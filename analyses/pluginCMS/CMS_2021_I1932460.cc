@@ -213,7 +213,7 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(CMS_2021_I1932460);
+  RIVET_DECLARE_PLUGIN(CMS_2021_I1932460);
 
 
 }
