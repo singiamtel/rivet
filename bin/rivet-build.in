@@ -160,7 +160,7 @@ fi
 
 ## Remove the "-shared" flag from clang
 grepclang1=$(echo "$mycxx" | grep "clang" 2> /dev/null)
-grepclang2=$("$mycxx" --version | grep "clang" 2> /dev/null)
+grepclang2=$($mycxx --version | grep "clang" 2> /dev/null)
 if [[ -n "$grepclang1" || -n "$grepclang2" ]]; then
     #shared_flags=$(echo $shared_flags | sed -e 's/-shared//g')
     shared_flags="-Wno-unused-command-line-argument $shared_flags"
