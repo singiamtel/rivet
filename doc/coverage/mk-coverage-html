@@ -45,7 +45,7 @@ now = datetime.datetime.now()
 ## Experiment (grouping) names and regex patterns
 import re
 EXPTS = ["ALICE", "ATLAS", "CMS", "LHCb", "Forward", "HERA", "EE-HIGH", "EE-LOW", "Tevatron", "RHIC", "SPS", "Other"]
-EXPT_PATTS = ["ALICE", "ATLAS", "CMS", "LHCb", "LHCF|TOTEM", "H1|ZEUS|HERMES", "ALEPH|DELPHI|L3|OPAL|SLD|LEP|TASSO|JADE|AMY|TOPAZ|MAC|VENUS|CELLO|TPC|HRS|PLUTO|MARK-J|MARK-II", "BABAR|KEDR|DESY-HAMBURG-HEIDELBERG-MUNICH|AACHEN-DESY-ANNECY(LAPP)-MIT-NIKHEF-BEIJING|BELLE|CLEO|CUSB|ARGUS|SND|CMD|DM1|DM2|KLOE|BES|OLYA|FENICE|LENA|DASP|MARK-I|MUPI|NMD|DESY147|MD1|CRYSTAL|ND|GAMMAGAMMA|BBAR|AACHEN-DESY-ANNECY(LAPP)-MIT-NIKHEF-BEIJING", "CDF|D0|E735", "STAR|PHENIX", "COMPASS|NA48|NA49|EHS/NA22|NA22"]
+EXPT_PATTS = ["ALICE", "ATLAS", "CMS", "LHCb", "LHCF|TOTEM", "H1|ZEUS|HERMES", "ALEPH|DELPHI|L3|L3\+C|OPAL|SLD|LEP|TASSO|JADE|AMY|TOPAZ|MAC|VENUS|CELLO|TPC|TPC/TWO|TPC/TWO-GAMMA|TPC-TWO-GAMMA|HRS|PLUTO|MARK-J|MARK-II|MARKJ|MARKII", "BABAR|KEDR|DESY-HAMBURG-HEIDELBERG-MUNICH|AACHEN-DESY-ANNECY(LAPP)-MIT-NIKHEF-BEIJING|BELLE|BELLE-II|CLEO|CLEO-II|CUSB|ARGUS|SND|CMD|CMD2|CMD-2|CMD-3|CMD3|DM1|DM2|DM1-DM2|KLOE|KLOE-2|BES|BESIII|OLYA|FENICE|LENA|DASP|MARK-I|MARKI|MUPI|NMD|DESY147|MD1|CRYSTAL|CRYSTAL_BALL|ND|GAMMAGAMMA|BBAR|AACHEN-DESY-ANNECY\(LAPP\)-MIT-NIKHEF-BEIJING|MARK-III", "CDF|D0|E735", "STAR|PHENIX", "COMPASS|NA48|NA49|EHS/NA22|NA22"]
 EXPT_REOBJS = [re.compile(patt, re.I) for patt in EXPT_PATTS]
 
 ## Add the rivet Python module build dir(s) to the Python module path, then import
@@ -63,18 +63,6 @@ for d in glob(dirpatt):
     #print(d)
     rivet.addAnalysisDataPath(os.path.abspath(d))
 
-## Rivet analyses to cross-reference
-ranas = {}
-for aname in rivet.AnalysisLoader.analysisNames():
-    ana = rivet.AnalysisLoader.getAnalysis(aname)
-    # TODO: all anas *should* have an Inspire ID...
-    try:
-        # print(aname, ":", ana.inspireId(), ":")
-        ranas.setdefault(int(ana.inspireId()), []).append(ana.name())
-    except:
-        pass
-
-
 ## Read data from JSON files
 records = {}
 import json
@@ -87,6 +75,20 @@ for jsonfile in args.JSONFILES:
 records = {int(k) : v for k, v in records.items()}
 if args.VERBOSE:
     print("Read total of {} records".format(len(records)))
+
+## Rivet analyses to cross-reference
+ranas = {}
+for aname in rivet.AnalysisLoader.analysisNames():
+    ana = rivet.AnalysisLoader.getAnalysis(aname)
+    # TODO: all anas *should* have an Inspire ID...
+    try:
+        # print(aname, ":", ana.inspireId(), ":")
+        iAnal=int(ana.inspireId())
+        if iAnal in records and not records[iAnal][1] :
+            records[iAnal][1] = ana.experiment()
+        ranas.setdefault(iAnal, []).append(ana.name())
+    except:
+        pass
 
 
 ## Read Inspire IDs from ranking files

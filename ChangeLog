@@ -9,6 +9,25 @@
 	* Update ParticleIdUtils content to match latest MCUtils. Includes
 	a serious speed-up (6x!) in PID digit decoding!
 
+2023-01-11 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2023_I2621481 D0,D+ -> pi+ pi+ pi- X
+
+2023-01-02 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add MD1_1994_I362599 Lambda spectrum in Upslion(1S) decay
+	* Add A2_2014_I1297221 eta -> pi0 gamma gamma
+
+2022-12-27 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_1986_I220652 Upsilon photon spectrum
+	* Add BESIII_2013_I1126137 J/psi -> 3 gamma
+	* Add BESIII_2022_I2618227 D_s -> pi+ pi+ pi- X
+
+2022-12-23 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2615968 D0 -> K0 pi+ pi-
+
 2022-12-15  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Allow linspace() and aspace() to make reversed edge-sets with start > end.
@@ -16,6 +35,39 @@
 	* Add powspace() and powdbnspace() uniform-spacing functions for
 	power laws, and a generic _fnspace() function for any
 	transform/inverse function-pair.
+
+2022-12-15 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2009_I803343 B -> Lambdo Lambdabar K(*)
+	* Add BABAR_2009_I821188 B0 -> KS0 pi+ pi-
+	* Add BABAR_2009_I827787 B -> X_c ell nu
+
+2022-12-14 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2009_I817326 B -> K(*) l+ l-
+	* Add CLEOC_2008_I784516 psi(2S) -> Jpsi pi pi
+	* Add BELLE_2009_I825222 B -> Xs gamma
+
+2022-12-13 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2009_I816632 B+ -> D_s(*) K pi
+
+2022-12-09 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2009_I813140 B+ -> pi+ pi+ pi-
+
+2022-12-08 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2611489 Lambda_c semileptonic
+	* Add BELLE_2009_I820737 B -> K pi pis(2S)
+
+2022-12-07 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2009_I825406 B0 -> a1+ a1-
+
+2022-12-06 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2009_I810694 B- -> D+ pi-pi-
 
 2022-12-06 Christian Gutschow  <chris.g@cern.ch>
 
@@ -25,11 +77,95 @@
 	* Replace regex_match with reg_search to pick up substring
 	matches, too.
 
+2022-12-05 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2009_I819092 B0 -> Lambdabar p+ pi-
+
+2022-12-01 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2010_I871475 B+ -> J/psi or psi(2S) K+ pi+pi-
+	* Add BELLE_2010_I862241 b0 > K+ K- KS0
+
+2022-11-29 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2012_I1111233 B -> K(*) l+ l-
+	* Add BELLE_2016_I1504055 B -> K* l+ -l
+	* Add BABAR_2013_I1272843 B -> Xs l+ l-
+
+2022-11-28 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add KEDR_2022_I2593308 J/psi -> rho pi
+
+2022-11-25 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2016_I1391152 B -> X l+l-
+
+2022-11-24 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2016_I1283183 B -> X l+l-
+	* Add BABAR_2015_I1337783 B -> X gamma
+
+2022-11-23 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2012_I1079912 B -> Xu ell nu
+	* Add BABAR_2011_I901433 B -> phi phi K
+	* Add BESIII_2012_I1097066 psi(2S) -> gamma gamma J/psi
+
+2022-11-22 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2022_I2512112 B -> D pi ell nu
+
+2022-11-21 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2012_I1185407 tau -> 5 and 6 pions
+
+2022-11-18 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2013_I1239347 B0 -> psi(2S) K+ pi-
+	* Add BELLE_2013_I1247059 B0 -> phi K+ pi-
+
+2022-11-12 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2012_I1125567 tau -> pi- KS0 KS0 nu
+	* Add BELLE_2014_I1282136 tau -> pi- KS0 KS0 pi0 nu
+
+2022-11-11 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2015_I1376282 J/psi -> gamma eta KS0 KS0
+	* Add BESIII_2012_I1079921 J/psi -> gamma p pbar
+	* Add BELLE_2013_I1247463 Upsilon(5S) -> Upsilon(nS) pi0 pi0
+
+2022-11-10 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add KLOE_2013_I1186739 eta -> pi+ pi- gamma
+	* Add BESIII_2013_I1203841 J/psi -> gamma omega phi
+
 2022-11-08 Christian Gutschow  <chris.g@cern.ch>
 
 	* Fix bug in DELPHI_2011_I890503 and OPAL_2003_I599181, where the
 	wrong decay chain was checked for weak decays (thanks to Max
 	Knobbe for spotting).
+
+2022-11-08 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2012_I1084539 J/psi -> gamma eta(1405)
+	* Add BESIII_2013_I1209121 J/psi -> gamma eta eta
+	* Add BABAR_2015_I1308513 B -> J/psi phi K
+
+2022-11-07 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2135117 J/psi -> gamma eta eta'
+	* Add BESIII_2016_I1419650 J/psi -> gamma phi phi
+	* Add BELLE_2016_I1454405 J/psi psi(2S) in Upsilon(1S) decays
+	* Add BELLE_2017_I1499706 chi_c1 in  Upsilon(1,2S) decays
+	* Add BABAR_2018_I1667191 Upsilon(1S) -> pi+pi- gamma
+	* Add BESIII_2016_I1437949 J/psi -> eta' pi+ pi-
+
+2022-11-04 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2018_I1674528 e+ spectrum in Lambda_c+ decay
+	* Add BELLE_2017_I1598461 B -> K+ K- pi+
+	* Add BESIII_2018_I1646687 J/Psi -> gamma gamma phi
 
 2022-11-02  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -40,10 +176,32 @@
 	build script (thanks to Alexander Puck Neuwirth for the
 	suggestion).
 
+2022-11-02 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2011_I916712 B -> K X(3872)
+
+2022-10-31 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2014_I1312626 Bbar0 -> J/psi K- pi+
+	* Add BELLE_2021_I1748231 B -> K l+l-
+	* Add BELLE_2019_I1728173 B -> K* l+l-
+
+2022-10-29 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2018_I1689296 J/psi -> gamma KS0 KS0
+	* Add BESIII_2015_I1373915 J/psi -> gamma pi0 pi0
+
+2022-10-28 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2011_I889524 B_s0 -> pi+ pi- J/psi
+
 2022-10-27 Peter Richardson <peter.richardson@durham.ac.uk>
 
+	* Add BESIII_2015_I135282 chi_c -> phi K K pi
+	* Add BELLE_2018_I1663447 B+ -> K+ eta gamma
 	* Add ATLAS_2018_I1615866 gamma gamma -> mu+ mu-
 	* Add ATLAS_2015_I1377585 gamma gamma -> l+ l-
+	* Add BABAR_2018_I1668123 D0 -> KS0 pi+ pi-
 
 2022-10-27 Christian Gutschow  <chris.g@cern.ch>
 
@@ -59,20 +217,115 @@
 
 	* Extend RivetLWTNN.hh to allow use of lwt::LightweightGraph
 
+2022-10-26 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2017_I1336340 B+ -> KS0 pi+ pi0
+
+2022-10-25 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2022_I2169621 B ->D semi-leptonic
+	* Add BELLE_2012_I1123656 B0 -> D*+ D*-
+	* Add BABAR_2012_I1086537 B -> 3K
+	* Add BABAR_2012_I1081760 B0-> pi+pi- K*0
+
+2022-10-24 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2015_I1369998 B -> D* omega pi
+	* Add BELLE_2015_I1392799 B -> p Lambda D(*)
+	* Add BABAR_2015_I1335269 B -> D D K
+	* Add BELLE_2015_I1326905 B0 -> Ds K0 pi and B+ Ds K K
+	* Add BELLE_2013_I1124584 Bs0 -> Ds* Ds*
+
+2022-10-20 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2012_I1122031 B -> Xs gamma
+	* Add BELLE_2022_I2167323 B -> Xs gamma
+	* Add BABAR_2016_I1409292 B+ -> K+ pi+ pi- gamma
+	* Add BABAR_2011_I920989 B0 -> D*0 omega
+
+2022-10-19 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2166759 J/psi, psi(2S) -> Sigma+ Sigmabar- eta
+	* Add BESIII_2022_I2166668 chi_cJ -> Lambda Lambdabar eta
+	* Add BESIII_2016_I1484158 J/psi -> gamma eta pi0
+
 2022-10-13  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Enable Cython autoconversion from C++ strings to the appropriate
 	str type for Python v2 and v3, eliminating many noisy and fragile
 	explicit encode()/decode() calls.
 
+2022-10-08 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2013_I1217425 Bbar0 -> Lambda_c+ pbar pi+ pi-
+	* Add BELLE_2016_I1408873 B -> chi_c1 and chi_c2
+
+2022-10-06 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2022_I2160445 Lambda-c+ -> p 2KS0 and p KS0 eta
+	* Add BELLE_2014_I1289224 D0 -> KS0 pi+ pi-
+
+2022-10-03 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2012_I946659 B-> D(*) p pbar + pions
+	* Add BESIII_2011_I894356 chi_c1 -> gamma + phi,rho,omega
+
+2022-09-30 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2158325 psi(2S) -> Sigma- Sigmabar+
+	* Add BESIII_2013_I1203840 psi(2S) -> pbar K+ Sigma0 and chi_c -> pbar K+ Lambda0
+	* Add BESIII_2013_I1261765 psi(2S) -> Lambda 0 Sigmabar+- pi-+ +cc
+	* Add BABAR_2012_I1127599 B- -> Sigma_c++ pbar pi- pi-
+
+2022-09-29 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2013_I1230342 B_s0 -> Lambda_c+ Lambdabar0 pi-
+
 2022-09-28  Christian Gutschow  <chris.g@cern.ch>
 
 	* Release 3.1.7
 
-2022-06-21  Jack Araz  <andy.buckley@cern.ch>
+2022-09-28 Peter Richardson <peter.richardson@durham.ac.uk>
 
-	* Add HEPTopTagger interface (since made optional, with no-build
-	example analysis).
+	* Add BELLE_2018_I1642436 B- -> Lambda_c+ Lambdabar_c- K-
+	* Add BELLE_2018_I1679584 Bbar0 -> Lambda_c+ Lambdabar_c- Kbar0
+	* Add BABAR_2011_I924163 Bbar0 -> Lambda_c+ Lambdabar0 K-
+	* Add BELLE_2011_I924618 B- -> pbar Lambda0 D0
+	* Add LHCB_2017_I1596893 B0 -> p Lambdabar0 pi- and BS0 -> p Lambdabar0 K-
+
+2022-09-26 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2017_I1509920 psi(2S) -> chi_c e+ e- and chi_c -> J/psi e+e-
+
+2022-09-25 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2018_I1664315 psi(2S) -> eta' e+ e-
+	* Add BESIII_2019_I1692688 J/psi -> eta' e+ e-
+	* Add BESIII_2014_I1287631 J/psi -> eta, eta', pi0 e+ e-
+
+2022-09-24 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2141748 psi(2S) -> eta_c e+ e-
+
+2022-09-21 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2016_I1487285 eta -> pi+ pi- gamma
+	* Add BELLE_2004_I658085 B -> D* + pions
+	* Add BESIII_2012_I1128258 chi -> p nbar pi- (pi0)
+	* Add BABAR_2010_I850492 Upslion_2(1D) -> pi+ pi- Upsilon
+	* Add BESIII_2010_I878544 chi_c -> 4pi0
+	* Add BABAR_2016_I14877225 B0 -> D*- 3pi
+
+2022-09-20 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2153556 Lambda_c+ -> Lambda pi+ pi0
+	* Add BELLE_2007_I723916 Lambda_c(2880)+ decay
+	* Add LHCB_2015_I1401225 D0 -> K+ pi- mu+ mu-
+	* Add BABAR_2019_I1691954 D0 -> K+ pi- e+ e-
+
+2022-09-19 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2021_I1809180 Xi(2790)+ decay
 
 2022-09-14  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -87,6 +340,19 @@
 
 	* Add EXAMPLE_NTUPLE_CSV example analysis showing how to open and
 	write to a CSV ntuple file.
+
+2022-09-08 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2006_I722213 Lambda_c+ -> Lambda K+ K0S
+
+2022-09-02 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add LHCB_2014_I1309880 B_c -> J/psi p pbar pi+
+	* Add BABAR_2011_I855306 B -> rho, pi semi-leptonic
+
+2022-09-01 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2013_I1206605 D+ -> K+ K- pi+
 
 2022-09-01  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -108,13 +374,134 @@
 	analysis writers rather than being directly useful in compiled
 	form, into an uncompiled analyses/examples/ directory.
 
+2022-08-31 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2020_I1813380 Lambda_c+ -> eta Lambda pi+
+	* Add BELLE_2021_I1895149 B -> Xu l nu
+
+2022-08-30 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add LHCB_2022_I2138845 B_c+ -> chamonium + hadrons
+	* Add CLEOII_1996_I397787 Xi_c+ -> Sigma+ K- pi+
+	* Add FOCUS_2003_I618864 Xi_c+ -> Sigma+ K- pi+ and Xi- pi+ pi+
+	* Add CLEOIII_2004_I627327 Xi_c0 -> p K- K- pi+
+	* Add BESIII_2021_I1837968 Lambda_c -> p KS0 eta
+
+2022-08-26 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add LHCB_2022_I1960979  B_c+ -> J/psi pi + 3 hadrons
+
+2022-08-25 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2018_I1641071 Omega_c0 decays
+	* Add BELLE_2022_I2140379 Lambda_c -> Sigma+ pi0,eta,eta'
+	* Add BELLE_2022_I2138841 Lambda_c ->Lambda0,Sigma0 + pi+,K+
+	* Add LHCB_2012_I1097092 B_c+ -> J/psi pi and 3pi
+
 2022-08-18  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Hide the bundled eigen3 in a mangled RivetEigen namespace, to avoid clashes.
 
+2022-08-17 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_2008_I787608 chi_c pi+pi-2pi0 and K+pi-K0pi0
+	* Add BESII_2005_I690784 chi_c0 -> pi+pi- K+K-
+
+2022-08-14 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2033855 chi_c -> Xi Xibar
+
+2022-08-13 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2014_I1280710 chi_c(1,2) -> eta' K+K-
+	* Add BESIII_2022_I2018236 Jpsi -> gamma pi+pi-eta'
+	* Add BESIII_2022_I2016785 Jpsi -> gamma eta' eta'
+
+2022-08-12 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2010_I879997 D+ -> K- pi+ e+ nu_e
+
+2022-08-11 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2011_I931195 psi(2S)-> chi_c correlations
+	* Add BESIII_2012_I1127328 psi(2S) -> K+ K- pi0
+
+2022-08-09 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2019_I1712729 J/psi -> phi eta eta'
+	* Add BESIII_2019_I1722111 psi(2S) -> p pbar phi
+	* Add BESIII_2019_I1716256 chi_c -> J/psi mu+mu-
+	* Add CLEOC_2011_I929693 chi_c1 -> eta pi+pi-
+	* Add BESIII_2017_I1490896 chi_c1 -> eta pi+pi-
+
+2022-08-08 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2019_I1729311 B0 -> p pbar pi0
+	* Add BELLE_2019_I1729723 B0 -> KS0 pi K
+
+2022-08-06 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2020_I1818254 chi_c -> phi phi eta
+	* Add BESIII_2019_I1716627 chi_c -> 4KS0
+
+2022-08-05 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2021_I1841899 B+ -> phi phi K+
+
+2022-08-04 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2020_I1818254 chi_c -> Sigma0 pbar K+
+	* Add BESIII_2017_I1511280 D0 -> K- pi+ pi+ pi-
+
 2022-08-04  Markus Seidel  <markus.seidel@cern.ch>
 
 	* Submission of CMS_2022_I2079374: Z pT over a wide mass range at 13 TeV
+
+2022-08-03 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2017_I1469067 eta' -> pions
+	* Add BESIII_2015_I1376484 eta -> pions/ eta'->3pi0
+	* Add BESIII_2018_I1623555 eta' -> eta pi pi
+	* Add BESIII_2022_I2038523 D_s+ -> f0 e+ nu_e
+
+2022-08-02 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2105430 eta' -> eta pi0 pi0
+	* Add BABAR_2006_I722905 D0 -> K-+ pi+- pi0
+	* Add CLEO_2007_I732065 chi_c1 -> pi+pi- eta KKpi
+	* Add BESIII_2022_I1997940 J/psi -> e+e- pi+ pi- eta'
+
+2022-08-01 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2128095 psi(2S) -> Lambda Lambdabar eta
+	* Add BESIII_2022_I2102455 D+/D0 -> pions
+	* Add BESIII_2022_I2088337 D+ -> KS0 pi+ pi0 pi0
+
+2022-07-31 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2019_I1693396 B0 -> D*- semi-leptonic
+
+2022-07-30 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2021_I1974025 e+e- -> Lambda Lambdabar at 3.773 GeV
+
+2022-07-29 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2127373 Lambda_c+ -> Lambda0 e+ nu_e
+	* Add BESIII_2021_I1921775 psi(2S) -> Xi*0 Xibar*0
+	* Add BESIII_2021_I1870388 chi_c -> n KS0 Lambdabar
+
+2022-07-28 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESII_2006_I716589 psi(2S) -> p nbar pi- +cc
+	* Add BESIII_2016_I1411448 J/psi -> p pbar phi
+
+2022-07-27 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2019_I1711896 Lambda_c+ _> eta pi+ Lambda
+	* Add BESII_2006_I650381 J/psi -> p nbar pi- +cc
+	* Add BELLE_2005_I660759 Xi_c0 -> p K- K- pi+
+	* Add BESIII_2013_I1227512 psi(2S)-> p pbar eta
 
 2022-07-27  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -125,14 +512,84 @@
 	* Require FastJet version 3.4.0 -- update list of plugin libs to
 	use the single libfastjetplugins.so library.
 
-2022-03-29  Andy Buckley  <andy.buckley@cern.ch>
+2022-07-26 Peter Richardson <peter.richardson@durham.ac.uk>
 
-	* Replace the distutils extension build & install with a handmade one.
+	* Add BESIII_2022_I2122392 psi(2S) -> Lambda Lambdabar omega
+	* Add BESIII_2022_I2122399 Lambda_c+ -> p K- e+ nu_e
+	* Add BELLE_2021_I1835729 Xi_c0 -> K+ K- Xi0
+	* Add BESII_2009_I819937 J/psi -> p pbar pi0
+	* Add BES_2001_I556330 J/psi -> p pbar eta
+
+2022-07-25 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2019_I1709205 J/psi psi(2S) -> p pbar eta'
+	* Add BESIII_2012_I1187787 eta_c -> KKpi dalitz
+	* Add BESIII_2013_I1120737 psi(2S) -> p pbar pi0
+	* Add BESIII_2013_I1223625 J/psi -> p pbar omega
+
+2022-07-24 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2021_I1921801 psi(2S) -> omega KS0 KS0
+	* Add BES_2005_I689969 psi(2S) -> pi+ pi- pi0
+	* Add BESIII_2020_I1771616 psi(2S) -> K+ K- eta
+
+2022-07-23 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_2004_I654843 D0 -> pi-, K- e+ nu_e
+	* Add BESIII_2017_I1624548 psi(2S) -> gamma chi_c
+
+2022-07-22 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2017_I1507887 psi(2S) -> gamma chi_c
+	* Add CLEO_2009_I832707 psi(2S) -> gamma chi_c
+	* Add CLEO_2013_I1081165 D -> rho e nu
 
 2022-07-21  Christian Gutschow  <chris.g@cern.ch>
 
 	* rivet-merge -a now supports analysis specific (ANA:OPT=VAL)
 	as well as global (:OPT=VAL) analysis options
+
+2022-07-21 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2015_I1386254 D+ -> omega ell nu
+	* Add BESIII_2016_I1411645 D+ -> K- pi+ e nu
+
+2022-07-20 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2013_I1247460 B+ -> omega ell nu
+	* Add BESIII_2019_I1694530 D -> pipi ell nu
+	* Add BABAR_2012_I1125973 B -> pi,omega, eta ell nu
+	* Add BABAR_2008_I790461 D_s+ -> K+K- e+ nu_e
+
+2022-07-19 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2018_I1705754 D0 -> Kbar0 pi- e+ nu_e
+
+2022-07-18 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2021_I1940222 D -> K pi omega decays
+	* Add FOCUS_2007_I741543 D0 -> 2pi+ 2pi-
+	* Add LHCB_2018_I1704426 D0 -> K+K-pi+pi-
+	* Add BESIII_2018_I1693610 D -> K pi eta' decays
+
+2022-07-17 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_2017_I1519168 D0 -> K+K-pi+pi- and 2pi+ 2pi-
+
+2022-07-14 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_2009_I822856 D_s+ -> pi+ pi0 omega
+	* Add FOCUS_2004_I663820 D0 -> K+K-pi+pi-
+	* Add BESIII_2022_I1900094 D0 -> omega phi
+
+2022-07-12 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_2012_I1086166 D0 -> K+K-pi+pi-
+
+2022-07-11 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add FOCUS_2003_I626320 D0 -> K-K-K+pi+
+	* Add new DecayedParticles projection to try and speed up code
 
 2022-07-11  Christian Gutschow  <chris.g@cern.ch>
 
@@ -143,10 +600,163 @@
 	* Fixed RatioPlotDrawReferenceFirst and ErrorTubeLineDash options in
 	make-plots.
 
+2022-07-10 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2019_I1714778 D+ -> KS0 pi+pi+pi-
+	* Add BESIII_2018_I1662665 D0 -> pi0 eta eta
+	* Add BESIII_2019_I1725265 D0 -> K- pi+ pi0 pi0
+	* Add BESIII_2022_I1864775 J/Psi -> Xi- Xibar+
+	* Add BESIII_2022_I2099144 psi(2S) -> Xi- Xibar+
+	* Add BESIII_2022_I2071715 J/Psi -> Lambda Lambdabar
+
+2022-07-09 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2021_I1849747 D_s+ -> K+K-pi+pi+pi-
+	* Add BESIII_2022_I2099126 Lambda -> n gamma asymmetry
+
+2022-07-08 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2021_I1849747 D_s+ -> K+K-pi+pi0
+	* Add BESIII_2021_I1870322 D_s+ -> pi+ pi+ pi- eta
+	* Add BESIII_2019_I1712742 D_s+ -> eta, eta' semi-leptonic
+	* Add BESIII_2022_I2088218 D_s+ -> K+ pi+ pi- pi0
+	* Add BESIII_2021_I1845444 D_s+ -> KS0 K- pi+ pi+
+
+2022-07-07 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2017_I1621266 J/psi psi2s -> pi+pi-eta'
+
+2022-07-06 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2020_I1830421 eta' -> e+e- pi+pi-
+
+2022-07-05 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2018_I1703033 omega -> pi+pi-pi0
+
+2022-07-04 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2019_I1731057 J/psi -> K+K-pi0
+
+2022-07-02 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add MC_EtaC_Dalitz eta_c dalitz decays
+
+2022-07-01 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2020_I1785816 D0 -> K- pi+ eta
+	* Add CLEO_2005_I679349 D0 -> pi+ pi- pi0
+	* Add CLEO_2012_I1094160 D0 -> KS0 K+- pi-+
+	* Add LHCB_2016_I1394391 D0 -> KS0 K+- pi-+
+
+2022-06-30 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2030993 D_s+ -> pi+ pi0 eta'
+	* Add CLEO_2004_I649917 D0 -> KS0 pi0 eta
+
+2022-06-29 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2007_I749390 D0 -> K+K+pi0 dalitz
+
+2022-06-25 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2020_I1799437 D0 -> KS0 K+K- dalitz
+
+2022-06-24 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_2008_I791716 D+ -> K+ K- pi+
+	* Add LHCB_2019_I1720423 D+ -> K+ K+ K-
+
+2022-06-23 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2022_I2070086 D_s+ -> KS0 K+ pi0
+	* Add BESIII_2022_I2084294 D_s+ -> K+ pi+ pi-
+	* Add FOCUS_2004_I654030 D+/D_s+ -> K+ pi+ pi-
+
+2022-06-22 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2019_I1724547 D_s+ -> pi+ pi0 eta
+	* Add BESIII_2021_I1854317 D_s+ -> pi+ pi0 KS0
+	* Add BESIII_2022_I1945692 D_s+ -> KS0 KS0 pi+
+
+2022-06-21  Jack Araz  <andy.buckley@cern.ch>
+
+	* Add HEPTopTagger interface (since made optional, with no-build
+	example analysis)
+
+2022-06-21 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2021_I1830524 Ds+ -> K+K-pi+
+
+2022-06-19 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEO_2003_I633196 D0 -> Kbar0 pi+ pi-
+	* Add BABAR_2010_I853279 D0 -> Kbar0 pi+ pi-/K+K-
+
+2022-06-18 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2021_I1867843 eta_c -> pipi eta(') KK eta' dalitz
+	* Add BABAR_2015_I1403544 eta_c -> KKpi dalitz
+	* Add BABAR_2017_I1512302 J/psi dalitz plots
+	* Add BESIII_2012_I1088606 J/psi psi(2S) -> pi+pi-pi0
+
+2022-06-16 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add E691_1992_I342947 D -> K pipi Dalitz decays
+	* Add MARKIII_1987_I247266  D -> K pipi Dalitz decays
+	* Add CLEOII_2001_I537154 D0 -> K- pi+ pi0 dalitz
+	* Add CLEOC_2007_I749602 D+ -> pi+pi+pi- dalitz
+	* Add BABAR_2014_I1287632 eta_c dalitz decays
+
+2022-06-15 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add FOCUS_2007_I750701 D_s+, D+ -> pi+pi+pi-
+	* Add BESIII_2021_I1909391  D_s+ -> pi+pi+pi-
+	* Add BABAR_2008_I792597  D_s+ -> pi+pi+pi-
+
+2022-06-12 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2021_I1929365 D_s+ -> pi+ pi0 pi0 pi0 dalitz
+	* Add BESIII_2021_I1859124 D+ -> K+ KS0 pi0 dalitz
+
+2022-06-10 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add FOCUS_2007_I750701 D+ -> K- pi+ pi+ dalitz
+
+2022-06-09 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEOC_2008_I780363 D+ -> K- pi+ pi+ dalitz
+
+2022-06-07 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add E791_2002_I585322 D+ -> K- pi+ pi+ dalitz
+
+2022-06-06 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2014_I1277070 D+ -> KS0 pi+ pi0 dalitz
+
+2022-05-30 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add CLEOC_2011_I913909 D0 -> K_S0 pi0 pi0
+	* Add E791_2001_I530319 D_s+ -> pi+ pi+ pi-
+	* Add E791_2001_I530320 D+ -> pi+ pi+ pi-
+
 2022-05-29  Christian Gutschow  <chris.g@cern.ch>
 
 	* Fix various labelling issues in ATLAS_2019_I1736531, ATLAS_2019_I1740909,
 	ATLAS_2019_I1750330 and ATLAS_2019_I1772062 as reported by Natalia Korneeva
+
+2022-05-27 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2016_I1441203 D0->pi+pi-pi0
+
+2022-05-26 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2007_I747154 D0->pi+pi-pi0
+
+2022-05-21 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2010_I878120 D_s+->K+K-pi+
 
 2022-05-18  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -155,6 +765,10 @@
 2022-05-17  Markus Seidel  <markus.seidel@cern.ch>
 
 	* Submission of CMS_2021_I1963239: Measurement of inclusive and Mueller-Navelet dijet cross sections and their ratios at 2.76 TeV
+
+2022-05-16 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BABAR_2008_I781294 and BABAR_2012_I1123662 b-> s gamma
 
 2022-05-13  Christian Gutschow  <chris.g@cern.ch>
 
@@ -167,6 +781,18 @@
 	argument. readData() is called for each specified preload file, in
 	order.
 
+2022-05-05 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BESIII_2016_I1504943 eta' -> pi0 gamma gamma decays
+
+2022-04-21 Peter Richardson <peter.richardson@durham.ac.uk>
+
+        * Add CRYSTAL_BALL_1991_I297905 pi0/eta Upslion and continuum
+        * Add CRYSTAL_BALL_1989_I263581 electron spectrum in B decays
+	* Add ARGUS_1987_I248655        photon spectrum in Upsilon(1S) decays
+	* Add CRYSTAL_BALL_1991_I315873 photon spectrum in Upsilon(1S) decays
+	* Add CRYSTAL_BARREL_1997_I456942 eta'-> pi+ pi- gamma decays
+
 2022-04-20  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add a pseudojets() method and automatic conversion operator to
@@ -178,6 +804,10 @@
 2022-04-06  Markus Seidel  <markus.seidel@cern.ch>
 
 	* Submission of CMS_2017_I1497519: Z boson in association with jets at 8 TeV
+
+2022-03-29  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Replace the distutils extension build & install with a handmade one.
 
 2022-03-25  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -203,9 +833,15 @@
 
 	* Add finalize-scaling protection in ATLAS_2020_1790256.
 
+2022-03-02 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add LHCB_2017_I1621811 lambda_b semileptonic decay
+	* Add LHCB_2020_I1787090 B_s semileptonic decay
+
 2022-02-28 Peter Richardson <peter.richardson@durham.ac.uk>
 
 	* Add BESIII_2022_I2039027 e+e- > pi+pi-eta
+	* Add LHCB_2012_I1114753 Lambda_b(5920) decays
 
 2022-02-17 Peter Richardson <peter.richardson@durham.ac.uk>
 

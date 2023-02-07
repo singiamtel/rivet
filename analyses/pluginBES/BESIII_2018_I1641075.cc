@@ -1,11 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
+#include "Rivet/Projections/DecayedParticles.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief eta' -> pi+pi- gamma decay
   class BESIII_2018_I1641075 : public Analysis {
   public:
 
@@ -20,59 +21,34 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      declare(UnstableParticles(), "UFS");
+      UnstableParticles ufs = UnstableParticles(Cuts::pid==331);
+      declare(ufs, "UFS");
+      DecayedParticles ETA(ufs);
+      ETA.addStable(PID::PI0);
+      declare(ETA, "ETA");
 
       // Book histograms
       book(_h_m, 1, 1, 5);
 
     }
-    
-    void findDecayProducts(const Particle & mother, unsigned int & nstable, unsigned int & ngamma, 
-                           unsigned int & npip, unsigned int & npim, FourMomentum & ptot) {
-      for(const Particle & p : mother.children()) {
-        int id = p.pid();
-        if (id == PID::PIMINUS ) {
-	  ++npim;
-          ++nstable;
-	  ptot += p.momentum();
-	}
-        else if (id == PID::PIPLUS) {
-          ++npip;
-          ++nstable;
-	  ptot += p.momentum();
-        }
-        else if ( !p.children().empty() ) {
-          findDecayProducts(p, nstable, ngamma,npip,npim,ptot);
-        }
-        else if (id == PID::GAMMA) {
-	  ++ngamma;
-          ++nstable;
-        }
-        else
-          ++nstable;
-      }
-    }
-
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-
-      // Loop over eta' mesons
-      for (const Particle& p :  apply<UnstableParticles>(event, "UFS").particles(Cuts::pid==331)) {
-	unsigned nstable(0),ngamma(0),npip(0),npim(0);
-	FourMomentum ptot;
-	findDecayProducts(p,nstable,ngamma,npip,npim,ptot);
-	if(nstable==3 && npim==1 && npip==1 && ngamma==1)
-	  _h_m->fill(ptot.mass());
+      static const map<PdgId,unsigned int> & mode   = { { PID::PIPLUS,1}, { PID::PIMINUS ,1}, { PID::GAMMA,1}};
+      DecayedParticles ETA = apply<DecayedParticles>(event, "ETA");
+      // loop over particles
+      for(unsigned int ix=0;ix<ETA.decaying().size();++ix) {
+	if (!ETA.modeMatches(ix,3,mode)) continue;
+	const Particle & pip = ETA.decayProducts()[ix].at( PID::PIPLUS )[0];
+	const Particle & pim = ETA.decayProducts()[ix].at( PID::PIMINUS)[0];
+	_h_m->fill((pip.momentum()+pim.momentum()).mass());
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
       normalize(_h_m);
-
     }
 
     //@}
