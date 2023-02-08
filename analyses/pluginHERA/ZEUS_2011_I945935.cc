@@ -106,5 +106,5 @@ public:
     Histo1DPtr _h_Q2_tmp;
 };
 /// The hook for the plugin system
-DECLARE_RIVET_PLUGIN(ZEUS_2011_I945935);
+RIVET_DECLARE_PLUGIN(ZEUS_2011_I945935);
 }

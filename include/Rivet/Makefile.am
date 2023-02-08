@@ -38,6 +38,7 @@ nobase_pkginclude_HEADERS += \
   Projections/ChargedFinalState.hh \
   Projections/ChargedLeptons.hh \
   Projections/ConstLossyFinalState.hh \
+  Projections/DecayedParticles.hh \
   Projections/DirectFinalState.hh \
   Projections/DISDiffHadron.hh \
   Projections/DISFinalState.hh \
@@ -149,6 +150,7 @@ nobase_pkginclude_HEADERS += \
   Tools/RivetHepMC.hh \
   Tools/RivetHTT.hh \
   Tools/RivetLWTNN.hh  \
+  Tools/RivetONNXrt.hh  \
   Tools/RivetMT2.hh \
   Tools/RivetPaths.hh \
   Tools/RivetSTL.hh \

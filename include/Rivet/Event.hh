@@ -56,8 +56,7 @@ namespace Rivet {
     /// Copy constructor
     Event(const Event& e)
       : _weightIndices(e._weightIndices),
-        _genevent(e._genevent)
-    {  }
+        _genevent(e._genevent) {  }
 
     /// @}
 
@@ -187,9 +186,6 @@ namespace Rivet {
 
     /// Get a Log object for Event
     Log& getLog() const;
-
-    /// @brief Actual (shared) implementation of the constructors from GenEvents
-    void _init(const GenEvent& ge);
 
 
     // /// @brief Remove uninteresting or unphysical particles in the

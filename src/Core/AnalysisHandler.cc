@@ -381,10 +381,12 @@ namespace Rivet {
         }
       }
     }
+    MSG_DEBUG("Analyzing subevent #" << _subEventWeights.size() - 1 << ".");
 
     // Warn if the subevent list is getting very long without flushing
     if (_subEventWeights.size() % 1000 == 0) {
-      MSG_WARNING("Sub-event weight list has " << _subEventWeights.size() << " elements: are the weight numbers correctly set in the input events?");
+      MSG_WARNING("Sub-event weight list has " << _subEventWeights.size()
+                  << " elements: are the weight numbers correctly set in the input events?");
     }
 
     // Update the event counter
@@ -392,10 +394,6 @@ namespace Rivet {
     _eventCounter->fill();
 
     // Run the analyses
-    if (_subEventWeights.size() > 1) {
-      MSG_TRACE("Analyzing subevent #" << _subEventWeights.size());
-    }
-    _eventCounter->fill();
     for (AnaHandle a : analyses()) {
       MSG_TRACE("About to run analysis " << a->name());
       try {
@@ -1122,7 +1120,7 @@ namespace Rivet {
 
 
   void AnalysisHandler::writeData(std::ostream& ostr, const string& fmt) const {
-    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true);
+    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true, false);
     try {
       YODA::write(ostr, begin(output), end(output), fmt);
     } catch (...) { //< YODA::WriteError&
@@ -1132,7 +1130,7 @@ namespace Rivet {
 
 
   void AnalysisHandler::writeData(const string& filename) const {
-    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true);
+    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true, false);
     try {
       YODA::write(filename, begin(output), end(output));
     } catch (...) { //< YODA::WriteError&
@@ -1188,7 +1186,8 @@ namespace Rivet {
     if (xsecs.empty())
       throw UserError("No cross-section supplied!");
 
-    if (xsecs.size() == 1)  setCrossSection(xsecs[0], isUserSupplied);
+    const bool allEqual = std::adjacent_find(xsecs.begin(), xsecs.end(), std::not_equal_to<>()) == xsecs.end();
+    if (xsecs.size() == 1 || allEqual)  setCrossSection(xsecs[0], isUserSupplied);
     else {
       // Update the user xsec
       if (isUserSupplied) _userxs = xsecs[0];

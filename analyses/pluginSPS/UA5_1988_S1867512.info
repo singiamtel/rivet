@@ -53,7 +53,7 @@ BibTeX: '@Article{Ansorge:1988fg,
      SLACcitation  = "%%CITATION = ZEPYA,C37,191;%%"
 }'
 ReleaseTests:
- - $A SppS-200-UE
- - $A-2 SppS-546-UE
- - $A-3 SppS-900-UE
+ - $A SppS-200-UE :ENERGY=200
+ - $A-2 SppS-546-UE :ENERGY=546
+ - $A-3 SppS-900-UE :ENERGY=900
 

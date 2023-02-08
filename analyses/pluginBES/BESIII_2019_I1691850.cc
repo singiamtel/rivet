@@ -81,27 +81,27 @@ namespace Rivet {
       Particle Lambda,LamBar;
       bool matched(false);
       for (const Particle& p :  ufs.particles(Cuts::abspid==3122)) {
-        if(p.children().empty()) continue;
-        map<long,int> nRes=nCount;
-        int ncount = ntotal;
-        findChildren(p,nRes,ncount);
-        matched=false;
-        // check for antiparticle
-        for (const Particle& p2 :  ufs.particles(Cuts::pid==-p.pid())) {
-          if(p2.children().empty()) continue;
-          map<long,int> nRes2=nRes;
-          int ncount2 = ncount;
-          findChildren(p2,nRes2,ncount2);
-          if(ncount2==0) {
-            matched = true;
-            for(auto const & val : nRes2) {
-              if(val.second!=0) {
-                matched = false;
-                break;
-              }
-            }
-            // fond baryon and antibaryon
-            if(matched) {
+       	if(p.children().empty()) continue;
+       	map<long,int> nRes=nCount;
+       	int ncount = ntotal;
+       	findChildren(p,nRes,ncount);
+       	matched=false;
+       	// check for antiparticle
+      	for (const Particle& p2 :  ufs.particles(Cuts::pid==-p.pid())) {
+      	  if(p2.children().empty()) continue;
+      	  map<long,int> nRes2=nRes;
+      	  int ncount2 = ncount;
+      	  findChildren(p2,nRes2,ncount2);
+      	  if(ncount2==0) {
+      	    matched = true;
+      	    for(auto const & val : nRes2) {
+      	      if(val.second!=0) {
+      		matched = false;
+      		break;
+      	      }
+      	    }
+            // found baryon and antibaryon
+      	    if(matched) {
               if(p.pid()>0) {
                 Lambda = p;
                 LamBar = p2;
@@ -110,11 +110,11 @@ namespace Rivet {
                 Lambda = p2;
                 LamBar = p;
               }
-              break;
-            }
-          }
-        }
-        if(matched) break;
+       	      break;
+       	    }
+       	  }
+       	}
+      	if(matched) break;
       }
       if(!matched) vetoEvent;
       Particle proton;
@@ -124,6 +124,8 @@ namespace Rivet {
           matched=true;
           proton=p;
         }
+        else if(p.pid()==PID::PHOTON)
+          vetoEvent;
       }
       if(!matched) vetoEvent;
       Particle baryon;
@@ -137,6 +139,8 @@ namespace Rivet {
           baryon=p;
           mode=1;
         }
+        else if(p.pid()==PID::PHOTON)
+          vetoEvent;
       }
       if(mode<0) vetoEvent;
       // boost to the Lambda rest frame
