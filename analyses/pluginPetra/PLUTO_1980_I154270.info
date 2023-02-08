@@ -40,15 +40,15 @@ BibTeX: '@article{Berger:1980zb,
 }'
 
 ReleaseTests:
- - $A LEP-12
- - $A-2 LEP-13
- - $A-3 LEP-17
- - $A-4 LEP-22
- - $A-5 LEP-27.6
- - $A-6 LEP-30.2
- - $A-7 LEP-30.7
- - $A-9 LEP-31.3
- - $A-10 LEP-9.4
+ - $A LEP-12 :ENERGY=12.0
+ - $A-2 LEP-13 :ENERGY=13.0
+ - $A-3 LEP-17 :ENERGY=17.0
+ - $A-4 LEP-22 :ENERGY=22.0
+ - $A-5 LEP-27.6 :ENERGY=27.6
+ - $A-6 LEP-30.2 :ENERGY=30.2
+ - $A-7 LEP-30.7 :ENERGY=30.7
+ - $A-9 LEP-31.3 :ENERGY=31.3
+ - $A-10 LEP-9.4 :ENERGY=9.4
 
 # Currently disabled
 #  - $A-8 LEP-30.75

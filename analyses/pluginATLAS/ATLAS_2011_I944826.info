@@ -50,6 +50,6 @@ BibTeX: '@article{Aad:2011hd,
 }'
 
 ReleaseTests:
- - $A LHC-7-UE-Long
- - $A-2 LHC-900-UE-Long
+ - $A LHC-7-UE-Long :ENERGY=7000
+ - $A-2 LHC-900-UE-Long :ENERGY=900
 

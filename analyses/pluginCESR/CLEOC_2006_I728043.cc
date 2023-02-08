@@ -21,20 +21,19 @@ namespace Rivet {
       // projection
       declare(UnstableParticles(),"UFS");
       // histograms
-      unsigned int imin(0),imax(3);
-      if(isCompatibleWithSqrtS(3.77*GeV)) imax=2;
-      else if(isCompatibleWithSqrtS(4.17*GeV))	imin=2;
+      unsigned int imin(0), imax(3);
+      if (isCompatibleWithSqrtS(3.77,1e-3)) imax=2;
+      else if(isCompatibleWithSqrtS(4.17))	imin=2;
       else
-	MSG_ERROR("Invalid CMS energy in CLEOC_2006_I728043");
-      for(unsigned int ix=imin;ix<imax;++ix) {
-	std::ostringstream title;
-	title << "TMP/n_D_" << ix;
-	book(_n_D[ix],title.str());
-	book(_br_eta     [ix],1,1,ix+1);
-	book(_br_etaPrime[ix],2,1,ix+1);
-	book(_br_phi     [ix],3,1,ix+1);
-	book(_s_eta      [ix],4,1,ix+1);
-	book(_s_phi      [ix],5,1,ix+1);
+        MSG_ERROR("Invalid CMS energy in CLEOC_2006_I728043");
+
+      for (unsigned int ix=imin; ix<imax; ++ix) {
+        book(_n_D[ix], "TMP/n_D_"+std::to_string(ix));
+        book(_br_eta     [ix],1,1,ix+1);
+        book(_br_etaPrime[ix],2,1,ix+1);
+        book(_br_phi     [ix],3,1,ix+1);
+        book(_s_eta      [ix],4,1,ix+1);
+        book(_s_phi      [ix],5,1,ix+1);
       }
     }
 
@@ -42,25 +41,25 @@ namespace Rivet {
       Particles ssbar;
       unsigned int iMeson=0;
       if(Dmeson.abspid()==421)
-	iMeson = 1;
+        iMeson = 1;
       else if(Dmeson.abspid()==431)
-	iMeson = 2;
+        iMeson = 2;
       _n_D[iMeson]->fill();
       findDecayProducts(Dmeson,ssbar);
       for(const Particle & dec : ssbar) {
-	FourMomentum p = boost.transform(dec.momentum());
-	double mom=p.p3().mod();
-	if(dec.pid()==221) {
-	  _br_eta[iMeson]->fill(0.5);
-	  _s_eta[iMeson]->fill(mom);
-	}
-	else if(dec.pid()==331) {
-	  _br_etaPrime[iMeson]->fill(0.5);
-	}
-	else {
-	  _br_phi[iMeson]->fill(0.5);
-	  _s_phi[iMeson] ->fill(mom);
-	}
+        FourMomentum p = boost.transform(dec.momentum());
+        double mom=p.p3().mod();
+        if(dec.pid()==221) {
+          _br_eta[iMeson]->fill(0.5);
+          _s_eta[iMeson]->fill(mom);
+        }
+        else if(dec.pid()==331) {
+          _br_etaPrime[iMeson]->fill(0.5);
+        }
+        else {
+          _br_phi[iMeson]->fill(0.5);
+          _s_phi[iMeson] ->fill(mom);
+        }
       }
     }
 
@@ -68,12 +67,12 @@ namespace Rivet {
       for(const Particle & p : mother.children()) {
         int id = p.pid();
       	if (id==221 || id==331 || id==333) {
-	  ssbar.push_back(p);
-	  findDecayProducts(p,ssbar);
-	}
-	else if ( !p.children().empty() ) {
-	  findDecayProducts(p,ssbar);
-	}
+          ssbar.push_back(p);
+          findDecayProducts(p,ssbar);
+        }
+        else if ( !p.children().empty() ) {
+          findDecayProducts(p,ssbar);
+        }
       }
     }
 
@@ -84,24 +83,24 @@ namespace Rivet {
       Particles psi = ufs.particles(Cuts::pid==30443);
       // D_s
       if(psi.empty()) {
-	LorentzTransform boost;
-	for(const Particle & Dmeson : apply<UnstableParticles>("UFS",event).particles(Cuts::abspid==431)) {
-	  fillHistos(Dmeson,boost);
-	}
+        LorentzTransform boost;
+        for(const Particle & Dmeson : apply<UnstableParticles>("UFS",event).particles(Cuts::abspid==431)) {
+          fillHistos(Dmeson,boost);
+        }
       }
       // D0 D+
       else {
-	for(const Particle& p : psi) {
-	  // boost to rest frame
-	  LorentzTransform boost;
-	  if (p.p3().mod() > 1*MeV)
-	    boost = LorentzTransform::mkFrameTransformFromBeta(p.momentum().betaVec());
-	  // loop over D0 and D+ children
-	  for(const Particle & Dmeson : p.children()) {
-	    if(Dmeson.abspid()!=411 && Dmeson.abspid()!=421) continue;
-	    fillHistos(Dmeson,boost);
-	  }
-	}
+        for(const Particle& p : psi) {
+          // boost to rest frame
+          LorentzTransform boost;
+          if (p.p3().mod() > 1*MeV)
+            boost = LorentzTransform::mkFrameTransformFromBeta(p.momentum().betaVec());
+          // loop over D0 and D+ children
+          for(const Particle & Dmeson : p.children()) {
+            if(Dmeson.abspid()!=411 && Dmeson.abspid()!=421) continue;
+            fillHistos(Dmeson,boost);
+          }
+        }
       }
     }
 
@@ -109,12 +108,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       unsigned int imin(0),imax(3);
-      if(isCompatibleWithSqrtS(3.77*GeV))	imax=2;
-      else if(isCompatibleWithSqrtS(4.17*GeV)) imin=2;
+      if(isCompatibleWithSqrtS(3.77,1e-3))	imax=2;
+      else if(isCompatibleWithSqrtS(4.17)) imin=2;
       else
-	MSG_ERROR("Invalid CMS energy in CLEOC_2006_I728043");
+        MSG_ERROR("Invalid CMS energy in CLEOC_2006_I728043");
       for(unsigned int ix=imin;ix<imax;++ix) {
-	if(_n_D[ix]->effNumEntries()<=0.) continue;
+        if(_n_D[ix]->effNumEntries()<=0.) continue;
       	scale(_br_eta     [ix], 100./ *_n_D[ix]);
       	scale(_br_etaPrime[ix], 100./ *_n_D[ix]);
       	scale(_br_phi     [ix], 100./ *_n_D[ix]);

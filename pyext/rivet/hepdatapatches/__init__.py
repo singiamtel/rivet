@@ -30,6 +30,7 @@ from . import BABAR_2001_I558091
 from . import BABAR_2005_S6181155
 from . import BABAR_2006_I731865
 from . import BABAR_2007_S6895344
+from . import BABAR_2016_I1391152
 from . import BELLE_2001_S4598261
 from . import BELLE_2007_I749358
 from . import BELLE_2009_I823878
@@ -52,6 +53,8 @@ from . import CMD3_2016_I1385598
 from . import CMS_2016_I1487288
 from . import CMS_2017_I1608166
 from . import CRYSTAL_BALL_1988_I261078
+from . import CRYSTAL_BALL_1989_I263581
+from . import CRYSTAL_BALL_1991_I297905
 from . import DELPHI_1990_I297698
 from . import DELPHI_1991_I301657
 from . import DELPHI_1991_I324035
@@ -101,6 +104,7 @@ from . import MARKII_1988_I261194
 from . import MARKII_1991_I295286
 from . import MARKI_1975_I100733
 from . import MARKJ_1979_I141976
+from . import MD1_1994_I362599
 from . import NA22_1986_I18431
 from . import NMD_1974_I745
 from . import OPAL_1992_I321190

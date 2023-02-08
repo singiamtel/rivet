@@ -7,7 +7,7 @@
 namespace Rivet {
 
 
-  /// @brief Analysis of $J/\psi$ and $\psi(2S)$ decays to $\Xi^0\bar\Xi^0$ and $\Sigma^{*0}\bar\Sigma^{*0}$
+  /// @brief J/psi and psi(2s) -> Xi* and Sigma*
   class BESIII_2017_I1506414 : public Analysis {
   public:
 
@@ -68,11 +68,12 @@ namespace Rivet {
 
 
       const UnstableParticles & ufs = apply<UnstableParticles>(event, "UFS");
-      for (const Particle& p :  ufs.particles(Cuts::abspid==3322 or Cuts::abspid==3214)) {
-        if(p.children().empty()) continue;
-        map<long,int> nRes=nCount;
-        int ncount = ntotal;
-        findChildren(p,nRes,ncount);
+      for (const Particle& p :  ufs.particles(Cuts::abspid==3322 or
+					      Cuts::abspid==3214)) {
+       	if(p.children().empty()) continue;
+       	map<long,int> nRes=nCount;
+       	int ncount = ntotal;
+       	findChildren(p,nRes,ncount);
         bool matched=false;
         // check for antiparticle
         for (const Particle& p2 :  ufs.particles(Cuts::pid==-p.pid())) {
@@ -88,7 +89,7 @@ namespace Rivet {
                 break;
               }
             }
-            // fond baryon and antibaryon
+            // found baryon and antibaryon
             if(matched) {
               // calc cosine
               double ctheta;

@@ -171,8 +171,8 @@ namespace Rivet {
     for (const pair<double,double>& reqbeamenergies : requiredBeamEnergies()) {
       MSG_TRACE("Beam energies = " << beamEnergies() << " vs. required " << reqbeamenergies);
       /// @todo Can't currently guarantee that the energies are matched to the correct beams... use sqrt(s) for now
-      // if (beamEnergiesMatch(reqbeamenergies)) {
-      if (beamEnergyMatch(reqbeamenergies)) {
+      if (beamEnergiesMatch(reqbeamenergies)) {
+      // if (beamEnergyMatch(reqbeamenergies)) {
         MSG_TRACE("Beam energies MATCH!");
         beamenergymatch = true; break;
       }

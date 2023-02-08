@@ -24,10 +24,10 @@ namespace Rivet {
   /// This assesses whether either of the two possible pairings of @a pair's
   /// constituents is compatible.
   inline bool compatibleBeamIDs(const PdgIdPair& pair, const PdgIdPair& allowedpair) {
-    bool oneToOne = compatibleBeamID(pair.first, allowedpair.first);
-    bool twoToTwo = compatibleBeamID(pair.second, allowedpair.second);
-    bool oneToTwo = compatibleBeamID(pair.first, allowedpair.second);
-    bool twoToOne = compatibleBeamID(pair.second, allowedpair.first);
+    const bool oneToOne = compatibleBeamID(pair.first, allowedpair.first);
+    const bool twoToTwo = compatibleBeamID(pair.second, allowedpair.second);
+    const bool oneToTwo = compatibleBeamID(pair.first, allowedpair.second);
+    const bool twoToOne = compatibleBeamID(pair.second, allowedpair.first);
     return (oneToOne && twoToTwo) || (oneToTwo && twoToOne);
   }
 
@@ -45,10 +45,17 @@ namespace Rivet {
 
   /// Check the energy compatibility of two pairs of particle energies
   inline bool compatibleBeamEnergies(const pair<double,double>& energies,
-                                     const pair<double,double>& allowedenergies, double reltol=1e-3) {
-    return
-      fuzzyEquals(energies.first, allowedenergies.first, reltol) &&
-      fuzzyEquals(energies.second, allowedenergies.second, reltol);
+                                     const pair<double,double>& allowedenergies, const double reltol=1e-3) {
+    const bool oneToOne = fuzzyEquals(energies.first,  allowedenergies.first,  reltol);
+    const bool twoToTwo = fuzzyEquals(energies.second, allowedenergies.second, reltol);
+    const bool oneToTwo = fuzzyEquals(energies.first,  allowedenergies.second, reltol);
+    const bool twoToOne = fuzzyEquals(energies.second, allowedenergies.first,  reltol);
+    const bool absDiffOneToOne = abs(energies.first - allowedenergies.first)   < 1*GeV;
+    const bool absDiffTwoToTwo = abs(energies.second - allowedenergies.second) < 1*GeV;
+    const bool absDiffOneToTwo = abs(energies.first - allowedenergies.second)  < 1*GeV;
+    const bool absDiffTwoToOne = abs(energies.second - allowedenergies.first)  < 1*GeV;
+    return (oneToOne && twoToTwo) || (oneToTwo && twoToOne) ||
+           (absDiffOneToOne && absDiffTwoToTwo) || (absDiffOneToTwo && absDiffTwoToOne);
   }
 
   /// Check the energy compatibility of a pair of particles
