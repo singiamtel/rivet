@@ -267,7 +267,13 @@ namespace Rivet {
       }
       // Work-around since access functions are not const.
       HepMC3::GenCrossSection xs = *ge.cross_section();
-      return make_pair(xs.xsec(index), xs.xsec_err(index));
+      try {
+        return make_pair(xs.xsec(index), xs.xsec_err(index));
+      } catch (...) {
+        // Probably a HepMC2 input file which only
+        // has a single (nominal) cross-section
+      }
+      return make_pair(xs.xsec(0), xs.xsec_err(0));
     }
 
 
