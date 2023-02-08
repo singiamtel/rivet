@@ -53,8 +53,7 @@ namespace Rivet {
                                  double dRmax, const Cut& cut,
                                  bool useDecayPhotons, bool useJetClustering)
     : FinalState(cut),
-      _dRmax(dRmax), _fromDecay(useDecayPhotons), _useJetClustering(useJetClustering)
-  {
+      _dRmax(dRmax), _fromDecay(useDecayPhotons), _useJetClustering(useJetClustering) {
     setName("DressedLeptons");
 
     // Find photons -- specialising to prompt photons if decay photons are to be vetoed
@@ -62,7 +61,8 @@ namespace Rivet {
     if (_fromDecay) {
       declare(photonfs, "Photons");
     } else {
-      declare(PromptFinalState(photonfs), "Photons");
+      // Note: explicitly allow photons from direct muons and taus
+      declare(PromptFinalState(photonfs, true, true), "Photons");
     }
 
     // Find bare leptons
@@ -154,9 +154,6 @@ namespace Rivet {
         // Match each photon to its closest charged lepton within the dR cone
         const FinalState& photons = applyProjection<FinalState>(e, "Photons");
         for (const Particle& photon : photons.particles()) {
-          // Ignore photon if it's from a hadron/tau decay and we're avoiding those
-          /// @todo Already removed via the PromptFinalState conversion above?
-          if (!_fromDecay && !photon.isDirect()) continue;
           double dRmin = _dRmax;
           int idx = -1;
           for (size_t i = 0; i < bareleptons.size(); ++i) {
