@@ -67,6 +67,7 @@ int main(int argc, char* argv[]) {
     rivet.analyze(*evt);
     sum_of_weights += evt->weights()[0];
   }
+  (void)sum_of_weights; // suppress unused variable warning
 
   rivet.setCrossSection(make_pair(1.0, 0.1));
   rivet.finalize();

@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
     ah.analyze(*evt);
     sum_of_weights += evt->weights()[0];
   }
+  (void)sum_of_weights; // suppress unused variable warning
 
   ah.setCrossSection(make_pair(1.0, 0.1));
 
