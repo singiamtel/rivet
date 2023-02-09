@@ -36,6 +36,7 @@ namespace Rivet {
 
 
 
+
     /// Require accepted particles to be prompt
     void requirePromptness(bool acc=true, bool allow_from_direct_tau=false, bool allow_from_direct_mu=false) {
       _requirePromptness = acc;

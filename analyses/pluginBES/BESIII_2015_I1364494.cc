@@ -38,7 +38,7 @@ namespace Rivet {
       DecayedParticles ETA = apply<DecayedParticles>(event, "ETA");
       // loop over particles
       for(unsigned int ix=0;ix<ETA.decaying().size();++ix) {
-        // refewrnece mode for denominator
+        // reference mode for denominator
         if(ETA.modeMatches(ix,2,mode0))
            _netap->fill();
         // select right decay mode

@@ -817,6 +817,10 @@
 
 	* Replace the distutils extension build & install with a handmade one.
 
+2022-03-29  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Replace the distutils extension build & install with a handmade one.
+
 2022-03-25  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Fall back to old calculation of y in DISKinematics if Q2 is zero. Thanks to Peter Meinzinger.
