@@ -47,9 +47,9 @@ namespace Rivet {
     /// Get the number of events seen. Should only really be used by external
     /// steering code or analyses in the finalize phase.
     ///
-    /// N.B. This only reports the count for the last collapsed event group 
+    /// N.B. This only reports the count for the last collapsed event group
     /// and hence ignores any additional sub-events seen so far.
-    size_t numEvents() const { 
+    size_t numEvents() const {
       const double N = _eventCounter.get()->_getPersistent(defaultWeightIndex())->numEntries();
       return  size_t(N + 0.5 - (N<0)); // round to nearest integer
     }
@@ -359,7 +359,7 @@ namespace Rivet {
 
     /// @brief Merge the AO map @a newaos into @a allaos
     void mergeAOS(map<string, YODA::AnalysisObjectPtr> &allaos,
-                  map<string, YODA::AnalysisObject*> &newaos, 
+                  map<string, YODA::AnalysisObjectPtr> &newaos,
                   map<string, pair<double, double>> &allxsecs,
                   const vector<string>& delopts=vector<string>(),
                   const vector<string>& optAnas=vector<string>(),
@@ -369,7 +369,7 @@ namespace Rivet {
                   const bool overwrite_xsec = false,
                   const double user_xsec = 1.0);
 
-     
+
     /// @brief A method to prepare a re-entrant run for a given set of analysis objects
     ///
     /// The @a unscale parameter multiplies fillable objects with sumW/xsec to counteract
