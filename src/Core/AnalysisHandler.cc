@@ -581,7 +581,7 @@ namespace Rivet {
     map<string, pair<double,double> > allxsecs;
     for (string file : aofiles) {
       ++nfiles;
-      std::cout << "Merging data file " << file << " [" << nfiles << "/" << nfilestot << "]\r";
+      std::cout << "[" << nfiles << "/" << nfilestot << "] Merging data file " << file << "\r";
       std::cout.flush();
       MSG_DEBUG("Reading in data from " << file);
 
@@ -614,7 +614,7 @@ namespace Rivet {
       // try to read the file and build path-AO map
       // @todo move this map construction into YODA?
       vector<YODA::AnalysisObject*> aos_raw;
-      map<string,YODA::AnalysisObject*> raw_map;
+      map<string,YODA::AnalysisObjectPtr> raw_map;
       size_t rawcount = 0, tmpcount = 0;
       try {
         YODA::read(file, aos_raw);
@@ -622,7 +622,10 @@ namespace Rivet {
           const string& aopath = aor->path();
           // skip everything that isn't pre-finalize
           const AOPath aop_obj(aopath);
-          if (!aop_obj.isRaw())   continue;
+          if (!aop_obj.isRaw()) {
+            delete aor;
+            continue;
+          }
           if (aop_obj.isTmp())  ++tmpcount;
           ++rawcount;
           bool skip = false;
@@ -636,8 +639,11 @@ namespace Rivet {
                                  return std::regex_search(aopath, std::regex(exp));} );
             }
           }
-          if (skip)  continue;
-          raw_map[aopath] = aor;
+          if (skip) {
+            delete aor;
+            continue;
+          }
+          raw_map[aopath].reset(aor);
         }
       }
       catch (...) { //< YODA::ReadError&
@@ -672,17 +678,17 @@ namespace Rivet {
       double xserr = sqrt(item.second.second);
       auto xs_it = allaos.find("/RAW/_XSEC" + wname);
       assert( xs_it != allaos.end() );
-      shared_ptr<YODA::Scatter1D> xsec = dynamic_pointer_cast<YODA::Scatter1D>(xs_it->second);
+      YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
       auto ec_it = allaos.find("/RAW/_EVTCOUNT" + wname);
       assert( ec_it != allaos.end() );
       if (equiv) {
         MSG_DEBUG("Equivalent mode: scale by numEntries");
-        const double nentries = dynamic_pointer_cast<YODA::Counter>(ec_it->second)->numEntries();
+        const double nentries = std::static_pointer_cast<YODA::Counter>(ec_it->second)->numEntries();
         xs /= nentries;
         xserr /= nentries;
       }
       xsec->reset();
-      xsec->addPoint( Point1D(xs,xserr) );
+      xsec->addPoint(xs, xserr);
     }
 
     MSG_INFO("Rerunning finalize ...");
@@ -698,13 +704,13 @@ namespace Rivet {
 
 
   void AnalysisHandler::mergeAOS(map<string, YODA::AnalysisObjectPtr> &allaos,
-                                 map<string, YODA::AnalysisObject*> &newaos, 
+                                 map<string, YODA::AnalysisObjectPtr> &newaos,
                                  map<string, pair<double, double>> &allxsecs,
                                  const vector<string> &delopts,
                                  const vector<string> &optAnas,
                                  const vector<string> &optKeys,
                                  const vector<string> &optVals,
-                                 const bool equiv, 
+                                 const bool equiv,
                                  const bool overwrite_xsec,
                                  const double user_xsec) {
 
@@ -712,7 +718,7 @@ namespace Rivet {
     map<string, double> scales;
     for (const auto& item : newaos) {
       const string& aopath = item.first;
-      YODA::AnalysisObjectPtr ao(item.second);
+      YODA::AnalysisObjectPtr ao = item.second;
       //AOPath path(ao->path());
       AOPath path(aopath);
       if ( !path ) {
@@ -730,7 +736,7 @@ namespace Rivet {
         double evts = 0, sumw = 1;
         auto ec_it = newaos.find("/RAW/_EVTCOUNT" + wname);
         if ( ec_it != newaos.end() ) {
-          YODA::Counter* cPtr = static_cast<YODA::Counter*>(ec_it->second);
+          YODA::CounterPtr cPtr = std::static_pointer_cast<YODA::Counter>(ec_it->second);
           evts = cPtr->numEntries();
           sumw = cPtr->sumW()? cPtr->sumW() : 1;
         }
@@ -743,7 +749,7 @@ namespace Rivet {
         const string xspath = "/RAW/_XSEC" + wname;
         auto xs_it = newaos.find(xspath);
         if ( xs_it != newaos.end() ) {
-          YODA::Scatter1D* xsec = static_cast<YODA::Scatter1D*>(xs_it->second);
+          YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
           if (overwrite_xsec) {
             MSG_DEBUG("Set user-supplied weight: " << user_xsec);
             xsec->point(0).setX(user_xsec);
@@ -805,7 +811,7 @@ namespace Rivet {
     set<string> foundAnalyses;
     set<string> foundWeightNames;
     for (const auto& pair : allAOs) {
-      AOPath path(pair.first); 
+      AOPath path(pair.first);
       if ( path.analysisWithOptions() != "" ) {
         foundAnalyses.insert(path.analysisWithOptions());
       }
@@ -851,13 +857,13 @@ namespace Rivet {
       // set the sum of weights
       auto aoit = allAOs.find(_eventCounter->path());
       if (aoit != allAOs.end()) {
-        *_eventCounter = *dynamic_pointer_cast<YODA::Counter>(aoit->second);
+        *_eventCounter = *std::static_pointer_cast<YODA::Counter>(aoit->second);
       }
 
       // set the cross-section
       const auto xit = allAOs.find(_xs->path());
       if ( xit != allAOs.end() ) {
-        *_xs = *dynamic_pointer_cast<YODA::Scatter1D>(xit->second);
+        *_xs = *std::static_pointer_cast<YODA::Scatter1D>(xit->second);
         if (unscale && _xs->point(0).x()) {
           // in stacking mode: need to unscale prior to finalize
           scales[iW] = _eventCounter->sumW()/_xs->point(0).x();
