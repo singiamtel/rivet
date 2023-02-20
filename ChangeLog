@@ -1,3 +1,7 @@
+2023-02-20 Christian Gutschow  <chris.g@cern.ch>
+
+	* Fix unit for Zjj inclusive runs in ATLAS_2017_I1627873
+
 2023-02-20  Andy Buckley  <andy.buckley@cern.ch>
 
 	* ATLAS_2019_I1746286: fix generator ctau description in the info
