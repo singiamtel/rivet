@@ -14,6 +14,7 @@ libRivetTools_la_SOURCES = \
   RivetMT2.cc \
   RivetPaths.cc \
   Utils.cc \
+  Vector4.cc \
   binreloc.c
 
 if ENABLE_HEPMC_3
