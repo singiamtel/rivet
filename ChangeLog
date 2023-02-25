@@ -1,3 +1,9 @@
+2023-02-24  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Provide an implicit cast for FourVector and derived classes to
+	PseudoJet, to avoid the incorrect conversion by PJ's template
+	constructor.
+
 2023-02-20 Christian Gutschow  <chris.g@cern.ch>
 
 	* Fix unit for Zjj inclusive runs in ATLAS_2017_I1627873
