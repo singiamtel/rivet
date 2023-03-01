@@ -629,7 +629,7 @@ namespace Rivet {
           if (aop_obj.isTmp())  ++tmpcount;
           ++rawcount;
           bool skip = false;
-          if (aopath != "") {
+          if (aopath != "" && aopath != "/RAW/_XSEC" && aopath != "/RAW/_EVTCOUNT") {
             if (matches.size()) {
               skip = !std::any_of(matches.begin(), matches.end(), [&](const string &exp){
                                   return std::regex_search(aopath, std::regex(exp));} );
