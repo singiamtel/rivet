@@ -105,4 +105,4 @@ shutil.copytree("@srcdir@/rivet/hepdatapatches", "build/rivet/hepdatapatches")
 
 ## Run the extension compilation in the build/rivet dir
 import subprocess
-subprocess.call(compile_cmd.split(), cwd="@abs_builddir@/build/rivet")
+sys.exit(subprocess.call(compile_cmd.split(), cwd="@abs_builddir@/build/rivet"))
