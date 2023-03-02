@@ -102,16 +102,16 @@ namespace Rivet {
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
       for (auto bin : hist->bins() ) {
-       	double Oi = bin.area();
+       	double Oi = bin.volume();
 	if(Oi==0.) continue;
 	double a =  d*(bin.xMax() - bin.xMin());
 	double b = d/3.*(pow(bin.xMax(),3) - pow(bin.xMin(),3));
-       	double Ei = bin.areaErr();
-	sum1 +=   a*Oi/sqr(Ei);
-	sum2 +=   b*Oi/sqr(Ei);
-	sum3 += sqr(a)/sqr(Ei);
-	sum4 += sqr(b)/sqr(Ei);
-	sum5 +=    a*b/sqr(Ei);
+       	double Ei = bin.volumeErr();
+        sum1 +=   a*Oi/sqr(Ei);
+        sum2 +=   b*Oi/sqr(Ei);
+        sum3 += sqr(a)/sqr(Ei);
+        sum4 += sqr(b)/sqr(Ei);
+        sum5 +=    a*b/sqr(Ei);
       }
       // calculate alpha
       double alpha = (-c*sum1 + sqr(c)*sum2 + sum3 - c*sum5)/(sum1 - c*sum2 + c*sum4 - sum5);

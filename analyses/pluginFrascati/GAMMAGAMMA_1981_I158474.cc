@@ -122,7 +122,7 @@ namespace Rivet {
 	}
       }
       for(unsigned int ix=1;ix<3;++ix) {
-	Scatter1D R = (ix==1? *_nC2 : *_nC4)/ *_nmu;
+	Scatter1D R = ((ix==1? *_nC2 : *_nC4)/ *_nmu).mkScatter();
 	double              rval = R.point(0).x();
 	pair<double,double> rerr = R.point(0).xErrs();
 	double sig_h = (ix ==1 ? _nC2 : _nC4)->val()*fact;

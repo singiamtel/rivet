@@ -32,8 +32,8 @@ namespace Rivet {
       double FQC = 1.-FGC;
       double FQF = 1.-FGF;
 
-      for (size_t i=0; i<hGluon->numBins(); i++) {
-        double binCenter = hGluon->bin(i).midpoint();
+      for (size_t i=1; i<hGluon->numBins()+1; i++) {
+        double binCenter = hGluon->bin(i).xMid();
         double gVal = 0., qVal = 0.;
         if ((FQF -  FQC) != 0.) {
           gVal = (FQF * hCentral->bin(ptbin*(nBins) + i).height() - FQC * hForward->bin(ptbin*(nBins) + i).height()) / (FQF - FQC);
@@ -90,12 +90,12 @@ namespace Rivet {
 
           if (var=="rg" || var=="trg") {
             binWidth = rgBins[j+1]- rgBins[j];
-            if (j==nBins-1) ptBinnedHist->bin( k*nBins+j ).scaleW(2.);
+            if (j==nBins-1) ptBinnedHist->bin( k*nBins+j+1 ).scaleW(2.);
             //normalization += ptBinnedHist->bin(k*nBins+j).height()*binWidth;
-            normalization += ptBinnedHist->bin(k*(nBins) + j).height()*binWidth;
+            normalization += ptBinnedHist->bin(k*(nBins) + j+1).height()*binWidth;
           }
           else{
-            normalization += ptBinnedHist->bin(k*(nBins) + j).height()*binWidth;
+            normalization += ptBinnedHist->bin(k*(nBins) + j+1).height()*binWidth;
           }
         }
 
@@ -103,10 +103,10 @@ namespace Rivet {
 
         for (unsigned int j=0; j<nBins; j++) {
           if (var=="rg" || var=="trg") {
-            ptBinnedHist->bin(k*(nBins) + j ).scaleW(1. / (normalization) );
+            ptBinnedHist->bin(k*(nBins) + j+1 ).scaleW(1. / (normalization) );
           }
           else{
-            ptBinnedHist->bin(k*(nBins) + j ).scaleW(1. / (normalization));
+            ptBinnedHist->bin(k*(nBins) + j+1 ).scaleW(1. / (normalization));
           }
 
         }
@@ -119,7 +119,7 @@ namespace Rivet {
       if (var=="m" || var=="tm") {
         double norm = 0.;
         for (size_t i = normBin1; i < normBin2; i++) { //only normalize in the resummation region.
-          norm+=hist->bin(i).area();
+          norm+=hist->bin(i+1).volume();
         }
         if (norm > 0.) {
           hist->scaleW(1.0/(norm));

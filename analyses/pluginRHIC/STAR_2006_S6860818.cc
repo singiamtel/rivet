@@ -129,22 +129,21 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      std::vector<Point2D> points;
       for (size_t i=0 ; i<4 ; i++) {
         if (_nWeightedBaryon[i]->val()==0 || _nWeightedAntiBaryon[i]->val()==0) {
-          points.push_back(Point2D(i,0,0.5,0));
-        } else {
+          _h_antibaryon_baryon_ratio->addPoint(i,0,0.5,0);
+        }
+        else {
           double y  = safediv(_nWeightedAntiBaryon[i]->val(), _nWeightedBaryon[i]->val(), 0.);
           double dy = sqrt( safediv(1., _nWeightedAntiBaryon[i]->numEntries(), 0.) + safediv(1., _nWeightedBaryon[i]->numEntries(), 0.) );
-          points.push_back(Point2D(i,y,0.5,y*dy));
+         _h_antibaryon_baryon_ratio->addPoint(i,y,0.5,y*dy);
         }
       }
-      _h_antibaryon_baryon_ratio->addPoints( points );
 
       divide(_h_pT_lambdabar,_h_pT_lambda, _h_lambar_lam);
       divide(_h_pT_xiplus,_h_pT_ximinus, _h_xiplus_ximinus);
 
-      const YODA::Scatter1D factor = (1./(2.0 * M_PI)) / *_sumWeightSelected;
+      const YODA::Scatter1D factor = ((1./(2.0 * M_PI)) / *_sumWeightSelected).mkScatter();
       scale(_h_pT_k0s,       factor);
       scale(_h_pT_kminus,    factor);
       scale(_h_pT_kplus,     factor);

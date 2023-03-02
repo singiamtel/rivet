@@ -550,19 +550,19 @@ namespace Rivet {
 
         // Scale individual bins which have been widened for visability
         if (hist.first == "jet_pt_leading" || hist.first == "jet_pt_subleading") {
-          hist.second->bin(0).scaleW(30);
+          hist.second->bin(1).scaleW(30);
         }
         else if (hist.first == "dijet_m") {
-          hist.second->bin(0).scaleW(500);
+          hist.second->bin(1).scaleW(500);
         }
         else if (hist.first == "pt4lj" || hist.first == "pt4ljj") {
-          hist.second->bin(0).scaleW(60);
+          hist.second->bin(1).scaleW(60);
         }
         else if (hist.first == "m4lj") {
-          hist.second->bin(0).scaleW(120);
+          hist.second->bin(1).scaleW(120);
         }
         else if (hist.first == "m4ljj") {
-          hist.second->bin(0).scaleW(180);
+          hist.second->bin(1).scaleW(180);
         }
 
       }

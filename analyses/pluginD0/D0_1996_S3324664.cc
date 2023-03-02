@@ -69,9 +69,7 @@ namespace Rivet {
       normalize(_h_deta, 8830.); // fixed norm OK
 
       // Normalied to 1/(4pi)
-      for (Histo1DPtr histo : _h_dphi.histos()) {
-        normalize(histo, 1./(4.*M_PI));
-      }
+      normalize(_h_dphi.histos(), 1./(4.*M_PI));
 
     }
 

@@ -71,7 +71,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       assert(_tmp_h_plus->numBins() == _tmp_h_minus->numBins());
-      for (size_t i = 0; i < _tmp_h_plus->numBins(); ++i) {
+      for (size_t i = 1; i < _tmp_h_plus->numBins()+1; ++i) {
         const double num   = _tmp_h_plus->bin(i).sumW() - _tmp_h_minus->bin(i).sumW();
         const double denom = _tmp_h_plus->bin(i).sumW() + _tmp_h_minus->bin(i).sumW();
         const double relerr = _tmp_h_plus->bin(i).relErr()  + _tmp_h_minus->bin(i).relErr();

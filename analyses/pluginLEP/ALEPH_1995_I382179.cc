@@ -39,8 +39,8 @@ namespace Rivet {
       // Even if we only generate hadronic events, we still need a cut on numCharged >= 2.
       const FinalState& fs = apply<FinalState>(event, "FS");
       if (fs.particles().size() < 2) {
-	MSG_DEBUG("Failed ncharged cut");
-	vetoEvent;
+        MSG_DEBUG("Failed ncharged cut");
+        vetoEvent;
       }
       MSG_DEBUG("Passed ncharged cut");
 
@@ -50,15 +50,15 @@ namespace Rivet {
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
       for (const Particle& p : fs.particles()) {
-	int id = p.abspid();
-	// charged pions
-	if (id == PID::PIPLUS || id == PID::PIMINUS) {
-	  _histXpPion->fill(p.p3().mod()/meanBeamMom);
-	} else if(id == PID::KPLUS || id == PID::KMINUS) {
-	  _histXpKaon->fill(p.p3().mod()/meanBeamMom);
-	} else if(id == PID::PROTON || id == PID::ANTIPROTON) {
-	  _histXpProton->fill(p.p3().mod()/meanBeamMom);
-	}
+        int id = p.abspid();
+        // charged pions
+        if (id == PID::PIPLUS || id == PID::PIMINUS) {
+          _histXpPion->fill(p.p3().mod()/meanBeamMom);
+        } else if(id == PID::KPLUS || id == PID::KMINUS) {
+          _histXpKaon->fill(p.p3().mod()/meanBeamMom);
+        } else if(id == PID::PROTON || id == PID::ANTIPROTON) {
+          _histXpProton->fill(p.p3().mod()/meanBeamMom);
+        }
       }
 
 

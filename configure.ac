@@ -1,7 +1,7 @@
 ## Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([Rivet],[3.1.7],[rivet@projects.hepforge.org],[Rivet])
+AC_INIT([Rivet],[3.2.0a],[rivet@projects.hepforge.org],[Rivet])
 
 ## Check and block installation into the src/build dir
 if test "$prefix" = "$PWD"; then
@@ -49,7 +49,7 @@ if test "x$CXXFLAGS" == "x"; then CXXFLAGS="-O2"; fi
 ## Compiler setup
 AC_LANG(C++)
 AC_PROG_CXX
-AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
+AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory])
 
 ## Store and propagate the compiler identity and flags
 RIVETCXX="$CXX"
@@ -81,8 +81,8 @@ if test -f "$YODACONFIG"; then
   YODA_VERSION2=[`echo $YODA_VERSION | cut -d. -f2 | sed -e 's/\([0-9]*\).*/\1/g'`]
   YODA_VERSION3=[`echo $YODA_VERSION | cut -d. -f3 | sed -e 's/\([0-9]*\).*/\1/g'`]
   let YODA_VERSION_INT=YODA_VERSION1*10000+YODA_VERSION2*100+YODA_VERSION3
-  if test $YODA_VERSION_INT -lt 10800; then
-    AC_MSG_ERROR([YODA version isn't sufficient: at least version 1.8.0 required])
+  if test $YODA_VERSION_INT -lt 20000; then
+    AC_MSG_ERROR([YODA version isn't sufficient: at least version 2.0.0 required])
   fi
   AC_MSG_CHECKING([YODA Python path using yoda-config])
   YODA_PYTHONPATH=`$YODACONFIG --pythonpath`

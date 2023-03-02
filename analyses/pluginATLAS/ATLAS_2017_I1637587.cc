@@ -71,27 +71,27 @@ namespace Rivet {
       double norm1 = 0.;
       double norm2 = 0.;
       for (size_t i = 4; i <= 7; ++i) { //only normalize in the resummation region.
-        norm0+=_h_Table1->bin(i).height();
-      	norm1+=_h_Table2->bin(i).height();
-      	norm2+=_h_Table3->bin(i).height();
+        norm0+=_h_Table1->bin(i+1).height();
+      	norm1+=_h_Table2->bin(i+1).height();
+      	norm2+=_h_Table3->bin(i+1).height();
       }
 
       if (norm0 != 0) {
-	_h_Table1->scaleW(1.0/norm0);
+        _h_Table1->scaleW(1.0/norm0);
       } else {
-	MSG_WARNING("Zero entries, cannot normalise Table 1");
+        MSG_WARNING("Zero entries, cannot normalise Table 1");
       }
 
       if (norm1 != 0) {
-	_h_Table2->scaleW(1.0/norm1);
+        _h_Table2->scaleW(1.0/norm1);
       } else {
-	MSG_WARNING("Zero entries, cannot normalise Table 2");
+        MSG_WARNING("Zero entries, cannot normalise Table 2");
       }
 
       if (norm2 != 0) {
-	_h_Table3->scaleW(1.0/norm2);
+        _h_Table3->scaleW(1.0/norm2);
       } else {
-	MSG_WARNING("Zero entries, cannot normalise Table 3");
+        MSG_WARNING("Zero entries, cannot normalise Table 3");
       }
 
       ptNorm( _h_Table4 );
@@ -103,12 +103,12 @@ namespace Rivet {
       for (size_t k = 0; k < 9; ++k){
         double normalization = 0;
         for (size_t j = 4; j <= 7; ++j) {
-          normalization += ptBinnedHist->bin(k*10 + j).height();
+          normalization += ptBinnedHist->bin(k*10 + j+1).height();
         }
         if( normalization == 0 ) continue;
 
         for (size_t j = 0; j < 10; ++j) {
-          ptBinnedHist->bin(k*10 + j).scaleW(1. / normalization);
+          ptBinnedHist->bin(k*10 + j+1).scaleW(1. / normalization);
         }
       }
 

@@ -4,13 +4,9 @@
 #include "Rivet/Config/RivetCommon.hh"
 #include "YODA/AnalysisObject.h"
 #include "YODA/Counter.h"
-#include "YODA/Histo1D.h"
-#include "YODA/Histo2D.h"
-#include "YODA/Profile1D.h"
-#include "YODA/Profile2D.h"
-#include "YODA/Scatter1D.h"
-#include "YODA/Scatter2D.h"
-#include "YODA/Scatter3D.h"
+#include "YODA/Histo.h"
+#include "YODA/Profile.h"
+#include "YODA/Scatter.h"
 #include <map>
 #include <valarray>
 
@@ -79,8 +75,8 @@ namespace Rivet {
     /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    void fill(double weight=1.0, double fraction=1.0) {
-      (void)fraction; //< ???
+    void fill(const double weight=1.0, const double fraction=1.0) {
+      (void)fraction; // suppress unused variable warning
       _fills.insert( { YODA::Counter::FillType(), weight } );
     }
 
@@ -102,30 +98,38 @@ namespace Rivet {
   class TupleWrapper<YODA::Histo1D> : public YODA::Histo1D {
   public:
 
+    using YAO = YODA::Histo1D;
+
     /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Histo1D>> Ptr;
+    using Ptr = shared_ptr<TupleWrapper<YAO>>;
 
     /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Histo1D& h) : YODA::Histo1D(h) {}
+    TupleWrapper(const YAO& h) : YAO(h) {}
+
+
 
     /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    void fill( double x, double weight=1.0, double fraction=1.0 ) {
-      (void)fraction; //< ???
-      if ( std::isnan(x) ) throw YODA::RangeError("X is NaN"); //< efficient?
-      _fills.insert( { x, weight } );
+    int fill(const double x, const double weight=1.0, const double fraction=1.0 ) {
+      (void)fraction; // suppress unused variable warning
+      _fills.insert( { YAO::FillType{x}, weight } );
+      if (YODA::containsNan(YAO::FillType{x})) {
+        return -1;
+      }
+      const size_t binIdx = YAO::_binning.globalBinIndex(YAO::FillType{x});
+      return int(binIdx);
     }
 
     /// Empty the subevent stack (for start of new event group).
-    void reset() { _fills.clear(); }
+    void reset() noexcept { _fills.clear(); }
 
     /// Access the fill info subevent stack.
-    const Fills<YODA::Histo1D>& fills() const { return _fills; }
+    const Fills<YAO>& fills() const { return _fills; }
 
   private:
 
-    Fills<YODA::Histo1D> _fills;
+    Fills<YAO> _fills;
 
   };
 
@@ -144,15 +148,19 @@ namespace Rivet {
     /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    void fill( double x, double y, double weight=1.0, double fraction=1.0 ) {
-      (void)fraction; //< ???
-      if ( std::isnan(x) ) throw YODA::RangeError("X is NaN"); //< efficient?
-      if ( std::isnan(y) ) throw YODA::RangeError("Y is NaN"); //< efficient?
+    int fill(const double x, const double y, const double weight=1.0, const double fraction=1.0 ) {
+      (void)fraction; // suppress unused variable warning
       _fills.insert( { YODA::Profile1D::FillType{x,y}, weight } );
+      if (YODA::containsNan(YODA::Profile1D::FillType{x,y})) {
+        return -1;
+      }
+      const std::tuple<double> coords{x};
+      const size_t binIdx = YODA::Profile1D::_binning.globalBinIndex(coords);
+      return int(binIdx);
     }
 
     /// Empty the subevent stack (for start of new event group).
-    void reset() { _fills.clear(); }
+    void reset() noexcept { _fills.clear(); }
 
     /// Access the fill info subevent stack.
     const Fills<YODA::Profile1D>& fills() const { return _fills; }
@@ -178,15 +186,18 @@ namespace Rivet {
     /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    void fill( double x, double y, double weight=1.0, double fraction=1.0 ) {
-      (void)fraction; //< ???
-      if ( std::isnan(x) ) throw YODA::RangeError("X is NaN"); //< efficient?
-      if ( std::isnan(y) ) throw YODA::RangeError("Y is NaN"); //< efficient?
+    int fill(const double x, const double y, const double weight=1.0, const double fraction=1.0 ) {
+      (void)fraction; // suppress unused variable warning
       _fills.insert( { YODA::Histo2D::FillType{x,y}, weight } );
+      if (YODA::containsNan(YODA::Histo2D::FillType{x,y})) {
+        return -1;
+      }
+      const size_t binIdx = YODA::Histo2D::_binning.globalBinIndex(YODA::Histo2D::FillType{x,y});
+      return int(binIdx);
     }
 
     /// Empty the subevent stack (for start of new event group).
-    void reset() { _fills.clear(); }
+    void reset() noexcept { _fills.clear(); }
 
     /// Access the fill info subevent stack.
     const Fills<YODA::Histo2D>& fills() const { return _fills; }
@@ -212,16 +223,19 @@ namespace Rivet {
     /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    void fill( double x, double y, double z, double weight=1.0, double fraction=1.0 ) {
-      (void)fraction; //< ???
-      if ( std::isnan(x) ) throw YODA::RangeError("X is NaN"); //< efficient?
-      if ( std::isnan(y) ) throw YODA::RangeError("Y is NaN"); //< efficient?
-      if ( std::isnan(z) ) throw YODA::RangeError("Z is NaN"); //< efficient?
+    int fill(const double x, const double y, const double z, const double weight=1.0, const double fraction=1.0 ) {
+      (void)fraction; // suppress unused variable warning
       _fills.insert( { YODA::Profile2D::FillType{x,y,z}, weight } );
+      if (YODA::containsNan(YODA::Profile2D::FillType{x,y,z})) {
+        return -1;
+      }
+      const std::tuple<double,double> coords{x,y};
+      const size_t binIdx = YODA::Profile2D::_binning.globalBinIndex(coords);
+      return int(binIdx);
     }
 
     /// Empty the subevent stack (for start of new event group).
-    void reset() { _fills.clear(); }
+    void reset() noexcept { _fills.clear(); }
 
     /// Access the fill info subevent stack.
     const Fills<YODA::Profile2D>& fills() const { return _fills; }
@@ -746,13 +760,9 @@ namespace Rivet {
 
   using YODA::Counter;
   using YODA::Histo1D;
-  using YODA::HistoBin1D;
   using YODA::Histo2D;
-  using YODA::HistoBin2D;
   using YODA::Profile1D;
-  using YODA::ProfileBin1D;
   using YODA::Profile2D;
-  using YODA::ProfileBin2D;
   using YODA::Scatter1D;
   using YODA::Point1D;
   using YODA::Scatter2D;
@@ -826,7 +836,7 @@ namespace Rivet {
     tsrc->scaleW(scale); //< note semi-accidental modification of the input
     try {
       *tdst += *tsrc;
-    } catch (YODA::LogicError&) {
+    } catch (YODA::BinningError&) {
       return false;
     }
     return true;
@@ -845,7 +855,7 @@ namespace Rivet {
   /// binned, are in other ways compatible.
   template <typename TPtr>
   inline bool bookingCompatible(TPtr a, TPtr b) {
-    return a->sameBinning(*b);
+    return *a == *b;
   }
   inline bool bookingCompatible(CounterPtr, CounterPtr) {
     return true;

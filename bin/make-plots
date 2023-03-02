@@ -189,8 +189,20 @@ class InputData(Described):
                         newname = self.histos[path].getName()
                         self.histos[newname] = copy.deepcopy(self.histos[path])
                         del self.histos[path]
-                elif name == 'VALUE':
+                elif name == 'VALUE' or name == 'SCATTER1D':
                     self.histos[path] = Value(f, p=path)
+                    if not self.histos[path].getName() == '':
+                        newname = self.histos[path].getName()
+                        self.histos[newname] = copy.deepcopy(self.histos[path])
+                        del self.histos[path]
+                elif 'SCATTER2D' in name:
+                    self.histos[path] = Scatter2D(f, p=path)
+                    if not self.histos[path].getName() == '':
+                        newname = self.histos[path].getName()
+                        self.histos[newname] = copy.deepcopy(self.histos[path])
+                        del self.histos[path]
+                elif 'SCATTER3D' in name:
+                    self.histos[path] = Scatter3D(f, p=path)
                     if not self.histos[path].getName() == '':
                         newname = self.histos[path].getName()
                         self.histos[newname] = copy.deepcopy(self.histos[path])
@@ -2602,6 +2614,61 @@ class Histo2D(Histogram):
 
     # TODO: specialise draw() here
 
+
+class Scatter2D(Histogram):
+
+    def read_input_data(self, f):
+        for line in f:
+            if is_end_marker(line, 'SCATTER2D'):
+                break
+            elif is_comment(line):
+                continue
+            else:
+                line = line.rstrip()
+                m = pat_property.match(line)
+                if m:
+                    prop, value = m.group(1,2)
+                    self.description[prop] = value
+                else:
+                    linearray = line.split()
+                    if len(linearray) == 6:
+                        x = floatify(linearray[0])
+                        xm = floatify(linearray[1])
+                        xp = floatify(linearray[2])
+                        self.data.append(BinData(x - xm, x + xp, linearray[3], [linearray[4],linearray[5]]))
+                    else:
+                        raise Exception('Scatter2D does not have the expected number of columns. ' + line)
+
+
+class Scatter3D(Histogram):
+
+    def read_input_data(self, f):
+        for line in f:
+            if is_end_marker(line, 'SCATTER3D'):
+                break
+            elif is_comment(line):
+                continue
+            else:
+                line = line.rstrip()
+                m = pat_property.match(line)
+                if m:
+                    prop, value = m.group(1,2)
+                    self.description[prop] = value
+                else:
+                    linearray = line.split()
+                    if len(linearray) == 9:
+                        x = floatify(linearray[0])
+                        xm = floatify(linearray[1])
+                        xp = floatify(linearray[2])
+                        y = floatify(linearray[3])
+                        ym = floatify(linearray[4])
+                        yp = floatify(linearray[5])
+                        err = 0.5 * (floatify(linearray[7]) + floatify(linearray[8]))
+                        if self.description.get("ShowMaxZErr", 1):
+                            err = max(floatify(linearray[7]) + floatify(linearray[8]))
+                        self.data.append(BinData([x - xm, y - ym], [x + xp, y + yp], linearray[6], err))
+                    else:
+                        raise Exception('Scatter3D does not have the expected number of columns. ' + line)
 
 
 #############################

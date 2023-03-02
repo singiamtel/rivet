@@ -69,29 +69,18 @@ namespace Rivet {
     ///
     /// Construct asymmetry: (dsig+/deta - dsig-/deta) / (dsig+/deta + dsig-/deta) for each ET region
     void finalize() {
-      calc_asymm(_hs_dsigpm_deta_25_35, _h_asym1);
-      calc_asymm(_hs_dsigpm_deta_35, _h_asym2);
-      calc_asymm(_hs_dsigpm_deta_25, _h_asym3);
-      _h_asym1->scaleY(100.);
-      _h_asym2->scaleY(100.);
-      _h_asym3->scaleY(100.);
+      asymm(_hs_dsigpm_deta_25_35[0], _hs_dsigpm_deta_25_35[1], _h_asym1);
+      asymm(_hs_dsigpm_deta_35[0],    _hs_dsigpm_deta_35[1],    _h_asym2);
+      asymm(_hs_dsigpm_deta_25[0],    _hs_dsigpm_deta_25[1],    _h_asym3);
+      _h_asym1->scale(1, 100.);
+      _h_asym2->scale(1, 100.);
+      _h_asym3->scale(1, 100.);
     }
 
     /// @}
 
 
   private:
-
-    /// @name Helper functions for constructing asymmetry histograms in finalize()
-    /// @{
-    void calc_asymm(const Histo1DPtr plus, const Histo1DPtr minus, Scatter2DPtr target) {
-      divide(*plus - *minus, *plus + *minus, target);
-    }
-    void calc_asymm(const Histo1DPtr histos[2], Scatter2DPtr target) {
-      calc_asymm(histos[0], histos[1], target);
-    }
-    /// @}
-
 
     /// @name Histograms
     /// @{

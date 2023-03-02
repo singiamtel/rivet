@@ -139,7 +139,7 @@ namespace Rivet {
 
     // Initialize the remaining analyses
     _stage = Stage::INIT;
-    for (AnaHandle a : analyses()) {
+    for (const AnaHandle& a : analyses()) {
       MSG_DEBUG("Initialising analysis: " << a->name());
       try {
         // Allow projection registration in the init phase onwards
@@ -327,14 +327,15 @@ namespace Rivet {
     // Ensure that beam details match those from the first event (if we're checking beams)
     if (_checkBeams) {
       const ParticlePair evtbeams = beams(event);
-      MSG_DEBUG("Event beams = " << evtbeams);
+      const double sqrts = Rivet::sqrtS(event);
+      MSG_DEBUG("Event beams = " << evtbeams << " at sqrt(s) = " << sqrts/GeV << " GeV");
       if (evtbeams.first.pid() == PID::ANY && evtbeams.second.pid() == PID::ANY) {
         throw Error("No event beams found: please fix the events, or run with beam-checking disabled");
       }
-      if (!compatibleBeams(evtbeams, runBeams())) {
+      if (!compatibleBeams(evtbeams, _beams) || !fuzzyEquals(sqrts, this->runSqrtS())) {
         ostringstream errmsg;
         errmsg << "Event beams mismatch with run: "
-                  << PID::toBeamsString(beamIDs(event)) << " @ " << sqrtS(event)/GeV << " GeV" << " vs. expected "
+                  << PID::toBeamsString(beamIDs(event)) << " @ " << sqrts/GeV << " GeV" << " vs. expected "
                   << this->runBeams() << " @ " << this->runSqrtS()/GeV << " GeV";
         throw Error(errmsg.str());
       }
@@ -365,7 +366,7 @@ namespace Rivet {
     MSG_TRACE("Starting new sub-event");
     _eventCounter.get()->newSubEvent();
     for (const AnaHandle& a : analyses()) {
-      for (auto ao : a->analysisObjects()) {
+      for (const auto& ao : a->analysisObjects()) {
         ao.get()->newSubEvent();
       }
     }
@@ -394,7 +395,7 @@ namespace Rivet {
     _eventCounter->fill();
 
     // Run the analyses
-    for (AnaHandle a : analyses()) {
+    for (const AnaHandle& a : analyses()) {
       MSG_TRACE("About to run analysis " << a->name());
       try {
         a->analyze(event);
@@ -421,7 +422,7 @@ namespace Rivet {
     MSG_TRACE("AnalysisHandler::analyze(): Pushing _eventCounter to persistent.");
     _eventCounter.get()->pushToPersistent(_subEventWeights);
     for (const AnaHandle& a : analyses()) {
-      for (auto ao : a->analysisObjects()) {
+      for (const auto& ao : a->analysisObjects()) {
         MSG_TRACE("AnalysisHandler::analyze(): Pushing " << a->name()
                   << "'s " << ao->name() << " to persistent.");
         ao.get()->pushToPersistent(_subEventWeights, _NLOSmearing);
@@ -456,13 +457,13 @@ namespace Rivet {
     _eventCounter.get()->pushToFinal();
     _xs.get()->pushToFinal();
     for (const AnaHandle& a : analyses()) {
-      for (auto ao : a->analysisObjects()) {
+      for (const auto& ao : a->analysisObjects()) {
         ao.get()->pushToFinal();
       }
     }
 
     // Run finalize for each supporting analysis
-    for (AnaHandle a : analyses()) {
+    for (const AnaHandle& a : analyses()) {
       if ( _dumping && !a->info().reentrant() )  {
         if ( _dumping == 1 ) { //< print on first attempt to dump
           MSG_DEBUG("Skipping finalize in periodic dump of " << a->name() << " as it is not declared re-entrant.");
@@ -472,7 +473,7 @@ namespace Rivet {
       for (size_t iW = 0; iW < numWeights(); iW++) {
         _eventCounter.get()->setActiveFinalWeightIdx(iW);
         _xs.get()->setActiveFinalWeightIdx(iW);
-        for (auto ao : a->analysisObjects()) {
+        for (const auto& ao : a->analysisObjects()) {
           ao.get()->setActiveFinalWeightIdx(iW);
         }
         try {
@@ -729,7 +730,7 @@ namespace Rivet {
 
 
   void AnalysisHandler::mergeAOS(map<string, YODA::AnalysisObjectPtr> &allaos,
-                                 map<string, YODA::AnalysisObjectPtr> &newaos,
+                                 const map<string, YODA::AnalysisObjectPtr> &newaos,
                                  map<string, pair<double, double>> &allxsecs,
                                  const vector<string> &delopts,
                                  const vector<string> &optAnas,
@@ -781,7 +782,7 @@ namespace Rivet {
           }
           else {
             MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
-            xsec->scaleX(user_xsec);
+            xsec->scale(0, user_xsec);
           }
           // get iterator to the existing (or newly created) key-value pair
           auto xit = allxsecs.insert( make_pair(wname, make_pair(0,0)) ).first;
@@ -851,7 +852,7 @@ namespace Rivet {
     // Then we create and initialize all analyses
     for (const string& ananame : foundAnalyses) { addAnalysis(ananame); }
     _stage = Stage::INIT;
-    for (AnaHandle a : analyses() ) {
+    for (const AnaHandle& a : analyses() ) {
       MSG_TRACE("Initialising analysis: " << a->name());
       if ( !a->info().reentrant() )
         MSG_WARNING("Analysis " << a->name() << " has not been validated to have "
@@ -901,7 +902,7 @@ namespace Rivet {
       }
 
       // Go through all analyses and add stuff to their analysis objects;
-      for (AnaHandle a : analyses()) {
+      for (const AnaHandle& a : analyses()) {
         for (const auto& ao : a->analysisObjects()) {
           ao.get()->setActiveWeightIdx(iW);
           YODA::AnalysisObjectPtr yao = ao.get()->activeYODAPtr();
@@ -943,7 +944,7 @@ namespace Rivet {
     // @todo Do we need to check that the sequence of weight indices is the same?
 
     // Check if the registered analyses are reentrant safe
-    for (AnaHandle a : analyses() ) {
+    for (const AnaHandle& a : analyses() ) {
       MSG_TRACE("Initialising analysis: " << a->name());
       if ( !a->info().reentrant() )
         MSG_WARNING("Analysis " << a->name() << " has not been validated to have "
@@ -1049,10 +1050,10 @@ namespace Rivet {
   vector<MultiweightAOPtr> AnalysisHandler::getRivetAOs() const {
       vector<MultiweightAOPtr> rtn;
 
-      for (AnaHandle a : analyses()) {
-          for (const auto & ao : a->analysisObjects()) {
-              rtn.push_back(ao);
-          }
+      for (const AnaHandle& a : analyses()) {
+        for (const auto& ao : a->analysisObjects()) {
+          rtn.push_back(ao);
+        }
       }
       rtn.push_back(_eventCounter);
       rtn.push_back(_xs);
@@ -1064,7 +1065,7 @@ namespace Rivet {
   YODA::AnalysisObjectPtr _mkStaticClone(YODA::AnalysisObjectPtr aop) {
     YODA::AnalysisObjectPtr rtn;
     T* aop_dyn = dynamic_cast<T*>(aop.get());
-    if (aop_dyn != nullptr) rtn.reset(YODA::mkScatter(*aop_dyn).newclone());
+    if (aop_dyn != nullptr)  rtn.reset((*aop_dyn).mkScatter(aop_dyn->path()).newclone());
     return rtn;
   }
 
@@ -1087,7 +1088,8 @@ namespace Rivet {
       for (auto rao : raos) {
         rao.get()->setActiveFinalWeightIdx(iW);
         if (rao->path().find("/TMP/") != string::npos) continue; //< skip TMP histos
-        if (rao->path().find("/_") != string::npos && !startsWith(rao->path(), "/_")) continue; //< skip leading-underscored analysis-level histos
+        // skip leading-underscored analysis-level histos
+        if (rao->path().find("/_") != string::npos && !startsWith(rao->path(), "/_")) continue;
         YODA::AnalysisObjectPtr aop = rao.get()->activeYODAPtr();
         // Convert to a static type, e.g. scatter
         /// @todo Convert the output to BinnedEstimates when available
@@ -1108,7 +1110,9 @@ namespace Rivet {
 
     // Analyses can make changes necessary for merging to RAW objects before writing
     for (size_t iW : order) {
-      for (auto a : analyses()) a->rawHookOut(raos, iW);
+      for (const auto& a : analyses()) {
+        a->rawHookOut(raos, iW);
+      }
     }
 
     // Finally write the RAW objects
@@ -1152,7 +1156,7 @@ namespace Rivet {
 
   std::vector<std::string> AnalysisHandler::analysisNames() const {
     std::vector<std::string> rtn;
-    for (AnaHandle a : analyses()) {
+    for (const AnaHandle& a : analyses()) {
       rtn.push_back(a->name());
     }
     return rtn;

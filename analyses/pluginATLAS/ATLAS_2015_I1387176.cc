@@ -62,19 +62,17 @@ namespace Rivet {
       scale(_hist_dummy, crossSectionPerEvent());
       normalize(_hist_EEC);
 
-      vector<Point2D> points;
       size_t nBins = _hist_EEC->numBins();
-      for (size_t k = 0; k < nBins/2; ++k) {
-        double x = _hist_EEC->bin(k).midpoint();
-        double y = _hist_EEC->bin(k).height() - _hist_EEC->bin(nBins-(k+1)).height();
+      for (size_t k = 1; k < (nBins/2)+1; ++k) {
+        double x = _hist_EEC->bin(k).xMid();
+        double y = _hist_EEC->bin(k).height() - _hist_EEC->bin(nBins-k+1).height();
         double ex = _hist_EEC->bin(k).xWidth()/2;
         double e1 = _hist_EEC->bin(k).heightErr();
-        double e2 = _hist_EEC->bin(nBins-(k+1)).heightErr();
+        double e2 = _hist_EEC->bin(nBins-k+1).heightErr();
         double ey = sqrt( e1 * e1 + e2 * e2 );
-        points.push_back(Point2D(x, y, ex, ey));
+        _hist_AEEC->addPoint(x, y, ex, ey);
       }
 
-      _hist_AEEC->addPoints(points);
     }
 
   private:

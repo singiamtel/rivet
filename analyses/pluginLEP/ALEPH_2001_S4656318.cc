@@ -64,7 +64,7 @@ namespace Rivet {
             }
             if (is_primary) {
               _histXbprim->fill(xp);
-              _histMeanXbprim->fill(_histMeanXbprim->bin(0).xMid(), xp);
+              _histMeanXbprim->fill(_histMeanXbprim->bin(1).xMid(), xp);
             }
           }
 
@@ -78,7 +78,7 @@ namespace Rivet {
             }
             if (is_weak) {
               _histXbweak->fill(xp);
-              _histMeanXbweak->fill(_histMeanXbweak->bin(0).xMid(), xp);
+              _histMeanXbweak->fill(_histMeanXbweak->bin(1).xMid(), xp);
             }
           }
 

@@ -36,28 +36,31 @@ namespace Rivet {
     void analyze(const Event& event) {
       const FastJets& jadejet = apply<FastJets>(event, "JadeJets");
       if (jadejet.clusterSeq()) {
-	const double y_23 = jadejet.clusterSeq()->exclusive_ymerge_max(2);
-	const double y_34 = jadejet.clusterSeq()->exclusive_ymerge_max(3);
-	const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
-	for (size_t i = 0; i < _h_y_2_JADE->numBins(); ++i) {
-	  double ycut = _h_y_2_JADE->bin(i).xMid();
-	  double width = _h_y_2_JADE->bin(i).width();
-	  if (y_23 < ycut) _h_y_2_JADE->fillBin(i,width);
-	}
-	for (size_t i = 0; i < _h_y_3_JADE->numBins(); ++i) {
-	  double ycut = _h_y_3_JADE->bin(i).xMid();
-	  double width = _h_y_3_JADE->bin(i).width();
-	  if (y_34 < ycut && y_23 > ycut) {
-	    _h_y_3_JADE->fillBin(i,width);
-	  }
-	}
-	for (size_t i = 0; i < _h_y_4_JADE->numBins(); ++i) {
-	  double ycut = _h_y_4_JADE->bin(i).xMid();
-	  double width = _h_y_4_JADE->bin(i).width();
-	  if (y_45 < ycut && y_34 > ycut) {
-	    _h_y_4_JADE->fillBin(i,width);
-	  }
-	}
+        const double y_23 = jadejet.clusterSeq()->exclusive_ymerge_max(2);
+        const double y_34 = jadejet.clusterSeq()->exclusive_ymerge_max(3);
+        const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
+        for (size_t i = 1; i < _h_y_2_JADE->numBins()+1; ++i) {
+          const auto& b = _h_y_2_JADE->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
+          if (y_23 < ycut) _h_y_2_JADE->fill(ycut,width);
+        }
+        for (size_t i = 1; i < _h_y_3_JADE->numBins()+1; ++i) {
+          const auto& b = _h_y_3_JADE->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
+          if (y_34 < ycut && y_23 > ycut) {
+            _h_y_3_JADE->fill(ycut,width);
+          }
+        }
+        for (size_t i = 1; i < _h_y_4_JADE->numBins()+1; ++i) {
+          const auto& b = _h_y_4_JADE->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
+          if (y_45 < ycut && y_34 > ycut) {
+            _h_y_4_JADE->fill(ycut,width);
+          }
+        }
       }
     }
 

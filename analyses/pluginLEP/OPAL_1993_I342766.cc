@@ -27,8 +27,8 @@ namespace Rivet {
       declare(ChargedFinalState(), "FS");
       declare(UnstableParticles(), "UFS");
       // Book histograms
-      book(_histXeKStar892   , 1, 1, 1);
-      book(_histMeanKStar892   , 2, 1, 1);
+      book(_histXeKStar892, 1, 1, 1);
+      book(_histMeanKStar892, 2, 1, 1);
     }
 
 
@@ -40,15 +40,14 @@ namespace Rivet {
 
       // Even if we only generate hadronic events, we still need a cut on numCharged >= 2.
       if (numParticles < 2) {
-	MSG_DEBUG("Failed leptonic event cut");
-	vetoEvent;
+        MSG_DEBUG("Failed leptonic event cut");
+        vetoEvent;
       }
       MSG_DEBUG("Passed leptonic event cut");
 
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() +
-				   beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
       // Final state of unstable particles to get particle spectra
@@ -57,7 +56,7 @@ namespace Rivet {
       for (const Particle& p : ufs.particles(Cuts::abspid==323)) {
         double xp = p.p3().mod()/meanBeamMom;
         _histXeKStar892->fill(xp);
-        _histMeanKStar892->fill(_histMeanKStar892->bin(0).xMid());
+        _histMeanKStar892->fill(_histMeanKStar892->bin(1).xMid());
       }
     }
 

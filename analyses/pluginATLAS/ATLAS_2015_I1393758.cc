@@ -85,31 +85,31 @@ namespace Rivet {
     void finalize() {
 
       if (numEvents() > 2) {
-        for (unsigned int i = 0; i < forward_kappa3->numBins(); ++i) {
-	  double stdv_fkappa3 = forward_kappa3->bin(i).effNumEntries() > 1? forward_kappa3->bin(i).stdDev() : 0.0;
-	  //See Eq. 3 for the factor of two: https://web.eecs.umich.edu/~fessler/papers/files/tr/stderr.pdf
+        for (unsigned int i = 1; i < forward_kappa3->numBins()+1; ++i) {
+          double stdv_fkappa3 = forward_kappa3->bin(i).effNumEntries() > 1? forward_kappa3->bin(i).yStdDev() : 0.0;
+          //See Eq. 3 for the factor of two: https://web.eecs.umich.edu/~fessler/papers/files/tr/stderr.pdf
           double yerr_fkappa3  = safediv(sqrt(forward_kappa3->bin(i).sumW2()), 2.*forward_kappa3->bin(i).sumW());
-	  forwardRMS_kappa3->point(i).setY(stdv_fkappa3, yerr_fkappa3);
+          forwardRMS_kappa3->point(i-1).setY(stdv_fkappa3, yerr_fkappa3);
 
-          double stdv_fkappa5 = forward_kappa5->bin(i).effNumEntries() > 1? forward_kappa5->bin(i).stdDev() : 0.0;
+          double stdv_fkappa5 = forward_kappa5->bin(i).effNumEntries() > 1? forward_kappa5->bin(i).yStdDev() : 0.0;
           double yerr_fkappa5  = safediv(sqrt(forward_kappa5->bin(i).sumW2()), 2.*forward_kappa5->bin(i).sumW());
-          forwardRMS_kappa5->point(i).setY(stdv_fkappa5, yerr_fkappa5);
+          forwardRMS_kappa5->point(i-1).setY(stdv_fkappa5, yerr_fkappa5);
 
-          double stdv_fkappa7 = forward_kappa7->bin(i).effNumEntries() > 1? forward_kappa7->bin(i).stdDev() : 0.0;
+          double stdv_fkappa7 = forward_kappa7->bin(i).effNumEntries() > 1? forward_kappa7->bin(i).yStdDev() : 0.0;
           double yerr_fkappa7  = safediv(sqrt(forward_kappa7->bin(i).sumW2()), 2.*forward_kappa7->bin(i).sumW());
-          forwardRMS_kappa7->point(i).setY(stdv_fkappa7, yerr_fkappa7);
+          forwardRMS_kappa7->point(i-1).setY(stdv_fkappa7, yerr_fkappa7);
 
-          double stdv_ckappa3 = central_kappa3->bin(i).effNumEntries() > 1? central_kappa3->bin(i).stdDev() : 0.0;
+          double stdv_ckappa3 = central_kappa3->bin(i).effNumEntries() > 1? central_kappa3->bin(i).yStdDev() : 0.0;
           double yerr_ckappa3  = safediv(sqrt(central_kappa3->bin(i).sumW2()), 2.*central_kappa3->bin(i).sumW());
-          centralRMS_kappa3->point(i).setY(stdv_ckappa3, yerr_ckappa3);
+          centralRMS_kappa3->point(i-1).setY(stdv_ckappa3, yerr_ckappa3);
 
-          double stdv_ckappa5 = central_kappa5->bin(i).effNumEntries() > 1? central_kappa5->bin(i).stdDev() : 0.0;
+          double stdv_ckappa5 = central_kappa5->bin(i).effNumEntries() > 1? central_kappa5->bin(i).yStdDev() : 0.0;
           double yerr_ckappa5  = safediv(sqrt(central_kappa5->bin(i).sumW2()), 2.*central_kappa5->bin(i).sumW());
-          centralRMS_kappa5->point(i).setY(stdv_ckappa5, yerr_ckappa5);
+          centralRMS_kappa5->point(i-1).setY(stdv_ckappa5, yerr_ckappa5);
 
-          double stdv_ckappa7 = central_kappa7->bin(i).effNumEntries() > 1? central_kappa7->bin(i).stdDev() : 0.0;
+          double stdv_ckappa7 = central_kappa7->bin(i).effNumEntries() > 1? central_kappa7->bin(i).yStdDev() : 0.0;
           double yerr_ckappa7  = safediv(sqrt(central_kappa7->bin(i).sumW2()), 2.*central_kappa7->bin(i).sumW());
-          centralRMS_kappa7->point(i).setY(stdv_ckappa7, yerr_ckappa7);
+          centralRMS_kappa7->point(i-1).setY(stdv_ckappa7, yerr_ckappa7);
 
         }
       }

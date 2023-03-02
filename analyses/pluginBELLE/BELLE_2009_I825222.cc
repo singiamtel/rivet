@@ -86,12 +86,12 @@ namespace Rivet {
       // dispersion
       Scatter2DPtr dispersion;
       book(dispersion,1,1,3);
-      for(unsigned int ix=0;ix<_p_E2->numBins();++ix) {
-	double val = _p_E2->bins()[ix].mean()-sqr(_p_E->bins()[ix].mean());
-	double err = val*sqrt(sqr(_p_E2->bins()[ix].stdErr()/_p_E2->bins()[ix].mean())+
-			      4.*sqr(_p_E->bins()[ix].stdErr()/_p_E->bins()[ix].mean()));
-	double dx = 0.5*_p_E2->bins()[ix].xWidth();
-	dispersion->addPoint(_p_E2->bins()[ix].xMid(),val,make_pair(dx,dx),make_pair(err,err));
+      for (unsigned int ix=0;ix<_p_E2->numBins();++ix) {
+        double val = _p_E2->bins()[ix].xMean()-sqr(_p_E->bins()[ix].xMean());
+        double err = val*sqrt(sqr(_p_E2->bins()[ix].xStdErr()/_p_E2->bins()[ix].xMean())+
+                            4.*sqr(_p_E->bins()[ix].xStdErr()/_p_E->bins()[ix].xMean()));
+        double dx = 0.5*_p_E2->bins()[ix].xWidth();
+        dispersion->addPoint(_p_E2->bins()[ix].xMid(),val,make_pair(dx,dx),make_pair(err,err));
       }
     }
 

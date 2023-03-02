@@ -84,7 +84,7 @@ namespace Rivet {
       double alpha = -0.732;
       for(unsigned int ix=0;ix<2;++ix) {
 	if(ix<2) normalize(_h_mass[ix],1.,false);
-	_h_pol2[ix]->scaleY(1./alpha);
+	_h_pol2[ix]->scale(2, 1./alpha);
       }
     }
 

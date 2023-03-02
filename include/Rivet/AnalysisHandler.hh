@@ -14,7 +14,7 @@ namespace Rivet {
 
   // Forward declaration and smart pointer for Analysis
   class Analysis;
-  typedef std::shared_ptr<Analysis> AnaHandle;
+  using AnaHandle = std::shared_ptr<Analysis>;
 
 
   /// @brief The key class for coordination of Analysis objects and the event loop
@@ -359,7 +359,7 @@ namespace Rivet {
 
     /// @brief Merge the AO map @a newaos into @a allaos
     void mergeAOS(map<string, YODA::AnalysisObjectPtr> &allaos,
-                  map<string, YODA::AnalysisObjectPtr> &newaos,
+                  const map<string, YODA::AnalysisObjectPtr> &newaos,
                   map<string, pair<double, double>> &allxsecs,
                   const vector<string>& delopts=vector<string>(),
                   const vector<string>& optAnas=vector<string>(),
