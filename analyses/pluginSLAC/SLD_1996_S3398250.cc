@@ -80,16 +80,16 @@ namespace Rivet {
       const size_t numParticles = cfs.particles().size();
       switch (flavour) {
       case 1: case 2: case 3:
-        _weightLight ->fill();
-        _h_light->fillBin(0, numParticles);
+        _weightLight->fill();
+        _h_light->fill(_h_light->bin(1).xMid(), numParticles);
         break;
       case 4:
-        _weightCharm ->fill();
-        _h_charm->fillBin(0, numParticles);
+        _weightCharm->fill();
+        _h_charm->fill(_h_charm->bin(1).xMid(), numParticles);
         break;
       case 5:
         _weightBottom->fill();
-        _h_bottom->fillBin(0, numParticles);
+        _h_bottom->fill(_h_bottom->bin(1).xMid(), numParticles);
         break;
       }
 
@@ -97,18 +97,18 @@ namespace Rivet {
 
 
     void multiplicity_subtract(const Histo1DPtr first, const Histo1DPtr second, Scatter2DPtr & scatter) {
-      const double x  = first->bin(0).xMid();
-      const double ex = first->bin(0).xWidth()/2.;
-      const double y  = first->bin(0).area() - second->bin(0).area();
-      const double ey = sqrt(sqr(first->bin(0).areaErr()) + sqr(second->bin(0).areaErr()));
+      const double x  = first->bin(1).xMid();
+      const double ex = 0.5*first->bin(1).xWidth();
+      const double y  = first->bin(1).volume() - second->bin(1).volume();
+      const double ey = sqrt(sqr(first->bin(1).volumeErr()) + sqr(second->bin(1).volumeErr()));
       scatter->addPoint(x, y, ex, ey);
     }
 
 
     void finalize() {
-      if (_weightBottom->val() != 0) scale(_h_bottom, 1./ *_weightBottom);
-      if (_weightCharm->val()  != 0) scale(_h_charm,  1./ *_weightCharm );
-      if (_weightLight->val()  != 0) scale(_h_light,  1./ *_weightLight );
+      if (_weightBottom->val()) scale(_h_bottom, 1./ *_weightBottom);
+      if (_weightCharm->val())  scale(_h_charm,  1./ *_weightCharm );
+      if (_weightLight->val())  scale(_h_light,  1./ *_weightLight );
 
       multiplicity_subtract(_h_charm,  _h_light, scatter_c);
       multiplicity_subtract(_h_bottom, _h_light, scatter_b);

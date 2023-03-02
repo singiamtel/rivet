@@ -282,103 +282,104 @@ namespace Rivet {
       }
       // jade jet rates
       if(_h_y_2_JADE) {
-	const FastJets& jadejet = apply<FastJets>(event, "JadeJets");
-	if (jadejet.clusterSeq()) {
-	  const double y_23 = jadejet.clusterSeq()->exclusive_ymerge_max(2);
-	  const double y_34 = jadejet.clusterSeq()->exclusive_ymerge_max(3);
-	  const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
-	  const double y_56 = jadejet.clusterSeq()->exclusive_ymerge_max(5);
-	  for (size_t i = 0; i < _h_y_2_JADE->numBins(); ++i) {
-	    double ycut = _h_y_2_JADE->bin(i).xMid();
-	    double width = _h_y_2_JADE->bin(i).width();
-	    if (y_23 < ycut) _h_y_2_JADE->fillBin(i,width);
-	  }
-	  for (size_t i = 0; i < _h_y_3_JADE->numBins(); ++i) {
-	    double ycut = _h_y_3_JADE->bin(i).xMid();
-	    double width = _h_y_3_JADE->bin(i).width();
-	    if (y_34 < ycut && y_23 > ycut) {
-	      _h_y_3_JADE->fillBin(i,width);
-	    }
-	  }
-	  for (size_t i = 0; i < _h_y_4_JADE->numBins(); ++i) {
-	    double ycut = _h_y_4_JADE->bin(i).xMid();
-	    double width = _h_y_4_JADE->bin(i).width();
-	    if (y_45 < ycut && y_34 > ycut) {
-	      _h_y_4_JADE->fillBin(i,width);
-	    }
-	  }
-	  for (size_t i = 0; i < _h_y_5_JADE->numBins(); ++i) {
-	    double ycut = _h_y_5_JADE->bin(i).xMid();
-	    double width = _h_y_5_JADE->bin(i).width();
-	    if (y_56 < ycut && y_45 > ycut) {
-	      _h_y_5_JADE->fillBin(i,width);
-	    }
-	  }
-	}
+        const FastJets& jadejet = apply<FastJets>(event, "JadeJets");
+        if (jadejet.clusterSeq()) {
+          const double y_23 = jadejet.clusterSeq()->exclusive_ymerge_max(2);
+          const double y_34 = jadejet.clusterSeq()->exclusive_ymerge_max(3);
+          const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
+          const double y_56 = jadejet.clusterSeq()->exclusive_ymerge_max(5);
+          for (size_t i = 1; i < _h_y_2_JADE->numBins()+1; ++i) {
+            const auto& b = _h_y_2_JADE->bin(i);
+            const double ycut = b.xMid();
+            if (y_23 < ycut) _h_y_2_JADE->fill(ycut, b.xWidth());
+          }
+          for (size_t i = 1; i < _h_y_3_JADE->numBins()+1; ++i) {
+            const auto& b = _h_y_3_JADE->bin(i);
+            const double ycut = b.xMid();
+            if (y_34 < ycut && y_23 > ycut) {
+              _h_y_3_JADE->fill(ycut, b.xWidth());
+            }
+          }
+          for (size_t i = 1; i < _h_y_4_JADE->numBins()+1; ++i) {
+            const auto& b = _h_y_4_JADE->bin(i);
+            const double ycut = b.xMid();
+            if (y_45 < ycut && y_34 > ycut) {
+              _h_y_4_JADE->fill(ycut, b.xWidth());
+            }
+          }
+          for (size_t i = 1; i < _h_y_5_JADE->numBins()+1; ++i) {
+            const auto& b = _h_y_5_JADE->bin(i);
+            const double ycut = b.xMid();
+            if (y_56 < ycut && y_45 > ycut) {
+              _h_y_5_JADE->fill(ycut, b.xWidth());
+            }
+          }
+        }
       }
       // Durham jet rates
       if(_h_y_2_Durham) {
-	const FastJets& durhamjet = apply<FastJets>(event, "DurhamJets");
-	if (durhamjet.clusterSeq()) {
-	  const double y_23 = durhamjet.clusterSeq()->exclusive_ymerge_max(2);
-	  const double y_34 = durhamjet.clusterSeq()->exclusive_ymerge_max(3);
-	  const double y_45 = durhamjet.clusterSeq()->exclusive_ymerge_max(4);
-	  const double y_56 = durhamjet.clusterSeq()->exclusive_ymerge_max(5);
-	  for (size_t i = 0; i < _h_y_2_Durham->numBins(); ++i) {
-	    double ycut = _h_y_2_Durham->bin(i).xMid();
-	    double width = _h_y_2_Durham->bin(i).width();
-	    if (y_23 < ycut) _h_y_2_Durham->fillBin(i,width);
-	  }
-	  for (size_t i = 0; i < _h_y_3_Durham->numBins(); ++i) {
-	    double ycut = _h_y_3_Durham->bin(i).xMid();
-	    double width = _h_y_3_Durham->bin(i).width();
-	    if (y_34 < ycut && y_23 > ycut) {
-	      _h_y_3_Durham->fillBin(i,width);
-	    }
-	  }
-	  for (size_t i = 0; i < _h_y_4_Durham->numBins(); ++i) {
-	    double ycut = _h_y_4_Durham->bin(i).xMid();
-	    double width = _h_y_4_Durham->bin(i).width();
-	    if (y_45 < ycut && y_34 > ycut) {
-	      _h_y_4_Durham->fillBin(i,width);
-	    }
-	  }
-	  for (size_t i = 0; i < _h_y_5_Durham->numBins(); ++i) {
-	    double ycut = _h_y_5_Durham->bin(i).xMid();
-	    double width = _h_y_5_Durham->bin(i).width();
-	    if (y_56 < ycut && y_45 > ycut) {
-	      _h_y_5_Durham->fillBin(i,width);
-	    }
-	  }
-	}
+        const FastJets& durhamjet = apply<FastJets>(event, "DurhamJets");
+        if (durhamjet.clusterSeq()) {
+          const double y_23 = durhamjet.clusterSeq()->exclusive_ymerge_max(2);
+          const double y_34 = durhamjet.clusterSeq()->exclusive_ymerge_max(3);
+          const double y_45 = durhamjet.clusterSeq()->exclusive_ymerge_max(4);
+          const double y_56 = durhamjet.clusterSeq()->exclusive_ymerge_max(5);
+          for (size_t i = 1; i < _h_y_2_Durham->numBins()+1; ++i) {
+            const auto& b = _h_y_2_Durham->bin(i);
+            const double ycut = b.xMid();
+            if (y_23 < ycut) _h_y_2_Durham->fill(ycut, b.xWidth());
+          }
+          for (size_t i = 1; i < _h_y_3_Durham->numBins()+1; ++i) {
+            const auto& b = _h_y_3_Durham->bin(i);
+            const double ycut = _h_y_3_Durham->bin(i).xMid();
+            if (y_34 < ycut && y_23 > ycut) {
+              _h_y_3_Durham->fill(ycut, b.xWidth());
+            }
+          }
+          for (size_t i = 1; i < _h_y_4_Durham->numBins()+1; ++i) {
+            const auto& b = _h_y_4_Durham->bin(i);
+            const double ycut = b.xMid();
+            if (y_45 < ycut && y_34 > ycut) {
+              _h_y_4_Durham->fill(ycut, b.xWidth());
+            }
+          }
+          for (size_t i = 1; i < _h_y_5_Durham->numBins()+1; ++i) {
+            const auto& b = _h_y_5_Durham->bin(i);
+            const double ycut = b.xMid();
+            if (y_56 < ycut && y_45 > ycut) {
+              _h_y_5_Durham->fill(ycut, b.xWidth());
+            }
+          }
+        }
       }
       // Cambridge
       if(_h_y_2_Cambridge) {
-	PseudoJets pjs;
-	const FinalState& fs = apply<FinalState>(event, "FS");
-	for (size_t i = 0; i < fs.particles().size(); ++i) {
-	  fastjet::PseudoJet pj = fs.particles()[i];
-	  pjs.push_back(pj);
-	}
-	for (size_t i = 0; i < _h_y_2_Cambridge->numBins(); ++i) {
-	  double ycut = _h_y_2_Cambridge->bin(i).xMid();
-	  double width = _h_y_2_Cambridge->bin(i).width();
-	  fastjet::EECambridgePlugin plugin(ycut);
-	  fastjet::JetDefinition jdef(&plugin);
-	  fastjet::ClusterSequence cseq(pjs, jdef);
-	  unsigned int njet = cseq.inclusive_jets().size();
-	  if(njet==2)
-	    _h_y_2_Cambridge->fillBin(i,width);
-	  else if(njet==3) {
-	    if(i<_h_y_3_Cambridge->numBins()) _h_y_3_Cambridge->fillBin(i,width);
-	  }
-	  else if(njet==4) {
-	    if(i<_h_y_4_Cambridge->numBins()) _h_y_4_Cambridge->fillBin(i,width);
-	  }
-	  else if(njet==5) {
-	    if(i<_h_y_5_Cambridge->numBins()) _h_y_5_Cambridge->fillBin(i,width);
-	  }
-	}
+        PseudoJets pjs;
+        const FinalState& fs = apply<FinalState>(event, "FS");
+        for (size_t i = 1; i < fs.particles().size()+1; ++i) {
+          fastjet::PseudoJet pj = fs.particles()[i];
+          pjs.push_back(pj);
+        }
+        for (size_t i = 1; i < _h_y_2_Cambridge->numBins()+1; ++i) {
+          const auto& b = _h_y_2_Cambridge->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
+          fastjet::EECambridgePlugin plugin(ycut);
+          fastjet::JetDefinition jdef(&plugin);
+          fastjet::ClusterSequence cseq(pjs, jdef);
+          unsigned int njet = cseq.inclusive_jets().size();
+          if(njet==2)
+            _h_y_2_Cambridge->fill(ycut, width);
+          else if(njet==3) {
+            if(i<_h_y_3_Cambridge->numBins()) _h_y_3_Cambridge->fill(ycut,width);
+          }
+          else if(njet==4) {
+            if(i<_h_y_4_Cambridge->numBins()) _h_y_4_Cambridge->fill(ycut,width);
+          }
+          else if(njet==5) {
+            if(i<_h_y_5_Cambridge->numBins()) _h_y_5_Cambridge->fill(ycut,width);
+          }
+        }
       }
     }
 
@@ -387,11 +388,11 @@ namespace Rivet {
       Scatter2DPtr mult;
       book(mult, ix, iy, iz);
       for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	double y    = histo->bins()[b].area();
-	double yerr = histo->bins()[b].areaErr();
-	mult->addPoint(x, y, ex, make_pair(yerr,yerr));
+        const double x  = temphisto.point(b).x();
+        pair<double,double> ex = temphisto.point(b).xErrs();
+        double y    = histo->bin(b+1).volume();
+        double yerr = histo->bin(b+1).volumeErr();
+        mult->addPoint(x, y, ex, make_pair(yerr,yerr));
       }
       return mult;
     }
@@ -403,13 +404,13 @@ namespace Rivet {
         scale(_h_Thrust_udsc,  1/_sumW_udsc->sumW());
         scale(_h_heavyJetmass_udsc,  1/_sumW_udsc->sumW());
         scale(_h_totalJetbroad_udsc, 1/_sumW_udsc->sumW());
-	scale(_h_wideJetbroad_udsc, 1/_sumW_udsc->sumW());
+        scale(_h_wideJetbroad_udsc, 1/_sumW_udsc->sumW());
         scale(_h_Cparameter_udsc, 1/_sumW_udsc->sumW());
         scale(_h_Dparameter_udsc, 1/_sumW_udsc->sumW());
         scale(_h_Thrust_bottom, 1./_sumW_b->sumW());
         scale(_h_heavyJetmass_bottom, 1./_sumW_b->sumW());
         scale(_h_totalJetbroad_bottom, 1./_sumW_b->sumW());
-	scale(_h_wideJetbroad_bottom, 1./_sumW_b->sumW());
+        scale(_h_wideJetbroad_bottom, 1./_sumW_b->sumW());
         scale(_h_Cparameter_bottom, 1./_sumW_b->sumW());
         scale(_h_Dparameter_bottom, 1./_sumW_b->sumW());
         scale(_h_Ncharged, 1./_sumW_ch->sumW());
@@ -424,65 +425,65 @@ namespace Rivet {
         scale(_h_scaledMomentum_bottom, 1/_sumW_ch_b->sumW());
       }
       else {
-	if(_h_thrust) normalize(_h_thrust);
-	if(_h_rho) normalize(_h_rho);
-	if(_h_B_T) normalize(_h_B_T);
-	if(_h_B_W) normalize(_h_B_W);
-	if(_h_C) normalize(_h_C);
-	if(_h_D) normalize(_h_D);
-	if(_h_N) normalize(_h_N);
-	if(_h_xi) scale(_h_xi,1./sumOfWeights());
+        if(_h_thrust) normalize(_h_thrust);
+        if(_h_rho) normalize(_h_rho);
+        if(_h_B_T) normalize(_h_B_T);
+        if(_h_B_W) normalize(_h_B_W);
+        if(_h_C) normalize(_h_C);
+        if(_h_D) normalize(_h_D);
+        if(_h_N) normalize(_h_N);
+        if(_h_xi) scale(_h_xi,1./sumOfWeights());
 
 
-      Scatter2DPtr mult;
-	if(_h_N) {
-    if(isCompatibleWithSqrtS(130.1*GeV)) {
-	    convertHisto(60, 1, 1, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(136.1*GeV)) {
-	    convertHisto(60, 1, 2, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(161.3*GeV)) {
-	    convertHisto(60, 1, 3, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(172.3*GeV)) {
-	    convertHisto(61, 1, 1, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(182.8*GeV)) {
-	    convertHisto(61, 1, 2, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(188.6*GeV)) {
-	    convertHisto(61, 1, 3, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(194.4*GeV)) {
-	    convertHisto(62, 1, 1, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(200.2*GeV)) {
-	    convertHisto(62, 1, 2, _h_N);
-	  }
-	  else if(isCompatibleWithSqrtS(206.2*GeV)) {
-	    convertHisto(62, 1, 3, _h_N);
-	  }
-	}
-	// // the jets
-	if(_h_y_2_JADE) {
-	  scale(_h_y_2_JADE, 1./ sumOfWeights());
-	  scale(_h_y_3_JADE, 1./ sumOfWeights());
-	  scale(_h_y_4_JADE, 1./ sumOfWeights());
-	  scale(_h_y_5_JADE, 1./ sumOfWeights());
-	}
-	if(_h_y_2_Durham) {
-	  scale(_h_y_2_Durham, 1./ sumOfWeights());
-	  scale(_h_y_3_Durham, 1./ sumOfWeights());
-	  scale(_h_y_4_Durham, 1./ sumOfWeights());
-	  scale(_h_y_5_Durham, 1./ sumOfWeights());
-	}
-	if(_h_y_2_Cambridge) {
-	  scale(_h_y_2_Cambridge, 1./ sumOfWeights());
-	  scale(_h_y_3_Cambridge, 1./ sumOfWeights());
-	  scale(_h_y_4_Cambridge, 1./ sumOfWeights());
-	  scale(_h_y_5_Cambridge, 1./ sumOfWeights());
-	}
+        Scatter2DPtr mult;
+        if(_h_N) {
+          if(isCompatibleWithSqrtS(130.1*GeV)) {
+            convertHisto(60, 1, 1, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(136.1*GeV)) {
+            convertHisto(60, 1, 2, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(161.3*GeV)) {
+            convertHisto(60, 1, 3, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(172.3*GeV)) {
+            convertHisto(61, 1, 1, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(182.8*GeV)) {
+            convertHisto(61, 1, 2, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(188.6*GeV)) {
+            convertHisto(61, 1, 3, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(194.4*GeV)) {
+            convertHisto(62, 1, 1, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(200.2*GeV)) {
+            convertHisto(62, 1, 2, _h_N);
+          }
+          else if(isCompatibleWithSqrtS(206.2*GeV)) {
+            convertHisto(62, 1, 3, _h_N);
+          }
+        }
+        // // the jets
+        if(_h_y_2_JADE) {
+          scale(_h_y_2_JADE, 1./ sumOfWeights());
+          scale(_h_y_3_JADE, 1./ sumOfWeights());
+          scale(_h_y_4_JADE, 1./ sumOfWeights());
+          scale(_h_y_5_JADE, 1./ sumOfWeights());
+        }
+        if(_h_y_2_Durham) {
+          scale(_h_y_2_Durham, 1./ sumOfWeights());
+          scale(_h_y_3_Durham, 1./ sumOfWeights());
+          scale(_h_y_4_Durham, 1./ sumOfWeights());
+          scale(_h_y_5_Durham, 1./ sumOfWeights());
+        }
+        if(_h_y_2_Cambridge) {
+          scale(_h_y_2_Cambridge, 1./ sumOfWeights());
+          scale(_h_y_3_Cambridge, 1./ sumOfWeights());
+          scale(_h_y_4_Cambridge, 1./ sumOfWeights());
+          scale(_h_y_5_Cambridge, 1./ sumOfWeights());
+        }
       }
     }
 

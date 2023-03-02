@@ -252,20 +252,20 @@ namespace Rivet {
 
       // Fill the avg NJet, deltaY slices
       if (!plots._avgNJetPtBarSlices.empty()) {
-      for (size_t i = 0; i < plots._avgNJetPtBarSlices.size()-1; i++) {
-        if (inRange(intervalSize, plots._avgNJetPtBarSlices[i], plots._avgNJetPtBarSlices[i+1])) {
-          plots._p_avgJetVsPtBar[i]->fill(ptBar/GeV, vetoJetsCount, weight);
+        for (size_t i = 0; i < plots._avgNJetPtBarSlices.size()-1; i++) {
+          if (inRange(intervalSize, plots._avgNJetPtBarSlices[i], plots._avgNJetPtBarSlices[i+1])) {
+            plots._p_avgJetVsPtBar[i]->fill(ptBar/GeV, vetoJetsCount, weight);
+          }
         }
-      }
       }
 
       // Fill the avg NJet, ptBar slices
       if (!plots._avgNJetDeltaYSlices.empty()) {
-      for (size_t i = 0; i < plots._avgNJetDeltaYSlices.size()-1; i++) {
-        if (inRange(ptBar/GeV, plots._avgNJetDeltaYSlices[i], plots._avgNJetDeltaYSlices[i+1])) {
-          plots._p_avgJetVsDeltaY[i]->fill(intervalSize, vetoJetsCount, weight);
+        for (size_t i = 0; i < plots._avgNJetDeltaYSlices.size()-1; i++) {
+          if (inRange(ptBar/GeV, plots._avgNJetDeltaYSlices[i], plots._avgNJetDeltaYSlices[i+1])) {
+            plots._p_avgJetVsDeltaY[i]->fill(intervalSize, vetoJetsCount, weight);
+          }
         }
-      }
       }
 
       // Fill the veto pt plots
@@ -320,15 +320,15 @@ namespace Rivet {
     /// Convert the differential histograms to an integral histo and assign binomial errors as a efficiency
     /// @todo Should be convertible to a YODA ~one-liner using toIntegralEfficiencyHisto
     void finalizeQ0GapFraction(double totalWeightSum, Scatter2DPtr gapFractionDP, Histo1DPtr vetoPtHist) {
-      for (size_t i = 0; i < vetoPtHist->numBins(); ++i) {
-        const double vetoPtWeightSum = vetoPtHist->integral(i); ///< Integral (with underflow) up to but not including bin i
+      for (const auto& b : vetoPtHist->bins()) {
+        const double vetoPtWeightSum = vetoPtHist->integralTo(b.binIndex()-1); ///< Integral (with underflow) up to but not including bin i
         // Calculate the efficiency & binomial uncertainty
         const double eff = (totalWeightSum != 0) ? vetoPtWeightSum/totalWeightSum : 0;
         const double effErr = (totalWeightSum != 0) ? sqrt( eff*(1.0-eff)/totalWeightSum ) : 0;
-	// get the x coord and bin width
-	const double x    = vetoPtHist->bin(i).xMid();
-	const double xerr = 0.5*vetoPtHist->bin(i).xWidth();
-	gapFractionDP->addPoint(x, eff, xerr, effErr);
+        // get the x coord and bin width
+        const double x    = b.xMid();
+        const double xerr = 0.5*b.xWidth();
+        gapFractionDP->addPoint(x, eff, xerr, effErr);
       }
     }
 

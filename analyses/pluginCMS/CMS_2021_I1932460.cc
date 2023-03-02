@@ -8,7 +8,7 @@ namespace Rivet {
 
 
   /// @brief Measurement of double-parton scattering in inclusive production of four jets with low transverse momentum in proton-proton collisions at $\sqrt{s}$ = 13 TeV.
-  
+
   class CMS_2021_I1932460 : public Analysis {
   public:
 
@@ -24,10 +24,10 @@ namespace Rivet {
 
       // Initialise and register projections
 
-      // the basic final-state projection: 
-      // all final-state particles within 
+      // the basic final-state projection:
+      // all final-state particles within
       // the given eta acceptance: 4.7 (jet range) + 0.4 (cone size)
-      const FinalState fs(Cuts::abseta < 5.1); 
+      const FinalState fs(Cuts::abseta < 5.1);
 
       // the final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
@@ -44,14 +44,14 @@ namespace Rivet {
       book(_h["JetEta2"], 6, 1, 1);
       book(_h["JetEta3"], 7, 1, 1);
       book(_h["JetEta4"], 8, 1, 1);
-      
+
       book(_h["DeltaPhiSoft_binNorm"], 9, 1, 1);
       book(_h["DeltaPhi3_binNorm"], 10, 1, 1);
       book(_h["DeltaY_binNorm"], 11, 1, 1);
       book(_h["DeltaPhiY_binNorm"], 12, 1, 1);
       book(_h["DeltaPtSoft_binNorm"], 13, 1, 1);
       book(_h["DeltaS_binNorm"], 14, 1, 1);
-      
+
       book(_h["DeltaPhiSoft"], 45, 1, 1);
       book(_h["DeltaPhi3"], 46, 1, 1);
       book(_h["DeltaY"], 47, 1, 1);
@@ -67,10 +67,10 @@ namespace Rivet {
 
       // retrieve clustered jets, sorted by pT, with a minimum pT cut 10 GeV and eta range 4.7 (similar to PFJet collection)
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::abseta < 4.7 && Cuts::pT > 10*GeV);
-      
+
       // fill only if there are at least 4 jets
       if (jets.size() < 4) vetoEvent;
-      
+
       double pt0 = jets[0].pt();
       double pt1 = jets[1].pt();
       double pt2 = jets[2].pt();
@@ -109,7 +109,7 @@ namespace Rivet {
         double phiS = atan2(pt2*sin(phi2) + pt3*sin(phi3) , pt2*cos(phi2) + pt3*cos(phi3));
         double DS = abs(deltaPhi(phiH, phiS));
         _h["DeltaS"]->fill(DS);
-        _h["DeltaS_binNorm"]->fill(DS);   
+        _h["DeltaS_binNorm"]->fill(DS);
       }
 
       // delta Y: most remote jets in rapidity, find min & max eta
@@ -117,7 +117,7 @@ namespace Rivet {
       double maxeta = -99999;
       int minetapos = -1;
       int maxetapos = -1;
-  
+
       for (int i = 0; i < 4; ++i) {
         if (jets[i].eta() < mineta) {
           mineta = jets[i].eta();
@@ -126,9 +126,9 @@ namespace Rivet {
         if (jets[i].eta() > maxeta) {
           maxeta = jets[i].eta();
           maxetapos = i;
-        }  
+        }
       }
-  
+
       _h["DeltaY"]->fill(abs(jets[minetapos].eta() - jets[maxetapos].eta()));
       _h["DeltaY_binNorm"]->fill(abs(jets[minetapos].eta() - jets[maxetapos].eta()));
 
@@ -151,10 +151,10 @@ namespace Rivet {
           }
         }
       }
-  
+
       _h["DeltaPhi3"]->fill(minphi3);
       _h["DeltaPhi3_binNorm"]->fill(minphi3);
-      
+
     }
 
 
@@ -175,38 +175,38 @@ namespace Rivet {
       scale(_h["DeltaPhiY"], crossSection()/picobarn/sumOfWeights());
       scale(_h["DeltaPtSoft"], crossSection()/picobarn/sumOfWeights());
       scale(_h["DeltaS"], crossSection()/picobarn/sumOfWeights());
-      
+
       // create bin normalised histograms
-      
-      // Correct for binwidths: Rivet automatically normalises histograms to binwidth when plotting AFTER the normalisation executed here. 
+
+      // Correct for binwidths: Rivet automatically normalises histograms to binwidth when plotting AFTER the normalisation executed here.
       // So we must calculate an extra correction here so that finally our bin-normalised histograms end up around 1 as in the paper.
       // in YODA bin index starts from 0
-      
+
       // For DeltaY, which has variable binwidths we need to do following steps
       // divide histograms by binwidth
-      for (unsigned int i = 0; i < _h["DeltaY_binNorm"]->numBins(); ++i) {
+      for (unsigned int i = 1; i < _h["DeltaY_binNorm"]->numBins()+1; ++i) {
         _h["DeltaY_binNorm"]->bin(i).scaleW(1.0/_h["DeltaY_binNorm"]->bin(i).xWidth());
       }
-      
+
       // normalise to average of first 4 bins
-      scale(_h["DeltaY_binNorm"], 1.0/(_h["DeltaY_binNorm"]->integralRange(0,3)/4.0));
-      
+      scale(_h["DeltaY_binNorm"], 1.0/(_h["DeltaY_binNorm"]->integralRange(1,4)/4.0));
+
       // multiply again with binwidth
-      for (unsigned int i = 0; i < _h["DeltaY_binNorm"]->numBins(); ++i) {
+      for (unsigned int i = 1; i < _h["DeltaY_binNorm"]->numBins()+1; ++i) {
         _h["DeltaY_binNorm"]->bin(i).scaleW(_h["DeltaY_binNorm"]->bin(i).xWidth());
       }
-      
+
       // DeltaPhiSoft and DeltaPhi3 histograms have uniform binwidths, so multiply with first binwidth is sufficient
-      scale(_h["DeltaPhiSoft_binNorm"], _h["DeltaPhiSoft_binNorm"]->bin(0).xWidth()/(_h["DeltaPhiSoft_binNorm"]->integralRange(0,4)/5.0));
-      scale(_h["DeltaPhi3_binNorm"], _h["DeltaPhi3_binNorm"]->bin(0).xWidth()/(_h["DeltaPhi3_binNorm"]->integralRange(0,3)/4.0));
-      
+      scale(_h["DeltaPhiSoft_binNorm"], _h["DeltaPhiSoft_binNorm"]->bin(1).xWidth()/(_h["DeltaPhiSoft_binNorm"]->integralRange(1,5)/5.0));
+      scale(_h["DeltaPhi3_binNorm"], _h["DeltaPhi3_binNorm"]->bin(1).xWidth()/(_h["DeltaPhi3_binNorm"]->integralRange(1,4)/4.0));
+
       // DeltaPhiY, DeltaPtSoft and DeltaS are normalised to last bin
-      scale(_h["DeltaPhiY_binNorm"], _h["DeltaPhiY_binNorm"]->bin(11).xWidth()/_h["DeltaPhiY_binNorm"]->bin(11).sumW() );
-      scale(_h["DeltaPtSoft_binNorm"], _h["DeltaPtSoft_binNorm"]->bin(7).xWidth()/_h["DeltaPtSoft_binNorm"]->bin(7).sumW() );
-      scale(_h["DeltaS_binNorm"], _h["DeltaS_binNorm"]->bin(6).xWidth()/_h["DeltaS_binNorm"]->bin(6).sumW() );
+      scale(_h["DeltaPhiY_binNorm"], _h["DeltaPhiY_binNorm"]->bin(12).xWidth()/_h["DeltaPhiY_binNorm"]->bin(12).sumW() );
+      scale(_h["DeltaPtSoft_binNorm"], _h["DeltaPtSoft_binNorm"]->bin(8).xWidth()/_h["DeltaPtSoft_binNorm"]->bin(8).sumW() );
+      scale(_h["DeltaS_binNorm"], _h["DeltaS_binNorm"]->bin(7).xWidth()/_h["DeltaS_binNorm"]->bin(7).sumW() );
 
     }
-    
+
     map<string, Histo1DPtr> _h;
 
   };

@@ -68,7 +68,7 @@ namespace Rivet {
         if (inRange(sqrtS(), x-ex2.first, x+ex2.second)) {
           mult->addPoint(x, sigma, ex, make_pair(error,error));
         } else {
-          mult->addPoint(x, 0., ex, make_pair(0.,.0));
+          mult->addPoint({x, 0.}, {ex, {0.,0.}});
         }
       }
     }

@@ -53,7 +53,7 @@ def constructDiff(hist):
         sigma = sqrt(stat.points[i].z ** 2 + unco.points[i].z ** 2 + (mc.points[i].zErrs[0]) ** 2)
         newz = (data.points[i].z - mc.points[i].z) / sigma if sigma else 0.0
         #newz = (0.01 * mc.points[i].z - data.points[i].z) / sigma if sigma else 0.0
-        rtn.fillBin(i, newz)
+        rtn.fill(rtn.bin(i+1).xMid(), newz)
     return rtn
 
 # this is where the magic happens

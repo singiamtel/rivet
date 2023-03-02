@@ -170,28 +170,23 @@ namespace Rivet {
           double logynm1=0.;
           double logyn;
           for (size_t i=0; i<5; ++i) {
-            double yn = durjet.clusterSeq()->exclusive_ymerge_max(i+1);
+            const double yn = durjet.clusterSeq()->exclusive_ymerge_max(i+1);
             if (yn<=0.0) continue;
             logyn = -log(yn);
             if (_h_y_Durham[i]) {
               _h_y_Durham[i]->fill(logyn);
             }
             if(!LEP1) logyn *= log10e;
-            for (size_t j = 0; j < _h_R_Durham[i]->numBins(); ++j) {
-              double val   = _h_R_Durham[i]->bin(j).xMin();
-              double width = _h_R_Durham[i]->bin(j).xWidth();
-              if(-val<=logynm1) break;
-              if(-val<logyn) {
-                _h_R_Durham[i]->fill(val+0.5*width, width);
-              }
+            for (const auto& b : _h_R_Durham[i]->bins()) {
+              const double xMin = b.xMin();
+              if (-xMin <= logynm1)  break;
+              if (-xMin<logyn)  _h_R_Durham[i]->fill(b.xMid(), b.xWidth());
             }
             logynm1 = logyn;
           }
-          for (size_t j = 0; j < _h_R_Durham[5]->numBins(); ++j) {
-            double val   = _h_R_Durham[5]->bin(j).xMin();
-            double width = _h_R_Durham[5]->bin(j).xWidth();
-            if(-val<=logynm1) break;
-            _h_R_Durham[5]->fill(val+0.5*width, width);
+          for (const auto& b : _h_R_Durham[5]->bins()) {
+            if (-b.xMin() <= logynm1)  break;
+            _h_R_Durham[5]->fill(b.xMid(), b.xWidth());
           }
         }
         if( !_initialisedSpectra) {
@@ -211,11 +206,11 @@ namespace Rivet {
                                      beams.second.p3().mod() ) / 2.0;
         for (const Particle& p : cfs.particles()) {
           const double xp = p.p3().mod()/meanBeamMom;
-          _h_xp->fill(xp   );
+          _h_xp->fill(xp);
           const double logxp = -std::log(xp);
           _h_xi->fill(logxp);
           const double xe = p.E()/meanBeamMom;
-          _h_xe->fill(xe   );
+          _h_xe->fill(xe);
           const double pTinT  = dot(p.p3(), thrust.thrustMajorAxis());
           const double pToutT = dot(p.p3(), thrust.thrustMinorAxis());
           _h_pTin->fill(fabs(pTinT/GeV));
@@ -264,7 +259,7 @@ namespace Rivet {
       const double avgNumParts = dbl(*_weightedTotalChargedPartNum) / sumOfWeights();
 
 
-      for (size_t b = 0; b < temphisto.numBins(); b++) {
+      for (size_t b = 1; b < temphisto.numBins()+1; b++) {
         const double x  = temphisto.bin(b).xMid();
         const double ex = temphisto.bin(b).xWidth()/2.;
         if (inRange(sqrtS()/GeV, x-ex, x+ex)) {

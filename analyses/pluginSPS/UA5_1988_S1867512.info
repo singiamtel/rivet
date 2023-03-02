@@ -6,7 +6,7 @@ Collider: CERN SPS
 SpiresID: 1867512
 InspireID: 263399
 Status: VALIDATED
-Reentrant: true
+Reentrant: false
 Authors:
  - Holger Schulz <holger.schulz@physik.hu-berlin.de>
 References:

@@ -81,7 +81,6 @@ namespace Rivet {
         _hEtFlow[ibin]->fill(rap, et/GeV);
       }
 
-      /// @todo Use fillBin?
       _tmphAvEt->fill(ibin + 1.5, y1.sumEt()/GeV);
       _tmphAvX->fill(ibin + 1.5, dk.x());
       _tmphAvQ2->fill(ibin + 1.5, dk.Q2()/GeV2);

@@ -137,13 +137,13 @@ namespace Rivet {
         const double MW_MZ = 0.8820; // Ratio M_W/M_Z
         const double BRZEE_BRWENU = 0.033632 / 0.1073; // Ratio of branching fractions
         const double scalefactor = (xSecW / wpt_integral) / (xSecZ / zpt_integral) * MW_MZ * BRZEE_BRWENU;
-        for (size_t ibin = 0; ibin < _h_dsigdpt_w->numBins(); ibin++) {
+        for (size_t ibin = 1; ibin < _h_dsigdpt_w->numBins()+1; ibin++) {
           const double xval = _h_dsigdpt_w->bin(ibin).xMid();
-          const double xerr = _h_dsigdpt_w->bin(ibin).xWidth() / 2.;
+          const double xerr = 0.5 * _h_dsigdpt_w->bin(ibin).xWidth();
           double yval(0), yerr(0);
           if (_h_dsigdpt_w->bin(ibin).sumW() != 0 && _h_dsigdpt_z->bin(ibin).sumW() != 0) {
             yval = scalefactor * _h_dsigdpt_w->bin(ibin).sumW() / _h_dsigdpt_z->bin(ibin).sumW();
-            yerr = yval * sqrt( sqr(_h_dsigdpt_w->bin(ibin).relErr()) + sqr(_h_dsigdpt_z->bin(ibin).areaErr()) );
+            yerr = yval * sqrt( sqr(_h_dsigdpt_w->bin(ibin).relErr()) + sqr(_h_dsigdpt_z->bin(ibin).volumeErr()) );
           }
           _h_dsigdpt_scaled_z->addPoint(xval, yval, xerr, yerr);
         }

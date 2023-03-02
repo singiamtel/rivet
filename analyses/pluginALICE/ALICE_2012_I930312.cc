@@ -244,8 +244,8 @@ namespace Rivet {
           bkgErr[itype][ipt] = sqrt(sum / (nbins - 1));
 
           // Fill histograms with removed background
-          for (size_t ibin = 0; ibin < hYield->numBins(); ++ibin) {
-            hYieldNoBkg->fillBin(ibin, hYield->bin(ibin).sumW() - bkg);
+          for (const auto& b : hYield->bins()) {
+            hYieldNoBkg->fill(b.xMid(), b.sumW() - bkg);
           }
 
           // Integrate near-side yield

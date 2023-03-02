@@ -157,13 +157,13 @@ namespace Rivet {
       if (dilep.pT() <= 30*GeV)  vetoEvent;
 
       // Fill cross section as function of veto-jet pt before applying jet veto
-      if (jets30.empty() || jets30[0].pT()/GeV < 30.) _h["jetveto"]->fillBin(0);
-      if (jets30.empty() || jets30[0].pT()/GeV < 35.) _h["jetveto"]->fillBin(1);
-      if (jets30.empty() || jets30[0].pT()/GeV < 40.) _h["jetveto"]->fillBin(2);
-      if (jets30.empty() || jets30[0].pT()/GeV < 45.) _h["jetveto"]->fillBin(3);
-      if (jets30.empty() || jets30[0].pT()/GeV < 50.) _h["jetveto"]->fillBin(4);
-      if (jets30.empty() || jets30[0].pT()/GeV < 55.) _h["jetveto"]->fillBin(5);
-      if (jets30.empty() || jets30[0].pT()/GeV < 60.) _h["jetveto"]->fillBin(6);
+      if (jets30.empty() || jets30[0].pT()/GeV < 30.) _h["jetveto"]->fill(_h["jetveto"]->bin(1).xMid());
+      if (jets30.empty() || jets30[0].pT()/GeV < 35.) _h["jetveto"]->fill(_h["jetveto"]->bin(2).xMid());
+      if (jets30.empty() || jets30[0].pT()/GeV < 40.) _h["jetveto"]->fill(_h["jetveto"]->bin(3).xMid());
+      if (jets30.empty() || jets30[0].pT()/GeV < 45.) _h["jetveto"]->fill(_h["jetveto"]->bin(4).xMid());
+      if (jets30.empty() || jets30[0].pT()/GeV < 50.) _h["jetveto"]->fill(_h["jetveto"]->bin(5).xMid());
+      if (jets30.empty() || jets30[0].pT()/GeV < 55.) _h["jetveto"]->fill(_h["jetveto"]->bin(6).xMid());
+      if (jets30.empty() || jets30[0].pT()/GeV < 60.) _h["jetveto"]->fill(_h["jetveto"]->bin(7).xMid());
       // Jet veto at 35 GeV is the default
       if (!jets30.empty() && jets30[0].pT()/GeV > 35.)  vetoEvent;
 

@@ -161,15 +161,15 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter1D R = *_FL/ *_norm;
+      Scatter1D R = (*_FL/ *_norm).mkScatter();
       double fl = R.point(0).x();
       double fact = 1./sqrt(fl*(1.-fl));
       for(unsigned int ix=0;ix<2;++ix) {
-	for(unsigned int iy=0;iy<6;++iy) {
-	  _p_P[ix][iy]->scaleY(fact);
-	  if(iy>1) continue;
-	  _p_Q[ix][iy]->scaleY(fact);
-	}
+        for(unsigned int iy=0;iy<6;++iy) {
+          _p_P[ix][iy]->scale(2, fact);
+          if(iy>1) continue;
+          _p_Q[ix][iy]->scale(2, fact);
+        }
       }
     }
 
@@ -181,23 +181,6 @@ namespace Rivet {
     Profile1DPtr _p_P[2][6],_p_Q[2][2];
     CounterPtr _FL,_norm;
     /// @}
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x01-y01
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x01-y02
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x01-y03
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x01-y04
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x01-y05
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x01-y06
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x02-y01
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x02-y02
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x02-y03
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x02-y04
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x02-y05
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d01-x02-y06
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d02-x01-y01
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d02-x01-y02
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d02-x02-y01
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2016_I1504055/d02-x02-y02
-
 
   };
 

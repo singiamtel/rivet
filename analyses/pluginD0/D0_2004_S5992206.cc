@@ -30,7 +30,7 @@ namespace Rivet {
 
     void init() {
       // Final state for jets, mET etc.
-      const FinalState fs((Cuts::etaIn(-3.0, 3.0)));
+      const FinalState fs(Cuts::abseta < 3.0);
       declare(fs, "FS");
       // Veto neutrinos, and muons with pT above 1.0 GeV
       VetoedFinalState vfs(fs);
@@ -61,8 +61,8 @@ namespace Rivet {
       } else {
         vetoEvent;
       }
-      const double rap1 = jets[0].rapidity();
-      const double rap2 = jets[1].rapidity();
+      const double rap1 = jets[0].rap();
+      const double rap2 = jets[1].rap();
       if (fabs(rap1) > 0.5 || fabs(rap2) > 0.5) {
         vetoEvent;
       }

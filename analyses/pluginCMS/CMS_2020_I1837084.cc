@@ -52,10 +52,9 @@ namespace Rivet {
     /// @todo Replace with barchart()
     void normalizeToSum(Histo1DPtr hist) {
       //double sum = 0.;
-      for (size_t i = 0; i < hist->numBins(); ++i) {
-        //sum += hist->bin(i).height();
-        double width = hist->bin(i).width();
-        hist->bin(i).scaleW(width != 0 ? width : 1.);
+      for (size_t i = 1; i < hist->numBins()+1; ++i) {
+        const double width = hist->bin(i).xWidth();
+        if (width) hist->bin(i).scaleW(width);
       }
       if (hist->integral() > 0) scale(hist, 1./hist->integral());
     }

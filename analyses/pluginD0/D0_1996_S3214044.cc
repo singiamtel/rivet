@@ -20,7 +20,7 @@ namespace Rivet {
     /// Book histograms
     void init() {
       const FinalState fs;
-      declare(fs, "FS");
+
       /// @todo Use correct jet algorithm --- tried FJ3 D0RunICone but does
       // not look as good as the Run2 cone alg used here
       declare(FastJets(fs, FastJets::D0ILCONE, 0.7), "ConeJets");
@@ -75,7 +75,7 @@ namespace Rivet {
         if (isolated) jets_isolated.push_back(jets_in[i]);
       }
 
-      if (jets_isolated.size() == 0 || jets_isolated[0].Et() < 60.0*GeV) vetoEvent;
+      if (jets_isolated.empty() || jets_isolated[0].Et() < 60.0*GeV) vetoEvent;
 
       if (jets_isolated.size() > 2) _threeJetAnalysis(jets_isolated);
       if (jets_isolated.size() > 3) _fourJetAnalysis(jets_isolated);
@@ -83,35 +83,35 @@ namespace Rivet {
 
 
     void finalize() {
-      normalize(_h_3j_x3, 1.0);
-      normalize(_h_3j_x5, 1.0);
-      normalize(_h_3j_costheta3, 1.0);
-      normalize(_h_3j_psi, 1.0);
-      normalize(_h_3j_mu34, 1.0);
-      normalize(_h_3j_mu35, 1.0);
-      normalize(_h_3j_mu45, 1.0);
-      normalize(_h_4j_x3, 1.0);
-      normalize(_h_4j_x4, 1.0);
-      normalize(_h_4j_x5, 1.0);
-      normalize(_h_4j_x6, 1.0);
-      normalize(_h_4j_costheta3, 1.0);
-      normalize(_h_4j_costheta4, 1.0);
-      normalize(_h_4j_costheta5, 1.0);
-      normalize(_h_4j_costheta6, 1.0);
-      normalize(_h_4j_cosomega34, 1.0);
-      normalize(_h_4j_cosomega35, 1.0);
-      normalize(_h_4j_cosomega36, 1.0);
-      normalize(_h_4j_cosomega45, 1.0);
-      normalize(_h_4j_cosomega46, 1.0);
-      normalize(_h_4j_cosomega56, 1.0);
-      normalize(_h_4j_mu34, 1.0);
-      normalize(_h_4j_mu35, 1.0);
-      normalize(_h_4j_mu36, 1.0);
-      normalize(_h_4j_mu45, 1.0);
-      normalize(_h_4j_mu46, 1.0);
-      normalize(_h_4j_mu56, 1.0);
-      normalize(_h_4j_theta_BZ, 1.0);
-      normalize(_h_4j_costheta_NR, 1.0);
+      normalize(_h_3j_x3);
+      normalize(_h_3j_x5);
+      normalize(_h_3j_costheta3);
+      normalize(_h_3j_psi);
+      normalize(_h_3j_mu34);
+      normalize(_h_3j_mu35);
+      normalize(_h_3j_mu45);
+      normalize(_h_4j_x3);
+      normalize(_h_4j_x4);
+      normalize(_h_4j_x5);
+      normalize(_h_4j_x6);
+      normalize(_h_4j_costheta3);
+      normalize(_h_4j_costheta4);
+      normalize(_h_4j_costheta5);
+      normalize(_h_4j_costheta6);
+      normalize(_h_4j_cosomega34);
+      normalize(_h_4j_cosomega35);
+      normalize(_h_4j_cosomega36);
+      normalize(_h_4j_cosomega45);
+      normalize(_h_4j_cosomega46);
+      normalize(_h_4j_cosomega56);
+      normalize(_h_4j_mu34);
+      normalize(_h_4j_mu35);
+      normalize(_h_4j_mu36);
+      normalize(_h_4j_mu45);
+      normalize(_h_4j_mu46);
+      normalize(_h_4j_mu56);
+      normalize(_h_4j_theta_BZ);
+      normalize(_h_4j_costheta_NR);
     }
 
     /// @}

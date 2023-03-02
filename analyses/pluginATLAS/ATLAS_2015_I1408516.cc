@@ -202,7 +202,7 @@ namespace Rivet {
       }
 
       // M(ll) plot isn't a differential cross section so shouldn't be divided by bin width
-      for (size_t i = 0; i < 6; ++i) {
+      for (size_t i = 1; i < 7; ++i) {
         double bw = _h["mll_xsec"]->bin(i).xWidth();
         _h["mll_xsec"]->bin(i).scaleW(bw);
       }

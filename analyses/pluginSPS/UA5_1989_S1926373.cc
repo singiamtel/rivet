@@ -20,10 +20,10 @@ namespace Rivet {
     /// Book histograms and projections
     void init() {
       declare(TriggerUA5(), "Trigger");
-      declare(ChargedFinalState((Cuts::etaIn(-0.5, 0.5))), "CFS05");
-      declare(ChargedFinalState((Cuts::etaIn(-1.5, 1.5))), "CFS15");
-      declare(ChargedFinalState((Cuts::etaIn(-3.0, 3.0))), "CFS30");
-      declare(ChargedFinalState((Cuts::etaIn(-5.0, 5.0))), "CFS50");
+      declare(ChargedFinalState(Cuts::abseta < 0.5), "CFS05");
+      declare(ChargedFinalState(Cuts::abseta < 1.5), "CFS15");
+      declare(ChargedFinalState(Cuts::abseta < 3.0), "CFS30");
+      declare(ChargedFinalState(Cuts::abseta < 5.0), "CFS50");
 
       // NB. _hist_nch and _hist_ncheta50 use the same data but different binning
       if (isCompatibleWithSqrtS(200*GeV)) {
@@ -66,7 +66,7 @@ namespace Rivet {
       _hist_nch_eta15->fill(numP15);
       _hist_nch_eta30->fill(numP30);
       _hist_nch_eta50->fill(numP50);
-      _hist_mean_nch->fill(_hist_mean_nch->bin(0).xMid(), numP50);
+      _hist_mean_nch->fill(_hist_mean_nch->bin(1).xMid(), numP50);
     }
 
 

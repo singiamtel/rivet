@@ -58,8 +58,8 @@ namespace Rivet {
       }
 
       // Histograms for the averages
-      book(_histAverETCentral ,33,  1, 1);
-      book(_histAverETFrag ,34,  1, 1);
+      book(_histAverETCentral, 33, 1, 1);
+      book(_histAverETFrag,    34, 1, 1);
     }
 
 
@@ -215,12 +215,22 @@ namespace Rivet {
 
     // Finalize
     void finalize() {
-      // Normalization of the Et distributions
+      // Normalization of the Et distributions to unit cross-section
+      // These histograms are filled once per particles though,
+      // so no unit area to be expected
       /// @todo Simplify by using normalize() instead? Are all these being normalized to area=1?
-      for (size_t ix = 0; ix < 17; ++ix) if (_weightETLowQa[ix]->val()  != 0) scale(_histETLowQa[ix],  1/ *_weightETLowQa[ix]);
-      for (size_t ix = 0; ix <  7; ++ix) if (_weightETHighQa[ix]->val() != 0) scale(_histETHighQa[ix], 1/ *_weightETHighQa[ix]);
-      for (size_t ix = 0; ix <  5; ++ix) if (_weightETLowQb[ix]->val()  != 0) scale(_histETLowQb[ix],  1/ *_weightETLowQb[ix]);
-      for (size_t ix = 0; ix <  3; ++ix) if (_weightETHighQb[ix]->val() != 0) scale(_histETHighQb[ix], 1/ *_weightETHighQb[ix]);
+      for (size_t ix = 0; ix < _weightETLowQa.size(); ++ix) {
+        if (_weightETLowQa[ix]->val() ) scale(_histETLowQa[ix],  1/ *_weightETLowQa[ix]);
+      }
+      for (size_t ix = 0; ix < _weightETHighQa.size(); ++ix) {
+        if (_weightETHighQa[ix]->val()) scale(_histETHighQa[ix], 1/ *_weightETHighQa[ix]);
+      }
+      for (size_t ix = 0; ix < _weightETLowQb.size(); ++ix) {
+        if (_weightETLowQb[ix]->val() ) scale(_histETLowQb[ix],  1/ *_weightETLowQb[ix]);
+      }
+      for (size_t ix = 0; ix < _weightETHighQb.size(); ++ix) {
+        if (_weightETHighQb[ix]->val()) scale(_histETHighQb[ix], 1/ *_weightETHighQb[ix]);
+      }
     }
 
     /// @}

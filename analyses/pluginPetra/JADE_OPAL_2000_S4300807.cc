@@ -60,39 +60,44 @@ namespace Rivet {
         const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
         const double y_56 = jadejet.clusterSeq()->exclusive_ymerge_max(5);
 
-        for (size_t i = 0; i < _h_R_Jade[0]->numBins(); ++i) {
-          double ycut = _h_R_Jade[0]->bin(i).xMid();
-          double width = _h_R_Jade[0]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Jade[0]->numBins()+1; ++i) {
+          const auto& b = _h_R_Jade[0]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_23 < ycut) {
-            _h_R_Jade[0]->fillBin(i, width);
+            _h_R_Jade[0]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Jade[1]->numBins(); ++i) {
-          double ycut = _h_R_Jade[1]->bin(i).xMid();
-          double width = _h_R_Jade[1]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Jade[1]->numBins()+1; ++i) {
+          const auto& b = _h_R_Jade[1]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_34 < ycut && y_23 > ycut) {
-            _h_R_Jade[1]->fillBin(i, width);
+            _h_R_Jade[1]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Jade[2]->numBins(); ++i) {
-          double ycut = _h_R_Jade[2]->bin(i).xMid();
-          double width = _h_R_Jade[2]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Jade[2]->numBins()+1; ++i) {
+          const auto& b = _h_R_Jade[2]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_45 < ycut && y_34 > ycut) {
-            _h_R_Jade[2]->fillBin(i, width);
+            _h_R_Jade[2]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Jade[3]->numBins(); ++i) {
-          double ycut = _h_R_Jade[3]->bin(i).xMid();
-          double width = _h_R_Jade[3]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Jade[3]->numBins()+1; ++i) {
+          const auto& b = _h_R_Jade[3]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_56 < ycut && y_45 > ycut) {
-            _h_R_Jade[3]->fillBin(i, width);
+            _h_R_Jade[3]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Jade[4]->numBins(); ++i) {
-          double ycut = _h_R_Jade[4]->bin(i).xMid();
-          double width = _h_R_Jade[4]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Jade[4]->numBins()+1; ++i) {
+          const auto& b = _h_R_Jade[4]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_56 > ycut) {
-            _h_R_Jade[4]->fillBin(i, width);
+            _h_R_Jade[4]->fill(ycut, width);
           }
         }
       }
@@ -109,39 +114,44 @@ namespace Rivet {
         _h_y_Durham[2]->fill(y_45);
         _h_y_Durham[3]->fill(y_56);
 
-        for (size_t i = 0; i < _h_R_Durham[0]->numBins(); ++i) {
-          double ycut = _h_R_Durham[0]->bin(i).xMid();
-          double width = _h_R_Durham[0]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Durham[0]->numBins()+1; ++i) {
+          const auto& b = _h_R_Durham[0]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_23 < ycut) {
-            _h_R_Durham[0]->fillBin(i, width);
+            _h_R_Durham[0]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Durham[1]->numBins(); ++i) {
-          double ycut = _h_R_Durham[1]->bin(i).xMid();
-          double width = _h_R_Durham[1]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Durham[1]->numBins()+1; ++i) {
+          const auto& b = _h_R_Durham[1]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_34 < ycut && y_23 > ycut) {
-            _h_R_Durham[1]->fillBin(i, width);
+            _h_R_Durham[1]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Durham[2]->numBins(); ++i) {
-          double ycut = _h_R_Durham[2]->bin(i).xMid();
-          double width = _h_R_Durham[2]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Durham[2]->numBins()+1; ++i) {
+          const auto& b = _h_R_Durham[2]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_45 < ycut && y_34 > ycut) {
-            _h_R_Durham[2]->fillBin(i, width);
+            _h_R_Durham[2]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Durham[3]->numBins(); ++i) {
-          double ycut = _h_R_Durham[3]->bin(i).xMid();
-          double width = _h_R_Durham[3]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Durham[3]->numBins()+1; ++i) {
+          const auto& b = _h_R_Durham[3]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_56 < ycut && y_45 > ycut) {
-            _h_R_Durham[3]->fillBin(i, width);
+            _h_R_Durham[3]->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_R_Durham[4]->numBins(); ++i) {
-          double ycut = _h_R_Durham[4]->bin(i).xMid();
-          double width = _h_R_Durham[4]->bin(i).xWidth();
+        for (size_t i = 1; i < _h_R_Durham[4]->numBins()+1; ++i) {
+          const auto& b = _h_R_Durham[4]->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_56 > ycut) {
-            _h_R_Durham[4]->fillBin(i, width);
+            _h_R_Durham[4]->fill(ycut, width);
           }
         }
       }

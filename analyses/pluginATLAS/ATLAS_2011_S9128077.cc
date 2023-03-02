@@ -174,15 +174,15 @@ namespace Rivet {
       scale(_h_tmp_HT2_R04_3, crossSectionPerEvent());
 
       // Fill inclusive jet multiplicity ratio
-      for (size_t b = 0; b < _h_jet_multi_ratio->numPoints(); ++b) {
-        if (_h_jet_multi_inclusive->bin(b).sumW() != 0) {
-          const double val = _h_jet_multi_inclusive->bin(b+1).sumW() / _h_jet_multi_inclusive->bin(b).sumW();
+      for (size_t i = 1; i < _h_jet_multi_ratio->numPoints()+1; ++i) {
+        if (_h_jet_multi_inclusive->bin(i).sumW()) {
+          const double val = _h_jet_multi_inclusive->bin(i+1).sumW() / _h_jet_multi_inclusive->bin(i).sumW();
           // @todo Shouldn't these be added in quadrature??
-          const double err = ( _h_jet_multi_inclusive->bin(b+1).relErr() + _h_jet_multi_inclusive->bin(b).relErr() ) * val;
-          _h_jet_multi_ratio->point(b).setY(val, err);
+          const double err = ( _h_jet_multi_inclusive->bin(i+1).relErr() + _h_jet_multi_inclusive->bin(i).relErr() ) * val;
+          _h_jet_multi_ratio->point(i-1).setY(val, err);
         }
         else {
-          _h_jet_multi_ratio->point(b).setY(0., 0.);
+          _h_jet_multi_ratio->point(i-1).setY(0., 0.);
         }
       }
 

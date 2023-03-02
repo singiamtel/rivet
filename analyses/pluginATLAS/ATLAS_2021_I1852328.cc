@@ -207,8 +207,10 @@ namespace Rivet {
        scale(_h, sf);
        for (auto& hist : _h) {
           if (hist.first.find("_inf") != string::npos) {
-            hist.second->fillBin(hist.second->numBins()-1, hist.second->overflow().sumW());
-            hist.second->overflow().reset();
+            const size_t nBins = hist.second->numBins();
+            auto& overflow = hist.second->bin(nBins+1);
+            hist.second->fill(hist.second->bin(nBins).xMid(), overflow.sumW());
+            overflow.reset();
           }
        }
     }

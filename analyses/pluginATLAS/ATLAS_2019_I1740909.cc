@@ -130,9 +130,9 @@ namespace Rivet {
       // For r only
       /// @todo Replace with barchart()
       for (auto& hist : _hr) {
-        for(size_t i=0; i < hist.second->numBins(); ++i) {
-          double x = hist.second->bin(i).xMid();
-          double bW = hist.second->bin(i).xWidth();
+        for(size_t i=1; i < hist.second->numBins()+1; ++i) {
+          const double x = hist.second->bin(i).xMid();
+          const double bW = hist.second->bin(i).xWidth();
           hist.second->bin(i).scaleW(bW/(2.0*M_PI*x));
         }
       }
@@ -140,15 +140,15 @@ namespace Rivet {
       // The rest
       /// @todo Replace with barchart()
       for (auto& hist : _h) {
-        for (size_t i=0; i < hist.second->numBins(); ++i) {
-          double bW = hist.second->bin(i).xWidth();
+        for (size_t i=1; i < hist.second->numBins()+1; ++i) {
+          const double bW = hist.second->bin(i).xWidth();
           hist.second->bin(i).scaleW(bW);
         }
       }
 
       for (size_t i_bin = 0; i_bin < 14; ++i_bin) {
 
-        double sfB =  _h["nch_B"+to_str(i_bin)]->sumW();
+        const double sfB =  _h["nch_B"+to_str(i_bin)]->sumW();
         if (sfB) {
           scale(_h["zeta_B"+to_str(i_bin)],2.0/sfB);
           scale(_h["pTrel_B"+to_str(i_bin)],2.0/sfB);
@@ -156,7 +156,7 @@ namespace Rivet {
           scale(_h["nch_B"+to_str(i_bin)], 2.0/sfB);
         }
 
-        double sfF =  _h["nch_F"+to_str(i_bin)]->sumW();
+        const double sfF =  _h["nch_F"+to_str(i_bin)]->sumW();
         if (sfF) {
           scale(_h["zeta_F"+to_str(i_bin)],1.0/sfF);
           scale(_h["pTrel_F"+to_str(i_bin)],1.0/sfF);
@@ -164,7 +164,7 @@ namespace Rivet {
           scale(_h["nch_F"+to_str(i_bin)], 1.0/sfF);
         }
 
-        double sfC =  _h["nch_C"+to_str(i_bin)]->sumW();
+        const double sfC =  _h["nch_C"+to_str(i_bin)]->sumW();
         if (sfC) {
           scale(_h["zeta_C"+to_str(i_bin)],1.0/sfC);
           scale(_h["pTrel_C"+to_str(i_bin)],1.0/sfC);

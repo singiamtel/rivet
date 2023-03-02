@@ -138,7 +138,7 @@ namespace Rivet {
       if (myTracks.size() > 100)  vetoEvent;
 
       // Fill nch, sumpt, and sumpt vs. nch
-      const double nch = min(myTracks.size(), 99); // put overflow in the last bin
+      const double nch = min(myTracks.size(), (size_t)99); // put overflow in the last bin
       _h["nch"]->fill(nch);
 
     	const double sumPt = min(sum(myTracks, Kin::pT, 0.0), 119.);

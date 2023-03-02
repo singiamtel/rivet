@@ -155,22 +155,21 @@ namespace Rivet {
     }
 
     // Scale the d{eta,phi,R} histograms
-    typedef map<pair<size_t, size_t>, Histo1DPtr> HistMap;
-    for (HistMap::value_type& it : _h_deta_jets) scale(it.second, scaling);
-    for (HistMap::value_type& it : _h_dphi_jets) scale(it.second, scaling);
-    for (HistMap::value_type& it : _h_dR_jets) scale(it.second, scaling);
+    scale(_h_deta_jets, scaling);
+    scale(_h_dphi_jets, scaling);
+    scale(_h_dR_jets, scaling);
 
     // Fill inclusive jet multi ratio
     size_t Nbins = _h_jet_multi_inclusive->numBins();
     size_t Npoints = (Nbins > 0) ? Nbins-1 : 0;
-    for (size_t i = 0; i < Npoints; ++i) { //< careful with 0-bin histos (huh?!)
-      _h_jet_multi_ratio->addPoint(i+1, 0, 0.5, 0);
+    for (size_t i = 1; i <= Npoints; ++i) { //< careful with 0-bin histos (huh?!)
+      _h_jet_multi_ratio->addPoint(i, 0, 0.5, 0);
       if (_h_jet_multi_inclusive->bin(i).sumW() > 0.0) {
         const double ratio = _h_jet_multi_inclusive->bin(i+1).sumW()/_h_jet_multi_inclusive->bin(i).sumW();
         const double relerr_i = _h_jet_multi_inclusive->bin(i).relErr();
         const double relerr_j = _h_jet_multi_inclusive->bin(i+1).relErr();
         const double err = ratio * (relerr_i + relerr_j);
-        _h_jet_multi_ratio->point(i).setY(ratio, err);
+        _h_jet_multi_ratio->point(i-1).setY(ratio, err);
       }
     }
 

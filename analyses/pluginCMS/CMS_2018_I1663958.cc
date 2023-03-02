@@ -246,12 +246,12 @@ namespace Rivet {
       double acc = total-totalj;
       double gf = acc/total;
       if (!std::isnan(gf)) {
-        for (size_t nb = 0 ; nb < _b[tag].histo(hn)->numBins() ; ++nb) {
+        for (size_t nb = 1 ; nb < _b[tag].histo(hn)->numBins()+1; ++nb) {
           const double bl = _b[tag].histo(njet+3)->bin(nb).xMin();
           const double bh = _b[tag].histo(njet+3)->bin(nb).xMax();
           const double bc = 0.5*(bh+bl);
           hgap->addPoint(bc, gf, bc-bl, bh-bc, 0., 0.);
-          acc += _b[tag].histo(njet+3)->bin(nb).area();
+          acc += _b[tag].histo(njet+3)->bin(nb).volume();
           gf = acc/total;
         }
       } else  MSG_WARNING("Gap fraction is NaN. Histogram not produced.");

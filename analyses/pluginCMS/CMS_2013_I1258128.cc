@@ -41,11 +41,11 @@ namespace Rivet {
       book(_hist1YZ      ,1, 1, 1);
       book(_hist1YJet    ,2, 1, 1);
       book(_hist1YSum    ,3, 1, 1);
-book(	  _hist1YDif	,4, 1, 1);
-book(	  _hist2YPhoton ,5, 1, 1);
-book(	  _hist2YJet	,6, 1, 1);
-book(	  _hist2YSum	,7, 1, 1);
-book(	  _hist2YDif	,8, 1, 1);
+      book(_hist1YDif	,4, 1, 1);
+      book(_hist2YPhoton ,5, 1, 1);
+      book(_hist2YJet	,6, 1, 1);
+      book(_hist2YSum	,7, 1, 1);
+      book(_hist2YDif	,8, 1, 1);
     }
 
 
@@ -147,7 +147,7 @@ book(	  _hist2YDif	,8, 1, 1);
     // is equal to 1. This function normalizes to area = area*bin_width.  /
     // @note This is a strange definition... why?
     void normalizeByContents(Histo1DPtr h) {
-      normalize(h, h->bin(0).xWidth());
+      normalize(h, h->bin(1).xWidth());
     }
 
 

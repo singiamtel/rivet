@@ -724,23 +724,22 @@ namespace Rivet {
     /// @}
 
 
-  public:
-
-    /// @name Allow RAW histograms to be read in to local objects.
-    /// @todo Should be protected, not public?
-    /// @todo Why is the function body written this way? To avoid the virtual function being optimised away?
+    /// @name Virtual helper function to allow classes deriving
+    /// from Analysis (e.g. CumulantAnalysis) to load external
+    /// raw AOs into their local AOs (needed in heavy-ion land).
     virtual void rawHookIn(YODA::AnalysisObjectPtr yao) {
-      (void) yao;
+      (void) yao; // suppress unused variable warning
     }
 
-    /// @name Provide access to RAW histograms before writing out to file.
-    /// @todo Should be protected, not public?
-    /// @todo Signature should pass the vector by reference?
-    /// @todo Why is the function body written this way? To avoid the virtual function being optimised away?
-    virtual void rawHookOut(vector<MultiweightAOPtr> raos, size_t iW) {
-      (void) raos;
-      (void) iW;
+    /// @name Virtual helper function to allow classes deriving from
+    /// Analysis (e.g. CumulantAnalysis) to fiddle with raw AOs
+    /// post-finalize/before writing them out (needed in heavy-ion land).
+    virtual void rawHookOut(const vector<MultiweightAOPtr>& raos, size_t iW) {
+      (void) raos; // suppress unused variable warning
+      (void) iW; // suppress unused variable warning
     }
+
+  public:
 
     /// @name Accessing options for this Analysis instance.
     /// @{
@@ -946,6 +945,8 @@ namespace Rivet {
 
       CounterAdapter(const YODA::Counter & c) : x_(c.val()) {}
 
+      CounterAdapter(const YODA::Estimate & e) : x_(e.val()) {}
+
       CounterAdapter(const YODA::Scatter1D & s) : x_(s.points()[0].x()) {
         assert( s.numPoints() == 1 || "Can only scale by a single value.");
       }
@@ -960,9 +961,10 @@ namespace Rivet {
 
   public:
 
-    double dbl(double          x) { return x; }
-    double dbl(const YODA::Counter   & c) { return c.val(); }
-    double dbl(const YODA::Scatter1D & s) {
+    double dbl(double x) { return x; }
+    double dbl(const YODA::Counter& c) { return c.val(); }
+    double dbl(const YODA::PointEstimate& e) { return e.val(); }
+    double dbl(const YODA::Scatter1D& s) {
       assert( s.numPoints() == 1 );
       return s.points()[0].x();
     }
@@ -1263,7 +1265,7 @@ namespace Rivet {
             wao->_final.push_back(make_shared<YODAT>(*preload));
           }
         }
-        if ( !preload ) {
+        else {
           wao->_final.push_back(make_shared<YODAT>(yao));
           wao->_final.back()->setPath(finalpath);
         }
@@ -1281,7 +1283,7 @@ namespace Rivet {
             wao->_persistent.push_back(make_shared<YODAT>(*preload));
           }
         }
-        if ( !preload ) {
+        else {
           wao->_persistent.push_back(make_shared<YODAT>(yao));
           wao->_persistent.back()->setPath(rawpath);
         }

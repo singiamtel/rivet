@@ -49,7 +49,7 @@ namespace Rivet {
         if (bhad.isLastWith(hasBottom)) {
           const double xp = bhad.E()/meanBeamMom;
           _histXbweak->fill(xp);
-          _histMeanXbweak->fill(_histMeanXbweak->bin(0).xMid(), xp);
+          _histMeanXbweak->fill(_histMeanXbweak->bin(1).xMid(), xp);
         }
       }
     }

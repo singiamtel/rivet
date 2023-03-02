@@ -162,7 +162,7 @@ namespace Rivet {
       }
       // R
       if(_c_mu->val()==0. || _c_All->val()==0.) return;
-      Scatter1D R = *_c_All/ *_c_mu;
+      Scatter1D R = (*_c_All/ *_c_mu).mkScatter();
       double              rval = R.point(0).x();
       pair<double,double> rerr = R.point(0).xErrs();
       Scatter2D temphisto(refData(2, 1, 1));

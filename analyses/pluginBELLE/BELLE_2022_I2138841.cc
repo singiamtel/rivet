@@ -167,7 +167,7 @@ namespace Rivet {
       for(int imeson=0;imeson<4;++imeson) {
 	for(int iy=0;iy<3;++iy) {
 	  if(imeson<2) normalize(_h[imeson][iy]);
-	  Scatter1D R = *_c[imeson][iy][1]/ *_c[imeson][iy][0];
+	  Scatter1D R = (*_c[imeson][iy][1]/ *_c[imeson][iy][0]).mkScatter();
 	  Scatter2DPtr _h_alpha1,_h_alpha2;
 	  if(iy==0) {
 	    book(_h_alpha1,1,1+imeson,1);

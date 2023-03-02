@@ -88,7 +88,7 @@ namespace Rivet {
 
     void normalizeToSum(Histo1DPtr hist) {
       double sum = 0.;
-      for (size_t i = 0; i < hist->numBins(); ++i) {
+      for (size_t i = 1; i < hist->numBins()+1; ++i) {
         sum += hist->bin(i).height();
       }
       scale(hist, 1. / sum);

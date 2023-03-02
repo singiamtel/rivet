@@ -45,32 +45,36 @@ namespace Rivet {
         const double y_34 = jets.clusterSeq()->exclusive_ymerge_max(3);
         const double y_45 = jets.clusterSeq()->exclusive_ymerge_max(4);
         const double y_56 = jets.clusterSeq()->exclusive_ymerge_max(5);
-        for (size_t i = 0; i < _h_2->numBins(); ++i) {
-          double ycut = _h_2->bin(i).xMid();
-          double width = _h_2->bin(i).xWidth();
+        for (size_t i = 1; i < _h_2->numBins()+1; ++i) {
+          const auto& b = _h_2->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_23 < ycut) {
-            _h_2->fillBin(i, width);
+            _h_2->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_3->numBins(); ++i) {
-          double ycut = _h_3->bin(i).xMid();
-          double width = _h_3->bin(i).xWidth();
+        for (size_t i = 1; i < _h_3->numBins()+1; ++i) {
+          const auto& b = _h_3->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_34 < ycut && y_23 > ycut) {
-            _h_3->fillBin(i, width);
+            _h_3->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_4->numBins(); ++i) {
-          double ycut = _h_4->bin(i).xMid();
-          double width = _h_4->bin(i).xWidth();
+        for (size_t i = 1; i < _h_4->numBins()+1; ++i) {
+          const auto& b = _h_4->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_45 < ycut && y_34 > ycut) {
-            _h_4->fillBin(i, width);
+            _h_4->fill(ycut, width);
           }
         }
-        for (size_t i = 0; i < _h_5->numBins(); ++i) {
-          double ycut = _h_5->bin(i).xMid();
-          double width = _h_5->bin(i).xWidth();
+        for (size_t i = 1; i < _h_5->numBins()+1; ++i) {
+          const auto& b = _h_5->bin(i);
+          const double ycut = b.xMid();
+          const double width = b.xWidth();
           if (y_56 < ycut && y_45 > ycut) {
-            _h_5->fillBin(i, width);
+            _h_5->fill(ycut, width);
           }
         }
       }

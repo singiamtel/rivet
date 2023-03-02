@@ -97,8 +97,9 @@ namespace Rivet {
       for (auto& hist : _h) {
         const double norm = 1.0 / hist.second->integral();
         // add overflow to last bin
-        double overflow = hist.second->overflow().effNumEntries();
-        hist.second->fillBin(hist.second->numBins() - 1, overflow);
+        const size_t nBins = hist.second->numBins();
+        const double overflow = hist.second->bin(nBins+1).effNumEntries();
+        hist.second->fill(hist.second->bin(nBins).xMid(), overflow);
         // histogram normalisation
         if (hist.first.find("norm") != string::npos)  scale(hist.second, norm);
         else  scale(hist.second, sf);

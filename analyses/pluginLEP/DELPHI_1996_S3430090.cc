@@ -269,7 +269,7 @@ namespace Rivet {
         }
       }
 
-      _histMultiCharged->fill(_histMultiCharged->bin(0).xMid(), numParticles);
+      _histMultiCharged->fill(_histMultiCharged->bin(1).xMid(), numParticles);
 
 
       // Final state of unstable particles to get particle spectra
@@ -278,82 +278,82 @@ namespace Rivet {
         int id = p.abspid();
         switch (id) {
         case 211:
-          _histMultiPiPlus->fill(_histMultiPiPlus->bin(0).xMid());
+          _histMultiPiPlus->fill(_histMultiPiPlus->bin(1).xMid());
           break;
         case 111:
-          _histMultiPi0->fill(_histMultiPi0->bin(0).xMid());
+          _histMultiPi0->fill(_histMultiPi0->bin(1).xMid());
           break;
         case 321:
-          _histMultiKPlus->fill(_histMultiKPlus->bin(0).xMid());
+          _histMultiKPlus->fill(_histMultiKPlus->bin(1).xMid());
           break;
         case 130:
         case 310:
-          _histMultiK0->fill(_histMultiK0->bin(0).xMid());
+          _histMultiK0->fill(_histMultiK0->bin(1).xMid());
           break;
         case 221:
-          _histMultiEta->fill(_histMultiEta->bin(0).xMid());
+          _histMultiEta->fill(_histMultiEta->bin(1).xMid());
           break;
         case 331:
-          _histMultiEtaPrime->fill(_histMultiEtaPrime->bin(0).xMid());
+          _histMultiEtaPrime->fill(_histMultiEtaPrime->bin(1).xMid());
           break;
         case 411:
-          _histMultiDPlus->fill(_histMultiDPlus->bin(0).xMid());
+          _histMultiDPlus->fill(_histMultiDPlus->bin(1).xMid());
           break;
         case 421:
-          _histMultiD0->fill(_histMultiD0->bin(0).xMid());
+          _histMultiD0->fill(_histMultiD0->bin(1).xMid());
           break;
         case 511:
         case 521:
         case 531:
-          _histMultiBPlus0->fill(_histMultiBPlus0->bin(0).xMid());
+          _histMultiBPlus0->fill(_histMultiBPlus0->bin(1).xMid());
           break;
         case 9010221:
-          _histMultiF0->fill(_histMultiF0->bin(0).xMid());
+          _histMultiF0->fill(_histMultiF0->bin(1).xMid());
           break;
         case 113:
-          _histMultiRho->fill(_histMultiRho->bin(0).xMid());
+          _histMultiRho->fill(_histMultiRho->bin(1).xMid());
           break;
         case 323:
-          _histMultiKStar892Plus->fill(_histMultiKStar892Plus->bin(0).xMid());
+          _histMultiKStar892Plus->fill(_histMultiKStar892Plus->bin(1).xMid());
           break;
         case 313:
-          _histMultiKStar892_0->fill(_histMultiKStar892_0->bin(0).xMid());
+          _histMultiKStar892_0->fill(_histMultiKStar892_0->bin(1).xMid());
           break;
         case 333:
-          _histMultiPhi->fill(_histMultiPhi->bin(0).xMid());
+          _histMultiPhi->fill(_histMultiPhi->bin(1).xMid());
           break;
         case 413:
-          _histMultiDStar2010Plus->fill(_histMultiDStar2010Plus->bin(0).xMid());
+          _histMultiDStar2010Plus->fill(_histMultiDStar2010Plus->bin(1).xMid());
           break;
         case 225:
-          _histMultiF2->fill(_histMultiF2->bin(0).xMid());
+          _histMultiF2->fill(_histMultiF2->bin(1).xMid());
           break;
         case 315:
-          _histMultiK2Star1430_0->fill(_histMultiK2Star1430_0->bin(0).xMid());
+          _histMultiK2Star1430_0->fill(_histMultiK2Star1430_0->bin(1).xMid());
           break;
         case 2212:
-          _histMultiP->fill(_histMultiP->bin(0).xMid());
+          _histMultiP->fill(_histMultiP->bin(1).xMid());
           break;
         case 3122:
-          _histMultiLambda0->fill(_histMultiLambda0->bin(0).xMid());
+          _histMultiLambda0->fill(_histMultiLambda0->bin(1).xMid());
           break;
         case 3312:
-          _histMultiXiMinus->fill(_histMultiXiMinus->bin(0).xMid());
+          _histMultiXiMinus->fill(_histMultiXiMinus->bin(1).xMid());
           break;
         case 3334:
-          _histMultiOmegaMinus->fill(_histMultiOmegaMinus->bin(0).xMid());
+          _histMultiOmegaMinus->fill(_histMultiOmegaMinus->bin(1).xMid());
           break;
         case 2224:
-          _histMultiDeltaPlusPlus->fill(_histMultiDeltaPlusPlus->bin(0).xMid());
+          _histMultiDeltaPlusPlus->fill(_histMultiDeltaPlusPlus->bin(1).xMid());
           break;
         case 3114:
-          _histMultiSigma1385Plus->fill(_histMultiSigma1385Plus->bin(0).xMid());
+          _histMultiSigma1385Plus->fill(_histMultiSigma1385Plus->bin(1).xMid());
           break;
         case 3324:
-          _histMultiXi1530_0->fill(_histMultiXi1530_0->bin(0).xMid());
+          _histMultiXi1530_0->fill(_histMultiXi1530_0->bin(1).xMid());
           break;
         case 5122:
-          _histMultiLambdaB0->fill(_histMultiLambdaB0->bin(0).xMid());
+          _histMultiLambdaB0->fill(_histMultiLambdaB0->bin(1).xMid());
           break;
         }
       }

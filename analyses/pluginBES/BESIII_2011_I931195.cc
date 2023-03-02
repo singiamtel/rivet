@@ -190,8 +190,8 @@ namespace Rivet {
       double x,y;
       pair<double,double> dx,dy;
       for(unsigned int ix=0;ix<3;++ix) {
-	Scatter1D X = *_c[ix][0]/ *_c[ix][2];
-	Scatter1D Y = *_c[ix][0]/ *_c[ix][1];
+	Scatter1D X = (*_c[ix][0]/ *_c[ix][2]).mkScatter();
+	Scatter1D Y = (*_c[ix][0]/ *_c[ix][1]).mkScatter();
 	x  = X.point(0).x();
 	y  = Y.point(0).x();
 	dx = X.point(0).xErrs();

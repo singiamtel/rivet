@@ -287,44 +287,44 @@ namespace Rivet {
     void finalize() {
 
       /// Normalise, scale and otherwise manipulate histograms here
-      normalize(_h_3_mNJ, 1.0);
-      normalize(_h_3_X3, 1.0);
-      normalize(_h_3_X4, 1.0);
-      normalize(_h_3_costheta3, 1.0);
-      normalize(_h_3_psi3, 1.0);
-      normalize(_h_3_f3, 1.0);
-      normalize(_h_3_f4, 1.0);
-      normalize(_h_3_f5, 1.0);
+      normalize(_h_3_mNJ);
+      normalize(_h_3_X3);
+      normalize(_h_3_X4);
+      normalize(_h_3_costheta3);
+      normalize(_h_3_psi3);
+      normalize(_h_3_f3);
+      normalize(_h_3_f4);
+      normalize(_h_3_f5);
 
-      normalize(_h_4_mNJ, 1.0);
-      normalize(_h_4_X3, 1.0);
-      normalize(_h_4_X4, 1.0);
-      normalize(_h_4_costheta3, 1.0);
-      normalize(_h_4_psi3, 1.0);
-      normalize(_h_4_f3, 1.0);
-      normalize(_h_4_f4, 1.0);
-      normalize(_h_4_f5, 1.0);
-      normalize(_h_4_XA, 1.0);
-      normalize(_h_4_psiAB, 1.0);
-      normalize(_h_4_fA, 1.0);
-      normalize(_h_4_fB, 1.0);
+      normalize(_h_4_mNJ);
+      normalize(_h_4_X3);
+      normalize(_h_4_X4);
+      normalize(_h_4_costheta3);
+      normalize(_h_4_psi3);
+      normalize(_h_4_f3);
+      normalize(_h_4_f4);
+      normalize(_h_4_f5);
+      normalize(_h_4_XA);
+      normalize(_h_4_psiAB);
+      normalize(_h_4_fA);
+      normalize(_h_4_fB);
 
-      normalize(_h_5_mNJ, 1.0);
-      normalize(_h_5_X3, 1.0);
-      normalize(_h_5_X4, 1.0);
-      normalize(_h_5_costheta3, 1.0);
-      normalize(_h_5_psi3, 1.0);
-      normalize(_h_5_f3, 1.0);
-      normalize(_h_5_f4, 1.0);
-      normalize(_h_5_f5, 1.0);
-      normalize(_h_5_XA, 1.0);
-      normalize(_h_5_XC, 1.0);
-      normalize(_h_5_psiAB, 1.0);
-      normalize(_h_5_psiCD, 1.0);
-      normalize(_h_5_fA, 1.0);
-      normalize(_h_5_fB, 1.0);
-      normalize(_h_5_fC, 1.0);
-      normalize(_h_5_fD, 1.0);
+      normalize(_h_5_mNJ);
+      normalize(_h_5_X3);
+      normalize(_h_5_X4);
+      normalize(_h_5_costheta3);
+      normalize(_h_5_psi3);
+      normalize(_h_5_f3);
+      normalize(_h_5_f4);
+      normalize(_h_5_f5);
+      normalize(_h_5_XA);
+      normalize(_h_5_XC);
+      normalize(_h_5_psiAB);
+      normalize(_h_5_psiCD);
+      normalize(_h_5_fA);
+      normalize(_h_5_fB);
+      normalize(_h_5_fC);
+      normalize(_h_5_fD);
 
     }
 
