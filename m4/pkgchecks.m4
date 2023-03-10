@@ -125,23 +125,23 @@ AC_DEFUN([AC_CEDAR_HEADERS], [
   test x${prefix} = xNONE && prefix=${ac_default_prefix}
 
   ## Environment variables for specifying paths
-  ifelse($5, yes,
+  dnl ifelse($5, yes,
     AC_ARG_VAR(@&t@cedar_SAFEPKGNAME@&t@PATH,
       path to cedar_PkgName @<:@$prefix and various standard locations@:>@)
-  )
+  dnl )
   AC_ARG_VAR(@&t@cedar_SAFEPKGNAME@&t@INCPATH,
     path to the directory containing the cedar_PkgName header files @<:@cedar_SAFEPKGNAME@&t@PATH/include@:>@)
   pkgpath=${cedar_SAFEPKGNAME@&t@PATH}
 
   ## "configure" option switches for specifying paths
-  ifelse($5, yes,
+  dnl ifelse($5, yes,
     AC_ARG_WITH(cedar_safepkgname,
                 AS_HELP_STRING(--with-@&t@cedar_safepkgname@&t@,
                   path to cedar_PkgName @<:@$prefix and various standard locations@:>@),
                 [pkgpath=$with_@&t@cedar_safepkgname], [])
     dnl echo "DEBUG: withval=$withval, with_@&t@cedar_safepkgname=$with_@&t@cedar_safepkgname -> pkgpath=$pkgpath"
     if test "$pkgpath"; then cedar_SAFEPKGNAME@&t@PATH="$pkgpath"; fi
-  )
+  dnl )
 
   pkgincpath=${cedar_SAFEPKGNAME@&t@INCPATH}
   AC_ARG_WITH(cedar_safepkgname@&t@-incpath,
@@ -273,10 +273,10 @@ AC_DEFUN([AC_CEDAR_LIBRARY], [
   test x${prefix} = xNONE && prefix=${ac_default_prefix}
 
   ## Environment variables for specifying paths
-  ifelse($5, yes,
+  dnl ifelse($5, yes,
     AC_ARG_VAR(@&t@cedar_SAFEPKGNAME@&t@PATH,
       path to cedar_PkgName @<:@$prefix and various standard locations@:>@)
-  )
+  dnl )
   AC_ARG_VAR(@&t@cedar_SAFEPKGNAME@&t@LIBPATH,
     path to the directory containing the cedar_PkgName library @<:@cedar_SAFEPKGNAME@&t@PATH/lib or cedar_SAFEPKGNAME@&t@PATH/lib/cedar_PkgName@:>@)
   AC_ARG_VAR(@&t@cedar_SAFEPKGNAME@&t@LIBNAME,
@@ -284,12 +284,12 @@ AC_DEFUN([AC_CEDAR_LIBRARY], [
   pkgpath=${cedar_SAFEPKGNAME@&t@PATH}
 
   ## "configure" option switches for specifying paths
-  ifelse($5, yes,
+  dnl ifelse($5, yes,
     AC_ARG_WITH([cedar_safepkgname],
                 [AS_HELP_STRING(--with-@&t@cedar_safepkgname,
                   path to cedar_PkgName @<:@$prefix and various standard locations@:>@)],
                 [pkgpath=$with_@&t@cedar_safepkgname], [])
-  )
+  dnl )
 
   dnl echo "DEBUG: withval=$withval, with_@&t@cedar_safepkgname=$with_@&t@cedar_safepkgname -> pkgpath=$pkgpath"
   if test "$pkgpath"; then cedar_SAFEPKGNAME@&t@PATH="$pkgpath"; fi
