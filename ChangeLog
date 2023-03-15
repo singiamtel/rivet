@@ -1,3 +1,9 @@
+2023-03-13  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add variations on the discard/select utility functions to
+	(particularly) discard elements by equality rather needing
+	to provide a function.
+
 2023-03-10 Christian Gutschow  <chris.g@cern.ch>
 
 	* Fixes in MC_TAU_Decay plot file, courtesy of George Marsden
