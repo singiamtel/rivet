@@ -40,11 +40,11 @@ namespace Rivet {
       if (muonFS.size() != 2) vetoEvent;
       if (muonFS[0].pid() != -muonFS[1].pid()) vetoEvent;
       // invariant mass between 12 and 70
-      double mmumu = (muonFS[0].momentum()+muonFS[1].momentum()).mass();
-      if(mmumu<12. or mmumu>70.) vetoEvent;
+      const double mmumu = (muonFS[0].momentum()+muonFS[1].momentum()).mass();
+      if(mmumu<12. or mmumu>70.)  vetoEvent;
       // cut pt >10 if pair mass >30
       for(unsigned int ix=0;ix<2;++ix) {
-	if(mmumu>30 && muonFS[ix].perp()<10.) vetoEvent;
+        if(mmumu>30 && muonFS[ix].perp()<10.)  vetoEvent;
       }
       // fill histogram
       _h_mass->fill(mmumu);

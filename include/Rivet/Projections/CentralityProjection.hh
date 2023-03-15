@@ -30,7 +30,7 @@ namespace Rivet {
     CentralityProjection() { setName("CentralityProjection"); }
 
 
-    DEFAULT_RIVET_PROJ_CLONE(CentralityProjection);
+    RIVET_DEFAULT_PROJ_CLONE(CentralityProjection);
 
 
     /// @brief Add a new centrality estimate.

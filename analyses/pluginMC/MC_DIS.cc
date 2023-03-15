@@ -11,7 +11,7 @@ class MC_DIS : public Analysis {
 public:
 
   /// Constructor
-  DEFAULT_RIVET_ANALYSIS_CTOR(MC_DIS);
+  RIVET_DEFAULT_ANALYSIS_CTOR(MC_DIS);
 
   /// @name Analysis methods
   /// @{

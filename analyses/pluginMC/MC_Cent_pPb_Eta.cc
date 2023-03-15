@@ -29,18 +29,20 @@ public:
                               Cuts::pT > 0.1*GeV), "CFS");
 
     // The centrality bins and the corresponding histograms.
-    std::vector< std::pair<float, float> > centralityBins =
+    std::vector< std::pair<double, double> > centralityBins =
       { {0, 1}, {1, 5}, {5, 10}, {10, 20},
         {20, 30}, {30, 40}, {40, 60}, {60, 90} };
     // std::vector< std::tuple<int, int, int> > refData =
     //   { {2, 1, 8}, {2, 1, 7}, {2, 1, 6}, {2, 1, 5},
     //     {2, 1, 4}, {2, 1, 3}, {2, 1, 2}, {2, 1, 1} };
-    std::vector< std::tuple<int, int, int> > refData;
-    for ( int i = 8; i > 0; --i )
-      refData.push_back(std::tuple<int, int, int>(2, 1, i));
+    std::vector< std::tuple<size_t, size_t, size_t> > refData;
+    refData.reserve(8);
+    for (size_t i = 8; i > 0; --i ) {
+      refData.push_back(std::tuple<size_t, size_t, size_t>(2, 1, i));
+    }
 
     // The centrality-binned histograms.
-    _hEta = bookPercentile<Histo1D>("CENT", centralityBins, refData);
+    _hEta = book<Histo1D>("CENT", centralityBins, refData);
 
   }
 

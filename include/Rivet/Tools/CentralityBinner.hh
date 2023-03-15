@@ -41,7 +41,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(CentralityEstimator);
+    RIVET_DEFAULT_PROJ_CLONE(CentralityEstimator);
 
   protected:
 
@@ -804,7 +804,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(GeneratedCentrality);
+    RIVET_DEFAULT_PROJ_CLONE(GeneratedCentrality);
 
   protected:
 

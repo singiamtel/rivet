@@ -35,7 +35,7 @@ namespace Rivet {
 
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(PrimaryHadrons);
+    RIVET_DEFAULT_PROJ_CLONE(PrimaryHadrons);
 
     /// @}
 

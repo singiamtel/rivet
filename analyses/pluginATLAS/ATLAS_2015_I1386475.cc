@@ -59,8 +59,9 @@ namespace Rivet {
 
     // Scale by the inverse sum of event weights in each centrality
     // bin.
-    for (int i = 0; i < 8; ++i)
+    for (int i = 0; i < 8; ++i) {
       histEta[centralityBins[i]]->scaleW(1./sow[centralityBins[i]]->sumW());
+    }
 
   }
 

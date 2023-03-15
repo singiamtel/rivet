@@ -23,7 +23,7 @@ namespace Rivet {
       declare(DISFinalState(DISFinalState::BoostFrame::HCM), "DISFS");
     }
 
-    DEFAULT_RIVET_PROJ_CLONE(DISRapidityGap);
+    RIVET_DEFAULT_PROJ_CLONE(DISRapidityGap);
 
     /// @todo Document
     double t() const { return _t; }

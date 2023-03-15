@@ -33,12 +33,12 @@ namespace Rivet {
       const size_t numWeights = event.weights().size();
       for (size_t m = 0; m < numWeights; ++m) {
         const double weight = event.weights()[m];
-        _h_weight_100.get()->_getPersistent(m)->fill(weight, 1.0);
-        _h_weight_10.get()->_getPersistent(m)->fill(weight, 1.0);
+        _h_weight_100.get()->persistent(m)->fill(weight, 1.0);
+        _h_weight_10.get()->persistent(m)->fill(weight, 1.0);
         if (weight < 0.) {
-          _h_logweight_neg.get()->_getPersistent(m)->fill(fabs(weight), 1.0);
+          _h_logweight_neg.get()->persistent(m)->fill(fabs(weight), 1.0);
         } else {
-          _h_logweight_pos.get()->_getPersistent(m)->fill(weight, 1.0);
+          _h_logweight_pos.get()->persistent(m)->fill(weight, 1.0);
         }
       }
     }

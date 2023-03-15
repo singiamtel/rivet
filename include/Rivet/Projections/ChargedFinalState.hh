@@ -21,7 +21,7 @@ namespace Rivet {
     ChargedFinalState(const Cut& c=Cuts::open());
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(ChargedFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(ChargedFinalState);
 
     /// @}
 

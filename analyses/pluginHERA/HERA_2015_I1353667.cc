@@ -34,7 +34,7 @@ namespace Rivet {
       book(_h_zD, 3, 1, 1);
       book(_h_Q2, 4, 1, 1);
       book(_h_y, 5, 1, 1);
- book(_h_Q2y, 6, 1, 1);
+      book(_h_Q2y, 6, 1, 1);
     }
 
 

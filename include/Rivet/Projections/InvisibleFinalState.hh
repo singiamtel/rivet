@@ -30,7 +30,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(InvisibleFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(InvisibleFinalState);
 
     /// @}
 

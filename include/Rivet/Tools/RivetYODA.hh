@@ -2,33 +2,78 @@
 #define RIVET_RIVETYODA_HH
 
 #include "Rivet/Config/RivetCommon.hh"
+#include "Rivet/Tools/TypeRegistry.hh"
+#include "Rivet/Tools/TypeTraits.hh"
 #include "YODA/AnalysisObject.h"
 #include "YODA/Counter.h"
 #include "YODA/Histo.h"
 #include "YODA/Profile.h"
 #include "YODA/Scatter.h"
+
+// Use execinfo for backtrace if available
+#ifdef HAVE_EXECINFO_H
+#include <execinfo.h>
+#endif
+
 #include <map>
+#include <unordered_map>
 #include <valarray>
+
 
 namespace YODA {
 
-  typedef std::shared_ptr<YODA::AnalysisObject> AnalysisObjectPtr;
-  typedef std::shared_ptr<YODA::Counter> CounterPtr;
-  typedef std::shared_ptr<YODA::Histo1D> Histo1DPtr;
-  typedef std::shared_ptr<YODA::Histo2D> Histo2DPtr;
-  typedef std::shared_ptr<YODA::Profile1D> Profile1DPtr;
-  typedef std::shared_ptr<YODA::Profile2D> Profile2DPtr;
-  typedef std::shared_ptr<YODA::Scatter1D> Scatter1DPtr;
-  typedef std::shared_ptr<YODA::Scatter2D> Scatter2DPtr;
-  typedef std::shared_ptr<YODA::Scatter3D> Scatter3DPtr;
+  template<size_t DbnN, typename ... AxisT>
+  using BinnedDbnPtr = std::shared_ptr<YODA::BinnedDbn<DbnN, AxisT...>>;
+
+  template<typename ... AxisT>
+  using BinnedHistoPtr = BinnedDbnPtr<sizeof...(AxisT), AxisT...>;
+
+  template<typename ... AxisT>
+  using BinnedProfilePtr = BinnedDbnPtr<sizeof...(AxisT)+1, AxisT...>;
+
+  template<size_t N>
+  using ScatterNDPtr = std::shared_ptr<YODA::ScatterND<N>>;
+
+  using AnalysisObjectPtr = std::shared_ptr<YODA::AnalysisObject>;
+  using CounterPtr = std::shared_ptr<YODA::Counter>;
+  using Histo1DPtr = BinnedHistoPtr<double>;
+  using Histo2DPtr = BinnedHistoPtr<double,double>;
+  using Histo3DPtr = BinnedHistoPtr<double,double,double>;
+  using Profile1DPtr = BinnedProfilePtr<double>;
+  using Profile2DPtr = BinnedProfilePtr<double,double>;
+  using Profile3DPtr = BinnedProfilePtr<double,double,double>;
+  using Scatter1DPtr = ScatterNDPtr<1>;
+  using Scatter2DPtr = ScatterNDPtr<2>;
+  using Scatter3DPtr = ScatterNDPtr<3>;
 
 }
 
-
 namespace Rivet {
 
+  /// If @a dst is the same subclass as @a src, copy the contents of @a
+  /// src into @a dst and return true. Otherwise return false.
+  inline bool copyAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, const double scale=1.0) {
+    auto typeHandle = findRegisteredType(src->type());
+    if (!typeHandle)  return false;
+    for (const std::string& a : src->annotations()) {
+      dst->setAnnotation(a, src->annotation(a));
+    }
+    return typeHandle->copyAO(src, dst, scale);
+  }
 
-  /// @defgroup aotuples Minimal objects representing AO fills, to be buffered before pushToPersistent().
+  /// If @a dst is the same subclass as @a src, scale the contents of
+  /// @a src with @a scale and add it to @a dst and return true. Otherwise
+  /// return false.
+  inline bool addAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr& dst, const double scale) {
+    auto typeHandle = findRegisteredType(src->type());
+    if (!typeHandle)  return false;
+    return typeHandle->addAO(src, dst, scale);
+  }
+
+
+
+  /// @defgroup AOFills Minimal objects representing AO fills,
+  /// to be buffered before pushToPersistent().
   ///
   /// @note Every object listed here needs a virtual fill method in YODA,
   /// otherwise the Tuple fakery won't work.
@@ -39,86 +84,431 @@ namespace Rivet {
   using Weight = double;
 
   /// A single fill is a (FillType, Weight) pair.
-  template <class T>
+  template<typename T>
   using Fill = pair<typename T::FillType, Weight>;
 
-  /// A set of several fill objects.
-  /// @todo Why a set rather than a vector? Efficiency???
-  template <class T>
-  using Fills = multiset<Fill<T>>;
+  /// A collection of several Fill objects.
+  template<typename T>
+  using Fills = vector<Fill<T>>;
 
 
 
-  /// @brief Wrappers for analysis objects to store all fills unaggregated, until collapsed by pushToPersistent().
+  /// @brief FillCollectors which are used to temporarily cache
+  /// unaggregated fills until collapsed by the Multiplexers via
+  /// a call to pushToPersistent().
   ///
   /// The specialisations of this inherit from the YODA analysis object types,
   /// and are used as such. The user-facing analysis objects in
-  /// Analysis::analyze() are TupleWrappers on the apparent type (accessed transparently
-  /// via the dereferencing of the current Wrapper<T>::active() pointer).
+  /// Analysis::analyze() are FillCollectors on the apparent type (accessed transparently
+  /// via the dereferencing of the current Multiplexer<T>::active() pointer).
   ///
-  /// @todo RENAME TO SOMETHING BETTER: AOProxy or FillProxy or SubEventProxy?
-  template <class T>
-  class TupleWrapper;
+  /// @todo Do we really want this inheritance from YODA::AOs??
+  template<typename T>
+  class FillCollector;
 
 
-  /// TupleWrapper specialisation for Counter
-  template <>
-  class TupleWrapper<YODA::Counter> : public YODA::Counter {
+  /// FillCollector specialisation for Counter
+  template<>
+  class FillCollector<YODA::Counter> : public YODA::Counter {
   public:
 
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Counter>> Ptr;
+    using YAO = YODA::Counter;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
 
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Counter& h) : YODA::Counter(h) {}
+    FillCollector() : YAO() { }
 
-    /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
+    /// Constructor
+    ///
+    /// The Counter isn't actually needed here:
+    /// We call the YAO nullary constructor for
+    /// performance reasons but still require
+    /// the pointer argument to harmonise the
+    /// FillCollector constructors.
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->path()) { }
+
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    void fill(const double weight=1.0, const double fraction=1.0) {
+    void fill(const double weight=1.0, const double fraction = 1.0) {
       (void)fraction; // suppress unused variable warning
-      _fills.insert( { YODA::Counter::FillType(), weight } );
+      _fills.insert(_fills.end(), { YAO::FillType(), weight } );
     }
 
     /// Empty the subevent stack (for start of new event group).
     void reset() { _fills.clear(); }
 
     /// Access the fill info subevent stack.
-    const Fills<YODA::Counter>& fills() const { return _fills; }
+    const Fills<YAO>& fills() const { return _fills; }
 
   private:
 
-    Fills<YODA::Counter> _fills;
+    Fills<YAO> _fills;
 
   };
 
 
-  /// TupleWrapper specialisation for Histo1D
-  template <>
-  class TupleWrapper<YODA::Histo1D> : public YODA::Histo1D {
+  /// FillCollector specialisation for all BinnedDbn-like AOs
+  template <size_t DbnN, typename... AxisT>
+  class FillCollector<YODA::BinnedDbn<DbnN, AxisT...>>
+         : public YODA::BinnedDbn<DbnN, AxisT...> {
   public:
 
-    using YAO = YODA::Histo1D;
+    using YAO = YODA::BinnedDbn<DbnN, AxisT...>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
 
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    using Ptr = shared_ptr<TupleWrapper<YAO>>;
+    FillCollector() : YAO() { }
 
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YAO& h) : YAO(h) {}
+    /// Constructor
+    ///
+    /// We call the cheaper constructor based on the
+    /// binning to avoid copying of the bin content.
+    /// The underlying binning object is still used
+    /// in analize() by many routines, e.g. to query
+    /// numBins() or to loop over bins() with
+    /// subsequent calls to bin xMid() etc.
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->binning()) {
+      YAO::setPath(yao->path());
+    }
 
-
-
-    /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    int fill(const double x, const double weight=1.0, const double fraction=1.0 ) {
+    int fill(typename YAO::FillType&& fillCoords,
+             const double weight=1.0, const double fraction=1.0) {
       (void)fraction; // suppress unused variable warning
-      _fills.insert( { YAO::FillType{x}, weight } );
-      if (YODA::containsNan(YAO::FillType{x})) {
+      if (YODA::containsNan(fillCoords)) {
+        _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
         return -1;
       }
-      const size_t binIdx = YAO::_binning.globalBinIndex(YAO::FillType{x});
-      return int(binIdx);
+      // Could be that DbnN > number of binned axes, so should
+      // extract subset of bin coordinates to pinpoint bin
+      typename YAO::BinningT::EdgeTypesTuple binCoords{};
+      auto extractBinCoords = [&binCoords, &fillCoords](auto I) {
+        std::get<I>(binCoords) = std::get<I>(fillCoords);
+      };
+      MetaUtils::staticFor<sizeof...(AxisT)>(extractBinCoords);
+      _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+      return (int)YAO::_binning.globalBinIndex(binCoords);
+    }
+
+    /// Empty the subevent stack (for start of new event group).
+    void reset() noexcept { _fills.clear(); }
+
+    /// Access the fill info subevent stack.
+    const Fills<YAO>& fills() const { return _fills; }
+
+  private:
+
+    Fills<YAO> _fills;
+
+  };
+  /// FillCollector specialisation for Histo1D
+  template <typename AxisT>
+  class FillCollector<YODA::BinnedDbn<1, AxisT>>
+         : public YODA::BinnedDbn<1, AxisT> {
+  public:
+
+    using YAO = YODA::BinnedDbn<1, AxisT>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->binning()) {
+      YAO::setPath(yao->path());
+    }
+
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
+    ///
+    /// @todo Do we need to deal with users using fractions directly?
+    int fill(typename YAO::FillType&& fillCoords,
+             const double weight=1.0, const double fraction=1.0) {
+      (void)fraction; // suppress unused variable warning
+      if (YODA::containsNan(fillCoords)) {
+        _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+        return -1;
+      }
+      // Could be that DbnN > number of binned axes, so should
+      // extract subset of bin coordinates to pinpoint bin
+      typename YAO::BinningT::EdgeTypesTuple binCoords{};
+      auto extractBinCoords = [&binCoords, &fillCoords](auto I) {
+        std::get<I>(binCoords) = std::get<I>(fillCoords);
+      };
+      MetaUtils::staticFor<1>(extractBinCoords);
+      _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+      return (int)YAO::_binning.globalBinIndex(binCoords);
+    }
+    //
+    int fill(const AxisT x, const double weight=1.0, const double fraction=1.0) {
+      return fill(typename YAO::FillType{x}, weight, fraction);
+    }
+
+    /// Empty the subevent stack (for start of new event group).
+    void reset() noexcept { _fills.clear(); }
+
+    /// Access the fill info subevent stack.
+    const Fills<YAO>& fills() const { return _fills; }
+
+  private:
+
+    Fills<YAO> _fills;
+
+  };
+  /// FillCollector specialisation for Histo2D
+  template <typename AxisT1, typename AxisT2>
+  class FillCollector<YODA::BinnedDbn<2, AxisT1, AxisT2>>
+         : public YODA::BinnedDbn<2, AxisT1, AxisT2> {
+  public:
+
+    using YAO = YODA::BinnedDbn<2, AxisT1, AxisT2>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->binning()) {
+      YAO::setPath(yao->path());
+    }
+
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
+    ///
+    /// @todo Do we need to deal with users using fractions directly?
+    int fill(typename YAO::FillType&& fillCoords,
+             const double weight=1.0, const double fraction=1.0) {
+      (void)fraction; // suppress unused variable warning
+      if (YODA::containsNan(fillCoords)) {
+        _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+        return -1;
+      }
+      // Could be that DbnN > number of binned axes, so should
+      // extract subset of bin coordinates to pinpoint bin
+      typename YAO::BinningT::EdgeTypesTuple binCoords{};
+      auto extractBinCoords = [&binCoords, &fillCoords](auto I) {
+        std::get<I>(binCoords) = std::get<I>(fillCoords);
+      };
+      MetaUtils::staticFor<1>(extractBinCoords);
+      _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+      return (int)YAO::_binning.globalBinIndex(binCoords);
+    }
+    //
+    int fill(const AxisT1 x, const AxisT2 y, const double weight=1.0, const double fraction=1.0) {
+      return fill(typename YAO::FillType{x,y}, weight, fraction);
+    }
+
+    /// Empty the subevent stack (for start of new event group).
+    void reset() noexcept { _fills.clear(); }
+
+    /// Access the fill info subevent stack.
+    const Fills<YAO>& fills() const { return _fills; }
+
+  private:
+
+    Fills<YAO> _fills;
+
+  };
+  /// FillCollector specialisation for Histo3D
+  template <typename AxisT1, typename AxisT2, typename AxisT3>
+  class FillCollector<YODA::BinnedDbn<3, AxisT1, AxisT2, AxisT3>>
+         : public YODA::BinnedDbn<3, AxisT1, AxisT2, AxisT3> {
+  public:
+
+    using YAO = YODA::BinnedDbn<3, AxisT1, AxisT2, AxisT3>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->binning()) {
+      YAO::setPath(yao->path());
+    }
+
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
+    ///
+    /// @todo Do we need to deal with users using fractions directly?
+    int fill(typename YAO::FillType&& fillCoords,
+             const double weight=1.0, const double fraction=1.0) {
+      (void)fraction; // suppress unused variable warning
+      if (YODA::containsNan(fillCoords)) {
+        _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+        return -1;
+      }
+      // Could be that DbnN > number of binned axes, so should
+      // extract subset of bin coordinates to pinpoint bin
+      typename YAO::BinningT::EdgeTypesTuple binCoords{};
+      auto extractBinCoords = [&binCoords, &fillCoords](auto I) {
+        std::get<I>(binCoords) = std::get<I>(fillCoords);
+      };
+      MetaUtils::staticFor<1>(extractBinCoords);
+      _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+      return (int)YAO::_binning.globalBinIndex(binCoords);
+    }
+    //
+    int fill(const AxisT1 x, const AxisT2 y, const AxisT3 z, const double weight=1.0, const double fraction=1.0) {
+      return fill(typename YAO::FillType{x,y,z}, weight, fraction);
+    }
+
+    /// Empty the subevent stack (for start of new event group).
+    void reset() noexcept { _fills.clear(); }
+
+    /// Access the fill info subevent stack.
+    const Fills<YAO>& fills() const { return _fills; }
+
+  private:
+
+    Fills<YAO> _fills;
+
+  };
+  /// FillCollector specialisation for Profile1D
+  template <typename AxisT>
+  class FillCollector<YODA::BinnedDbn<2, AxisT>>
+         : public YODA::BinnedDbn<2, AxisT> {
+  public:
+
+    using YAO = YODA::BinnedDbn<2, AxisT>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->binning()) {
+      YAO::setPath(yao->path());
+    }
+
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
+    ///
+    /// @todo Do we need to deal with users using fractions directly?
+    int fill(typename YAO::FillType&& fillCoords,
+             const double weight=1.0, const double fraction=1.0) {
+      (void)fraction; // suppress unused variable warning
+      if (YODA::containsNan(fillCoords)) {
+        _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+        return -1;
+      }
+      // Could be that DbnN > number of binned axes, so should
+      // extract subset of bin coordinates to pinpoint bin
+      typename YAO::BinningT::EdgeTypesTuple binCoords{};
+      auto extractBinCoords = [&binCoords, &fillCoords](auto I) {
+        std::get<I>(binCoords) = std::get<I>(fillCoords);
+      };
+      MetaUtils::staticFor<1>(extractBinCoords);
+      _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+      return (int)YAO::_binning.globalBinIndex(binCoords);
+    }
+    //
+    int fill(const AxisT x, const double y, const double weight=1.0, const double fraction=1.0) {
+      return fill(typename YAO::FillType{x,y}, weight, fraction);
+    }
+
+    /// Empty the subevent stack (for start of new event group).
+    void reset() noexcept { _fills.clear(); }
+
+    /// Access the fill info subevent stack.
+    const Fills<YAO>& fills() const { return _fills; }
+
+  private:
+
+    Fills<YAO> _fills;
+
+  };
+  /// FillCollector specialisation for Histo2D
+  template <typename AxisT1, typename AxisT2>
+  class FillCollector<YODA::BinnedDbn<3, AxisT1, AxisT2>>
+         : public YODA::BinnedDbn<3, AxisT1, AxisT2> {
+  public:
+
+    using YAO = YODA::BinnedDbn<3, AxisT1, AxisT2>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->binning()) {
+      YAO::setPath(yao->path());
+    }
+
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
+    ///
+    /// @todo Do we need to deal with users using fractions directly?
+    int fill(typename YAO::FillType&& fillCoords,
+             const double weight=1.0, const double fraction=1.0) {
+      (void)fraction; // suppress unused variable warning
+      if (YODA::containsNan(fillCoords)) {
+        _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+        return -1;
+      }
+      // Could be that DbnN > number of binned axes, so should
+      // extract subset of bin coordinates to pinpoint bin
+      typename YAO::BinningT::EdgeTypesTuple binCoords{};
+      auto extractBinCoords = [&binCoords, &fillCoords](auto I) {
+        std::get<I>(binCoords) = std::get<I>(fillCoords);
+      };
+      MetaUtils::staticFor<1>(extractBinCoords);
+      _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+      return (int)YAO::_binning.globalBinIndex(binCoords);
+    }
+    //
+    int fill(const AxisT1 x, const AxisT2 y, const double z, const double weight=1.0, const double fraction=1.0) {
+      return fill(typename YAO::FillType{x,y,z}, weight, fraction);
+    }
+
+    /// Empty the subevent stack (for start of new event group).
+    void reset() noexcept { _fills.clear(); }
+
+    /// Access the fill info subevent stack.
+    const Fills<YAO>& fills() const { return _fills; }
+
+  private:
+
+    Fills<YAO> _fills;
+
+  };
+  /// FillCollector specialisation for Histo3D
+  template <typename AxisT1, typename AxisT2, typename AxisT3>
+  class FillCollector<YODA::BinnedDbn<4, AxisT1, AxisT2, AxisT3>>
+         : public YODA::BinnedDbn<4, AxisT1, AxisT2, AxisT3> {
+  public:
+
+    using YAO = YODA::BinnedDbn<4, AxisT1, AxisT2, AxisT3>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->binning()) {
+      YAO::setPath(yao->path());
+    }
+
+    /// Overloaded fill method, which stores Fill info
+    /// until Multiplexer<T>::pushToPersistent() is called.
+    ///
+    /// @todo Do we need to deal with users using fractions directly?
+    int fill(typename YAO::FillType&& fillCoords,
+             const double weight=1.0, const double fraction=1.0) {
+      (void)fraction; // suppress unused variable warning
+      if (YODA::containsNan(fillCoords)) {
+        _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+        return -1;
+      }
+      // Could be that DbnN > number of binned axes, so should
+      // extract subset of bin coordinates to pinpoint bin
+      typename YAO::BinningT::EdgeTypesTuple binCoords{};
+      auto extractBinCoords = [&binCoords, &fillCoords](auto I) {
+        std::get<I>(binCoords) = std::get<I>(fillCoords);
+      };
+      MetaUtils::staticFor<1>(extractBinCoords);
+      _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
+      return (int)YAO::_binning.globalBinIndex(binCoords);
+    }
+    //
+    int fill(const AxisT1 x, const AxisT2 y, const AxisT3 z, const double zPlus, const double weight=1.0, const double fraction=1.0) {
+      return fill(typename YAO::FillType{x,y,z,zPlus}, weight, fraction);
     }
 
     /// Empty the subevent stack (for start of new event group).
@@ -134,184 +524,336 @@ namespace Rivet {
   };
 
 
-  /// TupleWrapper specialisation for Profile1D
-  template <>
-  class TupleWrapper<YODA::Profile1D> : public YODA::Profile1D {
+  /// FillCollector specialisation for ScatterND
+  template <size_t N>
+  class FillCollector<YODA::ScatterND<N>> : public YODA::ScatterND<N> {
   public:
 
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Profile1D>> Ptr;
+    using YAO = YODA::ScatterND<N>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
 
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Profile1D& h) : YODA::Profile1D(h) {}
+    FillCollector() : YAO() { }
 
-    /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
+    /// Constructor
     ///
-    /// @todo Do we need to deal with users using fractions directly?
-    int fill(const double x, const double y, const double weight=1.0, const double fraction=1.0 ) {
-      (void)fraction; // suppress unused variable warning
-      _fills.insert( { YODA::Profile1D::FillType{x,y}, weight } );
-      if (YODA::containsNan(YODA::Profile1D::FillType{x,y})) {
-        return -1;
-      }
-      const std::tuple<double> coords{x};
-      const size_t binIdx = YODA::Profile1D::_binning.globalBinIndex(coords);
-      return int(binIdx);
-    }
-
-    /// Empty the subevent stack (for start of new event group).
-    void reset() noexcept { _fills.clear(); }
-
-    /// Access the fill info subevent stack.
-    const Fills<YODA::Profile1D>& fills() const { return _fills; }
-
-  private:
-
-    Fills<YODA::Profile1D> _fills;
-
-  };
-
-
-  /// TupleWrapper specialisation for Histo2D
-  template <>
-  class TupleWrapper<YODA::Histo2D> : public YODA::Histo2D {
-  public:
-
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Histo2D>> Ptr;
-
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Histo2D& h) : YODA::Histo2D(h) {}
-
-    /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
-    ///
-    /// @todo Do we need to deal with users using fractions directly?
-    int fill(const double x, const double y, const double weight=1.0, const double fraction=1.0 ) {
-      (void)fraction; // suppress unused variable warning
-      _fills.insert( { YODA::Histo2D::FillType{x,y}, weight } );
-      if (YODA::containsNan(YODA::Histo2D::FillType{x,y})) {
-        return -1;
-      }
-      const size_t binIdx = YODA::Histo2D::_binning.globalBinIndex(YODA::Histo2D::FillType{x,y});
-      return int(binIdx);
-    }
-
-    /// Empty the subevent stack (for start of new event group).
-    void reset() noexcept { _fills.clear(); }
-
-    /// Access the fill info subevent stack.
-    const Fills<YODA::Histo2D>& fills() const { return _fills; }
-
-  private:
-
-    Fills<YODA::Histo2D> _fills;
-
-  };
-
-
-  /// TupleWrapper specialisation for Profile2D
-  template <>
-  class TupleWrapper<YODA::Profile2D> : public YODA::Profile2D {
-  public:
-
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Profile2D>> Ptr;
-
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Profile2D& h) : YODA::Profile2D(h) {}
-
-    /// Overloaded fill method, which stores subevent fill info until Wrapper<T>::pushToPersistent() is called.
-    ///
-    /// @todo Do we need to deal with users using fractions directly?
-    int fill(const double x, const double y, const double z, const double weight=1.0, const double fraction=1.0 ) {
-      (void)fraction; // suppress unused variable warning
-      _fills.insert( { YODA::Profile2D::FillType{x,y,z}, weight } );
-      if (YODA::containsNan(YODA::Profile2D::FillType{x,y,z})) {
-        return -1;
-      }
-      const std::tuple<double,double> coords{x,y};
-      const size_t binIdx = YODA::Profile2D::_binning.globalBinIndex(coords);
-      return int(binIdx);
-    }
-
-    /// Empty the subevent stack (for start of new event group).
-    void reset() noexcept { _fills.clear(); }
-
-    /// Access the fill info subevent stack.
-    const Fills<YODA::Profile2D>& fills() const { return _fills; }
-
-  private:
-
-    Fills<YODA::Profile2D> _fills;
-
-  };
-
-
-  /// TupleWrapper specialisation for Scatter1D
-  template <>
-  class TupleWrapper<YODA::Scatter1D> : public YODA::Scatter1D {
-  public:
-
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Scatter1D>> Ptr;
-
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Scatter1D& h) : YODA::Scatter1D(h) {}
-
-  };
-
-
-  /// TupleWrapper specialisation for Scatter2D
-  template <>
-  class TupleWrapper<YODA::Scatter2D> : public YODA::Scatter2D {
-  public:
-
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Scatter2D>> Ptr;
-
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Scatter2D& h) : YODA::Scatter2D(h) {}
-
-  };
-
-
-  /// TupleWrapper specialisation for Scatter3D
-  template <>
-  class TupleWrapper<YODA::Scatter3D> : public YODA::Scatter3D {
-  public:
-
-    /// @todo Can we remove this, now that we're not relying on the AO type having a Ptr property?
-    typedef shared_ptr<TupleWrapper<YODA::Scatter3D>> Ptr;
-
-    /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
-    TupleWrapper(const YODA::Scatter3D& h) : YODA::Scatter3D(h) {}
+    /// The Scatter isn't actually needed here:
+    /// We call the YAO nullary constructor for
+    /// performance reasons but still require
+    /// the pointer argument to harmonise the
+    /// FillCollector constructors.
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->path()) { }
 
   };
 
   /// @}
 
+  /// Anonymous namespace to limit visibility
+  namespace {
+
+    using namespace std;
+
+    template<typename... Args>
+    double distance(const tuple<Args...>& a, const tuple<Args...>& b) {
+      double rtn = 0;
+      auto calculateDistance = [&](auto I) {
+        if constexpr (std::is_floating_point<std::tuple_element_t<I,
+                                             std::tuple<Args...>>>::value) {
+          rtn += Rivet::sqr(get<I>(a) - get<I>(b));
+        }
+      };
+      MetaUtils::staticFor<sizeof...(Args)>(calculateDistance);
+      return rtn;
+    }
+
+    /// The argument @a evgroup is a vector of sub-events.
+    /// Each sub-event contains a FillCollection (where each
+    /// Fill is a pair of fill coordinate and weight fraction).
+    ///
+    /// Returns a transposed vector of fills with aligned sub-events,
+    /// potentially padded with empty fills to ensure equal sizes.
+    template <typename T>
+    vector<Fills<T>> applyEmptyFillPaddingAndTranspose(const vector<typename FillCollector<T>::Ptr>& subevents) {
+
+      static Fill<T> EmptyFill = { typename T::FillType{}, 0.0 };
+
+      vector<Fills<T>> matched;
+      matched.reserve(subevents.size());
+      // First just copy subevents into vectors and find the longest vector.
+      size_t maxFillLen = 0; // length of biggest vector
+      size_t maxFillPos = 0; // index position of biggest vector
+      for (const auto& subevt : subevents) {
+        auto&& fills = subevt->fills();
+        if (fills.size() > maxFillLen) {
+          maxFillLen = fills.size();
+          maxFillPos = matched.size();
+        }
+        matched.push_back(std::move(fills));
+      }
+
+      // Now, go through all subevents with missing fills.
+      const Fills<T>& maxFill = matched[maxFillPos]; // the longest fill
+      for (auto& fills : matched) {
+
+        if (fills.size() == maxFillLen)  continue;
+
+        /// Add empty-fill padding, such that
+        /// every element has the same length
+        while (fills.size() < maxFillLen) {
+          fills.push_back(EmptyFill);
+        }
+
+        /// Iterate from the back and shift all fill values
+        /// backwards by swapping with empty fills so that
+        /// they better match the full subevent.
+        for (int i = maxFillLen - 1; i >= 0; --i) {
+          if (fills[i] == EmptyFill)  continue;
+          int j = i;
+          while (j+1 < (int)maxFillLen &&
+                 fills[j + 1] == EmptyFill &&
+                 distance(fills[j].first,
+                          maxFill[j].first) >
+                 distance(fills[j].first,
+                          maxFill[j+1].first)) {
+            swap(fills[j], fills[j+1]);
+            ++j;
+          }
+        }
+      }
+      // finally, transpose and we're done
+      vector<Fills<T>> result(maxFillLen, Fills<T>(matched.size()));
+      for (size_t i = 0; i < matched.size(); ++i) {
+        for (size_t j = 0; j < maxFillLen; ++j) {
+          result.at(j).at(i) = std::move(matched.at(i).at(j));
+        }
+      }
+      return result;
+    }
+
+    /// Helper struct to extract a YODA::Binning type
+    /// corresponding to the axis types of the fill tuple
+    template<typename T>
+    struct SubwindowType;
+    //
+    template<typename... Args>
+    struct SubwindowType<tuple<Args...>> {
+      using type = YODA::Binning<std::decay_t<decltype(std::declval<YODA::Axis<Args>>())>...>;
+    };
+
+    /// Windowing with (optional) smearing of bin edges
+    ///
+    /// The logic here follows Appendix A of the Rivet 3 paper
+    /// but generalised to N dimensions: First, construct windows
+    /// around the fill coordinates, then create a YODA::Binning
+    /// object where each subwindow is represented as a bin to
+    /// allow looping over all subwindows (i.e. bins) in ND.
+    template<typename YAO>
+    vector<std::tuple<typename YAO::FillType, valarray<double>, double>>
+    applyFillWindows(shared_ptr<YAO> ao, const Fills<YAO>& subevents,
+                     const vector<valarray<double>>& weights, const double fsmear=0.5) {
 
 
+      using SubwindowT = typename SubwindowType<typename YAO::FillType>::type;
+      SubwindowT subwindows;
+
+      const size_t nFills = subevents.size();
+      vector<vector<double>> edgesLo, edgesHi;
+      edgesLo.resize(YAO::FillDimension::value);
+      edgesHi.resize(YAO::FillDimension::value);
+
+      auto constructWindows = [&](auto I) {
+
+        using FillAxisT = typename SubwindowT::template getAxisT<I>;
+        using isContinuous = typename SubwindowT::template is_CAxis<I>;
+
+        if constexpr(!isContinuous::value) { // discrete axes don't need smearing
+          // use single edge axis for discrete coordinates
+          subwindows.template axis<I>() = FillAxisT({ std::get<I>(subevents[0].first) });
+          return;
+        }
+
+        // continupus axes need windowing
+        edgesHi[I].resize(nFills);
+        edgesLo[I].resize(nFills);
+
+        if constexpr(I < YAO::BinningT::Dimension::value) {
+          // this fill axis is binned: window sizes will depend on bin width
+          const auto& axis = ao->binning().template axis<I>();
+          size_t over = 0, under = 0;
+          const double edgeMax = ao->template max<I>();
+          const double edgeMin = ao->template min<I>();
+          const size_t binLast = axis.numBins(); // index of last visible bin
+
+          for (size_t i = 0; i < nFills; ++i) {
+            const double edge = get<I>(subevents[i].first);
+            size_t idx = axis.index(edge);
+            if (edge >= edgeMax) {
+              if (edge > edgeMax) ++over;
+              idx = binLast; // cut off at highest visible bin
+            }
+            else if (edge < edgeMin) {
+              ++under;
+              idx = 1; // cut off at lowest visible bin
+            }
+            // find index of closest neighbouring bin
+            size_t ibn = idx;
+            if (edge > axis.mid(idx)) {
+              if (idx != binLast) ++ibn;
+            }
+            else {
+              if (idx != 1) --ibn;
+            }
+
+            // construct rectangular windows of with = 2*delta
+            const double ibw = axis.width(idx) < axis.width(ibn)? idx : ibn;
+            if ( fsmear > 0.0 ) {
+              const double delta = 0.5*fsmear*axis.width(ibw);
+              edgesHi[I][i] = edge + delta;
+              edgesLo[I][i] = edge - delta;
+            }
+            else {
+              const double delta = 0.5*axis.width(ibw);
+              if (edge > edgeMax) {
+                edgesHi[I][i] = max(edgeMax + 2*delta, edge + delta);
+                edgesLo[I][i] = max(edgeMax, edge - delta);
+              }
+              else if (edge < edgeMin) {
+                edgesHi[I][i] = min(edgeMin, edge + delta);
+                edgesLo[I][i] = min(edgeMin - 2*delta, edge - delta);
+              }
+              else {
+                edgesHi[I][i] = axis.max(idx);
+                edgesLo[I][i] = axis.min(idx);
+              }
+            }
+          }
+          for (size_t i = 0; i < nFills; ++i) {
+            const double wsize = edgesHi[I][i] - edgesLo[I][i];
+            if (over == nFills && edgesLo[I][i] < edgeMax && edgesHi[I][i] > edgeMax) {
+              edgesHi[I][i] = edgeMax + wsize;
+              edgesLo[I][i] = edgeMax;
+            }
+            else if (over == 0 && edgesLo[I][i] < edgeMax && edgesHi[I][i] > edgeMax) {
+              edgesLo[I][i] = edgeMax - wsize;
+              edgesHi[I][i] = edgeMax;
+            }
+            else if (under == nFills && edgesLo[I][i] < edgeMin && edgesHi[I][i] > edgeMin) {
+              edgesLo[I][i] = edgeMin - wsize;
+              edgesHi[I][i] = edgeMin;
+            }
+            else if (under == 0 && edgesLo[I][i] < edgeMin && edgesHi[I][i] > edgeMin) {
+              edgesHi[I][i] = edgeMin + wsize;
+              edgesLo[I][i] = edgeMin;
+            }
+          }
+        } // end of constexpr-check for binned axes
+        else {
+          // this fill axis is unbinned (e.g. in Profiles)
+          for (size_t i = 0; i < nFills; ++i) {
+            // What's a good reference for the window size along
+            // an unbinned axes? Picking 20% of the FP edge as
+            // the window size here - is that reasonable?
+            // @note No smearing needed here since
+            // there are no bin edges along this axes
+            const double edge = get<I>(subevents[i].first);
+            const double delta = 0.1*fabs(edge);
+            edgesHi[I][i] = edge + delta;
+            edgesLo[I][i] = edge - delta;
+          }
+        }
+        // create CAxis with subwindows from the set of window edges
+        vector<double> windowEdges;
+        std::copy(edgesLo[I].begin(), edgesLo[I].end(), std::back_inserter(windowEdges));
+        std::copy(edgesHi[I].begin(), edgesHi[I].end(), std::back_inserter(windowEdges));
+        std::sort(windowEdges.begin(), windowEdges.end());
+        windowEdges.erase( std::unique(windowEdges.begin(), windowEdges.end()), windowEdges.end() );
+        subwindows.template axis<I>() = FillAxisT(windowEdges);
+      };
+      // execute for each fill dimension
+      MetaUtils::staticFor<YAO::FillDimension::value>(constructWindows);
+
+      // Placeholder for the return type: a tuple of {FillType, multi-weights, fill fraction}
+      vector<std::tuple<typename YAO::FillType, valarray<double>, double>> rtn;
+
+      // Subwindows are given by visible bins of the
+      // SubwindowT, so skip all under-/overflows
+      const vector<size_t> overflows = subwindows.calcOverflowBinsIndices();
+      const auto& itEnd = overflows.cend();
+      for (size_t i = 0; i < subwindows.numBins(); ++i) {
+        if (std::find(overflows.cbegin(), itEnd, i) != itEnd)  continue;
+
+        const auto coords = subwindows.edgeTuple(i);
+        const double subwindowArea = subwindows.area(i);
+        size_t nSubfills = 0;
+        double windowFrac = 0.;
+        valarray<double> sumw(0.0, weights[0].size()); // one per multiweight
+        for (size_t j = 0; j < nFills; ++j) {
+          bool pass = true;
+          double windowArea = 1.0;
+          auto checkSubwindowOverlap = [&](auto I) {
+           using isContinuous = typename SubwindowT::template is_CAxis<I>;
+            if (isContinuous::value) {
+              const double edge = std::get<I>(coords);
+              pass &= (edgesLo[I][j] <= edge && edge <= edgesHi[I][j]);
+              windowArea *= edgesHi[I][j] - edgesLo[I][j];
+            }
+          };
+          MetaUtils::staticFor<YAO::FillDimension::value>(checkSubwindowOverlap);
+          if (pass) {
+            windowFrac = subwindowArea/windowArea;
+            sumw += subevents[j].second * weights[j];
+            ++nSubfills;
+          }
+        }
+        if (nSubfills) {
+          const double fillFrac = (double)nSubfills/(double)nFills;
+          rtn.emplace_back(coords, sumw/fillFrac, fillFrac*windowFrac); // normalise to a single fill
+        }
+      }
+      return rtn;
+    } // end of applyFillWindows
+
+  } // end of anonymous name space
 
 
-  /// @brief Abstract interface to a set of YODA AnalysisObjects.
+  /// @name Multiplexing wrappers
+  /// @{
+
+  /// @brief Multiplexer base class
   ///
-  /// This layer of interface is separated from the next to allow unweighted handling of
-  /// Scatter objects... but do we want that? Revisit when Scatters -> Binned<Meas> and
-  /// the live/dead finalize() treatment is ready to go.
+  /// Abstract interface to a set of YODA AOs corresponding
+  /// to multiple weight-streams, with subevent handling.
   ///
-  /// @todo RENAME TO SOMETHING BETTER! This is an e.g. MultiweightAOWrapper.
-  ///
-  /// @note This interface is not used anywhere other than in this file: eliminate/merge?
-  class AnalysisObjectWrapper {
+  /// @note This abstraction is useful for looping over
+  /// generic multiplexed AOs e.g. in the AnalysisHandler.
+  class MultiplexedAO {
   public:
 
-    virtual ~AnalysisObjectWrapper() {}
+    virtual ~MultiplexedAO() { }
+
+    /// The type being represented is a generic AO.
+    using Inner = YODA::AnalysisObject;
+
+    /// Add a new layer of subevent fill staging.
+    virtual void newSubEvent() = 0;
+
+    /// Sync the fill proxies to the persistent histogram.
+    virtual void pushToPersistent(const vector<std::valarray<double>>& weight, const double nlowfrac=0.0) = 0;
+
+    /// Sync the persistent histograms to the final collection.
+    virtual void pushToFinal() = 0;
+
+    /// A shared pointer to the active YODA AO.
+    virtual YODA::AnalysisObjectPtr activeAO() const = 0;
+
+    /// The histogram path, without a variation suffix.
+    virtual string basePath() const = 0;
 
     /// Access the active analysis object for function calls.
     virtual YODA::AnalysisObject* operator -> () = 0;
+
     /// Access the active analysis object for const function calls.
     virtual YODA::AnalysisObject* operator -> () const = 0;
+
     /// Access the active analysis object as a reference.
     virtual const YODA::AnalysisObject& operator * () const = 0;
 
@@ -322,163 +864,78 @@ namespace Rivet {
     virtual void setActiveFinalWeightIdx(size_t iWeight) = 0;
 
     /// Unset the active-object pointer.
-    ///
-    /// @note This is for development only: we shouldn't need this in real runs.
     virtual void unsetActiveWeight() = 0;
 
     /// Test for equality.
-    bool operator == (const AnalysisObjectWrapper& p) { return (this == &p); }
+    bool operator == (const MultiplexedAO& p) { return (this == &p); }
+
     /// Test for inequality.
-    bool operator != (const AnalysisObjectWrapper& p) { return (this != &p); }
+    bool operator != (const MultiplexedAO& p) { return (this != &p); }
 
   };
 
 
 
-  /// @todo
-  /// implement scatter1dptr and scatter2dptr here
-  /// these need to be multi-weighted eventually.
-  /*
-    class Scatter1DPtr : public AnalysisObjectPtr {
-    public:
-    Scatter1DPtr() : _persistent() { }
-
-    Scatter1DPtr(size_t len_of_weightvec, const YODA::Scatter1D& p) {
-    for (size_t m = 0; m < len_of_weightvec; ++m)
-    _persistent.push_back(make_shared<YODA::Scatter1D>(p));
-    }
-
-    bool operator!() const { return !_persistent; }
-    explicit operator bool() const { return bool(_persistent); }
-
-    YODA::Scatter1D* operator->() { return _persistent.get(); }
-
-    YODA::Scatter1D* operator->() const { return _persistent.get(); }
-
-    YODA::Scatter1D & operator*() { return *_persistent; }
-
-    const YODA::Scatter1D & operator*() const { return *_persistent; }
-
-    protected:
-    vector<YODA::Scatter1DPtr> _persistent;
-    };
-
-    class Scatter2DPtr : public AnalysisObjectPtr {
-    public:
-    Scatter2DPtr(size_t len_of_weightvec, const YODA::Scatter2D& p) {
-    for (size_t m = 0; m < len_of_weightvec; ++m)
-    _persistent.push_back(make_shared<YODA::Scatter2D>(p));
-    }
-
-    Scatter2DPtr() : _persistent() { }
-
-    bool operator!() { return !_persistent; }
-    explicit operator bool() { return bool(_persistent); }
-
-    YODA::Scatter2D* operator->() { return _persistent.get(); }
-
-    YODA::Scatter2D* operator->() const { return _persistent.get(); }
-
-    YODA::Scatter2D & operator*() { return *_persistent; }
-
-    const YODA::Scatter2D & operator*() const { return *_persistent; }
-
-    protected:
-    vector<YODA::Scatter2DPtr> _persistent;
-    };
-
-    class Scatter3DPtr : public AnalysisObjectPtr {
-    public:
-    Scatter3DPtr(size_t len_of_weightvec, const YODA::Scatter3D& p) {
-    for (size_t m = 0; m < len_of_weightvec; ++m)
-    _persistent.push_back(make_shared<YODA::Scatter3D>(p));
-    }
-
-    Scatter3DPtr() : _persistent() { }
-
-    bool operator!() { return !_persistent; }
-    explicit operator bool() { return bool(_persistent); }
-
-    YODA::Scatter3D* operator->() { return _persistent.get(); }
-
-    YODA::Scatter3D* operator->() const { return _persistent.get(); }
-
-    YODA::Scatter3D & operator*() { return *_persistent; }
-
-    const YODA::Scatter3D & operator*() const { return *_persistent; }
-
-    protected:
-    vector<YODA::Scatter3DPtr> _persistent;
-    };
-  */
-
-
-  /// Extended abstract interface to a set of YODA AOs corresponding to multiple weight-streams, with subevent handling.
+  /// @brief Type-specific multiplexed YODA analysis object.
   ///
-  /// @todo RENAME TO SOMETHING BETTER! This really adds the subevent proxying, so e.g. SubEventAOWrapper or MultiEventAOWrapper
+  /// Specialisations of this class (to each type of YODA object)
+  /// are effectively the user-facing types in Rivet analyses,
+  /// modulo a further wrapping via the MultplexAOPtr (which is
+  /// a customised std::shared_pointer around the Multiplexer).
   ///
-  /// @note This interface is not used anywhere other than in this file: eliminate/merge?
-  class MultiweightAOWrapper : public AnalysisObjectWrapper {
-  public:
-
-    /// The type being represented is a generic AO.
-    using Inner = YODA::AnalysisObject;
-
-    /// Add a new layer of subevent fill staging.
-    virtual void newSubEvent() = 0;
-
-    /// Sync the fill proxies to the persistent histogram.
-    virtual void pushToPersistent(const vector<std::valarray<double> >& weight, double nlowfrac=0.0) = 0;
-
-    /// Sync the persistent histograms to the final collection.
-    virtual void pushToFinal() = 0;
-
-    /// @todo Rename to active()?
-    virtual YODA::AnalysisObjectPtr activeYODAPtr() const = 0;
-
-    /// The histogram path, without a variation suffix.
-    virtual string basePath() const = 0;
-
-  };
-
-
-
-  /// Type-specific multi-weight YODA analysis object wrapper.
+  /// Multiplexers instantiate one AO for each of the multiweights
+  /// (x2 for pre- and post-finalize copies). They can expose either
+  /// FillCollector<T> or T active pointers, for the analyze() and
+  /// finalize() steps, respectively.
   ///
-  /// Specialisations of this (to each type of YODA object) are effectively the
-  /// user-facing types in Rivet analyses, modulo a further wrapping via
-  /// the Rivet shared-pointer type. They can expose either TupleWrapper<T>
-  /// or T active pointers, for the analyze() and finalize() steps respectively.
-  ///
-  /// @todo RENAME TO SOMETHING BETTER: Wrapper<T> is far too generic. Even
-  /// AnalysisObjectWrapper (with renamed base classes) would be a better
-  /// user-facing choice.
-  ///
-  /// @todo Some things are not really well-defined here. For instance: fill()
-  /// in the finalize() method and integral() in the analyze() method.
-  template <class T>
-  class Wrapper : public MultiweightAOWrapper {
+  /// @todo Some things are not really well-defined here.
+  /// For instance: fill() in the finalize() method and
+  /// integral() in the analyze() method. Should we throw?
+  template<typename T>
+  class Multiplexer : public MultiplexedAO {
+
   public:
 
     friend class Analysis;
-    friend class AnalysisHandler;
+    //friend class AnalysisHandler;
 
     /// Typedef for the YODA type being represented
     using Inner = T;
-    /// Typedef for a polymorphic pointer to T
-    /// @note Used either to point to a real T, or a TupleWrapper<T> derived class
-    using TPtr = shared_ptr<T>;
 
+    Multiplexer() = default;
 
-    Wrapper() = default;
+    Multiplexer(const vector<string>& weightNames, const T& p) {
+      _basePath = p.path();
+      _baseName = p.name();
+      for (const string& weightname : weightNames) {
+        _persistent.push_back(make_shared<T>(p));
+        _final.push_back(make_shared<T>(p));
 
-    Wrapper(const vector<string>& weightnames, const T& p);
+        typename T::Ptr obj = _persistent.back();
+        obj->setPath("/RAW" + obj->path());
+        typename T::Ptr final = _final.back();
+        if (weightname != "") {
+          obj->setPath(obj->path() + "[" + weightname + "]");
+          final->setPath(final->path() + "[" + weightname + "]");
+        }
+      }
+    }
 
-    ~Wrapper();
+    ~Multiplexer() = default;
 
-
-    /// Get the current active analysis object (may be either persistent or final, depending on stage)
-    shared_ptr<T> active() const;
+    /// Get the current active analysis object
+    /// (may be either persistent or final, depending on stage)
+    typename T::Ptr active() const {
+      if ( !_active ) {
+        #ifdef HAVE_BACKTRACE
+        void* buffer[4];
+        backtrace(buffer, 4);
+        backtrace_symbols_fd(buffer, 4 , 1);
+        #endif
+        assert(false && "No active pointer set. Was this object booked in init()?");
+      }
+      return _active;
+    }
 
     /// Get the AO path of the object, without variation suffix
     string basePath() const { return _basePath; }
@@ -488,10 +945,14 @@ namespace Rivet {
 
 
     /// Test for object validity.
-    explicit operator bool() const { return static_cast<bool>(_active); } // Don't use active() here, assert will catch
+    ///
+    /// @note Don't use active() here: assert will catch.
+    explicit operator bool() const { return static_cast<bool>(_active); }
 
     /// Test for object invalidity.
-    bool operator ! () const { return !_active; } // Don't use active() here, assert will catch
+    ///
+    /// @note Don't use active() here: assert will catch.
+    bool operator ! () const { return !_active; }
 
 
     /// Forwarding dereference-call operator.
@@ -508,12 +969,12 @@ namespace Rivet {
 
 
     /// Equality operator
-    /// @todo These probably need to loop over all? Do we even want to provide equality? How about... no
-    friend bool operator == (Wrapper a, Wrapper b){
-      if (a._persistent.size() != b._persistent.size())
+    friend bool operator == (const Multiplexer& a, const Multiplexer& b){
+      if (a._persistent.size() != b._persistent.size()) {
         return false;
-
-      for (size_t i = 0; i < a._persistent.size(); i++) {
+      }
+      // also test for binning compatibility
+      for (size_t i = 0; i < a._persistent.size(); ++i) {
         if (a._persistent.at(i) != b._persistent.at(i)) {
           return false;
         }
@@ -522,15 +983,16 @@ namespace Rivet {
     }
 
     /// Inequality operator
-    friend bool operator != (Wrapper a, Wrapper b) {
+    friend bool operator != (const Multiplexer& a, const Multiplexer& b) {
       return !(a == b);
     }
 
     /// Less-than operator
-    friend bool operator < (Wrapper a, Wrapper b) {
-      if (a._persistent.size() >= b._persistent.size())
+    friend bool operator < (const Multiplexer a, const Multiplexer& b) {
+      if (a._persistent.size() >= b._persistent.size()) {
         return false;
-      for (size_t i = 0; i < a._persistent.size(); i++) {
+      }
+      for (size_t i = 0; i < a._persistent.size(); ++i) {
         if (*(a._persistent.at(i)) >= *(b._persistent.at(i))) {
           return false;
         }
@@ -539,31 +1001,9 @@ namespace Rivet {
     }
 
 
-    /// Direct access to the YODA type in weight stream @a iWeight
-    ///
-    /// @note This is naturally a private member accessible only to , but is exposed publicly to
-    /// allow analyses that explicitly study weight distributions,
-    /// e.g. MC_WEIGHTS. The "private style" leading underscore in the name
-    /// highlights that this should not normally be called by users.
-    ///
-    /// @todo Rename to minimize the clash with persistent()... or just expose persistent() instead?
-    T* _getPersistent(size_t iWeight) { return _persistent.at(iWeight).get(); }
+    /// @}
 
-
-
-  private:
-
-    /// @name Restricted-access methods
-    ///
-    /// These methods are accessible via the base classes, in which they are
-    /// public, but they cannot be called directly on a Wrapper<T> object except
-    /// by the friend classes Analysis (but not its children) and AnalysisHandler.
-    ///
-    /// @todo Review this design: it's counterintuitive and hard to maintain:
-    /// how crucial is it to hide these functions from analysis authors? Can we
-    /// just make them public and remove the friend stuff, then be able to use
-    /// the access control properly for *really* private things?
-    ///
+    /// @name Access methods
     /// @{
 
     /// Set the active-object pointer to point at a variation in the persistent set
@@ -583,149 +1023,236 @@ namespace Rivet {
     void reset() { active()->reset(); }
 
 
-    /// @brief Create new object analysis-object wrappers for this sub-event
+    /// @brief Create a new FillCollector for the next sub-event.
     ///
-    /// Called every sub-event by AnalysisHandler::analyze() before dispatch to Analysis::analyze().
-    /// The fill values will be redistributed over variations by pushToPersistent().
-    void newSubEvent();
+    /// Called every sub-event by AnalysisHandler::analyze() before
+    /// dispatch to Analysis::analyze(). The fill values will be
+    /// redistributed over variations by pushToPersistent().
+    void newSubEvent() {
+      _evgroup.emplace_back(new FillCollector<T>(_persistent[0]));
+      _active = _evgroup.back();
+      assert(_active);
+    }
 
-    /// Collapse the _evgroup set of tuple wrappers into fills of the persistent objects, using fractional fills if there are subevents
-    void pushToPersistent(const vector<std::valarray<double> >& weight, double nlowfrac=0.0);
+    /// Pushes the (possibly collapsed) fill(s) into the persistent objects
+    void pushToPersistent(const vector<std::valarray<double>>& weights, const double nlowfrac=0.0) {
 
-    /// Copy all variations from the "live" persistent set to the final collection used by Analysis::finalize()
-    void pushToFinal();
+      // @todo If we don't multiplex (Binned)Estimates, perhaps we can get rid of this protection?
+      if constexpr( isFillable<T>::value ) {
 
+        // Should have as many subevent fills as subevent weights
+        assert( _evgroup.size() == weights.size() );
 
-    /// Get the set of persistent (i.e. after whole event groups) live objects, as used by Analysis::analyze()
-    const vector<shared_ptr<T>>& persistent() const { return _persistent; }
+        if (_evgroup.size() == 1) { // Have we had subevents at all?
+          // Simple replay of all collected fills:
+          // each fill is inserted into every persistent AO
+          for (auto f : _evgroup[0]->fills()) {
+            for (size_t m = 0; m < _persistent.size(); ++m) { //< m is the variation index
+              _persistent[m]->fill( std::move(f.first), std::move(f.second) * weights[0][m] );
+            }
+          }
+        }
+        else {
+          collapseSubevents(weights, nlowfrac);
+        }
+      }
 
-    /// Get the set of final analysis objects, as used by Analysis::finalize() and written out
-    const vector<shared_ptr<T>>& final() const { return _final; }
+      _evgroup.clear();
+      _active.reset();
+    }
 
-    /// Get the currently active (tuple wrapper on) analysis object
-    virtual YODA::AnalysisObjectPtr activeYODAPtr() const { return _active; }
+    /// Collapse the set of FillCollectors (i.e. _evgroup)
+    /// into combined fills of the persistent objects,
+    /// using fractional fills if there are subevents
+    void collapseSubevents(const vector<std::valarray<double>>& weights, const double nlowfrac) {
+      if constexpr( isFillable<T>::value ) {
+        if constexpr (!std::is_same<T, YODA::Counter>::value ) { // binned objects
+          // The number of fills could be different between sub-events,
+          // in which case we will first add a padding of "empty" fills.
+          // We also take the transpose of subevents vs fills.
+          // @todo Do we really need the transposing??
+          for (const Fills<T>& subEvents : applyEmptyFillPaddingAndTranspose<T>(_evgroup)) {
+            // construct fill windows with fractional fills
+            for (const auto& f : applyFillWindows(_persistent[0], subEvents, weights, nlowfrac)) {
+              for ( size_t m = 0; m < _persistent.size(); ++m ) { // for each multiweight
+                _persistent[m]->fill( typename T::FillType(get<0>(f)), get<1>(f)[m], get<2>(f) );
+              }
+            } // end of loop over fill windows
+          } // end of loop over subevents
+        }
+        else {
+          for (size_t m = 0; m < _persistent.size(); ++m) { //< m is the variation index
+            vector<double> sumfw{0.0}; // final fill weights (one per fill)
+            for (size_t n = 0; n < _evgroup.size(); ++n) { //< n is the correlated sub-event index
+              const auto& fills = _evgroup[n]->fills();
+              // resize if this subevent has an
+              // even larger number of fills
+              if (fills.size() > sumfw.size()) {
+                sumfw.resize(fills.size(), 0.0);
+              }
+              size_t fi = 0;
+              for (const auto& f : fills) { // collapse sub-events and aggregate final fill weights
+                sumfw[fi++] += f.second * weights[n][m]; // f.second is optional user-supplied scaling
+              }
+            }
+            for (double fw : sumfw) { // fill persistent Counters
+              _persistent[m]->fill(std::move(fw));
+            }
+          }
+        }
+      }
+    }
 
-    /// @todo Do we need an implicit cast?
-    // operator typename TPtr () { return _active; }
+    /// Copy all variations from the "live" persistent set
+    /// to the final collection used by Analysis::finalize()
+    void pushToFinal() {
+      for ( size_t m = 0; m < _persistent.size(); ++m ) { //< variation weight index
+        _final.at(m)->clearAnnotations(); // in case this is a repeat call
+        copyAO(_persistent.at(m), _final.at(m));
+        // Remove the /RAW prefix, if there is one, from the final copy
+        if ( _final[m]->path().substr(0,4) == "/RAW" )
+          _final[m]->setPath(_final[m]->path().substr(4));
+      }
+    }
+
+    /// Get the set of persistent (i.e. after whole event groups)
+    /// live objects, as used by Analysis::analyze().
+    const vector<typename T::Ptr>& persistent() const {
+      return _persistent;
+    }
+
+    /// Direct access to the persistent object in weight stream @a iWeight
+    typename T::Ptr persistent(const size_t iWeight) { return _persistent.at(iWeight); }
+
+    /// Get the set of final analysis objects, as used
+    /// by Analysis::finalize() and written out
+    const vector<typename T::Ptr>& final() const {
+      return _final;
+    }
+
+    /// Direct access to the finalized object in weight stream @a iWeight
+    typename T::Ptr final(const size_t iWeight) { return _final.at(iWeight); }
+
+    /// Get the currently active analysis object
+    YODA::AnalysisObjectPtr activeAO() const { return _active; }
 
     /// @}
 
+  private:
 
     /// @name Data members
     /// @{
 
     /// M of these, one for each weight
-    vector<shared_ptr<T>> _persistent;
+    vector<typename T::Ptr> _persistent;
 
     /// The copy of M-entry _persistent that will be passed to finalize().
-    vector<shared_ptr<T>> _final;
+    vector<typename T::Ptr> _final;
 
-    /// A set of M subevent-wrappers, one for each weight, each containing one entry for each of the N events in evgroup.
-    vector<shared_ptr<TupleWrapper<T>>> _evgroup;
+    /// A vector of FillCollectors, one for each subevent
+    vector<typename FillCollector<T>::Ptr> _evgroup;
 
-    /// The currently active AO (or AO proxy).
-    shared_ptr<T> _active;
+    /// The currently active FillCollector (if in analyze)
+    /// or AO (if in finalize).
+    typename T::Ptr _active;
 
-    /// The base AO path of this object, without any variation suffix.
+    /// The base AO path of this object,
+    /// without weight-variation suffix.
     string _basePath;
 
-    /// The base AO name, without any variation suffix.
+    /// The base AO name, without
+    /// any weight variation suffix.
     string _baseName;
+
+    /// @}
 
   };
 
 
-
-  /// Shared-pointer type for multi-weighted Rivet AOs, dispatching through two layers of indirection.
+  /// Customised shared pointer of multiplexed AOs,
+  /// dispatching through two layers of indirection.
   ///
-  /// We need our own shared_ptr class, so we can dispatch -> and *
-  /// all the way down to the inner YODA analysis objects
+  /// The customisation is needed in order to dispatch
+  /// -> and * operators all the way down to the inner
+  /// YODA analysis objects.
   ///
   /// @todo Provide remaining functionality that shared_ptr has (not needed right now).
-  ///
-  /// @todo RENAME TO SOMETHING BETTER! This naming is too generic, and the
-  /// "rivet" is redundant: we need something like ao_shared_ptr or AOWrapPtr.
   template <typename T>
-  class rivet_shared_ptr {
+  class MultiplexPtr {
+
   public:
-    typedef T value_type;
 
-    rivet_shared_ptr() = default;
+    using value_type = T;
 
-    rivet_shared_ptr(decltype(nullptr)) : _p(nullptr) {}
+    MultiplexPtr() = default;
 
-    /// Convenience constructor, pass through to the Wrapper constructor
-    rivet_shared_ptr(const vector<string>& weightNames, const typename T::Inner& p)
-      : _p( make_shared<T>(weightNames, p) )
-    {}
+    MultiplexPtr(decltype(nullptr)) : _p(nullptr) { }
 
-    /// @todo Use SFINAE to require T<-U? Why not require rvalue == T?
-    template <typename U>
-    rivet_shared_ptr(const shared_ptr<U>& p)
-      : _p(p)
-    {}
+    /// Convenience constructor, pass through to the Multiplexer constructor
+    MultiplexPtr(const vector<string>& weightNames, const typename T::Inner& p)
+      : _p( make_shared<T>(weightNames, p) ) { }
 
-    /// @todo Use SFINAE to require T<-U? Why not require rvalue == T?
-    template <typename U>
-    rivet_shared_ptr(const rivet_shared_ptr<U>& p)
-      : _p(p.get())
-    {}
+    // Ensure a shared_ptr<T> can be instantiated from a shared_ptr<U>
+    template <typename U, typename = decltype(shared_ptr<T>(shared_ptr<U>{}))>
+    MultiplexPtr(const shared_ptr<U>& p) : _p(p) { }
 
-    /// Goes right through to the active Wrapper<YODA> object's members
+    // Ensure a shared_ptr<T> can be instantiated from a shared_ptr<U>
+    template <typename U, typename = decltype(shared_ptr<T>(shared_ptr<U>{}))>
+    MultiplexPtr(const MultiplexPtr<U>& p) : _p(p.get()) { }
+
+    /// Goes right through to the active Multiplexer<YODA> object's members
     T& operator -> () {
-      if (_p == nullptr) throw Error("Dereferencing null AnalysisObject pointer. Is there an unbooked histogram variable?");
+      if (_p == nullptr) {
+        throw Error("Dereferencing null AnalysisObject pointer. Is there an unbooked histogram variable?");
+      }
       return *_p;
     }
 
-    /// Goes right through to the active Wrapper<YODA> object's members
-    const T& operator -> () const                {
-      if (_p == nullptr) throw Error("Dereferencing null AnalysisObject pointer. Is there an unbooked histogram variable?");
+    /// Goes right through to the active Multiplexer<YODA> object's members
+    const T& operator -> () const {
+      if (_p == nullptr) {
+        throw Error("Dereferencing null AnalysisObject pointer. Is there an unbooked histogram variable?");
+      }
       return *_p;
     }
 
     /// The active YODA object
-    typename T::Inner & operator * ()             { return **_p; }
-    const typename T::Inner & operator * () const { return **_p; }
+    typename T::Inner& operator * ()             { return **_p; }
+    const typename T::Inner& operator * () const { return **_p; }
 
     /// Object validity check.
-    explicit operator bool()  const { return _p && bool(*_p); }
+    explicit operator bool() const { return _p && bool(*_p); }
 
     /// Object invalidity check.
     bool operator ! () const { return !_p || !(*_p);   }
 
     /// Object validity check.
-    template <typename U>
-    bool operator == (const rivet_shared_ptr<U>& other) const {
+    bool operator == (const MultiplexPtr& other) const {
       return _p == other._p;
     }
 
     /// Object invalidity check.
-    template <typename U>
-    bool operator != (const rivet_shared_ptr<U>& other) const {
+    bool operator != (const MultiplexPtr& other) const {
       return _p != other._p;
     }
 
     /// Less-than for ptr ordering.
-    template <typename U>
-    bool operator < (const rivet_shared_ptr<U>& other) const {
+    bool operator < (const MultiplexPtr& other) const {
       return _p < other._p;
     }
 
     /// Greater-than for ptr ordering.
-    template <typename U>
-    bool operator > (const rivet_shared_ptr<U>& other) const {
+    bool operator > (const MultiplexPtr other) const {
       return _p > other._p;
     }
 
     /// Less-equals for ptr ordering.
-    template <typename U>
-    bool operator <= (const rivet_shared_ptr<U> & other) const {
+    bool operator <= (const MultiplexPtr& other) const {
       return _p <= other._p;
     }
 
     /// Greater-equals for ptr ordering.
-    template <typename U>
-    bool operator >= (const rivet_shared_ptr<U> & other) const {
+    bool operator >= (const MultiplexPtr& other) const {
       return _p >= other._p;
     }
 
@@ -739,41 +1266,56 @@ namespace Rivet {
 
   };
 
+  /// @}
 
-  /// @defgroup useraos User-facing analysis object wrappers
+
+  /// @name  User-facing analysis object Multiplexers
   ///
   /// @note Every object listed here needs a virtual fill() method in YODA,
-  /// otherwise the Tuple fakery won't work.
+  /// otherwise the FillCollector fakery won't work.
   ///
   /// @{
 
-  using MultiweightAOPtr = rivet_shared_ptr<MultiweightAOWrapper>;
+  using MultiplexAOPtr = MultiplexPtr<MultiplexedAO>;
 
-  using Histo1DPtr   = rivet_shared_ptr<Wrapper<YODA::Histo1D>>;
-  using Histo2DPtr   = rivet_shared_ptr<Wrapper<YODA::Histo2D>>;
-  using Profile1DPtr = rivet_shared_ptr<Wrapper<YODA::Profile1D>>;
-  using Profile2DPtr = rivet_shared_ptr<Wrapper<YODA::Profile2D>>;
-  using CounterPtr   = rivet_shared_ptr<Wrapper<YODA::Counter>>;
-  using Scatter1DPtr = rivet_shared_ptr<Wrapper<YODA::Scatter1D>>;
-  using Scatter2DPtr = rivet_shared_ptr<Wrapper<YODA::Scatter2D>>;
-  using Scatter3DPtr = rivet_shared_ptr<Wrapper<YODA::Scatter3D>>;
+  template<size_t DbnN, typename... AxisT>
+  using BinnedDbnPtr = MultiplexPtr<Multiplexer<YODA::BinnedDbn<DbnN, AxisT...>>>;
+
+  template<typename... AxisT>
+  using BinnedHistoPtr = BinnedDbnPtr<sizeof...(AxisT), AxisT...>;
+
+  template<typename... AxisT>
+  using BinnedProfilePtr = BinnedDbnPtr<sizeof...(AxisT)+1, AxisT...>;
+
+  template<size_t N>
+  using ScatterNDPtr = MultiplexPtr<Multiplexer<YODA::ScatterND<N>>>;
+
+  using CounterPtr   = MultiplexPtr<Multiplexer<YODA::Counter>>;
+  using Histo1DPtr   = BinnedHistoPtr<double>;
+  using Histo2DPtr   = BinnedHistoPtr<double,double>;
+  using Histo3DPtr   = BinnedHistoPtr<double,double,double>;
+  using Profile1DPtr = BinnedProfilePtr<double>;
+  using Profile2DPtr = BinnedProfilePtr<double,double>;
+  using Profile3DPtr = BinnedProfilePtr<double,double,double>;
+  using Scatter1DPtr = ScatterNDPtr<1>;
+  using Scatter2DPtr = ScatterNDPtr<2>;
+  using Scatter3DPtr = ScatterNDPtr<3>;
 
   using YODA::Counter;
   using YODA::Histo1D;
   using YODA::Histo2D;
+  using YODA::Histo3D;
   using YODA::Profile1D;
   using YODA::Profile2D;
+  using YODA::Profile3D;
   using YODA::Scatter1D;
-  using YODA::Point1D;
   using YODA::Scatter2D;
-  using YODA::Point2D;
   using YODA::Scatter3D;
+  using YODA::Point1D;
+  using YODA::Point2D;
   using YODA::Point3D;
 
   ///@}
-
-
-
 
 
   /// @defgroup aomanip Analysis object manipulation functions
@@ -790,66 +1332,23 @@ namespace Rivet {
 
 
   /// Traits class to access the type of the AnalysisObject in the reference files.
-  template<typename T> struct ReferenceTraits {};
-  template <> struct ReferenceTraits<Counter> { typedef Counter RefT; };
-  template <> struct ReferenceTraits<Scatter1D> { typedef Scatter1D RefT; };
-  template <> struct ReferenceTraits<Histo1D> { typedef Scatter2D RefT; };
-  template <> struct ReferenceTraits<Profile1D> { typedef Scatter2D RefT; };
-  template <> struct ReferenceTraits<Scatter2D> { typedef Scatter2D RefT; };
-  template <> struct ReferenceTraits<Histo2D> { typedef Scatter3D RefT; };
-  template <> struct ReferenceTraits<Profile2D> { typedef Scatter3D RefT; };
-  template <> struct ReferenceTraits<Scatter3D> { typedef Scatter3D RefT; };
+  template<typename T>
+  struct ReferenceTraits { };
 
-  /// If @a dst and @a src both are of same subclass T, copy the
-  /// contents of @a src into @a dst and return true. Otherwise return
-  /// false.
-  template <typename T>
-  inline bool aocopy(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst) {
-    shared_ptr<T> tsrc = dynamic_pointer_cast<T>(src);
-    if ( !tsrc ) return false;
-    shared_ptr<T> tdst = dynamic_pointer_cast<T>(dst);
-    if ( !tdst ) return false;
-    *tdst = *tsrc;
-    return true;
-  }
+  template<>
+  struct ReferenceTraits<Counter> {
+    using RefT = YODA::Counter;
+  };
 
-  /// If @a dst and @a src both are of same subclass T, copy the
-  /// contents of @a src into @a dst and return true. Otherwise return
-  /// false. The @a scale argument will be ued to scale the weights of
-  /// non-scatter types, cf. aoadd().
-  template <typename T>
-  inline bool aocopy(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, double scale) {
-    if (!aocopy<T>(src, dst)) return false;
-    dynamic_pointer_cast<T>(dst)->scaleW(scale);
-    return true;
-  }
+  template<size_t DbnN, typename... AxisT>
+  struct ReferenceTraits<YODA::BinnedDbn<DbnN, AxisT...>> {
+    using RefT = YODA::ScatterND<sizeof...(AxisT)+1>;
+  };
 
-  /// If @a dst and @a src both are of same subclass T, add the
-  /// contents of @a src into @a dst and return true. Otherwise return
-  /// false.
-  template <typename T>
-  inline bool aoadd(YODA::AnalysisObjectPtr dst, YODA::AnalysisObjectPtr src, double scale) {
-    shared_ptr<T> tsrc = dynamic_pointer_cast<T>(src);
-    if ( !tsrc ) return false;
-    shared_ptr<T> tdst = dynamic_pointer_cast<T>(dst);
-    if ( !tdst ) return false;
-    tsrc->scaleW(scale); //< note semi-accidental modification of the input
-    try {
-      *tdst += *tsrc;
-    } catch (YODA::BinningError&) {
-      return false;
-    }
-    return true;
-  }
-
-  /// If @a dst is the same subclass as @a src, copy the contents of @a
-  /// src into @a dst and return true. Otherwise return false.
-  bool copyao(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, double scale=1.0);
-
-  /// If @a dst is the same subclass as @a src, scale the contents of
-  /// @a src with @a scale and add it to @a dst and return true. Otherwise
-  /// return false.
-  bool addaos(YODA::AnalysisObjectPtr dst, YODA::AnalysisObjectPtr src, double scale);
+  template<size_t N>
+  struct ReferenceTraits<YODA::ScatterND<N>> {
+    using RefT = YODA::ScatterND<N>;
+  };
 
   /// Check if two analysis objects have the same binning or, if not
   /// binned, are in other ways compatible.
@@ -857,28 +1356,22 @@ namespace Rivet {
   inline bool bookingCompatible(TPtr a, TPtr b) {
     return *a == *b;
   }
+  //
   inline bool bookingCompatible(CounterPtr, CounterPtr) {
     return true;
   }
-  inline bool bookingCompatible(Scatter1DPtr a, Scatter1DPtr b) {
-    return a->numPoints() == b->numPoints();
-  }
-  inline bool bookingCompatible(Scatter2DPtr a, Scatter2DPtr b) {
-    return a->numPoints() == b->numPoints();
-  }
-  inline bool bookingCompatible(Scatter3DPtr a, Scatter3DPtr b) {
-    return a->numPoints() == b->numPoints();
-  }
+  //
   inline bool bookingCompatible(YODA::CounterPtr, YODA::CounterPtr) {
     return true;
   }
-  inline bool bookingCompatible(YODA::Scatter1DPtr a, YODA::Scatter1DPtr b) {
+  //
+  template<size_t N>
+  inline bool bookingCompatible(ScatterNDPtr<N> a, ScatterNDPtr<N> b) {
     return a->numPoints() == b->numPoints();
   }
-  inline bool bookingCompatible(YODA::Scatter2DPtr a, YODA::Scatter2DPtr b) {
-    return a->numPoints() == b->numPoints();
-  }
-  inline bool bookingCompatible(YODA::Scatter3DPtr a, YODA::Scatter3DPtr b) {
+  //
+  template<size_t N>
+  inline bool bookingCompatible(YODA::ScatterNDPtr<N> a, YODA::ScatterNDPtr<N> b) {
     return a->numPoints() == b->numPoints();
   }
 
@@ -918,28 +1411,28 @@ namespace Rivet {
     }
 
     /// Is This a RAW (filling) object?
-    bool   isRaw() const { return _raw; }
+    bool isRaw() const { return _raw; }
 
     // Is This a temporary (filling) object?
-    bool   isTmp() const { return _tmp; }
+    bool isTmp() const { return _tmp; }
 
     /// Is This a reference object?
-    bool   isRef() const { return _ref; }
+    bool isRef() const { return _ref; }
 
     /// The string describing the options passed to the analysis.
     string optionString() const { return _optionstring; }
 
     /// Are there options passed to the analysis?
-    bool   hasOptions() const { return !_options.empty(); }
+    bool hasOptions() const { return !_options.empty(); }
 
     /// Don't pass This optionto the analysis
-    void   removeOption(string opt) { _options.erase(opt); fixOptionString(); }
+    void removeOption(string opt) { _options.erase(opt); fixOptionString(); }
 
     /// Pass this option to the analysis.
-    void   setOption(string opt, string val) { _options[opt] = val; fixOptionString();}
+    void setOption(string opt, string val) { _options[opt] = val; fixOptionString(); }
 
     /// Was This option passed to the analyisi.
-    bool   hasOption(string opt) const { return _options.find(opt) != _options.end(); }
+    bool hasOption(string opt) const { return _options.find(opt) != _options.end(); }
 
     /// Get the value of this option.
     string getOption(string opt) const {

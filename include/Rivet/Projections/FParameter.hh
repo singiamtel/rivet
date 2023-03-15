@@ -20,7 +20,7 @@ namespace Rivet {
     FParameter(const FinalState& fsp);
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(FParameter);
+    RIVET_DEFAULT_PROJ_CLONE(FParameter);
 
     /// @}
 

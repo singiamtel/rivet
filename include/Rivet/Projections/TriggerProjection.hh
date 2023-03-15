@@ -27,7 +27,7 @@ namespace Rivet {
     virtual ~TriggerProjection() {}
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(TriggerProjection);
+    RIVET_DEFAULT_PROJ_CLONE(TriggerProjection);
 
     /// Return true if the event has passed some trigger or selection
     /// criteria.

@@ -50,7 +50,7 @@ namespace Rivet {
     /// N.B. This only reports the count for the last collapsed event group
     /// and hence ignores any additional sub-events seen so far.
     size_t numEvents() const {
-      const double N = _eventCounter.get()->_getPersistent(defaultWeightIndex())->numEntries();
+      const double N = _eventCounter.get()->persistent(defaultWeightIndex())->numEntries();
       return  size_t(N + 0.5 - (N<0)); // round to nearest integer
     }
 
@@ -265,7 +265,7 @@ namespace Rivet {
 
     /// Get a pointer to a preloaded yoda object with the given path,
     /// or null if path is not found.
-    const YODA::AnalysisObjectPtr getPreload(string path) const {
+    const YODA::AnalysisObjectPtr getPreload(const string& path) const {
       auto it = _preloads.find(path);
       if ( it == _preloads.end() ) return nullptr;
       return it->second;
@@ -338,7 +338,6 @@ namespace Rivet {
 
     /// @}
 
-
   private:
 
     /// @name Internal helper functions
@@ -348,7 +347,7 @@ namespace Rivet {
     Log& getLog() const;
 
     /// Get all multi-weight Rivet analysis object wrappers.
-    vector<MultiweightAOPtr> getRivetAOs() const;
+    vector<MultiplexAOPtr> getRivetAOs() const;
 
     /// Helper function to strip specific options from data object paths.
     void stripOptions(YODA::AnalysisObjectPtr ao, const vector<string>& delopts) const;

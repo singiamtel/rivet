@@ -61,7 +61,7 @@ namespace Rivet {
     Sphericity(const FinalState& fsp, double rparam=2.0);
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(Sphericity);
+    RIVET_DEFAULT_PROJ_CLONE(Sphericity);
 
     /// @}
 

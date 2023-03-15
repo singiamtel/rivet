@@ -29,7 +29,7 @@ namespace Rivet {
   public:
 
     /// Default constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ATLAS_2012_I1203852);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1203852);
 
 
     void init() {

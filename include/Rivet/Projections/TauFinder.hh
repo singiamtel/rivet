@@ -39,7 +39,7 @@ namespace Rivet {
 
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(TauFinder);
+    RIVET_DEFAULT_PROJ_CLONE(TauFinder);
 
 
     const Particles& taus() const { return _theParticles; }

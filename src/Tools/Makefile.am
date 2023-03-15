@@ -14,6 +14,7 @@ libRivetTools_la_SOURCES = \
   RivetYODA.cc \
   RivetMT2.cc \
   RivetPaths.cc \
+  TypeRegistry.cc \
   Utils.cc \
   binreloc.c \
   ProjectionTreePlotter.cc

@@ -23,7 +23,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap
-    DEFAULT_RIVET_PROJ_CLONE(UndressBeamLeptons);
+    RIVET_DEFAULT_PROJ_CLONE(UndressBeamLeptons);
 
 
     /// Project on to the Event

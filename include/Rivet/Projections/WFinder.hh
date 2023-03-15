@@ -55,7 +55,7 @@ namespace Rivet {
             double masstarget=80.4*GeV);
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(WFinder);
+    RIVET_DEFAULT_PROJ_CLONE(WFinder);
 
     /// @}
 

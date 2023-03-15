@@ -363,7 +363,7 @@ namespace Rivet {
     }
 
     // Make a new sub-event: affects every analysis object
-    MSG_TRACE("Starting new sub-event");
+    MSG_DEBUG("Starting new sub-event");
     _eventCounter.get()->newSubEvent();
     for (const AnaHandle& a : analyses()) {
       for (const auto& ao : a->analysisObjects()) {
@@ -813,15 +813,9 @@ namespace Rivet {
       // merge AOs
       const string& key = path.path();
       const double sf = key.find("_EVTCOUNT") != string::npos? 1 : scales[wname];
-      if (allaos.find(key) == allaos.end()) {
-        MSG_DEBUG("Copy first occurrence of " << key << " using scale " << sf);
-        allaos[key] = ao; // TODO would be nice to combine these two?
-        copyao(ao, allaos[key], sf);
+      if ( !addAO(ao, allaos[key], sf) ) { // assigns first occurrence, stacks subsequent ones
+        MSG_DEBUG("Cannot merge objects with path " << key << " of type " << ao->type() << " using scale " << sf);
       }
-      else if ( !addaos(allaos[key], ao, sf) ) {
-        MSG_DEBUG("Cannot merge objects with path " << key
-                  << " of type " << ao->annotation("Type") << " using scale " << sf);
-      } // end of merge attempt
     } // loop over all new AOs ends
   }
 
@@ -905,13 +899,13 @@ namespace Rivet {
       for (const AnaHandle& a : analyses()) {
         for (const auto& ao : a->analysisObjects()) {
           ao.get()->setActiveWeightIdx(iW);
-          YODA::AnalysisObjectPtr yao = ao.get()->activeYODAPtr();
+          YODA::AnalysisObjectPtr yao = ao.get()->activeAO();
           auto aoit = allAOs.find(yao->path());
           if (aoit != allAOs.end()) {
-            if ( !addaos(yao, aoit->second, scales[iW]) ) {
+            if ( !addAO(aoit->second, yao, scales[iW]) ) {
               MSG_DEBUG("Overwriting incompatible starting version of " << yao->path()
                         << " using scale " << scales[iW]);
-              copyao(aoit->second, yao, 1.0); // input already scaled by addaos
+              copyAO(aoit->second, yao, 1.0); // input already scaled by addAO
             }
           }
           else {
@@ -989,16 +983,16 @@ namespace Rivet {
       for (const auto& apair : other.analysesMap()) {
         for (const auto& other_ao : apair.second->analysisObjects()) {
           other_ao.get()->setActiveWeightIdx(iW);
-          YODA::AnalysisObjectPtr other_yao = other_ao.get()->activeYODAPtr();
+          YODA::AnalysisObjectPtr other_yao = other_ao.get()->activeAO();
           // Find corresponding YODA::AO in current AH
-          for (const MultiweightAOPtr& this_ao : analysis(apair.first)->analysisObjects()) {
+          for (const MultiplexAOPtr& this_ao : analysis(apair.first)->analysisObjects()) {
             this_ao.get()->setActiveWeightIdx(iW);
             if (this_ao->path() != other_ao->path())  continue;
-            YODA::AnalysisObjectPtr this_yao = this_ao.get()->activeYODAPtr(); // found it!
+            YODA::AnalysisObjectPtr this_yao = this_ao.get()->activeAO(); // found it!
             // attempt merge
-            if ( !addaos(this_yao, other_yao, 1.0) ) {
+            if ( !addAO(other_yao, this_yao, 1.0) ) {
               MSG_DEBUG("Overwriting incompatible starting version of " << this_yao->path());
-              copyao(other_yao, this_yao, 1.0); // input already scaled by addaos
+              copyAO(other_yao, this_yao, 1.0); // input already scaled by addAO
             }
             analysis(apair.first)->rawHookIn(this_yao);
             this_ao.get()->unsetActiveWeight();
@@ -1047,8 +1041,8 @@ namespace Rivet {
   }
 
 
-  vector<MultiweightAOPtr> AnalysisHandler::getRivetAOs() const {
-      vector<MultiweightAOPtr> rtn;
+  vector<MultiplexAOPtr> AnalysisHandler::getRivetAOs() const {
+      vector<MultiplexAOPtr> rtn;
 
       for (const AnaHandle& a : analyses()) {
         for (const auto& ao : a->analysisObjects()) {
@@ -1073,7 +1067,7 @@ namespace Rivet {
   vector<YODA::AnalysisObjectPtr> AnalysisHandler::getYodaAOs(bool includeraw, bool mkstatic) const {
 
     // First get all multiweight AOs
-    vector<MultiweightAOPtr> raos = getRivetAOs();
+    vector<MultiplexAOPtr> raos = getRivetAOs();
     vector<YODA::AnalysisObjectPtr> output;
     output.reserve(raos.size() * numWeights() * (includeraw ? 2 : 1));
 
@@ -1090,7 +1084,7 @@ namespace Rivet {
         if (rao->path().find("/TMP/") != string::npos) continue; //< skip TMP histos
         // skip leading-underscored analysis-level histos
         if (rao->path().find("/_") != string::npos && !startsWith(rao->path(), "/_")) continue;
-        YODA::AnalysisObjectPtr aop = rao.get()->activeYODAPtr();
+        YODA::AnalysisObjectPtr aop = rao.get()->activeAO();
         // Convert to a static type, e.g. scatter
         /// @todo Convert the output to BinnedEstimates when available
         if (mkstatic) { // && rao->path().find("/_") == string::npos) {
@@ -1120,7 +1114,7 @@ namespace Rivet {
       for (size_t iW : order) {
         for (auto rao : raos) {
           rao.get()->setActiveWeightIdx(iW);
-          output.push_back(rao.get()->activeYODAPtr());
+          output.push_back(rao.get()->activeAO());
         }
       }
     }

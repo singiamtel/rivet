@@ -133,7 +133,7 @@ namespace Rivet {
     }
 
     // Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(Correlators);
+    RIVET_DEFAULT_PROJ_CLONE(Correlators);
 
 
   protected:
@@ -614,7 +614,7 @@ namespace Rivet {
 
     /// @brief Book an ECorrelator in the same way as a histogram
     /// @todo Rename to book(ECorrPtr, ...)
-    ECorrPtr bookECorrelator(const string name, const vector<int>& h, vector<double>& binIn) {
+    ECorrPtr bookECorrelator(const string name, const vector<int>& h, const vector<double>& binIn) {
       ECorrPtr ecPtr = ECorrPtr(new ECorrelator(h, binIn));
       vector<string> eCorrProfs;
       for (int i = 0; i < BOOT_BINS; ++i) {
@@ -630,12 +630,12 @@ namespace Rivet {
     /// @brief Book a gapped ECorrelator with two harmonic vectors
     /// @todo Rename to book(ECorrPtr, ...)
     ECorrPtr bookECorrelator(const string name, const vector<int>& h1,
-                             const vector<int>& h2, vector<double>& binIn) {
+                             const vector<int>& h2, const vector<double>& binIn) {
       ECorrPtr ecPtr = ECorrPtr(new ECorrelator(h1, h2, binIn));
       vector<string> eCorrProfs;
+      Profile1DPtr tmp;
       for (int i = 0; i < BOOT_BINS; ++i) {
-        Profile1DPtr tmp;
-        book(tmp,"TMP/"+name+"-"+to_string(i),binIn);
+        book(tmp, "TMP/"+name+"-"+to_string(i), binIn);
         eCorrProfs.push_back(name+"-"+to_string(i));
       }
       ecPtr->setProfs(eCorrProfs);
@@ -669,7 +669,7 @@ namespace Rivet {
     ///
     /// @todo Rename to book(ECorrPtr, ...)
     template<unsigned int N, unsigned int M>
-    ECorrPtr bookECorrelator(const string& name, vector<double>& binIn) {
+    ECorrPtr bookECorrelator(const string& name, const vector<double>& binIn) {
       return bookECorrelator(name, Correlators::hVec(N, M), binIn);
     }
 
@@ -772,7 +772,6 @@ namespace Rivet {
                                          yErr[i].first, yErr[i].second));
       }
       h->reset();
-      h->points().clear();
 
       for (int i = 0, N = points.size(); i < N; ++i) {
         h->addPoint(points[i]);
@@ -812,7 +811,6 @@ namespace Rivet {
         }
       }
       hOut->reset();
-      hOut->points().clear();
       for (int i = 0, N = points.size(); i < N; ++i)
         hOut->addPoint(points[i]);
     }
@@ -847,7 +845,6 @@ namespace Rivet {
         }
       }
       h->reset();
-      h->points().clear();
       for (int i = 0, N = points.size(); i < N; ++i) h->addPoint(points[i]);
     }
 
@@ -953,7 +950,7 @@ namespace Rivet {
     /// before writing them.
     /// Overloaded method from Analysis base class should not be
     /// overridden further.
-    void rawHookOut(const vector<MultiweightAOPtr>& raos, size_t iW) final {
+    void rawHookOut(const vector<MultiplexAOPtr>& raos, size_t iW) final {
       // Loop over the correlators and extract the numbers.
       for (auto ec : eCorrPtrs) {
         const vector<CorBin>& corBins = ec->getBins();
@@ -971,7 +968,7 @@ namespace Rivet {
             if (rao->path() != "/"+name()+"/TMP/"+ec->profs[i]) continue;
             // Get a pointer to the active profile.
             rao.get()->setActiveWeightIdx(iW);
-            YODA::Profile1DPtr pPtr = dynamic_pointer_cast<YODA::Profile1D>(rao.get()->activeYODAPtr());
+            YODA::Profile1DPtr pPtr = dynamic_pointer_cast<YODA::Profile1D>(rao.get()->activeAO());
             // New bins.
             vector<YODA::Dbn2D> profBins;
             // Add reference flow in the underflow bin.

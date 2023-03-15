@@ -39,7 +39,7 @@ namespace Rivet {
 
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(InvMassFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(InvMassFinalState);
 
 
     /// Constituent pairs.

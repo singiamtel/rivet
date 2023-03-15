@@ -25,7 +25,7 @@ namespace Rivet {
       }
 
       /// Clone on the heap.
-      DEFAULT_RIVET_PROJ_CLONE(SumET_PB_Centrality);
+      RIVET_DEFAULT_PROJ_CLONE(SumET_PB_Centrality);
 
     protected:
 
@@ -61,7 +61,7 @@ namespace Rivet {
       }
 
       /// Clone on the heap.
-      DEFAULT_RIVET_PROJ_CLONE(SumET_PBPB_Centrality);
+      RIVET_DEFAULT_PROJ_CLONE(SumET_PBPB_Centrality);
 
     protected:
 
@@ -98,7 +98,7 @@ namespace Rivet {
       }
 
         /// Clone on the heap.
-        DEFAULT_RIVET_PROJ_CLONE(MinBiasTrigger);
+        RIVET_DEFAULT_PROJ_CLONE(MinBiasTrigger);
 
     protected:
 

@@ -22,7 +22,7 @@ namespace Rivet {
     FinalState(const FinalState& fsp, const Cut& c);
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(FinalState);
+    RIVET_DEFAULT_PROJ_CLONE(FinalState);
 
     /// @}
 

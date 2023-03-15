@@ -114,7 +114,7 @@ namespace Rivet {
 
 
     /// Clone this projection
-    DEFAULT_RIVET_PROJ_CLONE(DressedLeptons);
+    RIVET_DEFAULT_PROJ_CLONE(DressedLeptons);
 
 
     /// @brief Retrieve the dressed leptons
