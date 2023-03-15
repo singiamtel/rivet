@@ -51,6 +51,13 @@ namespace Rivet {
   // template <typename T>
   // using ConstIterable = pretty_print::is_container<T>;
 
+  /// SFINAE check if T is a YODA Fillable
+  template<typename T, typename = void>
+  struct isFillable : std::false_type { };
+  //
+  template<typename T>
+  struct isFillable<T, std::void_t<decltype(typename T::FillType{})>> : std::true_type { };
+
 
   template <typename T, typename=void>
   struct HasXYZ : std::false_type {};

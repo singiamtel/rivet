@@ -41,7 +41,7 @@ namespace Rivet {
       virtual const DecayMode& mode2() const {return _mode2;}
 
       /// Clone on the heap.
-      DEFAULT_RIVET_PROJ_CLONE(PseudoTop);
+      RIVET_DEFAULT_PROJ_CLONE(PseudoTop);
 
       /// @}
 

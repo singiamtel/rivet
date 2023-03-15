@@ -90,7 +90,7 @@ namespace Rivet {
       }
     }
 
-    DEFAULT_RIVET_PROJ_CLONE(PercentileProjection);
+    RIVET_DEFAULT_PROJ_CLONE(PercentileProjection);
 
     // The projection function takes the assigned SingeValueProjection
     // and sets the value of this projection to the corresponding

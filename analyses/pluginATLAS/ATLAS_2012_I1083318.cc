@@ -160,15 +160,15 @@ namespace Rivet {
       for (size_t i = 0; i < 2; ++i) {
 
         // Construct jet multiplicity ratio
-        for (size_t n = 2; n < _h_NjetIncl[i]->numBins()+1; ++n) {
-          auto& b0 = _h_NjetIncl[i]->bin(n-1);
-          auto& b1 = _h_NjetIncl[i]->bin(n);
+        for (size_t n = 1; n < _h_NjetIncl[i]->numBins(); ++n) {
+          auto& b0 = _h_NjetIncl[i]->bin(n);
+          auto& b1 = _h_NjetIncl[i]->bin(n+1);
           double val = 0.0, err= 0.0;
           if (b0.height() && b1.height()) {
             val = b1.height() / b0.height();
             err = b1.height() / b0.height() * (b0.relErr() + b1.relErr());
           }
-          _h_RatioNjetIncl[i]->addPoint(n-1, val, 0.5, err);
+          _h_RatioNjetIncl[i]->addPoint(n, val, 0.5, err);
         }
 
         // Scale all histos to the cross section

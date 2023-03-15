@@ -36,7 +36,7 @@ namespace Rivet {
 
 
     /// Clone on the heap
-    DEFAULT_RIVET_PROJ_CLONE(MissingMomentum);
+    RIVET_DEFAULT_PROJ_CLONE(MissingMomentum);
 
 
     /// @name Visible/missing four-momentum functions

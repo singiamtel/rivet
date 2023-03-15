@@ -22,7 +22,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(TriggerCDFRun0Run1);
+    RIVET_DEFAULT_PROJ_CLONE(TriggerCDFRun0Run1);
 
 
     /// The trigger result

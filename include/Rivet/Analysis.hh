@@ -506,138 +506,123 @@ namespace Rivet {
     /// @}
 
 
-    /// @name 1D histogram booking
+    /// @name BinnedDbn booking
     /// @{
 
-    /// Book a 1D histogram with @a nbins uniformly distributed across the range @a lower - @a upper .
-    Histo1DPtr& book(Histo1DPtr&,const std::string& name, size_t nbins, double lower, double upper);
+    /// Book a ND histogram with @a nbins uniformly distributed across the range @a lower - @a upper .
+    template<size_t DbnN, typename... AxisT, typename = YODA::enable_if_all_CAxisT<AxisT...>>
+    BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao,
+                                       const std::string& name, const std::vector<size_t>& nbins,
+                                       const std::vector<std::pair<double,double>>& loUpPairs) {
+      assert(nbins.size() == loUpPairs.size() && "Vectors should have the same size!");
+      const string path = histoPath(name);
 
-    /// Book a 1D histogram with non-uniform bins defined by the vector of bin edges @a binedges .
-    Histo1DPtr& book(Histo1DPtr&,const std::string& name, const std::vector<double>& binedges);
+      YODA::BinnedDbn<DbnN, AxisT...> yao(nbins, loUpPairs, path);
+      _setWriterPrecision(path, yao);
 
-    /// Book a 1D histogram with non-uniform bins defined by the vector of bin edges @a binedges .
-    Histo1DPtr& book(Histo1DPtr&,const std::string& name, const std::initializer_list<double>& binedges);
+      return ao = registerAO(yao);
+    }
 
-    /// Book a 1D histogram with binning from a reference scatter.
-    Histo1DPtr& book(Histo1DPtr&,const std::string& name, const Scatter2D& refscatter);
+    // Specialiation for 1D
+    Histo1DPtr& book(Histo1DPtr& ao, const std::string& name,
+                                     const size_t nbins, const double lower, const double upper) {
+      return book(ao, name, vector<size_t>{nbins},
+                  vector<pair<double,double>>{{lower,upper}});
+    }
+    //
+    Profile1DPtr& book(Profile1DPtr& ao, const std::string& name,
+                                         const size_t nbins, const double lower, const double upper) {
+      return book(ao, name, vector<size_t>{nbins},
+                  vector<pair<double,double>>{{lower,upper}});
+    }
 
-    /// Book a 1D histogram, using the binnings in the reference data histogram.
-    Histo1DPtr& book(Histo1DPtr&,const std::string& name);
+    // Specialiation for 2D
+    Histo2DPtr& book(Histo2DPtr& ao, const std::string& name,
+                                     const size_t nbinsX, const double lowerX, const double upperX,
+                                     const size_t nbinsY, const double lowerY, const double upperY) {
+      return book(ao, name, vector<size_t>{nbinsX,nbinsY},
+                  vector<pair<double,double>>{{lowerX,upperX}, {lowerY,upperY}});
+    }
+    //
+    Profile2DPtr& book(Profile2DPtr& ao, const std::string& name,
+                                         const size_t nbinsX, const double lowerX, const double upperX,
+                                         const size_t nbinsY, const double lowerY, const double upperY) {
+      return book(ao, name, vector<size_t>{nbinsX,nbinsY},
+                  vector<pair<double,double>>{{lowerX,upperX}, {lowerY,upperY}});
+    }
 
-    /// Book a 1D histogram, using the binnings in the reference data histogram.
+    // Specialiation for 3D
+    Histo3DPtr& book(Histo3DPtr& ao, const std::string& name,
+                                     const size_t nbinsX, const double lowerX, const double upperX,
+                                     const size_t nbinsY, const double lowerY, const double upperY,
+                                     const size_t nbinsZ, const double lowerZ, const double upperZ) {
+      return book(ao, name, vector<size_t>{nbinsX,nbinsY,nbinsZ},
+                  vector<pair<double,double>>{{lowerX,upperX}, {lowerY,upperY}, {lowerZ,upperZ}});
+    }
+    //
+    Profile3DPtr& book(Profile3DPtr& ao, const std::string& name,
+                                         const size_t nbinsX, const double lowerX, const double upperX,
+                                         const size_t nbinsY, const double lowerY, const double upperY,
+                                         const size_t nbinsZ, const double lowerZ, const double upperZ) {
+      return book(ao, name, vector<size_t>{nbinsX,nbinsY,nbinsZ},
+                  vector<pair<double,double>>{{lowerX,upperX}, {lowerY,upperY}, {lowerZ,upperZ}});
+    }
+
+    /// Book a ND histogram with non-uniform bins defined by the vector of bin edges @a binedges .
+    template<size_t DbnN, typename... AxisT>
+    BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const std::string& name,
+                                       const std::vector<AxisT>&... binedges) {
+      const string path = histoPath(name);
+      YODA::BinnedDbn<DbnN, AxisT...> yao(binedges..., path);
+      _setWriterPrecision(path, yao);
+
+      return ao = registerAO(yao);
+    }
+
+    /// Book a ND histogram with non-uniform bins defined by the vector of bin edges @a binedges .
+    template<size_t DbnN, typename... AxisT>
+    BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const std::string& name,
+                                       const std::initializer_list<AxisT>&... binedges) {
+      return book(ao, name, vector<AxisT>{binedges} ...);
+    }
+
+    /// Book a ND histogram with binning from a reference scatter.
+    template<size_t DbnN, typename... AxisT>
+    BinnedDbnPtr<DbnN,  AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const std::string& name,
+                                        const YODA::ScatterND<sizeof...(AxisT)+1>& refscatter) {
+      const string path = histoPath(name);
+
+      YODA::BinnedDbn<DbnN, AxisT...> yao(refscatter, path);
+      for (const string& a : yao.annotations()) {
+        if (a != "Path")  yao.rmAnnotation(a);
+      }
+      _setWriterPrecision(path, yao);
+      return ao = registerAO(yao);
+    }
+
+    /// Book a ND histogram, using the binnings in the reference data histogram.
+    template<size_t DbnN, typename... AxisT>
+    BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const std::string& name) {
+      return book(ao, name, refData<YODA::ScatterND<sizeof...(AxisT)+1>>(name));
+    }
+
+    /// Book a ND histogram, using the binnings in the reference data histogram.
     ///
     /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
-    Histo1DPtr& book(Histo1DPtr&,unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID);
+    template<size_t DbnN, typename... AxisT>
+    BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const unsigned int datasetID,
+                                       const unsigned int xAxisID, const unsigned int yAxisID) {
+      const string name = mkAxisCode(datasetID, xAxisID, yAxisID);
+      return book(ao, name);
+    }
 
     /// @}
 
 
-    /// @name 2D histogram booking
+    /// @name Scatter booking
     /// @{
 
-    /// Book a 2D histogram with @a nxbins and @a nybins uniformly
-    /// distributed across the ranges @a xlower - @a xupper and @a
-    /// ylower - @a yupper respectively along the x- and y-axis.
-    Histo2DPtr& book(Histo2DPtr&,const std::string& name,
-                           size_t nxbins, double xlower, double xupper,
-                           size_t nybins, double ylower, double yupper);
-
-    /// Book a 2D histogram with non-uniform bins defined by the
-    /// vectors of bin edges @a xbinedges and @a ybinedges.
-    Histo2DPtr& book(Histo2DPtr&,const std::string& name,
-                           const std::vector<double>& xbinedges,
-                           const std::vector<double>& ybinedges);
-
-    /// Book a 2D histogram with non-uniform bins defined by the
-    /// vectors of bin edges @a xbinedges and @a ybinedges.
-    Histo2DPtr& book(Histo2DPtr&,const std::string& name,
-                           const std::initializer_list<double>& xbinedges,
-                           const std::initializer_list<double>& ybinedges);
-
-    /// Book a 2D histogram with binning from a reference scatter.
-    Histo2DPtr& book(Histo2DPtr&,const std::string& name,
-                           const Scatter3D& refscatter);
-
-    /// Book a 2D histogram, using the binnings in the reference data histogram.
-    Histo2DPtr& book(Histo2DPtr&,const std::string& name);
-
-    /// Book a 2D histogram, using the binnings in the reference data histogram.
-    ///
-    /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
-    Histo2DPtr& book(Histo2DPtr&,unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID);
-
-    /// @}
-
-
-    /// @name 1D profile histogram booking
-    /// @{
-
-    /// Book a 1D profile histogram with @a nbins uniformly distributed across the range @a lower - @a upper .
-    Profile1DPtr& book(Profile1DPtr&,  const std::string& name, size_t nbins, double lower, double upper);
-
-    /// Book a 1D profile histogram with non-uniform bins defined by the vector of bin edges @a binedges .
-    Profile1DPtr& book(Profile1DPtr&,  const std::string& name, const std::vector<double>& binedges);
-
-    /// Book a 1D profile histogram with non-uniform bins defined by the vector of bin edges @a binedges .
-    Profile1DPtr& book(Profile1DPtr&,  const std::string& name, const std::initializer_list<double>& binedges);
-
-    /// Book a 1D profile histogram with binning from a reference scatter.
-    Profile1DPtr& book(Profile1DPtr&,  const std::string& name, const Scatter2D& refscatter);
-
-    /// Book a 1D profile histogram, using the binnings in the reference data histogram.
-    Profile1DPtr& book(Profile1DPtr&,  const std::string& name);
-
-    /// Book a 1D profile histogram, using the binnings in the reference data histogram.
-    ///
-    /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
-    Profile1DPtr& book(Profile1DPtr&,  unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID);
-
-    /// @}
-
-
-    /// @name 2D profile histogram booking
-    /// @{
-
-    /// Book a 2D profile histogram with @a nxbins and @a nybins uniformly
-    /// distributed across the ranges @a xlower - @a xupper and @a ylower - @a
-    /// yupper respectively along the x- and y-axis.
-    Profile2DPtr& book(Profile2DPtr&,  const std::string& name,
-                               size_t nxbins, double xlower, double xupper,
-                               size_t nybins, double ylower, double yupper);
-
-    /// Book a 2D profile histogram with non-uniform bins defined by the vectorx
-    /// of bin edges @a xbinedges and @a ybinedges.
-    Profile2DPtr& book(Profile2DPtr&,  const std::string& name,
-                               const std::vector<double>& xbinedges,
-                               const std::vector<double>& ybinedges);
-
-    /// Book a 2D profile histogram with non-uniform bins defined by the vectorx
-    /// of bin edges @a xbinedges and @a ybinedges.
-    Profile2DPtr& book(Profile2DPtr&,  const std::string& name,
-                               const std::initializer_list<double>& xbinedges,
-                               const std::initializer_list<double>& ybinedges);
-
-    /// @todo REINSTATE
-
-    // /// Book a 2D profile histogram with binning from a reference scatter.
-    // Profile2DPtr& book(const Profile2DPtr&, const std::string& name,
-    //                            const Scatter3D& refscatter);
-
-    // /// Book a 2D profile histogram, using the binnings in the reference data histogram.
-    // Profile2DPtr& book(const Profile2DPtr&, const std::string& name);
-
-    // /// Book a 2D profile histogram, using the binnings in the reference data histogram.
-    // ///
-    // /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
-    // Profile2DPtr& book(const Profile2DPtr&, unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID);
-
-    /// @}
-
-
-    /// @name 2D scatter booking
-    /// @{
-
-    /// @brief Book a 2-dimensional data point set with the given name.
+    /// @brief Book a N-dimensional data point set with the given name.
     ///
     /// @note Unlike histogram booking, scatter booking by default makes no
     /// attempt to use reference data to pre-fill the data object. If you want
@@ -647,9 +632,22 @@ namespace Rivet {
     /// data's x values and errors, but with the y values and errors zeroed...
     /// assuming that there is a reference histo with the same name: if there
     /// isn't, an exception will be thrown.
-    Scatter2DPtr& book(Scatter2DPtr& s2d, const string& hname, bool copy_pts = false);
+    template<size_t N>
+    ScatterNDPtr<N>& book(ScatterNDPtr<N>& snd, const string& name, const bool copy_pts = false) {
+      const string path = histoPath(name);
+      YODA::ScatterND<N> scat(path);
+      if (copy_pts) {
+        for (YODA::PointND<N> p : refData<YODA::ScatterND<N>>(name).points()) {
+          p.setVal(N-1, 0.0);
+          p.setErr(N-1, 0.0);
+          scat.addPoint(p);
+        }
+      }
+      _setWriterPrecision(path, scat);
+      return snd = registerAO(scat);
+    }
 
-    /// @brief Book a 2-dimensional data point set, using the binnings in the reference data histogram.
+    /// @brief Book a N-dimensional data point set, using the binnings in the reference data histogram.
     ///
     /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
     ///
@@ -659,67 +657,106 @@ namespace Rivet {
     /// meaningful and can't be extracted from the data, then set the @a
     /// copy_pts parameter to true. This creates points to match the reference
     /// data's x values and errors, but with the y values and errors zeroed.
-    Scatter2DPtr& book(Scatter2DPtr& s2d, unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID, bool copy_pts = false);
+    template<size_t N>
+    ScatterNDPtr<N>& book(ScatterNDPtr<N>& snd, const unsigned int datasetID, const unsigned int xAxisID,
+                                                const unsigned int yAxisID, const bool copy_pts = false) {
+      const string axisCode = mkAxisCode(datasetID, xAxisID, yAxisID);
+      return book(snd, axisCode, copy_pts);
+    }
 
-    /// @brief Book a 2-dimensional data point set with equally spaced x-points in a range.
+    /// @brief Book a N-dimensional data point set with equally spaced x-points in a range.
     ///
     /// The y values and errors will be set to 0.
-    Scatter2DPtr& book(Scatter2DPtr& s2d, const string& hname, size_t npts, double lower, double upper);
+    ///
+    /// @todo Remove this when we switch to BinnedEstimates
+    Scatter2DPtr& book(Scatter2DPtr& snd, const string& name,
+                       const size_t npts, const double lower, const double upper) {
+      const string path = histoPath(name);
+
+      Scatter2D scat(path);
+      const double binwidth = (upper-lower)/npts;
+      for (size_t pt = 0; pt < npts; ++pt) {
+        const double bincentre = lower + (pt + 0.5) * binwidth;
+        scat.addPoint(bincentre, 0, binwidth/2.0, 0);
+      }
+      _setWriterPrecision(path, scat);
+
+      return snd = registerAO(scat);
+    }
+    //
+    Scatter3DPtr& book(Scatter3DPtr& snd, const string& name,
+                       const size_t nptsX, const double lowerX, const double upperX,
+                       const size_t nptsY, const double lowerY, const double upperY) {
+      const string path = histoPath(name);
+
+      Scatter3D scat(path);
+      const double xbinwidth = (upperX-lowerX)/nptsX;
+      const double ybinwidth = (upperY-lowerY)/nptsY;
+      for (size_t xpt = 0; xpt < nptsX; ++xpt) {
+        const double xbincentre = lowerX + (xpt + 0.5) * xbinwidth;
+        for (size_t ypt = 0; ypt < nptsY; ++ypt) {
+          const double ybincentre = lowerY + (ypt + 0.5) * ybinwidth;
+          scat.addPoint(xbincentre, ybincentre, 0, 0.5*xbinwidth, 0.5*ybinwidth, 0);
+        }
+      }
+      _setWriterPrecision(path, scat);
+
+      return snd = registerAO(scat);
+    }
 
     /// @brief Book a 2-dimensional data point set based on provided contiguous "bin edges".
     ///
     /// The y values and errors will be set to 0.
-    Scatter2DPtr& book(Scatter2DPtr& s2d, const string& hname, const std::vector<double>& binedges);
+    ///
+    /// @todo Remove this when we switch to BinnedEstimates
+    Scatter2DPtr& book(Scatter2DPtr& snd, const string& name,
+                       const std::vector<double>& binedges) {
+      const string path = histoPath(name);
+
+      Scatter2D scat(path);
+      for (size_t pt = 0; pt < binedges.size()-1; ++pt) {
+        const double bincentre = (binedges[pt] + binedges[pt+1]) / 2.0;
+        const double binwidth = binedges[pt+1] - binedges[pt];
+        scat.addPoint(bincentre, 0, binwidth/2.0, 0);
+      }
+      _setWriterPrecision(path, scat);
+
+      return snd = registerAO(scat);
+    }
+    //
+    Scatter3DPtr& book(Scatter3DPtr& snd, const string& name,
+                       const std::vector<double>& binedgesX,
+                       const std::vector<double>& binedgesY) {
+      const string path = histoPath(name);
+
+      Scatter3D scat(path);
+      for (size_t xpt = 0; xpt < binedgesX.size()-1; ++xpt) {
+        const double xbincentre = (binedgesX[xpt] + binedgesX[xpt+1]) / 2.0;
+        const double xbinwidth = binedgesX[xpt+1] - binedgesX[xpt];
+        for (size_t ypt = 0; ypt < binedgesY.size()-1; ++ypt) {
+          const double ybincentre = (binedgesY[ypt] + binedgesY[ypt+1]) / 2.0;
+          const double ybinwidth = binedgesY[ypt+1] - binedgesY[ypt];
+          scat.addPoint(xbincentre, ybincentre, 0, 0.5*xbinwidth, 0.5*ybinwidth, 0);
+        }
+      }
+      _setWriterPrecision(path, scat);
+
+      return snd = registerAO(scat);
+    }
 
     /// Book a 2-dimensional data point set with x-points from an existing scatter and a new path.
-    Scatter2DPtr& book(Scatter2DPtr& s2d, const string& hname, const Scatter2D& refscatter);
+    template<size_t N>
+    ScatterNDPtr<N>& book(ScatterNDPtr<N>& snd, const string& name, const YODA::ScatterND<N>& refscatter) {
+      const string path = histoPath(name);
 
-    /// @}
+      YODA::ScatterND<N> scat(refscatter, path);
+      for (const string& a : scat.annotations()) {
+        if (a != "Path")  scat.rmAnnotation(a);
+      }
+      _setWriterPrecision(path, scat);
 
-    /// @name 3D scatter booking
-    /// @{
-
-    /// @brief Book a 3-dimensional data point set with the given name.
-    ///
-    /// @note Unlike histogram booking, scatter booking by default makes no
-    /// attempt to use reference data to pre-fill the data object. If you want
-    /// this, which is sometimes useful e.g. when the x-position is not really
-    /// meaningful and can't be extracted from the data, then set the @a
-    /// copy_pts parameter to true. This creates points to match the reference
-    /// data's x values and errors, but with the y values and errors zeroed...
-    /// assuming that there is a reference histo with the same name: if there
-    /// isn't, an exception will be thrown.
-    Scatter3DPtr& book(Scatter3DPtr& s3d, const std::string& hname, bool copy_pts=false);
-
-    /// @brief Book a 3-dimensional data point set, using the binnings in the reference data histogram.
-    ///
-    /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
-    ///
-    /// @note Unlike histogram booking, scatter booking by default makes no
-    /// attempt to use reference data to pre-fill the data object. If you want
-    /// this, which is sometimes useful e.g. when the x-position is not really
-    /// meaningful and can't be extracted from the data, then set the @a
-    /// copy_pts parameter to true. This creates points to match the reference
-    /// data's x values and errors, but with the y values and errors zeroed.
-    Scatter3DPtr& book(Scatter3DPtr& s3d, unsigned int datasetID, unsigned int xAxisID,
-                        unsigned int yAxisID, unsigned int zAxisID, bool copy_pts=false);
-
-    /// @brief Book a 3-dimensional data point set with equally spaced x-points in a range.
-    ///
-    /// The y values and errors will be set to 0.
-    Scatter3DPtr& book(Scatter3DPtr& s3d, const std::string& hname,
-                               size_t xnpts, double xlower, double xupper,
-                               size_t ynpts, double ylower, double yupper);
-
-    /// @brief Book a 3-dimensional data point set based on provided contiguous "bin edges".
-    ///
-    /// The y values and errors will be set to 0.
-    Scatter3DPtr& book(Scatter3DPtr& s3d, const std::string& hname,
-                               const std::vector<double>& xbinedges,
-                               const std::vector<double>& ybinedges);
-
-    /// Book a 3-dimensional data point set with x-points from an existing scatter and a new path.
-    Scatter3DPtr& book(Scatter3DPtr& s3d, const std::string& hname, const Scatter3D& refscatter);
+      return snd = registerAO(scat);
+    }
 
     /// @}
 
@@ -734,10 +771,11 @@ namespace Rivet {
     /// @name Virtual helper function to allow classes deriving from
     /// Analysis (e.g. CumulantAnalysis) to fiddle with raw AOs
     /// post-finalize/before writing them out (needed in heavy-ion land).
-    virtual void rawHookOut(const vector<MultiweightAOPtr>& raos, size_t iW) {
+    virtual void rawHookOut(const vector<MultiplexAOPtr>& raos, size_t iW) {
       (void) raos; // suppress unused variable warning
       (void) iW; // suppress unused variable warning
     }
+
 
   public:
 
@@ -836,30 +874,28 @@ namespace Rivet {
                       const string projName, bool increasing=false);
 
 
-    /// @brief Book a Percentile wrapper around AnalysisObjects.
+    /// @brief Book a Percentile Multiplexer around AnalysisObjects.
     ///
     /// Based on a previously registered CentralityProjection named @a
     /// projName book one AnalysisObject for each @a centralityBin and
     /// name them according to the corresponding code in the @a ref
     /// vector.
-    ///
-    /// @todo Convert to just be called book() cf. others
-    template <class T>
-    Percentile<T> bookPercentile(string projName,
-                                 vector<pair<float, float> > centralityBins,
-                                 vector<tuple<int, int, int> > ref) {
+    template<typename T>
+    Percentile<T> book(const string& projName,
+                       const vector<pair<double, double>>& centralityBins,
+                       const vector<tuple<size_t, size_t, size_t>>& ref) {
 
-      typedef typename ReferenceTraits<T>::RefT RefT;
-      typedef rivet_shared_ptr<Wrapper<T>> WrapT;
+      using RefT = typename ReferenceTraits<T>::RefT;
+      using WrapT = MultiplexPtr<Multiplexer<T>>;
 
       Percentile<T> pctl(this, projName);
 
-      const int nCent = centralityBins.size();
-      for (int iCent = 0; iCent < nCent; ++iCent) {
+      const size_t nCent = centralityBins.size();
+      for (size_t iCent = 0; iCent < nCent; ++iCent) {
         const string axisCode = mkAxisCode(std::get<0>(ref[iCent]),
                                            std::get<1>(ref[iCent]),
                                            std::get<2>(ref[iCent]));
-        const RefT & refscatter = refData<RefT>(axisCode);
+        const RefT& refscatter = refData<RefT>(axisCode);
 
         WrapT wtf(_weightNames(), T(refscatter, histoPath(axisCode)));
         wtf = addAnalysisObject(wtf);
@@ -873,7 +909,7 @@ namespace Rivet {
     }
 
 
-    // /// @brief Book Percentile wrappers around AnalysisObjects.
+    // /// @brief Book Percentile Multiplexers around AnalysisObjects.
     // ///
     // /// Based on a previously registered CentralityProjection named @a
     // /// projName book one (or several) AnalysisObject(s) named
@@ -886,7 +922,7 @@ namespace Rivet {
     //                                        tuple<int, int, int> ref) {
 
     //   typedef typename ReferenceTraits<T>::RefT RefT;
-    //   typedef rivet_shared_ptr<Wrapper<T>> WrapT;
+    //   typedef MultiplexPtr<Multiplexer<T>> WrapT;
 
     //   PercentileXaxis<T> pctl(this, projName);
 
@@ -916,10 +952,10 @@ namespace Rivet {
     vector<string> _weightNames() const;
 
     /// Get the list of weight names from the handler
-    YODA::AnalysisObjectPtr _getPreload(string name) const;
+    YODA::AnalysisObjectPtr _getPreload (const string& name) const;
 
     /// Get an AO from another analysis
-    MultiweightAOPtr _getOtherAnalysisObject(const std::string & ananame, const std::string& name);
+    MultiplexAOPtr _getOtherAnalysisObject(const std::string & ananame, const std::string& name);
 
     /// Check that analysis objects aren't being booked/registered outside the init stage
     void _checkBookInit() const;
@@ -932,7 +968,14 @@ namespace Rivet {
 
     /// Set DP annotation
     template <typename YODAT>
-    void _setWriterPrecision(const string& path, YODAT& yao);
+    void _setWriterPrecision(const string& path, YODAT& yao) {
+      const string re = _info->writerDoublePrecision();
+      if (re != "") {
+        std::smatch match;
+        const bool needsDP = std::regex_search(path, match, std::regex(re));
+        if (needsDP)  yao.template setAnnotation("WriterDoublePrecision", "1");
+      }
+    }
 
 
   private:
@@ -943,12 +986,12 @@ namespace Rivet {
 
       CounterAdapter(double x) : x_(x) {}
 
-      CounterAdapter(const YODA::Counter & c) : x_(c.val()) {}
+      CounterAdapter(const YODA::Counter& c) : x_(c.val()) {}
 
-      CounterAdapter(const YODA::Estimate & e) : x_(e.val()) {}
+      CounterAdapter(const YODA::Estimate& e) : x_(e.val()) {}
 
-      CounterAdapter(const YODA::Scatter1D & s) : x_(s.points()[0].x()) {
-        assert( s.numPoints() == 1 || "Can only scale by a single value.");
+      CounterAdapter(const YODA::Scatter1D& s) : x_(s.points()[0].x()) {
+        assert( s.numPoints() == 1 && "Can only scale by a single value.");
       }
 
       operator double() const { return x_; }
@@ -978,130 +1021,94 @@ namespace Rivet {
     /// Multiplicatively scale the given counter, @a cnt, by factor @a factor.
     void scale(CounterPtr cnt, CounterAdapter factor);
 
-    /// Multiplicatively scale the given counters, @a cnts, by factor @a factor.
-    /// @note Constness intentional, if weird, to allow passing rvalue refs of smart ptrs (argh)
-    /// @todo Use SFINAE for a generic iterable of CounterPtrs
-    void scale(const std::vector<CounterPtr>& cnts, CounterAdapter factor) {
-      for (auto& c : cnts) scale(c, factor);
-    }
-
-    /// Iteratively scale the counters in the map @a maps, by factor @a factor.
-    template<typename T>
-    void scale(const std::map<T, CounterPtr>& maps, CounterAdapter factor) {
-      for (auto& m : maps) scale(m.second, factor);
-    }
-
-    /// @todo YUCK!
-    template <std::size_t array_size>
-    void scale(const CounterPtr (&cnts)[array_size], CounterAdapter factor) {
-      // for (size_t i = 0; i < std::extent<decltype(cnts)>::value; ++i) scale(cnts[i], factor);
-      for (auto& c : cnts) scale(c, factor);
-    }
-
-
-    /// Normalize the given histogram, @a histo, to area = @a norm.
-    void normalize(Histo1DPtr histo, CounterAdapter norm=1.0, bool includeoverflows=true);
-
-    /// Normalize the given histograms, @a histos, to area = @a norm.
-    /// @note Constness intentional, if weird, to allow passing rvalue refs of smart ptrs (argh)
-    /// @todo Use SFINAE for a generic iterable of Histo1DPtrs
-    void normalize(const std::vector<Histo1DPtr>& histos, CounterAdapter norm=1.0, bool includeoverflows=true) {
-      for (auto& h : histos) normalize(h, norm, includeoverflows);
-    }
-
-    /// Normalize the histograms in map, @a maps, to area = @a norm.
-    template<typename T>
-    void normalize(const std::map<T, Histo1DPtr>& maps, CounterAdapter norm=1.0, bool includeoverflows=true) {
-      for (auto& m : maps) normalize(m.second, norm, includeoverflows);
-    }
-
-    /// @todo YUCK!
-    template <std::size_t array_size>
-    void normalize(const Histo1DPtr (&histos)[array_size], CounterAdapter norm=1.0, bool includeoverflows=true) {
-      for (auto& h : histos) normalize(h, norm, includeoverflows);
-    }
-
     /// Multiplicatively scale the given histogram, @a histo, by factor @a factor.
-    void scale(Histo1DPtr histo, CounterAdapter factor);
-
-    /// Multiplicatively scale the given histograms, @a histos, by factor @a factor.
-    /// @note Constness intentional, if weird, to allow passing rvalue refs of smart ptrs (argh)
-    /// @todo Use SFINAE for a generic iterable of Histo1DPtrs
-    void scale(const std::vector<Histo1DPtr>& histos, CounterAdapter factor) {
-      for (auto& h : histos) scale(h, factor);
+    template<size_t DbnN, typename... AxisT>
+    void scale(BinnedDbnPtr<DbnN, AxisT...> ao, CounterAdapter factor) {
+      if (!ao) {
+        MSG_WARNING("Failed to scale histo=NULL in analysis " << name() << " (scale=" << double(factor) << ")");
+        return;
+      }
+      if (std::isnan(double(factor)) || std::isinf(double(factor))) {
+        MSG_WARNING("Failed to scale histo=" << ao->path() << " in analysis: "
+                    << name() << " (invalid scale factor = " << double(factor) << ")");
+        factor = 0;
+      }
+      MSG_TRACE("Scaling histo " << ao->path() << " by factor " << double(factor));
+      try {
+        ao->scaleW(factor);
+      }
+      catch (YODA::Exception& we) {
+        MSG_WARNING("Could not scale histo " << ao->path());
+        return;
+      }
     }
 
-    /// Iteratively scale the histograms in the map, @a maps, by factor @a factor.
+
+    /// Iteratively scale the AOs in the map @a aos, by factor @a factor.
+    template<typename T, typename U>
+    void scale(std::map<T, U>& aos, CounterAdapter factor) {
+      for (auto& item : aos)  scale(item.second, factor);
+    }
+
+    /// Iteratively scale the AOs in the iterable @a aos, by factor @a factor.
+    template<typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
+    void scale(AORange& aos, CounterAdapter factor) {
+      for (auto& ao : aos)  scale(ao, factor);
+    }
+
+    /// Iteratively scale the AOs in the initialiser list @a aos, by factor @a factor.
     template<typename T>
-    void scale(const std::map<T, Histo1DPtr>& maps, CounterAdapter factor) {
-      for (auto& m : maps) scale(m.second, factor);
+    void scale(std::initializer_list<T>&& aos, CounterAdapter factor) {
+      for (auto& ao : aos)  scale(ao, factor);
     }
 
-    /// @todo YUCK!
-    template <std::size_t array_size>
-    void scale(const Histo1DPtr (&histos)[array_size], CounterAdapter factor) {
-      for (auto& h : histos) scale(h, factor);
+    /// Normalize the given histogram, @a histo to a target @a norm.
+    template<size_t DbnN, typename... AxisT>
+    void normalize(BinnedDbnPtr<DbnN, AxisT...> ao, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      if (!ao) {
+        MSG_WARNING("Failed to normalize histo=NULL in analysis " << name() << " (norm=" << double(norm) << ")");
+        return;
+      }
+      MSG_TRACE("Normalizing histo " << ao->path() << " to " << double(norm));
+      try {
+        const double hint = ao->integral(includeoverflows);
+        if (hint == 0)  MSG_DEBUG("Skipping histo with null area " << ao->path());
+        else            ao->normalize(norm, includeoverflows);
+      }
+      catch (YODA::Exception& we) {
+        MSG_WARNING("Could not normalize histo " << ao->path());
+        return;
+      }
     }
 
-
-    /// Normalize the given histogram, @a histo, to area = @a norm.
-    void normalize(Histo2DPtr histo, CounterAdapter norm=1.0, bool includeoverflows=true);
-
-    /// Normalize the given histograms, @a histos, to area = @a norm.
-    /// @note Constness intentional, if weird, to allow passing rvalue refs of smart ptrs (argh)
-    /// @todo Use SFINAE for a generic iterable of Histo2DPtrs
-    void normalize(const std::vector<Histo2DPtr>& histos, CounterAdapter norm=1.0, bool includeoverflows=true) {
-      for (auto& h : histos) normalize(h, norm, includeoverflows);
+    /// Iteratively normalise the AOs in the iterable @a iter, by factor @a factor.
+    template<typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
+    void normalize(AORange& aos, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      for (auto& ao : aos)  normalize(ao, norm, includeoverflows);
     }
 
-    /// Normalize the histograms in map, @a maps, to area = @a norm.
+    /// Iteratively normalise the AOs in the initialiser list @a iter to a target @a norm.
     template<typename T>
-    void normalize(const std::map<T, Histo2DPtr>& maps, CounterAdapter norm=1.0, bool includeoverflows=true) {
-      for (auto& m : maps) normalize(m.second, norm, includeoverflows);
+    void normalize(std::initializer_list<T>&& aos, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      for (auto& ao : aos)  normalize(ao, norm, includeoverflows);
     }
 
-    /// @todo YUCK!
-    template <std::size_t array_size>
-    void normalize(const Histo2DPtr (&histos)[array_size], CounterAdapter norm=1.0, bool includeoverflows=true) {
-      for (auto& h : histos) normalize(h, norm, includeoverflows);
+    /// Iteratively normalise the AOs in the map @a aos to a target @a norm.
+    template<typename T, typename U> //size_t DbnN, typename... AxisT>
+    void normalize(std::map<T, U>& aos, //BinnedDbnPtr<DbnN, AxisT...>>& aos,
+                   const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      for (auto& item : aos)  normalize(item.second, norm, includeoverflows);
     }
-
-    /// Multiplicatively scale the given histogram, @a histo, by factor @a factor.
-    void scale(Histo2DPtr histo, CounterAdapter factor);
-
-    /// Multiplicatively scale the given histograms, @a histos, by factor @a factor.
-    /// @note Constness intentional, if weird, to allow passing rvalue refs of smart ptrs (argh)
-    /// @todo Use SFINAE for a generic iterable of Histo2DPtrs
-    void scale(const std::vector<Histo2DPtr>& histos, CounterAdapter factor) {
-      for (auto& h : histos) scale(h, factor);
-    }
-
-    /// Iteratively scale the histograms in the map, @a maps, by factor @a factor.
-    template<typename T>
-    void scale(const std::map<T, Histo2DPtr>& maps, CounterAdapter factor) {
-      for (auto& m : maps) scale(m.second, factor);
-    }
-
-    /// @todo YUCK!
-    template <std::size_t array_size>
-    void scale(const Histo2DPtr (&histos)[array_size], CounterAdapter factor) {
-      for (auto& h : histos) scale(h, factor);
-    }
-
-
-    /// @todo Add in-place conversions
 
 
     /// Helper for histogram conversion to an inert scatter type
     ///
     /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void barchart(Histo1DPtr h, Scatter2DPtr s, bool usefocus=false) const;
-
-    /// Helper for histogram conversion to an inert scatter type
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void barchart(Histo2DPtr h, Scatter3DPtr s, bool usefocus=false) const;
-
+    template<size_t DbnN, typename... AxisT>
+    void barchart(BinnedDbnPtr<DbnN, AxisT...> ao, ScatterNDPtr<sizeof...(AxisT)+1> s, const bool usefocus=false) const {
+      const string path = s->path();
+      *s = ao->mkScatter(path, false, usefocus); //< do NOT divide by bin area cf. a differential dsigma/dX histogram
+    }
 
     /// Helper for counter division.
     ///
@@ -1117,78 +1124,66 @@ namespace Rivet {
     /// Helper for histogram division.
     ///
     /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(Histo1DPtr h1, Histo1DPtr h2, Scatter2DPtr s) const;
-
-    /// Helper for histogram division with raw YODA objects.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(const YODA::Histo1D& h1, const YODA::Histo1D& h2, Scatter2DPtr s) const;
-
-
-    /// Helper for profile histogram division.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(Profile1DPtr p1, Profile1DPtr p2, Scatter2DPtr s) const;
-
-    /// Helper for profile histogram division with raw YODA objects.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(const YODA::Profile1D& p1, const YODA::Profile1D& p2, Scatter2DPtr s) const;
-
-
-    /// Helper for 2D histogram division.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(Histo2DPtr h1, Histo2DPtr h2, Scatter3DPtr s) const;
-
-    /// Helper for 2D histogram division with raw YODA objects.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(const YODA::Histo2D& h1, const YODA::Histo2D& h2, Scatter3DPtr s) const;
-
-
-    /// Helper for 2D profile histogram division.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(Profile2DPtr p1, Profile2DPtr p2, Scatter3DPtr s) const;
-
-    /// Helper for 2D profile histogram division with raw YODA objects
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s.  Preserves the path information of the target.
-    void divide(const YODA::Profile2D& p1, const YODA::Profile2D& p2, Scatter3DPtr s) const;
+    template<size_t DbnN, typename... AxisT>
+    void divide(const YODA::BinnedDbn<DbnN, AxisT...>& h1, const YODA::BinnedDbn<DbnN, AxisT...>& h2,
+                ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      const string path = s->path();
+      *s = (h1 / h2).mkScatter(path, false); // suppress bin width div
+    }
+    //
+    template<size_t DbnN, typename... AxisT>
+    void divide(BinnedDbnPtr<DbnN, AxisT...> h1, BinnedDbnPtr<DbnN, AxisT...> h2,
+                             ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      return divide(*h1, *h2, s);
+    }
 
 
     /// Helper for histogram efficiency calculation.
     ///
     /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void efficiency(Histo1DPtr h1, Histo1DPtr h2, Scatter2DPtr s) const;
-
-    /// Helper for histogram efficiency calculation.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void efficiency(const YODA::Histo1D& h1, const YODA::Histo1D& h2, Scatter2DPtr s) const;
+    template<size_t DbnN, typename... AxisT>
+    void efficiency(const YODA::BinnedDbn<DbnN, AxisT...>& h1, const YODA::BinnedDbn<DbnN, AxisT...>& h2,
+                    ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      const string path = s->path();
+      *s = YODA::efficiency(h1, h2).mkScatter(path, false); // suppress bin width div
+    }
+    //
+    template<size_t DbnN, typename... AxisT>
+    void efficiency(BinnedDbnPtr<DbnN, AxisT...> h1, BinnedDbnPtr<DbnN, AxisT...> h2,
+                    ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      efficiency(*h1, *h2, s);
+    }
 
 
     /// Helper for histogram asymmetry calculation.
     ///
     /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void asymm(Histo1DPtr h1, Histo1DPtr h2, Scatter2DPtr s) const;
-
-    /// Helper for histogram asymmetry calculation.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void asymm(const YODA::Histo1D& h1, const YODA::Histo1D& h2, Scatter2DPtr s) const;
-
+    template<size_t DbnN, typename... AxisT>
+    void asymm(const YODA::BinnedDbn<DbnN, AxisT...>& h1, const YODA::BinnedDbn<DbnN, AxisT...>& h2,
+               ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      const string path = s->path();
+      *s = YODA::asymm(h1, h2).mkScatter(path, false); // suppress bin width div
+    }
+    //
+    template<size_t DbnN, typename... AxisT>
+    void asymm(BinnedDbnPtr<DbnN, AxisT...> h1, BinnedDbnPtr<DbnN, AxisT...> h2,
+               ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      asymm(*h1, *h2, s);
+    }
 
     /// Helper for converting a differential histo to an integral one.
     ///
     /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void integrate(Histo1DPtr h, Scatter2DPtr s) const;
-
-    /// Helper for converting a differential histo to an integral one.
-    ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void integrate(const Histo1D& h, Scatter2DPtr s) const;
+    template<size_t DbnN, typename... AxisT>
+    void integrate(const YODA::BinnedDbn<DbnN, AxisT...>& h, ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      const string path = s->path();
+      *s = mkIntegral(h).mkScatter(path);
+    }
+    //
+    template<size_t DbnN, typename... AxisT>
+    void integrate(BinnedDbnPtr<DbnN, AxisT...>& h, ScatterNDPtr<sizeof...(AxisT)+1> s) const {
+      integrate(*h, s);
+    }
 
     /// @}
 
@@ -1196,7 +1191,7 @@ namespace Rivet {
   public:
 
     /// List of registered analysis data objects
-    const vector<MultiweightAOPtr>& analysisObjects() const {
+    const vector<MultiplexAOPtr>& analysisObjects() const {
       return _analysisobjects;
     }
 
@@ -1211,17 +1206,17 @@ namespace Rivet {
 
     /// Get a preloaded YODA object.
     template <typename YODAT>
-    shared_ptr<YODAT> getPreload(string path) const {
+    shared_ptr<YODAT> getPreload(const string& path) const {
       return dynamic_pointer_cast<YODAT>(_getPreload(path));
     }
 
 
     /// Register a new data object, optionally read in preloaded data.
     template <typename YODAT>
-    rivet_shared_ptr< Wrapper<YODAT> > registerAO(const YODAT& yao) {
-      typedef Wrapper<YODAT> WrapperT;
-      typedef shared_ptr<YODAT> YODAPtrT;
-      typedef rivet_shared_ptr<WrapperT> RAOT;
+    MultiplexPtr< Multiplexer<YODAT> > registerAO(const YODAT& yao) {
+      using MultiplexerT = Multiplexer<YODAT>;
+      using YODAPtrT = shared_ptr<YODAT>;
+      using RAOT = MultiplexPtr<MultiplexerT>;
 
       if ( !_inInit() && !_inFinalize() ) {
         MSG_ERROR("Can't book objects outside of init() or finalize()");
@@ -1240,11 +1235,11 @@ namespace Rivet {
           } else {
             MSG_WARNING(msg + ". Keeping previous booking");
           }
-          return RAOT(dynamic_pointer_cast<WrapperT>(waold.get()));
+          return RAOT(dynamic_pointer_cast<MultiplexerT>(waold.get()));
         }
       }
 
-      shared_ptr<WrapperT> wao = make_shared<WrapperT>();
+      shared_ptr<MultiplexerT> wao = make_shared<MultiplexerT>();
       wao->_basePath = yao.path();
       YODAPtrT yaop = make_shared<YODAT>(yao);
 
@@ -1288,7 +1283,7 @@ namespace Rivet {
           wao->_persistent.back()->setPath(rawpath);
         }
       }
-      rivet_shared_ptr<WrapperT> ret(wao);
+      MultiplexPtr<MultiplexerT> ret(wao);
 
       ret.get()->unsetActiveWeight();
       if ( _inFinalize() ) {
@@ -1304,11 +1299,11 @@ namespace Rivet {
 
 
     /// Register a data object in the histogram system
-    template <typename AO=MultiweightAOPtr>
+    template <typename AO=MultiplexAOPtr>
     AO addAnalysisObject(const AO& aonew) {
       _checkBookInit();
 
-      for (const MultiweightAOPtr& ao : analysisObjects()) {
+      for (const MultiplexAOPtr& ao : analysisObjects()) {
 
         // Check AO base-name first
         ao.get()->setActiveWeightIdx(defaultWeightIndex());
@@ -1316,7 +1311,7 @@ namespace Rivet {
         if (ao->path() != aonew->path()) continue;
 
         // If base-name matches, check compatibility
-        // NB. This evil is because dynamic_ptr_cast can't work on rivet_shared_ptr directly
+        // NB. This evil is because dynamic_ptr_cast can't work on MultiplexPtr directly
         AO aoold = AO(dynamic_pointer_cast<typename AO::value_type>(ao.get())); //< OMG
         if ( !aoold || !bookingCompatible(aonew, aoold) ) {
           MSG_WARNING("Found incompatible pre-existing data object with same base path "
@@ -1353,17 +1348,12 @@ namespace Rivet {
     void removeAnalysisObject(const std::string& path);
 
     /// Unregister a data object from the histogram system (by pointer)
-    void removeAnalysisObject(const MultiweightAOPtr& ao);
-
-    // /// Get all data objects, for all analyses, from the AnalysisHandler
-    // /// @todo Can we remove this? Why not call handler().getData()?
-    // vector<YODA::AnalysisObjectPtr> getAllData(bool includeorphans) const;
-
+    void removeAnalysisObject(const MultiplexAOPtr& ao);
 
     /// Get a Rivet data object from the histogram system
-    template <typename AO=MultiweightAOPtr>
+    template <typename AO=MultiplexAOPtr>
     const AO getAnalysisObject(const std::string& aoname) const {
-      for (const MultiweightAOPtr& ao : analysisObjects()) {
+      for (const MultiplexAOPtr& ao : analysisObjects()) {
         ao.get()->setActiveWeightIdx(defaultWeightIndex());
         if (ao->path() == histoPath(aoname)) {
           // return dynamic_pointer_cast<AO>(ao);
@@ -1395,118 +1385,13 @@ namespace Rivet {
 
     /// Get a data object from another analysis (e.g. preloaded
     /// calibration histogram).
-    template <typename AO=MultiweightAOPtr>
+    template <typename AO=MultiplexAOPtr>
     AO getAnalysisObject(const std::string& ananame,
                          const std::string& aoname) {
-      MultiweightAOPtr ao = _getOtherAnalysisObject(ananame, aoname);
+      MultiplexAOPtr ao = _getOtherAnalysisObject(ananame, aoname);
       // return dynamic_pointer_cast<AO>(ao);
       return AO(dynamic_pointer_cast<typename AO::value_type>(ao.get()));
     }
-
-
-    // /// Get a named Histo1D object from the histogram system
-    // const Histo1DPtr getHisto1D(const std::string& name) const {
-    //   return getAnalysisObject<Histo1D>(name);
-    // }
-
-    // /// Get a named Histo1D object from the histogram system (non-const)
-    // Histo1DPtr getHisto1D(const std::string& name) {
-    //   return getAnalysisObject<Histo1D>(name);
-    // }
-
-    // /// Get a Histo1D object from the histogram system by axis ID codes (non-const)
-    // const Histo1DPtr getHisto1D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) const {
-    //   return getAnalysisObject<Histo1D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-    // /// Get a Histo1D object from the histogram system by axis ID codes (non-const)
-    // Histo1DPtr getHisto1D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    //   return getAnalysisObject<Histo1D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-
-    // /// Get a named Histo2D object from the histogram system
-    // const Histo2DPtr getHisto2D(const std::string& name) const {
-    //   return getAnalysisObject<Histo2D>(name);
-    // }
-
-    // /// Get a named Histo2D object from the histogram system (non-const)
-    // Histo2DPtr getHisto2D(const std::string& name) {
-    //   return getAnalysisObject<Histo2D>(name);
-    // }
-
-    // /// Get a Histo2D object from the histogram system by axis ID codes (non-const)
-    // const Histo2DPtr getHisto2D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) const {
-    //   return getAnalysisObject<Histo2D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-    // /// Get a Histo2D object from the histogram system by axis ID codes (non-const)
-    // Histo2DPtr getHisto2D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    //   return getAnalysisObject<Histo2D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-
-    // /// Get a named Profile1D object from the histogram system
-    // const Profile1DPtr getProfile1D(const std::string& name) const {
-    //   return getAnalysisObject<Profile1D>(name);
-    // }
-
-    // /// Get a named Profile1D object from the histogram system (non-const)
-    // Profile1DPtr getProfile1D(const std::string& name) {
-    //   return getAnalysisObject<Profile1D>(name);
-    // }
-
-    // /// Get a Profile1D object from the histogram system by axis ID codes (non-const)
-    // const Profile1DPtr getProfile1D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) const {
-    //   return getAnalysisObject<Profile1D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-    // /// Get a Profile1D object from the histogram system by axis ID codes (non-const)
-    // Profile1DPtr getProfile1D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    //   return getAnalysisObject<Profile1D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-
-    // /// Get a named Profile2D object from the histogram system
-    // const Profile2DPtr getProfile2D(const std::string& name) const {
-    //   return getAnalysisObject<Profile2D>(name);
-    // }
-
-    // /// Get a named Profile2D object from the histogram system (non-const)
-    // Profile2DPtr getProfile2D(const std::string& name) {
-    //   return getAnalysisObject<Profile2D>(name);
-    // }
-
-    // /// Get a Profile2D object from the histogram system by axis ID codes (non-const)
-    // const Profile2DPtr getProfile2D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) const {
-    //   return getAnalysisObject<Profile2D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-    // /// Get a Profile2D object from the histogram system by axis ID codes (non-const)
-    // Profile2DPtr getProfile2D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    //   return getAnalysisObject<Profile2D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-
-    // /// Get a named Scatter2D object from the histogram system
-    // const Scatter2DPtr getScatter2D(const std::string& name) const {
-    //   return getAnalysisObject<Scatter2D>(name);
-    // }
-
-    // /// Get a named Scatter2D object from the histogram system (non-const)
-    // Scatter2DPtr getScatter2D(const std::string& name) {
-    //   return getAnalysisObject<Scatter2D>(name);
-    // }
-
-    // /// Get a Scatter2D object from the histogram system by axis ID codes (non-const)
-    // const Scatter2DPtr getScatter2D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) const {
-    //   return getAnalysisObject<Scatter2D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
-
-    // /// Get a Scatter2D object from the histogram system by axis ID codes (non-const)
-    // Scatter2DPtr getScatter2D(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    //   return getAnalysisObject<Scatter2D>(makeAxisCode(datasetID, xAxisID, yAxisID));
-    // }
 
     /// @}
 
@@ -1521,7 +1406,7 @@ namespace Rivet {
 
     /// Storage of all plot objects
     /// @todo Make this a map for fast lookup by path?
-    vector<MultiweightAOPtr> _analysisobjects;
+    vector<MultiplexAOPtr> _analysisobjects;
 
     /// @name Cross-section variables
     /// @{
@@ -1584,33 +1469,6 @@ namespace Rivet {
 /// @def RIVET_DEFAULT_ANALYSIS_CTOR
 /// Preprocessor define to prettify the awkward constructor with name string argument
 #define RIVET_DEFAULT_ANALYSIS_CTOR(clsname) clsname() : Analysis(# clsname) {}
-
-
-
-/// @def DECLARE_RIVET_PLUGIN
-/// Preprocessor define to prettify the global-object plugin hook mechanism
-///
-/// @deprecated Prefer the RIVET_DECLARE_PLUGIN version with predictable RIVET_ prefix
-#define DECLARE_RIVET_PLUGIN(clsname) ::Rivet::AnalysisBuilder<clsname> plugin_ ## clsname
-
-/// @def DECLARE_ALIASED_RIVET_PLUGIN
-/// Preprocessor define to prettify the global-object plugin hook mechanism, with an extra alias name for this analysis
-///
-/// @deprecated Prefer the RIVET_DECLARE_ALIASED_PLUGIN version with predictable RIVET_ prefix
-// #define DECLARE_ALIASED_RIVET_PLUGIN(clsname, alias) Rivet::AnalysisBuilder<clsname> plugin_ ## clsname ## ( ## #alias ## )
-#define DECLARE_ALIASED_RIVET_PLUGIN(clsname, alias) DECLARE_RIVET_PLUGIN(clsname)( #alias )
-
-/// @def DEFAULT_RIVET_ANALYSIS_CONSTRUCTOR
-/// Preprocessor define to prettify the awkward constructor with name string argument
-///
-/// @deprecated Prefer the "CTOR" version
-#define DEFAULT_RIVET_ANALYSIS_CONSTRUCTOR(clsname) clsname() : Analysis(# clsname) {}
-
-/// @def DEFAULT_RIVET_ANALYSIS_CTOR
-/// Preprocessor define to prettify the awkward constructor with name string argument
-///
-/// @deprecated Prefer the RIVET_DEFAULT_ANALYSIS_CTOR version with predictable RIVET_ prefix
-#define DEFAULT_RIVET_ANALYSIS_CTOR(clsname) DEFAULT_RIVET_ANALYSIS_CONSTRUCTOR(clsname)
 
 /// @}
 

@@ -10,7 +10,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ATLAS_2019_I1768911);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2019_I1768911);
 
     /// @name Analysis methods
     /// @{

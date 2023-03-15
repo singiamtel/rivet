@@ -13,7 +13,7 @@ class ZEUS_2011_I945935 : public Analysis {
 public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ZEUS_2011_I945935);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ZEUS_2011_I945935);
 
 
     /// @name Analysis methods

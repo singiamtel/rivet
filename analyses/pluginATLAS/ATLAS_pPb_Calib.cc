@@ -52,8 +52,8 @@ namespace Rivet {
     /// Finalize
     void finalize() {
 
-      _calib->normalize();
-      _impcalib->normalize();
+      if (_calib->integral())     _calib->normalize();
+      if (_impcalib->integral())  _impcalib->normalize();
 
     }
 

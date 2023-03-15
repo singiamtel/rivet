@@ -28,7 +28,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(GammaGammaKinematics);
+    RIVET_DEFAULT_PROJ_CLONE(GammaGammaKinematics);
 
 
   protected:

@@ -29,4 +29,10 @@
 /* Define if Rivet supports in-memory merging of AnalysisHandlers. */
 #undef RIVET_SUPPORTS_MERGING_IN_MEMORY
 
+/* Defined if backtrace() could be fully identified. */
+#undef HAVE_BACKTRACE
+
+/* Define to 1 if you have the <execinfo.h> header file. */
+#undef HAVE_EXECINFO_H
+
 #endif

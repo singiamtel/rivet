@@ -22,7 +22,7 @@ public:
   virtual ~STAR_BES_Centrality() {}
 
   /// Clone on the heap.
-  DEFAULT_RIVET_PROJ_CLONE(STAR_BES_Centrality);
+  RIVET_DEFAULT_PROJ_CLONE(STAR_BES_Centrality);
 
 protected:
   void project(const Event& e) {
@@ -53,7 +53,7 @@ public:
   virtual ~BRAHMSCentrality() {}
 
   // Clone on the heap.
-  DEFAULT_RIVET_PROJ_CLONE(BRAHMSCentrality);
+  RIVET_DEFAULT_PROJ_CLONE(BRAHMSCentrality);
 
 protected:
   // Do the projection. Count the number of charged particles in

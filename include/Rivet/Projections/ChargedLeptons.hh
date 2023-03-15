@@ -29,7 +29,7 @@ namespace Rivet {
 
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(ChargedLeptons);
+    RIVET_DEFAULT_PROJ_CLONE(ChargedLeptons);
 
 
   protected:

@@ -22,7 +22,7 @@ public:
   }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(MC_SumETFwdPbCentrality);
+    RIVET_DEFAULT_PROJ_CLONE(MC_SumETFwdPbCentrality);
 
 protected:
 
@@ -62,7 +62,7 @@ public:
   }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(MC_pPbMinBiasTrigger);
+    RIVET_DEFAULT_PROJ_CLONE(MC_pPbMinBiasTrigger);
 
 protected:
 

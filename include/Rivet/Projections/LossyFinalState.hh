@@ -40,7 +40,7 @@ namespace Rivet {
     virtual ~LossyFinalState() { }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(LossyFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(LossyFinalState);
 
     /// @}
 

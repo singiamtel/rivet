@@ -19,7 +19,7 @@ namespace Rivet {
     Beam() { setName("Beam"); }
 
     /// Clone on the heap
-    DEFAULT_RIVET_PROJ_CLONE(Beam);
+    RIVET_DEFAULT_PROJ_CLONE(Beam);
 
 
     /// @name Beam particles and kinematics

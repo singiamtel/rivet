@@ -19,7 +19,7 @@ namespace Rivet {
     HepMCHeavyIon();
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(HepMCHeavyIon);
+    RIVET_DEFAULT_PROJ_CLONE(HepMCHeavyIon);
 
     /// @}
 

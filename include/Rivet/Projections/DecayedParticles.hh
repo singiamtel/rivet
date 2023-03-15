@@ -22,7 +22,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(DecayedParticles);
+    RIVET_DEFAULT_PROJ_CLONE(DecayedParticles);
     
     /// Virtual destructor.
     virtual ~DecayedParticles() { }

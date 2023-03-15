@@ -86,7 +86,7 @@ namespace Rivet {
 
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(VetoedFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(VetoedFinalState);
 
     /// @}
 

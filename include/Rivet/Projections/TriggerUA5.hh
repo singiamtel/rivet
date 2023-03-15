@@ -18,7 +18,7 @@ namespace Rivet {
     TriggerUA5();
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(TriggerUA5);
+    RIVET_DEFAULT_PROJ_CLONE(TriggerUA5);
 
 
     /// The trigger result for non-single diffractive (2 arm) trigger

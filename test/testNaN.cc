@@ -12,7 +12,7 @@ using namespace std;
 class NanTest : public Rivet::Analysis {
 public:
 
-  DEFAULT_RIVET_ANALYSIS_CTOR(NanTest);
+  RIVET_DEFAULT_ANALYSIS_CTOR(NanTest);
 
   void init() {
     book(_h_test, "test", 50, 66.0, 116.0);
@@ -45,7 +45,7 @@ private:
   Rivet::Histo1DPtr _h_test;
 };
 
-DECLARE_RIVET_PLUGIN(NanTest);
+RIVET_DECLARE_PLUGIN(NanTest);
 
 int main(int argc, char* argv[]) {
   assert(argc > 1);

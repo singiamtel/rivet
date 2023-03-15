@@ -30,7 +30,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(NonHadronicFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(NonHadronicFinalState);
 
 
     /// Apply the projection on the supplied event.

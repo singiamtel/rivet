@@ -133,4 +133,4 @@ cdef extern from "Rivet/Tools/ProjectionTreePlotter.hh" namespace "Rivet":
         void writeProjTree()
         vector[pair[size_t,size_t]]& getEdges()
         vector[string]& getProjNames()
-        
+

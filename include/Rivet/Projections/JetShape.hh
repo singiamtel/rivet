@@ -61,7 +61,7 @@ namespace Rivet {
              RapScheme rapscheme=RAPIDITY);
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(JetShape);
+    RIVET_DEFAULT_PROJ_CLONE(JetShape);
 
     /// @}
 

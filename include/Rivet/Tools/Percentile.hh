@@ -94,7 +94,7 @@ namespace Rivet {
   public:
 
     /// Convenient typedef.
-    typedef rivet_shared_ptr<Wrapper<T>> TPtr;
+    using TPtr = MultiplexPtr<Multiplexer<T>>;
 
     /// @brief Main constructor
     ///

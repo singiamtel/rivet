@@ -17,7 +17,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ATLAS_2022_I2152933);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2022_I2152933);
 
     void book2D(std::string name, std::vector<double> doubleDiff_bins, unsigned int table){
     	for (unsigned int i = 0; i < doubleDiff_bins.size() - 1; ++i){
@@ -176,6 +176,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(ATLAS_2022_I2152933);
+  RIVET_DECLARE_PLUGIN(ATLAS_2022_I2152933);
 
 }

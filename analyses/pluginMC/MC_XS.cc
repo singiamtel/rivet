@@ -39,12 +39,12 @@ namespace Rivet {
         size_t idx = (xsecs.size() == numWeights)? m : 0;
         const double xs    = xsecs[idx].first;
         const double xserr = xsecs[idx].second;
-        _h_XS.get()->_getPersistent(m)->point(0).setY(xs, xserr);
+        _h_XS.get()->persistent(m)->point(0).setY(xs, xserr);
         # endif
         const double weight = event.weights()[m];
-        _h_pmXS.get()->_getPersistent(m)->fill(0.5*(weight > 0 ? 1. : -1), abs(weight));
-        _h_pmN.get()->_getPersistent(m)->fill(0.5*(weight > 0 ? 1. : -1), 1.);
-        _h_N.get()->_getPersistent(m)->fill(0.5, 1.0);
+        _h_pmXS.get()->persistent(m)->fill(0.5*(weight > 0 ? 1. : -1), abs(weight));
+        _h_pmN.get()->persistent(m)->fill(0.5*(weight > 0 ? 1. : -1), 1.);
+        _h_N.get()->persistent(m)->fill(0.5, 1.0);
       }
 
     }

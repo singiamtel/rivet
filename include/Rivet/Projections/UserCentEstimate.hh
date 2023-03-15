@@ -17,7 +17,7 @@ public:
   }
 
   /// Clone on the heap.
-  DEFAULT_RIVET_PROJ_CLONE(UserCentEstimate);
+  RIVET_DEFAULT_PROJ_CLONE(UserCentEstimate);
 
 protected:
 

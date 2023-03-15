@@ -13,9 +13,7 @@
 namespace Rivet {
 
 
-  Analysis::Analysis(const string& name)
-    : _analysishandler(nullptr)
-  {
+  Analysis::Analysis(const string& name) : _analysishandler(nullptr) {
     ProjectionApplier::_allowProjReg = false;
     _defaultname = name;
 
@@ -309,10 +307,6 @@ namespace Rivet {
 
 
   CounterPtr& Analysis::book(CounterPtr& ctr, const string& cname) {
-    // const string path = histoPath(cname);
-    // ctr = CounterPtr(handler().weightNames(), Counter(path, title));
-    // ctr = addAnalysisObject(ctr);
-    // return ctr;
     return ctr = registerAO( Counter(histoPath(cname)) );
   }
 
@@ -323,444 +317,7 @@ namespace Rivet {
   }
 
 
-
-
-  Histo1DPtr& Analysis::book(Histo1DPtr& histo, const string& hname, size_t nbins, double lower, double upper) {
-    const string path = histoPath(hname);
-
-    Histo1D hist = Histo1D(nbins, lower, upper, path);
-    _setWriterPrecision(path, hist);
-
-    // histo = Histo1DPtr(handler().weightNames(), hist);
-    // histo = addAnalysisObject(histo);
-    // return histo;
-    return histo = registerAO(hist);
-  }
-
-  Histo1DPtr& Analysis::book(Histo1DPtr& histo, const string& hname, const initializer_list<double>& binedges) {
-    return book(histo, hname, vector<double>{binedges});
-  }
-
-  Histo1DPtr& Analysis::book(Histo1DPtr& histo, const string& hname, const vector<double>& binedges) {
-    const string path = histoPath(hname);
-
-    Histo1D hist = Histo1D(binedges, path);
-    _setWriterPrecision(path, hist);
-
-    // histo = Histo1DPtr(handler().weightNames(), hist);
-    // histo = addAnalysisObject(histo);
-    // return histo;
-    return histo = registerAO(hist);
-  }
-
-  Histo1DPtr& Analysis::book(Histo1DPtr& histo, const string& hname) {
-    const Scatter2D& refdata = refData(hname);
-    return book(histo, hname, refdata);
-  }
-
-
-  Histo1DPtr& Analysis::book(Histo1DPtr& histo, unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    const string axisCode = mkAxisCode(datasetID, xAxisID, yAxisID);
-    return book(histo, axisCode);
-  }
-
-  Histo1DPtr& Analysis::book(Histo1DPtr& histo, const string& hname, const Scatter2D& refscatter) {
-    const string path = histoPath(hname);
-
-    Histo1D hist = Histo1D(refscatter, path);
-    for (const string& a : hist.annotations()) {
-      if (a != "Path")  hist.rmAnnotation(a);
-    }
-    _setWriterPrecision(path, hist);
-
-    // histo = Histo1DPtr(handler().weightNames(), hist);
-    // histo = addAnalysisObject(histo);
-    // return histo;
-    return histo = registerAO(hist);
-  }
-
-
-  /////////////////
-
-
-  Histo2DPtr& Analysis::book(Histo2DPtr& h2d,const string& hname,
-                             size_t nxbins, double xlower, double xupper,
-                             size_t nybins, double ylower, double yupper) {
-    const string path = histoPath(hname);
-
-    Histo2D hist(nxbins, xlower, xupper, nybins, ylower, yupper, path);
-    _setWriterPrecision(path, hist);
-
-    // h2d = Histo2DPtr(handler().weightNames(), hist);
-    // h2d = addAnalysisObject(h2d);
-    // return h2d;
-    return h2d = registerAO(hist);
-  }
-
-  Histo2DPtr& Analysis::book(Histo2DPtr& h2d,const string& hname,
-                             const initializer_list<double>& xbinedges,
-                             const initializer_list<double>& ybinedges) {
-    return book(h2d, hname, vector<double>{xbinedges}, vector<double>{ybinedges});
-  }
-
-  Histo2DPtr& Analysis::book(Histo2DPtr& h2d,const string& hname,
-                             const vector<double>& xbinedges,
-                             const vector<double>& ybinedges) {
-    const string path = histoPath(hname);
-
-    Histo2D hist(xbinedges, ybinedges, path);
-    _setWriterPrecision(path, hist);
-
-    // h2d = Histo2DPtr(handler().weightNames(), hist);
-    // h2d = addAnalysisObject(h2d);
-    // return h2d;
-    return h2d = registerAO(hist);
-  }
-
-
-  Histo2DPtr& Analysis::book(Histo2DPtr& histo, const string& hname, const Scatter3D& refscatter) {
-    const string path = histoPath(hname);
-
-    Histo2D hist = Histo2D(refscatter, path);
-    for (const string& a : hist.annotations()) {
-      if (a != "Path")  hist.rmAnnotation(a);
-    }
-    _setWriterPrecision(path, hist);
-
-    // histo = Histo2DPtr(handler().weightNames(), hist);
-    // histo = addAnalysisObject(histo);
-    // return histo;
-    return histo = registerAO(hist);
-  }
-
-
-  Histo2DPtr& Analysis::book(Histo2DPtr& histo, const string& hname) {
-    const Scatter3D& refdata = refData<Scatter3D>(hname);
-    return book(histo, hname, refdata);
-  }
-
-
-  Histo2DPtr& Analysis::book(Histo2DPtr& histo, unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    const string axisCode = mkAxisCode(datasetID, xAxisID, yAxisID);
-    return book(histo, axisCode);
-  }
-
-
-  /////////////////
-
-
-  Profile1DPtr& Analysis::book(Profile1DPtr& p1d,const string& hname, size_t nbins, double lower, double upper) {
-    const string path = histoPath(hname);
-
-    Profile1D prof(nbins, lower, upper, path);
-    _setWriterPrecision(path, prof);
-
-    // p1d = Profile1DPtr(handler().weightNames(), prof);
-    // p1d = addAnalysisObject(p1d);
-    // return p1d;
-    return p1d = registerAO(prof);
-  }
-
-
-  Profile1DPtr& Analysis::book(Profile1DPtr& p1d,const string& hname, const initializer_list<double>& binedges) {
-    return book(p1d, hname, vector<double>{binedges});
-  }
-
-  Profile1DPtr& Analysis::book(Profile1DPtr& p1d, const string& hname, const vector<double>& binedges) {
-    const string path = histoPath(hname);
-
-    Profile1D prof(binedges, path);
-    _setWriterPrecision(path, prof);
-
-    // p1d = Profile1DPtr(handler().weightNames(), prof);
-    // p1d = addAnalysisObject(p1d);
-    // return p1d;
-    return p1d = registerAO(prof);
-  }
-
-  Profile1DPtr& Analysis::book(Profile1DPtr& p1d, const string& hname, const Scatter2D& refscatter) {
-    const string path = histoPath(hname);
-
-    Profile1D prof(refscatter, path);
-    for (const string& a : prof.annotations()) {
-      if (a != "Path")  prof.rmAnnotation(a);
-    }
-    _setWriterPrecision(path, prof);
-
-    // p1d = Profile1DPtr(handler().weightNames(), prof);
-    // p1d = addAnalysisObject(p1d);
-    // return p1d;
-    return p1d = registerAO(prof);
-  }
-
-
-  Profile1DPtr& Analysis::book(Profile1DPtr& p1d,const string& hname) {
-    const Scatter2D& refdata = refData(hname);
-    return  book(p1d, hname, refdata);
-  }
-
-
-  Profile1DPtr& Analysis::book(Profile1DPtr& p1d,unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
-    const string axisCode = mkAxisCode(datasetID, xAxisID, yAxisID);
-    return book(p1d, axisCode);
-  }
-
-
-  ///////////////////
-
-
-  Profile2DPtr& Analysis::book(Profile2DPtr& p2d, const string& hname,
-                               size_t nxbins, double xlower, double xupper,
-                               size_t nybins, double ylower, double yupper) {
-    const string path = histoPath(hname);
-
-    Profile2D prof(nxbins, xlower, xupper, nybins, ylower, yupper, path);
-    _setWriterPrecision(path, prof);
-
-    // p2d = Profile2DPtr(handler().weightNames(), prof);
-    // p2d = addAnalysisObject(p2d);
-    // return p2d;
-    return p2d = registerAO(prof);
-  }
-
-
-  Profile2DPtr& Analysis::book(Profile2DPtr& p2d, const string& hname,
-                               const initializer_list<double>& xbinedges,
-                               const initializer_list<double>& ybinedges) {
-    return book(p2d, hname, vector<double>{xbinedges}, vector<double>{ybinedges});
-  }
-
-
-  Profile2DPtr& Analysis::book(Profile2DPtr& p2d, const string& hname,
-                               const vector<double>& xbinedges,
-                               const vector<double>& ybinedges) {
-    const string path = histoPath(hname);
-
-    Profile2D prof(xbinedges, ybinedges, path);
-    _setWriterPrecision(path, prof);
-
-    // p2d = Profile2DPtr(handler().weightNames(), prof);
-    // p2d = addAnalysisObject(p2d);
-    // return p2d;
-    return p2d = registerAO(prof);
-  }
-
-
-  /// @todo REINSTATE
-
-  // Profile2DPtr Analysis::book(Profile2DPtr& prof,const string& hname,
-  //                                      const Scatter3D& refscatter) {
-  //   const string path = histoPath(hname);
-
-  //   /// @todo Add no-metadata argument to YODA copy constructors
-  //   Profile2D prof(refscatter, path);
-  //   if (prof.hasAnnotation("IsRef")) prof.rmAnnotation("IsRef");
-
-  //   p2d = Profile2DPtr(handler().weightNames(), prof);
-  //   p2d = addAnalysisObject(p2d);
-  //   return p2d;
-  // }
-
-
-  // Profile2DPtr Analysis::book(Profile2DPtr& prof, const string& hname) {
-  //   const Scatter3D& refdata = refData<Scatter3D>(hname);
-  //   return book(prof, hname, refdata);
-  // }
-
-
-  /// @todo Should be able to book Scatter1Ds
-
-
-  ///////////////
-
-
-  Scatter2DPtr& Analysis::book(Scatter2DPtr& s2d, unsigned int datasetID,
-                               unsigned int xAxisID, unsigned int yAxisID, bool copy_pts) {
-    const string axisCode = mkAxisCode(datasetID, xAxisID, yAxisID);
-    return book(s2d, axisCode, copy_pts);
-  }
-
-
-  Scatter2DPtr& Analysis::book(Scatter2DPtr& s2d, const string& hname, bool copy_pts) {
-    const string path = histoPath(hname);
-
-    Scatter2D scat;
-    if (copy_pts) {
-      const Scatter2D& refdata = refData(hname);
-      scat = Scatter2D(refdata, path);
-      for (Point2D& p : scat.points()) p.setY(0, 0);
-      for (const string& a : scat.annotations()) {
-        if (a != "Path")  scat.rmAnnotation(a);
-      }
-    }
-    else {
-      scat = Scatter2D(path);
-    }
-    _setWriterPrecision(path, scat);
-
-    // s2d = Scatter2DPtr(handler().weightNames(), scat);
-    // s2d = addAnalysisObject(s2d);
-    // return s2d;
-    return s2d = registerAO(scat);
-  }
-
-
-  Scatter2DPtr& Analysis::book(Scatter2DPtr& s2d, const string& hname, size_t npts, double lower, double upper) {
-    const string path = histoPath(hname);
-
-    Scatter2D scat(path);
-    const double binwidth = (upper-lower)/npts;
-    for (size_t pt = 0; pt < npts; ++pt) {
-      const double bincentre = lower + (pt + 0.5) * binwidth;
-      scat.addPoint(bincentre, 0, binwidth/2.0, 0);
-    }
-    _setWriterPrecision(path, scat);
-
-    // s2d = Scatter2DPtr(handler().weightNames(), scat);
-    // s2d = addAnalysisObject(s2d);
-    // return s2d;
-    return s2d = registerAO(scat);
-  }
-
-  Scatter2DPtr& Analysis::book(Scatter2DPtr& s2d, const string& hname, const vector<double>& binedges) {
-    const string path = histoPath(hname);
-
-    Scatter2D scat(path);
-    for (size_t pt = 0; pt < binedges.size()-1; ++pt) {
-      const double bincentre = (binedges[pt] + binedges[pt+1]) / 2.0;
-      const double binwidth = binedges[pt+1] - binedges[pt];
-      scat.addPoint(bincentre, 0, binwidth/2.0, 0);
-    }
-    _setWriterPrecision(path, scat);
-
-    // s2d = Scatter2DPtr(handler().weightNames(), scat);
-    // s2d = addAnalysisObject(s2d);
-    // return s2d;
-    return s2d = registerAO(scat);
-  }
-
-  Scatter2DPtr& Analysis::book(Scatter2DPtr& s2d, const string& hname, const Scatter2D& refscatter) {
-    const string path = histoPath(hname);
-
-    Scatter2D scat(refscatter, path);
-    for (const string& a : scat.annotations()) {
-      if (a != "Path")  scat.rmAnnotation(a);
-    }
-    _setWriterPrecision(path, scat);
-
-    return s2d = registerAO(scat);
-  }
-
-
-  ///////////////
-
-
-  Scatter3DPtr& Analysis::book(Scatter3DPtr& s3d, unsigned int datasetID, unsigned int xAxisID,
-                               unsigned int yAxisID, unsigned int zAxisID, bool copy_pts) {
-    const string axisCode = mkAxisCode(datasetID, xAxisID, yAxisID);
-    return book(s3d, axisCode, copy_pts);
-  }
-
-
-  Scatter3DPtr& Analysis::book(Scatter3DPtr& s3d, const string& hname, bool copy_pts) {
-    const string path = histoPath(hname);
-
-    Scatter3D scat;
-    if (copy_pts) {
-      const Scatter3D& refdata = refData<Scatter3D>(hname);
-      scat = Scatter3D(refdata, path);
-      for (Point3D& p : scat.points()) p.setZ(0, 0);
-      for (const string& a : scat.annotations()) {
-        if (a != "Path")  scat.rmAnnotation(a);
-      }
-    } else {
-      scat = Scatter3D(path);
-    }
-    _setWriterPrecision(path, scat);
-
-    // s3d = Scatter3DPtr(handler().weightNames(), scat);
-    // s3d = addAnalysisObject(s3d);
-    // return s3d;
-    return s3d = registerAO(scat);
-  }
-
-
-  Scatter3DPtr& Analysis::book(Scatter3DPtr& s3d, const string& hname,
-                               size_t xnpts, double xlower, double xupper,
-                               size_t ynpts, double ylower, double yupper) {
-    const string path = histoPath(hname);
-
-    Scatter3D scat(path);
-    const double xbinwidth = (xupper-xlower)/xnpts;
-    const double ybinwidth = (yupper-ylower)/ynpts;
-    for (size_t xpt = 0; xpt < xnpts; ++xpt) {
-      const double xbincentre = xlower + (xpt + 0.5) * xbinwidth;
-      for (size_t ypt = 0; ypt < ynpts; ++ypt) {
-        const double ybincentre = ylower + (ypt + 0.5) * ybinwidth;
-        scat.addPoint(xbincentre, ybincentre, 0, 0.5*xbinwidth, 0.5*ybinwidth, 0);
-      }
-    }
-    _setWriterPrecision(path, scat);
-
-    // s3d = Scatter3DPtr(handler().weightNames(), scat);
-    // s3d = addAnalysisObject(s3d);
-    // return s3d;
-    return s3d = registerAO(scat);
-  }
-
-  Scatter3DPtr& Analysis::book(Scatter3DPtr& s3d, const string& hname,
-                               const vector<double>& xbinedges,
-                               const vector<double>& ybinedges) {
-    const string path = histoPath(hname);
-
-    Scatter3D scat(path);
-    for (size_t xpt = 0; xpt < xbinedges.size()-1; ++xpt) {
-      const double xbincentre = (xbinedges[xpt] + xbinedges[xpt+1]) / 2.0;
-      const double xbinwidth = xbinedges[xpt+1] - xbinedges[xpt];
-      for (size_t ypt = 0; ypt < ybinedges.size()-1; ++ypt) {
-        const double ybincentre = (ybinedges[ypt] + ybinedges[ypt+1]) / 2.0;
-        const double ybinwidth = ybinedges[ypt+1] - ybinedges[ypt];
-        scat.addPoint(xbincentre, ybincentre, 0, 0.5*xbinwidth, 0.5*ybinwidth, 0);
-      }
-    }
-    _setWriterPrecision(path, scat);
-
-    // s3d = Scatter3DPtr(handler().weightNames(), scat);
-    // s3d = addAnalysisObject(s3d);
-    // return s3d;
-    return s3d = registerAO(scat);
-  }
-
-  Scatter3DPtr& Analysis::book(Scatter3DPtr& s3d, const string& hname, const Scatter3D& refscatter) {
-    const string path = histoPath(hname);
-
-    Scatter3D scat(refscatter, path);
-    for (const string& a : scat.annotations()) {
-      if (a != "Path")  scat.rmAnnotation(a);
-    }
-    _setWriterPrecision(path, scat);
-
-    return s3d = registerAO(scat);
-  }
-
-
-  ///////////////
-
-
-
   /////////////////////
-
-  void Analysis::barchart(Histo1DPtr h, Scatter2DPtr s, bool usefocus) const {
-    const string path = s->path();
-    *s = h->mkScatter(path, false, usefocus); //< do NOT divide by bin area cf. a differential dsigma/dX histogram
-  }
-
-
-  void Analysis::barchart(Histo2DPtr h, Scatter3DPtr s, bool usefocus) const {
-    const string path = s->path();
-    *s = h->mkScatter(path, false, usefocus); //< do NOT divide by bin area cf. a differential d^2sigma/dXdY histogram
-  }
-
 
   void Analysis::divide(const Counter& c1, const Counter& c2, Scatter1DPtr s) const {
     const string path = s->path();
@@ -772,77 +329,14 @@ namespace Rivet {
   }
 
 
-  void Analysis::divide(const Histo1D& h1, const Histo1D& h2, Scatter2DPtr s) const {
-    const string path = s->path();
-    *s = (h1 / h2).mkScatter(path, false); // suppress bin width div
-  }
-  //
-  void Analysis::divide(Histo1DPtr h1, Histo1DPtr h2, Scatter2DPtr s) const {
-    return Analysis::divide(*h1, *h2, s);
-  }
-
-
-  void Analysis::divide(const Profile1D& p1, const Profile1D& p2, Scatter2DPtr s) const {
-    const string path = s->path();
-    *s = (p1 / p2).mkScatter(path, false); // suppress bin width div
-  }
-  //
-  void Analysis::divide(Profile1DPtr p1, Profile1DPtr p2, Scatter2DPtr s) const {
-    return Analysis::divide(*p1, *p2, s);
-  }
-
-
-  void Analysis::divide(const Histo2D& h1, const Histo2D& h2, Scatter3DPtr s) const {
-    const string path = s->path();
-    *s = (h1 / h2).mkScatter(path, false); // suppress bin width div
-  }
-  //
-  void Analysis::divide(Histo2DPtr h1, Histo2DPtr h2, Scatter3DPtr s) const {
-    return Analysis::divide(*h1, *h2, s);
-  }
-
-
-  void Analysis::divide(const Profile2D& p1, const Profile2D& p2, Scatter3DPtr s) const {
-    const string path = s->path();
-    *s = (p1 / p2).mkScatter(path, false); // suppress bin width div
-  }
-  //
-  void Analysis::divide(Profile2DPtr p1, Profile2DPtr p2, Scatter3DPtr s) const {
-    return Analysis::divide(*p1, *p2, s);
-  }
-
-  /// @todo Counter and Histo2D efficiencies and asymms
-
-
-  void Analysis::efficiency(Histo1DPtr h1, Histo1DPtr h2, Scatter2DPtr s) const {
-    const string path = s->path();
-    *s = YODA::efficiency(*h1, *h2).mkScatter(path, false); // suppress bin width div
-  }
-
-  void Analysis::efficiency(const Histo1D& h1, const Histo1D& h2, Scatter2DPtr s) const {
-    const string path = s->path();
-    *s = YODA::efficiency(h1, h2).mkScatter(path, false); // suppress bin width div
-  }
-
-
-  void Analysis::asymm(Histo1DPtr h1, Histo1DPtr h2, Scatter2DPtr s) const {
-    const string path = s->path();
-    *s = YODA::asymm(*h1, *h2).mkScatter(path, false); // suppress bin width div
-  }
-
-  void Analysis::asymm(const Histo1D& h1, const Histo1D& h2, Scatter2DPtr s) const {
-    const string path = s->path();
-    *s = YODA::asymm(h1, h2).mkScatter(path, false);
-  }
-
-
   void Analysis::scale(CounterPtr cnt, Analysis::CounterAdapter factor) {
     if (!cnt) {
       MSG_WARNING("Failed to scale counter=NULL in analysis " << name() << " (scale=" << double(factor) << ")");
       return;
     }
     if (std::isnan(double(factor)) || std::isinf(double(factor))) {
-      MSG_WARNING("Failed to scale counter=" << cnt->path() << " in analysis: " << name() << " (invalid scale factor = " << double(factor) << ")");
+      MSG_WARNING("Failed to scale counter=" << cnt->path() << " in analysis: "
+                   << name() << " (invalid scale factor = " << double(factor) << ")");
       factor = 0;
     }
     MSG_TRACE("Scaling counter " << cnt->path() << " by factor " << double(factor));
@@ -854,93 +348,7 @@ namespace Rivet {
     }
   }
 
-
-  void Analysis::normalize(Histo1DPtr histo, Analysis::CounterAdapter norm, bool includeoverflows) {
-    if (!histo) {
-      MSG_WARNING("Failed to normalize histo=NULL in analysis " << name() << " (norm=" << double(norm) << ")");
-      return;
-    }
-    MSG_TRACE("Normalizing histo " << histo->path() << " to " << double(norm));
-    try {
-      const double hint = histo->integral(includeoverflows);
-      if (hint == 0)  MSG_DEBUG("Skipping histo with null area " << histo->path());
-      else            histo->normalize(norm, includeoverflows);
-    } catch (YODA::Exception& we) {
-      MSG_WARNING("Could not normalize histo " << histo->path());
-      return;
-    }
-  }
-
-
-  void Analysis::scale(Histo1DPtr histo, Analysis::CounterAdapter factor) {
-    if (!histo) {
-      MSG_WARNING("Failed to scale histo=NULL in analysis " << name() << " (scale=" << double(factor) << ")");
-      return;
-    }
-    if (std::isnan(double(factor)) || std::isinf(double(factor))) {
-      MSG_WARNING("Failed to scale histo=" << histo->path() << " in analysis: " << name() << " (invalid scale factor = " << double(factor) << ")");
-      factor = 0;
-    }
-    MSG_TRACE("Scaling histo " << histo->path() << " by factor " << double(factor));
-    try {
-      histo->scaleW(factor);
-    } catch (YODA::Exception& we) {
-      MSG_WARNING("Could not scale histo " << histo->path());
-      return;
-    }
-  }
-
-
-  void Analysis::normalize(Histo2DPtr histo, Analysis::CounterAdapter norm, bool includeoverflows) {
-    if (!histo) {
-      MSG_ERROR("Failed to normalize histo=NULL in analysis " << name() << " (norm=" << double(norm) << ")");
-      return;
-    }
-    MSG_TRACE("Normalizing histo " << histo->path() << " to " << double(norm));
-    try {
-      const double hint = histo->integral(includeoverflows);
-      if (hint == 0)  MSG_DEBUG("Skipping histo with null area " << histo->path());
-      else            histo->normalize(norm, includeoverflows);
-    } catch (YODA::Exception& we) {
-      MSG_WARNING("Could not normalize histo " << histo->path());
-      return;
-    }
-  }
-
-
-  void Analysis::scale(Histo2DPtr histo, Analysis::CounterAdapter factor) {
-    if (!histo) {
-      MSG_ERROR("Failed to scale histo=NULL in analysis " << name() << " (scale=" << double(factor) << ")");
-      return;
-    }
-    if (std::isnan(double(factor)) || std::isinf(double(factor))) {
-      MSG_ERROR("Failed to scale histo=" << histo->path() << " in analysis: " << name() << " (invalid scale factor = " << double(factor) << ")");
-      factor = 0;
-    }
-    MSG_TRACE("Scaling histo " << histo->path() << " by factor " << double(factor));
-    try {
-      histo->scaleW(factor);
-    } catch (YODA::Exception& we) {
-      MSG_WARNING("Could not scale histo " << histo->path());
-      return;
-    }
-  }
-
-
-  void Analysis::integrate(Histo1DPtr h, Scatter2DPtr s) const {
-    // preserve the path info
-    const string path = s->path();
-    *s = mkIntegral(*h).mkScatter(path);
-  }
-
-  void Analysis::integrate(const Histo1D& h, Scatter2DPtr s) const {
-    // preserve the path info
-    const string path = s->path();
-    *s = mkIntegral(h).mkScatter(path);
-  }
-
 }
-/// @todo 2D versions of integrate... defined how, exactly?!?
 
 
 //////////////////////////////////
@@ -949,7 +357,7 @@ namespace Rivet {
 namespace Rivet {
 
 
-  // void Analysis::addAnalysisObject(const MultiweightAOPtr& ao) {
+  // void Analysis::addAnalysisObject(const MultiplexAOPtr& ao) {
   //   if (handler().stage() == AnalysisHandler::Stage::INIT) {
   //     _analysisobjects.push_back(ao);
   //   }
@@ -968,7 +376,7 @@ namespace Rivet {
     }
   }
 
-  void Analysis::removeAnalysisObject(const MultiweightAOPtr& ao) {
+  void Analysis::removeAnalysisObject(const MultiplexAOPtr& ao) {
     for (auto it = _analysisobjects.begin();  it != _analysisobjects.end(); ++it) {
       if ((*it) == ao) {
         _analysisobjects.erase(it);
@@ -1089,7 +497,7 @@ namespace Rivet {
     return handler().weightNames();
   }
 
-  YODA::AnalysisObjectPtr Analysis::_getPreload(string path) const {
+  YODA::AnalysisObjectPtr Analysis::_getPreload(const string& path) const {
     return handler().getPreload(path);
   }
 
@@ -1097,7 +505,7 @@ namespace Rivet {
     return handler().defaultWeightIndex();
   }
 
-  MultiweightAOPtr Analysis::_getOtherAnalysisObject(const std::string & ananame, const std::string& name) {
+  MultiplexAOPtr Analysis::_getOtherAnalysisObject(const std::string & ananame, const std::string& name) {
     std::string path = "/" + ananame + "/" + name;
     const auto& ana = handler().analysis(ananame);
     return ana->getAnalysisObject(name); //< @todo includeorphans check??
@@ -1116,16 +524,6 @@ namespace Rivet {
 
   bool Analysis::_inFinalize() const {
     return handler().stage() == AnalysisHandler::Stage::FINALIZE;
-  }
-
-  template <typename YODAT>
-  void Analysis::_setWriterPrecision(const string& path, YODAT& yao) {
-    const string re = _info->writerDoublePrecision();
-    if (re != "") {
-      std::smatch match;
-      const bool needsDP = std::regex_search(path, match, std::regex(re));
-      if (needsDP)  yao.template setAnnotation("WriterDoublePrecision", "1");
-    }
   }
 
 }

@@ -13,7 +13,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ZEUS_2000_I524911);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ZEUS_2000_I524911);
 
 
     /// @name Analysis methods

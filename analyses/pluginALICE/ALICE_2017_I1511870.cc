@@ -10,7 +10,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ALICE_2017_I1511870);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ALICE_2017_I1511870);
 
 
     /// @name Analysis methods

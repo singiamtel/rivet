@@ -40,7 +40,7 @@ namespace Rivet {
     // PromptFinalState(const Cut& c, const FinalState& fsp=FinalState(), bool accepttaudecays, bool acceptmudecays);
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(PromptFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(PromptFinalState);
 
     /// @}
 

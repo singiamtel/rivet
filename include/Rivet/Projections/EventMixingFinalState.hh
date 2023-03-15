@@ -204,7 +204,7 @@ namespace Rivet {
       setName("EventMixingFinalState");
     }
 
-    DEFAULT_RIVET_PROJ_CLONE(EventMixingFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(EventMixingFinalState);
 
   protected:
 
@@ -227,7 +227,7 @@ namespace Rivet {
       setName("EventMixingCentrality");
     }
 
-    DEFAULT_RIVET_PROJ_CLONE(EventMixingCentrality);
+    RIVET_DEFAULT_PROJ_CLONE(EventMixingCentrality);
 
   protected:
 

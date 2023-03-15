@@ -29,7 +29,7 @@ namespace Rivet {
         declare(DISFinalState(DISFinalState::BoostFrame::HCM), "DISFS");
       }
 
-      DEFAULT_RIVET_PROJ_CLONE(RapidityGap);
+      RIVET_DEFAULT_PROJ_CLONE(RapidityGap);
 
       double M2X() const { return _M2X; }
       double M2Y() const { return _M2Y; }
@@ -239,7 +239,7 @@ namespace Rivet {
       // Return the boost to XCM frame.
       const LorentzTransform& boost() const { return _boost; }
 
-      DEFAULT_RIVET_PROJ_CLONE(BoostedXSystem);
+      RIVET_DEFAULT_PROJ_CLONE(BoostedXSystem);
 
     protected:
 

@@ -22,7 +22,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(LeadingParticlesFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(LeadingParticlesFinalState);
 
 
     /// Add a particle ID to the list of leading particles selected

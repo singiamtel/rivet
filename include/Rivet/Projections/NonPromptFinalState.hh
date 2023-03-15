@@ -27,7 +27,7 @@ namespace Rivet {
     //                     bool accepttaudecays=false, bool acceptmudecays=false);
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(NonPromptFinalState);
+    RIVET_DEFAULT_PROJ_CLONE(NonPromptFinalState);
 
     /// @}
 

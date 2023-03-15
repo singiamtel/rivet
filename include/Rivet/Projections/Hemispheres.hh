@@ -64,7 +64,7 @@ namespace Rivet {
     }
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(Hemispheres);
+    RIVET_DEFAULT_PROJ_CLONE(Hemispheres);
 
     /// Reset the projection
     void clear() {
