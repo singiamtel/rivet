@@ -7,6 +7,9 @@
 #include "Rivet/Math/VectorN.hh"
 #include "Rivet/Math/Vector3.hh"
 
+// Forward declaration
+namespace fastjet { class PseudoJet; }
+
 namespace Rivet {
 
 
@@ -53,6 +56,13 @@ namespace Rivet {
     }
 
     virtual ~FourVector() { }
+
+    /// @brief Cast operator to FastJet PseudoJet
+    ///
+    /// Needed, since otherwise the PseudoJet template constructor assumes
+    /// the indices [0-3] mean px,py,pz,E... but Rivet uses E,px,py,pz ordering.
+    operator fastjet::PseudoJet () const;
+
 
   public:
 

@@ -274,7 +274,7 @@ namespace Rivet {
       return info().refUnmatch();
     }
 
-    /// Positive filterin regex for setting double precision in Writer
+    /// Positive filtering regex for setting double precision in Writer
     virtual std::string writerDoublePrecision() const {
       return info().writerDoublePrecision();
     }

@@ -1,3 +1,28 @@
+2023-03-13  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add variations on the discard/select utility functions to
+	(particularly) discard single elements by equality rather needing
+	to provide a function.
+
+2023-03-10 Christian Gutschow  <chris.g@cern.ch>
+
+	* Fixes in MC_TAU_Decay plot file, courtesy of George Marsden
+
+2023-02-24  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Provide an implicit cast for FourVector and derived classes to
+	PseudoJet, to avoid the incorrect conversion by PJ's template
+	constructor.
+
+2023-02-20 Christian Gutschow  <chris.g@cern.ch>
+
+	* Fix unit for Zjj inclusive runs in ATLAS_2017_I1627873
+
+2023-02-20  Andy Buckley  <andy.buckley@cern.ch>
+
+	* ATLAS_2019_I1746286: fix generator ctau description in the info
+	file. Thanks to Natalia Korneeva for the report.
+
 2023-02-10 Christian Gutschow  <chris.g@cern.ch>
 
 	* Fix memory leaks in binreloc.c and the merging-related method

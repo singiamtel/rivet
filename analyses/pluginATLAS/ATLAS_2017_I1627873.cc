@@ -127,7 +127,7 @@ namespace Rivet {
      /// Normalise histograms etc., after the run
     void finalize() {
 
-      double factor = crossSection()/femtobarn/sumOfWeights();
+      const double factor = crossSection()/(_mode? femtobarn : picobarn)/sumOfWeights();
       scale(_h, factor);
     }
 

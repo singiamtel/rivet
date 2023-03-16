@@ -36,6 +36,7 @@ namespace Rivet {
         return total_integral;
     }
 
+
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -141,37 +142,35 @@ namespace Rivet {
       const double nch = min(myTracks.size(), (size_t)99); // put overflow in the last bin
       _h["nch"]->fill(nch);
 
-    	const double sumPt = min(sum(myTracks, Kin::pT, 0.0), 119.);
+      const double sumPt = min(sum(myTracks, Kin::pT, 0.0), 119*GeV);
       _h["sumPt"]->fill(sumPt/GeV);
 
-      const double sumPt2d = min(sumPt,99);
+      const double sumPt2d = min(sumPt, 99*GeV);
       _h_multi["sumPt_nch_multi"].fill(nch, sumPt2d/GeV);
-
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      // normalize to unity
+      // Normalize to unity
       normalize(_h);
-
       for (auto& hist : _h_multi) {
       	// scaling for normalised distribution according integral of whole set
-				const double norm2D = integral2D(hist.second);
-				hist.second.scale(1./norm2D, this);
+        const double norm2D = integral2D(hist.second);
+        hist.second.scale(1./norm2D, this);
       }
     }
 
+
     /// @name Histograms
-    ///@{
+    /// @{
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> _c;
     map<string, BinnedHistogram> _h_multi;
 
     const vector<double> nch_2D_bins = { 0, 19.5, 39.5, 59.5, 79.5, 101 };
-    ///@}
-
+    /// @}
 
   };
 

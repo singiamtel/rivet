@@ -11,13 +11,14 @@ libRivetTools_la_SOURCES = \
   ParticleUtils.cc \
   ParticleName.cc \
   Percentile.cc \
+  ProjectionTreePlotter.cc \
   RivetYODA.cc \
   RivetMT2.cc \
   RivetPaths.cc \
   TypeRegistry.cc \
   Utils.cc \
-  binreloc.c \
-  ProjectionTreePlotter.cc
+  Vector4.cc \
+  binreloc.c
 
 if ENABLE_HEPMC_3
 libRivetTools_la_SOURCES += RivetHepMC_3.cc ReaderCompressedAscii.cc WriterCompressedAscii.cc
