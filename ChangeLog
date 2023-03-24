@@ -1,3 +1,10 @@
+2023-03-24  Andrii Verbytskyi  <andrii.verbytskyi@mpp.mpg.de>
+
+	* Removed the suppurt of custom formats of Ascii files and related code.
+	* Massured the immediate call to HepMC3::deduce_reader(0 in the file/stream opening,
+	without attempts to deduce the file format inside Rivet.
+	* Required HepMC3>=3.2.0
+
 2023-03-13  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add variations on the discard/select utility functions to

@@ -5,84 +5,8 @@
 #include "HepMC3/ReaderAscii.h"
 #include "HepMC3/ReaderAsciiHepMC2.h"
 #include "HepMC3/ReaderFactory.h"
-#include "Rivet/Tools/ReaderCompressedAscii.hh"
 #include "Rivet/Tools/RivetHepMC.hh"
 #include <cassert>
-
-/// @todo Delete this and require > 3.2 at some point
-#if HEPMC3_VERSION_CODE < 3002000
-
-namespace HepMC3 {
-
-
-  /// Deduce the type of input stream based on its content and return an appropriate Reader
-  std::shared_ptr<Reader> deduce_reader(std::istream& stream) {
-    std::vector<std::string> head;
-    head.push_back("");
-    size_t back = 0;
-    size_t backnonempty = 0;
-    while ((back < 200 && backnonempty < 100) && stream) {
-      char c = stream.get();
-      back++;
-      if (c == '\n') {
-        if (head.back().length() != 0) head.push_back("");
-      } else {
-        head.back() += c;
-        backnonempty++;
-      }
-    }
-    if (!stream) {
-      printf("Info in deduce_reader: input stream is too short or invalid.\n");
-      return shared_ptr<Reader>(nullptr);
-    }
-
-    for (size_t i = 0; i < back; i++) stream.unget();
-
-    if (strncmp(head.at(0).c_str(), "HepMC::Version", 14) == 0 && strncmp(head.at(1).c_str(), "HepMC::Asciiv3", 14) == 0) {
-      printf("Info in deduce_reader: Attempt ReaderAscii\n");
-      return std::shared_ptr<Reader>((Reader*)(new ReaderAscii(stream)));
-    }
-
-    if (strncmp(head.at(0).c_str(), "HepMC::Version", 14) == 0 && strncmp(head.at(1).c_str(), "HepMC::IO_GenEvent", 18) == 0) {
-      printf("Info in deduce_reader: Attempt ReaderAsciiHepMC2\n");
-      return std::shared_ptr<Reader>((Reader*)(new ReaderAsciiHepMC2(stream)));
-    }
-
-    #if HEPMC3_VERSION_CODE >= 3001002
-    if (strncmp(head.at(0).c_str(), "<LesHouchesEvents", 17) == 0) {
-      printf("Info in deduce_reader: Attempt ReaderLHEF\n");
-      return std::shared_ptr<Reader>((Reader*)(new ReaderLHEF(stream)));
-    }
-    printf("Info in deduce_reader: Attempt ReaderHEPEVT\n");
-    std::stringstream st_e(head.at(0).c_str());
-    char attr = ' ';
-    bool HEPEVT = true;
-    int m_i, m_p;
-    while (true) {
-      if (!(st_e >> attr)) {
-        HEPEVT = false;
-        break;
-      }
-      if (attr == ' ') continue;
-      if (attr != 'E') {
-        HEPEVT = false;
-        break;
-      }
-      HEPEVT = static_cast<bool>(st_e >> m_i >> m_p);
-      break;
-    }
-    if (HEPEVT) return std::shared_ptr<Reader>((Reader*)(new ReaderHEPEVT(stream)));
-    printf("Info in deduce_reader: All attempts failed\n");
-    #endif
-    return shared_ptr<Reader>(nullptr);
-  }
-
-
-}
-
-#endif
-
-
 
 namespace Rivet {
   namespace HepMCUtils {
@@ -168,36 +92,7 @@ namespace Rivet {
       std::istream& istr = filename == "-" ? std::cin : *istrp;
       #endif
 
-      // First scan forward and check if there is some hint as to what
-      // kind of file we are looking att.
-      int ntry = 10;
-      std::string header;
-      int filetype = -1;
-      while (ntry) {
-        std::getline(istr, header);
-        if (header.empty()) continue;
-        if (header.substr(0, 34) == "HepMC::Asciiv3-START_EVENT_LISTING") {
-          filetype = 3;
-          break;
-        }
-        if (header.substr(0, 44) == "HepMC::CompressedAsciiv3-START_EVENT_LISTING") {
-          filetype = 4;
-          break;
-        }
-        if (header.substr(0, 38) == "HepMC::IO_GenEvent-START_EVENT_LISTING") {
-          filetype = 2;
-          break;
-        }
-        ntry -= 1;
-      }
-
-      if (filetype == 3) {
-        ret = make_shared<RivetHepMC::ReaderAscii>(istr);
-      } else if (filetype == 4) {
-        ret = make_shared<Rivet::ReaderCompressedAscii>(istr);
-      } else if (filetype == 2) {
-        ret = make_shared<RivetHepMC::ReaderAsciiHepMC2>(istr);
-      }
+      ret = RivetHepMC::deduce_reader(istr);
 
       // Check that everything was ok.
       if (ret) {
@@ -211,10 +106,6 @@ namespace Rivet {
         if (errm) *errm += "Problems reading HepMC from stdin. No header found. ";
         return shared_ptr<HepMC_IO_type>();
       }
-
-      // Now we try to reopen the file and see if we can read something.
-      if (errm) *errm += "Could not deduce file format. Will ask HepMC3 to try. ";
-      ret = RivetHepMC::deduce_reader(filename);
 
       return ret;
     }
@@ -280,11 +171,7 @@ namespace Rivet {
     vector<string> weightNames(const GenEvent& ge) {
       vector<string> ret;
       try {
-        #if HEPMC3_VERSION_CODE >= 3002000
         ret = ge.weight_names();
-        #else
-        ret = ge.weight_names("");
-        #endif
       } catch (...) { return vector<string>(); }
       return ret;
     }
