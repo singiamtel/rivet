@@ -1,8 +1,17 @@
+2023-03-24  Andrii Verbytskyi  <andrii.verbytskyi@mpp.mpg.de>
+
+	* Remove support for custom ASCII event-file formats.
+
+	* Use an immediate call to HepMC3::deduce_reader() in the file and
+	stream opening; drop local attempts to deduce the file format.
+
+	* Require HepMC3 >= 3.2.0
+
 2023-03-13  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add variations on the discard/select utility functions to
-	(particularly) discard elements by equality rather needing
-	to provide a function.
+	(particularly) discard single elements by equality rather than
+	needing to provide a function.
 
 2023-03-10 Christian Gutschow  <chris.g@cern.ch>
 
