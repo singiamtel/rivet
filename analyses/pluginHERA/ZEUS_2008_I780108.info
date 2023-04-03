@@ -5,7 +5,7 @@ Experiment: ZEUS
 Collider: HERA
 InspireID: 780108
 Status: VALIDATED
-Reentrant: false
+Reentrant: true
 Authors:
  -  Andrii Verbytskyi  andrii.verbytskyi@mpp.mpg.de
 References:

@@ -146,3 +146,4 @@ from . import UA5_1987_S1640666
 from . import UA5_1989_S1926373
 from . import VENUS_1995_I392360
 from . import VENUS_1999_I500179
+from . import ZEUS_2008_I780108
