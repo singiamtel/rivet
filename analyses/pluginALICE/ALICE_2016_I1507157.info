@@ -6,7 +6,8 @@ Collider: LHC
 InspireID: 1507157
 Status: UNVALIDATED
 Authors:
- - Christian Bierlich <christian.bierlich@thep.lu.se>
+ - Christian Bierlich <christian.bierlich@hep.lu.se>
+ - Harsh Shah <harsh.shah@hep.lu.se>
 References:
 - 'Eur.Phys.J.C77(2017)no.8,569'
 - 'DOI:10.1140/epjc/s10052-017-5129-6'
