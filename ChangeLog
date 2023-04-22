@@ -1,3 +1,11 @@
+2023-04-21  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add ability to control the specific plugin library paths for
+	analyses to be loaded from, via new programmatic set and get
+	methods on AnalysisLoader and a new RIVET_ANALYSIS_PLUGINS
+	environment variable. Mainly intended for use on big HPC MPI
+	systems where duplicated filesystem walking is a really bad idea.
+
 2023-03-24  Andrii Verbytskyi  <andrii.verbytskyi@mpp.mpg.de>
 
 	* Remove support for custom ASCII event-file formats.
