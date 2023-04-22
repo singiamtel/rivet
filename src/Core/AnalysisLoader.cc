@@ -12,7 +12,8 @@ namespace Rivet {
   using namespace std;
 
 
-  // Initialise static ptr collection
+  // Initialise static-function ptrs
+  vector<string> AnalysisLoader::_pluginpaths;
   AnalysisLoader::AnalysisBuilderMap AnalysisLoader::_ptrs;
   AnalysisLoader::AnalysisBuilderMap AnalysisLoader::_aliasptrs;
 
@@ -26,7 +27,7 @@ namespace Rivet {
 
 
   vector<string> AnalysisLoader::analysisNames() {
-    _loadAnalysisPlugins();
+    loadFromAnalysisPlugins();
     vector<string> names;
     for (const AnalysisBuilderMap::value_type& p : _ptrs) {
       names += p.second->name();
@@ -38,7 +39,7 @@ namespace Rivet {
 
 
   vector<string> AnalysisLoader::allAnalysisNames() {
-    _loadAnalysisPlugins();
+    loadFromAnalysisPlugins();
     vector<string> names;
     for (const AnalysisBuilderMap::value_type& p : _ptrs) names += p.first;
     for (const AnalysisBuilderMap::value_type& p : _aliasptrs) names += p.first;
@@ -59,7 +60,7 @@ namespace Rivet {
 
 
   map<string,string> AnalysisLoader::analysisNameAliases() {
-    _loadAnalysisPlugins();
+    loadFromAnalysisPlugins();
     map<string,string> alias_names;
     for (const AnalysisBuilderMap::value_type& p : _ptrs) {
       const string alias = p.second->alias();
@@ -71,7 +72,7 @@ namespace Rivet {
 
 
   unique_ptr<Analysis> AnalysisLoader::getAnalysis(const string& analysisname) {
-    _loadAnalysisPlugins();
+    loadFromAnalysisPlugins();
     AnalysisBuilderMap::const_iterator ai = _ptrs.find(analysisname);
     if (ai == _ptrs.end()) {
       ai = _aliasptrs.find(analysisname);
@@ -84,7 +85,7 @@ namespace Rivet {
 
 
   vector<unique_ptr<Analysis>> AnalysisLoader::getAllAnalyses() {
-    _loadAnalysisPlugins();
+    loadFromAnalysisPlugins();
     vector<unique_ptr<Analysis>> analyses;
     for (const auto & p : _ptrs) {
       analyses.emplace_back( p.second->mkAnalysis() );
@@ -123,34 +124,70 @@ namespace Rivet {
   }
 
 
-  void AnalysisLoader::_loadAnalysisPlugins() {
+  vector<string> AnalysisLoader::analysisPlugins() {
+    // Effectively just an alias, but semantically it's different
+    return searchAnalysisPlugins();
+  }
+
+
+  vector<string> AnalysisLoader::searchAnalysisPlugins() {
+    if (!_pluginpaths.empty()) return _pluginpaths;
+
+    // Take the full lib paths from the environment if set
+    string msg = "";
+    const char* env = getenv("RIVET_ANALYSIS_PLUGINS");
+    if (env) {
+      string envstr = env;
+      replace_all(envstr, "\n", " "); //< replace newlines from shell expansions
+      _pluginpaths = split(envstr, " "); //< space-separation
+      msg = "Using plugin libraries from $RIVET_ANALYSIS_PLUGINS";
+    }
+
+    // If no other overrides the plugins list is still empty, search the filesystem
+    if (_pluginpaths.empty()) {
+      const vector<string> dirs = getAnalysisLibPaths();
+      const string libsuffix = ".so";
+      for (const string& d : dirs) {
+        if (d.empty()) continue;
+        oslink::directory dir(d);
+        while (dir) {
+          string filename = dir.next();
+          // Require that plugin lib name starts with 'Rivet'
+          if (filename.find("Rivet") != 0) continue;
+          size_t posn = filename.find(libsuffix);
+          if (posn == string::npos || posn != filename.length()-libsuffix.length()) continue;
+          /// @todo Make sure this is an abs path
+          /// @todo Sys-dependent path separator instead of "/"
+          const string path = d + "/" + filename;
+          // Ensure no duplicate paths
+          if (find(_pluginpaths.begin(), _pluginpaths.end(), path) == _pluginpaths.end()) {
+            _pluginpaths += path;
+          }
+        }
+        msg = "Using plugin libraries from analysis-path search";
+      }
+    }
+
+    msg += " = [" + join(_pluginpaths, ", ") + "]";
+    getLog() << Log::DEBUG << msg << endl;
+    return _pluginpaths;
+  }
+
+
+  void AnalysisLoader::setAnalysisPlugins(const vector<string> pluginpaths) {
+    // Clear ptr caches, since resetting the allowed libraries
+    _ptrs.clear();
+    _aliasptrs.clear();
+    _pluginpaths = pluginpaths;
+  }
+
+
+  void AnalysisLoader::loadFromAnalysisPlugins() {
     // Only run once
     if (!_ptrs.empty()) return;
 
-    // Build the list of directories to search
-    const vector<string> dirs = getAnalysisLibPaths();
-
-    // Find plugin module library files
-    const string libsuffix = ".so";
-    vector<string> pluginfiles;
-    for (const string& d : dirs) {
-      if (d.empty()) continue;
-      oslink::directory dir(d);
-      while (dir) {
-        string filename = dir.next();
-        // Require that plugin lib name starts with 'Rivet'
-        if (filename.find("Rivet") != 0) continue;
-        size_t posn = filename.find(libsuffix);
-        if (posn == string::npos || posn != filename.length()-libsuffix.length()) continue;
-        /// @todo Make sure this is an abs path
-        /// @todo Sys-dependent path separator instead of "/"
-        const string path = d + "/" + filename;
-        // Ensure no duplicate paths
-        if (find(pluginfiles.begin(), pluginfiles.end(), path) == pluginfiles.end()) {
-          pluginfiles += path;
-        }
-      }
-    }
+    // Find plugin module library files if necessary
+    const vector<string> pluginfiles = analysisPlugins();
 
     // Load the plugin files
     MSG_TRACE("Candidate analysis plugin libs: " << pluginfiles);
