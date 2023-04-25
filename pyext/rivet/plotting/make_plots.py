@@ -164,7 +164,7 @@ def get_nominal_key(listOfHistoKeys):
 
 
 def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle, plotoptions,
-                 style, rc_params, mc_errs, nRatioTicks, skipWeights, canvasText, verbose = False):
+                 style, rc_params, mc_errs, nRatioTicks, skipWeights, canvasText, removeOptions, verbose = False):
     """Create output dictionary for the plot_id.
 
     Parameters
@@ -187,6 +187,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
         See rivet_mkdat
     style : str
         A predefined name of a style.
+    removeOptions : bool
+        If true, prevents appending the options string to the legend label
     rc_params : dict[str, str]
         Dict of rcParams that will be added to the rcParams section of the output .dat file.
 
@@ -232,7 +234,9 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
 
             thisFilePlotOptions = dict(plotoptions.get(filename, {}))
             # add options string to legend entry
-            newtitle = thisFilePlotOptions.get('Title', '') + label
+            newtitle = thisFilePlotOptions.get('Title', '')
+            if not removeOptions:
+                newtitle += label
             thisFilePlotOptions['Title'] = newtitle
             outputdict['histograms'][filename+label].update(thisFilePlotOptions)
 
@@ -377,7 +381,8 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
                            plotinfodirs=[], style='default', config_files=[],
                            hier_output=False, outdir='.', mc_errs=True,
                            rivetplotpaths=True, analysispaths=[], verbose=False,
-                           writefiles=False, nRatioTicks=1, skipWeights=False, canvasText=None):
+                           writefiles=False, nRatioTicks=1, skipWeights=False,
+                           removeOptions = False, canvasText=None):
     """Create a dictionary of the plotting data that can be turned
     into self-consistent Python executables.
 
@@ -503,7 +508,7 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
             plot_id, plotdirs, config_files,
             mchistos, refhistos, reftitle,
             plotoptions, stylename, rc_params_dict, mc_errs,
-            nRatioTicks, skipWeights, canvasText, verbose
+            nRatioTicks, skipWeights, canvasText, removeOptions, verbose
         )
         if 'histograms' in outputdict: # protection against Counters
             plot_info_dicts[plot_id] = outputdict

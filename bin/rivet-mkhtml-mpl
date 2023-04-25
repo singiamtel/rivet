@@ -89,6 +89,8 @@ stygroup.add_argument("-f", "--format", action="append", dest="FORMATS", default
                     help="output format string consisting of desired output formats separated by commas [default=PDF,PNG]")
 stygroup.add_argument("--booklet", dest="BOOKLET", action="store_true",
                       default=False, help="create booklet (currently only available for PDF with pdftk or pdfmerge).")
+stygroup.add_argument("--rmopts", "--remove-options", dest="REMOVE_OPTIONS", action="store_true", default=False,
+                      help="remove options label from legend")
 
 selgroup = parser.add_argument_group("Selective plotting")
 selgroup.add_argument("-m", "--match", action="append", dest="PATHPATTERNS", default=[],
@@ -211,6 +213,7 @@ def generateScripts(args):
                                                        style, configfiles, True, args.OUTPUTDIR, args.MC_ERRS,
                                                        True, [], args.VERBOSE, writefiles=writefiles,
                                                        nRatioTicks=args.NRATIOTICKS, skipWeights = args.SKIP_WEIGHTS,
+                                                       removeOptions = args.REMOVE_OPTIONS,
                                                        canvasText=args.CANVASTEXT)
 
     ## Write web page containing all (matched) plots
