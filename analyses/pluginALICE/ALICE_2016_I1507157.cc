@@ -81,7 +81,7 @@ namespace Rivet {
       nsp.resize(refdata.size());
       nmp.resize(refdata.size());
       for (int i = 0, N = refdata.size(); i < N; ++i) {
-	const YODA::Scatter2D& tmp = refData(refdata[i]);
+        const YODA::Scatter2D& tmp = refData(refdata[i]);
         // The ratio plots.
         book(ratio[i], refdata[i], true);
         // Signal and mixed background should not be displayed.
@@ -91,17 +91,15 @@ namespace Rivet {
         book(nsp[i],"TMP/nsp"+std::to_string(i));
         book(nmp[i],"TMP/nmp"+std::to_string(i));
         // The differing deltaphi histogram edges per pair.
-	deltaphi.push_back(xEdges(tmp));
+        deltaphi.push_back(xEdges(tmp));
       }
     }
 
-    /// Breaking out the main loop, since it is used twice.
-    void particleLoop(const Particles& particles, vector<Histo1DPtr>& histos, vector<CounterPtr>& sow) {
-      for (const Particle& p1 : particles) 
-	 for (const Particle& p2 : particles) {
-	   if (isSame(p1,p2)) continue;
+    void fillPair(const Particle& p1, const Particle& p2, vector<Histo1DPtr>& histos, 
+      vector<CounterPtr>& sow) {
+	   if (isSame(p1,p2)) return;
           // If the pair is not within eta acceptance, we can continue early.
-          if (abs(p1.eta() - p2.eta()) > 1.3) continue;
+          if (abs(p1.eta() - p2.eta()) > 1.3) return;
           // Figure out which pid pair we are looking at.
           int iPair = -1;
           for (int i = 0, N = pid.size(); i < N; ++i) {
@@ -111,13 +109,12 @@ namespace Rivet {
             }
           }
           // If the pair is not in the analysis, don't fill anything.
-          if (iPair < 0) continue;
+          if (iPair < 0) return;
           // Apply min pT cuts, varies for different species.
-          if (p1.pT() < pTcuts[iPair].first || p2.pT() < pTcuts[iPair].second) continue;
+          if (p1.pT() < pTcuts[iPair].first || p2.pT() < pTcuts[iPair].second) return;
           const double dPhi = phaseDif(p1.phi(), p2.phi(), deltaphi[iPair]);
           histos[iPair]->fill(dPhi);
           sow[iPair]->fill();
-        }      
     }
 
     /// Perform the per-event analysis
@@ -134,17 +131,21 @@ namespace Rivet {
       // Test if we have enough mixing events available to continue.
       if (!evm.hasMixingEvents()) return;
 
-      // Do the signal histograms.
-      particleLoop(pp.particles(), signal, nsp);
-      // Do the background histograms.
-      particleLoop(evm.particles(), background, nmp);
+      for (const Particle& p1 : pp.particles()) {
+	      // First do the signal histograms. 
+        for (const Particle& p2 : pp.particles())
+	        fillPair(p1, p2, signal, nsp);
+	      // Then do the background
+        for (const Particle& p2 : evm.particles())
+	        fillPair(p1, p2, background, nmp);
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       for (int i = 0, N = pid.size(); i < N; ++i) {
-	// Scaling factor eqns. (2)-(5) in the paper.
+	    // Scaling factor eqns. (2)-(5) in the paper.
         double sc = nmp[i]->sumW() / nsp[i]->sumW();
         signal[i]->scaleW(sc);
         divide(signal[i],background[i],ratio[i]);
