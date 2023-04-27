@@ -164,7 +164,7 @@ def get_nominal_key(listOfHistoKeys):
 
 
 def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle, plotoptions,
-                 style, rc_params, mc_errs, nRatioTicks, skipWeights, canvasText, removeOptions, verbose = False):
+                 style, rc_params, mc_errs, nRatioTicks, skipWeights, removeOptions, deviation, canvasText, verbose = False):
     """Create output dictionary for the plot_id.
 
     Parameters
@@ -189,6 +189,9 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
         A predefined name of a style.
     removeOptions : bool
         If true, prevents appending the options string to the legend label
+    deviation : bool
+        If true, express compatability between curve and ref. data in terms 
+        of standard deviations in ratio panel.
     rc_params : dict[str, str]
         Dict of rcParams that will be added to the rcParams section of the output .dat file.
 
@@ -200,7 +203,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
     outputdict = {}
     plot_configs = plot2yaml.get_plot_configs(plot_id, plotdirs=plotdirs, config_files=config_files)
     outputdict['plot features'] = plot_configs
-
+    outputdict['plot features']['Deviation'] = deviation
+    
     # only write extra info to the .dat file if specified by user
     if nRatioTicks !=1: outputdict['plot features'].update({"nRatioTicks": nRatioTicks})
     if canvasText != None: outputdict['plot features'].update({"canvasText" : canvasText})
@@ -381,8 +385,9 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
                            plotinfodirs=[], style='default', config_files=[],
                            hier_output=False, outdir='.', mc_errs=True,
                            rivetplotpaths=True, analysispaths=[], verbose=False,
-                           writefiles=False, nRatioTicks=1, skipWeights=False,
-                           removeOptions = False, canvasText=None):
+                           writefiles=False, nRatioTicks=1, skipWeights=False, 
+                           removeOptions = False, deviation=False,                    
+                           canvasText=None):
     """Create a dictionary of the plotting data that can be turned
     into self-consistent Python executables.
 
@@ -429,6 +434,8 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
         This is used if one wants the intermediate format for later use or if one only calls this function and not rivet-mkhtml.
     nRatioTicks: int
         Number of minor ticks between major ticks, can be specified in rivet-mkhtml
+    deviation: bool
+        Scale ratio-plot to error of the reference histogram (1 standard deviation)
 
     Returns
     -------
@@ -508,7 +515,8 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
             plot_id, plotdirs, config_files,
             mchistos, refhistos, reftitle,
             plotoptions, stylename, rc_params_dict, mc_errs,
-            nRatioTicks, skipWeights, canvasText, removeOptions, verbose
+            nRatioTicks, skipWeights, removeOptions, deviation, 
+            canvasText, verbose
         )
         if 'histograms' in outputdict: # protection against Counters
             plot_info_dicts[plot_id] = outputdict
