@@ -4,10 +4,12 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/EventMixingFinalState.hh"
+
 namespace Rivet {
 
 
   /// @brief Angular correlations of identified particles in pp at 7 TeV.
+  ///
   /// Also showcasing use of EventMixingFinalState.
   class ALICE_2016_I1507157 : public Analysis {
   public:
@@ -17,7 +19,7 @@ namespace Rivet {
 
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// @brief Calculate angular distance between particles.
     double phaseDif(double a1, double a2, const pair<double, double>& edges) {
@@ -28,7 +30,8 @@ namespace Rivet {
         dif -= 2*M_PI;
       return dif;
     }
-    
+
+
     /// @brief Get the minimal and maximal x values from a Scatter2D (refdata).
     pair<double, double> xEdges(const YODA::Scatter2D& h) {
       double xMin = 0;
@@ -39,6 +42,7 @@ namespace Rivet {
       }
       return {xMin, xMax};
     }
+
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -95,6 +99,7 @@ namespace Rivet {
       }
     }
 
+
     void fillPair(const Particle& p1, const Particle& p2, vector<Histo1DPtr>& histos, 
       vector<CounterPtr>& sow) {
 	   if (isSame(p1,p2)) return;
@@ -116,6 +121,7 @@ namespace Rivet {
           histos[iPair]->fill(dPhi);
           sow[iPair]->fill();
     }
+
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
@@ -152,7 +158,7 @@ namespace Rivet {
       }
     }
 
-    //@}
+    /// @}
 
 
     /// Analysis variables.
@@ -160,16 +166,17 @@ namespace Rivet {
     vector<pair<double, double> > pTcuts;
     vector<pair<double, double> > deltaphi;
     /// @name Histograms and counters
-    //@{
+    /// @{
     vector<Histo1DPtr> signal;
     vector<Histo1DPtr> background;
     vector<Scatter2DPtr> ratio;
     vector<CounterPtr> nsp;
     vector<CounterPtr> nmp;
-
-    //@}
+    /// @}
   };
+
 
   // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ALICE_2016_I1507157);
+
 }
