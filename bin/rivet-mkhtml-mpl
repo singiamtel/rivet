@@ -70,6 +70,8 @@ stygroup.add_argument("-t", "--title", dest="TITLE",
                       default="Plots from Rivet analyses", help="title to be displayed on the main web page")
 stygroup.add_argument("--reftitle", dest="REFTITLE",
                       default="Data", help="legend entry for reference data")
+stygroup.add_argument("--deviation", dest="DEVIATION", action="store_true",
+                      default=False, help="rescale ratio panel to standard deviation (bin by bin)")
 #stygroup.add_argument("--no-plottitle", dest="NOPLOTTITLE", action="store_true",
 #                      default=False, help="don't show the plot title on the plot "
 #                      "(useful when the plot description should only be given in a caption)")
@@ -213,7 +215,7 @@ def generateScripts(args):
                                                        style, configfiles, True, args.OUTPUTDIR, args.MC_ERRS,
                                                        True, [], args.VERBOSE, writefiles=writefiles,
                                                        nRatioTicks=args.NRATIOTICKS, skipWeights = args.SKIP_WEIGHTS,
-                                                       removeOptions = args.REMOVE_OPTIONS,
+                                                       removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION, 
                                                        canvasText=args.CANVASTEXT)
 
     ## Write web page containing all (matched) plots
