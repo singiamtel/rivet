@@ -5,10 +5,10 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-
 #include <unordered_map>
 
 namespace Rivet {
+
 
   /// @brief W+D production in pp at 13 TeV
   class ATLAS_2023_I2628732 : public Analysis {
@@ -121,8 +121,8 @@ namespace Rivet {
       // Reweight to values used in the paper:
       // f(D+) = 0.2404
       // f(D*) = 0.2429
-      for (const string& lepton_name : {"lep_minus", "lep_plus"}) {
-        for (const string& hadron_name : {"Dplus", "Dstar"}) {
+      for (const string lepton_name : {"lep_minus", "lep_plus"}) {
+        for (const string hadron_name : {"Dplus", "Dstar"}) {
           const double sf = hadron_name == "Dplus"? (0.2404/fDplus) : (0.2429/fDstar);
           scale(_h[histo_name(lepton_name, hadron_name, "lep_abs_eta")], sf);
           scale(_h[histo_name(lepton_name, hadron_name, "D_pt")], sf);
@@ -137,11 +137,13 @@ namespace Rivet {
       }
     }
 
+
   private:
 
     string histo_name(const string& lepton, const string& hadron, const string& val) {
       return lepton + "_" + hadron + "_" + val;
     }
+
 
     void bookPair(const string& lepton, const string& hadron,
                   const string& val, unsigned int d) {
@@ -195,5 +197,7 @@ namespace Rivet {
     double _max_D_pt = 150;
   };
 
+
   RIVET_DECLARE_PLUGIN(ATLAS_2023_I2628732);
+
 }
