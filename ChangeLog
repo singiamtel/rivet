@@ -1,3 +1,7 @@
+2023-04-27  Christian Gutschow  <chris.g@cern.ch>
+
+	* Release 3.1.8
+
 2023-04-27  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Append extra newlines to plugin sources in batched rivet-build.
