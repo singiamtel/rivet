@@ -79,7 +79,7 @@ namespace Rivet {
 
       const double HT = sum(jets, Kin::pT, 0.0);
       _h["HT"]->fill(HT/GeV);
-      
+
       size_t bTags = count(jets, hasBTag(Cuts::pT > 5*GeV && Cuts::abseta < 2.5));
       _h["bjets_excl"]->fill(bTags);
     }
