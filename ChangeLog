@@ -1,3 +1,8 @@
+2023-05-02  Christian Gutschow  <chris.g@cern.ch>
+
+	* Prevent bookeeping histos from acquiring analysis option
+	on the fly as part of merging
+
 2023-04-27  Christian Gutschow  <chris.g@cern.ch>
 
 	* Release 3.1.8
