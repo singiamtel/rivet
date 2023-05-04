@@ -776,10 +776,13 @@ namespace Rivet {
         if ( path.hasOption(delopt) )  path.removeOption(delopt);
       }
       // ...or added
-      for (size_t i = 0; i < optAnas.size(); ++i) {
-        if (optAnas[i] == "" || path.path().find(optAnas[i]) != string::npos ) {
-          path.setOption(optKeys[i], optVals[i]);
-          path.fixOptionString();
+      if (path.analysis() != "") {
+        // adding analysis options only makes sense for analysis routines
+        for (size_t i = 0; i < optAnas.size(); ++i) {
+          if (optAnas[i] == "" || path.path().find(optAnas[i]) != string::npos ) {
+            path.setOption(optKeys[i], optVals[i]);
+            path.fixOptionString();
+          }
         }
       }
       path.setPath();
