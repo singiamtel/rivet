@@ -77,8 +77,8 @@ namespace Rivet {
 
         auto output_name = _session->GetOutputNameAllocated(0, allocator);
         _outputNodeName = output_name.get();
-        auto out_type_info = _session->GetInputTypeInfo(0);
-        auto out_tensor_info = in_type_info.GetTensorTypeAndShapeInfo();
+        auto out_type_info = _session->GetOutputTypeInfo(0);
+        auto out_tensor_info = out_type_info.GetTensorTypeAndShapeInfo();
         _outType = out_tensor_info.GetElementType();//TODO: Use this for SFINAE
         _outputNodeDims = out_tensor_info.GetShape();
         // Check for -1's: This is an artifact of batch size issues.
