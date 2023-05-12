@@ -3,6 +3,8 @@
 #define RIVET_RivetONNXrt_HH
 
 #include <iostream>
+#include <functional>
+#include <numeric>
 
 #include "Rivet/Tools/RivetPaths.hh"
 #include "onnxruntime_cxx_api.h"
@@ -54,8 +56,8 @@ namespace Rivet {
         float* floatarr = output_tensors.front().GetTensorMutableData<float>();
 
         outputs.clear();
-        // TODO (longer-term): Generalise for different shape output arrays.
-        outputs.assign(floatarr, floatarr+_outputNodeDims[0]);                                                     
+        int64_t total = std::accumulate(_outputNodeDims.begin(), _outputNodeDims.end(), int64_t(1), std::multiplies<int64_t>());
+        outputs.assign(floatarr, floatarr+total);                                                     
       }
 
       void getNetworkInfo(){
