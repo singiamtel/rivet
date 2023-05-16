@@ -9,12 +9,12 @@ test "$FORCE" && BUILD="$BUILD --no-cache"
 test "$TEST" && BUILD="echo $BUILD"
 
 # FEDORA_IMAGE=fedora:32
-# UBUNTU_IMAGE=ubuntu:22.04
+# UBUNTU_IMAGE=ubuntu:23.04
 
-RIVETBS_VERSION=3.1.6
-LHAPDF_VERSION=6.5.2
+RIVETBS_VERSION=3.1.8
+LHAPDF_VERSION=6.5.4
 
-for vhepmc in 3.2.5; do   # 2.06.11
+for vhepmc in 3.2.6; do   # 2.06.11
     for tex in 0 1; do
 
         MSG="Building hepbase image with HepMC=$vhepmc and TeX=$tex"

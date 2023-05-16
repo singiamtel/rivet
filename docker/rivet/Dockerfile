@@ -10,6 +10,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && texhash \
     && git clone --depth 1 --branch $YODA_BRANCH https://gitlab.com/hepcedar/yoda.git yoda/ \
     && cd yoda/ \
+    && autoconf --version \
     && autoreconf -i \
     && ./configure && make -j $(nproc --ignore=1) && make install \
     && cd .. \
@@ -19,9 +20,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && mkdir /code && cd /code \
     && git clone --depth 1 --branch $RIVET_BRANCH https://gitlab.com/hepcedar/rivet.git rivet/ \
     && cd rivet/ \
+    && autoconf --version \
     && autoreconf -i \
     && if [[ -d /usr/local/include/HepMC3 ]]; then HEPMC_FLAG="--with-hepmc3=/usr/local"; fi \
-    && autoconf --version \
     && ./configure $HEPMC_FLAG && make -j $(nproc --ignore=1) && make install \
     && texhash \
     && echo "source /usr/local/etc/bash_completion.d/rivet-completion" > /etc/profile.d/rivet-completion.sh \
@@ -29,13 +30,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && texhash \
     && rm -rf /code
 
-# # TODO: remove when hepbase is fixed
-# RUN export DEBIAN_FRONTEND=noninteractive \
-#     && PYV=$(python -c 'from __future__ import print_function; import sys; print("{i.major}.{i.minor}".format(i=sys.version_info))') \
-#     && echo "PYTHONPATH=\"\$PYTHONPATH:/usr/local/lib/python$PYV/site-packages/\"" >> /etc/profile.d/05-usrlocal.sh \
-#     && echo "export PYTHONPATH" >> /etc/profile.d/05-usrlocal.sh
+# TODO: fix local/local in packages
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && echo 'export PYTHONPATH="/usr/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
+    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
+    && apt-get install -y cm-super dvipng \
+    && apt-get autoremove -y \
+    && apt-get autoclean -y
 
 WORKDIR /work
-#ADD rivet-exec.sh /root
-#ENTRYPOINT ["/root/rivet-exec.sh"]
-#CMD []

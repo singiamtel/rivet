@@ -1,19 +1,7 @@
-ARG FEDORA_IMAGE=fedora:36
+ARG FEDORA_IMAGE=fedora:38
 FROM ${FEDORA_IMAGE}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
-
-ARG LATEX
-RUN if test "$LATEX" = "1"; then \
-      dnf install -y \
-        texlive-latex-bin texlive-latexconfig \
-        texlive-pst-tools texlive-pst-arrow \
-        texlive-relsize texlive-cm texlive-hyphen-base \
-        texlive-dvips texlive-collection-fontsrecommended \
-        ghostscript ImageMagick; \
-      dnf clean all; \
-      texhash; \
-    fi
 
 ARG BUILD_TOOLS
 RUN true \
@@ -70,7 +58,7 @@ RUN true \
          dnf install -y libXft libXpm libXext libsqlite3x uuid-devel && \
          dnf clean all && \
          cd /usr/local && \
-         wget --no-verbose https://root.cern/download/root_v6.24.06.Linux-fedora32-x86_64-gcc10.2.tar.gz -O- | tar xz && \
+         wget --no-verbose https://root.cern/download/root_v6.28.02.Linux-fedoraVERSION_ID=36-x86_64-gcc12.2.tar.gz -O- | tar xz && \
          echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh; \
        fi
 
@@ -87,10 +75,11 @@ RUN true \
     && wget --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
     && chmod +x rivet-bootstrap \
     && INSTALL_PREFIX=/usr/local INSTALL_RIVET=0 INSTALL_YODA=0 INSTALL_CYTHON=0 HEPMC_VERSION=${HEPMC_VERSION} MAKE="make -j $(nproc --ignore=1)" ./rivet-bootstrap \
-    && rm -rf /code \
+    && rm -rf /code
 
-RUN export DEBIAN_FRONTEND=noninteractive \
+RUN true \
     && echo "export LD_LIBRARY_PATH=\"/usr/local/lib:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
+    && echo "export LD_LIBRARY_PATH=\"/usr/local/lib64:/usr/lib64:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
     && echo "export PYTHONPATH=\"$(for i in $(ls /usr/local/lib/python* -d); do echo -n "$i/site-packages:"; done)\$PYTHONPATH\"" >> /etc/profile.d/05-usrlocal.sh \
     && cp /etc/bashrc /tmp/DUMMY1 \
     && echo 'for i in /etc/profile.d/*.sh; do . $i; done' > /tmp/DUMMY2 \
@@ -107,15 +96,23 @@ RUN true \
     && ls wrappers/python/build/lhapdf -l \
     && rm -r /code
 
+ARG LATEX
+RUN if test "$LATEX" = "1"; then \
+      dnf install -y \
+        texlive-latex-bin texlive-latexconfig \
+        texlive-pst-tools texlive-pst-arrow \
+        texlive-relsize texlive-cm texlive-hyphen-base \
+        texlive-dvips texlive-collection-fontsrecommended \
+        ghostscript ImageMagick; \
+      dnf clean all; \
+      texhash; \
+    fi
+
+## Interactive niceties
 ADD bash.bashrc.completion /etc/
-RUN export DEBIAN_FRONTEND=noninteractive \
+RUN true \
     && cat /etc/bash.bashrc.completion >> /etc/bashrc \
-    && rm /etc/bash.bashrc.completion
-
-# TODO: move earlier
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && echo "export LD_LIBRARY_PATH=\"/usr/local/lib64:/usr/lib64:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh
-
-RUN echo "alias ll='ls -l'" > /etc/profile.d/15-aliases.sh
+    && rm /etc/bash.bashrc.completion \
+    && echo "alias ll='ls -l'" > /etc/profile.d/15-aliases.sh
 
 WORKDIR /work
