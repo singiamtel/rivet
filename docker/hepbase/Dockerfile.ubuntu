@@ -1,4 +1,4 @@
-ARG UBUNTU_IMAGE=ubuntu:23.04
+ARG UBUNTU_IMAGE=ubuntu:22.04
 FROM ${UBUNTU_IMAGE}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
@@ -129,8 +129,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 # TODO: fix local/local in packages
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && echo 'export PYTHONPATH="/usr/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
-    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
+    && echo 'export PYTHONPATH="/usr/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
+    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
 
 ## Interactive niceties
 ADD bash.bashrc.completion /etc/

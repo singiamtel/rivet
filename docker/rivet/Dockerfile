@@ -32,8 +32,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 # TODO: fix local/local in packages
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && echo 'export PYTHONPATH="/usr/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
-    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
+    && echo 'export PYTHONPATH="/usr/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
+    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
     && apt-get install -y cm-super dvipng \
     && apt-get autoremove -y \
     && apt-get autoclean -y
