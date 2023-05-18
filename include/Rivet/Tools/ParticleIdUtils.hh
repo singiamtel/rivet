@@ -42,7 +42,7 @@ namespace Rivet {
     // }
     /// Raise 10 to an integer power (LUT, tested and found faster than constexpr version)
     inline size_t _pow10(unsigned int power) {
-      assert(power >= 0 && "_pow10 only defined for positive powers");
+      //assert(power >= 0 && "_pow10 only defined for positive powers");
       assert(power < 16 && "_pow10 only defined for powers < 16");
       static const size_t POWS10[] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000000, 1000000000000, 10000000000000, 100000000000000, 1000000000000000, 10000000000000000};
       return POWS10[power];
