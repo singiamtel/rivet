@@ -193,7 +193,7 @@ namespace Rivet {
         double value = 0.;
         if (hist_num_dphi_500.bin(i).numEntries() > 0) {
           mean = hist_num_dphi_500.bin(i).xMean();
-          value = hist_num_dphi_500.bin(i).volume()/hist_num_dphi_500.bin(i).xWidth()/10.0;
+          value = hist_num_dphi_500.bin(i).sumW()/hist_num_dphi_500.bin(i).xWidth()/10.0;
         }
         if (pTlead/GeV >= ptcut[0]) _hist_N_vs_dPhi_1_500->fill(mean, value);
         if (pTlead/GeV >= ptcut[1]) _hist_N_vs_dPhi_2_500->fill(mean, value);
@@ -205,7 +205,7 @@ namespace Rivet {
         value = 0.;
         if (hist_pt_dphi_500.bin(i).numEntries() > 0) {
           mean = hist_pt_dphi_500.bin(i).xMean();
-          value = hist_pt_dphi_500.bin(i).volume()/hist_pt_dphi_500.bin(i).xWidth()/10.0;
+          value = hist_pt_dphi_500.bin(i).sumW()/hist_pt_dphi_500.bin(i).xWidth()/10.0;
         }
         if (pTlead/GeV >= ptcut[0]) _hist_pT_vs_dPhi_1_500->fill(mean, value);
         if (pTlead/GeV >= ptcut[1]) _hist_pT_vs_dPhi_2_500->fill(mean, value);

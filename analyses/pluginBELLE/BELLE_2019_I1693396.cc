@@ -225,9 +225,9 @@ namespace Rivet {
 	  // first extract values and errors applying efficiency
 	  Vector<10> val,err;
 	  for(unsigned int ibin=0;ibin<_h[ix][iy]->bins().size();++ibin) {
-	    val[ibin] = eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].volume();
-	    err[ibin] = sqr(eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].volumeErr());
-	                sqr(efe[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].volume());
+	    val[ibin] = eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].sumW();
+	    err[ibin] = sqr(eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].errW());
+	                sqr(efe[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].sumW());
 	  }
 	  // put response into a matrix
 	  Matrix<10> R,R2;

@@ -46,8 +46,8 @@ namespace Rivet {
       for(Histo1DPtr hist : hist2D.histos()) {
         int idx =0;
         for (auto bin : hist->bins()) {
-          phiValues[idx]+= bin.height();
-          phiValueserr[idx]+=bin.heightErr()*bin.heightErr();
+          phiValues[idx]+= bin.sumW();
+          phiValueserr[idx]+=bin.errW()*bin.errW();
           idx+=1;
         }
       }

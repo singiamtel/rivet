@@ -135,13 +135,13 @@ namespace Rivet {
         const auto& fwd_same_bini = _h_central_same_cross_section->bin(i+1);
         const auto& fwd_opp_bini = _h_central_opp_cross_section->bin(i+1);
         _h_cen_same_fwd_same->point(i).setY(_safediv(cen_same_bini.sumW(), fwd_same_bini.sumW(), 0),
-                                            add_quad(cen_same_bini.relErr(), fwd_same_bini.relErr()));
+                                            add_quad(cen_same_bini.relErrW(), fwd_same_bini.relErrW()));
         _h_cen_opp_fwd_same->point(i).setY(_safediv(cen_opp_bini.sumW(), fwd_same_bini.sumW(), 0),
-                                           add_quad(cen_opp_bini.relErr(), fwd_same_bini.relErr()));
+                                           add_quad(cen_opp_bini.relErrW(), fwd_same_bini.relErrW()));
         _h_cen_same_fwd_opp->point(i).setY(_safediv(cen_same_bini.sumW(), fwd_opp_bini.sumW(), 0),
-                                           add_quad(cen_same_bini.relErr(), fwd_opp_bini.relErr()));
+                                           add_quad(cen_same_bini.relErrW(), fwd_opp_bini.relErrW()));
         _h_cen_opp_fwd_opp->point(i).setY(_safediv(cen_opp_bini.sumW(), fwd_opp_bini.sumW(), 0),
-                                          add_quad(cen_opp_bini.relErr(), fwd_opp_bini.relErr()));
+                                          add_quad(cen_opp_bini.relErrW(), fwd_opp_bini.relErrW()));
       }
 
       // Use generator cross section for remaining histograms

@@ -167,7 +167,7 @@ namespace Rivet {
       const double scale_factor =  1. / sumOfWeights() / (2.*PI);
       const double rap_bin_width = 0.2;
       for (Histo1DPtr h: _h_pi0_rap_pT.histos()) {
-        const int cutoff_bin = h->binIndexAt(pt_cutoff);
+        const int cutoff_bin = h->indexAt(pt_cutoff);
         if (cutoff_bin >= 0) {
           const double cutoff_wdt = h->bin(cutoff_bin).xMax()-h->bin(cutoff_bin).xMin();
           h->bin(cutoff_bin).scaleW((cutoff_wdt)/(cutoff_wdt-pt_cutoff));

@@ -283,7 +283,7 @@ namespace Rivet {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
       for (auto bin : hist->bins() ) {
-	double Oi = bin.volume();
+	double Oi = bin.sumW();
 	if(Oi==0.) continue;
 	double ai(0.),bi(0.);
 	if(mode==0) {
@@ -298,7 +298,7 @@ namespace Rivet {
 	  ai = -2.*(bin.xMin()-bin.xMax())/M_PI;
 	  bi = -2.*(sin(2.*bin.xMin())-sin(2.*bin.xMax()))/M_PI;
 	}
-	double Ei = bin.volumeErr();
+	double Ei = bin.errW();
 	sum1 += sqr(bi/Ei);
 	sum2 += bi/sqr(Ei)*(Oi-ai);
       }

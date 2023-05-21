@@ -68,8 +68,8 @@ namespace Rivet {
         for (size_t k = 1; k <= nPoints/2; ++k) {
           const double x = _hEEC[iBin]->bin(k).xMid();
           const double ex = _hEEC[iBin]->bin(k).xWidth()/2;
-          const double y = _hEEC[iBin]->bin(k).height() - _hEEC[iBin]->bin(nPoints-(k+1)).height();
-          const double ey = sqrt( sqr(_hEEC[iBin]->bin(k).heightErr()) + sqr(_hEEC[iBin]->bin(nPoints-(k+1)).heightErr()) );
+          const double y = _hEEC[iBin]->bin(k).sumW() - _hEEC[iBin]->bin(nPoints-(k+1)).sumW();
+          const double ey = sqrt( sqr(_hEEC[iBin]->bin(k).errW()) + sqr(_hEEC[iBin]->bin(nPoints-(k+1)).errW()) );
           _hAEEC[iBin]->addPoint(x, y, ex, ey);
         }
        }

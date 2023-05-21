@@ -91,7 +91,7 @@ namespace Rivet {
         double value = 0.;
         if (_hist_num_dphi_500->bin(i).numEntries() > 0) {
           mean = _hist_num_dphi_500->bin(i).xMean();
-          value = _hist_num_dphi_500->bin(i).volume()/_hist_num_dphi_500->bin(i).xWidth()/10.0;
+          value = _hist_num_dphi_500->bin(i).sumW()/_hist_num_dphi_500->bin(i).xWidth()/10.0;
         }
         if (pTlead/GeV >= 1.0) _hist_N_vs_dPhi_1_500->fill(mean, value);
         if (pTlead/GeV >= 2.0) _hist_N_vs_dPhi_2_500->fill(mean, value);

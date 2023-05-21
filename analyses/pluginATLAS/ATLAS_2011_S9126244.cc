@@ -321,7 +321,7 @@ namespace Rivet {
     /// @todo Should be convertible to a YODA ~one-liner using toIntegralEfficiencyHisto
     void finalizeQ0GapFraction(double totalWeightSum, Scatter2DPtr gapFractionDP, Histo1DPtr vetoPtHist) {
       for (const auto& b : vetoPtHist->bins()) {
-        const double vetoPtWeightSum = vetoPtHist->integralTo(b.binIndex()-1); ///< Integral (with underflow) up to but not including bin i
+        const double vetoPtWeightSum = vetoPtHist->integralTo(b.index()-1); ///< Integral (with underflow) up to but not including bin i
         // Calculate the efficiency & binomial uncertainty
         const double eff = (totalWeightSum != 0) ? vetoPtWeightSum/totalWeightSum : 0;
         const double effErr = (totalWeightSum != 0) ? sqrt( eff*(1.0-eff)/totalWeightSum ) : 0;

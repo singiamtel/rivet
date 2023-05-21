@@ -36,8 +36,8 @@ namespace Rivet {
         double binCenter = hGluon->bin(i).xMid();
         double gVal = 0., qVal = 0.;
         if ((FQF -  FQC) != 0.) {
-          gVal = (FQF * hCentral->bin(ptbin*(nBins) + i).height() - FQC * hForward->bin(ptbin*(nBins) + i).height()) / (FQF - FQC);
-          qVal = (FGF * hCentral->bin(ptbin*(nBins) + i).height() - FGC * hForward->bin(ptbin*(nBins) + i).height()) / (FQC - FQF);
+          gVal = (FQF * hCentral->bin(ptbin*(nBins) + i).sumW() - FQC * hForward->bin(ptbin*(nBins) + i).sumW()) / (FQF - FQC);
+          qVal = (FGF * hCentral->bin(ptbin*(nBins) + i).sumW() - FGC * hForward->bin(ptbin*(nBins) + i).sumW()) / (FQC - FQF);
         }
         hGluon->fill(binCenter, gVal);
         hQuark->fill(binCenter, qVal);
@@ -91,11 +91,11 @@ namespace Rivet {
           if (var=="rg" || var=="trg") {
             binWidth = rgBins[j+1]- rgBins[j];
             if (j==nBins-1) ptBinnedHist->bin( k*nBins+j+1 ).scaleW(2.);
-            //normalization += ptBinnedHist->bin(k*nBins+j).height()*binWidth;
-            normalization += ptBinnedHist->bin(k*(nBins) + j+1).height()*binWidth;
+            //normalization += ptBinnedHist->bin(k*nBins+j).sumW()*binWidth;
+            normalization += ptBinnedHist->bin(k*(nBins) + j+1).sumW()*binWidth;
           }
           else{
-            normalization += ptBinnedHist->bin(k*(nBins) + j+1).height()*binWidth;
+            normalization += ptBinnedHist->bin(k*(nBins) + j+1).sumW()*binWidth;
           }
         }
 
@@ -119,7 +119,7 @@ namespace Rivet {
       if (var=="m" || var=="tm") {
         double norm = 0.;
         for (size_t i = normBin1; i < normBin2; i++) { //only normalize in the resummation region.
-          norm+=hist->bin(i+1).volume();
+          norm+=hist->bin(i+1).sumW();
         }
         if (norm > 0.) {
           hist->scaleW(1.0/(norm));

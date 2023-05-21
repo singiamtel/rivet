@@ -211,13 +211,13 @@ namespace Rivet {
         const auto& b = handler.histo->bin(i); // BSM
         double bsmy;
         try {
-          bsmy = b.height();
+          bsmy = b.sumW();
         } catch (const Exception&) { // LowStatsError or WeightError
           bsmy = 0;
         }
         double bsmey;
         try {
-          bsmey = b.heightErr();
+          bsmey = b.errW();
         } catch (const Exception&) { // LowStatsError or WeightError
           bsmey = 0;
         }

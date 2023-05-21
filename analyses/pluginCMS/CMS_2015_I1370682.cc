@@ -271,7 +271,7 @@ namespace Rivet {
 
     void applyCorrection(Histo1DPtr h, const double* cf) {
       for (auto& bin : h->bins()) {
-        bin.scaleW( cf[bin.binIndex()-1] );
+        bin.scaleW( cf[bin.index()-1] );
       }
     }
 

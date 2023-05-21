@@ -164,9 +164,9 @@ namespace Rivet {
           auto& b0 = _h_NjetIncl[i]->bin(n);
           auto& b1 = _h_NjetIncl[i]->bin(n+1);
           double val = 0.0, err= 0.0;
-          if (b0.height() && b1.height()) {
-            val = b1.height() / b0.height();
-            err = b1.height() / b0.height() * (b0.relErr() + b1.relErr());
+          if (b0.sumW() && b1.sumW()) {
+            val = b1.sumW() / b0.sumW();
+            err = b1.sumW() / b0.sumW() * (b0.relErrW() + b1.relErrW());
           }
           _h_RatioNjetIncl[i]->addPoint(n, val, 0.5, err);
         }

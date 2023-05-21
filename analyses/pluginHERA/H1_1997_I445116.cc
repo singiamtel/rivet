@@ -234,7 +234,7 @@ namespace Rivet {
         if (Nev != 0) scale(histo, 1./Nev);
 
         for (size_t iP = 0; iP < iPmax; ++iP) {
-          mean = histo->bin(iP).height() ;
+          mean = histo->bin(iP).sumW() ;
           double mean_err = mean/100;
           _s["Qxp"+to_string(iP)]->addPoint(Qmid, mean, Qerr, mean_err);
         }

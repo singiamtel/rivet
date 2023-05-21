@@ -65,10 +65,10 @@ namespace Rivet {
       size_t nBins = _hist_EEC->numBins();
       for (size_t k = 1; k < (nBins/2)+1; ++k) {
         double x = _hist_EEC->bin(k).xMid();
-        double y = _hist_EEC->bin(k).height() - _hist_EEC->bin(nBins-k+1).height();
+        double y = _hist_EEC->bin(k).sumW() - _hist_EEC->bin(nBins-k+1).sumW();
         double ex = _hist_EEC->bin(k).xWidth()/2;
-        double e1 = _hist_EEC->bin(k).heightErr();
-        double e2 = _hist_EEC->bin(nBins-k+1).heightErr();
+        double e1 = _hist_EEC->bin(k).errW();
+        double e2 = _hist_EEC->bin(nBins-k+1).errW();
         double ey = sqrt( e1 * e1 + e2 * e2 );
         _hist_AEEC->addPoint(x, y, ex, ey);
       }

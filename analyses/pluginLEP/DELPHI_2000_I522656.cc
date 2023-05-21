@@ -166,10 +166,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       for(unsigned int ix=0;ix<8;++ix) {
-	if(ix<2) scale(_h_thrust.histos()[ix],1./_h_bin->bins()[ix].volume());
-	scale(_h_EEC.histos()[ix],180./M_PI/_h_bin->bins()[ix].volume());
-	scale(_h_AEEC.histos()[ix],180./M_PI/_h_bin->bins()[ix].volume());
-	scale(_h_cone.histos()[ix],180./M_PI/_h_bin->bins()[ix].volume());
+	if(ix<2) scale(_h_thrust.histos()[ix],1./_h_bin->bins()[ix].sumW());
+	scale(_h_EEC.histos()[ix],180./M_PI/_h_bin->bins()[ix].sumW());
+	scale(_h_AEEC.histos()[ix],180./M_PI/_h_bin->bins()[ix].sumW());
+	scale(_h_cone.histos()[ix],180./M_PI/_h_bin->bins()[ix].sumW());
       }
 
       

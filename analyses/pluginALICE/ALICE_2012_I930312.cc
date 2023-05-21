@@ -249,8 +249,8 @@ namespace Rivet {
           }
 
           // Integrate near-side yield
-          size_t lowerBin = hYield->binIndexAt(-0.7 + 0.02);
-          size_t upperBin = hYield->binIndexAt( 0.7 - 0.02) + 1;
+          size_t lowerBin = hYield->indexAt(-0.7 + 0.02);
+          size_t upperBin = hYield->indexAt( 0.7 - 0.02) + 1;
           nbins = upperBin - lowerBin;
           numBins[itype][ipt][NEAR] = nbins;
           integral[itype][ipt][NEAR] =
@@ -259,8 +259,8 @@ namespace Rivet {
             hYield->integralRange(lowerBin, upperBin) * counter->sumW();
 
           // Integrate away-side yield
-          lowerBin = hYield->binIndexAt(M_PI - 0.7 + 0.02);
-          upperBin = hYield->binIndexAt(M_PI + 0.7 - 0.02) + 1;
+          lowerBin = hYield->indexAt(M_PI - 0.7 + 0.02);
+          upperBin = hYield->indexAt(M_PI + 0.7 - 0.02) + 1;
           nbins = upperBin - lowerBin;
           numBins[itype][ipt][AWAY] = nbins;
           integral[itype][ipt][AWAY] =

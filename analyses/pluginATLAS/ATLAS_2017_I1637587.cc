@@ -71,9 +71,9 @@ namespace Rivet {
       double norm1 = 0.;
       double norm2 = 0.;
       for (size_t i = 4; i <= 7; ++i) { //only normalize in the resummation region.
-        norm0+=_h_Table1->bin(i+1).height();
-      	norm1+=_h_Table2->bin(i+1).height();
-      	norm2+=_h_Table3->bin(i+1).height();
+        norm0+=_h_Table1->bin(i+1).sumW();
+      	norm1+=_h_Table2->bin(i+1).sumW();
+      	norm2+=_h_Table3->bin(i+1).sumW();
       }
 
       if (norm0 != 0) {
@@ -103,7 +103,7 @@ namespace Rivet {
       for (size_t k = 0; k < 9; ++k){
         double normalization = 0;
         for (size_t j = 4; j <= 7; ++j) {
-          normalization += ptBinnedHist->bin(k*10 + j+1).height();
+          normalization += ptBinnedHist->bin(k*10 + j+1).sumW();
         }
         if( normalization == 0 ) continue;
 

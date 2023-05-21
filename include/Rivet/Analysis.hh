@@ -1006,7 +1006,7 @@ namespace Rivet {
 
     double dbl(double x) { return x; }
     double dbl(const YODA::Counter& c) { return c.val(); }
-    double dbl(const YODA::PointEstimate& e) { return e.val(); }
+    double dbl(const YODA::Estimate0D& e) { return e.val(); }
     double dbl(const YODA::Scatter1D& s) {
       assert( s.numPoints() == 1 );
       return s.points()[0].x();

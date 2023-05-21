@@ -166,8 +166,8 @@ namespace Rivet {
       _h_jet_multi_ratio->addPoint(i, 0, 0.5, 0);
       if (_h_jet_multi_inclusive->bin(i).sumW() > 0.0) {
         const double ratio = _h_jet_multi_inclusive->bin(i+1).sumW()/_h_jet_multi_inclusive->bin(i).sumW();
-        const double relerr_i = _h_jet_multi_inclusive->bin(i).relErr();
-        const double relerr_j = _h_jet_multi_inclusive->bin(i+1).relErr();
+        const double relerr_i = _h_jet_multi_inclusive->bin(i).relErrW();
+        const double relerr_j = _h_jet_multi_inclusive->bin(i+1).relErrW();
         const double err = ratio * (relerr_i + relerr_j);
         _h_jet_multi_ratio->point(i-1).setY(ratio, err);
       }

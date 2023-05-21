@@ -284,7 +284,7 @@ namespace Rivet {
 
 
     int getBinID(MeasureType type, double value)  {
-      /// @todo Use Rivet binIndex() function
+      /// @todo Use Rivet index() function
       for (size_t iBin = 0; iBin < kNbins; ++iBin) {
         if (value <= bins[type][iBin+1]) return iBin;
       }

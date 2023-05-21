@@ -101,10 +101,10 @@ namespace Rivet {
       	divide(_h_br[1][ix],_h_br[3][ix],RK);
       	book(RK,1,1+ix,1);
       	for(unsigned int ibin=0;ibin<_h_br[1][ix]->bins().size();++ibin) {
-      	  double num     = _h_br[0][ix]->bins()[ibin].height()   +_h_br[1][ix]->bins()[ibin].height();
-      	  double numErr2 = sqr(_h_br[0][ix]->bins()[ibin].heightErr())+sqr(_h_br[1][ix]->bins()[ibin].heightErr());
-      	  double den     = _h_br[2][ix]->bins()[ibin].height()   +_h_br[3][ix]->bins()[ibin].height();
-      	  double denErr2 = sqr(_h_br[2][ix]->bins()[ibin].heightErr())+sqr(_h_br[3][ix]->bins()[ibin].heightErr());
+      	  double num     = _h_br[0][ix]->bins()[ibin].sumW()   +_h_br[1][ix]->bins()[ibin].sumW();
+      	  double numErr2 = sqr(_h_br[0][ix]->bins()[ibin].errW())+sqr(_h_br[1][ix]->bins()[ibin].errW());
+      	  double den     = _h_br[2][ix]->bins()[ibin].sumW()   +_h_br[3][ix]->bins()[ibin].sumW();
+      	  double denErr2 = sqr(_h_br[2][ix]->bins()[ibin].errW())+sqr(_h_br[3][ix]->bins()[ibin].errW());
       	  double val(0.),err(0.);
       	  if(num>0. && den>0.) {
       	    val = num/den;

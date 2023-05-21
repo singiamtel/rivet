@@ -207,13 +207,13 @@ namespace Rivet {
         const auto&  b = handler.histo->bin(i);
         double newy;
         try {
-          newy = b.height();
+          newy = b.sumW();
         } catch (const Exception&) { // LowStatsError or WeightError
           newy = 0;
         }
         double newey;
         try {
-          newey = b.heightErr();
+          newey = b.errW();
         } catch (const Exception&) { // LowStatsError or WeightError
           newey = 0;
         }

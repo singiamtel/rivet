@@ -117,9 +117,9 @@ namespace Rivet {
       /// @todo This special case for 1-to-0 will disappear if we use Counters for all mults including 0.
       if (_sumW->val() > 0) {
         const auto& b0 = _histJetMult[0]->bin(1);
-        double ratio = b0.volume()/dbl(*_sumW);
+        double ratio = b0.sumW()/dbl(*_sumW);
         double frac_err = 1/dbl(*_sumW); ///< This 1/sqrt{N} error treatment isn't right for weighted events: use YODA::Counter
-        if (b0.volume() > 0) frac_err = sqrt( sqr(frac_err) + sqr(b0.volumeErr()/b0.volume()) );
+        if (b0.sumW() > 0) frac_err = sqrt( sqr(frac_err) + sqr(b0.errW()/b0.sumW()) );
         _histJetMultRatio[0]->point(0).setY(ratio, ratio*frac_err);
       }
 
@@ -127,10 +127,10 @@ namespace Rivet {
       for (size_t i = 1; i < 4; ++i) {
         const auto& b1 = _histJetMult[i]->bin(0);
         const auto& b2 = _histJetMult[i+1]->bin(0);
-        if (b1.volume() == 0.0) continue;
-        double ratio = b2.volume()/b1.volume();
-        double frac_err = b1.volumeErr()/b1.volume();
-        if (b2.volume() > 0) frac_err = sqrt( sqr(frac_err) + sqr(b2.volumeErr()/b2.volume()) );
+        if (b1.sumW() == 0.0) continue;
+        double ratio = b2.sumW()/b1.sumW();
+        double frac_err = b1.errW()/b1.sumW();
+        if (b2.sumW() > 0) frac_err = sqrt( sqr(frac_err) + sqr(b2.errW()/b2.sumW()) );
         _histJetMultRatio[i]->point(0).setY(ratio, ratio*frac_err);
       }
 

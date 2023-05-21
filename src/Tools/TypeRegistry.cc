@@ -111,7 +111,7 @@ namespace Rivet {
 
     // load 0D types
     addType<YODA::Counter>("Counter");
-    addType<YODA::Estimate>("Estimate");
+    addType<YODA::Estimate0D>("Estimate0D");
 
     // load scatters and short-hand types
     auto addShorthands = [&](auto I) {

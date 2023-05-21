@@ -31,7 +31,7 @@ namespace Rivet {
             const double x   = input->bin(b).xMid();
             const double ex  = input->bin(b).xWidth()/2.;
             const double val = input->bin(b).sumW();
-            const double err = input->bin(b).relErr() * val;
+            const double err = input->bin(b).relErrW() * val;
             output->addPoint(x, val, ex, err);
        }
        return output;

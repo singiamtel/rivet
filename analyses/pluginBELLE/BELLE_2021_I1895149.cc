@@ -121,9 +121,9 @@ namespace Rivet {
 	vector<double> val(_h_forward[ix]->numBins(),0.),err(_h_forward[ix]->numBins(),0.);
 	// first divide by eff
 	for(unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
-	  val[iy] = _h_forward[ix]->bins()[iy].volume()/eff.points()[iy].y();
+	  val[iy] = _h_forward[ix]->bins()[iy].sumW()/eff.points()[iy].y();
 	  err[iy] =val[iy]*sqrt(sqr(eff.points()[iy].yErrAvg()/eff.points()[iy].y()) +
-				sqr(_h_forward[ix]->bins()[iy].volumeErr()/_h_forward[ix]->bins()[iy].volume()));
+				sqr(_h_forward[ix]->bins()[iy].errW()/_h_forward[ix]->bins()[iy].sumW()));
 	}
 	vector<double> val2(_h_forward[ix]->numBins(),0.),err2(_h_forward[ix]->numBins(),0.);
 	for(unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {

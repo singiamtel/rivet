@@ -98,10 +98,10 @@ namespace Rivet {
 	divide(_h_brB[1][ix],_h_brB[3][ix],RK);
 	book(RK,3,3,1+ix);
 	for(unsigned int ibin=0;ibin<_h_brB[1][ix]->bins().size();++ibin) {
-	  double num     = _h_brB[0][ix]->bins()[ibin].height()   +_h_brB[1][ix]->bins()[ibin].height();
-	  double numErr2 = sqr(_h_brB[0][ix]->bins()[ibin].heightErr())+sqr(_h_brB[1][ix]->bins()[ibin].heightErr());
-	  double den     = _h_brB[2][ix]->bins()[ibin].height()   +_h_brB[3][ix]->bins()[ibin].height();
-	  double denErr2 = sqr(_h_brB[2][ix]->bins()[ibin].heightErr())+sqr(_h_brB[3][ix]->bins()[ibin].heightErr());
+	  double num     = _h_brB[0][ix]->bins()[ibin].sumW()   +_h_brB[1][ix]->bins()[ibin].sumW();
+	  double numErr2 = sqr(_h_brB[0][ix]->bins()[ibin].errW())+sqr(_h_brB[1][ix]->bins()[ibin].errW());
+	  double den     = _h_brB[2][ix]->bins()[ibin].sumW()   +_h_brB[3][ix]->bins()[ibin].sumW();
+	  double denErr2 = sqr(_h_brB[2][ix]->bins()[ibin].errW())+sqr(_h_brB[3][ix]->bins()[ibin].errW());
 	  double val(0.),err(0.);
 	  if(num>0. && den>0.) {
 	    val = num/den;
@@ -118,10 +118,10 @@ namespace Rivet {
 	// average plot
 	book(RK,2,3,1+ix);
 	for(unsigned int ibin=0;ibin<_h_brB[1][ix]->bins().size();++ibin) {
-	  double term0     = _h_brB[1][ix]->bins()[ibin].height()   +_h_brB[3][ix]->bins()[ibin].height();
-	  double term0Err2 = sqr(_h_brB[1][ix]->bins()[ibin].heightErr())+sqr(_h_brB[3][ix]->bins()[ibin].heightErr());
-	  double term1     = _h_brB[0][ix]->bins()[ibin].height()   +_h_brB[2][ix]->bins()[ibin].height();
-	  double term1Err2 = sqr(_h_brB[0][ix]->bins()[ibin].heightErr())+sqr(_h_brB[2][ix]->bins()[ibin].heightErr());
+	  double term0     = _h_brB[1][ix]->bins()[ibin].sumW()   +_h_brB[3][ix]->bins()[ibin].sumW();
+	  double term0Err2 = sqr(_h_brB[1][ix]->bins()[ibin].errW())+sqr(_h_brB[3][ix]->bins()[ibin].errW());
+	  double term1     = _h_brB[0][ix]->bins()[ibin].sumW()   +_h_brB[2][ix]->bins()[ibin].sumW();
+	  double term1Err2 = sqr(_h_brB[0][ix]->bins()[ibin].errW())+sqr(_h_brB[2][ix]->bins()[ibin].errW());
 	  double val(0.),err(0.);
 	  if(term0>0. && term1>0.) {
 	    val = (term0-term1)/(term0+term1);

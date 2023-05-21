@@ -84,28 +84,28 @@ namespace Rivet {
       for (size_t k = 0; k < nBins/2; ++k) {
         double x = _hist_EEC1->bin(k).xMid(); double ex = _hist_EEC1->bin(k).xWidth()/2;
 
-        double y1 = _hist_EEC1->bin(k).height() - _hist_EEC1->bin(nBins-(k+1)).height();
-        double ey1 = sqrt( pow(_hist_EEC1->bin(k).heightErr(),2) + pow(_hist_EEC1->bin(nBins-(k+1)).heightErr(),2) );
+        double y1 = _hist_EEC1->bin(k).sumW() - _hist_EEC1->bin(nBins-(k+1)).sumW();
+        double ey1 = sqrt( pow(_hist_EEC1->bin(k).errW(),2) + pow(_hist_EEC1->bin(nBins-(k+1)).errW(),2) );
         points1.push_back(Point2D(x,y1,ex,ey1));
 
-        double y2 = _hist_EEC2->bin(k).height() - _hist_EEC2->bin(nBins-(k+1)).height();
-        double ey2 = sqrt( pow(_hist_EEC2->bin(k).heightErr(),2) + pow(_hist_EEC2->bin(nBins-(k+1)).heightErr(),2) );
+        double y2 = _hist_EEC2->bin(k).sumW() - _hist_EEC2->bin(nBins-(k+1)).sumW();
+        double ey2 = sqrt( pow(_hist_EEC2->bin(k).errW(),2) + pow(_hist_EEC2->bin(nBins-(k+1)).errW(),2) );
         points2.push_back(Point2D(x,y2,ex,ey2));
 
-        double y3 = _hist_EEC3->bin(k).height() - _hist_EEC3->bin(nBins-(k+1)).height();
-        double ey3 = sqrt( pow(_hist_EEC3->bin(k).heightErr(),2) + pow(_hist_EEC3->bin(nBins-(k+1)).heightErr(),2) );
+        double y3 = _hist_EEC3->bin(k).sumW() - _hist_EEC3->bin(nBins-(k+1)).sumW();
+        double ey3 = sqrt( pow(_hist_EEC3->bin(k).errW(),2) + pow(_hist_EEC3->bin(nBins-(k+1)).errW(),2) );
         points3.push_back(Point2D(x,y3,ex,ey3));
 
-        double y4 = _hist_EEC4->bin(k).height() - _hist_EEC4->bin(nBins-(k+1)).height();
-        double ey4 = sqrt( pow(_hist_EEC4->bin(k).heightErr(),2) + pow(_hist_EEC4->bin(nBins-(k+1)).heightErr(),2) );
+        double y4 = _hist_EEC4->bin(k).sumW() - _hist_EEC4->bin(nBins-(k+1)).sumW();
+        double ey4 = sqrt( pow(_hist_EEC4->bin(k).errW(),2) + pow(_hist_EEC4->bin(nBins-(k+1)).errW(),2) );
         points4.push_back(Point2D(x,y4,ex,ey4));
 
-        double y5 = _hist_EEC5->bin(k).height() - _hist_EEC5->bin(nBins-(k+1)).height();
-        double ey5 = sqrt( pow(_hist_EEC5->bin(k).heightErr(),2) + pow(_hist_EEC5->bin(nBins-(k+1)).heightErr(),2) );
+        double y5 = _hist_EEC5->bin(k).sumW() - _hist_EEC5->bin(nBins-(k+1)).sumW();
+        double ey5 = sqrt( pow(_hist_EEC5->bin(k).errW(),2) + pow(_hist_EEC5->bin(nBins-(k+1)).errW(),2) );
         points5.push_back(Point2D(x,y5,ex,ey5));
 
-        double y6 = _hist_EEC6->bin(k).height() - _hist_EEC6->bin(nBins-(k+1)).height();
-        double ey6 = sqrt( pow(_hist_EEC6->bin(k).heightErr(),2) + pow(_hist_EEC6->bin(nBins-(k+1)).heightErr(),2) );
+        double y6 = _hist_EEC6->bin(k).sumW() - _hist_EEC6->bin(nBins-(k+1)).sumW();
+        double ey6 = sqrt( pow(_hist_EEC6->bin(k).errW(),2) + pow(_hist_EEC6->bin(nBins-(k+1)).errW(),2) );
         points6.push_back(Point2D(x,y6,ex,ey6));
       }
 

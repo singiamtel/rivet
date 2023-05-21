@@ -168,16 +168,16 @@ namespace Rivet {
         for (size_t i = 0; i < _h_Wp_eta->numBins(); ++i) {
           const auto& bp = _h_Wp_eta->bin(i);
           const auto& bm = _h_Wm_eta->bin(i);
-          const double sum  = bp.height() + bm.height();
+          const double sum  = bp.sumW() + bm.sumW();
           //const double xerr = 0.5 * bp.xWidth();
           double val = 0., yerr = 0.;
 
           if (sum) {
-            const double pos2  = bp.height() * bp.height();
-            const double min2  = bm.height() * bm.height();
-            const double errp2 = bp.heightErr() * bp.heightErr();
-            const double errm2 = bm.heightErr() * bm.heightErr();
-            val = (bp.height() - bm.height()) / sum;
+            const double pos2  = bp.sumW() * bp.sumW();
+            const double min2  = bm.sumW() * bm.sumW();
+            const double errp2 = bp.errW() * bp.errW();
+            const double errm2 = bm.errW() * bm.errW();
+            val = (bp.sumW() - bm.sumW()) / sum;
             yerr = 2. * sqrt(errm2 * pos2 + errp2 * min2) / (sum * sum);
           }
           _h_W_asym->addPoint(bp.xMid(), val, 0.5*bp.xWidth(), yerr);

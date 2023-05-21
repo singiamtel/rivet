@@ -390,8 +390,8 @@ namespace Rivet {
       for (size_t b = 0; b < temphisto.numPoints(); b++) {
         const double x  = temphisto.point(b).x();
         pair<double,double> ex = temphisto.point(b).xErrs();
-        double y    = histo->bin(b+1).volume();
-        double yerr = histo->bin(b+1).volumeErr();
+        double y    = histo->bin(b+1).sumW();
+        double yerr = histo->bin(b+1).errW();
         mult->addPoint(x, y, ex, make_pair(yerr,yerr));
       }
       return mult;

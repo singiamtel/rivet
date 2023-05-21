@@ -141,8 +141,8 @@ namespace Rivet {
       _h_multi_ratio->addPoint(i+1, 0, 0.5, 0);
       if (_h_multi_inclusive->bin(i).sumW() > 0.0) {
         const double ratio = _h_multi_inclusive->bin(i+1).sumW() / _h_multi_inclusive->bin(i).sumW();
-        const double relerr_i = _h_multi_inclusive->bin(i).relErr();
-        const double relerr_j = _h_multi_inclusive->bin(i+1).relErr();
+        const double relerr_i = _h_multi_inclusive->bin(i).relErrW();
+        const double relerr_j = _h_multi_inclusive->bin(i+1).relErrW();
         const double err = ratio * (relerr_i + relerr_j);
         _h_multi_ratio->point(i).setY(ratio, err);
       }
@@ -151,8 +151,8 @@ namespace Rivet {
       _h_multi_ratio_prompt->addPoint(i+1, 0, 0.5, 0);
       if (_h_multi_inclusive_prompt->bin(i).sumW() > 0.0) {
         const double ratio = _h_multi_inclusive_prompt->bin(i+1).sumW() / _h_multi_inclusive_prompt->bin(i).sumW();
-        const double relerr_i = _h_multi_inclusive_prompt->bin(i).relErr();
-        const double relerr_j = _h_multi_inclusive_prompt->bin(i+1).relErr();
+        const double relerr_i = _h_multi_inclusive_prompt->bin(i).relErrW();
+        const double relerr_j = _h_multi_inclusive_prompt->bin(i+1).relErrW();
         const double err = ratio * (relerr_i + relerr_j);
         _h_multi_ratio_prompt->point(i).setY(ratio, err);
       }

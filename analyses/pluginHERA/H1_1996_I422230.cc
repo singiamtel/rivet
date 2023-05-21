@@ -562,11 +562,11 @@ namespace Rivet {
       } else {
         // loop to calcualte mean
         for (size_t b = 0; b < histo_input->numBins(); ++b) { // loop over points
-          mysumWX  += histo_input->bin(b).height()      *  histo_input->bin(b).xMid() ;
-          //mysumW2X += sqr(histo_input->bin(b).height()) *  histo_input->bin(b).xMid() ;
-          //mysumWX2 += histo_input->bin(b).height()      *  sqr(histo_input->bin(b).xMid()) ;
-          //mysumW2  += sqr(histo_input->bin(b).height()) ;
-          mysumW   += histo_input->bin(b).height() ;
+          mysumWX  += histo_input->bin(b).sumW()      *  histo_input->bin(b).xMid() ;
+          //mysumW2X += sqr(histo_input->bin(b).sumW()) *  histo_input->bin(b).xMid() ;
+          //mysumWX2 += histo_input->bin(b).sumW()      *  sqr(histo_input->bin(b).xMid()) ;
+          //mysumW2  += sqr(histo_input->bin(b).sumW()) ;
+          mysumW   += histo_input->bin(b).sumW() ;
         }
         mean = mysumWX/mysumW ;
 
@@ -574,7 +574,7 @@ namespace Rivet {
         double var = 0.;
         for (size_t b = 0; b < histo_input->numBins(); ++b) { // loop over points
           double xval = histo_input->bin(b).xMid() ;
-          double weight = histo_input->bin(b).height() ;
+          double weight = histo_input->bin(b).sumW() ;
           var = var + weight * pow((xval - mean),iq) ;
         }
 
@@ -584,7 +584,7 @@ namespace Rivet {
         double c = 0.;
         for (size_t b = 0; b < histo_input->numBins(); ++b) { // loop over points
           double xval = histo_input->bin(b).xMid() ;
-          double weight = histo_input->bin(b).height() ;
+          double weight = histo_input->bin(b).sumW() ;
           c = c+pow(xval,iq)*weight;
         }
         cq = c/(mysumW*pow(mean,iq));
@@ -592,7 +592,7 @@ namespace Rivet {
         double r3 = 0.;
         for (size_t b = 0; b < histo_input->numBins(); ++b) { // loop over points
           double xval = histo_input->bin(b).xMid() ;
-          double weight = histo_input->bin(b).height() ;
+          double weight = histo_input->bin(b).sumW() ;
           r2 = r2+xval*(xval-1)*weight;
           r3 = r3+xval*(xval-1)*(xval-2)*weight;
         }

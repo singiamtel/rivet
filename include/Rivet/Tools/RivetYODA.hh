@@ -190,7 +190,7 @@ namespace Rivet {
       };
       MetaUtils::staticFor<sizeof...(AxisT)>(extractBinCoords);
       _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
-      return (int)YAO::_binning.globalBinIndex(binCoords);
+      return (int)YAO::_binning.globalIndexAt(binCoords);
     }
 
     /// Empty the subevent stack (for start of new event group).
@@ -239,7 +239,7 @@ namespace Rivet {
       };
       MetaUtils::staticFor<1>(extractBinCoords);
       _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
-      return (int)YAO::_binning.globalBinIndex(binCoords);
+      return (int)YAO::_binning.globalIndexAt(binCoords);
     }
     //
     int fill(const AxisT x, const double weight=1.0, const double fraction=1.0) {
@@ -292,7 +292,7 @@ namespace Rivet {
       };
       MetaUtils::staticFor<1>(extractBinCoords);
       _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
-      return (int)YAO::_binning.globalBinIndex(binCoords);
+      return (int)YAO::_binning.globalIndexAt(binCoords);
     }
     //
     int fill(const AxisT1 x, const AxisT2 y, const double weight=1.0, const double fraction=1.0) {
@@ -345,7 +345,7 @@ namespace Rivet {
       };
       MetaUtils::staticFor<1>(extractBinCoords);
       _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
-      return (int)YAO::_binning.globalBinIndex(binCoords);
+      return (int)YAO::_binning.globalIndexAt(binCoords);
     }
     //
     int fill(const AxisT1 x, const AxisT2 y, const AxisT3 z, const double weight=1.0, const double fraction=1.0) {
@@ -398,7 +398,7 @@ namespace Rivet {
       };
       MetaUtils::staticFor<1>(extractBinCoords);
       _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
-      return (int)YAO::_binning.globalBinIndex(binCoords);
+      return (int)YAO::_binning.globalIndexAt(binCoords);
     }
     //
     int fill(const AxisT x, const double y, const double weight=1.0, const double fraction=1.0) {
@@ -451,7 +451,7 @@ namespace Rivet {
       };
       MetaUtils::staticFor<1>(extractBinCoords);
       _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
-      return (int)YAO::_binning.globalBinIndex(binCoords);
+      return (int)YAO::_binning.globalIndexAt(binCoords);
     }
     //
     int fill(const AxisT1 x, const AxisT2 y, const double z, const double weight=1.0, const double fraction=1.0) {
@@ -504,7 +504,7 @@ namespace Rivet {
       };
       MetaUtils::staticFor<1>(extractBinCoords);
       _fills.insert(_fills.end(), { std::move(fillCoords), weight } );
-      return (int)YAO::_binning.globalBinIndex(binCoords);
+      return (int)YAO::_binning.globalIndexAt(binCoords);
     }
     //
     int fill(const AxisT1 x, const AxisT2 y, const AxisT3 z, const double zPlus, const double weight=1.0, const double fraction=1.0) {
@@ -782,7 +782,7 @@ namespace Rivet {
         if (std::find(overflows.cbegin(), itEnd, i) != itEnd)  continue;
 
         const auto coords = subwindows.edgeTuple(i);
-        const double subwindowArea = subwindows.area(i);
+        const double subwindowArea = subwindows.volume(i);
         size_t nSubfills = 0;
         double windowFrac = 0.;
         valarray<double> sumw(0.0, weights[0].size()); // one per multiweight

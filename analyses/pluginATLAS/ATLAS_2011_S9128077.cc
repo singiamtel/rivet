@@ -178,7 +178,7 @@ namespace Rivet {
         if (_h_jet_multi_inclusive->bin(i).sumW()) {
           const double val = _h_jet_multi_inclusive->bin(i+1).sumW() / _h_jet_multi_inclusive->bin(i).sumW();
           // @todo Shouldn't these be added in quadrature??
-          const double err = ( _h_jet_multi_inclusive->bin(i+1).relErr() + _h_jet_multi_inclusive->bin(i).relErr() ) * val;
+          const double err = ( _h_jet_multi_inclusive->bin(i+1).relErrW() + _h_jet_multi_inclusive->bin(i).relErrW() ) * val;
           _h_jet_multi_ratio->point(i-1).setY(val, err);
         }
         else {

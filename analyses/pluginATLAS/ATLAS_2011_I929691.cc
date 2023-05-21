@@ -63,11 +63,11 @@ namespace Rivet {
 
         // Then... calculate the observable and fill the profiles
         for (const auto& b : h_ntracks_z.bins())
-          _p_F_z[i]->fill(b.xMid(), b.height());
+          _p_F_z[i]->fill(b.xMid(), b.sumW());
         for (const auto& b : h_ntracks_r.bins())
-          _p_rho_r[i]->fill(b.xMid(), b.volume()/annulus_area(b.xMin(), b.xMax()));
+          _p_rho_r[i]->fill(b.xMid(), b.sumW()/annulus_area(b.xMin(), b.xMax()));
         for (const auto& b : h_ntracks_pTrel.bins())
-          _p_f_pTrel[i]->fill(b.xMid(), b.height());
+          _p_f_pTrel[i]->fill(b.xMid(), b.sumW());
 
       }
 
