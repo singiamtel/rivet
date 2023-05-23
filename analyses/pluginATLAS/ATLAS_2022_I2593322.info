@@ -1,0 +1,47 @@
+Name: ATLAS_2022_I2593322
+Year: 2022
+Summary: Zyy cross-section measurement at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2593322
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Philipp Ott <philipp.sebastian.ott@cern.ch>
+ - Daniel Lewis <daniel.lewis@cern.ch>
+References:
+ - arXiv:2211.14171 [hep-ex]
+RunInfo:
+  pp -> lly at 13 TeV
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 139.0
+Description:
+  'Cross-sections for the production of a $Z$ boson in association
+  with two photons are measured in proton-proton collisions at a centre-of-mass
+  energy of $13 \, \mathrm{TeV}$. The data used correspond to an integrated luminosity
+  of $139 \, \mathrm{fb}^{-1}$ recorded by the ATLAS experiment during Run 2 of the LHC.
+  The measurements use the electron and muon decay channels of the $Z$ boson, and a
+  fiducial phase-space region where the photons are not radiated from the leptons.
+  The integrated $Z(\rightarrow\ell\ell)\gamma\gamma$ cross-section is measured with
+  a precision of $12\%$ and differential cross-sections are measured as a function of
+  six kinematic variables of the $Z\gamma\gamma$ system. The data are compared with predictions
+  from MC event generators which are accurate to up to next-to-leading order in QCD.
+  The cross-section measurements are used to set limits on the coupling strengths of
+  dimension-8 operators in the framework of an effective field theory.'
+ReleaseTests:
+ - $A pp-13000-eeyy
+Keywords:
+ - MULTIBOSON
+ - TRIBOSON
+BibKey: ATLAS:2022wmu
+BibTeX: '@article{ATLAS:2022wmu,
+    collaboration = "ATLAS",
+    title = "{Measurement of $Z\gamma\gamma$ production in $pp$ collisions at $\sqrt{s}= 13$ TeV with the ATLAS detector}",
+    eprint = "2211.14171",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2022-192",
+    month = "11",
+    year = "2022"
+}'

@@ -18,7 +18,7 @@ MEPS_BAND="Variations=$MEPS_VARS:BandComponentEnv=$MEPS_VARS"
 ME_BAND="Variations=$ME_VARS:BandComponentEnv=$ME_VARS"
 NO_BAND="Variations=none"
 # use "Name" tag declare multiple distinct curves using the same file,
-# apply style options, set a title, select the multiweights to be 
+# apply style options, set a title, select the multiweights to be
 # combined into bands
 rivet-mkhtml --errs -o plots_with_bands3 \
 Rivet.yoda":Name=full:$MEPS_STYLE:$MEPS_BAND:Title=ME+PS scales \$\\oplus\$ stats" \

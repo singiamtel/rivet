@@ -3,17 +3,6 @@ FROM ${UBUNTU_IMAGE}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
 
-ARG LATEX
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && if test "$LATEX" = "1"; then \
-      apt-get update -y && \
-      apt-get install -y texlive-latex-recommended texlive-fonts-recommended && \
-      apt-get install -y texlive-latex-extra texlive-pstricks imagemagick && \
-      sed -i 's/^.*policy.*coder.*none.*(PS|PDF).*//' /etc/ImageMagick-6/policy.xml && \
-      sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml && \
-      texhash; \
-    fi
-
 ARG BUILD_TOOLS
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
@@ -65,9 +54,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
          apt-get -y autoremove && \
          apt-get -y autoclean; \
        fi \
-    && wget --no-verbose https://bootstrap.pypa.io/get-pip.py -O get-pip.py \
-    && python get-pip.py \
-    && pip install matplotlib requests Cython
+    #&& wget --no-verbose https://bootstrap.pypa.io/get-pip.py -O get-pip.py \
+    #&& python get-pip.py \
+    #&& apt-get install -y python3-pip \
+    #&& pip install matplotlib requests Cython \
+    && apt-get install -y python3-matplotlib python3-requests cython3 \
+    && update-alternatives --install /usr/bin/cython cython /usr/bin/cython3 2
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && if [[ "$BUILD_TOOLS" != "Intel" ]]; then \
@@ -75,7 +67,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
          apt-get install -y libxft2 libxpm4 libpthread-stubs0-dev libsqlite3-dev uuid-dev && \
          apt-get -y autoclean && \
          cd /usr/local && \
-         wget --no-verbose https://root.cern/download/root_v6.26.02.Linux-ubuntu22-x86_64-gcc11.2.tar.gz -O- | tar xz && \
+         wget --no-verbose https://root.cern/download/root_v6.28.02.Linux-ubuntu22-x86_64-gcc11.3.tar.gz -O- | tar xz && \
          echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh; \
        fi
 
@@ -84,7 +76,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
          zlib1g-dev libgsl-dev \
          libhdf5-dev h5utils hdf5-tools python3-h5py \
     && mkdir /code && cd /code \
-    && wget https://github.com/BlueBrain/HighFive/archive/refs/tags/v2.4.1.tar.gz -O- | tar xz \
+    && wget https://github.com/BlueBrain/HighFive/archive/refs/tags/v2.7.1.tar.gz -O- | tar xz \
     && mv HighFive-*/include/highfive /usr/local/include/ \
     && rm -rf /code \
     && apt-get -y autoremove \
@@ -92,6 +84,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo "export LD_LIBRARY_PATH=\"/usr/local/lib:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
+    && echo "export LD_LIBRARY_PATH=\"/usr/local/lib64:/usr/lib64:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
     && echo "export PYTHONPATH=\"$(for i in $(ls /usr/local/lib/python* -d); do echo -n "$i/site-packages:"; done)\$PYTHONPATH\"" >> /etc/profile.d/05-usrlocal.sh \
     && cat /etc/profile.d/05-usrlocal.sh \
     && cp /etc/bash.bashrc /tmp/DUMMY1 \
@@ -104,7 +97,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && mkdir /code && cd /code \
     && wget --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
     && chmod +x rivet-bootstrap \
-    && INSTALL_PREFIX=/usr/local INSTALL_RIVET=0 INSTALL_YODA=0 INSTALL_CYTHON=0 HEPMC_VERSION=${HEPMC_VERSION} MAKE="make -j $(nproc --ignore=1)" ./rivet-bootstrap \
+    && INSTALL_PREFIX=/usr/local USE_VENV=0 \
+       INSTALL_RIVET=0 INSTALL_YODA=0 INSTALL_CYTHON=0 \
+       HEPMC_VERSION=${HEPMC_VERSION}  \
+       HEPMC_CMAKE_ADD='-D HEPMC3_Python_SITEARCH311=/usr/local/lib/python3.11/site-packages -DHEPMC3_PYTHON_VERSIONS=3.11' \
+       MAKE="make -j $(nproc --ignore=1)" \
+       ./rivet-bootstrap \
     && rm -rf /code
 
 ARG LHAPDF_VERSION
@@ -118,18 +116,26 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && ls wrappers/python/build/lhapdf -l \
     && rm -r /code
 
+ARG LATEX
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && if test "$LATEX" = "1"; then \
+      apt-get update -y && \
+      apt-get install -y texlive-latex-recommended texlive-fonts-recommended && \
+      apt-get install -y texlive-latex-extra texlive-pstricks cm-super dvipng imagemagick && \
+      sed -i 's/^.*policy.*coder.*none.*(PS|PDF).*//' /etc/ImageMagick-6/policy.xml && \
+      sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml && \
+      texhash; \
+    fi
+
+# TODO: fix local/local in packages
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && echo 'export PYTHONPATH="/usr/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
+    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
+
+## Interactive niceties
 ADD bash.bashrc.completion /etc/
 RUN export DEBIAN_FRONTEND=noninteractive \
     && cat /etc/bash.bashrc.completion >> /etc/bash.bashrc \
     && rm /etc/bash.bashrc.completion
-
-# RUN export DEBIAN_FRONTEND=noninteractive \
-#     && echo 'echo FOO' >> /etc/profile \
-#     && echo 'echo BAR' >> /etc/bash.bashrc \
-#     && echo 'echo BAZ' >> /root/.bashrc
-
-# TODO: move earlier
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && echo "export LD_LIBRARY_PATH=\"/usr/local/lib64:/usr/lib64:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh
 
 WORKDIR /work

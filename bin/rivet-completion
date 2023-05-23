@@ -268,3 +268,58 @@ function _rivet_mkhtml() {
 
 
 complete -F _rivet_mkhtml rivet-mkhtml
+
+
+########################
+
+
+function _rivet_mkhtml_mpl() {
+    local cur prev commands options command
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    opts="--help -h"
+    opts="$opts --outputdir -o"
+    opts="$opts --title -t"
+    opts="$opts --config -c"
+    opts="$opts --single -s"
+    opts="$opts --no-errs --no-mcerrs --no-mc-errs"
+    opts="$opts --num-threads --n"
+    opts="$opts --pdf --booklet"
+    opts="$opts --ignore-unvalidated -i"
+    opts="$opts --match -m"
+    opts="$opts --unmatch -M"
+    opts="$opts --verbose -v"
+    if [[ ${cur} == -* ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        if test -n "$COMPREPLY"; then
+            return 0
+        fi
+    fi
+
+    _filedir dat
+    return 0
+
+    ## Options with files / directories as the arg
+    if (echo ${prev} | grep -E -- "--\<outputdir\>|\<-o\>" &> /dev/null); then
+        _filedir -d
+        return 0
+    fi
+    if (echo ${prev} | grep -E -- "--\<config\>|\<-c\>" &> /dev/null); then
+        _filedir
+        return 0
+    fi
+
+    ## Options without an completeable arg
+    if (echo ${prev} | grep -E -- "\<-t\>|--\<title\>|--\<n\>|--\<num-threads\>|\<-m\>|--\<match\>|\<-M\>|--\<unmatch\>" &> /dev/null); then
+        COMPREPLY=()
+        return 0
+    fi
+
+    _filedir "yoda|yoda.gz"
+    return 0
+}
+
+
+complete -F _rivet_mkhtml_mpl rivet-mkhtml-mpl

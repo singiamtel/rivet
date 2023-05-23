@@ -256,7 +256,7 @@ for idx in $(seq 1 $num_buckets); do
 
     ## Concatenate the analysis codes into a single .cc, with separator lines to fool the preprocessor!
 	for i in $(echo ${buckets[$idx]}); do #< find the real way to do this!
-		echo "#line 1 \"$i\"" >> "$tmpfile"
+		echo -e "\n#line 1 \"$i\"" >> "$tmpfile"  #< include a terminating newline, in case missing
 		cat "$i" >> "$tmpfile"
 	done
 

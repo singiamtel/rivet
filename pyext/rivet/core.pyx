@@ -358,7 +358,7 @@ cdef class AnalysisLoader:
 
     @staticmethod
     def analysisNameAliases():
-        "Get the list of analysis-name aliases"
+        "Get the alias -> canonical dict of analysis-name aliases"
         anames = c.AnalysisLoader_analysisNameAliases()
         return { a.first : a.second for a in anames }
 
@@ -376,6 +376,29 @@ cdef class AnalysisLoader:
         pyobj._ptr = move(ptr)
         # Create python object
         return pyobj
+
+    @staticmethod
+    def analysisPlugins():
+        "Get the list of active analysis plugin paths"
+        ppaths = c.AnalysisLoader_analysisPlugins()
+        return [p for p in ppaths]
+
+    # @staticmethod
+    # def searchAnalysisPlugins():
+    #     "Search for and return the list of analysis plugin paths"
+    #     ppaths = c.AnalysisLoader_searchAnalysisPlugins()
+    #     return [p for p in ppaths]
+
+    @staticmethod
+    def setAnalysisPlugins(ppaths):
+        "Set the list of analysis-plugin paths"
+        c.AnalysisLoader_setAnalysisPlugins(ppaths)
+
+    @staticmethod
+    def loadFromAnalysisPlugins():
+        "Load analysis builders from the active analysis plugin libs"
+        c.AnalysisLoader_loadFromAnalysisPlugins()
+
 
 cdef class ProjectionTreeGenerator:
     cdef c.ProjectionTreeGenerator *_ptr
@@ -406,6 +429,7 @@ cdef class ProjectionTreeGenerator:
         vec = self._ptr.getProjNames()
         return [v.decode('utf-8') for v in vec]
 
+
 ## Convenience versions in main rivet namespace
 def analysisNames():
     "Get the list of available analysis names, not including aliases"
@@ -426,6 +450,14 @@ def analysisNameAliases():
 def getAnalysis(name):
     "Get a Python wrapper for a named analysis (metadata access only)"
     return AnalysisLoader.getAnalysis(name)
+
+def analysisPlugins():
+    "Get the list of active analysis plugin paths"
+    return AnalysisLoader.analysisPlugins()
+
+def setAnalysisPlugins(ppaths):
+    "Set the list of analysis-plugin paths"
+    return AnalysisLoader.setAnalysisPlugins(ppaths)
 
 
 ## Path functions

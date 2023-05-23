@@ -14,10 +14,16 @@ Examples:
   %(prog)s [options] fifo.hepmc
 
 
-ENVIRONMENT:
+Environment variables:
+
  * RIVET_ANALYSIS_PATH: list of paths to be searched for plugin analysis libraries at runtime
  * RIVET_DATA_PATH: list of paths to be searched for data files (defaults to use analysis path)
- * See the documentation for more environment variables.
+ * RIVET_REF_PATH: list of paths to be searched for reference data files (defaults to use data path)
+ * RIVET_INFO_PATH: list of paths to be searched for analysis info files (defaults to use data path)
+ * RIVET_PLOT_PATH: list of paths to be searched for plot-style files (defaults to use data path)
+ * RIVET_ANALYSIS_PLUGINS: list of paths to be searched for data files (defaults to use data path)
+ * RIVET_RANDOM_SEED: force the random seed used by the detector smearing system
+ * RIVET_STRIP_HEPMC: reduce the complexity of HepMC events before analysis (experimental)
 """
 
 from __future__ import print_function
@@ -369,13 +375,13 @@ if len(args.SHOW_ANALYSES) > 0:
                 msg += twrap.fill(l) + "\n"
 
         if ana.luminosityfb():
-            msg+= "\nIntegrated data luminosity = %s inverse fb.\n"%ana.luminosityfb()
+            msg += "\nIntegrated data luminosity = %s inverse fb.\n"%ana.luminosityfb()
 
         if ana.keywords():
             msg += "\nAnalysis keywords:"
             for k in ana.keywords():
                 msg += " %s"%k
-            msg+= "\n\n"
+            msg += "\n\n"
 
         if ana.references():
             msg += "\n" + "References:\n"

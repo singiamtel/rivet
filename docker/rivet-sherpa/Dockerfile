@@ -3,11 +3,15 @@ FROM hepstore/rivet:${RIVET_VERSION}
 LABEL maintainer="rivet-developers@cern.ch"
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y rsync pypy \
+    && apt-get install -y rsync pypy3 \
     && cd /usr/local \
     && git clone https://gitlab.com/openloops/OpenLoops.git \
     && cd OpenLoops && ./scons \
-    && ./openloops libinstall ppln ppln_ew pptt
+    && ./openloops libinstall ppln ppln_ew pptt \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean
+
+# TODO: update Sherpa to CMake build with v3
 
 ARG SHERPA_VERSION
 ENV PATH="${PATH}:/usr/lib64/openmpi/bin"
@@ -16,28 +20,23 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && mkdir /code && cd /code \
     && git clone -b v${SHERPA_VERSION} https://gitlab.com/sherpa-team/sherpa.git \
     && cd sherpa && autoreconf -fi \
+    && ./configure --help \
     && ./configure --prefix=/usr/local \
       --enable-lhapdf=/usr/local --enable-fastjet=/usr/local \
       --enable-hepmc3=/usr/local --enable-openloops=/usr/local/OpenLoops \
       --enable-rivet=/usr/local --enable-analysis \
-      --enable-pyext --enable-gzip \
+      --disable-pyext \
+      --enable-gzip \
       --enable-mpi CC=mpicc CXX=mpic++ \
     && make -j $(nproc --ignore=1) CXXFLAGS="-O2" AM_CXXFLAGS="-O2" \
     && make install \
     && mkdir /usr/local/Sherpa \
     && mv Examples /usr/local/Sherpa \
-    && cd / && rm -r /code
+    && cd / && rm -r /code \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean
 
-
-# RUN apt-get update; \
-# apt-get -q -y --no-install-recommends install pypy; \
-# apt autoremove; apt-get autoclean; \
-# rm -rf /var/lib/apt/lists /var/cache/apt; \
-# rm -rf $(find / -name doc 2>&1 | grep -v Permission)
-
-# RUN echo "export PATH=/usr/local/bin:\$PATH\n\
-# export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH\n\
-# . /usr/local/rivetenv.sh\n\
-# if [ "\$PS1" ]; then PS1='\\h:\\w\\$ '; fi" > /etc/bash.bashrc
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
 
 WORKDIR /work

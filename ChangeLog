@@ -1,8 +1,48 @@
+2023-05-16  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Remove tautological assert from particle-ID utils (thanks to
+	Markus Seidel for the report).
+
+2023-05-11  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add workaround for Ubuntu 23.04 putting 'local' in the Python
+	platbase path.
+
+2023-05-02  Christian Gutschow  <chris.g@cern.ch>
+
+	* Prevent bookeeping histos from acquiring analysis option
+	on the fly as part of merging
+
+2023-04-27  Christian Gutschow  <chris.g@cern.ch>
+
+	* Release 3.1.8
+
+2023-04-27  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Append extra newlines to plugin sources in batched rivet-build.
+
+2023-04-21  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add ability to control the specific plugin library paths for
+	analyses to be loaded from, via new programmatic set and get
+	methods on AnalysisLoader and a new RIVET_ANALYSIS_PLUGINS
+	environment variable. Mainly intended for use on big HPC MPI
+	systems where duplicated filesystem walking is a really bad idea.
+
+2023-03-24  Andrii Verbytskyi  <andrii.verbytskyi@mpp.mpg.de>
+
+	* Remove support for custom ASCII event-file formats.
+
+	* Use an immediate call to HepMC3::deduce_reader() in the file and
+	stream opening; drop local attempts to deduce the file format.
+
+	* Require HepMC3 >= 3.2.0
+
 2023-03-13  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add variations on the discard/select utility functions to
-	(particularly) discard single elements by equality rather needing
-	to provide a function.
+	(particularly) discard single elements by equality rather than
+	needing to provide a function.
 
 2023-03-10 Christian Gutschow  <chris.g@cern.ch>
 

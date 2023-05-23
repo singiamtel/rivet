@@ -9,8 +9,8 @@ using the `rivet-merge` script.
 
 In the following, we will distinguish _equivalent merging_,
 where all output files are assumed to come from a CPU-parallelised run
-over the same pool of generated events using different random seeds, 
-and _non-equivelent merging_ (or _stacking_), where the files are assumed to 
+over the same pool of generated events using different random seeds,
+and _non-equivelent merging_ (or _stacking_), where the files are assumed to
 correspond to different processes and are just meant to be stacked.
 
 
@@ -28,7 +28,7 @@ indicates that the given `yoda` files are equivalent.)
 
 In most cases, a histogram will be scaled by a factor in the `finalize` method,
 either cross-section / sum of weights or 1 / area. In practice, this scaling
-needs to be "undone" for every input histogram first. The unscaled histograms 
+needs to be "undone" for every input histogram first. The unscaled histograms
 are then stacked and the individual scaling factors combined by summing the
 inverse input scale factors and taking the inverse of the sum.
 The combined scaling factor is then applied to the stacked histogram.
@@ -40,10 +40,10 @@ file as the weight.
 
 ## Stacking
 
-Let's assume that the analysis measures a jet spectrum over a large range 
-of transverse momenta. It is then difficult to get reasonable statistics 
-for all transverse momenta in a single generator run. However, the event generator 
-most likely have the possibility to select upper and lower cuts on the 
+Let's assume that the analysis measures a jet spectrum over a large range
+of transverse momenta. It is then difficult to get reasonable statistics
+for all transverse momenta in a single generator run. However, the event generator
+most likely have the possibility to select upper and lower cuts on the
 transverse momentum of the hard partonic sub-process. Although such cuts
 do not correspond to clean cut in the jet transverse momenta, we can still merge
 them together with `rivet-merge`. If you have four files produced with cuts on
@@ -51,15 +51,15 @@ the hard sub-process transverse momenta as indicated by the file names
 `run_10-20.yoda`, `run_20-50.yoda`, `run_50-100.yoda`, and `run_100-inf.yoda`,
 they are simply merged together with
 ```
-rivet-merge run_10-20.yoda run_20-50.yoda run_50-100.yoda run_100-inf.yoda 
+rivet-merge run_10-20.yoda run_20-50.yoda run_50-100.yoda run_100-inf.yoda
 ```
 where the merged result is found in the default
 output file `Rivet.yoda`. Note the absence of the `-e` flag.
 
 
 Apart from slicing, one could also envisage that a process is split based
-on final state. For instance, consider top-quark pair production in the dileptonic, 
-semi-leponic and all-hadronic channels, with corrsponding `yoda` files 
+on final state. For instance, consider top-quark pair production in the dileptonic,
+semi-leponic and all-hadronic channels, with corrsponding `yoda` files
 `ttbar_dilep.yoda.gz`, `ttbar_singlep.yoda.gz` and `ttbar_hadronic.yoda.gz` respectively.
 Let's assume the generator-level cross-section was not known when the files
 were produced and so the cross-section was manually set to unity at the time.
@@ -72,8 +72,8 @@ where the cross-section values are specified in picobarns.
 Note that if the HepMC `GenEvent` does not include the cross-section information
 and the user also didn't supply a cross-section, the finalised histograms
 will have 0 area and the on-the-fly scaling from the above example cannot work.
-In this case, it is still possibly to forcibly set a cross-section 
-by using a syntax like `ttbar_dilep.yoda.gz:=72.592`. 
+In this case, it is still possibly to forcibly set a cross-section
+by using a syntax like `ttbar_dilep.yoda.gz:=72.592`.
 To ease scripting and readability,
 the syntax `ttbar_dilep.yoda.gz:x72.592` (equivalent to `ttbar_dilep.yoda.gz:72.592`)
 for multiplicative scaling will also be accepted.
@@ -82,49 +82,70 @@ for multiplicative scaling will also be accepted.
 
 The final cross-section will be given by the sum of the individual cross-sections.
 
-Note that the `yodamerge` script would really only perform a simple stacking here. 
-This is fine when the histogram is normalised to cross-section and the components 
-simply just need to be added up, but for a unit-normalised histogram, one would first 
-have to undo the divsion by area, add the components with their respective 
-cross-section weight, and renormalise the stacked histogram to unity. This is why `yodamerge` 
-tends to struggle with files that contain a mix of unit- and cross-section-normalised 
+Note that the `yodamerge` script would really only perform a simple stacking here.
+This is fine when the histogram is normalised to cross-section and the components
+simply just need to be added up, but for a unit-normalised histogram, one would first
+have to undo the divsion by area, add the components with their respective
+cross-section weight, and renormalise the stacked histogram to unity. This is why `yodamerge`
+tends to struggle with files that contain a mix of unit- and cross-section-normalised
 objects, although this can often still be dealt with using a few lines of Python.
+
+
+## Merging with different energies
+
+Some experimental routines support multiple beam energies. Often, the routine logic
+is steered depending on the centre-of-mass energy taken from the input HepMC event,
+e.g. to book a specific subset of histograms or sometimes even to choose an approriate
+upper/maximum bin edge for some histograms.
+This information of course will not be available at merging time.
+
+However, all Rivet routines support the `ENERGY=VALUE` option which can be used to
+achieve the same behviour at merging time. This option can be specified either
+right from the start when first running the routine, or added as part of the magic,
+e.g. for specific routines:
+```
+rivet-merge -e -a JADE_OPAL_2000_S4300807:ENERGY=91.2 file1.yoda file2.yoda ...
+```
+or globally for all analysis routines (post-3.1.8):
+```
+rivet-merge -e -a :ENERGY=91.2 file1.yoda file2.yoda ...
+```
 
 
 ## Reentrant safety
 
 In essence, a reentrant-safe analysis is one that, once interrupted mid-run,
 has enough information in the output file to be able to pick up where it left off.
-The `rivet-merge` script will call the `init()` method of an analysis to book 
-its objects into memory, replace all the emoty booked objects with the merged version 
-from the combined input files and then run the `finalize()` method once more. 
-With that in mind, all fillable objects must be booked in the `init()` method, 
-i.e. histograms, profiles, counters. Scatter-type objects can be booked in either 
+The `rivet-merge` script will call the `init()` method of an analysis to book
+its objects into memory, replace all the emoty booked objects with the merged version
+from the combined input files and then run the `finalize()` method once more.
+With that in mind, all fillable objects must be booked in the `init()` method,
+i.e. histograms, profiles, counters. Scatter-type objects can be booked in either
 the `init()` or the `finalize()` method.
 
-The vast majority of analyses shipped with Rivet are reentrant safe. 
+The vast majority of analyses shipped with Rivet are reentrant safe.
 Nevertheless, there are a few pitfalls worth highlighting:
 
  * If an analysis is meant to write out a scatter-type objects, such as
-   a ratio or an efficiency, it must book the corresponding numerator 
-   and denomintor histograms in the `init()` method in order to be 
+   a ratio or an efficiency, it must book the corresponding numerator
+   and denomintor histograms in the `init()` method in order to be
    reentrate safe.
  * If the number of histograms booked in the default `init()` method
    depends on the sample (e.g. a beam-energy-dependent booking),
    the routine is not reentrant safe because, for any given run,
-   it is not guaranteed that there is always a one-to-one match 
-   between the booked analysis objects and the objects written 
-   out to file. In such a case, it is preferable to use 
-   Rivet's [options mechanism](anaoptions.md) to steer the 
+   it is not guaranteed that there is always a one-to-one match
+   between the booked analysis objects and the objects written
+   out to file. In such a case, it is preferable to use
+   Rivet's [options mechanism](anaoptions.md) to steer the
    histogram booking, which ensures that an analysis will
    always be initialised with the right set of objects.
- * It's not possible to use a simple `double` to add up 
-   event weights in the main event loop and use the 
-   resulting sum to normalise a histogram. There are two reasons: 
+ * It's not possible to use a simple `double` to add up
+   event weights in the main event loop and use the
+   resulting sum to normalise a histogram. There are two reasons:
    First of all, many Monte Carlo samples will have multiple
    event weights, and so by using a `double` you are probably
    not correctly accounting for the different sum of weights.
-   Secondly, when merging files, the main event loop is not 
+   Secondly, when merging files, the main event loop is not
    executed and so these simple `double` counters will retain
    their initialisation values (usually 0) and the merged result
    cannot receive the intended normalisation. In these cases,

@@ -1,39 +1,39 @@
-EXTRA_DIST = analists/mk-analysis-html analists/mk-analysis-json analists/mk-analysis-txt
+EXTRA_DIST = anaindex/mk-analysis-html anaindex/mk-analysis-json anaindex/mk-analysis-txt
 DOCS =
 DOCDIRS =
 
 if ENABLE_PYEXT
 
 ## Analysis-list HTML pages
-DOCS += analists/analyses.html
-DOCDIRS += analists/analyses
-analists/analyses.html: $(top_srcdir)/analyses $(srcdir)/analists/mk-analysis-html
-	$(mkdir_p) analists && cd analists && \
+DOCS += anaindex/analyses.html
+DOCDIRS += anaindex/analyses
+anaindex/analyses.html: $(top_srcdir)/analyses $(srcdir)/anaindex/mk-analysis-html
+	$(mkdir_p) anaindex && cd anaindex && \
     LD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH):$(LD_LIBRARY_PATH) \
     DYLD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH):$(DYLD_LIBRARY_PATH) \
     PYTHONPATH=$(abs_top_builddir)/pyext/build:$(YODA_PYTHONPATH):$(PYTHONPATH) \
     RIVET_ANALYSIS_PATH=$(abs_top_builddir)/analyses:: \
-    $(PYTHON) $(abs_srcdir)/analists/mk-analysis-html || true
+    $(PYTHON) $(abs_srcdir)/anaindex/mk-analysis-html || true
 
 ## Analysis-list JSON file
-DOCS += analists/analyses.json
-analists/analyses.json: $(top_srcdir)/analyses $(srcdir)/analists/mk-analysis-json
-	$(mkdir_p) analists && cd analists && \
+DOCS += anaindex/analyses.json
+anaindex/analyses.json: $(top_srcdir)/analyses $(srcdir)/anaindex/mk-analysis-json
+	$(mkdir_p) anaindex && cd anaindex && \
     LD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH):$(LD_LIBRARY_PATH) \
     DYLD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH):$(DYLD_LIBRARY_PATH) \
     PYTHONPATH=$(abs_top_builddir)/pyext/build:$(YODA_PYTHONPATH):$(PYTHONPATH) \
     RIVET_ANALYSIS_PATH=$(abs_top_builddir)/analyses:: \
-    $(PYTHON) $(abs_srcdir)/analists/mk-analysis-json || true
+    $(PYTHON) $(abs_srcdir)/anaindex/mk-analysis-json || true
 
 ## Analysis-list text file
-DOCS += analists/analyses.dat
-analists/analyses.dat: $(top_srcdir)/analyses $(srcdir)/analists/mk-analysis-txt
-	$(mkdir_p) analists && cd analists && \
+DOCS += anaindex/analyses.dat
+anaindex/analyses.dat: $(top_srcdir)/analyses $(srcdir)/anaindex/mk-analysis-txt
+	$(mkdir_p) anaindex && cd anaindex && \
     LD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH):$(LD_LIBRARY_PATH) \
     DYLD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH):$(DYLD_LIBRARY_PATH) \
     PYTHONPATH=$(abs_top_builddir)/pyext/build:$(YODA_PYTHONPATH):$(PYTHONPATH) \
     RIVET_ANALYSIS_PATH=$(abs_top_builddir)/analyses:: \
-    $(PYTHON) $(abs_srcdir)/analists/mk-analysis-txt || true
+    $(PYTHON) $(abs_srcdir)/anaindex/mk-analysis-txt || true
 
 ## Analysis coverage
 DOCS += coverage/rivet-coverage.html \
@@ -42,7 +42,7 @@ DOCS += coverage/rivet-coverage.html \
   coverage/rivet-coverage-searchesonly.html \
   coverage/rivet-coverage-nosearches.html \
   coverage/rivet-coverage-nosearches-noheavyion.html
-coverage/rivet-coverage.html: analists $(wildcard $(srcdir)/coverage/inspire*.json) $(wildcard $(srcdir)/coverage/*.rank) $(top_srcdir)/analyses $(srcdir)/coverage/mk-coverage-html
+coverage/rivet-coverage.html: anaindex $(wildcard $(srcdir)/coverage/inspire*.json) $(wildcard $(srcdir)/coverage/*.rank) $(top_srcdir)/analyses $(srcdir)/coverage/mk-coverage-html
 	$(mkdir_p) coverage && cd coverage && \
     LD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(LD_LIBRARY_PATH):$(LD_LIBRARY_PATH) \
     DYLD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(DYLD_LIBRARY_PATH):$(DYLD_LIBRARY_PATH) \
@@ -97,13 +97,13 @@ DEST = login.hepforge.org:rivet/public_html/
 doc: $(DOCS)
 	@true
 
-html-local: analists/analyses.html
+html-local: anaindex/analyses.html
 	@true
 
-json: analists/analyses.json
+json: anaindex/analyses.json
 	@true
 
-dat: analists/analyses.dat
+dat: anaindex/analyses.dat
 	@true
 
 anadiff: anadiff/anadiffs.txt

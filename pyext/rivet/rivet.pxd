@@ -99,6 +99,12 @@ cdef extern from "Rivet/AnalysisLoader.hh":
     map[string,string] AnalysisLoader_analysisNameAliases "Rivet::AnalysisLoader::analysisNameAliases" ()
     vector[string] AnalysisLoader_stdAnalysisNames "Rivet::AnalysisLoader::stdAnalysisNames" ()
     unique_ptr[Analysis] AnalysisLoader_getAnalysis "Rivet::AnalysisLoader::getAnalysis" (string)
+    #
+    vector[string] AnalysisLoader_analysisPlugins "Rivet::AnalysisLoader::analysisPlugins" ()
+    vector[string] AnalysisLoader_searchAnalysisPlugins "Rivet::AnalysisLoader::searchAnalysisPlugins" ()
+    void AnalysisLoader_setAnalysisPlugins "Rivet::AnalysisLoader::setAnalysisPlugins" (vector[string])
+    void AnalysisLoader_loadFromAnalysisPlugins "Rivet::AnalysisLoader::loadFromAnalysisPlugins" ()
+
 
 cdef extern from "Rivet/Tools/RivetPaths.hh" namespace "Rivet":
     vector[string] getAnalysisLibPaths()

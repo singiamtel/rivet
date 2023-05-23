@@ -36,7 +36,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       /// Todo: Reconstruct the dilepton invariant mass to fill the histogram
-      // ... 
+      // ...
       _h["mll"]->fill(1.0);
 
     }

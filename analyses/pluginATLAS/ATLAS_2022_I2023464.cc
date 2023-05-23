@@ -139,8 +139,6 @@ namespace Rivet {
       idiscardIfAnyDeltaRLess(electrons10, photons, 0.4);
       idiscardIfAnyDeltaRLess(electrons15, photons, 0.4);
 
-      // Get dressed muons
-      const Particles & kin_mu = apply<FinalState>(event, "MFS").particlesByPt();
 
       // Retain prompt muons with pseudorapidity in acceptance
       // and pT>10 GeV (muons10) or >15 GeV (muons15)

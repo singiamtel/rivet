@@ -16,4 +16,7 @@ RUN true \
 
 RUN lhapdf install NNPDF23_lo_as_0130_qed
 
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
+
 WORKDIR /work

@@ -29,10 +29,15 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y python3 python3-dev python3-venv python3-wheel \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 2 \
     && update-alternatives --install /usr/bin/python-config python-config /usr/bin/python3-config 2 \
-    && wget --no-verbose https://bootstrap.pypa.io/pip/get-pip.py -O get-pip.py \
-    && python get-pip.py \
+    #&& wget --no-verbose https://bootstrap.pypa.io/pip/get-pip.py -O get-pip.py \
+    #&& python get-pip.py \
+    #&& apt-get python3-pip \
     && apt-get -y autoremove \
     && apt-get -y autoclean
+
+# TODO: fix local/local in packages, remove from here
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
 
 ARG RIVET_VERSION
 ARG YODA_VERSION
@@ -43,7 +48,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && python -m venv /herwig  \
     && mkdir -p /herwig/etc/bash_completion.d \
     && . /herwig/bin/activate \
-    && pip install Cython six \
+    #&& pip install Cython six \
+    && apt-get install cython3 python3-six \
     && cp /herwig/bin/activate{,-raw} \
     && wget https://herwig.hepforge.org/downloads/herwig-bootstrap \
     && chmod +x herwig-bootstrap \
@@ -53,17 +59,22 @@ RUN export DEBIAN_FRONTEND=noninteractive \
       --rivet-version=${RIVET_VERSION} --yoda-version=${YODA_VERSION} \
       --lhapdf-version=${LHAPDF_VERSION} \
       --without-hjets \
-    && rm -r /herwig/src herwig-bootstrap
-    #mv herwig-bootstrap /herwig/src
+    && rm -r /herwig/src herwig-bootstrap \
+    #mv herwig-bootstrap /herwig/src \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean
 
-RUN apt-get update -y \
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update -y \
     && apt-get install -y texlive-latex-recommended texlive-fonts-recommended \
     && apt-get install -y texlive-latex-extra texlive-pstricks imagemagick \
-    && apt-get install -y imagemagick \
+    && apt-get install -y imagemagick cm-super dvipng \
     && sed -i 's/^.*policy.*coder.*none.*(PS|PDF).*//' /etc/ImageMagick-6/policy.xml \
-    && sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml
+    && sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean
 
-RUN true \
+RUN export DEBIAN_FRONTEND=noninteractive \
     && echo ". /herwig/bin/activate" >> /etc/bash.bashrc \
     && echo ". /herwig/etc/bash_completion.d/yoda-completion" >> /etc/bash.bashrc \
     && echo ". /herwig/etc/bash_completion.d/rivet-completion" >> /etc/bash.bashrc

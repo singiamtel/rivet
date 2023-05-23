@@ -1,95 +1,132 @@
-
 BEGIN PLOT /ZEUS_2008_I780108/d11-x01-y01
-Title=Differential unpolarized cross section for inclusive jet production as a function of the jet pseudorapidity, electrons
+Title=Unpolarized inclusive jet cross section vs the jet $\eta$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}\eta$ [pb]
+XLabel=$\eta_\text{jet}$
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d11-x01-y02
-Title=Differential unpolarized cross section for inclusive jet production as a function of the jet pseudorapidity, positrons
+Title=Unpolarized inclusive jet cross section vs jet $\eta$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}\eta$ [pb]
+XLabel=$\eta_\text{jet}$
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d12-x01-y01
-Title=Differential unpolarized cross section for two jet production as a functionof the jet pseudorapidity, electrons
+Title=Unpolarized inclusive two jet cross section vs jet $\eta$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}\eta$ [pb]
+XLabel=$\eta_\text{jet}$
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d12-x01-y02
-Title=Differential unpolarized cross section for two jet production as a functionof the jet pseudorapidity, positrons
+Title=Unpolarized inclusive two jet cross section vs jet $\eta$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}\eta$ [pb]
+XLabel=$\eta_\text{jet}$
 END PLOT
 
 
 BEGIN PLOT /ZEUS_2008_I780108/d13-x01-y01
-Title=Differential unpolarized cross section for three jet production as a function of the jet pseudorapidity, electrons
+Title=Unpolarized inclusive three jet cross section vs jet $\eta$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}\eta$ [pb]
+XLabel=$\eta_\text{jet}$
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d13-x01-y02
-Title=Differential unpolarized cross section for three jet production as a function of the jet pseudorapidity, positrons
+Title=Unpolarized inclusive three jet cross section vs jet $\eta$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}\eta$ [pb]
+XLabel=$\eta_\text{jet}$
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d14-x01-y01
-Title=Differential unpolarized cross section for inclusive jet production as a function of the jet pseudorapidity, electrons
+Title=Unpolarized inclusive jet cross section vs jet $E_\perp$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}E_\perp$ [$\text{pb}/\text{GeV}$]
+XLabel=$E_\perp$ [GeV]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d14-x01-y02
-Title=Differential unpolarized cross section for inclusive jet production as a function of the jet pseudorapidity, positrons
+Title=Unpolarized inclusive jet cross section vs jet $E_\perp$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}E_\perp$ [$\text{pb}/\text{GeV}$]
+XLabel=$E_\perp$ [GeV]
 END PLOT
 
 
 BEGIN PLOT /ZEUS_2008_I780108/d15-x01-y01
-Title=Differential unpolarized cross section for two jet production as a functionof the jet pseudorapidity, electrons
+Title=Unpolarized inclusive two jet cross section vs $E_\perp$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}E_\perp$ [$\text{pb}/\text{GeV}$]
+XLabel=$E_\perp$ [GeV]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d15-x01-y02
-Title=Differential unpolarized cross section for two jet production as a functionof the jet pseudorapidity, positrons
+Title=Unpolarized inclusive two jet cross section vs $E_\perp$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}E_\perp$ [$\text{pb}/\text{GeV}$]
+XLabel=$E_\perp$ [GeV]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d16-x01-y01
-Title=Differential unpolarized cross section for three jet production as a function of the jet pseudorapidity, electrons
+Title=Unpolarized inclusive three jet cross section vs $E_\perp$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}E_\perp$ [$\text{pb}/\text{GeV}$]
+XLabel=$E_\perp$ [GeV]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d16-x01-y02
-Title=Differential unpolarized cross section for three jet production as a function of the jet pseudorapidity, positrons
+Title=Unpolarized inclusive three jet cross section vs $E_\perp$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}E_\perp$ [$\text{pb}/\text{GeV}$]
+XLabel=$E_\perp$ [GeV]
 END PLOT
 
 
 BEGIN PLOT /ZEUS_2008_I780108/d17-x01-y01
 LogX=1
-Title=Differential unpolarized cross section for inclusive jet production as a function of the jet pseudorapidity, electrons
+Title=Unpolarized inclusive jet cross section vs $Q^2$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}Q^2$ [$\text{pb}/\text{GeV}^{-2}$]
+XLabel=$Q^2$ [$\text{GeV}^2$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d17-x01-y02
 LogX=1
-Title=Differential unpolarized cross section for inclusive jet production as a function of the jet pseudorapidity, positrons
+Title=Unpolarized inclusive jet cross section vs $Q^2$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}Q^2$ [$\text{pb}\text{GeV}^{-2}$]
+XLabel=$Q^2$ [$\text{GeV}^2$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d18-x01-y01
 LogX=1
-Title=Differential unpolarized cross section for two jet production as a functionof the jet pseudorapidity, electrons
+Title=Unpolarized inclusive two jet cross section vs $Q^2$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}Q^2$ [$\text{pb}\text{GeV}^{-2}$]
+XLabel=$Q^2$ [$\text{GeV}^2$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d18-x01-y02
 LogX=1
-Title=Differential unpolarized cross section for two jet production as a functionof the jet pseudorapidity, positrons
+Title=Unpolarized inclusive two jet cross section vs $Q^2$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}Q^2$ [$\text{pb}\text{GeV}^{-2}$]
+XLabel=$Q^2$ [$\text{GeV}^2$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d19-x01-y01
 LogX=1
-Title=Differential unpolarized cross section for three jet production as a function of the jet pseudorapidity, electrons
+Title=Unpolarized inclusive three jet cross section vs $Q^2$, $e^-$
+YLabel=$\text{d}\sigma/\text{d}Q^2$ [$\text{pb}\text{GeV}^{-2}$]
+XLabel=$Q^2$ [$\text{GeV}^2$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d19-x01-y02
 LogX=1
-Title=Differential unpolarized cross section for three jet production as a function of the jet pseudorapidity, positrons
+Title=Unpolarized inclusive three jet cross section vs $Q^2$, $e^+$
+YLabel=$\text{d}\sigma/\text{d}Q^2$ [$\text{pb}\text{GeV}^{-2}$]
+XLabel=$Q^2$ [$\text{GeV}^2$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d20-x01-y01
 LogX=1
-Title=Differential unpolarized inclusive-jet cross section as a function of X, electrons
-XLabel=x
+Title=Unpolarized inclusive jet cross section vs $x$, $e^-$
+XLabel=$x$
+YLabel=$\text{d}\sigma/\text{d}x$ [pb]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d20-x01-y02
 LogX=1
-Title=Differential unpolarized inclusive-jet cross section as a function of X, positrons
-XLabel=x
+Title=Unpolarized inclusive jet cross section vs $x$, $e^+$
+XLabel=$x$
+YLabel=$\text{d}\sigma/\text{d}x$ [pb]
 END PLOT
 
 
@@ -130,26 +167,29 @@ END PLOT
 
 
 BEGIN PLOT /ZEUS_2008_I780108/d22-x01-y01
-Title=Differential unpolarized dijet cross section as a function of the dijet mass.
-XLabel=$M^{jj},GeV$
+Title=Unpolarized dijet cross section vs dijet mass.
+XLabel=$M^{jj}$ [GeV]
+YLabel=$\text{d}\sigma/\text{d}M^{jj}$ [$\text{pb}/\text{GeV}$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d22-x01-y02
-Title=Differential unpolarized dijet cross section as a function of the dijet mass.
-XLabel=$M^{jj},GeV$
+Title=Unpolarized dijet cross section vs dijet mass.
+XLabel=$M^{jj}$ [GeV]
+YLabel=$\text{d}\sigma/\text{d}M^{jj}$ [$\text{pb}/\text{GeV}$]
 END PLOT
-
-
+,
 
 
 BEGIN PLOT /ZEUS_2008_I780108/d23-x01-y01
-Title=Differential unpolarized trijet cross section as a function of the trijet mass.
-XLabel=$M^{jjj},GeV$
+Title=Unpolarized inclusive three jet cross section vs trijet mass.
+XLabel=$M^{jjj}$ [GeV]
+YLabel=$\text{d}\sigma/\text{d}M^{jjj}$ [$\text{pb}/\text{GeV}$]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d23-x01-y02
-Title=Differential unpolarized trijet cross section as a function of the trijet mass.
-XLabel=$M^{jjj},GeV$
+Title=Unpolarized inclusive three jet cross section vs trijet mass.
+XLabel=$M^{jjj}$ [GeV]
+YLabel=$\text{d}\sigma/\text{d}M^{jjj}$ [$\text{pb}/\text{GeV}$]
 END PLOT
 
 
