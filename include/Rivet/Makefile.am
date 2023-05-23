@@ -144,7 +144,6 @@ nobase_pkginclude_HEADERS += \
   Tools/Percentile.hh \
   Tools/PrettyPrint.hh \
   Tools/ProjectionTreePlotter.hh \
-  Tools/ReaderCompressedAscii.hh \
   Tools/RHICCommon.hh \
   Tools/RivetFastJet.hh \
   Tools/RivetHepMC.hh \
