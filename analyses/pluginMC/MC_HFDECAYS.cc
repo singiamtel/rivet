@@ -35,7 +35,7 @@ namespace Rivet {
 
       /// Book histograms and initialise projections before the run
       void init() {
-
+        
         declare(HeavyHadrons(),"HA");
 
         FastJets jetpro(FinalState(), FastJets::ANTIKT, 0.4, JetAlg::Muons::DECAY, JetAlg::Invisibles::DECAY);
@@ -153,62 +153,64 @@ namespace Rivet {
 
         for (const Particle &p : ha.bHadrons()) {
           const string name = "pt_" + whoDis(p.pid());
-          if (p.pid() == PID::B0) {
+          if (p.abspid() == PID::B0) { //Take into consideration both particles and anti-particles with abs()
             count_mult(p);
             _h["b_frac"]->fill(1);
             _h[name]->fill(p.pT()/GeV);
           }
-          else if (p.pid() == PID::BPLUS) {
+          else if (p.abspid() == PID::BPLUS) {
             count_mult(p);
             _h["b_frac"]->fill(2);
             _h[name]->fill(p.pT()/GeV);
           }
-          else if (p.pid() == PID::B0S) {
+          else if (p.abspid() == PID::B0S) {
             count_mult(p);
             _h["b_frac"]->fill(3);
             _h[name]->fill(p.pT()/GeV);
           }
-          else if (p.pid() == PID::BCPLUS)   _h["b_frac"]->fill(4);
-          else if (p.pid() == PID::LAMBDAB) {
+          else if (p.abspid() == PID::BCPLUS)   _h["b_frac"]->fill(4);
+          else if (p.abspid() == PID::LAMBDAB) {
             count_mult(p);
             _h["b_frac"]->fill(5);
             _h[name]->fill(p.pT()/GeV);
           }
-          else if (p.pid() == PID::XIBMINUS)     _h["b_frac"]->fill(6);
-          else if (p.pid() == PID::XI0B)         _h["b_frac"]->fill(7);
-          else if (p.pid() == PID::OMEGABMINUS)  _h["b_frac"]->fill(8);
-          else if (p.pid() == PID::SIGMABMINUS)  _h["b_frac"]->fill(9);
-          else if (p.pid() == PID::SIGMAB)       _h["b_frac"]->fill(10);
-          else if (p.pid() == PID::SIGMABPLUS)   _h["b_frac"]->fill(11);
+          else if (p.abspid() == PID::XIBMINUS)     _h["b_frac"]->fill(6);
+          else if (p.abspid() == PID::XI0B)         _h["b_frac"]->fill(7);
+          else if (p.abspid() == PID::OMEGABMINUS)  _h["b_frac"]->fill(8);
+          else if (p.abspid() == PID::SIGMABMINUS)  _h["b_frac"]->fill(9);
+          else if (p.abspid() == PID::SIGMAB)       _h["b_frac"]->fill(10);
+          else if (p.abspid() == PID::SIGMABPLUS)   _h["b_frac"]->fill(11);
         }
 
         for (const Particle &p : ha.cHadrons()) {
-          const string name = "pt_" + whoDis(p.pid());
-          if (p.pid() == PID::DPLUS) {
-            count_mult(p);
-            _h["c_frac"]->fill(1);
-            _h[name]->fill(p.pT()/GeV);
+          if( !p.fromBottom()){ //take into account only c-hadrons that don't come from a b-hadron decay
+                                //Avoid double-counting b-hadron fractions
+            const string name = "pt_" + whoDis(p.pid());
+            if (p.abspid() == PID::DPLUS) {
+              count_mult(p);
+              _h["c_frac"]->fill(1);
+              _h[name]->fill(p.pT()/GeV);
+            }
+            else if (p.abspid() == PID::D0) {
+              count_mult(p);
+              _h["c_frac"]->fill(2);
+              _h[name]->fill(p.pT()/GeV);
+            }
+            else if (p.abspid() == PID::DSPLUS) {
+              count_mult(p);
+              _h["c_frac"]->fill(3);
+              _h[name]->fill(p.pT()/GeV);
+            }
+            else if (p.abspid() == PID::LAMBDACPLUS) {
+              count_mult(p);
+              _h["c_frac"]->fill(4);
+              _h[name]->fill(p.pT()/GeV);
+            }
+            else if (p.abspid() == PID::XICPLUS)  _h["c_frac"]->fill(5);
+            else if (p.abspid() == PID::XI0C)     _h["c_frac"]->fill(6);
+            else if (p.abspid() == PID::OMEGA0C)  _h["c_frac"]->fill(7);
           }
-          else if (p.pid() == PID::D0) {
-            count_mult(p);
-            _h["c_frac"]->fill(2);
-            _h[name]->fill(p.pT()/GeV);
-          }
-          else if (p.pid() == PID::DSPLUS) {
-            count_mult(p);
-            _h["c_frac"]->fill(3);
-            _h[name]->fill(p.pT()/GeV);
-          }
-          else if (p.pid() == PID::LAMBDACPLUS) {
-            count_mult(p);
-            _h["c_frac"]->fill(4);
-            _h[name]->fill(p.pT()/GeV);
-          }
-          else if (p.pid() == PID::XICPLUS)  _h["c_frac"]->fill(5);
-          else if (p.pid() == PID::XI0C)     _h["c_frac"]->fill(6);
-          else if (p.pid() == PID::OMEGA0C)  _h["c_frac"]->fill(7);
         }
-
         Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 25.*GeV && Cuts::absrap < 2.5);
         if (jets.empty()) vetoEvent;
 
