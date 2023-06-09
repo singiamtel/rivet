@@ -1,0 +1,10 @@
+Name: MC_HFBRANCHING
+Summary: Monte Carlo analysis to compute semi-leptonic branching ratios of heavy-flavour hadrons
+Reentrant: true
+Status: VALIDATED
+Authors:
+ - Ilia Kalaitzidou <ilia.kalaitzidou@cern.ch>
+RunInfo: 
+  Anything with heavy-flavour hadrons
+Description:
+  'Plots to study semi-leptonic decays of heavy-flavour hadrons (branching ratios, hadron and lepton $p_T$.'
