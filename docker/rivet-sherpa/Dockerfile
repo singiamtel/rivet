@@ -1,6 +1,7 @@
 ARG RIVET_VERSION
 FROM hepstore/rivet:${RIVET_VERSION}
 LABEL maintainer="rivet-developers@cern.ch"
+SHELL ["/bin/bash", "-c"]
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y rsync pypy3 \

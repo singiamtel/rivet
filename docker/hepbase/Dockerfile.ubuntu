@@ -64,10 +64,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 RUN export DEBIAN_FRONTEND=noninteractive \
     && if [[ "$BUILD_TOOLS" != "Intel" ]]; then \
          apt-get update -y && \
-         apt-get install -y libxft2 libxpm4 libpthread-stubs0-dev libsqlite3-dev uuid-dev && \
+         apt-get install -y libxft2 libxpm4 libglu1-mesa libpthread-stubs0-dev libsqlite3-dev uuid-dev && \
          apt-get -y autoclean && \
          cd /usr/local && \
-         wget --no-verbose https://root.cern/download/root_v6.28.02.Linux-ubuntu22-x86_64-gcc11.3.tar.gz -O- | tar xz && \
+         wget --no-verbose https://root.cern/download/root_v6.28.04.Linux-ubuntu22-x86_64-gcc11.3.tar.gz -O- | tar xz && \
          echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh; \
        fi
 
