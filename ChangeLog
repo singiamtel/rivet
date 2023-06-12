@@ -1,3 +1,13 @@
+2023-05-16  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Remove tautological assert from particle-ID utils (thanks to
+	Markus Seidel for the report).
+
+2023-05-11  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add workaround for Ubuntu 23.04 putting 'local' in the Python
+	platbase path.
+
 2023-05-02  Christian Gutschow  <chris.g@cern.ch>
 
 	* Prevent bookeeping histos from acquiring analysis option

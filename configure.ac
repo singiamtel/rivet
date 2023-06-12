@@ -359,6 +359,7 @@ if test x$enable_pyext == xyes; then
   AC_SUBST(PYTHON_MAJOR_VERSION)
   #RIVET_PYTHONPATH=$pythondir
   RIVET_PYTHONPATH=`$PYTHON -c "from __future__ import print_function; import sysconfig; print(sysconfig.get_path('platlib', vars={'platbase': '$prefix', 'base': '$prefix'}))"`
+  RIVET_PYTHONPATH=`echo $RIVET_PYTHONPATH | sed -e 's:local/local:local:g'` #< hack around borked Ubuntu 23.04 platbase
   AC_SUBST(RIVET_PYTHONPATH)
   AC_MSG_NOTICE(Rivet Python lib will be installed to $RIVET_PYTHONPATH)
   if test -z "$PYTHON"; then
