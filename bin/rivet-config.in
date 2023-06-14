@@ -28,6 +28,7 @@ if test $# -eq 0 || test -n "$tmp"; then
     echo "  --libs        : returns a Rivet '-L/-l' string for insertion into LIBS or LIBADD"
     echo
     echo "  --version     : returns Rivet release version number"
+    exit 0
 fi
 
 
