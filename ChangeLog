@@ -1,3 +1,7 @@
+2023-06-15  Christian Gutschow  <chris.g@cern.ch>
+
+	* Patch projection comparison for SmearedJets (thanks to Mark Owen for the report).
+
 2023-06-14  Christian Gutschow  <chris.g@cern.ch>
 
 	* Patch Make file for some Macs (thanks to Peter Meinzinger for the report
