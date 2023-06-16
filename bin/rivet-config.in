@@ -28,7 +28,7 @@ if test $# -eq 0 || test -n "$tmp"; then
     echo "  --libs        : returns a Rivet '-L/-l' string for insertion into LIBS or LIBADD"
     echo
     echo "  --version     : returns Rivet release version number"
-    exit 0
+    if [[ $# -eq 0 ]]; then exit 1; else exit 0; fi
 fi
 
 
@@ -49,7 +49,10 @@ datarootdir=@datarootdir@
 
 OUT=""
 
-## "Atomic" build info, for "roll your own build" obsessives
+## "Atomic" build info
+tmp=$( echo "$*" | grep -E -- '--\<cxx\>')
+test -n "$tmp" && OUT="$OUT @RIVETCXX@"
+
 tmp=$( echo "$*" | grep -E -- '--\<prefix\>')
 test -n "$tmp" && OUT="$OUT @prefix@"
 
@@ -62,14 +65,11 @@ test -n "$tmp" && OUT="$OUT @libdir@"
 tmp=$( echo "$*" | grep -E -- '--\<datadir\>')
 test -n "$tmp" && OUT="$OUT @datadir@/@PACKAGE_TARNAME@"
 
-tmp=$( echo "$*" | grep -E -- '--\<pythonpath\>')
+tmp=$( echo "$*" | grep -E -- '--\<pythonpath|pydir\>')
 test -n "$tmp" && OUT="$OUT @RIVET_PYTHONPATH@"
 
 
 ## "Pre-rolled" build info
-tmp=$( echo "$*" | grep -E -- '--\<cxx\>')
-test -n "$tmp" && OUT="$OUT @RIVETCXX@"
-
 tmp=$( echo "$*" | grep -E -- '--\<cflags\>|--\<cxxflags\>')
 test -n "$tmp" && OUT="$OUT @RIVETCXXFLAGS@"
 
