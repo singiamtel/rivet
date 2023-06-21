@@ -62,7 +62,7 @@ namespace Rivet {
 	      Rivet::PID::K0S, Rivet::PID::K0L, Rivet::PID::PROTON,
 	      Rivet::PID::NEUTRON, Rivet::PID::LAMBDA, Rivet::PID::SIGMAMINUS,
        	Rivet::PID::SIGMAPLUS, Rivet::PID::XIMINUS, Rivet::PID::XI0,
-	      Rivet::PID::OMEGAMINUS},Cuts::abseta < etamax && 
+	      Rivet::PID::OMEGAMINUS},Cuts::abseta < etamax &&
         Cuts::pT > pTmin*GeV && Cuts::pT < pTmax*GeV);
       declare(pp,"APRIM");
 
@@ -100,7 +100,7 @@ namespace Rivet {
     }
 
 
-    void fillPair(const Particle& p1, const Particle& p2, vector<Histo1DPtr>& histos, 
+    void fillPair(const Particle& p1, const Particle& p2, vector<Histo1DPtr>& histos,
       vector<CounterPtr>& sow) {
 	   if (isSame(p1,p2)) return;
           // If the pair is not within eta acceptance, we can continue early.
@@ -138,7 +138,7 @@ namespace Rivet {
       if (!evm.hasMixingEvents()) return;
 
       for (const Particle& p1 : pp.particles()) {
-	      // First do the signal histograms. 
+	      // First do the signal histograms.
         for (const Particle& p2 : pp.particles())
 	        fillPair(p1, p2, signal, nsp);
 	      // Then do the background
@@ -170,15 +170,13 @@ namespace Rivet {
     vector<Histo1DPtr> signal;
     vector<Histo1DPtr> background;
     vector<Scatter2DPtr> ratio;
-<<<<<<< HEAD
     vector<double> nsp;
     vector<double> nmp;
-
     /// @}
+
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ALICE_2016_I1507157);
 
 }
