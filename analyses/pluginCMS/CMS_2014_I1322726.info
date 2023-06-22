@@ -1,0 +1,38 @@
+Name: CMS_2014_I1322726
+Year: 2014
+Summary: Z production in PbPb and pp collisions at 2.76 TeV in the dimuon and dielectron decay channels
+Experiment: CMS
+Collider: LHC
+InspireID: 1322726
+Status: VALIDATED 
+Reentrant: True
+Authors:
+ - Hannes Jung <hannes.jung@desy.de>
+ - Sara Taheri Monfared <taheri@mail.desy.de>
+ - Muhammad Ibrahim Abdulhamid <Muhammad.Ibrahim@science.tanta.edu.eg>
+References:
+ - CMS-HIN-13-004
+ - JHEP 03 (2015) 022
+ - arXiv:1410.4825
+RunInfo: DY events with m(ll)>60 GeV, run in pp mode (PbPb to be added)
+Beams: [p+, p+]
+Energies: [[1380,1380]]
+Luminosity_microb: 166
+Description: 'The differential cross-section for Z production in PbPb  and pp collisions at 2.76 TeV in the dimuon and dielectron decay channels has been measured 
+from data acquired by the CMS collaboration at the LHC during the year 2010.'
+Keywords: []
+BibKey: CMS:2014dyj
+BibTeX: '@article{CMS:2014dyj,
+    author = "Chatrchyan, Serguei and others",
+    collaboration = "CMS",
+    title = "{Study of Z production in PbPb and pp collisions at $ \sqrt{s_{\mathrm{NN}}}=2.76 $ TeV in the dimuon and dielectron decay channels}",
+    eprint = "1410.4825",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CMS-HIN-13-004, CERN-PH-EP-2014-235",
+    doi = "10.1007/JHEP03(2015)022",
+    journal = "JHEP",
+    volume = "03",
+    pages = "022",
+    year = "2015"
+}'
