@@ -28,8 +28,35 @@ namespace Rivet {
       FinalState fs((Cuts::etaIn(-5.0, 5.0)));
       declare(fs, "FS");
 
+      // set ptcut from input option
+      const double jetptcut = getOption<double>("PTJMIN", 20.0);
+      _jetptcut = jetptcut * GeV;
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.4);
+
+      // set clustering algorithm from input option
+      FastJets::Algo clusterAlgo;
+      const string algoopt = getOption("ALGO", "ANTIKT");
+
+      if ( algoopt == "KT" ) {
+	clusterAlgo = FastJets::KT;
+      } else if ( algoopt == "CA" ) {
+	clusterAlgo = FastJets::CA;
+      } else if ( algoopt == "ANTIKT" ) {
+	clusterAlgo = FastJets::ANTIKT;
+      } else {
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
+		    "Defaulting to anti-kT");
+	clusterAlgo = FastJets::ANTIKT;
+      }
+      
+      // set photon cuts from input options
+      const double etacut = getOption<double>("ABSETAGAMMAX", 2.5);
+      const double ptcut = getOption<double>("PTGAMMIN", 30.);
+      
       // Get leading photon
-      LeadingParticlesFinalState photonfs(FinalState(Cuts::abseta < 2.5 && Cuts::pT >= 30*GeV));
+      LeadingParticlesFinalState photonfs(FinalState(Cuts::abseta < etacut && Cuts::pT >= ptcut*GeV));
       photonfs.addParticleId(PID::PHOTON);
       declare(photonfs, "LeadingPhoton");
 
@@ -37,7 +64,7 @@ namespace Rivet {
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(photonfs);
       declare(vfs, "JetFS");
-      FastJets jetpro(vfs, FastJets::ANTIKT, 0.4);
+      FastJets jetpro(vfs, clusterAlgo, R);
       declare(jetpro, "Jets");
 
       book(_h_photon_jet1_deta ,"photon_jet1_deta", 50, -5.0, 5.0);

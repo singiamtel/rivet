@@ -14,4 +14,8 @@ Description:
   $R=0.4$ and projected onto many different observables.
 NeedCrossSection: yes
 Options:
-- GROOM=SD,TRIM
+ - PTJMIN=#
+ - R=#
+ - ALGO=KT,CA,ANTIKT
+ - GROOM=SD,TRIM
+

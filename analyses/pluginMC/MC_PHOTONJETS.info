@@ -11,6 +11,12 @@ NumEvents: 10000000
 PtCuts: [0]
 Description:
   Different observables related to the photon and extra jets.
+Options:
+ - PTGAMMIN=#
+ - ABSETAGAMMAX=#
+ - PTJMIN=#
+ - R=#
+ - ALGO=KT,CA,ANTIKT
 NeedCrossSection: yes
 
 ReleaseTests:

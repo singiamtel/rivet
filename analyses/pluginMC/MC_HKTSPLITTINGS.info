@@ -10,4 +10,8 @@ NumEvents: 1000000
 PtCuts: [0]
 Description:
   Monte Carlo validation observables for $h[\tau^+ \, \tau^-]$ + jets production
+Options:
+ - ABSETATAUMAX=#
+ - PTTAUMIN=#
+ - R=#
 NeedCrossSection: yes

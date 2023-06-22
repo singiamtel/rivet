@@ -11,4 +11,8 @@ NumEvents: 10000000
 PtCuts: [0]
 Description:
   Monte Carlo validation observables for photon + jets production
+Options:
+ - PTGAMMIN=#
+ - ABSETAGAMMAX=#
+ - R=#
 NeedCrossSection: yes
