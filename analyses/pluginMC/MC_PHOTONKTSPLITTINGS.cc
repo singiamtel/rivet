@@ -28,8 +28,12 @@ namespace Rivet {
       FinalState fs((Cuts::etaIn(-5.0, 5.0)));
       declare(fs, "FS");
 
+      // set photon cuts from input options
+      const double etacut = getOption<double>("ABSETAGAMMAX", 2.5);
+      const double ptcut = getOption<double>("PTGAMMIN", 30.);
+      
       // Get leading photon
-      LeadingParticlesFinalState photonfs(FinalState(Cuts::abseta < 2.5 && Cuts::pT >= 30*GeV));
+      LeadingParticlesFinalState photonfs(FinalState(Cuts::abseta < etacut && Cuts::pT >= ptcut*GeV));
       photonfs.addParticleId(PID::PHOTON);
       declare(photonfs, "LeadingPhoton");
 
@@ -37,7 +41,11 @@ namespace Rivet {
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(photonfs);
       declare(vfs, "JetFS");
-      FastJets jetpro(vfs, FastJets::KT, 0.6);
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.6);
+
+      FastJets jetpro(vfs, FastJets::KT, R);
       declare(jetpro, "Jets");
 
       MC_JetSplittings::init();

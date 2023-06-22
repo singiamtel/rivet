@@ -14,6 +14,14 @@ Description:
   related to properties of the WW-pair momentum, correlations between the WW,
   properties of the W bosons, properties of the leptons, correlations between
   the opposite charge leptons and correlations with jets.
+Options:
+ - ABSETAEMAX=#
+ - PTEMIN=#
+ - ABSETAMUMAX=#
+ - PTMUMIN=#
+ - PTJMIN=#
+ - R=#
+ - ALGO=KT,CA,ANTIKT
 NeedCrossSection: yes
 
 ReleaseTests:

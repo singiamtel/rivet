@@ -1,3 +1,8 @@
+2023-06-22  James Whitehead  <james.whitehead@ifj.edu.pl>
+
+	* Turn parameters (cuts, jet radius, clustering algorithms etc)
+	into Rivet options in several common MC analyses.
+
 2023-06-20  Christian Gutschow  <chris.g@cern.ch>
 
 	* Bypass projection comparison during registration if RIVET_CACHE_PROJECTIONS is false.
