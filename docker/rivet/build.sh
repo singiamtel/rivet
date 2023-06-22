@@ -2,7 +2,7 @@
 
 set -e
 
-BUILD="docker build . -f Dockerfile"
+BUILD="docker buildx build -f Dockerfile --platform linux/amd64,linux/arm64 $DOCKERFLAGS ."
 function xdocker { echo "docker $@"; docker "$@"; }
 
 test "$FORCE" && BUILD="$BUILD --no-cache"

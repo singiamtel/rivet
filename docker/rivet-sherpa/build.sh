@@ -5,7 +5,7 @@ set -e
 RIVET_VERSION=3.1.8
 SHERPA_VERSION=2.2.15
 
-BUILD="docker build ."
+BUILD="docker buildx build -f Dockerfile --platform linux/amd64,linux/arm64 $DOCKERFLAGS ."
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 
