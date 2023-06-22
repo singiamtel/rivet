@@ -1,3 +1,7 @@
+2023-06-20  Christian Gutschow  <chris.g@cern.ch>
+
+	* Bypass projection comparison during registration if RIVET_CACHE_PROJECTIONS is false.
+
 2023-06-15  Christian Gutschow  <chris.g@cern.ch>
 
 	* Patch projection comparison for SmearedJets (thanks to Mark Owen for the report).

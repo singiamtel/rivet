@@ -107,6 +107,7 @@ namespace Rivet {
 
   // Try to find a equivalent projection in the system
   ProjHandle ProjectionHandler::_getEquiv(const Projection& proj) const {
+    if (!getEnvParam("RIVET_CACHE_PROJECTIONS", true))  return nullptr;
     // Get class type using RTTI
     const std::type_info& newtype = typeid(proj);
     getLog() << Log::TRACE << "RTTI type of " << &proj << " is " << newtype.name() << endl;
