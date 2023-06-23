@@ -32,6 +32,10 @@ namespace Rivet {
     /// Compare projections.
     CmpState compare(const Projection& p) const;
 
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
   };
 
 

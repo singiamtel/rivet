@@ -31,6 +31,10 @@ namespace Rivet {
     DEFAULT_RIVET_PROJ_CLONE(GammaGammaKinematics);
 
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
   protected:
 
     /// Perform the projection operation on the supplied event.

@@ -21,7 +21,7 @@ namespace Rivet {
     /// Enum to enable different orderings for selecting scattered
     /// leptons in case several were found.
     enum SortOrder { ENERGY, ETA, ET };
-    
+
     /// @name Constructors.
     //@{
 
@@ -82,6 +82,9 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
   protected:
 
@@ -115,7 +118,7 @@ namespace Rivet {
 
     /// Clear the projection
     void clear() { _theParticles.clear(); }
-    
+
   protected:
 
     /// The incoming lepton

@@ -32,6 +32,9 @@ namespace Rivet {
     /// Clone on the heap.
     DEFAULT_RIVET_PROJ_CLONE(NonHadronicFinalState);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Apply the projection on the supplied event.
     void project(const Event& e);

@@ -38,6 +38,9 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Get the list of particle IDs to accept.
     const set<PdgId>& acceptedIds() const {

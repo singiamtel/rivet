@@ -105,6 +105,9 @@ namespace Rivet {
     /// Clear the projection
     void clear() { _theParticles.clear(); }
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
   protected:
 

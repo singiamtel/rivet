@@ -1,3 +1,8 @@
+2023-06-22  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Explicitly import YODA and Projection base-class operator= into
+	derived classes to silence new GCC13 warnings.
+
 2023-06-22  James Whitehead  <james.whitehead@ifj.edu.pl>
 
 	* Turn parameters (cuts, jet radius, clustering algorithms etc)

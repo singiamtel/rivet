@@ -44,6 +44,10 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// Accept leptons from decays of prompt muons as themselves being prompt?
     void acceptMuonDecays(bool acc=true) { _acceptMuDecays = acc; }
     /// Accept leptons from decays of prompt taus as themselves being prompt?

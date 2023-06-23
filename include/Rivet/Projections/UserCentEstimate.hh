@@ -19,6 +19,10 @@ public:
   /// Clone on the heap.
   DEFAULT_RIVET_PROJ_CLONE(UserCentEstimate);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
 protected:
 
   void project(const Event& e) {

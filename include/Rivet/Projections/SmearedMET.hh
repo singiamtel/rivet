@@ -44,6 +44,9 @@ namespace Rivet {
 
     ///@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Compare to another SmearedMET
     CmpState compare(const Projection& p) const {
