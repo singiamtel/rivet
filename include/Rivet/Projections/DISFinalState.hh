@@ -32,12 +32,14 @@ namespace Rivet {
       declare(kinematicsp, "Kinematics");
     }
 
+
     /// @brief Constructor with optional FinalState
     ///
     /// @deprecated The DISKinematics has no parameters, hence explicitly passing it as an arg shouldn't be necessary.
     DISFinalState(BoostFrame boosttype, const FinalState& fs=FinalState(), const DISKinematics& kinematicsp=DISKinematics())
       : DISFinalState(fs, boosttype, kinematicsp)
     {    }
+
 
     /// @brief Constructor with explicit cuts to define final-state particles
     ///
@@ -50,6 +52,7 @@ namespace Rivet {
       : DISFinalState(FinalState(c), boosttype, kinematicsp)
     {    }
 
+
     /// @brief Constructor with explicit cuts to define final-state particles
     ///
     /// @note The cuts will be applied *before* the boost, e.g. to express detector acceptance.
@@ -60,6 +63,7 @@ namespace Rivet {
     DISFinalState(BoostFrame boosttype, const Cut& c, const DISKinematics& kinematicsp=DISKinematics())
       : DISFinalState(FinalState(c), boosttype, kinematicsp)
     {    }
+
 
     // /// @brief Constructor with default FinalState
     // ///
@@ -80,6 +84,10 @@ namespace Rivet {
     DEFAULT_RIVET_PROJ_CLONE(DISFinalState);
 
     //@}
+
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
 
     /// Get the associated DISKinematics (to avoid needing a separate projection)

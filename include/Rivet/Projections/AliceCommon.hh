@@ -9,9 +9,6 @@
 namespace Rivet {
   namespace ALICE {
 
-    /// @todo We should avoid experiment-specific projections and tools as much as possible...
-    /// Says Leif: on the contrary this is a good thing!
-
 
     /// Template for ALICE V0 multiplicity projection.   Which
     /// acceptance to look in depends on the template argument @a MODE:
@@ -58,6 +55,10 @@ namespace Rivet {
       virtual std::unique_ptr<Rivet::Projection> clone() const {
         return std::unique_ptr<Projection>(new V0Multiplicity<MODE>(*this));
       }
+
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
+
       /// Compare to another projection
       ///
       /// @param p Projection to compare against
@@ -67,6 +68,7 @@ namespace Rivet {
       }
 
     };
+
 
     /// Convenience typedef for A-side multiplicity
     ///
@@ -128,6 +130,9 @@ namespace Rivet {
       virtual std::unique_ptr<Rivet::Projection> clone() const {
         return std::unique_ptr<Projection>(new CLMultiplicity<INNER>(*this));
       }
+
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
 
       /// Compare to another projection
       ///
@@ -192,6 +197,9 @@ namespace Rivet {
         return std::unique_ptr<Projection>(new V0Trigger<MODE>(*this));
       }
 
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
+
       /// Compare to projections.
       ///
       /// @param p Projection to compare to.
@@ -204,6 +212,7 @@ namespace Rivet {
       }
 
     };
+
 
     /// Convenience typedef for V0 A trigger
     ///
@@ -262,6 +271,9 @@ namespace Rivet {
         return std::unique_ptr<Projection>(new V0AndTrigger(*this));
       }
 
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
+
     };
 
 
@@ -295,6 +307,10 @@ namespace Rivet {
       virtual std::unique_ptr<Rivet::Projection> clone() const {
         return std::unique_ptr<Projection>(new PrimaryParticles(*this));
       }
+
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
+
 
     protected:
 

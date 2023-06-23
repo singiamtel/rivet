@@ -8,14 +8,12 @@
 
 namespace Rivet {
 
-  /**
-     @brief class for projections that reports the percentile for a
-     given SingleValueProjection when initialized with a Histo1D of the
-     distribution in the SingleValueProjection.
 
-     @author Leif Lönnblad
-
-  */
+  /// @brief class for projections that reports the percentile for a
+  /// given SingleValueProjection when initialized with a Histo1D of the
+  /// distribution in the SingleValueProjection.
+  ///
+  /// @author Leif Lönnblad
   class PercentileProjection : public SingleValueProjection {
   public:
 
@@ -93,6 +91,10 @@ namespace Rivet {
     }
 
     DEFAULT_RIVET_PROJ_CLONE(PercentileProjection);
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     // The projection function takes the assigned SingeValueProjection
     // and sets the value of this projection to the corresponding

@@ -30,7 +30,7 @@ namespace Rivet {
   class Spherocity : public AxesDefinition {
   public:
 
-    // Default Constructor
+    // Default constructor
     Spherocity() {}
 
     /// Constructor.
@@ -41,6 +41,9 @@ namespace Rivet {
 
     /// Clone on the heap.
     DEFAULT_RIVET_PROJ_CLONE(Spherocity);
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
 
   protected:

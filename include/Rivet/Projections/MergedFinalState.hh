@@ -31,6 +31,10 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
   protected:
 
     /// Apply the projection on the supplied event.

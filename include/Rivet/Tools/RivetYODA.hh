@@ -92,6 +92,9 @@ namespace Rivet {
     /// Access the fill info subevent stack.
     const Fills<YODA::Counter>& fills() const { return _fills; }
 
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Counter::operator =;
+
   private:
 
     Fills<YODA::Counter> _fills;
@@ -124,6 +127,9 @@ namespace Rivet {
 
     /// Access the fill info subevent stack.
     const Fills<YODA::Histo1D>& fills() const { return _fills; }
+
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Histo1D::operator =;
 
   private:
 
@@ -159,6 +165,9 @@ namespace Rivet {
     /// Access the fill info subevent stack.
     const Fills<YODA::Profile1D>& fills() const { return _fills; }
 
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Profile1D::operator =;
+
   private:
 
     Fills<YODA::Profile1D> _fills;
@@ -192,6 +201,9 @@ namespace Rivet {
 
     /// Access the fill info subevent stack.
     const Fills<YODA::Histo2D>& fills() const { return _fills; }
+
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Histo2D::operator =;
 
   private:
 
@@ -228,6 +240,9 @@ namespace Rivet {
     /// Access the fill info subevent stack.
     const Fills<YODA::Profile2D>& fills() const { return _fills; }
 
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Profile2D::operator =;
+
   private:
 
     Fills<YODA::Profile2D> _fills;
@@ -246,6 +261,9 @@ namespace Rivet {
     /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
     TupleWrapper(const YODA::Scatter1D& h) : YODA::Scatter1D(h) {}
 
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Scatter1D::operator =;
+
   };
 
 
@@ -260,6 +278,9 @@ namespace Rivet {
     /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
     TupleWrapper(const YODA::Scatter2D& h) : YODA::Scatter2D(h) {}
 
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Scatter2D::operator =;
+
   };
 
 
@@ -273,6 +294,9 @@ namespace Rivet {
 
     /// @todo Can we reduce the expense of calling the full base class constructor, which mostly won't be used?
     TupleWrapper(const YODA::Scatter3D& h) : YODA::Scatter3D(h) {}
+
+    /// Import to avoid warnings about overload-hiding
+    using YODA::Scatter3D::operator =;
 
   };
 
@@ -904,7 +928,7 @@ namespace Rivet {
     string weight() const { return _weight; }
 
     /// The weight component of the path
-    string weightComponent() const { 
+    string weightComponent() const {
       if (_weight == "")  return _weight;
       return "[" + _weight + "]";
     }

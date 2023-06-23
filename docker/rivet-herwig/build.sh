@@ -6,7 +6,8 @@ RIVET_VERSION=3.1.8
 HERWIG_VERSION=7.2.3
 THEPEG_VERSION=2.2.3
 
-BUILD="docker build ."
+PLATFLAGS="--platform linux/amd64,linux/arm64"
+BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 

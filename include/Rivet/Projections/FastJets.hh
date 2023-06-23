@@ -155,6 +155,10 @@ namespace Rivet {
     /// @}
 
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// @name Static helper functions for FastJet interaction, with tagging
     /// @{
 

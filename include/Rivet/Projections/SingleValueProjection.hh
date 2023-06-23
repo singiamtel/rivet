@@ -22,6 +22,10 @@ namespace Rivet {
       setName("SingleValueProjection");
     }
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// Returns true if the value has been set.
     bool isValueSet() const {
       return _isSet;

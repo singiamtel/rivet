@@ -5,7 +5,8 @@ set -e
 RIVET_VERSION=3.1.8
 PYTHIA_VERSION=8309
 
-BUILD="docker build ."
+PLATFLAGS="--platform linux/amd64,linux/arm64"
+BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 

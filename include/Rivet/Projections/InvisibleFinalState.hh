@@ -34,6 +34,9 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Require accepted particles to be prompt
     void requirePromptness(bool acc=true, bool allow_from_direct_tau=false, bool allow_from_direct_mu=false) {

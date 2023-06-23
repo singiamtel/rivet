@@ -39,6 +39,9 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Apply the projection to the event.
     virtual void project(const Event& e);

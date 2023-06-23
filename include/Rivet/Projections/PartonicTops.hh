@@ -18,7 +18,6 @@ namespace Rivet {
   class PartonicTops : public ParticleFinder {
   public:
 
-
     /// @brief Enum for categorising top quark decay modes
     ///
     /// More specifically, the decay mode of the W from the top. We presume top decay to a W and b quark.
@@ -61,6 +60,9 @@ namespace Rivet {
     DEFAULT_RIVET_PROJ_CLONE(PartonicTops);
 
     //@}
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
 
     /// Access to the found partonic tops
