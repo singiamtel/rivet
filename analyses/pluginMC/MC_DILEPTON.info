@@ -12,3 +12,6 @@ Description:
   momentum components parallel and perpendicular to the CoM boost direction are
   particularly sensitive to the polarisation state of a decaying vector boson.'
 Keywords: [mc,dilepton,polarization]
+Options:
+ - ABSETALMAX=#
+ - PTLMIN=#

@@ -11,6 +11,10 @@ namespace Rivet {
   class METFinder : public Projection {
   public:
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// @name Transverse momentum functions
     ///
     /// @note This may be what you want, even if the paper calls it "missing Et"!

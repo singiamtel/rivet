@@ -6,18 +6,15 @@
 
 namespace Rivet {
 
-  /** @brief Base class for projections returning a bool corresponding
-      to a trigger.
-
-      @author Leif Lönnblad
-
-      Project an event down to a single true or false value accessible
-      through the operator() function, where true means that the event
-      has passed some trigger criterion.
-
-  */
+  /// @brief Base class for projections returning a bool corresponding
+  /// to a trigger.
+  ///
+  /// @author Leif Lönnblad
+  ///
+  /// Project an event down to a single true or false value accessible
+  /// through the operator() function, where true means that the event
+  /// has passed some trigger criterion.
   class TriggerProjection: public Projection {
-
   public:
 
     /// The default constructor.
@@ -28,6 +25,10 @@ namespace Rivet {
 
     /// Clone on the heap.
     DEFAULT_RIVET_PROJ_CLONE(TriggerProjection);
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Return true if the event has passed some trigger or selection
     /// criteria.

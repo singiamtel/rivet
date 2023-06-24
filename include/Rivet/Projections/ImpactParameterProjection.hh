@@ -8,29 +8,34 @@
 
 namespace Rivet {
 
-class ImpactParameterProjection: public SingleValueProjection {
-public:
-  
-  ImpactParameterProjection() {
-    setName("ImpactParameterProjection");
-    declare(HepMCHeavyIon(), "HepMC");
-  }
+  class ImpactParameterProjection: public SingleValueProjection {
+  public:
 
-  /// Clone on the heap.
-  DEFAULT_RIVET_PROJ_CLONE(ImpactParameterProjection);
+    ImpactParameterProjection() {
+      setName("ImpactParameterProjection");
+      declare(HepMCHeavyIon(), "HepMC");
+    }
 
-protected:
+    /// Clone on the heap.
+    DEFAULT_RIVET_PROJ_CLONE(ImpactParameterProjection);
 
-  void project(const Event& e) {
-    clear();
-    set(apply<HepMCHeavyIon>(e, "HepMC").impact_parameter());
-  }
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
-  CmpState compare(const Projection& p) const {
-    return CmpState::EQ;
-  }
-  
-};
+
+  protected:
+
+    void project(const Event& e) {
+      clear();
+      set(apply<HepMCHeavyIon>(e, "HepMC").impact_parameter());
+    }
+
+    CmpState compare(const Projection& p) const {
+      return CmpState::EQ;
+    }
+
+  };
+
 
 }
 

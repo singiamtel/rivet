@@ -26,11 +26,40 @@ namespace Rivet {
 		  _lepton=PID::ELECTRON;
       if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
+      // set FS cuts from input options
+      const double etacut = getOption<double>("ABSETALMAX", 3.5);
+      const double ptcut = getOption<double>("PTLMIN", 25.);
+      
       FinalState fs;
-      Cut cut = Cuts::abseta < 3.5 && Cuts::pT > 25*GeV;
-      ZFinder zfinder(fs, cut, _lepton, 66*GeV, 116*GeV, _dR, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+      Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+
+      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
       declare(zfinder, "ZFinder");
-      FastJets jetpro(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.4);
+
+      // set ptcut from input option
+      const double jetptcut = getOption<double>("PTJMIN", 20.0);
+      _jetptcut = jetptcut * GeV;
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.4);
+
+      // set clustering algorithm from input option
+      FastJets::Algo clusterAlgo;
+      const string algoopt = getOption("ALGO", "ANTIKT");
+
+      if ( algoopt == "KT" ) {
+	clusterAlgo = FastJets::KT;
+      } else if ( algoopt == "CA" ) {
+	clusterAlgo = FastJets::CA;
+      } else if ( algoopt == "ANTIKT" ) {
+	clusterAlgo = FastJets::ANTIKT;
+      } else {
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
+		    "Defaulting to anti-kT");
+	clusterAlgo = FastJets::ANTIKT;
+      }
+
+      FastJets jetpro(zfinder.remainingFinalState(), clusterAlgo, R);
       declare(jetpro, "Jets");
 
       book(_h_Z_jet1_deta ,"Z_jet1_deta", 50, -5, 5);

@@ -22,12 +22,26 @@ namespace Rivet {
     /// Book histograms
     void init() {
       FinalState fs;
-      WFinder wenufinder(fs, Cuts::abseta < 3.5 && Cuts::pT > 25*GeV, PID::ELECTRON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
+
+      // set FS cuts from input options
+      const double etaecut = getOption<double>("ABSETAEMAX", 3.5);
+      const double ptecut = getOption<double>("PTEMIN", 25.);
+
+      Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
+
+      WFinder wenufinder(fs, cute, PID::ELECTRON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
       declare(wenufinder, "WenuFinder");
 
       VetoedFinalState wmnuinput;
       wmnuinput.addVetoOnThisFinalState(wenufinder);
-      WFinder wmnufinder(wmnuinput, Cuts::abseta < 3.5 && Cuts::pT > 25*GeV, PID::MUON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
+      
+      // set FS cuts from input options
+      const double etamucut = getOption<double>("ABSETAMUMAX", 3.5);
+      const double ptmucut = getOption<double>("PTMUMIN", 25.);
+
+      Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
+      
+      WFinder wmnufinder(wmnuinput, cutmu, PID::MUON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
       declare(wmnufinder, "WmnuFinder");
 
       // properties of the pair momentum

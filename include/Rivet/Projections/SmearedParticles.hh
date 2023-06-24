@@ -108,6 +108,9 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Compare to another SmearedParticles
     ///

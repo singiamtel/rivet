@@ -2,7 +2,8 @@
 
 set -e
 
-BUILD="docker buildx build -f Dockerfile --platform linux/amd64,linux/arm64 $DOCKERFLAGS ."
+PLATFLAGS="--platform linux/amd64,linux/arm64"
+BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
 function xdocker { echo "docker $@"; docker "$@"; }
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
@@ -28,7 +29,7 @@ for RIVET_BRANCH in rivet-3.1.8; do
         $BUILD --build-arg ARCH=$arch -t $tag
         if [[ "$PUSH" = 1 ]]; then
             xdocker push $tag
-            test "$NOSLEEP" = 1 || sleep 1m
+            sleep ${SLEEP:-1}m
         fi
         echo -e "\n\n\n"
 
@@ -43,10 +44,10 @@ if [[ "$LATEST" = 1 ]]; then
 fi
 if [[ "$PUSH" = 1 ]]; then
     xdocker push hepstore/rivet:$RIVET_VERSION
-    test "$NOSLEEP" = 1 || sleep 1m
+    sleep ${SLEEP:-1}m
     xdocker push hepstore/rivet:$RIVET_VERSION-hepmc3
     if [[ "$LATEST" = 1 ]]; then
-        test "$NOSLEEP" = 1 || sleep 1m
+        sleep ${SLEEP:-1}m
         xdocker push hepstore/rivet:latest
     fi
 fi

@@ -25,6 +25,10 @@ namespace Rivet {
 
     DEFAULT_RIVET_PROJ_CLONE(DISRapidityGap);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     const double M2X()               const {return _M2X;}
     const double M2Y()               const {return _M2Y;}
     const double t()                 const {return _t;}

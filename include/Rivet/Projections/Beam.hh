@@ -190,6 +190,10 @@ namespace Rivet {
     virtual void project(const Event& e);
 
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
   protected:
 
     /// The beam particles in the current collision

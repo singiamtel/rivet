@@ -11,4 +11,7 @@ NumEvents: 10000000
 PtCuts: [0]
 Description:
   Monte Carlo validation observables for single isolated photon production
+Options:
+ - PTGAMMIN=#
+ - ABSETAGAMMAX=#
 NeedCrossSection: yes

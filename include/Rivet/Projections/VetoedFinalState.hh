@@ -90,6 +90,8 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
 
     /// Get the list of particle IDs and \f$ p_T \f$ ranges to veto.

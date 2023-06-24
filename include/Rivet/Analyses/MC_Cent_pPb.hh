@@ -11,8 +11,7 @@ namespace Rivet {
 
 /// Example of a centrality observable projection for pPb that uses
 /// summed Et in the Pb direction.
-class MC_SumETFwdPbCentrality: public SingleValueProjection {
-
+class MC_SumETFwdPbCentrality : public SingleValueProjection {
 public:
 
   /// Constructor.
@@ -21,8 +20,11 @@ public:
 	    "FSSumETFwdCentrality");
   }
 
-    /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(MC_SumETFwdPbCentrality);
+  /// Clone on the heap.
+  DEFAULT_RIVET_PROJ_CLONE(MC_SumETFwdPbCentrality);
+
+  /// Import to avoid warnings about overload-hiding
+  using Projection::operator =;
 
 protected:
 
@@ -37,18 +39,18 @@ protected:
     }
     set(estimate);
   }
-  
+
   /// Compare projections
   CmpState compare(const Projection& p) const {
     return mkNamedPCmp(p, "FSSumETFwdCentrality");
   }
 
 };
-    
+
+
 /// Example of a trigger projection for minimum bias pPb requiring at
 /// least one charged particle in both forward and backward direction.
-class MC_pPbMinBiasTrigger: public TriggerProjection {
-
+class MC_pPbMinBiasTrigger : public TriggerProjection {
 public:
 
   /// Constructor.
@@ -61,8 +63,11 @@ public:
       			 Cuts::pT > 0.1*GeV), "MBF");
   }
 
-    /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(MC_pPbMinBiasTrigger);
+  /// Clone on the heap.
+  DEFAULT_RIVET_PROJ_CLONE(MC_pPbMinBiasTrigger);
+
+  /// Import to avoid warnings about overload-hiding
+  using Projection::operator =;
 
 protected:
 
@@ -73,14 +78,14 @@ protected:
 	   applyProjection<FinalState>(event,"MBB").particles().empty() )
         fail();
   }
-  
+
   /// Compare projections
   CmpState compare(const Projection& p) const {
     return mkNamedPCmp(p, "MBF") || mkNamedPCmp(p, "MBB");
   }
 
 };
-    
+
 
 }
 

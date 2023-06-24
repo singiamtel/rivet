@@ -31,6 +31,10 @@ namespace Rivet {
 
     //@}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// Treat particles from decays of prompt muons as non-prompt?
     void acceptMuonDecays(bool acc=true) { _acceptMuDecays = acc; }
     /// Treat particles from decays of prompt taus as non-prompt?

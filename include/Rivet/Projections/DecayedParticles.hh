@@ -23,13 +23,16 @@ namespace Rivet {
 
     /// Clone on the heap.
     DEFAULT_RIVET_PROJ_CLONE(DecayedParticles);
-    
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
     /// Virtual destructor.
     virtual ~DecayedParticles() { }
     //@}
 
   public :
-    
+
     /// Add a particle to be considered stable when finding the decay products
     DecayedParticles & addStable(PdgId pid) {
       _stable.insert(pid);
@@ -68,7 +71,7 @@ namespace Rivet {
       // pass all the tests
       return true;
     }
-    
+
   protected:
 
     /// Apply the projection to the event.
@@ -81,10 +84,10 @@ namespace Rivet {
 
     /**
      * Recursive function to find the decay products
-     */ 
+     */
     void findDecayProducts(const Particle & mother, unsigned int & nstable,
 			   map<PdgId,Particles> & products);
-    
+
   private :
 
     /**

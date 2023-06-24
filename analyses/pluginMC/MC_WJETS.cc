@@ -27,10 +27,40 @@ namespace Rivet {
 		  _lepton=PID::ELECTRON;
       if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
+      // set FS cuts from input options
+      const double etacut = getOption<double>("ABSETALMAX", 3.5);
+      const double ptcut = getOption<double>("PTLMIN", 25.);
+
       FinalState fs;
-      WFinder wfinder(fs, Cuts::abseta < 3.5 && Cuts::pT > 25*GeV, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
+      Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+
+      WFinder wfinder(fs, cut, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
       declare(wfinder, "WFinder");
-      FastJets jetpro(wfinder.remainingFinalState(), FastJets::ANTIKT, 0.4);
+
+      // set ptcut from input option
+      const double jetptcut = getOption<double>("PTJMIN", 20.0);
+      _jetptcut = jetptcut * GeV;
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.4);
+
+      // set clustering algorithm from input option
+      FastJets::Algo clusterAlgo;
+      const string algoopt = getOption("ALGO", "ANTIKT");
+
+      if ( algoopt == "KT" ) {
+	clusterAlgo = FastJets::KT;
+      } else if ( algoopt == "CA" ) {
+	clusterAlgo = FastJets::CA;
+      } else if ( algoopt == "ANTIKT" ) {
+	clusterAlgo = FastJets::ANTIKT;
+      } else {
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
+		    "Defaulting to anti-kT");
+	clusterAlgo = FastJets::ANTIKT;
+      }
+
+      FastJets jetpro(wfinder.remainingFinalState(), clusterAlgo, R);
       declare(jetpro, "Jets");
 
       book(_h_W_jet1_deta ,"W_jet1_deta", 50, -5.0, 5.0);

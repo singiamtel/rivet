@@ -13,6 +13,12 @@ Description:
   multiplicity, $\Delta\eta(h, \text{jet1})$, $\Delta R(\text{jet2},
   \text{jet3})$, differential jet rates 0->1, 1->2, 2->3, 3->4, and integrated
   0--4 jet rates.
+Options:
+ - ABSETATAUMAX=#
+ - PTTAUMIN=#
+ - PTJMIN=#
+ - R=#
+ - ALGO=KT,CA,ANTIKT
 NeedCrossSection: yes
 
 ReleaseTests:

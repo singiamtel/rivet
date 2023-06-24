@@ -22,20 +22,58 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      Cut cut = Cuts::abseta < 3.5 && Cuts::pT > 25*GeV;
-      ZFinder zeefinder(FinalState(), cut, PID::ELECTRON, 65*GeV, 115*GeV, 0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+      // set FS cuts from input options
+      const double etaecut = getOption<double>("ABSETAEMAX", 3.5);
+      const double ptecut = getOption<double>("PTEMIN", 25.);
+
+      Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
+
+      ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV,
+			0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
       declare(zeefinder, "ZeeFinder");
 
       VetoedFinalState zmminput;
       zmminput.addVetoOnThisFinalState(zeefinder);
-      ZFinder zmmfinder(zmminput, cut, PID::MUON, 65*GeV, 115*GeV, 0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+
+      // set FS cuts from input options
+      const double etamucut = getOption<double>("ABSETAMUMAX", 3.5);
+      const double ptmucut = getOption<double>("PTMUMIN", 25.);
+
+      Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
+      
+      ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV,
+			0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
       declare(zmmfinder, "ZmmFinder");
 
       VetoedFinalState jetinput;
       jetinput
           .addVetoOnThisFinalState(zeefinder)
           .addVetoOnThisFinalState(zmmfinder);
-      FastJets jetpro(jetinput, FastJets::ANTIKT, 0.4);
+
+      // set ptcut from input option
+      const double jetptcut = getOption<double>("PTJMIN", 20.0);
+      _jetptcut = jetptcut * GeV;
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.4);
+
+      // set clustering algorithm from input option
+      FastJets::Algo clusterAlgo;
+      const string algoopt = getOption("ALGO", "ANTIKT");
+
+      if ( algoopt == "KT" ) {
+	clusterAlgo = FastJets::KT;
+      } else if ( algoopt == "CA" ) {
+	clusterAlgo = FastJets::CA;
+      } else if ( algoopt == "ANTIKT" ) {
+	clusterAlgo = FastJets::ANTIKT;
+      } else {
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
+		    "Defaulting to anti-kT");
+	clusterAlgo = FastJets::ANTIKT;
+      }
+      
+      FastJets jetpro(jetinput, clusterAlgo, R);
       declare(jetpro, "Jets");
 
       // Correlations with jets
