@@ -82,6 +82,10 @@ namespace Rivet {
         mixEvents[o] = std::deque<MixEvent>();
     }
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
   public:
 
     // Test if we have enough mixing events available for projected,
@@ -206,6 +210,10 @@ namespace Rivet {
 
     RIVET_DEFAULT_PROJ_CLONE(EventMixingFinalState);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
   protected:
 
     // Calculate mixing observable
@@ -228,6 +236,10 @@ namespace Rivet {
     }
 
     RIVET_DEFAULT_PROJ_CLONE(EventMixingCentrality);
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
   protected:
 

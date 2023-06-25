@@ -17,6 +17,9 @@ namespace Rivet {
     /// Clone method
     RIVET_DEFAULT_PROJ_CLONE(FinalPartons);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
     /// Do the calculation
     void project(const Event& e);
 

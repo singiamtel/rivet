@@ -10,37 +10,35 @@
 namespace Rivet {
 
 
-  /**
-    @brief Get the e+ e- thrust basis and the thrust, thrust major and thrust minor scalars.
-
-    @author Andy Buckley
-
-    The scalar (maximum) thrust is defined as
-    \f[
-    T = \mathrm{max}_{\vec{n}} \frac{\sum_i \left|\vec{p}_i \cdot \vec{n} \right|}{\sum_i |\vec{p}_i|}
-    \f],
-    with the direction of the unit vector \f$ \vec{n} \f$ which maximises \f$ T \f$
-    being identified as the thrust axis. The unit vector which maximises the thrust
-    scalar in the plane perpendicular to \f$ \vec{n} \f$ is the "thrust major"
-    direction, and the vector perpendicular to both the thrust and thrust major directions
-    is the thrust minor. Both the major and minor directions have associated thrust
-    scalars.
-
-    Thrust calculations have particularly simple forms for less than 4 particles, and
-    in those cases this projection is computationally minimal. For 4 or more particles,
-    a more general calculation must be carried out, based on the Brandt/Dahmen method
-    from Z. Phys. C1 (1978). While a polynomial improvement on the exponential scaling
-    of the naive method, this algorithm scales asymptotically as
-    \f$ \mathcal{O}\left( n^3 \right) \f$. Be aware that the thrust may easily be the
-    most computationally demanding projection in Rivet for large events!
-
-    The Rivet implementation of thrust is based heavily on Stefan Gieseke's Herwig++
-    re-coding of the 'tasso' code from HERWIG.
-
-    NB. special case with >= 4 coplanar particles will still fail.
-    NB. Thrust assumes all momenta are in the CoM system: no explicit boost is performed.
-      This can be dealt with by appropriate choice of the supplied FinalState.
-   */
+  /// @brief Get the e+ e- thrust basis and the thrust, thrust major and thrust minor scalars.
+  ///
+  /// @author Andy Buckley
+  ///
+  /// The scalar (maximum) thrust is defined as
+  /// \f[
+  /// T = \mathrm{max}_{\vec{n}} \frac{\sum_i \left|\vec{p}_i \cdot \vec{n} \right|}{\sum_i |\vec{p}_i|}
+  /// \f],
+  /// with the direction of the unit vector \f$ \vec{n} \f$ which maximises \f$ T \f$
+  /// being identified as the thrust axis. The unit vector which maximises the thrust
+  /// scalar in the plane perpendicular to \f$ \vec{n} \f$ is the "thrust major"
+  /// direction, and the vector perpendicular to both the thrust and thrust major directions
+  /// is the thrust minor. Both the major and minor directions have associated thrust
+  /// scalars.
+  ///
+  /// Thrust calculations have particularly simple forms for less than 4 particles, and
+  /// in those cases this projection is computationally minimal. For 4 or more particles,
+  /// a more general calculation must be carried out, based on the Brandt/Dahmen method
+  /// from Z. Phys. C1 (1978). While a polynomial improvement on the exponential scaling
+  /// of the naive method, this algorithm scales asymptotically as
+  /// \f$ \mathcal{O}\left( n^3 \right) \f$. Be aware that the thrust may easily be the
+  /// most computationally demanding projection in Rivet for large events!
+  ///
+  /// The Rivet implementation of thrust is based heavily on Stefan Gieseke's Herwig++
+  /// re-coding of the 'tasso' code from HERWIG.
+  ///
+  /// NB. special case with >= 4 coplanar particles will still fail.
+  /// NB. Thrust assumes all momenta are in the CoM system: no explicit boost is performed.
+  ///   This can be dealt with by appropriate choice of the supplied FinalState.
   class Thrust : public AxesDefinition {
   public:
 
@@ -54,6 +52,10 @@ namespace Rivet {
 
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(Thrust);
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
   protected:
 

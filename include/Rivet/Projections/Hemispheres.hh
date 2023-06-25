@@ -66,6 +66,10 @@ namespace Rivet {
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(Hemispheres);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// Reset the projection
     void clear() {
       _E2vis = -1;

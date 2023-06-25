@@ -113,6 +113,9 @@ namespace Rivet {
         return unique_ptr<Projection>(new SpecialDressedLeptons(*this));
       }
 
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
+
       /// Retrieve the dressed leptons
       const vector<DressedLepton>& dressedLeptons() const { return _clusteredLeptons; }
 

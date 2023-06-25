@@ -24,8 +24,12 @@ namespace Rivet {
     void init() {
       FinalState fs;
       declare(fs, "FS");
-
-      IdentifiedFinalState ifs(Cuts::abseta < 2 && Cuts::pT > 20*GeV);
+      
+      // set photon cuts from input options
+      const double etacut = getOption<double>("ABSETAGAMMAX", 2.);
+      const double ptcut = getOption<double>("PTGAMMIN", 20.);
+      
+      IdentifiedFinalState ifs(Cuts::abseta < etacut && Cuts::pT > ptcut*GeV);
       ifs.acceptId(PID::PHOTON);
       declare(ifs, "IFS");
 

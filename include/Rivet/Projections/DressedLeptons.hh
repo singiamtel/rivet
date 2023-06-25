@@ -116,6 +116,9 @@ namespace Rivet {
     /// Clone this projection
     RIVET_DEFAULT_PROJ_CLONE(DressedLeptons);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// @brief Retrieve the dressed leptons
     ///

@@ -12,4 +12,10 @@ RunInfo:
 PtCuts: [0]
 Description:
   Monte Carlo validation observables for $Z[\ell^+ \, \ell^-]$ + jets production
+Options:
+ - ABSETALMAX=#
+ - PTLMIN=#
+ - R=#
+ - LMODE=EL,MU
+ - SCHEME=DRESSED,BARE
 NeedCrossSection: yes

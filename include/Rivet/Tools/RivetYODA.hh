@@ -114,6 +114,7 @@ namespace Rivet {
 
     using YAO = YODA::Counter;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -156,6 +157,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<DbnN, AxisT...>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -212,6 +214,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<1, AxisT>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -265,6 +268,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<2, AxisT1, AxisT2>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -318,6 +322,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<3, AxisT1, AxisT2, AxisT3>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -371,6 +376,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<2, AxisT>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -424,6 +430,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<3, AxisT1, AxisT2>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -477,6 +484,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<4, AxisT1, AxisT2, AxisT3>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator=;
 
     FillCollector() : YAO() { }
 
@@ -530,6 +538,7 @@ namespace Rivet {
   public:
 
     using YAO = YODA::ScatterND<N>;
+    using YAO::operator=;
     using Ptr = shared_ptr<FillCollector<YAO>>;
 
     FillCollector() : YAO() { }
@@ -782,7 +791,7 @@ namespace Rivet {
         if (std::find(overflows.cbegin(), itEnd, i) != itEnd)  continue;
 
         const auto coords = subwindows.edgeTuple(i);
-        const double subwindowArea = subwindows.dVol(i);
+        const double subwindowArea = subwindows.volume(i);
         size_t nSubfills = 0;
         double windowFrac = 0.;
         valarray<double> sumw(0.0, weights[0].size()); // one per multiweight

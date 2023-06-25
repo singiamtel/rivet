@@ -10,6 +10,11 @@ RunInfo:
   $\ell^+ \ell^-$ + jets analysis. Needs mass cut on lepton pair to avoid
   photon singularity, e.g. a min range of $66 < m_{ll} < 116$ GeV
 Options:
+ - ABSETALMAX=#
+ - PTLMIN=#
+ - PTJMIN=#
+ - R=#
+ - ALGO=KT,CA,ANTIKT
  - LMODE=EL,MU
  - SCHEME=DRESSED,BARE
 PtCuts: [0]

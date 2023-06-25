@@ -17,7 +17,6 @@ namespace Rivet {
     ///
     /// @author Christine O. Rasmussen.
     class RapidityGap : public Projection {
-
     public:
 
       /// Type of DIS boost to apply
@@ -30,6 +29,9 @@ namespace Rivet {
       }
 
       RIVET_DEFAULT_PROJ_CLONE(RapidityGap);
+
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
 
       double M2X() const { return _M2X; }
       double M2Y() const { return _M2Y; }
@@ -240,6 +242,9 @@ namespace Rivet {
       const LorentzTransform& boost() const { return _boost; }
 
       RIVET_DEFAULT_PROJ_CLONE(BoostedXSystem);
+
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
 
     protected:
 

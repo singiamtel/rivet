@@ -9,6 +9,9 @@ References:
 RunInfo:
   $\ell \, \nu$ + jets analysis.
 Options:
+ - ABSETALMAX=#
+ - PTLMIN=#
+ - R=#
  - LMODE=EL,MU
  - SCHEME=DRESSED,BARE
 PtCuts: [0]

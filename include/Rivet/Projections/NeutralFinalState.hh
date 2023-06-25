@@ -9,7 +9,6 @@ namespace Rivet {
 
   /// @brief Project only neutral final state particles.
   class NeutralFinalState : public FinalState {
-
   public:
 
     /// @name Constructors
@@ -33,6 +32,9 @@ namespace Rivet {
     RIVET_DEFAULT_PROJ_CLONE(NeutralFinalState);
 
     /// @}
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
 
     /// Apply the projection on the supplied event.

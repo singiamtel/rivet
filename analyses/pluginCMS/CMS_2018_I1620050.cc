@@ -165,6 +165,7 @@ namespace Rivet {
     /// Find dressed leptons by clustering all leptons and photons
     class SpecialDressedLeptons : public FinalState {
     public:
+
       /// The default constructor. May specify cuts
       SpecialDressedLeptons(const FinalState& fs, const Cut& cut)
         : FinalState(cut)
@@ -182,6 +183,9 @@ namespace Rivet {
       virtual unique_ptr<Projection> clone() const {
         return unique_ptr<Projection>(new SpecialDressedLeptons(*this));
       }
+
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
 
       /// Retrieve the dressed leptons
       const vector<DressedLepton>& dressedLeptons() const { return _clusteredLeptons; }

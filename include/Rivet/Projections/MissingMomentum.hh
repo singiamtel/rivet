@@ -38,6 +38,9 @@ namespace Rivet {
     /// Clone on the heap
     RIVET_DEFAULT_PROJ_CLONE(MissingMomentum);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// @name Visible/missing four-momentum functions
     /// @{

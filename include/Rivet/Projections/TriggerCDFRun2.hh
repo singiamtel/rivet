@@ -24,6 +24,9 @@ namespace Rivet {
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(TriggerCDFRun2);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// The trigger result
     bool minBiasDecision() const {

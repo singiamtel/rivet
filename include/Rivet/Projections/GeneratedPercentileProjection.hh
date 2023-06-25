@@ -7,29 +7,33 @@
 
 namespace Rivet {
 
-class GeneratedPercentileProjection: public SingleValueProjection {
-public:
+  class GeneratedPercentileProjection: public SingleValueProjection {
+  public:
 
-  GeneratedPercentileProjection() {
-    setName("GeneratedPercentileProjection");
-    declare(HepMCHeavyIon(), "HepMC");
-  }
+    GeneratedPercentileProjection() {
+      setName("GeneratedPercentileProjection");
+      declare(HepMCHeavyIon(), "HepMC");
+    }
 
-  /// Clone on the heap.
-  RIVET_DEFAULT_PROJ_CLONE(GeneratedPercentileProjection);
+    /// Clone on the heap.
+    RIVET_DEFAULT_PROJ_CLONE(GeneratedPercentileProjection);
 
-protected:
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
-  void project(const Event& e) {
-    clear();
-    set(apply<HepMCHeavyIon>(e, "HepMC").centrality());
-   }
 
-  CmpState compare(const Projection& p) const {
-    return CmpState::EQ;
-  }
+  protected:
 
-};
+    void project(const Event& e) {
+      clear();
+      set(apply<HepMCHeavyIon>(e, "HepMC").centrality());
+    }
+
+    CmpState compare(const Projection& p) const {
+      return CmpState::EQ;
+    }
+
+  };
 
 }
 

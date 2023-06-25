@@ -248,7 +248,7 @@ namespace Rivet {
           book(_hist_dPhi_K0h_mult[imult][ipt_trigg],"TMP/hist_dPhi_K0h_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(3,1,1));
           book(_hist_dPhi_Lamh_mult[imult][ipt_trigg],"TMP/hist_dPhi_Lamh_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(4,1,1));
 
-          if (imult<6||(imult==6&&!(ipt_trigg==0||ipt_trigg==5))) {
+          if (imult < 6 || (imult == 6 && !(ipt_trigg == 0 || ipt_trigg == 5))) {
             book(_hist_dPhi_hh_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_hh_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(2,1,1));
             book(_hist_dPhi_K0h_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_K0h_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(3,1,1));
             book(_hist_dPhi_Lamh_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_Lamh_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(4,1,1));
@@ -276,6 +276,7 @@ namespace Rivet {
           book(_hist_dPhi_hh_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_hh_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(2,1,1));
           book(_hist_dPhi_K0h_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_K0h_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(3,1,1));
           book(_hist_dPhi_Lamh_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_Lamh_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(4,1,1));
+
         }
       }
 
@@ -701,6 +702,8 @@ namespace Rivet {
     vector<string> mulsel_name = {"000-001", "001-003", "003-007", "007-015", "015-050", "050-100", "MB"};
     vector<string> bins_pt_trigg_name = {"3-4", "4-5", "5-6", "6-7", "7-9", "9-11", "11-15", "15-20"};
     vector<string> bins_pt_assoc_name = {"_1-2","_2-3", "_3-4", "_4-5", "_5-6", "_6-7", "_7-9", "_9-11", "_11-15", "_15-20"};
+
+    /// @}
 
   };
 

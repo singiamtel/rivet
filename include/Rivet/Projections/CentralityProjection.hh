@@ -8,6 +8,7 @@
 
 namespace Rivet {
 
+
   /// @brief Used together with the percentile-based analysis objects Percentile and PercentileXaxis
   ///
   /// The interior actually defines several different centrality
@@ -31,6 +32,10 @@ namespace Rivet {
 
 
     RIVET_DEFAULT_PROJ_CLONE(CentralityProjection);
+
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
 
 
     /// @brief Add a new centrality estimate.

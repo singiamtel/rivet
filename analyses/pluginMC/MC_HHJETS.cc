@@ -28,7 +28,32 @@ namespace Rivet {
 
       VetoedFinalState vfs;
       vfs.addVetoPairId(25);
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "Jets");
+
+      // set ptcut from input option
+      const double jetptcut = getOption<double>("PTJMIN", 20.0);
+      _jetptcut = jetptcut * GeV;
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.4);
+
+      // set clustering algorithm from input option
+      FastJets::Algo clusterAlgo;
+      const string algoopt = getOption("ALGO", "ANTIKT");
+
+      if ( algoopt == "KT" ) {
+	clusterAlgo = FastJets::KT;
+      } else if ( algoopt == "CA" ) {
+	clusterAlgo = FastJets::CA;
+      } else if ( algoopt == "ANTIKT" ) {
+	clusterAlgo = FastJets::ANTIKT;
+      } else {
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
+		    "Defaulting to anti-kT");
+	clusterAlgo = FastJets::ANTIKT;
+      }
+
+      FastJets jetpro(vfs, clusterAlgo, R);
+      declare(jetpro, "Jets");
 
       book(_h_HH_mass ,"HH_mass", 250, 240, 4000.0);
       book(_h_HH_dR ,"HH_dR", 25, 0.5, 10.0);

@@ -32,6 +32,10 @@ namespace Rivet {
     // Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(PrimaryParticles);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// Copy constructor
     PrimaryParticles(const PrimaryParticles& other) :
       ParticleFinder(other), _pdgIds(other._pdgIds) {

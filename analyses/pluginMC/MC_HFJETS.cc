@@ -19,7 +19,26 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      FastJets fj(FinalState(Cuts::abseta < 5), FastJets::ANTIKT, 0.6);
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.6);
+
+      // set clustering algorithm from input option
+      FastJets::Algo clusterAlgo;
+      const string algoopt = getOption("ALGO", "ANTIKT");
+
+      if ( algoopt == "KT" ) {
+	clusterAlgo = FastJets::KT;
+      } else if ( algoopt == "CA" ) {
+	clusterAlgo = FastJets::CA;
+      } else if ( algoopt == "ANTIKT" ) {
+	clusterAlgo = FastJets::ANTIKT;
+      } else {
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
+		    "Defaulting to anti-kT");
+	clusterAlgo = FastJets::ANTIKT;
+      }
+      
+      FastJets fj(FinalState(Cuts::abseta < 5), clusterAlgo, R);
       fj.useInvisibles();
       declare(fj, "Jets");
       declare(HeavyHadrons(Cuts::abseta < 5 && Cuts::pT > 500*MeV), "BCHadrons");

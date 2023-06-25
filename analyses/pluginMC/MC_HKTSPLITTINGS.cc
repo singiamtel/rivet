@@ -23,11 +23,20 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      Cut cut = Cuts::abseta < 3.5 && Cuts::pT > 25*GeV;
+      // set FS cuts from input options
+      const double etacut = getOption<double>("ABSETATAUMAX", 3.5);
+      const double ptcut = getOption<double>("PTTAUMIN", 25.);
+
+      Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+      
       /// @todo Urk, abuse! Need explicit HiggsFinder and TauFinder
       ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0, ZFinder::ClusterPhotons::NONE, ZFinder::AddPhotons::NO, 125*GeV);
       declare(hfinder, "Hfinder");
-      FastJets jetpro(hfinder.remainingFinalState(), FastJets::KT, 0.6);
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.6);
+
+      FastJets jetpro(hfinder.remainingFinalState(), FastJets::KT, R);
       declare(jetpro, "Jets");
 
       MC_JetSplittings::init();

@@ -11,8 +11,7 @@ namespace Rivet {
 
 /// Example of a centrality observable projection for pPb that uses
 /// summed Et in the Pb direction.
-class MC_SumETFwdPbCentrality: public SingleValueProjection {
-
+class MC_SumETFwdPbCentrality : public SingleValueProjection {
 public:
 
   /// Constructor.
@@ -21,8 +20,11 @@ public:
 	    "FSSumETFwdCentrality");
   }
 
-    /// Clone on the heap.
-    RIVET_DEFAULT_PROJ_CLONE(MC_SumETFwdPbCentrality);
+  /// Clone on the heap.
+  RIVET_DEFAULT_PROJ_CLONE(MC_SumETFwdPbCentrality);
+
+  /// Import to avoid warnings about overload-hiding
+  using Projection::operator =;
 
 protected:
 
@@ -45,10 +47,10 @@ protected:
 
 };
 
+
 /// Example of a trigger projection for minimum bias pPb requiring at
 /// least one charged particle in both forward and backward direction.
-class MC_pPbMinBiasTrigger: public TriggerProjection {
-
+class MC_pPbMinBiasTrigger : public TriggerProjection {
 public:
 
   /// Constructor.
@@ -61,8 +63,11 @@ public:
       			 Cuts::pT > 0.1*GeV), "MBF");
   }
 
-    /// Clone on the heap.
-    RIVET_DEFAULT_PROJ_CLONE(MC_pPbMinBiasTrigger);
+  /// Clone on the heap.
+  RIVET_DEFAULT_PROJ_CLONE(MC_pPbMinBiasTrigger);
+
+  /// Import to avoid warnings about overload-hiding
+  using Projection::operator =;
 
 protected:
 

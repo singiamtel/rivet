@@ -41,6 +41,9 @@ namespace Rivet {
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(InvMassFinalState);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Constituent pairs.
     const std::vector<std::pair<Particle, Particle> >& particlePairs() const;

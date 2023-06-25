@@ -23,8 +23,14 @@ namespace Rivet {
 		  _lepton=PID::ELECTRON;
       if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
+      // set FS cuts from input options
+      const double etacut = getOption<double>("ABSETALMAX", 3.5);
+      const double ptcut = getOption<double>("PTLMIN", 25.);
+      
       FinalState fs;
-      WFinder wfinder(fs, Cuts::abseta < 3.5 && Cuts::pT > 25*GeV, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
+      Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+
+      WFinder wfinder(fs, cut, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
       declare(wfinder, "WFinder");
 
       double sqrts = sqrtS()>0. ? sqrtS() : 14000.;

@@ -1,3 +1,26 @@
+2023-06-22  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Explicitly import YODA and Projection base-class operator= into
+	derived classes to silence new GCC13 warnings.
+
+2023-06-22  James Whitehead  <james.whitehead@ifj.edu.pl>
+
+	* Turn parameters (cuts, jet radius, clustering algorithms etc)
+	into Rivet options in several common MC analyses.
+
+2023-06-20  Christian Gutschow  <chris.g@cern.ch>
+
+	* Bypass projection comparison during registration if RIVET_CACHE_PROJECTIONS is false.
+
+2023-06-15  Christian Gutschow  <chris.g@cern.ch>
+
+	* Patch projection comparison for SmearedJets (thanks to Mark Owen for the report).
+
+2023-06-14  Christian Gutschow  <chris.g@cern.ch>
+
+	* Patch Make file for some Macs (thanks to Peter Meinzinger for the report
+	and Stefan Kiebacher for the solution).
+
 2023-05-16  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Remove tautological assert from particle-ID utils (thanks to

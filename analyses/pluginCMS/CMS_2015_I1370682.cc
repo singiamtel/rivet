@@ -14,6 +14,7 @@ namespace Rivet {
     /// The definition is based on the agreement at the LHC working group.
     class PseudoTop : public FinalState {
     public:
+
       /// @name Standard constructors and destructors.
       /// @{
 
@@ -45,7 +46,11 @@ namespace Rivet {
 
       /// @}
 
+      /// Import to avoid warnings about overload-hiding
+      using Projection::operator =;
+
     public:
+
       virtual const Particle& t1() const {return _t1;}
       virtual const Particle& t2() const {return _t2;}
       virtual const Particle& b1() const {return _b1;}

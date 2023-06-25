@@ -1,6 +1,6 @@
 // -*- C++ -*-
-#ifndef RIVET_ATLAS_COMMON_HH
-#define RIVET_ATLAS_COMMON_HH
+#ifndef RIVET_TOOLS_ATLASCOMMON_HH
+#define RIVET_TOOLS_ATLASCOMMON_HH
 
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"

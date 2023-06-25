@@ -25,6 +25,9 @@ namespace Rivet {
     /// Clone on the heap
     RIVET_DEFAULT_PROJ_CLONE(UndressBeamLeptons);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Project on to the Event
     virtual void project(const Event& e);

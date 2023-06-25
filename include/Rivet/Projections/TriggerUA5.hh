@@ -20,6 +20,9 @@ namespace Rivet {
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(TriggerUA5);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// The trigger result for non-single diffractive (2 arm) trigger
     bool sdDecision() const {

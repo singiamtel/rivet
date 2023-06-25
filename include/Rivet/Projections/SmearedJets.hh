@@ -117,6 +117,9 @@ namespace Rivet {
 
     /// @}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Compare to another SmearedJets
     CmpState compare(const Projection& p) const {
@@ -132,9 +135,8 @@ namespace Rivet {
         const CmpState feq = _detFns[i].cmp(other._detFns[i]);
         if (feq != CmpState::EQ) return feq;
       }
-
-      // If we got this far, we're equal
-      return CmpState::EQ;
+      return Rivet::cmp(get_address(_bTagEffFn), get_address(other._bTagEffFn)) ||
+             Rivet::cmp(get_address(_cTagEffFn), get_address(other._cTagEffFn));
     }
 
 

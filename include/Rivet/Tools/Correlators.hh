@@ -58,6 +58,10 @@ namespace Rivet {
     Correlators(const ParticleFinder& fsp, int nMaxIn,
                 int pMaxIn, const YODA::Scatter2D hIn);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// @brief Integrated correlator of @a n harmonic, with the
     /// number of powers being the size of @a n.
     /// E.G. @a n should be:<br>

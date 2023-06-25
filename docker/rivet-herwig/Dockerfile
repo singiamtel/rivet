@@ -1,37 +1,25 @@
-FROM ubuntu:22.04
+ARG RIVET_VERSION
+FROM hepstore/rivet:${RIVET_VERSION}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "-c"]
 
-ARG CXX_CMD=g++
-ARG CC_CMD=gcc
-ARG FC_CMD=gfortran
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get install -y rsync libgsl-dev libboost-all-dev \
+    && apt-get install -y cython3 python3-six \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean
 
-ENV CXX=${CXX_CMD}
-ENV CC=${CC_CMD}
-ENV FC=${FC_CMD}
+    # && apt-get install -y python3 python3-dev python3-venv python3-wheel \
+    # && update-alternatives --install /usr/bin/python python /usr/bin/python3 2 \
+    # && update-alternatives --install /usr/bin/python-config python-config /usr/bin/python3-config 2 \
+    # #&& wget --no-verbose https://bootstrap.pypa.io/pip/get-pip.py -O get-pip.py \
+    # #&& python get-pip.py \
+    # #&& apt-get python3-pip \
+    # && apt-get -y autoremove \
+    # && apt-get -y autoclean
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && if test "$CXX_CMD" = "g++"; then CXX_PKG=g++; else CXX_PKG=clang; fi \
-    && if test "$CC_CMD" = "gcc"; then CC_PKG=gcc; else CC_PKG=clang; fi \
-    && if test "$FC_CMD" = "gfortran"; then FC_PKG=gfortran; else FC_PKG=flang; fi \
-    && apt-get update -y \
-    && apt-get install -y ${CXX_PKG} ${CC_PKG} ${FC_PKG} \
-    && if test "$CXX_CMD" = "clang++"; then update-alternatives --install /usr/bin/g++ g++ /usr/bin/clang++ 2; fi \
-    && if test "$CXX_CMD" = "clang++"; then update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 2; fi \
-    && if test "$CC_CMD" = "clang"; then update-alternatives --install /usr/bin/gcc gcc /usr/bin/clang 2; fi \
-    && if test "$CC_CMD" = "clang"; then update-alternatives --install /usr/bin/cc cc /usr/bin/clang 2; fi \
-    && if test "$FC_CMD" = "flang"; then update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/flang 2; fi \
-    && apt-get install -y apt-utils tzdata \
-    && apt-get install -y \
-      make automake autoconf libtool cmake rsync \
-      git wget tar less bzip2 findutils nano file \
-      zlib1g-dev \
-    && apt-get install -y python3 python3-dev python3-venv python3-wheel \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python3 2 \
-    && update-alternatives --install /usr/bin/python-config python-config /usr/bin/python3-config 2 \
-    #&& wget --no-verbose https://bootstrap.pypa.io/pip/get-pip.py -O get-pip.py \
-    #&& python get-pip.py \
-    #&& apt-get python3-pip \
+    && apt-get install -y rsync libgsl-dev time \
     && apt-get -y autoremove \
     && apt-get -y autoclean
 
@@ -39,47 +27,39 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
 
-ARG RIVET_VERSION
-ARG YODA_VERSION
 ARG THEPEG_VERSION
 ARG HERWIG_VERSION
-ARG LHAPDF_VERSION
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && python -m venv /herwig  \
-    && mkdir -p /herwig/etc/bash_completion.d \
-    && . /herwig/bin/activate \
-    #&& pip install Cython six \
-    && apt-get install cython3 python3-six \
-    && cp /herwig/bin/activate{,-raw} \
-    && wget https://herwig.hepforge.org/downloads/herwig-bootstrap \
-    && chmod +x herwig-bootstrap \
-    && ./herwig-bootstrap --help \
-    && ./herwig-bootstrap /herwig -j$(nproc --ignore=1) \
-      --thepeg-version=${THEPEG_VERSION} --herwig-version=${HERWIG_VERSION} \
-      --rivet-version=${RIVET_VERSION} --yoda-version=${YODA_VERSION} \
-      --lhapdf-version=${LHAPDF_VERSION} \
-      --without-hjets \
-    && rm -r /herwig/src herwig-bootstrap \
-    #mv herwig-bootstrap /herwig/src \
-    && apt-get -y autoremove \
-    && apt-get -y autoclean
+    && mkdir /code && cd /code \
+    && wget https://thepeg.hepforge.org/downloads/ThePEG-${THEPEG_VERSION}.tar.bz2 -O - | tar xj \
+    && cd ThePEG-${THEPEG_VERSION} \
+    && ./configure --help \
+    && ./configure --prefix=/usr/local --with-{fastjet,rivet,hepmc,lhapdf}=/usr/local --with-hepmcversion=3 \
+    && make -j$(nproc --ignore=1) \
+    && make check && make install
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update -y \
-    && apt-get install -y texlive-latex-recommended texlive-fonts-recommended \
-    && apt-get install -y texlive-latex-extra texlive-pstricks imagemagick \
-    && apt-get install -y imagemagick cm-super dvipng \
-    && sed -i 's/^.*policy.*coder.*none.*(PS|PDF).*//' /etc/ImageMagick-6/policy.xml \
-    && sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml \
-    && apt-get -y autoremove \
-    && apt-get -y autoclean
+    && . /etc/profile \
+    && for i in cteq6l1 CT10 CT14lo CT14nlo MSTW2008nlo68cl MMHT2014lo68cl NNPDF23_nlo_as_0119 NNPDF30_nlo_as_0118; do lhapdf install --verbose $i; done
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && echo ". /herwig/bin/activate" >> /etc/bash.bashrc \
-    && echo ". /herwig/etc/bash_completion.d/yoda-completion" >> /etc/bash.bashrc \
-    && echo ". /herwig/etc/bash_completion.d/rivet-completion" >> /etc/bash.bashrc
+    && . /etc/profile \
+    && cd /code \
+    && wget https://herwig.hepforge.org/downloads/Herwig-${HERWIG_VERSION}.tar.bz2 -O - | tar xj \
+    && cd Herwig-${HERWIG_VERSION} \
+    && ./configure --help \
+    && ./configure --prefix=/usr/local --with-{thepeg,fastjet}=/usr/local --without-evtgen \
+    && make -j$(nproc --ignore=1)
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && . /etc/profile \
+    && cd /code \
+    && cd Herwig-${HERWIG_VERSION} \
+    && sed 's/^read EvtGenDecayer.in/#&/' src/defaults/decayers.in.in -i \
+    && tail src/defaults/decayers.in.in \
+    && ./config.status src/defaults/decayers.in \
+    && tail src/defaults/decayers.in \
+    && make check \
+    && make install
 
 WORKDIR /work
-#ADD rivet-exec.sh /root
-#ENTRYPOINT ["/root/rivet-exec.sh"]
-#CMD []

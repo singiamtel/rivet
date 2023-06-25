@@ -30,11 +30,18 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      IdentifiedFinalState leptons(Cuts::abseta < 5.0 && Cuts::pT > 10*GeV);
+      // set FS cuts from input options
+      const double etalcut = getOption<double>("ABSETALMAX", 5.);
+      const double ptlcut = getOption<double>("PTLMIN", 10.);
+      
+      IdentifiedFinalState leptons(Cuts::abseta < etalcut && Cuts::pT > ptlcut*GeV);
       leptons.acceptChLeptons();
       declare(leptons, "lFS");
 
-      IdentifiedFinalState photons(Cuts::abseta < 5.0);
+      // set photon cuts from input options
+      const double etagamcut = getOption<double>("ABSETAGAMMAX", 5.0);
+      
+      IdentifiedFinalState photons(Cuts::abseta < etagamcut);
       photons.acceptId(PID::PHOTON);
       declare(photons, "gammaFS");
 

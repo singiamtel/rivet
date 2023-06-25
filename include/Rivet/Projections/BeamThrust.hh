@@ -24,6 +24,9 @@ namespace Rivet {
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(BeamThrust);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
   protected:
 
@@ -39,12 +42,9 @@ namespace Rivet {
       return mkNamedPCmp(p, "FS");
     }
 
-
   public:
 
     double beamthrust() const { return _beamthrust; }
-
-  public:
 
     /// @name Direct methods
     /// Ways to do the calculation directly, without engaging the caching system

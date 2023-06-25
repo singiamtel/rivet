@@ -34,6 +34,10 @@ namespace Rivet {
     virtual const Vector3& axis3() const = 0;
     /// @}
 
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
   };
 
 

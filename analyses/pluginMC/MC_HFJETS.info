@@ -10,3 +10,6 @@ RunInfo:
 NumEvents: 100000
 Description:
   'Plots to study fragmentation of heavy flavour hadrons in jets.'
+Options:
+ - R=#
+ - ALGO=KT,CA,ANTIKT

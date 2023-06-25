@@ -18,9 +18,34 @@ namespace Rivet {
 
 
     void init() {
+      // set ptcut from input option
+      const double jetptcut = getOption<double>("PTJMIN", 20.0);
+      _jetptcut = jetptcut * GeV;
+
+      // set clustering radius from input option
+      const double R = getOption<double>("R", 0.4);
+
+      // set clustering algorithm from input option
+      FastJets::Algo clusterAlgo;
+      const string algoopt = getOption("ALGO", "ANTIKT");
+
+      if ( algoopt == "KT" ) {
+	clusterAlgo = FastJets::KT;
+      } else if ( algoopt == "CA" ) {
+	clusterAlgo = FastJets::CA;
+      } else if ( algoopt == "ANTIKT" ) {
+	clusterAlgo = FastJets::ANTIKT;
+      } else {
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
+		    "Defaulting to anti-kT");
+	clusterAlgo = FastJets::ANTIKT;
+      }
+           
       FinalState fs;
-      FastJets jetpro(fs, FastJets::ANTIKT, 0.4);
+      FastJets jetpro(fs, clusterAlgo, R);
+      
       const string groomopt = getOption("GROOM", "");
+
       if (groomopt == "SD") {
         jetpro.addTrf(new fastjet::contrib::SoftDrop(0.0, 0.1));
       } else if (groomopt == "TRIM") {
@@ -28,6 +53,7 @@ namespace Rivet {
       } else if (groomopt != "") {
         MSG_WARNING("Unknown GROOM=" + groomopt + " option. Not applying jet grooming");
       }
+
       declare(jetpro, "Jets");
       MC_JetAnalysis::init();
     }

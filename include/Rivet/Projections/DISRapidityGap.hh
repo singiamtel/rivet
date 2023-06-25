@@ -25,6 +25,15 @@ namespace Rivet {
 
     RIVET_DEFAULT_PROJ_CLONE(DISRapidityGap);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+    /// @todo Document
+    const double M2X() const { return _M2X; }
+
+    /// @todo Document
+    const double M2Y() const { return _M2Y; }
+
     /// @todo Document
     double t() const { return _t; }
 
@@ -32,13 +41,13 @@ namespace Rivet {
     double gap() const { return _gap; }
 
     /// The upper edge of the largest gap, relative to the DIS event orientation
-    double gapUpper() const { return _gapUpp; }
+    double gapUpp() const { return _gapUpp; }
 
     /// The lower edge of the largest gap, relative to the DIS event orientation
-    double gapLower() const { return _gapLow; }
+    double gapLow() const { return _gapLow; }
 
     /// @todo Document
-    double epPzX(Frame f) const {
+    double EpPzX(Frame f) const {
       if (f == LAB) return _ePpzX_LAB;
       else if (f == XCM) return _ePpzX_XCM;
       else return _ePpzX_HCM;

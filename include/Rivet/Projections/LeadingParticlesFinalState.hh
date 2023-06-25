@@ -24,6 +24,9 @@ namespace Rivet {
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(LeadingParticlesFinalState);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// Add a particle ID to the list of leading particles selected
     LeadingParticlesFinalState& addParticleId(PdgId id) {

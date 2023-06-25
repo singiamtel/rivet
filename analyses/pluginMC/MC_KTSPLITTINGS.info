@@ -11,4 +11,6 @@ NumEvents: 1000000
 PtCuts: [15]
 Description:
   Monte Carlo validation observables for jet production
+Options:
+ - R=#
 NeedCrossSection: yes

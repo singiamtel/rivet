@@ -34,6 +34,10 @@ namespace Rivet {
 
     /// @}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+
     /// Access the projected final-state particles.
     virtual const Particles& particles() const { return _theParticles; }
 

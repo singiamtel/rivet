@@ -105,15 +105,14 @@ namespace Rivet {
         }
         if ( e_near_jet ) continue;
         // soft selection
-        if(pT>7.&&!(fabs(eta)>1.37&&fabs(eta) < 1.52)) {
+        if (pT > 7*GeV && !(fabs(eta) > 1.37 && fabs(eta) < 1.52)) {
           cand_soft_e.push_back(e);
         }
         // hard selection
-        if(pT>10.) cand_hard_e.push_back(e);
+        if (pT > 10*GeV) cand_hard_e.push_back(e);
       }
       Particles cand_soft_mu,cand_hard_mu;
-      for( const Particle & mu :
-               apply<IdentifiedFinalState>(event, "muons").particlesByPt()) {
+      for (const Particle& mu : apply<IdentifiedFinalState>(event, "muons").particlesByPt()) {
         double pT  = mu.pT();
         double eta = mu.eta();
         // remove any leptons within 0.4 of any candidate jets

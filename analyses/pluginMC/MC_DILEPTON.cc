@@ -18,10 +18,14 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-
+      
+      // set FS cuts from input options
+      const double etacut = getOption<double>("ABSETALMAX", 5.);
+      const double ptcut = getOption<double>("PTLMIN", 10.);
+      
       // Initialise and register projections
       declare(PromptFinalState((Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON)
-                               && Cuts::abseta < 5 && Cuts::pT > 10*GeV), "Leptons");
+                               && Cuts::abseta < etacut && Cuts::pT > ptcut*GeV), "Leptons");
 
       // Book histograms
       book(_h_pt_l1, "lep1_pt", logspace(40, 10, 400));

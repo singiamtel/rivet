@@ -19,7 +19,7 @@ clean-local:
 	@rm -rf a.out
 
 install-data-local:
-	cd doc && $(MAKE) dat json
+	$(MAKE) -C doc dat json
 	$(mkdir_p) $(DESTDIR)$(pkgdatadir)
 	$(install_sh_DATA) doc/analists/analyses.dat $(DESTDIR)$(pkgdatadir)/ || true
 	$(install_sh_DATA) doc/analists/analyses.json $(DESTDIR)$(pkgdatadir)/ || true

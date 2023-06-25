@@ -30,6 +30,7 @@ nobase_pkginclude_HEADERS += \
 ## Projections
 nobase_pkginclude_HEADERS += \
   Projections/AliceCommon.hh \
+  Projections/AtlasCommon.hh \
   Projections/AxesDefinition.hh \
   Projections/Beam.hh \
   Projections/BeamThrust.hh \
@@ -84,6 +85,7 @@ nobase_pkginclude_HEADERS += \
   Projections/PrimaryHadrons.hh \
   Projections/PrimaryParticles.hh \
   Projections/PromptFinalState.hh \
+  Projections/RHICCommon.hh \
   Projections/SingleValueProjection.hh \
   Projections/SmearedParticles.hh \
   Projections/SmearedJets.hh \

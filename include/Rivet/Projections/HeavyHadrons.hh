@@ -34,6 +34,9 @@ namespace Rivet {
 
     /// @}
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// @name b hadron accessors
     /// @{

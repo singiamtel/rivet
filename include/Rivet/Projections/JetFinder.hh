@@ -37,6 +37,9 @@ namespace Rivet {
     /// Destructor
     virtual ~JetFinder() = default;
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     /// @name Control the treatment of muons and invisible particles
     ///

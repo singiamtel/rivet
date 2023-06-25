@@ -41,6 +41,9 @@ namespace Rivet {
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(TauFinder);
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
 
     const Particles& taus() const { return _theParticles; }
 
