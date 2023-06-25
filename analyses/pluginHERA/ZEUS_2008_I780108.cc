@@ -87,9 +87,9 @@ namespace Rivet {
 
           if (q2 < 200) vetoEvent;
           if (y > 0.9) vetoEvent;
-	  // make sure charged current
-	  const DISLepton& dl = applyProjection<DISLepton>(event,"Lepton");
-	  if ( ! PID::isNeutrino(dl.out().abspid()) ) vetoEvent; 
+          // make sure charged current
+          const DISLepton& dl = apply<DISLepton>(event,"Lepton");
+          if ( ! PID::isNeutrino(dl.out().abspid()) ) vetoEvent;
           // Jet selection
           const Jets jets = apply<FastJets>(event, "Jets").jets(Cuts::Et > 5*GeV && Cuts::etaIn(-1*orientation, 2.5*orientation), cmpMomByEt);
           MSG_DEBUG("Jet multiplicity = " << jets.size());

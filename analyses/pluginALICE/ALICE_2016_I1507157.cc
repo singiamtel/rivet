@@ -170,8 +170,8 @@ namespace Rivet {
     vector<Histo1DPtr> signal;
     vector<Histo1DPtr> background;
     vector<Scatter2DPtr> ratio;
-    vector<double> nsp;
-    vector<double> nmp;
+    vector<CounterPtr> nsp;
+    vector<CounterPtr> nmp;
     /// @}
 
   };

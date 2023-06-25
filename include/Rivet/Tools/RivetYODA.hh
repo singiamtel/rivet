@@ -782,7 +782,7 @@ namespace Rivet {
         if (std::find(overflows.cbegin(), itEnd, i) != itEnd)  continue;
 
         const auto coords = subwindows.edgeTuple(i);
-        const double subwindowArea = subwindows.volume(i);
+        const double subwindowArea = subwindows.dVol(i);
         size_t nSubfills = 0;
         double windowFrac = 0.;
         valarray<double> sumw(0.0, weights[0].size()); // one per multiweight
