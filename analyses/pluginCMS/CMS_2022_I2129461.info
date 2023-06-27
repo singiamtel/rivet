@@ -1,0 +1,33 @@
+Name: CMS_2022_I2129461
+Year: 2022
+Summary: tW single top-quark differential cross sections at 13 TeV
+Experiment: CMS
+Collider: LHC
+InspireID: 2129461
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Victor Rodriguez Bouza <victor.rodriguez.bouza@cern.ch>
+References:
+ - arXiv:2208.00924
+ - CMS-TOP-21-010
+ - Accepted by JHEP
+RunInfo:
+  'Measurement of inclusive and differential cross sections for single top quark production in association with a W boson in proton-proton collisions at $\sqrt{s}=$ 13 TeV'
+Beams: [p+, p+]
+Energies: [13000]
+Luminosity_fb: 138
+Description:
+    'Measurements of the inclusive and normalised differential cross sections are presented for the production of single top quarks in association with a W boson in proton-proton collisions at a centre-of-mass energy of 13 TeV. The data used were recorded with the CMS detector at the LHC during 2016-2018, and correspond to an integrated luminosity of $138 fb^{-1}$. Events containing one electron and one muon in the final state are analysed. For the inclusive measurement, a multivariate discriminant, exploiting the kinematic properties of the events is used to separate the signal from the dominant $t\bar{t}$ background. A cross section of $79.2 \pm 0.9 (stat) ^{7.7}_{-8.0} (syst) \pm 1.2 (lumi) pb$ is obtained, consistent with the predictions of the standard model. For the differential measurements, a fiducial region is defined according to the detector acceptance, and the requirement of exactly one jet coming from the fragmentation of a bottom quark. The resulting distributions are unfolded to particle level and agree with the predictions at next-to-leading order in perturbative quantum chromodynamics.'
+
+BibKey: CMS:2022ytw
+BibTeX: '@article{CMS:2022ytw,
+    collaboration = "CMS",
+    title = "{Measurement of inclusive and differential cross sections for single top quark production in association with a W boson in proton-proton collisions at $\sqrt{s}$ = 13 TeV}",
+    eprint = "2208.00924",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CMS-TOP-21-010, CERN-EP-2022-158",
+    month = "8",
+    year = "2022"
+}'
