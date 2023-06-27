@@ -7,6 +7,7 @@ SHERPA_VERSION=2.2.15
 
 PLATFLAGS="--platform linux/amd64,linux/arm64"
 BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
+if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 

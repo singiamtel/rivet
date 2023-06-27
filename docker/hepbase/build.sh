@@ -2,20 +2,18 @@
 
 set -e
 
-PLATFLAGS="--platform linux/amd64,linux/arm64"
-BUILD="docker buildx build $PLATFLAGS $DOCKERFLAGS" # --squash"
+#PLATFLAGS="--platform linux/amd64,linux/arm64"
+#BUILD="docker buildx build $PLATFLAGS $DOCKERFLAGS" # --squash"
+BUILD="docker build $PLATFLAGS $DOCKERFLAGS" # --squash"
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 
 test "$TEST" && BUILD="echo $BUILD"
 
-# FEDORA_IMAGE=fedora:32
-# UBUNTU_IMAGE=ubuntu:23.04
-
 RIVETBS_VERSION=3.1.8
 LHAPDF_VERSION=6.5.4
 
-for vhepmc in 3.2.6; do   # 2.06.11
+for vhepmc in 3.2.6; do  # 2.06.11
     for tex in 0 1; do
 
         MSG="Building hepbase image with HepMC=$vhepmc and TeX=$tex"
@@ -31,86 +29,30 @@ for vhepmc in 3.2.6; do   # 2.06.11
         if [[ "$tex" = 1 ]]; then TEXSUFFIX="-latex"; else TEXSUFFIX=""; fi
 
         echo "@@ $MSG on Ubuntu with GCC compilers"
-        tag=hepstore/hepbase-ubuntu-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX
+        tag=hepstore/hepbase-ubuntu-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX$ARM
         $BUILD -f Dockerfile.ubuntu $GCCARGS -t $tag .
-<<<<<<< HEAD
-        test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
         test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
         echo -e "\n\n\n"
 
-        # echo "@@ $MSG on Ubuntu LTS 20.04 with GCC compilers"
-        # tag=hepstore/hepbase-ubuntu20-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX
-        # $BUILD -f Dockerfile.ubuntu $GCCARGS -t $tag .
-<<<<<<< HEAD
-        # test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
-        # test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
-        # echo -e "\n\n\n"
-
         echo "@@ $MSG on Ubuntu with clang compilers"
-        tag=hepstore/hepbase-ubuntu-clang-hepmc${vhepmc:0:1}-py3$TEXSUFFIX
+        tag=hepstore/hepbase-ubuntu-clang-hepmc${vhepmc:0:1}-py3$TEXSUFFIX$ARM
         $BUILD -f Dockerfile.ubuntu ${CLANGARGS/gfortran/flang} -t $tag .
-<<<<<<< HEAD
-        test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
         test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
         echo -e "\n\n\n"
 
         if [[ "$INTEL" = 1 ]]; then
             echo "@@ $MSG on Ubuntu with Intel compilers"
-            tag=hepstore/hepbase-ubuntu-intel-hepmc${vhepmc:0:1}-py3$TEXSUFFIX
+            tag=hepstore/hepbase-ubuntu-intel-hepmc${vhepmc:0:1}-py3$TEXSUFFIX$ARM
             $BUILD -f Dockerfile.ubuntu $INTELARGS -t $tag .
-<<<<<<< HEAD
-            test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
             test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
             echo -e "\n\n\n"
         fi
 
         echo "@@ $MSG on Fedora with GCC compilers"
-        tag=hepstore/hepbase-fedora-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX
+        tag=hepstore/hepbase-fedora-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX$ARM
         $BUILD -f Dockerfile.fedora $GCCARGS -t $tag .
-<<<<<<< HEAD
-        test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
         test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
         echo -e "\n\n\n"
-
-        # echo "@@ $MSG on Ubuntu rolling with GCC compilers"
-        # tag=hepstore/hepbase-ubuntux-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX
-        # $BUILD -f Dockerfile.ubuntu $GCCARGS --build-arg UBUNTU_IMAGE=ubuntu:rolling -t $tag .
-<<<<<<< HEAD
-        # test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
-        # test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
-        # echo -e "\n\n\n"
-
-        # echo "@@ $MSG on Fedora rawhide with GCC compilers"
-        # tag=hepstore/hepbase-fedorax-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX
-        # $BUILD -f Dockerfile.fedora $GCCARGS --build-arg FEDORA_IMAGE=fedora:rawhide -t $tag .
-<<<<<<< HEAD
-        # test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
-        # test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
-        # echo -e "\n\n\n"
-
-        # echo "@@ $MSG on Ubuntu with GCC compilers and Python 2"
-        # tag=hepstore/hepbase-ubuntu-gcc-hepmc${vhepmc:0:1}-py2$TEXSUFFIX
-        # $BUILD -f Dockerfile.ubuntu-py2 $GCCARGS -t $tag .
-<<<<<<< HEAD
-        # test "$PUSH" = 1 && docker push $tag && sleep 1m
-=======
-        # test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
->>>>>>> 42d39bc28662b14c36585511ff1505c87b5a2125
-        # echo -e "\n\n\n"
 
     done
 done

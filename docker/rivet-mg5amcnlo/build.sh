@@ -8,6 +8,7 @@ MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.4.x/+download/MG5_aMC_v3.4.2.tar.g
 
 PLATFLAGS="--platform linux/amd64,linux/arm64"
 BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
+if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 
