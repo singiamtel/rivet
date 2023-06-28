@@ -76,14 +76,14 @@ LogY=1
 
 # BEGIN PLOT /ATLAS_2020_I1788444/d14-x01-y01
 Title=$ \geq 2$ btag events
-XLabel=$\pT_{\mathrm{bb}}$
+XLabel=$p_{\perp\mathrm{bb}}$
 YLabel=$d\sigma/dpT_{\mathrm{bb}}$
 LogY=1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2020_I1788444/d15-x01-y01
 Title=$ \geq 2$ btag events
-XLabel=$\pT_{\mathrm{bb}}/m_{\mathrm{bb}}$
+XLabel=$p_{\perp\mathrm{bb}}/m_{\mathrm{bb}}$
 YLabel=$d\sigma/d(pT_{\mathrm{bb}}/m_{\mathrm{bb}})$
 LogY=1
 # END PLOT
