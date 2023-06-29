@@ -357,33 +357,6 @@ for analysis in analyses:
     #print(anapath)
     anadatfiles = glob.glob("%s/*.dat" % anapath)
     datfiles += sorted(anadatfiles)
-if datfiles:
-    mp_cmd += datfiles
-    if args.VERBOSE:
-        mp_cmd.append("--verbose")
-        print("Calling make-plots with the following options:")
-        print(" ".join(mp_cmd))
-    if not args.DRY_RUN:
-        Popen(mp_cmd).wait()
-        if args.BOOKLET and args.VECTORFORMAT=="PDF":
-            if which("pdftk") is not None:
-                bookletcmd = ["pdftk"]
-                for analysis in analyses:
-                    anapath = os.path.join(args.OUTPUTDIR, analysis)
-                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
-                bookletcmd += ["cat", "output", "%s/booklet.pdf" % args.OUTPUTDIR]
-                print(bookletcmd)
-                Popen(bookletcmd).wait()
-            elif which("pdfmerge") is not None:
-                bookletcmd = ["pdfmerge"]
-                for analysis in analyses:
-                    anapath = os.path.join(args.OUTPUTDIR, analysis)
-                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
-                bookletcmd += ["%s/booklet.pdf" % args.OUTPUTDIR]
-                print(bookletcmd)
-                Popen(bookletcmd).wait()
-            else:
-                print("Neither pdftk nor pdfmerge available --- not booklet output possible")
 
 ## Write web page containing all (matched) plots
 ## Make web pages first so that we can load it locally in
@@ -590,3 +563,33 @@ if not args.DRY_RUN:
     index.write('<footer style="clear:both; margin-top:3em; padding-top:3em">\n%s\n%s\n</footer>\n\n' % (timestamp, command))
     index.write('</body>\n</html>')
     index.close()
+
+
+## *Now* make the plots, etc.
+if datfiles:
+    mp_cmd += datfiles
+    if args.VERBOSE:
+        mp_cmd.append("--verbose")
+        print("Calling make-plots with the following options:")
+        print(" ".join(mp_cmd))
+    if not args.DRY_RUN:
+        Popen(mp_cmd).wait()
+        if args.BOOKLET and args.VECTORFORMAT=="PDF":
+            if which("pdftk") is not None:
+                bookletcmd = ["pdftk"]
+                for analysis in analyses:
+                    anapath = os.path.join(args.OUTPUTDIR, analysis)
+                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
+                bookletcmd += ["cat", "output", "%s/booklet.pdf" % args.OUTPUTDIR]
+                print(bookletcmd)
+                Popen(bookletcmd).wait()
+            elif which("pdfmerge") is not None:
+                bookletcmd = ["pdfmerge"]
+                for analysis in analyses:
+                    anapath = os.path.join(args.OUTPUTDIR, analysis)
+                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
+                bookletcmd += ["%s/booklet.pdf" % args.OUTPUTDIR]
+                print(bookletcmd)
+                Popen(bookletcmd).wait()
+            else:
+                print("Neither pdftk nor pdfmerge available --- not booklet output possible")
