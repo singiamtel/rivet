@@ -1,3 +1,9 @@
+2023-06-29  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Make rivet-mkhtml write HTML file before processing images.
+
+	* Fix rivet-mkhtml-mpl autocomplete.
+
 2023-06-22  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Explicitly import YODA and Projection base-class operator= into
