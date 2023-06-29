@@ -298,8 +298,8 @@ function _rivet_mkhtml_mpl() {
         fi
     fi
 
-    _filedir dat
-    return 0
+    # _filedir dat
+    # return 0
 
     ## Options with files / directories as the arg
     if (echo ${prev} | grep -E -- "--\<outputdir\>|\<-o\>" &> /dev/null); then
