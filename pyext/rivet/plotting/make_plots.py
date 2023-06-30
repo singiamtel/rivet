@@ -216,8 +216,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
 
     componentNames = ['BandComponentPDF', 'BandComponentEnv']
 
-    if plot_id in refhistos and refhistos[plot_id].type() != 'Scatter1D':
-        refhistos[plot_id].setAnnotation('IsRef', True)
+    if plot_id in refhistos:
+        refhistos[plot_id].setAnnotation('IsRef', True) 
         outputdict['histograms'][reftitle] = {'nominal': refhistos[plot_id]} # this is where ErrorBreakdown is included?
         outputdict['histograms'][reftitle]['IsRef'] = True
         outputdict['histograms'][reftitle]['Title'] = 'Data'
@@ -229,9 +229,6 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
             if rivet.stripOptions(plot_id_with_anaopt) != plot_id:
                 continue
             histogroup = mchistos_in_file[plot_id_with_anaopt]
-            # TODO Counters/Scatter1D currently not supported
-            if next(iter(histogroup.values())).type() == 'Scatter1D':
-                continue
 
             label = rivet.extractOptionString(plot_id_with_anaopt)
             outputdict['histograms'][filename+label] = {}
@@ -263,7 +260,6 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
             nominalVariationKey = get_nominal_key(mchistos_in_file[plot_id_with_anaopt].keys())
             if nominalVariationKey == None:
                 raise NameError("Could not find nominal variation weight!")
-            obj_type = mchistos_in_file[plot_id_with_anaopt][nominalVariationKey].type()
 
             nomVals = None
             pdf_matches = { }; env_matches = { }
@@ -276,14 +272,19 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
                 # pass the plotoptions dict to the function?
                 outputdict['histograms'][filename+label]['ErrorBars'] = mc_errs
 
-                thisObj = histogram.mkScatter() if 'Histo1D' in obj_type else histogram
+                thisObj = histogram.mkScatter()
+
+                # no support for 3D scatters and bands
+                if thisObj.type() == "Scatter3D":
+                    makeEnvelope = makePDFBand = ''
+
                 # central values of current object
-                central_values = [ p.y() for p in thisObj.points() ]
+                central_values = [ p.x() if 'Scatter1D' in thisObj.type() else
+                  p.y() if 'Scatter2D' in thisObj.type() else p.z() for p in thisObj.points() ]
 
                 if isNominal:
-                    nominalScatter = histogram
-                    outputdict['histograms'][filename+label]['nominal'] = histogram
-                    nomvals = list(central_values)
+                    nominalScatter = thisObj 
+                    outputdict['histograms'][filename+label]['nominal'] = thisObj
 
                 for i, prescription in enumerate(makePDFBand.split()):
                     if verbose and prescription not in pdf_matches:
@@ -350,8 +351,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
 
                 BandScatter = nominalScatter.clone()
                 # iterate over bins
-                for ibin, y in enumerate(nominalScatter.yVals()):
-                    totErrDn, totErrUp = BandScatter.point(ibin).yErrs()
+                for ibin, y in enumerate(nominalScatter.yVals() if 'Scatter2D' in nominalScatter.type() else nominalScatter.xVals()):
+                    totErrDn, totErrUp = BandScatter.point(ibin).yErrs() if 'Scatter2D' in BandScatter.type() else BandScatter.point(0).xErrs()
                     totErrDn = totErrDn*totErrDn
                     totErrUp = totErrUp*totErrUp
 
