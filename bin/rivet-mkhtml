@@ -513,10 +513,12 @@ if not args.DRY_RUN:
         # anaindex.write('<span style="background-color:00cc00; border:2px solid #009933; padding:2px; border-radius:2px;"\n onclick="var patt = document.getElementById(\'patt_{ana}\').value; filterPlots(\'{ana}\', patt);">Filter</span>\n'.format(ana=analysis))
         anaindex.write('</form>\n\n')
 
+        ## Generate HTML index page(s)
         datfiles = glob.glob("%s/*.dat" % anapath)
+        datfiles_html = glob.glob("%s/*.dat" % anapath)
         #print(datfiles)
         # anaindex.write('<div style="float:none; overflow:auto; width:100%">\n')
-        for datfile in sorted(datfiles):
+        for datfile in sorted(datfiles_html):
             obsname = os.path.basename(datfile).replace(".dat", "")
             pngfile = obsname+".png"
             vecfile = obsname+"."+args.VECTORFORMAT.lower()
