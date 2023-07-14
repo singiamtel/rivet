@@ -61,13 +61,14 @@ Get in touch via the developer mailing list if you need any assistance: [rivet-s
 ## Writing a Rivet analysis
 [What is an Analysis?](doc/tutorials/what-analysis.md)
 
-[What is a Projection?](doc/tutorials/projection.md)
+[What is a Projection?](doc/tutorials/projections.md)
 
 [How does Rivet histograms work?](doc/tutorials/rivet-histograms.md)
 
 [Writing a simple analysis](doc/tutorials/simple-analysis.md)
 
-[Writing an analysis with FastJet](doc/tutorials/fastjet.md)
+[Writing an analysis with FastJet (work in progress)](doc/tutorials/fastjet.md)
+## This is not in the repository? ^
 
 [Contributing a routine](doc/tutorials/anacontrib.md)
 
