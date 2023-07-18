@@ -19,16 +19,16 @@ BEGIN PLOT /CMS_2020_I1814328/d05-x01-y01
 Title=CMS, 13 TeV, $W^+ W^-$, Figure 6 upper right
 XMin=27
 LogX=0
-XLabel=$p_{T}^{\el max}$ [GeV]
-YLabel=$1/\sigma d\sigma/dp_{T}^{\el max}$ [1/GeV]
+XLabel=$p_{T}^{\ell max}$ [GeV]
+YLabel=$1/\sigma d\sigma/dp_{T}^{\ell max}$ [1/GeV]
 END PLOT
 
 BEGIN PLOT /CMS_2020_I1814328/d06-x01-y01
 Title=CMS, 13 TeV, $W^+ W^-$, Figure 6 lower left
 XMin=25
 LogX=0
-XLabel=$p_{T}^{\el min}$ [GeV]
-YLabel=$1/\sigma d\sigma/dp_{T}^{\el min}$ [1/GeV]
+XLabel=$p_{T}^{\ell min}$ [GeV]
+YLabel=$1/\sigma d\sigma/dp_{T}^{\ell min}$ [1/GeV]
 END PLOT
 
 BEGIN PLOT /CMS_2020_I1814328/d07-x01-y01
