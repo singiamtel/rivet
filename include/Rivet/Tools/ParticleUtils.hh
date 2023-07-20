@@ -776,8 +776,6 @@ namespace Rivet {
     /// @todo Isolation routines?
 
   }
-  /// @}
-
 
   // Import Kin namespace into Rivet
   using namespace Kin;
@@ -798,7 +796,6 @@ namespace Rivet {
     return any(parts, HasPID(id));
   }
 
-  /// @}
 
 
   /// @brief Check whether a particle is radiative.
@@ -823,6 +820,7 @@ namespace Rivet {
     , bool ignorephoton
     );
 
+  /// @}
 
 }
 
