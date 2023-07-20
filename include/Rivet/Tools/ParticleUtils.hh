@@ -17,7 +17,7 @@ namespace Rivet {
   /// @{
 
   /// @defgroup particleutils_class Particle classifier functions
-  //@{
+  ///@{
 
   /// Unbound function access to PID code
   inline int pid(const Particle& p) { return p.pid(); }
