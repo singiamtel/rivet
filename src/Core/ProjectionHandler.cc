@@ -44,7 +44,7 @@ namespace Rivet {
       return ret;
     } else {
       unique_ptr<Projection> p = _clone(proj);
-      const Projection & ret = _register(parent, move(p), name);
+      const Projection & ret = _register(parent, std::move(p), name);
       // Return registered proj
       return ret;
     }

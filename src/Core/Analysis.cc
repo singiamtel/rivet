@@ -21,7 +21,7 @@ namespace Rivet {
 
     unique_ptr<AnalysisInfo> ai = AnalysisInfo::make(name);
     assert(ai);
-    _info = move(ai);
+    _info = std::move(ai);
     assert(_info);
   }
 
