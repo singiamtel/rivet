@@ -52,7 +52,7 @@ namespace Rivet {
     const static vector<double> effs_eta  = { 0.950, 0.965, 0.955, 0.885, 0.950, 0.935, 0.90 };
     // Et eff histogram (10-20 is a guess)
     const static vector<double> edges_et = { 0,   10,   20,   25,   30,   35,   40,    45,    50,   60,  80 };
-    const static vector<double> effs_et  = { 0.0, 0.90, 0.91, 0.92, 0.94, 0.95, 0.955, 0.965, 0.97, 0.98 };
+    const static vector<double> effs_et  = { 0.0, 0.90, 0.91, 0.92, 0.94, 0.95, 0.955, 0.965, 0.97, 0.98, 0.98 };//Extra value extrapolated for overflow
 
     if (e.abseta() > 2.47) return 0.0; // no ID outside the tracker
 
@@ -172,7 +172,7 @@ namespace Rivet {
   inline double ELECTRON_EFF_ATLAS_RUN2_TIGHT(const Particle& e) {
     if (e.abspid() != PID::ELECTRON) return 0;
     const static vector<double> et_edges = { /* 10, 15, */ 20, 25, 30, 35, 40, 45, 50, 60, 80 };
-    const static vector<double> et_effs = { 0.785, 0.805, 0.820, 0.830, 0.840, 0.850, 0.875, 0.910 };
+    const static vector<double> et_effs = { 0.785, 0.805, 0.820, 0.830, 0.840, 0.850, 0.875, 0.910, 0.910 }; //Extra value extrapolated for overflow
     const static vector<double> eta_edges = {0.000, 0.051, 0.374, 0.720, 0.981, 1.279, 1.468, 1.707, 1.945, 2.207, 2.457, 2.500}; // from ET > 80 bin
     const static vector<double> eta_refs =    {0.819, 0.855, 0.899, 0.906, 0.900, 0.869, 0.865, 0.873, 0.869, 0.868, 0.859};
     if (e.abseta() > 2.5 || e.Et() < 20*GeV) return 0.0;
