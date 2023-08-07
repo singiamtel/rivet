@@ -215,7 +215,7 @@ def generateScripts(args):
                                                        style, configfiles, True, args.OUTPUTDIR, args.MC_ERRS,
                                                        True, [], args.VERBOSE, writefiles=writefiles,
                                                        nRatioTicks=args.NRATIOTICKS, skipWeights = args.SKIP_WEIGHTS,
-                                                       removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION, 
+                                                       removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION,
                                                        canvasText=args.CANVASTEXT)
 
     ## Write web page containing all (matched) plots
@@ -271,7 +271,7 @@ def generateScripts(args):
 
         ## Timestamp and command HTML fragments to be used on each page:
         import datetime
-        timestamp = '<p>Generated at %s</p>' % datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")
+        timestamp = '<p>Generated at %s</p>' % datetime.datetime.now().strftime("%A, %d. %B %Y %H:%M")
         command = '<p>Created with command: <pre>%s</pre></p>' % COMMAND
 
         index = open(os.path.join(args.OUTPUTDIR, "index.html"), "w")
