@@ -59,7 +59,7 @@ namespace Rivet {
       if (icut == 0)
         throw RangeError("Cut number must be greater than 0");
       if (icut+cutresults.size() > ncuts+1)
-        throw RangeError("Number of filled cut results needs to match the Cutflow construction");
+        throw RangeError("Number of filled cut results needs to match the Cutflow construction (in cutflow '"+name+"')");
       bool rtn = true;
       for (size_t i = 0; i < cutresults.size(); ++i)
         if (!fill(icut+i, cutresults[i], weight)) { rtn = false; break; }
@@ -95,7 +95,7 @@ namespace Rivet {
     /// @deprecated Prefer to use vector fillinit() and vector fill()
     bool fillall(const vector<bool>& cutresults, double weight=1.) {
       if (cutresults.size() != ncuts)
-        throw RangeError("Number of filled cut results needs to match the Cutflow construction");
+        throw RangeError("Number of filled cut results needs to match the Cutflow construction (in cutflow '"+name+"')");
       // if (icut == 0) { fillinit(weight); icut = 1; }
       return fill(1, cutresults, weight);
     }
