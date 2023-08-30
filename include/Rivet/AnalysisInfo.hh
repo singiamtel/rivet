@@ -20,6 +20,8 @@ namespace Rivet {
 
     ~AnalysisInfo() { }
 
+    void parseInfoFile();
+
 
     /// @defgroup anainfo_metadata Metadata
     ///
@@ -285,6 +287,8 @@ namespace Rivet {
 
     // std::map<string,string> _yamldict;
 
+    static std::string _infoFilePath;
+
     std::string _name;
     std::string _refDataName;
     std::string _spiresId, _inspireId;
@@ -310,6 +314,7 @@ namespace Rivet {
     std::string _writerdoubleprecision;
     std::vector<std::string> _todos;
     bool _needsCrossSection;
+    bool _isInitialised;
 
     std::vector<std::string> _options;
     std::map< std::string, std::set<std::string> > _optionmap;
@@ -350,6 +355,7 @@ namespace Rivet {
       _optionmap.clear();
       _validation.clear();
       _reentrant = false;
+      _isInitialised = false;
     }
 
   };

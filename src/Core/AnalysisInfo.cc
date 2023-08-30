@@ -14,6 +14,7 @@
 
 namespace Rivet {
 
+  std::string AnalysisInfo::_infoFilePath = "";
 
   namespace {
     Log& getLog() {
@@ -30,29 +31,37 @@ namespace Rivet {
     ai->_name = ananame;
 
     /// If no ana data file found, return null AI
-    const string datapath = findAnalysisInfoFile(ananame + ".info");
-    if (datapath.empty()) {
+    _infoFilePath = findAnalysisInfoFile(ananame + ".info");
+    if (_infoFilePath.empty()) {
       MSG_DEBUG("No datafile " << ananame + ".info found");
-      return ai;
     }
+
+    MSG_TRACE("AnalysisInfo pointer = " << ai.get());
+    return ai;
+  }
+
+
+  /// Parse info file
+  void AnalysisInfo::parseInfoFile() {
+    if (_isInitialised || _infoFilePath.empty())  return;
 
     // Read data from YAML document
-    MSG_DEBUG("Reading analysis data from " << datapath);
+    MSG_DEBUG("Reading analysis data from " << _infoFilePath);
     YAML::Node doc;
     try {
-      doc = YAML::LoadFile(datapath);
+      doc = YAML::LoadFile(_infoFilePath);
     } catch (const YAML::ParserException& ex) {
-      MSG_ERROR("Parse error when reading analysis data from " << datapath << " (" << ex.what() << ")");
-      return ai;
+      MSG_ERROR("Parse error when reading analysis data from " << _infoFilePath << " (" << ex.what() << ")");
+      return;
     }
 
-    #define THROW_INFOERR(KEY) throw InfoError("Problem in info parsing while accessing key " + string(KEY) + " in file " + datapath)
+    #define THROW_INFOERR(KEY) throw InfoError("Problem in info parsing while accessing key " + string(KEY) + " in file " + _infoFilePath)
 
     // Simple scalars (test for nullness before casting)
-    #define TRY_GETINFO(KEY, VAR) try { if (doc[KEY] && !doc[KEY].IsNull()) ai->_ ## VAR = doc[KEY].as<string>(); } catch (...) { THROW_INFOERR(KEY); }
-    #define TRY_GETINFO_DEFAULT(KEY, VAR, DEFAULT) try { if (doc[KEY] && !doc[KEY].IsNull()) ai->_ ## VAR = doc[KEY].as<string>(); } catch (...) { ai->_ ## VAR = DEFAULT; }
-    #define TRY_GETINFO_DBL(KEY, VAR, DEFAULT) try { if (doc[KEY] && !doc[KEY].IsNull()) ai->_ ## VAR = doc[KEY].as<double>(); } catch (...) { THROW_INFOERR(KEY); }
-    #define TRY_GETINFO_DBL_DEFAULT(KEY, VAR, DEFAULT) try { if (doc[KEY] && !doc[KEY].IsNull()) ai->_ ## VAR = doc[KEY].as<double>(); } catch (...) { ai->_ ## VAR = DEFAULT; }
+    #define TRY_GETINFO(KEY, VAR) try { if (doc[KEY] && !doc[KEY].IsNull()) _ ## VAR = doc[KEY].as<string>(); } catch (...) { THROW_INFOERR(KEY); }
+    #define TRY_GETINFO_DEFAULT(KEY, VAR, DEFAULT) try { if (doc[KEY] && !doc[KEY].IsNull()) _ ## VAR = doc[KEY].as<string>(); } catch (...) { _ ## VAR = DEFAULT; }
+    #define TRY_GETINFO_DBL(KEY, VAR, DEFAULT) try { if (doc[KEY] && !doc[KEY].IsNull()) _ ## VAR = doc[KEY].as<double>(); } catch (...) { THROW_INFOERR(KEY); }
+    #define TRY_GETINFO_DBL_DEFAULT(KEY, VAR, DEFAULT) try { if (doc[KEY] && !doc[KEY].IsNull()) _ ## VAR = doc[KEY].as<double>(); } catch (...) { _ ## VAR = DEFAULT; }
     TRY_GETINFO("Name", name);
     TRY_GETINFO("Summary", summary);
     TRY_GETINFO("Status", status);
@@ -76,14 +85,14 @@ namespace Rivet {
     #undef TRY_GETINFO_DBL_DEFAULT
 
     // Normalise the status info to upper-case
-    ai->_status = toUpper(ai->_status);
+    _status = toUpper(_status);
 
     // Sequences (test the seq *and* each entry for nullness before casting)
     #define TRY_GETINFO_SEQ(KEY, VAR) try { \
         if (doc[KEY] && !doc[KEY].IsNull()) {                           \
           const YAML::Node& VAR = doc[KEY];                             \
           for (size_t i = 0; i < VAR.size(); ++i)                       \
-            if (!VAR[i].IsNull()) ai->_ ## VAR += VAR[i].as<string>();  \
+            if (!VAR[i].IsNull()) _ ## VAR += VAR[i].as<string>();  \
         } } catch (...) { THROW_INFOERR(KEY); }
     TRY_GETINFO_SEQ("Authors", authors);
     TRY_GETINFO_SEQ("References", references);
@@ -94,22 +103,22 @@ namespace Rivet {
     #undef TRY_GETINFO_SEQ
 
     // Build the option map
-    ai->buildOptionMap();
+    buildOptionMap();
 
     // A boolean with some name flexibility
     try {
-      if (doc["NeedsCrossSection"]) ai->_needsCrossSection = doc["NeedsCrossSection"].as<bool>();
-      else if (doc["NeedCrossSection"]) ai->_needsCrossSection = doc["NeedCrossSection"].as<bool>();
+      if (doc["NeedsCrossSection"]) _needsCrossSection = doc["NeedsCrossSection"].as<bool>();
+      else if (doc["NeedCrossSection"]) _needsCrossSection = doc["NeedCrossSection"].as<bool>();
     } catch (...) {
       THROW_INFOERR("NeedsCrossSection|NeedCrossSection");
     }
 
     // Check if reentrant
     try {
-      if (doc["Reentrant"]) ai->_reentrant = doc["Reentrant"].as<bool>();
+      if (doc["Reentrant"]) _reentrant = doc["Reentrant"].as<bool>();
     } catch(...) {
-      if ( ai->statuscheck("REENTRANT") && !ai->statuscheck("NOTREENTRY") ) {
-        ai->_reentrant = true;
+      if ( statuscheck("REENTRANT") && !statuscheck("NOTREENTRY") ) {
+        _reentrant = true;
       }
     }
 
@@ -128,7 +137,7 @@ namespace Rivet {
             beam_pairs += PID::make_pdgid_pair(bp[0].as<string>(), bp[1].as<string>());
           }
         }
-        ai->_beams = beam_pairs;
+        _beams = beam_pairs;
       }
     } catch (...) { THROW_INFOERR("Beams"); }
 
@@ -150,15 +159,13 @@ namespace Rivet {
             throw InfoError("Beam energies have to be a list of either numbers or pairs of numbers");
           }
         }
-        ai->_energies = beam_energy_pairs;
+        _energies = beam_energy_pairs;
       }
     } catch (...) { THROW_INFOERR("Energies"); }
 
     #undef THROW_INFOERR
 
-
-    MSG_TRACE("AnalysisInfo pointer = " << ai.get());
-    return ai;
+    _isInitialised = true;
   }
 
 
