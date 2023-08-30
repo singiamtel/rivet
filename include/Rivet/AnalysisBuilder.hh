@@ -33,7 +33,6 @@ namespace Rivet {
     virtual unique_ptr<Analysis> mkAnalysis() const = 0;
 
     /// Get the analysis' name, by asking it directly
-    /// @todo Could avoid this slow lookup by passing it via the constructor... at the cost of potential inconsistency
     string name() const {
       auto a = mkAnalysis();
       return a->name();

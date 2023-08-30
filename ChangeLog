@@ -1,3 +1,8 @@
+2023-08-18  Christian Gutschow  <chris.g@cern.ch>
+
+	* Remove logic that parses info file from AnalysisInfo constructor
+	and only parse when an analysis is being specifically asked for.
+
 2023-06-29  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Make rivet-mkhtml write HTML file before processing images.
