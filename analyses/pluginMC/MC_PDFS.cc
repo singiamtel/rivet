@@ -45,8 +45,8 @@ namespace Rivet {
 
 #ifdef RIVET_ENABLE_HEPMC_3
       MSG_DEBUG("PDF Q = " << pdfi.scale<< " for (id, x) = "
-                << "(" << pdfi.pdf_id[0] << ", " << pdfi.x[0] << ") "
-                << "(" << pdfi.pdf_id[1] << ", " << pdfi.x[1] << ")");
+                << "(" << pdfi.parton_id[0] << ", " << pdfi.x[0] << ") "
+                << "(" << pdfi.parton_id[1] << ", " << pdfi.x[1] << ")");
       _histPdfX->fill(pdfi.x[0], weight);
       _histPdfX->fill(pdfi.x[1], weight);
       _histPdfXmin->fill(std::min(pdfi.x[0], pdfi.x[1]), weight);
