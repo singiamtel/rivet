@@ -131,9 +131,10 @@ namespace Rivet {
     /// until Multiplexer<T>::pushToPersistent() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
-    void fill(const double weight=1.0, const double fraction = 1.0) {
+    int fill(const double weight=1.0, const double fraction = 1.0) {
       (void)fraction; // suppress unused variable warning
       _fills.insert(_fills.end(), { YAO::FillType(), weight } );
+      return 0;
     }
 
     /// Empty the subevent stack (for start of new event group).
