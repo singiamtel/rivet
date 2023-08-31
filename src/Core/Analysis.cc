@@ -19,9 +19,7 @@ namespace Rivet {
     ProjectionApplier::_allowProjReg = false;
     _defaultname = name;
 
-    unique_ptr<AnalysisInfo> ai = AnalysisInfo::make(name);
-    assert(ai);
-    _info = std::move(ai);
+    _info = AnalysisInfo::make(name);
     assert(_info);
   }
 

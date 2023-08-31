@@ -347,13 +347,14 @@ br_init (BrInitError *error)
 int
 br_init_lib (BrInitError *error)
 {
-  exe = _br_find_exe_for_symbol ((const void *) "", error);
-  const int rtn = exe != NULL;
-  if (rtn) {
+  if (exe != NULL) {
     free(exe);
     exe = (char *) NULL;
   }
-  return rtn;
+  exe = _br_find_exe_for_symbol ((const void *) "", error);
+  // exe is static, memory not freed here such that other methods pick up
+  // prefix of current binary location, in case it has been moved
+  return exe != NULL;
 }
 
 
