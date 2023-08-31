@@ -114,8 +114,7 @@ namespace Rivet {
       /// Perform the projection on the Event
       void project(const Event& event) {
         pass();
-        if ( applyProjection<FinalState>(event,"MBF").particles().empty() ||
-             applyProjection<FinalState>(event,"MBB").particles().empty() )
+        if ( apply<FinalState>(event,"MBF").particles().empty() || apply<FinalState>(event,"MBB").particles().empty() )
           fail();
       }
 
