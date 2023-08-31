@@ -39,7 +39,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get autoclean -y
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && sed -i /usr/local/include/Rivet/Projections/SmearedJets.hh \
-       -e 's/return CmpState::EQ;/return Rivet::cmp(get_address(_bTagEffFn), get_address(other._bTagEffFn)) || Rivet::cmp(get_address(_cTagEffFn), get_address(other._cTagEffFn));/'
+    && sed -i /usr/local/include/Rivet/Projections/SmearedJets.hh -e 's/return CmpState::EQ;/return Rivet::cmp(get_address(_bTagEffFn), get_address(other._bTagEffFn)) || Rivet::cmp(get_address(_cTagEffFn), get_address(other._cTagEffFn));/'
 
 WORKDIR /work

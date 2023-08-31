@@ -19,11 +19,16 @@ import matplotlib.pyplot as plt
 tags, dates, nanas = [], [], []
 with open(args.DATFILE) as f:
     for line in f:
-        items = line.split()
-        tags.append(items[0])
-        ts = float(items[1].replace("-3600", "").replace("-7200", ""))
-        dates.append(datetime.date.fromtimestamp(ts))
-        nanas.append(int(items[2]))
+        if not line.startswith("rivet-"):
+            continue
+        try:
+            items = line.split()
+            tags.append(items[0])
+            ts = float(items[1].replace("-3600", "").replace("-7200", ""))
+            dates.append(datetime.date.fromtimestamp(ts))
+            nanas.append(int(items[2]))
+        except ValueError:
+            pass
 
 plt.plot(dates, nanas)
 plt.xlabel("Year")

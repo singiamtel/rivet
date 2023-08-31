@@ -284,7 +284,7 @@ RatioPlotYMax=1.5
 # BEGIN PLOT /CMS_2018_I1663958/d49-x01-y01
 Title=CMS, 13$\,$TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$p_\mathrm{T}(\mathrm{j}_\mathrm{W1})$ [GeV]
-YLabel=$\frac{{d}\sigma}{{d}p_\mathrm{T}(\mathrm{\mathrm{j}_\mathrm{W1}j}_\mathrm{W1}})}$ [pb $\mathrm{GeV}^{-1}$]
+YLabel=$\frac{{d}\sigma}{{d}p_\mathrm{T}(\mathrm{j}_\mathrm{W1}\mathrm{j}_\mathrm{W1})}$ [pb $\mathrm{GeV}^{-1}$]
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT

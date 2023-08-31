@@ -80,7 +80,9 @@ namespace Rivet {
       MSG_WARNING("Instantiating analysis '" << ai->second->name() << "' via alias '"
                   << analysisname << "'. Using the canonical name is recommended");
     }
-    return ai->second->mkAnalysis();
+    unique_ptr<Analysis> ana = ai->second->mkAnalysis();
+    ana->loadInfo();
+    return ana;
   }
 
 
@@ -89,6 +91,7 @@ namespace Rivet {
     vector<unique_ptr<Analysis>> analyses;
     for (const auto & p : _ptrs) {
       analyses.emplace_back( p.second->mkAnalysis() );
+      analyses.back()->loadInfo();
     }
     return analyses;
   }

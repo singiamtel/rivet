@@ -1,0 +1,39 @@
+Name: CMS_2021_I1901295
+Year: 2021
+Summary: Differential cross sections for top quark pair production in the full kinematic range using the lepton+jets final state in proton proton collisions at 13 TeV
+Experiment: CMS
+Collider: LHC
+InspireID: 1901295
+Status: VALIDATED
+Reentrant: True
+Authors:
+ - Otto Hindrichs <otto.heinz.hindrichs@cern.ch>
+References:
+ - arXiv:2108.02803 
+ - CMS-TOP-20-001
+ - 10.1103/PhysRevD.104.092013  
+RunInfo:
+  LHC proton proton collisions at $\sqrt{s} = 13$ TeV. Data collected by CMS in years 2016-2018. Selection of lepton+jets top pair candidate events at particle level. 
+Luminosity_fb: 137
+Beams: [p+, p+]
+Energies: [13000]
+Description:
+  'Measurements of differential and double-differential cross sections of top quark pair ($\mathrm{t\bar{t}}$) production are presented in the lepton+jets channels with a single electron or muon and jets in the final state. The analysis combines for the first time signatures of top quarks with low transverse momentum $p_\mathrm{T}$, where the top quark decay products can be identified as separated jets and isolated leptons, and with high $p_\mathrm{T}$, where the decay products are collimated and overlap. The measurements are based on proton-proton collision data at $\sqrt{s} = 13$ TeV collected by the CMS experiment at the LHC, corresponding to an integrated luminosity of 137 fb$^{-1}$. The cross sections are presented at the parton and particle levels, where the latter minimizes extrapolations based on theoretical assumptions. Most of the measured differential cross sections are well described by standard model predictions with the exception of some double-differential distributions. The inclusive $\mathrm{t\bar{t}}$ production cross section is measured to be $\sigma_\mathrm{t\bar{t}} = 791\pm25$ pb, which constitutes the most precise measurement in the lepton+jets channel to date.'
+BibKey: CMS:2021vhb
+BibTeX: '@article{CMS:2021vhb,
+    author = "Tumasyan, Armen and others",
+    collaboration = "CMS",
+    title = "{Measurement of differential $t \bar t$ production cross sections in the full kinematic range using lepton+jets events from proton-proton collisions at $\sqrt {s}$ = 13\,\,TeV}",
+    eprint = "2108.02803",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CMS-TOP-20-001, CERN-EP-2021-135",
+    doi = "10.1103/PhysRevD.104.092013",
+    journal = "Phys. Rev. D",
+    volume = "104",
+    number = "9",
+    pages = "092013",
+    year = "2021"
+}'
+ReleaseTests:
+ - $A LHC-13-Top-All

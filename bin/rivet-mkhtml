@@ -357,33 +357,6 @@ for analysis in analyses:
     #print(anapath)
     anadatfiles = glob.glob("%s/*.dat" % anapath)
     datfiles += sorted(anadatfiles)
-if datfiles:
-    mp_cmd += datfiles
-    if args.VERBOSE:
-        mp_cmd.append("--verbose")
-        print("Calling make-plots with the following options:")
-        print(" ".join(mp_cmd))
-    if not args.DRY_RUN:
-        Popen(mp_cmd).wait()
-        if args.BOOKLET and args.VECTORFORMAT=="PDF":
-            if which("pdftk") is not None:
-                bookletcmd = ["pdftk"]
-                for analysis in analyses:
-                    anapath = os.path.join(args.OUTPUTDIR, analysis)
-                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
-                bookletcmd += ["cat", "output", "%s/booklet.pdf" % args.OUTPUTDIR]
-                print(bookletcmd)
-                Popen(bookletcmd).wait()
-            elif which("pdfmerge") is not None:
-                bookletcmd = ["pdfmerge"]
-                for analysis in analyses:
-                    anapath = os.path.join(args.OUTPUTDIR, analysis)
-                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
-                bookletcmd += ["%s/booklet.pdf" % args.OUTPUTDIR]
-                print(bookletcmd)
-                Popen(bookletcmd).wait()
-            else:
-                print("Neither pdftk nor pdfmerge available --- not booklet output possible")
 
 ## Write web page containing all (matched) plots
 ## Make web pages first so that we can load it locally in
@@ -498,13 +471,26 @@ if not args.DRY_RUN:
         if analysis in official_routines:
             reflist.append('<a href="https://rivet.hepforge.org/analyses/%s.html">Analysis reference</a>' % analysis)
         for i, ref in enumerate(references):
-            if "arXiv" in ref:
-                try:
+            try:
+                if ref.startswith("arXiv:"):
                     arxivID = ref.split(' ')[0].split(':')[-1]
                     if arxivID:
                         references[i] = '<a href="https://arxiv.org/abs/%s">arXiv:%s</a>' % (arxivID, arxivID)
-                except:
-                    pass
+                elif ref.startswith("doi:"):
+                    doi = ref.split(' ')[0].split(':')[-1]
+                    if doi:
+                        references[i] = '<a href="https://dx.doi.org/%s">doi:%s</a>' % (doi, doi)
+                elif ref.startswith("ATLAS-"):
+                    code = ref.replace("ATLAS-", "")
+                    url = "https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/" + code
+                    references[i] = '<a href="%s">%s</a>' % (url, ref)
+                elif ref.startswith("CMS-"):
+                    code = ref.replace("CMS-", "")
+                    url = "https://cms-results.web.cern.ch/cms-results/public-results/publications/" + code
+                    references[i] = '<a href="%s">%s</a>' % (url, ref)
+            except:
+                pass
+
         reflist += references
         index.write('<p>%s</p>\n' % " &#124; ".join(reflist))
 
@@ -540,10 +526,12 @@ if not args.DRY_RUN:
         # anaindex.write('<span style="background-color:00cc00; border:2px solid #009933; padding:2px; border-radius:2px;"\n onclick="var patt = document.getElementById(\'patt_{ana}\').value; filterPlots(\'{ana}\', patt);">Filter</span>\n'.format(ana=analysis))
         anaindex.write('</form>\n\n')
 
-        datfiles = glob.glob("%s/*.dat" % anapath)
+        ## Generate HTML index page(s)
+        # datfiles = glob.glob("%s/*.dat" % anapath)
+        datfiles_html = glob.glob("%s/*.dat" % anapath)
         #print(datfiles)
         # anaindex.write('<div style="float:none; overflow:auto; width:100%">\n')
-        for datfile in sorted(datfiles):
+        for datfile in sorted(datfiles_html):
             obsname = os.path.basename(datfile).replace(".dat", "")
             pngfile = obsname+".png"
             vecfile = obsname+"."+args.VECTORFORMAT.lower()
@@ -590,3 +578,33 @@ if not args.DRY_RUN:
     index.write('<footer style="clear:both; margin-top:3em; padding-top:3em">\n%s\n%s\n</footer>\n\n' % (timestamp, command))
     index.write('</body>\n</html>')
     index.close()
+
+
+## *Now* make the plots, etc.
+if datfiles:
+    mp_cmd += datfiles
+    if args.VERBOSE:
+        mp_cmd.append("--verbose")
+        print("Calling make-plots with the following options:")
+        print(" ".join(mp_cmd))
+    if not args.DRY_RUN:
+        Popen(mp_cmd).wait()
+        if args.BOOKLET and args.VECTORFORMAT=="PDF":
+            if which("pdftk") is not None:
+                bookletcmd = ["pdftk"]
+                for analysis in analyses:
+                    anapath = os.path.join(args.OUTPUTDIR, analysis)
+                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
+                bookletcmd += ["cat", "output", "%s/booklet.pdf" % args.OUTPUTDIR]
+                print(bookletcmd)
+                Popen(bookletcmd).wait()
+            elif which("pdfmerge") is not None:
+                bookletcmd = ["pdfmerge"]
+                for analysis in analyses:
+                    anapath = os.path.join(args.OUTPUTDIR, analysis)
+                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
+                bookletcmd += ["%s/booklet.pdf" % args.OUTPUTDIR]
+                print(bookletcmd)
+                Popen(bookletcmd).wait()
+            else:
+                print("Neither pdftk nor pdfmerge available --- not booklet output possible")

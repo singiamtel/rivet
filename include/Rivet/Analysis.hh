@@ -121,6 +121,9 @@ namespace Rivet {
     /// building web pages and the analysis pages in the Rivet manual.
     /// @{
 
+    /// Get the AnalysisInfo object to parse its info file in which the metadata is stored.
+    void loadInfo() { info().parseInfoFile(); }
+
     /// Get the actual AnalysisInfo object in which all this metadata is stored.
     const AnalysisInfo& info() const {
       if (!_info) throw Error("No AnalysisInfo object :-O");

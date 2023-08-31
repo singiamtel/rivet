@@ -45,10 +45,13 @@ namespace Rivet {
 
   public:
 
-    /// The \f$Q^2\f$.
+    /// @brief The \f$Q^2\f$, i.e. the virtuality of the DIS photon.
+    ///
+    /// Calculated by identifying the virtual photon momentum as the
+    /// difference between incoming and outgoing scattered-lepton momenta.
     double Q2() const { return _theQ2; }
 
-    /// The \f$W^2\f$.
+    /// The \f$W^2\f$, i.e. the squared CoM energy of the DIS-photon+hadron system.
     double W2() const { return _theW2; }
 
     /// The Bjorken \f$x\f$.

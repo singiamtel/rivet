@@ -1,0 +1,57 @@
+Name: ATLAS_2022_I2037744
+Year: 2022
+Summary: Semileptonic ttbar with high pT top at 13 TeV, single- and double-differential cross-sections
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2037744
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Jonathan Jamieson <jonathan.jamieson@cern.ch>
+ - Mark Owen <mark.andrew.owen@cern.ch>
+References:
+ - JHEP 06 (2022) 063
+ - arXiv:2202.12134 [hep-ex]
+ - ATLAS-TOPQ-2019-23
+Keywords:
+ - Semileptonic ttbar
+ - Boosted
+ - Differential cross-section measurement
+ - EFT limits
+RunInfo:
+  pp -> non-allhadronic ttbar production at 13 TeV
+Luminosity_fb: 139
+Beams: [p+, p+]
+Energies: [13000]
+PtCuts: [0]
+Description:
+'Cross-section measurements of top-quark pair production where the hadronically decaying top quark has transverse momentum
+greater than $355$ GeV and the other top quark decays into $\ell \nu b$ are presented using 139 fb$^{-1}$ of data
+collected by the ATLAS experiment during proton--proton collisions at the LHC. The fiducial cross-section at $\sqrt{s}=13$ TeV
+is measured to be $\sigma = 1.267 \pm 0.005 \pm 0.053$ pb, where the uncertainties reflect the limited number of data events
+and the systematic uncertainties, giving a total uncertainty of $4.2\%$. The cross-section is measured differentially as a
+function of variables characterising the $t\bar{t}$ system and additional radiation in the events. The results are compared
+with various Monte Carlo generators, including comparisons where the generators are reweighted to match a parton-level
+calculation at next-to-next-to-leading order. The reweighting improves the agreement between data and theory. The measured
+distribution of the top-quark transverse momentum is used to search for new physics in the context of the effective field
+theory framework. No significant deviation from the Standard Model is observed and limits are set on the Wilson coefficients
+of the dimension-six operators $O_{tG}$ and $O_{tq}^{(8)}$, where the limits on the latter are the most stringent to date.'
+BibKey: ATLAS:2022xfj
+BibTeX: '@article{ATLAS:2022xfj,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Measurements of differential cross-sections in top-quark pair events with a high
+             transverse momentum top quark and limits on beyond the Standard Model contributions
+             to top-quark pair production with the ATLAS detector at $ \sqrt{s} $ = 13 TeV}",
+    eprint = "2202.12134",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2022-003",
+    doi = "10.1007/JHEP06(2022)063",
+    journal = "JHEP",
+    volume = "06",
+    pages = "063",
+    year = "2022"
+}'
+ReleaseTests:
+ - $A pp-13000-ttbar-sl-boosted

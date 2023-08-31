@@ -25,6 +25,7 @@ from . import ATLAS_2019_I1720438
 from . import ATLAS_2019_I1734263
 from . import ATLAS_2019_I1746286
 from . import ATLAS_2020_I1790439
+from . import ATLAS_2022_I2037744
 from . import ATLAS_2022_I2077570
 from . import BABAR_2001_I558091
 from . import BABAR_2005_S6181155
@@ -52,6 +53,7 @@ from . import CLEOII_1999_I478217
 from . import CMD3_2016_I1385598
 from . import CMS_2016_I1487288
 from . import CMS_2017_I1608166
+from . import CMS_2017_I1631985
 from . import CRYSTAL_BALL_1988_I261078
 from . import CRYSTAL_BALL_1989_I263581
 from . import CRYSTAL_BALL_1991_I297905

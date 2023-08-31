@@ -1,0 +1,44 @@
+Name: CMS_2017_I1631985
+Year: 2017
+Summary: Measurement of differential cross sections in the kinematic angular variable $\phi$* for inclusive Z boson production in pp collisions at 8 TeV
+Experiment: CMS
+Collider: LHC
+InspireID: 1631985
+Status: VALIDATED
+Authors:
+ - cms-pag-conveners-smp@cern.ch
+ - Kyeongpil Lee <kplee@cern.ch>
+References:
+ - arXiv:1710.07955
+ - JHEP 03 (2018) 172
+ - CMS-SMP-17-002
+RunInfo: pp to Z interactions at $\sqrt{s} = 8$ TeV. Attention! Unfolded to the born lepton level, requires simulation without QED FSR if used for high-precision studies. Data collected by CMS during the year 2012.
+Beams: [p+, p+]
+Energies: [8000]
+Luminosity_fb: 19.7
+Options:
+ - LMODE=EL,MU,EMU
+ - TWODIM=YES,NO
+RefUnmatch: 'd07|d08'
+
+Description:
+  'Measurements of differential cross sections d$\sigma$/d$\phi^*$ and double-differential cross sections d$\sigma^{2}$/d$\phi^*$d|y| for inclusive Z boson production are presented using the dielectron and dimuon final states at the born level. The kinematic observable $\phi$* correlates with the dilepton transverse momentum but has better resolution, and y is the dilepton rapidity. The analysis is based on data collected with the CMS experiment at a centre-of-mass energy of 8 TeV corresponding to an integrated luminosity of 19.7 fb$^{-1}$. The normalised cross section (1/$\sigma$) d$\sigma$/d$\phi^*$, within the fiducial kinematic region, is measured with a precision of better than 0.5% for $\phi$* < 1. The measurements are compared to theoretical predictions and they agree, typically, within few percent.'
+
+BibKey: CMS:2017lvz
+BibTeX: '@article{CMS:2017lvz,
+    author = "Sirunyan, A. M. and others",
+    collaboration = "CMS",
+    title = "{Measurement of differential cross sections in the kinematic angular variable $\phi^*$ for inclusive Z boson production in pp collisions at $\sqrt{s}=$ 8 TeV}",
+    eprint = "1710.07955",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CMS-SMP-17-002, CERN-EP-2017-234",
+    doi = "10.1007/JHEP03(2018)172",
+    journal = "JHEP",
+    volume = "03",
+    pages = "172",
+    year = "2018"
+}'
+
+ReleaseTests:
+ - $A pp-8000-Zee-jets :LMODE=EL
