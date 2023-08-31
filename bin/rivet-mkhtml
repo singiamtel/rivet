@@ -471,13 +471,26 @@ if not args.DRY_RUN:
         if analysis in official_routines:
             reflist.append('<a href="https://rivet.hepforge.org/analyses/%s.html">Analysis reference</a>' % analysis)
         for i, ref in enumerate(references):
-            if "arXiv" in ref:
-                try:
+            try:
+                if ref.startswith("arXiv:"):
                     arxivID = ref.split(' ')[0].split(':')[-1]
                     if arxivID:
                         references[i] = '<a href="https://arxiv.org/abs/%s">arXiv:%s</a>' % (arxivID, arxivID)
-                except:
-                    pass
+                elif ref.startswith("doi:"):
+                    doi = ref.split(' ')[0].split(':')[-1]
+                    if doi:
+                        references[i] = '<a href="https://dx.doi.org/%s">doi:%s</a>' % (doi, doi)
+                elif ref.startswith("ATLAS-"):
+                    code = ref.replace("ATLAS-", "")
+                    url = "https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/" + code
+                    references[i] = '<a href="%s">%s</a>' % (url, ref)
+                elif ref.startswith("CMS-"):
+                    code = ref.replace("CMS-", "")
+                    url = "https://cms-results.web.cern.ch/cms-results/public-results/publications/" + code
+                    references[i] = '<a href="%s">%s</a>' % (url, ref)
+            except:
+                pass
+
         reflist += references
         index.write('<p>%s</p>\n' % " &#124; ".join(reflist))
 
