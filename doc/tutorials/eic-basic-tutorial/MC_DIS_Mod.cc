@@ -14,7 +14,7 @@ namespace Rivet {
     }
     virtual ~MC_DIS_CALIB() {}
 
-    DEFAULT_RIVET_PROJ_CLONE(MC_DIS_CALIB);
+    RIVET_DEFAULT_PROJ_CLONE(MC_DIS_CALIB);
   
   protected:
     void project(const Event& e) {
@@ -29,9 +29,10 @@ namespace Rivet {
     }
   };
 
+  
   class MC_DIS_PERC : public Analysis {
   public:
-    DEFAULT_RIVET_ANALYSIS_CTOR(MC_DIS_PERC);
+    RIVET_DEFAULT_ANALYSIS_CTOR(MC_DIS_PERC);
 
     void init() {
       declare(MC_DIS_CALIB(),"PERC");
@@ -49,11 +50,13 @@ namespace Rivet {
 
   DECLARE_RIVET_PLUGIN(MC_DIS_PERC);
 
+
+  
   class MC_DIS_Mod : public Analysis {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(MC_DIS_Mod);
+    RIVET_DEFAULT_ANALYSIS_CTOR(MC_DIS_Mod);
     
     /// Initialize histograms, projections etc.
     void init() {

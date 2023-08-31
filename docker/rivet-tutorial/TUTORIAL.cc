@@ -12,7 +12,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(TUTORIAL);
+    RIVET_DEFAULT_ANALYSIS_CTOR(TUTORIAL);
 
 
     /// Book histograms and initialise projections before the run

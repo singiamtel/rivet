@@ -8,9 +8,11 @@
 #include "Rivet/Tools/RHICCommon.hh"
 
 namespace Rivet {
-  /// @brief Brahms centrality calibration analysis based on the
-  //  BrahmsCentrality projection. No data is given for this
-  //  analysis, so one MUST do a calibration run.
+
+  
+  /// @brief Brahms centrality calibration analysis based on the BrahmsCentrality projection.
+  ///
+  /// No data is given for this analysis, so one MUST do a calibration run.
   class BRAHMS_2004_AUAUCentrality : public Analysis {
   public:
     // Constructor

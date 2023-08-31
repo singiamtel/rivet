@@ -12,7 +12,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(TESTDET);
+    RIVET_DEFAULT_ANALYSIS_CTOR(TESTDET);
 
 
     /// @name Analysis methods
