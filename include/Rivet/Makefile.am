@@ -118,7 +118,10 @@ nobase_pkginclude_HEADERS += \
   Analyses/MC_Cent_pPb.hh \
   Analyses/MC_ParticleAnalysis.hh \
   Analyses/MC_JetAnalysis.hh \
-  Analyses/MC_JetSplittings.hh
+  Analyses/MC_JetSplittings.hh \
+  Analyses/AliceCommon.hh \
+  Analyses/AtlasCommon.hh \
+  Analyses/RHICCommon.hh 
 
 ## Tools
 nobase_pkginclude_HEADERS += \

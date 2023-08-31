@@ -24,7 +24,7 @@ namespace Rivet {
     virtual ~STAR_BES_Centrality() {}
 
     /// Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(STAR_BES_Centrality);
+    RIVET_DEFAULT_PROJ_CLONE(STAR_BES_Centrality);
 
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
@@ -62,7 +62,7 @@ namespace Rivet {
     virtual ~BRAHMSCentrality() {}
 
     // Clone on the heap.
-    DEFAULT_RIVET_PROJ_CLONE(BRAHMSCentrality);
+    RIVET_DEFAULT_PROJ_CLONE(BRAHMSCentrality);
 
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;

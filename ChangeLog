@@ -1,3 +1,12 @@
+2023-08-31  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Fix residual DEFAULT_RIVET_... -> RIVET_DEFAULT macro invocations.
+
+	* Add include/Rivet/Analyses/<EXPT>Common.hh files and build info,
+	as a user-friendly front-end for the mix of projection and
+	non-projection common tools. Removed duplication between Tools and
+	Projections experiment-common files.
+
 2023-08-18  Christian Gutschow  <chris.g@cern.ch>
 
 	* Remove logic that parses info file from AnalysisInfo constructor

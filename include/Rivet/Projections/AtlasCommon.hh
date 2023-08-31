@@ -24,7 +24,7 @@ namespace Rivet {
       }
 
       /// Clone on the heap.
-      DEFAULT_RIVET_PROJ_CLONE(SumET_PB_Centrality);
+      RIVET_DEFAULT_PROJ_CLONE(SumET_PB_Centrality);
 
       /// Import to avoid warnings about overload-hiding
       using Projection::operator =;
@@ -63,7 +63,7 @@ namespace Rivet {
       }
 
       /// Clone on the heap.
-      DEFAULT_RIVET_PROJ_CLONE(SumET_PBPB_Centrality);
+      RIVET_DEFAULT_PROJ_CLONE(SumET_PBPB_Centrality);
 
       /// Import to avoid warnings about overload-hiding
       using Projection::operator =;
@@ -104,7 +104,7 @@ namespace Rivet {
       }
 
       /// Clone on the heap.
-      DEFAULT_RIVET_PROJ_CLONE(MinBiasTrigger);
+      RIVET_DEFAULT_PROJ_CLONE(MinBiasTrigger);
 
       /// Import to avoid warnings about overload-hiding
       using Projection::operator =;
