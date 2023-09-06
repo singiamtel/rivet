@@ -1,0 +1,42 @@
+Name: ALICE_2021_I1862793
+Year: 2021
+Summary: Prompt $\Xi_{\rm c}^{0}$ and $\Xi_{\rm c}^{+}$ analysis
+Experiment: ALICE
+Collider: LHC
+InspireID: 1862793
+Status: VALIDATED
+Authors:
+ - Yonne Lourens <yonne_14@live.nl>
+References:
+ - 'Phys. Rev. Lett. 127 (2021) 272001'
+ - 'DOI:10.1103/PhysRevLett.127.272001'
+ - 'arXiv:2105.05187'
+ - 'ALICE-7074'
+RunInfo: Minimum bias events
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 32e-6
+Description:
+The $\pt$-differential cross sections of prompt charm-strange baryons $\Xi^0_{\rm c}$ and $\Xi^+_{\rm c}$ were measured at midrapidity ($|y| < 0.5$) in proton--proton (pp) collisions at a centre-of-mass energy $\sqrt{s}=$~13~TeV with the ALICE detector at the LHC. The $\Xi^0_{\rm c}$ baryon was reconstructed via both the semileptonic decay ($\Xi^{-}{\rm e^{+}}\nu_{\rm e}$) and the hadronic decay ($\Xi^{-}{\rm \pi^{+}}$) channels. The $\Xi^+_{\rm c}$ baryon was reconstructed via the hadronic decay ($\Xi^{-}\pi^{+}\pi^{+}$) channel. The branching-fraction ratio $\rm {\rm BR}(\Xi_c^0\rightarrow \Xi^-e^+\nu_e)/\rm {\rm BR}(\Xi_c^0\rightarrow \Xi^{-}\pi^+)=$ 1.38 $\pm$ 0.14 (stat) $\pm$ 0.22 (syst) was measured with a total uncertainty reduced by a factor of about 3 with respect to the current world average reported by the Particle Data Group. The transverse momentum ($\pt$) dependence of the $\Xi^0_{\rm c}$- and $\Xi^+_{\rm c}$-baryon production relative to the ${\rm D^0}$-meson and to the $\Sigma^{0,+,++}_{\rm c}$- and $\Lambda^+_{\rm c}$-baryon production are reported. The baryon-to-meson ratio increases towards low \pt up to a value of approximately 0.3. The measurements are compared with various models that take different hadronisation mechanisms into consideration. The results provide stringent constraints to these theoretical calculations and additional evidence that different processes are involved in charm hadronisation in electron--positron ($\rm e^+e^-$) and hadronic collisions.
+Keywords: [pp collisions, 13 TeV, charm production]
+BibKey:  ALICE:2021rzj 
+BibTeX: '@article{ALICE:2021rzj,
+    author = "Acharya, Shreyasi and others",
+    collaboration = "ALICE",
+    title = "{Measurement of the cross sections of $\Xi^{0}_{\rm c}$ and $\Xi^+_{\rm c}$ baryons and of the branching-fraction ratio ${\rm BR}(\Xi^0_{\rm c} \rightarrow \Xi^{-}{\rm e}^{+}\nu_{\rm e})/ {\rm BR}(\Xi^0_{\rm c} \rightarrow \Xi^{-}{\pi}^{+})$ in pp collisions at $\sqrt{s}=$~13~TeV}",
+    eprint = "2105.05187",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2021-084",
+    doi = "10.1103/PhysRevLett.127.272001",
+    journal = "Phys. Rev. Lett.",
+    volume = "127",
+    number = "27",
+    pages = "272001",
+    year = "2021"
+}'
+
+
+
+
+
