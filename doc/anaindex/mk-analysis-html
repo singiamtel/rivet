@@ -141,6 +141,10 @@ for aname in sorted(all_analyses, key=anasort):
                     code = r.replace("doi:", "")
                     url = "https://dx.doi.org/" + code
                     page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("DOI:", htmlify(url), htmlify(code))
+                elif ref.startswith("ALICE-"):
+                    code = ref.replace("ALICE-", "")
+                    url = "https://alice-publications.web.cern.ch/node/" + code
+                    references[i] = '<a href="%s">%s</a>' % (url, ref)
                 elif r.startswith("ATLAS-"):
                     code = r.replace("ATLAS-", "")
                     url = "https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/" + code
