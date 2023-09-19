@@ -346,6 +346,10 @@ def generateScripts(args):
                         doi = ref.split(' ')[0].split(':')[-1]
                         if doi:
                             references[i] = '<a href="https://dx.doi.org/%s">doi:%s</a>' % (doi, doi)
+                    elif ref.startswith("ALICE-"):
+                        code = ref.replace("ALICE-", "")
+                        url = "https://alice-publications.web.cern.ch/node/" + code
+                        references[i] = '<a href="%s">%s</a>' % (url, ref)
                     elif ref.startswith("ATLAS-"):
                         code = ref.replace("ATLAS-", "")
                         url = "https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/" + code

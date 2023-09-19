@@ -69,12 +69,10 @@ namespace Rivet {
 
 
     bool readEvent(std::shared_ptr<HepMC_IO_type> io, std::shared_ptr<GenEvent> evt) {
-      return io->read_event(*evt) && !io->failed();
-      /// @todo Any problem due to these?! Factored failure return-lines are nicer if we can have them
-      // if (!io->read_event(*evt)) return false;
-      // if (io->failed()) return false;
-      /// @todo Check that this is working when reading from a MEV-unit file... or should the reader auto-convert evt is GEV and io is MEV?
+      io->read_event(*evt);
+      if (io->failed()) return false;
       evt->set_units(HepMC3::Units::GEV, HepMC3::Units::MM);
+      return true;
     }
 
 

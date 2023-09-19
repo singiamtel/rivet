@@ -36,7 +36,7 @@ namespace Rivet {
     static Matrix3 mkZRotation(const double angle) {
       return Matrix3(Vector3(0,0,1), angle);
     }
-
+    
     Matrix3& setAsRotation(const Vector3& from, const Vector3& to) {
       const double theta = angle(from, to);
       if (Rivet::isZero(theta)) {
@@ -46,6 +46,12 @@ namespace Rivet {
         _matrix = RivetEigen::AngleAxis<double>(theta, normaxis._vec);
       }
       return *this;
+    }
+    
+    static Matrix3 mkRotation(const Vector3& from, const Vector3& to) {
+      Matrix3 rtn;
+      rtn.setAsRotation(from, to);
+      return rtn;
     }
 
   };
