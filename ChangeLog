@@ -3,6 +3,10 @@
 	* Add a Matrix3::mkRotation(from, to) static factory function, for
 	one-liner convenience.
 
+2023-09-07  Christian Gutschow  <chris.g@cern.ch>
+
+	* Fix unit conversion in HepMC3 readEvent method
+
 2023-08-31  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Fix CMS_2021_I1920187 to use size_t or unsigned int types in
