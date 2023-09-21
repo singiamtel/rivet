@@ -166,7 +166,7 @@ namespace Rivet {
       scale(_h, norm);
 
       for (auto& item : _h_norm) {
-        const double rho = item.second->density(false);
+        const double rho = item.second->densitySum(false);
         if (rho)  scale(item.second, 1.0/rho);
       }
 

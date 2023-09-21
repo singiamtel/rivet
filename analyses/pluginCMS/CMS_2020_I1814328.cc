@@ -129,7 +129,7 @@ namespace Rivet {
 
       normalize(_h_WW_njets_norm );
       for (auto& item : _h) {
-        const double rho = item.second->density();
+        const double rho = item.second->densitySum();
         if (rho)  scale(item.second, 1.0/rho);
       }
       scale(_h_WW_njet0, norm);

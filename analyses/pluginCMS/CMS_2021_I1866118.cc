@@ -97,7 +97,7 @@ namespace Rivet {
       scale(h_reldpt_j1j2_Z2J_cn, norm);
 
       for (auto& item : _h) {
-        double rho = item.second->density(false);
+        double rho = item.second->densitySum(false);
         if (rho)  scale(item.second, 1.0/rho);
       }
     }
