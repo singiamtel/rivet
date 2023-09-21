@@ -100,24 +100,15 @@ namespace Rivet {
     void finalize() {
       double fact = crossSection()/picobarn/sumOfWeights();
       for(unsigned int ix=0;ix<2; ++ix) {
-	double sigma = _nMeson[ix]->val()*fact;
-	double error = _nMeson[ix]->err()*fact;
-	Scatter2D temphisto(refData(1, 1, 1+ix));
-	Scatter2DPtr  mult;
-	book(mult, 1, 1, 1+ix);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, sigma, ex, make_pair(error,error));
-	  }
-	  else {
-	    mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+        double sigma = _nMeson[ix]->val()*fact;
+        double error = _nMeson[ix]->err()*fact;
+        Estimate1DPtr  mult;
+        book(mult, 1, 1, 1+ix);
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
+          }
+        }
       }
     }
 

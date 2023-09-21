@@ -326,7 +326,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double sf = crossSection()/femtobarn/sumOfWeights();
-      for (const auto& kv : _h) scale(kv.second, sf);
+      scale(_h, sf);
       // if we are running both e and mu, the combined lepton histos
       // need to be divided by two to get the average
       if (_mode == 0 || _mode == 4){

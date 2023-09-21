@@ -32,72 +32,48 @@ namespace Rivet {
 
       map<long,int> nCount;
       int ntotal(0);
-      unsigned int nCharged(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
-	if(PID::isCharged(p.pid())) ++nCharged;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
-      // mu+mu- + photons
-      if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	_c_muons->fill();
-      // everything else
+      if(nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) {
+        // mu+mu- + photons
+        _c_muons->fill();
+      }
       else {
-	_c_hadrons->fill();
+        // everything else
+        _c_hadrons->fill();
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter1D R = (*_c_hadrons/ *_c_muons).mkScatter();
-      double              rval = R.point(0).x();
-      pair<double,double> rerr = R.point(0).xErrs();
+      Estimate0D R = *_c_hadrons/ *_c_muons;
       double fact = crossSection()/ sumOfWeights() /nanobarn;
       double sig_h = _c_hadrons->val()*fact;
       double err_h = _c_hadrons->err()*fact;
       double sig_m = _c_muons  ->val()*fact;
       double err_m = _c_muons  ->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr hadrons;
+      Estimate1DPtr hadrons;
       book(hadrons, "sigma_hadrons");
-      Scatter2DPtr muons;
+      Estimate1DPtr muons;
       book(muons, "sigma_muons"  );
-      Scatter2DPtr mult;
+      Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	  mult   ->addPoint(x, rval, ex, rerr);
-	  hadrons->addPoint(x, sig_h, ex, make_pair(err_h,err_h));
-	  muons  ->addPoint(x, sig_m, ex, make_pair(err_m,err_m));
-	}
-	else {
-	  mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	  hadrons->addPoint(x, 0., ex, make_pair(0.,.0));
-	  muons  ->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
+      for (auto& b : mult->bins()) {
+        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+          b.set(R.val(), R.errPos());
+          hadrons->bin(b.index()).set(sig_h, err_h);
+          muons  ->bin(b.index()).set(sig_m, err_m);
+        }
       }
       // cross section
-      Scatter2D temphisto2(refData(2, 1, 1));
       book(hadrons, 2, 1, 1);
-      for (size_t b = 0; b < temphisto2.numPoints(); b++) {
-	const double x  = temphisto2.point(b).x();
-	pair<double,double> ex = temphisto2.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	  hadrons->addPoint(x, sig_h, ex, make_pair(err_h,err_h));
-	}
-	else {
-	  hadrons->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
+      for (auto& b : hadrons->bins()) {
+        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+          b.set(sig_h, err_h);
+        }
       }
     }
 

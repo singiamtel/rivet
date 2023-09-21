@@ -255,15 +255,12 @@ namespace Rivet {
         }
       }
 
-      Histo1D temphisto(refData(1, 1, 1));
       const double avgNumParts = dbl(*_weightedTotalChargedPartNum) / sumOfWeights();
 
 
-      for (size_t b = 1; b < temphisto.numBins()+1; b++) {
-        const double x  = temphisto.bin(b).xMid();
-        const double ex = temphisto.bin(b).xWidth()/2.;
-        if (inRange(sqrtS()/GeV, x-ex, x+ex)) {
-          mult->addPoint(x, avgNumParts, ex, 0.);
+      for (auto& b : mult->bins()) {
+        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+          b.set(avgNumParts, 0.);
         }
       }
 
@@ -284,7 +281,7 @@ namespace Rivet {
     bool _initialisedJets = false;
     bool _initialisedSpectra = false;
 
-    Scatter2DPtr mult;
+    Estimate1DPtr mult;
     Histo1DPtr _h_xp;
     Histo1DPtr _h_xi;
     Histo1DPtr _h_xe;

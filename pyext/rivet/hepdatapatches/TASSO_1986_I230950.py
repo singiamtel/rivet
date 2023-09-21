@@ -1,11 +1,11 @@
-# fix bin widths (one in hepdata are for p not x)
+import yoda
+
 def patch(path, ao):
+    # fix bin widths (the ones in hepdata are for p not x)
     if path == "/REF/TASSO_1986_I230950/d02-x01-y01" :
-        bins = [0.7,1.0,1.5,2.0,3.0,4.0,6.0,10.0,17.0]
-        i=0
-        for p in ao.points() :
-            low = p.x()-2.*bins[i]/34.4
-            upp = 2.*bins[i+1]/34.4-p.x()
-            p.setXErrs((low,upp))
-            i+=1
+        bins =  [ 2.*b/34.4 for b in ao.xEdges() ]
+        newao = yoda.BinnedEstimate1D(bins, ao.path())
+        for b in ao.bins():
+            newao.set(b.index(), b)
+        ao = newao
     return ao

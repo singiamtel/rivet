@@ -26,16 +26,16 @@ namespace Rivet {
       declare(fj06, "AntiKT06");
 
       // |y| and ystar bins
-      const int nybins = 6;
-      double ybins[nybins+1] = { 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
+      const vector<double> ybins{ 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
 
       // Book histograms
       // pT histograms
-      for (size_t i = 0; i < nybins; ++i){ // loop over |y| bins
-        {Histo1DPtr tmp; _pThistograms6.add(ybins[i], ybins[i+1], book(tmp, i+1,1,1));}
-        {Histo1DPtr tmp; _pThistograms4.add(ybins[i], ybins[i+1], book(tmp, i+7,1,1));}
+      book(_pThistograms6, ybins);
+      book(_pThistograms4, ybins);
+      for (size_t i = 0; i < _pThistograms4->numBins(); ++i) {
+        book(_pThistograms6->bin(i+1), i+1, 1, 1);
+        book(_pThistograms4->bin(i+1), i+7, 1, 1);
       }
-
     }
 
 
@@ -53,14 +53,14 @@ namespace Rivet {
         FourMomentum jet = kt4Jets[ijet].momentum();
         // pT selection
         const double absy = jet.absrap();
-        _pThistograms4.fill(absy,jet.pt()/GeV);
+        _pThistograms4->fill(absy,jet.pt()/GeV);
       }
 
       for(int ijet=0;ijet<nJets6;++ijet){ // loop over jets
         FourMomentum jet = kt6Jets[ijet].momentum();
         // pT selection
         const double absy = jet.absrap();
-        _pThistograms6.fill(absy,jet.pt()/GeV);
+        _pThistograms6->fill(absy,jet.pt()/GeV);
       }
 
 
@@ -70,25 +70,20 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      const double xs_pb( crossSection() / picobarn );
-      const double sumW( sumOfWeights() );
-      const double xs_norm_factor( 0.5*xs_pb / sumW );
+      const double xs_norm_factor = 0.5*crossSection() / picobarn / sumOfWeights();
 
-      MSG_DEBUG( "Cross-Section/pb     : " << xs_pb       );
-      MSG_DEBUG( "ZH                   : " << crossSectionPerEvent()/ picobarn);
-      MSG_DEBUG( "Sum of weights       : " << sumW        );
-      MSG_DEBUG( "nEvents              : " << numEvents() );
-      _pThistograms4.scale(xs_norm_factor, this);
-      _pThistograms6.scale(xs_norm_factor, this);
+      scale(_pThistograms4, xs_norm_factor);
+      scale(_pThistograms6, xs_norm_factor);
+      divByGroupWidth({_pThistograms4, _pThistograms6});
 
     }
 
   private:
 
     // The inclusive pT spectrum for akt4 jets
-    BinnedHistogram _pThistograms4;
+    Histo1DGroupPtr _pThistograms4;
     // The inclusive pT spectrum for akt6 jets
-    BinnedHistogram _pThistograms6;
+    Histo1DGroupPtr _pThistograms6;
 
   };
 

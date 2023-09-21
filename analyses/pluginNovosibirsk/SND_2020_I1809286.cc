@@ -114,50 +114,41 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      if(_h_x) {
-	normalize(_h_x,1.,false);
-	normalize(_h_m,1.,false);
+      if (_h_x) {
+        normalize(_h_x,1.,false);
+        normalize(_h_m,1.,false);
       }
       double fact = crossSection()/nanobarn/sumOfWeights();
-      for(unsigned int ix=1;ix<4;++ix) {
-	unsigned int ymax = ix!=3 ? 2 : 4;
-	for(unsigned int iy=1;iy<ymax;++iy) {
-	  double sigma(0.),error(0.);
-	  if(ix<3) {
-	    sigma = _c_total->val()*fact;
-	    error = _c_total->err()*fact;
-	  }
-	  else if(ix==3) {
-	    if(iy==1) {
-	      sigma = _c_rho->val()*fact;
-	      error = _c_rho->err()*fact;
-	    }
-	    else if(iy==2) {
-	      sigma = _c_rhop->val()*fact;
-	      error = _c_rhop->err()*fact;
-	    }
-	    else {
-	      sigma = _c_omega->val()*fact;
-	      error = _c_omega->err()*fact;
-	    }
-	  }
-	  Scatter2D temphisto(refData(ix, 1, iy));
-	  Scatter2DPtr  mult;
-	  book(mult, ix, 1, iy);
-	  for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	    const double x  = temphisto.point(b).x();
-	    pair<double,double> ex = temphisto.point(b).xErrs();
-	    pair<double,double> ex2 = ex;
-	    if(ex2.first ==0.) ex2. first=0.0001;
-	    if(ex2.second==0.) ex2.second=0.0001;
-	    if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	      mult->addPoint(x, sigma, ex, make_pair(error,error));
-	    }
-	    else {
-	      mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	    }
-	  }
-	}
+      for (unsigned int ix=1;ix<4;++ix) {
+        unsigned int ymax = ix!=3 ? 2 : 4;
+        for (unsigned int iy=1;iy<ymax;++iy) {
+          double sigma(0.),error(0.);
+          if(ix<3) {
+            sigma = _c_total->val()*fact;
+            error = _c_total->err()*fact;
+          }
+          else if(ix==3) {
+            if(iy==1) {
+              sigma = _c_rho->val()*fact;
+              error = _c_rho->err()*fact;
+            }
+            else if(iy==2) {
+              sigma = _c_rhop->val()*fact;
+              error = _c_rhop->err()*fact;
+            }
+            else {
+              sigma = _c_omega->val()*fact;
+              error = _c_omega->err()*fact;
+            }
+          }
+          Estimate1DPtr  mult;
+          book(mult, ix, 1, iy);
+          for (auto& b : mult->bins()) {
+            if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+              b.set(sigma, error);
+            }
+          }
+        }
       }
     }
 

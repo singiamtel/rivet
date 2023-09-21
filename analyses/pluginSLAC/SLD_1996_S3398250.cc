@@ -96,12 +96,9 @@ namespace Rivet {
     }
 
 
-    void multiplicity_subtract(const Histo1DPtr first, const Histo1DPtr second, Scatter2DPtr & scatter) {
-      const double x  = first->bin(1).xMid();
-      const double ex = 0.5*first->bin(1).xWidth();
-      const double y  = first->bin(1).sumW() - second->bin(1).sumW();
-      const double ey = sqrt(sqr(first->bin(1).errW()) + sqr(second->bin(1).errW()));
-      scatter->addPoint(x, y, ex, ey);
+    void multiplicity_subtract(const Histo1DPtr first, const Histo1DPtr second, Estimate1DPtr & estimate) {
+      const auto diff = first->bin(1) - second->bin(1);
+      estimate->bin(1).set(diff.sumW(), diff.errW());
     }
 
 
@@ -120,7 +117,7 @@ namespace Rivet {
   private:
 
     /// Histograms
-    Scatter2DPtr scatter_c, scatter_b;
+    Estimate1DPtr scatter_c, scatter_b;
     Histo1DPtr _h_bottom, _h_charm, _h_light;
 
     /// Weights

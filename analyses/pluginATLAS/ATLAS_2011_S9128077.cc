@@ -30,8 +30,8 @@ namespace Rivet {
       declare(j6, "AntiKtJets06");
 
       // Persistent histograms
-      book(_h_jet_multi_inclusive ,1, 1, 1);
-      book(_h_jet_multi_ratio, 2, 1, 1, true);
+      book(_h_jet_multi_inclusive, 1, 1, 1);
+      book(_h_jet_multi_ratio, 2, 1, 1);
       _h_jet_pT.resize(4);
       book(_h_jet_pT[0] ,3, 1, 1);
       book(_h_jet_pT[1] ,4, 1, 1);
@@ -74,6 +74,9 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      if (_sedges.empty())  _sedges = _h_jet_multi_inclusive->xEdges();
+
       vector<FourMomentum> jets04;
       for (const Jet& jet : apply<FastJets>(event, "AntiKtJets04").jetsByPt(60.0*GeV)) {
         if (jet.abseta() < 2.8) {
@@ -83,7 +86,7 @@ namespace Rivet {
 
       if (jets04.size() > 1 && jets04[0].pT() > 80.0*GeV) {
         for (size_t i = 2; i <= jets04.size(); ++i) {
-          _h_jet_multi_inclusive->fill(i);
+          _h_jet_multi_inclusive->fill(discEdge(i));
         }
 
         double HT = 0.0;
@@ -174,15 +177,13 @@ namespace Rivet {
       scale(_h_tmp_HT2_R04_3, crossSectionPerEvent());
 
       // Fill inclusive jet multiplicity ratio
-      for (size_t i = 1; i < _h_jet_multi_ratio->numPoints()+1; ++i) {
-        if (_h_jet_multi_inclusive->bin(i).sumW()) {
-          const double val = _h_jet_multi_inclusive->bin(i+1).sumW() / _h_jet_multi_inclusive->bin(i).sumW();
+      for (auto& b : _h_jet_multi_ratio->bins()) {
+        size_t idx = b.index();
+        if (_h_jet_multi_inclusive->bin(idx).sumW()) {
+          const double val = _h_jet_multi_inclusive->bin(idx+1).sumW() / _h_jet_multi_inclusive->bin(idx).sumW();
           // @todo Shouldn't these be added in quadrature??
-          const double err = ( _h_jet_multi_inclusive->bin(i+1).relErrW() + _h_jet_multi_inclusive->bin(i).relErrW() ) * val;
-          _h_jet_multi_ratio->point(i-1).setY(val, err);
-        }
-        else {
-          _h_jet_multi_ratio->point(i-1).setY(0., 0.);
+          const double err = ( _h_jet_multi_inclusive->bin(idx+1).relErrW() + _h_jet_multi_inclusive->bin(idx).relErrW() ) * val;
+          b.set(val, err);
         }
       }
 
@@ -197,6 +198,12 @@ namespace Rivet {
       divide(_h_tmp_HT2_R04_3,_h_tmp_HT2_R04_2, _h_HT2_R04_ratio);
     }
 
+    string discEdge(size_t m) const {
+      size_t idx = m - 2;
+      if (idx < _sedges.size())  return _sedges[idx];
+      return "OTHER";
+    }
+
     /// @}
 
 
@@ -204,8 +211,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_jet_multi_inclusive;
-    Scatter2DPtr _h_jet_multi_ratio;
+    BinnedHistoPtr<string> _h_jet_multi_inclusive;
+    BinnedEstimatePtr<string> _h_jet_multi_ratio;
+    vector<string> _sedges;
+
     vector<Histo1DPtr> _h_jet_pT;
     Histo1DPtr _h_HT_2;
     Histo1DPtr _h_HT_3;
@@ -214,9 +223,9 @@ namespace Rivet {
 
     /// @name Ratio histograms
     /// @{
-    Scatter2DPtr _h_pTlead_R06_60_ratio, _h_pTlead_R06_80_ratio, _h_pTlead_R06_110_ratio;
-    Scatter2DPtr _h_pTlead_R04_60_ratio, _h_pTlead_R04_80_ratio, _h_pTlead_R04_110_ratio;
-    Scatter2DPtr _h_HT2_R06_ratio, _h_HT2_R04_ratio;
+    Estimate1DPtr _h_pTlead_R06_60_ratio, _h_pTlead_R06_80_ratio, _h_pTlead_R06_110_ratio;
+    Estimate1DPtr _h_pTlead_R04_60_ratio, _h_pTlead_R04_80_ratio, _h_pTlead_R04_110_ratio;
+    Estimate1DPtr _h_HT2_R06_ratio, _h_HT2_R04_ratio;
     /// @}
 
     /// @name Temporary histograms to be divided for the dsigma3/dsigma2 ratios

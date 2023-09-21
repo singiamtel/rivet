@@ -24,20 +24,28 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
       // book histos
       book(_h_Xi_c,1,1,1);
+      _axis = YODA::Axis<double>(5, 0.5, 1.0);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty())  _edges = _h_Xi_c->xEdges();
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
       const double Emax = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
       const double Pmax = sqrt(sqr(Emax)-sqr(2.578));
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles(Cuts::abspid==4312 or Cuts::abspid==4322)) {
-	double xp = p.momentum().p3().mod()/Pmax;
-        _h_Xi_c->fill(xp);
+        double xp = p.momentum().p3().mod()/Pmax;
+        _h_Xi_c->fill(map2string(xp));
       }
+    }
+
+    string map2string(const double value) const {
+      const size_t idx = _axis.index(value);
+      if (idx && idx <= _edges.size())  return _edges[idx-1];
+      return "OTHER";
     }
 
 
@@ -51,7 +59,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_Xi_c;
+    BinnedHistoPtr<string> _h_Xi_c;
+    YODA::Axis<double> _axis;
+    vector<string> _edges;
     /// @}
 
 

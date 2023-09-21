@@ -129,7 +129,6 @@ nobase_pkginclude_HEADERS += \
   Tools/AtlasCommon.hh \
   Tools/Beams.hh \
   Tools/BeamConstraint.hh \
-  Tools/BinnedHistogram.hh \
   Tools/CentralityBinner.hh \
   Tools/Cmp.fhh \
   Tools/Cmp.hh \
@@ -138,6 +137,7 @@ nobase_pkginclude_HEADERS += \
   Tools/Cuts.fhh \
   Tools/Cuts.hh \
   Tools/Exceptions.hh \
+  Tools/HistoGroup.hh \
   Tools/JetUtils.hh \
   Tools/Logging.hh  \
   Tools/MendelMin.hh  \

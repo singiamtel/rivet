@@ -37,11 +37,11 @@ namespace Rivet {
       book(h_reldpt_Zdijet_Z2J_cn, 4, 1, 1);
       book(h_reldpt_j1j2_Z2J_cn, 5, 1, 1);
 
-      book(h_dphi_Z1J_sc, 6, 1, 1);
-      book(h_reldpt_Z1J_sc, 7, 1, 1);
-      book(h_dphi_Zdijet_Z2J_sc, 8, 1, 1);
-      book(h_reldpt_Zdijet_Z2J_sc, 9, 1, 1);
-      book(h_reldpt_j1j2_Z2J_sc, 10, 1, 1);
+      book(_h["dphi_Z1J"], 6, 1, 1);
+      book(_h["reldpt_Z1J"], 7, 1, 1);
+      book(_h["dphi_Zdijet_Z2J"], 8, 1, 1);
+      book(_h["reldpt_Zdijet_Z2J"], 9, 1, 1);
+      book(_h["reldpt_j1j2_Z2J"], 10, 1, 1);
     }
 
     /// Perform the per-event analysis
@@ -69,8 +69,8 @@ namespace Rivet {
         h_dphi_Z1J_cn->fill(deltaPhi(zmumus[0], jets[0]));
         h_reldpt_Z1J_cn->fill((zmumus[0] + jets[0].momentum()).pt() / (zmumus[0].pt() + jets[0].pt()));
 
-        h_dphi_Z1J_sc->fill(deltaPhi(zmumus[0], jets[0]));
-        h_reldpt_Z1J_sc->fill((zmumus[0] + jets[0].momentum()).pt() / (zmumus[0].pt() + jets[0].pt()));
+        _h["dphi_Z1J"]->fill(deltaPhi(zmumus[0], jets[0]));
+        _h["reldpt_Z1J"]->fill((zmumus[0] + jets[0].momentum()).pt() / (zmumus[0].pt() + jets[0].pt()));
       }
 
       if (Njets >= 2) {
@@ -80,18 +80,10 @@ namespace Rivet {
         h_reldpt_Zdijet_Z2J_cn->fill((zmumus[0] + dij).pt() / (zmumus[0].pt() + dij.pt()));
         h_reldpt_j1j2_Z2J_cn->fill(dij.pt() / (jets[0].pt() + jets[1].pt()));
 
-        h_dphi_Zdijet_Z2J_sc->fill(deltaPhi(zmumus[0], dij));
-        h_reldpt_Zdijet_Z2J_sc->fill((zmumus[0] + dij).pt() / (zmumus[0].pt() + dij.pt()));
-        h_reldpt_j1j2_Z2J_sc->fill(dij.pt() / (jets[0].pt() + jets[1].pt()));
+        _h["dphi_Zdijet_Z2J"]->fill(deltaPhi(zmumus[0], dij));
+        _h["reldpt_Zdijet_Z2J"]->fill((zmumus[0] + dij).pt() / (zmumus[0].pt() + dij.pt()));
+        _h["reldpt_j1j2_Z2J"]->fill(dij.pt() / (jets[0].pt() + jets[1].pt()));
       }
-    }
-
-    void normalizeToSum(Histo1DPtr hist) {
-      double sum = 0.;
-      for (size_t i = 1; i < hist->numBins()+1; ++i) {
-        sum += hist->bin(i).sumW();
-      }
-      scale(hist, 1. / sum);
     }
 
     /// Normalise histograms etc., after the run
@@ -104,11 +96,10 @@ namespace Rivet {
       scale(h_reldpt_Zdijet_Z2J_cn, norm);
       scale(h_reldpt_j1j2_Z2J_cn, norm);
 
-      normalizeToSum(h_dphi_Z1J_sc);
-      normalizeToSum(h_reldpt_Z1J_sc);
-      normalizeToSum(h_dphi_Zdijet_Z2J_sc);
-      normalizeToSum(h_reldpt_Zdijet_Z2J_sc);
-      normalizeToSum(h_reldpt_j1j2_Z2J_sc);
+      for (auto& item : _h) {
+        double rho = item.second->density(false);
+        if (rho)  scale(item.second, 1.0/rho);
+      }
     }
 
   private:
@@ -120,11 +111,7 @@ namespace Rivet {
     Histo1DPtr h_reldpt_Zdijet_Z2J_cn;
     Histo1DPtr h_reldpt_j1j2_Z2J_cn;
 
-    Histo1DPtr h_dphi_Z1J_sc;
-    Histo1DPtr h_reldpt_Z1J_sc;
-    Histo1DPtr h_dphi_Zdijet_Z2J_sc;
-    Histo1DPtr h_reldpt_Zdijet_Z2J_sc;
-    Histo1DPtr h_reldpt_j1j2_Z2J_sc;
+    map<string,Histo1DPtr> _h;
 
     //@}
   };

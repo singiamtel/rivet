@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ZFinder.hh"
 
@@ -28,17 +27,13 @@ namespace Rivet {
       declare(zfinder_mm, "zfinder_mm");
 
       /// Book histograms here
-      {Histo1DPtr tmp; _h_phistar_ee.add(0.0, 1.0, book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _h_phistar_ee.add(1.0, 2.0, book(tmp, 1, 1, 2));}
-      {Histo1DPtr tmp; _h_phistar_ee.add(2.0, 10.0,book(tmp, 1, 1, 3));}
-      {Histo1DPtr tmp; _h_phistar_mm.add(0.0, 1.0, book(tmp, 2, 1, 1));}
-      {Histo1DPtr tmp; _h_phistar_mm.add(1.0, 2.0, book(tmp, 2, 1, 2));}
+      book(_h_phistar_ee, {0., 1., 2., 10.}, {"d01-x01-y01", "d01-x01-y02", "d01-x01-y03"});
+      book(_h_phistar_mm, {0., 1., 2.}, {"d02-x01-y01", "d02-x01-y02"});
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const ZFinder& zfinder_ee = apply<ZFinder>(event, "zfinder_ee");
       if (zfinder_ee.bosons().size() == 1) {
@@ -52,7 +47,7 @@ namespace Rivet {
         if (sin2thetastar < 0) sin2thetastar = 0;
         const double phistar = tan(phi_acop/2) * sqrt(sin2thetastar);
         const FourMomentum& zmom = zfinder_ee.bosons()[0].momentum();
-        _h_phistar_ee.fill(zmom.rapidity(), phistar, weight);
+        _h_phistar_ee->fill(zmom.rapidity(), phistar);
       }
 
       const ZFinder& zfinder_mm = apply<ZFinder>(event, "zfinder_mm");
@@ -67,15 +62,14 @@ namespace Rivet {
         if (sin2thetastar < 0) sin2thetastar = 0;
         const double phistar = tan(phi_acop/2) * sqrt(sin2thetastar);
         const FourMomentum& zmom = zfinder_mm.bosons()[0].momentum();
-        _h_phistar_mm.fill(zmom.rapidity(), phistar, weight);
+        _h_phistar_mm->fill(zmom.rapidity(), phistar);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (Histo1DPtr hist : _h_phistar_ee.histos()) normalize(hist);
-      for (Histo1DPtr hist : _h_phistar_mm.histos()) normalize(hist);
+      normalize({_h_phistar_ee, _h_phistar_mm});
     }
 
     /// @}
@@ -85,8 +79,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _h_phistar_ee;
-    BinnedHistogram _h_phistar_mm;
+    Histo1DGroupPtr _h_phistar_ee, _h_phistar_mm;
     /// @}
 
 

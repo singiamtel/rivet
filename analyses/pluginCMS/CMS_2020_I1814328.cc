@@ -55,17 +55,22 @@ namespace Rivet {
       declare(MissingMomentum(fs), "MET");
 
       // Book histograms
-      book(_h_WW_njets_norm , 2, 1, 1);
-      book(_h_WW_mll_norm   , 4, 1, 1);
-      book(_h_WW_ptlmax_norm, 5, 1, 1);
-      book(_h_WW_ptlmin_norm, 6, 1, 1);
-      book(_h_WW_dphill_norm, 7, 1, 1);
-      book(_h_WW_njet0      , 8, 1, 1);
+      book(_h_WW_njets_norm, 2, 1, 1);
+      book(_h["mll"], 4, 1, 1);
+      book(_h["ptlmax"], 5, 1, 1);
+      book(_h["ptlmin"], 6, 1, 1);
+      book(_h["dphill"], 7, 1, 1);
+      book(_h_WW_njet0, 8, 1, 1);
 
     }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      if (_edges.empty()) {
+        _edges = _h_WW_njets_norm->xEdges();
+        _edges0 = _h_WW_njet0->xEdges();
+      }
 
       // Apply a missing-momentum cut
       if (apply<MissingMomentum>(event, "MET").missingPt() < 20*GeV) return;
@@ -98,32 +103,22 @@ namespace Rivet {
           }
 
           if (leptons[0].abspid() != leptons[1].abspid()) {
-            _h_WW_njets_norm ->fill(min((double)jetsNj.size()+1, 2.999));
-            _h_WW_mll_norm   ->fill(min(dilCand.mass()/GeV, 1499.999));
-            _h_WW_ptlmax_norm->fill(min(ptlmax/GeV, 399.999));
-            _h_WW_ptlmin_norm->fill(min(ptlmin/GeV, 149.999));
-            _h_WW_dphill_norm->fill(deltaPhi(leptons[0], leptons[1]));
+            _h_WW_njets_norm ->fill(_edges[ min(jetsNj.size(), 2) ]);
+            _h["mll"]->fill(min(dilCand.mass()/GeV, 1499.999));
+            _h["ptlmax"]->fill(min(ptlmax/GeV, 399.999));
+            _h["ptlmin"]->fill(min(ptlmin/GeV, 149.999));
+            _h["dphill"]->fill(deltaPhi(leptons[0], leptons[1]));
           }
 
-          if (jets25.size() == 0) _h_WW_njet0->fill(1.0);
-          if (jets30.size() == 0) _h_WW_njet0->fill(2.0);
-          if (jets35.size() == 0) _h_WW_njet0->fill(3.0);
-          if (jets45.size() == 0) _h_WW_njet0->fill(4.0);
-          if (jets60.size() == 0) _h_WW_njet0->fill(5.0);
+          if (jets25.size() == 0) _h_WW_njet0->fill(_edges0[0]);
+          if (jets30.size() == 0) _h_WW_njet0->fill(_edges0[1]);
+          if (jets35.size() == 0) _h_WW_njet0->fill(_edges0[2]);
+          if (jets45.size() == 0) _h_WW_njet0->fill(_edges0[3]);
+          if (jets60.size() == 0) _h_WW_njet0->fill(_edges0[4]);
 
         }
       }
 
-    }
-
-
-    /// @todo Replace with barchart()
-    void normalizeToSum(Histo1DPtr hist) {
-      double sum = 0.;
-      for (size_t i = 1; i < hist->numBins()+1; ++i) {
-        sum += hist->bin(i).sumW();
-      }
-      scale(hist, 1./sum);
     }
 
 
@@ -132,12 +127,11 @@ namespace Rivet {
 
       double norm = (sumOfWeights() != 0) ? crossSection()/picobarn/sumOfWeights() : 1.0;
 
-      normalizeToSum(_h_WW_njets_norm );
-      normalizeToSum(_h_WW_mll_norm   );
-      normalizeToSum(_h_WW_ptlmax_norm);
-      normalizeToSum(_h_WW_ptlmin_norm);
-      normalizeToSum(_h_WW_dphill_norm);
-
+      normalize(_h_WW_njets_norm );
+      for (auto& item : _h) {
+        const double rho = item.second->density();
+        if (rho)  scale(item.second, 1.0/rho);
+      }
       scale(_h_WW_njet0, norm);
 
     }
@@ -147,9 +141,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_WW_njets_norm;
-    Histo1DPtr _h_WW_mll_norm, _h_WW_ptlmax_norm, _h_WW_ptlmin_norm, _h_WW_dphill_norm;
-    Histo1DPtr _h_WW_njet0;
+    BinnedHistoPtr<string> _h_WW_njets_norm, _h_WW_njet0;
+    map<string, Histo1DPtr> _h;
+    vector<string> _edges, _edges0;
     /// @}
 
   };

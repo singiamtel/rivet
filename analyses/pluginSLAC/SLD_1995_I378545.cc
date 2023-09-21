@@ -74,14 +74,14 @@ namespace Rivet {
           const double energy_j = p_j->momentum().E();
           const double thetaij = 180.*mom3_i.unit().angle(mom3_j.unit())/M_PI;
           double eec = (energy_i*energy_j) / Evis2;
-	  if(p_i != p_j)  eec *= 2.;
+          if (p_i != p_j)  eec *= 2.;
           _histEEC->fill(           thetaij, eec);
           if (thetaij <90.){
-	    _histAEEC->fill(thetaij, -eec);
-	  }
+            _histAEEC->fill(thetaij, -eec);
+          }
           else {
-	    _histAEEC->fill(180.-thetaij, eec);
-	  }
+            _histAEEC->fill(180.-thetaij, eec);
+          }
         }
       }
       // hemisphere related
@@ -100,10 +100,10 @@ namespace Rivet {
       // jet cone
       Vector3 jetAxis=thrust.thrustAxis();
       if(hemi.highMassDirection()) jetAxis *=-1.;
-      for(const Particle & p : fs.particles()) {
-	const double thetaij = 180.*jetAxis.angle(p.p3().unit())/M_PI;
-	double jcef = p.E()/ Evis;
-	_histJCEF->fill(          thetaij,jcef);
+      for (const Particle & p : fs.particles()) {
+        const double thetaij = 180.*jetAxis.angle(p.p3().unit())/M_PI;
+        double jcef = p.E()/ Evis;
+        _histJCEF->fill(thetaij,jcef);
       }
     }
 

@@ -27,36 +27,60 @@ namespace Rivet {
       // Book histograms
       _iHist=-1;
       sqs = 1.;
-      if(isCompatibleWithSqrtS(12*GeV)) {
-	_iHist = 0;
-	sqs = 12.;
+      if (isCompatibleWithSqrtS(12*GeV)) {
+        _iHist = 0;
+        sqs = 12.;
       }
       else if (isCompatibleWithSqrtS(30*GeV)) {
-	_iHist = 1;
-	sqs = 30.;
+        _iHist = 1;
+        sqs = 30.;
       }
       else
-	MSG_ERROR("Beam energy " << sqrtS() << " GeV not supported!");
+        MSG_ERROR("Beam energy " << sqrtS() << " GeV not supported!");
 
-      book(_h_p_pi,3*_iHist+2,1,1);
-      book(_h_x_pi,3*_iHist+2,1,2);
-      book(_h_p_K ,3*_iHist+3,1,1);
-      book(_h_x_K ,3*_iHist+3,1,2);
-      book(_h_p_p ,3*_iHist+4,1,1);
-      book(_h_x_p ,3*_iHist+4,1,2);
+      book(_h["p_pi"],3*_iHist+2,1,1);
+      book(_h["x_pi"],3*_iHist+2,1,2);
+      book(_h["p_K"] ,3*_iHist+3,1,1);
+      book(_h["x_K"] ,3*_iHist+3,1,2);
+      book(_h["p_p"] ,3*_iHist+4,1,1);
+      book(_h["x_p"] ,3*_iHist+4,1,2);
 
-      book(_n_pi,"TMP/n_pi",refData(3*_iHist+ 8,1,1));
-      book(_d_pi,"TMP/d_pi",refData(3*_iHist+ 8,1,1));
-      book(_n_K ,"TMP/n_K" ,refData(3*_iHist+ 9,1,1));
-      book(_d_K ,"TMP/d_K" ,refData(3*_iHist+ 9,1,1));
-      book(_n_p ,"TMP/n_p" ,refData(3*_iHist+10,1,1));
-      book(_d_p ,"TMP/d_p" ,refData(3*_iHist+10,1,1));
+      tribook("pi", 3*_iHist+ 8, 1, 1);
+      tribook("K",  3*_iHist+ 9, 1, 1);
+      tribook("p",  3*_iHist+10, 1, 1);
 
+      if (_iHist) {
+        _axes["pi"] = YODA::Axis<double>({0.325, 0.375, 0.425, 0.5, 0.575, 0.7, 0.9, 1.1, 1.3, 1.5});
+        _axes["K"]  = YODA::Axis<double>({0.4, 0.5, 0.575, 0.7, 0.9, 1.1});
+        _axes["p"]  = YODA::Axis<double>({0.5, 0.7, 1.2325, 2.0975});
+        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.675, 0.925});
+      }
+      else {
+        _axes["pi"] = YODA::Axis<double>({0.3, 0.4, 0.5, 0.675, 1.05, 1.55});
+        _axes["K"]  = YODA::Axis<double>({0.4, 0.5, 0.675, 0.925});
+        _axes["p"]  = YODA::Axis<double>({0.475, 0.725, 1.2125, 1.9375});
+        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.575, 0.7, 0.9, 1.1});
+      }
+      _axes["rp"]  = YODA::Axis<double>({0.475, 0.725, 1.0, 2.2});
+    }
+
+    void tribook(const string& label, unsigned int d, unsigned int x, unsigned int y) {
+      book(_h["n_"+label], "TMP/n_"+label, refData<YODA::BinnedEstimate<string>>(d, x, y));
+      book(_h["d_"+label], "TMP/d_"+label, refData<YODA::BinnedEstimate<string>>(d, x, y));
+      book(_r[label], d, x, y);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty()) {
+        for (const auto& item : _h) {
+          _edges[item.first] = item.second->xEdges();
+        }
+        for (const auto& item : _r) {
+          _edges["r"+item.first] = item.second->xEdges();
+        }
+      }
       // First, veto on leptonic events by requiring at least 4 charged FS particles
       const ChargedFinalState& fs = apply<ChargedFinalState>(event, "FS");
       const size_t numParticles = fs.particles().size();
@@ -74,51 +98,61 @@ namespace Rivet {
                                    beams.second.p3().mod() ) / 2.0;
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
-      for( const Particle& p : fs.particles()) {
-	double modp = p.p3().mod();
-	_d_pi->fill(modp);
-	_d_K->fill(modp);
-	_d_p ->fill(modp);
-	double beta = modp/p.E();
-	double xE = p.E()/meanBeamMom;
-	if(abs(p.pid())==211) {
-	  _h_p_pi->fill(modp);
-	  _h_x_pi->fill(xE  , 1./beta);
-	  _n_pi->fill(modp);
-	}
-	else if(abs(p.pid())==321) {
-	  _h_p_K->fill(modp);
-	  _h_x_K->fill(xE  ,1./beta);
-	  _n_K->fill(modp);
-	}
-	else if(abs(p.pid())==2212) {
-	  _h_p_p->fill(modp);
-	  _h_x_p->fill(xE  ,1./beta);
-	  _n_p ->fill(modp);
-	}
-
+      for (const Particle& p : fs.particles()) {
+        double modp = p.p3().mod();
+        fillND("d_pi", modp);
+        fillND("d_K", modp);
+        fillND("d_p", modp);
+        double beta = modp/p.E();
+        double xE = p.E()/meanBeamMom;
+        if (abs(p.pid())==211) {
+          fillhist("p_pi", modp);
+          fillhist("x_pi", xE, 1./beta);
+          fillND("n_pi", modp);
+        }
+        else if (abs(p.pid())==321) {
+          fillhist("p_K", modp);
+          fillhist("x_K", xE, 1./beta);
+          fillND("n_K", modp);
+        }
+        else if (abs(p.pid())==2212) {
+          fillhist("p_p", modp);
+          fillhist("x_p", xE, 1./beta);
+          fillND("n_p", modp);
+        }
       }
     }
 
+    void fillhist(const string& label, const double value, const double weight = 1.0) {
+      string edge = "OTHER";
+      const string tag = label.substr(2);
+      const size_t idx = _axes[tag].index(value);
+      if (idx && idx <= _edges[label].size())  edge = _edges[label][idx];
+      _h[label]->fill(edge, weight);
+    }
+
+    void fillND(const string& label, const double value) {
+      string edge = "OTHER";
+      const string tag = label.substr(2);
+      const size_t idx = _axes[(tag == "p")? "rp" : "r"].index(value);
+      if (idx && idx <= _edges["r"+tag].size())  edge = _edges[label][idx];
+      _h[label]->fill(edge);
+    }
 
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      scale(_h_p_pi , crossSection()/nanobarn/sumOfWeights());
-      scale(_h_x_pi , sqr(sqs)*crossSection()/microbarn/sumOfWeights());
-      scale(_h_p_K  , crossSection()/nanobarn/sumOfWeights());
-      scale(_h_x_K  , sqr(sqs)*crossSection()/microbarn/sumOfWeights());
-      scale(_h_p_p  , crossSection()/nanobarn/sumOfWeights());
-      scale(_h_x_p  , sqr(sqs)*crossSection()/microbarn/sumOfWeights());
+      scale(_h["p_pi"], crossSection()/nanobarn/sumOfWeights());
+      scale(_h["x_pi"], sqr(sqs)*crossSection()/microbarn/sumOfWeights());
+      scale(_h["p_K"],  crossSection()/nanobarn/sumOfWeights());
+      scale(_h["x_K"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights());
+      scale(_h["p_p"],  crossSection()/nanobarn/sumOfWeights());
+      scale(_h["x_p"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights());
 
-      Scatter2DPtr temp1,temp2,temp3;
-      book(temp1,3*_iHist+ 8,1,1);
-      book(temp2,3*_iHist+ 9,1,1);
-      book(temp3,3*_iHist+10,1,1);
+      for (auto& item : _r) {
+        divide(_h["n_"+item.first], _h["d_"+item.first], item.second);
+      }
 
-      divide(_n_pi,_d_pi, temp1);
-      divide(_n_K ,_d_K , temp2);
-      divide(_n_p ,_d_p , temp3);
     }
 
     /// @}
@@ -126,8 +160,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_p_pi, _h_x_pi, _h_p_K, _h_x_K, _h_p_p, _h_x_p;
-    Histo1DPtr _n_pi,_d_pi,_n_K,_d_K,_n_p,_d_p;
+    map<string,BinnedHistoPtr<string>> _h;
+    map<string,BinnedEstimatePtr<string>> _r;
+    map<string, YODA::Axis<double>> _axes;
+    map<string, vector<string>> _edges;
     int _iHist;
     double sqs;
     /// @}

@@ -135,14 +135,14 @@ namespace Rivet {
     pair<double,double> calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
-	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double ai = 0.5*(bin.xMax()-bin.xMin());
-	double bi = 0.5*ai*(bin.xMax()+bin.xMin());
-	double Ei = bin.errW();
-	sum1 += sqr(bi/Ei);
-	sum2 += bi/sqr(Ei)*(Oi-ai);
+      for (const auto& bin : hist->bins()) {
+        double Oi = bin.sumW();
+        if(Oi==0.) continue;
+        double ai = 0.5*(bin.xMax()-bin.xMin());
+        double bi = 0.5*ai*(bin.xMax()+bin.xMin());
+        double Ei = bin.errW();
+        sum1 += sqr(bi/Ei);
+        sum2 += bi/sqr(Ei)*(Oi-ai);
       }
       return make_pair(sum2/sum1,sqrt(1./sum1));
     }
@@ -153,18 +153,18 @@ namespace Rivet {
       normalize(_h_cthetaxi0);
       normalize(_h_cthetaxim);
       // calculate the values of alpha
-      Scatter2DPtr _h_alphaLam;
+      Estimate1DPtr _h_alphaLam;
       book(_h_alphaLam,1,1,1);
       pair<double,double> alpha = calcAlpha(_h_cthetalam);
-      _h_alphaLam->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
-      Scatter2DPtr _h_alphaXi0;
+      _h_alphaLam->bin(1).set(alpha.first, alpha.second);
+      Estimate1DPtr _h_alphaXi0;
       book(_h_alphaXi0,1,1,2);
       alpha = calcAlpha(_h_cthetaxi0);
-      _h_alphaXi0->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
-      Scatter2DPtr _h_alphaXim;
+      _h_alphaXi0->bin(1).set(alpha.first, alpha.second);
+      Estimate1DPtr _h_alphaXim;
       book(_h_alphaXim,1,1,3);
       alpha = calcAlpha(_h_cthetaxim);
-      _h_alphaXim->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
+      _h_alphaXim->bin(1).set(alpha.first, alpha.second);
     }
 
     /// @}

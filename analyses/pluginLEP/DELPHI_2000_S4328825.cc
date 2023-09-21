@@ -123,18 +123,9 @@ namespace Rivet {
           val = _cDiff.val();
           err = _cDiff.err();
         }
-        Scatter2D temphisto(refData(1, 1, ix));
-        for (size_t b = 0; b < temphisto.numPoints(); b++) {
-          const double x  = temphisto.point(b).x();
-          pair<double,double> ex = temphisto.point(b).xErrs();
-          pair<double,double> ex2 = ex;
-          if(ex2.first ==0.) ex2. first=0.0001;
-          if(ex2.second==0.) ex2.second=0.0001;
-          if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-            _mult[ix-1]->addPoint(x, val, ex, make_pair(err,err));
-          }
-          else {
-            _mult[ix-1]->addPoint(x, 0., ex, make_pair(0.,.0));
+        for (auto& b : _mult[ix-1]->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(val, err);
           }
         }
       }
@@ -146,7 +137,7 @@ namespace Rivet {
 
   private:
 
-    vector<Scatter2DPtr> _mult;
+    vector<Estimate1DPtr> _mult;
 
     /// @name Multiplicities
     /// @{

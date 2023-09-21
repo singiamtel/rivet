@@ -38,7 +38,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_histChTot, 200.0/sumOfWeights()); // bin width (2) and %age (100)
+      scale(_histChTot, 100.0/sumOfWeights()); // %age (100)
     }
 
     /// @}
@@ -48,7 +48,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _histChTot;
+    BinnedHistoPtr<int> _histChTot;
     Profile1DPtr _histAver;
     /// @}
 

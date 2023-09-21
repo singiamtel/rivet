@@ -21,8 +21,12 @@ namespace Rivet {
       // Final state
       declare(FinalState(),"FS");
       // check CMS energy in range
+      _energyAxis = YODA::Axis<double>(140, 0.8, 1.5);
+      _thetaAxis = YODA::Axis<double>(12, 0.0, 0.6);
       if (sqrtS()<0.8*GeV || sqrtS()>1.5*GeV)
         throw Error("Invalid CMS energy for BELLE_2007_I749358");
+      eIndex = _energyAxis.index(sqrtS()/GeV) - 1;
+
       // bin for the angle plots
       int ibin = (sqrtS()-0.8)/0.005 + 2;
       book(_h_cTheta,ibin,1,1);
@@ -32,6 +36,10 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      if (_EcmEdges.empty())  _EcmEdges = _cPi->xEdges();
+      if (_thetaEdges.empty())  _thetaEdges = _h_cTheta->xEdges();
+
       Particles part = apply<FinalState>(event,"FS").particles();
       if (part.size()!=2) vetoEvent;
       double cTheta(0.);
@@ -44,33 +52,20 @@ namespace Rivet {
         else if (p.pid()==PID::PIMINUS)
           foundM=true;
       }
-      if (!foundP || !foundM) vetoEvent;
-      if (cTheta<=0.6)    _cPi->fill();
-      if (_h_cTheta ) _h_cTheta ->fill(cTheta);
+      if (!foundP || !foundM)  vetoEvent;
+      if (cTheta<=0.6)  _cPi->fill(_EcmEdges[eIndex]);
+      if (_h_cTheta ) {
+        size_t idx = _thetaAxis.index(cTheta) - 1;
+        _h_cTheta->fill(_thetaEdges[idx]);
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/nanobarn/sumOfWeights();
+      const double fact = crossSection()/nanobarn/sumOfWeights();
       if (_h_cTheta ) scale(_h_cTheta ,fact);
-      double sigma = _cPi->val()*fact;
-      double error = _cPi->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr mult;
-      book(mult, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-        const double x  = temphisto.point(b).x();
-        pair<double,double> ex = temphisto.point(b).xErrs();
-        pair<double,double> ex2 = ex;
-        if (ex2.first ==0.) ex2. first=0.0001;
-        if (ex2.second==0.) ex2.second=0.0001;
-        if (inRange(sqrtS(), x-ex2.first, x+ex2.second)) {
-          mult->addPoint(x, sigma, ex, make_pair(error,error));
-        } else {
-          mult->addPoint({x, 0.}, {ex, {0.,0.}});
-        }
-      }
+      scale(_cPi, fact);
     }
 
     ///@}
@@ -78,8 +73,11 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_cTheta;
-    CounterPtr _cPi;
+    BinnedHistoPtr<string> _h_cTheta, _cPi;
+    YODA::Axis<double> _energyAxis;
+    YODA::Axis<double> _thetaAxis;
+    vector<string> _EcmEdges, _thetaEdges;
+    size_t eIndex;
     ///@}
 
 

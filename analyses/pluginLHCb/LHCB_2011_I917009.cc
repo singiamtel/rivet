@@ -202,7 +202,7 @@ namespace Rivet {
     /// Next 3 histograms contain the particles in y_loss bins for the whole pT interval (3 histos)
     /// Last 3 histograms contain the particles in pT bins for the whole rapidity (y) interval (3 histos)
     Histo1DPtr _tmphistos[18];
-    array<Scatter2DPtr,3> s1,s2,s3,s4;
+    array<Estimate1DPtr,3> s1,s2,s3,s4;
     /// @}
 
     // Fill the PDG ID to Lifetime[seconds] map

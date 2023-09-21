@@ -25,8 +25,8 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_c_bStar, "/TMP/cbStar ");
-      book(_c_B    , "/TMP/cB     ");
+      book(_c_bStar, "/TMP/cbStar", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_B    , "/TMP/cB", refData<YODA::BinnedEstimate<string>>(1,1,1));
 
     }
 
@@ -44,18 +44,17 @@ namespace Rivet {
       }
       MSG_DEBUG("Passed leptonic event cut");
 
-      for(const Particle& p : apply<UnstableParticles>(event, "UFS").particles(Cuts::abspid==513 or Cuts::abspid==523 or
+      for (const Particle& p : apply<UnstableParticles>(event, "UFS").particles(Cuts::abspid==513 or Cuts::abspid==523 or
 									       Cuts::abspid==511 or Cuts::abspid==521)) {
-	// count number of Bs not from mixing or B*
-	if(p.abspid()==511 || p.abspid()==521) {
-	  if(p.parents()[0].abspid()==p.abspid()) continue;
-	  if(p.parents()[0].abspid()==513 || p.parents()[0].abspid()==523) continue;
-	  _c_B->fill();
-	}
-	// B*
-	else {
-	  _c_bStar->fill();
-	}
+        // count number of Bs not from mixing or B*
+        if (p.abspid()==511 || p.abspid()==521) {
+          if (p.parents()[0].abspid()==p.abspid()) continue;
+          if (p.parents()[0].abspid()==513 || p.parents()[0].abspid()==523) continue;
+          _c_B->fill(Ecm);
+        }
+        else {
+          _c_bStar->fill(Ecm);	// B*
+        }
       }
 
     }
@@ -64,12 +63,9 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // no of B*/B+B*
-      Scatter2DPtr h1;
+      BinnedEstimatePtr<string> h1;
       book(h1,1,1,1);
-      Counter ctemp = *_c_bStar+*_c_B;
-      double val = _c_bStar->val()/ctemp.val();
-      double err = val*sqrt(sqr(_c_bStar->err()/_c_bStar->val())+sqr(ctemp.err()/ctemp.val()));
-      h1->addPoint(91.2,val,make_pair(0.5,0.5),make_pair(err,err) );
+      *h1 = *_c_bStar / (*_c_bStar + *_c_B);
     }
 
     /// @}
@@ -77,7 +73,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_bStar,_c_B;
+    BinnedHistoPtr<string> _c_bStar, _c_B;
+    const string Ecm = "91.2";
     /// @}
 
 

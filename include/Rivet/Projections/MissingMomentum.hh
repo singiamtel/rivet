@@ -22,6 +22,8 @@ namespace Rivet {
   class MissingMomentum : public METFinder {
   public:
 
+    using METFinder::operator=;
+
     /// Canonical constructor taking a FinalState as argument
     MissingMomentum(const FinalState& fs) {
       setName("MissingMomentum");

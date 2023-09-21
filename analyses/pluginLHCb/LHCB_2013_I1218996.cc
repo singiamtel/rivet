@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 
@@ -15,9 +14,7 @@ namespace Rivet {
     /// @{
 
     /// Constructor
-    LHCB_2013_I1218996()
-      : Analysis("LHCB_2013_I1218996")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(LHCB_2013_I1218996);
 
     /// @}
 
@@ -32,37 +29,23 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       /// Book histograms
-      {Histo1DPtr tmp; _h_pdg411_Dplus_pT_y.add( 2.0, 2.5, book(tmp, 3, 1, 1) );}
-      {Histo1DPtr tmp; _h_pdg411_Dplus_pT_y.add( 2.5, 3.0, book(tmp, 3, 1, 2) );}
-      {Histo1DPtr tmp; _h_pdg411_Dplus_pT_y.add( 3.0, 3.5, book(tmp, 3, 1, 3) );}
-      {Histo1DPtr tmp; _h_pdg411_Dplus_pT_y.add( 3.5, 4.0, book(tmp, 3, 1, 4) );}
-      {Histo1DPtr tmp; _h_pdg411_Dplus_pT_y.add( 4.0, 4.5, book(tmp, 3, 1, 5) );}
-
-      {Histo1DPtr tmp; _h_pdg421_Dzero_pT_y.add( 2.0, 2.5, book(tmp, 2, 1, 1) );}
-      {Histo1DPtr tmp; _h_pdg421_Dzero_pT_y.add( 2.5, 3.0, book(tmp, 2, 1, 2) );}
-      {Histo1DPtr tmp; _h_pdg421_Dzero_pT_y.add( 3.0, 3.5, book(tmp, 2, 1, 3) );}
-      {Histo1DPtr tmp; _h_pdg421_Dzero_pT_y.add( 3.5, 4.0, book(tmp, 2, 1, 4) );}
-      {Histo1DPtr tmp; _h_pdg421_Dzero_pT_y.add( 4.0, 4.5, book(tmp, 2, 1, 5) );}
-
-      {Histo1DPtr tmp; _h_pdg431_Dsplus_pT_y.add( 2.0, 2.5, book(tmp, 5, 1, 1) );}
-      {Histo1DPtr tmp; _h_pdg431_Dsplus_pT_y.add( 2.5, 3.0, book(tmp, 5, 1, 2) );}
-      {Histo1DPtr tmp; _h_pdg431_Dsplus_pT_y.add( 3.0, 3.5, book(tmp, 5, 1, 3) );}
-      {Histo1DPtr tmp; _h_pdg431_Dsplus_pT_y.add( 3.5, 4.0, book(tmp, 5, 1, 4) );}
-      {Histo1DPtr tmp; _h_pdg431_Dsplus_pT_y.add( 4.0, 4.5, book(tmp, 5, 1, 5) );}
-
-      {Histo1DPtr tmp; _h_pdg413_Dstarplus_pT_y.add( 2.0, 2.5, book(tmp, 4, 1, 1) );}
-      {Histo1DPtr tmp; _h_pdg413_Dstarplus_pT_y.add( 2.5, 3.0, book(tmp, 4, 1, 2) );}
-      {Histo1DPtr tmp; _h_pdg413_Dstarplus_pT_y.add( 3.0, 3.5, book(tmp, 4, 1, 3) );}
-      {Histo1DPtr tmp; _h_pdg413_Dstarplus_pT_y.add( 3.5, 4.0, book(tmp, 4, 1, 4) );}
-      {Histo1DPtr tmp; _h_pdg413_Dstarplus_pT_y.add( 4.0, 4.5, book(tmp, 4, 1, 5) );}
-
+      book(_h_pdg421_Dzero_pT_y,     {2., 2.5, 3., 3.5, 4., 4.5});
+      book(_h_pdg411_Dplus_pT_y,     {2., 2.5, 3., 3.5, 4., 4.5});
+      book(_h_pdg413_Dstarplus_pT_y, {2., 2.5, 3., 3.5, 4., 4.5});
+      book(_h_pdg431_Dsplus_pT_y,    {2., 2.5, 3., 3.5, 4., 4.5});
+      for (size_t i = 1; i < _h_pdg421_Dzero_pT_y->numBins()+1; ++i) {
+        size_t y = _h_pdg421_Dzero_pT_y->bin(i).index();
+        book(_h_pdg421_Dzero_pT_y->bin(i),     2, 1, y);
+        book(_h_pdg411_Dplus_pT_y->bin(i),     3, 1, y);
+        book(_h_pdg413_Dstarplus_pT_y->bin(i), 4, 1, y);
+        book(_h_pdg431_Dsplus_pT_y->bin(i),    5, 1, y);
+      }
       book(_h_pdg4122_Lambdac_pT ,1, 1, 1);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       /// @todo Use PrimaryHadrons to avoid double counting and automatically remove the contributions from unstable?
       const UnstableParticles &ufs = apply<UnstableParticles> (event, "UFS");
@@ -83,19 +66,19 @@ namespace Rivet {
 
         switch (p.abspid()) {
         case 411:
-          _h_pdg411_Dplus_pT_y.fill(y, pT/GeV, weight);
+          _h_pdg411_Dplus_pT_y->fill(y, pT/GeV);
           break;
         case 421:
-          _h_pdg421_Dzero_pT_y.fill(y, pT/GeV, weight);
+          _h_pdg421_Dzero_pT_y->fill(y, pT/GeV);
           break;
         case 431:
-          _h_pdg431_Dsplus_pT_y.fill(y, pT/GeV, weight);
+          _h_pdg431_Dsplus_pT_y->fill(y, pT/GeV);
           break;
         case 413:
-          _h_pdg413_Dstarplus_pT_y.fill(y, pT/GeV, weight);
+          _h_pdg413_Dstarplus_pT_y->fill(y, pT/GeV);
           break;
         case 4122:
-          _h_pdg4122_Lambdac_pT->fill(pT/GeV, weight);
+          _h_pdg4122_Lambdac_pT->fill(pT/GeV);
           break;
         }
       }
@@ -106,11 +89,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double scale_factor = 0.5 * crossSection()/microbarn / sumOfWeights();
-      /// Avoid the implicit division by the bin width in the BinnedHistogram::scale method.
-      for (Histo1DPtr h : _h_pdg411_Dplus_pT_y.histos()) h->scaleW(scale_factor);
-      for (Histo1DPtr h : _h_pdg421_Dzero_pT_y.histos()) h->scaleW(scale_factor);
-      for (Histo1DPtr h : _h_pdg431_Dsplus_pT_y.histos()) h->scaleW(scale_factor);
-      for (Histo1DPtr h : _h_pdg413_Dstarplus_pT_y.histos()) h->scaleW(scale_factor);
+      scale(_h_pdg411_Dplus_pT_y, scale_factor);
+      scale(_h_pdg421_Dzero_pT_y, scale_factor);
+      scale(_h_pdg431_Dsplus_pT_y, scale_factor);
+      scale(_h_pdg413_Dstarplus_pT_y, scale_factor);
       _h_pdg4122_Lambdac_pT->scaleW(scale_factor);
     }
 
@@ -121,10 +103,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _h_pdg411_Dplus_pT_y;
-    BinnedHistogram _h_pdg421_Dzero_pT_y;
-    BinnedHistogram _h_pdg431_Dsplus_pT_y;
-    BinnedHistogram _h_pdg413_Dstarplus_pT_y;
+    Histo1DGroupPtr _h_pdg411_Dplus_pT_y;
+    Histo1DGroupPtr _h_pdg421_Dzero_pT_y;
+    Histo1DGroupPtr _h_pdg431_Dsplus_pT_y;
+    Histo1DGroupPtr _h_pdg413_Dstarplus_pT_y;
     Histo1DPtr _h_pdg4122_Lambdac_pT;
     /// @}
 

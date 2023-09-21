@@ -1,13 +1,17 @@
+import yoda
 
 def patch(path, ao):
-    needs_patching = [
-        '/REF/ATLAS_2018_I1711223/d12-x01-y01',
-        '/REF/ATLAS_2018_I1711223/d20-x01-y01',
-    ]
-    if path in needs_patching:
-        for i in range(ao.numPoints()):
-            offset = 2.0 if 'd12' in path else 0.0
-            ao.point(i).setX(float(i) + offset)
-            ao.point(i).setXErrs(0.5)
+    if path == '/REF/ATLAS_2018_I1711223/d12-x01-y01':
+        edges = [ '2', '3', '4', r'$\geq5$' ]
+        newao = yoda.BinnedEstimate1D(edges, path)
+        for b in ao.bins():
+            newao.set(b.index(), b)
+        ao = newao
+    if path == '/REF/ATLAS_2018_I1711223/d20-x01-y01':
+        edges = [ '0', '1', '2', r'$\geq3$' ]
+        newao = yoda.BinnedEstimate1D(edges, path)
+        for b in ao.bins():
+            newao.set(b.index(), b)
+        ao = newao
     return ao
 

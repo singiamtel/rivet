@@ -10,10 +10,12 @@ namespace Rivet {
   class GeneratedPercentileProjection: public SingleValueProjection {
   public:
 
-    GeneratedPercentileProjection() {
-      setName("GeneratedPercentileProjection");
-      declare(HepMCHeavyIon(), "HepMC");
-    }
+  using SingleValueProjection::operator=;
+
+  GeneratedPercentileProjection() {
+    setName("GeneratedPercentileProjection");
+    declare(HepMCHeavyIon(), "HepMC");
+  }
 
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(GeneratedPercentileProjection);

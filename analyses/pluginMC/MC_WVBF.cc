@@ -173,7 +173,7 @@ namespace Rivet {
     /// @name Histograms
     //@{
     map<string,Histo1DPtr> _h;
-    map<string,Scatter2DPtr> _s;
+    map<string,Estimate1DPtr> _s;
     //@}
 
   };

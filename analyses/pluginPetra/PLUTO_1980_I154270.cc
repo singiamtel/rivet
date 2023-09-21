@@ -21,18 +21,14 @@ namespace Rivet {
     void init() {
       const ChargedFinalState cfs;
       declare(cfs, "CFS");
-      if (isCompatibleWithSqrtS( 9.4*GeV) ||
-          isCompatibleWithSqrtS(12.0*GeV) ||
-          isCompatibleWithSqrtS(13.0*GeV) ||
-          isCompatibleWithSqrtS(17.0*GeV) ||
-          isCompatibleWithSqrtS(22.0*GeV) ||
-          isCompatibleWithSqrtS(27.6*GeV) ||
-          isCompatibleWithSqrtS(30.2*GeV) ||
-          isCompatibleWithSqrtS(30.7*GeV) ||
-          isCompatibleWithSqrtS(31.3*GeV)) {
-        book(_c_mult, "/TMP/cmult");
+      for (const string label : {"9.4", "12.0", "13.0", "17.0", "22.0", "27.6", "30.2", "30.7", "31.3"}) {
+        const double sqrts = std::stod(label);
+        if (isCompatibleWithSqrtS(sqrts*GeV))  Ecm = label;
+      }
+      if (Ecm != "") {
         book(_mult, 1, 1, 1);
-      } else {
+      }
+      else {
         MSG_WARNING("CoM energy of events sqrt(s) = " << sqrtS()/GeV << " doesn't match any available analysis energy .");
       }
     }
@@ -51,7 +47,7 @@ namespace Rivet {
         while (ivertex) {
           vector<ConstGenParticlePtr> inparts = HepMCUtils::particles(ivertex, Relatives::PARENTS);
           int n_inparts = inparts.size();
-          if (n_inparts < 1) break;
+          if (n_inparts < 1)  break;
           pmother = inparts[0]; // first mother particle
           int mother_pid = abs(pmother->pdg_id());
           if (mother_pid==PID::K0S || mother_pid==PID::LAMBDA) {
@@ -63,31 +59,15 @@ namespace Rivet {
           }
           ivertex = pmother->production_vertex();
         }
-        if(prompt) ++nPart;
+        if (prompt) ++nPart;
       }
-      _c_mult->fill(sqrtS(), nPart);
+      _mult->fill(Ecm, nPart);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = 1./sumOfWeights();
-      double val = _c_mult->val()*fact;
-      double err = _c_mult->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-        const double x  = temphisto.point(b).x();
-        pair<double,double> ex = temphisto.point(b).xErrs();
-        pair<double,double> ex2 = ex;
-        if(ex2.first ==0.) ex2. first=0.0001;
-        if(ex2.second==0.) ex2.second=0.0001;
-        if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-          _mult->addPoint(x, val, ex, make_pair(err,err));
-        }
-        else {
-          _mult->addPoint(x, 0., ex, make_pair(0.,.0));
-        }
-      }
+      scale(_mult, 1./sumOfWeights());
     }
 
     /// @}
@@ -95,9 +75,8 @@ namespace Rivet {
 
   private:
 
-    Profile1DPtr _hist;
-    CounterPtr _c_mult;
-    Scatter2DPtr _mult;
+    BinnedProfilePtr<string> _mult;
+    string Ecm = "";
 
   };
 

@@ -15,6 +15,9 @@ namespace Rivet {
   class Beam : public Projection {
   public:
 
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator=;
+
     /// Default (and only) constructor
     Beam() { setName("Beam"); }
 
@@ -74,10 +77,6 @@ namespace Rivet {
 
     /// Project on to the Event
     virtual void project(const Event& e);
-
-
-    /// Import to avoid warnings about overload-hiding
-    using Projection::operator =;
 
 
   protected:

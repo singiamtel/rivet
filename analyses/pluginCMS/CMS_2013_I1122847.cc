@@ -198,9 +198,9 @@ namespace Rivet {
     Histo1DPtr _hist_mm_100_den, _hist_mm_125_den, _hist_mm_150_den, _hist_mm_240_den;
     Histo1DPtr _hist_ll_100_num, _hist_ll_125_num, _hist_ll_150_num, _hist_ll_240_num;
     Histo1DPtr _hist_ll_100_den, _hist_ll_125_den, _hist_ll_150_den, _hist_ll_240_den;
-    Scatter2DPtr _s_ee_100, _s_ee_125, _s_ee_150, _s_ee_240;
-    Scatter2DPtr _s_mm_100, _s_mm_125, _s_mm_150, _s_mm_240;
-    Scatter2DPtr _s_ll_100, _s_ll_125, _s_ll_150, _s_ll_240;
+    Estimate1DPtr _s_ee_100, _s_ee_125, _s_ee_150, _s_ee_240;
+    Estimate1DPtr _s_mm_100, _s_mm_125, _s_mm_150, _s_mm_240;
+    Estimate1DPtr _s_ll_100, _s_ll_125, _s_ll_150, _s_ll_240;
 
   };
 

@@ -197,22 +197,21 @@ namespace Rivet {
       double aPlus =-0.758;
       double factor = 45.*(3. +aPsi)/(11. + 5.*aPsi)/aPlus;
       // plots
-      for(unsigned int ix=0;ix<2;++ix) {
-	for(unsigned int iy=0;iy<2;++iy) {
-	  scale(_h_mu[ix][iy],10.*0.2/ *_n[ix]);
-	}
+      for (unsigned int ix=0;ix<2;++ix) {
+        for(unsigned int iy=0;iy<2;++iy) {
+          scale(_h_mu[ix][iy],10.*0.2/ *_n[ix]);
+        }
       }
       // alpha from the moments
-      for(unsigned int ix=0;ix<3;++ix) {
-	double value = _t[ix]->val()/_n[ix]->val();
-	double error = _t[ix]->err()/_n[ix]->val();
- 	value *= factor;
-	error *= abs(factor);
-	if(ix==1) value *=-1.;
-	Scatter2DPtr  alpha;
-	book(alpha,2,1,1+ix);
-	alpha->addPoint(0.5, value, make_pair(0.5,0.5),
-			make_pair(error,error) );
+      for (unsigned int ix=0;ix<3;++ix) {
+        double value = _t[ix]->val()/_n[ix]->val();
+        double error = _t[ix]->err()/_n[ix]->val();
+        value *= factor;
+        error *= abs(factor);
+        if(ix==1) value *=-1.;
+        Estimate1DPtr  alpha;
+        book(alpha,2,1,1+ix);
+        alpha->bin(1).set(value, error);
       }
     }
 

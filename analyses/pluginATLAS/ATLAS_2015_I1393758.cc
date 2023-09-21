@@ -16,22 +16,22 @@ namespace Rivet {
       declare(FastJets(FinalState(), FastJets::ANTIKT, 0.4), "Jets");
 
       book(forward_kappa3, 1, 1, 1);
-      book(forwardRMS_kappa3, "d02-x01-y01", true);
+      book(forwardRMS_kappa3, "d02-x01-y01");
 
       book(central_kappa3, 3, 1, 1);
-      book(centralRMS_kappa3, "d04-x01-y01", true);
+      book(centralRMS_kappa3, "d04-x01-y01");
 
       book(forward_kappa5, 5, 1, 1);
-      book(forwardRMS_kappa5, "d06-x01-y01", true);
+      book(forwardRMS_kappa5, "d06-x01-y01");
 
       book(central_kappa5, 7, 1, 1);
-      book(centralRMS_kappa5, "d08-x01-y01", true);
+      book(centralRMS_kappa5, "d08-x01-y01");
 
       book(forward_kappa7, 9, 1, 1);
-      book(forwardRMS_kappa7, "d10-x01-y01", true);
+      book(forwardRMS_kappa7, "d10-x01-y01");
 
       book(central_kappa7, 11, 1, 1);
-      book(centralRMS_kappa7, "d12-x01-y01", true);
+      book(centralRMS_kappa7, "d12-x01-y01");
 
     }
 
@@ -89,27 +89,27 @@ namespace Rivet {
           double stdv_fkappa3 = forward_kappa3->bin(i).effNumEntries() > 1? forward_kappa3->bin(i).yStdDev() : 0.0;
           //See Eq. 3 for the factor of two: https://web.eecs.umich.edu/~fessler/papers/files/tr/stderr.pdf
           double yerr_fkappa3  = safediv(sqrt(forward_kappa3->bin(i).sumW2()), 2.*forward_kappa3->bin(i).sumW());
-          forwardRMS_kappa3->point(i-1).setY(stdv_fkappa3, yerr_fkappa3);
+          forwardRMS_kappa3->bin(i).set(stdv_fkappa3, yerr_fkappa3);
 
           double stdv_fkappa5 = forward_kappa5->bin(i).effNumEntries() > 1? forward_kappa5->bin(i).yStdDev() : 0.0;
           double yerr_fkappa5  = safediv(sqrt(forward_kappa5->bin(i).sumW2()), 2.*forward_kappa5->bin(i).sumW());
-          forwardRMS_kappa5->point(i-1).setY(stdv_fkappa5, yerr_fkappa5);
+          forwardRMS_kappa5->bin(i).set(stdv_fkappa5, yerr_fkappa5);
 
           double stdv_fkappa7 = forward_kappa7->bin(i).effNumEntries() > 1? forward_kappa7->bin(i).yStdDev() : 0.0;
           double yerr_fkappa7  = safediv(sqrt(forward_kappa7->bin(i).sumW2()), 2.*forward_kappa7->bin(i).sumW());
-          forwardRMS_kappa7->point(i-1).setY(stdv_fkappa7, yerr_fkappa7);
+          forwardRMS_kappa7->bin(i).set(stdv_fkappa7, yerr_fkappa7);
 
           double stdv_ckappa3 = central_kappa3->bin(i).effNumEntries() > 1? central_kappa3->bin(i).yStdDev() : 0.0;
           double yerr_ckappa3  = safediv(sqrt(central_kappa3->bin(i).sumW2()), 2.*central_kappa3->bin(i).sumW());
-          centralRMS_kappa3->point(i-1).setY(stdv_ckappa3, yerr_ckappa3);
+          centralRMS_kappa3->bin(i).set(stdv_ckappa3, yerr_ckappa3);
 
           double stdv_ckappa5 = central_kappa5->bin(i).effNumEntries() > 1? central_kappa5->bin(i).yStdDev() : 0.0;
           double yerr_ckappa5  = safediv(sqrt(central_kappa5->bin(i).sumW2()), 2.*central_kappa5->bin(i).sumW());
-          centralRMS_kappa5->point(i-1).setY(stdv_ckappa5, yerr_ckappa5);
+          centralRMS_kappa5->bin(i).set(stdv_ckappa5, yerr_ckappa5);
 
           double stdv_ckappa7 = central_kappa7->bin(i).effNumEntries() > 1? central_kappa7->bin(i).yStdDev() : 0.0;
           double yerr_ckappa7  = safediv(sqrt(central_kappa7->bin(i).sumW2()), 2.*central_kappa7->bin(i).sumW());
-          centralRMS_kappa7->point(i-1).setY(stdv_ckappa7, yerr_ckappa7);
+          centralRMS_kappa7->bin(i).set(stdv_ckappa7, yerr_ckappa7);
 
         }
       }
@@ -127,13 +127,13 @@ namespace Rivet {
     Profile1DPtr central_kappa5;
     Profile1DPtr central_kappa7;
 
-    Scatter2DPtr forwardRMS_kappa3;
-    Scatter2DPtr forwardRMS_kappa5;
-    Scatter2DPtr forwardRMS_kappa7;
+    Estimate1DPtr forwardRMS_kappa3;
+    Estimate1DPtr forwardRMS_kappa5;
+    Estimate1DPtr forwardRMS_kappa7;
 
-    Scatter2DPtr centralRMS_kappa3;
-    Scatter2DPtr centralRMS_kappa5;
-    Scatter2DPtr centralRMS_kappa7;
+    Estimate1DPtr centralRMS_kappa3;
+    Estimate1DPtr centralRMS_kappa5;
+    Estimate1DPtr centralRMS_kappa7;
 
   };
 

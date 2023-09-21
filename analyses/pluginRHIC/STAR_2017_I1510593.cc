@@ -5,7 +5,7 @@
 #include "Rivet/Projections/ImpactParameterProjection.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
 #include "Rivet/Tools/Percentile.hh"
-#include "Rivet/Tools/RHICCommon.hh"
+#include "Rivet/Analyses/RHICCommon.hh"
 #include "Rivet/Projections/HepMCHeavyIon.hh"
 
 namespace Rivet {

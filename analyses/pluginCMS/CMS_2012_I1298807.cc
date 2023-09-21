@@ -46,12 +46,12 @@ namespace Rivet {
       declare(zmmfinder_woZmm, "Zmmfinder_WoZmm");
 
       // Book histograms
-      book(_hist_pt_l1  , 1, 1, 1);
-      book(_hist_pt_z1  , 1, 1, 2);
-      book(_hist_pt_zz  , 1, 1, 3);
-      book(_hist_m_zz   , 1, 1, 4);
-      book(_hist_dphi_zz, 1, 1, 5);
-      book(_hist_dR_zz  , 1, 1, 6);
+      book(_h["pt_l1"],   1, 1, 1);
+      book(_h["pt_z1"],   1, 1, 2);
+      book(_h["pt_zz"],   1, 1, 3);
+      book(_h["m_zz"],    1, 1, 4);
+      book(_h["dphi_zz"], 1, 1, 5);
+      book(_h["dR_zz"],   1, 1, 6);
 
     }
 
@@ -124,68 +124,33 @@ namespace Rivet {
       }
 
       // Fill histograms
-      const double weight = 1.0;
-      _hist_pt_zz->fill(pZZ.pT()/GeV, weight);
-      _hist_m_zz->fill(pZZ.mass()/GeV, weight);
-      _hist_dphi_zz->fill(deltaPhi(pZ_a, pZ_b), weight);
-      _hist_dR_zz->fill(deltaR(pZ_a, pZ_b, PSEUDORAPIDITY), weight);
-      _hist_pt_z1->fill(pt_z1/GeV, weight);
-      _hist_pt_l1->fill(pt_l1/GeV, weight);
+      _h["pt_zz"]->fill(pZZ.pT()/GeV);
+      _h["m_zz"]->fill(pZZ.mass()/GeV);
+      _h["dphi_zz"]->fill(deltaPhi(pZ_a, pZ_b));
+      _h["dR_zz"]->fill(deltaR(pZ_a, pZ_b, PSEUDORAPIDITY));
+      _h["pt_z1"]->fill(pt_z1/GeV);
+      _h["pt_l1"]->fill(pt_l1/GeV);
 
     }
 
 
     /// Scale histograms
-    /// @note This is all needed to undo bin width factor -- WHY DO PEOPLE USE UNPHYSICAL HISTOGRAMS?!?
-    /// @todo If we introduce a "bar plot" or similar, it'd work better here
+    /// @todo Why is it scaling by bin width twice??
     void finalize() {
 
-      double sum_height_pt_zz = 0;
-      for (size_t i = 1; i < _hist_pt_zz->numBins()+1; i++) {
-        _hist_pt_zz->bin(i).scaleW(1. / _hist_pt_zz->bin(i).xWidth());
-        sum_height_pt_zz += _hist_pt_zz->bin(i).sumW();
+      for (auto& item : _h) {
+        double area = 0.;
+        for (auto& b : item.second->bins()) {
+          b.scaleW(1.0/b.xWidth());
+          area += b.sumW() / b.dVol();
+        }
+        if (area)  scale(item.second, 1.0 / area);
       }
-      scale(_hist_pt_zz, 1. / sum_height_pt_zz);
-
-      double sum_height_m_zz = 0;
-      for (size_t i = 1; i < _hist_m_zz->numBins()+1; i++) {
-        _hist_m_zz->bin(i).scaleW(1. / _hist_m_zz->bin(i).xWidth());
-        sum_height_m_zz += _hist_m_zz->bin(i).sumW();
-      }
-      scale(_hist_m_zz, 1. / sum_height_m_zz);
-
-      double sum_height_dphi_zz = 0;
-      for (size_t i = 1; i < _hist_dphi_zz->numBins()+1; i++) {
-        _hist_dphi_zz->bin(i).scaleW(1. / _hist_dphi_zz->bin(i).xWidth());
-        sum_height_dphi_zz += _hist_dphi_zz->bin(i).sumW();
-      }
-      scale(_hist_dphi_zz, 1. / sum_height_dphi_zz);
-
-      double sum_height_dR_zz = 0;
-      for (size_t i = 1; i < _hist_dR_zz->numBins()+1; i++) {
-        _hist_dR_zz->bin(i).scaleW(1. / _hist_dR_zz->bin(i).xWidth());
-        sum_height_dR_zz += _hist_dR_zz->bin(i).sumW();
-      }
-      scale(_hist_dR_zz, 1. / sum_height_dR_zz);
-
-      double sum_height_pt_z1 = 0;
-      for (size_t i = 1; i < _hist_pt_z1->numBins()+1; i++) {
-        _hist_pt_z1->bin(i).scaleW(1. / _hist_pt_z1->bin(i).xWidth());
-        sum_height_pt_z1 += _hist_pt_z1->bin(i).sumW();
-      }
-      scale(_hist_pt_z1, 1. / sum_height_pt_z1);
-
-      double sum_height_pt_l1 = 0;
-      for (size_t i = 1; i < _hist_pt_l1->numBins()+1; i++) {
-        _hist_pt_l1->bin(i).scaleW(1. / _hist_pt_l1->bin(i).xWidth());
-        sum_height_pt_l1 += _hist_pt_l1->bin(i).sumW();
-      }
-      scale(_hist_pt_l1, 1. / sum_height_pt_l1);
     }
 
 
     /// Histograms
-    Histo1DPtr _hist_pt_zz, _hist_m_zz, _hist_dphi_zz, _hist_dR_zz, _hist_pt_z1, _hist_pt_l1;
+    map<string, Histo1DPtr> _h;
 
   };
 

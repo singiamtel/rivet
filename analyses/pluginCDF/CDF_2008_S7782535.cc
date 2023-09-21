@@ -92,15 +92,13 @@ namespace Rivet {
       for (size_t i = 0; i < _ptedges.size()-1; ++i) {
         // Get entry for rad_Psi = 0.2 bin
         Profile1DPtr ph_i = _h_Psi_pT[i];
-        const double ex = 0.5*(_ptedges[i+1] - _ptedges[i]);
-        const double x  = _ptedges[i] + ex;
         double y  = 0; // This is to protect against exceptions
         double ey = 0; // thrown by YODA when calling mean and
         if (ph_i->bin(1).effNumEntries() > 1) { // stdErr at
           y = 1.0 - ph_i->bin(1).yMean();        // low stats
           ey= ph_i->bin(1).yStdErr();
         }
-        _h_OneMinusPsi_vs_pT->addPoint(x, y, ex, ey);
+        _h_OneMinusPsi_vs_pT->bin(i+1).set(y, ey);
       }
 
     }
@@ -122,7 +120,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Profile1DPtr _h_Psi_pT[4];
-    Scatter2DPtr _h_OneMinusPsi_vs_pT;
+    Estimate1DPtr _h_OneMinusPsi_vs_pT;
     /// @}
 
   };

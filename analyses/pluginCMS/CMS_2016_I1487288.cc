@@ -38,9 +38,9 @@ namespace Rivet {
       WFinder wmuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 60*GeV, 100*GeV, 30*GeV);
       declare(wmuFinder, "Wmu");
 
-      book(_h_ZpT, "d03-x01-y01");
-      book(_h_Njet, "d04-x01-y01", {-0.5, 0.5, 1.5, 2.5, 3.5}); ///< @todo Ref data has null bin widths
-      book(_h_JpT, "d05-x01-y01");
+      book(_h_ZpT,  "d03-x01-y01");
+      book(_h_Njet, "d04-x01-y01");
+      book(_h_JpT,  "d05-x01-y01");
 
       MSG_WARNING("\033[91;1mLIMITED VALIDITY - check info file for details!\033[m");
     }
@@ -112,7 +112,8 @@ namespace Rivet {
   private:
 
     /// Histogram
-    Histo1DPtr _h_ZpT, _h_Njet, _h_JpT;
+    Histo1DPtr _h_ZpT, _h_JpT;
+    BinnedHistoPtr<int> _h_Njet;
 
   };
 

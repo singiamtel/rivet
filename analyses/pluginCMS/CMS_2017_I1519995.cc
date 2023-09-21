@@ -1,7 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -15,15 +14,14 @@ namespace Rivet {
 
     /// Book projections and histograms
     void init() {
+
       FastJets antikt(FinalState(), FastJets::ANTIKT, 0.4);
       declare(antikt, "ANTIKT");
-      /// @todo We need a better way!!
-      {Histo1DPtr tmp; _h_chi_dijet.add(4800., 8000., book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _h_chi_dijet.add(4200., 4800., book(tmp, 2, 1, 1));}
-      {Histo1DPtr tmp; _h_chi_dijet.add(3600., 4200., book(tmp, 3, 1, 1));}
-      {Histo1DPtr tmp; _h_chi_dijet.add(3000., 3600., book(tmp, 4, 1, 1));}
-      {Histo1DPtr tmp; _h_chi_dijet.add(2400., 3000., book(tmp, 5, 1, 1));}
-      {Histo1DPtr tmp; _h_chi_dijet.add(1900., 2400., book(tmp, 6, 1, 1));}
+
+      book(_h_chi_dijet, {1900., 2400., 3600., 4200., 4800., 8000.});
+      for (auto& b : _h_chi_dijet->bins()) {
+        book(b, _h_chi_dijet->numBins() - b.index() + 1, 1, 1);
+      }
     }
 
 
@@ -37,17 +35,17 @@ namespace Rivet {
 
       const double mjj = (j0+j1).mass();
       const double chi = exp(fabs(j0.rap()-j1.rap()));
-      if (chi < 16) _h_chi_dijet.fill(mjj/GeV, chi, 1.0);
+      if (chi < 16) _h_chi_dijet->fill(mjj/GeV, chi);
     }
 
 
     /// Normalize histograms
     void finalize() {
-      for (Histo1DPtr hist : _h_chi_dijet.histos()) normalize(hist);
+      normalize(_h_chi_dijet);
     }
 
 
-    BinnedHistogram _h_chi_dijet;
+   Histo1DGroupPtr _h_chi_dijet;
 
   };
 

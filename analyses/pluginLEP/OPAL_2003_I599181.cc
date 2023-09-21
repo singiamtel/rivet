@@ -26,8 +26,10 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_histXbweak     ,1, 1, 1);
-      book(_histMeanXbweak ,2, 1, 1);
+      book(_estXbweak, 1, 1, 1);
+      book(_histXbweak, "/TMP/Xbweak", refData(1, 1, 1));
+
+      book(_histMeanXbweak, 2, 1, 1);
 
     }
 
@@ -58,6 +60,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_histXbweak);
+      barchart(_histXbweak, _estXbweak);
     }
 
     /// @}
@@ -66,6 +69,7 @@ namespace Rivet {
   private:
 
     Histo1DPtr _histXbweak;
+    Estimate1DPtr _estXbweak;
     Profile1DPtr _histMeanXbweak;
 
   };

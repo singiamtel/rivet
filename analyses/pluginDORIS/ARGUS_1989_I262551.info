@@ -13,7 +13,7 @@ RunInfo:
   $e^+ e^-$ analysis near the $\Upsilon$ resonances
 NeedCrossSection: yes
 Beams: [e-, e+]
-Energies: [9.46,10,0.02]
+Energies: [9.46,10,10.02]
 NeedCrossSection: no
 Description:
   'Measurement of the spectrum for $\phi$ mesons in the $e^+e^-$ continuum at 10 GeV and in $\Upsilon(1S)$ and $\Upsilon(2S)$ decays.'

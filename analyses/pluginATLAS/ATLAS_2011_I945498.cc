@@ -237,10 +237,14 @@ namespace Rivet {
     void finalize() {
       // Fill ratio histograms
       for (size_t chn = 0; chn < 3; ++chn) {
-        _h_njet_ratio[chn]->addPoint(1, ratio(weights_nj1[chn]->val(), weights_nj0[chn]->val()), 0.5, ratio_err(weights_nj1[chn]->val(), weights_nj0[chn]->val()));
-        _h_njet_ratio[chn]->addPoint(2, ratio(weights_nj2[chn]->val(), weights_nj1[chn]->val()), 0.5, ratio_err(weights_nj2[chn]->val(), weights_nj1[chn]->val()));
-        _h_njet_ratio[chn]->addPoint(3, ratio(weights_nj3[chn]->val(), weights_nj2[chn]->val()), 0.5, ratio_err(weights_nj3[chn]->val(), weights_nj2[chn]->val()));
-        _h_njet_ratio[chn]->addPoint(4, ratio(weights_nj4[chn]->val(), weights_nj3[chn]->val()), 0.5, ratio_err(weights_nj4[chn]->val(), weights_nj3[chn]->val()));
+        _h_njet_ratio[chn]->bin(1).set(ratio(weights_nj1[chn]->val(), weights_nj0[chn]->val()),
+                                       ratio_err(weights_nj1[chn]->val(), weights_nj0[chn]->val()));
+        _h_njet_ratio[chn]->bin(2).set(ratio(weights_nj2[chn]->val(), weights_nj1[chn]->val()),
+                                       ratio_err(weights_nj2[chn]->val(), weights_nj1[chn]->val()));
+        _h_njet_ratio[chn]->bin(3).set(ratio(weights_nj3[chn]->val(), weights_nj2[chn]->val()),
+                                       ratio_err(weights_nj3[chn]->val(), weights_nj2[chn]->val()));
+        _h_njet_ratio[chn]->bin(4).set(ratio(weights_nj4[chn]->val(), weights_nj3[chn]->val()),
+                                       ratio_err(weights_nj4[chn]->val(), weights_nj3[chn]->val()));
       }
 
       // Scale other histos
@@ -282,7 +286,7 @@ namespace Rivet {
     CounterPtr weights_nj3[3];
     CounterPtr weights_nj4[3];
 
-    Scatter2DPtr _h_njet_ratio[3];
+    Estimate1DPtr _h_njet_ratio[3];
     Histo1DPtr _h_njet_incl[3];
     Histo1DPtr _h_ptjet[3];
     Histo1DPtr _h_ptlead[3];

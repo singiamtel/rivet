@@ -4,7 +4,6 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -48,46 +47,54 @@ namespace Rivet {
       book(_h["ttpt"],  11, 1, 1);
       book(_h["tty"],   13, 1, 1);
       book(_h["njet"],  15, 1, 1);
-      /// @todo Memory leak
-      vector<double> njetbins = {-0.5, 0.5, 1.5, 2.5, 3.5};
-      for (size_t i = 0; i < njetbins.size() - 1; ++i) {
-        { Histo1DPtr tmp; _b["njet_ttm"].add(njetbins[i], njetbins[i+1], book(tmp, 17 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["njet_ttm_norm"].add(njetbins[i], njetbins[i+1], book(tmp, 99 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["njet_thadpt"].add(njetbins[i], njetbins[i+1], book(tmp, 22 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["njet_thadpt_norm"].add(njetbins[i], njetbins[i+1], book(tmp, 104 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["njet_ttpt"].add(njetbins[i], njetbins[i+1], book(tmp, 27 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["njet_ttpt_norm"].add(njetbins[i], njetbins[i+1], book(tmp, 109 + i, 1, 1)); }
+
+      const vector<double> njetbins{-0.5, 0.5, 1.5, 2.5, 3.5};
+      book(_b["njet_ttm"], njetbins);
+      book(_b["njet_ttm_norm"], njetbins);
+      book(_b["njet_thadpt"], njetbins);
+      book(_b["njet_thadpt_norm"], njetbins);
+      book(_b["njet_ttpt"], njetbins);
+      book(_b["njet_ttpt_norm"], njetbins);
+      for (size_t i = 1; i < _b["njet_ttm"]->numBins()+1; ++i) {
+        book(_b["njet_ttm"]->bin(i), 16 + i, 1, 1);
+        book(_b["njet_ttm_norm"]->bin(i), 98 + i, 1, 1);
+        book(_b["njet_thadpt"]->bin(i), 21 + i, 1, 1);
+        book(_b["njet_thadpt_norm"]->bin(i), 103 + i, 1, 1);
+        book(_b["njet_ttpt"]->bin(i), 26 + i, 1, 1);
+        book(_b["njet_ttpt_norm"]->bin(i), 108 + i, 1, 1);
       }
-      vector<double> thadybins = {0.0, 0.5, 1.0, 1.5, 2.5};
-      for (size_t i = 0; i < thadybins.size() - 1; ++i) {
-        { Histo1DPtr tmp; _b["thady_thadpt"].add(thadybins[i], thadybins[i+1], book(tmp, 32 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["thady_thadpt_norm"].add(thadybins[i], thadybins[i+1], book(tmp, 114 + i, 1, 1)); }
+
+      book(_b["thady_thadpt"], {0.0, 0.5, 1.0, 1.5, 2.5}, {"d32-x01-y01", "d33-x01-y01", "d34-x01-y01", "d35-x01-y01"});
+      book(_b["thady_thadpt_norm"], {0.0, 0.5, 1.0, 1.5, 2.5}, {"d114-x01-y01", "d115-x01-y01", "d116-x01-y01", "d117-x01-y01"});
+
+      book(_b["ttm_tty"], {300., 450., 625., 850., 2000.}, {"d37-x01-y01", "d38-x01-y01", "d39-x01-y01", "d40-x01-y01"});
+      book(_b["ttm_tty_norm"], {300., 450., 625., 850., 2000.}, {"d119-x01-y01", "d120-x01-y01", "d121-x01-y01", "d122-x01-y01"});
+
+      book(_b["thadpt_ttm"], {0., 90., 180., 270., 800.}, {"d42-x01-y01", "d43-x01-y01", "d44-x01-y01", "d45-x01-y01"});
+      book(_b["thadpt_ttm_norm"], {0., 90., 180., 270., 800.}, {"d124-x01-y01", "d125-x01-y01", "d126-x01-y01", "d127-x01-y01"});
+
+      const vector<double> jetbins{-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5};
+      book(_b["jetspt"], jetbins);
+      book(_b["jetspt_norm"], jetbins);
+      book(_b["jetseta"], jetbins);
+      book(_b["jetseta_norm"], jetbins);
+      book(_b["jetsdr"], jetbins);
+      book(_b["jetsdr_norm"], jetbins);
+      book(_b["jetsdrtops"], jetbins);
+      book(_b["jetsdrtops_norm"], jetbins);
+
+      for (size_t i = 1; i < _b["jetspt"]->numBins()+1; ++i) {
+        book(_b["jetspt"]->bin(i), 46 + i, 1, 1);
+        book(_b["jetspt_norm"]->bin(i), 128 + i, 1, 1);
+        book(_b["jetseta"]->bin(i), 55 + i, 1, 1);
+        book(_b["jetseta_norm"]->bin(i), 137 + i, 1, 1);
+        book(_b["jetsdr"]->bin(i), 64 + i, 1, 1);
+        book(_b["jetsdr_norm"]->bin(i), 146 + i, 1, 1);
+        book(_b["jetsdrtops"]->bin(i), 73 + i, 1, 1);
+        book(_b["jetsdrtops_norm"]->bin(i), 155 + i, 1, 1);
       }
-      vector<double> ttmbins = {300., 450., 625., 850., 2000.};
-      for (size_t i = 0; i < ttmbins.size() - 1; ++i) {
-        { Histo1DPtr tmp; _b["ttm_tty"].add(ttmbins[i], ttmbins[i+1], book(tmp, 37 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["ttm_tty_norm"].add(ttmbins[i], ttmbins[i+1], book(tmp, 119 + i, 1, 1)); }
-      }
-      vector<double> thadptbins = {0., 90., 180., 270., 800.};
-      for (size_t i = 0; i < thadptbins.size() - 1; ++i) {
-        { Histo1DPtr tmp; _b["thadpt_ttm"].add(thadptbins[i], thadptbins[i+1], book(tmp, 42 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["thadpt_ttm_norm"].add(thadptbins[i], thadptbins[i+1], book(tmp, 124 + i, 1, 1)); }
-      }
-      vector<double> jetbins = {-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5};
-      for (size_t i = 0; i < jetbins.size() - 1; ++i) {
-        { Histo1DPtr tmp; _b["jetspt"].add(jetbins[i], jetbins[i+1], book(tmp, 47 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["jetspt_norm"].add(jetbins[i], jetbins[i+1], book(tmp, 129 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["jetseta"].add(jetbins[i], jetbins[i+1], book(tmp, 56 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["jetseta_norm"].add(jetbins[i], jetbins[i+1], book(tmp, 138 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["jetsdr"].add(jetbins[i], jetbins[i+1], book(tmp, 65 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["jetsdr_norm"].add(jetbins[i], jetbins[i+1], book(tmp, 147 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["jetsdrtops"].add(jetbins[i], jetbins[i+1], book(tmp, 74 + i, 1, 1)); }
-        { Histo1DPtr tmp; _b["jetsdrtops_norm"].add(jetbins[i], jetbins[i+1], book(tmp, 156 + i, 1, 1)); }
-      }
-      vector<double> njetsptbins = {0., 40., 60., 80., 120.};
-      for (size_t i = 0; i < njetsptbins.size() - 1; ++i) {
-        { Histo1DPtr tmp; _b["njetspt"].add(njetsptbins[i], njetsptbins[i+1], book(tmp, 169 + i, 1, 1)); }
-      }
+
+      book(_b["njetspt"], {0., 40., 60., 80., 120.}, {"d169-x01-y01", "d170-x01-y01", "d171-x01-y01", "d172-x01-y01"});
 
       book(_h["thadpt_norm"], 83, 1, 1);
       book(_h["thady_norm"],  85, 1, 1);
@@ -226,7 +233,7 @@ namespace Rivet {
         }
       }
       for (double ptcut : {30, 50, 75, 100}) {
-        _b["njetspt"].fill(ptcut , count_if(additionaljets.begin(), additionaljets.end(),
+        _b["njetspt"]->fill(ptcut , count_if(additionaljets.begin(), additionaljets.end(),
                                             [&ptcut](const Particle& j) {return j.pt() > ptcut;}));
       }
     }
@@ -236,22 +243,19 @@ namespace Rivet {
     }
 
     void dualfill(const string& tag, const double val1, const double val2) {
-      _b[tag].fill(val1, val2);  _b[tag + "_norm"].fill(val1, val2);
+      _b[tag]->fill(val1, val2);  _b[tag + "_norm"]->fill(val1, val2);
     }
 
-    void gapfractionfromjetpt(const string& tag, Scatter2DPtr hgap, size_t njet) {
-      size_t hn = njet+3;
-      const double total = _b[tag].histo(0)->integral();
-      const double totalj = _b[tag].histo(hn)->integral();
+    void gapfractionfromjetpt(const string& tag, Estimate1DPtr hgap, size_t njet) {
+      size_t hn = njet+4;
+      const double total = _b[tag]->bin(1)->integral();
+      const double totalj = _b[tag]->bin(hn)->integral();
       double acc = total-totalj;
       double gf = acc/total;
       if (!std::isnan(gf)) {
-        for (size_t nb = 1 ; nb < _b[tag].histo(hn)->numBins()+1; ++nb) {
-          const double bl = _b[tag].histo(njet+3)->bin(nb).xMin();
-          const double bh = _b[tag].histo(njet+3)->bin(nb).xMax();
-          const double bc = 0.5*(bh+bl);
-          hgap->addPoint(bc, gf, bc-bl, bh-bc, 0., 0.);
-          acc += _b[tag].histo(njet+3)->bin(nb).sumW();
+        for (size_t nb = 1 ; nb < _b[tag]->bin(hn)->numBins()+1; ++nb) {
+          hgap->bin(nb).set(gf, 0.);
+          acc += _b[tag]->bin(hn)->bin(nb).sumW();
           gf = acc/total;
         }
       } else  MSG_WARNING("Gap fraction is NaN. Histogram not produced.");
@@ -274,25 +278,28 @@ namespace Rivet {
 
       for (auto& item : _b) {
         if (item.first.find("_norm") != string::npos) {
-          double area = 0;
-          for (auto& hist : item.second.histos()) {  area += hist->sumW(false); }
-          //normalize(item.second.histos(), 1.0, false);
-          if (area)  item.second.scale(1/area, this);
+          const double area = item.second->sumW(false);
+          //normalize(item.second, 1.0, false);
+          if (area)  scale(item.second, 1/area);
+          divByGroupWidth(item.second);
         }
         else if (item.first.find("njetspt") != string::npos) {
           // skip division by bin width for secondary axis
-          for (auto& hist : item.second.histos()) { scale(hist, sf); }
+          scale(item.second, sf);
         }
-        else  item.second.scale(sf, this);
+        else {
+          scale(item.second, sf);
+          divByGroupWidth(item.second);
+        }
       }
 
     }
 
     map<string,Histo1DPtr> _h;
-    map<string,BinnedHistogram> _b;
+    map<string,Histo1DGroupPtr> _b;
 
-    Scatter2DPtr m_hist_gap1;
-    Scatter2DPtr m_hist_gap2;
+    Estimate1DPtr m_hist_gap1;
+    Estimate1DPtr m_hist_gap2;
 
   };
 

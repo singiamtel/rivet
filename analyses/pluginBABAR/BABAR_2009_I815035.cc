@@ -123,40 +123,31 @@ namespace Rivet {
     void finalize() {
       double fact = crossSection()/ sumOfWeights()/nanobarn;
       for(unsigned int ih=1;ih<5;++ih) {
-	double sigma = 0.0, error = 0.0;
-	unsigned int ix=1,iy=ih;
-	if(ih==1) {
-	  sigma = _c_D0_Dstar->val()*fact;
-	  error = _c_D0_Dstar->err()*fact;
-	}
-	else if(ih==2) {
-	  sigma = _c_Dplus_Dstar->val()*fact;
-	  error = _c_Dplus_Dstar->err()*fact;
-	}
-	else if(ih==3) {
-	  sigma = _c_D_Dstar->val()*fact;
-	  error = _c_D_Dstar->err()*fact;
-	}
-	else if(ih==4) {
-	  sigma = _c_Dstar_Dstar->val()*fact;
-	  error = _c_Dstar_Dstar->err()*fact;
-	  ix=2;
-	  iy=1;
-	}
-	Scatter2D temphisto(refData(ix, 1, iy));
-        Scatter2DPtr     mult;
+        double sigma = 0.0, error = 0.0;
+        unsigned int ix=1,iy=ih;
+        if(ih==1) {
+          sigma = _c_D0_Dstar->val()*fact;
+          error = _c_D0_Dstar->err()*fact;
+        }
+        else if(ih==2) {
+          sigma = _c_Dplus_Dstar->val()*fact;
+          error = _c_Dplus_Dstar->err()*fact;
+        }
+        else if(ih==3) {
+          sigma = _c_D_Dstar->val()*fact;
+          error = _c_D_Dstar->err()*fact;
+        }
+        else if(ih==4) {
+          sigma = _c_Dstar_Dstar->val()*fact;
+          error = _c_Dstar_Dstar->err()*fact;
+          ix=2;
+          iy=1;
+        }
+        Estimate1DPtr mult;
         book(mult, ix, 1, iy);
-        for (size_t b = 0; b < temphisto.numPoints(); b++) {
-          const double x  = temphisto.point(b).x();
-          pair<double,double> ex = temphisto.point(b).xErrs();
-          pair<double,double> ex2 = ex;
-          if(ex2.first ==0.) ex2. first=0.0001;
-          if(ex2.second==0.) ex2.second=0.0001;
-          if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-            mult   ->addPoint(x, sigma, ex, make_pair(error,error));
-          }
-          else {
-            mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
           }
         }
       }

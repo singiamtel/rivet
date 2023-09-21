@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ZFinder.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -35,10 +34,12 @@ namespace Rivet {
       size_t ch = _mode? 11 : 0; // offset
       book(_hist_mll, 18 + ch, 1, 1);
 
-      vector<double> mll_bins = { 116., 150., 200., 300., 500., 1500. };
-      for (size_t i = 0; i < (mll_bins.size() - 1); ++i) {
-        {Histo1DPtr tmp; _hist_rap.add( mll_bins[i], mll_bins[i+1], book(tmp, 19 + ch + i, 1, 1));}
-        {Histo1DPtr tmp; _hist_deta.add(mll_bins[i], mll_bins[i+1], book(tmp, 24 + ch + i, 1, 1));}
+      const vector<double> mll_bins{ 116., 150., 200., 300., 500., 1500. };
+      book(_hist_rap, mll_bins);
+      book(_hist_deta, mll_bins);
+      for (size_t i=0; i < _hist_rap->numBins(); ++i) {
+        book(_hist_rap->bin(i+1),  19 + ch + i, 1, 1);
+        book(_hist_deta->bin(i+1), 24 + ch + i, 1, 1);
       }
 
     }
@@ -58,8 +59,8 @@ namespace Rivet {
       if (el1.pT() > 40*GeV || el2.pT() > 40*GeV) {
         const double mass = z0.mass();
         _hist_mll->fill(mass/GeV);
-        _hist_rap. fill(mass/GeV, z0.absrap());
-        _hist_deta.fill(mass/GeV, deltaEta(el1,el2));
+        _hist_rap->fill(mass/GeV, z0.absrap());
+        _hist_deta->fill(mass/GeV, deltaEta(el1,el2));
       }
     }
 
@@ -69,8 +70,8 @@ namespace Rivet {
 
       const double sf = crossSection()/sumOfWeights();
       scale(_hist_mll, sf);
-      _hist_rap.scale(sf*0.5,  this);
-      _hist_deta.scale(sf*0.5, this);
+      scale(_hist_rap, sf*0.5);
+      scale(_hist_deta, sf*0.5);
 
     }
 
@@ -84,7 +85,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _hist_mll;
-    BinnedHistogram _hist_rap, _hist_deta;
+    Histo1DGroupPtr _hist_rap, _hist_deta;
     /// @}
 
   };

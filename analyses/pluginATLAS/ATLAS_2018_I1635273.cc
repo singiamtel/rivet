@@ -45,7 +45,7 @@ namespace Rivet {
       declare(jets, "Jets");
 
       // book histograms
-      book(_h["N_incl_pb"],            1, 1, 1);
+      book(_d["N_incl_pb"],            1, 1, 1);
       book(_h["HT_1j_fb"],             6, 1, 1);
       book(_h["W_pt_1j_fb"],          11, 1, 1);
       book(_h["jet_pt1_1j_fb"],       16, 1, 1);
@@ -54,14 +54,14 @@ namespace Rivet {
       book(_h["jet_y2_2j_fb"],        28, 1, 1);
       book(_h["DeltaRj12_2j_fb"],     30, 1, 1);
       book(_h["jet_mass12_2j_fb"],    32, 1, 1);
-      book(_h["N_pb"],                34, 1, 1);
+      book(_d["N_pb"],                34, 1, 1);
       book(_h["HT_2j_fb"],            36, 1, 1);
       book(_h["W_pt_2j_fb"],          41, 1, 1);
       book(_h["jet_pt1_2j_fb"],       46, 1, 1);
       book(_h["el_eta_0j_pb"],        51, 1, 1);
       book(_h["el_eta_1j_pb"],        56, 1, 1);
 
-      book(_h["Wplus_N_incl_pb"],      3, 1, 1);
+      book(_d["Wplus_N_incl_pb"],      3, 1, 1);
       book(_h["Wplus_HT_1j_fb"],       8, 1, 1);
       book(_h["Wplus_W_pt_1j_fb"],    13, 1, 1);
       book(_h["Wplus_jet_pt1_1j_fb"], 18, 1, 1);
@@ -72,7 +72,7 @@ namespace Rivet {
       book(_h["Wplus_el_eta_0j_pb"],  53, 1, 1);
       book(_h["Wplus_el_eta_1j_pb"],  58, 1, 1);
 
-      book(_h["Wminus_N_incl_pb"],     3, 1, 2);
+      book(_d["Wminus_N_incl_pb"],     3, 1, 2);
       book(_h["Wminus_HT_1j_fb"],      8, 1, 2);
       book(_h["Wminus_W_pt_1j_fb"],   13, 1, 2);
       book(_h["Wminus_jet_pt1_1j_fb"],18, 1, 2);
@@ -84,7 +84,7 @@ namespace Rivet {
       book(_h["Wminus_el_eta_1j_pb"], 58, 1, 2);
 
       // and ratios
-      book(_r["WplusOverWminus_N_incl_pb"],      3, 1, 3);
+      book(_r_disc, 3, 1, 3);
       book(_r["WplusOverWminus_HT_1j_fb"],       8, 1, 3);
       book(_r["WplusOverWminus_W_pt_1j_fb"],    13, 1, 3);
       book(_r["WplusOverWminus_jet_pt1_1j_fb"], 18, 1, 3);
@@ -131,9 +131,9 @@ namespace Rivet {
       const double HT = ST + lepton.pT() / GeV + MET; //missET;
 
       // fill W histograms
-      _h["N_pb"]->fill(njets);
+      _d["N_pb"]->fill(njets);
       for (size_t i = 0; i <= njets; ++i) {
-          _h["N_incl_pb"]->fill(i);
+          _d["N_incl_pb"]->fill(i);
       }
       _h["el_eta_0j_pb"]->fill(lepton.abseta());
 
@@ -153,10 +153,10 @@ namespace Rivet {
           _h["jet_y2_2j_fb"]->fill(jets[1].absrap());
           _h["jet_mass12_2j_fb"]->fill( (jets[0].mom()+jets[1].mom()).mass()/GeV);
       }
-        // fill W+ histograms
+      // fill W+ histograms
       if (lepton.charge() > 0) {
           for (size_t i = 0; i <= njets; ++i) {
-              _h["Wplus_N_incl_pb"]->fill(i);
+            _d["Wplus_N_incl_pb"]->fill(i);
           }
           _h["Wplus_el_eta_0j_pb"]->fill(lepton.abseta());
           if (njets > 0) {
@@ -175,7 +175,7 @@ namespace Rivet {
       // fill W- histograms
       if (lepton.charge() < 0) {
         for (size_t i = 0; i <= njets; ++i) {
-          _h["Wminus_N_incl_pb"]->fill(i);
+          _d["Wminus_N_incl_pb"]->fill(i);
         }
         _h["Wminus_el_eta_0j_pb"]->fill(lepton.abseta());
         if (njets > 0) {
@@ -199,6 +199,7 @@ namespace Rivet {
       const double scalefactor_fb = crossSection() / sumOfWeights() / femtobarn;
       const double scalefactor_pb = crossSection() / sumOfWeights() / picobarn;
 
+      scale(_d, scalefactor_pb);
       for (auto& hit : _h){
         if (hit.first.find("_fb") != string::npos) scale(hit.second, scalefactor_fb);
         else                                       scale(hit.second, scalefactor_pb);
@@ -211,6 +212,7 @@ namespace Rivet {
         denom_name.replace(rit.first.find(ratio_label),ratio_label.length(),"Wminus");
         divide(_h[num_name], _h[denom_name], rit.second);
       }
+      divide(_d["Wplus_N_incl_pb"], _d["Wminus_N_incl_pb"], _r_disc);
     }
 
     protected:
@@ -218,8 +220,10 @@ namespace Rivet {
       size_t _mode;
 
     private:
+      map<string, BinnedHistoPtr<int>> _d;
       map<string, Histo1DPtr> _h;
-      map<string, Scatter2DPtr> _r;
+      map<string, Estimate1DPtr> _r;
+      BinnedEstimatePtr<int> _r_disc;
   };
 
   // The hook for the plugin system

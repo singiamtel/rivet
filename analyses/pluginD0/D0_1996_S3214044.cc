@@ -124,16 +124,14 @@ namespace Rivet {
 
     void _threeJetAnalysis(const Jets& jets) {
       // >=3 jet events
-      FourMomentum jjj(jets[0].momentum()+jets[1].momentum()+jets[2].momentum());
+      FourMomentum jjj(jets[0].mom() + jets[1].mom() + jets[2].mom());
       const double sqrts = _safeMass(jjj);
-      if (sqrts<200*GeV) {
-        return;
-      }
+      if (sqrts<200*GeV)  return;
 
       const LorentzTransform cms_boost = LorentzTransform::mkFrameTransformFromBeta(jjj.betaVec());
       vector<FourMomentum> jets_boosted;
       for (Jet jet : jets) {
-        jets_boosted.push_back(cms_boost.transform(jet.momentum()));
+        jets_boosted.push_back(cms_boost.transform(jet.mom()));
       }
       std::sort(jets_boosted.begin(), jets_boosted.end(), FourMomentum::byEDescending());
       FourMomentum p3(jets_boosted[0]);

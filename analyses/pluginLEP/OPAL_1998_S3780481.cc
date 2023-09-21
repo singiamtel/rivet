@@ -84,7 +84,7 @@ namespace Rivet {
         const double logxp = -std::log(xp);
         _histXpall->fill(xp);
         _histLogXpall->fill(logxp);
-        _histMultiChargedall->fill(_histMultiChargedall->bin(1).xMid());
+        _histMultiChargedall->fill(Ecm);
         switch (flavour) {
           /// @todo Use PDG code enums
         case PID::DQUARK:
@@ -92,17 +92,17 @@ namespace Rivet {
         case PID::SQUARK:
           _histXpuds->fill(xp);
           _histLogXpuds->fill(logxp);
-          _histMultiChargeduds->fill(_histMultiChargeduds->bin(1).xMid());
+          _histMultiChargeduds->fill(Ecm);
           break;
         case PID::CQUARK:
           _histXpc->fill(xp);
           _histLogXpc->fill(logxp);
-          _histMultiChargedc->fill(_histMultiChargedc->bin(1).xMid());
+          _histMultiChargedc->fill(Ecm);
           break;
         case PID::BQUARK:
           _histXpb->fill(xp);
           _histLogXpb->fill(logxp);
-          _histMultiChargedb->fill(_histMultiChargedb->bin(1).xMid());
+          _histMultiChargedb->fill(Ecm);
           break;
         }
       }
@@ -125,10 +125,10 @@ namespace Rivet {
       book(_histLogXpc          ,6, 1, 1);
       book(_histLogXpb          ,7, 1, 1);
       book(_histLogXpall        ,8, 1, 1);
-      book(_histMultiChargeduds ,9, 1, 1);
-      book(_histMultiChargedc   ,9, 1, 2);
-      book(_histMultiChargedb   ,9, 1, 3);
-      book(_histMultiChargedall ,9, 1, 4);
+      book(_histMultiChargeduds, 9, 1, 1);
+      book(_histMultiChargedc,   9, 1, 2);
+      book(_histMultiChargedb,   9, 1, 3);
+      book(_histMultiChargedall, 9, 1, 4);
       // Counters
       book(_weightedTotalPartNum, "_TotalPartNum");
       book(_SumOfudsWeights, "_udsWeights");
@@ -140,14 +140,14 @@ namespace Rivet {
     /// Finalize
     void finalize() {
       const double avgNumParts = dbl(*_weightedTotalPartNum) / sumOfWeights();
-      normalize(_histXpuds    , avgNumParts);
-      normalize(_histXpc      , avgNumParts);
-      normalize(_histXpb      , avgNumParts);
-      normalize(_histXpall    , avgNumParts);
-      normalize(_histLogXpuds , avgNumParts);
-      normalize(_histLogXpc   , avgNumParts);
-      normalize(_histLogXpb   , avgNumParts);
-      normalize(_histLogXpall , avgNumParts);
+      normalize(_histXpuds   , avgNumParts);
+      normalize(_histXpc     , avgNumParts);
+      normalize(_histXpb     , avgNumParts);
+      normalize(_histXpall   , avgNumParts);
+      normalize(_histLogXpuds, avgNumParts);
+      normalize(_histLogXpc  , avgNumParts);
+      normalize(_histLogXpb  , avgNumParts);
+      normalize(_histLogXpall, avgNumParts);
 
       scale(_histMultiChargeduds, 1.0/ *_SumOfudsWeights);
       scale(_histMultiChargedc  , 1.0/ *_SumOfcWeights);
@@ -178,10 +178,11 @@ namespace Rivet {
     Histo1DPtr _histLogXpc;
     Histo1DPtr _histLogXpb;
     Histo1DPtr _histLogXpall;
-    Histo1DPtr _histMultiChargeduds;
-    Histo1DPtr _histMultiChargedc;
-    Histo1DPtr _histMultiChargedb;
-    Histo1DPtr _histMultiChargedall;
+    BinnedHistoPtr<string> _histMultiChargeduds;
+    BinnedHistoPtr<string> _histMultiChargedc;
+    BinnedHistoPtr<string> _histMultiChargedb;
+    BinnedHistoPtr<string> _histMultiChargedall;
+    const string Ecm = "91.2";
     /// @}
 
   };

@@ -43,7 +43,7 @@ namespace Rivet {
       // individual channels
       book(_h_Njets_excl,  _mode + 1, 1, 1);
       book(_h_Njets,       _mode + 4, 1, 1);
-      book(_h_Njets_Ratio, _mode + 7, 1, 1, true);
+      book(_h_Njets_Ratio, _mode + 7, 1, 1);
 
       book(_h_leading_jet_pT_eq1jet, _mode + 10, 1, 1);
       book(_h_leading_jet_pT       , _mode + 13, 1, 1);
@@ -132,7 +132,7 @@ namespace Rivet {
           // use F. James's approximation for weighted events:
           e = sqrt( safediv((1 - 2 * r) * dN + r * r * dD, d * d) );
         }
-        _h_Njets_Ratio->point(i).setY(r, e);
+        _h_Njets_Ratio->bin(i+1).set(r, e);
       }
 
       // when running in combined mode, need to average to get lepton xsec
@@ -163,9 +163,9 @@ namespace Rivet {
 
   private:
 
-    Scatter2DPtr _h_Njets_Ratio;
+    Estimate1DPtr _h_Njets_Ratio;
     Histo1DPtr   _h_Njets;
-    Scatter2DPtr _h_Njets_excl_Ratio;
+    Estimate1DPtr _h_Njets_excl_Ratio;
     Histo1DPtr   _h_Njets_excl;
     Histo1DPtr   _h_HT;
     Histo1DPtr   _h_leading_jet_rap;

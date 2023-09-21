@@ -25,7 +25,7 @@ namespace Rivet {
     RIVET_DEFAULT_PROJ_CLONE(DecayedParticles);
 
     /// Import to avoid warnings about overload-hiding
-    using Projection::operator =;
+    using Projection::operator=;
 
     /// Virtual destructor.
     virtual ~DecayedParticles() { }
@@ -59,14 +59,14 @@ namespace Rivet {
      */
     bool modeMatches(size_t imode,unsigned int nstable, map<PdgId,unsigned int> prod) const {
       // same no of stable particles
-      if(nstable!=_nStable[imode]) return false;
+      if (nstable!=_nStable[imode]) return false;
       for (const auto & kv : prod ) {
-	// check if same decay products
-	map<PdgId,Particles>::const_iterator iloc = _products[imode].find(kv.first);
-	// same type of product
-	if (iloc == _products[imode].end()) return false;
-	// and same number
-	if(iloc->second.size()!=kv.second) return false;
+        // check if same decay products
+        map<PdgId,Particles>::const_iterator iloc = _products[imode].find(kv.first);
+        // same type of product
+        if (iloc == _products[imode].end()) return false;
+        // and same number
+        if(iloc->second.size()!=kv.second) return false;
       }
       // pass all the tests
       return true;

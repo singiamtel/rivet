@@ -217,7 +217,7 @@ class ATLAS_2018_I1705857 : public Analysis {
     void finalize() {
       // Normalise all histograms
       const double sf = crossSection() / femtobarn / sumOfWeights();
-      for (auto const& h : _histograms) {
+      for (auto& h : _histograms) {
         scale(h.second, sf);
         if (h.first.find("fid_xsec") != string::npos)  continue;
         normalize(h.second, 1.0);

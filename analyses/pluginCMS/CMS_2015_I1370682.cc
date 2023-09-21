@@ -146,39 +146,37 @@ namespace Rivet {
       const FourMomentum ttP4 = t1P4 + t2P4;
       const FourMomentum t1P4AtCM = LorentzTransform::mkFrameTransformFromBeta(ttP4.betaVec()).transform(t1P4);
 
-      const double weight = 1.0;
-
       if ( ttbar.mode() == PseudoTop::CH_SEMILEPTON ) {
         const Particle lCand1 = ttbar.wDecays1()[0]; // w1 dau0 is the lepton in the PseudoTop
         if (lCand1.pT() < 33*GeV || lCand1.abseta() > 2.1) vetoEvent;
-        _hSL_topPt->fill(t1P4.pT(), weight);
-        _hSL_topPt->fill(t2P4.pT(), weight);
-        _hSL_topPtTtbarSys->fill(t1P4AtCM.pT(), weight);
-        _hSL_topY->fill(t1P4.rapidity(), weight);
-        _hSL_topY->fill(t2P4.rapidity(), weight);
-        _hSL_ttbarDelPhi->fill(dPhi, weight);
-        _hSL_topPtLead->fill(pt1, weight);
-        _hSL_topPtSubLead->fill(pt2, weight);
-        _hSL_ttbarPt->fill(ttP4.pT(), weight);
-        _hSL_ttbarY->fill(ttP4.rapidity(), weight);
-        _hSL_ttbarMass->fill(ttP4.mass(), weight);
+        _hSL_topPt->fill(t1P4.pT());
+        _hSL_topPt->fill(t2P4.pT());
+        _hSL_topPtTtbarSys->fill(t1P4AtCM.pT());
+        _hSL_topY->fill(t1P4.rapidity());
+        _hSL_topY->fill(t2P4.rapidity());
+        _hSL_ttbarDelPhi->fill(dPhi);
+        _hSL_topPtLead->fill(pt1);
+        _hSL_topPtSubLead->fill(pt2);
+        _hSL_ttbarPt->fill(ttP4.pT());
+        _hSL_ttbarY->fill(ttP4.rapidity());
+        _hSL_ttbarMass->fill(ttP4.mass());
       }
       else if ( ttbar.mode() == PseudoTop::CH_FULLLEPTON ) {
         const Particle lCand1 = ttbar.wDecays1()[0]; // dau0 are the lepton in the PseudoTop
         const Particle lCand2 = ttbar.wDecays2()[0]; // dau0 are the lepton in the PseudoTop
         if (lCand1.pT() < 20*GeV || lCand1.abseta() > 2.4) vetoEvent;
         if (lCand2.pT() < 20*GeV || lCand2.abseta() > 2.4) vetoEvent;
-        _hDL_topPt->fill(t1P4.pT(), weight);
-        _hDL_topPt->fill(t2P4.pT(), weight);
-        _hDL_topPtTtbarSys->fill(t1P4AtCM.pT(), weight);
-        _hDL_topY->fill(t1P4.rapidity(), weight);
-        _hDL_topY->fill(t2P4.rapidity(), weight);
-        _hDL_ttbarDelPhi->fill(dPhi, weight);
-        _hDL_topPtLead->fill(pt1, weight);
-        _hDL_topPtSubLead->fill(pt2, weight);
-        _hDL_ttbarPt->fill(ttP4.pT(), weight);
-        _hDL_ttbarY->fill(ttP4.rapidity(), weight);
-        _hDL_ttbarMass->fill(ttP4.mass(), weight);
+        _hDL_topPt->fill(t1P4.pT());
+        _hDL_topPt->fill(t2P4.pT());
+        _hDL_topPtTtbarSys->fill(t1P4AtCM.pT());
+        _hDL_topY->fill(t1P4.rapidity());
+        _hDL_topY->fill(t2P4.rapidity());
+        _hDL_ttbarDelPhi->fill(dPhi);
+        _hDL_topPtLead->fill(pt1);
+        _hDL_topPtSubLead->fill(pt2);
+        _hDL_ttbarPt->fill(ttP4.pT());
+        _hDL_ttbarY->fill(ttP4.rapidity());
+        _hDL_ttbarMass->fill(ttP4.mass());
       }
 
     }
@@ -274,7 +272,7 @@ namespace Rivet {
     }
 
 
-    void applyCorrection(Histo1DPtr h, const double* cf) {
+    void applyCorrection(Histo1DPtr& h, const double* cf) {
       for (auto& bin : h->bins()) {
         bin.scaleW( cf[bin.index()-1] );
       }

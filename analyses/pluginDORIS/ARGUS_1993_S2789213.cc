@@ -13,31 +13,30 @@ namespace Rivet {
 
     RIVET_DEFAULT_ANALYSIS_CTOR(ARGUS_1993_S2789213);
 
-
     void init() {
+
       declare(UnstableParticles(), "UFS");
-      for(unsigned int ix=0;ix<3;++ix) {
-        for(unsigned int iy=0;iy<5;++iy) {
-          std::ostringstream title;
-          title << "/TMP/MULT_" << ix << "_" << iy;
-          book(_mult[ix][iy],title.str());
+      for (unsigned int ix=0; ix<3; ++ix) {
+        for (unsigned int iy=0; iy<5; ++iy) {
+          if (ix==2 && iy==0) continue;
+          book(_mult[ix][iy], ix+1, 1, iy+1);
         }
       }
 
-      book(_hist_cont_KStarPlus , 4, 1, 1);
-      book(_hist_Ups1_KStarPlus , 5, 1, 1);
-      book(_hist_Ups4_KStarPlus , 6, 1, 1);
+      book(_hist_cont_KStarPlus, 4, 1, 1);
+      book(_hist_Ups1_KStarPlus, 5, 1, 1);
+      book(_hist_Ups4_KStarPlus, 6, 1, 1);
 
-      book(_hist_cont_KStar0    , 7, 1, 1);
-      book(_hist_Ups1_KStar0    , 8, 1, 1);
-      book(_hist_Ups4_KStar0    , 9, 1, 1);
+      book(_hist_cont_KStar0, 7, 1, 1);
+      book(_hist_Ups1_KStar0, 8, 1, 1);
+      book(_hist_Ups4_KStar0, 9, 1, 1);
 
-      book(_hist_cont_Rho0      ,10, 1, 1);
-      book(_hist_Ups1_Rho0      ,11, 1, 1);
-      book(_hist_Ups4_Rho0      ,12, 1, 1);
+      book(_hist_cont_Rho0, 10, 1, 1);
+      book(_hist_Ups1_Rho0, 11, 1, 1);
+      book(_hist_Ups4_Rho0, 12, 1, 1);
 
-      book(_hist_cont_Omega     ,13, 1, 1);
-      book(_hist_Ups1_Omega     ,14, 1, 1);
+      book(_hist_cont_Omega, 13, 1, 1);
+      book(_hist_Ups1_Omega, 14, 1, 1);
 
 
       book(_weightSum_cont,"TMP/weightSumcont");
@@ -60,22 +59,22 @@ namespace Rivet {
           double beta = p.p3().mod()/p.E();
           if (id == 113) {
             _hist_cont_Rho0->fill(xp, 1./beta);
-            _mult[0][1]->fill();
+            _mult[0][1]->fill(Ecm1);
           }
           else if (id == 313) {
             _hist_cont_KStar0->fill(xp, 1./beta);
-            _mult[0][2]->fill();
+            _mult[0][2]->fill(Ecm1);
           }
           else if (id == 223) {
             _hist_cont_Omega->fill(xp, 1./beta);
-            _mult[0][0]->fill();
+            _mult[0][0]->fill(Ecm1);
           }
           else if (id == 323) {
             _hist_cont_KStarPlus->fill(xp,1./beta);
-            _mult[0][3]->fill();
+            _mult[0][3]->fill(Ecm1);
           }
           else if (id == 333) {
-            _mult[0][4]->fill();
+            _mult[0][4]->fill(Ecm1);
           }
         }
       }
@@ -102,48 +101,45 @@ namespace Rivet {
             if (id == 113) {
               if (parentId == 553) {
                 _hist_Ups1_Rho0->fill(xp,1./beta);
-                _mult[1][1]->fill();
+                _mult[1][1]->fill(Ecm2);
               }
               else {
                 _hist_Ups4_Rho0->fill(xp,1./beta);
-                _mult[2][1]->fill();
+                _mult[2][1]->fill(Ecm3);
               }
             }
             else if (id == 313) {
               if (parentId == 553) {
                 _hist_Ups1_KStar0->fill(xp,1./beta);
-                _mult[1][2]->fill();
+                _mult[1][2]->fill(Ecm2);
               }
               else {
                 _hist_Ups4_KStar0->fill(xp,1./beta);
-                _mult[2][2]->fill();
+                _mult[2][2]->fill(Ecm3);
               }
             }
             else if (id == 223) {
               if (parentId == 553) {
                 _hist_Ups1_Omega->fill(xp,1./beta);
-                _mult[1][0]->fill();
-              }
-              else {
-                _mult[2][0]->fill();
+                _mult[1][0]->fill(Ecm2);
               }
             }
             else if (id == 323) {
               if (parentId == 553) {
                 _hist_Ups1_KStarPlus->fill(xp,1./beta);
-                _mult[1][3]->fill();
+                _mult[1][3]->fill(Ecm2);
               }
               else {
                 _hist_Ups4_KStarPlus->fill(xp,1./beta);
-                _mult[2][3]->fill();
+                _mult[2][3]->fill(Ecm3);
               }
             }
             else if (id == 333) {
               if (parentId == 553) {
-                _mult[1][4]->fill();
+                _mult[1][4]->fill(Ecm2);
               }
               else {
-                _mult[2][4]->fill();
+                _mult[2][4]->fill(Ecm3);
               }
             }
           }
@@ -154,18 +150,15 @@ namespace Rivet {
 
     void finalize() {
       // multiplicities
-      vector<CounterPtr> scales = {_weightSum_cont,_weightSum_Ups1,_weightSum_Ups4};
-      for(unsigned int ix=0;ix<3;++ix) {
-        if(scales[ix]->val() <= 0.) continue;
-        for(unsigned int iy=0;iy<5;++iy) {
-          // skip Upsilon(4S) -> omega, just an upper limit
-          if(ix==2&&iy==0) continue;
-          Scatter2DPtr scatter;
-          book(scatter,ix+1, 1, iy+1, true);
-          scale(_mult[ix][iy],1./ *scales[ix]);
-          scatter->point(0).setY(_mult[ix][iy]->val(),_mult[ix][iy]->err());
+      const vector<CounterPtr> scales = {_weightSum_cont,_weightSum_Ups1,_weightSum_Ups4};
+      for (size_t i=0; i<scales.size(); ++i) {
+        if (!scales[i]->val())  continue;
+        for (size_t j=0; j<5; ++j) {
+          if (i==2 && j==0) continue;
+          _mult[i][j]->scaleW(1.0/ scales[i]->val());
         }
       }
+
       // spectra
       if (_weightSum_cont->val() > 0.) {
         scale(_hist_cont_KStarPlus, 1. / *_weightSum_cont);
@@ -194,8 +187,9 @@ namespace Rivet {
     Histo1DPtr _hist_cont_Rho0, _hist_Ups1_Rho0,  _hist_Ups4_Rho0;
     Histo1DPtr _hist_cont_Omega, _hist_Ups1_Omega;
 
-    CounterPtr _mult[3][5];
+    BinnedHistoPtr<string> _mult[3][5];
     CounterPtr _weightSum_cont,_weightSum_Ups1,_weightSum_Ups4;
+    const string Ecm1 = "10.45", Ecm2 = "9.46", Ecm3 = "10.58";
 
 
     /// Recursively walk the decay tree to find decay products of @a p

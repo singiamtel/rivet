@@ -117,18 +117,12 @@ namespace Rivet {
 
     void histNorm(Rivet::Histo1DPtr hist, std::string var) {
       if (var=="m" || var=="tm") {
-        double norm = 0.;
-        for (size_t i = normBin1; i < normBin2; i++) { //only normalize in the resummation region.
-          norm+=hist->bin(i+1).sumW();
-        }
+        const double norm = hist->integralRange(normBin1+1, normBin2);
         if (norm > 0.) {
-          hist->scaleW(1.0/(norm));
+          hist->scaleW(1.0/norm);
         }
       }
-      else if ( var=="zg" || var=="tzg") {
-        normalize(hist);
-      }
-      else{
+      else {
         normalize(hist);
       }
     }

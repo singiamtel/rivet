@@ -72,10 +72,10 @@ namespace Rivet {
         book(_h["MQ0"   + to_str(i)], "_MQ0"   + to_str(i+12), refData("d" + to_str(i+12) + "-x01-y01"));
         book(_h["Qsum"  + to_str(i)], "_Qsum"  + to_str(i+16), refData("d" + to_str(i+16) + "-x01-y01"));
         book(_h["MQsum" + to_str(i)], "_MQsum" + to_str(i+20), refData("d" + to_str(i+20) + "-x01-y01"));
-        book(_s["gapFracQ0"    + to_str(i)],  8+i, 1 ,1, true);
-        book(_s["gapFracMQ0"   + to_str(i)], 12+i, 1, 1, true);
-        book(_s["gapFracQsum"  + to_str(i)], 16+i, 1, 1, true);
-        book(_s["gapFracMQsum" + to_str(i)], 20+i, 1, 1, true);
+        book(_s["gapFracQ0"    + to_str(i)],  8+i, 1 ,1);
+        book(_s["gapFracMQ0"   + to_str(i)], 12+i, 1, 1);
+        book(_s["gapFracQsum"  + to_str(i)], 16+i, 1, 1);
+        book(_s["gapFracMQsum" + to_str(i)], 20+i, 1, 1);
       }
     }
 
@@ -166,15 +166,15 @@ namespace Rivet {
     }
 
 
-    void constructGapFraction(Scatter2DPtr out, Histo1DPtr in) {
+    void constructGapFraction(Estimate1DPtr out, Histo1DPtr in) {
       bool hasWeights = in->effNumEntries() != in->numEntries();
       double denW  = in->sumW();
       double denW2 = in->sumW2();
-      size_t nEnd = out->numPoints();
+      size_t nEnd  = out->numBins();
 
-      for (size_t i = 0; i < nEnd; ++i) {
+      for (auto& b : out->bins()) {
           double numW = in->sumW(), numW2 = in->sumW2();
-          for (size_t j = i; j < nEnd; ++j) {
+          for (size_t j = b.index(); j < nEnd; ++j) {
             numW  -= in->bin(j).sumW();
             numW2 -= in->bin(j).sumW2();
           }
@@ -183,7 +183,7 @@ namespace Rivet {
           if (hasWeights) { // use F. James's approximation for weighted events
             yerr = sqrt( safediv((1 - 2 * yval) * numW2 + yval * yval * denW2, denW * denW) );
           }
-          out->point(i).setY(yval, yerr);
+          b.set(yval, yerr);
       }
     }
 
@@ -209,7 +209,7 @@ namespace Rivet {
 
     /// @name Histogram helper functions
     map<string, Histo1DPtr> _h;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
   };
 
 

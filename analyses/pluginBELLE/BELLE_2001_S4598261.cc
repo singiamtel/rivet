@@ -59,7 +59,7 @@ namespace Rivet {
           const double pcm = cms_boost.transform(FourMomentum(pions[ix]->momentum())).p();
           _histdSigDp->fill(pcm);
         }
-        _histMult->fill(0., pions.size());
+        _histMult->fill(0, pions.size());
       }
     }
 
@@ -77,7 +77,7 @@ namespace Rivet {
     CounterPtr _weightSum;
     /// Histograms
     Histo1DPtr _histdSigDp;
-    Histo1DPtr _histMult;
+    BinnedProfilePtr<int> _histMult;
     /// @}
 
 

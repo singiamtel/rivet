@@ -39,15 +39,15 @@ namespace Rivet {
           if (p.fromBottom())  continue;
           if (p.abspid() == 421) {
             _h_D0->fill(p.pT()/GeV);
-            _h_integ->fill(1);
+            _h_integ->fill(sedges[0]);
           }
           else if (p.abspid() == 411) {
             _h_Dplus->fill(p.pT()/GeV);
-            _h_integ->fill(2);
+            _h_integ->fill(sedges[1]);
           }
           else if (p.abspid()== 413) {
             _h_Dstarp->fill(p.pT()/GeV);
-            _h_integ->fill(3);
+            _h_integ->fill(sedges[2]);
           }
         }
     }
@@ -69,7 +69,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_D0, _h_Dplus, _h_Dstarp, _h_integ;
+    Histo1DPtr _h_D0, _h_Dplus, _h_Dstarp;
+    BinnedHistoPtr<string> _h_integ;
+    vector<string> sedges = {"P P --> D0 X", "P P --> D+ X", "P P --> D* X"};
     /// @}
 
 

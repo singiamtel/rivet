@@ -11,10 +11,12 @@ namespace Rivet {
   class ImpactParameterProjection: public SingleValueProjection {
   public:
 
-    ImpactParameterProjection() {
-      setName("ImpactParameterProjection");
-      declare(HepMCHeavyIon(), "HepMC");
-    }
+  using SingleValueProjection::operator=;
+
+  ImpactParameterProjection() {
+    setName("ImpactParameterProjection");
+    declare(HepMCHeavyIon(), "HepMC");
+  }
 
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(ImpactParameterProjection);

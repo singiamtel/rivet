@@ -24,23 +24,27 @@ namespace Rivet {
 
       // Book histograms
       unsigned int iloc(0);
-      if(isCompatibleWithSqrtS(22*GeV)) {
-	iloc=1;
+      if (isCompatibleWithSqrtS(22*GeV)) {
+        iloc=1;
       }
       else if (isCompatibleWithSqrtS(34*GeV)) {
-	iloc=2;
+        iloc=2;
       }
-      else
-	MSG_ERROR("Beam energy not supported!");
-      book(_histEEC  , 1, 1, iloc);
-      book(_histAEEC , 3, 1, iloc);
+      else {
+        MSG_ERROR("Beam energy not supported!");
+      }
+      book(_histEEC,   1, 1, iloc);
+      book(_histAEEC,  3, 1, iloc);
       book(_weightSum, "TMP/weightSum");
-
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      if (edges[0].empty())  edges[0] = _histEEC->xEdges();
+      if (edges[1].empty())  edges[1] = _histAEEC->xEdges();
+
       // First, veto on leptonic events by requiring at least 4 charged FS particles
       const FinalState& fs = apply<FinalState>(event, "FS");
       // Even if we only generate hadronic events, we still need a cut on numCharged >= 2.
@@ -66,16 +70,23 @@ namespace Rivet {
           const double energy_j = p_j->momentum().E();
           const double thetaij = mom3_i.unit().angle(mom3_j.unit());
           double eec = (energy_i*energy_j) / Evis2;
-	  if(p_i != p_j) eec *= 2.;
-          _histEEC->fill(thetaij, eec);
-          if (thetaij <0.5*M_PI)
-            _histAEEC->fill( thetaij, -eec);
-          else
-            _histAEEC->fill( M_PI-thetaij, eec);
+          if (p_i != p_j)  eec *= 2.;
+          _histEEC->fill(map2string(thetaij, 0), eec);
+          if (thetaij < 0.5*M_PI) {
+            _histAEEC->fill(map2string(thetaij, 1), -eec);
+          }
+          else {
+            _histAEEC->fill(map2string(M_PI-thetaij, 1), eec);
+          }
         }
       }
     }
 
+    string map2string(const double val, const size_t axis) const {
+      const size_t idx = axes[axis].index(val);
+      if (idx && idx <= edges[axis].size())  return edges[axis][idx];
+      return "OTHER";
+    }
 
     /// Normalise histograms etc., after the run
     void finalize() {
@@ -88,16 +99,16 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _histEEC, _histAEEC;
+    BinnedHistoPtr<string> _histEEC, _histAEEC;
+    vector<string> edges[2];
     CounterPtr _weightSum;
+    YODA::Axis<double> axes[2] = { YODA::Axis<double>(50, 0.0, M_PI),
+                                   YODA::Axis<double>(24, 0.0628, 0.5*M_PI) };
     /// @}
 
 
   };
 
-
   // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CELLO_1982_I12010);
-
-
 }

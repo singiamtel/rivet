@@ -26,10 +26,10 @@ namespace Rivet {
       declare(FastJets(cfs, FastJets::JADE, 0.7), "Jets");
 
       // Book histograms
-      for(unsigned int ih=0;ih<3;++ih) {
-	for(unsigned int iy=0;iy<3;++iy) {
-	  book(_h_mult[ih][iy],ih+1,1,iy+1);
-	}
+      for (unsigned int ih=0; ih<3; ++ih) {
+        for (unsigned int iy=0; iy<3; ++iy) {
+          book(_h_mult[ih][iy], ih+1, 1, iy+1);
+        }
       }
     }
 
@@ -46,12 +46,12 @@ namespace Rivet {
       MSG_DEBUG("Passed leptonic event cut");
       const FastJets& jets = apply<FastJets>(event, "Jets");
       if (jets.clusterSeq()) {
-	vector<double> ycut = {0.01,0.02,0.04};
-	for (unsigned int ih=0;ih<3;++ih) {
-	  int nbin = jets.clusterSeq()->n_exclusive_jets_ycut(ycut[ih])-2;
-	  if(nbin<0 || nbin>2) continue;
-	  _h_mult[ih][nbin]->fill(numParticles);
-	}
+        vector<double> ycut = {0.01,0.02,0.04};
+        for (unsigned int ih=0;ih<3;++ih) {
+          int nbin = jets.clusterSeq()->n_exclusive_jets_ycut(ycut[ih])-2;
+          if (nbin<0 || nbin>2) continue;
+          _h_mult[ih][nbin]->fill(numParticles);
+        }
       }
     }
 
@@ -59,10 +59,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      for(unsigned int ih=0;ih<3;++ih) {
-	for(unsigned int iy=0;iy<3;++iy) {
-	  normalize(_h_mult[ih][iy],2000.);
-	}
+      for (unsigned int ih=0; ih<3; ++ih) {
+        for (unsigned int iy=0; iy<3; ++iy) {
+          normalize(_h_mult[ih][iy], 2000.);
+        }
       }
     }
 
@@ -71,7 +71,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_mult[3][3];
+    BinnedHistoPtr<int> _h_mult[3][3];
     /// @}
 
 

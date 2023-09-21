@@ -134,56 +134,42 @@ namespace Rivet {
     void finalize() {
       // energy dependent
       for(unsigned int ix=1;ix<4;++ix) {
-	CounterPtr denom = (ix==1 || ix==3 ) ? _c_muons : _c_hadrons;
-	Scatter1D R = (*_c_kaons/ *denom).mkScatter();
-	double              rval = R.point(0).x();
-	pair<double,double> rerr = R.point(0).xErrs();
-	Scatter2D temphisto(refData(ix, 1, 1));
-	Scatter2DPtr mult;
-	book(mult,ix, 1, 1);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  if( (ix==1 || ix==3) &&  _c_muonsY ->val()==0.) continue;
-	  if(  ix==2           &&  _c_hadrons->val()==0.) continue;
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  if(x==9.458) {
-	    if(_c_kaonsY->val()>0.) {
-	      Scatter1D R2;
-	      if(ix==1 ) {
-		R2 = (*_c_kaonsY/ *_c_muonsY).mkScatter();
-	      }
-	      else if(ix==2) {
-		R2 = (*_c_kaonsY/ *_c_hadronsY).mkScatter();
-	      }
-	      else if(ix==3) {
-		R2 = (*_c_kaonsY/ *_c_muonsY).mkScatter();
-	      }
-	      mult   ->addPoint(x, R2.point(0).x(), ex, R2.point(0).xErrs());
-	    }
-	    else {
-	      mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	    }
-	  }
-	  else if (denom->numEntries()>0) {
-	    pair<double,double> ex2 = ex;
-	    if(ex2.first ==0.) ex2. first=0.0001;
-	    if(ex2.second==0.) ex2.second=0.0001;
-
-	    if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	      mult   ->addPoint(x, rval, ex, rerr);
-	    }
-	    else {
-	      mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	    }
-	  }
-	}
+        CounterPtr denom = (ix==1 || ix==3 ) ? _c_muons : _c_hadrons;
+        Estimate0D R = *_c_kaons/ *denom;
+        const double rval = R.val();
+        const double rerr = R.errPos();
+        Estimate1DPtr mult;
+        book(mult,ix, 1, 1);
+        for (auto& b : mult->bins()) {
+          if( (ix==1 || ix==3) &&  _c_muonsY ->val()==0.) continue;
+          if(  ix==2           &&  _c_hadrons->val()==0.) continue;
+          const double x = b.xMid();
+          if(x==9.458) {
+            if(_c_kaonsY->val()>0.) {
+              if (ix==1 ) {
+                b = *_c_kaonsY/ *_c_muonsY;
+              }
+              else if (ix==2) {
+                b = *_c_kaonsY/ *_c_hadronsY;
+              }
+              else if (ix==3) {
+                b = *_c_kaonsY/ *_c_muonsY;
+              }
+            }
+          }
+          else if (denom->numEntries()>0) {
+            if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+              b.set(rval, rerr);
+            }
+          }
+        }
       }
       // normalize the spectra if required
       if(_h_spectrum1) {
-	scale(_h_spectrum1, sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
+        scale(_h_spectrum1, sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
       }
       if(_h_spectrum2) {
-	scale(_h_spectrum2, 1./_c_hadronsY->val());
+        scale(_h_spectrum2, 1./_c_hadronsY->val());
       }
     }
 

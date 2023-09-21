@@ -48,8 +48,7 @@ namespace Rivet {
       FastJets jets(jet_input, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::DECAY);
       declare(jets, "Jets");
 
-      // Book histograms
-      book(_h["xs_flavor"],           3, 1, 1);
+      // Book histograms with continuous (float) binning
       book(_h["H4l_pt"],              5, 1, 1);
       book(_h["Z1_m"],                7, 1, 1);
       book(_h["Z2_m"],                9, 1, 1);
@@ -59,21 +58,6 @@ namespace Rivet {
       book(_h["cth2"],                17, 1, 1);
       book(_h["phi"],                 19, 1, 1);
       book(_h["phi1"],                21, 1, 1);
-      book(_h["n_jets"],              23, 1, 1);
-      book(_h["n_jets_incl"],         25, 1, 1);
-      book(_h["n_bjets"],             26, 1, 1);
-      book(_h["jet_pt_leading"],      28, 1, 1);
-      book(_h["jet_pt_subleading"],   30, 1, 1);
-      book(_h["dijet_m"],             32, 1, 1);
-      book(_h["dijet_deltaeta"],      34, 1, 1);
-      book(_h["dijet_deltaphi"],      36, 1, 1);
-      book(_h["pt4lj"],               38, 1, 1);
-      book(_h["pt4ljj"],              40, 1, 1);
-      book(_h["m4lj"],                42, 1, 1);
-      book(_h["m4ljj"],               44, 1, 1);
-      book(_h["m12vsm34"],            46, 1, 1);
-      book(_h["m12vsm34_2l2m"],       48, 1, 1);
-      book(_h["m12vsm34_2l2e"],       49, 1, 1);
       book(_h["pt4lvy4l_0_0p5"],      51, 1, 1);
       book(_h["pt4lvy4l_0p5_1"],      51, 1, 3);
       book(_h["pt4lvy4l_1_1p5"],      51, 1, 5);
@@ -82,27 +66,67 @@ namespace Rivet {
       book(_h["pt4lvnjet_1"],         53, 1, 3);
       book(_h["pt4lvnjet_2"],         53, 1, 5);
       book(_h["pt4lvnjet_3"],         53, 1, 7);
-      book(_h["pt4lvpt4lj"],          55, 1, 1);
-      book(_h["pt4ljvm4lj"],          57, 1, 1);
-      book(_h["pt4lvptj0"],           59, 1, 1);
-      book(_h["ptj0vyj0"],            61, 1, 1);
-      book(_h["ptj0vptj1"],           63, 1, 1);
       book(_h["Z1_m_4l"],             65, 1, 1);
       book(_h["Z1_m_2l2l"],           66, 1, 1);
       book(_h["Z2_m_4l"],             68, 1, 1);
       book(_h["Z2_m_2l2l"],           69, 1, 1);
       book(_h["phi_4l"],              71, 1, 1);
       book(_h["phi_2l2l"],            72, 1, 1);
-      book(_h["m12vsm34_4l"],         74, 1, 1);
-      book(_h["m12vsm34_2l2l"],       75, 1, 1);
+
+      // Book histograms with discrete (string) binning
+      book(_s["xs_flavour"],          3, 1, 1);
+      book(_s["n_jets"],              23, 1, 1);
+      book(_s["n_jets_incl"],         25, 1, 1);
+      book(_s["n_bjets"],             26, 1, 1);
+      book(_s["jet_pt_leading"],      28, 1, 1);
+      book(_s["jet_pt_subleading"],   30, 1, 1);
+      book(_s["dijet_m"],             32, 1, 1);
+      book(_s["dijet_deltaeta"],      34, 1, 1);
+      book(_s["dijet_deltaphi"],      36, 1, 1);
+      book(_s["pt4lj"],               38, 1, 1);
+      book(_s["pt4ljj"],              40, 1, 1);
+      book(_s["m4lj"],                42, 1, 1);
+      book(_s["m4ljj"],               44, 1, 1);
+      book(_s["m12vsm34"],            46, 1, 1);
+      book(_s["m12vsm34_2l2m"],       48, 1, 1);
+      book(_s["m12vsm34_2l2e"],       49, 1, 1);
+      book(_s["pt4lvpt4lj"],          55, 1, 1);
+      book(_s["pt4ljvm4lj"],          57, 1, 1);
+      book(_s["pt4lvptj0"],           59, 1, 1);
+      book(_s["ptj0vyj0"],            61, 1, 1);
+      book(_s["ptj0vptj1"],           63, 1, 1);
+      book(_s["m12vsm34_4l"],         74, 1, 1);
+      book(_s["m12vsm34_2l2l"],       75, 1, 1);
+
+      // helper axes to map onto discrete binning labels
+      _axisMap["jet_pt_leading"] = YODA::Axis<double>({30., 60., 120., 350.});
+      _axisMap["pt4lj"] = YODA::Axis<double>({0., 60., 120., 350.});
+      _axisMap["m4lj"] = YODA::Axis<double>({120., 180., 220., 300., 400., 600., 2000.});
+      _axisMap["jet_pt_subleading"] = YODA::Axis<double>({30., 60., 120., 120., 350. });
+      _axisMap["dijet_m"] = YODA::Axis<double>({0., 120., 450., 3000.});
+      _axisMap["dijet_deltaeta"] = YODA::Axis<double>({0., 1., 2.5, 9.});
+      _axisMap["dijet_deltaphi"] = YODA::Axis<double>({0.0, 1.571, 3.142, 4.712, 6.283});
+      _axisMap["pt4ljj"] = YODA::Axis<double>({0., 60., 120.});
+      _axisMap["m4ljj"] = YODA::Axis<double>({180., 320., 450., 600., 1000., 2500.});
     }
 
     /// Do the per-event analysis
     void analyze(const Event& e) {
 
-      _h["xs_flavor"]->fill(9);
+      if (edges.empty()) {
+        for (const string& label : vector<string>{ "xs_flavour", "n_jets", "n_jets_incl", "n_bjets",
+                                                   "jet_pt_leading", "jet_pt_subleading", "dijet_m",
+                                                   "dijet_deltaeta", "dijet_deltaphi", "pt4lj",
+                                                   "pt4ljj", "m4lj", "m4ljj", "m12vsm34", "m12vsm34_2l2m",
+                                                   "m12vsm34_2l2e", "pt4lvpt4lj", "pt4ljvm4lj", "pt4lvptj0",
+                                                   "ptj0vyj0", "ptj0vptj1", "m12vsm34_4l","m12vsm34_2l2l" }) {
 
-      const std::vector<DressedLepton>& all_leps = apply<DressedLeptons>(e, "AllLeptons").dressedLeptons();
+          edges[label] = _s[label]->xEdges();
+        }
+      }
+      _s["xs_flavour"]->fill(edges["xs_flavour"][8]);
+
+      const vector<DressedLepton>& all_leps = apply<DressedLeptons>(e, "AllLeptons").dressedLeptons();
       unsigned int n_parts = all_leps.size();
       unsigned int n_OSSF_pairs = 0;
       std::vector<Zstate> dileptons;
@@ -186,7 +210,7 @@ namespace Rivet {
       bool isNominalQuad        = false;
       bool extraLep             = false;
 
-      for(unsigned int iquad = 0; iquad < n_quads; iquad++) {
+      for (unsigned int iquad = 0; iquad < n_quads; iquad++) {
 
         // Veto event if nominal quad was not selected in 4 lepton case
         if (n_parts == 4 && iquad > 0) vetoEvent;
@@ -218,7 +242,8 @@ namespace Rivet {
         for (unsigned int i = 0; i < 4; i++) {
           for (unsigned int j = i+1; j < 4; j++) {
             if ( deltaR( leptons_sel4l[i], leptons_sel4l[j]) < 0.1) b_pass_leptonseparation = false;
-            if ( isOSSF(leptons_sel4l[i], leptons_sel4l[j]) && (leptons_sel4l[i].mom() + leptons_sel4l[j].mom()).mass() <= 5.*GeV) b_pass_jpsi = false;
+            if ( isOSSF(leptons_sel4l[i], leptons_sel4l[j])
+                 && (leptons_sel4l[i].mom() + leptons_sel4l[j].mom()).mass() <= 5.*GeV) b_pass_jpsi = false;
           }
         }
         if(b_pass_leptonseparation == false || b_pass_jpsi == false) continue;
@@ -369,106 +394,104 @@ namespace Rivet {
       if (inRange(H4l_mass, 115.*GeV, 130.*GeV)){
         if (quadSel.type() == Quadruplet::FlavCombi::mm
             || quadSel.type() == Quadruplet::FlavCombi::ee ) {
-          _h["xs_flavor"]->fill((int)quadSel.type()+1, BR_SF);
-          _h["xs_flavor"]->fill(5, BR_SF);
+          _s["xs_flavour"]->fill(edges["xs_flavour"][(int)quadSel.type()], BR_SF);
+          _s["xs_flavour"]->fill(edges["xs_flavour"][4], BR_SF);
         }
         else if (quadSel.type() == Quadruplet::FlavCombi::em
                  || quadSel.type() == Quadruplet::FlavCombi::me ) {
-          _h["xs_flavor"]->fill((int)quadSel.type()+1, BR_OF);
-          _h["xs_flavor"]->fill(6, BR_OF);
+          _s["xs_flavour"]->fill(edges["xs_flavour"][(int)quadSel.type()], BR_OF);
+          _s["xs_flavour"]->fill(edges["xs_flavour"][5], BR_OF);
         }
-        _h["xs_flavor"]->fill(7, Br);
-        _h["xs_flavor"]->fill(8, Br);
+        _s["xs_flavour"]->fill(edges["xs_flavour"][6], Br);
+        _s["xs_flavour"]->fill(edges["xs_flavour"][7], Br);
       }
 
       // Higgs variables
       for(const auto & p: std::map<std::string, double>{
           {"H4l_pt",     H4l_pt},
-            {"Z1_m",       H4l_m12},
-              {"Z2_m",       H4l_m34},
-                {"abshiggs_y", H4l_rapidity},
-                  {"abscthstr",  H4l_costheta},
-                    {"cth1",       H4l_cth1},
-                      {"cth2",       H4l_cth2},
-                        {"phi",        H4l_Phi},
-                          {"phi1",       H4l_Phi1}})
-        {
+          {"Z1_m",       H4l_m12},
+          {"Z2_m",       H4l_m34},
+          {"abshiggs_y", H4l_rapidity},
+          {"abscthstr",  H4l_costheta},
+          {"cth1",       H4l_cth1},
+          {"cth2",       H4l_cth2},
+          {"phi",        H4l_Phi},
+          {"phi1",       H4l_Phi1}}) {
           _h[ p.first ]->fill(p.second);
         }
 
       // Jet variables
-      if (n_jets <= 2) _h[ "n_jets" ]->fill(n_jets);
-      else _h[ "n_jets" ]->fill(3.0);
+      discreteFill("n_jets", min(n_jets, 3));
 
-      _h[ "n_jets_incl" ]->fill(0.0);
-      if (n_jets >= 1) _h[ "n_jets_incl" ]->fill(1.0);
-      if (n_jets >= 2) _h[ "n_jets_incl" ]->fill(2.0);
-      if (n_jets >= 3) _h[ "n_jets_incl" ]->fill(3.0);
+      discreteFill("n_jets_incl", 0);
+      if (n_jets >= 1)  discreteFill("n_jets_incl", 1);
+      if (n_jets >= 2)  discreteFill("n_jets_incl", 2);
+      if (n_jets >= 3)  discreteFill("n_jets_incl", 3);
 
-      if (n_jets == 0) _h[ "n_bjets" ]->fill(1.0);
-      else if (n_bjets == 0) _h[ "n_bjets" ]->fill(2.0);
-      else if (n_bjets >= 1) _h[ "n_bjets" ]->fill(3.0);
+      if (n_jets == 0)        discreteFill("n_bjets", 0);
+      else if (n_bjets == 0)  discreteFill("n_bjets", 1);
+      else if (n_bjets >= 1)  discreteFill("n_bjets", 2);
 
       if (n_jets == 0) {
-        _h[ "jet_pt_leading" ]->fill(29.5);
-        _h[ "pt4lj" ]->fill(-0.5);
-        _h[ "m4lj" ]->fill(119.5);
+        discreteFill("jet_pt_leading", 0);
+        discreteFill("pt4lj", 0);
+        discreteFill("m4lj", 0);
       }
       else if(n_jets >= 1){
-        _h[ "jet_pt_leading" ]->fill(leading_jet_pt);
-        _h[ "pt4lj" ]->fill(H4l_pt4lj);
-        _h[ "m4lj" ]->fill(H4l_m4lj);
+        discreteFill("jet_pt_leading", leading_jet_pt);
+        discreteFill("pt4lj", H4l_pt4lj);
+        discreteFill("m4lj", H4l_m4lj);
       }
 
       if (n_jets < 2) {
-        _h[ "jet_pt_subleading" ]->fill(29.5);
-        _h[ "dijet_m" ]->fill(-0.5);
-        _h[ "dijet_deltaeta" ]->fill(-0.5);
-        _h[ "dijet_deltaphi" ]->fill(-0.5);
-        _h[ "pt4ljj" ]->fill(-0.5);
-        _h[ "m4ljj" ]->fill(179.5);
+        discreteFill("jet_pt_subleading", 0);
+        discreteFill("dijet_m", 0);
+        discreteFill("dijet_deltaeta", 0);
+        discreteFill("dijet_deltaphi", 0);
+        discreteFill("pt4ljj", 0);
+        discreteFill("m4ljj", 0);
       }
       else if (n_jets >= 2) {
-        _h[ "jet_pt_subleading" ]->fill(subleading_jet_pt);
-        _h[ "dijet_m" ]->fill(mjj);
-        _h[ "dijet_deltaeta" ]->fill(detajj);
-        _h[ "dijet_deltaphi" ]->fill(dphijj);
-        _h[ "pt4ljj" ]->fill(H4l_pt4ljj);
-        _h[ "m4ljj" ]->fill(H4l_m4ljj);
+        discreteFill("jet_pt_subleading", subleading_jet_pt);
+        discreteFill("dijet_m", mjj);
+        discreteFill("dijet_deltaeta", detajj);
+        discreteFill("dijet_deltaphi", dphijj);
+        discreteFill("pt4ljj", H4l_pt4ljj);
+        discreteFill("m4ljj", H4l_m4ljj);
       }
 
       // m12 vs m34 (all channels)
-      if(H4l_m12 < 82 && H4l_m34 < 32) _h["m12vsm34"]->fill(1.);
-      else if(H4l_m12 < 74 && H4l_m34 > 32) _h["m12vsm34"]->fill(2.);
-      else if(H4l_m12 > 74 && H4l_m34 > 32) _h["m12vsm34"]->fill(3.);
-      else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) _h["m12vsm34"]->fill(4.);
-      else if(H4l_m12 > 82 && H4l_m34 < 24) _h["m12vsm34"]->fill(5.);
+      if(H4l_m12 < 82 && H4l_m34 < 32) discreteFill("m12vsm34", 0);
+      else if(H4l_m12 < 74 && H4l_m34 > 32) discreteFill("m12vsm34", 1);
+      else if(H4l_m12 > 74 && H4l_m34 > 32) discreteFill("m12vsm34", 2);
+      else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) discreteFill("m12vsm34", 3);
+      else if(H4l_m12 > 82 && H4l_m34 < 24) discreteFill("m12vsm34", 4);
 
       if (quadSel.type() == Quadruplet::FlavCombi::em
           || quadSel.type() == Quadruplet::FlavCombi::mm ){
-        if(H4l_m12 < 82 && H4l_m34 < 32) _h["m12vsm34_2l2m"]->fill(1.);
-        else if(H4l_m12 < 74 && H4l_m34 > 32) _h["m12vsm34_2l2m"]->fill(2.);
-        else if(H4l_m12 > 74 && H4l_m34 > 32) _h["m12vsm34_2l2m"]->fill(3.);
-        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) _h["m12vsm34_2l2m"]->fill(4.);
-        else if(H4l_m12 > 82 && H4l_m34 < 24) _h["m12vsm34_2l2m"]->fill(5.);
+        if(H4l_m12 < 82 && H4l_m34 < 32) discreteFill("m12vsm34_2l2m", 0);
+        else if(H4l_m12 < 74 && H4l_m34 > 32) discreteFill("m12vsm34_2l2m", 1);
+        else if(H4l_m12 > 74 && H4l_m34 > 32) discreteFill("m12vsm34_2l2m", 2);
+        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) discreteFill("m12vsm34_2l2m", 3);
+        else if(H4l_m12 > 82 && H4l_m34 < 24) discreteFill("m12vsm34_2l2m", 4);
       }
       else if (quadSel.type() == Quadruplet::FlavCombi::me
                || quadSel.type() == Quadruplet::FlavCombi::ee ){
-        if(H4l_m12 < 82 && H4l_m34 < 32) _h["m12vsm34_2l2e"]->fill(1.);
-        else if(H4l_m12 < 74 && H4l_m34 > 32) _h["m12vsm34_2l2e"]->fill(2.);
-        else if(H4l_m12 > 74 && H4l_m34 > 32) _h["m12vsm34_2l2e"]->fill(3.);
-        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) _h["m12vsm34_2l2e"]->fill(4.);
-        else if(H4l_m12 > 82 && H4l_m34 < 24) _h["m12vsm34_2l2e"]->fill(5.);
+        if(H4l_m12 < 82 && H4l_m34 < 32) discreteFill("m12vsm34_2l2e", 0);
+        else if(H4l_m12 < 74 && H4l_m34 > 32) discreteFill("m12vsm34_2l2e", 1);
+        else if(H4l_m12 > 74 && H4l_m34 > 32) discreteFill("m12vsm34_2l2e", 2);
+        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) discreteFill("m12vsm34_2l2e", 3);
+        else if(H4l_m12 > 82 && H4l_m34 < 24) discreteFill("m12vsm34_2l2e", 4);
       }
 
       // m12 vs m34 (4l channels only)
       if (quadSel.type() == Quadruplet::FlavCombi::ee
           || quadSel.type() == Quadruplet::FlavCombi::mm ){
-        if(H4l_m12 < 82 && H4l_m34 < 32) _h["m12vsm34_4l"]->fill(1.);
-        else if(H4l_m12 < 74 && H4l_m34 > 32) _h["m12vsm34_4l"]->fill(2.);
-        else if(H4l_m12 > 74 && H4l_m34 > 32) _h["m12vsm34_4l"]->fill(3.);
-        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) _h["m12vsm34_4l"]->fill(4.);
-        else if(H4l_m12 > 82 && H4l_m34 < 24) _h["m12vsm34_4l"]->fill(5.);
+        if(H4l_m12 < 82 && H4l_m34 < 32) discreteFill("m12vsm34_4l", 0);
+        else if(H4l_m12 < 74 && H4l_m34 > 32) discreteFill("m12vsm34_4l", 1);
+        else if(H4l_m12 > 74 && H4l_m34 > 32) discreteFill("m12vsm34_4l", 2);
+        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) discreteFill("m12vsm34_4l", 3);
+        else if(H4l_m12 > 82 && H4l_m34 < 24) discreteFill("m12vsm34_4l", 4);
         _h["Z1_m_4l"]->fill(H4l_m12);
         _h["Z2_m_4l"]->fill(H4l_m34);
         _h["phi_4l"]->fill(H4l_Phi);
@@ -477,11 +500,11 @@ namespace Rivet {
       // m12 vs m34 (2l2l channels only)
       if (quadSel.type() == Quadruplet::FlavCombi::me
           || quadSel.type() == Quadruplet::FlavCombi::em ){
-        if(H4l_m12 < 82 && H4l_m34 < 32) _h["m12vsm34_2l2l"]->fill(1.);
-        else if(H4l_m12 < 74 && H4l_m34 > 32) _h["m12vsm34_2l2l"]->fill(2.);
-        else if(H4l_m12 > 74 && H4l_m34 > 32) _h["m12vsm34_2l2l"]->fill(3.);
-        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) _h["m12vsm34_2l2l"]->fill(4.);
-        else if(H4l_m12 > 82 && H4l_m34 < 24) _h["m12vsm34_2l2l"]->fill(5.);
+        if(H4l_m12 < 82 && H4l_m34 < 32) discreteFill("m12vsm34_2l2l", 0);
+        else if(H4l_m12 < 74 && H4l_m34 > 32) discreteFill("m12vsm34_2l2l", 1);
+        else if(H4l_m12 > 74 && H4l_m34 > 32) discreteFill("m12vsm34_2l2l", 2);
+        else if(H4l_m12 > 82 && H4l_m34 < 32 && H4l_m34 > 24) discreteFill("m12vsm34_2l2l", 3);
+        else if(H4l_m12 > 82 && H4l_m34 < 24) discreteFill("m12vsm34_2l2l", 4);
         _h["Z1_m_2l2l"]->fill(H4l_m12);
         _h["Z2_m_2l2l"]->fill(H4l_m34);
         _h["phi_2l2l"]->fill(H4l_Phi);
@@ -499,72 +522,82 @@ namespace Rivet {
       else if (n_jets > 2) _h["pt4lvnjet_3"]->fill(H4l_pt);
 
       if (n_jets == 0) {
-        _h["pt4lvptj0"]->fill(1.);
-        _h["pt4lvpt4lj"]->fill(1.);
-        _h["pt4ljvm4lj"]->fill(1.);
-        _h["ptj0vptj1"]->fill(1.);
-        _h["ptj0vyj0"]->fill(1.);
-      } else {
+        discreteFill("pt4lvptj0",  0);
+        discreteFill("pt4lvpt4lj", 0);
+        discreteFill("pt4ljvm4lj", 0);
+        discreteFill("ptj0vptj1",  0);
+        discreteFill("ptj0vyj0",   0);
+      }
+      else {
 
-        if (     0  < H4l_pt4lj && H4l_pt4lj < 60  && 0   < H4l_pt && H4l_pt < 120)  _h["pt4lvpt4lj"]->fill(2.);
-        else if (0  < H4l_pt4lj && H4l_pt4lj < 60  && 120 < H4l_pt && H4l_pt < 350)  _h["pt4lvpt4lj"]->fill(3.);
-        else if (60 < H4l_pt4lj && H4l_pt4lj < 350 && 0   < H4l_pt && H4l_pt < 120)  _h["pt4lvpt4lj"]->fill(4.);
-        else if (60 < H4l_pt4lj && H4l_pt4lj < 350 && 120 < H4l_pt && H4l_pt < 350)  _h["pt4lvpt4lj"]->fill(5.);
+        if (     0  < H4l_pt4lj && H4l_pt4lj < 60  && 0   < H4l_pt && H4l_pt < 120)  discreteFill("pt4lvpt4lj", 1);
+        else if (0  < H4l_pt4lj && H4l_pt4lj < 60  && 120 < H4l_pt && H4l_pt < 350)  discreteFill("pt4lvpt4lj", 2);
+        else if (60 < H4l_pt4lj && H4l_pt4lj < 350 && 0   < H4l_pt && H4l_pt < 120)  discreteFill("pt4lvpt4lj", 3);
+        else if (60 < H4l_pt4lj && H4l_pt4lj < 350 && 120 < H4l_pt && H4l_pt < 350)  discreteFill("pt4lvpt4lj", 4);
 
-        if (     120 < H4l_m4lj && H4l_m4lj < 220  && 0   < H4l_pt4lj && H4l_pt4lj < 350) _h["pt4ljvm4lj"]->fill(2.);
-        else if (220 < H4l_m4lj && H4l_m4lj < 350  && 0   < H4l_pt4lj && H4l_pt4lj < 60)  _h["pt4ljvm4lj"]->fill(3.);
-        else if (220 < H4l_m4lj && H4l_m4lj < 350  && 60  < H4l_pt4lj && H4l_pt4lj < 350) _h["pt4ljvm4lj"]->fill(4.);
-        else if (350 < H4l_m4lj && H4l_m4lj < 2000 && 0   < H4l_pt4lj && H4l_pt4lj < 350) _h["pt4ljvm4lj"]->fill(5.);
+        if (     120 < H4l_m4lj && H4l_m4lj < 220  && 0   < H4l_pt4lj && H4l_pt4lj < 350) discreteFill("pt4ljvm4lj", 1);
+        else if (220 < H4l_m4lj && H4l_m4lj < 350  && 0   < H4l_pt4lj && H4l_pt4lj < 60)  discreteFill("pt4ljvm4lj", 2);
+        else if (220 < H4l_m4lj && H4l_m4lj < 350  && 60  < H4l_pt4lj && H4l_pt4lj < 350) discreteFill("pt4ljvm4lj", 3);
+        else if (350 < H4l_m4lj && H4l_m4lj < 2000 && 0   < H4l_pt4lj && H4l_pt4lj < 350) discreteFill("pt4ljvm4lj", 4);
 
-        if (     30 < leading_jet_pt  && leading_jet_pt < 60  && 0   < H4l_pt && H4l_pt < 80)  _h["pt4lvptj0"]->fill(2.);
-        else if (30 < leading_jet_pt  && leading_jet_pt < 60  && 80  < H4l_pt && H4l_pt < 350) _h["pt4lvptj0"]->fill(3.);
-        else if (60 < leading_jet_pt  && leading_jet_pt < 120 && 0   < H4l_pt && H4l_pt < 120) _h["pt4lvptj0"]->fill(4.);
-        else if (60 < leading_jet_pt  && leading_jet_pt < 120 && 120 < H4l_pt && H4l_pt < 350) _h["pt4lvptj0"]->fill(5.);
-        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 0   < H4l_pt && H4l_pt < 120) _h["pt4lvptj0"]->fill(6.);
-        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 120 < H4l_pt && H4l_pt < 350) _h["pt4lvptj0"]->fill(7.);
+        if (     30 < leading_jet_pt  && leading_jet_pt < 60  && 0   < H4l_pt && H4l_pt < 80)  discreteFill("pt4lvptj0", 1);
+        else if (30 < leading_jet_pt  && leading_jet_pt < 60  && 80  < H4l_pt && H4l_pt < 350) discreteFill("pt4lvptj0", 2);
+        else if (60 < leading_jet_pt  && leading_jet_pt < 120 && 0   < H4l_pt && H4l_pt < 120) discreteFill("pt4lvptj0", 3);
+        else if (60 < leading_jet_pt  && leading_jet_pt < 120 && 120 < H4l_pt && H4l_pt < 350) discreteFill("pt4lvptj0", 4);
+        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 0   < H4l_pt && H4l_pt < 120) discreteFill("pt4lvptj0", 5);
+        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 120 < H4l_pt && H4l_pt < 350) discreteFill("pt4lvptj0", 6);
 
-        if (     30 < leading_jet_pt && leading_jet_pt < 120 &&  0   < leading_jet_y && leading_jet_y < 0.8) _h["ptj0vyj0"]->fill(2.);
-        else if (30 < leading_jet_pt && leading_jet_pt < 120 &&  0.8 < leading_jet_y && leading_jet_y < 1.7) _h["ptj0vyj0"]->fill(3.);
-        else if (30 < leading_jet_pt && leading_jet_pt < 120 &&  1.7 < leading_jet_y                       ) _h["ptj0vyj0"]->fill(4.);
-        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 0   < leading_jet_y && leading_jet_y < 1.7) _h["ptj0vyj0"]->fill(5.);
-        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 1.7 < leading_jet_y                       ) _h["ptj0vyj0"]->fill(6.);
+        if (30 < leading_jet_pt && leading_jet_pt < 120 &&  0 < leading_jet_y && leading_jet_y < 0.8) {
+          discreteFill("ptj0vyj0", 1);
+        }
+        else if (30 < leading_jet_pt && leading_jet_pt < 120 &&  0.8 < leading_jet_y && leading_jet_y < 1.7) {
+          discreteFill("ptj0vyj0", 2);
+        }
+        else if (30 < leading_jet_pt && leading_jet_pt < 120 &&  1.7 < leading_jet_y) {
+          discreteFill("ptj0vyj0", 3);
+        }
+        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 0 < leading_jet_y && leading_jet_y < 1.7) {
+          discreteFill("ptj0vyj0", 4);
+        }
+        else if (120 < leading_jet_pt && leading_jet_pt < 350 && 1.7 < leading_jet_y) {
+          discreteFill("ptj0vyj0", 5);
+        }
 
-        if (     n_jets == 1 && 30 < leading_jet_pt && leading_jet_pt < 60)  _h["ptj0vptj1"]->fill(2.);
-        else if (n_jets == 1 && 60 < leading_jet_pt && leading_jet_pt < 350) _h["ptj0vptj1"]->fill(3.);
-        else if (30 < leading_jet_pt && leading_jet_pt < 60  && 30 < subleading_jet_pt && subleading_jet_pt < 60)  _h["ptj0vptj1"]->fill(4.);
-        else if (60 < leading_jet_pt && leading_jet_pt < 350 && 30 < subleading_jet_pt && subleading_jet_pt < 60)  _h["ptj0vptj1"]->fill(5.);
-        else if (60 < leading_jet_pt && leading_jet_pt < 350 && 60 < subleading_jet_pt && subleading_jet_pt < 350) _h["ptj0vptj1"]->fill(6.);
+        if (     n_jets == 1 && 30 < leading_jet_pt && leading_jet_pt < 60)   discreteFill("ptj0vptj1", 1);
+        else if (n_jets == 1 && 60 < leading_jet_pt && leading_jet_pt < 350)  discreteFill("ptj0vptj1", 2);
+        else if (30 < leading_jet_pt && leading_jet_pt < 60  && 30 < subleading_jet_pt && subleading_jet_pt < 60) {
+          discreteFill("ptj0vptj1", 3);
+        }
+        else if (60 < leading_jet_pt && leading_jet_pt < 350 && 30 < subleading_jet_pt && subleading_jet_pt < 60) {
+          discreteFill("ptj0vptj1", 4);
+        }
+        else if (60 < leading_jet_pt && leading_jet_pt < 350 && 60 < subleading_jet_pt && subleading_jet_pt < 350) {
+          discreteFill("ptj0vptj1", 5);
+        }
       }
     }
 
+    template<typename T>
+    void discreteFill(const string& label, const T coord) {
+      if constexpr( std::is_floating_point<T>::value) {
+        discreteFill(label, _axisMap[label].index(coord));
+      }
+      else {
+        _s[label]->fill(edges[label][coord]);
+      }
+    }
 
     void finalize() {
 
-      const double sf = crossSection() / femtobarn  / sumOfWeights();
-      for (auto hist : _h) {
-        if( hist.first == "xs_flavor"){
+      const double sf = crossSection() / femtobarn / sumOfWeights();
+      scale(_h, sf * Br);
+      for (auto& hist : _s) {
+        if (hist.first == "xs_flavour") {
           scale(hist.second, sf);
-        } else {
+        }
+        else {
           scale(hist.second, sf * Br);
         }
-
-        // Scale individual bins which have been widened for visability
-        if (hist.first == "jet_pt_leading" || hist.first == "jet_pt_subleading") {
-          hist.second->bin(1).scaleW(30);
-        }
-        else if (hist.first == "dijet_m") {
-          hist.second->bin(1).scaleW(500);
-        }
-        else if (hist.first == "pt4lj" || hist.first == "pt4ljj") {
-          hist.second->bin(1).scaleW(60);
-        }
-        else if (hist.first == "m4lj") {
-          hist.second->bin(1).scaleW(120);
-        }
-        else if (hist.first == "m4ljj") {
-          hist.second->bin(1).scaleW(180);
-        }
-
       }
     }
 
@@ -574,6 +607,9 @@ namespace Rivet {
     const double Br = 0.02641 *  0.004736842;
 
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<string>> _s;
+    map<string, vector<string>> edges;
+    map<string, YODA::Axis<double>> _axisMap;
 
     /// Generic Z candidate
     struct Zstate : public ParticlePair {

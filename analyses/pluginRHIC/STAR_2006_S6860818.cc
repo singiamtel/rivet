@@ -130,20 +130,17 @@ namespace Rivet {
     /// Finalize
     void finalize() {
       for (size_t i=0 ; i<4 ; i++) {
-        if (_nWeightedBaryon[i]->val()==0 || _nWeightedAntiBaryon[i]->val()==0) {
-          _h_antibaryon_baryon_ratio->addPoint(i,0,0.5,0);
-        }
-        else {
+        if (_nWeightedBaryon[i]->val() && _nWeightedAntiBaryon[i]->val()) {
           double y  = safediv(_nWeightedAntiBaryon[i]->val(), _nWeightedBaryon[i]->val(), 0.);
           double dy = sqrt( safediv(1., _nWeightedAntiBaryon[i]->numEntries(), 0.) + safediv(1., _nWeightedBaryon[i]->numEntries(), 0.) );
-         _h_antibaryon_baryon_ratio->addPoint(i,y,0.5,y*dy);
+         _h_antibaryon_baryon_ratio->bin(i+1).set(y, y*dy);
         }
       }
 
       divide(_h_pT_lambdabar,_h_pT_lambda, _h_lambar_lam);
       divide(_h_pT_xiplus,_h_pT_ximinus, _h_xiplus_ximinus);
 
-      const YODA::Scatter1D factor = ((1./(2.0 * M_PI)) / *_sumWeightSelected).mkScatter();
+      const double factor = ((1./(2.0 * M_PI)) / _sumWeightSelected->val());
       scale(_h_pT_k0s,       factor);
       scale(_h_pT_kminus,    factor);
       scale(_h_pT_kplus,     factor);
@@ -152,8 +149,6 @@ namespace Rivet {
       scale(_h_pT_ximinus,   factor);
       scale(_h_pT_xiplus,    factor);
       //scale(_h_pT_omega,     1./(2*M_PI*_sumWeightSelected));
-      MSG_DEBUG("sumOfWeights()     = " << sumOfWeights());
-      MSG_DEBUG("_sumWeightSelected = " << _sumWeightSelected->val());
     }
 
   private:
@@ -164,10 +159,10 @@ namespace Rivet {
 
     Histo1DPtr _h_pT_k0s, _h_pT_kminus, _h_pT_kplus, _h_pT_lambda, _h_pT_lambdabar, _h_pT_ximinus, _h_pT_xiplus;
     //Histo1DPtr _h_pT_omega;
-    Scatter2DPtr _h_antibaryon_baryon_ratio;
+    Estimate1DPtr _h_antibaryon_baryon_ratio;
     Profile1DPtr  _h_pT_vs_mass;
-    Scatter2DPtr _h_lambar_lam;
-    Scatter2DPtr _h_xiplus_ximinus;
+    Estimate1DPtr _h_lambar_lam;
+    Estimate1DPtr _h_xiplus_ximinus;
 
   };
 

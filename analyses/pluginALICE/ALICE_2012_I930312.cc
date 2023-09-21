@@ -3,8 +3,7 @@
 #include "Rivet/Projections/Beam.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
-#include "Rivet/Tools/AliceCommon.hh"
-#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 
 namespace Rivet {
 
@@ -274,8 +273,6 @@ namespace Rivet {
       // Variables for IAA/ICP plots
       double yval[2] = { 0.0, 0.0 };
       double yerr[2] = { 0.0, 0.0 };
-      double xval[PT_BINS] = { 3.5, 5.0, 7.0, 9.0 };
-      double xerr[PT_BINS] = { 0.5, 1.0, 1.0, 1.0 };
 
       int types1[3] = {1, 2, 1};
       int types2[3] = {0, 0, 2};
@@ -303,8 +300,8 @@ namespace Rivet {
               numBins2 * numBins2 * bkgErr2 * bkgErr2 * integ1 * integ1 / (integ2 * integ2);
             yerr[ina] = sqrt(yerr[ina])/integ2;
           }
-          _histIAA[ihist]->addPoint(xval[ipt], yval[NEAR], xerr[ipt], yerr[NEAR]);
-          _histIAA[ihist + 3]->addPoint(xval[ipt], yval[AWAY], xerr[ipt], yerr[AWAY]);
+          _histIAA[ihist]->bin(ipt+1).set(yval[NEAR], yerr[NEAR]);
+          _histIAA[ihist + 3]->bin(ipt+1).set(yval[AWAY], yerr[AWAY]);
         }
       }
 
@@ -325,7 +322,7 @@ namespace Rivet {
     Histo1DPtr _histYield[EVENT_TYPES][PT_BINS];
     Histo1DPtr _histYieldNoBkg[EVENT_TYPES][PT_BINS];
     CounterPtr _counterTrigger[EVENT_TYPES];
-    Scatter2DPtr _histIAA[6];
+    Estimate1DPtr _histIAA[6];
     /// @}
 
   };

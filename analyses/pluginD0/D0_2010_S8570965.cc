@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -27,22 +26,14 @@ namespace Rivet {
       book(_h_dPhi ,3, 1, 1);
       book(_h_costheta ,4, 1, 1);
 
-      std::pair<double, double> M_ranges[] = { std::make_pair(30.0, 50.0),
-                                               std::make_pair(50.0, 80.0),
-                                               std::make_pair(80.0, 350.0) };
-
-      for (size_t i = 0; i < 3; ++i) {
-        Histo1DPtr a,b,c;
-        _h_pT_M.add(M_ranges[i].first, M_ranges[i].second, book(a, 5+3*i, 1, 1));
-        _h_dPhi_M.add(M_ranges[i].first, M_ranges[i].second, book(b, 6+3*i, 1, 1));
-        _h_costheta_M.add(M_ranges[i].first, M_ranges[i].second, book(c, 7+3*i, 1, 1));
-      }
+      book(_h_pT_M, {30., 50., 80., 350.}, {"d05-x01-y01", "d08-x01-y01", "d11-x01-y01"});
+      book(_h_dPhi_M, {30., 50., 80., 350.}, {"d06-x01-y01", "d09-x01-y01", "d12-x01-y01"});
+      book(_h_costheta_M, {30., 50., 80., 350.}, {"d07-x01-y01", "d10-x01-y01", "d13-x01-y01"});
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       Particles photons = apply<IdentifiedFinalState>(event, "IFS").particlesByPt();
       if (photons.size() < 2 ||
@@ -75,36 +66,28 @@ namespace Rivet {
 
       FourMomentum y1=isolated_photons[0].momentum();
       FourMomentum y2=isolated_photons[1].momentum();
-      if (deltaR(y1, y2)<0.4) {
-        vetoEvent;
-      }
+      if (deltaR(y1, y2)<0.4)  vetoEvent;
 
       FourMomentum yy=y1+y2;
       double Myy = yy.mass()/GeV;
-      if (Myy<30.0 || Myy>350.0) {
-        vetoEvent;
-      }
+      if (Myy<30.0 || Myy>350.0)  vetoEvent;
 
       double pTyy = yy.pT()/GeV;
-      if (Myy<pTyy) {
-        vetoEvent;
-      }
+      if (Myy<pTyy)  vetoEvent;
 
       double dPhiyy = mapAngle0ToPi(y1.phi()-y2.phi());
-      if (dPhiyy<0.5*M_PI) {
-        vetoEvent;
-      }
+      if (dPhiyy<0.5*M_PI)  vetoEvent;
 
       double costhetayy = fabs(tanh((y1.eta()-y2.eta())/2.0));
 
-      _h_M->fill(Myy, weight);
-      _h_pT->fill(pTyy, weight);
-      _h_dPhi->fill(dPhiyy, weight);
-      _h_costheta->fill(costhetayy, weight);
+      _h_M->fill(Myy);
+      _h_pT->fill(pTyy);
+      _h_dPhi->fill(dPhiyy);
+      _h_costheta->fill(costhetayy);
 
-      _h_pT_M.fill(Myy, pTyy, weight);
-      _h_dPhi_M.fill(Myy, dPhiyy, weight);
-      _h_costheta_M.fill(Myy, costhetayy, weight);
+      _h_pT_M->fill(Myy, pTyy);
+      _h_dPhi_M->fill(Myy, dPhiyy);
+      _h_costheta_M->fill(Myy, costhetayy);
     }
 
 
@@ -115,10 +98,11 @@ namespace Rivet {
       scale(_h_dPhi, crossSection()/sumOfWeights());
       scale(_h_costheta, crossSection()/sumOfWeights());
 
-      _h_pT_M.scale(crossSection()/sumOfWeights(), this);
-      _h_dPhi_M.scale(crossSection()/sumOfWeights(), this);
-      _h_costheta_M.scale(crossSection()/sumOfWeights(), this);
+      scale(_h_pT_M, crossSection()/sumOfWeights());
+      scale(_h_dPhi_M, crossSection()/sumOfWeights());
+      scale(_h_costheta_M, crossSection()/sumOfWeights());
 
+      divByGroupWidth({_h_pT_M, _h_dPhi_M, _h_costheta_M});
     }
 
 
@@ -128,9 +112,7 @@ namespace Rivet {
     Histo1DPtr _h_pT;
     Histo1DPtr _h_dPhi;
     Histo1DPtr _h_costheta;
-    BinnedHistogram _h_pT_M;
-    BinnedHistogram _h_dPhi_M;
-    BinnedHistogram _h_costheta_M;
+    Histo1DGroupPtr _h_pT_M, _h_dPhi_M, _h_costheta_M;
 
   };
 

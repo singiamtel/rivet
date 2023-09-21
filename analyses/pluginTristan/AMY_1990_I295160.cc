@@ -21,63 +21,59 @@ namespace Rivet {
     void init() {
       const ChargedFinalState cfs;
       declare(cfs, "CFS");
-      int offset = 0;
+      unsigned int offset = 0;
       if(isCompatibleWithSqrtS(50.0*GeV)) {
-	offset = 1;
+        offset = 1;
       }
       else if(isCompatibleWithSqrtS(52.0*GeV)) {
-	offset = 2;
+        offset = 2;
       }
       else if(isCompatibleWithSqrtS(55.0*GeV)) {
-	offset = 3;
+        offset = 3;
       }
       else if(isCompatibleWithSqrtS(56.0*GeV)) {
-	offset = 4;
+        offset = 4;
       }
       else if(isCompatibleWithSqrtS(57.0*GeV)) {
-	offset = 5;
+        offset = 5;
       }
       else if(isCompatibleWithSqrtS(60.0*GeV)) {
-	offset = 6;
+        offset = 6;
       }
       else if(isCompatibleWithSqrtS(60.8*GeV)) {
-	offset = 7;
+        offset = 7;
       }
       else if(isCompatibleWithSqrtS(61.4*GeV)) {
-	offset = 8;
+        offset = 8;
       }
       else {
         MSG_WARNING("CoM energy of events sqrt(s) = " << sqrtS()/GeV
                     << " doesn't match any available analysis energy .");
       }
-      book( _histChTotal , 1, 1, offset);
-      book( _histTotal , 2, 1, 1);
-      if(offset==5) {
-	book( _histChAver, 1, 1, 9);
-	book( _histAver, 2, 2, 1);
+      book(_histChTotal, 1, 1, offset);
+      book(_histTotal, 2, 1, 1);
+      if (offset==5) {
+        book(_histChAver, 1, 1, 9);
       }
     }
-
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      const string ECMS = _histTotal->bin(ecmsAxis.index(sqrtS()/GeV)).xEdge();
       const FinalState& cfs = apply<FinalState>(event, "CFS");
       MSG_DEBUG("Total charged multiplicity = " << cfs.size());
       _histChTotal->fill(cfs.size());
-      _histTotal->fill(sqrtS()/GeV,cfs.size());
-      if(_histAver) {
-	_histChAver->fill(cfs.size());
-	_histAver->fill(sqrtS()/GeV,cfs.size());
+      _histTotal->fill(ECMS, cfs.size());
+      if (_histChAver) {
+        _histChAver->fill(cfs.size());
+        _histTotal->fill(string("50.0 - 61.4"), cfs.size());
       }
     }
 
-
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      scale(_histChTotal, 200.0/sumOfWeights()); // bin width (2) and %age (100)
-      if(_histAver)
-	scale(_histChAver, 200.0/sumOfWeights());
+      scale(_histChTotal, 100.0/sumOfWeights()); // %age (100)
+      if (_histChAver) scale(_histChAver, 100.0/sumOfWeights());
     }
 
     /// @}
@@ -87,10 +83,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _histChTotal;
-    Histo1DPtr _histChAver;
-    Profile1DPtr _histTotal;
-    Profile1DPtr _histAver;
+    BinnedHistoPtr<int> _histChTotal, _histChAver;
+    BinnedProfilePtr<string> _histTotal;
+    YODA::Axis<double> ecmsAxis{49., 51., 53., 55.5, 56.5, 58., 60.5, 61., 62.};
     /// @}
 
   };

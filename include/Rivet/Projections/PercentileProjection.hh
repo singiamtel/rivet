@@ -17,6 +17,8 @@ namespace Rivet {
   class PercentileProjection : public SingleValueProjection {
   public:
 
+    using SingleValueProjection::operator=;
+
     /// Constructor taking a SingleValueProjection and a calibration
     /// histogram. If increasing it means that low values corresponds to
     /// lower percentiles.
@@ -60,30 +62,31 @@ namespace Rivet {
     // Constructor taking a SingleValueProjection and a calibration
     // histogram. If increasing it means that low values corresponds to
     // lower percentiles.
-    PercentileProjection(const SingleValueProjection & sv, const Scatter2D& calscat,
+    PercentileProjection(const SingleValueProjection & sv, const Estimate1D& calest,
                          bool increasing = false)
       : _calhist("EMPTY"), _increasing(increasing) {
       declare(sv, "OBSERVABLE");
 
-      //if ( !calscat ) return;
-      MSG_DEBUG("Constructing PercentileProjection from " << calscat.path());
-      _calhist = calscat.path();
-      int N = calscat.numPoints();
+      //if ( !calest ) return;
+      MSG_DEBUG("Constructing PercentileProjection from " << calest.path());
+      _calhist = calest.path();
+      int N = calest.numBins();
       double sum = 0.0;
-      for ( const auto & p : calscat.points() ) sum += p.y();
+      for (const auto &b : calest.bins() )  sum += b.val();
 
       double acc = 0.0;
       if ( increasing ) {
-        _table.insert(make_pair(calscat.point(0).xMin(), 100.0*acc/sum));
+        _table.insert(make_pair(calest.bin(1).xMin(), 100.0*acc/sum));
         for ( int i = 0; i < N; ++i ) {
-          acc += calscat.point(i).y();
-          _table.insert(make_pair(calscat.point(i).xMax(), 100.0*acc/sum));
+          acc += calest.bin(i+1).val();
+          _table.insert(make_pair(calest.bin(i+1).xMax(), 100.0*acc/sum));
         }
-      } else {
-        _table.insert(make_pair(calscat.point(N - 1).xMax(), 100.0*acc/sum));
-        for ( int i = N - 1; i >= 0; --i ) {
-          acc += calscat.point(i).y();
-          _table.insert(make_pair(calscat.point(i).xMin(), 100.0*acc/sum));
+      }
+      else {
+        _table.insert(make_pair(calest.bin(N).xMax(), 100.0*acc/sum));
+        for (int i = N - 1; i >= 0; --i) {
+          acc += calest.bin(i+1).val();
+          _table.insert(make_pair(calest.bin(i+1).xMin(), 100.0*acc/sum));
         }
       }
     }

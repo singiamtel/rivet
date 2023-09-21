@@ -21,6 +21,7 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(UnstableParticles(), "UFS");
+
       book(_d_Dbar0[0], "/TMP/d_D0_low" );
       book(_d_Dbar0[1], "/TMP/d_D0_high");
       book(_d_Dm[0]   , "/TMP/d_Dm_low" );
@@ -43,121 +44,118 @@ namespace Rivet {
 
     }
 
-
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
-      for(const Particle & p : ufs.particles(Cuts::pid==-4122 or Cuts::pid==-411 or Cuts::pid==-421)) {
-	long id1 = p.pid();
-	double mom1 = p.p3().mod();
-	if(mom1<2.3*GeV || mom1>5.*GeV) continue;
-	bool high1 = mom1>3.3*GeV;
-	if(id1==-4122) {
-	  _d_Lam[high1]->fill();
-	}
-	else if(id1==-411) {
-	  _d_Dm[high1]->fill();
-	}
-	else if(id1==-421) {
-	  _d_Dbar0[high1]->fill();
-	}
-	for(const Particle & p2 : ufs.particles(Cuts::pid==4122)) {
-	  if(p.p3().angle(p2.p3())<0.5*M_PI) continue;
-	  double mom2 = p2.p3().mod();
-	  if(mom2<2.3*GeV || mom2>5.*GeV) continue;
-	  bool high2 = mom2>3.3*GeV;
-	  if(id1==-4122) {
-	    _n_Lam[high1][high2]->fill();
-	  }
-	  else if(id1==-411) {
-	    _n_Dm[high1][high2]->fill();
-	  }
-	  else if(id1==-421) {
-	    _n_Dbar0[high1][high2]->fill();
-	  }
-	}
+      for (const Particle& p : ufs.particles(Cuts::pid==-4122 or Cuts::pid==-411 or Cuts::pid==-421)) {
+        long id1 = p.pid();
+        double mom1 = p.p3().mod();
+        if(mom1<2.3*GeV || mom1>5.*GeV) continue;
+        bool high1 = mom1>3.3*GeV;
+        if(id1==-4122) {
+          _d_Lam[high1]->fill();
+        }
+        else if(id1==-411) {
+          _d_Dm[high1]->fill();
+        }
+        else if(id1==-421) {
+          _d_Dbar0[high1]->fill();
+        }
+        for (const Particle& p2 : ufs.particles(Cuts::pid==4122)) {
+          if(p.p3().angle(p2.p3())<0.5*M_PI) continue;
+          double mom2 = p2.p3().mod();
+          if(mom2<2.3*GeV || mom2>5.*GeV) continue;
+          bool high2 = mom2>3.3*GeV;
+          if(id1==-4122) {
+            _n_Lam[high1][high2]->fill();
+          }
+          else if(id1==-411) {
+            _n_Dm[high1][high2]->fill();
+          }
+          else if(id1==-421) {
+            _n_Dbar0[high1][high2]->fill();
+          }
+        }
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter1D R_D0_low_low    = (*_n_Dbar0[0][0]/ *_d_Dbar0[0]).mkScatter();
-      Scatter1D R_D0_low_high   = (*_n_Dbar0[0][1]/ *_d_Dbar0[0]).mkScatter();
-      Scatter1D R_D0_high_low   = (*_n_Dbar0[1][0]/ *_d_Dbar0[1]).mkScatter();
-      Scatter1D R_D0_high_high  = (*_n_Dbar0[1][1]/ *_d_Dbar0[1]).mkScatter();
-      Scatter1D R_Dm_low_low    = (*_n_Dm[0][0]   / *_d_Dm[0]).mkScatter();
-      Scatter1D R_Dm_low_high   = (*_n_Dm[0][1]   / *_d_Dm[0]).mkScatter();
-      Scatter1D R_Dm_high_low   = (*_n_Dm[1][0]   / *_d_Dm[1]).mkScatter();
-      Scatter1D R_Dm_high_high  = (*_n_Dm[1][1]   / *_d_Dm[1]).mkScatter();
-      Scatter1D R_Lam_low_low   = (*_n_Lam[0][0]  / *_d_Lam[0]).mkScatter();
-      Scatter1D R_Lam_low_high  = (*_n_Lam[0][1]  / *_d_Lam[0]).mkScatter();
-      Scatter1D R_Lam_high_low  = (*_n_Lam[1][0]  / *_d_Lam[1]).mkScatter();
-      Scatter1D R_Lam_high_high = (*_n_Lam[1][1]  / *_d_Lam[1]).mkScatter();
-      for(unsigned int ix=3;ix<5;++ix) {
-	for(unsigned int iy=1;iy<5;++iy) {
-	  double num(0.),den(0.),num_err(0.),den_err(0.);
-	  if(ix==3) {
-	    if(iy==1) {
-	      den     =  R_D0_low_low  .points()[0].x();
-	      den_err =  R_D0_low_low  .points()[0].xErrAvg();
-	    }
-	    else if(iy==2) {
-	      den     =  R_D0_high_low .points()[0].x();
-	      den_err =  R_D0_high_low .points()[0].xErrAvg();
-	    }
-	    else if(iy==3) {
-	      den     =  R_D0_low_low  .points()[0].x();
-	      den_err =  R_D0_low_low  .points()[0].xErrAvg();
-	    }
-	    else if(iy==4) {
-	      den     =  R_D0_high_high.points()[0].x();
-	      den_err =  R_D0_high_high.points()[0].xErrAvg();
-	    }
-	  }
-	  else if(ix==4) {
-	    if(iy==1) {
-	      den     =  R_Dm_low_low  .points()[0].x();
-	      den_err =  R_Dm_low_low  .points()[0].xErrAvg();
-	    }
-	    else if(iy==2) {
-	      den     =  R_Dm_high_low .points()[0].x();
-	      den_err =  R_Dm_high_low .points()[0].xErrAvg();
-	    }
-	    else if(iy==3) {
-	      den     =  R_Dm_low_low  .points()[0].x();
-	      den_err =  R_Dm_low_low  .points()[0].xErrAvg();
-	    }
-	    else if(iy==4) {
-	      den     =  R_Dm_high_high.points()[0].x();
-	      den_err =  R_Dm_high_high.points()[0].xErrAvg();
-	    }
-	  }
-	  if(iy==1) {
-	    num     =  R_Lam_low_low  .points()[0].x();
-	    num_err =  R_Lam_low_low  .points()[0].xErrAvg();
-	  }
-	  else if(iy==2) {
-	    num     =  R_Lam_high_low .points()[0].x();
-	    num_err =  R_Lam_high_low .points()[0].xErrAvg();
-	  }
-	  else if(iy==3) {
-	    num     =  R_Lam_low_low  .points()[0].x();
-	    num_err =  R_Lam_low_low  .points()[0].xErrAvg();
-	  }
-	  else if(iy==4) {
-	    num     =  R_Lam_high_high.points()[0].x();
-	    num_err =  R_Lam_high_high.points()[0].xErrAvg();
-	  }
-	  double val = num/den;
-	  double err = val>=0. ? val*sqrt(sqr(num_err/num)+sqr(den_err/den)) : 0.;
-	  Scatter2DPtr ratio;
-	  book(ratio,ix, 1, iy);
-	  Scatter2D temphisto(refData(ix, 1, iy));
-	  const double x  = temphisto.point(0).x();
-	  pair<double,double> ex = temphisto.point(0).xErrs();
-	  ratio->addPoint(x, val, ex, make_pair(err,err));
-	}
+      Estimate0D R_D0_low_low    = (*_n_Dbar0[0][0]/ *_d_Dbar0[0]);
+      Estimate0D R_D0_low_high   = (*_n_Dbar0[0][1]/ *_d_Dbar0[0]);
+      Estimate0D R_D0_high_low   = (*_n_Dbar0[1][0]/ *_d_Dbar0[1]);
+      Estimate0D R_D0_high_high  = (*_n_Dbar0[1][1]/ *_d_Dbar0[1]);
+      Estimate0D R_Dm_low_low    = (*_n_Dm[0][0]   / *_d_Dm[0]);
+      Estimate0D R_Dm_low_high   = (*_n_Dm[0][1]   / *_d_Dm[0]);
+      Estimate0D R_Dm_high_low   = (*_n_Dm[1][0]   / *_d_Dm[1]);
+      Estimate0D R_Dm_high_high  = (*_n_Dm[1][1]   / *_d_Dm[1]);
+      Estimate0D R_Lam_low_low   = (*_n_Lam[0][0]  / *_d_Lam[0]);
+      Estimate0D R_Lam_low_high  = (*_n_Lam[0][1]  / *_d_Lam[0]);
+      Estimate0D R_Lam_high_low  = (*_n_Lam[1][0]  / *_d_Lam[1]);
+      Estimate0D R_Lam_high_high = (*_n_Lam[1][1]  / *_d_Lam[1]);
+
+      for (size_t ix=3; ix<5; ++ix) {
+        for (size_t iy=1; iy<5; ++iy) {
+          double num(0.),den(0.),num_err(0.),den_err(0.);
+          if(ix==3) {
+            if(iy==1) {
+              den     =  R_D0_low_low.val();
+              den_err =  R_D0_low_low.errPos();
+            }
+            else if(iy==2) {
+              den     =  R_D0_high_low.val();
+              den_err =  R_D0_high_low.errPos();
+            }
+            else if(iy==3) {
+              den     =  R_D0_low_low.val();
+              den_err =  R_D0_low_low.errPos();
+            }
+            else if(iy==4) {
+              den     =  R_D0_high_high.val();
+              den_err =  R_D0_high_high.errPos();
+            }
+          }
+          else if(ix==4) {
+            if(iy==1) {
+              den     =  R_Dm_low_low.val();
+              den_err =  R_Dm_low_low.errPos();
+            }
+            else if(iy==2) {
+              den     =  R_Dm_high_low.val();
+              den_err =  R_Dm_high_low.errPos();
+            }
+            else if(iy==3) {
+              den     =  R_Dm_low_low.val();
+              den_err =  R_Dm_low_low.errPos();
+            }
+            else if(iy==4) {
+              den     =  R_Dm_high_high.val();
+              den_err =  R_Dm_high_high.errPos();
+            }
+          }
+          if(iy==1) {
+            num     =  R_Lam_low_low.val();
+            num_err =  R_Lam_low_low.errPos();
+          }
+          else if(iy==2) {
+            num     =  R_Lam_high_low.val();
+            num_err =  R_Lam_high_low.errPos();
+          }
+          else if(iy==3) {
+            num     =  R_Lam_low_low.val();
+            num_err =  R_Lam_low_low.errPos();
+          }
+          else if(iy==4) {
+            num     =  R_Lam_high_high.val();
+            num_err =  R_Lam_high_high.errPos();
+          }
+          double val = num/den;
+          double err = val>=0. ? val*sqrt(sqr(num_err/num)+sqr(den_err/den)) : 0.;
+          BinnedEstimatePtr<string> ratio;
+          book(ratio, ix, 1, iy);
+          ratio->bin(1).set(val, err);
+        }
       }
     }
 

@@ -50,41 +50,40 @@ namespace Rivet {
       Particles lambda    = ufs.particles(Cuts::pid== PID::LAMBDA);
       Particles lambdabar = ufs.particles(Cuts::pid==-PID::LAMBDA);
       // multiplicities
-      _m_single->fill(91.2,(lambda.size()+lambdabar.size()));
-      if(lambda.empty()&&lambdabar.empty()) vetoEvent;
-      for(const Particle& p : lambda) {
-	double xP = 2.*p.p3().mod()/sqrtS();
-	_h_x->fill(xP);
+      _m_single->fill(Ecm, (lambda.size()+lambdabar.size()));
+      if (lambda.empty()&&lambdabar.empty()) vetoEvent;
+      for (const Particle& p : lambda) {
+        double xP = 2.*p.p3().mod()/sqrtS();
+        _h_x->fill(xP);
       }
-      for(const Particle& p : lambdabar) {
-	double xP = 2.*p.p3().mod()/sqrtS();
-	_h_x->fill(xP);
+      for (const Particle& p : lambdabar) {
+        double xP = 2.*p.p3().mod()/sqrtS();
+        _h_x->fill(xP);
       }
-      if(lambda.size()>=2) {
-	unsigned int npair=lambda.size()/2;
-	_m_like->fill(91.2,double(npair));
+      if (lambda.size()>=2) {
+        unsigned int npair=lambda.size()/2;
+        _m_like->fill(Ecm, double(npair));
       }
-      if(lambdabar.size()>=2) {
-	unsigned int npair=lambdabar.size()/2;
-	_m_like->fill(91.2,double(npair));
+      if (lambdabar.size()>=2) {
+        unsigned int npair=lambdabar.size()/2;
+        _m_like->fill(Ecm, double(npair));
       }
-      if(lambda.size()==0 || lambdabar.size()==0)
-	return;
-      _m_opposite->fill(91.2,double(max(lambda.size(),lambdabar.size())));
+      if (lambda.size()==0 || lambdabar.size()==0)  return;
+      _m_opposite->fill(Ecm, double(max(lambda.size(),lambdabar.size())));
       const Sphericity& sphericity = apply<Sphericity>(event, "Sphericity");
-      for(const Particle & p : lambda) {
+      for (const Particle& p : lambda) {
         const Vector3 momP = p.p3();
         const double  enP  = p.E();
         const double  modP = dot(sphericity.sphericityAxis(), momP);
         const double rapP = 0.5 * std::log((enP + modP) / (enP - modP));
-	for(const Particle & pb : lambdabar) {
-	  const Vector3 momB = pb.p3();
-	  const double  enB  = pb.E();
-	  const double  modB = dot(sphericity.sphericityAxis(), momB);
-	  const double rapB = 0.5 * std::log((enB + modB) / (enB - modB));
-	  _h_rap->fill(abs(rapP-rapB));
-	  _h_cos->fill(momP.unit().dot(momB.unit()));
-	}
+        for (const Particle& pb : lambdabar) {
+          const Vector3 momB = pb.p3();
+          const double  enB  = pb.E();
+          const double  modB = dot(sphericity.sphericityAxis(), momB);
+          const double rapB = 0.5 * std::log((enB + modB) / (enB - modB));
+          _h_rap->fill(abs(rapP-rapB));
+          _h_cos->fill(momP.unit().dot(momB.unit()));
+        }
       }
     }
 
@@ -105,7 +104,8 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_x, _h_rap ,_h_cos;
-    Histo1DPtr _m_single, _m_like, _m_opposite;
+    BinnedHistoPtr<string> _m_single, _m_like, _m_opposite;
+    const string Ecm = "91.2";
     /// @}
 
 

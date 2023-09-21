@@ -48,10 +48,10 @@ namespace Rivet {
 
         if (onresonance) {
           _histOn  ->fill(xp);
-          _sigmaOn ->fill(10.58);
+          _sigmaOn ->fill(Ecm);
         } else {
           _histOff ->fill(xp);
-          _sigmaOff->fill(10.54);
+          _sigmaOff->fill(0.5);
         }
       }
     }
@@ -68,10 +68,11 @@ namespace Rivet {
   private:
 
     // Histograms for the continuum cross sections
-    Histo1DPtr _sigmaOn ;
+    BinnedHistoPtr<string> _sigmaOn;
     Histo1DPtr _sigmaOff;
     Histo1DPtr _histOn  ;
     Histo1DPtr _histOff ;
+    const string Ecm = "10.58";
 
   };
 

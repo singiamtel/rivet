@@ -22,20 +22,15 @@ namespace Rivet {
       declare(fj04, "AntiKT04");
 
       // |y| and ystar bins
-      const int nybins          = 6;
-      double ybins[nybins+1]     = { 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
-      double ystarbins[nybins+1] = { 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
+      vector<double> ybins{ 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
 
       // Book histograms
-      // pT histograms
-      for(size_t i=0;i<nybins;++i){// loop over |y| bins
-        {Histo1DPtr tmp; _pThistograms.add(ybins[i], ybins[i+1], book(tmp, i+1,1,1));}
+      book(_pThistograms, ybins);
+      book(_mjjhistograms, ybins);
+      for (size_t i=1; i < _pThistograms->numBins()+1; ++i) {
+        book(_pThistograms->bin(i), i, 1, 1);
+        book(_mjjhistograms->bin(i), 6+i, 1, 1);
       }
-      // mjj histograms
-      for(size_t i=0;i<nybins;++i){// loop over ystar bins
-        {Histo1DPtr tmp; _mjjhistograms.add(ystarbins[i], ystarbins[i+1], book(tmp, i+7,1,1));}
-      }
-
     }
 
 
@@ -50,10 +45,10 @@ namespace Rivet {
       for(int ijet=0;ijet<nJets;++ijet){ // loop over jets
         FourMomentum jet = kt4Jets[ijet].momentum();
         // pT selection
-        if(jet.pt()>100.0*GeV){
+        if (jet.pt()>100.0*GeV){
           // Fill distribution
           const double absy = jet.absrap();
-          _pThistograms.fill(absy,jet.pt()/GeV);
+          _pThistograms->fill(absy,jet.pt()/GeV);
         }
       }
 
@@ -66,9 +61,9 @@ namespace Rivet {
         const double ystar = fabs(rap0-rap1)/2;
         const double mass  = (jet0 + jet1).mass();
         const double HT2   = jet0.pt()+jet1.pt();
-        if(HT2>200*GeV && ystar<3.0){
+        if (HT2>200*GeV && ystar<3.0){
           // Fill distribution
-          _mjjhistograms.fill(ystar,mass/GeV);
+          _mjjhistograms->fill(ystar, mass/GeV);
         }
       }
 
@@ -78,25 +73,20 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      const double xs_pb( crossSection() / picobarn );
-      const double sumW( sumOfWeights() );
-      const double xs_norm_factor( 0.5*xs_pb / sumW );
+      const double xs_norm_factor = 0.5*crossSection() / picobarn / sumOfWeights();
 
-      MSG_DEBUG( "Cross-Section/pb     : " << xs_pb       );
-      MSG_DEBUG( "ZH                   : " << crossSectionPerEvent()/ picobarn);
-      MSG_DEBUG( "Sum of weights       : " << sumW        );
-      MSG_DEBUG( "nEvents              : " << numEvents() );
-      _pThistograms.scale(xs_norm_factor, this);
-      _mjjhistograms.scale(crossSectionPerEvent()/picobarn, this);
+      scale(_pThistograms, xs_norm_factor);
+      scale(_mjjhistograms, crossSectionPerEvent()/picobarn);
+      divByGroupWidth({_pThistograms, _mjjhistograms});
 
     }
 
   private:
 
     // The inclusive pT spectrum for akt4 jets
-    BinnedHistogram _pThistograms;
+    Histo1DGroupPtr _pThistograms;
     // The dijet mass spectrum for akt4 jets
-    BinnedHistogram _mjjhistograms;
+    Histo1DGroupPtr _mjjhistograms;
 
   };
 

@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -24,12 +23,10 @@ namespace Rivet {
       FastJets conefinder(fs, FastJets::D0ILCONE, 0.7);
       declare(conefinder, "ConeFinder");
 
-      {Histo1DPtr tmp; _h_m_dijet.add(0.0, 0.4, book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _h_m_dijet.add(0.4, 0.8, book(tmp, 2, 1, 1));}
-      {Histo1DPtr tmp; _h_m_dijet.add(0.8, 1.2, book(tmp, 3, 1, 1));}
-      {Histo1DPtr tmp; _h_m_dijet.add(1.2, 1.6, book(tmp, 4, 1, 1));}
-      {Histo1DPtr tmp; _h_m_dijet.add(1.6, 2.0, book(tmp, 5, 1, 1));}
-      {Histo1DPtr tmp; _h_m_dijet.add(2.0, 2.4, book(tmp, 6, 1, 1));}
+      book(_h_m_dijet, {0., 0.4, 0.8, 1.2, 1.6, 2., 2.4});
+      for (auto& b : _h_m_dijet->bins()) {
+        book(b, b.index(), 1, 1);
+      }
     }
 
 
@@ -38,18 +35,17 @@ namespace Rivet {
       const Jets& jets = apply<JetAlg>(e, "ConeFinder").jetsByPt(40.0*GeV);
       if (jets.size() < 2) vetoEvent;
 
-      FourMomentum j0(jets[0].momentum());
-      FourMomentum j1(jets[1].momentum());
-      double ymax = std::max(j0.absrap(), j1.absrap());
-      double mjj = FourMomentum(j0+j1).mass();
+      const double ymax = std::max(jets[0].absrap(), jets[1].absrap());
+      const double mjj = FourMomentum(jets[0].mom() + jets[1].mom()).mass();
 
-      _h_m_dijet.fill(ymax, mjj/TeV);
+      _h_m_dijet->fill(ymax, mjj/TeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      _h_m_dijet.scale(crossSection()/sumOfWeights(), this);
+      scale(_h_m_dijet, crossSection()/sumOfWeights());
+      divByGroupWidth(_h_m_dijet);
     }
 
     /// @}
@@ -59,7 +55,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _h_m_dijet;
+    Histo1DGroupPtr _h_m_dijet;
     /// @}
 
   };

@@ -64,7 +64,7 @@ namespace Rivet {
       const size_t numParticles = cfs.particles().size();
       switch (flavour) {
       case 1: case 2: case 3:
-	_weightLight->fill();  ;
+        _weightLight->fill();
         _cLight->fill(numParticles);
         break;
       case 5:
@@ -83,36 +83,27 @@ namespace Rivet {
       if(_weightBottom->effNumEntries()!=0) scale(_cBottom, 1./ *_weightBottom);
       Counter _cDiff = *_cBottom - *_cLight;
       // fill the histograms
-      for(unsigned int ix=1;ix<4;++ix) {
-	double val(0.), err(0.0);
-	if(ix==1) {
-	  val = _cBottom->val();
-	  err = _cBottom->err();
-	}
-	else if(ix==2) {
-	  val = _cLight->val();
-	  err = _cLight->err();
-	}
-	else if(ix==3) {
-	  val = _cDiff.val();
-	  err = _cDiff.err();
-	}
-	Scatter2D temphisto(refData(1, 1, ix));
-	Scatter2DPtr mult;
-	book(mult,1, 1, ix);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, val, ex, make_pair(err,err));
-	  }
-	  else {
-	    mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+      for (unsigned int ix=1;ix<4;++ix) {
+        double val(0.), err(0.0);
+        if (ix==1) {
+          val = _cBottom->val();
+          err = _cBottom->err();
+        }
+        else if (ix==2) {
+          val = _cLight->val();
+          err = _cLight->err();
+        }
+        else if (ix==3) {
+          val = _cDiff.val();
+          err = _cDiff.err();
+        }
+        Estimate1DPtr mult;
+        book(mult,1, 1, ix);
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(val, err);
+          }
+        }
       }
 
     }

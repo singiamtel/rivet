@@ -1,19 +1,11 @@
 import yoda
+
 def patch(path, ao):
-    # fix hist, really a 2D histo with two equivalent x axes not a 3d one
-    if ("OPAL_1993_I342766" in path) :
-        if("d01" in path ) :
-            points = ao.points()
-            newHist=yoda.Scatter2D()
-            newHist.setPath(ao.path())
-            for i in range(0,len(points)) :
-                x = points[i].y()
-                xErrs = points[i].yErrs()
-                y     = points[i].z()
-                yErrs = points[i].zErrs()
-                newHist.addPoint(x,y,xErrs,yErrs)    
-                ao=newHist
-        else :
-            for p in ao.points() :
-                p.setXErrs(0.2)
+    # fix type of hist from 2D to 1D, 2 equivalent independent axes
+    if "OPAL_1993_I342766/d01" in path:
+        newao = yoda.BinnedEstimate1D(ao.yEdges(), ao.path())
+        for i in range(1, newao.numBins()+1):
+            b = ao.bin(i,i)
+            newao.set(i, b)
+        ao = newao
     return ao

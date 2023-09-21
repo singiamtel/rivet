@@ -172,59 +172,59 @@ namespace Rivet {
       _h_mu->fill(cosL,mu);
       _wsum->fill();
     }
-    
+
     pair<double,pair<double,double> > calcAlpha0(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,make_pair(0.,0.));
       double d = 3./(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
        	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double a =  d*(bin.xMax() - bin.xMin());
-	double b = d/3.*(pow(bin.xMax(),3) - pow(bin.xMin(),3));
+        if (Oi==0.) continue;
+        double a =  d*(bin.xMax() - bin.xMin());
+        double b = d/3.*(pow(bin.xMax(),3) - pow(bin.xMin(),3));
        	double Ei = bin.errW();
-	sum1 +=   a*Oi/sqr(Ei);
-	sum2 +=   b*Oi/sqr(Ei);
-	sum3 += sqr(a)/sqr(Ei);
-	sum4 += sqr(b)/sqr(Ei);
-	sum5 +=    a*b/sqr(Ei);
+        sum1 +=   a*Oi/sqr(Ei);
+        sum2 +=   b*Oi/sqr(Ei);
+        sum3 += sqr(a)/sqr(Ei);
+        sum4 += sqr(b)/sqr(Ei);
+        sum5 +=    a*b/sqr(Ei);
       }
       // calculate alpha
       double alpha = (-c*sum1 + sqr(c)*sum2 + sum3 - c*sum5)/(sum1 - c*sum2 + c*sum4 - sum5);
       // and error
       double cc = -pow((sum3 + sqr(c)*sum4 - 2*c*sum5),3);
       double bb = -2*sqr(sum3 + sqr(c)*sum4 - 2*c*sum5)*(sum1 - c*sum2 + c*sum4 - sum5);
-      double aa =  sqr(sum1 - c*sum2 + c*sum4 - sum5)*(-sum3 - sqr(c)*sum4 + sqr(sum1 - c*sum2 + c*sum4 - sum5) + 2*c*sum5);      
+      double aa =  sqr(sum1 - c*sum2 + c*sum4 - sum5)*(-sum3 - sqr(c)*sum4 + sqr(sum1 - c*sum2 + c*sum4 - sum5) + 2*c*sum5);
       double dis = sqr(bb)-4.*aa*cc;
       if(dis>0.) {
-	dis = sqrt(dis);
-	return make_pair(alpha,make_pair(0.5*(-bb+dis)/aa,-0.5*(-bb-dis)/aa));
+        dis = sqrt(dis);
+        return make_pair(alpha,make_pair(0.5*(-bb+dis)/aa,-0.5*(-bb-dis)/aa));
       }
       else {
-	return make_pair(alpha,make_pair(0.,0.));
+        return make_pair(alpha,make_pair(0.,0.));
       }
     }
 
     pair<double,double> calcCoeff(unsigned int imode,Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
-	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double ai(0.),bi(0.);
-	if(imode==0) {
-	  bi = (pow(1.-sqr(bin.xMin()),1.5) - pow(1.-sqr(bin.xMax()),1.5))/3.;
-	}
-	else if(imode>=2 && imode<=4) {
-	  bi =   ( pow(bin.xMin(),3)*( -5. + 3.*sqr(bin.xMin()))  +
-		   pow(bin.xMax(),3)*(  5. - 3.*sqr(bin.xMax())))/15.;
-	}
-	else
-	  assert(false);
-	double Ei = bin.errW();
-	sum1 += sqr(bi/Ei);
-	sum2 += bi/sqr(Ei)*(Oi-ai);
+      for (const auto& bin : hist->bins() ) {
+        double Oi = bin.sumW();
+        if(Oi==0.) continue;
+        double ai(0.),bi(0.);
+        if(imode==0) {
+          bi = (pow(1.-sqr(bin.xMin()),1.5) - pow(1.-sqr(bin.xMax()),1.5))/3.;
+        }
+        else if(imode>=2 && imode<=4) {
+          bi =   ( pow(bin.xMin(),3)*( -5. + 3.*sqr(bin.xMin()))  +
+             pow(bin.xMax(),3)*(  5. - 3.*sqr(bin.xMax())))/15.;
+        }
+        else
+          assert(false);
+        double Ei = bin.errW();
+        sum1 += sqr(bi/Ei);
+        sum2 += bi/sqr(Ei)*(Oi-ai);
       }
       return make_pair(sum2/sum1,sqrt(1./sum1));
     }
@@ -233,21 +233,20 @@ namespace Rivet {
     void finalize() {
       // normalize histograms
       for(unsigned int ix=0;ix<6;++ix)
-	scale(_h_F[ix], 1./ *_wsum);
+        scale(_h_F[ix], 1./ *_wsum);
       scale(_h_mu, 10./ *_wsum);
       // value of aLambda assumed in paper
       double aLambda = 0.754;
       // calculate alpha0
       pair<double,pair<double,double> > alpha0 = calcAlpha0(_h_F[5]);
-      Scatter2DPtr _h_alpha0;
+      Estimate1DPtr _h_alpha0;
       book(_h_alpha0,3,1,1);
-      _h_alpha0->addPoint(0.5, alpha0.first, make_pair(0.5,0.5),
-			  make_pair(alpha0.second.first,alpha0.second.second) );
+      _h_alpha0->bin(1).set(alpha0.first, make_pair(alpha0.second.first,alpha0.second.second));
       double s2 = -1. + sqr(alpha0.first);
       double s3 = 3 + alpha0.first;
       double s1 = sqr(s3);
       // alpha- and alpha+ from proton data
-      pair<double,double> c_T2_p = calcCoeff(2,_h_F[1]); 
+      pair<double,double> c_T2_p = calcCoeff(2,_h_F[1]);
       pair<double,double> c_T3_p = calcCoeff(3,_h_F[2]);
       pair<double,double> c_T4_p = calcCoeff(4,_h_F[3]);
       double s4 = sqr(c_T2_p.first);
@@ -256,21 +255,21 @@ namespace Rivet {
       double disc = s1*s5*s6*(-9.*s2*s4 + 4.*s1*s5*s6);
       // now for Delta
       if(disc>0) {
-	double sDelta = (-2.*(3. + alpha0.first)*c_T3_p.first)/(aLambda*sqrt(1 - sqr(alpha0.first)));
-	double cDelta = (-3*(3 + alpha0.first)*c_T2_p.first)/(-aLambda*aLambda*sqrt(1 - sqr(alpha0.first)));
-	double Delta = asin(sDelta);
-	if(cDelta<0.) Delta = M_PI-Delta;
-	double ds_P = (-9*c_T2_p.first*((-1 + alpha0.first)*(1 + alpha0.first)*  (3 + alpha0.first)*c_T3_p.first*c_T4_p.first*c_T2_p.second +  c_T2_p.first*c_T4_p.first*(c_T3_p.first*(alpha0.second.first + 3*alpha0.first*alpha0.second.first) -(-1 + alpha0.first)*(1 + alpha0.first)*(3 + alpha0.first)*c_T3_p.second)
+        double sDelta = (-2.*(3. + alpha0.first)*c_T3_p.first)/(aLambda*sqrt(1 - sqr(alpha0.first)));
+        double cDelta = (-3*(3 + alpha0.first)*c_T2_p.first)/(-aLambda*aLambda*sqrt(1 - sqr(alpha0.first)));
+        double Delta = asin(sDelta);
+        if(cDelta<0.) Delta = M_PI-Delta;
+        double ds_P = (-9*c_T2_p.first*((-1 + alpha0.first)*(1 + alpha0.first)*  (3 + alpha0.first)*c_T3_p.first*c_T4_p.first*c_T2_p.second +  c_T2_p.first*c_T4_p.first*(c_T3_p.first*(alpha0.second.first + 3*alpha0.first*alpha0.second.first) -(-1 + alpha0.first)*(1 + alpha0.first)*(3 + alpha0.first)*c_T3_p.second)
 			      -  (-1 + alpha0.first)*(1 + alpha0.first)*  (3 + alpha0.first)*c_T2_p.first*c_T3_p.first*c_T4_p.second)*disc)/
 	  (pow(1 - pow(alpha0.first,2),1.5)*pow(c_T4_p.first,3)*pow(-((disc + 2*s1*s5*s6)/   (s2*s6)),1.5)*(-9*s2*s4 + 4*s1*s5*s6));
-	double ds_M = (-9*c_T2_p.first*((-1 + alpha0.first)*(1 + alpha0.first)*  (3 + alpha0.first)*c_T3_p.first*c_T4_p.first*c_T2_p.second +  c_T2_p.first*c_T4_p.first*(c_T3_p.first*(alpha0.second.second + 3*alpha0.first*alpha0.second.second) -(-1 + alpha0.first)*(1 + alpha0.first)*(3 + alpha0.first)*c_T3_p.second)
+        double ds_M = (-9*c_T2_p.first*((-1 + alpha0.first)*(1 + alpha0.first)*  (3 + alpha0.first)*c_T3_p.first*c_T4_p.first*c_T2_p.second +  c_T2_p.first*c_T4_p.first*(c_T3_p.first*(alpha0.second.second + 3*alpha0.first*alpha0.second.second) -(-1 + alpha0.first)*(1 + alpha0.first)*(3 + alpha0.first)*c_T3_p.second)
 			      -  (-1 + alpha0.first)*(1 + alpha0.first)*  (3 + alpha0.first)*c_T2_p.first*c_T3_p.first*c_T4_p.second)*disc)/
 	  (pow(1 - pow(alpha0.first,2),1.5)*pow(c_T4_p.first,3)*pow(-((disc + 2*s1*s5*s6)/   (s2*s6)),1.5)*(-9*s2*s4 + 4*s1*s5*s6));
-	ds_P /= sqrt(1.-sqr(sDelta));
-	ds_M /= sqrt(1.-sqr(sDelta));
-	Scatter2DPtr _h_sin;
-	book(_h_sin,3,1,2);
-	_h_sin->addPoint(0.5, Delta/M_PI*180., make_pair(0.5,0.5), make_pair( -ds_P/M_PI*180., -ds_M/M_PI*180. ) );
+        ds_P /= sqrt(1.-sqr(sDelta));
+        ds_M /= sqrt(1.-sqr(sDelta));
+        Estimate1DPtr _h_sin;
+        book(_h_sin,3,1,2);
+        _h_sin->bin(1).set(Delta/M_PI*180., make_pair( -ds_P/M_PI*180., -ds_M/M_PI*180. ));
       }
       // scale to number of observed events in experiment
       // for(unsigned int ix=0;ix<5;++ix)

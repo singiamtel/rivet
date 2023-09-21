@@ -198,9 +198,7 @@ namespace Rivet {
     void finalize() {
       const double sf = _mode? 1.0 : 0.5;
       const double scalefactor = sf * crossSection() / sumOfWeights();
-      for (const auto& hist : histos) {
-        scale(hist.second, scalefactor);
-      }
+      scale(histos, scalefactor);
     }
 
 

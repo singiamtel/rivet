@@ -46,5 +46,3 @@ BibTeX: '@article{Acharya:2019vdf,
       reportNumber   = "CERN-EP-2019-033",
       SLACcitation   = "%%CITATION = ARXIV:1903.01790;%%"
 }'
-ToDo:
- - Implement symmetric cumulants and 3 subevents.

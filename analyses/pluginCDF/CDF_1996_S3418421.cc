@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -22,11 +21,8 @@ namespace Rivet {
       FinalState fs(Cuts::abseta < 4.2);
       declare(FastJets(fs, FastJets::CDFJETCLU, 0.7), "Jets");
 
-      {Histo1DPtr tmp; _h_chi.add(241.0, 300.0, book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _h_chi.add(300.0, 400.0, book(tmp, 1, 1, 2));}
-      {Histo1DPtr tmp; _h_chi.add(400.0, 517.0, book(tmp, 1, 1, 3));}
-      {Histo1DPtr tmp; _h_chi.add(517.0, 625.0, book(tmp, 1, 1, 4));}
-      {Histo1DPtr tmp; _h_chi.add(625.0,1800.0, book(tmp, 1, 1, 5));}
+      book(_h_chi, {241., 300., 400., 517., 625., 1800.},
+                   {"d01-x01-y01", "d01-x01-y02", "d01-x01-y03", "d01-x01-y04", "d01-x01-y05"});
       book(_h_ratio,  2, 1, 1);
       book(_htmp_chi_above_25 ,"TMP/chiabove25", refData(2, 1, 1));
       book(_htmp_chi_below_25 ,"TMP/chibelow25", refData(2, 1, 1));
@@ -35,7 +31,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       Jets jets = apply<FastJets>(event, "Jets").jetsByPt(50.0*GeV);
       if (jets.size() < 2) vetoEvent;
@@ -48,18 +43,16 @@ namespace Rivet {
       if (fabs(eta2) > 2.0 || fabs(eta1) > 2.0 || chi > 5.0) vetoEvent;
 
       double m = FourMomentum(jet1 + jet2).mass();
-      _h_chi.fill(m, chi, weight);
+      _h_chi->fill(m, chi);
 
       // Fill ratio numerator or denominator depending on chi value
-      ((chi > 2.5) ? _htmp_chi_above_25 : _htmp_chi_below_25)->fill(m/GeV, weight);
+      ((chi > 2.5) ? _htmp_chi_above_25 : _htmp_chi_below_25)->fill(m/GeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (Histo1DPtr hist : _h_chi.histos()) {
-        normalize(hist);
-      }
+      normalize(_h_chi);
       divide(_htmp_chi_below_25, _htmp_chi_above_25, _h_ratio);
     }
 
@@ -70,9 +63,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _h_chi;
+    Histo1DGroupPtr _h_chi;
     Histo1DPtr _htmp_chi_above_25, _htmp_chi_below_25;
-    Scatter2DPtr _h_ratio;
+    Estimate1DPtr _h_ratio;
     /// @}
 
   };

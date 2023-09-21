@@ -12,9 +12,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    CMS_2017_I1471287() : CumulantAnalysis("CMS_2017_I1471287") {
-
-    };
+    CMS_2017_I1471287() : CumulantAnalysis("CMS_2017_I1471287") { };
 
 
     /// @name Analysis methods
@@ -64,25 +62,25 @@ namespace Rivet {
       declare(lfsnpT, "LFSN");
 
       // v22 |delta eta| > 2 (fig 4a)
-      book(h_v22, 1, 1, 1, true);
+      book(h_v22, 1, 1, 1);
       // v32 |delta eta| > 2 (fig 4b)
-      book(h_v32, 3, 1, 1, true);
+      book(h_v32, 3, 1, 1);
       // v22(pT) high mult., high pT (fig 6a)
-      book(h_v22pT, 11, 1, 1, true);
+      book(h_v22pT, 11, 1, 1);
       // v22(pT) charged low mult. (fig. 7a)
-      book(h_v22pTh, 17, 1, 1, true);
+      book(h_v22pTh, 17, 1, 1);
       // v22(pT) K0S low mult. (fig. 7a)
-      book(h_v22pTK, 18, 1, 1, true);
+      book(h_v22pTK, 18, 1, 1);
       // v22(pT) Lambda low mult. (fig. 7a)
-      book(h_v22pTL, 19, 1, 1, true);
+      book(h_v22pTL, 19, 1, 1);
       // v22(pT) K0S high mult. (fig. 7b)
-      book(h_v22pTKc, 21, 1, 1, true);
+      book(h_v22pTKc, 21, 1, 1);
       // v22(pT) Lambda high mult. (fig. 7b)
-      book(h_v22pTLc, 22, 1, 1, true);
+      book(h_v22pTLc, 22, 1, 1);
       // c24 (fig. 9a)
-      book(h_c24, 28, 1, 1, true);
+      book(h_c24, 28, 1, 1);
       // c26 (fig. 9b)
-      book(h_c26, 31, 1, 1, true);
+      book(h_c26, 31, 1, 1);
 
       // Corresponding event averaged correlators.
       ec22 = bookECorrelatorGap<2,2>("ec22",refData(1,1,1));

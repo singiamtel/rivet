@@ -50,7 +50,7 @@ namespace Rivet {
 
      /// @{
      Histo1DPtr _h_tmp_dijet, _h_tmp_trijet;
-     Scatter2DPtr _h_r32;
+     Estimate1DPtr _h_r32;
      /// @}
 
   };

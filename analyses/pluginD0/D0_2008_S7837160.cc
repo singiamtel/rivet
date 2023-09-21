@@ -72,9 +72,9 @@ namespace Rivet {
       asymm(_hs_dsigpm_deta_25_35[0], _hs_dsigpm_deta_25_35[1], _h_asym1);
       asymm(_hs_dsigpm_deta_35[0],    _hs_dsigpm_deta_35[1],    _h_asym2);
       asymm(_hs_dsigpm_deta_25[0],    _hs_dsigpm_deta_25[1],    _h_asym3);
-      _h_asym1->scale(1, 100.);
-      _h_asym2->scale(1, 100.);
-      _h_asym3->scale(1, 100.);
+      _h_asym1->scale(100.);
+      _h_asym2->scale(100.);
+      _h_asym3->scale(100.);
     }
 
     /// @}
@@ -85,7 +85,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _hs_dsigpm_deta_25_35[2], _hs_dsigpm_deta_35[2], _hs_dsigpm_deta_25[2];
-    Scatter2DPtr _h_asym1, _h_asym2, _h_asym3;
+    Estimate1DPtr _h_asym1, _h_asym2, _h_asym3;
     /// @}
 
   };

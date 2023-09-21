@@ -1,6 +1,6 @@
-#include <Rivet/Analysis.hh>
-#include <Rivet/Projections/AliceCommon.hh>
-#include <Rivet/Projections/HepMCHeavyIon.hh>
+#include "Rivet/Analysis.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
+#include "Rivet/Projections/HepMCHeavyIon.hh"
 
 namespace Rivet {
 

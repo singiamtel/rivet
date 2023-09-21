@@ -1,9 +1,8 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
-#include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Projections/HepMCHeavyIon.hh"
-#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 #include "Rivet/Tools/Cuts.hh"
 
 namespace Rivet {
@@ -111,12 +110,12 @@ namespace Rivet {
        // this in HepMC3
       const HepMCHeavyIon & hi = apply<HepMCHeavyIon>(event, "HepMC");
        if ( nPions != 0){
-	 const double npart = hi.Npart_proj() + hi.Npart_targ();
+         const double npart = hi.Npart_proj() + hi.Npart_targ();
          if (nXi != 0)
            _histXitoPi->fill(npart, double(nXi) / double(nPions));
          if (nOmega != 0)
-	   _histOmegatoPi->fill(npart, double(nOmega) / double(nPions));
-	}
+           _histOmegatoPi->fill(npart, double(nOmega) / double(nPions));
+        }
      }
 
     void finalize() {

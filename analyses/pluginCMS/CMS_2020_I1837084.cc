@@ -31,7 +31,8 @@ namespace Rivet {
 
       // Book histograms
       book(_h_Z_pt,      12, 1, 1);
-      book(_h_Z_pt_norm, 13, 1, 1);
+      book(_e_Z_pt_norm, 13, 1, 1);
+      book(_h_Z_pt_norm, "_h_Z_pt_norm", refData(13, 1, 1));
 
     }
 
@@ -49,17 +50,6 @@ namespace Rivet {
     }
 
 
-    /// @todo Replace with barchart()
-    void normalizeToSum(Histo1DPtr hist) {
-      //double sum = 0.;
-      for (size_t i = 1; i < hist->numBins()+1; ++i) {
-        const double width = hist->bin(i).xWidth();
-        if (width) hist->bin(i).scaleW(width);
-      }
-      if (hist->integral() > 0) scale(hist, 1./hist->integral());
-    }
-
-
     /// Normalise histograms etc., after the run
     void finalize() {
 
@@ -67,7 +57,8 @@ namespace Rivet {
 
       scale(_h_Z_pt, norm);
 
-      normalizeToSum(_h_Z_pt_norm);
+      normalize(_h_Z_pt_norm);
+      barchart(_h_Z_pt_norm, _e_Z_pt_norm);
 
     }
 
@@ -77,6 +68,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_Z_pt, _h_Z_pt_norm;
+    Estimate1DPtr _e_Z_pt_norm;
     /// @}
 
 

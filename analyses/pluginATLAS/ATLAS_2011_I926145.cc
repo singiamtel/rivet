@@ -32,8 +32,8 @@ namespace Rivet {
       IdentifiedFinalState muons_full(Cuts::abseta < 2.5 && Cuts::pT > 4*GeV, {PID::MUON, PID::ANTIMUON});
       declare(muons_full, "muons_full");
 
-	  Cut cut20 = Cuts::abseta < 2.0;
-	  Cut cut25 = Cuts::abseta < 2.5;
+      Cut cut20 = Cuts::abseta < 2.0;
+      Cut cut25 = Cuts::abseta < 2.5;
       const FinalState fs20(cut20);
       const FinalState fs25(cut25);
 
@@ -54,9 +54,9 @@ namespace Rivet {
       declare(wfinder_mufull, "WFinder_mufull");
 
       // Book histograms
-      book(_histPt_elecs      ,1 ,1 ,1);
-      book(_histPt_muons      ,2 ,1 ,1);
-      book(_histPt_muons_full ,3 ,1 ,1);
+      book(_histPt_elecs,      1, 1, 1);
+      book(_histPt_muons,      2, 1, 1);
+      book(_histPt_muons_full, 3, 1, 1);
     }
 
 
@@ -118,6 +118,9 @@ namespace Rivet {
       scale(_histPt_elecs,      crossSection()/nanobarn/sumOfWeights());
       scale(_histPt_muons,      crossSection()/nanobarn/sumOfWeights());
       scale(_histPt_muons_full, crossSection()/nanobarn/sumOfWeights());
+      // the last one is microbarn on HD, but cannot sync as the d02 is
+      // currently missing from HD:
+      //scale(_histPt_muons_full, crossSection()/microbarn/sumOfWeights());
     }
 
 

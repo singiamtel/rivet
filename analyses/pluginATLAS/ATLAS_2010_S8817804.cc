@@ -1,7 +1,6 @@
 // -*- C++ -*-
 
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -23,30 +22,27 @@ namespace Rivet {
       declare(FastJets(fs, FastJets::ANTIKT, 0.6), "AntiKT06");
       declare(FastJets(fs, FastJets::ANTIKT, 0.4), "AntiKT04");
 
-      double ybins[] = { 0.0, 0.3, 0.8, 1.2, 2.1, 2.8 };
-      double massBinsForChi[] = { 340, 520, 800, 1200 };
+      const vector<double> ybins{ 0.0, 0.3, 0.8, 1.2, 2.1, 2.8 };
+      const vector<double> massBinsForChi{ 340, 520, 800, 1200 };
 
 
       size_t ptDsOffset(0), massDsOffset(10), chiDsOffset(20);
       for (size_t alg = 0; alg < 2; ++alg) {
-        for (size_t i = 0; i < 5; ++i) {
-          Histo1DPtr tmp;
-          book(tmp, i + 1 + ptDsOffset, 1, 1);
-          _pThistos[alg].add(ybins[i], ybins[i+1], tmp);
+        book(_pThistos[alg], ybins);
+        for (auto& b : _pThistos[alg]->bins()) {
+          book(b, b.index() + ptDsOffset, 1, 1);
         }
         ptDsOffset += 5;
 
-        for (size_t i = 0; i < 5; ++i) {
-          Histo1DPtr tmp;
-          book(tmp, i + 1 + massDsOffset, 1, 1);
-          _massVsY[alg].add(ybins[i], ybins[i+1], tmp);
+        book(_massVsY[alg], ybins);
+        for (auto& b : _massVsY[alg]->bins()) {
+          book(b, b.index() + massDsOffset, 1, 1);
         }
         massDsOffset += 5;
 
-        for (size_t i = 0; i < 3; ++i) {
-          Histo1DPtr tmp;
-          book(tmp, i + 1 + chiDsOffset, 1, 1);
-          _chiVsMass[alg].add(massBinsForChi[i], massBinsForChi[i+1], tmp);
+        book(_chiVsMass[alg], massBinsForChi);
+        for (auto& b : _chiVsMass[alg]->bins()) {
+          book(b, b.index() + chiDsOffset, 1, 1);
         }
         chiDsOffset += 3;
       }
@@ -64,7 +60,7 @@ namespace Rivet {
         for (const Jet& jet : jetAr[alg]) {
           const double pT = jet.pT();
           const double absy = jet.absrap();
-          _pThistos[alg].fill(absy, pT/GeV, 1.0);
+          _pThistos[alg]->fill(absy, pT/GeV);
 
           if (absy < 2.8 && leadjets.size() < 2) {
             if (leadjets.empty() && pT < 60*GeV) continue;
@@ -84,34 +80,37 @@ namespace Rivet {
         const double ymax = max(fabs(rap1), fabs(rap2));
         const double chi = exp(fabs(rap1 - rap2));
         if (fabs(rap1 + rap2) < 2.2) {
-          _chiVsMass[alg].fill(mass/GeV, chi, 1.0);
+          _chiVsMass[alg]->fill(mass/GeV, chi);
         }
-        _massVsY[alg].fill(ymax, mass/GeV, 1.0);
+        _massVsY[alg]->fill(ymax, mass/GeV);
 
       }
     }
 
 
     void finalize() {
-      for (size_t alg = 0; alg < 2; ++alg) {
-        // factor 0.5 needed because it is differential in dy and not d|y|
-        _pThistos[alg].scale(0.5*crossSectionPerEvent()/picobarn, this);
-        _massVsY[alg].scale(crossSectionPerEvent()/picobarn, this);
-        _chiVsMass[alg].scale(crossSectionPerEvent()/picobarn, this);
-      }
+      const double sf = crossSectionPerEvent()/picobarn;
+      // factor 0.5 needed because it is differential in dy and not d|y|
+      scale(_pThistos, 0.5*sf);
+      scale(_massVsY, sf);
+      scale(_chiVsMass, sf);
+
+      divByGroupWidth(_pThistos);
+      divByGroupWidth(_massVsY);
+      divByGroupWidth(_chiVsMass);
     }
 
 
   private:
 
     /// The inclusive pT spectrum for akt6 and akt4 jets (array index is jet type from enum above)
-    BinnedHistogram _pThistos[2];
+    Histo1DGroupPtr _pThistos[2];
 
     /// The di-jet mass spectrum binned in rapidity for akt6 and akt4 jets (array index is jet type from enum above)
-    BinnedHistogram _massVsY[2];
+    Histo1DGroupPtr _massVsY[2];
 
     /// The di-jet chi distribution binned in mass for akt6 and akt4 jets (array index is jet type from enum above)
-    BinnedHistogram _chiVsMass[2];
+    Histo1DGroupPtr _chiVsMass[2];
 
   };
 

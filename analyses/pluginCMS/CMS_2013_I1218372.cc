@@ -153,7 +153,7 @@ namespace Rivet {
     CounterPtr inclEflow;
 
     // histograms
-    Scatter2DPtr _h_ratio;
+    Estimate1DPtr _h_ratio;
     Histo1DPtr   _tmp_jet;
     Histo1DPtr   _tmp_njet;
   };

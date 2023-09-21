@@ -35,7 +35,7 @@ namespace Rivet {
       // Book histograms
       // specify custom binning
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      
+
       book(_h["inclusive"], 7, 1, 1);
       book(_h["MN"], 8, 1, 1);
       book(_s["R_incl"], 9, 1, 1);
@@ -93,10 +93,10 @@ namespace Rivet {
       efficiency(_h["exclusive_veto"], _h["inclusive"], _s["R_incl_veto"]);
       efficiency(_h["exclusive_veto"], _h["MN"], _s["R_MN_veto"]);
 
-      transformY(*_s["R_incl"], _invert);
-      transformY(*_s["R_MN"], _invert);
-      transformY(*_s["R_incl_veto"], _invert);
-      transformY(*_s["R_MN_veto"], _invert);
+      transform(*_s["R_incl"], _invert);
+      transform(*_s["R_MN"], _invert);
+      transform(*_s["R_incl_veto"], _invert);
+      transform(*_s["R_MN_veto"], _invert);
 
 
       scale(_h["inclusive"], crossSection()/picobarn/sumOfWeights()); // norm to generated cross-section in pb
@@ -110,10 +110,10 @@ namespace Rivet {
     /// @name Histograms
     ///@{
     map<string, Histo1DPtr> _h;
-    map<string, Scatter2DPtr>_s;
+    map<string, Estimate1DPtr>_s;
     ///@}
     private:
-    
+
     /// Reciprocal function with div-by-zero protection, for inverting the efficiency measure
     static double _invert(double x) { return (x > 0) ? 1/x : 0; }
 

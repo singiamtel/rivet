@@ -92,17 +92,11 @@ namespace Rivet {
       if (mT < 40.0*GeV) vetoEvent;
 
       double jetcuts[] = { 30.0*GeV, 20.0*GeV };
-      const FastJets& jetpro = apply<FastJets>(event, "jets");
-
       for (size_t i = 0; i < 2; ++i) {
-        vector<FourMomentum> jets;
-        double HT = lepton.pT() + p_miss.pT();
-        for (const Jet& jet : jetpro.jetsByPt(jetcuts[i])) {
-          if (jet.absrap() < 4.4 && deltaR(lepton, jet.momentum()) > 0.5) {
-            jets.push_back(jet.momentum());
-            HT += jet.pT();
-          }
-        }
+        Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::absrap < 4.4 && Cuts::pT > jetcuts[i]);
+        ifilter_discard(jets, deltaRLess(lepton, 0.5));
+
+        const double HT = sum(jets, Kin::pT, lepton.pT() + p_miss.pT());
 
         _h_NjetIncl[i]->fill(0.0);
 
@@ -121,7 +115,7 @@ namespace Rivet {
         _h_FirstJetPt_2jet[i]->fill(jets[0].pT());
         _h_SecondJetPt_2jet[i]->fill(jets[1].pT());
         _h_Ht_2jet[i]->fill(HT);
-        double m2_2jet = FourMomentum(jets[0]+jets[1]).mass2();
+        double m2_2jet = (jets[0].mom()+jets[1].mom()).mass2();
         _h_Minv_2jet[i]->fill(m2_2jet>0.0 ? sqrt(m2_2jet) : 0.0);
         _h_DeltaR_2jet[i]->fill(deltaR(jets[0], jets[1]));
         _h_DeltaY_2jet[i]->fill(jets[0].rapidity()-jets[1].rapidity());
@@ -134,7 +128,7 @@ namespace Rivet {
         _h_SecondJetPt_3jet[i]->fill(jets[1].pT());
         _h_ThirdJetPt_3jet[i]->fill(jets[2].pT());
         _h_Ht_3jet[i]->fill(HT);
-        double m2_3jet = FourMomentum(jets[0]+jets[1]+jets[2]).mass2();
+        double m2_3jet = (jets[0].mom()+jets[1].mom()+jets[2].mom()).mass2();
         _h_Minv_3jet[i]->fill(m2_3jet>0.0 ? sqrt(m2_3jet) : 0.0);
 
         // Njet>=4 observables
@@ -145,7 +139,7 @@ namespace Rivet {
         _h_ThirdJetPt_4jet[i]->fill(jets[2].pT());
         _h_FourthJetPt_4jet[i]->fill(jets[3].pT());
         _h_Ht_4jet[i]->fill(HT);
-        double m2_4jet = FourMomentum(jets[0]+jets[1]+jets[2]+jets[3]).mass2();
+        double m2_4jet = (jets[0].mom()+jets[1].mom()+jets[2].mom()+jets[3].mom()).mass2();
         _h_Minv_4jet[i]->fill(m2_4jet>0.0 ? sqrt(m2_4jet) : 0.0);
 
         // Njet>=5 observables
@@ -161,14 +155,14 @@ namespace Rivet {
 
         // Construct jet multiplicity ratio
         for (size_t n = 1; n < _h_NjetIncl[i]->numBins(); ++n) {
-          auto& b0 = _h_NjetIncl[i]->bin(n);
-          auto& b1 = _h_NjetIncl[i]->bin(n+1);
+          const auto& b0 = _h_NjetIncl[i]->bin(n);
+          const auto& b1 = _h_NjetIncl[i]->bin(n+1);
           double val = 0.0, err= 0.0;
           if (b0.sumW() && b1.sumW()) {
             val = b1.sumW() / b0.sumW();
             err = b1.sumW() / b0.sumW() * (b0.relErrW() + b1.relErrW());
           }
-          _h_RatioNjetIncl[i]->addPoint(n, val, 0.5, err);
+          _h_RatioNjetIncl[i]->bin(n).set(val, err);
         }
 
         // Scale all histos to the cross section
@@ -225,7 +219,7 @@ namespace Rivet {
     Histo1DPtr _h_Minv_3jet[2];
     Histo1DPtr _h_Minv_4jet[2];
     Histo1DPtr _h_NjetIncl[2];
-    Scatter2DPtr _h_RatioNjetIncl[2];
+    Estimate1DPtr _h_RatioNjetIncl[2];
     Histo1DPtr _h_SecondJetPt_2jet[2];
     Histo1DPtr _h_SecondJetPt_3jet[2];
     Histo1DPtr _h_SecondJetPt_4jet[2];

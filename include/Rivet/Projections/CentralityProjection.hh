@@ -27,6 +27,8 @@ namespace Rivet {
   class CentralityProjection: public SingleValueProjection {
   public:
 
+    using SingleValueProjection::operator=;
+
     /// Default constructor
     CentralityProjection() { setName("CentralityProjection"); }
 

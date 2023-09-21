@@ -182,10 +182,10 @@ namespace Rivet {
      Histo1DPtr _h_Z_pt_combined, _h_Z_pt_cjet_combined, _h_Z_pt_bjet_combined;
 
 
-     Scatter2DPtr _h_R_jet_pt_cjet_combined, _h_R_jet_pt_bjet_combined, _h_R_jet_pt_cb_combined;
+     Estimate1DPtr _h_R_jet_pt_cjet_combined, _h_R_jet_pt_bjet_combined, _h_R_jet_pt_cb_combined;
 
  
-     Scatter2DPtr _h_R_Z_pt_cjet_combined, _h_R_Z_pt_bjet_combined, _h_R_Z_pt_cb_combined ;
+     Estimate1DPtr _h_R_Z_pt_cjet_combined, _h_R_Z_pt_bjet_combined, _h_R_Z_pt_cb_combined ;
 
   };
 

@@ -8,10 +8,13 @@
 #include "Rivet/Tools/RivetYODA.hh"
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Projections/Beam.hh"
+
 #include "YODA/IO.h"
 #include "YODA/WriterYODA.h"
+
 #include <iostream>
 #include <regex>
+
 using namespace std;
 
 namespace Rivet {
@@ -702,19 +705,26 @@ namespace Rivet {
       const string wname = item.first;
       double xs = item.second.first;
       double xserr = sqrt(item.second.second);
-      auto xs_it = allaos.find("/RAW/_XSEC" + wname);
-      assert( xs_it != allaos.end() );
-      YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
       auto ec_it = allaos.find("/RAW/_EVTCOUNT" + wname);
       assert( ec_it != allaos.end() );
+      auto xs_it = allaos.find("/RAW/_XSEC" + wname);
+      assert( xs_it != allaos.end() );
       if (equiv) {
         MSG_DEBUG("Equivalent mode: scale by numEntries");
         const double nentries = std::static_pointer_cast<YODA::Counter>(ec_it->second)->numEntries();
         xs /= nentries;
         xserr /= nentries;
       }
-      xsec->reset();
-      xsec->addPoint(xs, xserr);
+      YODA::Estimate0DPtr xsec = std::dynamic_pointer_cast<YODA::Estimate0D>(xs_it->second);
+      if (xsec) {
+        xsec->reset();
+        xsec->set(xs, xserr);
+      }
+      else { // old-style cross-section
+        YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
+        xsec->reset();
+        xsec->addPoint(xs, xserr);
+      }
     }
 
     MSG_INFO("Rerunning finalize ...");
@@ -775,22 +785,42 @@ namespace Rivet {
         const string xspath = "/RAW/_XSEC" + wname;
         auto xs_it = newaos.find(xspath);
         if ( xs_it != newaos.end() ) {
-          YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
-          if (overwrite_xsec) {
-            MSG_DEBUG("Set user-supplied weight: " << user_xsec);
-            xsec->point(0).setX(user_xsec);
-          }
-          else {
-            MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
-            xsec->scale(0, user_xsec);
-          }
           // get iterator to the existing (or newly created) key-value pair
           auto xit = allxsecs.insert( make_pair(wname, make_pair(0,0)) ).first;
-          // update cross-sections, possibly weighted by number of entries
-          xit->second.first  += (equiv? evts : 1.0) * xsec->point(0).x();
-          xit->second.second += (equiv? sqr(evts) : 1.0) * sqr(xsec->point(0).xErrAvg());
-          // only in stacking mode: multiply each AO by cross-section / sumW
-          if (!equiv)  scales[wname] = xsec->point(0).x() / sumw;
+          // Get cross-section AO, which was a S1D in V2 and then became a E0D from V3
+          YODA::Estimate0DPtr xsec = std::dynamic_pointer_cast<YODA::Estimate0D>(xs_it->second);
+          if (xsec) { // for >= V3 ASCII
+            if (overwrite_xsec) {
+              MSG_DEBUG("Set user-supplied weight: " << user_xsec);
+              xsec->setVal(user_xsec);
+            }
+            else {
+              MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
+              xsec->scale(user_xsec);
+            }
+            // update cross-sections, possibly weighted by number of entries
+            xit->second.first  += (equiv? evts : 1.0) * xsec->val();
+            xit->second.second += (equiv? sqr(evts) : 1.0) * sqr(xsec->errAvg());
+            // only in stacking mode: multiply each AO by cross-section / sumW
+            if (!equiv)  scales[wname] = xsec->val() / sumw;
+          }
+          else { // for <= V2 ASCII
+            // old-style cross-section
+            YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
+            if (overwrite_xsec) {
+              MSG_DEBUG("Set user-supplied weight: " << user_xsec);
+              xsec->point(0).setX(user_xsec);
+            }
+            else {
+              MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
+              xsec->scale(0, user_xsec);
+            }
+            // update cross-sections, possibly weighted by number of entries
+            xit->second.first  += (equiv? evts : 1.0) * xsec->point(0).x();
+            xit->second.second += (equiv? sqr(evts) : 1.0) * sqr(xsec->point(0).xErrAvg());
+            // only in stacking mode: multiply each AO by cross-section / sumW
+            if (!equiv)  scales[wname] = xsec->point(0).x() / sumw;
+          }
         }
         else if (!equiv) {
           throw UserError("Missing cross-section, needed for non-equivalent merging!");
@@ -873,7 +903,7 @@ namespace Rivet {
     MSG_DEBUG("Getting event counter and cross-section from "
               << weightNames().size() << " " << numWeights());
     _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
-    _xs = Scatter1DPtr(weightNames(), Scatter1D("_XSEC"));
+    _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
     vector<double> scales(numWeights(), 1.0);
     for (size_t iW = 0; iW < numWeights(); ++iW) {
       MSG_DEBUG("Weight # " << iW << " of " << numWeights());
@@ -888,10 +918,10 @@ namespace Rivet {
       // set the cross-section
       const auto xit = allAOs.find(_xs->path());
       if ( xit != allAOs.end() ) {
-        *_xs = *std::static_pointer_cast<YODA::Scatter1D>(xit->second);
-        if (unscale && _xs->point(0).x()) {
+        *_xs = *std::static_pointer_cast<YODA::Estimate0D>(xit->second);
+        if (unscale && _xs->val()) {
           // in stacking mode: need to unscale prior to finalize
-          scales[iW] = _eventCounter->sumW()/_xs->point(0).x();
+          scales[iW] = _eventCounter->sumW()/_xs->val();
         }
       }
       else {
@@ -969,17 +999,17 @@ namespace Rivet {
       // set the cross-section
       _xs.get()->setActiveWeightIdx(iW);
       other._xs.get()->setActiveWeightIdx(iW);
-      double xs = this_evts * _xs->point(0).x() + other_evts * other._xs->point(0).x();
-      double xserr = sqr(this_evts * _xs->point(0).xErrAvg());
-      xserr += sqr(other_evts * other._xs->point(0).xErrAvg());
+      double xs = this_evts * _xs->val() + other_evts * other._xs->val();
+      double xserr = sqr(this_evts * _xs->errAvg());
+      xserr += sqr(other_evts * other._xs->errAvg());
       const double ntot = _eventCounter->numEntries();
       if (ntot) {
         xs = xs / ntot;
         xserr = sqrt(xserr) / ntot;
       }
-      YODA::Scatter1D& this_xs = *_xs;
+      YODA::Estimate0D& this_xs = *_xs;
       this_xs.reset();
-      this_xs.addPoint( Point1D(xs,xserr) );
+      this_xs.set(xs, xserr);
 
 
       // Go through all analyses and merge other's AOs with current AOs
@@ -1058,16 +1088,8 @@ namespace Rivet {
   }
 
 
-  template <typename T>
-  YODA::AnalysisObjectPtr _mkStaticClone(YODA::AnalysisObjectPtr aop) {
-    YODA::AnalysisObjectPtr rtn;
-    T* aop_dyn = dynamic_cast<T*>(aop.get());
-    if (aop_dyn != nullptr)  rtn.reset((*aop_dyn).mkScatter(aop_dyn->path()).newclone());
-    return rtn;
-  }
-
-
-  vector<YODA::AnalysisObjectPtr> AnalysisHandler::getYodaAOs(bool includeraw, bool mkstatic) const {
+  vector<YODA::AnalysisObjectPtr> AnalysisHandler::getYodaAOs(const bool includeraw,
+                                                              const bool mkinert) const {
 
     // First get all multiweight AOs
     vector<MultiplexAOPtr> raos = getRivetAOs();
@@ -1081,6 +1103,7 @@ namespace Rivet {
     }
 
     // Then we go through all finalized, non-TMP AOs one weight at a time
+    size_t nantrigger = 0;
     for (size_t iW : order) {
       for (auto rao : raos) {
         rao.get()->setActiveFinalWeightIdx(iW);
@@ -1088,33 +1111,33 @@ namespace Rivet {
         // skip leading-underscored analysis-level histos
         if (rao->path().find("/_") != string::npos && !startsWith(rao->path(), "/_")) continue;
         YODA::AnalysisObjectPtr aop = rao.get()->activeAO();
-        // Convert to a static type, e.g. scatter
-        /// @todo Convert the output to BinnedEstimates when available
-        if (mkstatic) { // && rao->path().find("/_") == string::npos) {
-          YODA::AnalysisObjectPtr aop_static;
-          /// @todo Improve this awkward casting, e.g. with a AO::mkStatic() virtual member function
-          if (!aop_static) aop_static = _mkStaticClone<YODA::Counter>(aop);
-          if (!aop_static) aop_static = _mkStaticClone<YODA::Histo1D>(aop);
-          if (!aop_static) aop_static = _mkStaticClone<YODA::Histo2D>(aop);
-          if (!aop_static) aop_static = _mkStaticClone<YODA::Profile1D>(aop);
-          if (!aop_static) aop_static = _mkStaticClone<YODA::Profile2D>(aop);
-          if (aop_static) aop = aop_static; //< if successful, overwrite aop for return
+        // Convert to an inert type (e.g. estimate)
+        const std::string aopath = aop->path();
+        if (mkinert && aopath.find("Scatter") == std::string::npos) {
+          aop.reset(aop->mkInert(aopath, "stats"));
+          if (!iW && aop->hasAnnotation("NanFraction")) {
+            const double nanc = aop->annotation<double>("NanFraction", 0.);
+            const double nanw = aop->annotation<double>("WeightedNanFraction", 0.);
+            if (nanc > 0.1 || nanw > 0.1) {
+              MSG_DEBUG("Analysis with path " << aopath << " has (weighted) NaN fraction " << nanc << " (" << nanw << ")");
+              ++nantrigger;
+            }
+          }
+        }
+        if (nantrigger) {
+          MSG_WARNING("Found " << nantrigger << " analyses with unusually large NaN fraction (> 10%)! Run DEBUG mode for more info.");
         }
         // Push to output
         output.push_back(aop);
       }
-    }
 
-    // Analyses can make changes necessary for merging to RAW objects before writing
-    for (size_t iW : order) {
-      for (const auto& a : analyses()) {
-        a->rawHookOut(raos, iW);
-      }
-    }
+      if (includeraw) {
+        // Analyses can make changes necessary for merging to RAW objects before writing
+        for (const auto& a : analyses()) {
+          a->rawHookOut(raos, iW);
+        }
 
-    // Finally write the RAW objects
-    if (includeraw) {
-      for (size_t iW : order) {
+        // Finally write the RAW objects
         for (auto rao : raos) {
           rao.get()->setActiveWeightIdx(iW);
           output.push_back(rao.get()->activeAO());
@@ -1127,7 +1150,7 @@ namespace Rivet {
 
 
   void AnalysisHandler::writeData(std::ostream& ostr, const string& fmt) const {
-    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true, false);
+    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true);
     try {
       YODA::write(ostr, begin(output), end(output), fmt);
     } catch (...) { //< YODA::WriteError&
@@ -1137,7 +1160,7 @@ namespace Rivet {
 
 
   void AnalysisHandler::writeData(const string& filename) const {
-    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true, false);
+    const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true);
     try {
       YODA::write(filename, begin(output), end(output));
     } catch (...) { //< YODA::WriteError&
@@ -1203,10 +1226,10 @@ namespace Rivet {
       if (!isUserSupplied && notNaN(_userxs.first)) return;
 
       // Otherwise, update the xs scatter
-      _xs = Scatter1DPtr(weightNames(), Scatter1D("_XSEC"));
+      _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
       for (size_t iW = 0; iW < numWeights(); ++iW) {
         _xs.get()->setActiveWeightIdx(iW);
-        _xs->addPoint(xsecs[iW].first, xsecs[iW].second);
+        _xs->set(xsecs[iW].first, xsecs[iW].second);
       }
       _xs.get()->unsetActiveWeight();
     }
@@ -1226,7 +1249,7 @@ namespace Rivet {
     // Otherwise, update the xs scatter: xs_var = xs_nom * (sumW_var/sumW_nom)
     /// @todo Performance optimization? Overwriting the whole scatter wrapper on every event seems inefficient...
     MSG_TRACE("Setting nominal cross-section = " << xsec.first << " +- " << xsec.second << " pb");
-    _xs = Scatter1DPtr(weightNames(), Scatter1D("_XSEC"));
+    _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
     _eventCounter.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
     const double nomwgt = sumW();
     const double nomwt2 = sumW2();
@@ -1235,7 +1258,7 @@ namespace Rivet {
       const double s  = nomwgt? (sumW() / nomwgt) : 1.0;
       const double s2 = nomwt2? sqrt(sumW2() / nomwt2) : 1.0;
       _xs.get()->setActiveWeightIdx(iW);
-      _xs->addPoint(xsec.first*s, xsec.second*s2);
+      _xs->set(xsec.first*s, xsec.second*s2);
     }
     _eventCounter.get()->unsetActiveWeight();
     _xs.get()->unsetActiveWeight();
@@ -1244,12 +1267,11 @@ namespace Rivet {
 
   double AnalysisHandler::nominalCrossSection() const {
     _xs.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
-    const YODA::Scatter1D::Points& ps = _xs->points();
-    if (ps.size() != 1) {
+    double xs = _xs->val();
+    if (isnan(xs)) {
       string errMsg = "Value missing when requesting nominal cross-section";
       throw Error(errMsg);
     }
-    double xs = ps[0].x();
     _xs.get()->unsetActiveWeight();
     return xs;
   }

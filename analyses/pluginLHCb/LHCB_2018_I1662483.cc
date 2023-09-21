@@ -94,7 +94,7 @@ namespace Rivet {
       // veto event if it doesn't pass our selection
       if (!pass) vetoEvent;
       // append to cross-section
-      _h_fiducial_xsect->fill(sqrtS()/GeV);
+      _h_fiducial_xsect->fill(13000);
     }
 
 
@@ -105,7 +105,7 @@ namespace Rivet {
 
 
     /// Histogram
-    Histo1DPtr _h_fiducial_xsect;
+    BinnedHistoPtr<int> _h_fiducial_xsect;
 
   };
 

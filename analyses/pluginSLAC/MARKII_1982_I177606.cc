@@ -23,17 +23,19 @@ namespace Rivet {
       //Histograms
       book(_h_spect[0],2,1,1);
       book(_h_spect[1],3,1,1);
+      _axis = YODA::Axis<double>(4, 0.2, 1.0);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty())  _edges = _h_spect[0]->xEdges();
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles(Cuts::abspid==413)) {
-	const double xp = 2.*p.E()/sqrtS();
-	const double beta = p.p3().mod() / p.E();
-	_h_spect[0]->fill(xp,1./beta);
-	_h_spect[1]->fill(xp,1./beta);
+        const double xp = 2.*p.E()/sqrtS();
+        const double beta = p.p3().mod() / p.E();
+        _h_spect[0]->fill(map2string(xp), 1./beta);
+        _h_spect[1]->fill(map2string(xp), 1./beta);
       }
     }
 
@@ -46,10 +48,18 @@ namespace Rivet {
 
     ///@}
 
+    string map2string(const double value) const {
+      const size_t idx = _axis.index(value);
+      if (idx && idx <= _edges.size())  return _edges[idx-1];
+      return "OTHER";
+    }
+
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_spect[2];
+    BinnedHistoPtr<string> _h_spect[2];
+    vector<string> _edges;
+    YODA::Axis<double> _axis;
     ///@}
 
 

@@ -116,7 +116,7 @@ namespace Rivet {
       double d = 3./(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double a =  d*(bin.xMax() - bin.xMin());
@@ -147,9 +147,9 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // find energy
-      int ioff=-1;
-      if(isCompatibleWithSqrtS(3.1*GeV,1e-1)) ioff=0;
-      else if (isCompatibleWithSqrtS(3.686*GeV, 1E-1)) ioff=1;
+      //int ioff=-1;
+      //if(isCompatibleWithSqrtS(3.1*GeV,1e-1)) ioff=0;
+      //else if (isCompatibleWithSqrtS(3.686*GeV, 1E-1)) ioff=1;
       vector< pair<double,pair<double,double> > > alpha;
       normalize(_h_xi,1.,false);
       alpha.push_back(calcAlpha(_h_xi));
@@ -157,11 +157,12 @@ namespace Rivet {
       alpha.push_back(calcAlpha(_h_sigm));
       normalize(_h_sigp,1.,false);
       alpha.push_back(calcAlpha(_h_sigp));
-      Scatter2DPtr _h_alpha;
+      Estimate1DPtr _h_alpha;
       book(_h_alpha,1,1,3);
-      for(unsigned int ix=0;ix<3;++ix)
-        _h_alpha->addPoint(1.+ix+3.*ioff, alpha[ix].first, make_pair(0.5,0.5),
-                           make_pair(alpha[ix].second.first,alpha[ix].second.second) );
+      for (unsigned int ix=0;ix<3;++ix) {
+        _h_alpha->bin(ix+1).set(alpha[ix].first,
+                                make_pair(alpha[ix].second.first,alpha[ix].second.second));
+      }
     }
     /// @}
 

@@ -15,10 +15,7 @@ namespace Rivet {
   public:
 
     /// Default constructor
-    ATLAS_2013_I1190187()
-      : Analysis("ATLAS_2013_I1190187")
-    {    }
-
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2013_I1190187);
 
     void init() {
       FinalState fs;
@@ -63,10 +60,10 @@ namespace Rivet {
       declare(jetpro, "jet");
 
       // Book histograms
-      book(_h_Wl1_pT_mumu ,1, 1, 2);
-      book(_h_Wl1_pT_ee ,1, 1, 1);
-      book(_h_Wl1_pT_emu ,1, 1, 3);
-      book(_h_Wl1_pT_inclusive ,4, 1, 1);
+      book(_h_Wl1_pT_mumu, 1, 1, 2);
+      book(_h_Wl1_pT_ee,   1, 1, 1);
+      book(_h_Wl1_pT_emu,  1, 1, 3);
+      book(_h_Wl1_pT_inclusive,4, 1, 1);
     }
 
 
@@ -208,7 +205,7 @@ namespace Rivet {
         if (fabs(M_l1l2 - 91.1876*GeV) <= 15*GeV) vetoEvent;
         if (vetojets.size() != 0) vetoEvent;
         if (pT_l1l2 <= 30*GeV) vetoEvent;
-        _h_Wl1_pT_ee->fill(sqrtS()/GeV);
+        _h_Wl1_pT_ee->fill(7000);
         _h_Wl1_pT_inclusive->fill(pT_l1);
       }
 
@@ -219,7 +216,7 @@ namespace Rivet {
         if (fabs(M_l1l2-91.1876*GeV) <= 15*GeV) vetoEvent;
         if (vetojets.size() != 0) vetoEvent;
         if (pT_l1l2 <= 30*GeV) vetoEvent;
-        _h_Wl1_pT_mumu->fill(sqrtS()/GeV);
+        _h_Wl1_pT_mumu->fill(7000);
         _h_Wl1_pT_inclusive->fill(pT_l1);
       }
 
@@ -229,7 +226,7 @@ namespace Rivet {
         if (M_l1l2 <= 10*GeV) vetoEvent;
         if (vetojets.size() != 0) vetoEvent;
         if (pT_l1l2 <= 30*GeV) vetoEvent;
-        _h_Wl1_pT_emu->fill(sqrtS()/GeV);
+        _h_Wl1_pT_emu->fill(7000);
         _h_Wl1_pT_inclusive->fill(pT_l1);
       }
     }
@@ -247,7 +244,8 @@ namespace Rivet {
 
   private:
 
-    Histo1DPtr _h_Wl1_pT_ee, _h_Wl1_pT_mumu, _h_Wl1_pT_emu, _h_Wl1_pT_inclusive;
+    BinnedHistoPtr<int> _h_Wl1_pT_ee, _h_Wl1_pT_mumu, _h_Wl1_pT_emu;
+    Histo1DPtr _h_Wl1_pT_inclusive;
 
   };
 

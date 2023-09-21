@@ -20,23 +20,25 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+
       declare(Beam(), "Beams");
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
 
       int ioff=-1;
-      if(isCompatibleWithSqrtS(35*GeV)) {
+      if (isCompatibleWithSqrtS(35*GeV)) {
       	ioff=0;
       }
-      else if(isCompatibleWithSqrtS(44*GeV)) {
+      else if (isCompatibleWithSqrtS(44*GeV)) {
       	ioff=1;
       }
-      else
+      else {
       	MSG_ERROR("Beam energy " << sqrtS() << " not supported!");
+      }
       // Book histograms
       book(_h_gamma, 1+ioff, 1, 1);
       book(_h_pi0  , 3+ioff, 1, 1);
-      if(ioff==0) book(_h_eta, 5+ioff, 1, 1);
+      if (ioff==0)  book(_h_eta, 5, 1, 1);
     }
 
 
@@ -44,24 +46,24 @@ namespace Rivet {
     void analyze(const Event& event) {
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() +
-                                   beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = 0.5*(beams.first.p3().mod() + beams.second.p3().mod());
       // gamma
       const FinalState& fs = apply<FinalState>(event, "FS");
       for (const Particle& p : fs.particles(Cuts::pid==22)) {
-      	double xE = p.E()/meanBeamMom;
-      	_h_gamma->fill(xE);
+      	_h_gamma->fill(p.E()/meanBeamMom);
       }
       // pi0, eta
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles(Cuts::pid==111 or Cuts::pid==221)) {
-      	double modp = p.p3().mod();
-      	double xE = p.E()/meanBeamMom;
-      	double beta = modp/p.E();
-      	if(p.pid()==111)
+      	const double modp = p.p3().mod();
+      	const double xE = p.E()/meanBeamMom;
+      	const double beta = modp/p.E();
+      	if (p.pid()==111) {
       	  _h_pi0->fill(xE,1./beta);
-      	else if(_h_eta)
+        }
+      	else if (_h_eta) {
       	  _h_eta->fill(xE,1./beta);
+        }
       }
     }
 

@@ -184,7 +184,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double factor = crossSection()/sumOfWeights()/femtobarn;  // refData is in fb
-      for (const auto& key_hist : _hists) {
+      for (auto& key_hist : _hists) {
         scale(key_hist.second, factor);
         if (key_hist.first.find("_norm") != string::npos) normalize(key_hist.second);
       }

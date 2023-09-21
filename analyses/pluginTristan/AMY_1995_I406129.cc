@@ -62,10 +62,10 @@ namespace Rivet {
       FinalState fs;
       declare(fs, "FS");
       // Book histograms
-      book(_h_jade_P , 2, 1, 1);
-      book(_h_jade_E , 3, 1, 1);
-      book(_h_jade_E0, 6, 1, 1);
-      book(_h_durham , 4, 1, 1);
+      book(_h["jade_P"],  2, 1, 1);
+      book(_h["jade_E"],  3, 1, 1);
+      book(_h["jade_E0"], 6, 1, 1);
+      book(_h["durham"],  4, 1, 1);
     }
 
 
@@ -76,53 +76,53 @@ namespace Rivet {
       PseudoJets pjs;
       double mpi=.13957;
       for (const Particle & p : particles) {
-	Vector3 mom = p.p3();
-	double energy = p.E();
-	if(PID::isCharged(p.pid())) {
-	  energy = sqrt(mom.mod2()+sqr(mpi));
-	}
-	else {
-	  double fact = energy/mom.mod();
-	  mom *=fact;
-	}
-	pjs.push_back(fastjet::PseudoJet(mom.x(),mom.y(),mom.z(),energy));
+        Vector3 mom = p.p3();
+        double energy = p.E();
+        if(PID::isCharged(p.pid())) {
+          energy = sqrt(mom.mod2()+sqr(mpi));
+        }
+        else {
+          double fact = energy/mom.mod();
+          mom *=fact;
+        }
+        pjs.push_back(fastjet::PseudoJet(mom.x(),mom.y(),mom.z(),energy));
       }
       // durham
       fastjet::JetDefinition durDef(fastjet::ee_kt_algorithm, fastjet::E_scheme);
       fastjet::ClusterSequence durham(pjs,durDef);
       double y_23 = durham.exclusive_ymerge_max(2);
-      _h_durham->fill(y_23);
+      string label = _h["durham"]->xEdges()[durhamAxis.index(y_23)-1];
+      _h["durham"]->fill(label);
       // jade e-scheme
       fastjet::JetDefinition::Plugin *plugin = new fastjet::JadePlugin();
       fastjet::JetDefinition jadeEDef(plugin);
       jadeEDef.set_recombination_scheme(fastjet::E_scheme);
       fastjet::ClusterSequence jadeE(pjs,jadeEDef);
       y_23 = jadeE.exclusive_ymerge_max(2);
-      _h_jade_E->fill(y_23);
+      label = _h["jade_E"]->xEdges()[jadeAxis.index(y_23)-1];
+      _h["jade_E"]->fill(label);
       // jade p-scheme
       fastjet::P_scheme p_scheme;
       fastjet::JetDefinition jadePDef(plugin);
       jadePDef.set_recombiner(&p_scheme);
       fastjet::ClusterSequence jadeP(pjs,jadePDef);
       y_23 = jadeP.exclusive_ymerge_max(2);
-      _h_jade_P->fill(y_23);
+      label = _h["jade_P"]->xEdges()[jadeAxis.index(y_23)-1];
+      _h["jade_P"]->fill(label);
       // jade E0-scheme
       fastjet::E0_scheme e0_scheme;
       fastjet::JetDefinition jadeE0Def(plugin);
       jadeE0Def.set_recombiner(&e0_scheme);
       fastjet::ClusterSequence jadeE0(pjs,jadeE0Def);
       y_23 = jadeE0.exclusive_ymerge_max(2);
-      _h_jade_E0->fill(y_23);
+      label = _h["jade_E0"]->xEdges()[jadeAxis.index(y_23)-1];
+      _h["jade_E0"]->fill(label);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_jade_E , 1./sumOfWeights());
-      scale(_h_jade_E0, 1./sumOfWeights());
-      scale(_h_jade_P , 1./sumOfWeights());
-      scale(_h_durham , 1./sumOfWeights());
-
+      scale(_h, 1./sumOfWeights());
     }
 
     /// @}
@@ -130,7 +130,11 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_jade_P, _h_jade_E, _h_jade_E0, _h_durham;
+    map<string,BinnedHistoPtr<string>> _h;
+    YODA::Axis<double> jadeAxis{0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.0825, 0.1,
+                                0.12, 0.14, 0.16, 0.1825, 0.21, 0.24, 0.27, 0.3};
+    YODA::Axis<double> durhamAxis{0.0, 0.002, 0.004, 0.0065, 0.0115, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07,
+                                  0.0825, 0.1, 0.12, 0.14, 0.16, 0.1825, 0.21, 0.24, 0.27, 0.3};
     /// @}
 
 

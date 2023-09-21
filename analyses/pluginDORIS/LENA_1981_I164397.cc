@@ -108,52 +108,37 @@ namespace Rivet {
     void finalize() {
       // charged particle multiplicity
       if(_weightSum_cont->val()>0. ) {
-	scale(_charge_cont,1./ *_weightSum_cont );
-	if(_hist_T_cont) scale(_hist_T_cont,1./ *_weightSum_cont );
+        scale(_charge_cont,1./ *_weightSum_cont );
+        if(_hist_T_cont) scale(_hist_T_cont,1./ *_weightSum_cont );
       }
       if(_weightSum_Ups1->val()>0. ) {
-	scale(_charge_Ups1,1./ *_weightSum_Ups1 );
-	 scale(_hist_T_Ups1,1./ *_weightSum_Ups1 );
+        scale(_charge_Ups1,1./ *_weightSum_Ups1 );
+         scale(_hist_T_Ups1,1./ *_weightSum_Ups1 );
       }
       if(_weightSum_Ups2->val()>0. ) {
-	scale(_charge_Ups2,1./ *_weightSum_Ups2 );
-	scale(_hist_T_Ups2,1./ *_weightSum_Ups2 );
+        scale(_charge_Ups2,1./ *_weightSum_Ups2 );
+        scale(_hist_T_Ups2,1./ *_weightSum_Ups2 );
       }
-      Scatter2D tempScat(refData(3, 1, 1));
-      Scatter2DPtr _mult;
+      Estimate1DPtr _mult;
       book(_mult, 3, 1, 1);
-      for (size_t b = 0; b < tempScat.numPoints(); b++) {
-        const double x  = tempScat.point(b).x();
-        pair<double,double> ex = tempScat.point(b).xErrs();
-        pair<double,double> ex2 = ex;
-        if(ex2.first ==0.) ex2. first=0.02;
-        if(ex2.second==0.) ex2.second=0.02;
-	// Upsilon 1S
-	if(b==3) {
-	  if (_weightSum_Ups1->val()>0.) {
-	    _mult->addPoint(x, _charge_Ups1->val(), ex, make_pair(_charge_Ups1->err(),_charge_Ups1->err()));
-	  }
-	  else {
-	    _mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
-	// Upsilon 2S
-	else if(b==6) {
-	  if (_weightSum_Ups2->val()>0.) {
-	    _mult->addPoint(x, _charge_Ups2->val(), ex, make_pair(_charge_Ups2->err(),_charge_Ups2->err()));
-	  }
-	  else {
-	    _mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
-	else {
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second) && _weightSum_cont->val()>0.) {
-	    _mult->addPoint(x, _charge_cont->val(), ex, make_pair(_charge_cont->err(),_charge_cont->err()));
-	  }
-	  else {
-	    _mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+      for (auto& b : _mult->bins()) {
+        // Upsilon 1S
+        if(b.index()==4) {
+          if (_weightSum_Ups1->val()>0.) {
+            b.set(_charge_Ups1->val(), _charge_Ups1->err());
+          }
+        }
+        // Upsilon 2S
+        else if(b.index()==7) {
+          if (_weightSum_Ups2->val()>0.) {
+            b.set(_charge_Ups2->val(), _charge_Ups2->err());
+          }
+        }
+        else {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax()) && _weightSum_cont->val()>0.) {
+            b.set(_charge_cont->val(), _charge_cont->err());
+          }
+        }
       }
     }
 

@@ -77,7 +77,7 @@ namespace Rivet {
     Histo1DPtr _h_eta;
     Histo1DPtr _temp_h_pion;
     Histo1DPtr _temp_h_eta;
-    Scatter2DPtr _h_etaToPion;
+    Estimate1DPtr _h_etaToPion;
 
   };
 

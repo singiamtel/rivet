@@ -145,7 +145,7 @@ namespace Rivet {
     static const PdgId SIGMABPLUS = 5222;
     static const PdgId SIGMABMINUS = 5112;
     static const PdgId LAMBDACPLUS = 4122;
-    static const PdgId LAMBDACMINUS = 4122;
+    static const PdgId LAMBDACMINUS = -4122;
     static const PdgId LAMBDAB = 5122;
     static const PdgId XI0 = 3322;
     static const PdgId XIMINUS = 3312;

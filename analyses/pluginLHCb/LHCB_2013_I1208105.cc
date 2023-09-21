@@ -22,14 +22,14 @@ namespace Rivet {
       declare(ChargedFinalState((Cuts::etaIn(-3.5,-1.5))), "backwardCFS");
 
       // Histos
-      book(_s_chEF_minbias, 1, 1, 1, true);
-      book(_s_chEF_hard, 2, 1, 1, true);
-      book(_s_chEF_diff, 3, 1, 1, true);
-      book(_s_chEF_nondiff, 4, 1, 1, true);
-      book(_s_totEF_minbias, 5, 1, 1, true);
-      book(_s_totEF_hard, 6, 1, 1, true);
-      book(_s_totEF_diff, 7, 1, 1, true);
-      book(_s_totEF_nondiff, 8, 1, 1, true);
+      book(_s_chEF_minbias, 1, 1, 1);
+      book(_s_chEF_hard, 2, 1, 1);
+      book(_s_chEF_diff, 3, 1, 1);
+      book(_s_chEF_nondiff, 4, 1, 1);
+      book(_s_totEF_minbias, 5, 1, 1);
+      book(_s_totEF_hard, 6, 1, 1);
+      book(_s_totEF_diff, 7, 1, 1);
+      book(_s_totEF_nondiff, 8, 1, 1);
 
       // Temporary profiles and histos
       /// @todo Convert to declared/registered temp histos
@@ -150,91 +150,91 @@ namespace Rivet {
 
     void finalize() {
       if (_mbSumW->sumW()) {
-        for (size_t i = 0; i < _s_totEF_minbias->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_totEF_minbias->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_totEF_minbias->bin(i).effNumEntries() > 1) {
             val = _tp_totEF_minbias->bin(i).yMean() * _th_totN_minbias->bin(i).sumW();
             err = (_tp_totEF_minbias->bin(i).yMean() * _th_totN_minbias->bin(i).errW() +
                    _tp_totEF_minbias->bin(i).yStdErr() * _th_totN_minbias->bin(i).sumW());
           }
-          _s_totEF_minbias->point(i).setY(val/_mbSumW->val(), err/_mbSumW->val());
+          _s_totEF_minbias->bin(i).set(val/_mbSumW->val(), err/_mbSumW->val());
         }
       }
       if (_hdSumW->sumW()) {
-        for (size_t i = 0; i < _s_totEF_hard->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_totEF_hard->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_totEF_minbias->bin(i).effNumEntries() > 1) {
             val = _tp_totEF_hard->bin(i).yMean() * _th_totN_hard->bin(i).sumW();
             err = (_tp_totEF_hard->bin(i).yMean() * _th_totN_hard->bin(i).errW() +
                    _tp_totEF_hard->bin(i).yStdErr() * _th_totN_hard->bin(i).sumW());
           }
-          _s_totEF_hard->point(i).setY(val/_hdSumW->val(), err/_hdSumW->val());
+          _s_totEF_hard->bin(i).set(val/_hdSumW->val(), err/_hdSumW->val());
         }
       }
       if (_dfSumW->sumW()) {
-        for (size_t i = 0; i < _s_totEF_diff->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_totEF_diff->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_totEF_diff->bin(i).effNumEntries() > 1) {
             val = _tp_totEF_diff->bin(i).yMean() * _th_totN_diff->bin(i).sumW();
             err = (_tp_totEF_diff->bin(i).yMean() * _th_totN_diff->bin(i).errW() +
                    _tp_totEF_diff->bin(i).yStdErr() * _th_totN_diff->bin(i).sumW());
           }
-          _s_totEF_diff->point(i).setY(val/_dfSumW->val(), err/_dfSumW->val());
+          _s_totEF_diff->bin(1).set(val/_dfSumW->val(), err/_dfSumW->val());
         }
       }
       if (_ndSumW->sumW()) {
-        for (size_t i = 0; i < _s_totEF_nondiff->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_totEF_nondiff->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_totEF_nondiff->bin(i).effNumEntries() > 1) {
             val = _tp_totEF_nondiff->bin(i).yMean() * _th_totN_nondiff->bin(i).sumW();
             err = (_tp_totEF_nondiff->bin(i).yMean() * _th_totN_nondiff->bin(i).errW() +
                    _tp_totEF_nondiff->bin(i).yStdErr() * _th_totN_nondiff->bin(i).sumW());
-            _s_totEF_nondiff->point(i).setY(val/_ndSumW->val(), err/_ndSumW->val());
+            _s_totEF_nondiff->bin(i).set(val/_ndSumW->val(), err/_ndSumW->val());
          }
         }
       }
       if (_mbchSumW->sumW()) {
-        for (size_t i = 0; i < _s_chEF_minbias->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_chEF_minbias->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_chEF_minbias->bin(i).effNumEntries() > 1) {
             val = _tp_chEF_minbias->bin(i).yMean() * _th_chN_minbias->bin(i).sumW();
             err = (_tp_chEF_minbias->bin(i).yMean() * _th_chN_minbias->bin(i).errW() +
                    _tp_chEF_minbias->bin(i).yStdErr() * _th_chN_minbias->bin(i).sumW());
           }
-          _s_chEF_minbias->point(i).setY(val/_mbchSumW->val(), err/_mbchSumW->val());
+          _s_chEF_minbias->bin(i).set(val/_mbchSumW->val(), err/_mbchSumW->val());
         }
       }
       if (_hdchSumW->sumW()) {
-        for (size_t i = 0; i < _s_chEF_hard->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_chEF_hard->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_chEF_hard->bin(i).effNumEntries() > 1) {
             val = _tp_chEF_hard->bin(i).yMean() * _th_chN_hard->bin(i).sumW();
             err = (_tp_chEF_hard->bin(i).yMean() * _th_chN_hard->bin(i).errW() +
                    _tp_chEF_hard->bin(i).yStdErr() * _th_chN_hard->bin(i).sumW());
           }
-          _s_chEF_hard->point(i).setY(val/_hdchSumW->val(), err/_hdchSumW->val());
+          _s_chEF_hard->bin(i).set(val/_hdchSumW->val(), err/_hdchSumW->val());
         }
       }
       if (_dfchSumW->sumW()) {
-        for (size_t i = 0; i < _s_chEF_diff->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_chEF_diff->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_chEF_diff->bin(i).effNumEntries() > 1) {
             val = _tp_chEF_diff->bin(i).yMean() * _th_chN_diff->bin(i).sumW();
             err = (_tp_chEF_diff->bin(i).yMean() * _th_chN_diff->bin(i).errW() +
                    _tp_chEF_diff->bin(i).yStdErr() * _th_chN_diff->bin(i).sumW());
           }
-          _s_chEF_diff->point(i).setY(val/_dfchSumW->val(), err/_dfchSumW->val());
+          _s_chEF_diff->bin(i).set(val/_dfchSumW->val(), err/_dfchSumW->val());
         }
       }
       if (_ndchSumW->sumW()) {
-        for (size_t i = 0; i < _s_chEF_nondiff->numPoints(); ++i) {
+        for (size_t i = 1; i < _s_chEF_nondiff->numBins()+1; ++i) {
           double val = 0., err = 0.;
           if (_tp_chEF_nondiff->bin(i).effNumEntries() > 1) {
             val = _tp_chEF_nondiff->bin(i).yMean() * _th_chN_nondiff->bin(i).sumW();
             err = (_tp_chEF_nondiff->bin(i).yMean() * _th_chN_nondiff->bin(i).errW() +
                    _tp_chEF_nondiff->bin(i).yStdErr() * _th_chN_nondiff->bin(i).sumW());
           }
-          _s_chEF_nondiff->point(i).setY(val/_ndchSumW->val(), err/_ndchSumW->val());
+          _s_chEF_nondiff->bin(i).set(val/_ndchSumW->val(), err/_ndchSumW->val());
         }
       }
     }
@@ -249,8 +249,8 @@ namespace Rivet {
     /// @{
 
     // Scatters to be filled in finalize with 1/d_eta <N(eta)><E(eta)>
-    Scatter2DPtr _s_totEF_minbias, _s_totEF_hard, _s_totEF_diff, _s_totEF_nondiff;
-    Scatter2DPtr _s_chEF_minbias, _s_chEF_hard, _s_chEF_diff, _s_chEF_nondiff;
+    Estimate1DPtr _s_totEF_minbias, _s_totEF_hard, _s_totEF_diff, _s_totEF_nondiff;
+    Estimate1DPtr _s_chEF_minbias, _s_chEF_hard, _s_chEF_diff, _s_chEF_nondiff;
 
     // Temp profiles containing <E(eta)>
     Profile1DPtr _tp_totEF_minbias, _tp_totEF_hard, _tp_totEF_diff, _tp_totEF_nondiff;

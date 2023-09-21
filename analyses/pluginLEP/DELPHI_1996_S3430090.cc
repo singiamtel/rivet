@@ -269,7 +269,7 @@ namespace Rivet {
         }
       }
 
-      _histMultiCharged->fill(_histMultiCharged->bin(1).xMid(), numParticles);
+      _histMultiCharged->fill(Ecm, numParticles);
 
 
       // Final state of unstable particles to get particle spectra
@@ -278,82 +278,82 @@ namespace Rivet {
         int id = p.abspid();
         switch (id) {
         case 211:
-          _histMultiPiPlus->fill(_histMultiPiPlus->bin(1).xMid());
+          _histMultiPiPlus->fill(Ecm);
           break;
         case 111:
-          _histMultiPi0->fill(_histMultiPi0->bin(1).xMid());
+          _histMultiPi0->fill(Ecm);
           break;
         case 321:
-          _histMultiKPlus->fill(_histMultiKPlus->bin(1).xMid());
+          _histMultiKPlus->fill(Ecm);
           break;
         case 130:
         case 310:
-          _histMultiK0->fill(_histMultiK0->bin(1).xMid());
+          _histMultiK0->fill(Ecm);
           break;
         case 221:
-          _histMultiEta->fill(_histMultiEta->bin(1).xMid());
+          _histMultiEta->fill(Ecm);
           break;
         case 331:
-          _histMultiEtaPrime->fill(_histMultiEtaPrime->bin(1).xMid());
+          _histMultiEtaPrime->fill(Ecm);
           break;
         case 411:
-          _histMultiDPlus->fill(_histMultiDPlus->bin(1).xMid());
+          _histMultiDPlus->fill(Ecm);
           break;
         case 421:
-          _histMultiD0->fill(_histMultiD0->bin(1).xMid());
+          _histMultiD0->fill(Ecm);
           break;
         case 511:
         case 521:
         case 531:
-          _histMultiBPlus0->fill(_histMultiBPlus0->bin(1).xMid());
+          _histMultiBPlus0->fill(Ecm);
           break;
         case 9010221:
-          _histMultiF0->fill(_histMultiF0->bin(1).xMid());
+          _histMultiF0->fill(Ecm);
           break;
         case 113:
-          _histMultiRho->fill(_histMultiRho->bin(1).xMid());
+          _histMultiRho->fill(Ecm);
           break;
         case 323:
-          _histMultiKStar892Plus->fill(_histMultiKStar892Plus->bin(1).xMid());
+          _histMultiKStar892Plus->fill(Ecm);
           break;
         case 313:
-          _histMultiKStar892_0->fill(_histMultiKStar892_0->bin(1).xMid());
+          _histMultiKStar892_0->fill(Ecm);
           break;
         case 333:
-          _histMultiPhi->fill(_histMultiPhi->bin(1).xMid());
+          _histMultiPhi->fill(Ecm);
           break;
         case 413:
-          _histMultiDStar2010Plus->fill(_histMultiDStar2010Plus->bin(1).xMid());
+          _histMultiDStar2010Plus->fill(Ecm);
           break;
         case 225:
-          _histMultiF2->fill(_histMultiF2->bin(1).xMid());
+          _histMultiF2->fill(Ecm);
           break;
         case 315:
-          _histMultiK2Star1430_0->fill(_histMultiK2Star1430_0->bin(1).xMid());
+          _histMultiK2Star1430_0->fill(Ecm);
           break;
         case 2212:
-          _histMultiP->fill(_histMultiP->bin(1).xMid());
+          _histMultiP->fill(Ecm);
           break;
         case 3122:
-          _histMultiLambda0->fill(_histMultiLambda0->bin(1).xMid());
+          _histMultiLambda0->fill(Ecm);
           break;
         case 3312:
-          _histMultiXiMinus->fill(_histMultiXiMinus->bin(1).xMid());
+          _histMultiXiMinus->fill(Ecm);
           break;
         case 3334:
-          _histMultiOmegaMinus->fill(_histMultiOmegaMinus->bin(1).xMid());
+          _histMultiOmegaMinus->fill(Ecm);
           break;
         case 2224:
-          _histMultiDeltaPlusPlus->fill(_histMultiDeltaPlusPlus->bin(1).xMid());
+          _histMultiDeltaPlusPlus->fill(Ecm);
           break;
         case 3114:
-          _histMultiSigma1385Plus->fill(_histMultiSigma1385Plus->bin(1).xMid());
+          _histMultiSigma1385Plus->fill(Ecm);
           break;
         case 3324:
-          _histMultiXi1530_0->fill(_histMultiXi1530_0->bin(1).xMid());
+          _histMultiXi1530_0->fill(Ecm);
           break;
         case 5122:
-          _histMultiLambdaB0->fill(_histMultiLambdaB0->bin(1).xMid());
+          _histMultiLambdaB0->fill(Ecm);
           break;
         }
       }
@@ -502,37 +502,39 @@ namespace Rivet {
 
     Histo1DPtr _histEEC, _histAEEC;
 
-    Histo1DPtr _histMultiCharged;
+    BinnedHistoPtr<string> _histMultiCharged;
 
-    Histo1DPtr _histMultiPiPlus;
-    Histo1DPtr _histMultiPi0;
-    Histo1DPtr _histMultiKPlus;
-    Histo1DPtr _histMultiK0;
-    Histo1DPtr _histMultiEta;
-    Histo1DPtr _histMultiEtaPrime;
-    Histo1DPtr _histMultiDPlus;
-    Histo1DPtr _histMultiD0;
-    Histo1DPtr _histMultiBPlus0;
+    BinnedHistoPtr<string> _histMultiPiPlus;
+    BinnedHistoPtr<string> _histMultiPi0;
+    BinnedHistoPtr<string> _histMultiKPlus;
+    BinnedHistoPtr<string> _histMultiK0;
+    BinnedHistoPtr<string> _histMultiEta;
+    BinnedHistoPtr<string> _histMultiEtaPrime;
+    BinnedHistoPtr<string> _histMultiDPlus;
+    BinnedHistoPtr<string> _histMultiD0;
+    BinnedHistoPtr<string> _histMultiBPlus0;
 
-    Histo1DPtr _histMultiF0;
+    BinnedHistoPtr<string> _histMultiF0;
 
-    Histo1DPtr _histMultiRho;
-    Histo1DPtr _histMultiKStar892Plus;
-    Histo1DPtr _histMultiKStar892_0;
-    Histo1DPtr _histMultiPhi;
-    Histo1DPtr _histMultiDStar2010Plus;
+    BinnedHistoPtr<string> _histMultiRho;
+    BinnedHistoPtr<string> _histMultiKStar892Plus;
+    BinnedHistoPtr<string> _histMultiKStar892_0;
+    BinnedHistoPtr<string> _histMultiPhi;
+    BinnedHistoPtr<string> _histMultiDStar2010Plus;
 
-    Histo1DPtr _histMultiF2;
-    Histo1DPtr _histMultiK2Star1430_0;
+    BinnedHistoPtr<string> _histMultiF2;
+    BinnedHistoPtr<string> _histMultiK2Star1430_0;
 
-    Histo1DPtr _histMultiP;
-    Histo1DPtr _histMultiLambda0;
-    Histo1DPtr _histMultiXiMinus;
-    Histo1DPtr _histMultiOmegaMinus;
-    Histo1DPtr _histMultiDeltaPlusPlus;
-    Histo1DPtr _histMultiSigma1385Plus;
-    Histo1DPtr _histMultiXi1530_0;
-    Histo1DPtr _histMultiLambdaB0;
+    BinnedHistoPtr<string> _histMultiP;
+    BinnedHistoPtr<string> _histMultiLambda0;
+    BinnedHistoPtr<string> _histMultiXiMinus;
+    BinnedHistoPtr<string> _histMultiOmegaMinus;
+    BinnedHistoPtr<string> _histMultiDeltaPlusPlus;
+    BinnedHistoPtr<string> _histMultiSigma1385Plus;
+    BinnedHistoPtr<string> _histMultiXi1530_0;
+    BinnedHistoPtr<string> _histMultiLambdaB0;
+
+    const string Ecm = "91.2";
     /// @}
 
   };

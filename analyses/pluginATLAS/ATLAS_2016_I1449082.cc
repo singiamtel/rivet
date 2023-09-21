@@ -237,10 +237,10 @@ namespace Rivet {
           if ( (iM == kInclMeas) && (iB != 0)) continue;
 
           calcAsymAndError(_h_dEta_asym[iM][iB], asym, err);
-          _h_Acll[iM]->addPoint( (bins[iM][iB+1] + bins[iM][iB])/2., asym, (bins[iM][iB+1] - bins[iM][iB])/2., err);
+          _h_Acll[iM]->bin(iB+1).set(asym, err);
 
           calcAsymAndError(_h_dY_asym[iM][iB], asym, err);
-          _h_Actt[iM]->addPoint( (bins[iM][iB+1] + bins[iM][iB])/2., asym, (bins[iM][iB+1] - bins[iM][iB])/2., err);
+          _h_Actt[iM]->bin(iB+1).set(asym, err);
         }
       }
     }
@@ -296,8 +296,8 @@ namespace Rivet {
     /// @{
     Histo1DPtr _h_dEta;
     Histo1DPtr _h_dY;
-    Scatter2DPtr _h_Actt[kNmeas];
-    Scatter2DPtr _h_Acll[kNmeas];
+    Estimate1DPtr _h_Actt[kNmeas];
+    Estimate1DPtr _h_Acll[kNmeas];
     // Histograms to calculate the asymmetries from
     /// @todo Use /TMP histos?
     Histo1DPtr _h_dEta_asym[kNmeas][2];

@@ -196,7 +196,7 @@ namespace Rivet {
     void finalize() {
       // Scale non-xsec plots to cross-section
       const double sf = crossSection() / picobarn / sumOfWeights();
-      for (const auto& key_hist : _h) {
+      for (auto& key_hist : _h) {
         scale(key_hist.second, sf);
         if (!contains(key_hist.first, "_xsec")) normalize(key_hist.second);
       }

@@ -45,9 +45,9 @@ namespace Rivet {
       nbmutot += weight;
 
       FourMomentum pmu = muons[0].momentum();
-      _h_total->fill(      7000/GeV, weight);
-      _h_mupt->fill(   pmu.pT()/GeV, weight);
-      _h_mueta->fill( pmu.eta()/GeV, weight);
+      _h_total->fill(7000);
+      _h_mupt->fill(pmu.pT()/GeV);
+      _h_mueta->fill(pmu.eta()/GeV);
     }
 
 
@@ -65,7 +65,7 @@ namespace Rivet {
     double nbtot, nbmutot;
 
     /// @{
-    Histo1DPtr _h_total;
+    BinnedHistoPtr<int> _h_total;
     Histo1DPtr _h_mupt;
     Histo1DPtr _h_mueta;
     /// @}

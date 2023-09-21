@@ -65,7 +65,7 @@ namespace Rivet {
       book(_h_PtllMET_norm , 7,1,1);
       book(_h_Yll_norm     , 8,1,1);
       book(_h_PtLead_norm  , 9,1,1);
-      book(_h_JetVeto      , 10, 1, 1, true);
+      book(_h_JetVeto      , 10, 1, 1);
 
       //histos for jetveto
       std::vector<double> ptlead25_bins = { 0., 25., 300. };
@@ -160,9 +160,9 @@ namespace Rivet {
       normalize(_h_pTj1_sel25);
       normalize(_h_pTj1_sel40);
       // fill jet veto efficiency histogram
-      _h_JetVeto->point(0).setY(_h_pTj1_sel25->bin(0).sumW(), sqrt(_h_pTj1_sel25->bin(0).sumW2()));
-      _h_JetVeto->point(1).setY(_h_PtLead_norm->bin(0).sumW(), sqrt(_h_PtLead_norm->bin(0).sumW2()));
-      _h_JetVeto->point(2).setY(_h_pTj1_sel40->bin(0).sumW(), sqrt(_h_pTj1_sel25->bin(0).sumW2()));
+      _h_JetVeto->bin(1).set(_h_pTj1_sel25->bin(1).sumW(), _h_pTj1_sel25->bin(1).errW());
+      _h_JetVeto->bin(2).set(_h_PtLead_norm->bin(1).sumW(), _h_PtLead_norm->bin(1).errW());
+      _h_JetVeto->bin(3).set(_h_pTj1_sel40->bin(1).sumW(), _h_pTj1_sel25->bin(1).errW());
 
       scale(_h_PtLead_norm , 1000.); // curveball unit change in HepData, just for this one
       scale(_h_PtllMET_norm, 1000.); // curveball unit change in HepData, and this one
@@ -181,7 +181,7 @@ namespace Rivet {
     Histo1DPtr _h_Yll_norm;
     Histo1DPtr _h_PtLead_norm;
 
-    Scatter2DPtr _h_JetVeto;
+    Estimate1DPtr _h_JetVeto;
 
     Histo1DPtr _h_pTj1_sel25;
     Histo1DPtr _h_pTj1_sel40;

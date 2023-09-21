@@ -114,7 +114,7 @@ namespace Rivet {
       double d = 3./(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double a =  d*(bin.xMax() - bin.xMin());
@@ -149,17 +149,15 @@ namespace Rivet {
       if(isCompatibleWithSqrtS(3.1*GeV,1e-1)) ioff=0;
       else if (isCompatibleWithSqrtS(3.686*GeV, 1E-1)) ioff=1;
       normalize(_h_xi,1.,false);
-      Scatter2DPtr _h_alpha_xi;
+      Estimate1DPtr _h_alpha_xi;
       book(_h_alpha_xi,2,2*ioff+2,1);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_xi);
-      _h_alpha_xi->addPoint(0.5, alpha.first, make_pair(0.5,0.5),
-                            make_pair(alpha.second.first,alpha.second.second) );
+      _h_alpha_xi->bin(1).set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
       normalize(_h_sig,1.,false);
-      Scatter2DPtr _h_alpha_sig;
+      Estimate1DPtr _h_alpha_sig;
       book(_h_alpha_sig,2,2*ioff+1,1);
       alpha = calcAlpha(_h_sig);
-      _h_alpha_sig->addPoint(0.5, alpha.first, make_pair(0.5,0.5),
-                             make_pair(alpha.second.first,alpha.second.second) );
+      _h_alpha_sig->bin(1).set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
 
     }
     /// @}

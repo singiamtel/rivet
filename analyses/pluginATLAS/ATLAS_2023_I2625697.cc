@@ -64,13 +64,12 @@ namespace Rivet {
       normalize(_hEEC);
 
       for (int iBin = 0; iBin < 11; ++iBin) {
-        size_t nPoints = _hEEC[iBin]->numBins();
-        for (size_t k = 1; k <= nPoints/2; ++k) {
-          const double x = _hEEC[iBin]->bin(k).xMid();
-          const double ex = _hEEC[iBin]->bin(k).xWidth()/2;
-          const double y = _hEEC[iBin]->bin(k).sumW() - _hEEC[iBin]->bin(nPoints-(k+1)).sumW();
-          const double ey = sqrt( sqr(_hEEC[iBin]->bin(k).errW()) + sqr(_hEEC[iBin]->bin(nPoints-(k+1)).errW()) );
-          _hAEEC[iBin]->addPoint(x, y, ex, ey);
+        size_t nBins= _hEEC[iBin]->numBins();
+        for (size_t k = 1; k <= (nBins/2)+1; ++k) {
+          const double dV = _hEEC[iBin]->bin(k).dVol();
+          const double y = (_hEEC[iBin]->bin(k).sumW() - _hEEC[iBin]->bin(nBins-k+1).sumW())/dV;
+          const double ey = sqrt( sqr(_hEEC[iBin]->bin(k).errW()) + sqr(_hEEC[iBin]->bin(nBins-k+1).errW()) )/dV;
+          _hAEEC[iBin]->bin(k).set(y, ey);
         }
        }
     }
@@ -80,7 +79,7 @@ namespace Rivet {
   private:
 
     map<int, Histo1DPtr> _hEEC;
-    map<int, Scatter2DPtr> _hAEEC;
+    map<int, Estimate1DPtr> _hAEEC;
   };
 
   // Declare the plugin

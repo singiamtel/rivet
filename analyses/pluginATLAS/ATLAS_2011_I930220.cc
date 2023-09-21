@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/HeavyHadrons.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -24,17 +23,14 @@ namespace Rivet {
       declare(fj, "Jets");
       declare(HeavyHadrons(Cuts::abseta < 3.5 && Cuts::pT > 5*GeV), "BHadrons");
 
-      double ybins[] = { 0.0, 0.3, 0.8, 1.2, 2.1 };
-      for (size_t i = 0; i < 4; ++i) {
-        Histo1DPtr tmp;
-        _bjetpT_SV0.add(ybins[i], ybins[i+1], book(tmp, i+1, 1, 1));
-      }
-      book(_bjetpT_SV0_All    ,5, 1, 1);
-      book(_bjetpT_pTRel      ,6, 1, 1);
-      book(_dijet_mass        ,7, 1, 1);
-      book(_dijet_phi         ,8, 1, 1);
-      book(_dijet_chi_110_370 ,9, 1, 1);
-      book(_dijet_chi_370_850 ,10, 1, 1);
+      vector<double> ybins{ 0.0, 0.3, 0.8, 1.2, 2.1 };
+      book(_bjetpT_SV0, ybins, {"d01-x01-y01", "d02-x01-y01", "d03-x01-y01", "d04-x01-y01" });
+      book(_bjetpT_SV0_All   ,  5, 1, 1);
+      book(_bjetpT_pTRel     ,  6, 1, 1);
+      book(_dijet_mass       ,  7, 1, 1);
+      book(_dijet_phi        ,  8, 1, 1);
+      book(_dijet_chi_110_370,  9, 1, 1);
+      book(_dijet_chi_370_850, 10, 1, 1);
 
       book(_chiCounter1, "_chiCounter1");
       book(_chiCounter2, "_chiCounter2");
@@ -65,7 +61,7 @@ namespace Rivet {
             subJet = (hasB && j.pT() > 40*GeV) ? 2 : 1;
           }
           if (hasB) {
-            _bjetpT_SV0.fill(j.absrap(), j.pT()/GeV);
+            _bjetpT_SV0->fill(j.absrap(), j.pT()/GeV);
             _bjetpT_SV0_All->fill(j.pT()/GeV);
             _bjetpT_pTRel->fill(j.pT()/GeV);
           }
@@ -108,19 +104,21 @@ namespace Rivet {
       const double chiScale2 = 1 / dbl(*_chiCounter2) / 480.0;
       const double phiScale  = 1 / dbl(*_phiCounter);
 
-      _bjetpT_SV0.scale(xsec/2, this);
+      scale(_bjetpT_SV0, 0.5*xsec);
       scale(_bjetpT_SV0_All, xsec);
       scale(_bjetpT_pTRel, xsec);
       scale(_dijet_mass, xsec);
       scale(_dijet_phi, phiScale );
       scale(_dijet_chi_110_370, chiScale1);
       scale(_dijet_chi_370_850, chiScale2);
+
+      divByGroupWidth(_bjetpT_SV0);
     }
 
 
   private:
 
-    BinnedHistogram _bjetpT_SV0;
+    Histo1DGroupPtr _bjetpT_SV0;
 
     Histo1DPtr _bjetpT_SV0_All;
     Histo1DPtr _bjetpT_pTRel;

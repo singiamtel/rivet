@@ -165,23 +165,7 @@ namespace Rivet {
       // Construct asymmetry: (dsig+/deta - dsig-/deta) / (dsig+/deta + dsig-/deta)
       //divide(*_h_Wp_eta - *_h_Wm_eta, *_h_Wp_eta + *_h_Wm_eta, _h_W_asym);
       if (_runW) {
-        for (size_t i = 0; i < _h_Wp_eta->numBins(); ++i) {
-          const auto& bp = _h_Wp_eta->bin(i);
-          const auto& bm = _h_Wm_eta->bin(i);
-          const double sum  = bp.sumW() + bm.sumW();
-          //const double xerr = 0.5 * bp.xWidth();
-          double val = 0., yerr = 0.;
-
-          if (sum) {
-            const double pos2  = bp.sumW() * bp.sumW();
-            const double min2  = bm.sumW() * bm.sumW();
-            const double errp2 = bp.errW() * bp.errW();
-            const double errm2 = bm.errW() * bm.errW();
-            val = (bp.sumW() - bm.sumW()) / sum;
-            yerr = 2. * sqrt(errm2 * pos2 + errp2 * min2) / (sum * sum);
-          }
-          _h_W_asym->addPoint(bp.xMid(), val, 0.5*bp.xWidth(), yerr);
-        }
+        asymm(_h_Wp_eta, _h_Wm_eta, _h_W_asym);
       }
 
       ///  Normalise, scale and otherwise manipulate histograms here
@@ -217,7 +201,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_Wp_eta, _h_Wm_eta;
-    Scatter2DPtr _h_W_asym;
+    Estimate1DPtr _h_W_asym;
 
     Histo1DPtr _h_Zcenlow_y_dressed;
     Histo1DPtr _h_Zcenpeak_y_dressed;

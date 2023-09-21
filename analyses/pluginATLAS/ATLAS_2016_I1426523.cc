@@ -376,40 +376,24 @@ namespace Rivet {
 
       float totalBR= 4*0.1086*0.033658; // W and Z leptonic branching fractions
 
-      for (map<string, Histo1DPtr>::iterator it = _h.begin(); it != _h.end(); ++it) {
-        if (it->first.find("total") != string::npos)        scale(it->second, sf_pb/totalBR);
-        else if (it->first.find("norm") != string::npos)    normalize(it->second);
-        else if (it->first.find("fid") != string::npos)     scale(it->second, sf_fb/4.);
-        else if (it->first.find("Njets") != string::npos)   scale(it->second, sf_fb/4.);
-        else if (it->first.find("ZpT") != string::npos)     scale(it->second, sf_fb/4.);
-        else if (it->first.find("WpT") != string::npos)     scale(it->second, sf_fb/4.);
-        else if (it->first.find("mTWZ") != string::npos)    scale(it->second, sf_fb/4.);
-        else if (it->first.find("pTv") != string::npos)     scale(it->second, sf_fb/4.);
-        else if (it->first.find("Deltay") != string::npos)  scale(it->second, sf_fb/4.);
-        else if (it->first.find("mjj") != string::npos)     scale(it->second, sf_fb/4.);
-        else                                                scale(it->second, sf_fb);
+      for (auto& it : _h) {
+        if (it.first.find("total") != string::npos)        scale(it.second, sf_pb/totalBR);
+        else if (it.first.find("norm") != string::npos)    normalize(it.second);
+        else if (it.first.find("fid") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("Njets") != string::npos)   scale(it.second, sf_fb/4.);
+        else if (it.first.find("ZpT") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("WpT") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("mTWZ") != string::npos)    scale(it.second, sf_fb/4.);
+        else if (it.first.find("pTv") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("Deltay") != string::npos)  scale(it.second, sf_fb/4.);
+        else if (it.first.find("mjj") != string::npos)     scale(it.second, sf_fb/4.);
+        else                                               scale(it.second, sf_fb);
       }
-      for (map<string, Scatter2DPtr>::iterator it = _s.begin(); it != _s.end(); ++it) {
-        // @todo replace with new YODA object?
-        makeScatterWithoutDividingByBinwidth(it->first);
-        // @todo need this to disappear if we want reentrant safety
-        removeAnalysisObject(_h[it->first]);
+      for (auto& it : _s) {
+        barchart(_h[it.first], it.second);
+        removeAnalysisObject(_h[it.first]);
       }
     }
-
-    void makeScatterWithoutDividingByBinwidth(const string& tag) {
-      vector<Point2D> points;
-      //size_t nBins = _dummy->numBins();
-      for (const auto& bin : _h[tag]->bins()) {
-        double  x = bin.xMid();
-        double  y = bin.sumW();
-        double ex = bin.xWidth()/2;
-        double ey = sqrt(bin.sumW2());
-        points.push_back(Point2D(x, y, ex, ey));
-      }
-      _s[tag]->addPoints(points);
-    }
-
 
     /// @}
 
@@ -420,7 +404,7 @@ namespace Rivet {
     /// @{
 
      map<string, Histo1DPtr> _h;
-     map<string, Scatter2DPtr> _s;
+     map<string, Estimate1DPtr> _s;
 
      /// @}
 

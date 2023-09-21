@@ -107,42 +107,31 @@ namespace Rivet {
     void finalize() {
       // loop over histos to be filled
       for(unsigned int ix=1;ix<3;++ix) {
-	Scatter1D R;
-	for(unsigned int iy=1;iy<4;++iy) {
-	  if(ix==2 && iy!=1) continue;
-	  if(ix==1) {
-	    if(iy==1) {
-	      R = (*_c_1S/ *_c_muons).mkScatter();
-	    }
-	    else if(iy==2) {
-	      R = (*_c_2S/ *_c_muons).mkScatter();
-	    }
-	    else {
-	      R = (*_c_3S/ *_c_muons).mkScatter();
-	    }
-	  }
-	  else if(ix==2) {
-	    R = (*_c_hadrons/ *_c_muons).mkScatter();
-	  }
-	  double              rval = R.point(0).x();
-	  pair<double,double> rerr = R.point(0).xErrs();
-	  Scatter2D temphisto(refData(ix, 1, iy));
-	  Scatter2DPtr     mult;
-	  book(mult, ix, 1, iy);
-	  for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	    const double x  = temphisto.point(b).x();
-	    pair<double,double> ex = temphisto.point(b).xErrs();
-	    pair<double,double> ex2 = ex;
-	    if(ex2.first ==0.) ex2. first=0.0001;
-	    if(ex2.second==0.) ex2.second=0.0001;
-	    if (inRange(sqrtS()/MeV, x-ex2.first, x+ex2.second)) {
-	      mult   ->addPoint({x, rval}, {ex, rerr});
-	    }
-	    else {
-	      mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	    }
-	  }
-	}
+        Estimate0D R;
+        for (unsigned int iy=1;iy<4;++iy) {
+          if (ix==2 && iy!=1) continue;
+          if (ix==1) {
+            if (iy==1) {
+              R = *_c_1S/ *_c_muons;
+            }
+            else if (iy==2) {
+              R = *_c_2S/ *_c_muons;
+            }
+            else {
+              R = *_c_3S/ *_c_muons;
+            }
+          }
+          else if(ix==2) {
+            R = *_c_hadrons/ *_c_muons;
+          }
+          Estimate1DPtr     mult;
+          book(mult, ix, 1, iy);
+          for (auto& b : mult->bins()) {
+            if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
+              b.set(R.val(), R.errPos());
+            }
+          }
+        }
       }
     }
 

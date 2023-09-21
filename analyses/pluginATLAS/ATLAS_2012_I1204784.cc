@@ -1,7 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/ZFinder.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -13,9 +12,7 @@ namespace Rivet {
     public:
 
       /// Constructor
-      ATLAS_2012_I1204784()
-        : Analysis("ATLAS_2012_I1204784")
-      {      }
+      RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1204784);
 
 
     public:
@@ -41,41 +38,30 @@ namespace Rivet {
         book(_hist_zphistar_mu_dressed ,2, 1, 2);
 
         // Double-differential plots
-        {Histo1DPtr tmp; _h_phistar_el_bare.add(0.0, 0.8, book(tmp, 3, 1, 1));}
-        {Histo1DPtr tmp; _h_phistar_el_bare.add(0.8, 1.6, book(tmp, 3, 1, 2));}
-        {Histo1DPtr tmp; _h_phistar_el_bare.add(1.6, 10.0, book(tmp, 3, 1, 3));}
+        book(_h_phistar_el_bare,    {0., 0.8, 1.6, 10.}, {"d03-x01-y01", "d03-x01-y02", "d03-x01-y03"});
+        book(_h_phistar_el_dressed, {0., 0.8, 1.6, 10.}, {"d03-x02-y01", "d03-x02-y02", "d03-x02-y03"});
+        book(_h_phistar_mu_bare,    {0., 0.8, 1.6, 10.}, {"d04-x01-y01", "d04-x01-y02", "d04-x01-y03"});
+        book(_h_phistar_mu_dressed, {0., 0.8, 1.6, 10.}, {"d04-x02-y01", "d04-x02-y02", "d04-x02-y03"});
 
-        {Histo1DPtr tmp; _h_phistar_el_dressed.add(0.0, 0.8, book(tmp, 3, 2, 1));}
-        {Histo1DPtr tmp; _h_phistar_el_dressed.add(0.8, 1.6, book(tmp, 3, 2, 2));}
-        {Histo1DPtr tmp; _h_phistar_el_dressed.add(1.6, 10.0, book(tmp, 3, 2, 3));}
-
-        {Histo1DPtr tmp; _h_phistar_mu_bare.add(0.0, 0.8, book(tmp, 4, 1, 1));}
-        {Histo1DPtr tmp; _h_phistar_mu_bare.add(0.8, 1.6, book(tmp, 4, 1, 2));}
-        {Histo1DPtr tmp; _h_phistar_mu_bare.add(1.6, 10.0, book(tmp, 4, 1, 3));}
-
-        {Histo1DPtr tmp; _h_phistar_mu_dressed.add(0.0, 0.8, book(tmp, 4, 2, 1));}
-        {Histo1DPtr tmp; _h_phistar_mu_dressed.add(0.8, 1.6, book(tmp, 4, 2, 2));}
-        {Histo1DPtr tmp; _h_phistar_mu_dressed.add(1.6, 10.0, book(tmp, 4, 2, 3));}
       }
 
 
       /// Perform the per-event analysis
       void analyze(const Event& event) {
-        const double weight = 1.0;
 
         const ZFinder& zfinder_dressed_el = apply<ZFinder>(event, "ZFinder_dressed_el");
         const ZFinder& zfinder_bare_el = apply<ZFinder>(event, "ZFinder_bare_el");
         const ZFinder& zfinder_dressed_mu = apply<ZFinder>(event, "ZFinder_dressed_mu");
         const ZFinder& zfinder_bare_mu = apply<ZFinder>(event, "ZFinder_bare_mu");
 
-        fillPlots(zfinder_dressed_el, _hist_zphistar_el_dressed, _h_phistar_el_dressed, weight);
-        fillPlots(zfinder_bare_el, _hist_zphistar_el_bare, _h_phistar_el_bare, weight);
-        fillPlots(zfinder_dressed_mu, _hist_zphistar_mu_dressed, _h_phistar_mu_dressed, weight);
-        fillPlots(zfinder_bare_mu, _hist_zphistar_mu_bare, _h_phistar_mu_bare, weight);
+        fillPlots(zfinder_dressed_el, _hist_zphistar_el_dressed, _h_phistar_el_dressed);
+        fillPlots(zfinder_bare_el, _hist_zphistar_el_bare, _h_phistar_el_bare);
+        fillPlots(zfinder_dressed_mu, _hist_zphistar_mu_dressed, _h_phistar_mu_dressed);
+        fillPlots(zfinder_bare_mu, _hist_zphistar_mu_bare, _h_phistar_mu_bare);
       }
 
 
-      void fillPlots(const ZFinder& zfind, Histo1DPtr hist, BinnedHistogram& binnedHist, double weight) {
+      void fillPlots(const ZFinder& zfind, Histo1DPtr hist, Histo1DGroupPtr& binnedHist) {
         if (zfind.bosons().size() != 1) return;
         Particles leptons = sortBy(zfind.constituents(), cmpMomByPt);
 
@@ -86,9 +72,9 @@ namespace Rivet {
         const double costhetastar = tanh((lminus.eta()-lplus.eta())/2.0);
         const double sin2thetastar = (costhetastar <= 1) ? 1.0 - sqr(costhetastar) : 0;
         const double phistar = tan(phi_acop/2.0) * sqrt(sin2thetastar);
-        hist->fill(phistar, weight);
+        hist->fill(phistar);
 
-        binnedHist.fill(zfind.bosons()[0].absrap(), phistar, weight);
+        binnedHist->fill(zfind.bosons()[0].absrap(), phistar);
       }
 
 
@@ -99,10 +85,10 @@ namespace Rivet {
         normalize(_hist_zphistar_mu_dressed);
         normalize(_hist_zphistar_mu_bare);
 
-        for (Histo1DPtr hist : _h_phistar_mu_dressed.histos()) { normalize(hist); }
-        for (Histo1DPtr hist : _h_phistar_mu_bare.histos()) { normalize(hist); }
-        for (Histo1DPtr hist : _h_phistar_el_bare.histos()) { normalize(hist); }
-        for (Histo1DPtr hist : _h_phistar_el_dressed.histos()) { normalize(hist); }
+        normalize(_h_phistar_mu_dressed);
+        normalize(_h_phistar_mu_bare);
+        normalize(_h_phistar_el_bare);
+        normalize(_h_phistar_el_dressed);
       }
 
       //@}
@@ -110,10 +96,10 @@ namespace Rivet {
 
     private:
 
-      BinnedHistogram _h_phistar_mu_dressed;
-      BinnedHistogram _h_phistar_mu_bare;
-      BinnedHistogram _h_phistar_el_dressed;
-      BinnedHistogram _h_phistar_el_bare;
+      Histo1DGroupPtr _h_phistar_mu_dressed;
+      Histo1DGroupPtr _h_phistar_mu_bare;
+      Histo1DGroupPtr _h_phistar_el_dressed;
+      Histo1DGroupPtr _h_phistar_el_bare;
 
       Histo1DPtr _hist_zphistar_el_dressed;
       Histo1DPtr _hist_zphistar_el_bare;

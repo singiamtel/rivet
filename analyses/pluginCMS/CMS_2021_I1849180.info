@@ -4,7 +4,7 @@ Summary: Drell-Yan dimuon production in proton-lead collisions at 8.16 TeV
 Experiment: CMS
 Collider: LHC
 InspireID: 1849180
-Status: VALIDATED 
+Status: VALIDATED
 Reentrant: True
 Authors:
  - Hannes Jung <hannes.jung@desy.de>
@@ -17,7 +17,7 @@ References:
 RunInfo: DY events with m(ll)>15 GeV, run in pPb mode
 Beams: [p+, Pb]
 Energies: [[6500, 2560], [4080, 4080]]
-Luminosity_nb: 173.0 
+Luminosity_nb: 173.0
 Description: 'The differential cross-section for Drell-Yan dimuon production in proton-lead collisions at 8.16 TeV have been measured with data acquired by the CMS collaboration at the LHC during the year 2016.'
 Keywords: []
 BibKey: CMS:2021ynu

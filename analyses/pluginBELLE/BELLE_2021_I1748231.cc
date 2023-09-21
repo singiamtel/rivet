@@ -91,25 +91,23 @@ namespace Rivet {
       }
       // RK and asymmetry plots
       for(unsigned int ix=0;ix<3;++ix) {
-	Scatter2DPtr RK;
+	Estimate1DPtr RK;
 	book(RK,3,1,1+ix);
 	divide(_h_brB[0][ix],_h_brB[2][ix],RK);
 	book(RK,3,2,1+ix);
 	divide(_h_brB[1][ix],_h_brB[3][ix],RK);
 	book(RK,3,3,1+ix);
-	for(unsigned int ibin=0;ibin<_h_brB[1][ix]->bins().size();++ibin) {
-	  double num     = _h_brB[0][ix]->bins()[ibin].sumW()   +_h_brB[1][ix]->bins()[ibin].sumW();
-	  double numErr2 = sqr(_h_brB[0][ix]->bins()[ibin].errW())+sqr(_h_brB[1][ix]->bins()[ibin].errW());
-	  double den     = _h_brB[2][ix]->bins()[ibin].sumW()   +_h_brB[3][ix]->bins()[ibin].sumW();
-	  double denErr2 = sqr(_h_brB[2][ix]->bins()[ibin].errW())+sqr(_h_brB[3][ix]->bins()[ibin].errW());
+	for (size_t ibin=1; ibin<_h_brB[1][ix]->numBins()+1; ++ibin) {
+	  double num     = _h_brB[0][ix]->bin(ibin).sumW()   +_h_brB[1][ix]->bin(ibin).sumW();
+	  double numErr2 = _h_brB[0][ix]->bin(ibin).sumW2()  +_h_brB[1][ix]->bin(ibin).sumW2();
+	  double den     = _h_brB[2][ix]->bin(ibin).sumW()   +_h_brB[3][ix]->bin(ibin).sumW();
+	  double denErr2 = _h_brB[2][ix]->bin(ibin).sumW2()  +_h_brB[3][ix]->bin(ibin).sumW2();
 	  double val(0.),err(0.);
 	  if(num>0. && den>0.) {
 	    val = num/den;
 	    err = val*(numErr2/sqr(num)+denErr2/sqr(den));
 	  }
-	  double dx = 0.5*_h_brB[0][ix]->bins()[ibin].xWidth();
-	  RK->addPoint(_h_brB[0][ix]->bins()[ibin].xMid(),val,
-		       make_pair(dx,dx),make_pair(err,err));
+	  RK->bin(ibin).set(val, err);
 	}
 	book(RK,2,1,1+ix);
 	asymm(_h_brB[1][ix],_h_brB[0][ix],RK);
@@ -117,19 +115,17 @@ namespace Rivet {
 	asymm(_h_brB[3][ix],_h_brB[2][ix],RK);
 	// average plot
 	book(RK,2,3,1+ix);
-	for(unsigned int ibin=0;ibin<_h_brB[1][ix]->bins().size();++ibin) {
-	  double term0     = _h_brB[1][ix]->bins()[ibin].sumW()   +_h_brB[3][ix]->bins()[ibin].sumW();
-	  double term0Err2 = sqr(_h_brB[1][ix]->bins()[ibin].errW())+sqr(_h_brB[3][ix]->bins()[ibin].errW());
-	  double term1     = _h_brB[0][ix]->bins()[ibin].sumW()   +_h_brB[2][ix]->bins()[ibin].sumW();
-	  double term1Err2 = sqr(_h_brB[0][ix]->bins()[ibin].errW())+sqr(_h_brB[2][ix]->bins()[ibin].errW());
+	for(unsigned int ibin=1; ibin<_h_brB[1][ix]->numBins()+1; ++ibin) {
+	  double term0     = _h_brB[1][ix]->bin(ibin).sumW()   +_h_brB[3][ix]->bin(ibin).sumW();
+	  double term0Err2 = _h_brB[1][ix]->bin(ibin).sumW2()  +_h_brB[3][ix]->bin(ibin).sumW2();
+	  double term1     = _h_brB[0][ix]->bin(ibin).sumW()   +_h_brB[2][ix]->bin(ibin).sumW();
+	  double term1Err2 = _h_brB[0][ix]->bin(ibin).sumW2()  +_h_brB[2][ix]->bin(ibin).sumW2();
 	  double val(0.),err(0.);
 	  if(term0>0. && term1>0.) {
 	    val = (term0-term1)/(term0+term1);
 	    err = 4.*(sqr(term1)*term0Err2 + sqr(term0)*term1Err2)/pow(term0+term1,4);
 	  }
-	  double dx = 0.5*_h_brB[0][ix]->bins()[ibin].xWidth();
-	  RK->addPoint(_h_brB[0][ix]->bins()[ibin].xMid(),val,
-	  	       make_pair(dx,dx),make_pair(err,err));
+	  RK->bin(ibin).set(val, err);
 	}
       }
     }

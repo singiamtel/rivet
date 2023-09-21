@@ -21,18 +21,18 @@ namespace Rivet {
       const ChargedFinalState cfs;
       declare(cfs, "CFS");
 
-      int offset = 0;
-      if(isCompatibleWithSqrtS(14.0*GeV)) {
-	offset = 1;
+      offset = 0;
+      if (isCompatibleWithSqrtS(14.0*GeV)) {
+        offset = 1;
       }
-      else if(isCompatibleWithSqrtS(22.0*GeV)) {
-	offset = 2;
+      else if (isCompatibleWithSqrtS(22.0*GeV)) {
+        offset = 2;
       }
-      else if(isCompatibleWithSqrtS(34.8*GeV)) {
-	offset = 3;
+      else if (isCompatibleWithSqrtS(34.8*GeV)) {
+        offset = 3;
       }
-      else if(isCompatibleWithSqrtS(43.6*GeV)) {
-	offset = 4;
+      else if (isCompatibleWithSqrtS(43.6*GeV)) {
+        offset = 4;
       }
       else {
         MSG_WARNING("CoM energy of events sqrt(s) = " << sqrtS()/GeV
@@ -45,16 +45,17 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (Ecm == "")  Ecm = _histTotal->bin(offset).xEdge();
       const FinalState& cfs = apply<FinalState>(event, "CFS");
       MSG_DEBUG("Total charged multiplicity = " << cfs.size());
       _histCh->fill(cfs.size());
-      _histTotal->fill(sqrtS(),cfs.size());
+      _histTotal->fill(Ecm, cfs.size());
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_histCh, 2.0/sumOfWeights()); // bin width (2)
+      scale(_histCh, 1.0/sumOfWeights());
     }
 
     /// @}
@@ -64,8 +65,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _histCh;
-    Profile1DPtr _histTotal;
+    BinnedHistoPtr<int> _histCh;
+    BinnedProfilePtr<string> _histTotal;
+    string Ecm = "";
+    int offset;
     /// @}
   };
 

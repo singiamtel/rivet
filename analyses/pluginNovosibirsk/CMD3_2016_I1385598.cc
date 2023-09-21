@@ -32,9 +32,9 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const FinalState& fs = apply<FinalState>(event, "FS");
-      if(fs.particles().size()!=2) vetoEvent;
+      if (fs.particles().size() != 2) vetoEvent;
       for (const Particle& p : fs.particles()) {
-	if(abs(p.pid())!=PID::PROTON) vetoEvent;
+        if (p.abspid() != PID::PROTON) vetoEvent;
       }
       _nproton->fill();
     }
@@ -42,25 +42,14 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nproton->val();
-      double error = _nproton->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Scatter2D temphisto(refData(1, 1, 6));
-      Scatter2DPtr mult;
+      scale(_nproton, crossSection()/ sumOfWeights() /nanobarn);
+      BinnedEstimatePtr<string> mult;
       book(mult, 1, 1, 6);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/MeV, x-ex2.first, x+ex2.second)) {
-	  mult->addPoint(x, sigma, ex, make_pair(error,error));
-	}
-	else {
-	  mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
+      for (auto& b : mult->bins()) {
+        const double sqrts = std::stod(b.xEdge().substr(0, 4));
+        if (isCompatibleWithSqrtS(sqrts*MeV)) {
+          b.set(_nproton->val(), _nproton->err());
+        }
       }
     }
 

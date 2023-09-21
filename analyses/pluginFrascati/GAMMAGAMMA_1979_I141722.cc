@@ -61,66 +61,44 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter1D R = (*_c_hadrons/ *_c_muons).mkScatter();
-      double              rval = R.point(0).x();
-      pair<double,double> rerr = R.point(0).xErrs();
+      Estimate0D R = *_c_hadrons/ *_c_muons;
       double fact = crossSection()/ sumOfWeights() /picobarn;
       double sig_h = _c_hadrons->val()*fact;
       double err_h = _c_hadrons->err()*fact;
       double sig_m = _c_muons  ->val()*fact;
       double err_m = _c_muons  ->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr hadrons;
+      Estimate1DPtr hadrons;
       book(hadrons, "sigma_hadrons");
-      Scatter2DPtr muons;
+      Estimate1DPtr muons;
       book(muons, "sigma_muons"  );
-      Scatter2DPtr mult;
+      Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	  mult   ->addPoint(x, rval, ex, rerr);
-	  hadrons->addPoint(x, sig_h, ex, make_pair(err_h,err_h));
-	  muons  ->addPoint(x, sig_m, ex, make_pair(err_m,err_m));
-	}
-	else {
-	  mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	  hadrons->addPoint(x, 0., ex, make_pair(0.,.0));
-	  muons  ->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
+      for (auto& b : mult->bins()) {
+        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+          b.set(R.val(), R.errPos());
+          hadrons->bin(b.index()).set(sig_h, err_h);
+          muons  ->bin(b.index()).set(sig_m, err_m);
+        }
       }
       scale(_c_charged, 1./_nHadrons->sumW());
       scale(_c_neutral, 1./_nHadrons->sumW());
-      for(unsigned int iy=1; iy<3;++iy) {
-	double aver(0.),error(0.);
-	if(iy==1) {
-	  aver  = _c_charged->val();
-	  error = _c_charged->err();
-	}
-	else {
-	  aver  = _c_neutral->val();
-	  error = _c_neutral->err();
-	}
-	Scatter2D temphisto(refData(2, 1, iy));
-	Scatter2DPtr mult;
-	book(mult, 2, 1, iy);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult   ->addPoint(x, aver, ex, make_pair(error,error));
-	  }
-	  else {
-	    mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+      for (unsigned int iy=1; iy<3;++iy) {
+        double aver(0.),error(0.);
+        if(iy==1) {
+          aver  = _c_charged->val();
+          error = _c_charged->err();
+        }
+        else {
+          aver  = _c_neutral->val();
+          error = _c_neutral->err();
+        }
+        Estimate1DPtr mult;
+        book(mult, 2, 1, iy);
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(aver, error);
+          }
+        }
       }
     }
 

@@ -12,7 +12,6 @@ namespace Rivet {
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(HRS_1986_I18688);
 
-
     /// @name Analysis methods
     ///@{
 
@@ -27,21 +26,25 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty())  _edges = _h_f2->xEdges();
       UnstableParticles ufs = apply<UnstableParticles>(event,"UFS");
-      for(const Particle & p : ufs.particles(Cuts::abspid==9010221 ||
-					     Cuts::abspid==225 ||
-					     Cuts::abspid==315)) {
+      for (const Particle& p : ufs.particles(Cuts::abspid==9010221 ||
+                                             Cuts::abspid==225 ||
+                                             Cuts::abspid==315)) {
       	Vector3 mom3 = p.p3();
         const double energy = p.E();
       	double modp = mom3.mod();
       	double beta = modp/energy;
       	double xE = 2.*modp/sqrtS();
-	if(p.pid()==225) 
-	  _h_f2->fill(xE,1./beta);
-	else if(p.pid()==315) 
-	  _h_K2->fill(xE,1./beta);
-	else
-	  _h_f0->fill(xE,1./beta);
+        if (p.pid()==225) {
+          _h_f2->fill(map2string(xE), 1./beta);
+        }
+        else if (p.pid()==315) {
+          _h_K2->fill(map2string(xE), 1./beta);
+        }
+        else {
+          _h_f0->fill(map2string(xE), 1./beta);
+        }
       }
     }
 
@@ -55,10 +58,17 @@ namespace Rivet {
 
     ///@}
 
+    string map2string(const double value) const {
+      const size_t idx = _axis.index(value);
+      if (idx && idx <= _edges.size())  return _edges[idx-1];
+      return "OTHER";
+    }
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_f0,_h_f2,_h_K2;
+    BinnedHistoPtr<string> _h_f0, _h_f2, _h_K2;
+    YODA::Axis<double> _axis{0.1, 0.2, 0.3, 0.4, 0.7};
+    vector<string> _edges;
     ///@}
 
 

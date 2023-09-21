@@ -189,7 +189,7 @@ namespace Rivet {
       double d = 3./(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double a =  d*(bin.xMax() - bin.xMin());
@@ -221,7 +221,7 @@ namespace Rivet {
     pair<double,double> calcCoeff(unsigned int imode,Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double ai(0.),bi(0.);
@@ -261,10 +261,9 @@ namespace Rivet {
 
       // calculate alpha0
       pair<double,pair<double,double> > alpha0 = calcAlpha0(_h_cThetaL);
-      Scatter2DPtr _h_alpha0;
+      Estimate1DPtr _h_alpha0;
       book(_h_alpha0,1,1,1);
-      _h_alpha0->addPoint(0.5, alpha0.first, make_pair(0.5,0.5),
-                          make_pair(alpha0.second.first,alpha0.second.second) );
+      _h_alpha0->bin(1).set(alpha0.first, alpha0.second);
       double s2 = -1. + sqr(alpha0.first);
       double s3 = 3 + alpha0.first;
       double s1 = sqr(s3);
@@ -312,15 +311,13 @@ namespace Rivet {
                                                                                                                              8*(c_T3_p.first*c_T4_p.first*alpha0.second.second +  s3*c_T4_p.first*c_T3_p.second +  s3*c_T3_p.first*c_T4_p.second)* s1*s5*s6))/
                                                                                                                     (4* pow(3 + alpha0.first,3)* pow(c_T3_p.first,3)* pow(c_T4_p.first,3) -  9*s2*s3*c_T3_p.first*c_T4_p.first*s4)))/
                         (disc + 2*s1*s5*s6)))/(2.*pow(c_T3_p.first,2));
-        Scatter2DPtr _h_alphaM;
+        Estimate1DPtr _h_alphaM;
         book(_h_alphaM,1,3,1);
-        _h_alphaM->addPoint(0.5, aM, make_pair(0.5,0.5),
-                            make_pair(-aM_M , -aM_P ) );
+        _h_alphaM->bin(1).set(aM, make_pair(-aM_M , -aM_P ));
 
-        Scatter2DPtr _h_alphaP;
+        Estimate1DPtr _h_alphaP;
         book(_h_alphaP,1,4,1);
-        _h_alphaP->addPoint(0.5, aP, make_pair(0.5,0.5),
-                            make_pair(-aP_M , -aP_P  ) );
+        _h_alphaP->bin(1).set(aP, make_pair(-aP_M , -aP_P  ));
         // now for Delta
         double sDelta = (-2.*(3. + alpha0.first)*c_T3_p.first)/(aM*sqrt(1 - sqr(alpha0.first)));
         double cDelta = (-3*(3 + alpha0.first)*c_T2_p.first)/(aM*aP*sqrt(1 - sqr(alpha0.first)));
@@ -335,9 +332,9 @@ namespace Rivet {
           (pow(1 - pow(alpha0.first,2),1.5)*pow(c_T4_p.first,3)*pow(-((disc + 2*s1*s5*s6)/   (s2*s6)),1.5)*(-9*s2*s4 + 4*s1*s5*s6));
         ds_P /= sqrt(1.-sqr(sDelta));
         ds_M /= sqrt(1.-sqr(sDelta));
-        Scatter2DPtr _h_sin;
+        Estimate1DPtr _h_sin;
         book(_h_sin,1,2,1);
-        _h_sin->addPoint(0.5, Delta/M_PI*180., make_pair(0.5,0.5), make_pair( -ds_P/M_PI*180., -ds_M/M_PI*180. ) );
+        _h_sin->bin(1).set(Delta/M_PI*180., make_pair( -ds_P/M_PI*180., -ds_M/M_PI*180. ));
       }
       // alpha 0
       pair<double,double> c_T2_n = calcCoeff(2,_h_T2_n);
@@ -367,10 +364,9 @@ namespace Rivet {
                                                                                                                              8*(c_T3_n.first*c_T4_n.first*alpha0.second.second +  s3*c_T4_n.first*c_T3_n.second +  s3*c_T3_n.first*c_T4_n.second)* s1*s5*s6))/
                                                                                                                     (4* pow(3 + alpha0.first,3)* pow(c_T3_n.first,3)* pow(c_T4_n.first,3) -  9*s2*s3*c_T3_n.first*c_T4_n.first*s4)))/
                         (disc + 2*s1*s5*s6)))/(2.*pow(c_T3_n.first,2));
-        Scatter2DPtr _h_alpha0;
+        Estimate1DPtr _h_alpha0;
         book(_h_alpha0,1,5,1);
-        _h_alpha0->addPoint(0.5, a0, make_pair(0.5,0.5),
-                            make_pair(-a0_M , -a0_P ) );
+        _h_alpha0->bin(1).set(a0, make_pair(-a0_M , -a0_P)); // @todo Should there really be a minus sign for both of them?
       }
     }
 

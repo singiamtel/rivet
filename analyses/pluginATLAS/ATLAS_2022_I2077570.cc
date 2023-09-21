@@ -27,20 +27,20 @@ namespace Rivet {
       // AntiKt4TruthWZJets prescription
       // Photons
       FinalState all_photons(Cuts::abspid == PID::PHOTON);
-      
+
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // true = use muons from prompt tau decays
       DressedLeptons all_dressed_mu(all_photons, bare_mu, 0.1, Cuts::abseta < 2.5, true);
-      
+
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true); // true = use electrons from prompt tau decays
       DressedLeptons all_dressed_el(all_photons, bare_el, 0.1, Cuts::abseta < 2.5, true);
-      
+
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
-            
+
       FastJets jet(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::NONE);
       declare(jet, "Jets");
 
@@ -62,17 +62,17 @@ namespace Rivet {
 
       book(_h["ZpT"],        1, 1, 1);
       book(_h["jetpT"],      2, 1, 1);
-      book(_h["NJets"],      3, 1, 1);
-      book(_h["NJets500"],   4, 1, 1);
+      book(_d["NJets"],      3, 1, 1);
+      book(_d["NJets500"],   4, 1, 1);
       book(_h["minDR"],      5, 1, 1);
       book(_h["rZJ"],        6, 1, 1);
       book(_h["rZJ_coll"],   7, 1, 1);
       book(_h["rZJ_b2b"],    8, 1, 1);
-      book(_h["NJets_coll"], 9, 1, 1);
-      book(_h["NJets_b2b"], 10, 1, 1);
+      book(_d["NJets_coll"], 9, 1, 1);
+      book(_d["NJets_b2b"], 10, 1, 1);
       book(_h["HT"],        11, 1, 1);
       book(_h["minDR600"],  12, 1, 1);
-      book(_h["NJets600"],  13, 1, 1);
+      book(_d["NJets600"],  13, 1, 1);
 
     }
 
@@ -91,7 +91,7 @@ namespace Rivet {
       // Remove all jets within dR < 0.2 of a dressed lepton
       idiscardIfAnyDeltaRLess(jets, muons, 0.2);
       idiscardIfAnyDeltaRLess(jets, elecs, 0.2);
-      
+
       // Remove leptons within dR < 0.4 of a jet
       idiscardIfAnyDeltaRLess(muons, jets, 0.4);
       idiscardIfAnyDeltaRLess(elecs, jets, 0.4);
@@ -118,10 +118,10 @@ namespace Rivet {
 
       // Dilepton selection :: Z mass peak.
       FourMomentum ll = (l1->mom() + l2->mom());
-      double Zm  = ll.mass(); 
+      double Zm  = ll.mass();
       if ( !inRange(Zm/GeV, 71.0, 111.0) ) vetoEvent;
       double ZpT = ll.pT();
-      
+
       // Calculate the observables
       double jet0pT = 0.;
       double cljetpT = 0.;
@@ -140,16 +140,16 @@ namespace Rivet {
       }
       const size_t Njets = jets.size();
 
-      // NJets >= 1      
+      // NJets >= 1
       if (Njets < 1) vetoEvent;
       // Exclusive NJets, jet pT > 100 GeV
 
-      _h["NJets"]->fill(Njets);
+      _d["NJets"]->fill(Njets);
 
       // Z pT
       _h["ZpT"]->fill(ZpT/GeV);
-      
-      //Leading jet pT 
+
+      //Leading jet pT
       jet0pT = jets[0].pT();
       _h["jetpT"]->fill(jet0pT/GeV);
 
@@ -166,27 +166,27 @@ namespace Rivet {
           if (dr < minDR_HTjet)  minDR_HTjet = dr;
         }
         // Fill histograms of HTjet > 600 GeV
-        _h["NJets600"]->fill(Njets);
+        _d["NJets600"]->fill(Njets);
         _h["minDR600"]->fill(minDR_HTjet);
       } // end of HTjet > 600 GeV
 
       // Our high pT phase-space
       if (jet0pT/GeV < 500.0) vetoEvent;
-      
+
       // Exclusive NJets, jet pT > 500 GeV
-      _h["NJets500"]->fill(Njets);
-      
+      _d["NJets500"]->fill(Njets);
+
       // Z/J pT ratio
       _h["rZJ"]->fill(ZpT/cljetpT);
       _h["minDR"]->fill(minDR);
-      
-      // Phase space with DR<1.4       
+
+      // Phase space with DR<1.4
       if (minDR < 1.4) {
-        _h["NJets_coll"]->fill(Njets);
+        _d["NJets_coll"]->fill(Njets);
         _h["rZJ_coll"]->fill(ZpT/cljetpT);
       // Phase space with DR>2.0
       } else if (minDR >2.0) {
-        _h["NJets_b2b"]->fill(Njets);
+        _d["NJets_b2b"]->fill(Njets);
         _h["rZJ_b2b"]->fill(ZpT/cljetpT);
       }
 
@@ -199,6 +199,7 @@ namespace Rivet {
       if (_mode == 0) xsec *= 0.5;
       // Normalize to cross section.
       scale(_h, xsec);
+      scale(_d, xsec);
     } // end of finalize
 
     //@}
@@ -206,7 +207,8 @@ namespace Rivet {
     // define histograms
     size_t _mode;
     map<string, Histo1DPtr> _h;
- 
+    map<string, BinnedHistoPtr<int>> _d;
+
   };
 
   RIVET_DECLARE_PLUGIN(ATLAS_2022_I2077570);

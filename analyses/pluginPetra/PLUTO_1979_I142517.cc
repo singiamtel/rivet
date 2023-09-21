@@ -20,9 +20,13 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-      // counters for R
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
+      book(_c_hadrons, "sigma_hadrons", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_muons, "sigma_muons", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_mult, 1, 1, 1);
+      for (const string label : {"22.0", "27.6", "30.0", "31.6"}) {
+        const double E = std::stod(label);
+        if (isCompatibleWithSqrtS(E*GeV))  Ecm = label;
+      }
     }
 
 
@@ -32,57 +36,24 @@ namespace Rivet {
 
       map<long,int> nCount;
       int ntotal(0);
-      unsigned int nCharged(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
-	if(PID::isCharged(p.pid())) ++nCharged;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
-      // mu+mu- + photons
-      if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	_c_muons->fill();
-      // everything else
+      if (nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) {
+        _c_muons->fill(Ecm); // mu+mu- + photons
+      }
       else {
-	_c_hadrons->fill();
+        _c_hadrons->fill(Ecm); // everything else
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter1D R = (*_c_hadrons/ *_c_muons).mkScatter();
-      double              rval = R.point(0).x();
-      pair<double,double> rerr = R.point(0).xErrs();
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr hadrons;
-      book(hadrons, "sigma_hadrons");
-      Scatter2DPtr muons;
-      book(muons, "sigma_muons"  );
-      Scatter2DPtr mult;
-      book(mult, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	  mult   ->addPoint(x, rval, ex, rerr);
-	  hadrons->addPoint(x, sig_h, ex, make_pair(err_h,err_h));
-	  muons  ->addPoint(x, sig_m, ex, make_pair(err_m,err_m));
-	}
-	else {
-	  mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	  hadrons->addPoint(x, 0., ex, make_pair(0.,.0));
-	  muons  ->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
-      }
+      const double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale({_c_hadrons, _c_muons}, fact);
+      divide(_c_hadrons, _c_muons, _mult);
     }
 
     /// @}
@@ -90,7 +61,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    BinnedHistoPtr<string> _c_hadrons, _c_muons;
+    BinnedEstimatePtr<string> _mult;
+    string Ecm = "";
     /// @}
 
 

@@ -5,7 +5,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
-#include "Rivet/Tools/RHICCommon.hh"
+#include "Rivet/Analyses/RHICCommon.hh"
 
 namespace Rivet {
 

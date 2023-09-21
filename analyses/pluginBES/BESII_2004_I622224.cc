@@ -33,9 +33,15 @@ namespace Rivet {
       book(_h_weight, "TMP/Weight");
     }
 
+    string map2string(const double xi) const {
+      const size_t idx = axis.index(xi) - 1;
+      if (idx < edges.size())  return edges[idx];
+      return "OTHER";
+    }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (edges.empty())  edges = _h_ln->xEdges();
       const ChargedFinalState& fs = apply<ChargedFinalState>(event, "FS");
       if (fs.particles().size()==2 &&
           abs(fs.particles()[0].pid())==13 &&
@@ -44,7 +50,7 @@ namespace Rivet {
         const Vector3 mom3 = p.p3();
         double pp = mom3.mod();
         double xi = -log(2.*pp/sqrtS());
-        _h_ln->fill(xi);
+        _h_ln->fill(map2string(xi));
       }
       _h_weight->fill();
     }
@@ -52,7 +58,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_ln,1./_h_weight->sumW());
+      scale(_h_ln, 1./dbl(*_h_weight));
+      vector<string> edges;
     }
 
     /// @}
@@ -60,8 +67,12 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_ln;
+    BinnedHistoPtr<string> _h_ln;
     CounterPtr _h_weight;
+    vector<string> edges;
+    YODA::Axis<double> axis{0.0, 0.3875, 0.5875, 0.7, 0.8, 0.9, 1.0,
+                            1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+                            2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.1, 3.4};
     /// @}
 
 

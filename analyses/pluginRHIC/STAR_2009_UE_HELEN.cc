@@ -16,10 +16,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    STAR_2009_UE_HELEN()
-      : Analysis("STAR_2009_UE_HELEN")
-    {
-    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2009_UE_HELEN);
 
 
     /// @name Analysis methods
@@ -27,7 +24,7 @@ namespace Rivet {
 
     void init() {
       // Charged final state, |eta|<1, pT>0.2GeV
-      const Cut c = Cuts::etaIn(-1.0, 1.0) && Cuts::pT >= 0.2*GeV;
+      const Cut c = Cuts::abseta < 1.0 && Cuts::pT >= 0.2*GeV;
 
       const ChargedFinalState cfs(c);
       declare(cfs, "CFS");
@@ -52,9 +49,9 @@ namespace Rivet {
       declare(FastJets(jfs, FastJets::SISCONE, 0.7), "AllJets");
 
       // Book histograms
-      book(_hist_pmaxnchg   , 1, 1, 1);
-      book(_hist_pminnchg   , 2, 1, 1);
-      book(_hist_anchg      , 3, 1, 1);
+      book(_hist_pmaxnchg, 1, 1, 1);
+      book(_hist_pminnchg, 2, 1, 1);
+      book(_hist_anchg,    3, 1, 1);
     }
 
 
@@ -72,10 +69,10 @@ namespace Rivet {
       // The jet acceptance region is |eta|<(1-R)=0.3  (with R = jet radius)
       // Jets also must have a neutral energy fraction of < 0.7
       Jets jets;
-      for (const Jet & jet : alljets) {
-        if (jet.neutralEnergy()/jet.totalEnergy() < 0.7 &&
-	    jet.abseta() < 0.3)
+      for (const Jet& jet : alljets) {
+        if (jet.neutralEnergy()/jet.totalEnergy() < 0.7 && jet.abseta() < 0.3) {
           jets.push_back(jet);
+        }
       }
 
       // This analysis requires a di-jet like event.
@@ -99,7 +96,7 @@ namespace Rivet {
 
       // Now lets start ...
       const double jetphi = jets[0].phi();
-      const double jetpT  = jets[0].pT();
+      const double jetpT  = jets[0].pT()/GeV;
 
       size_t numTrans1(0), numTrans2(0), numAway(0);
 
@@ -137,9 +134,9 @@ namespace Rivet {
       } // end charged particle loop
 
       // Fill the histograms
-      _hist_pmaxnchg->fill(jetpT, (numTrans1>numTrans2 ? numTrans1 : numTrans2)/(2*PI/3));
-      _hist_pminnchg->fill(jetpT, (numTrans1<numTrans2 ? numTrans1 : numTrans2)/(2*PI/3));
-      _hist_anchg->fill(jetpT, numAway/(PI*0.7*0.7)); // jet area = pi*R^2
+      _hist_pmaxnchg->fill(jetpT, double(numTrans1>numTrans2 ? numTrans1 : numTrans2)/(2*PI/3));
+      _hist_pminnchg->fill(jetpT, double(numTrans1<numTrans2 ? numTrans1 : numTrans2)/(2*PI/3));
+      _hist_anchg->fill(jetpT, (double)numAway/(PI*0.7*0.7)); // jet area = pi*R^2
 
     }
 

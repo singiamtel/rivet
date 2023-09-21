@@ -98,7 +98,7 @@ namespace Rivet {
       double d = 3./(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double a =  d*(bin.xMax() - bin.xMin());
@@ -129,11 +129,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_h_cTheta);
-      Scatter2DPtr h_alpha_xi;
+      Estimate1DPtr h_alpha_xi;
       book(h_alpha_xi,2,1,1);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_cTheta);
-      h_alpha_xi->addPoint(0.5, alpha.first, make_pair(0.5,0.5),
-                           make_pair(alpha.second.first,alpha.second.second) );
+      h_alpha_xi->bin(1).set(alpha.first, alpha.second);
     }
 
     /// @}

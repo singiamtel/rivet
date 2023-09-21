@@ -23,12 +23,15 @@ namespace Rivet {
       // Book histograms
       book(_c_hadrons, "/TMP/sigma_hadrons");
       book(_c_muons, "/TMP/sigma_muons");
-      if(isCompatibleWithSqrtS(3*GeV))
+      if (isCompatibleWithSqrtS(3*GeV)) {
       	book(_h_charged, 3, 1, 1);
-      else if(isCompatibleWithSqrtS(4.8*GeV))
+      }
+      else if (isCompatibleWithSqrtS(4.8*GeV)) {
         book(_h_charged, 3, 1, 2);
-      else if(isCompatibleWithSqrtS(7.4*GeV))
+      }
+      else if (isCompatibleWithSqrtS(7.4*GeV)) {
         book(_h_charged, 3, 1, 3);
+      }
     }
 
 
@@ -42,61 +45,51 @@ namespace Rivet {
       	nCount[p.pid()] += 1;
       	++ntotal;
       }
-      // mu+mu- + photons
-      if(nCount[-13]==1 and nCount[13]==1 &&
-      	 ntotal==2+nCount[22])
-      	_c_muons->fill();
+      if (nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) {
+      	_c_muons->fill(); // mu+mu- + photons
+      }
       // everything else
       else {
       	_c_hadrons->fill();
-	if(_h_charged) {
-	  for (const Particle& p : fs.particles()) {
-	    if(PID::isCharged(p.pid())) {
-	      double x = 2.*p.p3().mod()/sqrtS();
-	      _h_charged->fill(x);
-	    }
-	  }
-	}
+        if(_h_charged) {
+          for (const Particle& p : fs.particles()) {
+            if(PID::isCharged(p.pid())) {
+              double x = 2.*p.p3().mod()/sqrtS();
+              _h_charged->fill(x);
+            }
+          }
+        }
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      if(_h_charged) {
+      if (_h_charged) {
       	scale(_h_charged, crossSection()/ sumOfWeights() /microbarn*sqr(sqrtS()));
       }
       // R
-      Scatter1D R = (*_c_hadrons/ *_c_muons).mkScatter();
-      double              rval = R.point(0).x();
-      pair<double,double> rerr = R.point(0).xErrs();
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr hadrons;
+      const double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale({_c_hadrons, _c_muons}, fact);
+      BinnedEstimatePtr<string> hadrons;
       book(hadrons, 1,1,1);
-      Scatter2DPtr muons;
-      book(muons, "sigma_muons"  );
-      Scatter2DPtr mult;
-      book(mult, 2,1,1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-      	const double x  = temphisto.point(b).x();
-      	pair<double,double> ex = temphisto.point(b).xErrs();
-      	pair<double,double> ex2 = ex;
-      	if(ex2.first ==0.) ex2. first=0.0001;
-      	if(ex2.second==0.) ex2.second=0.0001;
-      	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-      	  mult   ->addPoint(x, rval, ex, rerr);
-      	  hadrons->addPoint(x, sig_h, ex, make_pair(err_h,err_h));
-      	  muons  ->addPoint(x, sig_m, ex, make_pair(err_m,err_m));
+      BinnedEstimatePtr<string> muons;
+      book(muons, "sigma_muons", hadrons->xEdges());
+      for (auto& b : hadrons->bins()) {
+        const double sqs = std::stod(b.xEdge());
+        if (isCompatibleWithSqrtS(sqs)) {
+      	  b.set(_c_hadrons->val(), _c_hadrons->err());
+          muons->bin(b.index()).set(_c_muons->val(), _c_muons->err());
       	}
-      	else {
-      	  mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-      	  hadrons->addPoint(x, 0., ex, make_pair(0.,.0));
-      	  muons  ->addPoint(x, 0., ex, make_pair(0.,.0));
+      }
+
+      Estimate0D R = *_c_hadrons/ *_c_muons;
+      BinnedEstimatePtr<string> mult;
+      book(mult, 2,1,1);
+      for (auto& b : mult->bins()) {
+        const double sqs = std::stod(b.xEdge());
+        if (isCompatibleWithSqrtS(sqs)) {
+      	  b.set(R.val(), R.errPos());
       	}
       }
     }

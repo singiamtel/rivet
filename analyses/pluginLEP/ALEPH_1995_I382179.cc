@@ -26,9 +26,9 @@ namespace Rivet {
       declare(ChargedFinalState(), "FS");
 
       // Book histograms
-      book(_histXpPion , 1, 1, 1);
-      book(_histXpKaon , 2, 1, 1);
-      book(_histXpProton , 3, 1, 1);
+      book(_histXpPion,   1, 1, 1);
+      book(_histXpKaon,   2, 1, 1);
+      book(_histXpProton, 3, 1, 1);
 
     }
 

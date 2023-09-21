@@ -42,10 +42,10 @@ namespace Rivet {
 
       // individual channels
       book(_hNjets      ,1, 1, _mode + 1);
-      book(_hNjetsRatio ,2, 1, _mode + 1, true);
+      book(_hNjetsRatio ,2, 1, _mode + 1);
       // combination
       book(_hNjets_comb      ,1, 2, _mode + 1);
-      book(_hNjetsRatio_comb ,2, 2, _mode + 1, true);
+      book(_hNjetsRatio_comb ,2, 2, _mode + 1);
 
       _weights.resize(5);
       for (size_t i = 0; i < 5; i++)
@@ -96,19 +96,11 @@ namespace Rivet {
     /// @}
 
     void finalize() {
-      for (size_t i = 0; i < 4; ++i) {
-        double  n = _hNjets->bin(i + 1).sumW();
-        double dN = _hNjets->bin(i + 1).sumW2();
-        double  d = _hNjets->bin(i).sumW();
-        double dD = _hNjets->bin(i).sumW2();
-        double r = safediv(n, d);
-        double e = sqrt( safediv(r * (1 - r), d) );
-        if ( _hNjets->effNumEntries() != _hNjets->numEntries() ) {
-          // use F. James's approximation for weighted events:
-          e = sqrt( safediv((1 - 2 * r) * dN + r * r * dD, d * d) );
-        }
-        _hNjetsRatio->point(i).setY(r, e);
-        _hNjetsRatio_comb->point(i).setY(r, e);
+      for (size_t i = 1; i < 5; ++i) {
+        const double v = _hNjets->bin(i + 1).sumW() / _hNjets->bin(i).sumW();
+        const double e = _hNjets->bin(i + 1).errW() / _hNjets->bin(i).errW();
+        _hNjetsRatio->bin(i).set(v, e);
+        _hNjetsRatio_comb->bin(i).set(v, e);
       }
 
       scale(_hNjets,      crossSectionPerEvent() );
@@ -126,7 +118,7 @@ namespace Rivet {
   private:
 
     vector<CounterPtr> _weights;
-    Scatter2DPtr _hNjetsRatio, _hNjetsRatio_comb;
+    Estimate1DPtr _hNjetsRatio, _hNjetsRatio_comb;
     Histo1DPtr _hNjets, _hNjets_comb;
   };
 

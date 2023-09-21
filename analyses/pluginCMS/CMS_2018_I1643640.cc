@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -18,54 +17,21 @@ namespace Rivet {
       FastJets akt(fs, FastJets::ANTIKT, 0.4);
       declare(akt, "antikT");
 
-      Histo1DPtr tmp;
-
-      _h_deltaPhi_2J_phi12.add( 200.,  300., book(tmp, 1, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 300.,  400., book(tmp, 2, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 400.,  500., book(tmp, 3, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 500.,  600., book(tmp, 4, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 600.,  700., book(tmp, 5, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 700.,  800., book(tmp, 6, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 800.,  1000., book(tmp, 7, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 1000., 1200., book(tmp, 8, 1, 1));
-      _h_deltaPhi_2J_phi12.add( 1200., 7000., book(tmp, 9, 1, 1));
-
-      _h_deltaPhi_3J_phi12.add( 200.,  300., book(tmp, 10, 1, 1));
-      _h_deltaPhi_3J_phi12.add( 300.,  400., book(tmp, 11, 1, 1));
-      _h_deltaPhi_3J_phi12.add( 400.,  500., book(tmp, 12, 1, 1));
-      _h_deltaPhi_3J_phi12.add( 500.,  600., book(tmp, 13, 1, 1));
-      _h_deltaPhi_3J_phi12.add( 600.,  700., book(tmp, 14, 1, 1));
-      _h_deltaPhi_3J_phi12.add( 700.,  800., book(tmp, 15, 1, 1));
-      _h_deltaPhi_3J_phi12.add( 800.,  1000., book(tmp, 16, 1, 1));
-      _h_deltaPhi_3J_phi12.add( 1000., 7000., book(tmp, 17, 1, 1));
-
-      _h_deltaPhi_4J_phi12.add( 200.,  300., book(tmp, 18, 1, 1));
-      _h_deltaPhi_4J_phi12.add( 300.,  400., book(tmp, 19, 1, 1));
-      _h_deltaPhi_4J_phi12.add( 400.,  500., book(tmp, 20, 1, 1));
-      _h_deltaPhi_4J_phi12.add( 500.,  600., book(tmp, 21, 1, 1));
-      _h_deltaPhi_4J_phi12.add( 600.,  700., book(tmp, 22, 1, 1));
-      _h_deltaPhi_4J_phi12.add( 700.,  800., book(tmp, 23, 1, 1));
-      _h_deltaPhi_4J_phi12.add( 800.,  1000., book(tmp, 24, 1, 1));
-      _h_deltaPhi_4J_phi12.add( 1000., 7000., book(tmp, 25, 1, 1));
-
-      _h_deltaPhi_3J_phimin2J.add( 200.,  300., book(tmp, 26, 1, 1));
-      _h_deltaPhi_3J_phimin2J.add( 300.,  400., book(tmp, 27, 1, 1));
-      _h_deltaPhi_3J_phimin2J.add( 400.,  500., book(tmp, 28, 1, 1));
-      _h_deltaPhi_3J_phimin2J.add( 500.,  600., book(tmp, 29, 1, 1));
-      _h_deltaPhi_3J_phimin2J.add( 600.,  700., book(tmp, 30, 1, 1));
-      _h_deltaPhi_3J_phimin2J.add( 700.,  800., book(tmp, 31, 1, 1));
-      _h_deltaPhi_3J_phimin2J.add( 800.,  1000., book(tmp, 32, 1, 1));
-      _h_deltaPhi_3J_phimin2J.add( 1000., 7000., book(tmp, 33, 1, 1));
-
-      _h_deltaPhi_4J_phimin2J.add( 200.,  300., book(tmp, 34, 1, 1));
-      _h_deltaPhi_4J_phimin2J.add( 300.,  400., book(tmp, 35, 1, 1));
-      _h_deltaPhi_4J_phimin2J.add( 400.,  500., book(tmp, 36, 1, 1));
-      _h_deltaPhi_4J_phimin2J.add( 500.,  600., book(tmp, 37, 1, 1));
-      _h_deltaPhi_4J_phimin2J.add( 600.,  700., book(tmp, 38, 1, 1));
-      _h_deltaPhi_4J_phimin2J.add( 700.,  800., book(tmp, 39, 1, 1));
-      _h_deltaPhi_4J_phimin2J.add( 800.,  1000., book(tmp, 40, 1, 1));
-      _h_deltaPhi_4J_phimin2J.add( 1000., 7000., book(tmp, 41, 1, 1));
-
+      const vector<double> edges_2J{200., 300., 400., 500., 600., 700., 800., 1000., 1200., 7000.};
+      const vector<double> edges{200., 300., 400., 500., 600., 700., 800., 1000., 7000.};
+      book(_h_deltaPhi_2J_phi12, edges_2J);
+      book(_h_deltaPhi_3J_phi12, edges);
+      book(_h_deltaPhi_4J_phi12, edges);
+      book(_h_deltaPhi_3J_phimin2J, edges);
+      book(_h_deltaPhi_4J_phimin2J, edges);
+      for (size_t i=1; i<_h_deltaPhi_2J_phi12->numBins()+1; ++i) {
+        book(_h_deltaPhi_2J_phi12->bin(i), i, 1, 1);
+        if (i==9)  continue;
+        book(_h_deltaPhi_3J_phi12->bin(i), 9+i, 1, 1);
+        book(_h_deltaPhi_4J_phi12->bin(i), 17+i, 1, 1);
+        book(_h_deltaPhi_3J_phimin2J->bin(i), 25+i, 1, 1);
+        book(_h_deltaPhi_4J_phimin2J->bin(i), 33+i, 1, 1);
+      }
     }
 
 
@@ -77,7 +43,7 @@ namespace Rivet {
         if ( (jets[0].pT() >= 200.*GeV)  &&  (jets[1].pT() >= 100.*GeV) ) {
           if ( (fabs(jets[0].rap()) <= 2.5)  &&  (fabs(jets[1].rap()) <= 2.5) ) {
             double dphi = deltaPhi(jets[0].phi(), jets[1].phi());
-            _h_deltaPhi_2J_phi12.fill(jets[0].pT(), dphi, 1.0);
+            _h_deltaPhi_2J_phi12->fill(jets[0].pT(), dphi);
           }
         }
       }
@@ -87,7 +53,7 @@ namespace Rivet {
         if ( (jets[0].pT() >= 200.*GeV)  &&  (jets[1].pT() >= 100.*GeV)  && (jets[2].pT() >= 100.*GeV) ) {
           if ( (fabs(jets[0].rap()) <= 2.5)  &&  (fabs(jets[1].rap()) <= 2.5) &&  (fabs(jets[2].rap()) <= 2.5)) {
             double dphi = deltaPhi(jets[0].phi(), jets[1].phi());
-            _h_deltaPhi_3J_phi12.fill(jets[0].pT(), dphi, 1.0);
+            _h_deltaPhi_3J_phi12->fill(jets[0].pT(), dphi);
           }
         }
       }
@@ -97,7 +63,7 @@ namespace Rivet {
         if ( (jets[0].pT() >= 200.*GeV)  &&  (jets[1].pT() >= 100.*GeV)  && (jets[2].pT() >= 100.*GeV)   && (jets[3].pT() >= 100.*GeV)) {
           if ( (fabs(jets[0].rap()) <= 2.5)  &&  (fabs(jets[1].rap()) <= 2.5) &&  (fabs(jets[2].rap()) <= 2.5) &&  (fabs(jets[3].rap()) <= 2.5)) {
             double dphi = deltaPhi(jets[0].phi(), jets[1].phi());
-            _h_deltaPhi_4J_phi12.fill(jets[0].pT(), dphi, 1.0);
+            _h_deltaPhi_4J_phi12->fill(jets[0].pT(), dphi);
           }
         }
       }
@@ -116,7 +82,7 @@ namespace Rivet {
               // double Dphis2J[3] = {dphi01,dphi02,dphi12};
               // double DPhi2Jmin = Dphis2J[0];
               // for (int gg=1; gg<3; ++gg) { if (DPhi2Jmin>Dphis2J[gg]) DPhi2Jmin = Dphis2J[gg]; }
-              _h_deltaPhi_3J_phimin2J.fill(jets[0].pT(), DPhi2Jmin, 1.0);
+              _h_deltaPhi_3J_phimin2J->fill(jets[0].pT(), DPhi2Jmin);
             }
           }
         }
@@ -139,7 +105,7 @@ namespace Rivet {
               // for(int gg=1; gg<6; ++gg){ if(DPhi2Jmin>Dphis2J[gg]){DPhi2Jmin=Dphis2J[gg];} }
               vector<double> Dphis2J{dphi01,dphi02,dphi03,dphi12,dphi13,dphi23};
               double DPhi2Jmin = min(Dphis2J);
-              _h_deltaPhi_4J_phimin2J.fill(jets[0].pT(), DPhi2Jmin, 1.0);
+              _h_deltaPhi_4J_phimin2J->fill(jets[0].pT(), DPhi2Jmin);
             }
           }
         }
@@ -148,21 +114,21 @@ namespace Rivet {
 
 
     void finalize() {
-      for (Histo1DPtr histo : _h_deltaPhi_2J_phi12.histos()) normalize(histo);
-      for (Histo1DPtr histo : _h_deltaPhi_3J_phi12.histos()) normalize(histo);
-      for (Histo1DPtr histo : _h_deltaPhi_4J_phi12.histos()) normalize(histo);
-      for (Histo1DPtr histo : _h_deltaPhi_3J_phimin2J.histos()) normalize(histo);
-      for (Histo1DPtr histo : _h_deltaPhi_4J_phimin2J.histos()) normalize(histo);
+      normalize(_h_deltaPhi_2J_phi12);
+      normalize(_h_deltaPhi_3J_phi12);
+      normalize(_h_deltaPhi_4J_phi12);
+      normalize(_h_deltaPhi_3J_phimin2J);
+      normalize(_h_deltaPhi_4J_phimin2J);
     }
 
 
   private:
 
-    BinnedHistogram _h_deltaPhi_2J_phi12;
-    BinnedHistogram _h_deltaPhi_3J_phi12;
-    BinnedHistogram _h_deltaPhi_4J_phi12;
-    BinnedHistogram _h_deltaPhi_3J_phimin2J;
-    BinnedHistogram _h_deltaPhi_4J_phimin2J;
+    Histo1DGroupPtr _h_deltaPhi_2J_phi12;
+    Histo1DGroupPtr _h_deltaPhi_3J_phi12;
+    Histo1DGroupPtr _h_deltaPhi_4J_phi12;
+    Histo1DGroupPtr _h_deltaPhi_3J_phimin2J;
+    Histo1DGroupPtr _h_deltaPhi_4J_phimin2J;
 
   };
 

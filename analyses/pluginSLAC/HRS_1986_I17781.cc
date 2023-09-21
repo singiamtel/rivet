@@ -45,7 +45,7 @@ namespace Rivet {
       // Thrust
       const Thrust& thrust = apply<Thrust>(event, "Thrust");
       UnstableParticles ufs = apply<UnstableParticles>(event,"UFS");
-      for(const Particle & p : ufs.particles(Cuts::abspid==3122)) {
+      for (const Particle & p : ufs.particles(Cuts::abspid==3122)) {
       	double xE = 2.*p.E()/sqrtS();
       	Vector3 mom3 = p.p3();
         const double energy = p.E();
@@ -53,9 +53,9 @@ namespace Rivet {
       	double beta = modp/energy;
         const double momT = dot(thrust.thrustAxis(), mom3);
         const double rapidityT = 0.5 * std::log((energy + momT) / (energy - momT));
-	_h_spect->fill(xE,1./beta);
-	_h_rap->fill(abs(rapidityT));
-	_h_mult->fill(sqrtS());
+        _h_spect->fill(xE,1./beta);
+        _h_rap->fill(abs(rapidityT));
+        _h_mult->fill(29);
       }
     }
 
@@ -72,7 +72,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_spect,_h_rap,_h_mult;
+    Histo1DPtr _h_spect,_h_rap;
+    BinnedHistoPtr<int> _h_mult;
     ///@}
 
 

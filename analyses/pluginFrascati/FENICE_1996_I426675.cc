@@ -49,21 +49,12 @@ namespace Rivet {
       double fact = crossSection()/ sumOfWeights() /nanobarn;
       double sig_h = _c_hadrons->val()*fact;
       double err_h = _c_hadrons->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr hadrons;
+      Estimate1DPtr hadrons;
       book(hadrons, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-       	const double x  = temphisto.point(b).x();
-       	pair<double,double> ex = temphisto.point(b).xErrs();
-       	pair<double,double> ex2 = ex;
-       	if(ex2.first ==0.) ex2. first=0.0001;
-       	if(ex2.second==0.) ex2.second=0.0001;
-      	if (inRange(sqr(sqrtS()/GeV), x-ex2.first, x+ex2.second)) {
-       	  hadrons->addPoint(x, sig_h, ex, make_pair(err_h,err_h));
+      for (auto& b : hadrons->bins()) {
+      	if (inRange(sqr(sqrtS()/GeV), b.xMin(), b.xMax())) {
+       	  b.set(sig_h, err_h);
       	}
-      	else {
-       	  hadrons->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
       }
     }
 

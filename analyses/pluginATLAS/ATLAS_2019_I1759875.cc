@@ -3,7 +3,6 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -108,12 +107,12 @@ namespace Rivet {
       for (auto& hist : _h_multi) {
         if (hist.first.find("_norm") != std::string::npos) {
           // scaling for normalised distribution according integral of whole set
-          double norm2D = integral2D(hist.second);
-          hist.second.scale(1./norm2D, this);
+          const double norm2D = hist.second->integral(false);
+          scale(hist.second, 1./norm2D);
         }
         else {
           // scaling for non-normalised distribution
-          hist.second.scale(sf, this);
+          scale(hist.second, sf);
         }
       }
     }
@@ -133,36 +132,26 @@ namespace Rivet {
       _h["norm_" + name]->fill(value);
     }
 
-    void bookHisto2D(const std::string name, unsigned int index, std::vector<double> massbins) {
-      unsigned int nmbins = massbins.size()-1;
-      for (unsigned int i=0; i < nmbins; ++i) {
-	{ Histo1DPtr tmp; _h_multi[name].add(massbins[i], massbins[i+1], book(tmp, index,1,1+i)); }
-	const std::string namen = name+"_norm";
-	{ Histo1DPtr tmp; _h_multi[namen].add(massbins[i], massbins[i+1], book(tmp, index+1,1,1+i)); }
+    void bookHisto2D(const std::string& name, unsigned int index, const std::vector<double>& massbins) {
+      book(_h_multi[name], massbins);
+      book(_h_multi[name+"_norm"], massbins);
+      for (size_t i=1; i < _h_multi[name]->numBins()+1; ++i) {
+        book(_h_multi[name]->bin(i), index+1, 1, i);
+        book(_h_multi[name+"_norm"]->bin(i), index+1, 1, i);
       }
     }
 
 
 
-    void fillHisto2D(const std::string name,
-		     double val, double massval) {
-      _h_multi[name].fill(massval, val);
-      _h_multi[name+"_norm"].fill(massval, val);
+    void fillHisto2D(const std::string& name, double val, double massval) {
+      _h_multi[name]->fill(massval, val);
+      _h_multi[name+"_norm"]->fill(massval, val);
     }
-
-
-    double integral2D(BinnedHistogram& h_multi) {
-        double total_integral = 0;
-        for  (Histo1DPtr& h : h_multi.histos()) {
-          total_integral += h->integral(false);
-        }
-        return total_integral;
-      }
 
 
     // pointers to 1D and 2D histograms
     map<string, Histo1DPtr> _h;
-    map<string, BinnedHistogram> _h_multi;
+    map<string, Histo1DGroupPtr> _h_multi;
     /// @}
     // acceptance counter
 

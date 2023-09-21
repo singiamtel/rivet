@@ -88,7 +88,7 @@ namespace Rivet {
 
     Histo1DPtr _histPtK0s, _histPtLambda, _histPtAntiLambda, _histPtXi, _histPtPhi;
     Histo1DPtr _temp_h_Lambdas, _temp_h_Kzeros;
-    Scatter2DPtr _h_LamKzero;
+    Estimate1DPtr _h_LamKzero;
 
   };
 

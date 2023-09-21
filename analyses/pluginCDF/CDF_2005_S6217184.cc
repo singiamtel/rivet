@@ -36,13 +36,13 @@ namespace Rivet {
           _jsnames_pT[k] = pname;
           const JetShape jsp(fj, 0.0, 0.7, 7, PTEDGES[k], PTEDGES[k+1], 0.1, 0.7, RAPIDITY);
           declare(jsp, pname);
-          book(_profhistRho_pT[k] ,i+1, 1, j+1);
-          book(_profhistPsi_pT[k] ,6+i+1, 1, j+1);
+          book(_profhistRho_pT[k], i+1, 1, j+1);
+          book(_profhistPsi_pT[k], 6+i+1, 1, j+1);
         }
       }
 
       // Final histo
-      book(_profhistPsi_vs_pT, 13, 1, 1, true);
+      book(_profhistPsi_vs_pT, 13, 1, 1);
     }
 
 
@@ -79,13 +79,11 @@ namespace Rivet {
     // Finalize
     void finalize() {
       // Construct final 1-Psi(0.3/0.7) profile from Psi profiles
-      for (size_t i = 0; i < PTEDGES.size()-1; ++i) {
+      for (auto& e : _profhistPsi_vs_pT->bins()) {
         // Get entry for rad_Psi = 0.2 bin
-        /// @todo Not a great handling of empty bins! Skip point, or set NaN values?!
-        const auto& bi = _profhistPsi_pT[i]->bin(3);
-        const double y  = (bi.effNumEntries() > 0) ? bi.yMean() : 0;
-        const double ey = (bi.effNumEntries() > 1) ? bi.yStdErr() : 0;
-        _profhistPsi_vs_pT->point(i).setY(y, ey);
+        const auto& b = _profhistPsi_pT[e.index()]->bin(3);
+        if (!b.effNumEntries()) continue;
+        e.set(b.yMean(), b.yStdErr());
       }
     }
 
@@ -107,7 +105,7 @@ namespace Rivet {
     /// @{
     Profile1DPtr _profhistRho_pT[18];
     Profile1DPtr _profhistPsi_pT[18];
-    Scatter2DPtr _profhistPsi_vs_pT;
+    Estimate1DPtr _profhistPsi_vs_pT;
     /// @}
 
   };

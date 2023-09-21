@@ -189,7 +189,7 @@ namespace Rivet {
 	    if (il==0) scale(_h_br_B[ix][iy][il],rLife);
 	  }
 	  // A_I plots
-	  Scatter2DPtr AI;
+	  Estimate1DPtr AI;
 	  book(AI,1+ix,1+iy,3);
 	  asymm(_h_br_B[ix][iy][1],_h_br_B[ix][iy][0],AI);
 	}

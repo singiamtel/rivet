@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -15,9 +14,7 @@ namespace Rivet {
     /// @{
 
     /// Constructor
-    ATLAS_2012_I1125575()
-      : Analysis("ATLAS_2012_I1125575")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1125575);
 
     /// @}
 
@@ -75,22 +72,20 @@ namespace Rivet {
     void initializeProfiles(Profile1DPtr plots[5][2], int distribution) {
       for (int i = 0; i < 5; ++i) {
         for (int j = 0; j < 2; ++j) {
-          book(plots[i][j] ,distribution, i+1, j+1);
+          book(plots[i][j], distribution, i+1, j+1);
         }
       }
     }
 
 
-    void initializeHistograms(BinnedHistogram plots[5][2], int distribution) {
-      Scatter2D refscatter = refData(1, 1, 1);
-      for (int i = 0; i < 5; ++i) {
-        for (int y = 0; y < 2; ++y) {
-          for (size_t j = 0; j < refscatter.numPoints(); ++j) {
-            int histogram_number = ((j+1)*2)-((y+1)%2);
-            double low_edge = refscatter.point(j).xMin();
-            double high_edge = refscatter.point(j).xMax();
-            Histo1DPtr tmp;
-            plots[i][y].add(low_edge, high_edge, book(tmp, distribution, i+1, histogram_number));
+    void initializeHistograms(Histo1DGroupPtr plots[5][2], int distribution) {
+      const Estimate1D& refest = refData(1, 1, 1);
+      for (size_t i = 0; i < 5; ++i) {
+        for (size_t y = 0; y < 2; ++y) {
+          book(plots[i][y], refest.xEdges());
+          for (auto& b : plots[i][y]->bins()) {
+            size_t histogram_number = (b.index()*2)-((y+1)%2);
+            book(b, distribution, i+1, histogram_number);
           }
         }
       }
@@ -175,12 +170,12 @@ namespace Rivet {
     }
 
 
-    void fillHistograms(BinnedHistogram plots[5][2], double var[5][2], double lead_pt[5]) {
+    void fillHistograms(Histo1DGroupPtr plots[5][2], double var[5][2], double lead_pt[5]) {
       for (int i=0; i<5; ++i) {
         double pt = lead_pt[i];
         for (int j=0; j<2; ++j) {
           double v = var[i][j];
-          plots[i][j].fill(pt, v);
+          plots[i][j]->fill(pt, v);
         }
       }
     }
@@ -196,22 +191,13 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      finalizeHistograms(_h_Nch);
-      finalizeHistograms(_h_PtAvg);
-      finalizeHistograms(_h_PtSum);
-    }
-
-
-    void finalizeHistograms(BinnedHistogram plots[5][2]) {
-      for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 2; ++j) {
-          vector<Histo1DPtr> histos = plots[i][j].histos();
-          for(Histo1DPtr h : histos) {
-            scale(h, 1.0/ *_nEvents[i]);
-          }
-        }
+      for (size_t i = 0; i < 5; ++i) {
+        scale(_h_Nch[i], 1.0/ *_nEvents[i]);
+        scale(_h_PtAvg[i], 1.0/ *_nEvents[i]);
+        scale(_h_PtSum[i], 1.0/ *_nEvents[i]);
       }
     }
+
 
     /// @}
 
@@ -225,9 +211,9 @@ namespace Rivet {
     Profile1DPtr _h_meanPtAvg[5][2];
     Profile1DPtr _h_meanPtSum[5][2];
 
-    BinnedHistogram _h_Nch[5][2];
-    BinnedHistogram _h_PtAvg[5][2];
-    BinnedHistogram _h_PtSum[5][2];
+    Histo1DGroupPtr _h_Nch[5][2];
+    Histo1DGroupPtr _h_PtAvg[5][2];
+    Histo1DGroupPtr _h_PtSum[5][2];
 
   };
 

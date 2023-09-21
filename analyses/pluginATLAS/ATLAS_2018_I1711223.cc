@@ -14,13 +14,13 @@ namespace Rivet {
   /// @brief Electroweak WZjj production cross section at 13 TeV
   class ATLAS_2018_I1711223 : public Analysis {
   public:
-   
+
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1711223);
 
     /// @name Analysis methods
     //@{
-    
+
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -42,7 +42,7 @@ namespace Rivet {
       MSG_WARNING("\033[91;1mLIMITED VALIDITY - check info file for details!\033[m");
 
       //Jets
-    
+
     	// Muons
     	PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // true = use muons from prompt tau decays
     	DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 5.0, true);
@@ -55,7 +55,7 @@ namespace Rivet {
     	VetoedFinalState vfs(FinalState(Cuts::abseta < 5));
     	vfs.addVetoOnThisFinalState(all_dressed_el);
     	vfs.addVetoOnThisFinalState(all_dressed_mu);
-          
+
     	FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
     	declare(jets, "Jets");
 
@@ -63,22 +63,20 @@ namespace Rivet {
       book(_h["MTWZ"],         "_mTWZ", refData( 6, 1, 1));
       book(_h["sumpt"],       "_sumpT", refData( 8, 1, 1));
       book(_h["dphiWZ"],     "_dphiWZ", refData(10, 1, 1));
-      book(_h["Njets_VBS"],   "_njets", refData(12, 1, 1));
       book(_h["mjj"],           "_mjj", refData(14, 1, 1));
       book(_h["dyjj"],       "_dRapjj", refData(16, 1, 1));
       book(_h["dphijj"],     "_dPhijj", refData(18, 1, 1));
-      book(_h["Njets_gap"], "_gapJets", refData(20, 1, 1));
+      book(_d["Njets_VBS"],   "_njets", refData<YODA::BinnedEstimate<string>>(12, 1, 1));
+      book(_d["Njets_gap"], "_gapJets", refData<YODA::BinnedEstimate<string>>(20, 1, 1));
 
       // book output bar charts
       book(_s["MTWZ"],       6, 1, 1);
       book(_s["sumpt"],      8, 1, 1);
       book(_s["dphiWZ"],    10, 1, 1);
-      book(_s["Njets_VBS"], 12, 1, 1);
       book(_s["mjj"],       14, 1, 1);
       book(_s["dyjj"],      16, 1, 1);
       book(_s["dphijj"],    18, 1, 1);
-      book(_s["Njets_gap"], 20, 1, 1);
-      
+
     }
 
 
@@ -97,17 +95,10 @@ namespace Rivet {
       double WeightTotal1, WeightTotal2, WeightTotal3;
 
       //---Fiducial PS: assign leptons to W and Z bosons using Resonant shape algorithm
-      if (dressedleptons.size() < 3 || neutrinos.size() < 1) vetoEvent;                                                              
- 
-      //--- count num of electrons and muons
-      int Nel = 0, Nmu = 0;
-      for (const Particle& l : dressedleptons) {
-        if (l.abspid() == 11)  ++Nel;
-        if (l.abspid() == 13)  ++Nmu;
-      }
+      if (dressedleptons.size() < 3 || neutrinos.size() < 1) vetoEvent;
 
       int icomb=0;
-      // try Z pair of leptons 01                                                              
+      // try Z pair of leptons 01
     if ( (dressedleptons[0].pid() ==-(dressedleptons[1].pid()))  && (dressedleptons[2].pid()*neutrinos[0].pid()< 0) && (dressedleptons[2].abspid()==neutrinos[0].abspid()-1)) {
         MassZ01 = (dressedleptons[0].momentum() + dressedleptons[1].momentum()).mass();
         MassW2 = (dressedleptons[2].momentum() + neutrinos[0].momentum()).mass();
@@ -126,7 +117,7 @@ namespace Rivet {
         MassW0 = (dressedleptons[0].momentum() + neutrinos[0].momentum()).mass();
         icomb = 3;
       }
- 
+
       if (icomb<=0)  vetoEvent;
 
 
@@ -170,7 +161,7 @@ namespace Rivet {
       }
 
       //---- CUTS (based on Table 1 WZ: 36.1 fb-1)----//
-      if (Wlepton.pT() <= 20*GeV || Zlepton1.pT() <= 15*GeV || Zlepton2.pT() <= 15*GeV)     vetoEvent;      
+      if (Wlepton.pT() <= 20*GeV || Zlepton1.pT() <= 15*GeV || Zlepton2.pT() <= 15*GeV)     vetoEvent;
       if (Wlepton.abseta() >= 2.5 || Zlepton1.abseta() >= 2.5 || Zlepton2.abseta() >= 2.5)  vetoEvent;
       if (fabs(Zboson.mass()/GeV - MZ_PDG) >= 10.) vetoEvent;
       if (Wboson_mT <= 30*GeV)                     vetoEvent;
@@ -185,14 +176,14 @@ namespace Rivet {
       double sumptleptons = (Zlepton1.pt() + Zlepton2.pt() + Wlepton.pt())/GeV;
       double dPhiWZTruth = acos(cos(Zboson.phi()-Wboson.phi()));
 
-    
-      
+
+
       //---- Jet CUTS----//
       ifilter_discard(jets, [&](const Jet& j) {
         return deltaR(j, Zlepton1) < 0.3 || deltaR(j, Zlepton2) < 0.3 || deltaR(j, Wlepton) < 0.3;
       });
-      if (jets.size() < 2)  vetoEvent;  
-      if (jets[0].pT() < 40*GeV)  vetoEvent;  
+      if (jets.size() < 2)  vetoEvent;
+      if (jets[0].pT() < 40*GeV)  vetoEvent;
 
       // Selection of the second jet as the second highest pT jet and in opposite hemisphere with the fisrt jet
       FourMomentum jet_lead = jets[0].mom();
@@ -206,7 +197,7 @@ namespace Rivet {
         }
       }
       if (!foundVBSJetPair)  vetoEvent;
-     
+
       const double mJJ = (jet_lead + jet_sublead).mass()/GeV;
       const double dphi_jj = acos(cos(jet_lead.phi() - jet_sublead.phi()));
       const double dyjj = fabs(jet_lead.rap() - jet_sublead.rap());
@@ -215,14 +206,14 @@ namespace Rivet {
       if (mJJ < 500*GeV) vetoEvent;
 
       const size_t njets40 = filter_select(jets, Cuts::pT > 40*GeV).size();
-      fillWithOverflow("Njets_VBS", njets40, 5.1);
+      fillDiscrete("Njets_VBS", njets40, 5);
 
       const double y_min = std::min(jet_lead.rap(), jet_sublead.rap());
       const double y_max = std::max(jet_lead.rap(), jet_sublead.rap());
-      const size_t njetsGap = count(jets, [&](const Jet& j) { 
+      const size_t njetsGap = count(jets, [&](const Jet& j) {
         return  (j.rap() > y_min && j.rap() < y_max);
       });
-      fillWithOverflow("Njets_gap", njetsGap, 3.1);
+      fillDiscrete("Njets_gap", njetsGap, 3);
 
       fillWithOverflow("MTWZ", mTWZ, 551);
       fillWithOverflow("sumpt", sumptleptons, 501);
@@ -234,18 +225,22 @@ namespace Rivet {
 
     }
 
-
     void fillWithOverflow(const string& tag, const double value, const double overflow) {
-      if (value < overflow)  _h[tag]->fill(value);
-      else                   _h[tag]->fill(overflow);
+      _h[tag]->fill(value < overflow? value : overflow);
     }
 
+    void fillDiscrete(const string& tag, const size_t value, const size_t overflow) {
+      string edge = "$\\geq" + std::to_string(overflow) + "$";
+      if (value < overflow)  edge = std::to_string(value);
+      _d[tag]->fill(edge);
+    }
 
     void finalize() {
 
       scale(_h, crossSectionPerEvent() / femtobarn);
+      scale(_d, crossSectionPerEvent() / femtobarn);
       // unfortunately, no differential cross-sections were measured in this analysis
-      for (auto &item : _h)  barchart(item.second, _s[item.first]);
+      for (auto& item : _h)  barchart(item.second, _s[item.first]);
 
     }
 
@@ -259,7 +254,8 @@ namespace Rivet {
     //@{
 
     map<string, Histo1DPtr> _h;
-    map<string, Scatter2DPtr> _s;
+    map<string, BinnedHistoPtr<string>> _d;
+    map<string, Estimate1DPtr> _s;
 
     //@}
 

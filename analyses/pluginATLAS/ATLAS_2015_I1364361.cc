@@ -29,10 +29,10 @@ namespace Rivet {
       declare(fs, "FS");
 
       // Histograms with data bins
-      book(_h_pTH_incl   ,1,1,1);
-      book(_h_yH_incl    ,2,1,1);
-      book(_h_Njets_incl ,3,1,1);
-      book(_h_pTj1_incl  ,4,1,1);
+      book(_h_pTH_incl,   1, 1, 1);
+      book(_h_yH_incl,    2, 1, 1);
+      book(_h_Njets_incl, 3, 1, 1);
+      book(_h_pTj1_incl,  4, 1, 1);
     }
 
 
@@ -108,7 +108,8 @@ namespace Rivet {
       size_t njets = jets.size() > 3 ? 3 : jets.size();
       _h_pTH_incl->fill(higgs.pT());
       _h_yH_incl->fill(higgs.absrap());
-      _h_Njets_incl->fill(njets + 1); // accounts for HEPData offset
+      const string edge = _h_Njets_incl->xEdges()[njets];
+      _h_Njets_incl->fill(edge);
       _h_pTj1_incl->fill(jets.empty() ? 0 : jets[0].pT());
     }
 
@@ -125,7 +126,8 @@ namespace Rivet {
 
   private:
 
-    Histo1DPtr _h_pTH_incl, _h_yH_incl, _h_Njets_incl, _h_pTj1_incl;
+    Histo1DPtr _h_pTH_incl, _h_yH_incl, _h_pTj1_incl;
+    BinnedHistoPtr<string> _h_Njets_incl;
 
   };
 

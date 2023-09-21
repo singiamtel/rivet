@@ -8,7 +8,6 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PartonicTops.hh"
 #include "Rivet/Math/LorentzTrans.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -340,38 +339,38 @@ namespace Rivet {
         // Multi-dimensional cross-sections
         double norm_3D = 0, norm_3D_parton = 0;
         for (auto& h_it : _h_multi) {
-          if (h_it.first.find("_parton") != string::npos) for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, 2.1882987); }
+          if (h_it.first.find("_parton") != string::npos)  scale(h_it.second, 2.1882987);
           if (h_it.first.find("_norm") != string::npos) {
-            for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, sf); }
+            scale(h_it.second, sf);
             if (h_it.first.find("_3D") != string::npos) {
-              if (h_it.first.find("_parton") != string::npos) norm_3D_parton += integral_2D(h_it.second);
-              else norm_3D += integral_2D(h_it.second);
-              if (h_it.first.find("tt_y_1") != string::npos) { for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, 1 / 0.3); } }
-              if (h_it.first.find("tt_y_2") != string::npos) { for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, 1 / 0.6); } }
-              if (h_it.first.find("tt_y_3") != string::npos) { for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, 1 / 1.1); } }
+              if (h_it.first.find("_parton") != string::npos) norm_3D_parton += h_it.second->integral(false);
+              else norm_3D += h_it.second->integral(false);
+              if (h_it.first.find("tt_y_1") != string::npos) { scale(h_it.second, 1. / 0.3); }
+              if (h_it.first.find("tt_y_2") != string::npos) { scale(h_it.second, 1. / 0.6); }
+              if (h_it.first.find("tt_y_3") != string::npos) { scale(h_it.second, 1. / 1.1); }
             }
             else {
-             double norm_2D = integral_2D(h_it.second);
-             h_it.second.scale(safediv(1.0, norm_2D), this);
+             const double norm_2D = h_it.second->integral(false);
+             scale(h_it.second, safediv(1.0, norm_2D));
             }
           }
           else {
             if (h_it.first.find("_3D") != string::npos) {
-              if (h_it.first.find("tt_y_1") != string::npos) { for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, 1 / 0.3); } }
-              if (h_it.first.find("tt_y_2") != string::npos) { for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, 1 / 0.6); } }
-              if (h_it.first.find("tt_y_3") != string::npos) { for (Histo1DPtr& hist : h_it.second.histos()) { scale(hist, 1 / 1.1); } }
-              h_it.second.scale(sf, this);
+              if (h_it.first.find("tt_y_1") != string::npos) { scale(h_it.second, 1. / 0.3); }
+              if (h_it.first.find("tt_y_2") != string::npos) { scale(h_it.second, 1. / 0.6); }
+              if (h_it.first.find("tt_y_3") != string::npos) { scale(h_it.second, 1. / 1.1); }
+              scale(h_it.second, sf);
             }
-            else h_it.second.scale(sf, this);
+            else scale(h_it.second, sf);
           }
         }
-        _h_multi["tt_y_1_tt_m_t1_pt_3D_norm"].scale(safediv(1, norm_3D), this);
-        _h_multi["tt_y_2_tt_m_t1_pt_3D_norm"].scale(safediv(1, norm_3D), this);
-        _h_multi["tt_y_3_tt_m_t1_pt_3D_norm"].scale(safediv(1, norm_3D), this);
+        scale(_h_multi["tt_y_1_tt_m_t1_pt_3D_norm"], safediv(1, norm_3D));
+        scale(_h_multi["tt_y_2_tt_m_t1_pt_3D_norm"], safediv(1, norm_3D));
+        scale(_h_multi["tt_y_3_tt_m_t1_pt_3D_norm"], safediv(1, norm_3D));
         if (_mode) {
-          _h_multi["tt_y_1_tt_m_t1_pt_3D_parton_norm"].scale(safediv(1, norm_3D_parton), this);
-          _h_multi["tt_y_2_tt_m_t1_pt_3D_parton_norm"].scale(safediv(1, norm_3D_parton), this);
-          _h_multi["tt_y_3_tt_m_t1_pt_3D_parton_norm"].scale(safediv(1, norm_3D_parton), this);
+          scale(_h_multi["tt_y_1_tt_m_t1_pt_3D_parton_norm"], safediv(1, norm_3D_parton));
+          scale(_h_multi["tt_y_2_tt_m_t1_pt_3D_parton_norm"], safediv(1, norm_3D_parton));
+          scale(_h_multi["tt_y_3_tt_m_t1_pt_3D_parton_norm"], safediv(1, norm_3D_parton));
         }
       }
 
@@ -415,7 +414,7 @@ namespace Rivet {
 
       size_t _mode;
       map<string, Histo1DPtr> _h;
-      map<string, BinnedHistogram> _h_multi;
+      map<string, Histo1DGroupPtr> _h_multi;
 
       //some functions for booking, filling and scaling the histograms
       void fill_hist(const std::string name, double value) {
@@ -429,13 +428,13 @@ namespace Rivet {
       }
 
       void fill_hist_2D(const std::string name, double value_external, double value_internal) {
-       _h_multi[name].fill(value_external, value_internal);
-       _h_multi[name + "_norm"].fill(value_external, value_internal);
+       _h_multi[name]->fill(value_external, value_internal);
+       _h_multi[name + "_norm"]->fill(value_external, value_internal);
       }
 
       void fill_hist_2D_parton(const std::string name, double value_external, double value_internal) {
-       _h_multi[name + "_parton"].fill(value_external, value_internal);
-       _h_multi[name + "_parton_norm"].fill(value_external, value_internal);
+       _h_multi[name + "_parton"]->fill(value_external, value_internal);
+       _h_multi[name + "_parton_norm"]->fill(value_external, value_internal);
       }
 
       void book_hist(const std::string name, unsigned int index) {
@@ -447,25 +446,18 @@ namespace Rivet {
         }
       }
 
-      void book_hist_2D(const std::string name, std::vector<double> external_bins, unsigned int index) {
-        for (unsigned int i = 0; i < external_bins.size() - 1; ++i) {
-          Histo1DPtr tmp;
-          _h_multi[name].add(external_bins[i], external_bins[i + 1], book(tmp, index + i, 1, 1));
-          _h_multi[name + "_norm"].add(external_bins[i], external_bins[i + 1], book(tmp, index + 72 + i, 1, 1));
+      void book_hist_2D(const std::string name, const vector<double>& external_bins, unsigned int index) {
+        book(_h_multi[name], external_bins);
+        book(_h_multi[name+"_norm"], external_bins);
+        for (size_t i=0; i < _h_multi[name]->numBins(); ++i) {
+          book(_h_multi[name]->bin(i+1), index+i, 1, 1);
+          book(_h_multi[name+"_norm"]->bin(i+1), index+72+i, 1, 1);
           if (_mode != 0) {
-            _h_multi[name + "_parton"].add(external_bins[i], external_bins[i + 1], book(tmp, index + 145 + i, 1, 1));
-            _h_multi[name + "_parton_norm"].add(external_bins[i], external_bins[i + 1], book(tmp, index + 217 + i, 1, 1));
+            book(_h_multi[name+"_parton"]->bin(i+1), index+145+i, 1, 1);
+            book(_h_multi[name+"_parton_norm"]->bin(i+1), index+217+i, 1, 1);
           }
         }
       }
-
-      double integral_2D(BinnedHistogram& hist_multi) {
-       double total_integral = 0;
-       for (Histo1DPtr& h : hist_multi.histos()) {
-         total_integral += h->integral(false);
-       }
-       return total_integral;
-     }
 
   };
 

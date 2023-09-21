@@ -39,17 +39,20 @@ namespace Rivet {
       declare(jets, "jets");
 
       /// Book histograms
-      book(_h_el_njet_inclusive ,1,1,1);
-      book(_h_mu_njet_inclusive ,2,1,1);
-      book(_h_el_pT_jet1 ,5,1,1);
-      book(_h_mu_pT_jet1 ,6,1,1);
-      book(_h_el_pT_jet2 ,7,1,1);
-      book(_h_mu_pT_jet2 ,8,1,1);
+      book(_h_el_njet_inclusive,1,1,1);
+      book(_h_mu_njet_inclusive,2,1,1);
+      book(_h_el_pT_jet1,5,1,1);
+      book(_h_mu_pT_jet1,6,1,1);
+      book(_h_el_pT_jet2,7,1,1);
+      book(_h_mu_pT_jet2,8,1,1);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      if (_edges.empty())  _edges = _h_mu_njet_inclusive->xEdges();
+
       const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(20.0*GeV);
 
       const WFinder& We = apply<WFinder>(event, "W_e");
@@ -62,17 +65,17 @@ namespace Rivet {
             if (j.abseta() < 2.8 && deltaR(p_lept, j.momentum()) > 0.5)
               js.push_back(j);
           }
-          _h_el_njet_inclusive->fill(0);
+          _h_el_njet_inclusive->fill(_edges[0]);
           if (js.size() >= 1) {
-            _h_el_njet_inclusive->fill(1);
+            _h_el_njet_inclusive->fill(_edges[1]);
             _h_el_pT_jet1->fill(js[0].pT());
           }
           if (js.size() >= 2) {
-            _h_el_njet_inclusive->fill(2);
+            _h_el_njet_inclusive->fill(_edges[2]);
             _h_el_pT_jet2->fill(js[1].pT());
           }
           if (js.size() >= 3) {
-            _h_el_njet_inclusive->fill(3);
+            _h_el_njet_inclusive->fill(_edges[3]);
           }
         }
       }
@@ -87,20 +90,20 @@ namespace Rivet {
             if (j.abseta() < 2.8 && deltaR(p_lept, j.momentum()) > 0.5)
               js.push_back(j);
           }
-          _h_mu_njet_inclusive->fill(0);
+          _h_mu_njet_inclusive->fill(_edges[0]);
           if (js.size() >= 1) {
-            _h_mu_njet_inclusive->fill(1);
+            _h_mu_njet_inclusive->fill(_edges[1]);
             _h_mu_pT_jet1->fill(js[0].pT());
           }
           if (js.size() >= 2) {
-            _h_mu_njet_inclusive->fill(2);
+            _h_mu_njet_inclusive->fill(_edges[2]);
             _h_mu_pT_jet2->fill(js[1].pT());
           }
           if (js.size() >= 3) {
-            _h_mu_njet_inclusive->fill(3);
+            _h_mu_njet_inclusive->fill(_edges[3]);
           }
           if (js.size() >= 4) {
-            _h_mu_njet_inclusive->fill(4);
+            _h_mu_njet_inclusive->fill(_edges[4]);
           }
         }
       }
@@ -111,8 +114,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double normfac = crossSection()/sumOfWeights();
-      scale(_h_el_njet_inclusive, normfac);
-      scale(_h_mu_njet_inclusive, normfac);
+      scale(_h_el_njet_inclusive, normfac/nanobarn);
+      scale(_h_mu_njet_inclusive, normfac/nanobarn);
       scale(_h_el_pT_jet1, normfac);
       scale(_h_mu_pT_jet1, normfac);
       scale(_h_el_pT_jet2, normfac);
@@ -126,12 +129,13 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_el_njet_inclusive;
-    Histo1DPtr _h_mu_njet_inclusive;
+    BinnedHistoPtr<string> _h_el_njet_inclusive;
+    BinnedHistoPtr<string> _h_mu_njet_inclusive;
     Histo1DPtr _h_el_pT_jet1;
     Histo1DPtr _h_mu_pT_jet1;
     Histo1DPtr _h_el_pT_jet2;
     Histo1DPtr _h_mu_pT_jet2;
+    vector<string> _edges;
     /// @}
 
   };

@@ -18,7 +18,7 @@ namespace Rivet {
       // Find the upsilons
       const UnstableParticles& ufs = apply<UnstableParticles>(e, "UFS");
       for (const Particle& p : ufs.particles(Cuts::pid==300553)) {
-	_weightSum->fill();
+        _weightSum->fill();
         Particles pionsA,pionsB,protonsA,protonsB,kaons;
         // Find the decay products we want
         findDecayProducts(p, pionsA, pionsB, protonsA, protonsB, kaons);
@@ -31,28 +31,28 @@ namespace Rivet {
           double pcm = cms_boost.transform(ptemp).vector3().mod();
           _histPiA->fill(pcm);
         }
-        _multPiA->fill(10.58,double(pionsA.size()));
+        _multPiA->fill(Ecm,double(pionsA.size()));
         for (size_t ix = 0; ix < pionsB.size(); ++ix) {
           double pcm = cms_boost.transform(pionsB[ix].momentum()).vector3().mod();
           _histPiB->fill(pcm);
         }
-        _multPiB->fill(10.58,double(pionsB.size()));
+        _multPiB->fill(Ecm,double(pionsB.size()));
         for (size_t ix = 0; ix < protonsA.size(); ++ix) {
           double pcm = cms_boost.transform(protonsA[ix].momentum()).vector3().mod();
           _histpA->fill(pcm);
         }
-        _multpA->fill(10.58,double(protonsA.size()));
+        _multpA->fill(Ecm,double(protonsA.size()));
         for (size_t ix = 0; ix < protonsB.size(); ++ix) {
           double pcm = cms_boost.transform(protonsB[ix].momentum()).vector3().mod();
           _histpB->fill(pcm);
         }
-        _multpB->fill(10.58,double(protonsB.size()));
+        _multpB->fill(Ecm,double(protonsB.size()));
         for (size_t ix = 0 ;ix < kaons.size(); ++ix) {
           double pcm = cms_boost.transform(kaons[ix].momentum()).vector3().mod();
           _histKA->fill(pcm);
           _histKB->fill(pcm);
         }
-        _multK->fill(10.58,double(kaons.size()));
+        _multK->fill(Ecm,double(kaons.size()));
       }
     }
 
@@ -103,14 +103,15 @@ namespace Rivet {
     /// Spectra
     Histo1DPtr _histPiA, _histPiB, _histKA, _histKB, _histpA, _histpB;
     /// Multiplicities
-    Histo1DPtr _multPiA, _multPiB, _multK, _multpA, _multpB;
+    BinnedHistoPtr<string> _multPiA, _multPiB, _multK, _multpA, _multpB;
+    const string Ecm = "10.58";
     /// @}
 
 
     void findDecayProducts(Particle parent, Particles & pionsA, Particles & pionsB,
                            Particles & protonsA, Particles & protonsB, Particles & kaons) {
       int parentId = parent.pid();
-      for(const Particle & p : parent.children()) {
+      for (const Particle & p : parent.children()) {
         int id = abs(p.pid());
         if (id == PID::PIPLUS) {
           if (parentId != PID::LAMBDA && parentId != PID::K0S) {

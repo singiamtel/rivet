@@ -49,21 +49,12 @@ namespace Rivet {
       double fact = crossSection()/ sumOfWeights() /nanobarn;
       double sig = _c_Bstar->val()*fact;
       double err = _c_Bstar->err()*fact;
-      Scatter2D    temphisto(refData(1, 1, 1));
-      Scatter2DPtr mult;
+      Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	  mult->addPoint(x, sig, ex, make_pair(err,err));
-	}
-	else {
-	  mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
+      for (auto& b : mult->bins()) {
+        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+          b.set(sig, err);
+        }
       }
     }
 

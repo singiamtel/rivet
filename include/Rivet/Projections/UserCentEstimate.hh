@@ -11,6 +11,8 @@ namespace Rivet {
 class UserCentEstimate: public SingleValueProjection {
 public:
 
+  using SingleValueProjection::operator=;
+
   UserCentEstimate() {
     setName("UserCentEstimate");
     declare(HepMCHeavyIon(), "HepMC");

@@ -13,6 +13,8 @@ namespace Rivet {
   class UndressBeamLeptons : public Beam {
   public:
 
+    using Beam::operator=;
+
     /// Default (and only) constructor. Takes an angle as
     /// argument. The momentum of any photon within This angle wrt. a
     /// charged lepton beam will be subtracted from the beam lepton

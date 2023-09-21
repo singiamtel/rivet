@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -12,9 +11,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2014_I1268975()
-      : Analysis("ATLAS_2014_I1268975")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2014_I1268975);
 
 
     /// @name Analysis methods
@@ -34,15 +31,15 @@ namespace Rivet {
       fj06.useInvisibles();
       declare(fj06, "AntiKT06");
 
-      double ystarbins[] = { 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
+      vector<double> ystarbins{ 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
 
       size_t massDsOffset(0);
       for (size_t alg = 0; alg < 2; ++alg) {
-        for (size_t i = 0; i < 6; ++i) {
-          Histo1DPtr tmp;
-          _mass[alg].add(ystarbins[i], ystarbins[i+1], book(tmp, 1 + massDsOffset, 1, i+1));
+        book(_mass[alg], ystarbins);
+        for (auto& b : _mass[alg]->bins()) {
+          book(b, 1+massDsOffset, 1, b.index());
         }
-        massDsOffset += 1;
+        ++massDsOffset;
       }
     }
 
@@ -77,16 +74,15 @@ namespace Rivet {
         const double m     = (leadjets[0] + leadjets[1]).mass();
 
         // Fill mass histogram
-        _mass[alg].fill(ystar, m/TeV, 1.0);
+        _mass[alg]->fill(ystar, m/TeV);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (size_t alg = 0; alg < 2; ++alg) {
-        _mass[alg].scale(crossSectionPerEvent()/picobarn, this);
-      }
+      scale(_mass, crossSectionPerEvent()/picobarn);
+      divByGroupWidth(_mass);
     }
 
     /// @}
@@ -98,7 +94,7 @@ namespace Rivet {
     enum Alg { AKT4=0, AKT6=1 };
 
     /// The di-jet mass spectrum binned in rapidity for akt6 and akt4 jets (array index is jet type from enum above)
-    BinnedHistogram _mass[2];
+    Histo1DGroupPtr _mass[2];
 
   };
 

@@ -29,12 +29,11 @@ namespace Rivet {
       book(_h_sigma_vs_y,    18, 1, 1);
       book(_h_sigma_vs_pt,   19, 1, 1);
       book(_h_sigma_vs_phi,  20, 1, 1);
-      double ylow, yhigh;
-      for (int i = 1; i < 6; ++i) {
-      	ylow = 1.5 + 0.5*(double)i;
-      	yhigh = ylow + 0.5;
-      	{Histo1DPtr tmp; _h_sigma_vs_ypt.add (ylow, yhigh, book(tmp, 21, 1, i) );};
-      	{Histo1DPtr tmp; _h_sigma_vs_yphi.add(ylow, yhigh, book(tmp, 22, 1, i) );};
+      book(_h_sigma_vs_ypt,  {2., 2.5, 3., 3.5, 4., 4.5});
+      book(_h_sigma_vs_yphi, {2., 2.5, 3., 3.5, 4., 4.5});
+      for (size_t i = 1; i < _h_sigma_vs_ypt->numBins()+1; ++i) {
+      	book(_h_sigma_vs_ypt->bin(i),  21, 1, i);
+      	book(_h_sigma_vs_yphi->bin(i), 22, 1, i);
       }
     }
 
@@ -63,8 +62,8 @@ namespace Rivet {
       _h_sigma_vs_y->fill(zmumu.rapidity());
       _h_sigma_vs_pt->fill(zmumu.pT()/GeV);
       _h_sigma_vs_phi->fill(angular);
-      _h_sigma_vs_ypt.fill(zmumu.rapidity(), zmumu.pT()/GeV);
-      _h_sigma_vs_yphi.fill(zmumu.rapidity(), angular);
+      _h_sigma_vs_ypt->fill(zmumu.rapidity(), zmumu.pT()/GeV);
+      _h_sigma_vs_yphi->fill(zmumu.rapidity(), angular);
     }
 
 
@@ -75,14 +74,14 @@ namespace Rivet {
       _h_sigma_vs_y->scaleW(scale_f);
       _h_sigma_vs_pt->scaleW(scale_f);
       _h_sigma_vs_phi->scaleW(scale_f);
-      for (Histo1DPtr h : _h_sigma_vs_ypt.histos())  h->scaleW(scale_f*2.);
-      for (Histo1DPtr h : _h_sigma_vs_yphi.histos()) h->scaleW(scale_f*2.);
+      scale(_h_sigma_vs_ypt,  scale_f*2.);
+      scale(_h_sigma_vs_yphi, scale_f*2.);
     }
 
     ///@}
 
     Histo1DPtr _h_sigma_vs_y, _h_sigma_vs_pt, _h_sigma_vs_phi;
-    BinnedHistogram _h_sigma_vs_ypt, _h_sigma_vs_yphi;
+    Histo1DGroupPtr _h_sigma_vs_ypt, _h_sigma_vs_yphi;
 
 
   };

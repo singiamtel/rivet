@@ -44,7 +44,7 @@ namespace Rivet {
       for (size_t i = 0; i < 5; ++i) {
         book(_h_R_Jade[i] ,offset, 1, i+1);
         book(_h_R_Durham[i] ,offset+9, 1, i+1);
-        if (i < 4) book(_h_y_Durham[i] ,offset+17, 1, i+1);
+        if (i < 4) book(_h_y_Durham[i], offset+17, 1, i+1);
       }
     }
 
@@ -60,44 +60,39 @@ namespace Rivet {
         const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
         const double y_56 = jadejet.clusterSeq()->exclusive_ymerge_max(5);
 
-        for (size_t i = 1; i < _h_R_Jade[0]->numBins()+1; ++i) {
-          const auto& b = _h_R_Jade[0]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Jade[0]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_23 < ycut) {
-            _h_R_Jade[0]->fill(ycut, width);
+            _h_R_Jade[0]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Jade[1]->numBins()+1; ++i) {
-          const auto& b = _h_R_Jade[1]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Jade[1]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_34 < ycut && y_23 > ycut) {
-            _h_R_Jade[1]->fill(ycut, width);
+            _h_R_Jade[1]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Jade[2]->numBins()+1; ++i) {
-          const auto& b = _h_R_Jade[2]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Jade[2]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_45 < ycut && y_34 > ycut) {
-            _h_R_Jade[2]->fill(ycut, width);
+            _h_R_Jade[2]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Jade[3]->numBins()+1; ++i) {
-          const auto& b = _h_R_Jade[3]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Jade[3]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_56 < ycut && y_45 > ycut) {
-            _h_R_Jade[3]->fill(ycut, width);
+            _h_R_Jade[3]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Jade[4]->numBins()+1; ++i) {
-          const auto& b = _h_R_Jade[4]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Jade[4]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_56 > ycut) {
-            _h_R_Jade[4]->fill(ycut, width);
+            _h_R_Jade[4]->fill(xedge);
           }
         }
       }
@@ -114,44 +109,39 @@ namespace Rivet {
         _h_y_Durham[2]->fill(y_45);
         _h_y_Durham[3]->fill(y_56);
 
-        for (size_t i = 1; i < _h_R_Durham[0]->numBins()+1; ++i) {
-          const auto& b = _h_R_Durham[0]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Durham[0]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_23 < ycut) {
-            _h_R_Durham[0]->fill(ycut, width);
+            _h_R_Durham[0]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Durham[1]->numBins()+1; ++i) {
-          const auto& b = _h_R_Durham[1]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Durham[1]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_34 < ycut && y_23 > ycut) {
-            _h_R_Durham[1]->fill(ycut, width);
+            _h_R_Durham[1]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Durham[2]->numBins()+1; ++i) {
-          const auto& b = _h_R_Durham[2]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Durham[2]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_45 < ycut && y_34 > ycut) {
-            _h_R_Durham[2]->fill(ycut, width);
+            _h_R_Durham[2]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Durham[3]->numBins()+1; ++i) {
-          const auto& b = _h_R_Durham[3]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Durham[2]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_56 < ycut && y_45 > ycut) {
-            _h_R_Durham[3]->fill(ycut, width);
+            _h_R_Durham[3]->fill(xedge);
           }
         }
-        for (size_t i = 1; i < _h_R_Durham[4]->numBins()+1; ++i) {
-          const auto& b = _h_R_Durham[4]->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_R_Durham[4]->bins()) {
+          const string xedge = b.xEdge();
+          const double ycut = std::stod(xedge);
           if (y_56 > ycut) {
-            _h_R_Durham[4]->fill(ycut, width);
+            _h_R_Durham[4]->fill(xedge);
           }
         }
       }
@@ -161,9 +151,9 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      for (size_t n = 0; n < 4; ++n) normalize(_h_y_Durham[n]);
-      for (size_t n = 0; n < 5; ++n) scale(_h_R_Jade[n], 100/sumOfWeights());
-      for (size_t n = 0; n < 5; ++n) scale(_h_R_Durham[n], 100/sumOfWeights());
+      normalize(_h_y_Durham);
+      scale(_h_R_Jade, 100/sumOfWeights());
+      scale(_h_R_Durham, 100/sumOfWeights());
     }
 
     /// @}
@@ -173,8 +163,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_R_Jade[5];
-    Histo1DPtr _h_R_Durham[5];
+    BinnedHistoPtr<string> _h_R_Jade[5];
+    BinnedHistoPtr<string> _h_R_Durham[5];
     Histo1DPtr _h_y_Durham[4];
     /// @}
 

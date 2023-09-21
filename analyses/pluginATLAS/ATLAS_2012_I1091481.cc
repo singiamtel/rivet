@@ -96,13 +96,13 @@ namespace Rivet {
         if(SE)  y = getSE(part,   x);
         else    y = getSeta(part, x);
         h->fill(x, y * width);
-        // Histo1D objects will be converted to Scatter2D objects for plotting
+        // Histo1D objects will be converted to Estimate1D objects for plotting
         // As part of this conversion, Rivet will divide by bin width
-        // However, we want the (x,y) of the Scatter2D to be the (binCenter, sumW) of
+        // However, we want the (x,y) of the Estimate1D to be the (binCenter, sumW) of
         // the current Histo1D. This is why in the above line we multiply by bin width,
         // so as to undo later division by bin width.
         //
-        // Could have used Scatter2D objects in the first place, but they cannot be merged
+        // Could have used Estimate1D objects in the first place, but they cannot be merged
         // as easily as Histo1Ds can using yodamerge (missing ScaledBy attribute)
         }
     }

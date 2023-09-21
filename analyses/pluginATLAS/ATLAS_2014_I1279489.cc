@@ -27,11 +27,11 @@ namespace Rivet {
     Histo1DPtr h_ptbaleff_dy_veto;
     Histo1DPtr h_ptbaleff_dy_inc;
 
-    Scatter2DPtr s_jetveto_mjj;
-    Scatter2DPtr s_jetveto_dy;
+    Estimate1DPtr s_jetveto_mjj;
+    Estimate1DPtr s_jetveto_dy;
 
-    Scatter2DPtr s_ptbaleff_mjj;
-    Scatter2DPtr s_ptbaleff_dy;
+    Estimate1DPtr s_ptbaleff_mjj;
+    Estimate1DPtr s_ptbaleff_dy;
 
     Profile1DPtr p_avgnjets_dy;
     Profile1DPtr p_avgnjets_mjj;
@@ -357,7 +357,7 @@ namespace Rivet {
       if (plots.h_jetveto_mjj_veto && plots.h_jetveto_mjj_inc) {
         divide(plots.h_jetveto_mjj_veto, plots.h_jetveto_mjj_inc, plots.s_jetveto_mjj);
       }
-      //getScatter2D(8+offset, 1, 1)->addAnnotation("InclusiveSumWeights", plots.h_jetveto_mjj_inc->integral());
+      //getEstimate1D(8+offset, 1, 1)->addAnnotation("InclusiveSumWeights", plots.h_jetveto_mjj_inc->integral());
 
       if (plots.h_jetveto_dy_veto && plots.h_jetveto_dy_inc) {
         divide(plots.h_jetveto_dy_veto, plots.h_jetveto_dy_inc, plots.s_jetveto_dy);

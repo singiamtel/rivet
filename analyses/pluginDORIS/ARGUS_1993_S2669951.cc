@@ -105,33 +105,33 @@ namespace Rivet {
 
     void finalize() {
       // High-Z eta' multiplicity
-      Scatter2DPtr s111;
-      book(s111, 1, 1, 1, true);
+      Estimate1DPtr s111;
+      book(s111, 1, 1, 1);
       if (_weightSum_Ups1->val() > 0) // Point at 9.460
-        s111->point(0).setY(_count_etaPrime_highZ[0]->val() / _weightSum_Ups1->val(), 0);
+        s111->bin(1).set(_count_etaPrime_highZ[0]->val() / _weightSum_Ups1->val(), 0);
       if (_weightSum_cont->val() > 0) // Point at 9.905
-        s111->point(1).setY(_count_etaPrime_highZ[1]->val() / _weightSum_cont->val(), 0);
+        s111->bin(2).set(_count_etaPrime_highZ[1]->val() / _weightSum_cont->val(), 0);
 
       // All-Z eta' multiplicity
-      Scatter2DPtr s112;
-      book(s112, 1, 1, 2, true);
+      Estimate1DPtr s112;
+      book(s112, 1, 1, 2);
       if (_weightSum_Ups1->val() > 0) // Point at 9.460
-        s112->point(0).setY(_count_etaPrime_allZ[0]->val() / _weightSum_Ups1->val(), 0);
+        s112->bin(1).set(_count_etaPrime_allZ[0]->val() / _weightSum_Ups1->val(), 0);
       if (_weightSum_cont->val() > 0) // Point at 9.905
-        s112->point(1).setY(_count_etaPrime_allZ[2]->val() / _weightSum_cont->val(), 0);
+        s112->bin(2).set(_count_etaPrime_allZ[2]->val() / _weightSum_cont->val(), 0);
       if (_weightSum_Ups2->val() > 0) // Point at 10.02
-        s112->point(2).setY(_count_etaPrime_allZ[1]->val() / _weightSum_Ups2->val(), 0);
+        s112->bin(3).set(_count_etaPrime_allZ[1]->val() / _weightSum_Ups2->val(), 0);
 
 
       // f0 multiplicity
-      Scatter2DPtr s511;
-      book(s511, 5, 1, 1, true);
+      Estimate1DPtr s511;
+      book(s511, 5, 1, 1);
       if (_weightSum_Ups1->val() > 0) // Point at 9.46
-        s511->point(0).setY(_count_f0[0]->val() / _weightSum_Ups1->val(), 0);
+        s511->bin(1).set(_count_f0[0]->val() / _weightSum_Ups1->val(), 0);
       if (_weightSum_Ups2->val() > 0) // Point at 10.02
-        s511->point(1).setY(_count_f0[1]->val() / _weightSum_Ups2->val(), 0);
+        s511->bin(1).set(_count_f0[1]->val() / _weightSum_Ups2->val(), 0);
       if (_weightSum_cont->val() > 0) // Point at 10.45
-        s511->point(2).setY(_count_f0[2]->val() / _weightSum_cont->val(), 0);
+        s511->bin(1).set(_count_f0[2]->val() / _weightSum_cont->val(), 0);
 
       // Scale histos
       if (_weightSum_cont->val() > 0.) scale(_hist_cont_f0, 1./ *_weightSum_cont);
@@ -155,13 +155,14 @@ namespace Rivet {
 
     /// Recursively walk the decay tree to find decay products of @a p
     void findDecayProducts(Particle mother, Particles& unstable) {
-      for(const Particle & p: mother.children()) {
+      for (const Particle & p: mother.children()) {
         const int id = p.pid();
-	if (id == 331 || id == 9010221) {
-	  unstable.push_back(p);
-	}
-	else if(!p.children().empty())
-	  findDecayProducts(p, unstable);
+        if (id == 331 || id == 9010221) {
+          unstable.push_back(p);
+        }
+        else if(!p.children().empty()) {
+          findDecayProducts(p, unstable);
+        }
       }
     }
 

@@ -3,7 +3,6 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/WFinder.hh"
 #include "Rivet/Projections/ZFinder.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 

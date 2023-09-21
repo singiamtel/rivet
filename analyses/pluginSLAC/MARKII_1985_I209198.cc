@@ -29,13 +29,14 @@ namespace Rivet {
       declare(cfs, "FS");
       declare(Thrust(fs), "Thrust");
       //Histograms
-      book(_h_spect,2,1,1);
-      book(_h_pT   ,3,1,1);
+      book(_h_spect, 2, 1, 1);
+      book(_h_pT   , 3, 1, 1);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty())  _edges = _h_spect->xEdges();
       // 5 charged particles
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       if(cfs.particles().size()<5) vetoEvent;
@@ -44,14 +45,17 @@ namespace Rivet {
       // lambdas
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles(Cuts::abspid==3122)) {
-	const double xp = 2.*p.E()/sqrtS();
+        const double xp = 2.*p.E()/sqrtS();
       	Vector3 mom3 = p.p3();
-	const double beta = mom3.mod() / p.E();
+        const double beta = mom3.mod() / p.E();
         const double pTin  = dot(mom3, thrust.thrustMajorAxis());
         const double pTout = dot(mom3, thrust.thrustMinorAxis());
-	double pT2 = sqr(pTin)+sqr(pTout);
-	_h_spect->fill(xp,1./beta);
-	_h_pT   ->fill(pT2);
+        const double pT2 = sqr(pTin)+sqr(pTout);
+        const size_t idx = _axis.index(xp);
+        string edge = "OTHER";
+        if (idx && idx <= _axis.numBins())  edge = _edges[idx-1];
+        _h_spect->fill(edge, 1./beta);
+        _h_pT   ->fill(pT2);
       }
     }
 
@@ -67,7 +71,11 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_spect,_h_pT;
+    BinnedHistoPtr<string> _h_spect;
+    Histo1DPtr _h_pT;
+    vector<string> _edges;
+    YODA::Axis<double> _axis{0.084,0.094,0.104,0.124,0.157,0.190,0.223,0.256,
+                             0.289,0.322,0.355,0.423,0.491,0.559,0.627,0.695};
     ///@}
 
 

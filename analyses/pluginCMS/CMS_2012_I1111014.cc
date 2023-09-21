@@ -58,7 +58,7 @@ namespace Rivet {
       book(_profhistDr[1], 127, 1, 2);
       book(_profhistDeta, "TMP/Deta", refData(127,1,1));
       book(_profhistDphi, "TMP/Dphi", refData(127,1,1));
-      book(_profhistAsym, "d128-x01-y01", true);
+      book(_profhistAsym, "d128-x01-y01");
 
     }
 
@@ -139,12 +139,13 @@ namespace Rivet {
 
     // Finalize
     void finalize() {
-      for (unsigned int i = 0; i < _profhistAsym->numPoints(); ++i) {
+      for (size_t i = 1; i < _profhistAsym->numBins()+1; ++i) {
         if((_profhistDeta->bin(i).effNumEntries()<2)||(_profhistDphi->bin(i).effNumEntries()<2)) continue;
         if((_profhistDeta->bin(i).yMean()==0)||(_profhistDphi->bin(i).yMean()==0)) continue;
         double mean_ratio=_profhistDeta->bin(i).yMean() / _profhistDphi->bin(i).yMean();
-        double mean_error=mean_ratio*sqrt(pow(_profhistDeta->bin(i).yStdErr()/_profhistDeta->bin(i).yMean(),2)+pow(_profhistDphi->bin(i).yStdErr()/_profhistDphi->bin(i).yMean(),2));
-        _profhistAsym->point(i).setY(mean_ratio,mean_error);
+        double mean_error=mean_ratio*sqrt(sqr(_profhistDeta->bin(i).yStdErr()/_profhistDeta->bin(i).yMean())
+                                         +sqr(_profhistDphi->bin(i).yStdErr()/_profhistDphi->bin(i).yMean()));
+        _profhistAsym->bin(i).set(mean_ratio,mean_error);
       }
     }
 
@@ -172,7 +173,7 @@ namespace Rivet {
     Profile1DPtr _profhistDr[2];
     Profile1DPtr _profhistDeta;
     Profile1DPtr _profhistDphi;
-    Scatter2DPtr _profhistAsym;
+    Estimate1DPtr _profhistAsym;
     /// @}
 
   };

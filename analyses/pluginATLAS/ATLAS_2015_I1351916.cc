@@ -35,16 +35,16 @@ namespace Rivet {
 
 
       // Book dummy histograms for heterogeneous merging
-      const Scatter2D& ref = refData(_mode? 4 : 2, 1, 2);
-      book(_h["NCC_pos"], "_ncc_pos", ref);
-      book(_h["NCC_neg"], "_ncc_neg", ref);
-      book(_s["CC"], _mode ? 4 : 2, 1, 2, true);
+      const Estimate1D& ref = refData(_mode? 4 : 2, 1, 2);
+      book(_h["NCC_pos"], "_ncc_pos", ref.xEdges());
+      book(_h["NCC_neg"], "_ncc_neg", ref.xEdges());
+      book(_s["CC"], _mode ? 4 : 2, 1, 2);
 
       if (_mode == 0) { // electron-channel only
-        const Scatter2D& ref_cf = refData(3, 1, 2);
-        book(_h["NCF_pos"], "_ncf_pos", ref_cf);
-        book(_h["NCF_neg"], "_ncf_neg", ref_cf);
-        book(_s["CF"], 3, 1, 2, true);
+        const Estimate1D& ref_cf = refData(3, 1, 2);
+        book(_h["NCF_pos"], "_ncf_pos", ref_cf.xEdges());
+        book(_h["NCF_neg"], "_ncf_neg", ref_cf.xEdges());
+        book(_s["CF"], 3, 1, 2);
       }
     }
 
@@ -84,7 +84,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double sf = crossSectionPerEvent() / picobarn;
-      for (const auto& key_hist : _h) scale(key_hist.second, sf);
+      for (auto& key_hist : _h) scale(key_hist.second, sf);
       divide(*_h["NCC_pos"] - *_h["NCC_neg"], *_h["NCC_pos"] + *_h["NCC_neg"], _s["CC"]);
       if (!_mode)  divide(*_h["NCF_pos"] - *_h["NCF_neg"], *_h["NCF_pos"] + *_h["NCF_neg"], _s["CF"]);
     }
@@ -112,7 +112,7 @@ namespace Rivet {
     /// Histograms
     map<string, Histo1DPtr> _h;
     /// Asymmetries
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
 
   };
 

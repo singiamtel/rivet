@@ -242,7 +242,7 @@ namespace Rivet {
     /// @{
     Histo1DPtr _hist_Ks_pT, _hist_Ks_y, _hist_Ks_mult;
     Histo1DPtr _hist_L_pT, _hist_L_y, _hist_L_mult;
-    Scatter2DPtr _hist_Ratio_v_pT, _hist_Ratio_v_y;
+    Estimate1DPtr _hist_Ratio_v_pT, _hist_Ratio_v_y;
     /// @}
 
     /// @name Temporary histograms

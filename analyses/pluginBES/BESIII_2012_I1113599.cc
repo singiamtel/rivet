@@ -66,7 +66,7 @@ namespace Rivet {
     pair<double,pair<double,double> > calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,make_pair(0.,0.));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double a =  1.5*(bin.xMax() - bin.xMin());
@@ -99,15 +99,15 @@ namespace Rivet {
       // proton
       normalize(_h_proton );
       pair<double,pair<double,double> > alpha = calcAlpha(_h_proton);
-      Scatter2DPtr _h_alpha_proton;
+      Estimate1DPtr _h_alpha_proton;
       book(_h_alpha_proton,1,1,1);
-      _h_alpha_proton->addPoint({0.5, alpha.first}, {{0.5,0.5}, {alpha.second.first,alpha.second.second}} );
+      _h_alpha_proton->bin(1).set(alpha.first, alpha.second);
       // neutron
       normalize(_h_neutron);
       alpha = calcAlpha(_h_neutron);
-      Scatter2DPtr _h_alpha_neutron;
+      Estimate1DPtr _h_alpha_neutron;
       book(_h_alpha_neutron, 1,1,2);
-      _h_alpha_neutron->addPoint({0.5, alpha.first}, {{0.5,0.5}, {alpha.second.first,alpha.second.second}} );
+      _h_alpha_neutron->bin(1).set(alpha.first, alpha.second);
     }
 
     /// @}

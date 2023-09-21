@@ -32,10 +32,11 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty())  _edges = _histEEC->xEdges();
       // First, veto on leptonic events by requiring at least 4 charged FS particles
       const FinalState& fs = apply<FinalState>(event, "FS");
       // Even if we only generate hadronic events, we still need a cut on numCharged >= 2.
-      if ( fs.particles().size() < 2) {
+      if (fs.particles().size() < 2) {
         MSG_DEBUG("Failed leptonic event cut");
         vetoEvent;
       }
@@ -43,7 +44,7 @@ namespace Rivet {
       _weightSum->fill();
 
       double Evis = 0.0;
-      for( const Particle& p : fs.particles()) {
+      for (const Particle& p : fs.particles()) {
         Evis += p.E();
       }
       double Evis2 = sqr(Evis);
@@ -57,17 +58,23 @@ namespace Rivet {
           const double energy_j = p_j->momentum().E();
           const double thetaij = mom3_i.unit().angle(mom3_j.unit())/M_PI*180.;
           double eec = (energy_i*energy_j) / Evis2;
-	  if(p_i != p_j) eec *= 2.;
+          if (p_i != p_j)  eec *= 2.;
           if (thetaij < 90.) {
-	    _histEEC ->fill(thetaij,  eec);
-            _histAEEC->fill(thetaij, -eec);
-	  }
+            _histEEC ->fill(map2string(thetaij),  eec);
+            _histAEEC->fill(map2string(thetaij), -eec);
+          }
           else {
-	    _histEEC_Pi->fill(180.-thetaij, eec);
-            _histAEEC  ->fill(180.-thetaij, eec);
-	  }
+            _histEEC_Pi->fill(map2string(180.-thetaij), eec);
+            _histAEEC  ->fill(map2string(180.-thetaij), eec);
+          }
         }
       }
+    }
+
+    string map2string(const double value) const {
+      const size_t idx = _axis.index(value) - 1;
+      if (idx < _edges.size())  return _edges[idx];
+      return "OTHER";
     }
 
     /// Normalise histograms etc., after the run
@@ -81,8 +88,12 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _histEEC, _histEEC_Pi, _histAEEC;
     CounterPtr _weightSum;
+    BinnedHistoPtr<string> _histEEC, _histEEC_Pi, _histAEEC;
+    YODA::Axis<double> _axis{0.0, 3.6, 7.2, 10.8, 14.4, 18.0, 21.6, 25.2, 28.8, 32.4, 36.0, 39.6, 43.2, 46.8,
+                             50.4, 54.0, 57.6, 61.2, 64.8, 68.4, 72.0, 75.6, 79.2, 82.8, 86.4, 90.0};
+    vector<string> _edges;
+
     /// @}
 
   };

@@ -30,7 +30,7 @@ namespace Rivet {
       size_t hist_bin = 0;
       for (size_t i = 0; i < _eta_bins.size()-1; ++i) {
         if (fabs(_eta_bins[i] - 1.37) < .0001) continue;
-        book(_h_Et_photon[i] ,1, 1, hist_bin+1);
+        book(_h_Et_photon[i] ,1+hist_bin, 1, 1);
         hist_bin += 1;
       }
     }
@@ -99,7 +99,7 @@ namespace Rivet {
     void finalize() {
       for (size_t i = 0; i < _eta_bins.size()-1; ++i) {
         if (fabs(_eta_bins[i] - 1.37) < .0001) continue;
-        scale(_h_Et_photon[i], crossSection()/sumOfWeights());
+        scale(_h_Et_photon[i], crossSection()/picobarn/sumOfWeights());
       }
     }
 

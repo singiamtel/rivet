@@ -118,15 +118,15 @@ END PLOT
 BEGIN PLOT /ZEUS_2008_I780108/d20-x01-y01
 LogX=1
 Title=Unpolarized inclusive jet cross section vs $x$, $e^-$
-XLabel=$x$
-YLabel=$\text{d}\sigma/\text{d}x$ [pb]
+XLabel=$log_{10}(x)$
+YLabel=$\text{d}\sigma/\text{d}log_{10}(x)$ [pb]
 END PLOT
 
 BEGIN PLOT /ZEUS_2008_I780108/d20-x01-y02
 LogX=1
 Title=Unpolarized inclusive jet cross section vs $x$, $e^+$
-XLabel=$x$
-YLabel=$\text{d}\sigma/\text{d}x$ [pb]
+XLabel=$log_{10}(x)$
+YLabel=$\text{d}\sigma/\text{d}log_{10}(x)$ [pb]
 END PLOT
 
 

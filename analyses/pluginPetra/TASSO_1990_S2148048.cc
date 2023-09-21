@@ -99,11 +99,11 @@ namespace Rivet {
         const double scaledMom = 2.*mom/sqrtS();
         const double pTin = dot(mom3, sphericity.sphericityMajorAxis());
         const double pTout = dot(mom3, sphericity.sphericityMinorAxis());
-	const double pT=sqrt(sqr(pTin)+sqr(pTout));
+        const double pT = sqrt(sqr(pTin)+sqr(pTout));
         _h_xp[0]->fill(scaledMom);
         _h_xp[1]->fill(scaledMom);
-	_h_xi   ->fill(-log(scaledMom));
-	_h_pT   ->fill(pT);
+        _h_xi->fill(-log(scaledMom));
+        _h_pT->fill(pT);
       }
       // event shapes
       _h_sphericity->fill(sphericity.sphericity());

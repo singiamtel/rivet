@@ -72,10 +72,10 @@ namespace Rivet {
       declare(PartonicTops(PartonicTops::DecayMode::HADRONIC, false, false), "PartonicTops_HADRONIC_notau");
 
       // Book histograms
-      const Scatter2D& ref_asymm = refData(1, 1, 1);
-      book(_h["pos"], "_thetaj_opt_depos", ref_asymm);
-      book(_h["neg"], "_thetaj_opt_deneg", ref_asymm);
-      book(_asymm, 1, 1, 1, true);
+      const Estimate1D& ref_asymm = refData(1, 1, 1);
+      book(_h["pos"], "_thetaj_opt_depos", ref_asymm.xEdges());
+      book(_h["neg"], "_thetaj_opt_deneg", ref_asymm.xEdges());
+      book(_asymm, 1, 1, 1);
 
     }
 
@@ -242,7 +242,7 @@ namespace Rivet {
 
     // Histograms
     map<string, Histo1DPtr> _h;
-    Scatter2DPtr _asymm;
+    Estimate1DPtr _asymm;
 
 
     static double delta2_fcn(const MendelMin::Params& p, const MendelMin::Params& pfix) {

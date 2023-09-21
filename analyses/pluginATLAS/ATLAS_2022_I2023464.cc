@@ -65,16 +65,16 @@ namespace Rivet {
       // Declare histograms
 
       // plots in main body
-      book(_h["fid_regions"], 1, 1, 1); // inclusive regions
+      book(_d["fid_regions"], 1, 1, 1); // inclusive regions
       book(_h["pT_yy"], 2, 1, 1); // photon obs, in baseline region
 
-      book(_h["N_j_30"], 3, 1, 1); // N(jet) and N(b-jet) categories
-      book(_h["catXS_nbjet"], 4, 1, 1);
+      book(_d["N_j_30"], 3, 1, 1); // N(jet) and N(b-jet) categories
+      book(_d["catXS_nbjet"], 4, 1, 1);
       book(_h["pT_j1_30"], 5, 1, 1); // Observables in 1-jet events
       book(_h["pT_yy_JV_30"],  6, 1, 1); // Jet-veto observables
       book(_h["m_jj_30"],  7, 1, 1); // Observables in 2-jet events
       book(_h["Dphi_j_j_30_signed"],  8, 1, 1);
-      book(_h["pT_yy_vs_yAbs_yy"],  9, 1, 1); // 2D xsections
+      book(_d["pT_yy_vs_yAbs_yy"],  9, 1, 1); // 2D xsections
       book(_h["VBF_Dphi_j_j_30_signed"], 10, 1, 1); // Observables in VBF fiducial region
 
       // plots in appendix
@@ -91,18 +91,25 @@ namespace Rivet {
       book(_h["pT_yy_JV_60"], 41, 1, 1);
       book(_h["Dphi_yy_jj_30"], 43, 1, 1); // Observables in 2-jet events
       book(_h["pT_yyjj_30"], 45, 1, 1);
-      book(_h["pT_yy_vs_pT_yyj"], 47, 1, 1); // 2D xsections
-      book(_h["pT_yy_vs_maxTau_yyj"], 49, 1, 1);
-      book(_h["rel_DpT_y_y_vs_rel_sumpT_y_y"], 51, 1, 1);
+      book(_d["pT_yy_vs_pT_yyj"], 47, 1, 1); // 2D xsections
+      book(_d["pT_yy_vs_maxTau_yyj"], 49, 1, 1);
+      book(_d["rel_DpT_y_y_vs_rel_sumpT_y_y"], 51, 1, 1);
       book(_h["VBF_abs_Zepp"], 53, 1, 1); // Observables in VBF fiducial region
       book(_h["VBF_pT_yyjj_30"], 55, 1, 1);
       book(_h["VBF_pT_j1_30"], 57, 1, 1);
-      book(_h["VBF_pT_j1_30_vs_Dphi_j_j_30_signed"], 59, 1, 1);
+      book(_d["VBF_pT_j1_30_vs_Dphi_j_j_30_signed"], 59, 1, 1);
     }
 
 
     void analyze(const Event& event) {
 
+      if (edges.empty()) {
+        for (const string& label : vector<string>{"fid_regions", "N_j_30", "catXS_nbjet", "pT_yy_vs_yAbs_yy",
+                                                  "pT_yy_vs_pT_yyj", "pT_yy_vs_maxTau_yyj", "rel_DpT_y_y_vs_rel_sumpT_y_y",
+                                                  "VBF_pT_j1_30_vs_Dphi_j_j_30_signed"}) {
+          edges[label] = _d[label]->xEdges();
+        }
+      }
       // Get charged particles
       const Particles& tracks = apply<ChargedFinalState>(event,"CFS").particles();
 
@@ -138,7 +145,6 @@ namespace Rivet {
       Particles electrons15 = apply<FinalState>(event, "EFS").particlesByPt(Cuts::pT > 15*GeV);
       idiscardIfAnyDeltaRLess(electrons10, photons, 0.4);
       idiscardIfAnyDeltaRLess(electrons15, photons, 0.4);
-
 
       // Retain prompt muons with pseudorapidity in acceptance
       // and pT>10 GeV (muons10) or >15 GeV (muons15)
@@ -213,7 +219,7 @@ namespace Rivet {
 
         if (binYabs>=0 && binpT>=0) {
           int bin = binYabs*3 + binpT;
-          fillHist("pT_yy_vs_yAbs_yy", bin+1, binWidth );
+          fillHist("pT_yy_vs_yAbs_yy", bin, binWidth );
         }
       }
 
@@ -240,15 +246,17 @@ namespace Rivet {
           else if ( pTy1my2/myy < 4.0 ) { bin = 7; binWidth = 3.4; }
         }
         if (bin>-1) {
-          fillHist("rel_DpT_y_y_vs_rel_sumpT_y_y", bin+1, binWidth);
+          fillHist("rel_DpT_y_y_vs_rel_sumpT_y_y", bin, binWidth);
         }
       }
 
       // Jet multiplicity bin
-      _h["N_j_30"]->fill( njets30>3 ? 4: njets30 + 1 );
-      if (njets30central<1 || nlep10>0) 	_h["catXS_nbjet"]->fill(1.);
-      else if (nbjets==0) 	_h["catXS_nbjet"]->fill(2.);
-      else if (nbjets>=1) 	_h["catXS_nbjet"]->fill(3.);
+      _d["N_j_30"]->fill( edges["N_j_30"][ min(njets30, 3) ] );
+      if (njets30central<1 || nlep10>0) {
+        _d["catXS_nbjet"]->fill( edges["catXS_nbjet"][0] );
+      }
+      else if (nbjets==0) 	_d["catXS_nbjet"]->fill( edges["catXS_nbjet"][1] );
+      else if (nbjets>=1) 	_d["catXS_nbjet"]->fill( edges["catXS_nbjet"][2] );
 
 
       // Jet variables
@@ -317,65 +325,65 @@ namespace Rivet {
 
       // pT(yy) in bins pT(yyj)
       if (njets30==0) {
-        if (pT_yy/GeV < 350) fillHist("pT_yy_vs_pT_yyj", 1, 350.);
+        if (pT_yy/GeV < 350) fillHist("pT_yy_vs_pT_yyj", 0, 350.);
       }
       else {
         if (pT_yyj_30/GeV < 30) {
-          if (pT_yy/GeV < 100) fillHist("pT_yy_vs_pT_yyj", 2, 100.);
-          else if (pT_yy/GeV < 350) fillHist("pT_yy_vs_pT_yyj", 3, 250.);
+          if (pT_yy/GeV < 100) fillHist("pT_yy_vs_pT_yyj", 1, 100.);
+          else if (pT_yy/GeV < 350) fillHist("pT_yy_vs_pT_yyj", 2, 250.);
         }
         else if (pT_yyj_30/GeV < 60) {
-          if (pT_yy/GeV < 45) fillHist("pT_yy_vs_pT_yyj", 4, 45.);
-          else if (pT_yy/GeV < 120) fillHist("pT_yy_vs_pT_yyj", 5, 120.-45.);
-          else if (pT_yy/GeV < 350) fillHist("pT_yy_vs_pT_yyj", 6, 350.-120.);
+          if (pT_yy/GeV < 45) fillHist("pT_yy_vs_pT_yyj", 3, 45.);
+          else if (pT_yy/GeV < 120) fillHist("pT_yy_vs_pT_yyj", 4, 120.-45.);
+          else if (pT_yy/GeV < 350) fillHist("pT_yy_vs_pT_yyj", 5, 350.-120.);
         }
         else if (pT_yyj_30/GeV < 350) {
-          if (pT_yy/GeV < 80) fillHist("pT_yy_vs_pT_yyj", 7, 80.);
-          else if (pT_yy/GeV < 250) fillHist("pT_yy_vs_pT_yyj", 8, 250.-80.);
-          else if (pT_yy/GeV < 450) fillHist("pT_yy_vs_pT_yyj", 9, 450.-250.);
+          if (pT_yy/GeV < 80) fillHist("pT_yy_vs_pT_yyj", 6, 80.);
+          else if (pT_yy/GeV < 250) fillHist("pT_yy_vs_pT_yyj", 7, 250.-80.);
+          else if (pT_yy/GeV < 450) fillHist("pT_yy_vs_pT_yyj", 8, 450.-250.);
         }
       }
 
       // pT(yy) in bins of max(tau_C^j)
       if ( njets30 == 0 ) {
         if (pT_yy/GeV < 350.)
-          fillHist("pT_yy_vs_maxTau_yyj", 1., 350.);
+          fillHist("pT_yy_vs_maxTau_yyj", 0, 350.);
       }
       else {
         if ( maxtau/GeV < 15. ) {
 
           if (pT_yy/GeV < 100.)
-            fillHist("pT_yy_vs_maxTau_yyj", 2., 100.);
+            fillHist("pT_yy_vs_maxTau_yyj", 1, 100.);
 
           else if (pT_yy/GeV < 350.)
-            fillHist("pT_yy_vs_maxTau_yyj", 3., 350.-100.);
+            fillHist("pT_yy_vs_maxTau_yyj", 2, 350.-100.);
 
         }
       	else if (maxtau/GeV < 25.) {
 
         if (pT_yy/GeV < 120.)
-          fillHist("pT_yy_vs_maxTau_yyj", 4., 120.);
+          fillHist("pT_yy_vs_maxTau_yyj", 3, 120.);
 
         else if (pT_yy/GeV < 350.)
-          fillHist("pT_yy_vs_maxTau_yyj", 5., 350.-120.);
+          fillHist("pT_yy_vs_maxTau_yyj", 4, 350.-120.);
 
         }
       	else if (maxtau/GeV < 40.) {
 
         if (pT_yy/GeV < 200.)
-          fillHist("pT_yy_vs_maxTau_yyj", 6., 200.);
+          fillHist("pT_yy_vs_maxTau_yyj", 5, 200.);
 
         else if (pT_yy/GeV < 350.)
-          fillHist("pT_yy_vs_maxTau_yyj", 7., 350.-200.);
+          fillHist("pT_yy_vs_maxTau_yyj", 6, 350.-200.);
 
         }
       	else if (maxtau/GeV < 400.) {
 
         if (pT_yy/GeV < 250.)
-          fillHist("pT_yy_vs_maxTau_yyj", 8., 250. );
+          fillHist("pT_yy_vs_maxTau_yyj", 7, 250. );
 
         else if (pT_yy/GeV < 650.)
-          fillHist("pT_yy_vs_maxTau_yyj", 9., 650.-250.);
+          fillHist("pT_yy_vs_maxTau_yyj", 8, 650.-250.);
 
         }
       }
@@ -385,19 +393,19 @@ namespace Rivet {
         if (dphi_jj_signed < 0.) {
 
           if (pT_j1_30/GeV < 120.)
-            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 1., 120.-30.);
+            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 0, 120.-30.);
 
           else if (pT_j1_30/GeV < 500.)
-            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 2., 500.-120.);
+            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 1, 500.-120.);
 
         }
         else {
 
           if (pT_j1_30/GeV < 120.)
-            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 3., 120.-30.);
+            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 2, 120.-30.);
 
           else if (pT_j1_30/GeV < 500.)
-            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 4., 500.-120.);
+            fillHist("VBF_pT_j1_30_vs_Dphi_j_j_30_signed", 3, 500.-120.);
 
         }
       }
@@ -405,17 +413,17 @@ namespace Rivet {
 
       // fiducial regions
       // inclusive
-      _h["fid_regions"]->fill( 1.0 ) ;
+      _d["fid_regions"]->fill(edges["fid_regions"][0]) ;
       // VBF
-      if ( isVBF ) _h["fid_regions"]->fill( 2.0 );
+      if ( isVBF ) _d["fid_regions"]->fill(edges["fid_regions"][1]);
       // lep
-      if ( nlep15>0 ) _h["fid_regions"]->fill( 3.0 ) ;
+      if ( nlep15>0 ) _d["fid_regions"]->fill(edges["fid_regions"][2]) ;
       // MET
-      if ( met>=80*GeV && pT_yy>80*GeV ) _h["fid_regions"]->fill( 4.0 ) ;
+      if ( met>=80*GeV && pT_yy>80*GeV ) _d["fid_regions"]->fill(edges["fid_regions"][3]) ;
       // ttH
       const bool ttH_lep = njets30 > 2 && nlep15 >= 1 && nbjets > 0;
       const bool ttH_had = njets30 > 3 && nlep15 == 0 && nbjets > 0;
-      if ( ttH_lep || ttH_had ) _h["fid_regions"]->fill( 5.0 );
+      if ( ttH_lep || ttH_had ) _d["fid_regions"]->fill(edges["fid_regions"][4]);
     }
 
 
@@ -423,6 +431,7 @@ namespace Rivet {
       // Scale histograms from nEvents (sumW) to Xsection
       const double xs = crossSectionPerEvent() / femtobarn;
       scale(_h, xs);
+      scale(_d, xs);
     }
 
     double tau_jet(const FourMomentum& Higgs, const Jet& jet ) const {
@@ -451,22 +460,19 @@ namespace Rivet {
       return sum_tj ;
     }
 
-    void fillHist(const string& name, const double value, const double binWidth=-1.0) {
+    void fillHist(const string& name, const size_t index, const double binWidth=-1.0) {
       // scale weight by 1/binWidth to make differential xsections distributions
       // hack needed for 2D hists which are shown as 1D histograms
-      if (binWidth) _h[name]->fill(value , 1. / binWidth);
-      else {
-        // handle overflow/underflow
-        if (value > _h[name]->xMin() && value < _h[name]->xMax()) {
-          _h[name]->fill(value , 1. / _h[name]->binAt(value).xWidth());
-        }
-        else  _h[name]->fill(value);
-      }
+      const string& edge = edges[name][index];
+      if (binWidth) _d[name]->fill(edge , 1. / binWidth);
+      else          _d[name]->fill(edge);
     }
 
   private:
 
     map<string,Histo1DPtr> _h;
+    map<string,BinnedHistoPtr<string>> _d;
+    map<string, vector<string>> edges;
 
     //@}
   } ;

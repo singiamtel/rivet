@@ -45,7 +45,7 @@ namespace Rivet {
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
 
       // Fill mean charged multiplicity histos
-      _hist_nch->fill(_hist_nch->bin(0).xMid(), cfs.size());
+      _hist_nch->fill(53, cfs.size());
 
       // Iterate over all tracks and fill eta histograms
       for (const Particle& p : cfs.particles()) {
@@ -60,7 +60,8 @@ namespace Rivet {
       /// @todo Why the factor of 2 on Nch for ppbar?
       if (beamIDs().first == beamIDs().second) {
         scale(_hist_nch, 1.0 / *_sumWTrig);
-      } else {
+      }
+      else {
         scale(_hist_nch, 0.5 / *_sumWTrig);
       }
       scale(_hist_eta, 0.5 / *_sumWTrig);
@@ -78,7 +79,7 @@ namespace Rivet {
 
     /// @name Histogram collections
     /// @{
-    Histo1DPtr _hist_nch;
+    BinnedHistoPtr<int> _hist_nch;
     Histo1DPtr _hist_eta;
     /// @}
 

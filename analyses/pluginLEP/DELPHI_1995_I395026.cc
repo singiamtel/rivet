@@ -125,7 +125,7 @@ namespace Rivet {
     pair<double,double> calcRho(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
 	double Oi = bin.sumW();
 	if(Oi==0.) continue;
 	double ai = 0.125*( -bin.xMin()*(3.+sqr(bin.xMin())) + bin.xMax()*(3.+sqr(bin.xMax())));
@@ -145,31 +145,30 @@ namespace Rivet {
       scale(_h_ctheta1,1./_c_hadron->val());
       normalize(_h_ctheta2);
       pair<double,double> rho = calcRho(_h_ctheta2);
-      Scatter2DPtr h_rho;
+      Estimate1DPtr h_rho;
       book(h_rho, 3,1,1);
-      h_rho->addPoint(0.5, rho.first, make_pair(0.5,0.5),
-		      make_pair(rho.second,rho.second) );
+      h_rho->bin(1).set(rho.first, rho.second);
       // no of B* per hadronic Z
       double val = _c_bStar->val()/_c_hadron->val();
       double err = val*sqrt(sqr(_c_bStar->err()/_c_bStar->val())+sqr(_c_hadron->err()/_c_hadron->val()));
-      Scatter2DPtr h_nBS;
+      Estimate1DPtr h_nBS;
       book(h_nBS,2,1,1);
-      h_nBS->addPoint(1.,val,make_pair(0.5,0.5),make_pair(err,err) );
+      h_nBS->bin(1).set(val, err);
       // no of B* per b bbar
       val = _c_bStar->val()/_c_bottom->val();
       err = val*sqrt(sqr(_c_bStar->err()/_c_bStar->val())+sqr(_c_bottom->err()/_c_bottom->val()));
-      Scatter2DPtr h1;
+      Estimate1DPtr h1;
       book(h1,1,1,1);
-      h1->addPoint(1.,val,make_pair(0.5,0.5),make_pair(err,err) );
+      h1->bin(1).set(val, err);
       Counter ctemp = *_c_bStar+*_c_B;
       // no of B*/B+B*
       val = _c_bStar->val()/ctemp.val();
       err = val*sqrt(sqr(_c_bStar->err()/_c_bStar->val())+sqr(ctemp.err()/ctemp.val()));
-      h1->addPoint(2.,val,make_pair(0.5,0.5),make_pair(err,err) );
+      h1->bin(2).set(val, err);
       // average x_E
       val = _h_z->xMean();
       err = _h_z->xStdErr();
-      h1->addPoint(3.,val,make_pair(0.5,0.5),make_pair(err,err) );
+      h1->bin(3).set(val, err);
     }
 
     /// @}

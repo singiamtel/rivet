@@ -71,20 +71,11 @@ namespace Rivet {
         double sigma = count->val()*fact;
         double error = count->err()*fact;
         // hist for axis
-        Scatter2D temphisto(refData(ih, 1, 1));
-        Scatter2DPtr cross;
+        Estimate1DPtr cross;
         book(cross, ih, 1, 1);
-        for (size_t b = 0; b < temphisto.numPoints(); b++) {
-          const double x  = temphisto.point(b).x();
-          pair<double,double> ex = temphisto.point(b).xErrs();
-          pair<double,double> ex2 = ex;
-          if (ex2.first ==0.) ex2. first=0.0001;
-          if (ex2.second==0.) ex2.second=0.0001;
-          if (inRange(sqrtS(), x-ex2.first, x+ex2.second)) {
-            cross->addPoint(x, sigma, ex, make_pair(error,error));
-          }
-          else {
-            cross->addPoint(x, 0., ex, make_pair(0.,.0));
+        for (auto& b : cross->bins()) {
+          if (inRange(sqrtS(), b.xMin(), b.xMax())) {
+            b.set(sigma, error);
           }
         }
       }

@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/EventMixingFinalState.hh"
@@ -32,18 +32,6 @@ namespace Rivet {
     }
 
 
-    /// @brief Get the minimal and maximal x values from a Scatter2D (refdata).
-    pair<double, double> xEdges(const YODA::Scatter2D& h) {
-      double xMin = 0;
-      double xMax = 0;
-      for (const auto& p : h.points()) {
-        if (xMin > p.xMin()) xMin = p.xMin();
-        if (xMax < p.xMax()) xMax = p.xMax();
-      }
-      return {xMin, xMax};
-    }
-
-
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -62,8 +50,7 @@ namespace Rivet {
 	      Rivet::PID::K0S, Rivet::PID::K0L, Rivet::PID::PROTON,
 	      Rivet::PID::NEUTRON, Rivet::PID::LAMBDA, Rivet::PID::SIGMAMINUS,
        	Rivet::PID::SIGMAPLUS, Rivet::PID::XIMINUS, Rivet::PID::XI0,
-	      Rivet::PID::OMEGAMINUS},Cuts::abseta < etamax &&
-        Cuts::pT > pTmin*GeV && Cuts::pT < pTmax*GeV);
+	      Rivet::PID::OMEGAMINUS},Cuts::abseta < etamax && Cuts::pT > pTmin*GeV && Cuts::pT < pTmax*GeV);
       declare(pp,"APRIM");
 
       // The event mixing projection
@@ -85,9 +72,9 @@ namespace Rivet {
       nsp.resize(refdata.size());
       nmp.resize(refdata.size());
       for (int i = 0, N = refdata.size(); i < N; ++i) {
-        const YODA::Scatter2D& tmp = refData(refdata[i]);
+        const YODA::Estimate1D& tmp = refData(refdata[i]);
         // The ratio plots.
-        book(ratio[i], refdata[i], true);
+        book(ratio[i], refdata[i]);
         // Signal and mixed background should not be displayed.
         book(signal[i], "TMP/" + refdata[i] + "-s", tmp);
         book(background[i], "TMP/" + refdata[i] + "-b", tmp);
@@ -95,7 +82,7 @@ namespace Rivet {
         book(nsp[i],"TMP/nsp"+std::to_string(i));
         book(nmp[i],"TMP/nmp"+std::to_string(i));
         // The differing deltaphi histogram edges per pair.
-        deltaphi.push_back(xEdges(tmp));
+        deltaphi.push_back({tmp.xMin(), tmp.xMax()});
       }
     }
 
@@ -169,9 +156,10 @@ namespace Rivet {
     /// @{
     vector<Histo1DPtr> signal;
     vector<Histo1DPtr> background;
-    vector<Scatter2DPtr> ratio;
+    vector<Estimate1DPtr> ratio;
     vector<CounterPtr> nsp;
     vector<CounterPtr> nmp;
+
     /// @}
 
   };

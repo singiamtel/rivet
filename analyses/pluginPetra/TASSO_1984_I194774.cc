@@ -21,7 +21,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       declare(UnstableParticles(), "UFS");
-      book(_h_Ds ,1,1,1);
+      book(_h_Ds, 1, 1, 1);
     }
 
 
@@ -34,7 +34,7 @@ namespace Rivet {
         const double energy = p.E();
       	double modp = mom3.mod();
       	double beta = modp/energy;
-	_h_Ds ->fill(xE,1./beta);
+        _h_Ds ->fill(xE,1./beta);
       }
     }
 

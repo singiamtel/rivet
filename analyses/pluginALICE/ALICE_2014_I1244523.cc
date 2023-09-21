@@ -1,8 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
-#include "Rivet/Projections/AliceCommon.hh"
-#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 #include "Rivet/Tools/Cuts.hh"
 
 namespace Rivet {
@@ -88,12 +87,12 @@ namespace Rivet {
         book(_tmpLambdapT[centralityBins[i]], "TMP/NL" + toString(i), refData(15, 1, 1 + i));
         if (i < 3) book(_tmpLambdapT[centralityBins[i + 4]], "TMP/NL" + toString(i + 4), refData(16, 1, 1 + i));
         // Then the centrality dependent pT ratios.
-        book(_ratioKPi[centralityBins[i]], 11, 1, 1 + i, true);
-        if (i < 3) book(_ratioKPi[centralityBins[i + 4]], 12, 1, 1 + i, true);
-        book(_ratioPPi[centralityBins[i]], 13, 1, 1 + i, true);
-        if (i < 3) book(_ratioPPi[centralityBins[i + 4]], 14, 1, 1 + i, true);
-        book(_ratioLK[centralityBins[i]], 15, 1, 1 + i, true);
-        if (i < 3) book(_ratioLK[centralityBins[i + 4]], 16, 1, 1 + i, true);
+        book(_ratioKPi[centralityBins[i]], 11, 1, 1 + i);
+        if (i < 3) book(_ratioKPi[centralityBins[i + 4]], 12, 1, 1 + i);
+        book(_ratioPPi[centralityBins[i]], 13, 1, 1 + i);
+        if (i < 3) book(_ratioPPi[centralityBins[i + 4]], 14, 1, 1 + i);
+        book(_ratioLK[centralityBins[i]], 15, 1, 1 + i);
+        if (i < 3) book(_ratioLK[centralityBins[i + 4]], 16, 1, 1 + i);
       }
 
       // Mean pT vs. multiplicity class.
@@ -104,14 +103,14 @@ namespace Rivet {
       book(_histPiMeanpT,     21, 1, 1);
 
       // Yield ratios.
-      book(_histKtoPiYield,      22, 1, 1, true);
-      book(_histProtontoPiYield, 22, 1, 2, true);
-      book(_histLambdatoPiYield, 22, 1, 3, true);
+      book(_histKtoPiYield,      22, 1, 1);
+      book(_histProtontoPiYield, 22, 1, 2);
+      book(_histLambdatoPiYield, 22, 1, 3);
 
-      book(_histKYield,      "TMP/KY", refData(22,1,1));
-      book(_histProtonYield, "TMP/PrY",refData(22,1,2));
-      book(_histLambdaYield, "TMP/LY", refData(22,1,3));
-      book(_histPiYield,     "TMP/PiY",refData(22,1,1));
+      book(_histKYield,      "TMP/KY",  refData(22,1,1));
+      book(_histProtonYield, "TMP/PrY", refData(22,1,2));
+      book(_histLambdaYield, "TMP/LY",  refData(22,1,3));
+      book(_histPiYield,     "TMP/PiY", refData(22,1,1));
       book(_histPi4LYield,   "TMP/PiLY",refData(22,1,3)); // HepData entry is wrong -- look in the paper.
 
     }
@@ -147,45 +146,44 @@ namespace Rivet {
       sowItr->second->fill();
 
 
-      const ALICE::PrimaryParticles& fs =
-        apply<ALICE::PrimaryParticles>(event,"FS");
+      const ALICE::PrimaryParticles& fs =  apply<ALICE::PrimaryParticles>(event,"FS");
       // Count number of particles for yields.
       int npi = 0, nk = 0, np = 0, nlam = 0;
-      for(auto p : fs.particles()) {
-	  const double pT = p.pT();
-	  const int pid = abs(p.pid());
-	  const double nW = 1 / M_PI / pT; // Dividing and multiplying by 2 because dy.
-	  if (pid == 211) { // pi+/-
-	    ++npi;
-	    pi1Itr->second->fill(pT, nW);
-	    pi2Itr->second->fill(pT);
-	    pi3Itr->second->fill(pT);
-      _histPiMeanpT->fill(_histPiMeanpT->bin(index).xMid(), pT);
-	  }
-	  else if (pid == 321) { // K +/-
-	    ++nk;
-	    kItr->second->fill(pT, nW);
-	    krItr->second->fill(pT);
-	    _histKMeanpT->fill(_histKMeanpT->bin(index).xMid(), pT);
-	  }
-	  else if (pid == 310) { // K0S
-	    k0Itr->second->fill(pT, nW);
-	    klItr->second->fill(pT);
-	    _histK0SMeanpT->fill(_histK0SMeanpT->bin(index).xMid(), pT);
-	  }
-	  else if (pid == 2212) { // p + pbar
-	    ++np;
-	    pItr->second->fill(pT, nW);
-	    prItr->second->fill(pT);
-	    _histProtonMeanpT->fill(_histProtonMeanpT->bin(index).xMid(), pT);
-	  }
-	  else if (pid == 3122) { // Lambda + Lambdabar
-	    ++nlam;
-	    lItr->second->fill(pT, nW);
-	    lrItr->second->fill(pT);
-	    _histLambdaMeanpT->fill(_histLambdaMeanpT->bin(index).xMid(), pT);
-	  }
+      for (const auto& p : fs.particles()) {
+        const double pT = p.pT();
+        const int pid = abs(p.pid());
+        const double nW = 1 / M_PI / pT; // Dividing and multiplying by 2 because dy.
+        if (pid == 211) { // pi+/-
+          ++npi;
+          pi1Itr->second->fill(pT, nW);
+          pi2Itr->second->fill(pT);
+          pi3Itr->second->fill(pT);
+          _histPiMeanpT->fill(_histPiMeanpT->bin(index).xMid(), pT);
         }
+        else if (pid == 321) { // K +/-
+          ++nk;
+          kItr->second->fill(pT, nW);
+          krItr->second->fill(pT);
+          _histKMeanpT->fill(_histKMeanpT->bin(index).xMid(), pT);
+        }
+        else if (pid == 310) { // K0S
+          k0Itr->second->fill(pT, nW);
+          klItr->second->fill(pT);
+          _histK0SMeanpT->fill(_histK0SMeanpT->bin(index).xMid(), pT);
+        }
+        else if (pid == 2212) { // p + pbar
+          ++np;
+          pItr->second->fill(pT, nW);
+          prItr->second->fill(pT);
+          _histProtonMeanpT->fill(_histProtonMeanpT->bin(index).xMid(), pT);
+        }
+        else if (pid == 3122) { // Lambda + Lambdabar
+          ++nlam;
+          lItr->second->fill(pT, nW);
+          lrItr->second->fill(pT);
+          _histLambdaMeanpT->fill(_histLambdaMeanpT->bin(index).xMid(), pT);
+        }
+      }
       // Fill the yield profiles.
       _histKYield->fill(_histKYield->bin(index).xMid(), double(nk));
       _histPi4LYield->fill(_histPi4LYield->bin(index).xMid(), double(npi));
@@ -208,12 +206,9 @@ namespace Rivet {
         _histLambdapT[centralityBins[i]]->scaleW(1./_sow[centralityBins[i]]->sumW());
 
 	// Make the pT ratios.
-        divide(_tmpKpT[centralityBins[i]], _tmpPi4KpT[centralityBins[i]],
-	  _ratioKPi[centralityBins[i]]);
-        divide(_tmpProtonpT[centralityBins[i]], _tmpPi4PpT[centralityBins[i]],
-	  _ratioPPi[centralityBins[i]]);
-        divide(_tmpLambdapT[centralityBins[i]], _tmpK4LpT[centralityBins[i]],
-	  _ratioLK[centralityBins[i]]);
+        divide(_tmpKpT[centralityBins[i]], _tmpPi4KpT[centralityBins[i]], _ratioKPi[centralityBins[i]]);
+        divide(_tmpProtonpT[centralityBins[i]], _tmpPi4PpT[centralityBins[i]], _ratioPPi[centralityBins[i]]);
+        divide(_tmpLambdapT[centralityBins[i]], _tmpK4LpT[centralityBins[i]],  _ratioLK[centralityBins[i]]);
       }
 
       divide(_histKYield,      _histPiYield,  _histKtoPiYield);
@@ -245,9 +240,9 @@ private:
     map<double, Histo1DPtr> _tmpLambdapT;
 
     // The acual ratios.
-    map<double, Scatter2DPtr> _ratioKPi;
-    map<double, Scatter2DPtr> _ratioPPi;
-    map<double, Scatter2DPtr> _ratioLK;
+    map<double, Estimate1DPtr> _ratioKPi;
+    map<double, Estimate1DPtr> _ratioPPi;
+    map<double, Estimate1DPtr> _ratioLK;
 
     // Mean pT vs. Multiplicity
     Profile1DPtr       _histKMeanpT;
@@ -264,9 +259,9 @@ private:
     Profile1DPtr        _histPi4LYield;
 
     // Yield ratios.
-    Scatter2DPtr       _histKtoPiYield;
-    Scatter2DPtr       _histProtontoPiYield;
-    Scatter2DPtr       _histLambdatoPiYield;
+    Estimate1DPtr       _histKtoPiYield;
+    Estimate1DPtr       _histProtontoPiYield;
+    Estimate1DPtr       _histLambdatoPiYield;
 
   };
 

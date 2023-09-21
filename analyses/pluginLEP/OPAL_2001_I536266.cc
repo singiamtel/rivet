@@ -26,12 +26,12 @@ namespace Rivet {
       declare(Beam(), "Beams");
       declare(ChargedFinalState(), "CFS");
       declare(InitialQuarks(), "IQF");
-      book(_cDown   , "/TMP/CDOWN"   );
-      book(_cUp     , "/TMP/CUP"     );
-      book(_cStrange, "/TMP/CSTRANGE");
       book(_wDown   , "/TMP/WDOWN"   );
       book(_wUp     , "/TMP/WUP"     );
       book(_wStrange, "/TMP/WSTRANGE");
+      book(_hUp, 1, 1, 1);
+      book(_hDown, 1, 1, 2);
+      book(_hStrange, 1, 1, 3);
     }
 
 
@@ -67,16 +67,16 @@ namespace Rivet {
       const size_t numParticles = cfs.particles().size();
       switch (flavour) {
       case 1:
-	_wDown->fill();
-        _cDown->fill(numParticles);
+        _wDown->fill();
+        _hDown->fill(Ecm, numParticles);
         break;
       case 2:
         _wUp->fill();
-	_cUp->fill(numParticles);
+        _hUp->fill(Ecm, numParticles);
         break;
       case 3:
         _wStrange->fill();
-        _cStrange->fill(numParticles);
+        _hStrange->fill(Ecm, numParticles);
         break;
       }
     }
@@ -85,50 +85,30 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // calculate the averages and ratios
-      if(_wUp      ->effNumEntries()!=0. ) scale( _cUp     , 1./ *_wUp);
-      if(_wDown    ->effNumEntries()!=0. ) scale( _cDown   , 1./ *_wDown);
-      if(_wStrange ->effNumEntries()!=0. ) scale( _cStrange, 1./ *_wStrange);
-      for(unsigned int ix=1;ix<3;++ix) {
-	for(unsigned int iy=1;iy<4;++iy) {
-	  double val;
-	  std::pair<double,double> errs;
-	  if(ix==1) {
-	    CounterPtr cTemp;
-	    if(iy==1)      cTemp = _cUp;
-	    else if(iy==2) cTemp = _cDown;
-	    else if(iy==3) cTemp = _cStrange;
-	    val  = cTemp->val();
-	    errs = make_pair(cTemp->err(),cTemp->err());
-	  }
-	  else {
-	    Scatter1D temp;
-	    if(iy==1)      temp = (*_cUp     / *_cDown).mkScatter();
-	    else if(iy==2) temp = (*_cStrange/ *_cDown).mkScatter();
-	    else if(iy==3) temp = (*_cStrange/ *_cUp  ).mkScatter();
-	    val  = temp.points()[0].x();
-	    errs = temp.points()[0].xErrs();
-	  }
-	  Scatter2DPtr  mult;
-	  book(mult, ix, 1, iy);
-	  mult->addPoint(45.6, val, make_pair(0.5,0.5), errs);
-	}
-      }
+      if (_wUp->effNumEntries() != 0.)  scale(_hUp, 1./ *_wUp);
+      if (_wDown->effNumEntries() != 0.)  scale(_hDown, 1./ *_wDown);
+      if (_wStrange->effNumEntries( )!= 0.)  scale(_hStrange, 1./ *_wStrange);
+
+      BinnedEstimatePtr<string> ratioUD;
+      book(ratioUD, 2, 1, 1);
+      divide(_hUp, _hDown, ratioUD);
+
+      BinnedEstimatePtr<string> ratioSD;
+      book(ratioSD, 2, 1, 2);
+      divide(_hStrange, _hDown, ratioSD);
+
+      BinnedEstimatePtr<string> ratioSU;
+      book(ratioSU, 2, 1, 3);
+      divide(_hStrange, _hUp, ratioSU);
     }
 
     /// @}
 
-    /// @name Multiplicities
+    /// @name Member variables
     /// @{
-    CounterPtr _cDown;
-    CounterPtr _cUp;
-    CounterPtr _cStrange;
-    /// @}
-
-    /// @name Weights
-    /// @{
-    CounterPtr _wDown;
-    CounterPtr _wUp;
-    CounterPtr _wStrange;
+    CounterPtr _wDown, _wUp, _wStrange;
+    BinnedHistoPtr<string> _hDown, _hUp, _hStrange;
+    const string Ecm = "45.6";
     /// @}
 
 
@@ -137,6 +117,5 @@ namespace Rivet {
 
   // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(OPAL_2001_I536266);
-
 
 }

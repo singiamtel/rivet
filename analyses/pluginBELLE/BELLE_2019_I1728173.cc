@@ -93,26 +93,24 @@ namespace Rivet {
       	}
       }
       // RK*
-      for(unsigned int ix=0;ix<3;++ix) {
-      	Scatter2DPtr RK;
+      for (unsigned int ix=0;ix<3;++ix) {
+      	Estimate1DPtr RK;
       	book(RK,1,1+ix,3);
       	divide(_h_br[0][ix],_h_br[2][ix],RK);
       	book(RK,1,1+ix,2);
       	divide(_h_br[1][ix],_h_br[3][ix],RK);
       	book(RK,1,1+ix,1);
-      	for(unsigned int ibin=0;ibin<_h_br[1][ix]->bins().size();++ibin) {
-      	  double num     = _h_br[0][ix]->bins()[ibin].sumW()   +_h_br[1][ix]->bins()[ibin].sumW();
-      	  double numErr2 = sqr(_h_br[0][ix]->bins()[ibin].errW())+sqr(_h_br[1][ix]->bins()[ibin].errW());
-      	  double den     = _h_br[2][ix]->bins()[ibin].sumW()   +_h_br[3][ix]->bins()[ibin].sumW();
-      	  double denErr2 = sqr(_h_br[2][ix]->bins()[ibin].errW())+sqr(_h_br[3][ix]->bins()[ibin].errW());
+      	for (size_t ibin=1; ibin < _h_br[1][ix]->numBins()+1; ++ibin) {
+      	  double num     = _h_br[0][ix]->bin(ibin).sumW()   +_h_br[1][ix]->bin(ibin).sumW();
+      	  double numErr2 = sqr(_h_br[0][ix]->bin(ibin).errW())+sqr(_h_br[1][ix]->bin(ibin).errW());
+      	  double den     = _h_br[2][ix]->bin(ibin).sumW()   +_h_br[3][ix]->bin(ibin).sumW();
+      	  double denErr2 = sqr(_h_br[2][ix]->bin(ibin).errW())+sqr(_h_br[3][ix]->bin(ibin).errW());
       	  double val(0.),err(0.);
       	  if(num>0. && den>0.) {
       	    val = num/den;
       	    err = val*(numErr2/sqr(num)+denErr2/sqr(den));
       	  }
-      	  double dx = 0.5*_h_br[0][ix]->bins()[ibin].xWidth();
-      	  RK->addPoint(_h_br[0][ix]->bins()[ibin].xMid(),val,
-      		       make_pair(dx,dx),make_pair(err,err));
+      	  RK->bin(ibin).set(val, err);
       	}
       }
     }

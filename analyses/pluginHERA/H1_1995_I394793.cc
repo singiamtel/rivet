@@ -205,7 +205,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
     CounterPtr _Nevt_after_cuts;
     CounterPtr _Nevt_afterfwd_cuts;
     CounterPtr _Nevt_afterh_cuts;

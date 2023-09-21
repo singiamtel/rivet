@@ -25,9 +25,10 @@ namespace Rivet {
     /// Initialise projections and histograms
     void init() {
       // Projections
-      declare(DISLepton(), "Lepton");
+      const DISLepton dl;
+      declare(dl, "Lepton");
       declare(DISKinematics(), "Kinematics");
-      declare(FinalState(), "FS");
+      declare(dl.remainingFinalState(), "FS");
 
       // Histograms and weight vectors for low Q^2 a
       _histETLowQa.resize(17);
@@ -82,14 +83,7 @@ namespace Rivet {
       const double thel = 180 - leptonMom.angle(dl.in().mom())/degree;
 
       // Extract the particles other than the lepton
-      const FinalState& fs = apply<FinalState>(event, "FS");
-      Particles particles; particles.reserve(fs.size());
-      ConstGenParticlePtr dislepGP = dl.out().genParticle(); ///< @todo Is the GenParticle stuff necessary? (Not included in Particle::==?)
-      for(const Particle& p: fs.particles()) {
-        ConstGenParticlePtr loopGP = p.genParticle();
-        if (loopGP == dislepGP) continue;
-        particles.push_back(p);
-      }
+      Particles particles= apply<FinalState>(event, "FS").particles();
 
       // Cut on the forward energy
       double efwd = 0.;
@@ -197,8 +191,8 @@ namespace Rivet {
         double et = fabs(hcmMom.Et());
         double eta = hcmMom.eta();
         // Averages in central and forward region
-        if (fabs(eta) < .5 ) etcent += et;
-        if (eta > 2 && eta <= 3.) etfrag += et;
+        if (fabs(eta) < 0.5 )  etcent += et;
+        if (eta > 2 && eta <= 3.)  etfrag += et;
         // Histograms of Et flow
         if (evcut[0]) _histETLowQa [bin[0]]->fill(eta, et);
         if (evcut[1]) _histETLowQb [bin[1]]->fill(eta, et);
@@ -220,16 +214,16 @@ namespace Rivet {
       // so no unit area to be expected
       /// @todo Simplify by using normalize() instead? Are all these being normalized to area=1?
       for (size_t ix = 0; ix < _weightETLowQa.size(); ++ix) {
-        if (_weightETLowQa[ix]->val() ) scale(_histETLowQa[ix],  1/ *_weightETLowQa[ix]);
+        if (_weightETLowQa[ix]->val() )  scale(_histETLowQa[ix],  1/ *_weightETLowQa[ix]);
       }
       for (size_t ix = 0; ix < _weightETHighQa.size(); ++ix) {
-        if (_weightETHighQa[ix]->val()) scale(_histETHighQa[ix], 1/ *_weightETHighQa[ix]);
+        if (_weightETHighQa[ix]->val())  scale(_histETHighQa[ix], 1/ *_weightETHighQa[ix]);
       }
       for (size_t ix = 0; ix < _weightETLowQb.size(); ++ix) {
-        if (_weightETLowQb[ix]->val() ) scale(_histETLowQb[ix],  1/ *_weightETLowQb[ix]);
+        if (_weightETLowQb[ix]->val() )  scale(_histETLowQb[ix],  1/ *_weightETLowQb[ix]);
       }
       for (size_t ix = 0; ix < _weightETHighQb.size(); ++ix) {
-        if (_weightETHighQb[ix]->val()) scale(_histETHighQb[ix], 1/ *_weightETHighQb[ix]);
+        if (_weightETHighQb[ix]->val())  scale(_histETHighQb[ix], 1/ *_weightETHighQb[ix]);
       }
     }
 

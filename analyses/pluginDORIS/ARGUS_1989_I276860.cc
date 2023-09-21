@@ -205,32 +205,32 @@ namespace Rivet {
 	scale(_h_pt_ups1_z, 1./ *_weightSum_Ups1);
       }
       // Counters
-      Scatter2DPtr nPiA;
-      book(nPiA, 1, 1, 1, true);
-      Scatter2DPtr nPiB;
-      book(nPiB, 1, 1, 2, true);
-      Scatter2DPtr nKS ;
-      book(nKS, 2, 1, 1, true);
-      Scatter2DPtr nKp ;
-      book(nKp,3, 1, 1, true);
-      Scatter2DPtr nptA;
-      book(nptA,4, 1, 1, true);
-      Scatter2DPtr nptB;
-      book(nptB,4, 1, 2, true);
+      Estimate1DPtr nPiA;
+      book(nPiA, 1, 1, 1);
+      Estimate1DPtr nPiB;
+      book(nPiB, 1, 1, 2);
+      Estimate1DPtr nKS ;
+      book(nKS, 2, 1, 1);
+      Estimate1DPtr nKp ;
+      book(nKp,3, 1, 1);
+      Estimate1DPtr nptA;
+      book(nptA,4, 1, 1);
+      Estimate1DPtr nptB;
+      book(nptB,4, 1, 2);
       vector<CounterPtr> scales = {_weightSum_Ups1,_weightSum_cont};
-      for(unsigned int ix=0;ix<2;++ix) {
-	scale(_n_PiA[ix],1./ *scales[ix]);
-	nPiA->point(ix).setY(_n_PiA[ix]->val(),_n_PiA[ix]->err());
-	scale(_n_PiB[ix],1./ *scales[ix]);
-	nPiB->point(ix).setY(_n_PiB[ix]->val(),_n_PiB[ix]->err());
-	scale(_n_Kp[ix] ,1./ *scales[ix]);
-	nKp->point(ix).setY(_n_Kp[ix]->val(),_n_Kp[ix]->err());
-	scale(_n_KS[ix] ,1./ *scales[ix]);
-	nKS->point(ix).setY(_n_KS[ix]->val(),_n_KS[ix]->err());
-	scale(_n_ptA[ix],1./ *scales[ix]);
-	nptA->point(ix).setY(_n_ptA[ix]->val(),_n_ptA[ix]->err());
-	scale(_n_ptB[ix],1./ *scales[ix]);
-	nptB->point(ix).setY(_n_ptB[ix]->val(),_n_ptB[ix]->err());
+      for (unsigned int ix=0;ix<2;++ix) {
+        scale(_n_PiA[ix],1./ *scales[ix]);
+        nPiA->bin(ix+1).set(_n_PiA[ix]->val(),_n_PiA[ix]->err());
+        scale(_n_PiB[ix],1./ *scales[ix]);
+        nPiB->bin(ix+1).set(_n_PiB[ix]->val(),_n_PiB[ix]->err());
+        scale(_n_Kp[ix] ,1./ *scales[ix]);
+        nKp->bin(ix+1).set(_n_Kp[ix]->val(),_n_Kp[ix]->err());
+        scale(_n_KS[ix] ,1./ *scales[ix]);
+        nKS->bin(ix+1).set(_n_KS[ix]->val(),_n_KS[ix]->err());
+        scale(_n_ptA[ix],1./ *scales[ix]);
+        nptA->bin(ix+1).set(_n_ptA[ix]->val(),_n_ptA[ix]->err());
+        scale(_n_ptB[ix],1./ *scales[ix]);
+        nptB->bin(ix+1).set(_n_ptB[ix]->val(),_n_ptB[ix]->err());
       }
     }
 

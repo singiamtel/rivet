@@ -22,7 +22,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       /// @todo Convert to Scatter1D or Counter
-      book(_h_XS, "XS", {-0.5, 0.5});
+      book(_h_XS, "XS");
       book(_h_N, "N", 1, 0.0, 1.0);
       book(_h_pmXS, "pmXS", 2, -1.0, 1.0);
       book(_h_pmN, "pmN", 2, -1.0, 1.0);
@@ -39,7 +39,7 @@ namespace Rivet {
         size_t idx = (xsecs.size() == numWeights)? m : 0;
         const double xs    = xsecs[idx].first;
         const double xserr = xsecs[idx].second;
-        _h_XS.get()->persistent(m)->point(0).setY(xs, xserr);
+        _h_XS.get()->persistent(m)->set(xs, xserr);
         # endif
         const double weight = event.weights()[m];
         _h_pmXS.get()->persistent(m)->fill(0.5*(weight > 0 ? 1. : -1), abs(weight));
@@ -54,7 +54,7 @@ namespace Rivet {
     void finalize() {
       scale(_h_pmXS, crossSection()/sumOfWeights());
       #if !defined RIVET_ENABLE_HEPMC_3 && !defined HEPMC_HAS_CROSS_SECTION
-      _h_XS->point(0).setY(crossSection(), 0.);
+      _h_XS->set(crossSection(), 0.);
       #endif
     }
 
@@ -63,7 +63,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Scatter2DPtr _h_XS;
+    Estimate0DPtr _h_XS;
     Histo1DPtr _h_pmXS, _h_pmN, _h_N;
     /// @}
 

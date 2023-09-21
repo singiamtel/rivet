@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -25,32 +24,32 @@ namespace Rivet {
       declare(antiKT04Jets, "antiKT04Jets");
 
       // Book histograms
-      const double y_bins[] = {0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
-      for (size_t i = 0; i < 6; i++) {
-        Histo1DPtr tmp;
-        _h_pT.add(y_bins[i], y_bins[i+1], book(tmp, i+1, 1, 1));
+      const vector<double> y_bins{0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0};
+      book(_h_pT, y_bins);
+      for (auto& b : _h_pT->bins()) {
+        book(b, b.index(), 1, 1);
       }
     }
 
 
     /// Per-event analysis
     void analyze(const Event& event) {
-      const Jets& jets = apply<FastJets>(event, "antiKT04Jets")
-        .jetsByPt(Cuts::pT > 100*GeV && Cuts::absrap < 3.0);
-      for (const Jet& j : jets)
-        _h_pT.fill(j.absrap(), j.pT()/GeV, 1.0);
+      const Jets& jets = apply<FastJets>(event, "antiKT04Jets").jetsByPt(Cuts::pT > 100*GeV && Cuts::absrap < 3.0);
+      for (const Jet& j : jets) {
+        _h_pT->fill(j.absrap(), j.pT()/GeV);
+      }
     }
 
 
     /// Post-run scaling
     void finalize() {
       // Divide by 2 to only get positive rapidity values
-      _h_pT.scale(0.5*crossSection()/picobarn/sumOfWeights(), this);
+      scale(_h_pT, 0.5*crossSection()/picobarn/sumOfWeights());
     }
 
 
     /// Histograms
-    BinnedHistogram _h_pT;
+    Histo1DGroupPtr _h_pT;
 
   };
 

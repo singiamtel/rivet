@@ -30,7 +30,9 @@ namespace Rivet {
   class Spherocity : public AxesDefinition {
   public:
 
-    // Default constructor
+    using AxesDefinition::operator=;
+
+    // Default Constructor
     Spherocity() {}
 
     /// Constructor.

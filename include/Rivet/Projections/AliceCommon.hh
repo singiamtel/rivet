@@ -21,6 +21,7 @@ namespace Rivet {
     template <int MODE>
     class V0Multiplicity : public SingleValueProjection {
     public:
+      using SingleValueProjection::operator=;
       V0Multiplicity() : SingleValueProjection() {
         setName(MODE<0 ? "ALICE::V0CMultiplicity":
                 MODE>0 ? "ALICE::V0AMultiplicity":

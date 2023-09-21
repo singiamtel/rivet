@@ -70,10 +70,10 @@ namespace Rivet {
       if (_weightSum->val() > 0.)
         scale(_hist, 1. / *_weightSum);
       // BR
-      Scatter2DPtr scatter;
-      book(scatter,2, 1, 1, true);
+      Estimate0DPtr est;
+      book(est, 2, 1, 1);
       scale(_mult,1./ *_weightSum);
-      scatter->point(0).setY(_mult->val(),_mult->err());
+      est->set(_mult->val(), _mult->err());
     }
 
     /// @}

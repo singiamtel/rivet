@@ -22,12 +22,10 @@ namespace Rivet {
       // Initialise and register projections
       declare(UnstableParticles(), "UFS");
 
-      for(unsigned int ix=0;ix<2;++ix) {
-	for(unsigned int iy=0;iy<7;++iy) {
-	  std::ostringstream title;
-	  title << "/TMP/MULT_" << ix << "_" << iy;
-	  book(_mult[ix][iy],title.str());
-	}
+      for (unsigned int ix = 0; ix<2; ++ix) {
+        for (unsigned int iy = 0; iy<7; ++iy) {
+          book(_mult[ix][iy], ix+1, 1, iy+1);
+        }
       }
       book(_hist_ups1_lambda , 3,1,1);
       book(_hist_ups2_lambda , 4,1,1);
@@ -46,12 +44,12 @@ namespace Rivet {
     void findDecayProducts(Particle mother, Particles& unstable) {
       for(const Particle & p: mother.children()) {
         const int id = abs(p.pid());
-	if (id == 3122 || id == 3312 || id == 3212 || id == 3114 ||
-            id == 3224 || id == 3324 || id == 3334) {
-	  unstable.push_back(p);
-	}
-	if(!p.children().empty())
-	  findDecayProducts(p, unstable);
+        if (id == 3122 || id == 3312 || id == 3212 || id == 3114 ||
+                  id == 3224 || id == 3324 || id == 3334) {
+          unstable.push_back(p);
+        }
+        if(!p.children().empty())
+          findDecayProducts(p, unstable);
       }
     }
 
@@ -65,93 +63,93 @@ namespace Rivet {
         _weightSum_cont->fill();
         for (const Particle& p : ufs.particles()) {
           int id = p.abspid();
-	  double modp = p.p3().mod();
+          double modp = p.p3().mod();
           double xp = 2.*modp/sqrtS();
           double xE = 2.*p.E()/sqrtS();
           double beta = modp/p.E();
           if (id == 3122) {
-	    _hist_cont_lambda1->fill(xp);
-	    _hist_cont_lambda2->fill(xE, 1./beta);
-	    _mult[1][0]->fill();
+            _hist_cont_lambda1->fill(xp);
+            _hist_cont_lambda2->fill(xE, 1./beta);
+            _mult[1][0]->fill(Ecms);
           }
           else if (id == 3312) {
             _hist_cont_xi->fill(xE, 1./beta);
-	    _mult[1][1]->fill();
+            _mult[1][1]->fill(Ecms);
           }
           else if (id == 3212) {
-	    _mult[1][2]->fill();
+            _mult[1][2]->fill(Ecms);
           }
           else if (id == 3114) {
-	    _mult[1][3]->fill();
+            _mult[1][3]->fill(Ecms);
           }
           else if (id == 3224) {
-	    _mult[1][4]->fill();
+            _mult[1][4]->fill(Ecms);
           }
           else if (id == 3324) {
-	    _mult[1][5]->fill();
+            _mult[1][5]->fill(Ecms);
           }
           else if (id == 3334) {
-	    _mult[1][6]->fill();
+            _mult[1][6]->fill(Ecms);
           }
         }
       }
       // Upslion decays
       else {
-	for (const Particle& ups : upsilons) {
-	  const int parentId = ups.pid();
-	  if( parentId == 553)
-	    _weightSum_Ups1->fill();
-	  else
-	    _weightSum_Ups2->fill();
-	  Particles unstable;
-	  // Find the decay products we want
-	  findDecayProducts(ups,unstable);
-	  LorentzTransform cms_boost;
-	  if (ups.p3().mod() > 0.001)
-	    cms_boost = LorentzTransform::mkFrameTransformFromBeta(ups.momentum().betaVec());
-	  double mass = ups.mass();
-	  for(const Particle & p : unstable) {
-	    int id = p.abspid();
-	    FourMomentum p2 = cms_boost.transform(p.momentum());
-	    double modp = p2.p3().mod();
-	    double xp = 2.*modp/mass;
-	    if (id == 3122) {
-	      if(parentId==553) {
-		_hist_ups1_lambda->fill(xp);
-		_mult[0][0]->fill();
-	      }
-	      else {
-		_hist_ups2_lambda->fill(xp);
-	      }
-	    }
-	    else if (id == 3312) {
-	      if(parentId==553) {
-		_hist_ups1_xi->fill(xp);
-		_mult[0][1]->fill();
-	      }
-	      else {
-		_hist_ups2_xi->fill(xp);
-	      }
-	    }
-	    else if(parentId==553) {
-	      if (id == 3212) {
-		_mult[0][2]->fill();
-	      }
-	      else if (id == 3114) {
-		_mult[0][3]->fill();
-	      }
-	      else if (id == 3224) {
-		_mult[0][4]->fill();
-	      }
-	      else if (id == 3324) {
-		_mult[0][5]->fill();
-	      }
-	      else if (id == 3334) {
-		_mult[0][6]->fill();
-	      }
-	    }
-	  }
-	}
+        for (const Particle& ups : upsilons) {
+          const int parentId = ups.pid();
+          if( parentId == 553)
+            _weightSum_Ups1->fill();
+          else
+            _weightSum_Ups2->fill();
+          Particles unstable;
+          // Find the decay products we want
+          findDecayProducts(ups,unstable);
+          LorentzTransform cms_boost;
+          if (ups.p3().mod() > 0.001)
+            cms_boost = LorentzTransform::mkFrameTransformFromBeta(ups.momentum().betaVec());
+          double mass = ups.mass();
+          for(const Particle & p : unstable) {
+            int id = p.abspid();
+            FourMomentum p2 = cms_boost.transform(p.momentum());
+            double modp = p2.p3().mod();
+            double xp = 2.*modp/mass;
+            if (id == 3122) {
+              if(parentId==553) {
+                _hist_ups1_lambda->fill(xp);
+                _mult[0][0]->fill(Ecms);
+              }
+              else {
+                _hist_ups2_lambda->fill(xp);
+              }
+            }
+            else if (id == 3312) {
+              if (parentId==553) {
+                _hist_ups1_xi->fill(xp);
+                _mult[0][1]->fill(Ecms);
+              }
+              else {
+                _hist_ups2_xi->fill(xp);
+              }
+            }
+            else if(parentId==553) {
+              if (id == 3212) {
+                _mult[0][2]->fill(Ecms);
+              }
+              else if (id == 3114) {
+                _mult[0][3]->fill(Ecms);
+              }
+              else if (id == 3224) {
+                _mult[0][4]->fill(Ecms);
+              }
+              else if (id == 3324) {
+                _mult[0][5]->fill(Ecms);
+              }
+              else if (id == 3334) {
+                _mult[0][6]->fill(Ecms);
+              }
+            }
+          }
+        }
       }
     }
 
@@ -159,28 +157,23 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // multiplicities
-      vector<CounterPtr> scales = {_weightSum_Ups1,_weightSum_cont};
-      for(unsigned int ix=0;ix<2;++ix) {
-	if(scales[ix]->effNumEntries()<=0.) continue;
-	for(unsigned int iy=0;iy<7;++iy) {
-	  Scatter2DPtr scatter;
-	  book(scatter, ix+1, 1, iy+1, true);
-	  scale(_mult[ix][iy],1./ *scales[ix]);
-	  scatter->point(0).setY(_mult[ix][iy]->val(),_mult[ix][iy]->err());
-	}
+      const vector<CounterPtr> scales = {_weightSum_Ups1,_weightSum_cont};
+      for (unsigned int ix=0;ix<2;++ix) {
+        if (scales[ix]->effNumEntries()<=0.) continue;
+        scale(_mult[ix], 1./ *scales[ix]);
       }
       if(_weightSum_Ups1->val()>0.) {
-	scale(_hist_ups1_lambda,1./ *_weightSum_Ups1);
-	scale(_hist_ups1_xi    ,1./ *_weightSum_Ups1);
+        scale(_hist_ups1_lambda,1./ *_weightSum_Ups1);
+        scale(_hist_ups1_xi    ,1./ *_weightSum_Ups1);
       }
       if(_weightSum_Ups2->val()>0.) {
-	scale(_hist_ups2_lambda,1./ *_weightSum_Ups2);
-	scale(_hist_ups2_xi    ,1./ *_weightSum_Ups2);
+        scale(_hist_ups2_lambda,1./ *_weightSum_Ups2);
+        scale(_hist_ups2_xi    ,1./ *_weightSum_Ups2);
       }
       if(_weightSum_cont->val()) {
-	scale(_hist_cont_lambda1, 1./ *_weightSum_cont);
-	scale(_hist_cont_lambda2, 1./ *_weightSum_cont);
-	scale(_hist_cont_xi     , 1./ *_weightSum_cont);
+        scale(_hist_cont_lambda1, 1./ *_weightSum_cont);
+        scale(_hist_cont_lambda2, 1./ *_weightSum_cont);
+        scale(_hist_cont_xi     , 1./ *_weightSum_cont);
       }
     }
 
@@ -191,8 +184,9 @@ namespace Rivet {
     /// @{
     Histo1DPtr _hist_ups1_lambda, _hist_ups2_lambda, _hist_cont_lambda1, _hist_cont_lambda2;
     Histo1DPtr _hist_ups1_xi, _hist_ups2_xi, _hist_cont_xi;
-    CounterPtr _mult[2][7];
+    BinnedHistoPtr<int> _mult[2][7];
     CounterPtr _weightSum_cont,_weightSum_Ups1,_weightSum_Ups2;
+    const int Ecms = 10;
     /// @}
 
 

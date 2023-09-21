@@ -33,14 +33,14 @@ namespace Rivet {
 
     /// Recursively walk the decay tree to find decay products of @a p
     void findDecayProducts(Particle mother, Particles & dstar, Particles & d0, Particles & pi,unsigned int & ncount) {
-      for(const Particle & p: mother.children()) {
-	if(p.abspid()==413)
-	  dstar.push_back(p);
-	else if(p.abspid()==421)
-	  d0.push_back(p);
-	else if(p.abspid()==211)
-	  pi.push_back(p);
-	ncount +=1;
+      for (const Particle & p: mother.children()) {
+        if(p.abspid()==413)
+          dstar.push_back(p);
+        else if(p.abspid()==421)
+          d0.push_back(p);
+        else if(p.abspid()==211)
+          pi.push_back(p);
+        ncount +=1;
       }
     }
 
@@ -62,9 +62,9 @@ namespace Rivet {
 	if(ncount!=2 || dstar.size()!=1 || pi.size()!=1 || d0.size()!=0 ) continue;
 	if(dstar[0].pid()/p.pid()<0) continue;
 	if(p.abspid()==425)
-	  _h_D2_rate->fill(10.);
+	  _h_D2_rate->fill(10);
 	else
-	  _h_D1_rate->fill(10.);
+	  _h_D1_rate->fill(10);
 	Particle p2 = dstar[0];
 	LorentzTransform boost = LorentzTransform::mkFrameTransformFromBeta(p2.momentum().betaVec());
 	Vector3 d1 = boost.transform(pi[0].momentum()).p3().unit();
@@ -104,9 +104,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_D1_rate, _h_D2_rate;
+    BinnedHistoPtr<int> _h_D1_rate, _h_D2_rate;
     Histo1DPtr _h_D1_x, _h_D2_x;
     Histo1DPtr _h_D1_alpha, _h_D2_alpha;
+    const int Ecms = 10;
     /// @}
 
 

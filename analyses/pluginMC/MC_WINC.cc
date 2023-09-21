@@ -150,8 +150,8 @@ namespace Rivet {
     Histo1DPtr _htmp_dsigminus_deta;
     Histo1DPtr _htmp_dsigplus_deta;
 
-    Scatter2DPtr _h_asym;
-    Scatter2DPtr _h_asym_pT;
+    Estimate1DPtr _h_asym;
+    Estimate1DPtr _h_asym_pT;
     /// @}
 
   };

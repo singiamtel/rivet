@@ -541,8 +541,8 @@ namespace Rivet {
     Histo1DPtr   _hist_wdstar_charge;
 
     //d02-x01-
-    Scatter2DPtr _hist_wcjet_ratio;
-    Scatter2DPtr _hist_wd_ratio;
+    Estimate1DPtr _hist_wcjet_ratio;
+    Estimate1DPtr _hist_wd_ratio;
     Histo1DPtr _hist_wcjet_plus;
     Histo1DPtr _hist_wd_plus;
 
@@ -565,17 +565,17 @@ namespace Rivet {
     // postprocessing histos
     //d05-x01
     Histo1DPtr _hist_w_inc;
-    Scatter2DPtr _hist_wd_winc_ratio;
-    Scatter2DPtr _hist_wdstar_winc_ratio;
+    Estimate1DPtr _hist_wd_winc_ratio;
+    Estimate1DPtr _hist_wdstar_winc_ratio;
 
     //d06-x01
     Histo1DPtr _hist_wplus_winc;
     Histo1DPtr _hist_wminus_winc;
 
-    Scatter2DPtr _hist_wplusd_wplusinc_pt_ratio;
-    Scatter2DPtr _hist_wminusd_wminusinc_pt_ratio;
-    Scatter2DPtr _hist_wplusdstar_wplusinc_pt_ratio;
-    Scatter2DPtr _hist_wminusdstar_wminusinc_pt_ratio;
+    Estimate1DPtr _hist_wplusd_wplusinc_pt_ratio;
+    Estimate1DPtr _hist_wminusd_wminusinc_pt_ratio;
+    Estimate1DPtr _hist_wplusdstar_wplusinc_pt_ratio;
+    Estimate1DPtr _hist_wminusdstar_wminusinc_pt_ratio;
 
     Histo1DPtr _hist_wplusd_wplusinc_pt ;
     Histo1DPtr _hist_wminusd_wminusinc_pt;
@@ -586,7 +586,7 @@ namespace Rivet {
     Histo1DPtr _hist_wcjet_jets ;
 
     //d08-x01
-    Scatter2DPtr  _hist_wcjet_jets_ratio ;
+    Estimate1DPtr  _hist_wcjet_jets_ratio ;
     Histo1DPtr    _hist_wcjet_jets_plus ;
     Histo1DPtr    _hist_wcjet_jets_minus;
     /// @}

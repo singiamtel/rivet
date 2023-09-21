@@ -33,34 +33,34 @@ namespace Rivet {
      		 Particles & piP,Particles & pi0, Particles & ell, Particles & nu_ell,
 		 Particles & nu_tau) {
       for(const Particle & child : p.children()) {
-	if(child.pid()==PID::ELECTRON || child.pid()==PID::MUON) {
-	  ++nprod;
-	  ell.push_back(child);
-	}
-	else if(child.pid()==PID::NU_EBAR || child.pid()==PID::NU_MUBAR) {
-	  ++nprod;
-	  nu_ell.push_back(child);
-	}
-	else if(child.pid()==PID::PIMINUS) {
-	  ++nprod;
-	  piP.push_back(child);
-	}
-	else if(child.pid()==PID::PI0) {
-	  ++nprod;
-	  pi0.push_back(child);
-	}
-	else if(child.pid()==PID::NU_TAU) {
-	  ++nprod;
-	  nu_tau.push_back(child);
-	}
-	else if(child.pid()==PID::GAMMA)
-	  continue;
-	else if(child.children().empty() || child.pid()==221 || child.pid()==331) {
-	  ++nprod;
-	}
-	else {
-	  findTau(child,nprod,piP,pi0,ell,nu_ell,nu_tau);
-	}
+        if(child.pid()==PID::ELECTRON || child.pid()==PID::MUON) {
+          ++nprod;
+          ell.push_back(child);
+        }
+        else if(child.pid()==PID::NU_EBAR || child.pid()==PID::NU_MUBAR) {
+          ++nprod;
+          nu_ell.push_back(child);
+        }
+        else if(child.pid()==PID::PIMINUS) {
+          ++nprod;
+          piP.push_back(child);
+        }
+        else if(child.pid()==PID::PI0) {
+          ++nprod;
+          pi0.push_back(child);
+        }
+        else if(child.pid()==PID::NU_TAU) {
+          ++nprod;
+          nu_tau.push_back(child);
+        }
+        else if(child.pid()==PID::GAMMA)
+          continue;
+        else if(child.children().empty() || child.pid()==221 || child.pid()==331) {
+          ++nprod;
+        }
+        else {
+          findTau(child,nprod,piP,pi0,ell,nu_ell,nu_tau);
+        }
       }
     }
 
@@ -98,7 +98,7 @@ namespace Rivet {
     pair<double,double> calcP(Histo1DPtr hist,unsigned int imode) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
 	double Oi = bin.sumW();
 	if(Oi==0.) continue;
 	double ai(0.),bi(0.);
@@ -121,7 +121,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter2DPtr h_P;
+      Estimate1DPtr h_P;
       book(h_P,1,1,1);
       normalize(_h_e);
       pair<double,double> P_e  = calcP(_h_e,1);
@@ -142,9 +142,7 @@ namespace Rivet {
       P_rho.first  /=0.46;
       P_rho.second /=0.46;
       // average
-      pair<double,double> P_aver = make_pair(s1/s2,sqrt(1./s2));
-      h_P->addPoint(0.5,P_aver.first, make_pair(0.5,0.5),
-		    make_pair(P_aver.second,P_aver.second));
+      h_P->bin(1).set(s1/s2, sqrt(1./s2));
     }
 
     /// @}

@@ -12,9 +12,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    E288_1981_I153009()
-      : Analysis("E288_1981_I153009")
-    {   }
+    RIVET_DEFAULT_ANALYSIS_CTOR(E288_1981_I153009);
 
 
     /// @name Analysis methods
@@ -25,29 +23,22 @@ namespace Rivet {
 
       // Initialise and register projections
       const FinalState fs;
-      declare(fs, "FS");
-      Cut cut = Cuts::etaIn(-15.,15.);
-      ZFinder zfinder(fs, cut, PID::MUON, 3.5*GeV, 30.0*GeV, 0.1, ZFinder::ClusterPhotons::NONE );
+
+      ZFinder zfinder(fs, Cuts::abseta < 15.0, PID::MUON, 3.5*GeV, 30.0*GeV, 0.1, ZFinder::ClusterPhotons::NONE );
       declare(zfinder, "ZFinder");
 
       // Book histograms
       // 400 GeV and y = 0.03
-      Histo1DPtr dummy;
-      _hist_pT_M_400.add(5., 6., book(dummy,9, 1, 1));
-      _hist_pT_M_400.add(6., 7., book(dummy,9, 1, 2));
-      _hist_pT_M_400.add(7., 8., book(dummy,9, 1, 3));
-      _hist_pT_M_400.add(8., 9., book(dummy,9, 1, 4));
-      _hist_pT_M_400.add(9., 10., book(dummy,9, 1, 5));
-      _hist_pT_M_400.add(10.,11., book(dummy,9, 1, 6));
-      _hist_pT_M_400.add(11.,12., book(dummy,9, 1, 7));
-      _hist_pT_M_400.add(12.,13., book(dummy,9, 1, 8));
-      _hist_pT_M_400.add(13.,14., book(dummy,9, 1, 9));
+      book(_hist_pT_M_400, {5., 6., 7., 8., 9., 10., 11., 12., 13., 14.});
+      for (auto& b : _hist_pT_M_400->bins()) {
+        book(b, 9, 1, b.index());
+      }
 
       int Nbin = 50;
-      book(_h_m_DiMuon ,"DiMuon_mass",Nbin,0.0,30.0);
-      book(_h_pT_DiMuon,"DiMuon_pT",Nbin,0.0,20.0);
-      book(_h_y_DiMuon,"DiMuon_y",Nbin,-8.0, 8.0);
-      book(_h_xF_DiMuon,"DiMuon_xF",Nbin, -1.5,  1.5);
+      book(_h_m_DiMuon,  "DiMuon_mass", Nbin, 0.0,30.0);
+      book(_h_pT_DiMuon, "DiMuon_pT",   Nbin, 0.0,20.0);
+      book(_h_y_DiMuon,  "DiMuon_y",    Nbin,-8.0, 8.0);
+      book(_h_xF_DiMuon, "DiMuon_xF",   Nbin,-1.5, 1.5);
     }
 
 
@@ -80,7 +71,7 @@ namespace Rivet {
         if ( Zy > Zymin && Zy < Zymax ) {
           // Edsigma^3/dp^3 = 2E/(pi*sqrts)dsigma/dx_F/dq_T^2 = 1/pi dsigma/dy/dq_T^2
           // normalisation of Zy bin width = Zwidth
-          if (Zpt > 0) _hist_pT_M_400.fill(Zmass,Zpt, 1./2./Zpt/Z_y_width);
+          if (Zpt > 0) _hist_pT_M_400->fill(Zmass,Zpt, 1./2./Zpt/Z_y_width);
         }
       }
 
@@ -89,8 +80,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      MSG_DEBUG("Generator cross section [pb] = " << crossSection()/picobarn);
-      _hist_pT_M_400.scale(crossSection()/femtobarn/(sumOfWeights() * M_PI), this);
+      scale(_hist_pT_M_400, crossSection()/femtobarn/(sumOfWeights() * M_PI));
     }
 
     /// @}
@@ -98,14 +88,11 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _hist_pT_M_400,_hist_pT_M_300,_hist_pT_M_200;
+    Histo1DGroupPtr _hist_pT_M_400;
     Histo1DPtr _h_m_DiMuon ;
     Histo1DPtr _h_pT_DiMuon;
     Histo1DPtr _h_y_DiMuon;
     Histo1DPtr _h_xF_DiMuon;
-    Histo1DPtr _h_XXXX, _h_YYYY, _h_ZZZZ;
-    Profile1DPtr _p_AAAA;
-    CounterPtr _c_BBBB;
     /// @}
 
   };

@@ -5,11 +5,11 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
-#include "Rivet/Tools/RHICCommon.hh"
+#include "Rivet/Analyses/RHICCommon.hh"
 
 namespace Rivet {
 
-  
+
   /// @brief Brahms centrality calibration analysis based on the BrahmsCentrality projection.
   ///
   /// No data is given for this analysis, so one MUST do a calibration run.
