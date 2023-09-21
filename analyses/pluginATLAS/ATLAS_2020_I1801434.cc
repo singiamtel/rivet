@@ -398,28 +398,28 @@ namespace Rivet {
       _h["DR_e3e1_norm"]->fill(DR_e3e1);
 
 
-      _h_multi["t1_pt_jet_n_multi"].fill(jet_multiplicity_2D, t1.pt()/GeV);
-      _h_multi["t2_pt_jet_n_multi"].fill(jet_multiplicity_2D, t2.pt()/GeV);
-      _h_multi["tt_pt_jet_n_multi"].fill(jet_multiplicity_2D, pttbar.pt()/GeV);
-      _h_multi["absPout_jet_n_multi"].fill(jet_multiplicity_2D, absPout);
-      _h_multi["DeltaPhi_jet_n_multi"].fill(jet_multiplicity_2D, DPhi);
-      _h_multi["absPcross_jet_n_multi"].fill(jet_multiplicity_2D, absPcross);
-      _h_multi["t2_pt_m_multi"].fill(pttbar.mass()/GeV, t2.pt()/GeV);
-      _h_multi["tt_pt_m_multi"].fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
-      _h_multi["abs_tt_y_m_multi"].fill(pttbar.mass()/GeV, pttbar.absrap());
-      _h_multi["t1_pt_t2_pt_multi"].fill(t2.pt()/GeV, t1.pt()/GeV);
-      _h_multi["t1_pt_m_multi_y0"].fill(pttbar.mass()/GeV, t1.pt()/GeV);
-      _h_multi["t1_pt_jet_n_multi_norm"].fill(jet_multiplicity_2D, t1.pt()/GeV);
-      _h_multi["t2_pt_jet_n_multi_norm"].fill(jet_multiplicity_2D, t2.pt()/GeV);
-      _h_multi["tt_pt_jet_n_multi_norm"].fill(jet_multiplicity_2D, pttbar.pt()/GeV);
-      _h_multi["absPout_jet_n_multi_norm"].fill(jet_multiplicity_2D, absPout);
-      _h_multi["DeltaPhi_jet_n_multi_norm"].fill(jet_multiplicity_2D, DPhi);
-      _h_multi["absPcross_jet_n_multi_norm"].fill(jet_multiplicity_2D, absPcross);
-      _h_multi["t2_pt_m_multi_norm"].fill(pttbar.mass()/GeV, t2.pt()/GeV);
-      _h_multi["tt_pt_m_multi_norm"].fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
-      _h_multi["abs_tt_y_m_multi_norm"].fill(pttbar.mass()/GeV, pttbar.absrap());
-      _h_multi["t1_pt_t2_pt_multi_norm"].fill(t2.pt()/GeV, t1.pt()/GeV);
-      _h_multi["t1_pt_m_multi_y0_norm"].fill(pttbar.mass()/GeV, t1.pt()/GeV);
+      _h_multi["t1_pt_jet_n_multi"]->fill(jet_multiplicity_2D, t1.pt()/GeV);
+      _h_multi["t2_pt_jet_n_multi"]->fill(jet_multiplicity_2D, t2.pt()/GeV);
+      _h_multi["tt_pt_jet_n_multi"]->fill(jet_multiplicity_2D, pttbar.pt()/GeV);
+      _h_multi["absPout_jet_n_multi"]->fill(jet_multiplicity_2D, absPout);
+      _h_multi["DeltaPhi_jet_n_multi"]->fill(jet_multiplicity_2D, DPhi);
+      _h_multi["absPcross_jet_n_multi"]->fill(jet_multiplicity_2D, absPcross);
+      _h_multi["t2_pt_m_multi"]->fill(pttbar.mass()/GeV, t2.pt()/GeV);
+      _h_multi["tt_pt_m_multi"]->fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
+      _h_multi["abs_tt_y_m_multi"]->fill(pttbar.mass()/GeV, pttbar.absrap());
+      _h_multi["t1_pt_t2_pt_multi"]->fill(t2.pt()/GeV, t1.pt()/GeV);
+      _h_multi["t1_pt_m_multi_y0"]->fill(pttbar.mass()/GeV, t1.pt()/GeV);
+      _h_multi["t1_pt_jet_n_multi_norm"]->fill(jet_multiplicity_2D, t1.pt()/GeV);
+      _h_multi["t2_pt_jet_n_multi_norm"]->fill(jet_multiplicity_2D, t2.pt()/GeV);
+      _h_multi["tt_pt_jet_n_multi_norm"]->fill(jet_multiplicity_2D, pttbar.pt()/GeV);
+      _h_multi["absPout_jet_n_multi_norm"]->fill(jet_multiplicity_2D, absPout);
+      _h_multi["DeltaPhi_jet_n_multi_norm"]->fill(jet_multiplicity_2D, DPhi);
+      _h_multi["absPcross_jet_n_multi_norm"]->fill(jet_multiplicity_2D, absPcross);
+      _h_multi["t2_pt_m_multi_norm"]->fill(pttbar.mass()/GeV, t2.pt()/GeV);
+      _h_multi["tt_pt_m_multi_norm"]->fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
+      _h_multi["abs_tt_y_m_multi_norm"]->fill(pttbar.mass()/GeV, pttbar.absrap());
+      _h_multi["t1_pt_t2_pt_multi_norm"]->fill(t2.pt()/GeV, t1.pt()/GeV);
+      _h_multi["t1_pt_m_multi_y0_norm"]->fill(pttbar.mass()/GeV, t1.pt()/GeV);
     }
 
     void finalize() {
@@ -431,31 +431,18 @@ namespace Rivet {
         if (hit.first.find("_norm") != string::npos)  normalize(hit.second, 1.0, false);
       }
       for (auto& hit : _h_multi) {
-        if (hit.first.find("_norm") != string::npos) {
-          for (Histo1DPtr& hist : hit.second.histos()) { scale(hist, sf); }
-          const double norm2D = integral2D(hit.second);
-          hit.second.scale(safediv(1.0, norm2D), this);
-        }
-        else {
-          hit.second.scale(sf, this);
-        }
+        scale(hit.second, sf);
+        if (hit.first.find("_norm") != string::npos)  normalizeGroup(hit.second, 1.0, false);
       }
+      divByGroupWidth(_h_multi);
     }
 
   private:
 
-    double integral2D(BinnedHistogram& h_multi) {
-      double total_integral = 0;
-      for  (Histo1DPtr& h : h_multi.histos()) {
-        total_integral += h->integral(false);
-      }
-      return total_integral;
-    }
-
-    void book2D(string name, std::vector<double>& doubleDiff_bins, size_t table){
-      for (size_t i = 0; i < doubleDiff_bins.size() - 1; ++i) {
-        string nbin = std::to_string(i);
-        { Histo1DPtr tmp; _h_multi[name].add(doubleDiff_bins[i], doubleDiff_bins[i+1], book(tmp, table+i, 1, 1)); }
+    void book2D(const string& name, std::vector<double>& doubleDiff_bins, size_t table) {
+      book(_h_multi[name], doubleDiff_bins);
+      for (auto& b : _h_multi[name]->bins()) {
+        book(b, table + b.index() - 1, 1, 1);
       }
     }
 
@@ -497,7 +484,7 @@ namespace Rivet {
 
     /// @name Objects that are used by the event selection decisions
     map<string, Histo1DPtr> _h;
-    map<string, BinnedHistogram> _h_multi;
+    map<string, Histo1DGroupPtr> _h_multi;
   };
 
   // The hook for the plugin system

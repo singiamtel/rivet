@@ -117,7 +117,7 @@ namespace Rivet {
     }
 
     Histo1DPtr _h_X0, _h_XP, _h_X0Iint,_h_X0Oint, _h_XPint, _h_Sc, _h_Lc, _h_D0, _h_DP, _h_Xc, _h_X0D, _h_XPD, _h_X0L;
-    Scatter2DPtr _h_X0D0, _h_XPDP, _h_X0Lc, _h_XcSc;
+    Estimate1DPtr _h_X0D0, _h_XPDP, _h_X0Lc, _h_XcSc;
 
   };
 

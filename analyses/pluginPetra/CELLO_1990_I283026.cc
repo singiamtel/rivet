@@ -21,20 +21,32 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+
       declare(Beam(), "Beams");
       declare(ChargedFinalState(), "FS");
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_h_K0    , 1, 1, 1);
-      book(_h_Kstar , 2, 1, 1);
-      book(_h_Lambda, 3, 1, 1);
+      book(_h["K0"],     1, 1, 1);
+      book(_h["Kstar"],  2, 1, 1);
+      book(_h["Lambda"], 3, 1, 1);
+
+      _axes["K0"] = YODA::Axis<double>({0.0315, 0.0365, 0.0535, 0.0745, 0.0955, 0.1165,
+                                        0.1415, 0.175, 0.2375, 0.282, 0.3775, 0.652});
+      _axes["Kstar"] = YODA::Axis<double>({0.055, 0.195, 0.335, 0.537, 0.883});
+      _axes["Lambda"] = YODA::Axis<double>({0.067, 0.085, 0.103, 0.131, 0.175, 0.269, 0.447, 0.723});
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      if (_edges.empty()) {
+        for (const auto& item : _h) {
+          _edges[item.first] = item.second->xEdges();
+        }
+      }
 
       // First, veto on leptonic events by requiring at least 4 charged FS particles
       const FinalState& fs = apply<FinalState>(event, "FS");
@@ -49,8 +61,7 @@ namespace Rivet {
 
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() +
-                                   beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = 0.5*(beams.first.p3().mod() + beams.second.p3().mod());
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
       // Final state of unstable particles to get particle spectra
@@ -59,23 +70,28 @@ namespace Rivet {
       for (const Particle& p : ufs.particles()) {
         const int id = p.abspid();
         if (id == PID::K0S || id == PID::K0L) {
-          _h_K0->fill(p.E()/meanBeamMom);
+          discfill("K0", p.E()/meanBeamMom);
         }
-	else if(abs(id)==323) {
-          _h_Kstar->fill(p.E()/meanBeamMom);
-	}
-	else if(abs(id)==3122) {
-          _h_Lambda->fill(p.E()/meanBeamMom);
-	}
+        else if(abs(id)==323) {
+          discfill("Kstar", p.E()/meanBeamMom);
+        }
+        else if(abs(id)==3122) {
+          discfill("Lambda", p.E()/meanBeamMom);
+        }
       }
+    }
+
+    void discfill(const string& name, const double value) {
+      string edge = "OTHER";
+      const size_t idx = _axes[name].index(value);
+      if (idx && idx <= _edges[name].size())  edge = _edges[name][idx-1];
+      _h[name]->fill(edge);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_K0    , 1./sumOfWeights());
-      scale(_h_Kstar , 1./sumOfWeights());
-      scale(_h_Lambda, 1./sumOfWeights());
+      scale(_h, 1./sumOfWeights());
     }
 
     /// @}
@@ -83,7 +99,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_K0, _h_Kstar, _h_Lambda;
+    map<string, BinnedHistoPtr<string>> _h;
+    map<string, YODA::Axis<double>> _axes;
+    map<string, vector<string>> _edges;
     /// @}
 
 

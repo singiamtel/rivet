@@ -66,7 +66,7 @@ namespace Rivet {
     void finalize() {
       for(unsigned int ix=0;ix<3;++ix)
 	scale(_h[ix],1e7/ *_c[ix]);
-      Scatter2DPtr as;
+      Estimate1DPtr as;
       book(as,1,1,2);
       asymm(_h[2],_h[1],as);
     }

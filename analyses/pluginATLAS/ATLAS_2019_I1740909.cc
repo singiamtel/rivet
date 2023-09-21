@@ -25,9 +25,9 @@ namespace Rivet {
       FastJets jetpro(jetinput, FastJets::ANTIKT, 0.4);
       declare(jetpro, "Jets");
 
-      book(_p["nch_jetpt_F"] , 1, 1, 1);
-      book(_p["nch_jetpt_C"] , 2, 1, 1);
-      book(_p["nch_jetpt_B"] , 9, 1, 1);
+      book(_p["nch_jetpt_F"], 1, 1, 1);
+      book(_p["nch_jetpt_C"], 2, 1, 1);
+      book(_p["nch_jetpt_B"], 9, 1, 1);
 
       for (size_t i_bin = 0; i_bin < 14; ++i_bin) {
         book(_h["nch_B"+to_str(i_bin)] , 13 + i_bin, 1, 1);
@@ -127,25 +127,6 @@ namespace Rivet {
 
     void finalize() {
 
-      // For r only
-      /// @todo Replace with barchart()
-      for (auto& hist : _hr) {
-        for(size_t i=1; i < hist.second->numBins()+1; ++i) {
-          const double x = hist.second->bin(i).xMid();
-          const double bW = hist.second->bin(i).xWidth();
-          hist.second->bin(i).scaleW(bW/(2.0*M_PI*x));
-        }
-      }
-
-      // The rest
-      /// @todo Replace with barchart()
-      for (auto& hist : _h) {
-        for (size_t i=1; i < hist.second->numBins()+1; ++i) {
-          const double bW = hist.second->bin(i).xWidth();
-          hist.second->bin(i).scaleW(bW);
-        }
-      }
-
       for (size_t i_bin = 0; i_bin < 14; ++i_bin) {
 
         const double sfB =  _h["nch_B"+to_str(i_bin)]->sumW();
@@ -172,6 +153,26 @@ namespace Rivet {
           scale(_h["nch_C"+to_str(i_bin)], 1.0/sfC);
         }
       }
+
+      // For r only
+      /// @todo Replace with barchart()
+      for (auto& hist : _hr) {
+        for(size_t i=1; i < hist.second->numBins()+1; ++i) {
+          const double x = hist.second->bin(i).xMid();
+          const double bW = hist.second->bin(i).xWidth();
+          hist.second->bin(i).scaleW(bW/(2.0*M_PI*x));
+        }
+      }
+
+      // The rest
+      /// @todo Replace with barchart()
+      for (auto& hist : _h) {
+        for (size_t i=1; i < hist.second->numBins()+1; ++i) {
+          const double bW = hist.second->bin(i).xWidth();
+          hist.second->bin(i).scaleW(bW);
+        }
+      }
+
     }
 
   private:

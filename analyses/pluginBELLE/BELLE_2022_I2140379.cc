@@ -94,14 +94,14 @@ namespace Rivet {
     pair<double,double> calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
-	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double ai = 0.5*(bin.xMax()-bin.xMin());
-	double bi = 0.5*ai*(bin.xMax()+bin.xMin());
-	double Ei = bin.errW();
-	sum1 += sqr(bi/Ei);
-	sum2 += bi/sqr(Ei)*(Oi-ai);
+      for (const auto& bin : hist->bins() ) {
+        double Oi = bin.sumW();
+        if(Oi==0.) continue;
+        double ai = 0.5*(bin.xMax()-bin.xMin());
+        double bi = 0.5*ai*(bin.xMax()+bin.xMin());
+        double Ei = bin.errW();
+        sum1 += sqr(bi/Ei);
+        sum2 += bi/sqr(Ei)*(Oi-ai);
       }
       return make_pair(sum2/sum1,sqrt(1./sum1));
     }
@@ -109,19 +109,18 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       pair<double,double> aSigma(-.983,0.013);
-      for(unsigned int ix=0;ix<3;++ix) {
-	normalize(_h[ix]);
-	Scatter2DPtr _h_alpha1;
-	book(_h_alpha1,1,1+ix,1);
-	pair<double,double> alpha = calcAlpha(_h[ix]);
-	_h_alpha1->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
-	// divide out alpha Sigma
-	alpha.second = alpha.first/aSigma.first*
-	  sqrt(sqr(alpha.second/alpha.first) + sqr(aSigma.second/aSigma.first));
-	alpha.first /= aSigma.first;
-	Scatter2DPtr _h_alpha2;
-	book(_h_alpha2,1,1+ix,2);
-	_h_alpha2->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
+      for (unsigned int ix=0;ix<3;++ix) {
+        normalize(_h[ix]);
+        Estimate1DPtr _h_alpha1;
+        book(_h_alpha1,1,1+ix,1);
+        pair<double,double> alpha = calcAlpha(_h[ix]);
+        _h_alpha1->bin(1).set(alpha.first, alpha.second);
+        // divide out alpha Sigma
+        alpha.second = alpha.first/aSigma.first* sqrt(sqr(alpha.second/alpha.first) + sqr(aSigma.second/aSigma.first));
+        alpha.first /= aSigma.first;
+        Estimate1DPtr _h_alpha2;
+        book(_h_alpha2,1,1+ix,2);
+        _h_alpha2->bin(1).set(alpha.first, alpha.second);
       }
     }
 

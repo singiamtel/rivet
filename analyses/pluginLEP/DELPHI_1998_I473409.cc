@@ -74,12 +74,10 @@ namespace Rivet {
       book(_h_lgt_p_p , 38,1,1);
       book(_h_lgt_p_x , 39,1,1);
 
-      for(unsigned int ix=0;ix<3;++ix) {
-	for(unsigned int iy=0;iy<5;++iy) {
-	  std::ostringstream title;
-	  title << "/TMP/MULT_" << ix << "_" << iy;
-	  book(_mult[ix][iy],title.str());
-	}
+      for (unsigned int ix=0; ix<3; ++ix) {
+        for (unsigned int iy=0; iy<5; ++iy) {
+          book(_mult[ix][iy], ix+1, 1, iy+1);
+        }
       }
       book(_wLgt,"TMP/wLgt");
       book(_wBot,"TMP/wBot");
@@ -137,91 +135,91 @@ namespace Rivet {
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
       // loop over the charged particles
       for (const Particle& p : fs.particles()) {
-	double modp = p.p3().mod();
+        double modp = p.p3().mod();
         double xp = modp/meanBeamMom;
-	int id = abs(p.pid());
-	_d_all->fill(modp);
-	_mult[0][0]->fill();
-	_h_all_ch_p->fill(modp);
-	_h_all_ch_x->fill(xp  );
-	if(flavour<=3) {
-	  _d_lgt->fill(modp);
-	  _mult[2][0]->fill();
-	  _h_lgt_ch_p->fill(modp);
-	  _h_lgt_ch_x->fill(xp  );
-	}
-	else if(flavour==5) {
-	  _d_bot  ->fill(modp);
-	  _mult[1][0]->fill();
-	  _h_bot_ch_p->fill(modp);
-	  _h_bot_ch_x->fill(xp  );
-	}
-	if(id==211) {
-	  _h_all_pi ->fill(modp);
-	  _mult[0][1]->fill();
-	  _h_all_pi_p->fill(modp);
-	  _h_all_pi_x->fill(xp  );
-	  if(flavour<=3) {
-	    _h_lgt_pi ->fill(modp);
-	    _mult[2][1]->fill();
-	    _h_lgt_pi_p->fill(modp);
-	    _h_lgt_pi_x->fill(xp  );
-	  }
-	  else if(flavour==5) {
-	    _h_bot_pi ->fill(modp);
-	    _mult[1][1]->fill();
-	    _h_bot_pi_p->fill(modp);
-	    _h_bot_pi_x->fill(xp  );
-	  }
-	}
-	else if(id==321) {
-	  _h_all_K ->fill(modp);
-	  _h_all_Kp->fill(modp);
-	  _mult[0][2]->fill();
-	  _mult[0][4]->fill();
-	  _h_all_K_p ->fill(modp);
-	  _h_all_k_x ->fill(xp  );
-	  if(flavour<=3) {
-	    _h_lgt_K->fill(modp);
-	    _h_lgt_Kp->fill(modp);
-	    _mult[2][2]->fill();
-	    _mult[2][4]->fill();
-	    _h_lgt_K_p ->fill(modp);
-	    _h_lgt_k_x ->fill(xp  );
-	  }
-	  else if(flavour==5) {
-	    _h_bot_K ->fill(modp);
-	    _h_bot_Kp->fill(modp);
-	    _mult[1][2]->fill();
-	    _mult[1][4]->fill();
-	    _h_bot_K_p ->fill(modp);
-	    _h_bot_k_x ->fill(xp  );
-	  }
-	}
-	else if(id==2212) {
-	  _h_all_p ->fill(modp);
-	  _h_all_Kp->fill(modp);
-	  _mult[0][3]->fill();
-	  _mult[0][4]->fill();
-	  _h_all_p_p ->fill(modp);
-	  _h_all_p_x ->fill(xp  );
-	  if(flavour<=3) {
-	    _h_lgt_p ->fill(modp);
-	    _h_lgt_Kp->fill(modp);
-	    _mult[2][3]->fill();
-	    _mult[2][4]->fill();
-	    _h_lgt_p_p ->fill(modp);
-	    _h_lgt_p_x ->fill(xp  );
-	  }
-	  else if(flavour==5) {
-	    _h_bot_p ->fill(modp);
-	    _h_bot_Kp->fill(modp);
-	    _mult[1][3]->fill();
-	    _mult[1][4]->fill();
-	    _h_bot_p_p ->fill(modp);
-	    _h_bot_p_x ->fill(xp  );
-	  }
-	}
+        int id = abs(p.pid());
+        _d_all->fill(modp);
+        _mult[0][0]->fill(Ecm);
+        _h_all_ch_p->fill(modp);
+        _h_all_ch_x->fill(xp  );
+        if(flavour<=3) {
+          _d_lgt->fill(modp);
+          _mult[2][0]->fill(Ecm);
+          _h_lgt_ch_p->fill(modp);
+          _h_lgt_ch_x->fill(xp  );
+        }
+        else if(flavour==5) {
+          _d_bot  ->fill(modp);
+          _mult[1][0]->fill(Ecm);
+          _h_bot_ch_p->fill(modp);
+          _h_bot_ch_x->fill(xp  );
+        }
+        if(id==211) {
+          _h_all_pi ->fill(modp);
+          _mult[0][1]->fill(Ecm);
+          _h_all_pi_p->fill(modp);
+          _h_all_pi_x->fill(xp  );
+          if(flavour<=3) {
+            _h_lgt_pi ->fill(modp);
+            _mult[2][1]->fill(Ecm);
+            _h_lgt_pi_p->fill(modp);
+            _h_lgt_pi_x->fill(xp  );
+          }
+          else if(flavour==5) {
+            _h_bot_pi ->fill(modp);
+            _mult[1][1]->fill(Ecm);
+            _h_bot_pi_p->fill(modp);
+            _h_bot_pi_x->fill(xp  );
+          }
+        }
+        else if(id==321) {
+          _h_all_K ->fill(modp);
+          _h_all_Kp->fill(modp);
+          _mult[0][2]->fill(Ecm);
+          _mult[0][4]->fill(Ecm);
+          _h_all_K_p ->fill(modp);
+          _h_all_k_x ->fill(xp  );
+          if(flavour<=3) {
+            _h_lgt_K->fill(modp);
+            _h_lgt_Kp->fill(modp);
+            _mult[2][2]->fill(Ecm);
+            _mult[2][4]->fill(Ecm);
+            _h_lgt_K_p ->fill(modp);
+            _h_lgt_k_x ->fill(xp  );
+          }
+          else if(flavour==5) {
+            _h_bot_K ->fill(modp);
+            _h_bot_Kp->fill(modp);
+            _mult[1][2]->fill(Ecm);
+            _mult[1][4]->fill(Ecm);
+            _h_bot_K_p ->fill(modp);
+            _h_bot_k_x ->fill(xp  );
+          }
+        }
+        else if(id==2212) {
+          _h_all_p ->fill(modp);
+          _h_all_Kp->fill(modp);
+          _mult[0][3]->fill(Ecm);
+          _mult[0][4]->fill(Ecm);
+          _h_all_p_p ->fill(modp);
+          _h_all_p_x ->fill(xp  );
+          if(flavour<=3) {
+            _h_lgt_p ->fill(modp);
+            _h_lgt_Kp->fill(modp);
+            _mult[2][3]->fill(Ecm);
+            _mult[2][4]->fill(Ecm);
+            _h_lgt_p_p ->fill(modp);
+            _h_lgt_p_x ->fill(xp  );
+          }
+          else if(flavour==5) {
+            _h_bot_p ->fill(modp);
+            _h_bot_Kp->fill(modp);
+            _mult[1][3]->fill(Ecm);
+            _mult[1][4]->fill(Ecm);
+            _h_bot_p_p ->fill(modp);
+            _h_bot_p_x ->fill(xp  );
+          }
+        }
       }
     }
 
@@ -235,7 +233,7 @@ namespace Rivet {
       scale(_h_all_K ,100.);
       scale(_h_all_p ,100.);
       scale(_h_all_Kp,100.);
-      Scatter2DPtr temp;
+      Estimate1DPtr temp;
       book(temp,4,1,1);
       divide(_h_all_pi, _d_all, temp);
       book(temp,5,1,1);
@@ -299,15 +297,10 @@ namespace Rivet {
       scale(_h_lgt_p_x , 1./ *_wLgt);
 
       // multiplicities
-      vector<CounterPtr> scales = {_wAll,_wBot,_wLgt};
-      for(unsigned int ix=0;ix<3;++ix) {
-	if(scales[ix]->effNumEntries()<=0.) continue;
-	for(unsigned int iy=0;iy<5;++iy) {
-	  Scatter2DPtr scatter;
-	  book(scatter, ix+1, 1, iy+1, true);
-	  scale(_mult[ix][iy],1./ *scales[ix]);
-	  scatter->point(0).setY(_mult[ix][iy]->val(),_mult[ix][iy]->err());
-	}
+      vector<CounterPtr> scales = {_wAll, _wBot, _wLgt};
+      for (unsigned int ix=0; ix<3; ++ix) {
+        if (scales[ix]->effNumEntries()<=0.) continue;
+        scale(_mult[ix], 1./ *scales[ix]);
       }
     }
 
@@ -325,7 +318,8 @@ namespace Rivet {
     Histo1DPtr _h_bot_K_p  , _h_bot_k_x  , _h_bot_p_p  , _h_bot_p_x ;
     Histo1DPtr _h_lgt_ch_p , _h_lgt_ch_x , _h_lgt_pi_p , _h_lgt_pi_x;
     Histo1DPtr _h_lgt_K_p  , _h_lgt_k_x  , _h_lgt_p_p  , _h_lgt_p_x ;
-    CounterPtr _mult[3][5];
+    BinnedHistoPtr<string> _mult[3][5];
+    const string Ecm = "91.2";
 
     CounterPtr _wLgt, _wBot, _wAll;
     /// @}

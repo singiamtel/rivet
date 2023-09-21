@@ -59,7 +59,8 @@ namespace Rivet {
       const FinalState& cfs = apply<FinalState>(event, "CFS");
       if(cfs.particles().size()<5) vetoEvent;
       // charged particle mult
-      _histMult->fill(cfs.particles().size());
+      const string multi_edge = std::to_string(cfs.particles().size()) + ".0";
+      _histMult->fill(multi_edge);
       // Sphericity related
       const Sphericity& sphericity = apply<Sphericity>(event, "Sphericity");
       _histSphericity->fill(sphericity.sphericity());
@@ -103,9 +104,7 @@ namespace Rivet {
       scale(_histMJetHeavy , 1./sumOfWeights());
       scale(_histMJetLight , 1./sumOfWeights());
       // percentage and bin width
-      scale(_histMult, 100.*2./sumOfWeights());
-      // scale(, 1./sumOfWeights());
-      // scale(, 1./sumOfWeights());
+      scale(_histMult, 100./sumOfWeights());
     }
 
     ///@}
@@ -117,7 +116,8 @@ namespace Rivet {
     Histo1DPtr _histJade,_histDurham;
     Histo1DPtr _histSphericity, _histAplanarity;
     Histo1DPtr _histC, _histD;
-    Histo1DPtr _histMJetHeavy, _histMJetLight, _histMult;
+    Histo1DPtr _histMJetHeavy, _histMJetLight;
+    BinnedHistoPtr<string> _histMult;
     ///@}
 
 

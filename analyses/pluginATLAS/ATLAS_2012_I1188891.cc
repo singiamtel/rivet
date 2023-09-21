@@ -135,7 +135,7 @@ namespace Rivet {
   private:
 
     Histo1DPtr   _h_temp[7];
-    Scatter2DPtr _h_results[6];
+    Estimate1DPtr _h_results[6];
   };
 
 

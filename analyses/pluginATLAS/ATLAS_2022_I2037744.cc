@@ -7,7 +7,6 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
     class ATLAS_2022_I2037744 : public Analysis {
@@ -20,8 +19,8 @@ namespace Rivet {
         void init() {
 
             // Define cut objects on eta, eta neutrino and leptons
-            Cut eta_full =  (Cuts::abseta < 5.0);
-            Cut lep_cuts = (Cuts::abseta < 2.5) && (Cuts::pT > 27.0*GeV);
+            Cut eta_full =  Cuts::abseta < 5.0;
+            Cut lep_cuts = Cuts::abseta < 2.5 && Cuts::pT > 27*GeV;
 
             // All final state particles
             const FinalState fs(eta_full);
@@ -91,7 +90,7 @@ namespace Rivet {
             book_hist("ttbar_boosted_rc_pt",26);
             book_hist("dphi_hadTop_lepTop",29);
             book_hist("HTall",32);
-            book_hist("Nextrajets",35);
+            book(_njets, 36,1,1);
             book_hist("LeadAddJet_pt",38);
             book_hist("LeadAddJet_hadTop_m",41);
             book_hist("dphi_LeadAddJet_hadTop",44);
@@ -286,7 +285,7 @@ namespace Rivet {
             fillHist("ttbar_boosted_rc_pt",     pttbar.pt()/GeV);
             fillHist("dphi_hadTop_lepTop",      dphi_hadTop_lepTop);
             fillHist("HTall",                   HT_all/GeV);
-            fillHist("Nextrajets",              mapNjets(addJets.size()));
+            _njets->fill(map2string(min(addJets.size(),6)));
 
             if(addJets.size() > 0) {
                 const double dphi_leadaddjet_hadTop = deltaPhi( leading_addjet,HadronicTop ) / PI;
@@ -295,10 +294,10 @@ namespace Rivet {
                 fillHist("dphi_LeadAddJet_hadTop", dphi_leadaddjet_hadTop);
 
                 // 2D Observables
-                fillHist2D("LeadAddJet_pt_2D_Nextrajets", mapNjets(addJets.size()), leading_addjet.pt()/GeV);
+                fillHist2D("LeadAddJet_pt_2D_Nextrajets", min(addJets.size(),6), leading_addjet.pt()/GeV);
                 fillHist2D("LeadAddJet_pt_2D_Top_boosted_rc_pt", HadronicTop.pt()/GeV, leading_addjet.pt()/GeV);
                 fillHist2D("dphi_LeadAddJet_hadTop_2D_Top_boosted_rc_pt", HadronicTop.pt()/GeV, dphi_leadaddjet_hadTop);
-                fillHist2D("dphi_LeadAddJet_hadTop_2D_Nextrajets", mapNjets(addJets.size()), dphi_leadaddjet_hadTop);
+                fillHist2D("dphi_LeadAddJet_hadTop_2D_Nextrajets", min(addJets.size(),6), dphi_leadaddjet_hadTop);
             }
 
             if(addJets.size() > 1) {
@@ -314,23 +313,19 @@ namespace Rivet {
         void finalize() {
 
             // Normalize to cross-section
-            const double sf = (crossSection() / picobarn / sumOfWeights());
+            const double sf = crossSection() / picobarn / sumOfWeights();
 
             for (auto& hist : _h) {
-                scale(hist.second, sf);
-                if (hist.first.find("_norm") != string::npos)  normalize(hist.second, 1.0, false);
+              scale(hist.second, sf);
+              if (hist.first.find("_norm") != string::npos)  normalize(hist.second, 1.0, false);
             }
+            scale(_njets, sf);
             for (auto& hist : _h_multi) {
-                if (hist.first.find("_norm") != string::npos) {
-                    for (Histo1DPtr& hist_internal : hist.second.histos()) {
-                        scale(hist_internal, sf);
-                    }
-                    const double norm2D = integral2D(hist.second);
-                    hist.second.scale(safediv(1.0, norm2D), this);
-                }
-                else {
-                    hist.second.scale(sf, this);
-                }
+              scale(hist.second, sf);
+              if (hist.first.find("_norm") != string::npos) {
+                normalize(hist.second, 1.0, false);
+              }
+              divByGroupWidth(hist.second);
             }
 
         } //finalize
@@ -339,46 +334,41 @@ namespace Rivet {
     private:
 
         // HepData entry has dummy "Table of Contents", for both 1D and 2D hists need to offset tables by one unit
-        void book_hist(string name, unsigned int table, bool do_norm = true) {
-            book(_h[name], table+1, 1, 1);
-            if (do_norm) {
-                book(_h[name+"_norm"], table+3, 1, 1);
-            }
+        void book_hist(const string& name, unsigned int table, bool do_norm = true) {
+          book(_h[name], table+1, 1, 1);
+          if (do_norm) {
+            book(_h[name+"_norm"], table+3, 1, 1);
+          }
         }
 
-        void book_2Dhist(string name, std::vector<double>& doubleDiff_bins, unsigned int table){
-            for (size_t i = 0; i < doubleDiff_bins.size() - 1; ++i) {
-                { Histo1DPtr tmp; _h_multi[name].add(doubleDiff_bins[i], doubleDiff_bins[i+1], book(tmp, table+4+i, 1, 1)); }
-                { Histo1DPtr tmp; _h_multi[name+"_norm"].add(doubleDiff_bins[i], doubleDiff_bins[i+1], book(tmp, table+1+i, 1, 1)); }
-            }
+        void book_2Dhist(const string& name, const std::vector<double>& doubleDiff_bins, unsigned int table) {
+          book(_h_multi[name+"_norm"], doubleDiff_bins);
+          book(_h_multi[name], doubleDiff_bins);
+          for (size_t i=0; i < _h_multi[name]->numBins(); ++i) {
+            book(_h_multi[name+"_norm"]->bin(i+1), table+i+1, 1, 1);
+            book(_h_multi[name]->bin(i+1), table+i+4, 1, 1);
+          }
         }
 
         // Fill abs and nomralised hists at same time
-        void fillHist(const string name, double value, bool do_norm = true) {
-            _h[name]->fill(value);
-            if (do_norm) {
-                _h[name+"_norm"]->fill(value);
-            }
+        void fillHist(const string& name, double value, bool do_norm = true) {
+          _h[name]->fill(value);
+          if (do_norm)  _h[name+"_norm"]->fill(value);
         }
 
-        void fillHist2D(const string name, double externalbin, double val) {
-            _h_multi[name].fill(externalbin, val);
-            _h_multi[name+"_norm"].fill(externalbin, val);
+        void fillHist2D(const string& name, double externalbin, double val) {
+          _h_multi[name]->fill(externalbin, val);
+          _h_multi[name+"_norm"]->fill(externalbin, val);
         }
 
-        double integral2D(BinnedHistogram& h_multi) {
-            double total_integral = 0;
-            for  (Histo1DPtr& h : h_multi.histos()) {
-                total_integral += h->integral(false);
-            }
-            return total_integral;
+        string map2string(const size_t njets) const {
+          if (njets == 0)  return "0";
+          if (njets == 1)  return "1";
+          if (njets == 2)  return "2";
+          if (njets  < 5)  return "3.0 - 4.0";
+          return "$>$4";
         }
 
-        // small utility function accounting for the fact Njets has no upper bound
-        unsigned int mapNjets(unsigned int njets) {
-            if( njets > 6) njets = 6;
-            return njets;
-        }
 
         double computeneutrinoz(const FourMomentum& lepton, const FourMomentum& met, const FourMomentum& lbjet) const {
             const double m_W = 80.385*GeV; // mW
@@ -398,7 +388,7 @@ namespace Rivet {
                 topCands[i] = neutrino + lbjet + lepton;
             }
             // Pick neutrino solution that results in smallest top mass
-            if( topCands[0].mass() <= topCands[1].mass() ) {
+            if (topCands[0].mass() <= topCands[1].mass() ) {
                 return pzneutrinos[0];
             } else {
                 return pzneutrinos[1];
@@ -407,7 +397,8 @@ namespace Rivet {
 
         // Histogram pointer maps
         map<string, Histo1DPtr> _h;
-        map<string, BinnedHistogram > _h_multi;
+        BinnedHistoPtr<string> _njets;
+        map<string, Histo1DGroupPtr> _h_multi;
     };
 
     // The hook for the plugin system

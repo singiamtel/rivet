@@ -99,9 +99,9 @@ namespace Rivet {
           if (pt >= _max_D_pt)  pt = _max_D_pt - 10;
 
           // Fill histograms
-          _h[histo_name(lepton_name, hadron_name, "lep_abs_eta")]->fill(std::abs(lepton.eta()), weight);
+          _h[histo_name(lepton_name, hadron_name, "lep_abs_eta")]->fill(lepton.abseta(), weight);
           _h[histo_name(lepton_name, hadron_name, "D_pt")]->fill(pt, weight);
-          _h[histo_name(lepton_name, hadron_name, "lep_abs_eta") + "_norm"]->fill(std::abs(lepton.eta()), weight);
+          _h[histo_name(lepton_name, hadron_name, "lep_abs_eta") + "_norm"]->fill(lepton.abseta(), weight);
           _h[histo_name(lepton_name, hadron_name, "D_pt") + "_norm"]->fill(pt, weight);
         }
       }
@@ -115,8 +115,8 @@ namespace Rivet {
 
       // D+ and D* production fractions
       const double sum = _h["CharmSpecies"]->integral(false);
-      const double fDplus = safediv(_h["CharmSpecies"]->bin(1).sumW(), sum);
-      const double fDstar = safediv(_h["CharmSpecies"]->bin(0).sumW(), sum);
+      const double fDplus = safediv(_h["CharmSpecies"]->bin(2).sumW(), sum);
+      const double fDstar = safediv(_h["CharmSpecies"]->bin(1).sumW(), sum);
 
       // Reweight to values used in the paper:
       // f(D+) = 0.2404
@@ -131,7 +131,7 @@ namespace Rivet {
         }
       }
 
-      // The cross-sections from this are analysis are not differential
+      // The cross-sections from this analysis are not di_lep_minus_Dplus_D_ptfferential
       for (auto& item : _h) {
         if (item.first != "CharmSpecies")  barchart(item.second, _s[item.first]);
       }
@@ -191,7 +191,7 @@ namespace Rivet {
 
     // Histogram map
     map<string, Histo1DPtr> _h;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
 
     // Last pT(D) bin extends to infinity (150 only for practical purposes)
     double _max_D_pt = 150;

@@ -12,12 +12,12 @@
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Tools/ParticleUtils.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
+#include "Rivet/Tools/HistoGroup.hh"
 #include "Rivet/Tools/RivetMT2.hh"
+#include "Rivet/Tools/RivetPaths.hh"
 #include "Rivet/Tools/RivetYODA.hh"
 #include "Rivet/Tools/Percentile.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
-#include "Rivet/Tools/RivetPaths.hh"
 #include <tuple>
 
 
@@ -469,7 +469,7 @@ namespace Rivet {
 
     /// Get reference data for a named histo
     /// @todo SFINAE to ensure that the type inherits from YODA::AnalysisObject?
-    template <typename T=YODA::Scatter2D>
+    template <typename T=YODA::Estimate1D>
     const T& refData(const string& hname) const {
       _cacheRefData();
       MSG_TRACE("Using histo bin edges for " << name() << ":" << hname);
@@ -483,7 +483,7 @@ namespace Rivet {
 
     /// Get reference data for a numbered histo
     /// @todo SFINAE to ensure that the type inherits from YODA::AnalysisObject?
-    template <typename T=YODA::Scatter2D>
+    template <typename T=YODA::Estimate1D>
     const T& refData(unsigned int datasetId, unsigned int xAxisId, unsigned int yAxisId) const {
       const string hname = mkAxisCode(datasetId, xAxisId, yAxisId);
       return refData<T>(hname);
@@ -508,6 +508,20 @@ namespace Rivet {
 
     /// @}
 
+
+    /// @name Estimate booking
+    /// @{
+
+    /// Book an estimate.
+    Estimate0DPtr& book(Estimate0DPtr&, const std::string& name);
+
+    /// Book an estimate, using a path generated from the dataset and axis ID codes
+    ///
+    /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
+    Estimate0DPtr& book(Estimate0DPtr&, unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID);
+
+
+    /// @}
 
     /// @name BinnedDbn booking
     /// @{
@@ -592,10 +606,10 @@ namespace Rivet {
     /// Book a ND histogram with binning from a reference scatter.
     template<size_t DbnN, typename... AxisT>
     BinnedDbnPtr<DbnN,  AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const std::string& name,
-                                        const YODA::ScatterND<sizeof...(AxisT)+1>& refscatter) {
+                                        const YODA::BinnedEstimate<AxisT...>& refest) {
       const string path = histoPath(name);
 
-      YODA::BinnedDbn<DbnN, AxisT...> yao(refscatter, path);
+      YODA::BinnedDbn<DbnN, AxisT...> yao(refest.binning(), path);
       for (const string& a : yao.annotations()) {
         if (a != "Path")  yao.rmAnnotation(a);
       }
@@ -606,7 +620,7 @@ namespace Rivet {
     /// Book a ND histogram, using the binnings in the reference data histogram.
     template<size_t DbnN, typename... AxisT>
     BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const std::string& name) {
-      return book(ao, name, refData<YODA::ScatterND<sizeof...(AxisT)+1>>(name));
+      return book(ao, name, refData<YODA::BinnedEstimate<AxisT...>>(name));
     }
 
     /// Book a ND histogram, using the binnings in the reference data histogram.
@@ -615,6 +629,124 @@ namespace Rivet {
     template<size_t DbnN, typename... AxisT>
     BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao, const unsigned int datasetID,
                                        const unsigned int xAxisID, const unsigned int yAxisID) {
+      const string name = mkAxisCode(datasetID, xAxisID, yAxisID);
+      return book(ao, name);
+    }
+
+    /// @}
+
+    /// @name HistoGroup booking
+    /// @{
+
+    template <typename GroupAxisT, typename... AxisT>
+    HistoGroupPtr<GroupAxisT, AxisT...>& book(HistoGroupPtr<GroupAxisT, AxisT...>& ao,
+                                              const std::vector<GroupAxisT>& edges,
+                                              const std::vector<std::string>& names) {
+      ao = make_shared<HistoGroup<GroupAxisT, AxisT...>>(edges);
+      assert(ao->numBins() == names.size() && "Binning and reference-data names don't match!");
+      for (auto& b : ao->bins()) {
+        const string& refname = names[b.index()-1];
+        book(b, refname, refData<YODA::BinnedEstimate<AxisT...>>(refname));
+      }
+      return ao;
+    }
+
+    template <typename GroupAxisT, typename... AxisT>
+    HistoGroupPtr<GroupAxisT, AxisT...>& book(HistoGroupPtr<GroupAxisT, AxisT...>& ao,
+                                              const std::vector<GroupAxisT>& edges) {
+      return ao = make_shared<HistoGroup<GroupAxisT, AxisT...>>(edges);
+    }
+
+    template <typename GroupAxisT, typename... AxisT>
+    HistoGroupPtr<GroupAxisT, AxisT...>& book(HistoGroupPtr<GroupAxisT, AxisT...>& ao,
+                                              std::initializer_list<GroupAxisT>&& edges) {
+      return ao = make_shared<HistoGroup<GroupAxisT, AxisT...>>(std::move(edges));
+    }
+
+    /// @}
+
+    /// @name BinnedEstimate booking
+    /// @{
+
+    /// Book a ND estimate with @a nbins uniformly distributed across the range @a lower - @a upper .
+    template<typename... AxisT, typename = YODA::enable_if_all_CAxisT<AxisT...>>
+    BinnedEstimatePtr<AxisT...>& book(BinnedEstimatePtr<AxisT...>& ao,
+                                      const std::string& name, const std::vector<size_t>& nbins,
+                                      const std::vector<std::pair<double,double>>& loUpPairs) {
+      assert(nbins.size() == loUpPairs.size() && "Vectors should have the same size!");
+      const string path = histoPath(name);
+
+      YODA::BinnedEstimate<AxisT...> yao(nbins, loUpPairs, path);
+      _setWriterPrecision(path, yao);
+
+      return ao = registerAO(yao);
+    }
+
+
+    // Specialiation for 1D
+    Estimate1DPtr& book(Estimate1DPtr& ao, const std::string& name,
+                                           const size_t nbins, const double lower, const double upper) {
+      return book(ao, name, vector<size_t>{nbins},
+                  vector<pair<double,double>>{{lower,upper}});
+    }
+
+    // Specialiation for 2D
+    Estimate2DPtr& book(Estimate2DPtr& ao, const std::string& name,
+                                           const size_t nbinsX, const double lowerX, const double upperX,
+                                           const size_t nbinsY, const double lowerY, const double upperY) {
+      return book(ao, name, vector<size_t>{nbinsX,nbinsY},
+                  vector<pair<double,double>>{{lowerX,upperX}, {lowerY,upperY}});
+    }
+
+    // Specialiation for 3D
+    Estimate3DPtr& book(Estimate3DPtr& ao, const std::string& name,
+                                           const size_t nbinsX, const double lowerX, const double upperX,
+                                           const size_t nbinsY, const double lowerY, const double upperY,
+                                           const size_t nbinsZ, const double lowerZ, const double upperZ) {
+      return book(ao, name, vector<size_t>{nbinsX,nbinsY,nbinsZ},
+                  vector<pair<double,double>>{{lowerX,upperX}, {lowerY,upperY}, {lowerZ,upperZ}});
+    }
+
+    /// Book a ND estimate with non-uniform bins defined by the vector of bin edges @a binedges .
+    template<typename... AxisT>
+    BinnedEstimatePtr<AxisT...>& book(BinnedEstimatePtr<AxisT...>& ao, const std::string& name,
+                                      const std::vector<AxisT>&... binedges) {
+      const string path = histoPath(name);
+      YODA::BinnedEstimate<AxisT...> yao(binedges..., path);
+      _setWriterPrecision(path, yao);
+
+      return ao = registerAO(yao);
+    }
+
+    /// Book a ND estimate with non-uniform bins defined by the vector of bin edges @a binedges .
+    template<typename... AxisT>
+    BinnedEstimatePtr<AxisT...>& book(BinnedEstimatePtr<AxisT...>& ao, const std::string& name,
+                                      const std::initializer_list<AxisT>&... binedges) {
+      return book(ao, name, vector<AxisT>{binedges} ...);
+    }
+
+    /// Book a ND estimate, using the binnings in the reference data histogram.
+    template<typename... AxisT>
+    BinnedEstimatePtr<AxisT...>& book(BinnedEstimatePtr<AxisT...>& ao, const std::string& name) {
+
+      const string path = histoPath(name);
+      YODA::BinnedEstimate<AxisT...> yao;
+      try {
+        yao = YODA::BinnedEstimate<AxisT...>(refData<YODA::BinnedEstimate<AxisT...>>(name).binning());
+      } catch (...) {
+        MSG_DEBUG("Couldn't retrieve reference binning, continue with nullary AO constructor.");
+      }
+      yao.setPath(path);
+      _setWriterPrecision(path, yao);
+      return ao = registerAO(yao);
+    }
+
+    /// Book a ND estimate, using the binnings in the reference data histogram.
+    ///
+    /// The paper, dataset and x/y-axis IDs will be used to build the histo name in the HepData standard way.
+    template<typename... AxisT>
+    BinnedEstimatePtr<AxisT...>& book(BinnedEstimatePtr<AxisT...>& ao, const unsigned int datasetID,
+                                      const unsigned int xAxisID, const unsigned int yAxisID) {
       const string name = mkAxisCode(datasetID, xAxisID, yAxisID);
       return book(ao, name);
     }
@@ -640,10 +772,11 @@ namespace Rivet {
       const string path = histoPath(name);
       YODA::ScatterND<N> scat(path);
       if (copy_pts) {
-        for (YODA::PointND<N> p : refData<YODA::ScatterND<N>>(name).points()) {
+        const YODA::ScatterND<N> ref = refData<YODA::EstimateND<N-1>>(name).mkScatter();
+        for (YODA::PointND<N> p : ref.points()) {
           p.setVal(N-1, 0.0);
           p.setErr(N-1, 0.0);
-          scat.addPoint(p);
+          scat.addPoint(std::move(p));
         }
       }
       _setWriterPrecision(path, scat);
@@ -1016,36 +1149,62 @@ namespace Rivet {
     }
 
 
+  protected:
+
     /// @name Analysis object manipulation
     ///
-    /// @todo Should really be protected: only public to keep BinnedHistogram happy for now...
     /// @{
 
-    /// Multiplicatively scale the given counter, @a cnt, by factor @a factor.
-    void scale(CounterPtr cnt, CounterAdapter factor);
-
-    /// Multiplicatively scale the given histogram, @a histo, by factor @a factor.
-    template<size_t DbnN, typename... AxisT>
-    void scale(BinnedDbnPtr<DbnN, AxisT...> ao, CounterAdapter factor) {
+    /// Multiplicatively scale the given AnalysisObject, @a ao, by factor @a factor.
+    template<typename T>
+    void scale(MultiplexPtr<Multiplexer<T>>& ao, CounterAdapter factor) {
       if (!ao) {
-        MSG_WARNING("Failed to scale histo=NULL in analysis " << name() << " (scale=" << double(factor) << ")");
+        MSG_WARNING("Failed to scale AnalysisObject=NULL in analysis "
+                    << name() << " (scale=" << double(factor) << ")");
         return;
       }
       if (std::isnan(double(factor)) || std::isinf(double(factor))) {
-        MSG_WARNING("Failed to scale histo=" << ao->path() << " in analysis: "
+        MSG_WARNING("Failed to scale AnalysisObject=" << ao->path() << " in analysis: "
                     << name() << " (invalid scale factor = " << double(factor) << ")");
         factor = 0;
       }
-      MSG_TRACE("Scaling histo " << ao->path() << " by factor " << double(factor));
+      MSG_TRACE("Scaling AnalysisObject " << ao->path() << " by factor " << double(factor));
       try {
-        ao->scaleW(factor);
+        if constexpr( isFillable<T>::value ) {
+          ao->scaleW(factor);
+        }
+        else {
+          ao->scale(factor);
+        }
       }
       catch (YODA::Exception& we) {
-        MSG_WARNING("Could not scale histo " << ao->path());
+        MSG_WARNING("Could not scale AnalysisObject " << ao->path());
         return;
       }
     }
 
+    /// Multiplicatively scale the given histogram group, @a group, by factor @a factor.
+    template<typename GroupAxisT, typename... AxisT>
+    void scale(HistoGroupPtr<GroupAxisT, AxisT...>& group, CounterAdapter factor) {
+      if (!group) {
+        MSG_WARNING("Failed to scale AnalysisObject=NULL in analysis "
+                    << name() << " (scale=" << double(factor) << ")");
+        return;
+      }
+      if (std::isnan(double(factor)) || std::isinf(double(factor))) {
+        MSG_WARNING("Failed to scale histo group in analysis: "
+                    << name() << " (invalid scale factor = " << double(factor) << ")");
+        factor = 0;
+      }
+      MSG_TRACE("Scaling histo group by factor " << double(factor));
+      try {
+        group->scaleW(factor);
+      }
+      catch (YODA::Exception& we) {
+        MSG_WARNING("Could not scale histo group.");
+        return;
+      }
+    }
 
     /// Iteratively scale the AOs in the map @a aos, by factor @a factor.
     template<typename T, typename U>
@@ -1054,19 +1213,50 @@ namespace Rivet {
     }
 
     /// Iteratively scale the AOs in the iterable @a aos, by factor @a factor.
-    template<typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
+    template <typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
     void scale(AORange& aos, CounterAdapter factor) {
       for (auto& ao : aos)  scale(ao, factor);
     }
 
     /// Iteratively scale the AOs in the initialiser list @a aos, by factor @a factor.
-    template<typename T>
-    void scale(std::initializer_list<T>&& aos, CounterAdapter factor) {
-      for (auto& ao : aos)  scale(ao, factor);
+    template <typename T>
+    void scale(std::initializer_list<T> aos, CounterAdapter factor) {
+      for (auto& ao : std::vector<T>{aos})  scale(ao, factor);
     }
 
-    /// Normalize the given histogram, @a histo to a target @a norm.
-    template<size_t DbnN, typename... AxisT>
+
+    /// Scale the given histogram group, @a group, by the group axis width
+    template<typename GroupAxisT, typename... AxisT>
+    void divByGroupWidth(HistoGroupPtr<GroupAxisT, AxisT...>& group) {
+      if (!group) {
+        MSG_WARNING("Failed to scale HistoGroup=NULL in analysis "
+                    << name() << " by group axis width");
+        return;
+      }
+      group->divByGroupWidth();
+    }
+
+    /// Iteratively scale the HistoGroups in the map @a aos, by the group axis width
+    template<typename T, typename U>
+    void divByGroupWidth(std::map<T, U>& aos) {
+      for (auto& item : aos)  divByGroupWidth(item.second);
+    }
+
+    /// Iteratively scale the HistoGroups in the iterable @a aos, by the group axis width
+    template <typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
+    void divByGroupWidth(AORange& aos) {
+      for (auto& ao : aos)  divByGroupWidth(ao);
+    }
+
+    /// Iteratively scale the HistoGroups in the initialiser list @a aos, by the group axis width
+    template <typename T>
+    void divByGroupWidth(std::initializer_list<T> aos) {
+      for (auto& ao : std::vector<T>{aos})  divByGroupWidth(ao);
+    }
+
+
+    /// Normalize the given analysis object, @a ao to a target @a norm.
+    template <size_t DbnN, typename... AxisT>
     void normalize(BinnedDbnPtr<DbnN, AxisT...> ao, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
       if (!ao) {
         MSG_WARNING("Failed to normalize histo=NULL in analysis " << name() << " (norm=" << double(norm) << ")");
@@ -1084,8 +1274,28 @@ namespace Rivet {
       }
     }
 
+    /// Normalize each AO in the given histogram group, @a group to a target @a norm.
+    template <typename GroupAxisT, typename... AxisT>
+    void normalize(HistoGroupPtr<GroupAxisT, AxisT...> group, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      if (!group) {
+        MSG_WARNING("Failed to normalize histo=NULL in analysis " << name() << " (norm=" << double(norm) << ")");
+        return;
+      }
+      MSG_TRACE("Normalizing histo group  to " << double(norm));
+      try {
+        const double hint = group->integral(includeoverflows);
+        if (hint == 0)  MSG_DEBUG("Skipping histo group with null area.");
+        else            group->normalize(norm, includeoverflows);
+      }
+      catch (YODA::Exception& we) {
+        MSG_WARNING("Could not normalize histo group.");
+        return;
+      }
+    }
+
+
     /// Iteratively normalise the AOs in the iterable @a iter, by factor @a factor.
-    template<typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
+    template <typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
     void normalize(AORange& aos, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
       for (auto& ao : aos)  normalize(ao, norm, includeoverflows);
     }
@@ -1097,95 +1307,201 @@ namespace Rivet {
     }
 
     /// Iteratively normalise the AOs in the map @a aos to a target @a norm.
-    template<typename T, typename U> //size_t DbnN, typename... AxisT>
+    template<typename T, typename U>
     void normalize(std::map<T, U>& aos, //BinnedDbnPtr<DbnN, AxisT...>>& aos,
                    const CounterAdapter norm=1.0, const bool includeoverflows=true) {
       for (auto& item : aos)  normalize(item.second, norm, includeoverflows);
     }
 
+    /// Normalize the given histogram group, @a group to a target @a norm.
+    template <typename GroupAxisT, typename... AxisT>
+    void normalizeGroup(HistoGroupPtr<GroupAxisT, AxisT...> group, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      if (!group) {
+        MSG_WARNING("Failed to normalize histo=NULL in analysis " << name() << " (norm=" << double(norm) << ")");
+        return;
+      }
+      MSG_TRACE("Normalizing histo group  to " << double(norm));
+      try {
+        const double hint = group->integral(includeoverflows);
+        if (hint == 0)  MSG_DEBUG("Skipping histo group with null area.");
+        else            group->normalizeGroup(norm, includeoverflows);
+      }
+      catch (YODA::Exception& we) {
+        MSG_WARNING("Could not normalize histo group.");
+        return;
+      }
+    }
 
-    /// Helper for histogram conversion to an inert scatter type
+    /// Iteratively normalise the HistoGroups in the iterable @a iter, by factor @a factor.
+    template <typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
+    void normalizeGroup(AORange& aos, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      for (auto& ao : aos)  normalizeGroup(ao, norm, includeoverflows);
+    }
+
+    /// Iteratively normalise the HistoGroups in the initialiser list @a iter to a target @a norm.
+    template<typename T>
+    void normalizeGroup(std::initializer_list<T>&& aos, const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      for (auto& ao : aos)  normalizeGroup(ao, norm, includeoverflows);
+    }
+
+    /// Iteratively normalise the HistoGroups in the map @a aos to a target @a norm.
+    template<typename T, typename U>
+    void normalizeGroup(std::map<T, U>& aos, //BinnedDbnPtr<DbnN, AxisT...>>& aos,
+                   const CounterAdapter norm=1.0, const bool includeoverflows=true) {
+      for (auto& item : aos)  normalizeGroup(item.second, norm, includeoverflows);
+    }
+
+
+    /// Helper for histogram conversion to an inert estimate type
     ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
+    /// @note Assigns to the (already registered) output estimate, @a est.
+    /// Preserves the path information of the target.
     template<size_t DbnN, typename... AxisT>
-    void barchart(BinnedDbnPtr<DbnN, AxisT...> ao, ScatterNDPtr<sizeof...(AxisT)+1> s, const bool usefocus=false) const {
-      const string path = s->path();
-      *s = ao->mkScatter(path, false, usefocus); //< do NOT divide by bin area cf. a differential dsigma/dX histogram
+    void barchart(BinnedDbnPtr<DbnN, AxisT...> ao, BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = ao->mkEstimate(path, "stats", false); //< do NOT divide by bin area cf. a differential dsigma/dX histogram
     }
 
     /// Helper for counter division.
     ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(CounterPtr c1, CounterPtr c2, Scatter1DPtr s) const;
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    void divide(CounterPtr c1, CounterPtr c2, Estimate0DPtr est) const;
 
     /// Helper for histogram division with raw YODA objects.
     ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
-    void divide(const YODA::Counter& c1, const YODA::Counter& c2, Scatter1DPtr s) const;
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    void divide(const YODA::Counter& c1, const YODA::Counter& c2, Estimate0DPtr est) const;
+
+    /// Helper for counter division.
+    ///
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    void divide(Estimate0DPtr e1, Estimate0DPtr e2, Estimate0DPtr est) const;
+
+    /// Helper for estimate division with raw YODA objects.
+    ///
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    void divide(const YODA::Estimate0D& e1, const YODA::Estimate0D& e2, Estimate0DPtr est) const;
 
 
     /// Helper for histogram division.
     ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
     template<size_t DbnN, typename... AxisT>
     void divide(const YODA::BinnedDbn<DbnN, AxisT...>& h1, const YODA::BinnedDbn<DbnN, AxisT...>& h2,
-                ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      const string path = s->path();
-      *s = (h1 / h2).mkScatter(path, false); // suppress bin width div
+                BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = h1 / h2;
+      est->setPath(path);
     }
     //
     template<size_t DbnN, typename... AxisT>
     void divide(BinnedDbnPtr<DbnN, AxisT...> h1, BinnedDbnPtr<DbnN, AxisT...> h2,
-                             ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      return divide(*h1, *h2, s);
+                             BinnedEstimatePtr<AxisT...> est) const {
+      return divide(*h1, *h2, est);
     }
+
+    /// Helper for binned estimate division.
+    ///
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    template<typename... AxisT>
+    void divide(const YODA::BinnedEstimate<AxisT...>& e1, const YODA::BinnedEstimate<AxisT...>& e2,
+                BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = e1 / e2;
+      est->setPath(path);
+    }
+    //
+    template<typename... AxisT>
+    void divide(BinnedEstimatePtr<AxisT...> e1, BinnedEstimatePtr<AxisT...> e2,
+                             BinnedEstimatePtr<AxisT...> est) const {
+      return divide(*e1, *e2, est);
+    }
+
 
 
     /// Helper for histogram efficiency calculation.
     ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
     template<size_t DbnN, typename... AxisT>
     void efficiency(const YODA::BinnedDbn<DbnN, AxisT...>& h1, const YODA::BinnedDbn<DbnN, AxisT...>& h2,
-                    ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      const string path = s->path();
-      *s = YODA::efficiency(h1, h2).mkScatter(path, false); // suppress bin width div
+                    BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = YODA::efficiency(h1, h2);
+      est->setPath(path);
     }
     //
     template<size_t DbnN, typename... AxisT>
     void efficiency(BinnedDbnPtr<DbnN, AxisT...> h1, BinnedDbnPtr<DbnN, AxisT...> h2,
-                    ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      efficiency(*h1, *h2, s);
+                    BinnedEstimatePtr<AxisT...> est) const {
+      efficiency(*h1, *h2, est);
+    }
+
+
+    /// Helper for estimate efficiency calculation.
+    ///
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    template<typename... AxisT>
+    void efficiency(const YODA::BinnedEstimate<AxisT...>& e1, const YODA::BinnedEstimate<AxisT...>& e2,
+                    BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = YODA::efficiency(e1, e2);
+      est->setPath(path);
+    }
+    //
+    template<typename... AxisT>
+    void efficiency(BinnedEstimatePtr<AxisT...> e1, BinnedEstimatePtr<AxisT...> e2,
+                    BinnedEstimatePtr<AxisT...> est) const {
+      efficiency(*e1, *e2, est);
     }
 
 
     /// Helper for histogram asymmetry calculation.
     ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
     template<size_t DbnN, typename... AxisT>
     void asymm(const YODA::BinnedDbn<DbnN, AxisT...>& h1, const YODA::BinnedDbn<DbnN, AxisT...>& h2,
-               ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      const string path = s->path();
-      *s = YODA::asymm(h1, h2).mkScatter(path, false); // suppress bin width div
+               BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = YODA::asymm(h1, h2);
+      est->setPath(path);
     }
     //
     template<size_t DbnN, typename... AxisT>
     void asymm(BinnedDbnPtr<DbnN, AxisT...> h1, BinnedDbnPtr<DbnN, AxisT...> h2,
-               ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      asymm(*h1, *h2, s);
+               BinnedEstimatePtr<AxisT...> est) const {
+      asymm(*h1, *h2, est);
+    }
+
+    /// Helper for estimate asymmetry calculation.
+    ///
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    template<typename... AxisT>
+    void asymm(const YODA::BinnedEstimate<AxisT...>& e1, const YODA::BinnedEstimate<AxisT...>& e2,
+               BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = YODA::asymm(e1, e2);
+      est->setPath(path);
+    }
+    //
+    template<typename... AxisT>
+    void asymm(BinnedEstimatePtr<AxisT...> e1, BinnedEstimatePtr<AxisT...> e2,
+               BinnedEstimatePtr<AxisT...> est) const {
+      asymm(*e1, *e2, est);
     }
 
     /// Helper for converting a differential histo to an integral one.
     ///
-    /// @note Assigns to the (already registered) output scatter, @a s. Preserves the path information of the target.
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
     template<size_t DbnN, typename... AxisT>
-    void integrate(const YODA::BinnedDbn<DbnN, AxisT...>& h, ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      const string path = s->path();
-      *s = mkIntegral(h).mkScatter(path);
+    void integrate(const YODA::BinnedDbn<DbnN, AxisT...>& h, BinnedEstimatePtr<AxisT...> est) const {
+      const string path = est->path();
+      *est = mkIntegral(h);
+      est->setPath(path);
     }
     //
     template<size_t DbnN, typename... AxisT>
-    void integrate(BinnedDbnPtr<DbnN, AxisT...>& h, ScatterNDPtr<sizeof...(AxisT)+1> s) const {
-      integrate(*h, s);
+    void integrate(BinnedDbnPtr<DbnN, AxisT...>& h, BinnedEstimatePtr<AxisT...> est) const {
+      integrate(*h, est);
     }
 
     /// @}

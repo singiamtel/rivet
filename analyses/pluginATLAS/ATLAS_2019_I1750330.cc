@@ -7,7 +7,6 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 
 namespace Rivet {
@@ -293,45 +292,43 @@ namespace Rivet {
       int extrajet_n = jet_multiplicity - 4;
       int new_jet_multi = TransformJetMultiplicity(jet_multiplicity);
       int new_jet_multi_for_ttbar_m = TransformJetMultiplicity_for_ttbar_m(jet_multiplicity);
-      int new_extrajet_multi =TransformExtrajetMultiplicity(extrajet_n);
+      int new_extrajet_multi = TransformExtrajetMultiplicity(extrajet_n);
 
-      _h_multi["top_had_pt_Pout_multi"].fill(ppseudotophadron.pt()/GeV, Pout);
-      _h_multi["top_had_pt_absPout_multi"].fill(ppseudotophadron.pt()/GeV, absPout);
-      _h_multi["ttbar_m_top_had_pt_multi"].fill(pttbar.mass()/GeV, ppseudotophadron.pt()/GeV);
-      _h_multi["ttbar_m_ttbar_pt_multi"].fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
-      _h_multi["ttbar_pt_top_had_pt_multi"].fill(pttbar.pt()/GeV, ppseudotophadron.pt()/GeV);
-      _h_multi["ttbar_abs_y_ttbar_pt_multi"].fill(pttbar.absrap(), pttbar.pt()/GeV);
-      _h_multi["ttbar_abs_y_ttbar_m_multi"].fill(pttbar.absrap(), pttbar.mass()/GeV);
-      _h_multi["top_had_abs_y_top_had_pt_multi"].fill(ppseudotophadron.absrap(), ppseudotophadron.pt()/GeV);
+      _h_multi["top_had_pt_absPout_multi"]->fill(ppseudotophadron.pt()/GeV, absPout);
+      _h_multi["ttbar_m_top_had_pt_multi"]->fill(pttbar.mass()/GeV, ppseudotophadron.pt()/GeV);
+      _h_multi["ttbar_m_ttbar_pt_multi"]->fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
+      _h_multi["ttbar_pt_top_had_pt_multi"]->fill(pttbar.pt()/GeV, ppseudotophadron.pt()/GeV);
+      _h_multi["ttbar_abs_y_ttbar_pt_multi"]->fill(pttbar.absrap(), pttbar.pt()/GeV);
+      _h_multi["ttbar_abs_y_ttbar_m_multi"]->fill(pttbar.absrap(), pttbar.mass()/GeV);
+      _h_multi["top_had_abs_y_top_had_pt_multi"]->fill(ppseudotophadron.absrap(), ppseudotophadron.pt()/GeV);
 
-      _h_multi["ttbar_pt_jet_n_multi"].fill(new_jet_multi, pttbar.pt()/GeV);
-      _h_multi["ttbar_m_jet_n_multi"].fill(new_jet_multi_for_ttbar_m, pttbar.mass()/GeV);
-      _h_multi["chi_tt_jet_n_multi"].fill(new_jet_multi, chi_ttbar);
-      _h_multi["absPout_jet_n_multi"].fill(new_jet_multi, absPout);
-      _h_multi["deltaPhi_tt_jet_n_multi"].fill(new_jet_multi, deltaPhi_ttbar);
-      _h_multi["HT_tt_jet_n_multi"].fill(new_jet_multi, HT_ttbar/GeV);
-      _h_multi["top_had_pt_jet_n_multi"].fill(new_jet_multi, ppseudotophadron.pt()/GeV);
-      _h_multi["top_had_abs_y_jet_n_multi"].fill(new_jet_multi, ppseudotophadron.absrap());
-      _h_multi["ttbar_abs_y_jet_n_multi"].fill(new_jet_multi, pttbar.absrap());
+      _h_multi["ttbar_pt_jet_n_multi"]->fill(new_jet_multi, pttbar.pt()/GeV);
+      _h_multi["ttbar_m_jet_n_multi"]->fill(new_jet_multi_for_ttbar_m, pttbar.mass()/GeV);
+      _h_multi["chi_tt_jet_n_multi"]->fill(new_jet_multi, chi_ttbar);
+      _h_multi["absPout_jet_n_multi"]->fill(new_jet_multi, absPout);
+      _h_multi["deltaPhi_tt_jet_n_multi"]->fill(new_jet_multi, deltaPhi_ttbar);
+      _h_multi["HT_tt_jet_n_multi"]->fill(new_jet_multi, HT_ttbar/GeV);
+      _h_multi["top_had_pt_jet_n_multi"]->fill(new_jet_multi, ppseudotophadron.pt()/GeV);
+      _h_multi["top_had_abs_y_jet_n_multi"]->fill(new_jet_multi, ppseudotophadron.absrap());
+      _h_multi["ttbar_abs_y_jet_n_multi"]->fill(new_jet_multi, pttbar.absrap());
 
-      _h_multi["top_had_pt_Pout_multi_norm"].fill(ppseudotophadron.pt()/GeV, Pout);
-      _h_multi["top_had_pt_absPout_multi_norm"].fill(ppseudotophadron.pt()/GeV, absPout);
-      _h_multi["ttbar_m_top_had_pt_multi_norm"].fill(pttbar.mass()/GeV, ppseudotophadron.pt()/GeV);
-      _h_multi["ttbar_m_ttbar_pt_multi_norm"].fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
-      _h_multi["ttbar_pt_top_had_pt_multi_norm"].fill(pttbar.pt()/GeV, ppseudotophadron.pt()/GeV);
-      _h_multi["ttbar_abs_y_ttbar_pt_multi_norm"].fill(pttbar.absrap(), pttbar.pt()/GeV);
-      _h_multi["ttbar_abs_y_ttbar_m_multi_norm"].fill(pttbar.absrap(), pttbar.mass()/GeV);
-      _h_multi["top_had_abs_y_top_had_pt_multi_norm"].fill(ppseudotophadron.absrap(), ppseudotophadron.pt()/GeV);
+      _h_multi["top_had_pt_absPout_multi_norm"]->fill(ppseudotophadron.pt()/GeV, absPout);
+      _h_multi["ttbar_m_top_had_pt_multi_norm"]->fill(pttbar.mass()/GeV, ppseudotophadron.pt()/GeV);
+      _h_multi["ttbar_m_ttbar_pt_multi_norm"]->fill(pttbar.mass()/GeV, pttbar.pt()/GeV);
+      _h_multi["ttbar_pt_top_had_pt_multi_norm"]->fill(pttbar.pt()/GeV, ppseudotophadron.pt()/GeV);
+      _h_multi["ttbar_abs_y_ttbar_pt_multi_norm"]->fill(pttbar.absrap(), pttbar.pt()/GeV);
+      _h_multi["ttbar_abs_y_ttbar_m_multi_norm"]->fill(pttbar.absrap(), pttbar.mass()/GeV);
+      _h_multi["top_had_abs_y_top_had_pt_multi_norm"]->fill(ppseudotophadron.absrap(), ppseudotophadron.pt()/GeV);
 
-      _h_multi["ttbar_pt_jet_n_multi_norm"].fill(new_jet_multi, pttbar.pt());
-      _h_multi["ttbar_m_jet_n_multi_norm"].fill(new_jet_multi_for_ttbar_m, pttbar.mass());
-      _h_multi["chi_tt_jet_n_multi_norm"].fill(new_jet_multi, chi_ttbar);
-      _h_multi["absPout_jet_n_multi_norm"].fill(new_jet_multi, absPout);
-      _h_multi["deltaPhi_tt_jet_n_multi_norm"].fill(new_jet_multi, deltaPhi_ttbar);
-      _h_multi["HT_tt_jet_n_multi_norm"].fill(new_jet_multi, HT_ttbar/GeV);
-      _h_multi["top_had_pt_jet_n_multi_norm"].fill(new_jet_multi, ppseudotophadron.pt()/GeV);
-      _h_multi["top_had_abs_y_jet_n_multi_norm"].fill(new_jet_multi, ppseudotophadron.absrap());
-      _h_multi["ttbar_abs_y_jet_n_multi_norm"].fill(new_jet_multi, pttbar.absrap());
+      _h_multi["ttbar_pt_jet_n_multi_norm"]->fill(new_jet_multi, pttbar.pt());
+      _h_multi["ttbar_m_jet_n_multi_norm"]->fill(new_jet_multi_for_ttbar_m, pttbar.mass());
+      _h_multi["chi_tt_jet_n_multi_norm"]->fill(new_jet_multi, chi_ttbar);
+      _h_multi["absPout_jet_n_multi_norm"]->fill(new_jet_multi, absPout);
+      _h_multi["deltaPhi_tt_jet_n_multi_norm"]->fill(new_jet_multi, deltaPhi_ttbar);
+      _h_multi["HT_tt_jet_n_multi_norm"]->fill(new_jet_multi, HT_ttbar/GeV);
+      _h_multi["top_had_pt_jet_n_multi_norm"]->fill(new_jet_multi, ppseudotophadron.pt()/GeV);
+      _h_multi["top_had_abs_y_jet_n_multi_norm"]->fill(new_jet_multi, ppseudotophadron.absrap());
+      _h_multi["ttbar_abs_y_jet_n_multi_norm"]->fill(new_jet_multi, pttbar.absrap());
 
       _h["chi_tt"]->fill(chi_ttbar);
       _h["deltaPhi_tt"]->fill(deltaPhi_ttbar);
@@ -387,7 +384,7 @@ namespace Rivet {
 
       // trim the jets
       Jets TrimmedJets;
-      for (PseudoJet pjet : reclustered_jets) {
+      for (const PseudoJet& pjet : reclustered_jets) {
         PseudoJet ptrim = trimmer(pjet);
         if (ptrim.perp() < 350*GeV)  continue;
         if (fabs(ptrim.eta()) > 2.0) continue;
@@ -482,28 +479,28 @@ namespace Rivet {
       size_t new_extrajet_multi_ptttbar = TransformJetMultiplicity_ptttbar(extrajet);
       size_t new_extrajet_multi_mttbar = TransformJetMultiplicity_mttbar(extrajet);
 
-      _h_multi["boosted_rc_pttop_etatop_multi"].fill(HadronicTop.absrap(), HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_pttop_etattbar_multi"].fill(pttbar.absrap(), HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_pttop_ptttbar_multi"].fill(pttbar.pt()/GeV, HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_pttop_mttbar_multi"].fill(pttbar.mass()/GeV, HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_mttbar_etattbar_multi"].fill(pttbar.absrap(), pttbar.mass()/GeV);
-      _h_multi["boosted_rc_mttbar_ptttbar_multi"].fill(pttbar.pt()/GeV, pttbar.mass()/GeV);
-      _h_multi["boosted_rc_mttbar_HT_multi"].fill(HT_ttbar, pttbar.mass()/GeV);
+      _h_multi["boosted_rc_pttop_etatop_multi"]->fill(HadronicTop.absrap(), HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_pttop_etattbar_multi"]->fill(pttbar.absrap(), HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_pttop_ptttbar_multi"]->fill(pttbar.pt()/GeV, HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_pttop_mttbar_multi"]->fill(pttbar.mass()/GeV, HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_mttbar_etattbar_multi"]->fill(pttbar.absrap(), pttbar.mass()/GeV);
+      _h_multi["boosted_rc_mttbar_ptttbar_multi"]->fill(pttbar.pt()/GeV, pttbar.mass()/GeV);
+      _h_multi["boosted_rc_mttbar_HT_multi"]->fill(HT_ttbar, pttbar.mass()/GeV);
 
-      _h_multi["boosted_rc_pttop_extrajet_multi"].fill(new_extrajet_multi_pttop, HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_ptttbar_extrajet_multi"].fill(new_extrajet_multi_ptttbar, pttbar.pt()/GeV);
-      _h_multi["boosted_rc_mttbar_extrajet_multi"].fill(new_extrajet_multi_mttbar, pttbar.mass()/GeV);
+      _h_multi["boosted_rc_pttop_extrajet_multi"]->fill(new_extrajet_multi_pttop, HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_ptttbar_extrajet_multi"]->fill(new_extrajet_multi_ptttbar, pttbar.pt()/GeV);
+      _h_multi["boosted_rc_mttbar_extrajet_multi"]->fill(new_extrajet_multi_mttbar, pttbar.mass()/GeV);
 
-      _h_multi["boosted_rc_pttop_etatop_multi_norm"].fill(HadronicTop.absrap(), HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_pttop_etattbar_multi_norm"].fill(pttbar.absrap(), HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_pttop_ptttbar_multi_norm"].fill(pttbar.pt()/GeV, HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_pttop_mttbar_multi_norm"].fill(pttbar.mass()/GeV, HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_mttbar_etattbar_multi_norm"].fill(pttbar.absrap(), pttbar.mass()/GeV);
-      _h_multi["boosted_rc_mttbar_ptttbar_multi_norm"].fill(pttbar.pt()/GeV, pttbar.mass()/GeV);
-      _h_multi["boosted_rc_mttbar_HT_multi_norm"].fill(HT_ttbar/GeV, pttbar.mass()/GeV);
-      _h_multi["boosted_rc_pttop_extrajet_multi_norm"].fill(new_extrajet_multi_pttop, HadronicTop.pt()/GeV);
-      _h_multi["boosted_rc_ptttbar_extrajet_multi_norm"].fill(new_extrajet_multi_ptttbar, pttbar.pt()/GeV);
-      _h_multi["boosted_rc_mttbar_extrajet_multi_norm"].fill(new_extrajet_multi_mttbar, pttbar.mass()/GeV);
+      _h_multi["boosted_rc_pttop_etatop_multi_norm"]->fill(HadronicTop.absrap(), HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_pttop_etattbar_multi_norm"]->fill(pttbar.absrap(), HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_pttop_ptttbar_multi_norm"]->fill(pttbar.pt()/GeV, HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_pttop_mttbar_multi_norm"]->fill(pttbar.mass()/GeV, HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_mttbar_etattbar_multi_norm"]->fill(pttbar.absrap(), pttbar.mass()/GeV);
+      _h_multi["boosted_rc_mttbar_ptttbar_multi_norm"]->fill(pttbar.pt()/GeV, pttbar.mass()/GeV);
+      _h_multi["boosted_rc_mttbar_HT_multi_norm"]->fill(HT_ttbar/GeV, pttbar.mass()/GeV);
+      _h_multi["boosted_rc_pttop_extrajet_multi_norm"]->fill(new_extrajet_multi_pttop, HadronicTop.pt()/GeV);
+      _h_multi["boosted_rc_ptttbar_extrajet_multi_norm"]->fill(new_extrajet_multi_ptttbar, pttbar.pt()/GeV);
+      _h_multi["boosted_rc_mttbar_extrajet_multi_norm"]->fill(new_extrajet_multi_mttbar, pttbar.mass()/GeV);
 
       _h["hadTop_boosted_rc_pt"]->fill(HadronicTop.pt()/GeV);
       _h["hadTop_boosted_rc_y"]->fill(HadronicTop.absrap());
@@ -529,7 +526,7 @@ namespace Rivet {
       _h["boosted_rc_extrajet_norm"]->fill(new_extrajet_multi+1);
       _h["ttbar_boosted_rc_m_norm"]->fill(pttbar.mass()/GeV);
       _h["ttbar_boosted_rc_pt_norm"]->fill(pttbar.pt()/GeV);
-      _h["ttbar_boosted_rc_Rapidity_norm"]->fill(pttbar.absrap()) ;
+      _h["ttbar_boosted_rc_Rapidity_norm"]->fill(pttbar.absrap());
     }
 
 
@@ -542,14 +539,15 @@ namespace Rivet {
       }
       for (auto& hit : _h_multi) {
         if (hit.first.find("_norm") != string::npos) {
-          for (Histo1DPtr& hist : hit.second.histos()) { scale(hist, sf); }
-          const double norm2D = integral2D(hit.second);
-          hit.second.scale(safediv(1.0, norm2D), this);
+          scale(hit.second, sf);
+          const double norm2D = hit.second->integral(false);
+          scale(hit.second, safediv(1.0, norm2D));
         }
         else {
-          hit.second.scale(sf, this);
+          scale(hit.second, sf);
         }
       }
+      divByGroupWidth(_h_multi);
     }
 
 
@@ -584,21 +582,12 @@ namespace Rivet {
     }
 
 
-    double integral2D(BinnedHistogram& h_multi) {
-      double total_integral = 0;
-      for  (Histo1DPtr& h : h_multi.histos()) {
-        total_integral += h->integral(false);
-      }
-      return total_integral;
-    }
 
 
-    void book2D(string name, std::vector<double>& doubleDiff_bins, size_t table){
-      for (size_t i = 0; i < doubleDiff_bins.size() - 1; ++i) {
-        string nbin = std::to_string(i);
-        // HepData entry has dummy "Table of Contents",
-        // so need to offset everything by one unit
-        { Histo1DPtr tmp; _h_multi[name].add(doubleDiff_bins[i], doubleDiff_bins[i+1], book(tmp, table+1+i, 1, 1)); }
+    void book2D(const string& name, const std::vector<double>& doubleDiff_bins, size_t table){
+      book(_h_multi[name], doubleDiff_bins);
+      for (auto& b : _h_multi[name]->bins()) {
+        book(b, table+b.index(), 1, 1);
       }
     }
 
@@ -641,7 +630,7 @@ namespace Rivet {
     /// @name Objects that are used by the event selection decisions
     /// @{
     map<string, Histo1DPtr> _h;
-    map<string, BinnedHistogram> _h_multi;
+    map<string, Histo1DGroupPtr> _h_multi;
     /// @}
 
   };

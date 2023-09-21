@@ -91,12 +91,11 @@ namespace Rivet {
     pair<double,double> calcF(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
       	double Oi = bin.sumW();
       	if(Oi==0.) continue;
       	double ai = 0.5*(bin.xMin()*(sqr(bin.xMin())-3.)-bin.xMax()*(sqr(bin.xMax())-3.));
-	double bi = 1.5*(bin.xMin()*(1.-sqr(bin.xMin()))-
-			 bin.xMax()*(1.-sqr(bin.xMax())));
+        double bi = 1.5*(bin.xMin()*(1.-sqr(bin.xMin()))-bin.xMax()*(1.-sqr(bin.xMax())));
       	double Ei = bin.errW();
        	sum1 += sqr(bi/Ei);
       	sum2 += bi/sqr(Ei)*(Oi-ai);
@@ -107,10 +106,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_h_cTheta);
-      Scatter2DPtr _h_F;
+      Estimate1DPtr _h_F;
       book(_h_F,2,1,1);
       pair<double,double> F = calcF(_h_cTheta);
-      _h_F->addPoint(0.5, F.first, make_pair(0.5,0.5), make_pair(F.second,F.second) );
+      _h_F->bin(1).set(F.first, F.second);
 
     }
 

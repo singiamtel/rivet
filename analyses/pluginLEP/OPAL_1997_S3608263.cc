@@ -4,7 +4,6 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -25,46 +24,26 @@ namespace Rivet {
       declare(Beam(), "Beams");
       declare(ChargedFinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_histXeK0   , 1, 1, 1);
-      {Histo1DPtr temp; _h_ctheta.add(0.   ,0.01 ,book(temp, "ctheta_00",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.01 ,0.03 ,book(temp, "ctheta_01",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.03 ,0.10 ,book(temp, "ctheta_02",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.10 ,0.125,book(temp, "ctheta_03",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.125,0.14 ,book(temp, "ctheta_04",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.14 ,0.16 ,book(temp, "ctheta_05",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.16 ,0.20 ,book(temp, "ctheta_06",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.20 ,0.30 ,book(temp, "ctheta_07",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.30 ,0.40 ,book(temp, "ctheta_08",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.40 ,0.50 ,book(temp, "ctheta_09",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.50 ,0.70 ,book(temp, "ctheta_10",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta.add(0.70 ,1.00 ,book(temp, "ctheta_11",20,-1.,1.));}
-
-      book(_h_ctheta_large,"ctheta_large",20,-1.,1.);
-
-      {Histo1DPtr temp; _h_alpha.add(0.   ,0.01 ,book(temp, "alpha_00",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.01 ,0.03 ,book(temp, "alpha_01",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.03 ,0.10 ,book(temp, "alpha_02",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.10 ,0.125,book(temp, "alpha_03",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.125,0.14 ,book(temp, "alpha_04",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.14 ,0.16 ,book(temp, "alpha_05",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.16 ,0.20 ,book(temp, "alpha_06",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.20 ,0.30 ,book(temp, "alpha_07",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.30 ,0.40 ,book(temp, "alpha_08",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.40 ,0.50 ,book(temp, "alpha_09",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.50 ,0.70 ,book(temp, "alpha_10",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha.add(0.70 ,1.00 ,book(temp, "alpha_11",20,0.,0.5*M_PI));}
-
-      {Histo1DPtr temp; _h_alpha_low.add(0.30 ,0.40 ,book(temp, "alpha_low_00",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha_low.add(0.40 ,0.50 ,book(temp, "alpha_low_01",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha_low.add(0.50 ,0.70 ,book(temp, "alpha_low_02",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha_low.add(0.70 ,1.00 ,book(temp, "alpha_low_03",20,0.,0.5*M_PI));}
-
-      {Histo1DPtr temp; _h_alpha_high.add(0.30 ,0.40 ,book(temp, "alpha_high_00",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha_high.add(0.40 ,0.50 ,book(temp, "alpha_high_01",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha_high.add(0.50 ,0.70 ,book(temp, "alpha_high_02",20,0.,0.5*M_PI));}
-      {Histo1DPtr temp; _h_alpha_high.add(0.70 ,1.00 ,book(temp, "alpha_high_03",20,0.,0.5*M_PI));}
+      book(_histXeK0, 1, 1, 1);
+      const vector<double> edges{0., 0.01, 0.03, 0.1, 0.125, 0.14, 0.16, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0};
+      book(_h_ctheta, edges);
+      book(_h_alpha, edges);
+      for (size_t ix=0; ix < _h_ctheta->numBins(); ++ix) {
+        string suff = std::to_string(ix);
+        if (suff.length() == 1)  suff = "0"+suff;
+        book(_h_ctheta->bin(ix+1), "ctheta_"+suff, 20, -1.0, 1.0);
+        book(_h_alpha->bin(ix+1), "alpha_"+suff, 20, 0.0, 0.5*M_PI);
+      }
+      book(_h_ctheta_large,"ctheta_large", 20,-1.0, 1.0);
 
 
+      book(_h_alpha_low, {0.3, 0.4, 0.5, 0.7, 1.0});
+      book(_h_alpha_high, {0.3, 0.4, 0.5, 0.7, 1.0});
+      for (size_t ix=0; ix < _h_alpha_low->numBins(); ++ix) {
+        string suff = std::to_string(ix);
+        book(_h_alpha_low->bin(ix+1), "alpha_low_"+suff, 20, 0.0, 0.5*M_PI);
+        book(_h_alpha_high->bin(ix+1), "alpha_high_"+suff, 20, 0.0, 0.5*M_PI);
+      }
       book(_h_alpha_large     ,"_h_alpha_large"     ,20,0.,0.5*M_PI);
       book(_h_alpha_large_low ,"_h_alpha_large_low" ,20,0.,0.5*M_PI);
       book(_h_alpha_large_high,"_h_alpha_large_high",20,0.,0.5*M_PI);
@@ -73,7 +52,7 @@ namespace Rivet {
     pair<double,double> calcRho(Histo1DPtr hist,unsigned int imode) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double ai,bi;
@@ -107,14 +86,15 @@ namespace Rivet {
 
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(e, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() +
-                                   beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
       Vector3 axis;
-      if(beams.first.pid()>0)
+      if(beams.first.pid()>0) {
         axis = beams.first .momentum().p3().unit();
-      else
+      }
+      else {
         axis = beams.second.momentum().p3().unit();
+      }
 
       // Final state of unstable particles to get particle spectra
       const UnstableParticles& ufs = apply<UnstableParticles>(e, "UFS");
@@ -142,10 +122,10 @@ namespace Rivet {
         double ctheta = e1z.dot(axis1);
         double phi = atan2(e1y.dot(axis1),e1x.dot(axis1));
         double alpha = abs(abs(phi)-0.5*M_PI);
-        _h_ctheta.fill(xp,ctheta);
-        _h_alpha .fill(xp,alpha );
+        _h_ctheta->fill(xp,ctheta);
+        _h_alpha->fill(xp,alpha );
         double cBeam = axis.dot(e1z);
-        (cBeam < 0.5 ? _h_alpha_low : _h_alpha_high).fill(xp,alpha);
+        (cBeam < 0.5 ? _h_alpha_low : _h_alpha_high)->fill(xp,alpha);
 
         if (xp > 0.3) {
           _h_ctheta_large->fill(ctheta);
@@ -160,44 +140,42 @@ namespace Rivet {
     void finalize() {
       scale(_histXeK0, 1./sumOfWeights());
       const vector<double> x = {0., 0.01 ,0.03 ,0.10 ,0.125,0.14 ,0.16 ,0.20 ,0.30 ,0.40 ,0.50 ,0.70 ,1.00};
-      Scatter2DPtr h_rho00;
+      Estimate1DPtr h_rho00;
       book(h_rho00,2,1,1);
-      Scatter2DPtr h_rho_off;
+      Estimate1DPtr h_rho_off;
       book(h_rho_off,2,1,2);
-      Scatter2DPtr h_ratio;
+      Estimate1DPtr h_ratio;
       book(h_ratio,3,1,1);
-      Scatter2DPtr h_off_low;
+      Estimate1DPtr h_off_low;
       book(h_off_low,4,1,1);
-      Scatter2DPtr h_off_high;
+      Estimate1DPtr h_off_high;
       book(h_off_high,4,1,2);
-      for (unsigned int ix=0;ix<_h_ctheta.histos().size();++ix) {
+      for (size_t ix=0; ix<_h_ctheta->numBins(); ++ix) {
         // extract the rho00 component
-        normalize(_h_ctheta.histos()[ix]);
-        pair<double,double> rho00 = calcRho(_h_ctheta.histos()[ix],0);
-        h_rho00->addPoint(0.5*(x[ix]+x[ix+1]), rho00.first, make_pair(0.5*(x[ix+1]-x[ix]),0.5*(x[ix+1]-x[ix])),
-                          make_pair(rho00.second,rho00.second) );
+        normalize(_h_ctheta->bin(ix+1));
+        pair<double,double> rho00 = calcRho(_h_ctheta->bin(ix+1), 0);
+        h_rho00->bin(ix+1).set(rho00.first, rho00.second);
+
         // extract the rho 1 -1 component
-        normalize(_h_alpha.histos()[ix]);
-        pair<double,double> rho_off = calcRho(_h_alpha.histos()[ix],1);
-        h_rho_off->addPoint(0.5*(x[ix]+x[ix+1]), rho_off.first, make_pair(0.5*(x[ix+1]-x[ix]),0.5*(x[ix+1]-x[ix])),
-                            make_pair(rho_off.second,rho_off.second) );
+        normalize(_h_alpha->bin(ix+1));
+        pair<double,double> rho_off = calcRho(_h_alpha->bin(ix+1), 1);
+        h_rho_off->bin(ix+1).set(rho_off.first, rho_off.second);
+
         if (ix<8) continue;
+
         // at large xp also the ratio
+        size_t iy = ix-8;
         double ratio = rho_off.first/(1.-rho00.first);
         double dr    = ((rho_off.second - rho00.first*rho_off.second + rho_off.first*rho00.second))/sqr(1.-rho00.first);
-        h_ratio->addPoint(0.5*(x[ix]+x[ix+1]), ratio, make_pair(0.5*(x[ix+1]-x[ix]),0.5*(x[ix+1]-x[ix])),
-                          make_pair(dr,dr) );
-        unsigned int iy=ix-8;
+        h_ratio->bin(iy+1).set(ratio, dr);
         // rho 1 -1 for cos theta <0.5
-        normalize(_h_alpha_low .histos()[iy]);
-        rho_off = calcRho(_h_alpha_low.histos()[iy],1);
-        h_off_low->addPoint(0.5*(x[ix]+x[ix+1]), rho_off.first, make_pair(0.5*(x[ix+1]-x[ix]),0.5*(x[ix+1]-x[ix])),
-                            make_pair(rho_off.second,rho_off.second) );
+        normalize(_h_alpha_low->bin(iy+1));
+        rho_off = calcRho(_h_alpha_low->bin(iy+1), 1);
+        h_off_low->bin(iy+1).set(rho_off.first, rho_off.second);
         // rho 1 -1 for cos theta >0.5
-        normalize(_h_alpha_high.histos()[iy]);
-        rho_off = calcRho(_h_alpha_high.histos()[iy],1);
-        h_off_high->addPoint(0.5*(x[ix]+x[ix+1]), rho_off.first, make_pair(0.5*(x[ix+1]-x[ix]),0.5*(x[ix+1]-x[ix])),
-                             make_pair(rho_off.second,rho_off.second) );
+        normalize(_h_alpha_high->bin(iy+1));
+        rho_off = calcRho(_h_alpha_high->bin(iy+1), 1);
+        h_off_high->bin(iy+1).set(rho_off.first, rho_off.second);
 
       }
       // ratio for xp 0.3
@@ -207,19 +185,19 @@ namespace Rivet {
       pair<double,double> rho_off = calcRho(_h_alpha_large,1);
       double ratio = rho_off.first/(1.-rho00.first);
       double dr    = ((rho_off.second - rho00.first*rho_off.second + rho_off.first*rho00.second))/sqr(1.-rho00.first);
-      Scatter2DPtr h_ratio_large;
+      Estimate1DPtr h_ratio_large;
       book(h_ratio_large,3,2,1);
-      h_ratio_large->addPoint(0.65, ratio, make_pair(0.35,0.35),make_pair(dr,dr) );
+      h_ratio_large->bin(1).set(ratio, dr);
       // rho 1 -1 for xp >0.3 and cos theta < 0.5
       normalize(_h_alpha_large_low );
       rho_off = calcRho(_h_alpha_large_low,1);
       book(h_off_low,4,2,1);
-      h_off_low->addPoint(0.65, rho_off.first, make_pair(0.35,0.35),make_pair(rho_off.second,rho_off.second) );
+      h_off_low->bin(1).set(rho_off.first, rho_off.second);
       // rho 1 -1 for xp >0.3 and cos theta > 0.5
       normalize(_h_alpha_large_high);
       rho_off = calcRho(_h_alpha_large_high,1);
       book(h_off_high,4,2,2);
-      h_off_high->addPoint(0.65, rho_off.first, make_pair(0.35,0.35),make_pair(rho_off.second,rho_off.second) );
+      h_off_high->bin(1).set(rho_off.first, rho_off.second);
     }
 
     /// @}
@@ -229,8 +207,8 @@ namespace Rivet {
 
     /// @{
     Histo1DPtr _histXeK0;
-    BinnedHistogram _h_ctheta,_h_alpha,_h_alpha_low,_h_alpha_high;
-    Histo1DPtr  _h_ctheta_large,_h_alpha_large, _h_alpha_large_low,_h_alpha_large_high;
+    Histo1DGroupPtr _h_ctheta, _h_alpha, _h_alpha_low, _h_alpha_high;
+    Histo1DPtr  _h_ctheta_large, _h_alpha_large, _h_alpha_large_low, _h_alpha_large_high;
     /// @}
 
   };

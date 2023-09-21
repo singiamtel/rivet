@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ZFinder.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 /// @todo Include more projections as required, e.g. ChargedFinalState, FastJets, ZFinder...
 
@@ -13,9 +12,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2014_I1300647()
-      : Analysis("ATLAS_2014_I1300647")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2014_I1300647);
 
 
   public:
@@ -47,9 +44,7 @@ namespace Rivet {
       book(_hist_zpt_mu_bare    ,1, 2, 2);  // muon "bare"
 
       //double-differential plots
-      {Histo1DPtr tmp; _h_zpt_el_mu_dressed.add(0.0, 1.0, book(tmp, 3, 1, 2));}
-      {Histo1DPtr tmp; _h_zpt_el_mu_dressed.add(1.0, 2.0, book(tmp, 3, 1, 4));}
-      {Histo1DPtr tmp; _h_zpt_el_mu_dressed.add(2.0, 2.4, book(tmp, 3, 1, 6));}
+      book(_h_zpt_el_mu_dressed, {0., 1., 2., 2.4}, {"d03-x01-y02", "d03-x01-y04", "d03-x01-y06"});
 
     }
 
@@ -82,10 +77,10 @@ namespace Rivet {
       return;
     }
 
-    void FillPlots3d(const ZFinder& zfinder, BinnedHistogram& binnedHist) {
+    void FillPlots3d(const ZFinder& zfinder, Histo1DGroupPtr& binnedHist) {
       if(zfinder.bosons().size() != 1) return;
       const FourMomentum pZ = zfinder.bosons()[0].momentum();
-      binnedHist.fill(pZ.rapidity(), pZ.pT()/GeV);
+      binnedHist->fill(pZ.rapidity(), pZ.pT()/GeV);
       return;
     }
 
@@ -98,7 +93,7 @@ namespace Rivet {
       normalize(_hist_zpt_mu_dressed);
       normalize(_hist_zpt_mu_bare);
 
-      for (Histo1DPtr hist : _h_zpt_el_mu_dressed.histos()) { normalize(hist); }
+      normalize(_h_zpt_el_mu_dressed);
 
     }
 
@@ -114,7 +109,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _h_zpt_el_mu_dressed;
+    Histo1DGroupPtr _h_zpt_el_mu_dressed;
 
 
     Histo1DPtr _hist_zpt_el_dressed;

@@ -52,7 +52,7 @@ namespace Rivet {
           }
           else {
             _histOffResonance->fill(mom,s/sqr(10.58));
-            _sigma->fill(10.58);
+            _sigma->fill(Ecm);
           }
         }
       }
@@ -74,7 +74,8 @@ namespace Rivet {
     Histo1DPtr _histOnResonanceA;
     Histo1DPtr _histOnResonanceB;
     Histo1DPtr _histOffResonance;
-    Histo1DPtr _sigma;
+    BinnedHistoPtr<string> _sigma;
+    const string Ecm = "10.58";
     /// @}
 
 

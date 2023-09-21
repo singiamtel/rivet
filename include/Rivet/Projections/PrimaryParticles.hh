@@ -19,10 +19,12 @@ namespace Rivet {
   class PrimaryParticles : public ParticleFinder {
   public:
 
+    using ParticleFinder::operator=;
+
     /// Constructor
-	///
-	/// @param pids  List of PDG IDs which are considered primary
-	/// @param c     Normal particle cuts
+    ///
+    /// @param pids  List of PDG IDs which are considered primary
+    /// @param c     Normal particle cuts
     PrimaryParticles(std::initializer_list<int> pids,
 		     const Cut& c=Cuts::open()) :
       ParticleFinder(c), _pdgIds(pids) {

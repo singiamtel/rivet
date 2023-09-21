@@ -45,7 +45,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const Jets& jets = apply<FastJets>(event,"Jets").jetsByPt();
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
@@ -59,7 +58,7 @@ namespace Rivet {
       // Minimum requirement for event
       if (ljpT > 56*GeV && fabs(ljeta) < 3.0) {
         // Find B hadrons in event
-        int nab = 0, nb = 0; //counters for all B and independent B hadrons
+        int nb = 0; //counters for all B and independent B hadrons
         double etaB1 = 7.7, etaB2 = 7.7;
         double phiB1 = 7.7, phiB2 = 7.7;
         double pTB1 = 7.7, pTB2 = 7.7;
@@ -67,7 +66,6 @@ namespace Rivet {
         for (const Particle& p : ufs.particles()) {
           int aid = p.abspid();
           if (aid/100 == 5 || aid/1000==5) {
-            nab++;
             // 2J+1 == 1 (mesons) or 2 (baryons)
             if (aid%10 == 1 || aid%10 == 2) {
               // No B decaying to B
@@ -101,13 +99,12 @@ namespace Rivet {
           if (dPhi > 3.*PI/4. && ljpT > 84*GeV) _c["MCDPhi84"]->fill();
           if (dPhi > 3.*PI/4. && ljpT > 120*GeV) _c["MCDPhi120"]->fill();
 
-          _h_dsigma_dR_56GeV->fill(dR, weight);
-          if (ljpT > 84*GeV) _h_dsigma_dR_84GeV->fill(dR, weight);
-          if (ljpT > 120*GeV) _h_dsigma_dR_120GeV->fill(dR, weight);
-          _h_dsigma_dPhi_56GeV->fill(dPhi, weight);
-          if (ljpT > 84*GeV) _h_dsigma_dPhi_84GeV->fill(dPhi, weight);
-          if (ljpT > 120*GeV) _h_dsigma_dPhi_120GeV->fill(dPhi, weight);
-          //MSG_DEBUG("nb " << nb << " " << nab);
+          _h_dsigma_dR_56GeV->fill(dR);
+          if (ljpT > 84*GeV) _h_dsigma_dR_84GeV->fill(dR);
+          if (ljpT > 120*GeV) _h_dsigma_dR_120GeV->fill(discEdge(dR));
+          _h_dsigma_dPhi_56GeV->fill(dPhi);
+          if (ljpT > 84*GeV) _h_dsigma_dPhi_84GeV->fill(dPhi);
+          if (ljpT > 120*GeV) _h_dsigma_dPhi_120GeV->fill(dPhi);
         }
       }
     }
@@ -139,6 +136,14 @@ namespace Rivet {
       scale(_h_dsigma_dPhi_56GeV, normDPhi56*DPhibin);
       scale(_h_dsigma_dPhi_84GeV, normDPhi84*DPhibin);
       scale(_h_dsigma_dPhi_120GeV, normDPhi120*DPhibin);
+      for (auto& b : _h_dsigma_dR_120GeV->bins()) {
+        b.scaleW(1.0/_rapaxis.width(b.index()));
+      }
+    }
+
+    string discEdge(const double value) const {
+      const size_t idx = _rapaxis.index(value);
+      return _h_dsigma_dR_120GeV->bin(idx).xEdge();
     }
 
     /// @}
@@ -151,8 +156,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_dsigma_dR_56GeV, _h_dsigma_dR_84GeV, _h_dsigma_dR_120GeV;
+    Histo1DPtr _h_dsigma_dR_56GeV, _h_dsigma_dR_84GeV;
+    BinnedHistoPtr<string> _h_dsigma_dR_120GeV; // Why does this one have a different type?
     Histo1DPtr _h_dsigma_dPhi_56GeV, _h_dsigma_dPhi_84GeV, _h_dsigma_dPhi_120GeV;
+    YODA::Axis<double> _rapaxis{ 0.0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0 };
     /// @}
 
   };

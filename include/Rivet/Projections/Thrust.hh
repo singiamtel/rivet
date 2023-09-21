@@ -42,6 +42,8 @@ namespace Rivet {
   class Thrust : public AxesDefinition {
   public:
 
+    using AxesDefinition::operator=;
+
     /// Constructor.
     Thrust() {}
 

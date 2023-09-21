@@ -41,6 +41,7 @@ namespace Rivet {
       declare(Hemispheres(thrust), "Hemispheres");
 
       // Book histograms
+      book(_h_mult_avrg,   2,1,1);
       book(_h_thrust    ,  3,1,1);
       book(_h_major     ,  4,1,1);
       book(_h_minor     ,  5,1,1);
@@ -52,12 +53,12 @@ namespace Rivet {
       book(_h_totalB    , 11,1,1);
       book(_h_wideB     , 12,1,1);
       book(_h_y23       , 20,1,1);
-      book(_h_mult      , 26,1,1);
       book(_h_pTin      , 21,1,1);
       book(_h_pTout     , 22,1,1);
       book(_h_y         , 23,1,1);
       book(_h_x         , 24,1,1);
       book(_h_xi        , 25,1,1);
+      book(_h_mult      , 26,1,1);
       book(_sumW,"/TMP/sumW");
     }
 
@@ -104,6 +105,7 @@ namespace Rivet {
 
       // charged particles
       _h_mult->fill(cfs.particles().size());
+      _h_mult_avrg->fill(161, cfs.particles().size());
       for (const Particle& p : cfs.particles()) {
         const Vector3 mom3  = p.p3();
         const double energy = p.E();
@@ -142,12 +144,6 @@ namespace Rivet {
       scale(_h_y         ,1./ *_sumW);
       scale(_h_x         ,1./ *_sumW);
       scale(_h_xi        ,1./ *_sumW);
-      // mean multiplicity
-      double nch     = _h_mult->xMean();
-      double nch_err = _h_mult->xStdErr();
-      Scatter2DPtr m_ch;
-      book(m_ch,2,1,1);
-      m_ch->addPoint(sqrtS(),nch,0.5,nch_err);
     }
 
     /// @}
@@ -156,7 +152,9 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_thrust,_h_major,_h_minor,_h_aplanarity,_h_oblateness,_h_C,_h_rhoH,_h_sphericity;
-    Histo1DPtr _h_totalB,_h_wideB,_h_y23,_h_mult,_h_pTin,_h_pTout,_h_y,_h_x,_h_xi;
+    Histo1DPtr _h_totalB,_h_wideB,_h_y23,_h_pTin,_h_pTout,_h_y,_h_x,_h_xi;
+    BinnedHistoPtr<int> _h_mult;
+    BinnedProfilePtr<int> _h_mult_avrg;
     CounterPtr _sumW;
     /// @}
 

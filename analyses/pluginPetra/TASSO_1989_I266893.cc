@@ -123,7 +123,7 @@ namespace Rivet {
       scale( _h_lam_pTOut, crossSection()/nanobarn/sumOfWeights());
       scale( _h_lam_rap  , crossSection()/nanobarn/sumOfWeights());
       scale( _h_lam_x    , sqr(sqs)*crossSection()/nanobarn/sumOfWeights());
-      Scatter2DPtr temp;
+      Estimate1DPtr temp;
       book(temp,15+_ih,1,3);
       divide(_p_lam_S_1,_p_lam_S_2,temp);
       if(_ih==0) {

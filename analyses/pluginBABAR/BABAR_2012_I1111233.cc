@@ -137,7 +137,7 @@ namespace Rivet {
 	    if (il==0) scale(_h_br_I[il][ix][iy],rLife);
 	  }
 	  // RK plots
-	  Scatter2DPtr RK;
+	  Estimate1DPtr RK;
 	  book(RK,3,1+ix,1+iy);
 	  divide(_h_br_l[0][ix][iy],_h_br_l[1][ix][iy],RK);
 	  book(RK,4,1+ix,1+iy);

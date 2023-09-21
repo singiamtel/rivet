@@ -35,17 +35,16 @@ namespace Rivet {
     void analyze(const Event& event) {
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() +
-                                   beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
       for (const Particle& p : apply<UnstableParticles>(event, "UFS").
 	     particles(Cuts::pid==PID::PI0)) {
-	double modp = p.p3().mod();
-	double xE = p.E()/meanBeamMom;
-	double beta = modp/p.E();
-	_h_p->fill(modp);
-	_h_x->fill(xE  ,1./beta);
+      double modp = p.p3().mod();
+      double xE = p.E()/meanBeamMom;
+      double beta = modp/p.E();
+      _h_p->fill(modp);
+      _h_x->fill(xE, 1./beta);
       }
     }
 

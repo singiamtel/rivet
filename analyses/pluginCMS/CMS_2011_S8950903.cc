@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -18,16 +17,12 @@ namespace Rivet {
       FastJets akt(fs, FastJets::ANTIKT, 0.5);
       declare(akt, "antikT");
 
-      {Histo1DPtr tmp; _h_deltaPhi.add( 80.,  110., book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(110.,  140., book(tmp, 2, 1, 1));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(140.,  200., book(tmp, 3, 1, 1));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(200.,  300., book(tmp, 4, 1, 1));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(300., 7000., book(tmp, 5, 1, 1));}
+      book(_h_deltaPhi, {80., 110., 140., 200., 300., 7000.},
+                        {"d01-x01-y01", "d02-x01-y01", "d03-x01-y01", "d04-x01-y01", "d05-x01-y01"});
     }
 
 
     void analyze(const Event & event) {
-      const double weight = 1.0;
 
       const Jets& jets = apply<JetAlg>(event, "antikT").jetsByPt();
       if (jets.size() < 2) vetoEvent;
@@ -37,18 +32,18 @@ namespace Rivet {
 
       double dphi = deltaPhi(jets[0].momentum(), jets[1].phi());
 
-      _h_deltaPhi.fill(jets[0].pT(), dphi, weight);
+      _h_deltaPhi->fill(jets[0].pT(), dphi);
     }
 
 
     void finalize() {
-      normalize(_h_deltaPhi.histos(), 1.);
+      normalize(_h_deltaPhi);
     }
 
 
   private:
 
-    BinnedHistogram _h_deltaPhi;
+    Histo1DGroupPtr _h_deltaPhi;
 
   };
 

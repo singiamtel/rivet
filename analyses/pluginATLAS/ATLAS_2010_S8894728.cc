@@ -114,8 +114,8 @@ namespace Rivet {
       vector<double> num500(3, 0), ptSum500(3, 0.0);
       // Temporary histos that bin Nch and pT in dPhi.
       // NB. Only one of each needed since binnings are the same for the energies and pT cuts
-      Histo1D hist_num_dphi_500(refData(13,1,1));
-      Histo1D hist_pt_dphi_500(refData(15,1,1));
+      Histo1D hist_num_dphi_500(refData(13,1,1).binning());
+      Histo1D hist_pt_dphi_500(refData(15,1,1).binning());
       for (const Particle& p : particles500) {
         const double pT = p.pT();
         const double dPhi = deltaPhi(philead, p.phi());
@@ -178,7 +178,7 @@ namespace Rivet {
       // Note that we fill dN/dEtadPhi: dEta = 2*2.5, dPhi = 2*PI/nBins
       // The values tabulated in the note are for an (undefined) signed Delta(phi) rather than
       // |Delta(phi)| and so differ by a factor of 2: we have to actually norm for angular range = 2pi
-      const size_t nbins = refData(13,1,1).numPoints();
+      const size_t nbins = refData(13,1,1).numBins();
       std::vector<double> ptcut;
       if (isCompatibleWithSqrtS(900*GeV)) {
         ptcut += 1.0; ptcut += 1.5; ptcut += 2.0; ptcut += 2.5;
@@ -257,14 +257,11 @@ namespace Rivet {
   private:
 
 
-    inline void _moments_to_stddev(Profile1DPtr moment_profiles[], Scatter2DPtr target_dps) {
-      for (size_t b = 0; b < moment_profiles[0]->numBins(); ++b) { // loop over points
+    inline void _moments_to_stddev(Profile1DPtr moment_profiles[], Estimate1DPtr target_dps) {
+      for (size_t b = 1; b < moment_profiles[0]->numBins()+1; ++b) { // loop over points
         /// @todo Assuming unit weights here! Should use N_effective = sumW**2/sumW2?
         const double numentries = moment_profiles[0]->bin(b).numEntries();
-        const double x = moment_profiles[0]->bin(b).xMid();
-        const double ex = moment_profiles[0]->bin(b).xWidth()/2.;
-        double var = 0.;
-        double sd = 0.;
+        double var = 0., sd = 0.;
         if (numentries > 0) {
           var = moment_profiles[1]->bin(b).yMean() - intpow(moment_profiles[0]->bin(b).yMean(), 2);
           sd = fuzzyLessEquals(var,0.) ? 0 : sqrt(var); ///< Numerical safety check
@@ -272,7 +269,7 @@ namespace Rivet {
         if (sd == 0 || numentries < 3) {
           MSG_WARNING("Need at least 3 bin entries and a non-zero central value to calculate "
                       << "an error on standard deviation profiles (bin " << b << ")");
-          target_dps->addPoint(x, sd, ex, 0);
+          target_dps->bin(b).set(sd, 0);
           continue;
         }
         // c2(y) = m4(x) - 4 m3(x) m1(x) - m2(x)^2 + 8 m2(x) m1(x)^2 - 4 m1(x)^4
@@ -283,7 +280,7 @@ namespace Rivet {
           - 4 * intpow(moment_profiles[0]->bin(b).yMean(), 4);
         const double stderr_on_var = sqrt(var_on_var/(numentries-2.0));
         const double stderr_on_sd = stderr_on_var / (2.0*sd);
-        target_dps->addPoint(x, sd, ex, stderr_on_sd);
+        target_dps->bin(b).set(sd, stderr_on_sd);
       }
     }
 
@@ -298,8 +295,8 @@ namespace Rivet {
     Profile1DPtr _hist_ptsum_toward_500;
     Profile1DPtr _hist_ptsum_away_500;
 
-    Scatter2DPtr  _dps_sdnch_transverse_500;
-    Scatter2DPtr  _dps_sdptsum_transverse_500;
+    Estimate1DPtr  _dps_sdnch_transverse_500;
+    Estimate1DPtr  _dps_sdptsum_transverse_500;
 
     Profile1DPtr _hist_ptavg_transverse_500;
     Profile1DPtr _hist_ptavg_toward_500;

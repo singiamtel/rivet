@@ -107,42 +107,37 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       for(unsigned int ix=0;ix<6;++ix) {
-	// unfolded dist, scale by 1/2 /no of B's (2 as using e and mu modes)
-	scale(_h_direct[ix], 0.5/ *_nB);
-	// forward folding scale to BELLE no of B's
-	scale(_h_forward[ix], 2.*771.58e6/ *_nB);
-	// get the efficiency product and divide by it
-	unsigned int iloc = ix<2 ? 3+ix : (ix<4 ? ix-1 : ix+1);
-	Scatter2D eff = refData<YODA::Scatter2D>(iloc+24,1,1);
-	Scatter3D matrix = refData<YODA::Scatter3D>(19+ix,1,1);
-	// scatter for the result
-	Scatter2DPtr corrected;
-	book(corrected,ix+7,1,1);
-	vector<double> val(_h_forward[ix]->numBins(),0.),err(_h_forward[ix]->numBins(),0.);
-	// first divide by eff
-	for(unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
-	  val[iy] = _h_forward[ix]->bins()[iy].sumW()/eff.points()[iy].y();
-	  err[iy] =val[iy]*sqrt(sqr(eff.points()[iy].yErrAvg()/eff.points()[iy].y()) +
-				sqr(_h_forward[ix]->bins()[iy].errW()/_h_forward[ix]->bins()[iy].sumW()));
-	}
-	vector<double> val2(_h_forward[ix]->numBins(),0.),err2(_h_forward[ix]->numBins(),0.);
-	for(unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
-	  for(unsigned int iz=0;iz<_h_forward[ix]->numBins();++iz) {
-	    double corr  = matrix.points()[_h_forward[ix]->numBins()*iz+iy].z()/100.;
-	    double ecorr = matrix.points()[_h_forward[ix]->numBins()*iz+iy].zErrAvg()/100.;
-	    val2[iy] += corr*val[iz];
-	    err2[iy] += sqr(ecorr*val[iz]) + sqr(corr*err[iz]);
-	  }
-	  err2[iy]  = val2[iy]*sqrt(err2[iy]/sqr(val2[iy]) +  sqr(9.78/771.58));
-	}
-	for(unsigned int ibin=0;ibin<_h_forward[ix]->bins().size();++ibin) {
-	  double dx = 0.5*_h_forward[ix]->bins()[ibin].xWidth();
-	  double dy = sqrt(err[ibin]);
-	  corrected->addPoint(_h_forward[ix]->bins()[ibin].xMid(),
-			      val[ibin],
-			      make_pair(dx,dx),
-			      make_pair(dy,dy));
-	}
+        // unfolded dist, scale by 1/2 /no of B's (2 as using e and mu modes)
+        scale(_h_direct[ix], 0.5/ *_nB);
+        // forward folding scale to BELLE no of B's
+        scale(_h_forward[ix], 2.*771.58e6/ *_nB);
+        // get the efficiency product and divide by it
+        unsigned int iloc = ix<2 ? 3+ix : (ix<4 ? ix-1 : ix+1);
+        Estimate1D eff = refData<YODA::Estimate1D>(iloc+24,1,1);
+        Scatter3D matrix = refData<YODA::Scatter3D>(19+ix,1,1);
+        // scatter for the result
+        Estimate1DPtr corrected;
+        book(corrected,ix+7,1,1);
+        vector<double> val(_h_forward[ix]->numBins(),0.),err(_h_forward[ix]->numBins(),0.);
+        // first divide by eff
+        for (unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
+          val[iy] = _h_forward[ix]->bin(iy+1).sumW()/eff.bin(iy+1).val();
+          err[iy] =val[iy]*sqrt(sqr(eff.bin(iy+1).relErrAvg()) + sqr(_h_forward[ix]->bin(iy+1).relErrW()));
+        }
+        vector<double> val2(_h_forward[ix]->numBins(),0.),err2(_h_forward[ix]->numBins(),0.);
+        for (unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
+          for (unsigned int iz=0;iz<_h_forward[ix]->numBins();++iz) {
+            double corr  = matrix.points()[_h_forward[ix]->numBins()*iz+iy].z()/100.;
+            double ecorr = matrix.points()[_h_forward[ix]->numBins()*iz+iy].zErrAvg()/100.;
+            val2[iy] += corr*val[iz];
+            err2[iy] += sqr(ecorr*val[iz]) + sqr(corr*err[iz]);
+          }
+          err2[iy]  = val2[iy]*sqrt(err2[iy]/sqr(val2[iy]) +  sqr(9.78/771.58));
+        }
+        for (unsigned int ibin=0; ibin<_h_forward[ix]->numBins(); ++ibin) {
+          const double dy = sqrt(err[ibin]);
+          corrected->bin(ibin+1).set(val[ibin], dy);
+        }
       }
     }
 

@@ -63,62 +63,46 @@ namespace Rivet {
       unsigned int n_all_05(0),n_all_10(0),n_all_15(0),n_all_20(0),n_all_all(0);
       unsigned int n_pos_05(0),n_pos_10(0),n_pos_15(0),n_pos_20(0),n_pos_30(0),n_pos_40(0),n_pos_50(0),n_pos_all(0);
       unsigned int n_neg_05(0),n_neg_10(0),n_neg_15(0),n_neg_20(0),n_neg_30(0),n_neg_40(0),n_neg_50(0),n_neg_all(0);
-      for(const Particle &p : fs.particles()) {
+      for (const Particle &p : fs.particles()) {
         const Vector3 mom3 = p.p3();
         const double energy = p.E();
         const double momT = dot(axis, mom3);
         const double rapidityT = 0.5 * std::log((energy + momT) / (energy - momT));
-	++n_all_all;
-	if(abs(rapidityT)<0.5) {
-	  ++n_all_05;
-	  if(rapidityT>0)
-	    ++n_pos_05;
-	  else
-	    ++n_neg_05;
-	}
-	if(abs(rapidityT)<1.0) {
-	  ++n_all_10;
-	  if(rapidityT>0)
-	    ++n_pos_10;
-	  else
-	    ++n_neg_10;
-	}
-	if(abs(rapidityT)<1.5) {
-	  ++n_all_15;
-	  if(rapidityT>0)
-	    ++n_pos_15;
-	  else
-	    ++n_neg_15;
-	}
-	if(abs(rapidityT)<2.0) {
-	  ++n_all_20;
-	  if(rapidityT>0)
-	    ++n_pos_20;
-	  else
-	    ++n_neg_20;
-	}
-	if(abs(rapidityT)<3.0) {
-	  if(rapidityT>0)
-	    ++n_pos_30;
-	  else
-	    ++n_neg_30;
-	}
-	if(abs(rapidityT)<4.0) {
-	  if(rapidityT>0)
-	    ++n_pos_40;
-	  else
-	    ++n_neg_40;
-	}
-	if(abs(rapidityT)<5.0) {
-	  if(rapidityT>0)
-	    ++n_pos_50;
-	  else
-	    ++n_neg_50;
-	}
-	if(rapidityT>0)
-	  ++n_pos_all;
-	else
-	  ++n_neg_all;
+        ++n_all_all;
+        if (abs(rapidityT)<0.5) {
+          ++n_all_05;
+          if(rapidityT>0)  ++n_pos_05;
+          else             ++n_neg_05;
+        }
+        if (abs(rapidityT)<1.0) {
+          ++n_all_10;
+          if(rapidityT>0)  ++n_pos_10;
+          else             ++n_neg_10;
+        }
+        if (abs(rapidityT)<1.5) {
+          ++n_all_15;
+          if(rapidityT>0)  ++n_pos_15;
+          else             ++n_neg_15;
+        }
+        if (abs(rapidityT)<2.0) {
+          ++n_all_20;
+          if(rapidityT>0)  ++n_pos_20;
+          else             ++n_neg_20;
+        }
+        if (abs(rapidityT)<3.0) {
+          if(rapidityT>0)  ++n_pos_30;
+          else             ++n_neg_30;
+        }
+        if (abs(rapidityT)<4.0) {
+          if(rapidityT>0)  ++n_pos_40;
+          else             ++n_neg_40;
+        }
+        if(abs(rapidityT)<5.0) {
+          if(rapidityT>0)  ++n_pos_50;
+          else             ++n_neg_50;
+        }
+        if(rapidityT>0)  ++n_pos_all;
+        else             ++n_neg_all;
       }
       _h_all_05 ->fill(n_all_05 );
       _h_all_10 ->fill(n_all_10 );
@@ -166,9 +150,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_all_05, _h_all_10, _h_all_15, _h_all_20, _h_all_all;
-    Histo1DPtr _h_hemi_05, _h_hemi_10, _h_hemi_15, _h_hemi_20,
-      _h_hemi_30, _h_hemi_40, _h_hemi_50, _h_hemi_all;
+    BinnedHistoPtr<int> _h_all_05, _h_all_10, _h_all_15, _h_all_20, _h_all_all;
+    BinnedHistoPtr<int> _h_hemi_05, _h_hemi_10, _h_hemi_15, _h_hemi_20;
+    BinnedHistoPtr<int> _h_hemi_30, _h_hemi_40, _h_hemi_50, _h_hemi_all;
     /// @}
 
 

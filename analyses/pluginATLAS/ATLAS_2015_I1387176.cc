@@ -21,14 +21,12 @@ namespace Rivet {
       declare(jets, "Jets");
 
       // Book histograms
-      book(_hist_EEC  ,1, 1, 1);
-      book(_hist_AEEC ,2, 1, 1);
+      book(_hist_EEC,  1, 1, 1);
+      book(_hist_AEEC, 2, 1, 1);
 
       // add dummy histogram for heterogenous merging
-      string hname = "d01-x01-y01";
-      const Scatter2D& ref = refData(hname);
-      hname = "d01-x01-y02";
-      book(_hist_dummy ,hname, ref);
+      // @todo What is this for exactly? o.0
+      book(_hist_dummy, "d01-x01-y02", refData("d01-x01-y01"));
     }
 
     void analyze(const Event& event) {
@@ -64,13 +62,12 @@ namespace Rivet {
 
       size_t nBins = _hist_EEC->numBins();
       for (size_t k = 1; k < (nBins/2)+1; ++k) {
-        double x = _hist_EEC->bin(k).xMid();
-        double y = _hist_EEC->bin(k).sumW() - _hist_EEC->bin(nBins-k+1).sumW();
-        double ex = _hist_EEC->bin(k).xWidth()/2;
-        double e1 = _hist_EEC->bin(k).errW();
-        double e2 = _hist_EEC->bin(nBins-k+1).errW();
-        double ey = sqrt( e1 * e1 + e2 * e2 );
-        _hist_AEEC->addPoint(x, y, ex, ey);
+        const double dV = _hist_EEC->bin(k).dVol();
+        const double y = (_hist_EEC->bin(k).sumW() - _hist_EEC->bin(nBins-k+1).sumW())/dV;
+        const double e1 = _hist_EEC->bin(k).errW()/dV;
+        const double e2 = _hist_EEC->bin(nBins-k+1).errW()/dV;
+        const double ey = sqrt( e1 * e1 + e2 * e2 );
+        _hist_AEEC->bin(k).set(y, ey);
       }
 
     }
@@ -78,7 +75,7 @@ namespace Rivet {
   private:
     Histo1DPtr _hist_EEC;
     Histo1DPtr _hist_dummy;
-    Scatter2DPtr _hist_AEEC;
+    Estimate1DPtr _hist_AEEC;
   };
 
 

@@ -23,7 +23,7 @@ namespace Rivet {
 
     struct HistoHandler {
       Histo1DPtr histo;
-      Scatter2DPtr scatter;
+      Estimate1DPtr estimate;
       unsigned int d, x, y;
 
       void fill(double value) {
@@ -81,7 +81,7 @@ namespace Rivet {
       if (_mode < 2) {  // numerator mode
         const string histName = "_" + mkAxisCode(id_d, id_x, id_y);
         book(dummy.histo, histName, refData(id_d, id_x, id_y)); // hidden auxiliary output
-        book(dummy.scatter, id_d, id_x, id_y - 1, true); // ratio
+        book(dummy.estimate, id_d, id_x, id_y - 1); // ratio
         dummy.d = id_d;
         dummy.x = id_x;
         dummy.y = id_y;
@@ -192,47 +192,34 @@ namespace Rivet {
     /// Normalise, scale and otherwise manipulate histograms here
     void finalize() {
       const double sf(crossSection() / femtobarn / sumOfWeights());
-      for (map<string, HistoHandler>::iterator hit = _h.begin(); hit != _h.end(); ++hit) {
-        scale(hit->second.histo, sf);
-        if (_mode < 2)  constructRmiss(hit->second);
+      for (auto& item : _h) {
+        scale(item.second.histo, sf);
+        if (_mode < 2)  constructRmiss(item.second);
       }
     }
 
 
     void constructRmiss(HistoHandler& handler) {
       // Load transfer function from reference data file
-      const YODA::Scatter2D& rmiss = refData(handler.d, handler.x, handler.y);
-      const YODA::Scatter2D& numer = refData(handler.d, handler.x, handler.y + 1);
-      const YODA::Scatter2D& denom = refData(handler.d, handler.x, handler.y + 2);
-      for (size_t i = 0; i < handler.scatter->numPoints(); ++i) {
-        const Point2D& r = rmiss.point(i); // SM Rmiss
-        const Point2D& n = numer.point(i); // SM numerator
-        const Point2D& d = denom.point(i); // SM denominator
+      const YODA::Estimate1D& rmiss = refData(handler.d, handler.x, handler.y);
+      const YODA::Estimate1D& numer = refData(handler.d, handler.x, handler.y + 1);
+      const YODA::Estimate1D& denom = refData(handler.d, handler.x, handler.y + 2);
+      for (size_t i = 1; i < handler.estimate->numBins()+1; ++i) {
+        const auto& r = rmiss.bin(i); // SM Rmiss
+        const auto& n = numer.bin(i); // SM numerator
+        const auto& d = denom.bin(i); // SM denominator
         const auto& b = handler.histo->bin(i); // BSM
-        double bsmy;
-        try {
-          bsmy = b.sumW();
-        } catch (const Exception&) { // LowStatsError or WeightError
-          bsmy = 0;
-        }
-        double bsmey;
-        try {
-          bsmey = b.errW();
-        } catch (const Exception&) { // LowStatsError or WeightError
-          bsmey = 0;
-        }
+        double bsmy = b.sumW();
+        double bsmey = b.errW();
         // Combined numerator
-        double sm_plus_bsm = n.y() + bsmy;
+        double sm_plus_bsm = n.val() + bsmy;
         // Rmiss central value
-        double rmiss_y = safediv(sm_plus_bsm, d.y());
+        double rmiss_y = safediv(sm_plus_bsm, d.val());
         // Ratio error (Rmiss = SM_num/SM_denom + BSM/SM_denom ~ Rmiss_SM + BSM/SM_denom
-        double rmiss_p = sqrt(r.yErrPlus()*r.yErrPlus()   + safediv(bsmey*bsmey, d.y()*d.y()));
-        double rmiss_m = sqrt(r.yErrMinus()*r.yErrMinus() + safediv(bsmey*bsmey, d.y()*d.y()));
+        double rmiss_p = sqrt(sqr(r.errPos())  + safediv(sqr(bsmey), sqr(d.val())));
+        double rmiss_m = sqrt(sqr(r.errNeg()) + safediv(sqr(bsmey), sqr(d.val())));
         // Set new values
-        Point2D& p = handler.scatter->point(i); // (SM + BSM) Rmiss
-        p.setY(rmiss_y);
-        p.setYErrMinus(rmiss_m);
-        p.setYErrPlus(rmiss_p);
+        handler.estimate->bin(i).set(rmiss_y, {rmiss_m, rmiss_p});
       }
     }
 

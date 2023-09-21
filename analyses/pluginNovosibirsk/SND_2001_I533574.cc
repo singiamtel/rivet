@@ -52,44 +52,35 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int iy=1;iy<3;++iy) {
-	for(unsigned int ix=1;ix<5;++ix) {
-	  double sigma = 0., error = 0.;
-	  if(ix==1) {
-	    sigma = _nKpKm->val();
-	    error = _nKpKm->err();
-	  }
-	  else if(ix==2) {
-	    sigma = _nK0K0->val();
-	    error = _nK0K0->err();
-	  }
-	  else if(ix==3) {
-	    sigma = _nK0K0->val();
-	    error = _nK0K0->err();
-	  }
-	  else if(ix==4) {
-	    sigma = _n3pi->val();
-	    error = _n3pi->err();
-	  }
-	  sigma *= crossSection()/ sumOfWeights() /nanobarn;
-	  error *= crossSection()/ sumOfWeights() /nanobarn;
-	  Scatter2D temphisto(refData(iy, 1, ix));
-	  Scatter2DPtr mult;
-	  book(mult, iy, 1, ix);
-	  for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	    const double x  = temphisto.point(b).x();
-	    pair<double,double> ex = temphisto.point(b).xErrs();
-	    pair<double,double> ex2 = ex;
-	    if(ex2.first ==0.) ex2. first=0.0001;
-	    if(ex2.second==0.) ex2.second=0.0001;
-	    if (inRange(sqrtS()/MeV, x-ex2.first, x+ex2.second)) {
-	      mult->addPoint(x, sigma, ex, make_pair(error,error));
-	    }
-	    else {
-	      mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	    }
-	  }
-	}
+      for (unsigned int iy=1;iy<3;++iy) {
+        for (unsigned int ix=1;ix<5;++ix) {
+          double sigma = 0., error = 0.;
+          if(ix==1) {
+            sigma = _nKpKm->val();
+            error = _nKpKm->err();
+          }
+          else if(ix==2) {
+            sigma = _nK0K0->val();
+            error = _nK0K0->err();
+          }
+          else if(ix==3) {
+            sigma = _nK0K0->val();
+            error = _nK0K0->err();
+          }
+          else if(ix==4) {
+            sigma = _n3pi->val();
+            error = _n3pi->err();
+          }
+          sigma *= crossSection()/ sumOfWeights() /nanobarn;
+          error *= crossSection()/ sumOfWeights() /nanobarn;
+          Estimate1DPtr mult;
+          book(mult, iy, 1, ix);
+          for (auto& b : mult->bins()) {
+            if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
+              b.set(sigma, error);
+            }
+          }
+        }
       }
     }
 

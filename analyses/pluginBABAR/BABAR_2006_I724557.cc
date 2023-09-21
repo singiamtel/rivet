@@ -42,7 +42,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter2DPtr ratio;
+      Estimate1DPtr ratio;
       book(ratio,1,1,1);
       divide(_c_Omega_Star,_c_Omega,ratio);
     }

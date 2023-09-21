@@ -125,52 +125,37 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_h_K0_x, sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
-      if(_h_Kstar_x!=Histo1DPtr())
-	scale(_h_Kstar_x, sqr(sqrtS())*crossSection()/nanobarn/sumOfWeights());
+      if (_h_Kstar_x!=Histo1DPtr()) {
+        scale(_h_Kstar_x, sqr(sqrtS())*crossSection()/nanobarn/sumOfWeights());
+      }
       if(_p_K0_S_1!=Profile1DPtr()) {
-	Scatter2DPtr temp;
-	if(_ih==0)
-	  book(temp,5,1,2*_iy);
-	else
-	  book(temp,_ih+5,1,2);
-	divide(_p_K0_S_1,_p_K0_S_2,temp);
+        Estimate1DPtr temp;
+        if(_ih==0)  book(temp,5,1,2*_iy);
+        else        book(temp,_ih+5,1,2);
+        divide(_p_K0_S_1,_p_K0_S_2,temp);
       }
       if(_p_Kstar_S_1!=Profile1DPtr()) {
-	Scatter2DPtr temp;
-	book(temp,10,1,2);
-	divide(_p_Kstar_S_1,_p_Kstar_S_2,temp);
+        Estimate1DPtr temp;
+        book(temp,10,1,2);
+        divide(_p_Kstar_S_1,_p_Kstar_S_2,temp);
       }
       // K0 mult
       scale(_n_K0   ,1./sumOfWeights());
-      Scatter2D temphisto(refData(4, 1, 1));
-      Scatter2DPtr mult;
+      Estimate1DPtr mult;
       book(mult, 4, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-      	const double x  = temphisto.point(b).x();
-      	pair<double,double> ex = temphisto.point(b).xErrs();
-      	pair<double,double> ex2 = ex;
-     	if(ex2.first ==0.) ex2. first=0.0001;
-     	if(ex2.second==0.) ex2.second=0.0001;
-      	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second))
-       	  mult   ->addPoint(x, _n_K0->val(), ex, make_pair(_n_K0->err(),_n_K0->err()));
-	else
-	  mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
+      for (auto& b : mult->bins()) {
+      	if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+       	  b.set(_n_K0->val(), _n_K0->err());
+        }
       }
       // K*= mult
       scale(_n_Kstar,1./sumOfWeights());
-      Scatter2D temphisto2(refData(9, 1, 1));
-      Scatter2DPtr mult2;
+      Estimate1DPtr mult2;
       book(mult2,9, 1, 1);
-      for (size_t b = 0; b < temphisto2.numPoints(); b++) {
-      	const double x  = temphisto2.point(b).x();
-      	pair<double,double> ex = temphisto2.point(b).xErrs();
-      	pair<double,double> ex2 = ex;
-     	if(ex2.first ==0.) ex2. first=0.0001;
-     	if(ex2.second==0.) ex2.second=0.0001;
-      	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second))
-       	  mult2   ->addPoint(x, _n_Kstar->val(), ex, make_pair(_n_Kstar->err(),_n_Kstar->err()));
-	else
-	  mult2   ->addPoint(x, 0., ex, make_pair(0.,.0));
+      for (auto& b : mult2->bins()) {
+      	if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+       	  b.set(_n_Kstar->val(), _n_Kstar->err());
+        }
       }
     }
 

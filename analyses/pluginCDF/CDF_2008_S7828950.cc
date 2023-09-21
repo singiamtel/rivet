@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -25,25 +24,23 @@ namespace Rivet {
       const FinalState fs;
       declare(FastJets(fs, FastJets::CDFMIDPOINT, 0.7), "JetsM07");
 
-      {Histo1DPtr tmp; _binnedHistosR07.add(  0, 0.1, book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _binnedHistosR07.add(0.1, 0.7, book(tmp, 2, 1, 1));}
-      {Histo1DPtr tmp; _binnedHistosR07.add(0.7, 1.1, book(tmp, 3, 1, 1));}
-      {Histo1DPtr tmp; _binnedHistosR07.add(1.1, 1.6, book(tmp, 4, 1, 1));}
-      {Histo1DPtr tmp; _binnedHistosR07.add(1.6, 2.1, book(tmp, 5, 1, 1));}
+      book(_binnedHistosR07, {0., 0.1, 0.7, 1.1, 1.6, 2.1},
+                             {"d01-x01-y01", "d02-x01-y01", "d03-x01-y01", "d04-x01-y01", "d05-x01-y01"});
     }
 
 
     // Do the analysis
     void analyze(const Event& event) {
       for (const Jet& jet : apply<FastJets>(event, "JetsM07").jets(Cuts::pT > 62*GeV)) {
-        _binnedHistosR07.fill(jet.absrap(), jet.pT(), 1.0);
+        _binnedHistosR07->fill(jet.absrap(), jet.pT()/GeV);
       }
     }
 
 
     // Normalise histograms to cross-section
     void finalize() {
-      _binnedHistosR07.scale(crossSection()/nanobarn/sumOfWeights()/2.0, this);
+      scale(_binnedHistosR07, crossSection()/nanobarn/sumOfWeights()/2.0);
+      divByGroupWidth(_binnedHistosR07);
     }
 
     /// @}
@@ -52,7 +49,7 @@ namespace Rivet {
   private:
 
     /// Histograms in different eta regions
-    BinnedHistogram _binnedHistosR07;
+    Histo1DGroupPtr _binnedHistosR07;
 
   };
 

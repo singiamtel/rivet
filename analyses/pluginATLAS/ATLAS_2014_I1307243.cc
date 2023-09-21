@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -34,8 +33,8 @@ namespace Rivet {
         book(_aux_dy[cat], "_" + cat + "_dy", refData(1, 1, 1));
         book(_aux_pTbar[cat], "_" + cat + "_pTbar", refData(2, 1, 1));
 
-        book(_h_C2C1_dy[cat],    7 + 4 * offset, 1, 1, false);
-        book(_h_C2C1_pTbar[cat], 8 + 4 * offset, 1, 1, false);
+        book(_h_C2C1_dy[cat],    7 + 4 * offset, 1, 1);
+        book(_h_C2C1_pTbar[cat], 8 + 4 * offset, 1, 1);
 
         // Azimuthal moment histograms
         book(_p_cosDeltaPhi_dy[cat],        5 + 4 * offset, 1, 1);
@@ -45,13 +44,15 @@ namespace Rivet {
 
         // Gap fraction vs. Q0 and cross-section in dy slices
         _s_gapFrac_Q0.resize(_dy_max);
-        for (size_t dyLow = 0; dyLow < _dy_max; ++dyLow ) {
-          const string hname("_" + cat + "_dySlice_" + toString(dyLow) + "_" + toString(dyLow+1) + "_Q0");
-          { Histo1DPtr tmp; _aux_Q0_dySlices[cat].add(dyLow, dyLow+1, book(tmp, hname, refData(29+dyLow, 1, 1))); }
-          { Histo1DPtr tmp; _h_dphi_dySlices[cat].add(dyLow, dyLow+1, book(tmp, 13+(_dy_max*offset)+dyLow, 1, 1)); }
-          if (!offset)  book(_s_gapFrac_Q0[dyLow], 29 + dyLow, 1, 1); // only book once
+        const vector<double> edges {0., 1., 2., 3., 4., 5., 6., 7., 8.};
+        book(_aux_Q0_dySlices[cat], edges);
+        book(_h_dphi_dySlices[cat], edges);
+        for (size_t i=0; i < _aux_Q0_dySlices[cat]->numBins(); ++i) {
+          const string hname("_" + cat + "_dySlice_" + toString(i) + "_" + toString(i+1) + "_Q0");
+          book(_aux_Q0_dySlices[cat]->bin(i+1), hname, refData(29+i, 1, 1));
+          book(_h_dphi_dySlices[cat]->bin(i+1), 13+(_dy_max*offset)+i, 1, 1);
+          if (!offset)  book(_s_gapFrac_Q0[i], 29 + i, 1, 1); // only book once
         }
-
       }
 
       // Number of jets in rapidity interval
@@ -120,7 +121,7 @@ namespace Rivet {
         // Fill inclusive and gap histograms
         for (const string& cat : categories) {
           _aux_dy[cat]->fill(dy);
-          _h_dphi_dySlices[cat].fill(dy, dphi/M_PI);
+          _h_dphi_dySlices[cat]->fill(dy, dphi/M_PI);
           _p_cosDeltaPhi_dy[cat]->fill(dy, cos(M_PI - dphi));
           _p_cosTwoDeltaPhi_dy[cat]->fill(dy, cos(2*dphi));
         }
@@ -128,8 +129,8 @@ namespace Rivet {
         _p_nGapJets_dy->fill(dy, nGapJets);
         // Fill Q0 histograms - can fill multiple points per event
         for (const double Q0 :  _Qnoughts) {
-          _aux_Q0_dySlices["inclusive"].fill(dy, Q0);
-          if (maxGapQ0 <= Q0) { _aux_Q0_dySlices["gap"].fill(dy, Q0); }
+          _aux_Q0_dySlices["inclusive"]->fill(dy, Q0);
+          if (maxGapQ0 <= Q0) { _aux_Q0_dySlices["gap"]->fill(dy, Q0); }
         }
 
       // Fill histograms relevant for comparison with 2011 data
@@ -153,7 +154,7 @@ namespace Rivet {
       const double ySpan = 1.0; // all dy spans are 1
       const double sf = crossSection() / picobarn / sumOfWeights();
       for (const string cat : { "inclusive", "gap" }) {
-        _h_dphi_dySlices[cat].scale(sf/ySpan/M_PI, this);
+        scale(_h_dphi_dySlices[cat], sf/ySpan/M_PI);
         // Create C2/C1 scatter from profiles
         divide(_p_cosTwoDeltaPhi_dy[cat],    _p_cosDeltaPhi_dy[cat],    _h_C2C1_dy[cat]);
         divide(_p_cosTwoDeltaPhi_pTbar[cat], _p_cosDeltaPhi_pTbar[cat], _h_C2C1_pTbar[cat]);
@@ -165,7 +166,7 @@ namespace Rivet {
 
       // Register and fill Q0 gap fractions
       for (size_t dyLow = 0; dyLow < _dy_max; ++dyLow) {
-        efficiency(_aux_Q0_dySlices["gap"].histos()[dyLow], _aux_Q0_dySlices["inclusive"].histos()[dyLow], _s_gapFrac_Q0[dyLow]);
+        efficiency(_aux_Q0_dySlices["gap"]->bin(dyLow+1), _aux_Q0_dySlices["inclusive"]->bin(dyLow+1), _s_gapFrac_Q0[dyLow]);
       }
     }
 
@@ -181,11 +182,11 @@ namespace Rivet {
     /// auxiliary histograms for gap fractions
     map<string, Histo1DPtr> _aux_dy;
     map<string, Histo1DPtr> _aux_pTbar;
-    map<string, BinnedHistogram> _aux_Q0_dySlices;
+    map<string, Histo1DGroupPtr> _aux_Q0_dySlices;
 
     // Gap fractions
-    Scatter2DPtr _s_gapFrac_dy, _s_gapFrac_pTbar;
-    vector<Scatter2DPtr> _s_gapFrac_Q0;
+    Estimate1DPtr _s_gapFrac_dy, _s_gapFrac_pTbar;
+    vector<Estimate1DPtr> _s_gapFrac_Q0;
 
     // Number of jets in rapidity interval
     Profile1DPtr _p_nGapJets_dy;
@@ -196,11 +197,11 @@ namespace Rivet {
     map<string, Profile1DPtr> _p_cosDeltaPhi_pTbar;
     map<string, Profile1DPtr> _p_cosTwoDeltaPhi_dy;
     map<string, Profile1DPtr> _p_cosTwoDeltaPhi_pTbar;
-    map<string, Scatter2DPtr> _h_C2C1_dy;
-    map<string, Scatter2DPtr> _h_C2C1_pTbar;
+    map<string, Estimate1DPtr> _h_C2C1_dy;
+    map<string, Estimate1DPtr> _h_C2C1_pTbar;
 
     // Cross-section vs. deltaPhi in deltaY slices
-    map<string, BinnedHistogram> _h_dphi_dySlices;
+    map<string, Histo1DGroupPtr> _h_dphi_dySlices;
   };
 
   // The hook for the plugin system

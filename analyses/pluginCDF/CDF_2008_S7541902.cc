@@ -32,7 +32,7 @@ namespace Rivet {
       vector<pair<PdgId,PdgId> > vids;
       vids += make_pair(PID::ELECTRON, PID::NU_EBAR);
       vids += make_pair(PID::POSITRON, PID::NU_E);
-      FinalState fs2((Cuts::etaIn(-3.6, 3.6) && Cuts::pT >=  20*GeV));
+      FinalState fs2(Cuts::abseta < 3.6 && Cuts::pT >= 20*GeV);
       InvMassFinalState invfs(fs2, vids, 65*GeV, 95*GeV);
       declare(invfs, "INVFS");
 
@@ -44,13 +44,13 @@ namespace Rivet {
 
       // Book histograms
       for (int i = 0 ; i < 4 ; ++i) {
-        book(_histJetEt[i] ,1+i, 1, 1);
-        book(_histJetMultRatio[i], 5, 1, i+1, true);
-        /// @todo These would be better off as YODA::Counter until finalize()
-        book(_histJetMult[i] ,6+i, 1, 1); // _sumW is essentially the 0th "histo" counter
+        book(_histJetEt[i], i+1, 1, 1);
+        book(_histJetMultRatio[i], 5, 1, i+1);
+        book(_histJetMult[i], i+6, 1, 1);
+        book(_numer[i],"/TMP/numer"+std::to_string(i));
+        book(_denom[i],"/TMP/denom"+std::to_string(i));
       }
 
-      book(_sumW,"sumW");
     }
 
 
@@ -64,11 +64,11 @@ namespace Rivet {
       bool gotElectron(false), gotNeutrino(false);
       for (const Particle& p : wDecayProducts) {
         FourMomentum p4 = p.momentum();
-        if (p4.Et() > _electronETCut && fabs(p4.eta()) < _electronETACut && p.abspid() == PID::ELECTRON) {
+        if (p4.Et() > 20*GeV && p4.abseta() < 1.1 && p.abspid() == PID::ELECTRON) {
           electronP = p4;
           gotElectron = true;
         }
-        else if (p4.Et() > _eTmissCut && p.abspid() == PID::NU_E) {
+        else if (p4.Et() > 30*GeV && p.abspid() == PID::NU_E) {
           neutrinoP = p4;
           gotNeutrino = true;
         }
@@ -79,33 +79,33 @@ namespace Rivet {
 
       // Veto event if the MTR cut fails
       double mT2 = 2.0 * ( electronP.pT()*neutrinoP.pT() - electronP.px()*neutrinoP.px() - electronP.py()*neutrinoP.py() );
-      if (sqrt(mT2) < _mTCut ) vetoEvent;
+      if (sqrt(mT2) < 20*GeV ) vetoEvent;
 
       // Get the jets
       const JetAlg& jetProj = apply<FastJets>(event, "Jets");
-      Jets theJets = jetProj.jets(cmpMomByEt, Cuts::Et > _jetEtCutA);
+      Jets theJets = jetProj.jets(cmpMomByEt, Cuts::Et > 20*GeV);
       size_t njetsA(0), njetsB(0);
       for (const Jet& j : theJets) {
-        const FourMomentum pj = j.momentum();
-        if (fabs(pj.rapidity()) < _jetETA) {
+        if (j.absrap() < 2.0) {
           // Fill differential histograms for top 4 jets with Et > 20
-          if (njetsA < 4 && pj.Et() > _jetEtCutA) {
+          if (njetsA < 4 && j.Et() > 20*GeV) {
             ++njetsA;
-            _histJetEt[njetsA-1]->fill(pj.Et());
+            _histJetEt[njetsA-1]->fill(j.Et()/GeV);
           }
           // Count number of jets with Et > 25 (for multiplicity histograms)
-          if (pj.Et() > _jetEtCutB) ++njetsB;
+          if (j.Et() > 25*GeV)  ++njetsB;
         }
       }
 
       // Increment event counter
-      _sumW->fill();
+      _denom[0]->fill();
 
       // Jet multiplicity
       for (size_t i = 1; i <= njetsB; ++i) {
-        /// @todo This isn't really a histogram: replace with a YODA::Counter when we have one!
-        _histJetMult[i-1]->fill(1960.);
+        _histJetMult[i-1]->fill(1960);
+        _numer[i-1]->fill();
         if (i == 4) break;
+        _denom[i]->fill();
       }
     }
 
@@ -113,25 +113,11 @@ namespace Rivet {
     /// Finalize
     void finalize() {
 
-      // Fill the 0th ratio histogram specially
-      /// @todo This special case for 1-to-0 will disappear if we use Counters for all mults including 0.
-      if (_sumW->val() > 0) {
-        const auto& b0 = _histJetMult[0]->bin(1);
-        double ratio = b0.sumW()/dbl(*_sumW);
-        double frac_err = 1/dbl(*_sumW); ///< This 1/sqrt{N} error treatment isn't right for weighted events: use YODA::Counter
-        if (b0.sumW() > 0) frac_err = sqrt( sqr(frac_err) + sqr(b0.errW()/b0.sumW()) );
-        _histJetMultRatio[0]->point(0).setY(ratio, ratio*frac_err);
-      }
-
       // Loop over the non-zero multiplicities
-      for (size_t i = 1; i < 4; ++i) {
-        const auto& b1 = _histJetMult[i]->bin(0);
-        const auto& b2 = _histJetMult[i+1]->bin(0);
-        if (b1.sumW() == 0.0) continue;
-        double ratio = b2.sumW()/b1.sumW();
-        double frac_err = b1.errW()/b1.sumW();
-        if (b2.sumW() > 0) frac_err = sqrt( sqr(frac_err) + sqr(b2.errW()/b2.sumW()) );
-        _histJetMultRatio[i]->point(0).setY(ratio, ratio*frac_err);
+      for (size_t i = 0; i < 4; ++i) {
+        if (!_denom[i]->val())  continue;
+        const YODA::Estimate0D ratio = (*_numer[i]) / (*_denom[i]);
+        _histJetMultRatio[i]->bin(1).set(ratio.val(), ratio.err());
       }
 
       // Normalize the non-ratio histograms
@@ -147,31 +133,12 @@ namespace Rivet {
 
   private:
 
-    /// @name Cuts
-    /// @{
-    /// Cut on the electron ET:
-    double _electronETCut = 20*GeV;
-    /// Cut on the electron ETA:
-    double _electronETACut = 1.1;
-    /// Cut on the missing ET
-    double _eTmissCut = 30*GeV;
-    /// Cut on the transverse mass squared
-    double _mTCut = 20*GeV;
-    /// Cut on the jet ET for differential cross sections
-    double _jetEtCutA = 20*GeV;
-    /// Cut on the jet ET for jet multiplicity
-    double _jetEtCutB = 25*GeV;
-    /// Cut on the jet ETA
-    double _jetETA = 2.0;
-    /// @}
-
     /// @name Histograms
     /// @{
     Histo1DPtr _histJetEt[4];
-    Histo1DPtr _histJetMultNorm;
-    Scatter2DPtr _histJetMultRatio[4];
-    Histo1DPtr _histJetMult[4];
-    CounterPtr _sumW;
+    BinnedEstimatePtr<int> _histJetMultRatio[4];
+    BinnedHistoPtr<int> _histJetMult[4];
+    CounterPtr _numer[4], _denom[4];
     /// @}
 
   };

@@ -121,7 +121,7 @@ namespace Rivet {
     Histo1DPtr _histMult, _histEta, _histRapidity, _histPt, _histE, _histPhi;
     Histo1DPtr _histMultCh,  _histEtaCh, _histRapidityCh, _histPtCh, _histECh, _histPhiCh;
     Profile1DPtr _histEtaSumEt;
-    Scatter2DPtr _histEtaPMRatio, _histEtaChPMRatio, _histRapidityPMRatio, _histRapidityChPMRatio;
+    Estimate1DPtr _histEtaPMRatio, _histEtaChPMRatio, _histRapidityPMRatio, _histRapidityChPMRatio;
     /// @}
 
     /// @name Temporary histos used to calculate +/- rapidity ratio plots

@@ -126,14 +126,14 @@ namespace Rivet {
     pair<double,double> calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
-	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double ai = 0.5*(bin.xMax()-bin.xMin());
-	double bi = 0.5*ai*(bin.xMax()+bin.xMin());
-	double Ei = bin.errW();
-	sum1 += sqr(bi/Ei);
-	sum2 += bi/sqr(Ei)*(Oi-ai);
+      for (auto& bin : hist->bins() ) {
+        double Oi = bin.sumW();
+        if(Oi==0.) continue;
+        double ai = 0.5*(bin.xMax()-bin.xMin());
+        double bi = 0.5*ai*(bin.xMax()+bin.xMin());
+        double Ei = bin.errW();
+        sum1 += sqr(bi/Ei);
+        sum2 += bi/sqr(Ei)*(Oi-ai);
       }
       return make_pair(sum2/sum1,sqrt(1./sum1));
     }
@@ -143,7 +143,7 @@ namespace Rivet {
       normalize(_h_pi );
       normalize(_h_rho);
       // the polarization
-      Scatter2DPtr _h_alpha;
+      Estimate1DPtr _h_alpha;
       book(_h_alpha,1,1,2);
       pair<double,double> alpha_pi  = calcAlpha(_h_pi );
       pair<double,double> alpha_rho = calcAlpha(_h_rho);
@@ -153,7 +153,7 @@ namespace Rivet {
       pair<double,double> alpha;
       alpha.first  = (alpha_pi.first*sqr(alpha_rho.second)+alpha_rho.first*sqr(alpha_pi.second))/(sqr(alpha_pi.second)+sqr(alpha_rho.second));
       alpha.second = alpha_pi.second*alpha_rho.second/sqrt(sqr(alpha_pi.second)+sqr(alpha_rho.second));
-      _h_alpha->addPoint({0.5,alpha.first}, {make_pair(0.5,0.5), make_pair(alpha.second,alpha.second)});
+      _h_alpha->bin(1).set(alpha.first, alpha.second);
 
     }
 

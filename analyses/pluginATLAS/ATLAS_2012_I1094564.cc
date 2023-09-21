@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -11,9 +10,7 @@ namespace Rivet {
   class ATLAS_2012_I1094564 : public Analysis {
   public:
 
-    ATLAS_2012_I1094564()
-      : Analysis("ATLAS_2012_I1094564")
-    {}
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1094564);
 
 
     // Returns constituents to make it easier to do the filtering
@@ -165,50 +162,25 @@ namespace Rivet {
       declare(FastJets(fs, FastJets::CAM, 1.2)   , "CA" );
 
       /// Histograms:
-      {Histo1DPtr tmp; _h_camass.add(200, 300, book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _h_camass.add(300, 400, book(tmp, 2, 1, 1));}
-      {Histo1DPtr tmp; _h_camass.add(400, 500, book(tmp, 3, 1, 1));}
-      {Histo1DPtr tmp; _h_camass.add(500, 600, book(tmp, 4, 1, 1));}
+      book(_h_camass,   {200., 300., 400., 500., 600.},
+                        {"d01-x01-y01", "d02-x01-y01", "d03-x01-y01", "d04-x01-y01"});
+      book(_h_filtmass, {200., 300., 400., 500., 600.},
+                        {"d05-x01-y01", "d06-x01-y01", "d07-x01-y01", "d08-x01-y01"});
+      book(_h_ktmass,   {200., 300., 400., 500., 600.},
+                        {"d09-x01-y01", "d10-x01-y01", "d11-x01-y01", "d12-x01-y01"});
+      book(_h_ktd12,    {200., 300., 400., 500., 600.},
+                        {"d13-x01-y01", "d14-x01-y01", "d15-x01-y01", "d16-x01-y01"});
+      book(_h_ktd23,    {200., 300., 400., 500., 600.},
+                        {"d17-x01-y01", "d18-x01-y01", "d19-x01-y01", "d20-x01-y01"});
+      book(_h_cat21,    {200., 300., 400., 500., 600.},
+                        {"d21-x01-y01", "d22-x01-y01", "d23-x01-y01", "d24-x01-y01"});
+      book(_h_cat32,    {200., 300., 400., 500., 600.},
+                        {"d25-x01-y01", "d26-x01-y01", "d27-x01-y01", "d28-x01-y01"});
+      book(_h_ktt21,    {200., 300., 400., 500., 600.},
+                        {"d29-x01-y01", "d30-x01-y01", "d31-x01-y01", "d32-x01-y01"});
+      book(_h_ktt32,    {200., 300., 400., 500., 600.},
+                        {"d33-x01-y01", "d34-x01-y01", "d35-x01-y01", "d36-x01-y01"});
 
-      {Histo1DPtr tmp; _h_filtmass.add(200, 300, book(tmp, 5, 1, 1));}
-      {Histo1DPtr tmp; _h_filtmass.add(300, 400, book(tmp, 6, 1, 1));}
-      {Histo1DPtr tmp; _h_filtmass.add(400, 500, book(tmp, 7, 1, 1));}
-      {Histo1DPtr tmp; _h_filtmass.add(500, 600, book(tmp, 8, 1, 1));}
-
-      {Histo1DPtr tmp; _h_ktmass.add(200, 300, book(tmp,  9, 1, 1));}
-      {Histo1DPtr tmp; _h_ktmass.add(300, 400, book(tmp, 10, 1, 1));}
-      {Histo1DPtr tmp; _h_ktmass.add(400, 500, book(tmp, 11, 1, 1));}
-      {Histo1DPtr tmp; _h_ktmass.add(500, 600, book(tmp, 12, 1, 1));}
-
-      {Histo1DPtr tmp; _h_ktd12.add(200, 300, book(tmp, 13, 1, 1));}
-      {Histo1DPtr tmp; _h_ktd12.add(300, 400, book(tmp, 14, 1, 1));}
-      {Histo1DPtr tmp; _h_ktd12.add(400, 500, book(tmp, 15, 1, 1));}
-      {Histo1DPtr tmp; _h_ktd12.add(500, 600, book(tmp, 16, 1, 1));}
-
-      {Histo1DPtr tmp; _h_ktd23.add(200, 300, book(tmp, 17, 1 ,1));}
-      {Histo1DPtr tmp; _h_ktd23.add(300, 400, book(tmp, 18, 1 ,1));}
-      {Histo1DPtr tmp; _h_ktd23.add(400, 500, book(tmp, 19, 1 ,1));}
-      {Histo1DPtr tmp; _h_ktd23.add(500, 600, book(tmp, 20, 1 ,1));}
-
-      {Histo1DPtr tmp; _h_cat21.add(200, 300, book(tmp, 21, 1, 1));}
-      {Histo1DPtr tmp; _h_cat21.add(300, 400, book(tmp, 22, 1, 1));}
-      {Histo1DPtr tmp; _h_cat21.add(400, 500, book(tmp, 23, 1, 1));}
-      {Histo1DPtr tmp; _h_cat21.add(500, 600, book(tmp, 24, 1, 1));}
-
-      {Histo1DPtr tmp; _h_cat32.add(200, 300, book(tmp, 25, 1, 1));}
-      {Histo1DPtr tmp; _h_cat32.add(300, 400, book(tmp, 26, 1, 1));}
-      {Histo1DPtr tmp; _h_cat32.add(400, 500, book(tmp, 27, 1, 1));}
-      {Histo1DPtr tmp; _h_cat32.add(500, 600, book(tmp, 28, 1, 1));}
-
-      {Histo1DPtr tmp; _h_ktt21.add(200, 300, book(tmp, 29, 1, 1));}
-      {Histo1DPtr tmp; _h_ktt21.add(300, 400, book(tmp, 30, 1, 1));}
-      {Histo1DPtr tmp; _h_ktt21.add(400, 500, book(tmp, 31, 1, 1));}
-      {Histo1DPtr tmp; _h_ktt21.add(500, 600, book(tmp, 32, 1, 1));}
-
-      {Histo1DPtr tmp; _h_ktt32.add(200, 300, book(tmp, 33, 1, 1));}
-      {Histo1DPtr tmp; _h_ktt32.add(300, 400, book(tmp, 34, 1, 1));}
-      {Histo1DPtr tmp; _h_ktt32.add(400, 500, book(tmp, 35, 1, 1));}
-      {Histo1DPtr tmp; _h_ktt32.add(500, 600, book(tmp, 36, 1, 1));}
     }
 
 
@@ -223,7 +195,7 @@ namespace Rivet {
       PseudoJets ktjets = ktfj.pseudoJetsByPt(200*GeV);
       for (const PseudoJet & ajet : ktjets) {
         if (abs(ajet.rap()) < 2) {
-          _h_ktmass.fill(ajet.perp(), ajet.m(), weight);
+          _h_ktmass->fill(ajet.perp(), ajet.m(), weight);
         }
       }
 
@@ -232,7 +204,7 @@ namespace Rivet {
       PseudoJets cajets = cafj.pseudoJetsByPt(200*GeV);
       for (const PseudoJet & ajet : cajets) {
         if (abs(ajet.rap()) < 2) {
-          _h_camass.fill(ajet.perp(), ajet.m(), weight);
+          _h_camass->fill(ajet.perp(), ajet.m(), weight);
         }
       }
 
@@ -245,7 +217,7 @@ namespace Rivet {
         PseudoJets split_jets = splitjet(pjet, dR, cafj, unclustered);
         if ( (dR < 0.15) || (unclustered == false) ) continue;
         PseudoJet filt_jet = filterjet(split_jets, dR, 0.3);
-        _h_filtmass.fill(filt_jet.perp(), filt_jet.m(), weight);
+        _h_filtmass->fill(filt_jet.perp(), filt_jet.m(), weight);
       }
 
       // Use the two last stages of clustering to get sqrt(d_12) and sqrt(d_23).
@@ -255,8 +227,8 @@ namespace Rivet {
         ClusterSequence subjet_cseq(ktfj.clusterSeq()->constituents(pjet), JetDefinition(kt_algorithm, M_PI/2.));
         double d_12 = subjet_cseq.exclusive_dmerge(1) * M_PI*M_PI/4.;
         double d_23 = subjet_cseq.exclusive_dmerge(2) * M_PI*M_PI/4.;
-        _h_ktd12.fill(pjet.perp(), sqrt(d_12), weight);
-        _h_ktd23.fill(pjet.perp(), sqrt(d_23), weight);
+        _h_ktd12->fill(pjet.perp(), sqrt(d_12), weight);
+        _h_ktd23->fill(pjet.perp(), sqrt(d_23), weight);
       }
 
       // N-subjettiness, use beta = 1 (no rationale given).
@@ -282,8 +254,8 @@ namespace Rivet {
         const double tau3 = jetTauValue(beta, radius, constituents, axis3, Rcut);
 
         if (tau1 == 0 || tau2 == 0) continue;
-        _h_cat21.fill(pjet.perp(), tau2/tau1, weight);
-        _h_cat32.fill(pjet.perp(), tau3/tau2, weight);
+        _h_cat21->fill(pjet.perp(), tau2/tau1, weight);
+        _h_cat32->fill(pjet.perp(), tau3/tau2, weight);
       }
 
       for (const PseudoJet & pjet : ktjets) {
@@ -302,36 +274,36 @@ namespace Rivet {
         const double tau3 = jetTauValue(beta, radius, constituents, axis3, Rcut);
         if (tau1 == 0 || tau2 == 0) continue;
 
-        _h_ktt21.fill(pjet.perp(), tau2/tau1, weight);
-        _h_ktt32.fill(pjet.perp(), tau3/tau2, weight);
+        _h_ktt21->fill(pjet.perp(), tau2/tau1, weight);
+        _h_ktt32->fill(pjet.perp(), tau3/tau2, weight);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (Histo1DPtr h : _h_camass.histos()) normalize(h);
-      for (Histo1DPtr h : _h_filtmass.histos()) normalize(h);
-      for (Histo1DPtr h : _h_ktmass.histos()) normalize(h);
-      for (Histo1DPtr h : _h_ktd12.histos()) normalize(h);
-      for (Histo1DPtr h : _h_ktd23.histos()) normalize(h);
-      for (Histo1DPtr h : _h_cat21.histos()) normalize(h);
-      for (Histo1DPtr h : _h_cat32.histos()) normalize(h);
-      for (Histo1DPtr h : _h_ktt21.histos()) normalize(h);
-      for (Histo1DPtr h : _h_ktt32.histos()) normalize(h);
+      normalize(_h_camass);
+      normalize(_h_filtmass);
+      normalize(_h_ktmass);
+      normalize(_h_ktd12);
+      normalize(_h_ktd23);
+      normalize(_h_cat21);
+      normalize(_h_cat32);
+      normalize(_h_ktt21);
+      normalize(_h_ktt32);
     }
 
   private:
 
-    BinnedHistogram _h_camass;
-    BinnedHistogram _h_filtmass;
-    BinnedHistogram _h_ktmass;
-    BinnedHistogram _h_ktd12;
-    BinnedHistogram _h_ktd23;
-    BinnedHistogram _h_cat21;
-    BinnedHistogram _h_cat32;
-    BinnedHistogram _h_ktt21;
-    BinnedHistogram _h_ktt32;
+    Histo1DGroupPtr _h_camass;
+    Histo1DGroupPtr _h_filtmass;
+    Histo1DGroupPtr _h_ktmass;
+    Histo1DGroupPtr _h_ktd12;
+    Histo1DGroupPtr _h_ktd23;
+    Histo1DGroupPtr _h_cat21;
+    Histo1DGroupPtr _h_cat32;
+    Histo1DGroupPtr _h_ktt21;
+    Histo1DGroupPtr _h_ktt32;
 
   };
 

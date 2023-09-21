@@ -294,35 +294,35 @@ namespace Rivet {
     // Top quark pt histograms and ratio
     Histo1DPtr _hist_abs_top_pt;
     Histo1DPtr _hist_norm_top_pt;
-    Scatter2DPtr _hist_ratio_top_pt;
+    Estimate1DPtr _hist_ratio_top_pt;
     Histo1DPtr _hist_t_top_pt;
     Histo1DPtr _hist_tbar_top_pt;
 
     // Top quark rapidity histograms and ratio
     Histo1DPtr _hist_abs_top_y;
     Histo1DPtr _hist_norm_top_y;
-    Scatter2DPtr _hist_ratio_top_y;
+    Estimate1DPtr _hist_ratio_top_y;
     Histo1DPtr _hist_t_top_y;
     Histo1DPtr _hist_tbar_top_y;
 
     // Charged lepton pt histograms and ratio
     Histo1DPtr _hist_abs_lepton_pt;
     Histo1DPtr _hist_norm_lepton_pt;
-    Scatter2DPtr _hist_ratio_lepton_pt;
+    Estimate1DPtr _hist_ratio_lepton_pt;
     Histo1DPtr _hist_t_lepton_pt;
     Histo1DPtr _hist_tbar_lepton_pt;
 
     // Charged lepton rapidity histograms and ratio
     Histo1DPtr _hist_abs_lepton_y;
     Histo1DPtr _hist_norm_lepton_y;
-    Scatter2DPtr _hist_ratio_lepton_y;
+    Estimate1DPtr _hist_ratio_lepton_y;
     Histo1DPtr _hist_t_lepton_y;
     Histo1DPtr _hist_tbar_lepton_y;
 
     // W boson pt histograms and ratio
     Histo1DPtr _hist_abs_w_pt;
     Histo1DPtr _hist_norm_w_pt;
-    Scatter2DPtr _hist_ratio_w_pt;
+    Estimate1DPtr _hist_ratio_w_pt;
     Histo1DPtr _hist_t_w_pt;
     Histo1DPtr _hist_tbar_w_pt;
 

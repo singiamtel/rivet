@@ -20,13 +20,13 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
 
     /// @name Analysis methods
     ///@{
-      
+
     /// Book histograms and initialise projections before the run
     void init() {
-        
+
       // Initialise and register projections
         declare(DISKinematics(), "Kinematics");
-        
+
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
@@ -37,12 +37,12 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
       // Book histograms
       // specify custom binning
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      
+
         for(int iQ = 0; iQ < 11; ++iQ) {
-          book(_Nevt_after_cuts_Q[iQ], "TMP/Nevt_after_cuts_Q"+ to_string(iQ));     
+          book(_Nevt_after_cuts_Q[iQ], "TMP/Nevt_after_cuts_Q"+ to_string(iQ));
         }
 
-        
+
         book(_h["mult1"],"TMP/mult 1", refData(1, 1, 1)); // Multiplicity
         book(_h["mult1_Q"],"TMP/mult 1_1", refData(1, 1, 1));
         book(_h["mult2"],"TMP/mult 2", refData(2, 1, 1));
@@ -51,7 +51,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         book(_h["mult3_Q"], "TMP/mult 3_1",refData(3, 1, 1));
         book(_h["mult4"], "TMP/mult 4", refData(4, 1, 1));
         book(_h["mult4_Q"],"TMP/mult 4_1", refData(4, 1, 1));
-        
+
         book(_h["mom1"], "TMP/mult 5", refData(5, 1, 1)); // Momentum spectra
         book(_h["mom1_Q"],"TMP/mult 5_1", refData(5, 1, 1));
         book(_h["mom2"], "TMP/mult 6", refData(6, 1, 1));
@@ -60,7 +60,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         book(_h["mom3_Q"],"TMP/mult 7_1", refData(7, 1, 1));
         book(_h["mom4"], "TMP/mult 8", refData(8, 1, 1));
         book(_h["mom4_Q"], "TMP/mult 8_1", refData(8, 1, 1));
-        
+
         book(_h_mult1, 1,1,1);
         book(_h_mult2, 2,1,1);
         book(_h_mult3, 3,1,1);
@@ -69,7 +69,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         book(_h_mom2, 6,1,1);
         book(_h_mom3, 7,1,1);
         book(_h_mom4, 8,1,1);
-        
+
         book(_h["nch1"], 9, 1, 1);  // Multiplicity
         book(_h["nch2"], 10, 1, 1);
         book(_h["nch3"], 10, 1, 2);
@@ -80,7 +80,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         book(_h["nch8"], 11, 1, 4);
         book(_h["nch9"], 12, 1, 1);
         book(_h["nch10"], 12, 1, 2);
-        
+
         book(_h["loginvmom1"], 13, 1, 1); // Momentum spectra
         book(_h["loginvmom2"], 14, 1, 1);
         book(_h["loginvmom3"], 14, 1, 2);
@@ -91,7 +91,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         book(_h["loginvmom8"], 15, 1, 4);
         book(_h["loginvmom9"], 16, 1, 1);
         book(_h["loginvmom10"], 16, 1, 2);
-        
+
     }
 
 
@@ -103,7 +103,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         double xbj = dk.x(); // momentum fraction
         double Q2 = dk.Q2()/GeV; // momentum transfer
         const LorentzTransform Breitboost = dk.boostBreit();
-        
+
         // Multiplicity counters
         int n911(0), n1011(0), n1012(0), n1013(0), n1111(0), n1112(0), n1113(0), n1114(0), n1211(0), n1212(0);
 
@@ -144,7 +144,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                  _Nevt_after_cuts_Q[10] -> fill();
             }
         }
-            
+
 
         for (const Particle& p : cfs.particles()) {
             //??? calculating ln(1/x_p) ??? --> part to ask
@@ -152,9 +152,9 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
             double pp = sqrt(BrMom.px()*BrMom.px() + BrMom.py()*BrMom.py() + BrMom.pz()*BrMom.pz() );
             double xp = 2*pp/(sqrt(Q2));
             const double logInvScaledMom = log(1/xp);
-            
+
             if ( BrMom.pz() > 0. ) continue;
-            
+
             if(0.6e-3<xbj && xbj<1.2e-3) {
                 _h["mom1"] ->fill(Q2, logInvScaledMom);
                 _h["mom1_Q"] ->fill(Q2);
@@ -163,7 +163,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                     ++n911;
                 }
             }
-            
+
           if(1.2e-3<xbj && xbj<2.4e-3) {
                 _h["mom2"] ->fill(Q2, logInvScaledMom);
                 _h["mom2_Q"] ->fill(Q2);
@@ -180,7 +180,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                   ++n1013;
                   }
             }
-            
+
             if(2.4e-3<xbj && xbj<1.0e-2) {
                 _h["mom3"] ->fill(Q2, logInvScaledMom);
                 _h["mom3_Q"] ->fill(Q2);
@@ -201,7 +201,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                     ++n1114;
                     }
             }
-            
+
             if(1.0e-2<xbj && xbj<5.0e-2) {
                 _h["mom4"] ->fill(Q2,logInvScaledMom);
                 _h["mom4_Q"] ->fill(Q2);
@@ -214,9 +214,9 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                     ++n1212;
                     }
             }
-            
+
             }
-        
+
         if(0.6e-3<xbj && xbj<1.2e-3) {
             if(10<Q2 && Q2<20) {
                 _h["mult1"] ->fill(Q2, n911);
@@ -224,7 +224,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                 _h["nch1"] ->fill(n911);
             }
         }
-        
+
       if(1.2e-3<xbj && xbj<2.4e-3) {
           if(10<Q2 && Q2<80) {
             _h["mult2"] ->fill(Q2, n1011+n1012+n1013);
@@ -237,7 +237,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                   _h["nch4"] ->fill(n1013);}
           }
         }
-        
+
         if(2.4e-3<xbj && xbj<1.0e-2) {
             _h["mult3"] ->fill(Q2,n1111+n1112+n1113+n1114);
             _h["mult3_Q"] ->fill(Q2);
@@ -251,7 +251,7 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
                 _h["nch8"] ->fill(n1114);}
 
         }
-        
+
         if(1.0e-2<xbj && xbj<5.0e-2) {
             _h["mult4"] ->fill(Q2, n1211+n1212);
             _h["mult4_Q"] ->fill(Q2);
@@ -260,10 +260,10 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
             if(640<Q2 && Q2<1280) {
                 _h["nch10"] ->fill(n1212); }
         }
-        
+
     }
 
-      
+
     /// Normalise histograms etc., after the run
     void finalize() {
    //   normalize(_h["XXXX"]); // normalize to unity
@@ -275,8 +275,8 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         divide(_h["mom2"],_h["mom2_Q"],_h_mom2);
         divide(_h["mom3"],_h["mom3_Q"],_h_mom3);
         divide(_h["mom4"],_h["mom4_Q"],_h_mom4);
-        
-        
+
+
         normalize(_h["nch1"]); //multiplicity
         normalize(_h["nch2"]);
         normalize(_h["nch3"]);
@@ -300,31 +300,30 @@ const vector<double> xEdges {0.6e-3,1.2e-3,2.4e-3,1.0e-2,5.0e-2};
         if(dbl(*_Nevt_after_cuts_Q[10])>0 ) scale(_h["loginvmom10"],1./ *_Nevt_after_cuts_Q[10] );
 
 
-        
+
      // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
     }
 
     ///@}
-      
+
 
     /// @name Histograms
     ///@{
-      
-      Scatter2DPtr _h_mult1;
-      Scatter2DPtr _h_mult2;
-      Scatter2DPtr _h_mult3;
-      Scatter2DPtr _h_mult4;
-      Scatter2DPtr _h_mom1;
-      Scatter2DPtr _h_mom2;
-      Scatter2DPtr _h_mom3;
-      Scatter2DPtr _h_mom4;
-      
+
+    Estimate1DPtr _h_mult1;
+    Estimate1DPtr _h_mult2;
+    Estimate1DPtr _h_mult3;
+    Estimate1DPtr _h_mult4;
+    Estimate1DPtr _h_mom1;
+    Estimate1DPtr _h_mom2;
+    Estimate1DPtr _h_mom3;
+    Estimate1DPtr _h_mom4;
+
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     CounterPtr _Nevt_after_cuts_Q[11];
-    BinnedHistogram _h_invmom1,_h_invmom2,_h_invmom3;
 
     ///@}
 

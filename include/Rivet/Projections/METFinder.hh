@@ -12,8 +12,7 @@ namespace Rivet {
   public:
 
     /// Import to avoid warnings about overload-hiding
-    using Projection::operator =;
-
+    using Projection::operator=;
 
     /// @name Transverse momentum functions
     ///

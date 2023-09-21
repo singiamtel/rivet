@@ -104,7 +104,7 @@ namespace Rivet {
     pair<double,pair<double,double> > calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,make_pair(0.,0.));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
         double a =  1.5*(bin.xMax() - bin.xMin());
@@ -139,9 +139,9 @@ namespace Rivet {
       normalize(_h_bar);
       normalize(_h_all);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_all);
-      Scatter2DPtr h_alpha_lam;
+      Estimate1DPtr h_alpha_lam;
       book(h_alpha_lam, 5,1,1);
-      h_alpha_lam->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second.first,alpha.second.second) );
+      h_alpha_lam->bin(1).set(alpha.first, alpha.second);
 
     }
 

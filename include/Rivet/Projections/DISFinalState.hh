@@ -17,7 +17,6 @@ namespace Rivet {
     /// Type of DIS boost to apply
     enum class BoostFrame { HCM, BREIT, LAB };
 
-
     /// @name Constructors
     /// @{
 

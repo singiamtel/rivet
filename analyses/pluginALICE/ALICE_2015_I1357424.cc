@@ -86,8 +86,8 @@ namespace Rivet {
     Histo1DPtr _histPtProtonsR;
     Histo1DPtr _histPtKaonsR;
 
-    Scatter2DPtr _histPtKtoPi;
-    Scatter2DPtr _histPtPtoPi;
+    Estimate1DPtr _histPtKtoPi;
+    Estimate1DPtr _histPtPtoPi;
   };
 
 

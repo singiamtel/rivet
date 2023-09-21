@@ -10,12 +10,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2011_I928289_W()
-      : Analysis("ATLAS_2011_I928289_W")
-    {
-
-    }
-
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2011_I928289_W);
 
     /// @name Analysis methods
     /// @{
@@ -128,10 +123,10 @@ namespace Rivet {
     Histo1DPtr _h_Wplus_lepton_eta_el_dressed;
     Histo1DPtr _h_Wplus_lepton_eta_mu_bare;
     Histo1DPtr _h_Wplus_lepton_eta_mu_dressed;
-    Scatter2DPtr _h_W_asym_eta_el_bare;
-    Scatter2DPtr _h_W_asym_eta_el_dressed;
-    Scatter2DPtr _h_W_asym_eta_mu_bare;
-    Scatter2DPtr _h_W_asym_eta_mu_dressed;
+    Estimate1DPtr _h_W_asym_eta_el_bare;
+    Estimate1DPtr _h_W_asym_eta_el_dressed;
+    Estimate1DPtr _h_W_asym_eta_mu_bare;
+    Estimate1DPtr _h_W_asym_eta_mu_dressed;
 
     /// @}
 

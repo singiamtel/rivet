@@ -16,7 +16,6 @@ namespace Rivet {
   Analysis::Analysis(const string& name) : _analysishandler(nullptr) {
     ProjectionApplier::_allowProjReg = false;
     _defaultname = name;
-
     _info = AnalysisInfo::make(name);
     assert(_info);
   }
@@ -263,21 +262,21 @@ namespace Rivet {
 
 
   double Analysis::crossSection() const {
-    const YODA::Scatter1D::Points& ps = handler().crossSection()->points();
-    if (ps.size() != 1) {
+    double xs = handler().crossSection()->val();
+    if (isnan(xs)) {
       string errMsg = "cross section missing for analysis " + name();
       throw Error(errMsg);
     }
-    return ps[0].x();
+    return xs;
   }
 
   double Analysis::crossSectionError() const {
-    const YODA::Scatter1D::Points& ps = handler().crossSection()->points();
-    if (ps.size() != 1) {
+    double xserr = handler().crossSection()->errAvg();
+    if (isnan(xserr)) {
       string errMsg = "cross section missing for analysis " + name();
       throw Error(errMsg);
     }
-    return ps[0].xErrAvg();
+    return xserr;
   }
 
   double Analysis::crossSectionPerEvent() const {
@@ -315,36 +314,40 @@ namespace Rivet {
   }
 
 
+  Estimate0DPtr& Analysis::book(Estimate0DPtr& est, const string& cname) {
+    return est = registerAO( Estimate0D(histoPath(cname)) );
+  }
+
+
+  Estimate0DPtr& Analysis::book(Estimate0DPtr& est, unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) {
+    const string axisCode = mkAxisCode(datasetID, xAxisID, yAxisID);
+    return book(est, axisCode);
+  }
+
+
+
   /////////////////////
 
-  void Analysis::divide(const Counter& c1, const Counter& c2, Scatter1DPtr s) const {
-    const string path = s->path();
-    *s = (c1 / c2).mkScatter(path);
+  void Analysis::divide(const Counter& c1, const Counter& c2, Estimate0DPtr est) const {
+    const string path = est->path();
+    *est = (c1 / c2);
+    est->setPath(path);
   }
   //
-  void Analysis::divide(CounterPtr c1, CounterPtr c2, Scatter1DPtr s) const {
-    return Analysis::divide(*c1, *c2, s);
+  void Analysis::divide(CounterPtr c1, CounterPtr c2, Estimate0DPtr est) const {
+    return Analysis::divide(*c1, *c2, est);
   }
 
 
-  void Analysis::scale(CounterPtr cnt, Analysis::CounterAdapter factor) {
-    if (!cnt) {
-      MSG_WARNING("Failed to scale counter=NULL in analysis " << name() << " (scale=" << double(factor) << ")");
-      return;
-    }
-    if (std::isnan(double(factor)) || std::isinf(double(factor))) {
-      MSG_WARNING("Failed to scale counter=" << cnt->path() << " in analysis: "
-                   << name() << " (invalid scale factor = " << double(factor) << ")");
-      factor = 0;
-    }
-    MSG_TRACE("Scaling counter " << cnt->path() << " by factor " << double(factor));
-    try {
-      cnt->scaleW(factor);
-    } catch (YODA::Exception& we) {
-      MSG_WARNING("Could not scale counter " << cnt->path());
-      return;
-    }
+  void Analysis::divide(const YODA::Estimate0D& e1, const YODA::Estimate0D& e2, Estimate0DPtr est) const {
+    const string path = est->path();
+    *est = e1 / e2;
   }
+  //
+  void Analysis::divide(Estimate0DPtr e1, Estimate0DPtr e2, Estimate0DPtr est) const {
+    return Analysis::divide(*e1, *e2, est);
+  }
+
 
 }
 
@@ -396,7 +399,7 @@ namespace Rivet {
     set<string> done;
 
     if ( sel == "REF" ) {
-      YODA::Scatter2DPtr refscat;
+      YODA::Estimate1DPtr refest;
       map<string, YODA::AnalysisObjectPtr> refmap;
       try {
         refmap = getRefData(calAnaName);
@@ -410,17 +413,17 @@ namespace Rivet {
 
       }
       if ( refmap.find(calHistName) != refmap.end() )
-        refscat = dynamic_pointer_cast<Scatter2D>(refmap.find(calHistName)->second);
+        refest = dynamic_pointer_cast<Estimate1D>(refmap.find(calHistName)->second);
 
-      if ( !refscat ) {
+      if ( !refest ) {
         MSG_WARNING("No reference calibration histogram for " <<
                     "CentralityProjection " << projName << " found " <<
                     "(requested histogram " << calHistName << " in " <<
                     calAnaName << ")");
       }
       else {
-        MSG_INFO("Found calibration histogram " << sel << " " << refscat->path());
-        cproj.add(PercentileProjection(proj, *refscat, increasing), sel);
+        MSG_INFO("Found calibration histogram " << sel << " " << refest->path());
+        cproj.add(PercentileProjection(proj, *refest, increasing), sel);
       }
     }
     else if ( sel == "GEN" ) {

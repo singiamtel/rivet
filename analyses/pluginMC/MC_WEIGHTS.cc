@@ -23,7 +23,8 @@ namespace Rivet {
       book(_h_logweight_pos, "logweight_pos", logspace(100, 0.1, 10000.0));
       book(_h_logweight_neg, "logweight_neg", logspace(100, 0.1, 10000.0));
 
-      book(_h_xsfraction_neg, "xsfraction_neg");
+      const vector<string> edges = { "Negative weight fraction" };
+      book(_h_xsfraction_neg, "xsfraction_neg", edges);
     }
 
 
@@ -56,7 +57,7 @@ namespace Rivet {
       const double totalSumW2 = _h_logweight_neg->sumW2() + _h_logweight_pos->sumW2();
       const double negFrac = _h_logweight_neg->sumW() / totalSumW;
       const double negFracErr = negFrac * totalSumW / sqrt(totalSumW2);
-      _h_xsfraction_neg->addPoint(0, negFrac, 0.5, negFracErr);
+      _h_xsfraction_neg->bin(1).set(negFrac, negFracErr);
     }
 
     /// @}
@@ -64,7 +65,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Scatter2DPtr _h_xsfraction_neg;
+    BinnedEstimatePtr<string> _h_xsfraction_neg;
     Histo1DPtr _h_weight_100, _h_weight_10, _h_logweight_pos, _h_logweight_neg;
     /// @}
 

@@ -59,8 +59,8 @@ namespace Rivet {
       book(_histLogScaledMom ,17, 1, 1);
 
       book(_histChMult       ,18, 1, 1);
-      book(_histMeanChMult   ,19, 1, 1);
 
+      book(_histMeanChMult      ,19, 1, 1);
       book(_histMeanChMultRapt05,20, 1, 1);
       book(_histMeanChMultRapt10,21, 1, 1);
       book(_histMeanChMultRapt15,22, 1, 1);
@@ -205,11 +205,11 @@ namespace Rivet {
 
       _histChMult->fill(numParticles);
 
-      _histMeanChMultRapt05->fill(_histMeanChMultRapt05->bin(1).xMid(), rapt05);
-      _histMeanChMultRapt10->fill(_histMeanChMultRapt10->bin(1).xMid(), rapt10);
-      _histMeanChMultRapt15->fill(_histMeanChMultRapt15->bin(1).xMid(), rapt15);
-      _histMeanChMultRapt20->fill(_histMeanChMultRapt20->bin(1).xMid(), rapt20);
-      _histMeanChMult->fill(_histMeanChMult->bin(1).xMid(), numParticles);
+      _histMeanChMultRapt05->fill(Ecms, rapt05);
+      _histMeanChMultRapt10->fill(Ecms, rapt10);
+      _histMeanChMultRapt15->fill(Ecms, rapt15);
+      _histMeanChMultRapt20->fill(Ecms, rapt20);
+      _histMeanChMult->fill(Ecms, numParticles);
 
 
       //// Final state of unstable particles to get particle spectra
@@ -239,75 +239,75 @@ namespace Rivet {
               break;
            case 111:
               _histMultiPi0->fill(scaledMom);
-              _histMeanMultiPi0->fill(_histMeanMultiPi0->bin(1).xMid());
+              _histMeanMultiPi0->fill(Ecms);
               break;
            case 221:
               if (scaledMom >= 0.1) {
                 _histMultiEta->fill(scaledEnergy);
-                _histMeanMultiEta->fill(_histMeanMultiEta->bin(1).xMid());
+                _histMeanMultiEta->fill(Ecms);
               }
               break;
            case 331:
               if (scaledMom >= 0.1) {
                 _histMultiEtaPrime->fill(scaledEnergy);
-                _histMeanMultiEtaPrime->fill(_histMeanMultiEtaPrime->bin(1).xMid());
+                _histMeanMultiEtaPrime->fill(Ecms);
               }
               break;
            case 130: //klong
            case 310: //kshort
               _histMultiK0->fill(scaledMom);
-              _histMeanMultiK0->fill(_histMeanMultiK0->bin(1).xMid());
+              _histMeanMultiK0->fill(Ecms);
               break;
            case 113:
               _histMultiRho->fill(scaledMom);
-              _histMeanMultiRho->fill(_histMeanMultiRho->bin(1).xMid());
+              _histMeanMultiRho->fill(Ecms);
               break;
            case 223:
               _histMultiOmega782->fill(scaledMom);
-              _histMeanMultiOmega782->fill(_histMeanMultiOmega782->bin(1).xMid());
+              _histMeanMultiOmega782->fill(Ecms);
               break;
            case 333:
               _histMultiPhi->fill(scaledMom);
-              _histMeanMultiPhi->fill(_histMeanMultiPhi->bin(1).xMid());
+              _histMeanMultiPhi->fill(Ecms);
               break;
            case 313:
            case -313:
               _histMultiKStar892_0->fill(scaledMom);
-              _histMeanMultiKStar892_0->fill(_histMeanMultiKStar892_0->bin(1).xMid());
+              _histMeanMultiKStar892_0->fill(Ecms);
               break;
            case 323:
            case -323:
               _histMultiKStar892Plus->fill(scaledEnergy);
-              _histMeanMultiKStar892Plus->fill(_histMeanMultiKStar892Plus->bin(1).xMid());
+              _histMeanMultiKStar892Plus->fill(Ecms);
               break;
            case 3122:
            case -3122:
               _histMultiLambda0->fill(scaledMom);
-              _histMeanMultiLambda0->fill(_histMeanMultiLambda0->bin(1).xMid());
+              _histMeanMultiLambda0->fill(Ecms);
               break;
            case 3212:
            case -3212:
-              _histMeanMultiSigma0->fill(_histMeanMultiSigma0->bin(1).xMid());
+              _histMeanMultiSigma0->fill(Ecms);
               break;
            case 3312:
            case -3312:
               _histMultiXiMinus->fill(scaledEnergy);
-              _histMeanMultiXiMinus->fill(_histMeanMultiXiMinus->bin(1).xMid());
+              _histMeanMultiXiMinus->fill(Ecms);
               break;
            case 3114:
            case -3114:
            case 3224:
            case -3224:
               _histMultiSigma1385Plus->fill(scaledEnergy);
-              _histMeanMultiSigma1385Plus->fill(_histMeanMultiSigma1385Plus->bin(1).xMid());
+              _histMeanMultiSigma1385Plus->fill(Ecms);
               break;
            case 3324:
            case -3324:
               _histMultiXi1530_0->fill(scaledEnergy);
-              _histMeanMultiXi1530_0->fill(_histMeanMultiXi1530_0->bin(1).xMid());
+              _histMeanMultiXi1530_0->fill(Ecms);
               break;
            case 3334:
-              _histMeanMultiOmegaOmegaBar->fill(_histMeanMultiOmegaOmegaBar->bin(1).xMid());
+              _histMeanMultiOmegaOmegaBar->fill(Ecms);
               break;
         }
       }
@@ -363,7 +363,7 @@ namespace Rivet {
 
 
       // mean multiplicities
-      scale(_histChMult              , 2.0/sumOfWeights()); // taking into account the binwidth of 2
+      scale(_histChMult              , 1.0/sumOfWeights()); // taking into account the binwidth of 2
       scale(_histMeanChMult          , 1.0/sumOfWeights());
       scale(_histMeanChMultRapt05    , 1.0/sumOfWeights());
       scale(_histMeanChMultRapt10    , 1.0/sumOfWeights());
@@ -398,6 +398,8 @@ namespace Rivet {
     /// inclusive single particle distributions' normalisations.
     CounterPtr _weightedTotalPartNum;
 
+    const string Ecms = "91.2";
+
     /// @name Histograms
     /// @{
     Histo1DPtr _histSphericity;
@@ -424,7 +426,7 @@ namespace Rivet {
 
     Histo1DPtr _histLogScaledMom;
 
-    Histo1DPtr _histChMult;
+    BinnedHistoPtr<int> _histChMult;
 
     Histo1DPtr _histMultiPiPlus;
     Histo1DPtr _histMultiKPlus;
@@ -445,27 +447,27 @@ namespace Rivet {
     Histo1DPtr _histMultiKStar892Plus;
 
     // mean multiplicities
-    Histo1DPtr _histMeanChMult;
-    Histo1DPtr _histMeanChMultRapt05;
-    Histo1DPtr _histMeanChMultRapt10;
-    Histo1DPtr _histMeanChMultRapt15;
-    Histo1DPtr _histMeanChMultRapt20;
+    BinnedHistoPtr<string> _histMeanChMult;
+    BinnedHistoPtr<string> _histMeanChMultRapt05;
+    BinnedHistoPtr<string> _histMeanChMultRapt10;
+    BinnedHistoPtr<string> _histMeanChMultRapt15;
+    BinnedHistoPtr<string> _histMeanChMultRapt20;
 
-    Histo1DPtr _histMeanMultiPi0;
-    Histo1DPtr _histMeanMultiEta;
-    Histo1DPtr _histMeanMultiEtaPrime;
-    Histo1DPtr _histMeanMultiK0;
-    Histo1DPtr _histMeanMultiRho;
-    Histo1DPtr _histMeanMultiOmega782;
-    Histo1DPtr _histMeanMultiPhi;
-    Histo1DPtr _histMeanMultiKStar892Plus;
-    Histo1DPtr _histMeanMultiKStar892_0;
-    Histo1DPtr _histMeanMultiLambda0;
-    Histo1DPtr _histMeanMultiSigma0;
-    Histo1DPtr _histMeanMultiXiMinus;
-    Histo1DPtr _histMeanMultiSigma1385Plus;
-    Histo1DPtr _histMeanMultiXi1530_0;
-    Histo1DPtr _histMeanMultiOmegaOmegaBar;
+    BinnedHistoPtr<string> _histMeanMultiPi0;
+    BinnedHistoPtr<string> _histMeanMultiEta;
+    BinnedHistoPtr<string> _histMeanMultiEtaPrime;
+    BinnedHistoPtr<string> _histMeanMultiK0;
+    BinnedHistoPtr<string> _histMeanMultiRho;
+    BinnedHistoPtr<string> _histMeanMultiOmega782;
+    BinnedHistoPtr<string> _histMeanMultiPhi;
+    BinnedHistoPtr<string> _histMeanMultiKStar892Plus;
+    BinnedHistoPtr<string> _histMeanMultiKStar892_0;
+    BinnedHistoPtr<string> _histMeanMultiLambda0;
+    BinnedHistoPtr<string> _histMeanMultiSigma0;
+    BinnedHistoPtr<string> _histMeanMultiXiMinus;
+    BinnedHistoPtr<string> _histMeanMultiSigma1385Plus;
+    BinnedHistoPtr<string> _histMeanMultiXi1530_0;
+    BinnedHistoPtr<string> _histMeanMultiOmegaOmegaBar;
     /// @}
 
   };

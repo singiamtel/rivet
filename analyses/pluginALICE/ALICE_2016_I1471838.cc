@@ -2,8 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
-#include "Rivet/Projections/AliceCommon.hh"
-#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 
 namespace Rivet {
 
@@ -20,9 +19,9 @@ namespace Rivet {
       if (c > 0 && c <= cBins[0]) return cBins.size() - 1;
       for (size_t i = 0; i < cBins.size() - 1; ++i) {
         if (c > cBins[i] && c <= cBins[i + 1]) {
-	  index = i;
-	  break;
-	}
+          index = i;
+          break;
+        }
       }
       return max(0, int(cBins.size() - index - 2));
     }
@@ -57,12 +56,12 @@ namespace Rivet {
       book(piRebinned, "/piRebinned", refData(45,1,1));
 
       // Make the ratios
-      book(kpi, 36, 1, 1, true);
-      book(ppi, 47, 1, 1, true);
-      book(lpi, 37, 1, 1, true);
-      book(xpi, 38, 1, 1, true);
-      book(opi, 39, 1, 1, true);
-      book(lk, 46, 1, 1, true);
+      book(kpi, 36, 1, 1);
+      book(ppi, 47, 1, 1);
+      book(lpi, 37, 1, 1);
+      book(xpi, 38, 1, 1);
+      book(opi, 39, 1, 1);
+      book(lk, 46, 1, 1);
     }
 
 
@@ -93,25 +92,25 @@ namespace Rivet {
       int nla = 0, nxi = 0, nom = 0;
       for (auto p : prim.particles()) {
         const double pT = p.pT();
-	const int pid = abs(p.pid());
-	if (pid == 211) ++npi;
-	else if (pid == 2212) ++npr;
-	else if (pid == 310) {
-	  kptItr->second->fill(pT);
-	  ++nk;
-	}
-	else if (pid == 3122) {
-	  lptItr->second->fill(pT);
-	  ++nla;
-	}
-	else if (pid == 3312) {
-	  xptItr->second->fill(pT);
-	  ++nxi;
-	}
-	else if (pid == 3334) {
-	  optItr->second->fill(pT);
-	  ++nom;
-	}
+        const int pid = abs(p.pid());
+        if (pid == 211) ++npi;
+        else if (pid == 2212) ++npr;
+        else if (pid == 310) {
+          kptItr->second->fill(pT);
+          ++nk;
+        }
+        else if (pid == 3122) {
+          lptItr->second->fill(pT);
+          ++nla;
+        }
+        else if (pid == 3312) {
+          xptItr->second->fill(pT);
+          ++nxi;
+        }
+        else if (pid == 3334) {
+          optItr->second->fill(pT);
+          ++nom;
+        }
       }
       // Fill the profiles of yields.
       int index = profileIndex(centralityBins,c);
@@ -139,13 +138,13 @@ namespace Rivet {
       }
 
       divide(kYield, piYield, kpi);
-      kpi->scale(1, 2.);
+      kpi->scale(2.);
       divide(pYield, piYield, ppi);
       divide(lambdaYield, piYield, lpi);
       divide(xiYield, piYield, xpi);
       divide(omegaYield, piRebinned, opi);
       divide(lambdaYield, kYield, lk);
-      lk->scale(1, 0.5);
+      lk->scale(0.5);
     }
 
     /// @}
@@ -175,12 +174,12 @@ namespace Rivet {
     Profile1DPtr piRebinned;
 
     // Ratios
-    Scatter2DPtr kpi;
-    Scatter2DPtr ppi;
-    Scatter2DPtr lpi;
-    Scatter2DPtr xpi;
-    Scatter2DPtr opi;
-    Scatter2DPtr lk;
+    Estimate1DPtr kpi;
+    Estimate1DPtr ppi;
+    Estimate1DPtr lpi;
+    Estimate1DPtr xpi;
+    Estimate1DPtr opi;
+    Estimate1DPtr lk;
     /// @}
   };
 

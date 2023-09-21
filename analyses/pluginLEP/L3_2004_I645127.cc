@@ -120,52 +120,43 @@ namespace Rivet {
       scale(_c_sigma_tau,fact);
       unsigned int imin=0, imax = 3;
       if(_mode==1) {
-	imin=3;
-	imax=4;
+        imin=3;
+        imax=4;
       }
-      for(unsigned int ihist=imin;ihist<imax;++ihist) {
-	unsigned int id=0, iy=0;
-	double sigma = 0., error = 0.;
-	if(ihist==0) {
-	  id=1;
-	  iy=1;
-	  sigma = _c_sigma_mu2->val();
-	  error = _c_sigma_mu2->err();
-	}
-	else if(ihist==1) {
-	  id=1;
-	  iy=2;
-	  sigma = _c_sigma_mu1->val();
-	  error = _c_sigma_mu1->err();
-	}
-	else if(ihist==2) {
-	  id=2;
-	  iy=1;
-	  sigma = _c_sigma_tau->val();
-	  error = _c_sigma_tau->err();
-	}
-	else if(ihist==3) {
-	  id=3;
-	  iy=5;
-	  sigma = _c_sigma_mu1->val();
-	  error = _c_sigma_mu1->err();
-	}
-	Scatter2D temphisto(refData(id, 1, iy));
-	Scatter2DPtr  mult;
-	book(mult, id, 1, iy);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, sigma, ex, make_pair(error,error));
-	  }
-	  else {
-	    mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+      for (unsigned int ihist=imin;ihist<imax;++ihist) {
+        unsigned int id=0, iy=0;
+        double sigma = 0., error = 0.;
+        if(ihist==0) {
+          id=1;
+          iy=1;
+          sigma = _c_sigma_mu2->val();
+          error = _c_sigma_mu2->err();
+        }
+        else if(ihist==1) {
+          id=1;
+          iy=2;
+          sigma = _c_sigma_mu1->val();
+          error = _c_sigma_mu1->err();
+        }
+        else if(ihist==2) {
+          id=2;
+          iy=1;
+          sigma = _c_sigma_tau->val();
+          error = _c_sigma_tau->err();
+        }
+        else if(ihist==3) {
+          id=3;
+          iy=5;
+          sigma = _c_sigma_mu1->val();
+          error = _c_sigma_mu1->err();
+        }
+        Estimate1DPtr  mult;
+        book(mult, id, 1, iy);
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
+          }
+        }
       }
     }
 

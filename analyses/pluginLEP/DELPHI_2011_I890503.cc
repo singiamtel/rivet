@@ -14,10 +14,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DELPHI_2011_I890503()
-      : Analysis("DELPHI_2011_I890503")
-    {
-    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(DELPHI_2011_I890503);
 
 
     /// Book projections and histograms
@@ -26,8 +23,8 @@ namespace Rivet {
       declare(ChargedFinalState(), "FS");
       declare(UnstableParticles(), "UFS");
 
-      book(_histXbweak     ,1, 1, 1);
-      book(_histMeanXbweak ,2, 1, 1);
+      book(_histXbweak,     1, 1, 1);
+      book(_histMeanXbweak, 2, 1, 1);
     }
 
 
@@ -55,7 +52,7 @@ namespace Rivet {
         if (bhad.isLastWith(hasBottom)) {
           const double xp = bhad.E()/meanBeamMom;
           _histXbweak->fill(xp);
-          _histMeanXbweak->fill(_histMeanXbweak->bin(1).xMid(), xp);
+          _histMeanXbweak->fill(Ecm, xp);
         }
       }
     }
@@ -70,7 +67,8 @@ namespace Rivet {
   private:
 
     Histo1DPtr _histXbweak;
-    Profile1DPtr _histMeanXbweak;
+    BinnedProfilePtr<string> _histMeanXbweak;
+    const string Ecm = "91.2";
 
   };
 

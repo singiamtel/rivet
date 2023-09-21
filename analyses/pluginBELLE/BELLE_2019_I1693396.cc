@@ -53,8 +53,8 @@ namespace Rivet {
       FourMomentum lepton, neutrino, meson, q;
       for (const Particle& c : mother.children()) {
         if (c.isNeutrino()) neutrino = c.mom();
-        if (c.isChargedLepton()) lepton = c.mom();
-        if (c.isHadron()) meson = c.mom();
+        else if (c.isChargedLepton()) lepton = c.mom();
+        else if (c.isHadron()) meson = c.mom();
       }
       q = lepton + neutrino; //no hadron before
       double mb2= mother.mom()*mother.mom();
@@ -220,14 +220,14 @@ namespace Rivet {
       // correct the values
       for(unsigned int ix=0;ix<4;++ix) {
         for(unsigned int iy=0;iy<2;++iy) {
-          Scatter2DPtr corrected;
+          Estimate1DPtr corrected;
           book(corrected,ix+1,1,iy+1);
           // first extract values and errors applying efficiency
           Vector<10> val,err;
           for(unsigned int ibin=0;ibin<_h[ix][iy]->bins().size();++ibin) {
             val[ibin] = eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].sumW();
             err[ibin] = sqr(eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].errW());
-            sqr(efe[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].sumW());
+                        sqr(efe[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].sumW());
           }
           // put response into a matrix
           Matrix<10> R,R2;
@@ -247,10 +247,7 @@ namespace Rivet {
           for(unsigned int ibin=0;ibin<_h[ix][iy]->bins().size();++ibin) {
             double dx = 0.5*_h[ix][iy]->bins()[ibin].xWidth();
             double dy = sqrt(err[ibin])/total/2./dx;
-            corrected->addPoint(_h[ix][iy]->bins()[ibin].xMid(),
-                                val[ibin]/total/2./dx,
-                                make_pair(dx,dx),
-                                make_pair(dy,dy));
+            corrected->bin(ibin+1).set(val[ibin]/total/2./dx,	dy);
           }
         }
       }

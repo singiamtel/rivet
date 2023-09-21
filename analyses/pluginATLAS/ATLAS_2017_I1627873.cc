@@ -43,8 +43,8 @@ namespace Rivet {
       FastJets jets(remfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
       declare(jets, "Jets");
 
-      if (_mode)  book(_h["zjj-ew"], 3, 1, 1);
-      else        book(_h["zjj"], 2, 1, 1);
+      if (_mode)  book(_h, 3, 1, 1);
+      else        book(_h, 2, 1, 1);
     }
 
 
@@ -105,19 +105,19 @@ namespace Rivet {
 
       if (_mode) {
         if (zpt > 20.0*GeV && !ngapjets && ptbalance2 < 0.15 && mjj >  250.0*GeV) {
-          _h["zjj-ew"]->fill(_h["zjj-ew"]->bin(1).xMid());
+          _h->fill(_h->bin(1).xEdge());
         }
         if (zpt > 20.0*GeV && !ngapjets && ptbalance2 < 0.15 && mjj > 1000.0*GeV) {
-          _h["zjj-ew"]->fill(_h["zjj-ew"]->bin(2).xMid());
+          _h->fill(_h->bin(2).xEdge());
         }
       }
       else {
-        _h["zjj"]->fill(_h["zjj"]->bin(1).xMid());
-        if (jet1pt > 85.0*GeV && jet2pt > 75.0*GeV)  _h["zjj"]->fill(_h["zjj"]->bin(2).xMid());
-        if (zpt > 20.0*GeV && ngapjets == 0 && ptbalance2 < 0.15 && mjj > 250.0*GeV)  _h["zjj"]->fill(_h["zjj"]->bin(3).xMid());
-        if (zpt > 20.0*GeV && ngapjets && ptbalance3 < 0.15 && mjj > 250.0*GeV)  _h["zjj"]->fill(_h["zjj"]->bin(4).xMid());
-        if (mjj > 1000.0*GeV)  _h["zjj"]->fill(_h["zjj"]->bin(5).xMid());
-        if (zpt > 20.0*GeV && !ngapjets && ptbalance2 < 0.15 && mjj > 1000.0*GeV)  _h["zjj"]->fill(_h["zjj"]->bin(3).xMid());
+        _h->fill(_h->bin(1).xEdge());
+        if (jet1pt > 85.0*GeV && jet2pt > 75.0*GeV)  _h->fill(_h->bin(2).xEdge());
+        if (zpt > 20.0*GeV && ngapjets == 0 && ptbalance2 < 0.15 && mjj > 250.0*GeV)  _h->fill(_h->bin(3).xEdge());
+        if (zpt > 20.0*GeV && ngapjets && ptbalance3 < 0.15 && mjj > 250.0*GeV)  _h->fill(_h->bin(4).xEdge());
+        if (mjj > 1000.0*GeV)  _h->fill(_h->bin(5).xEdge());
+        if (zpt > 20.0*GeV && !ngapjets && ptbalance2 < 0.15 && mjj > 1000.0*GeV)  _h->fill(_h->bin(3).xEdge());
       }
 
     }
@@ -151,7 +151,7 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-     map<string, Histo1DPtr> _h;
+     BinnedHistoPtr<string> _h;
     ///@}
 
   };

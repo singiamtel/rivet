@@ -24,7 +24,7 @@ namespace Rivet {
           // Projections
           const DISKinematics diskin;
           declare(diskin, "Kinematics");
-	  declare(DISLepton(), "Lepton");
+          declare(DISLepton(), "Lepton");
           const DISFinalState disfs(DISFinalState::BoostFrame::LAB);
           FastJets jets(disfs, FastJets::KT, 1.0);
           declare(jets, "Jets");
@@ -102,8 +102,7 @@ namespace Rivet {
           double et123 = 0;
           double eta123 =0;
 
-          for (size_t i = 0; i < jets.size(); i++)
-          {
+          for (size_t i = 0; i < jets.size(); ++i) {
               if (jets[i].Et() < 14*GeV) continue;
               _h_eta_incl[fLepton]->fill(orientation*jets[i].eta());
               _h_et_incl[fLepton]->fill(jets[i].Et());
@@ -111,8 +110,7 @@ namespace Rivet {
               _h_x_incl[fLepton]->fill(x);
           }
 
-          if (jets.size() > 1)
-          {
+          if (jets.size() > 1) {
               eta12 = orientation*(jets[0].eta() + jets[1].eta())/2;
               et12 = (jets[0].Et() + jets[1].Et())/2;
               _h_eta_di[fLepton]->fill(eta12);
@@ -121,8 +119,7 @@ namespace Rivet {
               _h_m_di[fLepton]->fill(   (jets[0].momentum()+jets[1].momentum()).mass());
           }
 
-          if (jets.size() > 2)
-          {
+          if (jets.size() > 2) {
               eta123 = orientation*(jets[0].eta() + jets[1].eta()+jets[2].eta())/3;
               et123 = (jets[0].Et() + jets[1].Et()+jets[2].Et())/3;
 

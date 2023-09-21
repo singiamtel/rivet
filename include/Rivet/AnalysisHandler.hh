@@ -108,7 +108,7 @@ namespace Rivet {
     /// @{
 
     /// Get the cross-section known to the handler
-    Scatter1DPtr crossSection() const { return _xs; }
+    Estimate0DPtr crossSection() const { return _xs; }
 
     /// Set all cross-sections for the process being generated specifically (preferred)
     void setCrossSection(const vector<pair<double,double>>& xsecs, bool isUserSupplied = false);
@@ -147,8 +147,6 @@ namespace Rivet {
 
     /// Option to disable analysis-compatibility checks
     void setCheckBeams(bool check=true) { _checkBeams = check; }
-    /// @brief Alias for checkBeams()
-    [[deprecated]] void setIgnoreBeams(bool ignore=true) { setCheckBeams(!ignore); }
 
     /// Option to disable run-consistency checks
     // void setCheckConsistency(bool check=true) { _checkConsistency = check; }
@@ -261,7 +259,7 @@ namespace Rivet {
     void readData(const std::string& filename, bool preload = true);
 
     /// Get all YODA analysis objects (across all weights, optionally including RAW)
-    vector<YODA::AnalysisObjectPtr> getYodaAOs(bool includeraw=false, bool mkstatic=true) const;
+    vector<YODA::AnalysisObjectPtr> getYodaAOs(const bool includeraw=false, const bool mkinert=true) const;
 
     /// Get a pointer to a preloaded yoda object with the given path,
     /// or null if path is not found.
@@ -413,7 +411,7 @@ namespace Rivet {
     CounterPtr _eventCounter;
 
     /// Cross-section known to AH
-    Scatter1DPtr _xs;
+    Estimate0DPtr _xs;
 
     /// Nominal cross-section
     std::pair<double,double> _userxs;

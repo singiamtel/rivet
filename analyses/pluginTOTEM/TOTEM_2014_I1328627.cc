@@ -9,9 +9,7 @@ namespace Rivet {
   public:
 
 
-    TOTEM_2014_I1328627()
-      : Analysis("TOTEM_2014_I1328627")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(TOTEM_2014_I1328627);
 
 
 

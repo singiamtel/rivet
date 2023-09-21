@@ -54,10 +54,10 @@ namespace Rivet {
       book(_h_cen_opp_same, 5, 1, 1);
       book(_h_fwd_opp_same, 8, 1, 1);
       // Ratio histos to be filled manually, since the num/denom inputs don't match
-      book(_h_cen_same_fwd_same, 6, 1, 1, true);
-      book(_h_cen_opp_fwd_same, 7, 1, 1, true);
-      book(_h_cen_same_fwd_opp, 9, 1, 1, true);
-      book(_h_cen_opp_fwd_opp, 10, 1, 1, true);
+      book(_h_cen_same_fwd_same, 6, 1, 1);
+      book(_h_cen_opp_fwd_same, 7, 1, 1);
+      book(_h_cen_same_fwd_opp, 9, 1, 1);
+      book(_h_cen_opp_fwd_opp, 10, 1, 1);
     }
 
 
@@ -129,19 +129,19 @@ namespace Rivet {
       divide(_h_forward_opp_cross_section, _h_forward_same_cross_section, _h_fwd_opp_same);
       // Central/forward ratio combinations
       /// @note The central/forward histo binnings are not the same! Hence the need to do these by hand :-(
-      for (size_t i = 0; i < _h_cen_same_fwd_same->numPoints(); ++i) {
-        const auto& cen_same_bini = _h_central_same_cross_section->bin(i+1);
-        const auto& cen_opp_bini = _h_central_opp_cross_section->bin(i+1);
-        const auto& fwd_same_bini = _h_central_same_cross_section->bin(i+1);
-        const auto& fwd_opp_bini = _h_central_opp_cross_section->bin(i+1);
-        _h_cen_same_fwd_same->point(i).setY(_safediv(cen_same_bini.sumW(), fwd_same_bini.sumW(), 0),
-                                            add_quad(cen_same_bini.relErrW(), fwd_same_bini.relErrW()));
-        _h_cen_opp_fwd_same->point(i).setY(_safediv(cen_opp_bini.sumW(), fwd_same_bini.sumW(), 0),
-                                           add_quad(cen_opp_bini.relErrW(), fwd_same_bini.relErrW()));
-        _h_cen_same_fwd_opp->point(i).setY(_safediv(cen_same_bini.sumW(), fwd_opp_bini.sumW(), 0),
-                                           add_quad(cen_same_bini.relErrW(), fwd_opp_bini.relErrW()));
-        _h_cen_opp_fwd_opp->point(i).setY(_safediv(cen_opp_bini.sumW(), fwd_opp_bini.sumW(), 0),
-                                          add_quad(cen_opp_bini.relErrW(), fwd_opp_bini.relErrW()));
+      for (size_t i = 1; i < _h_cen_same_fwd_same->numBins()+1; ++i) {
+        const auto& cen_same_bini = _h_central_same_cross_section->bin(i);
+        const auto& cen_opp_bini = _h_central_opp_cross_section->bin(i);
+        const auto& fwd_same_bini = _h_central_same_cross_section->bin(i);
+        const auto& fwd_opp_bini = _h_central_opp_cross_section->bin(i);
+        _h_cen_same_fwd_same->bin(i).set(_safediv(cen_same_bini.sumW(), fwd_same_bini.sumW(), 0),
+                                         add_quad(cen_same_bini.relErrW(), fwd_same_bini.relErrW()));
+        _h_cen_opp_fwd_same->bin(i).set(_safediv(cen_opp_bini.sumW(), fwd_same_bini.sumW(), 0),
+                                        add_quad(cen_opp_bini.relErrW(), fwd_same_bini.relErrW()));
+        _h_cen_same_fwd_opp->bin(i).set(_safediv(cen_same_bini.sumW(), fwd_opp_bini.sumW(), 0),
+                                        add_quad(cen_same_bini.relErrW(), fwd_opp_bini.relErrW()));
+        _h_cen_opp_fwd_opp->bin(i).set(_safediv(cen_opp_bini.sumW(), fwd_opp_bini.sumW(), 0),
+                                       add_quad(cen_opp_bini.relErrW(), fwd_opp_bini.relErrW()));
       }
 
       // Use generator cross section for remaining histograms
@@ -172,12 +172,12 @@ namespace Rivet {
     Histo1DPtr _h_forward_same_cross_section;
     Histo1DPtr _h_forward_opp_cross_section;
 
-    Scatter2DPtr _h_cen_opp_same;
-    Scatter2DPtr _h_fwd_opp_same;
-    Scatter2DPtr _h_cen_same_fwd_same;
-    Scatter2DPtr _h_cen_opp_fwd_same;
-    Scatter2DPtr _h_cen_same_fwd_opp;
-    Scatter2DPtr _h_cen_opp_fwd_opp;
+    Estimate1DPtr _h_cen_opp_same;
+    Estimate1DPtr _h_fwd_opp_same;
+    Estimate1DPtr _h_cen_same_fwd_same;
+    Estimate1DPtr _h_cen_opp_fwd_same;
+    Estimate1DPtr _h_cen_same_fwd_opp;
+    Estimate1DPtr _h_cen_opp_fwd_opp;
     /// @}
 
   };

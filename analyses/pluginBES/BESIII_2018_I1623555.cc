@@ -132,23 +132,23 @@ namespace Rivet {
 
       // normalize histograms
       for(unsigned int ix=0;ix<4;++ix) {
-	for(unsigned int iy=0;iy<2;++iy) {
-	  normalize(_h[ix][iy]);
-	}
+        for(unsigned int iy=0;iy<2;++iy) {
+          normalize(_h[ix][iy]);
+        }
       }
       // last two plots  convert to scatter and normalize to phase space volume in bin
       double step = 0.002;
       for(unsigned int ix=0;ix<2;++ix) {
-	for(unsigned int iy=0;iy<2;++iy) {
-	  // convert to scatter
-	  Scatter2DPtr tmp;
-	  book(tmp,3+ix,1,1+iy);
-	  barchart(_h[ix+2][iy],tmp);
-	  // divide by phase space volume
-	  for(unsigned int ip=0;ip<tmp->points().size();++ip) {
-	    tmp->points()[ip].scaleY(1./phsp[ix][iy][ip]/step);
-	  }
-	}
+        for(unsigned int iy=0;iy<2;++iy) {
+          // convert to scatter
+          Estimate1DPtr tmp;
+          book(tmp,3+ix,1,1+iy);
+          barchart(_h[ix+2][iy],tmp);
+          // divide by phase space volume
+          for (auto& b : tmp->bins()) {
+            b.scale(1./phsp[ix][iy][b.index()-1]/step);
+          }
+        }
       }
     }
 

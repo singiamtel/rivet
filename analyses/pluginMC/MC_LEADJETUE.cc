@@ -71,7 +71,8 @@ namespace Rivet {
       // Get the final states to work with for filling the distributions
       const FinalState& cfs = apply<ChargedFinalState>(e, "CFS");
 
-      size_t numOverall(0), numToward(0), numTrans1(0), numTrans2(0), numAway(0);
+      //size_t numOverall(0), numToward(0), numAway(0);
+      size_t numTrans1(0), numTrans2(0);
       double ptSumTrans1(0.0), ptSumTrans2(0.0);
       double ptMaxOverall(0.0), ptMaxToward(0.0), ptMaxTrans1(0.0), ptMaxTrans2(0.0), ptMaxAway(0.0);
 
@@ -83,12 +84,12 @@ namespace Rivet {
         const double rotatedphi = phi - jetphi;
 
         //ptSumOverall += pT;
-        ++numOverall;
+        //++numOverall;
         if (pT > ptMaxOverall) ptMaxOverall = pT;
 
         if (dPhi < PI/3.0) {
           //ptSumToward += pT;
-          ++numToward;
+          //++numToward;
           if (pT > ptMaxToward) ptMaxToward = pT;
         }
         else if (dPhi < 2*PI/3.0) {
@@ -104,7 +105,7 @@ namespace Rivet {
         }
         else {
           //ptSumAway += pT;
-          ++numAway;
+          //++numAway;
           if (pT > ptMaxAway) ptMaxAway = pT;
         }
       }

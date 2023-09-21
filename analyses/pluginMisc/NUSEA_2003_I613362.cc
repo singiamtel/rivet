@@ -31,32 +31,19 @@ namespace Rivet {
 
       // Booking histograms
       // hydrogen d01-d16
-      Histo1DPtr dummy;
-      _hist_M_xF.add(-0.05, 0.05, book(dummy,1, 1, 1));
-      _hist_M_xF.add( 0.05, 0.10, book(dummy,2, 1, 1));
-      _hist_M_xF.add( 0.10, 0.15, book(dummy,3, 1, 1));
-      _hist_M_xF.add( 0.15, 0.20, book(dummy,4, 1, 1));
-      _hist_M_xF.add( 0.20, 0.25, book(dummy,5, 1, 1));
-      _hist_M_xF.add( 0.25, 0.30, book(dummy,6, 1, 1));
-      _hist_M_xF.add( 0.30, 0.35, book(dummy,7, 1, 1));
-      _hist_M_xF.add( 0.35, 0.40, book(dummy,8, 1, 1));
-      _hist_M_xF.add( 0.40, 0.45, book(dummy,9, 1, 1));
-      _hist_M_xF.add( 0.45, 0.50, book(dummy,10, 1, 1));
-      _hist_M_xF.add( 0.50, 0.55, book(dummy,11, 1, 1));
-      _hist_M_xF.add( 0.55, 0.60, book(dummy,12, 1, 1));
-      _hist_M_xF.add( 0.60, 0.65, book(dummy,13, 1, 1));
-      _hist_M_xF.add( 0.65, 0.70, book(dummy,14, 1, 1));
-      _hist_M_xF.add( 0.70, 0.75, book(dummy,15, 1, 1));
-      _hist_M_xF.add( 0.75, 0.80, book(dummy,16, 1, 1));
+      book(_hist_M_xF, {-0.05, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8});
+      for (auto& b : _hist_M_xF->bins()) {
+        book(b, b.index(), 1, 1);
+      }
 
       // deuterium d17-d32
 
       // hydrogen d40
-      _hist_pT_M.add(4.2, 5.2, book(dummy,40, 1, 1));
-      _hist_pT_M.add(5.2, 6.2, book(dummy,40, 1, 2));
-      _hist_pT_M.add(6.2, 7.2, book(dummy,40, 1, 3));
-      _hist_pT_M.add(7.2, 8.7, book(dummy,40, 1, 4));
-      _hist_pT_M.add(10.85, 12.85, book(dummy,40, 1, 5));
+      book(_hist_pT_M, {4.2, 5.2, 6.2, 7.2, 8.7, 10.85, 12.85});
+      _hist_pT_M->maskBin(5); int idx = 0;
+      for (auto& b : _hist_pT_M->bins()) {
+        book(b, 40, 1, ++idx);
+      }
 
     }
 
@@ -81,12 +68,12 @@ namespace Rivet {
       double xF = 2.*Zpl/sqrtS();
 
       // Filling dimuon mass in bins of xF
-      _hist_M_xF.fill(xF, Zmass/GeV, pow(Zmass,3));
+      _hist_M_xF->fill(xF, Zmass/GeV, Zmass*sqr(Zmass));
 
       // Filling pT in bins of Zmass
       if ( xF > -0.05 && xF <= 0.15 ) {
         // Include here all factors which are run-dependent for later scaling
-        if (Zpt > 0) _hist_pT_M.fill(Zmass,Zpt, 1./2./Zpt*2.*ZE/sqrtS());
+        if (Zpt > 0) _hist_pT_M->fill(Zmass,Zpt, 1./2./Zpt*2.*ZE/sqrtS());
       }
 
       MSG_DEBUG("Dimuon pT = "<< Zpt<<"   Dimuon E = ");
@@ -98,11 +85,13 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // xf bin width = 0.2, x-section in picobarn
-      double scalefactor=crossSection()/picobarn/(sumOfWeights() * M_PI *0.2 );
-      _hist_pT_M.scale(scalefactor, this);
+      const double scalefactor=crossSection()/picobarn/(sumOfWeights() * M_PI *0.2 );
+      scale(_hist_pT_M, scalefactor);
 
       // x-section is quoted in nanobarn
-      _hist_M_xF.scale(crossSection()/nanobarn/sumOfWeights(), this);
+      scale(_hist_M_xF, crossSection()/nanobarn/sumOfWeights());
+
+      divByGroupWidth({_hist_pT_M, _hist_M_xF});
     }
 
     /// @}
@@ -112,15 +101,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _hist_pT_M, _hist_M_xF;
-    Histo1DPtr  _h_m_DiMuon ;
-    Histo1DPtr  _h_pT_DiMuon;
-    Histo1DPtr  _h_eta_DiMuon;
-    Histo1DPtr  _h_y_DiMuon;
-    Histo1DPtr  _h_phi_DiMuon;
-    Histo1DPtr _h_yDiff_DiMuon;
-    Histo1DPtr _h_dPhi_DiMuon;
-    Histo1DPtr _h_xF_DiMuon;
+    Histo1DGroupPtr _hist_pT_M, _hist_M_xF;
     /// @}
 
 

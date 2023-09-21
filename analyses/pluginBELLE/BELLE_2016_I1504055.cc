@@ -161,8 +161,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter1D R = (*_FL/ *_norm).mkScatter();
-      double fl = R.point(0).x();
+      Estimate0D R = *_FL/ *_norm;
+      double fl = R.val();
       double fact = 1./sqrt(fl*(1.-fl));
       for(unsigned int ix=0;ix<2;++ix) {
         for(unsigned int iy=0;iy<6;++iy) {

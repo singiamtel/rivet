@@ -17,7 +17,7 @@ namespace Rivet {
 
     struct HistoHandler {
       Histo1DPtr histo;
-      Scatter2DPtr scatter;
+      Estimate1DPtr scatter;
       unsigned int d, x, y;
 
       HistoHandler() {}
@@ -64,7 +64,7 @@ namespace Rivet {
     void bookHandler(HistoHandler& handler, unsigned int id_xsec) {
       if (_mode) {
         book(handler.histo, "_aux_hist" + toString(id_xsec), refData(id_xsec, 1, 1));
-        book(handler.scatter, id_xsec, 1, 1, true);
+        book(handler.scatter, id_xsec, 1, 1);
         handler.d = id_xsec + 1; // transfer function
         handler.x = 1; handler.y = 1;
       }
@@ -190,20 +190,20 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (map<string, HistoHandler>::iterator hit = _h.begin(); hit != _h.end(); ++hit) {
-        normalize(hit->second.histo);
-        if (_mode == 1)  applyTransferFnAndNorm(hit->second);
+      for (auto& hit : _h) {
+        normalize(hit.second.histo);
+        if (_mode == 1)  applyTransferFnAndNorm(hit.second);
       }
     }
 
 
     void applyTransferFnAndNorm(HistoHandler &handler) { ///< @todo Pass as const reference?
       // Load transfer function from reference data file
-      const YODA::Scatter2D& myTransferFn = refData(handler.d, handler.x, handler.y);
+      const YODA::Estimate1D& myTransferFn = refData(handler.d, handler.x, handler.y);
       double area = 0.0;
-      for (size_t i = 0; i < handler.scatter->numPoints(); ++i) {
-        const Point2D& f = myTransferFn.point(i);
-        Point2D& p = handler.scatter->point(i);
+      for (size_t i = 1; i < handler.scatter->numBins()+1; ++i) {
+        const auto& f = myTransferFn.bin(i);
+        auto& p = handler.scatter->bin(i);
         const auto&  b = handler.histo->bin(i);
         double newy;
         try {
@@ -218,19 +218,18 @@ namespace Rivet {
           newey = 0;
         }
         // apply transfer function here
-        newy *= f.y(); newey *= f.y();
+        newy *= f.val(); newey *= f.val();
         double rp = safediv(newey, newy);
-        double rf = safediv(f.yErrAvg(), f.y());
+        double rf = safediv(f.errAvg(), f.val());
         newey = newy * sqrt(rp*rp + rf*rf);
         // set new values
-        p.setY(newy);
-        p.setYErrMinus(newey);
-        p.setYErrPlus(newey);
+        p.set(newy, newey);
         area += newy * (p.xMax() - p.xMin());
       }
       if (area > 0.) { // normalise to unity
-        for (size_t i = 0; i < handler.scatter->numPoints(); ++i)
-          handler.scatter->point(i).scale(1,1.0 / area);
+        for (size_t i = 1; i < handler.scatter->numBins()+1; ++i) {
+          handler.scatter->bin(i).scale(1.0 / area);
+        }
       }
     }
 

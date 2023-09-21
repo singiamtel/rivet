@@ -42,30 +42,30 @@ namespace Rivet {
       declare(lossyfs, "FS");
       declare(FastJets(lossyfs, FastJets::TRACKJET, 0.7), "TrackJet");
 
-      book(_numvsDeltaPhi2 ,1, 1, 1);
-      book(_numvsDeltaPhi5 ,1, 1, 2);
-      book(_numvsDeltaPhi30 ,1, 1, 3);
-      book(_pTvsDeltaPhi2 ,2, 1, 1);
-      book(_pTvsDeltaPhi5 ,2, 1, 2);
-      book(_pTvsDeltaPhi30 ,2, 1, 3);
+      book(_numvsDeltaPhi2, 1, 1, 1);
+      book(_numvsDeltaPhi5, 1, 1, 2);
+      book(_numvsDeltaPhi30, 1, 1, 3);
+      book(_pTvsDeltaPhi2, 2, 1, 1);
+      book(_pTvsDeltaPhi5, 2, 1, 2);
+      book(_pTvsDeltaPhi30, 2, 1, 3);
 
-      book(_numTowardMB ,3, 1, 1);
-      book(_numTransMB ,3, 1, 2);
-      book(_numAwayMB ,3, 1, 3);
-      book(_numTowardJ20 ,4, 1, 1);
-      book(_numTransJ20 ,4, 1, 2);
-      book(_numAwayJ20 ,4, 1, 3);
+      book(_numTowardMB, 3, 1, 1);
+      book(_numTransMB, 3, 1, 2);
+      book(_numAwayMB, 3, 1, 3);
+      book(_numTowardJ20, 4, 1, 1);
+      book(_numTransJ20, 4, 1, 2);
+      book(_numAwayJ20, 4, 1, 3);
 
-      book(_ptsumTowardMB ,5, 1, 1);
-      book(_ptsumTransMB ,5, 1, 2);
-      book(_ptsumAwayMB ,5, 1, 3);
-      book(_ptsumTowardJ20 ,6, 1, 1);
-      book(_ptsumTransJ20 ,6, 1, 2);
-      book(_ptsumAwayJ20 ,6, 1, 3);
+      book(_ptsumTowardMB, 5, 1, 1);
+      book(_ptsumTransMB, 5, 1, 2);
+      book(_ptsumAwayMB, 5, 1, 3);
+      book(_ptsumTowardJ20, 6, 1, 1);
+      book(_ptsumTransJ20, 6, 1, 2);
+      book(_ptsumAwayJ20, 6, 1, 3);
 
-      book(_ptTrans2 ,7, 1, 1);
-      book(_ptTrans5 ,7, 1, 2);
-      book(_ptTrans30 ,7, 1, 3);
+      book(_ptTrans2, 7, 1, 1);
+      book(_ptTrans5, 7, 1, 2);
+      book(_ptTrans30, 7, 1, 3);
 
       book(_totalNumTrans2, "totalNumTrans2");
       book(_totalNumTrans5, "totalNumTrans5");
@@ -74,12 +74,12 @@ namespace Rivet {
       book(_sumWeightsPtLead5, "sumWeightsPtLead5");
       book(_sumWeightsPtLead30, "sumWeightsPtLead30");
 
-      book(_htmp_num_dphi_2, "/TMP/_num_dphi_2", refData(1, 1, 1));
-      book(_htmp_num_dphi_5, "/TMP/_num_dphi_5", refData(1, 1, 2));
-      book(_htmp_num_dphi_30, "/TMP/_num_dphi_30", refData(1, 1, 3));
-      book(_htmp_pt_dphi_2, "/TMP/_pt_dphi_2", refData(2, 1, 1));
-      book(_htmp_pt_dphi_5, "/TMP/_pt_dphi_5", refData(2, 1, 2));
-      book(_htmp_pt_dphi_30, "/TMP/_pt_dphi_30", refData(2, 1, 3));
+      _htmp_num_dphi_2  =  std::make_shared<YODA::Profile1D>(refData(1, 1, 1).binning());
+      _htmp_num_dphi_5  =  std::make_shared<YODA::Profile1D>(refData(1, 1, 2).binning());
+      _htmp_num_dphi_30 =  std::make_shared<YODA::Profile1D>(refData(1, 1, 3).binning());
+      _htmp_pt_dphi_2   =  std::make_shared<YODA::Profile1D>(refData(2, 1, 1).binning());
+      _htmp_pt_dphi_5   =  std::make_shared<YODA::Profile1D>(refData(2, 1, 2).binning());
+      _htmp_pt_dphi_30  =  std::make_shared<YODA::Profile1D>(refData(2, 1, 3).binning());
 
     }
 
@@ -109,9 +109,13 @@ namespace Rivet {
       double ptSumToward(0.0), ptSumAway(0.0), ptSumTrans(0.0);
       size_t numToward(0), numTrans(0), numAway(0);
 
+      _htmp_num_dphi_2->reset(); _htmp_num_dphi_5->reset(); _htmp_num_dphi_30->reset();
+      _htmp_pt_dphi_2->reset();  _htmp_pt_dphi_5->reset();  _htmp_pt_dphi_30->reset();
+
       // Final state charged particles
       /// @todo Non-trackjet track efficiencies are corrected?
       const Particles& tracks = apply<FinalState>(event, "FS").particles();
+
       for (const Particle& p : tracks) {
         const double dPhi = deltaPhi(p, jet1);
         const double pT = p.pT();
@@ -146,15 +150,15 @@ namespace Rivet {
         const double dPhideg = 180*dPhi/M_PI;
         if (ptLead/GeV > 2.0) {
           _htmp_num_dphi_2->fill(dPhideg, 1);
-          _htmp_pt_dphi_2->fill (dPhideg, pT/GeV);
+          _htmp_pt_dphi_2->fill(dPhideg, pT/GeV);
         }
         if (ptLead/GeV > 5.0) {
           _htmp_num_dphi_5->fill(dPhideg, 1);
-          _htmp_pt_dphi_5->fill (dPhideg, pT/GeV);
+          _htmp_pt_dphi_5->fill(dPhideg, pT/GeV);
         }
         if (ptLead/GeV > 30.0) {
           _htmp_num_dphi_30->fill(dPhideg, 1);
-          _htmp_pt_dphi_30->fill (dPhideg, pT/GeV);
+          _htmp_pt_dphi_30->fill(dPhideg, pT/GeV);
         }
       }
 
@@ -254,8 +258,8 @@ namespace Rivet {
     Histo1DPtr _ptTrans2, _ptTrans5, _ptTrans30;
 
     // Temporary histos that bin N and pT in dphi
-    Profile1DPtr _htmp_num_dphi_2, _htmp_num_dphi_5, _htmp_num_dphi_30;
-    Profile1DPtr _htmp_pt_dphi_2, _htmp_pt_dphi_5, _htmp_pt_dphi_30;
+    YODA::Profile1DPtr _htmp_num_dphi_2, _htmp_num_dphi_5, _htmp_num_dphi_30;
+    YODA::Profile1DPtr _htmp_pt_dphi_2, _htmp_pt_dphi_5, _htmp_pt_dphi_30;
 
     /// @}
 

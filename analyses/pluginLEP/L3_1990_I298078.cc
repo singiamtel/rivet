@@ -39,26 +39,20 @@ namespace Rivet {
         const double y_23 = jadejet.clusterSeq()->exclusive_ymerge_max(2);
         const double y_34 = jadejet.clusterSeq()->exclusive_ymerge_max(3);
         const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
-        for (size_t i = 1; i < _h_y_2_JADE->numBins()+1; ++i) {
-          const auto& b = _h_y_2_JADE->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
-          if (y_23 < ycut) _h_y_2_JADE->fill(ycut,width);
+        for (const auto& b : _h_y_2_JADE->bins()) {
+          const double ycut = std::stod(b.xEdge());
+          if (y_23 < ycut)  _h_y_2_JADE->fill(b.xEdge());
         }
-        for (size_t i = 1; i < _h_y_3_JADE->numBins()+1; ++i) {
-          const auto& b = _h_y_3_JADE->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_y_3_JADE->bins()) {
+          const double ycut = std::stod(b.xEdge());
           if (y_34 < ycut && y_23 > ycut) {
-            _h_y_3_JADE->fill(ycut,width);
+            _h_y_3_JADE->fill(b.xEdge());
           }
         }
-        for (size_t i = 1; i < _h_y_4_JADE->numBins()+1; ++i) {
-          const auto& b = _h_y_4_JADE->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (const auto& b : _h_y_4_JADE->bins()) {
+          const double ycut = std::stod(b.xEdge());
           if (y_45 < ycut && y_34 > ycut) {
-            _h_y_4_JADE->fill(ycut,width);
+            _h_y_4_JADE->fill(b.xEdge());
           }
         }
       }
@@ -77,7 +71,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_y_2_JADE,_h_y_3_JADE,_h_y_4_JADE;
+    BinnedHistoPtr<string> _h_y_2_JADE, _h_y_3_JADE, _h_y_4_JADE;
     /// @}
 
 

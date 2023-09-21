@@ -58,41 +58,32 @@ namespace Rivet {
     void finalize() {
 
       for(unsigned int ix=9;ix<13;++ix) {
-	double sigma = 0., error = 0.;
-	if(ix==9) {
-	  sigma =  _nKSKL->val();
-	  error =  _nKSKL->err();
-	}
-	else if(ix==10) {
-	  sigma = _nKSKLpipi->val();
-	  error = _nKSKLpipi->err();
-	}
-     	else if(ix==11) {
-	  sigma = _nKSKSpipi->val();
-	  error = _nKSKSpipi->err();
-	}
-     	else if(ix==12) {
-	  sigma = _nKSKSKpKm->val();
-	  error = _nKSKSKpKm->err();
-	}
-    	sigma *= crossSection()/ sumOfWeights() /nanobarn;
-    	error *= crossSection()/ sumOfWeights() /nanobarn;
-	Scatter2D temphisto(refData(ix, 1, 1));
-	Scatter2DPtr  mult;
+        double sigma = 0., error = 0.;
+        if(ix==9) {
+          sigma =  _nKSKL->val();
+          error =  _nKSKL->err();
+        }
+        else if(ix==10) {
+          sigma = _nKSKLpipi->val();
+          error = _nKSKLpipi->err();
+        }
+        else if(ix==11) {
+          sigma = _nKSKSpipi->val();
+          error = _nKSKSpipi->err();
+        }
+        else if(ix==12) {
+          sigma = _nKSKSKpKm->val();
+          error = _nKSKSKpKm->err();
+        }
+        sigma *= crossSection()/ sumOfWeights() /nanobarn;
+        error *= crossSection()/ sumOfWeights() /nanobarn;
+        Estimate1DPtr  mult;
         book(mult, ix, 1, 1);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, sigma, ex, make_pair(error,error));
-	  }
-	  else {
-	    mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
+          }
+        }
       }
     }
 

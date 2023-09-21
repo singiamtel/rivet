@@ -4,8 +4,7 @@
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
-#include "Rivet/Tools/AliceCommon.hh"
-#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 #include "Rivet/Projections/HepMCHeavyIon.hh"
 
 namespace Rivet {
@@ -182,7 +181,7 @@ namespace Rivet {
           double ncoll = _counterNcoll[ihist]->sumW();
           double sow = _counterSOW[PBPB][ihist]->sumW();
           if (ncoll > 1e-6 && sow > 1e-6)
-            _histRAA[ihist]->scale(1, 1. / (ncoll / sow));
+            _histRAA[ihist]->scale(1. / (ncoll / sow));
 
         }
       }
@@ -204,7 +203,7 @@ namespace Rivet {
     Histo1DPtr _histNch[EVENT_TYPES][NHISTOS];
     CounterPtr _counterSOW[EVENT_TYPES][NHISTOS];
     CounterPtr _counterNcoll[NHISTOS];
-    Scatter2DPtr _histRAA[NHISTOS];
+    Estimate1DPtr _histRAA[NHISTOS];
     /// @}
 
     std::vector<std::pair<double, double>> _centrRegions;

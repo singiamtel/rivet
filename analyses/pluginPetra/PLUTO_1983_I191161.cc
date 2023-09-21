@@ -98,8 +98,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<3;++ix) {
-        for(unsigned int iy=1;iy<5;++iy) {
+      for (unsigned int ix=1;ix<3;++ix) {
+        for (unsigned int iy=1;iy<5;++iy) {
           double value = 0.0, error = 0.0;
           if (ix==1) {
             if (iy==1) {
@@ -137,19 +137,11 @@ namespace Rivet {
               error = _p_sphere_sum_pt2.xStdErr();
             }
           }
-          Scatter2D temphisto(refData(ix, 1, iy));
-          Scatter2DPtr mult;
+          Estimate1DPtr mult;
           book(mult, ix, 1, iy);
-          for (size_t b = 0; b < temphisto.numPoints(); b++) {
-            const double x  = temphisto.point(b).x();
-            pair<double,double> ex = temphisto.point(b).xErrs();
-            pair<double,double> ex2 = ex;
-            if (ex2.first ==0.) ex2.first=0.0001;
-            if (ex2.second==0.) ex2.second=0.0001;
-            if (inRange(sqs, x-ex2.first, x+ex2.second)) {
-              mult->addPoint(x, value, ex, make_pair(error,error));
-            } else {
-              mult->addPoint(x, 0., ex, make_pair(0.,.0));
+          for (auto& b : mult->bins()) {
+            if (inRange(sqs, b.xMin(), b.xMax())) {
+              b.set(value, error);
             }
           }
         }

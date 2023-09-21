@@ -257,11 +257,11 @@ namespace Rivet {
       book(_weightCharm, "_weightCharm");
       book(_weightBottom, "_weightBottom");
 
-      book(tmp1, 8, 2, 1, true);
-      book(tmp2, 8, 2, 2, true);
-      book(tmp3, 8, 2, 3, true);
-      book(tmp4, 8, 3, 2, true);
-      book(tmp5, 8, 3, 3, true);
+      book(tmp1, 8, 2, 1);
+      book(tmp2, 8, 2, 2);
+      book(tmp3, 8, 2, 3);
+      book(tmp4, 8, 3, 2);
+      book(tmp5, 8, 3, 3);
 
 
     }
@@ -275,11 +275,11 @@ namespace Rivet {
       const double avgNumPartsLight = _weightedTotalChargedPartNumLight->val() / _weightLight->val();
       const double avgNumPartsCharm = _weightedTotalChargedPartNumCharm->val() / _weightCharm->val();
       const double avgNumPartsBottom = _weightedTotalChargedPartNumBottom->val() / _weightBottom->val();
-      tmp1->point(0).setY(avgNumPartsLight);
-      tmp2->point(0).setY(avgNumPartsCharm);
-      tmp3->point(0).setY(avgNumPartsBottom);
-      tmp4->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
-      tmp5->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp1->bin(1).set(avgNumPartsLight, 0.);
+      tmp2->bin(1).set(avgNumPartsCharm, 0.);
+      tmp3->bin(1).set(avgNumPartsBottom, 0.);
+      tmp4->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
+      tmp5->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
 
       // Do divisions
       divide(*_h_RPiMinus - *_h_RPiPlus, *_h_RPiMinus + *_h_RPiPlus, _s_PiM_PiP);
@@ -327,9 +327,9 @@ namespace Rivet {
       scale(_h_RPBar,    1. / *_weightLight);
 
       // convert ratio to %
-      _s_PiM_PiP->scale(1,100.);
-      _s_KM_KP  ->scale(1,100.);
-      _s_Pr_PBar->scale(1,100.);
+      _s_PiM_PiP->scale(100.);
+      _s_KM_KP  ->scale(100.);
+      _s_Pr_PBar->scale(100.);
     }
 
     /// @}
@@ -337,7 +337,7 @@ namespace Rivet {
 
   private:
 
-    Scatter2DPtr tmp1, tmp2, tmp3, tmp4, tmp5;
+    Estimate1DPtr tmp1, tmp2, tmp3, tmp4, tmp5;
 
     /// Multiplicities
     CounterPtr _weightedTotalChargedPartNumLight, _weightedTotalChargedPartNumCharm, _weightedTotalChargedPartNumBottom;
@@ -359,7 +359,7 @@ namespace Rivet {
     Histo1DPtr _h_NProtonL, _h_NProtonC, _h_NProtonB;
     Histo1DPtr _h_RPiPlus, _h_RPiMinus, _h_RKPlus;
     Histo1DPtr _h_RKMinus, _h_RProton, _h_RPBar;
-    Scatter2DPtr _s_PiM_PiP, _s_KM_KP, _s_Pr_PBar;
+    Estimate1DPtr _s_PiM_PiP, _s_KM_KP, _s_Pr_PBar;
     /// @}
 
   };

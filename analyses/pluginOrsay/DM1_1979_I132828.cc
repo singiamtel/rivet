@@ -21,52 +21,38 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       // Book histograms
-      book(_npion, "TMP/pion");
+      book(_npion, 1, 1, 1);
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (Ecm == "") {
+        const size_t idx = _ecmAxis.index(sqrtS()/MeV);
+        Ecm = idx? _npion->xEdges()[idx-1] : "OTHER";
+      }
       const FinalState& fs = apply<FinalState>(event, "FS");
       if(fs.particles().size()!=4) vetoEvent;
       for (const Particle& p : fs.particles()) {
-	if(abs(p.pid())!=PID::PIPLUS) vetoEvent;
+        if(abs(p.pid())!=PID::PIPLUS)  vetoEvent;
       }
-      _npion->fill();
+      _npion->fill(Ecm);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _npion->val();
-      double error = _npion->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr mult;
-      book(mult, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/MeV, x-ex2.first, x+ex2.second)) {
-	  mult->addPoint(x, sigma, ex, make_pair(error,error));
-	}
-	else {
-	  mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
-      }
+      scale(_npion, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
 
-
     /// @name Histograms
     /// @{
-    CounterPtr _npion;
+    BinnedHistoPtr<string> _npion;
+    YODA::Axis<double> _ecmAxis{963., 1008., 1024., 1055., 1088., 1108.};
+    string Ecm = "";
     /// @}
 
 

@@ -46,8 +46,10 @@ namespace Rivet {
 
     // Hide lossy copy constructors for all classes derived from FinalState
     /// @todo Can this be done better with the construction deletion syntax, or does that not inherit?
-    template<typename T> FinalState(const T& rhs);
-    template<typename T> FinalState const& operator=(T const& rhs);
+    template<typename T>
+    FinalState(const T& rhs) = delete;
+    template<typename T>
+    const FinalState& operator=(const T& rhs) = delete;
 
   };
 

@@ -9,11 +9,11 @@ Reentrant: True
 Authors:
  - Otto Hindrichs <otto.heinz.hindrichs@cern.ch>
 References:
- - arXiv:2108.02803 
+ - arXiv:2108.02803
  - CMS-TOP-20-001
- - 10.1103/PhysRevD.104.092013  
+ - 10.1103/PhysRevD.104.092013
 RunInfo:
-  LHC proton proton collisions at $\sqrt{s} = 13$ TeV. Data collected by CMS in years 2016-2018. Selection of lepton+jets top pair candidate events at particle level. 
+  LHC proton proton collisions at $\sqrt{s} = 13$ TeV. Data collected by CMS in years 2016-2018. Selection of lepton+jets top pair candidate events at particle level.
 Luminosity_fb: 137
 Beams: [p+, p+]
 Energies: [13000]

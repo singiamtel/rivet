@@ -28,7 +28,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       if (cfs.size() != 2) vetoEvent; // no other charged particles in 2.4
@@ -46,7 +45,7 @@ namespace Rivet {
              v_angle < 0.95*PI       &&
              dPhi    > 0.9*PI        &&
              deltaPt < 1.*GeV        ) {
-           _h_sigma->fill(sqrtS()/GeV, weight);
+           _h_sigma->fill(7000);
          }
       }
     }
@@ -59,7 +58,7 @@ namespace Rivet {
 
 
     /// Histogram
-    Histo1DPtr _h_sigma;
+    BinnedHistoPtr<int> _h_sigma;
 
   };
 

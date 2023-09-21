@@ -1,11 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/IdentifiedFinalState.hh"
+#include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include <bitset>
 
 namespace Rivet {
 
@@ -17,15 +16,8 @@ namespace Rivet {
   class ATLAS_2014_I1304688 : public Analysis {
   public:
 
-    ATLAS_2014_I1304688():
-      Analysis("ATLAS_2014_I1304688"),
-      _jet_ntag(0),
-      _met_et(0.),
-      _met_phi(0.),
-      _hMap(),
-      //_chanLimit(3),
-      _histLimit(6)
-    {   }
+
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2014_I1304688);
 
 
     void init() {
@@ -34,19 +26,11 @@ namespace Rivet {
       Cut eta_full = Cuts::abseta < 5.0 && Cuts::pT > 1.0*MeV;
       Cut eta_lep = Cuts::abseta < 2.5;
 
-      // All final state particles
-      FinalState fs(eta_full);
-
       // Get photons to dress leptons
-      IdentifiedFinalState photons(fs);
-      photons.acceptIdPair(PID::PHOTON);
+      FinalState photons(eta_full && Cuts::abspid == PID::PHOTON);
 
       // Projection to find the electrons
-      IdentifiedFinalState el_id(fs);
-      el_id.acceptIdPair(PID::ELECTRON);
-      PromptFinalState electrons(el_id);
-      electrons.acceptTauDecays(true);
-      declare(electrons, "electrons");
+      PromptFinalState electrons(eta_full && Cuts::abspid == PID::ELECTRON, true);
       DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, true);
       declare(dressedelectrons, "dressedelectrons");
       DressedLeptons vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT >= 15*GeV, true);
@@ -55,12 +39,7 @@ namespace Rivet {
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       // Projection to find the muons
-      IdentifiedFinalState mu_id(fs);
-      mu_id.acceptIdPair(PID::MUON);
-      PromptFinalState muons(mu_id);
-      muons.acceptTauDecays(true);
-      declare(muons, "muons");
-      vector<pair<double, double> > eta_muon;
+      PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, true);
       DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 25*GeV, true);
       declare(dressedmuons, "dressedmuons");
       DressedLeptons vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 15*GeV, true);
@@ -69,10 +48,7 @@ namespace Rivet {
       declare(ewdressedmuons, "ewdressedmuons");
 
       // Projection to find neutrinos and produce MET
-      IdentifiedFinalState nu_id;
-      nu_id.acceptNeutrinos();
-      PromptFinalState neutrinos(nu_id);
-      neutrinos.acceptTauDecays(true);
+      InvisibleFinalState neutrinos(true, true);
       declare(neutrinos, "neutrinos");
 
       // Jet clustering.
@@ -85,108 +61,113 @@ namespace Rivet {
       declare(jets, "jets");
 
       // Book histograms
-      for (unsigned int ihist = 0; ihist < _histLimit ; ihist++) {
-        const unsigned int threshLimit = _thresholdLimit(ihist);
-        for (unsigned int ithres = 0; ithres < threshLimit; ithres++) {
-          _histogram(ihist, ithres); // Create all histograms
-        }
+      for (size_t i = 0; i < pTcuts.size(); ++i) {
+        const string name = "mult_"+std::to_string(i);
+        book(_s[name], i+1, 1, 1);
+      }
+      for (size_t i = 0; i < njets; ++i) {
+        const string name = "jet_"+std::to_string(i);
+        book(_h[name], i+5, 1, 1);
       }
     }
 
 
     void analyze(const Event& event) {
 
+      if (_edges.empty()) {
+        _edges.resize(_s.size());
+        for (size_t i = 0; i < _edges.size(); ++i) {
+          const string name = "mult_"+std::to_string(i);
+          _edges[i] = _s[name]->xEdges();
+        }
+      }
+
       // Get the selected objects, using the projections.
-      _dressedelectrons = sortByPt(apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons());
-      _vetodressedelectrons = apply<DressedLeptons>(event, "vetodressedelectrons").dressedLeptons();
+      const vector<DressedLepton> dressedelectrons = sortByPt(apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons());
+      const vector<DressedLepton> vetodressedelectrons = apply<DressedLeptons>(event, "vetodressedelectrons").dressedLeptons();
 
-      _dressedmuons = sortByPt(apply<DressedLeptons>(event, "dressedmuons").dressedLeptons());
-      _vetodressedmuons = apply<DressedLeptons>(event, "vetodressedmuons").dressedLeptons();
+      const vector<DressedLepton> dressedmuons = sortByPt(apply<DressedLeptons>(event, "dressedmuons").dressedLeptons());
+      const vector<DressedLepton> vetodressedmuons = apply<DressedLeptons>(event, "vetodressedmuons").dressedLeptons();
 
-      _neutrinos = apply<PromptFinalState>(event, "neutrinos").particlesByPt();
+      if (dressedelectrons.empty() && dressedmuons.empty())  vetoEvent;
+      if (dressedelectrons.size()) {
+        if (vetodressedelectrons.size() > 1 || vetodressedmuons.size())  vetoEvent;
+      }
+      if (dressedmuons.size()) {
+        if (vetodressedmuons.size() > 1 || vetodressedelectrons.size())  vetoEvent;
+      }
 
-      _jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
+      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
+      if (jets.size() < 3)  vetoEvent;
 
 
       // Calculate the missing ET, using the prompt neutrinos only (really?)
       /// @todo Why not use MissingMomentum?
       FourMomentum pmet;
-      for (const Particle& p : _neutrinos) pmet += p.momentum();
-      _met_et = pmet.pT();
-      _met_phi = pmet.phi();
+      for (const Particle& p : apply<InvisibleFinalState>(event, "neutrinos").particlesByPt())  pmet += p.momentum();
+      const double met_et = pmet.pT();
+      const double met_phi = pmet.phi();
+      if (met_et <= 30*GeV)  vetoEvent;
+      if (dressedelectrons.size()) {
+        if (transMass(dressedelectrons[0].pT(), dressedelectrons[0].phi(), met_et, met_phi) <= 35*GeV)  vetoEvent;
+      }
+      if (dressedmuons.size()) {
+        if (transMass(dressedmuons[0].pT(), dressedmuons[0].phi(), met_et, met_phi) <= 35*GeV)  vetoEvent;
+      }
 
       // Check overlap of jets/leptons.
-      unsigned int i,j;
-      _jet_ntag = 0;
-      _overlap = false;
-      for (i = 0; i < _jets.size(); i++) {
-        const Jet& jet = _jets[i];
+      size_t jet_ntag = 0;
+      bool overlap = false;
+      for (size_t j1 = 0; j1 < jets.size(); ++j1) {
+        const Jet& jet = jets[j1];
         // If dR(el,jet) < 0.4 skip the event
-        for (const DressedLepton& el : _dressedelectrons) {
-          if (deltaR(jet, el) < 0.4) _overlap = true;
+        for (const DressedLepton& el : dressedelectrons) {
+          if (deltaR(jet, el) < 0.4)  overlap = true;
         }
         // If dR(mu,jet) < 0.4 skip the event
-        for (const DressedLepton& mu : _dressedmuons) {
-          if (deltaR(jet, mu) < 0.4) _overlap = true;
+        for (const DressedLepton& mu : dressedmuons) {
+          if (deltaR(jet, mu) < 0.4)  overlap = true;
         }
         // If dR(jet,jet) < 0.5 skip the event
-        for (j = 0; j < _jets.size(); j++) {
-          const Jet& jet2 = _jets[j];
-          if (i == j) continue; // skip the diagonal
-          if (deltaR(jet, jet2) < 0.5) _overlap = true;
+        for (size_t j2 = j1+1; j2 < jets.size(); ++j2) {
+          const Jet& jet2 = jets[j2];
+          if (deltaR(jet, jet2) < 0.5)  overlap = true;
         }
         // Count the number of b-tags
-        if (!jet.bTags().empty()) _jet_ntag += 1;
+        if (jet.bTags().size())  ++jet_ntag;
       }
-
-      // Evaluate basic event selection
-      unsigned int ejets_bits = 0, mujets_bits = 0;
-      bool pass_ejets = _ejets(ejets_bits);
-      bool pass_mujets = _mujets(mujets_bits);
 
       // Remove events with object overlap
-      if (_overlap) vetoEvent;
-      // basic event selection requirements
-      if (!pass_ejets && !pass_mujets) vetoEvent;
-
-      // Check if the additional pT threshold requirements are passed
-      bool pass_jetPt = _additionalJetCuts();
+      if (overlap || !jet_ntag)  vetoEvent;
 
       // Count the jet multiplicity for 25, 40, 60 and 80GeV
-      unsigned int ithres, jet_n[4];
-      for (ithres = 0; ithres < 4; ithres++) {
-        jet_n[ithres] = _countJets(ithres);
+      vector<size_t> jet_n; jet_n.resize(pTcuts.size());
+      for (size_t i = 0; i < pTcuts.size(); ++i) {
+        jet_n[i] = countJets(jets, i);
+        const string name = "mult_" + std::to_string(i);
+        const string& edge = _edges[i][jet_n[i]-3];
+        _s[name]->fill(edge);
       }
 
+      // Check if the additional pT threshold requirements are passed
+      const bool pass_jetPt = jets.size() > 1 && jets[0].pT() > 50*GeV && jets[1].pT() > 35*GeV;
+      if (!pass_jetPt)  vetoEvent;
+
+
       // Fill histograms
-      for (unsigned int ihist = 0; ihist < 6; ihist++) {
-        if (ihist > 0 && !pass_jetPt) continue; // additional pT threshold cuts for pT plots
-        unsigned int threshLimit = _thresholdLimit(ihist);
-        for (ithres = 0; ithres < threshLimit; ithres++) {
-          if (jet_n[ithres] < 3) continue; // 3 or more jets for ljets
-          // Fill
-          if (ihist == 0) _histogram(ihist, ithres)->fill(jet_n[ithres]-2); // njets
-          else if (ihist == 1) _histogram(ihist, ithres)->fill(_jets[0].pT()); // leading jet pT
-          else if (ihist == 2) _histogram(ihist, ithres)->fill(_jets[1].pT()); // 2nd jet pT
-          else if (ihist == 3 && jet_n[ithres] >= 3) _histogram(ihist, ithres)->fill(_jets[2].pT()); // 3rd jet pT
-          else if (ihist == 4 && jet_n[ithres] >= 4) _histogram(ihist, ithres)->fill(_jets[3].pT()); // 4th jet pT
-          else if (ihist == 5 && jet_n[ithres] >= 5) _histogram(ihist, ithres)->fill(_jets[4].pT()); // 5th jet pT
-        }
+      for (size_t i = 0; i < njets; ++i) {
+        const string name = "jet_" + std::to_string(i);
+        if (i > 1 && jet_n[0] <= i)  continue;
+        _h[name]->fill(jets[i].pT()/GeV);
       }
     }
 
 
     void finalize() {
-      // Normalize to cross-section
-      const double norm = crossSection()/sumOfWeights();
-      scale(_hMap, norm);
-      // Calc averages
-      for (unsigned int ihist = 0; ihist < _histLimit ; ihist++) {
-        unsigned int threshLimit = _thresholdLimit(ihist);
-        for (unsigned int ithres = 0; ithres < threshLimit; ithres++) {
-          scale(_histogram(ihist, ithres), 0.5);
-        }
-      }
+      // Normalize to cross-section x 0.5 to average lepton flavours
+      const double norm = 0.5*crossSection()/sumOfWeights();
+      scale(_h, norm);
+      scale(_s, norm);
     }
 
 
@@ -194,100 +175,20 @@ namespace Rivet {
   private:
 
 
-    /// @name Cut helper functions
-    /// @{
-
-    // Event selection functions
-    bool _ejets(unsigned int& cutBits) {
-      // 1. More than zero good electrons
-      cutBits += 1; if (_dressedelectrons.size() == 0) return false;
-      // 2. No additional electrons passing the veto selection
-      cutBits += 1 << 1; if (_vetodressedelectrons.size() > 1) return false;
-      // 3. No muons passing the veto selection
-      cutBits += 1 << 2; if (_vetodressedmuons.size() > 0) return false;
-      // 4. total neutrino pT > 30 GeV
-      cutBits += 1 << 3; if (_met_et <= 30.0*GeV) return false;
-      // 5. MTW > 35 GeV
-      cutBits += 1 << 4;
-      if (_transMass(_dressedelectrons[0].pT(), _dressedelectrons[0].phi(), _met_et, _met_phi) <= 35*GeV) return false;
-      // 6. At least one b-tagged jet
-      cutBits += 1 << 5; if (_jet_ntag < 1) return false;
-      // 7. At least three good jets
-      cutBits += 1 << 6; if (_jets.size() < 3) return false;
-      cutBits += 1 << 7;
-      return true;
-    }
-
-    bool _mujets(unsigned int& cutBits) {
-      // 1. More than zero good muons
-      cutBits += 1; if (_dressedmuons.size() == 0) return false;
-      // 2. No additional muons passing the veto selection
-      cutBits += 1 << 1; if (_vetodressedmuons.size() > 1) return false;
-      // 3. No electrons passing the veto selection
-      cutBits += 1 << 2; if (_vetodressedelectrons.size() > 0) return false;
-      // 4. total neutrino pT > 30 GeV
-      cutBits += 1 << 3; if (_met_et <= 30*GeV) return false;
-      // 5. MTW > 35 GeV
-      cutBits += 1 << 4;
-      if (_transMass(_dressedmuons[0].pT(), _dressedmuons[0].phi(), _met_et, _met_phi) <= 35*GeV) return false;
-      // 6. At least one b-tagged jet
-      cutBits += 1 << 5; if (_jet_ntag < 1) return false;
-      // 7. At least three good jets
-      cutBits += 1 << 6; if (_jets.size() < 3) return false;
-      cutBits += 1 << 7;
-      return true;
-    }
-
-    bool _additionalJetCuts() {
-      if (_jets.size() < 2) return false;
-      if (_jets[0].pT() <= 50*GeV || _jets[1].pT() <= 35*GeV) return false;
-      return true;
-    }
-
-    /// @}
-
-
-    /// @name Histogram helper functions
-    /// @{
-
-    unsigned int _thresholdLimit(unsigned int histId) {
-      if (histId == 0) return 4;
-      return 1;
-    }
-
-    Histo1DPtr _histogram(unsigned int histId, unsigned int thresholdId) {
-      assert(histId < _histLimit);
-      assert(thresholdId < _thresholdLimit(histId));
-
-      const unsigned int hInd = (histId == 0) ? thresholdId : (_thresholdLimit(0) + (histId-1) + thresholdId);
-      if (_hMap.find(hInd) != _hMap.end()) return _hMap[hInd];
-
-      _hMap.insert( { hInd, Histo1DPtr() } );
-      if (histId == 0) book(_hMap[hInd], thresholdId+1, 1, 1);
-      else             book(_hMap[hInd], 4+histId,      1, 1);
-      return _hMap[hInd];
-    }
-
-    /// @}
-
-
     /// @name Physics object helper functions
     /// @{
 
-    double _transMass(double ptLep, double phiLep, double met, double phiMet) {
+    double transMass(double ptLep, double phiLep, double met, double phiMet) const {
       return sqrt(2.0*ptLep*met*(1 - cos(phiLep-phiMet)));
     }
 
-    unsigned int _countJets(unsigned int ithres) {
-      if (ithres > 4) assert(0);
-      double pTcut[4] = {25.,40.,60.,80.};
-      unsigned int i, jet_n = 0;
-      for (i = 0; i < _jets.size(); i++) {
-        if (_jets[i].pT() > pTcut[ithres]) jet_n++;
+    size_t countJets(const Jets& jets, size_t thresh) const {
+      size_t jet_n = 0;
+      for (const Jet& jet : jets) {
+        if (jet.pT() > pTcuts[thresh])  ++jet_n;
       }
-      unsigned int ncutoff[4] = {8,7,6,5};
-      if (jet_n > ncutoff[ithres]) jet_n = ncutoff[ithres];
-      return jet_n;
+      const vector<size_t> ncutoff{8,7,6,5};
+      return min(jet_n, ncutoff[thresh]);
     }
 
     /// @}
@@ -297,20 +198,12 @@ namespace Rivet {
 
     /// @name Objects that are used by the event selection decisions
     /// @{
-    vector<DressedLepton> _dressedelectrons;
-    vector<DressedLepton> _vetodressedelectrons;
-    vector<DressedLepton> _dressedmuons;
-    vector<DressedLepton> _vetodressedmuons;
-    Particles _neutrinos;
-    Jets _jets;
-    unsigned int _jet_ntag;
-    /// @todo Why not store the whole MET FourMomentum?
-    double _met_et, _met_phi;
-    bool _overlap;
 
-    map<unsigned int, Histo1DPtr> _hMap;
-    //unsigned int _chanLimit;
-    unsigned int _histLimit;
+    map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<string>> _s;
+    vector<vector<string>> _edges;
+    const size_t njets = 5;
+    const vector<int> pTcuts{25,40,60,80};
     /// @}
 
   };

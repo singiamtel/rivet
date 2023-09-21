@@ -31,6 +31,8 @@ namespace Rivet {
       declare(Hemispheres(sphere), "Hemispheres");
       // histograms
       book(_histRapidityT , 1, 1, 1);
+      book(_histMajor     ,13, 1, 1);
+
       book(_histScaledMom , 2, 1, 1);
       book(_histPl        , 3, 1, 1);
       book(_histPt        , 4, 1, 1);
@@ -42,7 +44,6 @@ namespace Rivet {
       book(_histNtheta    ,10, 1, 1);
       book(_histEtheta    ,11, 1, 1);
       book(_histThrust    ,12, 1, 1);
-      book(_histMajor     ,13, 1, 1);
       book(_histMinor     ,14, 1, 1);
       book(_histOblateness,15, 1, 1);
       book(_histSphericity,16, 1, 1);

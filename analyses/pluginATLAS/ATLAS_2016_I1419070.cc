@@ -25,13 +25,13 @@ namespace Rivet {
       book(central_2GeV   ,5, 1, 1);
       book(central_5GeV   ,6, 1, 1);
 
-      book(diff_500MeV, "d07-x01-y01", true);
-      book(diff_2GeV  , "d08-x01-y01", true);
-      book(diff_5GeV  , "d09-x01-y01", true);
+      book(diff_500MeV, "d07-x01-y01");
+      book(diff_2GeV  , "d08-x01-y01");
+      book(diff_5GeV  , "d09-x01-y01");
 
-      book(sum_500MeV, "d10-x01-y01", true);
-      book(sum_2GeV  , "d11-x01-y01", true);
-      book(sum_5GeV  , "d12-x01-y01", true);
+      book(sum_500MeV, "d10-x01-y01");
+      book(sum_2GeV  , "d11-x01-y01");
+      book(sum_5GeV  , "d12-x01-y01");
 
     }
 
@@ -97,13 +97,13 @@ namespace Rivet {
           double yerr2 = bsum2.effNumEntries() > 1.0 ? bsum2.yStdErr() : 0.0;
           double yerr5 = bsum5.effNumEntries() > 1.0 ? bsum5.yStdErr() : 0.0;
 
-          diff_500MeV->point(i-1).setY(ydiff, yerr);
-          diff_2GeV->point(i-1).setY(ydiff2, yerr2);
-          diff_5GeV->point(i-1).setY(ydiff5, yerr5);
+          diff_500MeV->bin(i).set(ydiff, yerr);
+          diff_2GeV->bin(i).set(ydiff2, yerr2);
+          diff_5GeV->bin(i).set(ydiff5, yerr5);
 
-          sum_500MeV->point(i-1).setY(bsum.effNumEntries()? bsum.yMean() : 0.0, yerr);
-          sum_2GeV->point(i-1).setY(bsum2.effNumEntries()? bsum2.yMean() : 0.0, yerr2);
-          sum_5GeV->point(i-1).setY(bsum5.effNumEntries()? bsum5.yMean() : 0.0, yerr5);
+          sum_500MeV->bin(i).set(bsum.effNumEntries()? bsum.yMean() : 0.0, yerr);
+          sum_2GeV->bin(i).set(bsum2.effNumEntries()? bsum2.yMean() : 0.0, yerr2);
+          sum_5GeV->bin(i).set(bsum5.effNumEntries()? bsum5.yMean() : 0.0, yerr5);
         }
       }
 
@@ -120,13 +120,13 @@ namespace Rivet {
     Profile1DPtr central_2GeV;
     Profile1DPtr central_5GeV;
 
-    Scatter2DPtr sum_500MeV;
-    Scatter2DPtr sum_2GeV;
-    Scatter2DPtr sum_5GeV;
+    Estimate1DPtr sum_500MeV;
+    Estimate1DPtr sum_2GeV;
+    Estimate1DPtr sum_5GeV;
 
-    Scatter2DPtr diff_500MeV;
-    Scatter2DPtr diff_2GeV;
-    Scatter2DPtr diff_5GeV;
+    Estimate1DPtr diff_500MeV;
+    Estimate1DPtr diff_2GeV;
+    Estimate1DPtr diff_5GeV;
 
   };
 

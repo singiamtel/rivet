@@ -138,14 +138,12 @@ namespace Rivet {
         const double BRZEE_BRWENU = 0.033632 / 0.1073; // Ratio of branching fractions
         const double scalefactor = (xSecW / wpt_integral) / (xSecZ / zpt_integral) * MW_MZ * BRZEE_BRWENU;
         for (size_t ibin = 1; ibin < _h_dsigdpt_w->numBins()+1; ibin++) {
-          const double xval = _h_dsigdpt_w->bin(ibin).xMid();
-          const double xerr = 0.5 * _h_dsigdpt_w->bin(ibin).xWidth();
           double yval(0), yerr(0);
           if (_h_dsigdpt_w->bin(ibin).sumW() != 0 && _h_dsigdpt_z->bin(ibin).sumW() != 0) {
             yval = scalefactor * _h_dsigdpt_w->bin(ibin).sumW() / _h_dsigdpt_z->bin(ibin).sumW();
             yerr = yval * sqrt( sqr(_h_dsigdpt_w->bin(ibin).relErrW()) + sqr(_h_dsigdpt_z->bin(ibin).errW()) );
           }
-          _h_dsigdpt_scaled_z->addPoint(xval, yval, xerr, yerr);
+          _h_dsigdpt_scaled_z->bin(ibin).set(yval, yerr);
         }
       }
 
@@ -169,7 +167,7 @@ namespace Rivet {
     /// Histograms
     Histo1DPtr  _h_dsigdpt_w;
     Histo1DPtr  _h_dsigdpt_z;
-    Scatter2DPtr _h_dsigdpt_scaled_z;
+    Estimate1DPtr _h_dsigdpt_scaled_z;
     /// @}
 
   };

@@ -181,27 +181,18 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       for(unsigned int ix=1;ix<18;++ix) {
-	if(ix==6||ix==16) continue;
-	double sigma = _nMeson[ix]->val();
-	double error = _nMeson[ix]->err();
-    	sigma *= crossSection()/ sumOfWeights() /picobarn;
-    	error *= crossSection()/ sumOfWeights() /picobarn;
-	Scatter2D temphisto(refData(1, 1, ix));
-	Scatter2DPtr mult;
-	book(mult, 1, 1, ix);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, sigma, ex, make_pair(error,error));
-	  }
-	  else {
-	    mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+        if(ix==6||ix==16) continue;
+        double sigma = _nMeson[ix]->val();
+        double error = _nMeson[ix]->err();
+        sigma *= crossSection()/ sumOfWeights() /picobarn;
+        error *= crossSection()/ sumOfWeights() /picobarn;
+        Estimate1DPtr mult;
+        book(mult, 1, 1, ix);
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
+          }
+        }
       }
     }
 

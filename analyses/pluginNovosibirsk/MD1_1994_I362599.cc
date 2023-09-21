@@ -51,10 +51,8 @@ namespace Rivet {
       if (upsilons.empty()) {
         _weightSum_cont->fill();
         // Unstable particles
-        for (const Particle& p : ufs.particles(Cuts::abspid==PID::LAMBDA)) {
-          (void)p; // to suppress "unused variable" warning
-          _mult[1][0]->fill();
-        }
+        size_t nLam = ufs.particles(Cuts::abspid==PID::LAMBDA).size();
+        _mult[1][0]->fill(nLam);
       }
       else {
         for (const Particle& ups : upsilons) {
@@ -82,29 +80,21 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       if (_weightSum_Ups1->val() > 0.) {
-        scale(_h_spect,1./ *_weightSum_Ups1);
-        for(unsigned int iy=0;iy<2;++iy) {
-          Scatter2DPtr scatter;
-          book(scatter,2+iy*2, 1, 1, true);
-          if(_weightSum_Ups1->val() <= 0.) {
-            scatter->point(0).setY(0.,0.);
-          }
-          else {
+        scale(_h_spect, 1./ *_weightSum_Ups1);
+        for (size_t iy=0; iy<2; ++iy) {
+          BinnedEstimatePtr<string> est;
+          book(est, 2+iy*2, 1, 1);
+          if (_weightSum_Ups1->val() > 0.) {
             scale(_mult[0][iy],1./ *_weightSum_Ups1);
-            scatter->point(0).setY(_mult[0][iy]->val(),_mult[0][iy]->err());
+            est->bin(1).set(_mult[0][iy]->val(), _mult[0][iy]->err());
           }
         }
       }
       if (_weightSum_cont->val() > 0.) {
-        scale(_mult[1][0],1./ *_weightSum_cont);
-        for(unsigned int ix=0;ix<2;++ix) {
-          Scatter2DPtr scatter;
-          book(scatter,3, 1, 1+ix, true);
-          if(inRange(sqrtS(),7.2,10.) && ix==1)
-            scatter->point(0).setY(_mult[1][0]->val(),_mult[1][0]->err());
-          else if(inRange(sqrtS(),7.2,9.4) && ix==0)
-            scatter->point(0).setY(_mult[1][0]->val(),_mult[1][0]->err());
-        }
+        scale(_mult[1][0], 1./ *_weightSum_cont);
+        Estimate1DPtr est;
+        book(est, 3, 1, 1);
+        est->bin(1).set(_mult[1][0]->val(), _mult[1][0]->err());
       }
     }
 

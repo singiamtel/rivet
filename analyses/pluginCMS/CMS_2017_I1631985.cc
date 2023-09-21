@@ -47,22 +47,13 @@ namespace Rivet {
         book(_h2D_Zll_phiStar_y_norm, 4, 1, 1);
       }
 
-      Histo1DPtr tmp;
-      _b_Zll_phiStar.add(0.0, 0.4, book(tmp, 9, 1, 1));
-      _b_Zll_phiStar.add(0.4, 0.8, book(tmp, 9, 1, 2));
-      _b_Zll_phiStar.add(0.8, 1.2, book(tmp, 9, 1, 3));
-      _b_Zll_phiStar.add(1.2, 1.6, book(tmp, 9, 1, 4));
-      _b_Zll_phiStar.add(1.6, 2.0, book(tmp, 9, 1, 5));
-      _b_Zll_phiStar.add(2.0, 2.4, book(tmp, 9, 1, 6));
-
-      _b_Zll_phiStar_norm.add(0.0, 0.4, book(tmp, 10, 1, 1));
-      _b_Zll_phiStar_norm.add(0.4, 0.8, book(tmp, 10, 1, 2));
-      _b_Zll_phiStar_norm.add(0.8, 1.2, book(tmp, 10, 1, 3));
-      _b_Zll_phiStar_norm.add(1.2, 1.6, book(tmp, 10, 1, 4));
-      _b_Zll_phiStar_norm.add(1.6, 2.0, book(tmp, 10, 1, 5));
-      _b_Zll_phiStar_norm.add(2.0, 2.4, book(tmp, 10, 1, 6));
-
-      _absYBinWidth = 0.4; // bin width for |y|
+      vector<double> edges = {0.0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4};
+      book(_b_Zll_phiStar, edges);
+      book(_b_Zll_phiStar_norm, edges);
+      for (size_t i = 0; i < _b_Zll_phiStar->numBins(); ++i) {
+        book(_b_Zll_phiStar->bin(i+1), 9, 1, i+1);
+        book(_b_Zll_phiStar_norm->bin(i+1), 10, 1, i+1);
+      }
     }
 
 
@@ -113,8 +104,8 @@ namespace Rivet {
         _h2D_Zll_phiStar_y_norm->fill(phiStar, absRap);
       }
 
-      _b_Zll_phiStar.fill(absRap, phiStar);
-      _b_Zll_phiStar_norm.fill(absRap, phiStar);
+      _b_Zll_phiStar->fill(absRap, phiStar);
+      _b_Zll_phiStar_norm->fill(absRap, phiStar);
 
     }
 
@@ -126,9 +117,8 @@ namespace Rivet {
       if (_mode == 2) norm /= 2.;
 
       scale(_h_Zll_phiStar, norm);
-      for (auto& hist : _b_Zll_phiStar.histos()) {
-        scale(hist, norm/_absYBinWidth);
-      }
+      scale(_b_Zll_phiStar, norm);
+      divByGroupWidth(_b_Zll_phiStar);
       normalize(_h_Zll_phiStar_norm);
 
       if (_twodim) {
@@ -137,22 +127,16 @@ namespace Rivet {
       }
 
       // normalized using the sum of 2D
-      double sum2D = 0;
-      for (auto& hist : _b_Zll_phiStar_norm.histos()) {
-        sum2D += hist->integral();
-      }
-      for (auto& hist : _b_Zll_phiStar_norm.histos()) {
-        scale(hist, 1./(sum2D*_absYBinWidth));
-      }
+      normalizeGroup(_b_Zll_phiStar_norm);
+      divByGroupWidth(_b_Zll_phiStar_norm);
     }
 
     /// @}
 
     Histo1DPtr _h_Zll_phiStar, _h_Zll_phiStar_norm;
-    BinnedHistogram _b_Zll_phiStar, _b_Zll_phiStar_norm;
+    Histo1DGroupPtr _b_Zll_phiStar, _b_Zll_phiStar_norm;
     Histo2DPtr _h2D_Zll_phiStar_y, _h2D_Zll_phiStar_y_norm;
 
-    double _absYBinWidth;
     size_t _mode;
     bool _twodim;
   };

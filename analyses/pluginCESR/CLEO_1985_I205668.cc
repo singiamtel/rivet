@@ -26,35 +26,63 @@ namespace Rivet {
       book(_weightSum_cont,"TMP/weightSumcont");
       book(_weightSum_Ups1,"TMP/weightSumUps1");
       // multiplcities
-      for(unsigned int ix=0;ix<2;++ix) {
-        for(unsigned int iy=0;iy<12;++iy) {
+      for (size_t ix=0; ix<2; ++ix) {
+        for (size_t iy=0; iy<12; ++iy) {
           book(_mult[ix][iy],"/TMP/MULT_" +toString(ix) + "_" +toString(iy));
         }
       }
       // cont spectra
-      book(_h_cont_pip   , 1,1,1);
-      book(_h_cont_Kp    , 2,1,1);
-      book(_h_cont_p     , 3,1,1);
-      book(_h_cont_pi0   , 4,1,1);
-      book(_h_cont_K0    , 5,1,1);
-      book(_h_cont_lam   , 6,1,1);
-      book(_h_cont_xi    , 7,1,1);
-      book(_h_cont_rho   , 8,1,1);
-      book(_h_cont_Kstarp, 9,1,1);
-      book(_h_cont_Kstar0,10,1,1);
-      book(_h_cont_phi   ,11,1,1);
+      book(_cont["pip"]   , 1,1,1);
+      book(_cont["Kp"]    , 2,1,1);
+      book(_cont["p"]     , 3,1,1);
+      book(_cont["pi0"]   , 4,1,1);
+      book(_cont["K0"]    , 5,1,1);
+      book(_cont["lam"]   , 6,1,1);
+      book(_cont["xi"]    , 7,1,1);
+      book(_cont["rho"]   , 8,1,1);
+      book(_cont["Kstarp"], 9,1,1);
+      book(_cont["Kstar0"],10,1,1);
+      book(_cont["phi"]   ,11,1,1);
       // ups spectra
-      book(_h_ups1_pip   , 1,1,2);
-      book(_h_ups1_Kp    , 2,1,2);
-      book(_h_ups1_p     , 3,1,2);
-      book(_h_ups1_pi0   , 4,1,2);
-      book(_h_ups1_K0    , 5,1,2);
-      book(_h_ups1_lam   , 6,1,2);
-      book(_h_ups1_xi    , 7,1,2);
-      book(_h_ups1_rho   , 8,1,2);
-      book(_h_ups1_Kstarp, 9,1,2);
-      book(_h_ups1_Kstar0,10,1,2);
-      book(_h_ups1_phi   ,11,1,2);
+      book(_ups1["pip"]   , 1,1,2);
+      book(_ups1["Kp"]    , 2,1,2);
+      book(_ups1["p"]     , 3,1,2);
+      book(_ups1["pi0"]   , 4,1,2);
+      book(_ups1["K0"]    , 5,1,2);
+      book(_ups1["lam"]   , 6,1,2);
+      book(_ups1["xi"]    , 7,1,2);
+      book(_ups1["rho"]   , 8,1,2);
+      book(_ups1["Kstarp"], 9,1,2);
+      book(_ups1["Kstar0"],10,1,2);
+      book(_ups1["phi"]   ,11,1,2);
+
+      _axes[0]["pip"] = YODA::Axis<double>({0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17,
+                                            0.19, 0.58, 0.68, 0.78, 0.98});
+      _axes[0]["Kp"] = YODA::Axis<double>({0.03, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19});
+      _axes[0]["p"] = YODA::Axis<double>({0.06, 0.14, 0.155, 0.185, 0.215, 0.245, 0.275});
+      _axes[0]["pi0"] = YODA::Axis<double>({0.1, 0.2, 0.3, 0.4, 0.5});
+      _axes[0]["K0"] = YODA::Axis<double>({0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45,
+                                           0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.9});
+      _axes[0]["lam"] = YODA::Axis<double>({0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4,
+                                            0.5, 0.65, 0.8, 0.95});
+      _axes[0]["xi"] = YODA::Axis<double>({0.2, 0.3, 0.4, 0.5, 0.6, 0.7});
+      _axes[0]["rho"] = YODA::Axis<double>({0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0});
+      _axes[0]["Kstarp"] = YODA::Axis<double>({0.06, 0.12, 0.24, 0.36, 0.48, 0.6});
+      _axes[0]["Kstar0"] = YODA::Axis<double>({0.0, 0.06, 0.12, 0.24, 0.36, 0.48});
+      _axes[0]["phi"] = YODA::Axis<double>({0.195, 0.385, 0.575, 0.945});
+
+      _axes[1]["pip"] = YODA::Axis<double>({0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19, 0.58, 0.68, 0.88});
+      _axes[1]["Kp"] = YODA::Axis<double>({0.02, 0.1, 0.11, 0.13, 0.15, 0.17, 0.19});
+      _axes[1]["p"] = _axes[0]["p"];
+      _axes[1]["pi0"] = _axes[0]["p0"];
+      _axes[1]["K0"] = _axes[0]["K0"];
+      _axes[1]["lam"] = _axes[0]["lam"];
+      _axes[1]["xi"] = _axes[0]["xi"];
+      _axes[1]["rho"] = YODA::Axis<double>({0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7});
+      _axes[1]["Kstarp"] = _axes[0]["Kstarp"];
+      _axes[1]["Kstar0"] = YODA::Axis<double>({0.06, 0.12, 0.24, 0.36, 0.48});
+      _axes[1]["phi"] = YODA::Axis<double>({0.28, 0.36, 0.7, 1.0});
+
     }
 
     /// Recursively walk the decay tree to find decay products of @a p
@@ -74,6 +102,12 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges[0].empty()) {
+        for (const auto& item : _cont) {
+          _edges[0][item.first] = item.second->xEdges();
+          _edges[1][item.first] = _ups1[item.first]->xEdges();
+        }
+      }
       // Find the upsilons
       // First in unstable final state
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
@@ -81,21 +115,21 @@ namespace Rivet {
       // continuum
       if (upsilons.empty()) {
         _weightSum_cont->fill();
-        const FinalState & fs = apply<FinalState>(event, "FS");
+        const FinalState& fs = apply<FinalState>(event, "FS");
         // FS particles
         for (const Particle& p : fs.particles()) {
           int id = p.abspid();
           double xp = 2.*p.p3().mod()/sqrtS();
           if(id==PID::PIPLUS) {
-            _h_cont_pip->fill(xp);
+            discfill("pip", xp, 0);
             _mult[1][0]->fill();
           }
           else if(id==PID::KPLUS) {
-            _h_cont_Kp->fill(xp);
+            discfill("Kp", xp, 0);
             _mult[1][1]->fill();
           }
           else if(id==PID::PROTON) {
-            _h_cont_p->fill(xp);
+            discfill("p", xp, 0);
             _mult[1][2]->fill();
           }
         }
@@ -104,35 +138,35 @@ namespace Rivet {
           int id = p.abspid();
           double xp = 2.*p.p3().mod()/sqrtS();
           if(id==PID::PI0) {
-            _h_cont_pi0->fill(xp);
+            discfill("pi0", xp, 0);
             _mult[1][3]->fill();
           }
           else if(id==PID::K0S || id==PID::K0L) {
-            _h_cont_K0->fill(xp);
+            discfill("K0", xp, 0);
             _mult[1][4]->fill();
           }
           else if(id==PID::LAMBDA) {
-            _h_cont_lam->fill(xp);
+            discfill("lam", xp, 0);
             _mult[1][5]->fill();
           }
           else if(id==PID::XIMINUS) {
-            _h_cont_xi->fill(xp);
+            discfill("xi", xp, 0);
             _mult[1][6]->fill();
           }
           else if(id==PID::RHO0) {
-            _h_cont_rho->fill(xp);
+            discfill("rho", xp, 0);
             _mult[1][7]->fill();
           }
           else if(id==323) {
-            _h_cont_Kstarp->fill(xp);
+            discfill("Kstarp", xp, 0);
             _mult[1][8]->fill();
           }
           else if(id==313) {
-            _h_cont_Kstar0->fill(xp);
+            discfill("Kstar0", xp, 0);
             _mult[1][9]->fill();
           }
           else if(id==PID::PHI) {
-            _h_cont_phi->fill(xp);
+            discfill("phi", xp, 0);
             _mult[1][10]->fill();
           }
           else if(id==225) {
@@ -147,51 +181,51 @@ namespace Rivet {
           LorentzTransform boost = LorentzTransform::mkFrameTransformFromBeta(ups.momentum().betaVec());
           // Find the decay products we want
           findDecayProducts(ups,unstable);
-          for(const Particle & p : unstable)  {
+          for (const Particle& p : unstable)  {
             int id = p.abspid();
             double xp = 2.*boost.transform(p.momentum()).p3().mod()/ups.mass();
             if(id==PID::PIPLUS) {
-              _h_ups1_pip->fill(xp);
+              discfill("pip", xp, 1);
               _mult[0][0]->fill();
             }
             else if(id==PID::KPLUS) {
-              _h_ups1_Kp->fill(xp);
+              discfill("Kp", xp, 1);
               _mult[0][1]->fill();
             }
             else if(id==PID::PROTON) {
-              _h_ups1_p->fill(xp);
+              discfill("p", xp, 1);
               _mult[0][2]->fill();
             }
             else if(id==PID::PI0) {
-              _h_ups1_pi0->fill(xp);
+              discfill("pi0", xp, 1);
               _mult[0][3]->fill();
             }
             else if(id==PID::K0S || id==PID::K0L) {
-              _h_ups1_K0->fill(xp);
+              discfill("K0", xp, 1);
               _mult[0][4]->fill();
             }
             else if(id==PID::LAMBDA) {
-              _h_ups1_lam->fill(xp);
+              discfill("lam", xp, 1);
               _mult[0][5]->fill();
             }
             else if(id==PID::XIMINUS) {
-              _h_ups1_xi->fill(xp);
+              discfill("xi", xp, 1);
               _mult[0][6]->fill();
             }
             else if(id==PID::RHO0) {
-              _h_ups1_rho->fill(xp);
+              discfill("rho", xp, 1);
               _mult[0][7]->fill();
             }
             else if(id==323) {
-              _h_ups1_Kstarp->fill(xp);
+              discfill("Kstarp", xp, 1);
               _mult[0][8]->fill();
             }
             else if(id==313) {
-              _h_ups1_Kstar0->fill(xp);
+              discfill("Kstar0", xp, 1);
               _mult[0][9]->fill();
             }
             else if(id==PID::PHI) {
-              _h_ups1_phi->fill(xp);
+              discfill("phi", xp, 1);
               _mult[0][10]->fill();
             }
             else if(id==225) {
@@ -202,50 +236,34 @@ namespace Rivet {
       }
     }
 
+    void discfill(const string& name, const double value, const size_t k) {
+      string edge = "OTHER";
+      const size_t idx = _axes[k][name].index(value);
+      if (idx && idx <= _edges[k][name].size())  edge = _edges[k][name][idx-1];
+      (k? _ups1 : _cont)[name]->fill(edge, value);
+    }
+
 
     /// Normalise histograms etc., after the run
     void finalize() {
       // multiplicities
-      vector<CounterPtr> scales = {_weightSum_Ups1,_weightSum_cont};
-      for (unsigned int ix=0;ix<12;++ix) {
-        Scatter2DPtr scatter;
-        book(scatter,ix+12, 1, 1, true);
-        for(unsigned int iy=0;iy<2;++iy) {
-          if(scales[iy]->val() <= 0.) {
-            scatter->point(iy).setY(0.,0.);
-          }
-          else {
-            scale(_mult[iy][ix],1./ *scales[iy]);
-            scatter->point(iy).setY(_mult[iy][ix]->val(),_mult[iy][ix]->err());
+      const vector<CounterPtr> scales = {_weightSum_Ups1, _weightSum_cont};
+      for (size_t ix=0; ix<12; ++ix) {
+        BinnedEstimatePtr<string> est;
+        book(est, ix+12, 1, 1);
+        for (size_t iy=0; iy<2; ++iy) {
+          if (scales[iy]->val() > 0.) {
+            scale(_mult[iy][ix], 1./ *scales[iy]);
+            est->bin(iy+1).set(_mult[iy][ix]->val(), _mult[iy][ix]->err());
           }
         }
       }
       // spectra
       if (_weightSum_cont->val() > 0.) {
-        scale(_h_cont_pip   , 1. / *_weightSum_cont);
-        scale(_h_cont_Kp    , 1. / *_weightSum_cont);
-        scale(_h_cont_p     , 1. / *_weightSum_cont);
-        scale(_h_cont_pi0   , 1. / *_weightSum_cont);
-        scale(_h_cont_K0    , 1. / *_weightSum_cont);
-        scale(_h_cont_lam   , 1. / *_weightSum_cont);
-        scale(_h_cont_xi    , 1. / *_weightSum_cont);
-        scale(_h_cont_rho   , 1. / *_weightSum_cont);
-        scale(_h_cont_Kstarp, 1. / *_weightSum_cont);
-        scale(_h_cont_Kstar0, 1. / *_weightSum_cont);
-        scale(_h_cont_phi   , 1. / *_weightSum_cont);
+        scale(_cont, 1. / *_weightSum_cont);
       }
       if (_weightSum_Ups1->val() > 0.) {
-        scale(_h_ups1_pip   , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_Kp    , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_p     , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_pi0   , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_K0    , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_lam   , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_xi    , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_rho   , 1. / *_weightSum_Ups1);
-        scale(_h_ups1_Kstarp, 1. / *_weightSum_Ups1);
-        scale(_h_ups1_Kstar0, 1. / *_weightSum_Ups1);
-        scale(_h_ups1_phi   , 1. / *_weightSum_Ups1);
+        scale(_ups1, 1. / *_weightSum_Ups1);
       }
     }
 
@@ -254,11 +272,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_cont_pip,_h_cont_Kp,_h_cont_p,_h_cont_pi0,_h_cont_K0,_h_cont_lam,
-      _h_cont_xi,_h_cont_rho,_h_cont_Kstarp,_h_cont_Kstar0,_h_cont_phi;
-    Histo1DPtr _h_ups1_pip,_h_ups1_Kp,_h_ups1_p,_h_ups1_pi0,_h_ups1_K0,_h_ups1_lam,
-      _h_ups1_xi,_h_ups1_rho,_h_ups1_Kstarp,_h_ups1_Kstar0,_h_ups1_phi;
-    CounterPtr _weightSum_cont,_weightSum_Ups1;
+    map<string,BinnedHistoPtr<string>> _cont, _ups1;
+    map<string, YODA::Axis<double>> _axes[2];
+    map<string, vector<string>> _edges[2];
+    CounterPtr _weightSum_cont, _weightSum_Ups1;
     CounterPtr _mult[2][12];
     /// @}
 

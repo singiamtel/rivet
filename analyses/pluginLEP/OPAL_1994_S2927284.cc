@@ -30,8 +30,7 @@ namespace Rivet {
 
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(e, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() +
-                                   beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
       for (const Particle& p : fs.particles()) {
@@ -39,9 +38,9 @@ namespace Rivet {
         // charged pions
         if (id == PID::PIPLUS) {
           _histXpPiPlus->fill(p.p3().mod());
-        } else if(id == PID::KPLUS) {
+        } else if (id == PID::KPLUS) {
           _histXpKPlus->fill(p.p3().mod());
-        } else if(id == PID::PROTON) {
+        } else if (id == PID::PROTON) {
           _histXpProton->fill(p.p3().mod());
         }
       }
@@ -53,17 +52,17 @@ namespace Rivet {
       declare(Beam(), "Beams");
       declare(ChargedFinalState(), "FS");
 
-      book(_histXpPiPlus , 1, 1, 1);
-      book(_histXpKPlus  , 2, 1, 1);
-      book(_histXpProton , 3, 1, 1);
+      book(_histXpPiPlus, 1, 1, 1);
+      book(_histXpKPlus,  2, 1, 1);
+      book(_histXpProton, 3, 1, 1);
     }
 
 
     /// Finalize
     void finalize() {
-      scale(_histXpPiPlus,1./sumOfWeights());
-      scale(_histXpKPlus ,1./sumOfWeights());
-      scale(_histXpProton,1./sumOfWeights());
+      scale(_histXpPiPlus, 1./sumOfWeights());
+      scale(_histXpKPlus,  1./sumOfWeights());
+      scale(_histXpProton, 1./sumOfWeights());
     }
 
     /// @}

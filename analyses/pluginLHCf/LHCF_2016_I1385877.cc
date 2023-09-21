@@ -1,7 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/Beam.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 
 namespace Rivet {
@@ -25,22 +24,15 @@ namespace Rivet {
     /// @{
     void bookHistosPP() {
       if (isCompatibleWithSqrtS(7000*GeV, 1e-3)) {
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  8.8,  9.0, book(tmp,  2, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.0,  9.2, book(tmp,  3, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.2,  9.4, book(tmp,  4, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.4,  9.6, book(tmp,  5, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.6,  9.8, book(tmp,  6, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.8, 10.0, book(tmp,  7, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 10.0, 10.2, book(tmp,  8, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 10.2, 10.4, book(tmp,  9, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 10.4, 10.6, book(tmp, 10, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 10.6, 10.8, book(tmp, 11, 1, 2));}
+        book(_h_pi0_rap_pT, {8.8, 9., 9.2, 9.4, 9.6, 9.8, 10., 10.2, 10.4, 10.6, 10.8});
+        for (auto& b : _h_pi0_rap_pT->bins()) {
+          book(b, 1+b.index(), 1, 2);
+        }
 
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.0, 0.2, book(tmp, 12, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.2, 0.4, book(tmp, 13, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.4, 0.6, book(tmp, 14, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.6, 0.8, book(tmp, 15, 1, 2));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.8, 1.0, book(tmp, 16, 1, 2));}
+        book(_h_pi0_pT_pZ, {0., 0.2, 0.4, 0.6, 0.8, 1.});
+        for (auto& b : _h_pi0_pT_pZ->bins()) {
+          book(b, 11+b.index(), 1, 2);
+        }
 
         book(_p_pi0_rap_apT,      1, 1, 2);
         book(_h_pi0_rap,         21, 1, 2);
@@ -50,14 +42,12 @@ namespace Rivet {
       else if (isCompatibleWithSqrtS(2760*GeV, 1e-3)) {
         book(_p_pi0_rap_apT, 1, 1, 1);
 
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  8.8, 9.0, book(tmp, 2, 1, 1));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.0, 9.2, book(tmp, 3, 1, 1));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.2, 9.4, book(tmp, 4, 1, 1));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.4, 9.6, book(tmp, 5, 1, 1));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(  9.6, 9.8, book(tmp, 6, 1, 1));}
+        book(_h_pi0_rap_pT, {8.8, 9., 9.2, 9.4, 9.6, 9.8});
+        for (auto& b : _h_pi0_rap_pT->bins()) {
+          book(b, 1+b.index(), 1, 1);
+        }
 
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.0, 0.2, book(tmp, 12, 1, 1));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.2, 0.4, book(tmp, 13, 1, 1));}
+        book(_h_pi0_pT_pZ, {0., 0.2, 0.4}, {"d12-x01-y01", "d13-x01-y01"});
 
         book(_h_pi0_rap, 21, 1, 1);
 
@@ -73,22 +63,15 @@ namespace Rivet {
     void bookHistosPPb() {
       if (isCompatibleWithSqrtS(sqrt(208)*5020*GeV, 1e-3)) {
 
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 8.8,  9.0, book(tmp,  2, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 9.0,  9.2, book(tmp,  3, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 9.2,  9.4, book(tmp,  4, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 9.4,  9.6, book(tmp,  5, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 9.6,  9.8, book(tmp,  6, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add( 9.8, 10.0, book(tmp,  7, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(10.0, 10.2, book(tmp,  8, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(10.2, 10.4, book(tmp,  9, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(10.4, 10.6, book(tmp, 10, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_rap_pT.add(10.6, 10.8, book(tmp, 11, 1, 3));}
+        book(_h_pi0_rap_pT, {8.8, 9., 9.2, 9.4, 9.6, 9.8, 10., 10.2, 10.4, 10.6, 10.8});
+        for (auto& b : _h_pi0_rap_pT->bins()) {
+          book(b, 1+b.index(), 1, 3);
+        }
 
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.0,  0.2, book(tmp, 12, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.2,  0.4, book(tmp, 13, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.4,  0.6, book(tmp, 14, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.6,  0.8, book(tmp, 15, 1, 3));}
-        {Histo1DPtr tmp; _h_pi0_pT_pZ.add(  0.8,  1.0, book(tmp, 16, 1, 3));}
+        book(_h_pi0_pT_pZ, {0., 0.2, 0.4, 0.6, 0.8, 1.0});
+        for (auto& b : _h_pi0_pT_pZ->bins()) {
+          book(b, 11+b.index(), 1, 3);
+        }
 
         book(_p_pi0_rap_apT,      1, 1, 3);
         book(_p_pi0_raploss_apT, 22, 1, 3);
@@ -138,8 +121,8 @@ namespace Rivet {
         const double raploss = _beam_rap - p.rap();
         _p_pi0_rap_apT->fill(rap, p.pT()/MeV);
         _p_pi0_raploss_apT->fill(raploss, p.pT()/MeV);
-        _h_pi0_rap_pT.fill(rap, pT, 1.0/pT);
-        _h_pi0_pT_pZ.fill(pT, p.pz()/GeV, p.E()/GeV/pT);
+        _h_pi0_rap_pT->fill(rap, pT, 1.0/pT);
+        _h_pi0_pT_pZ->fill(pT, p.pz()/GeV, p.E()/GeV/pT);
         if (_isPP) {
           _h_pi0_rap->fill(rap);
           _h_pi0_raploss->fill(raploss);
@@ -154,19 +137,20 @@ namespace Rivet {
 
       const double inv_scale_factor = 1. / sumOfWeights() / (2.*PI);
       const double pt_bin_width = 0.2;
-      for (Histo1DPtr h: _h_pi0_pT_pZ.histos()){
+      for (auto& h : _h_pi0_pT_pZ->bins()) {
         if (h->path() == "/LHCF_2016_I1385877/d12-x01-y01" ||
             h->path() == "/LHCF_2016_I1385877/d12-x01-y02" ||
             h->path() == "/LHCF_2016_I1385877/d12-x01-y03") {
           h->scaleW( inv_scale_factor / (pt_bin_width-pt_cutoff) );
-        } else {
+        }
+        else {
           h->scaleW( inv_scale_factor / pt_bin_width );
         }
       }
 
       const double scale_factor =  1. / sumOfWeights() / (2.*PI);
       const double rap_bin_width = 0.2;
-      for (Histo1DPtr h: _h_pi0_rap_pT.histos()) {
+      for (auto& h : _h_pi0_rap_pT->bins()) {
         const int cutoff_bin = h->indexAt(pt_cutoff);
         if (cutoff_bin >= 0) {
           const double cutoff_wdt = h->bin(cutoff_bin).xMax()-h->bin(cutoff_bin).xMin();
@@ -193,8 +177,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _h_pi0_pT_pZ;
-    BinnedHistogram _h_pi0_rap_pT;
+    Histo1DGroupPtr _h_pi0_pT_pZ, _h_pi0_rap_pT;
     Profile1DPtr _p_pi0_rap_apT;
     Histo1DPtr _h_pi0_rap;
     Profile1DPtr _p_pi0_raploss_apT;

@@ -54,9 +54,9 @@ namespace Rivet {
     Correlators(const ParticleFinder& fsp, int nMaxIn = 2,
                 int pMaxIn = 0, vector<double> pTbinEdgesIn = {});
 
-    // Constructor which takes a Scatter2D to estimate bin edges.
+    // Constructor which takes an Estimate1D to estimate bin edges.
     Correlators(const ParticleFinder& fsp, int nMaxIn,
-                int pMaxIn, const YODA::Scatter2D hIn);
+                int pMaxIn, const YODA::Estimate1D hIn);
 
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
@@ -609,10 +609,11 @@ namespace Rivet {
 
     /// @brief Book an ECorrelator in the same way as a histogram
     /// @todo Rename to book(ECorrPtr, ...)
-    ECorrPtr bookECorrelator(const string name, const vector<int>& h, const YODA::Scatter2D& hIn) {
+    ECorrPtr bookECorrelator(const string name, const vector<int>& h, const YODA::Estimate1D& hIn) {
       vector<double> binIn;
-      for (auto b : hIn.points()) binIn.push_back(b.xMin());
-      binIn.push_back(hIn.points().back().xMax());
+      const YODA::Scatter2D s = hIn.mkScatter();
+      for (const auto& p : s.points())  binIn.push_back(p.xMin());
+      binIn.push_back(s.points().back().xMax());
       return bookECorrelator(name, h, binIn);
     }
 
@@ -650,10 +651,11 @@ namespace Rivet {
     /// @brief Book a gapped ECorrelator with two harmonic vectors
     /// @todo Rename to book(ECorrPtr, ...)
     ECorrPtr bookECorrelator(const string& name, const vector<int>& h1,
-                             const vector<int>& h2, const YODA::Scatter2D& hIn ) {
+                             const vector<int>& h2, const YODA::Estimate1D& hIn) {
       vector<double> binIn;
-      for (auto b : hIn.points()) binIn.push_back(b.xMin());
-      binIn.push_back(hIn.points().back().xMax());
+      const YODA::Scatter2D s = hIn.mkScatter();
+      for (const auto& p : s.points())  binIn.push_back(p.xMin());
+      binIn.push_back(s.points().back().xMax());
       return bookECorrelator(name, h1, h2, binIn);
     }
 
@@ -662,7 +664,7 @@ namespace Rivet {
     ///
     /// @todo Rename to book(ECorrPtr, ...)
     ECorrPtr bookECorrelatorGap(const string& name, const vector<int>& h,
-                                const YODA::Scatter2D& hIn) {
+                                const YODA::Estimate1D& hIn) {
       const vector<int> h1(h.begin(), h.begin() + h.size() / 2);
       const vector<int> h2(h.begin() + h.size() / 2, h.end());
       return bookECorrelator(name, h1, h2, hIn);
@@ -682,7 +684,7 @@ namespace Rivet {
     ///
     /// @todo Rename to book(ECorrPtr, ...)
     template<unsigned int N, unsigned int M>
-    ECorrPtr bookECorrelator(const string& name, const YODA::Scatter2D& hIn) {
+    ECorrPtr bookECorrelator(const string& name, const YODA::Estimate1D& hIn) {
       return bookECorrelator(name, Correlators::hVec(N, M), hIn);
     }
 
@@ -691,7 +693,7 @@ namespace Rivet {
     ///
     /// @todo Rename to book(ECorrPtr, ...)
     template<unsigned int N, unsigned int M>
-    ECorrPtr bookECorrelatorGap(const string& name, const YODA::Scatter2D& hIn) {
+    ECorrPtr bookECorrelatorGap(const string& name, const YODA::Estimate1D& hIn) {
       const vector<int> h = Correlators::hVec(N,M);
       const vector<int> h1(h.begin(), h.begin() + h.size() / 2);
       const vector<int> h2(h.begin() + h.size() / 2, h.end());

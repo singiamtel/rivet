@@ -58,12 +58,12 @@ namespace Rivet {
       const Jets jets  = jetpro.jetsByPt(40.0*GeV);
       if (jets.size() >= 2) {
         MSG_DEBUG("Jet multiplicity after pT > 40 GeV cut = " << jets.size());
-      } else {
-        vetoEvent;
       }
-      const double rap1 = jets[0].rap();
-      const double rap2 = jets[1].rap();
-      if (fabs(rap1) > 0.5 || fabs(rap2) > 0.5) {
+      else  vetoEvent;
+
+      const double rap1 = jets[0].absrap();
+      const double rap2 = jets[1].absrap();
+      if (rap1 > 0.5 || rap2 > 0.5) {
         vetoEvent;
       }
       MSG_DEBUG("Jet eta and pT requirements fulfilled");

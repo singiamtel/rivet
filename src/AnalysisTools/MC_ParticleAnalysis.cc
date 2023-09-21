@@ -63,13 +63,23 @@ namespace Rivet {
       }
     }
 
-    book(_h_multi_exclusive ,_pname + "_multi_exclusive", _nparts+3, -0.5, _nparts+3-0.5);
-    book(_h_multi_inclusive ,_pname + "_multi_inclusive", _nparts+3, -0.5, _nparts+3-0.5);
-    book(_h_multi_ratio, _pname + "_multi_ratio");
+    vector<int> discbins;
+    vector<std::string> ratiobins;
+    for (size_t i = 0; i < _nparts+3; ++i) {
+      discbins.push_back(i);
+      if (i) {
+        const string label = std::to_string(i) + "/" + std::to_string(i-1);
+        ratiobins.push_back(label);
+      }
+    }
 
-    book(_h_multi_exclusive_prompt ,_pname + "_multi_exclusive_prompt", _nparts+3, -0.5, _nparts+3-0.5);
-    book(_h_multi_inclusive_prompt ,_pname + "_multi_inclusive_prompt", _nparts+3, -0.5, _nparts+3-0.5);
-    book(_h_multi_ratio_prompt, _pname + "_multi_ratio_prompt");
+    book(_h_multi_exclusive ,_pname + "_multi_exclusive", discbins);
+    book(_h_multi_inclusive ,_pname + "_multi_inclusive", discbins);
+    book(_h_multi_ratio, _pname + "_multi_ratio", ratiobins);
+
+    book(_h_multi_exclusive_prompt ,_pname + "_multi_exclusive_prompt", discbins);
+    book(_h_multi_inclusive_prompt ,_pname + "_multi_inclusive_prompt", discbins);
+    book(_h_multi_ratio_prompt, _pname + "_multi_ratio_prompt", ratiobins);
   }
 
 
@@ -137,24 +147,24 @@ namespace Rivet {
     for (HistMap::value_type& it : _h_dR) scale(it.second, scaling);
 
     // Fill inclusive multi ratios
-    for (size_t i = 0; i < _h_multi_inclusive->numBins()-1; ++i) {
-      _h_multi_ratio->addPoint(i+1, 0, 0.5, 0);
+    for (size_t i = 1; i < _h_multi_inclusive->numBins(); ++i) {
+      const string label = std::to_string(i+1) + "/" + std::to_string(i);
       if (_h_multi_inclusive->bin(i).sumW() > 0.0) {
         const double ratio = _h_multi_inclusive->bin(i+1).sumW() / _h_multi_inclusive->bin(i).sumW();
         const double relerr_i = _h_multi_inclusive->bin(i).relErrW();
         const double relerr_j = _h_multi_inclusive->bin(i+1).relErrW();
         const double err = ratio * (relerr_i + relerr_j);
-        _h_multi_ratio->point(i).setY(ratio, err);
+        _h_multi_ratio->binAt(label).set(ratio, {-err,err});
       }
     }
-    for (size_t i = 0; i < _h_multi_inclusive_prompt->numBins()-1; ++i) {
-      _h_multi_ratio_prompt->addPoint(i+1, 0, 0.5, 0);
+    for (size_t i = 1; i < _h_multi_inclusive_prompt->numBins(); ++i) {
+      const string label = std::to_string(i+1) + "/" + std::to_string(i);
       if (_h_multi_inclusive_prompt->bin(i).sumW() > 0.0) {
         const double ratio = _h_multi_inclusive_prompt->bin(i+1).sumW() / _h_multi_inclusive_prompt->bin(i).sumW();
         const double relerr_i = _h_multi_inclusive_prompt->bin(i).relErrW();
         const double relerr_j = _h_multi_inclusive_prompt->bin(i+1).relErrW();
         const double err = ratio * (relerr_i + relerr_j);
-        _h_multi_ratio_prompt->point(i).setY(ratio, err);
+        _h_multi_ratio_prompt->binAt(label).set(ratio, {-err,err});
       }
     }
 

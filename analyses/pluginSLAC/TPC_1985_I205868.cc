@@ -52,7 +52,7 @@ namespace Rivet {
       // Final state of unstable particles to get particle spectra
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
 
-      for( const Particle& p : ufs.particles()) {
+      for (const Particle& p : ufs.particles()) {
         const int id = p.abspid();
         double xE = p.E()/meanBeamMom;
         switch (id) {
@@ -62,7 +62,7 @@ namespace Rivet {
         case 111: // Neutral pions
           _histPi->fill(xE);
           break;
-	}
+        }
       }
 
     }

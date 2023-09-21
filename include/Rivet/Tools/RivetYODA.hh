@@ -8,6 +8,8 @@
 #include "YODA/Counter.h"
 #include "YODA/Histo.h"
 #include "YODA/Profile.h"
+#include "YODA/Estimate0D.h"
+#include "YODA/BinnedEstimate.h"
 #include "YODA/Scatter.h"
 
 // Use execinfo for backtrace if available
@@ -31,17 +33,24 @@ namespace YODA {
   template<typename ... AxisT>
   using BinnedProfilePtr = BinnedDbnPtr<sizeof...(AxisT)+1, AxisT...>;
 
+  template<typename ... AxisT>
+  using BinnedEstimatePtr = std::shared_ptr<YODA::BinnedEstimate<AxisT...>>;
+
   template<size_t N>
   using ScatterNDPtr = std::shared_ptr<YODA::ScatterND<N>>;
 
   using AnalysisObjectPtr = std::shared_ptr<YODA::AnalysisObject>;
   using CounterPtr = std::shared_ptr<YODA::Counter>;
+  using Estimate0DPtr = std::shared_ptr<YODA::Estimate0D>;
   using Histo1DPtr = BinnedHistoPtr<double>;
   using Histo2DPtr = BinnedHistoPtr<double,double>;
   using Histo3DPtr = BinnedHistoPtr<double,double,double>;
   using Profile1DPtr = BinnedProfilePtr<double>;
   using Profile2DPtr = BinnedProfilePtr<double,double>;
   using Profile3DPtr = BinnedProfilePtr<double,double,double>;
+  using Estimate1DPtr = BinnedEstimatePtr<double>;
+  using Estimate2DPtr = BinnedEstimatePtr<double,double>;
+  using Estimate3DPtr = BinnedEstimatePtr<double,double,double>;
   using Scatter1DPtr = ScatterNDPtr<1>;
   using Scatter2DPtr = ScatterNDPtr<2>;
   using Scatter3DPtr = ScatterNDPtr<3>;
@@ -204,6 +213,7 @@ namespace Rivet {
 
   private:
 
+    using YODA::AnalysisObject::operator=;
     Fills<YAO> _fills;
 
   };
@@ -533,6 +543,53 @@ namespace Rivet {
   };
 
 
+  /// FillCollector specialisation for Estimate
+  template<>
+  class FillCollector<YODA::Estimate0D> : public YODA::Estimate0D {
+  public:
+
+    using YAO = YODA::Estimate0D;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    ///
+    /// The Estimate isn't actually needed here:
+    /// We call the YAO nullary constructor for
+    /// performance reasons but still require
+    /// the pointer argument to harmonise the
+    /// FillCollector constructors.
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->path()) { }
+
+  private:
+
+    using YODA::AnalysisObject::operator=;
+
+  };
+
+  /// FillCollector specialisation for BinnedEstimate
+  template<typename ... AxisT>
+  class FillCollector<YODA::BinnedEstimate<AxisT...>>
+         : public YODA::BinnedEstimate<AxisT...> {
+  public:
+
+    using YAO = YODA::BinnedEstimate<AxisT...>;
+    using Ptr = shared_ptr<FillCollector<YAO>>;
+
+    FillCollector() : YAO() { }
+
+    /// Constructor
+    ///
+    /// The BinnedEstimate isn't actually needed here:
+    /// We call the YAO nullary constructor for
+    /// performance reasons but still require
+    /// the pointer argument to harmonise the
+    /// FillCollector constructors.
+    FillCollector(typename YAO::Ptr yao) : YAO(yao->path()) { }
+
+  };
+
   /// FillCollector specialisation for ScatterND
   template <size_t N>
   class FillCollector<YODA::ScatterND<N>> : public YODA::ScatterND<N> {
@@ -680,103 +737,103 @@ namespace Rivet {
           subwindows.template axis<I>() = FillAxisT({ std::get<I>(subevents[0].first) });
           return;
         }
+        else { // continupus axes need windowing
+          edgesHi[I].resize(nFills);
+          edgesLo[I].resize(nFills);
 
-        // continupus axes need windowing
-        edgesHi[I].resize(nFills);
-        edgesLo[I].resize(nFills);
+          if constexpr(I < YAO::BinningT::Dimension::value) {
+            // this fill axis is binned: window sizes will depend on bin width
+            const auto& axis = ao->binning().template axis<I>();
+            size_t over = 0, under = 0;
+            const double edgeMax = ao->template max<I>();
+            const double edgeMin = ao->template min<I>();
+            const size_t binLast = axis.numBins(); // index of last visible bin
 
-        if constexpr(I < YAO::BinningT::Dimension::value) {
-          // this fill axis is binned: window sizes will depend on bin width
-          const auto& axis = ao->binning().template axis<I>();
-          size_t over = 0, under = 0;
-          const double edgeMax = ao->template max<I>();
-          const double edgeMin = ao->template min<I>();
-          const size_t binLast = axis.numBins(); // index of last visible bin
+            for (size_t i = 0; i < nFills; ++i) {
+              const double edge = get<I>(subevents[i].first);
+              size_t idx = axis.index(edge);
+              if (edge >= edgeMax) {
+                if (edge > edgeMax) ++over;
+                idx = binLast; // cut off at highest visible bin
+              }
+              else if (edge < edgeMin) {
+                ++under;
+                idx = 1; // cut off at lowest visible bin
+              }
+              // find index of closest neighbouring bin
+              size_t ibn = idx;
+              if (edge > axis.mid(idx)) {
+                if (idx != binLast) ++ibn;
+              }
+              else {
+                if (idx != 1) --ibn;
+              }
 
-          for (size_t i = 0; i < nFills; ++i) {
-            const double edge = get<I>(subevents[i].first);
-            size_t idx = axis.index(edge);
-            if (edge >= edgeMax) {
-              if (edge > edgeMax) ++over;
-              idx = binLast; // cut off at highest visible bin
+              // construct rectangular windows of with = 2*delta
+              const double ibw = axis.width(idx) < axis.width(ibn)? idx : ibn;
+              if ( fsmear > 0.0 ) {
+                const double delta = 0.5*fsmear*axis.width(ibw);
+                edgesHi[I][i] = edge + delta;
+                edgesLo[I][i] = edge - delta;
+              }
+              else {
+                const double delta = 0.5*axis.width(ibw);
+                if (edge > edgeMax) {
+                  edgesHi[I][i] = max(edgeMax + 2*delta, edge + delta);
+                  edgesLo[I][i] = max(edgeMax, edge - delta);
+                }
+                else if (edge < edgeMin) {
+                  edgesHi[I][i] = min(edgeMin, edge + delta);
+                  edgesLo[I][i] = min(edgeMin - 2*delta, edge - delta);
+                }
+                else {
+                  edgesHi[I][i] = axis.max(idx);
+                  edgesLo[I][i] = axis.min(idx);
+                }
+              }
             }
-            else if (edge < edgeMin) {
-              ++under;
-              idx = 1; // cut off at lowest visible bin
+            for (size_t i = 0; i < nFills; ++i) {
+              const double wsize = edgesHi[I][i] - edgesLo[I][i];
+              if (over == nFills && edgesLo[I][i] < edgeMax && edgesHi[I][i] > edgeMax) {
+                edgesHi[I][i] = edgeMax + wsize;
+                edgesLo[I][i] = edgeMax;
+              }
+              else if (over == 0 && edgesLo[I][i] < edgeMax && edgesHi[I][i] > edgeMax) {
+                edgesLo[I][i] = edgeMax - wsize;
+                edgesHi[I][i] = edgeMax;
+              }
+              else if (under == nFills && edgesLo[I][i] < edgeMin && edgesHi[I][i] > edgeMin) {
+                edgesLo[I][i] = edgeMin - wsize;
+                edgesHi[I][i] = edgeMin;
+              }
+              else if (under == 0 && edgesLo[I][i] < edgeMin && edgesHi[I][i] > edgeMin) {
+                edgesHi[I][i] = edgeMin + wsize;
+                edgesLo[I][i] = edgeMin;
+              }
             }
-            // find index of closest neighbouring bin
-            size_t ibn = idx;
-            if (edge > axis.mid(idx)) {
-              if (idx != binLast) ++ibn;
-            }
-            else {
-              if (idx != 1) --ibn;
-            }
-
-            // construct rectangular windows of with = 2*delta
-            const double ibw = axis.width(idx) < axis.width(ibn)? idx : ibn;
-            if ( fsmear > 0.0 ) {
-              const double delta = 0.5*fsmear*axis.width(ibw);
+          } // end of constexpr-check for binned axes
+          else {
+            // this fill axis is unbinned (e.g. in Profiles)
+            for (size_t i = 0; i < nFills; ++i) {
+              // What's a good reference for the window size along
+              // an unbinned axes? Picking 20% of the FP edge as
+              // the window size here - is that reasonable?
+              // @note No smearing needed here since
+              // there are no bin edges along this axes
+              const double edge = get<I>(subevents[i].first);
+              const double delta = 0.1*fabs(edge);
               edgesHi[I][i] = edge + delta;
               edgesLo[I][i] = edge - delta;
             }
-            else {
-              const double delta = 0.5*axis.width(ibw);
-              if (edge > edgeMax) {
-                edgesHi[I][i] = max(edgeMax + 2*delta, edge + delta);
-                edgesLo[I][i] = max(edgeMax, edge - delta);
-              }
-              else if (edge < edgeMin) {
-                edgesHi[I][i] = min(edgeMin, edge + delta);
-                edgesLo[I][i] = min(edgeMin - 2*delta, edge - delta);
-              }
-              else {
-                edgesHi[I][i] = axis.max(idx);
-                edgesLo[I][i] = axis.min(idx);
-              }
-            }
           }
-          for (size_t i = 0; i < nFills; ++i) {
-            const double wsize = edgesHi[I][i] - edgesLo[I][i];
-            if (over == nFills && edgesLo[I][i] < edgeMax && edgesHi[I][i] > edgeMax) {
-              edgesHi[I][i] = edgeMax + wsize;
-              edgesLo[I][i] = edgeMax;
-            }
-            else if (over == 0 && edgesLo[I][i] < edgeMax && edgesHi[I][i] > edgeMax) {
-              edgesLo[I][i] = edgeMax - wsize;
-              edgesHi[I][i] = edgeMax;
-            }
-            else if (under == nFills && edgesLo[I][i] < edgeMin && edgesHi[I][i] > edgeMin) {
-              edgesLo[I][i] = edgeMin - wsize;
-              edgesHi[I][i] = edgeMin;
-            }
-            else if (under == 0 && edgesLo[I][i] < edgeMin && edgesHi[I][i] > edgeMin) {
-              edgesHi[I][i] = edgeMin + wsize;
-              edgesLo[I][i] = edgeMin;
-            }
-          }
-        } // end of constexpr-check for binned axes
-        else {
-          // this fill axis is unbinned (e.g. in Profiles)
-          for (size_t i = 0; i < nFills; ++i) {
-            // What's a good reference for the window size along
-            // an unbinned axes? Picking 20% of the FP edge as
-            // the window size here - is that reasonable?
-            // @note No smearing needed here since
-            // there are no bin edges along this axes
-            const double edge = get<I>(subevents[i].first);
-            const double delta = 0.1*fabs(edge);
-            edgesHi[I][i] = edge + delta;
-            edgesLo[I][i] = edge - delta;
-          }
-        }
-        // create CAxis with subwindows from the set of window edges
-        vector<double> windowEdges;
-        std::copy(edgesLo[I].begin(), edgesLo[I].end(), std::back_inserter(windowEdges));
-        std::copy(edgesHi[I].begin(), edgesHi[I].end(), std::back_inserter(windowEdges));
-        std::sort(windowEdges.begin(), windowEdges.end());
-        windowEdges.erase( std::unique(windowEdges.begin(), windowEdges.end()), windowEdges.end() );
-        subwindows.template axis<I>() = FillAxisT(windowEdges);
+          // create CAxis with subwindows from the set of window edges
+          vector<double> windowEdges;
+          std::copy(edgesLo[I].begin(), edgesLo[I].end(), std::back_inserter(windowEdges));
+          std::copy(edgesHi[I].begin(), edgesHi[I].end(), std::back_inserter(windowEdges));
+          std::sort(windowEdges.begin(), windowEdges.end());
+          windowEdges.erase( std::unique(windowEdges.begin(), windowEdges.end()), windowEdges.end() );
+          subwindows.template axis<I>() = FillAxisT(windowEdges);
+        } // end of if constexpr isContinuous
       };
       // execute for each fill dimension
       MetaUtils::staticFor<YAO::FillDimension::value>(constructWindows);
@@ -792,7 +849,7 @@ namespace Rivet {
         if (std::find(overflows.cbegin(), itEnd, i) != itEnd)  continue;
 
         const auto coords = subwindows.edgeTuple(i);
-        const double subwindowArea = subwindows.volume(i);
+        const double subwindowArea = subwindows.dVol(i);
         size_t nSubfills = 0;
         double windowFrac = 0.;
         valarray<double> sumw(0.0, weights[0].size()); // one per multiweight
@@ -801,7 +858,7 @@ namespace Rivet {
           double windowArea = 1.0;
           auto checkSubwindowOverlap = [&](auto I) {
            using isContinuous = typename SubwindowT::template is_CAxis<I>;
-            if (isContinuous::value) {
+            if constexpr (isContinuous::value) {
               const double edge = std::get<I>(coords);
               pass &= (edgesLo[I][j] <= edge && edge <= edgesHi[I][j]);
               windowArea *= edgesHi[I][j] - edgesLo[I][j];
@@ -1297,27 +1354,38 @@ namespace Rivet {
   template<typename... AxisT>
   using BinnedProfilePtr = BinnedDbnPtr<sizeof...(AxisT)+1, AxisT...>;
 
-  template<size_t N>
-  using ScatterNDPtr = MultiplexPtr<Multiplexer<YODA::ScatterND<N>>>;
+  template<typename... AxisT>
+  using BinnedEstimatePtr = MultiplexPtr<Multiplexer<YODA::BinnedEstimate<AxisT...>>>;
 
-  using CounterPtr   = MultiplexPtr<Multiplexer<YODA::Counter>>;
-  using Histo1DPtr   = BinnedHistoPtr<double>;
-  using Histo2DPtr   = BinnedHistoPtr<double,double>;
-  using Histo3DPtr   = BinnedHistoPtr<double,double,double>;
-  using Profile1DPtr = BinnedProfilePtr<double>;
-  using Profile2DPtr = BinnedProfilePtr<double,double>;
-  using Profile3DPtr = BinnedProfilePtr<double,double,double>;
-  using Scatter1DPtr = ScatterNDPtr<1>;
-  using Scatter2DPtr = ScatterNDPtr<2>;
-  using Scatter3DPtr = ScatterNDPtr<3>;
+  template<size_t N>
+  using ScatterNDPtr  = MultiplexPtr<Multiplexer<YODA::ScatterND<N>>>;
+
+  using CounterPtr    = MultiplexPtr<Multiplexer<YODA::Counter>>;
+  using Estimate0DPtr = MultiplexPtr<Multiplexer<YODA::Estimate0D>>;
+  using Histo1DPtr    = BinnedHistoPtr<double>;
+  using Histo2DPtr    = BinnedHistoPtr<double,double>;
+  using Histo3DPtr    = BinnedHistoPtr<double,double,double>;
+  using Profile1DPtr  = BinnedProfilePtr<double>;
+  using Profile2DPtr  = BinnedProfilePtr<double,double>;
+  using Profile3DPtr  = BinnedProfilePtr<double,double,double>;
+  using Estimate1DPtr = BinnedEstimatePtr<double>;
+  using Estimate2DPtr = BinnedEstimatePtr<double,double>;
+  using Estimate3DPtr = BinnedEstimatePtr<double,double,double>;
+  using Scatter1DPtr  = ScatterNDPtr<1>;
+  using Scatter2DPtr  = ScatterNDPtr<2>;
+  using Scatter3DPtr  = ScatterNDPtr<3>;
 
   using YODA::Counter;
+  using YODA::Estimate0D;
   using YODA::Histo1D;
   using YODA::Histo2D;
   using YODA::Histo3D;
   using YODA::Profile1D;
   using YODA::Profile2D;
   using YODA::Profile3D;
+  using YODA::Estimate1D;
+  using YODA::Estimate2D;
+  using YODA::Estimate3D;
   using YODA::Scatter1D;
   using YODA::Scatter2D;
   using YODA::Scatter3D;
@@ -1342,12 +1410,23 @@ namespace Rivet {
 
 
   /// Traits class to access the type of the AnalysisObject in the reference files.
+  /// @todo MIGRATE TO ESTIMATES
   template<typename T>
   struct ReferenceTraits { };
 
   template<>
-  struct ReferenceTraits<Counter> {
-    using RefT = YODA::Counter;
+  struct ReferenceTraits<YODA::Counter> {
+    using RefT = YODA::Estimate0D;
+  };
+
+  template<>
+  struct ReferenceTraits<YODA::Estimate0D> {
+    using RefT = YODA::Estimate0D;
+  };
+
+  template<typename... AxisT>
+  struct ReferenceTraits<YODA::BinnedEstimate<AxisT...>> {
+    using RefT = YODA::BinnedEstimate<AxisT...>;
   };
 
   template<size_t DbnN, typename... AxisT>
@@ -1372,6 +1451,14 @@ namespace Rivet {
   }
   //
   inline bool bookingCompatible(YODA::CounterPtr, YODA::CounterPtr) {
+    return true;
+  }
+  //
+  inline bool bookingCompatible(Estimate0DPtr, Estimate0DPtr) {
+    return true;
+  }
+  //
+  inline bool bookingCompatible(YODA::Estimate0DPtr, YODA::Estimate0DPtr) {
     return true;
   }
   //

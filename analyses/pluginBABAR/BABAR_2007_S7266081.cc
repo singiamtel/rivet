@@ -34,10 +34,10 @@ namespace Rivet {
       book(_weight_KpiK, "/TMP/weight_KpiK");
       book(_weight_KKK, "/TMP/weight_KKK");
 
-      book(tmp11, 11, 1, 1, true);
-      book(tmp12, 12, 1, 1, true);
-      book(tmp13, 13, 1, 1, true);
-      book(tmp14, 14, 1, 1, true);
+      book(tmp11, 11, 1, 1);
+      book(tmp12, 12, 1, 1);
+      book(tmp13, 13, 1, 1);
+      book(tmp14, 14, 1, 1);
     }
 
 
@@ -115,16 +115,20 @@ namespace Rivet {
         scale(_hist_KKK_KKK      , 1.0 / *_weight_KKK);
         scale(_hist_KKK_KK       , 0.5 / *_weight_KKK);
       }
-      tmp11->point(0).setY(100*_weight_pipipi->val()/_weight_total->val(), 100*sqrt(double(_weight_pipipi->val()))/_weight_total->val());
-      tmp12->point(0).setY(100*_weight_Kpipi->val()/_weight_total->val(), 100*sqrt(double(_weight_Kpipi->val()))/_weight_total->val());
-      tmp13->point(0).setY(100*_weight_KpiK->val()/_weight_total->val(), 100*sqrt(double(_weight_KpiK->val()))/_weight_total->val());
-      tmp14->point(0).setY(100*_weight_KKK->val()/_weight_total->val(), 100*sqrt(double(_weight_KKK->val()))/_weight_total->val());
+      tmp11->bin(1).set(100*_weight_pipipi->val()/_weight_total->val(),
+                        100*sqrt(double(_weight_pipipi->val()))/_weight_total->val());
+      tmp12->bin(1).set(100*_weight_Kpipi->val()/_weight_total->val(),
+                        100*sqrt(double(_weight_Kpipi->val()))/_weight_total->val());
+      tmp13->bin(1).set(100*_weight_KpiK->val()/_weight_total->val(),
+                        100*sqrt(double(_weight_KpiK->val()))/_weight_total->val());
+      tmp14->bin(1).set(100*_weight_KKK->val()/_weight_total->val(),
+                        100*sqrt(double(_weight_KKK->val()))/_weight_total->val());
     }
 
 
   private:
 
-    Scatter2DPtr tmp11, tmp12, tmp13, tmp14;
+    Estimate1DPtr tmp11, tmp12, tmp13, tmp14;
 
     // Histograms
     Histo1DPtr _hist_pipipi_pipipi, _hist_pipipi_pipi;

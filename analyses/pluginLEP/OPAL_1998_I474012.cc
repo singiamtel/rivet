@@ -23,21 +23,21 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_h_El   , "El",   45,0.,45.0);
-      book(_h_Ev   , "Ev",   45,0.,45.0);
-      book(_h_ratio, "ratio",20,0.,10.0);
+      book(_h_El   , "El",   45, 0.,45.0);
+      book(_h_Ev   , "Ev",   45, 0.,45.0);
+      book(_h_ratio, "ratio",20, 0.,10.0);
 
     }
 
     void findDecayProducts(Particle p, Particles & lep, Particles & nu) {
-      for(const Particle & child : p.children()) {
-	if(PID::isHadron(child.pid())) continue;
-	if(child.abspid()==11 or child.abspid()==13)
-	  lep.push_back(child);
-	else if(child.abspid()==12 or child.abspid()==14)
-	  nu.push_back(child);
-	else if(child.abspid()!=15)
-	  findDecayProducts(child,lep,nu);
+      for (const Particle & child : p.children()) {
+        if (PID::isHadron(child.pid())) continue;
+        if (child.abspid()==11 or child.abspid()==13)
+          lep.push_back(child);
+        else if (child.abspid()==12 or child.abspid()==14)
+          nu.push_back(child);
+        else if (child.abspid()!=15)
+          findDecayProducts(child,lep,nu);
       }
     }
 
@@ -46,12 +46,12 @@ namespace Rivet {
       const FinalState& ufs = apply<UnstableParticles>(event, "UFS");
       // loop over weakly decaying b-baryons
       for (const Particle& p : ufs.particles(Cuts::abspid==5122)) {
-	Particles lep,nu;
-	findDecayProducts(p,lep,nu);
-	if(lep.size()!=1 || nu.size()!=1) continue;
-	_h_El   ->fill(lep[0].momentum().t());
-	_h_Ev   ->fill(nu [0].momentum().t());
-	_h_ratio->fill(nu [0].momentum().t()/lep[0].momentum().t());
+        Particles lep,nu;
+        findDecayProducts(p,lep,nu);
+        if(lep.size()!=1 || nu.size()!=1) continue;
+        _h_El   ->fill(lep[0].momentum().t());
+        _h_Ev   ->fill(nu [0].momentum().t());
+        _h_ratio->fill(nu [0].momentum().t()/lep[0].momentum().t());
       }
     }
 
@@ -61,19 +61,19 @@ namespace Rivet {
       normalize(_h_El   );
       normalize(_h_Ev   );
       normalize(_h_ratio);
-      if(_h_El->effNumEntries()!=0. and _h_Ev->effNumEntries()!=0.) {
-	double Ev  = _h_Ev->xMean();
-	double El  = _h_El->xMean();
-	double dEv = _h_Ev->xStdErr();
-	double dEl = _h_El->xStdErr();
-	double ratio = Ev/El;
-	double dr    = (El*dEv-Ev*dEl)/sqr(El);
-	double rho = 0.091;
-	double  P = 7. - 20./(2. + ratio) + 10.*rho*ratio*(-4. + 3.*ratio)/sqr(2.+ratio);
-	double dP = (20.*(2. + ratio + rho*(-4. + 8.*ratio)))/pow(2.+ratio,3)*dr;
-       	Scatter2DPtr h_pol;
-	book(h_pol, 1,1,1);
-       	h_pol->addPoint(91.2, P, make_pair(0.5,0.5),make_pair(dP,dP) );
+      if (_h_El->effNumEntries()!=0. and _h_Ev->effNumEntries()!=0.) {
+        const double Ev  = _h_Ev->xMean();
+        const double El  = _h_El->xMean();
+        const double dEv = _h_Ev->xStdErr();
+        const double dEl = _h_El->xStdErr();
+        const double ratio = Ev/El;
+        const double dr    = (El*dEv-Ev*dEl)/sqr(El);
+        const double rho = 0.091;
+        const double  P = 7. - 20./(2. + ratio) + 10.*rho*ratio*(-4. + 3.*ratio)/sqr(2.+ratio);
+        const double dP = (20.*(2. + ratio + rho*(-4. + 8.*ratio)))/pow(2.+ratio,3)*dr;
+       	BinnedEstimatePtr<string> h_pol;
+        book(h_pol, 1,1,1);
+       	h_pol->bin(1).set(P, dP);
       }
     }
 

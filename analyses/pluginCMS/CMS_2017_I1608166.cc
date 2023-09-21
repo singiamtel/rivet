@@ -36,16 +36,28 @@ namespace Rivet {
       book(_s["p~/p"],    "d45-x01-y01");
 
       // k/pi and p/pi ratios
-      book(_hkpi[PID::PIPLUS], "TMP/hkpi/pi", refData(46, 1, 1));
-      book(_hkpi[PID::KPLUS],  "TMP/hkpi/k",  refData(46, 1, 1));
-      book(_hppi[PID::PIPLUS], "TMP/hppi/pi", refData(47, 1, 1));
-      book(_hppi[PID::PROTON], "TMP/hppi/p",  refData(47, 1, 1));
+      book(_hkpi[PID::PIPLUS], "TMP/hkpi/pi", refData<YODA::BinnedEstimate<string>>(46, 1, 1));
+      book(_hkpi[PID::KPLUS],  "TMP/hkpi/k",  refData<YODA::BinnedEstimate<string>>(46, 1, 1));
+      book(_hppi[PID::PIPLUS], "TMP/hppi/pi", refData<YODA::BinnedEstimate<string>>(47, 1, 1));
+      book(_hppi[PID::PROTON], "TMP/hppi/p",  refData<YODA::BinnedEstimate<string>>(47, 1, 1));
       book(_s["k/pi"],    "d46-x01-y01");
       book(_s["p/pi"],    "d47-x01-y01");
+
+      _axes[PID::PIPLUS] = YODA::Axis<double>(22, 0.1, 1.2);
+      _axes[PID::KPLUS]  = YODA::Axis<double>(17, 0.2, 1.05);
+      _axes[PID::PROTON] = YODA::Axis<double>(26, 0.4, 1.7);
+      _axes[4] = YODA::Axis<double>(17, 0.2, 1.05);
+      _axes[5] = YODA::Axis<double>(16, 0.4, 1.2);
     }
 
 
     void analyze(const Event& event) {
+
+      if (_edges[PID::PIPLUS].empty())  _edges[PID::PIPLUS] = _h[PID::PIPLUS]->xEdges();
+      if (_edges[PID::KPLUS].empty())   _edges[PID::KPLUS]  = _h[PID::KPLUS]->xEdges();
+      if (_edges[PID::PROTON].empty())  _edges[PID::PROTON] = _h[PID::PROTON]->xEdges();
+      if (_edges[4].empty())  _edges[4] = _hkpi[PID::PIPLUS]->xEdges();
+      if (_edges[5].empty())  _edges[5] = _hppi[PID::PIPLUS]->xEdges();
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       for (const Particle& p : cfs.particles()) {
@@ -62,16 +74,28 @@ namespace Rivet {
 
         if (theParticles.find(p.pid()) != theParticles.end()) {
           // fill pt spectra
-          _h[p.pid()]->fill(p.pt() / GeV);
+          _h[p.pid()]->fill(map2string(p.pt() / GeV, p.abspid()));
           // fill tmp histos for ratios
-          if (p.abspid() != PID::PROTON)
-            _hkpi[p.abspid()]->fill(p.pt() / GeV);
-          if (p.abspid() != PID::KPLUS)
-            _hppi[p.abspid()]->fill(p.pt() / GeV);
+          if (p.abspid() != PID::PROTON) {
+            _hkpi[p.abspid()]->fill(map2string(p.pt() / GeV, 4, true));
+          }
+          if (p.abspid() != PID::KPLUS) {
+            _hppi[p.abspid()]->fill(map2string(p.pt() / GeV, 4, true));
+          }
         }
-
       }
 
+    }
+
+    string map2string(const double value, const int type, const bool isRatio = false) const {
+      int id = type;
+      if (isRatio && id == 4)  id = PID::KPLUS;
+      else if (isRatio && id == 5)  id = PID::PROTON;
+      const size_t idx = _axes.at(id).index(value);
+      if (idx && idx <= _edges.at(id).size()) {
+        return _edges.at(id)[idx-1];
+      }
+      return "OTHER";
     }
 
 
@@ -86,14 +110,23 @@ namespace Rivet {
 
       scale(_h, 1./2./sumOfWeights());
 
+      for (auto& item : _h) {
+        const auto& axis = _axes.at( fabs(item.first) );
+        for (auto& b : item.second->bins()) {
+          b.scaleW( 1.0/axis.width(b.index()) );
+        }
+      }
+
     }
 
 
     set<int> theParticles = {PID::PIPLUS, PID::KPLUS, PID::PROTON, PID::PIMINUS, PID::KMINUS, PID::PBAR};
 
-    map<int, Histo1DPtr> _h;
-    map<int, Histo1DPtr> _hkpi, _hppi;
-    map<string, Scatter2DPtr> _s;
+    map<int, BinnedHistoPtr<string>> _h;
+    map<int, BinnedHistoPtr<string>> _hkpi, _hppi;
+    map<string, BinnedEstimatePtr<string>> _s;
+    map<int, YODA::Axis<double>> _axes;
+    map<int, vector<string>> _edges;
 
   };
 

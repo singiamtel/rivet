@@ -135,91 +135,82 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<15;++ix) {
-	unsigned int ymax=2;
+      for (unsigned int ix=1;ix<15;++ix) {
+        unsigned int ymax=2;
        	double sigma(0.),error(0.);
        	if(ix<=4) {
        	  sigma = _nOmegaPi->val();
        	  error = _nOmegaPi->err();
        	}
-	else if(ix==5) {
-	  sigma = _n3Pi->val();
-	  error = _n3Pi->err();
-	}
-	else if(ix==6) {
-	  sigma = _nEtaPiPi->val();
-	  error = _nEtaPiPi->err();
-	}
-	else if(ix==7) {
-	  sigma = _n4PiC->val();
-	  error = _n4PiC->err();
-	}
-	else if(ix==8) {
-	  sigma = _n4PiN->val();
-	  error = _n4PiN->err();
-	}
-	else if(ix==9) {
-	  continue;
-	}
-	else if(ix==10) {
-	  ymax=5;
-	}
-	else if(ix==11) {
-	  sigma = _n2Pi->val();
-	  error = _n2Pi->err();
-	}
-	else if(ix==12) {
-	  sigma = _nKC->val();
-	  error = _nKC->err();
-	}
-	else if(ix==13) {
-	  sigma = _nKN->val();
-	  error = _nKN->err();
-	}
-	else if(ix==14) {
-	  sigma = _n5Pi->val();
-	  error = _n5Pi->err();
-	}
-      	sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      	error *= crossSection()/ sumOfWeights() /nanobarn;
-	for(unsigned int iy=1;iy<ymax;++iy) {
-	  if(ix==10) {
-	    if(iy==1) {
-	      sigma = _n4PiC->val();
-	      error = _n4PiC->err();
-	    }
-	    else if(iy==2) {
-	      sigma = _n4PiN->val();
-	      error = _n4PiN->err();
-	    }
-	    else if(iy==3) {
-	      sigma = _nOmegaPi->val();
-	      error = _nOmegaPi->err();
-	    }
-	    else {
-	      sigma = _n3Pi->val();
-	      error = _n3Pi->err();
-	    }
-	    sigma *= crossSection()/ sumOfWeights() /nanobarn;
-	    error *= crossSection()/ sumOfWeights() /nanobarn;
-	  }
-	  Scatter2D temphisto(refData(ix, 1, iy));
-	  Scatter2DPtr mult;
-	  book(mult, ix, 1, iy);
-	  for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	    const double x  = temphisto.point(b).x();
-	    pair<double,double> ex = temphisto.point(b).xErrs();
-	    pair<double,double> ex2 = ex;
-	    if(ex2.first ==0.) ex2. first=0.0001;
-	    if(ex2.second==0.) ex2.second=0.0001;
-	    if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	      mult->addPoint(x, sigma, ex, make_pair(error,error));
-	    }
-	    else {
-	      mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	    }
-	  }
-	}
+        else if(ix==5) {
+          sigma = _n3Pi->val();
+          error = _n3Pi->err();
+        }
+        else if(ix==6) {
+          sigma = _nEtaPiPi->val();
+          error = _nEtaPiPi->err();
+        }
+        else if(ix==7) {
+          sigma = _n4PiC->val();
+          error = _n4PiC->err();
+        }
+        else if(ix==8) {
+          sigma = _n4PiN->val();
+          error = _n4PiN->err();
+        }
+        else if(ix==9) {
+          continue;
+        }
+        else if(ix==10) {
+          ymax=5;
+        }
+        else if(ix==11) {
+          sigma = _n2Pi->val();
+          error = _n2Pi->err();
+        }
+        else if(ix==12) {
+          sigma = _nKC->val();
+          error = _nKC->err();
+        }
+        else if(ix==13) {
+          sigma = _nKN->val();
+          error = _nKN->err();
+        }
+        else if(ix==14) {
+          sigma = _n5Pi->val();
+          error = _n5Pi->err();
+        }
+        sigma *= crossSection()/ sumOfWeights() /nanobarn;
+        error *= crossSection()/ sumOfWeights() /nanobarn;
+        for(unsigned int iy=1;iy<ymax;++iy) {
+          if(ix==10) {
+            if(iy==1) {
+              sigma = _n4PiC->val();
+              error = _n4PiC->err();
+            }
+            else if(iy==2) {
+              sigma = _n4PiN->val();
+              error = _n4PiN->err();
+            }
+            else if(iy==3) {
+              sigma = _nOmegaPi->val();
+              error = _nOmegaPi->err();
+            }
+            else {
+              sigma = _n3Pi->val();
+              error = _n3Pi->err();
+            }
+            sigma *= crossSection()/ sumOfWeights() /nanobarn;
+            error *= crossSection()/ sumOfWeights() /nanobarn;
+          }
+          Estimate1DPtr mult;
+          book(mult, ix, 1, iy);
+          for (auto& b : mult->bins()) {
+            if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+              b.set(sigma, error);
+            }
+          }
+        }
       }
     }
 

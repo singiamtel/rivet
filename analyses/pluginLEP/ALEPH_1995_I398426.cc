@@ -87,14 +87,14 @@ namespace Rivet {
     pair<double,double> calcRho(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
-	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double ai = 0.125*( -bin.xMin()*(3.+sqr(bin.xMin())) + bin.xMax()*(3.+sqr(bin.xMax())));
-	double bi = 0.375*( -bin.xMin()*(1.-sqr(bin.xMin())) + bin.xMax()*(1.-sqr(bin.xMax())));
-	double Ei = bin.errW();
-	sum1 += sqr(bi/Ei);
-	sum2 += bi/sqr(Ei)*(Oi-ai);
+      for (const auto& bin : hist->bins() ) {
+        double Oi = bin.sumW();
+        if(Oi==0.) continue;
+        double ai = 0.125*( -bin.xMin()*(3.+sqr(bin.xMin())) + bin.xMax()*(3.+sqr(bin.xMax())));
+        double bi = 0.375*( -bin.xMin()*(1.-sqr(bin.xMin())) + bin.xMax()*(1.-sqr(bin.xMax())));
+        double Ei = bin.errW();
+        sum1 += sqr(bi/Ei);
+        sum2 += bi/sqr(Ei)*(Oi-ai);
       }
       return make_pair(sum2/sum1,sqrt(1./sum1));
     }
@@ -105,17 +105,16 @@ namespace Rivet {
       scale(_h_ctheta1,1./_c_hadron->val());
       normalize(_h_ctheta2);
       pair<double,double> rho = calcRho(_h_ctheta2);
-      Scatter2DPtr h_rho;
+      Estimate1DPtr h_rho;
       book(h_rho,2,1,1);
-      h_rho->addPoint(0.5, rho.first, make_pair(0.5,0.5),
-		      make_pair(rho.second,rho.second) );
-      Scatter2DPtr h1;
+      h_rho->bin(1).set(rho.first, rho.second);
+      Estimate1DPtr h1;
       book(h1,1,1,1);
       Counter ctemp = *_c_bStar+*_c_B;
       // no of B*/B+B*
       double val = _c_bStar->val()/ctemp.val();
       double err = val*sqrt(sqr(_c_bStar->err()/_c_bStar->val())+sqr(ctemp.err()/ctemp.val()));
-      h1->addPoint(0.5,val,make_pair(0.5,0.5),make_pair(err,err) );
+      h1->bin(1).set(val, err);
     }
 
     /// @}

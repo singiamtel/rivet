@@ -1,7 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 
 namespace Rivet {
@@ -14,10 +13,7 @@ namespace Rivet {
     /// @{
 
     /// Constructor
-    ATLAS_2012_I1082936()
-      : Analysis("ATLAS_2012_I1082936")
-    {
-    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1082936);
 
     /// @}
 
@@ -43,27 +39,28 @@ namespace Rivet {
 
 
       // Histogram booking copied from the previous analysis
-      double ybins[] = { 0.0, 0.3, 0.8, 1.2, 2.1, 2.8, 3.6, 4.4 };
-      double ystarbins[] = { 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.4};
+      const vector<double> ybins{ 0.0, 0.3, 0.8, 1.2, 2.1, 2.8, 3.6, 4.4 };
+      const vector<double> ystarbins{ 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.4};
 
       size_t ptDsOffset(0), massDsOffset(2);
       for (size_t alg = 0; alg < 2; ++alg) {
-        for (size_t i = 0; i < 7; ++i) {
-          Histo1DPtr tmp;
-          _pThistos[alg].add(ybins[i], ybins[i+1], book(tmp, 1 + ptDsOffset, 1, i+1));
+        book(_pThistos[alg], ybins);
+        for (auto& b : _pThistos[alg]->bins()) {
+          book(b, 1+ptDsOffset, 1, b.index());
         }
-        ptDsOffset += 1;
+        ++ptDsOffset;
 
-        for (size_t i = 0; i < 9; ++i) {
-          Histo1DPtr tmp;
-          _mass[alg].add(ystarbins[i], ystarbins[i+1], book(tmp, 1 + massDsOffset, 1, i+1));
+        book(_mass[alg], ystarbins);
+        for (auto& b : _mass[alg]->bins()) {
+          book(b, 1+massDsOffset, 1, b.index());
         }
-        massDsOffset += 1;
+        ++massDsOffset;
       }
     }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
       Jets jetAr[2];
       jetAr[AKT6] = apply<FastJets>(event, "AntiKT06").jetsByPt(20*GeV);
       jetAr[AKT4] = apply<FastJets>(event, "AntiKT04").jetsByPt(20*GeV);
@@ -75,7 +72,7 @@ namespace Rivet {
         for (const Jet& jet : jetAr[alg]) {
           const double pT = jet.pT();
           const double absy = jet.absrap();
-          _pThistos[alg].fill(absy, pT/GeV);
+          _pThistos[alg]->fill(absy, pT/GeV);
 
           if (absy < 4.4 && leadjets.size() < 2) {
             if (leadjets.empty() && pT < 30*GeV) continue;
@@ -93,18 +90,18 @@ namespace Rivet {
         const double ystar = fabs(y1-y2)/2.;
         const double m = (leadjets[0] + leadjets[1]).mass();
         // Fill mass histogram
-        _mass[alg].fill(ystar, m/TeV);
+        _mass[alg]->fill(ystar, m/TeV);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (size_t alg = 0; alg < 2; ++alg) {
-        // factor 0.5 needed because it is differential in dy and not d|y|
-        _pThistos[alg].scale(0.5*crossSectionPerEvent()/picobarn, this);
-        _mass[alg].scale(crossSectionPerEvent()/picobarn, this);
-}
+      // factor 0.5 needed because it is differential in dy and not d|y|
+      scale(_pThistos, 0.5*crossSectionPerEvent()/picobarn);
+      scale(_mass, crossSectionPerEvent()/picobarn);
+      divByGroupWidth(_pThistos);
+      divByGroupWidth(_mass);
     }
 
     /// @}
@@ -119,10 +116,10 @@ namespace Rivet {
   private:
 
     /// The inclusive pT spectrum for akt6 and akt4 jets (array index is jet type from enum above)
-    BinnedHistogram _pThistos[2];
+    Histo1DGroupPtr _pThistos[2];
 
     /// The di-jet mass spectrum binned in rapidity for akt6 and akt4 jets (array index is jet type from enum above)
-    BinnedHistogram _mass[2];
+    Histo1DGroupPtr _mass[2];
   };
 
   // The hook for the plugin system

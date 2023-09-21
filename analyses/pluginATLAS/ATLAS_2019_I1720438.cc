@@ -52,7 +52,7 @@ namespace Rivet {
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5.0));
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
-	      
+
       FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
       declare(jets, "Jets");
 
@@ -63,8 +63,10 @@ namespace Rivet {
       book(_h["dPhiWZ"], "_dPhiWZ", refData(14, 1, 1));
       book(_h["pTv"],    "_pTV",    refData(16, 1, 1));
       book(_h["dRapWZ"], "_drapWZ", refData(18, 1, 1));
-      book(_h["Njets"],  "_njets",  refData(20, 1, 1)); 
-      book(_h["Mjj"],    "_mjj",    refData(22, 1, 1)); 
+      book(_h["Mjj"],    "_mjj",    refData(22, 1, 1));
+
+      // Book discrete histogram
+      book(_d, 20, 1, 1);
 
       // book output bar charts
       book(_s["pTZ"],     8, 1, 1);
@@ -73,17 +75,18 @@ namespace Rivet {
       book(_s["dPhiWZ"], 14, 1, 1);
       book(_s["pTv"],    16, 1, 1);
       book(_s["dRapWZ"], 18, 1, 1);
-      book(_s["Njets"],  20, 1, 1); 
-      book(_s["Mjj"],    22, 1, 1); 
+      book(_s["Mjj"],    22, 1, 1);
 
     }
 
 
     void analyze(const Event& event) {
 
+      if (sedges.empty())  sedges = _d->xEdges();
+
       const Particles& dressedleptons = apply<DressedLeptons>(event, "DressedLeptons").particlesByPt();
       const Particles& neutrinos = apply<PromptFinalState>(event, "Neutrinos").particlesByPt();
-      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 4.5);                                                                           
+      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 4.5);
       int i, j, k;
       double MassZ01 = 0., MassZ02 = 0., MassZ12 = 0.;
       double MassW0 = 0., MassW1 = 0., MassW2 = 0.;
@@ -93,36 +96,35 @@ namespace Rivet {
       double WeightTotal1, WeightTotal2, WeightTotal3;
 
       //---Fiducial PS: assign leptons to W and Z bosons using Resonant shape algorithm
-       if (dressedleptons.size() < 3 || neutrinos.size() < 1) vetoEvent;                                                              
-
-      //--- count num of electrons and muons
-      int Nel = 0, Nmu = 0;
-      for (const Particle& l : dressedleptons) {
-        if (l.abspid() == 11)  ++Nel;
-        if (l.abspid() == 13)  ++Nmu;
-      }
+       if (dressedleptons.size() < 3 || neutrinos.size() < 1) vetoEvent;
 
       int icomb=0;
-      // try Z pair of leptons 01                                                              
-    if ( (dressedleptons[0].pid() ==-(dressedleptons[1].pid()))  && (dressedleptons[2].pid()*neutrinos[0].pid()< 0) && (dressedleptons[2].abspid()==neutrinos[0].abspid()-1)) {
+      // try Z pair of leptons 01
+      if ( (dressedleptons[0].pid() ==-(dressedleptons[1].pid())) &&
+           (dressedleptons[2].pid()*neutrinos[0].pid()< 0) &&
+           (dressedleptons[2].abspid()==neutrinos[0].abspid()-1)) {
         MassZ01 = (dressedleptons[0].momentum() + dressedleptons[1].momentum()).mass();
         MassW2 = (dressedleptons[2].momentum() + neutrinos[0].momentum()).mass();
         icomb = 1;
       }
 
       // try Z pair of leptons 02
-      if ( (dressedleptons[0].pid()==-(dressedleptons[2].pid()))  && (dressedleptons[1].pid()*neutrinos[0].pid()< 0) && (dressedleptons[1].abspid()==neutrinos[0].abspid()-1)) {
+      if ( (dressedleptons[0].pid()==-(dressedleptons[2].pid())) &&
+           (dressedleptons[1].pid()*neutrinos[0].pid()< 0) &&
+           (dressedleptons[1].abspid()==neutrinos[0].abspid()-1)) {
         MassZ02 = (dressedleptons[0].momentum() + dressedleptons[2].momentum()).mass();
         MassW1 = (dressedleptons[1].momentum() + neutrinos[0].momentum()).mass();
         icomb = 2;
       }
       // try Z pair of leptons 12
-      if ( (dressedleptons[1].pid()==-(dressedleptons[2].pid())) && (dressedleptons[0].pid()*neutrinos[0].pid()< 0) && (dressedleptons[0].abspid()==neutrinos[0].abspid()-1)) {
+      if ( (dressedleptons[1].pid()==-(dressedleptons[2].pid())) &&
+           (dressedleptons[0].pid()*neutrinos[0].pid()< 0) &&
+           (dressedleptons[0].abspid()==neutrinos[0].abspid()-1)) {
         MassZ12 = (dressedleptons[1].momentum() + dressedleptons[2].momentum()).mass();
         MassW0 = (dressedleptons[0].momentum() + neutrinos[0].momentum()).mass();
         icomb = 3;
       }
- 
+
       if (icomb<=0)  vetoEvent;
 
 
@@ -157,16 +159,16 @@ namespace Rivet {
       FourMomentum Zboson   = dressedleptons[i].mom()+dressedleptons[j].mom();
       FourMomentum Wboson   = dressedleptons[k].mom()+neutrinos[0].mom();
 
-     double cosLepNeut;
-     double Wboson_mT = 0;
-   	 double norm = Wlepton.pT() * neutrinos[0].pt();
-	   if (norm != 0) {
-	     cosLepNeut = ( Wlepton.px()*neutrinos[0].px() + Wlepton.py()*neutrinos[0].py() )/norm;
-	     if ( 1-cosLepNeut >= 0 )  Wboson_mT = sqrt( 2 * Wlepton.pT() * neutrinos[0].pt() * (1-cosLepNeut ) );
-	   }
+      double cosLepNeut;
+      double Wboson_mT = 0;
+   	  double norm = Wlepton.pT() * neutrinos[0].pt();
+ 	    if (norm != 0) {
+        cosLepNeut = ( Wlepton.px()*neutrinos[0].px() + Wlepton.py()*neutrinos[0].py() )/norm;
+        if ( 1-cosLepNeut >= 0 )  Wboson_mT = sqrt( 2 * Wlepton.pT() * neutrinos[0].pt() * (1-cosLepNeut ) );
+      }
 
       //---- CUTS (based on Table 1 WZ: 36.1 fb-1)----//
-      if (Wlepton.pT() <= 20*GeV || Zlepton1.pT() <= 15*GeV || Zlepton2.pT() <= 15*GeV)  vetoEvent;      
+      if (Wlepton.pT() <= 20*GeV || Zlepton1.pT() <= 15*GeV || Zlepton2.pT() <= 15*GeV)  vetoEvent;
       if (Wlepton.abseta() >= 2.5 || Zlepton1.abseta() >= 2.5 || Zlepton2.abseta() >= 2.5)  vetoEvent;
       if (fabs(Zboson.mass()/GeV - MZ_PDG) >= 10.) vetoEvent;
       if (Wboson_mT <= 30*GeV)                     vetoEvent;
@@ -190,7 +192,7 @@ namespace Rivet {
       });
 
       size_t njets = jets.size()>5? 5 : jets.size();
-      _h["Njets"]->fill(njets);
+      _d->fill(sedges[njets]);
 
       if (njets > 1) {
         double mjj = (jets[0].mom() + jets[1].mom()).mass()/GeV;
@@ -220,6 +222,7 @@ namespace Rivet {
     void finalize() {
 
       scale(_h, 0.25 * crossSectionPerEvent() / femtobarn); // data values are for _single_ lepton channel
+      scale(_d, 0.25 * crossSectionPerEvent() / femtobarn); // data values are for _single_ lepton channel
       // unfortunately, no differential cross-sections were measured in this analysis
       for (auto &item : _h)  barchart(item.second, _s[item.first]);
 
@@ -233,9 +236,11 @@ namespace Rivet {
 
     /// @name Histograms
     //@{
-    
+
+    BinnedHistoPtr<string> _d;
     map<string, Histo1DPtr> _h;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
+    vector<string> sedges;
 
     //@}
 

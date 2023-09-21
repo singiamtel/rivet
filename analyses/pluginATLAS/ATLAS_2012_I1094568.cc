@@ -30,9 +30,9 @@ namespace Rivet {
       Histo1DPtr h_veto_Q0;
       Histo1DPtr h_veto_Qsum;
 
-      // Scatter2Ds for the gap fractions
-      Scatter2DPtr gapFrac_Q0;
-      Scatter2DPtr gapFrac_Qsum;
+      // Estimate1Ds for the gap fractions
+      Estimate1DPtr gapFrac_Q0;
+      Estimate1DPtr gapFrac_Qsum;
     };
 
     /// Book histograms and initialise projections before the run
@@ -92,12 +92,12 @@ namespace Rivet {
       plots.veto_Q0 = 0.0;
       const string veto_Q0_name = "TMP/vetoJetPt_Q0_" + to_str(plots.region_index);
       book(plots.h_veto_Q0, veto_Q0_name, 200, 0.0, 1000.0);
-      book(plots.gapFrac_Q0, plots.region_index, 1, 1, true);
+      book(plots.gapFrac_Q0, plots.region_index, 1, 1);
 
       plots.veto_Qsum = 0.0;
       const string veto_Qsum_name = "TMP/vetoJetPt_Qsum_" + to_str(plots.region_index);
       book(plots.h_veto_Qsum, veto_Qsum_name, 200, 0.0, 1000.0);
-      book(plots.gapFrac_Qsum, plots.region_index, 2, 1, true);
+      book(plots.gapFrac_Qsum, plots.region_index, 2, 1);
     }
 
 
@@ -237,7 +237,7 @@ namespace Rivet {
 
     /// Convert temporary histos to cumulative efficiency scatters
     /// @todo Should be possible to replace this with a couple of YODA one-lines for diff -> integral and "efficiency division"
-    void finalizeGapFraction(const double total_weight, Scatter2DPtr gapFrac, Histo1DPtr vetoPt) {
+    void finalizeGapFraction(const double total_weight, Estimate1DPtr gapFrac, Histo1DPtr vetoPt) {
       // Stores the cumulative frequency of the veto jet pT histogram
       double vetoPtWeightSum = 0.0;
 
@@ -245,7 +245,7 @@ namespace Rivet {
       size_t fgap_point = 0;
       for (size_t i = 0; i < vetoPt->numBins(); ++i) {
         // If we've done the last "final" point, stop
-        if (fgap_point == gapFrac->numPoints())  break;
+        if (fgap_point == gapFrac->numBins())  break;
 
         // Increment the cumulative vetoPt counter for this temp histo bin
         /// @todo Get rid of this and use vetoPt->integral(i+1) when points and bins line up?
@@ -253,12 +253,12 @@ namespace Rivet {
 
         // If this temp histo bin's upper edge doesn't correspond to the reference point, don't finalise the scatter.
         // Note that points are ON the bin edges and have no width: they represent the integral up to exactly that point.
-        if ( !fuzzyEquals(vetoPt->bin(i).xMax(), gapFrac->point(fgap_point).x()) )  continue;
+        if ( !fuzzyEquals(vetoPt->bin(i).xMax(), gapFrac->bin(fgap_point+1).xMid()) )  continue;
 
         // Calculate the gap fraction and its uncertainty
         const double frac = (total_weight != 0.0) ? vetoPtWeightSum/total_weight : 0;
         const double fracErr = (total_weight != 0.0) ? sqrt(frac*(1-frac)/total_weight) : 0;
-        gapFrac->point(fgap_point).setY(frac, fracErr);
+        gapFrac->bin(fgap_point+1).set(frac, fracErr);
 
         ++fgap_point;
       }

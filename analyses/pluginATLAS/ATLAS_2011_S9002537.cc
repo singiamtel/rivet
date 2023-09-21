@@ -70,21 +70,21 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      assert(_tmp_h_plus->numBins() == _tmp_h_minus->numBins());
+      assert(*_tmp_h_plus == *_tmp_h_minus);
       for (size_t i = 1; i < _tmp_h_plus->numBins()+1; ++i) {
         const double num   = _tmp_h_plus->bin(i).sumW() - _tmp_h_minus->bin(i).sumW();
         const double denom = _tmp_h_plus->bin(i).sumW() + _tmp_h_minus->bin(i).sumW();
         const double relerr = _tmp_h_plus->bin(i).relErrW()  + _tmp_h_minus->bin(i).relErrW();
         const double asym = (num != 0 && denom != 0) ? num / denom : 0;
         const double asym_err = (num != 0 && denom != 0) ? asym*relerr : 0;
-        _h_asym->addPoint(_tmp_h_plus->bin(i).xMid(), asym, _tmp_h_plus->bin(i).xWidth()/2.0, asym_err);
+        _h_asym->bin(i).set(asym, asym_err);
       }
     }
 
 
   private:
 
-    Scatter2DPtr _h_asym;
+    Estimate1DPtr _h_asym;
     /// @todo Will need to register TMP histograms for future histogramming
     Histo1DPtr  _tmp_h_plus, _tmp_h_minus;
 

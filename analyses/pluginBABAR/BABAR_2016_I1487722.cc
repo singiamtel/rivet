@@ -32,18 +32,15 @@ namespace Rivet {
       // histograms
       book(_h,1,1,1);
       // efficiency
-      const Scatter2D& ref = refData(2,1,1);
-      _edges.push_back(ref.points()[0].xMin());
-      for(auto p : ref.points() ) {
-	_edges.push_back(p.xMax());
-	_eff.push_back(p.y());
-      }
+      const Estimate1D& ref = refData(2,1,1);
+      _edges = ref.xEdges();
+      _eff = ref.vals();
     }
 
     double eff(double mass) {
       if(mass<_edges[0] || mass>_edges.back()) return 0.;
       for(unsigned int ix=0;ix<_eff.size();++ix) {
-	if(mass<_edges[ix+1]) return _eff[ix];
+        if(mass<_edges[ix+1]) return _eff[ix];
       }
       return 0.;
     }
@@ -54,19 +51,19 @@ namespace Rivet {
       static const map<PdgId,unsigned int> & mode1CC = { {  413,1}, {-211,2}, { 211,1} };
       DecayedParticles B0 = apply<DecayedParticles>(event, "B0");
       for(unsigned int ix=0;ix<B0.decaying().size();++ix) {
-	int sign = B0.decaying()[ix].pid()/B0.decaying()[ix].abspid();
-	if ( (sign== 1 && B0.modeMatches(ix,4,mode1) ) ||
-	     (sign==-1 && B0.modeMatches(ix,4,mode1CC) ) ) {
-	  FourMomentum ptotal;
-	  for(const Particle & p : B0.decayProducts()[ix].at( sign*211) ) {
-	    ptotal+=p.momentum();
-	  }
-	  for(const Particle & p : B0.decayProducts()[ix].at(-sign*211) ) {
-	    ptotal+=p.momentum();
-	  }
-	  double m = ptotal.mass();
-	  _h->fill(m, eff(m));
-	}
+        int sign = B0.decaying()[ix].pid()/B0.decaying()[ix].abspid();
+        if ( (sign== 1 && B0.modeMatches(ix,4,mode1) ) ||
+             (sign==-1 && B0.modeMatches(ix,4,mode1CC) ) ) {
+          FourMomentum ptotal;
+          for(const Particle & p : B0.decayProducts()[ix].at( sign*211) ) {
+            ptotal+=p.momentum();
+          }
+          for(const Particle & p : B0.decayProducts()[ix].at(-sign*211) ) {
+            ptotal+=p.momentum();
+          }
+          double m = ptotal.mass();
+          _h->fill(m, eff(m));
+        }
       }
     }
 

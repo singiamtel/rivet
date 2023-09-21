@@ -3,7 +3,6 @@
 #include "Rivet/Projections/Beam.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -28,23 +27,19 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      {Histo1DPtr temp; _h_ctheta_rho  .add(0.025,0.05,book(temp, "ctheta_rho_0",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_rho  .add(0.05 ,0.1 ,book(temp, "ctheta_rho_1",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_rho  .add(0.1  ,0.15,book(temp, "ctheta_rho_2",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_rho  .add(0.15 ,0.3 ,book(temp, "ctheta_rho_3",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_rho  .add(0.3  ,0.6 ,book(temp, "ctheta_rho_4",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_omega.add(0.025,0.05,book(temp, "ctheta_omega_0",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_omega.add(0.05 ,0.1 ,book(temp, "ctheta_omega_1",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_omega.add(0.1  ,0.15,book(temp, "ctheta_omega_2",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_omega.add(0.15 ,0.3 ,book(temp, "ctheta_omega_3",20,-1.,1.));}
-      {Histo1DPtr temp; _h_ctheta_omega.add(0.3  ,0.6 ,book(temp, "ctheta_omega_4",20,-1.,1.));}
+      book(_h_ctheta_rho, {0.025, 0.05, 0.1, 0.15, 0.3, 0.6});
+      book(_h_ctheta_omega, {0.025, 0.05, 0.1, 0.15, 0.3, 0.6});
+      for (size_t i = 0; _h_ctheta_rho->numBins(); ++i) {
+        book(_h_ctheta_rho->bin(i+1), "ctheta_rho_"+to_string(i), 20, -1.0, 1.0);
+        book(_h_ctheta_omega->bin(i+1), "ctheta_omega_"+to_string(i), 20, -1.0, 1.0);
+      }
       book(_h_ctheta_omega_all, "ctheta_omega_all",20,-1.,1.);
     }
 
     pair<double,double> calcRho(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
 	double Oi = bin.sumW();
 	if(Oi==0.) continue;
 	double ai = 0.25*(bin.xMax()*(3.-sqr(bin.xMax())) - bin.xMin()*(3.-sqr(bin.xMin())));
@@ -110,7 +105,7 @@ namespace Rivet {
 	    continue;
 	  Vector3 axis1 = boost.transform(pion.momentum()).p3().unit();
 	  double ctheta = e1z.dot(axis1);
-	  _h_ctheta_rho.fill(xE,ctheta);
+	  _h_ctheta_rho->fill(xE,ctheta);
 	}
 	else {
 	  Particles pi0,pip,pim;
@@ -121,7 +116,7 @@ namespace Rivet {
 	  Vector3 v2 = boost.transform(pip[0].momentum()).p3().unit();
 	  Vector3 norm = v1.cross(v2).unit();
 	  double ctheta = e1z.dot(norm);
-	  _h_ctheta_omega.fill(xE,ctheta);
+	  _h_ctheta_omega->fill(xE,ctheta);
 	  if(xE>0.025) _h_ctheta_omega_all->fill(ctheta);
 	}
       }
@@ -131,29 +126,26 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       vector<double> x = {0.025,0.05,0.1,0.15,0.3,0.6};
-      Scatter2DPtr h_rho  ;
+      Estimate1DPtr h_rho  ;
       book(h_rho, 1,1,1);
-      Scatter2DPtr h_omega;
+      Estimate1DPtr h_omega;
       book(h_omega, 2,1,1);
-      for(unsigned int ix=0;ix<_h_ctheta_rho.histos().size();++ix) {
-	// rho
-	normalize(_h_ctheta_rho.histos()[ix]);
-	pair<double,double> rho00 = calcRho(_h_ctheta_rho.histos()[ix]);
-	h_rho->addPoint(0.5*(x[ix]+x[ix+1]), rho00.first, make_pair(0.5*(x[ix+1]-x[ix]),0.5*(x[ix+1]-x[ix])),
-			make_pair(rho00.second,rho00.second) );
-	// omega
-	normalize(_h_ctheta_omega.histos()[ix]);
-	rho00 = calcRho(_h_ctheta_omega.histos()[ix]);
-	h_omega->addPoint(0.5*(x[ix]+x[ix+1]), rho00.first, make_pair(0.5*(x[ix+1]-x[ix]),0.5*(x[ix+1]-x[ix])),
-			make_pair(rho00.second,rho00.second) );
+      for (size_t ix=1; ix<_h_ctheta_rho->numBins()+1; ++ix) {
+        // rho
+        normalize(_h_ctheta_rho->bin(ix));
+        pair<double,double> rho00 = calcRho(_h_ctheta_rho->bin(ix));
+        h_rho->bin(ix+1).set(rho00.first, rho00.second);
+        // omega
+        normalize(_h_ctheta_omega->bin(ix));
+        rho00 = calcRho(_h_ctheta_omega->bin(ix));
+        h_omega->bin(ix+1).set(rho00.first, rho00.second);
       }
       // omega over whole range
-      Scatter2DPtr h_omega_all;
+      Estimate1DPtr h_omega_all;
       book(h_omega_all,2,2,1);
       normalize(_h_ctheta_omega_all);
       pair<double,double> rho00 = calcRho(_h_ctheta_omega_all);
-      h_omega_all->addPoint(0.5125, rho00.first, make_pair(0.4875,0.4875),
-			    make_pair(rho00.second,rho00.second) );
+      h_omega_all->bin(1).set(rho00.first, rho00.second);
     }
 
     /// @}
@@ -161,7 +153,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistogram _h_ctheta_rho,_h_ctheta_omega;
+    Histo1DGroupPtr _h_ctheta_rho, _h_ctheta_omega;
     Histo1DPtr _h_ctheta_omega_all;
     /// @}
 

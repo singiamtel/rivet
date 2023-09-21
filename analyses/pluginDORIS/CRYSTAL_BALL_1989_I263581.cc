@@ -22,43 +22,51 @@ namespace Rivet {
       declare(UnstableParticles(),"UFS");
       // Book histograms
       // specify custom binning
-      book(_h_all, 1,1,1);
-      book(_nB,"/TMP/nB");
+      book(_h_all, 1, 1, 1);
+      book(_nB, "/TMP/nB");
     }
 
-    void findDecayProducts(Particle parent, Particles & em) {
-      for(const Particle & p : parent.children()) {
-	if(p.abspid() == PID::EMINUS) {
-	  em.push_back(p);
-	}
-	else  {
-	  findDecayProducts(p,em);
-	}
+    void findDecayProducts(Particle parent, Particles& em) {
+      for (const Particle& p : parent.children()) {
+        if(p.abspid() == PID::EMINUS) {
+          em.push_back(p);
+        }
+        else  {
+          findDecayProducts(p,em);
+        }
       }
     }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty())  _edges = _h_all->xEdges();
       // find and loop over Upslion(4S)
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles(Cuts::pid==300553)) {
       	// boost to rest frame
       	LorentzTransform cms_boost;
-      	if (p.p3().mod() > 1*MeV)
+      	if (p.p3().mod() > 1*MeV) {
       	  cms_boost = LorentzTransform::mkFrameTransformFromBeta(p.momentum().betaVec());
+        }
       	// loop over decay products
-      	for(const Particle & p2 : p.children()) {
-      	  if(p2.abspid()==511 || p2.abspid()==521) {
-	    _nB->fill();
+      	for (const Particle& p2 : p.children()) {
+      	  if (p2.abspid()==511 || p2.abspid()==521) {
+            _nB->fill();
       	    Particles em;
-	    findDecayProducts(p2,em);
-	    for(const Particle & electron : em) {
-	      double en = cms_boost.transform(electron.momentum()).E();
-	      _h_all->fill(en);
-	    }
+            findDecayProducts(p2, em);
+            for (const Particle& electron : em) {
+              const double en = cms_boost.transform(electron.momentum()).E();
+              _h_all->fill(map2string(en));
+            }
       	  }
       	}
       }
+    }
+
+    string map2string(const double val) const {
+      const size_t idx = _axis.index(val);
+      if (val || val <= _edges.size())  return _edges[idx-1];
+      return "OTHER";
     }
 
 
@@ -73,8 +81,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_all;
+    BinnedHistoPtr<string> _h_all;
     CounterPtr _nB;
+    YODA::Axis<double> _axis{48, 0.6, 3.0};
+    vector<string> _edges;
     /// @}
 
 

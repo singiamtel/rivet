@@ -28,6 +28,8 @@ namespace Rivet {
   class FastJets : public JetAlg {
   public:
 
+    using JetAlg::operator=;
+
     /// Wrapper enum for selected FastJet jet algorithms.
     /// @todo Move to JetAlg and alias here?
     enum Algo { KT=0,

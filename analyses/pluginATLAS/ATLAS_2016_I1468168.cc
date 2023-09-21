@@ -42,8 +42,7 @@ namespace Rivet {
       DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, true);
       declare(dressedmuons, "DressedMuons");
 
-      book(_s , 2, 1 ,1);
-      book(_c , "_counter");
+      book(_h , 2, 1 ,1);
     }
 
 
@@ -58,24 +57,19 @@ namespace Rivet {
       if (!pass_emu) vetoEvent;
 
       // Fill histogram to measure the event acceptance
-      _c->fill();
+      _h->fill(13000);
     }
 
 
     void finalize() {
       // Normalize to cross-section
-      scale(_c, crossSection() / sumOfWeights());
-
-      double err = _c->err();
-      _s->addPoint(13*TeV, _c->val(), make_pair(0.5, 0.5), make_pair(err,err));
-
+      scale(_h, crossSection() / sumOfWeights());
     }
 
 
    private:
 
-    CounterPtr _c;
-    Scatter2DPtr _s;
+    BinnedHistoPtr<int> _h;
 
   };
 

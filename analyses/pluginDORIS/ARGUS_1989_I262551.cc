@@ -24,8 +24,8 @@ namespace Rivet {
       book(_h_cont, 1, 1, 1);
       book(_h_ups1, 2, 1, 1);
       book(_h_ups2, 2, 1, 2);
-      book(_n_Phi[0], "/TMP/NUps1");
-      book(_n_Phi[1], "/TMP/NUps2");
+      book(_n_Phi[0], 3, 1, 1);
+      book(_n_Phi[1], 4, 1, 1);
       book(_weightSum_cont, "TMP/weightSum_cont");
       book(_weightSum_Ups1, "TMP/weightSum_Ups1");
       book(_weightSum_Ups2, "TMP/weightSum_Ups2");
@@ -33,13 +33,14 @@ namespace Rivet {
 
     /// Recursively walk the decay tree to find decay products of @a p
     void findDecayProducts(Particle mother, Particles& phis) {
-      for(const Particle & p: mother.children()) {
+      for (const Particle & p: mother.children()) {
         const int id = p.pid();
-	if(id == 333) {
-	  phis.push_back(p);
-	}
-	if(!p.children().empty())
-	  findDecayProducts(p, phis);
+        if(id == 333) {
+          phis.push_back(p);
+        }
+        if (!p.children().empty()) {
+          findDecayProducts(p, phis);
+        }
       }
     }
 
@@ -55,20 +56,20 @@ namespace Rivet {
         for (const Particle& p : ufs.particles(Cuts::pid==333)) {
           const double xp = 2.*p.E()/sqrtS();
           const double beta = p.p3().mod() / p.E();
-	  _h_cont->fill(xp,1./beta);
-	}
+          _h_cont->fill(xp,1./beta);
+        }
       }
       // Upsilon(s) found
       else {
         MSG_DEBUG("Upsilons found => resonance event");
         for (const Particle& ups : upsilons) {
           const int parentId = ups.pid();
-	  if(parentId==553) {
-	    _weightSum_Ups1->fill();
-	  }
-	  else {
-	    _weightSum_Ups2->fill();
-	  }
+          if(parentId==553) {
+            _weightSum_Ups1->fill();
+          }
+          else {
+            _weightSum_Ups2->fill();
+          }
           Particles phis;
           // Find the decay products we want
           findDecayProducts(ups, phis);
@@ -76,21 +77,21 @@ namespace Rivet {
           if (ups.p3().mod() > 1*MeV)
             cms_boost = LorentzTransform::mkFrameTransformFromBeta(ups.momentum().betaVec());
           const double mass = ups.mass();
-	  // loop over decay products
-          for(const Particle& p : phis) {
+          // loop over decay products
+          for (const Particle& p : phis) {
             const FourMomentum p2 = cms_boost.transform(p.momentum());
             const double xp = 2.*p2.E()/mass;
             const double beta = p2.p3().mod()/p2.E();
-	    if(parentId==553) {
-	      _n_Phi[0]->fill();
-	      _h_ups1->fill(xp,1./beta);
-	    }
-	    else {
-	      _n_Phi[1]->fill();
-	      _h_ups2->fill(xp,1./beta);
-	    }
-	  }
-	}
+            if (parentId==553) {
+              _n_Phi[0]->fill(Ecm9);
+              _h_ups1->fill(xp,1./beta);
+            }
+            else {
+              _n_Phi[1]->fill(Ecm10);
+              _h_ups2->fill(xp,1./beta);
+            }
+          }
+        }
       }
     }
 
@@ -98,21 +99,17 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       if (_weightSum_cont->effNumEntries() > 0.)
-	scale(_h_cont, sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
+        scale(_h_cont, sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
       if (_weightSum_Ups1->effNumEntries() > 0.) {
-	scale(_h_ups1, 1./ *_weightSum_Ups1);
+        scale(_h_ups1, 1./ *_weightSum_Ups1);
       }
       if (_weightSum_Ups2->effNumEntries() > 0.) {
-	scale(_h_ups2, 1./ *_weightSum_Ups2);
+        scale(_h_ups2, 1./ *_weightSum_Ups2);
       }
       // Counters
       vector<CounterPtr> scales = {_weightSum_Ups1,_weightSum_Ups2};
-      for(unsigned int ix=0;ix<2;++ix) {
-	Scatter2DPtr scatter;
-	book(scatter, 3+ix, 1, 1, true);
-	scale(_n_Phi[ix], 1./ *scales[ix]);
-        scatter->point(0).setY(_n_Phi[ix]->val(),
-			       _n_Phi[ix]->err());
+      for (unsigned int ix=0; ix<2; ++ix) {
+        scale(_n_Phi[ix], 1./ *scales[ix]);
       }
     }
 
@@ -122,8 +119,9 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_cont, _h_ups1, _h_ups2;
-    CounterPtr _n_Phi[2];
+    BinnedHistoPtr<string> _n_Phi[2];
     CounterPtr _weightSum_cont,_weightSum_Ups1,_weightSum_Ups2;
+    const string Ecm9 = "9.46", Ecm10 = "10.023";
     /// @}
 
 

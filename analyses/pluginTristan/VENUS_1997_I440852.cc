@@ -98,7 +98,7 @@ namespace Rivet {
     pair<double,double> calcP(Histo1DPtr hist,unsigned int imode) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
 	double Oi = bin.sumW();
 	if(Oi==0.) continue;
 	double ai(0.),bi(0.);
@@ -126,29 +126,28 @@ namespace Rivet {
       normalize(_h_mu ,1.);
       normalize(_h_pi ,1.);
       normalize(_h_rho,1.);
-      Scatter2DPtr _h_P;
+      Estimate1DPtr _h_P;
       book(_h_P,1,1,1);
       pair<double,double> P_e  = calcP(_h_e,1);
       double s1 = P_e.first/sqr(P_e.second);
       double s2 = 1./sqr(P_e.second);
-      _h_P->addPoint(1.,P_e.first, make_pair(0.5,0.5), make_pair(P_e.second,P_e.second) );
+      _h_P->bin(1).set(P_e.first, P_e.second);
       pair<double,double> P_mu = calcP(_h_mu,1);
       s1 += P_mu.first/sqr(P_mu.second);
       s2 += 1./sqr(P_mu.second);
-      _h_P->addPoint(2.,P_mu.first, make_pair(0.5,0.5), make_pair(P_mu.second,P_mu.second) );
+      _h_P->bin(2).set(P_mu.first, P_mu.second);
       pair<double,double> P_pi = calcP(_h_pi,0);
       s1 += P_pi.first/sqr(P_pi.second);
       s2 += 1./sqr(P_pi.second);
-      _h_P->addPoint(3.,P_pi.first, make_pair(0.5,0.5), make_pair(P_pi.second,P_pi.second) );
+      _h_P->bin(3).set(P_pi.first, P_pi.second);
       pair<double,double> P_rho = calcP(_h_rho,0);
       s1 += P_rho.first/sqr(P_rho.second);
       s2 += 1./sqr(P_rho.second);
       P_rho.first  /=0.46;
       P_rho.second /=0.46;
-      _h_P->addPoint(4.,P_rho.first, make_pair(0.5,0.5), make_pair(P_rho.second,P_rho.second) );
+      _h_P->bin(4).set(P_rho.first, P_rho.second);
       // average
-      pair<double,double> P_aver = make_pair(s1/s2,sqrt(1./s2));
-      _h_P->addPoint(5.,P_aver.first, make_pair(0.5,0.5), make_pair(P_aver.second,P_aver.second) );
+      _h_P->bin(5).set(s1/s2, sqrt(1./s2));
     }
 
     /// @}

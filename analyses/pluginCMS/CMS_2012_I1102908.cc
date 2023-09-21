@@ -62,8 +62,8 @@ namespace Rivet {
   void finalize() {
     efficiency(_h_DeltaY_exclusive, _h_DeltaY_inclusive, _h_dijet_ratio);
     efficiency(_h_DeltaY_exclusive, _h_DeltaY_MN, _h_MN_dijet_ratio);
-    transformY(*_h_dijet_ratio, _invert);
-    transformY(*_h_MN_dijet_ratio, _invert);
+    transform(*_h_dijet_ratio, _invert);
+    transform(*_h_MN_dijet_ratio, _invert);
   }
 
 
@@ -74,7 +74,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Scatter2DPtr _h_dijet_ratio, _h_MN_dijet_ratio;
+    Estimate1DPtr _h_dijet_ratio, _h_MN_dijet_ratio;
     Histo1DPtr _h_DeltaY_inclusive, _h_DeltaY_exclusive, _h_DeltaY_MN;
     /// @}
 

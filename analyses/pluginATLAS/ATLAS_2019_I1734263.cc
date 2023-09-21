@@ -63,7 +63,7 @@ namespace Rivet {
 
       // Book histograms
       // fiducial differential cross section as a function of the jet-veto pt cut
-      book(_h["jetveto"], 1, 1, 1);
+      book(_d, 1, 1, 1);
 
       // fiducial differential cross section (leading lepton pt)
       book(_h["ptlead"], 4, 1, 1);
@@ -157,13 +157,13 @@ namespace Rivet {
       if (dilep.pT() <= 30*GeV)  vetoEvent;
 
       // Fill cross section as function of veto-jet pt before applying jet veto
-      if (jets30.empty() || jets30[0].pT()/GeV < 30.) _h["jetveto"]->fill(_h["jetveto"]->bin(1).xMid());
-      if (jets30.empty() || jets30[0].pT()/GeV < 35.) _h["jetveto"]->fill(_h["jetveto"]->bin(2).xMid());
-      if (jets30.empty() || jets30[0].pT()/GeV < 40.) _h["jetveto"]->fill(_h["jetveto"]->bin(3).xMid());
-      if (jets30.empty() || jets30[0].pT()/GeV < 45.) _h["jetveto"]->fill(_h["jetveto"]->bin(4).xMid());
-      if (jets30.empty() || jets30[0].pT()/GeV < 50.) _h["jetveto"]->fill(_h["jetveto"]->bin(5).xMid());
-      if (jets30.empty() || jets30[0].pT()/GeV < 55.) _h["jetveto"]->fill(_h["jetveto"]->bin(6).xMid());
-      if (jets30.empty() || jets30[0].pT()/GeV < 60.) _h["jetveto"]->fill(_h["jetveto"]->bin(7).xMid());
+      if (jets30.empty() || jets30[0].pT()/GeV < 30.) _d->fill(30);
+      if (jets30.empty() || jets30[0].pT()/GeV < 35.) _d->fill(35);
+      if (jets30.empty() || jets30[0].pT()/GeV < 40.) _d->fill(40);
+      if (jets30.empty() || jets30[0].pT()/GeV < 45.) _d->fill(45);
+      if (jets30.empty() || jets30[0].pT()/GeV < 50.) _d->fill(50);
+      if (jets30.empty() || jets30[0].pT()/GeV < 55.) _d->fill(55);
+      if (jets30.empty() || jets30[0].pT()/GeV < 60.) _d->fill(60);
       // Jet veto at 35 GeV is the default
       if (!jets30.empty() && jets30[0].pT()/GeV > 35.)  vetoEvent;
 
@@ -193,9 +193,8 @@ namespace Rivet {
     void finalize() {
       const double sf(crossSection()/femtobarn/sumOfWeights());
       // scale histogram by binwidth, as bin content is actually a integrated fiducial cross section
-      // @todo revisit when new YODA binned-object type drops
-      scale(_h["jetveto"], 5.);
       // scale to cross section
+      scale(_d, sf);
       for (auto& hist : _h) {
         scale(hist.second, sf);
         if (hist.first.find("norm") != string::npos) normalize(hist.second);
@@ -209,6 +208,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     map<string, Histo1DPtr> _h;
+    BinnedHistoPtr<int> _d;
     /// @}
 
   };

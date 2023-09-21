@@ -193,7 +193,7 @@ namespace Rivet {
 
     /// histograms
     Histo1DPtr _h_wpj, _h_wmj, _h_wj, _h_zj;
-    Scatter2DPtr _h_rwz, _h_rwpz, _h_rwmz, _h_rwpm, _h_aw;
+    Estimate1DPtr _h_rwz, _h_rwpz, _h_rwmz, _h_rwpm, _h_aw;
     Histo1DPtr _h_eta_wpj, _h_eta_wmj, _h_etaj_wpj, _h_etaj_wmj, _h_ptj_wpj, _h_ptj_wmj;
     Histo1DPtr _h_yz_zj, _h_etaj_zj, _h_ptj_zj, _h_dphi_zj;
   };

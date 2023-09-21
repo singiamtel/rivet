@@ -68,8 +68,8 @@ namespace Rivet {
           MSG_DEBUG("D0 found");
           mH2 = 3.47763; // 1.86484^2
           xp = mom/sqrt(s/4.0 - mH2);
-          _sigmaD0A->fill(10.6);
-          _sigmaD0B->fill(10.6);
+          _sigmaD0A->fill(Ecm);
+          _sigmaD0B->fill(Ecm);
           _histXpD0A->fill(xp);
           _histXpD0B->fill(xp);
           _histXpTotal->fill(xp);
@@ -79,7 +79,7 @@ namespace Rivet {
           MSG_DEBUG("D+ found");
           mH2 = 3.49547; // 1.86962^2
           xp = mom/sqrt(s/4.0 - mH2);
-          _sigmaDPlus->fill(10.6);
+          _sigmaDPlus->fill(Ecm);
           _histXpDplus->fill(xp);
           _histXpTotal->fill(xp);
           break;
@@ -88,8 +88,8 @@ namespace Rivet {
           MSG_DEBUG("D*+ found");
           mH2 = 4.04119; // 2.01027^2
           xp = mom/sqrt(s/4.0 - mH2);
-          _sigmaDStarPlusA->fill(10.6);
-          _sigmaDStarPlusB->fill(10.6);
+          _sigmaDStarPlusA->fill(Ecm);
+          _sigmaDStarPlusB->fill(Ecm);
           _histXpDStarPlusA->fill(xp);
           _histXpDStarPlusB->fill(xp);
           _histXpTotal->fill(xp);
@@ -99,8 +99,8 @@ namespace Rivet {
           MSG_DEBUG("D*0 found");
           mH2 = 4.02793; // 2.00697**2
           xp = mom/sqrt(s/4.0 - mH2);
-          _sigmaDStar0A->fill(10.6);
-          _sigmaDStar0B->fill(10.6);
+          _sigmaDStar0A->fill(Ecm);
+          _sigmaDStar0B->fill(Ecm);
           _histXpDStar0A->fill(xp);
           _histXpDStar0B->fill(xp);
           _histXpTotal->fill(xp);
@@ -113,45 +113,47 @@ namespace Rivet {
 
     void finalize() {
 
-      scale(_sigmaDPlus     , crossSection()/picobarn/sumOfWeights());
-      scale(_sigmaD0A       , crossSection()/picobarn/sumOfWeights());
-      scale(_sigmaD0B       , crossSection()/picobarn/sumOfWeights());
-      scale(_sigmaDStarPlusA, crossSection()/picobarn/sumOfWeights());
-      scale(_sigmaDStarPlusB, crossSection()/picobarn/sumOfWeights());
-      scale(_sigmaDStar0A   , crossSection()/picobarn/sumOfWeights());
-      scale(_sigmaDStar0B   , crossSection()/picobarn/sumOfWeights());
+      const double sf = crossSection()/picobarn/sumOfWeights();
+      scale(_sigmaDPlus     , sf);
+      scale(_sigmaD0A       , sf);
+      scale(_sigmaD0B       , sf);
+      scale(_sigmaDStarPlusA, sf);
+      scale(_sigmaDStarPlusB, sf);
+      scale(_sigmaDStar0A   , sf);
+      scale(_sigmaDStar0B   , sf);
 
-      scale(_histXpDplus     , crossSection()/picobarn/sumOfWeights());
-      scale(_histXpD0A       , crossSection()/picobarn/sumOfWeights());
-      scale(_histXpD0B       , crossSection()/picobarn/sumOfWeights());
-      scale(_histXpDStarPlusA, crossSection()/picobarn/sumOfWeights());
-      scale(_histXpDStarPlusB, crossSection()/picobarn/sumOfWeights());
-      scale(_histXpDStar0A   , crossSection()/picobarn/sumOfWeights());
-      scale(_histXpDStar0B   , crossSection()/picobarn/sumOfWeights());
-      scale(_histXpTotal     , crossSection()/picobarn/sumOfWeights()/4.);
+      scale(_histXpDplus     , sf);
+      scale(_histXpD0A       , sf);
+      scale(_histXpD0B       , sf);
+      scale(_histXpDStarPlusA, sf);
+      scale(_histXpDStarPlusB, sf);
+      scale(_histXpDStar0A   , sf);
+      scale(_histXpDStar0B   , sf);
+      scale(_histXpTotal     , sf/4.);
     }
 
 
   private:
 
     // Histograms for the continuum cross sections
-    Histo1DPtr _sigmaDPlus     ;
-    Histo1DPtr _sigmaD0A       ;
-    Histo1DPtr _sigmaD0B       ;
-    Histo1DPtr _sigmaDStarPlusA;
-    Histo1DPtr _sigmaDStarPlusB;
-    Histo1DPtr _sigmaDStar0A   ;
-    Histo1DPtr _sigmaDStar0B   ;
+    BinnedHistoPtr<string> _sigmaDPlus;
+    BinnedHistoPtr<string> _sigmaD0A;
+    BinnedHistoPtr<string> _sigmaD0B;
+    BinnedHistoPtr<string> _sigmaDStarPlusA;
+    BinnedHistoPtr<string> _sigmaDStarPlusB;
+    BinnedHistoPtr<string> _sigmaDStar0A;
+    BinnedHistoPtr<string> _sigmaDStar0B;
 
     // Histograms for continuum data
-    Histo1DPtr _histXpDplus     ;
-    Histo1DPtr _histXpD0A       ;
-    Histo1DPtr _histXpD0B       ;
+    Histo1DPtr _histXpDplus;
+    Histo1DPtr _histXpD0A;
+    Histo1DPtr _histXpD0B;
     Histo1DPtr _histXpDStarPlusA;
     Histo1DPtr _histXpDStarPlusB;
-    Histo1DPtr _histXpDStar0A   ;
-    Histo1DPtr _histXpDStar0B   ;
-    Histo1DPtr _histXpTotal     ;
+    Histo1DPtr _histXpDStar0A;
+    Histo1DPtr _histXpDStar0B;
+    Histo1DPtr _histXpTotal;
+    const string Ecm = "10.56";
 
   };
 

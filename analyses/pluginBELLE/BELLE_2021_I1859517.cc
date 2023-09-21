@@ -134,14 +134,14 @@ namespace Rivet {
     pair<double,double> calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
-	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double ai = 0.5*(bin.xMax()-bin.xMin());
-	double bi = 0.5*ai*(bin.xMax()+bin.xMin());
-	double Ei = bin.errW();
-	sum1 += sqr(bi/Ei);
-	sum2 += bi/sqr(Ei)*(Oi-ai);
+      for (const auto& bin : hist->bins() ) {
+        double Oi = bin.sumW();
+        if(Oi==0.) continue;
+        double ai = 0.5*(bin.xMax()-bin.xMin());
+        double bi = 0.5*ai*(bin.xMax()+bin.xMin());
+        double Ei = bin.errW();
+        sum1 += sqr(bi/Ei);
+        sum2 += bi/sqr(Ei)*(Oi-ai);
       }
       return make_pair(sum2/sum1,sqrt(1./sum1));
     }
@@ -150,20 +150,20 @@ namespace Rivet {
     void finalize() {
       // Lambda Kbar*0
       normalize(_h_Lambda);
-      Scatter2DPtr _h_alpha;
+      Estimate1DPtr _h_alpha;
       book(_h_alpha,4,1,1);
       pair<double,double> alpha = calcAlpha(_h_Lambda);
-      _h_alpha->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
+      _h_alpha->bin(1).set(alpha.first, alpha.second);
       // Sigma0 Kbar*0
       normalize(_h_Sigma0);
       book(_h_alpha,4,1,2);
       alpha = calcAlpha(_h_Sigma0);
-      _h_alpha->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
+      _h_alpha->bin(1).set(alpha.first, alpha.second);
       // Sigma+ K*-
       normalize(_h_Sigmap);
       book(_h_alpha,4,1,3);
       alpha = calcAlpha(_h_Sigmap);
-      _h_alpha->addPoint(0.5, alpha.first, make_pair(0.5,0.5), make_pair(alpha.second,alpha.second) );
+      _h_alpha->bin(1).set(alpha.first, alpha.second);
 
     }
 

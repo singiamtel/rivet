@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/AtlasCommon.hh"
+#include "Rivet/Analyses/AtlasCommon.hh"
 #include "Rivet/Projections/ImpactParameterProjection.hh"
 
 namespace Rivet {

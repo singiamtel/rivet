@@ -2,13 +2,11 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Tools/AliceCommon.hh"
-#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/EventMixingFinalState.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
- #include "YODA/Utils/sortedvector.h"
-#include "Rivet/Tools/BinnedHistogram.hh"
+#include "YODA/Utils/sortedvector.h"
 
 namespace Rivet {
 
@@ -24,15 +22,15 @@ namespace Rivet {
     /// @name Analysis methods
     /// @{
 
-    void fillbyparticles(BinnedHistogram &_histo, Particle tp, Particle ap) {
+    void fillbyparticles(Histo1DGroupPtr& _histo, const Particle& tp, const Particle& ap) {
       double dphi = (ap.phi() - tp.phi());
       if (dphi < -0.5*M_PI) dphi = dphi + 2*M_PI;
       if (dphi > 1.5*M_PI) dphi = dphi - 2*M_PI;
       double deta = (ap.eta() - tp.eta());
-      _histo.fill(deta, dphi, 1.0);
+      _histo->fill(deta, dphi);
     }
 
-    void S2DProjectionY(Scatter2DPtr projection, BinnedHistogram &hist2D) {
+    void S2DProjectionY(Scatter2DPtr projection, Histo1DGroupPtr& hist2D) {
 
       double phiValues[N_phibins];
       double phiValueserr[N_phibins];
@@ -43,25 +41,23 @@ namespace Rivet {
         phiValueserr[i]=0;
       }
 
-      for(Histo1DPtr hist : hist2D.histos()) {
-        int idx =0;
-        for (auto bin : hist->bins()) {
-          phiValues[idx]+= bin.sumW();
-          phiValueserr[idx]+=bin.errW()*bin.errW();
-          idx+=1;
+      for (const auto& hist : hist2D->bins()) {
+        for (const auto& bin : hist->bins()) {
+          phiValues[bin.index()-1] += bin.sumW();
+          phiValueserr[bin.index()-1] +=bin.sumW2();
         }
       }
       projection->reset();
 
-      for (int idx = 0; idx < N_phibins; ++idx) {
-        phiValueserr[idx]=sqrt(phiValueserr[idx]);
-        phiValues[idx]=phiValues[idx];
+      for (size_t idx = 0; idx < N_phibins; ++idx) {
+        phiValueserr[idx] = sqrt(phiValueserr[idx]);
+        phiValues[idx] = phiValues[idx];
         projection->addPoint(points[idx].x(),phiValues[idx],points[idx].xErrAvg(),phiValueserr[idx]);
       }
       return;
     }
 
-    pair<double, double> BackgEstimate (Scatter2DPtr hist) {
+    pair<double, double> BackgEstimate(const Scatter2DPtr& hist) {
 
       pair<double, double> backg;
       vector<Point2D> points = hist->points();
@@ -74,24 +70,23 @@ namespace Rivet {
       return backg;
     }
 
-    void ZYAM (Scatter2DPtr hist_final, Scatter2DPtr hist) {
+    void ZYAM (Scatter2DPtr& hist_final, const Scatter2DPtr& hist) {
       vector<Point2D> points = hist->points();
       pair<double, double> backg = BackgEstimate(hist);
       hist_final->reset();
-      for(int idx = 0; idx < N_phibins; ++idx) {
-        hist_final->addPoint(points[idx].x() ,points[idx].y()-backg.first,points[idx].xErrAvg(),sqrt(pow(points[idx].yErrAvg(),2)+pow(backg.second,2)));
+      for (size_t idx = 0; idx < N_phibins; ++idx) {
+        hist_final->addPoint(points[idx].x() ,points[idx].y()-backg.first,points[idx].xErrAvg(),
+                             sqrt(pow(points[idx].yErrAvg(),2)+pow(backg.second,2)));
       }
     }
 
-    Point2D IntegratePeak (Scatter2DPtr s, pair<double, double> PeakInterval) {
+    Point2D IntegratePeak (Scatter2DPtr s, const pair<double, double>& PeakInterval) {
       Point2D PeakYield;
-      pair<double, double> Errs;
+      pair<double, double> Errs{0,0};
       PeakYield.setY(0);
-      Errs.first = 0;
-      Errs.second = 0;
       PeakYield.setYErrs(Errs);
 
-      for (auto point : s->points()) {
+      for (const auto& point : s->points()) {
         if (point.xMin() > PeakInterval.first && point.xMax() < PeakInterval.second) {
           PeakYield.setY(point.y() + PeakYield.y());
           Errs.first = sqrt(pow(point.yErrs().first,2) + pow(PeakYield.yErrs().first,2));
@@ -108,7 +103,7 @@ namespace Rivet {
       return PeakYield;
     }
 
-    void IntegratePeakByPT(Scatter2DPtr s, Scatter2DPtr vs[8], pair<double,double> PeakInterval, int pt_interval) {
+    void IntegratePeakByPT(Scatter2DPtr& s, Scatter2DPtr vs[8], pair<double,double> PeakInterval, int pt_interval) {
 
       Point2D PeakYield;
 
@@ -128,7 +123,7 @@ namespace Rivet {
       }
     }
 
-    void sdivide(Scatter2DPtr V0hist, Scatter2DPtr hhist, Scatter2DPtr ratio_hist,int pt_interval, bool V0mult) {
+    void sdivide(Scatter2DPtr& V0hist, Scatter2DPtr& hhist, Scatter2DPtr& ratio_hist, int pt_interval, bool V0mult) {
       vector<Point2D> V0h_points = V0hist->points();
       vector<Point2D> hh_points = hhist->points();
 
@@ -227,31 +222,45 @@ namespace Rivet {
 
       multiplicityBins = {0.,1.,3.,7.,15.,50,100.};
 
+      etabins.resize(39);
       etabins[0] = -1.013333 - 2.666650e-02;
-      for (int i = 1; i < Num_etabins; ++i) {
+      for (int i = 1; i < etabins.size(); ++i) {
         etabins[i] = etabins[i-1] + (2*2.666650e-02);
       }
 
       // Histograms
-      for (int imult = 0; imult < MULT_BINS; ++imult) {
-        for (int ipt_trigg = 0; ipt_trigg < PT_TRIGG_BINS; ++ipt_trigg) {
+      const auto& ref = refData(2, 1, 1);
+      for (size_t imult = 0; imult < MULT_BINS; ++imult) {
+        for (size_t ipt_trigg = 0; ipt_trigg < PT_TRIGG_BINS; ++ipt_trigg) {
 
-          for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_hh_2D_mult[imult][ipt_trigg].add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_hh_2D_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg]+std::to_string(ieta), refData(2, 1, 1)));}
-          for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_K0h_2D_mult[imult][ipt_trigg].add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_K0h_2D_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg]+std::to_string(ieta), refData(2, 1, 1)));}
-          for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_Lamh_2D_mult[imult][ipt_trigg].add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_Lamh_2D_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg]+std::to_string(ieta), refData(2, 1, 1)));}
+          book(_hist_hh_2D_mult[imult][ipt_trigg], etabins);
+          book(_hist_K0h_2D_mult[imult][ipt_trigg], etabins);
+          book(_hist_Lamh_2D_mult[imult][ipt_trigg], etabins);
+          for (size_t i=0; i < _hist_hh_2D_mult[imult][ipt_trigg]->numBins(); ++i) {
+            const string suff = mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg]+to_string(i);
+            book(_hist_hh_2D_mult[imult][ipt_trigg]->bin(i+1), "TMP/ist_hh_2D_mult_"+suff, ref);
+            book(_hist_K0h_2D_mult[imult][ipt_trigg]->bin(i+1), "TMP/ist_K0h_2D_mult_"+suff, ref);
+            book(_hist_Lamh_2D_mult[imult][ipt_trigg]->bin(i+1), "TMP/ist_Lamh_2D_mult_"+suff, ref);
+          }
 
           book(_counterChargedTriggers_mult[imult][ipt_trigg], "TMP/counterChargedTriggers_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg]);
           book(_counterK0Triggers_mult[imult][ipt_trigg], "TMP/counterK0Triggers_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg]);
           book(_counterLamTriggers_mult[imult][ipt_trigg], "TMP/counterLamTriggers_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg]);
 
-          book(_hist_dPhi_hh_mult[imult][ipt_trigg],"TMP/hist_dPhi_hh_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(2,1,1));
-          book(_hist_dPhi_K0h_mult[imult][ipt_trigg],"TMP/hist_dPhi_K0h_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(3,1,1));
-          book(_hist_dPhi_Lamh_mult[imult][ipt_trigg],"TMP/hist_dPhi_Lamh_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(4,1,1));
+          book(_hist_dPhi_hh_mult[imult][ipt_trigg],"TMP/hist_dPhi_hh_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg],
+                                                     refData(2,1,1).mkScatter());
+          book(_hist_dPhi_K0h_mult[imult][ipt_trigg],"TMP/hist_dPhi_K0h_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg],
+                                                     refData(3,1,1).mkScatter());
+          book(_hist_dPhi_Lamh_mult[imult][ipt_trigg],"TMP/hist_dPhi_Lamh_mult_"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg],
+                                                      refData(4,1,1).mkScatter());
 
           if (imult < 6 || (imult == 6 && !(ipt_trigg == 0 || ipt_trigg == 5))) {
-            book(_hist_dPhi_hh_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_hh_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(2,1,1));
-            book(_hist_dPhi_K0h_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_K0h_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(3,1,1));
-            book(_hist_dPhi_Lamh_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_Lamh_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg], refData(4,1,1));
+            book(_hist_dPhi_hh_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_hh_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg],
+                                                          refData(2,1,1).mkScatter());
+            book(_hist_dPhi_K0h_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_K0h_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg],
+                                                           refData(3,1,1).mkScatter());
+            book(_hist_dPhi_Lamh_mult_fin[imult][ipt_trigg],"TMP/hist_dPhi_Lamh_mult_fin"+mulsel_name[imult]+"_"+bins_pt_trigg_name[ipt_trigg],
+                                                            refData(4,1,1).mkScatter());
           }
         }
       }
@@ -265,18 +274,24 @@ namespace Rivet {
 
       for (int ipt_trigg = 0; ipt_trigg < PT_TRIGG_BINS; ++ipt_trigg) {
         for (int ipt_assoc = 0; ipt_assoc < PT_ASSOC_BINS; ++ipt_assoc) {
-          for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc].add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_hh_2D_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc]+std::to_string(ieta), refData(2, 1, 1)));}
-          for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_K0h_2D_ptassoc[ipt_trigg][ipt_assoc].add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_K0h_2D_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc]+std::to_string(ieta), refData(2, 1, 1)));}
-          for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_Lamh_2D_ptassoc[ipt_trigg][ipt_assoc].add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_Lamh_2D_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc]+std::to_string(ieta), refData(2, 1, 1)));}
 
-          book(_hist_dPhi_hh_ptassoc[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_hh_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(2,1,1));
-          book(_hist_dPhi_K0h_ptassoc[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_K0h_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(3,1,1));
-          book(_hist_dPhi_Lamh_ptassoc[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_Lamh_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(4,1,1));
+          book(_hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc], etabins);
+          book(_hist_K0h_2D_ptassoc[ipt_trigg][ipt_assoc], etabins);
+          book(_hist_Lamh_2D_ptassoc[ipt_trigg][ipt_assoc], etabins);
+          for (size_t i=0; i < _hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc]->numBins(); ++i) {
+            const string suff = bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc]+to_string(i);
+            book(_hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc]->bin(i+1), "TMP/ist_hh_2D_ptassoc_"+suff, ref);
+            book(_hist_K0h_2D_ptassoc[ipt_trigg][ipt_assoc]->bin(i+1), "TMP/ist_K0h_2D_ptassoc_"+suff, ref);
+            book(_hist_Lamh_2D_ptassoc[ipt_trigg][ipt_assoc]->bin(i+1), "TMP/ist_Lamh_2D_ptassoc_"+suff, ref);
+          }
 
-          book(_hist_dPhi_hh_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_hh_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(2,1,1));
-          book(_hist_dPhi_K0h_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_K0h_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(3,1,1));
-          book(_hist_dPhi_Lamh_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_Lamh_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(4,1,1));
+          book(_hist_dPhi_hh_ptassoc[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_hh_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(2,1,1).mkScatter());
+          book(_hist_dPhi_K0h_ptassoc[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_K0h_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(3,1,1).mkScatter());
+          book(_hist_dPhi_Lamh_ptassoc[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_Lamh_ptassoc_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(4,1,1).mkScatter());
 
+          book(_hist_dPhi_hh_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_hh_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(2,1,1).mkScatter());
+          book(_hist_dPhi_K0h_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_K0h_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(3,1,1).mkScatter());
+          book(_hist_dPhi_Lamh_ptassoc_fin[ipt_trigg][ipt_assoc],"TMP/hist_dPhi_Lamh_ptassoc_fin_"+bins_pt_trigg_name[ipt_trigg]+bins_pt_assoc_name[ipt_assoc], refData(4,1,1).mkScatter());
         }
       }
 
@@ -328,9 +343,15 @@ namespace Rivet {
         }
       }
 
-      for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_mix_hh.add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_mix_hh"+std::to_string(ieta), refData(2, 1, 1)));}
-      for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_mix_K0h.add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_mix_K0h"+std::to_string(ieta), refData(2, 1, 1)));}
-      for(int ieta=1; ieta<Num_etabins; ieta++){Histo1DPtr tmp; _hist_mix_Lamh.add(etabins[ieta-1], etabins[ieta], book(tmp, "TMP/hist_mix_Lamh"+std::to_string(ieta), refData(2, 1, 1)));}
+      book(_hist_mix_hh, etabins);
+      book(_hist_mix_K0h, etabins);
+      book(_hist_mix_Lamh, etabins);
+      for (size_t i=0; i < _hist_mix_hh->numBins(); ++i) {
+        const string suff = to_string(i);
+        book(_hist_mix_hh->bin(i+1), "TMP/hist_mix_hh"+suff, ref);
+        book(_hist_mix_K0h->bin(i+1), "TMP/hist_mix_K0h"+suff, ref);
+        book(_hist_mix_Lamh->bin(i+1), "TMP/hist_mix_Lamh"+suff, ref);
+      }
     }
 
 
@@ -423,7 +444,7 @@ namespace Rivet {
         for (const Particle& trigg : trigg_h_Particles[ipt_trigg]) {
             if(evmc.particles().size()==0)continue;
           for (const Particle& assoc_mix : evmc.particles()){
-            if (assoc_mix.pT() < trigg.pT())fillbyparticles(_hist_mix_hh, trigg, assoc_mix);
+            if (assoc_mix.pT() < trigg.pT()) fillbyparticles(_hist_mix_hh, trigg, assoc_mix);
           }
         }
       }
@@ -433,8 +454,8 @@ namespace Rivet {
           const int pid = abs(triggV0.pid());
           if(evmc.particles().size()==0)continue;
           for (const Particle& assoc_mix : evmc.particles()){
-            if(assoc_mix.pT() < triggV0.pT() && pid==310)fillbyparticles(_hist_mix_K0h, triggV0, assoc_mix);
-            if(assoc_mix.pT() < triggV0.pT() && pid==3122)fillbyparticles(_hist_mix_Lamh, triggV0, assoc_mix);
+            if(assoc_mix.pT() < triggV0.pT() && pid==310) fillbyparticles(_hist_mix_K0h, triggV0, assoc_mix);
+            if(assoc_mix.pT() < triggV0.pT() && pid==3122) fillbyparticles(_hist_mix_Lamh, triggV0, assoc_mix);
           }
         }
       }
@@ -445,62 +466,55 @@ namespace Rivet {
     /// Finalize
     void finalize() {
 
-      double mix_nomalisation_hh = (_hist_mix_hh.histo(0))->integral()/(_hist_mix_hh.histo(0))->numBins();
+      double mix_nomalisation_hh = (_hist_mix_hh->bin(0))->integral()/(_hist_mix_hh->bin(0))->numBins();
       double mix_scaling_hh[38];
-      int i_mix=0;
-      for(Histo1DPtr hist : _hist_mix_hh.histos()){
-        mix_scaling_hh[i_mix]=(hist->integral()/hist->numBins())/mix_nomalisation_hh;
-        i_mix++;
+      for (auto& b : _hist_mix_hh->bins()) {
+        mix_scaling_hh[b.index()-1] = b->integral()/b->numBins()/mix_nomalisation_hh;
       }
 
-      double mix_nomalisation_K0h = (_hist_mix_K0h.histo(0))->integral()/(_hist_mix_K0h.histo(0))->numBins();
+      double mix_nomalisation_K0h = (_hist_mix_K0h->bin(0))->integral()/(_hist_mix_K0h->bin(0))->numBins();
       double mix_scaling_K0h[38];
-      i_mix=0;
-      for(Histo1DPtr hist : _hist_mix_K0h.histos()){
-        mix_scaling_K0h[i_mix]=(hist->integral()/hist->numBins())/mix_nomalisation_K0h;
-        i_mix++;
+      for (auto& b : _hist_mix_K0h->bins()) {
+        mix_scaling_hh[b.index()-1] = b->integral()/b->numBins()/mix_nomalisation_K0h;
       }
 
-      double mix_nomalisation_Lamh = (_hist_mix_Lamh.histo(0))->integral()/(_hist_mix_Lamh.histo(0))->numBins();
+      double mix_nomalisation_Lamh = (_hist_mix_Lamh->bin(0))->integral()/(_hist_mix_Lamh->bin(0))->numBins();
       double mix_scaling_Lamh[38];
-      i_mix=0;
-      for(Histo1DPtr hist : _hist_mix_Lamh.histos()){
-        mix_scaling_Lamh[i_mix]=(hist->integral()/hist->numBins())/mix_nomalisation_Lamh;
-        i_mix++;
+      for (auto& b : _hist_mix_Lamh->bins()) {
+        mix_scaling_hh[b.index()-1] = b->integral()/b->numBins()/mix_nomalisation_Lamh;
       }
 
+      size_t i_mix=0;
       for (int imult = 0; imult < MULT_BINS; ++imult) {
         for (int ipt_trigg = 0; ipt_trigg < PT_TRIGG_BINS; ++ipt_trigg) {
           //cor. scaling + mixing
           if (_counterChargedTriggers_mult[imult][ipt_trigg]->sumW() > 0) {
-            for (Histo1DPtr hist : _hist_hh_2D_mult[imult][ipt_trigg].histos()) {
-              scale(hist,1./_counterChargedTriggers_mult[imult][ipt_trigg]->sumW());
+            scale(_hist_hh_2D_mult[imult][ipt_trigg], 1./_counterChargedTriggers_mult[imult][ipt_trigg]->sumW());
+          }
+          i_mix = 0;
+          for (auto& hist : _hist_hh_2D_mult[imult][ipt_trigg]->bins()) {
+            if (mix_scaling_hh[i_mix]>0) scale(hist, 1./mix_scaling_hh[i_mix]);
+            ++i_mix;
+          }
+          if (_counterK0Triggers_mult[imult][ipt_trigg]->sumW() > 0) {
+            for (auto& hist : _hist_K0h_2D_mult[imult][ipt_trigg]->bins()) {
+              scale(hist, 1./_counterK0Triggers_mult[imult][ipt_trigg]->sumW());
             }
           }
           i_mix = 0;
-          for (Histo1DPtr hist : _hist_hh_2D_mult[imult][ipt_trigg].histos()) {
-            if (mix_scaling_hh[i_mix]>0) scale(hist,1./mix_scaling_hh[i_mix]);
-            i_mix++;
+          for (auto& hist : _hist_K0h_2D_mult[imult][ipt_trigg]->bins()) {
+            if (mix_scaling_K0h[i_mix]>0) scale(hist, 1./mix_scaling_K0h[i_mix]);
+            ++i_mix;
           }
-          if (_counterK0Triggers_mult[imult][ipt_trigg]->sumW() >0) {
-            for (Histo1DPtr hist : _hist_K0h_2D_mult[imult][ipt_trigg].histos()) {
-              scale(hist,1./_counterK0Triggers_mult[imult][ipt_trigg]->sumW());
+          if (_counterLamTriggers_mult[imult][ipt_trigg]->sumW() > 0) {
+            for (auto& hist : _hist_Lamh_2D_mult[imult][ipt_trigg]->bins()) {
+              scale(hist, 1./_counterLamTriggers_mult[imult][ipt_trigg]->sumW());
             }
           }
           i_mix = 0;
-          for (Histo1DPtr hist : _hist_K0h_2D_mult[imult][ipt_trigg].histos()) {
-            if (mix_scaling_K0h[i_mix]>0) scale(hist,1./mix_scaling_K0h[i_mix]);
-            i_mix++;
-          }
-          if (_counterLamTriggers_mult[imult][ipt_trigg]->sumW() >0) {
-            for (Histo1DPtr hist : _hist_Lamh_2D_mult[imult][ipt_trigg].histos()) {
-              scale(hist,1./_counterLamTriggers_mult[imult][ipt_trigg]->sumW());
-            }
-          }
-          i_mix = 0;
-          for (Histo1DPtr hist : _hist_Lamh_2D_mult[imult][ipt_trigg].histos()) {
-            if (mix_scaling_Lamh[i_mix]>0) scale(hist,1./mix_scaling_Lamh[i_mix]);
-            i_mix++;
+          for (auto& hist : _hist_Lamh_2D_mult[imult][ipt_trigg]->bins()) {
+            if (mix_scaling_Lamh[i_mix]>0) scale(hist, 1./mix_scaling_Lamh[i_mix]);
+            ++i_mix;
           }
 
           //integration by eta
@@ -518,34 +532,34 @@ namespace Rivet {
         for (int ipt_assoc = 0; ipt_assoc < PT_ASSOC_BINS; ++ipt_assoc) {
           //cor. scaling + mixing
           if (_counterChargedTriggers_mult[6][ipt_trigg]->sumW() >0) {
-            for (Histo1DPtr hist : _hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc].histos()) {
+            for (auto& hist : _hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc]->bins()) {
               scale(hist,1./_counterChargedTriggers_mult[6][ipt_trigg]->sumW());
             }
           }
           i_mix=0;
-          for (Histo1DPtr hist : _hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc].histos()) {
+          for (auto& hist : _hist_hh_2D_ptassoc[ipt_trigg][ipt_assoc]->bins()) {
             if (mix_scaling_hh[i_mix]>0) scale(hist,1./mix_scaling_hh[i_mix]);
-            i_mix++;
+            ++i_mix;
           }
           if (_counterK0Triggers_mult[6][ipt_trigg]->sumW() >0) {
-            for (Histo1DPtr hist : _hist_K0h_2D_ptassoc[ipt_trigg][ipt_assoc].histos()) {
+            for (auto& hist : _hist_K0h_2D_ptassoc[ipt_trigg][ipt_assoc]->bins()) {
               scale(hist,1./_counterK0Triggers_mult[6][ipt_trigg]->sumW());
             }
           }
           i_mix=0;
-          for (Histo1DPtr hist : _hist_K0h_2D_ptassoc[ipt_trigg][ipt_assoc].histos()) {
+          for (auto& hist : _hist_K0h_2D_ptassoc[ipt_trigg][ipt_assoc]->bins()) {
             if (mix_scaling_K0h[i_mix]>0)scale(hist,1./mix_scaling_K0h[i_mix]);
-            i_mix++;
+            ++i_mix;
           }
           if (_counterLamTriggers_mult[6][ipt_trigg]->sumW() >0) {
-            for (Histo1DPtr hist : _hist_Lamh_2D_ptassoc[ipt_trigg][ipt_assoc].histos()) {
+            for (auto& hist : _hist_Lamh_2D_ptassoc[ipt_trigg][ipt_assoc]->bins()) {
               scale(hist,1./_counterLamTriggers_mult[6][ipt_trigg]->sumW());
             }
           }
           i_mix=0;
-          for (Histo1DPtr hist : _hist_Lamh_2D_ptassoc[ipt_trigg][ipt_assoc].histos()) {
+          for (Histo1DPtr hist : _hist_Lamh_2D_ptassoc[ipt_trigg][ipt_assoc]->bins()) {
             if (mix_scaling_Lamh[i_mix]>0) scale(hist,1./mix_scaling_Lamh[i_mix]);
-            i_mix++;
+            ++i_mix;
           }
 
           //integration by eta
@@ -632,19 +646,19 @@ namespace Rivet {
     /// @name Histograms
     /// @{
 
-    BinnedHistogram _hist_mix_hh, _hist_mix_K0h, _hist_mix_Lamh;
+    Histo1DGroupPtr _hist_mix_hh, _hist_mix_K0h, _hist_mix_Lamh;
 
     CounterPtr _counterChargedTriggers_mult[MULT_BINS][PT_TRIGG_BINS];
     CounterPtr _counterK0Triggers_mult[MULT_BINS][PT_TRIGG_BINS];
     CounterPtr _counterLamTriggers_mult[MULT_BINS][PT_TRIGG_BINS];
 
-    BinnedHistogram _hist_hh_2D_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
-    BinnedHistogram _hist_K0h_2D_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
-    BinnedHistogram _hist_Lamh_2D_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
+    Histo1DGroupPtr _hist_hh_2D_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
+    Histo1DGroupPtr _hist_K0h_2D_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
+    Histo1DGroupPtr _hist_Lamh_2D_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
 
-    BinnedHistogram _hist_hh_2D_mult[MULT_BINS][PT_TRIGG_BINS];
-    BinnedHistogram _hist_K0h_2D_mult[MULT_BINS][PT_TRIGG_BINS];
-    BinnedHistogram _hist_Lamh_2D_mult[MULT_BINS][PT_TRIGG_BINS];
+    Histo1DGroupPtr _hist_hh_2D_mult[MULT_BINS][PT_TRIGG_BINS];
+    Histo1DGroupPtr _hist_K0h_2D_mult[MULT_BINS][PT_TRIGG_BINS];
+    Histo1DGroupPtr _hist_Lamh_2D_mult[MULT_BINS][PT_TRIGG_BINS];
 
     Scatter2DPtr _hist_dPhi_hh_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
     Scatter2DPtr _hist_dPhi_K0h_ptassoc[PT_TRIGG_BINS][PT_ASSOC_BINS];
@@ -693,9 +707,8 @@ namespace Rivet {
     Scatter2DPtr _hist_Lamh_NearSideYield_ptassoc[PT_TRIGG_BINS-1];
     Scatter2DPtr _hist_Lamh_AwaySideYield_ptassoc[PT_TRIGG_BINS-1];
 
-    static const int Num_etabins = 39;
     vector<double> multiplicityBins;
-    double etabins[Num_etabins];
+    vector<double> etabins;
 
     vector<double> bins_pt_trigg = {3. ,4. ,5. ,6. ,7. ,9. ,11. ,15. ,20.};
     vector<double> bins_pt_assoc = {1. ,2., 3. ,4. ,5. ,6. ,7. ,9. ,11. ,15., 20.};

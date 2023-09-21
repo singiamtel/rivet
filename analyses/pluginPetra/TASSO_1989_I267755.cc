@@ -29,11 +29,11 @@ namespace Rivet {
       // Book histograms
       // Book histograms
       _iHist=-1;
-      if(isCompatibleWithSqrtS(34*GeV)) {
-	_iHist = 0;
+      if (isCompatibleWithSqrtS(34*GeV)) {
+        _iHist = 0;
       }
       else if (isCompatibleWithSqrtS(44*GeV)) {
-	_iHist = 1;
+        _iHist = 1;
       }
       else
         MSG_WARNING("CoM energy of events sqrt(s) = " << sqrtS()/GeV
@@ -104,7 +104,7 @@ namespace Rivet {
       scale(_h_x_K  , 1./sumOfWeights());
       scale(_h_x_p  , 1./sumOfWeights());
       if(_h_x_pi0) scale(_h_x_pi0, 1./sumOfWeights());
-      Scatter2DPtr temp1,temp2,temp3;
+      Estimate1DPtr temp1,temp2,temp3;
       book(temp1,3*_iHist+1,1,1);
       book(temp2,3*_iHist+2,1,1);
       book(temp3,3*_iHist+3,1,1);

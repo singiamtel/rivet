@@ -226,9 +226,9 @@ namespace Rivet {
 
     // Define histograms
     // ratio
-    std::map<std::string, Scatter2DPtr > _h_ratio_lowpt;
-    std::map<std::string, Scatter2DPtr > _h_ratio_midpt;
-    std::map<std::string, Scatter2DPtr > _h_ratio_highpt;
+    std::map<std::string, Estimate1DPtr > _h_ratio_lowpt;
+    std::map<std::string, Estimate1DPtr > _h_ratio_midpt;
+    std::map<std::string, Estimate1DPtr > _h_ratio_highpt;
     // numerator
     std::map<std::string, Histo1DPtr > _h_num_lowpt;
     std::map<std::string, Histo1DPtr > _h_num_midpt;

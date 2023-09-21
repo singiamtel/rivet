@@ -34,32 +34,33 @@ namespace Rivet {
 
     void findChildren(const Particle & p,int & nCharged, int & nLep) {
       bool isBottom = PID::isBottomHadron(p.pid());
-      for( const Particle &child : p.children()) {
-	if(child.children().empty()) {
-	  if(PID::isCharged(child.pid())           ) ++nCharged;
-	  if(isBottom && (child.abspid()==11||child.abspid()==13)) ++nLep;
-	}
-	else
-	  findChildren(child,nCharged,nLep);
+      for (const Particle& child : p.children()) {
+        if (child.children().empty()) {
+          if (PID::isCharged(child.pid()))  ++nCharged;
+          if (isBottom && (child.abspid()==11||child.abspid()==13))  ++nLep;
+        }
+        else {
+          findChildren(child,nCharged,nLep);
+        }
       }
     }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       for (const Particle& p :  apply<FinalState>(event, "UFS").particles(Cuts::pid==300553)) {
-	_n_Ups_All->fill();
-	int nCharged(0),nLep(0);
-	findChildren(p,nCharged,nLep);
-	_h_n->fill(nCharged);
-	_n_tot->fill(10.1,nCharged);
-	if(nLep==2) {
-	  _n_lep  ->fill(10.1,nCharged);
-	  _n_Ups_Lep->fill();
-	}
-	else {
-	  _n_nolep->fill(10.1,nCharged);
-	  _n_Ups_NoLep->fill();
-	}
+        _n_Ups_All->fill();
+        int nCharged(0),nLep(0);
+        findChildren(p,nCharged,nLep);
+        _h_n->fill(nCharged);
+        _n_tot->fill(Ecm, nCharged);
+        if(nLep==2) {
+          _n_lep  ->fill(Ecm, nCharged);
+          _n_Ups_Lep->fill();
+        }
+        else {
+          _n_nolep->fill(Ecm, nCharged);
+          _n_Ups_NoLep->fill();
+        }
       }
     }
 
@@ -78,8 +79,9 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_n;
-    Histo1DPtr _n_tot,_n_lep,_n_nolep;
+    BinnedHistoPtr<string> _n_tot,_n_lep,_n_nolep;
     CounterPtr _n_Ups_All,_n_Ups_Lep,_n_Ups_NoLep;
+    const string Ecm = "10.6";
 
     /// @}
 

@@ -28,7 +28,7 @@ namespace Rivet {
     return _instance;
   }
 
-  /// Registers a new type with AO::type() name @a name
+  /// Registers a new type with AO::type() @a name
   template<typename T>
   void registerType(const string& name) {
     TypeRegistry& reg = TypeRegistry::create();

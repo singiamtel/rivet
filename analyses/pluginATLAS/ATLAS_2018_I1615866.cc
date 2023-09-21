@@ -48,7 +48,7 @@ namespace Rivet {
       }
       // fill histogram
       _h_mass->fill(mmumu);
-      _h_sigma->fill(13000);
+      _h_sigma->fill();
     }
 
 
@@ -63,7 +63,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_sigma;
+    CounterPtr _h_sigma;
     Histo1DPtr _h_mass;
     /// @}
 

@@ -63,7 +63,8 @@ namespace Rivet {
         // Cluster the jets
         for (size_t j = 1; j < _nPhotonDurham->numBinsX()+1; ++j) {
           bool accept(true);
-          const double ycut = _nPhotonDurham->bin(j).xMid(); ///< @todo Should this be xMin?
+          const string edge = _nPhotonDurham->bin(j).xEdge();
+          const double ycut = std::stod(edge);
           const double dcut = sqr(evis)*ycut;
           vector<fastjet::PseudoJet> exclusive_jets = sorted_by_E(clust_seq.exclusive_jets(dcut));
           for (size_t iy = 0; iy < exclusive_jets.size(); ++iy) {
@@ -76,18 +77,19 @@ namespace Rivet {
             }
           }
           if (!accept) continue;
-          _nPhotonDurham->fill(ycut, _nPhotonDurham->bin(j).xWidth());
+          _nPhotonDurham->fill(edge);
           size_t njet = min(size_t(4), exclusive_jets.size()) - 1;
           if (j < _nPhotonJetDurham[njet]->numBins()+1) {
             const auto& b = _nPhotonJetDurham[njet]->bin(j);
-            _nPhotonJetDurham[njet]->fill(b.xMid(), b.xWidth());
+            _nPhotonJetDurham[njet]->fill(b.xEdge());
           }
         }
         // Run the jet clustering JADE
         fastjet::ClusterSequence clust_seq2(input_particles, jade_def);
         for (size_t j = 1; j < _nPhotonJade->numBinsX()+1; ++j) {
           bool accept(true);
-          const double ycut = _nPhotonJade->bin(j).xMid(); ///< @todo Should this be xMin?
+          const string edge = _nPhotonJade->bin(j).xEdge();
+          const double ycut = std::stod(edge);
           const double dcut = sqr(evis)*ycut;
           vector<fastjet::PseudoJet> exclusive_jets = sorted_by_E(clust_seq2.exclusive_jets(dcut));
           for (size_t iy = 0; iy < exclusive_jets.size(); ++iy) {
@@ -101,11 +103,11 @@ namespace Rivet {
           }
           if (!accept) continue;
           /// @todo Really want to use a "bar graph" here (i.e. ignore bin width)
-          _nPhotonJade->fill(ycut, _nPhotonJade->bin(j).xWidth());
+          _nPhotonJade->fill(edge);
           size_t njet = min(size_t(4), exclusive_jets.size()) - 1;
           if (j < _nPhotonJetJade[njet]->numBins()+1) {
             const auto& b = _nPhotonJetJade[njet]->bin(j);
-            _nPhotonJetJade[njet]->fill(b.xMid(), b.xWidth());
+            _nPhotonJetJade[njet]->fill(b.xEdge());
           }
         }
         // Add this photon back in for the next iteration of the loop
@@ -121,11 +123,11 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book datasets
-      book(_nPhotonJade   ,1, 1, 1);
-      book(_nPhotonDurham ,2, 1, 1);
+      book(_nPhotonJade, 1, 1, 1);
+      book(_nPhotonDurham, 2, 1, 1);
       for (size_t ix = 0; ix < 4; ++ix) {
-        book(_nPhotonJetJade  [ix] ,3 , 1, 1+ix);
-        book(_nPhotonJetDurham[ix] ,4 , 1, 1+ix);
+        book(_nPhotonJetJade[ix], 3, 1, 1+ix);
+        book(_nPhotonJetDurham[ix], 4, 1, 1+ix);
       }
     }
 
@@ -135,10 +137,8 @@ namespace Rivet {
       const double fact = 1000/sumOfWeights();
       scale(_nPhotonJade, fact);
       scale(_nPhotonDurham, fact);
-      for (size_t ix = 0; ix < 4; ++ix) {
-        scale(_nPhotonJetJade  [ix],fact);
-        scale(_nPhotonJetDurham[ix],fact);
-      }
+      scale(_nPhotonJetJade, fact);
+      scale(_nPhotonJetDurham, fact);
     }
 
     /// @}
@@ -146,10 +146,10 @@ namespace Rivet {
 
   private:
 
-    Histo1DPtr _nPhotonJade;
-    Histo1DPtr _nPhotonDurham;
-    Histo1DPtr _nPhotonJetJade  [4];
-    Histo1DPtr _nPhotonJetDurham[4];
+    BinnedHistoPtr<string> _nPhotonJade;
+    BinnedHistoPtr<string> _nPhotonDurham;
+    BinnedHistoPtr<string> _nPhotonJetJade[4];
+    BinnedHistoPtr<string> _nPhotonJetDurham[4];
 
   };
 

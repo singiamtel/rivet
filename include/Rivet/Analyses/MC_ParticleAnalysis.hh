@@ -50,14 +50,14 @@ namespace Rivet {
     std::vector<Histo1DPtr> _h_eta_plus, _h_eta_minus;
     std::vector<Histo1DPtr> _h_rap;
     std::vector<Histo1DPtr> _h_rap_plus, _h_rap_minus;
-    std::vector<Scatter2DPtr> tmpeta, tmprap;
+    std::vector<Estimate1DPtr> tmpeta, tmprap;
 
     std::map<std::pair<size_t, size_t>, Histo1DPtr> _h_deta;
     std::map<std::pair<size_t, size_t>, Histo1DPtr> _h_dphi;
     std::map<std::pair<size_t, size_t>, Histo1DPtr> _h_dR;
-    Histo1DPtr _h_multi_exclusive, _h_multi_inclusive;
-    Histo1DPtr _h_multi_exclusive_prompt, _h_multi_inclusive_prompt;
-    Scatter2DPtr _h_multi_ratio, _h_multi_ratio_prompt;
+    BinnedHistoPtr<int> _h_multi_exclusive, _h_multi_inclusive;
+    BinnedHistoPtr<int> _h_multi_exclusive_prompt, _h_multi_inclusive_prompt;
+    BinnedEstimatePtr<std::string> _h_multi_ratio, _h_multi_ratio_prompt;
     /// @}
 
   };

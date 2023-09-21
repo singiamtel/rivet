@@ -389,48 +389,48 @@ namespace Rivet {
       	book(_multLambda[i], "_multLambda_"+to_str(i));
       }
 
-      book(tmp1, 24, 1, 1, true);
-      book(tmp2, 24, 1, 2, true);
-      book(tmp3, 24, 1, 3, true);
-      book(tmp4, 24, 1, 4, true);
-      book(tmp5, 25, 1, 1, true);
-      book(tmp6, 25, 1, 2, true);
-      book(tmp7, 24, 2, 1, true);
-      book(tmp8, 24, 2, 2, true);
-      book(tmp9, 24, 2, 3, true);
-      book(tmp10, 24, 2, 4, true);
-      book(tmp11, 25, 2, 1, true);
-      book(tmp12, 25, 2, 2, true);
-      book(tmp13, 24, 3, 1, true);
-      book(tmp14, 24, 3, 2, true);
-      book(tmp15, 24, 3, 3, true);
-      book(tmp16, 24, 3, 4, true);
-      book(tmp17, 25, 3, 1, true);
-      book(tmp18, 25, 3, 2, true);
-      book(tmp19, 24, 4, 1, true);
-      book(tmp20, 24, 4, 2, true);
-      book(tmp21, 24, 4, 3, true);
-      book(tmp22, 24, 4, 4, true);
-      book(tmp23, 25, 4, 1, true);
-      book(tmp24, 25, 4, 2, true);
-      book(tmp25, 24, 5, 1, true);
-      book(tmp26, 24, 5, 2, true);
-      book(tmp27, 24, 5, 3, true);
-      book(tmp28, 24, 5, 4, true);
-      book(tmp29, 25, 5, 1, true);
-      book(tmp30, 25, 5, 2, true);
-      book(tmp31, 24, 6, 1, true);
-      book(tmp32, 24, 6, 2, true);
-      book(tmp33, 24, 6, 3, true);
-      book(tmp34, 24, 6, 4, true);
-      book(tmp35, 25, 6, 1, true);
-      book(tmp36, 25, 6, 2, true);
-      book(tmp37, 24, 7, 1, true);
-      book(tmp38, 24, 7, 2, true);
-      book(tmp39, 24, 7, 3, true);
-      book(tmp40, 24, 7, 4, true);
-      book(tmp41, 25, 7, 1, true);
-      book(tmp42, 25, 7, 2, true);
+      book(tmp1, 24, 1, 1);
+      book(tmp2, 24, 1, 2);
+      book(tmp3, 24, 1, 3);
+      book(tmp4, 24, 1, 4);
+      book(tmp5, 25, 1, 1);
+      book(tmp6, 25, 1, 2);
+      book(tmp7, 24, 2, 1);
+      book(tmp8, 24, 2, 2);
+      book(tmp9, 24, 2, 3);
+      book(tmp10, 24, 2, 4);
+      book(tmp11, 25, 2, 1);
+      book(tmp12, 25, 2, 2);
+      book(tmp13, 24, 3, 1);
+      book(tmp14, 24, 3, 2);
+      book(tmp15, 24, 3, 3);
+      book(tmp16, 24, 3, 4);
+      book(tmp17, 25, 3, 1);
+      book(tmp18, 25, 3, 2);
+      book(tmp19, 24, 4, 1);
+      book(tmp20, 24, 4, 2);
+      book(tmp21, 24, 4, 3);
+      book(tmp22, 24, 4, 4);
+      book(tmp23, 25, 4, 1);
+      book(tmp24, 25, 4, 2);
+      book(tmp25, 24, 5, 1);
+      book(tmp26, 24, 5, 2);
+      book(tmp27, 24, 5, 3);
+      book(tmp28, 24, 5, 4);
+      book(tmp29, 25, 5, 1);
+      book(tmp30, 25, 5, 2);
+      book(tmp31, 24, 6, 1);
+      book(tmp32, 24, 6, 2);
+      book(tmp33, 24, 6, 3);
+      book(tmp34, 24, 6, 4);
+      book(tmp35, 25, 6, 1);
+      book(tmp36, 25, 6, 2);
+      book(tmp37, 24, 7, 1);
+      book(tmp38, 24, 7, 2);
+      book(tmp39, 24, 7, 3);
+      book(tmp40, 24, 7, 4);
+      book(tmp41, 25, 7, 1);
+      book(tmp42, 25, 7, 2);
     }
 
 
@@ -441,33 +441,33 @@ namespace Rivet {
       divide(_h_XpKPlusN, _temp_XpChargedN2, _s_Xp_KPl_Ch);
       divide(_h_XpProtonN, _temp_XpChargedN3, _s_Xp_Pr_Ch);
       divide(_h_XpPiPlusCharm, _h_XpPiPlusLight, _s_Xp_PiPlCh_PiPlLi);
-      _s_Xp_PiPlCh_PiPlLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfcWeights));
+      _s_Xp_PiPlCh_PiPlLi->scale(dbl(*_SumOfudsWeights / *_SumOfcWeights));
       divide(_h_XpPiPlusBottom, _h_XpPiPlusLight, _s_Xp_PiPlBo_PiPlLi);
-       _s_Xp_PiPlBo_PiPlLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfbWeights));
+       _s_Xp_PiPlBo_PiPlLi->scale(dbl(*_SumOfudsWeights / *_SumOfbWeights));
       divide(_temp_XpKPlusCharm , _temp_XpKPlusLight, _s_Xp_KPlCh_KPlLi);
-      _s_Xp_KPlCh_KPlLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfcWeights));
+      _s_Xp_KPlCh_KPlLi->scale(dbl(*_SumOfudsWeights / *_SumOfcWeights));
       divide(_h_XpKPlusBottom, _h_XpKPlusLight, _s_Xp_KPlBo_KPlLi);
-       _s_Xp_KPlBo_KPlLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfbWeights));
+       _s_Xp_KPlBo_KPlLi->scale(dbl(*_SumOfudsWeights / *_SumOfbWeights));
       divide(_temp_XpKStar0Charm, _temp_XpKStar0Light, _s_Xp_KS0Ch_KS0Li);
-      _s_Xp_KS0Ch_KS0Li->scale(1,dbl(*_SumOfudsWeights / *_SumOfcWeights));
+      _s_Xp_KS0Ch_KS0Li->scale(dbl(*_SumOfudsWeights / *_SumOfcWeights));
       divide(_h_XpKStar0Bottom, _h_XpKStar0Light, _s_Xp_KS0Bo_KS0Li);
-      _s_Xp_KS0Bo_KS0Li->scale(1,dbl(*_SumOfudsWeights / *_SumOfbWeights));
+      _s_Xp_KS0Bo_KS0Li->scale(dbl(*_SumOfudsWeights / *_SumOfbWeights));
       divide(_temp_XpProtonCharm, _temp_XpProtonLight, _s_Xp_PrCh_PrLi);
-      _s_Xp_PrCh_PrLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfcWeights));
+      _s_Xp_PrCh_PrLi->scale(dbl(*_SumOfudsWeights / *_SumOfcWeights));
       divide(_h_XpProtonBottom, _h_XpProtonLight, _s_Xp_PrBo_PrLi);
-      _s_Xp_PrBo_PrLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfbWeights));
+      _s_Xp_PrBo_PrLi->scale(dbl(*_SumOfudsWeights / *_SumOfbWeights));
       divide(_h_XpLambdaCharm, _h_XpLambdaLight, _s_Xp_LaCh_LaLi);
-      _s_Xp_LaCh_LaLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfcWeights));
+      _s_Xp_LaCh_LaLi->scale(dbl(*_SumOfudsWeights / *_SumOfcWeights));
       divide(_h_XpLambdaBottom, _h_XpLambdaLight, _s_Xp_LaBo_LaLi);
-      _s_Xp_LaBo_LaLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfbWeights));
+      _s_Xp_LaBo_LaLi->scale(dbl(*_SumOfudsWeights / *_SumOfbWeights));
       divide(_h_XpK0Charm, _h_XpK0Light, _s_Xp_K0Ch_K0Li);
-      _s_Xp_K0Ch_K0Li->scale(1,dbl(*_SumOfudsWeights / *_SumOfcWeights));
+      _s_Xp_K0Ch_K0Li->scale(dbl(*_SumOfudsWeights / *_SumOfcWeights));
       divide(_h_XpK0Bottom, _h_XpK0Light, _s_Xp_K0Bo_K0Li);
-      _s_Xp_K0Bo_K0Li->scale(1,dbl(*_SumOfudsWeights / *_SumOfbWeights));
+      _s_Xp_K0Bo_K0Li->scale(dbl(*_SumOfudsWeights / *_SumOfbWeights));
       divide(_h_XpPhiCharm, _h_XpPhiLight, _s_Xp_PhiCh_PhiLi);
-      _s_Xp_PhiCh_PhiLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfcWeights));
+      _s_Xp_PhiCh_PhiLi->scale(dbl(*_SumOfudsWeights / *_SumOfcWeights));
       divide(_h_XpPhiBottom, _h_XpPhiLight, _s_Xp_PhiBo_PhiLi);
-      _s_Xp_PhiBo_PhiLi->scale(1,dbl(*_SumOfudsWeights / *_SumOfbWeights));
+      _s_Xp_PhiBo_PhiLi->scale(dbl(*_SumOfudsWeights / *_SumOfbWeights));
 
       // Then the leading particles
       divide(*_h_RPiMinus - *_h_RPiPlus, *_h_RPiMinus + *_h_RPiPlus, _s_PiM_PiP);
@@ -522,122 +522,122 @@ namespace Rivet {
       // pi+/-
       // all
       avgNumPartsAll = dbl(*_multPiPlus[0])/sumOfWeights();
-      tmp1->point(0).setY(avgNumPartsAll);
+      tmp1->bin(1).set(avgNumPartsAll, 0.);
       // light
       avgNumPartsLight = dbl(*_multPiPlus[1] / *_SumOfudsWeights);
-      tmp2->point(0).setY(avgNumPartsLight);
+      tmp2->bin(1).set(avgNumPartsLight, 0.);
       // charm
       avgNumPartsCharm = dbl(*_multPiPlus[2] / *_SumOfcWeights);
-      tmp3->point(0).setY(avgNumPartsCharm);
+      tmp3->bin(1).set(avgNumPartsCharm, 0.);
       // bottom
       avgNumPartsBottom = dbl(*_multPiPlus[3] / *_SumOfbWeights);
-      tmp4->point(0).setY(avgNumPartsBottom);
+      tmp4->bin(1).set(avgNumPartsBottom, 0.);
       // charm-light
-      tmp5->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
+      tmp5->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
       // bottom-light
-      tmp6->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp6->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
       // K+/-
       // all
       avgNumPartsAll = dbl(*_multKPlus[0])/sumOfWeights();
-      tmp7->point(0).setY(avgNumPartsAll);
+      tmp7->bin(1).set(avgNumPartsAll, 0.);
       // light
       avgNumPartsLight = dbl(*_multKPlus[1] / *_SumOfudsWeights);
-      tmp8->point(0).setY(avgNumPartsLight);
+      tmp8->bin(1).set(avgNumPartsLight, 0.);
       // charm
       avgNumPartsCharm = dbl(*_multKPlus[2] / *_SumOfcWeights);
-      tmp9->point(0).setY(avgNumPartsCharm);
+      tmp9->bin(1).set(avgNumPartsCharm, 0.);
       // bottom
       avgNumPartsBottom = dbl(*_multKPlus[3] / *_SumOfbWeights);
-      tmp10->point(0).setY(avgNumPartsBottom);
+      tmp10->bin(1).set(avgNumPartsBottom, 0.);
       // charm-light
-      tmp11->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
+      tmp11->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
       // bottom-light
-      tmp12->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp12->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
       // K0
       // all
       avgNumPartsAll = dbl(*_multK0[0])/sumOfWeights();
-      tmp13->point(0).setY(avgNumPartsAll);
+      tmp13->bin(1).set(avgNumPartsAll, 0.);
       // light
       avgNumPartsLight = dbl(*_multK0[1] / *_SumOfudsWeights);
-      tmp14->point(0).setY(avgNumPartsLight);
+      tmp14->bin(1).set(avgNumPartsLight, 0.);
       // charm
       avgNumPartsCharm = dbl(*_multK0[2] / *_SumOfcWeights);
-      tmp15->point(0).setY(avgNumPartsCharm);
+      tmp15->bin(1).set(avgNumPartsCharm, 0.);
       // bottom
       avgNumPartsBottom = dbl(*_multK0[3] / *_SumOfbWeights);
-      tmp16->point(0).setY(avgNumPartsBottom);
+      tmp16->bin(1).set(avgNumPartsBottom, 0.);
       // charm-light
-      tmp17->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
+      tmp17->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
       // bottom-light
-      tmp18->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp18->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
       // K*0
       // all
       avgNumPartsAll = dbl(*_multKStar0[0])/sumOfWeights();
-      tmp19->point(0).setY(avgNumPartsAll);
+      tmp19->bin(1).set(avgNumPartsAll, 0.);
       // light
       avgNumPartsLight = dbl(*_multKStar0[1] / *_SumOfudsWeights);
-      tmp20->point(0).setY(avgNumPartsLight);
+      tmp20->bin(1).set(avgNumPartsLight, 0.);
       // charm
       avgNumPartsCharm = dbl(*_multKStar0[2] / *_SumOfcWeights);
-      tmp21->point(0).setY(avgNumPartsCharm);
+      tmp21->bin(1).set(avgNumPartsCharm, 0.);
       // bottom
       avgNumPartsBottom = dbl(*_multKStar0[3] / *_SumOfbWeights);
-      tmp22->point(0).setY(avgNumPartsBottom);
+      tmp22->bin(1).set(avgNumPartsBottom, 0.);
       // charm-light
-      tmp23->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
+      tmp23->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
       // bottom-light
-      tmp24->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp24->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
       // phi
       // all
       avgNumPartsAll = dbl(*_multPhi[0])/sumOfWeights();
-      tmp25->point(0).setY(avgNumPartsAll);
+      tmp25->bin(1).set(avgNumPartsAll, 0.);
       // light
       avgNumPartsLight = dbl(*_multPhi[1] / *_SumOfudsWeights);
-      tmp26->point(0).setY(avgNumPartsLight);
+      tmp26->bin(1).set(avgNumPartsLight, 0.);
       // charm
       avgNumPartsCharm = dbl(*_multPhi[2] / *_SumOfcWeights);
-      tmp27->point(0).setY(avgNumPartsCharm);
+      tmp27->bin(1).set(avgNumPartsCharm, 0.);
       // bottom
       avgNumPartsBottom = dbl(*_multPhi[3] / *_SumOfbWeights);
-      tmp28->point(0).setY(avgNumPartsBottom);
+      tmp28->bin(1).set(avgNumPartsBottom, 0.);
       // charm-light
-      tmp29->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
+      tmp29->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
       // bottom-light
-      tmp30->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp30->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
       // p
       // all
       avgNumPartsAll = dbl(*_multProton[0])/sumOfWeights();
-      tmp31->point(0).setY(avgNumPartsAll);
+      tmp31->bin(1).set(avgNumPartsAll, 0.);
       // light
       avgNumPartsLight = dbl(*_multProton[1] / *_SumOfudsWeights);
-      tmp32->point(0).setY(avgNumPartsLight);
+      tmp32->bin(1).set(avgNumPartsLight, 0.);
       // charm
       avgNumPartsCharm = dbl(*_multProton[2] / *_SumOfcWeights);
-      tmp33->point(0).setY(avgNumPartsCharm);
+      tmp33->bin(1).set(avgNumPartsCharm, 0.);
       // bottom
       avgNumPartsBottom = dbl(*_multProton[3] / *_SumOfbWeights);
-      tmp34->point(0).setY(avgNumPartsBottom);
+      tmp34->bin(1).set(avgNumPartsBottom, 0.);
       // charm-light
-      tmp35->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
+      tmp35->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
       // bottom-light
-      tmp36->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp36->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
       // Lambda
       // all
       avgNumPartsAll = dbl(*_multLambda[0])/sumOfWeights();
-      tmp37->point(0).setY(avgNumPartsAll);
+      tmp37->bin(1).set(avgNumPartsAll, 0.);
       // light
       avgNumPartsLight = dbl(*_multLambda[1] / *_SumOfudsWeights);
-      tmp38->point(0).setY(avgNumPartsLight);
+      tmp38->bin(1).set(avgNumPartsLight, 0.);
       // charm
       avgNumPartsCharm = dbl(*_multLambda[2] / *_SumOfcWeights);
-      tmp39->point(0).setY(avgNumPartsCharm);
+      tmp39->bin(1).set(avgNumPartsCharm, 0.);
       // bottom
       avgNumPartsBottom = dbl(*_multLambda[3] / *_SumOfbWeights);
-      tmp40->point(0).setY(avgNumPartsBottom);
+      tmp40->bin(1).set(avgNumPartsBottom, 0.);
       // charm-light
-      tmp41->point(0).setY(avgNumPartsCharm - avgNumPartsLight);
+      tmp41->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
       // bottom-light
-      tmp42->point(0).setY(avgNumPartsBottom - avgNumPartsLight);
+      tmp42->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
     }
 
     /// @}
@@ -677,60 +677,60 @@ namespace Rivet {
     Histo1DPtr _h_RProton, _h_RPBar;
     Histo1DPtr _h_RLambda, _h_RLBar;
 
-    Scatter2DPtr _s_Xp_PiPl_Ch, _s_Xp_KPl_Ch,  _s_Xp_Pr_Ch;
-    Scatter2DPtr _s_Xp_PiPlCh_PiPlLi, _s_Xp_PiPlBo_PiPlLi;
-    Scatter2DPtr _s_Xp_KPlCh_KPlLi, _s_Xp_KPlBo_KPlLi;
-    Scatter2DPtr _s_Xp_KS0Ch_KS0Li, _s_Xp_KS0Bo_KS0Li;
-    Scatter2DPtr _s_Xp_PrCh_PrLi, _s_Xp_PrBo_PrLi;
-    Scatter2DPtr _s_Xp_LaCh_LaLi, _s_Xp_LaBo_LaLi;
-    Scatter2DPtr _s_Xp_K0Ch_K0Li, _s_Xp_K0Bo_K0Li;
-    Scatter2DPtr _s_Xp_PhiCh_PhiLi, _s_Xp_PhiBo_PhiLi;
+    Estimate1DPtr _s_Xp_PiPl_Ch, _s_Xp_KPl_Ch,  _s_Xp_Pr_Ch;
+    Estimate1DPtr _s_Xp_PiPlCh_PiPlLi, _s_Xp_PiPlBo_PiPlLi;
+    Estimate1DPtr _s_Xp_KPlCh_KPlLi, _s_Xp_KPlBo_KPlLi;
+    Estimate1DPtr _s_Xp_KS0Ch_KS0Li, _s_Xp_KS0Bo_KS0Li;
+    Estimate1DPtr _s_Xp_PrCh_PrLi, _s_Xp_PrBo_PrLi;
+    Estimate1DPtr _s_Xp_LaCh_LaLi, _s_Xp_LaBo_LaLi;
+    Estimate1DPtr _s_Xp_K0Ch_K0Li, _s_Xp_K0Bo_K0Li;
+    Estimate1DPtr _s_Xp_PhiCh_PhiLi, _s_Xp_PhiBo_PhiLi;
 
-    Scatter2DPtr _s_PiM_PiP, _s_KSBar0_KS0, _s_KM_KP, _s_Pr_PBar, _s_Lam_LBar;
+    Estimate1DPtr _s_PiM_PiP, _s_KSBar0_KS0, _s_KM_KP, _s_Pr_PBar, _s_Lam_LBar;
 
     /// @}
-      Scatter2DPtr tmp1;
-      Scatter2DPtr tmp2;
-      Scatter2DPtr tmp3;
-      Scatter2DPtr tmp4;
-      Scatter2DPtr tmp5;
-      Scatter2DPtr tmp6;
-      Scatter2DPtr tmp7;
-      Scatter2DPtr tmp8;
-      Scatter2DPtr tmp9;
-      Scatter2DPtr tmp10;
-      Scatter2DPtr tmp11;
-      Scatter2DPtr tmp12;
-      Scatter2DPtr tmp13;
-      Scatter2DPtr tmp14;
-      Scatter2DPtr tmp15;
-      Scatter2DPtr tmp16;
-      Scatter2DPtr tmp17;
-      Scatter2DPtr tmp18;
-      Scatter2DPtr tmp19;
-      Scatter2DPtr tmp20;
-      Scatter2DPtr tmp21;
-      Scatter2DPtr tmp22;
-      Scatter2DPtr tmp23;
-      Scatter2DPtr tmp24;
-      Scatter2DPtr tmp25;
-      Scatter2DPtr tmp26;
-      Scatter2DPtr tmp27;
-      Scatter2DPtr tmp28;
-      Scatter2DPtr tmp29;
-      Scatter2DPtr tmp30;
-      Scatter2DPtr tmp31;
-      Scatter2DPtr tmp32;
-      Scatter2DPtr tmp33;
-      Scatter2DPtr tmp34;
-      Scatter2DPtr tmp35;
-      Scatter2DPtr tmp36;
-      Scatter2DPtr tmp37;
-      Scatter2DPtr tmp38;
-      Scatter2DPtr tmp39;
-      Scatter2DPtr tmp40;
-      Scatter2DPtr tmp41;
-      Scatter2DPtr tmp42;
+      Estimate1DPtr tmp1;
+      Estimate1DPtr tmp2;
+      Estimate1DPtr tmp3;
+      Estimate1DPtr tmp4;
+      Estimate1DPtr tmp5;
+      Estimate1DPtr tmp6;
+      Estimate1DPtr tmp7;
+      Estimate1DPtr tmp8;
+      Estimate1DPtr tmp9;
+      Estimate1DPtr tmp10;
+      Estimate1DPtr tmp11;
+      Estimate1DPtr tmp12;
+      Estimate1DPtr tmp13;
+      Estimate1DPtr tmp14;
+      Estimate1DPtr tmp15;
+      Estimate1DPtr tmp16;
+      Estimate1DPtr tmp17;
+      Estimate1DPtr tmp18;
+      Estimate1DPtr tmp19;
+      Estimate1DPtr tmp20;
+      Estimate1DPtr tmp21;
+      Estimate1DPtr tmp22;
+      Estimate1DPtr tmp23;
+      Estimate1DPtr tmp24;
+      Estimate1DPtr tmp25;
+      Estimate1DPtr tmp26;
+      Estimate1DPtr tmp27;
+      Estimate1DPtr tmp28;
+      Estimate1DPtr tmp29;
+      Estimate1DPtr tmp30;
+      Estimate1DPtr tmp31;
+      Estimate1DPtr tmp32;
+      Estimate1DPtr tmp33;
+      Estimate1DPtr tmp34;
+      Estimate1DPtr tmp35;
+      Estimate1DPtr tmp36;
+      Estimate1DPtr tmp37;
+      Estimate1DPtr tmp38;
+      Estimate1DPtr tmp39;
+      Estimate1DPtr tmp40;
+      Estimate1DPtr tmp41;
+      Estimate1DPtr tmp42;
   };
 
 

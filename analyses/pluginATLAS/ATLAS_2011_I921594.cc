@@ -12,9 +12,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2011_I921594()
-      : Analysis("ATLAS_2011_I921594")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2011_I921594);
 
 
     /// Book histograms and initialise projections before the run
@@ -34,9 +32,11 @@ namespace Rivet {
       declare(photonfs, "LeadingPhoton");
 
       // Book the dsigma/dEt (in eta bins) histograms
-      for (size_t i = 0; i < _eta_bins.size()-1; i++) {
+      size_t d = 1;
+      for (size_t i = 0; i < _eta_bins.size()-1; ++i) {
         if (fuzzyEquals(_eta_bins[i], 1.37)) continue; // skip this bin
-        book(_h_Et_photon[i] ,1, 1, i+1);
+        book(_h_Et_photon[i], d, 1, 1);
+        ++d;
       }
     }
 

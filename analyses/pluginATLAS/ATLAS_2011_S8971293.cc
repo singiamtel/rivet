@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -23,22 +22,15 @@ namespace Rivet {
       declare(FastJets(FinalState(), FastJets::ANTIKT, 0.6), "AntiKtJets06");
 
       /// Book histograms
-      /// @todo Provide a nicer way!
-      {Histo1DPtr tmp; _h_deltaPhi.add(110., 160., book(tmp, 1, 1, 1));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(160., 210., book(tmp, 1, 1, 2));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(210., 260., book(tmp, 1, 1, 3));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(260., 310., book(tmp, 1, 1, 4));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(310., 400., book(tmp, 1, 1, 5));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(400., 500., book(tmp, 1, 1, 6));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(500., 600., book(tmp, 1, 1, 7));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(600., 800., book(tmp, 1, 1, 8));}
-      {Histo1DPtr tmp; _h_deltaPhi.add(800.,10000.,book(tmp, 1, 1, 9));}
+      book(_h_deltaPhi, {110., 160., 210., 260., 310., 400., 500., 600., 800., 10000.});
+      for (auto& b : _h_deltaPhi->bins()) {
+        book(b, 1, 1, b.index());
+      }
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       Jets jets06;
       for (const Jet& jet : apply<FastJets>(event, "AntiKtJets06").jetsByPt(100.0*GeV)) {
@@ -49,7 +41,7 @@ namespace Rivet {
       if (jets06.size()>1){
         if (fabs(jets06[0].rapidity())<0.8 && fabs(jets06[1].rapidity())<0.8) {
           double observable = mapAngle0ToPi(jets06[0].phi()-jets06[1].phi()) / M_PI;
-          _h_deltaPhi.fill(jets06[0].pT(), observable, weight);
+          _h_deltaPhi->fill(jets06[0].pT(), observable);
         }
       }
     }
@@ -57,9 +49,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (Histo1DPtr hist : _h_deltaPhi.histos()) {
-        normalize(hist, 1/M_PI);
-      }
+      normalize(_h_deltaPhi, 1.0/M_PI);
     }
 
     /// @}
@@ -68,7 +58,7 @@ namespace Rivet {
   private:
 
     /// Histograms
-    BinnedHistogram _h_deltaPhi;
+    Histo1DGroupPtr _h_deltaPhi;
 
   };
 

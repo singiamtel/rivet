@@ -2,8 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/Correlators.hh"
-#include "Rivet/Tools/AliceCommon.hh"
-#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 
 namespace Rivet {
 
@@ -58,18 +57,18 @@ namespace Rivet {
       book(h_v24pT20, 9, 1, 2, true);
       book(h_v24pT30, 9, 1, 3, true);
 
-      book(h_c22gap, "_c22gap", refData(1, 1, 1));
-      book(h_c24, "_c24", refData(1, 1, 2));
-      book(h_c26, "_c26", refData(1, 1, 3));
-      book(h_c28, "_c28", refData(1, 1, 4));
-      book(h_c32gap, "_c32gap", refData(8, 1, 2));
-      book(h_c42gap, "_c24gap", refData(8, 1, 3));
+      book(h_c22gap, "_c22gap", refData(1, 1, 1).mkScatter());
+      book(h_c24, "_c24", refData(1, 1, 2).mkScatter());
+      book(h_c26, "_c26", refData(1, 1, 3).mkScatter());
+      book(h_c28, "_c28", refData(1, 1, 4).mkScatter());
+      book(h_c32gap, "_c32gap", refData(8, 1, 2).mkScatter());
+      book(h_c42gap, "_c24gap", refData(8, 1, 3).mkScatter());
 
-      book(h_ec22gap, "_ec22gap", refData(1, 1, 1));
-      book(h_ec22, "_ec22", refData(1, 1, 2));
-      book(h_ec24, "_ec24", refData(1, 1, 2));
-      book(h_ec26, "_ec26", refData(1, 1, 3));
-      book(h_ec28, "_ec28", refData(1, 1, 4));
+      book(h_ec22gap, "_ec22gap", refData(1, 1, 1).mkScatter());
+      book(h_ec22, "_ec22", refData(1, 1, 2).mkScatter());
+      book(h_ec24, "_ec24", refData(1, 1, 2).mkScatter());
+      book(h_ec26, "_ec26", refData(1, 1, 3).mkScatter());
+      book(h_ec28, "_ec28", refData(1, 1, 4).mkScatter());
 
       // Corresponding event averaged correlators.
       // Integrated, with gap.

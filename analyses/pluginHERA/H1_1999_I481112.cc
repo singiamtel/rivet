@@ -39,21 +39,19 @@ namespace Rivet {
 
       Histo1DPtr dummy;
 
-      book(_h["211"],2,1,1);
-      book(_h["311"],3,1,1);
-      book(_h["411"],4,1,1);
-      book(_h["511"],5,1,1);
-      book(_h["611"],6,1,1);
+      book(_h["211"], 2,1,1);
+      book(_h["311"], 3,1,1);
+      book(_h["411"], 4,1,1);
+      book(_h["511"], 5,1,1);
+      book(_h["611"], 6,1,1);
       book(_h["rap194"], 7,1,1);
       book(_h["pt194"], 8,1,1);
       book(_h["rap88"], 9,1,1);
       book(_h["pt88"], 10,1,1);
-      _hpt.add(2.5, 3.5, book(dummy, 11,1,1));
-      _hpt.add(3.5, 5.0, book(dummy, 11,1,2));
-      _hpt.add(5.0, 10.0, book(dummy, 11,1,3));
-      book(_h["1211"],12,1,1);
-      book(_h["1212"],12,1,2);
-      book(_h["1311"],13,1,1);
+      book(_hpt, {2.5, 3.5, 5.0, 10.0}, {"d11-x01-y01", "d11-x01-y02", "d11-x01-y03"});
+      book(_h["1211"], 12,1,1);
+      book(_h["1212"], 12,1,2);
+      book(_h["1311"], 13,1,1);
     }
 
 
@@ -126,7 +124,7 @@ namespace Rivet {
 
         _h["rap194"]->fill(y_capp);
         _h["pt194"] ->fill(dstar.pT());
-        _hpt.fill(dstar.pT(), y_capp);
+        _hpt->fill(dstar.pT(), y_capp);
 
         if ( W > 173 &&  W<273) {
           _h["1211"]->fill(log10(x_g));
@@ -164,7 +162,7 @@ namespace Rivet {
       scale(_h["rap88"], norm_mub/F_etag44 );
       scale(_h["pt88"],  norm_mub/F_etag44 );
 
-      _hpt.scale( norm/F_etag33, this);
+      scale(_hpt, norm/F_etag33);
       scale(_h["1211"], norm_mub/F_etag33);
       scale(_h["1212"], norm_mub/F_etag33);
       scale(_h["1311"], norm_mub/F_etag44);
@@ -176,7 +174,7 @@ namespace Rivet {
     /// @name Histograms
     ///@{
     map<string, Histo1DPtr> _h;
-    BinnedHistogram  _hpt;
+    Histo1DGroupPtr  _hpt;
     ///@}
 
 

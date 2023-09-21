@@ -2,7 +2,6 @@ noinst_LTLIBRARIES = libRivetTools.la
 
 libRivetTools_la_SOURCES = \
   Beams.cc \
-  BinnedHistogram.cc \
   Correlators.cc \
   Cuts.cc \
   JetUtils.cc \

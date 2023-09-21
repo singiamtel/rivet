@@ -125,7 +125,7 @@ class ZEUS_2008_I810112 : public Analysis {
 
           for (size_t i = 0; i < 3; i++) {
               scale(_h_Dp_yinq2[i], sf);
-              barchart(_h_Dp_yinq2[i], _s_Dp_yinq2[i], false);
+              barchart(_h_Dp_yinq2[i], _s_Dp_yinq2[i]);
           }
 
           scale(_h_D0_pt, sf);
@@ -135,7 +135,7 @@ class ZEUS_2008_I810112 : public Analysis {
 
           for (size_t i = 0; i < 3; i++) {
               scale(_h_D0_yinq2[i], sf);
-              barchart(_h_D0_yinq2[i], _s_D0_yinq2[i], false);
+              barchart(_h_D0_yinq2[i], _s_D0_yinq2[i]);
           }
       }
       /// @}
@@ -155,8 +155,8 @@ class ZEUS_2008_I810112 : public Analysis {
       _h_Dp_x,
       _h_Dp_yinq2[3];
 
-      Scatter2DPtr _s_Dp_yinq2[3];
-      Scatter2DPtr _s_D0_yinq2[3];
+      Estimate1DPtr _s_Dp_yinq2[3];
+      Estimate1DPtr _s_D0_yinq2[3];
 
   };
 

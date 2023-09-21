@@ -66,16 +66,16 @@ namespace Rivet {
       const size_t numParticles = cfs.particles().size();
       switch (flavour) {
       case 1: case 2: case 3:
-	_h_light->fill(sqrtS()/GeV,numParticles);
+        _h_light->fill(29, numParticles);
         break;
       case 4:
-	_h_charm->fill(sqrtS()/GeV,numParticles);
+        _h_charm->fill(29, numParticles);
         break;
       case 5:
-	_h_bottom->fill(sqrtS()/GeV,numParticles);
+        _h_bottom->fill(29, numParticles);
         break;
       }
-      _h_all->fill(sqrtS()/GeV,numParticles);
+      _h_all->fill(29, numParticles);
     }
 
 
@@ -88,10 +88,10 @@ namespace Rivet {
 
     /// @name Multiplicities
     /// @{
-    Profile1DPtr _h_all;
-    Profile1DPtr _h_light;
-    Profile1DPtr _h_charm;
-    Profile1DPtr _h_bottom;
+    BinnedProfilePtr<int> _h_all;
+    BinnedProfilePtr<int> _h_light;
+    BinnedProfilePtr<int> _h_charm;
+    BinnedProfilePtr<int> _h_bottom;
     /// @}
 
   };

@@ -478,7 +478,7 @@ namespace Rivet {
 
       // Now fill histograms
       if (isPHO){
-        _h_PHO_sig_sqrts     ->fill(sqrtS()/GeV);
+        _h_PHO_sig_sqrts     ->fill(319);
         _h_PHO_dsigdz        ->fill(zPomJets);
         _h_PHO_dsigdxPom     ->fill(xPom);
         _h_PHO_dsigdy        ->fill(y);
@@ -488,7 +488,7 @@ namespace Rivet {
         _h_PHO_dsigdDeltaEta ->fill(deltaEtaJets);
         _h_PHO_dsigdAvgEta   ->fill(avgEtaJets);
       } else {
-        _h_DIS_sig_sqrts     ->fill(sqrtS()/GeV);
+        _h_DIS_sig_sqrts     ->fill(319);
         _h_DIS_dsigdz        ->fill(zPomJets);
         _h_DIS_dsigdxPom     ->fill(xPom);
         _h_DIS_dsigdy        ->fill(y);
@@ -561,9 +561,9 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     // Book histograms from REF data
-    Histo1DPtr _h_PHO_sig_sqrts;
-    Histo1DPtr _h_DIS_sig_sqrts;
-    Scatter2DPtr _h_PHODIS_sqrts;
+    BinnedHistoPtr<int> _h_PHO_sig_sqrts;
+    BinnedHistoPtr<int> _h_DIS_sig_sqrts;
+    BinnedEstimatePtr<int> _h_PHODIS_sqrts;
 
     Histo1DPtr _h_DIS_dsigdz;
     Histo1DPtr _h_DIS_dsigdxPom;
@@ -583,10 +583,10 @@ namespace Rivet {
     Histo1DPtr _h_PHO_dsigdDeltaEta;
     Histo1DPtr _h_PHO_dsigdAvgEta;
 
-    Scatter2DPtr _h_PHODIS_deltaEta;
-    Scatter2DPtr _h_PHODIS_y;
-    Scatter2DPtr _h_PHODIS_z;
-    Scatter2DPtr _h_PHODIS_Etj1;
+    Estimate1DPtr _h_PHODIS_deltaEta;
+    Estimate1DPtr _h_PHODIS_y;
+    Estimate1DPtr _h_PHODIS_z;
+    Estimate1DPtr _h_PHODIS_Etj1;
     /// @}
 
     bool isPHO;

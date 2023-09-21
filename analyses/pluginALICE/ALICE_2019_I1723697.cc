@@ -2,8 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/Correlators.hh"
-#include "Rivet/Tools/AliceCommon.hh"
-#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Analyses/AliceCommon.hh"
 
 namespace Rivet {
 
@@ -90,20 +89,22 @@ namespace Rivet {
       book(h_v22gap, 1 + n1, 1, 1, true);
       book(h_v32gap, 2 + n1, 1, 1, true);
       book(h_v42gap, 3 + n1, 1, 1, true);
-      if (sysType != pp)
+      if (sysType != pp) {
         book(h_v24, 4 + n1, 1, 1, true);
+      }
       book(h_v26, 5 + n1 + n2, 1, 1, true);
-      if (sysType == XeXe || sysType == PbPb)
+      if (sysType == XeXe || sysType == PbPb) {
         book(h_v28, 6 + n1 + n2 + n3, 1, 1, true);
+      }
 
       // Book cumulant scatters.
-      book(h_c22gap, "c22gap", refData(1 + n1, 1, 1));
-      book(h_c32gap, "c32gap", refData(2 + n1, 1, 1));
-      book(h_c42gap, "c42gap", refData(3 + n1, 1, 1));
-      book(h_c24, "c24", refData(4 + n1, 1, 1));
-      book(h_c26, "c26", refData(5 + n1 + n2, 1, 1));
+      book(h_c22gap, "c22gap", refData(1 + n1, 1, 1).mkScatter());
+      book(h_c32gap, "c32gap", refData(2 + n1, 1, 1).mkScatter());
+      book(h_c42gap, "c42gap", refData(3 + n1, 1, 1).mkScatter());
+      book(h_c24, "c24", refData(4 + n1, 1, 1).mkScatter());
+      book(h_c26, "c26", refData(5 + n1 + n2, 1, 1).mkScatter());
       if (sysType == XeXe || sysType == PbPb)
-        book(h_c28, "c28", refData(6 + n1 + n2 + n3, 1, 1));
+        book(h_c28, "c28", refData(6 + n1 + n2 + n3, 1, 1).mkScatter());
 
       // Book correlators. First the ungapped ones.
       ec22 = bookECorrelator<2,2>("ec22", refData(4 + n1, 1, 1));

@@ -108,7 +108,7 @@ namespace Rivet {
     /// @name Particle distributions versus rapidity and transverse momentum
     /// @{
     Histo1DPtr _h_dNKshort_dy, _h_dNKshort_dpT, _h_dNLambda_dy, _h_dNLambda_dpT, _h_dNXi_dy, _h_dNXi_dpT;
-    Scatter2DPtr _h_LampT_KpT, _h_XipT_LampT, _h_Lamy_Ky, _h_Xiy_Lamy;
+    Estimate1DPtr _h_LampT_KpT, _h_XipT_LampT, _h_Lamy_Ky, _h_Xiy_Lamy;
     /// @}
 
   };

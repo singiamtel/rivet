@@ -46,23 +46,23 @@ namespace Rivet {
       book(_h["b_k0_x"],   2, 1, 1);
       book(_h["b_k0_e"],   3, 1, 1);
       book(_h["b_k0_eta"], 4, 1, 1);
-      book(_h["b_k0_n"],   5, 1, 1);
+      book(_d["b_k0_n"],   5, 1, 1);
 
       book(_h["j_k0_pt"],  6, 1, 1);
       book(_h["j_k0_x"],   7, 1, 1);
       book(_h["j_k0_e"],   8, 1, 1);
       book(_h["j_k0_eta"], 9, 1, 1);
-      book(_h["j_k0_n"],  10, 1, 1);
+      book(_d["j_k0_n"],  10, 1, 1);
 
       book(_h["out_k0_pt"],  11, 1, 1);
       book(_h["out_k0_e"],   12, 1, 1);
       book(_h["out_k0_eta"], 13, 1, 1);
-      book(_h["out_k0_n"],   14, 1, 1);
+      book(_s["out_k0_n"],   14, 1, 1);
 
       book(_h["all_k0_pt"],  15, 1, 1);
       book(_h["all_k0_e"],   16, 1, 1);
       book(_h["all_k0_eta"], 17, 1, 1);
-      book(_h["all_k0_n"],   18, 1, 1);
+      book(_s["all_k0_n"],   18, 1, 1);
 
       book(_h["all_l_pt"],  19, 1, 1);
       book(_h["all_l_e"],   20, 1, 1);
@@ -146,8 +146,8 @@ namespace Rivet {
         }
 
         //K0s associated to b-jets
-        if(isJetAssoc && isBjet){
-          if(isVisible) n_k0_b_visible += 1;
+        if (isJetAssoc && isBjet){
+          if (isVisible) n_k0_b_visible += 1;
           _h["b_k0_pt"]->fill(k.pT()/GeV);
           _h["b_k0_eta"]->fill(k.abseta());
           _h["b_k0_e"]->fill(k.E()/GeV);
@@ -166,15 +166,15 @@ namespace Rivet {
 
 
       // K0s multiplicities
-      _h["all_k0_n"]->fill(n_k0_all_visible);
-      _h["out_k0_n"]->fill(n_k0_out_visible);
-      _h["b_k0_n"]->fill(n_k0_b_visible);
-      _h["j_k0_n"]->fill(n_k0_j_visible);
+      _s["all_k0_n"]->fill(allEdge(n_k0_all_visible));
+      _s["out_k0_n"]->fill(outEdge(n_k0_out_visible));
+      _d["b_k0_n"]->fill(n_k0_b_visible);
+      _d["j_k0_n"]->fill(n_k0_j_visible);
 
 
       // Loop over all Lambda particles
       //size_t n_lambda_all = 0;
-      for(const Particle& l : lambdaFS) {
+      for (const Particle& l : lambdaFS) {
         //n_lambda_all += 1;
         _h["all_l_pt"]->fill(l.pT()/GeV);
         _h["all_l_eta"]->fill(l.abseta());
@@ -182,17 +182,33 @@ namespace Rivet {
       }
     }
 
+    const string outEdge(const size_t n) {
+      if (outEdges.empty())  outEdges = _s["out_k0_n"]->xEdges();
+      if (n > 9)  return ""; // otherflow
+      return outEdges[(n == 9)? 8 : n];
+    }
+
+    const string allEdge(const size_t n) {
+      if (allEdges.empty())  allEdges = _s["all_k0_n"]->xEdges();
+      if (n > 11)  return ""; // otherflow
+      return allEdges[(n == 10 || n == 11)? 9 : n];
+    }
 
     // Histogram normalization to the number of events passing the cuts
-    void finalize(){
-      const double sf = 1.0 / _h["all_k0_n"]->sumW();
-      for (auto& hist : _h) { scale(hist.second, sf); }
+    void finalize() {
+      const double sf = 1.0 / _s["all_k0_n"]->sumW();
+      scale(_h, sf);
+      scale(_d, sf);
+      scale(_s, sf);
     }
 
   private:
 
     // Counters
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<int>> _d;
+    map<string, BinnedHistoPtr<string>> _s;
+    vector<string> outEdges, allEdges;
 
   };
 

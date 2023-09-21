@@ -78,49 +78,49 @@ namespace Rivet {
     pair<double,double> calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
-	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double ai = 0.5*(bin.xMax()-bin.xMin());
-	double bi = 0.5*ai*(bin.xMax()+bin.xMin());
-	double Ei = bin.errW();
-	sum1 += sqr(bi/Ei);
-	sum2 += bi/sqr(Ei)*(Oi-ai);
+      for (const auto& bin : hist->bins() ) {
+        double Oi = bin.sumW();
+        if(Oi==0.) continue;
+        double ai = 0.5*(bin.xMax()-bin.xMin());
+        double bi = 0.5*ai*(bin.xMax()+bin.xMin());
+        double Ei = bin.errW();
+        sum1 += sqr(bi/Ei);
+        sum2 += bi/sqr(Ei)*(Oi-ai);
       }
       return make_pair(sum2/sum1,sqrt(1./sum1));
     }
-    
+
     /// Normalise histograms etc., after the run
     void finalize() {
       // first mode
       normalize(_h_c_P);
-      Scatter2DPtr _h_alpha_P;
+      Estimate1DPtr _h_alpha_P;
       book(_h_alpha_P,2,1,1);
       pair<double,double> alphaP = calcAlpha(_h_c_P);
       alphaP.first /= -0.401;
       alphaP.second/= -0.401;
-      _h_alpha_P->addPoint(0.5, alphaP.first, make_pair(0.5,0.5), make_pair(alphaP.second,alphaP.second) );
+      _h_alpha_P->bin(1).set(alphaP.first, alphaP.second);
       // second mode
       normalize(_h_c_M);
-      Scatter2DPtr _h_alpha_M;
+      Estimate1DPtr _h_alpha_M;
       book(_h_alpha_M,2,1,2);
       pair<double,double> alphaM = calcAlpha(_h_c_M);
       alphaM.first /= 0.389;
       alphaM.second/= 0.389;
-      _h_alpha_M->addPoint(0.5, alphaM.first, make_pair(0.5,0.5), make_pair(alphaM.second,alphaM.second) );
+      _h_alpha_M->bin(1).set(alphaM.first, alphaM.second);
       // average
       double aver = 0.5*(-alphaP.first+alphaM.first);
       double err  = 0.5*sqrt(sqr(alphaP.second)+sqr(alphaM.second));
-      Scatter2DPtr _h_alpha_aver;
+      Estimate1DPtr _h_alpha_aver;
       book(_h_alpha_aver,2,1,3);
-      _h_alpha_aver->addPoint(0.5, aver, make_pair(0.5,0.5), make_pair(err,err) );
+      _h_alpha_aver->bin(1).set(aver, err);
       // asymetry
       double asym = (alphaP.first+alphaM.first)/(alphaP.first-alphaM.first);
       err         = 2./sqr(alphaP.first-alphaM.first)*sqrt(sqr(alphaM.first *alphaP.second)+
 							   sqr(alphaM.second*alphaP.first ));
-      Scatter2DPtr _h_alpha_asym;
+      Estimate1DPtr _h_alpha_asym;
       book(_h_alpha_asym,2,1,4);
-      _h_alpha_asym->addPoint(0.5, asym, make_pair(0.5,0.5), make_pair(err,err) );
+      _h_alpha_asym->bin(1).set(asym, err);
     }
 
     ///@}

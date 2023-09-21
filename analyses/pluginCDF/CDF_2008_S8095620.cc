@@ -124,7 +124,7 @@ namespace Rivet {
       // wasn't asking for b-jets before!!!!
       if(numJet > 0 && numBJet > 0) _dSdNJet->fill(numJet);
       if(numBJet > 0) {
-        _dStot->fill(1960.0);
+        _dStot->fill(1960);
         _dSdNbJet->fill(numBJet);
         _dSdZpT->fill(Zmom.pT());
       }
@@ -167,12 +167,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _dStot;
-    Histo1DPtr _dSdET;
-    Histo1DPtr _dSdETA;
-    Histo1DPtr _dSdNJet;
-    Histo1DPtr _dSdNbJet;
-    Histo1DPtr _dSdZpT;
+    BinnedHistoPtr<int> _dStot, _dSdNbJet, _dSdNJet;
+    Histo1DPtr _dSdET, _dSdETA, _dSdZpT;
     /// @}
 
   };

@@ -65,9 +65,18 @@ namespace Rivet {
       }
     }
 
-    book(_h_jet_multi_exclusive ,"jet_multi_exclusive", _njet+3, -0.5, _njet+3-0.5);
-    book(_h_jet_multi_inclusive ,"jet_multi_inclusive", _njet+3, -0.5, _njet+3-0.5);
-    book(_h_jet_multi_ratio, "jet_multi_ratio");
+    vector<int> discbins;
+    vector<std::string> ratiobins;
+    for (size_t i = 0; i < _njet+3; ++i) {
+      discbins.push_back(i);
+      if (i) {
+        const string label = std::to_string(i) + "/" + std::to_string(i-1);
+        ratiobins.push_back(label);
+      }
+    }
+    book(_h_jet_multi_exclusive ,"jet_multi_exclusive", discbins);
+    book(_h_jet_multi_inclusive ,"jet_multi_inclusive", discbins);
+    book(_h_jet_multi_ratio, "jet_multi_ratio", ratiobins);
     book(_h_jet_HT ,"jet_HT", logspace(50/rebin, _jetptcut, sqrts/GeV/2.0));
     book(_h_mjj_jets, "jets_mjj", 40/rebin, 0.0, sqrts/GeV/2.0);
   }
@@ -144,7 +153,7 @@ namespace Rivet {
   void MC_JetAnalysis::finalize() {
     const double scaling = crossSection()/sumOfWeights();
     for (size_t i = 0; i < _njet; ++i) {
-      scale(_h_pT_jet[i], scaling);
+      if (_h_pT_jet[i])  scale(_h_pT_jet[i], scaling);
       scale(_h_mass_jet[i], scaling);
       scale(_h_eta_jet[i], scaling);
       scale(_h_rap_jet[i], scaling);
@@ -160,16 +169,14 @@ namespace Rivet {
     scale(_h_dR_jets, scaling);
 
     // Fill inclusive jet multi ratio
-    size_t Nbins = _h_jet_multi_inclusive->numBins();
-    size_t Npoints = (Nbins > 0) ? Nbins-1 : 0;
-    for (size_t i = 1; i <= Npoints; ++i) { //< careful with 0-bin histos (huh?!)
-      _h_jet_multi_ratio->addPoint(i, 0, 0.5, 0);
+    for (size_t i = 1; i < _h_jet_multi_inclusive->numBins(); ++i) {
+      const string label = std::to_string(i) + "/" + std::to_string(i-1);
       if (_h_jet_multi_inclusive->bin(i).sumW() > 0.0) {
         const double ratio = _h_jet_multi_inclusive->bin(i+1).sumW()/_h_jet_multi_inclusive->bin(i).sumW();
         const double relerr_i = _h_jet_multi_inclusive->bin(i).relErrW();
         const double relerr_j = _h_jet_multi_inclusive->bin(i+1).relErrW();
         const double err = ratio * (relerr_i + relerr_j);
-        _h_jet_multi_ratio->point(i-1).setY(ratio, err);
+        _h_jet_multi_ratio->binAt(label).set(ratio, {-err,err});
       }
     }
 

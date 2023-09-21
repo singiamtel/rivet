@@ -117,8 +117,7 @@ namespace Rivet {
       for (size_t i = 0;  i < 40; ++i) {
         const double yval = _tmphistJet3eta->bin(i+1).sumW() * (eta3_CDF_sim[i]/eta3_Ideal_sim[i]);
         const double yerr = _tmphistJet3eta->bin(i+1).errW() * (eta3_CDF_sim_err[i]/eta3_Ideal_sim[i]);
-        _histJet3eta->addPoint(_tmphistJet3eta->bin(i+1).xMid(), yval/dbl(*_sumw),
-                               0.5*_tmphistJet3eta->bin(i+1).xWidth(), yerr/dbl(*_sumw));
+        _histJet3eta->bin(i+1).set(yval/dbl(*_sumw), yerr/dbl(*_sumw));
       }
 
       // R23 correction
@@ -140,8 +139,7 @@ namespace Rivet {
       for (size_t i = 0;  i < 35; ++i) {
         const double yval = _tmphistR23->bin(i+1).sumW() * (R23_CDF_sim[i]/R23_Ideal_sim[i]);
         const double yerr = _tmphistR23->bin(i+1).errW() * (R23_CDF_sim_err[i]/R23_Ideal_sim[i]);
-        _histR23->addPoint(_tmphistR23->bin(i+1).xMid(), yval/dbl(*_sumw),
-                           0.5*_tmphistR23->bin(i+1).xWidth(), yerr/dbl(*_sumw));
+        _histR23->bin(i+1).set(yval/dbl(*_sumw), yerr/dbl(*_sumw));
       }
 
       // alpha correction
@@ -163,8 +161,7 @@ namespace Rivet {
       for (size_t i = 0;  i < 40; ++i) {
         const double yval = _tmphistAlpha->bin(i+1).sumW() * (alpha_CDF_sim[i]/alpha_Ideal_sim[i]);
         const double yerr = _tmphistAlpha->bin(i+1).errW() * (alpha_CDF_sim_err[i]/alpha_Ideal_sim[i]);
-        _histAlpha->addPoint(_tmphistAlpha->bin(i+1).xMid(), yval/dbl(*_sumw),
-                             0.5*_tmphistAlpha->bin(i+1).xWidth(), yerr/dbl(*_sumw));
+        _histAlpha->bin(i+1).set(yval/dbl(*_sumw), yerr/dbl(*_sumw));
       }
     }
 
@@ -183,7 +180,7 @@ namespace Rivet {
     Histo1DPtr _histJet1Et, _histJet2Et;
 
     /// Output histos which need to have correction factors applied
-    Scatter2DPtr _histR23, _histJet3eta, _histAlpha;
+    Estimate1DPtr _histR23, _histJet3eta, _histAlpha;
 
     /// Temporary histos, to be converted to scatters
     Histo1DPtr _tmphistR23, _tmphistJet3eta, _tmphistAlpha;

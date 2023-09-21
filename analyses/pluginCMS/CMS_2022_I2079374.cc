@@ -167,8 +167,8 @@ namespace Rivet {
 
       /// Calculates the ratio between two histograms
       void calculateRatio(int d, const Histo1DPtr &numerator, const Histo1DPtr &denominator) {
-        Scatter2DPtr ratio;
-        book(ratio, d, 1, 1, true);
+        Estimate1DPtr ratio;
+        book(ratio, d, 1, 1);
 
         // The denominator has a finer binning, so rebin it
         auto rebinned_den = denominator->clone();

@@ -11,6 +11,8 @@ namespace Rivet {
   class ParticleFinder : public Projection {
   public:
 
+    //using Projection::operator=;
+
     /// @name Object lifetime management
     /// @{
 

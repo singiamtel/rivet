@@ -47,13 +47,13 @@ namespace Rivet {
       declare(jets, "jets");
 
       book(_h_njet_incl              ,  1, 1, _mode+1);
-      book(_h_njet_incl_ratio        ,  2, 1, _mode+1, true);
+      book(_h_njet_incl_ratio        ,  2, 1, _mode+1);
       book(_h_njet_excl              ,  3, 1, _mode+1);
-      book(_h_njet_excl_ratio        ,  4, 1, _mode+1, true);
+      book(_h_njet_excl_ratio        ,  4, 1, _mode+1);
       book(_h_njet_excl_pt150        ,  5, 1, _mode+1);
-      book(_h_njet_excl_pt150_ratio  ,  6, 1, _mode+1, true);
+      book(_h_njet_excl_pt150_ratio  ,  6, 1, _mode+1);
       book(_h_njet_excl_vbf          ,  7, 1, _mode+1);
-      book(_h_njet_excl_vbf_ratio    ,  8, 1, _mode+1, true);
+      book(_h_njet_excl_vbf_ratio    ,  8, 1, _mode+1);
       book(_h_ptlead                 ,  9, 1, _mode+1);
       book(_h_ptseclead              , 10, 1, _mode+1);
       book(_h_ptthirdlead            , 11, 1, _mode+1);
@@ -220,23 +220,23 @@ namespace Rivet {
 
 
     void finalize() {
-      bool hasWeights = _h_njet_incl->effNumEntries() != _h_njet_incl->numEntries();
+      const bool hasWeights = _h_njet_incl->effNumEntries() != _h_njet_incl->numEntries();
       for (size_t i = 0; i < 6; ++i) {
-        _h_njet_incl_ratio->point(i).setY(safediv(_h_njet_incl->bin(i + 2).sumW(), _h_njet_incl->bin(i+1).sumW()),
+        _h_njet_incl_ratio->bin(i+1).set(safediv(_h_njet_incl->bin(i + 2).sumW(), _h_njet_incl->bin(i+1).sumW()),
                                           err_incl(_h_njet_incl->bin(i + 2).raw(), _h_njet_incl->bin(i+1).raw(), hasWeights));
-        _h_njet_excl_ratio->point(i).setY(safediv(_h_njet_excl->bin(i + 2).sumW(), _h_njet_excl->bin(i+1).sumW()),
+        _h_njet_excl_ratio->bin(i+1).set(safediv(_h_njet_excl->bin(i + 2).sumW(), _h_njet_excl->bin(i+1).sumW()),
                                           err_excl(_h_njet_excl->bin(i + 2).raw(), _h_njet_excl->bin(i+1).raw()));
         if (i >= 1) {
-          _h_njet_excl_pt150_ratio->point(i - 1).setY(safediv(_h_njet_excl_pt150->bin(i+1).sumW(), _h_njet_excl_pt150->bin(i).sumW()),
-                                                      err_excl(_h_njet_excl_pt150->bin(i+1).raw(), _h_njet_excl_pt150->bin(i).raw()));
+          _h_njet_excl_pt150_ratio->bin(i).set(safediv(_h_njet_excl_pt150->bin(i+1).sumW(), _h_njet_excl_pt150->bin(i).sumW()),
+                                               err_excl(_h_njet_excl_pt150->bin(i+1).raw(), _h_njet_excl_pt150->bin(i).raw()));
           if (i >= 2) {
-            _h_njet_excl_vbf_ratio->point(i - 2).setY(safediv(_h_njet_excl_vbf->bin(i+1).sumW(), _h_njet_excl_vbf->bin(i).sumW()),
-                                                      err_excl(_h_njet_excl_vbf->bin(i+1).raw(), _h_njet_excl_vbf->bin(i).raw()));
+            _h_njet_excl_vbf_ratio->bin(i - 1).set(safediv(_h_njet_excl_vbf->bin(i+1).sumW(), _h_njet_excl_vbf->bin(i).sumW()),
+                                                   err_excl(_h_njet_excl_vbf->bin(i+1).raw(), _h_njet_excl_vbf->bin(i).raw()));
           }
         }
       }
 
-      double sf = _mode? 1.0 : 0.5;
+      const double sf = _mode? 1.0 : 0.5;
       const double xs = sf * crossSectionPerEvent()/picobarn;
 
       scale(_h_njet_incl, xs); scale(_h_njet_excl, xs); scale(_h_njet_excl_pt150, xs);
@@ -259,10 +259,10 @@ namespace Rivet {
 
   private:
 
-    Scatter2DPtr _h_njet_incl_ratio;
-    Scatter2DPtr _h_njet_excl_ratio;
-    Scatter2DPtr _h_njet_excl_pt150_ratio;
-    Scatter2DPtr _h_njet_excl_vbf_ratio;
+    Estimate1DPtr _h_njet_incl_ratio;
+    Estimate1DPtr _h_njet_excl_ratio;
+    Estimate1DPtr _h_njet_excl_pt150_ratio;
+    Estimate1DPtr _h_njet_excl_vbf_ratio;
     Histo1DPtr _h_njet_incl;
     Histo1DPtr _h_njet_excl;
     Histo1DPtr _h_njet_excl_pt150;

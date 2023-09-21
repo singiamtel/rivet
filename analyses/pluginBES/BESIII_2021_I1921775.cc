@@ -25,7 +25,7 @@ namespace Rivet {
       declare(Beam(), "Beams");
       declare(UnstableParticles(), "UFS");
       declare(FinalState(), "FS");
-      
+
       book(_h_xi , 1, 1, 1);
       book(_h_xiB, 1, 1, 2);
     }
@@ -101,11 +101,11 @@ namespace Rivet {
       double d = 3./(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
        	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double a =  d*(bin.xMax() - bin.xMin());
-	double b = d/3.*(pow(bin.xMax(),3) - pow(bin.xMin(),3));
+        if(Oi==0.) continue;
+        double a =  d*(bin.xMax() - bin.xMin());
+        double b = d/3.*(pow(bin.xMax(),3) - pow(bin.xMin(),3));
        	double Ei = bin.errW();
         sum1 +=   a*Oi/sqr(Ei);
         sum2 +=   b*Oi/sqr(Ei);
@@ -118,14 +118,14 @@ namespace Rivet {
       // and error
       double cc = -pow((sum3 + sqr(c)*sum4 - 2*c*sum5),3);
       double bb = -2*sqr(sum3 + sqr(c)*sum4 - 2*c*sum5)*(sum1 - c*sum2 + c*sum4 - sum5);
-      double aa =  sqr(sum1 - c*sum2 + c*sum4 - sum5)*(-sum3 - sqr(c)*sum4 + sqr(sum1 - c*sum2 + c*sum4 - sum5) + 2*c*sum5);      
+      double aa =  sqr(sum1 - c*sum2 + c*sum4 - sum5)*(-sum3 - sqr(c)*sum4 + sqr(sum1 - c*sum2 + c*sum4 - sum5) + 2*c*sum5);
       double dis = sqr(bb)-4.*aa*cc;
       if(dis>0.) {
-	dis = sqrt(dis);
-	return make_pair(alpha,make_pair(0.5*(-bb+dis)/aa,-0.5*(-bb-dis)/aa));
+        dis = sqrt(dis);
+        return make_pair(alpha,make_pair(0.5*(-bb+dis)/aa,-0.5*(-bb-dis)/aa));
       }
       else {
-	return make_pair(alpha,make_pair(0.,0.));
+        return make_pair(alpha,make_pair(0.,0.));
       }
     }
 
@@ -133,11 +133,10 @@ namespace Rivet {
     void finalize() {
       normalize(_h_xi ,1.,false);
       normalize(_h_xiB,1.,false);
-      Scatter2DPtr _h_alpha_xi;
+      Estimate1DPtr _h_alpha_xi;
       book(_h_alpha_xi, 2,1,1);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_xi);
-      _h_alpha_xi->addPoint(0.5, alpha.first, make_pair(0.5,0.5),
-			    make_pair(alpha.second.first,alpha.second.second) );
+      _h_alpha_xi->bin(1).set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
     }
 
     /// @}

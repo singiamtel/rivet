@@ -22,7 +22,7 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
+      book(_c_hadrons, 1, 1, 1);
     }
 
 
@@ -33,40 +33,22 @@ namespace Rivet {
       map<long,int> nCount;
       int ntotal(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
-      // mu+mu- + photons
-      if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	vetoEvent;
-      // everything else
-      else
-	_c_hadrons->fill();
+      if (nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) {
+        vetoEvent; // mu+mu- + photons
+      }
+      else {
+        _c_hadrons->fill(Ecm); // everything else
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/ sumOfWeights() /picobarn;
-      double sigma = _c_hadrons->val()*fact;
-      double error = _c_hadrons->err()*fact;
-      Scatter2D temphisto(refData(1, 1, 1));
-      Scatter2DPtr mult;
-      book(mult, 1, 1, 1);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	const double x  = temphisto.point(b).x();
-	pair<double,double> ex = temphisto.point(b).xErrs();
-	pair<double,double> ex2 = ex;
-	if(ex2.first ==0.) ex2. first=0.0001;
-	if(ex2.second==0.) ex2.second=0.0001;
-	if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	  mult   ->addPoint(x, sigma, ex, make_pair(error,error));
-	}
-	else {
-	  mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	}
-      }
+      const double fact = crossSection()/ sumOfWeights() /picobarn;
+      scale(_c_hadrons, fact);
     }
 
     /// @}
@@ -74,7 +56,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons;
+    BinnedHistoPtr<string> _c_hadrons;
+    const string Ecm = "57.77";
     /// @}
 
 

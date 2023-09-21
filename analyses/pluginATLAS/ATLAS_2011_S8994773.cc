@@ -85,7 +85,7 @@ namespace Rivet {
       // Note that we fill dN/dEtadPhi: dEta = 2*2.5, dPhi = 2*PI/nBins
       // The values tabulated in the note are for an (undefined) signed Delta(phi) rather than
       // |Delta(phi)| and so differ by a factor of 2: we have to actually norm for angular range = 2pi
-      const size_t nbins = refData(13+isqrts,1,1).numPoints();
+      const size_t nbins = refData(13+isqrts,1,1).numBins();
       for (size_t i = 0; i < nbins; ++i) {
         double mean = _hist_num_dphi_500->bin(i).xMid();
         double value = 0.;

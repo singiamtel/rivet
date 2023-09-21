@@ -275,11 +275,11 @@ namespace Rivet {
     Histo1DPtr     _h_HT, _h_HT_b;
     Histo1DPtr     _h_Dphi_Zj, _h_Dphi_Zb_b;
 
-    Scatter2DPtr     _h_first_jet_pt_ratio;
-    Scatter2DPtr     _h_first_jet_abseta_ratio;
-    Scatter2DPtr     _h_Z_pt_ratio;
-    Scatter2DPtr     _h_HT_ratio;
-    Scatter2DPtr     _h_Dphi_Zj_ratio;
+    Estimate1DPtr     _h_first_jet_pt_ratio;
+    Estimate1DPtr     _h_first_jet_abseta_ratio;
+    Estimate1DPtr     _h_Z_pt_ratio;
+    Estimate1DPtr     _h_HT_ratio;
+    Estimate1DPtr     _h_Dphi_Zj_ratio;
 
     Histo1DPtr     _h_first_bjet_pt_bb, _h_second_bjet_pt_bb;
     Histo1DPtr     _h_Z_pt_bb;

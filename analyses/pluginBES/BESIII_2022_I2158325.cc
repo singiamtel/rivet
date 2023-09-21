@@ -106,24 +106,24 @@ namespace Rivet {
       double d = 3./(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double c = 3.*(hist->xMax()-hist->xMin())/(pow(hist->xMax(),3)-pow(hist->xMin(),3));
       double sum1(0.),sum2(0.),sum3(0.),sum4(0.),sum5(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins() ) {
        	double Oi = bin.sumW();
-	if(Oi==0.) continue;
-	double a =  d*(bin.xMax() - bin.xMin());
-	double b = d/3.*(pow(bin.xMax(),3) - pow(bin.xMin(),3));
+        if(Oi==0.) continue;
+        double a =  d*(bin.xMax() - bin.xMin());
+        double b = d/3.*(pow(bin.xMax(),3) - pow(bin.xMin(),3));
        	double Ei = bin.errW();
-	sum1 +=   a*Oi/sqr(Ei);
-	sum2 +=   b*Oi/sqr(Ei);
-	sum3 += sqr(a)/sqr(Ei);
-	sum4 += sqr(b)/sqr(Ei);
-	sum5 +=    a*b/sqr(Ei);
+        sum1 +=   a*Oi/sqr(Ei);
+        sum2 +=   b*Oi/sqr(Ei);
+        sum3 += sqr(a)/sqr(Ei);
+        sum4 += sqr(b)/sqr(Ei);
+        sum5 +=    a*b/sqr(Ei);
       }
       // calculate alpha
       double alpha = (-c*sum1 + sqr(c)*sum2 + sum3 - c*sum5)/(sum1 - c*sum2 + c*sum4 - sum5);
       // and error
       double cc = -pow((sum3 + sqr(c)*sum4 - 2*c*sum5),3);
       double bb = -2*sqr(sum3 + sqr(c)*sum4 - 2*c*sum5)*(sum1 - c*sum2 + c*sum4 - sum5);
-      double aa =  sqr(sum1 - c*sum2 + c*sum4 - sum5)*(-sum3 - sqr(c)*sum4 + sqr(sum1 - c*sum2 + c*sum4 - sum5) + 2*c*sum5);      
+      double aa =  sqr(sum1 - c*sum2 + c*sum4 - sum5)*(-sum3 - sqr(c)*sum4 + sqr(sum1 - c*sum2 + c*sum4 - sum5) + 2*c*sum5);
       double dis = sqr(bb)-4.*aa*cc;
       if(dis>0.) {
 	dis = sqrt(dis);
@@ -139,10 +139,9 @@ namespace Rivet {
       normalize(_h);
       // calculate alpha0
       pair<double,pair<double,double> > alpha0 = calcAlpha0(_h);
-      Scatter2DPtr _h_alpha0;
+      Estimate1DPtr _h_alpha0;
       book(_h_alpha0,2,1,1);
-      _h_alpha0->addPoint(0.5, alpha0.first, make_pair(0.5,0.5),
-			  make_pair(alpha0.second.first,alpha0.second.second) );
+      _h_alpha0->bin(1).set(alpha0.first, make_pair(alpha0.second.first,alpha0.second.second));
     }
 
     /// @}

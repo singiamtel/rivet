@@ -52,6 +52,8 @@ namespace Rivet {
   class Sphericity : public AxesDefinition {
   public:
 
+    using AxesDefinition::operator=;
+
     /// @name Constructors etc.
     /// @{
 

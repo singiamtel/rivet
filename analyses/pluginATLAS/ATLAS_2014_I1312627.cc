@@ -19,7 +19,7 @@ namespace Rivet {
     struct Plots {
       string ref;
       Histo1DPtr comp[2]; // (de)nominator components
-      Scatter2DPtr ratio; // Rjets plot
+      Estimate1DPtr ratio; // Rjets plot
     };
 
     /// @}
@@ -127,7 +127,7 @@ namespace Rivet {
     void finalize() {
       ///  Normalise, scale and otherwise manipulate histograms here
       const double sf( crossSection() / sumOfWeights() );
-      for (const auto& item : _plots) {
+      for (auto& item : _plots) {
         scale(item.second.comp[0], sf);
         scale(item.second.comp[1], sf);
         divide(item.second.comp[0], item.second.comp[1], item.second.ratio);
@@ -197,7 +197,7 @@ namespace Rivet {
     void hInit(string label, string ident) {
       string pre = ident + "-x0";
       _plots[label].ref = pre;
-      book(_plots[label].ratio, pre + "1" + _suff, true);
+      book(_plots[label].ratio, pre + "1" + _suff);
     }
 
     /// @}

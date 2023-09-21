@@ -137,7 +137,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_Lc, _h_LcPb, _h_D0, _h_D0Pb, _h_Lcint, _h_LcintPb, _h_D0int, _h_D0intPb, _h_LcR, _h_LcRPb, _h_Lcdummy,_h_LcPbdummy;
-    Scatter2DPtr _h_LcD0, _h_LcD0Pb, _h_LcD0int, _h_LcD0Pbint, _h_RpPb;
+    Estimate1DPtr _h_LcD0, _h_LcD0Pb, _h_LcD0int, _h_LcD0Pbint, _h_RpPb;
     /// @}
 
   };

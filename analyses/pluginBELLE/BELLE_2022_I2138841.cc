@@ -42,25 +42,25 @@ namespace Rivet {
 	Particle baryon1;
 	int imeson=-1;
 	if((Lambdac.children()[0].pid()==sign*3122 ||
-	    Lambdac.children()[0].pid()==sign*3212) && 
+	    Lambdac.children()[0].pid()==sign*3212) &&
 	   Lambdac.children()[1].pid()==sign*321) {
 	  baryon1 = Lambdac.children()[0];
 	  imeson=0;
 	}
 	else if((Lambdac.children()[1].pid()==sign*3122 ||
-		 Lambdac.children()[0].pid()==sign*3212) && 
+		 Lambdac.children()[0].pid()==sign*3212) &&
 		Lambdac.children()[0].pid()==sign*321) {
 	  baryon1 = Lambdac.children()[1];
 	  imeson=0;
 	}
 	else if((Lambdac.children()[0].pid()==sign*3122 ||
-		 Lambdac.children()[0].pid()==sign*3212) && 
+		 Lambdac.children()[0].pid()==sign*3212) &&
 		Lambdac.children()[1].pid()==sign*211) {
 	  baryon1 = Lambdac.children()[0];
 	  imeson=1;
 	}
 	else if((Lambdac.children()[1].pid()==sign*3122 ||
-		 Lambdac.children()[0].pid()==sign*3212) && 
+		 Lambdac.children()[0].pid()==sign*3212) &&
 		Lambdac.children()[0].pid()==sign*211) {
 	  baryon1 = Lambdac.children()[1];
 	  imeson=1;
@@ -70,11 +70,11 @@ namespace Rivet {
 	// Lambda0 case
 	if(baryon1.abspid()==3122) {
 	  Particle baryon2;
-	  if(baryon1.children()[0].pid()== sign*2212 && 
+	  if(baryon1.children()[0].pid()== sign*2212 &&
 	     baryon1.children()[1].pid()==-sign*211) {
 	    baryon2 = baryon1.children()[0];
 	  }
-	  else if(baryon1.children()[1].pid()== sign*2212 && 
+	  else if(baryon1.children()[1].pid()== sign*2212 &&
 		  baryon1.children()[0].pid()==-sign*211) {
 	    baryon2 = baryon1.children()[1];
 	  }
@@ -107,22 +107,22 @@ namespace Rivet {
 	// sigma0 case
 	else {
 	  Particle baryon2;
-	  if(baryon1.children()[0].pid()== sign*3122 && 
+	  if(baryon1.children()[0].pid()== sign*3122 &&
 	     baryon1.children()[1].pid()== 22) {
 	    baryon2 = baryon1.children()[0];
 	  }
-	  else if(baryon1.children()[1].pid()== sign*3122 && 
+	  else if(baryon1.children()[1].pid()== sign*3122 &&
 		  baryon1.children()[0].pid()== 22) {
 	    baryon2 = baryon1.children()[1];
 	  }
 	  else
 	    continue;
 	  Particle baryon3;
-	  if(baryon2.children()[0].pid()== sign*2212 && 
+	  if(baryon2.children()[0].pid()== sign*2212 &&
 	     baryon2.children()[1].pid()==-sign*211) {
 	    baryon3 = baryon2.children()[0];
 	  }
-	  else if(baryon2.children()[1].pid()== sign*2212 && 
+	  else if(baryon2.children()[1].pid()== sign*2212 &&
 		  baryon2.children()[0].pid()==-sign*211) {
 	    baryon3 = baryon2.children()[1];
 	  }
@@ -163,35 +163,33 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      pair<double,double> aLambda(0.7542,0.0022); 
+      pair<double,double> aLambda(0.7542,0.0022);
       for(int imeson=0;imeson<4;++imeson) {
-	for(int iy=0;iy<3;++iy) {
-	  if(imeson<2) normalize(_h[imeson][iy]);
-	  Scatter1D R = (*_c[imeson][iy][1]/ *_c[imeson][iy][0]).mkScatter();
-	  Scatter2DPtr _h_alpha1,_h_alpha2;
-	  if(iy==0) {
-	    book(_h_alpha1,1,1+imeson,1);
-	    book(_h_alpha2,1,1+imeson,2);
-	  }
-	  else {
-	    book(_h_alpha1,2,1+imeson,iy);
-	    book(_h_alpha2,2,1+imeson,2+iy);
-	  }
-	  double              rval = R.point(0).x();
-	  pair<double,double> rerr = R.point(0).xErrs();
-	  _h_alpha1->addPoint(0.5, rval, make_pair(0.5,0.5), rerr );
-	  // divide out aLambda
-	  rerr.first  = sqrt(sqr(rerr.first /rval) + sqr(aLambda.second/aLambda.first));
-	  rerr.second = sqrt(sqr(rerr.second/rval) + sqr(aLambda.second/aLambda.first));
-	  rval /= aLambda.first;
-	  rerr.first  *= rval;
-	  rerr.second *= rval;
-	  if(iy==2) {
-	    rval *=-1;
-	    swap(rerr.first,rerr.second);
-	  }
-	  _h_alpha2->addPoint(0.5, rval, make_pair(0.5,0.5), rerr );
-	}
+        for(int iy=0;iy<3;++iy) {
+          if(imeson<2) normalize(_h[imeson][iy]);
+          Estimate0DPtr _h_alpha1,_h_alpha2;
+          if(iy==0) {
+            book(_h_alpha1,1,1+imeson,1);
+            book(_h_alpha2,1,1+imeson,2);
+          }
+          else {
+            book(_h_alpha1,2,1+imeson,iy);
+            book(_h_alpha2,2,1+imeson,2+iy);
+          }
+          *_h_alpha1 = *_c[imeson][iy][1]/ *_c[imeson][iy][0];
+          // divide out aLambda
+          double rval = _h_alpha1->val() / aLambda.first;
+          pair<double,double> rerr = _h_alpha1->err();
+          rerr.first  = sqrt(sqr(rerr.first /rval) + sqr(aLambda.second/aLambda.first));
+          rerr.second = sqrt(sqr(rerr.second/rval) + sqr(aLambda.second/aLambda.first));
+          rerr.first  *= rval;
+          rerr.second *= rval;
+          if(iy==2) {
+            rval *=-1;
+            swap(rerr.first,rerr.second);
+          }
+          _h_alpha2->set(rval, rerr);
+        }
       }
     }
 

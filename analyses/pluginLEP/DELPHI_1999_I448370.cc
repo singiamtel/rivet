@@ -92,47 +92,51 @@ namespace Rivet {
                                    beams.second.p3().mod() ) / 2.0;
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
       Vector3 axis;
-      if(beams.first.pid()>0)
-	axis = beams.first .momentum().p3().unit();
-      else
-	axis = beams.second.momentum().p3().unit();
+      if (beams.first.pid()>0) {
+        axis = beams.first .momentum().p3().unit();
+      }
+      else {
+        axis = beams.second.momentum().p3().unit();
+      }
 
       // loop over charged particles
       double v=0.8, v2=sqr(v), v5=v2*v2*v;
       for (const Particle& p : fs.particles()) {
         double xp = p.p3().mod()/meanBeamMom;
-	double ctheta = axis.dot(p.momentum().p3().unit());
-	if(abs(ctheta)<0.8) {
-	  double WT = 0.5 /v5*(5.*sqr(ctheta)*(3.-v2)-v2*(5.-3.*v2));
-	  double WL = 0.25/v5*(v2*(5.+3.*v2)-5.*sqr(ctheta)*(3.+v2));
-	  double WA = 2.*ctheta/v2/v;
-	  _h_F_T  ->fill(xp,WT);
-	  _h_F_L  ->fill(xp,WL);
-	  _h_F_TL ->fill(xp,(WL+WT));
-	  _h_F_T_total ->fill(xp,0.5*xp*WT);
-	  _h_F_L_total ->fill(xp,0.5*xp*WL);
-	  _h_F_TL_total->fill(xp,0.5*xp*(WL+WT));
-	  if(p.charge()>0) {
-	    _h_F_A->fill(xp, WA);
-	  }
-	  else {
-	    _h_F_A->fill(xp,-WA);
-	  }
-	  if(flavour==5) {
-	    _h_b_F_T  ->fill(xp,WT);
-	    _h_b_F_L  ->fill(xp,WL);
-	  }
-	  else if(flavour!=4) {
-	    _h_light_F_T->fill(xp,WT);
-	    _h_light_F_L->fill(xp,WL);
-	  }
-	}
+        double ctheta = axis.dot(p.momentum().p3().unit());
+        if(abs(ctheta)<0.8) {
+          double WT = 0.5 /v5*(5.*sqr(ctheta)*(3.-v2)-v2*(5.-3.*v2));
+          double WL = 0.25/v5*(v2*(5.+3.*v2)-5.*sqr(ctheta)*(3.+v2));
+          double WA = 2.*ctheta/v2/v;
+          _h_F_T  ->fill(xp,WT);
+          _h_F_L  ->fill(xp,WL);
+          _h_F_TL ->fill(xp,(WL+WT));
+          _h_F_T_total ->fill(xp,0.5*xp*WT);
+          _h_F_L_total ->fill(xp,0.5*xp*WL);
+          _h_F_TL_total->fill(xp,0.5*xp*(WL+WT));
+          if(p.charge()>0) {
+            _h_F_A->fill(xp, WA);
+          }
+          else {
+            _h_F_A->fill(xp,-WA);
+          }
+          if(flavour==5) {
+            _h_b_F_T  ->fill(xp,WT);
+            _h_b_F_L  ->fill(xp,WL);
+          }
+          else if(flavour!=4) {
+            _h_light_F_T->fill(xp,WT);
+            _h_light_F_L->fill(xp,WL);
+          }
+        }
       }
 
-      if(flavour==5)
-	_n_bottom->fill(91.2,fs.particles().size());
-      else if(flavour!=4)
-	_n_light->fill(91.2,fs.particles().size());
+      if(flavour==5) {
+        _n_bottom->fill(Ecm, fs.particles().size());
+      }
+      else if(flavour!=4) {
+        _n_light->fill(Ecm, fs.particles().size());
+      }
 
     }
 
@@ -143,8 +147,8 @@ namespace Rivet {
       scale(_h_F_L ,1./ *_c_total);
       scale(_h_F_A ,1./ *_c_total);
       scale(_h_F_TL,1./ *_c_total);
-      {Scatter2DPtr temp; divide(_h_F_L, _h_F_T , book(temp, 6, 1, 1));}
-      {Scatter2DPtr temp; divide(_h_F_L, _h_F_TL, book(temp, 6, 1, 2));}
+      {Estimate1DPtr temp; divide(_h_F_L, _h_F_T , book(temp, 6, 1, 1));}
+      {Estimate1DPtr temp; divide(_h_F_L, _h_F_TL, book(temp, 6, 1, 2));}
       scale(_h_F_T_total ,1./ *_c_total);
       scale(_h_F_L_total ,1./ *_c_total);
       scale(_h_F_TL_total,1./ *_c_total);
@@ -161,9 +165,11 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_F_T,_h_F_L,_h_F_A,_h_F_TL,_h_b_F_T,_h_b_F_L,_h_light_F_T,_h_light_F_L,_n_light,_n_bottom;
+    Histo1DPtr _h_F_T,_h_F_L,_h_F_A,_h_F_TL,_h_b_F_T,_h_b_F_L,_h_light_F_T,_h_light_F_L;
     Histo1DPtr _h_F_T_total,_h_F_L_total,_h_F_TL_total;
+    BinnedHistoPtr<string> _n_light,_n_bottom;
     CounterPtr _c_light,_c_bottom,_c_total;
+    const string Ecm = "91.2";
     /// @}
 
 

@@ -69,7 +69,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _histEta09, _histEta70;
-    Scatter2DPtr _histEtaR;
+    Estimate1DPtr _histEtaR;
     /// @}
 
     bool fill09, fill70;

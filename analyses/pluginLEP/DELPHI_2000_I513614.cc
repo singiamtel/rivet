@@ -59,19 +59,19 @@ namespace Rivet {
     void finalize() {
       normalize(_h_El   );
       normalize(_h_Ev   );
-      if(_h_El->effNumEntries()!=0. and _h_Ev->effNumEntries()!=0.) {
-	double Ev  = _h_Ev->xMean();
-	double El  = _h_El->xMean();
-	double dEv = _h_Ev->xStdErr();
-	double dEl = _h_El->xStdErr();
-	double ratio = El/Ev;
-	double dr    = (Ev*dEl-El*dEv)/sqr(Ev);
-	double rho = 0.091;
-	double P = (7. + rho*(30. - 40.*ratio) + 4.*(2.-3.*ratio)*ratio)/sqr(1.+2.*ratio);
-	double dP = (20.*(-1. + 4.*rho*(-2. + ratio) - 2.*ratio))/pow(1. + 2.*ratio,3)*dr;
-       	Scatter2DPtr h_pol;
-	book(h_pol, 1,1,1);
-       	h_pol->addPoint(91.2, P, make_pair(0.5,0.5),make_pair(dP,dP) );
+      if (_h_El->effNumEntries()!=0. and _h_Ev->effNumEntries()!=0.) {
+        const double Ev  = _h_Ev->xMean();
+        const double El  = _h_El->xMean();
+        const double dEv = _h_Ev->xStdErr();
+        const double dEl = _h_El->xStdErr();
+        const double ratio = El/Ev;
+        const double dr    = (Ev*dEl-El*dEv)/sqr(Ev);
+        const double rho = 0.091;
+        const double P = (7. + rho*(30. - 40.*ratio) + 4.*(2.-3.*ratio)*ratio)/sqr(1.+2.*ratio);
+        const double dP = (20.*(-1. + 4.*rho*(-2. + ratio) - 2.*ratio))/pow(1. + 2.*ratio,3)*dr;
+       	Estimate1DPtr h_pol;
+        book(h_pol, 1,1,1);
+       	h_pol->bin(1).set(P, dP);
       }
     }
 

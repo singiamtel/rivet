@@ -62,7 +62,7 @@ namespace Rivet {
         book(_h_Ncharged_bottom         , "/TMP/NCHARGED_B"   , 27, 3, 57);
         book(_h_scaledMomentum          , 65, 1, 1);
         book(_h_scaledMomentum_udsc     , 65, 1, 2);
-        book(_h_scaledMomentum_bottom   ,  65, 1, 3);
+        book(_h_scaledMomentum_bottom   , 65, 1, 3);
       }
       else if(sqrtS()/GeV < 90) {
         int i1(-1),i2(-1);
@@ -84,8 +84,10 @@ namespace Rivet {
         else if(isCompatibleWithSqrtS(85.1*GeV)) {
           i1=1; i2=3;
         }
-        else
+        else {
           MSG_ERROR("Beam energy not supported!");
+        }
+
         book(_h_thrust , 21+i1,1,i2);
         book(_h_rho    , 26+i1,1,i2);
         book(_h_B_T    , 31+i1,1,i2);
@@ -120,32 +122,34 @@ namespace Rivet {
         else if(isCompatibleWithSqrtS(206.2*GeV)) {
           i1=2; i2=3;
         }
-        else
+        else {
           MSG_ERROR("Beam energy not supported!");
-	book(_h_thrust , 23+i1,1,i2);
-	book(_h_rho    , 28+i1,1,i2);
-	book(_h_B_T    , 33+i1,1,i2);
-	book(_h_B_W    , 38+i1,1,i2);
-	book(_h_C      , 41+i1,1,i2);
-	book(_h_D      , 44+i1,1,i2);
-	book(_h_N      , "/TMP/NCHARGED", 22, 9, 53);
-	book(_h_xi     , 66+i1,1,i2);
-	// and the jets
-	int i3 = 3*i1+i2;
-	book(_h_y_2_JADE  ,   i3,1,1);
-	book(_h_y_3_JADE  ,   i3,1,2);
-	book(_h_y_4_JADE  ,   i3,1,3);
-	book(_h_y_5_JADE  ,   i3,1,4);
-	book(_h_y_2_Durham, 9+i3,1,1);
-	book(_h_y_3_Durham, 9+i3,1,2);
-	book(_h_y_4_Durham, 9+i3,1,3);
-	book(_h_y_5_Durham, 9+i3,1,4);
-	if(i3==8||i3==9) {
-	  book(_h_y_2_Cambridge,11+i3,1,1);
-	  book(_h_y_3_Cambridge,11+i3,1,2);
-	  book(_h_y_4_Cambridge,11+i3,1,3);
-	  book(_h_y_5_Cambridge,11+i3,1,4);
-	}
+        }
+
+        book(_h_thrust , 23+i1,1,i2);
+        book(_h_rho    , 28+i1,1,i2);
+        book(_h_B_T    , 33+i1,1,i2);
+        book(_h_B_W    , 38+i1,1,i2);
+        book(_h_C      , 41+i1,1,i2);
+        book(_h_D      , 44+i1,1,i2);
+        book(_h_N      , "/TMP/NCHARGED", 22, 9, 53);
+        book(_h_xi     , 66+i1,1,i2);
+        // and the jets
+        int i3 = 3*i1+i2;
+        book(_s["y_2_JADE"],     i3,1,1);
+        book(_s["y_3_JADE"],     i3,1,2);
+        book(_s["y_4_JADE"],     i3,1,3);
+        book(_s["y_5_JADE"],     i3,1,4);
+        book(_s["y_2_Durham"], 9+i3,1,1);
+        book(_s["y_3_Durham"], 9+i3,1,2);
+        book(_s["y_4_Durham"], 9+i3,1,3);
+        book(_s["y_5_Durham"], 9+i3,1,4);
+        if (i3==8 || i3==9) {
+          book(_s["y_2_Cambridge"], 11+i3,1,1);
+          book(_s["y_3_Cambridge"], 11+i3,1,2);
+          book(_s["y_4_Cambridge"], 11+i3,1,3);
+          book(_s["y_5_Cambridge"], 11+i3,1,4);
+        }
       }
 
       book(_sumW_udsc, "_sumW_udsc");
@@ -167,37 +171,37 @@ namespace Rivet {
       /// @todo Yuck!!! Eliminate when possible...
       int iflav = 0;
       // only need the flavour at Z pole
-      if(_h_Thrust_udsc) {
-	int flavour = 0;
-	const InitialQuarks& iqf = apply<InitialQuarks>(event, "initialquarks");
-	Particles quarks;
-	if ( iqf.particles().size() == 2 ) {
-	  flavour = iqf.particles().front().abspid();
-	  quarks  = iqf.particles();
-	} else {
-	  map<int, Particle> quarkmap;
-	  for (const Particle& p : iqf.particles()) {
-	    if (quarkmap.find(p.pid()) == quarkmap.end()) quarkmap[p.pid()] = p;
-	    else if (quarkmap[p.pid()].E() < p.E()) quarkmap[p.pid()] = p;
-	  }
-	  double max_energy = 0.;
-	  for (int i = 1; i <= 5; ++i) {
-	    double energy = 0.;
-	    if (quarkmap.find(i) != quarkmap.end())
-	      energy += quarkmap[ i].E();
-	    if (quarkmap.find(-i) != quarkmap.end())
-	      energy += quarkmap[-i].E();
-	    if (energy > max_energy)
-	      flavour = i;
-	  }
-	  if (quarkmap.find(flavour) != quarkmap.end())
-	    quarks.push_back(quarkmap[flavour]);
-	  if (quarkmap.find(-flavour) != quarkmap.end())
-	    quarks.push_back(quarkmap[-flavour]);
-	}
-	// Flavour label
-	/// @todo Change to a bool?
-	iflav = (flavour == PID::DQUARK || flavour == PID::UQUARK || flavour == PID::SQUARK || flavour == PID::CQUARK) ? 1 : (flavour == PID::BQUARK) ? 5 : 0;
+      if (_h_Thrust_udsc) {
+        int flavour = 0;
+        const InitialQuarks& iqf = apply<InitialQuarks>(event, "initialquarks");
+        Particles quarks;
+        if ( iqf.particles().size() == 2 ) {
+          flavour = iqf.particles().front().abspid();
+          quarks  = iqf.particles();
+        } else {
+          map<int, Particle> quarkmap;
+          for (const Particle& p : iqf.particles()) {
+            if (quarkmap.find(p.pid()) == quarkmap.end()) quarkmap[p.pid()] = p;
+            else if (quarkmap[p.pid()].E() < p.E()) quarkmap[p.pid()] = p;
+          }
+          double max_energy = 0.;
+          for (int i = 1; i <= 5; ++i) {
+            double energy = 0.;
+            if (quarkmap.find(i) != quarkmap.end())
+              energy += quarkmap[ i].E();
+            if (quarkmap.find(-i) != quarkmap.end())
+              energy += quarkmap[-i].E();
+            if (energy > max_energy)
+              flavour = i;
+          }
+          if (quarkmap.find(flavour) != quarkmap.end())
+            quarks.push_back(quarkmap[flavour]);
+          if (quarkmap.find(-flavour) != quarkmap.end())
+            quarks.push_back(quarkmap[-flavour]);
+        }
+        // Flavour label
+        /// @todo Change to a bool?
+        iflav = (flavour == PID::DQUARK || flavour == PID::UQUARK || flavour == PID::SQUARK || flavour == PID::CQUARK) ? 1 : (flavour == PID::BQUARK) ? 5 : 0;
       }
       // Update weight sums
       if (iflav == 1) {
@@ -218,7 +222,7 @@ namespace Rivet {
         _h_Ncharged_bottom->fill(cfs.size());
       }
       else if(_h_N) {
-	_h_N->fill(cfs.size());
+        _h_N->fill(cfs.size());
       }
 
       // Scaled momentum
@@ -234,9 +238,9 @@ namespace Rivet {
         } else if (iflav == 5) {
           _h_scaledMomentum_bottom->fill(-logScaledMom);
         }
-	else if(_h_xi) {
-	  _h_xi->fill(-logScaledMom);
-	}
+        else if(_h_xi) {
+          _h_xi->fill(-logScaledMom);
+        }
       }
 
       // Thrust
@@ -260,8 +264,8 @@ namespace Rivet {
         _h_Dparameter_bottom->fill(parisi.D());
       }
       else if(_h_C) {
-	_h_C->fill(parisi.C());
-	_h_D->fill(parisi.D());
+        _h_C->fill(parisi.C());
+        _h_D->fill(parisi.D());
       }
 
       // The hemisphere variables
@@ -281,119 +285,110 @@ namespace Rivet {
         _h_B_W->fill(hemisphere.Bmax());
       }
       // jade jet rates
-      if(_h_y_2_JADE) {
+      if (_s.count("y_2_JADE")) {
         const FastJets& jadejet = apply<FastJets>(event, "JadeJets");
         if (jadejet.clusterSeq()) {
           const double y_23 = jadejet.clusterSeq()->exclusive_ymerge_max(2);
           const double y_34 = jadejet.clusterSeq()->exclusive_ymerge_max(3);
           const double y_45 = jadejet.clusterSeq()->exclusive_ymerge_max(4);
           const double y_56 = jadejet.clusterSeq()->exclusive_ymerge_max(5);
-          for (size_t i = 1; i < _h_y_2_JADE->numBins()+1; ++i) {
-            const auto& b = _h_y_2_JADE->bin(i);
-            const double ycut = b.xMid();
-            if (y_23 < ycut) _h_y_2_JADE->fill(ycut, b.xWidth());
+          for (auto& b : _s["y_2_JADE"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
+            if (y_23 < ycut)  _s["y_2_JADE"]->fill(b.xEdge());
           }
-          for (size_t i = 1; i < _h_y_3_JADE->numBins()+1; ++i) {
-            const auto& b = _h_y_3_JADE->bin(i);
-            const double ycut = b.xMid();
+          for (auto& b : _s["y_3_JADE"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
             if (y_34 < ycut && y_23 > ycut) {
-              _h_y_3_JADE->fill(ycut, b.xWidth());
+              _s["y_3_JADE"]->fill(b.xEdge());
             }
           }
-          for (size_t i = 1; i < _h_y_4_JADE->numBins()+1; ++i) {
-            const auto& b = _h_y_4_JADE->bin(i);
-            const double ycut = b.xMid();
+          for (auto& b : _s["y_4_JADE"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
             if (y_45 < ycut && y_34 > ycut) {
-              _h_y_4_JADE->fill(ycut, b.xWidth());
+              _s["y_4_JADE"]->fill(b.xEdge());
             }
           }
-          for (size_t i = 1; i < _h_y_5_JADE->numBins()+1; ++i) {
-            const auto& b = _h_y_5_JADE->bin(i);
-            const double ycut = b.xMid();
+          for (auto& b : _s["y_5_JADE"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
             if (y_56 < ycut && y_45 > ycut) {
-              _h_y_5_JADE->fill(ycut, b.xWidth());
+              _s["y_5_JADE"]->fill(b.xEdge());
             }
           }
         }
       }
       // Durham jet rates
-      if(_h_y_2_Durham) {
+      if (_s.count("y_2_Durham")) {
         const FastJets& durhamjet = apply<FastJets>(event, "DurhamJets");
         if (durhamjet.clusterSeq()) {
           const double y_23 = durhamjet.clusterSeq()->exclusive_ymerge_max(2);
           const double y_34 = durhamjet.clusterSeq()->exclusive_ymerge_max(3);
           const double y_45 = durhamjet.clusterSeq()->exclusive_ymerge_max(4);
           const double y_56 = durhamjet.clusterSeq()->exclusive_ymerge_max(5);
-          for (size_t i = 1; i < _h_y_2_Durham->numBins()+1; ++i) {
-            const auto& b = _h_y_2_Durham->bin(i);
-            const double ycut = b.xMid();
-            if (y_23 < ycut) _h_y_2_Durham->fill(ycut, b.xWidth());
+          for (auto& b : _s["y_2_Durham"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
+            if (y_23 < ycut)  _s["y_2_Durham"]->fill(b.xEdge());
           }
-          for (size_t i = 1; i < _h_y_3_Durham->numBins()+1; ++i) {
-            const auto& b = _h_y_3_Durham->bin(i);
-            const double ycut = _h_y_3_Durham->bin(i).xMid();
+          for (auto& b : _s["y_3_Durham"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
             if (y_34 < ycut && y_23 > ycut) {
-              _h_y_3_Durham->fill(ycut, b.xWidth());
+              _s["y_3_Durham"]->fill(b.xEdge());
             }
           }
-          for (size_t i = 1; i < _h_y_4_Durham->numBins()+1; ++i) {
-            const auto& b = _h_y_4_Durham->bin(i);
-            const double ycut = b.xMid();
+          for (auto& b : _s["y_4_Durham"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
             if (y_45 < ycut && y_34 > ycut) {
-              _h_y_4_Durham->fill(ycut, b.xWidth());
+              _s["y_4_Durham"]->fill(b.xEdge());
             }
           }
-          for (size_t i = 1; i < _h_y_5_Durham->numBins()+1; ++i) {
-            const auto& b = _h_y_5_Durham->bin(i);
-            const double ycut = b.xMid();
+          for (auto& b : _s["y_5_Durham"]->bins()) {
+            const double ycut = std::stod(b.xEdge());
             if (y_56 < ycut && y_45 > ycut) {
-              _h_y_5_Durham->fill(ycut, b.xWidth());
+              _s["y_5_Durham"]->fill(b.xEdge());
             }
           }
         }
       }
       // Cambridge
-      if(_h_y_2_Cambridge) {
+      if (_s.count("y_2_Cambridge")) {
         PseudoJets pjs;
         const FinalState& fs = apply<FinalState>(event, "FS");
         for (size_t i = 1; i < fs.particles().size()+1; ++i) {
           fastjet::PseudoJet pj = fs.particles()[i];
           pjs.push_back(pj);
         }
-        for (size_t i = 1; i < _h_y_2_Cambridge->numBins()+1; ++i) {
-          const auto& b = _h_y_2_Cambridge->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (size_t i = 1; i < _s["y_2_Cambridge"]->numBins()+1; ++i) {
+          const auto& b = _s["y_2_Cambridge"]->bin(i);
+          const double ycut = std::stod(b.xEdge());
           fastjet::EECambridgePlugin plugin(ycut);
           fastjet::JetDefinition jdef(&plugin);
           fastjet::ClusterSequence cseq(pjs, jdef);
-          unsigned int njet = cseq.inclusive_jets().size();
-          if(njet==2)
-            _h_y_2_Cambridge->fill(ycut, width);
-          else if(njet==3) {
-            if(i<_h_y_3_Cambridge->numBins()) _h_y_3_Cambridge->fill(ycut,width);
+          size_t njet = cseq.inclusive_jets().size();
+          if (njet==2) {
+            _s["y_2_Cambridge"]->fill(b.xEdge());
+          }
+          else if (njet==3) {
+            if (i < _s["y_3_Cambridge"]->numBins()+1) {
+              _s["y_3_Cambridge"]->fill(b.xEdge());
+            }
           }
           else if(njet==4) {
-            if(i<_h_y_4_Cambridge->numBins()) _h_y_4_Cambridge->fill(ycut,width);
+            if (i < _s["y_4_Cambridge"]->numBins()+1) {
+              _s["y_4_Cambridge"]->fill(b.xEdge());
+            }
           }
           else if(njet==5) {
-            if(i<_h_y_5_Cambridge->numBins()) _h_y_5_Cambridge->fill(ycut,width);
+            if (i < _s["y_5_Cambridge"]->numBins()+1) {
+              _s["y_5_Cambridge"]->fill(b.xEdge());
+            }
           }
         }
       }
     }
 
-    Scatter2DPtr convertHisto(unsigned int ix,unsigned int iy, unsigned int iz, Histo1DPtr histo) {
-      Scatter2D temphisto(refData(ix, iy, iz));
-      Scatter2DPtr mult;
+    Estimate1DPtr convertHisto(unsigned int ix,unsigned int iy, unsigned int iz, Histo1DPtr histo) {
+      Estimate1DPtr mult;
       book(mult, ix, iy, iz);
-      for (size_t b = 0; b < temphisto.numPoints(); b++) {
-        const double x  = temphisto.point(b).x();
-        pair<double,double> ex = temphisto.point(b).xErrs();
-        double y    = histo->bin(b+1).sumW();
-        double yerr = histo->bin(b+1).errW();
-        mult->addPoint(x, y, ex, make_pair(yerr,yerr));
-      }
+      barchart(histo, mult);
       return mult;
     }
 
@@ -435,7 +430,7 @@ namespace Rivet {
         if(_h_xi) scale(_h_xi,1./sumOfWeights());
 
 
-        Scatter2DPtr mult;
+        Estimate1DPtr mult;
         if(_h_N) {
           if(isCompatibleWithSqrtS(130.1*GeV)) {
             convertHisto(60, 1, 1, _h_N);
@@ -466,24 +461,7 @@ namespace Rivet {
           }
         }
         // // the jets
-        if(_h_y_2_JADE) {
-          scale(_h_y_2_JADE, 1./ sumOfWeights());
-          scale(_h_y_3_JADE, 1./ sumOfWeights());
-          scale(_h_y_4_JADE, 1./ sumOfWeights());
-          scale(_h_y_5_JADE, 1./ sumOfWeights());
-        }
-        if(_h_y_2_Durham) {
-          scale(_h_y_2_Durham, 1./ sumOfWeights());
-          scale(_h_y_3_Durham, 1./ sumOfWeights());
-          scale(_h_y_4_Durham, 1./ sumOfWeights());
-          scale(_h_y_5_Durham, 1./ sumOfWeights());
-        }
-        if(_h_y_2_Cambridge) {
-          scale(_h_y_2_Cambridge, 1./ sumOfWeights());
-          scale(_h_y_3_Cambridge, 1./ sumOfWeights());
-          scale(_h_y_4_Cambridge, 1./ sumOfWeights());
-          scale(_h_y_5_Cambridge, 1./ sumOfWeights());
-        }
+        scale(_s, 1./sumOfWeights());
       }
     }
 
@@ -503,11 +481,9 @@ namespace Rivet {
     Histo1DPtr _h_Ncharged, _h_Ncharged_udsc, _h_Ncharged_bottom;
     Histo1DPtr _h_scaledMomentum, _h_scaledMomentum_udsc, _h_scaledMomentum_bottom;
     // at other enegies
-    Histo1DPtr _h_thrust,_h_rho,_h_B_T,_h_B_W,_h_C,_h_D,_h_N,_h_xi;
-    // and the jets
+    Histo1DPtr _h_thrust, _h_rho, _h_B_T, _h_B_W, _h_C, _h_D, _h_N, _h_xi;
     Histo1DPtr _h_y_2_JADE,_h_y_3_JADE,_h_y_4_JADE,_h_y_5_JADE;
-    Histo1DPtr _h_y_2_Durham,_h_y_3_Durham,_h_y_4_Durham,_h_y_5_Durham;
-    Histo1DPtr _h_y_2_Cambridge,_h_y_3_Cambridge,_h_y_4_Cambridge,_h_y_5_Cambridge;
+    map<string, BinnedHistoPtr<string>> _s;
     /// @}
 
   };

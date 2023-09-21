@@ -27,14 +27,9 @@ namespace Rivet {
       // histograms
       book(_h_sigma ,1,1,1);
       book(_h_cTheta,2,1,1);
-      double xlow=-1., step=0.2;
-      for(unsigned int ix=0;ix<10;++ix) {
-        Histo1DPtr temp;
-        std::ostringstream title;
-        title << "/TMP/h_pol_" << ix;
-        book(temp,title.str(),20,-1.,1.);
-        _h_pol.add(xlow,xlow+step,temp);
-        xlow+=step;
+      book(_h_pol, {-1, -0.8, -0.6, -0.4, -0.2, 0., 0.2, 0.4, 0.6, 0.8, 1.0});
+      for (auto& b : _h_pol->bins()) {
+        book(b, "/TMP/h_pol_"+to_string(b.index()+1), 20, -1.0, 1.0);
       }
     }
 
@@ -98,19 +93,19 @@ namespace Rivet {
               break;
             }
           }
-          if(!fs) continue;
+          if (!fs) continue;
           map<long,int> nRes2 = nRes;
           int ncount2 = ncount;
-          findChildren(p2,nRes2,ncount2);
-          if(ncount2!=0) continue;
+          findChildren(p2, nRes2, ncount2);
+          if (ncount2!=0) continue;
           matched=true;
-          for(auto const & val : nRes2) {
+          for (const auto& val : nRes2) {
             if(val.second!=0) {
               matched = false;
               break;
             }
           }
-          if(matched) {
+          if (matched) {
             _h_sigma->fill(2.396);
             if(p1.pid()==PID::LAMBDA) {
               Lambda=p1;
@@ -121,10 +116,10 @@ namespace Rivet {
             break;
           }
         }
-        if(matched) break;
+        if (matched) break;
       }
       // now for the polarization measurements
-      if(matched) {
+      if (matched) {
         double cTheta = Lambda.momentum().p3().unit().dot(axis);
         _h_cTheta->fill(cTheta);
         Particle proton;
@@ -139,17 +134,17 @@ namespace Rivet {
         LorentzTransform boost1 = LorentzTransform::mkFrameTransformFromBeta(Lambda.momentum().betaVec());
         Vector3 axis1 = boost1.transform(proton.momentum()).p3().unit();
         double cPhi = axis1.dot(Lambda.momentum().p3().unit());
-        _h_pol.fill(cTheta,cPhi);
+        _h_pol->fill(cTheta, cPhi);
       }
     }
 
     pair<double,double> calcAlpha(Histo1DPtr hist) {
       if(hist->numEntries()==0.) return make_pair(0.,0.);
       double sum1(0.),sum2(0.);
-      for (auto bin : hist->bins() ) {
+      for (const auto& bin : hist->bins()) {
         double Oi = bin.sumW();
         if(Oi==0.) continue;
-        double ai = 0.5*(bin.xMax()-bin.xMin());
+        double ai = 0.5*bin.xWidth();
         double bi = 0.5*ai*(bin.xMax()+bin.xMin());
         double Ei = bin.errW();
         sum1 += sqr(bi/Ei);
@@ -160,16 +155,14 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_sigma,crossSection()/sumOfWeights()/picobarn);
+      scale(_h_sigma, crossSection()/sumOfWeights()/picobarn);
       normalize(_h_cTheta);
-      Scatter2DPtr _h_alpha;
-      book(_h_alpha,3,1,1);
-      double step=0.2, x=-0.9;
-      for(unsigned int ix=0;ix<10;++ix) {
-        normalize(_h_pol.histos()[ix]);
-        pair<double,double> alpha = calcAlpha(_h_pol.histos()[ix]);
-        _h_alpha->addPoint(x, alpha.first, make_pair(0.5*step,0.5*step), make_pair(alpha.second,alpha.second) );
-        x+=step;
+      Estimate1DPtr _h_alpha;
+      book(_h_alpha, 3, 1, 1);
+      for (auto& b : _h_pol->bins()) {
+        normalize(b);
+        pair<double,double> alpha = calcAlpha(b);
+        _h_alpha->bin(b.index()).set(alpha.first, alpha.second);
       }
     }
     /// @}
@@ -178,7 +171,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_sigma,_h_cTheta;
-    BinnedHistogram _h_pol;
+    Histo1DGroupPtr _h_pol;
     /// @}
 
 

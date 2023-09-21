@@ -39,29 +39,29 @@ namespace Rivet {
       declare(zmmFind, "ZmmFind");
 
       // Book histograms
-      book(_h_Zmm_absY          , 26, 1, 1);
-      book(_h_Zee_absY          , 26, 1, 2);
-      book(_h_Zll_absY          , 26, 1, 3);
-      book(_h_Zmm_pt            , 27, 1, 1);
-      book(_h_Zee_pt            , 27, 1, 2);
-      book(_h_Zll_pt            , 27, 1, 3);
-      book(_h_Zmm_phiStar       , 28, 1, 1);
-      book(_h_Zee_phiStar       , 28, 1, 2);
-      book(_h_Zll_phiStar       , 28, 1, 3);
-      book(_h_Zll_pt_Y0         , 29, 1, 1);
-      book(_h_Zll_pt_Y1         , 29, 1, 2);
-      book(_h_Zll_pt_Y2         , 29, 1, 3);
-      book(_h_Zll_pt_Y3         , 29, 1, 4);
-      book(_h_Zll_pt_Y4         , 29, 1, 5);
+      book(_h_Zmm_absY,    26, 1, 1);
+      book(_h_Zee_absY,    26, 1, 2);
+      book(_h["absY"],     26, 1, 3);
+      book(_h_Zmm_pt,      27, 1, 1);
+      book(_h_Zee_pt,      27, 1, 2);
+      book(_h["pt"],       27, 1, 3);
+      book(_h_Zmm_phiStar, 28, 1, 1);
+      book(_h_Zee_phiStar, 28, 1, 2);
+      book(_h["phiStar"],  28, 1, 3);
+      book(_h["pt_Y0"],    29, 1, 1);
+      book(_h["pt_Y1"],    29, 1, 2);
+      book(_h["pt_Y2"],    29, 1, 3);
+      book(_h["pt_Y3"],    29, 1, 4);
+      book(_h["pt_Y4"],    29, 1, 5);
 
-      book(_h_Zll_pt_norm       , 30, 1, 1);
-      book(_h_Zll_phiStar_norm  , 31, 1, 1);
-      book(_h_Zll_absY_norm     , 32, 1, 1);
-      book(_h_Zll_pt_Y0_norm    , 33, 1, 1);
-      book(_h_Zll_pt_Y1_norm    , 33, 1, 2);
-      book(_h_Zll_pt_Y2_norm    , 33, 1, 3);
-      book(_h_Zll_pt_Y3_norm    , 33, 1, 4);
-      book(_h_Zll_pt_Y4_norm    , 33, 1, 5);
+      book(_h_norm["pt"],      30, 1, 1);
+      book(_h_norm["phiStar"], 31, 1, 1);
+      book(_h_norm["absY"],    32, 1, 1);
+      book(_h_norm["pt_Y0"],   33, 1, 1);
+      book(_h_norm["pt_Y1"],   33, 1, 2);
+      book(_h_norm["pt_Y2"],   33, 1, 3);
+      book(_h_norm["pt_Y3"],   33, 1, 4);
+      book(_h_norm["pt_Y4"],   33, 1, 5);
 
     }
 
@@ -109,51 +109,43 @@ namespace Rivet {
 
       if (ee_event) {
         _h_Zee_absY->fill(zcand.absrap());
-        _h_Zee_pt->fill(zcand.pt());
+        _h_Zee_pt->fill(zcand.pt()/GeV);
         _h_Zee_phiStar->fill(phiStar);
       }
       else if (mm_event) {
         _h_Zmm_absY->fill(zcand.absrap());
-        _h_Zmm_pt->fill(zcand.pt());
+        _h_Zmm_pt->fill(zcand.pt()/GeV);
         _h_Zmm_phiStar->fill(phiStar);
       }
 
-      _h_Zll_pt->fill(zcand.pt());
-      _h_Zll_pt_norm->fill(zcand.pt());
-      _h_Zll_phiStar->fill(phiStar);
-      _h_Zll_phiStar_norm->fill(phiStar);
-      _h_Zll_absY->fill(zcand.absrap());
-      _h_Zll_absY_norm->fill(zcand.absrap());
+      _h["pt"]->fill(zcand.pt()/GeV);
+      _h_norm["pt"]->fill(zcand.pt()/GeV);
+      _h["phiStar"]->fill(phiStar);
+      _h_norm["phiStar"]->fill(phiStar);
+      _h["absY"]->fill(zcand.absrap());
+      _h_norm["absY"]->fill(zcand.absrap());
 
-      if      (zcand.absrap()<0.4) {
-        _h_Zll_pt_Y0->fill(zcand.pt());
-        _h_Zll_pt_Y0_norm->fill(zcand.pt());
+      if (zcand.absrap() < 0.4) {
+        _h["pt_Y0"]->fill(zcand.pt()/GeV);
+        _h_norm["pt_Y0"]->fill(zcand.pt()/GeV);
       }
-      else if (zcand.absrap()<0.8) {
-        _h_Zll_pt_Y1->fill(zcand.pt());
-        _h_Zll_pt_Y1_norm->fill(zcand.pt());
+      else if (zcand.absrap() < 0.8) {
+        _h["pt_Y1"]->fill(zcand.pt()/GeV);
+        _h_norm["pt_Y1"]->fill(zcand.pt()/GeV);
       }
-      else if (zcand.absrap()<1.2) {
-        _h_Zll_pt_Y2->fill(zcand.pt());
-        _h_Zll_pt_Y2_norm->fill(zcand.pt());
+      else if (zcand.absrap() < 1.2) {
+        _h["pt_Y2"]->fill(zcand.pt()/GeV);
+        _h_norm["pt_Y2"]->fill(zcand.pt()/GeV);
       }
-      else if (zcand.absrap()<1.6) {
-        _h_Zll_pt_Y3->fill(zcand.pt());
-        _h_Zll_pt_Y3_norm->fill(zcand.pt());
+      else if (zcand.absrap() < 1.6) {
+        _h["pt_Y3"]->fill(zcand.pt()/GeV);
+        _h_norm["pt_Y3"]->fill(zcand.pt()/GeV);
       }
-      else if (zcand.absrap()<2.4) {
-        _h_Zll_pt_Y4->fill(zcand.pt());
-        _h_Zll_pt_Y4_norm->fill(zcand.pt());
+      else if (zcand.absrap() < 2.4) {
+        _h["pt_Y4"]->fill(zcand.pt()/GeV);
+        _h_norm["pt_Y4"]->fill(zcand.pt()/GeV);
       }
 
-    }
-
-    void normalizeToSum(Histo1DPtr hist) {
-      double sum = 0.;
-      for (size_t i = 1; i < hist->numBins()+1; ++i) {
-        sum += hist->bin(i).sumW();
-      }
-      scale(hist, 1./sum);
     }
 
     /// Normalise histograms etc., after the run
@@ -171,24 +163,12 @@ namespace Rivet {
 
       // when running in combined mode, need to average to get lepton xsec
       if (_mode == 2) norm /= 2.;
+      scale(_h, norm);
 
-      scale(_h_Zll_pt,      norm);
-      scale(_h_Zll_absY,    norm);
-      scale(_h_Zll_phiStar, norm);
-      scale(_h_Zll_pt_Y0,   norm);
-      scale(_h_Zll_pt_Y1,   norm);
-      scale(_h_Zll_pt_Y2,   norm);
-      scale(_h_Zll_pt_Y3,   norm);
-      scale(_h_Zll_pt_Y4,   norm);
-
-      normalizeToSum(_h_Zll_pt_norm);
-      normalizeToSum(_h_Zll_absY_norm);
-      normalizeToSum(_h_Zll_phiStar_norm);
-      normalizeToSum(_h_Zll_pt_Y0_norm);
-      normalizeToSum(_h_Zll_pt_Y1_norm);
-      normalizeToSum(_h_Zll_pt_Y2_norm);
-      normalizeToSum(_h_Zll_pt_Y3_norm);
-      normalizeToSum(_h_Zll_pt_Y4_norm);
+      for (auto& item : _h_norm) {
+        const double rho = item.second->density(false);
+        if (rho)  scale(item.second, 1.0/rho);
+      }
 
     }
 
@@ -205,11 +185,8 @@ namespace Rivet {
     Histo1DPtr   _h_Zmm_pt, _h_Zmm_phiStar, _h_Zmm_absY;
     Histo1DPtr   _h_Zee_pt, _h_Zee_phiStar, _h_Zee_absY;
 
-    Histo1DPtr   _h_Zll_pt, _h_Zll_phiStar, _h_Zll_absY;
-    Histo1DPtr   _h_Zll_pt_Y0, _h_Zll_pt_Y1, _h_Zll_pt_Y2, _h_Zll_pt_Y3, _h_Zll_pt_Y4;
-
-    Histo1DPtr   _h_Zll_pt_norm, _h_Zll_phiStar_norm, _h_Zll_absY_norm;
-    Histo1DPtr   _h_Zll_pt_Y0_norm, _h_Zll_pt_Y1_norm, _h_Zll_pt_Y2_norm, _h_Zll_pt_Y3_norm, _h_Zll_pt_Y4_norm;
+    map<string,Histo1DPtr> _h;
+    map<string,Histo1DPtr> _h_norm;
 
   };
 

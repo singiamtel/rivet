@@ -31,11 +31,11 @@ namespace Rivet {
     void analyze(const Event& event) {
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles(Cuts::abspid==3334)) {
-	const double xp = 2.*p.E()/sqrtS();
-	const double beta = p.p3().mod() / p.E();
-	_h_spect->fill(xp,1./beta);
-	_h_sigma->fill(sqrtS());
-	_h_rate->fill(sqrtS());
+        const double xp = 2.*p.E()/sqrtS();
+        const double beta = p.p3().mod() / p.E();
+        _h_spect->fill(xp,1./beta);
+        _h_sigma->fill(29);
+        _h_rate->fill(29);
       }
     }
 
@@ -53,7 +53,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_spect,_h_sigma,_h_rate;
+    Histo1DPtr _h_spect;
+    BinnedHistoPtr<int> _h_sigma, _h_rate;
     ///@}
 
 

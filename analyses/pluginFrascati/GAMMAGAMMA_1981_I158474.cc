@@ -79,85 +79,63 @@ namespace Rivet {
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /nanobarn;
       for(unsigned int ix=1;ix<7;++ix) {
-	double sigma = 0.0, error = 0.0;
-	if(ix==1) {
-	  sigma = _n3pi->val()*fact;
-	  error = _n3pi->err()*fact;
-	}
-	else if(ix==2) {
-	  sigma = _n4pi->val()*fact;
-	  error = _n4pi->err()*fact;
-	}
-	else if(ix==3) {
-	  sigma = _n5pi->val()*fact;
-	  error = _n5pi->err()*fact;
-	}
-	else if(ix==4) {
-	  sigma = _n6pi->val()*fact;
-	  error = _n6pi->err()*fact;
-	}
-	else if(ix==5) {
-	  sigma = _n35pi->val()*fact;
-	  error = _n35pi->err()*fact;
-	}
-	else if(ix==6) {
-	  sigma = _n46pi->val()*fact;
-	  error = _n46pi->err()*fact;
-	}
-	Scatter2D temphisto(refData(1, 1, ix));
-	Scatter2DPtr mult;
-	book(mult, 1, 1, ix);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, sigma, ex, make_pair(error,error));
-	  }
-	  else {
-	  mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+        double sigma = 0.0, error = 0.0;
+        if(ix==1) {
+          sigma = _n3pi->val()*fact;
+          error = _n3pi->err()*fact;
+        }
+        else if(ix==2) {
+          sigma = _n4pi->val()*fact;
+          error = _n4pi->err()*fact;
+        }
+        else if(ix==3) {
+          sigma = _n5pi->val()*fact;
+          error = _n5pi->err()*fact;
+        }
+        else if(ix==4) {
+          sigma = _n6pi->val()*fact;
+          error = _n6pi->err()*fact;
+        }
+        else if(ix==5) {
+          sigma = _n35pi->val()*fact;
+          error = _n35pi->err()*fact;
+        }
+        else if(ix==6) {
+          sigma = _n46pi->val()*fact;
+          error = _n46pi->err()*fact;
+        }
+        Estimate1DPtr mult;
+        book(mult, 1, 1, ix);
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
+          }
+        }
       }
-      for(unsigned int ix=1;ix<3;++ix) {
-	Scatter1D R = ((ix==1? *_nC2 : *_nC4)/ *_nmu).mkScatter();
-	double              rval = R.point(0).x();
-	pair<double,double> rerr = R.point(0).xErrs();
-	double sig_h = (ix ==1 ? _nC2 : _nC4)->val()*fact;
-	double err_h = (ix ==1 ? _nC2 : _nC4)->err()*fact;
-	double sig_m = _nmu->val()*fact;
-	double err_m = _nmu->err()*fact;
-	Scatter2D temphisto(refData(2, 1, ix));
-	std::ostringstream title;
-	if(ix==1)
-	  title << "sigma_2pi";
-	else
-	  title << "sigma_4pi";
-	Scatter2DPtr hadrons;
-	book(hadrons, title.str());
-	Scatter2DPtr muons;
- book(muons, "sigma_muons");
-	Scatter2DPtr mult;
-	book(mult, 2,1,ix);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult   ->addPoint(x, rval, ex, rerr);
-	    hadrons->addPoint(x, sig_h, ex, make_pair(err_h,err_h));
-	    if(ix==1) muons  ->addPoint(x, sig_m, ex, make_pair(err_m,err_m));
-	  }
-	  else {
-	    mult   ->addPoint(x, 0., ex, make_pair(0.,.0));
-	    hadrons->addPoint(x, 0., ex, make_pair(0.,.0));
-	    if(ix==1) muons  ->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+      for (unsigned int ix=1;ix<3;++ix) {
+        Estimate0D R = (ix==1? *_nC2 : *_nC4)/ *_nmu;
+        double sig_h = (ix ==1 ? _nC2 : _nC4)->val()*fact;
+        double err_h = (ix ==1 ? _nC2 : _nC4)->err()*fact;
+        double sig_m = _nmu->val()*fact;
+        double err_m = _nmu->err()*fact;
+        std::ostringstream title;
+        if(ix==1)
+          title << "sigma_2pi";
+        else
+          title << "sigma_4pi";
+        Estimate1DPtr hadrons;
+        book(hadrons, title.str());
+        Estimate1DPtr muons;
+        book(muons, "sigma_muons");
+        Estimate1DPtr mult;
+        book(mult, 2,1,ix);
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(R.val(), R.errPos());
+            hadrons->bin(b.index()).set(sig_h, err_h);
+            if(ix==1) muons->bin(b.index()).set(sig_m, err_m);
+          }
+        }
       }
     }
 

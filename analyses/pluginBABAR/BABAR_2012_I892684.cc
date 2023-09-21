@@ -146,57 +146,48 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       for(unsigned int ix=1;ix<9;++ix) {
-	double sigma = 0., error = 0.;
-	if(ix==1) {
-	  sigma = _cKpKmpippim->val();
-	  error = _cKpKmpippim->err();
-	}
-	else if(ix==2) {
-	  sigma = _cKstarKpi->val();
-	  error = _cKstarKpi->err();
-	}
-     	else if(ix==3) {
-	  sigma = _cphipippim->val();
-	  error = _cphipippim->err();
-	}
-     	else if(ix==4) {
-	  sigma = _cphif0_980->val();
-	  error = _cphif0_980->err();
-	}
-     	else if(ix==5) {
-	  sigma = _cphif0_600->val();
-	  error = _cphif0_600->err();
-	}
-     	else if(ix==6) {
-	  sigma = _cKpKmpi0pi0->val();
-	  error = _cKpKmpi0pi0->err();
-	}
-     	else if(ix==7) {
-	  sigma = _cphif0pi0pi0->val();
-	  error = _cphif0pi0pi0->err();
-	}
-     	else if(ix==8) {
-	  sigma =  _c2Kp2Km->val();
-	  error =  _c2Kp2Km->err();
-	}
-    	sigma *= crossSection()/ sumOfWeights() /nanobarn;
-    	error *= crossSection()/ sumOfWeights() /nanobarn;
-	Scatter2D temphisto(refData(ix, 1, 1));
-	Scatter2DPtr  mult;
+        double sigma = 0., error = 0.;
+        if(ix==1) {
+          sigma = _cKpKmpippim->val();
+          error = _cKpKmpippim->err();
+        }
+        else if(ix==2) {
+          sigma = _cKstarKpi->val();
+          error = _cKstarKpi->err();
+        }
+        else if(ix==3) {
+          sigma = _cphipippim->val();
+          error = _cphipippim->err();
+        }
+        else if(ix==4) {
+          sigma = _cphif0_980->val();
+          error = _cphif0_980->err();
+        }
+        else if(ix==5) {
+          sigma = _cphif0_600->val();
+          error = _cphif0_600->err();
+        }
+        else if(ix==6) {
+          sigma = _cKpKmpi0pi0->val();
+          error = _cKpKmpi0pi0->err();
+        }
+        else if(ix==7) {
+          sigma = _cphif0pi0pi0->val();
+          error = _cphif0pi0pi0->err();
+        }
+        else if(ix==8) {
+          sigma =  _c2Kp2Km->val();
+          error =  _c2Kp2Km->err();
+        }
+        sigma *= crossSection()/ sumOfWeights() /nanobarn;
+        error *= crossSection()/ sumOfWeights() /nanobarn;
+        Estimate1DPtr  mult;
         book(mult, ix, 1, 1);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, sigma, ex, make_pair(error,error));
-	  }
-	  else {
-	    mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
+          }
+        }
       }
     }
 

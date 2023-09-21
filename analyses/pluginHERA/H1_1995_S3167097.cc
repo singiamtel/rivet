@@ -92,7 +92,7 @@ namespace Rivet {
       for (size_t ibin = 0; ibin < 9; ++ibin)
         scale(_hEtFlow[ibin], 0.5/ *_sumw[ibin]);
       /// @todo Improve this!
-      Scatter2DPtr s21,s22,s23;
+      Estimate1DPtr s21,s22,s23;
       book(s21, "21");
       divide(_tmphAvEt,_tmphN,s21);
       book(s22, "22");

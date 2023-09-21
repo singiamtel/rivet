@@ -67,7 +67,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // phase space volumes in the different bins (PR has python program which computed these)
-      vector<double> phsp[2] = { {1.29921180560319,1.9664163781008512,2.437411090783833,2.8167198110075895,3.1384424839069816,3.4191598743922667,3.6684846236204653,3.892603483754069,
+      vector<double> phsp[2] = {
+         {1.29921180560319,1.9664163781008512,2.437411090783833,2.8167198110075895,3.1384424839069816,3.4191598743922667,3.6684846236204653,3.892603483754069,
 				  4.0957879360431315,4.281140528359467,4.451003067955206,4.607197285803388,4.751175204530485,4.88411754014731,5.007000581045515,5.120643099873668,
 				  5.225740150956019,5.322887984241281,5.412602779591596,5.4953349814658825,5.571480436748339,5.641389167221586,5.705372363331301,5.763708020726753,
 				  5.8166455273826925,5.864409429427267,5.907202547019624,5.945208570543684,5.978594237253912,6.007511166123523,6.032097411815989,6.0524787859064215,
@@ -90,19 +91,19 @@ namespace Rivet {
 				  9.093216230262732,8.856846123359322,8.610496015674501,8.3533629186997,8.084498274135298,7.802770195530031,7.506811917146632,7.194949741305242,
 				  6.865099532725173,6.5146131262832965,6.140041338435136,5.736750353635648,5.298262152423473,4.81502775442034,4.271887046472109,3.6419114500505065,2.8669813619285884}};
       // normalize the histograms
-      for(unsigned int ix=0;ix<4;++ix)
-	normalize(_h[ix]);
+      for (unsigned int ix=0;ix<4;++ix)
+        normalize(_h[ix]);
       // last two plots  convert to scatter and normalize to phase space volume in bin
       for(unsigned int ix=0;ix<2;++ix) {
-	// convert to scatter
-	Scatter2DPtr tmp;
-	book(tmp,3+ix,1,1);
-	barchart(_h[ix+2],tmp);
-	double step[2] = {0.0025,0.001};
-	// divide by phase space volume
-	for(unsigned int ip=0;ip<tmp->points().size();++ip) {
-	  tmp->points()[ip].scaleY(1./phsp[ix][ip]/step[ix]);
-	}
+        // convert to scatter
+        Estimate1DPtr tmp;
+        book(tmp,3+ix,1,1);
+        barchart(_h[ix+2],tmp);
+        double step[2] = {0.0025,0.001};
+        // divide by phase space volume
+        for (unsigned int ip=0; ip< tmp->numBins(); ++ip) {
+          tmp->bin(ip+1).scale(1./phsp[ix][ip]/step[ix]);
+        }
       }
     }
 

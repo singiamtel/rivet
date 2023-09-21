@@ -76,9 +76,8 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      /// Scale by L_eff = sig_MC * L_exp / num_MC
-      const double lumi_mc = sumOfWeights() / crossSection();
-      const double scalefactor =  1 / lumi_mc;
+      /// Scale by cross-section
+      const double scalefactor = crossSection() / sumOfWeights();
       scale(_h_dsigdptdy_y00_04, scalefactor);
       scale(_h_dsigdptdy_y04_08, scalefactor);
       scale(_h_dsigdptdy_y08_12, scalefactor);

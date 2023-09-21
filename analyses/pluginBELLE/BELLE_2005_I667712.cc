@@ -88,33 +88,19 @@ namespace Rivet {
             iy = ip==0 ? 2 : 1;
           }
           // ratio
-          std::ostringstream title;
-          title << "/TMP/n_" << ip << "_" << ih;
-          Scatter1D sTemp(title.str());
-          Scatter1DPtr s1d = registerAO(sTemp);
-          // hist for axis
-          Scatter2D temphisto(refData(ix, 1, iy));
-          Scatter2DPtr cross,ratio;
+          Estimate0D temp;
+          Estimate1DPtr cross, ratio;
           book(cross, ix, 1, iy);
           if (ih!=0) {
             book(ratio,ix-2,1,iy);
-            divide(numer,denom,s1d);
+            temp = *numer / *denom;
           }
-          for (size_t b = 0; b < temphisto.numPoints(); b++) {
-            const double x  = temphisto.point(b).x();
-            pair<double,double> ex = temphisto.point(b).xErrs();
-            pair<double,double> ex2 = ex;
-            if (ex2.first ==0.) ex2. first=0.0001;
-            if (ex2.second==0.) ex2.second=0.0001;
-            if (inRange(sqrtS(), x-ex2.first, x+ex2.second)) {
-              cross->addPoint(x, sigma, ex, make_pair(error,error));
+          for (auto& b : cross->bins()) {
+            if (inRange(sqrtS(), b.xMin(), b.xMax())) {
+              b.set(sigma, error);
               if (ih!=0) {
-                ratio->addPoint(x,s1d->points()[0].x()/0.1,ex,make_pair(s1d->points()[0].xErrs().first /0.1,
-                                                                        s1d->points()[0].xErrs().second/0.1));
+                ratio->bin(b.index()).set(temp.val()/0.1, temp.errPos()/0.1);
               }
-            } else {
-              cross->addPoint(x, 0., ex, make_pair(0.,.0));
-              if (ih!=0) ratio->addPoint(x, 0., ex, make_pair(0.,.0));
             }
           }
         }

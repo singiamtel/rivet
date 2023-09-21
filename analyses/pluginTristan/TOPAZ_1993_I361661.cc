@@ -30,15 +30,24 @@ namespace Rivet {
       declare(Hemispheres(thrust), "Hemispheres");
 
       // Book histograms
-      book(_h_thrust, 1, 1, 1);
-      book(_h_rho   , 2, 1, 1);
-      book(_h_y23   , 3, 1, 1);
+      book(_h["thrust"], 1, 1, 1);
+      book(_h["rho"]   , 2, 1, 1);
+      book(_h["y23"]   , 3, 1, 1);
+
+      _axes["thrust"] = YODA::Axis<double>{22, 0.8, 5.2};
+      _axes["rho"] = YODA::Axis<double>{21, 1.0, 5.2};
+      _axes["y23"] = YODA::Axis<double>{18, 1.2, 8.4};
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges.empty()) {
+        for (const auto& item : _h) {
+          _edges[item.first] = item.second->xEdges();
+        }
+      }
       // First, veto on leptonic events by requiring at least 4 charged FS particles
       const FinalState& fs = apply<FinalState>(event, "FS");
       const size_t numParticles = fs.particles().size();
@@ -49,24 +58,30 @@ namespace Rivet {
       }
       // thrust
       const Thrust& thrust = apply<Thrust>(event, "Thrust");
-      _h_thrust->fill(-log(1.-thrust.thrust()));
+      fillhist("thrust", -log(1.-thrust.thrust()));
       // jet mass
       const Hemispheres& hemi = apply<Hemispheres>(event, "Hemispheres");
-      _h_rho->fill(-log(hemi.scaledM2high()));
+      fillhist("rho", -log(hemi.scaledM2high()));
       // Jets
       const FastJets& durjet = apply<FastJets>(event, "DurhamJets");
-      if(numParticles>=3)
-        if (durjet.clusterSeq()) _h_y23->fill(-log(durjet.clusterSeq()->exclusive_ymerge_max(2)));
+      if (numParticles>=3) {
+        if (durjet.clusterSeq()) fillhist("y23", -log(durjet.clusterSeq()->exclusive_ymerge_max(2)));
+      }
+    }
+
+    void fillhist(const string& label, const double value) {
+      string edge = "OTHER";
+      const size_t idx = _axes[label].index(value);
+      if (idx && idx <= _edges[label].size()) {
+        edge = _edges[label][idx-1];
+      }
+      _h[label]->fill(edge);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      normalize(_h_thrust);
-      normalize(_h_rho);
-      normalize(_h_y23);
-
+      normalize(_h);
     }
 
     /// @}
@@ -74,9 +89,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_thrust,_h_rho,_h_y23;
+    map<string, BinnedHistoPtr<string>> _h;
+    map<string, YODA::Axis<double>> _axes;
+    map<string, vector<string>> _edges;
     /// @}
-
 
   };
 

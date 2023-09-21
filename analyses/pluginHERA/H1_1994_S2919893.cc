@@ -24,23 +24,24 @@ namespace Rivet {
     /// Initialise projections and histograms
     void init() {
       // Projections
-      declare(DISLepton(), "Lepton");
+      const DISLepton dl;
+      declare(dl, "Lepton");
       declare(DISKinematics(), "Kinematics");
-      declare(FinalState(), "FS");
+      declare(dl.remainingFinalState(), "FS");
 
       // Histos
-      book(_histEnergyFlowLowX ,1, 1, 1);
-      book(_histEnergyFlowHighX ,1, 1, 2);
+      book(_histEnergyFlowLowX, 1, 1, 1);
+      book(_histEnergyFlowHighX, 1, 1, 2);
 
-      book(_histEECLowX ,2, 1, 1);
-      book(_histEECHighX ,2, 1, 2);
+      book(_histEECLowX, 2, 1, 1);
+      book(_histEECHighX, 2, 1, 2);
 
-      book(_histSpectraW77 ,3, 1, 1);
-      book(_histSpectraW122 ,3, 1, 2);
-      book(_histSpectraW169 ,3, 1, 3);
-      book(_histSpectraW117 ,3, 1, 4);
+      book(_histSpectraW77, 3, 1, 1);
+      book(_histSpectraW122, 3, 1, 2);
+      book(_histSpectraW169, 3, 1, 3);
+      book(_histSpectraW117, 3, 1, 4);
 
-      book(_histPT2 ,4, 1, 1);
+      book(_histPT2, 4, 1, 1);
 
       book(_w77 .first, "TMP/w77_1");
       book(_w122.first, "TMP/w122_1");
@@ -68,28 +69,20 @@ namespace Rivet {
 
       // Momentum of the scattered lepton
       const DISLepton& dl = apply<DISLepton>(event,"Lepton");
-      if ( dl.failed() ) return;
+      if ( dl.failed() )  vetoEvent;
       const FourMomentum leptonMom = dl.out();
       const double ptel = leptonMom.pT();
       const double enel = leptonMom.E();
       const double thel = leptonMom.angle(dk.beamHadron().mom())/degree;
 
       // Extract the particles other than the lepton
-      const FinalState& fs = apply<FinalState>(event, "FS");
-      Particles particles;
-      particles.reserve(fs.particles().size());
-      ConstGenParticlePtr dislepGP = dl.out().genParticle();
-      for(const Particle& p: fs.particles()) {
-        ConstGenParticlePtr loopGP = p.genParticle();
-        if (loopGP == dislepGP) continue;
-        particles.push_back(p);
-      }
+      Particles particles = apply<FinalState>(event, "FS").particles();
 
       // Cut on the forward energy
       double efwd = 0.0;
       for (const Particle& p : particles) {
         const double th = p.angle(dk.beamHadron())/degree;
-        if (inRange(th, 4.4, 15)) efwd += p.E();
+        if (inRange(th, 4.4, 15))  efwd += p.E();
       }
 
       // Apply the cuts
@@ -100,7 +93,8 @@ namespace Rivet {
       if (!cut) vetoEvent;
 
       // Weight of the event
-      (x < 1e-3 ? _wEnergy.first : _wEnergy.second)->fill();
+      if (x < 1e-3) _wEnergy.first->fill();
+      else          _wEnergy.second->fill();
 
       // Boost to hadronic CM
       const LorentzTransform hcmboost = dk.boostHCM();
@@ -203,8 +197,8 @@ namespace Rivet {
     /// Polar angle with right direction of the beam
     inline double beamAngle(const FourVector& v, bool order) {
       double thel = v.polarAngle()/degree;
-      if (thel < 0) thel += 180.;
-      if (!order) thel = 180 - thel;
+      if (thel < 0.)  thel += 180.;
+      if (!order)     thel = 180 - thel;
       return thel;
     }
 

@@ -121,9 +121,9 @@ namespace Rivet {
 
       if (numJet > 0) _sumWeightsWithZJet->fill();
       if (numBJet > 0) {
-        _sigmaBJet->fill(1960.0);
-        _ratioBJetToZ->fill(1960.0);
-        _ratioBJetToJet->fill(1960.0);
+        _sigmaBJet->fill(1960);
+        _ratioBJetToZ->fill(1960);
+        _ratioBJetToJet->fill(1960);
       }
 
     }
@@ -163,9 +163,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _sigmaBJet;
-    Histo1DPtr _ratioBJetToZ;
-    Histo1DPtr _ratioBJetToJet;
+    BinnedHistoPtr<int> _sigmaBJet, _ratioBJetToZ, _ratioBJetToJet;
     /// @}
 
   };

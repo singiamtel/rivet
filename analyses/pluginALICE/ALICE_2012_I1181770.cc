@@ -7,27 +7,19 @@ namespace Rivet {
   class ALICE_2012_I1181770 : public Analysis {
   public:
 
-    ALICE_2012_I1181770()
-      : Analysis("ALICE_2012_I1181770")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ALICE_2012_I1181770);
 
 
     void init() {
       // Projection setup
       declare(ChargedFinalState(), "CFS");
 
-      // Book (energy-specific) histograms
-      int isqrts = -1;
-      if (isCompatibleWithSqrtS(900*GeV)) isqrts = 1;
-      else if (isCompatibleWithSqrtS(2760*GeV)) isqrts = 2;
-      else if (isCompatibleWithSqrtS(7000*GeV)) isqrts = 3;
-      assert(isqrts > 0);
-
-      book(_h_frac_sd_inel, 1, 1, isqrts);
-      book(_h_frac_dd_inel, 2, 1, isqrts);
-      book(_h_xsec_sd     , 3, 1, isqrts);
-      book(_h_xsec_dd     , 4, 1, isqrts);
-      book(_h_xsec_inel   , 5, 1, isqrts);
+      // Book histograms
+      book(_h_frac_sd_inel, 1, 1, 1);
+      book(_h_frac_dd_inel, 2, 1, 1);
+      book(_h_xsec_sd     , 3, 1, 1);
+      book(_h_xsec_dd     , 4, 1, 1);
+      book(_h_xsec_inel   , 5, 1, 1);
     }
 
 
@@ -100,8 +92,8 @@ namespace Rivet {
 
   private:
 
-    Scatter2DPtr _h_frac_sd_inel;
-    Scatter2DPtr _h_frac_dd_inel;
+    Estimate1DPtr _h_frac_sd_inel;
+    Estimate1DPtr _h_frac_dd_inel;
     Histo1DPtr   _h_xsec_sd;
     Histo1DPtr   _h_xsec_dd;
     Histo1DPtr   _h_xsec_inel;

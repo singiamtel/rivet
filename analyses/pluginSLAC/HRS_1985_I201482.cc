@@ -43,19 +43,30 @@ namespace Rivet {
       book(_histZJet[2]   , 15, 1, 1);
       book(_histXFeyn     , 16, 1, 1);
       book(_histXFeyn2Jet , 17, 1, 1);
-      book(_histRap       , 19, 1, 1);
-      book(_histRap2Jet   , 20, 1, 1);
+      book(_histRap[0]    , 19, 1, 1);
+      book(_histRap[1]    , 20, 1, 1);
       book(_histPtT       , 22, 1, 1);
       book(_histPtT2Jet   , 23, 1, 1);
       book(_histPtTIn     , 24, 1, 1);
       book(_histPtTOut    , 25, 1, 1);
       book(_wSum ,"TMP/wSum");
       book(_wSum2,"TMP/wSum2");
+
+      _axes[0] = YODA::Axis<double>({-5.0, -4.0, -3.5, -3.0, -2.75, -2.5, -2.3, -2.0, -1.75, -1.5,
+                                      -1.25, -1.0, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5, 0.75, 1.0,
+                                      1.25, 1.5, 1.75, 2.0, 2.3, 2.5, 2.75, 3.0, 3.5, 4.0, 5.0});
+      _axes[1] = YODA::Axis<double>({-4.0, -3.5, -3.0, -2.75, -2.5, -2.25, -2.0, -1.75, -1.5,
+                                     -1.25, -1.0, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5, 0.75,
+                                      1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.5, 4.0});
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (_edges[0].empty()) {
+        _edges[0] = _histRap[0]->xEdges();
+        _edges[1] = _histRap[1]->xEdges();
+      }
       // require 5 charged particles
       const FinalState& fs = apply<FinalState>(event, "FS");
       const size_t numParticles = fs.particles().size();
@@ -73,47 +84,46 @@ namespace Rivet {
       bool twoJet   = sphericity.sphericity()<=0.25 && sphericity.aplanarity()<=0.1;
       //bool threeJet = sphericity.sphericity() >0.25 && sphericity.aplanarity()<=0.1;
       _wSum->fill();
-      if(twoJet) _wSum2->fill();
+      if (twoJet) _wSum2->fill();
       // basic event shapes
       _histSphericity->fill(sphericity.sphericity());
       _histThrust    ->fill(thrust.thrust());
       _histAplanarity->fill(sphericity.aplanarity());
-      if(twoJet)
-	_histThrust2Jet->fill(thrust.thrust());
+      if(twoJet)  _histThrust2Jet->fill(thrust.thrust());
       double pTSqIn  = 0.;
       double pTSqOut = 0.;
       unsigned int iPlus(0),iMinus(0);
       // single particle  dists
       for(const Particle & p : sortBy(fs.particles(),cmpMomByP)) {
-	const double z  = p.p3().mod()/meanBeamMom;
-	const double momT = axis.dot(p.p3());
-	const double xF = fabs(momT)/meanBeamMom;
+        const double z  = p.p3().mod()/meanBeamMom;
+        const double momT = axis.dot(p.p3());
+        const double xF = fabs(momT)/meanBeamMom;
         const double energy = p.E();
         const double rap = 0.5 * std::log((energy + momT) / (energy - momT));
         const double pTin  = dot(p.p3(), thrust.thrustMajorAxis());
         const double pTout = dot(p.p3(), thrust.thrustMinorAxis());
-	const double pT2 = sqr(pTin)+sqr(pTout);
-	pTSqIn  += sqr(dot(p.p3(), sphericity.sphericityMajorAxis()));
-	pTSqOut += sqr(dot(p.p3(), sphericity.sphericityMinorAxis()));
-	_histZ     ->fill(z         );
-	_histZScale->fill(z         );
-	_histXFeyn ->fill(xF        ,z);
-	_histRap   ->fill(rap       );
-	_histPtT   ->fill(pT2       );
-	if(twoJet) {
-	  _histZ2Jet    ->fill(z  );
-	  _histXFeyn2Jet->fill(xF ,z);
-	  _histRap2Jet  ->fill(rap);
-	  _histPtT2Jet  ->fill(pT2);
-	  if(momT>0.&&iPlus<3) {
-	    _histZJet[iPlus]->fill(z);
-	    iPlus+=1;
-	  }
-	  else if(momT<0.&&iMinus<3) {
-	    _histZJet[iMinus]->fill(z);
-	    iMinus+=1;
-	  }
-	}
+        const double pT2 = sqr(pTin)+sqr(pTout);
+        pTSqIn  += sqr(dot(p.p3(), sphericity.sphericityMajorAxis()));
+        pTSqOut += sqr(dot(p.p3(), sphericity.sphericityMinorAxis()));
+        _histZ->fill(z);
+        _histZScale->fill(z);
+        _histXFeyn ->fill(xF, z);
+        _histRap[0]->fill(map2string(rap, 0));
+        _histPtT->fill(pT2);
+        if(twoJet) {
+          _histZ2Jet->fill(z);
+          _histXFeyn2Jet->fill(xF, z);
+          _histRap[1]->fill(map2string(rap, 1));
+          _histPtT2Jet->fill(pT2);
+          if(momT>0.&&iPlus<3) {
+            _histZJet[iPlus]->fill(z);
+            iPlus+=1;
+          }
+          else if(momT<0.&&iMinus<3) {
+            _histZJet[iMinus]->fill(z);
+            iMinus+=1;
+          }
+        }
       }
       _histPtTIn ->fill(pTSqIn /numParticles);
       _histPtTOut->fill(pTSqOut/numParticles);
@@ -127,30 +137,42 @@ namespace Rivet {
       normalize(_histThrust);
       normalize(_histThrust2Jet);
       normalize(_histAplanarity);
-      scale(_histZ        ,1./ *_wSum);
-      scale(_histZScale   , sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
-      scale(_histXFeyn    ,1./M_PI/ *_wSum);
-      scale(_histRap      ,1./ *_wSum);
-      scale(_histZ2Jet    ,1./ *_wSum2);
-      scale(_histXFeyn2Jet,1./M_PI/ *_wSum2);
-      scale(_histRap2Jet  ,1./ *_wSum2);
-      scale(_histPtT      ,1./ *_wSum);
-      scale(_histPtT2Jet  ,1./ *_wSum2);
-      scale(_histPtTIn    ,1./ *_wSum);
-      scale(_histPtTOut   ,1./ *_wSum);
-      for(unsigned int i=0;i<3;++i)
-	scale(_histZJet[i]   ,0.5/ *_wSum2);
+      scale(_histZ, 1./ *_wSum);
+      scale(_histZScale,    sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
+      scale(_histXFeyn,     1./M_PI/ *_wSum);
+      scale(_histRap[0],    1./ *_wSum);
+      scale(_histZ2Jet,     1./ *_wSum2);
+      scale(_histXFeyn2Jet, 1./M_PI/ *_wSum2);
+      scale(_histRap[1],    1./ *_wSum2);
+      scale(_histPtT,       1./ *_wSum);
+      scale(_histPtT2Jet,   1./ *_wSum2);
+      scale(_histPtTIn,     1./ *_wSum);
+      scale(_histPtTOut,    1./ *_wSum);
+      for (size_t i=0; i<3; ++i) {
+        scale(_histZJet[i], 0.5/ *_wSum2);
+      }
     }
 
     /// @}
+
+    string map2string(const double value, const size_t k) const {
+      const size_t idx = _axes[k].index(value);
+      if (idx && idx <= _edges[k].size())  return _edges[k][idx-1];
+      return "OTHER";
+    }
 
 
     /// @name Histograms
     /// @{
     Histo1DPtr _histSphericity, _histThrust, _histThrust2Jet, _histAplanarity,
-      _histZ, _histZ2Jet, _histZScale, _histXFeyn, _histXFeyn2Jet, _histRap,
-      _histRap2Jet, _histPtT, _histPtT2Jet, _histPtTIn, _histPtTOut ,_histZJet[3];
+      _histZ, _histZ2Jet, _histZScale, _histXFeyn, _histXFeyn2Jet,
+      _histPtT, _histPtT2Jet, _histPtTIn, _histPtTOut, _histZJet[3];
+    BinnedHistoPtr<string> _histRap[2];
     CounterPtr _wSum,_wSum2;
+
+    YODA::Axis<double> _axes[2];
+    vector<string> _edges[2];
+
     /// @}
 
 

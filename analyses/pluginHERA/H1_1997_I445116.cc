@@ -4,7 +4,6 @@
 #include "Rivet/Projections/DISKinematics.hh"
 #include "Rivet/Projections/DISLepton.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
-#include "Rivet/Tools/BinnedHistogram.hh"
 
 namespace Rivet {
 
@@ -19,10 +18,6 @@ namespace Rivet {
 
     /// @name Analysis methods
     /// @{
-    const vector<double> QEdges {3.17, 3.915, 4.72, 6.13, 7.635, 8.85, 10.81, 13.415, 16.365, 21.745, 33.835, 50.745};
-    const vector<double> AvgEdges {3.13, 3.875, 4.675, 6.065, 7.55, 8.76, 9.785, 14.675, 16.25, 21.45, 33.06, 49.26};
-    const vector<double> xp_range{0.02, 0.05, 0.10, 0.20, 0.3, 0.4, 0.5, 0.7};
-    const size_t iPmax = 7;
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -39,18 +34,20 @@ namespace Rivet {
       book(_h["xi"], 2, 1, 1);
       book(_h["xiQgt"], 2, 1, 2);
 
-      Histo1DPtr dummy;
-      for (size_t iQ = 0; iQ < 11; ++iQ) {
-        _h_Q2_xp.add(QEdges[iQ], QEdges[iQ+1],book(dummy,"TMP/xpQ"+ to_string(iQ), xp_range));
-        book(_Nevt_after_cuts_Q[iQ], "TMP/Nevt_after_cuts_Q"+ to_string(iQ));
+      book(_h_Q2_xp, QEdges);
+      for (auto& b : _h_Q2_xp->bins()) {
+        const size_t iQ = b.index()-1;
+        const string suff = to_string(iQ);
+        book(b, "TMP/xpQ"+suff, xp_range);
+        book(_Nevt_after_cuts_Q[iQ], "TMP/Nevt_after_cuts_Q"+suff);
       }
 
       for (size_t iP = 0 ; iP < iPmax; ++iP) {
-        book(_s["Qxp"+to_string(iP)], 3+iP, 1, 1);
+        book(_e["Qxp"+to_string(iP)], 3+iP, 1, 1);
       }
 
-      book(_s["Avg1"], 10,1,1);
-      book(_s["Avg2"], 11,1,1);
+      book(_e["Avg1"], 10,1,1);
+      book(_e["Avg2"], 11,1,1);
 
       book(_h["QT1"], "TMP/QT1",refData(10,1,1));
       book(_h["QT2"], "TMP/QT2",refData(11,1,1));
@@ -170,7 +167,7 @@ namespace Rivet {
         if (Q2 > 60 && Q2 <  80)  _h["E6"]->fill(E, factor);
         if (Q2 > 80 && Q2 < 100)  _h["E7"]->fill(E, factor);
 
-        _h_Q2_xp.fill(sqrt(Q2),xp);
+        _h_Q2_xp->fill(sqrt(Q2),xp);
 
         multi = multi+1;
 
@@ -220,33 +217,31 @@ namespace Rivet {
         scale(_h["N"+to_string(iN)], 1.0/ *_Nevt_after_cuts_N[iN]);
       }
 
-      divide(_h["AvgT1"], _h["QT1"],_s["Avg1"] );
-      divide(_h["AvgT2"], _h["QT2"],_s["Avg2"] );
+      divide(_h["AvgT1"], _h["QT1"],_e["Avg1"] );
+      divide(_h["AvgT2"], _h["QT2"],_e["Avg2"] );
 
 
 
       int iQ = 0;
       double mean;
-      for (Histo1DPtr histo : _h_Q2_xp.histos()) {
-        double Qerr = (QEdges[iQ+1] - QEdges[iQ])/2. ;
-        double Qmid = (QEdges[iQ+1] + QEdges[iQ])/2. ;
-        double Nev = dbl(*_Nevt_after_cuts_Q[iQ]) ;
+      for (auto& histo :_h_Q2_xp->bins()) {
+        const double Nev = dbl(*_Nevt_after_cuts_Q[iQ]) ;
         if (Nev != 0) scale(histo, 1./Nev);
 
         for (size_t iP = 0; iP < iPmax; ++iP) {
           mean = histo->bin(iP).sumW() ;
           double mean_err = mean/100;
-          _s["Qxp"+to_string(iP)]->addPoint(Qmid, mean, Qerr, mean_err);
+          _e["Qxp"+to_string(iP)]->bin(iP+1).set(mean, mean_err);
         }
         ++iQ;
       }
       if(_h["MeanTest1"]->numEntries(false)>0 && _h["MeanTest1"]->effNumEntries(false)>0) {
-	const double x1 = _h["MeanTest1"]->xMean(false);
-	MSG_DEBUG("Mean of low Q = " << x1);
+        const double x1 = _h["MeanTest1"]->xMean(false);
+        MSG_DEBUG("Mean of low Q = " << x1);
       }
       if(_h["MeanTest2"]->numEntries(false)>0 && _h["MeanTest2"]->effNumEntries(false)>0) {
-	const double x2 = _h["MeanTest2"]->xMean(false);
-	MSG_DEBUG("Mean of High Q = " << x2);
+        const double x2 = _h["MeanTest2"]->xMean(false);
+        MSG_DEBUG("Mean of High Q = " << x2);
       }
     }
 
@@ -260,14 +255,16 @@ namespace Rivet {
 
     CounterPtr _Nevt_after_cuts_Qlow,_Nevt_after_cuts_QHigh,_Nevt_after_cuts_E[8],_Nevt_after_cuts_N[6];
     CounterPtr _Nevt_after_cuts_Q[12];
-    map<string, CounterPtr> _Nevt;
     map<string, Histo1DPtr> _h;
-    map<string, Scatter2DPtr> _s;
-    map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> _c;
-    Scatter2DPtr _h_pt_06_ratio;
+    map<string, Estimate1DPtr> _e;
+    Estimate1DPtr _h_pt_06_ratio;
 
-    BinnedHistogram _h_Q2_xp,_h_Avg,_h_xipeak,_h_xiwidth;
+    Histo1DGroupPtr _h_Q2_xp;
+
+    const vector<double> QEdges {3.17, 3.915, 4.72, 6.13, 7.635, 8.85, 10.81, 13.415, 16.365, 21.745, 33.835, 50.745};
+    const vector<double> AvgEdges {3.13, 3.875, 4.675, 6.065, 7.55, 8.76, 9.785, 14.675, 16.25, 21.45, 33.06, 49.26};
+    const vector<double> xp_range{0.02, 0.05, 0.10, 0.20, 0.3, 0.4, 0.5, 0.7};
+    const size_t iPmax = 7;
 
     /// @}
 

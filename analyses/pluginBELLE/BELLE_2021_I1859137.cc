@@ -98,37 +98,28 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       for(unsigned int iy=1;iy<4;++iy) {
-	double sigma,error;
-	if(iy==1) {
-	  sigma = _nBB->val();
-	  error = _nBB->err();
-	}
-	else if(iy==2) {
-	  sigma = _nBBS->val();
-	  error = _nBBS->err();
-	}
-	else {
-	  sigma = _nBSBS->val();
-	  error = _nBSBS->err();
-	}
-    	sigma *= crossSection()/ sumOfWeights() /picobarn;
-    	error *= crossSection()/ sumOfWeights() /picobarn; 
-	Scatter2D temphisto(refData( 1, 1, iy));
-    	Scatter2DPtr  mult;
+        double sigma,error;
+        if(iy==1) {
+          sigma = _nBB->val();
+          error = _nBB->err();
+        }
+        else if(iy==2) {
+          sigma = _nBBS->val();
+          error = _nBBS->err();
+        }
+        else {
+          sigma = _nBSBS->val();
+          error = _nBSBS->err();
+        }
+        sigma *= crossSection()/ sumOfWeights() /picobarn;
+        error *= crossSection()/ sumOfWeights() /picobarn;
+        Estimate1DPtr  mult;
         book(mult, 1, 1, iy);
-	for (size_t b = 0; b < temphisto.numPoints(); b++) {
-	  const double x  = temphisto.point(b).x();
-	  pair<double,double> ex = temphisto.point(b).xErrs();
-	  pair<double,double> ex2 = ex;
-	  if(ex2.first ==0.) ex2. first=0.0001;
-	  if(ex2.second==0.) ex2.second=0.0001;
-	  if (inRange(sqrtS()/GeV, x-ex2.first, x+ex2.second)) {
-	    mult->addPoint(x, sigma, ex, make_pair(error,error));
-	  }
-	  else {
-	    mult->addPoint(x, 0., ex, make_pair(0.,.0));
-	  }
-	}
+        for (auto& b : mult->bins()) {
+          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
+            b.set(sigma, error);
+          }
+        }
       }
     }
 

@@ -133,7 +133,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Scatter2DPtr h_r;
+      Estimate1DPtr h_r;
       book(h_r,1,1,1);
       divide(_h_pMp,_h_sum,h_r);
     }

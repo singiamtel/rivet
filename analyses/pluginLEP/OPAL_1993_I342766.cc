@@ -47,16 +47,16 @@ namespace Rivet {
 
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = 0.5*(beams.first.p3().mod() + beams.second.p3().mod());
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
       // Final state of unstable particles to get particle spectra
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
 
       for (const Particle& p : ufs.particles(Cuts::abspid==323)) {
-        double xp = p.p3().mod()/meanBeamMom;
+        const double xp = p.p3().mod()/meanBeamMom;
         _histXeKStar892->fill(xp);
-        _histMeanKStar892->fill(_histMeanKStar892->bin(1).xMid());
+        _histMeanKStar892->fill(Ecm);
       }
     }
 
@@ -74,7 +74,8 @@ namespace Rivet {
 
     /// @name Histograms
     Histo1DPtr _histXeKStar892;
-    Histo1DPtr _histMeanKStar892;
+    BinnedHistoPtr<string> _histMeanKStar892;
+    const string Ecm = "91.2";
 
   };
 

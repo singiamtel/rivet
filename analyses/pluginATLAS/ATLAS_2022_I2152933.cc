@@ -19,23 +19,6 @@ namespace Rivet {
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2022_I2152933);
 
-    void book2D(std::string name, std::vector<double> doubleDiff_bins, unsigned int table){
-    	for (unsigned int i = 0; i < doubleDiff_bins.size() - 1; ++i){
-				std::string nbin = std::to_string(i);
-				std::string title = name+"_"+nbin;
-				Histo1DPtr tmp;
-				_h_multi[name].add(doubleDiff_bins[i], doubleDiff_bins[i+1], book(tmp, table+i,1,1));
-			}
-    }
-
-    double integral2D(BinnedHistogram& h_multi) {
-        double total_integral = 0;
-        for  (Histo1DPtr& h : h_multi.histos()){
-          total_integral += h->integral(false);
-        }
-        return total_integral;
-    }
-
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -76,7 +59,10 @@ namespace Rivet {
       book(_h["nch"], 7,1,1);
       book(_h["sumPt"], 8,1,1);
 
-      book2D("sumPt_nch_multi", nch_2D_bins, 9);
+      book(_h_multi, { 0, 19.5, 39.5, 59.5, 79.5, 101 });
+      for (auto& b : _h_multi->bins()) {
+        book(b, 8+b.index(), 1, 1);
+      }
 
     }
 
@@ -146,7 +132,7 @@ namespace Rivet {
       _h["sumPt"]->fill(sumPt/GeV);
 
       const double sumPt2d = min(sumPt, 99*GeV);
-      _h_multi["sumPt_nch_multi"].fill(nch, sumPt2d/GeV);
+      _h_multi->fill(nch, sumPt2d/GeV);
     }
 
 
@@ -155,11 +141,8 @@ namespace Rivet {
 
       // Normalize to unity
       normalize(_h);
-      for (auto& hist : _h_multi) {
-      	// scaling for normalised distribution according integral of whole set
-        const double norm2D = integral2D(hist.second);
-        hist.second.scale(1./norm2D, this);
-      }
+      normalizeGroup(_h_multi, 1.0, false);
+      divByGroupWidth(_h_multi);
     }
 
 
@@ -167,9 +150,8 @@ namespace Rivet {
     /// @{
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> _c;
-    map<string, BinnedHistogram> _h_multi;
+    Histo1DGroupPtr _h_multi;
 
-    const vector<double> nch_2D_bins = { 0, 19.5, 39.5, 59.5, 79.5, 101 };
     /// @}
 
   };

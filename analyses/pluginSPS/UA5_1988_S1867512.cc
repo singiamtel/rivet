@@ -46,7 +46,7 @@ namespace Rivet {
       declare(ChargedFinalState((Cuts::etaIn(-4.0, -3.0))), "CFS40B");
 
       // Histogram booking, we have sqrt(s) = 200, 546 and 900 GeV
-      // TODO use Scatter2D to be able to output errors
+      // TODO use Estimate1D to be able to output errors
       if (isCompatibleWithSqrtS(200.0*GeV)) {
         book(_hist_correl, 2, 1, 1);
         book(_hist_correl_asym, 3, 1, 1);
@@ -101,38 +101,42 @@ namespace Rivet {
       //      the eta-intervals
       //
 
-      // Define vectors to be able to fill Scatter2Ds
-      vector<Point2D> points;
-      // Fill the y-value vector
-      points.push_back(correlation_helper(0, 0.5, n_10f, n_10b, _sumWPassed));
-      points.push_back(correlation_helper(1, 0.5, n_15f, n_15b, _sumWPassed));
-      points.push_back(correlation_helper(2, 0.5, n_20f, n_20b, _sumWPassed));
-      points.push_back(correlation_helper(3, 0.5, n_25f, n_25b, _sumWPassed));
-      points.push_back(correlation_helper(4, 0.5, n_30f, n_30b, _sumWPassed));
-      points.push_back(correlation_helper(5, 0.5, n_35f, n_35b, _sumWPassed));
-      points.push_back(correlation_helper(6, 0.5, n_40f, n_40b, _sumWPassed));
-
       // Fill the DPS
-      _hist_correl->addPoints(points);
+      pair<double,double> corr;
+      corr = correlation_helper(n_10f, n_10b, _sumWPassed);
+      _hist_correl->bin(1).set(corr.first, corr.second);
+      corr = correlation_helper(n_15f, n_15b, _sumWPassed);
+      _hist_correl->bin(2).set(corr.first, corr.second);
+      corr = correlation_helper(n_20f, n_20b, _sumWPassed);
+      _hist_correl->bin(3).set(corr.first, corr.second);
+      corr = correlation_helper(n_25f, n_25b, _sumWPassed);
+      _hist_correl->bin(4).set(corr.first, corr.second);
+      corr = correlation_helper(n_30f, n_30b, _sumWPassed);
+      _hist_correl->bin(5).set(corr.first, corr.second);
+      corr = correlation_helper(n_35f, n_35b, _sumWPassed);
+      _hist_correl->bin(6).set(corr.first, corr.second);
+      corr = correlation_helper(n_40f, n_40b, _sumWPassed);
+      _hist_correl->bin(7).set(corr.first, corr.second);
 
       // Fill gap-center histo (Fig 15)
       //
       // The first bin contains the c_str strengths of
       // the gap size histo that has ane eta gap of two
       //
-      // Now do the other histo -- clear already defined vectors first
-      points.clear();
-
-      points.push_back(correlation_helper(0,   0.25, n_20f, n_20b, _sumWPassed));
-      points.push_back(correlation_helper(0.5, 0.25, n_25f, n_15b, _sumWPassed));
-      points.push_back(correlation_helper(1,   0.25, n_30f, n_10b, _sumWPassed));
-      points.push_back(correlation_helper(1.5, 0.25, n_35f, n_05 , _sumWPassed));
-      points.push_back(correlation_helper(2,   0.25, n_40f, n_10f, _sumWPassed));
-
       // Fill in correlation strength for assymetric intervals,
       // see Tab. 5
       // Fill the DPS
-      _hist_correl_asym->addPoints(points);
+      corr = correlation_helper(n_20f, n_20b, _sumWPassed);
+      _hist_correl_asym->bin(1).set(corr.first, corr.second);
+      corr = correlation_helper(n_25f, n_15b, _sumWPassed);
+      _hist_correl_asym->bin(2).set(corr.first, corr.second);
+      corr = correlation_helper(n_30f, n_10b, _sumWPassed);
+      _hist_correl_asym->bin(3).set(corr.first, corr.second);
+      corr = correlation_helper(n_35f, n_05 , _sumWPassed);
+      _hist_correl_asym->bin(4).set(corr.first, corr.second);
+      corr = correlation_helper(n_40f, n_10f, _sumWPassed);
+      _hist_correl_asym->bin(5).set(corr.first, corr.second);
+
     }
 
     /// @}
@@ -141,8 +145,8 @@ namespace Rivet {
   private:
 
     /// Helper function to fill correlation points into scatter plot
-    Point2D correlation_helper(double x, double xerr, const vector<int>& nf, const vector<int>& nb, CounterPtr sumWPassed) {
-      return Point2D(x, correlation(nf, nb), xerr, correlation_err(nf, nb)/sqrt(sumWPassed->val()));
+    pair<double,double> correlation_helper(const vector<int>& nf, const vector<int>& nb, CounterPtr sumWPassed) {
+      return make_pair(correlation(nf, nb),  correlation_err(nf, nb)/sqrt(sumWPassed->val()));
     }
 
     /// Counter
@@ -161,9 +165,9 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     // Symmetric eta intervals
-    Scatter2DPtr _hist_correl;
+    Estimate1DPtr _hist_correl;
     // For asymmetric eta intervals
-    Scatter2DPtr _hist_correl_asym;
+    Estimate1DPtr _hist_correl_asym;
     /// @}
 
   };

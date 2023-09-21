@@ -18,6 +18,7 @@ Title=Production rate for $\Lambda_c^++\bar{\Lambda}_c^-$ in the continuum regio
 XLabel=$\sqrt{s}/\mathrm{GeV}$
 YLabel=$N(\Lambda_c^++\bar{\Lambda}_c^-)/N(q\bar q)$
 LogY=0
+XCustomMajorTicks=0.5  10.54
 # END PLOT
 
 # BEGIN PLOT /BABAR_2007_S6895344/d04-x01-y01

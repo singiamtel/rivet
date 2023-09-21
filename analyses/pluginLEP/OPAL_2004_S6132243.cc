@@ -63,33 +63,33 @@ namespace Rivet {
       _isqrts = getHistIndex();
 
       // Book histograms
-      book(_hist1MinusT[_isqrts]    ,1, 1, _isqrts+1);
-      book(_histHemiMassH[_isqrts]  ,2, 1, _isqrts+1);
-      book(_histCParam[_isqrts]     ,3, 1, _isqrts+1);
-      book(_histHemiBroadT[_isqrts] ,4, 1, _isqrts+1);
-      book(_histHemiBroadW[_isqrts] ,5, 1, _isqrts+1);
-      book(_histY23Durham[_isqrts]  ,6, 1, _isqrts+1);
-      book(_histTMajor[_isqrts]     ,7, 1, _isqrts+1);
-      book(_histTMinor[_isqrts]     ,8, 1, _isqrts+1);
-      book(_histAplanarity[_isqrts] ,9, 1, _isqrts+1);
-      book(_histSphericity[_isqrts] ,10, 1, _isqrts+1);
-      book(_histOblateness[_isqrts] ,11, 1, _isqrts+1);
-      book(_histHemiMassL[_isqrts]  ,12, 1, _isqrts+1);
-      book(_histHemiBroadN[_isqrts] ,13, 1, _isqrts+1);
-      book(_histDParam[_isqrts]     ,14, 1, _isqrts+1);
+      book(_hist1MinusT[_isqrts]   , 1, 1, _isqrts+1);
+      book(_histHemiMassH[_isqrts] , 2, 1, _isqrts+1);
+      book(_histCParam[_isqrts]    , 3, 1, _isqrts+1);
+      book(_histHemiBroadT[_isqrts], 4, 1, _isqrts+1);
+      book(_histHemiBroadW[_isqrts], 5, 1, _isqrts+1);
+      book(_histY23Durham[_isqrts] , 6, 1, _isqrts+1);
+      book(_histTMajor[_isqrts]    , 7, 1, _isqrts+1);
+      book(_histTMinor[_isqrts]    , 8, 1, _isqrts+1);
+      book(_histAplanarity[_isqrts], 9, 1, _isqrts+1);
+      book(_histSphericity[_isqrts], 10, 1, _isqrts+1);
+      book(_histOblateness[_isqrts], 11, 1, _isqrts+1);
+      book(_histHemiMassL[_isqrts] , 12, 1, _isqrts+1);
+      book(_histHemiBroadN[_isqrts], 13, 1, _isqrts+1);
+      book(_histDParam[_isqrts]    , 14, 1, _isqrts+1);
       //
-      book(_hist1MinusTMom[_isqrts]    ,15, 1, _isqrts+1);
-      book(_histHemiMassHMom[_isqrts]  ,16, 1, _isqrts+1);
-      book(_histCParamMom[_isqrts]     ,17, 1, _isqrts+1);
-      book(_histHemiBroadTMom[_isqrts] ,18, 1, _isqrts+1);
-      book(_histHemiBroadWMom[_isqrts] ,19, 1, _isqrts+1);
-      book(_histY23DurhamMom[_isqrts]  ,20, 1, _isqrts+1);
-      book(_histTMajorMom[_isqrts]     ,21, 1, _isqrts+1);
-      book(_histTMinorMom[_isqrts]     ,22, 1, _isqrts+1);
-      book(_histSphericityMom[_isqrts] ,23, 1, _isqrts+1);
-      book(_histOblatenessMom[_isqrts] ,24, 1, _isqrts+1);
-      book(_histHemiMassLMom[_isqrts]  ,25, 1, _isqrts+1);
-      book(_histHemiBroadNMom[_isqrts] ,26, 1, _isqrts+1);
+      book(_hist1MinusTMom[_isqrts]   , 15, 1, _isqrts+1);
+      book(_histHemiMassHMom[_isqrts] , 16, 1, _isqrts+1);
+      book(_histCParamMom[_isqrts]    , 17, 1, _isqrts+1);
+      book(_histHemiBroadTMom[_isqrts], 18, 1, _isqrts+1);
+      book(_histHemiBroadWMom[_isqrts], 19, 1, _isqrts+1);
+      book(_histY23DurhamMom[_isqrts] , 20, 1, _isqrts+1);
+      book(_histTMajorMom[_isqrts]    , 21, 1, _isqrts+1);
+      book(_histTMinorMom[_isqrts]    , 22, 1, _isqrts+1);
+      book(_histSphericityMom[_isqrts], 23, 1, _isqrts+1);
+      book(_histOblatenessMom[_isqrts], 24, 1, _isqrts+1);
+      book(_histHemiMassLMom[_isqrts] , 25, 1, _isqrts+1);
+      book(_histHemiBroadNMom[_isqrts], 26, 1, _isqrts+1);
 
       book(_sumWTrack2, "_sumWTrack2");
       book(_sumWJet3, "_sumWJet3");
@@ -243,18 +243,18 @@ namespace Rivet {
 
     /// @name Event shape moment histos at 4 energies
     /// @{
-    Histo1DPtr _hist1MinusTMom[4];
-    Histo1DPtr _histHemiMassHMom[4];
-    Histo1DPtr _histCParamMom[4];
-    Histo1DPtr _histHemiBroadTMom[4];
-    Histo1DPtr _histHemiBroadWMom[4];
-    Histo1DPtr _histY23DurhamMom[4];
-    Histo1DPtr _histTMajorMom[4];
-    Histo1DPtr _histTMinorMom[4];
-    Histo1DPtr _histSphericityMom[4];
-    Histo1DPtr _histOblatenessMom[4];
-    Histo1DPtr _histHemiMassLMom[4];
-    Histo1DPtr _histHemiBroadNMom[4];
+    BinnedHistoPtr<int> _hist1MinusTMom[4];
+    BinnedHistoPtr<int> _histHemiMassHMom[4];
+    BinnedHistoPtr<int> _histCParamMom[4];
+    BinnedHistoPtr<int> _histHemiBroadTMom[4];
+    BinnedHistoPtr<int> _histHemiBroadWMom[4];
+    BinnedHistoPtr<int> _histY23DurhamMom[4];
+    BinnedHistoPtr<int> _histTMajorMom[4];
+    BinnedHistoPtr<int> _histTMinorMom[4];
+    BinnedHistoPtr<int> _histSphericityMom[4];
+    BinnedHistoPtr<int> _histOblatenessMom[4];
+    BinnedHistoPtr<int> _histHemiMassLMom[4];
+    BinnedHistoPtr<int> _histHemiBroadNMom[4];
     /// @}
 
   };

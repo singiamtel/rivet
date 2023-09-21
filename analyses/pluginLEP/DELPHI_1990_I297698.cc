@@ -23,10 +23,10 @@ namespace Rivet {
       declare(cfs, "FS");
       declare(FastJets(cfs, FastJets::JADE, 0.7), "JadeJets");
       // histos
-      book(_h_2,1,1,1);
-      book(_h_3,1,1,2);
-      book(_h_4,1,1,3);
-      book(_h_5,1,1,4);
+      book(_h_2, 1, 1, 1);
+      book(_h_3, 1, 1, 2);
+      book(_h_4, 1, 1, 3);
+      book(_h_5, 1, 1, 4);
     }
 
 
@@ -45,36 +45,28 @@ namespace Rivet {
         const double y_34 = jets.clusterSeq()->exclusive_ymerge_max(3);
         const double y_45 = jets.clusterSeq()->exclusive_ymerge_max(4);
         const double y_56 = jets.clusterSeq()->exclusive_ymerge_max(5);
-        for (size_t i = 1; i < _h_2->numBins()+1; ++i) {
-          const auto& b = _h_2->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (auto& b : _h_2->bins()) {
+          const double ycut = std::stod(b.xEdge());
           if (y_23 < ycut) {
-            _h_2->fill(ycut, width);
+            _h_2->fill(b.xEdge());
           }
         }
-        for (size_t i = 1; i < _h_3->numBins()+1; ++i) {
-          const auto& b = _h_3->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (auto& b : _h_2->bins()) {
+          const double ycut = std::stod(b.xEdge());
           if (y_34 < ycut && y_23 > ycut) {
-            _h_3->fill(ycut, width);
+            _h_3->fill(b.xEdge());
           }
         }
-        for (size_t i = 1; i < _h_4->numBins()+1; ++i) {
-          const auto& b = _h_4->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (auto& b : _h_4->bins()) {
+          const double ycut = std::stod(b.xEdge());
           if (y_45 < ycut && y_34 > ycut) {
-            _h_4->fill(ycut, width);
+            _h_4->fill(b.xEdge());
           }
         }
-        for (size_t i = 1; i < _h_5->numBins()+1; ++i) {
-          const auto& b = _h_5->bin(i);
-          const double ycut = b.xMid();
-          const double width = b.xWidth();
+        for (auto& b : _h_5->bins()) {
+          const double ycut = std::stod(b.xEdge());
           if (y_56 < ycut && y_45 > ycut) {
-            _h_5->fill(ycut, width);
+            _h_5->fill(b.xEdge());
           }
         }
       }
@@ -94,7 +86,7 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_2,_h_3,_h_4,_h_5;
+    BinnedHistoPtr<string> _h_2, _h_3, _h_4, _h_5;
     ///@}
 
 

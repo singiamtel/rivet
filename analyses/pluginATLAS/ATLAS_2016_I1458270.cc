@@ -23,20 +23,6 @@ namespace Rivet {
     /// @name Analysis methods
     /// @{
 
-    // method to turn Hist1D into Scatter... so we can write this out witout dividing by bin width
-    // since the HEPData entry corresponding to this does not divide the refData by bin width!
-    // Have requested they update their HEPData entry but until they do so, we use this workaround.
-    Scatter2DPtr convertToScatterWithoutBinWidthDivision(Histo1DPtr input , Scatter2DPtr output ){
-      for (size_t b = 0; b < input->numBins(); ++b) {
-            const double x   = input->bin(b).xMid();
-            const double ex  = input->bin(b).xWidth()/2.;
-            const double val = input->bin(b).sumW();
-            const double err = input->bin(b).relErrW() * val;
-            output->addPoint(x, val, ex, err);
-       }
-       return output;
-    }
-
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -233,15 +219,15 @@ namespace Rivet {
 
 
       // the HEPData entry corresponding to this does not divide their distributions
-      // by bin width... so to avoid this we need to convert to Scatter2D which is not divided by bw
-      _hMeff_2jl = convertToScatterWithoutBinWidthDivision(_h_temp_Meff_2jl,_hMeff_2jl);
-      _hMeff_2jm = convertToScatterWithoutBinWidthDivision(_h_temp_Meff_2jm,_hMeff_2jm);
-      _hMeff_2jt = convertToScatterWithoutBinWidthDivision(_h_temp_Meff_2jt,_hMeff_2jt);
-      _hMeff_4jt = convertToScatterWithoutBinWidthDivision(_h_temp_Meff_4jt,_hMeff_4jt);
-      _hMeff_5j  = convertToScatterWithoutBinWidthDivision(_h_temp_Meff_5j ,_hMeff_5j ) ;
-      _hMeff_6jm = convertToScatterWithoutBinWidthDivision(_h_temp_Meff_6jm,_hMeff_6jm);
-      _hMeff_6jt = convertToScatterWithoutBinWidthDivision(_h_temp_Meff_6jt,_hMeff_6jt);
-      MSG_INFO("CUTFLOWS:\n\n" << _flows);
+      // by bin width... so to avoid this we need to convert to Estimate1D which is not divided by bw
+      barchart(_h_temp_Meff_2jl,_hMeff_2jl);
+      barchart(_h_temp_Meff_2jm,_hMeff_2jm);
+      barchart(_h_temp_Meff_2jt,_hMeff_2jt);
+      barchart(_h_temp_Meff_4jt,_hMeff_4jt);
+      barchart(_h_temp_Meff_5j ,_hMeff_5j );
+      barchart(_h_temp_Meff_6jm,_hMeff_6jm);
+      barchart(_h_temp_Meff_6jt,_hMeff_6jt);
+      //MSG_INFO("CUTFLOWS:\n\n" << _flows);
 
     }
 
@@ -256,9 +242,9 @@ namespace Rivet {
     CounterPtr _h_4jt, _h_5j;
     CounterPtr _h_6jm, _h_6jt;
 
-    Scatter2DPtr  _hMeff_2jl, _hMeff_2jm, _hMeff_2jt;
-    Scatter2DPtr  _hMeff_4jt, _hMeff_5j;
-    Scatter2DPtr  _hMeff_6jm, _hMeff_6jt;
+    Estimate1DPtr  _hMeff_2jl, _hMeff_2jm, _hMeff_2jt;
+    Estimate1DPtr  _hMeff_4jt, _hMeff_5j;
+    Estimate1DPtr  _hMeff_6jm, _hMeff_6jt;
 
     Histo1DPtr _h_temp_Meff_2jl, _h_temp_Meff_2jm, _h_temp_Meff_2jt;
     Histo1DPtr _h_temp_Meff_4jt, _h_temp_Meff_5j;
