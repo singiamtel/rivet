@@ -94,7 +94,6 @@ def mkoutput(result):
 
 
 # import rivet
-# rivet.util.check_python_version()
 # rivet.util.set_process_name(os.path.basename(__file__))
 
 
