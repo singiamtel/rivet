@@ -12,6 +12,7 @@
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Tools/ParticleUtils.hh"
+#include "Rivet/Tools/RivetHDF5.hh"
 #include "Rivet/Tools/HistoGroup.hh"
 #include "Rivet/Tools/RivetMT2.hh"
 #include "Rivet/Tools/RivetPaths.hh"
@@ -453,6 +454,30 @@ namespace Rivet {
 
     /// Get the internal histogram name for given d, x and y (cf. HepData)
     const std::string mkAxisCode(unsigned int datasetID, unsigned int xAxisID, unsigned int yAxisID) const;
+
+    /// @}
+
+
+    /// @name Auxiliary HDF5 reference data
+    /// @{
+
+    /// Read in an aux data HDF5 file
+    H5::File auxFile() const {
+      return H5::readFile(name()+".h5");
+    }
+
+    /// Read HDF5 file @a filename
+    template <typename T>
+    bool auxData(const string& dsname, T& rtndata) {
+      /// @todo Cache loading the H5 files? On MPI?
+      return H5::readData(name()+".h5", dsname, rtndata);
+    }
+
+    template <typename T>
+    T auxData(const string& dsname) {
+      /// @todo Cache loading the H5 files? On MPI?
+      return H5::readData<T>(name()+".h5", dsname);
+    }
 
     /// @}
 

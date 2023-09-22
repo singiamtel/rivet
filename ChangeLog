@@ -1054,6 +1054,7 @@
 2021-12-14  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add strcat() variadic template function to Rivet utils.
+>>>>>>> main
 
 2021-12-07  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -1072,8 +1073,15 @@
 
 	* Add BESIII_2021_I1900124 e+e- > Lambda Lambdabar
 	* Add BESIII_2021_I1845443 e+e- > p pbar eta/omega
->>>>>>> origin/release-3-1-x
 
+2021-12-09  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Analysis.h: add auxFile() and auxData() methods to load and read
+	data from HDF5 analysis auxiliary-data files.
+
+	* Add RivetHDF5.hh header with convenience functions for HDF5 file
+	and dataset loading. Requires highfive.
+	
 2021-12-02  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Allow manual use of analysis-plugin make-targets after

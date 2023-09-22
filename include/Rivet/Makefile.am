@@ -151,6 +151,7 @@ nobase_pkginclude_HEADERS += \
   Tools/ProjectionTreePlotter.hh \
   Tools/RHICCommon.hh \
   Tools/RivetFastJet.hh \
+  Tools/RivetHDF5.hh \
   Tools/RivetHepMC.hh \
   Tools/RivetHTT.hh \
   Tools/RivetLWTNN.hh  \
