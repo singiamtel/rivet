@@ -1,14 +1,6 @@
 "Python utility functions for use by Rivet scripts (and anyone else who wants to)"
 
 
-def check_python_version(req_version=(2,6,0)):
-    "Enforce the Rivet scripts' minimal Python version requirement"
-    import sys
-    if sys.version_info[:3] < req_version:
-        sys.stderr.write( "Python version >= %s is required... exiting\n" % ".".join(req_version) )
-        sys.exit(1)
-
-
 def set_process_name(name):
     "Try to rename the process on Linux so it doesn't appear as 'python <scriptpath>'"
     try:

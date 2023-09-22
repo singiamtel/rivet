@@ -48,7 +48,6 @@ except Exception as e:
     sys.stderr.write("Full error message:\n{}\n".format(e))
     sys.exit(5)
 
-rivet.util.check_python_version()
 rivet.util.set_process_name("rivet")
 
 import time, datetime, logging, signal
