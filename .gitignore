@@ -78,7 +78,7 @@ include/Rivet/Config/DummyConfig.hh.in
 include/Rivet/Config/BuildOptions.hh
 include/Rivet/Config/DummyConfig.hh
 include/Rivet/Config/RivetConfig.hh
-doc/analists
+doc/anaindex
 doc/anadiff
 doc/coverage/inspire-missing.ins.json.bak
 doc/coverage/wget-log
