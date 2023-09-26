@@ -6,8 +6,6 @@ XTwosidedTicks=1
 YTwosidedTicks=1
 FullRange=1
 ConnectBins=0
-RatioPlotSameStyle=0
-RatioPlotErrorBandColor=gray!40!yellow!60
 LegendXPos=0.54
 LegendYPos=0.93
 # END PLOT

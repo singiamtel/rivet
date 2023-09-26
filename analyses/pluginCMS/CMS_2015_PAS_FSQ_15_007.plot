@@ -2,7 +2,6 @@
 XLabelSep=4.4
 YLabelSep=5.4
 ConnectBins=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 # BEGIN SPECIAL /CMS_2015_PAS_FSQ_15_007/*

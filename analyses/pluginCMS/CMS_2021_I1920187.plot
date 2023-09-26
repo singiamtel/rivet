@@ -9,7 +9,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -25,7 +24,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -41,7 +39,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -57,7 +54,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -73,7 +69,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -89,7 +84,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -105,7 +99,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -121,7 +114,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -137,7 +129,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -153,7 +144,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -169,7 +159,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -185,7 +174,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -201,7 +189,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -217,7 +204,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -233,7 +219,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -249,7 +234,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -265,7 +249,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -281,7 +264,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -297,7 +279,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -313,7 +294,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -329,7 +309,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -345,7 +324,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -361,7 +339,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -377,7 +354,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -393,7 +369,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -409,7 +384,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -425,7 +399,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -441,7 +414,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -457,7 +429,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -473,7 +444,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -489,7 +459,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -505,7 +474,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -521,7 +489,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -537,7 +504,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -553,7 +519,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -569,7 +534,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -585,7 +549,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -601,7 +564,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -617,7 +579,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -633,7 +594,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -649,7 +609,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -665,7 +624,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -681,7 +639,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -697,7 +654,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -713,7 +669,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -729,7 +684,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -745,7 +699,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -761,7 +714,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -777,7 +729,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -793,7 +744,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -809,7 +759,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -825,7 +774,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -841,7 +789,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -857,7 +804,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -873,7 +819,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -889,7 +834,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -905,7 +849,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -921,7 +864,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -937,7 +879,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -953,7 +894,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -969,7 +909,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -985,7 +924,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1001,7 +939,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1017,7 +954,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1033,7 +969,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1049,7 +984,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1065,7 +999,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1081,7 +1014,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1097,7 +1029,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1113,7 +1044,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1129,7 +1059,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1145,7 +1074,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1161,7 +1089,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1177,7 +1104,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1193,7 +1119,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1209,7 +1134,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1225,7 +1149,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1241,7 +1164,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1257,7 +1179,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1273,7 +1194,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1289,7 +1209,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1305,7 +1224,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1321,7 +1239,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1337,7 +1254,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1353,7 +1269,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1369,7 +1284,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1385,7 +1299,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1401,7 +1314,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1417,7 +1329,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1433,7 +1344,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1449,7 +1359,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1465,7 +1374,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1481,7 +1389,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1497,7 +1404,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1513,7 +1419,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1529,7 +1434,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1545,7 +1449,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1561,7 +1464,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1577,7 +1479,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1593,7 +1494,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1609,7 +1509,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1625,7 +1524,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1641,7 +1539,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1657,7 +1554,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1673,7 +1569,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1689,7 +1584,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1705,7 +1599,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1721,7 +1614,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1737,7 +1629,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1753,7 +1644,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1769,7 +1659,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1785,7 +1674,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1801,7 +1689,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1817,7 +1704,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1833,7 +1719,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1849,7 +1734,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1865,7 +1749,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1881,7 +1764,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1897,7 +1779,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1913,7 +1794,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1929,7 +1809,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1945,7 +1824,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1961,7 +1839,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1977,7 +1854,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -1993,7 +1869,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2009,7 +1884,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2025,7 +1899,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2041,7 +1914,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2057,7 +1929,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2073,7 +1944,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2089,7 +1959,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2105,7 +1974,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2121,7 +1989,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2137,7 +2004,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2153,7 +2019,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2169,7 +2034,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2185,7 +2049,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2201,7 +2064,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2217,7 +2079,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2233,7 +2094,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2249,7 +2109,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2265,7 +2124,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2281,7 +2139,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2297,7 +2154,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2313,7 +2169,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2329,7 +2184,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2345,7 +2199,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2361,7 +2214,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2377,7 +2229,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2393,7 +2244,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2409,7 +2259,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2425,7 +2274,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2441,7 +2289,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2457,7 +2304,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2473,7 +2319,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2489,7 +2334,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2505,7 +2349,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2521,7 +2364,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2537,7 +2379,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2553,7 +2394,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2569,7 +2409,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2585,7 +2424,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2601,7 +2439,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2617,7 +2454,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2633,7 +2469,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2649,7 +2484,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2665,7 +2499,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2681,7 +2514,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2697,7 +2529,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2713,7 +2544,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2729,7 +2559,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2745,7 +2574,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2761,7 +2589,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2777,7 +2604,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2793,7 +2619,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2809,7 +2634,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2825,7 +2649,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2841,7 +2664,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2857,7 +2679,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2873,7 +2694,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2889,7 +2709,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2905,7 +2724,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2921,7 +2739,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2937,7 +2754,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2953,7 +2769,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2969,7 +2784,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -2985,7 +2799,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3001,7 +2814,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3017,7 +2829,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3033,7 +2844,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3049,7 +2859,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3065,7 +2874,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3081,7 +2889,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3097,7 +2904,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3113,7 +2919,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3129,7 +2934,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3145,7 +2949,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3161,7 +2964,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3177,7 +2979,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3193,7 +2994,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3209,7 +3009,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3225,7 +3024,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3241,7 +3039,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3257,7 +3054,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3273,7 +3069,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3289,7 +3084,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3305,7 +3099,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3321,7 +3114,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3337,7 +3129,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3353,7 +3144,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3369,7 +3159,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3385,7 +3174,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3401,7 +3189,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3417,7 +3204,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3433,7 +3219,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3449,7 +3234,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3465,7 +3249,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3481,7 +3264,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3497,7 +3279,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3513,7 +3294,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3529,7 +3309,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3545,7 +3324,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3561,7 +3339,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3577,7 +3354,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3593,7 +3369,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3609,7 +3384,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3625,7 +3399,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3641,7 +3414,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3657,7 +3429,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3673,7 +3444,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3689,7 +3459,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3705,7 +3474,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3721,7 +3489,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3737,7 +3504,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3753,7 +3519,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3769,7 +3534,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3785,7 +3549,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3801,7 +3564,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3817,7 +3579,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3833,7 +3594,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3849,7 +3609,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3865,7 +3624,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3881,7 +3639,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3897,7 +3654,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3913,7 +3669,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3929,7 +3684,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3945,7 +3699,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3961,7 +3714,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3977,7 +3729,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -3993,7 +3744,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4009,7 +3759,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4025,7 +3774,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4041,7 +3789,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4057,7 +3804,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4073,7 +3819,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4089,7 +3834,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4105,7 +3849,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4121,7 +3864,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4137,7 +3879,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4153,7 +3894,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4169,7 +3909,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4185,7 +3924,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4201,7 +3939,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4217,7 +3954,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4233,7 +3969,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4249,7 +3984,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4265,7 +3999,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4281,7 +4014,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4297,7 +4029,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4313,7 +4044,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4329,7 +4059,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4345,7 +4074,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4361,7 +4089,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4377,7 +4104,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4393,7 +4119,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4409,7 +4134,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4425,7 +4149,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4441,7 +4164,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4457,7 +4179,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4473,7 +4194,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4489,7 +4209,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4505,7 +4224,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4521,7 +4239,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4537,7 +4254,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4553,7 +4269,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4569,7 +4284,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4585,7 +4299,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4601,7 +4314,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4617,7 +4329,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4633,7 +4344,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4649,7 +4359,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4665,7 +4374,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4681,7 +4389,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4697,7 +4404,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4713,7 +4419,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4729,7 +4434,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4745,7 +4449,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4761,7 +4464,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4777,7 +4479,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4793,7 +4494,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4809,7 +4509,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4825,7 +4524,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4841,7 +4539,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4857,7 +4554,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4873,7 +4569,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4889,7 +4584,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4905,7 +4599,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4921,7 +4614,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4937,7 +4629,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4953,7 +4644,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4969,7 +4659,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -4985,7 +4674,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5001,7 +4689,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5017,7 +4704,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5033,7 +4719,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5049,7 +4734,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5065,7 +4749,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5081,7 +4764,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5097,7 +4779,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5113,7 +4794,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5129,7 +4809,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5145,7 +4824,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5161,7 +4839,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5177,7 +4854,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5193,7 +4869,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5209,7 +4884,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5225,7 +4899,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5241,7 +4914,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5257,7 +4929,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5273,7 +4944,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5289,7 +4959,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5305,7 +4974,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5321,7 +4989,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5337,7 +5004,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5353,7 +5019,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5369,7 +5034,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5385,7 +5049,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5401,7 +5064,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5417,7 +5079,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5433,7 +5094,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5449,7 +5109,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5465,7 +5124,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5481,7 +5139,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5497,7 +5154,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5513,7 +5169,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5529,7 +5184,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5545,7 +5199,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5561,7 +5214,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5577,7 +5229,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5593,7 +5244,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5609,7 +5259,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5625,7 +5274,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5641,7 +5289,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5657,7 +5304,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5673,7 +5319,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5689,7 +5334,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5705,7 +5349,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5721,7 +5364,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5737,7 +5379,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5753,7 +5394,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5769,7 +5409,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5785,7 +5424,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5801,7 +5439,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5817,7 +5454,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5833,7 +5469,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5849,7 +5484,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5865,7 +5499,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5881,7 +5514,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5897,7 +5529,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5913,7 +5544,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5929,7 +5559,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5945,7 +5574,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5961,7 +5589,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5977,7 +5604,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -5993,7 +5619,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6009,7 +5634,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6025,7 +5649,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6041,7 +5664,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6057,7 +5679,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6073,7 +5694,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6089,7 +5709,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6105,7 +5724,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6121,7 +5739,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6137,7 +5754,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6153,7 +5769,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6169,7 +5784,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6185,7 +5799,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6201,7 +5814,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6217,7 +5829,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6233,7 +5844,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6249,7 +5859,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6265,7 +5874,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6281,7 +5889,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6297,7 +5904,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6313,7 +5919,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6329,7 +5934,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6345,7 +5949,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6361,7 +5964,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6377,7 +5979,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6393,7 +5994,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6409,7 +6009,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6425,7 +6024,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6441,7 +6039,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6457,7 +6054,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6473,7 +6069,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6489,7 +6084,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6505,7 +6099,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6521,7 +6114,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6537,7 +6129,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6553,7 +6144,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6569,7 +6159,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6585,7 +6174,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6601,7 +6189,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6617,7 +6204,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6633,7 +6219,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6649,7 +6234,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6665,7 +6249,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6681,7 +6264,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6697,7 +6279,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6713,7 +6294,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6729,7 +6309,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6745,7 +6324,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6761,7 +6339,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6777,7 +6354,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6793,7 +6369,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6809,7 +6384,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6825,7 +6399,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6841,7 +6414,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6857,7 +6429,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6873,7 +6444,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6889,7 +6459,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6905,7 +6474,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6921,7 +6489,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6937,7 +6504,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6953,7 +6519,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6969,7 +6534,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -6985,7 +6549,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7001,7 +6564,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7017,7 +6579,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7033,7 +6594,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7049,7 +6609,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7065,7 +6624,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7081,7 +6639,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7097,7 +6654,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7113,7 +6669,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7129,7 +6684,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7145,7 +6699,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7161,7 +6714,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7177,7 +6729,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7193,7 +6744,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7209,7 +6759,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7225,7 +6774,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7241,7 +6789,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7257,7 +6804,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7273,7 +6819,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7289,7 +6834,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7305,7 +6849,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7321,7 +6864,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7337,7 +6879,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7353,7 +6894,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7369,7 +6909,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7385,7 +6924,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7401,7 +6939,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7417,7 +6954,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7433,7 +6969,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7449,7 +6984,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7465,7 +6999,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7481,7 +7014,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7497,7 +7029,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7513,7 +7044,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7529,7 +7059,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7545,7 +7074,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7561,7 +7089,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7577,7 +7104,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7593,7 +7119,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7609,7 +7134,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7625,7 +7149,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7641,7 +7164,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7657,7 +7179,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7673,7 +7194,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7689,7 +7209,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7705,7 +7224,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7721,7 +7239,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7737,7 +7254,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7753,7 +7269,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7769,7 +7284,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7785,7 +7299,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7801,7 +7314,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7817,7 +7329,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7833,7 +7344,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7849,7 +7359,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7865,7 +7374,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7881,7 +7389,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7897,7 +7404,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7913,7 +7419,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7929,7 +7434,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7945,7 +7449,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7961,7 +7464,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7977,7 +7479,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -7993,7 +7494,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8009,7 +7509,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8025,7 +7524,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8041,7 +7539,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8057,7 +7554,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8073,7 +7569,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8089,7 +7584,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8105,7 +7599,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8121,7 +7614,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8137,7 +7629,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8153,7 +7644,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8169,7 +7659,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8185,7 +7674,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8201,7 +7689,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8217,7 +7704,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8233,7 +7719,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8249,7 +7734,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8265,7 +7749,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8281,7 +7764,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8297,7 +7779,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8313,7 +7794,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8329,7 +7809,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8345,7 +7824,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8361,7 +7839,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8377,7 +7854,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8393,7 +7869,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8409,7 +7884,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8425,7 +7899,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8441,7 +7914,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8457,7 +7929,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8473,7 +7944,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8489,7 +7959,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8505,7 +7974,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8521,7 +7989,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8537,7 +8004,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8553,7 +8019,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8569,7 +8034,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8585,7 +8049,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8601,7 +8064,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8617,7 +8079,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8633,7 +8094,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8649,7 +8109,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8665,7 +8124,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8681,7 +8139,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8697,7 +8154,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8713,7 +8169,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8729,7 +8184,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8745,7 +8199,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8761,7 +8214,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8777,7 +8229,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8793,7 +8244,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8809,7 +8259,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8825,7 +8274,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8841,7 +8289,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8857,7 +8304,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8873,7 +8319,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8889,7 +8334,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8905,7 +8349,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8921,7 +8364,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8937,7 +8379,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8953,7 +8394,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8969,7 +8409,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -8985,7 +8424,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9001,7 +8439,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9017,7 +8454,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9033,7 +8469,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9049,7 +8484,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9065,7 +8499,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9081,7 +8514,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9097,7 +8529,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9113,7 +8544,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9129,7 +8559,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9145,7 +8574,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9161,7 +8589,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9177,7 +8604,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9193,7 +8619,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9209,7 +8634,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9225,7 +8649,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9241,7 +8664,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9257,7 +8679,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9273,7 +8694,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9289,7 +8709,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9305,7 +8724,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9321,7 +8739,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9337,7 +8754,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9353,7 +8769,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9369,7 +8784,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9385,7 +8799,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9401,7 +8814,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9417,7 +8829,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9433,7 +8844,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9449,7 +8859,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9465,7 +8874,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9481,7 +8889,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9497,7 +8904,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9513,7 +8919,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9529,7 +8934,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9545,7 +8949,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9561,7 +8964,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9577,7 +8979,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9593,7 +8994,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9609,7 +9009,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9625,7 +9024,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9641,7 +9039,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9657,7 +9054,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9673,7 +9069,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9689,7 +9084,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9705,7 +9099,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9721,7 +9114,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9737,7 +9129,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9753,7 +9144,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9769,7 +9159,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9785,7 +9174,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9801,7 +9189,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9817,7 +9204,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9833,7 +9219,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9849,7 +9234,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9865,7 +9249,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9881,7 +9264,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9897,7 +9279,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9913,7 +9294,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9929,7 +9309,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9945,7 +9324,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9961,7 +9339,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9977,7 +9354,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -9993,7 +9369,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10009,7 +9384,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10025,7 +9399,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10041,7 +9414,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10057,7 +9429,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10073,7 +9444,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10089,7 +9459,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10105,7 +9474,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10121,7 +9489,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10137,7 +9504,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10153,7 +9519,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10169,7 +9534,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10185,7 +9549,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10201,7 +9564,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10217,7 +9579,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10233,7 +9594,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10249,7 +9609,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10265,7 +9624,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10281,7 +9639,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10297,7 +9654,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10313,7 +9669,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10329,7 +9684,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10345,7 +9699,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10361,7 +9714,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10377,7 +9729,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10393,7 +9744,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10409,7 +9759,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10425,7 +9774,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10441,7 +9789,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10457,7 +9804,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10473,7 +9819,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10489,7 +9834,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10505,7 +9849,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10521,7 +9864,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10537,7 +9879,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10553,7 +9894,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10569,7 +9909,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10585,7 +9924,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10601,7 +9939,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10617,7 +9954,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10633,7 +9969,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10649,7 +9984,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10665,7 +9999,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10681,7 +10014,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10697,7 +10029,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10713,7 +10044,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10729,7 +10059,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10745,7 +10074,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10761,7 +10089,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10777,7 +10104,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10793,7 +10119,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10809,7 +10134,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10825,7 +10149,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10841,7 +10164,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10857,7 +10179,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10873,7 +10194,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10889,7 +10209,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10905,7 +10224,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10921,7 +10239,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10937,7 +10254,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10953,7 +10269,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10969,7 +10284,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -10985,7 +10299,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11001,7 +10314,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11017,7 +10329,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11033,7 +10344,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11049,7 +10359,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11065,7 +10374,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11081,7 +10389,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11097,7 +10404,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11113,7 +10419,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11129,7 +10434,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11145,7 +10449,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11161,7 +10464,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11177,7 +10479,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11193,7 +10494,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11209,7 +10509,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11225,7 +10524,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11241,7 +10539,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11257,7 +10554,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11273,7 +10569,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11289,7 +10584,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11305,7 +10599,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11321,7 +10614,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11337,7 +10629,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11353,7 +10644,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11369,7 +10659,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11385,7 +10674,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11401,7 +10689,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11417,7 +10704,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11433,7 +10719,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11449,7 +10734,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11465,7 +10749,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11481,7 +10764,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11497,7 +10779,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11513,7 +10794,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11529,7 +10809,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11545,7 +10824,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11561,7 +10839,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11577,7 +10854,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11593,7 +10869,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11609,7 +10884,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11625,7 +10899,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11641,7 +10914,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11657,7 +10929,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11673,7 +10944,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11689,7 +10959,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11705,7 +10974,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11721,7 +10989,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11737,7 +11004,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11753,7 +11019,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11769,7 +11034,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11785,7 +11049,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11801,7 +11064,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11817,7 +11079,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11833,7 +11094,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11849,7 +11109,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11865,7 +11124,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11881,7 +11139,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11897,7 +11154,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11913,7 +11169,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11929,7 +11184,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11945,7 +11199,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11961,7 +11214,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11977,7 +11229,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -11993,7 +11244,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12009,7 +11259,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12025,7 +11274,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12041,7 +11289,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12057,7 +11304,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12073,7 +11319,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12089,7 +11334,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12105,7 +11349,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12121,7 +11364,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12137,7 +11379,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12153,7 +11394,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12169,7 +11409,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12185,7 +11424,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12201,7 +11439,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12217,7 +11454,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12233,7 +11469,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12249,7 +11484,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12265,7 +11499,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12281,7 +11514,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12297,7 +11529,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12313,7 +11544,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12329,7 +11559,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12345,7 +11574,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12361,7 +11589,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12377,7 +11604,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12393,7 +11619,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12409,7 +11634,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12425,7 +11649,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12441,7 +11664,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12457,7 +11679,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12473,7 +11694,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12489,7 +11709,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12505,7 +11724,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12521,7 +11739,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12537,7 +11754,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12553,7 +11769,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12569,7 +11784,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12585,7 +11799,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12601,7 +11814,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12617,7 +11829,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12633,7 +11844,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12649,7 +11859,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12665,7 +11874,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12681,7 +11889,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12697,7 +11904,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12713,7 +11919,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12729,7 +11934,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12745,7 +11949,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12761,7 +11964,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12777,7 +11979,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12793,7 +11994,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12809,7 +12009,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12825,7 +12024,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12841,7 +12039,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12857,7 +12054,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12873,7 +12069,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12889,7 +12084,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12905,7 +12099,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12921,7 +12114,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12937,7 +12129,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12953,7 +12144,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12969,7 +12159,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -12985,7 +12174,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13001,7 +12189,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13017,7 +12204,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13033,7 +12219,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13049,7 +12234,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13065,7 +12249,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13081,7 +12264,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13097,7 +12279,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13113,7 +12294,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13129,7 +12309,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13145,7 +12324,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13161,7 +12339,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13177,7 +12354,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13193,7 +12369,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13209,7 +12384,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13225,7 +12399,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13241,7 +12414,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13257,7 +12429,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13273,7 +12444,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13289,7 +12459,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13305,7 +12474,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13321,7 +12489,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13337,7 +12504,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13353,7 +12519,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13369,7 +12534,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13385,7 +12549,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13401,7 +12564,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13417,7 +12579,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13433,7 +12594,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13449,7 +12609,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13465,7 +12624,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13481,7 +12639,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13497,7 +12654,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13513,7 +12669,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13529,7 +12684,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13545,7 +12699,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13561,7 +12714,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13577,7 +12729,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13593,7 +12744,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13609,7 +12759,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13625,7 +12774,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13641,7 +12789,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13657,7 +12804,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13673,7 +12819,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13689,7 +12834,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13705,7 +12849,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13721,7 +12864,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13737,7 +12879,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13753,7 +12894,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13769,7 +12909,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13785,7 +12924,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13801,7 +12939,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13817,7 +12954,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13833,7 +12969,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13849,7 +12984,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13865,7 +12999,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13881,7 +13014,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13897,7 +13029,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13913,7 +13044,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13929,7 +13059,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13945,7 +13074,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13961,7 +13089,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13977,7 +13104,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -13993,7 +13119,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14009,7 +13134,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14025,7 +13149,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14041,7 +13164,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14057,7 +13179,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14073,7 +13194,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14089,7 +13209,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14105,7 +13224,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14121,7 +13239,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14137,7 +13254,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14153,7 +13269,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14169,7 +13284,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14185,7 +13299,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14201,7 +13314,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14217,7 +13329,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14233,7 +13344,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14249,7 +13359,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14265,7 +13374,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14281,7 +13389,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14297,7 +13404,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14313,7 +13419,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14329,7 +13434,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14345,7 +13449,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14361,7 +13464,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14377,7 +13479,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14393,7 +13494,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14409,7 +13509,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14425,7 +13524,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14441,7 +13539,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14457,7 +13554,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14473,7 +13569,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14489,7 +13584,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14505,7 +13599,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14521,7 +13614,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14537,7 +13629,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14553,7 +13644,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14569,7 +13659,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14585,7 +13674,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14601,7 +13689,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14617,7 +13704,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14633,7 +13719,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14649,7 +13734,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14665,7 +13749,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14681,7 +13764,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14697,7 +13779,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14713,7 +13794,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14729,7 +13809,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14745,7 +13824,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14761,7 +13839,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14777,7 +13854,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14793,7 +13869,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14809,7 +13884,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14825,7 +13899,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14841,7 +13914,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14857,7 +13929,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14873,7 +13944,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14889,7 +13959,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14905,7 +13974,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14921,7 +13989,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14937,7 +14004,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14953,7 +14019,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14969,7 +14034,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -14985,7 +14049,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15001,7 +14064,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15017,7 +14079,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15033,7 +14094,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15049,7 +14109,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15065,7 +14124,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15081,7 +14139,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15097,7 +14154,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15113,7 +14169,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15129,7 +14184,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15145,7 +14199,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15161,7 +14214,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15177,7 +14229,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15193,7 +14244,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15209,7 +14259,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15225,7 +14274,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15241,7 +14289,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15257,7 +14304,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15273,7 +14319,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15289,7 +14334,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15305,7 +14349,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15321,7 +14364,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15337,7 +14379,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15353,7 +14394,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15369,7 +14409,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15385,7 +14424,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15401,7 +14439,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15417,7 +14454,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15433,7 +14469,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15449,7 +14484,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15465,7 +14499,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15481,7 +14514,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15497,7 +14529,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15513,7 +14544,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15529,7 +14559,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15545,7 +14574,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15561,7 +14589,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15577,7 +14604,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15593,7 +14619,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15609,7 +14634,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15625,7 +14649,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15641,7 +14664,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15657,7 +14679,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15673,7 +14694,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15689,7 +14709,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15705,7 +14724,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15721,7 +14739,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15737,7 +14754,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15753,7 +14769,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15769,7 +14784,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15785,7 +14799,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15801,7 +14814,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15817,7 +14829,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15833,7 +14844,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15849,7 +14859,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15865,7 +14874,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15881,7 +14889,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15897,7 +14904,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15913,7 +14919,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15929,7 +14934,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15945,7 +14949,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15961,7 +14964,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15977,7 +14979,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -15993,7 +14994,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16009,7 +15009,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16025,7 +15024,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16041,7 +15039,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16057,7 +15054,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16073,7 +15069,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16089,7 +15084,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16105,7 +15099,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16121,7 +15114,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16137,7 +15129,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16153,7 +15144,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16169,7 +15159,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16185,7 +15174,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16201,7 +15189,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16217,7 +15204,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16233,7 +15219,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16249,7 +15234,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16265,7 +15249,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16281,7 +15264,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16297,7 +15279,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16313,7 +15294,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16329,7 +15309,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16345,7 +15324,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16361,7 +15339,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16377,7 +15354,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16393,7 +15369,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16409,7 +15384,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16425,7 +15399,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16441,7 +15414,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16457,7 +15429,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16473,7 +15444,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16489,7 +15459,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16505,7 +15474,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16521,7 +15489,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16537,7 +15504,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16553,7 +15519,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16569,7 +15534,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16585,7 +15549,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16601,7 +15564,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16617,7 +15579,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16633,7 +15594,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16648,7 +15608,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16664,7 +15623,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16680,7 +15638,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16696,7 +15653,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16712,7 +15668,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16728,7 +15683,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16744,7 +15698,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16760,7 +15713,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16776,7 +15728,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16792,7 +15743,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16808,7 +15758,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16824,7 +15773,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16840,7 +15788,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16856,7 +15803,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16872,7 +15818,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16888,7 +15833,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16904,7 +15848,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16920,7 +15863,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16936,7 +15878,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16952,7 +15893,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16968,7 +15908,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -16984,7 +15923,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17000,7 +15938,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17016,7 +15953,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17032,7 +15968,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17048,7 +15983,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17064,7 +15998,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17080,7 +16013,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17096,7 +16028,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17112,7 +16043,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17128,7 +16058,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17144,7 +16073,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17160,7 +16088,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17176,7 +16103,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17192,7 +16118,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17208,7 +16133,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17224,7 +16148,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17240,7 +16163,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17256,7 +16178,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17272,7 +16193,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17288,7 +16208,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17304,7 +16223,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17320,7 +16238,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17336,7 +16253,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17352,7 +16268,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17368,7 +16283,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17384,7 +16298,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17400,7 +16313,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17416,7 +16328,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17432,7 +16343,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17448,7 +16358,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17464,7 +16373,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17480,7 +16388,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17496,7 +16403,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17512,7 +16418,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17528,7 +16433,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17544,7 +16448,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17560,7 +16463,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17576,7 +16478,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17592,7 +16493,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17608,7 +16508,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17624,7 +16523,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17640,7 +16538,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17656,7 +16553,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17672,7 +16568,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17688,7 +16583,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17704,7 +16598,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17720,7 +16613,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17736,7 +16628,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17752,7 +16643,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17768,7 +16658,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17784,7 +16673,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17800,7 +16688,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17816,7 +16703,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17832,7 +16718,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17848,7 +16733,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17864,7 +16748,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17880,7 +16763,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17896,7 +16778,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17912,7 +16793,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17928,7 +16808,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17944,7 +16823,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17960,7 +16838,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17976,7 +16853,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -17992,7 +16868,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18008,7 +16883,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18024,7 +16898,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18040,7 +16913,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18056,7 +16928,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18072,7 +16943,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18088,7 +16958,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18104,7 +16973,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18120,7 +16988,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18136,7 +17003,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18152,7 +17018,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18168,7 +17033,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18184,7 +17048,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18200,7 +17063,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18216,7 +17078,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18232,7 +17093,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18248,7 +17108,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18264,7 +17123,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18280,7 +17138,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18296,7 +17153,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18312,7 +17168,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18328,7 +17183,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18344,7 +17198,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18360,7 +17213,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18376,7 +17228,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18392,7 +17243,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18408,7 +17258,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18424,7 +17273,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18440,7 +17288,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18456,7 +17303,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18472,7 +17318,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18488,7 +17333,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18504,7 +17348,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18520,7 +17363,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18536,7 +17378,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18552,7 +17393,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18568,7 +17408,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18584,7 +17423,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18600,7 +17438,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18616,7 +17453,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18632,7 +17468,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18648,7 +17483,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18664,7 +17498,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18680,7 +17513,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18696,7 +17528,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18712,7 +17543,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18728,7 +17558,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18744,7 +17573,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18760,7 +17588,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18776,7 +17603,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18792,7 +17618,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18808,7 +17633,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18824,7 +17648,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18840,7 +17663,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18856,7 +17678,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18872,7 +17693,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18888,7 +17708,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18904,7 +17723,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18920,7 +17738,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18936,7 +17753,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18952,7 +17768,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18968,7 +17783,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -18984,7 +17798,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19000,7 +17813,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19016,7 +17828,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19032,7 +17843,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19048,7 +17858,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19064,7 +17873,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19080,7 +17888,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19096,7 +17903,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19112,7 +17918,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19128,7 +17933,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19144,7 +17948,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19160,7 +17963,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19176,7 +17978,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19192,7 +17993,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19208,7 +18008,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19224,7 +18023,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19240,7 +18038,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19256,7 +18053,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19272,7 +18068,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19288,7 +18083,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19304,7 +18098,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19320,7 +18113,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19336,7 +18128,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19352,7 +18143,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19368,7 +18158,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19384,7 +18173,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19400,7 +18188,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19416,7 +18203,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19432,7 +18218,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19448,7 +18233,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19464,7 +18248,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19480,7 +18263,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19496,7 +18278,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19512,7 +18293,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19528,7 +18308,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19544,7 +18323,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19560,7 +18338,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19576,7 +18353,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19592,7 +18368,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19608,7 +18383,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19624,7 +18398,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19640,7 +18413,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19656,7 +18428,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19672,7 +18443,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19688,7 +18458,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19704,7 +18473,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19720,7 +18488,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19736,7 +18503,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19752,7 +18518,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19768,7 +18533,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19784,7 +18548,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19800,7 +18563,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19816,7 +18578,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19832,7 +18593,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19848,7 +18608,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19864,7 +18623,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19880,7 +18638,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19896,7 +18653,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19912,7 +18668,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19928,7 +18683,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19944,7 +18698,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19960,7 +18713,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19976,7 +18728,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -19992,7 +18743,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20008,7 +18758,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20024,7 +18773,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20040,7 +18788,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20056,7 +18803,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20072,7 +18818,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20088,7 +18833,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20104,7 +18848,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20120,7 +18863,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20136,7 +18878,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20152,7 +18893,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20168,7 +18908,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20184,7 +18923,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20200,7 +18938,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20216,7 +18953,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20232,7 +18968,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20248,7 +18983,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20264,7 +18998,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20280,7 +19013,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20296,7 +19028,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20312,7 +19043,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20328,7 +19058,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20344,7 +19073,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20360,7 +19088,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20376,7 +19103,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20392,7 +19118,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20408,7 +19133,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20424,7 +19148,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20440,7 +19163,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20456,7 +19178,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20472,7 +19193,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20488,7 +19208,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20504,7 +19223,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20520,7 +19238,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20536,7 +19253,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20552,7 +19268,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20568,7 +19283,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20584,7 +19298,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20600,7 +19313,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20616,7 +19328,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20632,7 +19343,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20648,7 +19358,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20664,7 +19373,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20680,7 +19388,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20696,7 +19403,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20712,7 +19418,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20728,7 +19433,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20744,7 +19448,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20760,7 +19463,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20776,7 +19478,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20792,7 +19493,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20808,7 +19508,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20824,7 +19523,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20840,7 +19538,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20856,7 +19553,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20872,7 +19568,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20888,7 +19583,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20904,7 +19598,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20920,7 +19613,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20936,7 +19628,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20952,7 +19643,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20968,7 +19658,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -20984,7 +19673,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21000,7 +19688,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21016,7 +19703,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21032,7 +19718,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21048,7 +19733,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21064,7 +19748,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21080,7 +19763,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21096,7 +19778,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21112,7 +19793,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21128,7 +19808,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21144,7 +19823,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21160,7 +19838,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21176,7 +19853,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21192,7 +19868,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21208,7 +19883,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21224,7 +19898,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21240,7 +19913,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21256,7 +19928,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21272,7 +19943,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21288,7 +19958,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21304,7 +19973,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21320,7 +19988,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21336,7 +20003,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21352,7 +20018,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21368,7 +20033,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21384,7 +20048,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21400,7 +20063,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21416,7 +20078,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21432,7 +20093,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21448,7 +20108,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21464,7 +20123,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21480,7 +20138,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21496,7 +20153,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21512,7 +20168,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21528,7 +20183,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21544,7 +20198,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21560,7 +20213,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21576,7 +20228,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21592,7 +20243,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21608,7 +20258,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21624,7 +20273,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21640,7 +20288,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21656,7 +20303,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21672,7 +20318,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21688,7 +20333,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21704,7 +20348,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21720,7 +20363,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21736,7 +20378,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21752,7 +20393,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21768,7 +20408,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21784,7 +20423,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21800,7 +20438,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21816,7 +20453,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21832,7 +20468,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21848,7 +20483,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21864,7 +20498,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21880,7 +20513,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21896,7 +20528,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21912,7 +20543,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21928,7 +20558,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21944,7 +20573,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21960,7 +20588,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21976,7 +20603,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -21992,7 +20618,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22008,7 +20633,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22024,7 +20648,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22040,7 +20663,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22056,7 +20678,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22072,7 +20693,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22088,7 +20708,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22104,7 +20723,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22120,7 +20738,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22136,7 +20753,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22152,7 +20768,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22168,7 +20783,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22184,7 +20798,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22200,7 +20813,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22216,7 +20828,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22232,7 +20843,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22248,7 +20858,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22264,7 +20873,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22280,7 +20888,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22296,7 +20903,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22312,7 +20918,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22328,7 +20933,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22344,7 +20948,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22360,7 +20963,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22376,7 +20978,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
 
@@ -22392,6 +20993,5 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 NormalizeToIntegral=1
-RatioPlotSameStyle=1
 LegendXPos=0.5
 # END PLOT
