@@ -67,8 +67,10 @@ parser.add_argument("--write-files", dest="WRITE_FILES", help="Choose to write Y
 stygroup = parser.add_argument_group("Style options")
 stygroup.add_argument("-t", "--title", dest="TITLE",
                       default="Plots from Rivet analyses", help="title to be displayed on the main web page")
-stygroup.add_argument("--reftitle", dest="REFTITLE",
-                      default="Data", help="legend entry for reference data")
+stygroup.add_argument("--reflabel", dest="REFLABEL",
+                      default=None, help="legend entry for reference data")
+stygroup.add_argument("--ratiolabel", dest="RATIOPLOTLABEL",
+                      default=None, help="label on ratio panel")
 stygroup.add_argument("--deviation", dest="DEVIATION", action="store_true",
                       default=False, help="rescale ratio panel to standard deviation (bin by bin)")
 #stygroup.add_argument("--no-plottitle", dest="NOPLOTTITLE", action="store_true",
@@ -76,8 +78,8 @@ stygroup.add_argument("--deviation", dest="DEVIATION", action="store_true",
 #                      "(useful when the plot description should only be given in a caption)")
 stygroup.add_argument("-s", "--single", dest="SINGLE", action="store_true",
                       default=False, help="display plots on single webpage.")
-#stygroup.add_argument("--no-ratio", dest="SHOW_RATIO", action="store_false",
-#                      default=True, help="don't draw a ratio plot under each main plot.")
+stygroup.add_argument("--no-ratio", dest="SHOW_RATIO", action="store_false",
+                     default=True, help="don't draw a ratio plot under each main plot.")
 stygroup.add_argument("--no-errs", "--no-mcerrs", "--no-mc-errs", dest="MC_ERRS", action="store_false",
                       default=True, help="plot error bars.")
 stygroup.add_argument("--canvastext", dest="CANVASTEXT", default=None,
@@ -209,13 +211,14 @@ def generateScripts(args):
 
     pat_match = list(set(args.PATHPATTERNS + args.ANAPATTERNS))
     pat_unmatch = list(set(args.PATHUNPATTERNS + args.ANAUNPATTERNS))
-    analyses, allPlotContents = assemble_plotting_data(args.YODAFILES, args.PATH_PWD, args.REFTITLE,
+    analyses, allPlotContents = assemble_plotting_data(args.YODAFILES, args.PATH_PWD,
                                                        args.RIVETREFS, pat_match, pat_unmatch, [os.path.abspath("../")],
                                                        style, configfiles, True, args.OUTPUTDIR, args.MC_ERRS,
                                                        True, [], args.VERBOSE, writefiles=writefiles,
                                                        nRatioTicks=args.NRATIOTICKS, skipWeights = args.SKIP_WEIGHTS,
                                                        removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION,
-                                                       canvasText=args.CANVASTEXT)
+                                                       canvasText=args.CANVASTEXT, refLabel=args.REFLABEL,
+                                                       ratioPlotLabel=args.RATIOPLOTLABEL, showRatio=args.SHOW_RATIO)
 
     ## Write web page containing all (matched) plots
     ## Make web pages first so that we can load it locally in

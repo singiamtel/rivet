@@ -163,8 +163,10 @@ def get_nominal_key(listOfHistoKeys):
     return name
 
 
-def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle, plotoptions,
-                 style, rc_params, mc_errs, nRatioTicks, skipWeights, removeOptions, deviation, canvasText, verbose = False):
+def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptions,
+                 style, rc_params, mc_errs, nRatioTicks, skipWeights, removeOptions, deviation, 
+                 canvasText, refLabel = None, ratioPlotLabel = None, showRatio = None, verbose = False,):
+                 
     """Create output dictionary for the plot_id.
 
     Parameters
@@ -179,7 +181,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
         Dictionary of the Monte Carlo YODA histograms.
         The structure is {filename: {plot_id: {"0": yoda_histogram1, "1": yoda_histogram2, ...}}}
         Usually only "0" exists as the innermost key.
-    refhsitos : dict
+    refhistos : dict
         Dictionary of the reference analysis data YODA histograms.
     plotoptions : dict[str, dict[str, str]]
         Dict containing all plot options for all histograms and all plots.
@@ -215,14 +217,27 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
     outputdict['histograms'] = {}
 
     componentNames = ['BandComponentPDF', 'BandComponentEnv']
-
+ 
     if plot_id in refhistos:
         refhistos[plot_id].setAnnotation('IsRef', True) 
-        outputdict['histograms'][reftitle] = {'nominal': refhistos[plot_id]} # this is where ErrorBreakdown is included?
-        outputdict['histograms'][reftitle]['IsRef'] = True
-        outputdict['histograms'][reftitle]['Title'] = 'Data'
-        outputdict['plot features']['RatioPlotYLabel'] = 'MC/Data'
-        outputdict['plot features']['RatioPlot'] = True
+        outputdict['histograms']['Data'] = {'nominal': refhistos[plot_id]} # this is where ErrorBreakdown is included?
+        outputdict['histograms']['Data']['IsRef'] = True
+
+        # set label for reference data in legend, checking for user-input on rivet-mkhtml first,
+        # then the annotations in the plot file and finally falling back to a default value
+        outputdict['histograms']['Data']['Title'] = refLabel if refLabel != None else \
+                                                refhistos[plot_id].title() if \
+                                                refhistos[plot_id].hasAnnotation('Title') else 'Data' 
+        # decide if ratio panel is shown or not
+        outputdict['plot features']['RatioPlot'] = showRatio if showRatio != None else \
+                                                refhistos[plot_id].annotation('RatioPlot') if \
+                                                refhistos[plot_id].hasAnnotation('RatioPlot') else True
+
+        # set label on y-axis of the ratio panel
+        outputdict['plot features']['RatioPlotYLabel'] = ratioPlotLabel if ratioPlotLabel != None else \
+                                                refhistos[plot_id].annotation('RatioPlotYLabel') if \
+                                                refhistos[plot_id].hasAnnotation('RatioPlotYLabel') else 'MC/Data'
+
     lhapdfCheck = True
     for filename, mchistos_in_file in mchistos.items():
         for plot_id_with_anaopt in sorted(mchistos_in_file):
@@ -381,14 +396,15 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, reftitle,
     return outputdict
 
 
-def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
+def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
                            path_patterns=[], path_unpatterns=[],
                            plotinfodirs=[], style='default', config_files=[],
                            hier_output=False, outdir='.', mc_errs=True,
                            rivetplotpaths=True, analysispaths=[], verbose=False,
                            writefiles=False, nRatioTicks=1, skipWeights=False, 
                            removeOptions = False, deviation=False,                    
-                           canvasText=None):
+                           canvasText=None, refLabel=None, ratioPlotLabel=None,
+                           showRatio=None):
     """Create a dictionary of the plotting data that can be turned
     into self-consistent Python executables.
 
@@ -399,8 +415,6 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
         E.g., ['mc1.yoda', 'mc2.yoda:Title=example title', 'PLOT:LogX=1']
     path_pwd : bool
         Search for plot files and reference data files in current directory.
-    reftitle : str
-        Legend name of the reference data in the plots.
     rivetrefs : bool
         If False, don't use Rivet reference data files
     path_patterns : Iterable[str]
@@ -437,6 +451,10 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
         Number of minor ticks between major ticks, can be specified in rivet-mkhtml
     deviation: bool
         Scale ratio-plot to error of the reference histogram (1 standard deviation)
+    refLabel : str
+        Legend name of the reference data in the plots.
+    ratioPlotLabel : str
+        Label on the y-axis of the ratio panel.
 
     Returns
     -------
@@ -514,10 +532,10 @@ def assemble_plotting_data(args, path_pwd=True, reftitle='Data', rivetrefs=True,
     for plot_id in hpaths:
         outputdict = _make_output(
             plot_id, plotdirs, config_files,
-            mchistos, refhistos, reftitle,
+            mchistos, refhistos,
             plotoptions, stylename, rc_params_dict, mc_errs,
             nRatioTicks, skipWeights, removeOptions, deviation, 
-            canvasText, verbose
+            canvasText, refLabel, ratioPlotLabel, showRatio, verbose
         )
         if 'histograms' in outputdict: # protection against Counters
             plot_info_dicts[plot_id] = outputdict
