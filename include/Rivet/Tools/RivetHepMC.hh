@@ -13,14 +13,20 @@
 #include "HepMC3/HepMC3.h"
 #include "HepMC3/Relatives.h"
 #include "HepMC3/Reader.h"
-#ifndef HEPMC_HAS_CROSS_SECTION
-#define HEPMC_HAS_CROSS_SECTION
-#endif
 
+#include "HepMC3/Version.h"
+#if HEPMC3_VERSION_CODE >= 3002007
+#include "HepMC3/ReaderFactory.h"
+#else
 namespace HepMC3 {
   std::shared_ptr<HepMC3::Reader> deduce_reader(const std::string &filename);
   std::shared_ptr<HepMC3::Reader> deduce_reader(std::istream &stream);
 }
+#endif
+
+#ifndef HEPMC_HAS_CROSS_SECTION
+#define HEPMC_HAS_CROSS_SECTION
+#endif
 
 namespace Rivet {
   namespace RivetHepMC = HepMC3;
