@@ -4,7 +4,6 @@ YLabel=$d^3\sigma / dp_{T,\mathrm{avg}}\,dy_b\,dy^*$ [pb/GeV]
 LogX=1
 LogY=1
 RatioPlot=1
-RatioPlotSameStyle=1
 RatioPlotMode=datamc
 RatioPlotYMin=0.4
 RatioPlotYMax=1.6

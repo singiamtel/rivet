@@ -1,5 +1,4 @@
 # BEGIN PLOT /CMS_2017_I1518399/d*
-RatioPlotYLabel=Theory/Data
 LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1

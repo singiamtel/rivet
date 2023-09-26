@@ -1,7 +1,6 @@
 # BEGIN PLOT /CDF_2015_I1388868/*
 XLabelSep=4.4
 YLabelSep=5.4
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 # BEGIN PLOT /CDF_2015_I1388868/d04-x01-y01
@@ -13,7 +12,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 # BEGIN PLOT /CDF_2015_I1388868/d02-x01-y01
@@ -25,7 +23,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 # BEGIN PLOT /CDF_2015_I1388868/d01-x01-y01
@@ -37,7 +34,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -50,7 +46,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -63,7 +58,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -76,7 +70,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -89,7 +82,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -102,7 +94,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 # BEGIN PLOT /CDF_2015_I1388868/d12-x01-y01
@@ -114,7 +105,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 # BEGIN PLOT /CDF_2015_I1388868/d10-x01-y01
@@ -126,7 +116,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -139,7 +128,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -152,7 +140,6 @@ YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -165,7 +152,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -178,7 +164,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -191,7 +176,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -204,7 +188,6 @@ YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [
 LegendXPos=0.40
 LegendYPos=0.50 
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -218,7 +201,6 @@ LegendXPos=0.40
 LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 B
 
@@ -232,7 +214,6 @@ LegendXPos=0.20
 LegendYPos=0.40
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -246,7 +227,6 @@ LegendXPos=0.40
 LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -260,7 +240,6 @@ LegendXPos=0.40
 LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -274,7 +253,6 @@ LegendXPos=0.40
 LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -288,7 +266,6 @@ LegendXPos=0.20
 LegendYPos=0.40
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -302,7 +279,6 @@ LegendXPos=0.40
 LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 
@@ -316,7 +292,6 @@ LegendXPos=0.40
 LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 XLabelSep=4.4
 YLabelSep=5.4
 # END PLOT

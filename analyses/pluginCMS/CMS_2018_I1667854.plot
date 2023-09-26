@@ -2,8 +2,6 @@
 XLabelSep=4.4
 YLabelSep=5.4
 ConnectBins=0
-RatioPlotSameStyle=0
-RatioPlotErrorBandColor=grey!40!yellow!60
 # END PLOT
 
 # BEGIN PLOT /CMS_2018_I1667854/d01-x01-y01

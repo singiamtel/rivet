@@ -4,7 +4,6 @@ LegendXPos=0.6
 YLabelSep=8.0
 RatioPlotYMin=0.6
 RatioPlotYMax=1.8
-RatioPlotYLabel=Expected/Data
 Title=combined lepton channels
 # END PLOT
 

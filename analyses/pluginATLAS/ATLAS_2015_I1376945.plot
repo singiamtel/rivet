@@ -1,7 +1,6 @@
 # BEGIN PLOT /ATLAS_2015_I1376945/d*
 RatioPlotYMin=0.9
 RatioPlotYMax=1.1
-RatioPlotYLabel=Ratio
 XTwosidedTicks=1
 YTwosidedTicks=1
 XLabel=$\phi(j_1, j_2) / \pi$

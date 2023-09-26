@@ -2,7 +2,6 @@
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -11,7 +10,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -20,7 +18,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{l})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{l})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -29,7 +26,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{l})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{l})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -38,7 +34,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{high})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{high})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -47,7 +42,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{high})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{high})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -56,7 +50,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{low})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{low})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -65,7 +58,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{low})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{low})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -74,7 +66,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ S_\mathrm{T}$ [GeV]
 YLabel=$\frac{d\sigma}{d S_\mathrm{T}}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -83,7 +74,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ S_\mathrm{T}$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d S_\mathrm{T}}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -92,7 +82,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{d\sigma}{d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -101,7 +90,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d|y(\mathrm{t}_\mathrm{h})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -110,7 +98,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|y(\mathrm{t}_\mathrm{l})|$
 YLabel=$\frac{d\sigma}{d|y(\mathrm{t}_\mathrm{l})|}$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -119,7 +106,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|y(\mathrm{t}_\mathrm{l})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d|y(\mathrm{t}_\mathrm{l})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -128,7 +114,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{d\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -137,7 +122,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -146,7 +130,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{d\sigma}{d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -155,7 +138,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -164,7 +146,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -173,7 +154,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -182,7 +162,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -191,7 +170,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -200,7 +178,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{d\sigma}{d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -209,7 +186,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d|y(\mathrm{t}\mathrm{\bar{t}})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -218,7 +194,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$\phi_{\mathrm{t}/\mathrm{\bar{t}}}$ [$\circ$]
 YLabel=$\frac{d\sigma}{d\phi_{\mathrm{t}/\mathrm{\bar{t}}}}$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -227,7 +202,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$\phi_{\mathrm{t}/\mathrm{\bar{t}}}$ [$\circ$]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d\phi_{\mathrm{t}/\mathrm{\bar{t}}}}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -236,7 +210,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{d\sigma}{d\cos(\theta^*)}$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -245,7 +218,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d\cos(\theta^*)}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -254,7 +226,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,80\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -263,7 +234,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 80\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,160\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -272,7 +242,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 160\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,240\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -281,7 +250,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 240\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,320\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -290,7 +258,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 320\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,400\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -299,7 +266,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 400\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,1500\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -308,7 +274,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,80\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -317,7 +282,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 80\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,160\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -326,7 +290,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 160\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,240\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -335,7 +298,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 240\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,320\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -344,7 +306,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 320\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,400\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -353,7 +314,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 400\,$<$\,$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$\,$<$\,1500\,GeV
 XLabel=$|y(\mathrm{t}_\mathrm{h})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h}) d|y(\mathrm{t}_\mathrm{h})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -362,7 +322,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,420\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -371,7 +330,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 420\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,520\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -380,7 +338,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 520\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,620\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -389,7 +346,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 620\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,800\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -398,7 +354,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 800\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -407,7 +362,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -416,7 +370,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,420\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -425,7 +378,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 420\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,520\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -434,7 +386,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 520\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,620\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -443,7 +394,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 620\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,800\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -452,7 +402,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 800\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -461,7 +410,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$|y(\mathrm{t}\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|y(\mathrm{t}\mathrm{\bar{t}})|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -470,7 +418,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,420\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -479,7 +426,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 420\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,520\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -488,7 +434,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 520\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,620\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -497,7 +442,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 620\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,800\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -506,7 +450,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 800\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -515,7 +458,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -524,7 +466,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,420\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -533,7 +474,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 420\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,520\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -542,7 +482,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 520\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,620\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -551,7 +490,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 620\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,800\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -560,7 +498,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 800\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -569,7 +506,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$\cos(\theta^*)$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d\cos(\theta^*)}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -578,7 +514,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,420\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -587,7 +522,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 420\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,520\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -596,7 +530,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 520\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,620\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -605,7 +538,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 620\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,800\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -614,7 +546,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 800\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -623,7 +554,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -632,7 +562,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,420\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -641,7 +570,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 420\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,520\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -650,7 +578,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 520\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,620\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -659,7 +586,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 620\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,800\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -668,7 +594,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 800\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -677,7 +602,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -686,7 +610,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,50\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -695,7 +618,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 50\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,120\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -704,7 +626,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 120\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,200\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -713,7 +634,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 200\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,300\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -722,7 +642,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 300\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,400\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -731,7 +650,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 400\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1200\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -740,7 +658,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,50\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -749,7 +666,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 50\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,120\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -758,7 +674,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 120\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,200\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -767,7 +682,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 200\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,300\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -776,7 +690,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 300\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,400\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -785,7 +698,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 400\,$<$\,$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1200\,GeV
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}}) d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-2}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -794,7 +706,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,0.6\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -803,7 +714,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0.6\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,1.2\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -812,7 +722,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1.2\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,1.8\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -821,7 +730,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1.8\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,3.5\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -830,7 +738,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,0.6\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -839,7 +746,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0.6\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,1.2\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -848,7 +754,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1.2\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,1.8\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -857,7 +762,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1.8\,$<$\,$|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|$\,$<$\,3.5\,
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{dm(\mathrm{t}\mathrm{\bar{t}}) d|\Delta y_{\mathrm{t}/\mathrm{\bar{t}}}|}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -866,7 +770,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,700\,GeV
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{d^2\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}| dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -875,7 +778,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 700\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{d^2\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}| dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -884,7 +786,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{d^2\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}| dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -893,7 +794,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 250\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,700\,GeV
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}| dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -902,7 +802,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 700\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,1000\,GeV
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}| dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -911,7 +810,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1000\,$<$\,$m(\mathrm{t}\mathrm{\bar{t}})$\,$<$\,3500\,GeV
 XLabel=$\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d\Delta| y_{\mathrm{t}/\mathrm{\bar{t}}}| dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -920,7 +818,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$|y(\mathrm{t})|$\,$<$\,0.5\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -929,7 +826,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0.5\,$<$\,$|y(\mathrm{t})|$\,$<$\,1\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -938,7 +834,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1\,$<$\,$|y(\mathrm{t})|$\,$<$\,1.5\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -947,7 +842,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1.5\,$<$\,$|y(\mathrm{t})|$\,$<$\,2\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -956,7 +850,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2\,$<$\,$|y(\mathrm{t})|$\,$<$\,2.5\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -965,7 +858,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0\,$<$\,$|y(\mathrm{t})|$\,$<$\,0.5\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -974,7 +866,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0.5\,$<$\,$|y(\mathrm{t})|$\,$<$\,1\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -983,7 +874,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1\,$<$\,$|y(\mathrm{t})|$\,$<$\,1.5\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -992,7 +882,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1.5\,$<$\,$|y(\mathrm{t})|$\,$<$\,2\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1001,7 +890,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2\,$<$\,$|y(\mathrm{t})|$\,$<$\,2.5\,
 XLabel=$|y(\mathrm{\bar{t}})|$
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d^2\sigma}{d|y(\mathrm{\bar{t}})| d|y(\mathrm{t})|}$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1010,7 +898,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\ell)$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\ell)}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1019,7 +906,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ p_\mathrm{T}(\ell)$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\ell)}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1028,7 +914,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=Additional jets
 YLabel=$\sigma$ [$\mathrm{pb}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1037,7 +922,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=Additional jets
 YLabel=$\sigma$
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1046,7 +930,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ H_\mathrm{T}$ [GeV]
 YLabel=$\frac{d\sigma}{d H_\mathrm{T}}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1055,7 +938,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ H_\mathrm{T}$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d H_\mathrm{T}}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1064,7 +946,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ m_\mathrm{evt}$ [GeV]
 YLabel=$\frac{d\sigma}{d m_\mathrm{evt}}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1073,7 +954,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$
 XLabel=$ m_\mathrm{evt}$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d m_\mathrm{evt}}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1082,7 +962,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1091,7 +970,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1100,7 +978,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1109,7 +986,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 3 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1118,7 +994,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1127,7 +1002,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1136,7 +1010,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1145,7 +1018,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 3 Additional jets
 XLabel=$m(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{dm(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1154,7 +1026,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1163,7 +1034,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1172,7 +1042,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1181,7 +1050,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 3 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1190,7 +1058,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1199,7 +1066,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1208,7 +1074,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1217,7 +1082,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 3 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}\mathrm{\bar{t}})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1226,7 +1090,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1235,7 +1098,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1244,7 +1106,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1253,7 +1114,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 3 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{pb}\,\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1262,7 +1122,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 0 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1271,7 +1130,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 1 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1280,7 +1138,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 2 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT
@@ -1289,7 +1146,6 @@ RatioPlotYMax=1.5
 Title=CMS, 13\,TeV, $\mathrm{t}\mathrm{\bar{t}}$ $e/\mu +\mathrm{jets}$: 3 Additional jets
 XLabel=$ p_\mathrm{T}(\mathrm{t}_\mathrm{h})$ [GeV]
 YLabel=$\frac{1}{\sigma_\mathrm{norm}} \frac{d\sigma}{d p_\mathrm{T}(\mathrm{t}_\mathrm{h})}$ [$\mathrm{GeV}^{-1}$]
-RatioPlotYLabel=$\frac{\mathrm{theory}}{\mathrm{data}}$
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 #END PLOT

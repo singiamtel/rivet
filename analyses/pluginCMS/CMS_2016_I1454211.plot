@@ -1,16 +1,14 @@
 # BEGIN PLOT /CMS_2016_I1454211/d*
 Title=CMS, 8 TeV, $t\bar{t}$ boosted lepton+jets
 YLabelSep=6
-RatioPlotErrorBandColor=cyan!50!blue!40
 RatioPlotYSize=2.6
 PlotSize=10.7,7.2
-CustomLegend=\colorbox{cyan!50!blue!40}{Stat+Sys Uncertainty}
 #END PLOT
 
 # BEGIN PLOT /CMS_2016_I1454211/d01-x01-y01
 XLabel={Top quark $\mathrm{p_{T}}$ (GeV)}
 YLabel={$\mathrm{d}\sigma/\mathrm{dp_{T} \ (fb / GeV)}$}
-YMin=0.015 
+YMin=0.015
 YMax=30.0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55

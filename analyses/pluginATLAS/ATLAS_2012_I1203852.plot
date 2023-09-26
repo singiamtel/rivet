@@ -4,7 +4,6 @@ XLabel=$\sqrt{s}$~[GeV]
 YLabel=$\sigma_{ZZ \to 4l}$~[fb]
 LogY=0
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1203852/d01-x01-y02
@@ -13,7 +12,6 @@ XLabel=$\sqrt{s}$~[GeV]
 YLabel=$\sigma_{ZZ^{\ast} \to 4l}$~[fb]
 LogY=0
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1203852/d01-x01-y03
@@ -22,7 +20,6 @@ XLabel=$\sqrt{s}$~[GeV]
 YLabel=$\sigma_{ZZ \to 2l2nu}$~[fb]
 LogY=0
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 # END PLOT
 
 
@@ -33,7 +30,6 @@ XLabel=$p_\perp^Z$~[GeV]
 YLabel=1/$\sigma^{fid}_{ZZ}$ $\times$ d$\sigma^{fid}_{ZZ}$/d$p_\perp^Z$~[GeV$^{-1}$]
 LogY=0
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 RatioPlotYMax=2.1
 # END PLOT
 
@@ -47,7 +43,6 @@ YLabelPos=0.5
 LegendXPos=0.5
 LegendYPos=0.35
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 RatioPlotYMax=2.1
 # END PLOT
 
@@ -57,7 +52,6 @@ XLabel=$m^{ZZ}_T$~[GeV]
 YLabel=1/$\sigma^{fid}_{ZZ}$ $\times$ d$\sigma^{fid}_{ZZ}$/d$m^{ZZ}_T$~[GeV$^{-1}$]
 LogY=0
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 RatioPlotYMax=1.8
 # END PLOT
 
@@ -69,7 +63,6 @@ LogY=0
 LegendXPos=0.1
 LegendYPos=0.3
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1203852/d06-x01-y01
@@ -81,7 +74,6 @@ LogY=0
 LegendXPos=0.1
 LegendYPos=0.3
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 RatioPlotYMax=1.8
 # END PLOT
 
@@ -91,6 +83,5 @@ XLabel=$m^{ZZ}_T$~[GeV]
 YLabel=1/$\sigma^{fid}_{ZZ}$ $\times$ d$\sigma^{fid}_{ZZ}$/d$m^{ZZ}_T$~[GeV$^{-1}$]
 LogY=0
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 RatioPlotYMax=1.8
 # END PLOT

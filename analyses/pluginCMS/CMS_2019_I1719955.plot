@@ -6,7 +6,6 @@ RatioPlotYMin=0.85
 RatioPlotYMax=1.15
 LegendXPos=0.085
 LogY=0
-RatioPlotErrorBandColor={[rgb]{0.8,0.8,0.5}}
 # END PLOT
 # BEGIN PLOT /CMS_2019_I1719955/d01-x01-y01
 Title=CMS, 13 TeV, $\Delta\phi_{12}$ inclusive $2$-jet, $200<p_{\mathrm{T}}^\mathrm{max}<300$~GeV

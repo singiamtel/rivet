@@ -5,7 +5,6 @@ LegendAlign=r
 LogY=0
 YMin=0
 RatioPlotMode=datamc
-RatioPlotYLabel=Data/MC
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1494075/d02-x01-y01
