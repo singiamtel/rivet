@@ -100,7 +100,7 @@ if test -n "$tmp"; then
     lfastjet="@FASTJETLIBADD@"
     test -n "$lfastjet" && OUT="$OUT ${lfastjet}"
     lh5="@HDF5_LDFLAGS@ @HDF5_LIBS@"
-    test -n "$lh5" && OUT="$OUT ${lh5}"    
+    test -n "$lh5" && OUT="$OUT ${lh5}"
 fi
 
 tmp=$( echo "$*" | grep -E -- '--\<libs\>|--\<ldadd\>')

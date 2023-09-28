@@ -92,123 +92,59 @@ AC_SUBST(YODA_PYTHONPATH)
 
 
 ## HepMC event record library
-if test "${with_hepmc+set}" = set; then
-  if test "${with_hepmc3+set}" = set; then
-    AC_MSG_ERROR([HepMC2 *OR* HepMC3 is required.  Both were specified!])
-  fi
-fi
-
-## Test for the appropriate HepMC version; at least one must work
-use_hepmc2=no
-use_hepmc3=no
-if test "${with_hepmc3+set}" = set; then
+use_hepmc=no
 AC_ARG_WITH([hepmc3],
             [AS_HELP_STRING(--with-hepmc3, path to HepMC3 @<:@$prefix and various standard locations@:>@)],
             [HEPMC3PATH=$with_hepmc3], [])
-  AC_CEDAR_LIBRARYANDHEADERS([HepMC3], , [use_hepmc3=yes], [use_hepmc3=no])
-  AM_CONDITIONAL(WITH_HEPMC,false)
-  AM_CONDITIONAL(WITH_HEPMCINC,false)
-  AM_CONDITIONAL(WITH_HEPMCLIB,false)
-  AM_CONDITIONAL(WITHOUT_HEPMC,true)
-  AM_CONDITIONAL(WITHOUT_HEPMCINC,true)
-  AM_CONDITIONAL(WITHOUT_HEPMCLIB,true)
-else
 AC_ARG_WITH([hepmc],
-            [AS_HELP_STRING(--with-hepmc, path to HepMC2 @<:@$prefix and various standard locations@:>@)],
-            [HEPMCPATH=$with_hepmc], [])
-  AC_CEDAR_LIBRARYANDHEADERS([HepMC], , [use_hepmc2=yes], [use_hepmc2=no])
-  AM_CONDITIONAL(WITH_HEPMC3,false)
-  AM_CONDITIONAL(WITH_HEPMC3INC,false)
-  AM_CONDITIONAL(WITH_HEPMC3LIB,false)
-  AM_CONDITIONAL(WITHOUT_HEPMC3,true)
-  AM_CONDITIONAL(WITHOUT_HEPMC3INC,true)
-  AM_CONDITIONAL(WITHOUT_HEPMC3LIB,true)
-fi
-if test x$use_hepmc2 = xno && test x$use_hepmc3 = xno ; then
-  AC_MSG_ERROR([HepMC2 or HepMC3 is required])
+            [AS_HELP_STRING(--with-hepmc, path to HepMC3 @<:@$prefix and various standard locations@:>@)],
+            [HEPMC3PATH=$with_hepmc], [])
+AC_CEDAR_LIBRARYANDHEADERS([HepMC3], , [use_hepmc=yes], [use_hepmc=no])
+if test x$use_hepmc = xno ; then
+  AC_MSG_ERROR([ HepMC3 is required])
 fi
 
 ## Test the discovered HepMC
 rm conftest.*
-if test x$use_hepmc2 = xyes; then
 
-  oldCPPFLAGS=$CPPFLAGS
-  CPPFLAGS="$CPPFLAGS -I$HEPMCINCPATH"
-  if test -e "$HEPMCINCPATH/HepMC/HepMCDefs.h"; then
-    AC_LANG_CONFTEST([AC_LANG_SOURCE([#include <iostream>
-  #include "HepMC/HepMCDefs.h"
-  int main() { std::cout << HEPMC_VERSION << std::endl; return 0; }])])
-  else
-    AC_LANG_CONFTEST([AC_LANG_SOURCE([#include <iostream>
-  #include "HepMC/defs.h"
-  int main() { std::cout << VERSION << std::endl; return 0; }])])
-  fi
-  if test -f conftest.cc; then
-    $CXX $CPPFLAGS conftest.cc -o conftest 2>&1 1>&5
-  elif test -f conftest.C; then
-    $CXX $CPPFLAGS conftest.C -o conftest 2>&1 1>&5
-  else
-    $CXX $CPPFLAGS conftest.cpp -o conftest 2>&1 1>&5
-  fi
-  hepmc_version=`./conftest`
-  if test x$hepmc_version != x; then
-    let hepmc_major=`echo "$hepmc_version" | cut -d. -f1`
-    let hepmc_minor=`echo "$hepmc_version" | cut -d. -f2`
-  fi
-  rm -f conftest conftest.cpp conftest.cc conftest.C
-  HEPMC_VERSION=$hepmc_major$hepmc_minor
-  AC_MSG_NOTICE([HepMC version is $hepmc_version -> $HEPMC_VERSION])
-  AC_SUBST(HEPMC_VERSION)
-  if test "x$hepmc_version" == "x2.06.10"; then
-    AC_DEFINE([RIVET_ENABLE_HEPMC_20610],[1], [Defined if version 2.06.10 of HepMC is used.])
-  fi
-  CPPFLAGS=$oldCPPFLAGS
-  HEPMCLIBNAME="-lHepMC"
-  AC_SUBST(HEPMCLIBNAME)
-
+oldCPPFLAGS=$CPPFLAGS
+CPPFLAGS="$CPPFLAGS -I$HEPMC3INCPATH"
+AC_LANG_CONFTEST([AC_LANG_SOURCE([#include <iostream>
+#include "HepMC3/Version.h"
+int main() { std::cout << HepMC3::version() << std::endl; return 0; }])])
+if test -f conftest.cc; then
+  $CXX $CPPFLAGS conftest.cc -o conftest 2>&1 1>&5
+elif test -f conftest.C; then
+  $CXX $CPPFLAGS conftest.C -o conftest 2>&1 1>&5
 else
-
-  oldCPPFLAGS=$CPPFLAGS
-  CPPFLAGS="$CPPFLAGS -I$HEPMC3INCPATH"
-  AC_LANG_CONFTEST([AC_LANG_SOURCE([#include <iostream>
-  #include "HepMC3/Version.h"
-  int main() { std::cout << HepMC3::version() << std::endl; return 0; }])])
-  if test -f conftest.cc; then
-    $CXX $CPPFLAGS conftest.cc -o conftest 2>&1 1>&5
-  elif test -f conftest.C; then
-    $CXX $CPPFLAGS conftest.C -o conftest 2>&1 1>&5
-  else
-    $CXX $CPPFLAGS conftest.cpp -o conftest 2>&1 1>&5
-  fi
-  hepmc_version=`./conftest`
-  if test x$hepmc_version != x; then
-    let hepmc_major=`echo "$hepmc_version" | cut -d. -f1`
-    let hepmc_minor=`echo "$hepmc_version" | cut -d. -f2`
-    let hepmc_third=`echo "$hepmc_version" | cut -d. -f3`
-  fi
-  rm -f conftest conftest.cpp conftest.cc conftest.C
-  HEPMC_VERSION=$hepmc_major$hepmc_minor$hepmc_third
-  AC_MSG_NOTICE([HepMC version is $hepmc_version -> $HEPMC_VERSION])
-  if test $HEPMC_VERSION -le 310; then
-    AC_MSG_ERROR([HepMC3 version 3.1.1 or later is required.])
-  fi
-
-  AC_SUBST(HEPMC_VERSION)
-  AC_DEFINE([RIVET_ENABLE_HEPMC_3],[1], [Defined if version 3 of HepMC is used.])
-  CPPFLAGS=$oldCPPFLAGS
-
-  ## Use generic HEPMC* variables for HepMC3 as well (needed for rivet-config.in)
-  c=$HEPMC3INCPATH
-  HEPMCINCPATH=$HEPMC3INCPATH
-  HEPMCLIBPATH=$HEPMC3LIBPATH
-  HEPMCLIBNAME="-lHepMC3 -lHepMC3search"
-  AC_SUBST(HEPMCINCPATH)
-  AC_SUBST(HEPMCLIBPATH)
-  AC_SUBST(HEPMCLIBNAME)
+  $CXX $CPPFLAGS conftest.cpp -o conftest 2>&1 1>&5
+fi
+hepmc_version=`./conftest`
+if test x$hepmc_version != x; then
+  let hepmc_major=`echo "$hepmc_version" | cut -d. -f1`
+  let hepmc_minor=`echo "$hepmc_version" | cut -d. -f2`
+  let hepmc_third=`echo "$hepmc_version" | cut -d. -f3`
+fi
+rm -f conftest conftest.cpp conftest.cc conftest.C
+HEPMC_VERSION=$hepmc_major$hepmc_minor$hepmc_third
+AC_MSG_NOTICE([HepMC version is $hepmc_version -> $HEPMC_VERSION])
+if test $HEPMC_VERSION -le 310; then
+  AC_MSG_ERROR([HepMC3 version 3.1.1 or later is required.])
 fi
 
-AM_CONDITIONAL([ENABLE_HEPMC_3], [test x$hepmc_major = x3])
-AM_COND_IF([ENABLE_HEPMC_3],[CPPFLAGS="$CPPFLAGS -DENABLE_HEPMC_3=true"])
+AC_SUBST(HEPMC_VERSION)
+CPPFLAGS=$oldCPPFLAGS
+
+## Use generic HEPMC* variables for HepMC3 as well (needed for rivet-config.in)
+c=$HEPMC3INCPATH
+HEPMCINCPATH=$HEPMC3INCPATH
+HEPMCLIBPATH=$HEPMC3LIBPATH
+HEPMCLIBNAME="-lHepMC3 -lHepMC3search"
+AC_SUBST(HEPMCINCPATH)
+AC_SUBST(HEPMCLIBPATH)
+AC_SUBST(HEPMCLIBNAME)
+
+CPPFLAGS="$CPPFLAGS -DENABLE_HEPMC_3=true"
 
 ## FastJet clustering library
 AC_CEDAR_LIBRARYANDHEADERS([fastjet], , , [AC_MSG_ERROR([FastJet is required])])
@@ -293,6 +229,9 @@ LIBS=$oldLIBS
 AX_LIB_HDF5()
 AC_MSG_NOTICE([HDF5 include flags: $HDF5_CFLAGS ::: $HDF5_CPPFLAGS])
 AC_MSG_NOTICE([HDF5 lib flags: $HDF5_LDFLAGS ::: $HDF5_LIBS])
+if test x$HDF5_TYPE == xparallel; then
+  AX_PROG_CXX_MPI([true], [], [AC_MSG_ERROR([Found hdf5-parallel, but no MPI compiler.])])
+fi
 #
 AC_CEDAR_HEADERS([highfive], , , [AC_MSG_ERROR([highfive (HDF5 for C++) is required])])
 oldCPPFLAGS=$CPPFLAGS
@@ -417,11 +356,7 @@ AM_CPPFLAGS="-I\$(top_srcdir)/include -I\$(top_builddir)/include"
 #AM_CPPFLAGS="$AM_CPPFLAGS -I\$(top_srcdir)/include/eigen3"
 #AM_CPPFLAGS="$AM_CPPFLAGS \$(GSL_CPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS -I\$(YODAINCPATH)"
-if test x$use_hepmc2 = xyes ; then
-AM_CPPFLAGS="$AM_CPPFLAGS -I\$(HEPMCINCPATH)"
-else
 AM_CPPFLAGS="$AM_CPPFLAGS -I\$(HEPMC3INCPATH)"
-fi
 AM_CPPFLAGS="$AM_CPPFLAGS \$(FASTJETCPPFLAGS) \$(FJCONTRIBCPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(HDF5_CPPFLAGS) \$(HIGHFIVECPPFLAGS)"
 AC_CEDAR_CHECKCXXFLAG([-pedantic], [AM_CXXFLAGS="$AM_CXXFLAGS -pedantic"])

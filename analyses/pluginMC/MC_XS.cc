@@ -2,10 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/AnalysisHandler.hh"
 
-#ifndef RIVET_ENABLE_HEPMC_3
-#include "HepMC/HepMCDefs.h"
-#endif
-
 namespace Rivet {
 
 
@@ -35,12 +31,10 @@ namespace Rivet {
       const size_t numWeights = event.weights().size();
       const vector<pair<double,double>> xsecs = event.crossSections();
       for (size_t m = 0; m < numWeights; ++m) {
-        #if defined RIVET_ENABLE_HEPMC_3 || defined HEPMC_HAS_CROSS_SECTION
         size_t idx = (xsecs.size() == numWeights)? m : 0;
         const double xs    = xsecs[idx].first;
         const double xserr = xsecs[idx].second;
         _h_XS.get()->persistent(m)->set(xs, xserr);
-        # endif
         const double weight = event.weights()[m];
         _h_pmXS.get()->persistent(m)->fill(0.5*(weight > 0 ? 1. : -1), abs(weight));
         _h_pmN.get()->persistent(m)->fill(0.5*(weight > 0 ? 1. : -1), 1.);
@@ -53,9 +47,6 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_h_pmXS, crossSection()/sumOfWeights());
-      #if !defined RIVET_ENABLE_HEPMC_3 && !defined HEPMC_HAS_CROSS_SECTION
-      _h_XS->set(crossSection(), 0.);
-      #endif
     }
 
     /// @}

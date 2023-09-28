@@ -77,7 +77,6 @@ namespace Rivet {
     // In case makeReader fails.
     std::string errormessage;
 
-    #ifdef RIVET_ENABLE_HEPMC_3
     if (evtfile == "-") {
       // Turn off the buffering to make IO faster and make ungetc work on cin
       std::basic_ios<char>::sync_with_stdio(false);
@@ -141,16 +140,8 @@ namespace Rivet {
         //_hepmcReader= make_shared<Rivet::RivetHepMC::ReaderCompressedAscii>(_istr);
       }
     }
-    #endif
 
 
-    #ifndef RIVET_ENABLE_HEPMC_3
-    // Use Rivet's own file format deduction (which uses the one in
-    // HepMC3 if needed).
-    _hepmcReader = HepMCUtils::makeReader(evtfile, _istr, &errormessage);
-
-    // Check that it worked.
-    #endif
     if (_hepmcReader == nullptr) {
       MSG_ERROR("Read error in file '" << evtfile << "' " << errormessage);
       return false;

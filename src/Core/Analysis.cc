@@ -460,28 +460,19 @@ namespace Rivet {
       }
     }
     else if ( sel == "USR" ) {
-      #if HEPMC_VERSION_CODE >= 3000000
       YODA::Histo1DPtr usrhists =
         getPreload<Histo1D>("/" + calAnaName + "/" + calHistName + "_USR");
       if ( !usrhists || usrhists->numEntries() <= 1 ) {
         MSG_WARNING("No user-defined calibration histogram for " <<
                     "CentralityProjection " << projName << " found " <<
                     "(requested histogram " << calHistName << "_USR in " << calAnaName << ")");
-        continue;
       } else {
         MSG_INFO("Found calibration histogram " << sel << " " << usrhists->path());
-        cproj.add((UserCentEstimate(), usrhists*, true), sel);
+        cproj.add(PercentileProjection(UserCentEstimate(), *usrhists, true), sel);
       }
-      #else
-      MSG_ERROR("UserCentEstimate is only available with HepMC3.");
-      #endif
     }
     else if ( sel == "RAW" ) {
-      #if HEPMC_VERSION_CODE >= 3000000 || defined(RIVET_ENABLE_HEPMC_20610)
       cproj.add(GeneratedPercentileProjection(), sel);
-      #else
-      MSG_ERROR("GeneratedCentrality is only available with HepMC3 and HepMC 2.06.10.");
-      #endif
     }
     else MSG_ERROR("'" << sel << "' is not a valid PercentileProjection tag.");
 
