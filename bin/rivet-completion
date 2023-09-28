@@ -112,7 +112,7 @@ complete -F _rivet_config rivet-config
 ##########################
 
 
-function _rivet_buildplugin() {
+function _rivet_build() {
     local cur prev commands options command
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -136,8 +136,7 @@ function _rivet_buildplugin() {
 }
 
 
-complete -F _rivet_buildplugin rivet-buildplugin
-complete -F _rivet_buildplugin rivet-build
+complete -F _rivet_build rivet-build
 
 
 ##############################

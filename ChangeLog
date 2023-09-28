@@ -945,7 +945,6 @@
 2022-04-06  Markus Seidel  <markus.seidel@cern.ch>
 
 	* Submission of CMS_2017_I1497519: Z boson in association with jets at 8 TeV
->>>>>>> release-3-1-x
 
 2022-03-29  Andy Buckley  <andy.buckley@cern.ch>
 
@@ -1054,7 +1053,6 @@
 2021-12-14  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add strcat() variadic template function to Rivet utils.
->>>>>>> main
 
 2021-12-07  Andy Buckley  <andy.buckley@cern.ch>
 

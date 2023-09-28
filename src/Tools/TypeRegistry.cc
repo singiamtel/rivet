@@ -89,7 +89,7 @@ namespace Rivet {
     if (res == _register.end()) {
       _register[name] = make_shared<TypeHandle<T>>();
     }
-    _reader.addType<T>(name); // also let YODA know
+    _reader.registerType<T>(); // also let YODA know
   }
 
 

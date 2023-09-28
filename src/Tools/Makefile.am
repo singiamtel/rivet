@@ -11,6 +11,7 @@ libRivetTools_la_SOURCES = \
   ParticleName.cc \
   Percentile.cc \
   ProjectionTreePlotter.cc \
+  RivetHepMC_3.cc \
   RivetHDF5.cc \
   RivetMT2.cc \
   RivetPaths.cc \
@@ -19,12 +20,6 @@ libRivetTools_la_SOURCES = \
   Utils.cc \
   Vector4.cc \
   binreloc.c
-
-if ENABLE_HEPMC_3
-libRivetTools_la_SOURCES += RivetHepMC_3.cc
-else
-libRivetTools_la_SOURCES += RivetHepMC_2.cc
-endif
 
 dist_noinst_HEADERS = binreloc.h lester_mt2_bisect.hh
 

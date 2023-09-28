@@ -7,9 +7,6 @@
 #include "Rivet/Tools/Exceptions.hh"
 #include <valarray>
 
-
-#ifdef RIVET_ENABLE_HEPMC_3
-
 #include "HepMC3/HepMC3.h"
 #include "HepMC3/Relatives.h"
 #include "HepMC3/Reader.h"
@@ -39,49 +36,6 @@ namespace Rivet {
   using HepMC_IO_type = RivetHepMC::Reader;
   using PdfInfo = RivetHepMC::GenPdfInfo;
 }
-
-#else // HEPMC_2
-
-#include "HepMC/GenEvent.h"
-#include "HepMC/GenParticle.h"
-#include "HepMC/HeavyIon.h"
-#include "HepMC/GenVertex.h"
-#include "HepMC/Version.h"
-#include "HepMC/GenRanges.h"
-#include "HepMC/IO_GenEvent.h"
-namespace Rivet {
-  namespace RivetHepMC = HepMC;
-
-  // HepMC 2.07 provides its own #defines
-  typedef const HepMC::GenParticle* ConstGenParticlePtr;
-  typedef const HepMC::GenVertex* ConstGenVertexPtr;
-  typedef const HepMC::HeavyIon* ConstGenHeavyIonPtr;
-
-  /// @brief Replicated the HepMC3 Relatives syntax using HepMC2 IteratorRanges
-  /// This is necessary mainly because of capitalisation differences
-  class Relatives {
-  public:
-
-    constexpr Relatives(HepMC::IteratorRange relo): _internal(relo){}
-
-    constexpr HepMC::IteratorRange operator()() const {return _internal;}
-    operator HepMC::IteratorRange() const {return _internal;}
-
-    const static Relatives PARENTS;
-    const static Relatives CHILDREN;
-    const static Relatives ANCESTORS;
-    const static Relatives DESCENDANTS;
-
-    private:
-    const HepMC::IteratorRange _internal;
-
-  };
-
-  using HepMC_IO_type = HepMC::IO_GenEvent;
-  using PdfInfo = RivetHepMC::PdfInfo;
-}
-
-#endif
 
 
 namespace Rivet {

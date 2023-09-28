@@ -29,11 +29,7 @@ namespace Rivet {
 
       // Hmm, this sucks. Last guess is that barcodes 1 and 2 are the beams
       /// @todo There are no barcodes in HepMC3. Fall back to guessing from particle.id() rather than barcode?
-      #ifndef RIVET_ENABLE_HEPMC_3
-      if (e.genEvent()->barcode_to_particle(1) && e.genEvent()->barcode_to_particle(2)) {
-        return ParticlePair{e.genEvent()->barcode_to_particle(1), e.genEvent()->barcode_to_particle(2)};
-      }
-      #endif
+      throw Exception("Could not identify beam particles");
     }
     // else cerr << "EVENT TOO SMALL TO HAVE BEAMS!!!" << endl;
 
