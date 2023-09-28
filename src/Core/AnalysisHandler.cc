@@ -109,6 +109,9 @@ namespace Rivet {
     MSG_DEBUG("Initialising the analysis handler");
     _eventNumber = ge.event_number();
 
+    // Set bootstrap file if a name has been set
+    if (!_bootstrapfilename.empty()) _fbootstrap = ofstream(_bootstrapfilename);
+
     // Assemble the weight streams to be used
     setWeightNames(ge);
     if (_skipMultiWeights) {
@@ -176,6 +179,20 @@ namespace Rivet {
     _stage = Stage::OTHER;
     _initialised = true;
     MSG_DEBUG("Analysis handler initialised");
+
+    // Write out list of analysis objects to bootstrap file, if active
+    if (_fbootstrap.is_open()) {
+      _fbootstrap << "#";
+      for (const AnaHandle& a : analyses()) {
+        for (const auto& ao : a->analysisObjects()) {
+          ao.get()->initBootstrap();
+          _fbootstrap << " " << ao.get()->basePath();
+          _fbootstrap << "," << ao.get()->fillOutcomes().size();
+        }
+      }
+      _fbootstrap << endl;
+    }
+
   }
 
 
@@ -324,6 +341,20 @@ namespace Rivet {
     MSG_DEBUG("Default weight name: \"" <<  _weightNames[_rivetDefaultWeightIdx] << "\"");
     MSG_DEBUG("Default weight index (Rivet): " << _rivetDefaultWeightIdx);
     MSG_DEBUG("Default weight index (overall): " << _defaultWeightIdx);
+
+    // Write weight names into the bootstrap file, if active
+    if (_fbootstrap.is_open()) {
+      _fbootstrap << "#";
+      for (const string& wn : _weightNames) {
+        if (wn.empty()) {
+          _fbootstrap << " " << nom_winner.substr(1, nom_winner.length()-2);
+          continue;
+        }
+        _fbootstrap << " " << wn;
+      }
+      _fbootstrap << endl;
+    }
+
   }
 
 
@@ -449,7 +480,60 @@ namespace Rivet {
       MSG_TRACE("AnalysisHandler::analyze(): finished pushing "
                 << a->name() << "'s objects to persistent.");
     }
+
+    // Write out bootstrap acceptances if possible
+    // @todo Only a placeholder... complete by writing out actual bin-weights from instrumented ao wrappers
+    if (_fbootstrap.is_open()) {
+      if (_subEventWeights.size() == 1) { // correlated subevents currently not supported
+        // write out weights
+        _fbootstrap << "W";
+        for (const double sew : _subEventWeights[0]) {
+          _fbootstrap << " " << sew;
+        }
+        _fbootstrap << endl;
+        // write out fill outcomes
+        _fbootstrap << "O";
+        for (const bool out : fillOutcomes()) {
+          _fbootstrap << " " << out;
+        }
+        _fbootstrap << endl;
+        // write out fill fractions
+        _fbootstrap << "F";
+        for (const double frac : fillFractions()) {
+          _fbootstrap << " " << frac;
+        }
+        _fbootstrap << endl;
+      }
+    }
+
+    // Clean up
     _subEventWeights.clear();
+  }
+
+
+  vector<bool> AnalysisHandler::fillOutcomes() const {
+    vector<bool> rtn;
+    for (const AnaHandle& a : analyses()) {
+      for (const auto& ao : a->analysisObjects()) {
+        for (bool res : ao.get()->fillOutcomes()) {
+          rtn.push_back(res);
+        }
+      }
+    }
+    return rtn;
+  }
+
+
+  vector<double> AnalysisHandler::fillFractions() const {
+    vector<double> rtn;
+    for (const AnaHandle& a : analyses()) {
+      for (const auto& ao : a->analysisObjects()) {
+        for (double res : ao.get()->fillFractions()) {
+          rtn.push_back(res);
+        }
+      }
+    }
+    return rtn;
   }
 
 

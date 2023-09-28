@@ -23,11 +23,14 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         void matchWeightNames(string)
         void unmatchWeightNames(string)
         void setNominalWeightName(string)
+        void setBootstrapFilename(string)
         void setWeightCap(double)
         void setNLOSmearing(double)
         AnalysisHandler& addAnalysis(string)
-        vector[string] analysisNames() const
-        vector[string] stdAnalysisNames() const
+        vector[string] analysisNames()
+        vector[string] stdAnalysisNames()
+        vector[bool] fillOutcomes()
+        vector[double] fillFractions()
         # Analysis* analysis(string)
         void writeData_FILE "writeData" (string&) except +
         void writeData_OSTR "writeData" (ostringstream&, string&) except +
