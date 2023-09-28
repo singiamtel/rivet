@@ -1,3 +1,8 @@
+2023-09-21  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Port selected build improvements from Christian Holm Christensen
+	into the main branch.
+
 2023-09-08  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add a Matrix3::mkRotation(from, to) static factory function, for

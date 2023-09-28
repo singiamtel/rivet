@@ -70,13 +70,14 @@ endif
 ## Analyses diffs between releases
 DOCS += anadiff/anadiffs.txt
 anadiff/anadiffs.txt: $(top_srcdir)/analyses $(abs_srcdir)/anadiff/diffanas
-	cd anadiff && \
+	$(mkdir_p) anadiff
+	cd $(srcdir)/anadiff && \
     LD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH) \
     DYLD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(HEPMCLIBPATH):$(HEPMC3LIBPATH):$(YODALIBPATH) \
     PYTHONPATH=$(abs_top_builddir)/pyext/build:$(YODA_PYTHONPATH):$(PYTHONPATH) \
     RIVET_ANALYSIS_PATH=$(abs_top_builddir)/analyses:: \
     PATH=$(abs_top_srcdir)/bin:$(PATH) \
-    $(abs_srcdir)/anadiff/diffanas > anadiffs.txt
+    $(abs_srcdir)/anadiff/diffanas $(abs_builddir) > $(abs_builddir)/anadiff/anadiffs.txt
 
 
 ## TODO: Add a Markdown compiler and README.md + tutorials/: (py)pandoc?

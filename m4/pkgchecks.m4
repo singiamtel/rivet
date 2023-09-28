@@ -318,8 +318,8 @@ AC_DEFUN([AC_CEDAR_LIBRARY], [
     fi
 
     ## Build a list of library search locations, unless specified
-    libdirnames="lib"
-
+    libdirnames="lib lib/${host_cpu}-${host_os}"
+    
     ## Test for 64-bit mode and add lib64 as first choice
     ## library dir name if appropriate
     if test -z "$UNAME"; then

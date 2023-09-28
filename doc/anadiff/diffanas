@@ -2,10 +2,17 @@
 
 # TODO: rewrite in Python?
 
+## Where to look for the files 
+builddir="."
+test -n "$1" && builddir=$1
+
 echo PYTHONPATH=$PYTHONPATH 1>&2
 
 ## Get list of all tags excluding tip
 declare -a tags
+## Test we're in a git repo, and if not, exit
+git tag >/dev/null 2>&1 || exit 0
+## Get all tags 
 for t in $(git tag | sort -r); do tags+=($t); done
 let numtags=${#tags[@]}
 
@@ -15,10 +22,10 @@ for i in `seq 0 $N`; do
     tag=${tags[$i]}
 
     tagfile="analist-$tag.dat"
-    test -e "$tagfile" && continue
-    echo "Writing analysis list to $tagfile" 1>&2
+    test -e "$builddir/$tagfile" && continue
+    echo "Writing analysis list to $builddir/$tagfile" 1>&2
 
-    > $tagfile
+    > $builddir/$tagfile
     git ls-tree --full-tree -r --name-only $tag src/Analysis/ src/Analyses/ analyses/ | grep "\.cc" | \
         while read i; do basename $i .cc >> $tagfile; done
     sort $tagfile > $$ && mv $$ $tagfile
