@@ -9,6 +9,10 @@
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Projections/Beam.hh"
 
+#include "YODA/Counter.h"
+#include "YODA/Histo.h"
+#include "YODA/Profile.h"
+#include "YODA/Scatter.h"
 #include "YODA/IO.h"
 #include "YODA/WriterYODA.h"
 
@@ -16,6 +20,17 @@
 #include <regex>
 
 using namespace std;
+
+namespace {
+
+  /// Fold expression to call lambda @a F with
+  /// each argument in the variadic set
+  template<typename... Args, typename F>
+  constexpr void for_each_arg(F&& f) {
+    (( f(Args{}) ), ...);
+  }
+
+}
 
 namespace Rivet {
 
@@ -31,8 +46,9 @@ namespace Rivet {
       _nominalWeightName(""),
       _weightCap(0.),
       _NLOSmearing(0.), _defaultWeightIdx(0),
-      _rivetDefaultWeightIdx(0), _dumpPeriod(0), _dumping(false)
-  {  }
+      _rivetDefaultWeightIdx(0), _dumpPeriod(0), _dumping(false) {
+    registerDefaultTypes<double,int,string>();
+  }
 
 
   AnalysisHandler::~AnalysisHandler() {
@@ -1336,5 +1352,69 @@ namespace Rivet {
     return sqrtS(runBeams());
   }
 
+  bool AnalysisHandler::copyAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, const double scale) {
+    const TypeRegisterItr& typeHandle = _register.find(src->type());
+    if (typeHandle == _register.end())  return false;
+    return typeHandle->second->copyAO(src, dst, scale); // uses type-specific implementation
+  }
+
+  bool AnalysisHandler::addAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr& dst, const double scale) {
+    const TypeRegisterItr& typeHandle = _register.find(src->type());
+    if (typeHandle == _register.end())  return false;
+    return typeHandle->second->addAO(src, dst, scale); // uses type-specific implementation
+  }
+
+  /// Register a default set of types in the calling singleton
+  template<typename... Args>
+  void AnalysisHandler::registerDefaultTypes() {
+
+    // load 0D types
+    registerType<YODA::Counter>();
+    registerType<YODA::Estimate0D>();
+
+    // load scatters and short-hand types
+    auto addShorthands = [&](auto I) {
+      registerType<YODA::HistoND<I+1>>();
+      registerType<YODA::ProfileND<I+1>>();
+      registerType<YODA::ScatterND<I+1>>();
+    };
+    MetaUtils::staticFor<3>(addShorthands);
+
+    // load BinnedHisto/BinnedProfile in 1D
+    for_each_arg<Args...>([&](auto&& arg) {
+      using A1 = decay_t<decltype(arg)>;
+      using BH = YODA::BinnedHisto<A1>;
+      registerType<BH>();
+      using BP = YODA::BinnedProfile<A1>;
+      registerType<BP>();
+      using BE = YODA::BinnedEstimate<A1>;
+      registerType<BE>();
+
+      // load BinnedHisto/BinnedProfile in 2D
+      for_each_arg<Args...>([&](auto&& arg) {
+        using A2 = decay_t<decltype(arg)>;
+        using BH = YODA::BinnedHisto<A1,A2>;
+        registerType<BH>();
+        using BP = YODA::BinnedProfile<A1,A2>;
+        registerType<BP>();
+        using BE = YODA::BinnedEstimate<A1,A2>;
+        registerType<BE>();
+
+        // load BinnedHisto/BinnedProfile in 3D
+        /*for_each_arg<Args...>([&](auto&& arg) {
+          using A3 = decay_t<decltype(arg)>;
+          using BH = YODA::BinnedHisto<A1,A2,A3>;
+          registerType<BH>();
+          //using BP = YODA::BinnedProfile<A1,A2,A3>;
+          //registerType<BP>(BP().type());
+          using BE = YODA::BinnedEstimate<A1,A2,A3>;
+          registerType<BE>();
+        });*/
+      });
+    });
+    // for now, only load HistoND<d,d,d>
+    // @todo Do we need more 3D types?
+    registerType<YODA::HistoND<3>>();
+  }
 
 }

@@ -165,7 +165,6 @@ nobase_pkginclude_HEADERS += \
   Tools/ParticleSmearingFunctions.hh \
   Tools/JetSmearingFunctions.hh \
   Tools/ExptSmearingFunctions.hh \
-  Tools/TypeRegistry.hh \
   Tools/TypeTraits.hh \
   Tools/Utils.hh
 nobase_dist_noinst_HEADERS += \

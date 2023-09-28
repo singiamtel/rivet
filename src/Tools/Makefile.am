@@ -16,7 +16,6 @@ libRivetTools_la_SOURCES = \
   RivetMT2.cc \
   RivetPaths.cc \
   RivetYODA.cc \
-  TypeRegistry.cc \
   Utils.cc \
   Vector4.cc \
   binreloc.c

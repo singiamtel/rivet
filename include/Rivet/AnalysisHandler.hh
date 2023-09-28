@@ -4,10 +4,12 @@
 
 #include "Rivet/Config/RivetCommon.hh"
 #include "Rivet/Particle.hh"
-// #include "Rivet/Event.hh"
 #include "Rivet/AnalysisLoader.hh"
 #include "Rivet/Tools/RivetYODA.hh"
 #include "Rivet/ProjectionHandler.hh"
+#include "YODA/ReaderYODA.h"
+
+#include <unordered_map>
 
 namespace Rivet {
 
@@ -23,6 +25,11 @@ namespace Rivet {
   /// generated events. An {@link Analysis}' AnalysisHandler is also responsible
   /// for handling the final writing-out of histograms.
   class AnalysisHandler {
+
+    using TypeHandlePtr = std::shared_ptr<TypeBaseHandle>;
+    using TypeRegister = std::unordered_map<string, TypeHandlePtr>;
+    using TypeRegisterItr = typename TypeRegister::const_iterator;
+
   public:
 
     /// Preferred constructor, with optional run name.
@@ -155,6 +162,31 @@ namespace Rivet {
     // void setCheckConsistency(bool check=true) { _checkConsistency = check; }
     // Check event consistency with the run, usually determined from the first event
     // bool consistentWithRun(Event& event) {
+
+    /// @}
+
+
+    /// @name AO type handling
+    /// @{
+
+    /// Register an AO type handle into type map and YODA reader
+    template<typename T>
+    void registerType() {
+      const std::string name = T().type();
+      const TypeRegisterItr& res = _register.find(name);
+      if (res == _register.end()) {
+        _register[name] = make_shared<TypeHandle<T>>();
+      }
+      _reader.registerType<T>(); // also let YODA know
+    }
+
+    /// If @a dst is the same subclass as @a src, copy the contents of
+    /// @a src into @a dst and return true. Otherwise return false.
+    bool copyAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, const double scale=1.0);
+
+    /// If @a dst is the same subclass as @a src, scale the contents of @a src with
+    /// @a scale and add it to @a dst and return true. Otherwise return false.
+    bool addAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr& dst, const double scale);
 
     /// @}
 
@@ -467,6 +499,16 @@ namespace Rivet {
 
     /// A vector containing copies of analysis objects after finalize() has been run.
     vector<YODA::AnalysisObjectPtr> _finalizedAOs;
+
+    /// Loads a default set of YODA AO types into the TypeHandleMap
+    template<typename... Args>
+    void registerDefaultTypes();
+
+    /// The TypeRegister of all registered types
+    TypeRegister _register;
+
+    /// A reference to the ReaderYODA singleton
+    YODA::Reader& _reader = YODA::ReaderYODA::create();
 
 
     /// @name Run properties
