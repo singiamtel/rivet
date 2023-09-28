@@ -2,7 +2,6 @@
 #define RIVET_RIVETYODA_HH
 
 #include "Rivet/Config/RivetCommon.hh"
-#include "Rivet/Tools/TypeRegistry.hh"
 #include "Rivet/Tools/TypeTraits.hh"
 #include "YODA/AnalysisObject.h"
 #include "YODA/Counter.h"
@@ -61,24 +60,67 @@ namespace Rivet {
 
   /// If @a dst is the same subclass as @a src, copy the contents of @a
   /// src into @a dst and return true. Otherwise return false.
-  inline bool copyAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, const double scale=1.0) {
-    auto typeHandle = findRegisteredType(src->type());
-    if (!typeHandle)  return false;
+  template <typename T>
+  bool copyAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, const double scale=1.0) {
+    if (dst->hasAnnotation("Type") && src->type() != dst->type()) {
+      throw YODA::LogicError("Operation requries types to be the same!");
+    }
     for (const std::string& a : src->annotations()) {
       dst->setAnnotation(a, src->annotation(a));
     }
-    return typeHandle->copyAO(src, dst, scale);
+    shared_ptr<T> dstPtr = std::static_pointer_cast<T>(dst);
+    *dstPtr = *std::static_pointer_cast<T>(src);
+    if constexpr (isFillable<T>::value) { dstPtr->scaleW(scale); }
+    return true;
   }
 
-  /// If @a dst is the same subclass as @a src, scale the contents of
-  /// @a src with @a scale and add it to @a dst and return true. Otherwise
-  /// return false.
-  inline bool addAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr& dst, const double scale) {
-    auto typeHandle = findRegisteredType(src->type());
-    if (!typeHandle)  return false;
-    return typeHandle->addAO(src, dst, scale);
-  }
 
+  /// @brief A polymorphic base type for the AO type handles
+  struct TypeBaseHandle {
+
+    TypeBaseHandle() = default;
+
+    virtual ~TypeBaseHandle() { }
+
+    virtual bool copyAO(YODA::AnalysisObjectPtr src,
+                        YODA::AnalysisObjectPtr dst,
+                        const double scale = 1.0) const = 0;
+
+    virtual bool addAO(YODA::AnalysisObjectPtr src,
+                       YODA::AnalysisObjectPtr& dst,
+                       const double scale = 1.0) const = 0;
+
+  };
+
+
+
+  /// @brief The type-specific handle that can perform
+  /// type-specific operations for objects of type T
+  template<typename T>
+  struct TypeHandle : public TypeBaseHandle {
+
+    bool addAO(YODA::AnalysisObjectPtr src,
+               YODA::AnalysisObjectPtr& dst,
+               const double scale = 1.0) const {
+      if constexpr (isFillable<T>::value) {
+        std::shared_ptr<T> srcPtr = std::static_pointer_cast<T>(src);
+        srcPtr->scaleW(scale);
+        if (dst == nullptr) { dst = src; return true; }
+        try { *std::static_pointer_cast<T>(dst) += *srcPtr; }
+        catch (YODA::BinningError&) { return false; }
+        return true;
+      }
+      else if (dst == nullptr) { dst = src; return true; }
+      return false;
+    }
+
+    bool copyAO(YODA::AnalysisObjectPtr src,
+                YODA::AnalysisObjectPtr dst,
+                const double scale = 1.0) const {
+      return ::Rivet::copyAO<T>(src, dst, scale);
+    }
+
+  };
 
 
   /// @defgroup AOFills Minimal objects representing AO fills,
@@ -1161,7 +1203,7 @@ namespace Rivet {
     void pushToFinal() {
       for ( size_t m = 0; m < _persistent.size(); ++m ) { //< variation weight index
         _final.at(m)->clearAnnotations(); // in case this is a repeat call
-        copyAO(_persistent.at(m), _final.at(m));
+        copyAO<T>(_persistent.at(m), _final.at(m));
         // Remove the /RAW prefix, if there is one, from the final copy
         if ( _final[m]->path().substr(0,4) == "/RAW" )
           _final[m]->setPath(_final[m]->path().substr(4));

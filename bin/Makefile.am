@@ -1,6 +1,5 @@
 bin_SCRIPTS = rivet-config rivet-build
 dist_bin_SCRIPTS = make-plots
-dist_noinst_SCRIPTS = make-plots-fast make-pgfplots
 
 EXTRA_DIST =
 
@@ -9,7 +8,7 @@ RIVETPROGS = \
     rivet-mkanalysis \
     rivet-findid rivet-which \
     rivet-diffhepdata rivet-diffhepdata-all \
-    rivet-cmphistos rivet-mkhtml rivet-mkhtml-mpl rivet-merge rivet-mkvaldir
+    rivet-cmphistos rivet-mkhtml rivet-mkhtml-tex rivet-merge rivet-mkvaldir
 if ENABLE_PYEXT
 dist_bin_SCRIPTS += $(RIVETPROGS)
 else

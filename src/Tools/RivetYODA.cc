@@ -1,7 +1,6 @@
 #include "Rivet/Config/RivetCommon.hh"
 #include "Rivet/Tools/RivetYODA.hh"
 #include "Rivet/Tools/RivetPaths.hh"
-#include "Rivet/Tools/TypeRegistry.hh"
 #include "YODA/BinnedDbn.h"
 #include "YODA/IO.h"
 
