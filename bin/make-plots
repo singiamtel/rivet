@@ -43,8 +43,8 @@ from math import *
 
 
 ## Regex patterns
-pat_begin_block = re.compile(r'^#+\s*BEGIN ([A-Z0-9_]+) ?(\S+)?')
-pat_end_block =   re.compile('^#+\s*END ([A-Z0-9_]+)')
+pat_begin_block = re.compile(r'^#?+\s*BEGIN ([A-Z0-9_]+) ?(\S+)?')
+pat_end_block =   re.compile('^#?+\s*END ([A-Z0-9_]+)')
 pat_comment = re.compile('^#|^\s*$')
 pat_property = re.compile('^(\w+?)=(.*)$')
 pat_property_opt = re.compile('^ReplaceOption\[(\w+=\w+)\]=(.*)$')

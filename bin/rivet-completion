@@ -219,7 +219,7 @@ complete -F _make_plots -o default make-plots
 ########################
 
 
-function _rivet_mkhtml() {
+function _rivet_mkhtml_tex() {
     local cur prev commands options command
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -266,13 +266,13 @@ function _rivet_mkhtml() {
 }
 
 
-complete -F _rivet_mkhtml rivet-mkhtml
+complete -F _rivet_mkhtml_tex rivet-mkhtml-tex
 
 
 ########################
 
 
-function _rivet_mkhtml_mpl() {
+function _rivet_mkhtml() {
     local cur prev commands options command
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -321,4 +321,4 @@ function _rivet_mkhtml_mpl() {
 }
 
 
-complete -F _rivet_mkhtml_mpl rivet-mkhtml-mpl
+complete -F _rivet_mkhtml rivet-mkhtml

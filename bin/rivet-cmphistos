@@ -51,6 +51,9 @@ def getHistos(filelist, filenames):
                                "Histo2D",
                                "Profile1D",
                                "Profile2D",
+                               "Estimate0D",
+                               "Estimate1D",
+                               "Estimate2D",
                                "Scatter1D",
                                "Scatter2D",
                                "Scatter3D"):
@@ -381,7 +384,7 @@ if __name__ == '__main__':
                 hpaths.append(ps)
             firstaop = aos[p][sorted(aos[p].keys())[0]]
             # TODO: Would be nicer to test via isHisto and dim or similar, or yoda.Scatter/Histo/Profile base classes
-            if type(firstaop) in (yoda.Histo2D, yoda.Profile2D, yoda.Scatter3D) and ps not in h2ds:
+            if type(firstaop) in (yoda.Histo2D, yoda.Profile2D, yoda.Estimate2D, yoda.Scatter3D) and ps not in h2ds:
                 h2ds.append(ps)
 
     # Unique list of analyses
@@ -502,7 +505,7 @@ if __name__ == '__main__':
                     if defaultWeightName not in hmcs:
                         raise NameError("No default weight found in file!")
                     obj_type = str(hmcs[defaultWeightName])
-                    construct_band = 'Histo1D' in obj_type or 'Scatter2D' in obj_type
+                    construct_band = 'Histo' in obj_type or 'Estimate' in obj_type or 'Scatter' in obj_type
                     componentNames = ['BandComponentPDF', 'BandComponentEnv']
                     poptions = getFileOptions(plotoptions[infile], componentNames) if construct_band else { }
                     for bandType, bandContribs in poptions.items():
@@ -513,14 +516,14 @@ if __name__ == '__main__':
                                 isNominal = (str(varname) == defaultWeightName)
                                 # accept nominal and variations matching any of the specified patterns
                                 if isNominal or any([ re.search(pat, varname) for pat in curvegroup.split(',') ]):
-                                    thisobj = hmcs[varname].mkScatter() if 'Histo1D' in obj_type else hmcs[varname]
+                                    thisobj = hmcs[varname] if 'Scatter' in obj_type else hmcs[varname].mkScatter()
                                     if isNominal and BANDNAME not in hmcs:
                                         # make a copy of the nominal as basis for the error tube
-                                        hmcs[BANDNAME] = thisobj if 'Histo1D' in obj_type else hmcs[varname].clone()
+                                        hmcs[BANDNAME] = hmcs[varname].clone() if 'Scatter' in obj_type else thisobj
                                         newpath = "%s[%s]" % (hmcs[BANDNAME].annotation('Path'), BANDNAME)
                                         hmcs[BANDNAME].setAnnotation('Path', newpath)
                                     # get central values of current variation
-                                    central_values = [ p.y() for p in thisobj.points() ]
+                                    central_values = thisobj.yVals()
                                     # update envelope
                                     if isPDF:
                                         # generator may or may not count

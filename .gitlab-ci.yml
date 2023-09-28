@@ -265,7 +265,7 @@ check_plugin_fedora_gcc_hepmc3_py3:
     - cd $TEST_PREFIX
     - ls /usr/local/lib64
     - echo $LD_LIBRARY_PATH
-    - rivet-mkhtml --errs -o ttbar_test_plots ttbar_test_run.yoda
+    - rivet-mkhtml -o ttbar_test_plots ttbar_test_run.yoda
   artifacts:
     when: always
     paths:

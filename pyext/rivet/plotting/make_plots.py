@@ -109,8 +109,7 @@ def _get_histos(filelist, filenames, plotoptions, path_patterns = [], path_unpat
                 continue
 
             # Convert non-scatter objects to scatter
-            if "Scatter" not in ao.type():
-                ao = ao.mkScatter()
+            ao = yoda.plotting.utils.mkPlotFriendlyScatter(ao)
 
             ## Add it to the ref or mc paths, if this path isn't already known
             basepath = aop.basepath(keepref=False)
@@ -164,9 +163,9 @@ def get_nominal_key(listOfHistoKeys):
 
 
 def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptions,
-                 style, rc_params, mc_errs, nRatioTicks, skipWeights, removeOptions, deviation, 
+                 style, rc_params, mc_errs, nRatioTicks, skipWeights, removeOptions, deviation,
                  canvasText, refLabel = None, ratioPlotLabel = None, showRatio = None, verbose = False,):
-                 
+
     """Create output dictionary for the plot_id.
 
     Parameters
@@ -192,7 +191,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
     removeOptions : bool
         If true, prevents appending the options string to the legend label
     deviation : bool
-        If true, express compatability between curve and ref. data in terms 
+        If true, express compatability between curve and ref. data in terms
         of standard deviations in ratio panel.
     rc_params : dict[str, str]
         Dict of rcParams that will be added to the rcParams section of the output .dat file.
@@ -206,7 +205,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
     plot_configs = plot2yaml.get_plot_configs(plot_id, plotdirs=plotdirs, config_files=config_files)
     outputdict['plot features'] = plot_configs
     outputdict['plot features']['Deviation'] = deviation
-    
+
     # only write extra info to the .dat file if specified by user
     if nRatioTicks !=1: outputdict['plot features'].update({"nRatioTicks": nRatioTicks})
     if canvasText != None: outputdict['plot features'].update({"canvasText" : canvasText})
@@ -217,9 +216,9 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
     outputdict['histograms'] = {}
 
     componentNames = ['BandComponentPDF', 'BandComponentEnv']
- 
+
     if plot_id in refhistos:
-        refhistos[plot_id].setAnnotation('IsRef', True) 
+        refhistos[plot_id].setAnnotation('IsRef', True)
         outputdict['histograms']['Data'] = {'nominal': refhistos[plot_id]} # this is where ErrorBreakdown is included?
         outputdict['histograms']['Data']['IsRef'] = True
 
@@ -227,7 +226,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
         # then the annotations in the plot file and finally falling back to a default value
         outputdict['histograms']['Data']['Title'] = refLabel if refLabel != None else \
                                                 refhistos[plot_id].title() if \
-                                                refhistos[plot_id].hasAnnotation('Title') else 'Data' 
+                                                refhistos[plot_id].hasAnnotation('Title') else 'Data'
         # decide if ratio panel is shown or not
         outputdict['plot features']['RatioPlot'] = showRatio if showRatio != None else \
                                                 refhistos[plot_id].annotation('RatioPlot') if \
@@ -287,18 +286,17 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                 # pass the plotoptions dict to the function?
                 outputdict['histograms'][filename+label]['ErrorBars'] = mc_errs
 
-                thisObj = histogram.mkScatter()
+                thisObj = yoda.plotting.utils.mkPlotFriendlyScatter(histogram)
 
                 # no support for 3D scatters and bands
                 if thisObj.type() == "Scatter3D":
                     makeEnvelope = makePDFBand = ''
 
                 # central values of current object
-                central_values = [ p.x() if 'Scatter1D' in thisObj.type() else
-                  p.y() if 'Scatter2D' in thisObj.type() else p.z() for p in thisObj.points() ]
+                central_values = thisObj.vals(thisObj.dim()-1)
 
                 if isNominal:
-                    nominalScatter = thisObj 
+                    nominalScatter = thisObj
                     outputdict['histograms'][filename+label]['nominal'] = thisObj
 
                 for i, prescription in enumerate(makePDFBand.split()):
@@ -331,7 +329,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                 # don't plot multiweights if already plotting a band
                 if not skipWeights and not isNominal and not makeEnvelope and not makePDFBand:
                     if not rivet.extractWeightName(plot_id_with_anaopt).startswith('EXTRA'):
-                        outputdict['histograms'][filename+label]['multiweight'+histogramkey] = histogram
+                        outputdict['histograms'][filename+label]['multiweight'+histogramkey] = thisObj
 
             if verbose:
                 for pat in pdf_matches:
@@ -401,8 +399,8 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
                            plotinfodirs=[], style='default', config_files=[],
                            hier_output=False, outdir='.', mc_errs=True,
                            rivetplotpaths=True, analysispaths=[], verbose=False,
-                           writefiles=False, nRatioTicks=1, skipWeights=False, 
-                           removeOptions = False, deviation=False,                    
+                           writefiles=False, nRatioTicks=1, skipWeights=False,
+                           removeOptions = False, deviation=False,
                            canvasText=None, refLabel=None, ratioPlotLabel=None,
                            showRatio=None):
     """Create a dictionary of the plotting data that can be turned
@@ -534,7 +532,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
             plot_id, plotdirs, config_files,
             mchistos, refhistos,
             plotoptions, stylename, rc_params_dict, mc_errs,
-            nRatioTicks, skipWeights, removeOptions, deviation, 
+            nRatioTicks, skipWeights, removeOptions, deviation,
             canvasText, refLabel, ratioPlotLabel, showRatio, verbose
         )
         if 'histograms' in outputdict: # protection against Counters
