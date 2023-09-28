@@ -961,11 +961,24 @@ namespace Rivet {
     /// Unset the active-object pointer.
     virtual void unsetActiveWeight() = 0;
 
+    /// Set the size of the bootstrap vectors
+    virtual void initBootstrap() = 0;
+
     /// Test for equality.
     bool operator == (const MultiplexedAO& p) { return (this == &p); }
 
     /// Test for inequality.
     bool operator != (const MultiplexedAO& p) { return (this != &p); }
+
+    const vector<bool>& fillOutcomes() const {  return _fillOutcomes; }
+
+    const vector<double>& fillFractions() const {  return _fillFractions; }
+
+  protected:
+
+    vector<bool> _fillOutcomes;
+
+    vector<double> _fillFractions;
 
   };
 
@@ -996,6 +1009,8 @@ namespace Rivet {
 
     /// Typedef for the YODA type being represented
     using Inner = T;
+    using MultiplexedAO::_fillOutcomes;
+    using MultiplexedAO::_fillFractions;
 
     Multiplexer() = default;
 
@@ -1139,11 +1154,24 @@ namespace Rivet {
         assert( _evgroup.size() == weights.size() );
 
         if (_evgroup.size() == 1) { // Have we had subevents at all?
+          // ensure vector length matches size of multiplexed AO
+          if (_fillOutcomes.empty())  initBootstrap();
+          // reset fill positions
+          std::fill(_fillOutcomes.begin(), _fillOutcomes.end(), false);
+          std::fill(_fillFractions.begin(), _fillFractions.end(), 0.0);
+
           // Simple replay of all collected fills:
           // each fill is inserted into every persistent AO
           for (auto f : _evgroup[0]->fills()) {
+            int pos = -1;
+            double frac = 0.0;
             for (size_t m = 0; m < _persistent.size(); ++m) { //< m is the variation index
-              _persistent[m]->fill( std::move(f.first), std::move(f.second) * weights[0][m] );
+              if (!m)  frac = f.second;
+              pos = _persistent[m]->fill( std::move(f.first), std::move(f.second) * weights[0][m] );
+            }
+            if (pos >= 0) {
+              _fillOutcomes[pos] = true;
+              _fillFractions[pos] += frac;
             }
           }
         }
@@ -1230,6 +1258,18 @@ namespace Rivet {
 
     /// Get the currently active analysis object
     YODA::AnalysisObjectPtr activeAO() const { return _active; }
+
+    /// @brief Helper method to resize aux vectors to AO size
+    void initBootstrap() {
+      if constexpr( isFillable<T>::value ) {
+        size_t nPos = 1; // Counter only has a single fill position
+        if constexpr (!std::is_same<T, YODA::Counter>::value ) { // binned objects
+          nPos = _persistent.back()->numBins(true, true);
+        }
+        _fillOutcomes.resize(nPos);
+        _fillFractions.resize(nPos);
+      }
+     }
 
     /// @}
 
@@ -1535,13 +1575,13 @@ namespace Rivet {
       return "[" + _weight + "]";
     }
 
-    /// Is This a RAW (filling) object?
+    /// Is this a RAW (filling) object?
     bool isRaw() const { return _raw; }
 
-    // Is This a temporary (filling) object?
+    // Is this a temporary (filling) object?
     bool isTmp() const { return _tmp; }
 
-    /// Is This a reference object?
+    /// Is this a reference object?
     bool isRef() const { return _ref; }
 
     /// The string describing the options passed to the analysis.

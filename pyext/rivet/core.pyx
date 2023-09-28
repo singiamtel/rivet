@@ -60,6 +60,10 @@ cdef class AnalysisHandler:
     #selectMultiWeights = matchWeightNames
     #deselectMultiWeights = unmatchWeightNames
 
+    def setBootstrapFilename(self, name):
+        "Set file name for the boostrap dumping file"
+        self._ptr.setBootstrapFilename(name)
+
     def setNominalWeightName(self, name=""):
         "Declare which weight-stream name to treat as the nominal [default=Nominal|Default||0]"
         self._ptr.setNominalWeightName(name)
@@ -132,6 +136,14 @@ cdef class AnalysisHandler:
     def dump(self, name, period):
         "Declare to dump the current status of this AH's histograms to file every <period> events"
         self._ptr.dump(name, period)
+
+    def fillOutcomes(self):
+        "Return vector of Booleans representing the fill outcomes"
+        return self._ptr.fillOutcomes()
+
+    def fillFractions(self):
+        "Return vector of doubles representing the fill fractions"
+        return self._ptr.fillFractions()
 
     def mergeYodas(self, filelist, delopts, addopts, matches, unmatches, equiv):
         "Access to the API call for merging multiple YODA files correctly, including finalization. Mainly for rivet-merge"

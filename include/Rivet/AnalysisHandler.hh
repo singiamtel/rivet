@@ -6,9 +6,11 @@
 #include "Rivet/Particle.hh"
 #include "Rivet/AnalysisLoader.hh"
 #include "Rivet/Tools/RivetYODA.hh"
+#include "Rivet/Tools/Utils.hh"
 #include "Rivet/ProjectionHandler.hh"
 #include "YODA/ReaderYODA.h"
 
+#include <fstream>
 #include <unordered_map>
 
 namespace Rivet {
@@ -334,6 +336,17 @@ namespace Rivet {
       _dumpFile = dumpfile;
     }
 
+    /// @brief Set filename of the bootstrap file
+    void setBootstrapFilename(const string& filename) {
+      _bootstrapfilename = filename;
+    }
+
+    /// Return a vector of the binary fill outcome (was/wasn't filled) at each fill position
+    vector<bool> fillOutcomes() const;
+
+    /// Return a vector of the fill fraction at each fill position
+    vector<double> fillFractions() const;
+
     /// @brief Merge the vector of YODA files, using the cross-section and weight information provided in each.
     ///
     /// Each file in @a aofiles is assumed to have been produced by Rivet. By
@@ -578,8 +591,14 @@ namespace Rivet {
     /// The name of a YODA file to which Rivet periodically dumps results.
     string _dumpFile;
 
-    /// Flag to indicate periodic dumping is in progress
+    /// Flag to indicate periodic AO dumping is in progress
     bool _dumping;
+
+    /// Flag to indicate bootstrap dumping is in progress
+    ofstream _fbootstrap;
+
+    /// Name of the file that the bootstrap dumping should be written to
+    std::string _bootstrapfilename;
 
     /// Projection Handler
     ProjectionHandler _projHandler;

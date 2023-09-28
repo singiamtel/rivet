@@ -125,6 +125,8 @@ extragroup.add_argument("-d", "--dump", "--histo-interval", dest="DUMP_PERIOD", 
                         "Note that intermediate histograms will be those from the analyze step "
                         "only, except for analyses explicitly declared Reentrant for which the "
                         "finalize function is executed first.")
+extragroup.add_argument("--bootstrapfile", dest="BOOTSTRAP_FILE", default=None,
+                        help="set the file name for a boostrap file. Note: This file grows in size quickly!")
 
 timinggroup = parser.add_argument_group("Timeouts and periodic operations")
 timinggroup.add_argument("--event-timeout", dest="EVENT_TIMEOUT", type=int,
@@ -579,6 +581,9 @@ for plfarg in args.PRELOADFILES:
 
 if args.DUMP_PERIOD:
     ah.dump(args.HISTOFILE, args.DUMP_PERIOD)
+
+if args.BOOTSTRAP_FILE:
+    ah.setBootstrapFilename(args.BOOTSTRAP_FILE)
 
 if args.SHOW_BIBTEX:
     bibs = []

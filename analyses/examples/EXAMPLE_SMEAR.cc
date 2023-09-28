@@ -200,31 +200,31 @@ namespace Rivet {
 
       normalize(_h_nj_true);
       normalize(_h_nj_reco);
-      normalize(_h_j1pt_true, 1-_h_nj_true->bin(0).area());
-      normalize(_h_j1pt_reco, 1-_h_nj_reco->bin(0).area());
-      normalize(_h_j1eta_true, 1-_h_nj_true->bin(0).area());
-      normalize(_h_j1eta_reco, 1-_h_nj_reco->bin(0).area());
+      normalize(_h_j1pt_true, 1-_h_nj_true->bin(0).sumW());
+      normalize(_h_j1pt_reco, 1-_h_nj_reco->bin(0).sumW());
+      normalize(_h_j1eta_true, 1-_h_nj_true->bin(0).sumW());
+      normalize(_h_j1eta_reco, 1-_h_nj_reco->bin(0).sumW());
 
       normalize(_h_ne_true);
       normalize(_h_ne_reco);
-      normalize(_h_e1pt_true, 1-_h_ne_true->bin(0).area());
-      normalize(_h_e1pt_reco, 1-_h_ne_reco->bin(0).area());
-      normalize(_h_e1eta_true, 1-_h_ne_true->bin(0).area());
-      normalize(_h_e1eta_reco, 1-_h_ne_reco->bin(0).area());
+      normalize(_h_e1pt_true, 1-_h_ne_true->bin(0).sumW());
+      normalize(_h_e1pt_reco, 1-_h_ne_reco->bin(0).sumW());
+      normalize(_h_e1eta_true, 1-_h_ne_true->bin(0).sumW());
+      normalize(_h_e1eta_reco, 1-_h_ne_reco->bin(0).sumW());
 
       normalize(_h_nm_true);
       normalize(_h_nm_reco);
-      normalize(_h_m1pt_true, 1-_h_nm_true->bin(0).area());
-      normalize(_h_m1pt_reco, 1-_h_nm_reco->bin(0).area());
-      normalize(_h_m1eta_true, 1-_h_nm_true->bin(0).area());
-      normalize(_h_m1eta_reco, 1-_h_nm_reco->bin(0).area());
+      normalize(_h_m1pt_true, 1-_h_nm_true->bin(0).sumW());
+      normalize(_h_m1pt_reco, 1-_h_nm_reco->bin(0).sumW());
+      normalize(_h_m1eta_true, 1-_h_nm_true->bin(0).sumW());
+      normalize(_h_m1eta_reco, 1-_h_nm_reco->bin(0).sumW());
 
       normalize(_h_nt_true);
       normalize(_h_nt_reco);
-      normalize(_h_t1pt_true, 1-_h_nt_true->bin(0).area());
-      normalize(_h_t1pt_reco, 1-_h_nt_reco->bin(0).area());
-      normalize(_h_t1eta_true, 1-_h_nt_true->bin(0).area());
-      normalize(_h_t1eta_reco, 1-_h_nt_reco->bin(0).area());
+      normalize(_h_t1pt_true, 1-_h_nt_true->bin(0).sumW());
+      normalize(_h_t1pt_reco, 1-_h_nt_reco->bin(0).sumW());
+      normalize(_h_t1eta_true, 1-_h_nt_true->bin(0).sumW());
+      normalize(_h_t1eta_reco, 1-_h_nt_reco->bin(0).sumW());
     }
 
     /// @}
