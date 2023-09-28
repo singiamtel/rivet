@@ -67,7 +67,7 @@ stages:
     #     ./ci/getAffectedRoutines.sh anasToCompile.txt
     #     echo "==== echo analyses to compile ====="
     #     cat anasToCompile.txt
-    #     find analyses | grep MC_TTBAR | grep cc  >> anasToCompile.txt # need at least one!
+    #     find analyses -name MC_TTBAR.cc >> anasToCompile.txt # need at least one!
     #     cat anasToCompile.txt | sort --unique > anasToCompile.tmp ; mv anasToCompile.tmp anasToCompile.txt
     #     echo rivet-build `cat anasToCompile.txt`
     #     RIVET_BUILD_NOCAT=1 rivet-build RivetModifiedAnas.so `cat anasToCompile.txt`
@@ -170,10 +170,10 @@ get_test_hepmc:
     - |
       if [[ "$ALLANAS" != "1" ]]; then
         $CI_PROJECT_DIR/ci/getAffectedRoutines.sh $CI_PROJECT_DIR/anasToCompile.txt
-        find $CI_PROJECT_DIR/analyses | grep MC_TTBAR | grep cc  >> $CI_PROJECT_DIR/anasToCompile.txt
-        find $CI_PROJECT_DIR/analyses | grep ATLAS_2018_I1656578 | grep cc  >> $CI_PROJECT_DIR/anasToCompile.txt
-        find $CI_PROJECT_DIR/analyses | grep ATLAS_2018_I1646686 | grep cc  >> $CI_PROJECT_DIR/anasToCompile.txt
-        find $CI_PROJECT_DIR/analyses | grep ATLAS_2017_I1614149 | grep cc  >> $CI_PROJECT_DIR/anasToCompile.txt
+        find $CI_PROJECT_DIR/analyses -name MC_TTBAR.cc  >> $CI_PROJECT_DIR/anasToCompile.txt
+        find $CI_PROJECT_DIR/analyses -name ATLAS_2018_I1656578.cc  >> $CI_PROJECT_DIR/anasToCompile.txt
+        find $CI_PROJECT_DIR/analyses -name ATLAS_2018_I1646686.cc  >> $CI_PROJECT_DIR/anasToCompile.txt
+        find $CI_PROJECT_DIR/analyses -name ATLAS_2017_I1614149.cc  >> $CI_PROJECT_DIR/anasToCompile.txt
         sort --unique $CI_PROJECT_DIR/anasToCompile.txt -o $CI_PROJECT_DIR/anasToCompile.txt
         cat $CI_PROJECT_DIR/anasToCompile.txt
         ## Build changed routines

@@ -150,7 +150,7 @@ elif [[ -x "$abscxx" ]]; then
 	mycxx="$CXX"
 fi
 
-## Get Rivet system C++ compiler flags
+## Get Rivet-system build-time C++ compiler flags
 if [[ -n "@AM_CXXFLAGS@" ]]; then
 	mycxxflags="@AM_CXXFLAGS@"
 fi
@@ -203,13 +203,18 @@ test -n "$lh5" && myldflags="$myldflags ${lh5}"
 
 ## Detect whether the linker accepts the --no-as-needed flag and prepend the linker flag with it if possible
 if (cd /tmp && echo -e 'int main() { return 0; }' > $$.cc; $mycxx -Wl,--no-as-needed $$.cc -o $$ 2> /dev/null); then
-  myldflags="-Wl,--no-as-needed $myldflags"
+    myldflags="-Wl,--no-as-needed $myldflags"
+fi
+
+## Add build-time AM_LDFLAGS and LDFLAGS
+if [[ -n "@RIVETLDFLAGS@" ]]; then
+    myldflags="$myldflags @RIVETLDFLAGS@"
 fi
 
 ## Get ROOT flags if needed
 if [[ -n $with_root ]]; then
-	rootcxxflags=$(root-config --cflags 2> /dev/null)
-	rootldflags=$(root-config --libs 2> /dev/null)
+    rootcxxflags=$(root-config --cflags 2> /dev/null)
+    rootldflags=$(root-config --libs 2> /dev/null)
 fi
 
 
