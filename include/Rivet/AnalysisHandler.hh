@@ -124,6 +124,9 @@ namespace Rivet {
     /// Get the nominal cross-section
     double nominalCrossSection() const;
 
+    /// Get the nominal cross-section
+    double nominalCrossSectionError() const;
+
     /// @}
 
 
@@ -261,6 +264,9 @@ namespace Rivet {
     /// Get all YODA analysis objects (across all weights, optionally including RAW)
     vector<YODA::AnalysisObjectPtr> getYodaAOs(const bool includeraw=false, const bool mkinert=true) const;
 
+    /// Get all raw YODA analysis objects (across all weights)
+    vector<YODA::AnalysisObjectPtr> getRawAOs() const;
+
     /// Get a pointer to a preloaded yoda object with the given path,
     /// or null if path is not found.
     const YODA::AnalysisObjectPtr getPreload(const string& path) const {
@@ -320,6 +326,76 @@ namespace Rivet {
 
     /// A method to merge another AnalysisHandler into the current one
     void merge(AnalysisHandler &other);
+
+
+    /// @}
+
+    /// @name MPI (de-)serialisation
+    ///@{
+
+    vector<double> serializeContent() {
+      if (!_initialised)
+        throw Error("AnalysisHandler has not been initialised!");
+
+      pushToPersistent();
+
+      // Loop over raw AOs and fill a temporary 2D matrix
+      // with the per-AO content; keep track of per-AO sizes
+      const vector<YODA::AnalysisObjectPtr> raos = getRawAOs();
+      std::vector<vector<double>> data; // temporary 2D matrix
+      data.resize(raos.size());
+      size_t total = 0;
+      for (size_t i = 0; i < raos.size(); ++i) {
+        vector<double> tmp = raos[i]->serializeContent();
+        total += tmp.size() + 1; // +1 for length parameter
+        data[i].reserve(tmp.size());
+        data[i].insert(std::end(data[i]),
+                       std::make_move_iterator(std::begin(tmp)),
+                       std::make_move_iterator(std::end(tmp)));
+      }
+      // Now that we know the total size of all AOs,
+      // rearrange memory to improve overall layout
+      std::vector<double> rtn; // serialized return vector
+      rtn.reserve(total); // pre-allocate enough memory
+      for (size_t i = 0; i < data.size(); ++i) {
+        rtn.push_back(data[i].size()); // length of the AO
+        rtn.insert(std::end(rtn),
+                   std::make_move_iterator(std::begin(data[i])),
+                   std::make_move_iterator(std::end(data[i]))); // AO data
+      }
+      return rtn;
+    }
+
+    void deserializeContent(const vector<double>& data) {
+      if (!_initialised)
+        throw Error("AnalysisHandler has not been initialised!");
+
+      pushToPersistent();
+
+      // get Rivet AOs for access to raw AO pointers
+      vector<MultiplexAOPtr> raos = getRivetAOs();
+
+      size_t iAO = 0, iW = 0, offset = 0;
+      const auto itr = data.cbegin();
+      while (offset < data.size()) {
+        if (iW < numWeights())  raos[iAO].get()->setActiveWeightIdx(iW);
+        else {
+          raos[iAO].get()->unsetActiveWeight();
+          iW = 0; ++iAO; // move on to next AO
+          raos[iAO].get()->setActiveWeightIdx(iW);
+        }
+
+        // obtain content length and set content iterators
+        size_t aoLen = *(itr + offset); ++offset;
+        auto first = itr + offset;
+        auto last = first + aoLen;
+        // load data into AO
+        raos[iAO].get()->activeAO()->deserializeContent(std::vector<double>{first, last});
+
+        ++iW; offset += aoLen; // increment offset
+      }
+      raos[iAO].get()->unsetActiveWeight();
+    }
 
     /// @}
 

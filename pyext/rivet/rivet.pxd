@@ -18,7 +18,6 @@ cdef extern from "<sstream>" namespace "std":
 
 cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
     cdef cppclass AnalysisHandler:
-        # void setIgnoreBeams(bool)
         void setCheckBeams(bool)
         void skipMultiWeights(bool)
         void matchWeightNames(string)
@@ -34,11 +33,15 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         void writeData_OSTR "writeData" (ostringstream&, string&) except +
         void readData_FILE "readData" (string&, bool) except +
         void readData_ISTR "readData" (istringstream&, string&, bool) except +
+        void setCrossSection(double, double, bool)
         double nominalCrossSection()
+        double nominalCrossSectionError()
         void finalize()
         void dump(string, int)
         void mergeYodas(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool)
         void merge(AnalysisHandler&)
+        vector[double] serializeContent() except +
+        void deserializeContent(vector[double]&) except +
 
 cdef extern from "Rivet/Run.hh" namespace "Rivet":
     cdef cppclass Run:
