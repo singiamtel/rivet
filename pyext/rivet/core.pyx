@@ -113,9 +113,17 @@ cdef class AnalysisHandler:
             self._ptr.writeData_OSTR(oss, fmt)
             file_or_filename.write(oss.str())
 
+    def setCrossSection(self, float xs, float xserr):
+        "Set the nominal cross-section value and error for the ongoing event run"
+        return self._ptr.setCrossSection(xs, xserr, True)
+
     def nominalCrossSection(self):
         "Get the current nominal cross-section value from the ongoing event run"
         return self._ptr.nominalCrossSection()
+
+    def nominalCrossSectionError(self):
+        "Get the current nominal cross-section error from the ongoing event run"
+        return self._ptr.nominalCrossSectionError()
 
     def finalize(self):
         "Perform the finalising operations on all registered analyses"
@@ -137,6 +145,13 @@ cdef class AnalysisHandler:
     def merge(self, AnalysisHandler other):
         "Combine analysis data in-memory with another AH object"
         self._ptr.merge(other._ptr[0])
+
+    def serializeContent(self):
+        return self._ptr.serializeContent()
+
+    def deserializeContent(self, data):
+        data = list(float(x) for x in data)
+        self._ptr.deserializeContent(data)
 
 
 cdef class Run:

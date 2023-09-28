@@ -1149,6 +1149,25 @@ namespace Rivet {
   }
 
 
+  vector<YODA::AnalysisObjectPtr> AnalysisHandler::getRawAOs() const {
+
+    // Prepare output vector
+    vector<YODA::AnalysisObjectPtr> output;
+    vector<MultiplexAOPtr> raos = getRivetAOs();
+    output.reserve(raos.size() * numWeights());
+
+    // Get all multiweight AOs
+    for (auto rao : raos) {
+      for (size_t iW = 0; iW < numWeights(); ++iW) {
+        rao.get()->setActiveWeightIdx(iW);
+        output.push_back(rao.get()->activeAO());
+      }
+    }
+
+    return output;
+  }
+
+
   void AnalysisHandler::writeData(std::ostream& ostr, const string& fmt) const {
     const vector<YODA::AnalysisObjectPtr> output = getYodaAOs(true);
     try {
@@ -1274,6 +1293,18 @@ namespace Rivet {
     }
     _xs.get()->unsetActiveWeight();
     return xs;
+  }
+
+
+  double AnalysisHandler::nominalCrossSectionError() const {
+    _xs.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
+    double xserr = _xs->errAvg();
+    if (isnan(xserr)) {
+      string errMsg = "Value missing when requesting nominal cross-section error";
+      throw Error(errMsg);
+    }
+    _xs.get()->unsetActiveWeight();
+    return xserr;
   }
 
 
