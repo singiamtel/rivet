@@ -30,7 +30,7 @@ stages:
     # - export CPPFLAGS="$CPPFLAGS -DNDEBUG"
     #- export PATH=$INSTALL_PREFIX/bin:$PATH
     ## Build YODA
-    - git clone --depth 1 --branch operator_faff https://gitlab.com/hepcedar/yoda.git yoda/
+    - git clone --depth 1 --branch release-2-0-x https://gitlab.com/hepcedar/yoda.git yoda/
     - cd yoda/
     - autoreconf -i
     - ./configure --prefix=$INSTALL_PREFIX
