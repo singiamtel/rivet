@@ -251,7 +251,7 @@ namespace Rivet {
       }
 
       // Jet multiplicity bin
-      _d["N_j_30"]->fill( edges["N_j_30"][ min(njets30, 3) ] );
+      _d["N_j_30"]->fill( edges["N_j_30"][ min((int)njets30, 3) ] );
       if (njets30central<1 || nlep10>0) {
         _d["catXS_nbjet"]->fill( edges["catXS_nbjet"][0] );
       }

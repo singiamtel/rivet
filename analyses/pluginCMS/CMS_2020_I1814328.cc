@@ -103,7 +103,7 @@ namespace Rivet {
           }
 
           if (leptons[0].abspid() != leptons[1].abspid()) {
-            _h_WW_njets_norm ->fill(_edges[ min(jetsNj.size(), 2) ]);
+            _h_WW_njets_norm ->fill(_edges[ min((int)jetsNj.size(), 2) ]);
             _h["mll"]->fill(min(dilCand.mass()/GeV, 1499.999));
             _h["ptlmax"]->fill(min(ptlmax/GeV, 399.999));
             _h["ptlmin"]->fill(min(ptlmin/GeV, 149.999));

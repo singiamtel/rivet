@@ -285,7 +285,7 @@ namespace Rivet {
             fillHist("ttbar_boosted_rc_pt",     pttbar.pt()/GeV);
             fillHist("dphi_hadTop_lepTop",      dphi_hadTop_lepTop);
             fillHist("HTall",                   HT_all/GeV);
-            _njets->fill(map2string(min(addJets.size(),6)));
+            _njets->fill(map2string(min((int)addJets.size(),6)));
 
             if(addJets.size() > 0) {
                 const double dphi_leadaddjet_hadTop = deltaPhi( leading_addjet,HadronicTop ) / PI;

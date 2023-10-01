@@ -49,7 +49,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       if (_edges.empty()) {
-        for (string&& tag : {"pT_M_78", "pT_M_89", "pT_M_1011", "pT_M_1113", "pT_M_1318"}) {
+        for (string tag : vector<string>{"pT_M_78", "pT_M_89", "pT_M_1011", "pT_M_1113", "pT_M_1318"}) {
           _edges.insert({tag, _h[tag]->xEdges()});
         }
       }

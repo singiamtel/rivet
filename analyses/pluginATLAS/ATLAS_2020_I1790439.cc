@@ -421,7 +421,7 @@ namespace Rivet {
         }
 
       // Jet variables
-      discreteFill("n_jets", min(n_jets, 3));
+      discreteFill("n_jets", min((int)n_jets, 3));
 
       discreteFill("n_jets_incl", 0);
       if (n_jets >= 1)  discreteFill("n_jets_incl", 1);

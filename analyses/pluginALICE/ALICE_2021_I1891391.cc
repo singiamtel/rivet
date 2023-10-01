@@ -224,7 +224,7 @@ namespace Rivet {
 
       etabins.resize(39);
       etabins[0] = -1.013333 - 2.666650e-02;
-      for (int i = 1; i < etabins.size(); ++i) {
+      for (size_t i = 1; i < etabins.size(); ++i) {
         etabins[i] = etabins[i-1] + (2*2.666650e-02);
       }
 

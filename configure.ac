@@ -1,7 +1,7 @@
 ## Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([Rivet],[3.2.0a],[rivet@projects.hepforge.org],[Rivet])
+AC_INIT([Rivet],[3.2.0alpha],[rivet@projects.hepforge.org],[Rivet])
 
 ## Check and block installation into the src/build dir
 if test "$prefix" = "$PWD"; then

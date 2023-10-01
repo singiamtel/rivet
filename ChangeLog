@@ -1,3 +1,8 @@
+2023-10-01  Christian Gutschow  <chris.g@cern.ch>
+
+	* Tagging 3.2.0alpha version with YODA2 and HDF5 support.
+	Requires C++17 flag. More detailed write-up in progress.
+
 2023-09-21  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Port selected build improvements from Christian Holm Christensen

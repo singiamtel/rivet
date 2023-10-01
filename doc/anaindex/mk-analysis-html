@@ -141,18 +141,18 @@ for aname in sorted(all_analyses, key=anasort):
                     code = r.replace("doi:", "")
                     url = "https://dx.doi.org/" + code
                     page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("DOI:", htmlify(url), htmlify(code))
-                elif ref.startswith("ALICE-"):
-                    code = ref.replace("ALICE-", "")
+                elif r.startswith("ALICE-"):
+                    code = r.replace("ALICE-", "")
                     url = "https://alice-publications.web.cern.ch/node/" + code
-                    references[i] = '<a href="%s">%s</a>' % (url, ref)
+                    page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("Public page:", htmlify(url), htmlify(r))
                 elif r.startswith("ATLAS-"):
                     code = r.replace("ATLAS-", "")
                     url = "https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/" + code
-                    page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("Public page:", htmlify(url), htmlify(code))
+                    page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("Public page:", htmlify(url), htmlify(r))
                 elif r.startswith("CMS-"):
                     code = r.replace("CMS-", "")
                     url = "https://cms-results.web.cern.ch/cms-results/public-results/publications/" + code
-                    page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("Public page:", htmlify(url), htmlify(code))
+                    page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("Public page:", htmlify(url), htmlify(r))
                 else:
                     page += "  <li>%s</li>\n" % htmlify(r)
             page += "</ul>\n"
@@ -160,7 +160,7 @@ for aname in sorted(all_analyses, key=anasort):
             page += "<b>No references listed</b><br/>\n"
 
         ## Beams
-        if ana.requiredBeams():
+        if ana.requiredBeamIDs():
             def pid_to_str(pid):
                 if pid == 11:
                     return "e-"
@@ -175,13 +175,13 @@ for aname in sorted(all_analyses, key=anasort):
                 else:
                     return str(pid)
             beamstrs = []
-            for bp in ana.requiredBeams():
+            for bp in ana.requiredBeamIDs():
                 beamstrs.append(pid_to_str(bp[0]) + " " + pid_to_str(bp[1]))
             page += "<b>Beams:</b> %s<br/>\n" % ", ".join(beamstrs)
 
         page += "<b>Beam energies:</b> "
-        if ana.requiredEnergies():
-            page += "; ".join(["(%0.1f, %0.1f)" % (epair[0], epair[1]) for epair in ana.requiredEnergies()])
+        if ana.requiredBeamEnergies():
+            page += "; ".join(["(%0.1f, %0.1f)" % (epair[0], epair[1]) for epair in ana.requiredBeamEnergies()])
             page += "&nbsp;GeV"
         else:
             page += "ANY"

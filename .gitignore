@@ -15,6 +15,7 @@
 **.fifo
 **.hepmc
 **.egg-info*
+**.build
 config.guess
 config.status
 config.sub

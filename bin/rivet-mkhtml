@@ -30,6 +30,7 @@ import os, subprocess
 from rivet.plotting.make_plots import assemble_plotting_data
 from yoda.plotting import script_generator
 import multiprocessing
+import importlib
 
 rivet.util.set_process_name(os.path.basename(__file__))
 COMMAND = " ".join([os.path.basename(sys.argv[0])] + sys.argv[1:])
@@ -156,13 +157,57 @@ def which(program):
     return None
 
 
-def executeScript(script):
+def executeScript(script, shared_modules_list=[]):
+    """
+    execute a single Python script, with argument string arg
+    """
+
     if not os.path.isfile(script):
-        raise FileNotFoundError("Python script not found!")
+        raise FileNotFoundError(f"Python script {script} not found!")
     try:
-        subprocess.check_call([script], shell=True)
-    except:
-        print('Unexpected error when executing', script)
+        # load shared imports
+        mpl = importlib.import_module(shared_modules_list[0])
+        np  = importlib.import_module(shared_modules_list[1])
+        sys_lib = importlib.import_module(shared_modules_list[2])
+        os_lib  = importlib.import_module(shared_modules_list[3])
+
+        # pass imports to globals, including plot directory
+        script_globals = {'mpl': mpl, 'np': np, 'sys' : sys_lib,
+                          'os' : os_lib, '__file__': script}
+
+        # execute script
+        exec(open(script).read(), script_globals)
+
+    except Exception as ex:
+        print("Unexpected error when executing ", script)
+        print(ex)
+
+
+def generate_plots(pyScripts,numcores=1):
+
+    # manage matplotlib and numpy processes centrally,
+    # so that they are not imported for each individual script
+    manager = multiprocessing.Manager()
+    manager_module = manager.Namespace()
+    manager_module.shared_modules = ["matplotlib", "numpy", "sys", "os"]
+
+    # Call multiprocessing pool to generate plots
+    p = multiprocessing.Pool(processes=numcores)
+
+    try:
+        # show progress bar
+        import tqdm
+        jobs = [p.apply_async(func=executeScript,
+                              args=(pyScript, manager_module.shared_modules,)) for pyScript in pyScripts]
+        p.close()
+
+        for job in tqdm.tqdm(jobs):
+            job.get()
+
+    except ImportError:
+        for i, _ in enumerate(p.starmap(func=executeScript,
+                              iterable=[(pyScript, manager_module.shared_modules) for pyScript in pyScripts])):
+            sys.stderr.write(f'\rdone {100*i/len(pyScripts):.1f}%')
 
 
 def generateScripts(args):
@@ -460,16 +505,8 @@ if __name__ == '__main__':
     pyScripts = generateScripts(args)
 
     ## Execute generated Python scripts with a multiprocessing Pool
-    # TODO: re-add the progress printout from the plotting pool
     sys.stdout.write('Plotting...')
-    p = multiprocessing.Pool(processes=args.NUMTHREADS)
-    try:
-        import tqdm
-        for _ in tqdm.tqdm(p.imap_unordered(executeScript, pyScripts), total=len(pyScripts)):
-            pass
-    except ImportError:
-        for i, _ in enumerate(p.imap_unordered(executeScript, pyScripts), 1):
-            sys.stderr.write(f'\rdone {100*i/len(pyScripts):.1f}%')
+    generate_plots(pyScripts, numcores=args.NUMTHREADS)
 
     sys.stdout.write('\r')
     sys.stdout.write('Plotting... done!\n')

@@ -224,18 +224,16 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
 
         # set label for reference data in legend, checking for user-input on rivet-mkhtml first,
         # then the annotations in the plot file and finally falling back to a default value
+        reftitle = refhistos[plot_id].annotation('Title', 'Data')
         outputdict['histograms']['Data']['Title'] = refLabel if refLabel != None else \
-                                                refhistos[plot_id].title() if \
-                                                refhistos[plot_id].hasAnnotation('Title') else 'Data'
+                                                    reftitle if reftitle != None else 'Data'
         # decide if ratio panel is shown or not
         outputdict['plot features']['RatioPlot'] = showRatio if showRatio != None else \
-                                                refhistos[plot_id].annotation('RatioPlot') if \
-                                                refhistos[plot_id].hasAnnotation('RatioPlot') else True
+                                                refhistos[plot_id].annotation<bool>('RatioPlot', True)
 
         # set label on y-axis of the ratio panel
         outputdict['plot features']['RatioPlotYLabel'] = ratioPlotLabel if ratioPlotLabel != None else \
-                                                refhistos[plot_id].annotation('RatioPlotYLabel') if \
-                                                refhistos[plot_id].hasAnnotation('RatioPlotYLabel') else 'MC/Data'
+                                                refhistos[plot_id].annotation('RatioPlotYLabel', 'MC/Data')
 
     lhapdfCheck = True
     for filename, mchistos_in_file in mchistos.items():
