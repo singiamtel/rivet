@@ -165,6 +165,7 @@ namespace Rivet {
 
     using YAO = YODA::Counter;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -208,6 +209,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<DbnN, AxisT...>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -264,6 +266,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<1, AxisT>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -317,6 +320,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<2, AxisT1, AxisT2>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -370,6 +374,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<3, AxisT1, AxisT2, AxisT3>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -423,6 +428,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<2, AxisT>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -476,6 +482,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<3, AxisT1, AxisT2>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -529,6 +536,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedDbn<4, AxisT1, AxisT2, AxisT3>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -583,6 +591,7 @@ namespace Rivet {
 
     using YAO = YODA::Estimate0D;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -605,6 +614,7 @@ namespace Rivet {
 
     using YAO = YODA::BinnedEstimate<AxisT...>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
@@ -626,6 +636,7 @@ namespace Rivet {
 
     using YAO = YODA::ScatterND<N>;
     using Ptr = shared_ptr<FillCollector<YAO>>;
+    using YAO::operator =;
 
     FillCollector() : YAO() { }
 
