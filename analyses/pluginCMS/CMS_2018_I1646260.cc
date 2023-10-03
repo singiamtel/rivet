@@ -85,6 +85,8 @@ namespace Rivet {
                                "pTmiss/HT in [0.6, 1.4]", "b-tag veto", "Mtautau veto"};
       _cutflows.addCutflow("EW", cfnames+strings{"MT < 70 GeV"});
       _cutflows.addCutflow("St", cfnames);
+
+      book(_cutflows);
     }
 
 

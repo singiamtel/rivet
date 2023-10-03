@@ -26,7 +26,7 @@ namespace Rivet {
 
     /// @brief Fill the pre-cut counter
     void fillinit(double weight=1.) {
-      counts[0] += weight;
+      counts[0]->fill(weight);
       icurr = 1;
     }
 
@@ -37,7 +37,7 @@ namespace Rivet {
     bool fill(size_t icut, bool cutresult=true, double weight=1.) {
       if (icut == 0)
         throw RangeError("Cut number must be greater than 0");
-      if (cutresult) counts.at(icut) += weight;
+      if (cutresult) counts.at(icut)->fill(weight);
       icurr = icut + 1;
       return cutresult;
     }
@@ -61,8 +61,9 @@ namespace Rivet {
       if (icut+cutresults.size() > ncuts+1)
         throw RangeError("Number of filled cut results needs to match the Cutflow construction (in cutflow '"+name+"')");
       bool rtn = true;
-      for (size_t i = 0; i < cutresults.size(); ++i)
+      for (size_t i = 0; i < cutresults.size(); ++i){
         if (!fill(icut+i, cutresults[i], weight)) { rtn = false; break; }
+      }
       icurr = icut + cutresults.size();
       return rtn;
     }
@@ -123,12 +124,12 @@ namespace Rivet {
 
     /// Scale the cutflow weights by the given factor
     void scale(double factor) {
-      for (double& x : counts) x *= factor;
+      for (CounterPtr c : counts) c->scaleW(factor);
     }
 
     /// Scale the cutflow weights so that the weight count after cut @a icut is @a norm
     void normalize(double norm, size_t icut=0) {
-      scale(norm/counts.at(icut));
+      scale(norm/counts.at(icut)->sumW());
     }
 
 
@@ -136,7 +137,9 @@ namespace Rivet {
     string str() const {
       using namespace std;
       stringstream ss;
-      ss << fixed << std::setprecision(1) << counts.front();
+      ss << fixed << std::setprecision(1) << counts.front()->sumW();
+      const size_t weight0len = ss.str().length();
+      ss << fixed << std::setprecision(1) << counts.front()->effNumEntries();
       const size_t count0len = ss.str().length();
       ss.str("");
       ss << name << " cut-flow:\n";
@@ -144,14 +147,17 @@ namespace Rivet {
       for (const string& t : cuts)
         maxnamelen = max(t.length(), maxnamelen);
       ss << setw(maxnamelen+5) << "" << "   "
+         << setw(weight0len) << right << "Weight" << "   "
          << setw(count0len) << right << "Count" << "    "
          << setw(6) << right << "A_cumu" << "    "
          << setw(6) << right << "A_incr";
       for (size_t i = 0; i <= ncuts; ++i) {
-        const int pcttot = (counts.front() == 0) ? -1 : round(100*counts.at(i)/double(counts.front()));
-        const int pctinc = (i == 0 || counts.at(i-1) == 0) ? -1 : round(100*counts.at(i)/double(counts.at(i-1)));
+        const int pcttot = (counts.front()->sumW() == 0) ? -1 : round(100*counts.at(i)->sumW()/double(counts.front()->sumW()));
+        const int pctinc = (i == 0 || counts.at(i-1)->sumW() == 0) ? -1 : round(100*counts.at(i)->sumW()/double(counts.at(i-1)->sumW()));
         stringstream ss2;
-        ss2 << fixed << setprecision(1) << counts.at(i);
+        ss2 << fixed << setprecision(1) << counts.at(i)->sumW();
+        const string weightstr = ss2.str(); ss2.str("");
+        ss2 << fixed << setprecision(1) << counts.at(i)->effNumEntries();
         const string countstr = ss2.str(); ss2.str("");
         ss2 << fixed << setprecision(3) << pcttot << "%";
         const string pcttotstr = ss2.str(); ss2.str("");
@@ -159,6 +165,7 @@ namespace Rivet {
         const string pctincstr = ss2.str();
         ss << "\n"
            << setw(maxnamelen+5) << left << (i == 0 ? "" : "Pass "+cuts.at(i-1)) << "   "
+           << setw(weight0len) << right << weightstr << "    "
            << setw(count0len) << right << countstr << "    "
            << setw(6) << right << (pcttot < 0 ? "- " : pcttotstr) << "    "
            << setw(6) << right << (pctinc < 0 ? "- " : pctincstr);
@@ -174,7 +181,7 @@ namespace Rivet {
     string name;
     size_t ncuts;
     vector<string> cuts;
-    vector<double> counts;
+    vector<CounterPtr> counts;
     size_t icurr;
 
   };

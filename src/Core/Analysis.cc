@@ -324,7 +324,20 @@ namespace Rivet {
     return book(est, axisCode);
   }
 
+  Cutflow& Analysis::book(Cutflow & cf){
+    book(cf.counts[0], cf.name+"-preInit");
+    for (size_t i = 1; i < cf.ncuts + 1; ++i){
+      book(cf.counts[i], cf.name+"-"+cf.cuts[i-1]);
+    }
+    return cf;
+  }
 
+  Cutflows& Analysis::book(Cutflows & cfs){
+    for (Cutflow& cf : cfs.cfs){
+      book(cf);
+    }
+    return cfs;
+  }
 
   /////////////////////
 

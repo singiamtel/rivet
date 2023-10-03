@@ -18,6 +18,7 @@
 #include "Rivet/Tools/RivetPaths.hh"
 #include "Rivet/Tools/RivetYODA.hh"
 #include "Rivet/Tools/Percentile.hh"
+#include "Rivet/Tools/Cutflow.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
 #include <tuple>
 
@@ -937,6 +938,16 @@ namespace Rivet {
       (void) iW; // suppress unused variable warning
     }
 
+    /// @defgroup Cutflow booking
+    /// @{
+
+    /// Book all the counterPtr's in a cutflow object
+    Cutflow& book(Cutflow & cf);
+
+    /// Mass-book a Cutflows object
+    Cutflows& book(Cutflows & cfs);
+
+    /// @}
 
   public:
 

@@ -75,7 +75,7 @@ namespace Rivet {
             "Nmuon=0", "Nmuisotrk=0", "Nelec=0", "Nelisotrk=0", "Nhadisotrk=0",
             "dPhi_miss,j1>0.5", "dPhi_miss,j2>0.5", "dPhi_miss,j3>0.3", "dPhi_miss,j4>0.3"
             });
-
+      book(_flow);
     }
 
 

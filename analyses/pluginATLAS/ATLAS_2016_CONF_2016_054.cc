@@ -7,7 +7,6 @@
 #include "Rivet/Projections/SmearedParticles.hh"
 #include "Rivet/Projections/SmearedJets.hh"
 #include "Rivet/Projections/SmearedMET.hh"
-#include "Rivet/Tools/Cutflow.hh"
 
 namespace Rivet {
 
