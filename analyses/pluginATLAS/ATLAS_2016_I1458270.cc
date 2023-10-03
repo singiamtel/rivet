@@ -83,7 +83,8 @@ namespace Rivet {
       _flows.addCutflow("5j",  cutsXj);
       _flows.addCutflow("6jm", cutsXj);
       _flows.addCutflow("6jt", cutsXj);
-
+      
+      book(_flows);
     }
 
     /// Perform the per-event analysis

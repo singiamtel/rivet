@@ -37,6 +37,7 @@ namespace Rivet {
       _flows.addCutflow("CutFlow2",
                         {"NJet >= 4 ", "Delta12 < 1.4", "NJet >= 5 ", "M SumJ > 0.8 ",
                             "NbJet > 0", "M SumJ > 0.8  & NbJet > 0"});
+      book(_flows);
     }
 
 

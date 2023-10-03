@@ -45,53 +45,58 @@ namespace Rivet {
       const strings cfnames1 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "Fraction 1 > 0.8", "Fraction 2 < 0.05",
                                 "Delta Phi in [0.3, 2.9]", "H_PP_4,1 > 800 GeV"};
-      _cutflow2l[0].addCutflow("ATLAS_2018_I1676551 SR EW", cfnames1);
+      _cutflow2l[0].addCutflow("ATLAS_2018_I1676551 SR EW 2l-high", cfnames1);
 
       // Cutflow Setup for 2l-Int
       const strings cfnames2 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "Fraction 1 > 0.8", "Fraction 2 < 0.05",
                                 "Delta Phi in [0.3, 2.6]", "H_PP_4,1 > 600 GeV"};
-      _cutflow2l[1].addCutflow("ATLAS_2018_I1676551 SR EW", cfnames2);
+      _cutflow2l[1].addCutflow("ATLAS_2018_I1676551 SR EW 2l-int", cfnames2);
 
       // Cutflow Setup for 2l-Low
       const strings cfnames3 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "Fraction 1 in [0.35, 0.6]", "Fraction 2 < 0.05",
                                 "Min Delta Phi > 2.4", "H_PP_4,1 > 400 GeV"};
-      _cutflow2l[2].addCutflow("ATLAS_2018_I1676551 SR EW", cfnames3);
+      _cutflow2l[2].addCutflow("ATLAS_2018_I1676551 SR EW 2l-low", cfnames3);
 
       // Cutflow Setup for 2l-ISR
       const strings cfnames4 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "m_Z in [80, 100] GeV", "m_J in [50, 110] GeV",
                                 "Delta Phi > 2.8", "R_ISR in [0.4, 0.75]", "p_CM_T_ISR > 180 GeV",
                                 "p_CM_T_I > 100 GeV", "p_CM_T < 30 GeV"};
-      _cutflow2lISR.addCutflow("ATLAS_2018_I1676551 SR EW", cfnames4);
+      _cutflow2lISR.addCutflow("ATLAS_2018_I1676551 SR EW 2l-ISR" , cfnames4);
 
       // Cutflow Setup for 3l-High
       const strings cfnames5 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75,105] GeV", "m_W_T > 150 GeV",
                                 "Fraction 1 > 0.75", "Fraction 2 < 0.8",
                                 "H_PP_31 > 500 GeV", "Fraction 3 < 0.2"};
-      _cutflow3l[0].addCutflow("ATLAS_2018_I1676551 SR EW", cfnames5);
+      _cutflow3l[0].addCutflow("ATLAS_2018_I1676551 SR EW 3l-high", cfnames5);
 
       // Cutflow Setup for 3l-Int
       const strings cfnames6 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75,105] GeV", "m_W_T > 130 GeV",
                                 "Fraction 1 > 0.8", "Fraction 2 < 0.75",
                                 "H_PP_31 > 450 GeV", "Fraction 3 < 0.15"};
-      _cutflow3l[1].addCutflow("ATLAS_2018_I1676551 SR EW", cfnames6);
+      _cutflow3l[1].addCutflow("ATLAS_2018_I1676551 SR EW 3l-int", cfnames6);
 
       // Cutflow Setup for 3l-Low
       const strings cfnames7 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75,105] GeV", "m_W_T > 100 GeV",
                                 "Fraction 1 > 0.9", "H_PP_31 > 250 GeV", "Fraction 2 < 0.05"};
-      _cutflow3l[2].addCutflow("ATLAS_2018_I1676551 SR EW", cfnames7);
+      _cutflow3l[2].addCutflow("ATLAS_2018_I1676551 SR EW 3l-low", cfnames7);
 
       // Cutflow Setup for 3l-ISR
       const strings cfnames8 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75, 105] GeV", "m_W_T > 100 GeV",
                                 "Delta Phi > 2.0", "R_ISR in [0.55, 1.0]", "p_CM_T_ISR > 100 GeV",
                                 "p_CM_T_I > 80 GeV", "p_CM_T < 25 GeV"};
-      _cutflow3lISR.addCutflow("ATLAS_2018_I1676551 SR EW", cfnames8);
+      _cutflow3lISR.addCutflow("ATLAS_2018_I1676551 SR EW 3l-ISR", cfnames8);
+
+      for (Cutflows & cfs : _cutflow2l){book(cfs);}
+      for (Cutflows & cfs : _cutflow3l){book(cfs);}
+      book(_cutflow2lISR);
+      book(_cutflow3lISR);
     }
 
 

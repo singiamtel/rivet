@@ -36,6 +36,7 @@ namespace Rivet {
       _cutflows.addCutflow("JetLep", {"Jets", "Nlep", "pTlep1", "yLep1"});
       _cutflows.addCutflow("DiBjet", {"Jets", "0Lep", "2Jet", "Nbjets", });
 
+      book(_cutflows);
     }
 
 

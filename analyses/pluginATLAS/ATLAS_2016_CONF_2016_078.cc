@@ -54,7 +54,7 @@ namespace Rivet {
       book(_h_2j_1200,"2j-1200");
       book(_h_2j_1600,"2j-1600");
       book(_h_2j_2000,"2j-2000");
-      book(_h_3j_1200,"2j-2000");
+      book(_h_3j_1200,"3j-1200");
       book(_h_4j_1000,"4j-1000");
       book(_h_4j_1400,"4j-1400");
       book(_h_4j_1800,"4j-1800");
@@ -82,6 +82,7 @@ namespace Rivet {
       _flows.addCutflow("6j-1800", cuts456j);
       _flows.addCutflow("6j-2200", cuts456j);
 
+      book(_flows);
     }
 
 
