@@ -1814,6 +1814,17 @@ namespace Rivet {
 /// Preprocessor define to prettify the awkward constructor with name string argument
 #define RIVET_DEFAULT_ANALYSIS_CTOR(clsname) clsname() : Analysis(# clsname) {}
 
+/// @def RIVET_REGISTER_TYPE
+/// Preprocessor define to prettify on-the-fly type registration
+#define RIVET_REGISTER_TYPE(...) handler().registerType<__VA_ARGS__>()
+
+/// @def RIVET_REGISTER_BINNED_SET
+/// Preprocessor define to prettify on-the-fly type registration
+#define RIVET_REGISTER_BINNED_SET(...) { \
+    RIVET_REGISTER_TYPE(YODA::BinnedHisto<__VA_ARGS__>); \
+    RIVET_REGISTER_TYPE(YODA::BinnedProfile<__VA_ARGS__>); \
+    RIVET_REGISTER_TYPE(YODA::BinnedEstimate<__VA_ARGS__>); }
+
 /// @}
 
 
