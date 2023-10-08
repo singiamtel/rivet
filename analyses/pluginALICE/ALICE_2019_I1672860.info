@@ -1,0 +1,44 @@
+Name: ALICE_2019_I1672860
+Year: 2019
+Summary: Rho meson production in pp and Pb-Pb at 2.76 TeV
+Experiment: ALICE
+Collider: LHC
+InspireID: 1672860
+Status: VALIDATED
+Authors:
+ - Enrico Fragiacomo <enrico.fragiacomo@ts.infn.it>
+References:
+ - 'Phys. Rev. C 99, 064901'
+ - 'DOI:10.1103/PhysRevC.99.064901'
+ - 'arXiv:1805.04365'
+ - 'ALICE-3181'
+BibKey: ALICE:2018qdv
+BibTex: '@article{ALICE:2018qdv,
+    author = "Acharya, Shreyasi and others",
+    collaboration = "ALICE",
+    title = "{Production of the $\rho$(770)${^{0}}$ meson in pp and Pb-Pb collisions at $\sqrt{s_{\rm NN}}$ = 2.76 TeV}",
+    eprint = "1805.04365",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CERN-EP-2018-106",
+    doi = "10.1103/PhysRevC.99.064901",
+    journal = "Phys. Rev. C",
+    volume = "99",
+    number = "6",
+    pages = "064901",
+    year = "2019"
+}'
+Beams: [ [P,P], [PB,PB] ]
+Energies: [ 2760, 574080 ]
+Luminosity_fb: [[1.1e-6],[4.4e-9]]
+Reentrant: true
+Description:
+  'The production of the $\rho(770)0$ meson has been measured at midrapidity ($|y|<0.5$) in pp and centrality differential
+  Pb-Pb collisions at $\sqrt{s_\text{NN}}= 2.76$ TeV with the ALICE detector at the Large Hadron Collider. The particles have
+  been reconstructed in the $\rho(770)0\to\pi^{++}\pi^{-}$ decay channel in the transverse-momentum ($p_\text{T}$) range 0.511 GeV/c.
+  A centrality-dependent suppression of the ratio of the integrated yields $2\rho(770)0/(\pi^{++}\pi^{-})$ is observed. The ratio
+  decreases by $\sim40\%$ from pp to central Pb-Pb collisions. A study of the $p_\mathrm{T}$-differential $2\rho(770)0/(\pi^{++}\pi^{-})$
+  ratio reveals that the suppression occurs at low transverse momenta, $p_\mathrm{T}<2$ GeV/c. At higher momentum, particle ratios
+  measured in heavy-ion and pp collisions are consistent. The observed suppression is very similar to that previously measured for
+  the $K^\ast(892)0/K$ ratio and is consistent with EPOS3 predictions that may imply that rescattering in the hadronic phase is a
+  dominant mechanism for the observed suppression.'
