@@ -1,0 +1,52 @@
+Name: ATLAS_2022_I2614196
+Year: 2020
+Summary: Zy+jets at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2614196
+Status: VALIDATED
+Authors:
+ - Lorenzo Rossini <lorenzo.rossini@cern.ch>
+ - Christian Gutschow <chris.g@cern.ch>
+References:
+ - arXiv:2212.07184 [hep-ex]
+ - ATLAS-STDM-2020-14
+Keywords:
+ - Z
+ - photon
+ - diboson
+ - jets
+RunInfo:
+  pp -> Zy + jets at 13 TeV
+Luminosity_fb: 139
+Beams: [p+, p+]
+Energies: [13000]
+PtCuts: [300]
+Description:
+'Differential cross-section measurements of $Z\gamma$ production in association with hadronic jets are presented,
+using the full 139 fb${}^{-1}$ dataset of $\sqrt{s}$=13 TeV proton-proton collisions collected by the ATLAS detector
+during Run 2 of the LHC. Distributions are measured using events in which the $Z$ boson decays leptonically and the
+photon is usually radiated from an initial-state quark. Measurements are made in both one and two observables,
+including those sensitive to the hard scattering in the event and others which probe additional soft and collinear
+radiation. Different Standard Model predictions, from both parton-shower Monte Carlo simulation and fixed-order QCD
+calculations, are compared with the measurements. In general, good agreement is observed between data and predictions
+from MATRIX and MiNNLOPS, as well as next-to-leading-order predictions from MadGraph5_aMC@NLO and Sherpa.'
+BibKey: ATLAS:2022wnf
+BibTeX: '@article{ATLAS:2022wnf,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Measurements of $Z\gamma+$jets differential cross sections in $pp$ collisions at $\sqrt{s}=13$ TeV with the ATLAS detector}",
+    eprint = "2212.07184",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2022-240",
+    doi = "10.1007/JHEP07(2023)072",
+    journal = "JHEP",
+    volume = "07",
+    pages = "072",
+    year = "2023"
+}'
+
+ReleaseTests:
+ - $A pp-13000-eegamma
+
