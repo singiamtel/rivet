@@ -1,0 +1,46 @@
+Name: LHCB_2021_I1889335
+Year: 2021
+Summary: Measurement of $pp$ inelastic cross-section at 13 TeV using prompt, long-lived particles in the LHCb fiducial phase-space
+Experiment: LHCB
+Collider: LHC
+InspireID: 1889335
+Status: VALIDATED
+Authors:
+ - Lars Kolk <Lars.Kolk@tu-dortmund.de>
+References:
+ - JHEP 01 (2022) 166
+ - DOI:10.1007/JHEP01(2022)166
+ - arXiv:2107.10090
+ - LHCb-PAPER-2021-010
+ - CERN-EP-2021-110
+RunInfo: Proton-proton interactions at 13 TeV centre-of-mass energy. LHCb minimum bias, inelastic events.
+NeedCrossSection: yes
+NumEvents: 100000
+Beams: [p+, p+]
+Energies: [13000]
+Luminosity_fb: 5400000
+Description:
+  'The differential cross-section of prompt inclusive production of long-lived charged particles in proton-proton collisions 
+  is measured using a data sample recorded by the LHCb experiment at a centre-of-mass energy of $\sqrt{s} = 13$ TeV. The data sample,
+  collected with an unbiased trigger, corresponds to an integrated luminosity of 5.4 nb$^{-1}$. The differential cross-section 
+  is measured as a function of transverse momentum and pseudorapidity in the ranges $p_T \in [80, 10000)$ MeV$/c$ and 
+  $\eta \in [2.0, 4.8)$ and is determined separately for positively and negatively charged particles.'
+Keywords: ['pp collisions','prompt, long-lived charged particles','inelastic scattering','LHCb','CERN LHC','total cross-section','13000 GeV c.m.s.']
+BibKey: LHCb:2021abm
+BibTeX: '@article{LHCb:2021abm,
+  author = "Aaij, Roel and others",
+  collaboration = "LHCb",
+  title = "{Measurement of prompt charged-particle production in pp collisions at $ \sqrt{\mathrm{s}} $ = 13 TeV}",
+  eprint = "2107.10090",
+  archivePrefix = "arXiv",
+  primaryClass = "hep-ex",
+  reportNumber = "LHCb-PAPER-2021-010, CERN-EP-2021-110",
+  doi = "10.1007/JHEP01(2022)166",
+  journal = "JHEP",
+  volume = "01",
+  pages = "166",
+  year = "2022"
+}'
+ReleaseTests:
+ - $A LHC-13-MinBias
+
