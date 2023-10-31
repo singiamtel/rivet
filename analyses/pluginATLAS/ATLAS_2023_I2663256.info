@@ -1,0 +1,43 @@
+Name: ATLAS_2023_I2663256
+Year: 2023
+Summary: Semivisible jets t-channel search
+Experiment: ATLAS
+Collider: ATLAS
+InspireID: 2663256
+Status: VALIDATED
+Authors:
+ - Deepak Kar <deepak.kar@cern.ch>
+References:
+- 'arXiv:2305.18037'
+- accepted in PLB
+- ATLAS-EXOT-2022-37
+RunInfo: BSM Search
+Beams: [p+, p+]
+Energies: [13000]
+Luminosity_fb: 139
+Description:
+    'Semi-visible jets, with a significant contribution to the missing transverse momentum of the event, 
+    can arise in strongly interacting dark sectors. This results in an event topology where one of the 
+    jets can be aligned with the direction of the missing transverse momentum. 
+    A search for semi-visible jets produced via a t-channel mediator exchange is presented. 
+    The analysis uses pp collisions with an integrated luminosity of 139 fb$^{−1}$ and a centre-of-mass energy of 13 TeV, 
+    collected with the ATLAS detector during Run 2 of the LHC. No excess over Standard Model predictions is observed. 
+    Assuming a coupling strength of unity between the mediator, a Standard Model quark and a dark quark, 
+    mediator masses up to 2.7 TeV can be excluded at the 95\% confidence level. Upper limits on the coupling strength are also derived.'
+Keywords:
+ - Semivisible jets
+ - DarkQCD
+BibKey: ATLAS:2023swa
+BibTeX: 
+  '@article{ATLAS:2020wny,
+    archivePrefix = "arXiv",
+    collaboration = "ATLAS",
+    eprint = "2305.18037",
+    month = "5",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2023-084",
+    title = "{Search for non-resonant production of semi-visible jets using Run 2 data in ATLAS",
+    year = "2023"
+  }'
+
+
