@@ -130,6 +130,14 @@ namespace Rivet {
       setCrossSection({xsec, xsecerr}, isUserSupplied);
     }
 
+    /// Update the internal cross-section average when running over multiple files
+    ///
+    /// @note This method should only be called when switching HepMC file mid-run.
+    void updateCrossSection();
+
+    /// Toggle to signal a change in HepMC input file
+    void notifyEndOfFile() { _isEndOfFile = true; }
+
     /// Get the nominal cross-section
     double nominalCrossSection() const;
 
@@ -543,6 +551,15 @@ namespace Rivet {
 
     /// Cross-section known to AH
     Estimate0DPtr _xs;
+
+    /// Cross-section averages for runs over multiple files
+    vector<Estimate0D> _xsAvg;
+
+    /// Total number of entries of the previous HepMC file
+    double _numEntriesAggregate;
+
+    /// Toggle for multi-file runs
+    bool _isEndOfFile;
 
     /// Nominal cross-section
     std::pair<double,double> _userxs;

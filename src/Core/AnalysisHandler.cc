@@ -37,6 +37,8 @@ namespace Rivet {
 
   AnalysisHandler::AnalysisHandler(const string& runname)
     : _runname(runname),
+      _numEntriesAggregate(0),
+      _isEndOfFile(false),
       _userxs{NAN, NAN},
       _initialised(false),
       _checkBeams(true),
@@ -391,6 +393,10 @@ namespace Rivet {
       }
     }
 
+    // If the HepMC file has changed, keep track of the best cross-section estimate from the
+    // previous file before updating the cross-section using the information from the new file
+    if (_isEndOfFile)  updateCrossSection();
+
     // Set the cross section based on what is reported by this event
     if (ge.cross_section())  setCrossSection(event.crossSections());
 
@@ -573,9 +579,20 @@ namespace Rivet {
         }
         continue;
       }
-      for (size_t iW = 0; iW < numWeights(); iW++) {
+      for (size_t iW = 0; iW < numWeights(); ++iW) {
         _eventCounter.get()->setActiveFinalWeightIdx(iW);
         _xs.get()->setActiveFinalWeightIdx(iW);
+        const double effN = _eventCounter->effNumEntries();
+        const double sf = effN - _numEntriesAggregate;
+        double oldXS = 0., oldXSerrSq = 0.;
+        if (iW < _xsAvg.size()) {
+          oldXS = _xsAvg[iW].val();
+          oldXSerrSq = _xsAvg[iW].errAvg(); // already squared
+        }
+        double xs = oldXS + sf * _xs->val();
+        double xserr = sqrt(oldXSerrSq + sqr(sf*_xs->errAvg()));
+        xs /= effN;  xserr /= effN;
+        _xs->reset();  _xs->set(xs, xserr);
         for (const auto& ao : a->analysisObjects()) {
           ao.get()->setActiveFinalWeightIdx(iW);
         }
@@ -800,9 +817,8 @@ namespace Rivet {
     }
 
     MSG_DEBUG("Finalize cross-section scaling ...");
-    vector<double> scales(allxsecs.size(), 1.0);
     for (const auto& item : allxsecs) {
-      const string wname = item.first;
+      const string& wname = item.first;
       double xs = item.second.first;
       double xserr = sqrt(item.second.second);
       auto ec_it = allaos.find("/RAW/_EVTCOUNT" + wname);
@@ -998,6 +1014,7 @@ namespace Rivet {
     } // analyses
     _stage = Stage::OTHER;
     _initialised = true;
+    _isEndOfFile = true; // in case this is a re-entrant run
 
     // Collect global weights and cross sections and fix scaling for all files
     MSG_DEBUG("Getting event counter and cross-section from "
@@ -1407,6 +1424,41 @@ namespace Rivet {
     return xserr;
   }
 
+
+  void AnalysisHandler::updateCrossSection() {
+
+    pushToPersistent();
+
+    // update the weighted cross-section estimate with the cross-section
+    // information from the previous HepMC file (this method gets called
+    // before the first event from the new file gets processed).
+    _eventCounter.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
+    const double effN = _eventCounter->effNumEntries();
+    const double wgt = effN - _numEntriesAggregate;
+    _numEntriesAggregate = effN;
+    _eventCounter.get()->unsetActiveWeight();
+
+
+    // add cross-section contribution from last file
+    if (_xsAvg.empty())  _xsAvg.resize(numWeights());
+    for (size_t iW = 0; iW < numWeights(); ++iW) {
+      _xs.get()->setActiveWeightIdx(iW);
+      double oldXS = 0., oldXSerrSq = 0.;
+      if (!isnan(_xsAvg[iW].val())) {
+        // update previous values
+        oldXS = _xsAvg[iW].val();
+        oldXSerrSq = _xsAvg[iW].errAvg(); // already squared
+      }
+      const double xs = oldXS + wgt * _xs->val();
+      const double xserr = oldXSerrSq + sqr(wgt * _xs->errAvg());
+      _xs.get()->unsetActiveWeight();
+      _xsAvg[iW].reset();
+      _xsAvg[iW].set(xs, xserr);
+    }
+    // Information processed - we're good to continue
+    // processing the current event file
+    _isEndOfFile = false;
+  }
 
   AnalysisHandler& AnalysisHandler::addAnalysis(Analysis* analysis) {
     analysis->_analysishandler = this;

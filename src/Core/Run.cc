@@ -52,6 +52,7 @@ namespace Rivet {
     _evt.reset(new GenEvent());
     if (!HepMCUtils::readEvent(_hepmcReader, _evt)) {
       MSG_DEBUG("Read failed. End of file?");
+      _ah.notifyEndOfFile();
       return false;
     }
     // increment counter when event number changes
