@@ -405,6 +405,10 @@ def generateScripts(args):
                         code = ref.replace("CMS-", "")
                         url = "https://cms-results.web.cern.ch/cms-results/public-results/publications/" + code
                         references[i] = '<a href="%s">%s</a>' % (url, ref)
+                    elif ref.startswith("LHCb-", ""):
+                        code = ref.replace("PAPER-", "")
+                        url = "https://lhcbproject.web.cern.ch/Publications/LHCbProjectPublic/%s.html" % ref
+                        references[i] = '<a href="%s">%s</a>' % (url, code)
                 except:
                     pass
             reflist += references
