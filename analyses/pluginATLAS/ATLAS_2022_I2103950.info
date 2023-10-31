@@ -1,0 +1,44 @@
+Name: ATLAS_2022_I2103950
+Year: 2022
+Summary: WW production in pp at 13 TeV in electroweak SUSY inspired phase space
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2103950
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Sarah Louise Williams <sarah.louise.williams@cern.ch>
+References:
+ - arXiv:2206.15231 [hep-ex]
+ - Eur.Phys.J.C 83 (2023) 718, 2023
+ - ATLAS-SUSY-2021-06
+Keywords:
+  - WW
+RunInfo: WW + 0-jet production
+Beams: [p+, p+]
+Energies: [13000]
+Luminosity_fb: 139.0
+Description: |
+   This paper presents a measurement of fiducial and differential cross-sections for $W^+W^-$ production in proton-proton
+   collisions at $\sqrt{s}=13$ TeV with the ATLAS experiment at the Large Hadron Collider using a dataset corresponding to an
+   integrated luminosity of 139 fb${}^{-1}$. Events with exactly one electron, one muon and no hadronic jets are studied. The
+   fiducial region in which the measurements are performed is inspired by searches for the electroweak production of supersymmetric
+   charginos decaying to two-lepton final states. The selected events have moderate values of missing transverse momentum and the
+   'stransverse mass' variable $m_\mathrm{T2}$, which is widely used in searches for supersymmetry at the LHC. The ranges of these
+   variables are chosen so that the acceptance is enhanced for direct $W^+W^-$ production and suppressed for production via top quarks,
+   which is treated as a background. The fiducial cross-section and particle-level differential cross-sections for six variables are
+   measured and compared with two theoretical SM predictions from perturbative QCD calculations.
+BibKey: ATLAS:2022jat
+BibTeX: '@article{ATLAS:2022jat,
+    collaboration = "ATLAS",
+    title = "{Measurements of $W^{+}W^{-}$ production in decay topologies inspired by searches for electroweak supersymmetry}",
+    eprint = "2206.15231",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2022-087",
+    month = "6",
+    year = "2022"
+}'
+ReleaseTests:
+ - $A LHC-13-WW-ll
+
