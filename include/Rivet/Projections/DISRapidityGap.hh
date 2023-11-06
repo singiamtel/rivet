@@ -10,8 +10,10 @@
 namespace Rivet {
 
 
-  /// @brief Get the incoming and outgoing hadron in a diffractive ep event
+  /// @brief Get the incoming and outgoing hadron in a diffractive ep
+  /// event.
   class DISRapidityGap : public Projection {
+
   public:
 
     /// Type of DIS boost to apply
@@ -27,12 +29,6 @@ namespace Rivet {
 
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
-
-    /// @todo Document
-    const double M2X() const { return _M2X; }
-
-    /// @todo Document
-    const double M2Y() const { return _M2Y; }
 
     /// @todo Document
     double t() const { return _t; }
@@ -133,7 +129,7 @@ namespace Rivet {
 
   };
 
-
 }
+
 
 #endif
