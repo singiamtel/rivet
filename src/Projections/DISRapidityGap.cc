@@ -21,7 +21,7 @@ namespace Rivet {
   void DISRapidityGap::clear() {
     _M2X = _M2Y = _t = _gap = 0.;
     _gapUpp = _gapLow = -DBL_MAX;
-    _ePpzX_HCM = _eMpzX_HCM =_ePpzX_LAB =_eMpzX_LAB = _ePpzX_XCM = _eMpzX_XCM = 0.;
+    _ePpzX_HCM = _eMpzX_HCM =_ePpzX_LAB = _eMpzX_LAB = _ePpzX_XCM = _eMpzX_XCM = 0.;
     _momX_HCM.setPE(0., 0., 0., 0.);
     _momY_HCM.setPE(0., 0., 0., 0.);
     _momX_XCM.setPE(0., 0., 0., 0.);
