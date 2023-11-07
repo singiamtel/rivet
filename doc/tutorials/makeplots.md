@@ -126,9 +126,9 @@ To specify major ticks at arbitrary positions and/or with arbitrary labels. `<li
 To specify minor ticks at arbitrary positions. `<list>` is a tab separated list of format `value1 <tab> value2 <tab> value3 ...`.
 
 ```
-    PlotXTickLabels=<0|1>
-    RatioPlotTickLabels=<0|1>
-
+    PlotTickLabels=<0|1> # toggle both X- and Y-axis in the main panel
+    PlotXTickLabels=<0|1> # toggle only X-axis in the main panel
+    RatioPlotTickLabels=<0|1> # toggle both X- and Y-axis in the ratio panel
 ```
 Disable/enable plotting of the tick labels in the plot and ratio plot (useful if multiple plots are to be combined manually later).
 
