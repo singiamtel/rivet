@@ -12,7 +12,7 @@
 namespace Rivet {
 
 
-  /// CMS 2 soft lepton + MET in 36/fb of 13 TeV pp
+  /// CMS 2 soft-lepton + MET in 36/fb of 13 TeV pp
   class CMS_2018_I1646260 : public Analysis {
   public:
 
@@ -58,10 +58,10 @@ namespace Rivet {
         }, MUON_SMEAR_CMS_RUN2);
       declare(recomuons, "Muons");
 
-      TauFinder taus(TauFinder::DecayMode::LEPTONIC);
+      TauFinder taus(TauDecay::LEPTONIC);
       declare(taus, "Taus");
 
-      FastJets jets4(IndirectFinalState(Cuts::abseta < 4.9), FastJets::ANTIKT, 0.4);
+      FastJets jets4(IndirectFinalState(Cuts::abseta < 4.9), JetAlg::ANTIKT, 0.4);
       SmearedJets recojets4(jets4, JET_SMEAR_CMS_RUN2, JET_BTAG_EFFS(0.8, 0.1, 0.4));
       declare(recojets4, "Jets");
 

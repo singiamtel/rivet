@@ -5,7 +5,7 @@
 #include "Rivet/Jet.hh"
 #include "Rivet/Particle.hh"
 #include "Rivet/Projection.hh"
-#include "Rivet/Projections/JetAlg.hh"
+#include "Rivet/Projections/JetFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Tools/RivetFastJet.hh"
 
@@ -23,25 +23,14 @@
 
 namespace Rivet {
 
-
-  /// Project out jets found using the FastJet package jet algorithms.
-  class FastJets : public JetAlg {
+  
+  /// Find jets using jet algorithms via the FastJet package
+  class FastJets : public JetFinder {
   public:
 
-    using JetAlg::operator=;
+    using JetFinder::operator =;
 
-    /// Wrapper enum for selected FastJet jet algorithms.
-    /// @todo Move to JetAlg and alias here?
-    enum Algo { KT=0,
-                AKT=1, ANTIKT=1,
-                CA=2, CAM=2, CAMBRIDGE=2,
-                SISCONE, PXCONE,
-                ATLASCONE, CMSCONE,
-                CDFJETCLU, CDFMIDPOINT, D0ILCONE,
-                JADE, DURHAM, TRACKJET, GENKTEE ,
-                KTET, ANTIKTET };
-
-
+    
     /// @name Constructors etc.
     /// @{
 
@@ -50,10 +39,10 @@ namespace Rivet {
     /// @warning The AreaDefinition pointer must be heap-allocated: it will be stored/deleted via a shared_ptr.
     FastJets(const FinalState& fsp,
              const fastjet::JetDefinition& jdef,
-             JetAlg::Muons usemuons=JetAlg::Muons::ALL,
-             JetAlg::Invisibles useinvis=JetAlg::Invisibles::NONE,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr)
-      : JetAlg(fsp, usemuons, useinvis), _jdef(jdef), _adef(adef)
+      : JetFinder(fsp, usemuons, useinvis), _jdef(jdef), _adef(adef)
     {
       _initBase();
     }
@@ -64,8 +53,8 @@ namespace Rivet {
     FastJets(const FinalState& fsp,
              const fastjet::JetDefinition& jdef,
              fastjet::AreaDefinition* adef,
-             JetAlg::Muons usemuons=JetAlg::Muons::ALL,
-             JetAlg::Invisibles useinvis=JetAlg::Invisibles::NONE)
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE)
       : FastJets(fsp, jdef, usemuons, useinvis, adef)
     {    }
 
@@ -75,8 +64,8 @@ namespace Rivet {
     FastJets(const FinalState& fsp,
              fastjet::JetAlgorithm type,
              fastjet::RecombinationScheme recom, double rparameter,
-             JetAlg::Muons usemuons=JetAlg::Muons::ALL,
-             JetAlg::Invisibles useinvis=JetAlg::Invisibles::NONE,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr)
       : FastJets(fsp, fastjet::JetDefinition(type, rparameter, recom), usemuons, useinvis, adef)
     {    }
@@ -88,8 +77,8 @@ namespace Rivet {
              fastjet::JetAlgorithm type,
              fastjet::RecombinationScheme recom, double rparameter,
              fastjet::AreaDefinition* adef,
-             JetAlg::Muons usemuons=JetAlg::Muons::ALL,
-             JetAlg::Invisibles useinvis=JetAlg::Invisibles::NONE)
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE)
       : FastJets(fsp, type, recom, rparameter, usemuons, useinvis, adef)
     {    }
 
@@ -98,8 +87,8 @@ namespace Rivet {
     /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
     FastJets(const FinalState& fsp,
              fastjet::JetDefinition::Plugin* plugin,
-             JetAlg::Muons usemuons=JetAlg::Muons::ALL,
-             JetAlg::Invisibles useinvis=JetAlg::Invisibles::NONE,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr)
       : FastJets(fsp, fastjet::JetDefinition(plugin), usemuons, useinvis, adef)
     {
@@ -112,8 +101,8 @@ namespace Rivet {
     FastJets(const FinalState& fsp,
              fastjet::JetDefinition::Plugin* plugin,
              fastjet::AreaDefinition* adef,
-             JetAlg::Muons usemuons=JetAlg::Muons::ALL,
-             JetAlg::Invisibles useinvis=JetAlg::Invisibles::NONE)
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE)
       : FastJets(fsp, plugin, usemuons, useinvis, adef)
     {    }
 
@@ -125,30 +114,16 @@ namespace Rivet {
     ///
     /// @warning Provided area definition pointer must be heap-allocated; Rivet will store/delete via a shared_ptr
     FastJets(const FinalState& fsp,
-             Algo alg, double rparameter,
-             JetAlg::Muons usemuons=JetAlg::Muons::ALL,
-             JetAlg::Invisibles useinvis=JetAlg::Invisibles::NONE,
+             JetAlg alg, double rparameter,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr,
              double seed_threshold=1.0)
-      : JetAlg(fsp, usemuons, useinvis)
+      : JetFinder(fsp, usemuons, useinvis)
     {
       _initBase();
       _initJdef(alg, rparameter, seed_threshold);
     }
-
-
-    // /// Same thing as above, but without an FS (for when we want to pass the particles directly to the calc method)
-    // /// @todo Does this work properly, without internal HeavyQuarks etc.?
-    // FastJets(Algo alg, double rparameter, double seed_threshold=1.0) { _initJdef(alg, rparameter, seed_threshold); }
-    // /// Same thing as above, but without an FS (for when we want to pass the particles directly to the calc method)
-    // /// @todo Does this work properly, without internal HeavyQuarks etc.?
-    // FastJets(fastjet::JetAlgorithm type, fastjet::RecombinationScheme recom, double rparameter) { _initJdef(type, recom, rparameter); }
-    // /// Same thing as above, but without an FS (for when we want to pass the particles directly to the calc method)
-    // /// @todo Does this work properly, without internal HeavyQuarks etc.?
-    // FastJets(fastjet::JetDefinition::Plugin* plugin) : _jdef(plugin), _plugin(plugin) {
-    //   // _plugin.reset(plugin);
-    //   // _jdef = fastjet::JetDefinition(plugin);
-    // }
 
 
     /// Clone on the heap.
@@ -305,7 +280,7 @@ namespace Rivet {
 
     /// Shared utility functions to implement constructor behaviour
     void _initBase();
-    void _initJdef(Algo alg, double rparameter, double seed_threshold);
+    void _initJdef(JetAlg alg, double rparameter, double seed_threshold);
 
   protected:
 

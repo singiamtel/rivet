@@ -51,9 +51,12 @@ namespace Rivet {
   // Separate-FS version
   DressedLeptons::DressedLeptons(const FinalState& photons, const FinalState& bareleptons,
                                  double dRmax, const Cut& cut,
-                                 bool useDecayPhotons, bool useJetClustering)
+				 PhotonOrigin whichphotons, DressingType dressing)
     : FinalState(cut),
-      _dRmax(dRmax), _fromDecay(useDecayPhotons), _useJetClustering(useJetClustering) {
+      _dRmax(dRmax),
+      _fromDecay(whichphotons == PhotonOrigin::ALL),
+      _useJetClustering(dressing != DressingType::CONE)
+  {
     setName("DressedLeptons");
 
     // Find photons -- specialising to prompt photons if decay photons are to be vetoed
@@ -62,31 +65,29 @@ namespace Rivet {
       declare(photonfs, "Photons");
     } else {
       // Note: explicitly allow photons from direct muons and taus
-      declare(PromptFinalState(photonfs, true, true), "Photons");
+      declare(PromptFinalState(photonfs, TauDecaysAs::PROMPT, MuDecaysAs::PROMPT), "Photons");
     }
 
     // Find bare leptons
     IdentifiedFinalState leptonfs(bareleptons);
     leptonfs.acceptIdPairs({PID::ELECTRON, PID::MUON, PID::TAU}); //< hmm, no final-state taus, so is this useful?
     declare(leptonfs, "Leptons");
+    // declare(bareleptons, "Leptons");
 
     // Set up FJ clustering option
     if (_useJetClustering) {
       MergedFinalState mergedfs(photonfs, leptonfs);
-      FastJets leptonjets(mergedfs, FastJets::ANTIKT, dRmax);
+      FastJets leptonjets(mergedfs, JetAlg::ANTIKT, dRmax);
       declare(leptonjets, "LeptonJets");
     }
   }
 
 
   // Single-FS version
-  DressedLeptons::DressedLeptons(const FinalState& allfs,
-                                 double dRmax, const Cut& cut,
-                                 bool useDecayPhotons, bool useJetClustering)
-    : DressedLeptons(allfs, allfs, dRmax, cut, useDecayPhotons, useJetClustering)
+  DressedLeptons::DressedLeptons(const FinalState& allfs, double dRmax, const Cut& cut,
+				 PhotonOrigin whichphotons, DressingType dressing)
+    : DressedLeptons(allfs, allfs, dRmax, cut, whichphotons, dressing)
   {     }
-
-
 
 
   CmpState DressedLeptons::compare(const Projection& p) const {
@@ -111,12 +112,12 @@ namespace Rivet {
     _theParticles.clear();
 
     // Get bare leptons
-    const FinalState& signal = apply<FinalState>(e, "Leptons");
-    Particles bareleptons = signal.particles();
+    const Particles bareleptons = apply<ParticleFinder>(e, "Leptons").particles(); 
+    // .particles(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON || Cuts::abspid == PID::TAU);
     if (bareleptons.empty()) return;
 
     // Initialise DL collection with bare leptons
-    vector<Particle> allClusteredLeptons;
+    Particles allClusteredLeptons;
     allClusteredLeptons.reserve(bareleptons.size());
 
     if (_useJetClustering) {
@@ -129,7 +130,7 @@ namespace Rivet {
           allClusteredLeptons += dl;
         }
       } else {
-        const Jets& lepjets = apply<FastJets>(e, "LeptonJets").jets();
+        const Jets& lepjets = apply<JetFinder>(e, "LeptonJets").jets();
         for (const Jet& lepjet : lepjets) {
           const Particles leps = sortByPt(lepjet.particles(isChargedLepton));
           if (leps.empty()) continue;

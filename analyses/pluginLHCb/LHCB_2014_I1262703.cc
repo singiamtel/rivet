@@ -20,9 +20,9 @@ namespace Rivet {
 
       // Projections
       const Cut mycut = Cuts::eta >= 2.0 && Cuts::eta <= 4.5 && Cuts::pT > 20*GeV;
-      ZFinder zfinder(FinalState(), mycut, PID::MUON, 60*GeV, 120*GeV, 0., ZFinder::ClusterPhotons::NONE);
+      ZFinder zfinder(FinalState(), mycut, PID::MUON, 60*GeV, 120*GeV, 0., PhotonOrigin::NONE);
       declare(zfinder, "ZFinder");
-      FastJets jetpro(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.5);
+      FastJets jetpro(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5);
       declare(jetpro, "Jets");
 
       // Histograms

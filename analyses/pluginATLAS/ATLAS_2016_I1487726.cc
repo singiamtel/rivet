@@ -7,16 +7,14 @@
 namespace Rivet {
 
 
-class ATLAS_2016_I1487726 : public Analysis {
-
+    /// Collinear W emissions at 8 TeV
+    class ATLAS_2016_I1487726 : public Analysis {
     public:
 
     /// Constructor
-    /// @brief Collinear W emissions at 8 TeV
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2016_I1487726);
 
-    public:
-
+      
         /// @name Analysis methods
         /// @{
 
@@ -32,10 +30,10 @@ class ATLAS_2016_I1487726 : public Analysis {
             FinalState phs(Cuts::abspid == PID::PHOTON);
 
             Cut lep_fid = (Cuts::abseta < 2.4 && Cuts::pT >= 25*GeV);
-            DressedLeptons dlep(phs, _mode? elfs : mufs, 0.1, lep_fid, true);
+            DressedLeptons dlep(phs, _mode? elfs : mufs, 0.1, lep_fid, PhotonOrigin::ALL);
             declare(dlep, "DressedLeptons");
 
-            FastJets fj(FinalState(), FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+            FastJets fj(FinalState(), JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
             declare(fj, "AntiKt4Jets");
 
             book(h_mu_jet_dr,          2, 1, 1);

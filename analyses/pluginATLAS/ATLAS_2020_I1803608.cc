@@ -36,7 +36,7 @@ namespace Rivet {
       DressedLeptons dressed_muons(photons, muons, 0.1, cuts_mu);
       declare(dressed_muons, "DressedMuons");
 
-      FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "Jets");
 
       _doControl = bool(getOption("TYPE") != "EW_ONLY");

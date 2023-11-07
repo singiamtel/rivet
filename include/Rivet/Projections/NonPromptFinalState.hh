@@ -3,10 +3,11 @@
 #define RIVET_NonPromptFinalState_HH
 
 #include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/PromptFinalState.fhh"
 
 namespace Rivet {
 
-
+  
   /// @brief Find final state particles NOT directly connected to the hard process.
   ///
   /// See PromptFinalState for details.
@@ -17,14 +18,19 @@ namespace Rivet {
     /// @{
 
     // Constructor from a final state.
-    NonPromptFinalState(const FinalState& fsp, bool accepttaudecays=false, bool acceptmudecays=false);
+    NonPromptFinalState(const FinalState& fsp,
+			TauDecaysAs taudecays=TauDecaysAs::PROMPT,
+			MuDecaysAs mudecays=MuDecaysAs::PROMPT);
 
     /// Constructor from a Cut (and implicit general FS).
-    NonPromptFinalState(const Cut& c, bool accepttaudecays=false, bool acceptmudecays=false);
+    NonPromptFinalState(const Cut& c,
+			TauDecaysAs taudecays=TauDecaysAs::PROMPT,
+			MuDecaysAs mudecays=MuDecaysAs::PROMPT);
 
     // /// Constructor from a Cut and optional FinalState.
     // NonPromptFinalState(const Cut& c, const FinalState& fsp=FinalState(),
-    //                     bool accepttaudecays=false, bool acceptmudecays=false);
+    // 			TauDecaysAs taudecays=TauDecaysAs::PROMPT,
+    // 			MuDecaysAs mudecays=MuDecaysAs::PROMPT);
 
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(NonPromptFinalState);
@@ -36,9 +42,9 @@ namespace Rivet {
 
 
     /// Treat particles from decays of prompt muons as non-prompt?
-    void acceptMuonDecays(bool acc=true) { _acceptMuDecays = acc; }
+    void acceptMuonDecays(bool acc=true) { _mudecays = acc; }
     /// Treat particles from decays of prompt taus as non-prompt?
-    void acceptTauDecays(bool acc=true) { _acceptTauDecays = acc; }
+    void acceptTauDecays(bool acc=true) { _taudecays = acc; }
 
 
     /// Apply the projection on the supplied event.
@@ -50,7 +56,7 @@ namespace Rivet {
 
   protected:
 
-    bool _acceptMuDecays, _acceptTauDecays;
+    bool _mudecays, _taudecays;
 
   };
 

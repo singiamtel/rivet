@@ -9,6 +9,7 @@
 
 namespace Rivet {
 
+  
   /// @brief b-fragmentation at 13 TeV
   class ATLAS_2021_I1913061 : public Analysis {
 
@@ -25,17 +26,17 @@ namespace Rivet {
       //Jet building: anti-kT R = 0.4, including muons and neutrinos.
       FinalState photons(Cuts::abspid == PID::PHOTON);
 
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true);
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, true);
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true);
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, true);
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
 
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "JETS");
 
       //Charged B mesons
@@ -53,6 +54,7 @@ namespace Rivet {
       book(_p["ptRel"], 8,1,1);
     }
 
+    
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
@@ -193,6 +195,7 @@ namespace Rivet {
       }
     }
 
+    
     void finalize() {
       normalize(_h);
     }
@@ -205,7 +208,6 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
 
   };
-
 
 
   RIVET_DECLARE_PLUGIN(ATLAS_2021_I1913061);

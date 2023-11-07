@@ -24,7 +24,7 @@ namespace Rivet {
       // Set up projections
       const FinalState fs((Cuts::etaIn(-5.0, 5.0)));
       declare(fs, "FS");
-      FastJets fj(fs, FastJets::ANTIKT, 0.6);
+      FastJets fj(fs, JetAlg::ANTIKT, 0.6);
       fj.useInvisibles();
       declare(fj, "Jets");
 

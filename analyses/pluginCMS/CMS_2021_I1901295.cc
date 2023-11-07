@@ -7,11 +7,11 @@
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/HistoGroup.hh"
 
-/// @brief ttbar lepton+jets at 13 TeV
 namespace Rivet {
 
-  class CMS_2021_I1901295 : public Analysis {
 
+  /// @brief ttbar lepton+jets at 13 TeV
+  class CMS_2021_I1901295 : public Analysis {
   public:
 
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2021_I1901295);
@@ -35,11 +35,11 @@ namespace Rivet {
 
       DressedLeptons dressed_leptons(all_photons, prompt_leptons, 0.1,
                                      Cuts::abseta < 2.4 && Cuts::pT > 15. * GeV,
-                                     true);
+                                     PhotonOrigin::ALL);
       declare(dressed_leptons, "MyLeptons");
 
-      declare(FastJets(fs, FastJets::ANTIKT, 0.4), "JetsAK4");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.8), "JetsAK8");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "JetsAK4");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.8), "JetsAK8");
 
       book(_h["thadpt"], "d159-x01-y01");
       book(_h["tleppt"], "d163-x01-y01");

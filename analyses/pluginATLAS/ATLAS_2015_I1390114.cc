@@ -35,9 +35,9 @@ namespace Rivet {
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
-      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, true);
+      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Projection to find the muons
       IdentifiedFinalState mu_id(fs);
@@ -45,9 +45,9 @@ namespace Rivet {
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
       declare(muons, "muons");
-      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 25*GeV, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
-      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, true);
+      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Projection to find neutrinos and produce MET
       IdentifiedFinalState nu_id;
@@ -60,7 +60,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(ewdressedelectrons);
       vfs.addVetoOnThisFinalState(ewdressedmuons);
       vfs.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(vfs,FastJets::ANTIKT, 0.4);
+      FastJets jets(vfs,JetAlg::ANTIKT, 0.4);
       jets.useInvisibles();
       declare(jets, "jets");
 

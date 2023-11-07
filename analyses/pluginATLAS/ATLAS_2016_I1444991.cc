@@ -11,14 +11,13 @@
 namespace Rivet {
 
 
+  /// Higgs-to-WW differential cross sections at 8 TeV
   class ATLAS_2016_I1444991 : public Analysis {
   public:
 
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2016_I1444991);
 
-
-  public:
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -35,14 +34,14 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState el_bare(el_id);
       Cut cuts = (Cuts::abseta < 2.47) && ( (Cuts::abseta <= 1.37) || (Cuts::abseta >= 1.52) ) && (Cuts::pT > 15*GeV);
-      DressedLeptons el_dressed_FS(photon_id, el_bare, 0.1, cuts, true);
+      DressedLeptons el_dressed_FS(photon_id, el_bare, 0.1, cuts, PhotonOrigin::ALL);
       declare(el_dressed_FS,"EL_DRESSED_FS");
 
       // Project dressed muons with pT > 15 GeV and |eta| < 2.5
       IdentifiedFinalState mu_id(FS);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState mu_bare(mu_id);
-      DressedLeptons mu_dressed_FS(photon_id, mu_bare, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 15*GeV, true);
+      DressedLeptons mu_dressed_FS(photon_id, mu_bare, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(mu_dressed_FS,"MU_DRESSED_FS");
 
       // get MET from generic invisibles
@@ -51,9 +50,9 @@ namespace Rivet {
       declare(inv_fs, "InvisibleFS");
 
       // Project jets
-      FastJets jets(FS, FastJets::ANTIKT, 0.4);
-      jets.useInvisibles(JetAlg::Invisibles::NONE);
-      jets.useMuons(JetAlg::Muons::NONE);
+      FastJets jets(FS, JetAlg::ANTIKT, 0.4);
+      jets.useInvisibles(JetInvisibles::NONE);
+      jets.useMuons(JetMuons::NONE);
       declare(jets, "jets");
 
       // Book histograms

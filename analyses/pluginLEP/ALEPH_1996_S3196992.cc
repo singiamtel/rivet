@@ -23,7 +23,7 @@ namespace Rivet {
     void init() {
       // Set up projections
       FinalState fs;
-      declare(FastJets(fs, FastJets::DURHAM, 0.7), "DurhamJets");
+      declare(FastJets(fs, JetAlg::DURHAM, 0.7), "DurhamJets");
       IdentifiedFinalState ifs; //(Cuts::pT > 0);
       ifs.acceptId(PID::PHOTON);
       declare(ifs, "Photons");

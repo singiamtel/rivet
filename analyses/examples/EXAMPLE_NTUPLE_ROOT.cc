@@ -28,7 +28,7 @@ namespace Rivet {
       // Get jets, leptons, MET
       const FinalState fs(Cuts::abseta < 4.9);
       declare(fs, "Particles");
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetfs(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "Jets");
       DirectFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
       DressedLeptons dressed_leps(fs, bare_leps, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV);

@@ -20,7 +20,7 @@ namespace Rivet {
       declare(cfs, "CFS");
 
       const ChargedFinalState cfsforjet((Cuts::etaIn(-2.5, 2.5) && Cuts::pT >=  500*MeV));
-      const FastJets jetpro(cfsforjet, FastJets::SISCONE, 0.5);
+      const FastJets jetpro(cfsforjet, JetAlg::SISCONE, 0.5);
       declare(jetpro, "Jets");
 
       if (isCompatibleWithSqrtS(7000*GeV)) {

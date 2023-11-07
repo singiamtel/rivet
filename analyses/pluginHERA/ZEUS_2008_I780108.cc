@@ -25,8 +25,8 @@ namespace Rivet {
           const DISKinematics diskin;
           declare(diskin, "Kinematics");
           declare(DISLepton(), "Lepton");
-          const DISFinalState disfs(DISFinalState::BoostFrame::LAB);
-          FastJets jets(disfs, FastJets::KT, 1.0);
+          const DISFinalState disfs(DISFrame::LAB);
+          FastJets jets(disfs, JetAlg::KT, 1.0);
           declare(jets, "Jets");
 
           // Table 11

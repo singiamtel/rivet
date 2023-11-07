@@ -19,7 +19,7 @@ namespace Rivet {
 
     void init() {
 
-      FastJets jets(FinalState(Cuts::abseta < 4.9), FastJets::ANTIKT, 0.4);
+      FastJets jets(FinalState(Cuts::abseta < 4.9), JetAlg::ANTIKT, 0.4);
       SmearedJets recojets(jets, JET_SMEAR_ATLAS_RUN1);
       declare(recojets, "Jets");
 
@@ -48,7 +48,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
+      const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
       const Particles elecs = apply<ParticleFinder>(event, "Electrons").particlesByPt();
       const Particles mus = apply<ParticleFinder>(event, "Muons").particlesByPt();
       MSG_DEBUG("Number of raw jets, electrons, muons = "

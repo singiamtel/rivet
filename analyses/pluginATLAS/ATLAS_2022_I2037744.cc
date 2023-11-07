@@ -9,13 +9,15 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 
 namespace Rivet {
-    class ATLAS_2022_I2037744 : public Analysis {
+
+
+  /// Semileptonic ttbar single- and double-differential cross-sections with high pT top at 13 TeV
+  class ATLAS_2022_I2037744 : public Analysis {
     public:
 
         /// Constructor
         RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2022_I2037744);
 
-    public:
         void init() {
 
             // Define cut objects on eta, eta neutrino and leptons
@@ -25,57 +27,57 @@ namespace Rivet {
             // All final state particles
             const FinalState fs(eta_full);
 
-            //Final state photons for loose lepton dressing for inputs to jets and MET
+            // Final state photons for loose lepton dressing for inputs to jets and MET
             IdentifiedFinalState all_photons(fs, PID::PHOTON);
 
-            //Final state photons, acceptTauDecays=false, for analysis lepton dressing
-            PromptFinalState photons(all_photons,false);
+            // Final state photons, not from taus, for analysis lepton dressing
+            PromptFinalState photons(all_photons, TauDecaysAs::NONPROMPT);
             declare(photons, "photons");
 
-            //Final state electrons, acceptTauDecays=true
-            PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, true);
+            // Final state electrons, including from prompt tau decays
+            PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
             declare(electrons, "electrons");
 
             // Analysis dressed electrons
-            DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, true);
+            DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
             declare(dressedelectrons, "dressedelectrons");
 
             // "All" dressed electrons to be removed from input to jetbuilder
-            DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, true);
+            DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
             declare(ewdressedelectrons, "ewdressedelectrons");
 
-            //Final state muons, acceptTauDecays=true
-            PromptFinalState muons(Cuts::abspid == PID::MUON, true);
+            //Final state muons, including from prompt tau decays
+            PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
             declare(muons, "muons");
 
             //Analysis dressed muons
-            DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, true);
+            DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
             declare(dressedmuons, "dressedmuons");
 
             //"All" dressed muons to be removed from input to jetbuilder and for use in METbuilder
-            DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, true);
+            DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
             declare(ewdressedmuons, "ewdressedmuons");
 
             //Neutrinos to be removed from input to jetbuilder, acceptTauDecays=true
             IdentifiedFinalState nu_id;
             nu_id.acceptNeutrinos();
-            PromptFinalState neutrinos(nu_id, true);
+            PromptFinalState neutrinos(nu_id, TauDecaysAs::PROMPT);
 
             //Small-R jets
             VetoedFinalState vfs(fs);
             vfs.addVetoOnThisFinalState(ewdressedelectrons);
             vfs.addVetoOnThisFinalState(ewdressedmuons);
             vfs.addVetoOnThisFinalState(neutrinos);
-            FastJets jets(vfs, FastJets::ANTIKT, 0.4);
-            jets.useInvisibles(JetFinder::Invisibles::DECAY);
+            FastJets jets(vfs, JetAlg::ANTIKT, 0.4);
+            jets.useInvisibles(JetInvisibles::DECAY);
             declare(jets, "jets");
 
             //MET
             declare(MissingMomentum(), "MissingMomentum");
 
             // External bins for 2D plots
-            std::vector<double> n_jet_2D_bins = {0.5,1.5,2.5,10.0}; //Extra wide final bin mistakenly used in analysis, replicated here
-            std::vector<double> Top_boosted_rc_pt_2D_bins = {355.0,398.0,496.0,2000.0};
+            vector<double> n_jet_2D_bins = {0.5,1.5,2.5,10.0}; //Extra wide final bin mistakenly used in analysis, replicated here
+            vector<double> Top_boosted_rc_pt_2D_bins = {355.0,398.0,496.0,2000.0};
 
             //Book Histograms using custom function (handles HEPData offset and relative hists)
             book_hist("sigma_ttbar",1,false);
@@ -102,7 +104,6 @@ namespace Rivet {
             book_2Dhist("LeadAddJet_pt_2D_Top_boosted_rc_pt",Top_boosted_rc_pt_2D_bins,68);
             book_2Dhist("dphi_LeadAddJet_hadTop_2D_Top_boosted_rc_pt",Top_boosted_rc_pt_2D_bins,80);
             book_2Dhist("dphi_LeadAddJet_hadTop_2D_Nextrajets",n_jet_2D_bins,92);
-
         }
 
         void analyze(const Event& event) {
@@ -126,11 +127,11 @@ namespace Rivet {
             map<double,bool> b_tagging_info_rc_jets;
             map<double,bool> Addjet_veto_info; // Also append information about which small-R jets are subjets of the chosen top-quark or the leptonic b-jet, again use momentum<->subjet map
 
-            for(Jet jet : smalljets) {
-                b_tagging_info_small_jets[jet.pt()]=jet.bTagged(Cuts::pT > 5.0*GeV);
-                if (jet.pt() >= 30.0*GeV){
-                    smalljets_for_rc += jet;
-                }
+            for (Jet jet : smalljets) {
+	      b_tagging_info_small_jets[jet.pt()]=jet.bTagged(Cuts::pT > 5.0*GeV);
+	      if (jet.pt() >= 30.0*GeV){
+		smalljets_for_rc += jet;
+	      }
             }
 
             const FourMomentum met = apply<MissingMomentum>(event, "MissingMomentum").missingMomentum();
@@ -142,23 +143,24 @@ namespace Rivet {
             // trim the jets
             PseudoJets TrimmedReclusteredJets;
 
+	    /// @todo Store rather than rebuild for every event
             fastjet::Filter trimmer(fastjet::JetDefinition(fastjet::kt_algorithm, 0.01), fastjet::SelectorPtFractionMin(0.05));
             for (PseudoJet pjet : reclustered_jets) {
-                fastjet::PseudoJet candidate_trim = trimmer(pjet);
-                bool b_tagged = false;
-                std::vector<fastjet::PseudoJet> constituents = candidate_trim.constituents();
-                for(unsigned int iCons = 0; iCons<constituents.size(); iCons++){
-                    if(b_tagging_info_small_jets[constituents[iCons].pt()]) b_tagged = true;
-                }
-                FourMomentum trfj_mom = momentum(candidate_trim);
-                if (trfj_mom.pt() <= 355*GeV)  continue;
-                if (trfj_mom.abseta() < 2.0) {
-                    TrimmedReclusteredJets.push_back(candidate_trim);
-                    b_tagging_info_rc_jets[candidate_trim.perp()]=b_tagged;
-                }
+	      fastjet::PseudoJet candidate_trim = trimmer(pjet);
+	      bool b_tagged = false;
+	      std::vector<fastjet::PseudoJet> constituents = candidate_trim.constituents();
+	      for (unsigned int iCons = 0; iCons<constituents.size(); iCons++) {
+		if (b_tagging_info_small_jets[constituents[iCons].pt()]) b_tagged = true;
+	      }
+	      FourMomentum trfj_mom = momentum(candidate_trim);
+	      if (trfj_mom.pt() <= 355*GeV)  continue;
+	      if (trfj_mom.abseta() < 2.0) {
+		TrimmedReclusteredJets.push_back(candidate_trim);
+		b_tagging_info_rc_jets[candidate_trim.perp()]=b_tagged;
+	      }
             }
             TrimmedReclusteredJets = fastjet::sorted_by_pt(TrimmedReclusteredJets);
-
+	    
 
 
             //----------Event selection
@@ -178,19 +180,19 @@ namespace Rivet {
             }
 
             //MET
-            if(met.pt()<20.0*GeV) vetoEvent;
+            if (met.pt()<20.0*GeV) vetoEvent;
             double transmass = mT(momentum(*lepton), met);
             //MET+MWT
-            if((met.pt()+transmass)<60.0*GeV) vetoEvent;
+            if ((met.pt()+transmass)<60.0*GeV) vetoEvent;
 
             //SMALL-R JET MULTIPLICITY
-            if(smalljets.size()<2) vetoEvent;
-            if(TrimmedReclusteredJets.size()==0) vetoEvent;
+            if (smalljets.size()<2) vetoEvent;
+            if (TrimmedReclusteredJets.size()==0) vetoEvent;
 
             //TOP-TAGGED RC JET
             PseudoJet HadTopJet;
             bool ThereIsHadTop = false;
-            for(PseudoJet rc_jet : TrimmedReclusteredJets){
+            for (PseudoJet rc_jet : TrimmedReclusteredJets){
                 FourMomentum rc_jet_mom = momentum(rc_jet);
                 double dR_lepJet = deltaR(rc_jet_mom,momentum(*lepton));
                 if (single_electron && dR_lepJet < 1.) continue;
@@ -208,7 +210,7 @@ namespace Rivet {
             Jet LepbJet;
             double smallest_dR_bjetlep=2.0;
             bool ThereIsLepbJet = false;
-            for(Jet jet : smalljets){
+            for (Jet jet : smalljets) {
                 // leptonic bjet cannot be constituent of top-jet
                 std::vector<fastjet::PseudoJet> constituents = HadTopJet.constituents();
                 bool issubjet=false;
@@ -220,7 +222,7 @@ namespace Rivet {
                     }
                 }
                 if (issubjet) continue;
-                if(!b_tagging_info_small_jets[jet.pt()]) continue; // Must be b-tagged (do after so we can also fill addjet veto in same loop)
+                if (!b_tagging_info_small_jets[jet.pt()]) continue; // Must be b-tagged (do after so we can also fill addjet veto in same loop)
 
                 const double dR_bjetlep = deltaR(jet, *lepton);
                 if (dR_bjetlep > smallest_dR_bjetlep) continue;
@@ -235,7 +237,7 @@ namespace Rivet {
 
             // MLB
             double mlb = (lepton->momentum() + LepbJet.momentum()).mass();
-            if(mlb >= 180.0*GeV) vetoEvent;
+            if (mlb >= 180.0*GeV) vetoEvent;
 
             // Reconstruct leptonically decaying top-jet
             const double nu_pz = computeneutrinoz(lepton->momentum(), met, LepbJet.momentum());
@@ -249,9 +251,7 @@ namespace Rivet {
             Jets addJets;
             for (const Jet& jet : smalljets) {
                 // ignore all sub-jets of hadronic top and the b-tagged jet on the leptonic side
-                if (Addjet_veto_info[jet.pt()]) {
-                    continue;
-                }
+                if (Addjet_veto_info[jet.pt()]) continue;
                 addJets += jet;
                 HT_all = HT_all + jet.pt();
             }
@@ -285,22 +285,22 @@ namespace Rivet {
             fillHist("ttbar_boosted_rc_pt",     pttbar.pt()/GeV);
             fillHist("dphi_hadTop_lepTop",      dphi_hadTop_lepTop);
             fillHist("HTall",                   HT_all/GeV);
-            _njets->fill(map2string(min((int)addJets.size(),6)));
+            _njets->fill(map2string(min(addJets.size(), 6u)));
 
-            if(addJets.size() > 0) {
+            if (addJets.size() > 0) {
                 const double dphi_leadaddjet_hadTop = deltaPhi( leading_addjet,HadronicTop ) / PI;
                 fillHist("LeadAddJet_pt",          leading_addjet.pt()/GeV);
                 fillHist("LeadAddJet_hadTop_m",    p_hadtop_leading_addjet.mass()/GeV);
                 fillHist("dphi_LeadAddJet_hadTop", dphi_leadaddjet_hadTop);
 
                 // 2D Observables
-                fillHist2D("LeadAddJet_pt_2D_Nextrajets", min(addJets.size(),6), leading_addjet.pt()/GeV);
+                fillHist2D("LeadAddJet_pt_2D_Nextrajets", min(addJets.size(), 6u), leading_addjet.pt()/GeV);
                 fillHist2D("LeadAddJet_pt_2D_Top_boosted_rc_pt", HadronicTop.pt()/GeV, leading_addjet.pt()/GeV);
                 fillHist2D("dphi_LeadAddJet_hadTop_2D_Top_boosted_rc_pt", HadronicTop.pt()/GeV, dphi_leadaddjet_hadTop);
-                fillHist2D("dphi_LeadAddJet_hadTop_2D_Nextrajets", min(addJets.size(),6), dphi_leadaddjet_hadTop);
+                fillHist2D("dphi_LeadAddJet_hadTop_2D_Nextrajets", min(addJets.size(), 6u), dphi_leadaddjet_hadTop);
             }
 
-            if(addJets.size() > 1) {
+            if (addJets.size() > 1) {
                 const double dphi_subleadaddjet_hadTop = deltaPhi( subleading_addjet, HadronicTop ) / PI;
                 const double dphi_leadaddjet_subleadaddjet = deltaPhi( leading_addjet, subleading_addjet ) / PI;
                 fillHist("dphi_SubLeadAddJet_hadTop",     dphi_subleadaddjet_hadTop );
@@ -308,8 +308,9 @@ namespace Rivet {
                 fillHist("SubLeadAddJet_pt",              subleading_addjet.pt()/GeV);
             }
 
-        } //Boosted_selection
+        }
 
+      
         void finalize() {
 
             // Normalize to cross-section
@@ -328,9 +329,9 @@ namespace Rivet {
               divByGroupWidth(hist.second);
             }
 
-        } //finalize
+        }
 
-
+      
     private:
 
         // HepData entry has dummy "Table of Contents", for both 1D and 2D hists need to offset tables by one unit
@@ -399,9 +400,9 @@ namespace Rivet {
         map<string, Histo1DPtr> _h;
         BinnedHistoPtr<string> _njets;
         map<string, Histo1DGroupPtr> _h_multi;
-    };
+  };
 
-    // The hook for the plugin system
-    RIVET_DECLARE_PLUGIN(ATLAS_2022_I2037744);
+
+  RIVET_DECLARE_PLUGIN(ATLAS_2022_I2037744);
+
 }
-

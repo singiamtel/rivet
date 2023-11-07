@@ -14,7 +14,7 @@ namespace Rivet {
 
     void init() {
       FinalState fs;
-      FastJets akt(fs, FastJets::ANTIKT, 0.4);
+      FastJets akt(fs, JetAlg::ANTIKT, 0.4);
       declare(akt, "antikT");
 
       const vector<double> edges_2J{200., 300., 400., 500., 600., 700., 800., 1000., 1200., 7000.};
@@ -36,7 +36,7 @@ namespace Rivet {
 
 
     void analyze(const Event & event) {
-      const Jets& jets = apply<JetAlg>(event, "antikT").jetsByPt();
+      const Jets& jets = apply<JetFinder>(event, "antikT").jetsByPt();
 
       // 2 jet case and Delta_phi12
       if( jets.size() >= 2 ) {

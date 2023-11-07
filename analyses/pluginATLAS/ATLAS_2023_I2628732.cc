@@ -28,8 +28,8 @@ namespace Rivet {
 
       // Get dressed leptons
       IdentifiedFinalState lepids(fs, {{PID::ELECTRON, PID::POSITRON, PID::MUON, PID::ANTIMUON}});
-      PromptFinalState leptons(lepids, false);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, cuts, true);
+      PromptFinalState leptons(lepids, TauDecaysAs::NONPROMPT);
+      DressedLeptons dressedleptons(photons, leptons, 0.1, cuts, PhotonOrigin::ALL);
       declare(dressedleptons, "DressedLeptons");
 
       // unstable final-state for Ds

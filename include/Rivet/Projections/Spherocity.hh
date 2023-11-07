@@ -52,8 +52,7 @@ namespace Rivet {
 
     /// Perform the projection on the Event
     void project(const Event& e) {
-      const vector<Particle> ps
-        = apply<FinalState>(e, "FS").particles();
+      const vector<Particle> ps = apply<FinalState>(e, "FS").particles();
       calc(ps);
     }
 

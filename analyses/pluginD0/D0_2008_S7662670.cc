@@ -27,7 +27,7 @@ namespace Rivet {
       declare(fs, "FS");
 
       // Jets
-      FastJets jetpro(fs, FastJets::D0ILCONE, 0.7);
+      FastJets jetpro(fs, JetAlg::D0ILCONE, 0.7);
       declare(jetpro, "Jets");
 
       // Book histograms
@@ -50,7 +50,7 @@ namespace Rivet {
       }
 
       // Find the jets
-      const JetAlg& jetpro = apply<JetAlg>(event, "Jets");
+      const JetFinder& jetpro = apply<JetFinder>(event, "Jets");
       // Fill histo for each jet
       for (const Jet& j : jetpro.jets(Cuts::pT > 50*GeV)) {
         const double pt = j.pT();

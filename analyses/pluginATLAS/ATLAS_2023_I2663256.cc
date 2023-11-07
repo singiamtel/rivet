@@ -35,7 +35,7 @@ namespace Rivet {
        vfs.vetoNeutrinos();
        vfs.addVetoPairId(PID::MUON);
 
-       FastJets j04(vfs, FastJets::ANTIKT, 0.4);
+       FastJets j04(vfs, JetAlg::ANTIKT, 0.4);
        declare(j04, "Jets");
 
        SmearedJets sj04(j04, JET_SMEAR_ATLAS_RUN2, [](const Jet& j){
@@ -61,8 +61,8 @@ namespace Rivet {
       const ChargedLeptons& lfs = apply<ChargedLeptons>(event, "LFS");
       if (lfs.chargedLeptons().size() > 0) vetoEvent;
 
-      const Jets j04 = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::abseta < 2.8 && Cuts::pT > 30*GeV);
-      const Jets sj04 = apply<JetAlg>(event, "SJets").jetsByPt(Cuts::pT > 30*GeV);
+      const Jets j04 = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::abseta < 2.8 && Cuts::pT > 30*GeV);
+      const Jets sj04 = apply<JetFinder>(event, "SJets").jetsByPt(Cuts::pT > 30*GeV);
       if(sj04.size() < 2) vetoEvent;
       const Jets sj04b = filter_select(sj04, [&](const Jet& j) { return j.bTagged(); });
       if(sj04b.size() > 1) vetoEvent;

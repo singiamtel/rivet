@@ -43,14 +43,14 @@ namespace Rivet {
       declare(fs, "FS");
 
       ZFinder zfinder(fs, Cuts::abseta < 2.5 && Cuts::pT > 30*GeV, PID::MUON, 80*GeV, 100*GeV, 0.2,
-                      ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zfinder, "ZFinder");
 
       // Z+jet jet collections
-      declare(FastJets(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.3), "JetsAK3");
-      declare(FastJets(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.5), "JetsAK5");
-      declare(FastJets(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.7), "JetsAK7");
-      declare(FastJets(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.9), "JetsAK9");
+      declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.3), "JetsAK3");
+      declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5), "JetsAK5");
+      declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.7), "JetsAK7");
+      declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.9), "JetsAK9");
 
       jetFinders = {"JetsAK3", "JetsAK5", "JetsAK7", "JetsAK9"};
 

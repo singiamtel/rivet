@@ -5,6 +5,7 @@
 
 namespace Rivet {
 
+  
   class D0_2015_I1324946 : public Analysis {
   public:
 
@@ -18,7 +19,8 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       FinalState fs;
-      ZFinder zfinder_mm(fs, Cuts::abseta < 2 && Cuts::pT > 15*GeV, PID::MUON, 30*GeV, 500*GeV, 0.0, ZFinder::ClusterPhotons::NONE, ZFinder::AddPhotons::NO);
+      ZFinder zfinder_mm(fs, Cuts::abseta < 2 && Cuts::pT > 15*GeV, PID::MUON, 30*GeV, 500*GeV,
+			 0.0, PhotonOrigin::NONE, PhotonsAsConstituents::NO);
       declare(zfinder_mm, "zfinder_mm");
 
       book(_h_phistar_mm_peak_central, 1, 1, 1);
@@ -33,7 +35,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const double weight = 1.0;
-
 
       //70<Mmm<105
       const ZFinder& zfinder_mm = apply<ZFinder>(event, "zfinder_mm");
@@ -60,6 +61,7 @@ namespace Rivet {
       }
     }
 
+    
     /// Normalise histograms etc., after the run
     void finalize() {
 
@@ -72,13 +74,11 @@ namespace Rivet {
 
     }
 
-
-    //}
-
     /// @}
 
 
   private:
+
     /// @name Histograms
     /// @{
 
@@ -89,11 +89,10 @@ namespace Rivet {
     Histo1DPtr _h_phistar_mm_high1;
     Histo1DPtr _h_phistar_mm_high2;
     /// @}
+
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(D0_2015_I1324946);
 
 }

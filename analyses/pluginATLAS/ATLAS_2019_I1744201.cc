@@ -17,11 +17,11 @@ namespace Rivet{
       const FinalState fs(Cuts::abseta < 5.0);
       Cut cut = Cuts::abseta < 2.47 && Cuts::pT >= 20*GeV;
 
-      ZFinder zfinder_el(fs, cut, PID::ELECTRON, 66*GeV, 116*GeV, 0.1, ZFinder::ChargedLeptons::PROMPT);
+      ZFinder zfinder_el(fs, cut, PID::ELECTRON, 66*GeV, 116*GeV, 0.1, LeptonOrigin::PROMPT);
       declare(zfinder_el, "ZFinder_el");
 
-      declare(FastJets(zfinder_el.remainingFinalState(), FastJets::ANTIKT, 0.4,
-                       JetAlg::Muons::NONE, JetAlg::Invisibles::NONE), "AKT04");
+      declare(FastJets(zfinder_el.remainingFinalState(), JetAlg::ANTIKT, 0.4,
+                       JetMuons::NONE, JetInvisibles::NONE), "AKT04");
 
       h_jet_y_pt.resize(6);
       for (size_t iPtBin=0; iPtBin < h_jet_y_pt.size(); ++iPtBin) {

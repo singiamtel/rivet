@@ -11,7 +11,7 @@
 namespace Rivet {
 
 
-  /// Leading jet mass for boosted top quarks at 8 TeV
+  /// Leading-jet mass for boosted top quarks at 8 TeV
   class CMS_2017_I1518399 : public Analysis {
   public:
 
@@ -36,11 +36,11 @@ namespace Rivet {
       // Jets
       VetoedFinalState fs_jets;
       fs_jets.vetoNeutrinos();
-      declare(FastJets(fs_jets, FastJets::CAM, 1.2), "JetsCA12");
+      declare(FastJets(fs_jets, JetAlg::CAM, 1.2), "JetsCA12");
 
       // Partonic top for decay channel definition
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU, false), "LeptonicTops");
-      declare(PartonicTops(PartonicTops::DecayMode::HADRONIC), "HadronicTops");
+      declare(PartonicTops(TopDecay::E_MU, PromptEMuFromTau::NO), "LeptonicTops");
+      declare(PartonicTops(TopDecay::HADRONIC), "HadronicTops");
 
       // Main histograms
       book(_hist_mass     , "d01-x01-y01");
@@ -120,8 +120,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2017_I1518399);
-
 
 }

@@ -20,7 +20,7 @@ namespace Rivet {
     void init() {
 
       FinalState fs;
-      FastJets conefinder(fs, FastJets::D0ILCONE, 0.7);
+      FastJets conefinder(fs, JetAlg::D0ILCONE, 0.7);
       declare(conefinder, "ConeFinder");
 
       book(_h_m_dijet, {0., 0.4, 0.8, 1.2, 1.6, 2., 2.4});
@@ -32,7 +32,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& e) {
-      const Jets& jets = apply<JetAlg>(e, "ConeFinder").jetsByPt(40.0*GeV);
+      const Jets& jets = apply<JetFinder>(e, "ConeFinder").jetsByPt(40.0*GeV);
       if (jets.size() < 2) vetoEvent;
 
       const double ymax = std::max(jets[0].absrap(), jets[1].absrap());

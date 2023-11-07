@@ -33,9 +33,9 @@ namespace Rivet {
 
       // The experimental result is unfolded to the 'born' level (pre-FSR), which is discouraged in Rivet
       // The implementation in Rivet here is using dressed leptons
-      ZFinder zeeFind(fs, cut, PID::ELECTRON, 60.0*GeV, 120.0*GeV, 0.1, ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+      ZFinder zeeFind(fs, cut, PID::ELECTRON, 60.0*GeV, 120.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zeeFind, "ZeeFind");
-      ZFinder zmmFind(fs, cut, PID::MUON    , 60.0*GeV, 120.0*GeV, 0.1, ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+      ZFinder zmmFind(fs, cut, PID::MUON    , 60.0*GeV, 120.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zmmFind, "ZmmFind");
 
       // Book histograms

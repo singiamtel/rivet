@@ -12,7 +12,9 @@ namespace Rivet {
 
     /// Constructor
     ATLAS_2015_I1351916(const string name="ATLAS_2015_I1351916", size_t mode=0,
-                        const string ref_data="ATLAS_2015_I1351916") : Analysis(name) {
+                        const string ref_data="ATLAS_2015_I1351916")
+      : Analysis(name)
+    {
       _mode = mode; // pick electron channel by default
       setRefDataName(ref_data);
     }
@@ -29,8 +31,10 @@ namespace Rivet {
       IdentifiedFinalState bareleptons(fs);
       bareleptons.acceptIdPair(_mode? PID::MUON : PID::ELECTRON);
 
-      const Cut cuts = (_mode == 0) ? (Cuts::pT > 25*GeV && Cuts::abseta < 4.9) : (Cuts::pT > 20*GeV && Cuts::abseta < 2.47);
-      DressedLeptons leptons(fs, bareleptons, 0.1, cuts, true);
+      const Cut cuts = (_mode == 0)
+	? (Cuts::pT > 25*GeV && Cuts::abseta < 4.9)
+	: (Cuts::pT > 20*GeV && Cuts::abseta < 2.47);
+      DressedLeptons leptons(fs, bareleptons, 0.1, cuts, PhotonOrigin::ALL);
       declare(leptons, "leptons");
 
 

@@ -135,7 +135,7 @@ namespace Rivet {
       // Jets - all final state particles excluding neutrinos
       VetoedFinalState vfs;
       vfs.vetoNeutrinos();
-      FastJets fastjets(vfs, FastJets::ANTIKT, 0.4);
+      FastJets fastjets(vfs, JetAlg::ANTIKT, 0.4);
       declare(fastjets, "Jets");
 
       // Dressed leptons
@@ -150,8 +150,7 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
 
       DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, dressed_lepton_cone_,
-                                     Cuts::open(),
-                                     /*useDecayPhotons*/ false);
+                                     Cuts::open(), PhotonOrigin::NODECAY);
       declare(dressed_leptons, "DressedLeptons");
 
       // Photons
@@ -160,7 +159,7 @@ namespace Rivet {
       declare(vetoed_prompt_photons, "Photons");
 
       // Invisibles
-      InvisibleFinalState invisibles(true, true, true);
+      InvisibleFinalState invisibles(OnlyPrompt::YES, TauDecaysAs::PROMPT, MuDecaysAs::PROMPT);
       declare(invisibles, "Invisibles");
 
       // MET

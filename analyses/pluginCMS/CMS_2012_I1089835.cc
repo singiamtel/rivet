@@ -33,7 +33,7 @@ namespace Rivet {
       
       const FinalState cnfs;
       declare(cnfs, "FS");
-      declare(FastJets(cnfs, FastJets::ANTIKT, 0.5), "Jets");
+      declare(FastJets(cnfs, JetAlg::ANTIKT, 0.5), "Jets");
       
       book(_h_dsigdpty05, 4, 1, 1);
       book(_h_dsigdpty10, 5, 1, 1);

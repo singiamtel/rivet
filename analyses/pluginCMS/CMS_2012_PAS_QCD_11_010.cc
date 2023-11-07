@@ -14,7 +14,7 @@ namespace Rivet {
     {  }
 
     void init() {
-      const FastJets jets(ChargedFinalState(Cuts::abseta < 2.5 && Cuts::pT > 0.5*GeV), FastJets::ANTIKT, 0.5);
+      const FastJets jets(ChargedFinalState(Cuts::abseta < 2.5 && Cuts::pT > 0.5*GeV), JetAlg::ANTIKT, 0.5);
       declare(jets, "Jets");
 
       const UnstableParticles ufs(Cuts::abseta < 2 && Cuts::pT > 0.6*GeV);

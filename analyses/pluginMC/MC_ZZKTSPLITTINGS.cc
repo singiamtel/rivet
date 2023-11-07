@@ -30,7 +30,7 @@ namespace Rivet {
       Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
 
       ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV,
-                        0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+                        0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zeefinder, "ZeeFinder");
 
       VetoedFinalState zmminput;
@@ -43,7 +43,7 @@ namespace Rivet {
       Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
       
       ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV,
-                        0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+                        0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zmmfinder, "ZmmFinder");
 
       VetoedFinalState jetinput;
@@ -54,7 +54,7 @@ namespace Rivet {
       // set clustering radius from input option
       const double R = getOption<double>("R", 0.6);
       
-      FastJets jetpro(jetinput, FastJets::KT, R);
+      FastJets jetpro(jetinput, JetAlg::KT, R);
       declare(jetpro, "Jets");
 
       MC_JetSplittings::init();

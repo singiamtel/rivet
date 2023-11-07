@@ -29,7 +29,7 @@ namespace Rivet {
       declare(DressedLeptons(PromptFinalState(), 0.1, Cuts::abseta < 2.4 && Cuts::pT > 26*GeV), "Leptons");
 
       // Jets
-      declare(FastJets(FinalState(Cuts::abseta < 5), FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(FinalState(Cuts::abseta < 5), JetAlg::ANTIKT, 0.4), "Jets");
 
       // Photons
       declare(PromptFinalState(Cuts::pid == PID::PHOTON && Cuts::pT > 25*GeV && Cuts::abseta < 1.44), "Photons");
@@ -47,7 +47,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // // Find at least 2 jets, one b-tagged
-      // const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::abseta < 4.7 && Cuts::pT > 40*GeV);
+      // const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::abseta < 4.7 && Cuts::pT > 40*GeV);
       // Jets bjets, ljets;
       // for (const Jet& j : jets)
       //   ((j.abseta() < 2.5 && j.bTagged()) ? bjets : ljets) += j;
@@ -73,7 +73,7 @@ namespace Rivet {
 
 
       // Find light jets
-      const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt();
+      const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt();
       const Jets ljets = filter_discard(jets, [](const Jet& j){ return j.abseta() < 2.5 && j.bTagged(); } );
 
       // Require a photon, isolated from the light jet

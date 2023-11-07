@@ -8,7 +8,8 @@
 
 namespace Rivet {
 
-  /// @brief: ttbar + gamma at 13 TeV
+  
+  /// @brief ttbar + gamma at 13 TeV
   class ATLAS_2018_I1707015 : public Analysis {
   public:
 
@@ -19,7 +20,6 @@ namespace Rivet {
 
     // Book histograms and initialise projections before the run
     void init() {
-
 
       // Set default running mode to 3 (all)
       _mode = 3;
@@ -37,11 +37,11 @@ namespace Rivet {
       declare(cfs, "CFS");
 
       // Signal photons
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON && Cuts::pT > 20*GeV && Cuts::abseta < 2.37, true);
+      PromptFinalState photons(Cuts::abspid == PID::PHOTON && Cuts::pT > 20*GeV && Cuts::abseta < 2.37, TauDecaysAs::PROMPT);
       declare(photons, "Photons");
 
       // Leptons
-      PromptFinalState leptons(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState leptons(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
 
       // Dress the leptons
       FinalState dressPhotons(Cuts::abspid == PID::PHOTON);
@@ -55,16 +55,16 @@ namespace Rivet {
       // Remove prompt invisibles from jet input
       VetoedFinalState invis_fs(fs);
       invis_fs.addVetoOnThisFinalState(VisibleFinalState(fs));
-      PromptFinalState invis_pfs = PromptFinalState(invis_fs, true);
+      PromptFinalState invis_pfs = PromptFinalState(invis_fs, TauDecaysAs::PROMPT);
       vfs.addVetoOnThisFinalState(invis_pfs);
 
       // Remove prompt dressed muons (muons + associated photons) from jet input
-      PromptFinalState muons(Cuts::abspid == PID::MUON, true);
+      PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       DressedLeptons dressedmuons(dressPhotons, muons, 0.1);
       vfs.addVetoOnThisFinalState(dressedmuons);
 
       // Jet clustering
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets, "Jets");
 
       // Book histograms
@@ -89,7 +89,7 @@ namespace Rivet {
       const vector<DressedLepton>& leptons = apply<DressedLeptons>(event, "Leptons").dressedLeptons();
       Particles photons = apply<PromptFinalState>(event, "Photons").particles();
       ChargedFinalState charged = apply<ChargedFinalState>(event, "CFS");
-      Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
+      Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
 
       // Immediate veto on events without one good photon
       if ( photons.size() != 1 ) vetoEvent;

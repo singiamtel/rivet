@@ -1,3 +1,27 @@
+2023-11-04  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add a set of Rivet::retrieve(map, key, fallback) functions,
+	generally templated and with specialisations to cope with string
+	literals.
+
+	* Remove map<string> options from DIS and GammaGamma classes,
+	replacing with better enums and ctor combinations.
+
+2023-11-03  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Convert all projection-constructor boolean args to class enums
+	for better readability and self-documentation.
+
+2023-11-02  Andy Buckley  <andy.buckley@cern.ch>
+
+	* More projection enum improvements.
+
+	* Improve ZFinder enum names and scopes.
+
+2023-11-01  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Simplify and unify jet-enum scopes to JetAlg, JetMuons, JetInvisibles.
+
 2023-10-01  Christian Gutschow  <chris.g@cern.ch>
 
 	* Tagging 3.2.0alpha version with YODA2 and HDF5 support.

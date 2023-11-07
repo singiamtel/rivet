@@ -65,14 +65,13 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
 
       // NB. useDecayPhotons=true allows for photons with tau ancestor; photons from hadrons are vetoed by the PromptFinalState;
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, true);
+      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
       declare(dressed_leptons, "DressedLeptons");
 
       // Projection for jets
       VetoedFinalState fsForJets(fs);
       fsForJets.addVetoOnThisFinalState(dressed_leptons);
-      declare(FastJets(fsForJets, FastJets::ANTIKT, 0.4,
-                       JetAlg::Muons::ALL, JetAlg::Invisibles::NONE), "Jets");
+      declare(FastJets(fsForJets, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::NONE), "Jets");
 
       // Booking of histograms
       int d = 0;

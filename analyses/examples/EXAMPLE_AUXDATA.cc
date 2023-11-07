@@ -21,7 +21,7 @@ namespace Rivet {
 
       // Projections
       FinalState fs(Cuts::abseta < 4.9);
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4);
+      FastJets jetfs(fs, JetAlg::ANTIKT, 0.4);
       declare(jetfs, "Jets");
       
       // Get scale-factors from aux data

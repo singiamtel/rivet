@@ -24,7 +24,7 @@ namespace Rivet {
     void init() {
       const FinalState fs(Cuts::abseta < 4.2);
       declare(fs, "FS");
-      declare(FastJets(fs, FastJets::CDFJETCLU, 0.7), "Jets");
+      declare(FastJets(fs, JetAlg::CDFJETCLU, 0.7), "Jets");
 
       // Zero passed-cuts event weight counters
       book(_sumw, "sumW");

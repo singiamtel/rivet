@@ -30,7 +30,7 @@ namespace Rivet {
       declare(fs, "FS");
 
       // Voronoi eta-phi tessellation with KT jets, for ambient energy density calculation
-      FastJets fj(fs, FastJets::KT, 0.5);
+      FastJets fj(fs, JetAlg::KT, 0.5);
       fj.useJetArea(new fastjet::AreaDefinition(fastjet::VoronoiAreaSpec()));
       declare(fj, "KtJetsD05");
 
@@ -45,7 +45,7 @@ namespace Rivet {
       declare(vfs, "JetFS");
 
       // Jets
-      FastJets jetpro(vfs, FastJets::ANTIKT, 0.4);
+      FastJets jetpro(vfs, JetAlg::ANTIKT, 0.4);
       jetpro.useInvisibles();
       declare(jetpro, "Jets");
 

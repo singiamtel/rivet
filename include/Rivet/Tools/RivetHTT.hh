@@ -8,29 +8,24 @@
 namespace Rivet {
 
 
+  /// HTT operating mode
+  enum class HTTMode {
+    EARLY_MASSRATIO_SORT_MASS,     // applies 2D mass plane requirements then select the candidate which minimizes |m_cand-mt|
+    LATE_MASSRATIO_SORT_MASS,      // selects the candidate which minimizes |m_cand-mt|
+    EARLY_MASSRATIO_SORT_MODDJADE, // applies the 2D mass plane requirements then select the candidate with highest jade distance
+    LATE_MASSRATIO_SORT_MODDJADE,  // selects the candidate with highest modified jade distance
+    TWO_STEP_FILTER                // only analyzes the candidate built with the highest pT(t) after unclustering
+  };
+  
+  
+  /// Wrapper class for configuring use of HEPTopTagger
   class HTT {
   public:
-
-    /// Clustering algorithms
-    ///
-    /// @todo Merge with JetAlg alg enum
-    enum Algo { KT=0, AKT=1, ANTIKT=1, CA=2, CAMBRIDGE=2, CAMBRIDGE_AACHEN=2 };
-
-
-    /// HTT operating mode
-    enum Mode {
-      EARLY_MASSRATIO_SORT_MASS,     // applies 2D mass plane requirements then select the candidate which minimizes |m_cand-mt|
-      LATE_MASSRATIO_SORT_MASS,      // selects the candidate which minimizes |m_cand-mt|
-      EARLY_MASSRATIO_SORT_MODDJADE, // applies the 2D mass plane requirements then select the candidate with highest jade distance
-      LATE_MASSRATIO_SORT_MODDJADE,  // selects the candidate with highest modified jade distance
-      TWO_STEP_FILTER                // only analyzes the candidate built with the highest pT(t) after unclustering
-    };
-
 
     struct InputParameters {
 
       /// HTT execution mode
-      Mode mode = Mode::EARLY_MASSRATIO_SORT_MASS;
+      Mode mode = HTTMode::EARLY_MASSRATIO_SORT_MASS;
 
       /// @name Optimal-R parameters
       /// @{
@@ -55,10 +50,10 @@ namespace Rivet {
       /// @}
 
       /// Jet algorithm used for filtering
-      Algo filtering_algorithm = Algo::CA;
+      JetAlg filtering_algorithm = JetAlg::CA;
 
       /// Reclustering jet algorithm
-      Algo reclustering_algorithm = Algo::CA;
+      JetAlg reclustering_algorithm = JetAlg::CA;
 
       /// @name Top-mass ranges
       /// @{
@@ -180,13 +175,13 @@ namespace Rivet {
 
     // Candidate selection
     fastjet::HEPTopTagger::Mode mode;
-    if (params.mode == HTT::EARLY_MASSRATIO_SORT_MASS) {
+    if (params.mode == HTTMode::EARLY_MASSRATIO_SORT_MASS) {
       mode = fastjet::HEPTopTagger::EARLY_MASSRATIO_SORT_MASS;
-    } else if (params.mode == HTT::LATE_MASSRATIO_SORT_MASS) {
+    } else if (params.mode == HTTMode::LATE_MASSRATIO_SORT_MASS) {
       mode = fastjet::HEPTopTagger::LATE_MASSRATIO_SORT_MASS;
-    } else if (params.mode == HTT::EARLY_MASSRATIO_SORT_MODDJADE) {
+    } else if (params.mode == HTTMode::EARLY_MASSRATIO_SORT_MODDJADE) {
       mode = fastjet::HEPTopTagger::EARLY_MASSRATIO_SORT_MODDJADE;
-    } else if (params.mode == HTT::LATE_MASSRATIO_SORT_MODDJADE) {
+    } else if (params.mode == HTTMode::LATE_MASSRATIO_SORT_MODDJADE) {
       mode = fastjet::HEPTopTagger::LATE_MASSRATIO_SORT_MODDJADE;
     } else {
       mode = fastjet::HEPTopTagger::TWO_STEP_FILTER;

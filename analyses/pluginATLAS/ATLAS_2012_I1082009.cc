@@ -36,7 +36,7 @@ namespace Rivet {
       VetoedFinalState veto;
       veto.addVetoPairId(PID::MUON);
       veto.vetoNeutrinos();
-      FastJets jets(veto, FastJets::ANTIKT, 0.6);
+      FastJets jets(veto, JetAlg::ANTIKT, 0.6);
       declare(jets, "jets");
       // unstable final-state for D*
       declare(UnstableParticles(), "UFS");

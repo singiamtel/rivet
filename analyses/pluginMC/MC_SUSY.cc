@@ -33,7 +33,7 @@ namespace Rivet {
 
       // Tracks and jets
       declare(ChargedFinalState(fs), "Tracks");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.7), "Jets");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.7), "Jets");
 
       IdentifiedFinalState photonfs(fs);
       photonfs.acceptId(PID::PHOTON);

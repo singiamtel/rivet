@@ -38,7 +38,7 @@ namespace Rivet {
       // Jet finder
       VetoedFinalState vfs;
       vfs.addVetoPairId(PID::MUON);
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "AntiKtJets04");
+      declare(FastJets(vfs, JetAlg::ANTIKT, 0.4), "AntiKtJets04");
 
       // for pTmiss
       declare(VisibleFinalState(Cuts::abseta < 4.9),"vfs");

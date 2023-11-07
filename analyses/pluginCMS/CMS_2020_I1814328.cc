@@ -35,9 +35,9 @@ namespace Rivet {
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
-      FastJets jet4p5fs(fsjet4p5, FastJets::ANTIKT, 0.4);
+      FastJets jet4p5fs(fsjet4p5, JetAlg::ANTIKT, 0.4);
       declare(jet4p5fs, "jets4p5");
-      FastJets jet2p5fs(fsjet2p5, FastJets::ANTIKT, 0.4);
+      FastJets jet2p5fs(fsjet2p5, JetAlg::ANTIKT, 0.4);
       declare(jet2p5fs, "jets2p5");
 
       // FinalState of prompt photons and bare muons and electrons in the event

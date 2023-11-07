@@ -16,7 +16,7 @@ namespace Rivet {
     /// @{
 
     /// Construction using Cuts object
-    FinalState(const Cut& c=Cuts::open());
+    FinalState(const Cut& c=Cuts::OPEN);
 
     /// Construction using another FinalState and a Cuts object
     FinalState(const FinalState& fsp, const Cut& c);

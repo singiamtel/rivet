@@ -29,7 +29,7 @@ namespace Rivet {
       Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
 
       ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV,
-			0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+			0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zeefinder, "ZeeFinder");
 
       VetoedFinalState zmminput;
@@ -42,7 +42,7 @@ namespace Rivet {
       Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
       
       ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV,
-			0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+			0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zmmfinder, "ZmmFinder");
 
       VetoedFinalState jetinput;
@@ -58,19 +58,17 @@ namespace Rivet {
       const double R = getOption<double>("R", 0.4);
 
       // set clustering algorithm from input option
-      FastJets::Algo clusterAlgo;
+      JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
-
       if ( algoopt == "KT" ) {
-	clusterAlgo = FastJets::KT;
+	clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = FastJets::CA;
+	clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = FastJets::ANTIKT;
+	clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
-		    "Defaulting to anti-kT");
-	clusterAlgo = FastJets::ANTIKT;
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+	clusterAlgo = JetAlg::ANTIKT;
       }
       
       FastJets jetpro(jetinput, clusterAlgo, R);

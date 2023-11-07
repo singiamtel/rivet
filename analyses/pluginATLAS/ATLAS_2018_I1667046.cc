@@ -23,8 +23,8 @@ namespace Rivet {
 
       // Projections
       const FinalState fs (Cuts::abseta < 4.9);
-      declare("SmallRJ", FastJets(fs, FastJets::ANTIKT, 0.4));
-      declare("LargeRJ", FastJets(fs, FastJets::ANTIKT, 1.0));
+      declare("SmallRJ", FastJets(fs, JetAlg::ANTIKT, 0.4));
+      declare("LargeRJ", FastJets(fs, JetAlg::ANTIKT, 1.0));
 
       // Book histograms
       book(_h_sigmaM, "sigmaM",   50, 200, 2000);

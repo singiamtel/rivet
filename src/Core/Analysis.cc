@@ -400,9 +400,9 @@ namespace Rivet {
   }
 
   const CentralityProjection&
-  Analysis::declareCentrality(const SingleValueProjection &proj,
+  Analysis::declareCentrality(const SingleValueProjection& proj,
                               string calAnaName, string calHistName,
-                              const string projName, bool increasing) {
+                              const string projName, PercentileOrder pctorder) {
 
     CentralityProjection cproj;
 
@@ -436,7 +436,7 @@ namespace Rivet {
       }
       else {
         MSG_INFO("Found calibration histogram " << sel << " " << refest->path());
-        cproj.add(PercentileProjection(proj, *refest, increasing), sel);
+        cproj.add(PercentileProjection(proj, *refest, pctorder), sel);
       }
     }
     else if ( sel == "GEN" ) {
@@ -452,7 +452,7 @@ namespace Rivet {
       }
       else {
         MSG_INFO("Found calibration histogram " << sel << " " << genhists->path());
-        cproj.add(PercentileProjection(proj, *genhists, increasing), sel);
+        cproj.add(PercentileProjection(proj, *genhists, pctorder), sel);
       }
     }
     else if ( sel == "IMP" ) {
@@ -469,7 +469,7 @@ namespace Rivet {
       else {
         MSG_INFO("Found calibration histogram " << sel << " " << imphists->path());
         cproj.add(PercentileProjection(ImpactParameterProjection(),
-                                       *imphists, true), sel);
+                                       *imphists, PercentileOrder::INCREASING), sel);
       }
     }
     else if ( sel == "USR" ) {
@@ -481,7 +481,8 @@ namespace Rivet {
                     "(requested histogram " << calHistName << "_USR in " << calAnaName << ")");
       } else {
         MSG_INFO("Found calibration histogram " << sel << " " << usrhists->path());
-        cproj.add(PercentileProjection(UserCentEstimate(), *usrhists, true), sel);
+        cproj.add(PercentileProjection(UserCentEstimate(),
+				       *usrhists, PercentileOrder::INCREASING), sel);
       }
     }
     else if ( sel == "RAW" ) {

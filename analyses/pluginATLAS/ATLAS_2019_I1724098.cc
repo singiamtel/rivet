@@ -13,7 +13,6 @@
 #include "fastjet/contrib/Njettiness.hh"
 #include "fastjet/contrib/EnergyCorrelator.hh"
 
-
 namespace Rivet {
 
 
@@ -22,8 +21,6 @@ namespace Rivet {
   public:
 
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2019_I1724098);
-
-  private:
 
     /// @name Analysis methods
     /// @{
@@ -41,19 +38,19 @@ namespace Rivet {
       const FinalState photons(Cuts::abspid == PID::PHOTON);
 
       // Use all bare muons as input to the DressedMuons projection
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true);
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
 
       // Muons must have |eta| < 2.5
       Cut eta_ranges = Cuts::abseta < 2.5;
-      DressedLeptons dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 30*GeV, true);
+      DressedLeptons dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 30*GeV, PhotonOrigin::ALL);
       declare(dressed_mu, "muons");
-      DressedLeptons dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, true);
+      DressedLeptons dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressed_el, "electrons");
 
-      FastJets fj(fs, FastJets::ANTIKT, 1.0, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets fj(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
       declare(fj, "FJets");
-      FastJets sj(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets sj(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(sj, "Jets");
 
       ChargedLeptons lfs(FinalState(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV));
@@ -62,7 +59,8 @@ namespace Rivet {
       MissingMomentum missmom(fs);
       declare(missmom, "MissingMomentum");
 
-      _trimmer = fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2), fastjet::SelectorPtFractionMin(0.05));
+      _trimmer = fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2),
+				 fastjet::SelectorPtFractionMin(0.05));
 
       // Dijet
       if (_mode == 0 || _mode == 1) {
@@ -145,7 +143,7 @@ namespace Rivet {
       if (leptons.size())  return;
 
       // Normal fatjets
-      const Jets &fjets = apply<JetAlg>(event, "FJets").jetsByPt();
+      const Jets &fjets = apply<JetFinder>(event, "FJets").jetsByPt();
 
       // Trim the fatjets
       PseudoJets tr_ljets;
@@ -281,7 +279,7 @@ namespace Rivet {
       const Jet& lepjet = jets[lepJetIndex];
 
 
-      const Jets fjets = apply<JetAlg>(event, "FJets").jetsByPt();
+      const Jets fjets = apply<JetFinder>(event, "FJets").jetsByPt();
       PseudoJets tr_ljets_all;
       for (const Jet& j : fjets) {
         tr_ljets_all += _trimmer(j);

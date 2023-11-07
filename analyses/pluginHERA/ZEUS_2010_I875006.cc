@@ -28,8 +28,8 @@ namespace Rivet {
 
       // All final state particles boosted to Breit frame then clustered
       //using FastJet KT algorithm with jet radius parameter 1
-      const DISFinalState DISfs(DISFinalState::BoostFrame::BREIT);
-      FastJets DISjetfs(DISfs, FastJets::KT, 1.0);
+      const DISFinalState DISfs(DISFrame::BREIT);
+      FastJets DISjetfs(DISfs, JetAlg::KT, 1.0);
       declare(DISjetfs, "DISjets");
 
       // Book histograms

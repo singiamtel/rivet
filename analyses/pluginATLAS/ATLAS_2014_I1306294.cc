@@ -33,12 +33,12 @@ namespace Rivet {
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
 
       ZFinder zfinder(fs, cuts, _mode==1? PID::ELECTRON : PID::MUON, 76.0*GeV, 106.0*GeV, 0.1,
-                      ZFinder::ChargedLeptons::ALL, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::NO);
+                      LeptonOrigin::ALL, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
       declare(zfinder, "ZFinder");
 
       VetoedFinalState jet_fs(fs);
       jet_fs.addVetoOnThisFinalState(getProjection<ZFinder>("ZFinder"));
-      FastJets jetpro1(jet_fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jetpro1(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jetpro1, "AntiKtJets04");
       declare(HeavyHadrons(), "BHadrons");
 
@@ -75,7 +75,7 @@ namespace Rivet {
       if (stableBs.empty()) vetoEvent;
 
       // Get the b-jets
-      const Jets& jets = apply<JetAlg>(e, "AntiKtJets04").jetsByPt(Cuts::pT >20.0*GeV && Cuts::abseta <2.4);
+      const Jets& jets = apply<JetFinder>(e, "AntiKtJets04").jetsByPt(Cuts::pT >20.0*GeV && Cuts::abseta <2.4);
       Jets b_jets;
       for (const Jet& jet : jets) {
         //veto overlaps with Z leptons:

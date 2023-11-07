@@ -21,7 +21,7 @@ namespace Rivet {
     void init() {
       const ChargedFinalState cfs((Cuts::etaIn(-7., 7.)));
       declare(cfs, "CFS");
-      declare(FastJets(cfs, FastJets::ANTIKT, 0.5), "Jets");
+      declare(FastJets(cfs, JetAlg::ANTIKT, 0.5), "Jets");
 
       book(_h_tracks, 1, 1, 1);
       book(_h_jets  , 2, 1, 1);

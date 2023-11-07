@@ -33,7 +33,7 @@ namespace Rivet {
       WFinder wfinder(fs, Cuts::rap < 2.5 && Cuts::pT >= 25*GeV, _mode? PID::MUON : PID::ELECTRON, 0*GeV, 13*TeV, 0*GeV, 0.1);
       declare(wfinder, "WFinder");
 
-      FastJets jets( wfinder.remainingFinalState(), FastJets::ANTIKT, 0.4, JetAlg::Muons::DECAY, JetAlg::Invisibles::ALL);
+      FastJets jets( wfinder.remainingFinalState(), JetAlg::ANTIKT, 0.4, JetMuons::DECAY, JetInvisibles::ALL);
       declare(jets, "Jets_w");
 
       MissingMomentum missmom(FinalState(Cuts::eta < 5.0));
@@ -92,8 +92,8 @@ namespace Rivet {
       if ( wfinder.bosons().size() != 1 ) { vetoEvent; }
 
       boson    = wfinder.bosons().front().momentum();
-      lepton   = wfinder.constituentLeptons().front().momentum();
-      neutrino = wfinder.constituentNeutrinos().front().momentum();
+      lepton   = wfinder.leptons().front().momentum();
+      neutrino = wfinder.neutrinos().front().momentum();
 
       vector<FourMomentum> jets;
       for (const Jet& jet : jetpro.jetsByPt(30*GeV)) {

@@ -7,6 +7,27 @@
 namespace Rivet {
 
 
+  /// @brief Enum for categorising top quark decay modes
+  ///
+  /// More specifically, the decay mode of the W from the top. We presume top decay to a W and b quark.
+  enum class TopDecay {
+    ANY=0, ALL=0,
+    ELECTRON,
+    MUON,
+    TAU,
+    E_MU,
+    E_MU_TAU,
+    HADRONIC
+  };
+
+  /// @brief Enum for categorising which top quark to be selected: last (weakly decaying) or first?
+  enum class WhichTop { FIRST, LAST };
+
+  enum class PromptEMuFromTau { YES, NO };
+
+  enum class InclHadronicTau { YES, NO };
+  
+
   /// @brief Convenience finder of partonic top quarks
   ///
   /// @warning This projection requires there to be tops in the event record:
@@ -18,41 +39,30 @@ namespace Rivet {
   class PartonicTops : public ParticleFinder {
   public:
 
-    /// @brief Enum for categorising top quark decay modes
-    ///
-    /// More specifically, the decay mode of the W from the top. We presume top decay to a W and b quark.
-    enum class DecayMode {
-      ANY = 0,
-      ALL = 0,
-      ELECTRON,
-      MUON,
-      TAU,
-      E_MU,
-      E_MU_TAU,
-      HADRONIC
-    };
-
-    /// @brief Enum for categorising which top quark to be selected: last (weakly decaying) or first?
-    enum class WhichTop { FIRST, LAST };
-
-
     /// @name Constructors
     /// @{
 
     /// Constructor taking decay mode details (and an optional cuts object)
-    PartonicTops(DecayMode decaymode, bool emu_from_prompt_tau=true, bool include_hadronic_taus=false, const Cut& c=Cuts::OPEN, WhichTop whichtop=WhichTop::LAST)
+    PartonicTops(TopDecay decaymode,
+		 PromptEMuFromTau emu_from_prompt_tau=PromptEMuFromTau::YES,
+		 InclHadronicTau include_hadronic_taus=InclHadronicTau::NO,
+		 const Cut& c=Cuts::OPEN, WhichTop whichtop=WhichTop::LAST)
       : ParticleFinder(c), _topmode(whichtop), _decaymode(decaymode),
-        _emu_from_prompt_tau(emu_from_prompt_tau), _include_hadronic_taus(include_hadronic_taus)
+        _emu_from_prompt_tau(emu_from_prompt_tau == PromptEMuFromTau::YES),
+	_include_hadronic_taus(include_hadronic_taus == InclHadronicTau::YES)
     {  }
 
     /// Constructor taking decay mode details (and a non-optional cuts object)
-    PartonicTops(DecayMode decaymode, const Cut& c, bool emu_from_prompt_tau=true, bool include_hadronic_taus=false, WhichTop whichtop=WhichTop::LAST)
+    PartonicTops(TopDecay decaymode, const Cut& c,
+		 PromptEMuFromTau emu_from_prompt_tau=PromptEMuFromTau::YES,
+		 InclHadronicTau include_hadronic_taus=InclHadronicTau::NO,
+		 WhichTop whichtop=WhichTop::LAST)
       : PartonicTops(decaymode, emu_from_prompt_tau, include_hadronic_taus, c, whichtop)
     {  }
 
     /// Simple constructor optionally taking cuts object
     PartonicTops(const Cut& c=Cuts::OPEN, WhichTop whichtop=WhichTop::LAST)
-      : PartonicTops(DecayMode::ALL, true, false, c, whichtop)
+      : PartonicTops(TopDecay::ALL, PromptEMuFromTau::YES, InclHadronicTau::NO, c, whichtop)
     {  }
 
 
@@ -60,6 +70,7 @@ namespace Rivet {
     RIVET_DEFAULT_PROJ_CLONE(PartonicTops);
 
     /// @}
+
 
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
@@ -91,17 +102,17 @@ namespace Rivet {
       _theParticles = filter_select(event.allParticles(_cuts), (_topmode == WhichTop::LAST ? lastParticleWith(isTop) : firstParticleWith(isTop)));
 
       // Filtering by decay mode
-      if (_decaymode != DecayMode::ALL) {
+      if (_decaymode != TopDecay::ALL) {
         const auto decaycheck = [&](const Particle& t) {
           const Particles descendants = t.allDescendants();
           const bool prompt_e = any(descendants, [&](const Particle& p){ return p.abspid() == PID::ELECTRON && p.isPrompt(_emu_from_prompt_tau) && !p.hasAncestor(PID::PHOTON, false); });
           const bool prompt_mu = any(descendants, [&](const Particle& p){ return p.abspid() == PID::MUON && p.isPrompt(_emu_from_prompt_tau) && !p.hasAncestor(PID::PHOTON, false); });
-          if (prompt_e && (_decaymode == DecayMode::ELECTRON || _decaymode == DecayMode::E_MU || _decaymode == DecayMode::E_MU_TAU)) return true;
-          if (prompt_mu && (_decaymode == DecayMode::MUON || _decaymode == DecayMode::E_MU || _decaymode == DecayMode::E_MU_TAU)) return true;
+          if (prompt_e && (_decaymode == TopDecay::ELECTRON || _decaymode == TopDecay::E_MU || _decaymode == TopDecay::E_MU_TAU)) return true;
+          if (prompt_mu && (_decaymode == TopDecay::MUON || _decaymode == TopDecay::E_MU || _decaymode == TopDecay::E_MU_TAU)) return true;
           const bool prompt_tau = any(descendants, [&](const Particle& p){ return p.abspid() == PID::TAU && p.isPrompt()  && !p.hasAncestor(PID::PHOTON, false); });
           const bool prompt_hadronic_tau = any(descendants, [&](const Particle& p){ return p.abspid() == PID::TAU && p.isPrompt() && !p.hasAncestor(PID::PHOTON, false) && none(p.children(), isChargedLepton); });
-          if (prompt_tau && (_decaymode == DecayMode::TAU || _decaymode == DecayMode::E_MU_TAU)) return (_include_hadronic_taus || !prompt_hadronic_tau);
-          if (_decaymode == DecayMode::HADRONIC && (!prompt_e && !prompt_mu && (!prompt_tau || (_include_hadronic_taus && prompt_hadronic_tau)))) return true; //< logical hairiness...
+          if (prompt_tau && (_decaymode == TopDecay::TAU || _decaymode == TopDecay::E_MU_TAU)) return (_include_hadronic_taus || !prompt_hadronic_tau);
+          if (_decaymode == TopDecay::HADRONIC && (!prompt_e && !prompt_mu && (!prompt_tau || (_include_hadronic_taus && prompt_hadronic_tau)))) return true; //< logical hairiness...
           return false;
         };
         ifilter_select(_theParticles, decaycheck);
@@ -134,7 +145,7 @@ namespace Rivet {
 
     WhichTop _topmode;
 
-    DecayMode _decaymode;
+    TopDecay _decaymode;
 
     bool _emu_from_prompt_tau, _include_hadronic_taus;
 

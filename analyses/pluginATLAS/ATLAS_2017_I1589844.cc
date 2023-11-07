@@ -46,8 +46,8 @@ namespace Rivet {
       bare_mu.acceptIdPair(PID::MUON);
       IdentifiedFinalState bare_el(fs);
       bare_el.acceptIdPair(PID::ELECTRON);
-      const DressedLeptons muons(fs, bare_mu, 0.1, cuts_mu, true);
-      const DressedLeptons elecs(fs, bare_el, 0.1, cuts_el, true);
+      const DressedLeptons muons(fs, bare_mu, 0.1, cuts_mu, PhotonOrigin::ALL);
+      const DressedLeptons elecs(fs, bare_el, 0.1, cuts_el, PhotonOrigin::ALL);
       declare(muons, "muons");
       declare(elecs, "elecs");
 
@@ -55,16 +55,16 @@ namespace Rivet {
       VetoedFinalState jet_fs(cfs);
       jet_fs.addVetoOnThisFinalState(muons);
       jet_fs.addVetoOnThisFinalState(elecs);
-      declare(FastJets(jet_fs, FastJets::KT, 0.4), "Kt04Jets");
-      declare(FastJets(jet_fs, FastJets::KT, 1.0), "Kt10Jets");
+      declare(FastJets(jet_fs, JetAlg::KT, 0.4), "Kt04Jets");
+      declare(FastJets(jet_fs, JetAlg::KT, 1.0), "Kt10Jets");
 
       VetoedFinalState jet_fs_all(FinalState(Cuts::abseta < 2.5 && Cuts::pT > 0.4*GeV));
       jet_fs_all.addVetoOnThisFinalState(muons);
       jet_fs_all.addVetoOnThisFinalState(elecs);
-      FastJets jetpro04_all(jet_fs_all, FastJets::KT, 0.4);
+      FastJets jetpro04_all(jet_fs_all, JetAlg::KT, 0.4);
       jetpro04_all.useInvisibles();
       declare(jetpro04_all, "Kt04Jets_all");
-      FastJets jetpro10_all(jet_fs_all, FastJets::KT, 1.0);
+      FastJets jetpro10_all(jet_fs_all, JetAlg::KT, 1.0);
       jetpro10_all.useInvisibles();
       declare(jetpro10_all, "Kt10Jets_all");
 

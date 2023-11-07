@@ -31,11 +31,11 @@ namespace Rivet {
       IdentifiedFinalState all_photons(fs);
       all_photons.acceptIdPair(PID::PHOTON);
 
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON, true);
+      PromptFinalState photons(Cuts::abspid == PID::PHOTON, TauDecaysAs::PROMPT);
       declare(photons, "photons");
 
       // Projection to find the electrons
-      PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
 
       DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts);
       declare(dressedelectrons, "elecs");
@@ -43,7 +43,7 @@ namespace Rivet {
       DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full);
 
       // Projection to find the muons
-      PromptFinalState muons(Cuts::abspid == PID::MUON, true);
+      PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
 
       DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts);
       declare(dressedmuons, "muons");
@@ -57,7 +57,7 @@ namespace Rivet {
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(ewdressedelectrons);
       vfs.addVetoOnThisFinalState(ewdressedmuons);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
 
 

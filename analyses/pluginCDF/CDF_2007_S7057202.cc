@@ -15,9 +15,9 @@ namespace Rivet {
     void init() {
       // Set up projections
       const FinalState fs;
-      declare(FastJets(fs, FastJets::KT, 0.5), "JetsD05");
-      declare(FastJets(fs, FastJets::KT, 0.7), "JetsD07");
-      declare(FastJets(fs, FastJets::KT, 1.0), "JetsD10");
+      declare(FastJets(fs, JetAlg::KT, 0.5), "JetsD05");
+      declare(FastJets(fs, JetAlg::KT, 0.7), "JetsD07");
+      declare(FastJets(fs, JetAlg::KT, 1.0), "JetsD10");
 
       // Book histos
       book(_binnedHistosD07, {0., 0.1, 0.7, 1.1, 1.6, 2.1},
@@ -29,15 +29,15 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      for (const Jet& jet : apply<JetAlg>(event, "JetsD07").jets(Cuts::pT > 54*GeV)) {
+      for (const Jet& jet : apply<JetFinder>(event, "JetsD07").jets(Cuts::pT > 54*GeV)) {
         _binnedHistosD07->fill(jet.absrap(), jet.pT());
       }
 
-      for (const Jet& jet : apply<JetAlg>(event, "JetsD05").jets(Cuts::pT > 54*GeV)) {
+      for (const Jet& jet : apply<JetFinder>(event, "JetsD05").jets(Cuts::pT > 54*GeV)) {
         if (inRange(jet.absrap(), 0.1, 0.7))  _histoD05->fill(jet.pT());
       }
 
-      for (const Jet& jet : apply<JetAlg>(event, "JetsD10").jets(Cuts::pT > 54*GeV)) {
+      for (const Jet& jet : apply<JetFinder>(event, "JetsD10").jets(Cuts::pT > 54*GeV)) {
         if (inRange(jet.absrap(), 0.1, 0.7))  _histoD10->fill(jet.pT());
       }
     }

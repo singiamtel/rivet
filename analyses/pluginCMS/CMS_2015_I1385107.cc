@@ -26,7 +26,7 @@ namespace Rivet {
       declare(cfs, "CFS");
 
       const ChargedFinalState cfsforjet(Cuts::abseta < 2.5 && Cuts::pT > 500*MeV);
-      const FastJets jetpro(cfsforjet, FastJets::SISCONE, 0.5);
+      const FastJets jetpro(cfsforjet, JetAlg::SISCONE, 0.5);
       declare(jetpro, "Jets");
 
       book(_h_Nch_TransAVE_vs_pT ,1, 1, 1); // Nch vs. pT_max      (TransAVE)

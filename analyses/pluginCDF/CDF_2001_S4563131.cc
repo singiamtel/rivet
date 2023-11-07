@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       FinalState fs(Cuts::abseta < 4.2);
-      declare(FastJets(fs, FastJets::CDFJETCLU, 0.7), "Jets");
+      declare(FastJets(fs, JetAlg::CDFJETCLU, 0.7), "Jets");
       book(_h_ET, 1, 1, 1);
     }
 

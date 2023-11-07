@@ -138,10 +138,34 @@ namespace Rivet {
     return false;
   }
 
+  /// Get the value in map @a m with key @a key, or fall back to @a fallback
+  template <typename K, typename T>
+  inline const T& retrieve(const std::map<K, T>& m, const K& key, const T& fallback) {
+    return has_key(m, key) ? m[key] : fallback;
+  }
+
+  /// Get the value in map @a m with key @a key, or fall back to @a fallback (string-value specialisation)
+  template <typename K>
+  inline const std::string& retrieve(const std::map<K, std::string>& m, const K& key, const std::string& fallback) {
+    return has_key(m, key) ? m.find(key)->second : fallback;
+  }
+
+  /// Get the value in map @a m with key @a key, or fall back to @a fallback (string-key specialisation)
+  template <typename T>
+  inline const T& retrieve(const std::map<std::string, T>& m, const std::string& key, const T& fallback) {
+    return has_key(m, key) ? m.find(key)->second : fallback;
+  }
+
+  /// Get the value in map @a m with key @a key, or fall back to @a fallback (string-key+value specialisation)
+  inline const std::string& retrieve(const std::map<std::string, std::string>& m, const std::string& key, const std::string& fallback) {
+    return has_key(m, key) ? m.find(key)->second : fallback;
+  }  
+  
   /// @}
 
 
 }
+
 
 namespace std {
 

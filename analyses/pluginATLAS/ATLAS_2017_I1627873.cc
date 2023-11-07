@@ -40,7 +40,7 @@ namespace Rivet {
       remfs.addVetoOnThisFinalState(dressed_electrons);
       remfs.addVetoOnThisFinalState(dressed_muons);
 
-      FastJets jets(remfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets(remfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets, "Jets");
 
       if (_mode)  book(_h, 3, 1, 1);

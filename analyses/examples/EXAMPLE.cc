@@ -27,7 +27,7 @@ namespace Rivet {
       const ChargedFinalState cfs(cnfs);
       declare(cnfs, "FS");
       declare(cfs, "CFS");
-      declare(FastJets(cnfs, FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(cnfs, JetAlg::ANTIKT, 0.4), "Jets");
       declare(Thrust(cfs), "Thrust");
       declare(Sphericity(cfs), "Sphericity");
 

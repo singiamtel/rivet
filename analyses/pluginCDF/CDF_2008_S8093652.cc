@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms
     void init() {
       FinalState fs;
-      FastJets conefinder(fs, FastJets::CDFMIDPOINT, 0.7);
+      FastJets conefinder(fs, JetAlg::CDFMIDPOINT, 0.7);
       declare(conefinder, "ConeFinder");
 
       book(_h_m_dijet ,1, 1, 1);
@@ -28,7 +28,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & e) {
-      const JetAlg& jetpro = apply<JetAlg>(e, "ConeFinder");
+      const JetFinder& jetpro = apply<JetFinder>(e, "ConeFinder");
       const Jets& jets = jetpro.jetsByPt();
 
       if (jets.size() < 2) vetoEvent;

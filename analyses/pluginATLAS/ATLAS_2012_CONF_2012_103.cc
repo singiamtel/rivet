@@ -43,7 +43,7 @@ namespace Rivet {
       vfs.addVetoPairId(PID::MUON);
 
       /// Jet finder
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "AntiKtJets04");
+      declare(FastJets(vfs, JetAlg::ANTIKT, 0.4), "AntiKtJets04");
 
       /// Book histograms
       book(_etmiss_HT_7j55 ,"etmiss_HT_7j55", 8, 0., 16.);

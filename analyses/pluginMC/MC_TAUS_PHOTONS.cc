@@ -14,7 +14,7 @@ namespace Rivet {
 
       /// Book projections and histograms
       void init() {
-        TauFinder taus(TauFinder::DecayMode::ANY, Cuts::pT > 500*MeV);
+        TauFinder taus(TauDecay::ANY, Cuts::pT > 500*MeV);
         declare(taus, "Taus");
 
         IdentifiedFinalState photons(Cuts::pT > 500*MeV, PID::PHOTON);

@@ -23,7 +23,7 @@ namespace Rivet {
 
       FinalState fs(Cuts::abseta < 4.9);
 
-      FastJets fj(fs, FastJets::ANTIKT, 0.5, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets fj(fs, JetAlg::ANTIKT, 0.5, JetMuons::ALL, JetInvisibles::DECAY);
       declare(fj, "Jets");
 
       ZFinder zeeFinder(fs, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV, PID::ELECTRON, 71*GeV, 111*GeV);

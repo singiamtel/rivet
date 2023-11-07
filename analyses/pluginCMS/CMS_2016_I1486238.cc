@@ -23,7 +23,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      FastJets akt(FinalState(), FastJets::ANTIKT, 0.5);
+      FastJets akt(FinalState(), JetAlg::ANTIKT, 0.5);
       declare(akt, "antikT");
 
       book(_h_Deltaphi_newway, 1,1,1);
@@ -44,7 +44,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const Jets& jets = apply<JetAlg>(event, "antikT").jetsByPt(Cuts::absrap < 4.7 && Cuts::pT > 20*GeV);
+      const Jets& jets = apply<JetFinder>(event, "antikT").jetsByPt(Cuts::absrap < 4.7 && Cuts::pT > 20*GeV);
       if (jets.size() < 4) vetoEvent;
 
       // Initial quarks

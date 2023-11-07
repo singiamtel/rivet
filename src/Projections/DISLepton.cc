@@ -6,8 +6,12 @@ namespace Rivet {
 
   CmpState DISLepton::compare(const Projection& p) const {
     const DISLepton& other = pcast<DISLepton>(p);
-    return mkNamedPCmp(other, "Beam") || mkNamedPCmp(other, "LFS") ||
-      mkNamedPCmp(other, "IFS") || cmp(_sort, other._sort);
+    return \
+      mkNamedPCmp(other, "Beam") ||
+      mkNamedPCmp(other, "LFS") ||
+      mkNamedPCmp(other, "IFS") ||
+      cmp(_lsort, other._lsort) ||
+      cmp(_isolDR, other._isolDR);
   }
 
 
@@ -32,24 +36,21 @@ namespace Rivet {
     // (preferably same-flavour) prompt FS lepton in the event.
     const FinalState & fs = apply<FinalState>(e, "LFS");
     Particles fsleptons;
-    if ( _sort == ET )
+    if ( _lsort == ObjOrdering::ET )
       fsleptons = fs.particles(isLepton, cmpMomByEt);
-    else if ( _sort == ETA && _incoming.momentum().pz() >= 0.0 )
+    else if ( _lsort == ObjOrdering::ETA && _incoming.pz() >= 0.0 )
       fsleptons = fs.particles(isLepton, cmpMomByDescEta);
-    else if ( _sort == ETA && _incoming.momentum().pz() < 0.0 )
+    else if ( _lsort == ObjOrdering::ETA && _incoming.pz() < 0.0 )
       fsleptons = fs.particles(isLepton, cmpMomByEta);
-    else
+    else // _lsort == ObjOrdering::ENERGY
       fsleptons = fs.particles(isLepton, cmpMomByE);
 
-    Particles sfleptons =
-      filter_select(fsleptons, Cuts::pid == _incoming.pid());
-    MSG_DEBUG("SF leptons = " << sfleptons.size() << ", all leptons = "
-              << fsleptons.size());
+    Particles sfleptons = filter_select(fsleptons, Cuts::pid == _incoming.pid());
+    MSG_DEBUG("SF leptons = " << sfleptons.size() << ", all leptons = " << fsleptons.size());
     if ( sfleptons.empty() ) sfleptons = fsleptons;
 
     if ( _isolDR > 0.0 ) {
-      const Particles & other =
-        apply<FinalState>(e, "IFS").particles();
+      const Particles & other = apply<FinalState>(e, "IFS").particles();
       while (!sfleptons.empty()) {
         bool skip = false;
         Particle testlepton = sfleptons.front();
@@ -75,7 +76,6 @@ namespace Rivet {
     }
 
     _theParticles.push_back(_outgoing);
-
   }
 
 

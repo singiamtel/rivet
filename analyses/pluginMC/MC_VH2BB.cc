@@ -42,9 +42,9 @@ namespace Rivet {
       declare(wmfinder, "WmFinder");
 
       declare(fs, "FinalState");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.4), "AntiKT04");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.5), "AntiKT05");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.6), "AntiKT06");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "AntiKT04");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.5), "AntiKT05");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.6), "AntiKT06");
 
       /// Book histograms
       book(_h_jet_bb_Delta_eta ,"jet_bb_Delta_eta", 50, 0, 4);

@@ -8,11 +8,12 @@
 namespace Rivet {
 
 
-/// @brief ttbb at 13 TeV
-class ATLAS_2018_I1705857 : public Analysis {
- public:
-   /// Constructor
-   RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1705857);
+  /// @brief ttbb at 13 TeV
+  class ATLAS_2018_I1705857 : public Analysis {
+  public:
+    
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1705857);
 
     void init() {
       // Eta ranges
@@ -23,16 +24,16 @@ class ATLAS_2018_I1705857 : public Analysis {
       FinalState fs(eta_full);
 
       // Get photons to dress leptons
-      PromptFinalState photons(eta_full && Cuts::abspid == PID::PHOTON, true);
+      PromptFinalState photons(eta_full && Cuts::abspid == PID::PHOTON, TauDecaysAs::PROMPT);
 
       // Projection to find the electrons
-      PromptFinalState electrons(eta_full && Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState electrons(eta_full && Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
 
       // Projection to find the muons
-      PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, true);
+      PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
 
-      DressedLeptons dressedelectrons25(photons, electrons, 0.1, lep_cuts25, true);
-      DressedLeptons dressedmuons25(photons, muons, 0.1, lep_cuts25, true);
+      DressedLeptons dressedelectrons25(photons, electrons, 0.1, lep_cuts25, PhotonOrigin::ALL);
+      DressedLeptons dressedmuons25(photons, muons, 0.1, lep_cuts25, PhotonOrigin::ALL);
 
       declare(dressedelectrons25, "elecs");
       declare(dressedmuons25, "muons");
@@ -43,16 +44,16 @@ class ATLAS_2018_I1705857 : public Analysis {
       PromptFinalState neutrinos(nu_id);
       neutrinos.acceptTauDecays(true);
 
-      PromptFinalState jet_photons(eta_full && Cuts::abspid == PID::PHOTON, false);
-      DressedLeptons all_dressed_electrons(jet_photons, electrons, 0.1, eta_full, true);
-      DressedLeptons all_dressed_muons(jet_photons, muons, 0.1, eta_full, true);
+      PromptFinalState jet_photons(eta_full && Cuts::abspid == PID::PHOTON, TauDecaysAs::NONPROMPT);
+      DressedLeptons all_dressed_electrons(jet_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      DressedLeptons all_dressed_muons(jet_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
 
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(all_dressed_electrons);
       vfs.addVetoOnThisFinalState(all_dressed_muons);
       vfs.addVetoOnThisFinalState(neutrinos);
 
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::DECAY, JetAlg::Invisibles::DECAY);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::DECAY, JetInvisibles::DECAY);
       declare(jets, "jets");
 
       // fiducial cross-section histogram

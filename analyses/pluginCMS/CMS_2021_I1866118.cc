@@ -27,7 +27,7 @@ namespace Rivet {
 
       VetoedFinalState had_fs;
       had_fs.addVetoOnThisFinalState(zmumufinder);
-      FastJets jets(had_fs, FastJets::ANTIKT, 0.4);
+      FastJets jets(had_fs, JetAlg::ANTIKT, 0.4);
       jets.useInvisibles();
       declare(jets, "jets");
 

@@ -21,11 +21,22 @@ namespace Rivet {
       : _cuts(c), _theParticles()
     { }
 
+    // /// @brief Construction using a wrapped other ParticleFinder plus cuts
+    // ///
+    // /// Useful to apply extra cuts to a generic PF's returned particles.
+    // ParticleFinder(const ParticleFinder& pf, const Cut& c) //=Cuts::OPEN)
+    //   : _cuts(c), _theParticles()
+    // {
+    //   setName("ParticleFinder[" + pf.name() + "]");      
+    //   declare(pf, "PF");
+    // }
+    
     /// Virtual destructor for inheritance
     virtual ~ParticleFinder() {}
 
     /// Clone on the heap.
     virtual unique_ptr<Projection> clone() const = 0;
+    // RIVET_DEFAULT_PROJ_CLONE(ParticleFinder);
 
     /// @}
 

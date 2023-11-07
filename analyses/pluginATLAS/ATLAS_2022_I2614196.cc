@@ -9,6 +9,7 @@
 
 namespace Rivet {
 
+  
   /// @brief Zy+jets at 13 TeV
   class ATLAS_2022_I2614196 : public Analysis {
   public:
@@ -32,8 +33,8 @@ namespace Rivet {
       // Dressed leptons
       const FinalState allphoton_fs(Cuts::abspid == PID::PHOTON);
       const Cut leptoncut = Cuts::pT > 25*GeV && Cuts::abseta < 2.47;
-      const DressedLeptons dressedelectron_fs(allphoton_fs, bareelectron_fs, 0.1, leptoncut, true); // use *all* photons for lepton dressing
-      const DressedLeptons dressedmuon_fs(allphoton_fs, baremuon_fs, 0.1, leptoncut, true); // use *all* photons for lepton dressing
+      const DressedLeptons dressedelectron_fs(allphoton_fs, bareelectron_fs, 0.1, leptoncut, PhotonOrigin::ALL);
+      const DressedLeptons dressedmuon_fs(allphoton_fs, baremuon_fs, 0.1, leptoncut, PhotonOrigin::ALL);
 
       declare(dressedelectron_fs, "Electrons");
       declare(dressedmuon_fs, "Muons");
@@ -51,7 +52,7 @@ namespace Rivet {
       declare(hadrons, "hadrons");
 
       //Jets
-      FastJets jets(hadrons, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(hadrons, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
 
       // Histograms

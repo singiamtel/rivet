@@ -35,8 +35,8 @@ namespace Rivet {
       // Dressed leptons
       const IdentifiedFinalState allphoton_fs(PID::PHOTON); // photons used for lepton dressing
       const Cut leptoncut = Cuts::pT > 20*GeV && Cuts::abseta < 2.47;
-      const DressedLeptons dressedelectron_fs(allphoton_fs, bareelectron_fs, 0.1, leptoncut, true); // use *all* photons for lepton dressing
-      const DressedLeptons dressedmuon_fs(allphoton_fs, baremuon_fs, 0.1, leptoncut, true); // use *all* photons for lepton dressing
+      const DressedLeptons dressedelectron_fs(allphoton_fs, bareelectron_fs, 0.1, leptoncut, PhotonOrigin::ALL);
+      const DressedLeptons dressedmuon_fs(allphoton_fs, baremuon_fs, 0.1, leptoncut, PhotonOrigin::ALL);
 
       declare(dressedelectron_fs, "Electrons");
       declare(dressedmuon_fs, "Muons");

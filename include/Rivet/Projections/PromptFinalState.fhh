@@ -1,0 +1,19 @@
+// -*- C++ -*-
+#ifndef RIVET_PromptFinalState_FHH
+#define RIVET_PromptFinalState_FHH
+
+#include "Rivet/Projections/FinalState.hh"
+
+namespace Rivet {
+
+
+  /// How to treat decay products from prompt muons
+  enum class MuDecaysAs { PROMPT=0, NODECAY=0, NONPROMPT }; //DIRECT, INDIRECT }
+
+  /// How to treat decay products from prompt taus
+  enum class TauDecaysAs { PROMPT=0, NODECAY=0, NONPROMPT }; //DIRECT, INDIRECT }
+
+
+}
+
+#endif

@@ -22,7 +22,7 @@ namespace Rivet {
       // Initialise and register projections
       const FinalState fs;
       declare(fs, "FS");
-      declare(FastJets(fs, FastJets::DURHAM, 0.7), "Jets");
+      declare(FastJets(fs, JetAlg::DURHAM, 0.7), "Jets");
 
       // Book histograms here
       book(_h_BZ      ,3, 1, 1);

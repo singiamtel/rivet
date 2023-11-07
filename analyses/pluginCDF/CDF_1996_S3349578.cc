@@ -22,7 +22,7 @@ namespace Rivet {
 
       /// Initialise and register projections here
       const FinalState fs(Cuts::abseta < 4.2);
-      FastJets fj(fs, FastJets::CDFJETCLU, 0.7);
+      FastJets fj(fs, JetAlg::CDFJETCLU, 0.7);
       declare(fj, "Jets");
 
       // Smear energy and mass with the 10% uncertainty quoted in the paper
@@ -74,7 +74,7 @@ namespace Rivet {
     void analyze(const Event& event) {
       Jets jets;
       FourMomentum jetsystem(0.0, 0.0, 0.0, 0.0);
-      for (const Jet& jet : apply<JetAlg>(event, "SmearedJets").jets(Cuts::Et > 20.0*GeV, cmpMomByEt)) {
+      for (const Jet& jet : apply<JetFinder>(event, "SmearedJets").jets(Cuts::Et > 20.0*GeV, cmpMomByEt)) {
         bool separated = true;
         for (const Jet& ref : jets) {
           if (deltaR(jet, ref) < 0.9) {

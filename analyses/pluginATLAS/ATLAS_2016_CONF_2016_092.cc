@@ -19,7 +19,7 @@ namespace Rivet {
     void init() {
 
       // Define the jets
-      FastJets antiKT04Jets(FinalState(Cuts::open()),  FastJets::ANTIKT, 0.4);
+      FastJets antiKT04Jets(FinalState(Cuts::open()),  JetAlg::ANTIKT, 0.4);
       antiKT04Jets.useInvisibles();
       declare(antiKT04Jets, "antiKT04Jets");
 

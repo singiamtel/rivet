@@ -16,7 +16,7 @@ namespace Rivet {
     /// Initialization, called once before running
     void init() {
       // Projections
-      FastJets jets(FinalState(), FastJets::ANTIKT, 0.4);
+      FastJets jets(FinalState(), JetAlg::ANTIKT, 0.4);
       jets.useInvisibles();
       declare(jets, "Jets");
 

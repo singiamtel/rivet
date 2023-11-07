@@ -24,7 +24,7 @@ namespace Rivet {
 
       const FinalState fs;
       declare(fs, "FS");
-      declare(FastJets(fs, FastJets::DURHAM, 0.7), "DurhamJets");
+      declare(FastJets(fs, JetAlg::DURHAM, 0.7), "DurhamJets");
       const Thrust thrust(fs);
       declare(thrust, "Thrust");
       declare(Hemispheres(thrust), "Hemispheres");

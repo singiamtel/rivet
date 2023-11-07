@@ -4,7 +4,7 @@
 namespace Rivet {
 
 
-  JetFinder::JetFinder(const FinalState& fs, Muons usemuons, Invisibles useinvis)
+  JetFinder::JetFinder(const FinalState& fs, JetMuons usemuons, JetInvisibles useinvis)
     : _useMuons(usemuons), _useInvisibles(useinvis)
   {
     setName("JetFinder");

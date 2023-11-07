@@ -27,7 +27,7 @@ namespace Rivet {
 
       // Initialise and register projections
       FinalState calofs(Cuts::abseta < 4.9);
-      FastJets fj(calofs, FastJets::ANTIKT, 0.4);
+      FastJets fj(calofs, JetAlg::ANTIKT, 0.4);
       declare(fj, "TruthJets");
       declare(SmearedJets(fj, JET_SMEAR_ATLAS_RUN2, [](const Jet& j) {
             if (j.abseta() > 2.5) return 0.;
@@ -68,7 +68,7 @@ namespace Rivet {
       // Get baseline electrons, muons, and jets
       Particles elecs = apply<ParticleFinder>(event, "Electrons").particles();
       Particles muons = apply<ParticleFinder>(event, "Muons").particles();
-      Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.5);
+      Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.5);
 
       // Jet/electron/muons overlap removal and selection
       // Remove any jet within dR = 0.2 of an electron

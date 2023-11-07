@@ -25,7 +25,7 @@ namespace Rivet {
       muons.acceptIdPair(PID::MUON);
       declare(muons, "Muons");
 
-      FastJets jetproj(fs, FastJets::D0ILCONE, 0.7);
+      FastJets jetproj(fs, JetAlg::D0ILCONE, 0.7);
       jetproj.useInvisibles();
       declare(jetproj, "Jets");
 

@@ -6,9 +6,8 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
 
-
-
 namespace Rivet {
+
   
   /// @brief ATLAS pTmiss+gamma measurement at 13 TeV 
   class ATLAS_2018_I1698006 : public Analysis {
@@ -16,9 +15,10 @@ namespace Rivet {
     
     /// Default constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1698006);
+
     
     /// @name Analysis methods
-    //@{
+    /// @{
     void init() {
 
       // Get options
@@ -34,21 +34,21 @@ namespace Rivet {
       declare(photon_fs, "Photons");
 
       //missing energy (prompt neutrinos)
-      declare(InvisibleFinalState(true), "MET");
+      declare(InvisibleFinalState(OnlyPrompt::YES), "MET");
       
       if (_mode==1) {
 	FinalState allLeps(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
 	FinalState photons(Cuts::abspid == PID::PHOTON);
 	PromptFinalState promptLeps(allLeps);
 	Cut dressedLep_cuts = (Cuts::abseta < 2.7) && (Cuts::pT > 7*GeV);
-	const DressedLeptons dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, true);
+	DressedLeptons dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
 	declare(dressedLeps, "dressedLeptons");
       }
       
       //jets. run the jet finder on a final state without the prompt photons, and without neutrinos or muons
       VetoedFinalState jet_fs(Cuts::abseta > 4.5);
       jet_fs.addVetoOnThisFinalState(photon_fs);
-      FastJets fastjets(jet_fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets fastjets(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(fastjets, "Jets");
 
 
@@ -65,9 +65,9 @@ namespace Rivet {
       book(_h["Njets"],6,1,1);
 
     }
+
     
     void analyze(const Event& event) {
-
 
       const Particles& photons = apply<PromptFinalState>(event,"Photons").particlesByPt();
       const Jets& jets = apply<FastJets>(event,"Jets").jetsByPt(Cuts::pT > 50*GeV);
@@ -80,8 +80,7 @@ namespace Rivet {
 	const vector<DressedLepton> &dressedLeptons = apply<DressedLeptons>(event, "dressedLeptons").dressedLeptons();
 	if (dressedLeptons.size() > 0) vetoEvent;
       }
-      
-      
+            
       //Nγ==1 and Emiss > 150 GeV
       if (met_vec.mod() > 150*GeV && photons.size()==1){
 
@@ -110,22 +109,24 @@ namespace Rivet {
       
     }
 
-    void finalize() {
-      
+    
+    void finalize() {      
       const double sf = crossSection()/femtobarn/sumOfWeights();
       scale(_h, sf);
-
     }
 
-    //@}
+    /// @}
 
-    private:
+    
+  private:
+
     map<string, Histo1DPtr> _h;
+
     size_t _mode;
     
   };
 
-  // Magic required by the plugin system 
+  
   RIVET_DECLARE_PLUGIN(ATLAS_2018_I1698006);
   
 }

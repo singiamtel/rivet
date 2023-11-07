@@ -1043,7 +1043,8 @@ namespace Rivet {
     const CentralityProjection&
     declareCentrality(const SingleValueProjection &proj,
                       string calAnaName, string calHistName,
-                      const string projName, bool increasing=false);
+                      const string projName,
+		      PercentileOrder pctorder=PercentileOrder::DECREASING);
 
 
     /// @brief Book a Percentile Multiplexer around AnalysisObjects.

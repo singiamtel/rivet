@@ -41,9 +41,9 @@ namespace Rivet {
         VetoedFinalState jetinput(vfs);
         jetinput.addVetoOnThisFinalState(dressedmuons);
 
-        if (_mode != 1)  declare(InvisibleFinalState(true), "MET");
+        if (_mode != 1)  declare(InvisibleFinalState(OnlyPrompt::YES), "MET");
 
-        FastJets fastjets(jetinput, FastJets::ANTIKT, 0.4);
+        FastJets fastjets(jetinput, JetAlg::ANTIKT, 0.4);
         declare (fastjets, "Jets");
 
         // ZZ to four leptons channel

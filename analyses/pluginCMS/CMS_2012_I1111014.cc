@@ -26,9 +26,9 @@ namespace Rivet {
       // Set up projections
       const FinalState fs((Cuts::etaIn(-5.0, 5.0)));
       declare(fs, "FS");
-      FastJets fj5(fs, FastJets::ANTIKT, 0.5);
+      FastJets fj5(fs, JetAlg::ANTIKT, 0.5);
       declare(fj5, "Jets5");
-      FastJets fj7(fs, FastJets::ANTIKT, 0.7);
+      FastJets fj7(fs, JetAlg::ANTIKT, 0.7);
       declare(fj7, "Jets7");
 
       // Specify pT bins

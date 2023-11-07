@@ -8,9 +8,10 @@
 
 namespace Rivet {
 
+
   /// @brief Z pT over a wide mass range
   class CMS_2022_I2079374 : public Analysis {
-    public:
+  public:
 
       /// Constructor
       RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2022_I2079374);
@@ -34,14 +35,12 @@ namespace Rivet {
         PromptFinalState pfs(fs);
 
         PromptFinalState bareMuons(Cuts::abspid == PID::MUON);
-        declare(DressedLeptons(pfs, bareMuons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, true),
-                "muons");
+        declare(DressedLeptons(pfs, bareMuons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "muons");
 
         PromptFinalState bareElectrons(Cuts::abspid == PID::ELECTRON);
-        declare(DressedLeptons(pfs, bareElectrons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, true),
-                "electrons");
+        declare(DressedLeptons(pfs, bareElectrons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "electrons");
 
-        FastJets jets(fs, FastJets::ANTIKT, 0.4);
+        FastJets jets(fs, JetAlg::ANTIKT, 0.4);
         declare(jets, "jets");
 
         // Histograms

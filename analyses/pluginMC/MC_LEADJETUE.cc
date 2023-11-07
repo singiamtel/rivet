@@ -26,7 +26,7 @@ namespace Rivet {
       // Final state for the jet finding
       const FinalState fsj((Cuts::etaIn(-4.0, 4.0)));
       declare(fsj, "FSJ");
-      declare(FastJets(fsj, FastJets::KT, 0.7), "Jets");
+      declare(FastJets(fsj, JetAlg::KT, 0.7), "Jets");
 
       // Charged final state for the distributions
       const ChargedFinalState cfs((Cuts::etaIn(-1.0, 1.0) && Cuts::pT >=  0.5*GeV));

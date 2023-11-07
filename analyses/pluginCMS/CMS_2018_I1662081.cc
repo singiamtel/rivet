@@ -37,13 +37,13 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
       Cut looseLeptonCuts = Cuts::pt > 15*GeV && Cuts::abseta < 2.4;
 
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, looseLeptonCuts, true);
+      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, looseLeptonCuts, PhotonOrigin::ALL);
       declare(dressed_leptons, "DressedLeptons");
 
       // Projection for jets
       VetoedFinalState fsForJets(fs);
       fsForJets.addVetoOnThisFinalState(dressed_leptons);
-      declare(FastJets(fsForJets, FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(fsForJets, JetAlg::ANTIKT, 0.4), "Jets");
 
       // Projections for MET
       declare(MissingMomentum(fs), "MET");

@@ -28,7 +28,7 @@ namespace Rivet {
       declare(vfs, "VFS");
 
       // Jets
-      declare(FastJets(vfs, FastJets::CDFJETCLU, 0.7), "Jets");
+      declare(FastJets(vfs, JetAlg::CDFJETCLU, 0.7), "Jets");
 
       book(_h_costheta ,1, 1, 1);
 

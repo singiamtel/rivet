@@ -21,7 +21,7 @@ namespace Rivet {
       _dy_max = 8; _years = { 2010, 2011 };
       _Qnoughts = { 20., 30., 40., 50., 60., 70., 80., 90., 100. };
       /// Initialise and register projections here
-      FastJets fastJets(FinalState(), FastJets::ANTIKT, 0.6, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets fastJets(FinalState(), JetAlg::ANTIKT, 0.6, JetMuons::ALL, JetInvisibles::ALL);
       declare(fastJets, "AntiKt6JetsWithInvisibles");
 
 
@@ -70,7 +70,7 @@ namespace Rivet {
 
         // Retrieve all anti-kt R=0.6 jets
         const double maxRap = reg? 2.4 : 4.4;
-        const Jets& akt6Jets = apply<JetAlg>(event, "AntiKt6JetsWithInvisibles").jetsByPt(Cuts::absrap < maxRap);
+        const Jets& akt6Jets = apply<JetFinder>(event, "AntiKt6JetsWithInvisibles").jetsByPt(Cuts::absrap < maxRap);
         // If there are fewer than 2 jets then bail
         if ( akt6Jets.size() < 2 ) { vetoEvent; }
 

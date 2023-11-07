@@ -18,8 +18,8 @@ namespace Rivet {
 
     void init() {
       FinalState fs;
-      declare(FastJets(fs, FastJets::ANTIKT, 0.4), "Jets04");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.6), "Jets06");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "Jets04");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.6), "Jets06");
 
       book(_h_numBTagsPerJet[0] ,"numBTagsPer04Jet", 5, -0.5, 4.5);
       book(_h_numBTagsPerJet[1] ,"numBTagsPer06Jet", 5, -0.5, 4.5);

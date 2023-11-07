@@ -22,7 +22,7 @@ namespace Rivet {
 
       // Projections
       FinalState fs(Cuts::abseta < 4.5);
-      FastJets jet4(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jet4(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jet4, "Jets");
 
       ChargedFinalState tracks(Cuts::pT > 0.5*GeV && Cuts::abseta < 2.5);
@@ -46,7 +46,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 300*GeV && Cuts::abseta < 2.1);
+      const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 300*GeV && Cuts::abseta < 2.1);
 
       if (jets.size() < 2)  vetoEvent;
       if (jets[0].pT() < 675*GeV)  vetoEvent;

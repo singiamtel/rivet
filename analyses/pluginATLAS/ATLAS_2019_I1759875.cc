@@ -6,7 +6,8 @@
 
 namespace Rivet {
 
-  /// @brief lepton differential ttbar analysis at 13 TeV
+  
+  /// @brief Lepton differential ttbar analysis at 13 TeV
   class ATLAS_2019_I1759875 : public Analysis {
   public:
 
@@ -24,15 +25,15 @@ namespace Rivet {
       photons.acceptIdPair(PID::PHOTON);
 
       // Projection to find the electrons
-      PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       DressedLeptons elecs(photons, prompt_el, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
-      DressedLeptons veto_elecs(photons, prompt_el, 0.1, eta_full, false);
+      DressedLeptons veto_elecs(photons, prompt_el, 0.1, eta_full, PhotonOrigin::NODECAY);
       declare(elecs, "elecs");
 
       // Projection to find the muons
-      PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, true);
+      PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       DressedLeptons muons(photons, prompt_mu, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
-      DressedLeptons veto_muons(photons, prompt_mu, 0.1, eta_full, false);
+      DressedLeptons veto_muons(photons, prompt_mu, 0.1, eta_full, PhotonOrigin::NODECAY);
       declare(muons, "muons");
 
       VetoedFinalState vfs;

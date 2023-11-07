@@ -71,7 +71,7 @@ namespace Rivet {
       _h_W_pT_peak->fill(wmom.pT()/GeV);
       _h_W_y->fill(wmom.rapidity());
       _h_W_phi->fill(wmom.phi());
-      Particle l=wfinder.constituentLeptons()[0];
+      Particle l=wfinder.leptons()[0];
       _h_lepton_pT->fill(l.pT()/GeV);
       _h_lepton_eta->fill(l.eta());
       if (PID::charge3(l.pid()) != 0) {

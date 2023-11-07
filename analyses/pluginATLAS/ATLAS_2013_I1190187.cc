@@ -56,7 +56,7 @@ namespace Rivet {
       jetinput.addVetoOnThisFinalState(bare_MU);
       jetinput.addVetoOnThisFinalState(neutrinoFS);
 
-      FastJets jetpro(jetinput, FastJets::ANTIKT, 0.4);
+      FastJets jetpro(jetinput, JetAlg::ANTIKT, 0.4);
       declare(jetpro, "jet");
 
       // Book histograms
@@ -87,20 +87,20 @@ namespace Rivet {
       for (DressedLepton& l1 : dressed_lepton) {
         bool l_isolated = true;
         for (DressedLepton& l2 : dressed_lepton) {
-          if (!isSame(l1, l2) && l2.constituentLepton().abspid() == PID::ELECTRON) {
-            double overlapControl_ll= deltaR(l1.constituentLepton(),l2.constituentLepton());
+          if (!isSame(l1, l2) && l2.bareLepton().abspid() == PID::ELECTRON) {
+            double overlapControl_ll= deltaR(l1.bareLepton(), l2.bareLepton());
             if (overlapControl_ll < 0.1) {
               l_isolated = false;
               // e/e overlap removal
-              if (l1.constituentLepton().abspid() == PID::ELECTRON) {
-                if (l1.constituentLepton().pT()>l2.constituentLepton().pT()) {
+              if (l1.bareLepton().abspid() == PID::ELECTRON) {
+                if (l1.bareLepton().pT() > l2.bareLepton().pT()) {
                   isolated_lepton.push_back(l1);//keep e with highest pT
                 } else {
                   isolated_lepton.push_back(l2);//keep e with highest pT
                 }
               }
               // e/mu overlap removal
-              if (l1.constituentLepton().abspid() == PID::MUON) isolated_lepton.push_back(l1); //keep mu
+              if (l1.bareLepton().abspid() == PID::MUON) isolated_lepton.push_back(l1); //keep mu
             }
           }
         }
@@ -144,8 +144,8 @@ namespace Rivet {
         alljets.push_back(j);
         bool deltaRcontrol = true;
         for (DressedLepton& fl : fiducial_lepton) {
-          if (fl.constituentLepton().abspid() == PID::ELECTRON) { //electrons
-            double deltaRjets = deltaR(fl.constituentLepton().momentum(), j.momentum(), RAPIDITY);
+          if (fl.bareLepton().abspid() == PID::ELECTRON) { //electrons
+            double deltaRjets = deltaR(fl.bareLepton().momentum(), j.momentum(), RAPIDITY);
             if (deltaRjets <= 0.3) deltaRcontrol = false; //false if at least one electron is in the overlap region
           }
         }

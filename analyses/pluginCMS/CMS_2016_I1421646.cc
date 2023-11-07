@@ -16,7 +16,7 @@ namespace Rivet {
     /// Book projections and histograms
     void init() {
 
-      FastJets akt(FinalState(), FastJets::ANTIKT, 0.7);
+      FastJets akt(FinalState(), JetAlg::ANTIKT, 0.7);
       declare(akt, "antikT");
 
       book(_h_deltaPhi, {200., 300., 400., 500., 700., 900., 1100., 4000.});
@@ -29,7 +29,7 @@ namespace Rivet {
     /// Per-event analysis
     void analyze(const Event & event) {
 
-      const Jets& jets = apply<JetAlg>(event, "antikT").jetsByPt(Cuts::absrap < 5.0 && Cuts::pT > 100*GeV);
+      const Jets& jets = apply<JetFinder>(event, "antikT").jetsByPt(Cuts::absrap < 5.0 && Cuts::pT > 100*GeV);
       if (jets.size() < 2) vetoEvent;
       if (jets[0].pT() < 200*GeV) vetoEvent;
       if (jets[0].absrap() > 2.5 || jets[1].absrap() > 2.5) vetoEvent;

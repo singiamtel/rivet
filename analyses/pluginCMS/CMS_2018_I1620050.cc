@@ -19,10 +19,8 @@ namespace Rivet {
     void init() {
 
       // Parton level top quark to analyze dilepton channels only
-      // Note: 2nd argument of PartonicTops to toggle tau->lepton channel (true to inclusive, false to exclusive)
-      const bool acceptTauDecays = false;
-      declare(PartonicTops(PartonicTops::DecayMode::MUON, acceptTauDecays), "PartonTopsToMuon"); // Partonic top decaying to mu
-      declare(PartonicTops(PartonicTops::DecayMode::ELECTRON, acceptTauDecays), "PartonTopsToElectron"); // Partonic top decaying to e
+      declare(PartonicTops(TopDecay::MUON, PromptEMuFromTau::NO), "PartonTopsToMuon"); // Partonic top decaying to mu
+      declare(PartonicTops(TopDecay::ELECTRON, PromptEMuFromTau::NO), "PartonTopsToElectron"); // Partonic top decaying to e
 
       // Build particle level tops starting from FinalState
       const FinalState fs(Cuts::pT > 0. && Cuts::abseta < 6.);
@@ -30,7 +28,7 @@ namespace Rivet {
       // Neutrinos
       IdentifiedFinalState neutrinos(fs);
       neutrinos.acceptNeutrinos();
-      PromptFinalState prompt_neutrinos(neutrinos, true, true);
+      PromptFinalState prompt_neutrinos(neutrinos, TauDecaysAs::PROMPT, MuDecaysAs::PROMPT);
       declare(prompt_neutrinos, "Neutrinos");
 
       // Projection for electrons and muons
@@ -46,7 +44,7 @@ namespace Rivet {
       VetoedFinalState fs_jets(fs);
       fs_jets.addVetoOnThisFinalState(dressedLeptons);
       fs_jets.vetoNeutrinos();
-      declare(FastJets(fs_jets, FastJets::ANTIKT, 0.4), "ak4jets");
+      declare(FastJets(fs_jets, JetAlg::ANTIKT, 0.4), "ak4jets");
 
       // Book hists
       book(_hist_lep_pt, "d01-x01-y01");
@@ -176,7 +174,7 @@ namespace Rivet {
         ifs.acceptIdPair(PID::ELECTRON);
         ifs.acceptIdPair(PID::MUON);
         declare(ifs, "IFS");
-        declare(FastJets(ifs, FastJets::ANTIKT, 0.1), "LeptonJets");
+        declare(FastJets(ifs, JetAlg::ANTIKT, 0.1), "LeptonJets");
       }
 
       /// Clone on the heap.
@@ -219,8 +217,8 @@ namespace Rivet {
         for (const DressedLepton& lepton : allClusteredLeptons) {
           if (accept(lepton)) {
             _clusteredLeptons.push_back(lepton);
-            _theParticles.push_back(lepton.constituentLepton());
-            _theParticles += lepton.constituentPhotons();
+            _theParticles.push_back(lepton.bareLepton());
+            _theParticles += lepton.photons();
           }
         }
       }

@@ -3,9 +3,10 @@
 #define RIVET_PromptFinalState_HH
 
 #include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/PromptFinalState.fhh"
 
 namespace Rivet {
-
+  
 
   /// @brief Find final state particles directly connected to the hard process.
   ///
@@ -28,16 +29,16 @@ namespace Rivet {
     /// @{
 
     /// Constructor without cuts
-    PromptFinalState(bool accepttaudecays=false, bool acceptmudecays=false);
+    PromptFinalState(TauDecaysAs taudecays=TauDecaysAs::NONPROMPT, MuDecaysAs mudecays=MuDecaysAs::NONPROMPT);
 
     /// Constructor from a Cut
-    PromptFinalState(const Cut& c, bool accepttaudecays=false, bool acceptmudecays=false);
+    PromptFinalState(const Cut& c, TauDecaysAs taudecays=TauDecaysAs::NONPROMPT, MuDecaysAs mudecays=MuDecaysAs::NONPROMPT);
 
     // Constructor from a FinalState
-    PromptFinalState(const FinalState& fsp, bool accepttaudecays=false, bool acceptmudecays=false);
+    PromptFinalState(const FinalState& fsp, TauDecaysAs taudecays=TauDecaysAs::NONPROMPT, MuDecaysAs mudecays=MuDecaysAs::NONPROMPT);
 
     // /// Constructor from a Cut and optional FinalState.
-    // PromptFinalState(const Cut& c, const FinalState& fsp=FinalState(), bool accepttaudecays, bool acceptmudecays);
+    // PromptFinalState(const Cut& c, const FinalState& fsp=FinalState(), TauDecaysAs taudecays, MuDecaysAs mudecays);
 
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(PromptFinalState);
@@ -49,9 +50,9 @@ namespace Rivet {
 
 
     /// Accept leptons from decays of prompt muons as themselves being prompt?
-    void acceptMuonDecays(bool acc=true) { _acceptMuDecays = acc; }
+    void acceptMuonDecays(bool acc=true) { _mudecays = acc; }
     /// Accept leptons from decays of prompt taus as themselves being prompt?
-    void acceptTauDecays(bool acc=true) { _acceptTauDecays = acc; }
+    void acceptTauDecays(bool acc=true) { _taudecays = acc; }
 
 
     /// Apply the projection on the supplied event.
@@ -63,7 +64,7 @@ namespace Rivet {
 
   protected:
 
-    bool _acceptMuDecays, _acceptTauDecays;
+    bool _mudecays, _taudecays;
 
   };
 

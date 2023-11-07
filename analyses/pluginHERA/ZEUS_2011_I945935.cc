@@ -26,7 +26,7 @@ namespace Rivet {
           declare(labcut, "UFS");
           const DISKinematics& diskin = DISKinematics();
           declare(diskin, "Kinematics");
-          const DISFinalState&  disfsbf = DISFinalState(labcut, DISFinalState::BoostFrame::BREIT, diskin);
+          const DISFinalState&  disfsbf = DISFinalState(labcut, DISFrame::BREIT, diskin);
           declare(disfsbf, "FSBF");
 
           for (size_t offset = 0; offset < 5; offset++) {

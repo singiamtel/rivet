@@ -24,7 +24,7 @@ namespace Rivet {
     void init() {
       // Projections
       const FinalState fs(Cuts::abseta < 2.5);
-      declare(FastJets(fs, FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "Jets");
 
       #ifdef RIVET_ENABLE_HEPMC_3   
       _writer = std::make_shared<HepMC3::WriterAscii>("EXAMPLE_HEPMC_FILTER.hepmc3");

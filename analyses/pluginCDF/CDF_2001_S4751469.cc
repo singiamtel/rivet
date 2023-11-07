@@ -40,7 +40,7 @@ namespace Rivet {
       //const SmearedParticles lossyfs(cfs, [](const Particle&){ return 0.92; });
 
       declare(lossyfs, "FS");
-      declare(FastJets(lossyfs, FastJets::TRACKJET, 0.7), "TrackJet");
+      declare(FastJets(lossyfs, JetAlg::TRACKJET, 0.7), "TrackJet");
 
       book(_numvsDeltaPhi2, 1, 1, 1);
       book(_numvsDeltaPhi5, 1, 1, 2);
@@ -91,7 +91,7 @@ namespace Rivet {
       if (!trigger) vetoEvent;
 
       // Get jets, sorted by pT
-      const Jets jets = apply<JetAlg>(event, "TrackJet").jetsByPt();
+      const Jets jets = apply<JetFinder>(event, "TrackJet").jetsByPt();
       if (jets.empty()) vetoEvent;
       const Jet jet1 = jets.front();
       const double ptLead = jet1.pT();

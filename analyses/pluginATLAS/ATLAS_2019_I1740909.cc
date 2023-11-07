@@ -22,7 +22,7 @@ namespace Rivet {
       jetinput.addVetoOnThisFinalState(bare_MU);
       jetinput.addVetoOnThisFinalState(InvisibleFinalState());
 
-      FastJets jetpro(jetinput, FastJets::ANTIKT, 0.4);
+      FastJets jetpro(jetinput, JetAlg::ANTIKT, 0.4);
       declare(jetpro, "Jets");
 
       book(_p["nch_jetpt_F"], 1, 1, 1);
@@ -58,7 +58,7 @@ namespace Rivet {
       double ctval=0;
 
       // Event selection
-      Jets m_goodJets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 100*GeV && Cuts::abseta < 2.1);
+      Jets m_goodJets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 100*GeV && Cuts::abseta < 2.1);
       if (m_goodJets.size() < 2) vetoEvent;
       if (fabs(1.0 - m_goodJets[0].pT()/m_goodJets[1].pT()) > 0.5)  vetoEvent;
       // Decide forward or central

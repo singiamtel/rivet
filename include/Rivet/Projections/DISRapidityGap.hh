@@ -9,20 +9,16 @@
 
 namespace Rivet {
 
-
-  /// @brief Get the incoming and outgoing hadron in a diffractive ep
-  /// event.
+  
+  /// @brief Get the incoming and outgoing hadron in a diffractive ep event
   class DISRapidityGap : public Projection {
 
   public:
 
-    /// Type of DIS boost to apply
-    enum Frame { HCM, LAB, XCM };
-
     DISRapidityGap() {
       setName("DISRapidityGap");
       declare(DISKinematics(), "DISKIN");
-      declare(DISFinalState(DISFinalState::BoostFrame::HCM), "DISFS");
+      declare(DISFinalState(DISFrame::HCM), "DISFS");
     }
 
     RIVET_DEFAULT_PROJ_CLONE(DISRapidityGap);
@@ -43,16 +39,16 @@ namespace Rivet {
     double gapLow() const { return _gapLow; }
 
     /// @todo Document
-    double EpPzX(Frame f) const {
-      if (f == LAB) return _ePpzX_LAB;
-      else if (f == XCM) return _ePpzX_XCM;
+    double EpPzX(const DISFrame& f) const {
+      if (f == DISFrame::LAB) return _ePpzX_LAB;
+      else if (f == DISFrame::XCM) return _ePpzX_XCM;
       else return _ePpzX_HCM;
     }
 
     /// @todo Document
-    const double emPzX(Frame f) const {
-      if (f == LAB) return _eMpzX_LAB;
-      else if (f == XCM) return _eMpzX_XCM;
+    const double emPzX(const DISFrame& f) const {
+      if (f == DISFrame::LAB) return _eMpzX_LAB;
+      else if (f == DISFrame::XCM) return _eMpzX_XCM;
       else return _eMpzX_HCM;
     }
 
@@ -60,36 +56,36 @@ namespace Rivet {
     /// The particles defining system X
     ///
     /// @todo Document
-    const Particles& systemX(Frame f) const {
-      if (f == LAB) return _pX_LAB;
-      else if (f == XCM) return _pX_XCM;
+    const Particles& systemX(const DISFrame& f) const {
+      if (f == DISFrame::LAB) return _pX_LAB;
+      else if (f == DISFrame::XCM) return _pX_XCM;
       else return _pX_HCM;
     }
 
     /// The particles defining system Y
     ///
     /// @todo Document
-    const Particles& systemY(Frame f) const {
-      if (f == LAB) return _pY_LAB;
-      else if (f == XCM) return _pY_XCM;
+    const Particles& systemY(const DISFrame& f) const {
+      if (f == DISFrame::LAB) return _pY_LAB;
+      else if (f == DISFrame::XCM) return _pY_XCM;
       else return _pY_HCM;
     }
 
     /// Four-momentum of system X
     ///
     /// @todo Document
-    const FourMomentum pX(Frame f) const {
-      if (f == LAB) return _momX_LAB;
-      else if (f == XCM) return _momX_XCM;
+    const FourMomentum pX(const DISFrame& f) const {
+      if (f == DISFrame::LAB) return _momX_LAB;
+      else if (f == DISFrame::XCM) return _momX_XCM;
       else return _momX_HCM;
     }
 
     /// Four-momentum of system Y
     ///
     /// @todo Document
-    const FourMomentum pY(Frame f) const {
-      if (f == LAB) return _momY_LAB;
-      else if (f == XCM) return _momY_XCM;
+    const FourMomentum pY(const DISFrame& f) const {
+      if (f == DISFrame::LAB) return _momY_LAB;
+      else if (f == DISFrame::XCM) return _momY_XCM;
       else return _momY_HCM;
     }
 
@@ -129,7 +125,7 @@ namespace Rivet {
 
   };
 
+  
 }
-
 
 #endif

@@ -29,7 +29,7 @@ namespace Rivet {
       /// @todo Acceptance
       FinalState fs;
       // Final state particles with central tracking detector.
-      declare(FastJets(fs, FastJets::KT, 1.0), "Jets");
+      declare(FastJets(fs, JetAlg::KT, 1.0), "Jets");
 
       // Projections
       declare(DISKinematics(), "Kinematics");

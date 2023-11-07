@@ -16,9 +16,7 @@ namespace Rivet {
   class ATLAS_2014_I1304688 : public Analysis {
   public:
 
-
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2014_I1304688);
-
 
     void init() {
       // Eta ranges
@@ -30,25 +28,25 @@ namespace Rivet {
       FinalState photons(eta_full && Cuts::abspid == PID::PHOTON);
 
       // Projection to find the electrons
-      PromptFinalState electrons(eta_full && Cuts::abspid == PID::ELECTRON, true);
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, true);
+      PromptFinalState electrons(eta_full && Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
-      DressedLeptons vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT >= 15*GeV, true);
+      DressedLeptons vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT >= 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedelectrons, "vetodressedelectrons");
-      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, true);
+      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       // Projection to find the muons
-      PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, true);
-      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 25*GeV, true);
+      PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 25*GeV, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
-      DressedLeptons vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 15*GeV, true);
+      DressedLeptons vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedmuons, "vetodressedmuons");
-      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, true);
+      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
 
       // Projection to find neutrinos and produce MET
-      InvisibleFinalState neutrinos(true, true);
+      InvisibleFinalState neutrinos(OnlyPrompt::YES, TauDecaysAs::PROMPT);
       declare(neutrinos, "neutrinos");
 
       // Jet clustering.
@@ -56,7 +54,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(ewdressedelectrons);
       vfs.addVetoOnThisFinalState(ewdressedmuons);
       vfs.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4);
       jets.useInvisibles();
       declare(jets, "jets");
 

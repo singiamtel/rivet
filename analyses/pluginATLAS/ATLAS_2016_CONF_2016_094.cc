@@ -27,7 +27,7 @@ namespace Rivet {
 
       // Initialise and register projections
       FinalState calofs(Cuts::abseta < 4.9);
-      FastJets fj(calofs, FastJets::ANTIKT, 0.4);
+      FastJets fj(calofs, JetAlg::ANTIKT, 0.4);
       declare(fj, "TruthJets");
       declare(SmearedJets(fj, JET_SMEAR_ATLAS_RUN2, [](const Jet& j) {
             if (j.abseta() > 2.5) return 0.;
@@ -71,7 +71,7 @@ namespace Rivet {
       // NB. for electrons, we don't apply the loose ID here, since we don't want to double-count effs with later use of tight ID
       Particles elecs = apply<ParticleFinder>(event, "Electrons").particles();
       Particles muons = apply<ParticleFinder>(event, "Muons").particles();
-      Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.4);
+      Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.4);
       ifilter_select(jets, JetEffFilter([](const Jet& j) { return j.pT() > 60*GeV ? 1.0 : 0.94; }));
 
 

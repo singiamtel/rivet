@@ -5,6 +5,7 @@
 #include "Rivet/Projection.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
+#include "Rivet/Projections/DressedLeptons.fhh"
 #include "Rivet/Config/RivetCommon.hh"
 
 namespace Rivet {
@@ -12,36 +13,31 @@ namespace Rivet {
 
   /// @brief A charged lepton meta-particle created by clustering photons close to the bare lepton
   ///
-  /// @todo Remove completely -- it's unnecessary and too confusing (esp. between copying & aggregating)
-  /// @deprecated Just use Particle.constituents() now.
+  /// @deprecated Prefer to use Particle.constituents()
   class DressedLepton : public Particle {
   public:
 
     /// Copy constructor (from Particle)
     DressedLepton(const Particle& dlepton);
 
-    /// Components constructor
+    /// @brief Components constructor
+    ///
     /// @note This is not a copy constructor, hence the explicit second argument even if empty
     DressedLepton(const Particle& lepton, const Particles& photons, bool momsum=true);
 
-    /// Add a photon to the dressed lepton
+    /// @brief Add a photon to the dressed lepton
+    ///
     /// @todo Deprecate and override add/setConstituents instead?
     void addPhoton(const Particle& p, bool momsum=true);
 
     /// Retrieve the bare lepton
     const Particle& bareLepton() const;
-    /// Retrieve the bare lepton (alias)
-    /// @deprecated Prefer the more physicsy bareLepton()
-    const Particle& constituentLepton() const { return bareLepton(); }
 
     /// Retrieve the clustered photons
     const Particles photons() const { return slice(constituents(), 1); }
-    /// Retrieve the clustered photons (alias)
-    /// @deprecated Prefer the shorter photons()
-    const Particles constituentPhotons() const { return photons(); }
 
   };
-
+  
 
   /// @brief Cluster photons from a given FS to all charged particles (typically leptons)
   ///
@@ -72,9 +68,9 @@ namespace Rivet {
     /// by a jet clustering algorithm.  Set the clustering radius to 0 or
     /// negative to disable clustering.
     DressedLeptons(const FinalState& allfs,
-                   double dRmax, const Cut& cut=Cuts::open(),
-                   bool useDecayPhotons=false,
-                   bool useJetClustering=false);
+                   double dRmax, const Cut& cut=Cuts::OPEN,
+                   PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+                   DressingType dressing=DressingType::CONE);
 
     /// @brief Constructor with default input FinalState
     ///
@@ -86,10 +82,10 @@ namespace Rivet {
     /// leptons is to be done via dR matching to the bare lepton or by a jet
     /// clustering algorithm.  Set the clustering radius to 0 or negative to
     /// disable clustering.
-    DressedLeptons(double dRmax, const Cut& cut=Cuts::open(),
-                   bool useDecayPhotons=false,
-                   bool useJetClustering=false)
-      : DressedLeptons(FinalState(), dRmax, cut, useDecayPhotons, useJetClustering)
+    DressedLeptons(double dRmax, const Cut& cut=Cuts::OPEN,
+                   PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+                   DressingType dressing=DressingType::CONE)
+      : DressedLeptons(FinalState(), dRmax, cut, whichphotons, dressing)
     {   }
 
     /// @brief Constructor with distinct photon and lepton finders
@@ -103,14 +99,16 @@ namespace Rivet {
     /// algorithm.  Set the clustering radius to 0 or negative to disable
     /// clustering.
     ///
-    /// @note Wish we had put the first two args the other way around...
+    /// @note Wish we had put the first two args the other way around... not reversible!
     ///
-    /// @todo Convert second arg to a general ParticleFinder rather than an FS, to
-    /// allow clustering on to unstables, e.g. taus via TauFinder.
+    /// @todo Convert the second arg to a general ParticleFinder rather than an FS, to
+    /// allow clustering of unstables, e.g. taus via TauFinder when that becomes a PF.
+    /// Complicated by the clustering version relying on MergedFinalState and FastJets'
+    /// current restriction to FinalState inputs. Requires widespread redesign.
     DressedLeptons(const FinalState& photons, const FinalState& bareleptons,
-                   double dRmax, const Cut& cut=Cuts::open(),
-                   bool useDecayPhotons=false,
-                   bool useJetClustering=false);
+                   double dRmax, const Cut& cut=Cuts::OPEN,
+                   PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+                   DressingType dressing=DressingType::CONE);
 
 
     /// Clone this projection

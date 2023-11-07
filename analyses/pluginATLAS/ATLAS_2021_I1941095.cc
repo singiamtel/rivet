@@ -9,7 +9,6 @@
 #include "Rivet/Projections/PartonicTops.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Tools/MendelMin.hh"
-
 #include "fastjet/tools/Filter.hh"
 
 namespace Rivet {
@@ -32,32 +31,32 @@ namespace Rivet {
       // Declare projections
 
       // Photons
-      PromptFinalState promptphotons(Cuts::abspid == PID::PHOTON, false);
+      PromptFinalState promptphotons(Cuts::abspid == PID::PHOTON, TauDecaysAs::NONPROMPT);
 
       // Electrons
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true); // true = use electrons from prompt tau decays
-      DressedLeptons all_dressed_el(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5, true);
-      DressedLeptons electrons(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV, true);
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_el(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      DressedLeptons electrons(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(electrons,"electrons");
 
       // Muons
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // true = use muons from prompt tau decays
-      DressedLeptons all_dressed_mu(promptphotons, bare_mu, 0.1, Cuts::abseta < 2.5, true);
-      DressedLeptons muons(promptphotons,bare_mu, 0.1, Cuts::abseta <2.5 && Cuts::pT > 25*GeV, true);
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_mu(promptphotons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      DressedLeptons muons(promptphotons,bare_mu, 0.1, Cuts::abseta <2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(muons,"muons");
 
       // AntiKt4TruthWZJets as AntiKt4TruthWZJets, but w/o photons from hadrons in dressing
-      const InvisibleFinalState invisibles(true, true);
+      const InvisibleFinalState invisibles(OnlyPrompt::YES, TauDecaysAs::PROMPT);
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5.0)); // changed from 4.5 to 5.0
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
       vfs.addVetoOnThisFinalState(invisibles); // new
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL); // changed invisible from DECAY to ALL
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL); // changed invisible from DECAY to ALL
       declare(jets,"jets");
 
       // AntiKt10TruthTrimmedPtFrac5SmallR20Jets
       FinalState fs(Cuts::abseta < 5.0);
-      FastJets fjets(fs, FastJets::ANTIKT, 1.0, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets fjets(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
       _trimmer = fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2), fastjet::SelectorPtFractionMin(0.05));
       declare(fjets,"fjets");
 
@@ -66,10 +65,10 @@ namespace Rivet {
 
       // Parton level top quarks after FSR
       // options are: decaymode, emu_from_prompt_tau, include_hadronic_taus
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU, true, false), "PartonicTops_EMU");
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU, false, false), "PartonicTops_EMU_notau");
-      declare(PartonicTops(PartonicTops::DecayMode::HADRONIC, false, true), "PartonicTops_HADRONIC");
-      declare(PartonicTops(PartonicTops::DecayMode::HADRONIC, false, false), "PartonicTops_HADRONIC_notau");
+      declare(PartonicTops(TopDecay::E_MU, PromptEMuFromTau::YES, InclHadronicTau::NO), "PartonicTops_EMU");
+      declare(PartonicTops(TopDecay::E_MU, PromptEMuFromTau::NO, InclHadronicTau::NO), "PartonicTops_EMU_notau");
+      declare(PartonicTops(TopDecay::HADRONIC, PromptEMuFromTau::NO, InclHadronicTau::YES), "PartonicTops_HADRONIC");
+      declare(PartonicTops(TopDecay::HADRONIC, PromptEMuFromTau::NO, InclHadronicTau::NO), "PartonicTops_HADRONIC_notau");
 
       // Book histograms
       const Estimate1D& ref_asymm = refData(1, 1, 1);

@@ -7,8 +7,6 @@
 namespace Rivet {
 
 
-
-
   /// @brief MC validation analysis for W^+[enu]W^-[munu] + jets events
   class MC_WWJETS : public MC_JetAnalysis {
   public:
@@ -60,19 +58,17 @@ namespace Rivet {
       const double R = getOption<double>("R", 0.4);
 
       // set clustering algorithm from input option
-      FastJets::Algo clusterAlgo;
+      JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
-
       if ( algoopt == "KT" ) {
-	clusterAlgo = FastJets::KT;
+	clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = FastJets::CA;
+	clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = FastJets::ANTIKT;
+	clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
-		    "Defaulting to anti-kT");
-	clusterAlgo = FastJets::ANTIKT;
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+	clusterAlgo = JetAlg::ANTIKT;
       }
 
       FastJets jetpro(jetinput, clusterAlgo, R);
@@ -106,10 +102,10 @@ namespace Rivet {
       FourMomentum wmnu = wmnufinder.bosons()[0].momentum();
       FourMomentum ww = wenu + wmnu;
       // find leptons
-      FourMomentum ep = wenufinder.constituentLeptons()[0].momentum();
-      FourMomentum enu = wenufinder.constituentNeutrinos()[0].momentum();
-      FourMomentum mm = wmnufinder.constituentLeptons()[0].momentum();
-      FourMomentum mnu = wmnufinder.constituentNeutrinos()[0].momentum();
+      FourMomentum ep = wenufinder.leptons()[0].momentum();
+      FourMomentum enu = wenufinder.neutrinos()[0].momentum();
+      FourMomentum mm = wmnufinder.leptons()[0].momentum();
+      FourMomentum mnu = wmnufinder.neutrinos()[0].momentum();
 
       const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(_jetptcut);
       if (jets.size() > 0) {

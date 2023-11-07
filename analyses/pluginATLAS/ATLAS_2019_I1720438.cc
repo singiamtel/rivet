@@ -29,7 +29,7 @@ namespace Rivet {
       // Electrons and muons in Fiducial PS
       PromptFinalState leptons(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       leptons.acceptTauDecays(false);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, Cuts::open(), true);
+      DressedLeptons dressedleptons(photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
       declare(dressedleptons, "DressedLeptons");
 
       // Prompt neutrinos (yikes!)
@@ -41,19 +41,19 @@ namespace Rivet {
       MSG_WARNING("\033[91;1mLIMITED VALIDITY - check info file for details!\033[m");
 
       // Muons
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // true = use muons from prompt tau decays
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, true);
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       // Electrons
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true); // true = use electrons from prompt tau decays
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, true);
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5.0));
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
-
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "Jets");
 
       // Book auxiliary histograms

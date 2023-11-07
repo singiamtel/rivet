@@ -34,7 +34,7 @@ namespace Rivet {
        VetoedFinalState vfs(fs);
        vfs.addVetoOnThisFinalState(invfsW);
        declare(vfs, "VFS");
-       declare(FastJets(vfs, FastJets::ANTIKT, 0.5), "Jets");
+       declare(FastJets(vfs, JetAlg::ANTIKT, 0.5), "Jets");
 
        book(_h_deltaS_eq2jet_Norm ,1,1,1);
        book(_h_rel_deltaPt_eq2jet_Norm ,2,1,1);

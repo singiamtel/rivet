@@ -18,7 +18,7 @@ namespace Rivet {
 
       // Find true jets
       const FinalState fs(Cuts::abseta < 4.2);
-      FastJets fj(fs, FastJets::CDFJETCLU, 0.7);
+      FastJets fj(fs, JetAlg::CDFJETCLU, 0.7);
 
       // Smear jet energy and mass with the 10% uncertainty quoted in the paper
       SmearedJets sj_E(fj, [](const Jet& jet){ return P4_SMEAR_MASS_GAUSS(P4_SMEAR_E_GAUSS(jet, 0.1*jet.E()), 0.1*jet.mass()); });
@@ -49,7 +49,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const Jets alljets = apply<JetAlg>(event, "Jets").jets(Cuts::Et > 20*GeV && Cuts::abseta < 3, cmpMomByEt);
+      const Jets alljets = apply<JetFinder>(event, "Jets").jets(Cuts::Et > 20*GeV && Cuts::abseta < 3, cmpMomByEt);
 
       Jets jets;
       double sumEt = 0.0;

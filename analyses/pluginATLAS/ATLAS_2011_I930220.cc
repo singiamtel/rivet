@@ -18,7 +18,7 @@ namespace Rivet {
     void init() {
       FinalState fs((Cuts::etaIn(-3.5, 3.5)));
       declare(fs, "FinalState");
-      FastJets fj(fs, FastJets::ANTIKT, 0.4);
+      FastJets fj(fs, JetAlg::ANTIKT, 0.4);
       fj.useInvisibles();
       declare(fj, "Jets");
       declare(HeavyHadrons(Cuts::abseta < 3.5 && Cuts::pT > 5*GeV), "BHadrons");
@@ -41,7 +41,7 @@ namespace Rivet {
     void analyze(const Event& evt) {
 
       const Particles& bHadrons = apply<HeavyHadrons>(evt, "BHadrons").bHadrons();
-      const Jets& jets = apply<JetAlg>(evt, "Jets").jetsByPt(15*GeV);
+      const Jets& jets = apply<JetFinder>(evt, "Jets").jetsByPt(15*GeV);
 
       FourMomentum leadingJet, subleadingJet;
       int leadJet = 0, subJet = 0;

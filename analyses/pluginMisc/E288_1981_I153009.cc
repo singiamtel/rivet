@@ -24,7 +24,7 @@ namespace Rivet {
       // Initialise and register projections
       const FinalState fs;
 
-      ZFinder zfinder(fs, Cuts::abseta < 15.0, PID::MUON, 3.5*GeV, 30.0*GeV, 0.1, ZFinder::ClusterPhotons::NONE );
+      ZFinder zfinder(fs, Cuts::abseta < 15.0, PID::MUON, 3.5*GeV, 30.0*GeV, 0.1, PhotonOrigin::NONE );
       declare(zfinder, "ZFinder");
 
       // Book histograms

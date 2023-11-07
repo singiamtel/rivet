@@ -6,19 +6,22 @@
 
 namespace Rivet {
 
-  /// @brief Measurements of angular distance and momentum ratio distributions in three-jet and Z + two-jet final states in pp collisions
+  
+  /// @brief Angular distance and momentum ratios in 3-jet and Z+2-jet final states
   class CMS_2021_I1847230 : public Analysis {
   public:
 
     CMS_2021_I1847230 ()
       : Analysis("CMS_2021_I1847230")
     {}
-    void init() {
 
+    
+    void init() {
       _mode = 0;
       if ( getOption("MODE") == "QCD8TeV" ) _mode = 1;
       else if ( getOption("MODE") == "QCD13TeV" ) _mode = 2;
       else if ( getOption("MODE") == "ZJet" ) _mode = 3;
+      
       if (_mode == 1) {
          _jr = 0.5;
          book(_h1, "d01-x01-y01");
@@ -34,19 +37,18 @@ namespace Rivet {
          book(_h4, "d08-x01-y01");
        }
        if (_mode == 1 or _mode == 2) {
-         const FastJets jets(FinalState(), FastJets::ANTIKT, _jr);
+         const FastJets jets(FinalState(), JetAlg::ANTIKT, _jr);
          declare(jets, "jets");
        }
        if (_mode == 3) {
          FinalState fs(Cuts::abseta < 2.4 and Cuts::pT > 100*MeV);
          declare(fs, "FS");
   
-         ZFinder zfinder(fs, Cuts::abseta < 5. and Cuts::pT > 30*GeV, PID::MUON, 70*GeV, 110*GeV,
-              0.2, ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, 
-              ZFinder::AddPhotons::NO, 91.2*GeV);
+         ZFinder zfinder(fs, Cuts::abseta < 5. and Cuts::pT > 30*GeV, PID::MUON, 70*GeV, 110*GeV, 0.2,
+			 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, 91.2*GeV);
   
          declare(zfinder, "ZFinder");
-         declare(FastJets(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.5), "JetsAK5_zj");
+         declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5), "JetsAK5_zj");
   
          book(_h1, "d09-x01-y01");  
          book(_h2, "d10-x01-y01");  
@@ -60,7 +62,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       if (_mode == 1 or _mode ==2) {
-        const Jets& jets = apply<JetAlg>(event, "jets").jetsByPt(Cuts::pT > 30.0*GeV);
+        const Jets& jets = apply<JetFinder>(event, "jets").jetsByPt(Cuts::pT > 30.0*GeV);
         if (jets.size() < 3) vetoEvent;
         const FourMomentum jet1 = jets[0].momentum();
         const FourMomentum jet2 = jets[1].momentum();
@@ -93,7 +95,7 @@ namespace Rivet {
   
         if (psjetsAK5_zj.empty()) vetoEvent;
         
-        const fastjet::PseudoJet& j0 = psjetsAK5_zj[0];
+        const PseudoJet& j0 = psjetsAK5_zj[0];
         const FourMomentum jmom0(j0.e(), j0.px(), j0.py(), j0.pz());
         
         if (jmom0.absrapidity() > 1.0 or jmom0.pT() < 80.0*GeV) vetoEvent;
@@ -103,7 +105,7 @@ namespace Rivet {
 
         if(psjetsAK5_zj.size() < 2) vetoEvent;
         
-        const fastjet::PseudoJet& j1 = psjetsAK5_zj[1];
+        const PseudoJet& j1 = psjetsAK5_zj[1];
         const FourMomentum jmom1(j1.e(), j1.px(), j1.py(), j1.pz());
         if(deltaR(leptons[0], jmom1) < 0.5 or deltaR(leptons[1], jmom1) < 0.5 or jmom1.absrapidity() > 2.4) vetoEvent;
         
@@ -118,6 +120,7 @@ namespace Rivet {
       }
     }
 
+    
     void finalize() {
       if (_mode == 1 or _mode == 2) {
         normalize(_h1);
@@ -149,6 +152,7 @@ namespace Rivet {
       }
     }
 
+    
   private:
 
     Histo1DPtr  _h1;
@@ -160,11 +164,11 @@ namespace Rivet {
 
     double _jr;
 
-  protected:
-
     size_t _mode;
 
   };
 
+  
   RIVET_DECLARE_PLUGIN(CMS_2021_I1847230);
+
 }

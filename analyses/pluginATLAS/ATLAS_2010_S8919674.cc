@@ -35,7 +35,7 @@ namespace Rivet {
       veto.addVetoOnThisFinalState(wfinder_mu);
       veto.addVetoPairId(PID::MUON);
       veto.vetoNeutrinos();
-      FastJets jets(veto, FastJets::ANTIKT, 0.4);
+      FastJets jets(veto, JetAlg::ANTIKT, 0.4);
       declare(jets, "jets");
 
       /// Book histograms
@@ -57,8 +57,8 @@ namespace Rivet {
 
       const WFinder& We = apply<WFinder>(event, "W_e");
       if (We.bosons().size() == 1) {
-        const FourMomentum p_miss = We.constituentNeutrinos()[0];
-        const FourMomentum p_lept = We.constituentLeptons()[0];
+        const FourMomentum p_miss = We.neutrinos()[0];
+        const FourMomentum p_lept = We.leptons()[0];
         if (p_miss.Et() > 25*GeV && We.mT() > 40*GeV) {
           Jets js;
           for (const Jet& j : jets) {
@@ -82,8 +82,8 @@ namespace Rivet {
 
       const WFinder& Wm = apply<WFinder>(event, "W_mu");
       if (Wm.bosons().size() == 1) {
-        const FourMomentum p_miss = Wm.constituentNeutrinos()[0];
-        const FourMomentum p_lept = Wm.constituentLeptons()[0];
+        const FourMomentum p_miss = Wm.neutrinos()[0];
+        const FourMomentum p_lept = Wm.leptons()[0];
         if (p_miss.Et() > 25*GeV && Wm.mT() > 40*GeV) {
           Jets js;
           for (const Jet& j : jets) {

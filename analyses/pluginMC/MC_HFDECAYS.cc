@@ -32,7 +32,7 @@ namespace Rivet {
         
         declare(HeavyHadrons(),"HA");
 
-        FastJets jetpro(FinalState(), FastJets::ANTIKT, 0.4, JetAlg::Muons::DECAY, JetAlg::Invisibles::DECAY);
+        FastJets jetpro(FinalState(), JetAlg::ANTIKT, 0.4, JetMuons::DECAY, JetInvisibles::DECAY);
         declare(jetpro, "Jets");
 
         // bar charts

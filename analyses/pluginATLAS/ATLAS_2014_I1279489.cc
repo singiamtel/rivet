@@ -142,7 +142,7 @@ namespace Rivet {
       DressedLeptons dressed_muons(photon_fs, muon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_muons, "DressedMuons");
 
-      FastJets jets(fs, FastJets::ANTIKT, 0.4);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4);
       declare(jets, "Jets");
 
       initialisePlots(baseline_plots, "baseline");

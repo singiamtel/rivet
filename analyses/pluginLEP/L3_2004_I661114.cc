@@ -22,7 +22,7 @@ namespace Rivet {
       // get the hadronic final state
       const GammaGammaKinematics& diskin = declare(GammaGammaKinematics(), "Kinematics");
       const FinalState & fs = declare(GammaGammaFinalState(diskin), "FS");
-      declare(FastJets(fs, FastJets::KT,1.),"Jets");
+      declare(FastJets(fs, JetAlg::KT,1.),"Jets");
 
       // Book histograms
       book(_h_y, 1, 1, 1);

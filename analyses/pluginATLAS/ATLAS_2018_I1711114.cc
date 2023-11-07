@@ -20,10 +20,10 @@ namespace Rivet {
       FinalState fs(Cuts::abseta<5.0);
 
       ChargedFinalState cfs(Cuts::pT > 0.5*GeV && Cuts::abseta < 2.5);
-      FastJets smallR_jets(cfs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets smallR_jets(cfs, JetAlg::ANTIKT, 0.2, JetMuons::NONE, JetInvisibles::NONE);
       declare(smallR_jets, "track_jets");
 
-      FastJets largeR_jets(fs, FastJets::ANTIKT, 1.0, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets largeR_jets(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
       declare(largeR_jets, "largeR_jets");
 
       book(_h_R, 1,1,1);

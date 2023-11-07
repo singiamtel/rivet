@@ -44,7 +44,7 @@ namespace Rivet {
       VetoedFinalState veto;
       veto.addVetoOnThisFinalState(leptons);
       veto.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(veto, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(veto, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
 
       for (size_t i = 0; i < 2; ++i) {

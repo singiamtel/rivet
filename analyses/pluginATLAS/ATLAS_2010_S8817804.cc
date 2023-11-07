@@ -19,8 +19,8 @@ namespace Rivet {
     void init() {
       FinalState fs;
       declare(fs, "FinalState");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.6), "AntiKT06");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.4), "AntiKT04");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.6), "AntiKT06");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "AntiKT04");
 
       const vector<double> ybins{ 0.0, 0.3, 0.8, 1.2, 2.1, 2.8 };
       const vector<double> massBinsForChi{ 340, 520, 800, 1200 };

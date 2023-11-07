@@ -34,8 +34,8 @@ namespace Rivet {
       declare(thrust, "Thrust"    );
       declare(Hemispheres(thrust), "Hemispheres");
       declare(ParisiTensor(fs), "Parisi");
-      declare(FastJets(cfs, FastJets::DURHAM, 0.7), "DurhamJets");
-      declare(FastJets(cfs, FastJets::JADE  , 0.7), "JadeJets"  );
+      declare(FastJets(cfs, JetAlg::DURHAM, 0.7), "DurhamJets");
+      declare(FastJets(cfs, JetAlg::JADE  , 0.7), "JadeJets"  );
       // histograms
       book(_histThrust    ,  1, 1, 1);
       book(_histMajor     ,  2, 1, 1);

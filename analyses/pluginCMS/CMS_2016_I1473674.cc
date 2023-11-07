@@ -26,8 +26,8 @@ namespace Rivet {
       FinalState fs;
 
       // Parton level top quarks
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU, false), "LeptonicPartonTops");
-      declare(PartonicTops(PartonicTops::DecayMode::HADRONIC),    "HadronicPartonTops");
+      declare(PartonicTops(TopDecay::E_MU, PromptEMuFromTau::NO), "LeptonicPartonTops");
+      declare(PartonicTops(TopDecay::HADRONIC), "HadronicPartonTops");
 
       // Projections for dressed electrons and muons
       IdentifiedFinalState photons(fs);
@@ -50,7 +50,7 @@ namespace Rivet {
       // Projection for jets
       VetoedFinalState fs_jets;
       fs_jets.addVetoOnThisFinalState(dressed_muons);
-      declare(FastJets(fs_jets, FastJets::ANTIKT, 0.5), "Jets");
+      declare(FastJets(fs_jets, JetAlg::ANTIKT, 0.5), "Jets");
 
       // Projections for MET
       declare(MissingMomentum(), "MET");

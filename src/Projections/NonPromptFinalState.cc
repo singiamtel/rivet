@@ -4,16 +4,18 @@
 namespace Rivet {
 
 
-  NonPromptFinalState::NonPromptFinalState(const FinalState& fsp, bool accepttaudecays, bool acceptmudecays)
-    : _acceptMuDecays(acceptmudecays), _acceptTauDecays(accepttaudecays)
+  NonPromptFinalState::NonPromptFinalState(const FinalState& fsp, TauDecaysAs taudecays, MuDecaysAs mudecays)
+    : _mudecays(mudecays == MuDecaysAs::NONPROMPT),
+      _taudecays(taudecays == TauDecaysAs::NONPROMPT)
   {
     setName("NonPromptFinalState");
     declare(fsp, "FS");
   }
 
 
-  NonPromptFinalState::NonPromptFinalState(const Cut& c, bool accepttaudecays, bool acceptmudecays)
-    : _acceptMuDecays(acceptmudecays), _acceptTauDecays(accepttaudecays)
+  NonPromptFinalState::NonPromptFinalState(const Cut& c, TauDecaysAs taudecays, MuDecaysAs mudecays)
+    : _mudecays(mudecays == MuDecaysAs::NONPROMPT),
+      _taudecays(taudecays == TauDecaysAs::NONPROMPT)
   {
     setName("NonPromptFinalState");
     declare(FinalState(c), "FS");
@@ -24,7 +26,7 @@ namespace Rivet {
     const PCmp fscmp = mkNamedPCmp(p, "FS");
     if (fscmp != CmpState::EQ) return fscmp;
     const NonPromptFinalState& other = dynamic_cast<const NonPromptFinalState&>(p);
-    return cmp(_acceptMuDecays, other._acceptMuDecays) || cmp(_acceptTauDecays, other._acceptTauDecays);
+    return cmp(_mudecays, other._mudecays) || cmp(_taudecays, other._taudecays);
   }
 
 
@@ -33,7 +35,7 @@ namespace Rivet {
 
     const Particles& particles = apply<FinalState>(e, "FS").particles();
     for (const Particle& p : particles)
-      if (!isPrompt(p, !_acceptTauDecays, !_acceptMuDecays)) _theParticles.push_back(p);
+      if (!isPrompt(p, !_taudecays, !_mudecays)) _theParticles.push_back(p);
     MSG_DEBUG("Number of final state particles from hadron decays = " << _theParticles.size());
 
     if (getLog().isActive(Log::TRACE)) {

@@ -37,7 +37,7 @@ namespace Rivet {
       vfs.vetoNeutrinos();
       vfs.addVetoPairDetail(PID::MUON, 1.0*GeV, DBL_MAX);
       declare(vfs, "VFS");
-      declare(FastJets(vfs, FastJets::D0ILCONE, 0.7), "Jets");
+      declare(FastJets(vfs, JetAlg::D0ILCONE, 0.7), "Jets");
       declare(MissingMomentum(vfs), "CalMET");
 
       // Book histograms
@@ -52,7 +52,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Analyse and print some info
-      const JetAlg& jetpro = apply<JetAlg>(event, "Jets");
+      const JetFinder& jetpro = apply<JetFinder>(event, "Jets");
       MSG_DEBUG("Jet multiplicity before any pT cut = " << jetpro.size());
 
       const Jets jets  = jetpro.jetsByPt(40.0*GeV);

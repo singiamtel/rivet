@@ -35,31 +35,31 @@ namespace Rivet {
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, true, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, true, true);
+      DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON);
       muons.acceptTauDecays(true);
       declare(muons, "muons");
 
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, true, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(dressedmuons, "dressedmuons");
 
-      DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, true, true);
+      DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(ewdressedmuons, "ewdressedmuons");
 
       PromptFinalState taus(eta_full && Cuts::abspid == PID::TAU);
       declare(taus, "taus");
 
       VetoedFinalState vfs(fs);
-      InvisibleFinalState prompt_invis(true, true); // require promptness & allow from prompt tau decays
+      InvisibleFinalState prompt_invis(OnlyPrompt::YES, TauDecaysAs::PROMPT);
       vfs.addVetoOnThisFinalState(dressedelectrons);
       vfs.addVetoOnThisFinalState(dressedmuons);
       vfs.addVetoOnThisFinalState(prompt_invis);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4);
       declare(jets, "jets");
 
 

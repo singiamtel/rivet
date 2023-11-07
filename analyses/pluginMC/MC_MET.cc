@@ -7,7 +7,6 @@
 namespace Rivet {
 
 
-
   /// @brief MC validation analysis for truth-MET measurement
   /// @todo Add plots for MET based on prompt invisibles
   class MC_MET : public Analysis {
@@ -23,7 +22,7 @@ namespace Rivet {
       declare(MissingMomentum(calofs), "CaloMET");
 
       declare(InvisibleFinalState(), "InvisibleFS");
-      declare(InvisibleFinalState(true), "PromptInvisibleFS");
+      declare(InvisibleFinalState(OnlyPrompt::YES), "PromptInvisibleFS");
 
       book(_h["met_incl"], "met_incl", logspace(50, 10, sqrtS()/GeV/5));
       book(_h["met_calo"], "met_calo", logspace(50, 10, sqrtS()/GeV/5));

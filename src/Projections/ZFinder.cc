@@ -8,13 +8,13 @@ namespace Rivet {
 
 
   ZFinder::ZFinder(const FinalState& inputfs,
-		   const Cut & fsCut,
+		   const Cut& fsCut,
                    PdgId pid,
                    double minmass, double maxmass,
                    double dRmax,
-                   ChargedLeptons chLeptons,
-                   ClusterPhotons clusterPhotons,
-                   AddPhotons trackPhotons,
+                   LeptonOrigin chLeptons,
+                   PhotonOrigin clusterPhotons,
+                   PhotonsAsConstituents trackPhotons,
                    double masstarget)
   {
     setName("ZFinder");
@@ -28,7 +28,7 @@ namespace Rivet {
     // Identify bare leptons for dressing
     // Bit of a code nightmare -- FS projection copy constructors don't work?
     /// @todo Fix FS copy constructors!!
-    if (chLeptons == ChargedLeptons::PROMPT) {
+    if (chLeptons == LeptonOrigin::PROMPT) {
       PromptFinalState inputfs_prompt(inputfs);
       IdentifiedFinalState bareleptons = IdentifiedFinalState(inputfs_prompt);
       bareleptons.acceptIdPair(_pid);
@@ -40,9 +40,10 @@ namespace Rivet {
     }
 
     // Dress the bare leptons
-    const bool doClustering = (clusterPhotons != ClusterPhotons::NONE);
-    const bool useDecayPhotons = (clusterPhotons == ClusterPhotons::ALL);
-    DressedLeptons leptons(inputfs, get<FinalState>("BareLeptons"), (doClustering ? dRmax : -1.0), fsCut, useDecayPhotons);
+    const bool doClustering = (clusterPhotons != PhotonOrigin::NONE);
+    //const bool useDecayPhotons = (clusterPhotons == PhotonOrigin::ALL);
+    DressedLeptons leptons(inputfs, get<FinalState>("BareLeptons"),
+			   (doClustering ? dRmax : -1.0), fsCut, clusterPhotons);
     declare(leptons, "DressedLeptons");
 
     // Identify the non-Z part of the event
@@ -57,12 +58,21 @@ namespace Rivet {
 
 
 
-  const Particles & ZFinder::constituentLeptons() const {
-    static const Particles none;
-    if (empty()) return none;
-    return boson().constituents();
+  const Particles& ZFinder::constituents() const {
+    static const Particles NO_PARTICLES;
+    return empty() ? NO_PARTICLES : boson().constituents();
   }
 
+  
+  // const Particles ZFinder::leptons() const {
+  //   static const Particles NO_PARTICLES;
+  //   if (empty()) return NO_PARTICLES;
+  //   Particles rtn;
+  //   for (size_t i = 0; i < 2; ++i) rtn.push_back(constituents().at(i));
+  //   return rtn;
+  // }
+
+  
   const VetoedFinalState& ZFinder::remainingFinalState() const {
     return getProjection<VetoedFinalState>("RFS");
   }
@@ -106,8 +116,8 @@ namespace Rivet {
     const Particle& l2 = p2.charge() < 0 ? p2 : p1;
     MSG_TRACE("l1 = " << l1.constituents());
     MSG_TRACE("l2 = " << l2.constituents());
-    z.addConstituent(_trackPhotons == AddPhotons::YES ? l1 : l1.constituents().front());
-    z.addConstituent(_trackPhotons == AddPhotons::YES ? l2 : l2.constituents().front());
+    z.addConstituent(_trackPhotons == PhotonsAsConstituents::YES ? l1 : l1.constituents().front());
+    z.addConstituent(_trackPhotons == PhotonsAsConstituents::YES ? l2 : l2.constituents().front());
     MSG_DEBUG("Number of stored raw Z constituents = " << z.rawConstituents().size() << "  " << z.rawConstituents());
 
     // Register the completed Z

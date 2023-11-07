@@ -8,9 +8,9 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/FastJets.hh"
 
-
 namespace Rivet {
 
+  
   /// @brief Semileptonic ttbar at 13 TeV
   class ATLAS_2019_I1750330 : public Analysis {
   public:
@@ -29,41 +29,41 @@ namespace Rivet {
 
       FinalState all_photons(fs, Cuts::abspid == PID::PHOTON);
 
-      PromptFinalState photons(all_photons, false);
+      PromptFinalState photons(all_photons, TauDecaysAs::NONPROMPT);
       declare(photons, "photons");
 
-      PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, true);
+      DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
-      PromptFinalState muons(Cuts::abspid == PID::MUON, true);
+      PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       declare(muons, "muons");
 
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
 
-      DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, true);
+      DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
 
-      const InvisibleFinalState neutrinos(true, true);
+      InvisibleFinalState neutrinos(OnlyPrompt::YES, TauDecaysAs::PROMPT);
 
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(dressedelectrons);
       vfs.addVetoOnThisFinalState(dressedmuons);
       vfs.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets, "boosted_jets");
 
       VetoedFinalState vfs_res(fs);
       vfs_res.addVetoOnThisFinalState(ewdressedelectrons);
       vfs_res.addVetoOnThisFinalState(ewdressedmuons);
       vfs_res.addVetoOnThisFinalState(neutrinos);
-      FastJets jets_res(vfs_res, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets_res(vfs_res, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets_res, "resolved_jets");
 
       declare(MissingMomentum(), "MissingMomentum");

@@ -18,7 +18,7 @@ namespace Rivet {
     void init() {
       // Projections AntiKt4TruthJets
       const FinalState fs(Cuts::abseta < 4.5);
-      FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "Jets");
 
       // Book histograms
@@ -32,7 +32,7 @@ namespace Rivet {
 
       const double htBins[11] = {1000.0, 1200.0, 1400.0, 1600.0, 1800.0, 2000.0, 2300.0, 2600.0, 3000.0, 3500.0, 13000.0};
 
-      const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 60.0*GeV && Cuts::abseta < 2.4);
+      const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 60.0*GeV && Cuts::abseta < 2.4);
 
       if (jets.size() < 2) vetoEvent;
 

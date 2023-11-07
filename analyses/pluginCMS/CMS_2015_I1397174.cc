@@ -22,13 +22,13 @@ namespace Rivet {
     void init() {
 
       // Parton level top quarks
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU, false), "PartonTops");
+      declare(PartonicTops(TopDecay::E_MU, PromptEMuFromTau::NO), "PartonTops");
 
       // Find jets not related to the top/W decays
       VetoedFinalState vfs;
       vfs.addDecayProductsVeto(PID::WPLUSBOSON);
       vfs.addDecayProductsVeto(PID::WMINUSBOSON);
-      FastJets fj(vfs, FastJets::ANTIKT, 0.5, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets fj(vfs, JetAlg::ANTIKT, 0.5, JetMuons::ALL, JetInvisibles::ALL);
       declare(fj, "Jets");
 
       // Book histograms
@@ -144,7 +144,7 @@ namespace Rivet {
       const Particle lep2 = t2.allDescendants(lastParticleWith(isPromptChLepton)).front();
       if (lep1.pT() < 1e-9*GeV || lep2.pT() < 1e-9*GeV) vetoEvent; // sanity check?
 
-      const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.4);
+      const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.4);
       int nJet30 = 0, nJet60 = 0, nJet100 = 0;
       Jets topBJets, addJets, addBJets, addJets_eta0, addJets_eta1, addJets_eta2;
       for (const Jet& jet : jets) {

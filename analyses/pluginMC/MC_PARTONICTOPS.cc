@@ -20,10 +20,11 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      declare(PartonicTops(PartonicTops::DecayMode::ALL), "AllTops");
-      declare(PartonicTops(PartonicTops::DecayMode::ALL, true, false, Cuts::OPEN, PartonicTops::WhichTop::FIRST), "AllTopsFirst"); ///< @todo API ick!
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU), "LeptonicTops");
-      declare(PartonicTops(PartonicTops::DecayMode::HADRONIC), "HadronicTops");
+      declare(PartonicTops(TopDecay::ALL), "AllTops");
+      declare(PartonicTops(TopDecay::ALL, PromptEMuFromTau::YES, InclHadronicTau::NO,
+			   Cuts::OPEN, WhichTop::FIRST), "AllTopsFirst");
+      declare(PartonicTops(TopDecay::E_MU), "LeptonicTops");
+      declare(PartonicTops(TopDecay::HADRONIC), "HadronicTops");
 
       // Book histograms
       book(_h_tall_n, "t_all_n", linspace(5, -0.5, 4.5));

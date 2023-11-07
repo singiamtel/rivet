@@ -76,8 +76,8 @@ namespace Rivet {
     void analyze(const Event& event) {
       const double weight = event.weight();
 
-      const Jets tjets = apply<JetAlg>(event, "TrueJets").jetsByPt(Cuts::pT > 40*GeV);
-      const Jets rjets = apply<JetAlg>(event, "RecoJets").jetsByPt(Cuts::pT > 40*GeV);
+      const Jets tjets = apply<JetFinder>(event, "TrueJets").jetsByPt(Cuts::pT > 40*GeV);
+      const Jets rjets = apply<JetFinder>(event, "RecoJets").jetsByPt(Cuts::pT > 40*GeV);
       MSG_DEBUG("Numbers of jets = " << tjets.size() << " true; " << rjets.size() << " reco");
       _h_nj_true->fill(tjets.size(), weight);
       _h_nj_reco->fill(rjets.size(), weight);

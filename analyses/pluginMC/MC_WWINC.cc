@@ -96,10 +96,10 @@ namespace Rivet {
       FourMomentum wmnu(wmnufinder.bosons()[0].momentum());
       FourMomentum ww(wenu+wmnu);
       // find leptons
-      FourMomentum ep=wenufinder.constituentLeptons()[0].momentum();
-      FourMomentum enu=wenufinder.constituentNeutrinos()[0].momentum();
-      FourMomentum mm=wmnufinder.constituentLeptons()[0].momentum();
-      FourMomentum mnu=wmnufinder.constituentNeutrinos()[0].momentum();
+      FourMomentum ep=wenufinder.leptons()[0].momentum();
+      FourMomentum enu=wenufinder.neutrinos()[0].momentum();
+      FourMomentum mm=wmnufinder.leptons()[0].momentum();
+      FourMomentum mnu=wmnufinder.neutrinos()[0].momentum();
 
       _h_WW_pT->fill(ww.pT(),weight);
       _h_WW_pT_peak->fill(ww.pT(),weight);

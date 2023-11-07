@@ -20,10 +20,10 @@ namespace Rivet {
     /// Book histograms
     void init() {
       Cut cut = Cuts::abseta < 1.7 && Cuts::pT > 15*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2, ZFinder::ClusterPhotons::NONE, ZFinder::AddPhotons::YES);
+      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2, PhotonOrigin::NONE, PhotonsAsConstituents::YES);
       declare(zfinder, "ZFinder");
 
-      FastJets conefinder(zfinder.remainingFinalState(), FastJets::D0ILCONE, 0.5);
+      FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
 
       book(_h_dphi_jet_Z25 ,1, 1, 1);
@@ -58,7 +58,7 @@ namespace Rivet {
         if (zmom.pT() < 25*GeV) vetoEvent;
 
         Jets jets;
-        for (const Jet& j : apply<JetAlg>(event, "ConeFinder").jetsByPt(20*GeV)) {
+        for (const Jet& j : apply<JetFinder>(event, "ConeFinder").jetsByPt(20*GeV)) {
           if (j.abseta() < 2.8) {
             jets.push_back(j);
             break;

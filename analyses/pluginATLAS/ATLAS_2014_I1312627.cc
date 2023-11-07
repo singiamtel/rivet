@@ -52,19 +52,19 @@ namespace Rivet {
       // Boson finders
       FinalState fs;
       WFinder wfinder(fs, cuts, _mode > 1? PID::MUON : PID::ELECTRON, 40*GeV, 8*TeV, 0., 0.1,
-				              WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY,
-                      WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+				              LeptonOrigin::PROMPT, PhotonOrigin::NODECAY,
+                      PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wfinder, "WF");
 
       ZFinder zfinder(fs, cuts, _mode > 1? PID::MUON : PID::ELECTRON, 66*GeV, 116*GeV, 0.1,
-                      ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::NO);
+                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
       declare(zfinder, "ZF");
 
       // Jets
       VetoedFinalState jet_fs(fs);
       jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("WF"));
       jet_fs.addVetoOnThisFinalState(getProjection<ZFinder>("ZF"));
-      FastJets jets(jet_fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets, "Jets");
 
 
@@ -106,7 +106,7 @@ namespace Rivet {
       if (wf.empty() && zf.empty())  vetoEvent;
 
       // Retrieve jets
-      const JetAlg& jetfs = apply<JetAlg>(event, "Jets");
+      const JetFinder& jetfs = apply<JetFinder>(event, "Jets");
       Jets jets = jetfs.jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 4.4);
 
       // Apply boson cuts and fill histograms
@@ -116,8 +116,8 @@ namespace Rivet {
           fillPlots(leptons, jets, 1);
       }
       if (!wf.empty()) {
-        const Particles& leptons = wf.constituentLeptons();
-        if (wf.constituentNeutrino().pT() > 25*GeV && wf.mT() > 40*GeV )
+        const Particles& leptons = wf.leptons();
+        if (wf.neutrino().pT() > 25*GeV && wf.mT() > 40*GeV )
           fillPlots(leptons, jets, 0);
       }
     }

@@ -33,9 +33,9 @@ namespace Rivet {
       FinalState fs;
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 25*GeV;
 
-      ZFinder zeeFind(fs, cut, PID::ELECTRON, 76.1876*GeV, 106.1876*GeV, 0.1, ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES );
+      ZFinder zeeFind(fs, cut, PID::ELECTRON, 76.1876*GeV, 106.1876*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES );
       declare(zeeFind, "ZeeFind");
-      ZFinder zmmFind(fs, cut, PID::MUON    , 76.1876*GeV, 106.1876*GeV, 0.1, ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES );
+      ZFinder zmmFind(fs, cut, PID::MUON    , 76.1876*GeV, 106.1876*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES );
       declare(zmmFind, "ZmmFind");
 
       // Book histograms

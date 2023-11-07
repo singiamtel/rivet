@@ -5,9 +5,14 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
+#include "Rivet/Projections/DressedLeptons.fhh"
 
 namespace Rivet {
 
+
+  /// Variable to use for the mass-window cut
+  enum class MassVariable { M, MT };
+  
 
   /// @brief Convenience finder of leptonically decaying W
   ///
@@ -15,12 +20,6 @@ namespace Rivet {
   /// from one lepton and the missing E 4-vector in the final state, including photon clustering.
   class WFinder : public ParticleFinder {
   public:
-
-    enum class ChargedLeptons { PROMPT, ALL };
-    enum class ClusterPhotons { NONE, NODECAY, ALL };
-    enum class AddPhotons { NO, YES };
-    enum class MassWindow { M, MT };
-
 
     /// @name Constructors
     /// @{
@@ -48,10 +47,10 @@ namespace Rivet {
             double minmass, double maxmass,
             double missingET,
             double dRmax=0.1,
-            ChargedLeptons chLeptons=ChargedLeptons::PROMPT,
-            ClusterPhotons clusterPhotons=ClusterPhotons::NODECAY,
-            AddPhotons trackPhotons=AddPhotons::NO,
-            MassWindow masstype=MassWindow::M,
+            LeptonOrigin chLeptons=LeptonOrigin::PROMPT,
+            PhotonOrigin clusterPhotons=PhotonOrigin::NODECAY,
+            PhotonsAsConstituents trackPhotons=PhotonsAsConstituents::NO,
+            MassVariable masstype=MassVariable::M,
             double masstarget=80.4*GeV);
 
     /// Clone on the heap.
@@ -61,29 +60,47 @@ namespace Rivet {
 
 
     /// @brief Access to the found bosons, equivalent to constituents()
+    ///
     /// @note Currently either 0 or 1 boson can be found.
     const Particles& bosons() const { return particles(); }
     /// Access to the found boson (assuming it exists)
+    ///
     /// @todo C++17 std::optional...
     const Particle& boson() const { return particles().front(); }
 
 
-    /// @brief Access to the Ws' constituent clustered leptons
+    /// @brief Access to the Ws' constituent (clustered) charged leptons
+    ///
     /// @note Either size 0 if no boson was found or 1 if one boson was found
-    const Particles& constituentLeptons() const { return _leptons; }
-    /// brief Access to the W's constituent clustered lepton (assuming it exists)
+    const Particles& visibleConstituents() const { return _leptons; }
+    
+
+    /// @brief Access to the Ws' constituent (clustered) charged leptons
+    ///
+    /// @note Either size 0 if no boson was found or 1 if one boson was found
+    const Particles leptons() const { return head(_leptons, 1); }
+    /// brief Access to the W's constituent (clustered) charged lepton (assuming it exists)
+    ///
     /// @todo C++17 std::optional...
-    const Particle& constituentLepton() const { return _leptons.front(); }
+    const Particle& lepton() const { return _leptons.front(); }
 
 
     /// Access to the Ws' constituent neutrinos
     ///
     /// @note Either size 0 if no boson was found or 1 if one boson was found
-    /// @note The neutrino can't be perfecly reconstructed -- this is a pseudo-nu from the MET.
-    const Particles& constituentNeutrinos() const { return _neutrinos; }
+    ///
+    /// @note The neutrino can't be perfectly reconstructed -- this is a pseudo-nu from the MET.
+    ///
+    /// @todo Clarify whether the nu is purely transverse or if it has a reconstructed z-component (cf. ambiguities?)
+    const Particles& neutrinos() const { return _neutrinos; }
     /// Access to the W's constituent neutrino (assuming it exists)
-    /// @note The neutrino can't be perfecly reconstructed -- this is a pseudo-nu from the MET.
-    const Particle& constituentNeutrino() const { return _neutrinos.front(); }
+    ///
+    /// @note The neutrino can't be perfectly reconstructed -- this is a pseudo-nu from the MET.
+    ///
+    /// @todo Clarify whether the nu is purely transverse or if it has a reconstructed z-component (cf. ambiguities?)
+    ///
+    /// @todo C++17 std::optional...
+    const Particle& neutrino() const { return _neutrinos.front(); }
 
 
     /// Access to the particles other than the W leptons and clustered photons
@@ -99,7 +116,7 @@ namespace Rivet {
     /// Defined as sqrt(2 pT_l pT_nu (1.0 - cos(dphi_lnu))). Return -1 if no boson found.
     double mT() const {
       if (bosons().empty()) return -1;
-      return Rivet::mT(constituentLepton().mom(), constituentNeutrino().mom());
+      return Rivet::mT(lepton().mom(), neutrino().mom());
     }
 
 
@@ -134,7 +151,7 @@ namespace Rivet {
 
     /// Switch for tracking of photons (whether to include them in the W particle)
     /// This is relevant when the clustered photons need to be excluded from e.g. a jet finder
-    AddPhotons _trackPhotons;
+    PhotonsAsConstituents _trackPhotons;
 
     /// Charged lepton flavour
     PdgId _pid;

@@ -45,7 +45,7 @@ namespace Rivet {
       fsJets.vetoNeutrinos();
       fsJets.addVetoOnThisFinalState(photon_fs);
       fsJets.addVetoOnThisFinalState(chLep_fid);
-      declare(FastJets(fsJets, FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(fsJets, JetAlg::ANTIKT, 0.4), "Jets");
 
       // b hadrons for b-tagging
       declare(HeavyHadrons(Cuts::abseta < 2.5 && Cuts::pT > 5*GeV), "Bhadrons");
@@ -70,7 +70,7 @@ namespace Rivet {
       vector<DressedLepton> _vbs_lep = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
       if (_vbs_lep.size() == 3 && _mode != 2) {
 	std::sort(_vbs_lep.begin(), _vbs_lep.end(), [](const DressedLepton& l1, const DressedLepton& l2) {
-	    return (l1.constituentLepton().pT() > l2.constituentLepton().pT());
+	    return (l1.bareLepton().pT() > l2.bareLepton().pT());
 	  });
 
 	// Get the jets
@@ -147,7 +147,7 @@ namespace Rivet {
 	  // Sort the dressed leptons by pt of their constituent lepton (bare lepton pt)
 	  std::sort(leps.begin(), leps.end() ,
 		    [](const DressedLepton& l1, const DressedLepton& l2) {
-		      return (l1.constituentLepton().pT() > l2.constituentLepton().pT()); });
+		      return (l1.bareLepton().pT() > l2.bareLepton().pT()); });
 	  if (leps[0].pT() < 30*GeV || leps[0].abseta() > 2.5)  vetoEvent;
 	  if (leps[1].pT() < 30*GeV || leps[1].abseta() > 2.5)  vetoEvent;
 

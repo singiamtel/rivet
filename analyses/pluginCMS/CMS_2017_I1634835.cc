@@ -32,7 +32,7 @@ namespace Rivet {
           jetConstits.addVetoOnThisFinalState(zeeFinder);
           jetConstits.addVetoOnThisFinalState(zmumuFinder);
 
-          FastJets akt04Jets(jetConstits, FastJets::ANTIKT, 0.4);
+          FastJets akt04Jets(jetConstits, JetAlg::ANTIKT, 0.4);
           declare(akt04Jets, "AntiKt04Jets");
 
           book(_h_Z_pt_cjet, 4, 1, 1);
@@ -65,12 +65,12 @@ namespace Rivet {
           Particles leptons;
           Particle zcand;
           if (zees.size() == 1) {
-              leptons = zeeFS.constituentLeptons();
+              leptons = zeeFS.leptons();
               zcand = zees[0];
               counter_ee->fill();
           }
           if (zmumus.size() == 1) {
-              leptons = zmumuFS.constituentLeptons();
+              leptons = zmumuFS.leptons();
               zcand = zmumus[0];
               counter_mm->fill();
           }

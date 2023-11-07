@@ -40,7 +40,7 @@ namespace Rivet {
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(invfs);
       declare(vfs, "VFS");
-      declare(FastJets(vfs, FastJets::CDFJETCLU, 0.4), "Jets");
+      declare(FastJets(vfs, JetAlg::CDFJETCLU, 0.4), "Jets");
 
       // Book histograms
       for (int i = 0 ; i < 4 ; ++i) {
@@ -82,7 +82,7 @@ namespace Rivet {
       if (sqrt(mT2) < 20*GeV ) vetoEvent;
 
       // Get the jets
-      const JetAlg& jetProj = apply<FastJets>(event, "Jets");
+      const JetFinder& jetProj = apply<FastJets>(event, "Jets");
       Jets theJets = jetProj.jets(cmpMomByEt, Cuts::Et > 20*GeV);
       size_t njetsA(0), njetsB(0);
       for (const Jet& j : theJets) {

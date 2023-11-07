@@ -32,7 +32,7 @@ namespace Rivet {
       declare(TriggerCDFRun0Run1(), "Trigger");
       const FinalState calofs(Cuts::abseta < 1.2);
       declare(calofs, "CaloFS");
-      declare(FastJets(calofs, FastJets::CDFJETCLU, 0.7), "Jets");
+      declare(FastJets(calofs, JetAlg::CDFJETCLU, 0.7), "Jets");
       const ChargedFinalState trackfs(Cuts::abseta < 1.2 && Cuts::pT >= 0.4*GeV);
       declare(trackfs, "TrackFS");
       // Restrict tracks to |eta| < 0.7 for the min bias part.
@@ -41,7 +41,7 @@ namespace Rivet {
       // Restrict tracks to |eta| < 1 for the Swiss-Cheese part.
       const ChargedFinalState cheesefs(Cuts::abseta < 1.0 && Cuts::pT >= 0.4*GeV);
       declare(cheesefs, "CheeseFS");
-      declare(FastJets(cheesefs, FastJets::CDFJETCLU, 0.7), "CheeseJets");
+      declare(FastJets(cheesefs, JetAlg::CDFJETCLU, 0.7), "CheeseJets");
 
       // Book histograms
       if (isCompatibleWithSqrtS(1800*GeV)) {
@@ -83,7 +83,7 @@ namespace Rivet {
 
       {
         MSG_DEBUG("Running max/min analysis");
-        Jets jets = apply<JetAlg>(event, "Jets").jets(cmpMomByE);
+        Jets jets = apply<JetFinder>(event, "Jets").jets(cmpMomByE);
         if (!jets.empty()) {
           // Leading jet must be in central |eta| < 0.5 region
           const Jet leadingjet = jets.front();
@@ -161,7 +161,7 @@ namespace Rivet {
       {
         MSG_DEBUG("Running Swiss Cheese analysis");
         const Particles cheesetracks = apply<FinalState>(event, "CheeseFS").particles();
-        Jets cheesejets = apply<JetAlg>(event, "Jets").jets(cmpMomByE);
+        Jets cheesejets = apply<JetFinder>(event, "Jets").jets(cmpMomByE);
         if (cheesejets.empty()) {
           MSG_DEBUG("No 'cheese' jets found in event");
           return;

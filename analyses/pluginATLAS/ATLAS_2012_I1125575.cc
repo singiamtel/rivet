@@ -31,19 +31,19 @@ namespace Rivet {
       const ChargedFinalState track_input((Cuts::etaIn(-1.5, 1.5) && Cuts::pT >=  0.5*GeV));
       declare(track_input, "TRACK_INPUT");
 
-      const FastJets jets02(jet_input, FastJets::ANTIKT, 0.2);
+      const FastJets jets02(jet_input, JetAlg::ANTIKT, 0.2);
       declare(jets02, "JETS_02");
 
-      const FastJets jets04(jet_input, FastJets::ANTIKT, 0.4);
+      const FastJets jets04(jet_input, JetAlg::ANTIKT, 0.4);
       declare(jets04, "JETS_04");
 
-      const FastJets jets06(jet_input, FastJets::ANTIKT, 0.6);
+      const FastJets jets06(jet_input, JetAlg::ANTIKT, 0.6);
       declare(jets06, "JETS_06");
 
-      const FastJets jets08(jet_input, FastJets::ANTIKT, 0.8);
+      const FastJets jets08(jet_input, JetAlg::ANTIKT, 0.8);
       declare(jets08, "JETS_08");
 
-      const FastJets jets10(jet_input, FastJets::ANTIKT, 1.0);
+      const FastJets jets10(jet_input, JetAlg::ANTIKT, 1.0);
       declare(jets10, "JETS_10");
 
       // Mean number of tracks

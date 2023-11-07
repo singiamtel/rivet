@@ -18,7 +18,7 @@ namespace Rivet {
       // All final state particles
       const FinalState fs(Cuts::abseta < 5.0);
 
-      FastJets jets(fs, FastJets::ANTIKT, 0.8, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.8, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "jets");
 
       book(_h_Table1, 1,1,1);

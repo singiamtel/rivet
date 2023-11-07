@@ -35,10 +35,10 @@ namespace Rivet {
 
       // bosons
       WFinder wfinder_mu(fs, cuts, PID::MUON, 40.0*GeV, YODA::MAXDOUBLE, 0.0*GeV, 0.1,
-                      WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wfinder_mu, "WFmu");
       WFinder wfinder_el(fs, cuts, PID::ELECTRON, 40.0*GeV, YODA::MAXDOUBLE, 0.0*GeV, 0.1,
-                      WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wfinder_el, "WFel");
 
       // jets
@@ -46,7 +46,7 @@ namespace Rivet {
       //jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("WF"));
       jet_fs.addVetoOnThisFinalState(wfinder_mu);
       jet_fs.addVetoOnThisFinalState(wfinder_el);
-      FastJets jets(jet_fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "Jets");
 
       // book histograms
@@ -183,11 +183,11 @@ namespace Rivet {
       if (_mode == 2 && !(nWmu == 1 && !nWel))  vetoEvent; // one W->munu candidate, otherwise veto
 
       // Retrieve jets
-      const JetAlg& jetfs = apply<JetAlg>(event, "Jets");
+      const JetFinder& jetfs = apply<JetFinder>(event, "Jets");
       Jets all_jets = jetfs.jetsByPt(Cuts::pT > 30.0*GeV && Cuts::absrap < 4.4);
 
-      const Particles& leptons = (nWmu? wfmu : wfel).constituentLeptons();
-      const double missET = (nWmu? wfmu : wfel).constituentNeutrino().pT() / GeV;
+      const Particles& leptons = (nWmu? wfmu : wfel).leptons();
+      const double missET = (nWmu? wfmu : wfel).neutrino().pT() / GeV;
       if (leptons.size() == 1 && missET > 25. && (nWmu? wfmu : wfel).mT() > 40*GeV) {
         const Particle& lep = leptons[0];
         fillPlots(lep, missET, all_jets);

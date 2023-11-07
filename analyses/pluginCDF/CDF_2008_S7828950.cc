@@ -22,7 +22,7 @@ namespace Rivet {
     // Book histos and set counters for number of events passed in each one
     void init() {
       const FinalState fs;
-      declare(FastJets(fs, FastJets::CDFMIDPOINT, 0.7), "JetsM07");
+      declare(FastJets(fs, JetAlg::CDFMIDPOINT, 0.7), "JetsM07");
 
       book(_binnedHistosR07, {0., 0.1, 0.7, 1.1, 1.6, 2.1},
                              {"d01-x01-y01", "d02-x01-y01", "d03-x01-y01", "d04-x01-y01", "d05-x01-y01"});

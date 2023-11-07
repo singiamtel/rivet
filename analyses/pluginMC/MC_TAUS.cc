@@ -17,7 +17,7 @@ namespace Rivet {
 
     /// Book projections and histograms
     void init() {
-      TauFinder taus(TauFinder::DecayMode::ANY);
+      TauFinder taus(TauDecay::ANY);
       declare(taus, "Taus");
 
       MC_ParticleAnalysis::init();

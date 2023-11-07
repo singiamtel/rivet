@@ -54,14 +54,14 @@ namespace Rivet {
       // Z finder
       if (_doZ) {
         ZFinder zf(fs, cuts, _mode==3? PID::MUON : PID::ELECTRON, 40.0*GeV, 1000.0*GeV, 0.1,
-                   ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::NO);
+                   LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
         declare(zf, "ZF");
       }
 
       if (_doW) {
         // W finder for electrons and muons
         WFinder wf(fs, cuts, _mode==3? PID::MUON : PID::ELECTRON, 0.0*GeV, 1000.0*GeV, 35.0*GeV, 0.1,
-                   WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+                   LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
         declare(wf, "WF");
       }
 
@@ -75,7 +75,7 @@ namespace Rivet {
       if (_doZ) { jet_fs.addVetoOnThisFinalState(getProjection<ZFinder>("ZF")); }
       if (_doW) { jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("WF")); }
       jet_fs.addVetoOnThisFinalState(getProjection<LeadingParticlesFinalState>("LeadingPhoton"));
-      FastJets jets(jet_fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::NONE);
+      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::NONE);
       declare(jets, "Jets");
 
       // FS excluding the leading photon
@@ -127,11 +127,11 @@ namespace Rivet {
 	if ( wf.bosons().size() == 1 ) {
 
 	  // retrieve constituent neutrino
-	  const Particle& neutrino = wf.constituentNeutrino();
+	  const Particle& neutrino = wf.neutrino();
 	  if ( (neutrino.pT() > 35.0*GeV) ) {
 
 	    // retrieve constituent lepton
-	    const Particle& lepton = wf.constituentLepton();
+	    const Particle& lepton = wf.lepton();
 	    if ( lepton.pT() > 25.0*GeV && lepton.abseta() < 2.47 ) {
 
 	      // check photon-lepton overlap

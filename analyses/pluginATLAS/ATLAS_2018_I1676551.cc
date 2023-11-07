@@ -33,7 +33,7 @@ namespace Rivet {
       SmearedParticles recomuons(muons, MUON_EFF_ATLAS_RUN2, MUON_SMEAR_ATLAS_RUN2);
       declare(recomuons, "Muons");
 
-      FastJets jets4(IndirectFinalState(Cuts::open()), FastJets::ANTIKT, 0.4);
+      FastJets jets4(IndirectFinalState(Cuts::open()), JetAlg::ANTIKT, 0.4);
       SmearedJets recojets4(jets4, JET_SMEAR_CMS_RUN2, JET_BTAG_EFFS(0.77, 1/6., 1/134.));
       declare(recojets4, "Jets");
 

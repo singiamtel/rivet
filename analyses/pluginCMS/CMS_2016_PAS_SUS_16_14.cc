@@ -27,7 +27,7 @@ namespace Rivet {
 
       // Initialise and register projections
       FinalState calofs(Cuts::abseta < 5.0);
-      FastJets fj(calofs, FastJets::ANTIKT, 0.4);
+      FastJets fj(calofs, JetAlg::ANTIKT, 0.4);
       declare(fj, "TruthJets");
       declare(SmearedJets(fj, JET_SMEAR_CMS_RUN2, [](const Jet& j) {
             if (j.abseta() > 2.5) return 0.;
@@ -69,7 +69,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get jets and require Nj >= 3
-      const Jets jets24 = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::abseta < 2.4);
+      const Jets jets24 = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::abseta < 2.4);
       if (jets24.size() < 3) vetoEvent;
 
       // HT cut
@@ -78,7 +78,7 @@ namespace Rivet {
       if (ht < 300*GeV) vetoEvent;
 
       // HTmiss cut
-      const Jets jets50 = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::abseta < 5.0);
+      const Jets jets50 = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::abseta < 5.0);
       const FourMomentum htmissvec = -sum(jets24, mom, FourMomentum());
       const double htmiss = htmissvec.pT();
       if (htmissvec.pT() < 300*GeV) vetoEvent;

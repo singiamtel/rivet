@@ -28,7 +28,7 @@ namespace Rivet {
       Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
 
       ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV,
-                        0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+                        0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zeefinder, "ZeeFinder");
 
       VetoedFinalState zmminput;
@@ -41,7 +41,7 @@ namespace Rivet {
       Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
       
       ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV,
-                        0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+                        0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zmmfinder, "ZmmFinder");
 
       // Properties of the pair momentum

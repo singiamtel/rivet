@@ -20,8 +20,8 @@ namespace Rivet {
     void init() {
       FinalState fs((Cuts::etaIn(-2.0, 2.0)));
       declare(fs, "FS");
-      declare(FastJets(fs, FastJets::CDFMIDPOINT, 0.4,
-                             JetAlg::Muons::ALL, JetAlg::Invisibles::NONE,
+      declare(FastJets(fs, JetAlg::CDFMIDPOINT, 0.4,
+                             JetMuons::ALL, JetInvisibles::NONE,
                              nullptr, 0.5), "MidpointJets");
 
       book(_h_jet_pT_MB ,1, 1, 1);

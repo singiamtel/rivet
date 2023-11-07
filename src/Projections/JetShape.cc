@@ -6,7 +6,7 @@ namespace Rivet {
 
 
   // Constructor.
-  JetShape::JetShape(const JetAlg& jetalg,
+  JetShape::JetShape(const JetFinder& jetalg,
                      double rmin, double rmax, size_t nbins,
                      double ptmin, double ptmax,
                      double absrapmin, double absrapmax,
@@ -22,7 +22,7 @@ namespace Rivet {
 
 
   // Constructor.
-  JetShape::JetShape(const JetAlg& jetalg,
+  JetShape::JetShape(const JetFinder& jetalg,
                      vector<double> binedges,
                      double ptmin, double ptmax,
                      double absrapmin, double absrapmax,
@@ -103,12 +103,12 @@ namespace Rivet {
 
 
   void JetShape::project(const Event& e) {
-    const Jets jets = apply<JetAlg>(e, "Jets").jets(Cuts::ptIn(_ptcuts.first, _ptcuts.second) &
-                                                              ((_rapscheme == PSEUDORAPIDITY) ?
-                                                               Cuts::etaIn(-_rapcuts.second, _rapcuts.second) :
-                                                               Cuts::rapIn(-_rapcuts.second, _rapcuts.second)) );
+    const Jets jets = apply<JetFinder>(e, "Jets").jets(Cuts::ptIn(_ptcuts.first, _ptcuts.second) &
+						       ((_rapscheme == PSEUDORAPIDITY) ?
+							Cuts::etaIn(-_rapcuts.second, _rapcuts.second) :
+							Cuts::rapIn(-_rapcuts.second, _rapcuts.second)) );
     calc(jets);
   }
-
-
+  
+  
 }

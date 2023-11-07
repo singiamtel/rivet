@@ -60,7 +60,7 @@ namespace Rivet {
     void init() {
 
       // Initialize the lone projection required
-      declare(FastJets(FinalState(), FastJets::ANTIKT, 0.6), "AntiKtJets06");
+      declare(FastJets(FinalState(), JetAlg::ANTIKT, 0.6), "AntiKtJets06");
 
       // Initialize plots for each selection type
       _selectionPlots[0].intermediateHistName = "highestPt";

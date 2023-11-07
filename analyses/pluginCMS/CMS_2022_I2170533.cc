@@ -19,7 +19,7 @@ namespace Rivet {
       /// Book histograms and initialise projections before the run
       void init() {
           FinalState fs;
-          FastJets akt(fs, FastJets::ANTIKT, 0.4);
+          FastJets akt(fs, JetAlg::ANTIKT, 0.4);
           declare(akt, "antikT");
 
           vector<double> edges = {0., 150., 170., 180.};

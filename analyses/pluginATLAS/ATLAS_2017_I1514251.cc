@@ -37,7 +37,7 @@ namespace Rivet {
       VetoedFinalState had_fs;
       had_fs.addVetoOnThisFinalState(zeefinder);
       had_fs.addVetoOnThisFinalState(zmumufinder);
-      FastJets jets(had_fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(had_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
 
       // individual channels
@@ -83,7 +83,7 @@ namespace Rivet {
       const Particles& leptons = zees.size() ? zeefinder.constituents() : zmumufinder.constituents();
       if (leptons.size() != 2) vetoEvent;
 
-      Jets jets =  apply<JetAlg>(event, "jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 2.5);
+      Jets jets =  apply<JetFinder>(event, "jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 2.5);
 
       bool veto = false;
       for(const Jet& j : jets)  {
