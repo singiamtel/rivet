@@ -369,13 +369,14 @@ check_lwtnn_analyses_fedora_gcc_hepmc3_py3:
     - if [[ $VAL != 1 ]]; then exit 0; fi
   # LWTNN setup variables
     - ONNX_INSTALL_PREFIX="$CI_PROJECT_DIR/local_$ARCH"
+    - mkdir -p $ONNX_INSTALL_PREFIX/include/onnxruntime
     - ONNX_VERSION="1.13.1"
   # Download ONNX libs and headers (and move them to share locations)
   # n.b. this command won't work for mac! Will need a new version when we have mac runners.
     - wget https://github.com/microsoft/onnxruntime/releases/download/v$ONNX_VERSION/onnxruntime-linux-x64-$ONNX_VERSION.tgz
     - tar -xf onnxruntime-linux-x64-$ONNX_VERSION.tgz
     - mv onnxruntime-linux-x64-$ONNX_VERSION/lib/*.so* $ONNX_INSTALL_PREFIX/lib
-    - mv onnxruntime-linux-x64-$ONNX_VERSION/include/*.h $ONNX_INSTALL_PREFIX/include
+    - mv onnxruntime-linux-x64-$ONNX_VERSION/include/*.h $ONNX_INSTALL_PREFIX/include/onnxruntime
   # Build the onnx example analysis
     - source $ONNX_INSTALL_PREFIX/rivetenv.sh
     - TEST_PREFIX="$CI_PROJECT_DIR/test_$ARCH"

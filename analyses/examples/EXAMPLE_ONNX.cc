@@ -58,9 +58,7 @@ namespace Rivet {
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
 
       // Require at least three jets:
-      if (jets.size() < 3){
-        vetoEvent;
-      }
+      if (jets.size() < 3) vetoEvent;
 
       // Create vector of inputs.
       vector<float> nn_input = {
@@ -71,11 +69,9 @@ namespace Rivet {
         (float)jets[1].eta(),
         (float)jets[2].eta()
       };
-      // Vector to fill with output
-      vector<float> nn_output;
 
-      // Compute
-      _nn->compute(nn_input, nn_output);
+      // Compute output node
+      vector<float> nn_output = _nn->compute(nn_input);
 
       // Fill histogram
       _h["DNN_output"]->fill(abs(nn_output[0]));
@@ -89,13 +85,13 @@ namespace Rivet {
 
     /// @}
 
-    
+    private:
+
     /// @name Histograms
     /// @{
     map<string, Histo1DPtr> _h;
     /// @}
 
-    private:
     /// @name Member variables
     /// @{
     /// The neural network
