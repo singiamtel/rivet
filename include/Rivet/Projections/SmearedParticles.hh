@@ -123,6 +123,9 @@ namespace Rivet {
       const CmpState teq = mkPCmp(other, "TruthParticles");
       if (teq != CmpState::EQ) return teq;
 
+      // Compare cuts
+      if (_cuts != other._cuts) return CmpState::NEQ;
+
       // Compare lists of detector functions
       const CmpState nfeq = cmp(_detFns.size(), other._detFns.size());
       MSG_TRACE("Numbers of detector functions = " << _detFns.size() << " VS " << other._detFns.size());
@@ -160,6 +163,9 @@ namespace Rivet {
         }
         // If discarding, go straight to the next particle
         if (!keep) continue;
+        //Ensure the smeared particle satisfies the cuts associated with this projection
+        if (!_cuts->accept(pdet)) continue;
+
         // Store, recording where the smearing was built from
         pdet.addConstituent(p); ///< @todo Is this a good idea?? What if raw particles are requested?
         _theParticles.push_back(pdet);
