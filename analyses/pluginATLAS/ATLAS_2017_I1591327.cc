@@ -21,7 +21,7 @@ namespace Rivet {
       const FinalState fs;
       declare(fs, "FS");
 
-      FastJets fj(fs, FastJets::KT, 0.5);
+      FastJets fj(fs, JetAlg::KT, 0.5);
       _area_def = new fastjet::AreaDefinition(fastjet::VoronoiAreaSpec());
       fj.useJetArea(_area_def);
       declare(fj, "KtJetsD05");

@@ -21,17 +21,16 @@ namespace Rivet {
       // All final state particles
       FinalState fs(Cuts::abseta < 5.0);
 
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON, true); // true accepts tau decays
-
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true); // true accepts tau decays
+      PromptFinalState photons(Cuts::abspid == PID::PHOTON, TauDecaysAs::PROMPT);
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       DressedLeptons elecs(photons, bare_el, 0.1, Cuts::pT > 7*GeV && Cuts::abseta < 2.47);
       declare(elecs, "elecs");
 
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // accepts tau decays
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       DressedLeptons muons(photons, bare_mu, 0.1, Cuts::pT > 6*GeV && Cuts::abseta < 2.5);
       declare(muons, "muons");
 
-      FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "jets");
 
       book(_h, 3, 1, 1);

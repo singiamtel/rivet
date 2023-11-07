@@ -41,7 +41,7 @@ namespace Rivet {
       declare(vfs, "JetFS");
 
       // Jets
-      FastJets jetpro(vfs, FastJets::D0ILCONE, 0.7);
+      FastJets jetpro(vfs, JetAlg::D0ILCONE, 0.7);
       declare(jetpro, "Jets");
 
       // Histograms

@@ -30,23 +30,23 @@ namespace Rivet {
 
     	// Muons
     	Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 25*GeV;
-    	PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true);
-    	DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, lepton_cuts, true);
+    	PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+    	DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
     	declare(all_dressed_mu, "muons");
 
     	// Electrons
-    	PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true);
-    	DressedLeptons all_dressed_el(photons, bare_el, 0.1, lepton_cuts, true);
+    	PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
+    	DressedLeptons all_dressed_el(photons, bare_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
     	declare(all_dressed_el, "electrons");
 
     	//Jet forming
-    	const InvisibleFinalState neutrinos(true, true);
+    	const InvisibleFinalState neutrinos(OnlyPrompt::YES, TauDecaysAs::PROMPT);
 
     	VetoedFinalState vfs(FinalState(Cuts::abseta < 5.0));
     	vfs.addVetoOnThisFinalState(all_dressed_el);
     	vfs.addVetoOnThisFinalState(all_dressed_mu);
     	vfs.addVetoOnThisFinalState(neutrinos);
-    	FastJets jetfs(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+    	FastJets jetfs(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
     	declare(jetfs, "jets");
 
       // FinalState charged particles

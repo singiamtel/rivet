@@ -31,7 +31,7 @@ namespace Rivet {
       declare(mm, "TruthMET");
       declare(SmearedMET(mm, MET_SMEAR_CMS_RUN2), "MET");
 
-      FastJets fj(calofs, FastJets::ANTIKT, 0.5);
+      FastJets fj(calofs, JetAlg::ANTIKT, 0.5);
       declare(fj, "TruthJets");
       declare(SmearedJets(fj, JET_SMEAR_CMS_RUN2, [](const Jet& j) {
             if (j.abseta() > 2.4) return 0.;
@@ -114,7 +114,7 @@ namespace Rivet {
 
 
       // Get jets and apply jet-based event-selection cuts
-      const JetAlg& jetproj = apply<JetAlg>(event, "Jets");
+      const JetFinder& jetproj = apply<JetFinder>(event, "Jets");
       const Jets alljets = jetproj.jetsByPt(Cuts::abseta < 3.0 && Cuts::Et > 37*GeV); //< most inclusive jets requirement
       if (filter_select(alljets, Cuts::Et > 73*GeV).size() < 2) vetoEvent; //< most inclusive lead jets requirement
 

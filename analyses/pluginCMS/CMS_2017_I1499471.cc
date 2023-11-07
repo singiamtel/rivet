@@ -37,7 +37,7 @@ namespace Rivet {
       jetConstits.addVetoOnThisFinalState(zeeFinder);
       jetConstits.addVetoOnThisFinalState(zmumuFinder);
 
-      FastJets akt05Jets(jetConstits, FastJets::ANTIKT, 0.5);
+      FastJets akt05Jets(jetConstits, JetAlg::ANTIKT, 0.5);
       declare(akt05Jets, "AntiKt05Jets");
 
       //Histograms booking

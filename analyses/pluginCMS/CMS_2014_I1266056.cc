@@ -37,7 +37,7 @@ namespace Rivet {
       declare(vfs, "JetFS");
 
       // Jets
-      FastJets jetpro(vfs, FastJets::ANTIKT, 0.5);
+      FastJets jetpro(vfs, JetAlg::ANTIKT, 0.5);
       //jetpro.useInvisibles();
       declare(jetpro, "Jets");
 

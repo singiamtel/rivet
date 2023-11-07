@@ -28,7 +28,7 @@ namespace Rivet {
 
       // Initialise and register projections
       FinalState calofs(Cuts::abseta < 3.2);
-      FastJets fj(calofs, FastJets::ANTIKT, 0.4);
+      FastJets fj(calofs, JetAlg::ANTIKT, 0.4);
       declare(fj, "TruthJets");
       declare(SmearedJets(fj, JET_SMEAR_ATLAS_RUN2, //JET_BTAG_ATLAS_RUN2_MV2C10
                           [](const Jet& j) {
@@ -40,11 +40,11 @@ namespace Rivet {
       declare(mm, "TruthMET");
       declare(SmearedMET(mm, MET_SMEAR_ATLAS_RUN2), "RecoMET");
 
-      PromptFinalState es(Cuts::abseta < 2.47 && Cuts::abspid == PID::ELECTRON, true, true);
+      PromptFinalState es(Cuts::abseta < 2.47 && Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT, MuDecaysAs::PROMPT);
       declare(es, "TruthElectrons");
       declare(SmearedParticles(es, ELECTRON_RECOEFF_ATLAS_RUN2, ELECTRON_SMEAR_ATLAS_RUN2), "RecoElectrons");
 
-      PromptFinalState mus(Cuts::abseta < 2.7 && Cuts::abspid == PID::MUON, true);
+      PromptFinalState mus(Cuts::abseta < 2.7 && Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       declare(mus, "TruthMuons");
       declare(SmearedParticles(mus, MUON_EFF_ATLAS_RUN2, MUON_SMEAR_ATLAS_RUN2), "RecoMuons");
 
@@ -99,7 +99,7 @@ namespace Rivet {
       // Get baseline electrons, muons, and jets
       Particles elecs = apply<ParticleFinder>(event, "RecoElectrons").particles(Cuts::pT > 10*GeV);
       Particles muons = apply<ParticleFinder>(event, "RecoMuons").particles(Cuts::pT > 10*GeV);
-      Jets jets = apply<JetAlg>(event, "RecoJets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8); ///< @todo Pile-up subtraction
+      Jets jets = apply<JetFinder>(event, "RecoJets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8); ///< @todo Pile-up subtraction
 
       // Jet/electron/muons overlap removal and selection
       // Remove electrons within dR = 0.2 of a b-tagged jet

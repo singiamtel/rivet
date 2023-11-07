@@ -15,7 +15,7 @@ namespace Rivet {
     /// Book projections and histograms
     void init() {
 
-      FastJets antikt(FinalState(), FastJets::ANTIKT, 0.4);
+      FastJets antikt(FinalState(), JetAlg::ANTIKT, 0.4);
       declare(antikt, "ANTIKT");
 
       book(_h_chi_dijet, {1900., 2400., 3600., 4200., 4800., 8000.});
@@ -27,7 +27,7 @@ namespace Rivet {
 
     /// Per-event analysis
     void analyze(const Event& event) {
-      const Jets& jets = apply<JetAlg>(event, "ANTIKT").jetsByPt();
+      const Jets& jets = apply<JetFinder>(event, "ANTIKT").jetsByPt();
       if (jets.size() < 2) vetoEvent;
 
       const FourMomentum j0(jets[0].mom()), j1(jets[1].mom());

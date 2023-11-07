@@ -46,6 +46,7 @@ nobase_pkginclude_HEADERS += \
   Projections/DISKinematics.hh \
   Projections/DISLepton.hh \
   Projections/DISRapidityGap.hh \
+  Projections/DressedLeptons.fhh \
   Projections/DressedLeptons.hh \
   Projections/EventMixingFinalState.hh \
   Projections/FastJets.hh \
@@ -67,7 +68,6 @@ nobase_pkginclude_HEADERS += \
   Projections/InitialQuarks.hh \
   Projections/InvisibleFinalState.hh \
   Projections/InvMassFinalState.hh \
-  Projections/JetAlg.hh \
   Projections/JetFinder.hh \
   Projections/JetShape.hh \
   Projections/LeadingParticlesFinalState.hh \
@@ -84,6 +84,7 @@ nobase_pkginclude_HEADERS += \
   Projections/PercentileProjection.hh \
   Projections/PrimaryHadrons.hh \
   Projections/PrimaryParticles.hh \
+  Projections/PromptFinalState.fhh \
   Projections/PromptFinalState.hh \
   Projections/RHICCommon.hh \
   Projections/SingleValueProjection.hh \

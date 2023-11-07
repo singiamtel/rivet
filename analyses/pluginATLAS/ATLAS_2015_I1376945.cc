@@ -55,7 +55,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(elecs);
       vfs.addVetoOnThisFinalState(neutrino_fs);
 
-      FastJets fjets(vfs, FastJets::ANTIKT, 0.4);
+      FastJets fjets(vfs, JetAlg::ANTIKT, 0.4);
       fjets.useInvisibles();
       declare(fjets, "jets");
 

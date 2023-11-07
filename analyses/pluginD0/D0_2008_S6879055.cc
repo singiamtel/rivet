@@ -20,10 +20,10 @@ namespace Rivet {
     void init() {
       FinalState fs;
       ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON,
-                      40*GeV, 200*GeV, 0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+                      40*GeV, 200*GeV, 0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zfinder, "ZFinder");
 
-      FastJets conefinder(zfinder.remainingFinalState(), FastJets::D0ILCONE, 0.5);
+      FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
 
       book(_crossSectionRatio, 1, 1, 1);
@@ -44,7 +44,7 @@ namespace Rivet {
       FourMomentum e0 = zfinder.constituents()[0].mom();
       FourMomentum e1 = zfinder.constituents()[1].mom();
 
-      Jets jets = apply<JetAlg>(event, "ConeFinder").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
+      Jets jets = apply<JetFinder>(event, "ConeFinder").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
       ifilter_discard(jets, deltaRLess(e0, 0.4));
       ifilter_discard(jets, deltaRLess(e1, 0.4));
 

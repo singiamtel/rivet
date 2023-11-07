@@ -30,9 +30,9 @@ namespace Rivet {
 
       // W finder for electrons and muons
       WFinder wf_mu(fs, cuts, PID::MUON, 0.0*GeV, DBL_MAX, 0.0, 0.1,
-                 WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+                 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       WFinder wf_el(fs, cuts, PID::ELECTRON, 0.0*GeV, DBL_MAX, 0.0, 0.1,
-                 WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+                 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wf_mu, "WFmu");
       declare(wf_el, "WFel");
 
@@ -40,7 +40,7 @@ namespace Rivet {
       VetoedFinalState jet_fs(fs);
       jet_fs.addVetoOnThisFinalState(wf_el);
       jet_fs.addVetoOnThisFinalState(wf_mu);
-      FastJets fj(jet_fs, FastJets::ANTIKT, 0.4);
+      FastJets fj(jet_fs, JetAlg::ANTIKT, 0.4);
       fj.useInvisibles();
       declare(fj, "Jets");
       declare(HeavyHadrons(Cuts::abseta < 2.5 && Cuts::pT > 5*GeV), "BHadrons");
@@ -74,15 +74,15 @@ namespace Rivet {
 
 
       // retrieve constituent neutrino
-      const Particle& neutrino = (nWmu? wf_mu : wf_el).constituentNeutrino();
+      const Particle& neutrino = (nWmu? wf_mu : wf_el).neutrino();
       if( !(neutrino.pT() > 25*GeV) )  vetoEvent;
 
       // retrieve constituent lepton
-      const Particle& lepton = (nWmu? wf_mu : wf_el).constituentLepton();
+      const Particle& lepton = (nWmu? wf_mu : wf_el).lepton();
 
       // count good jets, check if good jet contains B hadron
       const Particles& bHadrons = apply<HeavyHadrons>(event, "BHadrons").bHadrons();
-      const Jets& jets = apply<JetAlg>(event, "Jets").jetsByPt(25*GeV);
+      const Jets& jets = apply<JetFinder>(event, "Jets").jetsByPt(25*GeV);
       int goodjets = 0, bjets = 0;
       double bPt = 0.;
       for(const Jet& j : jets) {

@@ -13,7 +13,7 @@ namespace Rivet {
 
     void init() {
 
-      declare(FastJets(FinalState(), FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(FinalState(), JetAlg::ANTIKT, 0.4), "Jets");
 
       book(forward_kappa3, 1, 1, 1);
       book(forwardRMS_kappa3, "d02-x01-y01");
@@ -38,7 +38,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      Jets m_goodJets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.1);
+      Jets m_goodJets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.1);
 
       if (m_goodJets.size() < 2)        vetoEvent;
       if (m_goodJets[0].pT() < 50*GeV)  vetoEvent;

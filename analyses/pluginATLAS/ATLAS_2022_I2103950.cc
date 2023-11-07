@@ -7,8 +7,6 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
-
-
 #include "Rivet/Tools/RivetMT2.hh"
 
 namespace Rivet {
@@ -38,36 +36,36 @@ namespace Rivet {
                          (Cuts::abseta < 2.47 && Cuts::abspid == PID::ELECTRON ) );
 
       // Muons
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // true = use muons from prompt tau decays
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       DressedLeptons all_dressed_mu(photons, bare_mu, 0.1);
 
       // Electrons
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true); // true = use electrons from prompt tau decays
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       DressedLeptons all_dressed_el(photons, bare_el, 0.1);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5));
 
-      InvisibleFinalState prompt_invis(true, true); // require promptness & allow from prompt tau decays
+      InvisibleFinalState prompt_invis(OnlyPrompt::YES, TauDecaysAs::PROMPT);
       vfs.addVetoOnThisFinalState(prompt_invis);
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
 
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, FastJets::Muons::ALL, FastJets::Invisibles::DECAY);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
 
 
       // Project dressed leptons (e/mu not from tau) with pT > 25 GeV
-      PromptFinalState lep_bare(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON , true);
+      PromptFinalState lep_bare(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       declare(lep_bare,"lep_bare");
-      PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, true);
-      PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
 
-      DressedLeptons lep_dressed(photons, lep_bare, 0.1, lepton_cuts, true);
+      DressedLeptons lep_dressed(photons, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(lep_dressed,"lep_dressed");
-      DressedLeptons elecs(photons, prompt_el, 0.1, lepton_cuts,true);
+      DressedLeptons elecs(photons, prompt_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(elecs, "elecs");
-      DressedLeptons muons(photons, prompt_mu, 0.1, lepton_cuts,true);
+      DressedLeptons muons(photons, prompt_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(muons, "muons");
 
       // Get MET from generic invisibles

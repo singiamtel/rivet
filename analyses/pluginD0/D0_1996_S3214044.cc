@@ -23,7 +23,7 @@ namespace Rivet {
 
       /// @todo Use correct jet algorithm --- tried FJ3 D0RunICone but does
       // not look as good as the Run2 cone alg used here
-      declare(FastJets(fs, FastJets::D0ILCONE, 0.7), "ConeJets");
+      declare(FastJets(fs, JetAlg::D0ILCONE, 0.7), "ConeJets");
 
       book(_h_3j_x3 ,1, 1, 1);
       book(_h_3j_x5 ,2, 1, 1);

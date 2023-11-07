@@ -26,7 +26,7 @@ namespace Rivet {
       declare(fs, "FS");
 
       // Consider the final state jets for the energy density calculation
-      FastJets fj(fs, FastJets::KT, 0.5);
+      FastJets fj(fs, JetAlg::KT, 0.5);
       fj.useJetArea(new fastjet::AreaDefinition(fastjet::VoronoiAreaSpec()));
       declare(fj, "KtJetsD05");
 

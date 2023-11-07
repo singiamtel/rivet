@@ -28,23 +28,23 @@ namespace Rivet {
       FinalState photons(Cuts::abspid == PID::PHOTON);
 
       Cut dressedLep_cuts = (Cuts::abseta < 2.5) && (Cuts::pT > 27*GeV);
-      const DressedLeptons dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, true);
+      DressedLeptons dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
       declare(dressedLeps, "dressedLeptons");
 
       // veto on leptons from prompt tau decays
-      VetoedFinalState lepsFromTaus(PromptFinalState(allLeps, true));
+      VetoedFinalState lepsFromTaus(PromptFinalState(allLeps, TauDecaysAs::PROMPT));
       lepsFromTaus.addVetoOnThisFinalState(promptLeps);
-      const DressedLeptons vetoLeps(photons, lepsFromTaus, 0.1, dressedLep_cuts, true);
+      DressedLeptons vetoLeps(photons, lepsFromTaus, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
       declare(vetoLeps, "vetoLeptons");
 
       declare(MissingMomentum(), "eTmiss");
 
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
       vfs.addVetoOnThisFinalState(dressedLeps);
-      const FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::NONE);
+      const FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::NONE);
       declare(jets, "jets");
 
-      // histograms
+      // Histograms
       book(_c, 1, 1, 1);
 
     }

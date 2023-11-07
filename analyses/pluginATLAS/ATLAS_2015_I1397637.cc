@@ -66,13 +66,13 @@ namespace Rivet {
       Cut eta_ranges = Cuts::abseta < 2.5;
 
       // Get dressed muons and the good muons (pt>25GeV)
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, eta_ranges, true);
-      DressedLeptons dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 25*GeV, true);
+      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, eta_ranges, PhotonOrigin::ALL);
+      DressedLeptons dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressed_mu, "muons");
 
       // Get dressed electrons and the good electrons (pt>25GeV)
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1, eta_ranges, true);
-      DressedLeptons dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, true);
+      DressedLeptons all_dressed_el(photons, bare_el, 0.1, eta_ranges, PhotonOrigin::ALL);
+      DressedLeptons dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressed_el, "electrons");
 
       // Jet clustering
@@ -83,16 +83,16 @@ namespace Rivet {
 
       // Small-R jets
       /// @todo Use extra constructor args
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4);
-      jets.useInvisibles(JetAlg::Invisibles::ALL);
-      jets.useMuons(JetAlg::Muons::DECAY);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4);
+      jets.useInvisibles(JetInvisibles::ALL);
+      jets.useMuons(JetMuons::DECAY);
       declare(jets, "jets");
 
       // Large-R jets
       /// @todo Use extra constructor args
-      FastJets large_jets(vfs, FastJets::ANTIKT, 1.0);
-      large_jets.useInvisibles(JetAlg::Invisibles::ALL);
-      large_jets.useMuons(JetAlg::Muons::DECAY);
+      FastJets large_jets(vfs, JetAlg::ANTIKT, 1.0);
+      large_jets.useInvisibles(JetInvisibles::ALL);
+      large_jets.useMuons(JetMuons::DECAY);
       declare(large_jets, "fat_jets");
 
 

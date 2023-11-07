@@ -22,10 +22,10 @@ namespace Rivet {
 
       // Projections
       const FinalState fs;
-      FastJets j4(fs, FastJets::ANTIKT, 0.4);
+      FastJets j4(fs, JetAlg::ANTIKT, 0.4);
       j4.useInvisibles();
       declare(j4, "AntiKtJets04");
-      FastJets j6(fs, FastJets::ANTIKT, 0.6);
+      FastJets j6(fs, JetAlg::ANTIKT, 0.6);
       j6.useInvisibles();
       declare(j6, "AntiKtJets06");
 

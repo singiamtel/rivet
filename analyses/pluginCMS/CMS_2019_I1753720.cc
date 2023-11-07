@@ -21,7 +21,7 @@ namespace Rivet {
     void init() {
       // Jets
       // Only use visible particles with |eta|<6 (miniAOD content)
-      declare(FastJets(VisibleFinalState(Cuts::abseta < 6.), FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(VisibleFinalState(Cuts::abseta < 6.), JetAlg::ANTIKT, 0.4), "Jets");
 
       // Book xsec histo
       book(_hist_xsec_fid, "d01-x01-y01");
@@ -30,7 +30,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-       const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::abseta < 2.4 && Cuts::pT > 20*GeV);
+       const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::abseta < 2.4 && Cuts::pT > 20*GeV);
        const Jets jets_30 = filter_select(jets, [](const Jet& j) { return j.pT() > 30*GeV; } );
        const Jets bjets = filter_select(jets, [](const Jet& j) { return j.bTagged(); } );
 

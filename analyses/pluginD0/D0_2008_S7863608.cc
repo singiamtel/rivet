@@ -22,10 +22,11 @@ namespace Rivet {
     void init() {
       /// @todo These clustering arguments look odd: are they ok?
       Cut cut = Cuts::abseta < 1.7 && Cuts::pT > 15*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2, ZFinder::ClusterPhotons::NONE, ZFinder::AddPhotons::YES);
+      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2,
+		      PhotonOrigin::NONE, PhotonsAsConstituents::YES);
       declare(zfinder, "ZFinder");
 
-      FastJets conefinder(zfinder.remainingFinalState(), FastJets::D0ILCONE, 0.5);
+      FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
 
       book(_sum_of_weights_inclusive, "sum_of_weights_inclusive");
@@ -47,7 +48,7 @@ namespace Rivet {
       const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
       if (zfinder.bosons().size()==1) {
         _sum_of_weights_inclusive->fill();
-        const JetAlg& jetpro = apply<JetAlg>(e, "ConeFinder");
+        const JetFinder& jetpro = apply<JetFinder>(e, "ConeFinder");
         const Jets& jets = jetpro.jetsByPt(20*GeV);
         Jets jets_cut;
         for (const Jet& j : jets) {
@@ -57,7 +58,7 @@ namespace Rivet {
         }
 
         // Return if there are no jets:
-        if(jets_cut.size()<1) {
+        if (jets_cut.size() < 1) {
           MSG_DEBUG("Skipping event " << numEvents() << " because no jets pass cuts ");
           vetoEvent;
         }
@@ -119,7 +120,6 @@ namespace Rivet {
     CounterPtr _sum_of_weights_inclusive;
 
   };
-
 
 
   RIVET_DECLARE_ALIASED_PLUGIN(D0_2008_S7863608, D0_2008_I792812);

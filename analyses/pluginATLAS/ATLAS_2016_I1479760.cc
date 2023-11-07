@@ -19,9 +19,9 @@ namespace Rivet {
     void init() {
 
       /// Declare AntiKt 0.6 jets without muons and neutrinos
-      FastJets fastJets(FinalState(), FastJets::ANTIKT, 0.6);
-      fastJets.useInvisibles(JetAlg::Invisibles::NONE);
-      fastJets.useMuons(JetAlg::Muons::NONE);
+      FastJets fastJets(FinalState(), JetAlg::ANTIKT, 0.6);
+      fastJets.useInvisibles(JetInvisibles::NONE);
+      fastJets.useMuons(JetMuons::NONE);
       declare(fastJets, "AntiKt6Jets");
 
       book(_hists["deltaPt34"]       ,  1, 1, 1);
@@ -65,7 +65,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Retrieve all anti-kt R=0.6 jets with pT above 20 GeV and eta < 4.4
-      const Jets jets = apply<JetAlg>(event, "AntiKt6Jets").jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta <= 4.4);
+      const Jets jets = apply<JetFinder>(event, "AntiKt6Jets").jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta <= 4.4);
 
       // Require at least 4 jets, with the leading jet pT above 42.5 GeV
       if (jets.size() < 4) vetoEvent;

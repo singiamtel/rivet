@@ -29,7 +29,7 @@ namespace Rivet {
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.5
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.5);
+      FastJets jetfs(fs, JetAlg::ANTIKT, 0.5);
       declare(jetfs, "jets");
 
       // Book histograms

@@ -5,7 +5,7 @@ Authors:
  - Andrii Verbytskyi <andrii.verbytskyi@mpp.mpg.de>
 
 Options:
- - LMode=mc
+ - LReco=ALL,ALL_DRESSED,PROMPT_BARE,PROMPT_DRESSED
  - LSort=ENERGY,ETA,ET
  - DressDR=#
  - IsolDR=#

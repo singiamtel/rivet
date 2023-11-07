@@ -8,13 +8,15 @@
 
 namespace Rivet {
 
+  
   /// @brief Drell-Yan dimuon production in proton-lead collisions at  8.16 TeV
   class CMS_2021_I1849180 : public Analysis {
   public:
+
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2021_I1849180);
-    float y_shift = 0;
 
+    
     /// @name Analysis methods
     ///@{
 
@@ -23,15 +25,15 @@ namespace Rivet {
       const FinalState fs;
 
       const ParticlePair& beam = beams();
-      pcom = beam.first.momentum() + beam.second.momentum();
+      _pcom = beam.first.momentum() + beam.second.momentum();
       if (beam.first.mom().E() == beam.second.mom().E()) {
-        y_shift = -0.465;
+        _y_shift = -0.465;
       }
 
-      ZFinder zmumuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 10 * GeV, PID::MUON, 15.0 * GeV, 600.0 * GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder zmumuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 10 * GeV, PID::MUON, 15.0 * GeV, 600.0 * GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zmumuFinder, "ZmumuFinder");
 
-      ZFinder TotzmumuFinder(fs, Cuts::pT > 0.0 * GeV, PID::MUON, 0.0 * GeV, 1000.0 * GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder TotzmumuFinder(fs, Cuts::pT > 0.0 * GeV, PID::MUON, 0.0 * GeV, 1000.0 * GeV, 0.1, PhotonOrigin::NODECAY);
       declare(TotzmumuFinder, "TotzmumuFinder");
 
       declare(FinalState(), "FS");
@@ -59,7 +61,7 @@ namespace Rivet {
       const Particles& zmumus = ZmumuFinder.bosons();
       const Particles& totzmumus = TotzmumuFinder.bosons();
 
-      const Vector3 betacom = pcom.betaVec();
+      const Vector3 betacom = _pcom.betaVec();
       const LorentzTransform comboost = LorentzTransform::mkFrameTransformFromBeta(betacom);
 
       if (zmumus.size() == 1) {
@@ -81,7 +83,7 @@ namespace Rivet {
           const double Zmass = zmumu.mass() / GeV;
           const double Zpt = zmumu.momentum().pT() / GeV;
 
-          const double Zy = Zcm.rapidity() + y_shift;
+          const double Zy = Zcm.rapidity() + _y_shift;
 
           if (Zcm.rapidity() < 1.93 && Zcm.rapidity() > -2.87) {
             _h["111"]->fill(Zmass);
@@ -120,7 +122,7 @@ namespace Rivet {
 
           const double totZmass = totzmumu.mass() / GeV;
           const double totZpt = totzmumu.momentum().pT() / GeV;
-          const double totZy = totZcm.rapidity() + y_shift;
+          const double totZy = totZcm.rapidity() + _y_shift;
 
           if (totZcm.rapidity() < 1.93 && totZcm.rapidity() > -2.87) {
             _h["911"]->fill(totZmass);
@@ -146,14 +148,22 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double norm = crossSection() * 208 / nanobarn / sumW();
-
       scale(_h, norm);
     }
 
-    FourMomentum pcom;
+
+  private:
+    
+    FourMomentum _pcom;
+
     map<string, Histo1DPtr> _h;
+
+    /// Offset constant
+    double _y_shift = 0;
+
   };
+
 
   RIVET_DECLARE_PLUGIN(CMS_2021_I1849180);
 
-}  // namespace Rivet
+}

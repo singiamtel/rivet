@@ -37,9 +37,9 @@ namespace Rivet {
       // Project dressed leptons (e/mu not from tau) with pT > 27 GeV and |eta| < 2.5
       // Both for normal and simplified phase space
       PromptFinalState lep_bare(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      DressedLeptons lep_dressed(photon_id, lep_bare, 0.1, lepton_cuts, true);
+      DressedLeptons lep_dressed(photon_id, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(lep_dressed,"lep_dressed");
-      DressedLeptons lep_dressed_simpl(photon_id, lep_bare, 0.1, lepton_cuts_simpl, true);
+      DressedLeptons lep_dressed_simpl(photon_id, lep_bare, 0.1, lepton_cuts_simpl, PhotonOrigin::ALL);
       declare(lep_dressed_simpl,"lep_dressed_simpl");
 
       // Get MET
@@ -55,9 +55,9 @@ namespace Rivet {
       declare(hadrons_simpl, "hadrons_simpl");
 
       // Project jets
-      FastJets jets(hadrons, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::NONE);
+      FastJets jets(hadrons, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::NONE);
       declare(jets, "jets");
-      FastJets jets_simpl(hadrons_simpl, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::NONE);
+      FastJets jets_simpl(hadrons_simpl, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::NONE);
       declare(jets_simpl, "jets_simpl");
 
 

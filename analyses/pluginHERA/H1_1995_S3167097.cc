@@ -25,7 +25,7 @@ namespace Rivet {
     void init() {
       // Projections
       const DISKinematics& diskin = declare(DISKinematics(), "Kinematics");
-      const DISFinalState& fshcm = declare(DISFinalState(diskin, DISFinalState::BoostFrame::HCM), "FS");
+      const DISFinalState& fshcm = declare(DISFinalState(diskin, DISFrame::HCM), "FS");
       declare(CentralEtHCM(fshcm), "Y1HCM");
 
       // Histograms

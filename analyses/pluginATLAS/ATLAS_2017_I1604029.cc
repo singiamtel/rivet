@@ -48,7 +48,7 @@ namespace Rivet {
       declare(UnstableParticles(), "ufs");
 
       // jets
-      FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "jets");
 
 
@@ -79,7 +79,7 @@ namespace Rivet {
       const Particle& photon = photons[0];
 
       // jet selection
-      Jets jets = apply<JetAlg>(event, "jets").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
+      Jets jets = apply<JetFinder>(event, "jets").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
 
       // lepton selection
       const vector<DressedLepton>& elecs = apply<DressedLeptons>(event, "elecs").dressedLeptons();

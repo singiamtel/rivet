@@ -16,10 +16,8 @@ namespace Rivet {
   public:
 
     /// The default constructor.
-    GammaGammaKinematics(const GammaGammaLeptons & lepton = GammaGammaLeptons(),
-                  const std::map<std::string,std::string> & opts =
-                  std::map<std::string,std::string>())
-      : _theQ2(make_pair(-1.0,-1.0)), _theW2(-1.0) //,_theX(-1.0), _theY(-1.0), _theS(-1.0)
+    GammaGammaKinematics(const GammaGammaLeptons& lepton=GammaGammaLeptons())
+      : _theQ2(make_pair(-1.0,-1.0)), _theW2(-1.0)
     {
       setName("GammaGammaKinematics");
       //addPdgIdPair(ANY, hadid);

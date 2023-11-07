@@ -37,8 +37,8 @@ namespace Rivet {
       const FinalState fs;
       declare(fs, "FS");
 
-      FastJets jets(fs, FastJets::GENKTEE, 0.5, JetAlg::Muons::NONE, JetAlg::Invisibles::ALL);
-      //FastJets jets(fs, FastJets::ANTIKT, 0.5, JetAlg::Muons::NONE, JetAlg::Invisibles::ALL);
+      FastJets jets(fs, JetAlg::GENKTEE, 0.5, JetMuons::NONE, JetInvisibles::ALL);
+      //FastJets jets(fs, JetAlg::ANTIKT, 0.5, JetMuons::NONE, JetInvisibles::ALL);
       declare(jets, "Jets");
 
       IdentifiedFinalState mu_id(fs);
@@ -58,7 +58,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // B-jets
-      const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 5*GeV); // tODO jet eta?
+      const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 5*GeV); // tODO jet eta?
       const Jets bjets = filter_select(jets,  [](const Jet& j) { return j.bTagged(); });
       if (bjets.size()<2) vetoEvent;
 

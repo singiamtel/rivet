@@ -24,8 +24,8 @@ namespace Rivet {
 
     void init() {
       // Eta ranges
-      Cut eta_full = (Cuts::abseta < 5.0) & (Cuts::pT >= 1.0*MeV);
-      Cut eta_lep = (Cuts::abseta < 2.5);
+      Cut eta_full = Cuts::abseta < 5.0 && Cuts::pT >= 1.0*MeV;
+      Cut eta_lep = Cuts::abseta < 2.5;
 
       // All final state particles
       FinalState fs(eta_full);
@@ -42,13 +42,13 @@ namespace Rivet {
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, true);
+      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
-      DressedLeptons vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 15*GeV, true);
+      DressedLeptons vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedelectrons, "vetodressedelectrons");
 
       // Projection to find the muons
@@ -57,11 +57,11 @@ namespace Rivet {
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
       declare(muons, "muons");
-      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 25*GeV, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
-      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, true);
+      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
-      DressedLeptons vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 15*GeV, true);
+      DressedLeptons vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedmuons, "vetodressedmuons");
 
       // Projection to find neutrinos and produce MET
@@ -76,7 +76,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(ewdressedelectrons);
       vfs.addVetoOnThisFinalState(ewdressedmuons);
       vfs.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4);
       jets.useInvisibles();
       declare(jets, "jets");
 

@@ -13,10 +13,8 @@ namespace Rivet {
 
       /// Constructor
       CMS_2016_I1471281(std::string name="CMS_2016_I1471281")
-        : Analysis(name)
-        {
-          _mode = 0; // init
-        }
+        : Analysis(name), _mode(0)
+        { }
 
 
       /// @name Analysis methods
@@ -37,11 +35,13 @@ namespace Rivet {
         Cut cut_mu = Cuts::abseta < 2.1 && Cuts::pT > 20*GeV;
 
         // Dressed Ws ...
-        WFinder wmunu_Finder(fs, cut_mu, PID::MUON, 0*GeV, YODA::MAXDOUBLE, 0*GeV, 0, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+        WFinder wmunu_Finder(fs, cut_mu, PID::MUON, 0*GeV, YODA::MAXDOUBLE, 0*GeV, 0,
+			     LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
         declare(wmunu_Finder, "Wmunu_Finder");
 
         // Dressed Zs ...
-        ZFinder zmumu_Finder(fs, cut_mu, PID::MUON, 60*GeV, 120*GeV, 0, ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::NO);
+        ZFinder zmumu_Finder(fs, cut_mu, PID::MUON, 60*GeV, 120*GeV, 0,
+			     LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
         declare(zmumu_Finder, "Zmumu_Finder");
 
         // Histograms

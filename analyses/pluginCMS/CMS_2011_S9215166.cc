@@ -19,7 +19,7 @@ namespace Rivet {
     void init() {
       const FinalState fs((Cuts::etaIn(-6.0, 6.0)));
       declare(fs, "FS");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.5), "Jets");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.5), "Jets");
 
       VetoedFinalState fsv(fs);
       fsv.vetoNeutrinos();

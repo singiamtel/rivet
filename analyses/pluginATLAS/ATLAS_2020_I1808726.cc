@@ -25,7 +25,7 @@ namespace Rivet {
       //Jet collection (excluding muons and neutrinos)
       const FinalState fs(Cuts::abseta < 4.5);
 
-      FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "Jets");
 
       // Book histograms

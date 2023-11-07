@@ -12,6 +12,7 @@
 
 namespace Rivet {
 
+  
   /// ttbar dilepton differential cross-sections in pp collisions at 13 TeV
   class CMS_2018_I1703993 : public Analysis {  //
   public:
@@ -19,15 +20,13 @@ namespace Rivet {
 
     void init() {
       // Parton level top quarks dilepton e/mu channels only
-      const bool acceptTauDecays = false;
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU, acceptTauDecays),
-              "PartonTops");  // Partonic top decaying to e or mu
+      declare(PartonicTops(TopDecay::E_MU, PromptEMuFromTau::NO), "PartonTops");  // Partonic top decaying to e or mu
 
       // Build particle level tops starting from FinalState
       const FinalState fs(Cuts::pT > 0. && Cuts::abseta < 6.);
 
       // Neutrinos
-      InvisibleFinalState neutrinos(true, true, true);
+      InvisibleFinalState neutrinos(OnlyPrompt::YES, TauDecaysAs::PROMPT, MuDecaysAs::PROMPT);
       declare(neutrinos, "Neutrinos");
 
       // Projection for electrons and muons
@@ -38,17 +37,17 @@ namespace Rivet {
       IdentifiedFinalState photons(fs);
       photons.acceptIdPair(PID::PHOTON);
 
-      PromptFinalState prompt_leptons(charged_leptons, false);
-      PromptFinalState prompt_photons(photons, true);
+      PromptFinalState prompt_leptons(charged_leptons, TauDecaysAs::NONPROMPT);
+      PromptFinalState prompt_photons(photons, TauDecaysAs::PROMPT);
 
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, /*useDecayPhotons*/ true);
+      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
       declare(dressed_leptons, "DressedLeptons");
 
       // Projection for jets
       VetoedFinalState fs_jets(fs);
       fs_jets.addVetoOnThisFinalState(dressed_leptons);
       fs_jets.vetoNeutrinos();
-      declare(FastJets(fs_jets, FastJets::ANTIKT, 0.4), "ak4jets");
+      declare(FastJets(fs_jets, JetAlg::ANTIKT, 0.4), "ak4jets");
 
       // Book hists for particle level, normalized values
       book(_h["top_pt_norm"], "d07-x01-y01");       //  table 15, normalized values

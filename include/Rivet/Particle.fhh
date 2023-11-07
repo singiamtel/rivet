@@ -40,6 +40,10 @@ namespace Rivet {
   /// @}
 
 
+  /// Enum to enable different orderings for particles
+  enum class ObjOrdering { ENERGY, ETA, ET };
+
+
 }
 
 #endif

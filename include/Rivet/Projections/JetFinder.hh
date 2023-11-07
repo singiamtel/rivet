@@ -11,26 +11,26 @@
 namespace Rivet {
 
 
+  /// Enum for the treatment of muons: whether to include all, some, or none in jet-finding
+  enum class JetMuons { NONE, DECAY, ALL };
+  
+  /// Enum for the treatment of invisible particles: whether to include all, some, or none in jet-finding
+  enum class JetInvisibles { NONE, DECAY, ALL };
+
+
+  
   /// Abstract base class for projections which can return a set of {@link Jet}s.
   class JetFinder : public Projection {
   public:
 
-    /// Enum for the treatment of muons: whether to include all, some, or none in jet-finding
-    enum class Muons { NONE, DECAY, ALL };
-
-    /// Enum for the treatment of invisible particles: whether to include all, some, or none in jet-finding
-    enum class Invisibles { NONE, DECAY, ALL };
-
-
-
     /// Constructor
     JetFinder(const FinalState& fs,
-           Muons usemuons = Muons::ALL,
-           Invisibles useinvis = Invisibles::NONE);
-
+	      JetMuons usemuons = JetMuons::ALL,
+	      JetInvisibles useinvis = JetInvisibles::NONE);
+    
     /// Default constructor
     JetFinder() = default;
-
+    
     /// Clone on the heap.
     virtual unique_ptr<Projection> clone() const = 0;
 
@@ -53,7 +53,7 @@ namespace Rivet {
     /// particles. Some jet studies, including those from ATLAS, use a definition
     /// in which neutrinos from hadron decays are included via MC-based calibrations.
     /// Setting this flag to true avoids the automatic restriction to a VisibleFinalState.
-    void useMuons(Muons usemuons = Muons::ALL) {
+    void useMuons(JetMuons usemuons = JetMuons::ALL) {
       _useMuons = usemuons;
     }
 
@@ -63,14 +63,8 @@ namespace Rivet {
     /// particles. Some jet studies, including those from ATLAS, use a definition
     /// in which neutrinos from hadron decays are included via MC-based calibrations.
     /// Setting this flag to true avoids the automatic restriction to a VisibleFinalState.
-    void useInvisibles(Invisibles useinvis = Invisibles::DECAY) {
+    void useInvisibles(JetInvisibles useinvis = JetInvisibles::DECAY) {
       _useInvisibles = useinvis;
-    }
-
-    /// @brief obsolete chooser
-    DEPRECATED("make an explicit choice from Invisibles::{NONE,DECAY,ALL}. This boolean call does not allow for ALL")
-    void useInvisibles(bool useinvis) {
-      _useInvisibles = useinvis ? Invisibles::DECAY : Invisibles::NONE;
     }
 
     /// @}
@@ -198,10 +192,10 @@ namespace Rivet {
   protected:
 
     /// Flag to determine whether or not to exclude (some) muons from the would-be constituents.
-    Muons _useMuons;
+    JetMuons _useMuons;
 
     /// Flag to determine whether or not to exclude (some) invisible particles from the would-be constituents.
-    Invisibles _useInvisibles;
+    JetInvisibles _useInvisibles;
 
 
   };

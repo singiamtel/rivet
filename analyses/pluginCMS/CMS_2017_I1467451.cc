@@ -46,7 +46,7 @@ namespace Rivet {
       prompt_photons.acceptMuonDecays(true);
       prompt_photons.acceptTauDecays(false);
 
-      DressedLeptons dressed_leptons = DressedLeptons(prompt_photons, prompt_leptons, lepConeSize, lepton_cut, true);
+      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, lepConeSize, lepton_cut, PhotonOrigin::ALL);
       declare(dressed_leptons, "DressedLeptons");
 
       MissingMomentum Met(fsm);

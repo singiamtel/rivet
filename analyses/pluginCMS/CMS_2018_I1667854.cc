@@ -45,7 +45,7 @@ namespace Rivet {
       declare(DressedLeptons(fs, bareElectrons, /*dRmax =*/ 0.1,
                              Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "electrons");
 
-      FastJets jets(visfs, FastJets::ANTIKT, 0.4);
+      FastJets jets(visfs, JetAlg::ANTIKT, 0.4);
       declare(jets, "jets");
 
       // Histograms

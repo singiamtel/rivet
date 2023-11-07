@@ -29,11 +29,11 @@ namespace Rivet {
       const FinalState fs;
       declare(fs,"FinalState");
 
-      FastJets fj04(fs,  FastJets::ANTIKT, 0.4);
+      FastJets fj04(fs,  JetAlg::ANTIKT, 0.4);
       fj04.useInvisibles();
       declare(fj04, "AntiKT04");
 
-      FastJets fj06(fs,  FastJets::ANTIKT, 0.6);
+      FastJets fj06(fs,  JetAlg::ANTIKT, 0.6);
       fj06.useInvisibles();
       declare(fj06, "AntiKT06");
 

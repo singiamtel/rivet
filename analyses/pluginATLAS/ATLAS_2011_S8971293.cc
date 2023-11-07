@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       /// Initialise and register projections
-      declare(FastJets(FinalState(), FastJets::ANTIKT, 0.6), "AntiKtJets06");
+      declare(FastJets(FinalState(), JetAlg::ANTIKT, 0.6), "AntiKtJets06");
 
       /// Book histograms
       book(_h_deltaPhi, {110., 160., 210., 260., 310., 400., 500., 600., 800., 10000.});

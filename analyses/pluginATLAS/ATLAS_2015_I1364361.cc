@@ -101,7 +101,7 @@ namespace Rivet {
       const fastjet::JetDefinition jdef(fastjet::antikt_algorithm, 0.4);
       const Jets alljets = mkJets(fastjet::ClusterSequence(pjs_in, jdef).inclusive_jets());
       const Jets jets = sortByPt(filterBy(alljets, Cuts::pT > 30*GeV && Cuts::absrap < 4.4));
-      // FastJets jet_pro(FastJets::ANTIKT, 0.4);
+      // FastJets jet_pro(JetAlg::ANTIKT, 0.4);
       // jet_pro.calc(jet_ptcls);
       // Jets jets = jet_pro.jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 4.4);
 

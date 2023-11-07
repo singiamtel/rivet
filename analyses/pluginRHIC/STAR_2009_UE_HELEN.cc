@@ -46,7 +46,7 @@ namespace Rivet {
       declare(jfs, "JFS");
 
       // SISCone, R = 0.7, overlap_threshold = 0.75
-      declare(FastJets(jfs, FastJets::SISCONE, 0.7), "AllJets");
+      declare(FastJets(jfs, JetAlg::SISCONE, 0.7), "AllJets");
 
       // Book histograms
       book(_hist_pmaxnchg, 1, 1, 1);

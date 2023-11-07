@@ -1,24 +1,28 @@
 #ifndef RIVET_TauFinder_HH
 #define RIVET_TauFinder_HH
 
-#include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
+#include "Rivet/Projections/FinalState.hh"
 
 namespace Rivet {
 
 
+  /// Enumerate types of tau decay
+  enum class TauDecay {
+    ANY = 0,
+    ALL = 0,
+    LEPTONIC,
+    HADRONIC
+  };
+
+
+  
   /// @brief Convenience finder of unstable taus
   ///
-  /// @todo Convert to a general ParticleFinder, since it's not a true final state? Needs some care...
+  /// @todo Convert to a general ParticleFinder, but this has many knock-on
+  /// effects and requires e.g. FastJets to also be generalised.
   class TauFinder : public FinalState {
   public:
-
-    enum class DecayMode {
-      ANY = 0,
-      ALL = 0,
-      LEPTONIC,
-      HADRONIC
-    };
 
     static bool isHadronic(const Particle& tau) {
       assert(tau.abspid() == PID::TAU);
@@ -30,7 +34,7 @@ namespace Rivet {
     }
 
 
-    TauFinder(DecayMode decaymode=DecayMode::ANY, const Cut& cut=Cuts::open()) {
+    TauFinder(TauDecay decaymode=TauDecay::ANY, const Cut& cut=Cuts::open()) {
       /// @todo What about directness/promptness?
       setName("TauFinder");
       _decmode = decaymode;
@@ -59,13 +63,13 @@ namespace Rivet {
 
   protected:
 
-    /// The decaymode enum
-    DecayMode _decmode;
+    /// The decay-mode enum
+    TauDecay _decmode;
 
   };
 
 
-  /// @todo Make this the canonical name in future
+  /// @todo Make this the canonical name in future?
   using Taus = TauFinder;
 
 

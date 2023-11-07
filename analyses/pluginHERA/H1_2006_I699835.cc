@@ -9,8 +9,7 @@
 namespace Rivet {
 
 
-
-  /// @brief Measurement of Event Shape Variables in Deep-Inelastic Scattering at HERA (H1)
+  /// @brief Event-shape variables in deep-inelastic scattering at HERA
   class H1_2006_I699835 : public Analysis {
   public:
 
@@ -32,7 +31,7 @@ namespace Rivet {
       const FinalState fs(Cuts::abseta < 4.9);
       declare(fs, "FS");
 
-      const DISFinalState DISfs(DISFinalState::BoostFrame::BREIT);
+      const DISFinalState DISfs(DISFrame::BREIT);
 
       const FinalState DISfsCut(DISfs, Cuts::eta < 0);
 
@@ -62,7 +61,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-
       const DISKinematics& dk = apply<DISKinematics>(event, "Kinematics");
 
       // The kinematic region covered by the analysis is defined by ranges of Q² and y
@@ -70,7 +68,7 @@ namespace Rivet {
       	vetoEvent;
       }
 
-      const double Q=sqrt(dk.Q2());
+      const double Q = sqrt(dk.Q2());
       _Nevt_after_cuts->fill();
       const size_t iQ = _h_tauc->binAt(Q).index();
       if (0 < iQ && iQ < 8)  _Nevt_after_cuts_Q[iQ-1]->fill();
@@ -94,13 +92,13 @@ namespace Rivet {
 
       for (const Particle& p : fs.particles()) {
       	// Boost to Breit frame
-        const FourMomentum BreitMom = breitboost.transform(p.momentum());
-      	if (BreitMom.eta() < 0) {
-      		thrust_num += abs(BreitMom.pz());
-      		thrust_den += BreitMom.p();
-      		b_num += abs(BreitMom.pt());
-      		sumMom.operator+=(BreitMom.p3());
-      		sumE += BreitMom.E();
+        const FourMomentum breitMom = breitboost.transform(p.momentum());
+      	if (breitMom.eta() < 0) {
+	  thrust_num += abs(breitMom.pz());
+	  thrust_den += breitMom.p();
+	  b_num += abs(breitMom.pt());
+	  sumMom.operator+=(breitMom.p3());
+	  sumE += breitMom.E();
       	}
       }
 
@@ -160,7 +158,6 @@ namespace Rivet {
     CounterPtr _Nevt_after_cuts;
     CounterPtr _Nevt_after_cuts_Q[7];
     ///@}
-
 
   };
 

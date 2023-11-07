@@ -30,7 +30,7 @@ namespace Rivet {
       declare(PromptFinalState(Cuts::abspid == PID::PHOTON), "Photons");
 
       // Jets for UE subtraction with jet-area method
-      FastJets fj(FinalState(), FastJets::KT, 0.5, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets fj(FinalState(), JetAlg::KT, 0.5, JetMuons::NONE, JetInvisibles::NONE);
       fj.useJetArea(new fastjet::AreaDefinition(fastjet::VoronoiAreaSpec(0.9)));
       declare(fj, "KtJetsD05");
 

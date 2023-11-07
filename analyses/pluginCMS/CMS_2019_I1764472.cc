@@ -37,12 +37,13 @@ namespace Rivet {
       fs_jets.vetoNeutrinos();
 
       // First XCone jet clustering step
+      /// @todo Clean this up with something in-place
       fastjet::contrib::PseudoXConePlugin* plugin_xcone = new fastjet::contrib::PseudoXConePlugin(2, 1.2, 2.0);
       declare(FastJets(fs_jets, plugin_xcone), "FatJets");
 
       // Partonic tops for decay channel definition
-      declare(PartonicTops(PartonicTops::DecayMode::E_MU, false), "LeptonicTops");
-      declare(PartonicTops(PartonicTops::DecayMode::HADRONIC), "HadronicTops");
+      declare(PartonicTops(TopDecay::E_MU, PromptEMuFromTau::NO), "LeptonicTops");
+      declare(PartonicTops(TopDecay::HADRONIC), "HadronicTops");
 
       // Book histograms
       book(_hist_mass, "d01-x01-y01");
@@ -61,15 +62,15 @@ namespace Rivet {
 
       // Get prompt leptons
       const PromptFinalState& prompt_leptons = apply<PromptFinalState>(event, "PromptLeptons");
-      const Particles & leptons = prompt_leptons.particles();
-      if(leptons.empty()) vetoEvent;
+      const Particles& leptons = prompt_leptons.particles();
+      if (leptons.empty()) vetoEvent;
 
       // Select leading lepton
       Particle lepton;
-      for(const Particle& l : leptons){
-        if(l.pT() > lepton.pT()) lepton = l;
+      for (const Particle& l : leptons){
+        if (l.pT() > lepton.pT()) lepton = l;
       }
-      if(lepton.pT() < 60*GeV) vetoEvent;
+      if (lepton.pT() < 60*GeV) vetoEvent;
 
       // Get the fat jets
       const Jets& fatjets = apply<FastJets>(event, "FatJets").jets();
@@ -81,17 +82,18 @@ namespace Rivet {
       double dR0 = deltaR(lepton, fatjets.at(0));
       double dR1 = deltaR(lepton, fatjets.at(1));
 
-      if(dR0 < dR1){
+      if (dR0 < dR1) {
         ihad = 1;
         ilep = 0;
       }
 
       // Get jet constituents
-      const Particles & phad = fatjets.at(ihad).particles();
-      const Particles & plep = fatjets.at(ilep).particles();
+      const Particles& phad = fatjets.at(ihad).particles();
+      const Particles& plep = fatjets.at(ilep).particles();
 
       // Cluster subjets
       FinalState fs_dummy;
+      /// @todo Avoid rebuilding the plugin for every event
       fastjet::JetDefinition::Plugin* plugin_subhad = new fastjet::contrib::PseudoXConePlugin(3, 0.4, 2.0);
       fastjet::contrib::PseudoXConePlugin* plugin_sublep = new fastjet::contrib::PseudoXConePlugin(3, 0.4, 2.0);
       FastJets hadsubcluster(fs_dummy, plugin_subhad);
@@ -107,17 +109,19 @@ namespace Rivet {
       double dRmin_had = 0.4;
       unsigned int i_dRmin_had = 0;
       bool found_match_had = false;
-      for(unsigned int i=0; i<subjets_had.size(); i++){
+      for (unsigned int i=0; i<subjets_had.size(); i++) {
         double dR = deltaR(subjets_had[i], lepton);
-        if(dR < dRmin_had){
+        if (dR < dRmin_had) {
           dRmin_had = dR;
           i_dRmin_had = i;
           found_match_had = true;
         }
       }
-      for(unsigned int i=0; i<subjets_had.size(); i++){
+      for (unsigned int i=0; i<subjets_had.size(); i++) {
         Jet subjet = subjets_had[i];
-        if(found_match_had && i == i_dRmin_had) subjet = Jet(subjets_had[i].momentum()-lepton.momentum(), subjets_had[i].particles(), subjets_had[i].tags());
+        if (found_match_had && i == i_dRmin_had) {
+	  subjet = Jet(subjets_had[i].momentum()-lepton.momentum(), subjets_had[i].particles(), subjets_had[i].tags());
+	}
         subjets_had_clean.push_back(subjet);
       }
       std::sort(subjets_had_clean.begin(), subjets_had_clean.end(), cmpMomByPt);
@@ -127,52 +131,54 @@ namespace Rivet {
       double dRmin_lep = 0.4;
       unsigned int i_dRmin_lep = 0;
       bool found_match_lep = false;
-      for(unsigned int i=0; i<subjets_lep.size(); i++){
+      for (unsigned int i=0; i<subjets_lep.size(); i++) {
         double dR = deltaR(subjets_lep[i], lepton);
-        if(dR < dRmin_lep){
+        if (dR < dRmin_lep) {
           dRmin_lep = dR;
           i_dRmin_lep = i;
           found_match_lep = true;
         }
       }
-      for(unsigned int i=0; i<subjets_lep.size(); i++){
+      for (unsigned int i=0; i<subjets_lep.size(); i++) {
         Jet subjet = subjets_lep[i];
-        if(found_match_lep && i == i_dRmin_lep) subjet = Jet(subjets_lep[i].momentum()-lepton.momentum(), subjets_lep[i].particles(), subjets_lep[i].tags());
+        if (found_match_lep && i == i_dRmin_lep) {
+	  subjet = Jet(subjets_lep[i].momentum()-lepton.momentum(), subjets_lep[i].particles(), subjets_lep[i].tags());
+	}
         subjets_lep_clean.push_back(subjet);
       }
       std::sort(subjets_lep_clean.begin(), subjets_lep_clean.end(), cmpMomByPt);
 
       // Subjet cuts
-      if(subjets_had_clean.size() != 3) vetoEvent;
-      if(subjets_lep_clean.size() != 3) vetoEvent;
+      if (subjets_had_clean.size() != 3) vetoEvent;
+      if (subjets_lep_clean.size() != 3) vetoEvent;
       for (Jet jet : subjets_had_clean){
-          if(jet.pT() < 30*GeV) vetoEvent;
-          if(jet.abseta() > 2.5) vetoEvent;
+	if (jet.pT() < 30*GeV) vetoEvent;
+	if (jet.abseta() > 2.5) vetoEvent;
       }
 
       // Combine subjets to final jets
       FourMomentum hadjet;
-      for(Jet subjet : subjets_had_clean){
-        if(subjet.abseta() < 2.5) hadjet += subjet.momentum();
+      for (Jet subjet : subjets_had_clean) {
+        if (subjet.abseta() < 2.5) hadjet += subjet.momentum();
       }
       FourMomentum lepjet;
-      for(Jet subjet : subjets_lep_clean){
-        if(subjet.abseta() < 2.5) lepjet += subjet.momentum();
+      for (Jet subjet : subjets_lep_clean) {
+        if (subjet.abseta() < 2.5) lepjet += subjet.momentum();
       }
 
       // Jet pT cuts
-      if(hadjet.pT() < 400*GeV) vetoEvent;
-      if(lepjet.pT() < 10*GeV) vetoEvent;
+      if (hadjet.pT() < 400*GeV) vetoEvent;
+      if (lepjet.pT() < 10*GeV) vetoEvent;
 
       // m(hadjet) > m(lepjet+lepton)
       FourMomentum secondJetLepton = lepjet + lepton.momentum();
-      if(hadjet.mass() < secondJetLepton.mass()) vetoEvent;
+      if (hadjet.mass() < secondJetLepton.mass()) vetoEvent;
 
       // Fill histograms
       _hist_mass->fill(hadjet.mass()/GeV);
       _hist_mass_norm->fill(hadjet.mass()/GeV);
-
     }
+    
 
     /// Normalise and scale histograms
     void finalize() {

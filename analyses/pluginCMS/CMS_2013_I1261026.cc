@@ -19,7 +19,7 @@ namespace Rivet {
       const ChargedFinalState cfs(Cuts::abseta < 2.4 && Cuts::pT > 0.25*GeV);
       declare(cfs, "CFS250");
 
-      FastJets jetpro(cfs, FastJets::ANTIKT, 0.5);
+      FastJets jetpro(cfs, JetAlg::ANTIKT, 0.5);
       declare(jetpro, "Jets");
 
       // For min bias trigger

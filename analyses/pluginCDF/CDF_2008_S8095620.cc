@@ -34,7 +34,7 @@ namespace Rivet {
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(invfs);
       declare(vfs, "VFS");
-      declare(FastJets(vfs, FastJets::CDFMIDPOINT, 0.7), "Jets");
+      declare(FastJets(vfs, JetAlg::CDFMIDPOINT, 0.7), "Jets");
 
       // Book histograms
       book(_dStot    ,1, 1, 1);

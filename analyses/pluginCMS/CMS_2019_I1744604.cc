@@ -46,8 +46,7 @@ namespace Rivet {
       Cut lepton_cut   = (Cuts::abseta < 2.4) and (Cuts::pT > 26.*GeV);
       DressedLeptons dressed_leptons(
         prompt_photons, prompt_leptons, 0.1,
-        lepton_cut, true
-      );
+        lepton_cut, PhotonOrigin::ALL);
       declare(dressed_leptons, "DressedLeptons");
 
       // Jets
@@ -55,9 +54,8 @@ namespace Rivet {
       fsForJets.addVetoOnThisFinalState(dressed_leptons);
       declare(
         // excludes all neutrinos by default
-        FastJets(fsForJets, FastJets::ANTIKT, 0.4),
-        "Jets"
-      );
+        FastJets(fsForJets, JetAlg::ANTIKT, 0.4),
+        "Jets");
 
       // Neutrinos
       IdentifiedFinalState neutrinos(fs);

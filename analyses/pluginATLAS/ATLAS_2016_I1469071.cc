@@ -36,13 +36,13 @@ namespace Rivet {
       // Electrons and muons in Fiducial PS
       PromptFinalState leptons(FinalState(fs_z && (Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON)));
       leptons.acceptTauDecays(false);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, FS_Zlept, true);
+      DressedLeptons dressedleptons(photons, leptons, 0.1, FS_Zlept, PhotonOrigin::ALL);
       declare(dressedleptons, "DressedLeptons");
 
       // Electrons and muons in Total PS
       PromptFinalState leptons_total(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       leptons_total.acceptTauDecays(false);
-      DressedLeptons dressedleptonsTotal(photons, leptons_total, 0.1, Cuts::open(), true);
+      DressedLeptons dressedleptonsTotal(photons, leptons_total, 0.1, Cuts::open(), PhotonOrigin::ALL);
       declare(dressedleptonsTotal, "DressedLeptonsTotal");
 
       // Promot neutrinos (yikes!)
@@ -56,7 +56,7 @@ namespace Rivet {
       // Jets
       VetoedFinalState veto;
       veto.addVetoOnThisFinalState(dressedleptons);
-      FastJets jets(veto, FastJets::ANTIKT, 0.4);
+      FastJets jets(veto, JetAlg::ANTIKT, 0.4);
       declare(jets, "Jets");
 
       // Book histograms
@@ -86,7 +86,7 @@ namespace Rivet {
       const vector<DressedLepton>& dressedleptons = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
       const vector<DressedLepton>& dressedleptonsTotal = apply<DressedLeptons>(event, "DressedLeptonsTotal").dressedLeptons();
       const Particles& neutrinos = apply<PromptFinalState>(event, "Neutrinos").particlesByPt();
-      Jets jets = apply<JetAlg>(event, "Jets").jetsByPt( (Cuts::abseta < 4.5) && (Cuts::pT > 25*GeV) );
+      Jets jets = apply<JetFinder>(event, "Jets").jetsByPt( (Cuts::abseta < 4.5) && (Cuts::pT > 25*GeV) );
 
       if (dressedleptonsTotal.size() < 3 || neutrinos.size() < 1) vetoEvent;
 

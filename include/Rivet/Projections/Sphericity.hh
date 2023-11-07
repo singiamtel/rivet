@@ -11,7 +11,6 @@
 namespace Rivet {
 
 
-
   /// @brief Calculate the sphericity event shape.
   ///
   /// The sphericity tensor (or quadratic momentum tensor) is defined as

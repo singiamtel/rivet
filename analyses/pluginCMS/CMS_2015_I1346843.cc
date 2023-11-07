@@ -19,7 +19,7 @@ namespace Rivet {
     void init() {
 
       Cut c_photons = Cuts::pT >= 5*GeV && Cuts::abseta < 2.5 && !(Cuts::absetaIn(1.4, 1.6));
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON && c_photons, true, true);
+      PromptFinalState photons(Cuts::abspid == PID::PHOTON && c_photons, TauDecaysAs::PROMPT, MuDecaysAs::PROMPT);
       declare(photons, "PHOTONFS");
 
       Cut c_muons = Cuts::pT > 9*GeV && Cuts::abseta < 2.4;

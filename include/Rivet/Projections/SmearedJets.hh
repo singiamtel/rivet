@@ -5,7 +5,7 @@
 #include "Rivet/Jet.hh"
 #include "Rivet/Particle.hh"
 #include "Rivet/Projection.hh"
-#include "Rivet/Projections/JetAlg.hh"
+#include "Rivet/Projections/JetFinder.hh"
 #include "Rivet/Tools/SmearingFunctions.hh"
 #include <functional>
 

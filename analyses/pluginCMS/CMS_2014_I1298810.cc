@@ -21,9 +21,9 @@ namespace Rivet {
 
     void init() {
       // Projections
-      FastJets jetsak5(FinalState(), FastJets::ANTIKT, 0.5);
+      FastJets jetsak5(FinalState(), JetAlg::ANTIKT, 0.5);
       declare(jetsak5, "JetsAK5");
-      FastJets jetsak7(FinalState(), FastJets::ANTIKT, 0.7);
+      FastJets jetsak7(FinalState(), JetAlg::ANTIKT, 0.7);
       declare(jetsak7, "JetsAK7");
 
       // Histograms

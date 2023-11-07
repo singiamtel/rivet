@@ -7,10 +7,11 @@
 
 namespace Rivet {
 
-/// @brief Measurements of differential production cross sections for a Z boson in association with jets in pp collisions at 8 TeV
 
+  /// @brief Measurements of differential production cross sections for a Z boson in association with jets in pp collisions at 8 TeV
   class CMS_2017_I1497519 : public Analysis {
   private:
+    
     enum histIds {
       //Normalized differential cross sections
       kYZ, kYZmidPt, kYZhighPt, //Figs. 9a, 9b, 9c
@@ -53,7 +54,7 @@ namespace Rivet {
 
     /// Fill histograms _h[ih+0..2] with x with different lower thresholds on tocut:
     /// no threshold, threshold cut2, threshold cut2
-    void fill3cuts(int ih, double tocut, double cut2, double cut3, double x){
+    void fill3cuts(int ih, double tocut, double cut2, double cut3, double x) {
       _h[ih]->fill(x);
       if (tocut > cut2) _h[ih+1]->fill(x);
       if (tocut > cut3) _h[ih+2]->fill(x);
@@ -61,11 +62,11 @@ namespace Rivet {
 
     /// Fills a set of N 1-D histograms _h[ih + 0...N-1] that represents a 2-D distribution
     /// @param bins: boundaries of the y bins covered by each 1-D histogram
-    void fill2D(int ih, std::vector<double>& ybins, double x, double y, double w){
+    void fill2D(int ih, vector<double>& ybins, double x, double y, double w){
       int iybin = -1;
       double lowEdge;
-      for(auto highEdge: ybins){
-        if(y < highEdge){
+      for (auto highEdge: ybins) {
+        if (y < highEdge){
           if (iybin >= 0) _h[ih + iybin]->fill(x, w / (highEdge - lowEdge));
           break;
         }
@@ -74,12 +75,12 @@ namespace Rivet {
       }
     }
 
-    void fill3D(int ih, std::vector<double>& ybins, std::vector<double> zbins, double x, double y, double z, double w){
+    void fill3D(int ih, vector<double>& ybins, std::vector<double> zbins, double x, double y, double z, double w){
       int izbin = -1;
       double lowEdge = 0;
       int nybins = ybins.size() - 1;
-      for(auto highEdge: zbins){
-        if(z < highEdge){
+      for (auto highEdge: zbins) {
+        if (z < highEdge){
           if (izbin >= 0) fill2D(ih + izbin*nybins, ybins, x, y, w / (highEdge - lowEdge));
           break;
         }
@@ -88,6 +89,7 @@ namespace Rivet {
       }
     }
 
+    
   public:
 
     /// Constructor
@@ -141,20 +143,18 @@ namespace Rivet {
       PromptFinalState bareMuons(Cuts::abspid == PID::MUON);
       declare(DressedLeptons(fs, bareMuons, /*dRmax = */0.1,
                              Cuts::pT > 20*GeV && Cuts::abseta < 2.4,
-                             /*useDecayPhotons = */ true),
-              "muons");
+			     PhotonOrigin::ALL), "muons");
 
       PromptFinalState bareElectrons(Cuts::abspid == PID::ELECTRON);
       declare(DressedLeptons(fs, bareElectrons, /*dRmax =*/ 0.1,
                              Cuts::pT > 20*GeV && Cuts::abseta < 2.4,
-                             /*useDecayPhotons = */ true),
-              "electrons");
+			     PhotonOrigin::ALL), "electrons");
 
-      FastJets jets(fs, FastJets::ANTIKT, 0.5);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.5);
       declare(jets, "jets");
 
       _h = std::vector<Histo1DPtr>(nHistos);
-      for(int ih = 0; ih < nHistos; ++ih){
+      for (int ih = 0; ih < nHistos; ++ih){
         book(_h[_histListInPaperOrder[ih]], ih + 1, 1, 1);
       }
 
@@ -182,16 +182,16 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      std::vector<DressedLepton> muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
-      std::vector<DressedLepton> electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
+      vector<DressedLepton> muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
 
       //Look for Z->ee
       std::unique_ptr<Particle> z = zfinder(electrons);
 
-      const std::vector<DressedLepton>* dressedLeptons = 0;
+      const vector<DressedLepton>* dressedLeptons = 0;
 
       //Look for Z->ee
-      if(z.get() != nullptr && _mode != 1) {
+      if (z.get() != nullptr && _mode != 1) {
         dressedLeptons = &electrons;
       } else{ //look for Z->mumu
         z = zfinder(muons);

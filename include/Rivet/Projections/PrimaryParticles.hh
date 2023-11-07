@@ -19,14 +19,13 @@ namespace Rivet {
   class PrimaryParticles : public ParticleFinder {
   public:
 
-    using ParticleFinder::operator=;
+    using ParticleFinder::operator =;
 
     /// Constructor
     ///
     /// @param pids  List of PDG IDs which are considered primary
     /// @param c     Normal particle cuts
-    PrimaryParticles(std::initializer_list<int> pids,
-		     const Cut& c=Cuts::open()) :
+    PrimaryParticles(std::initializer_list<int> pids, const Cut& c=Cuts::open()) :
       ParticleFinder(c), _pdgIds(pids) {
       setName("PrimaryParticles");
     }
@@ -61,62 +60,62 @@ namespace Rivet {
   protected:
 
     /// Do the projection.
-	///
-	/// @param e Event to project from
+    ///
+    /// @param e Event to project from
     virtual void project(const Event& e);
-
-	/// @name Internally used member functions
+    
+    /// @name Internally used member functions
     /// @{
     ///
     /// Check if the particle is a primary.
-	///
-	/// @param p Pointer to a HepMC particle
-	///
-	/// @return true if the particle @a p is considered primary
+    ///
+    /// @param p Pointer to a HepMC particle
+    ///
+    /// @return true if the particle @a p is considered primary
     virtual bool isPrimary(ConstGenParticlePtr p) const;
 
     /// Check if the particle should be ignored, via its status code
     virtual bool isIgnored(ConstGenParticlePtr p) const;
 
     /// Check PDG ID of particle @a p is in the list of accepted primaries
-	///
-	/// @param p Particle to investigate.
-	///
-	/// @return true if the particle PDG ID is in the list of known primary PDG IDs.
+    ///
+    /// @param p Particle to investigate.
+    ///
+    /// @return true if the particle PDG ID is in the list of known primary PDG IDs.
     virtual bool isPrimaryPID(ConstGenParticlePtr p) const;
 
     /// Check if a particle @a p has decayed.
-	///
-	/// @param p Pointer to HepMC particle
-	///
-	/// @return true if the particle has decayed according to the
-	/// status flag of the particle @a p
+    ///
+    /// @param p Pointer to HepMC particle
+    ///
+    /// @return true if the particle has decayed according to the
+    /// status flag of the particle @a p
     virtual bool hasDecayed(ConstGenParticlePtr p) const;
 
     /// Check if a particle is a beam (remnant) particle.
-	///
-	/// @param p Particle to check
-	///
-	/// @return true if the particle @a p is a (remnant) beam particle
+    ///
+    /// @param p Particle to check
+    ///
+    /// @return true if the particle @a p is a (remnant) beam particle
     virtual bool isBeam(ConstGenParticlePtr p) const;
 
-	/// Get the immediate ancestor of a particle.
-	///
-	/// @param p Particle for which to get the immediate ancestor
-	///
-	/// @return Pointer to immediate ancestor or null if there's no ancestor.
+    /// Get the immediate ancestor of a particle.
+    ///
+    /// @param p Particle for which to get the immediate ancestor
+    ///
+    /// @return Pointer to immediate ancestor or null if there's no ancestor.
     ConstGenParticlePtr ancestor(ConstGenParticlePtr p) const;
 
     /// Get the immediate ancestor of a particle, which is @e not an
-	/// ignored particle.
-	///
-	/// @param p Particle for which to get the immediate ancestor
-	///
-	/// @return Pointer to immediate ancestor or null if there's no ancestor.
+    /// ignored particle.
+    ///
+    /// @param p Particle for which to get the immediate ancestor
+    ///
+    /// @return Pointer to immediate ancestor or null if there's no ancestor.
     ConstGenParticlePtr ancestor(ConstGenParticlePtr p, bool) const;
 
     /// Particle types to test for
-    std::vector<int> _pdgIds;
+    vector<int> _pdgIds;
 
   };
 

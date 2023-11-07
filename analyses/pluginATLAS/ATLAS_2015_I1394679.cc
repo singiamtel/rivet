@@ -23,7 +23,7 @@ namespace Rivet {
       // Initialise and register projections here
       const FinalState fs;
       declare(fs, "FinalState");
-      FastJets fj04(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets fj04(fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(fj04, "AntiKt4jets");
 
       // Histograms

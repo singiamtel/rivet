@@ -26,7 +26,7 @@ namespace Rivet {
       Cut cut_lep = (Cuts::abseta < 2.7) && (Cuts::pT > 5*GeV);
       PromptFinalState prompt_photons(Cuts::abspid == PID::PHOTON);
       PromptFinalState prompt_leptons(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      DressedLeptons dLeptons(prompt_photons, prompt_leptons, 0.1, cut_lep, true);
+      DressedLeptons dLeptons(prompt_photons, prompt_leptons, 0.1, cut_lep, PhotonOrigin::ALL);
       declare(dLeptons, "AllLeptons");
 
       /// Jet inputs
@@ -35,17 +35,17 @@ namespace Rivet {
 
       // reject all leptons dressed with only prompt photons from jet input
       FinalState leptons(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-      DressedLeptons reject_leptons(prompt_photons, leptons, 0.1, Cuts::open(), true);
+      DressedLeptons reject_leptons(prompt_photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
       jet_input.addVetoOnThisFinalState(reject_leptons);
 
       // reject prompt invisibles, including from tau decays
       VetoedFinalState invis_fs_jet(fs_jet);
       invis_fs_jet.addVetoOnThisFinalState(VisibleFinalState(fs_jet));
-      PromptFinalState invis_pfs_jet = PromptFinalState(invis_fs_jet, true);
+      PromptFinalState invis_pfs_jet = PromptFinalState(invis_fs_jet, TauDecaysAs::PROMPT);
       jet_input.addVetoOnThisFinalState(invis_pfs_jet);
 
       // declare jets
-      FastJets jets(jet_input, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::DECAY);
+      FastJets jets(jet_input, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::DECAY);
       declare(jets, "Jets");
 
       // Book histograms with continuous (float) binning

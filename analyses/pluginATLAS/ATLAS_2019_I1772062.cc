@@ -226,7 +226,7 @@ namespace Rivet {
       // All final state particles
       const FinalState fs(Cuts::abseta < 5.0);
 
-      FastJets jets(fs, FastJets::ANTIKT, 0.8, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.8, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "jets");
 
       ChargedFinalState tracks(Cuts::pT > 0.5*GeV && Cuts::abseta < 2.5);

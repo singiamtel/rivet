@@ -50,7 +50,7 @@ namespace Rivet {
       // Final state including all AntiKt 04 Jets
       VetoedFinalState vfs;
       vfs.addVetoPairId(PID::MUON);
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "AntiKtJets04");
+      declare(FastJets(vfs, JetAlg::ANTIKT, 0.4), "AntiKtJets04");
 
       // Final state including all unstable particles (including taus)
       declare(UnstableParticles(Cuts::abseta < 5.0 && Cuts::pT > 5*GeV),"UFS");

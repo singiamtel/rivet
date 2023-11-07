@@ -23,19 +23,17 @@ namespace Rivet {
       const double R = getOption<double>("R", 0.6);
 
       // set clustering algorithm from input option
-      FastJets::Algo clusterAlgo;
+      JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
-
       if ( algoopt == "KT" ) {
-	clusterAlgo = FastJets::KT;
+	clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = FastJets::CA;
+	clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = FastJets::ANTIKT;
+	clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
-		    "Defaulting to anti-kT");
-	clusterAlgo = FastJets::ANTIKT;
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+	clusterAlgo = JetAlg::ANTIKT;
       }
       
       FastJets fj(FinalState(Cuts::abseta < 5), clusterAlgo, R);
@@ -59,7 +57,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get jets and heavy hadrons
-      const Jets& jets = apply<JetAlg>(event, "Jets").jetsByPt();
+      const Jets& jets = apply<JetFinder>(event, "Jets").jetsByPt();
       const Particles bhadrons = sortByPt(apply<HeavyHadrons>(event, "BCHadrons").bHadrons());
       const Particles chadrons = sortByPt(apply<HeavyHadrons>(event, "BCHadrons").cHadrons());
       MSG_DEBUG("# b hadrons = " << bhadrons.size() << ", # c hadrons = " << chadrons.size());

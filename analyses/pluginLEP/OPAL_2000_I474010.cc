@@ -55,8 +55,8 @@ namespace Rivet {
       // projections
       const FinalState fs;
       declare(fs, "FS");
-      FastJets durhamjets(fs, FastJets::DURHAM, 0.7);
-      durhamjets.useInvisibles(JetAlg::Invisibles::ALL);
+      FastJets durhamjets(fs, JetAlg::DURHAM, 0.7);
+      durhamjets.useInvisibles(JetInvisibles::ALL);
       declare(durhamjets, "DurhamJets");
       const Thrust thrust(fs);
       declare(thrust, "Thrust");

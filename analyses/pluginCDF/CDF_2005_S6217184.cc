@@ -24,7 +24,7 @@ namespace Rivet {
       // Set up projections
       const FinalState fs(Cuts::abseta < 2);
       declare(fs, "FS");
-      FastJets fj(fs, FastJets::CDFMIDPOINT, 0.7, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets fj(fs, JetAlg::CDFMIDPOINT, 0.7, JetMuons::ALL, JetInvisibles::ALL);
       declare(fj, "Jets");
 
       // Register a jet shape projection and histogram for each pT bin

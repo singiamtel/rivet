@@ -61,7 +61,7 @@ namespace Rivet {
       jetFS.addVetoOnThisFinalState(electronClusters);
       jetFS.addVetoOnThisFinalState(muonClusters);
       jetFS.addVetoOnThisFinalState(neutrinos);
-      FastJets jetpro(jetFS, FastJets::KT, 0.6, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jetpro(jetFS, JetAlg::KT, 0.6, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jetpro, "jets");
 
       // Book histograms

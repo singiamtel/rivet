@@ -24,7 +24,7 @@ namespace Rivet {
       RapidityGap() {
         setName("RapidityGap");
         declare(DISKinematics(), "DISKIN");
-        declare(DISFinalState(DISFinalState::BoostFrame::HCM), "DISFS");
+        declare(DISFinalState(DISFrame::HCM), "DISFS");
       }
 
       RIVET_DEFAULT_PROJ_CLONE(RapidityGap);
@@ -311,10 +311,10 @@ namespace Rivet {
     void init() {
 
       declare(DISKinematics(), "Kinematics");
-      const DISFinalState& disfs = declare(DISFinalState(DISFinalState::BoostFrame::HCM), "DISFS");
+      const DISFinalState& disfs = declare(DISFinalState(DISFrame::HCM), "DISFS");
       const BoostedXSystem& disfsXcm = declare( BoostedXSystem(disfs), "BoostedXFS");
       declare(FastJets(disfsXcm, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 1.0,
-                       JetAlg::Muons::ALL, JetAlg::Invisibles::NONE, nullptr), "DISFSJets");
+                       JetMuons::ALL, JetInvisibles::NONE, nullptr), "DISFSJets");
       declare(RapidityGap(), "RapidityGap");
 
       // Book histograms from REF data

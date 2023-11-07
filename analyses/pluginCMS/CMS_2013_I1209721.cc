@@ -30,7 +30,7 @@ namespace Rivet {
       declare(zfe, "ZFE");
       declare(zfm, "ZFM");
       // Jets
-      const FastJets jets(fs, FastJets::ANTIKT, 0.5);
+      const FastJets jets(fs, JetAlg::ANTIKT, 0.5);
       declare(jets, "JETS");
 
       // Book histograms from data

@@ -29,7 +29,7 @@ namespace Rivet {
 
       /// @todo Urk, abuse! Need explicit HiggsFinder (and TauFinder?)
       ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV,
-		      0.0, ZFinder::ClusterPhotons::NONE, ZFinder::AddPhotons::NO, 125*GeV);
+		      0.0, PhotonOrigin::NONE, PhotonsAsConstituents::NO, 125*GeV);
       declare(hfinder, "Hfinder");
 
       // set ptcut from input option
@@ -40,19 +40,17 @@ namespace Rivet {
       const double R = getOption<double>("R", 0.4);
 
       // set clustering algorithm from input option
-      FastJets::Algo clusterAlgo;
+      JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
-
       if ( algoopt == "KT" ) {
-	clusterAlgo = FastJets::KT;
+	clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = FastJets::CA;
+	clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = FastJets::ANTIKT;
+	clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
-		    "Defaulting to anti-kT");
-	clusterAlgo = FastJets::ANTIKT;
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+	clusterAlgo = JetAlg::ANTIKT;
       }
 
       FastJets jetpro(hfinder.remainingFinalState(), clusterAlgo, R);

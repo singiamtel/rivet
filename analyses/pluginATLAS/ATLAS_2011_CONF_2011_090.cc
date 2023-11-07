@@ -52,7 +52,7 @@ namespace Rivet {
       // Jet finder
       VetoedFinalState vfs;
       vfs.addVetoPairId(PID::MUON);
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "AntiKtJets04");
+      declare(FastJets(vfs, JetAlg::ANTIKT, 0.4), "AntiKtJets04");
 
       // all tracks (to do deltaR with leptons)
       declare(ChargedFinalState(Cuts::abseta < 3.0 && Cuts::pT > 0.5*GeV), "cfs");

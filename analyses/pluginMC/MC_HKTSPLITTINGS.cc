@@ -30,13 +30,13 @@ namespace Rivet {
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
       
       /// @todo Urk, abuse! Need explicit HiggsFinder and TauFinder
-      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0, ZFinder::ClusterPhotons::NONE, ZFinder::AddPhotons::NO, 125*GeV);
+      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0, PhotonOrigin::NONE, PhotonsAsConstituents::NO, 125*GeV);
       declare(hfinder, "Hfinder");
 
       // set clustering radius from input option
       const double R = getOption<double>("R", 0.6);
 
-      FastJets jetpro(hfinder.remainingFinalState(), FastJets::KT, R);
+      FastJets jetpro(hfinder.remainingFinalState(), JetAlg::KT, R);
       declare(jetpro, "Jets");
 
       MC_JetSplittings::init();

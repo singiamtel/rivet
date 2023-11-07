@@ -61,7 +61,7 @@ namespace Rivet {
       declare(veto_mu_nu_FS, "VETO_MU_NU_FS");
 
       // Build the anti-kT R=0.4 jets, using FinalState particles (vetoing muons and neutrinos)
-      FastJets jets(veto_mu_nu_FS, FastJets::ANTIKT, 0.4);
+      FastJets jets(veto_mu_nu_FS, JetAlg::ANTIKT, 0.4);
       declare(jets, "JETS");
 
       // Book histograms

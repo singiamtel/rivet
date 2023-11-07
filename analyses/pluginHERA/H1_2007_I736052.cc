@@ -33,7 +33,7 @@ namespace Rivet {
         declare(ufs, "UFS");
 
         double jet_radius = 1.0;
-        const DISFinalState DISfs(DISFinalState::BoostFrame::BREIT);
+        const DISFinalState DISfs(DISFrame::BREIT);
         declare(FastJets(DISfs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::Et_scheme, jet_radius), "jets_fs");
 
         Histo1DPtr tmp;
@@ -72,7 +72,7 @@ namespace Rivet {
         const FinalState& fs = apply<FinalState>(event, "FS");
         const size_t numParticles = fs.particles().size();
 
-        Jets jets_fs = apply<JetAlg>(event, "jets_fs").jetsByPt(); // Jets with cut on eta
+        Jets jets_fs = apply<JetFinder>(event, "jets_fs").jetsByPt(); // Jets with cut on eta
         double jet_radius = 1.0;
 
         const UnstableParticles& ufs = apply<UnstableFinalState>(event, "UFS");

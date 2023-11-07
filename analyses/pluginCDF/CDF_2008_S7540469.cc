@@ -102,7 +102,7 @@ namespace Rivet {
       const auto jplugin = make_shared<fastjet::CDFMidPointPlugin>(0.7, 0.5, 1.0);
       const Jets jets_all = mkJets(fastjet::ClusterSequence(pjs, jplugin.get()).inclusive_jets());
       const Jets jets_cut = sortByPt(filterBy(jets_all, Cuts::pT > 30*GeV && Cuts::abseta < 2.1));
-      // FastJets jetpro(FastJets::CDFMIDPOINT, 0.7);
+      // FastJets jetpro(JetAlg::CDFMIDPOINT, 0.7);
       // jetpro.calc(jetparts);
       // // Take jets with pt > 30, |eta| < 2.1:
       // const Jets& jets = jetpro.jets();

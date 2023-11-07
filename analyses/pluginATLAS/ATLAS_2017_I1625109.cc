@@ -186,9 +186,9 @@ namespace Rivet {
 
       // Prompt leptons, photons, neutrinos
       // Excluding those from tau decay
-      const PromptFinalState photons(presel && Cuts::abspid == PID::PHOTON, false);
-      const PromptFinalState bare_elecs(presel && Cuts::abspid == PID::ELECTRON, false);
-      const PromptFinalState bare_muons(presel && Cuts::abspid == PID::MUON, false);
+      const PromptFinalState photons(presel && Cuts::abspid == PID::PHOTON, TauDecaysAs::NONPROMPT);
+      const PromptFinalState bare_elecs(presel && Cuts::abspid == PID::ELECTRON, TauDecaysAs::NONPROMPT);
+      const PromptFinalState bare_muons(presel && Cuts::abspid == PID::MUON, TauDecaysAs::NONPROMPT);
 
       // Baseline lepton and jet declaration
       const Cut lepton_baseline_cuts = Cuts::abseta < 2.7 && Cuts::pT > 5*GeV;
@@ -200,7 +200,7 @@ namespace Rivet {
       VetoedFinalState jet_input(fs);
       jet_input.addVetoOnThisFinalState(elecs);
       jet_input.addVetoOnThisFinalState(muons);
-      declare(FastJets(jet_input, FastJets::ANTIKT, 0.4), "jets");
+      declare(FastJets(jet_input, JetAlg::ANTIKT, 0.4), "jets");
 
       // // Book histograms
       book(_h["pT_4l"], 2, 1, 1);
@@ -246,7 +246,7 @@ namespace Rivet {
       if (!inRange(quadruplet.subleadingDilepton.momentum().mass(), 66*GeV, 116*GeV)) vetoEvent;
 
       // Select jets
-      Jets alljets = apply<JetAlg>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+      Jets alljets = apply<JetFinder>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
       for (const DressedLepton& lep : quadruplet.leptonsSortedByPt)
         ifilter_discard(alljets, deltaRLess(lep, 0.4));
       const Jets jets = alljets;

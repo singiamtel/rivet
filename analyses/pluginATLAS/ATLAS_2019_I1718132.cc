@@ -8,10 +8,12 @@
 
 namespace Rivet {
 
+  
   /// @brief leptoquark search at 13 TeV
+  ///
   /// @note This base class contains a "mode" variable to specify lepton channel
   class ATLAS_2019_I1718132 : public Analysis {
-    public:
+  public:
 
       /// Constructor
       RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2019_I1718132);
@@ -37,11 +39,11 @@ namespace Rivet {
 
         // Find and dress the electrons and muons
         PromptFinalState bare_leps(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-        DressedLeptons dressed_leps(photons, bare_leps, 0.1, baseline_lep_cuts, true);
+        DressedLeptons dressed_leps(photons, bare_leps, 0.1, baseline_lep_cuts, PhotonOrigin::ALL);
         declare(dressed_leps, "leptons");
 
         //and finally the jets:
-        FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE);
+        FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE);
         declare(jets, "jets");
 
         size_t offset = _mode;
@@ -79,7 +81,7 @@ namespace Rivet {
         vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
 
         // get the selected jets:
-        Jets jets = apply<JetAlg>(event, "jets").jetsByPt(Cuts::pT > 60*GeV && Cuts::absrap < 2.5);
+        Jets jets = apply<JetFinder>(event, "jets").jetsByPt(Cuts::pT > 60*GeV && Cuts::absrap < 2.5);
 
         // exclude jets which are actually electrons
 

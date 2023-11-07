@@ -23,8 +23,8 @@ namespace Rivet {
 
       const FinalState fs((Cuts::etaIn(-4.0, 4.0)));
       declare(fs, "FS");
-      //      FastJets jets(fs, FastJets::ANTIKT, 0.6);
-      FastJets jets(fs, FastJets::D0ILCONE, 1.0);
+      //      FastJets jets(fs, JetAlg::ANTIKT, 0.6);
+      FastJets jets(fs, JetAlg::D0ILCONE, 1.0);
       jets.useInvisibles();
       declare(jets, "Jets");
 

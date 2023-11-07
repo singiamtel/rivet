@@ -101,7 +101,7 @@ namespace Rivet {
         jetinput.addVetoOnThisFinalState(bare_MU);
         jetinput.addVetoOnThisFinalState(neutrino_fs);
 
-        FastJets jetpro(fs, FastJets::ANTIKT, 0.4);
+        FastJets jetpro(fs, JetAlg::ANTIKT, 0.4);
         declare(jetpro, "jet");
 
         // ZZ -> llnunu histos
@@ -217,8 +217,8 @@ namespace Rivet {
         if (leptons_sel2l2nu.empty()) vetoEvent; // no further analysis, fine to veto
 
         Particles leptons_sel2l2nu_jetveto;
-        for (const DressedLepton& l : mu_sel2l2nu) leptons_sel2l2nu_jetveto.push_back(l.constituentLepton());
-        for (const DressedLepton& l : el_sel2l2nu) leptons_sel2l2nu_jetveto.push_back(l.constituentLepton());
+        for (const DressedLepton& l : mu_sel2l2nu) leptons_sel2l2nu_jetveto.push_back(l.bareLepton());
+        for (const DressedLepton& l : el_sel2l2nu) leptons_sel2l2nu_jetveto.push_back(l.bareLepton());
         double ptll = (leptons_sel2l2nu[0].momentum() + leptons_sel2l2nu[1].momentum()).pT();
 
         // Find Z1-> ll

@@ -13,7 +13,6 @@ namespace Rivet {
   class ATLAS_2017_I1495243 : public Analysis {
   public:
 
-
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2017_I1495243);
 
 
@@ -34,18 +33,18 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(false);
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, Cuts::abseta< 2.5 && Cuts::pT > 25.0*GeV, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, Cuts::abseta< 2.5 && Cuts::pT > 25.0*GeV, PhotonOrigin::ALL);
       declare(dressedelectrons, "electrons");
-      DressedLeptons fulldressedelectrons(photons, electrons, 0.1, eta_full, true);
+      DressedLeptons fulldressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Projection to find the muons
       IdentifiedFinalState mu_id(FS);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(false);
-      DressedLeptons dressedmuons(photons, muons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25.0*GeV, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25.0*GeV, PhotonOrigin::ALL);
       declare(dressedmuons, "muons");
-      DressedLeptons fulldressedmuons(photons, muons, 0.1, eta_full, true);
+      DressedLeptons fulldressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Projection to find neutrinos to exclude from jets
       IdentifiedFinalState nu_id;
@@ -58,7 +57,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(fulldressedelectrons);
       vfs.addVetoOnThisFinalState(fulldressedmuons);
       vfs.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
 
       // Book Histograms

@@ -18,10 +18,10 @@ namespace Rivet {
       ChargedFinalState cfs((Cuts::etaIn(-1.5, 1.5) && Cuts::pT >=  0.5*GeV));
       declare(cfs, "CFS");
 
-      FastJets jetsproj6(cfs, FastJets::ANTIKT, 0.6);
+      FastJets jetsproj6(cfs, JetAlg::ANTIKT, 0.6);
       declare(jetsproj6, "Jets6");
 
-      FastJets jetsproj4(cfs, FastJets::ANTIKT, 0.4);
+      FastJets jetsproj4(cfs, JetAlg::ANTIKT, 0.4);
       declare(jetsproj4, "Jets4");
 
       // @todo tmp YOs

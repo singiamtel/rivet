@@ -34,7 +34,7 @@ namespace Rivet {
       declare(photonfs, "LeadingPhoton");
 
       // Jets
-      const FastJets jets(fs, FastJets::ANTIKT, 0.5);
+      const FastJets jets(fs, JetAlg::ANTIKT, 0.5);
       declare(jets, "JETS");
 
       // Histograms

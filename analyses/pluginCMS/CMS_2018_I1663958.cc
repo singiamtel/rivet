@@ -26,7 +26,8 @@ namespace Rivet {
       FinalState all_photons(vfs, Cuts::abspid == PID::PHOTON);
       FinalState leptons(vfs, Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
 
-      DressedLeptons dressed_leptons(all_photons, leptons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 15*GeV, true);
+      DressedLeptons dressed_leptons(all_photons, leptons, 0.1,
+				     Cuts::abseta < 2.4 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(dressed_leptons, "MyLeptons");
 
       VetoedFinalState photons(all_photons);
@@ -37,7 +38,7 @@ namespace Rivet {
       isolationparticles.addVetoOnThisFinalState(dressed_leptons);
       declare(isolationparticles, "IsoParticles");
 
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(vfs, JetAlg::ANTIKT, 0.4), "Jets");
 
       book(_h["thadpt"], 1, 1, 1);
       book(_h["thady"],  3, 1, 1);

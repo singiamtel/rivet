@@ -26,7 +26,7 @@ namespace Rivet {
       FinalState fs;
       WFinder wfinder(fs, Cuts::abseta < 3.5 && Cuts::pT > 25*GeV, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
       declare(wfinder, "WFinder");
-      FastJets jetpro(wfinder.remainingFinalState(), FastJets::ANTIKT, 0.4);
+      FastJets jetpro(wfinder.remainingFinalState(), JetAlg::ANTIKT, 0.4);
       declare(jetpro, "Jets");
 
       const double sqrts = sqrtS() ? sqrtS() : 14*TeV;

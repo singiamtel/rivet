@@ -12,7 +12,7 @@ namespace Rivet {
 
     void init() {
       FinalState fs;
-      FastJets antikt(fs, FastJets::ANTIKT, 0.4);
+      FastJets antikt(fs, JetAlg::ANTIKT, 0.4);
       declare(antikt, "ANTIKT");
       book(_h_chi_dijet, {2400., 3000., 4200., 4800., 5400., 6000.});
       for (auto& b : _h_chi_dijet->bins()) {
@@ -21,7 +21,7 @@ namespace Rivet {
     }
 
     void analyze(const Event& event) {
-      const Jets& jets = apply<JetAlg>(event, "ANTIKT").jetsByPt();
+      const Jets& jets = apply<JetFinder>(event, "ANTIKT").jetsByPt();
       if (jets.size() < 2) vetoEvent;
       FourMomentum j0(jets[0].momentum());
       FourMomentum j1(jets[1].momentum());

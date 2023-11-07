@@ -9,6 +9,7 @@
 namespace Rivet {
 
 
+  /// BB to Jpsi plus mu at 8 TeV
   class ATLAS_2017_I1598613 : public Analysis {
   public:
 
@@ -41,7 +42,7 @@ namespace Rivet {
         FinalState photons(Cuts::abspid == PID::PHOTON);
         FinalState muons(Cuts::abspid == PID::MUON);
         Cut eta_lep = Cuts::abseta < 2.5;
-        DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 6*GeV, true);
+        DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 6*GeV, PhotonOrigin::ALL);
         declare(dressedmuons, "dressedmuons");
       } else {
         declare(HeavyHadrons(Cuts::absrap < 2.4 && Cuts::pT > 15.5*GeV), "BHadrons");
@@ -114,11 +115,12 @@ namespace Rivet {
 
         // Not sure if this is going to work, but ..
         vector<DressedLepton> Jpsi_muons, third_muons;
-        for (DressedLepton mu : muons) {
-          if (mu.constituentLepton().fromBottom() && mu.constituentLepton().hasAncestor(PID::JPSI)) {
+        for (const DressedLepton& mu : muons) {
+	  const Particle& baremu = mu.bareLepton();
+          if (baremu.fromBottom() && baremu.hasAncestor(PID::JPSI)) {
             Jpsi_muons.push_back(mu);
           }
-          else if (mu.constituentLepton().fromBottom()) {
+          else if (baremu.fromBottom()) {
             third_muons.push_back(mu);
           }
         }

@@ -45,7 +45,7 @@ namespace Rivet {
       // set clustering radius from input option
       const double R = getOption<double>("R", 0.6);
 
-      FastJets jetpro(vfs, FastJets::KT, R);
+      FastJets jetpro(vfs, JetAlg::KT, R);
       declare(jetpro, "Jets");
 
       MC_JetSplittings::init();

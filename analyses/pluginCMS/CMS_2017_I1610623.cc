@@ -23,8 +23,8 @@ namespace Rivet {
 
       // Initialise and register projections
       FinalState fs;
-      WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON, 0*GeV, 1000000*GeV, 0*GeV, 0.1, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::YES, WFinder::MassWindow::MT);
-      //WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON, 0*GeV, 1000000*GeV, 0*GeV, 0.1, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+      WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON, 0*GeV, 1000000*GeV, 0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES, MassVariable::MT);
+      //WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON, 0*GeV, 1000000*GeV, 0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wfinder_mu, "WFinder_mu");
 
       // Define veto FS
@@ -33,7 +33,7 @@ namespace Rivet {
       vfs.addVetoPairId(PID::MUON);
       vfs.vetoNeutrinos();
 
-      FastJets fastjets(vfs, FastJets::ANTIKT, 0.4);
+      FastJets fastjets(vfs, JetAlg::ANTIKT, 0.4);
       declare(fastjets, "Jets");
 
       //-------------
@@ -90,8 +90,8 @@ namespace Rivet {
 
       if (wfinder_mu.bosons().size() == 1) {
 
-        const FourMomentum lepton0 = wfinder_mu.constituentLepton().momentum();
-        const FourMomentum neutrino = wfinder_mu.constituentNeutrino().momentum();
+        const FourMomentum lepton0 = wfinder_mu.lepton().momentum();
+        const FourMomentum neutrino = wfinder_mu.neutrino().momentum();
         double WmT = wfinder_mu.mT();
 
         if (WmT < 50.0*GeV) vetoEvent;

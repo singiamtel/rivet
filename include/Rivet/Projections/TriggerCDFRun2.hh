@@ -11,6 +11,8 @@ namespace Rivet {
 
 
   /// @brief Access to the min bias triggers used by CDF in Run 0 and Run 1
+  ///
+  /// @todo Should really inherit from TriggerProjection!
   class TriggerCDFRun2 : public Projection {
   public:
 

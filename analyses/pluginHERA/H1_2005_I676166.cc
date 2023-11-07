@@ -33,15 +33,15 @@ namespace Rivet {
 
       // DIS events: final state particles boosted to Breit frame then clustered
       // using FastJet KT algorithm with jet radius parameter 1 , pT recombination scheme
-      const DISFinalState DISfs(DISFinalState::BoostFrame::BREIT);
+      const DISFinalState DISfs(DISFrame::BREIT);
       declare(FastJets(DISfs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 1.0,
-                      JetAlg::Muons::ALL, JetAlg::Invisibles::NONE, nullptr), "DISjets");
+                      JetMuons::ALL, JetInvisibles::NONE, nullptr), "DISjets");
 
       // Photoproduction events: final state particles in lab frame then clustered
       // using FastJet KT algorithm with jet radius parameter 1 , pT recombination scheme
-      const DISFinalState PHOfs(DISFinalState::BoostFrame::LAB);
+      const DISFinalState PHOfs(DISFrame::LAB);
       declare(FastJets(PHOfs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 1.0,
-                       JetAlg::Muons::ALL, JetAlg::Invisibles::NONE, nullptr), "PHOjets");
+                       JetMuons::ALL, JetInvisibles::NONE, nullptr), "PHOjets");
 
       // Photoproduction (Table 4)
       book(_h["PHO_eta_mu"], 1, 1, 1);

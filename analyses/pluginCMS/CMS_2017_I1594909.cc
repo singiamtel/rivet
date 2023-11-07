@@ -33,7 +33,7 @@ namespace Rivet {
       ChargedFinalState pfchg(Cuts::abseta < 2.5);
       declare(pfchg, "PFChg");
 
-      FastJets jets(FinalState(Cuts::abseta < 4.9), FastJets::ANTIKT, 0.4);
+      FastJets jets(FinalState(Cuts::abseta < 4.9), JetAlg::ANTIKT, 0.4);
       SmearedJets recojets(jets, JET_SMEAR_CMS_RUN2, [](const Jet& j){ return j.bTagged() ? 0.55 : j.cTagged() ? 0.12 : 0.016; });
       declare(recojets, "Jets");
 
@@ -107,7 +107,7 @@ namespace Rivet {
         });
 
       // Find and isolate jets
-      const Jets jets = apply<JetAlg>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV);
+      const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV);
       const Jets cjets = filter_select(jets, Cuts::abseta < 2.4);
       const Jets isojets = cjets; //discardIfAnyDeltaRLess(cjets, elecs+mus, 0.4);
       const int njets = isojets.size();

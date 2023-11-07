@@ -24,10 +24,10 @@ namespace Rivet {
       Cut el_fid_sel = (Cuts::abseta < 2.47) && (Cuts::pT > 7*GeV);
       Cut mu_fid_sel = (Cuts::abseta < 2.7) && (Cuts::pT > 5*GeV);
 
-      DressedLeptons dressed_elecs(photons, elecs, 0.005, el_fid_sel, false);
+      DressedLeptons dressed_elecs(photons, elecs, 0.005, el_fid_sel, PhotonOrigin::NODECAY);
       declare(dressed_elecs, "elecs");
 
-      DressedLeptons dressed_muons(photons, muons, 0.005, mu_fid_sel, false);
+      DressedLeptons dressed_muons(photons, muons, 0.005, mu_fid_sel, PhotonOrigin::NODECAY);
       declare(dressed_muons, "muons");
 
       // Book histos

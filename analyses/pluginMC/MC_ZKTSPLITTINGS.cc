@@ -6,8 +6,6 @@
 namespace Rivet {
 
 
-
-
   /// @brief MC validation analysis for Z + jets events
   class MC_ZKTSPLITTINGS : public MC_JetSplittings {
   public:
@@ -23,10 +21,8 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-		  _dR=0.2;
-      if (getOption("SCHEME") == "BARE")  _dR = 0.0;
-		  _lepton=PID::ELECTRON;
-      if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
+      _dR = (getOption("SCHEME") == "BARE") ? 0.0 : 0.2;
+      _lepton = (getOption("LMODE") == "MU") ? PID::MUON : PID::ELECTRON;
 
       // set FS cuts from input options
       const double etacut = getOption<double>("ABSETALMAX", 3.5);
@@ -35,13 +31,14 @@ namespace Rivet {
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
       
       FinalState fs;
-      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR,
+		      PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zfinder, "ZFinder");
 
       // set clustering radius from input option
       const double R = getOption<double>("R", 0.6);
       
-      FastJets jetpro(zfinder.remainingFinalState(), FastJets::KT, R);
+      FastJets jetpro(zfinder.remainingFinalState(), JetAlg::KT, R);
       declare(jetpro, "Jets");
 
       MC_JetSplittings::init();
@@ -65,6 +62,7 @@ namespace Rivet {
 
     /// @}
 
+    
   protected:
 
     /// @name Parameters for specialised e/mu and dressed/bare subclassing
@@ -75,6 +73,7 @@ namespace Rivet {
 
   };
 
-  // The hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(MC_ZKTSPLITTINGS);
+  
 }

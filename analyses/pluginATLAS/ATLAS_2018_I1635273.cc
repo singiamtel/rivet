@@ -7,6 +7,7 @@
 
 namespace Rivet {
 
+
   /// @brief W + jets production at 8 TeV
   class ATLAS_2018_I1635273 : public Analysis {
   public:
@@ -33,15 +34,15 @@ namespace Rivet {
       FinalState photons(Cuts::abspid == PID::PHOTON);
 
       // Get dressed leptons
-      PromptFinalState leptons(Cuts::abspid == (_mode? PID::MUON : PID::ELECTRON), false);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, cuts, true);
+      PromptFinalState leptons(Cuts::abspid == (_mode? PID::MUON : PID::ELECTRON), TauDecaysAs::NONPROMPT);
+      DressedLeptons dressedleptons(photons, leptons, 0.1, cuts, PhotonOrigin::ALL);
       declare(dressedleptons, "DressedLeptons");
 
       // Get neutrinos for MET calculation
-      declare(InvisibleFinalState(true), "InvFS"); // true = only allow prompt invisibles
+      declare(InvisibleFinalState(OnlyPrompt::YES), "InvFS");
 
       // jets
-      FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE);
       declare(jets, "Jets");
 
       // book histograms

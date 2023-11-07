@@ -15,7 +15,7 @@ namespace Rivet {
 
      void init() {
        FinalState fs;
-       FastJets akt(fs, FastJets::ANTIKT, 0.5);
+       FastJets akt(fs, JetAlg::ANTIKT, 0.5);
        declare(akt, "antikT");
 
        book(_h_tmp_dijet , "TMP/dijet", refData(1, 1, 1));
@@ -29,7 +29,7 @@ namespace Rivet {
 
        Jets highpT_jets;
        double HT = 0;
-       for(const Jet & jet : apply<JetAlg>(event, "antikT").jetsByPt(50.0*GeV)) {
+       for(const Jet & jet : apply<JetFinder>(event, "antikT").jetsByPt(50.0*GeV)) {
          if (jet.abseta() < 2.5) {
            highpT_jets.push_back(jet);
            HT += jet.pT();

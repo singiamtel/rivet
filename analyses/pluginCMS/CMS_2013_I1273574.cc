@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       const FinalState cnfs((Cuts::etaIn(-4.7, 4.7)));
-      declare(FastJets(cnfs, FastJets::ANTIKT, 0.5), "Jets");
+      declare(FastJets(cnfs, JetAlg::ANTIKT, 0.5), "Jets");
 
       // Modified to match the HEPDATA record.
       // eta of highest pT jet

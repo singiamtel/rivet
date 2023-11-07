@@ -49,10 +49,10 @@ namespace Rivet {
 
       // Z momenta
       FourMomentum zmumu = zmumufinder.bosons()[0].momentum();
-      if(zmumufinder.constituentLeptons().size() < 2) vetoEvent;
+      if (zmumufinder.leptons().size() < 2) vetoEvent;
 
-      const Particle& muon_p = zmumufinder.constituentLeptons()[0];
-      const Particle& muon_m = zmumufinder.constituentLeptons()[1];
+      const Particle& muon_p = zmumufinder.leptons()[0];
+      const Particle& muon_m = zmumufinder.leptons()[1];
 
       const double diffphi = deltaPhi(muon_p, muon_m);
       const double diffpsd = deltaEta(muon_p, muon_m);
@@ -80,9 +80,9 @@ namespace Rivet {
 
     ///@}
 
+    
     Histo1DPtr _h_sigma_vs_y, _h_sigma_vs_pt, _h_sigma_vs_phi;
     Histo1DGroupPtr _h_sigma_vs_ypt, _h_sigma_vs_yphi;
-
 
   };
 

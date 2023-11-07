@@ -25,9 +25,9 @@ namespace Rivet {
 
       FinalState fs;
       Cut cut = Cuts::abseta < 3.5 && Cuts::pT > 25*GeV;
-      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
       declare(zfinder, "ZFinder");
-      FastJets jetpro(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.4);
+      FastJets jetpro(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.4);
       declare(jetpro, "Jets");
 
       const double sqrts = sqrtS() ? sqrtS() : 14*TeV;

@@ -9,6 +9,8 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
+
+
   /// @brief Normalised differential cross sections for 13 TeV tW-channel single top-quark production
   class CMS_2022_I2129461 : public Analysis {
   public:
@@ -48,8 +50,7 @@ namespace Rivet {
 
       DressedLeptons dressed_leptons(
         prompt_photons, prompt_leptons, 0.1,
-        lepton_cut, true
-      );
+        lepton_cut, PhotonOrigin::ALL);
       declare(dressed_leptons, "DressedLeptons");
 
       // Jets
@@ -57,9 +58,8 @@ namespace Rivet {
       fsForJets.addVetoOnThisFinalState(dressed_leptons);
       declare(
         // excludes all neutrinos by default
-        FastJets(fsForJets, FastJets::ANTIKT, 0.4),
-        "Jets"
-      );
+        FastJets(fsForJets, JetAlg::ANTIKT, 0.4),
+        "Jets");
 
       // pTmiss
       declare(MissingMomentum(fs), "MET");

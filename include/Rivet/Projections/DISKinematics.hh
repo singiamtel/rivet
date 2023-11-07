@@ -11,14 +11,16 @@
 namespace Rivet {
 
 
+  /// Type of DIS boost to apply
+  enum class DISFrame { HCM, XCM, BREIT, LAB };
+
+  
   /// @brief Get the DIS kinematic variables and relevant boosts for an event.
   class DISKinematics : public Projection {
   public:
 
     /// The default constructor.
-    DISKinematics(const DISLepton & lepton = DISLepton(),
-                  const std::map<std::string,std::string> & opts =
-                  std::map<std::string,std::string>())
+    DISKinematics(const DISLepton& lepton=DISLepton())
       : _theQ2(-1.0), _theW2(-1.0), _theX(-1.0), _theY(-1.0), _theS(-1.0), _theGH(-1.0)
     {
       setName("DISKinematics");

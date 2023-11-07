@@ -11,7 +11,7 @@ namespace Rivet {
   void FastJets::_initBase() {
     setName("FastJets");
     declare(HeavyHadrons(), "HFHadrons");
-    declare(TauFinder(TauFinder::DecayMode::HADRONIC), "Taus");
+    declare(TauFinder(TauDecay::HADRONIC), "Taus");
 
     // Print/hide FJ banner
     std::cout.setstate(std::ios_base::badbit);
@@ -20,53 +20,53 @@ namespace Rivet {
   }
 
 
-  void FastJets::_initJdef(Algo alg, double rparameter, double seed_threshold) {
+  void FastJets::_initJdef(JetAlg alg, double rparameter, double seed_threshold) {
     MSG_DEBUG("JetAlg = " << static_cast<int>(alg));
     MSG_DEBUG("R parameter = " << rparameter);
     MSG_DEBUG("Seed threshold = " << seed_threshold);
-    if (alg == KT) {
+    if (alg == JetAlg::KT) {
       _jdef = fastjet::JetDefinition(fastjet::kt_algorithm, rparameter, fastjet::E_scheme);
-    } else if (alg == ANTIKT) {
+    } else if (alg == JetAlg::ANTIKT) {
       _jdef = fastjet::JetDefinition(fastjet::antikt_algorithm, rparameter, fastjet::E_scheme);
-    } else if (alg == CAM) {
+    } else if (alg == JetAlg::CAM) {
       _jdef = fastjet::JetDefinition(fastjet::cambridge_algorithm, rparameter, fastjet::E_scheme);
-    } else if (alg == DURHAM) {
+    } else if (alg == JetAlg::DURHAM) {
       _jdef = fastjet::JetDefinition(fastjet::ee_kt_algorithm, fastjet::E_scheme);
-    } else if (alg == GENKTEE) {
+    } else if (alg == JetAlg::GENKTEE) {
       _jdef = fastjet::JetDefinition(fastjet::ee_genkt_algorithm, rparameter, -1);
-    } else if (alg == KTET) {
+    } else if (alg == JetAlg::KTET) {
       _jdef = fastjet::JetDefinition(fastjet::kt_algorithm, rparameter, fastjet::Et_scheme);
-    } else if (alg == ANTIKTET) {
+    } else if (alg == JetAlg::ANTIKTET) {
       _jdef = fastjet::JetDefinition(fastjet::antikt_algorithm, rparameter, fastjet::Et_scheme);
 
     } else {
       // Plugins:
-      if (alg == SISCONE) {
+      if (alg == JetAlg::SISCONE) {
         const double OVERLAP_THRESHOLD = 0.75;
-        _plugin.reset(new fastjet::SISConePlugin(rparameter, OVERLAP_THRESHOLD));
-      } else if (alg == PXCONE) {
+        _plugin = make_shared<fastjet::SISConePlugin>(rparameter, OVERLAP_THRESHOLD);
+      } else if (alg == JetAlg::PXCONE) {
         string msg = "Using own c++ version of PxCone, since FastJet doesn't install it by default. ";
         msg += "Please notify the Rivet authors if this behaviour should be changed.";
         MSG_WARNING(msg);
-        _plugin.reset(new Rivet::PxConePlugin(rparameter));
-      } else if (alg == ATLASCONE) {
+        _plugin = make_shared<Rivet::PxConePlugin>(rparameter);
+      } else if (alg == JetAlg::ATLASCONE) {
         const double OVERLAP_THRESHOLD = 0.5;
-        _plugin.reset(new fastjet::ATLASConePlugin(rparameter, seed_threshold, OVERLAP_THRESHOLD));
-      } else if (alg == CMSCONE) {
-        _plugin.reset(new fastjet::CMSIterativeConePlugin(rparameter, seed_threshold));
-      } else if (alg == CDFJETCLU) {
+        _plugin = make_shared<fastjet::ATLASConePlugin>(rparameter, seed_threshold, OVERLAP_THRESHOLD);
+      } else if (alg == JetAlg::CMSCONE) {
+        _plugin = make_shared<fastjet::CMSIterativeConePlugin>(rparameter, seed_threshold);
+      } else if (alg == JetAlg::CDFJETCLU) {
         const double OVERLAP_THRESHOLD = 0.75;
-        _plugin.reset(new fastjet::CDFJetCluPlugin(rparameter, OVERLAP_THRESHOLD, seed_threshold));
-      } else if (alg == CDFMIDPOINT) {
+        _plugin = make_shared<fastjet::CDFJetCluPlugin>(rparameter, OVERLAP_THRESHOLD, seed_threshold);
+      } else if (alg == JetAlg::CDFMIDPOINT) {
         const double OVERLAP_THRESHOLD = 0.5;
-        _plugin.reset(new fastjet::CDFMidPointPlugin(rparameter, OVERLAP_THRESHOLD, seed_threshold));
-      } else if (alg == D0ILCONE) {
+        _plugin = make_shared<fastjet::CDFMidPointPlugin>(rparameter, OVERLAP_THRESHOLD, seed_threshold);
+      } else if (alg == JetAlg::D0ILCONE) {
         const double min_jet_Et = 6.0;
-        _plugin.reset(new fastjet::D0RunIIConePlugin(rparameter, min_jet_Et));
-      } else if (alg == JADE) {
-        _plugin.reset(new fastjet::JadePlugin());
-      } else if (alg == TRACKJET) {
-        _plugin.reset(new fastjet::TrackJetPlugin(rparameter));
+        _plugin = make_shared<fastjet::D0RunIIConePlugin>(rparameter, min_jet_Et);
+      } else if (alg == JetAlg::JADE) {
+        _plugin = make_shared<fastjet::JadePlugin>();
+      } else if (alg == JetAlg::TRACKJET) {
+        _plugin = make_shared<fastjet::TrackJetPlugin>(rparameter);
       }
       _jdef = fastjet::JetDefinition(_plugin.get());
     }
@@ -161,16 +161,16 @@ namespace Rivet {
 
   void FastJets::project(const Event& e) {
     // Assemble final state particles
-    const string fskey = (_useInvisibles == JetAlg::Invisibles::NONE) ? "VFS" : "FS";
+    const string fskey = (_useInvisibles == JetInvisibles::NONE) ? "VFS" : "FS";
     Particles fsparticles = apply<FinalState>(e, fskey).particles();
     // Remove prompt invisibles if needed (already done by VFS if using NO_INVISIBLES)
-    if (_useInvisibles == JetAlg::Invisibles::DECAY) {
+    if (_useInvisibles == JetInvisibles::DECAY) {
       ifilter_discard(fsparticles, [](const Particle& p) { return !p.isVisible() && p.isPrompt(); });
     }
     // Remove prompt/all muons if needed
-    if (_useMuons == JetAlg::Muons::DECAY) {
+    if (_useMuons == JetMuons::DECAY) {
       ifilter_discard(fsparticles, [](const Particle& p) { return isMuon(p) && p.isPrompt(); });
-    } else if (_useMuons == JetAlg::Muons::NONE) {
+    } else if (_useMuons == JetMuons::NONE) {
       ifilter_discard(fsparticles, isMuon);
     }
 

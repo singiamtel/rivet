@@ -9,7 +9,8 @@
 
 namespace Rivet {
 
-  /// Colinear Z + Jets in pp at 13 TeV
+  
+  /// Collinear Z + Jets in pp at 13 TeV
   class ATLAS_2022_I2077570 : public Analysis {
   public:
 
@@ -29,19 +30,19 @@ namespace Rivet {
       FinalState all_photons(Cuts::abspid == PID::PHOTON);
 
       // Muons
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // true = use muons from prompt tau decays
-      DressedLeptons all_dressed_mu(all_photons, bare_mu, 0.1, Cuts::abseta < 2.5, true);
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_mu(all_photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       // Electrons
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true); // true = use electrons from prompt tau decays
-      DressedLeptons all_dressed_el(all_photons, bare_el, 0.1, Cuts::abseta < 2.5, true);
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_el(all_photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
 
-      FastJets jet(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::NONE);
+      FastJets jet(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::NONE);
       declare(jet, "Jets");
 
 

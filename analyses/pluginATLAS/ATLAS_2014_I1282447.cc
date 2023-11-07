@@ -1,122 +1,4 @@
 // -*- C++ -*-
-// ATLAS W+c analysis
-
-//////////////////////////////////////////////////////////////////////////
-/*
-  Description of rivet analysis ATLAS_2014_I1282447 W+c production
-
-  This rivet routine implements the ATLAS W+c analysis.
-  Apart from those histograms, described and published on HEP Data, here
-  are some helper histograms defined, these are:
-
-  d02-x01-y01, d02-x01-y02 and d08-x01-y01 are ratios, the nominator ("_plus")
-  and denominator ("_minus") histograms are also given, so that the ratios can
-  be reconstructed if need be (e.g. when running on separate samples).
-
-  d05 and d06 are ratios over inclusive W production.
-  The routine has to be run on a sample for inclusive W production in order to
-  make sure the denominator ("_winc") is correctly filled.
-
-  The ratios can be constructed using the following sample code:
-  python divideWCharm.py
-
-  import yoda
-  hists_wc   = yoda.read("Rivet_Wc.yoda")
-  hists_winc = yoda.read("Rivet_Winc.yoda")
-
-  ## division histograms --> ONLY for different plus minus runs
-  # (merge before using yodamerge Rivet_plus.yoda Rivet_minus.yoda > Rivet_Wc.yoda)
-
-  d02y01_plus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y01_plus"]
-  d02y01_minus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y01_minus"]
-  ratio_d02y01 =  d02y01_plus.divide(d02y01_minus)
-  ratio_d02y01.path = "/ATLAS_2014_I1282447/d02-x01-y01"
-
-  d02y02_plus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y02_plus"]
-  d02y02_minus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y02_minus"]
-  ratio_d02y02=  d02y02_plus.divide(d02y02_minus)
-  ratio_d02y02.path = "/ATLAS_2014_I1282447/d02-x01-y02"
-
-  d08y01_plus = hists_wc["/ATLAS_2014_I1282447/d08-x01-y01_plus"]
-  d08y01_minus = hists_wc["/ATLAS_2014_I1282447/d08-x01-y01_minus"]
-  ratio_d08y01=  d08y01_plus.divide(d08y01_minus)
-  ratio_d08y01.path = "/ATLAS_2014_I1282447/d08-x01-y01"
-
-  # inclusive cross section
-  h_winc = hists_winc["/ATLAS_2014_I1282447/d05-x01-y01"]
-  h_d    = hists_wc["/ATLAS_2014_I1282447/d01-x01-y02"]
-  h_dstar= hists_wc["/ATLAS_2014_I1282447/d01-x01-y03"]
-
-  ratio_wd      =  h_d.divide(h_winc)
-  ratio_wd.path = "/ATLAS_2014_I1282447/d05-x01-y02"
-
-  ratio_wdstar      =  h_d.divide(h_winc)
-  ratio_wdstar.path = "/ATLAS_2014_I1282447/d05-x01-y03"
-
-  # pT differential
-  h_winc_plus  = hists_winc["/ATLAS_2014_I1282447/d06-x01-y01_winc"]
-  h_winc_minus = hists_winc["/ATLAS_2014_I1282447/d06-x01-y02_winc"]
-
-  h_wd_plus      = hists_wc["/ATLAS_2014_I1282447/d06-x01-y01_wplus"]
-  h_wd_minus     = hists_wc["/ATLAS_2014_I1282447/d06-x01-y02_wminus"]
-  h_wdstar_plus  = hists_wc["/ATLAS_2014_I1282447/d06-x01-y03_wplus"]
-  h_wdstar_minus = hists_wc["/ATLAS_2014_I1282447/d06-x01-y04_wminus"]
-
-  ratio_wd_plus       =  h_wd_plus.divide(h_winc_plus)
-  ratio_wd_plus.path  = "/ATLAS_2014_I1282447/d06-x01-y01"
-  ratio_wd_minus      =  h_wd_plus.divide(h_winc_minus)
-  ratio_wd_minus.path = "/ATLAS_2014_I1282447/d06-x01-y02"
-
-  ratio_wdstar_plus       =  h_wdstar_plus.divide(h_winc_plus)
-  ratio_wdstar_plus.path  = "/ATLAS_2014_I1282447/d06-x01-y03"
-  ratio_wdstar_minus      =  h_wdstar_plus.divide(h_winc_minus)
-  ratio_wdstar_minus.path = "/ATLAS_2014_I1282447/d06-x01-y04"
-
-  ratio_wd_plus =  h_wd_plus.divide(h_winc_plus)
-  ratio_wd_plus.path = "/ATLAS_2014_I1282447/d06-x01-y01"
-  ratio_wd_minus =  h_wd_plus.divide(h_winc_minus)
-  ratio_wd_minus.path = "/ATLAS_2014_I1282447/d06-x01-y02"
-
-  h_winc_plus= hists_winc["/ATLAS_2014_I1282447/d06-x01-y01_winc"]
-  h_winc_minus= hists_winc["/ATLAS_2014_I1282447/d06-x01-y02_winc"]
-
-  ## copy other histograms for plotting
-
-  d01x01y01= hists_wc["/ATLAS_2014_I1282447/d01-x01-y01"]
-  d01x01y01.path = "/ATLAS_2014_I1282447/d01-x01-y01"
-
-  d01x01y02= hists_wc["/ATLAS_2014_I1282447/d01-x01-y02"]
-  d01x01y02.path = "/ATLAS_2014_I1282447/d01-x01-y02"
-
-  d01x01y03= hists_wc["/ATLAS_2014_I1282447/d01-x01-y03"]
-  d01x01y03.path = "/ATLAS_2014_I1282447/d01-x01-y03"
-
-  d03x01y01= hists_wc["/ATLAS_2014_I1282447/d03-x01-y01"]
-  d03x01y01.path = "/ATLAS_2014_I1282447/d03-x01-y01"
-
-  d03x01y02= hists_wc["/ATLAS_2014_I1282447/d03-x01-y02"]
-  d03x01y02.path = "/ATLAS_2014_I1282447/d03-x01-y02"
-
-  d04x01y01= hists_wc["/ATLAS_2014_I1282447/d04-x01-y01"]
-  d04x01y01.path = "/ATLAS_2014_I1282447/d04-x01-y01"
-
-  d04x01y02= hists_wc["/ATLAS_2014_I1282447/d04-x01-y02"]
-  d04x01y02.path = "/ATLAS_2014_I1282447/d04-x01-y02"
-
-  d04x01y03= hists_wc["/ATLAS_2014_I1282447/d04-x01-y03"]
-  d04x01y03.path = "/ATLAS_2014_I1282447/d04-x01-y03"
-
-  d04x01y04= hists_wc["/ATLAS_2014_I1282447/d04-x01-y04"]
-  d04x01y04.path = "/ATLAS_2014_I1282447/d04-x01-y04"
-
-  d07x01y01= hists_wc["/ATLAS_2014_I1282447/d07-x01-y01"]
-  d07x01y01.path = "/ATLAS_2014_I1282447/d07-x01-y01"
-
-  yoda.write([ratio_d02y01,ratio_d02y02,ratio_d08y01, ratio_wd ,ratio_wdstar,ratio_wd_plus,ratio_wd_minus ,ratio_wdstar_plus,ratio_wdstar_minus,d01x01y01,d01x01y02,d01x01y03,d03x01y01,d03x01y02,d04x01y01,d04x01y02,d04x01y03,d04x01y04,d07x01y01],"validation.yoda")
-
-*/
-//////////////////////////////////////////////////////////////////////////
-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/WFinder.hh"
@@ -127,15 +9,125 @@
 namespace Rivet {
 
 
-
+  /// @name ATLAS W+c analysis
+  ///
+  /// This routine implements the ATLAS W+c analysis.
+  /// Apart from those histograms, described and published on HEP Data, here
+  /// are some helper histograms defined, these are:
+  /// 
+  /// d02-x01-y01, d02-x01-y02 and d08-x01-y01 are ratios, the nominator ("_plus")
+  /// and denominator ("_minus") histograms are also given, so that the ratios can
+  /// be reconstructed if need be (e.g. when running on separate samples).
+  /// 
+  /// d05 and d06 are ratios over inclusive W production.
+  /// The routine has to be run on a sample for inclusive W production in order to
+  /// make sure the denominator ("_winc") is correctly filled.
+  /// 
+  /// The ratios can be constructed using the following sample code:
+  ///
+  /// ```python
+  /// ## python divideWCharm.py
+  ///
+  /// import yoda
+  /// hists_wc   = yoda.read("Rivet_Wc.yoda")
+  /// hists_winc = yoda.read("Rivet_Winc.yoda")
+  /// 
+  /// ## division histograms --> ONLY for different plus minus runs
+  /// # (merge before using yodamerge Rivet_plus.yoda Rivet_minus.yoda > Rivet_Wc.yoda)
+  /// 
+  /// d02y01_plus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y01_plus"]
+  /// d02y01_minus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y01_minus"]
+  /// ratio_d02y01 =  d02y01_plus.divide(d02y01_minus)
+  /// ratio_d02y01.path = "/ATLAS_2014_I1282447/d02-x01-y01"
+  /// 
+  /// d02y02_plus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y02_plus"]
+  /// d02y02_minus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y02_minus"]
+  /// ratio_d02y02=  d02y02_plus.divide(d02y02_minus)
+  /// ratio_d02y02.path = "/ATLAS_2014_I1282447/d02-x01-y02"
+  /// 
+  /// d08y01_plus = hists_wc["/ATLAS_2014_I1282447/d08-x01-y01_plus"]
+  /// d08y01_minus = hists_wc["/ATLAS_2014_I1282447/d08-x01-y01_minus"]
+  /// ratio_d08y01=  d08y01_plus.divide(d08y01_minus)
+  /// ratio_d08y01.path = "/ATLAS_2014_I1282447/d08-x01-y01"
+  /// 
+  /// # inclusive cross section
+  /// h_winc = hists_winc["/ATLAS_2014_I1282447/d05-x01-y01"]
+  /// h_d    = hists_wc["/ATLAS_2014_I1282447/d01-x01-y02"]
+  /// h_dstar= hists_wc["/ATLAS_2014_I1282447/d01-x01-y03"]
+  /// 
+  /// ratio_wd      =  h_d.divide(h_winc)
+  /// ratio_wd.path = "/ATLAS_2014_I1282447/d05-x01-y02"
+  /// 
+  /// ratio_wdstar      =  h_d.divide(h_winc)
+  /// ratio_wdstar.path = "/ATLAS_2014_I1282447/d05-x01-y03"
+  /// 
+  /// # pT differential
+  /// h_winc_plus  = hists_winc["/ATLAS_2014_I1282447/d06-x01-y01_winc"]
+  /// h_winc_minus = hists_winc["/ATLAS_2014_I1282447/d06-x01-y02_winc"]
+  /// 
+  /// h_wd_plus      = hists_wc["/ATLAS_2014_I1282447/d06-x01-y01_wplus"]
+  /// h_wd_minus     = hists_wc["/ATLAS_2014_I1282447/d06-x01-y02_wminus"]
+  /// h_wdstar_plus  = hists_wc["/ATLAS_2014_I1282447/d06-x01-y03_wplus"]
+  /// h_wdstar_minus = hists_wc["/ATLAS_2014_I1282447/d06-x01-y04_wminus"]
+  /// 
+  /// ratio_wd_plus       =  h_wd_plus.divide(h_winc_plus)
+  /// ratio_wd_plus.path  = "/ATLAS_2014_I1282447/d06-x01-y01"
+  /// ratio_wd_minus      =  h_wd_plus.divide(h_winc_minus)
+  /// ratio_wd_minus.path = "/ATLAS_2014_I1282447/d06-x01-y02"
+  /// 
+  /// ratio_wdstar_plus       =  h_wdstar_plus.divide(h_winc_plus)
+  /// ratio_wdstar_plus.path  = "/ATLAS_2014_I1282447/d06-x01-y03"
+  /// ratio_wdstar_minus      =  h_wdstar_plus.divide(h_winc_minus)
+  /// ratio_wdstar_minus.path = "/ATLAS_2014_I1282447/d06-x01-y04"
+  /// 
+  /// ratio_wd_plus =  h_wd_plus.divide(h_winc_plus)
+  /// ratio_wd_plus.path = "/ATLAS_2014_I1282447/d06-x01-y01"
+  /// ratio_wd_minus =  h_wd_plus.divide(h_winc_minus)
+  /// ratio_wd_minus.path = "/ATLAS_2014_I1282447/d06-x01-y02"
+  /// 
+  /// h_winc_plus= hists_winc["/ATLAS_2014_I1282447/d06-x01-y01_winc"]
+  /// h_winc_minus= hists_winc["/ATLAS_2014_I1282447/d06-x01-y02_winc"]
+  /// 
+  /// ## copy other histograms for plotting
+  /// 
+  /// d01x01y01= hists_wc["/ATLAS_2014_I1282447/d01-x01-y01"]
+  /// d01x01y01.path = "/ATLAS_2014_I1282447/d01-x01-y01"
+  /// 
+  /// d01x01y02= hists_wc["/ATLAS_2014_I1282447/d01-x01-y02"]
+  /// d01x01y02.path = "/ATLAS_2014_I1282447/d01-x01-y02"
+  /// 
+  /// d01x01y03= hists_wc["/ATLAS_2014_I1282447/d01-x01-y03"]
+  /// d01x01y03.path = "/ATLAS_2014_I1282447/d01-x01-y03"
+  /// 
+  /// d03x01y01= hists_wc["/ATLAS_2014_I1282447/d03-x01-y01"]
+  /// d03x01y01.path = "/ATLAS_2014_I1282447/d03-x01-y01"
+  /// 
+  /// d03x01y02= hists_wc["/ATLAS_2014_I1282447/d03-x01-y02"]
+  /// d03x01y02.path = "/ATLAS_2014_I1282447/d03-x01-y02"
+  /// 
+  /// d04x01y01= hists_wc["/ATLAS_2014_I1282447/d04-x01-y01"]
+  /// d04x01y01.path = "/ATLAS_2014_I1282447/d04-x01-y01"
+  /// 
+  /// d04x01y02= hists_wc["/ATLAS_2014_I1282447/d04-x01-y02"]
+  /// d04x01y02.path = "/ATLAS_2014_I1282447/d04-x01-y02"
+  /// 
+  /// d04x01y03= hists_wc["/ATLAS_2014_I1282447/d04-x01-y03"]
+  /// d04x01y03.path = "/ATLAS_2014_I1282447/d04-x01-y03"
+  /// 
+  /// d04x01y04= hists_wc["/ATLAS_2014_I1282447/d04-x01-y04"]
+  /// d04x01y04.path = "/ATLAS_2014_I1282447/d04-x01-y04"
+  /// 
+  /// d07x01y01= hists_wc["/ATLAS_2014_I1282447/d07-x01-y01"]
+  /// d07x01y01.path = "/ATLAS_2014_I1282447/d07-x01-y01"
+  /// 
+  /// yoda.write([ratio_d02y01,ratio_d02y02,ratio_d08y01, ratio_wd ,ratio_wdstar,ratio_wd_plus,ratio_wd_minus ,ratio_wdstar_plus,ratio_wdstar_minus,d01x01y01,d01x01y02,d01x01y03,d03x01y01,d03x01y02,d04x01y01,d04x01y02,d04x01y03,d04x01y04,d07x01y01],"validation.yoda")
+  /// ```
   class ATLAS_2014_I1282447 : public Analysis {
   public:
 
     /// Constructor
     ATLAS_2014_I1282447() : Analysis("ATLAS_2014_I1282447")
-    {
-
-    }
+    {    }
 
 
     /// @name Analysis methods
@@ -150,10 +142,12 @@ namespace Rivet {
       Cut cuts = Cuts::etaIn(-2.5, 2.5) & (Cuts::pT > 20*GeV);
 
       /// should use sample WITHOUT QED radiation off the electron
-      WFinder wfinder_born_el(fs, cuts, PID::ELECTRON, 25*GeV, 8000*GeV, 15*GeV, 0.1, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::ALL, WFinder::AddPhotons::YES);
+      WFinder wfinder_born_el(fs, cuts, PID::ELECTRON, 25*GeV, 8000*GeV, 15*GeV, 0.1,
+			      LeptonOrigin::PROMPT, PhotonOrigin::ALL, PhotonsAsConstituents::YES);
       declare(wfinder_born_el, "WFinder_born_el");
 
-      WFinder wfinder_born_mu(fs, cuts, PID::MUON    , 25*GeV, 8000*GeV, 15*GeV, 0.1, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::ALL, WFinder::AddPhotons::YES);
+      WFinder wfinder_born_mu(fs, cuts, PID::MUON , 25*GeV, 8000*GeV, 15*GeV, 0.1,
+			      LeptonOrigin::PROMPT, PhotonOrigin::ALL, PhotonsAsConstituents::YES);
       declare(wfinder_born_mu, "WFinder_born_mu");
 
       // all hadrons that could be coming from a charm decay --
@@ -170,7 +164,7 @@ namespace Rivet {
       veto.addVetoPairId(PID::MUON);
       veto.addVetoPairId(PID::TAU);
 
-      FastJets jets(veto, FastJets::ANTIKT, 0.4);
+      FastJets jets(veto, JetAlg::ANTIKT, 0.4);
       declare(jets, "jets");
 
       // Book histograms
@@ -251,21 +245,21 @@ namespace Rivet {
 
       //check electrons
       if (!wfinder_born_el.empty()) {
-        const FourMomentum nu = wfinder_born_el.constituentNeutrinos()[0];
+        const FourMomentum nu = wfinder_born_el.neutrinos()[0];
         if (wfinder_born_el.mT() > 40*GeV && nu.pT() > 25*GeV) {
           keepevent = true;
-          lepton_charge = wfinder_born_el.constituentLeptons()[0].charge();
-          lepton_eta = fabs(wfinder_born_el.constituentLeptons()[0].pseudorapidity());
+          lepton_charge = wfinder_born_el.leptons()[0].charge();
+          lepton_eta = fabs(wfinder_born_el.leptons()[0].pseudorapidity());
         }
       }
 
       //check muons
       if (!wfinder_born_mu.empty()) {
-        const FourMomentum nu = wfinder_born_mu.constituentNeutrinos()[0];
+        const FourMomentum nu = wfinder_born_mu.neutrinos()[0];
         if (wfinder_born_mu.mT() > 40*GeV && nu.pT() > 25*GeV) {
           keepevent = true;
-          lepton_charge = wfinder_born_mu.constituentLeptons()[0].charge();
-          lepton_eta = fabs(wfinder_born_mu.constituentLeptons()[0].pseudorapidity());
+          lepton_charge = wfinder_born_mu.leptons()[0].charge();
+          lepton_eta = fabs(wfinder_born_mu.leptons()[0].pseudorapidity());
         }
       }
 

@@ -142,7 +142,7 @@ namespace Rivet {
     void setName(const std::string& name) {
       _name = name;
     }
-
+    
     /// Set the projection in an unvalid state.
     void fail() {
       _isValid = false;

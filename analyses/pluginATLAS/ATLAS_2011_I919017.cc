@@ -64,8 +64,8 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       ChargedFinalState cfs((Cuts::etaIn(-2.5, 2.5) && Cuts::pT >=  0.3*GeV));
-      FastJets trkjets04(cfs, FastJets::ANTIKT, 0.4);
-      FastJets trkjets06(cfs, FastJets::ANTIKT, 0.6);
+      FastJets trkjets04(cfs, JetAlg::ANTIKT, 0.4);
+      FastJets trkjets06(cfs, JetAlg::ANTIKT, 0.6);
       declare(trkjets04, "Jets04");
       declare(trkjets06, "Jets06");
 
@@ -116,7 +116,7 @@ namespace Rivet {
     }
 
     void doCollection(const string& Rval, const Event& event) {
-      const Jets& jets = apply<JetAlg>(event, "Jets"+Rval).jets();
+      const Jets& jets = apply<JetFinder>(event, "Jets"+Rval).jets();
       if (jets.empty())  return;
       const string R = Rval+"_";
       _c[R+"sumw"]->fill();

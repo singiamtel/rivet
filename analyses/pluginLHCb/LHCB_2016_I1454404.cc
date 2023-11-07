@@ -42,11 +42,11 @@ namespace Rivet {
       declare(wfinder, "WFinder");
 
       // Jet Z
-      FastJets jetproZ(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.5);
+      FastJets jetproZ(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5);
       declare(jetproZ, "JetsZ");
 
       // Jet W
-      FastJets jetproW(wfinder.remainingFinalState(), FastJets::ANTIKT, 0.5);
+      FastJets jetproW(wfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5);
       declare(jetproW, "JetsW");
 
       // Book histograms
@@ -99,7 +99,7 @@ namespace Rivet {
 
         const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
         if (zfinder.bosons().size() ==1){
-          const Particles muon = zfinder.constituentLeptons(); //zfinder.constituents()?
+          const Particles muon = zfinder.leptons();
           const Particles Z = zfinder.bosons();
           const FourMomentum Zmom = Z[0].momentum();
           const Jets jetsZ = apply<FastJets>(event, "JetsZ").jetsByPt(jetSel);
@@ -127,7 +127,7 @@ namespace Rivet {
 
         const WFinder& wfinder = apply<WFinder>(event, "WFinder");
         if (wfinder.bosons().size() == 1) {
-          const Particles Muons = wfinder.constituentLeptons();
+          const Particles Muons = wfinder.leptons();
           const FourMomentum muonmom = Muons[0].momentum();
           const Jets jetsW = apply<FastJets>(event, "JetsW").jetsByPt(jetSel);
 

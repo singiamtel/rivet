@@ -14,80 +14,72 @@ namespace Rivet {
 
 
   /// @brief Get the incoming and outgoing leptons in a gamma gamma collision event in e+e-
-  //         Heavily based on DISLepton
   class GammaGammaLeptons : public Projection {
   public:
-
-    /// Enum to enable different orderings for selecting scattered
-    /// leptons in case several were found.
-    enum SortOrder { ENERGY, ETA, ET };
 
     /// @name Constructors.
     /// @{
 
-    /// Default constructor taking general options. The recognised
-    /// options are: LMODE, taking the options "prompt", "any" and
-    /// "dressed"; DressedDR giving a delta-R cone radius where photon
-    /// momenta are added to the lepton candidates for LMODE=dresses;
-    /// IsolDR giving a cone in delta-R where no hadrons are allowed
-    /// around a lepton candidate; and Undress giving a cone around
-    /// the incoming incoming beam in which photons are considered
-    /// initial state rafiation for which the momentum is subtracted
-    /// from the beam momentum.
-    GammaGammaLeptons(const std::map<std::string,std::string> & opts =
-              std::map<std::string,std::string>())
-      : _isolDR(0.0), _sort(ENERGY) {
+    /// Constructor with optional cuts first
+    GammaGammaLeptons(const Cut& cuts=Cuts::OPEN,
+		      LeptonReco lreco=LeptonReco::ALL, ObjOrdering lsort=ObjOrdering::ENERGY, 
+		      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
+      : _isolDR(isolDR), _lsort(lsort)
+    {
       setName("GammaGammaLeptons");
       declare(HadronicFinalState(), "IFS");
 
-      auto sorting = opts.find("LSort");
-      if ( sorting != opts.end() && sorting->second == "ETA" )
-        _sort = ETA;
-      else if ( sorting != opts.end() && sorting->second == "ET" )
-        _sort = ET;
-
-      double undresstheta = 0.0;
-      auto undress = opts.find("Undress");
-      if ( undress != opts.end() )
-        undresstheta = std::stod(undress->second);
-      if ( undresstheta > 0.0 )
-        declare(UndressBeamLeptons(undresstheta), "Beam");
-      else
+      // Beam undressing
+      if (beamundresstheta > 0.0) {
+        declare(UndressBeamLeptons(beamundresstheta), "Beam");
+      } else {
         declare(Beam(), "Beam");
+      }
 
-      auto isol = opts.find("IsolDR");
-      if ( isol != opts.end() ) _isolDR = std::stod(isol->second);
-
-      double dressdr = 0.0;
-      auto dress = opts.find("DressDR");
-      if ( dress != opts.end() )
-        dressdr = std::stod(dress->second);
-
-      auto lmode = opts.find("LMode");
-      if ( lmode != opts.end() && lmode->second == "any" )
-        declare(FinalState(), "LFS");
-      else if ( lmode != opts.end() && lmode->second == "dressed" )
-        declare(DressedLeptons(dressdr), "LFS");
-      else
-        declare(PromptFinalState(), "LFS");
+      // Lepton reco mode
+      switch (lreco) {
+      case LeptonReco::ALL:
+	declare(FinalState(cuts), "LFS");
+      case LeptonReco::ALL_DRESSED:
+        declare(DressedLeptons(FinalState(), dressDR, cuts, PhotonOrigin::ALL), "LFS");
+      case LeptonReco::PROMPT_BARE:
+        declare(PromptFinalState(cuts), "LFS");
+      case LeptonReco::PROMPT_DRESSED:
+        declare(DressedLeptons(PromptFinalState(), dressDR, cuts), "LFS");
+      }
     }
 
-    /// Constructor taking the following arguments: a final state
-    /// projection defining which lepton candidates to consider; a
-    /// beam projection detining the momenta of the incoming lepton
-    /// beam, and a final state projection defining the particles not
-    /// allowed witin a delta-R of @a isolationcut of a lepton
-    /// candidate.
-    GammaGammaLeptons(const FinalState & leptoncandidates,
-              const Beam &  beamproj = Beam(),
-              const FinalState & isolationfs = FinalState(),
-              double isolationcut = 0.0, SortOrder sorting = ENERGY)
-      : _isolDR(isolationcut), _sort(sorting) {
+
+    /// Constructor without lepton-ordering spec, requiring cuts
+    GammaGammaLeptons(Cut& cuts, LeptonReco lreco=LeptonReco::ALL,
+		      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
+      : GammaGammaLeptons(cuts, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
+    {  }
+    
+    /// Constructor without cuts, requiring lepton reco spec
+    GammaGammaLeptons(LeptonReco lreco, ObjOrdering lsort=ObjOrdering::ENERGY,
+	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
+      : GammaGammaLeptons(Cuts::OPEN, lreco, lsort, beamundresstheta, isolDR, dressDR)
+    {  }
+
+    /// Constructor without cuts or lepton-ordering spec, requiring lepton reco spec
+    GammaGammaLeptons(LeptonReco lreco,
+	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
+      : GammaGammaLeptons(Cuts::OPEN, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
+    {  }
+
+    
+    /// Constructor from other constructors
+    GammaGammaLeptons(const FinalState& leptoncandidates,
+		      const Beam& beamproj=Beam(),
+		      const FinalState& isolationfs=FinalState(),
+		      double isolDR = 0.0, ObjOrdering lsort=ObjOrdering::ENERGY)
+      : _isolDR(isolDR), _lsort(lsort)
+    {
       declare(leptoncandidates, "LFS");
       declare(isolationfs, "IFS");
       declare(beamproj, "Beam");
     }
-
 
 
     /// Clone on the heap.
@@ -112,7 +104,7 @@ namespace Rivet {
   public:
 
     /// The incoming lepton
-    const ParticlePair &  in() const { return _incoming; }
+    const ParticlePair & in() const { return _incoming; }
 
     /// The outgoing lepton
     const ParticlePair & out() const { return _outgoing; }
@@ -126,15 +118,15 @@ namespace Rivet {
     /// The outgoing leptons
     ParticlePair _outgoing;
 
-    /// If larger than zerp an isolation cut around the lepton is required.
+    /// An isolation cut around the lepton
     double _isolDR;
 
     /// How to sort leptons
-    SortOrder _sort;
+    ObjOrdering _lsort;
 
   };
 
+  
 }
-
 
 #endif

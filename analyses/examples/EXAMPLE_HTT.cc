@@ -19,8 +19,8 @@ namespace Rivet {
     void init() {
 
       // Declare the fat jet
-      FastJets fatjets(FinalState(Cuts::abseta < 2.5), FastJets::CA, 1.5,
-                       JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets fatjets(FinalState(Cuts::abseta < 2.5), JetAlg::CA, 1.5,
+                       JetMuons::NONE, JetInvisibles::NONE);
       declare(fatjets, "FatJets");
 
       // Declare histograms
@@ -58,7 +58,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      Jets fatjets = apply<JetAlg>(event, "FatJets").jetsByPt();
+      Jets fatjets = apply<JetFinder>(event, "FatJets").jetsByPt();
       if (fatjets.size() > 0 && fatjets[0].pT() > 200*GeV) {
         _tagger.calc(fatjets[0]);
 

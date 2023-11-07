@@ -40,7 +40,7 @@ namespace Rivet {
       jetConstits.addVetoOnThisFinalState(zeeFinder);
       jetConstits.addVetoOnThisFinalState(zmumuFinder);
 
-      FastJets akt04Jets(jetConstits, FastJets::ANTIKT, 0.4);
+      FastJets akt04Jets(jetConstits, JetAlg::ANTIKT, 0.4);
       declare(akt04Jets, "AntiKt04Jets");
       
       book(_h_jet_pt_combined,"_TMP/jet_pt_combined", refData(1,1,1));

@@ -33,9 +33,9 @@ namespace Rivet {
       
       // Partonic tops
       // Need these for flavour determination, even if only plotting particle-level
-      declare(PartonicTops(PartonicTops::DecayMode::ELECTRON, false), "ElectronPartonTops");
-      declare(PartonicTops(PartonicTops::DecayMode::MUON, false),     "MuonPartonTops");
-      declare(PartonicTops(PartonicTops::DecayMode::HADRONIC),        "HadronicPartonTops");
+      declare(PartonicTops(TopDecay::ELECTRON, PromptEMuFromTau::NO), "ElectronPartonTops");
+      declare(PartonicTops(TopDecay::MUON, PromptEMuFromTau::NO), "MuonPartonTops");
+      declare(PartonicTops(TopDecay::HADRONIC), "HadronicPartonTops");
       
       // Projection for electrons and muons
       IdentifiedFinalState photons(fs, PID::PHOTON);
@@ -57,8 +57,8 @@ namespace Rivet {
       fs_jets.addVetoOnThisFinalState(dressed_muons);
       fs_jets.addVetoOnThisFinalState(dressed_electrons);
       fs_jets.vetoNeutrinos();
-      declare(FastJets(fs_jets, FastJets::ANTIKT, 0.5), "ak5jets");
-      declare(FastJets(fs_jets, FastJets::CAM, 0.8), "ca8jets");
+      declare(FastJets(fs_jets, JetAlg::ANTIKT, 0.5), "ak5jets");
+      declare(FastJets(fs_jets, JetAlg::CAM, 0.8), "ca8jets");
 
       if (_mode == 1) {
         book(_hEl_topPt_parton          , "d01-x01-y01"); // dsigma/dpt(top quark), el ch

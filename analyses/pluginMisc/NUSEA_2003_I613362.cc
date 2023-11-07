@@ -26,24 +26,20 @@ namespace Rivet {
       const FinalState fs;
       declare(fs, "FS");
       Cut cut = Cuts::etaIn(-10.,10.);
-      ZFinder zfinder(fs, cut, PID::MUON, 4.0*GeV, 100.0*GeV, 0.1, ZFinder::ClusterPhotons::NONE );
+      ZFinder zfinder(fs, cut, PID::MUON, 4.0*GeV, 100.0*GeV, 0.1, PhotonOrigin::NONE );
       declare(zfinder, "ZFinder");
 
       // Booking histograms
       // hydrogen d01-d16
       book(_hist_M_xF, {-0.05, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8});
-      for (auto& b : _hist_M_xF->bins()) {
-        book(b, b.index(), 1, 1);
-      }
+      for (auto& b : _hist_M_xF->bins()) book(b, b.index(), 1, 1);
 
       // deuterium d17-d32
 
       // hydrogen d40
       book(_hist_pT_M, {4.2, 5.2, 6.2, 7.2, 8.7, 10.85, 12.85});
       _hist_pT_M->maskBin(5); int idx = 0;
-      for (auto& b : _hist_pT_M->bins()) {
-        book(b, 40, 1, ++idx);
-      }
+      for (auto& b : _hist_pT_M->bins()) book(b, 40, 1, ++idx);
 
     }
 
@@ -103,7 +99,6 @@ namespace Rivet {
     /// @{
     Histo1DGroupPtr _hist_pT_M, _hist_M_xF;
     /// @}
-
 
   };
 

@@ -7,7 +7,8 @@
 
 namespace Rivet {
 
-  /// @brief MC validation analysis for higgs pairs events (stable Higgses)
+  
+  /// @brief MC validation analysis for Higgs-pair events (stable Higgses)
   class MC_HHJETS : public MC_JetAnalysis {
   public:
 
@@ -37,19 +38,17 @@ namespace Rivet {
       const double R = getOption<double>("R", 0.4);
 
       // set clustering algorithm from input option
-      FastJets::Algo clusterAlgo;
+      JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
-
       if ( algoopt == "KT" ) {
-	clusterAlgo = FastJets::KT;
+	clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = FastJets::CA;
+	clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = FastJets::ANTIKT;
+	clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". "
-		    "Defaulting to anti-kT");
-	clusterAlgo = FastJets::ANTIKT;
+	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+	clusterAlgo = JetAlg::ANTIKT;
       }
 
       FastJets jetpro(vfs, clusterAlgo, R);

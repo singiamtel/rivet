@@ -27,7 +27,7 @@ namespace Rivet {
           fs, Cuts::abseta < 5 && Cuts::pT > 0. * GeV, PID::ELECTRON, 60.0 * GeV, 120.0 * GeV);  //dielectron
       declare(zeeFinder, "ZeeFinder");
 
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetfs(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "jets");
 
       book(_h["ds/dydp-mu"], 1, 1, 1);

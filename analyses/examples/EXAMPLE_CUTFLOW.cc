@@ -26,7 +26,7 @@ namespace Rivet {
       declare(leps, "Leptons");
 
       const FinalState fs(Cuts::abseta < 4);
-      const FastJets jets(fs, FastJets::Algo::ANTIKT, 0.4);
+      const FastJets jets(fs, JetAlg::Algo::ANTIKT, 0.4);
       declare(jets, "Jets");
 
       // Histograms

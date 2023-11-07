@@ -61,13 +61,13 @@ namespace Rivet {
 
 	// Find W's with pT > 120, MET > 50
 	WFinder wfinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 80*GeV, PID::ELECTRON, 50*GeV, 1000*GeV, 50.0*GeV,
-			0.2, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+			0.2, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
 	declare(wfinder, "WFinder");
 
 	// W+jet jet collections
-	declare(FastJets(wfinder.remainingFinalState(), FastJets::ANTIKT, 0.7), "JetsAK7_wj");
-	declare(FastJets(wfinder.remainingFinalState(), FastJets::CAM, 0.8), "JetsCA8_wj");
-	declare(FastJets(wfinder.remainingFinalState(), FastJets::CAM, 1.2), "JetsCA12_wj");
+	declare(FastJets(wfinder.remainingFinalState(), JetAlg::ANTIKT, 0.7), "JetsAK7_wj");
+	declare(FastJets(wfinder.remainingFinalState(), JetAlg::CAM, 0.8), "JetsCA8_wj");
+	declare(FastJets(wfinder.remainingFinalState(), JetAlg::CAM, 1.2), "JetsCA12_wj");
 
 	// Histograms
 	/// @note These are 2D histos rendered into slices
@@ -87,13 +87,13 @@ namespace Rivet {
 
 	// Find Zs with pT > 120 GeV
 	ZFinder zfinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 30*GeV, PID::ELECTRON, 80*GeV, 100*GeV,
-			0.2, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::YES);
+			0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
 	declare(zfinder, "ZFinder");
 
 	// Z+jet jet collections
-	declare(FastJets(zfinder.remainingFinalState(), FastJets::ANTIKT, 0.7), "JetsAK7_zj");
-	declare(FastJets(zfinder.remainingFinalState(), FastJets::CAM, 0.8), "JetsCA8_zj");
-	declare(FastJets(zfinder.remainingFinalState(), FastJets::CAM, 1.2), "JetsCA12_zj");
+	declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.7), "JetsAK7_zj");
+	declare(FastJets(zfinder.remainingFinalState(), JetAlg::CAM, 0.8), "JetsCA8_zj");
+	declare(FastJets(zfinder.remainingFinalState(), JetAlg::CAM, 1.2), "JetsCA12_zj");
 
 	// Histograms
 	/// @note These are 2D histos rendered into slices
@@ -112,9 +112,9 @@ namespace Rivet {
       if (DIJET){
 
 	// Jet collections
-	declare(FastJets(fs, FastJets::ANTIKT, 0.7), "JetsAK7");
-	declare(FastJets(fs, FastJets::CAM, 0.8), "JetsCA8");
-	declare(FastJets(fs, FastJets::CAM, 1.2), "JetsCA12");
+	declare(FastJets(fs, JetAlg::ANTIKT, 0.7), "JetsAK7");
+	declare(FastJets(fs, JetAlg::CAM, 0.8), "JetsCA8");
+	declare(FastJets(fs, JetAlg::CAM, 1.2), "JetsCA12");
 
 	// Histograms
 	for (size_t i = 0; i < N_PT_BINS_dj; ++i ) {
@@ -129,8 +129,8 @@ namespace Rivet {
 
     bool isBackToBack_wj(const WFinder& wf, const fastjet::PseudoJet& psjet) {
       const FourMomentum w = wf.bosons()[0];
-      const FourMomentum l1 = wf.constituentLeptons()[0];
-      const FourMomentum l2 = wf.constituentNeutrinos()[0];
+      const FourMomentum l1 = wf.leptons()[0];
+      const FourMomentum l2 = wf.neutrinos()[0];
       /// @todo We should make FourMomentum know how to construct itself from a PseudoJet
       const FourMomentum jmom(psjet.e(), psjet.px(), psjet.py(), psjet.pz());
       return (deltaPhi(w, jmom) > 2.0 && deltaR(l1, jmom) > 1.0 && deltaPhi(l2, jmom) > 0.4);
@@ -177,7 +177,7 @@ namespace Rivet {
 	const WFinder& wfinder = apply<WFinder>(event, "WFinder");
 	if (wfinder.bosons().size() == 1) {
 	  const Particle w = wfinder.bosons()[0];
-	  const Particle l = wfinder.constituentLeptons()[0];
+	  const Particle l = wfinder.leptons()[0];
 
 	  // Require a fairly high-pT W and charged lepton
 	  if (l.pT() >= 80*GeV && w.pT() >= 120*GeV) {

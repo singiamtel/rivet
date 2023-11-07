@@ -11,6 +11,7 @@
 namespace Rivet {
 
 
+  /// ttbar (to l+jets) differential cross sections at 8 TeV
   class ATLAS_2015_I1404878 : public Analysis {
   public:
 
@@ -38,10 +39,10 @@ namespace Rivet {
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, true);
+      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       // Projection to find the muons
@@ -52,10 +53,10 @@ namespace Rivet {
       muons.acceptTauDecays(true);
       declare(muons, "muons");
 
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
 
-      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, true);
+      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
 
       // Projection to find neutrinos
@@ -74,7 +75,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(ewdressedelectrons);
       vfs.addVetoOnThisFinalState(ewdressedmuons);
       vfs.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
 
 

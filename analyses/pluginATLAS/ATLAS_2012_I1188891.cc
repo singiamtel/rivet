@@ -19,7 +19,7 @@ namespace Rivet {
     void init() {
 
       const FinalState fs;
-      FastJets fj04(fs,  FastJets::ANTIKT, 0.4);
+      FastJets fj04(fs,  JetAlg::ANTIKT, 0.4);
       declare(fj04, "AntiKT04");
 
       string histotitle[7]={"BBfraction","BCfraction","CCfraction","BUfraction","CUfraction","UUfraction","Total"};

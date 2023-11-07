@@ -8,7 +8,7 @@
 namespace Rivet {
 
 
-  // Measurement of associated production of a W boson and a charm quark in proton-proton collisions at 13 TeV
+  /// Measurement of associated production of a W boson and a charm quark in proton-proton collisions at 13 TeV
   class CMS_2019_I1705068 : public Analysis {
   public:
 
@@ -20,8 +20,8 @@ namespace Rivet {
       // Projections
       FinalState fs;
       WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON,
-                         0*GeV, 1000000*GeV, 0*GeV, 0.1, WFinder::ChargedLeptons::PROMPT,
-                         WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+                         0*GeV, 1000000*GeV, 0*GeV, 0.1, LeptonOrigin::PROMPT,
+                         PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wfinder_mu, "WFinder_mu");
 
       UnstableParticles dst(Cuts::pT > 5*GeV && Cuts::abseta < 2.4);
@@ -42,12 +42,12 @@ namespace Rivet {
       if (wfinder_mu.bosons().size() != 1) vetoEvent;
 
       // No Missing Energy or MT cut at generator level:
-      const FourMomentum& lepton0 = wfinder_mu.constituentLeptons()[0].momentum();
+      const FourMomentum& lepton0 = wfinder_mu.leptons()[0].momentum();
       double pt0 = lepton0.pT();
       double eta0 = fabs( lepton0.eta() );
       if ( (eta0 > 2.4) || (pt0 < 26.0*GeV) ) vetoEvent;
 
-      int muID = wfinder_mu.constituentLeptons()[0].pid();
+      int muID = wfinder_mu.leptons()[0].pid();
 
 
       // D* selection:
@@ -92,7 +92,6 @@ namespace Rivet {
     Histo1DPtr _hist_WplusMinus_MuAbseta;
 
   };
-
 
 
   RIVET_DECLARE_PLUGIN(CMS_2019_I1705068);

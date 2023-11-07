@@ -38,7 +38,7 @@ namespace Rivet {
       VetoedFinalState vfs(fs);
       vfs.addVetoPairId(PID::MUON);
       vfs.vetoNeutrinos();
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "jets");
+      declare(FastJets(vfs, JetAlg::ANTIKT, 0.4), "jets");
 
       // book histogram
       book(_hist ,1, 1, 1);

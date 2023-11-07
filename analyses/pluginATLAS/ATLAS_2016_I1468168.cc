@@ -31,7 +31,7 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "DressedElectrons");
 
       // Projection to find the muons
@@ -39,7 +39,7 @@ namespace Rivet {
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "DressedMuons");
 
       book(_h , 2, 1 ,1);

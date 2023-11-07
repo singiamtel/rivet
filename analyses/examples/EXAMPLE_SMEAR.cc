@@ -34,7 +34,7 @@ namespace Rivet {
       declare(smm2, "MET2");
 
 
-      FastJets fj(FinalState(Cuts::abseta < 5), FastJets::ANTIKT, 0.4);
+      FastJets fj(FinalState(Cuts::abseta < 5), JetAlg::ANTIKT, 0.4);
       declare(fj, "Jets0");
 
       SmearedJets sj1(fj, JET_SMEAR_IDENTITY);
@@ -69,7 +69,7 @@ namespace Rivet {
       SmearedParticles recomuons(dressedmuons, MUON_EFF_ATLAS_RUN2, MUON_SMEAR_ATLAS_RUN2);
       declare(recomuons, "Muons2");
 
-      TauFinder truthtaus(TauFinder::DecayMode::ANY, Cuts::abseta < 5 && Cuts::pT > 10*GeV);
+      TauFinder truthtaus(TauDecay::ANY, Cuts::abseta < 5 && Cuts::pT > 10*GeV);
       declare(truthtaus, "Taus0");
       DressedLeptons dressedtaus(photons, truthtaus, 0.2);
       declare(dressedtaus, "Taus1");
@@ -125,10 +125,10 @@ namespace Rivet {
                     "; dphi = " << deltaPhi(met0, met1));
       }
 
-      const Jets jets0 = apply<JetAlg>(event, "Jets0").jetsByPt(Cuts::pT > 10*GeV);
-      const Jets jets1 = apply<JetAlg>(event, "Jets1").jetsByPt(Cuts::pT > 10*GeV);
-      const Jets jets2 = apply<JetAlg>(event, "Jets2").jetsByPt(Cuts::pT > 10*GeV);
-      const Jets jets3 = apply<JetAlg>(event, "Jets3").jetsByPt(Cuts::pT > 10*GeV);
+      const Jets jets0 = apply<JetFinder>(event, "Jets0").jetsByPt(Cuts::pT > 10*GeV);
+      const Jets jets1 = apply<JetFinder>(event, "Jets1").jetsByPt(Cuts::pT > 10*GeV);
+      const Jets jets2 = apply<JetFinder>(event, "Jets2").jetsByPt(Cuts::pT > 10*GeV);
+      const Jets jets3 = apply<JetFinder>(event, "Jets3").jetsByPt(Cuts::pT > 10*GeV);
       MSG_DEBUG("Numbers of jets = " << jets0.size() << " true; "
                << jets1.size() << ", " << jets2.size() << ", " << jets3.size());
       if (!jets0.empty() && !jets2.empty() && deltaPhi(jets0[0], jets2[0]) > 0.1) {

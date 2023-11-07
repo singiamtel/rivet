@@ -75,15 +75,15 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(ewdressedelectrons);
       vfs.addVetoOnThisFinalState(ewdressedmuons);
       vfs.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets, "jets");
 
       // Addition of the large-R jets
       VetoedFinalState vfs1(fs);
       vfs1.addVetoOnThisFinalState(neutrinos);
-      FastJets fjets(vfs1, FastJets::ANTIKT, 1.);
-      fjets.useInvisibles(JetAlg::Invisibles::NONE);
-      fjets.useMuons(JetAlg::Muons::NONE);
+      FastJets fjets(vfs1, JetAlg::ANTIKT, 1.);
+      fjets.useInvisibles(JetInvisibles::NONE);
+      fjets.useMuons(JetMuons::NONE);
       declare(fjets, "fjets");
 
       bookHists("top_pt_res", 15);

@@ -43,8 +43,8 @@ namespace Rivet {
       const ChargedFinalState cfs;
       declare(cfs, "FS");
       declare(UnstableParticles(), "UFS");
-      declare(FastJets(cfs, FastJets::JADE, 0.7), "JadeJets");
-      declare(FastJets(cfs, FastJets::DURHAM, 0.7), "DurhamJets");
+      declare(FastJets(cfs, JetAlg::JADE, 0.7), "JadeJets");
+      declare(FastJets(cfs, JetAlg::DURHAM, 0.7), "DurhamJets");
       declare(Sphericity(cfs), "Sphericity");
       declare(ParisiTensor(cfs), "Parisi");
       const Thrust thrust(cfs);

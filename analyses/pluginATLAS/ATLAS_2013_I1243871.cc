@@ -44,7 +44,7 @@ namespace Rivet {
       declare(jet_input, "JET_INPUT");
 
       // Get the jets
-      FastJets jets(jet_input, FastJets::ANTIKT, 0.4);
+      FastJets jets(jet_input, JetAlg::ANTIKT, 0.4);
       declare(jets, "JETS");
 
       // Book histograms

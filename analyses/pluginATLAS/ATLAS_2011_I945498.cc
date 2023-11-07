@@ -38,19 +38,19 @@ namespace Rivet {
 
       // Set up projections
 	  FinalState fs;
-      ZFinder zfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 66*GeV, 116*GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder zfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 66*GeV, 116*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zfinder_mu, "ZFinder_mu");
 
       Cut cuts = (Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
 
-      ZFinder zfinder_el(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder zfinder_el(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zfinder_el, "ZFinder_el");
 
 	  Cut cuts25_20 = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
       // For combined cross-sections (combined phase space + dressed level)
-      ZFinder zfinder_comb_mu(fs, cuts25_20, PID::MUON, 66.0*GeV, 116.0*GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder zfinder_comb_mu(fs, cuts25_20, PID::MUON, 66.0*GeV, 116.0*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zfinder_comb_mu, "ZFinder_comb_mu");
-      ZFinder zfinder_comb_el(fs, cuts25_20, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder zfinder_comb_el(fs, cuts25_20, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zfinder_comb_el, "ZFinder_comb_el");
 
       // Define veto FS in order to prevent Z-decay products entering the jet algorithm
@@ -61,10 +61,10 @@ namespace Rivet {
       remfs_comb.addVetoOnThisFinalState(zfinder_comb_el);
       remfs_comb.addVetoOnThisFinalState(zfinder_comb_mu);
 
-      FastJets jets(remfs, FastJets::ANTIKT, 0.4);
+      FastJets jets(remfs, JetAlg::ANTIKT, 0.4);
       jets.useInvisibles();
       declare(jets, "jets");
-      FastJets jets_comb(remfs_comb, FastJets::ANTIKT, 0.4);
+      FastJets jets_comb(remfs_comb, JetAlg::ANTIKT, 0.4);
       jets_comb.useInvisibles();
       declare(jets_comb, "jets_comb");
 

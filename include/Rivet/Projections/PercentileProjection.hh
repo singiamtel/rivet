@@ -8,6 +8,8 @@
 
 namespace Rivet {
 
+  enum class PercentileOrder { INCREASING, DECREASING };
+  
 
   /// @brief class for projections that reports the percentile for a
   /// given SingleValueProjection when initialized with a Histo1D of the
@@ -17,7 +19,7 @@ namespace Rivet {
   class PercentileProjection : public SingleValueProjection {
   public:
 
-    using SingleValueProjection::operator=;
+    using SingleValueProjection::operator =;
 
     /// Constructor taking a SingleValueProjection and a calibration
     /// histogram. If increasing it means that low values corresponds to
@@ -25,8 +27,10 @@ namespace Rivet {
     ///
     /// @todo Use mkScatter to pass this to the Scatter2D-calibrated version?
     PercentileProjection(const SingleValueProjection & sv, const Histo1D& calhist,
-                         bool increasing = false)
-      : _calhist("EMPTY"), _increasing(increasing) {
+                         PercentileOrder pctorder=PercentileOrder::DECREASING)
+      : _calhist("EMPTY"),
+	_increasing(pctorder == PercentileOrder::INCREASING)
+    {
       setName("PercentileProjection");
       declare(sv, "OBSERVABLE");
       //if ( !calhist ) return;
@@ -34,7 +38,7 @@ namespace Rivet {
       _calhist = calhist.path();
       int N = calhist.numBins();
       double sum = calhist.sumW();
-      if ( increasing ) {
+      if ( _increasing ) {
         double acc = 0.0;
         for (int i = 0; i <= N; ++i) {
           acc += calhist.bin(i).sumW();
@@ -53,18 +57,21 @@ namespace Rivet {
         for (auto p : _table) {
           std::cout << std::setw(16) << p.first << " -> "
                     << std::setw(16) << p.second << "%" << std::endl;
-          if (not increasing and p.second <= 0) break;
-          if (increasing and p.second >= 100) break;
+          if (not _increasing and p.second <= 0) break;
+          if (_increasing and p.second >= 100) break;
         }
       }
     }
 
+    
     // Constructor taking a SingleValueProjection and a calibration
     // histogram. If increasing it means that low values corresponds to
     // lower percentiles.
     PercentileProjection(const SingleValueProjection & sv, const Estimate1D& calest,
-                         bool increasing = false)
-      : _calhist("EMPTY"), _increasing(increasing) {
+                         PercentileOrder pctorder=PercentileOrder::DECREASING)
+      : _calhist("EMPTY"),
+	_increasing(pctorder == PercentileOrder::INCREASING)
+    {
       declare(sv, "OBSERVABLE");
 
       //if ( !calest ) return;
@@ -75,7 +82,7 @@ namespace Rivet {
       for (const auto &b : calest.bins() )  sum += b.val();
 
       double acc = 0.0;
-      if ( increasing ) {
+      if ( _increasing ) {
         _table.insert(make_pair(calest.bin(1).xMin(), 100.0*acc/sum));
         for ( int i = 0; i < N; ++i ) {
           acc += calest.bin(i+1).val();
@@ -91,6 +98,7 @@ namespace Rivet {
       }
     }
 
+    
     RIVET_DEFAULT_PROJ_CLONE(PercentileProjection);
 
     /// Import to avoid warnings about overload-hiding

@@ -28,7 +28,7 @@ namespace Rivet {
       declare(cnfs, "FS");
       declare(cfs, "CFS");
 
-      const FastJets jetsAntiKt4(cnfs, FastJets::ANTIKT, 0.4);
+      const FastJets jetsAntiKt4(cnfs, JetAlg::ANTIKT, 0.4);
       declare(jetsAntiKt4, "AntiKt4Jets");
 
       // ------- MINBIAS HISTOGRAMS --------

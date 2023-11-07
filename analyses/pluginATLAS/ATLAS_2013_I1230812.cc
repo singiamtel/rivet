@@ -43,7 +43,7 @@ namespace Rivet {
       VetoedFinalState had_fs;
       had_fs.addVetoOnThisFinalState(getProjection<ZFinder>("zfinder_el"));
       had_fs.addVetoOnThisFinalState(getProjection<ZFinder>("zfinder_mu"));
-      FastJets jets(had_fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets(had_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets, "jets");
 
       book(_h_njet_incl              ,  1, 1, _mode+1);

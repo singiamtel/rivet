@@ -38,7 +38,7 @@ namespace Rivet {
 
       // Final state used as input for jet-finding.
       // We include everything except the muons and neutrinos
-      FastJets jets(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "JETS");
 
       // Book histograms

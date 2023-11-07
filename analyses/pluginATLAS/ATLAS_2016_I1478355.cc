@@ -21,7 +21,7 @@ namespace Rivet {
 
       // Initialise and register projections
       FinalState fs(Cuts::abseta < 3.2);
-      FastJets fj(fs, FastJets::ANTIKT, 0.4);
+      FastJets fj(fs, JetAlg::ANTIKT, 0.4);
       fj.useInvisibles();
       declare(fj, "Jets");
       declare(HeavyHadrons(Cuts::abseta < 3.2 && Cuts::pT > 5*GeV), "BHadrons");

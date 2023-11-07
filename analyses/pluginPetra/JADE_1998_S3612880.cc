@@ -19,7 +19,7 @@ namespace Rivet {
     void init() {
       const ChargedFinalState cfs(Cuts::pT > 0.1*GeV);
       declare(cfs, "CFS");
-      declare(FastJets(cfs, FastJets::DURHAM, 0.7), "DurhamJets");
+      declare(FastJets(cfs, JetAlg::DURHAM, 0.7), "DurhamJets");
 
       // Thrust
       const Thrust thrust(cfs);

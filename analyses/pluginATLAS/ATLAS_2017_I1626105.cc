@@ -13,9 +13,7 @@ namespace Rivet {
   class ATLAS_2017_I1626105 : public Analysis {
   public:
 
-
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2017_I1626105);
-
 
     void init() {
 
@@ -29,22 +27,22 @@ namespace Rivet {
       photons.acceptIdPair(PID::PHOTON);
 
       // Projection to find the electrons
-      PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       DressedLeptons elecs(photons, prompt_el, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 25*GeV));
-      DressedLeptons veto_elecs(photons, prompt_el, 0.1, eta_full, false);
+      DressedLeptons veto_elecs(photons, prompt_el, 0.1, eta_full, PhotonOrigin::NODECAY);
       declare(elecs, "elecs");
 
       // Projection to find the muons
-      PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, true);
+      PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       DressedLeptons muons(photons, prompt_mu, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 25*GeV));
-      DressedLeptons veto_muons(photons, prompt_mu, 0.1, eta_full, false);
+      DressedLeptons veto_muons(photons, prompt_mu, 0.1, eta_full, PhotonOrigin::NODECAY);
       declare(muons, "muons");
 
       // Jet clustering.
       VetoedFinalState vfs;
       vfs.addVetoOnThisFinalState(veto_elecs);
       vfs.addVetoOnThisFinalState(veto_muons);
-      FastJets jets(vfs, FastJets::ANTIKT, 0.4);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4);
       jets.useInvisibles();
       declare(jets, "jets");
 

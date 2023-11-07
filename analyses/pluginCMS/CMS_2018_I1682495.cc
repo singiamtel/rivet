@@ -35,7 +35,7 @@ namespace Rivet {
       const FinalState fs(Cuts::abseta < 5.);
 
       // use FastJet, anti-kt(R=0.8) to do the clustering
-      declare(FastJets(fs, FastJets::ANTIKT, 0.8), "JetsAK8");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.8), "JetsAK8");
 
       // Histograms
       for (size_t i = 0; i < N_PT_BINS_dj; ++i ) {

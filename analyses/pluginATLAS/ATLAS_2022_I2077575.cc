@@ -29,7 +29,7 @@ namespace Rivet {
 
         // External bins for 2D and 3D cross-sections
         std::vector<double> t1_pt_2D_bins_1 = {0.5, 0.55, 0.6, 0.75, 2.0};
-	      std::vector<double> t1_pt_2D_bins_2 = {0.5, 0.55, 0.625, 0.75, 2.0};
+	std::vector<double> t1_pt_2D_bins_2 = {0.5, 0.55, 0.625, 0.75, 2.0};
         std::vector<double> t_and_tt_y_2D_bins = {0.0, 0.2, 0.5, 1.0, 2.0};
         std::vector<double> tt_pt_2D_bins = {0.0, 0.1, 0.2, 0.35, 1.0};
         std::vector<double> tt_m_3D_bins = {0.9, 1.2, 1.5, 4.0};
@@ -80,26 +80,26 @@ namespace Rivet {
         const FinalState photons(Cuts::abspid == PID::PHOTON);
 
         // Projection to find the electrons
-        PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, true);
+        PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
         DressedLeptons dressedelectrons(photons, electrons, 0.1, dressed_lep);
         declare(dressedelectrons, "elecs");
-        DressedLeptons alldressedelectrons(photons, electrons, 0.1, all_dressed_lep, true);
+        DressedLeptons alldressedelectrons(photons, electrons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
 
         // Projection to find the muons
-        PromptFinalState muons(Cuts::abspid == PID::MUON, true);
+        PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
         DressedLeptons dressedmuons(photons, muons, 0.1, dressed_lep);
         declare(dressedmuons, "muons");
-        DressedLeptons alldressedmuons(photons, muons, 0.1, all_dressed_lep, true);
+        DressedLeptons alldressedmuons(photons, muons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
 
         // Small-R jet clustering
         VetoedFinalState vfs(fs);
         vfs.addVetoOnThisFinalState(alldressedelectrons);
         vfs.addVetoOnThisFinalState(alldressedmuons);
-        FastJets sjets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+        FastJets sjets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
         declare(sjets, "sjets");
 
         // Large-R jet clustering.
-        FastJets ljets(fs, FastJets::ANTIKT, 1.0, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+        FastJets ljets(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
         declare(ljets, "ljets");
 
         if (_mode) {

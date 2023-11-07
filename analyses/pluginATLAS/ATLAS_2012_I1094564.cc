@@ -158,8 +158,8 @@ namespace Rivet {
       /// Projections:
       FinalState fs((Cuts::etaIn(-4.5, 4.5) && Cuts::pT >=  0.*GeV));
       declare(fs, "FS");
-      declare(FastJets(fs, FastJets::ANTIKT, 1.0), "AKT");
-      declare(FastJets(fs, FastJets::CAM, 1.2)   , "CA" );
+      declare(FastJets(fs, JetAlg::ANTIKT, 1.0), "AKT");
+      declare(FastJets(fs, JetAlg::CAM, 1.2)   , "CA" );
 
       /// Histograms:
       book(_h_camass,   {200., 300., 400., 500., 600.},

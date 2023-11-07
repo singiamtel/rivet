@@ -14,7 +14,7 @@ namespace Rivet {
 
     void init() {
       FinalState fs;
-      FastJets akt(fs, FastJets::ANTIKT, 0.5);
+      FastJets akt(fs, JetAlg::ANTIKT, 0.5);
       declare(akt, "antikT");
 
       book(_h_deltaPhi, {80., 110., 140., 200., 300., 7000.},
@@ -24,7 +24,7 @@ namespace Rivet {
 
     void analyze(const Event & event) {
 
-      const Jets& jets = apply<JetAlg>(event, "antikT").jetsByPt();
+      const Jets& jets = apply<JetFinder>(event, "antikT").jetsByPt();
       if (jets.size() < 2) vetoEvent;
 
       if (fabs(jets[0].eta()) > 1.1 || jets[0].pT() < 80.) vetoEvent;

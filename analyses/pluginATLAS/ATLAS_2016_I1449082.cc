@@ -32,6 +32,7 @@ namespace Rivet {
                             rangeStr{ { "0_1", "1_2"}, { "0_500", "500_2000"}, { "0_0.6", "0.6_1.0"}, { "0_30" , "30_1000"} }
     {  }
 
+
     /// @name Analysis methods
     /// @{
 
@@ -56,9 +57,9 @@ namespace Rivet {
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
       // Electron dressing
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, true);
+      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
-      DressedLeptons dressedelectrons_full(photons, electrons, 0.1, eta_full, true);
+      DressedLeptons dressedelectrons_full(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Muon projections
       // ---------------------
@@ -66,9 +67,9 @@ namespace Rivet {
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
       // Muon dressing
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, true);
+      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
-      DressedLeptons dressedmuons_full(photons, muons, 0.1, eta_full, true);
+      DressedLeptons dressedmuons_full(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Neutrino projections
       // ---------------------
@@ -89,7 +90,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(dressedelectrons_full);
       vfs.addVetoOnThisFinalState(dressedmuons_full);
       vfs.addVetoOnThisFinalState(neutrinos);
-      declare(FastJets(vfs, FastJets::ANTIKT, 0.4), "Jets");
+      declare(FastJets(vfs, JetAlg::ANTIKT, 0.4), "Jets");
 
       // Book histograms
       book(_h_dEta     , 1, 1, 1);

@@ -20,7 +20,7 @@ namespace Rivet {
       const FinalState fs;
       declare(fs, "FS");
       /// @todo Use correct jet algorithm
-      declare(FastJets(fs, FastJets::D0ILCONE, 0.7), "ConeJets");
+      declare(FastJets(fs, JetAlg::D0ILCONE, 0.7), "ConeJets");
 
       book(_h_deta, 1, 1, 1);
       book(_h_dphi, {0., 2., 4., 6.}, {"d02-x01-y01", "d02-x01-y02", "d02-x01-y03"});

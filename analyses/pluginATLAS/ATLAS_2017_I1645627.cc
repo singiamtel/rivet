@@ -27,7 +27,7 @@ namespace Rivet {
       declare(calo_fs, "calo");
 
       // Voronoi eta-phi tessellation with KT jets, for ambient energy density calculation
-      FastJets fj(fs, FastJets::KT, 0.5, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE); // E-scheme used by default;
+      FastJets fj(fs, JetAlg::KT, 0.5, JetMuons::NONE, JetInvisibles::NONE); // E-scheme used by default;
       fj.useJetArea(new fastjet::AreaDefinition(fastjet::voronoi_area, fastjet::VoronoiAreaSpec(1.0)));
       declare(fj, "KtJetsD05");
 
@@ -36,7 +36,7 @@ namespace Rivet {
       declare(photonfs, "photons");
 
       // Jets
-      FastJets jetpro(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetpro(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetpro, "Jets");
 
       // Histograms

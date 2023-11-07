@@ -53,19 +53,19 @@ namespace Rivet {
       Cut Zcuts = Cuts::pT >= 20.0*GeV;
 
       WFinder wfinder_edressed(fs, Wcuts, PID::ELECTRON, 40*GeV, 13*TeV, 25*GeV, 0.1,
-				 WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+				 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wfinder_edressed, "WFinder_edressed");
 
       ZFinder zfindere(fs, Zcuts, PID::ELECTRON, 46.0*GeV, 150*GeV, 0.1,
-                       ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::NO);
+                       LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
       declare(zfindere, "ZFindere");
 
       WFinder wfinder_mdressed(fs, Wcuts, PID::MUON, 40*GeV, 13*TeV, 25*GeV, 0.1,
-				 WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY, WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+				 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
       declare(wfinder_mdressed, "WFinder_mdressed");
 
       ZFinder zfinderm(fs, Zcuts, PID::MUON, 46.0*GeV, 150*GeV, 0.1,
-                       ZFinder::ChargedLeptons::PROMPT, ZFinder::ClusterPhotons::NODECAY, ZFinder::AddPhotons::NO);
+                       LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
       declare(zfinderm, "ZFinderm");
 
 
@@ -96,10 +96,10 @@ namespace Rivet {
 
 	Particle lep;
 	if (_mode !=2 && wfindere.bosons().size() == 1 ) {
-	  lep = wfindere.constituentLeptons()[0];
+	  lep = wfindere.leptons()[0];
 	}
 	else if (_mode !=1 && wfinderm.bosons().size() == 1 ) {
-	  lep = wfinderm.constituentLeptons()[0];
+	  lep = wfinderm.leptons()[0];
 	}
 
 	if (lep.charge3() == 3) {

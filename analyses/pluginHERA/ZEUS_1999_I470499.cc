@@ -33,7 +33,7 @@ namespace Rivet {
         
       // declare jets
       double jet_radius = 1.0;///FIGURE THIS OUT
-      declare(FastJets(fs, FastJets::PXCONE, jet_radius), "Jets");//FIGURE THE JET OUT
+      declare(FastJets(fs, JetAlg::PXCONE, jet_radius), "Jets");//FIGURE THE JET OUT
        
       // declare DIS Kinematics
       declare(DISLepton(), "Lepton");

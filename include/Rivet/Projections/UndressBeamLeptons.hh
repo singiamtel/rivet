@@ -8,17 +8,16 @@
 namespace Rivet {
 
 
-  /// @brief Project out the incoming beams, but subtract any colinear
-  /// photons from lepton beams within a given cone.
+  /// @brief Incoming lepton beams with collinear photons subtracted
   class UndressBeamLeptons : public Beam {
   public:
 
     using Beam::operator=;
 
-    /// Default (and only) constructor. Takes an angle as
-    /// argument. The momentum of any photon within This angle wrt. a
-    /// charged lepton beam will be subtracted from the beam lepton
-    /// momentum.
+    /// @brief Constructor with an angle as argument
+    ///
+    /// The momentum of any photon within this angle w.r.t. a charged
+    /// lepton beam will be subtracted from the beam-lepton momentum.
     UndressBeamLeptons(double theta = 0.0): _thetamax(theta) {
       setName("UndressBeamLeptons");
       declare(FinalState(), "FS");

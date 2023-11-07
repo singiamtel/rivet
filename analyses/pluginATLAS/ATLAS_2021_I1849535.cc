@@ -8,9 +8,10 @@
 
 namespace Rivet {
 
-  /// @name M4lLineshape analysis
+  
+  /// M4l lineshape analysis
   class ATLAS_2021_I1849535 : public Analysis {
-    public:
+  public:
 
       /// Constructor
       RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2021_I1849535);
@@ -31,9 +32,8 @@ namespace Rivet {
         // Final state including all charged particles
         declare(ChargedFinalState(), "CFS");
 
-        DressedLeptons dressed_elecs(photons, elecs, 0.1, el_fid_sel, false);
+        DressedLeptons dressed_elecs(photons, elecs, 0.1, el_fid_sel, PhotonOrigin::NODECAY);
         declare(dressed_elecs, "elecs");
-
         declare(muons, "muons");
 
         // Book histos

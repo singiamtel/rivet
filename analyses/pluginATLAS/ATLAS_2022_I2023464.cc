@@ -8,9 +8,9 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/FastJets.hh"
 
-
 namespace Rivet {
 
+  
   /// @brief H->yy differentual cross-sections at 13 TeV
   class ATLAS_2022_I2023464 : public Analysis {
   public:
@@ -34,7 +34,7 @@ namespace Rivet {
                                   Cuts::pT > 25*GeV &&
                                   Cuts::abseta < 2.37 &&
                                   ( Cuts::abseta < 1.37 || Cuts::abseta > 1.52 ),
-                                  true, true);
+                                  TauDecaysAs::PROMPT, MuDecaysAs::PROMPT);
       declare(kin_fs_ph, "PFS");
 
       // All photons (to dress leptons)
@@ -42,25 +42,25 @@ namespace Rivet {
 
       // Create dressed mu projection
       // true in last arg = use also muons from prompt tau decays
-      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true);
-      DressedLeptons dressed_mu( photons, bare_mu, 0.1, Cuts::abseta < 2.7, true);
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      DressedLeptons dressed_mu( photons, bare_mu, 0.1, Cuts::abseta < 2.7, PhotonOrigin::ALL);
       declare(dressed_mu, "MFS");
 
       // Create dressed e projection
-      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true);
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       // true in last arg = use also electrons from prompt tau decays
       Cut fid_el = Cuts::abseta < 2.47 && (Cuts::abseta < 1.37 || Cuts::abseta > 1.52);
-      DressedLeptons dressed_el( photons, bare_el, 0.1, fid_el, true);
+      DressedLeptons dressed_el( photons, bare_el, 0.1, fid_el, PhotonOrigin::ALL);
       declare(dressed_el, "EFS");
 
       // Create AntiKt4TruthWZJets projection
       VetoedFinalState vfs( FinalState(Cuts::abseta < 4.5) );
       vfs.addVetoOnThisFinalState( dressed_el );
       vfs.addVetoOnThisFinalState( dressed_mu );
-      FastJets jets( vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
+      FastJets jets( vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets , "jets");
 
-      declare(InvisibleFinalState(true), "MET");
+      declare(InvisibleFinalState(OnlyPrompt::YES), "MET");
 
       // Declare histograms
 

@@ -7,6 +7,7 @@
 
 namespace Rivet {
 
+  
   /// @brief MPI sensitive di-jet balance variables for W->ejj or W->mujj events.
   class ATLAS_2013_I1216670 : public Analysis {
   public:
@@ -30,18 +31,20 @@ namespace Rivet {
 
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT >= 20*GeV;
 
-      WFinder w_e_finder(fs, cuts, PID::ELECTRON, 40*GeV, DBL_MAX, 0.0*GeV, 0.0, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY,
-                         WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+      WFinder w_e_finder(fs, cuts, PID::ELECTRON, 40*GeV, DBL_MAX, 0.0*GeV, 0.0,
+			 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY,
+			 PhotonsAsConstituents::NO, MassVariable::MT);
       declare(w_e_finder, "W_E_FINDER");
 
-      WFinder w_mu_finder(fs, cuts, PID::MUON, 40*GeV, DBL_MAX, 0.0*GeV, 0.0, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY,
-                          WFinder::AddPhotons::NO, WFinder::MassWindow::MT);
+      WFinder w_mu_finder(fs, cuts, PID::MUON, 40*GeV, DBL_MAX, 0.0*GeV, 0.0,
+			  LeptonOrigin::PROMPT, PhotonOrigin::NODECAY,
+			  PhotonsAsConstituents::NO, MassVariable::MT);
       declare(w_mu_finder, "W_MU_FINDER");
 
       VetoedFinalState jet_fs(fs);
       jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("W_E_FINDER"));
       jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("W_MU_FINDER"));
-      FastJets jets(jet_fs, FastJets::ANTIKT, 0.4);
+      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4);
       declare(jets, "JETS");
 
     }
@@ -55,33 +58,33 @@ namespace Rivet {
       Jets all_jets, jets;
 
       // Find exactly 1 W->e or W->mu boson
-      if(w_e_finder.bosons().size() == 1 && w_mu_finder.bosons().size() == 0) {
+      if (w_e_finder.bosons().size() == 1 && w_mu_finder.bosons().size() == 0) {
         MSG_DEBUG(" Event identified as W->e nu.");
-        if( !(w_e_finder.mT() > 40*GeV && w_e_finder.constituentNeutrino().Et() > 25.0*GeV) )  vetoEvent;
-        lepton = w_e_finder.constituentLepton();
-      } else if(w_mu_finder.bosons().size() == 1 && w_e_finder.bosons().size() == 0) {
+        if( !(w_e_finder.mT() > 40*GeV && w_e_finder.neutrino().Et() > 25.0*GeV) )  vetoEvent;
+        lepton = w_e_finder.lepton();
+      } else if (w_mu_finder.bosons().size() == 1 && w_e_finder.bosons().size() == 0) {
         MSG_DEBUG(" Event identified as W->mu nu.");
-        if( !(w_mu_finder.mT() > 40*GeV && w_mu_finder.constituentNeutrino().Et() > 25.0*GeV) )  vetoEvent;
-        lepton = w_mu_finder.constituentLepton();
+        if ( !(w_mu_finder.mT() > 40*GeV && w_mu_finder.neutrino().Et() > 25.0*GeV) )  vetoEvent;
+        lepton = w_mu_finder.lepton();
       } else {
         MSG_DEBUG(" No W found passing cuts.");
         vetoEvent;
       }
 
-      all_jets = apply<FastJets>(e, "JETS").jetsByPt(Cuts::pt>20.0*GeV && Cuts::absrap<2.8);
+      all_jets = apply<FastJets>(e, "JETS").jetsByPt(Cuts::pT > 20.0*GeV && Cuts::absrap < 2.8);
 
       // Remove jets DeltaR < 0.5 from W lepton
-      for(Jets::iterator it = all_jets.begin(); it != all_jets.end(); ++it) {
-        double distance = deltaR( lepton, (*it) );
-        if(distance < 0.5) {
+      for (const Jet& j : all_jets) {
+        double distance = deltaR(lepton, j);
+        if (distance < 0.5) {
           MSG_DEBUG("   Veto jet DeltaR " << distance << " from W lepton");
         } else {
-          jets.push_back(*it);
+          jets.push_back(j);
         }
       }
 
       // Exactly two jets required
-      if( jets.size() != 2 )  vetoEvent;
+      if (jets.size() != 2)  vetoEvent;
 
       // Calculate analysis quantities from the two jets
       double delta_jets = (jets.front().momentum() + jets.back().momentum()).pT();
@@ -93,17 +96,16 @@ namespace Rivet {
 
     }
 
+    
     /// Finalize
     void finalize() {
-
-      // Data is normalised to 0.03 and 3
       normalize(_h_delta_jets_n, 0.03);
       normalize(_h_delta_jets  , 3.0 );
-
     }
 
     /// @}
 
+    
   private:
 
     /// @name Histograms
@@ -114,7 +116,7 @@ namespace Rivet {
 
   };
 
-  // The hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(ATLAS_2013_I1216670);
 
 }

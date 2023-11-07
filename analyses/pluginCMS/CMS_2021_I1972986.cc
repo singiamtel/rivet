@@ -19,8 +19,8 @@ namespace Rivet {
 
       // Initialize the projections
       const FinalState fs;
-      declare(FastJets(fs, FastJets::ANTIKT, 0.4), "JetsAK4");
-      declare(FastJets(fs, FastJets::ANTIKT, 0.7), "JetsAK7");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "JetsAK4");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.7), "JetsAK7");
 
       // Book sets of histograms, binned in absolute rapidity
       book(_hist_sigmaAK4, {0., 0.5, 1.0, 1.5, 2.0},

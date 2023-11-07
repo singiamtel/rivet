@@ -19,7 +19,7 @@ namespace Rivet {
 
     void init() {
       FinalState fs;
-      FastJets jetproj(fs, FastJets::ANTIKT, 0.5);
+      FastJets jetproj(fs, JetAlg::ANTIKT, 0.5);
       jetproj.useInvisibles();
       declare(jetproj, "Jets");
 

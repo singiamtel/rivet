@@ -7,7 +7,6 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
-
 namespace Rivet {
 
 
@@ -30,7 +29,7 @@ namespace Rivet {
       // Electrons and muons in Fiducial PS
       PromptFinalState leptons(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       leptons.acceptTauDecays(false);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, Cuts::open(), true);                                       // useDecayPhotons=true -- useJetClustering? auto-set to false?
+      DressedLeptons dressedleptons(photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
       declare(dressedleptons, "DressedLeptons");
 
       // Prompt neutrinos (yikes!)
@@ -43,22 +42,22 @@ namespace Rivet {
 
       //Jets
 
-    	// Muons
-    	PromptFinalState bare_mu(Cuts::abspid == PID::MUON, true); // true = use muons from prompt tau decays
-    	DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 5.0, true);
-
-    	// Electrons
-    	PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, true); // true = use electrons from prompt tau decays
-    	DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 5.0, true);
-
-    	//Jet forming
-    	VetoedFinalState vfs(FinalState(Cuts::abseta < 5));
-    	vfs.addVetoOnThisFinalState(all_dressed_el);
-    	vfs.addVetoOnThisFinalState(all_dressed_mu);
-
-    	FastJets jets(vfs, FastJets::ANTIKT, 0.4, JetAlg::Muons::ALL, JetAlg::Invisibles::DECAY);
-    	declare(jets, "Jets");
-
+      // Muons
+      PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 5.0, PhotonOrigin::ALL);
+      
+      // Electrons
+      PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
+      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 5.0, PhotonOrigin::ALL);
+      
+      //Jet forming
+      VetoedFinalState vfs(FinalState(Cuts::abseta < 5));
+      vfs.addVetoOnThisFinalState(all_dressed_el);
+      vfs.addVetoOnThisFinalState(all_dressed_mu);
+      
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
+      declare(jets, "Jets");
+      
       // Book auxiliary histograms
       book(_h["MTWZ"],         "_mTWZ", refData( 6, 1, 1));
       book(_h["sumpt"],       "_sumpT", refData( 8, 1, 1));

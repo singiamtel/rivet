@@ -49,7 +49,7 @@ namespace Rivet {
       jetFS.addVetoOnThisFinalState(muonClusters);
       jetFS.addVetoOnThisFinalState(neutrinos);
       jetFS.vetoNeutrinos();
-      FastJets jetprojection(jetFS, FastJets::ANTIKT, 0.5);
+      FastJets jetprojection(jetFS, JetAlg::ANTIKT, 0.5);
       declare(jetprojection, "Jets");
 
       // Histograms
@@ -98,8 +98,8 @@ namespace Rivet {
       //const Particles& neutrinos = apply<FinalState>(event, "neutrinos").particlesByPt();
 
       // Check that the muon and neutrino are not decay products of tau
-      if (dressedmuon.constituentLepton().hasAncestor( PID::TAU)) vetoEvent;
-      if (dressedmuon.constituentLepton().hasAncestor(-PID::TAU)) vetoEvent;
+      if (dressedmuon.bareLepton().hasAncestor( PID::TAU)) vetoEvent;
+      if (dressedmuon.bareLepton().hasAncestor(-PID::TAU)) vetoEvent;
 
       // Get the missing momentum
       const MissingMomentum& met = apply<MissingMomentum>(event, "MET");

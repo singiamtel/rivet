@@ -8,10 +8,14 @@
 #include "Rivet/Event.hh"
 #include "Rivet/Projection.hh"
 #include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 
 namespace Rivet {
 
 
+  enum class OnlyPrompt { YES, NO };
+  
+  
   /// @brief Final state modifier excluding particles which are experimentally visible
   class InvisibleFinalState : public FinalState {
   public:
@@ -20,10 +24,12 @@ namespace Rivet {
     /// @{
 
     /// Constructor with specific FinalState.
-    InvisibleFinalState(bool requirepromptness=false, bool allow_from_direct_tau=false, bool allow_from_direct_mu=false)
-      : _requirePromptness(requirepromptness),
-        _allow_from_direct_tau(allow_from_direct_tau),
-        _allow_from_direct_mu(allow_from_direct_mu)
+    InvisibleFinalState(OnlyPrompt requirepromptness=OnlyPrompt::NO,
+			TauDecaysAs taudecays=TauDecaysAs::NONPROMPT,
+			MuDecaysAs mudecays=MuDecaysAs::NONPROMPT)
+      : _requirePromptness(requirepromptness == OnlyPrompt::YES),
+        _taudecays(taudecays == TauDecaysAs::PROMPT),
+        _mudecays(mudecays == MuDecaysAs::PROMPT)
     {
       setName("InvisibleFinalState");
       declare(FinalState(), "FS");
@@ -39,10 +45,12 @@ namespace Rivet {
 
 
     /// Require accepted particles to be prompt
-    void requirePromptness(bool acc=true, bool allow_from_direct_tau=false, bool allow_from_direct_mu=false) {
+    void requirePromptness(bool acc=true,
+			   TauDecaysAs taudecays=TauDecaysAs::NONPROMPT,
+			   MuDecaysAs mudecays=MuDecaysAs::NONPROMPT) {
       _requirePromptness = acc;
-      _allow_from_direct_tau = allow_from_direct_tau;
-      _allow_from_direct_mu = allow_from_direct_mu;
+      _taudecays = (taudecays == TauDecaysAs::PROMPT);
+      _mudecays = (mudecays == MuDecaysAs::PROMPT);
     }
 
     /// Apply the projection on the supplied event.
@@ -52,9 +60,9 @@ namespace Rivet {
     CmpState compare(const Projection& p) const;
 
 
-    protected:
+  protected:
 
-      bool _requirePromptness, _allow_from_direct_tau, _allow_from_direct_mu;
+    bool _requirePromptness, _taudecays, _mudecays;
   };
 
 

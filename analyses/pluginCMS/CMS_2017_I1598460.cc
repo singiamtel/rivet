@@ -21,7 +21,7 @@ namespace Rivet {
 
       const FinalState fs;
       declare(fs, "FinalState");
-      FastJets fj07(fs, FastJets::ANTIKT, 0.7);
+      FastJets fj07(fs, JetAlg::ANTIKT, 0.7);
       declare(fj07, "Jets");
       /// @todo Book histograms here, e.g.:
       for (int i = 0; i < 6; i++) {

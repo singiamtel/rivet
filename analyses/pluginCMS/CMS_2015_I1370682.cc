@@ -436,7 +436,7 @@ namespace Rivet {
       sortByPt(neutrinos);
 
       // Proceed to lepton dressing
-      FastJets fjLep(FinalState(), FastJets::ANTIKT, _lepR);
+      FastJets fjLep(FinalState(), JetAlg::ANTIKT, _lepR);
       fjLep.calc(pForLep);
 
       Jets leptons;
@@ -469,7 +469,7 @@ namespace Rivet {
       }
 
       // Then do the jet clustering
-      FastJets fjJet(FinalState(), FastJets::ANTIKT, _jetR);
+      FastJets fjJet(FinalState(), JetAlg::ANTIKT, _jetR);
       //fjJet.useInvisibles(); // NOTE: CMS proposal to remove neutrinos (AB: wouldn't work anyway, since they were excluded from clustering inputs)
       fjJet.calc(pForJet);
       for (const Jet& jet : fjJet.jetsByPt(_jetMinPt)) {

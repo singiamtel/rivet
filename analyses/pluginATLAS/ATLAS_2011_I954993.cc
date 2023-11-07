@@ -27,19 +27,19 @@ namespace Rivet {
       FinalState fs;
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 15*GeV;
 
-      ZFinder zfinder_e(fs, cuts, PID::ELECTRON, 81.1876*GeV, 101.1876*GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder zfinder_e(fs, cuts, PID::ELECTRON, 81.1876*GeV, 101.1876*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zfinder_e, "ZFinder_e");
-      ZFinder zfinder_mu(fs, cuts, PID::MUON, 81.1876*GeV, 101.1876*GeV, 0.1, ZFinder::ClusterPhotons::NODECAY);
+      ZFinder zfinder_mu(fs, cuts, PID::MUON, 81.1876*GeV, 101.1876*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zfinder_mu, "ZFinder_mu");
 
       VetoedFinalState weinput;
       weinput.addVetoOnThisFinalState(zfinder_e);
-      WFinder wfinder_e(weinput, cuts, PID::ELECTRON, 0*GeV, 1000*GeV, 25*GeV, 0.1, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY);
+      WFinder wfinder_e(weinput, cuts, PID::ELECTRON, 0*GeV, 1000*GeV, 25*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(wfinder_e, "WFinder_e");
 
       VetoedFinalState wminput;
       wminput.addVetoOnThisFinalState(zfinder_mu);
-      WFinder wfinder_mu(wminput,cuts, PID::MUON, 0*GeV, 1000*GeV, 25*GeV, 0.1, WFinder::ChargedLeptons::PROMPT, WFinder::ClusterPhotons::NODECAY);
+      WFinder wfinder_mu(wminput,cuts, PID::MUON, 0*GeV, 1000*GeV, 25*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(wfinder_mu, "WFinder_mu");
 
       // Histograms
@@ -68,16 +68,16 @@ namespace Rivet {
 
       // If we find a W, make fiducial acceptance cuts and exit if not found
       if (wfinder_e.bosons().size() == 1) {
-        const FourMomentum We = wfinder_e.constituentLeptons()[0];
-        const FourMomentum Wenu = wfinder_e.constituentNeutrinos()[0];
+        const FourMomentum We = wfinder_e.leptons()[0];
+        const FourMomentum Wenu = wfinder_e.neutrinos()[0];
         const double mT = wfinder_e.mT();
         if (Wenu.pT() < 25*GeV || We.pT() < 20*GeV || mT < 20*GeV) {
           MSG_DEBUG("Wnu pT = " << Wenu.pT()/GeV << " GeV, Wl pT = " << We.pT()/GeV << " GeV, mT = " << mT/GeV << " GeV");
           vetoEvent;
         }
       } else if (wfinder_mu.bosons().size() == 1) {
-        const FourMomentum Wmu = wfinder_mu.constituentLeptons()[0];
-        const FourMomentum Wmunu = wfinder_mu.constituentNeutrinos()[0];
+        const FourMomentum Wmu = wfinder_mu.leptons()[0];
+        const FourMomentum Wmunu = wfinder_mu.neutrinos()[0];
         const double mT = wfinder_mu.mT();
         if (Wmunu.pT() < 25*GeV || Wmu.pT() < 20*GeV || mT < 20*GeV) {
           MSG_DEBUG("Wnu pT = " << Wmunu.pT()/GeV << ", Wl pT = " << Wmu.pT()/GeV << " GeV, mT = " << mT/GeV << " GeV");

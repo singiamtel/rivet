@@ -6,6 +6,7 @@
 
 namespace Rivet {
 
+  
   /// @brief Base class for projections returning a bool corresponding
   /// to a trigger.
   ///
@@ -21,6 +22,7 @@ namespace Rivet {
     TriggerProjection() : _passed(true) {
       setName("TriggerProjection");
     }
+    
     virtual ~TriggerProjection() {}
 
     /// Clone on the heap.
@@ -29,13 +31,12 @@ namespace Rivet {
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
 
-
-    /// Return true if the event has passed some trigger or selection
-    /// criteria.
+    /// Return true if the event has passed some trigger or selection criteria.
     bool operator()() const {
       return _passed;
     }
 
+    
   protected:
 
     virtual void project(const Event& e) {
@@ -63,6 +64,7 @@ namespace Rivet {
 
   };
 
+  
 }
 
 #endif

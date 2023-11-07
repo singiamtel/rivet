@@ -9,7 +9,9 @@ namespace Rivet {
     const auto& ufs = apply<UnstableParticles>(e, "UFS");
     for (const Particle& p : ufs.particles()) {
       if (p.abspid() != PID::TAU) continue;
-      if (_decmode == DecayMode::ANY || (_decmode == DecayMode::LEPTONIC && isLeptonic(p)) || (_decmode == DecayMode::HADRONIC && isHadronic(p)) )
+      if (_decmode == TauDecay::ANY ||
+	  (_decmode == TauDecay::LEPTONIC && isLeptonic(p)) ||
+	  (_decmode == TauDecay::HADRONIC && isHadronic(p)) )
         _theParticles.push_back(p);
     }
   }
