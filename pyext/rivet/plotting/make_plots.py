@@ -30,11 +30,14 @@ def _parse_args(args):
     filelist : list[str]
         Raw names of the files, i.e. the first part of each string in args.
     filenames : list[str]
-        Names of the files. If Name=value is passed as a plot option after a file name, this will become the filename. Otherwise, it will use the same value as in filelist.
+        Names of the files. If Name=value is passed as a plot option after a file name, this will become the filename.
+        Otherwise, it will use the same value as in filelist.
     plotoptions : dict[str, dict[str, str]]
         Dictionary of plot options.
-        The key will be the file name (i.e., same value as in filenames) and the value will be a dict of strings with plot options.
-        One of the keys will also be PLOT (if it was passed in as an argument to args, which contains all plot options that will be applied to the entire figure.
+        The key will be the file name, unless Name=label is passed as a plot option after a file name,
+        in which case it will be label. The dictionary value with be a dict of strings with plot options.
+        One of the keys will also be PLOT (if it was passed in as an argument to args, which contains
+        all plot options that will be applied to the entire figure.
 
     Examples
     --------
@@ -51,16 +54,15 @@ def _parse_args(args):
     ----
     Some matplotlib line styles contain ':', which would not work with current code. TODO: change delimiter?
     """
-    # TODO: remove filenames since they exist as keys in plotoptions?
     filelist = []
-    filenames = []
     plotoptions = {}
     for a in args:
         asplit = a.split(':')
         path = asplit[0]
         if path != "PLOT":
             filelist.append(path)
-            filenames.append(path)
+            while path in plotoptions:
+                path = '_' + path
         plotoptions[path] = {}
         has_title = False
         has_name = ""
@@ -74,21 +76,23 @@ def _parse_args(args):
             plotoptions[path][key] = type_conversion(value)
             if asplit[i].startswith('Name=') and path != "PLOT":
                 has_name = asplit[i].split('=', 1)[1]
-                filenames[-1] = has_name
         if has_name != "":
-            plotoptions[has_name] = plotoptions[path]
-            del plotoptions[path]
+            plotoptions[has_name] = plotoptions.pop(path)
+        else:
+            has_name = path
         if path != "PLOT" and not has_title:
-            plotoptions[has_name if has_name != "" else path]['Title'] = _sanitise_string(os.path.basename( os.path.splitext(path)[0] ))
-    return filelist, filenames, plotoptions
+            plotoptions[has_name]['Title'] = _sanitise_string(os.path.basename( os.path.splitext(path)[0] ))
+    return filelist, plotoptions
 
 
-def _get_histos(filelist, filenames, plotoptions, path_patterns = [], path_unpatterns = []):
+def _get_histos(filelist, plotoptions, path_patterns = [], path_unpatterns = [], rivetrefs = True):
     """Loop over all input files. Only use the first occurrence of any REF-histogram
     and the first occurrence in each MC file for every MC-histogram."""
 
+    hpaths = []; anas = []
+    hasVariations = False
     refhistos, mchistos = {}, {}
-    for infile, inname in zip(filelist, filenames):
+    for infile, inname in zip(filelist, plotoptions.keys()):
         mchistos.setdefault(inname, {})
         try:
             analysisobjects = yoda.read(infile, patterns=path_patterns, unpatterns=path_unpatterns)
@@ -108,6 +112,8 @@ def _get_histos(filelist, filenames, plotoptions, path_patterns = [], path_unpat
             if aop.istmp() or aop.israw():
                 continue
 
+            hasVariations |= bool(aop.varid())
+
             # Convert non-scatter objects to scatter
             ao = yoda.plotting.utils.mkPlotFriendlyScatter(ao)
 
@@ -119,36 +125,47 @@ def _get_histos(filelist, filenames, plotoptions, path_patterns = [], path_unpat
                 refhistos[basepath] = ao
             else: #if basepath not in mchistos[infile]:
                 mchistos[inname].setdefault(basepath, {})[aop.varid(defaultWeightName)] = ao
+                if basepath and basepath not in hpaths:
+                    hpaths.append(basepath)
+                    ana = basepath.split("/")[1]
+                    if ana not in anas:
+                        anas.append(ana)
 
-    return refhistos, mchistos
-
-
-def _get_rivet_ref_data(anas, path_patterns, path_unpatterns):
-    """Find all Rivet reference data files"""
-    refhistos = {}
-    rivet_data_dirs = rivet.getAnalysisRefPaths()
-    dirlist = []
-    for d in rivet_data_dirs:
-        if anas is None:
-            dirlist.append(glob.glob(os.path.join(d, '*.yoda*')))
-        else:
-            #dirlist.append([os.path.join(d, a+'.yoda*') for a in anas])
-            for a in anas:
-                res = glob.glob(os.path.join(d, a+'.yoda'))
-                if len(res) == 0:
-                    res = glob.glob(os.path.join(d, a+'.yoda.gz'))
-                if len(res) != 0:
-                    dirlist.append(res)
-    for filelist in dirlist:
-        # TODO: delegate to _get_histos?
-        for infile in filelist:
+    if rivetrefs:
+        # Scrape Rivet ref-data files for matching ref-data AOs
+        rivet_data_dirs = rivet.getAnalysisRefPaths()
+        dirlist = list(set([ item for a in anas
+                                  for d in rivet_data_dirs
+                                  for item in glob.glob(os.path.join(d, a+'.yoda*')) ]))
+        for infile in dirlist:
             analysisobjects = yoda.read(infile, patterns=path_patterns, unpatterns=path_unpatterns)
             for path, ao in analysisobjects.items():
                 aop = rivet.AOPath(ao.path())
-                if aop.isref():
-                    ao.setPath(aop.basepath(keepref=False))
-                    refhistos[ao.path()] = ao
-    return refhistos
+                if not aop.isref():  continue
+                ao.setPath(aop.basepath(keepref=False))
+                new_aop = ao.path()
+                if new_aop not in hpaths:  continue
+                if new_aop not in refhistos:
+                    refhistos[new_aop] = ao
+
+    # propagate the variations Boolean to the top-level script
+    hpaths.append(hasVariations)
+
+    return refhistos, mchistos, hpaths
+
+
+def _add_ref_hist(output, refhisto, mainlabel, ratiolabel):
+    reflabel = 'Data'
+    refhisto.setAnnotation('IsRef', True)
+    output['histograms'][reflabel] = {'nominal': refhisto}
+    output['histograms'][reflabel]['IsRef'] = True
+    output['histograms'][reflabel]['LineColor'] = 'black'
+    # set label for reference data in legend
+    output['histograms'][reflabel]['Title'] = mainlabel
+    # decide if ratio panel is shown or not
+    output['plot features']['RatioPlot'] = ratiolabel != None
+    # set label on y-axis of the ratio panel
+    output['plot features']['RatioPlotYLabel'] = ratiolabel
 
 
 def get_nominal_key(listOfHistoKeys):
@@ -163,7 +180,7 @@ def get_nominal_key(listOfHistoKeys):
 
 
 def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptions,
-                 style, rc_params, mc_errs, nRatioTicks, skipWeights, removeOptions, deviation,
+                 style, rc_params, mc_errs, nRatioTicks, showWeights, removeOptions, deviation,
                  canvasText, refLabel = None, ratioPlotLabel = None, showRatio = None, verbose = False,):
 
     """Create output dictionary for the plot_id.
@@ -204,7 +221,9 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
     outputdict = {}
     plot_configs = plot2yaml.get_plot_configs(plot_id, plotdirs=plotdirs, config_files=config_files)
     outputdict['plot features'] = plot_configs
-    outputdict['plot features']['Deviation'] = deviation
+    rpmode = plot_configs.get('RatioPlotMode', 'mcdata')
+    deviation |= plot_configs.get('Deviation', False)
+    outputdict['plot features']['Deviation'] = deviation or rpmode == 'deviation'
 
     # only write extra info to the .dat file if specified by user
     if nRatioTicks !=1: outputdict['plot features'].update({"nRatioTicks": nRatioTicks})
@@ -217,24 +236,20 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
 
     componentNames = ['BandComponentPDF', 'BandComponentEnv']
 
-    if plot_id in refhistos:
-        refhistos[plot_id].setAnnotation('IsRef', True)
-        outputdict['histograms']['Data'] = {'nominal': refhistos[plot_id]} # this is where ErrorBreakdown is included?
-        outputdict['histograms']['Data']['IsRef'] = True
-
-        # set label for reference data in legend, checking for user-input on rivet-mkhtml first,
-        # then the annotations in the plot file and finally falling back to a default value
+    # Check if there's reference data
+    if plot_id in refhistos and rpmode != 'datamc':
+        # Adding it first ensures it goes in the denominator
+        rplabel = None
+        hasRatio = showRatio if showRatio != None else refhistos[plot_id].annotation('RatioPlot', True)
+        if hasRatio:
+            rplabel = ratioPlotLabel if ratioPlotLabel != None else \
+                      refhistos[plot_id].annotation('RatioPlotYLabel', 'MC/Data')
         reftitle = refhistos[plot_id].annotation('Title', 'Data')
-        outputdict['histograms']['Data']['Title'] = refLabel if refLabel != None else \
-                                                    reftitle if reftitle != None else 'Data'
-        # decide if ratio panel is shown or not
-        outputdict['plot features']['RatioPlot'] = showRatio if showRatio != None else \
-                                                refhistos[plot_id].annotation<bool>('RatioPlot', True)
+        mainlabel = refLabel if refLabel != None else \
+                    reftitle if reftitle != None else 'Data'
+        _add_ref_hist(outputdict, refhistos[plot_id], mainlabel, rplabel)
 
-        # set label on y-axis of the ratio panel
-        outputdict['plot features']['RatioPlotYLabel'] = ratioPlotLabel if ratioPlotLabel != None else \
-                                                refhistos[plot_id].annotation('RatioPlotYLabel', 'MC/Data')
-
+    # Now add MC curves
     lhapdfCheck = True
     for filename, mchistos_in_file in mchistos.items():
         for plot_id_with_anaopt in sorted(mchistos_in_file):
@@ -253,10 +268,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
             thisFilePlotOptions['Title'] = newtitle
             outputdict['histograms'][filename+label].update(thisFilePlotOptions)
 
-            makePDFBand  = thisFilePlotOptions['BandComponentPDF'] \
-                           if 'BandComponentPDF' in thisFilePlotOptions else ''
-            makeEnvelope = thisFilePlotOptions['BandComponentEnv'] \
-                           if 'BandComponentEnv' in thisFilePlotOptions else ''
+            makePDFBand  = thisFilePlotOptions.get('BandComponentPDF', '')
+            makeEnvelope = thisFilePlotOptions.get('BandComponentEnv', '')
 
             # check if lhapdf is available
             if makePDFBand and lhapdfCheck:
@@ -324,10 +337,16 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                             Enverrors[i][0] = list(map(min, zip(Enverrors[i][0], central_values)))
                             Enverrors[i][1] = list(map(max, zip(Enverrors[i][1], central_values)))
 
-                # don't plot multiweights if already plotting a band
-                if not skipWeights and not isNominal and not makeEnvelope and not makePDFBand:
-                    if not rivet.extractWeightName(plot_id_with_anaopt).startswith('EXTRA'):
-                        outputdict['histograms'][filename+label]['multiweight'+histogramkey] = thisObj
+                # Don't plot multiweights if already plotting a band
+                if showWeights and not isNominal and not makeEnvelope and not makePDFBand:
+                    wname = rivet.extractWeightName(plot_id_with_anaopt)
+                    if wname.startswith('EXTRA'):  continue  # cf. weightname convention
+                    # Check if the user supplied regex-based weightname filtering
+                    var_filter = thisFilePlotOptions.get('Variations', '')
+                    if var_filter:
+                        if not any([ re.search(pat, wname) for pat in var_filter.split(',') ]):
+                            continue
+                    outputdict['histograms'][filename+label]['multiweight'+histogramkey] = thisObj
 
             if verbose:
                 for pat in pdf_matches:
@@ -383,6 +402,19 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                     BandScatter.point(ibin).setYErrs(sqrt(totErrDn), sqrt(totErrUp))
                 outputdict['histograms'][filename+label]['BandUncertainty'] = BandScatter
 
+    # Check if there's reference data
+    if plot_id in refhistos and rpmode == 'datamc':
+        # Adding it last ensures it goes in the numerator
+        rplabel = None
+        hasRatio = showRatio if showRatio != None else refhistos[plot_id].annotation('RatioPlot', True)
+        if hasRatio:
+            rplabel = ratioPlotLabel if ratioPlotLabel != None else \
+                      refhistos[plot_id].annotation('RatioPlotYLabel', 'Data/MC')
+        reftitle = refhistos[plot_id].annotation('Title', 'Data')
+        mainlabel = refLabel if refLabel != None else \
+                    reftitle if reftitle != None else 'Data'
+        _add_ref_hist(outputdict, refhistos[plot_id], mainlabel, rplabel)
+
     # Remove all sections of the output_dict that do not contain any information.
     # A list of keys is first created. Otherwise, it will raise an error since the size of the dict changes.
     dict_keys = list(outputdict.keys())
@@ -397,7 +429,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
                            plotinfodirs=[], style='default', config_files=[],
                            hier_output=False, outdir='.', mc_errs=True,
                            rivetplotpaths=True, analysispaths=[], verbose=False,
-                           writefiles=False, nRatioTicks=1, skipWeights=False,
+                           writefiles=False, nRatioTicks=1, showWeights=False,
                            removeOptions = False, deviation=False,
                            canvasText=None, refLabel=None, ratioPlotLabel=None,
                            showRatio=None):
@@ -474,7 +506,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
 
     # TODO: more elegant solution for getting rc_params by refactoring _parse_args.
     #  Then the 4 lines below can be replaced by 1 line
-    stylename, _, rc_params_dict = _parse_args([style])
+    stylename, rc_params_dict = _parse_args([style])
     stylename = stylename[0]    # Convert list to str
     rc_params_dict = rc_params_dict[stylename]  # Convert dict of dicts to dict
     del rc_params_dict['Title']
@@ -488,7 +520,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
         rivet.addAnalysisDataPath(os.path.abspath(path))
 
     # Split the input file names and the associated plotting options given on the command line into two separate lists
-    filelist, filenames, plotoptions = _parse_args(args)
+    filelist, plotoptions = _parse_args(args)
 
     ## Check that the files exist
     for f in filelist:
@@ -500,28 +532,8 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
     plotdirs += (rivet.getAnalysisPlotPaths() if rivetplotpaths else [])
 
     # Create a list of all histograms to be plotted, and identify if they are 2D histos (which need special plotting)
-    refhistos, mchistos = _get_histos(filelist, filenames, plotoptions, path_patterns, path_unpatterns)
-
-    hpaths = []
-    for aos in mchistos.values():
-        for p in aos.keys():
-            ps = rivet.stripOptions(p)
-            if ps and ps not in hpaths:
-                hpaths.append(ps)
-
-    # Unique list of analyses
-    anas = list(set([x.split("/")[1] for x in hpaths]))
-
-    ## Take reference data from the Rivet search paths, if there is not already
-    if rivetrefs:
-        refhistos2 = _get_rivet_ref_data(anas, path_patterns, path_unpatterns)
-        refhistos2.update(refhistos)
-        refhistos = refhistos2
-    ## Purge unmatched ref data entries to save memory
-    keylist = list(refhistos.keys())
-    for refhpath in keylist:
-        if refhpath not in hpaths:
-            del refhistos[refhpath]
+    refhistos, mchistos, hpaths = _get_histos(filelist, plotoptions, path_patterns, path_unpatterns, rivetrefs)
+    hasVariations = hpaths.pop()
 
     # Write each file
     plot_info_dicts = {}
@@ -530,11 +542,11 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
             plot_id, plotdirs, config_files,
             mchistos, refhistos,
             plotoptions, stylename, rc_params_dict, mc_errs,
-            nRatioTicks, skipWeights, removeOptions, deviation,
+            nRatioTicks, showWeights, removeOptions, deviation,
             canvasText, refLabel, ratioPlotLabel, showRatio, verbose
         )
         if 'histograms' in outputdict: # protection against Counters
             plot_info_dicts[plot_id] = outputdict
 
-    return anas, plot_info_dicts
+    return plot_info_dicts, hasVariations
 

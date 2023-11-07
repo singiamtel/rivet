@@ -69,7 +69,7 @@ stygroup = parser.add_argument_group("Style options")
 stygroup.add_argument("-t", "--title", dest="TITLE",
                       default="Plots from Rivet analyses", help="title to be displayed on the main web page")
 stygroup.add_argument("--reflabel", dest="REFLABEL",
-                      default=None, help="legend entry for reference data")
+                      default='Data', help="legend entry for reference data")
 stygroup.add_argument("--ratiolabel", dest="RATIOPLOTLABEL",
                       default=None, help="label on ratio panel")
 stygroup.add_argument("--deviation", dest="DEVIATION", action="store_true",
@@ -105,7 +105,7 @@ selgroup.add_argument("--ana-match", action="append", dest="ANAPATTERNS", defaul
                       help="only write out histograms from analyses whose name matches any of these regexes (same as --match)")
 selgroup.add_argument("--ana-unmatch", action="append", dest="ANAUNPATTERNS", default=[],
                       help="exclude histograms from analyses whose name matches any of these regexes (same as --unmatch)")
-selgroup.add_argument("--no-weights", "--skip-weights", help="prevent multiweights from being plotted", dest="SKIP_WEIGHTS",
+selgroup.add_argument("--with-variations", "--show-variations", help="also plot multiweight variations", dest="SHOW_WEIGHTS",
                     action="store_true", default=False)
 
 vrbgroup = parser.add_argument_group("Verbosity control")
@@ -212,7 +212,6 @@ def generate_plots(pyScripts,numcores=1):
 
 def generateScripts(args):
 
-    yodafiles = args.YODAFILES
     style = args.STYLE
     writefiles = args.WRITE_FILES
 
@@ -223,7 +222,7 @@ def generateScripts(args):
 
 
     ## Check that there are some arguments!
-    if not yodafiles:
+    if not args.YODAFILES:
         print("Error: You need to specify some YODA files to be plotted!")
         sys.exit(1)
 
@@ -240,7 +239,8 @@ def generateScripts(args):
             sys.exit(1)
 
     ## Check that YODA files are accessible
-    for yodafile in yodafiles:
+    yodafiles = [ ]
+    for yodafile in args.YODAFILES:
         if yodafile.startswith("PLOT:"):
             continue
         yodafilepath = os.path.abspath(yodafile.split(":")[0])
@@ -250,29 +250,36 @@ def generateScripts(args):
                 continue
             else:
                 sys.exit(2)
+        yodafiles.append(yodafile)
 
     ## Make sure user-supplied config files are accessible
     configfiles = [ os.path.abspath(os.path.expanduser(cf)) for cf in args.CONFIGFILES if os.access(cf, os.R_OK) ]
 
     pat_match = list(set(args.PATHPATTERNS + args.ANAPATTERNS))
     pat_unmatch = list(set(args.PATHUNPATTERNS + args.ANAUNPATTERNS))
-    analyses, allPlotContents = assemble_plotting_data(args.YODAFILES, args.PATH_PWD,
-                                                       args.RIVETREFS, pat_match, pat_unmatch, [os.path.abspath("../")],
-                                                       style, configfiles, True, args.OUTPUTDIR, args.MC_ERRS,
-                                                       True, [], args.VERBOSE, writefiles=writefiles,
-                                                       nRatioTicks=args.NRATIOTICKS, skipWeights = args.SKIP_WEIGHTS,
-                                                       removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION,
-                                                       canvasText=args.CANVASTEXT, refLabel=args.REFLABEL,
-                                                       ratioPlotLabel=args.RATIOPLOTLABEL, showRatio=args.SHOW_RATIO)
+    plotContents, hasVars = assemble_plotting_data(yodafiles, args.PATH_PWD,
+                                                   args.RIVETREFS, pat_match, pat_unmatch, [os.path.abspath("../")],
+                                                   style, configfiles, True, args.OUTPUTDIR, args.MC_ERRS,
+                                                   True, [], args.VERBOSE, writefiles=writefiles,
+                                                   nRatioTicks=args.NRATIOTICKS, showWeights = args.SHOW_WEIGHTS,
+                                                   removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION,
+                                                   canvasText=args.CANVASTEXT, refLabel=args.REFLABEL,
+                                                   ratioPlotLabel=args.RATIOPLOTLABEL, showRatio=args.SHOW_RATIO)
+
+    # Unique list of analyses
+    analyses = list(set([p.split("/")[1] for p in plotContents.keys()]))
+
+    if hasVars and not args.SHOW_WEIGHTS:
+        print ('Found multiweight variations in one of the input YODA files.')
+        print ('You can plot them using --with-variations.')
 
     ## Write web page containing all (matched) plots
     ## Make web pages first so that we can load it locally in
     ## a browser to view the output before all plots are made
-
     analyses = sorted(analyses, key=anasort)
     if not args.DRY_RUN:
 
-        allPlotNames = allPlotContents.keys()
+        allPlotNames = plotContents.keys()
 
         style = '''<style>
           html { font-family: sans-serif; }
@@ -481,10 +488,10 @@ def generateScripts(args):
         index.write('</body>\n</html>')
         index.close()
 
-    num_plots = len(allPlotContents)
+    num_plots = len(plotContents)
     pyScripts = []
     print("Making {} plots".format(num_plots))
-    for i, (plotName, singlePlotContent) in enumerate(allPlotContents.items()):
+    for i, (plotName, plotContent) in enumerate(plotContents.items()):
 
         ## Skip temporary AOs
         if rivet.isTmpPath(plotName):
@@ -493,7 +500,7 @@ def generateScripts(args):
 
         ## writePyScript returns path of the .py script
         try:
-            pyScript = script_generator.process(singlePlotContent, plotName, args.OUTPUTDIR, args.FORMATS)
+            pyScript = script_generator.process(plotContent, plotName, args.OUTPUTDIR, args.FORMATS)
             pyScripts += [os.path.abspath(pyScript)]
         except:
             print('Unexpected error encountered for', plotName)
