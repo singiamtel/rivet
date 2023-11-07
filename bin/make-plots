@@ -899,6 +899,8 @@ class MainPlot(Plot):
         drawlabels = True
         if 'PlotTickLabels' in inputdata.description and inputdata.description['PlotTickLabels']=='0':
             drawlabels=False
+        elif 'PlotXTickLabels' in inputdata.description and inputdata.description['PlotXTickLabels']=='0':
+            drawlabels=False
         for i in [""] + [str(idx) for idx in range(1,inputdata.nPanels)]:
             if inputdata.attr_bool('RatioPlot'+i,0):
                 drawlabels=False
@@ -930,6 +932,8 @@ class MainPlot(Plot):
 
         yticks = YTicks(inputdata.description, self.coors)
         drawylabels = inputdata.attr_bool('PlotYTickLabels', True)
+        if 'PlotTickLabels' in inputdata.description and inputdata.description['PlotTickLabels']=='0':
+            drawylabels=False
         if inputdata.description.get('YBreaks', '') != '':
             FOO=inputdata.description['YBreaks'].strip().split('\t')
             for i in range(len(FOO)):
@@ -1223,9 +1227,13 @@ class RatioPlot(Plot):
         drawlabels = True
         if (inputdata.description.get(self.name+'TickLabels','')=='0'):
             drawlabels=False
-        for i in range(self.number+1,inputdata.nPanels):
-            if inputdata.description.get('RatioPlot'+str(i), '')=='1':
-                drawlabels=False
+
+        else:
+          if (inputdata.description.get(self.name+'XTickLabels','')=='0'):
+              drawlabels=False
+          for i in range(self.number+1,inputdata.nPanels):
+              if inputdata.description.get('RatioPlot'+str(i), '')=='1':
+                  drawlabels=False
         out += xticks.draw(custommajortickmarks=xcustommajortickmarks,
                            customminortickmarks=xcustomminortickmarks,
                            custommajorticks=xcustommajorticks,
