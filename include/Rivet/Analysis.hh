@@ -1456,6 +1456,24 @@ namespace Rivet {
 
 
 
+    /// Helper for counter efficiency calculation.
+    ///
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    void efficiency(CounterPtr c1, CounterPtr c2, Estimate0DPtr est) const {
+      efficiency(*c1, *c2, est);
+    }
+
+    /// Helper for counter efficiency calculation.
+    ///
+    /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
+    void efficiency(const YODA::Counter& c1, const YODA::Counter& c2, Estimate0DPtr est) const {
+      const string path = est->path();
+      *est = YODA::efficiency(c1, c2);
+      est->setPath(path);
+    }
+
+
+
     /// Helper for histogram efficiency calculation.
     ///
     /// @note Assigns to the (already registered) output estimate, @a est. Preserves the path information of the target.
