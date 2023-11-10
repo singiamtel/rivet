@@ -71,11 +71,11 @@ def convert_legacy_plotfile(filename, hpath, section='PLOT'):
     Raises
     ------
     ValueError
-        If section is not PLOT or HISTOGRAM.
+        If section is not PLOT, HISTOGRAM or TEXT.
         This includes the SPECIAL and FUNCTION sections, which could be parsed before.
     """
-    if section not in ('PLOT', 'HISTOGRAM'):
-        raise ValueError('Expected section to be PLOT or HISTOGRAM but got {}.'.format(section))
+    if section not in ('PLOT', 'HISTOGRAM', 'TEXT'):
+        raise ValueError('Expected section to be PLOT, HISTOGRAM or TEXT but got {}.'.format(section))
 
     ## Assemble the list of headers from any matching plotinfo paths and additional style files
     pat_paths = {}
@@ -84,6 +84,7 @@ def convert_legacy_plotfile(filename, hpath, section='PLOT'):
     if not os.access(filename, os.R_OK):
         return {}
     startreading = False
+    isTextBox = False
     with open(filename) as f:
         msec = None
         for line in f:
@@ -103,10 +104,28 @@ def convert_legacy_plotfile(filename, hpath, section='PLOT'):
                         msec = m2
                         startreading = True
                         continue
+            m = pat_begin_name_block.match(line)
+            if m:
+                tag, pathpath, name = m.group(2,3,4)
+                if pathpat not in pat_paths:
+                    try:
+                        pat_paths[pathpat] = re.compile(pathpat)
+                    except TypeError:
+                        logging.debug("Error reading plot file for {}. Skipping.".format(filename))
+                        return {}
+                if tag == 'TEXT':
+                    m2 = pat_paths[pathpat].match(hpath)
+                    if m2:
+                        msec = m2
+                        startreading = True
+                        isTextBox = 'text_'+name
+                        ret[isTextBox] = { }
+                        continue
             if not startreading:
                 continue
             if _is_end_marker(line, section):
                 startreading = False
+                isTextBox = False
                 continue
             elif _is_comment(line):
                 continue
@@ -123,7 +142,10 @@ def convert_legacy_plotfile(filename, hpath, section='PLOT'):
                         value = msec.expand(value)
                     except Exception as e: # TODO: bad exception handling
                         value = oldval #< roll back escapes if it goes wrong
-                ret[prop] = type_conversion(texpand(value)) #< expand TeX shorthands and convert type if necessary
+                if isTextBox:
+                    ret[isTextBox][prop] = type_conversion(texpand(value))
+                else:
+                    ret[prop] = type_conversion(texpand(value)) #< expand TeX shorthands and convert type if necessary
             vm = pat_property_opt.match(line)
             if vm:
                 prop, value = vm.group(1,2)
