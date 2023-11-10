@@ -29,7 +29,6 @@ namespace Rivet {
     ///  for Z reconstruction.
     /// @param clusterPhotons  Whether such photons are supposed to be
     ///  clustered to the lepton objects and thus Z mom
-    /// @param trackPhotons  Whether such photons should be considered constituent particles of the resonance
     /// @param masstarget  The expected (transverse) mass value, if resolving ambiguities
     ZFinder(const FinalState& inputfs,
 		const Cut& cuts,
@@ -37,11 +36,11 @@ namespace Rivet {
 		double minmass, double maxmass,
 		double dRmax=0.1,
 		LeptonOrigin chLeptons=LeptonOrigin::PROMPT,
-		PhotonOrigin clusterPhotons=PhotonOrigin::NODECAY,
-		PhotonsAsConstituents trackPhotons=PhotonsAsConstituents::NO,
-		double masstarget=91.2*GeV);
+	        PhotonOrigin clusterPhotons=PhotonOrigin::NODECAY,
+	        double masstarget=91.2*GeV);
     
-    /// Backward-compatible constructor with implicit chLeptons mode = PROMPTCHLEPTONS
+    /// @brief Backward-compatible constructor with implicit chLeptons mode = PROMPTCHLEPTONS
+    ///
     /// @deprecated Remove this and always use the constructor with chLeptons argument.
     ZFinder(const FinalState& inputfs,
 		const Cut& cuts,
@@ -49,10 +48,9 @@ namespace Rivet {
 		double minmass, double maxmass,
 		double dRmax,
 		PhotonOrigin clusterPhotons,
-		PhotonsAsConstituents trackPhotons=PhotonsAsConstituents::NO,
 		double masstarget=91.2*GeV)
       : ZFinder(inputfs, cuts, pid, minmass, maxmass,
-		dRmax, LeptonOrigin::PROMPT, clusterPhotons, trackPhotons, masstarget)
+		dRmax, LeptonOrigin::PROMPT, clusterPhotons, masstarget)
     {   }
 
 
@@ -112,10 +110,6 @@ namespace Rivet {
 
     /// Mass cuts to apply to clustered leptons (cf. InvMassFinalState)
     double _minmass, _maxmass, _masstarget;
-
-    /// Switch for tracking of photons (whether to include them in the Z particle)
-    /// This is relevant when the clustered photons need to be excluded from e.g. a jet finder
-    PhotonsAsConstituents _trackPhotons;
 
     /// Lepton flavour
     PdgId _pid;

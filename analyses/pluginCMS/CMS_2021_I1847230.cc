@@ -45,7 +45,7 @@ namespace Rivet {
          declare(fs, "FS");
   
          ZFinder zfinder(fs, Cuts::abseta < 5. and Cuts::pT > 30*GeV, PID::MUON, 70*GeV, 110*GeV, 0.2,
-			 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, 91.2*GeV);
+			 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, 91.2*GeV);
   
          declare(zfinder, "ZFinder");
          declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5), "JetsAK5_zj");

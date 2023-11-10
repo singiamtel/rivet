@@ -1,3 +1,8 @@
+2023-11-09  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Remove W/ZFinder option to not include dressing photons in the
+	particle constituents.
+
 2023-11-09  Christian Gutschow  <chris.g@cern.ch>
 
 	* Add missing efficiency calculation for Counters

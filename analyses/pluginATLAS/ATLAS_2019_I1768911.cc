@@ -27,10 +27,10 @@ namespace Rivet {
       const FinalState fs;
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 27*GeV;
       ZFinder zmmFinder(fs, cuts, PID::MUON, 66*GeV, 116*GeV, 0.1,
-		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zmmFinder, "ZFinder_mu");
       ZFinder zeeFinder(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1,
-		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zeeFinder, "ZFinder_el");
 
       // Book histograms

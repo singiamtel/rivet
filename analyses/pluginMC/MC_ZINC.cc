@@ -30,7 +30,7 @@ namespace Rivet {
       FinalState fs;
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
 
-      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR, PhotonOrigin::NODECAY);
       declare(zfinder, "ZFinder");
 
       book(_h_Z_mass ,"Z_mass", 50, 66.0, 116.0);

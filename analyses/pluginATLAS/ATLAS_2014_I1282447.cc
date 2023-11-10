@@ -143,11 +143,11 @@ namespace Rivet {
 
       /// should use sample WITHOUT QED radiation off the electron
       WFinder wfinder_born_el(fs, cuts, PID::ELECTRON, 25*GeV, 8000*GeV, 15*GeV, 0.1,
-			      LeptonOrigin::PROMPT, PhotonOrigin::ALL, PhotonsAsConstituents::YES);
+			      LeptonOrigin::PROMPT, PhotonOrigin::ALL);
       declare(wfinder_born_el, "WFinder_born_el");
 
       WFinder wfinder_born_mu(fs, cuts, PID::MUON , 25*GeV, 8000*GeV, 15*GeV, 0.1,
-			      LeptonOrigin::PROMPT, PhotonOrigin::ALL, PhotonsAsConstituents::YES);
+			      LeptonOrigin::PROMPT, PhotonOrigin::ALL);
       declare(wfinder_born_mu, "WFinder_born_mu");
 
       // all hadrons that could be coming from a charm decay --

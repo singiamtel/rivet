@@ -52,12 +52,11 @@ namespace Rivet {
       // Boson finders
       FinalState fs;
       WFinder wfinder(fs, cuts, _mode > 1? PID::MUON : PID::ELECTRON, 40*GeV, 8*TeV, 0., 0.1,
-				              LeptonOrigin::PROMPT, PhotonOrigin::NODECAY,
-                      PhotonsAsConstituents::NO, MassVariable::MT);
+		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
       declare(wfinder, "WF");
 
       ZFinder zfinder(fs, cuts, _mode > 1? PID::MUON : PID::ELECTRON, 66*GeV, 116*GeV, 0.1,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zfinder, "ZF");
 
       // Jets

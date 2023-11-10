@@ -19,7 +19,6 @@ namespace Rivet {
                    double dRmax,
                    LeptonOrigin chLeptons,
                    PhotonOrigin clusterPhotons,
-                   PhotonsAsConstituents trackPhotons,
                    MassVariable masstype,
                    double masstarget) {
     setName("WFinder");
@@ -29,7 +28,6 @@ namespace Rivet {
     _maxmass = maxmass;
     _masstarget = masstarget;
     _pid = abs(pid);
-    _trackPhotons = trackPhotons;
     _useTransverseMass = (masstype == MassVariable::MT);
 
     // Check that the arguments are legal
@@ -88,12 +86,12 @@ namespace Rivet {
     if (dlcmp != CmpState::EQ) return dlcmp;
 
     const WFinder& other = dynamic_cast<const WFinder&>(p);
-    return (cmp(_minmass, other._minmass) ||
-            cmp(_maxmass, other._maxmass) ||
-            cmp(_useTransverseMass, other._useTransverseMass) ||
-            cmp(_etMissMin, other._etMissMin) ||
-            cmp(_pid, other._pid) ||
-            cmp(_trackPhotons, other._trackPhotons));
+    return \
+      cmp(_minmass, other._minmass) ||
+      cmp(_maxmass, other._maxmass) ||
+      cmp(_useTransverseMass, other._useTransverseMass) ||
+      cmp(_etMissMin, other._etMissMin) ||
+      cmp(_pid, other._pid);
   }
 
 
@@ -150,7 +148,7 @@ namespace Rivet {
     // Add (dressed) lepton constituents to the W (skipping photons if requested)
     /// @todo Do we need to add all used invisibles to _theParticles ?
     const Particle l = p1.isChargedLepton() ? p1 : p2;
-    _leptons += (_trackPhotons == PhotonsAsConstituents::YES) ? l : l.constituents().front();
+    _leptons += l;
     w.addConstituent(_leptons.back());
     const Particle nu = p1.isNeutrino() ? p1 : p2;
     _neutrinos += nu;

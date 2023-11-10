@@ -33,7 +33,7 @@ namespace Rivet {
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
 
       ZFinder zfinder(fs, cuts, _mode==1? PID::ELECTRON : PID::MUON, 76.0*GeV, 106.0*GeV, 0.1,
-                      LeptonOrigin::ALL, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+                      LeptonOrigin::ALL, PhotonOrigin::NODECAY);
       declare(zfinder, "ZFinder");
 
       VetoedFinalState jet_fs(fs);

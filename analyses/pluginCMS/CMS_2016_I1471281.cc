@@ -36,12 +36,12 @@ namespace Rivet {
 
         // Dressed Ws ...
         WFinder wmunu_Finder(fs, cut_mu, PID::MUON, 0*GeV, YODA::MAXDOUBLE, 0*GeV, 0,
-			     LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+			     LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
         declare(wmunu_Finder, "Wmunu_Finder");
 
         // Dressed Zs ...
         ZFinder zmumu_Finder(fs, cut_mu, PID::MUON, 60*GeV, 120*GeV, 0,
-			     LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+			     LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
         declare(zmumu_Finder, "Zmumu_Finder");
 
         // Histograms

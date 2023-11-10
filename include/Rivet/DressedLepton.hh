@@ -12,21 +12,16 @@ namespace Rivet {
   enum class LeptonOrigin { PROMPT=1, NODECAY=1, ALL };
 
   /// Reconstruction/dressing mode for leptons
-  enum class LeptonReco { ALL=0, ALL_BARE=0, ALL_DRESSED, PROMPT_BARE, PROMPT_DRESSED };
+  enum class LeptonReco { ALL=0, ALL_BARE=0,
+			  ALL_DRESSED=1,
+			  DIRECT_BARE=2, PROMPT_BARE=2,
+			  DIRECT_DRESSED=3, PROMPT_DRESSED=3 };
 
   /// The approach taken to photon dressing of leptons
   enum class DressingType { DR=0, CONE=0, CLUSTER=1, AKT=1 };
 
   /// Accepted classes of lepton origin  
   enum class PhotonOrigin { NONE=0, PROMPT=1, NODECAY=1, ALL };
-
-  /// @brief Whether to add photons as resonance constituents
-  ///
-  /// @deprecated Immediately to be removed, as it doesn't do what it
-  /// says, and is a dreadful idea better achieved through modern
-  /// Particle::constituents()
-  enum class PhotonsAsConstituents { NO, YES };
-
 
 
   /// @brief A charged lepton meta-particle created by clustering photons close to the bare lepton

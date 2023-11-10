@@ -26,7 +26,7 @@ namespace Rivet {
 
       // Initialise and register projections
       ZFinder zmmFind(FinalState(), Cuts::pT > 0*GeV, PID::MUON, 76.1876*GeV, 106.1876*GeV, 0.1,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zmmFind, "ZmmFind");
 
       // Book histograms

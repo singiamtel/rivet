@@ -23,7 +23,7 @@ namespace Rivet {
       /// @todo These clustering arguments look odd: are they ok?
       Cut cut = Cuts::abseta < 1.7 && Cuts::pT > 15*GeV;
       ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2,
-		      PhotonOrigin::NONE, PhotonsAsConstituents::YES);
+		      PhotonOrigin::NONE);
       declare(zfinder, "ZFinder");
 
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);

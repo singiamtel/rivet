@@ -55,7 +55,7 @@ namespace Rivet {
 			Cuts::pT > mu_pt*GeV  && Cuts::abseta < eta_max,
 			PID::MUON,
 			mz_min*GeV, mz_max*GeV,
-			0.1, PhotonOrigin::NONE, PhotonsAsConstituents::NO);
+			0.1, PhotonOrigin::NONE);
 	declare(zfinder, "ZFinder");
 
 	eta_max = 2.4;
