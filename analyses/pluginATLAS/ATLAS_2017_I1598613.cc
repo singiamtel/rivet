@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/HeavyHadrons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
@@ -42,7 +42,7 @@ namespace Rivet {
         FinalState photons(Cuts::abspid == PID::PHOTON);
         FinalState muons(Cuts::abspid == PID::MUON);
         Cut eta_lep = Cuts::abseta < 2.5;
-        DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 6*GeV, PhotonOrigin::ALL);
+        LeptonFinder dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 6*GeV, PhotonOrigin::ALL);
         declare(dressedmuons, "dressedmuons");
       } else {
         declare(HeavyHadrons(Cuts::absrap < 2.4 && Cuts::pT > 15.5*GeV), "BHadrons");
@@ -110,11 +110,11 @@ namespace Rivet {
       if (_mode == 0) { // the 3-muon-level analysis
 
         // First, simply check that we have enough muons
-        const vector<DressedLepton> muons = apply<DressedLeptons>(event, "dressedmuons").dressedLeptons();
+        const DressedLeptons muons = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
         if (muons.size() < 3)  vetoEvent;
 
         // Not sure if this is going to work, but ..
-        vector<DressedLepton> Jpsi_muons, third_muons;
+        DressedLeptons Jpsi_muons, third_muons;
         for (const DressedLepton& mu : muons) {
 	  const Particle& baremu = mu.bareLepton();
           if (baremu.fromBottom() && baremu.hasAncestor(PID::JPSI)) {

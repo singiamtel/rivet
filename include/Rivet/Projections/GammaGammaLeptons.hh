@@ -5,7 +5,7 @@
 #include "Rivet/Projections/Beam.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/HadronicFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/UndressBeamLeptons.hh"
 #include "Rivet/Particle.hh"
 #include "Rivet/Event.hh"
@@ -41,11 +41,11 @@ namespace Rivet {
       case LeptonReco::ALL:
 	declare(FinalState(cuts), "LFS");
       case LeptonReco::ALL_DRESSED:
-        declare(DressedLeptons(FinalState(), dressDR, cuts, PhotonOrigin::ALL), "LFS");
+        declare(LeptonFinder(FinalState(), dressDR, cuts, PhotonOrigin::ALL), "LFS");
       case LeptonReco::PROMPT_BARE:
         declare(PromptFinalState(cuts), "LFS");
       case LeptonReco::PROMPT_DRESSED:
-        declare(DressedLeptons(PromptFinalState(), dressDR, cuts), "LFS");
+        declare(LeptonFinder(PromptFinalState(), dressDR, cuts), "LFS");
       }
     }
 

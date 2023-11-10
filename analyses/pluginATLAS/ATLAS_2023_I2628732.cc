@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
@@ -29,8 +29,8 @@ namespace Rivet {
       // Get dressed leptons
       IdentifiedFinalState lepids(fs, {{PID::ELECTRON, PID::POSITRON, PID::MUON, PID::ANTIMUON}});
       PromptFinalState leptons(lepids, TauDecaysAs::NONPROMPT);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, cuts, PhotonOrigin::ALL);
-      declare(dressedleptons, "DressedLeptons");
+      LeptonFinder dressedleptons(photons, leptons, 0.1, cuts, PhotonOrigin::ALL);
+      declare(dressedleptons, "LeptonFinder");
 
       // unstable final-state for Ds
       declare(UnstableParticles(), "UFS");
@@ -57,7 +57,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event &event) {
       // Retrieve the dressed electrons
-      const Particles &signal_leptons = apply<DressedLeptons>(event, "DressedLeptons").particlesByPt();
+      const Particles &signal_leptons = apply<LeptonFinder>(event, "LeptonFinder").particlesByPt();
       if (signal_leptons.size() != 1)  vetoEvent;
 
       const Particle &lepton = signal_leptons[0];

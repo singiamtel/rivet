@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -46,7 +46,7 @@ namespace Rivet {
       // Dress the leptons
       FinalState dressPhotons(Cuts::abspid == PID::PHOTON);
       Cut lepCuts = (Cuts::abseta < 2.5) && (Cuts::pT > 25*GeV);
-      DressedLeptons dressedLeptons(dressPhotons, leptons, 0.1, lepCuts);
+      LeptonFinder dressedLeptons(dressPhotons, leptons, 0.1, lepCuts);
       declare(dressedLeptons, "Leptons");
 
       // Jet alg input
@@ -60,7 +60,7 @@ namespace Rivet {
 
       // Remove prompt dressed muons (muons + associated photons) from jet input
       PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons dressedmuons(dressPhotons, muons, 0.1);
+      LeptonFinder dressedmuons(dressPhotons, muons, 0.1);
       vfs.addVetoOnThisFinalState(dressedmuons);
 
       // Jet clustering
@@ -86,7 +86,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Fetch objects
-      const vector<DressedLepton>& leptons = apply<DressedLeptons>(event, "Leptons").dressedLeptons();
+      const DressedLeptons& leptons = apply<LeptonFinder>(event, "Leptons").dressedLeptons();
       Particles photons = apply<PromptFinalState>(event, "Photons").particles();
       ChargedFinalState charged = apply<ChargedFinalState>(event, "CFS");
       Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);

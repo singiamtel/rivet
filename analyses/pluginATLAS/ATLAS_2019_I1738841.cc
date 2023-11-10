@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
@@ -28,13 +28,13 @@ namespace Rivet {
       FinalState photons(Cuts::abspid == PID::PHOTON);
 
       Cut dressedLep_cuts = (Cuts::abseta < 2.5) && (Cuts::pT > 27*GeV);
-      DressedLeptons dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
       declare(dressedLeps, "dressedLeptons");
 
       // veto on leptons from prompt tau decays
       VetoedFinalState lepsFromTaus(PromptFinalState(allLeps, TauDecaysAs::PROMPT));
       lepsFromTaus.addVetoOnThisFinalState(promptLeps);
-      DressedLeptons vetoLeps(photons, lepsFromTaus, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
+      LeptonFinder vetoLeps(photons, lepsFromTaus, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
       declare(vetoLeps, "vetoLeptons");
 
       declare(MissingMomentum(), "eTmiss");
@@ -53,9 +53,9 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      if (apply<DressedLeptons>(event, "vetoLeptons").dressedLeptons().size())  vetoEvent;
+      if (apply<LeptonFinder>(event, "vetoLeptons").dressedLeptons().size())  vetoEvent;
 
-      const vector<DressedLepton> &dressedLeptons = apply<DressedLeptons>(event, "dressedLeptons").dressedLeptons();
+      const DressedLeptons &dressedLeptons = apply<LeptonFinder>(event, "dressedLeptons").dressedLeptons();
       if (dressedLeptons.size() != 2) vetoEvent;
       const Particle& lep1 = dressedLeptons[0];
       const Particle& lep2 = dressedLeptons[1];

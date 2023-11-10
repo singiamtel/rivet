@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VisibleFinalState.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -37,12 +37,12 @@ namespace Rivet {
 
       IdentifiedFinalState bareMuons(fs_notaudecay);
       bareMuons.acceptIdPair(PID::MUON);
-      declare(DressedLeptons(fs, bareMuons, /*dRmax = */0.1,
+      declare(LeptonFinder(fs, bareMuons, /*dRmax = */0.1,
                              Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "muons");
 
       IdentifiedFinalState bareElectrons(fs_notaudecay);
       bareElectrons.acceptIdPair(PID::ELECTRON);
-      declare(DressedLeptons(fs, bareElectrons, /*dRmax =*/ 0.1,
+      declare(LeptonFinder(fs, bareElectrons, /*dRmax =*/ 0.1,
                              Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "electrons");
 
       FastJets jets(visfs, JetAlg::ANTIKT, 0.4);
@@ -89,8 +89,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get leptons
-      const Particles& muons = apply<DressedLeptons>(event, "muons").particlesByPt();
-      const Particles& electrons = apply<DressedLeptons>(event, "electrons").particlesByPt();
+      const Particles& muons = apply<LeptonFinder>(event, "muons").particlesByPt();
+      const Particles& electrons = apply<LeptonFinder>(event, "electrons").particlesByPt();
 
       // Look for Z->ee
       std::unique_ptr<Particle> z = zfinder(electrons);

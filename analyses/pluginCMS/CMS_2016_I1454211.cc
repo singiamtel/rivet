@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PartonicTops.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -44,12 +44,12 @@ namespace Rivet {
       
       IdentifiedFinalState el_id(fs, {{PID::ELECTRON, -PID::ELECTRON}});
       PromptFinalState electrons(el_id);
-      DressedLeptons dressed_electrons(photons, electrons, 0.1, leptonCuts);
+      LeptonFinder dressed_electrons(photons, electrons, 0.1, leptonCuts);
       declare(dressed_electrons, "DressedElectrons");
       
       IdentifiedFinalState mu_id(fs, {{PID::MUON, -PID::MUON}});
       PromptFinalState muons(mu_id);
-      DressedLeptons dressed_muons(photons, muons, 0.1, leptonCuts);
+      LeptonFinder dressed_muons(photons, muons, 0.1, leptonCuts);
       declare(dressed_muons, "DressedMuons");
 
       // Projection for jets
@@ -119,8 +119,8 @@ namespace Rivet {
       const FourMomentum& partonTopP4 = hadronicpartontops.front();
 
       // Do particle-level selection and channel determination
-      const DressedLeptons& dressed_electrons = apply<DressedLeptons>(event, "DressedElectrons");
-      const DressedLeptons& dressed_muons = apply<DressedLeptons>(event, "DressedMuons");
+      const LeptonFinder& dressed_electrons = apply<LeptonFinder>(event, "DressedElectrons");
+      const LeptonFinder& dressed_muons = apply<LeptonFinder>(event, "DressedMuons");
 
       bool passParticleLep = false, passParticleTop = false;
       FourMomentum lepton, particleTopP4;

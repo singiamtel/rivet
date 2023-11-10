@@ -5,7 +5,7 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -31,11 +31,11 @@ namespace Rivet {
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_mu(all_photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(all_photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_el(all_photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(all_photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
@@ -54,10 +54,10 @@ namespace Rivet {
       // Kinematic cuts for leptons
       const Cut cuts_lep = Cuts::pT > 25*GeV && Cuts::abseta < 2.5;
 
-      DressedLeptons dressed_electrons(photons, electrons, 0.1, cuts_lep);
+      LeptonFinder dressed_electrons(photons, electrons, 0.1, cuts_lep);
       declare(dressed_electrons, "DressedElectrons");
 
-      DressedLeptons dressed_muons(photons, muons, 0.1, cuts_lep);
+      LeptonFinder dressed_muons(photons, muons, 0.1, cuts_lep);
       declare(dressed_muons, "DressedMuons");
 
 
@@ -83,8 +83,8 @@ namespace Rivet {
 
       // access fiducial electrons and muons
       const Particle *l1 = nullptr, *l2 = nullptr;
-      auto muons = apply<DressedLeptons>(event, "DressedMuons").dressedLeptons();
-      auto elecs = apply<DressedLeptons>(event, "DressedElectrons").dressedLeptons();
+      auto muons = apply<LeptonFinder>(event, "DressedMuons").dressedLeptons();
+      auto elecs = apply<LeptonFinder>(event, "DressedElectrons").dressedLeptons();
 
       // lepton-jet overlap removal (note: muons are not included in jet finding)
       // Jets eta < 2.5, pT > 30GeV for overlap removal

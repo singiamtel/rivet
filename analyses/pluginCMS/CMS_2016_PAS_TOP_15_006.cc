@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
@@ -26,8 +26,8 @@ namespace Rivet {
       // Complete final state
       FinalState fs;
       Cut superLooseLeptonCuts = Cuts::pt > 5*GeV;
-      SpecialDressedLeptons dressedleptons(fs, superLooseLeptonCuts);
-      declare(dressedleptons, "DressedLeptons");
+      SpecialLeptonFinder dressedleptons(fs, superLooseLeptonCuts);
+      declare(dressedleptons, "LeptonFinder");
 
       // Projection for jets
       VetoedFinalState fsForJets(fs);
@@ -43,7 +43,7 @@ namespace Rivet {
     /// Per-event analysis
     void analyze(const Event& event) {
       // Select ttbar -> lepton+jets
-      const SpecialDressedLeptons& dressedleptons = apply<SpecialDressedLeptons>(event, "DressedLeptons");
+      const SpecialLeptonFinder& dressedleptons = apply<SpecialLeptonFinder>(event, "LeptonFinder");
       vector<FourMomentum> selleptons;
       for (const DressedLepton& dressedlepton : dressedleptons.dressedLeptons()) {
         // Select good leptons
@@ -92,14 +92,14 @@ namespace Rivet {
     /// @brief Special dressed lepton finder
     ///
     /// Find dressed leptons by clustering all leptons and photons
-    class SpecialDressedLeptons : public FinalState {
+    class SpecialLeptonFinder : public FinalState {
     public:
 
       /// Constructor
-      SpecialDressedLeptons(const FinalState& fs, const Cut& cut)
+      SpecialLeptonFinder(const FinalState& fs, const Cut& cut)
         : FinalState(cut)
       {
-        setName("SpecialDressedLeptons");
+        setName("SpecialLeptonFinder");
         IdentifiedFinalState ifs(fs);
         ifs.acceptIdPair(PID::PHOTON);
         ifs.acceptIdPair(PID::ELECTRON);
@@ -110,21 +110,21 @@ namespace Rivet {
 
       /// Clone on the heap
       virtual unique_ptr<Projection> clone() const {
-        return unique_ptr<Projection>(new SpecialDressedLeptons(*this));
+        return unique_ptr<Projection>(new SpecialLeptonFinder(*this));
       }
 
       /// Import to avoid warnings about overload-hiding
       using Projection::operator =;
 
       /// Retrieve the dressed leptons
-      const vector<DressedLepton>& dressedLeptons() const { return _clusteredLeptons; }
+      const DressedLeptons& dressedLeptons() const { return _clusteredLeptons; }
 
       /// Perform the calculation
       void project(const Event& e) {
         _theParticles.clear();
         _clusteredLeptons.clear();
 
-        vector<DressedLepton> allClusteredLeptons;
+        DressedLeptons allClusteredLeptons;
         const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(5*GeV);
         for (const Jet& jet : jets) {
           Particle lepCand;
@@ -157,7 +157,7 @@ namespace Rivet {
     private:
 
       /// Container which stores the clustered lepton objects
-      vector<DressedLepton> _clusteredLeptons;
+      DressedLeptons _clusteredLeptons;
 
     };
 

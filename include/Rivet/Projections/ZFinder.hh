@@ -3,9 +3,8 @@
 #define RIVET_ZFinder_HH
 
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.fhh"
 
 namespace Rivet {
  

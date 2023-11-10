@@ -3,7 +3,7 @@
 #include "Rivet/Projections/VisibleFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -26,7 +26,7 @@ namespace Rivet {
       FinalState all_photons(vfs, Cuts::abspid == PID::PHOTON);
       FinalState leptons(vfs, Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
 
-      DressedLeptons dressed_leptons(all_photons, leptons, 0.1,
+      LeptonFinder dressed_leptons(all_photons, leptons, 0.1,
 				     Cuts::abseta < 2.4 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(dressed_leptons, "MyLeptons");
 
@@ -117,7 +117,7 @@ namespace Rivet {
       Particles leptons, vetoleptons, additionalobjects, additionaljets;
 
       const Particles& isopars = apply<VetoedFinalState>(event, "IsoParticles").particles();
-      const Particles& dressedleptons = apply<DressedLeptons>(event, "MyLeptons").particles();
+      const Particles& dressedleptons = apply<LeptonFinder>(event, "MyLeptons").particles();
       for (const Particle& lep : dressedleptons) {
         double isolation = sum(filter_select(isopars, deltaRLess(lep, 0.4)), Kin::pT, 0.);
         isolation = isolation/lep.pt();

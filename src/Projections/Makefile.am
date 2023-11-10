@@ -12,7 +12,6 @@ libRivetProjections_la_SOURCES = \
   DISKinematics.cc \
   DISLepton.cc \
   DISRapidityGap.cc \
-  DressedLeptons.cc \
   FastJets.cc \
   PxConePlugin.cc \
   FinalPartons.cc \
@@ -32,6 +31,7 @@ libRivetProjections_la_SOURCES = \
   JetFinder.cc \
   JetShape.cc \
   LeadingParticlesFinalState.cc \
+  LeptonFinder.cc \
   MergedFinalState.cc \
   MissingMomentum.cc \
   NeutralFinalState.cc \

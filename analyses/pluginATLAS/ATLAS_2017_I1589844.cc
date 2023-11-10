@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
@@ -46,8 +46,8 @@ namespace Rivet {
       bare_mu.acceptIdPair(PID::MUON);
       IdentifiedFinalState bare_el(fs);
       bare_el.acceptIdPair(PID::ELECTRON);
-      const DressedLeptons muons(fs, bare_mu, 0.1, cuts_mu, PhotonOrigin::ALL);
-      const DressedLeptons elecs(fs, bare_el, 0.1, cuts_el, PhotonOrigin::ALL);
+      const LeptonFinder muons(fs, bare_mu, 0.1, cuts_mu, PhotonOrigin::ALL);
+      const LeptonFinder elecs(fs, bare_el, 0.1, cuts_el, PhotonOrigin::ALL);
       declare(muons, "muons");
       declare(elecs, "elecs");
 
@@ -95,8 +95,8 @@ namespace Rivet {
     void analyze(const Event& e) {
 
       // Check we have a Z candidate:
-      const vector<DressedLepton>& muons = apply<DressedLeptons>(e, "muons").dressedLeptons();
-      const vector<DressedLepton>& elecs = apply<DressedLeptons>(e, "elecs").dressedLeptons();
+      const DressedLeptons& muons = apply<LeptonFinder>(e, "muons").dressedLeptons();
+      const DressedLeptons& elecs = apply<LeptonFinder>(e, "elecs").dressedLeptons();
 
       bool e_ok = elecs.size() == 2 && muons.empty();
       bool m_ok = elecs.empty() && muons.size() == 2;
@@ -106,7 +106,7 @@ namespace Rivet {
 
       string lep_type = elecs.size()? "el_" : "mu_";
 
-      const vector<DressedLepton>& leptons = elecs.size()? elecs : muons;
+      const DressedLeptons& leptons = elecs.size()? elecs : muons;
       if (leptons[0].charge()*leptons[1].charge() > 0) vetoEvent;
 
       const double dilepton_mass = (leptons[0].momentum() + leptons[1].momentum()).mass();

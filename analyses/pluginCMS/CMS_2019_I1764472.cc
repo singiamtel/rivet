@@ -5,7 +5,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
 
 #include "fastjet/contrib/Nsubjettiness.hh"

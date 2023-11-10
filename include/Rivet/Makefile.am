@@ -12,6 +12,7 @@ nobase_pkginclude_HEADERS += \
   Event.hh \
   ParticleBase.hh \
   Particle.fhh Particle.hh \
+  DressedLepton.hh \
   Jet.fhh Jet.hh \
   Projection.fhh Projection.hh \
   ProjectionApplier.hh \
@@ -46,8 +47,6 @@ nobase_pkginclude_HEADERS += \
   Projections/DISKinematics.hh \
   Projections/DISLepton.hh \
   Projections/DISRapidityGap.hh \
-  Projections/DressedLeptons.fhh \
-  Projections/DressedLeptons.hh \
   Projections/EventMixingFinalState.hh \
   Projections/FastJets.hh \
   Projections/PxConePlugin.hh \
@@ -71,6 +70,7 @@ nobase_pkginclude_HEADERS += \
   Projections/JetFinder.hh \
   Projections/JetShape.hh \
   Projections/LeadingParticlesFinalState.hh \
+  Projections/LeptonFinder.hh \
   Projections/LossyFinalState.hh \
   Projections/MergedFinalState.hh \
   Projections/METFinder.hh \

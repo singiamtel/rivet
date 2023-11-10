@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/TauFinder.hh"
 #include "Rivet/Projections/SmearedJets.hh"
 #include "Rivet/Projections/SmearedParticles.hh"
@@ -57,21 +57,21 @@ namespace Rivet {
 
       IdentifiedFinalState truthelectrons(Cuts::abseta < 5 && Cuts::pT > 10*GeV, {{PID::ELECTRON, PID::POSITRON}});
       declare(truthelectrons, "Electrons0");
-      DressedLeptons dressedelectrons(photons, truthelectrons, 0.2);
+      LeptonFinder dressedelectrons(photons, truthelectrons, 0.2);
       declare(dressedelectrons, "Electrons1");
       SmearedParticles recoelectrons(dressedelectrons, ELECTRON_RECOEFF_ATLAS_RUN2, ELECTRON_SMEAR_ATLAS_RUN2);
       declare(recoelectrons, "Electrons2");
 
       IdentifiedFinalState truthmuons(Cuts::abseta < 5 && Cuts::pT > 10*GeV, {{PID::MUON, PID::ANTIMUON}});
       declare(truthmuons, "Muons0");
-      DressedLeptons dressedmuons(photons, truthmuons, 0.2);
+      LeptonFinder dressedmuons(photons, truthmuons, 0.2);
       declare(dressedmuons, "Muons1");
       SmearedParticles recomuons(dressedmuons, MUON_EFF_ATLAS_RUN2, MUON_SMEAR_ATLAS_RUN2);
       declare(recomuons, "Muons2");
 
       TauFinder truthtaus(TauDecay::ANY, Cuts::abseta < 5 && Cuts::pT > 10*GeV);
       declare(truthtaus, "Taus0");
-      DressedLeptons dressedtaus(photons, truthtaus, 0.2);
+      LeptonFinder dressedtaus(photons, truthtaus, 0.2);
       declare(dressedtaus, "Taus1");
       SmearedParticles recotaus(dressedtaus, TAU_EFF_ATLAS_RUN2, TAU_SMEAR_ATLAS_RUN2);
       declare(recotaus, "Taus2");

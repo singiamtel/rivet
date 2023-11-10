@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 
@@ -35,20 +35,20 @@ namespace Rivet {
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON);
       muons.acceptTauDecays(true);
       declare(muons, "muons");
 
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(dressedmuons, "dressedmuons");
 
-      DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
       declare(ewdressedmuons, "ewdressedmuons");
 
       PromptFinalState taus(eta_full && Cuts::abspid == PID::TAU);
@@ -135,8 +135,8 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      vector<DressedLepton> elecs = apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons();
-      vector<DressedLepton> muons = apply<DressedLeptons>(event, "dressedmuons").dressedLeptons();
+      DressedLeptons elecs = apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons();
+      DressedLeptons muons = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
       Particles taus = apply<PromptFinalState>(event, "taus").particlesByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
 

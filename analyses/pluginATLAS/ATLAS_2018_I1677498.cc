@@ -1,7 +1,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -23,11 +23,11 @@ namespace Rivet {
 
       PromptFinalState photons(Cuts::abspid == PID::PHOTON, TauDecaysAs::PROMPT);
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons elecs(photons, bare_el, 0.1, Cuts::pT > 7*GeV && Cuts::abseta < 2.47);
+      LeptonFinder elecs(photons, bare_el, 0.1, Cuts::pT > 7*GeV && Cuts::abseta < 2.47);
       declare(elecs, "elecs");
 
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons muons(photons, bare_mu, 0.1, Cuts::pT > 6*GeV && Cuts::abseta < 2.5);
+      LeptonFinder muons(photons, bare_mu, 0.1, Cuts::pT > 6*GeV && Cuts::abseta < 2.5);
       declare(muons, "muons");
 
       FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
@@ -54,9 +54,9 @@ namespace Rivet {
       if (bjets.size() != 2) vetoEvent;
 
       // Get dressed leptons
-      vector<DressedLepton> leptons;
-      for (auto& lep : apply<DressedLeptons>(event, "muons").dressedLeptons()) { leptons.push_back(lep); }
-      for (auto& lep : apply<DressedLeptons>(event, "elecs").dressedLeptons()) { leptons.push_back(lep); }
+      DressedLeptons leptons;
+      for (auto& lep : apply<LeptonFinder>(event, "muons").dressedLeptons()) { leptons.push_back(lep); }
+      for (auto& lep : apply<LeptonFinder>(event, "elecs").dressedLeptons()) { leptons.push_back(lep); }
 
       // 1. Find which light jets survive OR
       for (const auto& lep : leptons) {

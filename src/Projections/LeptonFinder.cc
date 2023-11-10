@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/MergedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
@@ -7,57 +7,16 @@
 namespace Rivet {
 
 
-  // On DressedLepton helper class
-  //{
-
-  DressedLepton::DressedLepton(const Particle& dlepton)
-    : Particle(dlepton)
-  {
-    if (dlepton.isComposite()) {
-      Particles dressing;
-      dressing.reserve(dlepton.constituents().size()-1);
-      for (const Particle& p : dlepton.constituents()) {
-        if (p.isChargedLepton()) setConstituents({{p}}); //< bare lepton is first constituent
-        else dressing.push_back(p);
-      }
-      addConstituents(dressing);
-    } else {
-      setConstituents({{dlepton}});
-    }
-  }
-
-  DressedLepton::DressedLepton(const Particle& lepton, const Particles& photons, bool momsum)
-    : Particle(lepton.pid(), lepton.momentum())
-  {
-    setConstituents({{lepton}}); //< bare lepton is first constituent
-    addConstituents(photons, momsum);
-  }
-
-  void DressedLepton::addPhoton(const Particle& p, bool momsum) {
-    if (p.pid() != PID::PHOTON) throw Error("Clustering a non-photon on to a DressedLepton:"+to_string(p.pid()));
-    addConstituent(p, momsum);
-  }
-
-  const Particle& DressedLepton::bareLepton() const {
-    const Particle& l = constituents().front();
-    if (!l.isChargedLepton()) throw Error("First constituent of a DressedLepton is not a bare lepton: oops");
-    return l;
-  }
-
-  //}
-
-
-
   // Separate-FS version
-  DressedLeptons::DressedLeptons(const FinalState& photons, const FinalState& bareleptons,
-                                 double dRmax, const Cut& cut,
-				 PhotonOrigin whichphotons, DressingType dressing)
+  LeptonFinder::LeptonFinder(const FinalState& photons, const FinalState& bareleptons,
+                             double dRmax, const Cut& cut,
+                             PhotonOrigin whichphotons, DressingType dressing)
     : FinalState(cut),
       _dRmax(dRmax),
       _fromDecay(whichphotons == PhotonOrigin::ALL),
       _useJetClustering(dressing != DressingType::CONE)
   {
-    setName("DressedLeptons");
+    setName("LeptonFinder");
 
     // Find photons -- specialising to prompt photons if decay photons are to be vetoed
     IdentifiedFinalState photonfs(photons, PID::PHOTON);
@@ -84,15 +43,15 @@ namespace Rivet {
 
 
   // Single-FS version
-  DressedLeptons::DressedLeptons(const FinalState& allfs, double dRmax, const Cut& cut,
-				 PhotonOrigin whichphotons, DressingType dressing)
-    : DressedLeptons(allfs, allfs, dRmax, cut, whichphotons, dressing)
+  LeptonFinder::LeptonFinder(const FinalState& allfs, double dRmax, const Cut& cut,
+                             PhotonOrigin whichphotons, DressingType dressing)
+    : LeptonFinder(allfs, allfs, dRmax, cut, whichphotons, dressing)
   {     }
 
 
-  CmpState DressedLeptons::compare(const Projection& p) const {
+  CmpState LeptonFinder::compare(const Projection& p) const {
     // Compare the two as final states (for pT and eta cuts)
-    const DressedLeptons& other = dynamic_cast<const DressedLeptons&>(p);
+    const LeptonFinder& other = dynamic_cast<const LeptonFinder&>(p);
     CmpState fscmp = FinalState::compare(other);
     if (fscmp != CmpState::EQ) return fscmp;
 
@@ -108,11 +67,11 @@ namespace Rivet {
   }
 
 
-  void DressedLeptons::project(const Event& e) {
+  void LeptonFinder::project(const Event& e) {
     _theParticles.clear();
 
     // Get bare leptons
-    const Particles bareleptons = apply<ParticleFinder>(e, "Leptons").particles(); 
+    const Particles bareleptons = apply<ParticleFinder>(e, "Leptons").particles();
     // .particles(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON || Cuts::abspid == PID::TAU);
     if (bareleptons.empty()) return;
 

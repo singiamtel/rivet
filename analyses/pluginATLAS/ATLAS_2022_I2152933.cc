@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
@@ -31,12 +31,12 @@ namespace Rivet {
     	// Muons
     	Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 25*GeV;
     	PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-    	DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
+    	LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
     	declare(all_dressed_mu, "muons");
 
     	// Electrons
     	PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-    	DressedLeptons all_dressed_el(photons, bare_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
+    	LeptonFinder all_dressed_el(photons, bare_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
     	declare(all_dressed_el, "electrons");
 
     	//Jet forming
@@ -70,8 +70,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       // Retrieve dressed leptons, sorted by pT
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
-      vector<DressedLepton> muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
+      DressedLeptons muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
 

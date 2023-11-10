@@ -1,7 +1,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
@@ -32,8 +32,8 @@ namespace Rivet {
       // Projection to find the muons
       PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
 
-      DressedLeptons dressedelectrons25(photons, electrons, 0.1, lep_cuts25, PhotonOrigin::ALL);
-      DressedLeptons dressedmuons25(photons, muons, 0.1, lep_cuts25, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons25(photons, electrons, 0.1, lep_cuts25, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons25(photons, muons, 0.1, lep_cuts25, PhotonOrigin::ALL);
 
       declare(dressedelectrons25, "elecs");
       declare(dressedmuons25, "muons");
@@ -45,8 +45,8 @@ namespace Rivet {
       neutrinos.acceptTauDecays(true);
 
       PromptFinalState jet_photons(eta_full && Cuts::abspid == PID::PHOTON, TauDecaysAs::NONPROMPT);
-      DressedLeptons all_dressed_electrons(jet_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
-      DressedLeptons all_dressed_muons(jet_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_electrons(jet_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_muons(jet_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
 
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(all_dressed_electrons);
@@ -102,9 +102,9 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      vector<DressedLepton> leptons;
-      for (auto &lep : apply<DressedLeptons>(event, "muons").dressedLeptons()) { leptons.push_back(lep); }
-      for (auto &lep : apply<DressedLeptons>(event, "elecs").dressedLeptons()) { leptons.push_back(lep); }
+      DressedLeptons leptons;
+      for (auto &lep : apply<LeptonFinder>(event, "muons").dressedLeptons()) { leptons.push_back(lep); }
+      for (auto &lep : apply<LeptonFinder>(event, "elecs").dressedLeptons()) { leptons.push_back(lep); }
 
       const Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       for (const auto& jet : jets) {

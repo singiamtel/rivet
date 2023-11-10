@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -32,7 +32,7 @@ namespace Rivet {
       // dressed leptons
       const FinalState photon_fs = FinalState(Cuts::abspid == PID::PHOTON);
 
-      const DressedLeptons mu_dressed(photon_fs, mu_pfs, 0.1, Cuts::open());
+      const LeptonFinder mu_dressed(photon_fs, mu_pfs, 0.1, Cuts::open());
       declare(mu_dressed, "DressedMuons");
 
       book(_h_massMuMu, 3, 1, 1); /// muon channel result in full-phase space @ dressed level
@@ -44,7 +44,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const DressedLeptons muons_dressed = apply<DressedLeptons>(event, "DressedMuons");
+      const LeptonFinder muons_dressed = apply<LeptonFinder>(event, "DressedMuons");
       bool filled_mu = FillHistogram_DressedLepton(muons_dressed, 13);
       if ( filled_mu ) {
 
@@ -83,7 +83,7 @@ namespace Rivet {
 
 
     // select two opposite sign leptons with highest pT & fill the histogram for full-phase space diff. x-section
-    bool FillHistogram_DressedLepton(DressedLeptons leptons_dressed, int leptonID) {
+    bool FillHistogram_DressedLepton(LeptonFinder leptons_dressed, int leptonID) {
       bool filled = false;
 
       vector< DressedLepton > vec_dressedLepByPt = leptons_dressed.dressedLeptons();
@@ -112,7 +112,7 @@ namespace Rivet {
     }
 
 
-    void FindDressedLeptonPair_HighestPt(vector<DressedLepton>& vec_dressedLepByPt, int& index_lepton1, int& index_lepton2) {
+    void FindDressedLeptonPair_HighestPt(DressedLeptons& vec_dressedLepByPt, int& index_lepton1, int& index_lepton2) {
       // 1st lepton: lepton with highest pT
       int nLepton_dressed = int(vec_dressedLepByPt.size());
       for (int i=0; i<nLepton_dressed; ++i) {

@@ -36,10 +36,10 @@ namespace Rivet {
       FinalState photons(Cuts::abspid == PID::PHOTON);
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
       
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));

@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_ParticleAnalysis.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -25,7 +25,7 @@ namespace Rivet {
       } else if (!dressed) {
         declare(PromptFinalState(electrons), "Electrons");
       } else {
-        DressedLeptons dleps(FinalState(Cuts::abspid == PID::PHOTON), electrons, 0.1);
+        LeptonFinder dleps(FinalState(Cuts::abspid == PID::PHOTON), electrons, 0.1);
         declare(dleps, "Electrons");
       }
 

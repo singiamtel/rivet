@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -43,15 +43,15 @@ namespace Rivet {
       PromptFinalState el_bare_FS(Cuts::abseta < 5.0 && Cuts::abspid == PID::ELECTRON);
 
       // Project dressed electrons with pT > 15 GeV and |eta| < 2.47
-      DressedLeptons el_dressed_FS(ph_dressing_FS, el_bare_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
+      LeptonFinder el_dressed_FS(ph_dressing_FS, el_bare_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
       declare(el_dressed_FS,"EL_DRESSED_FS");
 
       // Project bare muons
       PromptFinalState mu_bare_FS(Cuts::abseta < 5.0 && Cuts::abspid == PID::MUON);
 
       // Project dressed muons with pT > 15 GeV and |eta| < 2.47
-      //DressedLeptons mu_dressed_FS(ph_dressing_FS, mu_bare_FS, 0.1, true, -2.47, 2.47, 15.0*GeV, false);
-      DressedLeptons mu_dressed_FS(ph_dressing_FS, mu_bare_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
+      //LeptonFinder mu_dressed_FS(ph_dressing_FS, mu_bare_FS, 0.1, true, -2.47, 2.47, 15.0*GeV, false);
+      LeptonFinder mu_dressed_FS(ph_dressing_FS, mu_bare_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
       declare(mu_dressed_FS,"MU_DRESSED_FS");
 
       // Final state excluding muons and neutrinos (for jet building and photon isolation)
@@ -111,8 +111,8 @@ namespace Rivet {
       const Particles& FS_ptcls         = apply<FinalState>(event, "FS").particles();
       const Particles& ptcls_veto_mu_nu = apply<VetoedFinalState>(event, "VETO_MU_NU_FS").particles();
       const Particles& photons          = apply<PromptFinalState>(event, "PH_FS").particlesByPt();
-      vector<DressedLepton> good_el          = apply<DressedLeptons>(event, "EL_DRESSED_FS").dressedLeptons();
-      vector<DressedLepton> good_mu          = apply<DressedLeptons>(event, "MU_DRESSED_FS").dressedLeptons();
+      DressedLeptons good_el          = apply<LeptonFinder>(event, "EL_DRESSED_FS").dressedLeptons();
+      DressedLeptons good_mu          = apply<LeptonFinder>(event, "MU_DRESSED_FS").dressedLeptons();
 
       // For isolation calculation
       float dR_iso    = 0.4;

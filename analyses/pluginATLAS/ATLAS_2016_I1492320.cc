@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/HeavyHadrons.hh"
 
@@ -33,11 +33,11 @@ namespace Rivet {
       // Charged leptons within acceptance
       const PromptFinalState chLep_fid = PromptFinalState(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       const PromptFinalState photon_fs = PromptFinalState(Cuts::abspid == PID::PHOTON);
-      const DressedLeptons dressed_leps(photon_fs, chLep_fid, 0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
-      declare(dressed_leps, "DressedLeptons");
+      const LeptonFinder dressed_leps(photon_fs, chLep_fid, 0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
+      declare(dressed_leps, "LeptonFinder");
 
-      const DressedLeptons dressed_leps2(photon_fs, chLep_fid, 0.1, Cuts::pT > 10*GeV);
-      declare(dressed_leps2, "DressedLeptons2");
+      const LeptonFinder dressed_leps2(photon_fs, chLep_fid, 0.1, Cuts::pT > 10*GeV);
+      declare(dressed_leps2, "LeptonFinder2");
 
 
       // Jets, anti-kt 0.4
@@ -67,7 +67,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the dressed leptons, sorted by pT of their constituent bare lepton (!!)
-      vector<DressedLepton> _vbs_lep = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
+      DressedLeptons _vbs_lep = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
       if (_vbs_lep.size() == 3 && _mode != 2) {
 	std::sort(_vbs_lep.begin(), _vbs_lep.end(), [](const DressedLepton& l1, const DressedLepton& l2) {
 	    return (l1.bareLepton().pT() > l2.bareLepton().pT());
@@ -142,7 +142,7 @@ namespace Rivet {
 
       if (_mode != 1){
 	// Get leptons
-	vector<DressedLepton> leps = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
+	DressedLeptons leps = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
 	if (leps.size() >= 2) {
 	  // Sort the dressed leptons by pt of their constituent lepton (bare lepton pt)
 	  std::sort(leps.begin(), leps.end() ,

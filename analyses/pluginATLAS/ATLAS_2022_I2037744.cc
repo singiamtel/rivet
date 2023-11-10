@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 
@@ -39,11 +39,11 @@ namespace Rivet {
             declare(electrons, "electrons");
 
             // Analysis dressed electrons
-            DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+            LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
             declare(dressedelectrons, "dressedelectrons");
 
             // "All" dressed electrons to be removed from input to jetbuilder
-            DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+            LeptonFinder ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
             declare(ewdressedelectrons, "ewdressedelectrons");
 
             //Final state muons, including from prompt tau decays
@@ -51,11 +51,11 @@ namespace Rivet {
             declare(muons, "muons");
 
             //Analysis dressed muons
-            DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+            LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
             declare(dressedmuons, "dressedmuons");
 
             //"All" dressed muons to be removed from input to jetbuilder and for use in METbuilder
-            DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+            LeptonFinder ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
             declare(ewdressedmuons, "ewdressedmuons");
 
             //Neutrinos to be removed from input to jetbuilder, acceptTauDecays=true
@@ -109,8 +109,8 @@ namespace Rivet {
         void analyze(const Event& event) {
 
             //----------Projections
-            vector<DressedLepton> electrons = apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons();
-            vector<DressedLepton> muons = apply<DressedLeptons>(event, "dressedmuons").dressedLeptons();
+            DressedLeptons electrons = apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons();
+            DressedLeptons muons = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
 
             // We a need seperate jet collection with 25GeV cut to perform OR with leptons
             const Jets& smalljets_25 = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25.0*GeV && Cuts::abseta <= 2.5);

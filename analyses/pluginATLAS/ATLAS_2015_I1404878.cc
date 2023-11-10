@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VisibleFinalState.hh"
 
@@ -39,10 +39,10 @@ namespace Rivet {
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       // Projection to find the muons
@@ -53,10 +53,10 @@ namespace Rivet {
       muons.acceptTauDecays(true);
       declare(muons, "muons");
 
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
 
-      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
 
       // Projection to find neutrinos
@@ -109,8 +109,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the selected objects, using the projections.
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons();
-      vector<DressedLepton> muons     = apply<DressedLeptons>(event, "dressedmuons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons();
+      DressedLeptons muons     = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
       const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       const FinalState& ifs = apply<FinalState>(event, "InvisibleFS");
 

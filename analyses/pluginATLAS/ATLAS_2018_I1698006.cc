@@ -4,7 +4,7 @@
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -41,7 +41,7 @@ namespace Rivet {
 	FinalState photons(Cuts::abspid == PID::PHOTON);
 	PromptFinalState promptLeps(allLeps);
 	Cut dressedLep_cuts = (Cuts::abseta < 2.7) && (Cuts::pT > 7*GeV);
-	DressedLeptons dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
+	LeptonFinder dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
 	declare(dressedLeps, "dressedLeptons");
       }
       
@@ -77,7 +77,7 @@ namespace Rivet {
 
 
       if (_mode==1) {
-	const vector<DressedLepton> &dressedLeptons = apply<DressedLeptons>(event, "dressedLeptons").dressedLeptons();
+	const DressedLeptons &dressedLeptons = apply<LeptonFinder>(event, "dressedLeptons").dressedLeptons();
 	if (dressedLeptons.size() > 0) vetoEvent;
       }
             

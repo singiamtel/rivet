@@ -5,7 +5,7 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MergedFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/InvMassFinalState.hh"
@@ -63,9 +63,9 @@ namespace Rivet {
         // Selection 1: ZZ-> llll selection
         Cut etaranges_lep = Cuts::abseta < 3.16 && Cuts::pT > 7*GeV;
 
-        DressedLeptons electron_sel4l(Photon, bare_EL, 0.1, etaranges_lep);
+        LeptonFinder electron_sel4l(Photon, bare_EL, 0.1, etaranges_lep);
         declare(electron_sel4l, "ELECTRON_sel4l");
-        DressedLeptons muon_sel4l(Photon, bare_MU, 0.1, etaranges_lep);
+        LeptonFinder muon_sel4l(Photon, bare_MU, 0.1, etaranges_lep);
         declare(muon_sel4l, "MUON_sel4l");
 
         // Both ZZ on-shell histos
@@ -84,9 +84,9 @@ namespace Rivet {
         // Selection 2: ZZ-> llnunu selection
         Cut etaranges_lep2 = Cuts::abseta < 2.5 && Cuts::pT > 10*GeV;
 
-        DressedLeptons electron_sel2l2nu(Photon, bare_EL, 0.1, etaranges_lep2);
+        LeptonFinder electron_sel2l2nu(Photon, bare_EL, 0.1, etaranges_lep2);
         declare(electron_sel2l2nu, "ELECTRON_sel2l2nu");
-        DressedLeptons muon_sel2l2nu(Photon, bare_MU, 0.1, etaranges_lep2);
+        LeptonFinder muon_sel2l2nu(Photon, bare_MU, 0.1, etaranges_lep2);
         declare(muon_sel2l2nu, "MUON_sel2l2nu");
 
         /// Get all neutrinos. These will not be used to form jets.
@@ -126,10 +126,10 @@ namespace Rivet {
 
         Particles leptons_sel4l;
 
-        const vector<DressedLepton>& mu_sel4l = apply<DressedLeptons>(e, "MUON_sel4l").dressedLeptons();
-        const vector<DressedLepton>& el_sel4l = apply<DressedLeptons>(e, "ELECTRON_sel4l").dressedLeptons();
+        const DressedLeptons& mu_sel4l = apply<LeptonFinder>(e, "MUON_sel4l").dressedLeptons();
+        const DressedLeptons& el_sel4l = apply<LeptonFinder>(e, "ELECTRON_sel4l").dressedLeptons();
 
-        vector<DressedLepton> leptonsFS_sel4l;
+        DressedLeptons leptonsFS_sel4l;
         leptonsFS_sel4l.insert( leptonsFS_sel4l.end(), mu_sel4l.begin(), mu_sel4l.end() );
         leptonsFS_sel4l.insert( leptonsFS_sel4l.end(), el_sel4l.begin(), el_sel4l.end() );
 
@@ -199,10 +199,10 @@ namespace Rivet {
         ////////////////////////////////////////////////////////////////////
 
         Particles leptons_sel2l2nu; // output
-        const vector<DressedLepton>& mu_sel2l2nu = apply<DressedLeptons>(e, "MUON_sel2l2nu").dressedLeptons();
-        const vector<DressedLepton>& el_sel2l2nu = apply<DressedLeptons>(e, "ELECTRON_sel2l2nu").dressedLeptons();
+        const DressedLeptons& mu_sel2l2nu = apply<LeptonFinder>(e, "MUON_sel2l2nu").dressedLeptons();
+        const DressedLeptons& el_sel2l2nu = apply<LeptonFinder>(e, "ELECTRON_sel2l2nu").dressedLeptons();
 
-        vector<DressedLepton> leptonsFS_sel2l2nu;
+        DressedLeptons leptonsFS_sel2l2nu;
         leptonsFS_sel2l2nu.insert( leptonsFS_sel2l2nu.end(), mu_sel2l2nu.begin(), mu_sel2l2nu.end() );
         leptonsFS_sel2l2nu.insert( leptonsFS_sel2l2nu.end(), el_sel2l2nu.begin(), el_sel2l2nu.end() );
 

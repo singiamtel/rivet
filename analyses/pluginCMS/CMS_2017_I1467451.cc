@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
@@ -46,8 +46,8 @@ namespace Rivet {
       prompt_photons.acceptMuonDecays(true);
       prompt_photons.acceptTauDecays(false);
 
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, lepConeSize, lepton_cut, PhotonOrigin::ALL);
-      declare(dressed_leptons, "DressedLeptons");
+      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, lepConeSize, lepton_cut, PhotonOrigin::ALL);
+      declare(dressed_leptons, "LeptonFinder");
 
       MissingMomentum Met(fsm);
       declare(Met, "MET");
@@ -63,7 +63,7 @@ namespace Rivet {
     void analyze(const Event& event) {
       const double weight = 1.0;
 
-      Particles leptons = apply<DressedLeptons>(event, "DressedLeptons").particlesByPt(10.0*GeV);
+      Particles leptons = apply<LeptonFinder>(event, "LeptonFinder").particlesByPt(10.0*GeV);
       if (leptons.size() < 2) vetoEvent;
       if (leptons[0].pT() < 20*GeV || leptons[1].pT() < 10*GeV) vetoEvent;
       if (leptons[0].charge() == leptons[1].charge()) vetoEvent;

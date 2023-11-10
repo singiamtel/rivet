@@ -3,7 +3,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -29,20 +29,20 @@ namespace Rivet {
 
       // Projection to find the electrons
       PromptFinalState electrons(eta_full && Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
-      DressedLeptons vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT >= 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT >= 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedelectrons, "vetodressedelectrons");
-      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       // Projection to find the muons
       PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 25*GeV, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
-      DressedLeptons vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedmuons, "vetodressedmuons");
-      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
 
       // Projection to find neutrinos and produce MET
@@ -81,11 +81,11 @@ namespace Rivet {
       }
 
       // Get the selected objects, using the projections.
-      const vector<DressedLepton> dressedelectrons = sortByPt(apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons());
-      const vector<DressedLepton> vetodressedelectrons = apply<DressedLeptons>(event, "vetodressedelectrons").dressedLeptons();
+      const DressedLeptons dressedelectrons = sortByPt(apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons());
+      const DressedLeptons vetodressedelectrons = apply<LeptonFinder>(event, "vetodressedelectrons").dressedLeptons();
 
-      const vector<DressedLepton> dressedmuons = sortByPt(apply<DressedLeptons>(event, "dressedmuons").dressedLeptons());
-      const vector<DressedLepton> vetodressedmuons = apply<DressedLeptons>(event, "vetodressedmuons").dressedLeptons();
+      const DressedLeptons dressedmuons = sortByPt(apply<LeptonFinder>(event, "dressedmuons").dressedLeptons());
+      const DressedLeptons vetodressedmuons = apply<LeptonFinder>(event, "vetodressedmuons").dressedLeptons();
 
       if (dressedelectrons.empty() && dressedmuons.empty())  vetoEvent;
       if (dressedelectrons.size()) {

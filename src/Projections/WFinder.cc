@@ -4,7 +4,7 @@
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/InvMassFinalState.hh"
 #include "Rivet/Projections/MergedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/Beam.hh"
 
@@ -53,9 +53,9 @@ namespace Rivet {
     // Dress the bare leptons
     const bool doClustering = (clusterPhotons != PhotonOrigin::NONE);
     // const bool useDecayPhotons = (clusterPhotons == PhotonOrigin::ALL);
-    DressedLeptons leptons(inputfs, get<FinalState>("BareLeptons"),
+    LeptonFinder leptons(inputfs, get<FinalState>("BareLeptons"),
 			   (doClustering ? dRmax : -1.), leptoncuts, clusterPhotons);
-    declare(leptons, "DressedLeptons");
+    declare(leptons, "Leptons");
 
     // Add MissingMomentum proj to calc MET
     MissingMomentum vismom(inputfs);
@@ -84,7 +84,7 @@ namespace Rivet {
 
 
   CmpState WFinder::compare(const Projection& p) const {
-    PCmp dlcmp = mkNamedPCmp(p, "DressedLeptons");
+    PCmp dlcmp = mkNamedPCmp(p, "LeptonFinder");
     if (dlcmp != CmpState::EQ) return dlcmp;
 
     const WFinder& other = dynamic_cast<const WFinder&>(p);
@@ -112,7 +112,7 @@ namespace Rivet {
     }
 
     // Get lepton
-    const DressedLeptons& leptons = apply<DressedLeptons>(e, "DressedLeptons");
+    const LeptonFinder& leptons = apply<LeptonFinder>(e, "Leptons");
     if ( leptons.dressedLeptons().empty() ) {
       MSG_DEBUG("No dressed leptons");
       return;

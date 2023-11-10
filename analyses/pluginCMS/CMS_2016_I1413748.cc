@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PartonicTops.hh"
 
 namespace Rivet {
@@ -31,14 +31,14 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState electrons(el_id);
       declare(electrons, "Electrons");
-      DressedLeptons dressed_electrons(photons, electrons, 0.1);
+      LeptonFinder dressed_electrons(photons, electrons, 0.1);
       declare(dressed_electrons, "DressedElectrons");
 
       IdentifiedFinalState mu_id(fs);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState muons(mu_id);
       declare(muons, "Muons");
-      DressedLeptons dressed_muons(photons, muons, 0.1);
+      LeptonFinder dressed_muons(photons, muons, 0.1);
       declare(dressed_muons, "DressedMuons");
 
       // Parton-level top quarks
@@ -105,11 +105,11 @@ namespace Rivet {
       const double weight = 1.0;
 
       // Use particle-level leptons for the first histogram
-      const DressedLeptons& dressed_electrons = apply<DressedLeptons>(event, "DressedElectrons");
-      const DressedLeptons& dressed_muons = apply<DressedLeptons>(event, "DressedMuons");
+      const LeptonFinder& dressed_electrons = apply<LeptonFinder>(event, "DressedElectrons");
+      const LeptonFinder& dressed_muons = apply<LeptonFinder>(event, "DressedMuons");
 
-      const vector<DressedLepton> dressedels = dressed_electrons.dressedLeptons();
-      const vector<DressedLepton> dressedmus = dressed_muons.dressedLeptons();
+      const DressedLeptons dressedels = dressed_electrons.dressedLeptons();
+      const DressedLeptons dressedmus = dressed_muons.dressedLeptons();
 
       const size_t ndressedel = dressedels.size();
       const size_t ndressedmu = dressedmus.size();

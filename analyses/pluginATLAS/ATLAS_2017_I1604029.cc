@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 
@@ -37,9 +37,9 @@ namespace Rivet {
       PromptFinalState prompt_mu(base_cuts && Cuts::abspid == PID::MUON);
       PromptFinalState prompt_el(base_cuts && Cuts::abspid == PID::ELECTRON);
       IdentifiedFinalState all_photons(fs, PID::PHOTON);
-      DressedLeptons elecs(all_photons, prompt_el, 0.1, dressed_cuts);
+      LeptonFinder elecs(all_photons, prompt_el, 0.1, dressed_cuts);
       declare(elecs, "elecs");
-      DressedLeptons muons(all_photons, prompt_mu, 0.1, dressed_cuts);
+      LeptonFinder muons(all_photons, prompt_mu, 0.1, dressed_cuts);
       declare(muons, "muons");
 
       // auxiliary projections for 'single-lepton ttbar filter'
@@ -82,8 +82,8 @@ namespace Rivet {
       Jets jets = apply<JetFinder>(event, "jets").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
 
       // lepton selection
-      const vector<DressedLepton>& elecs = apply<DressedLeptons>(event, "elecs").dressedLeptons();
-      const vector<DressedLepton>& all_muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      const DressedLeptons& elecs = apply<LeptonFinder>(event, "elecs").dressedLeptons();
+      const DressedLeptons& all_muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
 
       // jet photon/electron overlap removal
       for (const DressedLepton& e : elecs)
@@ -101,7 +101,7 @@ namespace Rivet {
       if (mindR_phjet < 0.5)  vetoEvent;
 
       // muon jet overlap removal
-      vector<DressedLepton> muons;
+      DressedLeptons muons;
       for (const DressedLepton& mu : all_muons) {
         bool overlaps = false;
         for (const Jet& jet : jets) {

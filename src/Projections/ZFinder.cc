@@ -42,9 +42,9 @@ namespace Rivet {
     // Dress the bare leptons
     const bool doClustering = (clusterPhotons != PhotonOrigin::NONE);
     //const bool useDecayPhotons = (clusterPhotons == PhotonOrigin::ALL);
-    DressedLeptons leptons(inputfs, get<FinalState>("BareLeptons"),
-			   (doClustering ? dRmax : -1.0), fsCut, clusterPhotons);
-    declare(leptons, "DressedLeptons");
+    LeptonFinder leptons(inputfs, get<FinalState>("BareLeptons"),
+			 (doClustering ? dRmax : -1.0), fsCut, clusterPhotons);
+    declare(leptons, "Leptons");
 
     // Identify the non-Z part of the event
     VetoedFinalState remainingFS;
@@ -79,7 +79,7 @@ namespace Rivet {
 
 
   CmpState ZFinder::compare(const Projection& p) const {
-    PCmp LCcmp = mkNamedPCmp(p, "DressedLeptons");
+    PCmp LCcmp = mkNamedPCmp(p, "Leptons");
     if (LCcmp != CmpState::EQ) return LCcmp;
 
     const ZFinder& other = dynamic_cast<const ZFinder&>(p);
@@ -94,7 +94,7 @@ namespace Rivet {
     clear();
 
     // Get leptons and find an acceptable invariant mass OSSF pair
-    const DressedLeptons& leptons = apply<DressedLeptons>(e, "DressedLeptons");
+    const LeptonFinder& leptons = apply<LeptonFinder>(e, "Leptons");
     InvMassFinalState imfs({_pid, -_pid}, _minmass, _maxmass, _masstarget);
     imfs.calc(leptons.particles());
     if (imfs.particlePairs().empty()) {
@@ -111,11 +111,12 @@ namespace Rivet {
     MSG_DEBUG(z << " reconstructed from: " << p1 << " + " << p2);
 
     // Add (dressed) lepton constituents to the Z (skipping photons if requested)
-    // Keep the DressedLeptons found by the ZFinder
+    // Keep the dressed leptons found by the ZFinder
     const Particle& l1 = p1.charge() > 0 ? p1 : p2;
     const Particle& l2 = p2.charge() < 0 ? p2 : p1;
     MSG_TRACE("l1 = " << l1.constituents());
     MSG_TRACE("l2 = " << l2.constituents());
+    /// @todo Tear this down...
     z.addConstituent(_trackPhotons == PhotonsAsConstituents::YES ? l1 : l1.constituents().front());
     z.addConstituent(_trackPhotons == PhotonsAsConstituents::YES ? l2 : l2.constituents().front());
     MSG_DEBUG("Number of stored raw Z constituents = " << z.rawConstituents().size() << "  " << z.rawConstituents());
