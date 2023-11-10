@@ -141,7 +141,7 @@ namespace Rivet {
       const Particles& descendants = mother.stableDescendants();
       if (descendants.size() >= ids.size()) {
         const Particles parts = { mother };
-        bool decayfound = cascadeContains(parts, ids, absolute, true)
+        bool decayfound = cascadeContains(parts, ids, absolute, true);
         // Do not increment counters if the specified decay products were not found
         if (decayfound) {
           w_incl->fill(); // the (global) weight counter for leptonic decays
