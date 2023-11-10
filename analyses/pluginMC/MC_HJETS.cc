@@ -29,7 +29,7 @@ namespace Rivet {
 
       /// @todo Urk, abuse! Need explicit HiggsFinder (and TauFinder?)
       ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV,
-		      0.0, PhotonOrigin::NONE, PhotonsAsConstituents::NO, 125*GeV);
+		      0.0, PhotonOrigin::NONE, 125*GeV);
       declare(hfinder, "Hfinder");
 
       // set ptcut from input option

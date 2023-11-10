@@ -30,9 +30,9 @@ namespace Rivet {
 
       // W finder for electrons and muons
       WFinder wf_mu(fs, cuts, PID::MUON, 0.0*GeV, DBL_MAX, 0.0, 0.1,
-                 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+                 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
       WFinder wf_el(fs, cuts, PID::ELECTRON, 0.0*GeV, DBL_MAX, 0.0, 0.1,
-                 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+                 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
       declare(wf_mu, "WFmu");
       declare(wf_el, "WFel");
 

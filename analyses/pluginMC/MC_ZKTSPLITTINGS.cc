@@ -32,7 +32,7 @@ namespace Rivet {
       
       FinalState fs;
       ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR,
-		      PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+		      PhotonOrigin::NODECAY);
       declare(zfinder, "ZFinder");
 
       // set clustering radius from input option

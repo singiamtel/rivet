@@ -43,7 +43,7 @@ namespace Rivet {
       declare(fs, "FS");
 
       ZFinder zfinder(fs, Cuts::abseta < 2.5 && Cuts::pT > 30*GeV, PID::MUON, 80*GeV, 100*GeV, 0.2,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zfinder, "ZFinder");
 
       // Z+jet jet collections

@@ -61,7 +61,7 @@ namespace Rivet {
 
 	// Find W's with pT > 120, MET > 50
 	WFinder wfinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 80*GeV, PID::ELECTRON, 50*GeV, 1000*GeV, 50.0*GeV,
-			0.2, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+			0.2, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
 	declare(wfinder, "WFinder");
 
 	// W+jet jet collections
@@ -87,7 +87,7 @@ namespace Rivet {
 
 	// Find Zs with pT > 120 GeV
 	ZFinder zfinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 30*GeV, PID::ELECTRON, 80*GeV, 100*GeV,
-			0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+			0.2, PhotonOrigin::NODECAY);
 	declare(zfinder, "ZFinder");
 
 	// Z+jet jet collections

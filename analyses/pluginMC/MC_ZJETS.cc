@@ -33,7 +33,7 @@ namespace Rivet {
       FinalState fs;
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
 
-      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR, PhotonOrigin::NODECAY);
       declare(zfinder, "ZFinder");
 
       // set ptcut from input option

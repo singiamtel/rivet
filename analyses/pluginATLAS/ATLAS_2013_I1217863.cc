@@ -54,14 +54,14 @@ namespace Rivet {
       // Z finder
       if (_doZ) {
         ZFinder zf(fs, cuts, _mode==3? PID::MUON : PID::ELECTRON, 40.0*GeV, 1000.0*GeV, 0.1,
-                   LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+                   LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
         declare(zf, "ZF");
       }
 
       if (_doW) {
         // W finder for electrons and muons
         WFinder wf(fs, cuts, _mode==3? PID::MUON : PID::ELECTRON, 0.0*GeV, 1000.0*GeV, 35.0*GeV, 0.1,
-                   LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+                   LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
         declare(wf, "WF");
       }
 

@@ -20,7 +20,7 @@ namespace Rivet {
     void init() {
       FinalState fs;
       ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON,
-                      40*GeV, 200*GeV, 0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+                      40*GeV, 200*GeV, 0.2, PhotonOrigin::NODECAY);
       declare(zfinder, "ZFinder");
 
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);

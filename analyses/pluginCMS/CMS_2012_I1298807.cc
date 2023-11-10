@@ -30,9 +30,9 @@ namespace Rivet {
       Cut cut_el = Cuts::abseta < 2.5 && Cuts::pT > 7.0*GeV;
       Cut cut_mu = Cuts::abseta < 2.4 && Cuts::pT > 5.0*GeV;
 
-      ZFinder zeefinder(FinalState(), cut_el, PID::ELECTRON, 60*GeV, 120*GeV, 0.1, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+      ZFinder zeefinder(FinalState(), cut_el, PID::ELECTRON, 60*GeV, 120*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zeefinder, "ZeeFinder");
-      ZFinder zmmfinder(FinalState(), cut_mu, PID::MUON, 60*GeV, 120*GeV, 0.1, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+      ZFinder zmmfinder(FinalState(), cut_mu, PID::MUON, 60*GeV, 120*GeV, 0.1, PhotonOrigin::NODECAY);
       declare(zmmfinder, "ZmmFinder");
 
       VetoedFinalState fs_woZmm;

@@ -20,7 +20,7 @@ namespace Rivet {
     void init() {
       FinalState fs;
       ZFinder zfinder_mm(fs, Cuts::abseta < 2 && Cuts::pT > 15*GeV, PID::MUON, 30*GeV, 500*GeV,
-			 0.0, PhotonOrigin::NONE, PhotonsAsConstituents::NO);
+			 0.0, PhotonOrigin::NONE);
       declare(zfinder_mm, "zfinder_mm");
 
       book(_h_phistar_mm_peak_central, 1, 1, 1);

@@ -36,11 +36,8 @@ namespace Rivet {
     /// @param chLeptons  Only use prompt charged leptons, or any charged leptons?
     /// @param clusterPhotons  Whether such photons are supposed to be
     ///  clustered to the lepton object and thus W mom
-    /// @param trackPhotons  Whether such photons should be added to _theParticles
     /// @param masstype  Whether mass window should be applied using m or mT
     /// @param masstarget  The expected (transverse) mass value, if resolving ambiguities
-    ///
-    /// @todo Revisit AddPhotons::NO as default?
     WFinder(const FinalState& inputfs,
             const Cut& leptoncuts,
             PdgId pid,
@@ -49,7 +46,6 @@ namespace Rivet {
             double dRmax=0.1,
             LeptonOrigin chLeptons=LeptonOrigin::PROMPT,
             PhotonOrigin clusterPhotons=PhotonOrigin::NODECAY,
-            PhotonsAsConstituents trackPhotons=PhotonsAsConstituents::NO,
             MassVariable masstype=MassVariable::M,
             double masstarget=80.4*GeV);
 
@@ -78,7 +74,7 @@ namespace Rivet {
     /// @brief Access to the Ws' constituent (clustered) charged leptons
     ///
     /// @note Either size 0 if no boson was found or 1 if one boson was found
-    const Particles leptons() const { return head(_leptons, 1); }
+    const Particles leptons() const { return _leptons; }
     /// brief Access to the W's constituent (clustered) charged lepton (assuming it exists)
     ///
     /// @todo C++17 std::optional...
@@ -149,10 +145,6 @@ namespace Rivet {
     /// Missing ET cut
     double _etMissMin;
 
-    /// Switch for tracking of photons (whether to include them in the W particle)
-    /// This is relevant when the clustered photons need to be excluded from e.g. a jet finder
-    PhotonsAsConstituents _trackPhotons;
-
     /// Charged lepton flavour
     PdgId _pid;
 
@@ -163,6 +155,5 @@ namespace Rivet {
 
 
 }
-
 
 #endif

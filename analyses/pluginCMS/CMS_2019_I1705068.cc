@@ -21,7 +21,7 @@ namespace Rivet {
       FinalState fs;
       WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON,
                          0*GeV, 1000000*GeV, 0*GeV, 0.1, LeptonOrigin::PROMPT,
-                         PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+                         PhotonOrigin::NODECAY, MassVariable::MT);
       declare(wfinder_mu, "WFinder_mu");
 
       UnstableParticles dst(Cuts::pT > 5*GeV && Cuts::abseta < 2.4);

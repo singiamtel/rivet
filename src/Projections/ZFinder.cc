@@ -14,7 +14,6 @@ namespace Rivet {
                    double dRmax,
                    LeptonOrigin chLeptons,
                    PhotonOrigin clusterPhotons,
-                   PhotonsAsConstituents trackPhotons,
                    double masstarget)
   {
     setName("ZFinder");
@@ -23,7 +22,6 @@ namespace Rivet {
     _maxmass = maxmass;
     _masstarget = masstarget;
     _pid = abs(pid);
-    _trackPhotons = trackPhotons;
 
     // Identify bare leptons for dressing
     // Bit of a code nightmare -- FS projection copy constructors don't work?
@@ -83,10 +81,10 @@ namespace Rivet {
     if (LCcmp != CmpState::EQ) return LCcmp;
 
     const ZFinder& other = dynamic_cast<const ZFinder&>(p);
-    return (cmp(_minmass, other._minmass) ||
-            cmp(_maxmass, other._maxmass) ||
-            cmp(_pid, other._pid) ||
-            cmp(_trackPhotons, other._trackPhotons));
+    return \
+      cmp(_minmass, other._minmass) ||
+      cmp(_maxmass, other._maxmass) ||
+      cmp(_pid, other._pid);
   }
 
 
@@ -116,9 +114,8 @@ namespace Rivet {
     const Particle& l2 = p2.charge() < 0 ? p2 : p1;
     MSG_TRACE("l1 = " << l1.constituents());
     MSG_TRACE("l2 = " << l2.constituents());
-    /// @todo Tear this down...
-    z.addConstituent(_trackPhotons == PhotonsAsConstituents::YES ? l1 : l1.constituents().front());
-    z.addConstituent(_trackPhotons == PhotonsAsConstituents::YES ? l2 : l2.constituents().front());
+    z.addConstituent(l1);
+    z.addConstituent(l2);
     MSG_DEBUG("Number of stored raw Z constituents = " << z.rawConstituents().size() << "  " << z.rawConstituents());
 
     // Register the completed Z

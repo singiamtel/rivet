@@ -24,7 +24,7 @@ namespace Rivet {
       // this seems to have been corrected completely for all selection cuts,
       // i.e. eta cuts and pT cuts on leptons.
       ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON,
-                      66*GeV, 116*GeV, 0.2, PhotonOrigin::NODECAY, PhotonsAsConstituents::YES);
+                      66*GeV, 116*GeV, 0.2, PhotonOrigin::NODECAY);
       declare(zfinder, "ZFinder");
 
 

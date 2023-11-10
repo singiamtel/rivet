@@ -30,7 +30,7 @@ namespace Rivet {
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
       
       /// @todo Urk, abuse! Need explicit HiggsFinder and TauFinder
-      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0, PhotonOrigin::NONE, PhotonsAsConstituents::NO, 125*GeV);
+      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0, PhotonOrigin::NONE, 125*GeV);
       declare(hfinder, "Hfinder");
 
       // set clustering radius from input option

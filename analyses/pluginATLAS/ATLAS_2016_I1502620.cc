@@ -53,19 +53,19 @@ namespace Rivet {
       Cut Zcuts = Cuts::pT >= 20.0*GeV;
 
       WFinder wfinder_edressed(fs, Wcuts, PID::ELECTRON, 40*GeV, 13*TeV, 25*GeV, 0.1,
-				 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+				 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
       declare(wfinder_edressed, "WFinder_edressed");
 
       ZFinder zfindere(fs, Zcuts, PID::ELECTRON, 46.0*GeV, 150*GeV, 0.1,
-                       LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+                       LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zfindere, "ZFindere");
 
       WFinder wfinder_mdressed(fs, Wcuts, PID::MUON, 40*GeV, 13*TeV, 25*GeV, 0.1,
-				 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO, MassVariable::MT);
+				 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
       declare(wfinder_mdressed, "WFinder_mdressed");
 
       ZFinder zfinderm(fs, Zcuts, PID::MUON, 46.0*GeV, 150*GeV, 0.1,
-                       LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, PhotonsAsConstituents::NO);
+                       LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zfinderm, "ZFinderm");
 
 
