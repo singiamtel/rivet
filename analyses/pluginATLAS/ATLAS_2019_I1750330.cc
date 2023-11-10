@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -35,19 +35,19 @@ namespace Rivet {
       PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       declare(muons, "muons");
 
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
 
-      DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
 
       InvisibleFinalState neutrinos(OnlyPrompt::YES, TauDecaysAs::PROMPT);
@@ -205,8 +205,8 @@ namespace Rivet {
     void Resolved_selection(const Event& event) {
 
       // Get the selected objects, using the projections.
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons();
-      vector<DressedLepton> muons     = apply<DressedLeptons>(event, "dressedmuons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons();
+      DressedLeptons muons     = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
       const Jets& jets = apply<FastJets>(event, "resolved_jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       FourMomentum met = apply<MissingMomentum>(event, "MissingMomentum").missingMomentum();
 
@@ -362,8 +362,8 @@ namespace Rivet {
     void Boosted_selection(const Event& event) {
 
       //Projections
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons();
-      vector<DressedLepton> muons = apply<DressedLeptons>(event, "dressedmuons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons();
+      DressedLeptons muons = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
       const Jets& jets = apply<FastJets>(event, "boosted_jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta <= 2.5);
       const FourMomentum& met = apply<MissingMomentum>(event, "MissingMomentum").missingMomentum();
 

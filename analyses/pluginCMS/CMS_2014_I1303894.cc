@@ -7,7 +7,7 @@
 #include "Rivet/Projections/InvMassFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/WFinder.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -38,7 +38,7 @@ namespace Rivet {
       PromptFinalState pfs(fs);
       IdentifiedFinalState bareMuons(pfs);
       bareMuons.acceptIdPair(PID::MUON);
-      DressedLeptons muonClusters(fs, bareMuons, -1); //, Cuts::open(), false, false);
+      LeptonFinder muonClusters(fs, bareMuons, -1); //, Cuts::open(), false, false);
       declare(muonClusters, "muonClusters");
 
       IdentifiedFinalState neutrinos(pfs);
@@ -87,7 +87,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
       // Get the dressed muon
-      const DressedLeptons& muonClusters = apply<DressedLeptons>(event, "muonClusters");
+      const LeptonFinder& muonClusters = apply<LeptonFinder>(event, "muonClusters");
       int nmu = muonClusters.dressedLeptons().size();
       if (nmu < 1) vetoEvent;
       DressedLepton dressedmuon = muonClusters.dressedLeptons()[0];

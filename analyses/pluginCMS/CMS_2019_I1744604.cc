@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -44,10 +44,10 @@ namespace Rivet {
 
       // Dressed leptons from selected prompt charged leptons and photons
       Cut lepton_cut   = (Cuts::abseta < 2.4) and (Cuts::pT > 26.*GeV);
-      DressedLeptons dressed_leptons(
+      LeptonFinder dressed_leptons(
         prompt_photons, prompt_leptons, 0.1,
         lepton_cut, PhotonOrigin::ALL);
-      declare(dressed_leptons, "DressedLeptons");
+      declare(dressed_leptons, "LeptonFinder");
 
       // Jets
       VetoedFinalState fsForJets(fs);
@@ -137,9 +137,9 @@ namespace Rivet {
         return;
       }
 
-      vector<DressedLepton> dressedLeptons = apply<DressedLeptons>(
+      DressedLeptons dressedLeptons = apply<LeptonFinder>(
         event,
-        "DressedLeptons"
+        "LeptonFinder"
       ).dressedLeptons();
 
       // only analyze events with one dressed lepton (muon or electron)

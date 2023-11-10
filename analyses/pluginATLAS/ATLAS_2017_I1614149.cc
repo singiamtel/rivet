@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 
@@ -47,9 +47,9 @@ namespace Rivet {
 
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts);
       declare(dressedelectrons, "elecs");
-      DressedLeptons ewdressedelectrons(all_photons, electrons, 0.1, eta_full);
+      LeptonFinder ewdressedelectrons(all_photons, electrons, 0.1, eta_full);
 
       // Projection to find the muons
       IdentifiedFinalState mu_id(fs);
@@ -57,9 +57,9 @@ namespace Rivet {
 
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts);
+      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts);
       declare(dressedmuons, "muons");
-      DressedLeptons ewdressedmuons(all_photons, muons, 0.1, eta_full);
+      LeptonFinder ewdressedmuons(all_photons, muons, 0.1, eta_full);
 
       // Projection to find MET
       declare(MissingMomentum(fs), "MET");
@@ -100,8 +100,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the selected objects, using the projections.
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "elecs").dressedLeptons();
-      vector<DressedLepton> muons     = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "elecs").dressedLeptons();
+      DressedLeptons muons     = apply<LeptonFinder>(event, "muons").dressedLeptons();
       const Jets& jets  = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       const PseudoJets& all_fjets  = apply<FastJets>(event, "fjets").pseudoJetsByPt();
 

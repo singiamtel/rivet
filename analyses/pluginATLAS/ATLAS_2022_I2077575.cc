@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PartonicTops.hh"
 #include "Rivet/Math/LorentzTrans.hh"
@@ -81,15 +81,15 @@ namespace Rivet {
 
         // Projection to find the electrons
         PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-        DressedLeptons dressedelectrons(photons, electrons, 0.1, dressed_lep);
+        LeptonFinder dressedelectrons(photons, electrons, 0.1, dressed_lep);
         declare(dressedelectrons, "elecs");
-        DressedLeptons alldressedelectrons(photons, electrons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
+        LeptonFinder alldressedelectrons(photons, electrons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
 
         // Projection to find the muons
         PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-        DressedLeptons dressedmuons(photons, muons, 0.1, dressed_lep);
+        LeptonFinder dressedmuons(photons, muons, 0.1, dressed_lep);
         declare(dressedmuons, "muons");
-        DressedLeptons alldressedmuons(photons, muons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
+        LeptonFinder alldressedmuons(photons, muons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
 
         // Small-R jet clustering
         VetoedFinalState vfs(fs);
@@ -193,8 +193,8 @@ namespace Rivet {
         const Jets all_sjets = sjets_fj.jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
 
         // Get dressed leptons
-        vector<DressedLepton> dressedElectrons = apply<DressedLeptons>(event, "elecs").dressedLeptons();
-        vector<DressedLepton> dressedMuons     = apply<DressedLeptons>(event, "muons").dressedLeptons();
+        DressedLeptons dressedElectrons = apply<LeptonFinder>(event, "elecs").dressedLeptons();
+        DressedLeptons dressedMuons     = apply<LeptonFinder>(event, "muons").dressedLeptons();
 
         // Perform lepton isolation
         idiscardIfAnyDeltaRLess(dressedElectrons, all_sjets, 0.4);

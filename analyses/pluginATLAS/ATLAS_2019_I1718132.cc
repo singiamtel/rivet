@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 
 namespace Rivet {
@@ -39,7 +39,7 @@ namespace Rivet {
 
         // Find and dress the electrons and muons
         PromptFinalState bare_leps(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-        DressedLeptons dressed_leps(photons, bare_leps, 0.1, baseline_lep_cuts, PhotonOrigin::ALL);
+        LeptonFinder dressed_leps(photons, bare_leps, 0.1, baseline_lep_cuts, PhotonOrigin::ALL);
         declare(dressed_leps, "leptons");
 
         //and finally the jets:
@@ -78,7 +78,7 @@ namespace Rivet {
       void analyze(const Event& event) {
 
         // Get the selected leptons:
-        vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
+        DressedLeptons leptons = apply<LeptonFinder>(event, "leptons").dressedLeptons();
 
         // get the selected jets:
         Jets jets = apply<JetFinder>(event, "jets").jetsByPt(Cuts::pT > 60*GeV && Cuts::absrap < 2.5);

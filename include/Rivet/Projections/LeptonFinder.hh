@@ -1,45 +1,16 @@
 // -*- C++ -*-
-#ifndef RIVET_DressedLeptons_HH
-#define RIVET_DressedLeptons_HH
+#ifndef RIVET_LeptonFinder_HH
+#define RIVET_LeptonFinder_HH
 
-#include "Rivet/Projection.hh"
+#include "Rivet/DressedLepton.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.fhh"
 #include "Rivet/Config/RivetCommon.hh"
 
 namespace Rivet {
-
-
-  /// @brief A charged lepton meta-particle created by clustering photons close to the bare lepton
-  ///
-  /// @deprecated Prefer to use Particle.constituents()
-  class DressedLepton : public Particle {
-  public:
-
-    /// Copy constructor (from Particle)
-    DressedLepton(const Particle& dlepton);
-
-    /// @brief Components constructor
-    ///
-    /// @note This is not a copy constructor, hence the explicit second argument even if empty
-    DressedLepton(const Particle& lepton, const Particles& photons, bool momsum=true);
-
-    /// @brief Add a photon to the dressed lepton
-    ///
-    /// @todo Deprecate and override add/setConstituents instead?
-    void addPhoton(const Particle& p, bool momsum=true);
-
-    /// Retrieve the bare lepton
-    const Particle& bareLepton() const;
-
-    /// Retrieve the clustered photons
-    const Particles photons() const { return slice(constituents(), 1); }
-
-  };
   
 
-  /// @brief Cluster photons from a given FS to all charged particles (typically leptons)
+  /// @brief Reconstruct leptons, generally including "dressing" with clustered photons
   ///
   /// The clustering is done by a delta(R) cone around each bare lepton or by
   /// jet clustering. In both modes, double counting is avoided: for the dR
@@ -54,7 +25,7 @@ namespace Rivet {
   /// bare leptons and photons are returned by rawParticles() (inherited from
   /// ParticleFinder)
   ///
-  class DressedLeptons : public FinalState {
+  class LeptonFinder : public FinalState {
   public:
 
     /// @brief Constructor with a single input FinalState (used for both photons and bare leptons)
@@ -67,10 +38,10 @@ namespace Rivet {
     /// photons to leptons is to be done via dR matching to the bare lepton or
     /// by a jet clustering algorithm.  Set the clustering radius to 0 or
     /// negative to disable clustering.
-    DressedLeptons(const FinalState& allfs,
-                   double dRmax, const Cut& cut=Cuts::OPEN,
-                   PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
-                   DressingType dressing=DressingType::CONE);
+    LeptonFinder(const FinalState& allfs,
+		 double dRmax, const Cut& cut=Cuts::OPEN,
+		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+		 DressingType dressing=DressingType::CONE);
 
     /// @brief Constructor with default input FinalState
     ///
@@ -82,10 +53,10 @@ namespace Rivet {
     /// leptons is to be done via dR matching to the bare lepton or by a jet
     /// clustering algorithm.  Set the clustering radius to 0 or negative to
     /// disable clustering.
-    DressedLeptons(double dRmax, const Cut& cut=Cuts::OPEN,
-                   PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
-                   DressingType dressing=DressingType::CONE)
-      : DressedLeptons(FinalState(), dRmax, cut, whichphotons, dressing)
+    LeptonFinder(double dRmax, const Cut& cut=Cuts::OPEN,
+		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+		 DressingType dressing=DressingType::CONE)
+      : LeptonFinder(FinalState(), dRmax, cut, whichphotons, dressing)
     {   }
 
     /// @brief Constructor with distinct photon and lepton finders
@@ -105,14 +76,14 @@ namespace Rivet {
     /// allow clustering of unstables, e.g. taus via TauFinder when that becomes a PF.
     /// Complicated by the clustering version relying on MergedFinalState and FastJets'
     /// current restriction to FinalState inputs. Requires widespread redesign.
-    DressedLeptons(const FinalState& photons, const FinalState& bareleptons,
-                   double dRmax, const Cut& cut=Cuts::OPEN,
-                   PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
-                   DressingType dressing=DressingType::CONE);
+    LeptonFinder(const FinalState& photons, const FinalState& bareleptons,
+		 double dRmax, const Cut& cut=Cuts::OPEN,
+		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+		 DressingType dressing=DressingType::CONE);
 
 
     /// Clone this projection
-    RIVET_DEFAULT_PROJ_CLONE(DressedLeptons);
+    RIVET_DEFAULT_PROJ_CLONE(LeptonFinder);
 
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
@@ -121,8 +92,8 @@ namespace Rivet {
     /// @brief Retrieve the dressed leptons
     ///
     /// @note Like particles() but with helper functions
-    vector<DressedLepton> dressedLeptons() const {
-      vector<DressedLepton> rtn;
+    DressedLeptons dressedLeptons() const {
+      DressedLeptons rtn;
       for (const Particle& p : particles(cmpMomByPt))
         rtn += DressedLepton(p);  //static_cast<const DressedLepton>(p);
       return rtn;
@@ -131,8 +102,8 @@ namespace Rivet {
     /// @brief Retrieve the dressed leptons ordered by supplied sorting functor
     ///
     /// @note Like particles() but with helper functions
-    vector<DressedLepton> dressedLeptons(const ParticleSorter& sorter) const {
-      vector<DressedLepton> rtn;
+    DressedLeptons dressedLeptons(const ParticleSorter& sorter) const {
+      DressedLeptons rtn;
       for (const Particle& p : particles(sorter))
         rtn += DressedLepton(p);  //static_cast<const DressedLepton>(p);
       return rtn;
@@ -165,6 +136,5 @@ namespace Rivet {
 
 
 }
-
 
 #endif

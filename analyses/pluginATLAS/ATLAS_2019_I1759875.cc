@@ -2,7 +2,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -26,14 +26,14 @@ namespace Rivet {
 
       // Projection to find the electrons
       PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons elecs(photons, prompt_el, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
-      DressedLeptons veto_elecs(photons, prompt_el, 0.1, eta_full, PhotonOrigin::NODECAY);
+      LeptonFinder elecs(photons, prompt_el, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
+      LeptonFinder veto_elecs(photons, prompt_el, 0.1, eta_full, PhotonOrigin::NODECAY);
       declare(elecs, "elecs");
 
       // Projection to find the muons
       PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons muons(photons, prompt_mu, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
-      DressedLeptons veto_muons(photons, prompt_mu, 0.1, eta_full, PhotonOrigin::NODECAY);
+      LeptonFinder muons(photons, prompt_mu, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
+      LeptonFinder veto_muons(photons, prompt_mu, 0.1, eta_full, PhotonOrigin::NODECAY);
       declare(muons, "muons");
 
       VetoedFinalState vfs;
@@ -59,8 +59,8 @@ namespace Rivet {
     }
 
     void analyze(const Event& event) {
-      vector<DressedLepton> elecs = apply<DressedLeptons>(event, "elecs").dressedLeptons();
-      vector<DressedLepton> muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      DressedLeptons elecs = apply<LeptonFinder>(event, "elecs").dressedLeptons();
+      DressedLeptons muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
 
       if (elecs.empty() || muons.empty())  vetoEvent;
       if (elecs[0].charge() == muons[0].charge())  vetoEvent;

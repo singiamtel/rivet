@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -34,7 +34,7 @@ namespace Rivet {
       const Cut cuts = (_mode == 0)
 	? (Cuts::pT > 25*GeV && Cuts::abseta < 4.9)
 	: (Cuts::pT > 20*GeV && Cuts::abseta < 2.47);
-      DressedLeptons leptons(fs, bareleptons, 0.1, cuts, PhotonOrigin::ALL);
+      LeptonFinder leptons(fs, bareleptons, 0.1, cuts, PhotonOrigin::ALL);
       declare(leptons, "leptons");
 
 
@@ -57,7 +57,7 @@ namespace Rivet {
     void analyze(const Event& e) {
 
       // Get and cut on dressed leptons
-      const vector<DressedLepton>& leptons = apply<DressedLeptons>(e, "leptons").dressedLeptons();
+      const DressedLeptons& leptons = apply<LeptonFinder>(e, "leptons").dressedLeptons();
       if (leptons.size() != 2) vetoEvent; // require exactly two leptons
       if (leptons[0].charge3() * leptons[1].charge3() > 0) vetoEvent; // require opposite charge
 

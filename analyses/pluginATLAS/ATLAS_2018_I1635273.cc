@@ -3,7 +3,7 @@
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -35,8 +35,8 @@ namespace Rivet {
 
       // Get dressed leptons
       PromptFinalState leptons(Cuts::abspid == (_mode? PID::MUON : PID::ELECTRON), TauDecaysAs::NONPROMPT);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, cuts, PhotonOrigin::ALL);
-      declare(dressedleptons, "DressedLeptons");
+      LeptonFinder dressedleptons(photons, leptons, 0.1, cuts, PhotonOrigin::ALL);
+      declare(dressedleptons, "LeptonFinder");
 
       // Get neutrinos for MET calculation
       declare(InvisibleFinalState(OnlyPrompt::YES), "InvFS");
@@ -103,7 +103,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // retrieve the dressed electrons
-      const Particles& signal_leptons = apply<DressedLeptons>(event, "DressedLeptons").particlesByPt();
+      const Particles& signal_leptons = apply<LeptonFinder>(event, "LeptonFinder").particlesByPt();
       if (signal_leptons.size() != 1 ) vetoEvent;
       const Particle& lepton = signal_leptons[0];
 

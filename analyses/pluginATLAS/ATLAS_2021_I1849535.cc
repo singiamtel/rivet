@@ -4,7 +4,7 @@
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -32,7 +32,7 @@ namespace Rivet {
         // Final state including all charged particles
         declare(ChargedFinalState(), "CFS");
 
-        DressedLeptons dressed_elecs(photons, elecs, 0.1, el_fid_sel, PhotonOrigin::NODECAY);
+        LeptonFinder dressed_elecs(photons, elecs, 0.1, el_fid_sel, PhotonOrigin::NODECAY);
         declare(dressed_elecs, "elecs");
         declare(muons, "muons");
 
@@ -227,7 +227,7 @@ namespace Rivet {
         //preselection of leptons for ZZ-> llll final state
         Particles dressed_leptons;
         for (auto lep : apply<FinalState>(event, "muons").particles()) { dressed_leptons.push_back(lep); }
-        for (auto lep : apply<DressedLeptons>(event, "elecs").dressedLeptons()) { dressed_leptons.push_back(lep); }
+        for (auto lep : apply<LeptonFinder>(event, "elecs").dressedLeptons()) { dressed_leptons.push_back(lep); }
 
 
 

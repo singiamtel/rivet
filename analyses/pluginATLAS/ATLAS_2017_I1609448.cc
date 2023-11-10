@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
@@ -50,14 +50,14 @@ namespace Rivet {
 
       // Dressed leptons
       Cut lep_cuts = Cuts::pT > 7*GeV && Cuts::abseta < 2.5;
-      DressedLeptons dressed_leps(photon_fs, (_mode == 2 ? el_fs : mu_fs), 0.1, lep_cuts);
-      declare(dressed_leps, "DressedLeptons");
+      LeptonFinder dressed_leps(photon_fs, (_mode == 2 ? el_fs : mu_fs), 0.1, lep_cuts);
+      declare(dressed_leps, "LeptonFinder");
 
       // In-acceptance leptons for lepton veto
       PromptFinalState veto_lep_fs(Cuts::abseta < 4.9 && (Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON));
       veto_lep_fs.acceptTauDecays();
       veto_lep_fs.acceptMuonDecays();
-      DressedLeptons veto_lep(photon_fs, veto_lep_fs, 0.1, lep_cuts);
+      LeptonFinder veto_lep(photon_fs, veto_lep_fs, 0.1, lep_cuts);
       declare(veto_lep, "VetoLeptons");
 
       // MET
@@ -122,12 +122,12 @@ namespace Rivet {
 
       // Require 0 (Znunu) or 2 (Zll) dressed leptons
       bool isZll = bool(_mode);
-      const vector<DressedLepton> &vetoLeptons = apply<DressedLeptons>(event, "VetoLeptons").dressedLeptons();
-      const vector<DressedLepton> &all_leps = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
+      const DressedLeptons &vetoLeptons = apply<LeptonFinder>(event, "VetoLeptons").dressedLeptons();
+      const DressedLeptons &all_leps = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
       if (!isZll && vetoLeptons.size())    vetoEvent;
       if ( isZll && all_leps.size() != 2)  vetoEvent;
 
-      vector<DressedLepton> leptons;
+      DressedLeptons leptons;
       bool pass_Zll = true;
       if (isZll) {
         // Sort dressed leptons by pT

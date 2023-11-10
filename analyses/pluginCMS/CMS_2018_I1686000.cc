@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/MergedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
@@ -26,7 +26,7 @@ namespace Rivet {
     void init() {
 
       // Leptons
-      declare(DressedLeptons(PromptFinalState(), 0.1, Cuts::abseta < 2.4 && Cuts::pT > 26*GeV), "Leptons");
+      declare(LeptonFinder(PromptFinalState(), 0.1, Cuts::abseta < 2.4 && Cuts::pT > 26*GeV), "Leptons");
 
       // Jets
       declare(FastJets(FinalState(Cuts::abseta < 5), JetAlg::ANTIKT, 0.4), "Jets");

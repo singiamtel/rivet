@@ -4,7 +4,7 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 
 namespace Rivet {
@@ -46,10 +46,10 @@ namespace Rivet {
       //    7.arg: false    = ignore photons from hadron or tau
       //
       //////////////////////////////////////////////////////////
-      DressedLeptons electronFS(Photon, bare_EL, 0.1, etaRanges_EL);
+      LeptonFinder electronFS(Photon, bare_EL, 0.1, etaRanges_EL);
       declare(electronFS, "ELECTRON_FS");
 
-      DressedLeptons muonFS(Photon, bare_MU, 0.1, etaRanges_MU);
+      LeptonFinder muonFS(Photon, bare_MU, 0.1, etaRanges_MU);
       declare(muonFS, "MUON_FS");
 
       VetoedFinalState jetinput;
@@ -70,11 +70,11 @@ namespace Rivet {
     /// Do the analysis
     void analyze(const Event& e) {
 
-      const  vector<DressedLepton>& muonFS = apply<DressedLeptons>(e, "MUON_FS").dressedLeptons();
-      const  vector<DressedLepton>& electronFS = apply<DressedLeptons>(e, "ELECTRON_FS").dressedLeptons();
+      const  DressedLeptons& muonFS = apply<LeptonFinder>(e, "MUON_FS").dressedLeptons();
+      const  DressedLeptons& electronFS = apply<LeptonFinder>(e, "ELECTRON_FS").dressedLeptons();
       const MissingMomentum& met = apply<MissingMomentum>(e, "MET");
 
-      vector<DressedLepton> dressed_lepton, isolated_lepton, fiducial_lepton;
+      DressedLeptons dressed_lepton, isolated_lepton, fiducial_lepton;
       dressed_lepton.insert(dressed_lepton.end(), muonFS.begin(), muonFS.end());
       dressed_lepton.insert(dressed_lepton.end(), electronFS.begin(), electronFS.end());
 

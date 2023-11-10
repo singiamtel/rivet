@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -48,10 +48,10 @@ namespace Rivet {
                         (Cuts::pT > 20.*GeV) and 
                         (((Cuts::abspid == PID::ELECTRON) and ((Cuts::abseta < 1.4442) or (Cuts::abseta > 1.566))) or (Cuts::abspid == PID::MUON)));
 
-      DressedLeptons dressed_leptons(
+      LeptonFinder dressed_leptons(
         prompt_photons, prompt_leptons, 0.1,
         lepton_cut, PhotonOrigin::ALL);
-      declare(dressed_leptons, "DressedLeptons");
+      declare(dressed_leptons, "LeptonFinder");
 
       // Jets
       VetoedFinalState fsForJets(fs);
@@ -76,9 +76,9 @@ namespace Rivet {
 
     /// @brief Perform the per-event analysis
     void analyze(const Event& event) {
-      vector<DressedLepton> dressedLeptons = apply<DressedLeptons>(
+      DressedLeptons dressedLeptons = apply<LeptonFinder>(
         event,
-        "DressedLeptons"
+        "LeptonFinder"
       ).dressedLeptons();
 
       // Require at least two dressed leptons

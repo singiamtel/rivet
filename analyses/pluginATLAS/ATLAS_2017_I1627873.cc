@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -30,10 +30,10 @@ namespace Rivet {
       PromptFinalState electron_fs(Cuts::abspid == PID::ELECTRON);
       PromptFinalState muon_fs(Cuts::abspid == PID::MUON);
 
-      DressedLeptons dressed_electrons(photon_fs, electron_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_electrons(photon_fs, electron_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_electrons, "DressedElectrons");
 
-      DressedLeptons dressed_muons(photon_fs, muon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_muons(photon_fs, muon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_muons, "DressedMuons");
 
       VetoedFinalState remfs(fs);
@@ -52,8 +52,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 4.4);
-	    vector<DressedLepton> electrons = apply<DressedLeptons>(event, "DressedElectrons").dressedLeptons();
-	    vector<DressedLepton> muons = apply<DressedLeptons>(event, "DressedMuons").dressedLeptons();
+	    DressedLeptons electrons = apply<LeptonFinder>(event, "DressedElectrons").dressedLeptons();
+	    DressedLeptons muons = apply<LeptonFinder>(event, "DressedMuons").dressedLeptons();
 
 	   	// Overlap Removal
       idiscardIfAnyDeltaRLess(electrons, jets, 0.4);

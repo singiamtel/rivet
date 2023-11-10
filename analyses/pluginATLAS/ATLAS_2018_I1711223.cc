@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
@@ -29,8 +29,8 @@ namespace Rivet {
       // Electrons and muons in Fiducial PS
       PromptFinalState leptons(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       leptons.acceptTauDecays(false);
-      DressedLeptons dressedleptons(photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
-      declare(dressedleptons, "DressedLeptons");
+      LeptonFinder dressedleptons(photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
+      declare(dressedleptons, "LeptonFinder");
 
       // Prompt neutrinos (yikes!)
       IdentifiedFinalState nu_id;
@@ -44,11 +44,11 @@ namespace Rivet {
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 5.0, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 5.0, PhotonOrigin::ALL);
       
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 5.0, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 5.0, PhotonOrigin::ALL);
       
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5));
@@ -81,7 +81,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const Particles& dressedleptons = apply<DressedLeptons>(event, "DressedLeptons").particlesByPt();
+      const Particles& dressedleptons = apply<LeptonFinder>(event, "LeptonFinder").particlesByPt();
       const Particles& neutrinos = apply<PromptFinalState>(event, "Neutrinos").particlesByPt();
       Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 4.5);
 

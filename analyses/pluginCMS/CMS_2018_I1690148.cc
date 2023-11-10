@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -65,8 +65,8 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
 
       // NB. useDecayPhotons=true allows for photons with tau ancestor; photons from hadrons are vetoed by the PromptFinalState;
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
-      declare(dressed_leptons, "DressedLeptons");
+      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
+      declare(dressed_leptons, "LeptonFinder");
 
       // Projection for jets
       VetoedFinalState fsForJets(fs);
@@ -89,7 +89,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // select ttbar -> lepton+jets
-      const vector<DressedLepton>& leptons = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
+      const DressedLeptons& leptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
       int nsel_leptons = 0;
       for (const DressedLepton& lepton : leptons) {
         if (lepton.pt() > 26.) nsel_leptons += 1; else vetoEvent; // found veto lepton

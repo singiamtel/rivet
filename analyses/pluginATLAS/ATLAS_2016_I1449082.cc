@@ -4,7 +4,7 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -57,9 +57,9 @@ namespace Rivet {
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
       // Electron dressing
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
-      DressedLeptons dressedelectrons_full(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons_full(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Muon projections
       // ---------------------
@@ -67,9 +67,9 @@ namespace Rivet {
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
       // Muon dressing
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
-      DressedLeptons dressedmuons_full(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons_full(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
 
       // Neutrino projections
       // ---------------------
@@ -113,9 +113,9 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the electrons and muons
-      const vector<DressedLepton> dressedelectrons = apply<DressedLeptons>(event, "dressedelectrons").dressedLeptons();
-      const vector<DressedLepton> dressedmuons     = apply<DressedLeptons>(event, "dressedmuons").dressedLeptons();
-      const vector<DressedLepton> leptons = dressedelectrons + dressedmuons;
+      const DressedLeptons dressedelectrons = apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons();
+      const DressedLeptons dressedmuons     = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
+      const DressedLeptons leptons = dressedelectrons + dressedmuons;
       // Require at least 2 leptons in the event
       if (leptons.size() < 2) vetoEvent;
 

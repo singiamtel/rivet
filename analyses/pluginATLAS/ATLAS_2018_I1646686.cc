@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PartonicTops.hh"
 #include "Rivet/Math/LorentzTrans.hh"
@@ -58,15 +58,15 @@ namespace Rivet {
 
         // Projection to find the electrons
         PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-        DressedLeptons dressedelectrons(photons, electrons, 0.1, dressed_lep);
+        LeptonFinder dressedelectrons(photons, electrons, 0.1, dressed_lep);
         declare(dressedelectrons, "elecs");
-        DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full);
+        LeptonFinder ewdressedelectrons(photons, electrons, 0.1, eta_full);
 
         // Projection to find the muons
         PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-        DressedLeptons dressedmuons(photons, muons, 0.1, dressed_lep);
+        LeptonFinder dressedmuons(photons, muons, 0.1, dressed_lep);
         declare(dressedmuons, "muons");
-        DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full);
+        LeptonFinder ewdressedmuons(photons, muons, 0.1, eta_full);
 
         // Jet clustering.
         VetoedFinalState vfs;
@@ -148,8 +148,8 @@ namespace Rivet {
         }
 
         // Get and veto on dressed leptons
-        const vector<DressedLepton> dressedElectrons = apply<DressedLeptons>(event, "elecs").dressedLeptons();
-        const vector<DressedLepton> dressedMuons     = apply<DressedLeptons>(event, "muons").dressedLeptons();
+        const DressedLeptons dressedElectrons = apply<LeptonFinder>(event, "elecs").dressedLeptons();
+        const DressedLeptons dressedMuons     = apply<LeptonFinder>(event, "muons").dressedLeptons();
         if (!dressedElectrons.empty()) vetoEvent;
         if (!dressedMuons.empty()) vetoEvent;
 

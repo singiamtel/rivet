@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -24,10 +24,10 @@ namespace Rivet {
       Cut el_fid_sel = (Cuts::abseta < 2.47) && (Cuts::pT > 7*GeV);
       Cut mu_fid_sel = (Cuts::abseta < 2.7) && (Cuts::pT > 5*GeV);
 
-      DressedLeptons dressed_elecs(photons, elecs, 0.005, el_fid_sel, PhotonOrigin::NODECAY);
+      LeptonFinder dressed_elecs(photons, elecs, 0.005, el_fid_sel, PhotonOrigin::NODECAY);
       declare(dressed_elecs, "elecs");
 
-      DressedLeptons dressed_muons(photons, muons, 0.005, mu_fid_sel, PhotonOrigin::NODECAY);
+      LeptonFinder dressed_muons(photons, muons, 0.005, mu_fid_sel, PhotonOrigin::NODECAY);
       declare(dressed_muons, "muons");
 
       // Book histos
@@ -186,8 +186,8 @@ namespace Rivet {
 
       //preselection of leptons for ZZ-> llll final state
       Particles dressed_leptons;
-      for (auto lep : apply<DressedLeptons>(event, "muons").dressedLeptons()) { dressed_leptons.push_back(lep); }
-      for (auto lep : apply<DressedLeptons>(event, "elecs").dressedLeptons()) { dressed_leptons.push_back(lep); }
+      for (auto lep : apply<LeptonFinder>(event, "muons").dressedLeptons()) { dressed_leptons.push_back(lep); }
+      for (auto lep : apply<LeptonFinder>(event, "elecs").dressedLeptons()) { dressed_leptons.push_back(lep); }
 
       auto foundDressed = getBestQuads(dressed_leptons);
       // if we don't find any quad, we can stop here

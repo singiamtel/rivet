@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/PartonicTops.hh"
@@ -35,14 +35,14 @@ namespace Rivet {
 
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_el(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
-      DressedLeptons electrons(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder electrons(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(electrons,"electrons");
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_mu(promptphotons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
-      DressedLeptons muons(promptphotons,bare_mu, 0.1, Cuts::abseta <2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(promptphotons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder muons(promptphotons,bare_mu, 0.1, Cuts::abseta <2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(muons,"muons");
 
       // AntiKt4TruthWZJets as AntiKt4TruthWZJets, but w/o photons from hadrons in dressing
@@ -93,8 +93,8 @@ namespace Rivet {
       if (nLeptons != 1) vetoEvent;
 
       // Get the selected objects, using the projections.
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
-      vector<DressedLepton> muons     = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
+      DressedLeptons muons     = apply<LeptonFinder>(event, "muons").dressedLeptons();
       const Jets& jets  = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       const Jets& fjets  = apply<FastJets>(event, "fjets").jetsByPt(Cuts::pT > 200*GeV && Cuts::abseta < 2.0);
       PseudoJets ljets;

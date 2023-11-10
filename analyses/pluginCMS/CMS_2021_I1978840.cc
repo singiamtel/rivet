@@ -4,7 +4,7 @@
 #include "Rivet/Math/LorentzTrans.hh"
 #include "Rivet/Particle.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
@@ -149,9 +149,9 @@ namespace Rivet {
       prompt_photons.acceptMuonDecays(true);
       prompt_photons.acceptTauDecays(true);
 
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, dressed_lepton_cone_,
+      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, dressed_lepton_cone_,
                                      Cuts::open(), PhotonOrigin::NODECAY);
-      declare(dressed_leptons, "DressedLeptons");
+      declare(dressed_leptons, "LeptonFinder");
 
       // Photons
       VetoedFinalState vetoed_prompt_photons(prompt_photons);
@@ -182,7 +182,7 @@ namespace Rivet {
     void analyze(const Event& event) {
       vars_.resetVars();
 
-      const Particles leptons = apply<FinalState>(event, "DressedLeptons").particlesByPt();
+      const Particles leptons = apply<FinalState>(event, "LeptonFinder").particlesByPt();
 
       if (leptons.size() == 0) {
         vetoEvent;

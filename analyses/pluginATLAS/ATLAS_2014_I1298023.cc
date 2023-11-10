@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -28,7 +28,7 @@ namespace Rivet {
 
       // dressed leptons
       Cut cuts = (Cuts::abseta < 2.5) & (Cuts::pT > 25*GeV);
-      DressedLeptons leptons(fs, bare_leptons, 0.1, cuts);
+      LeptonFinder leptons(fs, bare_leptons, 0.1, cuts);
       declare(leptons, "leptons");
 
       // MET
@@ -47,7 +47,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const vector<DressedLepton>& leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
+      const DressedLeptons& leptons = apply<LeptonFinder>(event, "leptons").dressedLeptons();
       if ( leptons.size() < 2 )  vetoEvent;
 
       double minDR_ll = DBL_MAX, mll = -1.0;

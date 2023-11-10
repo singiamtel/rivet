@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -31,7 +31,7 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedelectrons, "DressedElectrons");
 
       // Projection to find the muons
@@ -39,7 +39,7 @@ namespace Rivet {
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
-      DressedLeptons dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
       declare(dressedmuons, "DressedMuons");
 
       book(_h , 2, 1 ,1);
@@ -49,8 +49,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the selected objects, using the projections.
-      const size_t num_es = apply<DressedLeptons>(event, "DressedElectrons").dressedLeptons().size();
-      const size_t num_mus = apply<DressedLeptons>(event, "DressedMuons").dressedLeptons().size();
+      const size_t num_es = apply<LeptonFinder>(event, "DressedElectrons").dressedLeptons().size();
+      const size_t num_mus = apply<LeptonFinder>(event, "DressedMuons").dressedLeptons().size();
 
       // Evaluate basic event selection
       const bool pass_emu = num_es == 1 && num_mus == 1;

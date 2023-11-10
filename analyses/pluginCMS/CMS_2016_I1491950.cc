@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -28,8 +28,8 @@ namespace Rivet {
 
     // Projection for dressed electrons and muons
     Cut leptonCuts = Cuts::abseta < 2.5 and Cuts::pt > 30.*GeV;
-    SpecialDressedLeptons dressedleptons(prompt_fs, leptonCuts);
-    declare(dressedleptons, "DressedLeptons");
+    SpecialLeptonFinder dressedleptons(prompt_fs, leptonCuts);
+    declare(dressedleptons, "LeptonFinder");
 
     // Neutrinos
     IdentifiedFinalState neutrinos(prompt_fs);
@@ -107,8 +107,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // leptons
-      const SpecialDressedLeptons& dressedleptons_proj = apply<SpecialDressedLeptons>(event, "DressedLeptons");
-      std::vector<DressedLepton> dressedLeptons = dressedleptons_proj.dressedLeptons();
+      const SpecialLeptonFinder& dressedleptons_proj = apply<SpecialLeptonFinder>(event, "LeptonFinder");
+      DressedLeptons dressedLeptons = dressedleptons_proj.dressedLeptons();
       if(dressedLeptons.size() != 1) return;
 
       // neutrinos
@@ -342,14 +342,14 @@ namespace Rivet {
     /// @brief Special dressed lepton finder
     ///
     /// Find dressed leptons by clustering all leptons and photons
-    class SpecialDressedLeptons : public FinalState {
+    class SpecialLeptonFinder : public FinalState {
     public:
 
       /// The default constructor. May specify cuts
-      SpecialDressedLeptons(const FinalState& fs, const Cut& cut)
+      SpecialLeptonFinder(const FinalState& fs, const Cut& cut)
         : FinalState(cut)
       {
-        setName("SpecialDressedLeptons");
+        setName("SpecialLeptonFinder");
         IdentifiedFinalState ifs(fs);
         ifs.acceptIdPair(PID::PHOTON);
         ifs.acceptIdPair(PID::ELECTRON);
@@ -360,18 +360,18 @@ namespace Rivet {
 
       /// Clone on the heap.
       virtual unique_ptr<Projection> clone() const {
-        return unique_ptr<Projection>(new SpecialDressedLeptons(*this));
+        return unique_ptr<Projection>(new SpecialLeptonFinder(*this));
       }
 
       /// Import to avoid warnings about overload-hiding
       using Projection::operator =;
 
       /// Retrieve the dressed leptons
-      const vector<DressedLepton>& dressedLeptons() const { return _clusteredLeptons; }
+      const DressedLeptons& dressedLeptons() const { return _clusteredLeptons; }
 
     private:
       /// Container which stores the clustered lepton objects
-      vector<DressedLepton> _clusteredLeptons;
+      DressedLeptons _clusteredLeptons;
 
     public:
       void project(const Event& e) {
@@ -379,7 +379,7 @@ namespace Rivet {
         _theParticles.clear();
         _clusteredLeptons.clear();
 
-        vector<DressedLepton> allClusteredLeptons;
+        DressedLeptons allClusteredLeptons;
 
         const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(5.*GeV);
         for (const Jet& jet : jets) {

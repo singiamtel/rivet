@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
@@ -37,9 +37,9 @@ namespace Rivet {
       // Project dressed leptons (e/mu not from tau) with pT > 27 GeV and |eta| < 2.5
       // Both for normal and simplified phase space
       PromptFinalState lep_bare(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      DressedLeptons lep_dressed(photon_id, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder lep_dressed(photon_id, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(lep_dressed,"lep_dressed");
-      DressedLeptons lep_dressed_simpl(photon_id, lep_bare, 0.1, lepton_cuts_simpl, PhotonOrigin::ALL);
+      LeptonFinder lep_dressed_simpl(photon_id, lep_bare, 0.1, lepton_cuts_simpl, PhotonOrigin::ALL);
       declare(lep_dressed_simpl,"lep_dressed_simpl");
 
       // Get MET
@@ -101,8 +101,8 @@ namespace Rivet {
 
       // Get met and find leptons
       const MissingMomentum& met = apply<MissingMomentum>(event, "met");
-      const vector<DressedLepton> &leptons       = apply<DressedLeptons>(event, "lep_dressed").dressedLeptons();
-      const vector<DressedLepton> &leptons_simpl = apply<DressedLeptons>(event, "lep_dressed_simpl").dressedLeptons();
+      const DressedLeptons &leptons       = apply<LeptonFinder>(event, "lep_dressed").dressedLeptons();
+      const DressedLeptons &leptons_simpl = apply<LeptonFinder>(event, "lep_dressed_simpl").dressedLeptons();
 
       // Find jets and jets for simplified phase space (for the latter slightly different leptons are excluded from clustering)
       const Jets& jets30     = apply<FastJets>(event, "jets").jetsByPt(Cuts::abseta < 4.5 && Cuts::pT > 30*GeV);

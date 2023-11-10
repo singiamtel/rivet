@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -141,12 +141,12 @@ namespace Rivet {
       FinalState fs;
 
       PromptFinalState bareMuons(Cuts::abspid == PID::MUON);
-      declare(DressedLeptons(fs, bareMuons, /*dRmax = */0.1,
+      declare(LeptonFinder(fs, bareMuons, /*dRmax = */0.1,
                              Cuts::pT > 20*GeV && Cuts::abseta < 2.4,
 			     PhotonOrigin::ALL), "muons");
 
       PromptFinalState bareElectrons(Cuts::abspid == PID::ELECTRON);
-      declare(DressedLeptons(fs, bareElectrons, /*dRmax =*/ 0.1,
+      declare(LeptonFinder(fs, bareElectrons, /*dRmax =*/ 0.1,
                              Cuts::pT > 20*GeV && Cuts::abseta < 2.4,
 			     PhotonOrigin::ALL), "electrons");
 
@@ -170,7 +170,7 @@ namespace Rivet {
     /// algorithm
     /// @param leptons pt-ordered of electron or muon collection to use to build
     /// the Z boson
-    std::unique_ptr<Particle> zfinder(const std::vector<DressedLepton>& leptons){
+    std::unique_ptr<Particle> zfinder(const DressedLeptons& leptons){
       if(leptons.size() < 2) return 0;
       if(leptons[0].charge()*leptons[1].charge() > 0) return 0;
       std::unique_ptr<Particle> cand(new Particle(PID::ZBOSON, leptons[0].mom()
@@ -182,13 +182,13 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      vector<DressedLepton> muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
+      DressedLeptons muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
 
       //Look for Z->ee
       std::unique_ptr<Particle> z = zfinder(electrons);
 
-      const vector<DressedLepton>* dressedLeptons = 0;
+      const DressedLeptons* dressedLeptons = 0;
 
       //Look for Z->ee
       if (z.get() != nullptr && _mode != 1) {

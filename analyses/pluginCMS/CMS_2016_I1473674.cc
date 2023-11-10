@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PartonicTops.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -37,14 +37,14 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState electrons(el_id);
       declare(electrons, "Electrons");
-      DressedLeptons dressed_electrons(photons, electrons, 0.1);
+      LeptonFinder dressed_electrons(photons, electrons, 0.1);
       declare(dressed_electrons, "DressedElectrons");
       //
       IdentifiedFinalState mu_id(fs);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState muons(mu_id);
       declare(muons, "Muons");
-      DressedLeptons dressed_muons(photons, muons, 0.1);
+      LeptonFinder dressed_muons(photons, muons, 0.1);
       declare(dressed_muons, "DressedMuons");
 
       // Projection for jets
@@ -75,8 +75,8 @@ namespace Rivet {
       if (hadronicpartontops.size() != 1) vetoEvent;
 
       // Select ttbar -> lepton+jets at particle level
-      const DressedLeptons& dressed_electrons = apply<DressedLeptons>(event, "DressedElectrons");
-      const DressedLeptons& dressed_muons = apply<DressedLeptons>(event, "DressedMuons");
+      const LeptonFinder& dressed_electrons = apply<LeptonFinder>(event, "DressedElectrons");
+      const LeptonFinder& dressed_muons = apply<LeptonFinder>(event, "DressedMuons");
       if (dressed_electrons.dressedLeptons().size() + dressed_muons.dressedLeptons().size() != 1) vetoEvent;
       const FourMomentum lepton = (dressed_electrons.dressedLeptons().empty() ? dressed_muons : dressed_electrons).dressedLeptons()[0];
 

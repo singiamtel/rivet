@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 
@@ -47,7 +47,7 @@ namespace Rivet {
       // Dress the prompt bare leptons with prompt photons within dR < 0.1,
       // and apply some fiducial cuts on the dressed leptons
       Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
+      LeptonFinder dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
       declare(dressed_leps, "leptons");
 
       // Missing momentum
@@ -65,7 +65,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Retrieve dressed leptons, sorted by pT
-      Particles leptons = apply<DressedLeptons>(event, "leptons").particles();
+      Particles leptons = apply<LeptonFinder>(event, "leptons").particles();
 
       // Apply a #leptons requirement
       if (leptons.size() <= 1 || leptons.size() >= 4) return;

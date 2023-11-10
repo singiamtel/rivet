@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PartonicTops.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
@@ -40,8 +40,8 @@ namespace Rivet {
       PromptFinalState prompt_leptons(charged_leptons, TauDecaysAs::NONPROMPT);
       PromptFinalState prompt_photons(photons, TauDecaysAs::PROMPT);
 
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
-      declare(dressed_leptons, "DressedLeptons");
+      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
+      declare(dressed_leptons, "LeptonFinder");
 
       // Projection for jets
       VetoedFinalState fs_jets(fs);
@@ -204,9 +204,8 @@ namespace Rivet {
 
       //Particle-level analysis
       // Select leptons
-      const vector<DressedLepton>& dressedLeptons = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
-      if (dressedLeptons.size() != 2)
-        vetoEvent;
+      const DressedLeptons& dressedLeptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
+      if (dressedLeptons.size() != 2) vetoEvent;
       sortByPt(dressedLeptons);
 
       const FourMomentum& lepton1 = dressedLeptons[0].momentum();

@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/VisibleFinalState.hh"
@@ -35,8 +35,8 @@ namespace Rivet {
       // Dressed leptons
       const IdentifiedFinalState allphoton_fs(PID::PHOTON); // photons used for lepton dressing
       const Cut leptoncut = Cuts::pT > 20*GeV && Cuts::abseta < 2.47;
-      const DressedLeptons dressedelectron_fs(allphoton_fs, bareelectron_fs, 0.1, leptoncut, PhotonOrigin::ALL);
-      const DressedLeptons dressedmuon_fs(allphoton_fs, baremuon_fs, 0.1, leptoncut, PhotonOrigin::ALL);
+      const LeptonFinder dressedelectron_fs(allphoton_fs, bareelectron_fs, 0.1, leptoncut, PhotonOrigin::ALL);
+      const LeptonFinder dressedmuon_fs(allphoton_fs, baremuon_fs, 0.1, leptoncut, PhotonOrigin::ALL);
 
       declare(dressedelectron_fs, "Electrons");
       declare(dressedmuon_fs, "Muons");
@@ -65,8 +65,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      vector<DressedLepton> electrons = apply<DressedLeptons>(event, "Electrons").dressedLeptons();
-      vector<DressedLepton> muons = apply<DressedLeptons>(event, "Muons").dressedLeptons();
+      DressedLeptons electrons = apply<LeptonFinder>(event, "Electrons").dressedLeptons();
+      DressedLeptons muons = apply<LeptonFinder>(event, "Muons").dressedLeptons();
       const Particles& photons = apply<PromptFinalState>(event, "Photons").particlesByPt();
 
       if ( (electrons.size() < 2 && muons.size() < 2) ) vetoEvent;

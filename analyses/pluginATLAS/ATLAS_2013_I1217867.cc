@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -44,13 +44,13 @@ namespace Rivet {
 
       Cut cuts = (Cuts::absetaIn(0, 1.37) || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
 
-      DressedLeptons electronClusters(fs, bareElectrons, 0.1, cuts);
+      LeptonFinder electronClusters(fs, bareElectrons, 0.1, cuts);
       declare(electronClusters, "electronClusters");
 
       IdentifiedFinalState bareMuons(fs);
       bareMuons.acceptIdPair(PID::MUON);
       Cut mucuts = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      DressedLeptons muonClusters(fs, bareMuons, 0.1, mucuts);
+      LeptonFinder muonClusters(fs, bareMuons, 0.1, mucuts);
       declare(muonClusters, "muonClusters");
 
       IdentifiedFinalState neutrinos(Cuts::pT > 25*GeV);
@@ -74,8 +74,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& e) {
-      const DressedLeptons& electronClusters = apply<DressedLeptons>(e, "electronClusters");
-      const DressedLeptons& muonClusters = apply<DressedLeptons>(e, "muonClusters");
+      const LeptonFinder& electronClusters = apply<LeptonFinder>(e, "electronClusters");
+      const LeptonFinder& muonClusters = apply<LeptonFinder>(e, "muonClusters");
       int ne = electronClusters.dressedLeptons().size();
       int nmu = muonClusters.dressedLeptons().size();
 

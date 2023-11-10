@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -26,11 +26,11 @@ namespace Rivet {
 
       // Selection: lepton selection
       Cut etaranges_el = Cuts::abseta < 2.47 && Cuts::pT > 7*GeV;
-      DressedLeptons electron_sel4l(photons, bare_el, 0.1, etaranges_el, PhotonOrigin::NODECAY);
+      LeptonFinder electron_sel4l(photons, bare_el, 0.1, etaranges_el, PhotonOrigin::NODECAY);
       declare(electron_sel4l, "electrons");
 
       Cut etaranges_mu = Cuts::abseta < 2.7 && Cuts::pT > 6*GeV;
-      DressedLeptons muon_sel4l(photons, bare_mu, 0.1, etaranges_mu, PhotonOrigin::NODECAY);
+      LeptonFinder muon_sel4l(photons, bare_mu, 0.1, etaranges_mu, PhotonOrigin::NODECAY);
       declare(muon_sel4l, "muons");
 
       FastJets jetpro(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
@@ -55,10 +55,10 @@ namespace Rivet {
       // preselection of leptons for ZZ-> llll final state
       ////////////////////////////////////////////////////////////////////
 
-      const vector<DressedLepton>& mu_sel4l = apply<DressedLeptons>(e, "muons").dressedLeptons();
-      const vector<DressedLepton>& el_sel4l = apply<DressedLeptons>(e, "electrons").dressedLeptons();
+      const DressedLeptons& mu_sel4l = apply<LeptonFinder>(e, "muons").dressedLeptons();
+      const DressedLeptons& el_sel4l = apply<LeptonFinder>(e, "electrons").dressedLeptons();
 
-      vector<DressedLepton> leptonsFS_sel4l;
+      DressedLeptons leptonsFS_sel4l;
       leptonsFS_sel4l.insert( leptonsFS_sel4l.end(), mu_sel4l.begin(), mu_sel4l.end() );
       leptonsFS_sel4l.insert( leptonsFS_sel4l.end(), el_sel4l.begin(), el_sel4l.end() );
 

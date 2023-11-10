@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -136,10 +136,10 @@ namespace Rivet {
 
       FinalState muon_fs(fs, Cuts::abspid == PID::MUON);
 
-      DressedLeptons dressed_electrons(photon_fs, electron_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_electrons(photon_fs, electron_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_electrons, "DressedElectrons");
 
-      DressedLeptons dressed_muons(photon_fs, muon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_muons(photon_fs, muon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_muons, "DressedMuons");
 
       FastJets jets(fs, JetAlg::ANTIKT, 0.4);
@@ -247,7 +247,7 @@ namespace Rivet {
       // Make sure that we have a Z-candidate:
       const Particle *lep1 = nullptr, *lep2 = nullptr;
       //
-      const vector<DressedLepton>& muons = apply<DressedLeptons>(event, "DressedMuons").dressedLeptons();
+      const DressedLeptons& muons = apply<LeptonFinder>(event, "DressedMuons").dressedLeptons();
       if (muons.size() == 2) {
         const FourMomentum dimuon = muons[0].mom() + muons[1].mom();
         if ( inRange(dimuon.mass()/GeV, 81.0, 101.0) && PID::charge3(muons[0].pid()) != PID::charge3(muons[1].pid()) ) {
@@ -256,7 +256,7 @@ namespace Rivet {
         }
       }
       //
-      const vector<DressedLepton>& electrons = apply<DressedLeptons>(event, "DressedElectrons").dressedLeptons();
+      const DressedLeptons& electrons = apply<LeptonFinder>(event, "DressedElectrons").dressedLeptons();
       if (electrons.size() == 2) {
         const FourMomentum dielectron = electrons[0].mom() + electrons[1].mom();
         if ( inRange(dielectron.mass()/GeV, 81.0, 101.0) && PID::charge3(electrons[0].pid()) != PID::charge3(electrons[1].pid()) ) {

@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -26,7 +26,7 @@ namespace Rivet {
       Cut cut_lep = (Cuts::abseta < 2.7) && (Cuts::pT > 5*GeV);
       PromptFinalState prompt_photons(Cuts::abspid == PID::PHOTON);
       PromptFinalState prompt_leptons(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      DressedLeptons dLeptons(prompt_photons, prompt_leptons, 0.1, cut_lep, PhotonOrigin::ALL);
+      LeptonFinder dLeptons(prompt_photons, prompt_leptons, 0.1, cut_lep, PhotonOrigin::ALL);
       declare(dLeptons, "AllLeptons");
 
       /// Jet inputs
@@ -35,7 +35,7 @@ namespace Rivet {
 
       // reject all leptons dressed with only prompt photons from jet input
       FinalState leptons(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-      DressedLeptons reject_leptons(prompt_photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
+      LeptonFinder reject_leptons(prompt_photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
       jet_input.addVetoOnThisFinalState(reject_leptons);
 
       // reject prompt invisibles, including from tau decays
@@ -126,7 +126,7 @@ namespace Rivet {
       }
       _s["xs_flavour"]->fill(edges["xs_flavour"][8]);
 
-      const vector<DressedLepton>& all_leps = apply<DressedLeptons>(e, "AllLeptons").dressedLeptons();
+      const DressedLeptons& all_leps = apply<LeptonFinder>(e, "AllLeptons").dressedLeptons();
       unsigned int n_parts = all_leps.size();
       unsigned int n_OSSF_pairs = 0;
       std::vector<Zstate> dileptons;

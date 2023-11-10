@@ -2,7 +2,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -37,8 +37,8 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
       Cut looseLeptonCuts = Cuts::pt > 15*GeV && Cuts::abseta < 2.4;
 
-      DressedLeptons dressed_leptons(prompt_photons, prompt_leptons, 0.1, looseLeptonCuts, PhotonOrigin::ALL);
-      declare(dressed_leptons, "DressedLeptons");
+      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, 0.1, looseLeptonCuts, PhotonOrigin::ALL);
+      declare(dressed_leptons, "LeptonFinder");
 
       // Projection for jets
       VetoedFinalState fsForJets(fs);
@@ -72,7 +72,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Lepton veto selection
-      const DressedLeptons& dressed_leptons = apply<DressedLeptons>(event, "DressedLeptons");
+      const LeptonFinder& dressed_leptons = apply<LeptonFinder>(event, "LeptonFinder");
       if (dressed_leptons.dressedLeptons().size() != 1) vetoEvent;
 
       // Signal lepton selection

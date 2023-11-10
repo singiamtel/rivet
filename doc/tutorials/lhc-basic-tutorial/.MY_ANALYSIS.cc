@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -31,11 +31,11 @@ namespace Rivet {
       declare(bare_leps, "bare_leps");
 
       PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 10*GeV);
+      LeptonFinder dressed_leps(photons, bare_leps, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 10*GeV);
       declare(dressed_leps, "dressed_leptons");
 
       // jet collection
-      FastJets jets(fs_full, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jets(fs_full, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jets, "jets");
 
       // Book histograms
@@ -54,7 +54,7 @@ namespace Rivet {
 
       const Particles& bare_leptons = apply<PromptFinalState>(event, "bare_leps").particles(Cuts::abseta < 2.5 && Cuts::pT > 10*GeV);
 
-      const Particles& leptons = apply<DressedLeptons>(event, "dressed_leptons").particles();
+      const Particles& leptons = apply<LeptonFinder>(event, "dressed_leptons").particles();
 
       if (leptons.size() != 2)  vetoEvent;
       if (leptons[0].pid() != -leptons[1].pid())  vetoEvent; // same flavour, opposite charge

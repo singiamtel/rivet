@@ -258,7 +258,7 @@ namespace Rivet {
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/DirectFinalState.hh"
 
@@ -299,7 +299,7 @@ namespace Rivet {
       // Dress the bare direct leptons with direct photons within dR < 0.1,
       // and apply some fiducial cuts on the dressed leptons
       Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
+      LeptonFinder dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
       declare(dressed_leps, "leptons");
 
       // Missing momentum
@@ -315,7 +315,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Retrieve dressed leptons, sorted by pT
-      Particles leptons = apply<FinalState>(event, "leptons").particles();
+      Particles leptons = apply<ParticleFinder>(event, "leptons").particles();
 
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);

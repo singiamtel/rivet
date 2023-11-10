@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -30,8 +30,8 @@ namespace Rivet {
             FinalState phs(Cuts::abspid == PID::PHOTON);
 
             Cut lep_fid = (Cuts::abseta < 2.4 && Cuts::pT >= 25*GeV);
-            DressedLeptons dlep(phs, _mode? elfs : mufs, 0.1, lep_fid, PhotonOrigin::ALL);
-            declare(dlep, "DressedLeptons");
+            LeptonFinder dlep(phs, _mode? elfs : mufs, 0.1, lep_fid, PhotonOrigin::ALL);
+            declare(dlep, "LeptonFinder");
 
             FastJets fj(FinalState(), JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
             declare(fj, "AntiKt4Jets");
@@ -45,7 +45,7 @@ namespace Rivet {
         /// Perform the per-event analysis
         void analyze(const Event& event) {
 
-          const vector<DressedLepton> leptons = apply<DressedLeptons>(event, "DressedLeptons").dressedLeptons();
+          const DressedLeptons leptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
           const Jets jets = apply<FastJets>(event, "AntiKt4Jets").jetsByPt(Cuts::pT >= 100*GeV && Cuts::abseta <= 2.1);
 
           if (leptons.size() != 1)       vetoEvent;

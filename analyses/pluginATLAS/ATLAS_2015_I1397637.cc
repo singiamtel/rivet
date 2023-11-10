@@ -5,7 +5,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -66,13 +66,13 @@ namespace Rivet {
       Cut eta_ranges = Cuts::abseta < 2.5;
 
       // Get dressed muons and the good muons (pt>25GeV)
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, eta_ranges, PhotonOrigin::ALL);
-      DressedLeptons dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, eta_ranges, PhotonOrigin::ALL);
+      LeptonFinder dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressed_mu, "muons");
 
       // Get dressed electrons and the good electrons (pt>25GeV)
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1, eta_ranges, PhotonOrigin::ALL);
-      DressedLeptons dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(photons, bare_el, 0.1, eta_ranges, PhotonOrigin::ALL);
+      LeptonFinder dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressed_el, "electrons");
 
       // Jet clustering
@@ -110,8 +110,8 @@ namespace Rivet {
       if (bare_lep.size() + bare_tau.size() != 1) vetoEvent;
 
       // Electrons and muons
-      const vector<DressedLepton>& electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
-      const vector<DressedLepton>& muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      const DressedLeptons& electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
+      const DressedLeptons& muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
       if (electrons.size() + muons.size() != 1) vetoEvent;
       const DressedLepton& lepton = muons.empty() ? electrons[0] : muons[0];
 

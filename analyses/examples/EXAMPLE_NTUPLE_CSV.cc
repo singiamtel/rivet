@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/DirectFinalState.hh"
 #include <fstream>
@@ -30,7 +30,7 @@ namespace Rivet {
       FastJets jetfs(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "Jets");
       DirectFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      DressedLeptons dressed_leps(fs, bare_leps, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV);
+      LeptonFinder dressed_leps(fs, bare_leps, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV);
       declare(dressed_leps, "Leptons");
       declare(MissingMomentum(fs), "MET");
 

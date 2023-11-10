@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
@@ -27,10 +27,10 @@ namespace Rivet {
       FinalState photons(Cuts::abspid == PID::PHOTON);
 
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
 
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
       vfs.addVetoOnThisFinalState(all_dressed_el);

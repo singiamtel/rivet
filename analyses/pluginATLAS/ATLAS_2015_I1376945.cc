@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -44,10 +44,10 @@ namespace Rivet {
       bare_elecs_fs.acceptIdPair(PID::ELECTRON);
 
       Cut lep_cuts = (Cuts::abseta < 2.5) & (Cuts::pT > 1*MeV);
-      DressedLeptons muons(Photon, bare_muons_fs, 0.1, lep_cuts);
+      LeptonFinder muons(Photon, bare_muons_fs, 0.1, lep_cuts);
       declare(muons, "MUONS");
 
-      DressedLeptons elecs(Photon, bare_elecs_fs, 0.1, lep_cuts);
+      LeptonFinder elecs(Photon, bare_elecs_fs, 0.1, lep_cuts);
       declare(elecs, "ELECS");
 
       VetoedFinalState vfs;
@@ -71,8 +71,8 @@ namespace Rivet {
        *    JETS    *
        **************/
       const Jets& allJets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25.0*GeV && Cuts::absrap < 2.5);
-      const vector<DressedLepton>& all_elecs = apply<DressedLeptons>(event, "ELECS").dressedLeptons();
-      const vector<DressedLepton>& all_muons = apply<DressedLeptons>(event, "MUONS").dressedLeptons();
+      const DressedLeptons& all_elecs = apply<LeptonFinder>(event, "ELECS").dressedLeptons();
+      const DressedLeptons& all_muons = apply<LeptonFinder>(event, "MUONS").dressedLeptons();
       Jets goodJets;
       for (const Jet & j : allJets) {
         bool keep = true;
@@ -84,7 +84,7 @@ namespace Rivet {
       /****************
        *    LEPTONS   *
        ****************/
-      vector<DressedLepton> muons, vetoMuons;
+      DressedLeptons muons, vetoMuons;
       for (const DressedLepton & mu : all_muons) {
         bool keep = true;
         for (const Jet & j : goodJets)  keep &= deltaR(j, mu) >= 0.4;
@@ -94,7 +94,7 @@ namespace Rivet {
         }
       }
 
-      vector<DressedLepton> elecs, vetoElecs;
+      DressedLeptons elecs, vetoElecs;
       for (const DressedLepton & el : all_elecs) {
         bool keep = true;
         for (const Jet & j : goodJets)  keep &= deltaR(j, el) >= 0.4;

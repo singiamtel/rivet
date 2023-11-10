@@ -5,7 +5,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.fhh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 

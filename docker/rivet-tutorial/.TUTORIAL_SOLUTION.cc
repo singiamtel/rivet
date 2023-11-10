@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
@@ -24,7 +24,7 @@ namespace Rivet {
       // Projections
       FinalState leps(Cuts::pT > 20*GeV && Cuts::abspid == (_eemode ? PID::ELECTRON : PID::MUON));
       declare("Leps", leps);
-      DressedLeptons dleps(0.1, Cuts::pT > 20*GeV && Cuts::abspid == (_eemode ? PID::ELECTRON : PID::MUON));
+      LeptonFinder dleps(0.1, Cuts::pT > 20*GeV && Cuts::abspid == (_eemode ? PID::ELECTRON : PID::MUON));
       declare("DLeps", dleps);
       FastJets jets(FinalState(), FastJets::ANTIKT, 0.4);
       declare("Jets", jets);

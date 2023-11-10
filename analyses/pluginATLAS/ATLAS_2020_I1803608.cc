@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -30,10 +30,10 @@ namespace Rivet {
       Cut cuts_el = (Cuts::pT > 25*GeV) && ( Cuts::abseta < 1.37 || (Cuts::abseta > 1.52 && Cuts::abseta < 2.47) );
       Cut cuts_mu = (Cuts::pT > 25*GeV) && (Cuts::abseta < 2.4);
 
-      DressedLeptons dressed_electrons(photons, electrons, 0.1, cuts_el);
+      LeptonFinder dressed_electrons(photons, electrons, 0.1, cuts_el);
       declare(dressed_electrons, "DressedElectrons");
 
-      DressedLeptons dressed_muons(photons, muons, 0.1, cuts_mu);
+      LeptonFinder dressed_muons(photons, muons, 0.1, cuts_mu);
       declare(dressed_muons, "DressedMuons");
 
       FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
@@ -56,8 +56,8 @@ namespace Rivet {
 
       // Access fiducial electrons and muons
       const Particle *l1 = nullptr, *l2 = nullptr;
-      Particles muons = apply<DressedLeptons>(event, "DressedMuons").particles();
-      Particles elecs = apply<DressedLeptons>(event, "DressedElectrons").particles();
+      Particles muons = apply<LeptonFinder>(event, "DressedMuons").particles();
+      Particles elecs = apply<LeptonFinder>(event, "DressedElectrons").particles();
 
       // Dilepton selection 1: =2 leptons of the same kind
       if (muons.size()+elecs.size() != 2) vetoEvent;

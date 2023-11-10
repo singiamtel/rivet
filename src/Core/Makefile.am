@@ -5,7 +5,8 @@ EXTRA_DIST = zstr
 noinst_LTLIBRARIES  = libRivetCore.la
 
 libRivetCore_la_SOURCES = \
-  Run.cc Event.cc Jet.cc Particle.cc \
+  Run.cc Event.cc \
+  Jet.cc Particle.cc DressedLepton.cc \
   ProjectionApplier.cc Projection.cc \
   Analysis.cc AnalysisLoader.cc AnalysisInfo.cc \
   AnalysisHandler.cc ProjectionHandler.cc

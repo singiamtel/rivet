@@ -5,7 +5,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
 
 namespace Rivet {
@@ -30,8 +30,8 @@ namespace Rivet {
       ChargedLeptons charged_leptons;
       PromptFinalState prompt_leptons(charged_leptons);
       Cut leptonCuts = Cuts::pT > 45*GeV && Cuts::abseta < 2.1;
-      DressedLeptons dressed_leptons(photons, prompt_leptons, 0.1, leptonCuts);
-      declare(dressed_leptons, "DressedLeptons");
+      LeptonFinder dressed_leptons(photons, prompt_leptons, 0.1, leptonCuts);
+      declare(dressed_leptons, "LeptonFinder");
 
       // Jets
       VetoedFinalState fs_jets;
@@ -58,10 +58,10 @@ namespace Rivet {
       if (leptonicTops.size() != 1 || hadronicTops.size() != 1) vetoEvent;
 
       // Get the leptons
-      const DressedLeptons& dressed_leptons = apply<DressedLeptons>(event, "DressedLeptons");
+      const LeptonFinder& dressed_leptons = apply<LeptonFinder>(event, "LeptonFinder");
 
       // Leading dressed lepton
-      const vector<DressedLepton> leptons = dressed_leptons.dressedLeptons();
+      const DressedLeptons leptons = dressed_leptons.dressedLeptons();
       if (leptons.empty()) vetoEvent;
       Particle lepton;
       for (const Particle& l : leptons) {

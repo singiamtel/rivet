@@ -1,6 +1,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Math/LorentzTrans.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
@@ -33,7 +33,7 @@ namespace Rivet {
       prompt_leptons.acceptMuonDecays(true);
       prompt_leptons.acceptTauDecays(true);
 
-      DressedLeptons dressed_leptons(all_photons, prompt_leptons, 0.1,
+      LeptonFinder dressed_leptons(all_photons, prompt_leptons, 0.1,
                                      Cuts::abseta < 2.4 && Cuts::pT > 15. * GeV,
                                      PhotonOrigin::ALL);
       declare(dressed_leptons, "MyLeptons");
@@ -147,7 +147,7 @@ namespace Rivet {
     }
 
     void analyze(const Event &event) {
-      vector<DressedLepton> m_leptons;
+      DressedLeptons m_leptons;
       Jets m_bjets;
       Jets m_ljets;
       Jets m_alljets;
@@ -156,8 +156,8 @@ namespace Rivet {
       Particles m_additionaljets;
 
       int numvetoleps = 0;
-      const vector<DressedLepton> &dressedleptons =
-          apply<DressedLeptons>(event, "MyLeptons").dressedLeptons();
+      const DressedLeptons &dressedleptons =
+          apply<LeptonFinder>(event, "MyLeptons").dressedLeptons();
       for (const DressedLepton &lep : dressedleptons) {
         if (lep.pt()/GeV > 30. && lep.abseta() < 2.4) {
           m_leptons.push_back(lep);

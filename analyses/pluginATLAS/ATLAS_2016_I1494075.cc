@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/DirectFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -31,8 +31,8 @@ namespace Rivet {
         // Wide lepton cuts which cover both channels and are used for the jet veto.
         Cut dressedele_cuts = (Cuts::abseta < 4.9) && (Cuts::pT > 7*GeV);
         Cut dressedmu_cuts = (Cuts::abseta < 2.7) && (Cuts::pT > 7*GeV);
-        const DressedLeptons dressedelectrons(prompt_photons, prompt_ele, 0.1, dressedele_cuts);
-        const DressedLeptons dressedmuons(prompt_photons, prompt_mu, 0.1, dressedmu_cuts);
+        const LeptonFinder dressedelectrons(prompt_photons, prompt_ele, 0.1, dressedele_cuts);
+        const LeptonFinder dressedmuons(prompt_photons, prompt_mu, 0.1, dressedmu_cuts);
 
         declare(dressedelectrons, "electrons");
         declare(dressedmuons, "muons");
@@ -72,8 +72,8 @@ namespace Rivet {
 
       // find out how many good jets
       //Jets jets = apply<FastJets>(event, "Jets").jetsByPt();
-      Particles cand_e = apply<DressedLeptons>(event, "electrons").particlesByPt();
-      Particles cand_mu = apply<DressedLeptons>(event, "muons").particlesByPt();
+      Particles cand_e = apply<LeptonFinder>(event, "electrons").particlesByPt();
+      Particles cand_mu = apply<LeptonFinder>(event, "muons").particlesByPt();
 
       Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::abseta < 4.5 && Cuts::pT>25*GeV);
       idiscardIfAnyDeltaRLess(jets, cand_e, 0.3);
@@ -141,7 +141,7 @@ namespace Rivet {
         ///////////
         // Insert selected muons then electrons into the lepton 4l final state
         ///////////
-        vector<DressedLepton> leptonsFS_sel4l;
+        DressedLeptons leptonsFS_sel4l;
         leptonsFS_sel4l.insert( leptonsFS_sel4l.end(), cand_mu.begin(), cand_mu.end() );
         leptonsFS_sel4l.insert( leptonsFS_sel4l.end(), cand_e.begin(), cand_e.end() );
 
@@ -171,7 +171,7 @@ namespace Rivet {
             std::swap(lead_Z, sub_Z);
           }
 
-          vector<DressedLepton> lepton4l;
+          DressedLeptons lepton4l;
           lepton4l.insert( lepton4l.end(), leptonsFS_sel4l.begin(), leptonsFS_sel4l.end() );
           std::sort(lepton4l.begin(), lepton4l.end(), [](const DressedLepton& l1, const DressedLepton& l2) {
             return (l1.abseta() > l2.abseta());

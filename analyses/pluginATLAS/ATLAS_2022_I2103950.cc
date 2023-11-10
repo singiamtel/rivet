@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Tools/RivetMT2.hh"
@@ -37,11 +37,11 @@ namespace Rivet {
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_mu(photons, bare_mu, 0.1);
+      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1);
 
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      DressedLeptons all_dressed_el(photons, bare_el, 0.1);
+      LeptonFinder all_dressed_el(photons, bare_el, 0.1);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5));
@@ -61,11 +61,11 @@ namespace Rivet {
       PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
 
-      DressedLeptons lep_dressed(photons, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder lep_dressed(photons, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(lep_dressed,"lep_dressed");
-      DressedLeptons elecs(photons, prompt_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder elecs(photons, prompt_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(elecs, "elecs");
-      DressedLeptons muons(photons, prompt_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder muons(photons, prompt_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
       declare(muons, "muons");
 
       // Get MET from generic invisibles
@@ -92,15 +92,15 @@ namespace Rivet {
       const FourMomentum metinvisible = sum(ifs.particles(), FourMomentum());
 
       // Get met and find leptons
-      //const vector<DressedLepton> &leptons       = apply<DressedLeptons>(event, "lep_dressed").dressedLeptons();
-      const vector<DressedLepton>& all_elecs = apply<DressedLeptons>(event, "elecs").dressedLeptons();
-      const vector<DressedLepton>& all_muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      //const DressedLeptons &leptons       = apply<LeptonFinder>(event, "lep_dressed").dressedLeptons();
+      const DressedLeptons& all_elecs = apply<LeptonFinder>(event, "elecs").dressedLeptons();
+      const DressedLeptons& all_muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
       //Particles bare_leps  = apply<IdentifiedFinalState>(event, "bare_leptons").particles();
 
       // Find jets and jets for simplified phase space (for the latter slightly different leptons are excluded from clustering)
       Jets alljets = apply<FastJets>(event, "jets").jetsByPt(Cuts::abseta < 4.5 && Cuts::pT > 20*GeV);
 
-      vector<DressedLepton> elecs_muonOR;
+      DressedLeptons elecs_muonOR;
       for (const DressedLepton& el : all_elecs) {
         bool overlaps = false;
         for (const DressedLepton& mu : all_muons) {
@@ -119,7 +119,7 @@ namespace Rivet {
       }
 
       // muon jet overlap removal
-      vector<DressedLepton> muons;
+      DressedLeptons muons;
       for (const DressedLepton& mu : all_muons) {
         float dRcut=0.4;
         if ((0.04+10.0/mu.pT()) < 0.4){
@@ -136,7 +136,7 @@ namespace Rivet {
         muons.push_back(mu);
       }
       // electron jet overlap removal
-      vector<DressedLepton> elecs;
+      DressedLeptons elecs;
       for (const DressedLepton& el : elecs_muonOR) {
         float dRcut=0.4;
         if ((0.04+10/el.pT()) < 0.4){
@@ -160,7 +160,7 @@ namespace Rivet {
       if ((elecs.size()+muons.size()) !=2) vetoEvent;
       // only select electron-muon events
       if (elecs.size() != 1) vetoEvent;
-      vector<DressedLepton> leptons;
+      DressedLeptons leptons;
       if (elecs[0].pT()>muons[0].pT()) {
          leptons.push_back(elecs[0]);
          leptons.push_back(muons[0]);

@@ -4,7 +4,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -42,13 +42,13 @@ namespace Rivet {
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
 
-      DressedLeptons dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedelectrons, "dressedelectrons");
 
-      DressedLeptons ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
-      DressedLeptons vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder vetodressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedelectrons, "vetodressedelectrons");
 
       // Projection to find the muons
@@ -57,11 +57,11 @@ namespace Rivet {
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
       declare(muons, "muons");
-      DressedLeptons dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressedmuons, "dressedmuons");
-      DressedLeptons ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
       declare(ewdressedmuons, "ewdressedmuons");
-      DressedLeptons vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder vetodressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(vetodressedmuons, "vetodressedmuons");
 
       // Projection to find neutrinos and produce MET
@@ -108,10 +108,10 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the selected objects, using the projections.
-      _dressedelectrons     = apply<DressedLeptons>(  event, "dressedelectrons").dressedLeptons();
-      _vetodressedelectrons = apply<DressedLeptons>(  event, "vetodressedelectrons").dressedLeptons();
-      _dressedmuons         = apply<DressedLeptons>(  event, "dressedmuons").dressedLeptons();
-      _vetodressedmuons     = apply<DressedLeptons>(  event, "vetodressedmuons").dressedLeptons();
+      _dressedelectrons     = apply<LeptonFinder>(  event, "dressedelectrons").dressedLeptons();
+      _vetodressedelectrons = apply<LeptonFinder>(  event, "vetodressedelectrons").dressedLeptons();
+      _dressedmuons         = apply<LeptonFinder>(  event, "dressedmuons").dressedLeptons();
+      _vetodressedmuons     = apply<LeptonFinder>(  event, "vetodressedmuons").dressedLeptons();
       _neutrinos            = apply<PromptFinalState>(event, "neutrinos").particlesByPt();
       const Jets& all_jets  = apply<FastJets>(        event, "jets").jetsByPt(Cuts::pT > 25.0*GeV && Cuts::abseta < 2.5);
 
@@ -276,7 +276,7 @@ namespace Rivet {
     }
 
     /// @name Objects that are used by the event selection decisions
-    vector<DressedLepton> _dressedelectrons, _vetodressedelectrons, _dressedmuons, _vetodressedmuons;
+    DressedLeptons _dressedelectrons, _vetodressedelectrons, _dressedmuons, _vetodressedmuons;
     Particles _neutrinos;
     map<string, Histo1DPtr> _h;
   };

@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -34,14 +34,14 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState el_bare(el_id);
       Cut cuts = (Cuts::abseta < 2.47) && ( (Cuts::abseta <= 1.37) || (Cuts::abseta >= 1.52) ) && (Cuts::pT > 15*GeV);
-      DressedLeptons el_dressed_FS(photon_id, el_bare, 0.1, cuts, PhotonOrigin::ALL);
+      LeptonFinder el_dressed_FS(photon_id, el_bare, 0.1, cuts, PhotonOrigin::ALL);
       declare(el_dressed_FS,"EL_DRESSED_FS");
 
       // Project dressed muons with pT > 15 GeV and |eta| < 2.5
       IdentifiedFinalState mu_id(FS);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState mu_bare(mu_id);
-      DressedLeptons mu_dressed_FS(photon_id, mu_bare, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder mu_dressed_FS(photon_id, mu_bare, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
       declare(mu_dressed_FS,"MU_DRESSED_FS");
 
       // get MET from generic invisibles
@@ -79,12 +79,12 @@ namespace Rivet {
 
       // Get final state particles
       const FinalState& ifs = apply<FinalState>(event, "InvisibleFS");
-      const vector<DressedLepton>& good_mu = apply<DressedLeptons>(event, "MU_DRESSED_FS").dressedLeptons();
-      const vector<DressedLepton>& el_dressed = apply<DressedLeptons>(event, "EL_DRESSED_FS").dressedLeptons();
+      const DressedLeptons& good_mu = apply<LeptonFinder>(event, "MU_DRESSED_FS").dressedLeptons();
+      const DressedLeptons& el_dressed = apply<LeptonFinder>(event, "EL_DRESSED_FS").dressedLeptons();
       const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT>25*GeV && Cuts::abseta < 4.5);
 
       //find good electrons
-      vector<DressedLepton> good_el;
+      DressedLeptons good_el;
       for (const DressedLepton& el : el_dressed){
         bool keep = true;
         for (const DressedLepton& mu : good_mu) {

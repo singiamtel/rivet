@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VisibleFinalState.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 
 namespace Rivet {
@@ -35,10 +35,10 @@ namespace Rivet {
         PromptFinalState pfs(fs);
 
         PromptFinalState bareMuons(Cuts::abspid == PID::MUON);
-        declare(DressedLeptons(pfs, bareMuons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "muons");
+        declare(LeptonFinder(pfs, bareMuons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "muons");
 
         PromptFinalState bareElectrons(Cuts::abspid == PID::ELECTRON);
-        declare(DressedLeptons(pfs, bareElectrons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "electrons");
+        declare(LeptonFinder(pfs, bareElectrons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "electrons");
 
         FastJets jets(fs, JetAlg::ANTIKT, 0.4);
         declare(jets, "jets");
@@ -68,7 +68,7 @@ namespace Rivet {
       /// algorithm
       /// @param leptons pt-ordered of electron or muon collection to use to build
       /// the Z boson
-      std::unique_ptr<Particle> zfinder(const std::vector<DressedLepton> &leptons)
+      std::unique_ptr<Particle> zfinder(const DressedLeptons &leptons)
       {
         if (leptons.size() < 2) {
           return nullptr;
@@ -92,10 +92,10 @@ namespace Rivet {
       void analyze(const Event& event)
       {
         // Fetch dressed leptons
-        auto muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
-        auto electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
+        auto muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
+        auto electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
 
-        const std::vector<DressedLepton> *dressedLeptons = nullptr;
+        const DressedLeptons* dressedLeptons = nullptr;
 
         //Look for Z->ee
         std::unique_ptr<Particle> z = zfinder(electrons);

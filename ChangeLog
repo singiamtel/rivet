@@ -2,6 +2,12 @@
 
 	* Add missing efficiency calculation for Counters
 
+2023-11-08  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Rename the DressedLeptons projection to LeptonFinder, and used
+	DressedLeptons as an alias for vector<DressedLepton> cf. Particles
+	and Jets.
+
 2023-11-04  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add a set of Rivet::retrieve(map, key, fallback) functions,

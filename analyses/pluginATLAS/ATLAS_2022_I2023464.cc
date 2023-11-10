@@ -5,7 +5,7 @@
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -43,14 +43,14 @@ namespace Rivet {
       // Create dressed mu projection
       // true in last arg = use also muons from prompt tau decays
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      DressedLeptons dressed_mu( photons, bare_mu, 0.1, Cuts::abseta < 2.7, PhotonOrigin::ALL);
+      LeptonFinder dressed_mu( photons, bare_mu, 0.1, Cuts::abseta < 2.7, PhotonOrigin::ALL);
       declare(dressed_mu, "MFS");
 
       // Create dressed e projection
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       // true in last arg = use also electrons from prompt tau decays
       Cut fid_el = Cuts::abseta < 2.47 && (Cuts::abseta < 1.37 || Cuts::abseta > 1.52);
-      DressedLeptons dressed_el( photons, bare_el, 0.1, fid_el, PhotonOrigin::ALL);
+      LeptonFinder dressed_el( photons, bare_el, 0.1, fid_el, PhotonOrigin::ALL);
       declare(dressed_el, "EFS");
 
       // Create AntiKt4TruthWZJets projection

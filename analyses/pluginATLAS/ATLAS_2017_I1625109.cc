@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -33,8 +33,8 @@ namespace Rivet {
 
     struct Quadruplet {
 
-      vector<DressedLepton> getLeptonsSortedByPt() const {
-        vector<DressedLepton> out = { leadingDilepton.leptons.first, leadingDilepton.leptons.second,
+      DressedLeptons getLeptonsSortedByPt() const {
+        DressedLeptons out = { leadingDilepton.leptons.first, leadingDilepton.leptons.second,
                                       subleadingDilepton.leptons.first, subleadingDilepton.leptons.second };
         std::sort(out.begin(), out.end(), cmpMomByPt);
         return out;
@@ -62,7 +62,7 @@ namespace Rivet {
 
       Dilepton leadingDilepton;
       Dilepton subleadingDilepton;
-      vector<DressedLepton> leptonsSortedByPt;
+      DressedLeptons leptonsSortedByPt;
     };
 
     typedef vector<Quadruplet> Quadruplets;
@@ -70,7 +70,7 @@ namespace Rivet {
     typedef std::pair<size_t, size_t> IndexPair;
 
 
-    vector<IndexPair> getOppositeChargePairsIndices(const vector<DressedLepton>& leptons) {
+    vector<IndexPair> getOppositeChargePairsIndices(const DressedLeptons& leptons) {
       vector<IndexPair> indices = {};
       if (leptons.size() < 2) return indices;
       for (size_t i = 0; i < leptons.size(); ++i) {
@@ -123,7 +123,7 @@ namespace Rivet {
       return true;
     }
 
-    Quadruplets formQuadrupletsByChannel(const vector<DressedLepton>& same_flavour_leptons, vector<IndexPair> indices) {
+    Quadruplets formQuadrupletsByChannel(const DressedLeptons& same_flavour_leptons, vector<IndexPair> indices) {
       Quadruplets quadruplets = {};
       for (size_t i = 0; i <  indices.size(); ++i) {
         for (size_t k = i+1; k <  indices.size(); ++k) {
@@ -139,8 +139,8 @@ namespace Rivet {
       return quadruplets;
     }
 
-    Quadruplets formQuadrupletsByChannel(const vector<DressedLepton>& electrons, vector<IndexPair> e_indices,
-                                         const vector<DressedLepton>& muons,     vector<IndexPair> m_indices) {
+    Quadruplets formQuadrupletsByChannel(const DressedLeptons& electrons, vector<IndexPair> e_indices,
+                                         const DressedLeptons& muons,     vector<IndexPair> m_indices) {
       Quadruplets quadruplets = {};
       for (const auto& pair_e : e_indices) {
         for (const auto& pair_m : m_indices) {
@@ -154,7 +154,7 @@ namespace Rivet {
     }
 
 
-    Quadruplets getQuadruplets(const vector<DressedLepton>& electrons, const vector<DressedLepton>& muons) {
+    Quadruplets getQuadruplets(const DressedLeptons& electrons, const DressedLeptons& muons) {
       const auto oc_electrons_indices = getOppositeChargePairsIndices(electrons);
       const auto oc_muons_indices = getOppositeChargePairsIndices(muons);
 
@@ -192,8 +192,8 @@ namespace Rivet {
 
       // Baseline lepton and jet declaration
       const Cut lepton_baseline_cuts = Cuts::abseta < 2.7 && Cuts::pT > 5*GeV;
-      const DressedLeptons elecs = DressedLeptons(photons, bare_elecs, 0.1, lepton_baseline_cuts);
-      const DressedLeptons muons = DressedLeptons(photons, bare_muons, 0.1, lepton_baseline_cuts);
+      const LeptonFinder elecs = LeptonFinder(photons, bare_elecs, 0.1, lepton_baseline_cuts);
+      const LeptonFinder muons = LeptonFinder(photons, bare_muons, 0.1, lepton_baseline_cuts);
       declare(elecs, "electrons");
       declare(muons, "muons");
 
@@ -228,8 +228,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(Event const & event) {
-      const auto& baseline_electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
-      const auto& baseline_muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      const auto& baseline_electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
+      const auto& baseline_muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
 
       // Form all possible quadruplets passing hierarchical lepton pT cuts
       const auto quadruplets = getQuadruplets(baseline_electrons, baseline_muons);

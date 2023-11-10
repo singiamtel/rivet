@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/ChargedLeptons.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 
 #include "fastjet/tools/Filter.hh"
@@ -43,9 +43,9 @@ namespace Rivet {
 
       // Muons must have |eta| < 2.5
       Cut eta_ranges = Cuts::abseta < 2.5;
-      DressedLeptons dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 30*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 30*GeV, PhotonOrigin::ALL);
       declare(dressed_mu, "muons");
-      DressedLeptons dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
       declare(dressed_el, "electrons");
 
       FastJets fj(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
@@ -250,10 +250,10 @@ namespace Rivet {
 
       const double beta = 1, Rcut = 1;
 
-      const vector<DressedLepton>& muons = apply<DressedLeptons>(event, "muons").dressedLeptons();
+      const DressedLeptons& muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
       if (muons.size() != 1)  return;
 
-      const vector<DressedLepton>& electrons = apply<DressedLeptons>(event, "electrons").dressedLeptons();
+      const DressedLeptons& electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
       if (electrons.size() != 0)  return;
 
       const FourMomentum muonmom = muons[0].momentum();
