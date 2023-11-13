@@ -145,6 +145,8 @@ verbgroup.add_argument("-v", "--verbose", action="store_const", const=logging.DE
                        default=logging.INFO, help="print debug (very verbose) messages")
 verbgroup.add_argument("-q", "--quiet", action="store_const", const=logging.WARNING, dest="LOGLEVEL",
                        default=logging.INFO, help="be very quiet")
+verbgroup.add_argument("--silent", action="store_const", const=logging.CRITICAL, dest="LOGLEVEL",
+                       default=logging.INFO, help="minimal verbosity (critical messages only)")
 
 args = parser.parse_args()
 
@@ -169,6 +171,10 @@ if args.ANALYSIS_PATH_PWD:
 
 ## Configure logging
 logging.basicConfig(level=args.LOGLEVEL, format="%(message)s")
+if not args.NATIVE_LOG_STRS:
+    # find the key in rivet.LEVELS corresponding to the value of args.LOGLEVEL
+    l = list(rivet.LEVELS.keys())[list(rivet.LEVELS.values()).index(args.LOGLEVEL)]
+    args.NATIVE_LOG_STRS.append("Rivet=%s" % l)
 for l in args.NATIVE_LOG_STRS:
     name, level = None, None
     try:
@@ -678,8 +684,7 @@ for fileidx, hepmcfile in enumerate(HEPMCFILES):
             continue
 
     ## Announce new file
-    print()
-    msg = "Reading events from '%s'" % hepmcfile
+    msg = "\nReading events from '%s'" % hepmcfile
     if hepmcfileweight != 1.0:
         msg += " (file weight = %e)" % hepmcfileweight
     logging.info(msg)
@@ -731,9 +736,8 @@ for fileidx, hepmcfile in enumerate(HEPMCFILES):
             sys.exit(3)
 
 ## Print end-of-loop messages
-print()
 loopendtime = datetime.datetime.now().replace(microsecond=0)
-logging.info("Finished event loop at %s" % str(loopendtime))
+logging.info("\nFinished event loop at %s" % str(loopendtime))
 logging.info("Cross-section = %e pb" % ah.nominalCrossSection())
 
 ## Finalize and write out data file
@@ -742,7 +746,6 @@ if args.WRITE_DATA:
     ah.writeData(args.HISTOFILE)
 
 ## Print end-of-run messages
-print()
 endtime = datetime.datetime.now().replace(microsecond=0)
-logging.info("Rivet run completed at %s, time elapsed = %s" % (str(endtime), str(endtime-starttime)))
+logging.info("\nRivet run completed at %s, time elapsed = %s" % (str(endtime), str(endtime-starttime)))
 logging.info("Histograms written to %s" % os.path.abspath(args.HISTOFILE))

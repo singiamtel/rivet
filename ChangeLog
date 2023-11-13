@@ -13,6 +13,10 @@
 	DressedLeptons as an alias for vector<DressedLepton> cf. Particles
 	and Jets.
 
+2023-11-07  Christian Gutschow  <chris.g@cern.ch>
+
+	* Introduce --silent level for minimal verbosity.
+
 2023-11-04  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add a set of Rivet::retrieve(map, key, fallback) functions,
