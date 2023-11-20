@@ -61,7 +61,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       Particles leptons = apply<LeptonFinder>(event, "LeptonFinder").particlesByPt(10.0*GeV);
       if (leptons.size() < 2) vetoEvent;
@@ -81,8 +80,8 @@ namespace Rivet {
       double mT = sqrt(2*LL.pT()*EtMiss.pT()*(1-cos(dphi)));
       if (mT < 50*GeV) vetoEvent;
 
-      histoPtH->fill(min(P4H.pT()/GeV, 199.), weight);
-      histoXsec->fill(8000, weight); ///< @todo Should probably be a Counter
+      histoPtH->fill(min(P4H.pT()/GeV, 199.));
+      histoXsec->fill(8000); ///< @todo Should probably be a Counter
     }
 
 

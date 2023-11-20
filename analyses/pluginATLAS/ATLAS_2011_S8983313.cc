@@ -67,7 +67,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       Particles veto_e = apply<IdentifiedFinalState>(event, "veto_elecs").particles();
       if ( ! veto_e.empty() ) {
@@ -220,39 +219,39 @@ namespace Rivet {
                  << et_meff_3j << ' '
                  << m_T2 );
 
-      _hist_eTmiss->fill(eTmiss, weight);
+      _hist_eTmiss->fill(eTmiss);
 
       // AAAAAAAAAA
       if ( et_meff_2j > 0.3 ) {
-        _hist_meff_A->fill(m_eff_2j, weight);
+        _hist_meff_A->fill(m_eff_2j);
         if ( m_eff_2j > 500 * GeV ) {
           MSG_DEBUG("Hits A");
-          _count_A->fill(0.5, weight);
+          _count_A->fill(0.5);
         }
       }
 
       // BBBBBBBBBB
-      _hist_mT2_B->fill(m_T2, weight);
+      _hist_mT2_B->fill(m_T2);
       if ( m_T2 > 300 * GeV ) {
         MSG_DEBUG("Hits B");
-        _count_B->fill(0.5, weight);
+        _count_B->fill(0.5);
       }
 
       // need 3 jets for C and D
       if ( Njets >= 3 && et_meff_3j > 0.25 ) {
 
-        _hist_meff_CD->fill(m_eff_3j, weight);
+        _hist_meff_CD->fill(m_eff_3j);
 
         // CCCCCCCCCC
         if ( m_eff_3j > 500 * GeV ) {
           MSG_DEBUG("Hits C");
-          _count_C->fill(0.5, weight);
+          _count_C->fill(0.5);
         }
 
         // DDDDDDDDDD
         if ( m_eff_3j > 1000 * GeV ) {
           MSG_DEBUG("Hits D");
-          _count_D->fill(0.5, weight);
+          _count_D->fill(0.5);
         }
       }
 

@@ -55,7 +55,7 @@ namespace Rivet {
       _values.clear();
       for ( string pname : _projNames )
         _values.push_back(apply<SingleValueProjection>(e, pname)());
-      if ( !_values.empty() ) set(_values[0]);
+      if ( !_values.empty() ) setValue(_values[0]);
     }
 
     /// Cheek if no internal projections have been added.

@@ -57,15 +57,12 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // get the candiate jets
       Jets cand_jets;
       for ( const Jet& jet :
-                apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          cand_jets.push_back(jet);
-        }
+                apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8) ) {
+        cand_jets.push_back(jet);
       }
 
       // get the candidate "medium" leptons without isolation
@@ -182,14 +179,14 @@ namespace Rivet {
          m_eff_inc > 800.) {
         if( eTmiss > 250. ) {
           if(lepton.abspid()==PID::ELECTRON)
-            _count_e->fill(0.5,weight);
+            _count_e->fill(0.5);
           else if(lepton.abspid()==PID::MUON)
-            _count_mu->fill(0.5,weight);
+            _count_mu->fill(0.5);
         }
         if(lepton.abspid()==PID::ELECTRON)
-          _hist_eTmiss_e ->fill(eTmiss,weight);
+          _hist_eTmiss_e ->fill(eTmiss);
         else if(lepton.abspid()==PID::MUON)
-          _hist_eTmiss_mu->fill(eTmiss,weight);
+          _hist_eTmiss_mu->fill(eTmiss);
       }
     }
     /// @}

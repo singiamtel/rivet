@@ -90,7 +90,6 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& e) {
-      const double weight = 1.0;
 
       const WFinder& wenufinder = apply<WFinder>(e, "WenuFinder");
       if (wenufinder.bosons().size() !=1 ) vetoEvent;
@@ -107,21 +106,21 @@ namespace Rivet {
       FourMomentum mm = wmnufinder.leptons()[0].momentum();
       FourMomentum mnu = wmnufinder.neutrinos()[0].momentum();
 
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(_jetptcut);
+      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > _jetptcut);
       if (jets.size() > 0) {
-        _h_WW_jet1_deta->fill(ww.eta()-jets[0].eta(), weight);
-        _h_WW_jet1_dR->fill(deltaR(ww, jets[0].momentum()), weight);
-        _h_We_jet1_dR->fill(deltaR(ep, jets[0].momentum()), weight);
+        _h_WW_jet1_deta->fill(ww.eta()-jets[0].eta());
+        _h_WW_jet1_dR->fill(deltaR(ww, jets[0].momentum()));
+        _h_We_jet1_dR->fill(deltaR(ep, jets[0].momentum()));
       }
 
       double HT = ep.pT() + mm.pT() + FourMomentum(enu+mnu).pT();
       for (const Jet& jet : jets) HT += jet.pT();
-      if (HT > 0.0) _h_HT->fill(HT/GeV, weight);
+      if (HT > 0.0) _h_HT->fill(HT/GeV);
 
       if (jets.size() > 1) {
         const FourMomentum jet1 = jets[0].momentum();
         const FourMomentum jet2 = jets[1].momentum();
-        _h_jets_m_12->fill((jet1+jet2).mass()/GeV, weight);
+        _h_jets_m_12->fill((jet1+jet2).mass()/GeV);
       }
 
       MC_JetAnalysis::analyze(e);

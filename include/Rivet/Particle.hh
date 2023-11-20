@@ -293,7 +293,7 @@ namespace Rivet {
     /// @brief Direct constituents of this particle, filtered by a Cut
     /// @note Returns a copy, thanks to the filtering
     const Particles constituents(const Cut& c) const {
-      return filter_select(constituents(), c);
+      return select(constituents(), c);
     }
 
     /// @brief Direct constituents of this particle, sorted by a functor
@@ -305,7 +305,7 @@ namespace Rivet {
     /// @brief Direct constituents of this particle, filtered by a selection functor
     /// @note Returns a copy, thanks to the filtering
     const Particles constituents(const ParticleSelector& selector) const {
-      return filter_select(constituents(), selector);
+      return select(constituents(), selector);
     }
 
     /// @brief Direct constituents of this particle, filtered and sorted by functors
@@ -328,7 +328,7 @@ namespace Rivet {
     /// @brief Fundamental constituents of this particle, filtered by a Cut
     /// @note Returns a copy, thanks to the filtering
     const Particles rawConstituents(const Cut& c) const {
-      return filter_select(rawConstituents(), c);
+      return select(rawConstituents(), c);
     }
 
     /// @brief Fundamental constituents of this particle, sorted by a functor
@@ -340,7 +340,7 @@ namespace Rivet {
     /// @brief Fundamental constituents of this particle, filtered by a selection functor
     /// @note Returns a copy, thanks to the filtering
     const Particles rawConstituents(const ParticleSelector& selector) const {
-      return filter_select(rawConstituents(), selector);
+      return select(rawConstituents(), selector);
     }
 
     /// @brief Fundamental constituents of this particle, filtered and sorted by functors
@@ -368,7 +368,7 @@ namespace Rivet {
     /// experimentally -- use this function with care when replicating
     /// experimental analyses!
     Particles parents(const ParticleSelector& f) const {
-      return filter_select(parents(), f);
+      return select(parents(), f);
     }
 
     /// Check whether any particle in the particle's parent list has the requested property
@@ -401,16 +401,6 @@ namespace Rivet {
     /// experimental analyses!
     bool hasParentWithout(const Cut& c) const;
 
-    /// Check whether a given PID is found in the particle's parent list
-    ///
-    /// @note This question is valid in MC, but may not be answerable
-    /// experimentally -- use this function with care when replicating
-    /// experimental analyses!
-    ///
-    /// @deprecated Prefer e.g. hasParentWith(Cut::pid == 123)
-    bool hasParent(PdgId pid) const;
-
-
 
     /// Get a list of the ancestors of the current particle (with optional selection Cut)
     ///
@@ -427,7 +417,7 @@ namespace Rivet {
     /// @note This is valid in MC, but may not be answerable experimentally --
     /// use this function with care when replicating experimental analyses!
     Particles ancestors(const ParticleSelector& f, bool only_physical=true) const {
-      return filter_select(ancestors(Cuts::OPEN, only_physical), f);
+      return select(ancestors(Cuts::OPEN, only_physical), f);
     }
 
     /// Check whether any particle in the particle's ancestor list has the requested property
@@ -459,16 +449,6 @@ namespace Rivet {
     /// experimentally -- use this function with care when replicating
     /// experimental analyses!
     bool hasAncestorWithout(const Cut& c, bool only_physical=true) const;
-
-    /// Check whether a given PID is found in the particle's ancestor list
-    ///
-    /// @note This question is valid in MC, but may not be answerable
-    /// experimentally -- use this function with care when replicating
-    /// experimental analyses!
-    ///
-    /// @deprecated Prefer hasAncestorWith(Cuts::pid == pid) etc.
-    bool hasAncestor(PdgId pid, bool only_physical=true) const;
-
 
     /// @brief Determine whether the particle is from a b-hadron decay
     ///
@@ -525,18 +505,6 @@ namespace Rivet {
     /// experimental analyses!
     bool fromHadronicTau(bool prompt_taus_only=false) const;
 
-    /// @brief Determine whether the particle is from a hadron or tau decay
-    ///
-    /// Specifically, walk up the ancestor chain until a status 2 hadron or
-    /// tau is found, if at all.
-    ///
-    /// @note This question is valid in MC, but may not be perfectly answerable
-    /// experimentally -- use this function with care when replicating
-    /// experimental analyses!
-    ///
-    DEPRECATED("Too vague: use fromHadron() || fromPromptTau(), or isDirect()")
-    bool fromDecay() const { return fromHadron() || fromPromptTau(); }
-
     /// @brief Shorthand definition of 'promptness' based on set definition flags
     ///
     /// A "direct" particle is one directly connected to the hard process. It is a
@@ -571,7 +539,7 @@ namespace Rivet {
 
     /// Get a list of the direct descendants from the current particle (with selector function)
     Particles children(const ParticleSelector& f) const {
-      return filter_select(children(), f);
+      return select(children(), f);
     }
 
     /// Check whether any direct child of this particle has the requested property
@@ -610,7 +578,7 @@ namespace Rivet {
 
     /// Get a list of all the descendants from the current particle (with selector function)
     Particles allDescendants(const ParticleSelector& f, bool remove_duplicates=true) const {
-      return filter_select(allDescendants(Cuts::OPEN, remove_duplicates), f);
+      return select(allDescendants(Cuts::OPEN, remove_duplicates), f);
     }
 
     /// Check whether any descendant of this particle has the requested property
@@ -652,7 +620,7 @@ namespace Rivet {
 
     /// Get a list of all the stable descendants from the current particle (with selector function)
     Particles stableDescendants(const ParticleSelector& f) const {
-      return filter_select(stableDescendants(), f);
+      return select(stableDescendants(), f);
     }
 
     /// Check whether any stable descendant of this particle has the requested property

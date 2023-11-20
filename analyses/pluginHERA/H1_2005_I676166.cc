@@ -165,9 +165,9 @@ namespace Rivet {
       Particles PHO_muons_cut;
 
       // Apply muon eta / pT cuts
-      const Particles DIS_muons = filter_select(all_muons, [](const Particle& m) {
+      const Particles DIS_muons = select(all_muons, [](const Particle& m) {
             return m.eta() > -0.75 && m.eta() < 1.15 && m.pT() > 2.5*GeV; });
-      const Particles PHO_muons = filter_select(all_muons, [](const Particle& m) {
+      const Particles PHO_muons = select(all_muons, [](const Particle& m) {
             return m.eta() > -0.55 && m.eta() < 1.10 && m.pT() > 2.5*GeV; });
 
       if (isDIS) {

@@ -81,10 +81,10 @@ namespace Rivet {
       const Particles& lambdaFS = apply<UnstableParticles>(event, "LAMBDA_FS").particlesByPt();
 
       // Get all jets with pT > 7 GeV (ATLAS standard jet collection)
-      Jets jets = apply<FastJets>(event, "JETS").jetsByPt(7*GeV);
+      Jets jets = apply<FastJets>(event, "JETS").jetsByPt(Cuts::pT > 7*GeV);
 
       // Keep any jets that pass the pt cut
-      Jets good_jets = filter_select(jets, Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
+      Jets good_jets = select(jets, Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
 
       // Remove jets too close to an electron
       idiscardIfAnyDeltaRLess(good_jets, elecFS, 0.2);

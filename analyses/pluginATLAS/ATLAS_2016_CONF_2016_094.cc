@@ -72,16 +72,16 @@ namespace Rivet {
       Particles elecs = apply<ParticleFinder>(event, "Electrons").particles();
       Particles muons = apply<ParticleFinder>(event, "Muons").particles();
       Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.4);
-      ifilter_select(jets, JetEffFilter([](const Jet& j) { return j.pT() > 60*GeV ? 1.0 : 0.94; }));
+      iselect(jets, JetEffFilter([](const Jet& j) { return j.pT() > 60*GeV ? 1.0 : 0.94; }));
 
 
       // Jet/electron/muon overlap removal and selection
       // Remove any untagged jet within dR = 0.2 of an electron
       for (const Particle& e : elecs)
-        ifilter_discard(jets, [&](const Jet& j) { return !j.bTagged(Cuts::pT > 5*GeV) && deltaR(e, j, RAPIDITY) < 0.2; });
+        idiscard(jets, [&](const Jet& j) { return !j.bTagged(Cuts::pT > 5*GeV) && deltaR(e, j, RAPIDITY) < 0.2; });
       // Remove any untagged low-multiplicity/muon-dominated jet within dR = 0.4 of a muon
       for (const Particle& m : muons)
-        ifilter_discard(jets, [&](const Jet& j) {
+        idiscard(jets, [&](const Jet& j) {
             if (j.bTagged(Cuts::pT > 5*GeV)) return false; /// @note A different b-tag working point, 85%, was actually used here *sigh*
             if (deltaR(m, j, RAPIDITY) > 0.4) return false;
             if (j.particles(Cuts::abscharge != 0).size() < 3) return true;
@@ -89,18 +89,18 @@ namespace Rivet {
           });
       // Removing leptons within dR = 0.4 of remaining jets
       for (const Jet& j : jets) {
-        ifilter_discard(elecs, deltaRLess(j, 0.4, RAPIDITY));
-        ifilter_discard(muons, deltaRLess(j, 0.4, RAPIDITY));
+        idiscard(elecs, deltaRLess(j, 0.4, RAPIDITY));
+        idiscard(muons, deltaRLess(j, 0.4, RAPIDITY));
       }
 
       // Signal jet and lepton selection
-      const Jets sigjets40 = filter_select(jets, Cuts::pT > 40*GeV);
-      const Jets sigjets60 = filter_select(sigjets40, Cuts::pT > 60*GeV);
-      const Jets sigbjets40 = filter_select(sigjets40, [](const Jet& j) { return j.bTagged(Cuts::pT > 5*GeV); });
-      const Jets sigbjets60 = filter_select(sigjets60, [](const Jet& j) { return j.bTagged(Cuts::pT > 5*GeV); });
-      const Particles sigmuons = filter_select(muons, Cuts::pT > 35*GeV);
-      Particles sigelecs = filter_select(elecs, Cuts::pT > 35*GeV);
-      ifilter_select(sigelecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_TIGHT));
+      const Jets sigjets40 = select(jets, Cuts::pT > 40*GeV);
+      const Jets sigjets60 = select(sigjets40, Cuts::pT > 60*GeV);
+      const Jets sigbjets40 = select(sigjets40, [](const Jet& j) { return j.bTagged(Cuts::pT > 5*GeV); });
+      const Jets sigbjets60 = select(sigjets60, [](const Jet& j) { return j.bTagged(Cuts::pT > 5*GeV); });
+      const Particles sigmuons = select(muons, Cuts::pT > 35*GeV);
+      Particles sigelecs = select(elecs, Cuts::pT > 35*GeV);
+      iselect(sigelecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_TIGHT));
 
 
       //////////////////

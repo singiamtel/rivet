@@ -133,7 +133,7 @@ namespace Rivet {
       for (Jet jet : jets) {
         jets_boosted.push_back(cms_boost.transform(jet.mom()));
       }
-      std::sort(jets_boosted.begin(), jets_boosted.end(), FourMomentum::byEDescending());
+      isortBy(jets_boosted, cmpMomByE);
       FourMomentum p3(jets_boosted[0]);
       FourMomentum p4(jets_boosted[1]);
       FourMomentum p5(jets_boosted[2]);
@@ -164,7 +164,7 @@ namespace Rivet {
       for (Jet jet : jets) {
         jets_boosted.push_back(cms_boost.transform(jet.momentum()));
       }
-      sort(jets_boosted.begin(), jets_boosted.end(), FourMomentum::byEDescending());
+      isortBy(jets_boosted, cmpMomByE);
       FourMomentum p3(jets_boosted[0]);
       FourMomentum p4(jets_boosted[1]);
       FourMomentum p5(jets_boosted[2]);

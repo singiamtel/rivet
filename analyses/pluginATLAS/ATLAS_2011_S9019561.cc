@@ -76,7 +76,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
 
       Particles veto_e
         = apply<IdentifiedFinalState>(event, "veto_elecs").particles();
@@ -85,13 +84,7 @@ namespace Rivet {
         vetoEvent;
       }
 
-      Jets cand_jets;
-      for (const Jet& jet :
-        apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.5 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT>20*GeV && Cuts::abseta < 2.5);
 
       Particles cand_e =
         apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
@@ -197,19 +190,19 @@ namespace Rivet {
 
         // SS ee
         if ( recon_e[0].pid() * recon_e[1].pid() > 0 ) {
-          _hist_eTmiss_SS->fill(eTmiss, weight);
+          _hist_eTmiss_SS->fill(eTmiss);
           if ( eTmiss > 100 ) {
             MSG_DEBUG("Hits SS e+/-e+/-");
-            _count_SS_e_e->fill(0.5, weight);
+            _count_SS_e_e->fill(0.5);
           }
         }
 
         // OS ee
         else if ( recon_e[0].pid() * recon_e[1].pid() < 0) {
-          _hist_eTmiss_OS->fill(eTmiss, weight);
+          _hist_eTmiss_OS->fill(eTmiss);
           if ( eTmiss > 150 ) {
             MSG_DEBUG("Hits OS e+e-");
-            _count_OS_e_e->fill(0.5, weight);
+            _count_OS_e_e->fill(0.5);
           }
         }
       }
@@ -220,19 +213,19 @@ namespace Rivet {
 
         // SS mu_e
         if ( recon_e[0].pid() * recon_mu[0].pid() > 0 ) {
-          _hist_eTmiss_SS->fill(eTmiss, weight);
+          _hist_eTmiss_SS->fill(eTmiss);
           if ( eTmiss > 100 ) {
             MSG_DEBUG("Hits SS e+/-mu+/-");
-            _count_SS_e_mu->fill(0.5, weight);
+            _count_SS_e_mu->fill(0.5);
           }
         }
 
         // OS mu_e
         else if ( recon_e[0].pid() * recon_mu[0].pid() < 0) {
-          _hist_eTmiss_OS->fill(eTmiss, weight);
+          _hist_eTmiss_OS->fill(eTmiss);
           if ( eTmiss > 150 ) {
             MSG_DEBUG("Hits OS e+mu-");
-            _count_OS_e_mu->fill(0.5, weight);
+            _count_OS_e_mu->fill(0.5);
           }
         }
       }
@@ -243,19 +236,19 @@ namespace Rivet {
 
         // SS mu_mu
         if ( recon_mu[0].pid() * recon_mu[1].pid() > 0 ) {
-          _hist_eTmiss_SS->fill(eTmiss, weight);
+          _hist_eTmiss_SS->fill(eTmiss);
           if ( eTmiss > 100 ) {
             MSG_DEBUG("Hits SS mu+/-mu+/-");
-            _count_SS_mu_mu->fill(0.5, weight);
+            _count_SS_mu_mu->fill(0.5);
           }
         }
 
         // OS mu_mu
         else if ( recon_mu[0].pid() * recon_mu[1].pid() < 0) {
-          _hist_eTmiss_OS->fill(eTmiss, weight);
+          _hist_eTmiss_OS->fill(eTmiss);
           if ( eTmiss > 150 ) {
             MSG_DEBUG("Hits OS mu+mu-");
-            _count_OS_mu_mu->fill(0.5, weight);
+            _count_OS_mu_mu->fill(0.5);
           }
         }
       }

@@ -68,7 +68,7 @@ namespace Rivet {
 
         case PID::LAMBDA:
           // Lambda should not have Cascade or Omega ancestors since they should not decay. But just in case...
-          if ( !( p.hasAncestor(3322) || p.hasAncestor(-3322) || p.hasAncestor(3312) || p.hasAncestor(-3312) || p.hasAncestor(3334) || p.hasAncestor(-3334) ) ) {
+          if ( !( p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ) ) {
             _h_dNLambda_dy->fill(p.absrap());
             _h_dNLambda_dpT->fill(p.pT()/GeV);
           }
@@ -76,7 +76,7 @@ namespace Rivet {
 
         case PID::XIMINUS:
           // Cascade should not have Omega ancestors since it should not decay.  But just in case...
-          if ( !( p.hasAncestor(3334) || p.hasAncestor(-3334) ) ) {
+          if ( !( p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ) ) {
             _h_dNXi_dy->fill(p.absrap());
             _h_dNXi_dpT->fill(p.pT()/GeV);
           }

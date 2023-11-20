@@ -96,7 +96,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
       Particles veto_e
         = apply<IdentifiedFinalState>(event, "veto_elecs").particles();
       if ( ! veto_e.empty() ) {
@@ -104,13 +103,7 @@ namespace Rivet {
         vetoEvent;
       }
 
-      Jets cand_jets;
-      for ( const Jet& jet :
-          apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
 
       Particles candtemp_e =
         apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
@@ -263,25 +256,25 @@ namespace Rivet {
           + recon_jets[2].pT();
 
         if (  lepton[0].abspid() == e_id ) {
-          _3j_hist_mT_e->fill(mT, weight);
-          _3j_hist_eTmiss_e->fill(eTmiss, weight);
-          _3j_hist_m_eff_e->fill(m_eff, weight);
+          _3j_hist_mT_e->fill(mT);
+          _3j_hist_eTmiss_e->fill(eTmiss);
+          _3j_hist_m_eff_e->fill(m_eff);
           if ( mT > 100*GeV && eTmiss > 125*GeV ) {
-            _3jl_hist_m_eff_e_final->fill(m_eff, weight);
+            _3jl_hist_m_eff_e_final->fill(m_eff);
             if ( m_eff > 500*GeV && eTmiss > 0.25*m_eff ) {
-              _3jl_count_e_channel->fill(0.5,weight);
+              _3jl_count_e_channel->fill(0.5);
             }
           }
         }
 
         else if (  lepton[0].abspid() == mu_id ) {
-          _3j_hist_mT_mu->fill(mT, weight);
-          _3j_hist_eTmiss_mu->fill(eTmiss, weight);
-          _3j_hist_m_eff_mu->fill(m_eff, weight);
+          _3j_hist_mT_mu->fill(mT);
+          _3j_hist_eTmiss_mu->fill(eTmiss);
+          _3j_hist_m_eff_mu->fill(m_eff);
           if ( mT > 100*GeV && eTmiss > 125*GeV ) {
-            _3jl_hist_m_eff_mu_final->fill(m_eff, weight);
+            _3jl_hist_m_eff_mu_final->fill(m_eff);
             if ( m_eff > 500*GeV && eTmiss > 0.25*m_eff ) {
-              _3jl_count_mu_channel->fill(0.5,weight);
+              _3jl_count_mu_channel->fill(0.5);
             }
           }
         }
@@ -307,18 +300,18 @@ namespace Rivet {
 
         if (  lepton[0].abspid() == e_id ) {
           if ( mT > 100*GeV && eTmiss > 240*GeV ) {
-            _3jt_hist_m_eff_e_final->fill(m_eff, weight);
+            _3jt_hist_m_eff_e_final->fill(m_eff);
             if ( m_eff > 600*GeV && eTmiss > 0.15*m_eff ) {
-              _3jt_count_e_channel->fill(0.5,weight);
+              _3jt_count_e_channel->fill(0.5);
             }
           }
         }
 
         else if (  lepton[0].abspid() == mu_id ) {
           if ( mT > 100*GeV && eTmiss > 240*GeV ) {
-            _3jt_hist_m_eff_mu_final->fill(m_eff, weight);
+            _3jt_hist_m_eff_mu_final->fill(m_eff);
             if ( m_eff > 600*GeV && eTmiss > 0.15*m_eff ) {
-              _3jt_count_mu_channel->fill(0.5,weight);
+              _3jt_count_mu_channel->fill(0.5);
             }
           }
         }
@@ -353,26 +346,26 @@ namespace Rivet {
 
 
         if (  lepton[0].abspid() == e_id ) {
-          _4j_hist_mT_e->fill(mT, weight);
-          _4j_hist_eTmiss_e->fill(eTmiss, weight);
-          _4j_hist_m_eff_e->fill(m_eff, weight);
+          _4j_hist_mT_e->fill(mT);
+          _4j_hist_eTmiss_e->fill(eTmiss);
+          _4j_hist_m_eff_e->fill(m_eff);
           if ( mT > 100*GeV && eTmiss > 140*GeV ) {
-            _4jl_hist_m_eff_e_final->fill(m_eff, weight);
+            _4jl_hist_m_eff_e_final->fill(m_eff);
             if ( m_eff > 300*GeV && eTmiss > 0.3*m_eff ) {
-              _4jl_count_e_channel->fill(0.5,weight);
+              _4jl_count_e_channel->fill(0.5);
             }
           }
         }
 
         // Muon channel signal region
         else if (  lepton[0].abspid() == mu_id ) {
-          _4j_hist_mT_mu->fill(mT, weight);
-          _4j_hist_eTmiss_mu->fill(eTmiss, weight);
-          _4j_hist_m_eff_mu->fill(m_eff, weight);
+          _4j_hist_mT_mu->fill(mT);
+          _4j_hist_eTmiss_mu->fill(eTmiss);
+          _4j_hist_m_eff_mu->fill(m_eff);
           if ( mT > 100*GeV && eTmiss > 140*GeV ) {
-            _4jl_hist_m_eff_mu_final->fill(m_eff, weight);
+            _4jl_hist_m_eff_mu_final->fill(m_eff);
             if ( m_eff > 300*GeV && eTmiss > 0.3*m_eff ) {
-              _4jl_count_mu_channel->fill(0.5,weight);
+              _4jl_count_mu_channel->fill(0.5);
             }
           }
         }
@@ -400,9 +393,9 @@ namespace Rivet {
 
         if (  lepton[0].abspid() == e_id ) {
           if ( eTmiss > 200*GeV ) {
-            _4jt_hist_m_eff_e_final->fill(m_eff, weight);
+            _4jt_hist_m_eff_e_final->fill(m_eff);
             if ( m_eff > 500*GeV && eTmiss > 0.15*m_eff ) {
-              _4jt_count_e_channel->fill(0.5,weight);
+              _4jt_count_e_channel->fill(0.5);
             }
           }
         }
@@ -410,9 +403,9 @@ namespace Rivet {
         // Muon channel signal region
         else if (  lepton[0].abspid() == mu_id ) {
           if ( eTmiss > 200*GeV ) {
-            _4jt_hist_m_eff_mu_final->fill(m_eff, weight);
+            _4jt_hist_m_eff_mu_final->fill(m_eff);
             if ( m_eff > 500*GeV && eTmiss > 0.15*m_eff ) {
-              _4jt_count_mu_channel->fill(0.5,weight);
+              _4jt_count_mu_channel->fill(0.5);
             }
           }
         }

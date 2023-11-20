@@ -72,15 +72,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
-      Jets cand_jets;
-      const Jets jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV);
-      for (const Jet& jet : jets) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
 
       const Particles cand_e  = apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
 
@@ -216,24 +209,24 @@ namespace Rivet {
         if(jetCharge) {
           // SR0-A region
           if(m_eff>500.) {
-            _count_SR0_A1->fill(0.5,weight);
-            _hist_meff_SR0_A1->fill(m_eff,weight);
-            _hist_met_SR0_A1 ->fill(eTmiss,weight);
+            _count_SR0_A1->fill(0.5);
+            _hist_meff_SR0_A1->fill(m_eff);
+            _hist_met_SR0_A1 ->fill(eTmiss);
             if(ntagged>=2) {
-              _count_SR0_A2->fill(0.5,weight);
-              _hist_meff_SR0_A2->fill(m_eff,weight);
-              _hist_met_SR0_A2 ->fill(eTmiss,weight);
+              _count_SR0_A2->fill(0.5);
+              _hist_meff_SR0_A2->fill(m_eff);
+              _hist_met_SR0_A2 ->fill(eTmiss);
             }
           }
           // SR0-B
           if(m_eff>700.) {
-            _count_SR0_B1->fill(0.5,weight);
-            if(ntagged>=2) _count_SR0_B2->fill(0.5,weight);
+            _count_SR0_B1->fill(0.5);
+            if(ntagged>=2) _count_SR0_B2->fill(0.5);
           }
           // SR0-C
           if(m_eff>900.) {
-            _count_SR0_C1->fill(0.5,weight);
-            if(ntagged>=2) _count_SR0_C2->fill(0.5,weight);
+            _count_SR0_C1->fill(0.5);
+            if(ntagged>=2) _count_SR0_C2->fill(0.5);
           }
         }
       }
@@ -251,18 +244,18 @@ namespace Rivet {
         mT = sqrt(mT);
         if(mT>100.&&m_eff>700.) {
           // D region
-          _count_SR1_D->fill(0.5,weight);
+          _count_SR1_D->fill(0.5);
           if(lepton.abspid()==PID::ELECTRON) {
-            _hist_meff_SR1_D_e->fill(m_eff,weight);
-            _hist_met_SR0_D_e->fill(eTmiss,weight);
+            _hist_meff_SR1_D_e->fill(m_eff);
+            _hist_met_SR0_D_e->fill(eTmiss);
           }
           else {
-            _hist_meff_SR1_D_mu->fill(m_eff,weight);
-            _hist_met_SR0_D_mu->fill(eTmiss,weight);
+            _hist_meff_SR1_D_mu->fill(m_eff);
+            _hist_met_SR0_D_mu->fill(eTmiss);
           }
           // E region
           if(eTmiss>200.) {
-            _count_SR1_E->fill(0.5,weight);
+            _count_SR1_E->fill(0.5);
           }
         }
       }

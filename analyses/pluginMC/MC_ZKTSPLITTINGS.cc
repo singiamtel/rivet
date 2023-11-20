@@ -29,15 +29,14 @@ namespace Rivet {
       const double ptcut = getOption<double>("PTLMIN", 25.);
 
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
-      
+
       FinalState fs;
-      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR,
-		      PhotonOrigin::NODECAY);
+      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR);
       declare(zfinder, "ZFinder");
 
       // set clustering radius from input option
       const double R = getOption<double>("R", 0.6);
-      
+
       FastJets jetpro(zfinder.remainingFinalState(), JetAlg::KT, R);
       declare(jetpro, "Jets");
 
@@ -62,7 +61,7 @@ namespace Rivet {
 
     /// @}
 
-    
+
   protected:
 
     /// @name Parameters for specialised e/mu and dressed/bare subclassing
@@ -75,5 +74,5 @@ namespace Rivet {
 
 
   RIVET_DECLARE_PLUGIN(MC_ZKTSPLITTINGS);
-  
+
 }

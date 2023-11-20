@@ -28,8 +28,8 @@ namespace Rivet {
 
       Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
 
-      ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV,
-			0.2, PhotonOrigin::NODECAY);
+      ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV, 0.2,
+                        LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
       declare(zeefinder, "ZeeFinder");
 
       VetoedFinalState zmminput;
@@ -40,9 +40,8 @@ namespace Rivet {
       const double ptmucut = getOption<double>("PTMUMIN", 25.);
 
       Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
-      
-      ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV,
-			0.2, PhotonOrigin::NODECAY);
+
+      ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV, 0.2);
       declare(zmmfinder, "ZmmFinder");
 
       VetoedFinalState jetinput;
@@ -61,16 +60,16 @@ namespace Rivet {
       JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
       if ( algoopt == "KT" ) {
-	clusterAlgo = JetAlg::KT;
+        clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = JetAlg::CA;
+        clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = JetAlg::ANTIKT;
+        clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
-	clusterAlgo = JetAlg::ANTIKT;
+        MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+        clusterAlgo = JetAlg::ANTIKT;
       }
-      
+
       FastJets jetpro(jetinput, clusterAlgo, R);
       declare(jetpro, "Jets");
 
@@ -89,7 +88,6 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& e) {
-      const double weight = 1.0;
 
       const ZFinder& zeefinder = apply<ZFinder>(e, "ZeeFinder");
       if (zeefinder.bosons().size() != 1) vetoEvent;
@@ -107,17 +105,17 @@ namespace Rivet {
       const FourMomentum& mp = zmmfinder.constituents()[0].momentum();
       const FourMomentum& mm = zmmfinder.constituents()[1].momentum();
 
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(_jetptcut);
+      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > _jetptcut);
       if (jets.size() > 0) {
         const FourMomentum j0 = jets[0].momentum();
-        _h_ZZ_jet1_deta->fill(zz.eta()-j0.eta(), weight);
-        _h_ZZ_jet1_dR->fill(deltaR(zz, j0), weight);
-        _h_Ze_jet1_dR->fill(deltaR(ep, j0), weight);
+        _h_ZZ_jet1_deta->fill(zz.eta()-j0.eta());
+        _h_ZZ_jet1_dR->fill(deltaR(zz, j0));
+        _h_Ze_jet1_dR->fill(deltaR(ep, j0));
       }
 
       double HT = ep.pT() + em.pT() + mp.pT() + mm.pT();
       for (const Jet& jet : jets) HT += jet.pT();
-      if (HT > 0.0) _h_HT->fill(HT/GeV, weight);
+      if (HT > 0.0) _h_HT->fill(HT/GeV);
 
       MC_JetAnalysis::analyze(e);
     }

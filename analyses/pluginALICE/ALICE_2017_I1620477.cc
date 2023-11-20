@@ -40,14 +40,14 @@ namespace Rivet {
 
         if (p.pid() == 111) {
           // neutral pion; ALICE corrects for pi0 feed-down
-          if ( !(p.hasAncestor(310)  || p.hasAncestor(130)   || // K0_s, K0_l
-                 p.hasAncestor(321)  || p.hasAncestor(-321)  || // K+,K-
-                 p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                 p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                 p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                 p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                 p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                 p.hasAncestor(3312) || p.hasAncestor(-3312) )) // Cascades
+          if ( !(p.hasAncestorWith(Cuts::pid == 310)  || p.hasAncestorWith(Cuts::pid == 130)   || // K0_s, K0_l
+                 p.hasAncestorWith(Cuts::pid == 321)  || p.hasAncestorWith(Cuts::pid == -321)  || // K+,K-
+                 p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                 p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                 p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                 p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                 p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                 p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) )) // Cascades
             {
               _h_pi0->fill(p.pT()/GeV, 1. /(TWOPI*p.pT()/GeV*2*_rapmax));
               _temp_h_pion->fill(p.pT()/GeV);

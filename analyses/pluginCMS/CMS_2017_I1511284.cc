@@ -58,10 +58,9 @@ namespace Rivet {
         if (p.abspid() != PID::ELECTRON && p.abspid() != PID::PHOTON && p.abspid() != 111) hadEnergy += p.energy();
       }
 
-      const double weight = 1.0;
-      _h_totEnergy->fill(totEnergy/GeV, weight);
-      _h_emEnergy->fill(emEnergy/GeV, weight);
-      _h_hadEnergy->fill(hadEnergy/GeV, weight);
+      _h_totEnergy->fill(totEnergy/GeV);
+      _h_emEnergy->fill(emEnergy/GeV);
+      _h_hadEnergy->fill(hadEnergy/GeV);
     }
 
 

@@ -24,7 +24,7 @@ namespace Rivet {
 
       /// @note Using a bare muon Z (but with a clustering radius!?)
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 4*GeV, 140*GeV, 0.2, PhotonOrigin::NONE);
+      ZFinder zfinder(FinalState(), cut, PID::MUON, 4*GeV, 140*GeV, 0.2);
       declare(zfinder, "ZFinder");
 
       ChargedFinalState cfs((Cuts::etaIn(-2, 2) && Cuts::pT >=  500*MeV));
@@ -57,7 +57,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
       const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
 
       if (zfinder.bosons().size() != 1) vetoEvent;
@@ -82,16 +81,16 @@ namespace Rivet {
         if ( dphi < M_PI/3 ) {
           nTowards++;
           ptSumTowards += pT;
-          if (Zmass > 81. && Zmass < 101.) _h_pT_towards_zmass_81_101->fill(pT, weight);
+          if (Zmass > 81. && Zmass < 101.) _h_pT_towards_zmass_81_101->fill(pT);
         } else if ( dphi < 2.*M_PI/3 ) {
           nTransverse++;
           ptSumTransverse += pT;
-          if (Zmass > 81. && Zmass < 101.) _h_pT_transverse_zmass_81_101->fill(pT, weight);
-          if (Zpt < 5.) _h_pT_transverse_zpt_5->fill(pT, weight);
+          if (Zmass > 81. && Zmass < 101.) _h_pT_transverse_zmass_81_101->fill(pT);
+          if (Zpt < 5.) _h_pT_transverse_zpt_5->fill(pT);
         } else {
           nAway++;
           ptSumAway += pT;
-          if (Zmass > 81. && Zmass < 101.) _h_pT_away_zmass_81_101->fill(pT, weight);
+          if (Zmass > 81. && Zmass < 101.) _h_pT_away_zmass_81_101->fill(pT);
         }
 
       } // Loop over particles
@@ -99,25 +98,25 @@ namespace Rivet {
 
       const double area = 8./3.*M_PI;
       if (Zmass > 81. && Zmass < 101.) {
-        _h_Nchg_towards_pTmumu->         fill(Zpt, 1./area * nTowards, weight);
-        _h_Nchg_transverse_pTmumu->      fill(Zpt, 1./area * nTransverse, weight);
-        _h_Nchg_away_pTmumu->            fill(Zpt, 1./area * nAway, weight);
-        _h_pTsum_towards_pTmumu->        fill(Zpt, 1./area * ptSumTowards, weight);
-        _h_pTsum_transverse_pTmumu->     fill(Zpt, 1./area * ptSumTransverse, weight);
-        _h_pTsum_away_pTmumu->           fill(Zpt, 1./area * ptSumAway, weight);
-        if (nTowards > 0)    _h_avgpT_towards_pTmumu->    fill(Zpt, ptSumTowards/nTowards, weight);
-        if (nTransverse > 0) _h_avgpT_transverse_pTmumu-> fill(Zpt, ptSumTransverse/nTransverse, weight);
-        if (nAway > 0)       _h_avgpT_away_pTmumu->       fill(Zpt, ptSumAway/nAway, weight);
-        _h_Nchg_towards_zmass_81_101->   fill(nTowards, weight);
-        _h_Nchg_transverse_zmass_81_101->fill(nTransverse, weight);
-        _h_Nchg_away_zmass_81_101->      fill(nAway, weight);
+        _h_Nchg_towards_pTmumu->         fill(Zpt, 1./area * nTowards);
+        _h_Nchg_transverse_pTmumu->      fill(Zpt, 1./area * nTransverse);
+        _h_Nchg_away_pTmumu->            fill(Zpt, 1./area * nAway);
+        _h_pTsum_towards_pTmumu->        fill(Zpt, 1./area * ptSumTowards);
+        _h_pTsum_transverse_pTmumu->     fill(Zpt, 1./area * ptSumTransverse);
+        _h_pTsum_away_pTmumu->           fill(Zpt, 1./area * ptSumAway);
+        if (nTowards > 0)    _h_avgpT_towards_pTmumu->    fill(Zpt, ptSumTowards/nTowards);
+        if (nTransverse > 0) _h_avgpT_transverse_pTmumu-> fill(Zpt, ptSumTransverse/nTransverse);
+        if (nAway > 0)       _h_avgpT_away_pTmumu->       fill(Zpt, ptSumAway/nAway);
+        _h_Nchg_towards_zmass_81_101->   fill(nTowards);
+        _h_Nchg_transverse_zmass_81_101->fill(nTransverse);
+        _h_Nchg_away_zmass_81_101->      fill(nAway);
       }
 
       if (Zpt < 5.) {
-        _h_Nchg_towards_plus_transverse_Mmumu->fill(Zmass, (nTowards + nTransverse)/(2.*area), weight);
-        _h_pTsum_towards_plus_transverse_Mmumu->fill(Zmass, (ptSumTowards + ptSumTransverse)/(2.*area), weight);
-        if ((nTowards + nTransverse) > 0) _h_avgpT_towards_plus_transverse_Mmumu->fill(Zmass, (ptSumTowards + ptSumTransverse)/(nTowards + nTransverse), weight);
-        _h_Nchg_transverse_zpt_5->fill(nTransverse, weight);
+        _h_Nchg_towards_plus_transverse_Mmumu->fill(Zmass, (nTowards + nTransverse)/(2.*area));
+        _h_pTsum_towards_plus_transverse_Mmumu->fill(Zmass, (ptSumTowards + ptSumTransverse)/(2.*area));
+        if ((nTowards + nTransverse) > 0) _h_avgpT_towards_plus_transverse_Mmumu->fill(Zmass, (ptSumTowards + ptSumTransverse)/(nTowards + nTransverse));
+        _h_Nchg_transverse_zpt_5->fill(nTransverse);
       }
 
     }

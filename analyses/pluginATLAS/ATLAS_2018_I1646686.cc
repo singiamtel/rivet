@@ -77,6 +77,7 @@ namespace Rivet {
         declare(jets, "jets");
 
         FastJets ljets(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
+        ljets.addTrf(new fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2), fastjet::SelectorPtFractionMin(0.05)));
         declare(ljets, "ljets" );
 
         if (_mode != 0 ){
@@ -156,14 +157,7 @@ namespace Rivet {
         // Get jets
         const Jets& all_jets  = apply<FastJets>( event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
         const FastJets& ljets_fj = apply<FastJets>( event, "ljets");
-        const Jets all_ljets = ljets_fj.jetsByPt();
-
-        // Trim the large-R jets
-        Jets trimmedJets;
-        fastjet::Filter trimmer(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2), fastjet::SelectorPtFractionMin(0.05));
-        for (const Jet& jet : all_ljets)
-          trimmedJets += ljets_fj.trimJet(jet, trimmer);
-        trimmedJets = sortByPt(trimmedJets);
+        const Jets trimmedJets = ljets_fj.jetsByPt();
 
         // Check large-R jets
         Jets ljets;

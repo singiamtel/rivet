@@ -482,27 +482,13 @@ namespace Rivet {
   /// Filter a collection in-place, removing the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  ///
-  /// @deprecated Use idiscard()
   template <typename CONTAINER, typename FN>
-  inline CONTAINER& ifilter_discard(CONTAINER& c, const FN& f) {
+  inline CONTAINER& idiscard(CONTAINER& c, const FN& f) {
     const auto newend = std::remove_if(std::begin(c), std::end(c), f);
     c.erase(newend, c.end());
     return c;
   }
-  /// Alias
-  template <typename CONTAINER, typename FN>
-  inline CONTAINER& idiscard(CONTAINER& c, const FN& f) {
-    return ifilter_discard(c, f);
-  }
 
-  /// Version with element-equality comparison in place of a function
-  ///
-  /// @deprecated Use idiscard()
-  template <typename CONTAINER>
-  inline CONTAINER& ifilter_discard(CONTAINER& c, const typename CONTAINER::value_type& y) {
-    return ifilter_discard(c, [&](typename CONTAINER::value_type& x){ return x == y; });
-  }
   /// Version with element-equality comparison in place of a function
   template <typename CONTAINER>
   inline CONTAINER& idiscard(CONTAINER& c, const typename CONTAINER::value_type& y) {
@@ -510,13 +496,6 @@ namespace Rivet {
   }
 
   /// Version with several element-equality comparisons in place of a function
-  ///
-  /// @deprecated Use idiscard()
-  template <typename CONTAINER>
-  inline CONTAINER& ifilter_discard_if_any(CONTAINER& c, const CONTAINER& ys) {
-    return ifilter_discard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
-  }
-  /// Version with element-equality comparisons in place of a function
   template <typename CONTAINER>
   inline CONTAINER& idiscard_if_any(CONTAINER& c, const CONTAINER& ys) {
     return idiscard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
@@ -526,26 +505,12 @@ namespace Rivet {
   /// Filter a collection by copy, removing the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  ///
-  /// @deprecated Use discard()
-  template <typename CONTAINER, typename FN>
-  inline CONTAINER filter_discard(const CONTAINER& c, const FN& f) {
-    CONTAINER rtn = c;
-    return ifilter_discard(rtn, f); ///< @todo More efficient would be copy_if with back_inserter...
-  }
-  /// Alias
   template <typename CONTAINER, typename FN>
   inline CONTAINER discard(const CONTAINER& c, const FN& f) {
-    return filter_discard(c, f);
+    CONTAINER rtn = c;
+    return idiscard(rtn, f); ///< @todo More efficient would be copy_if with back_inserter...
   }
 
-  /// Version with element-equality comparison in place of a function
-  ///
-  /// @deprecated Use discard()
-  template <typename CONTAINER>
-  inline CONTAINER filter_discard(const CONTAINER& c, const typename CONTAINER::value_type& y) {
-    return filter_discard(c, [&](typename CONTAINER::value_type& x){ return x == y; });
-  }
   /// Version with element-equality comparison in place of a function
   template <typename CONTAINER>
   inline CONTAINER discard(const CONTAINER& c, const typename CONTAINER::value_type& y) {
@@ -553,13 +518,6 @@ namespace Rivet {
   }
 
   /// Version with several element-equality comparisons in place of a function
-  ///
-  /// @deprecated Use idiscard_if_any()
-  template <typename CONTAINER>
-  inline CONTAINER filter_discard_if_any(const CONTAINER& c, const CONTAINER& ys) {
-    return filter_discard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
-  }
-  /// Version with element-equality comparisons in place of a function
   template <typename CONTAINER>
   inline CONTAINER discard_if_any(const CONTAINER& c, const CONTAINER& ys) {
     return discard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
@@ -571,26 +529,12 @@ namespace Rivet {
   /// @note New container will be replaced, not appended to
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  ///
-  /// @deprecated Use discard()
-  template <typename CONTAINER, typename FN>
-  inline CONTAINER& filter_discard(const CONTAINER& c, const FN& f, CONTAINER& out) {
-    out = filter_discard(c, f);
-    return out;
-  }
-  /// Alias
   template <typename CONTAINER, typename FN>
   inline CONTAINER& discard(const CONTAINER& c, const FN& f, CONTAINER& out) {
-    return filter_discard(c, f, out);
+    out = discard(c, f);
+    return out;
   }
 
-  /// Version with element-equality comparison in place of a function
-  ///
-  /// @deprecated Use discard()
-  template <typename CONTAINER>
-  inline CONTAINER& filter_discard(const CONTAINER& c, const typename CONTAINER::value_type& y, CONTAINER& out) {
-    return filter_discard(c, [&](typename CONTAINER::value_type& x){ return x == y; }, out);
-  }
   /// Version with element-equality comparison in place of a function
   template <typename CONTAINER>
   inline CONTAINER& discard(const CONTAINER& c, const typename CONTAINER::value_type& y, CONTAINER& out) {
@@ -598,13 +542,6 @@ namespace Rivet {
   }
 
   /// Version with several element-equality comparisons in place of a function
-  ///
-  /// @deprecated Use idiscard_if_any()
-  template <typename CONTAINER>
-  inline CONTAINER& filter_discard_if_any(const CONTAINER& c, const CONTAINER& ys, CONTAINER& out) {
-    return filter_discard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); }, out);
-  }
-  /// Version with element-equality comparisons in place of a function
   template <typename CONTAINER>
   inline CONTAINER& discard_if_any(const CONTAINER& c, const CONTAINER& ys, CONTAINER& out) {
     return discard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); }, out);
@@ -615,30 +552,16 @@ namespace Rivet {
   /// Filter a collection in-place, keeping the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  ///
-  /// @deprecated Use iselect()
-  template <typename CONTAINER, typename FN>
-  inline CONTAINER& ifilter_select(CONTAINER& c, const FN& f) {
-    //using value_type = typename std::remove_reference<decltype(*std::begin(std::declval<typename std::add_lvalue_reference<CONTAINER>::type>()))>::type;
-    auto invf = [&](const typename CONTAINER::value_type& x){ return !f(x); };
-    return ifilter_discard(c, invf); //< yes, intentional!
-  }
-  /// Alias
   template <typename CONTAINER, typename FN>
   inline CONTAINER& iselect(CONTAINER& c, const FN& f) {
-    return ifilter_select(c, f);
+    //using value_type = typename std::remove_reference<decltype(*std::begin(std::declval<typename std::add_lvalue_reference<CONTAINER>::type>()))>::type;
+    auto invf = [&](const typename CONTAINER::value_type& x){ return !f(x); };
+    return idiscard(c, invf); //< yes, intentional!
   }
 
   // No single equality-comparison version for select, since that would be silly!
 
   /// Version with several element-equality comparisons in place of a function
-  ///
-  /// @deprecated Use iselect_if_any()
-  template <typename CONTAINER>
-  inline CONTAINER& ifilter_select_if_any(CONTAINER& c, const CONTAINER& ys) {
-    return ifilter_select(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
-  }
-  /// Version with element-equality comparisons in place of a function
   template <typename CONTAINER>
   inline CONTAINER& iselect_if_any(CONTAINER& c, const CONTAINER& ys) {
     return iselect(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
@@ -648,29 +571,15 @@ namespace Rivet {
   /// Filter a collection by copy, keeping the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  ///
-  /// @deprecated Use select()
-  template <typename CONTAINER, typename FN>
-  inline CONTAINER filter_select(const CONTAINER& c, const FN& f) {
-    CONTAINER rtn = c;
-    return ifilter_select(rtn, f); ///< @todo More efficient would be copy_if with back_inserter ... but is that equally container agnostic?
-  }
-  /// Alias
   template <typename CONTAINER, typename FN>
   inline CONTAINER select(const CONTAINER& c, const FN& f) {
-    return filter_select(c, f);
+    CONTAINER rtn = c;
+    return iselect(rtn, f); ///< @todo More efficient would be copy_if with back_inserter ... but is that equally container agnostic?
   }
 
   // No single equality-comparison version for select, since that would be silly!
 
   /// Version with several element-equality comparisons in place of a function
-  ///
-  /// @deprecated Use select_if_any()
-  template <typename CONTAINER>
-  inline CONTAINER filter_select_if_any(const CONTAINER& c, const CONTAINER& ys) {
-    return filter_select(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
-  }
-  /// Version with element-equality comparisons in place of a function
   template <typename CONTAINER>
   inline CONTAINER select_if_any(const CONTAINER& c, const CONTAINER& ys) {
     return select(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
@@ -682,29 +591,15 @@ namespace Rivet {
   /// @note New container will be replaced, not appended to
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  ///
-  /// @deprecated Use select()
-  template <typename CONTAINER, typename FN>
-  inline CONTAINER& filter_select(const CONTAINER& c, const FN& f, CONTAINER& out) {
-    out = filter_select(c, f);
-    return out;
-  }
-  /// Alias
   template <typename CONTAINER, typename FN>
   inline CONTAINER& select(const CONTAINER& c, const FN& f, CONTAINER& out) {
-    return filter_select(c, f, out);
+    out = select(c, f);
+    return out;
   }
 
   // No single equality-comparison version for select, since that would be silly!
 
   /// Version with several element-equality comparisons in place of a function
-  ///
-  /// @deprecated Use iselect_if_any()
-  template <typename CONTAINER>
-  inline CONTAINER& filter_select_if_any(const CONTAINER& c, const CONTAINER& ys, CONTAINER& out) {
-    return filter_select(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); }, out);
-  }
-  /// Version with element-equality comparisons in place of a function
   template <typename CONTAINER>
   inline CONTAINER& select_if_any(const CONTAINER& c, const CONTAINER& ys, CONTAINER& out) {
     return select(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); }, out);

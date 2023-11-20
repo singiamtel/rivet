@@ -50,13 +50,13 @@ namespace Rivet {
       Jets LRJJ;
       fastjet::Filter trimmer(fastjet::JetDefinition(fastjet::kt_algorithm,0.2), fastjet::SelectorPtFractionMin(0.05));
       for (Jet& j: LRJ_old) LRJJ.push_back(trimmer(j));
-      Jets LRJ = ifilter_select(LRJJ, Cuts::abseta < 2.0 && Cuts::pT > 200*GeV);
+      Jets LRJ = iselect(LRJJ, Cuts::abseta < 2.0 && Cuts::pT > 200*GeV);
       if (LRJ.size() < 4) vetoEvent;
       LRJ = sortByPt(LRJ); // sorting for constructing sigmaM
 
       // Small R jets need to pass some cuts + need to be BTagged.
       const Jets SRJ = apply<FastJets>(event, "SmallRJ").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 50*GeV);
-      Jets BT_SRJ = filter_select(SRJ, hasBTag(Cuts::pT > 5*GeV));
+      Jets BT_SRJ = select(SRJ, hasBTag(Cuts::pT > 5*GeV));
       const int tagg = (BT_SRJ.size() == 0) ? 1 : 0; //if there are no B-TAGGED jets are present, tagg = 1.
 
       // Now to find B-MATCHED Large R Jets: extra step, not useful for SR regions!

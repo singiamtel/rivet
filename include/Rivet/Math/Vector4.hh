@@ -693,42 +693,6 @@ namespace Rivet {
 
     ////////////////////////////////////////
 
-
-    /// @cond HIDDEN
-
-    /// Struct for sorting by increasing energy
-    /// @deprecated Use cmpMomByEAsc
-    struct byEAscending {
-      bool operator()(const FourMomentum& left, const FourMomentum& right) const{
-        const double pt2left = left.E();
-        const double pt2right = right.E();
-        return pt2left < pt2right;
-      }
-
-      bool operator()(const FourMomentum* left, const FourMomentum* right) const{
-        return (*this)(*left, *right);
-      }
-    };
-
-
-    /// Struct for sorting by decreasing energy
-    /// @deprecated Use cmpMomByE
-    struct byEDescending {
-      bool operator()(const FourMomentum& left, const FourMomentum& right) const{
-        return byEAscending()(right, left);
-      }
-
-      bool operator()(const FourMomentum* left, const FourVector* right) const{
-        return (*this)(*left, *right);
-      }
-    };
-
-    /// @endcond HIDDEN
-
-
-    ////////////////////////////////////////
-
-
     /// @name Arithmetic operators
     /// @{
 

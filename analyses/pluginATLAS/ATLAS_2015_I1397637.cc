@@ -125,7 +125,7 @@ namespace Rivet {
       // Thin jets and trimmed fat jets
       /// @todo Use Rivet built-in FJ trimming support
       const Jets& jets  = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
-      const PseudoJets& fat_pjets = apply<FastJets>(event, "fat_jets").pseudoJetsByPt();
+      const PseudoJets& fat_pjets = apply<FastJets>(event, "fat_jets").pseudojetsByPt();
       const double Rfilt = 0.3, ptFrac_min = 0.05; ///< @todo Need to be careful about the units for the pT cut passed to FJ?
       PseudoJets trimmed_fat_pjets;
       fastjet::Filter trimmer(fastjet::JetDefinition(fastjet::kt_algorithm, Rfilt), fastjet::SelectorPtFractionMin(ptFrac_min));

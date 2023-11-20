@@ -53,26 +53,25 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const Jets& jetsak5 = apply<FastJets>(event, "JetsAK5").jetsByPt(56*GeV);
-      const Jets& jetsak7 = apply<FastJets>(event, "JetsAK7").jetsByPt(56*GeV);
+      const Jets& jetsak5 = apply<FastJets>(event, "JetsAK5").jetsByPt(Cuts::pT > 56*GeV);
+      const Jets& jetsak7 = apply<FastJets>(event, "JetsAK7").jetsByPt(Cuts::pT > 56*GeV);
       if (jetsak5.size() < 1 && jetsak7.size() < 1) vetoEvent;
 
-      const double weight = 1.0;
 
       // Filling R = 0.5 jets
       for(const Jet& jet : jetsak5) {
         if (jet.absrapidity() < 0.5) {
-          _h_pt_05_ak5->fill(jet.pT()/GeV, weight);
+          _h_pt_05_ak5->fill(jet.pT()/GeV);
         } else if (jet.absrapidity() < 1.0) {
-          _h_pt_05_10_ak5->fill(jet.pT()/GeV, weight);
+          _h_pt_05_10_ak5->fill(jet.pT()/GeV);
         } else if (jet.absrapidity() < 1.5) {
-          _h_pt_10_15_ak5->fill(jet.pT()/GeV, weight);
+          _h_pt_10_15_ak5->fill(jet.pT()/GeV);
         } else if (jet.absrapidity() < 2.0) {
-          _h_pt_15_20_ak5->fill(jet.pT()/GeV, weight);
+          _h_pt_15_20_ak5->fill(jet.pT()/GeV);
         } else if (jet.absrapidity() < 2.5) {
-          _h_pt_20_25_ak5->fill(jet.pT()/GeV, weight);
+          _h_pt_20_25_ak5->fill(jet.pT()/GeV);
         } else if (jet.absrapidity() < 3.0) {
-          _h_pt_25_30_ak5->fill(jet.pT()/GeV, weight);
+          _h_pt_25_30_ak5->fill(jet.pT()/GeV);
         }
       }
 
@@ -80,17 +79,17 @@ namespace Rivet {
       // Filling R = 0.7 jets
       for(const Jet& jet : jetsak7) {
         if (jet.absrapidity() < 0.5) {
-          _h_pt_05_ak7->fill(jet.pT() * GeV, weight);
+          _h_pt_05_ak7->fill(jet.pT() * GeV);
         } else if (jet.absrapidity() < 1.0) {
-          _h_pt_05_10_ak7->fill(jet.pT() * GeV, weight);
+          _h_pt_05_10_ak7->fill(jet.pT() * GeV);
         } else if (jet.absrapidity() < 1.5) {
-          _h_pt_10_15_ak7->fill(jet.pT() * GeV, weight);
+          _h_pt_10_15_ak7->fill(jet.pT() * GeV);
         } else if (jet.absrapidity() < 2.0) {
-          _h_pt_15_20_ak7->fill(jet.pT() * GeV, weight);
+          _h_pt_15_20_ak7->fill(jet.pT() * GeV);
         } else if (jet.absrapidity() < 2.5) {
-          _h_pt_20_25_ak7->fill(jet.pT() * GeV, weight);
+          _h_pt_20_25_ak7->fill(jet.pT() * GeV);
         } else if (jet.absrapidity() < 3.0) {
-          _h_pt_25_30_ak7->fill(jet.pT() * GeV, weight);
+          _h_pt_25_30_ak7->fill(jet.pT() * GeV);
         }
       }
 

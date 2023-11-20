@@ -66,7 +66,6 @@ namespace Rivet {
 
     /// Per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // Select ttbar -> lepton+jets at parton level, removing tau decays
       const Particles leptonicpartontops = apply<ParticleFinder>(event, "LeptonicPartonTops").particlesByPt();
@@ -82,11 +81,11 @@ namespace Rivet {
 
       // MET
       const MissingMomentum& met = apply<MissingMomentum>(event, "MET");
-      _hist_met->fill(met.visibleMomentum().pT()/GeV, weight);
+      _hist_met->fill(met.visibleMomentum().pT()/GeV);
 
       // HT and ST
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
-      const Jets jets = jetpro.jetsByPt(20*GeV);
+      const Jets jets = jetpro.jetsByPt(Cuts::pT > 20*GeV);
 
       double ht = 0.0;
       for (const Jet& j : jets) {
@@ -96,12 +95,12 @@ namespace Rivet {
       }
 
       double st = ht + lepton.pT() + met.visibleMomentum().pT();
-      _hist_ht->fill(ht/GeV, weight);
-      _hist_st->fill(st/GeV, weight);
+      _hist_ht->fill(ht/GeV);
+      _hist_st->fill(st/GeV);
 
       // WPT
       const FourMomentum w = lepton - met.visibleMomentum();
-      _hist_wpt->fill(w.pT()/GeV, weight);
+      _hist_wpt->fill(w.pT()/GeV);
     }
 
 

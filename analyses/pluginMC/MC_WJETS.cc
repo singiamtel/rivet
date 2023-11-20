@@ -78,7 +78,7 @@ namespace Rivet {
       }
       FourMomentum wmom(wfinder.bosons().front().momentum());
 
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(_jetptcut);
+      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > _jetptcut);
       if (jets.size() > 0) {
         _h_W_jet1_deta->fill(wmom.eta()-jets[0].eta());
         _h_W_jet1_dR->fill(deltaR(wmom, jets[0].momentum()));

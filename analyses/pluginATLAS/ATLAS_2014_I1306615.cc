@@ -156,8 +156,8 @@ namespace Rivet {
       // -------------------------------------------- //
 
       // Muon and Electron selection
-      ifilter_discard(good_mu, [&](const DressedLepton& lep) { return deltaR(lep, y1) < 0.4 || deltaR(lep, y2) < 0.4; });
-      ifilter_discard(good_el, [&](const DressedLepton& lep) { return deltaR(lep, y1) < 0.4 || deltaR(lep, y2) < 0.4; });
+      idiscard(good_mu, [&](const DressedLepton& lep) { return deltaR(lep, y1) < 0.4 || deltaR(lep, y2) < 0.4; });
+      idiscard(good_el, [&](const DressedLepton& lep) { return deltaR(lep, y1) < 0.4 || deltaR(lep, y2) < 0.4; });
 
       // Find prompt, invisible particles for missing ET calculation
       // Based on VisibleFinalState projection
@@ -181,7 +181,6 @@ namespace Rivet {
 
       // Jet selection
       // Get jets with pT > 25 GeV and |rapidity| < 4.4
-      //const Jets& jets = apply<FastJets>(event, "JETS").jetsByPt(25.0*GeV, MAXDOUBLE, -4.4, 4.4, RAPIDITY);
       const Jets& jets = apply<FastJets>(event, "JETS").jetsByPt(Cuts::pT>25*GeV && Cuts::absrap <4.4);
 
       Jets jets_25, jets_30, jets_50;

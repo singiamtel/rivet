@@ -60,14 +60,14 @@ namespace Rivet {
 
       // 1. Find which light jets survive OR
       for (const auto& lep : leptons) {
-        ifilter_discard(lightjets, [&](const Jet& jet) {
+        idiscard(lightjets, [&](const Jet& jet) {
           return deltaR(jet, lep) < 0.2 && (lep.abspid() == PID::ELECTRON || lep.pT()/jet.pT() > 0.7);
         });
       }
 
       // 2. Find which leptons survive the OR and apply signal selection
       for (const auto& jet : (lightjets + bjets)) {
-        ifilter_discard(leptons, [&](const DressedLepton& lep) {
+        idiscard(leptons, [&](const DressedLepton& lep) {
           return lep.pT() < 28*GeV || deltaR(jet, lep) < min(0.4, 0.04+10*GeV/lep.pT());
         });
       }

@@ -73,23 +73,23 @@ namespace Rivet {
       Particles elecs = apply<ParticleFinder>(event, "Electrons").particlesByPt();
       Particles muons = apply<ParticleFinder>(event, "Muons").particlesByPt();
       Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
-      const Jets bjets = filter_select(jets, [&](const Jet& j) { return j.bTagged(Cuts::pT > 5*GeV); });
+      const Jets bjets = select(jets, [&](const Jet& j) { return j.bTagged(Cuts::pT > 5*GeV); });
 
 
       // Jet/electron/muon overlap removal and selection
       // Remove any electron or muon within dR = 0.2 of a b-tagged jet
       for (const Jet& bj : bjets) {
-        ifilter_discard(elecs, deltaRLess(bj, 0.2, RAPIDITY));
-        ifilter_discard(muons, deltaRLess(bj, 0.2, RAPIDITY));
+        idiscard(elecs, deltaRLess(bj, 0.2, RAPIDITY));
+        idiscard(muons, deltaRLess(bj, 0.2, RAPIDITY));
       }
       // Remove any untagged jet within dR = 0.2 of an electron or muon
       for (const Particle& e : elecs)
-        ifilter_discard(jets, deltaRLess(e, 0.2, RAPIDITY));
+        idiscard(jets, deltaRLess(e, 0.2, RAPIDITY));
       for (const Particle& m : muons)
-        ifilter_discard(jets, deltaRLess(m, 0.2, RAPIDITY));
+        idiscard(jets, deltaRLess(m, 0.2, RAPIDITY));
       // Remove any untagged low-multiplicity/muon-dominated jet within dR = 0.4 of a muon
       for (const Particle& m : muons)
-        ifilter_discard(jets, [&](const Jet& j) {
+        idiscard(jets, [&](const Jet& j) {
             if (deltaR(m, j, RAPIDITY) > 0.4) return false;
             const Particles trks = j.particles(Cuts::abscharge != 0);
             if (trks.size() < 3) return true;
@@ -100,20 +100,20 @@ namespace Rivet {
         const double dr = min(0.4, 0.04 + 10*GeV/l.pT());
         return any(jets, deltaRLess(l, dr, RAPIDITY));
       };
-      ifilter_discard(elecs, lcone_iso_fn);
-      ifilter_discard(muons, lcone_iso_fn);
+      idiscard(elecs, lcone_iso_fn);
+      idiscard(muons, lcone_iso_fn);
       // Track-sharing e,mu also filtered, but that decision can't be made here
       const Jets& sigjets = jets;
       const Jets& sigbjets = bjets;
 
 
       // Lepton isolation
-      Particles sigelecs = filter_select(elecs, Cuts::abseta < 2);
+      Particles sigelecs = select(elecs, Cuts::abseta < 2);
       Particles sigmuons = muons;
-      ifilter_select(sigelecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_MEDIUM));
+      iselect(sigelecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_MEDIUM));
       const Particles trks = apply<ParticleFinder>(event, "Tracks").particles();
       const Particles clus = apply<ParticleFinder>(event, "Clusters").particles();
-      ifilter_discard(sigelecs, [&](const Particle& e) {
+      idiscard(sigelecs, [&](const Particle& e) {
           const double R = min(0.2, 10*GeV/e.pT());
           double ptsum = -e.pT(), etsum = -e.Et();
           for (const Particle& t : trks)
@@ -122,7 +122,7 @@ namespace Rivet {
             if (deltaR(c,e) < 0.2) etsum += c.pT(); ///< @todo Bit vague about "energy"
           return ptsum / e.pT() > 0.06 || etsum / e.pT() > 0.06;
         });
-      ifilter_discard(sigmuons, [&](const Particle& m) {
+      idiscard(sigmuons, [&](const Particle& m) {
           const double R = min(0.3, 10*GeV/m.pT());
           double ptsum = -m.pT();
           for (const Particle& t : trks)
@@ -130,8 +130,8 @@ namespace Rivet {
           return ptsum / m.pT() > 0.06;
         });
       /// @todo Note is vague about whether "signal lepton" defn includes pT > 20?
-      ifilter_discard(sigelecs, Cuts::pT > 20*GeV);
-      ifilter_discard(sigmuons, Cuts::pT > 20*GeV);
+      idiscard(sigelecs, Cuts::pT > 20*GeV);
+      idiscard(sigmuons, Cuts::pT > 20*GeV);
 
 
       // MET calculation (NB. done generically, with smearing, rather than via explicit physics objects)
@@ -148,9 +148,9 @@ namespace Rivet {
       if (sigleptons.size() == 2 && sigleptons[0].charge() != sigleptons[1].charge()) vetoEvent;
 
       // Jet sub-selections and meff calculation
-      const Jets sigjets25 = filter_select(sigjets, Cuts::pT > 25*GeV);
-      const Jets sigjets40 = filter_select(sigjets25, Cuts::pT > 40*GeV);
-      const Jets sigjets50 = filter_select(sigjets40, Cuts::pT > 50*GeV);
+      const Jets sigjets25 = select(sigjets, Cuts::pT > 25*GeV);
+      const Jets sigjets40 = select(sigjets25, Cuts::pT > 40*GeV);
+      const Jets sigjets50 = select(sigjets40, Cuts::pT > 50*GeV);
       /// @todo Is meff specific to the jet pT cut?
       const double meff = sum(sigjets, pT, 0.0) + sum(sigleptons, pT, 0.0);
 
@@ -161,7 +161,7 @@ namespace Rivet {
       if (sigleptons.size() >= 2 && sigbjets.empty() && sigjets40.size() >= 6 && etmiss > 150*GeV && meff > 900*GeV) _h_0b2->fill();
       if (sigleptons.size() >= 2 && sigbjets.size() >= 1 && sigjets25.size() >= 6 && etmiss > 200*GeV && meff > 650*GeV) _h_1b->fill();
       if (sigleptons.size() >= 2 && sigbjets.size() >= 3 && sigjets25.size() >= 6 && etmiss > 150*GeV && meff > 600*GeV) _h_3b->fill();
-      if (filter_select(sigleptons, Cuts::charge < 0).size() >= 2) {
+      if (select(sigleptons, Cuts::charge < 0).size() >= 2) {
         if (sigleptons.size() >= 2 && sigbjets.size() >= 1 && sigjets50.size() >= 6 && meff > 1200*GeV) _h_1bDD->fill();
         if (sigleptons.size() >= 2 && sigbjets.size() >= 3 && sigjets50.size() >= 6 && meff > 1000*GeV) _h_3bDD->fill();
         if (sigleptons.size() >= 2 && sigbjets.size() >= 1 && sigjets50.size() >= 6 && meff > 1800*GeV) _h_1bGG->fill();

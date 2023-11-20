@@ -87,7 +87,7 @@ namespace Rivet {
 
 
       // Isolate jets from W and Z charged leptons
-      const Particles wzleps = filter_select(W.constituents()+Z.constituents(), isChLepton);
+      const Particles wzleps = select(W.constituents()+Z.constituents(), isChargedLepton);
       const Jets& jets = apply<FastJets>("Jets", event).jetsByPt(Cuts::pT > 30*GeV and Cuts::abseta < 2.5);
       const Jets isojets = discardIfAnyDeltaRLess(jets, wzleps, 0.5);
 

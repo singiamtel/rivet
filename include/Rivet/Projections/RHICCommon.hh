@@ -35,7 +35,7 @@ namespace Rivet {
       clear();
       double estimate =
         apply<FinalState>(e, "STAR_BES_Centrality").particles().size();
-      set(estimate);
+      setValue(estimate);
     }
 
     /// Compare projections
@@ -73,8 +73,7 @@ namespace Rivet {
     // the specified range.
     virtual void project(const Event& e) {
       clear();
-      set(apply<ChargedFinalState>
-          (e, "ChargedFinalState").particles().size());
+      setValue(apply<ChargedFinalState>(e, "ChargedFinalState").particles().size());
     }
 
     // Compare to another projection.

@@ -56,31 +56,30 @@ namespace Rivet {
         const FourMomentum t1P4AtCM = LorentzTransform::mkFrameTransformFromBeta(ttbarP4.betaVec()).transform(t1P4);
         const double dPhi = deltaPhi(t1P4.phi(), t2P4.phi());
 
-        const double weight = 1.0;
         if (isSemilepton) {
-          _hSL_topPt->fill(t1Pt, weight);
-          _hSL_topPt->fill(t2Pt, weight);
-          _hSL_topPtTtbarSys->fill(t1P4AtCM.pT(), weight);
-          _hSL_topY->fill(t1P4.rapidity(), weight);
-          _hSL_topY->fill(t2P4.rapidity(), weight);
-          _hSL_ttbarDelPhi->fill(dPhi, weight);
-          _hSL_topPtLead->fill(std::max(t1Pt, t2Pt), weight);
-          _hSL_topPtSubLead->fill(std::min(t1Pt, t2Pt), weight);
-          _hSL_ttbarPt->fill(ttbarP4.pT(), weight);
-          _hSL_ttbarY->fill(ttbarP4.rapidity(), weight);
-          _hSL_ttbarMass->fill(ttbarP4.mass(), weight);
+          _hSL_topPt->fill(t1Pt);
+          _hSL_topPt->fill(t2Pt);
+          _hSL_topPtTtbarSys->fill(t1P4AtCM.pT());
+          _hSL_topY->fill(t1P4.rapidity());
+          _hSL_topY->fill(t2P4.rapidity());
+          _hSL_ttbarDelPhi->fill(dPhi);
+          _hSL_topPtLead->fill(std::max(t1Pt, t2Pt));
+          _hSL_topPtSubLead->fill(std::min(t1Pt, t2Pt));
+          _hSL_ttbarPt->fill(ttbarP4.pT());
+          _hSL_ttbarY->fill(ttbarP4.rapidity());
+          _hSL_ttbarMass->fill(ttbarP4.mass());
         } else { // if (isDilepton) {
-          _hDL_topPt->fill(t1Pt, weight);
-          _hDL_topPt->fill(t2Pt, weight);
-          _hDL_topPtTtbarSys->fill(t1P4AtCM.pT(), weight);
-          _hDL_topY->fill(t1P4.rapidity(), weight);
-          _hDL_topY->fill(t2P4.rapidity(), weight);
-          _hDL_ttbarDelPhi->fill(dPhi, weight);
-          _hDL_topPtLead->fill(std::max(t1Pt, t2Pt), weight);
-          _hDL_topPtSubLead->fill(std::min(t1Pt, t2Pt), weight);
-          _hDL_ttbarPt->fill(ttbarP4.pT(), weight);
-          _hDL_ttbarY->fill(ttbarP4.rapidity(), weight);
-          _hDL_ttbarMass->fill(ttbarP4.mass(), weight);
+          _hDL_topPt->fill(t1Pt);
+          _hDL_topPt->fill(t2Pt);
+          _hDL_topPtTtbarSys->fill(t1P4AtCM.pT());
+          _hDL_topY->fill(t1P4.rapidity());
+          _hDL_topY->fill(t2P4.rapidity());
+          _hDL_ttbarDelPhi->fill(dPhi);
+          _hDL_topPtLead->fill(std::max(t1Pt, t2Pt));
+          _hDL_topPtSubLead->fill(std::min(t1Pt, t2Pt));
+          _hDL_ttbarPt->fill(ttbarP4.pT());
+          _hDL_ttbarY->fill(ttbarP4.rapidity());
+          _hDL_ttbarMass->fill(ttbarP4.mass());
         }
       }
 

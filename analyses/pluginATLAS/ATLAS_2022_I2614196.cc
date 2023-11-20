@@ -9,7 +9,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief Zy+jets at 13 TeV
   class ATLAS_2022_I2614196 : public Analysis {
   public:

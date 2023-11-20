@@ -38,7 +38,6 @@ namespace Rivet {
 
   /// Determine if the PID is that of a charged lepton
   PARTICLE_TO_PID_BOOLFN(isChargedLepton)
-  PARTICLE_TO_PID_BOOLFN(isChLepton)
 
   /// Determine if the PID is that of a lepton (charged or neutral)
   PARTICLE_TO_PID_BOOLFN(isLepton)
@@ -447,10 +446,6 @@ namespace Rivet {
   }
 
 
-  /// Check whether a given PID is found in the particle's ancestor list
-  /// @deprecated Prefer hasAncestorWith
-  inline bool hasAncestor(const Particle& p, PdgId pid)  { return p.hasAncestor(pid); }
-
   /// Determine whether the particle is from a b-hadron decay
   inline bool fromBottom(const Particle& p) { return p.fromBottom(); }
 
@@ -467,10 +462,6 @@ namespace Rivet {
 
   /// @brief Determine whether the particle is from a prompt tau decay
   inline bool fromPromptTau(const Particle& p) { return p.fromPromptTau(); }
-
-  // /// @brief Determine whether the particle is from a hadron or tau decay
-  // DEPRECATED("Too vague: use fromHadron or fromHadronicTau")
-  // inline bool fromDecay(const Particle& p) { return p.fromDecay(); }
 
   /// @}
 
@@ -677,56 +668,34 @@ namespace Rivet {
   /// @{
 
   /// Filter a particle collection in-place to the subset that passes the supplied Cut
-  Particles& ifilter_select(Particles& particles, const Cut& c);
-  /// Alias for ifilter_select
-  /// @deprecated Use ifilter_select
-  inline Particles& ifilterBy(Particles& particles, const Cut& c) { return ifilter_select(particles, c); }
-  /// New alias for ifilter_select
-  inline Particles& iselect(Particles& particles, const Cut& c) { return ifilter_select(particles, c); }
+  Particles& iselect(Particles& particles, const Cut& c);
 
   /// Filter a particle collection in-place to the subset that passes the supplied Cut
-  inline Particles filter_select(const Particles& particles, const Cut& c) {
+  inline Particles select(const Particles& particles, const Cut& c) {
     Particles rtn = particles;
-    return ifilter_select(rtn, c);
+    return iselect(rtn, c);
   }
-  /// Alias for ifilter_select
-  /// @deprecated Use filter_select
-  inline Particles filterBy(const Particles& particles, const Cut& c) { return filter_select(particles, c); }
-  /// New alias for ifilter_select
-  inline Particles select(const Particles& particles, const Cut& c) { return filter_select(particles, c); }
 
   /// Filter a particle collection in-place to the subset that passes the supplied Cut
-  inline Particles filter_select(const Particles& particles, const Cut& c, Particles& out) {
-    out = filter_select(particles, c);
+  inline Particles select(const Particles& particles, const Cut& c, Particles& out) {
+    out = select(particles, c);
     return out;
   }
-  /// Alias for ifilter_select
-  /// @deprecated Use filter_select
-  inline Particles filterBy(const Particles& particles, const Cut& c, Particles& out) { return filter_select(particles, c, out); }
-  /// New alias for ifilter_select
-  inline Particles select(const Particles& particles, const Cut& c, Particles& out) { return filter_select(particles, c, out); }
 
+   /// Filter a particle collection in-place to the subset that fails the supplied Cut
+   Particles& idiscard(Particles& particles, const Cut& c);
 
   /// Filter a particle collection in-place to the subset that fails the supplied Cut
-  Particles& ifilter_discard(Particles& particles, const Cut& c);
-  /// New alias for ifilter_discard
-  inline Particles& idiscard(Particles& particles, const Cut& c) { return ifilter_discard(particles, c); }
-
-  /// Filter a particle collection in-place to the subset that fails the supplied Cut
-  inline Particles filter_discard(const Particles& particles, const Cut& c) {
+  inline Particles discard(const Particles& particles, const Cut& c) {
     Particles rtn = particles;
-    return ifilter_discard(rtn, c);
+    return idiscard(rtn, c);
   }
-  /// New alias for filter_discard
-  inline Particles discard(const Particles& particles, const Cut& c) { return filter_discard(particles, c); }
 
   /// Filter a particle collection in-place to the subset that fails the supplied Cut
-  inline Particles filter_discard(const Particles& particles, const Cut& c, Particles& out) {
-    out = filter_discard(particles, c);
+  inline Particles discard(const Particles& particles, const Cut& c, Particles& out) {
+    out = discard(particles, c);
     return out;
   }
-  /// New alias for filter_discard
-  inline Particles discard(const Particles& particles, const Cut& c, Particles& out) { return filter_discard(particles, c, out); }
 
 
   // inline void ifilterIsolateDeltaR(Particles& particles, const FourMomenta& vecs) {

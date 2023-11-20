@@ -64,7 +64,7 @@ namespace Rivet {
       const Jets j04 = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::abseta < 2.8 && Cuts::pT > 30*GeV);
       const Jets sj04 = apply<JetFinder>(event, "SJets").jetsByPt(Cuts::pT > 30*GeV);
       if(sj04.size() < 2) vetoEvent;
-      const Jets sj04b = filter_select(sj04, [&](const Jet& j) { return j.bTagged(); });
+      const Jets sj04b = select(sj04, [&](const Jet& j) { return j.bTagged(); });
       if(sj04b.size() > 1) vetoEvent;
       if( sj04[0].pT() < 250) vetoEvent;
 

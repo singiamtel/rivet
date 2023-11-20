@@ -32,7 +32,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& e) {
-      const Jets& jets = apply<JetFinder>(e, "ConeFinder").jetsByPt(40.0*GeV);
+      const Jets& jets = apply<JetFinder>(e, "ConeFinder").jetsByPt(Cuts::pT > 40.0*GeV);
       if (jets.size() < 2) vetoEvent;
 
       const double ymax = std::max(jets[0].absrap(), jets[1].absrap());

@@ -83,7 +83,7 @@ namespace Rivet {
         }
 
         Particles Dstar;
-        for(const Particle& p : filter_select(ufs.particles(), Cuts::pT > 1.5*GeV and Cuts::pT < 15*GeV and Cuts::abseta < 1.5 and Cuts::abspid==413)) {
+        for(const Particle& p : select(ufs.particles(), Cuts::pT > 1.5*GeV and Cuts::pT < 15*GeV and Cuts::abseta < 1.5 and Cuts::abspid==413)) {
             Dstar.push_back(p);
         }
         if(Dstar.size() == 0){ // Cut on Dstar

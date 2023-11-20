@@ -57,7 +57,7 @@ namespace Rivet {
       if (cfsp.empty()) vetoEvent;
 
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
-      const Jets& jets = jetpro.jetsByPt(5.0*GeV);
+      const Jets& jets = jetpro.jetsByPt(Cuts::pT > 5*GeV);
 
       const int mult = cfsp.size();
 
@@ -112,7 +112,7 @@ namespace Rivet {
       }
 
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
-      const Jets& jets = jetpro.jetsByPt(5.0*GeV);
+      const Jets& jets = jetpro.jetsByPt(Cuts::pT > 5*GeV);
 
       // Start event decomp
 

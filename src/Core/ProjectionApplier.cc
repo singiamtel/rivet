@@ -24,16 +24,14 @@ namespace Rivet {
   }
 
 
-  const Projection& ProjectionApplier::_applyProjection(const Event& evt,
-                                                        const string& name) const {
+  const Projection& ProjectionApplier::_apply(const Event& evt, const string& name) const {
     const Projection& proj = getProjection(name);
     // cout << "Found projection " << &proj << " -> applying" << '\n';
-    return _applyProjection(evt, proj);
+    return _apply(evt, proj);
   }
 
 
-  const Projection& ProjectionApplier::_applyProjection(const Event& evt,
-                                                        const Projection& proj) const {
+  const Projection& ProjectionApplier::_apply(const Event& evt, const Projection& proj) const {
     return evt.applyProjection(proj);
   }
 

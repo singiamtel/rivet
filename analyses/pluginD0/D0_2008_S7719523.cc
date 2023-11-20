@@ -87,7 +87,7 @@ namespace Rivet {
         }
       }
 
-      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(15.0*GeV);
+      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 15.0*GeV);
       if (jets.empty()) vetoEvent;
 
       FourMomentum leadingJet = jets[0].momentum();

@@ -85,7 +85,7 @@ namespace Rivet {
   // Do the analysis
   void MC_JetAnalysis::analyze(const Event & e) {
 
-    const Jets& jets = apply<FastJets>(e, _jetpro_name).jetsByPt(_jetptcut);
+    const Jets& jets = apply<FastJets>(e, _jetpro_name).jetsByPt(Cuts::pT > _jetptcut);
 
     for (size_t i = 0; i < _njet; ++i) {
       if (jets.size() < i+1) continue;

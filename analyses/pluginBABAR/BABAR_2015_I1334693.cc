@@ -30,7 +30,7 @@ namespace Rivet {
 
     // Calculate the Q2 using mother and daugher meson
     double q2(const Particle& B, int mesonID) {
-      FourMomentum q = B.mom() - filter_select(B.children(), Cuts::pid==mesonID)[0];
+      FourMomentum q = B.mom() - select(B.children(), Cuts::pid==mesonID)[0];
       return q*q;
     }
 

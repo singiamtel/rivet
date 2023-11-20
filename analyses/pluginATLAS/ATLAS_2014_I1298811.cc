@@ -50,7 +50,7 @@ namespace Rivet {
     void analyze(const Event& event) {
       // Find the jets with pT > 20 GeV and *rapidity* within 2.8
       /// @todo Use Cuts instead rather than an eta cut in the proj and a y cut after
-      const Jets alljets = apply<FastJets>(event, "Jets").jetsByPt(20*GeV);
+      const Jets alljets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV);
       Jets jets;
       for (const Jet& j : alljets)
         if (j.absrap() < 2.8) jets.push_back(j);

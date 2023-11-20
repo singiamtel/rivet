@@ -117,7 +117,7 @@ namespace Rivet {
         DressedLeptons Jpsi_muons, third_muons;
         for (const DressedLepton& mu : muons) {
 	  const Particle& baremu = mu.bareLepton();
-          if (baremu.fromBottom() && baremu.hasAncestor(PID::JPSI)) {
+          if (baremu.fromBottom() && baremu.hasAncestorWith(Cuts::pid == PID::JPSI)) {
             Jpsi_muons.push_back(mu);
           }
           else if (baremu.fromBottom()) {

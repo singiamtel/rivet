@@ -47,7 +47,7 @@ namespace Rivet {
       /// @param e Event to project from
       virtual void project(const Event& e) {
         clear();
-        set(apply<FinalState>(e,"FinalState").particles().size());
+        setValue(apply<FinalState>(e,"FinalState").particles().size());
       }
 
       /// Clone this projection

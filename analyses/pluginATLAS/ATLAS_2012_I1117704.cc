@@ -78,16 +78,9 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // get the jet candidates
-      Jets cand_jets;
-      for (const Jet& jet :
-               apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20.0*GeV && Cuts::abseta < 2.8);
 
       // candidate muons
       Particles cand_mu;
@@ -187,45 +180,45 @@ namespace Rivet {
       double ratio = eTmiss/sqrt(HT);
 
       if(ratio>4.) {
-        _hist_njet55->fill(njet55,weight);
-        _hist_njet80->fill(njet80,weight);
+        _hist_njet55->fill(njet55);
+        _hist_njet80->fill(njet80);
         // 7j55
         if(njet55>=7)
-          _count_7j55->fill( 0.5, weight);
+          _count_7j55->fill( 0.5);
         // 8j55
         if(njet55>=8)
-          _count_8j55->fill( 0.5, weight) ;
+          _count_8j55->fill( 0.5) ;
         // 8j55
         if(njet55>=9)
-          _count_9j55->fill( 0.5, weight) ;
+          _count_9j55->fill( 0.5) ;
         // 6j80
         if(njet80>=6)
-          _count_6j80->fill( 0.5, weight) ;
+          _count_6j80->fill( 0.5) ;
         // 7j80
         if(njet80>=7)
-          _count_7j80->fill( 0.5, weight) ;
+          _count_7j80->fill( 0.5) ;
         // 8j80
         if(njet80>=8)
-          _count_8j80->fill( 0.5, weight) ;
+          _count_8j80->fill( 0.5) ;
       }
 
       if(njet55>=7)
-        _etmiss_HT_7j55->fill( ratio, weight);
+        _etmiss_HT_7j55->fill( ratio);
       // 8j55
       if(njet55>=8)
-        _etmiss_HT_8j55->fill( ratio, weight) ;
+        _etmiss_HT_8j55->fill( ratio) ;
       // 8j55
       if(njet55>=9)
-        _etmiss_HT_9j55->fill( ratio, weight) ;
+        _etmiss_HT_9j55->fill( ratio) ;
       // 6j80
       if(njet80>=6)
-        _etmiss_HT_6j80->fill( ratio, weight) ;
+        _etmiss_HT_6j80->fill( ratio) ;
       // 7j80
       if(njet80>=7)
-        _etmiss_HT_7j80->fill( ratio, weight) ;
+        _etmiss_HT_7j80->fill( ratio) ;
       // 8j80
       if(njet80>=8)
-        _etmiss_HT_8j80->fill( ratio, weight) ;
+        _etmiss_HT_8j80->fill( ratio) ;
 
     }
 

@@ -37,7 +37,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(12*GeV);
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 12*GeV);
       if (jets.size() < 2) vetoEvent;
 
       const Particles& muons = apply<IdentifiedFinalState>(event, "Muons").particlesByPt();

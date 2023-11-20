@@ -102,7 +102,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
       // apply electron veto region
       Particles veto_e
         = apply<IdentifiedFinalState>(event, "veto_elecs").particles();
@@ -112,13 +111,7 @@ namespace Rivet {
       }
 
       // get the jet candidates
-      Jets cand_jets;
-      for (const Jet& jet :
-               apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 4.9 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20.0*GeV && Cuts::abseta < 4.9);
 
       // candidate muons
       Particles cand_mu;
@@ -240,64 +233,64 @@ namespace Rivet {
       // plots of etmiss/ht
       double etht = eTmiss/sqrt(HT);
       if (njet55 == 6) {
-        _etmisspT_55_NJ_6_obs->fill(etht,weight);
-        _etmisspT_55_NJ_6_bac->fill(etht,weight);
-        _etmisspT_55_NJ_6_sig->fill(etht,weight);
+        _etmisspT_55_NJ_6_obs->fill(etht);
+        _etmisspT_55_NJ_6_bac->fill(etht);
+        _etmisspT_55_NJ_6_sig->fill(etht);
       } else if (njet55 == 7) {
-        _etmisspT_55_NJ_7_obs->fill(etht,weight);
-        _etmisspT_55_NJ_7_bac->fill(etht,weight);
-        _etmisspT_55_NJ_7_sig->fill(etht,weight);
+        _etmisspT_55_NJ_7_obs->fill(etht);
+        _etmisspT_55_NJ_7_bac->fill(etht);
+        _etmisspT_55_NJ_7_sig->fill(etht);
       } else if (njet55 == 8) {
-        _etmisspT_55_NJ_8_obs->fill(etht,weight);
-        _etmisspT_55_NJ_8_bac->fill(etht,weight);
-        _etmisspT_55_NJ_8_sig->fill(etht,weight);
+        _etmisspT_55_NJ_8_obs->fill(etht);
+        _etmisspT_55_NJ_8_bac->fill(etht);
+        _etmisspT_55_NJ_8_sig->fill(etht);
       }
       if (njet80 == 5) {
-        _etmisspT_80_NJ_5_obs->fill(etht,weight);
-        _etmisspT_80_NJ_5_bac->fill(etht,weight);
-        _etmisspT_80_NJ_5_sig->fill(etht,weight);
+        _etmisspT_80_NJ_5_obs->fill(etht);
+        _etmisspT_80_NJ_5_bac->fill(etht);
+        _etmisspT_80_NJ_5_sig->fill(etht);
       } else if (njet80 == 6) {
-        _etmisspT_80_NJ_6_obs->fill(etht,weight);
-        _etmisspT_80_NJ_6_bac->fill(etht,weight);
-        _etmisspT_80_NJ_6_sig->fill(etht,weight);
+        _etmisspT_80_NJ_6_obs->fill(etht);
+        _etmisspT_80_NJ_6_bac->fill(etht);
+        _etmisspT_80_NJ_6_sig->fill(etht);
       } else if (njet80 == 7) {
-        _etmisspT_80_NJ_7_obs->fill(etht,weight);
-        _etmisspT_80_NJ_7_bac->fill(etht,weight);
-        _etmisspT_80_NJ_7_sig->fill(etht,weight);
+        _etmisspT_80_NJ_7_obs->fill(etht);
+        _etmisspT_80_NJ_7_bac->fill(etht);
+        _etmisspT_80_NJ_7_sig->fill(etht);
       }
 
       if (etht > 1.5 && etht < 2.) {
         if (njet55 > 3) {
-          _njet55A_obs->fill(njet55,weight);
-          _njet55A_bac->fill(njet55,weight);
-          _njet55A_sig->fill(njet55,weight);
+          _njet55A_obs->fill(njet55);
+          _njet55A_bac->fill(njet55);
+          _njet55A_sig->fill(njet55);
         }
         if (njet80 > 3) {
-          _njet80A_obs->fill(njet80,weight);
-          _njet80A_bac->fill(njet80,weight);
-          _njet80A_sig->fill(njet80,weight);
+          _njet80A_obs->fill(njet80);
+          _njet80A_bac->fill(njet80);
+          _njet80A_sig->fill(njet80);
         }
       } else if (etht > 2. && etht < 3.) {
         if (njet55 > 3) {
-          _njet55B_obs->fill(njet55,weight);
-          _njet55B_bac->fill(njet55,weight);
-          _njet55B_sig->fill(njet55,weight);
+          _njet55B_obs->fill(njet55);
+          _njet55B_bac->fill(njet55);
+          _njet55B_sig->fill(njet55);
         }
         if (njet80 > 3) {
-          _njet80B_obs->fill(njet80,weight);
-          _njet80B_bac->fill(njet80,weight);
-          _njet80B_sig->fill(njet80,weight);
+          _njet80B_obs->fill(njet80);
+          _njet80B_bac->fill(njet80);
+          _njet80B_sig->fill(njet80);
         }
       } else {
         if (njet55 > 3) {
-          _njet55C_obs->fill(njet55,weight);
-          _njet55C_bac->fill(njet55,weight);
-          _njet55C_sig->fill(njet55,weight);
+          _njet55C_obs->fill(njet55);
+          _njet55C_bac->fill(njet55);
+          _njet55C_sig->fill(njet55);
         }
         if (njet80 > 3) {
-          _njet80C_obs->fill(njet80,weight);
-          _njet80C_bac->fill(njet80,weight);
-          _njet80C_sig->fill(njet80,weight);
+          _njet80C_obs->fill(njet80);
+          _njet80C_bac->fill(njet80);
+          _njet80C_sig->fill(njet80);
         }
       }
 
@@ -314,13 +307,13 @@ namespace Rivet {
       }
 
       // 7j55
-      if (njet55 >= 7 && pass55DeltaR) _count_7j55->fill( 0.5, weight);
+      if (njet55 >= 7 && pass55DeltaR) _count_7j55->fill( 0.5);
       // 8j55
-      if (njet55 >= 8 && pass55DeltaR) _count_8j55->fill( 0.5, weight);
+      if (njet55 >= 8 && pass55DeltaR) _count_8j55->fill( 0.5);
       // 6j80
-      if (njet80 >= 6 && pass80DeltaR) _count_6j80->fill( 0.5, weight);
+      if (njet80 >= 6 && pass80DeltaR) _count_6j80->fill( 0.5);
       // 7j80
-      if (njet80 >= 7 && pass80DeltaR) _count_7j80->fill( 0.5, weight);
+      if (njet80 >= 7 && pass80DeltaR) _count_7j80->fill( 0.5);
     }
 
     /// @}

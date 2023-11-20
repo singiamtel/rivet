@@ -42,7 +42,7 @@ namespace Rivet {
     // Calculate the recoil w using mother and daugher meson
     double recoilW(const Particle& B, int mesonID) {
       // TODO why does that not work with const?
-      Particle D = filter_select(B.children(), Cuts::pid==mesonID)[0];
+      Particle D = select(B.children(), Cuts::pid==mesonID)[0];
       FourMomentum q = B.mom() - D.mom();
       return (B.mom()*B.mom() + D.mom()*D.mom() - q*q )/ (2. * sqrt(B.mom()*B.mom()) * sqrt(D.mom()*D.mom()) );
     }

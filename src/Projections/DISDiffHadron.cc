@@ -31,7 +31,7 @@ namespace Rivet {
       else
         fshadrons = fs.particles(isHadron, cmpMomByEta);
 
-      Particles sfhadrons = filter_select(fshadrons,
+      Particles sfhadrons = select(fshadrons,
                                           Cuts::pid == _incoming.pid());
       MSG_DEBUG("SF hadrons = " << sfhadrons.size() <<
                 ", all hadrons = " << fshadrons.size());

@@ -35,7 +35,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const PseudoJets& myJets = apply<FastJets>(event, "largeR_jets").pseudoJetsByPt(450*GeV);
+      const PseudoJets& myJets = apply<FastJets>(event, "largeR_jets").pseudojetsByPt(450*GeV);
       if (myJets.empty()) vetoEvent;
 
       fastjet::Filter trimmer(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2), fastjet::SelectorPtFractionMin(0.05));

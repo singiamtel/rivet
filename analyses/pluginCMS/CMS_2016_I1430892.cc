@@ -82,7 +82,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
 
       // Use particle-level leptons for the first histogram
       const LeptonFinder& dressed_electrons = apply<LeptonFinder>(event, "DressedElectrons");
@@ -112,7 +111,7 @@ namespace Rivet {
           // Now calculate the variable
           double dabseta_temp = lepPlus.abseta() - lepMinus.abseta();
 
-          fillWithUFOF( _h_dabsetadressedleptons, dabseta_temp, weight );
+          fillWithUFOF( _h_dabsetadressedleptons, dabseta_temp);
         }
 
       }
@@ -143,7 +142,7 @@ namespace Rivet {
           bool istrueleptonictop = false;
           for (size_t i = 0; i < lepton_candidates.size(); ++i) {
             const Particle& lepton_candidate = lepton_candidates[i];
-            if ( lepton_candidate.hasParent(PID::PHOTON) ) {
+            if ( lepton_candidate.hasParentWith(Cuts::pid == PID::PHOTON) ) {
               MSG_DEBUG("Found gamma parent, top: " << k+1 << " of " << leptonicpartontops.size() << " , lepton: " << i+1 << " of " << lepton_candidates.size());
               continue;
             }
@@ -182,8 +181,8 @@ namespace Rivet {
         const double dabsrapidity_temp = topPlus_p4.absrapidity() - topMinus_p4.absrapidity();
 
         // Fill parton-level histos
-        fillWithUFOF( _h_dabseta, dabseta_temp, weight );
-        fillWithUFOF( _h_dabsrapidity, dabsrapidity_temp, weight );
+        fillWithUFOF( _h_dabseta, dabseta_temp);
+        fillWithUFOF( _h_dabsrapidity, dabsrapidity_temp);
 
         // Now fill the same variables in the 2D and profile histos vs ttbar invariant mass, pT, and absolute rapidity
         for (int i_var = 0; i_var < 3; ++i_var) {
@@ -196,11 +195,11 @@ namespace Rivet {
             var = tt_absrapidity_temp;
           }
 
-          fillWithUFOF( _h_dabsrapidity_var[i_var], dabsrapidity_temp, var, weight );
-          fillWithUFOF( _h_dabseta_var[i_var], dabseta_temp, var, weight );
+          fillWithUFOF( _h_dabsrapidity_var[i_var], dabsrapidity_temp, var);
+          fillWithUFOF( _h_dabseta_var[i_var], dabseta_temp, var);
 
-          fillWithUFOF( _h_dabsrapidity_profile[i_var], dabsrapidity_temp, var, weight, (_h_dabsrapidity->xMax() + _h_dabsrapidity->xMin())/2. );
-          fillWithUFOF( _h_dabseta_profile[i_var], dabseta_temp, var, weight, (_h_dabseta->xMax() + _h_dabseta->xMin())/2. );
+          fillWithUFOF( _h_dabsrapidity_profile[i_var], dabsrapidity_temp, var, (_h_dabsrapidity->xMax() + _h_dabsrapidity->xMin())/2. );
+          fillWithUFOF( _h_dabseta_profile[i_var], dabseta_temp, var, (_h_dabseta->xMax() + _h_dabseta->xMin())/2. );
         }
 
       }
@@ -236,16 +235,16 @@ namespace Rivet {
     const vector<double> _bins_dabseta = { -2., -68./60., -48./60., -32./60., -20./60., -8./60., 0., 8./60., 20./60., 32./60., 48./60., 68./60., 2.};
     const vector<double> _bins_dabsrapidity = {-2., -44./60., -20./60., 0., 20./60., 44./60., 2.};
 
-    void fillWithUFOF(Histo1DPtr h, double x, double w) {
-      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9), w);
+    void fillWithUFOF(Histo1DPtr h, double x) {
+      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9));
     }
 
-    void fillWithUFOF(Histo2DPtr h, double x, double y, double w) {
-      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9), std::max(std::min(y, h->yMax()-1e-9),h->yMin()+1e-9), w);
+    void fillWithUFOF(Histo2DPtr h, double x, double y) {
+      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9), std::max(std::min(y, h->yMax()-1e-9),h->yMin()+1e-9));
     }
 
-    void fillWithUFOF(Profile1DPtr h, double x, double y, double w, double c) {
-      h->fill(std::max(std::min(y, h->xMax()-1e-9),h->xMin()+1e-9), float(x > c) - float(x < c), w);
+    void fillWithUFOF(Profile1DPtr h, double x, double y, double c) {
+      h->fill(std::max(std::min(y, h->xMax()-1e-9),h->xMin()+1e-9), float(x > c) - float(x < c));
     }
 
 

@@ -51,11 +51,7 @@ namespace Rivet {
 	double mz_min = (90-20);
 	double mz_max = (90+20);
 	double eta_max = 2.4;
-	ZFinder zfinder(fs,
-			Cuts::pT > mu_pt*GeV  && Cuts::abseta < eta_max,
-			PID::MUON,
-			mz_min*GeV, mz_max*GeV,
-			0.1, PhotonOrigin::NONE);
+	ZFinder zfinder(fs, Cuts::pT > mu_pt*GeV  && Cuts::abseta < eta_max,PID::MUON, mz_min*GeV, mz_max*GeV, 0.1);
 	declare(zfinder, "ZFinder");
 
 	eta_max = 2.4;

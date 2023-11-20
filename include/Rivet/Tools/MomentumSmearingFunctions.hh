@@ -23,13 +23,9 @@ namespace Rivet {
 
   /// Take a FourMomentum and return 0
   inline double P4_EFF_ZERO(const FourMomentum& ) { return 0; }
-  /// @deprecated Alias for P4_EFF_ZERO
-  inline double P4_FN0(const FourMomentum& ) { return 0; }
 
   /// Take a FourMomentum and return 1
   inline double P4_EFF_ONE(const FourMomentum& ) { return 1; }
-  /// @deprecated Alias for P4_EFF_ONE
-  inline double P4_FN1(const FourMomentum& ) { return 1; }
 
   /// Take a FourMomentum and return a constant number
   struct P4_EFF_CONST {
@@ -74,13 +70,9 @@ namespace Rivet {
 
   /// Take a Vector3 and return 0
   inline double P3_EFF_ZERO(const Vector3& p) { return 0; }
-  /// @deprecated Alias for P3_EFF_ZERO
-  inline double P3_FN0(const Vector3& p) { return 0; }
 
   /// Take a Vector3 and return 1
   inline double P3_EFF_ONE(const Vector3& p) { return 1; }
-  /// @deprecated Alias for P3_EFF_ONE
-  inline double P3_FN1(const Vector3& p) { return 1; }
 
   /// Take a Vector3 and return a constant number
   struct P3_EFF_CONST {

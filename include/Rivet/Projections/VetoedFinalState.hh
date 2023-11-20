@@ -73,17 +73,6 @@ namespace Rivet {
       : VetoedFinalState(FinalState(), vector<Cut>())
     {   }
 
-    /// You can add a map of ID plus a pair containing \f$ p_{Tmin} \f$ and
-    /// \f$ p_{Tmax} \f$ -- these define the range of particles to be vetoed.
-    //DEPRECATED("Prefer constructors using Cut arguments")
-    VetoedFinalState(const map<PdgId,pair<double,double>>& vetocodes)
-      : VetoedFinalState(FinalState(), {})
-    {
-      for (const auto& it : vetocodes) {
-        addVeto(it.first, Cuts::pT > it.second.first && Cuts::pT < it.second.second);
-      }
-    }
-
 
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(VetoedFinalState);

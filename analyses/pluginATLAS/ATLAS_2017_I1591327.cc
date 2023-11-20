@@ -57,7 +57,7 @@ namespace Rivet {
 
       // Get jets, and corresponding jet areas
       const shared_ptr<fastjet::ClusterSequenceArea> clust_seq_area = apply<FastJets>(event, "KtJetsD05").clusterSeqArea();
-      for (const fastjet::PseudoJet& jet : apply<FastJets>(event, "KtJetsD05").pseudoJets(0.0*GeV)) {
+      for (const fastjet::PseudoJet& jet : apply<FastJets>(event, "KtJetsD05").pseudojets(0.0*GeV)) {
         const double aeta = fabs(jet.eta());
         const double pt = jet.perp();
         const double area = clust_seq_area->area(jet);

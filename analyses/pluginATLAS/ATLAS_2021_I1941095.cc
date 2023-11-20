@@ -104,8 +104,8 @@ namespace Rivet {
 
       // Overlap removal
       for (const Jet& jet : jets) {
-        ifilter_discard(electrons, deltaRLess(jet, 0.4, RAPIDITY));
-        ifilter_discard(muons, deltaRLess(jet, 0.4, RAPIDITY));
+        idiscard(electrons, deltaRLess(jet, 0.4, RAPIDITY));
+        idiscard(muons, deltaRLess(jet, 0.4, RAPIDITY));
       }
 
       // Reconstruct event

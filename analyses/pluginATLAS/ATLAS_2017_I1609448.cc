@@ -152,7 +152,7 @@ namespace Rivet {
       // Get jets and remove those within dR = 0.5 of a dressed lepton
       Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::absrap < 4.4);
       for (const DressedLepton& lep : leptons)
-        ifilter_discard(jets, deltaRLess(lep, 0.5));
+        idiscard(jets, deltaRLess(lep, 0.5));
 
       const size_t njets = jets.size();
       if (!njets)  vetoEvent;

@@ -98,8 +98,8 @@ namespace Rivet {
       //const Particles& neutrinos = apply<FinalState>(event, "neutrinos").particlesByPt();
 
       // Check that the muon and neutrino are not decay products of tau
-      if (dressedmuon.bareLepton().hasAncestor( PID::TAU)) vetoEvent;
-      if (dressedmuon.bareLepton().hasAncestor(-PID::TAU)) vetoEvent;
+      if (dressedmuon.bareLepton().hasAncestorWith(Cuts::pid ==  PID::TAU)) vetoEvent;
+      if (dressedmuon.bareLepton().hasAncestorWith(Cuts::pid == -PID::TAU)) vetoEvent;
 
       // Get the missing momentum
       const MissingMomentum& met = apply<MissingMomentum>(event, "MET");
@@ -115,7 +115,7 @@ namespace Rivet {
       if (mt_mumet < 50*GeV) vetoEvent;
 
       // Loop over jets and fill pt/eta/phi quantities in vectors
-      const Jets& jets_filtered = apply<FastJets>(event, "Jets").jetsByPt(0.0*GeV);
+      const Jets& jets_filtered = apply<FastJets>(event, "Jets").jetsByPt();
       vector<float> finaljet_pT_list, finaljet_eta_list, finaljet_phi_list;
       double htjets = 0.0;
       for (size_t ii = 0; ii < jets_filtered.size(); ++ii) {

@@ -23,8 +23,7 @@ namespace Rivet {
     /// Book histograms
     void init() {
       FinalState fs;
-      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON,
-                      40*GeV, 200*GeV, 0.2, PhotonOrigin::NODECAY);
+      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON, 40*GeV, 200*GeV, 0.2);
       declare(zfinder, "ZFinder");
 
       book(_h_ZpT         ,1, 1, 1);

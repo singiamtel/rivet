@@ -88,7 +88,6 @@ namespace Rivet {
       }
 
       // Passed cuts, so get the weight
-      const double weight = 1.0;
 
       // Isolate photon by ensuring that a 0.4 cone around it contains less than 7% of the photon's energy
       const double egamma = photon.E();
@@ -103,11 +102,11 @@ namespace Rivet {
         }
       }
 
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(_jetptcut);
+      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > _jetptcut);
       if (jets.size()>0) {
-        _h_photon_jet1_deta->fill(photon.eta()-jets[0].eta(), weight);
-        _h_photon_jet1_dphi->fill(mapAngle0ToPi(photon.phi()-jets[0].phi()), weight);
-        _h_photon_jet1_dR->fill(deltaR(photon, jets[0].momentum()), weight);
+        _h_photon_jet1_deta->fill(photon.eta()-jets[0].eta());
+        _h_photon_jet1_dphi->fill(mapAngle0ToPi(photon.phi()-jets[0].phi()));
+        _h_photon_jet1_dR->fill(deltaR(photon, jets[0].momentum()));
       }
 
       MC_JetAnalysis::analyze(e);

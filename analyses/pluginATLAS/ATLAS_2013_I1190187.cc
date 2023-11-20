@@ -139,8 +139,7 @@ namespace Rivet {
       //
       /////////////////////////////////////////////////////////////////////////
       Jets alljets, vetojets;
-      for (const Jet& j : apply<FastJets>(e, "jet").jetsByPt(25)) {
-        if (j.absrap() > 4.5 ) continue;
+      for (const Jet& j : apply<FastJets>(e, "jet").jetsByPt(Cuts::pT > 25 && Cuts::absrap < 4.5)) {
         alljets.push_back(j);
         bool deltaRcontrol = true;
         for (DressedLepton& fl : fiducial_lepton) {

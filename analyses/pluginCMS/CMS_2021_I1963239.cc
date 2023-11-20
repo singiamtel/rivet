@@ -51,7 +51,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
       Jets jets20 = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::absrap < 4.7);
@@ -66,20 +65,20 @@ namespace Rivet {
           const double deltaY = fabs(jets35[ij1].rapidity() - jets35[ij2].rapidity());
           // Exclusive dijet case:
           if (jets35.size() == 2) {
-            _h["exclusive"]->fill(deltaY, weight);
+            _h["exclusive"]->fill(deltaY);
             //Exclusive with veto 20 GeV dijet case:
             if (jets20.size() == 2) {
-              _h["exclusive_veto"]->fill(deltaY, weight);
+              _h["exclusive_veto"]->fill(deltaY);
             }
           }
           // Inclusive jets case:
-          _h["inclusive"]->fill(deltaY, weight);
+          _h["inclusive"]->fill(deltaY);
           // Mueller-Navelet:
           if (deltaY > deltaY_MN) deltaY_MN = deltaY;
         }
       }
       // Fill histogram with MN dijets Delta y
-      _h["MN"]->fill(deltaY_MN, weight);
+      _h["MN"]->fill(deltaY_MN);
 
     }
 

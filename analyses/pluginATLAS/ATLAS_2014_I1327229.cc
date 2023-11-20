@@ -115,7 +115,7 @@ namespace Rivet {
 
         // Apply reconstruction efficiency and simulate reconstruction
         int muon_id = 13;
-        if (mu.hasAncestor(PID::TAU) || mu.hasAncestor(-PID::TAU)) muon_id = 14;
+        if (mu.hasAncestorWith(Cuts::pid == PID::TAU) || mu.hasAncestorWith(Cuts::pid == -PID::TAU)) muon_id = 14;
         const double eff = (_use_fiducial_lepton_efficiency) ? apply_reco_eff(muon_id,mu) : 1.0;
         const bool keep_muon = rand()/static_cast<double>(RAND_MAX)<=eff;
 
@@ -145,7 +145,7 @@ namespace Rivet {
 
         // Apply reconstruction efficiency and simulate reconstruction
         int elec_id = 11;
-        if (e.hasAncestor(15) || e.hasAncestor(-15)) elec_id = 12;
+        if (e.hasAncestorWith(Cuts::pid == 15) || e.hasAncestorWith(Cuts::pid == -15)) elec_id = 12;
         const double eff = (_use_fiducial_lepton_efficiency) ? apply_reco_eff(elec_id,e) : 1.0;
         const bool keep_elec = rand()/static_cast<double>(RAND_MAX)<=eff;
 
@@ -188,10 +188,7 @@ namespace Rivet {
       }
 
       // Jets (all anti-kt R=0.4 jets with pT > 30 GeV and eta < 4.9
-      Jets jet_candidates;
-      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets04").jetsByPt(30.0*GeV) ) {
-        if (jet.abseta() < 4.9 ) jet_candidates.push_back(jet);
-      }
+      Jets jet_candidates = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 30.0*GeV && Cuts::abseta < 4.9);
 
       // ETmiss
       Particles vfs_particles = apply<VisibleFinalState>(event, "VFS").particles();

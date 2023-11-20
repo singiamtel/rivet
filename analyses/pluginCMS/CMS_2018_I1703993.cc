@@ -12,10 +12,11 @@
 
 namespace Rivet {
 
-  
+
   /// ttbar dilepton differential cross-sections in pp collisions at 13 TeV
   class CMS_2018_I1703993 : public Analysis {  //
   public:
+
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2018_I1703993);  //
 
     void init() {
@@ -221,7 +222,7 @@ namespace Rivet {
       // Select bjets
       const FastJets& fjJets = apply<FastJets>(event, "ak4jets");
       const Jets jets = fjJets.jetsByPt(Cuts::abseta < 2.4 && Cuts::pT > 30 * GeV);
-      const Jets bJets = filter_select(jets, hasBTag());
+      const Jets bJets = select(jets, hasBTag());
 
       // There should at least two b jets.
       if (bJets.size() < 2)

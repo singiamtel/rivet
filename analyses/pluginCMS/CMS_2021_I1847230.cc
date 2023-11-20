@@ -6,7 +6,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief Angular distance and momentum ratios in 3-jet and Z+2-jet final states
   class CMS_2021_I1847230 : public Analysis {
   public:
@@ -15,13 +15,13 @@ namespace Rivet {
       : Analysis("CMS_2021_I1847230")
     {}
 
-    
+
     void init() {
       _mode = 0;
       if ( getOption("MODE") == "QCD8TeV" ) _mode = 1;
       else if ( getOption("MODE") == "QCD13TeV" ) _mode = 2;
       else if ( getOption("MODE") == "ZJet" ) _mode = 3;
-      
+
       if (_mode == 1) {
          _jr = 0.5;
          book(_h1, "d01-x01-y01");
@@ -43,18 +43,18 @@ namespace Rivet {
        if (_mode == 3) {
          FinalState fs(Cuts::abseta < 2.4 and Cuts::pT > 100*MeV);
          declare(fs, "FS");
-  
+
          ZFinder zfinder(fs, Cuts::abseta < 5. and Cuts::pT > 30*GeV, PID::MUON, 70*GeV, 110*GeV, 0.2,
 			 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, 91.2*GeV);
-  
+
          declare(zfinder, "ZFinder");
          declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5), "JetsAK5_zj");
-  
-         book(_h1, "d09-x01-y01");  
-         book(_h2, "d10-x01-y01");  
-         book(_h3, "d11-x01-y01");  
-         book(_h4, "d12-x01-y01"); 
- 
+
+         book(_h1, "d09-x01-y01");
+         book(_h2, "d10-x01-y01");
+         book(_h3, "d11-x01-y01");
+         book(_h4, "d12-x01-y01");
+
          book(_ZJw_gen, "TMP/ZJw_gen");
        }
     }
@@ -67,7 +67,7 @@ namespace Rivet {
         const FourMomentum jet1 = jets[0].momentum();
         const FourMomentum jet2 = jets[1].momentum();
         const FourMomentum jet3 = jets[2].momentum();
-        
+
         if (jet1.pT() < 510.0*GeV) vetoEvent;
         if (jet1.absrapidity() > 2.5 or jet2.absrapidity() > 2.5) vetoEvent;
         const double del_phi12 = mapAngle0ToPi(jet2.phi() - jet1.phi());
@@ -76,43 +76,43 @@ namespace Rivet {
         if (!inRange(jet3_pt_jet2_pt, 0.1, 0.9)) vetoEvent;
         const double del_r23 = deltaR(jet3.rapidity(), jet3.phi(), jet2.rapidity(), jet2.phi());
         if (!inRange(del_r23, _jr+0.1, 1.5)) vetoEvent;
-  
+
         if (del_r23 < 1.0) _h1->fill(jet3_pt_jet2_pt);
         if (del_r23 > 1.0) _h2->fill(jet3_pt_jet2_pt);
         if (jet3_pt_jet2_pt < 0.3) _h3->fill(del_r23);
-        if (jet3_pt_jet2_pt > 0.6) _h4->fill(del_r23); 
+        if (jet3_pt_jet2_pt > 0.6) _h4->fill(del_r23);
       }
 
-      if (_mode == 3) { 
+      if (_mode == 3) {
         const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
         if (zfinder.bosons().size() != 1) vetoEvent;
         const Particle& z = zfinder.bosons()[0];
         const Particles leptons = sortBy(zfinder.constituents(), cmpMomByPt);
         if (leptons[0].pT() < 25.0*GeV or leptons[1].pT() < 10.0*GeV or z.pT() < 80.0*GeV) vetoEvent;
         if (leptons[0].absrapidity() > 2.1 or leptons[1].absrapidity() > 2.4) vetoEvent;
-  
-        const PseudoJets& psjetsAK5_zj = apply<FastJets>(event, "JetsAK5_zj").pseudoJetsByPt(20.0*GeV);
-  
+
+        const PseudoJets& psjetsAK5_zj = apply<FastJets>(event, "JetsAK5_zj").pseudojetsByPt(20.0*GeV);
+
         if (psjetsAK5_zj.empty()) vetoEvent;
-        
+
         const PseudoJet& j0 = psjetsAK5_zj[0];
         const FourMomentum jmom0(j0.e(), j0.px(), j0.py(), j0.pz());
-        
+
         if (jmom0.absrapidity() > 1.0 or jmom0.pT() < 80.0*GeV) vetoEvent;
         if (!(deltaPhi(z, jmom0) > 2.0 and deltaR(leptons[0], jmom0) > 0.5 and deltaR(leptons[1], jmom0) > 0.5)) vetoEvent;
-        
-        _ZJw_gen ->fill(); 
+
+        _ZJw_gen ->fill();
 
         if(psjetsAK5_zj.size() < 2) vetoEvent;
-        
+
         const PseudoJet& j1 = psjetsAK5_zj[1];
         const FourMomentum jmom1(j1.e(), j1.px(), j1.py(), j1.pz());
         if(deltaR(leptons[0], jmom1) < 0.5 or deltaR(leptons[1], jmom1) < 0.5 or jmom1.absrapidity() > 2.4) vetoEvent;
-        
+
         const double dR_gen_Jj = deltaR(jmom0, jmom1);
         if (!inRange(dR_gen_Jj, 0.5, 1.5)) vetoEvent;
-        const double rPt_gen_Jj = jmom1.pT()/jmom0.pT(); 
-         
+        const double rPt_gen_Jj = jmom1.pT()/jmom0.pT();
+
         if (dR_gen_Jj < 1.0) _h1->fill(rPt_gen_Jj);
         if (dR_gen_Jj > 1.0) _h2->fill(rPt_gen_Jj);
         if (rPt_gen_Jj < 0.3) _h3->fill(dR_gen_Jj);
@@ -120,7 +120,7 @@ namespace Rivet {
       }
     }
 
-    
+
     void finalize() {
       if (_mode == 1 or _mode == 2) {
         normalize(_h1);
@@ -152,7 +152,7 @@ namespace Rivet {
       }
     }
 
-    
+
   private:
 
     Histo1DPtr  _h1;
@@ -168,7 +168,7 @@ namespace Rivet {
 
   };
 
-  
+
   RIVET_DECLARE_PLUGIN(CMS_2021_I1847230);
 
 }

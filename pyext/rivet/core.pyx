@@ -133,9 +133,9 @@ cdef class AnalysisHandler:
         "Perform the finalising operations on all registered analyses"
         self._ptr.finalize()
 
-    def dump(self, name, period):
-        "Declare to dump the current status of this AH's histograms to file every <period> events"
-        self._ptr.dump(name, period)
+    def setFinalizePeriod(self, name, period):
+        "Declare to finalize the current status of this AH's histograms to file every <period> events"
+        self._ptr.setFinalizePeriod(name, period)
 
     def fillOutcomes(self):
         "Return vector of Booleans representing the fill outcomes"

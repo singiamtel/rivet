@@ -37,7 +37,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // This analysis needs a valid HepMC PDF info object to do anything
       if (event.genEvent()->pdf_info() == 0) vetoEvent;
@@ -46,20 +45,20 @@ namespace Rivet {
       MSG_DEBUG("PDF Q = " << pdfi.scale<< " for (id, x) = "
                 << "(" << pdfi.parton_id[0] << ", " << pdfi.x[0] << ") "
                 << "(" << pdfi.parton_id[1] << ", " << pdfi.x[1] << ")");
-      _histPdfX->fill(pdfi.x[0], weight);
-      _histPdfX->fill(pdfi.x[1], weight);
-      _histPdfXmin->fill(std::min(pdfi.x[0], pdfi.x[1]), weight);
-      _histPdfXmax->fill(std::max(pdfi.x[0], pdfi.x[1]), weight);
-      _histPdfQ->fill(pdfi.scale, weight); // always in GeV?
-      _histPdfXQ->fill(pdfi.x[0], pdfi.scale, weight); // always in GeV?
-      _histPdfXQ->fill(pdfi.x[1], pdfi.scale, weight); // always in GeV?
+      _histPdfX->fill(pdfi.x[0]);
+      _histPdfX->fill(pdfi.x[1]);
+      _histPdfXmin->fill(std::min(pdfi.x[0], pdfi.x[1]));
+      _histPdfXmax->fill(std::max(pdfi.x[0], pdfi.x[1]));
+      _histPdfQ->fill(pdfi.scale); // always in GeV?
+      _histPdfXQ->fill(pdfi.x[0], pdfi.scale); // always in GeV?
+      _histPdfXQ->fill(pdfi.x[1], pdfi.scale); // always in GeV?
 
       // const FinalState& cfs = apply<FinalState>(event, "CFS");
       // for (const Particle& p : cfs.particles()) {
       //   if (fabs(eta) < 2.5 && p.pT() > 10*GeV) {
-      //     _histPdfTrackptVsX->fill(pdfi.x1(), p.pT()/GeV, weight);
-      //     _histPdfTrackptVsX->fill(pdfi.x2(), p.pT()/GeV, weight);
-      //     _histPdfTrackptVsQ->fill(pdfi.scalePDF(), p.pT()/GeV, weight);
+      //     _histPdfTrackptVsX->fill(pdfi.x1(), p.pT()/GeV);
+      //     _histPdfTrackptVsX->fill(pdfi.x2(), p.pT()/GeV);
+      //     _histPdfTrackptVsQ->fill(pdfi.scalePDF(), p.pT()/GeV);
       //   }
       // }
 

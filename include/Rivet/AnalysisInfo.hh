@@ -276,11 +276,6 @@ namespace Rivet {
       return _validation;
     }
 
-    /// Return true if this analysis needs to know the process cross-section.
-    ///
-    /// @deprecated Cross-section should now always be available from the HepMC
-    bool needsCrossSection() const { return _needsCrossSection; }
-
 
   private:
 

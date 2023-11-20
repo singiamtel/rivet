@@ -110,10 +110,10 @@ namespace Rivet {
       //     }
       //     if (dRmin < MAX_DR) {
       //       // A jet has been tagged, so fill the histos and break the loop
-      //       _h_ptBJetLead->fill(leadBJet.pT()/GeV, weight);
-      //       _h_ptBHadrLead->fill(leadBHadr.pT()/GeV, weight);
-      //       _h_ptFracB->fill(leadBHadr.pT() / leadBJet.pT(), weight);
-      //       _h_eFracB->fill(leadBHadr.E() / leadBJet.E(), weight);
+      //       _h_ptBJetLead->fill(leadBJet.pT()/GeV);
+      //       _h_ptBHadrLead->fill(leadBHadr.pT()/GeV);
+      //       _h_ptFracB->fill(leadBHadr.pT() / leadBJet.pT());
+      //       _h_eFracB->fill(leadBHadr.E() / leadBJet.E());
       //       gotLeadingB = true;
       //       continue; // escape this loop iteration so the same jet isn't c-tagged
       //     }
@@ -134,10 +134,10 @@ namespace Rivet {
       //     }
       //     if (dRmin < MAX_DR) {
       //       // A jet has been tagged, so fill the histos and break the loop
-      //       _h_ptCJetLead->fill(leadCJet.pT()/GeV, weight);
-      //       _h_ptCHadrLead->fill(leadCHadr.pT()/GeV, weight);
-      //       _h_ptFracC->fill(leadCHadr.pT() / leadCJet.pT(), weight);
-      //       _h_eFracC->fill(leadCHadr.E() / leadCJet.E(), weight);
+      //       _h_ptCJetLead->fill(leadCJet.pT()/GeV);
+      //       _h_ptCHadrLead->fill(leadCHadr.pT()/GeV);
+      //       _h_ptFracC->fill(leadCHadr.pT() / leadCJet.pT());
+      //       _h_eFracC->fill(leadCHadr.E() / leadCJet.E());
       //       gotLeadingB = true;
       //     }
       //   }

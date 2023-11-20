@@ -354,10 +354,10 @@ namespace Rivet {
       Jets jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 4.4);
 
       // discard jets which overlap leptons
-      for (const Particle& l: all_leps) ifilter_discard(jets, deltaRLess(l, 0.1));
+      for (const Particle& l: all_leps) idiscard(jets, deltaRLess(l, 0.1));
 
       // collect b-tagged jets
-      const Jets b_jets_btagged = filter_select(jets, hasBTag(Cuts::pT>5*GeV));
+      const Jets b_jets_btagged = select(jets, hasBTag(Cuts::pT>5*GeV));
 
       unsigned int n_bjets = b_jets_btagged.size();
       unsigned int n_jets = jets.size();

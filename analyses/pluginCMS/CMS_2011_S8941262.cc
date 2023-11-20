@@ -18,7 +18,6 @@ namespace Rivet {
       book(_h_total ,1, 1, 1);
       book(_h_mupt  ,2, 1, 1);
       book(_h_mueta ,3, 1, 1);
-      nbtot=0.;   nbmutot=0.;
 
       IdentifiedFinalState ifs(Cuts::abseta < 2.1 && Cuts::pT > 6*GeV);
       ifs.acceptIdPair(PID::MUON);
@@ -28,7 +27,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // a b-quark must have been produced
       /// @todo Ouch. Use hadron tagging...
@@ -37,12 +35,10 @@ namespace Rivet {
         if (abs(p->pdg_id()) == PID::BQUARK) nb += 1;
       }
       if (nb == 0) vetoEvent;
-      nbtot += weight;
 
       // Event must contain a muon
       Particles muons = apply<IdentifiedFinalState>(event, "IFS").particlesByPt();
       if (muons.size() < 1) vetoEvent;
-      nbmutot += weight;
 
       FourMomentum pmu = muons[0].momentum();
       _h_total->fill(7000);
@@ -60,9 +56,6 @@ namespace Rivet {
 
 
   private:
-
-    /// @todo Convert to counters?
-    double nbtot, nbmutot;
 
     /// @{
     BinnedHistoPtr<int> _h_total;

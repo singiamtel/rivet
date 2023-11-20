@@ -37,7 +37,7 @@ protected:
     for ( const Particle & p : fsfwd.particles() ) {
       estimate += p.Et();
     }
-    set(estimate);
+    setValue(estimate);
   }
 
   /// Compare projections

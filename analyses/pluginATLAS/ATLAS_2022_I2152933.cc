@@ -83,7 +83,7 @@ namespace Rivet {
       idiscardIfAnyDeltaRLess(electrons, jets, 0.4);
 
       // Select jets ghost-associated to B-hadrons with a certain fiducial selection
-      Jets bjets = filter_select(jets, [](const Jet& jet) {
+      Jets bjets = select(jets, [](const Jet& jet) {
         return  jet.bTagged(Cuts::pT > 5*GeV);
       });
 

@@ -147,7 +147,7 @@ namespace Rivet {
 	}
       }
 
-      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(30.0*GeV);
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV);
       if (jets.size() < 2) vetoEvent;
       if (jets[0].abseta() > 2.4 || jets[1].abseta() > 2.4) vetoEvent;
 
@@ -168,15 +168,14 @@ namespace Rivet {
       const vector<double> eventvar = eventshape.getEventShapes();
       if (eventvar[NEVTVAR] < 0) vetoEvent; // Jets are not only one hemisphere
 
-      const double weight = 1.0;
       for (int ij = NJETPTMN-1; ij >= 0; --ij) {
         if (leadingpt/GeV > LEADINGPTTHRESHOLD[ij]) {
-          if (inRange(eventvar[0], _alow1[ij], _ahgh1[ij])) _h_thrustc[ij]->fill(eventvar[0], weight);
-          if (inRange(eventvar[2], _alow3[ij], _ahgh3[ij])) _h_tot3dmass[ij]->fill(eventvar[2], weight);
-          if (inRange(eventvar[3], _alow4[ij], _ahgh4[ij])) _h_tottrnsmass[ij]->fill(eventvar[3], weight);
+          if (inRange(eventvar[0], _alow1[ij], _ahgh1[ij])) _h_thrustc[ij]->fill(eventvar[0]);
+          if (inRange(eventvar[2], _alow3[ij], _ahgh3[ij])) _h_tot3dmass[ij]->fill(eventvar[2]);
+          if (inRange(eventvar[3], _alow4[ij], _ahgh4[ij])) _h_tottrnsmass[ij]->fill(eventvar[3]);
           if (eventvar[NEVTVAR] >= 3) {
-            if (inRange(eventvar[1], _alow2[ij], _ahgh2[ij])) _h_broadt[ij]->fill(eventvar[1], weight);
-            if (inRange(eventvar[4], _alow5[ij], _ahgh5[ij])) _h_y23c[ij]->fill(eventvar[4], weight);
+            if (inRange(eventvar[1], _alow2[ij], _ahgh2[ij])) _h_broadt[ij]->fill(eventvar[1]);
+            if (inRange(eventvar[4], _alow5[ij], _ahgh5[ij])) _h_y23c[ij]->fill(eventvar[4]);
           }
           break;
         }

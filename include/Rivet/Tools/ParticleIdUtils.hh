@@ -23,13 +23,6 @@ namespace Rivet {
     /// @defgroup mcutils_utils Utility functions
     /// @{
 
-    /// Absolute value
-    /// @deprecated Just use abs()!
-    inline int abspid(int pid) {
-      return abs(pid);
-    }
-
-
     // /// Compile-time int^int power-raising function
     // template <size_t N>
     // inline int _intpow(int x) { return x * _intpow<N-1>(x); }
@@ -128,10 +121,6 @@ namespace Rivet {
       if (isNucleus(pid)) return (abs(pid)/10000) % 1000;
       return 0;
     }
-    /// @deprecated Use nuclZ()
-    inline int Z(int pid) {
-      return nuclZ(pid);
-    }
 
     /// Get the atomic weight (number of nucleons) in a nucleus/ion
     /// @note Ion numbers are +/- 10LZZZAAAI.
@@ -143,10 +132,6 @@ namespace Rivet {
       if (isNucleus(pid)) return (abs(pid)/10) % 1000;
       return 0;
     }
-    /// @deprecated Use nuclA()
-    inline int A(int pid) {
-      return nuclA(pid);
-    }
 
     /// If this is a nucleus (ion), get nLambda
     /// @note Ion numbers are +/- 10LZZZAAAI.
@@ -157,10 +142,6 @@ namespace Rivet {
       }
       if (isNucleus(pid)) return _digit(n8,pid);
       return 0;
-    }
-    /// @deprecated Use nuclNlambda()
-    inline int lambda(int pid) {
-      return nuclNlambda(pid);
     }
 
     /// @}
@@ -209,11 +190,6 @@ namespace Rivet {
     inline bool isChargedLepton(int pid) {
       const long apid = abs(pid);
       return apid == 11 || apid == 13 || apid == 15 || apid == 17;
-    }
-    /// Alias for isChargedLepton
-    /// @deprecated Prefer isChargedLepton
-    inline bool isChLepton(int pid) {
-      return isChargedLepton(pid);
     }
 
     /// Determine if the PID is that of a neutrino
@@ -353,10 +329,6 @@ namespace Rivet {
       //  return true;
       // }
       return false;
-    }
-    /// @deprecated Use the nicer capitalisation isDiquark(pid)
-    inline bool isDiQuark(int pid) {
-      return isDiquark(pid);
     }
 
     /// Check to see if this is a valid pentaquark
@@ -943,19 +915,13 @@ namespace Rivet {
         } else if (_digit(nr,pid) == 0) { //< squark+q+q+q
           ch3 = ch100[q3-1] + ch100[q2-1] + ch100[q1-1] + ch100[ql-1];
         }
-      } else if (isDiQuark(pid)) { // Diquarks
+      } else if (isDiquark(pid)) { // Diquarks
         ch3 = ch100[q2-1] + ch100[q1-1];
       } else { // Unknown
         return 0;
       }
       if (pid < 0) ch3 *= -1;
       return ch3;
-    }
-
-    /// Alias for charge3
-    /// @deprecated Prefer charge3
-    inline int threeCharge(int pid) {
-      return charge3(pid);
     }
 
     /// Return the absolute value of 3 times the EM charge

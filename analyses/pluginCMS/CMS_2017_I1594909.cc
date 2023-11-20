@@ -88,30 +88,30 @@ namespace Rivet {
       const Particles elecs = apply<ParticleFinder>(event, "Electrons").particlesByPt();
       const Particles mus = apply<ParticleFinder>(event, "Muons").particlesByPt();
       const Particles pfall = apply<ParticleFinder>(event, "PFAll").particlesByPt();
-      const Particles pfiso = filter_select(pfall, [](const Particle& p){ return p.isHadron() || p.pid() == PID::PHOTON; });
+      const Particles pfiso = select(pfall, [](const Particle& p){ return p.isHadron() || p.pid() == PID::PHOTON; });
 
       // Find isolated leptons
-      const Particles isoleps = filter_select(elecs+mus, [&](const Particle& l){
+      const Particles isoleps = select(elecs+mus, [&](const Particle& l){
           const double dR = l.pT() < 50*GeV ? 0.2 : l.pT() < 200*GeV ? 10*GeV/l.pT() : 0.05;
-          const double sumpt = sum(filter_select(pfiso, deltaRLess(l, dR)), Kin::pT, 0.0);
+          const double sumpt = sum(select(pfiso, deltaRLess(l, dR)), Kin::pT, 0.0);
           return sumpt/l.pT() < (l.abspid() == PID::ELECTRON ? 0.1 : 0.2); //< different I criteria for e and mu
         });
 
       // Find other isolated tracks
       const Particles pfchg = apply<ParticleFinder>(event, "PFChg").particlesByPt();
-      const Particles isochgs = filter_select(pfchg, [&](const Particle& t){
+      const Particles isochgs = select(pfchg, [&](const Particle& t){
           if (t.abseta() > 2.4) return false;
           if (any(isoleps, deltaRLess(t, 0.01))) return false; //< don't count isolated leptons here
-          const double sumpt = sum(filter_select(pfchg, deltaRLess(t, 0.3)), Kin::pT, -t.pT());
+          const double sumpt = sum(select(pfchg, deltaRLess(t, 0.3)), Kin::pT, -t.pT());
           return sumpt/t.pT() < ((t.abspid() == PID::ELECTRON || t.abspid() == PID::MUON) ? 0.2 : 0.1);
         });
 
       // Find and isolate jets
       const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV);
-      const Jets cjets = filter_select(jets, Cuts::abseta < 2.4);
+      const Jets cjets = select(jets, Cuts::abseta < 2.4);
       const Jets isojets = cjets; //discardIfAnyDeltaRLess(cjets, elecs+mus, 0.4);
       const int njets = isojets.size();
-      const Jets isobjets = filter_select(isojets, hasBTag());
+      const Jets isobjets = select(isojets, hasBTag());
       const int nbjets = isobjets.size();
       MSG_DEBUG("Njets = " << jets.size() << ", Nisojets = " << njets << ", Nbjets = " << nbjets);
 
@@ -138,7 +138,7 @@ namespace Rivet {
       _flow.fill(3);
 
       // Isolated leptons cut
-      if (!filter_select(isoleps, Cuts::pT > 10*GeV).empty()) vetoEvent;
+      if (!select(isoleps, Cuts::pT > 10*GeV).empty()) vetoEvent;
       // Isolated tracks cut
       for (const Particle& t : isochgs) {
         const double mT = sqrt(2*t.pT()*ptmiss * (1 - cos(deltaPhi(t, vptmiss))) );
@@ -149,25 +149,25 @@ namespace Rivet {
       //
       // // Inefficiently separated version of isolation cuts for detailed cutflow debugging
       // // Muon cut
-      // if (!filter_select(isoleps, Cuts::pT > 10*GeV && Cuts::abspid == PID::MUON).empty()) vetoEvent;
+      // if (!select(isoleps, Cuts::pT > 10*GeV && Cuts::abspid == PID::MUON).empty()) vetoEvent;
       // _flow.fill(4);
       // // Muon isotrk cut
-      // for (const Particle& t : filter_select(isochgs, Cuts::abspid == PID::MUON)) {
+      // for (const Particle& t : select(isochgs, Cuts::abspid == PID::MUON)) {
       //   const double mT = sqrt(2*t.pT()*ptmiss * (1 - cos(deltaPhi(t, vptmiss))) );
       //   if (mT > 100*GeV && t.pT() > 5*GeV) vetoEvent;
       // }
       // _flow.fill(5);
       // // Electron cut
-      // if (!filter_select(isoleps, Cuts::pT > 10*GeV && Cuts::abspid == PID::ELECTRON).empty()) vetoEvent;
+      // if (!select(isoleps, Cuts::pT > 10*GeV && Cuts::abspid == PID::ELECTRON).empty()) vetoEvent;
       // _flow.fill(6);
       // // Electron isotrk cut
-      // for (const Particle& t : filter_select(isochgs, Cuts::abspid == PID::ELECTRON)) {
+      // for (const Particle& t : select(isochgs, Cuts::abspid == PID::ELECTRON)) {
       //   const double mT = sqrt(2*t.pT()*ptmiss * (1 - cos(deltaPhi(t, vptmiss))) );
       //   if (mT > 100*GeV && t.pT() > 5*GeV) vetoEvent;
       // }
       // _flow.fill(7);
       // // Hadron isotrk cut
-      // for (const Particle& t : filter_select(isochgs, Cuts::abspid != PID::ELECTRON && Cuts::abspid != PID::MUON)) {
+      // for (const Particle& t : select(isochgs, Cuts::abspid != PID::ELECTRON && Cuts::abspid != PID::MUON)) {
       //   const double mT = sqrt(2*t.pT()*ptmiss * (1 - cos(deltaPhi(t, vptmiss))) );
       //   if (mT > 100*GeV && t.pT() > 10*GeV) vetoEvent;
       // }

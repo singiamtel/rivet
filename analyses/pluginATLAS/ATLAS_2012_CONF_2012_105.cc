@@ -65,17 +65,10 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // get the jet candidates
-      Jets cand_jets;
-      for (const Jet& jet :
-               apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::abseta < 2.8 && Cuts::pT > 20*GeV);
 
       // electron candidates
-      Particles cand_e =
-        apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
+      Particles cand_e = apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
 
       // Discard jets that overlap with electrons
       Jets recon_jets;

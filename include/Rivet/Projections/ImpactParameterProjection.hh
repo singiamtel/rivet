@@ -29,7 +29,7 @@ namespace Rivet {
 
     void project(const Event& e) {
       clear();
-      set(apply<HepMCHeavyIon>(e, "HepMC").impact_parameter());
+      setValue(apply<HepMCHeavyIon>(e, "HepMC").impact_parameter());
     }
 
     CmpState compare(const Projection& p) const {

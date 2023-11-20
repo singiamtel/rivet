@@ -128,7 +128,7 @@ namespace Rivet {
       const string tag = label.substr(2);
       const size_t idx = _axes[tag].index(value);
       if (idx && idx <= _edges[label].size())  edge = _edges[label][idx];
-      _h[label]->fill(edge, weight);
+      _h[label]->fill(edge);
     }
 
     void fillND(const string& label, const double value) {

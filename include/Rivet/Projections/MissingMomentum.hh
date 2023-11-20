@@ -116,9 +116,6 @@ namespace Rivet {
 
     /// The scalar-summed visible transverse energy in the event.
     double scalarEt() const { return _set; }
-    /// Alias for scalarEt
-    /// @deprecated Use the full name, "set" is too ambiguous
-    double set() const { return scalarEt(); }
 
     /// @}
 

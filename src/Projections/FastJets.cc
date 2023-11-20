@@ -165,13 +165,13 @@ namespace Rivet {
     Particles fsparticles = apply<FinalState>(e, fskey).particles();
     // Remove prompt invisibles if needed (already done by VFS if using NO_INVISIBLES)
     if (_useInvisibles == JetInvisibles::DECAY) {
-      ifilter_discard(fsparticles, [](const Particle& p) { return !p.isVisible() && p.isPrompt(); });
+      idiscard(fsparticles, [](const Particle& p) { return !p.isVisible() && p.isPrompt(); });
     }
     // Remove prompt/all muons if needed
     if (_useMuons == JetMuons::DECAY) {
-      ifilter_discard(fsparticles, [](const Particle& p) { return isMuon(p) && p.isPrompt(); });
+      idiscard(fsparticles, [](const Particle& p) { return isMuon(p) && p.isPrompt(); });
     } else if (_useMuons == JetMuons::NONE) {
-      ifilter_discard(fsparticles, isMuon);
+      idiscard(fsparticles, isMuon);
     }
 
     // Tagging particles
@@ -220,16 +220,7 @@ namespace Rivet {
   }
 
 
-  /// @todo "Automate" trimming as part of project() with pre-registered Filters
-  Jet FastJets::trimJet(const Jet& input, const fastjet::Filter& trimmer) const {
-    if (input.pseudojet().associated_cluster_sequence() != clusterSeq().get())
-      throw Error("To trim a Rivet::Jet, its associated PseudoJet must have come from this FastJets' ClusterSequence");
-    PseudoJet pj = trimmer(input);
-    return mkJet(pj, _fsparticles, _tagparticles);
-  }
-
-
-  PseudoJets FastJets::pseudoJets(double ptmin) const {
+  PseudoJets FastJets::pseudojets(double ptmin) const {
     // Get the base set of pseudo-jets
     PseudoJets rtn = clusterSeq() ? clusterSeq()->inclusive_jets(ptmin) : PseudoJets();
 

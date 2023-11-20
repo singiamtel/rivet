@@ -44,7 +44,7 @@ namespace Rivet {
 
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       // Get Bottom hadrons
-      const Particles bhads = filter_select(ufs.particles(), isBottomHadron);
+      const Particles bhads = select(ufs.particles(), isBottomHadron);
 
       for (const Particle& bhad : bhads) {
         // Check for weak decay, i.e. no more bottom present in children

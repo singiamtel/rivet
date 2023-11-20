@@ -82,13 +82,12 @@ namespace Rivet {
       const double PTsumPDFden = PTsumPMXden - PTsumPMNden;
 
       // Fill histograms
-      const double weight = 1.0;
-      _NchgPMXden1->fill(ptlead/GeV, NchgPmax/AREA, weight);
-      _NchgPMNden1->fill(ptlead/GeV, NchgPmin/AREA, weight);
-      _NchgPDFden1->fill(ptlead/GeV, NchgPDFden, weight);
-      _PTsumPMXden1->fill(ptlead/GeV, PTsumPmax/AREA, weight);
-      _PTsumPMNden1->fill(ptlead/GeV, PTsumPmin/AREA, weight);
-      _PTsumPDFden1->fill(ptlead/GeV, PTsumPDFden, weight);
+      _NchgPMXden1->fill(ptlead/GeV, NchgPmax/AREA);
+      _NchgPMNden1->fill(ptlead/GeV, NchgPmin/AREA);
+      _NchgPDFden1->fill(ptlead/GeV, NchgPDFden);
+      _PTsumPMXden1->fill(ptlead/GeV, PTsumPmax/AREA);
+      _PTsumPMNden1->fill(ptlead/GeV, PTsumPmin/AREA);
+      _PTsumPDFden1->fill(ptlead/GeV, PTsumPDFden);
 
     }
 

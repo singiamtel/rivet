@@ -55,7 +55,7 @@ namespace Rivet {
       const JetFinder& jetpro = apply<JetFinder>(event, "Jets");
       MSG_DEBUG("Jet multiplicity before any pT cut = " << jetpro.size());
 
-      const Jets jets  = jetpro.jetsByPt(40.0*GeV);
+      const Jets jets  = jetpro.jetsByPt(Cuts::pT > 40.0*GeV);
       if (jets.size() >= 2) {
         MSG_DEBUG("Jet multiplicity after pT > 40 GeV cut = " << jets.size());
       }

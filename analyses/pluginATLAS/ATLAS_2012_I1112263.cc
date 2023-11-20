@@ -71,12 +71,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the jet candidates
-      Jets cand_jets;
-      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
 
       // Candidate muons
       Particles cand_mu;
@@ -251,20 +246,19 @@ namespace Rivet {
       }
 
 	  // Histogram filling
-	  const double weight = 1.0;
 
       // Region SR1, Z depleted
       if (mdiff > 10*GeV) {
-        _count_SR1->fill(0.5, weight);
-        _hist_etmiss_SR1_A->fill(eTmiss, weight);
-        _hist_etmiss_SR1_B->fill(eTmiss, weight);
-        _hist_mSFOS->fill(mSFOS, weight);
+        _count_SR1->fill(0.5);
+        _hist_etmiss_SR1_A->fill(eTmiss);
+        _hist_etmiss_SR1_B->fill(eTmiss);
+        _hist_mSFOS->fill(mSFOS);
       }
       // Region SR2, Z enriched
       else {
-        _count_SR2->fill(0.5, weight);
-        _hist_etmiss_SR2_A->fill(eTmiss, weight);
-        _hist_etmiss_SR2_B->fill(eTmiss, weight);
+        _count_SR2->fill(0.5);
+        _hist_etmiss_SR2_A->fill(eTmiss);
+        _hist_etmiss_SR2_B->fill(eTmiss);
       }
       // Make the control plots
       // lepton pT
@@ -274,10 +268,10 @@ namespace Rivet {
         double pTe  = (ie  < recon_e .size()) ? recon_e [ie ].perp() : -1*GeV;
         double pTmu = (imu < recon_mu.size()) ? recon_mu[imu].perp() : -1*GeV;
         if (pTe > pTmu) {
-          hist->fill(pTe, weight);
+          hist->fill(pTe);
           ++ie;
         } else {
-          hist->fill(pTmu, weight);
+          hist->fill(pTmu);
           ++imu;
         }
       }

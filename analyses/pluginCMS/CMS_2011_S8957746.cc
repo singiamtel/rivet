@@ -31,8 +31,7 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
-      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(30.0*GeV);
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 30.0*GeV);
       if (jets.size() < 2 ||
           fabs(jets[0].eta()) >= 1.3 ||
           fabs(jets[1].eta()) >= 1.3 ||
@@ -58,14 +57,14 @@ namespace Rivet {
       const double T = max(log(1-thrust.thrust()), -12.0);
       const double M = max(log(thrust.thrustMajor()), -6.0);
       if (jets[0].pT()/GeV > 200) {
-        _hist_T_200->fill(T, weight);
-        _hist_m_200->fill(M, weight);
+        _hist_T_200->fill(T);
+        _hist_m_200->fill(M);
       } else if (jets[0].pT()/GeV > 125) {
-        _hist_T_125->fill(T, weight);
-        _hist_m_125->fill(M, weight);
+        _hist_T_125->fill(T);
+        _hist_m_125->fill(M);
       } else if (jets[0].pT()/GeV > 90) {
-        _hist_T_90->fill(T, weight);
-        _hist_m_90->fill(M, weight);
+        _hist_T_90->fill(T);
+        _hist_m_90->fill(M);
       }
     }
 

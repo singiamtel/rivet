@@ -63,7 +63,6 @@ namespace Rivet {
       }
 
       // Passed cuts, so get the weight
-      const double weight = 1.0;
 
       // Isolate photon by ensuring that a 0.4 cone around it contains less than 7% of the photon's energy
       const double egamma = photon.E();
@@ -78,9 +77,9 @@ namespace Rivet {
         }
       }
 
-      _h_photon_pT->fill(photon.pT(),weight);
-      _h_photon_pT_lin->fill(photon.pT(),weight);
-      _h_photon_y->fill(photon.rapidity(),weight);
+      _h_photon_pT->fill(photon.pT());
+      _h_photon_pT_lin->fill(photon.pT());
+      _h_photon_y->fill(photon.rapidity());
     }
 
 

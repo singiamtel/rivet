@@ -38,20 +38,6 @@ namespace Rivet {
 		LeptonOrigin chLeptons=LeptonOrigin::PROMPT,
 	        PhotonOrigin clusterPhotons=PhotonOrigin::NODECAY,
 	        double masstarget=91.2*GeV);
-    
-    /// @brief Backward-compatible constructor with implicit chLeptons mode = PROMPTCHLEPTONS
-    ///
-    /// @deprecated Remove this and always use the constructor with chLeptons argument.
-    ZFinder(const FinalState& inputfs,
-		const Cut& cuts,
-		PdgId pid,
-		double minmass, double maxmass,
-		double dRmax,
-		PhotonOrigin clusterPhotons,
-		double masstarget=91.2*GeV)
-      : ZFinder(inputfs, cuts, pid, minmass, maxmass,
-		dRmax, LeptonOrigin::PROMPT, clusterPhotons, masstarget)
-    {   }
 
 
     /// Clone on the heap.

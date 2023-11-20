@@ -33,7 +33,7 @@ namespace Rivet {
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       unsigned int nBstar(0);
       // Get Bottom hadrons
-      const Particles bhads = filter_select(ufs.particles(), isBottomHadron);
+      const Particles bhads = select(ufs.particles(), isBottomHadron);
       // find the Bstars
       for (const Particle& p : bhads) {
         if(abs(p.pid())==513 || abs(p.pid())==523) {

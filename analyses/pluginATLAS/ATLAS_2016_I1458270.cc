@@ -106,30 +106,30 @@ namespace Rivet {
       // Jet/electron/muons overlap removal and selection
       // Remove any |eta| < 2.8 jet within dR = 0.2 of a baseline electron
       for (const Particle& e : elecs)
-        ifilter_discard(jets, deltaRLess(e, 0.2, RAPIDITY));
+        idiscard(jets, deltaRLess(e, 0.2, RAPIDITY));
       // Remove any electron or muon with dR < 0.4 of a remaining (Nch > 3) jet
       for (const Jet& j : jets) {
-        /// @todo Add track efficiency random filtering
-        ifilter_discard(elecs, deltaRLess(j, 0.4, RAPIDITY));
+        /// @todo Add track efficiency random ing
+        idiscard(elecs, deltaRLess(j, 0.4, RAPIDITY));
         if (j.particles(Cuts::abscharge > 0 && Cuts::pT > 500*MeV).size() >= 3)
-          ifilter_discard(muons, deltaRLess(j, 0.4, RAPIDITY));
+          idiscard(muons, deltaRLess(j, 0.4, RAPIDITY));
       }
       // Discard the softer of any electrons within dR < 0.05
       for (size_t i = 0; i < elecs.size(); ++i) {
         const Particle& e1 = elecs[i];
         /// @todo Would be nice to pass a "tail view" for the filtering, but awkward without range API / iterator guts
-        ifilter_discard(elecs, [&](const Particle& e2){ return e2.pT() < e1.pT() && deltaR(e1,e2) < 0.05; });
+        idiscard(elecs, [&](const Particle& e2){ return e2.pT() < e1.pT() && deltaR(e1,e2) < 0.05; });
       }
 
       // Loose electron selection
-      ifilter_select(elecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_LOOSE));
+      iselect(elecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_LOOSE));
 
       // Veto the event if there are any remaining baseline leptons
       if (!elecs.empty()) vetoEvent;
       if (!muons.empty()) vetoEvent;
 
       // Signal jets have pT > 50 GeV
-      const Jets jets50 = filter_select(jets, Cuts::pT > 50*GeV);
+      const Jets jets50 = select(jets, Cuts::pT > 50*GeV);
       if (jets50.size() < 2) vetoEvent;
       vector<double> jetpts; transform(jets, jetpts, pT);
       vector<double> jetpts50; transform(jets50, jetpts50, pT);

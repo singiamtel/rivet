@@ -126,7 +126,7 @@ namespace Rivet {
       //  ============================== JET EVENTS
 
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
-      const Jets& jets = jetpro.jetsByPt(1.0*GeV);
+      const Jets& jets = jetpro.jetsByPt(Cuts::pT > 1.0*GeV);
       if (jets.size()<1) vetoEvent;
 
       if (fabs(jets[0].eta()) < 2.0) {

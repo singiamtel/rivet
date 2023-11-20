@@ -63,7 +63,7 @@ namespace Rivet {
 
       // // Require exactly one isolated photon
       // const Particles& photons = apply<FinalState>(event, "Photons").particlesByPt();
-      // const Particles muisophotons = filter_discard(photons, deltaRLess(muon,0.5));
+      // const Particles muisophotons = discard(photons, deltaRLess(muon,0.5));
       // const Particles isophotons = discardIfAnyDeltaRLess(muisophotons, Jets{bjet,ljet}, 0.5);
       // if (isophotons.size() != 1) vetoEvent;
 
@@ -74,11 +74,11 @@ namespace Rivet {
 
       // Find light jets
       const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt();
-      const Jets ljets = filter_discard(jets, [](const Jet& j){ return j.abseta() < 2.5 && j.bTagged(); } );
+      const Jets ljets = discard(jets, [](const Jet& j){ return j.abseta() < 2.5 && j.bTagged(); } );
 
       // Require a photon, isolated from the light jet
       Particles photons = apply<FinalState>(event, "Photons").particlesByPt();
-      if (!ljets.empty()) ifilter_discard(photons, deltaRLess(ljets[0], 0.5));
+      if (!ljets.empty()) idiscard(photons, deltaRLess(ljets[0], 0.5));
       if (photons.empty()) vetoEvent;
 
       // Fill counter

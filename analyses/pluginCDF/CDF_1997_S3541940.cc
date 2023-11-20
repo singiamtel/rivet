@@ -88,19 +88,19 @@ namespace Rivet {
       for (const Jet& jet : jets) {
         jets6.push_back(cms_boost.transform(jet.momentum()));
       }
-      std::sort(jets6.begin(), jets6.end(), FourMomentum::byEDescending());
+      isortBy(jets6, cmpMomByE);
 
       FourMomentum pE, pF;
       vector<FourMomentum> jets5(_reduce(jets6, pE, pF));
-      std::sort(jets5.begin(), jets5.end(), FourMomentum::byEDescending());
+      isortBy(jets5, cmpMomByE);
 
       FourMomentum pCp, pDp;
       vector<FourMomentum> jets4(_reduce(jets5, pCp, pDp));
-      std::sort(jets4.begin(), jets4.end(), FourMomentum::byEDescending());
+      isortBy(jets4, cmpMomByE);
 
       FourMomentum pApp, pBpp;
       vector<FourMomentum> jets3(_reduce(jets4, pApp, pBpp));
-      std::sort(jets3.begin(), jets3.end(), FourMomentum::byEDescending());
+      isortBy(jets3, cmpMomByE);
       FourMomentum p3ppp(jets3[0]);
       FourMomentum p4ppp(jets3[1]);
       FourMomentum p5ppp(jets3[2]);

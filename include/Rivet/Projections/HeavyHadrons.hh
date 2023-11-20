@@ -48,18 +48,12 @@ namespace Rivet {
 
     /// Get weakly decaying b hadrons with a Cut applied (return by value)
     Particles bHadrons(const Cut& c) const {
-      return filter_select(bHadrons(), c);
-    }
-
-    /// Get weakly decaying b hadrons with a pTmin cut (return by value)
-    /// @deprecated Prefer bHadrons(Cuts::pT > x)
-    Particles bHadrons(double ptmin) const {
-      return bHadrons(Cuts::pT > ptmin);
+      return select(bHadrons(), c);
     }
 
     /// Get weakly decaying b hadrons with a general filter function applied (return by value)
     Particles bHadrons(const ParticleSelector& s) const {
-      return filter_select(bHadrons(), s);
+      return select(bHadrons(), s);
     }
 
     /// @}
@@ -76,18 +70,12 @@ namespace Rivet {
 
     /// Get weakly decaying c hadrons with a Cut applied (return by value)
     Particles cHadrons(const Cut& c) const {
-      return filter_select(cHadrons(), c);
-    }
-
-    /// Get weakly decaying c hadrons with a pTmin cut (return by value)
-    /// @deprecated Prefer cHadrons(Cuts::pT > x)
-    Particles cHadrons(double ptmin) const {
-      return cHadrons(Cuts::pT > ptmin);
+      return select(cHadrons(), c);
     }
 
     /// Get weakly decaying c hadrons with a general filter function applied (return by value)
     Particles cHadrons(const ParticleSelector& s) const {
-      return filter_select(cHadrons(), s);
+      return select(cHadrons(), s);
     }
 
     /// @}

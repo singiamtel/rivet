@@ -381,7 +381,7 @@ namespace Rivet {
 
         DressedLeptons allClusteredLeptons;
 
-        const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(5.*GeV);
+        const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(Cuts::pT > 5.*GeV);
         for (const Jet& jet : jets) {
           Particle lepCand;
           for (const Particle& cand : jet.particles()) {

@@ -88,19 +88,19 @@ namespace Rivet {
 
       // Electron/muon isolation (guesswork/copied from other CMS analysis -- paper is unspecific)
       const Particles calofs = apply<ParticleFinder>(event, "Clusters").particles();
-      ifilter_discard(photons, [&](const Particle& y) {
+      idiscard(photons, [&](const Particle& y) {
           double ptsum = -y.pT();
           for (const Particle& p : calofs)
             if (deltaR(p,y) < 0.3) ptsum += p.pT();
           return ptsum / y.pT() > 0.1;
         });
-      ifilter_discard(elecs, [&](const Particle& e) {
+      idiscard(elecs, [&](const Particle& e) {
           double ptsum = -e.pT();
           for (const Particle& p : calofs)
             if (deltaR(p,e) < 0.3) ptsum += p.pT();
           return ptsum / e.pT() > 0.1;
         });
-      ifilter_discard(muons, [&](const Particle& m) {
+      idiscard(muons, [&](const Particle& m) {
           double ptsum = -m.pT();
           for (const Particle& p : calofs)
             if (deltaR(p,m) < 0.3) ptsum += p.pT();
@@ -116,13 +116,13 @@ namespace Rivet {
       // Get jets and apply jet-based event-selection cuts
       const JetFinder& jetproj = apply<JetFinder>(event, "Jets");
       const Jets alljets = jetproj.jetsByPt(Cuts::abseta < 3.0 && Cuts::Et > 37*GeV); //< most inclusive jets requirement
-      if (filter_select(alljets, Cuts::Et > 73*GeV).size() < 2) vetoEvent; //< most inclusive lead jets requirement
+      if (select(alljets, Cuts::Et > 73*GeV).size() < 2) vetoEvent; //< most inclusive lead jets requirement
 
       // Filter jets into different Et requirements & compute corresponding HTs
       /// @note It's not clear if different HTs are used to choose the HT bins
-      const Jets jets37 = filter_select(alljets, Cuts::Et > 37*GeV);
-      const Jets jets43 = filter_select(jets37, Cuts::Et > 43*GeV);
-      const Jets jets50 = filter_select(jets43, Cuts::Et > 50*GeV);
+      const Jets jets37 = select(alljets, Cuts::Et > 37*GeV);
+      const Jets jets43 = select(jets37, Cuts::Et > 43*GeV);
+      const Jets jets50 = select(jets43, Cuts::Et > 50*GeV);
       const double ht37 = sum(jets37, Kin::Et, 0.0);
       const double ht43 = sum(jets43, Kin::Et, 0.0);
       const double ht50 = sum(jets50, Kin::Et, 0.0);
@@ -132,8 +132,8 @@ namespace Rivet {
       const int iht = inRange(ht37, 275*GeV, 325*GeV) ? 0 : inRange(ht43, 325*GeV, 375*GeV) ? 1 : (2+binIndex(ht50, htcuts, true));
       MSG_TRACE("HT = {" << ht37 << ", " << ht43 << ", " << ht50 << "} => IHT = " << iht);
       if (iht < 0) vetoEvent;
-      if (iht == 1 && filter_select(jets43, Cuts::Et > 78*GeV).size() < 2) vetoEvent;
-      if (iht >= 2 && filter_select(jets50, Cuts::Et > 100*GeV).size() < 2) vetoEvent;
+      if (iht == 1 && select(jets43, Cuts::Et > 78*GeV).size() < 2) vetoEvent;
+      if (iht >= 2 && select(jets50, Cuts::Et > 100*GeV).size() < 2) vetoEvent;
 
       // Create references for uniform access to relevant set of jets & HT
       const double etcut = iht == 0 ? 37. : iht == 1 ? 43. : 50.;
@@ -179,17 +179,16 @@ namespace Rivet {
       /// @todo Need to include trigger efficiency sampling or weighting?
 
       // Fill histograms
-      const double weight = 1.0;
       const size_t inj = nj < 4 ? 0 : 1;
       const size_t inb = nb < 4 ? nb : 4;
       if (iht >= 2)
-        (inj == 0 ? _h_alphaT23 : _h_alphaT4)->fill(alphaT, weight);
+        (inj == 0 ? _h_alphaT23 : _h_alphaT4)->fill(alphaT);
 
       // Fill the appropriate counter -- after working out the irregular SR bin index! *sigh*
       size_t i = 8 * ((inj == 0 ? 0 : 3) + inb) + iht;
       if (inj == 1 && inb == 4) i = 8*7 + (iht < 3 ? iht : 2);
       MSG_INFO("inj = " << inj << ", inb = " << inb << ", i = " << i);
-      _h_srcounters[i]->fill(weight);
+      _h_srcounters[i]->fill();
 
     }
 

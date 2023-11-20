@@ -66,7 +66,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // CFS projection and particles
       const Particles& particles500 = apply<ChargedFinalState>(event, "CFS").particlesByPt();
@@ -115,76 +114,76 @@ namespace Rivet {
       // Fill histos, most inclusive first
 
       // pTlead > 0.5
-      _hist_T_05->fill(T , weight);
-      _hist_TM_05->fill(TM, weight);
-      _hist_S_05->fill(S , weight);
+      _hist_T_05->fill(T );
+      _hist_TM_05->fill(TM);
+      _hist_S_05->fill(S );
 
       // pTlead 0.5 - 2.5
       if (pTlead <= 2.5) {
-        _hist_T_05_25->fill(T , weight);
-        _hist_TM_05_25->fill(TM, weight);
-        _hist_S_05_25->fill(S , weight);
+        _hist_T_05_25->fill(T );
+        _hist_TM_05_25->fill(TM);
+        _hist_S_05_25->fill(S );
       }
 
       // pTlead > 2.5
       if (pTlead > 2.5) {
-        _hist_T_25->fill(T , weight);
-        _hist_TM_25->fill(TM, weight);
-        _hist_S_25->fill(S , weight);
+        _hist_T_25->fill(T );
+        _hist_TM_25->fill(TM);
+        _hist_S_25->fill(S );
       }
 
       // pTlead 2.5 - .5
       if (inRange(pTlead, 2.5, 5.0)) {
-        _hist_T_25_50->fill(T , weight);
-        _hist_TM_25_50->fill(TM, weight);
-        _hist_S_25_50->fill(S , weight);
+        _hist_T_25_50->fill(T );
+        _hist_TM_25_50->fill(TM);
+        _hist_S_25_50->fill(S );
       }
 
       // pTlead > 5
       if (pTlead > 5) {
-        _hist_T_50->fill(T , weight);
-        _hist_TM_50->fill(TM, weight);
-        _hist_S_50->fill(S , weight);
+        _hist_T_50->fill(T );
+        _hist_TM_50->fill(TM);
+        _hist_S_50->fill(S );
       }
 
       // pTlead 5 - 7.5
       if (inRange(pTlead, 5.0, 7.5)) {
-        _hist_T_50_75->fill(T , weight);
-        _hist_TM_50_75->fill(TM, weight);
-        _hist_S_50_75->fill(S , weight);
+        _hist_T_50_75->fill(T );
+        _hist_TM_50_75->fill(TM);
+        _hist_S_50_75->fill(S );
       }
 
       // pTlead > 7.5
       if (pTlead > 7.5) {
-        _hist_T_75->fill(T , weight);
-        _hist_TM_75->fill(TM, weight);
-        _hist_S_75->fill(S , weight);
+        _hist_T_75->fill(T );
+        _hist_TM_75->fill(TM);
+        _hist_S_75->fill(S );
       }
 
       // pTlead 7.5 - 10
       if (inRange(pTlead, 7.5, 10)) {
-        _hist_T_75_100->fill(T , weight);
-        _hist_TM_75_100->fill(TM, weight);
-        _hist_S_75_100->fill(S , weight);
+        _hist_T_75_100->fill(T );
+        _hist_TM_75_100->fill(TM);
+        _hist_S_75_100->fill(S );
       }
 
       // pTlead > 10
       if (pTlead > 10) {
-        _hist_T_100->fill(T , weight);
-        _hist_TM_100->fill(TM, weight);
-        _hist_S_100->fill(S , weight);
+        _hist_T_100->fill(T );
+        _hist_TM_100->fill(TM);
+        _hist_S_100->fill(S );
       }
 
 
       // Profiles Nch vs. ES
-      _hist_T_N->fill(num500, T, weight);
-      _hist_TM_N->fill(num500, TM, weight);
-      _hist_S_N->fill(num500, S, weight);
+      _hist_T_N->fill(num500, T);
+      _hist_TM_N->fill(num500, TM);
+      _hist_S_N->fill(num500, S);
 
       // Profiles pTsum vs. ES
-      _hist_T_S->fill(ptSum500, T, weight);
-      _hist_TM_S->fill(ptSum500, TM, weight);
-      _hist_S_S->fill(ptSum500, S, weight);
+      _hist_T_S->fill(ptSum500, T);
+      _hist_TM_S->fill(ptSum500, TM);
+      _hist_S_S->fill(ptSum500, S);
     }
 
 

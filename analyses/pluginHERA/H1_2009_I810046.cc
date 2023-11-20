@@ -50,7 +50,7 @@ namespace Rivet {
       if (!inRange(y, 0.1, 0.6)) vetoEvent;
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UPS");
 
-      for (const Particle& p: filter_select(ufs.particles(), Cuts::abspid == abs(PID::K0S))) {
+      for (const Particle& p: select(ufs.particles(), Cuts::abspid == abs(PID::K0S))) {
         if (!inRange(p.pt()/GeV, 0.5, 3.5)) continue;
         if (!inRange(p.eta(), -1.3, 1.3)) continue;
         _h_K0S_q2->fill(q2/GeV2);
@@ -59,7 +59,7 @@ namespace Rivet {
         _h_K0S_eta->fill(p.eta()*orientation);
       }
 
-      for (const Particle& p: filter_select(ufs.particles(), Cuts::abspid == abs(PID::LAMBDA))) {
+      for (const Particle& p: select(ufs.particles(), Cuts::abspid == abs(PID::LAMBDA))) {
         if (!inRange(p.pt()/GeV, 0.5, 3.5)) continue;
         if (!inRange(p.eta(), -1.3, 1.3)) continue;
         _h_LAMBDA_q2->fill(q2/GeV2);

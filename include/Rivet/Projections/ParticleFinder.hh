@@ -77,13 +77,13 @@ namespace Rivet {
     /// @brief Get the particles with selection cuts
     /// @note Returns a copy rather than a reference, due to the cuts.
     Particles particles(const Cut& c) const {
-      return filter_select(particles(), c);
+      return select(particles(), c);
     }
 
     /// @brief Get the particles with selection cuts via a functor
     /// @note Returns a copy rather than a reference, due to the cuts.
     Particles particles(const ParticleSelector& selector) const {
-      return filter_select(particles(), selector);
+      return select(particles(), selector);
     }
 
     /// Get the particles, ordered by supplied sorting function object

@@ -53,7 +53,7 @@ namespace Rivet {
       // D* reconstruction
       const Particles unstables = apply<ParticleFinder>(event, "Dstars")
         .particles(Cuts::pT > 1.5*GeV && Cuts::abseta < 1.5);
-      const Particles dstars = filter_select(unstables, [](const Particle& p){ return p.abspid() == PID::DSTARPLUS; });
+      const Particles dstars = select(unstables, [](const Particle& p){ return p.abspid() == PID::DSTARPLUS; });
       if (dstars.empty()) vetoEvent;
       MSG_DEBUG("#D* = " << dstars.size());
       const Particle& dstar = dstars.front();

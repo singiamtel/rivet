@@ -176,18 +176,10 @@ namespace Rivet {
   }
 
 
-  bool Particle::hasParent(PdgId pid) const {
-    return hasParentWith(hasPID(pid));
-  }
-
   bool Particle::hasParentWith(const Cut& c) const {
     return hasParentWith([&](const Particle& p){return c->accept(p);});
   }
 
-
-  bool Particle::hasAncestor(PdgId pid, bool only_physical) const {
-    return hasAncestorWith(hasPID(pid), only_physical);
-  }
 
   bool Particle::hasAncestorWith(const Cut& c, bool only_physical) const {
     return hasAncestorWith([&](const Particle& p){return c->accept(p);}, only_physical);

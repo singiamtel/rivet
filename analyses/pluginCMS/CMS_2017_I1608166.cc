@@ -63,13 +63,13 @@ namespace Rivet {
       for (const Particle& p : cfs.particles()) {
 
         // protections against MC generators decaying long-lived particles
-        if (p.hasAncestor(310)  || p.hasAncestor(-310)  ||  // K0s
-            p.hasAncestor(130)  || p.hasAncestor(-130)  ||  // K0l
-            p.hasAncestor(3322) || p.hasAncestor(-3322) ||  // Xi0
-            p.hasAncestor(3122) || p.hasAncestor(-3122) ||  // Lambda
-            p.hasAncestor(3222) || p.hasAncestor(-3222) ||  // Sigma+/-
-            p.hasAncestor(3312) || p.hasAncestor(-3312) ||  // Xi-/+
-            p.hasAncestor(3334) || p.hasAncestor(-3334))    // Omega-/+
+        if (p.hasAncestorWith(Cuts::pid == 310)  || p.hasAncestorWith(Cuts::pid == -310)  ||  // K0s
+            p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||  // K0l
+            p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||  // Xi0
+            p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||  // Lambda
+            p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||  // Sigma+/-
+            p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||  // Xi-/+
+            p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))    // Omega-/+
           continue;
 
         if (theParticles.find(p.pid()) != theParticles.end()) {

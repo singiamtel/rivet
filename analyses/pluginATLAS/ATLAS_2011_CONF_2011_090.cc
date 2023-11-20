@@ -76,7 +76,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
 
       Particles veto_e = apply<IdentifiedFinalState>(event, "veto_elecs").particles();
       if ( ! veto_e.empty() ) {
@@ -264,13 +263,13 @@ namespace Rivet {
 
       if (  lepton[0].abspid() == e_id ) {
 
-        _hist_eTmiss_e->fill(eTmiss, weight);
-        _hist_m_eff_e->fill(m_eff, weight);
+        _hist_eTmiss_e->fill(eTmiss);
+        _hist_m_eff_e->fill(m_eff);
 
         if ( mT > 100*GeV && eTmiss > 125*GeV ) {
-          _hist_m_eff_e_final->fill(m_eff, weight);
+          _hist_m_eff_e_final->fill(m_eff);
           if ( m_eff > 500*GeV && eTmiss > 0.25*m_eff ) {
-            _count_e_channel->fill(0.5,weight);
+            _count_e_channel->fill(0.5);
           }
         }
       }
@@ -279,13 +278,13 @@ namespace Rivet {
 
       else if (  lepton[0].abspid() == mu_id ) {
 
-        _hist_eTmiss_mu->fill(eTmiss, weight);
-        _hist_m_eff_mu->fill(m_eff, weight);
+        _hist_eTmiss_mu->fill(eTmiss);
+        _hist_m_eff_mu->fill(m_eff);
 
         if ( mT > 100*GeV && eTmiss > 125*GeV ) {
-          _hist_m_eff_mu_final->fill(m_eff, weight);
+          _hist_m_eff_mu_final->fill(m_eff);
           if ( m_eff > 500*GeV && eTmiss > 0.25*m_eff ) {
-            _count_mu_channel->fill(0.5,weight);
+            _count_mu_channel->fill(0.5);
           }
         }
 

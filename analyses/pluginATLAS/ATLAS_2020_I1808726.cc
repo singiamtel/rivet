@@ -121,7 +121,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(7.0*GeV);
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 7.0*GeV);
 
       //Select jets passing kinematic cuts
       std::vector<const Jet*> goodJets; goodJets.clear();

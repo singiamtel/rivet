@@ -329,19 +329,14 @@ namespace Rivet {
     ///
     /// Tell Rivet to dump intermediate result to a file named @a
     /// dumpfile every @a period'th event. If @a period is not positive,
-    /// no dumping will be done.
-    void setAODump(const string& dumpfile, int period) {
-      dump(dumpfile, period);
-    }
-    /// @brief Configure the AnalysisObject dump rate and destination.
-    void setNoAODump() {
-      setAODump("DUMMY", -1);
-    }
-    /// Alias for setAODump()
-    /// @deprecated Prefer setAODump()
-    void dump(const string& dumpfile, int period) {
+    /// no periodic finalization will be done.
+    void setFinalizePeriod(const string& dumpfile, int period) {
       _dumpPeriod = period;
       _dumpFile = dumpfile;
+    }
+    /// @brief Configure the AnalysisObject dump rate and destination.
+    void setNoFinalizePeriod() {
+      setFinalizePeriod("DUMMY", -1);
     }
 
     /// @brief Set filename of the bootstrap file

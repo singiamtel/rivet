@@ -43,7 +43,7 @@ namespace Rivet {
 
       for (size_t i = 0; i < 10; ++i) {
 
-        const Jets jets = filter_select(alljets, Cuts::pT > bedges[i] && Cuts::pT < bedges[i+1]);
+        const Jets jets = select(alljets, Cuts::pT > bedges[i] && Cuts::pT < bedges[i+1]);
         const int n_jets = jets.size();
         if (n_jets == 0) continue;
 

@@ -442,8 +442,7 @@ namespace Rivet {
       Jets leptons;
       vector<int> leptonsId;
       set<int> dressedIdxs;
-      for (const Jet& lep : fjLep.jetsByPt(_lepMinPt)) {
-        if (lep.abseta() > _lepMaxEta) continue;
+      for (const Jet& lep : fjLep.jetsByPt(Cuts::pT > _lepMinPt && Cuts::abseta < _lepMaxEta)) {
         double leadingPt = -1;
         int leptonId = 0;
         for (const Particle& p : lep.particles()) {
@@ -472,8 +471,7 @@ namespace Rivet {
       FastJets fjJet(FinalState(), JetAlg::ANTIKT, _jetR);
       //fjJet.useInvisibles(); // NOTE: CMS proposal to remove neutrinos (AB: wouldn't work anyway, since they were excluded from clustering inputs)
       fjJet.calc(pForJet);
-      for (const Jet& jet : fjJet.jetsByPt(_jetMinPt)) {
-        if (jet.abseta() > _jetMaxEta) continue;
+      for (const Jet& jet : fjJet.jetsByPt(Cuts::pT > _jetMinPt && Cuts::abseta < _jetMaxEta)) {
         _jets.push_back(jet);
         bool isBJet = false;
         for (const Particle& rp : jet.particles()) {

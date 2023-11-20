@@ -32,14 +32,9 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      Jets jets06;
-      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets06").jetsByPt(100.0*GeV)) {
-        if (jet.absrap() < 2.8) {
-          jets06.push_back(jet);
-        }
-      }
+      Jets jets06 = apply<FastJets>(event, "AntiKtJets06").jetsByPt(Cuts::absrap < 2.8 && Cuts::pT > 100*GeV);
       if (jets06.size()>1){
-        if (fabs(jets06[0].rapidity())<0.8 && fabs(jets06[1].rapidity())<0.8) {
+        if (jets06[0].absrap()<0.8 && jets06[1].absrap()<0.8) {
           double observable = mapAngle0ToPi(jets06[0].phi()-jets06[1].phi()) / M_PI;
           _h_deltaPhi->fill(jets06[0].pT(), observable);
         }

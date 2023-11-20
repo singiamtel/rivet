@@ -30,8 +30,6 @@ namespace Rivet {
     bool isValueSet() const {
       return _isSet;
     }
-    /// @deprecated Less clear alias
-    bool isSet() const { return isValueSet(); }
 
     /// Return the single value.
     double value() const {
@@ -51,8 +49,6 @@ namespace Rivet {
       _value = v;
       _isSet = true;
     }
-    /// @deprecated Less clear alias
-    void set(double v) { setValue(v); }
 
     /// Unset the value.
     void clear() {

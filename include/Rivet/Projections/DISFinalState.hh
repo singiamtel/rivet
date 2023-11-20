@@ -18,22 +18,28 @@ namespace Rivet {
     /// @{
 
     /// @brief Constructor with explicit FinalState
-    ///
-    /// @deprecated The DISKinematics has no parameters, hence explicitly passing it as an arg shouldn't be necessary.
-    DISFinalState(const FinalState& fs, DISFrame boosttype, const DISKinematics& kinematicsp=DISKinematics())
+    DISFinalState(const FinalState& fs, DISFrame boosttype)
       : _boosttype(boosttype)
     {
       setName("DISFinalState");
       declare(fs, "FS");
-      declare(kinematicsp, "Kinematics");
+      declare(DISKinematics(), "Kinematics");
     }
 
 
     /// @brief Constructor with optional FinalState
+    DISFinalState(DISFrame boosttype, const FinalState& fs=FinalState())
+      : DISFinalState(fs, boosttype)
+    {    }
+
+
+    /// @brief Constructor with explicit cuts to define final-state particles
     ///
-    /// @deprecated The DISKinematics has no parameters, hence explicitly passing it as an arg shouldn't be necessary.
-    DISFinalState(DISFrame boosttype, const FinalState& fs=FinalState(), const DISKinematics& kinematicsp=DISKinematics())
-      : DISFinalState(fs, boosttype, kinematicsp)
+    /// @note The cuts will be applied *before* the boost, e.g. to express detector acceptance.
+    ///
+    /// @todo Add a second optional Cut argument for post-boost cuts.
+    DISFinalState(const Cut& c, DISFrame boosttype)
+      : DISFinalState(FinalState(c), boosttype)
     {    }
 
 
@@ -44,36 +50,15 @@ namespace Rivet {
     /// @todo Add a second optional Cut argument for post-boost cuts.
     ///
     /// @deprecated The DISKinematics has no parameters, hence explicitly passing it as an arg shouldn't be necessary.
-    DISFinalState(const Cut& c, DISFrame boosttype, const DISKinematics& kinematicsp=DISKinematics())
-      : DISFinalState(FinalState(c), boosttype, kinematicsp)
-    {    }
-
-
-    /// @brief Constructor with explicit cuts to define final-state particles
-    ///
-    /// @note The cuts will be applied *before* the boost, e.g. to express detector acceptance.
-    ///
-    /// @todo Add a second optional Cut argument for post-boost cuts.
-    ///
-    /// @deprecated The DISKinematics has no parameters, hence explicitly passing it as an arg shouldn't be necessary.
-    DISFinalState(DISFrame boosttype, const Cut& c, const DISKinematics& kinematicsp=DISKinematics())
-      : DISFinalState(FinalState(c), boosttype, kinematicsp)
+    DISFinalState(DISFrame boosttype, const Cut& c)
+      : DISFinalState(FinalState(c), boosttype)
     {    }
 
 
     // /// @brief Constructor with default FinalState
-    // ///
-    // /// @note The DISKinematics has no parameters, hence explicitly passing it as an arg shouldn't be necessary.
-    // DISFinalState(BoostFrame boosttype, const DISKinematics& kinematicsp=DISKinematics())
-    //   : DISFinalState(FinalState(), boosttype, kinematicsp)
+    // DISFinalState(BoostFrame boosttype)
+    //   : DISFinalState(FinalState(), boosttype)
     // {    }
-
-    /// @brief Backward-compatible constructor with default FinalState
-    ///
-    /// @deprecated Prefer a version that doesn't need a DISKinematics argument
-    DISFinalState(const DISKinematics& kinematicsp, DISFrame boosttype)
-      : DISFinalState(FinalState(), boosttype, kinematicsp)
-    {    }
 
 
     /// Clone on the heap.

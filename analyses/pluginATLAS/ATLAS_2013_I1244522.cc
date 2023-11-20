@@ -82,7 +82,7 @@ namespace Rivet {
       }
 
       // Get the jets
-      Jets alljets = apply<FastJets>(event, "Jets").jetsByPt(40.0*GeV);
+      Jets alljets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 40*GeV);
       Jets jets;
       for (const Jet& jet : alljets)
         if (deltaR(photon, jet) > 1.0) jets += jet;

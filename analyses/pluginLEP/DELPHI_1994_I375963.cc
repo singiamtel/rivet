@@ -36,12 +36,12 @@ namespace Rivet {
       Particles muons = apply<PromptFinalState>(event, "muons").particles();
       Particles photons = apply<PromptFinalState>(event, "photons").particles();
 
-      ifilter_select(muons, [](const Particle& muon) {
+      iselect(muons, [](const Particle& muon) {
         double theta = muon.theta()/M_PI * 180.;
         return (theta > 20. && theta < 160.);
       });
 
-      ifilter_select(photons, [](const Particle& photon) {
+      iselect(photons, [](const Particle& photon) {
         double theta = photon.theta()/M_PI * 180.;
         double phi = photon.phi()/M_PI * 180.;
 

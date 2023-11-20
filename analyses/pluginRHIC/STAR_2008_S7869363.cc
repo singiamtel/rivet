@@ -100,7 +100,7 @@ namespace Rivet {
           continue;
         }
       }
-      _h_dNch->fill(charged.particles().size(), weight);
+      _h_dNch->fill(charged.particles().size());
     }
 
 

@@ -248,10 +248,10 @@ namespace Rivet {
       // Select jets
       Jets alljets = apply<JetFinder>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
       for (const DressedLepton& lep : quadruplet.leptonsSortedByPt)
-        ifilter_discard(alljets, deltaRLess(lep, 0.4));
+        idiscard(alljets, deltaRLess(lep, 0.4));
       const Jets jets = alljets;
-      const Jets centralJets = filterBy(jets, Cuts::abseta < 2.4);
-      const Jets pt60Jets = filterBy(jets, Cuts::pT > 60*GeV);
+      const Jets centralJets = select(jets, Cuts::abseta < 2.4);
+      const Jets pt60Jets = select(jets, Cuts::pT > 60*GeV);
 
       const auto& leadingDilepton = quadruplet.leadingDilepton.momentum();
       const auto& subleadingDilepton = quadruplet.subleadingDilepton.momentum();

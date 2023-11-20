@@ -102,8 +102,7 @@ namespace Rivet {
       incSow->fill();
       // Get the  jets
       for (size_t i = 0; i < jetFinders.size(); ++i ) {
-        const PseudoJets& psjets = apply<FastJets>(event,
-	  jetFinders[i]).pseudoJetsByPt(30.0*GeV);
+        const PseudoJets& psjets = apply<FastJets>(event, jetFinders[i]).pseudojetsByPt(30.0*GeV);
         if (!psjets.empty()) {
         // Get the leading jet and make sure it's back-to-back with the Z
         const fastjet::PseudoJet& j0 = psjets[0];

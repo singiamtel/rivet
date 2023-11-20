@@ -103,7 +103,7 @@ namespace Rivet {
           const Particles Z = zfinder.bosons();
           const FourMomentum Zmom = Z[0].momentum();
           const Jets jetsZ = apply<FastJets>(event, "JetsZ").jetsByPt(jetSel);
-          const Jets cleanedJetsZ = filter_discard(jetsZ, [&](const Jet& j) {return any(muon, deltaRLess(j, 0.5)); });
+          const Jets cleanedJetsZ = discard(jetsZ, [&](const Jet& j) {return any(muon, deltaRLess(j, 0.5)); });
 
           if (cleanedJetsZ.size() > 0 && cleanedJetsZ.at(0).pT() > 20*GeV) {
             const double yZ = Zmom.rap(); //histogram 7
@@ -131,7 +131,7 @@ namespace Rivet {
           const FourMomentum muonmom = Muons[0].momentum();
           const Jets jetsW = apply<FastJets>(event, "JetsW").jetsByPt(jetSel);
 
-          const Jets cleanedJetsW = filter_discard(jetsW, [&](const Jet& j) {return any(Muons, deltaRLess(j, 0.5)); });
+          const Jets cleanedJetsW = discard(jetsW, [&](const Jet& j) {return any(Muons, deltaRLess(j, 0.5)); });
 
           if (cleanedJetsW.size() > 0 && cleanedJetsW.at(0).pT() > 20*GeV) {
             const double etaj = cleanedJetsW[0].eta(); //histogram 5

@@ -155,7 +155,7 @@ namespace Rivet {
       size_t nBaseline = count(tr_ljets, [](const Jet &j) { return j.pT() > 200*GeV && j.abseta() < 2.5; });
       if (nBaseline < 2)  return;
 
-      ifilter_select(tr_ljets, [](const PseudoJet &j) { return j.perp() > 450*GeV; });
+      iselect(tr_ljets, [](const PseudoJet &j) { return j.perp() > 450*GeV; });
       if (tr_ljets.size() > 1)  tr_ljets = sorted_by_pt(tr_ljets);
       else if (tr_ljets.empty())  return;
 

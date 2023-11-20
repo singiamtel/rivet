@@ -186,25 +186,24 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       using namespace fastjet;
 
       // Get anti-kt jets with p_T > 200 GeV, check abs(y) < 2, and fill mass histograms
       const FastJets& ktfj = apply<FastJets>(event, "AKT");
-      PseudoJets ktjets = ktfj.pseudoJetsByPt(200*GeV);
+      PseudoJets ktjets = ktfj.pseudojetsByPt(200*GeV);
       for (const PseudoJet & ajet : ktjets) {
         if (abs(ajet.rap()) < 2) {
-          _h_ktmass->fill(ajet.perp(), ajet.m(), weight);
+          _h_ktmass->fill(ajet.perp(), ajet.m());
         }
       }
 
       // Same as above but C/A jets
       const FastJets& cafj = apply<FastJets>(event, "CA");
-      PseudoJets cajets = cafj.pseudoJetsByPt(200*GeV);
+      PseudoJets cajets = cafj.pseudojetsByPt(200*GeV);
       for (const PseudoJet & ajet : cajets) {
         if (abs(ajet.rap()) < 2) {
-          _h_camass->fill(ajet.perp(), ajet.m(), weight);
+          _h_camass->fill(ajet.perp(), ajet.m());
         }
       }
 
@@ -217,7 +216,7 @@ namespace Rivet {
         PseudoJets split_jets = splitjet(pjet, dR, cafj, unclustered);
         if ( (dR < 0.15) || (unclustered == false) ) continue;
         PseudoJet filt_jet = filterjet(split_jets, dR, 0.3);
-        _h_filtmass->fill(filt_jet.perp(), filt_jet.m(), weight);
+        _h_filtmass->fill(filt_jet.perp(), filt_jet.m());
       }
 
       // Use the two last stages of clustering to get sqrt(d_12) and sqrt(d_23).
@@ -227,8 +226,8 @@ namespace Rivet {
         ClusterSequence subjet_cseq(ktfj.clusterSeq()->constituents(pjet), JetDefinition(kt_algorithm, M_PI/2.));
         double d_12 = subjet_cseq.exclusive_dmerge(1) * M_PI*M_PI/4.;
         double d_23 = subjet_cseq.exclusive_dmerge(2) * M_PI*M_PI/4.;
-        _h_ktd12->fill(pjet.perp(), sqrt(d_12), weight);
-        _h_ktd23->fill(pjet.perp(), sqrt(d_23), weight);
+        _h_ktd12->fill(pjet.perp(), sqrt(d_12));
+        _h_ktd23->fill(pjet.perp(), sqrt(d_23));
       }
 
       // N-subjettiness, use beta = 1 (no rationale given).
@@ -254,8 +253,8 @@ namespace Rivet {
         const double tau3 = jetTauValue(beta, radius, constituents, axis3, Rcut);
 
         if (tau1 == 0 || tau2 == 0) continue;
-        _h_cat21->fill(pjet.perp(), tau2/tau1, weight);
-        _h_cat32->fill(pjet.perp(), tau3/tau2, weight);
+        _h_cat21->fill(pjet.perp(), tau2/tau1);
+        _h_cat32->fill(pjet.perp(), tau3/tau2);
       }
 
       for (const PseudoJet & pjet : ktjets) {
@@ -274,8 +273,8 @@ namespace Rivet {
         const double tau3 = jetTauValue(beta, radius, constituents, axis3, Rcut);
         if (tau1 == 0 || tau2 == 0) continue;
 
-        _h_ktt21->fill(pjet.perp(), tau2/tau1, weight);
-        _h_ktt32->fill(pjet.perp(), tau3/tau2, weight);
+        _h_ktt21->fill(pjet.perp(), tau2/tau1);
+        _h_ktt32->fill(pjet.perp(), tau3/tau2);
       }
     }
 

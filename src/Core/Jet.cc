@@ -161,7 +161,7 @@ namespace Rivet {
 
 
   Particles Jet::tags(const Cut& c) const {
-    return filter_select(tags(), c);
+    return select(tags(), c);
   }
 
   Particles Jet::bTags(const Cut& c) const {
@@ -172,7 +172,7 @@ namespace Rivet {
     }
     // If no proper tags found, look for b quark constituents
     if (rtn.empty()) {
-      rtn = filter_select(constituents(), hasAbsPID(PID::BQUARK));
+      rtn = select(constituents(), hasAbsPID(PID::BQUARK));
     }
     return rtn;
   }
@@ -186,7 +186,7 @@ namespace Rivet {
     }
     // If no proper tags found, look for b quark constituents
     if (rtn.empty()) {
-      rtn = filter_select(constituents(), hasAbsPID(PID::CQUARK));
+      rtn = select(constituents(), hasAbsPID(PID::CQUARK));
     }
     return rtn;
   }

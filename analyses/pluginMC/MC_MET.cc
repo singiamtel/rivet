@@ -43,11 +43,11 @@ namespace Rivet {
 
       const MissingMomentum& mmincl = apply<MissingMomentum>(event, "InclMET");
       _h["met_incl"]->fill(mmincl.met()/GeV);
-      _h["set_incl"]->fill(mmincl.set()/GeV);
+      _h["set_incl"]->fill(mmincl.scalarEt()/GeV);
 
       const MissingMomentum& mmcalo = apply<MissingMomentum>(event, "CaloMET");
       _h["met_calo"]->fill(mmcalo.met()/GeV);
-      _h["set_calo"]->fill(mmcalo.set()/GeV);
+      _h["set_calo"]->fill(mmcalo.scalarEt()/GeV);
 
       // Get the invisible final state particles
       const Particles& invisibles = apply<InvisibleFinalState>(event, "InvisibleFS").particlesByPt();

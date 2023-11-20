@@ -29,7 +29,7 @@ namespace Rivet {
       double xiM = 0.;
       double xiP = 0.;
 
-      const Jets jets = apply<FastJets>(event, "AntiKtJets05").jetsByPt(20.*GeV);
+      const Jets jets = apply<FastJets>(event, "AntiKtJets05").jetsByPt(Cuts::pT > 20.*GeV);
       if (jets.size() < 2) vetoEvent;  // require a dijet system with a 20 GeV cut on both jets
       if (fabs(jets[0].eta()) > 4.4 || fabs(jets[1].eta()) > 4.4) vetoEvent;
 
@@ -47,9 +47,8 @@ namespace Rivet {
       xiP = xiP / (sqrtS()/GeV);
       xiM = xiM / (sqrtS()/GeV);
 
-      const double weight = 1.0;
-      _h_xi->fill( xiM, weight ); // Fill the histogram both with xiP and xiM, and get the average in the endjob.
-      _h_xi->fill( xiP, weight );
+      _h_xi->fill( xiM ); // Fill the histogram both with xiP and xiM, and get the average in the endjob.
+      _h_xi->fill( xiP );
     }
 
 

@@ -126,7 +126,7 @@ namespace Rivet {
 
       double p_annulus(const Jet &jet, const double a, const double b) const {
         // calculate the total momentum inside an annulus with a <= R < b
-        return sum(filter_select(jet.particles(), [&](const Particle &p) {
+        return sum(select(jet.particles(), [&](const Particle &p) {
           const double dr = deltaR(p, jet);
           return (dr < b && dr >= a);
         }), Kin::pT, 0.)/GeV;
@@ -220,7 +220,7 @@ namespace Rivet {
           double p_0_R = p_annulus(thisJet, 0., 0.4);
           if (fuzzyEquals(p_0_R, 0., 1e-5))  continue;
           Particles bjets = thisJet.bTags(Cuts::pT > 5*GeV);
-          ifilter_select(bjets, deltaRLess(thisJet, 0.3));
+          iselect(bjets, deltaRLess(thisJet, 0.3));
           for (const Particle &thisB : bjets) {
             _h["b_jet_pThad"]->fill(thisB.pT()/GeV);
             double z = thisJet.p3().dot(thisB.p3())/thisJet.p2();
@@ -241,7 +241,7 @@ namespace Rivet {
           }
 
           Particles cjets = thisJet.cTags(Cuts::pT > 5*GeV);
-          ifilter_select(cjets, deltaRLess(thisJet, 0.3));
+          iselect(cjets, deltaRLess(thisJet, 0.3));
           if (bjets.empty()) {
             for (const Particle& thisC : cjets) {
               _h["c_jet_pThad"]->fill(thisC.pT()/GeV);

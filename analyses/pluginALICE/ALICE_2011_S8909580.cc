@@ -37,7 +37,7 @@ namespace Rivet {
           switch(p.pid()) {
           case 3312:
           case -3312:
-            if ( !( p.hasAncestor(3334) || p.hasAncestor(-3334) ) ) {
+            if ( !( p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ) ) {
               _histPtXi->fill(pT);
             }
             break;
@@ -47,17 +47,17 @@ namespace Rivet {
               _temp_h_Kzeros->fill(pT, 2);
               break;
             case 3122:
-              if ( !( p.hasAncestor(3322) || p.hasAncestor(-3322) ||
-                      p.hasAncestor(3312) || p.hasAncestor(-3312) ||
-                      p.hasAncestor(3334) || p.hasAncestor(-3334) ) ) {
+              if ( !( p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||
+                      p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||
+                      p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ) ) {
                 _histPtLambda->fill(pT);
                 _temp_h_Lambdas->fill(pT);
               }
               break;
             case -3122:
-              if ( !( p.hasAncestor(3322) || p.hasAncestor(-3322) ||
-                      p.hasAncestor(3312) || p.hasAncestor(-3312) ||
-                      p.hasAncestor(3334) || p.hasAncestor(-3334) ) ) {
+              if ( !( p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||
+                      p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||
+                      p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ) ) {
                 _histPtAntiLambda->fill(pT);
                 _temp_h_Lambdas->fill(pT);
               }

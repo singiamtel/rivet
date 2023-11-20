@@ -94,7 +94,7 @@ namespace Rivet {
       _h_Z_multiplicity->fill(zeefinder.bosons().size() + zmmfinder.bosons().size());
       _h_W_multiplicity->fill(wefinder.bosons().size() + wmfinder.bosons().size());
 
-      const Jets jets = apply<FastJets>(event, "AntiKT04").jetsByPt(JETPTCUT);
+      const Jets jets = apply<FastJets>(event, "AntiKT04").jetsByPt(Cuts::pT > JETPTCUT);
       _h_jet_multiplicity->fill(jets.size());
 
       // Identify the b-jets

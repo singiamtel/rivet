@@ -26,7 +26,7 @@ namespace Rivet {
       // all final-state particles within
       // the given eta acceptance
       const UnstableParticles up(Cuts::absrap < 0.5);
-      declare(up, "up");  
+      declare(up, "up");
 
       book(_h_D0,1,1,1);
       book(_h_Lc,2,1,1);
@@ -45,7 +45,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       const UnstableParticles& up = apply<UnstableParticles>(event, "up");
-      
+
       for (const Particle& p : up.particles()) {
         if(p.fromBottom())
           continue;
@@ -55,26 +55,26 @@ namespace Rivet {
           else if(p.abspid()==4122){
             _h_Lc->fill(p.pT()/GeV);
             _h_Lc4Ratio->fill(p.pT()/GeV);
-            if(p.hasAncestor(4222) || p.hasAncestor(4212) || p.hasAncestor(4112) || p.hasAncestor(-4222) || p.hasAncestor(-4212) || p.hasAncestor(-4112))
+            if(p.hasAncestorWith(Cuts::pid == 4222) || p.hasAncestorWith(Cuts::pid == 4212) || p.hasAncestorWith(Cuts::pid == 4112) || p.hasAncestorWith(Cuts::pid == -4222) || p.hasAncestorWith(Cuts::pid == -4212) || p.hasAncestorWith(Cuts::pid == -4112))
               _h_LcfromSc->fill(p.pT()/GeV);
           }
           else if(p.abspid()==421){
             _h_D0->fill(p.pT()/GeV);
             _h_D04Sc->fill(p.pT()/GeV);
           }
-        }    
-      }      
+        }
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      
+
       scale(_h_D0,              crossSection()/(microbarn*2*sumOfWeights()));
       scale(_h_Lc,              crossSection()/(microbarn*2*sumOfWeights()));
       scale(_h_LcfromSc,        crossSection()/(microbarn*2*sumOfWeights()));
       scale(_h_Lc4Ratio,        crossSection()/(microbarn*2*sumOfWeights()));
-      scale(_h_Sc,              crossSection()/(microbarn*2*sumOfWeights())); 
+      scale(_h_Sc,              crossSection()/(microbarn*2*sumOfWeights()));
       scale(_h_D04Sc,           crossSection()/(microbarn*2*sumOfWeights())); // norm to generated cross-section in pb (after cuts)
       divide(_h_Sc, _h_D04Sc, _h_ScD0);
       divide(_h_Lc, _h_D0, _h_LcD0);

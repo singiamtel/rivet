@@ -102,7 +102,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
 
       // Use particle-level leptons for the first histogram
       const LeptonFinder& dressed_electrons = apply<LeptonFinder>(event, "DressedElectrons");
@@ -134,7 +133,7 @@ namespace Rivet {
           // Now calculate the variable
           double dphi_temp = deltaPhi(lepPlus,lepMinus);
 
-          fillWithUFOF( _h_dphidressedleptons, dphi_temp, weight );
+          fillWithUFOF( _h_dphidressedleptons, dphi_temp );
         }
 
       }
@@ -164,7 +163,7 @@ namespace Rivet {
           bool istrueleptonictop = false;
           for (size_t i = 0; i < lepton_candidates.size(); ++i) {
             const Particle& lepton_candidate = lepton_candidates[i];
-            if ( lepton_candidate.hasParent(PID::PHOTON) ) {
+            if ( lepton_candidate.hasParentWith(Cuts::pid == PID::PHOTON) ) {
               MSG_DEBUG("Found gamma parent, top: " << k+1 << " of " << leptonicpartontops.size() << " , lepton: " << i+1 << " of " << lepton_candidates.size());
               continue;
             }
@@ -226,13 +225,13 @@ namespace Rivet {
         const double cos_opening_angle_temp = lepPlus.vector3().dot(lepMinus.vector3()) / (lepPlus.vector3().mod() * lepMinus.vector3().mod());
 
         // Fill parton-level histos
-        fillWithUFOF( _h_dphi, dphi_temp, weight );
-        fillWithUFOF( _h_cos_opening_angle, cos_opening_angle_temp, weight );
-        fillWithUFOF( _h_c1c2, c1c2_temp, weight );
-        fillWithUFOF( _h_lep_costheta, lepPlus_costheta_temp, weight );
-        fillWithUFOF( _h_lep_costheta, lepMinus_costheta_temp, weight );
-        fillWithUFOF( _h_lep_costheta_CPV, lepPlus_costheta_temp, weight );
-        fillWithUFOF( _h_lep_costheta_CPV, -lepMinus_costheta_temp, weight );
+        fillWithUFOF( _h_dphi, dphi_temp );
+        fillWithUFOF( _h_cos_opening_angle, cos_opening_angle_temp );
+        fillWithUFOF( _h_c1c2, c1c2_temp );
+        fillWithUFOF( _h_lep_costheta, lepPlus_costheta_temp );
+        fillWithUFOF( _h_lep_costheta, lepMinus_costheta_temp );
+        fillWithUFOF( _h_lep_costheta_CPV, lepPlus_costheta_temp );
+        fillWithUFOF( _h_lep_costheta_CPV, -lepMinus_costheta_temp );
 
         // Now fill the same variables in the 2D and profile histos vs ttbar invariant mass, pT, and absolute rapidity
         for (int i_var = 0; i_var < 3; ++i_var) {
@@ -245,21 +244,21 @@ namespace Rivet {
             var = tt_absrapidity_temp;
           }
 
-          fillWithUFOF( _h_dphi_var[i_var], dphi_temp, var, weight );
-          fillWithUFOF( _h_cos_opening_angle_var[i_var], cos_opening_angle_temp, var, weight );
-          fillWithUFOF( _h_c1c2_var[i_var], c1c2_temp, var, weight );
-          fillWithUFOF( _h_lep_costheta_var[i_var], lepPlus_costheta_temp, var, weight );
-          fillWithUFOF( _h_lep_costheta_var[i_var], lepMinus_costheta_temp, var, weight );
-          fillWithUFOF( _h_lep_costheta_CPV_var[i_var], lepPlus_costheta_temp, var, weight );
-          fillWithUFOF( _h_lep_costheta_CPV_var[i_var], -lepMinus_costheta_temp, var, weight );
+          fillWithUFOF( _h_dphi_var[i_var], dphi_temp, var );
+          fillWithUFOF( _h_cos_opening_angle_var[i_var], cos_opening_angle_temp, var );
+          fillWithUFOF( _h_c1c2_var[i_var], c1c2_temp, var );
+          fillWithUFOF( _h_lep_costheta_var[i_var], lepPlus_costheta_temp, var );
+          fillWithUFOF( _h_lep_costheta_var[i_var], lepMinus_costheta_temp, var );
+          fillWithUFOF( _h_lep_costheta_CPV_var[i_var], lepPlus_costheta_temp, var );
+          fillWithUFOF( _h_lep_costheta_CPV_var[i_var], -lepMinus_costheta_temp, var );
 
-          fillWithUFOF( _h_dphi_profile[i_var], dphi_temp, var, weight, (_h_dphi->xMax() + _h_dphi->xMin())/2. );
-          fillWithUFOF( _h_cos_opening_angle_profile[i_var], cos_opening_angle_temp, var, weight, (_h_cos_opening_angle->xMax() + _h_cos_opening_angle->xMin())/2. );
-          fillWithUFOF( _h_c1c2_profile[i_var], c1c2_temp, var, weight, (_h_c1c2->xMax() + _h_c1c2->xMin())/2. );
-          fillWithUFOF( _h_lep_costheta_profile[i_var], lepPlus_costheta_temp, var, weight, (_h_lep_costheta->xMax() + _h_lep_costheta->xMin())/2. );
-          fillWithUFOF( _h_lep_costheta_profile[i_var], lepMinus_costheta_temp, var, weight, (_h_lep_costheta->xMax() + _h_lep_costheta->xMin())/2. );
-          fillWithUFOF( _h_lep_costheta_CPV_profile[i_var], lepPlus_costheta_temp, var, weight, (_h_lep_costheta_CPV->xMax() + _h_lep_costheta_CPV->xMin())/2. );
-          fillWithUFOF( _h_lep_costheta_CPV_profile[i_var], -lepMinus_costheta_temp, var, weight, (_h_lep_costheta_CPV->xMax() + _h_lep_costheta_CPV->xMin())/2. );
+          fillWithUFOF( _h_dphi_profile[i_var], dphi_temp, var, (_h_dphi->xMax() + _h_dphi->xMin())/2. );
+          fillWithUFOF( _h_cos_opening_angle_profile[i_var], cos_opening_angle_temp, var, (_h_cos_opening_angle->xMax() + _h_cos_opening_angle->xMin())/2. );
+          fillWithUFOF( _h_c1c2_profile[i_var], c1c2_temp, var, (_h_c1c2->xMax() + _h_c1c2->xMin())/2. );
+          fillWithUFOF( _h_lep_costheta_profile[i_var], lepPlus_costheta_temp, var, (_h_lep_costheta->xMax() + _h_lep_costheta->xMin())/2. );
+          fillWithUFOF( _h_lep_costheta_profile[i_var], lepMinus_costheta_temp, var, (_h_lep_costheta->xMax() + _h_lep_costheta->xMin())/2. );
+          fillWithUFOF( _h_lep_costheta_CPV_profile[i_var], lepPlus_costheta_temp, var, (_h_lep_costheta_CPV->xMax() + _h_lep_costheta_CPV->xMin())/2. );
+          fillWithUFOF( _h_lep_costheta_CPV_profile[i_var], -lepMinus_costheta_temp, var, (_h_lep_costheta_CPV->xMax() + _h_lep_costheta_CPV->xMin())/2. );
 
         }
 
@@ -305,16 +304,16 @@ namespace Rivet {
     const vector<double> _bins_c1c2 = {-1., -0.4, -10./60., 0., 10./60., 0.4, 1.};
     const vector<double> _bins_cos_opening_angle = {-1., -2./3., -1./3., 0., 1./3., 2./3., 1.};
 
-    void fillWithUFOF(Histo1DPtr h, double x, double w) {
-      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9), w);
+    void fillWithUFOF(Histo1DPtr h, double x) {
+      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9));
     }
 
-    void fillWithUFOF(Histo2DPtr h, double x, double y, double w) {
-      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9), std::max(std::min(y, h->yMax()-1e-9),h->yMin()+1e-9), w);
+    void fillWithUFOF(Histo2DPtr h, double x, double y) {
+      h->fill(std::max(std::min(x, h->xMax()-1e-9),h->xMin()+1e-9), std::max(std::min(y, h->yMax()-1e-9),h->yMin()+1e-9));
     }
 
-    void fillWithUFOF(Profile1DPtr h, double x, double y, double w, double c) {
-      h->fill(std::max(std::min(y, h->xMax()-1e-9),h->xMin()+1e-9), float(x > c) - float(x < c), w);
+    void fillWithUFOF(Profile1DPtr h, double x, double y, double c) {
+      h->fill(std::max(std::min(y, h->xMax()-1e-9),h->xMin()+1e-9), float(x > c) - float(x < c));
     }
 
 

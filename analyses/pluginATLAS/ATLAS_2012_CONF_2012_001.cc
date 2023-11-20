@@ -75,15 +75,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
       // get the jet candidates
-      Jets cand_jets;
-      for (const Jet& jet :
-               apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
 
       // candidate muons
       Particles cand_mu;
@@ -310,33 +303,33 @@ namespace Rivet {
         double pTmu = imu<recon_mu.size() ?
           recon_mu[imu].perp() : -1*GeV;
         if(pTe>pTmu) {
-          _hist_leptonpT   [ix]->fill(pTe ,weight);
-          _hist_leptonpT_MC[ix]->fill(pTe ,weight);
+          _hist_leptonpT   [ix]->fill(pTe );
+          _hist_leptonpT_MC[ix]->fill(pTe );
           ++ie;
         }
         else {
-          _hist_leptonpT   [ix]->fill(pTmu,weight);
-          _hist_leptonpT_MC[ix]->fill(pTmu,weight);
+          _hist_leptonpT   [ix]->fill(pTmu);
+          _hist_leptonpT_MC[ix]->fill(pTmu);
           ++imu;
         }
       }
       // njet
-      _hist_njet   ->fill(recon_jets.size(),weight);
-      _hist_njet_MC->fill(recon_jets.size(),weight);
+      _hist_njet   ->fill(recon_jets.size());
+      _hist_njet_MC->fill(recon_jets.size());
       // etmiss
-      _hist_etmiss   ->fill(eTmiss,weight);
-      _hist_etmiss_MC->fill(eTmiss,weight);
+      _hist_etmiss   ->fill(eTmiss);
+      _hist_etmiss_MC->fill(eTmiss);
       if(mSFOS<1e30) {
-        _hist_mSFOS   ->fill(mSFOS,weight);
-        _hist_mSFOS_MC->fill(mSFOS,weight);
+        _hist_mSFOS   ->fill(mSFOS);
+        _hist_mSFOS_MC->fill(mSFOS);
       }
-      _hist_meff   ->fill(meff,weight);
-      _hist_meff_MC->fill(meff,weight);
+      _hist_meff   ->fill(meff);
+      _hist_meff_MC->fill(meff);
 
       // finally the counts
       if(eTmiss>50.) {
-        _count_SR1->fill(0.5,weight);
-        if(mdiff>10.) _count_SR2->fill(0.5,weight);
+        _count_SR1->fill(0.5);
+        if(mdiff>10.) _count_SR2->fill(0.5);
       }
     }
 

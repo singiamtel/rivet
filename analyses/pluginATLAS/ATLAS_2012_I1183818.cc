@@ -87,7 +87,7 @@ namespace Rivet {
 
       // get jets
       const FastJets& jetsAntiKt4 = apply<FastJets>(event, "AntiKt4Jets");
-      const Jets& jets = jetsAntiKt4.jetsByPt(20.0*GeV);
+      const Jets& jets = jetsAntiKt4.jetsByPt(Cuts::pT > 20*GeV);
 
       // initialise sumET variables
       double sumETbin1 = 0;

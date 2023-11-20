@@ -57,7 +57,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
 
       // require at least 2 photons in final state
       Particles photons =
@@ -104,10 +103,10 @@ namespace Rivet {
       }
       double eTmiss = pTmiss.pT();
 
-      _hist_ET_photon->fill(isolated_photons[0].Et(),weight);
-      _hist_met      ->fill(eTmiss                             ,weight);
+      _hist_ET_photon->fill(isolated_photons[0].Et());
+      _hist_met      ->fill(eTmiss                             );
 
-      if(eTmiss>125.) _count_SR->fill(0.5,weight);
+      if(eTmiss>125.) _count_SR->fill(0.5);
     }
 
 

@@ -62,7 +62,7 @@ namespace Rivet {
       const FourMomentum photon = photonfs.particles().front().momentum();
 
       // Get the jet
-      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(30.0*GeV);
+      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV);
       if (jets.empty()) vetoEvent;
       FourMomentum leadingJet;
       for ( const Jet & j : jets ) {

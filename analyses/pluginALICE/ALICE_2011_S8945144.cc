@@ -39,19 +39,19 @@ namespace Rivet {
               _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
               break;
             case 2212:
-              if ( !(p.hasAncestor(3322) ||                             // Xi0
-                     p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-                     p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-                     p.hasAncestor(3312) || p.hasAncestor(-3312) ) ) {  // Xi-/+
+              if ( !(p.hasAncestorWith(Cuts::pid == 3322) ||                             // Xi0
+                     p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+                     p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+                     p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ) ) {  // Xi-/+
                 _histPtProtons->fill(p.pT()/GeV);
                 _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
               }
               break;
             case -2212:
-              if ( !(p.hasAncestor(3322) ||                             // Xi0
-                     p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-                     p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-                     p.hasAncestor(3312) || p.hasAncestor(-3312) ) ) {  // Xi-/+
+              if ( !(p.hasAncestorWith(Cuts::pid == 3322) ||                             // Xi0
+                     p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+                     p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+                     p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ) ) {  // Xi-/+
                 _histPtAntiProtons->fill(p.pT()/GeV);
                 _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
               }

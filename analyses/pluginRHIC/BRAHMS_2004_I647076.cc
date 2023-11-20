@@ -75,8 +75,8 @@ namespace Rivet {
 	// First pions.
 	if (abs(id) == 211) {
           // Protect against decaying K0S and Lambda
-	  if (p.hasAncestor(310) || p.hasAncestor(-310) ||
-	    p.hasAncestor(3122) || p.hasAncestor(3122)) continue;
+	  if (p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310) ||
+	    p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122)) continue;
 	  for (int i = 0, N = rapIntervalsPi.size(); i < N; ++i) {
 	    if (y > rapIntervalsPi[i].first && y <= rapIntervalsPi[i].second) {
 	      const double dy = rapIntervalsPi[i].second - rapIntervalsPi[i].first;

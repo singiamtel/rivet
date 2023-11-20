@@ -94,7 +94,7 @@ namespace Rivet {
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
       MSG_DEBUG("Jet multiplicity before any pT cut = " << jetpro.size());
 
-      const PseudoJets& jets = jetpro.pseudoJetsByPt();
+      const PseudoJets& jets = jetpro.pseudojetsByPt();
       MSG_DEBUG("jetlist size = " << jets.size());
 
       int numBJet = 0;

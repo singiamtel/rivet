@@ -83,13 +83,12 @@ namespace Rivet {
       if (cleanedJets.size() != 1) return;
 
       // Fill histos
-      const double weight = 1.0;
       const double yz = z[0].rapidity();
       const double yjet = cleanedJets[0]->momentum().rapidity();
-      _hist1YZ->fill(fabs(yz), weight);
-      _hist1YJet->fill(fabs(yjet), weight);
-      _hist1YSum->fill(0.5*fabs(yz + yjet), weight);
-      _hist1YDif->fill(0.5*fabs(yz - yjet), weight);
+      _hist1YZ->fill(fabs(yz));
+      _hist1YJet->fill(fabs(yjet));
+      _hist1YSum->fill(0.5*fabs(yz + yjet));
+      _hist1YDif->fill(0.5*fabs(yz - yjet));
     }
 
 
@@ -115,13 +114,12 @@ namespace Rivet {
       if (cleanedJets.size() != 1) return;
 
       // Fill histos
-      const double weight = 1.0;
       const double ypho = photon.rapidity();
       const double yjet = cleanedJets[0]->momentum().rapidity();
-      _hist2YPhoton->fill(fabs(ypho), weight);
-      _hist2YJet->fill(fabs(yjet), weight);
-      _hist2YSum->fill(0.5*fabs(ypho + yjet), weight);
-      _hist2YDif->fill(0.5*fabs(ypho - yjet), weight);
+      _hist2YPhoton->fill(fabs(ypho));
+      _hist2YJet->fill(fabs(yjet));
+      _hist2YSum->fill(0.5*fabs(ypho + yjet));
+      _hist2YDif->fill(0.5*fabs(ypho - yjet));
     }
 
 

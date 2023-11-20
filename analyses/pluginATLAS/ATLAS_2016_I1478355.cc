@@ -39,7 +39,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(20*GeV);
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV);
       const Particles& bHadrons = apply<HeavyHadrons>(event, "BHadrons").bHadrons();
 
       if (jets.size() < 1)  vetoEvent;

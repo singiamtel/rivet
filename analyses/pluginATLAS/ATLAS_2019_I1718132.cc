@@ -92,7 +92,7 @@ namespace Rivet {
         });*/
 
         for (const DressedLepton& lep : leptons) {
-          ifilter_discard(jets, [&](const Jet& jet) {
+          idiscard(jets, [&](const Jet& jet) {
             return lep.abspid() == PID::ELECTRON and deltaR(jet, lep) < 0.2;
           });
         }
@@ -103,7 +103,7 @@ namespace Rivet {
             return lep.abspid() == PID::MUON and deltaR(jet, lep) < 0.4;
           });*/
           for (const DressedLepton& lep : leptons) {
-            ifilter_discard(jets, [&](const Jet& jet) {
+            idiscard(jets, [&](const Jet& jet) {
               return lep.abspid() == PID::MUON and deltaR(jet, lep) < 0.4;
             });
           }

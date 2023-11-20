@@ -80,7 +80,6 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & e) {
-      const double weight = 1.0;
 
       const WFinder& wenufinder = apply<WFinder>(e, "WenuFinder");
       if (wenufinder.bosons().size()!=1) {
@@ -101,39 +100,39 @@ namespace Rivet {
       FourMomentum mm=wmnufinder.leptons()[0].momentum();
       FourMomentum mnu=wmnufinder.neutrinos()[0].momentum();
 
-      _h_WW_pT->fill(ww.pT(),weight);
-      _h_WW_pT_peak->fill(ww.pT(),weight);
-      _h_WW_eta->fill(ww.eta(),weight);
-      _h_WW_phi->fill(ww.phi(),weight);
+      _h_WW_pT->fill(ww.pT());
+      _h_WW_pT_peak->fill(ww.pT());
+      _h_WW_eta->fill(ww.eta());
+      _h_WW_phi->fill(ww.phi());
       double mww2=ww.mass2();
-      if (mww2>0.0) _h_WW_m->fill(sqrt(mww2), weight);
+      if (mww2>0.0) _h_WW_m->fill(sqrt(mww2));
 
-      _h_WW_dphi->fill(mapAngle0ToPi(wenu.phi()-wmnu.phi()), weight);
-      _h_WW_deta->fill(wenu.eta()-wmnu.eta(), weight);
-      _h_WW_dR->fill(deltaR(wenu,wmnu), weight);
-      _h_WW_dpT->fill(fabs(wenu.pT()-wmnu.pT()), weight);
+      _h_WW_dphi->fill(mapAngle0ToPi(wenu.phi()-wmnu.phi()));
+      _h_WW_deta->fill(wenu.eta()-wmnu.eta());
+      _h_WW_dR->fill(deltaR(wenu,wmnu));
+      _h_WW_dpT->fill(fabs(wenu.pT()-wmnu.pT()));
 
       Vector3 crossWenu = ep.p3().cross(enu.p3());
       Vector3 crossWmnu = mm.p3().cross(mnu.p3());
       double costheta = crossWenu.dot(crossWmnu)/crossWenu.mod()/crossWmnu.mod();
-      _h_WW_costheta_planes->fill(costheta, weight);
+      _h_WW_costheta_planes->fill(costheta);
 
-      _h_W_pT->fill(wenu.pT(),weight);
-      _h_W_pT->fill(wmnu.pT(),weight);
-      _h_W_eta->fill(wenu.eta(),weight);
-      _h_W_eta->fill(wmnu.eta(),weight);
+      _h_W_pT->fill(wenu.pT());
+      _h_W_pT->fill(wmnu.pT());
+      _h_W_eta->fill(wenu.eta());
+      _h_W_eta->fill(wmnu.eta());
 
-      _h_Wl_pT->fill(ep.pT(), weight);
-      _h_Wl_pT->fill(mm.pT(), weight);
-      _h_Wl_eta->fill(ep.eta(), weight);
-      _h_Wl_eta->fill(mm.eta(), weight);
+      _h_Wl_pT->fill(ep.pT());
+      _h_Wl_pT->fill(mm.pT());
+      _h_Wl_eta->fill(ep.eta());
+      _h_Wl_eta->fill(mm.eta());
 
-      _h_WeWm_dphi->fill(mapAngle0ToPi(ep.phi()-mm.phi()), weight);
-      _h_WeWm_deta->fill(ep.eta()-mm.eta(), weight);
-      _h_WeWm_dR->fill(deltaR(ep,mm), weight);
+      _h_WeWm_dphi->fill(mapAngle0ToPi(ep.phi()-mm.phi()));
+      _h_WeWm_deta->fill(ep.eta()-mm.eta());
+      _h_WeWm_dR->fill(deltaR(ep,mm));
       double m2=FourMomentum(ep+mm).mass2();
       if (m2 < 0) m2 = 0.0;
-      _h_WeWm_m->fill(sqrt(m2), weight);
+      _h_WeWm_m->fill(sqrt(m2));
     }
 
 

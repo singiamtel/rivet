@@ -72,7 +72,7 @@ namespace Rivet {
 
       // Get the jet
       Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 100*GeV && Cuts::absrap < 2.5);
-      ifilter_discard(jets, deltaRLess(photon, 0.8));
+      idiscard(jets, deltaRLess(photon, 0.8));
       if ( jets.size()<2 )  vetoEvent;
       FourMomentum leadingJet = jets[0].momentum();
       FourMomentum subleadingJet = jets[1].momentum();

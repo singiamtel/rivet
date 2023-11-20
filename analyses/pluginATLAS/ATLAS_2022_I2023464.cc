@@ -10,7 +10,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief H->yy differentual cross-sections at 13 TeV
   class ATLAS_2022_I2023464 : public Analysis {
   public:
