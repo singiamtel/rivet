@@ -37,7 +37,7 @@ namespace Rivet {
       const Particles& ks_all = apply<IdentifiedFinalState>(event, "Kpms").particles();
       Particles kp, km;
       for (const Particle& p : ks_all) {
-        if (!p.hasAncestor(PID::PHI)) { MSG_DEBUG("-- K not from phi."); continue; }
+        if (!p.hasAncestorWith(Cuts::pid == PID::PHI)) { MSG_DEBUG("-- K not from phi."); continue; }
         if (p.p3().mod() > 800*MeV) { MSG_DEBUG("-- p K too high."); continue; }
         (p.charge() > 0 ? kp : km).push_back(p);
       }

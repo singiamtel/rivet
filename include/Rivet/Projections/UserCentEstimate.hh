@@ -7,38 +7,38 @@
 
 namespace Rivet {
 
-  
+
   class UserCentEstimate: public SingleValueProjection {
   public:
-    
+
     using SingleValueProjection::operator=;
-    
+
     UserCentEstimate() {
       setName("UserCentEstimate");
       declare(HepMCHeavyIon(), "HepMC");
     }
-    
+
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(UserCentEstimate);
-    
+
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
-    
-    
+
+
   protected:
-    
+
     void project(const Event& e) {
       clear();
-      set(apply<HepMCHeavyIon>(e, "HepMC").user_cent_estimate());
+      setValue(apply<HepMCHeavyIon>(e, "HepMC").user_cent_estimate());
     }
-    
+
     CmpState compare(const Projection& p) const {
       return CmpState::EQ;
     }
-    
+
   };
 
-  
+
 }
 
 #endif

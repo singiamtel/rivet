@@ -22,8 +22,7 @@ namespace Rivet {
     void init() {
       /// @todo These clustering arguments look odd: are they ok?
       Cut cut = Cuts::abseta < 1.7 && Cuts::pT > 15*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2,
-		      PhotonOrigin::NONE);
+      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2);
       declare(zfinder, "ZFinder");
 
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
@@ -49,16 +48,10 @@ namespace Rivet {
       if (zfinder.bosons().size()==1) {
         _sum_of_weights_inclusive->fill();
         const JetFinder& jetpro = apply<JetFinder>(e, "ConeFinder");
-        const Jets& jets = jetpro.jetsByPt(20*GeV);
-        Jets jets_cut;
-        for (const Jet& j : jets) {
-          if (j.abseta() < 2.8) {
-            jets_cut.push_back(j);
-          }
-        }
+        const Jets& jets = jetpro.jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.8);
 
         // Return if there are no jets:
-        if (jets_cut.size() < 1) {
+        if (jets.size() < 1) {
           MSG_DEBUG("Skipping event " << numEvents() << " because no jets pass cuts ");
           vetoEvent;
         }
@@ -66,10 +59,10 @@ namespace Rivet {
         const FourMomentum Zmom = zfinder.bosons()[0].momentum();
 
         // In jet pT
-        _h_jet_pT_cross_section->fill( jets_cut[0].pT());
-        _h_jet_pT_normalised->fill( jets_cut[0].pT());
-        _h_jet_y_cross_section->fill( fabs(jets_cut[0].rapidity()));
-        _h_jet_y_normalised->fill( fabs(jets_cut[0].rapidity()));
+        _h_jet_pT_cross_section->fill( jets[0].pT());
+        _h_jet_pT_normalised->fill( jets[0].pT());
+        _h_jet_y_cross_section->fill( fabs(jets[0].rapidity()));
+        _h_jet_y_normalised->fill( fabs(jets[0].rapidity()));
 
         // In Z pT
         _h_Z_pT_cross_section->fill(Zmom.pT());

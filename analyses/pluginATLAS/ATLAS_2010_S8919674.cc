@@ -53,7 +53,7 @@ namespace Rivet {
 
       if (_edges.empty())  _edges = _h_mu_njet_inclusive->xEdges();
 
-      const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(20.0*GeV);
+      const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 20*GeV);
 
       const WFinder& We = apply<WFinder>(event, "W_e");
       if (We.bosons().size() == 1) {

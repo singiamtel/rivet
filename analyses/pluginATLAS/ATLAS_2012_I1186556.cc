@@ -59,15 +59,12 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // get the candiate jets
       Jets cand_jets;
       for ( const Jet& jet :
-                apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 4.5 ) {
-          cand_jets.push_back(jet);
-        }
+                apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.5) ) {
+        cand_jets.push_back(jet);
       }
       // charged tracks for isolation
       Particles chg_tracks =
@@ -183,15 +180,15 @@ namespace Rivet {
 	     ++n_b;
 	}
 	if(n_b==0) vetoEvent;
-	_hist_mT2_SF_exp->fill(m_T2,weight);
-	_hist_mT2_SF_MC ->fill(m_T2,weight);
-	if(m_T2>120.) _count_SR_SF->fill(0.5,weight);
+	_hist_mT2_SF_exp->fill(m_T2);
+	_hist_mT2_SF_MC ->fill(m_T2);
+	if(m_T2>120.) _count_SR_SF->fill(0.5);
       }
       // opposite flavour region
       else {
-	_hist_mT2_OF_exp->fill(m_T2,weight);
-	_hist_mT2_OF_MC ->fill(m_T2,weight);
-	if(m_T2>120.) _count_SR_OF->fill(0.5,weight);
+	_hist_mT2_OF_exp->fill(m_T2);
+	_hist_mT2_OF_MC ->fill(m_T2);
+	if(m_T2>120.) _count_SR_OF->fill(0.5);
       }
     }
     /// @}

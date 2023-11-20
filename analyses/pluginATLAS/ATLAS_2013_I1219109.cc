@@ -82,7 +82,7 @@ namespace Rivet {
 
       // count good jets, check if good jet contains B hadron
       const Particles& bHadrons = apply<HeavyHadrons>(event, "BHadrons").bHadrons();
-      const Jets& jets = apply<JetFinder>(event, "Jets").jetsByPt(25*GeV);
+      const Jets& jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 25*GeV);
       int goodjets = 0, bjets = 0;
       double bPt = 0.;
       for(const Jet& j : jets) {

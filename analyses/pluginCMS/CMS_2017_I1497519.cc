@@ -11,7 +11,7 @@ namespace Rivet {
   /// @brief Measurements of differential production cross sections for a Z boson in association with jets in pp collisions at 8 TeV
   class CMS_2017_I1497519 : public Analysis {
   private:
-    
+
     enum histIds {
       //Normalized differential cross sections
       kYZ, kYZmidPt, kYZhighPt, //Figs. 9a, 9b, 9c
@@ -89,7 +89,7 @@ namespace Rivet {
       }
     }
 
-    
+
   public:
 
     /// Constructor
@@ -207,13 +207,13 @@ namespace Rivet {
       const Jets& jets = fj.jetsByPt(Cuts::absrap < 4.7 && Cuts::pT > 30*GeV);
 
       // Remove jets overlapping with any of the two selected leptons
-      Jets goodjets47 = filter_discard(jets, [dressedLeptons](const ParticleBase& j){
+      Jets goodjets47 = discard(jets, [dressedLeptons](const ParticleBase& j){
           return deltaR(j, (*dressedLeptons)[0]) < 0.5
           ||  deltaR(j, (*dressedLeptons)[1]) < 0.5;
         });
 
       // Jets in the CMS tracker acceptance
-      Jets goodjets24 = filter_select(goodjets47, [](const ParticleBase& j){
+      Jets goodjets24 = select(goodjets47, [](const ParticleBase& j){
           return j.absrapidity() < 2.4;
         });
 

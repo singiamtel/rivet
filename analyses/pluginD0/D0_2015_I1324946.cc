@@ -5,7 +5,7 @@
 
 namespace Rivet {
 
-  
+
   class D0_2015_I1324946 : public Analysis {
   public:
 
@@ -19,8 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       FinalState fs;
-      ZFinder zfinder_mm(fs, Cuts::abseta < 2 && Cuts::pT > 15*GeV, PID::MUON, 30*GeV, 500*GeV,
-			 0.0, PhotonOrigin::NONE);
+      ZFinder zfinder_mm(fs, Cuts::abseta < 2 && Cuts::pT > 15*GeV, PID::MUON, 30*GeV, 500*GeV, 0.0);
       declare(zfinder_mm, "zfinder_mm");
 
       book(_h_phistar_mm_peak_central, 1, 1, 1);
@@ -34,7 +33,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       //70<Mmm<105
       const ZFinder& zfinder_mm = apply<ZFinder>(event, "zfinder_mm");
@@ -51,17 +49,17 @@ namespace Rivet {
         const FourMomentum& zmom = zfinder_mm.bosons()[0].momentum();
         if (zmom.mass()<30*GeV || zmom.mass() >500*GeV) vetoEvent;
 
-        if( zmom.mass()>70 && zmom.mass()<100 && zmom.absrap()<1.0) _h_phistar_mm_peak_central->fill(phistar, weight);
-        if( zmom.mass()>70 && zmom.mass()<100 && zmom.absrap()>1.0  && zmom.absrap()<2.0) _h_phistar_mm_peak_forward->fill(phistar, weight);
-        if( zmom.mass()>30 && zmom.mass()<60  && zmom.absrap()<1.0) _h_phistar_mm_low_central->fill(phistar, weight);
-        if( zmom.mass()>30 && zmom.mass()<60 && zmom.absrap()>1.0 && zmom.absrap()<2.0) _h_phistar_mm_low_forward->fill(phistar, weight);
-        if( zmom.mass()>160 && zmom.mass()<300) _h_phistar_mm_high1->fill(phistar, weight);
-        if( zmom.mass()>300 && zmom.mass()<500) _h_phistar_mm_high2->fill(phistar, weight);
+        if( zmom.mass()>70 && zmom.mass()<100 && zmom.absrap()<1.0) _h_phistar_mm_peak_central->fill(phistar);
+        if( zmom.mass()>70 && zmom.mass()<100 && zmom.absrap()>1.0  && zmom.absrap()<2.0) _h_phistar_mm_peak_forward->fill(phistar);
+        if( zmom.mass()>30 && zmom.mass()<60  && zmom.absrap()<1.0) _h_phistar_mm_low_central->fill(phistar);
+        if( zmom.mass()>30 && zmom.mass()<60 && zmom.absrap()>1.0 && zmom.absrap()<2.0) _h_phistar_mm_low_forward->fill(phistar);
+        if( zmom.mass()>160 && zmom.mass()<300) _h_phistar_mm_high1->fill(phistar);
+        if( zmom.mass()>300 && zmom.mass()<500) _h_phistar_mm_high2->fill(phistar);
 
       }
     }
 
-    
+
     /// Normalise histograms etc., after the run
     void finalize() {
 

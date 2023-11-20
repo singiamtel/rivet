@@ -73,21 +73,21 @@ namespace Rivet {
       // Jet/electron/muons overlap removal and selection
       // Remove any jet within dR = 0.2 of an electron
       for (const Particle& e : elecs)
-        ifilter_discard(jets, deltaRLess(e, 0.2, RAPIDITY));
+        idiscard(jets, deltaRLess(e, 0.2, RAPIDITY));
       // Remove any electron within dR = 0.01 of a muon
       for (const Particle& m : muons)
-        ifilter_discard(elecs, deltaRLess(m, 0.01, RAPIDITY));
+        idiscard(elecs, deltaRLess(m, 0.01, RAPIDITY));
       // Assemble b-jets collection, and remove muons within dR = 0.2 of a b-tagged jet
       Jets bjets;
       for (const Jet& j : jets) {
         if (j.abseta() < 2.5 && j.pT() > 30*GeV && j.bTagged(Cuts::pT > 5*GeV)) {
           bjets += j;
-          ifilter_discard(muons, deltaRLess(j, 0.2, RAPIDITY));
+          idiscard(muons, deltaRLess(j, 0.2, RAPIDITY));
         }
       }
       // Remove any jet within dR = 0.2 of a muon if track conditions are met
       for (const Particle& m : muons)
-        ifilter_discard(jets, [&](const Jet& j){
+        idiscard(jets, [&](const Jet& j){
             if (deltaR(j,m) > 0.2) return false;
             /// @todo Add track efficiency random filtering
             const Particles trks = j.particles(Cuts::abscharge > 0 && Cuts::pT > 0.5*GeV);
@@ -98,26 +98,26 @@ namespace Rivet {
       for (const Jet& j : jets) {
         /// @todo Add track efficiency random filtering
         const size_t ntrks = j.particles(Cuts::abscharge > 0 && Cuts::pT > 0.5*GeV).size();
-        ifilter_discard(muons, [&](const Particle& m){
+        idiscard(muons, [&](const Particle& m){
             if (deltaR(j,m) > 0.2) return false;
             return ntrks > 3 && m.pT()/j.pT() < 0.7;
           });
       }
       // Remove any muon with dR close to a remaining jet, via a functional form
       for (const Jet& j : jets)
-        ifilter_discard(muons, [&](const Particle& m) { return deltaR(m,j, RAPIDITY) < min(0.4, 0.04 + 10*GeV/m.pT()); });
+        idiscard(muons, [&](const Particle& m) { return deltaR(m,j, RAPIDITY) < min(0.4, 0.04 + 10*GeV/m.pT()); });
 
 
       // Signal jet selection
-      const Jets sigjets = filter_select(jets, Cuts::pT > 30*GeV && Cuts::abseta < 2.8);
+      const Jets sigjets = select(jets, Cuts::pT > 30*GeV && Cuts::abseta < 2.8);
       const Jets sigbjets = bjets;
 
       // "Gradient-loose" signal lepton selection
       const ParticleEffFilter grad_loose_filter([](const Particle& e) { return e.pT() > 60*GeV ? 0.98 : 0.95; });
-      Particles sigelecs = filter_select(elecs, grad_loose_filter);
-      Particles sigmuons = filter_select(muons, grad_loose_filter);
+      Particles sigelecs = select(elecs, grad_loose_filter);
+      Particles sigmuons = select(muons, grad_loose_filter);
       // Tight electron selection (NB. assuming independent eff to gradient-loose... hmm)
-      ifilter_select(sigelecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_TIGHT));
+      iselect(sigelecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_TIGHT));
 
 
       // MET calculation (NB. done generically, with smearing, rather than via explicit physics objects)

@@ -46,16 +46,16 @@ namespace Rivet {
       rmduplicates(remove_duplicates) { }
 
 
-  Particles& ifilter_select(Particles& particles, const Cut& c) {
+  Particles& iselect(Particles& particles, const Cut& c) {
     if (c == Cuts::OPEN) return particles;
-    // return ifilter_select(particles, *c);
-    return ifilter_select(particles, [&](const Particle& p){return c->accept(p);});
+    // return iselect(particles, *c);
+    return iselect(particles, [&](const Particle& p){return c->accept(p);});
   }
 
-  Particles& ifilter_discard(Particles& particles, const Cut& c) {
+  Particles& idiscard(Particles& particles, const Cut& c) {
     if (c == Cuts::OPEN) { particles.clear(); return particles; }
-    // return ifilter_discard(particles, *c);
-    return ifilter_discard(particles, [&](const Particle& p){return c->accept(p);});
+    // return idiscard(particles, *c);
+    return idiscard(particles, [&](const Particle& p){return c->accept(p);});
   }
 
 

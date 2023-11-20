@@ -45,7 +45,7 @@ namespace Rivet {
     else // _lsort == ObjOrdering::ENERGY
       fsleptons = fs.particles(isLepton, cmpMomByE);
 
-    Particles sfleptons = filter_select(fsleptons, Cuts::pid == _incoming.pid());
+    Particles sfleptons = select(fsleptons, Cuts::pid == _incoming.pid());
     MSG_DEBUG("SF leptons = " << sfleptons.size() << ", all leptons = " << fsleptons.size());
     if ( sfleptons.empty() ) sfleptons = fsleptons;
 

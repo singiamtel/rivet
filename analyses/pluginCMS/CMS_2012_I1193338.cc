@@ -23,12 +23,11 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      if (cfs.size() > 1) {_h_sigma->fill(1.5, weight);}
-      if (cfs.size() > 2) {_h_sigma->fill(2.5, weight);}
-      if (cfs.size() > 3) {_h_sigma->fill(3.5, weight);}
+      if (cfs.size() > 1) {_h_sigma->fill(1.5);}
+      if (cfs.size() > 2) {_h_sigma->fill(2.5);}
+      if (cfs.size() > 3) {_h_sigma->fill(3.5);}
 
       const FinalState& fs = apply<FinalState>(event, "FS");
       if (fs.size() < 2) vetoEvent; // need at least two particles to calculate gaps
@@ -61,7 +60,7 @@ namespace Rivet {
       const double xi = M2/sqr(sqrtS()); // sqrt(s)=7000 GeV, note that units cancel
       if (xi < 5e-6) vetoEvent;
 
-      _h_sigma->fill(0.5, weight);
+      _h_sigma->fill(0.5);
     }
 
 

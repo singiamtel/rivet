@@ -43,8 +43,8 @@ namespace Rivet {
       const FastJets & jetsproj6 = apply<FastJets>(event, "Jets6");
       const FastJets & jetsproj4 = apply<FastJets>(event, "Jets4");
       Jets alljets[2];
-      alljets[0] = jetsproj6.jetsByPt(4.0*GeV);
-      alljets[1] = jetsproj4.jetsByPt(4.0*GeV);
+      alljets[0] = jetsproj6.jetsByPt(Cuts::pT > 4*GeV);
+      alljets[1] = jetsproj4.jetsByPt(Cuts::pT > 4*GeV);
 
       for (size_t i=0 ; i<2 ; i++) {
         Jets jets;

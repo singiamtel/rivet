@@ -40,16 +40,16 @@ namespace Rivet {
       ZJET = true;
       DIJET = true;
       if ( getOption("JMODE") == "W" ) {
-	ZJET = false;
-	DIJET = false;
+        ZJET = false;
+        DIJET = false;
       }
       if ( getOption("JMODE") == "Z" ) {
-	WJET = false;
-	DIJET = false;
+        WJET = false;
+        DIJET = false;
       }
       if ( getOption("JMODE") == "DIJET" ) {
-	WJET = false;
-	ZJET = false;
+        WJET = false;
+        ZJET = false;
       }
 
 
@@ -86,8 +86,7 @@ namespace Rivet {
 	// filling Z+jet histos
 
 	// Find Zs with pT > 120 GeV
-	ZFinder zfinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 30*GeV, PID::ELECTRON, 80*GeV, 100*GeV,
-			0.2, PhotonOrigin::NODECAY);
+	ZFinder zfinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 30*GeV, PID::ELECTRON, 80*GeV, 100*GeV, 0.2);
 	declare(zfinder, "ZFinder");
 
 	// Z+jet jet collections
@@ -169,7 +168,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       if (WJET) {
 
@@ -183,11 +181,11 @@ namespace Rivet {
 	  if (l.pT() >= 80*GeV && w.pT() >= 120*GeV) {
 
 	      // Get the pseudojets.
-	      const PseudoJets psjetsCA8_wj = apply<FastJets>(event, "JetsCA8_wj").pseudoJetsByPt( 50.0*GeV );
-	      const PseudoJets psjetsCA12_wj = apply<FastJets>(event, "JetsCA12_wj").pseudoJetsByPt( 50.0*GeV );
+	      const PseudoJets psjetsCA8_wj = apply<FastJets>(event, "JetsCA8_wj").pseudojetsByPt( 50.0*GeV );
+	      const PseudoJets psjetsCA12_wj = apply<FastJets>(event, "JetsCA12_wj").pseudojetsByPt( 50.0*GeV );
 
 	      // AK7 jets
-	      const PseudoJets psjetsAK7_wj = apply<FastJets>(event, "JetsAK7_wj").pseudoJetsByPt( 50.0*GeV );
+	      const PseudoJets psjetsAK7_wj = apply<FastJets>(event, "JetsAK7_wj").pseudojetsByPt( 50.0*GeV );
 	      if (!psjetsAK7_wj.empty()) {
 		// Get the leading jet and make sure it's back-to-back with the W
 		const fastjet::PseudoJet& j0 = psjetsAK7_wj[0];
@@ -197,10 +195,10 @@ namespace Rivet {
 		    fastjet::PseudoJet filtered0 = _filter(j0);
 		    fastjet::PseudoJet trimmed0 = _trimmer(j0);
 		    fastjet::PseudoJet pruned0 = _pruner(j0);
-		    _h_ungroomedJetMass_AK7_wj[njetBin]->fill(j0.m()/GeV, weight);
-		    _h_filteredJetMass_AK7_wj[njetBin]->fill(filtered0.m()/GeV, weight);
-		    _h_trimmedJetMass_AK7_wj[njetBin]->fill(trimmed0.m()/GeV, weight);
-		    _h_prunedJetMass_AK7_wj[njetBin]->fill(pruned0.m()/GeV, weight);
+		    _h_ungroomedJetMass_AK7_wj[njetBin]->fill(j0.m()/GeV);
+		    _h_filteredJetMass_AK7_wj[njetBin]->fill(filtered0.m()/GeV);
+		    _h_trimmedJetMass_AK7_wj[njetBin]->fill(trimmed0.m()/GeV);
+		    _h_prunedJetMass_AK7_wj[njetBin]->fill(pruned0.m()/GeV);
 		  }
 		}
 	      }
@@ -213,7 +211,7 @@ namespace Rivet {
 		  const size_t njetBin = findPtBin_vj(j0.pt()/GeV);
 		  if (njetBin < N_PT_BINS_vj) {
 		    fastjet::PseudoJet pruned0 = _pruner(j0);
-		    _h_prunedJetMass_CA8_wj[njetBin]->fill(pruned0.m()/GeV, weight);
+		    _h_prunedJetMass_CA8_wj[njetBin]->fill(pruned0.m()/GeV);
 		  }
 		}
 	      }
@@ -226,7 +224,7 @@ namespace Rivet {
 		  const size_t njetBin = findPtBin_vj(j0.pt()/GeV);
 		  if (njetBin < N_PT_BINS_vj&&njetBin>0) {
 		    fastjet::PseudoJet filtered0 = _filter(j0);
-		    _h_filteredJetMass_CA12_wj[njetBin]->fill( filtered0.m() / GeV, weight);
+		    _h_filteredJetMass_CA12_wj[njetBin]->fill( filtered0.m() / GeV);
 		  }
 		}
 	      }
@@ -252,7 +250,7 @@ namespace Rivet {
 	  if (l1.pT() >= 30*GeV && l2.pT() >= 30*GeV && z.pT() >= 120*GeV) {
 
 	    // AK7 jets
-	    const PseudoJets& psjetsAK7_zj = apply<FastJets>(event, "JetsAK7_zj").pseudoJetsByPt(50.0*GeV);
+	    const PseudoJets& psjetsAK7_zj = apply<FastJets>(event, "JetsAK7_zj").pseudojetsByPt(50.0*GeV);
 	    if (!psjetsAK7_zj.empty()) {
 	      // Get the leading jet and make sure it's back-to-back with the Z
 	      const fastjet::PseudoJet& j0 = psjetsAK7_zj[0];
@@ -262,16 +260,16 @@ namespace Rivet {
 		  fastjet::PseudoJet filtered0 = _filter(j0);
 		  fastjet::PseudoJet trimmed0 = _trimmer(j0);
 		  fastjet::PseudoJet pruned0 = _pruner(j0);
-		  _h_ungroomedJetMass_AK7_zj[njetBin]->fill(j0.m()/GeV, weight);
-		  _h_filteredJetMass_AK7_zj[njetBin]->fill(filtered0.m()/GeV, weight);
-		  _h_trimmedJetMass_AK7_zj[njetBin]->fill(trimmed0.m()/GeV, weight);
-		  _h_prunedJetMass_AK7_zj[njetBin]->fill(pruned0.m()/GeV, weight);
+		  _h_ungroomedJetMass_AK7_zj[njetBin]->fill(j0.m()/GeV);
+		  _h_filteredJetMass_AK7_zj[njetBin]->fill(filtered0.m()/GeV);
+		  _h_trimmedJetMass_AK7_zj[njetBin]->fill(trimmed0.m()/GeV);
+		  _h_prunedJetMass_AK7_zj[njetBin]->fill(pruned0.m()/GeV);
 		}
 	      }
 	    }
 
 	    // CA8 jets
-	    const PseudoJets& psjetsCA8_zj = apply<FastJets>(event, "JetsCA8_zj").pseudoJetsByPt(50.0*GeV);
+	    const PseudoJets& psjetsCA8_zj = apply<FastJets>(event, "JetsCA8_zj").pseudojetsByPt(50.0*GeV);
 	    if (!psjetsCA8_zj.empty()) {
 	      // Get the leading jet and make sure it's back-to-back with the Z
 	      const fastjet::PseudoJet& j0 = psjetsCA8_zj[0];
@@ -279,13 +277,13 @@ namespace Rivet {
 		const size_t njetBin = findPtBin_vj(j0.pt()/GeV);
 		if (njetBin < N_PT_BINS_vj) {
 		  fastjet::PseudoJet pruned0 = _pruner(j0);
-		  _h_prunedJetMass_CA8_zj[njetBin]->fill(pruned0.m()/GeV, weight);
+		  _h_prunedJetMass_CA8_zj[njetBin]->fill(pruned0.m()/GeV);
 		}
 	      }
 	    }
 
 	    // CA12 jets
-	    const PseudoJets& psjetsCA12_zj = apply<FastJets>(event, "JetsCA12_zj").pseudoJetsByPt(50.0*GeV);
+	    const PseudoJets& psjetsCA12_zj = apply<FastJets>(event, "JetsCA12_zj").pseudojetsByPt(50.0*GeV);
 	    if (!psjetsCA12_zj.empty()) {
 	      // Get the leading jet and make sure it's back-to-back with the Z
 	      const fastjet::PseudoJet& j0 = psjetsCA12_zj[0];
@@ -293,7 +291,7 @@ namespace Rivet {
 		const size_t njetBin = findPtBin_vj(j0.pt()/GeV);
 		if (njetBin>0 && njetBin < N_PT_BINS_vj) {
 		  fastjet::PseudoJet filtered0 = _filter(j0);
-		  _h_filteredJetMass_CA12_zj[njetBin]->fill( filtered0.m() / GeV, weight);
+		  _h_filteredJetMass_CA12_zj[njetBin]->fill( filtered0.m() / GeV);
 		}
 	      }
 	    }
@@ -303,7 +301,7 @@ namespace Rivet {
 
       if (DIJET) {
 	// Look at events with >= 2 jets
-	const PseudoJets& psjetsAK7 = apply<FastJets>(event, "JetsAK7").pseudoJetsByPt( 50.0*GeV );
+	const PseudoJets& psjetsAK7 = apply<FastJets>(event, "JetsAK7").pseudojetsByPt( 50.0*GeV );
 	if (psjetsAK7.size() >= 2) {
 
 	  // Get the leading two jets and find their average pT
@@ -324,10 +322,10 @@ namespace Rivet {
 	    fastjet::PseudoJet pruned1 = _pruner(j1);
 
 	    // ... and fill the histograms
-	    _h_ungroomedAvgJetMass_dj[njetBin]->fill(0.5*(j0.m() + j1.m())/GeV, weight);
-	    _h_filteredAvgJetMass_dj[njetBin]->fill(0.5*(filtered0.m() + filtered1.m())/GeV, weight);
-	    _h_trimmedAvgJetMass_dj[njetBin]->fill(0.5*(trimmed0.m() + trimmed1.m())/GeV, weight);
-	    _h_prunedAvgJetMass_dj[njetBin]->fill(0.5*(pruned0.m() + pruned1.m())/GeV, weight);
+	    _h_ungroomedAvgJetMass_dj[njetBin]->fill(0.5*(j0.m() + j1.m())/GeV);
+	    _h_filteredAvgJetMass_dj[njetBin]->fill(0.5*(filtered0.m() + filtered1.m())/GeV);
+	    _h_trimmedAvgJetMass_dj[njetBin]->fill(0.5*(trimmed0.m() + trimmed1.m())/GeV);
+	    _h_prunedAvgJetMass_dj[njetBin]->fill(0.5*(pruned0.m() + pruned1.m())/GeV);
 	  }
 	}
       }

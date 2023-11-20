@@ -19,8 +19,7 @@ namespace Rivet {
 
     void init() {
       // Set up projections
-      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON,
-                      66*GeV, 116*GeV, 0.0, PhotonOrigin::NONE);
+      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 66*GeV, 116*GeV, 0.0);
       declare(zfinder, "ZFinder");
 
       // Book histogram

@@ -42,7 +42,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const Particles& photons = apply<IdentifiedFinalState>(event, "IFS").particlesByPt();
 
@@ -71,13 +70,13 @@ namespace Rivet {
         vetoEvent;
       }
 
-      _h_pT_P1->fill(isolated_photons[0].pT(), weight);
-      _h_pT_P2->fill(isolated_photons[1].pT(), weight);
+      _h_pT_P1->fill(isolated_photons[0].pT());
+      _h_pT_P2->fill(isolated_photons[1].pT());
       FourMomentum mom_PP = isolated_photons[0].momentum() + isolated_photons[1].momentum();
-      _h_m_PP->fill(mom_PP.mass(), weight);
-      _h_pT_PP->fill(mom_PP.pT(), weight);
+      _h_m_PP->fill(mom_PP.mass());
+      _h_pT_PP->fill(mom_PP.pT());
       _h_dphi_PP->fill(deltaPhi(isolated_photons[0].phi(),
-                                isolated_photons[1].phi()), weight);
+                                isolated_photons[1].phi()));
     }
 
 

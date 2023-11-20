@@ -4,7 +4,7 @@
 
 namespace Rivet {
 
-  
+
   /// @ CDF Run II Z \f$ p_\perp \f$ in Drell-Yan events
   /// @author Simone Amoroso
   class CDF_2012_I1124333 : public Analysis {
@@ -21,7 +21,7 @@ namespace Rivet {
     void init() {
 
       ///  Initialise and register projections
-      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 66*GeV, 116*GeV, 0.0, PhotonOrigin::NONE);
+      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 66*GeV, 116*GeV, 0.0);
       declare(zfinder, "ZFinder");
 
       ///  Book histograms
@@ -58,7 +58,7 @@ namespace Rivet {
 
 
   private:
-    
+
     /// @name Histograms
     /// @{
     Histo1DPtr _hist_zpt;

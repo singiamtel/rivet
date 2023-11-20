@@ -145,61 +145,40 @@ namespace Rivet {
   /// @{
 
   /// Filter a jet collection in-place to the subset that passes the supplied Cut
-  Jets& ifilter_select(Jets& jets, const Cut& c);
-  /// Alias for ifilter_select
-  /// @deprecated Use ifilter_select
-  inline Jets& ifilterBy(Jets& jets, const Cut& c) { return ifilter_select(jets, c); }
-  /// New alias for ifilter_select
-  inline Jets& iselect(Jets& jets, const Cut& c) { return ifilter_select(jets, c); }
+  Jets& iselect(Jets& jets, const Cut& c);
 
 
   /// Filter a jet collection in-place to the subset that passes the supplied Cut
-  inline Jets filter_select(const Jets& jets, const Cut& c) {
+  inline Jets select(const Jets& jets, const Cut& c) {
     Jets rtn = jets;
-    return ifilter_select(rtn, c);
+    return iselect(rtn, c);
   }
-  /// Alias for filter_select
-  /// @deprecated Use filter_select
-  inline Jets filterBy(const Jets& jets, const Cut& c) { return filter_select(jets, c); }
-  /// New alias for filter_select
-  inline Jets select(const Jets& jets, const Cut& c) { return filter_select(jets, c); }
 
 
   /// Filter a jet collection in-place to the subset that passes the supplied Cut
-  inline Jets filter_select(const Jets& jets, const Cut& c, Jets& out) {
-    out = filter_select(jets, c);
+  inline Jets select(const Jets& jets, const Cut& c, Jets& out) {
+    out = select(jets, c);
     return out;
   }
-  /// Alias for filter_select
-  /// @deprecated Use filter_select
-  inline Jets filterBy(const Jets& jets, const Cut& c, Jets& out) { return filter_select(jets, c, out); }
-  /// New alias for filter_select
-  inline Jets select(const Jets& jets, const Cut& c, Jets& out) { return filter_select(jets, c, out); }
 
 
 
   /// Filter a jet collection in-place to the subset that fails the supplied Cut
-  Jets& ifilter_discard(Jets& jets, const Cut& c);
-  /// New alias for ifilter_discard
-  inline Jets& idiscard(Jets& jets, const Cut& c) { return ifilter_discard(jets, c); }
+  Jets& idiscard(Jets& jets, const Cut& c);
 
 
   /// Filter a jet collection in-place to the subset that fails the supplied Cut
-  inline Jets filter_discard(const Jets& jets, const Cut& c) {
+  inline Jets discard(const Jets& jets, const Cut& c) {
     Jets rtn = jets;
-    return ifilter_discard(rtn, c);
+    return idiscard(rtn, c);
   }
-  /// New alias for filter_discard
-  inline Jets discard(const Jets& jets, const Cut& c) { return filter_discard(jets, c); }
 
 
   /// Filter a jet collection in-place to the subset that fails the supplied Cut
-  inline Jets filter_discard(const Jets& jets, const Cut& c, Jets& out) {
-    out = filter_discard(jets, c);
+  inline Jets discard(const Jets& jets, const Cut& c, Jets& out) {
+    out = discard(jets, c);
     return out;
   }
-  /// New alias for filter_discard
-  inline Jets discard(const Jets& jets, const Cut& c, Jets& out) { return filter_discard(jets, c, out); }
 
   /// @}
 

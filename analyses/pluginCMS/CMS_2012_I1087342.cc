@@ -25,7 +25,6 @@ namespace Rivet {
     }
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const FastJets& fj = apply<FastJets>(event,"Jets");
       const Jets jets = fj.jets(Cuts::ptIn(35*GeV, 150*GeV) && Cuts::abseta < 4.7);
@@ -36,7 +35,7 @@ namespace Rivet {
       for(const Jet& j : jets) {
         double pT = j.pT();
         if (j.abseta() > 3.2) {
-          _hist_jetpt_fwdincl->fill(j.pT()/GeV, weight);
+          _hist_jetpt_fwdincl->fill(j.pT()/GeV);
         }
         if (j.abseta() < 2.8) {
           if (cjet_pt < pT) cjet_pt = pT;
@@ -47,8 +46,8 @@ namespace Rivet {
       }
 
       if (cjet_pt > 35*GeV && fjet_pt > 35*GeV) {
-        _hist_jetpt_forward->fill(fjet_pt/GeV, weight);
-        _hist_jetpt_central->fill(cjet_pt/GeV, weight);
+        _hist_jetpt_forward->fill(fjet_pt/GeV);
+        _hist_jetpt_central->fill(cjet_pt/GeV);
       }
 
     }

@@ -13,12 +13,12 @@ namespace Rivet {
 
   /// Enum for the treatment of muons: whether to include all, some, or none in jet-finding
   enum class JetMuons { NONE, DECAY, ALL };
-  
+
   /// Enum for the treatment of invisible particles: whether to include all, some, or none in jet-finding
   enum class JetInvisibles { NONE, DECAY, ALL };
 
 
-  
+
   /// Abstract base class for projections which can return a set of {@link Jet}s.
   class JetFinder : public Projection {
   public:
@@ -27,10 +27,10 @@ namespace Rivet {
     JetFinder(const FinalState& fs,
 	      JetMuons usemuons = JetMuons::ALL,
 	      JetInvisibles useinvis = JetInvisibles::NONE);
-    
+
     /// Default constructor
     JetFinder() = default;
-    
+
     /// Clone on the heap.
     virtual unique_ptr<Projection> clone() const = 0;
 
@@ -76,13 +76,13 @@ namespace Rivet {
     /// Get jets in no guaranteed order, with an optional Cut
     /// @note Returns a copy rather than a reference, due to cuts
     virtual Jets jets(const Cut& c=Cuts::open()) const {
-      return filter_select(_jets(), c);
+      return select(_jets(), c);
     }
 
     /// Get jets in no guaranteed order, with a selection functor
     /// @note Returns a copy rather than a reference, due to cuts
     virtual Jets jets(const JetSelector& selector) const {
-      return filter_select(_jets(), selector);
+      return select(_jets(), selector);
     }
 
 
@@ -130,16 +130,6 @@ namespace Rivet {
     /// This is a very common use-case, so is available as syntatic sugar for jets(c, cmpMomByPt).
     Jets jetsByPt(const JetSelector& selector) const {
       return jets(selector, cmpMomByPt);
-    }
-
-    /// Get the jets, ordered by \f$ p_T \f$, with a cut on \f$ p_\perp \f$.
-    ///
-    /// @deprecated Use the version with a Cut argument
-    /// @note Returns a copy rather than a reference, due to cuts and sorting
-    ///
-    /// This is a very common use-case, so is available as syntatic sugar for jets(Cuts::pT >= ptmin, cmpMomByPt).
-    Jets jetsByPt(double ptmin) const {
-      return jets(Cuts::pT >= ptmin, cmpMomByPt);
     }
 
     /// @}

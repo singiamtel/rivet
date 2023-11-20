@@ -61,24 +61,23 @@ namespace Rivet {
       }
 
       // Fill histograms
-      const double weight = 1.0;
       if (bjets.size() >= 2 && ljets.size() >= 2) {
-        _h_LeadingBJetpt->fill(bjets[0].pT()/GeV, weight);
-        _h_SubleadingBJetpt->fill(bjets[1].pT()/GeV, weight);
-        _h_LeadingLightJetpt->fill(ljets[0].pT()/GeV, weight);
-        _h_SubleadingLightJetpt->fill(ljets[1].pT()/GeV, weight);
+        _h_LeadingBJetpt->fill(bjets[0].pT()/GeV);
+        _h_SubleadingBJetpt->fill(bjets[1].pT()/GeV);
+        _h_LeadingLightJetpt->fill(ljets[0].pT()/GeV);
+        _h_SubleadingLightJetpt->fill(ljets[1].pT()/GeV);
         //
-        _h_LeadingBJeteta->fill(bjets[0].eta(), weight);
-        _h_SubleadingBJeteta->fill(bjets[1].eta(), weight);
-        _h_LeadingLightJeteta->fill(ljets[0].eta(), weight);
-        _h_SubleadingLightJeteta->fill(ljets[1].eta(), weight);
+        _h_LeadingBJeteta->fill(bjets[0].eta());
+        _h_SubleadingBJeteta->fill(bjets[1].eta());
+        _h_LeadingLightJeteta->fill(ljets[0].eta());
+        _h_SubleadingLightJeteta->fill(ljets[1].eta());
 
         const double lightdphi = deltaPhi(ljets[0], ljets[1]);
-        _h_deltaphiafterlight->fill(lightdphi, weight);
+        _h_deltaphiafterlight->fill(lightdphi);
 
         const double vecsumlightjets = sqrt(sqr(ljets[0].px()+ljets[1].px()) + sqr(ljets[0].py()+ljets[1].py())); //< @todo Just (lj0+lj1).pT()? Or use add_quad
         const double term2 = vecsumlightjets/(sqrt(sqr(ljets[0].px()) + sqr(ljets[0].py())) + sqrt(sqr(ljets[1].px()) + sqr(ljets[1].py()))); //< @todo lj0.pT() + lj1.pT()? Or add_quad
-        _h_SumPLight->fill(term2, weight);
+        _h_SumPLight->fill(term2);
 
         const double pxBsyst2 = bjets[0].px()+bjets[1].px(); // @todo (bj0+bj1).px()
         const double pyBsyst2 = bjets[0].py()+bjets[1].py(); // @todo (bj0+bj1).py()
@@ -91,7 +90,7 @@ namespace Rivet {
         const double phiBsyst2 = ((pyBsyst2 > 0) ? 1 : -1) * acos(cosphiBsyst2); //< @todo sign(pyBsyst2)
         const double phiJetssyst2 = sign(pyJetssyst2) * acos(cosphiJetssyst2);
         const double Dphi2 = deltaPhi(phiBsyst2, phiJetssyst2);
-        _h_Deltaphi_newway->fill(Dphi2,weight);
+        _h_Deltaphi_newway->fill(Dphi2);
       }
     }
 

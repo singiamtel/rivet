@@ -78,10 +78,8 @@ namespace Rivet {
       if (_sedges.empty())  _sedges = _h_jet_multi_inclusive->xEdges();
 
       vector<FourMomentum> jets04;
-      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets04").jetsByPt(60.0*GeV)) {
-        if (jet.abseta() < 2.8) {
+      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 60*GeV && Cuts::abseta < 2.8)) {
           jets04.push_back(jet.momentum());
-        }
       }
 
       if (jets04.size() > 1 && jets04[0].pT() > 80.0*GeV) {
@@ -118,10 +116,8 @@ namespace Rivet {
 
       /// @todo It'd be better to avoid duplicating 95% of the code!
       vector<FourMomentum> jets06;
-      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets06").jetsByPt(60.0*GeV)) {
-        if (jet.abseta() < 2.8) {
+      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets06").jetsByPt(Cuts::pT > 60*GeV && Cuts::abseta < 2.8)) {
           jets06.push_back(jet.momentum());
-        }
       }
       if (jets06.size() > 1 && jets06[0].pT() > 80.0*GeV) {
         double pT1(jets06[0].pT()), pT2(jets06[1].pT());

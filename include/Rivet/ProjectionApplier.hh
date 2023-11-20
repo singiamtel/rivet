@@ -83,11 +83,11 @@ namespace Rivet {
     ///TODO @TP: Recursion?
     template <typename PROJ>
     const PROJ& getProjectionFromDeclQueue(const std::string name) const {
-      auto it = std::find_if(_declQueue.begin(), _declQueue.end(), 
+      auto it = std::find_if(_declQueue.begin(), _declQueue.end(),
           [&name](const std::pair<std::shared_ptr<Projection>, std::string> &Qmember) {return Qmember.second == name;});
       if (it != _declQueue.end()){
         return dynamic_cast<PROJ&>(*(it->first));
-      }                          
+      }
       else {
         //If projection isn't found, deal with it properly.
         MSG_ERROR("Projection " << name << " not found in declQueue of " << this << " (" << this->name() << ")");
@@ -100,55 +100,29 @@ namespace Rivet {
     /// @name Projection applying functions
     /// @{
 
-  private:
-    /// Apply the supplied projection on event @a evt.
-    ///
-    /// @deprecated Prefer the simpler apply<> form
-    template <typename PROJ=Projection>
-    typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
-    applyProjection(const Event& evt, const Projection& proj) const {
-      return pcast<PROJ>(_applyProjection(evt, proj));
-    }
-
-    /// Apply the supplied projection on event @a evt.
-    ///
-    /// @deprecated Prefer the simpler apply<> form
-    template <typename PROJ=Projection>
-    typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
-    applyProjection(const Event& evt, const PROJ& proj) const {
-      return pcast<PROJ>(_applyProjection(evt, proj));
-    }
-
-    /// Apply the named projection on event @a evt.
-    ///
-    /// @deprecated Prefer the simpler apply<> form
-    template <typename PROJ=Projection>
-    typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
-    applyProjection(const Event& evt, const std::string& name) const {
-      return pcast<PROJ>(_applyProjection(evt, name));
-    }
-
   public:
 
-    /// Apply the supplied projection on event @a evt (user-facing alias).
-    template <typename PROJ=Projection>
-    typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
-    apply(const Event& evt, const Projection& proj) const { return applyProjection<PROJ>(evt, proj); }
+    /// Apply the supplied projection on event @a evt.
 
     /// Apply the supplied projection on event @a evt (user-facing alias).
     template <typename PROJ=Projection>
     typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
-    apply(const Event& evt, const PROJ& proj) const { return applyProjection<PROJ>(evt, proj); }
+    apply(const Event& evt, const Projection& proj) const { return pcast<PROJ>(_apply(evt, proj)); }
 
     /// Apply the supplied projection on event @a evt (user-facing alias).
     template <typename PROJ=Projection>
     typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
-    apply(const Event& evt, const std::string& name) const { return applyProjection<PROJ>(evt, name); }
+    apply(const Event& evt, const PROJ& proj) const { return pcast<PROJ>(_apply(evt, proj)); }
+
+    /// Apply the supplied projection on event @a evt (user-facing alias).
+    template <typename PROJ=Projection>
+    typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
+    apply(const Event& evt, const std::string& name) const { return pcast<PROJ>(_apply(evt, name)); }
 
     /// Apply the supplied projection on event @a evt (convenience arg-reordering alias).
     template <typename PROJ=Projection>
     typename std::enable_if_t<std::is_base_of<Projection, PROJ>::value, const PROJ&>
-    apply(const std::string& name, const Event& evt) const { return applyProjection<PROJ>(evt, name); }
+    apply(const std::string& name, const Event& evt) const { return pcast<PROJ>(_apply(evt, name)); }
 
     /// @}
 
@@ -198,7 +172,7 @@ namespace Rivet {
     /// @brief Register a contained projection (user-facing version)
     /// @todo Add SFINAE to require that PROJ inherit from Projection
     template <typename PROJ>
-    const PROJ& declare(const PROJ& proj, const std::string& name) const { 
+    const PROJ& declare(const PROJ& proj, const std::string& name) const {
       std::shared_ptr<Projection> projClone = proj.clone();
       _declQueue.push_back(make_pair(projClone, name));
       return (dynamic_cast<PROJ&>(*projClone));
@@ -219,18 +193,18 @@ namespace Rivet {
     /// @}
 
 
-    /// Non-templated version of string-based applyProjection, to work around
+    /// Non-templated version of string-based apply, to work around
     /// header dependency issue.
-    const Projection& _applyProjection(const Event& evt, const std::string& name) const;
+    const Projection& _apply(const Event& evt, const std::string& name) const;
 
-    /// Non-templated version of proj-based applyProjection, to work around
+    /// Non-templated version of proj-based apply, to work around
     /// header dependency issue.
-    const Projection& _applyProjection(const Event& evt, const Projection& proj) const;
+    const Projection& _apply(const Event& evt, const Projection& proj) const;
 
 
     /// @todo AB: Add Doxygen comment, follow surrounding coding style
     void setProjectionHandler(ProjectionHandler& projectionHandler) const;
-  
+
     /// Flag to forbid projection registration in analyses until the init phase
     bool _allowProjReg;
 

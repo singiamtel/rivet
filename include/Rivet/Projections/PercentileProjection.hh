@@ -9,7 +9,7 @@
 namespace Rivet {
 
   enum class PercentileOrder { INCREASING, DECREASING };
-  
+
 
   /// @brief class for projections that reports the percentile for a
   /// given SingleValueProjection when initialized with a Histo1D of the
@@ -63,7 +63,7 @@ namespace Rivet {
       }
     }
 
-    
+
     // Constructor taking a SingleValueProjection and a calibration
     // histogram. If increasing it means that low values corresponds to
     // lower percentiles.
@@ -98,7 +98,7 @@ namespace Rivet {
       }
     }
 
-    
+
     RIVET_DEFAULT_PROJ_CLONE(PercentileProjection);
 
     /// Import to avoid warnings about overload-hiding
@@ -116,7 +116,7 @@ namespace Rivet {
       auto&  pobs = apply<SingleValueProjection>(e, "OBSERVABLE");
       double obs  = pobs();
       double pcnt = lookup(obs);
-      if ( pcnt >= 0.0 ) set(pcnt);
+      if ( pcnt >= 0.0 ) setValue(pcnt);
       MSG_DEBUG("Observable(" << pobs.name() << ")="
                 << std::setw(16) << obs
                 << "-> Percentile=" << std::setw(16) << pcnt << "%");

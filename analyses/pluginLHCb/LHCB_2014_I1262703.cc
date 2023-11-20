@@ -20,7 +20,7 @@ namespace Rivet {
 
       // Projections
       const Cut mycut = Cuts::eta >= 2.0 && Cuts::eta <= 4.5 && Cuts::pT > 20*GeV;
-      ZFinder zfinder(FinalState(), mycut, PID::MUON, 60*GeV, 120*GeV, 0., PhotonOrigin::NONE);
+      ZFinder zfinder(FinalState(), mycut, PID::MUON, 60*GeV, 120*GeV, 0.);
       declare(zfinder, "ZFinder");
       FastJets jetpro(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5);
       declare(jetpro, "Jets");
@@ -53,7 +53,7 @@ namespace Rivet {
       if (jets.empty()) vetoEvent;
 
       // Clean the jets against the lepton candidates with a deltaR cut of 0.4
-      const Jets cleanedJets = filter_discard(jets, [&](const Jet& j) { return any(leptons, deltaRLess(j, 0.4)); });
+      const Jets cleanedJets = discard(jets, [&](const Jet& j) { return any(leptons, deltaRLess(j, 0.4)); });
       // vector<const Jet*> cleanedJets;
       // for (size_t i = 0; i < jets.size(); i++) {
       //   bool isolated = true;

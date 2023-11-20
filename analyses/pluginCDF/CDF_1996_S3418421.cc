@@ -32,7 +32,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(50.0*GeV);
+      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 50.0*GeV);
       if (jets.size() < 2) vetoEvent;
 
       const FourMomentum jet1 = jets[0].momentum();

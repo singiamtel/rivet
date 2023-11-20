@@ -105,26 +105,26 @@ namespace Rivet {
       // Remove electrons within dR = 0.2 of a b-tagged jet
       for (const Jet& j : jets)
         if (j.abseta() < 2.5 && j.pT() > 50*GeV && j.bTagged(Cuts::pT > 5*GeV))
-          ifilter_discard(elecs, deltaRLess(j, 0.2, RAPIDITY));
+          idiscard(elecs, deltaRLess(j, 0.2, RAPIDITY));
       // Remove any |eta| < 2.8 jet within dR = 0.2 of a remaining electron
       for (const Particle& e : elecs)
-        ifilter_discard(jets, deltaRLess(e, 0.2, RAPIDITY));
+        idiscard(jets, deltaRLess(e, 0.2, RAPIDITY));
       // Remove any electron with dR in [0.2, 0.4] of a remaining jet
       for (const Jet& j : jets)
-        ifilter_discard(elecs, [&](const Particle& e) { return inRange(deltaR(e,j, RAPIDITY), 0.2, 0.4); });
+        idiscard(elecs, [&](const Particle& e) { return inRange(deltaR(e,j, RAPIDITY), 0.2, 0.4); });
       // Remove any muon with dR close to a remaining jet, via a functional form
       for (const Jet& j : jets)
-        ifilter_discard(muons, [&](const Particle& m) { return deltaR(m,j, RAPIDITY) < min(0.4, 0.04 + 10*GeV/m.pT()); });
+        idiscard(muons, [&](const Particle& m) { return deltaR(m,j, RAPIDITY) < min(0.4, 0.04 + 10*GeV/m.pT()); });
       // Remove any |eta| < 2.8 jet within dR = 0.2 of a remaining muon if track conditions are met
       for (const Particle& m : muons)
         /// @todo Add track efficiency random filtering
-        ifilter_discard(jets, [&](const Jet& j) {
+        idiscard(jets, [&](const Jet& j) {
             if (deltaR(j,m, RAPIDITY) > 0.2) return false;
             const Particles trks = j.particles(Cuts::abscharge > 0 && Cuts::pT > 0.5*GeV);
             return trks.size() < 3 || (m.pT() > 2*j.pT() && m.pT() > 0.7*sum(trks, pT, 0.0));
           });
       // Loose electron selection
-      ifilter_select(elecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_LOOSE));
+      iselect(elecs, ParticleEffFilter(ELECTRON_EFF_ATLAS_RUN2_LOOSE));
 
       // Veto the event if there are any remaining baseline leptons
       if (!elecs.empty()) vetoEvent;
@@ -135,7 +135,7 @@ namespace Rivet {
 
       // Get jets and their pTs
       const Jets jets20 = jets;
-      const Jets jets50 = filterBy(jets, Cuts::pT > 50*GeV);
+      const Jets jets50 = select(jets, Cuts::pT > 50*GeV);
       const size_t njets50 = jets50.size(), njets20 = jets20.size();
       if (jets50.size() < 2) vetoEvent;
       vector<double> jetpts20, jetpts50;

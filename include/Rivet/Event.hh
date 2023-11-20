@@ -100,7 +100,7 @@ namespace Rivet {
     ///
     /// @note Due to the cut, this returns by value, i.e. involves an expensive copy
     inline Particles allParticles(const Cut& c) const {
-      return filter_select(allParticles(), c);
+      return select(allParticles(), c);
     }
 
     /// @brief All the raw GenEvent particles, wrapped in Rivet::Particle objects, but with a selection function applied
@@ -108,7 +108,7 @@ namespace Rivet {
     /// @note Due to the cut, this returns by value, i.e. involves an expensive copy
     template <typename FN>
     inline Particles allParticles(const FN& f) const {
-      return filter_select(allParticles(), f);
+      return select(allParticles(), f);
     }
 
     /// @brief The generation weights associated with the event
@@ -117,9 +117,6 @@ namespace Rivet {
     /// @brief The generation cross-sections associated with the event
     std::vector<std::pair<double, double>> crossSections() const;
 
-    /// @brief Obsolete weight method. Always returns 1 now.
-    DEPRECATED("Event weight does not need to be included anymore. For compatibility, it's always == 1 now.")
-    double weight() const { return 1.0; }
     /// @}
 
     /// @name Projection running

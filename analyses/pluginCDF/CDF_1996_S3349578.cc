@@ -121,7 +121,7 @@ namespace Rivet {
       for (Jet jet : jets) {
         jets3.push_back(cms_boost.transform(jet.momentum()));
       }
-      std::sort(jets3.begin(), jets3.end(), FourMomentum::byEDescending());
+      isortBy(jets3, cmpMomByE);
       FourMomentum p3(jets3[0]), p4(jets3[1]), p5(jets3[2]);
 
       FourMomentum pAV = cms_boost.transform(_avg_beam_in_lab(m3J, jetsystem.rapidity()));
@@ -168,11 +168,11 @@ namespace Rivet {
       for (Jet jet : jets) {
         jets4.push_back(cms_boost.transform(jet.momentum()));
       }
-      std::sort(jets4.begin(), jets4.end(), FourMomentum::byEDescending());
+      isortBy(jets4, cmpMomByE);
 
       FourMomentum pA, pB;
       vector<FourMomentum> jets3(_reduce(jets4, pA, pB));
-      std::sort(jets3.begin(), jets3.end(), FourMomentum::byEDescending());
+      isortBy(jets3, cmpMomByE);
       FourMomentum p3(jets3[0]);
       FourMomentum p4(jets3[1]);
       FourMomentum p5(jets3[2]);
@@ -233,15 +233,15 @@ namespace Rivet {
       for (Jet jet : jets) {
         jets5.push_back(cms_boost.transform(jet.momentum()));
       }
-      std::sort(jets5.begin(), jets5.end(), FourMomentum::byEDescending());
+      isortBy(jets5, cmpMomByE);
 
       FourMomentum pC, pD;
       vector<FourMomentum> jets4(_reduce(jets5, pC, pD));
-      std::sort(jets4.begin(), jets4.end(), FourMomentum::byEDescending());
+      isortBy(jets4, cmpMomByE);
 
       FourMomentum pA, pB;
       vector<FourMomentum> jets3(_reduce(jets4, pA, pB));
-      std::sort(jets3.begin(), jets3.end(), FourMomentum::byEDescending());
+      isortBy(jets3, cmpMomByE);
       FourMomentum p3(jets3[0]);
       FourMomentum p4(jets3[1]);
       FourMomentum p5(jets3[2]);

@@ -27,8 +27,7 @@ namespace Rivet {
 
       Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
 
-      ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV,
-                        0.2, PhotonOrigin::NODECAY);
+      ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV, 0.2);
       declare(zeefinder, "ZeeFinder");
 
       VetoedFinalState zmminput;
@@ -39,9 +38,8 @@ namespace Rivet {
       const double ptmucut = getOption<double>("PTMUMIN", 25.);
 
       Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
-      
-      ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV,
-                        0.2, PhotonOrigin::NODECAY);
+
+      ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV, 0.2);
       declare(zmmfinder, "ZmmFinder");
 
       // Properties of the pair momentum
@@ -94,44 +92,43 @@ namespace Rivet {
       const FourMomentum& mp = zmmfinder.constituents()[0].momentum();
       const FourMomentum& mm = zmmfinder.constituents()[1].momentum();
 
-      const double weight = 1.0;
-      _h_ZZ_pT->fill(zz.pT()/GeV, weight);
-      _h_ZZ_pT_peak->fill(zz.pT()/GeV, weight);
-      _h_ZZ_eta->fill(zz.eta(), weight);
-      _h_ZZ_phi->fill(zz.phi(), weight);
+      _h_ZZ_pT->fill(zz.pT()/GeV);
+      _h_ZZ_pT_peak->fill(zz.pT()/GeV);
+      _h_ZZ_eta->fill(zz.eta());
+      _h_ZZ_phi->fill(zz.phi());
       if (zz.mass2() > 0.0) ///< @todo Protection still needed?
-        _h_ZZ_m->fill(zz.mass()/GeV, weight);
+        _h_ZZ_m->fill(zz.mass()/GeV);
 
-      _h_ZZ_dphi->fill(deltaPhi(zee, zmm), weight);
-      _h_ZZ_deta->fill(zee.eta()-zmm.eta(), weight);
-      _h_ZZ_dR->fill(deltaR(zee,zmm), weight);
-      _h_ZZ_dpT->fill(fabs(zee.pT()-zmm.pT()), weight);
+      _h_ZZ_dphi->fill(deltaPhi(zee, zmm));
+      _h_ZZ_deta->fill(zee.eta()-zmm.eta());
+      _h_ZZ_dR->fill(deltaR(zee,zmm));
+      _h_ZZ_dpT->fill(fabs(zee.pT()-zmm.pT()));
 
       const Vector3 crossZee = ep.p3().cross(em.p3());
       const Vector3 crossZmm = mp.p3().cross(mm.p3());
       const double costheta = crossZee.dot(crossZmm)/crossZee.mod()/crossZmm.mod();
-      _h_ZZ_costheta_planes->fill(costheta, weight);
+      _h_ZZ_costheta_planes->fill(costheta);
 
-      _h_Z_pT->fill(zee.pT()/GeV, weight);
-      _h_Z_pT->fill(zmm.pT()/GeV, weight);
-      _h_Z_eta->fill(zee.eta(), weight);
-      _h_Z_eta->fill(zmm.eta(), weight);
+      _h_Z_pT->fill(zee.pT()/GeV);
+      _h_Z_pT->fill(zmm.pT()/GeV);
+      _h_Z_eta->fill(zee.eta());
+      _h_Z_eta->fill(zmm.eta());
 
-      _h_Zl_pT->fill(ep.pT()/GeV, weight);
-      _h_Zl_pT->fill(em.pT()/GeV, weight);
-      _h_Zl_pT->fill(mp.pT()/GeV, weight);
-      _h_Zl_pT->fill(mm.pT()/GeV, weight);
-      _h_Zl_eta->fill(ep.eta(), weight);
-      _h_Zl_eta->fill(em.eta(), weight);
-      _h_Zl_eta->fill(mp.eta(), weight);
-      _h_Zl_eta->fill(mm.eta(), weight);
+      _h_Zl_pT->fill(ep.pT()/GeV);
+      _h_Zl_pT->fill(em.pT()/GeV);
+      _h_Zl_pT->fill(mp.pT()/GeV);
+      _h_Zl_pT->fill(mm.pT()/GeV);
+      _h_Zl_eta->fill(ep.eta());
+      _h_Zl_eta->fill(em.eta());
+      _h_Zl_eta->fill(mp.eta());
+      _h_Zl_eta->fill(mm.eta());
 
-      _h_ZeZm_dphi->fill(deltaPhi(ep, mm), weight);
-      _h_ZeZm_deta->fill(ep.eta()-mm.eta(), weight);
-      _h_ZeZm_dR->fill(deltaR(ep, mm), weight);
+      _h_ZeZm_dphi->fill(deltaPhi(ep, mm));
+      _h_ZeZm_deta->fill(ep.eta()-mm.eta());
+      _h_ZeZm_dR->fill(deltaR(ep, mm));
       const FourMomentum epmm = ep + mm;
       const double m_epmm = (epmm.mass2() > 0) ? epmm.mass() : 0; ///< @todo Protection still needed?
-      _h_ZeZm_m->fill(m_epmm/GeV, weight);
+      _h_ZeZm_m->fill(m_epmm/GeV);
     }
 
 

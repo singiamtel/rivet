@@ -38,9 +38,9 @@ namespace Rivet {
       const double meanBeamMom = ( beams.first.p3().mod() +
                                    beams.second.p3().mod() ) / 2.0/GeV;
       // check if b hadrons or not
-      unsigned int nB= (filter_select(ufs.particles(), isBottomHadron)).size();
+      unsigned int nB= (select(ufs.particles(), isBottomHadron)).size();
       // Accept all D*+- decays.
-      for (const Particle& p : filter_select(ufs.particles(), Cuts::abspid==PID::DSTARPLUS)) {
+      for (const Particle& p : select(ufs.particles(), Cuts::abspid==PID::DSTARPLUS)) {
 	// Scaled energy.
 	const double energy = p.E()/GeV;
 	const double scaledEnergy = energy/meanBeamMom;

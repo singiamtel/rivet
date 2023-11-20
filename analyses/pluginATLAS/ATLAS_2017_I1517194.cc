@@ -96,8 +96,7 @@ namespace Rivet {
       neutrino = wfinder.neutrinos().front().momentum();
 
       vector<FourMomentum> jets;
-      for (const Jet& jet : jetpro.jetsByPt(30*GeV)) {
-        if ( fabs(jet.momentum().rapidity()) > 4.4 ) continue;
+      for (const Jet& jet : jetpro.jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 4.4)) {
         if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
         jets.push_back(jet.momentum());
       }

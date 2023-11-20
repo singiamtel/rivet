@@ -70,8 +70,8 @@ namespace Rivet {
       const Particles zleps   =  zfinder.constituents();
 
       // Stop processing the event if no true b-partons or hadrons are found
-      const Particles allBs = apply<HeavyHadrons>(e, "BHadrons").bHadrons(5.0*GeV);
-      Particles stableBs = filter_select(allBs, Cuts::abseta < 2.5);
+      const Particles allBs = apply<HeavyHadrons>(e, "BHadrons").bHadrons(Cuts::pT > 5.0*GeV);
+      Particles stableBs = select(allBs, Cuts::abseta < 2.5);
       if (stableBs.empty()) vetoEvent;
 
       // Get the b-jets

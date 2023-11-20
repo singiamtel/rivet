@@ -53,41 +53,40 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& evt) {
-      const double weight = 1.0;
 
       const ZFinder& zfinder_dressed_mu_rap = apply<ZFinder>(evt, "ZFinder_dressed_mu_rap");
       if (!zfinder_dressed_mu_rap.bosons().empty()) {
         const FourMomentum pZ = zfinder_dressed_mu_rap.bosons()[0].momentum();
-        _hist_zrap_mu_dressed->fill(pZ.rapidity()/GeV, weight);
-        _hist_zrap_comb_dressed->fill(pZ.rapidity()/GeV, weight);
+        _hist_zrap_mu_dressed->fill(pZ.rapidity()/GeV);
+        _hist_zrap_comb_dressed->fill(pZ.rapidity()/GeV);
       }
 
       const ZFinder& zfinder_dressed_mu_pt = apply<ZFinder>(evt, "ZFinder_dressed_mu_pt");
       if (!zfinder_dressed_mu_pt.bosons().empty()) {
         const FourMomentum pZ = zfinder_dressed_mu_pt.bosons()[0].momentum();
-        _hist_zpt_mu_dressed->fill(pZ.pT()/GeV, weight);
-        _hist_zpt_comb_dressed->fill(pZ.pT()/GeV, weight);
+        _hist_zpt_mu_dressed->fill(pZ.pT()/GeV);
+        _hist_zpt_comb_dressed->fill(pZ.pT()/GeV);
         if (pZ.pT() < 30*GeV) {
-          _hist_zptpeak_mu_dressed->fill(pZ.pT()/GeV, weight);
-          _hist_zptpeak_comb_dressed->fill(pZ.pT()/GeV, weight);
+          _hist_zptpeak_mu_dressed->fill(pZ.pT()/GeV);
+          _hist_zptpeak_comb_dressed->fill(pZ.pT()/GeV);
         }
       }
 
       const ZFinder& zfinder_dressed_el_rap = apply<ZFinder>(evt, "ZFinder_dressed_el_rap");
       if (!zfinder_dressed_el_rap.bosons().empty()) {
         const FourMomentum pZ = zfinder_dressed_el_rap.bosons()[0].momentum();
-        _hist_zrap_el_dressed->fill(pZ.rapidity()/GeV, weight);
-        _hist_zrap_comb_dressed->fill(pZ.rapidity()/GeV, weight);
+        _hist_zrap_el_dressed->fill(pZ.rapidity()/GeV);
+        _hist_zrap_comb_dressed->fill(pZ.rapidity()/GeV);
       }
 
       const ZFinder& zfinder_dressed_el_pt = apply<ZFinder>(evt, "ZFinder_dressed_el_pt");
       if (!zfinder_dressed_el_pt.bosons().empty()) {
         const FourMomentum pZ = zfinder_dressed_el_pt.bosons()[0].momentum();
-        _hist_zpt_el_dressed->fill(pZ.pT()/GeV, weight);
-        _hist_zpt_comb_dressed->fill(pZ.pT()/GeV, weight);
+        _hist_zpt_el_dressed->fill(pZ.pT()/GeV);
+        _hist_zpt_comb_dressed->fill(pZ.pT()/GeV);
         if (pZ.pT() < 30*GeV) {
-          _hist_zptpeak_el_dressed->fill(pZ.pT()/GeV, weight);
-          _hist_zptpeak_comb_dressed->fill(pZ.pT()/GeV, weight);
+          _hist_zptpeak_el_dressed->fill(pZ.pT()/GeV);
+          _hist_zptpeak_comb_dressed->fill(pZ.pT()/GeV);
         }
       }
 

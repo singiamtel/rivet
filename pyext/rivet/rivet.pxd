@@ -40,7 +40,7 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         double nominalCrossSection()
         double nominalCrossSectionError()
         void finalize()
-        void dump(string, int)
+        void setFinalizePeriod(string, int)
         void mergeYodas(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool)
         void merge(AnalysisHandler&)
         vector[double] serializeContent() except +

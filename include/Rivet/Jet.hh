@@ -78,9 +78,9 @@ namespace Rivet {
     /// Get the particles in this jet (const version)
     const Particles& particles() const { return _particles; }
     /// Get the particles in this jet which pass a cut (const)
-    const Particles particles(const Cut& c) const { return filter_select(_particles, c); }
+    const Particles particles(const Cut& c) const { return select(_particles, c); }
     /// Get the particles in this jet which pass a filtering functor (const)
-    const Particles particles(const ParticleSelector& s) const { return filter_select(_particles, s); }
+    const Particles particles(const ParticleSelector& s) const { return select(_particles, s); }
 
     /// Get the particles in this jet (FastJet-like alias)
     Particles& constituents() { return particles(); }
@@ -122,7 +122,7 @@ namespace Rivet {
     /// @brief Particles which have been tag-matched to this jet _and_ pass a selector function
     ///
     /// @note Note the less efficient return by value, due to the filtering.
-    Particles tags(const ParticleSelector& f) const { return filter_select(tags(), f); }
+    Particles tags(const ParticleSelector& f) const { return select(tags(), f); }
     /// @brief Particles which have been tag-matched to this jet _and_ pass a Cut
     ///
     /// @note Note the less efficient return by value, due to the cut-pass filtering.
@@ -134,7 +134,7 @@ namespace Rivet {
     /// The default jet finding adds b-hadron tags by ghost association.
     Particles bTags(const Cut& c=Cuts::open()) const;
     /// @brief b particles which have been tag-matched to this jet _and_ pass a selector function
-    Particles bTags(const ParticleSelector& f) const { return filter_select(bTags(), f); }
+    Particles bTags(const ParticleSelector& f) const { return select(bTags(), f); }
 
     /// Does this jet have at least one b-tag (that passes an optional Cut)?
     bool bTagged(const Cut& c=Cuts::open()) const { return !bTags(c).empty(); }
@@ -147,7 +147,7 @@ namespace Rivet {
     /// The default jet finding adds c-hadron tags by ghost association.
     Particles cTags(const Cut& c=Cuts::open()) const;
     /// @brief c (and not b) particles which have been tag-matched to this jet and pass a selector function
-    Particles cTags(const ParticleSelector& f) const { return filter_select(cTags(), f); }
+    Particles cTags(const ParticleSelector& f) const { return select(cTags(), f); }
 
     /// Does this jet have at least one c-tag (that passes an optional Cut)?
     bool cTagged(const Cut& c=Cuts::open()) const { return !cTags(c).empty(); }
@@ -160,7 +160,7 @@ namespace Rivet {
     /// The default jet finding adds tau tags by ghost association.
     Particles tauTags(const Cut& c=Cuts::open()) const;
     /// @brief Tau particles which have been tag-matched to this jet and pass a selector function
-    Particles tauTags(const ParticleSelector& f) const { return filter_select(tauTags(), f); }
+    Particles tauTags(const ParticleSelector& f) const { return select(tauTags(), f); }
 
     /// Does this jet have at least one tau-tag (that passes an optional Cut)?
     bool tauTagged(const Cut& c=Cuts::open()) const { return !tauTags(c).empty(); }

@@ -74,7 +74,7 @@ namespace Rivet {
       Particles photons = apply<PromptFinalState>(event, "photons").particlesByPt();
       Particles bare_leps  = apply<IdentifiedFinalState>(event, "bare_leptons").particles();
       for (const Particle& lep : bare_leps)
-        ifilter_discard(photons, deltaRLess(lep, 0.1));
+        idiscard(photons, deltaRLess(lep, 0.1));
       if (photons.size() != 1)  vetoEvent;
       const Particle& photon = photons[0];
 
@@ -87,9 +87,9 @@ namespace Rivet {
 
       // jet photon/electron overlap removal
       for (const DressedLepton& e : elecs)
-        ifilter_discard(jets, deltaRLess(e, 0.2, RAPIDITY));
+        idiscard(jets, deltaRLess(e, 0.2, RAPIDITY));
       for (const Particle& ph : photons)
-        ifilter_discard(jets, deltaRLess(ph, 0.1, RAPIDITY));
+        idiscard(jets, deltaRLess(ph, 0.1, RAPIDITY));
 	    if (jets.size() < 4)  vetoEvent;
 
       // photon-jet minimum deltaR

@@ -1,3 +1,7 @@
+2023-11-11  Christian Gutschow  <chris.g@cern.ch>
+
+	* Remove various methods + constructors that have been deprecated in 3.1.x
+
 2023-11-09  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Remove W/ZFinder option to not include dressing photons in the

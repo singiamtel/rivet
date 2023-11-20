@@ -65,7 +65,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const WFinder& wfinder = apply<WFinder>(event, "WFinder");
       if (wfinder.bosons().size() != 1) {
@@ -100,23 +99,23 @@ namespace Rivet {
       double cosphis(cos(phis)), sinphis(sin(phis));
       if (phis<0.0) phis+=2.0*M_PI;
 
-      _h_histos[idx][0]->fill(costhetas,weight);
-      _h_histos[idx][1]->fill(phis*180.0/M_PI,weight);
+      _h_histos[idx][0]->fill(costhetas);
+      _h_histos[idx][1]->fill(phis*180.0/M_PI);
       if (ptw>20.0) {
-        _h_histos[idx][2]->fill(costhetas,weight);
-        _h_histos[idx][3]->fill(phis*180.0/M_PI,weight);
+        _h_histos[idx][2]->fill(costhetas);
+        _h_histos[idx][3]->fill(phis*180.0/M_PI);
       }
-      _h_dists[idx][0]->fill(ptw,10.0/3.0*(1.0-3.0*sqr(costhetas))+2.0/3.0,weight);
-      _h_dists[idx][1]->fill(ptw,10.0*sinthetas*costhetas*cosphis,weight);
-      _h_dists[idx][2]->fill(ptw,10.0*sqr(sinthetas)*(sqr(cosphis)-sqr(sinphis)),weight);
-      _h_dists[idx][3]->fill(ptw,4.0*sinthetas*cosphis,weight);
-      _h_dists[idx][4]->fill(ptw,4.0*costhetas,weight);
-      _h_dists[idx][5]->fill(ptw,4.0*sinthetas*sinphis,weight);
-      _h_dists[idx][6]->fill(ptw,10.0*costhetas*sinthetas*sinphis,weight);
-      _h_dists[idx][7]->fill(ptw,10.0*sqr(sinthetas)*cosphis*sinphis,weight);
-      _h_dists[idx][8]->fill(ptw,0.5*sqr(1.0-costhetas)-(1.0-2.0*sqr(costhetas)),weight);
-      _h_dists[idx][9]->fill(ptw,0.5*sqr(1.0+costhetas)-(1.0-2.0*sqr(costhetas)),weight);
-      _h_dists[idx][10]->fill(ptw,5.0*sqr(sinthetas)-3.0,weight);
+      _h_dists[idx][0]->fill(ptw,10.0/3.0*(1.0-3.0*sqr(costhetas))+2.0/3.0);
+      _h_dists[idx][1]->fill(ptw,10.0*sinthetas*costhetas*cosphis);
+      _h_dists[idx][2]->fill(ptw,10.0*sqr(sinthetas)*(sqr(cosphis)-sqr(sinphis)));
+      _h_dists[idx][3]->fill(ptw,4.0*sinthetas*cosphis);
+      _h_dists[idx][4]->fill(ptw,4.0*costhetas);
+      _h_dists[idx][5]->fill(ptw,4.0*sinthetas*sinphis);
+      _h_dists[idx][6]->fill(ptw,10.0*costhetas*sinthetas*sinphis);
+      _h_dists[idx][7]->fill(ptw,10.0*sqr(sinthetas)*cosphis*sinphis);
+      _h_dists[idx][8]->fill(ptw,0.5*sqr(1.0-costhetas)-(1.0-2.0*sqr(costhetas)));
+      _h_dists[idx][9]->fill(ptw,0.5*sqr(1.0+costhetas)-(1.0-2.0*sqr(costhetas)));
+      _h_dists[idx][10]->fill(ptw,5.0*sqr(sinthetas)-3.0);
 
     }
 

@@ -56,7 +56,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // pTmiss
       FourMomentum pTmiss;
@@ -69,10 +68,7 @@ namespace Rivet {
       if (ETmiss < 150*GeV) vetoEvent;
 
       // get the candiate jets
-      Jets cand_jets;
-      for ( const Jet& jet : apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if (jet.abseta() < 4.5) cand_jets.push_back(jet);
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.5);
 
       // find the electrons
       Particles cand_e;
@@ -247,19 +243,19 @@ namespace Rivet {
         recon_jets[j5].momentum()+ recon_jets[j6].momentum();
       double mjjj2 = pjjj2.mass();
 
-      _hist_mjjj1->fill(mjjj1,weight);
-      _hist_mjjj2->fill(mjjj2,weight);
+      _hist_mjjj1->fill(mjjj1);
+      _hist_mjjj2->fill(mjjj2);
       // require triplets in 80<mjjj<270
       if(mjjj1<80.||mjjj1>270.||mjjj2<80.||mjjj2>270.)
         vetoEvent;
 
       // counts in signal regions
-      _count_SR_A->fill(0.5,weight);
-      if(ETmiss>260.) _count_SR_B->fill(0.5,weight);
+      _count_SR_A->fill(0.5);
+      if(ETmiss>260.) _count_SR_B->fill(0.5);
 
-      _hist_ETmiss->fill(ETmiss,weight);
+      _hist_ETmiss->fill(ETmiss);
       const double m_T2 = mT2(pjjj1, pjjj2, pTmiss, 0.0); // zero mass invisibles
-      _hist_mT2->fill(m_T2,weight);
+      _hist_mT2->fill(m_T2);
     }
     /// @}
 

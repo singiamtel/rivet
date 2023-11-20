@@ -63,15 +63,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
-      Jets cand_jets;
-      const Jets jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV);
-      for (const Jet& jet : jets) {
-        if ( fabs( jet.eta() ) < 4.9 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      const Jets& cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.9);
 
       const Particles cand_e  = apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
 
@@ -237,49 +230,49 @@ namespace Rivet {
                  << et_meff_HM );
 
 
-      _hist_eTmiss->fill(eTmiss, weight);
+      _hist_eTmiss->fill(eTmiss);
 
 
       // 2j region
       if ( et_meff_2j > 0.3 ) {
-        _hist_meff_2j->fill(m_eff_2j, weight);
+        _hist_meff_2j->fill(m_eff_2j);
         if ( m_eff_2j > 1000 * GeV ) {
           MSG_DEBUG("Hits 2j");
-          _count_2j->fill(0.5, weight);
+          _count_2j->fill(0.5);
         }
       }
 
 
       // 3j region
       if ( Njets >= 3 && et_meff_3j > 0.25 ) {
-        _hist_meff_3j->fill(m_eff_3j, weight);
+        _hist_meff_3j->fill(m_eff_3j);
         if ( m_eff_3j > 1000 * GeV ) {
           MSG_DEBUG("Hits 3j");
-          _count_3j->fill(0.5, weight);
+          _count_3j->fill(0.5);
         }
       }
 
 
       // 4j5 & 4j10 regions
       if ( Njets >= 4 && et_meff_4j > 0.25 ) {
-        _hist_meff_4j->fill(m_eff_4j, weight);
+        _hist_meff_4j->fill(m_eff_4j);
         if ( m_eff_4j > 500 * GeV ) {
           MSG_DEBUG("Hits 4j5");
-          _count_4j5->fill(0.5, weight);
+          _count_4j5->fill(0.5);
         }
         if ( m_eff_4j > 1000 * GeV ) {
           MSG_DEBUG("Hits 4j10");
-          _count_4j10->fill(0.5, weight);
+          _count_4j10->fill(0.5);
         }
       }
 
 
       // High mass region
       if ( NjetsHighMass >= 4 && et_meff_HM > 0.2 ) {
-        _hist_meff_HM->fill(m_eff_HM, weight);
+        _hist_meff_HM->fill(m_eff_HM);
         if ( m_eff_HM > 1100 * GeV ) {
           MSG_DEBUG("Hits HM");
-          _count_HM->fill(0.5, weight);
+          _count_HM->fill(0.5);
         }
       }
 

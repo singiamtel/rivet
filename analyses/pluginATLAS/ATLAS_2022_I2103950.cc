@@ -115,7 +115,7 @@ namespace Rivet {
 
       // jet electron overlap removal
       for (const DressedLepton& e : elecs_muonOR) {
-        ifilter_discard(alljets, deltaRLess(e, 0.2, RAPIDITY));
+        idiscard(alljets, deltaRLess(e, 0.2, RAPIDITY));
       }
 
       // muon jet overlap removal

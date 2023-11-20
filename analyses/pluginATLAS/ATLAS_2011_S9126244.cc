@@ -175,10 +175,8 @@ namespace Rivet {
       double minimumJetPtBar = 50.0*GeV; // of interval defining jets
 
       vector<FourMomentum> acceptJets;
-      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets06").jetsByPt(20.0*GeV)) {
-        if (jet.absrap() < 4.4) {
-          acceptJets.push_back(jet.momentum());
-        }
+      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets06").jetsByPt(Cuts::pT > 20*GeV && Cuts::absrap < 4.4)) {
+        acceptJets.push_back(jet.momentum());
       }
 
       // If we can't form an interval, drop out of the analysis early

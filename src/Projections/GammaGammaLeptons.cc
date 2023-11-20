@@ -48,7 +48,7 @@ namespace Rivet {
 	else if ( _lsort == ObjOrdering::ETA && _incoming.second.momentum().pz() < 0.0 )
 	  sort(fsleptons.begin(),fsleptons.end(), cmpMomByEta);
       }
-      Particles sfleptons = filter_select(fsleptons, Cuts::pid == inc.pid());
+      Particles sfleptons = select(fsleptons, Cuts::pid == inc.pid());
       if ( sfleptons.empty() ) sfleptons = fsleptons;
 
       if ( _isolDR > 0.0 ) {

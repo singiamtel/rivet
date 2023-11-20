@@ -38,7 +38,7 @@ namespace Rivet {
                                    beams.second.p3().mod() ) / 2.0/GeV;
 
       // Accept all D*+- decays.
-      for (const Particle& p : filter_select(ufs.particles(), Cuts::abspid==PID::DSTARPLUS)) {
+      for (const Particle& p : select(ufs.particles(), Cuts::abspid==PID::DSTARPLUS)) {
           // Scaled energy.
           const double energy = p.E()/GeV;
           const double scaledEnergy = energy/meanBeamMom;

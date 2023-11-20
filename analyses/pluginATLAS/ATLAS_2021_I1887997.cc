@@ -59,7 +59,7 @@ namespace Rivet {
       if (ph1_pt < 40.*GeV || ph2_pt < 30.*GeV) vetoEvent;
 
       // Apply photon eta cuts
-      ifilter_select(photons, (Cuts::abseta < 2.37) && ( (Cuts::abseta <= 1.37) || (Cuts::abseta >= 1.52) ));
+      iselect(photons, (Cuts::abseta < 2.37) && ( (Cuts::abseta <= 1.37) || (Cuts::abseta >= 1.52) ));
       if (photons.size() < 2) vetoEvent;
 
       // Require the two photons to be separated in dR

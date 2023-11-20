@@ -31,20 +31,19 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
-      const Jets jets04 = apply<FastJets>(event, "Jets04").jetsByPt(20*GeV);
-      const Jets jets06 = apply<FastJets>(event, "Jets06").jetsByPt(20*GeV);
+      const Jets jets04 = apply<FastJets>(event, "Jets04").jetsByPt(Cuts::pT > 20*GeV);
+      const Jets jets06 = apply<FastJets>(event, "Jets06").jetsByPt(Cuts::pT > 20*GeV);
 
       for (const Jet& j : jets04) {
-        _h_numBTagsPerJet[0]->fill(j.bTags().size(), weight);
-        _h_numCTagsPerJet[0]->fill(j.cTags().size(), weight);
-        _h_numTauTagsPerJet[0]->fill(j.tauTags().size(), weight);
+        _h_numBTagsPerJet[0]->fill(j.bTags().size());
+        _h_numCTagsPerJet[0]->fill(j.cTags().size());
+        _h_numTauTagsPerJet[0]->fill(j.tauTags().size());
       }
       for (const Jet& j : jets06) {
-        _h_numBTagsPerJet[1]->fill(j.bTags().size(), weight);
-        _h_numCTagsPerJet[1]->fill(j.cTags().size(), weight);
-        _h_numTauTagsPerJet[1]->fill(j.tauTags().size(), weight);
+        _h_numBTagsPerJet[1]->fill(j.bTags().size());
+        _h_numCTagsPerJet[1]->fill(j.cTags().size());
+        _h_numTauTagsPerJet[1]->fill(j.tauTags().size());
       }
     }
 

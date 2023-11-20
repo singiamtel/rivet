@@ -26,7 +26,7 @@ namespace Rivet {
   enum class PromptEMuFromTau { YES, NO };
 
   enum class InclHadronicTau { YES, NO };
-  
+
 
   /// @brief Convenience finder of partonic top quarks
   ///
@@ -99,23 +99,23 @@ namespace Rivet {
       }
 
       // Find partonic tops
-      _theParticles = filter_select(event.allParticles(_cuts), (_topmode == WhichTop::LAST ? lastParticleWith(isTop) : firstParticleWith(isTop)));
+      _theParticles = select(event.allParticles(_cuts), (_topmode == WhichTop::LAST ? lastParticleWith(isTop) : firstParticleWith(isTop)));
 
       // Filtering by decay mode
       if (_decaymode != TopDecay::ALL) {
         const auto decaycheck = [&](const Particle& t) {
           const Particles descendants = t.allDescendants();
-          const bool prompt_e = any(descendants, [&](const Particle& p){ return p.abspid() == PID::ELECTRON && p.isPrompt(_emu_from_prompt_tau) && !p.hasAncestor(PID::PHOTON, false); });
-          const bool prompt_mu = any(descendants, [&](const Particle& p){ return p.abspid() == PID::MUON && p.isPrompt(_emu_from_prompt_tau) && !p.hasAncestor(PID::PHOTON, false); });
+          const bool prompt_e = any(descendants, [&](const Particle& p){ return p.abspid() == PID::ELECTRON && p.isPrompt(_emu_from_prompt_tau) && !p.hasAncestorWith(Cuts::pid == PID::PHOTON, false); });
+          const bool prompt_mu = any(descendants, [&](const Particle& p){ return p.abspid() == PID::MUON && p.isPrompt(_emu_from_prompt_tau) && !p.hasAncestorWith(Cuts::pid == PID::PHOTON, false); });
           if (prompt_e && (_decaymode == TopDecay::ELECTRON || _decaymode == TopDecay::E_MU || _decaymode == TopDecay::E_MU_TAU)) return true;
           if (prompt_mu && (_decaymode == TopDecay::MUON || _decaymode == TopDecay::E_MU || _decaymode == TopDecay::E_MU_TAU)) return true;
-          const bool prompt_tau = any(descendants, [&](const Particle& p){ return p.abspid() == PID::TAU && p.isPrompt()  && !p.hasAncestor(PID::PHOTON, false); });
-          const bool prompt_hadronic_tau = any(descendants, [&](const Particle& p){ return p.abspid() == PID::TAU && p.isPrompt() && !p.hasAncestor(PID::PHOTON, false) && none(p.children(), isChargedLepton); });
+          const bool prompt_tau = any(descendants, [&](const Particle& p){ return p.abspid() == PID::TAU && p.isPrompt()  && !p.hasAncestorWith(Cuts::pid == PID::PHOTON, false); });
+          const bool prompt_hadronic_tau = any(descendants, [&](const Particle& p){ return p.abspid() == PID::TAU && p.isPrompt() && !p.hasAncestorWith(Cuts::pid == PID::PHOTON, false) && none(p.children(), isChargedLepton); });
           if (prompt_tau && (_decaymode == TopDecay::TAU || _decaymode == TopDecay::E_MU_TAU)) return (_include_hadronic_taus || !prompt_hadronic_tau);
           if (_decaymode == TopDecay::HADRONIC && (!prompt_e && !prompt_mu && (!prompt_tau || (_include_hadronic_taus && prompt_hadronic_tau)))) return true; //< logical hairiness...
           return false;
         };
-        ifilter_select(_theParticles, decaycheck);
+        iselect(_theParticles, decaycheck);
       }
 
       // Filtering and warning about unphysical partonic tops
@@ -126,7 +126,7 @@ namespace Rivet {
         }
         return true;
       };
-      ifilter_select(_theParticles, physcheck);
+      iselect(_theParticles, physcheck);
     }
 
 

@@ -28,8 +28,8 @@ namespace Rivet {
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
 
       /// @todo Urk, abuse! Need explicit HiggsFinder (and TauFinder?)
-      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV,
-		      0.0, PhotonOrigin::NONE, 125*GeV);
+      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0,
+                      LeptonOrigin::PROMPT, PhotonOrigin::NONE, 125*GeV);
       declare(hfinder, "Hfinder");
 
       // set ptcut from input option
@@ -68,13 +68,12 @@ namespace Rivet {
     void analyze(const Event & e) {
       const ZFinder& hfinder = apply<ZFinder>(e, "Hfinder");
       if (hfinder.bosons().size() != 1) vetoEvent;
-      const double weight = 1.0;
 
       FourMomentum hmom(hfinder.bosons()[0].momentum());
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(_jetptcut);
+      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > _jetptcut);
       if (jets.size() > 0) {
-        _h_H_jet1_deta->fill(hmom.eta()-jets[0].eta(), weight);
-        _h_H_jet1_dR->fill(deltaR(hmom, jets[0].momentum()), weight);
+        _h_H_jet1_deta->fill(hmom.eta()-jets[0].eta());
+        _h_H_jet1_dR->fill(deltaR(hmom, jets[0].momentum()));
       }
 
       MC_JetAnalysis::analyze(e);

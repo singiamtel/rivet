@@ -84,12 +84,12 @@ namespace Rivet {
       // Get the selected objects, using the projections.
       Jets all_jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
 
-      const DressedLeptons electrons = filter_discard(apply<LeptonFinder>(event, "electrons").dressedLeptons(),
+      const DressedLeptons electrons = discard(apply<LeptonFinder>(event, "electrons").dressedLeptons(),
         [&](const DressedLepton &e) {
           return any(all_jets, deltaRLess(e, 0.4));
         });
 
-      const DressedLeptons muons = filter_discard(apply<LeptonFinder>(event, "muons").dressedLeptons(),
+      const DressedLeptons muons = discard(apply<LeptonFinder>(event, "muons").dressedLeptons(),
         [&](const DressedLepton &m) {
           return any(all_jets, deltaRLess(m, 0.4));
         });

@@ -173,70 +173,69 @@ namespace Rivet {
                 << "; l1 = " << lep1.pT() << ", " << lep1.abseta()
                 << "; l2 = " << lep2.pT() << ", " << lep2.abseta());
 
-      const double weight = 1.0;
 
 
       if (isVisiblePS) {
-        fillWithOF(_hVis_nJet30_abs,  nJet30, weight);
-        fillWithOF(_hVis_nJet30,      nJet30, weight);
-        fillWithOF(_hVis_nJet60_abs,  nJet60, weight);
-        fillWithOF(_hVis_nJet60,      nJet60, weight);
-        fillWithOF(_hVis_nJet100_abs, nJet100, weight);
-        fillWithOF(_hVis_nJet100,     nJet100, weight);
+        fillWithOF(_hVis_nJet30_abs,  nJet30);
+        fillWithOF(_hVis_nJet30,      nJet30);
+        fillWithOF(_hVis_nJet60_abs,  nJet60);
+        fillWithOF(_hVis_nJet60,      nJet60);
+        fillWithOF(_hVis_nJet100_abs, nJet100);
+        fillWithOF(_hVis_nJet100,     nJet100);
 
-        fillGapFractions(addJets, _h_gap_addJet1Pt, _h_gap_addJet2Pt, _h_gap_addJetHT, weight);
-        fillGapFractions(addJets_eta0, _h_gap_addJet1Pt_eta0, _h_gap_addJet2Pt_eta0, _h_gap_addJetHT_eta0, weight);
-        fillGapFractions(addJets_eta1, _h_gap_addJet1Pt_eta1, _h_gap_addJet2Pt_eta1, _h_gap_addJetHT_eta1, weight);
-        fillGapFractions(addJets_eta2, _h_gap_addJet1Pt_eta2, _h_gap_addJet2Pt_eta2, _h_gap_addJetHT_eta2, weight);
+        fillGapFractions(addJets, _h_gap_addJet1Pt, _h_gap_addJet2Pt, _h_gap_addJetHT);
+        fillGapFractions(addJets_eta0, _h_gap_addJet1Pt_eta0, _h_gap_addJet2Pt_eta0, _h_gap_addJetHT_eta0);
+        fillGapFractions(addJets_eta1, _h_gap_addJet1Pt_eta1, _h_gap_addJet2Pt_eta1, _h_gap_addJetHT_eta1);
+        fillGapFractions(addJets_eta2, _h_gap_addJet1Pt_eta2, _h_gap_addJet2Pt_eta2, _h_gap_addJetHT_eta2);
       }
 
       // Plots with two additional jets
       if (addJets.size() >= 1) {
         const double ht = sum(addJets, Kin::pT, 0.0);
-        _hFull_addJJHT_abs->fill(ht/GeV, weight);
-        _hFull_addJJHT    ->fill(ht/GeV, weight);
+        _hFull_addJJHT_abs->fill(ht/GeV);
+        _hFull_addJJHT    ->fill(ht/GeV);
         if (isVisiblePS) {
-          _hVis_addJJHT_abs->fill(ht/GeV, weight);
-          _hVis_addJJHT    ->fill(ht/GeV, weight);
+          _hVis_addJJHT_abs->fill(ht/GeV);
+          _hVis_addJJHT    ->fill(ht/GeV);
         }
 
         const Jet& j1 = addJets[0];
-        _hFull_addJet1Pt_abs ->fill(j1.pT()/GeV, weight);
-        _hFull_addJet1Pt     ->fill(j1.pT()/GeV, weight);
-        _hFull_addJet1Eta_abs->fill(j1.abseta(), weight);
-        _hFull_addJet1Eta    ->fill(j1.abseta(), weight);
+        _hFull_addJet1Pt_abs ->fill(j1.pT()/GeV);
+        _hFull_addJet1Pt     ->fill(j1.pT()/GeV);
+        _hFull_addJet1Eta_abs->fill(j1.abseta());
+        _hFull_addJet1Eta    ->fill(j1.abseta());
         if (isVisiblePS) {
-          _hVis_addJet1Pt_abs ->fill(j1.pT()/GeV, weight);
-          _hVis_addJet1Pt     ->fill(j1.pT()/GeV, weight);
-          _hVis_addJet1Eta_abs->fill(j1.abseta(), weight);
-          _hVis_addJet1Eta    ->fill(j1.abseta(), weight);
+          _hVis_addJet1Pt_abs ->fill(j1.pT()/GeV);
+          _hVis_addJet1Pt     ->fill(j1.pT()/GeV);
+          _hVis_addJet1Eta_abs->fill(j1.abseta());
+          _hVis_addJet1Eta    ->fill(j1.abseta());
         }
 
         if (addJets.size() >= 2) {
           const Jet& j2 = addJets[1];
 
-          _hFull_addJet2Pt_abs ->fill(j2.pT()/GeV, weight);
-          _hFull_addJet2Pt     ->fill(j2.pT()/GeV, weight);
-          _hFull_addJet2Eta_abs->fill(j2.abseta(), weight);
-          _hFull_addJet2Eta    ->fill(j2.abseta(), weight);
+          _hFull_addJet2Pt_abs ->fill(j2.pT()/GeV);
+          _hFull_addJet2Pt     ->fill(j2.pT()/GeV);
+          _hFull_addJet2Eta_abs->fill(j2.abseta());
+          _hFull_addJet2Eta    ->fill(j2.abseta());
           if (isVisiblePS) {
-            _hVis_addJet2Pt_abs ->fill(j2.pT()/GeV, weight);
-            _hVis_addJet2Pt     ->fill(j2.pT()/GeV, weight);
-            _hVis_addJet2Eta_abs->fill(j2.abseta(), weight);
-            _hVis_addJet2Eta    ->fill(j2.abseta(), weight);
+            _hVis_addJet2Pt_abs ->fill(j2.pT()/GeV);
+            _hVis_addJet2Pt     ->fill(j2.pT()/GeV);
+            _hVis_addJet2Eta_abs->fill(j2.abseta());
+            _hVis_addJet2Eta    ->fill(j2.abseta());
           }
 
           const double jjmass = (j1.mom() + j2.mom()).mass();
           const double jjdR = deltaR(j1, j2);
-          _hFull_addJJMass_abs->fill(jjmass/GeV, weight);
-          _hFull_addJJMass    ->fill(jjmass/GeV, weight);
-          _hFull_addJJDR_abs  ->fill(jjdR, weight);
-          _hFull_addJJDR      ->fill(jjdR, weight);
+          _hFull_addJJMass_abs->fill(jjmass/GeV);
+          _hFull_addJJMass    ->fill(jjmass/GeV);
+          _hFull_addJJDR_abs  ->fill(jjdR);
+          _hFull_addJJDR      ->fill(jjdR);
           if (isVisiblePS) {
-            _hVis_addJJMass_abs->fill(jjmass/GeV, weight);
-            _hVis_addJJMass    ->fill(jjmass/GeV, weight);
-            _hVis_addJJDR_abs  ->fill(jjdR, weight);
-            _hVis_addJJDR      ->fill(jjdR, weight);
+            _hVis_addJJMass_abs->fill(jjmass/GeV);
+            _hVis_addJJMass    ->fill(jjmass/GeV);
+            _hVis_addJJDR_abs  ->fill(jjdR);
+            _hVis_addJJDR      ->fill(jjdR);
           }
         }
       }
@@ -245,42 +244,42 @@ namespace Rivet {
       // Same set of plots if there are additional b-jets
       if (addBJets.size() >= 1) {
         const Jet& b1 = addBJets[0];
-        _hFull_addBJet1Pt_abs ->fill(b1.pT()/GeV, weight);
-        _hFull_addBJet1Pt     ->fill(b1.pT()/GeV, weight);
-        _hFull_addBJet1Eta_abs->fill(b1.abseta(), weight);
-        _hFull_addBJet1Eta    ->fill(b1.abseta(), weight);
+        _hFull_addBJet1Pt_abs ->fill(b1.pT()/GeV);
+        _hFull_addBJet1Pt     ->fill(b1.pT()/GeV);
+        _hFull_addBJet1Eta_abs->fill(b1.abseta());
+        _hFull_addBJet1Eta    ->fill(b1.abseta());
         if (isVisiblePS) {
-          _hVis_addBJet1Pt_abs ->fill(b1.pT()/GeV, weight);
-          _hVis_addBJet1Pt     ->fill(b1.pT()/GeV, weight);
-          _hVis_addBJet1Eta_abs->fill(b1.abseta(), weight);
-          _hVis_addBJet1Eta    ->fill(b1.abseta(), weight);
+          _hVis_addBJet1Pt_abs ->fill(b1.pT()/GeV);
+          _hVis_addBJet1Pt     ->fill(b1.pT()/GeV);
+          _hVis_addBJet1Eta_abs->fill(b1.abseta());
+          _hVis_addBJet1Eta    ->fill(b1.abseta());
         }
 
         if (addBJets.size() >= 2) {
           const Jet& b2 = addBJets[1];
 
-          _hFull_addBJet2Pt_abs ->fill(b2.pT()/GeV, weight);
-          _hFull_addBJet2Pt     ->fill(b2.pT()/GeV, weight);
-          _hFull_addBJet2Eta_abs->fill(b2.abseta(), weight);
-          _hFull_addBJet2Eta    ->fill(b2.abseta(), weight);
+          _hFull_addBJet2Pt_abs ->fill(b2.pT()/GeV);
+          _hFull_addBJet2Pt     ->fill(b2.pT()/GeV);
+          _hFull_addBJet2Eta_abs->fill(b2.abseta());
+          _hFull_addBJet2Eta    ->fill(b2.abseta());
           if (isVisiblePS) {
-            _hVis_addBJet2Pt_abs ->fill(b2.pT()/GeV, weight);
-            _hVis_addBJet2Pt     ->fill(b2.pT()/GeV, weight);
-            _hVis_addBJet2Eta_abs->fill(b2.abseta(), weight);
-            _hVis_addBJet2Eta    ->fill(b2.abseta(), weight);
+            _hVis_addBJet2Pt_abs ->fill(b2.pT()/GeV);
+            _hVis_addBJet2Pt     ->fill(b2.pT()/GeV);
+            _hVis_addBJet2Eta_abs->fill(b2.abseta());
+            _hVis_addBJet2Eta    ->fill(b2.abseta());
           }
 
           const double bbmass = (b1.mom() + b2.mom()).mass();
           const double bbdR = deltaR(b1, b2);
-          _hFull_addBBMass_abs->fill(bbmass/GeV, weight);
-          _hFull_addBBMass    ->fill(bbmass/GeV, weight);
-          _hFull_addBBDR_abs  ->fill(bbdR, weight);
-          _hFull_addBBDR      ->fill(bbdR, weight);
+          _hFull_addBBMass_abs->fill(bbmass/GeV);
+          _hFull_addBBMass    ->fill(bbmass/GeV);
+          _hFull_addBBDR_abs  ->fill(bbdR);
+          _hFull_addBBDR      ->fill(bbdR);
           if (isVisiblePS) {
-            _hVis_addBBMass_abs->fill(bbmass/GeV, weight);
-            _hVis_addBBMass    ->fill(bbmass/GeV, weight);
-            _hVis_addBBDR_abs  ->fill(bbdR, weight);
-            _hVis_addBBDR      ->fill(bbdR, weight);
+            _hVis_addBBMass_abs->fill(bbmass/GeV);
+            _hVis_addBBMass    ->fill(bbmass/GeV);
+            _hVis_addBBDR_abs  ->fill(bbdR);
+            _hVis_addBBDR      ->fill(bbdR);
           }
         }
       }
@@ -327,28 +326,28 @@ namespace Rivet {
     /// @}
 
 
-    void fillWithOF(Histo1DPtr h, double x, double w) {
-      h->fill(std::min(x, h->xMax()-1e-9), w);
+    void fillWithOF(Histo1DPtr h, double x) {
+      h->fill(std::min(x, h->xMax()-1e-9));
     }
 
 
-    void fillGapFractions(const Jets& addJets, Profile1DPtr h_gap_addJet1Pt, Profile1DPtr h_gap_addJet2Pt, Profile1DPtr h_gap_addJetHT, double weight) {
+    void fillGapFractions(const Jets& addJets, Profile1DPtr h_gap_addJet1Pt, Profile1DPtr h_gap_addJet2Pt, Profile1DPtr h_gap_addJetHT) {
       const double j1pt = (addJets.size() > 0) ? addJets[0].pT() : 0;
       for (size_t i = 1; i <= h_gap_addJet1Pt->numBins(); ++i) {
         const double binCenter = h_gap_addJet1Pt->bin(i).xMid();
-        h_gap_addJet1Pt->fill(binCenter, int(j1pt/GeV < binCenter), weight);
+        h_gap_addJet1Pt->fill(binCenter, int(j1pt/GeV < binCenter));
       }
 
       const double j2pt = (addJets.size() > 1) ? addJets[1].pT() : 0;
       for (size_t i = 1; i <= h_gap_addJet2Pt->numBins(); ++i) {
         const double binCenter = h_gap_addJet2Pt->bin(i).xMid();
-        h_gap_addJet2Pt->fill(binCenter, int(j2pt/GeV < binCenter), weight);
+        h_gap_addJet2Pt->fill(binCenter, int(j2pt/GeV < binCenter));
       }
 
       const double ht = sum(addJets, Kin::pT, 0.);
       for (size_t i = 1; i <= h_gap_addJetHT->numBins(); ++i) {
         const double binCenter = h_gap_addJetHT->bin(i).xMid();
-        h_gap_addJetHT->fill(binCenter, int(ht/GeV < binCenter) , weight);
+        h_gap_addJetHT->fill(binCenter, int(ht/GeV < binCenter) );
       }
     }
 

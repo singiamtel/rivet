@@ -33,7 +33,6 @@ namespace Rivet {
 
 
   void analyze(const Event & event) {
-    const double weight = 1.0;
 
     // Jets with  pT > 35.0, -4.7 < y < 4.7
     const JetFinder& jet_alg = apply<JetFinder>(event, "antikT");
@@ -48,14 +47,14 @@ namespace Rivet {
       for (size_t ij2 = ij1 + 1; ij2 < jets.size(); ++ij2) {
         const double deltaY = fabs(jets[ij1].rapidity() - jets[ij2].rapidity());
         // Exclusive dijet case:
-        if (jets.size() == 2) _h_DeltaY_exclusive->fill(deltaY, weight);
+        if (jets.size() == 2) _h_DeltaY_exclusive->fill(deltaY);
         // Inclusive jets case:
-        _h_DeltaY_inclusive->fill(deltaY, weight);
+        _h_DeltaY_inclusive->fill(deltaY);
         // Mueller-Navelet:
         if (deltaY > deltaY_MN) deltaY_MN = deltaY;
       }
     }
-    _h_DeltaY_MN->fill(deltaY_MN, weight);
+    _h_DeltaY_MN->fill(deltaY_MN);
   }
 
 

@@ -22,13 +22,13 @@ namespace Rivet {
       FinalState fs;
       // Leptons in constrained tracking acceptance
       Cut cuts = (Cuts::abseta < 1.1 || Cuts::absetaIn(1.5, 2.5)) && Cuts::pT > 25*GeV;
-      ZFinder zfinder_constrained(fs, cuts, PID::ELECTRON, 65*GeV, 115*GeV, 0.2, PhotonOrigin::NODECAY);
+      ZFinder zfinder_constrained(fs, cuts, PID::ELECTRON, 65*GeV, 115*GeV, 0.2);
       declare(zfinder_constrained, "ZFinderConstrained");
       FastJets conefinder_constrained(zfinder_constrained.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder_constrained, "ConeFinderConstrained");
 
       // Unconstrained leptons
-      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON, 65*GeV, 115*GeV, 0.2, PhotonOrigin::NODECAY);
+      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON, 65*GeV, 115*GeV, 0.2);
       declare(zfinder, "ZFinder");
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
@@ -70,7 +70,7 @@ namespace Rivet {
         return; // Not really a "veto", since if we got this far there is an unconstrained Z
       }
       _sum_of_weights_constrained->fill();
-      const Jets& jets_constrained = apply<JetFinder>(e, "ConeFinderConstrained").jetsByPt(20*GeV);
+      const Jets& jets_constrained = apply<JetFinder>(e, "ConeFinderConstrained").jetsByPt(Cuts::pT > 20*GeV);
       /// @todo Replace this explicit selection with a Cut
       Jets jets_cut_constrained;
       for (const Jet& j : jets_constrained) {

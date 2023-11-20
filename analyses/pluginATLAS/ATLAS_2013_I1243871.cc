@@ -65,7 +65,7 @@ namespace Rivet {
 
       // Get all jets with pT > 7 GeV (ATLAS standard jet collection)
       /// @todo Why rewrite the jets collection as a vector of pointers?
-      const Jets& jets = apply<FastJets>(event, "JETS").jetsByPt(7*GeV);
+      const Jets& jets = apply<FastJets>(event, "JETS").jetsByPt(Cuts::pT > 7*GeV);
       vector<const Jet*> allJets;
       for (const Jet& j : jets) allJets.push_back(&j);
 

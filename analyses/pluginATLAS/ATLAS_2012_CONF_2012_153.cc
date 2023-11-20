@@ -88,12 +88,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
       // get the jet candidates
-      Jets cand_jets;
-      for (const Jet& jet : apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if (jet.abseta() < 2.5) cand_jets.push_back(jet);
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
 
       // candidate muons
       Particles cand_mu = apply<IdentifiedFinalState>(event, "muons").particlesByPt();
@@ -247,11 +243,11 @@ namespace Rivet {
       }
 
       // now only use recon_jets, recon_mu, recon_e
-      _hist_electrons->fill(recon_e.size(), weight);
-      _hist_muons->fill(recon_mu.size(), weight);
-      _hist_leptons->fill(recon_mu.size() + recon_e.size(), weight);
+      _hist_electrons->fill(recon_e.size());
+      _hist_muons->fill(recon_mu.size());
+      _hist_leptons->fill(recon_mu.size() + recon_e.size());
       if (recon_mu.size() + recon_e.size() > 3) {
-        _hist_4leptons->fill(0.5, weight);
+        _hist_4leptons->fill(0.5);
       }
 
       // reject events with less than 4 electrons and muons
@@ -274,7 +270,7 @@ namespace Rivet {
       // must pass a trigger
       if (!passDouble ) {
         MSG_DEBUG("Hardest lepton fails trigger");
-        _hist_veto->fill(0.5, weight);
+        _hist_veto->fill(0.5);
         vetoEvent;
       }
 
@@ -354,11 +350,11 @@ namespace Rivet {
       }
 
       // Make the control plots
-      _hist_etmiss->fill(eTmiss,weight);
-      _hist_meff  ->fill(meff  ,weight);
+      _hist_etmiss->fill(eTmiss);
+      _hist_meff  ->fill(meff  );
       // Finally the counts
-      if (eTmiss > 50*GeV) _count_SR1->fill(0.5,weight);
-      if (meff  >0*GeV) _count_SR2->fill(0.5,weight);
+      if (eTmiss > 50*GeV) _count_SR1->fill(0.5);
+      if (meff  >0*GeV) _count_SR2->fill(0.5);
 
     }
 

@@ -26,10 +26,10 @@ namespace Rivet {
       book(_h_q2 ,1, 1, 1);
       book(_nB,"TMP/nB");
     }
-    
+
     // Calculate the Q2 using mother and daughter charged lepton
     double q2(const Particle& B, int mesonID) {
-      FourMomentum q = B.mom() - filter_select(B.children(), Cuts::pid==mesonID)[0];
+      FourMomentum q = B.mom() - select(B.children(), Cuts::pid==mesonID)[0];
       return q*q;
     }
 

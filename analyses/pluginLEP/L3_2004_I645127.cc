@@ -28,12 +28,11 @@ namespace Rivet {
 
       // Initialise and register projections
       if(_mode==0) {
-	const GammaGammaKinematics& diskin = declare(GammaGammaKinematics(), "Kinematics");
-	declare(GammaGammaFinalState(diskin), "FS");
-	declare(UnstableParticles(),"UFS");
+        declare(GammaGammaFinalState(), "FS");
+        declare(UnstableParticles(),"UFS");
       }
       else if(_mode==1) {
-	declare(FinalState(), "FS");
+        declare(FinalState(), "FS");
       }
       // Book counters
       book(_c_sigma_mu1, "/TMP/sigma_mu_1");

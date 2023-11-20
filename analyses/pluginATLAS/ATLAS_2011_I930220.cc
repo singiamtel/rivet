@@ -41,7 +41,7 @@ namespace Rivet {
     void analyze(const Event& evt) {
 
       const Particles& bHadrons = apply<HeavyHadrons>(evt, "BHadrons").bHadrons();
-      const Jets& jets = apply<JetFinder>(evt, "Jets").jetsByPt(15*GeV);
+      const Jets& jets = apply<JetFinder>(evt, "Jets").jetsByPt(Cuts::pT > 15*GeV);
 
       FourMomentum leadingJet, subleadingJet;
       int leadJet = 0, subJet = 0;

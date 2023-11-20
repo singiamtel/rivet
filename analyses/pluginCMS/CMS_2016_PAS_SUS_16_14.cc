@@ -90,14 +90,14 @@ namespace Rivet {
 
       // Electron/muon isolation
       const Particles calofs = apply<ParticleFinder>(event, "IsoFS").particles();
-      ifilter_discard(elecs, [&](const Particle& e) {
+      idiscard(elecs, [&](const Particle& e) {
           const double R = max(0.05, min(0.2, 10*GeV/e.pT()));
           double ptsum = -e.pT();
           for (const Particle& p : calofs)
             if (deltaR(p,e) < R) ptsum += p.pT();
           return ptsum / e.pT() > 0.1;
         });
-      ifilter_discard(muons, [&](const Particle& m) {
+      idiscard(muons, [&](const Particle& m) {
           const double R = max(0.05, min(0.2, 10*GeV/m.pT()));
           double ptsum = -m.pT();
           for (const Particle& p : calofs)
@@ -112,13 +112,13 @@ namespace Rivet {
 
       // Get isolated tracks
       Particles trks25 = apply<ParticleFinder>(event, "Tracks").particles();
-      ifilter_discard(trks25, [&](const Particle& t) {
+      idiscard(trks25, [&](const Particle& t) {
           double ptsum = -t.pT();
           for (const Particle& p : trks25)
             if (deltaR(p,t) < 0.3) ptsum += p.pT();
           return ptsum/t.pT() > ((t.abspid() == PID::ELECTRON || t.abspid() == PID::MUON) ? 0.2 : 0.1);
         });
-      const Particles trks = filter_select(trks25, Cuts::abseta < 2.4);
+      const Particles trks = select(trks25, Cuts::abseta < 2.4);
 
       // Isolated track pT, pTmiss and mT cut
       // mT^2 = m1^2 + m2^2 + 2(ET1 ET2 - pT1 . pT2))

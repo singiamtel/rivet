@@ -81,39 +81,38 @@ namespace Rivet {
       Particles allp = ifs.particlesByPt();
       if (allp.empty()) vetoEvent;
 
-      const double weight = 1.0;
 
       FourMomentum hmom = allp[0].momentum();
       if (allp.size() > 1) {
         FourMomentum hmom2(allp[1].momentum());
-        _h_HH_dR->fill(deltaR(hmom, hmom2), weight);
-        _h_HH_dPhi->fill(deltaPhi(hmom, hmom2), weight);
-        _h_HH_deta->fill(hmom.eta()-hmom2.eta(), weight);
-        _h_HH_pT->fill((hmom+hmom2).pT(), weight);
-        _h_HH_mass->fill((hmom+hmom2).mass(), weight);
+        _h_HH_dR->fill(deltaR(hmom, hmom2));
+        _h_HH_dPhi->fill(deltaPhi(hmom, hmom2));
+        _h_HH_deta->fill(hmom.eta()-hmom2.eta());
+        _h_HH_pT->fill((hmom+hmom2).pT());
+        _h_HH_mass->fill((hmom+hmom2).mass());
 
         if (hmom.pT() > hmom2.pT()) {
-          _h_H_pT1->fill(hmom.pT(), weight);
-          _h_H_eta1->fill(hmom.eta(), weight);
-          _h_H_pT2->fill(hmom2.pT(), weight);
-          _h_H_eta2->fill(hmom2.eta(), weight);
+          _h_H_pT1->fill(hmom.pT());
+          _h_H_eta1->fill(hmom.eta());
+          _h_H_pT2->fill(hmom2.pT());
+          _h_H_eta2->fill(hmom2.eta());
         } else {
-          _h_H_pT1->fill(hmom2.pT(), weight);
-          _h_H_eta1->fill(hmom2.eta(), weight);
-          _h_H_pT2->fill(hmom.pT(), weight);
-          _h_H_eta2->fill(hmom.eta(), weight);
+          _h_H_pT1->fill(hmom2.pT());
+          _h_H_eta1->fill(hmom2.eta());
+          _h_H_pT2->fill(hmom.pT());
+          _h_H_eta2->fill(hmom.eta());
         }
       }
-      _h_H_pT->fill(hmom.pT(), weight);
-      _h_H_eta->fill(hmom.eta(), weight);
-      _h_H_phi->fill(hmom.azimuthalAngle(), weight);
+      _h_H_pT->fill(hmom.pT());
+      _h_H_eta->fill(hmom.eta());
+      _h_H_phi->fill(hmom.azimuthalAngle());
 
 
       // Get the jet candidates
-      Jets jets = apply<FastJets>(e, "Jets").jetsByPt(20.0*GeV);
+      Jets jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > 20*GeV);
       if (!jets.empty()) {
-        _h_H_jet1_deta->fill(deltaEta(hmom, jets[0]), weight);
-        _h_H_jet1_dR->fill(deltaR(hmom, jets[0]), weight);
+        _h_H_jet1_deta->fill(deltaEta(hmom, jets[0]));
+        _h_H_jet1_dR->fill(deltaR(hmom, jets[0]));
       }
 
       MC_JetAnalysis::analyze(e);

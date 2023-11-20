@@ -47,7 +47,7 @@ namespace Rivet {
         const double normfactor = TWOPI*p.pT()/GeV*2*RAPMAX;
         if (p.pid() == 111) {
           // Neutral pion; ALICE corrects for pi0 feed-down from K_0_s and Lambda
-          if (p.hasAncestor(310) || p.hasAncestor(3122) || p.hasAncestor(-3122)) continue; //< K_0_s, Lambda, Anti-Lambda
+          if (p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122)) continue; //< K_0_s, Lambda, Anti-Lambda
           _h_pi0->fill(p.pT()/GeV, 1.0/normfactor);
           _temp_h_pion->fill(p.pT()/GeV);
         } else if (p.pid() == 221 && _cm_energy_case == 2) {

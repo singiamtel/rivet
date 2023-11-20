@@ -65,8 +65,8 @@ namespace Rivet {
 
       // Check overlap of jets/leptons.
       for (const Jet& jet : jets) {
-        ifilter_discard(elecs, deltaRLess(jet, 0.4));
-        ifilter_discard(muons, deltaRLess(jet, 0.4));
+        idiscard(elecs, deltaRLess(jet, 0.4));
+        idiscard(muons, deltaRLess(jet, 0.4));
       }
       if (elecs.empty() || muons.empty()) vetoEvent;
       if (elecs[0].charge() == muons[0].charge()) vetoEvent;

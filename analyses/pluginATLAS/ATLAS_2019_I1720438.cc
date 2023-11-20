@@ -187,7 +187,7 @@ namespace Rivet {
       double pTv = neutrinos[0].pT()/GeV;
       double AbsDeltay = fabs(Zboson.rapidity()-Wlepton.rapidity());
 
-      ifilter_discard(jets, [&](const Jet& j) {
+      idiscard(jets, [&](const Jet& j) {
         return deltaR(j, Zlepton1) < 0.3 || deltaR(j, Zlepton2) < 0.3 || deltaR(j, Wlepton) < 0.3;
       });
 

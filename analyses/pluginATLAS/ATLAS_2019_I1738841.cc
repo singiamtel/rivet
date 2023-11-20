@@ -60,7 +60,7 @@ namespace Rivet {
       const Particle& lep1 = dressedLeptons[0];
       const Particle& lep2 = dressedLeptons[1];
 
-      const Jets& jets = apply<FastJets>(event,"jets").jetsByPt(35.);
+      const Jets& jets = apply<FastJets>(event,"jets").jetsByPt(Cuts::pT > 35*GeV);
       if (jets.size() < 2) vetoEvent;
 
       // pT of the two leading jets

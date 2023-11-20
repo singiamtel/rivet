@@ -28,7 +28,7 @@ namespace Rivet {
 
     void project(const Event& e) {
       clear();
-      set(apply<HepMCHeavyIon>(e, "HepMC").centrality());
+      setValue(apply<HepMCHeavyIon>(e, "HepMC").centrality());
     }
 
     CmpState compare(const Projection& p) const {

@@ -8,7 +8,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief ttbar + gamma at 13 TeV
   class ATLAS_2018_I1707015 : public Analysis {
   public:
@@ -102,7 +102,7 @@ namespace Rivet {
 
       // Overlap removel of jets near leptons
       for (const DressedLepton& lep : leptons) {
-        ifilter_discard(jets, deltaRLess(lep, 0.4));
+        idiscard(jets, deltaRLess(lep, 0.4));
       }
 
       // Overlap removel of jets near isolated photon
@@ -111,7 +111,7 @@ namespace Rivet {
       for (const Particle& p : photSurround) {
         conePt += p.pt();
       }
-      if ( conePt / photon.pT() < 0.1 ) ifilter_discard(jets, deltaRLess(photon, 0.4) );
+      if ( conePt / photon.pT() < 0.1 ) idiscard(jets, deltaRLess(photon, 0.4) );
 
       // Veto event if photon too close to good jets
       for (const Jet& jet : jets) {

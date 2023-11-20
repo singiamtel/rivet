@@ -59,12 +59,12 @@ namespace Rivet {
 
       // B-jets
       const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::pT > 5*GeV); // tODO jet eta?
-      const Jets bjets = filter_select(jets,  [](const Jet& j) { return j.bTagged(); });
+      const Jets bjets = select(jets,  [](const Jet& j) { return j.bTagged(); });
       if (bjets.size()<2) vetoEvent;
 
       // Muons
       const Particles all_muons = apply<IdentifiedFinalState>(event, "MUONS").particles(Cuts::pT>2.5/GeV, cmpMomByE);
-      const Particles b_muons = filter_select(all_muons, [](const Particle& m) {return cos(m.theta()) < 0.7; });
+      const Particles b_muons = select(all_muons, [](const Particle& m) {return cos(m.theta()) < 0.7; });
       if (b_muons.size()<2) vetoEvent;
 
       // Missing energy cut

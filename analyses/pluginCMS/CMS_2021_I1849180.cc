@@ -8,7 +8,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief Drell-Yan dimuon production in proton-lead collisions at  8.16 TeV
   class CMS_2021_I1849180 : public Analysis {
   public:
@@ -16,7 +16,7 @@ namespace Rivet {
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2021_I1849180);
 
-    
+
     /// @name Analysis methods
     ///@{
 
@@ -30,10 +30,10 @@ namespace Rivet {
         _y_shift = -0.465;
       }
 
-      ZFinder zmumuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 10 * GeV, PID::MUON, 15.0 * GeV, 600.0 * GeV, 0.1, PhotonOrigin::NODECAY);
+      ZFinder zmumuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 10 * GeV, PID::MUON, 15.0 * GeV, 600.0 * GeV, 0.1);
       declare(zmumuFinder, "ZmumuFinder");
 
-      ZFinder TotzmumuFinder(fs, Cuts::pT > 0.0 * GeV, PID::MUON, 0.0 * GeV, 1000.0 * GeV, 0.1, PhotonOrigin::NODECAY);
+      ZFinder TotzmumuFinder(fs, Cuts::pT > 0.0 * GeV, PID::MUON, 0.0 * GeV, 1000.0 * GeV, 0.1);
       declare(TotzmumuFinder, "TotzmumuFinder");
 
       declare(FinalState(), "FS");
@@ -153,7 +153,7 @@ namespace Rivet {
 
 
   private:
-    
+
     FourMomentum _pcom;
 
     map<string, Histo1DPtr> _h;

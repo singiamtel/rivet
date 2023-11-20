@@ -118,7 +118,7 @@ namespace Rivet {
       // Select final jets, ordered by decreasing pT
       vector<FourMomentum> finaljet_list;
       double HT = 0.0;
-      const Jets jListAll = apply<FastJets>(event, "Jets").jetsByPt(30.0*GeV);
+      const Jets jListAll = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV);
       for (const Jet& j : jListAll) {
         if (j.abseta() < 2.4 && j.pT() > 30.0*GeV && deltaR(lepton0, j) > 0.5) {
           finaljet_list.push_back(j.momentum());

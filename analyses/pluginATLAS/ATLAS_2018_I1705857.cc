@@ -11,7 +11,7 @@ namespace Rivet {
   /// @brief ttbb at 13 TeV
   class ATLAS_2018_I1705857 : public Analysis {
   public:
-    
+
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1705857);
 
@@ -108,7 +108,7 @@ namespace Rivet {
 
       const Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       for (const auto& jet : jets) {
-        ifilter_discard(leptons, [&](const DressedLepton& lep) { return deltaR(jet, lep) < 0.4; });
+        idiscard(leptons, [&](const DressedLepton& lep) { return deltaR(jet, lep) < 0.4; });
       }
 
       Jets bjets;

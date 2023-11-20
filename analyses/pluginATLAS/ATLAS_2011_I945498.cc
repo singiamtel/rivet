@@ -38,19 +38,19 @@ namespace Rivet {
 
       // Set up projections
 	  FinalState fs;
-      ZFinder zfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 66*GeV, 116*GeV, 0.1, PhotonOrigin::NODECAY);
+      ZFinder zfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 66*GeV, 116*GeV, 0.1);
       declare(zfinder_mu, "ZFinder_mu");
 
       Cut cuts = (Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
 
-      ZFinder zfinder_el(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1, PhotonOrigin::NODECAY);
+      ZFinder zfinder_el(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1);
       declare(zfinder_el, "ZFinder_el");
 
 	  Cut cuts25_20 = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
       // For combined cross-sections (combined phase space + dressed level)
-      ZFinder zfinder_comb_mu(fs, cuts25_20, PID::MUON, 66.0*GeV, 116.0*GeV, 0.1, PhotonOrigin::NODECAY);
+      ZFinder zfinder_comb_mu(fs, cuts25_20, PID::MUON, 66.0*GeV, 116.0*GeV, 0.1);
       declare(zfinder_comb_mu, "ZFinder_comb_mu");
-      ZFinder zfinder_comb_el(fs, cuts25_20, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.1, PhotonOrigin::NODECAY);
+      ZFinder zfinder_comb_el(fs, cuts25_20, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.1);
       declare(zfinder_comb_el, "ZFinder_comb_el");
 
       // Define veto FS in order to prevent Z-decay products entering the jet algorithm
@@ -92,7 +92,7 @@ namespace Rivet {
       const FourMomentum l1 = zf->constituents()[0].momentum();
       const FourMomentum l2 = zf->constituents()[1].momentum();
       Jets jets;
-      for (const Jet& jet : allJets->jetsByPt(30*GeV)) {
+      for (const Jet& jet : allJets->jetsByPt(Cuts::pT > 30*GeV)) {
         const FourMomentum jmom = jet.momentum();
         if (jmom.absrap() < 4.4 &&
             deltaR(l1, jmom) > 0.5  && deltaR(l2, jmom) > 0.5) {

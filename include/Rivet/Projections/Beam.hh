@@ -31,10 +31,6 @@ namespace Rivet {
     /// The pair of beam particles in the current collision
     const ParticlePair& beams() const { return _theBeams; }
 
-    /// The pair of beam particle PDG codes in the current collision
-    /// @deprecated Use pids(beams())
-    PdgIdPair beamIDs() const { return pids(beams()); }
-
     /// Get centre of mass energy, \f$ \sqrt{s} \f$
     double sqrtS() const { return Rivet::sqrtS(beams()); }
 

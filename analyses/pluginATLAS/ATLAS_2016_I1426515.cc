@@ -152,7 +152,7 @@ namespace Rivet {
       if (lep1->pT() < 25*GeV || lep2->pT() < 20*GeV)  vetoEvent;
 
       // Select jets isolated from electrons
-      const Jets jets_selected = filter_select(jets, [&](const Jet& j){ return all(good_el, deltaRGtr(j, 0.3)); });
+      const Jets jets_selected = select(jets, [&](const Jet& j){ return all(good_el, deltaRGtr(j, 0.3)); });
 
       // Define variables
       const FourMomentum met = sum(ifs.particles(), FourMomentum());

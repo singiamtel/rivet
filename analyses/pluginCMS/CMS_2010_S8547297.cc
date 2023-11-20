@@ -41,7 +41,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       //charged particles
       const ChargedFinalState& charged = apply<ChargedFinalState>(event, "CFS");
@@ -54,14 +53,14 @@ namespace Rivet {
         const double eta = p.eta();
 
         // The data is actually a duplicated folded distribution.  This should mimic it.
-        _h_dNch_dEta->fill(eta, 0.5*weight);
-        _h_dNch_dEta->fill(-eta, 0.5*weight);
+        _h_dNch_dEta->fill(eta, 0.5);
+        _h_dNch_dEta->fill(-eta, 0.5);
         if (fabs(eta) < 2.4 && pT > 0.1*GeV) {
           if (pT < 4.0*GeV) {
-            _h_dNch_dpT_all->fill(pT/GeV, weight/(pT/GeV));
+            _h_dNch_dpT_all->fill(pT/GeV, 1.0/(pT/GeV));
             if (pT < 2.0*GeV) {
               int ietabin = int(fabs(eta)/0.2);
-              _h_dNch_dpT[ietabin]->fill(pT/GeV, weight);
+              _h_dNch_dpT[ietabin]->fill(pT/GeV);
             }
           }
         }

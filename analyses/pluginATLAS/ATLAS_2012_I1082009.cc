@@ -60,10 +60,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       // get the jets
-      Jets jets;
-      for (const Jet& jet : apply<FastJets>(event, "jets").jetsByPt(25.0*GeV)) {
-        if ( jet.abseta() < 2.5 ) jets.push_back(jet);
-      }
+      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
       // get the D* mesons
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       Particles Dstar;

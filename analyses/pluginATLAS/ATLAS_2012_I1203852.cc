@@ -265,8 +265,7 @@ namespace Rivet {
         // JETVETO: veto all events with at least one good jet
         ///////////////////////////////////////////////////////////////////////////
         vector<Jet> good_jets;
-        for (const Jet& j : apply<FastJets>(e, "jet").jetsByPt(25)) {
-          if (j.abseta() > 4.5) continue;
+        for (const Jet& j : apply<FastJets>(e, "jet").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 4.5)) {
           bool isLepton = 0;
           for (const Particle& l : leptons_sel2l2nu_jetveto) {
             const double dR = deltaR(l.momentum(), j.momentum());

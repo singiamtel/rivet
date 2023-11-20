@@ -96,7 +96,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
 
       ///DEBUG
       count +=1; //cerr<< "Event " << count << '\n';
@@ -320,14 +319,14 @@ namespace Rivet {
       if ( cand_mu.size() == 2 ) {
         if ( M_ll >= 81*GeV && M_ll <= 101*GeV ) {
           ++mumuZCR;
-          _hist_St_mumu_ZCR->fill(St_ll, weight);
+          _hist_St_mumu_ZCR->fill(St_ll);
         }
       }
       // eejj, Z control region
       else if ( cand_e.size() == 2 ) {
         if ( M_ll >= 81*GeV && M_ll <= 101*GeV ) {
           ++eeZCR;
-          _hist_St_ee_ZCR->fill(St_ll, weight);
+          _hist_St_ee_ZCR->fill(St_ll);
 
         }
       }
@@ -337,13 +336,13 @@ namespace Rivet {
         if ( recon_jets.size() == 2 &&
              mT >= 40*GeV && mT <= 150*GeV ) {
           ++munuW2CR;
-          _hist_MLQ_munu_W2CR->fill(M_LQ, weight);
+          _hist_MLQ_munu_W2CR->fill(M_LQ);
         }
         // munujj, tt control region
         if ( recon_jets.size() >= 4 &&
              recon_jets[0].pT() > 50*GeV && recon_jets[1].pT() > 40*GeV && recon_jets[2].pT() > 30*GeV ) {
           ++munuttCR;
-          _hist_MLQ_munu_ttCR->fill(M_LQ, weight);
+          _hist_MLQ_munu_ttCR->fill(M_LQ);
         }
       }
       if ( cand_e.size() == 1 ) {
@@ -351,13 +350,13 @@ namespace Rivet {
         if ( recon_jets.size() == 2 &&
              mT >= 40*GeV && mT <= 150*GeV ) {
           ++enuW2CR;
-          _hist_MLQ_enu_W2CR->fill(M_LQ, weight);
+          _hist_MLQ_enu_W2CR->fill(M_LQ);
         }
         // enujj, tt control region
         if ( recon_jets.size() >= 4 &&
              recon_jets[0].pT() > 50*GeV && recon_jets[1].pT() > 40*GeV && recon_jets[2].pT() > 30*GeV ) {
           ++enuttCR;
-          _hist_MLQ_enu_ttCR->fill(M_LQ, weight);
+          _hist_MLQ_enu_ttCR->fill(M_LQ);
         }
       }
 
@@ -415,8 +414,8 @@ namespace Rivet {
 
           ++mumujj;
           // cerr<< " ->MUMUJJ event selected." << '\n';
-          _hist_St_mumu->fill(St_ll, weight);
-          _count_mumujj->fill(0.5, weight);
+          _hist_St_mumu->fill(St_ll);
+          _count_mumujj->fill(0.5);
 
         }
       }
@@ -434,8 +433,8 @@ namespace Rivet {
 
           ++eejj;
           //cerr<< " ->EEJJ event selected." << '\n';
-          _hist_St_ee->fill(St_ll, weight);
-          _count_eejj->fill(0.5, weight);
+          _hist_St_ee->fill(St_ll);
+          _count_eejj->fill(0.5);
 
         }
       }
@@ -469,8 +468,8 @@ namespace Rivet {
         //else {
         ++muvjj;
         //cerr<< " ->MUVJJ event selected." << '\n';
-        _hist_MLQ_muv->fill(M_LQ, weight);
-        _count_muvjj->fill(0.5, weight);
+        _hist_MLQ_muv->fill(M_LQ);
+        _count_muvjj->fill(0.5);
 
         //}
       }
@@ -501,8 +500,8 @@ namespace Rivet {
         //else {
         ++evjj;
         //cerr<< " ->EVJJ event selected." << '\n';
-        _hist_MLQ_ev->fill(M_LQ, weight);
-        _count_evjj->fill(0.5, weight);
+        _hist_MLQ_ev->fill(M_LQ);
+        _count_evjj->fill(0.5);
 
 
 
@@ -516,8 +515,8 @@ namespace Rivet {
         //      else {
         // ++evjj;
         // cerr<< " ->EVJJ event selected." << '\n';
-        // _hist_MLQ_ev->fill(M_LQ, weight);
-        //          _count_evjj->fill(0.5, weight);
+        // _hist_MLQ_ev->fill(M_LQ);
+        //          _count_evjj->fill(0.5);
 
         //      }
 

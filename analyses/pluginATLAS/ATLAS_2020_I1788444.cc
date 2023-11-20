@@ -8,7 +8,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief Z + b(b) in pp at 13 TeV
   class ATLAS_2020_I1788444 : public Analysis {
   public:
@@ -31,7 +31,7 @@ namespace Rivet {
       declare(zfinderE, "zfinderE");
       declare(zfinderM, "zfinderM");
       declare(HeavyHadrons(), "HFHadrons");
-      
+
       // Photons
       FinalState photons(Cuts::abspid == PID::PHOTON);
       // Muons
@@ -40,15 +40,15 @@ namespace Rivet {
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
-      
+
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
-      
+
       FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "jets");
-      
+
       // Book histos - binning taken from data.yoda
       book(_h["i1b_ZpT"],2,1,1);
       book(_h["i1b_ZY"],4,1,1);
@@ -57,7 +57,7 @@ namespace Rivet {
       book(_h["i1b_dYZb"],7,1,1);
       book(_h["i1b_bpT"],3,1,1);
       book(_h["i1b_bY"],5,1,1);
-      
+
       book(_h["i2b_ZpT"],13,1,1);
       book(_h["i2b_dPhibb"],9,1,1);
       book(_h["i2b_dRbb"],11,1,1);
@@ -65,7 +65,7 @@ namespace Rivet {
       book(_h["i2b_Mbb"],12,1,1);
       book(_h["i2b_pTbb"],14,1,1);
       book(_h["i2b_pTOnMbb"],15,1,1);
-      
+
       book(_h["ib_nBJets"],1,1,1);
     }
 
@@ -77,7 +77,7 @@ namespace Rivet {
       const Particles& els = zfinderE.constituents();
       const ZFinder& zfinderM = apply<ZFinder>(event, "zfinderM");
       const Particles& mus = zfinderM.constituents();
-      
+
       // default is to run average of Z->ee and Z->mm
       // use LMODE option to pick one channel
       if ( (els.size() + mus.size()) != 2 )  vetoEvent;
@@ -105,21 +105,21 @@ namespace Rivet {
       idiscardIfAnyDeltaRLess(jets, mus, 0.4);
 
       Jets btagged;
-      const Particles allBs = apply<HeavyHadrons>(event, "HFHadrons").bHadrons(5.0*GeV);
+      const Particles allBs = apply<HeavyHadrons>(event, "HFHadrons").bHadrons(Cuts::pT > 5.0*GeV);
       Particles matchedBs;
-      
+
       for (const Jet& j : jets) {
         Jet closest_j;
         Particle closest_b;
         double minDR_j_b = 10;
-	
+
         for (const Particle& bHad : allBs) {
           bool alreadyMatched = false;
           for (const Particle& bMatched : matchedBs) {
             alreadyMatched |= bMatched.isSame(bHad);
           }
           if (alreadyMatched)  continue;
-	  
+
           double DR_j_b = deltaR(j, bHad);
           if ( DR_j_b <= 0.3 && DR_j_b < minDR_j_b) {
             minDR_j_b = DR_j_b;
@@ -127,7 +127,7 @@ namespace Rivet {
             closest_b = bHad;
           }
         }
-	
+
         if (minDR_j_b < 0.3) {
           btagged += closest_j;
           matchedBs += closest_b;
@@ -136,14 +136,14 @@ namespace Rivet {
       //size_t njets = jets.size();
       size_t ntags = btagged.size();
       if (ntags < 1) vetoEvent;
-      
+
       _h["ib_nBJets"]->fill(1); //inclusive 1-b
-      
+
       double dYVb = fabs(Vy - btagged[0].rap());
       double dEtaVb = fabs(Veta - btagged[0].eta());
       double dPhiVb = deltaPhi(Vphi, btagged[0]);
       double dRVb = sqrt(dEtaVb*dEtaVb + dPhiVb*dPhiVb);
-      
+
       _h["i1b_ZpT"]   ->fill(Vpt/GeV);
       _h["i1b_ZY"]    ->fill(fabs(Vy));
       _h["i1b_dPhiZb"]->fill(dPhiVb);
@@ -151,16 +151,16 @@ namespace Rivet {
       _h["i1b_dYZb"]->fill(dYVb);
       _h["i1b_bpT"]->fill(btagged[0].pt()/GeV);
       _h["i1b_bY"]->fill(btagged[0].absrap());
-      
+
       if ( ntags>1 ) {
         _h["ib_nBJets"]->fill(2); //inclusive 2-b
-	
+
         double dYbb   = fabs(btagged[0].rap() - btagged[1].rap());
         double dPhibb = deltaPhi(btagged[0], btagged[1]);
         double dRbb   = deltaR(btagged[0], btagged[1]);
         double Mbb    = (btagged[0].mom() + btagged[1].mom()).mass()/GeV;
         double Ptbb   = (btagged[0].mom() + btagged[1].mom()).pt()/GeV;
-	
+
         _h["i2b_ZpT"]->fill(Vpt);
         _h["i2b_dPhibb"]->fill(dPhibb);
         _h["i2b_dRbb"]->fill(dRbb);
@@ -168,29 +168,29 @@ namespace Rivet {
         _h["i2b_Mbb"]->fill(Mbb);
         _h["i2b_pTbb"]->fill(Ptbb);
         _h["i2b_pTOnMbb"]->fill(Ptbb/Mbb);
-	
+
       }
     }
-    
-    
+
+
     void finalize() {
       // routine accepts both Z->ee and Z->mm
       // data corresponds to average
       const double sf = _mode? 1.0 : 0.5;
       scale(_h, sf * crossSectionPerEvent());
     }
-    
-    
+
+
   private:
-    
+
     size_t _mode;
-    
-    
+
+
     map<string, Histo1DPtr> _h;
-    
+
   };
 
-  
+
   RIVET_DECLARE_PLUGIN(ATLAS_2020_I1788444);
 
 }

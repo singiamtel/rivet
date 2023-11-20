@@ -103,7 +103,7 @@ namespace Rivet {
       DressedLeptons electrons = apply<LeptonFinder>(event, "elecs").dressedLeptons();
       DressedLeptons muons     = apply<LeptonFinder>(event, "muons").dressedLeptons();
       const Jets& jets  = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
-      const PseudoJets& all_fjets  = apply<FastJets>(event, "fjets").pseudoJetsByPt();
+      const PseudoJets& all_fjets  = apply<FastJets>(event, "fjets").pseudojetsByPt();
 
       // get MET
       const Vector3 met = apply<MissingMomentum>(event, "MET").vectorMPT();

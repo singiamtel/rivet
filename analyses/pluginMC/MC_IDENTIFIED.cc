@@ -46,28 +46,27 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // Unphysical (debug) plotting of all PIDs in the event, physical or otherwise
       for(ConstGenParticlePtr gp: HepMCUtils::particles(event.genEvent())) {
-        _histAllPIDs->fill(abs(gp->pdg_id()), weight);
+        _histAllPIDs->fill(abs(gp->pdg_id()));
       }
 
       // Charged + neutral final state PIDs
       const FinalState& cnfs = apply<FinalState>(event, "FS");
       for (const Particle& p : cnfs.particles()) {
-        _histStablePIDs->fill(p.abspid(), weight);
+        _histStablePIDs->fill(p.abspid());
       }
 
       // Unstable PIDs and identified particle eta spectra
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
-        _histDecayedPIDs->fill(p.pid(), weight);
+        _histDecayedPIDs->fill(p.pid());
         const double eta_abs = p.abseta();
         const PdgId pid = p.abspid(); //if (PID::isMeson(pid) && PID::hasStrange()) {
-        if (pid == 211 || pid == 111) _histEtaPi->fill(eta_abs, weight);
-        else if (pid == 321 || pid == 130 || pid == 310) _histEtaK->fill(eta_abs, weight);
-        else if (pid == 3122) _histEtaLambda->fill(eta_abs, weight);
+        if (pid == 211 || pid == 111) _histEtaPi->fill(eta_abs);
+        else if (pid == 321 || pid == 130 || pid == 310) _histEtaK->fill(eta_abs);
+        else if (pid == 3122) _histEtaLambda->fill(eta_abs);
       }
 
     }

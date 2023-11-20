@@ -94,19 +94,6 @@ namespace Rivet {
     }
 
 
-    /// @brief Constructor with trailing efficiency arg
-    /// @deprecated Use the version with pair-smearing list as 2nd argument
-    ///
-    /// @todo Add a tau-tag slot
-    SmearedJets(const JetFinder& ja,
-                const JetSmearFn& smearFn,
-                const JetEffFn& bTagEffFn,
-                const JetEffFn& cTagEffFn,
-                const JetEffFn& jetEffFn)
-      : SmearedJets(ja, {jetEffFn,smearFn}, bTagEffFn, cTagEffFn)
-    {    }
-
-
     /// @todo How to include tagging effs?
     /// @todo Variadic eff/smear fn list?
     /// @todo Add a trailing Cut arg cf. SmearedParticles? -- wrap into an eff function

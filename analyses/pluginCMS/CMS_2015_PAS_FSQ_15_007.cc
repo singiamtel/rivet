@@ -46,18 +46,14 @@ namespace Rivet {
     void analyze(const Event& event) {
       // Find the lead jet, applying a restriction that the jets must be within |eta| < 2.
       FourMomentum p_leadjet, p_leadtrack;
-      for (const Jet& j : apply<FastJets>(event, "Jets").jetsByPt(1.0 * GeV)) {
-        if (j.abseta() < 2.0) {
-          p_leadjet = j.momentum();
-          break;
-        }
+      for (const Jet& j : apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 1*GeV && Cuts::abseta < 2.0)) {
+        p_leadjet = j.momentum();
+        break;
       }
 
-      for (const Particle& j : apply<ChargedFinalState>(event, "CFS").particlesByPt(0.5 * GeV)) {
-        if (j.abseta() < 2.0) {
-          p_leadtrack = j.momentum();
-          break;
-        }
+      for (const Particle& j : apply<ChargedFinalState>(event, "CFS").particlesByPt(Cuts::abseta < 2.0 && 0.5*GeV)) {
+        p_leadtrack = j.momentum();
+        break;
       }
 
       if (p_leadjet.isZero() && p_leadtrack.isZero())

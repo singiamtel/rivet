@@ -94,7 +94,7 @@ namespace Rivet {
       double jetcuts[] = { 30.0*GeV, 20.0*GeV };
       for (size_t i = 0; i < 2; ++i) {
         Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::absrap < 4.4 && Cuts::pT > jetcuts[i]);
-        ifilter_discard(jets, deltaRLess(lepton, 0.5));
+        idiscard(jets, deltaRLess(lepton, 0.5));
 
         const double HT = sum(jets, Kin::pT, lepton.pT() + p_miss.pT());
 

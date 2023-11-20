@@ -69,7 +69,7 @@ namespace Rivet {
       string edge = "OTHER";
       const size_t idx = _axes[name].index(val);
       if (idx && idx <= _edges[name].size())  edge = _edges[name][idx-1];
-      _h[name]->fill(edge, weight);
+      _h[name]->fill(edge);
     }
 
 

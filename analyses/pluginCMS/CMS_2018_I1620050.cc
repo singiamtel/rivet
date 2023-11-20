@@ -97,7 +97,7 @@ namespace Rivet {
       // Select bjets
       const FastJets& fjJets = apply<FastJets>(event, "ak4jets");
       const Jets jets = fjJets.jetsByPt(Cuts::abseta < 2.4 && Cuts::pT > 30*GeV);
-      const Jets bJets = filter_select(jets, hasBTag());
+      const Jets bJets = select(jets, hasBTag());
       // Jets bJets;
       // for ( Jets::const_iterator itjet = jets.begin(); itjet != jets.end() ; ++itjet) {
       //   if ( itjet->bTagged() ) { // Note: default b tagging algorithm is ghost association (see the Rivet Jet class reference manual)
@@ -194,7 +194,7 @@ namespace Rivet {
         _clusteredLeptons.clear();
 
         DressedLeptons allClusteredLeptons;
-        const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(5*GeV);
+        const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(Cuts::pT > 5*GeV);
         for (const Jet& jet : jets) {
           Particle lepCand;
           for (const Particle& cand : jet.particles()) {

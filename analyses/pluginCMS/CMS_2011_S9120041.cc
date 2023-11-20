@@ -54,11 +54,9 @@ namespace Rivet {
 
       // Find the lead jet, applying a restriction that the jets must be within |eta| < 2.
       FourMomentum p_lead;
-      for (const Jet& j : apply<FastJets>(event, "Jets").jetsByPt(1.0*GeV)) {
-        if (j.abseta() < 2.0) {
-          p_lead = j.momentum();
-          break;
-        }
+      for (const Jet& j : apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 1.0*GeV && Cuts::abseta < 2.0)) {
+        p_lead = j.momentum();
+        break;
       }
       if (p_lead.isZero()) vetoEvent;
       const double philead = p_lead.phi();

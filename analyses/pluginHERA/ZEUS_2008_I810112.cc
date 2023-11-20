@@ -84,10 +84,10 @@ class ZEUS_2008_I810112 : public Analysis {
           const UnstableParticles& ufs = apply<UnstableParticles>(event, "UPS");
 
           /// Get \f$D^0$\f particles
-          for (const Particle& p : filter_select(ufs.particles(), Cuts::abspid == PID::D0)) {
+          for (const Particle& p : select(ufs.particles(), Cuts::abspid == PID::D0)) {
               ///But not not from \f$D^{*\pm}$\f decays
-              if (p.hasAncestor(PID::DSTARPLUS)) continue;
-              if (p.hasAncestor(PID::DSTARMINUS)) continue;
+              if (p.hasAncestorWith(Cuts::pid == PID::DSTARPLUS)) continue;
+              if (p.hasAncestorWith(Cuts::pid == PID::DSTARMINUS)) continue;
               /// Select particles only in the \f$\eta-p_{T}$\f region
               if (!inRange(p.eta(), -1.6, 1.6)) continue;
               if (!inRange(p.pt()/GeV, 1.5, 15.0)) continue;
@@ -101,7 +101,7 @@ class ZEUS_2008_I810112 : public Analysis {
           }
 
           /// Get \f$D^{\pm}$\f particles
-          for (const Particle& p : filter_select(ufs.particles(), Cuts::abspid == PID::DPLUS)) {
+          for (const Particle& p : select(ufs.particles(), Cuts::abspid == PID::DPLUS)) {
               /// Select particles only in the \f$\eta-p_{T}$\f region
               if (!inRange(p.eta(), -1.6, 1.6)) continue;
               if (!inRange(p.pt()/GeV, 1.5, 15.0)) continue;

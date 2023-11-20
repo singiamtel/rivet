@@ -28,9 +28,8 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
-      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(1.0*GeV);
+      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 1.0*GeV);
       if (jets.size() < 1) vetoEvent;
 
       if (fabs(jets[0].eta()) >= 2) { // cuts on leading jets
@@ -64,10 +63,10 @@ namespace Rivet {
         }
       }
 
-      _h_nTrans_Kaon->fill(pTlead/GeV, numTrans_Kaon / (8.0 * PI/3.0), weight);
-      _h_nTrans_Lambda->fill(pTlead/GeV, numTrans_Lambda / (8.0 * PI/3.0), weight);
-      _h_ptsumTrans_Kaon->fill(pTlead/GeV, ptSumTrans_Kaon / (GeV * (8.0 * PI/3.0)), weight);
-      _h_ptsumTrans_Lambda->fill(pTlead/GeV, ptSumTrans_Lambda / (GeV * (8.0 * PI/3.0)), weight);
+      _h_nTrans_Kaon->fill(pTlead/GeV, numTrans_Kaon / (8.0 * PI/3.0));
+      _h_nTrans_Lambda->fill(pTlead/GeV, numTrans_Lambda / (8.0 * PI/3.0));
+      _h_ptsumTrans_Kaon->fill(pTlead/GeV, ptSumTrans_Kaon / (GeV * (8.0 * PI/3.0)));
+      _h_ptsumTrans_Lambda->fill(pTlead/GeV, ptSumTrans_Lambda / (GeV * (8.0 * PI/3.0)));
     }
 
 

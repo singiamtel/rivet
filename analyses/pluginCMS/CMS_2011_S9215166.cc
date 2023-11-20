@@ -75,7 +75,7 @@ namespace Rivet {
       if (isCompatibleWithSqrtS(900*GeV)) PTCUT = 8.0*GeV;
       else if (isCompatibleWithSqrtS(7000*GeV)) PTCUT = 20.0*GeV;
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
-      const Jets jets = jetpro.jetsByPt(PTCUT);
+      const Jets jets = jetpro.jetsByPt(Cuts::pT > PTCUT);
       if (jets.size() >= 2) {
         // eta cut for the central jets
         if (fabs(jets[0].eta()) < 2.5 && fabs(jets[1].eta()) < 2.5) {

@@ -98,7 +98,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       const ZFinder& zfinder_el = apply<ZFinder>(event, "zfinder_el");
       if (zfinder_el.bosons().size() > 0) {
@@ -113,25 +112,25 @@ namespace Rivet {
 
         // Fill the histograms
         if (rap < 1.0) {
-          _hist_ee_100_num->fill(z.mass(), weight * sgn);
-          _hist_ll_100_num->fill(z.mass(), weight * sgn);
-          _hist_ee_100_den->fill(z.mass(), weight);
-          _hist_ll_100_den->fill(z.mass(), weight);
+          _hist_ee_100_num->fill(z.mass(), sgn);
+          _hist_ll_100_num->fill(z.mass(), sgn);
+          _hist_ee_100_den->fill(z.mass());
+          _hist_ll_100_den->fill(z.mass());
         } else if (rap < 1.25) {
-          _hist_ee_125_num->fill(z.mass(), weight * sgn);
-          _hist_ll_125_num->fill(z.mass(), weight * sgn);
-          _hist_ee_125_den->fill(z.mass(), weight);
-          _hist_ll_125_den->fill(z.mass(), weight);
+          _hist_ee_125_num->fill(z.mass(), sgn);
+          _hist_ll_125_num->fill(z.mass(), sgn);
+          _hist_ee_125_den->fill(z.mass());
+          _hist_ll_125_den->fill(z.mass());
         } else if (rap < 1.50) {
-          _hist_ee_150_num->fill(z.mass(), weight * sgn);
-          _hist_ll_150_num->fill(z.mass(), weight * sgn);
-          _hist_ee_150_den->fill(z.mass(), weight);
-          _hist_ll_150_den->fill(z.mass(), weight);
+          _hist_ee_150_num->fill(z.mass(), sgn);
+          _hist_ll_150_num->fill(z.mass(), sgn);
+          _hist_ee_150_den->fill(z.mass());
+          _hist_ll_150_den->fill(z.mass());
         } else if (rap < 2.40) {
-          _hist_ee_240_num->fill(z.mass(), weight * sgn);
-          _hist_ll_240_num->fill(z.mass(), weight * sgn);
-          _hist_ee_240_den->fill(z.mass(), weight);
-          _hist_ll_240_den->fill(z.mass(), weight);
+          _hist_ee_240_num->fill(z.mass(), sgn);
+          _hist_ll_240_num->fill(z.mass(), sgn);
+          _hist_ee_240_den->fill(z.mass());
+          _hist_ll_240_den->fill(z.mass());
         }
       }
 
@@ -148,25 +147,25 @@ namespace Rivet {
 
         // Fill the histograms
         if (rap < 1.0) {
-          _hist_mm_100_num->fill(z.mass(), weight * sgn);
-          _hist_ll_100_num->fill(z.mass(), weight * sgn);
-          _hist_mm_100_den->fill(z.mass(), weight);
-          _hist_ll_100_den->fill(z.mass(), weight);
+          _hist_mm_100_num->fill(z.mass(), sgn);
+          _hist_ll_100_num->fill(z.mass(), sgn);
+          _hist_mm_100_den->fill(z.mass());
+          _hist_ll_100_den->fill(z.mass());
         } else if (rap < 1.25) {
-          _hist_mm_125_num->fill(z.mass(), weight * sgn);
-          _hist_ll_125_num->fill(z.mass(), weight * sgn);
-          _hist_mm_125_den->fill(z.mass(), weight);
-          _hist_ll_125_den->fill(z.mass(), weight);
+          _hist_mm_125_num->fill(z.mass(), sgn);
+          _hist_ll_125_num->fill(z.mass(), sgn);
+          _hist_mm_125_den->fill(z.mass());
+          _hist_ll_125_den->fill(z.mass());
         } else if (rap < 1.50) {
-          _hist_mm_150_num->fill(z.mass(), weight * sgn);
-          _hist_ll_150_num->fill(z.mass(), weight * sgn);
-          _hist_mm_150_den->fill(z.mass(), weight);
-          _hist_ll_150_den->fill(z.mass(), weight);
+          _hist_mm_150_num->fill(z.mass(), sgn);
+          _hist_ll_150_num->fill(z.mass(), sgn);
+          _hist_mm_150_den->fill(z.mass());
+          _hist_ll_150_den->fill(z.mass());
         } else if (rap < 2.40) {
-          _hist_mm_240_num->fill(z.mass(), weight * sgn);
-          _hist_ll_240_num->fill(z.mass(), weight * sgn);
-          _hist_mm_240_den->fill(z.mass(), weight);
-          _hist_ll_240_den->fill(z.mass(), weight);
+          _hist_mm_240_num->fill(z.mass(), sgn);
+          _hist_ll_240_num->fill(z.mass(), sgn);
+          _hist_mm_240_den->fill(z.mass());
+          _hist_ll_240_den->fill(z.mass());
         }
       }
     }

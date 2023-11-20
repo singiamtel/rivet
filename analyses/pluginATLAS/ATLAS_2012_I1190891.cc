@@ -59,15 +59,9 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
+
       // get the jet candidates
-      Jets cand_jets;
-      for (const Jet& jet :
-               apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.5 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
 
       // candidate muons
       Particles cand_mu;
@@ -265,11 +259,11 @@ namespace Rivet {
       }
 
       // make the control plots
-      _hist_etmiss ->fill(eTmiss,weight);
-      _hist_meff   ->fill(meff  ,weight);
+      _hist_etmiss ->fill(eTmiss);
+      _hist_meff   ->fill(meff  );
       // finally the counts
-      if(eTmiss>50.) _count_SR1->fill(0.5,weight);
-      if(meff >300.) _count_SR2->fill(0.5,weight);
+      if(eTmiss>50.) _count_SR1->fill(0.5);
+      if(meff >300.) _count_SR2->fill(0.5);
     }
 
     /// @}

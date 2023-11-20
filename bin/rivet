@@ -586,7 +586,7 @@ for plfarg in args.PRELOADFILES:
         ah.readData(plf)
 
 if args.DUMP_PERIOD:
-    ah.dump(args.HISTOFILE, args.DUMP_PERIOD)
+    ah.setFinalizePeriod(args.HISTOFILE, args.DUMP_PERIOD)
 
 if args.BOOTSTRAP_FILE:
     ah.setBootstrapFilename(args.BOOTSTRAP_FILE)

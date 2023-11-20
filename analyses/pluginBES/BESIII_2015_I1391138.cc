@@ -31,7 +31,7 @@ namespace Rivet {
 
     // Calculate the Q2 using mother and daugher meson
     size_t q2(const Particle& B, int mesonID, size_t species) const {
-      FourMomentum q = B.mom() - filter_select(B.children(), Cuts::pid==mesonID)[0];
+      FourMomentum q = B.mom() - select(B.children(), Cuts::pid==mesonID)[0];
       return axes[species].index(q*q) - 1;
     }
 

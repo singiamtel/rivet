@@ -34,11 +34,10 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      double weight    = 1.0;
-      double weight100 = 1.0 * 100.;  //to get results in %
+      double weight100 = 100.;  //to get results in %
 
       //keeps jets with pt>20 geV and ordered in decreasing pt
-      Jets jetAr = apply<FastJets>(event, "AntiKT04").jetsByPt(20*GeV);
+      Jets jetAr = apply<FastJets>(event, "AntiKT04").jetsByPt(Cuts::pT > 20*GeV);
 
       int flav[2]={1,1};
       vector<FourMomentum> leadjets;
@@ -101,7 +100,7 @@ namespace Rivet {
       bool isDijet = c_ljpt & c_nljpt & c_dphi;
       if (!isDijet) vetoEvent;
 
-      _h_temp[6]->fill(leadjets[0].pT(), weight);
+      _h_temp[6]->fill(leadjets[0].pT());
 
       if (flav[0]==5 && flav[1]==5)                                  // BB dijet
         _h_temp[0]->fill(leadjets[0].pT(), weight100);

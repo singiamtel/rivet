@@ -400,7 +400,7 @@ namespace Rivet {
         TrimmedJets += Jet(ptrim, constituents);
       }
       Cut trim_selection = Cuts::abseta < 2.0 && Cuts::pT > 200*GeV && Cuts::massIn(120*GeV, 220*GeV);
-      ifilter_select(isortByPt(TrimmedJets), trim_selection);
+      iselect(isortByPt(TrimmedJets), trim_selection);
       if (TrimmedJets.empty())  vetoEvent;
 
 
@@ -439,7 +439,7 @@ namespace Rivet {
       }
       if (!hasHadTopCandidate)  vetoEvent;
 
-      Jets LepTopCandidates = filter_discard(jets, [&](const Jet& j) {
+      Jets LepTopCandidates = discard(jets, [&](const Jet& j) {
           return deltaR(j, HadTopCandidate) < 1.5 || deltaR(j, *lepton) > 2.0;
         });
       if (LepTopCandidates.empty()) vetoEvent;

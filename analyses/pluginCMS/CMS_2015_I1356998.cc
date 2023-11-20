@@ -28,7 +28,6 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
       const FinalState& fs = apply<FinalState>(event, "FS");
 
       // A vector containing a lot of eta values
@@ -52,7 +51,7 @@ namespace Rivet {
 
       // Fill rapidity gap histo
       if (detfmax != 2*edge ) {
-        _h_maxFwdGap->fill(detfmax, weight);
+        _h_maxFwdGap->fill(detfmax);
       }
       // Everything that follows has to do with the cross-section measurements
 
@@ -94,12 +93,12 @@ namespace Rivet {
       const double xix = (Mx*Mx)/(sqrtS()/GeV * sqrtS()/GeV);
 
       if (log10(My) < 0.5) {
-        _h_noCASTORtag->fill(log10(xix), weight);
-        if (log10(xix) > -5.5 && log10(xix) < -2.5) _h_sigmaVis->fill(0.5, weight);
+        _h_noCASTORtag->fill(log10(xix));
+        if (log10(xix) > -5.5 && log10(xix) < -2.5) _h_sigmaVis->fill(0.5);
       }
       else if (log10(My) < 1.1) {
-        _h_CASTORtag->fill(log10(xix), weight);
-        if (log10(xix) > -5.5 && log10(xix) < -2.5) _h_sigmaVis->fill(1.5, weight);
+        _h_CASTORtag->fill(log10(xix));
+        if (log10(xix) > -5.5 && log10(xix) < -2.5) _h_sigmaVis->fill(1.5);
       }
 
       // Central gap x-section
@@ -108,8 +107,8 @@ namespace Rivet {
 
       if (dy0 > 3.) {
         if (log10(My) > 1.1 && log10(Mx) > 1.1) {
-          _h_centralGap->fill(dy0, weight);
-          _h_sigmaVis->fill(2.5, weight);
+          _h_centralGap->fill(dy0);
+          _h_sigmaVis->fill(2.5);
         }
       }
 

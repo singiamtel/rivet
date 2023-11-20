@@ -178,7 +178,7 @@ namespace Rivet {
 
 
       //---- Jet CUTS----//
-      ifilter_discard(jets, [&](const Jet& j) {
+      idiscard(jets, [&](const Jet& j) {
         return deltaR(j, Zlepton1) < 0.3 || deltaR(j, Zlepton2) < 0.3 || deltaR(j, Wlepton) < 0.3;
       });
       if (jets.size() < 2)  vetoEvent;
@@ -204,7 +204,7 @@ namespace Rivet {
       //Plots in the SR
       if (mJJ < 500*GeV) vetoEvent;
 
-      const size_t njets40 = filter_select(jets, Cuts::pT > 40*GeV).size();
+      const size_t njets40 = select(jets, Cuts::pT > 40*GeV).size();
       fillDiscrete("Njets_VBS", njets40, 5);
 
       const double y_min = std::min(jet_lead.rap(), jet_sublead.rap());

@@ -63,10 +63,10 @@ namespace Rivet {
 
       // Get jets and make sure there are at least two of them in |y| < 2
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
-      /// @todo Collapse this into jetpro.jetsByPt(ptGtr(20*GeV) & rapIn(2.0))
       vector<FourMomentum> jets;
-      for (const Jet& jet : jetpro.jetsByPt(20*GeV))
-        if (jet.absrap() < 2.0) jets.push_back(jet.momentum());
+      for (const Jet& jet : jetpro.jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.0)) {
+        jets.push_back(jet.momentum());
+      }
       if (jets.size() != 2) vetoEvent;
 
       const double mupx     = pt1 * cos(phi1);
@@ -81,9 +81,8 @@ namespace Rivet {
       const double p1p2_mag = dpt * sqrt(pT2);
       const double dS       = acos((Px+Py) / p1p2_mag);
 
-      const double weight = 1.0;
-      _h_rel_deltaPt_eq2jet_Norm->fill(rel_dpt, weight);
-      _h_deltaS_eq2jet_Norm->fill(dS, weight);
+      _h_rel_deltaPt_eq2jet_Norm->fill(rel_dpt);
+      _h_deltaS_eq2jet_Norm->fill(dS);
     }
 
 

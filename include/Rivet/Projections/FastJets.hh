@@ -198,11 +198,6 @@ namespace Rivet {
       _trfs.clear();
     }
 
-    /// @brief Trim (filter) a jet, keeping tag and constituent info in the resulting jet
-    ///
-    /// @deprecated Use the built-in transformers system, e.g. addTrf(), instead
-    Jet trimJet(const Jet& input, const fastjet::Filter& trimmer) const;
-
     /// @}
 
 
@@ -214,33 +209,22 @@ namespace Rivet {
 
     /// Get the pseudo jets (unordered).
     /// @deprecated Use pseudojets
-    PseudoJets pseudoJets(double ptmin=0.0) const;
-    /// Alias
-    PseudoJets pseudojets(double ptmin=0.0) const { return pseudoJets(ptmin); }
+    PseudoJets pseudojets(double ptmin=0.0) const;
 
     /// Get the pseudo jets, ordered by \f$ p_T \f$.
-    /// @deprecated Use pseudojetsbyPt
-    PseudoJets pseudoJetsByPt(double ptmin=0.0) const {
-      return sorted_by_pt(pseudoJets(ptmin));
+    PseudoJets pseudojetsByPt(double ptmin=0.0) const {
+      return sorted_by_pt(pseudojets(ptmin));
     }
-    /// Alias
-    PseudoJets pseudojetsByPt(double ptmin=0.0) const { return pseudoJetsByPt(ptmin); }
 
     /// Get the pseudo jets, ordered by \f$ E \f$.
-    /// @deprecated Use pseudojetsByE
-    PseudoJets pseudoJetsByE(double ptmin=0.0) const {
-      return sorted_by_E(pseudoJets(ptmin));
+    PseudoJets pseudojetsByE(double ptmin=0.0) const {
+      return sorted_by_E(pseudojets(ptmin));
     }
-    /// Alias
-    PseudoJets pseudojetsByE(double ptmin=0.0) const { return pseudoJetsByE(ptmin); }
 
     /// Get the pseudo jets, ordered by rapidity.
-    /// @deprecated Use pseudojetsByRapidity
-    PseudoJets pseudoJetsByRapidity(double ptmin=0.0) const {
-      return sorted_by_rapidity(pseudoJets(ptmin));
+    PseudoJets pseudojetsByRapidity(double ptmin=0.0) const {
+      return sorted_by_rapidity(pseudojets(ptmin));
     }
-    /// Alias
-    PseudoJets pseudojetsByRapidity(double ptmin=0.0) const { return pseudoJetsByRapidity(ptmin); }
 
     /// @}
 

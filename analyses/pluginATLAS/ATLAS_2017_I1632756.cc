@@ -113,7 +113,7 @@ namespace Rivet {
 
       // Get the leading jet
       Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV);
-      ifilter_discard(jets, deltaRLess(leadingPhoton, 0.4));
+      idiscard(jets, deltaRLess(leadingPhoton, 0.4));
       if (jets.empty())  vetoEvent;
       const Jet& leadingJet = jets[0];
 
@@ -124,7 +124,7 @@ namespace Rivet {
       if (deltaR(leadingPhoton, leadingJet) < 1.0)  vetoEvent;
 
       // Veto events with leading jet not b-tagged (deltaR match with a B-hadron) nor c-tagged (deltaR match with a C-hadron)
-      const Particles& allBs = apply<HeavyHadrons>(event, "HeavyHadrons").bHadrons(5*GeV);
+      const Particles& allBs = apply<HeavyHadrons>(event, "HeavyHadrons").bHadrons(Cuts::pT > 5*GeV);
       bool bTagged = false;
       for (const Particle& thisB : allBs) {
         if(deltaR(thisB, leadingJet) < 0.3) {
@@ -135,7 +135,7 @@ namespace Rivet {
 
       bool cTagged = false;
       if (!bTagged) {
-        const Particles& allCs = apply<HeavyHadrons>(event, "HeavyHadrons").cHadrons(5*GeV);
+        const Particles& allCs = apply<HeavyHadrons>(event, "HeavyHadrons").cHadrons(Cuts::pT > 5*GeV);
         for (const Particle& thisC : allCs) {
           if (deltaR(thisC, leadingJet) < 0.3) {
             cTagged = true;

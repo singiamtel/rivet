@@ -73,15 +73,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
-      Jets cand_jets;
-      const Jets jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV);
-      for (const Jet& jet : jets) {
-        if ( fabs( jet.eta() ) < 4.9 ) {
-          cand_jets.push_back(jet);
-        }
-      }
+      Jets cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.9);
 
       const Particles cand_e  = apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
 
@@ -197,15 +190,15 @@ namespace Rivet {
       // region A
       double m_eff_Nj = eTmiss + recon_jets[0].pT() + recon_jets[1].pT();
       if( min_dPhi_2 > 0.4 && eTmiss/m_eff_Nj > 0.3 ) {
-        _hist_meff_A->fill(m_eff_inc,weight);
-        if(m_eff_inc>1900.) _count_A_tight ->fill(0.5,weight);
-        if(m_eff_inc>1400.) _count_A_medium->fill(0.5,weight);
+        _hist_meff_A->fill(m_eff_inc);
+        if(m_eff_inc>1900.) _count_A_tight ->fill(0.5);
+        if(m_eff_inc>1400.) _count_A_medium->fill(0.5);
       }
 
       // region A'
       if( min_dPhi_2 > 0.4 && eTmiss/m_eff_Nj > 0.4 ) {
-        _hist_meff_Ap->fill(m_eff_inc,weight);
-        if(m_eff_inc>1200.) _count_Ap_medium->fill(0.5,weight);
+        _hist_meff_Ap->fill(m_eff_inc);
+        if(m_eff_inc>1200.) _count_Ap_medium->fill(0.5);
       }
 
       // for rest of regions 3 jets pT> 60 needed
@@ -215,8 +208,8 @@ namespace Rivet {
       // region B
       m_eff_Nj +=  recon_jets[2].perp();
       if( min_dPhi_3 > 0.4 && eTmiss/m_eff_Nj > 0.25 ) {
-        _hist_meff_B->fill(m_eff_inc,weight);
-        if(m_eff_inc>1900.) _count_B_tight ->fill(0.5,weight);
+        _hist_meff_B->fill(m_eff_inc);
+        if(m_eff_inc>1900.) _count_B_tight ->fill(0.5);
       }
 
       // for rest of regions 4 jets pT> 60 needed
@@ -226,10 +219,10 @@ namespace Rivet {
       // region C
       m_eff_Nj +=  recon_jets[3].perp();
       if( min_dPhi_3 > 0.4 && min_dPhi_All > 0.2 && eTmiss/m_eff_Nj > 0.25 ) {
-        _hist_meff_C->fill(m_eff_inc,weight);
-        if(m_eff_inc>1500.) _count_C_tight ->fill(0.5,weight);
-        if(m_eff_inc>1200.) _count_C_medium->fill(0.5,weight);
-        if(m_eff_inc> 900.) _count_C_loose ->fill(0.5,weight);
+        _hist_meff_C->fill(m_eff_inc);
+        if(m_eff_inc>1500.) _count_C_tight ->fill(0.5);
+        if(m_eff_inc>1200.) _count_C_medium->fill(0.5);
+        if(m_eff_inc> 900.) _count_C_loose ->fill(0.5);
       }
 
       // for rest of regions 5 jets pT> 40 needed
@@ -239,8 +232,8 @@ namespace Rivet {
       // region D
       m_eff_Nj +=  recon_jets[4].perp();
       if( min_dPhi_3 > 0.4 && min_dPhi_All > 0.2 && eTmiss/m_eff_Nj > 0.2 ) {
-        _hist_meff_D->fill(m_eff_inc,weight);
-        if(m_eff_inc>1500.) _count_D_tight ->fill(0.5,weight);
+        _hist_meff_D->fill(m_eff_inc);
+        if(m_eff_inc>1500.) _count_D_tight ->fill(0.5);
       }
 
       // for rest of regions 6 jets pT> 40 needed
@@ -250,10 +243,10 @@ namespace Rivet {
       // region E
       m_eff_Nj +=  recon_jets[5].perp();
       if( min_dPhi_3 > 0.4 && min_dPhi_All > 0.2 && eTmiss/m_eff_Nj > 0.15 ) {
-        _hist_meff_E->fill(m_eff_inc,weight);
-        if(m_eff_inc>1400.) _count_E_tight ->fill(0.5,weight);
-        if(m_eff_inc>1200.) _count_E_medium->fill(0.5,weight);
-        if(m_eff_inc> 900.) _count_E_loose ->fill(0.5,weight);
+        _hist_meff_E->fill(m_eff_inc);
+        if(m_eff_inc>1400.) _count_E_tight ->fill(0.5);
+        if(m_eff_inc>1200.) _count_E_medium->fill(0.5);
+        if(m_eff_inc> 900.) _count_E_loose ->fill(0.5);
       }
     }
 

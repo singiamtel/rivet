@@ -67,7 +67,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const double weight = 1.0;
 
       // Temp: calorimeter module failure with 10% acceptance loss;
       // region unknown ==> randomly choose 10% of events to be vetoed
@@ -75,13 +74,7 @@ namespace Rivet {
       if ( rand()/static_cast<double>(RAND_MAX) < 0.1 )
         vetoEvent;
 
-      Jets tmp_cand_jets;
-      for (const Jet& jet :
-               apply<FastJets>(event, "AntiKtJets04").jetsByPt(20.0*GeV) ) {
-        if ( fabs( jet.eta() ) < 2.8 ) {
-          tmp_cand_jets.push_back(jet);
-        }
-      }
+      Jets tmp_cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT>20*GeV && Cuts::abseta < 2.8);
 
       Particles cand_e =
         apply<IdentifiedFinalState>(event, "elecs").particlesByPt();
@@ -215,40 +208,40 @@ namespace Rivet {
       // 1 bjet
       if ( bjets.size() >= 1 ) {
 
-        _hist_meff_1bjet->fill(m_eff, weight);
-        _hist_eTmiss_1bjet->fill(eTmiss, weight);
-        _hist_pTj_1bjet->fill(recon_jets[0].pT(), weight);
+        _hist_meff_1bjet->fill(m_eff);
+        _hist_eTmiss_1bjet->fill(eTmiss);
+        _hist_pTj_1bjet->fill(recon_jets[0].pT());
 
         // 3JA region
         if ( m_eff > 200*GeV ) {
 	  ++threeJA;
-        _count_threeJA->fill(0.5, weight);
+        _count_threeJA->fill(0.5);
         }
 
         // 3JB region
         if ( m_eff > 700*GeV ) {
 	  ++threeJB;
-        _count_threeJB->fill(0.5, weight);
+        _count_threeJB->fill(0.5);
         }
       }
 
       // 2 bjets
       if ( bjets.size() >= 2 ) {
 
-        _hist_meff_2bjet->fill(m_eff, weight);
-        _hist_eTmiss_2bjet->fill(eTmiss, weight);
-        _hist_pTj_2bjet->fill(recon_jets[0].pT(), weight);
+        _hist_meff_2bjet->fill(m_eff);
+        _hist_eTmiss_2bjet->fill(eTmiss);
+        _hist_pTj_2bjet->fill(recon_jets[0].pT());
 
         // 3JC region
         if ( m_eff > 500*GeV ) {
 	  ++threeJC;
-          _count_threeJC->fill(0.5, weight);
+          _count_threeJC->fill(0.5);
         }
 
         // 3JD region
         if ( m_eff > 700*GeV ) {
 	  ++threeJD;
-          _count_threeJD->fill(0.5, weight);
+          _count_threeJD->fill(0.5);
         }
       }
 

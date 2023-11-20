@@ -20,8 +20,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       // get the hadronic final state
-      const GammaGammaKinematics& gammakin = declare(GammaGammaKinematics(), "Kinematics");
-      const FinalState & fs = declare(GammaGammaFinalState(gammakin), "FS");
+      const FinalState & fs = declare(GammaGammaFinalState(), "FS");
       declare(FastJets(fs, JetAlg::KT,1.),"Jets");
 
       // Book histograms

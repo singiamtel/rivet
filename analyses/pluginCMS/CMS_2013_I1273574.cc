@@ -61,24 +61,21 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      /// @todo Use jetsByPt(ptGtr(20*GeV) & absetaIn(4.7)), then no need for the lower loop;
-      const Jets jets = apply<FastJets>(event, "Jets").jetsByPt(20*GeV);
+      const Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.7);
       if (jets.size() < 4) vetoEvent;
 
       // Ensure that there are exactly 4 jets > 20 GeV, with two above 50 GeV
       Jets hardjets, alljets;
       for (const Jet& j : jets) {
-        if (j.abseta() > 4.7) continue;
         if (j.pT() > 50*GeV) hardjets.push_back(j);
-        if (j.pT() > 20*GeV) alljets.push_back(j);
+        alljets.push_back(j);
       }
       if (hardjets.size() < 2 || alljets.size() != 4) vetoEvent;
-      const double weight = 1.0;
 
       // Histogram pT and eta of all 4 jets
       for (size_t i = 0; i < 4; ++i) {
-        _h_jetpts[i]->fill(alljets[i].pT()/GeV, weight);
-        _h_jetetas[i]->fill(alljets[i].eta(), weight);
+        _h_jetpts[i]->fill(alljets[i].pT()/GeV);
+        _h_jetetas[i]->fill(alljets[i].eta());
       }
 
       // Create vector sums of the hard and soft pairs of jets
@@ -87,16 +84,16 @@ namespace Rivet {
 
       // Fill the delta(phi) between the soft jets
       const double dphisoft = deltaPhi(alljets[2], alljets[3]);
-      _h_DeltaPhiSoft->fill(dphisoft, weight);
+      _h_DeltaPhiSoft->fill(dphisoft);
 
       // Fill the pT balance between the soft jets
       const double ptbalanceSoft = p34.pT() / (alljets[2].pT() + alljets[3].pT());
-      _h_DeltaPtRelSoft->fill(ptbalanceSoft, weight);
+      _h_DeltaPtRelSoft->fill(ptbalanceSoft);
 
       // Fill the azimuthal angle difference between the two jet pairs
       const double p12p34_trans = p12.px()*p34.px() + p12.py()*p34.py();
       const double DeltaS = acos( p12p34_trans / p12.pT() / p34.pT() );
-      _h_DeltaS->fill(DeltaS, weight);
+      _h_DeltaS->fill(DeltaS);
     }
 
 

@@ -568,7 +568,7 @@ namespace Rivet {
   template<typename PBCONTAINER1, typename PBCONTAINER2>
   inline void idiscardIfAnyDeltaRLess(PBCONTAINER1& tofilter, const PBCONTAINER2& tocompare, double dR) {
     for (const typename PBCONTAINER2::value_type& pb : tocompare) {
-      ifilter_discard(tofilter, deltaRLess(pb, dR));
+      idiscard(tofilter, deltaRLess(pb, dR));
     }
   }
 
@@ -582,7 +582,7 @@ namespace Rivet {
   template<typename PBCONTAINER1, typename PBCONTAINER2>
   inline void idiscardIfAnyDeltaPhiLess(PBCONTAINER1& tofilter, const PBCONTAINER2& tocompare, double dphi) {
     for (const typename PBCONTAINER2::value_type& pb : tocompare) {
-      ifilter_discard(tofilter, deltaPhiLess(pb, dphi));
+      idiscard(tofilter, deltaPhiLess(pb, dphi));
     }
   }
 

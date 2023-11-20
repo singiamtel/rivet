@@ -115,7 +115,7 @@ namespace Rivet {
       const Jets& jets = fj.jetsByPt(Cuts::absrap < 2.4 && Cuts::pT > 30*GeV);
 
       // Remove jets overlapping with any of the two selected leptons
-      Jets goodjets = filter_discard(jets, [dressedLeptons](const ParticleBase& j) {
+      Jets goodjets = discard(jets, [dressedLeptons](const ParticleBase& j) {
           return deltaR(j, (*dressedLeptons)[0]) < 0.4 ||  deltaR(j, (*dressedLeptons)[1]) < 0.4;
         });
 

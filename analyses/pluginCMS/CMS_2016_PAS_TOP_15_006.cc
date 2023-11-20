@@ -57,7 +57,7 @@ namespace Rivet {
 
       // Jets
       const FastJets& jets   = apply<FastJets>(event, "Jets");
-      const Jets      jets30 = jets.jetsByPt(30*GeV);
+      const Jets      jets30 = jets.jetsByPt(Cuts::pT > 30*GeV);
       int nJets = 0, nBJets = 0;
       for (const Jet& jet : jets30) {
         if (jet.abseta() > 2.5) continue;
@@ -125,7 +125,7 @@ namespace Rivet {
         _clusteredLeptons.clear();
 
         DressedLeptons allClusteredLeptons;
-        const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(5*GeV);
+        const Jets jets = apply<FastJets>(e, "LeptonJets").jetsByPt(Cuts::pT > 5*GeV);
         for (const Jet& jet : jets) {
           Particle lepCand;
           for (const Particle& cand : jet.particles()) {

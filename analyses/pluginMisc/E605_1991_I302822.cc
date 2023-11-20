@@ -25,7 +25,7 @@ namespace Rivet {
       const FinalState fs;
       declare(fs, "FS");
       Cut cut = Cuts::etaIn(-10.,10.);
-      ZFinder zfinder(fs, cut, PID::MUON, 4.0*GeV, 100.0*GeV, 0.1, PhotonOrigin::NONE );
+      ZFinder zfinder(fs, cut, PID::MUON, 4.0*GeV, 100.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NONE);
       declare(zfinder, "ZFinder");
 
       // Book histograms in mass ranges (measurement is not normalised to mass range)
@@ -109,7 +109,7 @@ namespace Rivet {
       if (idx && idx <= _edges.at(tag).size()) {
         edge = _edges.at(tag)[idx-1];
       }
-      _h[tag]->fill(edge, weight);
+      _h[tag]->fill(edge);
     }
 
 

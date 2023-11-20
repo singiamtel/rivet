@@ -19,8 +19,7 @@ namespace Rivet {
     // Book histograms
     void init() {
       FinalState fs;
-      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON,
-                      40*GeV, 200*GeV, 0.2, PhotonOrigin::NODECAY);
+      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON, 40*GeV, 200*GeV, 0.2);
       declare(zfinder, "ZFinder");
 
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
@@ -45,8 +44,8 @@ namespace Rivet {
       FourMomentum e1 = zfinder.constituents()[1].mom();
 
       Jets jets = apply<JetFinder>(event, "ConeFinder").jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
-      ifilter_discard(jets, deltaRLess(e0, 0.4));
-      ifilter_discard(jets, deltaRLess(e1, 0.4));
+      idiscard(jets, deltaRLess(e0, 0.4));
+      idiscard(jets, deltaRLess(e1, 0.4));
 
       // For normalisation of crossSection data (includes events with no jets passing cuts)
       _crossSectionRatio->fill(string("INC"));

@@ -37,12 +37,6 @@ namespace Rivet {
     //   : GammaGammaFinalState(FinalState(), kinematicsp)
     // {    }
 
-    /// Backward compatible constructor with default FinalState
-    /// @deprecated Prefer a version that doesn't need a GammaGammaKinematics argument
-    GammaGammaFinalState(const GammaGammaKinematics& kinematicsp)
-      : GammaGammaFinalState(FinalState(), kinematicsp)
-    {    }
-
 
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(GammaGammaFinalState);

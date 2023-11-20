@@ -27,8 +27,6 @@ namespace Rivet {
 
     /// Get all the available analyses' names, including aliases
     static vector<string> allAnalysisNames();
-    /// @deprecated Use allAnalysisNames()
-    static vector<string> getAllAnalysisNames() { return allAnalysisNames(); }
 
     /// Get the standard analyses' names (from a release-specific list file)
     static vector<string> stdAnalysisNames();

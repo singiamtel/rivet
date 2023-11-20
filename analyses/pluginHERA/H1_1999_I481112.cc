@@ -78,7 +78,7 @@ namespace Rivet {
       //Creating array of D*
       Cut cuts = isDIS? (Cuts::pT > 1.5*GeV && Cuts::abseta < 1.5) : (Cuts::pT > 2*GeV && Cuts::absrap < 1.5);
       Particles unstables = apply<ParticleFinder>(event, "DStars").particles(cuts);
-      const Particles dstars = filter_select(unstables, [](const Particle& p){
+      const Particles dstars = select(unstables, [](const Particle& p){
         return p.abspid() == PID::DSPLUS;
       });
 

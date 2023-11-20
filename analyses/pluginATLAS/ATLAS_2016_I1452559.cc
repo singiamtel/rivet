@@ -55,7 +55,7 @@ namespace Rivet {
                 << jets.size() << ", " << elecs.size() << ", " << mus.size());
 
       // Discard jets very close to electrons, or with low track multiplicity and close to muons
-      const Jets isojets = filter_discard(jets, [&](const Jet& j) {
+      const Jets isojets = discard(jets, [&](const Jet& j) {
           /// @todo Add track efficiency random filtering
           if (any(elecs, deltaRLess(j, 0.2))) return true;
           if (j.particles(Cuts::abscharge > 0 && Cuts::pT > 0.4*GeV).size() < 3 &&
@@ -64,12 +64,12 @@ namespace Rivet {
         });
 
       // Discard electrons close to remaining jets
-      const Particles isoelecs = filter_discard(elecs, [&](const Particle& e) {
+      const Particles isoelecs = discard(elecs, [&](const Particle& e) {
           return any(isojets, deltaRLess(e, 0.4));
         });
 
       // Discard muons close to remaining jets
-      const Particles isomus = filter_discard(mus, [&](const Particle& m) {
+      const Particles isomus = discard(mus, [&](const Particle& m) {
           for (const Jet& j : isojets) {
             if (deltaR(j,m) > 0.4) continue;
             if (j.particles(Cuts::abscharge > 0 && Cuts::pT > 0.4*GeV).size() > 3) return true;
@@ -86,9 +86,9 @@ namespace Rivet {
       // Event selection cuts
       if (etmiss < 250*GeV) vetoEvent;
       // Require at least one jet with pT > 250 GeV and |eta| < 2.4
-      if (filter_select(isojets, Cuts::pT > 250*GeV && Cuts::abseta < 2.4).empty()) vetoEvent;
+      if (select(isojets, Cuts::pT > 250*GeV && Cuts::abseta < 2.4).empty()) vetoEvent;
       // Require at most 4 jets with pT > 30 GeV and |eta| < 2.8
-      if (filter_select(isojets, Cuts::pT > 30*GeV).size() > 4) vetoEvent;
+      if (select(isojets, Cuts::pT > 30*GeV).size() > 4) vetoEvent;
       // Require no isolated jets within |dphi| < 0.4 of the MET vector
       if (any(isojets, deltaPhiLess(-vet, 0.4))) vetoEvent;
       // Require no isolated electrons or muons

@@ -95,7 +95,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const double weight = 1.0;
 
       // Use the "LFS" projection to require at least one hard charged
       // lepton. This is an experimental signature for the leptonically decaying
@@ -130,7 +129,7 @@ namespace Rivet {
       // remove jets overlapping with any lepton (dR < 0.3)
       // cut on jet multiplicity depending on ttbar decay mode
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
-      const Jets jets = discardIfAnyDeltaRLess(jetpro.jetsByPt(30*GeV), lfs.chargedLeptons(), 0.3);
+      const Jets jets = discardIfAnyDeltaRLess(jetpro.jetsByPt(Cuts::pT > 30*GeV), lfs.chargedLeptons(), 0.3);
 
       if (     _mode == 0 && jets.size() < 6)  vetoEvent; // all-hadronic
       else if (_mode == 1 && jets.size() < 4)  vetoEvent; // single lepton
@@ -140,14 +139,14 @@ namespace Rivet {
       MSG_DEBUG("Event failed jet multiplicity cut");
 
       // Fill histograms for inclusive jet kinematics
-      _h["njets"]->fill(jets.size(), weight);
-      if (jets.size() > 0)  _h["jet_1_pT"]->fill(jets[0].pT()/GeV, weight);
-      if (jets.size() > 1)  _h["jet_2_pT"]->fill(jets[1].pT()/GeV, weight);
-      if (jets.size() > 2)  _h["jet_3_pT"]->fill(jets[2].pT()/GeV, weight);
-      if (jets.size() > 3)  _h["jet_4_pT"]->fill(jets[3].pT()/GeV, weight);
+      _h["njets"]->fill(jets.size());
+      if (jets.size() > 0)  _h["jet_1_pT"]->fill(jets[0].pT()/GeV);
+      if (jets.size() > 1)  _h["jet_2_pT"]->fill(jets[1].pT()/GeV);
+      if (jets.size() > 2)  _h["jet_3_pT"]->fill(jets[2].pT()/GeV);
+      if (jets.size() > 3)  _h["jet_4_pT"]->fill(jets[3].pT()/GeV);
       double ht = 0.0;
       for (const Jet& j : jets) { ht += j.pT(); }
-      _h["jet_HT"]->fill(ht/GeV, weight);
+      _h["jet_HT"]->fill(ht/GeV);
 
       // Sort the jets into b-jets and light jets. We expect one hard b-jet from
       // each top decay, so our 4 hardest jets should include two b-jets. The
@@ -169,11 +168,11 @@ namespace Rivet {
       else if (_mode == 3 && nLeps == 1 && ljets.size() < 2)  vetoEvent;
 
       // Plot the pTs of the identified jets.
-      _h["bjet_1_pT"]->fill(bjets[0].pT(), weight);
-      _h["bjet_2_pT"]->fill(bjets[1].pT(), weight);
+      _h["bjet_1_pT"]->fill(bjets[0].pT());
+      _h["bjet_2_pT"]->fill(bjets[1].pT());
       // need to check size to cater for dileptonic mode
-      if (ljets.size() > 0)  _h["ljet_1_pT"]->fill(ljets[0].pT(), weight);
-      if (ljets.size() > 1)  _h["ljet_2_pT"]->fill(ljets[1].pT(), weight);
+      if (ljets.size() > 0)  _h["ljet_1_pT"]->fill(ljets[0].pT());
+      if (ljets.size() > 1)  _h["ljet_2_pT"]->fill(ljets[1].pT());
 
 
       // Try to reconstruct ttbar pair (doesn't really work in the dileptonic mode)
@@ -188,7 +187,7 @@ namespace Rivet {
         FourMomentum neutrino(sqrt(sqr(met.x()) + sqr(met.y()) + sqr(pz)), met.x(), met.y(), pz);
         ttpair += lep + neutrino;
       }
-      if (nLeps < 2)  _h["tt_mass"]->fill(ttpair.mass()/GeV, weight);
+      if (nLeps < 2)  _h["tt_mass"]->fill(ttpair.mass()/GeV);
 
       if (_mode < 2) {
         // Construct the hadronically decaying W momentum 4-vector from pairs of
@@ -214,52 +213,52 @@ namespace Rivet {
         // both possible top momenta and fill the histograms with both.
         const FourMomentum t1 = W + bjets[0].momentum();
         const FourMomentum t2 = W + bjets[1].momentum();
-        _h["W_mass"]->fill(W.mass(), weight);
-        _h["t_mass"]->fill(t1.mass(), weight);
-        _h["t_mass"]->fill(t2.mass(), weight);
+        _h["W_mass"]->fill(W.mass());
+        _h["t_mass"]->fill(t1.mass());
+        _h["t_mass"]->fill(t2.mass());
 
         // Placing a cut on the well-known W mass helps to reduce backgrounds
         // only done for all-hadronic and semileptonic mode (since W is hadronic)
         if (!inRange(W.mass()/GeV, 75.0, 85.0))  vetoEvent;
         MSG_DEBUG("W found with mass " << W.mass()/GeV << " GeV");
 
-        _h["t_mass_W_cut"]->fill(t1.mass(), weight);
-        _h["t_mass_W_cut"]->fill(t2.mass(), weight);
+        _h["t_mass_W_cut"]->fill(t1.mass());
+        _h["t_mass_W_cut"]->fill(t2.mass());
 
-        _h["jetb_1_W_dR"]->fill(deltaR(bjets[0].momentum(), W),weight);
-        _h["jetb_1_W_deta"]->fill(fabs(bjets[0].eta()-W.eta()),weight);
-        _h["jetb_1_W_dphi"]->fill(deltaPhi(bjets[0].momentum(),W),weight);
+        _h["jetb_1_W_dR"]->fill(deltaR(bjets[0].momentum(), W));
+        _h["jetb_1_W_deta"]->fill(fabs(bjets[0].eta()-W.eta()));
+        _h["jetb_1_W_dphi"]->fill(deltaPhi(bjets[0].momentum(),W));
       }
 
-      _h["jetb_1_jetb_2_dR"]->fill(deltaR(bjets[0].momentum(), bjets[1].momentum()),weight);
-      _h["jetb_1_jetb_2_deta"]->fill(fabs(bjets[0].eta()-bjets[1].eta()),weight);
-      _h["jetb_1_jetb_2_dphi"]->fill(deltaPhi(bjets[0].momentum(),bjets[1].momentum()),weight);
+      _h["jetb_1_jetb_2_dR"]->fill(deltaR(bjets[0].momentum(), bjets[1].momentum()));
+      _h["jetb_1_jetb_2_deta"]->fill(fabs(bjets[0].eta()-bjets[1].eta()));
+      _h["jetb_1_jetb_2_dphi"]->fill(deltaPhi(bjets[0].momentum(),bjets[1].momentum()));
 
       if (ljets.size() > 0) {
-        _h["jetb_1_jetl_1_dR"]->fill(deltaR(bjets[0].momentum(), ljets[0].momentum()),weight);
-        _h["jetb_1_jetl_1_deta"]->fill(fabs(bjets[0].eta()-ljets[0].eta()),weight);
-        _h["jetb_1_jetl_1_dphi"]->fill(deltaPhi(bjets[0].momentum(),ljets[0].momentum()),weight);
+        _h["jetb_1_jetl_1_dR"]->fill(deltaR(bjets[0].momentum(), ljets[0].momentum()));
+        _h["jetb_1_jetl_1_deta"]->fill(fabs(bjets[0].eta()-ljets[0].eta()));
+        _h["jetb_1_jetl_1_dphi"]->fill(deltaPhi(bjets[0].momentum(),ljets[0].momentum()));
         if (ljets.size() > 1) {
-          _h["jetl_1_jetl_2_dR"]->fill(deltaR(ljets[0].momentum(), ljets[1].momentum()),weight);
-          _h["jetl_1_jetl_2_deta"]->fill(fabs(ljets[0].eta()-ljets[1].eta()),weight);
-          _h["jetl_1_jetl_2_dphi"]->fill(deltaPhi(ljets[0].momentum(),ljets[1].momentum()),weight);
+          _h["jetl_1_jetl_2_dR"]->fill(deltaR(ljets[0].momentum(), ljets[1].momentum()));
+          _h["jetl_1_jetl_2_deta"]->fill(fabs(ljets[0].eta()-ljets[1].eta()));
+          _h["jetl_1_jetl_2_dphi"]->fill(deltaPhi(ljets[0].momentum(),ljets[1].momentum()));
         }
       }
 
       // lepton-centric plots
       if (_mode > 0) {
         FourMomentum l=lfs.chargedLeptons()[0].momentum();
-        _h["jetb_1_l_dR"]->fill(deltaR(bjets[0].momentum(), l),weight);
-        _h["jetb_1_l_deta"]->fill(fabs(bjets[0].eta()-l.eta()),weight);
-        _h["jetb_1_l_dphi"]->fill(deltaPhi(bjets[0].momentum(),l),weight);
-        _h["jetb_1_l_mass"]->fill(FourMomentum(bjets[0].momentum()+l).mass(), weight);
+        _h["jetb_1_l_dR"]->fill(deltaR(bjets[0].momentum(), l));
+        _h["jetb_1_l_deta"]->fill(fabs(bjets[0].eta()-l.eta()));
+        _h["jetb_1_l_dphi"]->fill(deltaPhi(bjets[0].momentum(),l));
+        _h["jetb_1_l_mass"]->fill(FourMomentum(bjets[0].momentum()+l).mass());
 
         if (nLeps > 1) {
           FourMomentum l=lfs.chargedLeptons()[1].momentum();
-          _h["jetb_1_l2_dR"]->fill(deltaR(bjets[0].momentum(), l),weight);
-          _h["jetb_1_l2_deta"]->fill(fabs(bjets[0].eta()-l.eta()),weight);
-          _h["jetb_1_l2_dphi"]->fill(deltaPhi(bjets[0].momentum(),l),weight);
-          _h["jetb_1_l2_mass"]->fill(FourMomentum(bjets[0].momentum()+l).mass(), weight);
+          _h["jetb_1_l2_dR"]->fill(deltaR(bjets[0].momentum(), l));
+          _h["jetb_1_l2_deta"]->fill(fabs(bjets[0].eta()-l.eta()));
+          _h["jetb_1_l2_dphi"]->fill(deltaPhi(bjets[0].momentum(),l));
+          _h["jetb_1_l2_mass"]->fill(FourMomentum(bjets[0].momentum()+l).mass());
         }
       }
 

@@ -158,7 +158,7 @@ namespace Rivet {
       if (taus.size())  vetoEvent; //No taus
 
       //At least 6 jets with pt > 55 GeV
-      if (filter_select(jets, Cuts::pT > 55*GeV).size() < 6)  vetoEvent;
+      if (select(jets, Cuts::pT > 55*GeV).size() < 6)  vetoEvent;
 
       //Exactly 2 bjets
       if ( bjets.size() != 2) vetoEvent;

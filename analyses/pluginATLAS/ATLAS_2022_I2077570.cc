@@ -129,7 +129,7 @@ namespace Rivet {
       double minDR = 99.;
 
       // Require jets to be above 100GeV
-      ifilter_select(jets, Cuts::pT > 100*GeV);
+      iselect(jets, Cuts::pT > 100*GeV);
       double HTjet = sum(jets, Kin::pT, 0.);
       for (const Jet& j : jets) {
         // find minDR and closest jet to Z boson, only with 100GeV+ jets

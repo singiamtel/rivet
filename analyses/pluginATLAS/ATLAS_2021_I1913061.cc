@@ -54,11 +54,11 @@ namespace Rivet {
       book(_p["ptRel"], 8,1,1);
     }
 
-    
+
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const Jets& jets = apply<FastJets>(event, "JETS").jetsByPt(7*GeV);
+      const Jets& jets = apply<FastJets>(event, "JETS").jetsByPt(Cuts::pT > 7*GeV);
       const Particles& bpmFS = apply<UnstableParticles>(event, "BPM_FS").particlesByPt();
 
       //Preselect B mesons in J/psi K decay channel

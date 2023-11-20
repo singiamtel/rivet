@@ -106,8 +106,8 @@ namespace Rivet {
       if (deltaR(lp, lm) < 0.2) vetoEvent;
 
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 4.4);
-      ifilter_discard(jets, deltaRLess(lp, 0.5));
-      ifilter_discard(jets, deltaRLess(lm, 0.5));
+      idiscard(jets, deltaRLess(lp, 0.5));
+      idiscard(jets, deltaRLess(lm, 0.5));
 
       // Fill jet multiplicities
       for (size_t ijet = 0; ijet <= jets.size(); ++ijet) {

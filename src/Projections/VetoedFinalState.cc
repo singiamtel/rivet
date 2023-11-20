@@ -119,7 +119,7 @@ namespace Rivet {
     for (const string& ifs : _vetofsnames) {
       const ParticleFinder& vfs = apply<ParticleFinder>(e, ifs);
       const Particles& pvetos = vfs.rawParticles();
-      ifilter_discard(_theParticles, [&](const Particle& pcheck) {
+      idiscard(_theParticles, [&](const Particle& pcheck) {
           if (pcheck.genParticle() == nullptr) return false;
           for (const Particle& pveto : pvetos) {
             if (pveto.genParticle() == nullptr) continue;

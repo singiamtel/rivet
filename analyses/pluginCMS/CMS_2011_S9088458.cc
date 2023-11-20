@@ -25,19 +25,18 @@ namespace Rivet {
 
 
      void analyze(const Event & event) {
-       const double weight = 1.0;
 
        Jets highpT_jets;
        double HT = 0;
-       for(const Jet & jet : apply<JetFinder>(event, "antikT").jetsByPt(50.0*GeV)) {
+       for(const Jet & jet : apply<JetFinder>(event, "antikT").jetsByPt(Cuts::pT > 50.0*GeV)) {
          if (jet.abseta() < 2.5) {
            highpT_jets.push_back(jet);
            HT += jet.pT();
          }
        }
        if (highpT_jets.size() < 2) vetoEvent;
-       if (highpT_jets.size() >= 2) _h_tmp_dijet->fill(HT/TeV, weight);
-       if (highpT_jets.size() >= 3) _h_tmp_trijet->fill(HT/TeV, weight);
+       if (highpT_jets.size() >= 2) _h_tmp_dijet->fill(HT/TeV);
+       if (highpT_jets.size() >= 3) _h_tmp_trijet->fill(HT/TeV);
      }
 
 

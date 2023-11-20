@@ -99,7 +99,6 @@ nobase_pkginclude_HEADERS += \
   Projections/TriggerCDFRun2.hh \
   Projections/TriggerProjection.hh \
   Projections/TriggerUA5.hh \
-  Projections/UnstableFinalState.hh \
   Projections/UndressBeamLeptons.hh \
   Projections/UnstableParticles.hh \
   Projections/UserCentEstimate.hh \

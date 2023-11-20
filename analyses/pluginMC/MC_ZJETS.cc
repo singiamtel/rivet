@@ -29,11 +29,11 @@ namespace Rivet {
       // set FS cuts from input options
       const double etacut = getOption<double>("ABSETALMAX", 3.5);
       const double ptcut = getOption<double>("PTLMIN", 25.);
-      
+
       FinalState fs;
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
 
-      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR, PhotonOrigin::NODECAY);
+      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR);
       declare(zfinder, "ZFinder");
 
       // set ptcut from input option
@@ -76,7 +76,7 @@ namespace Rivet {
       const FourMomentum& zmom = zfinder.bosons()[0].momentum();
       MSG_TRACE("MC_ZJETS: have exactly one Z boson candidate");
 
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(_jetptcut);
+      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > _jetptcut);
       if (jets.size() > 0) {
         MSG_TRACE("MC_ZJETS: have at least one valid jet");
         _h_Z_jet1_deta->fill(zmom.eta()-jets[0].eta());

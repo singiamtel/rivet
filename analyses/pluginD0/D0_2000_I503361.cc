@@ -20,7 +20,7 @@ namespace Rivet {
     void init() {
 
       ///  Initialise and register projections here
-      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 75*GeV, 105*GeV, 0.0*GeV, PhotonOrigin::NONE);
+      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 75*GeV, 105*GeV, 0.0);
       declare(zfinder, "ZFinder");
 
 

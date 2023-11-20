@@ -212,9 +212,9 @@ namespace Rivet {
       met = FourMomentum(met.pt(), met.px(), met.py(), 0.);
 
       // Filter jets on pT, eta and DR with lepton and photon
-      const Jets jets = apply<FastJets>(event, "Jets").jetsByPt([&](Jet const& j) {
-        return j.pt() > jet_pt_cut_ && j.abseta() < jet_abs_eta_cut_ && deltaR(j, l0) > jet_dr_cut_ && deltaR(j, p0) > jet_dr_cut_;
-      });
+      Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > jet_pt_cut_ && Cuts::abseta < jet_abs_eta_cut_);
+      idiscard(jets, deltaRLess(l0, jet_dr_cut_));
+      idiscard(jets, deltaRLess(p0, jet_dr_cut_));
 
       if (leptons.size() >= 1 && photons.size() >= 1 && invisibles.size() >= 1) {
         // Populate variables

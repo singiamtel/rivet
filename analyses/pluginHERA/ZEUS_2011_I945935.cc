@@ -26,7 +26,7 @@ namespace Rivet {
           declare(labcut, "UFS");
           const DISKinematics& diskin = DISKinematics();
           declare(diskin, "Kinematics");
-          const DISFinalState&  disfsbf = DISFinalState(labcut, DISFrame::BREIT, diskin);
+          const DISFinalState&  disfsbf = DISFinalState(labcut, DISFrame::BREIT);
           declare(disfsbf, "FSBF");
 
           for (size_t offset = 0; offset < 5; offset++) {
@@ -75,7 +75,7 @@ namespace Rivet {
           if (ofv2 >= 0) _h_Q2_tmp->fill(5+ofv2);
           const DISFinalState& disfsbf = apply<DISFinalState>(event, "FSBF");
 
-          for (const Particle& p: filter_select(disfsbf.particles(), Cuts::abspid == abs(PID::K0S))) {
+          for (const Particle& p: select(disfsbf.particles(), Cuts::abspid == abs(PID::K0S))) {
               //// Scaled energy.
               if (p.pz() > 0) continue;
               const double energy = p.momentum().vector3().mod();
@@ -84,7 +84,7 @@ namespace Rivet {
               if (ofv2 >= 0) _h_K0S[5+ofv2]->fill(scaledEnergy);
           }
 
-          for (const Particle& p: filter_select(disfsbf.particles(), Cuts::abspid == abs(PID::LAMBDA))) {
+          for (const Particle& p: select(disfsbf.particles(), Cuts::abspid == abs(PID::LAMBDA))) {
               //// Scaled energy.
               if (p.pz() > 0) continue;
               const double energy = p.momentum().vector3().mod();
