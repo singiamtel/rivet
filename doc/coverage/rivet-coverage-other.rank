@@ -1,15 +1,10 @@
-133123 . Inclusive Production of $D$ Mesons in $e^+ e^-$ Annihilation at 7-{GeV} #implement#
 153009 . Measurement of the Continuum of Dimuons Produced in High-Energy Proton - Nucleus Collisions
 168182 . Dimuon Scaling Comparison at 44-{GeV} and 62-{GeV}
-168793 . Production of $\pi^0 \pi^0$ and $\pi^0 \eta$ in Photon - Photon Collisions #implement#
 176647 . Comparison of $p \bar{p}$ and $p p$ Interactions at $\sqrt{s}=53$-{GeV}
 196601 . Charged Multiplicity Distribution in p p Interactions at ISR Energies
-202899 . Inclusive D0 and $D^+$ Production in $e^+ e^-$ Annihilation at 29-{GeV} #implement#
-205132 . Charged $D^*$ Production in $e^+ e^-$ Annihilation at 29-{GeV} and a Limit on D0 - Anti-d0 Mixing #implement#
 206647 . MEASUREMENT OF OMEGA- DECAY PROPERTIES IN THE CERN SPS HYPERON BEAM
 233599 . Scaling of Pseudorapidity Distributions at c.m. Energies Up to 0.9-TeV
 244829 . UA5: A general study of proton-antiproton physics at $\sqrt{s}$ = 546-GeV
-246162 . Production of Strange Baryons in $e^+ e^-$ Annihilations at 29-{GeV} #implement#
 263399 . Charged Particle Correlations in $\bar{P} P$ Collisions at c.m. Energies of 200-{GeV}, 546-{GeV} and 900-{GeV}
 267179 . Charged Particle Multiplicity Distributions at 200-GeV and 900-GeV Center-Of-Mass Energy
 280412 . A Study of the General Characteristics of $p\bar{p}$ Collisions at $\sqrt{s}$ = 0.2-TeV to 0.9-TeV
@@ -112,7 +107,6 @@
 697215 . New measurement of $BR(D^+ \to \rho^0 \mu^+ \nu)/BR(D^+ \to \bar{K}^{*0} \mu^+ \nu)$ branching ratio.
 718501 . Search for a pentaquark decaying to $p K_{S}$ 0
 734494 . A Non-parametric approach to measuring the $K^{-} \pi^{+}$ amplitudes in $D^{+} \to K^{-} K^{+} \pi^{+}$ decay
-735496 . Measurements of the continuum R(uds) and R values in e+e- annihilation in the energy region between 3.650 and 3.872-GeV #implement#
 741543 . Study of the $D^0 \to \pi^{-} \pi^{+} \pi^{-} \pi^{+}$ decay
 750701 . Dalitz plot analysis of the $D^{+} \to K^{-} \pi^{+} \pi^{+}$ decay in the FOCUS experiment
 757767 . Search for a pentaquark decaying to Cascade- pi-
@@ -129,4 +123,9 @@
 1942141 . First Search for Exclusive Diphoton Production at High Mass with Tagged Protons in Proton-Proton Collisions at $\sqrt s$ = 13 TeV
 2018236 . Observation of a State $X(2600)$ in the $\pi^{+}\pi^{-}\eta'$ System in the Process $J/\psi\rightarrow\gamma\pi^{+}\pi^{-}\eta'$ #implement#
 2068180 . Observation of the Y(4230) and a new structure in * #implement#
+2075454 . Test beam performance of a CBC3-based mini-module for the Phase-2 CMS Outer Tracker before and after neutron irradiation
 2105022 X Beam test performance of a prototype module with Short Strip ASICs for the CMS HL-LHC tracker upgrade
+2162525 . Observations of the Cabibbo-Suppressed decays $\Lambda_{c}^{+}\to n\pi^{+}\pi^{0}$, $n\pi^{+}\pi^{-}\pi^{+}$ and the Cabibbo-Favored decay $\Lambda_{c}^{+}\to nK^{-}\pi^{+}\pi^{+}$
+2513734 . Search for hidden-charm tetraquark with strangeness in $e^{+}e^{-}\rightarrow K^+ D_{s}^{*-} D^{*0}+c.c.$
+2593281 . Observation of $e^+e^- \to p p \bar{p} \bar{n} \pi^{-} + c.c.$ #implement#
+2612736 . Evaluation of HPK $n^+$-$p$ planar pixel sensors for the CMS Phase-2 upgrade

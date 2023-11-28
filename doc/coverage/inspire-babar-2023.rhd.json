@@ -1,1 +1,37 @@
-{}
+{
+    "2119980": [
+        "Search for heavy neutral leptons using tau lepton decays at BaBaR",
+        "BaBar",
+        "10.1103/PhysRevD.107.052009",
+        null,
+        "2207.09575",
+        null,
+        null,
+        [
+            "BABAR-PUB-22/002",
+            "SLAC-PUB-17695"
+        ]
+    ],
+    "2120528": [
+        "Study of the reactions <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>K</mi><mo>+</mo></msup><msup><mi>K</mi><mo>-</mo></msup><msup><mi>\u03c0</mi><mn>0</mn></msup><msup><mi>\u03c0</mi><mn>0</mn></msup><msup><mi>\u03c0</mi><mn>0</mn></msup></math>, <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msubsup><mi>K</mi><mi>S</mi><mn>0</mn></msubsup><msup><mi>K</mi><mo>\u00b1</mo></msup><msup><mi>\u03c0</mi><mo>\u2213</mo></msup><msup><mi>\u03c0</mi><mn>0</mn></msup><msup><mi>\u03c0</mi><mn>0</mn></msup></math>, and <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msubsup><mi>K</mi><mi>S</mi><mn>0</mn></msubsup><msup><mi>K</mi><mo>\u00b1</mo></msup><msup><mi>\u03c0</mi><mo>\u2213</mo></msup><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup></math> at center-of-mass energies from threshold to 4.5\u00a0GeV using initial-state radiation",
+        "BaBar",
+        "10.1103/PhysRevD.107.072001",
+        null,
+        "2207.10340",
+        null,
+        null,
+        [
+            "SLAC-PUB-17694"
+        ]
+    ],
+    "2628737": [
+        "Search for <math display=\"inline\"><mi>B</mi></math> mesogenesis at BaBar",
+        "BaBar",
+        "10.1103/PhysRevD.107.092001",
+        null,
+        "2302.00208",
+        null,
+        null,
+        []
+    ]
+}

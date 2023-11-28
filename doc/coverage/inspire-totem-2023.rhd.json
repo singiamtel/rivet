@@ -1,1 +1,30 @@
-{}
+{
+    "2164528": [
+        "Proton reconstruction with the CMS-TOTEM Precision Proton Spectrometer",
+        "CMS",
+        "10.1088/1748-0221/18/09/P09009",
+        "2836521",
+        "2210.05854",
+        null,
+        null,
+        [
+            "CMS-PRO-21-001",
+            "TOTEM-2022-001",
+            "CERN-EP-2022-139"
+        ]
+    ],
+    "2605178": [
+        "Search for high-mass exclusive $\\gamma\\gamma$$\\to$ WW and $\\gamma\\gamma$$\\to$ ZZ production in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
+        "CMS",
+        "10.1007/JHEP07(2023)229",
+        "2842494",
+        "2211.16320",
+        "ins2605178",
+        null,
+        [
+            "CMS-SMP-21-014",
+            "TOTEM-2022-002",
+            "CERN-EP-2022-177"
+        ]
+    ]
+}

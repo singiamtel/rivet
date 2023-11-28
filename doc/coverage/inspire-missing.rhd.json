@@ -212,19 +212,6 @@
             "LAL-78/31"
         ]
     ],
-    "133123": [
-        "Inclusive Production of $D$ Mesons in $e^+ e^-$ Annihilation at 7-{GeV}",
-        null,
-        "10.1016/0370-2693(79)91249-8",
-        null,
-        null,
-        "ins133123",
-        null,
-        [
-            "SLAC-PUB-2184",
-            "LBL-8143"
-        ]
-    ],
     "133588": [
         "Total Hadronic Cross-section From $e^+ e^-$ Annihilation in the Total Center-of-mass Energy Range 1920-{MeV} - 3090-{MeV}",
         null,
@@ -346,7 +333,6 @@
         "ins153009",
         null,
         [
-            "FERMILAB-PUB-80-19-EXP",
             "FERMILAB-PUB-80-019-E"
         ]
     ],
@@ -514,18 +500,6 @@
         null,
         [
             "LAL 81/33"
-        ]
-    ],
-    "168793": [
-        "Production of $\\pi^0 \\pi^0$ and $\\pi^0 \\eta$ in Photon - Photon Collisions",
-        null,
-        "10.1016/0370-2693(82)90957-1",
-        null,
-        null,
-        "ins168793",
-        null,
-        [
-            "SLAC-PUB-2821"
         ]
     ],
     "169326": [
@@ -763,22 +737,6 @@
             "UM HE 84-03"
         ]
     ],
-    "202899": [
-        "Inclusive D0 and $D^+$ Production in $e^+ e^-$ Annihilation at 29-{GeV}",
-        null,
-        "10.1103/PhysRevLett.53.1971",
-        null,
-        null,
-        "ins202899",
-        null,
-        [
-            "ANL-HEP-PR-84-46",
-            "IUHEE 57",
-            "UM HE 84-13",
-            "PU-84-517",
-            "HRS-PR-84-1"
-        ]
-    ],
     "202924": [
         "A Measurement of Energy-energy Correlations in $e^+ e^- \\to$ Hadrons at $\\sqrt{s}=29$-{GeV}",
         null,
@@ -789,19 +747,6 @@
         null,
         [
             "SLAC-PUB-3385"
-        ]
-    ],
-    "205132": [
-        "Charged $D^*$ Production in $e^+ e^-$ Annihilation at 29-{GeV} and a Limit on D0 - Anti-d0 Mixing",
-        null,
-        "10.1103/PhysRevLett.54.522",
-        null,
-        null,
-        "ins205132",
-        null,
-        [
-            "SLAC-PUB-3498",
-            "CALT-68-1206"
         ]
     ],
     "205668": [
@@ -903,19 +848,6 @@
             "PU-85-537",
             "IUHEE-69",
             "UM-HE-85-16"
-        ]
-    ],
-    "217547": [
-        "Formation of Delta (980) and A2 (1320) in Photon-photon Collisions",
-        "Crystal Ball",
-        "10.1103/PhysRevD.33.1847",
-        null,
-        null,
-        "ins217547",
-        null,
-        [
-            "SLAC-PUB-3761",
-            "DESY-85-97"
         ]
     ],
     "220003": [
@@ -1025,18 +957,6 @@
         null,
         []
     ],
-    "244856": [
-        "Observation of $e^+ e^- \\to D(s$)+- $D^*(s$)-+ at $\\sqrt{s}=4$.14-{GeV}",
-        "MARK-III",
-        "10.1103/PhysRevLett.58.2171",
-        null,
-        null,
-        "ins244856",
-        null,
-        [
-            "SLAC-PUB-4158"
-        ]
-    ],
     "245571": [
         "Measurement of the Polarization of $\\tau$ Leptons Produced in $e^+ e^-$ Annihilation at $\\sqrt{s}=29$-{GeV}",
         null,
@@ -1048,21 +968,6 @@
         [
             "SLAC-PUB-4066",
             "COLO-HEP-132"
-        ]
-    ],
-    "246162": [
-        "Production of Strange Baryons in $e^+ e^-$ Annihilations at 29-{GeV}",
-        null,
-        "10.1103/PhysRevLett.58.2627",
-        null,
-        null,
-        "ins246162",
-        null,
-        [
-            "ANL-HEP-PR-87-26",
-            "IUHEE-87-4",
-            "PU-87-591",
-            "UM-HE-87-06"
         ]
     ],
     "246184": [
@@ -1251,19 +1156,6 @@
         null,
         [
             "SLAC-PUB-5160"
-        ]
-    ],
-    "294492": [
-        "A Measurement of $\\pi^0 \\pi^0$ Production in Two Photon Collisions",
-        "Crystal Ball",
-        "10.1103/PhysRevD.41.3324",
-        null,
-        null,
-        "ins294492",
-        null,
-        [
-            "SLAC-PUB-5163",
-            "DESY-90-002"
         ]
     ],
     "295286": [
@@ -1823,16 +1715,6 @@
             "BABAR-PUB-06-038"
         ]
     ],
-    "735496": [
-        "Measurements of the continuum R(uds) and R values in e+e- annihilation in the energy region between 3.650 and 3.872-GeV",
-        null,
-        "10.1103/PhysRevLett.97.262001",
-        null,
-        "hep-ex/0612054",
-        null,
-        null,
-        []
-    ],
     "755881": [
         "Measurement of the e+e- -> K+K- process cross-section in the energy range s**(1/2) = 1.04 - 1.38 GeV with the SND detector in the experiment at VEPP-2M e+e- collider",
         null,
@@ -2321,16 +2203,6 @@
         null,
         []
     ],
-    "1793431": [
-        "Study of the process $e^+e^-\\to\\pi^0\\pi^0 J/\\psi$ and neutral charmonium-like state $Z_c(3900)^0$",
-        "BESIII",
-        "10.1103/PhysRevD.102.012009",
-        null,
-        "2004.13788",
-        null,
-        null,
-        []
-    ],
     "1799437": [
         "Analysis of the decay $D^0\\rightarrow K_{S}^{0} K^{+} K^{-}$",
         "BESIII",
@@ -2340,28 +2212,6 @@
         null,
         null,
         []
-    ],
-    "1808875": [
-        "Measurement of cross sections for $e^{+}e^{-} \\rightarrow \\mu^+\\mu^-$ at center-of-mass energies from 3.80 to 4.60 GeV",
-        "BESIII",
-        "10.1103/PhysRevD.102.112009",
-        null,
-        "2007.12872",
-        "ins1808875",
-        null,
-        []
-    ],
-    "1829739": [
-        "$\\Lambda^+_c$ Production and Baryon-to-Meson Ratios in pp and p-Pb Collisions at $\\sqrt {s_{NN}}$=5.02\u2009\u2009TeV at the LHC",
-        "ALICE",
-        "10.1103/PhysRevLett.127.202301",
-        "2743731",
-        "2011.06078",
-        "ins1829739",
-        null,
-        [
-            "CERN-EP-2020-217"
-        ]
     ],
     "1845443": [
         "Cross section measurement of $e^+e^- \\to p\\bar{p}\\eta$ and $e^+e^- \\to p\\bar{p}\\omega$ at center-of-mass energies between 3.773\u00a0GeV and 4.6\u00a0GeV",
@@ -2385,16 +2235,6 @@
             "CMS-SMP-17-008",
             "CERN-EP-2020-251"
         ]
-    ],
-    "1849633": [
-        "Observation of $e^{+}e^{-}\\rightarrow\\eta\\psi(2S)$\u00a0at center-of-mass energies from 4.236 to 4.600 GeV",
-        "BESIII",
-        "10.1007/JHEP10(2021)177",
-        null,
-        "2103.01480",
-        null,
-        null,
-        []
     ],
     "1849747": [
         "Amplitude analysis and branching fraction measurement of $D_s^+ \\to K^-K^+\\pi^+\\pi^0$",
@@ -2468,30 +2308,6 @@
         null,
         [
             "Belle Preprint 2021-06; KEK Preprint 2021-2"
-        ]
-    ],
-    "1862793": [
-        "Measurement of the Cross Sections of $\\Xi^0_{c}$ and $\\Xi^+_{c}$ Baryons and of the Branching-Fraction Ratio BR($\\Xi^0_{c} \\rightarrow \\Xi^-{e}^+\\nu_{ e}$)/BR($\\Xi^0_{c} \\rightarrow \\Xi^-\\pi^+$) in pp collisions at 13 TeV",
-        "ALICE",
-        "10.1103/PhysRevLett.127.272001",
-        "2766135",
-        "2105.05187",
-        "ins1862793",
-        null,
-        [
-            "CERN-EP-2021-084"
-        ]
-    ],
-    "1863039": [
-        "Measurement of the production cross section of prompt $ {\\Xi}_{\\mathrm{c}}^0 $ baryons at midrapidity in pp collisions at $ \\sqrt{s} $ = 5.02 TeV",
-        "ALICE",
-        "10.1007/JHEP10(2021)159",
-        "2766009",
-        "2105.05616",
-        "ins1863039",
-        null,
-        [
-            "CERN-EP-2021-079"
         ]
     ],
     "1866051": [
@@ -2579,29 +2395,6 @@
         null,
         []
     ],
-    "1876550": [
-        "Measurement of prompt open-charm production cross sections in proton-proton collisions at $ \\sqrt{s} $ = 13 TeV",
-        "CMS",
-        "10.1007/JHEP11(2021)225",
-        "2774790",
-        "2107.01476",
-        null,
-        null,
-        [
-            "CMS-BPH-18-003",
-            "CERN-EP-2021-085"
-        ]
-    ],
-    "1880103": [
-        "Measurement of $e^+e^-\\to\\gamma \\chi_{c0,c1,c2}$ cross sections at center-of-mass energies between 3.77 and 4.60\u00a0GeV",
-        "BESIII",
-        "10.1103/PhysRevD.104.092001",
-        null,
-        "2107.03604",
-        null,
-        null,
-        []
-    ],
     "1887997": [
         "Measurement of the production cross section of pairs of isolated photons in $pp$ collisions at 13 TeV with the ATLAS detector",
         "ATLAS",
@@ -2612,19 +2405,6 @@
         null,
         [
             "CERN-EP-2021-105"
-        ]
-    ],
-    "1888216": [
-        "Observation of a $\\Lambda_b^0-\\overline{\\Lambda}_b^0$ production asymmetry in proton-proton collisions at $\\sqrt{s} = 7 \\textrm{ and } 8\\,\\textrm{TeV}$",
-        "LHCb",
-        "10.1007/JHEP10(2021)060",
-        "2776527",
-        "2107.09593",
-        null,
-        null,
-        [
-            "LHCb-PAPER-2021-016",
-            "CERN-EP-2021-121"
         ]
     ],
     "1891391": [
@@ -2652,18 +2432,6 @@
             "KEK Preprint 2021-13"
         ]
     ],
-    "1898832": [
-        "Inclusive $\\text {J}/\\psi $ production at midrapidity in pp collisions at $\\sqrt{s} = 13$ TeV",
-        "ALICE",
-        "10.1140/epjc/s10052-021-09873-4",
-        "2777656",
-        "2108.01906",
-        "ins1898832",
-        null,
-        [
-            "CERN-EP-2021-160"
-        ]
-    ],
     "1900124": [
         "Measurement of the cross section for $e^{+}e^{-}\\rightarrow\\Lambda\\bar\\Lambda$\u00a0and evidence of the decay $\\psi(3770)\\rightarrow\\Lambda\\bar\\Lambda$",
         "BESIII",
@@ -2673,6 +2441,19 @@
         null,
         null,
         []
+    ],
+    "1901295": [
+        "Measurement of differential $t \\bar t$ production cross sections in the full kinematic range using lepton+jets events from proton-proton collisions at $\\sqrt {s}$ = 13\u2009\u2009TeV",
+        "CMS",
+        "10.1103/PhysRevD.104.092013",
+        "2777964",
+        "2108.02803",
+        "ins1901295",
+        null,
+        [
+            "CMS-TOP-20-001",
+            "CERN-EP-2021-135"
+        ]
     ],
     "1908066": [
         "Direct Measurement of the Branching Fractions $\\mathcal B (\\psi (3686)\\to J/\\psi X)$, and $\\mathcal B (\\psi (3770) \\to J/\\psi X)$ Observation of the State $\\mathcal R(3760)$ in $e^+e^- \\to J/\\psi X$",
@@ -2694,19 +2475,6 @@
         null,
         [
             "CERN-EP-2021-123"
-        ]
-    ],
-    "1915030": [
-        "Measurement of $J/\\psi$ production cross-sections in $pp$ collisions at $\\sqrt{s}=5$ TeV",
-        "LHCb",
-        "10.1007/JHEP11(2021)181",
-        "2779925",
-        "2109.00220",
-        "ins1915030",
-        null,
-        [
-            "LHCb-PAPER-2021-020",
-            "CERN-EP-2021-156"
         ]
     ],
     "1921775": [
@@ -2786,7 +2554,7 @@
         []
     ],
     "1997451": [
-        "Measurement of $e^+ e^- \\to \\phi \\pi^+ \\pi^-$ cross sections at center-of-mass energies from 2.00 to 3.08 GeV",
+        "Measurement of $e^{+}e^{-}\\to\\phi\\pi^{+}\\pi^{-}$ cross sections at center-of-mass energies from 2.00 to 3.08 GeV",
         "BESIII",
         null,
         null,
@@ -2798,178 +2566,12 @@
     "2030993": [
         "Amplitude analysis and branching-fraction measurement of $D_{s}^{+} \\to \\pi^{+}\\pi^{0}\\eta^{\\prime}$",
         "BESIII",
-        null,
+        "10.1007/JHEP04(2022)058",
         null,
         "2202.04232",
         null,
         null,
         []
-    ],
-    "2070086": [
-        "Observation of $a_0(1710)^+ \\to K_S^0K^+$ in study of the $D_s^+\\to K_S^0K^+\\pi^0$ decay",
-        "BESIII",
-        null,
-        null,
-        "2204.09614",
-        null,
-        null,
-        []
-    ],
-    "2077570": [
-        "Cross-section measurements for the production of a $Z$ boson in association with high-transverse-momentum jets in $pp$ collisions at $\\sqrt{s} = 13$ TeV with the ATLAS detector",
-        "ATLAS",
-        null,
-        "2808609",
-        "2205.02597",
-        "ins2077570",
-        null,
-        [
-            "CERN-EP-2022-075"
-        ]
-    ],
-    "2079374": [
-        "Measurement of the mass dependence of the transverse momentum of lepton pairs in Drell-Yan production in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
-        "CMS",
-        null,
-        "2809120",
-        "2205.04897",
-        "ins2079374",
-        null,
-        [
-            "CMS-SMP-20-003",
-            "CERN-EP-2022-053"
-        ]
-    ],
-    "2097619": [
-        "Study of the resonance structures in $e^{+}e^{-} \\rightarrow \\pi^{+}\\pi^{-}J/\\psi$ process",
-        "BESIII",
-        null,
-        null,
-        "2206.08554",
-        null,
-        null,
-        []
-    ],
-    "2102287": [
-        "Measurement of the total and leptonic decay widths of the $J/\\psi$ resonance with an energy scan method at BESIII",
-        "BESIII",
-        null,
-        null,
-        "2206.13674",
-        null,
-        null,
-        []
-    ],
-    "2105430": [
-        "Evidence for the cusp effect in $\\eta'$ decays into $\\eta\\pi^0\\pi^0$",
-        "BESIII",
-        null,
-        null,
-        "2207.01004",
-        null,
-        null,
-        []
-    ],
-    "2120528": [
-        "Study of the reactions $e^+e^-\\to K^+K^-\\pi^0\\pi^0\\pi^0$, $e^+e^-\\to K^{0}_{S}K^{\\pm}\\pi^{\\mp}\\pi^0\\pi^0$, and $e^+e^-\\to K^{0}_{S}K^{\\pm}\\pi^{\\mp}\\pi^+\\pi^-$ at center-of-mass energies from threshold to 4.5 GeV using ISR",
-        "BaBar",
-        null,
-        null,
-        "2207.10340",
-        null,
-        null,
-        [
-            "SLAC-PUB-17694"
-        ]
-    ],
-    "2132748": [
-        "Amplitude analysis of the $D^+\\to\\pi^- \\pi^+\\pi^+$ decay and measurement of the $\\pi^-\\pi^+$ S-wave amplitude",
-        "LHCb",
-        null,
-        "2824350",
-        "2208.03300",
-        null,
-        null,
-        [
-            "LHCb-PAPER-2022-016",
-            "CERN-EP-2022-136"
-        ]
-    ],
-    "2133889": [
-        "Measurement of $e^{+}e^{-}\\rightarrow\\omega\\pi^{+}\\pi^{-}$ cross section at $\\sqrt s = $ 2.000 to 3.080 GeV",
-        "BESIII",
-        null,
-        null,
-        "2208.04507",
-        null,
-        null,
-        []
-    ],
-    "2138841": [
-        "Measurement of branching fractions and decay asymmetry parameters for $\\Lambda_c^+\\to\\Lambda h^+$ and $\\Lambda_c^+\\to\\Sigma^0h^+$ ($h=K,\\pi$), and search for $CP$ violation in baryon decays",
-        "Belle",
-        null,
-        null,
-        "2208.08695",
-        null,
-        null,
-        [
-            "Belle Preprint 2022-17",
-            "KEK Preprint 2022-22",
-            "UCHEP-22-04"
-        ]
-    ],
-    "2138845": [
-        "Study of $B_c^+$ meson decays to charmonia plus multihadron final states",
-        "LHCb",
-        null,
-        "2824905",
-        "2208.08660",
-        null,
-        null,
-        [
-            "CERN-EP-2022-162",
-            "LHCb-PAPER-2022-025"
-        ]
-    ],
-    "2140379": [
-        "Measurements of branching fractions of $\\Lambda_c^+ \\to \\Sigma^+ \\eta$ and $\\Lambda_c^+ \\to \\Sigma^+ \\eta'$ and asymmetry parameters of $\\Lambda_c^+ \\to \\Sigma^+ \\pi^0$, $\\Lambda_c^+ \\to \\Sigma^+ \\eta$, and $\\Lambda_c^+ \\to \\Sigma^+ \\eta'$",
-        "Belle",
-        null,
-        null,
-        "2208.10825",
-        null,
-        null,
-        [
-            "Belle Preprint 2022-19; KEK Preprint 2022-25"
-        ]
-    ],
-    "2142648": [
-        "Observation of $e^+e^-\\to\\omega\\chi_{bJ}(1P)$ and search for $X_b \\to \\omega\\Upsilon(1S)$ at $\\sqrt{s}$ near 10.75 GeV",
-        "Belle-II",
-        null,
-        null,
-        "2208.13189",
-        null,
-        null,
-        [
-            "Belle II Preprint 2022-004; KEK Preprint 2022-24"
-        ]
-    ],
-    "2160445": [
-        "Measurement of branching fractions of $\\Lambda_c^+\\to{}pK_S^0K_S^0$ and $\\Lambda_c^+\\to{}pK_S^0\\eta$ at Belle",
-        "Belle",
-        null,
-        null,
-        "2210.01995",
-        null,
-        null,
-        [
-            "Belle Preprint 2022-24",
-            "KEK Preprint 2022-33",
-            "Univ. Cincinnati\n  preprint UCHEP-22-05",
-            "UCHEP-22-05"
-        ]
     ],
     "2163247": [
         "Determination of $|V_{ub}|$ from untagged $B^0\\to\\pi^- \\ell^+ \\nu_{\\ell}$ decays using 2019-2021 Belle II data",
@@ -2982,16 +2584,6 @@
         [
             "BELLE2-CONF-PH-2022-017"
         ]
-    ],
-    "2165175": [
-        "Measurement of $e^+ e^- \\rightarrow \\phi \\eta^{\\prime}$ cross sections at center-of-mass energies between 3.508 and 4.600 GeV",
-        "BESIII",
-        null,
-        null,
-        "2210.06988",
-        null,
-        null,
-        []
     ],
     "2167323": [
         "Measurement of the photon-energy spectrum in inclusive $B\\rightarrow X_{s}\\gamma$ decays identified using hadronic decays of the recoil $B$ meson in 2019-2021 Belle II data",
@@ -3017,127 +2609,12 @@
             "BELLE2-CONF-PH-2022-010"
         ]
     ],
-    "2169640": [
-        "Study of $e^+e^-\\to\\gamma\\phi J/\\psi$ from $\\sqrt{s}=4.600$ to $4.951$ GeV",
-        "BESIII",
-        null,
-        null,
-        "2210.13058",
-        null,
-        null,
-        []
-    ],
-    "2173361": [
-        "Study of $e^+e^- \\rightarrow \\Sigma^0 \\overline{\\Sigma}{}^0$ and $\\Sigma^+\\overline{\\Sigma}{}^- $ by Initial State Radiation Method at Belle",
-        "Belle",
-        null,
-        null,
-        "2210.16761",
-        null,
-        null,
-        [
-            "Belle Preprint 2022-26; KEK Preprint 2022-35"
-        ]
-    ],
-    "2512112": [
-        "First observation of $B\\!\\to \\bar{D}_1(\\to\\bar{D}\\pi^+\\pi^-)\\ell^+\\nu_\\ell$ and measurement of the $B\\!\\to \\bar{D}^{(*)}\\pi\\ell^+\\nu_\\ell$ and $B\\!\\to \\bar{D}^{(*)}\\pi^+\\pi^-\\ell^+\\nu_\\ell$ branching fractions with hadronic tagging at Belle",
-        "Belle",
-        null,
-        null,
-        "2211.09833",
-        null,
-        null,
-        [
-            "Belle Preprint 2022-32",
-            "KEK Preprint 2022-44"
-        ]
-    ],
-    "2512962": [
-        "Measurement of $e^+e^-\\rightarrow\\Lambda\\bar{\\Lambda}\\eta$ from 3.5106 to 4.6988 GeV and study of $\\Lambda\\bar{\\Lambda}$ mass threshold enhancement",
-        "BESIII",
-        null,
-        null,
-        "2211.10755",
-        null,
-        null,
-        []
-    ],
-    "2513076": [
-        "Measurements of Differential Cross Sections of Inclusive $\\pi^0$ and $K^0_S$ Production in $e^{+}e^{-}$ Annihilation at Energies from 2.2324 to 3.6710 GeV",
-        "BESIII",
-        null,
-        null,
-        "2211.11253",
-        null,
-        null,
-        []
-    ],
-    "2593281": [
-        "Observation of $e^+e^- \\to p p \\bar{p} \\bar{n} \\pi^{-} + c.c.$",
-        "BESIII",
-        null,
-        null,
-        "2211.13390",
-        null,
-        null,
-        []
-    ],
-    "2593308": [
-        "Measurement of the branching fraction of $J/\\psi\\rightarrow\\rho\\pi$ at KEDR",
-        "KEDR",
-        null,
-        null,
-        "2211.13520",
-        null,
-        null,
-        []
-    ],
-    "2611486": [
-        "Study of $e^+e^-\\rightarrow\\Omega^{-}\\bar\\Omega^{+}$ at center-of-mass energies from 3.49 to 3.67 GeV",
-        "BESIII",
-        null,
-        null,
-        "2212.03693",
-        null,
-        null,
-        []
-    ],
-    "2611489": [
-        "Improved measurement of the absolute branching fraction of inclusive semileptonic $\\Lambda_c^+$ decay",
-        "BESIII",
-        null,
-        null,
-        "2212.03753",
-        null,
-        null,
-        []
-    ],
-    "2614215": [
-        "Observation of a new $X(3872)$ production process $e^+e^-\\to\\omega X(3872)$",
-        "BESIII",
-        null,
-        null,
-        "2212.07291",
-        null,
-        null,
-        []
-    ],
     "2615968": [
         "Determination of U-spin breaking parameters with an amplitude analysis of the decay $D^0 \\to K_{\\rm L}^0\\pi^+\\pi^-$",
         "BESIII",
         null,
         null,
         "2212.09048",
-        null,
-        null,
-        []
-    ],
-    "2618227": [
-        "Measurement of the absolute branching fraction of the inclusive decay $D_s^+\\to \\pi^+\\pi^+\\pi^- X$",
-        "BESIII",
-        null,
-        null,
-        "2212.13072",
         null,
         null,
         []

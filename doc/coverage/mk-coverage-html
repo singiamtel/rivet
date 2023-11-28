@@ -83,10 +83,10 @@ for aname in rivet.AnalysisLoader.analysisNames():
     # TODO: all anas *should* have an Inspire ID...
     try:
         # print(aname, ":", ana.inspireId(), ":")
-        iAnal=int(ana.inspireId())
-        if iAnal in records and not records[iAnal][1] :
-            records[iAnal][1] = ana.experiment()
-        ranas.setdefault(iAnal, []).append(ana.name())
+        iana = int(ana.inspireId())
+        if iana in records and not records[iana][1] :
+            records[iana][1] = ana.experiment()
+        ranas.setdefault(iana, []).append(ana.name())
     except:
         pass
 
@@ -95,6 +95,9 @@ for aname in rivet.AnalysisLoader.analysisNames():
 blacklist, greylist, hotlist = [], [], []
 assigned = {}
 comment  = {}
+commpatt = re.compile(r"^(.*)\s*\#(.*)$")
+mailpatt = re.compile(r"^(.*)\s*<(.+@.+>)\s*$")
+mainpatt = re.compile(r"^(\d+)\s+(.)\s+(.+)$")
 for rankfilestr in args.RANKFILES:
     for rankfile in rankfilestr.split(" "):
         with open(rankfile) as rf:
@@ -102,26 +105,36 @@ for rankfilestr in args.RANKFILES:
                 print("Reading rankings from {}".format(rankfile))
             for line in rf:
                 line = line.strip()
-                if not line or line.startswith("#"):
+                # First strip the optional trailing components (rather than make a monster regex)
+                # Detect an optional comment
+                comm, mcomm = None, commpatt.match(line)
+                if mcomm:
+                    comm = mcomm.group(2).strip()
+                    comment[ins] = comm
+                    line = mcomm.group(1).strip()
+                # Optional assigned email address
+                email, mmail = None, mailpatt.match(line)
+                if mmail:
+                    email = mmail.group(2).strip()
+                    assigned[ins] = email
+                    line = mmail.group(1).strip()
+                # Finally the core components
+                m = mainpatt.match(line)
+                if not m:
                     continue
-                tokens = line.split()
-                ins = int(tokens[0])
-                code = tokens[1]
+                # ID and status codes
+                ins = int(m.group(1))
+                code = m.group(2)
                 if code == "X":
                     blacklist.append(ins)
                 elif code == "?":
                     greylist.append(ins)
                 elif code == "!":
                     hotlist.append(ins)
-                # Detect an optional assigned email address
-                last = tokens[-1]
-                if "@" in last:
-                    if last.startswith("<") and last.endswith(">"):
-                        last = last[1:-1]
-                    assigned[ins] = last
-                # Detect an optional comment
-                if line.count("#") == 2:
-                    comment[ins] = line.split("#")[1]
+                # Title but we ignore this, and take it from the JSON
+                title = m.group(3)
+                # if email or comm:
+                #     print(ins, ":::", code, ":::", title, ":::", email, ":::", comm)
 
 
 ## Add rankings/tags to the record
@@ -239,11 +252,6 @@ if args.NOHEAVYION:
 ## Web page rendering (from bundled version of the Py2 package)
 from simplehtml import HTML
 OUT = HTML("html")
-# except: #< attempt to load the Py2 package
-#     import imp
-#     # TODO: handle non-system (e.g. user and venv) installs... maybe call Py2 to get the path?!? Won't work on Py3-only systems
-#     html = imp.load_source("html", "/usr/local/lib/python2.7/dist-packages/html.py")
-#     OUT = html.HTML("html")
 
 title = "Rivet analysis coverage"
 exclstr = " ({})".format(", ".join(excls)) if excls else ""
@@ -253,11 +261,10 @@ head = OUT.head(newlines=True)
 head.meta(charset="utf-8")
 head.title(title)
 head.link("", rel="stylesheet", href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
-head.script("MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$']]} });", type="text/x-mathjax-config", escape=False)
-#head.script("", type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", escape=False
-head.script("", type="text/javascript", **{"src" : "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", "async" : "async", "escape" : False})
-head.script("", type="text/javascript", src="https://code.jquery.com/jquery-3.3.1.js", integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=", crossorigin="anonymous", escape=False)
-head.script("", type="text/javascript", src="https://code.jquery.com/ui/1.12.1/jquery-ui.js", integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=", crossorigin="anonymous", escape=False)
+head.script("window.MathJax = { tex: { inlineMath: [['$','$']] } };", type="text/javascript", escape=False)
+head.script("", type="text/javascript", **{"src" : "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml-full.min.js", "id" : "MathJax-script", "async" : "async", "escape" : False})
+head.script("", type="text/javascript", src="https://code.jquery.com/jquery-3.7.1.js", crossorigin="anonymous", escape=False)
+head.script("", type="text/javascript", src="https://code.jquery.com/ui/1.13.1/jquery-ui.js", crossorigin="anonymous", escape=False)
 head.script("""
 $(document).ready( function(){
   $("#blacktoggle").click( function(){
@@ -371,7 +378,7 @@ for ex in EXPTS:
     d = tabs.div(id="{}expt".format(ex.lower()))
     t = d.table(klass="list").tbody(newlines=True)
     for i, (ins, rec) in enumerate(sorted(ex_records[ex].items(), reverse=args.REVERSE)):
-
+        
         expt = rec[1]
         code = rec[-1]
         if ins in assigned:
@@ -382,7 +389,15 @@ for ex in EXPTS:
         # Title
         summ = u""
         summ += u"{}: {}".format(expt, rec[0])
-        cell.span().b(summ)
+        sp = cell.span()
+        sp.b(summ, escape=False)
+
+        ## Add logo-links for HepData and Inspire records
+        sp += "&nbsp;"
+        sp.a("&#128218;", href="http://inspirehep.net/record/{}".format(ins), escape=False)
+        if rec[5]:
+            sp += "&nbsp;"
+            sp.a("&#128202;", href="https://hepdata.net/record/{}".format(rec[5]), escape=False)
 
         ## Inspire ID and link
         p = cell.p()
