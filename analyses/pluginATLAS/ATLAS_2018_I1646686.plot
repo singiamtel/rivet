@@ -21,7 +21,7 @@ RatioPlotYMax=1.5
 # BEGIN PLOT /ATLAS_2018_I1646686/d01-x01-y01
 XLabel=
 YLabel=Cross section [pb]
-XCustomMajorTicks=0.0 $\sigma_\text{fiducial}$
+XCustomMajorTicks=0.0 $\sigma_\mathrm{fiducial}$
 Title=Inclusive fiducial particle-level cross section
 LogY=0
 LegendYPos=0.3
