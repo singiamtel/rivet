@@ -45,11 +45,22 @@ namespace Rivet {
       declare(sj2, "Jets2");
 
       SmearedJets sj3(fj,
-                      JET_SMEAR_CMS_RUN2,
                       JET_BTAG_EFFS(0.7, 0.1, 0.01),
                       JET_CTAG_PERFECT,
+                      JET_SMEAR_CMS_RUN2,
                       JET_EFF_CONST(0.8));
       declare(sj3, "Jets3");
+
+      // Different smearing/efficiency functor can
+      // be chained in a specifc sequence if need be
+      SmearedJets sj4(fj,
+                      JET_BTAG_EFFS(0.7, 0.1, 0.01),
+                      JET_CTAG_PERFECT,
+                      JET_SMEAR_IDENTITY,
+                      JET_EFF_CONST(0.8),
+                      JET_SMEAR_ATLAS_RUN2,
+                      JET_EFF_CONST(0.9));
+      declare(sj4, "Jets4");
 
 
       IdentifiedFinalState photons(Cuts::abseta < 5, PID::PHOTON);
@@ -129,8 +140,10 @@ namespace Rivet {
       const Jets jets1 = apply<JetFinder>(event, "Jets1").jetsByPt(Cuts::pT > 10*GeV);
       const Jets jets2 = apply<JetFinder>(event, "Jets2").jetsByPt(Cuts::pT > 10*GeV);
       const Jets jets3 = apply<JetFinder>(event, "Jets3").jetsByPt(Cuts::pT > 10*GeV);
+      const Jets jets4 = apply<JetFinder>(event, "Jets4").jetsByPt(Cuts::pT > 10*GeV);
       MSG_DEBUG("Numbers of jets = " << jets0.size() << " true; "
-               << jets1.size() << ", " << jets2.size() << ", " << jets3.size());
+               << jets1.size() << ", " << jets2.size() << ", "
+               << jets3.size() << ", " << jets4.size());
       if (!jets0.empty() && !jets2.empty() && deltaPhi(jets0[0], jets2[0]) > 0.1) {
         MSG_DEBUG("Large jet1 phi change (could be a different truth-jet): " <<
                   jets0[0].phi() << " -> " << jets2[0].phi() <<

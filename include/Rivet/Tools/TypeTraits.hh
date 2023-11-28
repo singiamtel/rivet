@@ -59,6 +59,19 @@ namespace Rivet {
   struct isFillable<T, std::void_t<decltype(typename T::FillType{})>> : std::true_type { };
 
 
+  // SFINAE struct to check if U can be used as an argument of T
+  template<typename T, typename U, typename = void>
+  struct isArgumentOf : std::false_type { };
+  //
+  template<typename T, typename U>
+  struct isArgumentOf<T, U, std::void_t<decltype(T(std::declval<U>()))>>
+                  : std::true_type { };
+
+  /// Check if all elements in parameter pack Us can be used as an argument of T
+  template <typename T, typename... Us>
+  using allArgumentsOf = typename std::conjunction<isArgumentOf<T, Us>...>;
+
+  /// SFINAE check if T has XYZ methods
   template <typename T, typename=void>
   struct HasXYZ : std::false_type {};
   template <typename T>
@@ -66,6 +79,7 @@ namespace Rivet {
                                          std::declval<T>().z())> > : std::true_type {};
 
 
+  /// SFINAE check if T has XYZT methods
   template <typename T, typename=void>
   struct HasXYZT : std::false_type {};
   template <typename T>

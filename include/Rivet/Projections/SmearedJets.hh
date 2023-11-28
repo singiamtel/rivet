@@ -12,22 +12,6 @@
 namespace Rivet {
 
 
-  // // Recursive variadic template arg decoding
-  // namespace {
-  //   template<typename T>
-  //   vector<JetEffSmearFn>& toEffSmearFns(vector<JetEffSmearFn>& v, const T& t) {
-  //     v.push_back(JetEffSmearFn(t));
-  //     return v;
-  //   }
-  //   template<typename T, typename... ARGS>
-  //   vector<JetEffSmearFn>& toEffSmearFns(vector<JetEffSmearFn>& v, const T& first, ARGS... args) {
-  //     v.push_back(JetEffSmearFn(first));
-  //     toEffSmearFns(v, args...);
-  //     return v;
-  //   }
-  // }
-
-
   /// @todo Allow applying a pre-smearing cut so smearing doesn't need to be applied to below-threshold micro-jets
 
 
@@ -45,54 +29,22 @@ namespace Rivet {
                 const JetSmearFn& smearFn,
                 const JetEffFn& bTagEffFn=JET_BTAG_PERFECT,
                 const JetEffFn& cTagEffFn=JET_CTAG_PERFECT)
-      : SmearedJets(ja, vector<JetEffSmearFn>{smearFn}, bTagEffFn, cTagEffFn)
+      : SmearedJets(ja, bTagEffFn, cTagEffFn, smearFn)
     {    }
 
 
-    /// @brief Constructor with tagging efficiencies, plus an ordered init-list of efficiency and smearing functions
+    /// @brief Constructor with a parameter pack of efficiency and smearing functions,
+    /// plus optional tagging efficiencies
     ///
     /// @todo Add a tau-tag slot
-    SmearedJets(const JetFinder& ja,
-                const JetEffFn& bTagEffFn=JET_BTAG_PERFECT,
-                const JetEffFn& cTagEffFn=JET_CTAG_PERFECT,
-                const initializer_list<JetEffSmearFn>& effSmearFns={})
-      : SmearedJets(ja, vector<JetEffSmearFn>{effSmearFns}, bTagEffFn, cTagEffFn)
-    {    }
-
-    /// @brief Constructor with tagging efficiencies, plus an ordered vector of efficiency and smearing functions
-    ///
-    /// @todo Add a tau-tag slot
-    SmearedJets(const JetFinder& ja,
-                const JetEffFn& bTagEffFn=JET_BTAG_PERFECT,
-                const JetEffFn& cTagEffFn=JET_CTAG_PERFECT,
-                const vector<JetEffSmearFn>& effSmearFns={})
-      : SmearedJets(ja, effSmearFns, bTagEffFn, cTagEffFn)
-    {    }
-
-
-    /// @brief Constructor with an ordered init-list of efficiency and smearing functions, plus optional tagging efficiencies
-    ///
-    /// @todo Add a tau-tag slot
-    SmearedJets(const JetFinder& ja,
-                const initializer_list<JetEffSmearFn>& effSmearFns,
-                const JetEffFn& bTagEffFn=JET_BTAG_PERFECT,
-                const JetEffFn& cTagEffFn=JET_CTAG_PERFECT)
-      : SmearedJets(ja, vector<JetEffSmearFn>{effSmearFns}, bTagEffFn, cTagEffFn)
-    {    }
-
-    /// @brief Constructor with an ordered vector of efficiency and smearing functions, plus optional tagging efficiencies
-    ///
-    /// @todo Add a tau-tag slot
-    SmearedJets(const JetFinder& ja,
-                const vector<JetEffSmearFn>& effSmearFns,
-                const JetEffFn& bTagEffFn=JET_BTAG_PERFECT,
-                const JetEffFn& cTagEffFn=JET_CTAG_PERFECT)
-      : _detFns(effSmearFns), _bTagEffFn(bTagEffFn), _cTagEffFn(cTagEffFn)
+    template <typename... Args,
+              typename = std::enable_if_t< allArgumentsOf<JetEffSmearFn, Args...>::value >>
+    SmearedJets(const JetFinder& ja, const JetEffFn& bTagEffFn, const JetEffFn& cTagEffFn, Args&& ... effSmearFns)
+      : _detFns({JetEffSmearFn(std::forward<Args>(effSmearFns))...}), _bTagEffFn(bTagEffFn), _cTagEffFn(cTagEffFn)
     {
       setName("SmearedJets");
       declare(ja, "TruthJets");
     }
-
 
     /// @todo How to include tagging effs?
     /// @todo Variadic eff/smear fn list?
