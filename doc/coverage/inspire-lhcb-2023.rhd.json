@@ -1,1 +1,644 @@
-{}
+{
+    "2069763": [
+        "Search for the doubly heavy baryon $\\it{\\Xi}_{bc}^{+}$ decaying to $J/\\it{\\psi} \\it{\\Xi}_{c}^{+}$",
+        "LHCb",
+        "10.1088/1674-1137/ace9c8",
+        "2807199",
+        "2204.09541",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-005",
+            "CERN-EP-2022-048"
+        ]
+    ],
+    "2072369": [
+        "Measurement of CP asymmetries in $ {D}_{(s)}^{+}\\to \\eta {\\pi}^{+} $ and $ {D}_{(s)}^{+}\\to {\\eta}^{\\prime }{\\pi}^{+} $ decays",
+        "LHCb",
+        "10.1007/JHEP04(2023)081",
+        "2807820",
+        "2204.12228",
+        null,
+        null,
+        [
+            "CERN-EP-2022-035",
+            "LHCb-PAPER-2021-051"
+        ]
+    ],
+    "2083797": [
+        "Search for <math display=\"inline\"><mrow><mi>C</mi><mi>P</mi></mrow></math> violation using <math display=\"inline\"><mrow><mover accent=\"true\"><mrow><mi>T</mi></mrow><mrow><mo stretchy=\"false\">^</mo></mrow></mover></mrow></math>-odd correlations in <math display=\"inline\"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy=\"false\">\u2192</mo><mi>p</mi><mover accent=\"true\"><mrow><mi>p</mi></mrow><mrow><mo stretchy=\"false\">\u00af</mo></mrow></mover><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>\u03c0</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> decays",
+        "LHCb",
+        "10.1103/PhysRevD.108.032007",
+        "2809792",
+        "2205.08973",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-003",
+            "CERN-EP-2022-083"
+        ]
+    ],
+    "2084295": [
+        "Measurement of antiproton production from antihyperon decays in ${p} \\textrm{He}$ collisions at $\\sqrt{s_{\\scriptscriptstyle \\mathrm NN}} =110\\,\\text {Ge\\hspace{-1.00006pt}V}$",
+        "LHCb",
+        "10.1140/epjc/s10052-023-11673-x",
+        "2809797",
+        "2205.09009",
+        "ins2084295",
+        null,
+        [
+            "LHCb-PAPER-2022-006",
+            "CERN-EP-2022-091"
+        ]
+    ],
+    "2085913": [
+        "Measurement of the Z boson production cross-section in proton-lead collisions at $ \\sqrt{s_{\\textrm{NN}}} $ = 8.16 TeV",
+        "LHCb",
+        "10.1007/JHEP06(2023)022",
+        "2810073",
+        "2205.10213",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-009",
+            "CERN-EP-2022-089"
+        ]
+    ],
+    "2092598": [
+        "Measurement of $\\tau _\\text {L}$ using the ${B} _s^0 \\rightarrow J/\\psi \\eta $ decay mode",
+        "LHCb",
+        "10.1140/epjc/s10052-023-11634-4",
+        "2811737",
+        "2206.03088",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-010 CERN-EP-2022-099",
+            "CERN-EP-2022-099",
+            "LHCb-PAPER-2022-010"
+        ]
+    ],
+    "2096906": [
+        "Study of exclusive photoproduction of charmonium in ultra-peripheral lead-lead collisions",
+        "LHCb",
+        "10.1007/JHEP06(2023)146",
+        "2812554",
+        "2206.08221",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-012",
+            "CERN-EP-2022-108"
+        ]
+    ],
+    "2107941": [
+        "Search for the lepton-flavour violating decays B$^{0}$\u2192 K$^{*0}$\u03bc$^{\u00b1}$e$^{\u2213}$ and $ {B}_s^0 $\u2192 \u03d5\u03bc$^{\u00b1}$e$^{\u2213}$",
+        "LHCb",
+        "10.1007/JHEP06(2023)073",
+        "2815542",
+        "2207.04005",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-008",
+            "CERN-EP-2022-097"
+        ]
+    ],
+    "2132748": [
+        "Amplitude analysis of the $D^+\\to\\pi^- \\pi^+\\pi^+$ decay and measurement of the $\\pi^-\\pi^+$ S-wave amplitude",
+        "LHCb",
+        "10.1007/JHEP06(2023)044",
+        "2824350",
+        "2208.03300",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-016",
+            "CERN-EP-2022-136"
+        ]
+    ],
+    "2138845": [
+        "Study of $ {B}_c^{+} $ meson decays to charmonia plus multihadron final states",
+        "LHCb",
+        "10.1007/JHEP07(2023)198",
+        "2824905",
+        "2208.08660",
+        null,
+        null,
+        [
+            "CERN-EP-2022-162",
+            "LHCb-PAPER-2022-025"
+        ]
+    ],
+    "2148941": [
+        "Measurement of the CKM angle $\\gamma$ with $ B^\\pm \\to D[K^\\mp \\pi^\\pm \\pi^\\pm \\pi^\\mp] h^\\pm$ decays using a binned phase-space approach",
+        "LHCb",
+        "10.1007/JHEP07(2023)138",
+        "2826596",
+        "2209.03692",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-017",
+            "CERN-EP-2022-150"
+        ]
+    ],
+    "2154229": [
+        "Search for the lepton-flavour violating decays $B^0 \\to K^{*0} \\tau^\\pm \\mu^\\mp$",
+        "LHCb",
+        "10.1007/JHEP06(2023)143",
+        "2834012",
+        "2209.09846",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-021",
+            "CERN-EP-2022-154"
+        ]
+    ],
+    "2154232": [
+        "Amplitude analysis of the $ {D}_s^{+} $\u2192 \u03c0$^{\u2212}$\u03c0$^{+}$\u03c0$^{+}$ decay",
+        "LHCb",
+        "10.1007/JHEP07(2023)204",
+        "2834485",
+        "2209.09840",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-030",
+            "CERN-EP-2022-173"
+        ]
+    ],
+    "2165165": [
+        "Measurement of the $ {\\Lambda}_c^{+} $ to D$^{0}$ production ratio in periphera PbPb collisions at $ \\sqrt{s_{\\textrm{NN}}} $ = 5.02 TeV",
+        "LHCb",
+        "10.1007/JHEP06(2023)132",
+        "2836932",
+        "2210.06939",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2021-046",
+            "CERN-EP-2022-148"
+        ]
+    ],
+    "2168941": [
+        "Measurement of the ratio of branching fractions $ \\mathcal{B}\\left({B}_c^{+}\\to {B}_s^0{\\pi}^{+}\\right)/\\mathcal{B}\\left({B}_c^{+}\\to J/\\psi {\\pi}^{+}\\right) $",
+        "LHCb",
+        "10.1007/JHEP07(2023)066",
+        "2838237",
+        "2210.12000",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-034",
+            "CERN-EP-2022-204"
+        ]
+    ],
+    "2172077": [
+        "Observation of the $B^0_s\\!\\to D^{*+}D^{*-}$ decay",
+        "LHCb",
+        "10.1007/JHEP07(2023)119",
+        "2838838",
+        "2210.14945",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-023",
+            "CERN-EP-2022-193"
+        ]
+    ],
+    "2614213": [
+        "Search for the rare decays $W^+ \\to D^+_s\\gamma$ and $Z \\to D^0\\gamma$ at LHCb",
+        "LHCb",
+        "10.1088/1674-1137/aceae9",
+        "2844588",
+        "2212.07120",
+        null,
+        null,
+        [
+            "CERN-EP-2022-252",
+            "LHCb-PAPER-2022-033"
+        ]
+    ],
+    "2615983": [
+        "Test of lepton universality in $b \\rightarrow s \\ell^+ \\ell^-$ decays",
+        "LHCb",
+        "10.1103/PhysRevLett.131.051803",
+        "2845047",
+        "2212.09152",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-046",
+            "CERN-EP-2022-277"
+        ]
+    ],
+    "2618202": [
+        "Measurement of \u03a5 production in pp collisions at $ \\sqrt{s} $ = 5 TeV",
+        "LHCb",
+        "10.1007/JHEP07(2023)069",
+        "2845286",
+        "2212.12664",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-036",
+            "CERN-EP-2022-269"
+        ]
+    ],
+    "2618313": [
+        "First observation and branching fraction measurement of the $ {\\Lambda}_b^0\\to {D}_s^{-}p $ decay",
+        "LHCb",
+        "10.1007/JHEP07(2023)075",
+        "2845285",
+        "2212.12574",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-038",
+            "CERN-EP-2022-272"
+        ]
+    ],
+    "2623821": [
+        "$ {\\Lambda}_c^{+} $ polarimetry using the dominant hadronic mode",
+        "LHCb",
+        "10.1007/JHEP07(2023)228",
+        "2846462",
+        "2301.07010",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-044",
+            "CERN-EP-2022-287"
+        ]
+    ],
+    "2626410": [
+        "A study of $C\\!P$ violation in the decays $B^\\pm\\to[K^+K^-\\pi^+\\pi^-]_D h^{\\pm}$ ($h = K, \\pi$) and $B^\\pm\\to[\\pi^+\\pi^-\\pi^+\\pi^-]_D h^{\\pm}$",
+        "LHCb",
+        "10.1140/epjc/s10052-023-11560-5",
+        "2847639",
+        "2301.10328",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-037",
+            "CERN-EP-2022-285"
+        ]
+    ],
+    "2635083": [
+        "Observation of the $ {\\textrm{B}}_{\\textrm{s}}^0 $\u2192 \u03c7$_{c1}$(3872)\u03c0$^{+}$\u03c0$^{\u2212}$ decay",
+        "LHCb",
+        "10.1007/JHEP07(2023)084",
+        "2850676",
+        "2302.10629",
+        null,
+        null,
+        [
+            "CERN-EP-2023-015",
+            "LHCb-PAPER-2022-049"
+        ]
+    ],
+    "2639012": [
+        "Search for $\\it{CP}$ violation in $D_{(s)}^{+}\\rightarrow K^{-}K^{+}K^{+}$ decays",
+        "LHCb",
+        "10.1007/JHEP07(2023)067",
+        "2851919",
+        "2303.04062",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-042",
+            "CERN-EP-2023-010"
+        ]
+    ],
+    "2643022": [
+        "Observation of the $B^+ \\rightarrow J/\\psi \\eta^{\\prime} K^+$ decay",
+        "LHCb",
+        "10.1007/JHEP08(2023)174",
+        "2852730",
+        "2303.09443",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-054",
+            "CERN-EP-2023-022"
+        ]
+    ],
+    "2649222": [
+        "Search for $D^{*}(2007)^{0} \\rightarrow \\mu ^{+} \\mu ^{-}$ in $B^{-}\\rightarrow \\pi ^{-} \\mu ^{+} \\mu ^{-}$ decays",
+        "LHCb",
+        "10.1140/epjc/s10052-023-11759-6",
+        "2855565",
+        "2304.01981",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2023-004",
+            "CERN-EP-2023-050"
+        ]
+    ],
+    "2655326": [
+        "Study of charmonium decays to $K^0_S K \\pi$ in the $B \\to (K^0_S K \\pi) K$ channels",
+        "LHCb",
+        "10.1103/PhysRevD.108.032010",
+        "2857425",
+        "2304.14891",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-051",
+            "CERN-EP-2023-060"
+        ]
+    ],
+    "2662581": [
+        "Associated production of prompt J/\u03c8 and \u03a5 mesons in pp collisions at $ \\sqrt{s} $ = 13 TeV",
+        "LHCb",
+        "10.1007/JHEP08(2023)093",
+        "2860313",
+        "2305.15580",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-047",
+            "CERN-EP-2023-078"
+        ]
+    ],
+    "2673124": [
+        "Open charm production and asymmetry in pNe collisions at $\\sqrt{s_{\\scriptscriptstyle {\\textrm{NN}}}} = 68.5\\,\\text {Ge\\hspace{-1.00006pt}V}$",
+        "LHCb",
+        "10.1140/epjc/s10052-023-11641-5",
+        "2841850",
+        "2211.11633",
+        null,
+        null,
+        [
+            "CERN-EP-2022-217",
+            "LHCb-PAPER-2022-015"
+        ]
+    ],
+    "2676543": [
+        "Direct <math display=\"inline\"><mi>C</mi><mi>P</mi></math> violation in charmless three-body decays of <math display=\"inline\"><msup><mi>B</mi><mo>\u00b1</mo></msup></math> mesons",
+        "LHCb",
+        "10.1103/PhysRevD.108.012008",
+        "2812560",
+        "2206.07622",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2021-049",
+            "CERN-EP-2022-100"
+        ]
+    ],
+    "2677042": [
+        "Search for the rare hadronic decay <math display=\"inline\"><msubsup><mi>B</mi><mi>s</mi><mn>0</mn></msubsup><mo stretchy=\"false\">\u2192</mo><mi>p</mi><mover accent=\"true\"><mi>p</mi><mo stretchy=\"false\">\u00af</mo></mover></math>",
+        "LHCb",
+        "10.1103/PhysRevD.108.012007",
+        "2812295",
+        "2206.06673",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-004",
+            "CERN-EP-2022-102"
+        ]
+    ],
+    "2678048": [
+        "Observation of a <math display=\"inline\"><mi>J</mi><mo>/</mo><mi>\u03c8</mi><mi mathvariant=\"normal\">\u039b</mi></math> Resonance Consistent with a Strange Pentaquark Candidate in <math display=\"inline\"><msup><mi>B</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><mi>J</mi><mo>/</mo><mi>\u03c8</mi><mi mathvariant=\"normal\">\u039b</mi><mover accent=\"true\"><mi>p</mi><mo stretchy=\"false\">\u00af</mo></mover></math> Decays",
+        "LHCb",
+        "10.1103/PhysRevLett.131.031901",
+        "2838037",
+        "2210.10346",
+        null,
+        null,
+        [
+            "CERN-EP-2022-198",
+            "LHCb-PAPER-2022-031"
+        ]
+    ],
+    "2678329": [
+        "Charmonium production in $p$Ne collisions at $\\sqrt{s_{\\scriptscriptstyle \\text {NN}}} =68.5$ GeV",
+        "LHCb",
+        "10.1140/epjc/s10052-023-11608-6",
+        "2841849",
+        "2211.11645",
+        null,
+        null,
+        [
+            "CERN-EP-2022-216",
+            "LHCb-PAPER-2022-014"
+        ]
+    ],
+    "2678996": [
+        "Search for direct <math display=\"inline\"><mi>C</mi><mi>P</mi></math> violation in charged charmless <math display=\"inline\"><mi>B</mi><mo stretchy=\"false\">\u2192</mo><mi>P</mi><mi>V</mi></math> decays",
+        "LHCb",
+        "10.1103/PhysRevD.108.012013",
+        "2811572",
+        "2206.02038",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2021-050",
+            "CERN-EP-2022-101"
+        ]
+    ],
+    "2680578": [
+        "Nuclear Modification Factor of Neutral Pions in the Forward and Backward Regions in <math display=\"inline\"><mrow><mi>p</mi><mtext>-</mtext><mi>Pb</mi></mrow></math> Collisions",
+        "LHCb",
+        "10.1103/PhysRevLett.131.042302",
+        "2807334",
+        "2204.10608",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2021-053",
+            "CERN-EP-2022-050"
+        ]
+    ],
+    "2681870": [
+        "Search for Rare Decays of <math display=\"inline\"><msup><mi>D</mi><mn>0</mn></msup></math> Mesons into Two Muons",
+        "LHCb",
+        "10.1103/PhysRevLett.131.041804",
+        "2845229",
+        "2212.11203",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-029",
+            "CERN-EP-2022-273"
+        ]
+    ],
+    "2682591": [
+        "Test of lepton flavor universality using <math display=\"inline\"><mrow><msup><mrow><mi>B</mi></mrow><mn>0</mn></msup><mo stretchy=\"false\">\u2192</mo><msup><mrow><mi>D</mi></mrow><mrow><mo>*</mo><mo>-</mo></mrow></msup><msup><mrow><mi>\u03c4</mi></mrow><mrow><mo>+</mo></mrow></msup><msub><mrow><mi>\u03bd</mi></mrow><mrow><mi>\u03c4</mi></mrow></msub></mrow></math> decays with hadronic <math display=\"inline\"><mi>\u03c4</mi></math> channels",
+        "LHCb",
+        "10.1103/PhysRevD.108.012018",
+        "2857546",
+        "2305.01463",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-052",
+            "CERN-EP-2023-062"
+        ]
+    ],
+    "2682593": [
+        "First Observation of a Doubly Charged Tetraquark and Its Neutral Partner",
+        "LHCb",
+        "10.1103/PhysRevLett.131.041902",
+        "2843257",
+        "2212.02716",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-026",
+            "CERN-EP-2022-239"
+        ]
+    ],
+    "2682599": [
+        "Observation of sizeable <math display=\"inline\"><mi>\u03c9</mi></math> contribution to <math display=\"inline\"><msub><mi>\u03c7</mi><mrow><mi>c</mi><mn>1</mn></mrow></msub><mo stretchy=\"false\">(</mo><mn>3872</mn><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">\u2192</mo><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup><mi>J</mi><mo>/</mo><mi>\u03c8</mi></math> decays",
+        "LHCb",
+        "10.1103/PhysRevD.108.L011103",
+        "2807721",
+        "2204.12597",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2021-045",
+            "CERN-EP-2022-049"
+        ]
+    ],
+    "2682616": [
+        "${{J}/\\psi }$ and ${{D}} ^0$ production in $\\sqrt{s_{\\scriptscriptstyle \\text {NN}}} =68.5\\,\\text {GeV} $ PbNe collisions",
+        "LHCb",
+        "10.1140/epjc/s10052-023-11674-w",
+        "2841790",
+        "2211.11652",
+        null,
+        null,
+        [
+            "CERN-EP-2022-215",
+            "LHCb-PAPER-2022-011"
+        ]
+    ],
+    "2682639": [
+        "Amplitude analysis of <math display=\"inline\"><msup><mi>B</mi><mn>0</mn></msup><mo stretchy=\"false\">\u2192</mo><msup><mover accent=\"true\"><mi>D</mi><mo stretchy=\"true\">\u00af</mo></mover><mn>0</mn></msup><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><msup><mi>\u03c0</mi><mo>-</mo></msup></math> and <math display=\"inline\"><msup><mi>B</mi><mo>+</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>D</mi><mo>-</mo></msup><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><msup><mi>\u03c0</mi><mo>+</mo></msup></math> decays",
+        "LHCb",
+        "10.1103/PhysRevD.108.012017",
+        "2843240",
+        "2212.02717",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-027",
+            "CERN-EP-2022-246"
+        ]
+    ],
+    "2683002": [
+        "Search for the baryon- and lepton-number violating decays <math display=\"inline\"><msup><mi>B</mi><mn>0</mn></msup><mo stretchy=\"false\">\u2192</mo><mi>p</mi><msup><mi>\u03bc</mi><mo>-</mo></msup></math> and <math display=\"inline\"><msubsup><mi>B</mi><mi>s</mi><mn>0</mn></msubsup><mo stretchy=\"false\">\u2192</mo><mi>p</mi><msup><mi>\u03bc</mi><mo>-</mo></msup></math>",
+        "LHCb",
+        "10.1103/PhysRevD.108.012021",
+        "2838028",
+        "2210.10412",
+        null,
+        null,
+        [
+            "CERN-EP-2022-195",
+            "LHCb-PAPER-2022-022"
+        ]
+    ],
+    "2683025": [
+        "Amplitude analysis of the <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi><mo>+</mo></msubsup><mo stretchy=\"false\">\u2192</mo><mi>p</mi><msup><mi>K</mi><mo>-</mo></msup><msup><mi>\u03c0</mi><mo>+</mo></msup></math> decay and <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi><mo>+</mo></msubsup></math> baryon polarization measurement in semileptonic beauty hadron decays",
+        "LHCb",
+        "10.1103/PhysRevD.108.012023",
+        "2824328",
+        "2208.03262",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-002",
+            "CERN-EP-2022-124"
+        ]
+    ],
+    "2684465": [
+        "Measurement of lepton universality parameters in $B^+\\to K^+\\ell^+\\ell^-$ and $B^0\\to K^{*0}\\ell^+\\ell^-$ decays",
+        "LHCb",
+        "10.1103/PhysRevD.108.032002",
+        "2845040",
+        "2212.09153",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2022-045",
+            "CERN-EP-2022-278"
+        ]
+    ],
+    "2684884": [
+        "Search for <math display=\"inline\"><mrow><msubsup><mrow><mi>K</mi></mrow><mrow><mi mathvariant=\"normal\">S</mi><mo stretchy=\"false\">(</mo><mi mathvariant=\"normal\">L</mi><mo stretchy=\"false\">)</mo></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy=\"false\">\u2192</mo><msup><mrow><mi>\u03bc</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>\u03bc</mi></mrow><mrow><mo>-</mo></mrow></msup><msup><mrow><mi>\u03bc</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>\u03bc</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> decays at LHCb",
+        "LHCb",
+        "10.1103/PhysRevD.108.L031102",
+        "2844656",
+        "2212.04977",
+        null,
+        null,
+        [
+            "CERN-EP-2022-255",
+            "LHCb-PAPER-2022-035"
+        ]
+    ],
+    "2690240": [
+        "Observation of a Resonant Structure near the <math display=\"inline\"><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><msubsup><mi>D</mi><mi>s</mi><mo>-</mo></msubsup></math> Threshold in the <math display=\"inline\"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mo>+</mo></mrow></msup><mo stretchy=\"false\">\u2192</mo><msubsup><mrow><mi>D</mi></mrow><mrow><mi>s</mi></mrow><mrow><mo>+</mo></mrow></msubsup><msubsup><mrow><mi>D</mi></mrow><mrow><mi>s</mi></mrow><mrow><mo>-</mo></mrow></msubsup><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup></mrow></math> Decay",
+        "LHCb",
+        "10.1103/PhysRevLett.131.071901",
+        "2838705",
+        "2210.15153",
+        null,
+        null,
+        [
+            "CERN-EP-2022-200",
+            "LHCb-PAPER-2022-018"
+        ]
+    ],
+    "2691605": [
+        "Measurement of the Branching Fractions <math display=\"inline\"><mi mathvariant=\"script\">B</mi><mo stretchy=\"false\">(</mo><msup><mi>B</mi><mn>0</mn></msup><mo stretchy=\"false\">\u2192</mo><mi>p</mi><mover accent=\"true\"><mi>p</mi><mo stretchy=\"false\">\u00af</mo></mover><mi>p</mi><mover accent=\"true\"><mi>p</mi><mo stretchy=\"false\">\u00af</mo></mover><mo stretchy=\"false\">)</mo></math> and <math display=\"inline\"><mrow><mi mathvariant=\"script\">B</mi><mo stretchy=\"false\">(</mo><msubsup><mrow><mi>B</mi></mrow><mrow><mi>s</mi></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy=\"false\">\u2192</mo><mi>p</mi><mover accent=\"true\"><mrow><mi>p</mi></mrow><mrow><mo stretchy=\"false\">\u00af</mo></mrow></mover><mi>p</mi><mover accent=\"true\"><mrow><mi>p</mi></mrow><mrow><mo stretchy=\"false\">\u00af</mo></mrow></mover><mo stretchy=\"false\">)</mo></mrow></math>",
+        "LHCb",
+        "10.1103/PhysRevLett.131.091901",
+        null,
+        null,
+        null,
+        null,
+        []
+    ],
+    "2692262": [
+        "Measurement of the Time-Integrated <math display=\"inline\"><mi>C</mi><mi>P</mi></math> Asymmetry in <math display=\"inline\"><mrow><msup><mrow><mi>D</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy=\"false\">\u2192</mo><msup><mrow><mi>K</mi></mrow><mrow><mo>-</mo></mrow></msup><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup></mrow></math> Decays",
+        "LHCb",
+        "10.1103/PhysRevLett.131.091802",
+        "2826530",
+        "2209.03179",
+        null,
+        null,
+        [
+            "CERN-EP-2022-163",
+            "LHCb-PAPER-2022-024"
+        ]
+    ],
+    "2694330": [
+        "Model-independent measurement of charm mixing parameters in <math display=\"inline\"><mover accent=\"true\"><mi>B</mi><mo stretchy=\"false\">\u00af</mo></mover><mo stretchy=\"false\">\u2192</mo><msup><mi>D</mi><mn>0</mn></msup><mo stretchy=\"false\">(</mo><mo stretchy=\"false\">\u2192</mo><msubsup><mi>K</mi><mi>S</mi><mn>0</mn></msubsup><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup><mo stretchy=\"false\">)</mo><msup><mi>\u03bc</mi><mo>-</mo></msup><msub><mover accent=\"true\"><mi>\u03bd</mi><mo stretchy=\"false\">\u00af</mo></mover><mi>\u03bc</mi></msub><mi>X</mi></math> decays",
+        "LHCb",
+        "10.1103/PhysRevD.108.052005",
+        null,
+        null,
+        null,
+        null,
+        []
+    ],
+    "2694685": [
+        "Measurement of the Prompt <math display=\"inline\"><mrow><msup><mrow><mi>D</mi></mrow><mrow><mn>0</mn></mrow></msup></mrow></math> Nuclear Modification Factor in <math display=\"inline\"><mrow><mi>p</mi><mtext>-</mtext><mi>Pb</mi></mrow></math> Collisions at <math display=\"inline\"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>N</mi><mi>N</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>8.16</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></mrow></math>",
+        "LHCb",
+        "10.1103/PhysRevLett.131.102301",
+        null,
+        null,
+        null,
+        null,
+        []
+    ]
+}
