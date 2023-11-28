@@ -10,23 +10,6 @@
 namespace Rivet {
 
 
-  // Recursive variadic template arg decoding
-  namespace {
-    template<typename T>
-    vector<ParticleEffSmearFn>& toEffSmearFns(vector<ParticleEffSmearFn>& v, const T& t) {
-      v.push_back(ParticleEffSmearFn(t));
-      return v;
-    }
-    template<typename T, typename... ARGS>
-    vector<ParticleEffSmearFn>& toEffSmearFns(vector<ParticleEffSmearFn>& v, const T& first, ARGS... args) {
-      v.push_back(ParticleEffSmearFn(first));
-      toEffSmearFns(v, args...);
-      return v;
-    }
-  }
-
-
-
   /// Wrapper projection for smearing {@link Jet}s with detector resolutions and efficiencies
   class SmearedParticles : public ParticleFinder {
   public:
@@ -34,73 +17,24 @@ namespace Rivet {
     /// @name Constructors etc.
     /// @{
 
-    /// @brief Constructor with const efficiency
-    SmearedParticles(const ParticleFinder& pf,
-                     double eff,
-                     const Cut& c=Cuts::open())
-      : SmearedParticles(pf, {{eff}}, c)
-    {    }
-
-    /// @brief Constructor with an efficiency function
-    SmearedParticles(const ParticleFinder& pf,
-                     const ParticleEffFn& effFn,
-                     const Cut& c=Cuts::open())
-      : SmearedParticles(pf, {{effFn}}, c)
-    {    }
-
-    /// @brief Constructor with const efficiency followed by a smearing function
-    SmearedParticles(const ParticleFinder& pf,
-                     double eff, const ParticleSmearFn& smearFn,
-                     const Cut& c=Cuts::open())
-      : SmearedParticles(pf, {eff, smearFn}, c)
-    {    }
-
-    /// @brief Constructor with a smearing function followed by const efficiency
-    SmearedParticles(const ParticleFinder& pf,
-                     const ParticleSmearFn& smearFn, double eff,
-                     const Cut& c=Cuts::open())
-      : SmearedParticles(pf, {smearFn, eff}, c)
-    {    }
-
-    /// @brief Constructor with an efficiency function followed by a smearing function
-    SmearedParticles(const ParticleFinder& pf,
-                     const ParticleEffFn& effFn, const ParticleSmearFn& smearFn,
-                     const Cut& c=Cuts::open())
-      : SmearedParticles(pf, {effFn, smearFn}, c)
-    {    }
-
-    /// @brief Constructor with a smearing function followed by an efficiency function
-    SmearedParticles(const ParticleFinder& pf,
-                     const ParticleSmearFn& smearFn, const ParticleEffFn& effFn,
-                     const Cut& c=Cuts::open())
-      : SmearedParticles(pf, {smearFn, effFn}, c)
-    {    }
-
-    /// @brief Constructor with an ordered list of efficiency and/or smearing functions
-    SmearedParticles(const ParticleFinder& pf,
-                     const vector<ParticleEffSmearFn>& effSmearFns,
-                     const Cut& c=Cuts::open())
-      : ParticleFinder(c),
-        _detFns(effSmearFns)
-    {
-      setName("SmearedParticles");
-      declare(pf, "TruthParticles");
-    }
-
-    /// @brief Constructor with an ordered list of efficiency and/or smearing functions
-    SmearedParticles(const ParticleFinder& pf,
-                     const initializer_list<ParticleEffSmearFn>& effSmearFns,
-                     const Cut& c=Cuts::open())
-      : SmearedParticles(pf, vector<ParticleEffSmearFn>{effSmearFns}, c)
+    /// @brief Constructor with a variadic ordered list of efficiency and smearing function args
+    template<typename... Args,
+             typename = std::enable_if_t< allArgumentsOf<ParticleEffSmearFn, Args...>::value >>
+    SmearedParticles(const ParticleFinder& pf, Args&& ... effSmearFns)
+      : SmearedParticles(pf, Cuts::open(), std::forward<Args>(effSmearFns) ...)
     {    }
 
     /// @brief Constructor with a variadic ordered list of efficiency and smearing function args
     /// @note The Cut must be provided *before* the eff/smearing functions
     /// @todo Wouldn't it be nice if the Cut could also go *after* the parameter pack?
-    template<typename... ARGS>
-    SmearedParticles(const ParticleFinder& pf, const Cut& c, ARGS... effSmearFns)
-      : SmearedParticles(pf, toEffSmearFns(_detFns, effSmearFns...), c)
-    {    }
+    template<typename... Args,
+             typename = std::enable_if_t< allArgumentsOf<ParticleEffSmearFn, Args...>::value >>
+    SmearedParticles(const ParticleFinder& pf, const Cut& c, Args&& ... effSmearFns)
+      : ParticleFinder(c), _detFns({ParticleEffSmearFn(std::forward<Args>(effSmearFns))...})
+    {
+      setName("SmearedParticles");
+      declare(pf, "TruthParticles");
+    }
 
 
     /// Clone on the heap.
