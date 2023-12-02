@@ -70,18 +70,16 @@ namespace Rivet {
       book(_h["pTysqrtHT"], 12, 1, 1);
       book(_h["DeltaPhiJetY"], 13, 1, 1);
       book(_h["pTllyj"], 14, 1, 1);
-      // The binning on HepData is not directly usable for T15 and T16
-      // (Hopefully, it will be addressed, so these can go back in.)
-      /*book(_h["phi_CS_Slice1"], 15, 1, 1);
-      book(_h["phi_CS_Slice2"], 15, 2, 1);
-      book(_h["phi_CS_Slice3"], 15, 3, 1);
-      book(_h["phi_CS_Slice4"], 15, 4, 1);
-      book(_h["phi_CS_Slice5"], 15, 5, 1);
-      book(_h["ctheta_CS_Slice1"], 16, 1, 1);
-      book(_h["ctheta_CS_Slice2"], 16, 2, 1);
-      book(_h["ctheta_CS_Slice3"], 16, 3, 1);
-      book(_h["ctheta_CS_Slice4"], 16, 4, 1);
-      book(_h["ctheta_CS_Slice5"], 16, 5, 1);*/
+      book(_h["phi_CS_Slice1"], 51, 1, 1);
+      book(_h["phi_CS_Slice2"], 51, 1, 2);
+      book(_h["phi_CS_Slice3"], 51, 1, 3);
+      book(_h["phi_CS_Slice4"], 51, 1, 4);
+      book(_h["phi_CS_Slice5"], 51, 1, 5);
+      book(_h["ctheta_CS_Slice1"], 52, 1, 1);
+      book(_h["ctheta_CS_Slice2"], 52, 1, 2);
+      book(_h["ctheta_CS_Slice3"], 52, 1, 3);
+      book(_h["ctheta_CS_Slice4"], 52, 1, 4);
+      book(_h["ctheta_CS_Slice5"], 52, 1, 5);
       book(_h["RatiopTlly_mlly_Slice1"], 17, 1, 1);
       book(_h["RatiopTlly_mlly_Slice2"], 18, 1, 1);
       book(_h["RatiopTlly_mlly_Slice3"], 19, 1, 1);
@@ -92,12 +90,13 @@ namespace Rivet {
       book(_h["pTllyj_Slice2"], 24, 1, 1);
       book(_h["pTllyj_Slice3"], 25, 1, 1);
 
+      _ptllAxis = YODA::Axis<double>({0, 35, 60, 90, 135, 2500});
     }
 
 
    /// Perform the per-event analysis
    void analyze(const Event& event) {
-     // const double weight = event.weight();
+
      // Get objects
      Particles electrons = apply<LeptonFinder>(event, "Electrons").particlesByPt();
      Particles muons = apply<LeptonFinder>(event, "Muons").particlesByPt();
@@ -218,22 +217,20 @@ namespace Rivet {
        vetoEvent;
      }
 
-     /*FourMomentum Dilepton = (lep1+lep2);
+     FourMomentum Dilepton = (lep1+lep2);
      FourMomentum lep1_CS;
      LorentzTransform boost;
      boost.setBetaVec(-Dilepton.betaVec());
      lep1_CS = boost.transform(lep1);
-     double ctheta_CS, phi_CS;
-     ctheta_CS = cos(lep1_CS.p3().theta());
-     phi_CS    = lep1_CS.p3().azimuthalAngle();
+     const double ctheta_CS = cos(lep1_CS.p3().theta());
+     const double phi_CS    = lep1_CS.p3().azimuthalAngle();
 
-     vector<double> pTll_binning = {0, 35, 60, 90, 135, 2500};
-     int pTll_binnum = std::lower_bound(pTll_binning.begin(), pTll_binning.end(), pTll) - pTll_binning.begin();
-     if (mll > 80*GeV && mll<100*GeV) {
-       string s = "_Slice" + to_string(pTll_binnum);
+     size_t idx = _ptllAxis.index(pTll);
+     if (mll > 80*GeV && mll<100*GeV && idx && idx <= _ptllAxis.numBins()) {
+       const string s = "_Slice" + to_string(idx);
        _h["ctheta_CS" + s]->fill(ctheta_CS);
        _h["phi_CS" + s]->fill(phi_CS);
-     }*/
+     }
    }
    // end of analysis
 
@@ -247,6 +244,7 @@ namespace Rivet {
 
     /// Histograms
     map<string, Histo1DPtr> _h;
+    YODA::Axis<double> _ptllAxis;
 
   };
 

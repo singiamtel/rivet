@@ -22,7 +22,8 @@ namespace Rivet {
     // Fill the particle list with all particles _other_ than the GammaGamma scattered
     // lepton, with momenta boosted into the appropriate frame.
     _theParticles.clear();
-    _theParticles.reserve(fs.particles().size()-1);
+    size_t nParticles = fs.particles().size();
+    if (nParticles > 2)  _theParticles.reserve(nParticles-1);
     ConstGenParticlePtr lep1 = gglep.out().first .genParticle();
     ConstGenParticlePtr lep2 = gglep.out().second.genParticle();
     // Ensure that we skip the GammaGamma leptons

@@ -10,6 +10,7 @@ Authors:
  - Christian Bierlich <christian.bierlich@thep.lu.se>
  - Cody B Duncan <cody.duncan@monash.edu>
  - Patrick Kirchgaesser <patrick.kirchgaesser@kit.edu>
+ - Harsh Shah <harsh.shah@hep.lu.se>
 References:
  - Phys.Lett. B728 (2014) 25-38
  - 10.1016/j.physletb.2013.11.020
@@ -19,8 +20,8 @@ RunInfo:
 NeedCrossSection: no
 Options:
  - cent=REF,GEN,IMP,USR,RAW
-Beams: [p, Pb]
-Energies: [[4000,326560]]
+Beams: [Pb, p]
+Energies: [[326560, 4000]]
 Description:
   'Identified baryons and mesons plotted in invariant pT spectra as well as average pT and yield ratios.
    The measurements are done in centrality classes, and one must apply centrality selection by

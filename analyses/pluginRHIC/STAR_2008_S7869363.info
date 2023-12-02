@@ -35,11 +35,3 @@ BibTeX: '@Article{:2008ez,
      doi       = "10.1103/PhysRevC.79.034909",
      SLACcitation  = "%%CITATION = 0808.2041;%%"
 }'
-ToDo:
- - Understand first bin in multiplicity distribution
- - Normalise to generator values (just scale by 1/nPassedCuts?) rather than data areas?
-
-# Currently disabled
-# ReleaseTests:
-#  - $A Star-UE
-

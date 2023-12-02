@@ -34,7 +34,7 @@ BibTeX: '@article{H1:2005jeo,
     volume = "41",
     pages = "453",
     year = "2005"
-}
-
-'
+}'
+ReleaseTests:
+ - $A ep-920-dis-photoprod
 
