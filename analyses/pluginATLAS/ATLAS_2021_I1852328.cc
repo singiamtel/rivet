@@ -32,14 +32,14 @@ namespace Rivet {
       // Project dressed leptons (e/mu not from tau) with pT > 27 GeV and |eta| < 2.5
       PromptFinalState lep_bare(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
       lep_bare.acceptTauDecays(false);
-      LeptonFinder lep_dressed(photons, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder lep_dressed(lep_bare, photons, 0.1, lepton_cuts);
       declare(lep_dressed,"lep_dressed");
 
       // Leptons (+ dressed photons) to be removed from jets
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(bare_mu, photons, 0.1, Cuts::abseta < 2.5);
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(bare_el, photons, 0.1, Cuts::abseta < 2.5);
 
       // Define hadrons as everything but dressed leptons (for jet clustering)
       VetoedFinalState hadrons(fs);

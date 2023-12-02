@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
@@ -24,12 +24,9 @@ namespace Rivet {
       if ( getOption("LMODE") == "MU" ) _mode = 1;
       if ( getOption("LMODE") == "EMU" ) _mode = 2;
 
-      const FinalState fs;
-
-      Cut cuts = (Cuts::pT > 25*GeV) && (Cuts::abseta < 2.5);
-
-      ZFinder zeefinder(fs, cuts, PID::ELECTRON, 71*GeV, 111*GeV);
-      ZFinder zmumufinder(fs, cuts, PID::MUON, 71*GeV, 111*GeV);
+      Cut cuts = Cuts::pT > 25*GeV && Cuts::abseta < 2.5;
+      DileptonFinder zeefinder(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(71*GeV, 111*GeV));
+      DileptonFinder zmumufinder(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::MUON, Cuts::massIn(71*GeV, 111*GeV));
       declare(zeefinder, "zeefinder");
       declare(zmumufinder, "zmumufinder");
 
@@ -62,8 +59,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zeefinder = apply<ZFinder>(event, "zeefinder");
-      const ZFinder& zmumufinder = apply<ZFinder>(event, "zmumufinder");
+      const DileptonFinder& zeefinder = apply<DileptonFinder>(event, "zeefinder");
+      const DileptonFinder& zmumufinder = apply<DileptonFinder>(event, "zmumufinder");
 
       const Particles& zees = zeefinder.bosons();
       const Particles& zmumus = zmumufinder.bosons();

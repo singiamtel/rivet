@@ -1,10 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
-  /// @ D0 Run I Z \f$ p_\perp \f$ in Drell-Yan events
+
+  /// @brief D0 Run I Z \f$ p_\perp \f$ in Drell-Yan events
+  ///
   /// @author Simone Amoroso
   class D0_2000_I503361 : public Analysis {
   public:
@@ -20,9 +22,8 @@ namespace Rivet {
     void init() {
 
       ///  Initialise and register projections here
-      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 75*GeV, 105*GeV, 0.0);
-      declare(zfinder, "ZFinder");
-
+      DileptonFinder zfinder(91.2*GeV, 0.0, Cuts::abspid == PID::ELECTRON, Cuts::massIn(75*GeV, 105*GeV));
+      declare(zfinder, "DileptonFinder");
 
       book(_hist_zpt ,1, 1, 1);
     }
@@ -31,15 +32,15 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       /// @todo Do the event by event analysis here
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.bosons().size() != 1) {
         MSG_DEBUG("Num e+ e- pairs found = " << zfinder.bosons().size());
-	vetoEvent;
+        vetoEvent;
       }
       const FourMomentum& pZ = zfinder.bosons()[0].momentum();
       if (pZ.mass2() < 0) {
-	MSG_DEBUG("Negative Z mass**2 = " << pZ.mass2()/GeV2 << "!");
-	vetoEvent;
+        MSG_DEBUG("Negative Z mass**2 = " << pZ.mass2()/GeV2 << "!");
+        vetoEvent;
       }
 
       MSG_DEBUG("Dilepton mass = " << pZ.mass()/GeV << " GeV");

@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -9,11 +9,8 @@ namespace Rivet {
   class LHCB_2012_I1208102 : public Analysis {
   public:
 
-
     /// Constructor
-    LHCB_2012_I1208102()
-      : Analysis("LHCB_2012_I1208102")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(LHCB_2012_I1208102);
 
 
     /// @name Analysis methods
@@ -21,7 +18,8 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      ZFinder zeefinder(FinalState(), Cuts::etaIn(2.0, 4.5) && Cuts::pT > 20*GeV, PID::ELECTRON, 60*GeV, 120*GeV);
+      DileptonFinder zeefinder(91.2*GeV, 0.1, Cuts::etaIn(2.0, 4.5) && Cuts::pT > 20*GeV &&
+                               Cuts::abspid == PID::ELECTRON, Cuts::massIn(60*GeV, 120*GeV));
       declare(zeefinder, "ZeeFinder");
 
       book(_h_sigma_vs_y,   2, 1, 1);
@@ -31,7 +29,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& e) {
-      const ZFinder& zeefinder = apply<ZFinder>(e, "ZeeFinder");
+      const DileptonFinder& zeefinder = apply<DileptonFinder>(e, "ZeeFinder");
       if (zeefinder.empty()) vetoEvent;
       if (zeefinder.bosons().size() > 1)
         MSG_WARNING("Found multiple (" << zeefinder.bosons().size() << ") Z -> e+ e- decays!");

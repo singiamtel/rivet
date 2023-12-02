@@ -1,21 +1,20 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
 
-  
+
   /// @brief MPI sensitive di-jet balance variables for W->ejj or W->mujj events.
   class ATLAS_2013_I1216670 : public Analysis {
   public:
 
-    /// @name Constructor
-    ATLAS_2013_I1216670()
-      : Analysis("ATLAS_2013_I1216670")
-    {    }
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2013_I1216670);
 
 
     /// @name Analysis methods
@@ -24,77 +23,69 @@ namespace Rivet {
     /// Book histograms, set up projections for W and jets
     void init() {
 
+      Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
+      declare("MET", MissingMomentum());
+      PromptFinalState ef(cuts && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
+      PromptFinalState mf(cuts && Cuts::abspid == PID::MUON);
+      declare(mf, "Muons");
+
+      VetoedFinalState jet_fs;
+      jet_fs.addVetoOnThisFinalState(ef);
+      jet_fs.addVetoOnThisFinalState(mf);
+      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4);
+      declare(jets, "Jets");
+
       book(_h_delta_jets_n ,1, 1, 1);
       book(_h_delta_jets   ,2, 1, 1);
-
-      FinalState fs;
-
-      Cut cuts = Cuts::abseta < 2.5 && Cuts::pT >= 20*GeV;
-
-      WFinder w_e_finder(fs, cuts, PID::ELECTRON, 40*GeV, DBL_MAX, 0.0*GeV, 0.0,
-			 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
-      declare(w_e_finder, "W_E_FINDER");
-
-      WFinder w_mu_finder(fs, cuts, PID::MUON, 40*GeV, DBL_MAX, 0.0*GeV, 0.0,
-			  LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
-      declare(w_mu_finder, "W_MU_FINDER");
-
-      VetoedFinalState jet_fs(fs);
-      jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("W_E_FINDER"));
-      jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("W_MU_FINDER"));
-      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4);
-      declare(jets, "JETS");
-
     }
 
+
     /// Do the analysis
-    void analyze(const Event &e) {
+    void analyze(const Event& event) {
 
-      const WFinder& w_e_finder  = apply<WFinder>(e, "W_E_FINDER" );
-      const WFinder& w_mu_finder = apply<WFinder>(e, "W_MU_FINDER");
-      Particle lepton, neutrino;
-      Jets all_jets, jets;
+      // W reco, starting with MET
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
 
-      // Find exactly 1 W->e or W->mu boson
-      if (w_e_finder.bosons().size() == 1 && w_mu_finder.bosons().size() == 0) {
-        MSG_DEBUG(" Event identified as W->e nu.");
-        if( !(w_e_finder.mT() > 40*GeV && w_e_finder.neutrino().Et() > 25.0*GeV) )  vetoEvent;
-        lepton = w_e_finder.lepton();
-      } else if (w_mu_finder.bosons().size() == 1 && w_e_finder.bosons().size() == 0) {
-        MSG_DEBUG(" Event identified as W->mu nu.");
-        if ( !(w_mu_finder.mT() > 40*GeV && w_mu_finder.neutrino().Et() > 25.0*GeV) )  vetoEvent;
-        lepton = w_mu_finder.lepton();
-      } else {
-        MSG_DEBUG(" No W found passing cuts.");
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& es = apply<PromptFinalState>(event, "Elecs").particles();
+      const Particles es_mtfilt = select(es, [&](const Particle& e){ return mT(e, pmiss) > 40*GeV; });
+      const int iefound = closestMatchIndex(es_mtfilt, pmiss, Kin::mass, 80.4*GeV);
+      const Particles& mus = apply<PromptFinalState>(event, "Muons").particles();
+      const Particles mus_mtfilt = select(mus, [&](const Particle& m){ return mT(m, pmiss) > 40*GeV; });
+      const int imfound = closestMatchIndex(mus_mtfilt, pmiss, Kin::mass, 80.4*GeV);
+
+      // Event selection and ID
+      if (iefound < 0 && imfound < 0) {
+        MSG_DEBUG("No W's passed cuts: vetoing");
         vetoEvent;
       }
-
-      all_jets = apply<FastJets>(e, "JETS").jetsByPt(Cuts::pT > 20.0*GeV && Cuts::absrap < 2.8);
-
-      // Remove jets DeltaR < 0.5 from W lepton
-      for (const Jet& j : all_jets) {
-        double distance = deltaR(lepton, j);
-        if (distance < 0.5) {
-          MSG_DEBUG("   Veto jet DeltaR " << distance << " from W lepton");
-        } else {
-          jets.push_back(j);
-        }
+      if (iefound >= 0 && imfound >= 0) {
+        MSG_DEBUG("Multiple W's passed cuts: vetoing");
+        vetoEvent;
       }
+      const Particle& lepton = (iefound >= 0) ? es_mtfilt[iefound] : mus_mtfilt[imfound];
+      MSG_DEBUG("Event identified as W -> " << lepton.pid() << " + nu");
+
+      // Remove jets with deltaR < 0.5 from W lepton
+      const Jets all_jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 20.0*GeV && Cuts::absrap < 2.8);
+      const Jets jets = select(all_jets, deltaRGtr(lepton, 0.5));
+      MSG_DEBUG("Overlap removal #jets = " << all_jets.size() << " -> " << jets.size());
 
       // Exactly two jets required
       if (jets.size() != 2)  vetoEvent;
 
       // Calculate analysis quantities from the two jets
-      double delta_jets = (jets.front().momentum() + jets.back().momentum()).pT();
-      double total_pt = jets.front().momentum().pT() + jets.back().momentum().pT();
+      double delta_jets = (jets[0].momentum() + jets[1].momentum()).pT();
+      double total_pt = jets[0].pT() + jets[1].pT();
       double delta_jets_n = delta_jets / total_pt;
 
-      _h_delta_jets->fill(   delta_jets); // Jet pT balance
-      _h_delta_jets_n->fill( delta_jets_n); // Jet pT balance, normalised by scalar dijet pT
-
+      _h_delta_jets->fill(delta_jets); // Jet pT balance
+      _h_delta_jets_n->fill(delta_jets_n); // Jet pT balance, normalised by scalar dijet pT
     }
 
-    
+
     /// Finalize
     void finalize() {
       normalize(_h_delta_jets_n, 0.03);
@@ -103,7 +94,7 @@ namespace Rivet {
 
     /// @}
 
-    
+
   private:
 
     /// @name Histograms

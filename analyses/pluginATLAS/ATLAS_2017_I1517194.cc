@@ -1,43 +1,48 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
 
-  ///@brief: Electroweak Wjj production at 8 TeV
+  namespace FOO {
+    double mass(const Particle&, const P4&) { return 0.0; }
+    // double mass(const P4&, double) { return 0.0; }
+  }
+
+  /// @brief Electroweak Wjj production at 8 TeV
   class ATLAS_2017_I1517194 : public Analysis {
   public:
 
-    /// @name Constructors etc.
-    /// @{
-
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2017_I1517194);
-    /// @}
+
 
     /// @name Analysis methods
     /// @{
+
     /// Book histograms and initialise projections before the run
     void init() {
 
-      // Get options from the new option system
+      // Get options from the option system
       _mode = 0;
       if ( getOption("LMODE") == "EL" ) _mode = 0;
       if ( getOption("LMODE") == "MU" ) _mode = 1;
 
-      const FinalState fs;
       // W Selection
-      WFinder wfinder(fs, Cuts::rap < 2.5 && Cuts::pT >= 25*GeV, _mode? PID::MUON : PID::ELECTRON, 0*GeV, 13*TeV, 0*GeV, 0.1);
-      declare(wfinder, "WFinder");
-
-      FastJets jets( wfinder.remainingFinalState(), JetAlg::ANTIKT, 0.4, JetMuons::DECAY, JetInvisibles::ALL);
-      declare(jets, "Jets_w");
-
       MissingMomentum missmom(FinalState(Cuts::eta < 5.0));
-      declare(missmom, "mm");
+      declare(missmom, "MET");
+      LeptonFinder lf(0.1, Cuts::rap < 2.5 && Cuts::pT > 25*GeV &&
+                      Cuts::abspid == (_mode? PID::MUON : PID::ELECTRON));
+      declare(lf, "Leptons");
+
+      VetoedFinalState vfs;
+      vfs.vetoFinalState(lf);
+      FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::DECAY, JetInvisibles::ALL); //< !!
+      declare(jets, "Jets_w");
 
       const vector<string> phase_spaces = { "highmass15", "antiLC", "signal10",
                                             "highmass10", "inclusive", "highmass20",
@@ -84,17 +89,14 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      FourMomentum boson, lepton, neutrino;
-      const WFinder& wfinder = apply<WFinder>(event, "WFinder");
+      const P4& pmiss = apply<MissingMomentum>(event, "MET").missingMom();
+      const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+      const int ifound = closestMatchIndex(ls, pmiss, FOO::mass, 80.4*GeV);
+
+      if (ifound < 0) vetoEvent;
+      const FourMomentum lepton(ls[ifound]), neutrino(pmiss);
+
       const FastJets& jetpro = apply<FastJets>(event, "Jets_w");
-      const MissingMomentum& missmom = apply<MissingMomentum>(event, "mm");
-
-      if ( wfinder.bosons().size() != 1 ) { vetoEvent; }
-
-      boson    = wfinder.bosons().front().momentum();
-      lepton   = wfinder.leptons().front().momentum();
-      neutrino = wfinder.neutrinos().front().momentum();
-
       vector<FourMomentum> jets;
       for (const Jet& jet : jetpro.jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 4.4)) {
         if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
@@ -108,7 +110,7 @@ namespace Rivet {
       double dijet_mass = FourMomentum(jets[0]+jets[1]).mass();
       size_t nojets = jets.size();
 
-      if (missmom.vectorEt().mod() < 25*GeV)  vetoEvent;
+      if (pmiss.pT() < 25*GeV)  vetoEvent;
       if (jets[0].pT() < 80*GeV)  vetoEvent;
       if (jets[1].pT() < 60*GeV)  vetoEvent;
       if (dijet_mass < 500*GeV)  vetoEvent;
@@ -219,8 +221,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2017_I1517194);
-
 
 }

@@ -36,13 +36,13 @@ namespace Rivet {
       // Electrons and muons in Fiducial PS
       PromptFinalState leptons(FinalState(fs_z && (Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON)));
       leptons.acceptTauDecays(false);
-      LeptonFinder dressedleptons(photons, leptons, 0.1, FS_Zlept, PhotonOrigin::ALL);
+      LeptonFinder dressedleptons(leptons, photons, 0.1, FS_Zlept);
       declare(dressedleptons, "LeptonFinder");
 
       // Electrons and muons in Total PS
       PromptFinalState leptons_total(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       leptons_total.acceptTauDecays(false);
-      LeptonFinder dressedleptonsTotal(photons, leptons_total, 0.1, Cuts::open(), PhotonOrigin::ALL);
+      LeptonFinder dressedleptonsTotal(leptons_total, photons, 0.1);
       declare(dressedleptonsTotal, "LeptonFinderTotal");
 
       // Promot neutrinos (yikes!)

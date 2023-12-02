@@ -20,7 +20,7 @@ namespace Rivet {
   /// The approach taken to photon dressing of leptons
   enum class DressingType { DR=0, CONE=0, CLUSTER=1, AKT=1 };
 
-  /// Accepted classes of lepton origin  
+  /// Accepted classes of lepton origin
   enum class PhotonOrigin { NONE=0, PROMPT=1, NODECAY=1, ALL };
 
 
@@ -54,8 +54,18 @@ namespace Rivet {
 
   /// Alias for a list of dressed leptons, cf. Particles and Jets
   using DressedLeptons = vector<DressedLepton>;
-  
-  
+
+  /// Generic sum function, adding @a fn(@c x) for all @c x in container @a c, starting with @a start
+  template <typename T, typename FN = T(const ParticleBase&)>
+  inline T sum(const DressedLeptons& c, FN&& fn, const T& start=T()) {
+    auto f = std::function(std::forward<FN>(fn));
+    T rtn = start;
+    for (const auto& x : c) rtn += fn(x);
+    return rtn;
+  }
+
+
+
 }
 
 #endif

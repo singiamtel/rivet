@@ -9,7 +9,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief b-fragmentation at 13 TeV
   class ATLAS_2021_I1913061 : public Analysis {
 
@@ -27,10 +27,10 @@ namespace Rivet {
       FinalState photons(Cuts::abspid == PID::PHOTON);
 
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(bare_mu, photons, 0.1, Cuts::abseta < 2.5);
 
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(bare_el, photons, 0.1, Cuts::abseta < 2.5);
 
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
       vfs.addVetoOnThisFinalState(all_dressed_el);
@@ -195,7 +195,7 @@ namespace Rivet {
       }
     }
 
-    
+
     void finalize() {
       normalize(_h);
     }

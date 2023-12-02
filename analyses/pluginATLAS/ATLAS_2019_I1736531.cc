@@ -3,7 +3,7 @@
 #include "Rivet/Projections/Thrust.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -17,12 +17,12 @@ namespace Rivet {
     void init() {
 
       // Get options from the new option system
-      PdgId flav = (getOption("LMODE") == "EL")? PID::ELECTRON : PID::MUON;
+      PdgId flav = (getOption("LMODE") == "EL") ? PID::ELECTRON : PID::MUON;
 
       //Projections
-      FinalState fs;
-      ZFinder zfinder(fs, Cuts::abseta<2.4 && Cuts::pT>25.0*GeV, flav, 66*GeV, 116*GeV, 0.1);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 25*GeV &&
+                             Cuts::abspid == flav, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder, "DileptonFinder");
       ChargedFinalState cfs(zfinder.remainingFinalState() );
       declare(cfs, "cfs");
 
@@ -145,7 +145,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       const double area = 5.*2./3.*M_PI;
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
 
       if (zfinder.bosons().size() != 1) vetoEvent;
       double  Zpt   = zfinder.bosons()[0].momentum().pT()/GeV;

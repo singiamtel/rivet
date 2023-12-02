@@ -8,10 +8,10 @@ namespace Rivet {
 
 
   /// How to treat decay products from prompt muons
-  enum class MuDecaysAs { PROMPT=0, NODECAY=0, NONPROMPT }; //DIRECT, INDIRECT }
+  enum class MuDecaysAs { DIRECT=0, PROMPT=0, NODECAY=0, INDIRECT=1, NONPROMPT=1 };
 
   /// How to treat decay products from prompt taus
-  enum class TauDecaysAs { PROMPT=0, NODECAY=0, NONPROMPT }; //DIRECT, INDIRECT }
+  enum class TauDecaysAs { DIRECT=0, PROMPT=0, NODECAY=0, INDIRECT=1, NONPROMPT=1 };
 
 
 }

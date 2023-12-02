@@ -1,11 +1,13 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
 
-  /// ATLAS W pT analysis
+  /// ATLAS W pT analysis at 7 TeV
   class ATLAS_2011_I925932 : public Analysis {
   public:
 
@@ -18,16 +20,16 @@ namespace Rivet {
 
     void init() {
       // Set up projections
-      FinalState fs;
       Cut cuts = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      WFinder wfinder_dressed_el(fs, cuts, PID::ELECTRON, 0*GeV, 1000*GeV, 25*GeV, 0.2);
-      declare(wfinder_dressed_el, "WFinder_dressed_el");
-      WFinder wfinder_bare_el(fs, cuts, PID::ELECTRON, 0*GeV, 1000*GeV, 25*GeV, 0.0);
-      declare(wfinder_bare_el, "WFinder_bare_el");
-      WFinder wfinder_dressed_mu(fs, cuts, PID::MUON, 0*GeV, 1000*GeV, 25*GeV, 0.2);
-      declare(wfinder_dressed_mu, "WFinder_dressed_mu");
-      WFinder wfinder_bare_mu(fs, cuts, PID::MUON, 0*GeV, 1000*GeV, 25*GeV, 0.0);
-      declare(wfinder_bare_mu, "WFinder_bare_mu");
+      declare("MET", MissingMomentum());
+      LeptonFinder ef_dressed(0.2, cuts && Cuts::abspid == PID::ELECTRON);
+      declare(ef_dressed, "Elecs_dressed");
+      LeptonFinder ef_bare(0.0, cuts && Cuts::abspid == PID::ELECTRON);
+      declare(ef_bare, "Elecs_bare");
+      LeptonFinder mf_dressed(0.2, cuts && Cuts::abspid == PID::MUON);
+      declare(mf_dressed, "Muons_dressed");
+      LeptonFinder mf_bare(0.0, cuts && Cuts::abspid == PID::MUON);
+      declare(mf_bare, "Muons_bare");
 
       // Book histograms
       book(_hist_wpt_dressed_el, 1, 1, 2);
@@ -39,53 +41,50 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& event) {
-      const WFinder& wfinder_dressed_el = apply<WFinder>(event, "WFinder_dressed_el");
-      const WFinder& wfinder_bare_el    = apply<WFinder>(event, "WFinder_bare_el");
-      const WFinder& wfinder_dressed_mu = apply<WFinder>(event, "WFinder_dressed_mu");
-      const WFinder& wfinder_bare_mu    = apply<WFinder>(event, "WFinder_bare_mu");
-      MSG_DEBUG("Found " << wfinder_dressed_el.size() + wfinder_dressed_mu.size() << " dressed W -> e/mu nu");
-      MSG_DEBUG("Found " << wfinder_bare_el.size() + wfinder_bare_mu.size() << " bare W -> e/mu nu");
 
-      if (wfinder_dressed_el.empty() && wfinder_bare_el.empty() &&
-          wfinder_dressed_mu.empty() && wfinder_bare_mu.empty()) {
+      // W reco, starting with MET
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.Et() < 25*GeV) vetoEvent;
+
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& esd = apply<LeptonFinder>(event, "Elecs_dressed").particles();
+      const int iedfound = closestMatchIndex(esd, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+      const Particles& esb = apply<LeptonFinder>(event, "Elecs_bare").particles();
+      const int iebfound = closestMatchIndex(esb, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+      const Particles& musd = apply<LeptonFinder>(event, "Muons_dressed").particles();
+      const int imdfound = closestMatchIndex(musd, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+      const Particles& musb = apply<LeptonFinder>(event, "Muons_bare").particles();
+      const int imbfound = closestMatchIndex(musb, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+
+      MSG_DEBUG("Found " << int(iedfound >= 0) + int(imdfound >= 0) << " dressed W -> e/mu nu");
+      MSG_DEBUG("Found " << int(iebfound >= 0) + int(imbfound >= 0) << " bare W -> e/mu nu");
+      if (iedfound < 0 && iebfound < 0 && imdfound < 0 && imbfound < 0) {
         MSG_DEBUG("No W bosons found");
         vetoEvent;
       }
 
       // "Dressed" electron
-      if (!wfinder_dressed_el.empty()) {
-        /// @todo Is this safe? Using MET would be better
-        const FourMomentum nu = wfinder_dressed_el.neutrinos()[0];
-        if (wfinder_dressed_el.mT() > 40*GeV && nu.pT() > 25*GeV) {
-            _hist_wpt_dressed_el->fill(wfinder_dressed_el.bosons()[0].pT()/GeV);
-        }
+      if (iedfound >= 0) {
+        const Particle& l = esd[iedfound];
+        if (mT(pmiss, l) > 40*GeV) _hist_wpt_dressed_el->fill((l.mom() + pmiss).pT()/GeV);
       }
 
       // "Bare" electron
-      if (!wfinder_bare_el.empty()) {
-        /// @todo Is this safe? Using MET would be better
-        const FourMomentum nu = wfinder_bare_el.neutrinos()[0];
-        if (wfinder_bare_el.mT() > 40*GeV && nu.pT() > 25*GeV) {
-            _hist_wpt_bare_el->fill(wfinder_bare_el.bosons()[0].pT()/GeV);
-        }
+      if (iebfound >= 0) {
+        const Particle& l = esb[iebfound];
+        if (mT(pmiss, l) > 40*GeV) _hist_wpt_bare_el->fill((l.mom() + pmiss).pT()/GeV);
       }
 
       // "Dressed" muon
-      if (!wfinder_dressed_mu.empty()) {
-        /// @todo Is this safe? Using MET would be better
-        const FourMomentum nu = wfinder_dressed_mu.neutrinos()[0];
-        if (wfinder_dressed_mu.mT() > 40*GeV && nu.pT() > 25*GeV) {
-            _hist_wpt_dressed_mu->fill(wfinder_dressed_mu.bosons()[0].pT()/GeV);
-        }
+      if (imdfound >= 0) {
+        const Particle& l = musd[imdfound];
+        if (mT(pmiss, l) > 40*GeV) _hist_wpt_dressed_mu->fill((l.mom() + pmiss).pT()/GeV);
       }
 
       // "Bare" muon
-      if (!wfinder_bare_mu.empty()) {
-        /// @todo Is this safe? Using MET would be better
-        const FourMomentum nu = wfinder_bare_mu.neutrinos()[0];
-        if (wfinder_bare_mu.mT() > 40*GeV && nu.pT() > 25*GeV) {
-            _hist_wpt_bare_mu->fill(wfinder_bare_mu.bosons()[0].pT()/GeV);
-        }
+      if (imbfound >= 0) {
+        const Particle& l = musb[imbfound];
+        if (mT(pmiss, l) > 40*GeV) _hist_wpt_bare_mu->fill((l.mom() + pmiss).pT()/GeV);
       }
 
     }
@@ -104,12 +103,11 @@ namespace Rivet {
 
   private:
 
-	Histo1DPtr _hist_wpt_dressed_el, _hist_wpt_bare_el, _hist_wpt_dressed_mu, _hist_wpt_bare_mu;
+    Histo1DPtr _hist_wpt_dressed_el, _hist_wpt_bare_el, _hist_wpt_dressed_mu, _hist_wpt_bare_mu;
 
   };
 
 
-  // Hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2011_I925932);
 
 }

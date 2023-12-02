@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -22,9 +22,8 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      FinalState fs;
-      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON, 40*GeV, 200*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, Cuts::abspid == PID::ELECTRON, Cuts::massIn(40*GeV, 200*GeV));
+      declare(zfinder, "DileptonFinder");
 
       book(_h_ZpT         ,1, 1, 1);
       book(_h_forward_ZpT ,3, 1, 1);
@@ -33,7 +32,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& e) {
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) {
         MSG_DEBUG("No unique lepton pair found.");
         vetoEvent;

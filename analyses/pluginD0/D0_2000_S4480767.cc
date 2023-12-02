@@ -1,11 +1,13 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
 
+  /// D0 transverse momentum of the W boson
   class D0_2000_S4480767 : public Analysis {
   public:
 
@@ -17,9 +19,9 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      FinalState fs;
-      WFinder wf(fs, Cuts::abseta < 5, PID::ELECTRON, 0.0*GeV, 200.0*GeV, 0.0*GeV, 0.2);
-      declare(wf, "WFinder");
+      declare("MET", MissingMomentum());
+      LeptonFinder ef(0.2, Cuts::abseta < 5 && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
 
       book(_h_W_pT ,1, 1, 1);
     }
@@ -27,10 +29,12 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const WFinder& wf = apply<WFinder>(event, "WFinder");
-      if (wf.bosons().size() == 0) vetoEvent;
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const int ifound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 200*GeV);
 
-      _h_W_pT->fill(wf.bosons()[0].pT()/GeV);
+      if (ifound < 0) vetoEvent;
+      _h_W_pT->fill((pmiss+es[ifound].mom()).pT()/GeV);
     }
 
 
@@ -48,7 +52,6 @@ namespace Rivet {
     Histo1DPtr _h_W_pT;
 
   };
-
 
 
   RIVET_DECLARE_ALIASED_PLUGIN(D0_2000_S4480767, D0_2000_I535017);

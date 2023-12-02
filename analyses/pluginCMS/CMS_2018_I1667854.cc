@@ -37,13 +37,13 @@ namespace Rivet {
 
       IdentifiedFinalState bareMuons(fs_notaudecay);
       bareMuons.acceptIdPair(PID::MUON);
-      declare(LeptonFinder(fs, bareMuons, /*dRmax = */0.1,
-                             Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "muons");
+      declare(LeptonFinder(bareMuons, fs, /*dRmax = */0.1,
+                           Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "muons");
 
       IdentifiedFinalState bareElectrons(fs_notaudecay);
       bareElectrons.acceptIdPair(PID::ELECTRON);
-      declare(LeptonFinder(fs, bareElectrons, /*dRmax =*/ 0.1,
-                             Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "electrons");
+      declare(LeptonFinder(bareElectrons, fs, /*dRmax =*/ 0.1,
+                           Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "electrons");
 
       FastJets jets(visfs, JetAlg::ANTIKT, 0.4);
       declare(jets, "jets");
@@ -72,8 +72,8 @@ namespace Rivet {
 
     /// @brief Z boson finder
     ///
-    /// @note We don't use the standard ZFinder class in order to stick to
-    /// the definition of the publication that is simpler than the ZFinder algorithm.
+    /// @note We don't use the standard DileptonFinder class in order to stick to
+    /// the definition of the publication that is simpler than the DileptonFinder algorithm.
     ///
     /// @param leptons pt-ordered list of electrons or muons from which to build the Z boson
     std::unique_ptr<Particle> zfinder(const Particles& leptons) {

@@ -26,7 +26,7 @@ namespace Rivet {
     void init() {
 
       // Leptons
-      declare(LeptonFinder(PromptFinalState(), 0.1, Cuts::abseta < 2.4 && Cuts::pT > 26*GeV), "Leptons");
+      declare(LeptonFinder(Cuts::abseta < 2.4 && Cuts::pT > 26*GeV, 0.1), "Leptons");
 
       // Jets
       declare(FastJets(FinalState(Cuts::abseta < 5), JetAlg::ANTIKT, 0.4), "Jets");

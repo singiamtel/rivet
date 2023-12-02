@@ -49,8 +49,7 @@ namespace Rivet {
                         (((Cuts::abspid == PID::ELECTRON) and ((Cuts::abseta < 1.4442) or (Cuts::abseta > 1.566))) or (Cuts::abspid == PID::MUON)));
 
       LeptonFinder dressed_leptons(
-        prompt_photons, prompt_leptons, 0.1,
-        lepton_cut, PhotonOrigin::ALL);
+        prompt_photons, prompt_leptons, 0.1, lepton_cut);
       declare(dressed_leptons, "LeptonFinder");
 
       // Jets

@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -10,11 +10,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2011_I928289_Z()
-      : Analysis("ATLAS_2011_I928289_Z")
-    {
-
-    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2011_I928289_Z);
 
 
     /// @name Analysis methods
@@ -23,36 +19,32 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      FinalState fs;
+      Cut cut = Cuts::pT >= 20.0*GeV;
+      DileptonFinder zfinder_ee_bare(   91.2*GeV, 0.0, cut && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      DileptonFinder zfinder_ee_dressed(91.2*GeV, 0.1, cut && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      DileptonFinder zfinder_mm_bare(   91.2*GeV, 0.0, cut && Cuts::abspid == PID::MUON    , Cuts::massIn(66*GeV, 116*GeV));
+      DileptonFinder zfinder_mm_dressed(91.2*GeV, 0.1, cut && Cuts::abspid == PID::MUON    , Cuts::massIn(66*GeV, 116*GeV));
 
-      Cut cut = (Cuts::pT >= 20.0*GeV);
-
-      ZFinder zfinder_ee_bare(   fs, cut, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.0);
-      ZFinder zfinder_ee_dressed(fs, cut, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.1);
-      ZFinder zfinder_mm_bare(   fs, cut, PID::MUON    , 66.0*GeV, 116.0*GeV, 0.0);
-      ZFinder zfinder_mm_dressed(fs, cut, PID::MUON    , 66.0*GeV, 116.0*GeV, 0.1);
-
-      declare(zfinder_ee_bare   , "ZFinder_ee_bare"   );
-      declare(zfinder_ee_dressed, "ZFinder_ee_dressed");
-      declare(zfinder_mm_bare   , "ZFinder_mm_bare"   );
-      declare(zfinder_mm_dressed, "ZFinder_mm_dressed");
+      declare(zfinder_ee_bare   , "DileptonFinder_ee_bare"   );
+      declare(zfinder_ee_dressed, "DileptonFinder_ee_dressed");
+      declare(zfinder_mm_bare   , "DileptonFinder_mm_bare"   );
+      declare(zfinder_mm_dressed, "DileptonFinder_mm_dressed");
 
       // y(Z) cross-section dependence
       book(_h_Z_y_ee_bare     ,1, 1, 1);
       book(_h_Z_y_ee_dressed  ,1, 1, 2);
       book(_h_Z_y_mm_bare     ,1, 1, 3);
       book(_h_Z_y_mm_dressed  ,1, 1, 4);
-
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zfinder_ee_bare     = apply<ZFinder>(event, "ZFinder_ee_bare"   );
-      const ZFinder& zfinder_ee_dressed  = apply<ZFinder>(event, "ZFinder_ee_dressed");
-      const ZFinder& zfinder_mm_bare     = apply<ZFinder>(event, "ZFinder_mm_bare"   );
-      const ZFinder& zfinder_mm_dressed  = apply<ZFinder>(event, "ZFinder_mm_dressed");
+      const DileptonFinder& zfinder_ee_bare     = apply<DileptonFinder>(event, "DileptonFinder_ee_bare"   );
+      const DileptonFinder& zfinder_ee_dressed  = apply<DileptonFinder>(event, "DileptonFinder_ee_dressed");
+      const DileptonFinder& zfinder_mm_bare     = apply<DileptonFinder>(event, "DileptonFinder_mm_bare"   );
+      const DileptonFinder& zfinder_mm_dressed  = apply<DileptonFinder>(event, "DileptonFinder_mm_dressed");
 
       fillPlots1D(zfinder_ee_bare   , _h_Z_y_ee_bare);
       fillPlots1D(zfinder_ee_dressed, _h_Z_y_ee_dressed);
@@ -62,7 +54,7 @@ namespace Rivet {
     }
 
 
-    void fillPlots1D(const ZFinder& zfinder, Histo1DPtr hist) {
+    void fillPlots1D(const DileptonFinder& zfinder, Histo1DPtr hist) {
       if (zfinder.bosons().size() != 1) return;
       const FourMomentum zmom = zfinder.bosons()[0].momentum();
       hist->fill(zmom.absrap());

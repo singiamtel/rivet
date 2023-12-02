@@ -3,9 +3,10 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
+
 
   /// @brief Differential Z cross section measurement in phi* at 8 TeV
   class CMS_2017_I1631985 : public Analysis {
@@ -13,6 +14,7 @@ namespace Rivet {
 
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2017_I1631985);
+
 
     /// @name Analysis methods
     /// @{
@@ -28,14 +30,12 @@ namespace Rivet {
       _twodim = false;
       if ( getOption("TWODIM") == "YES" ) _twodim = true;
 
-      FinalState fs;
+      // The experimental result is unfolded to the 'born' level (pre-FSR), which is discouraged
+      // The implementation in Rivet here is using dressed leptons (or disable generator QED FSR)
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-
-      // The experimental result is unfolded to the 'born' level (pre-FSR), which is discouraged in Rivet
-      // The implementation in Rivet here is using dressed leptons
-      ZFinder zeeFind(fs, cut, PID::ELECTRON, 60.0*GeV, 120.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
+      DileptonFinder zeeFind(91.2*GeV, 0.1, cut && Cuts::abspid == PID::ELECTRON, Cuts::massIn(60*GeV, 120*GeV));
       declare(zeeFind, "ZeeFind");
-      ZFinder zmmFind(fs, cut, PID::MUON    , 60.0*GeV, 120.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
+      DileptonFinder zmmFind(91.2*GeV, 0.1, cut && Cuts::abspid == PID::MUON    , Cuts::massIn(60*GeV, 120*GeV));
       declare(zmmFind, "ZmmFind");
 
       // Book histograms
@@ -60,8 +60,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zeeFS = apply<ZFinder>(event, "ZeeFind");
-      const ZFinder& zmumuFS = apply<ZFinder>(event, "ZmmFind");
+      const DileptonFinder& zeeFS = apply<DileptonFinder>(event, "ZeeFind");
+      const DileptonFinder& zmumuFS = apply<DileptonFinder>(event, "ZmmFind");
 
       const Particles& zees = zeeFS.bosons();
       const Particles& zmumus = zmumuFS.bosons();

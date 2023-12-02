@@ -12,7 +12,7 @@
 namespace Rivet {
 
 
-  /// @brief WW production in pp at 13 TeV in electroweak SUSY inspired phase space
+  /// @brief WW production in pp at 13 TeV in electroweak SUSY-inspired phase space
   class ATLAS_2022_I2103950 : public Analysis {
   public:
 
@@ -37,11 +37,11 @@ namespace Rivet {
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1);
+      LeptonFinder all_dressed_mu(bare_mu, photons, 0.1);
 
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_el(photons, bare_el, 0.1);
+      LeptonFinder all_dressed_el(bare_el, photons, 0.1);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5));
@@ -61,11 +61,11 @@ namespace Rivet {
       PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
 
-      LeptonFinder lep_dressed(photons, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder lep_dressed(lep_bare, photons, 0.1, lepton_cuts);
       declare(lep_dressed,"lep_dressed");
-      LeptonFinder elecs(photons, prompt_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder elecs(prompt_el, photons, 0.1, lepton_cuts);
       declare(elecs, "elecs");
-      LeptonFinder muons(photons, prompt_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder muons(prompt_mu, photons, 0.1, lepton_cuts);
       declare(muons, "muons");
 
       // Get MET from generic invisibles
@@ -92,7 +92,7 @@ namespace Rivet {
       const FourMomentum metinvisible = sum(ifs.particles(), FourMomentum());
 
       // Get met and find leptons
-      //const DressedLeptons &leptons       = apply<LeptonFinder>(event, "lep_dressed").dressedLeptons();
+      //const DressedLeptons &leptons = apply<LeptonFinder>(event, "lep_dressed").dressedLeptons();
       const DressedLeptons& all_elecs = apply<LeptonFinder>(event, "elecs").dressedLeptons();
       const DressedLeptons& all_muons = apply<LeptonFinder>(event, "muons").dressedLeptons();
       //Particles bare_leps  = apply<IdentifiedFinalState>(event, "bare_leptons").particles();

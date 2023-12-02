@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -41,13 +41,10 @@ namespace Rivet {
          declare(jets, "jets");
        }
        if (_mode == 3) {
-         FinalState fs(Cuts::abseta < 2.4 and Cuts::pT > 100*MeV);
-         declare(fs, "FS");
-
-         ZFinder zfinder(fs, Cuts::abseta < 5. and Cuts::pT > 30*GeV, PID::MUON, 70*GeV, 110*GeV, 0.2,
-			 LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, 91.2*GeV);
-
-         declare(zfinder, "ZFinder");
+         //PromptFinalState pfs(Cuts::abseta < 2.4 and Cuts::pT > 100*MeV);
+         DileptonFinder zfinder(91.2*GeV, 0.2, Cuts::abseta < 5 and Cuts::pT > 30*GeV and
+                                Cuts::abspid == PID::MUON, Cuts::massIn(70*GeV, 110*GeV));
+         declare(zfinder, "DileptonFinder");
          declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5), "JetsAK5_zj");
 
          book(_h1, "d09-x01-y01");
@@ -84,7 +81,7 @@ namespace Rivet {
       }
 
       if (_mode == 3) {
-        const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+        const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
         if (zfinder.bosons().size() != 1) vetoEvent;
         const Particle& z = zfinder.bosons()[0];
         const Particles leptons = sortBy(zfinder.constituents(), cmpMomByPt);

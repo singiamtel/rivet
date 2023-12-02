@@ -1,24 +1,25 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 
 namespace Rivet{
 
-  /// @brief:  Z+jet at 8 TeV
+
+  /// Z+jet at 8 TeV
   class ATLAS_2019_I1744201 : public Analysis {
   public:
 
+    /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2019_I1744201);
+
 
     void init() {
 
-      const FinalState fs(Cuts::abseta < 5.0);
-      Cut cut = Cuts::abseta < 2.47 && Cuts::pT >= 20*GeV;
-
-      ZFinder zfinder_el(fs, cut, PID::ELECTRON, 66*GeV, 116*GeV, 0.1, LeptonOrigin::PROMPT);
-      declare(zfinder_el, "ZFinder_el");
+      DileptonFinder zfinder_el(91.2*GeV, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 20*GeV &&
+                                Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder_el, "DileptonFinder_el");
 
       declare(FastJets(zfinder_el.remainingFinalState(), JetAlg::ANTIKT, 0.4,
                        JetMuons::NONE, JetInvisibles::NONE), "AKT04");
@@ -30,10 +31,11 @@ namespace Rivet{
 
     }
 
+
     void analyze(const Event& event) {
 
       // electrons selection
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder_el");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder_el");
       if ( zfinder.bosons().size() != 1)  vetoEvent;
 
       const Particles& leptons = zfinder.constituents();

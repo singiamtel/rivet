@@ -7,6 +7,7 @@ libRivetProjections_la_SOURCES = \
   ChargedLeptons.cc \
   CentralEtHCM.cc \
   DecayedParticles.cc \
+  DileptonFinder.cc \
   DISDiffHadron.cc \
   DISFinalState.cc \
   DISKinematics.cc \
@@ -52,9 +53,7 @@ libRivetProjections_la_SOURCES = \
   UnstableParticles.cc \
   UndressBeamLeptons.cc \
   VetoedFinalState.cc \
-  VisibleFinalState.cc \
-  WFinder.cc \
-  ZFinder.cc
+  VisibleFinalState.cc
 
 # libRivetProjections_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(HEPTOPTAGGERINCPATH)
 # libRivetProjections_la_SOURCES += HTT.cc

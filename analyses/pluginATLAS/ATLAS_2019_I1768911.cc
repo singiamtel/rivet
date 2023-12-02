@@ -1,6 +1,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -11,6 +11,7 @@ namespace Rivet {
 
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2019_I1768911);
+
 
     /// @name Analysis methods
     /// @{
@@ -24,14 +25,11 @@ namespace Rivet {
       if ( getOption("LMODE") == "MU" ) _mode = 2;
 
       // Configure projections
-      const FinalState fs;
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 27*GeV;
-      ZFinder zmmFinder(fs, cuts, PID::MUON, 66*GeV, 116*GeV, 0.1,
-		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
-      declare(zmmFinder, "ZFinder_mu");
-      ZFinder zeeFinder(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1,
-		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
-      declare(zeeFinder, "ZFinder_el");
+      DileptonFinder zmmFinder(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::MUON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zmmFinder, "DileptonFinder_mu");
+      DileptonFinder zeeFinder(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zeeFinder, "DileptonFinder_el");
 
       // Book histograms
       book(_h["zpt_combined_dressed_normalised"], 27, 1, 1);
@@ -43,8 +41,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get leptonic Z boson
-      const ZFinder& zmmFinder = apply<ZFinder>(event, "ZFinder_mu");
-      const ZFinder& zeeFinder = apply<ZFinder>(event, "ZFinder_el");
+      const DileptonFinder& zmmFinder = apply<DileptonFinder>(event, "DileptonFinder_mu");
+      const DileptonFinder& zeeFinder = apply<DileptonFinder>(event, "DileptonFinder_el");
       if (_mode == 2 && zmmFinder.bosons().size() != 1 && zeeFinder.bosons().size())   vetoEvent;
       if (_mode == 1 && zeeFinder.bosons().size() != 1 && zmmFinder.bosons().size())   vetoEvent;
       if (_mode == 0 && (zeeFinder.bosons().size() + zmmFinder.bosons().size()) != 1)  vetoEvent;

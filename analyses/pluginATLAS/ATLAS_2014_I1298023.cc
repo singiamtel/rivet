@@ -28,7 +28,7 @@ namespace Rivet {
 
       // dressed leptons
       Cut cuts = (Cuts::abseta < 2.5) & (Cuts::pT > 25*GeV);
-      LeptonFinder leptons(fs, bare_leptons, 0.1, cuts);
+      LeptonFinder leptons(bare_leptons, fs, 0.1, cuts);
       declare(leptons, "leptons");
 
       // MET

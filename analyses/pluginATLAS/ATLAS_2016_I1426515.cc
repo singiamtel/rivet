@@ -31,12 +31,12 @@ namespace Rivet {
       // Project dressed electrons with pT > 15 GeV and |eta| < 2.47
       PromptFinalState el_bare(FinalState(Cuts::abspid == PID::ELECTRON));
       Cut cuts = (Cuts::abseta < 2.47) && ( (Cuts::abseta <= 1.37) || (Cuts::abseta >= 1.52) ) && (Cuts::pT > 10*GeV);
-      LeptonFinder el_dressed_FS(photon_id, el_bare, 0.1, cuts, PhotonOrigin::ALL);
+      LeptonFinder el_dressed_FS(el_bare, photon_id, 0.1, cuts);
       declare(el_dressed_FS, "EL_DRESSED_FS");
 
       // Project dressed muons with pT > 15 GeV and |eta| < 2.5
       PromptFinalState mu_bare(FinalState(Cuts::abspid == PID::MUON));
-      LeptonFinder mu_dressed_FS(photon_id, mu_bare, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder mu_dressed_FS(mu_bare, photon_id, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 15*GeV);
       declare(mu_dressed_FS, "MU_DRESSED_FS");
 
       Cut cuts_WW = (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV);
@@ -44,7 +44,7 @@ namespace Rivet {
       lep_id.acceptIdPair(PID::MUON);
       lep_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState lep_bare(lep_id);
-      LeptonFinder leptons(photon_id, lep_bare, 0.1, cuts_WW, PhotonOrigin::ALL);
+      LeptonFinder leptons(lep_bare, photon_id, 0.1, cuts_WW);
       declare(leptons,"leptons");
 
       declare(FinalState(Cuts::abspid == PID::TAU || Cuts::abspid == PID::NU_TAU), "tau_id");

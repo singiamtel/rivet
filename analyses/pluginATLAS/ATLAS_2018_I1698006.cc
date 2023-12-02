@@ -8,15 +8,15 @@
 
 namespace Rivet {
 
-  
-  /// @brief ATLAS pTmiss+gamma measurement at 13 TeV 
+
+  /// @brief ATLAS pTmiss+gamma measurement at 13 TeV
   class ATLAS_2018_I1698006 : public Analysis {
   public:
-    
+
     /// Default constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1698006);
 
-    
+
     /// @name Analysis methods
     /// @{
     void init() {
@@ -35,16 +35,16 @@ namespace Rivet {
 
       //missing energy (prompt neutrinos)
       declare(InvisibleFinalState(OnlyPrompt::YES), "MET");
-      
+
       if (_mode==1) {
-	FinalState allLeps(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-	FinalState photons(Cuts::abspid == PID::PHOTON);
-	PromptFinalState promptLeps(allLeps);
-	Cut dressedLep_cuts = (Cuts::abseta < 2.7) && (Cuts::pT > 7*GeV);
-	LeptonFinder dressedLeps(photons, promptLeps, 0.1, dressedLep_cuts, PhotonOrigin::ALL);
-	declare(dressedLeps, "dressedLeptons");
+        FinalState allLeps(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
+        FinalState photons(Cuts::abspid == PID::PHOTON);
+        PromptFinalState promptLeps(allLeps);
+        Cut dressedLep_cuts = (Cuts::abseta < 2.7) && (Cuts::pT > 7*GeV);
+        LeptonFinder dressedLeps(promptLeps, photons, 0.1, dressedLep_cuts);
+        declare(dressedLeps, "dressedLeptons");
       }
-      
+
       //jets. run the jet finder on a final state without the prompt photons, and without neutrinos or muons
       VetoedFinalState jet_fs(Cuts::abseta > 4.5);
       jet_fs.addVetoOnThisFinalState(photon_fs);
@@ -66,7 +66,7 @@ namespace Rivet {
 
     }
 
-    
+
     void analyze(const Event& event) {
 
       const Particles& photons = apply<PromptFinalState>(event,"Photons").particlesByPt();
@@ -80,7 +80,7 @@ namespace Rivet {
 	const DressedLeptons &dressedLeptons = apply<LeptonFinder>(event, "dressedLeptons").dressedLeptons();
 	if (dressedLeptons.size() > 0) vetoEvent;
       }
-            
+
       //Nγ==1 and Emiss > 150 GeV
       if (met_vec.mod() > 150*GeV && photons.size()==1){
 
@@ -104,29 +104,29 @@ namespace Rivet {
 	  }
 
 	  _h["Njets"]->fill(jets.size());
-	  
+
       }
-      
+
     }
 
-    
-    void finalize() {      
+
+    void finalize() {
       const double sf = crossSection()/femtobarn/sumOfWeights();
       scale(_h, sf);
     }
 
     /// @}
 
-    
+
   private:
 
     map<string, Histo1DPtr> _h;
 
     size_t _mode;
-    
+
   };
 
-  
+
   RIVET_DECLARE_PLUGIN(ATLAS_2018_I1698006);
-  
+
 }

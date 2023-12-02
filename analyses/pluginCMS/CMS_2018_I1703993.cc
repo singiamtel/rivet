@@ -41,7 +41,7 @@ namespace Rivet {
       PromptFinalState prompt_leptons(charged_leptons, TauDecaysAs::NONPROMPT);
       PromptFinalState prompt_photons(photons, TauDecaysAs::PROMPT);
 
-      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
+      LeptonFinder dressed_leptons(prompt_leptons, prompt_photons, 0.1, lepton_cut);
       declare(dressed_leptons, "LeptonFinder");
 
       // Projection for jets

@@ -41,31 +41,21 @@ namespace Rivet {
       if ( getOption("LMODE") == "LNU" ) _mode = 2;
 
       // NB Missing ET is not required to be neutrinos
-      FinalState fs((Cuts::etaIn(-5.0, 5.0)));
-      PromptFinalState pfs((Cuts::etaIn(-5.0, 5.0)));
+      FinalState fs(Cuts::abseta < 5.0);
+      PromptFinalState pfs(fs);
 
       // Final states to form Z bosons
       vids.push_back(make_pair(PID::ELECTRON, PID::POSITRON));
       vids.push_back(make_pair(PID::MUON, PID::ANTIMUON));
-
-      IdentifiedFinalState Photon(fs);
-      Photon.acceptIdPair(PID::PHOTON);
-
-      IdentifiedFinalState bare_EL(pfs);
-      bare_EL.acceptIdPair(PID::ELECTRON);
-
-      IdentifiedFinalState bare_MU(pfs);
-      bare_MU.acceptIdPair(PID::MUON);
-
 
       if (_mode!=2) {
 
         // Selection 1: ZZ-> llll selection
         Cut etaranges_lep = Cuts::abseta < 3.16 && Cuts::pT > 7*GeV;
 
-        LeptonFinder electron_sel4l(Photon, bare_EL, 0.1, etaranges_lep);
+        LeptonFinder electron_sel4l(0.1, etaranges_lep && Cuts::abspid == PID::ELECTRON);
         declare(electron_sel4l, "ELECTRON_sel4l");
-        LeptonFinder muon_sel4l(Photon, bare_MU, 0.1, etaranges_lep);
+        LeptonFinder muon_sel4l(0.1, etaranges_lep && Cuts::abspid == PID::MUON);
         declare(muon_sel4l, "MUON_sel4l");
 
         // Both ZZ on-shell histos
@@ -84,9 +74,9 @@ namespace Rivet {
         // Selection 2: ZZ-> llnunu selection
         Cut etaranges_lep2 = Cuts::abseta < 2.5 && Cuts::pT > 10*GeV;
 
-        LeptonFinder electron_sel2l2nu(Photon, bare_EL, 0.1, etaranges_lep2);
+        LeptonFinder electron_sel2l2nu(0.1, etaranges_lep2 && Cuts::abspid == PID::ELECTRON);
         declare(electron_sel2l2nu, "ELECTRON_sel2l2nu");
-        LeptonFinder muon_sel2l2nu(Photon, bare_MU, 0.1, etaranges_lep2);
+        LeptonFinder muon_sel2l2nu(0.1, etaranges_lep2 && Cuts::abspid == PID::MUON);
         declare(muon_sel2l2nu, "MUON_sel2l2nu");
 
         /// Get all neutrinos. These will not be used to form jets.
@@ -98,10 +88,9 @@ namespace Rivet {
         declare(MissingMomentum(Cuts::abseta < 4.5), "MISSING");
 
         VetoedFinalState jetinput;
-        jetinput.addVetoOnThisFinalState(bare_MU);
         jetinput.addVetoOnThisFinalState(neutrino_fs);
 
-        FastJets jetpro(fs, JetAlg::ANTIKT, 0.4);
+        FastJets jetpro(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE);
         declare(jetpro, "jet");
 
         // ZZ -> llnunu histos

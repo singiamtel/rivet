@@ -12,14 +12,8 @@
 #include <ostream>
 #include <fstream>
 #include <sstream>
-// #include <tuple>
-// #include <utility>
-// #include <algorithm>
-// #include <cassert>
-// #include <typeinfo>
-// #include <iomanip>
-// #include <cmath>
-// #include <limits>
+#include <cmath>
+#include <limits>
 
 namespace Rivet {
 
@@ -51,6 +45,8 @@ namespace Rivet {
   using std::initializer_list;
 
   using std::function;
+
+  using std::isnan;
 
   /// @name Streaming containers as string reps
   /// @todo Make these named toStr rather than operator<<

@@ -19,7 +19,7 @@ namespace Rivet {
     /// Construction using Cuts object
     ParticleFinder(const Cut& c=Cuts::OPEN)
       : _cuts(c), _theParticles()
-    { }
+    {   }
 
     // /// @brief Construction using a wrapped other ParticleFinder plus cuts
     // ///

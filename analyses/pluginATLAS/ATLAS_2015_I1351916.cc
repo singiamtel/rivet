@@ -28,13 +28,10 @@ namespace Rivet {
 
       const FinalState fs;
 
-      IdentifiedFinalState bareleptons(fs);
-      bareleptons.acceptIdPair(_mode? PID::MUON : PID::ELECTRON);
-
       const Cut cuts = (_mode == 0)
-	? (Cuts::pT > 25*GeV && Cuts::abseta < 4.9)
-	: (Cuts::pT > 20*GeV && Cuts::abseta < 2.47);
-      LeptonFinder leptons(fs, bareleptons, 0.1, cuts, PhotonOrigin::ALL);
+                        ? (Cuts::pT > 25*GeV && Cuts::abseta < 4.9)
+                        : (Cuts::pT > 20*GeV && Cuts::abseta < 2.47);
+      LeptonFinder leptons(0.1, cuts && Cuts::abspid == (_mode? PID::MUON : PID::ELECTRON));
       declare(leptons, "leptons");
 
 
@@ -88,7 +85,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double sf = crossSectionPerEvent() / picobarn;
-      for (auto& key_hist : _h) scale(key_hist.second, sf);
+      scale(_h, sf);
       divide(*_h["NCC_pos"] - *_h["NCC_neg"], *_h["NCC_pos"] + *_h["NCC_neg"], _s["CC"]);
       if (!_mode)  divide(*_h["NCF_pos"] - *_h["NCF_neg"], *_h["NCF_pos"] + *_h["NCF_neg"], _s["CF"]);
     }

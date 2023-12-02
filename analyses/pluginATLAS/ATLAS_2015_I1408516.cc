@@ -1,6 +1,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -23,10 +23,9 @@ namespace Rivet {
       if ( getOption("LMODE") == "MU" ) _mode = 1;
 
       // Configure projections
-      FinalState fs;
       Cut cuts = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      ZFinder zfinder(fs, cuts, (_mode ? PID::MUON : PID::ELECTRON), 12*GeV, 150*GeV, 0.1);
-      declare(zfinder, _mode ? "ZFinder_mu" : "ZFinder_el");
+      DileptonFinder zfinder(91.2*GeV, 0.1, cuts && Cuts::abspid == (_mode ? PID::MUON : PID::ELECTRON), Cuts::massIn(12*GeV, 150*GeV));
+      declare(zfinder, _mode ? "DileptonFinder_mu" : "DileptonFinder_el");
 
       // Book histograms
       const size_t offset = _mode ? 4 : 1;
@@ -86,7 +85,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get leptonic Z boson
-      const ZFinder& zfinder = apply<ZFinder>(event, _mode ? "ZFinder_mu" : "ZFinder_el");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, _mode ? "DileptonFinder_mu" : "DileptonFinder_el");
       if (zfinder.bosons().size() != 1 ) vetoEvent;
       const Particle& Zboson = zfinder.boson();
 

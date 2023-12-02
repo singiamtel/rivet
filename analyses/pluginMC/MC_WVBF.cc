@@ -1,6 +1,9 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -13,21 +16,27 @@ namespace Rivet {
     /// Default constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(MC_WVBF);
 
+
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Initialize
     void init() {
-      _dR=0.1;
-      if (getOption("SCHEME") == "BARE")  _dR = 0.0;
-      _lepton=PID::ELECTRON;
-      if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
-      FinalState fs;
-      WFinder wfinder(fs, Cuts::abseta < 3.5 && Cuts::pT > 25*GeV, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
-      declare(wfinder, "WFinder");
-      FastJets jetpro(wfinder.remainingFinalState(), JetAlg::ANTIKT, 0.4);
-      declare(jetpro, "Jets");
+      // Use analysis options
+      _dR = (getOption("SCHEME") == "BARE") ? 0.0 : 0.1;
+      _lepton = (getOption("LMODE") == "MU") ? PID::MUON : PID::ELECTRON;
+      const double ETACUT = getOption<double>("ABSETALMAX", 3.5);
+      const double PTCUT = getOption<double>("PTLMIN", 25.);
+      const Cut cut = Cuts::abseta < ETACUT && Cuts::pT > PTCUT*GeV;
+
+      declare("MET", MissingMomentum());
+      LeptonFinder lf(_dR, cut && Cuts::abspid == _lepton);
+      declare(lf, "Leptons");
+      VetoedFinalState vfs;
+      vfs.addVetoOnThisFinalState(lf);
+      FastJets fj(vfs, JetAlg::ANTIKT, 0.4);
+      declare(fj, "Jets");
 
       const double sqrts = sqrtS() ? sqrtS() : 14*TeV;
       book(_h["gap_inc"], "N_gapjets_inclusive", 8, -0.5, 7.5);
@@ -62,14 +71,21 @@ namespace Rivet {
 
 
     /// Do the analysis
-    void analyze(const Event & e) {
-      MSG_TRACE("MC_WVBF: running WFinder");
-      const WFinder& wfinder = apply<WFinder>(e, "WFinder");
-      if (wfinder.bosons().size() != 1) vetoEvent;
-      const FourMomentum& wmom = wfinder.bosons()[0].momentum();
-      MSG_TRACE("MC_WVBF: have exactly one Z boson candidate");
+    void analyze(const Event& event) {
+      
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
 
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::absrap < 5 && Cuts::pT > 30*GeV);
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+      const int ifound = closestMatchIndex(ls, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+
+      if (ifound < 0) vetoEvent;      
+      const Particle& l = ls[ifound];
+      const FourMomentum& wmom = l.momentum() + pmiss;
+
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::absrap < 5 && Cuts::pT > 30*GeV);
       if (jets.size() < 2) {
         MSG_TRACE("MC_WVBF: does not have at least two valid jets");
         vetoEvent;
@@ -83,7 +99,7 @@ namespace Rivet {
         vetoEvent;
       }
 
-      // jet kinematics
+      // Jet kinematics
       for (size_t i = 0; i < min(4u, jets.size()); ++i) {
         const string pTname  = "jet_pT_"  + to_str(i+1);
         const string etaname = "jet_eta_" + to_str(i+1);
@@ -141,9 +157,10 @@ namespace Rivet {
       efficiency(_h["mjj"], _h["jve_mjj"], _s["jve_mjj"]);
     }
 
-    //@}
+    /// @}
 
-    // check if jet is between tagging jets
+    
+    // Check if jet is between tagging jets
     bool isBetween(const Jet &probe, const Jet &boundary1, const Jet &boundary2) {
       double y_p = probe.rapidity();
       double y_b1 = boundary1.rapidity();
@@ -162,21 +179,24 @@ namespace Rivet {
       return mapAngleMPiToPi(dphijj)/M_PI;
     }
 
+    
   private:
 
     /// @name Parameters for specialised e/mu and dressed/bare subclassing
-    //@{
+    /// @{
     double _dR;
     PdgId _lepton;
-    //@}
+    /// @}
 
     /// @name Histograms
-    //@{
+    /// @{
     map<string,Histo1DPtr> _h;
     map<string,Estimate1DPtr> _s;
-    //@}
+    /// @}
 
   };
 
+  
   RIVET_DECLARE_PLUGIN(MC_WVBF);
+
 }

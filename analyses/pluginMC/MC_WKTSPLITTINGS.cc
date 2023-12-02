@@ -1,11 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetSplittings.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/VetoedFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
-
-
 
 
   /// @brief MC validation analysis for kt splitting scales in W + jets events
@@ -23,40 +24,41 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-		  _dR=0.2;
-      if (getOption("SCHEME") == "BARE")  _dR = 0.0;
-		  _lepton=PID::ELECTRON;
-      if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
-      // set FS cuts from input options
-      const double etacut = getOption<double>("ABSETALMAX", 3.5);
-      const double ptcut = getOption<double>("PTLMIN", 25.);
+      // Use analysis options
+      _dR = (getOption("SCHEME") == "BARE") ? 0.0 : 0.2;
+      _lepton = (getOption("LMODE") == "MU") ? PID::MUON : PID::ELECTRON;
+      const double ETACUT = getOption<double>("ABSETALMAX", 3.5);
+      const double PTCUT = getOption<double>("PTLMIN", 25.);
+      const Cut cut = Cuts::abseta < ETACUT && Cuts::pT > PTCUT*GeV;
 
-      Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
-      
-      FinalState fs;
-      WFinder wfinder(fs, cut, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
-      declare(wfinder, "WFinder");
+      // Define projections
+      LeptonFinder lf(_dR, cut && Cuts::abspid == _lepton);
+      declare(lf, "Leptons");
 
-      // set clustering radius from input option
+      VetoedFinalState jetinput;
+      jetinput.vetoFinalState(lf);
       const double R = getOption<double>("R", 0.6);
-      
-      FastJets jetpro(wfinder.remainingFinalState(), JetAlg::KT, R);
-      declare(jetpro, "Jets");
+      FastJets fj(jetinput, JetAlg::KT, R);
+      declare(fj, "Jets");
 
       MC_JetSplittings::init();
     }
 
 
     /// Do the analysis
-    void analyze(const Event & e) {
+    void analyze(const Event& event) {
 
-      const WFinder& wfinder = apply<WFinder>(e, "WFinder");
-      if (wfinder.bosons().size() != 1) {
-        vetoEvent;
-      }
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
 
-      MC_JetSplittings::analyze(e);
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+      const int ifound = closestMassIndex(ls, pmiss, 80.4*GeV, 60*GeV, 100*GeV);
+      if (ifound < 0) vetoEvent;
+
+      MC_JetSplittings::analyze(event);
     }
 
 
@@ -75,10 +77,9 @@ namespace Rivet {
     PdgId _lepton;
     /// @}
 
-
   };
 
-  // The hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(MC_WKTSPLITTINGS);
 
 }

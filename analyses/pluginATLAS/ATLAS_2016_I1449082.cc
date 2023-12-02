@@ -57,9 +57,9 @@ namespace Rivet {
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
       // Electron dressing
-      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(electrons, photons, 0.1, lep_cuts);
       declare(dressedelectrons, "dressedelectrons");
-      LeptonFinder dressedelectrons_full(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons_full(electrons, photons, 0.1, eta_full);
 
       // Muon projections
       // ---------------------
@@ -67,9 +67,9 @@ namespace Rivet {
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
       // Muon dressing
-      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(muons, photons, 0.1, lep_cuts);
       declare(dressedmuons, "dressedmuons");
-      LeptonFinder dressedmuons_full(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons_full(muons, photons, 0.1, eta_full);
 
       // Neutrino projections
       // ---------------------

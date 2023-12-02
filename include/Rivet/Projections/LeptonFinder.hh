@@ -4,6 +4,7 @@
 
 #include "Rivet/DressedLepton.hh"
 #include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Config/RivetCommon.hh"
 
@@ -39,9 +40,73 @@ namespace Rivet {
     /// by a jet clustering algorithm.  Set the clustering radius to 0 or
     /// negative to disable clustering.
     LeptonFinder(const FinalState& allfs,
-		 double dRmax, const Cut& cut=Cuts::OPEN,
+                 double dRdress,
+                 const Cut& cut=Cuts::OPEN,
+		 DressingType dressing=DressingType::CONE)
+      : LeptonFinder(allfs, allfs, dRdress, cut, dressing)
+    {     }
+
+
+    /// @brief Constructor with a single input FinalState and default dR
+    ///
+    /// Provide a single final state projection used to select the
+    /// photons and bare leptons, an optional photon-clustering
+    /// delta(R) cone size around each bare lepton, and an optional
+    /// cut on the _dressed_ leptons (i.e. the momenta and PID after
+    /// clustering).  The final arguments control whether non-prompt
+    /// photons are to be included, and whether the matching of
+    /// photons to leptons is to be done via dR matching to the bare
+    /// lepton or by a jet clustering algorithm.  Set the clustering
+    /// radius to 0 or negative to disable clustering.
+    LeptonFinder(const FinalState& allfs,
+		 const Cut& cut,
+                 double dRdress,
+		 DressingType dressing=DressingType::CONE)
+      : LeptonFinder(allfs, dRdress, cut, dressing)
+    {   }
+
+
+    /// @brief Constructor with default input FinalState and deltaR
+    ///
+    /// Dressed lepton construction from a default FinalState and optional deltaR cone.
+    /// Provide a photon-clustering delta(R) cone size around each bare lepton,
+    /// and an optional cut on the _dressed_ leptons (i.e. the momenta and PID
+    /// after clustering).  The final arguments control whether non-prompt
+    /// photons are to be included, and whether the matching of photons to
+    /// leptons is to be done via dR matching to the bare lepton or by a jet
+    /// clustering algorithm.  Set the clustering radius to 0 or negative to
+    /// disable clustering.
+    LeptonFinder(const Cut& cut,
+		 double dRdress,
+		 LeptonOrigin whichleptons=LeptonOrigin::NODECAY,
 		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
-		 DressingType dressing=DressingType::CONE);
+                 TauDecaysAs tauDecays=TauDecaysAs::PROMPT,
+                 MuDecaysAs muDecays=MuDecaysAs::PROMPT,
+		 DressingType dressing=DressingType::CONE)
+      : LeptonFinder(dRdress, cut, whichleptons, whichphotons, tauDecays, muDecays, dressing)
+    {   }
+
+
+    /// @brief Constructor with default input FinalState and deltaR
+    ///
+    /// Dressed lepton construction from a default FinalState and optional deltaR cone.
+    /// Provide a photon-clustering delta(R) cone size around each bare lepton,
+    /// and an optional cut on the _dressed_ leptons (i.e. the momenta and PID
+    /// after clustering).  The final arguments control whether non-prompt
+    /// photons are to be included, and whether the matching of photons to
+    /// leptons is to be done via dR matching to the bare lepton or by a jet
+    /// clustering algorithm.  Set the clustering radius to 0 or negative to
+    /// disable clustering.
+    LeptonFinder(const Cut& cut,
+		 double dRdress,
+		 DressingType dressing,
+		 LeptonOrigin whichleptons=LeptonOrigin::NODECAY,
+		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+                 TauDecaysAs tauDecays=TauDecaysAs::PROMPT,
+                 MuDecaysAs muDecays=MuDecaysAs::PROMPT)
+      : LeptonFinder(dRdress, cut, whichleptons, whichphotons, tauDecays, muDecays, dressing)
+    {   }
+
 
     /// @brief Constructor with default input FinalState
     ///
@@ -53,11 +118,33 @@ namespace Rivet {
     /// leptons is to be done via dR matching to the bare lepton or by a jet
     /// clustering algorithm.  Set the clustering radius to 0 or negative to
     /// disable clustering.
-    LeptonFinder(double dRmax, const Cut& cut=Cuts::OPEN,
+    LeptonFinder(double dRdress, const Cut& cut=Cuts::OPEN,
+		 LeptonOrigin whichleptons=LeptonOrigin::NODECAY,
 		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
-		 DressingType dressing=DressingType::CONE)
-      : LeptonFinder(FinalState(), dRmax, cut, whichphotons, dressing)
+                 TauDecaysAs tauDecays=TauDecaysAs::PROMPT,
+                 MuDecaysAs muDecays=MuDecaysAs::PROMPT,
+		 DressingType dressing=DressingType::CONE);
+
+
+    /// @brief Constructor with default input FinalState
+    ///
+    /// DressedLepton construction from a default-constructed FinalState.
+    /// Provide a photon-clustering delta(R) cone size around each bare lepton,
+    /// and an optional cut on the _dressed_ leptons (i.e. the momenta and PID
+    /// after clustering).  The final arguments control whether non-prompt
+    /// photons are to be included, and whether the matching of photons to
+    /// leptons is to be done via dR matching to the bare lepton or by a jet
+    /// clustering algorithm.  Set the clustering radius to 0 or negative to
+    /// disable clustering.
+    LeptonFinder(double dRdress, const Cut& cut,
+		 DressingType dressing,
+		 LeptonOrigin whichleptons=LeptonOrigin::NODECAY,
+		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+                 TauDecaysAs tauDecays=TauDecaysAs::PROMPT,
+                 MuDecaysAs muDecays=MuDecaysAs::PROMPT)
+      : LeptonFinder(dRdress, cut, whichleptons, whichphotons, tauDecays, muDecays, dressing)
     {   }
+
 
     /// @brief Constructor with distinct photon and lepton finders
     ///
@@ -70,16 +157,38 @@ namespace Rivet {
     /// algorithm.  Set the clustering radius to 0 or negative to disable
     /// clustering.
     ///
-    /// @note Wish we had put the first two args the other way around... not reversible!
+    /// @note The first two args were swapped in version 3.2.0!
     ///
-    /// @todo Convert the second arg to a general ParticleFinder rather than an FS, to
+    /// @todo Convert the "bare" arg to a general ParticleFinder rather than an FS, to
     /// allow clustering of unstables, e.g. taus via TauFinder when that becomes a PF.
     /// Complicated by the clustering version relying on MergedFinalState and FastJets'
     /// current restriction to FinalState inputs. Requires widespread redesign.
-    LeptonFinder(const FinalState& photons, const FinalState& bareleptons,
-		 double dRmax, const Cut& cut=Cuts::OPEN,
-		 PhotonOrigin whichphotons=PhotonOrigin::NODECAY,
+    LeptonFinder(const FinalState& leptonfs, const FinalState& photonfs,
+		 double dRdress, const Cut& cut=Cuts::OPEN,
 		 DressingType dressing=DressingType::CONE);
+
+
+    /// @brief Constructor with distinct photon and lepton finders
+    ///
+    /// Provide final state projections used to select the photons and bare
+    /// leptons, an optional clustering delta(R) cone size around each bare lepton, and an
+    /// optional cut on the _dressed_ leptons (i.e. the momenta and PID after
+    /// clustering.)  The final arguments control whether non-prompt photons are
+    /// to be included, and whether the matching of photons to leptons is to be
+    /// done via dR matching to the bare lepton or by a jet clustering
+    /// algorithm.  Set the clustering radius to 0 or negative to disable
+    /// clustering.
+    ///
+    /// @note The first two args were swapped in version 3.2.0!
+    ///
+    /// @todo Convert the "bare" arg to a general ParticleFinder rather than an FS, to
+    /// allow clustering of unstables, e.g. taus via TauFinder when that becomes a PF.
+    /// Complicated by the clustering version relying on MergedFinalState and FastJets'
+    /// current restriction to FinalState inputs. Requires widespread redesign.
+    LeptonFinder(const FinalState& leptonfs, const FinalState& photonfs,
+		 const Cut& cut, double dRdress, DressingType dressing=DressingType::CONE)
+      : LeptonFinder(leptonfs, photonfs, dRdress, cut, dressing)
+    {   }
 
 
     /// Clone this projection
@@ -122,17 +231,12 @@ namespace Rivet {
   protected:
 
     /// Maximum cone radius to find photons in
-    double _dRmax;
+    double _dRdress;
 
-    /// Whether to include photons from hadron (particularly pi0) and hadronic tau decays
-    bool _fromDecay;
-
-    /// Whether to use a jet clustering algorithm rather than nearest-lepton association
-    bool _useJetClustering;
-
+    /// Whether to use a cone, a clustering algorithm or other
+    DressingType _dressMode;
 
   };
-
 
 
 }

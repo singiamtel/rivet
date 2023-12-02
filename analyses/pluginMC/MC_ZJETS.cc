@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetAnalysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -30,11 +30,9 @@ namespace Rivet {
       const double etacut = getOption<double>("ABSETALMAX", 3.5);
       const double ptcut = getOption<double>("PTLMIN", 25.);
 
-      FinalState fs;
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
-
-      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, _dR, cut && Cuts::abspid == _lepton, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder, "DileptonFinder");
 
       // set ptcut from input option
       const double jetptcut = getOption<double>("PTJMIN", 20.0);
@@ -47,14 +45,14 @@ namespace Rivet {
       JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
       if ( algoopt == "KT" ) {
-	clusterAlgo = JetAlg::KT;
+        clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = JetAlg::CA;
+        clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = JetAlg::ANTIKT;
+        clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
-	clusterAlgo = JetAlg::ANTIKT;
+        MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+        clusterAlgo = JetAlg::ANTIKT;
       }
 
       FastJets jetpro(zfinder.remainingFinalState(), clusterAlgo, R);
@@ -70,8 +68,8 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & e) {
-      MSG_TRACE("MC_ZJETS: running ZFinder");
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      MSG_TRACE("MC_ZJETS: running DileptonFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
       const FourMomentum& zmom = zfinder.bosons()[0].momentum();
       MSG_TRACE("MC_ZJETS: have exactly one Z boson candidate");

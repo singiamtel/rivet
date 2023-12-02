@@ -1,13 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/HeavyHadrons.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
-
 
 
   /// Electroweak Wjj production at 8 TeV
@@ -29,15 +28,14 @@ namespace Rivet {
       if ( getOption("LMODE") == "EL" ) _mode = 1;
       if ( getOption("LMODE") == "MU" ) _mode = 2;
 
-      FinalState fs;
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
+      DileptonFinder zfinder(91.2*GeV, 0.1, cuts && Cuts::abspid == (_mode == 1 ? PID::ELECTRON : PID::MUON),
+                             Cuts::massIn(76.0*GeV, 106.0*GeV),
+                             LeptonOrigin::ALL, PhotonOrigin::NODECAY);
+      declare(zfinder, "DileptonFinder");
 
-      ZFinder zfinder(fs, cuts, _mode==1? PID::ELECTRON : PID::MUON, 76.0*GeV, 106.0*GeV, 0.1,
-                      LeptonOrigin::ALL, PhotonOrigin::NODECAY);
-      declare(zfinder, "ZFinder");
-
-      VetoedFinalState jet_fs(fs);
-      jet_fs.addVetoOnThisFinalState(getProjection<ZFinder>("ZFinder"));
+      VetoedFinalState jet_fs;
+      jet_fs.addVetoOnThisFinalState(getProjection<DileptonFinder>("DileptonFinder"));
       FastJets jetpro1(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jetpro1, "AntiKtJets04");
       declare(HeavyHadrons(), "BHadrons");
@@ -62,7 +60,7 @@ namespace Rivet {
     void analyze(const Event& e) {
 
       // Check we have a Z:
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
 
       const Particles boson_s =  zfinder.bosons();

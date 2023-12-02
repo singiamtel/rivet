@@ -65,7 +65,7 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
 
       // NB. useDecayPhotons=true allows for photons with tau ancestor; photons from hadrons are vetoed by the PromptFinalState;
-      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut, PhotonOrigin::ALL);
+      LeptonFinder dressed_leptons(prompt_leptons, prompt_photons, 0.1, lepton_cut);
       declare(dressed_leptons, "LeptonFinder");
 
       // Projection for jets

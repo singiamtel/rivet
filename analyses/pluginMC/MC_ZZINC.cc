@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
@@ -11,9 +11,7 @@ namespace Rivet {
   public:
 
     /// Default constructor
-    MC_ZZINC()
-      : Analysis("MC_ZZINC")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(MC_ZZINC);
 
 
     /// @name Analysis methods
@@ -24,10 +22,9 @@ namespace Rivet {
       // set FS cuts from input options
       const double etaecut = getOption<double>("ABSETAEMAX", 3.5);
       const double ptecut = getOption<double>("PTEMIN", 25.);
-
-      Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
-
-      ZFinder zeefinder(FinalState(), cute, PID::ELECTRON, 65*GeV, 115*GeV, 0.2);
+      Cut cut_e = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
+      DileptonFinder zeefinder(91.2*GeV, 0.2, cut_e && Cuts::abspid == PID::ELECTRON,
+                               Cuts::massIn(65*GeV, 115*GeV));
       declare(zeefinder, "ZeeFinder");
 
       VetoedFinalState zmminput;
@@ -36,10 +33,9 @@ namespace Rivet {
       // set FS cuts from input options
       const double etamucut = getOption<double>("ABSETAMUMAX", 3.5);
       const double ptmucut = getOption<double>("PTMUMIN", 25.);
-
-      Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
-
-      ZFinder zmmfinder(zmminput, cutmu, PID::MUON, 65*GeV, 115*GeV, 0.2);
+      Cut cut_mu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
+      DileptonFinder zmmfinder(PromptFinalState(zmminput), 91.2*GeV, 0.2, cut_mu &&
+                               Cuts::abspid == PID::MUON, Cuts::massIn(65*GeV, 115*GeV));
       declare(zmmfinder, "ZmmFinder");
 
       // Properties of the pair momentum
@@ -77,9 +73,9 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& e) {
-      const ZFinder& zeefinder = apply<ZFinder>(e, "ZeeFinder");
+      const DileptonFinder& zeefinder = apply<DileptonFinder>(e, "ZeeFinder");
       if (zeefinder.bosons().size() != 1) vetoEvent;
-      const ZFinder& zmmfinder = apply<ZFinder>(e, "ZmmFinder");
+      const DileptonFinder& zmmfinder = apply<DileptonFinder>(e, "ZmmFinder");
       if (zmmfinder.bosons().size() != 1) vetoEvent;
 
       // Z momenta

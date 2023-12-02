@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -23,11 +23,9 @@ namespace Rivet {
     void init() {
 
       // Projections
-      const FinalState fs;
-      declare(fs, "FS");
-      Cut cut = Cuts::etaIn(-10.,10.);
-      ZFinder zfinder(fs, cut, PID::MUON, 4.0*GeV, 100.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NONE);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.0, Cuts::abseta < 10. && Cuts::abspid == PID::MUON,
+                                       Cuts::massIn(4.0*GeV, 100.0*GeV));
+      declare(zfinder, "DileptonFinder");
 
       // Booking histograms
       // hydrogen d01-d16
@@ -54,7 +52,7 @@ namespace Rivet {
       }
 
       // Muons
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.particles().size() <= 0) vetoEvent;
 
       double Zmass = zfinder.bosons()[0].momentum().mass()/GeV;

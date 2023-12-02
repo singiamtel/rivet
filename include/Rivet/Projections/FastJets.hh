@@ -23,14 +23,14 @@
 
 namespace Rivet {
 
-  
+
   /// Find jets using jet algorithms via the FastJet package
   class FastJets : public JetFinder {
   public:
 
     using JetFinder::operator =;
 
-    
+
     /// @name Constructors etc.
     /// @{
 

@@ -5,12 +5,12 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
 
-  /// @brief Ratios of cross sections in the associated production of a Z boson with at least one charm or bottom quark jet are measured in proton-proton collisions at 13 TeV
+  /// @brief Ratios of cross-sections in Z + >= 1 c- or b-jet at 13 TeV
   class CMS_2020_I1776758 : public Analysis {
   public:
 
@@ -27,15 +27,15 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      FinalState fs; ///< @todo No cuts?
-      VisibleFinalState visfs(fs);
-
-      ZFinder zeeFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 25*GeV, PID::ELECTRON, 71.0*GeV, 111.0*GeV, 0.1 );
+      DileptonFinder zeeFinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 25*GeV &&
+                               Cuts::abspid == PID::ELECTRON, Cuts::massIn(71*GeV, 111*GeV));
       declare(zeeFinder, "ZeeFinder");
 
-      ZFinder zmumuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 25*GeV, PID::MUON, 71.0*GeV, 111.0*GeV, 0.1 );
+      DileptonFinder zmumuFinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 25*GeV &&
+                                 Cuts::abspid == PID::MUON, Cuts::massIn(71*GeV, 111*GeV));
       declare(zmumuFinder, "ZmumuFinder");
 
+      VisibleFinalState visfs;
       VetoedFinalState jetConstits(visfs);
       jetConstits.addVetoOnThisFinalState(zeeFinder);
       jetConstits.addVetoOnThisFinalState(zmumuFinder);
@@ -68,8 +68,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zeeFS = apply<ZFinder>(event, "ZeeFinder");
-      const ZFinder& zmumuFS = apply<ZFinder>(event, "ZmumuFinder");
+      const DileptonFinder& zeeFS = apply<DileptonFinder>(event, "ZeeFinder");
+      const DileptonFinder& zmumuFS = apply<DileptonFinder>(event, "ZmumuFinder");
 
       const Particles& zees = zeeFS.bosons();
       const Particles& zmumus = zmumuFS.bosons();

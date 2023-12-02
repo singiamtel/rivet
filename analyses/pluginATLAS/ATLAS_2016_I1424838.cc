@@ -1,7 +1,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/Beam.hh"
 #include "Rivet/Projections/Thrust.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FParameter.hh"
 #include "Rivet/Projections/Spherocity.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
@@ -25,11 +25,11 @@ namespace Rivet {
       const ChargedFinalState cfs(Cuts::abseta < 2.5 && Cuts::pT > 500*MeV);
       declare(cfs, "CFS");
 
-      // ZFinders
-      ZFinder zfinder(cfs, Cuts::abseta<2.4 && Cuts::pT>20.0*GeV, PID::ELECTRON, 66*GeV, 116*GeV, 0.1);
-      declare(zfinder, "ZFinder");
-      ZFinder zfinder_mu(cfs, Cuts::abseta<2.4 && Cuts::pT>20.0*GeV, PID::MUON, 66*GeV, 116*GeV, 0.1);
-      declare(zfinder_mu, "ZFinderMu");
+      // Dilepton finders
+      DileptonFinder zfinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20.0*GeV && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder, "DileptonFinder");
+      DileptonFinder zfinder_mu(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20.0*GeV && Cuts::abspid == PID::MUON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder_mu, "DileptonFinderMu");
 
       // This CFS only contains charged particles inside the acceptance excluding the leptons
       VetoedFinalState remfs(cfs);
@@ -68,11 +68,11 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Check for Z boson in event
-      const ZFinder& zfinder    = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder    = apply<DileptonFinder>(event, "DileptonFinder");
       MSG_DEBUG("Num e+ e- pairs found = " << zfinder.bosons().size());
       const bool isElec = zfinder.bosons().size() == 1;
 
-      const ZFinder& zfinder_mu = apply<ZFinder>(event, "ZFinderMu");
+      const DileptonFinder& zfinder_mu = apply<DileptonFinder>(event, "DileptonFinderMu");
       MSG_DEBUG("Num mu+ mu- pairs found = " << zfinder_mu.bosons().size());
       const bool isMuon = zfinder_mu.bosons().size() == 1;
 

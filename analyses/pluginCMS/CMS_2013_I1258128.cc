@@ -1,7 +1,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/Thrust.hh"
 #include "Rivet/Projections/LeadingParticlesFinalState.hh"
 
@@ -17,24 +17,21 @@ namespace Rivet {
 
 
     void init() {
-      // Full final state
-      const FinalState fs(Cuts::abseta < 5);
-      declare(fs, "FS");
 
       // Z finders for electrons and muons
       Cut cuts = Cuts::abseta < 2.1 && Cuts::pT > 20*GeV;
-      const ZFinder zfe(fs, cuts, PID::ELECTRON, 76*GeV, 106*GeV);
-      const ZFinder zfm(fs, cuts, PID::MUON, 76*GeV, 106*GeV);
+      const DileptonFinder zfe(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(76*GeV, 106*GeV));
+      const DileptonFinder zfm(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::MUON, Cuts::massIn(76*GeV, 106*GeV));
       declare(zfe, "ZFE");
       declare(zfm, "ZFM");
 
       // Try to get the leading photon
-      LeadingParticlesFinalState photonfs(FinalState((Cuts::etaIn(-2.5, 2.5) && Cuts::pT >=  40.0*GeV)));
+      LeadingParticlesFinalState photonfs(FinalState(Cuts::abseta < 2.5 && Cuts::pT > 40*GeV));
       photonfs.addParticleId(PID::PHOTON);
       declare(photonfs, "LeadingPhoton");
 
       // Jets
-      const FastJets jets(fs, JetAlg::ANTIKT, 0.5);
+      const FastJets jets(FinalState(Cuts::abseta < 5), JetAlg::ANTIKT, 0.5);
       declare(jets, "JETS");
 
       // Histograms
@@ -51,8 +48,8 @@ namespace Rivet {
 
     void makeZCut(const Event& event) {
       // Apply the Z finders and veto if no Z found
-      const ZFinder& zfe = apply<ZFinder>(event, "ZFE");
-      const ZFinder& zfm = apply<ZFinder>(event, "ZFM");
+      const DileptonFinder& zfe = apply<DileptonFinder>(event, "ZFE");
+      const DileptonFinder& zfm = apply<DileptonFinder>(event, "ZFM");
       if (zfe.empty() && zfm.empty()) vetoEvent;
 
       // Choose the Z candidate

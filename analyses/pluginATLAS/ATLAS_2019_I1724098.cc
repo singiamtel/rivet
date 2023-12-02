@@ -43,9 +43,9 @@ namespace Rivet {
 
       // Muons must have |eta| < 2.5
       Cut eta_ranges = Cuts::abseta < 2.5;
-      LeptonFinder dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 30*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressed_mu(bare_mu, photons, 0.1, eta_ranges && Cuts::pT > 30*GeV);
       declare(dressed_mu, "muons");
-      LeptonFinder dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressed_el(bare_el, photons, 0.1, eta_ranges && Cuts::pT > 25*GeV);
       declare(dressed_el, "electrons");
 
       FastJets fj(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);

@@ -43,11 +43,11 @@ namespace Rivet {
       IdentifiedFinalState bare_elecs_fs(promptFs);
       bare_elecs_fs.acceptIdPair(PID::ELECTRON);
 
-      Cut lep_cuts = (Cuts::abseta < 2.5) & (Cuts::pT > 1*MeV);
-      LeptonFinder muons(Photon, bare_muons_fs, 0.1, lep_cuts);
+      Cut lep_cuts = (Cuts::abseta < 2.5) && (Cuts::pT > 1*MeV);
+      LeptonFinder muons(bare_muons_fs, Photon, 0.1, lep_cuts);
       declare(muons, "MUONS");
 
-      LeptonFinder elecs(Photon, bare_elecs_fs, 0.1, lep_cuts);
+      LeptonFinder elecs(bare_elecs_fs, Photon, 0.1, lep_cuts);
       declare(elecs, "ELECS");
 
       VetoedFinalState vfs;

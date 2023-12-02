@@ -8,7 +8,7 @@
 
 namespace Rivet {
 
-  
+
   /// M4l lineshape analysis
   class ATLAS_2021_I1849535 : public Analysis {
   public:
@@ -32,7 +32,7 @@ namespace Rivet {
         // Final state including all charged particles
         declare(ChargedFinalState(), "CFS");
 
-        LeptonFinder dressed_elecs(photons, elecs, 0.1, el_fid_sel, PhotonOrigin::NODECAY);
+        LeptonFinder dressed_elecs(elecs, photons, 0.1, el_fid_sel);
         declare(dressed_elecs, "elecs");
         declare(muons, "muons");
 
@@ -101,6 +101,7 @@ namespace Rivet {
 
       }
 
+
       /// Generic dilepton candidate
       struct Dilepton : public ParticlePair {
         Dilepton() { }
@@ -114,6 +115,7 @@ namespace Rivet {
         double pTl1() const { return first.pT(); }
         double pTl2() const { return second.pT(); }
       };
+
 
       struct Quadruplet {
         Quadruplet (Dilepton z1, Dilepton z2): _z1(z1), _z2(z2) { }
@@ -130,6 +132,8 @@ namespace Rivet {
           else  return FlavCombi::undefined;
         }
       };
+
+
       bool passesTruthIsolation(Quadruplet quad, const Particles charged_tracks, Particles& truthLeptons ){
         bool pass =true;
         Particles leps;
@@ -155,18 +159,18 @@ namespace Rivet {
         return pass;
       }
 
-      std::vector<Quadruplet> getBestQuads(Particles& particles, bool drcut = true) {
+      vector<Quadruplet> getBestQuads(Particles& particles, bool drcut = true) {
         // H->ZZ->4l pairing
         // - Two same flavor opposite charged leptons
         // - Ambiguities in pairing are resolved by choosing the combination
         //     that results in the smaller value of |mll - mZ| for each pair successively
-        std::vector<Quadruplet> quads {};
+        vector<Quadruplet> quads {};
 
         size_t n_parts = particles.size();
         if (n_parts < 4)  return quads;
 
         // STEP 1: find SFOS pairs
-        std::vector<Dilepton> SFOS;
+        vector<Dilepton> SFOS;
         for (size_t i = 0; i < n_parts; ++i) {
           for (size_t j = 0; j < i; ++j) {
             if (particles[i].pid() == -particles[j].pid()) {
@@ -183,8 +187,8 @@ namespace Rivet {
 
         // now we sort the SFOS pairs
         std::sort(SFOS.begin(), SFOS.end(), [](const Dilepton& p1, const Dilepton& p2) {
-            return fabs(p1.mom().mass() - Z_mass) < fabs(p2.mom().mass() - Z_mass);
-            });
+	  return fabs(p1.mom().mass() - Z_mass) < fabs(p2.mom().mass() - Z_mass);
+	});
 
         //form all possible quadruplets, passing the pt cuts, the dR cuts and the mll cuts
         for (size_t k = 0; k < SFOS.size(); ++k) {
@@ -210,6 +214,7 @@ namespace Rivet {
         return quads;
       }
 
+
       bool passPtLeptons(const Particles& particles) {
         size_t n_parts = particles.size();
         if (n_parts < 4)  return false;
@@ -221,20 +226,12 @@ namespace Rivet {
       // Do the analysis
       void analyze(const Event& event) {
 
-        const Particles charged_tracks    = apply<ChargedFinalState>(event, "CFS").particles();
+        const Particles charged_tracks = apply<ChargedFinalState>(event, "CFS").particles();
 
-
-        //preselection of leptons for ZZ-> llll final state
-        Particles dressed_leptons;
-        for (auto lep : apply<FinalState>(event, "muons").particles()) { dressed_leptons.push_back(lep); }
-        for (auto lep : apply<LeptonFinder>(event, "elecs").dressedLeptons()) { dressed_leptons.push_back(lep); }
-
-
-
-        // sort to put highest pT first
-        std::sort(dressed_leptons.begin(), dressed_leptons.end(), [](const Particle& l1, const Particle& l2) {
-            return l1.pt() > l2.pt();
-            });
+        // Preselection of leptons for ZZ-> llll final state
+        Particles dressed_leptons = apply<ParticleFinder>(event, "muons").particlesByPt() +
+                                    apply<ParticleFinder>(event, "elecs").particlesByPt();
+        isortByPt(dressed_leptons);
 
         auto foundDressedNoDrll = getBestQuads(dressed_leptons,false);
 
@@ -254,7 +251,7 @@ namespace Rivet {
         double ptZ1 = foundDressed[0].getZ1().mom().pT()/GeV;
         double ptZ2 = foundDressed[0].getZ2().mom().pT()/GeV;
         double dy_Z1Z2 = fabs(foundDressed[0].getZ1().mom().rapidity() - foundDressed[0].getZ2().mom().rapidity());
-        double dphi_Z1Z2 = deltaPhi(foundDressed[0].getZ1().mom(),foundDressed[0].getZ2().mom());
+        double dphi_Z1Z2 = deltaPhi(foundDressed[0].getZ1().mom(), foundDressed[0].getZ2().mom());
         double dphi_l1l2 = deltaPhi(dressed_leptons[0].mom(),dressed_leptons[1].mom());
 
         _h["m4l_paper"]->fill(m4l);
@@ -286,7 +283,7 @@ namespace Rivet {
         const LorentzTransform comboost = LorentzTransform::mkFrameTransformFromBeta(betacom);
         // Get four-momentum of the negative lepton w.r.t. the first lepton pair
         const FourMomentum p1com = comboost.transform(foundDressed.at(0).getZ1().first.mom());
-        float costhetastar1 = cos(p1com.p3().angle(unitboostvec));
+        double costhetastar1 = cos(p1com.p3().angle(unitboostvec));
 
         // Get four-momentum of the second lepton pair
         const FourMomentum pcom2 = foundDressed.at(0).getZ2().mom();
@@ -295,7 +292,7 @@ namespace Rivet {
         const LorentzTransform comboost2 = LorentzTransform::mkFrameTransformFromBeta(betacom2);
         // Get four-momentum of the negative lepton w.r.t. the second lepton pair
         const FourMomentum p2com = comboost2.transform(foundDressed.at(0).getZ2().first.mom());
-        float  costhetastar2 = cos(p2com.p3().angle(unitboostvec2));
+        double costhetastar2 = cos(p2com.p3().angle(unitboostvec2));
 
         //fill m4l binned variables
         if (60 < m4l && m4l < 100.) {
@@ -339,8 +336,8 @@ namespace Rivet {
           _h["dy_Z1Z2_offshell_paper"]->fill(dy_Z1Z2);
           _h["dphi_Z1Z2_offshell_paper"]->fill(dphi_Z1Z2);
           _h["dphi_l1l2_offshell_paper"]->fill(dphi_l1l2);
-          _h["costhetastar1_offshell_paper"]->fill(costhetastar1 );
-          _h["costhetastar2_offshell_paper"]->fill(costhetastar2 );
+          _h["costhetastar1_offshell_paper"]->fill(costhetastar1);
+          _h["costhetastar2_offshell_paper"]->fill(costhetastar2);
         }
 
       }//end analysis
@@ -348,7 +345,7 @@ namespace Rivet {
       /// Finalize
       void finalize() {
         const double sf = crossSection() / femtobarn / sumOfWeights();
-        for (auto hist : _h) { scale(hist.second, sf); }
+        scale(_h, sf);
       }
 
     private:

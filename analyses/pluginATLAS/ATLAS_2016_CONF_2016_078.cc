@@ -139,8 +139,8 @@ namespace Rivet {
       const size_t njets50 = jets50.size(), njets20 = jets20.size();
       if (jets50.size() < 2) vetoEvent;
       vector<double> jetpts20, jetpts50;
-      transform(jets20, jetpts20, pT);
-      transform(jets50, jetpts50, pT);
+      transform(jets20, jetpts20, Kin::pT);
+      transform(jets50, jetpts50, Kin::pT);
 
       // Construct multi-jet observables
       const double ht = sum(jetpts20, 0.0);

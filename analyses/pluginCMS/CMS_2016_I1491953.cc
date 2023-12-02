@@ -2,7 +2,8 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 
 namespace Rivet {
 
@@ -22,14 +23,13 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      FinalState fs;
-      WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON, 0*GeV, 1000000*GeV,
-                         0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
-      declare(wfinder_mu, "WFinder_mu");
+      LeptonFinder lf(0.1, Cuts::abseta < 2.4 && Cuts::abspid == PID::MUON);
+      declare(lf, "Muons");
+      declare(MissingMom(), "MET");
 
       // Define veto FS
       VetoedFinalState vfs;
-      vfs.addVetoOnThisFinalState(wfinder_mu);
+      vfs.addVetoOnThisFinalState(lf);
       vfs.addVetoPairId(PID::MUON);
       vfs.vetoNeutrinos();
 
@@ -102,16 +102,17 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const WFinder& wfinder_mu = apply<WFinder>(event, "WFinder_mu");
-      if (wfinder_mu.bosons().size() != 1) vetoEvent;
 
-      //const FourMomentum& lepton0 = wfinder_mu.leptons()[0].momentum();
-      //const FourMomentum& neutrino = wfinder_mu.neutrinos()[0].momentum();
-      //double WmT = sqrt( 2 * lepton0.pT() * neutrino.pT() * (1 - cos(deltaPhi(lepton0, neutrino))) );
+      // Identify the closest-matching l+MET to m == mW
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+      const Particles mus_mtfilt = select(mus, [&](const Particle& m){ return mT(m, pmiss) > 0*GeV; });
+      const int ifound = closestMatchIndex(mus_mtfilt, pmiss, Kin::mass, 80.4*GeV);
 
-      const FourMomentum& lepton0 = wfinder_mu.lepton().momentum();
-      double WmT = wfinder_mu.mT();
-
+      // Make cuts on the identified mT and lepton
+      if (ifound < 0) vetoEvent;
+      const FourMomentum& lepton0 = mus_mtfilt[ifound].momentum();
+      const double WmT = mT(pmiss, lepton0);
       if (WmT < 50.0*GeV) vetoEvent;
       if (lepton0.abseta() > 2.1 || lepton0.pT() < 25.0*GeV) vetoEvent;
 

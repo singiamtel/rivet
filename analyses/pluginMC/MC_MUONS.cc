@@ -25,7 +25,7 @@ namespace Rivet {
       } else if (!dressed) {
         declare(PromptFinalState(muons), "Muons");
       } else {
-        LeptonFinder dleps(FinalState(Cuts::abspid == PID::PHOTON), muons, 0.1);
+        LeptonFinder dleps(muons, FinalState(Cuts::abspid == PID::PHOTON), 0.1);
         declare(dleps, "Muons");
       }
 

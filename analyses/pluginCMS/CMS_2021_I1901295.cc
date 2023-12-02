@@ -10,7 +10,7 @@
 namespace Rivet {
 
 
-  /// @brief ttbar lepton+jets at 13 TeV
+  /// ttbar lepton+jets at 13 TeV
   class CMS_2021_I1901295 : public Analysis {
   public:
 
@@ -33,9 +33,7 @@ namespace Rivet {
       prompt_leptons.acceptMuonDecays(true);
       prompt_leptons.acceptTauDecays(true);
 
-      LeptonFinder dressed_leptons(all_photons, prompt_leptons, 0.1,
-                                     Cuts::abseta < 2.4 && Cuts::pT > 15. * GeV,
-                                     PhotonOrigin::ALL);
+      LeptonFinder dressed_leptons(prompt_leptons, all_photons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 15*GeV);
       declare(dressed_leptons, "MyLeptons");
 
       declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "JetsAK4");

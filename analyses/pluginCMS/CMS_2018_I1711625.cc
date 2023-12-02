@@ -32,7 +32,7 @@ namespace Rivet {
       // dressed leptons
       const FinalState photon_fs = FinalState(Cuts::abspid == PID::PHOTON);
 
-      const LeptonFinder mu_dressed(photon_fs, mu_pfs, 0.1, Cuts::open());
+      const LeptonFinder mu_dressed(mu_pfs, photon_fs, 0.1, Cuts::open());
       declare(mu_dressed, "DressedMuons");
 
       book(_h_massMuMu, 3, 1, 1); /// muon channel result in full-phase space @ dressed level

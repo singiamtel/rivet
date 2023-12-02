@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/HeavyHadrons.hh"
@@ -23,11 +23,10 @@ namespace Rivet {
       if ( getOption("LMODE") == "EL" ) _mode = 1;
       if ( getOption("LMODE") == "MU" ) _mode = 2;
 
-      const FinalState fs;
-      // Define fiducial cuts for the leptons in the ZFinder
+      // Define fiducial cuts for the leptons in the DileptonFinder
       Cut lepcuts = (Cuts::pT > 27*GeV) & (Cuts::abseta < 2.5);
-      ZFinder zfinderE(fs, lepcuts, PID::ELECTRON, 76*GeV, 106*GeV);
-      ZFinder zfinderM(fs, lepcuts, PID::MUON, 76*GeV, 106*GeV);
+      DileptonFinder zfinderE(91.2*GeV, 0.1, lepcuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(76*GeV, 106*GeV));
+      DileptonFinder zfinderM(91.2*GeV, 0.1, lepcuts && Cuts::abspid == PID::MUON, Cuts::massIn(76*GeV, 106*GeV));
       declare(zfinderE, "zfinderE");
       declare(zfinderM, "zfinderM");
       declare(HeavyHadrons(), "HFHadrons");
@@ -36,10 +35,10 @@ namespace Rivet {
       FinalState photons(Cuts::abspid == PID::PHOTON);
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(bare_mu, photons, 0.1, Cuts::abseta < 2.5);
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(bare_el, photons, 0.1, Cuts::abseta < 2.5);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
@@ -73,9 +72,9 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zfinderE = apply<ZFinder>(event, "zfinderE");
+      const DileptonFinder& zfinderE = apply<DileptonFinder>(event, "zfinderE");
       const Particles& els = zfinderE.constituents();
-      const ZFinder& zfinderM = apply<ZFinder>(event, "zfinderM");
+      const DileptonFinder& zfinderM = apply<DileptonFinder>(event, "zfinderM");
       const Particles& mus = zfinderM.constituents();
 
       // default is to run average of Z->ee and Z->mm

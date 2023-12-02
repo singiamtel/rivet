@@ -1,8 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Math/LorentzTrans.hh"
@@ -10,18 +12,12 @@
 namespace Rivet {
 
 
+  /// An MC analysis for studying the content of {W,Z} H(->bb) events
   class MC_VH2BB : public Analysis {
   public:
 
-    /// @name Constructors etc.
-    /// @{
-
     /// Constructor
-    MC_VH2BB()
-      : Analysis("MC_VH2BB")
-    {    }
-
-    /// @}
+    RIVET_DEFAULT_ANALYSIS_CTOR(MC_VH2BB);
 
 
     /// @name Analysis methods
@@ -30,21 +26,31 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      FinalState fs;
-      Cut cut = Cuts::abseta < 3.5 && Cuts::pT > 25*GeV;
-      ZFinder zeefinder(fs, cut, PID::ELECTRON, 65*GeV, 115*GeV, 0.2);
-      declare(zeefinder, "ZeeFinder");
-      ZFinder zmmfinder(fs, cut, PID::MUON, 65*GeV, 115*GeV, 0.2);
-      declare(zmmfinder, "ZmmFinder");
-      WFinder wefinder(fs, cut, PID::ELECTRON, 60*GeV, 100*GeV, 25*GeV, 0.2);
-      declare(wefinder, "WeFinder");
-      WFinder wmfinder(fs, cut, PID::MUON, 60*GeV, 100*GeV, 25*GeV, 0.2);
-      declare(wmfinder, "WmFinder");
+      _jetptcut = getOption<double>("PTJMIN", 30.0)*GeV;
 
-      declare(fs, "FinalState");
-      declare(FastJets(fs, JetAlg::ANTIKT, 0.4), "AntiKT04");
-      declare(FastJets(fs, JetAlg::ANTIKT, 0.5), "AntiKT05");
-      declare(FastJets(fs, JetAlg::ANTIKT, 0.6), "AntiKT06");
+      // Boson projections
+      Cut cut = Cuts::abseta < 3.5 && Cuts::pT > 25*GeV;
+      DileptonFinder zeefinder(91.2*GeV, 0.2, cut && Cuts::abspid == PID::ELECTRON, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zeefinder, "ZeeFinder");
+      DileptonFinder zmmfinder(91.2*GeV, 0.2, cut && Cuts::abspid == PID::MUON, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zmmfinder, "ZmmFinder");
+      //
+      LeptonFinder ef(cut && Cuts::abspid == PID::ELECTRON, 0.2);
+      declare(ef, "Elecs");
+      LeptonFinder mf(cut && Cuts::abspid == PID::MUON, 0.2);
+      declare(ef, "Muons");
+      declare(MissingMomentum(), "MET");
+
+      // Jet projections
+      VetoedFinalState jfs;
+      jfs
+      .addVetoOnThisFinalState(zeefinder)
+      .addVetoOnThisFinalState(zmmfinder)
+      .addVetoOnThisFinalState(ef)
+      .addVetoOnThisFinalState(mf);
+      declare(FastJets(jfs, JetAlg::ANTIKT, 0.4), "AntiKT04");
+      declare(FastJets(jfs, JetAlg::ANTIKT, 0.5), "AntiKT05");
+      declare(FastJets(jfs, JetAlg::ANTIKT, 0.6), "AntiKT06");
 
       /// Book histograms
       book(_h_jet_bb_Delta_eta ,"jet_bb_Delta_eta", 50, 0, 4);
@@ -84,17 +90,34 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double JETPTCUT = 30*GeV;
 
-      const ZFinder& zeefinder = apply<ZFinder>(event, "ZeeFinder");
-      const ZFinder& zmmfinder = apply<ZFinder>(event, "ZmmFinder");
-      const WFinder& wefinder = apply<WFinder>(event, "WeFinder");
-      const WFinder& wmfinder = apply<WFinder>(event, "WmFinder");
-      const Particles vectorBosons = zeefinder.bosons() + zmmfinder.bosons() + wefinder.bosons() + wmfinder.bosons();
-      _h_Z_multiplicity->fill(zeefinder.bosons().size() + zmmfinder.bosons().size());
-      _h_W_multiplicity->fill(wefinder.bosons().size() + wmfinder.bosons().size());
+      // Get vector bosons -- only one is expected
+      const DileptonFinder& zeefinder = apply<DileptonFinder>(event, "ZeeFinder");
+      const DileptonFinder& zmmfinder = apply<DileptonFinder>(event, "ZmmFinder");
+      Particles vectorBosons = zeefinder.bosons() + zmmfinder.bosons();
+      const int numZ = vectorBosons.size();
+      // Now the W's...
+      const P4& pmiss = apply<MissingMomentum>(event, "MET").missingMom();
+      if (pmiss.pT() > 25*GeV) {
+        const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+        const int iefound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+        if (iefound >= 0) {
+          const Particle we(PID::WBOSON * sign(es[iefound].charge()), es[iefound].mom() + pmiss);
+          vectorBosons.push_back(we);
+        }
+        //
+        const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+        const int imfound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+        if (imfound >= 0) {
+          const Particle wm(PID::WBOSON * sign(mus[imfound].charge()), mus[imfound].mom() + pmiss);
+          vectorBosons.push_back(wm);
+        }
+      }
+      const int numW = vectorBosons.size() - numZ;
+      _h_Z_multiplicity->fill(numZ);
+      _h_W_multiplicity->fill(numW);
 
-      const Jets jets = apply<FastJets>(event, "AntiKT04").jetsByPt(Cuts::pT > JETPTCUT);
+      const Jets jets = apply<FastJets>(event, "AntiKT04").jetsByPt(Cuts::pT > _jetptcut);
       _h_jet_multiplicity->fill(jets.size());
 
       // Identify the b-jets
@@ -107,7 +130,7 @@ namespace Rivet {
         _h_jet_phi->fill(jetPhi/2/M_PI);
         _h_jet_pT->fill(jetPt/GeV);
 
-        if (jet.bTagged() && jet.pT() > JETPTCUT) {
+        if (jet.bTagged() && jet.pT() > _jetptcut) {
           bjets.push_back(jet);
           _h_jet_b_jet_eta->fill(jetEta);
           _h_jet_b_jet_phi->fill(jetPhi/2/M_PI);
@@ -116,7 +139,7 @@ namespace Rivet {
       }
       _h_jet_b_jet_multiplicity->fill(bjets.size());
 
-      // Plot vector boson properties
+      // Plot vector-boson properties
       for (const Particle& v : vectorBosons) {
         _h_VB_phi->fill(v.phi()/2/M_PI);
         _h_VB_pT->fill(v.pT());
@@ -124,8 +147,8 @@ namespace Rivet {
         _h_VB_mass->fill(v.mass());
       }
 
-      // rest of analysis requires at least 1 b jets
-      if(bjets.empty()) vetoEvent;
+      // The rest of the analysis requires at least 1 b-jet
+      if (bjets.empty()) vetoEvent;
 
       // Construct Higgs candidates from pairs of b-jets
       for (size_t i = 0; i < bjets.size()-1; ++i) {
@@ -236,9 +259,11 @@ namespace Rivet {
 
   private:
 
+    // Jet pT cut
+    double _jetptcut = 20*GeV;
+
     /// @name Histograms
     /// @{
-
     Histo1DPtr _h_Z_multiplicity, _h_W_multiplicity;
     Histo1DPtr _h_jet_bb_Delta_eta, _h_jet_bb_Delta_phi, _h_jet_bb_Delta_pT, _h_jet_bb_Delta_R;
     Histo1DPtr _h_jet_b_jet_eta, _h_jet_b_jet_multiplicity, _h_jet_b_jet_phi, _h_jet_b_jet_pT;
@@ -247,14 +272,11 @@ namespace Rivet {
     Histo1DPtr _h_jet_VBbb_Delta_eta, _h_jet_VBbb_Delta_phi, _h_jet_VBbb_Delta_pT, _h_jet_VBbb_Delta_R;
     Histo1DPtr _h_VB_eta, _h_VB_mass, _h_VB_phi, _h_VB_pT;
     Histo1DPtr _h_jet_bVB_angle_Hframe, _h_jet_bb_angle_Hframe, _h_jet_bVB_cosangle_Hframe, _h_jet_bb_cosangle_Hframe;
-    //Histo1DPtr _h_jet_cuts_bb_deltaR_v_HpT;
-
     /// @}
 
   };
 
 
-  // This global object acts as a hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_VH2BB);
 
 }

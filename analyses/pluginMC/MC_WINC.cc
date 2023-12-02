@@ -1,9 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 
 namespace Rivet {
-
 
 
   /// @brief MC validation analysis for inclusive W events
@@ -13,27 +14,26 @@ namespace Rivet {
     /// Default constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(MC_WINC);
 
+
     /// @name Analysis methods
     /// @{
 
     /// Book histograms
     void init() {
-		  _dR=0.2;
-      if (getOption("SCHEME") == "BARE")  _dR = 0.0;
-		  _lepton=PID::ELECTRON;
-      if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
-      // set FS cuts from input options
-      const double etacut = getOption<double>("ABSETALMAX", 3.5);
-      const double ptcut = getOption<double>("PTLMIN", 25.);
-      
-      FinalState fs;
-      Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+      // Use analysis options
+      _dR = (getOption("SCHEME") == "BARE") ? 0.0 : 0.2;
+      _lepton = (getOption("LMODE") == "MU") ? PID::MUON : PID::ELECTRON;
+      const double ETACUT = getOption<double>("ABSETALMAX", 3.5);
+      const double PTCUT = getOption<double>("PTLMIN", 25.);
+      const Cut cut = Cuts::abseta < ETACUT && Cuts::pT > PTCUT*GeV;
 
-      WFinder wfinder(fs, cut, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
-      declare(wfinder, "WFinder");
+      // Define projections
+      declare("MET", MissingMomentum());
+      LeptonFinder lf(_dR, cut && Cuts::abspid == _lepton);
+      declare(lf, "Leptons");
 
-      double sqrts = sqrtS()>0. ? sqrtS() : 14000.;
+      double sqrts = sqrtS() > 0.0 ? sqrtS() : 14000.;
       book(_h_W_mass ,"W_mass", 50, 55.0, 105.0);
       book(_h_W_mT ,"W_mT", 40, 60.0, 100.0);
       book(_h_W_pT ,"W_pT", logspace(100, 1.0, 0.5*sqrts));
@@ -54,30 +54,34 @@ namespace Rivet {
 
 
     /// Do the analysis
-    void analyze(const Event & e) {
+    void analyze(const Event & event) {
 
-      const WFinder& wfinder = apply<WFinder>(e, "WFinder");
-      if (wfinder.bosons().size() != 1) {
-        vetoEvent;
-      }
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
+
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+      const int ifound = closestMatchIndex(ls, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+      if (ifound < 0) vetoEvent;
+      const Particle& l = ls[ifound];
 
       double charge3_x_eta = 0;
       int charge3 = 0;
-      FourMomentum emom;
-      FourMomentum wmom(wfinder.bosons().front().momentum());
+      FourMomentum wmom = l.mom() + pmiss;
       _h_W_mass->fill(wmom.mass()/GeV);
-      _h_W_mT->fill(wfinder.mT()/GeV);
+      _h_W_mT->fill(mT(l, pmiss)/GeV);
       _h_W_pT->fill(wmom.pT()/GeV);
       _h_W_pT_peak->fill(wmom.pT()/GeV);
       _h_W_y->fill(wmom.rapidity());
       _h_W_phi->fill(wmom.phi());
-      Particle l=wfinder.leptons()[0];
       _h_lepton_pT->fill(l.pT()/GeV);
       _h_lepton_eta->fill(l.eta());
-      if (PID::charge3(l.pid()) != 0) {
+      FourMomentum emom;
+      if (l.charge3() != 0) {
         emom = l.momentum();
-        charge3_x_eta = PID::charge3(l.pid()) * emom.eta();
-        charge3 = PID::charge3(l.pid());
+        charge3_x_eta = l.charge3() * emom.eta();
+        charge3 = l.charge3();
       }
       assert(charge3_x_eta != 0);
       assert(charge3!=0);
@@ -156,6 +160,7 @@ namespace Rivet {
 
   };
 
-  // The hooks for the plugin system
+
   RIVET_DECLARE_PLUGIN(MC_WINC);
+
 }

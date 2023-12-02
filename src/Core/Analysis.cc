@@ -264,8 +264,8 @@ namespace Rivet {
   double Analysis::crossSection() const {
     double xs = handler().crossSection()->val();
     if (isnan(xs)) {
-      string errMsg = "cross section missing for analysis " + name();
-      throw Error(errMsg);
+      string errMsg = "cross section missing for analysis " + name() + "; will return 0";
+      return 0.;
     }
     return xs;
   }
@@ -273,8 +273,8 @@ namespace Rivet {
   double Analysis::crossSectionError() const {
     double xserr = handler().crossSection()->errAvg();
     if (isnan(xserr)) {
-      string errMsg = "cross section missing for analysis " + name();
-      throw Error(errMsg);
+      string errMsg = "cross section missing for analysis " + name() + "; will return 0";
+      return 0.;
     }
     return xserr;
   }

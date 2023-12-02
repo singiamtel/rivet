@@ -42,7 +42,7 @@ namespace Rivet {
         FinalState photons(Cuts::abspid == PID::PHOTON);
         FinalState muons(Cuts::abspid == PID::MUON);
         Cut eta_lep = Cuts::abseta < 2.5;
-        LeptonFinder dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT >= 6*GeV, PhotonOrigin::ALL);
+        LeptonFinder dressedmuons(muons, photons, 0.1, eta_lep && Cuts::pT >= 6*GeV);
         declare(dressedmuons, "dressedmuons");
       } else {
         declare(HeavyHadrons(Cuts::absrap < 2.4 && Cuts::pT > 15.5*GeV), "BHadrons");

@@ -28,6 +28,14 @@ namespace Rivet {
     declare(fsp, "FS");
   }
 
+  PromptFinalState::PromptFinalState(const FinalState& fsp, const Cut& c, TauDecaysAs taudecays, MuDecaysAs mudecays)
+    : _mudecays(mudecays == MuDecaysAs::PROMPT),
+      _taudecays(taudecays == TauDecaysAs::PROMPT)
+  {
+    setName("PromptFinalState");
+    declare(FinalState(fsp, c), "FS");
+  }
+  
 
 
   CmpState PromptFinalState::compare(const Projection& p) const {

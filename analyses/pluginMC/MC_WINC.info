@@ -7,7 +7,6 @@ Authors:
  - Christian Gutschow <chris.g@cern.ch>
 References:
 Options:
-Options:
  - ABSETALMAX=#
  - PTLMIN=#
  - LMODE=EL,MU

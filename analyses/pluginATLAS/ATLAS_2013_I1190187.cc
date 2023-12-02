@@ -18,24 +18,12 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2013_I1190187);
 
     void init() {
-      FinalState fs;
-
       Cut etaRanges_EL = (Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
       Cut etaRanges_MU = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
 
-      MissingMomentum met(fs);
-      declare(met, "MET");
+      declare(MissingMomentum(), "MET");
 
-      IdentifiedFinalState Photon(fs);
-      Photon.acceptIdPair(PID::PHOTON);
-
-      IdentifiedFinalState bare_EL(fs);
-      bare_EL.acceptIdPair(PID::ELECTRON);
-
-      IdentifiedFinalState bare_MU(fs);
-      bare_MU.acceptIdPair(PID::MUON);
-
-      IdentifiedFinalState neutrinoFS(fs);
+      IdentifiedFinalState neutrinoFS;
       neutrinoFS.acceptNeutrinos();
       declare(neutrinoFS, "Neutrinos");
 
@@ -46,17 +34,16 @@ namespace Rivet {
       //    7.arg: false    = ignore photons from hadron or tau
       //
       //////////////////////////////////////////////////////////
-      LeptonFinder electronFS(Photon, bare_EL, 0.1, etaRanges_EL);
+      LeptonFinder electronFS(0.1, Cuts::abspid == PID::ELECTRON && etaRanges_EL);
       declare(electronFS, "ELECTRON_FS");
 
-      LeptonFinder muonFS(Photon, bare_MU, 0.1, etaRanges_MU);
+      LeptonFinder muonFS(0.1, Cuts::abspid == PID::MUON && etaRanges_MU);
       declare(muonFS, "MUON_FS");
 
       VetoedFinalState jetinput;
-      jetinput.addVetoOnThisFinalState(bare_MU);
       jetinput.addVetoOnThisFinalState(neutrinoFS);
 
-      FastJets jetpro(jetinput, JetAlg::ANTIKT, 0.4);
+      FastJets jetpro(jetinput, JetAlg::ANTIKT, 0.4, JetMuons::NONE);
       declare(jetpro, "jet");
 
       // Book histograms

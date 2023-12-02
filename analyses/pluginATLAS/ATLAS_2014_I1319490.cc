@@ -1,20 +1,22 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
 
 
-  ///@brief Electroweak Wjj production at 8 TeV
+  /// @brief Electroweak Wjj production at 8 TeV
   class ATLAS_2014_I1319490 : public Analysis {
   public:
 
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2014_I1319490);
 
 
-    // Book histograms and initialise projections before the run
+    /// Book histograms and initialise projections before the run
     void init() {
 
      // Get options from the new option system
@@ -22,34 +24,30 @@ namespace Rivet {
       if ( getOption("LMODE") == "EL" ) _mode = 1;
       if ( getOption("LMODE") == "MU" ) _mode = 2;
 
-      FinalState fs;
-
       Cut cuts;
       if (_mode == 2) { // muon channel
-        cuts = (Cuts::pT > 25.0*GeV) & Cuts::etaIn(-2.4, 2.4);
+        cuts = Cuts::pT > 25*GeV && Cuts::abseta < 2.4;
       } else if (_mode) { // electron channel
-        cuts = (Cuts::pT > 25.0*GeV) & ( Cuts::etaIn(-2.47, -1.52) | Cuts::etaIn(-1.37, 1.37) | Cuts::etaIn(1.52, 2.47) );
+        cuts = Cuts::pT > 25*GeV && ( Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47) );
       } else { // combined data extrapolated to common phase space
-        cuts = (Cuts::pT > 25.0*GeV) & Cuts::etaIn(-2.5, 2.5);
+        cuts = Cuts::pT > 25*GeV && Cuts::abseta < 2.5;
       }
 
-      // bosons
-      WFinder wfinder_mu(fs, cuts, PID::MUON, 40.0*GeV, YODA::MAXDOUBLE, 0.0*GeV, 0.1,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
-      declare(wfinder_mu, "WFmu");
-      WFinder wfinder_el(fs, cuts, PID::ELECTRON, 40.0*GeV, YODA::MAXDOUBLE, 0.0*GeV, 0.1,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
-      declare(wfinder_el, "WFel");
+      // Bosons
+      LeptonFinder ef(0.1, cuts && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
+      LeptonFinder mf(0.1, cuts && Cuts::abspid == PID::MUON);
+      declare(mf, "Muons");
+      declare(MissingMomentum(), "MET");
 
-      // jets
-      VetoedFinalState jet_fs(fs);
-      //jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("WF"));
-      jet_fs.addVetoOnThisFinalState(wfinder_mu);
-      jet_fs.addVetoOnThisFinalState(wfinder_el);
+      // Jets
+      VetoedFinalState jet_fs;
+      jet_fs.addVetoOnThisFinalState(ef);
+      jet_fs.addVetoOnThisFinalState(mf);
       FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "Jets");
 
-      // book histograms
+      // Book histograms
       book(histos["h_N_incl"]            ,1,1,_mode+1);
       book(histos["h_N"]                 ,4,1,_mode+1);
       book(histos["h_pt_jet1_1jet"]      ,5,1,_mode+1);
@@ -87,6 +85,7 @@ namespace Rivet {
     }
 
 
+    /// A convenience method to do all the plot-filling work
     void fillPlots(const Particle& lepton, const double& missET, Jets& all_jets) {
       // do jet-lepton overlap removal
       Jets jets;
@@ -169,32 +168,38 @@ namespace Rivet {
     }
 
 
-    // Perform the per-event analysis
+    /// Perform the per-event analysis
     void analyze(const Event& event) {
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
+
       // Retrieve boson candidate
-      const WFinder& wfmu = apply<WFinder>(event, "WFmu");
-      const WFinder& wfel = apply<WFinder>(event, "WFel");
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const Particles es_mtfilt = select(es, [&](const Particle& e){ return mT(e, pmiss) > 40*GeV; });
+      const int iefound = closestMatchIndex(es_mtfilt, pmiss, Kin::mass, 80.4*GeV);
+      const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+      const Particles mus_mtfilt = select(mus, [&](const Particle& m){ return mT(m, pmiss) > 40*GeV; });
+      const int imfound = closestMatchIndex(mus_mtfilt, pmiss, Kin::mass, 80.4*GeV);
 
-      size_t nWmu = wfmu.size();
-      size_t nWel = wfel.size();
-
+      // Restrict allowed W-candidate combinations
+      size_t nWmu = (imfound >= 0);
+      size_t nWel = (iefound >= 0);
       if (_mode == 0 && !((nWmu == 1 && !nWel) || (!nWmu && nWel == 1)))  vetoEvent; // one W->munu OR W->elnu candidate, otherwise veto
       if (_mode == 1 && !(!nWmu && nWel == 1))  vetoEvent; // one W->elnu candidate, otherwise veto
       if (_mode == 2 && !(nWmu == 1 && !nWel))  vetoEvent; // one W->munu candidate, otherwise veto
 
       // Retrieve jets
       const JetFinder& jetfs = apply<JetFinder>(event, "Jets");
-      Jets all_jets = jetfs.jetsByPt(Cuts::pT > 30.0*GeV && Cuts::absrap < 4.4);
+      Jets all_jets = jetfs.jetsByPt(Cuts::pT > 30*GeV && Cuts::absrap < 4.4);
 
-      const Particles& leptons = (nWmu? wfmu : wfel).leptons();
-      const double missET = (nWmu? wfmu : wfel).neutrino().pT() / GeV;
-      if (leptons.size() == 1 && missET > 25. && (nWmu? wfmu : wfel).mT() > 40*GeV) {
-        const Particle& lep = leptons[0];
-        fillPlots(lep, missET, all_jets);
-      }
+      // Fill histograms
+      const Particle& lepton = nWmu ? mus_mtfilt[imfound] : es_mtfilt[iefound];
+      fillPlots(lepton, pmiss.pT()/GeV, all_jets);
     }
 
 
+    /// Finalize data objects after the run
     void finalize() {
       const double sf = _mode? 1.0 : 0.5;
       const double scalefactor = sf * crossSection() / sumOfWeights();

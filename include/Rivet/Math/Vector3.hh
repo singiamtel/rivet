@@ -628,9 +628,16 @@ namespace Rivet {
   /// @{
 
   /// Calculate transverse mass of a visible and an invisible 3-vector
+  ///
+  /// @note Note assumption of zero-mass particles
   inline double mT(const Vector3& vis, const Vector3& invis) {
     // return sqrt(2*vis.perp()*invis.perp() * (1 - cos(deltaPhi(vis, invis))) );
     return mT(vis.perp(), invis.perp(), deltaPhi(vis, invis));
+  }
+
+  /// Calculate transverse momentum of pair of 3-vectors
+  inline double pT(const Vector3& a, const Vector3& b) {
+    return (a+b).perp();
   }
 
   /// @}

@@ -7,51 +7,78 @@
 namespace Rivet {
 
 
-  // Separate-FS version
-  LeptonFinder::LeptonFinder(const FinalState& photons, const FinalState& bareleptons,
-                             double dRmax, const Cut& cut,
-                             PhotonOrigin whichphotons, DressingType dressing)
+  // Separate-FS constructor
+  /// @note The first two args were swapped in version 3.2.0!
+  LeptonFinder::LeptonFinder(const FinalState& leptonfs, const FinalState& photonfs,
+                             double dRdress, const Cut& cut, DressingType dressing)
     : FinalState(cut),
-      _dRmax(dRmax),
-      _fromDecay(whichphotons == PhotonOrigin::ALL),
-      _useJetClustering(dressing != DressingType::CONE)
+      _dRdress(dRdress),
+      _dressMode(dressing)
   {
     setName("LeptonFinder");
 
-    // Find photons -- specialising to prompt photons if decay photons are to be vetoed
-    IdentifiedFinalState photonfs(photons, PID::PHOTON);
-    if (_fromDecay) {
-      declare(photonfs, "Photons");
-    } else {
-      // Note: explicitly allow photons from direct muons and taus
-      declare(PromptFinalState(photonfs, TauDecaysAs::PROMPT, MuDecaysAs::PROMPT), "Photons");
-    }
+    IdentifiedFinalState leptonfs2(leptonfs); // make sure it really is only leptons
+    leptonfs2.acceptIdPairs({PID::ELECTRON, PID::MUON, PID::TAU}); //< usually no final-state taus...
+    IdentifiedFinalState photonfs2(photonfs, PID::PHOTON); // make sure it really is only photons
+    declare(leptonfs2, "Leptons");
+    declare(photonfs2, "Photons");
 
-    // Find bare leptons
-    IdentifiedFinalState leptonfs(bareleptons);
-    leptonfs.acceptIdPairs({PID::ELECTRON, PID::MUON, PID::TAU}); //< hmm, no final-state taus, so is this useful?
-    declare(leptonfs, "Leptons");
-    // declare(bareleptons, "Leptons");
-
-    // Set up FJ clustering option
-    if (_useJetClustering) {
+    // Set up FJ clustering
+    if (_dressMode == DressingType::AKT) {
       MergedFinalState mergedfs(photonfs, leptonfs);
-      FastJets leptonjets(mergedfs, JetAlg::ANTIKT, dRmax);
+      FastJets leptonjets(mergedfs, JetAlg::ANTIKT, dRdress);
       declare(leptonjets, "LeptonJets");
     }
   }
 
 
-  // Single-FS version
-  LeptonFinder::LeptonFinder(const FinalState& allfs, double dRmax, const Cut& cut,
-                             PhotonOrigin whichphotons, DressingType dressing)
-    : LeptonFinder(allfs, allfs, dRmax, cut, whichphotons, dressing)
-  {     }
+  // No-FS version
+  LeptonFinder::LeptonFinder(double dRdress, const Cut& cut,
+                             LeptonOrigin whichleptons, PhotonOrigin whichphotons,
+                             TauDecaysAs tauDecays, MuDecaysAs muDecays,
+                             DressingType dressing)
+    : FinalState(cut),
+      _dRdress(dRdress),
+      _dressMode(dressing)
+  {
+    setName("LeptonFinder");
+
+    // Find leptons -- specialising to prompt if requested
+    IdentifiedFinalState leptonfs;
+    leptonfs.acceptIdPairs({PID::ELECTRON, PID::MUON, PID::TAU}); //< usually no final-state taus...
+    if (whichleptons == LeptonOrigin::NODECAY) {
+      declare(PromptFinalState(leptonfs, tauDecays, muDecays), "Leptons");
+    } else {
+      declare(leptonfs, "Leptons");
+    }
+
+    // Find photons -- specialising to prompt if requested
+    /// @todo Generalise to allow other clustering particles, e.g. e+e- (don't double-count)
+    IdentifiedFinalState photonfs(PID::PHOTON);
+    if (whichphotons == PhotonOrigin::NODECAY) {
+      declare(PromptFinalState(photonfs, tauDecays, muDecays), "Photons");
+    } else if (whichphotons == PhotonOrigin::NONE) {
+      declare(FinalState(photonfs, Cuts::abspid != PID::PHOTON), "Photons");
+    } else {
+      declare(photonfs, "Photons");
+    }
+
+    // Set up FJ clustering
+    if (_dressMode == DressingType::AKT) {
+      MergedFinalState mergedfs(photonfs, leptonfs);
+      FastJets leptonjets(mergedfs, JetAlg::ANTIKT, dRdress);
+      declare(leptonjets, "LeptonJets");
+    }
+  }
 
 
   CmpState LeptonFinder::compare(const Projection& p) const {
-    // Compare the two as final states (for pT and eta cuts)
+    // Do the fast comparison of local stuff first
     const LeptonFinder& other = dynamic_cast<const LeptonFinder&>(p);
+    CmpState localcmp = cmp(_dRdress, other._dRdress) || cmp(_dressMode, other._dressMode);
+    if (localcmp != CmpState::EQ) return localcmp;
+
+    // Compare the two projs as final states (for the cuts)
     CmpState fscmp = FinalState::compare(other);
     if (fscmp != CmpState::EQ) return fscmp;
 
@@ -61,9 +88,12 @@ namespace Rivet {
     const PCmp sigcmp = mkNamedPCmp(p, "Leptons");
     if (sigcmp != CmpState::EQ) return sigcmp;
 
-    return (cmp(_dRmax, other._dRmax) ||
-            cmp(_fromDecay, other._fromDecay) ||
-            cmp(_useJetClustering, other._useJetClustering));
+    if (_dressMode == DressingType::AKT) {
+      const PCmp ljcmp = mkNamedPCmp(p, "LeptonJets");
+      if (ljcmp != CmpState::EQ) return ljcmp;
+    }
+
+    return CmpState::NEQ;
   }
 
 
@@ -71,18 +101,18 @@ namespace Rivet {
     _theParticles.clear();
 
     // Get bare leptons
-    const Particles bareleptons = apply<ParticleFinder>(e, "Leptons").particles();
-    // .particles(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON || Cuts::abspid == PID::TAU);
+    const Particles& bareleptons = apply<FinalState>(e, "Leptons").particles();
+    MSG_DEBUG("Number of bare leptons: " << bareleptons.size());
     if (bareleptons.empty()) return;
 
     // Initialise DL collection with bare leptons
     Particles allClusteredLeptons;
     allClusteredLeptons.reserve(bareleptons.size());
 
-    if (_useJetClustering) {
+    if (_dressMode == DressingType::AKT) {
 
       // If the radius is 0 or negative, don't even attempt to cluster
-      if (_dRmax <= 0) {
+      if (_dRdress <= 0) {
         for (const Particle& bl : bareleptons) {
           Particle dl(bl.pid(), bl.momentum(), bl.genParticle(), bl.origin());
           dl.setConstituents({bl});
@@ -110,11 +140,11 @@ namespace Rivet {
       }
 
       // If the radius is 0 or negative, don't even attempt to cluster
-      if (_dRmax > 0) {
+      if (_dRdress > 0) {
         // Match each photon to its closest charged lepton within the dR cone
         const FinalState& photons = apply<FinalState>(e, "Photons");
         for (const Particle& photon : photons.particles()) {
-          double dRmin = _dRmax;
+          double dRmin = _dRdress;
           int idx = -1;
           for (size_t i = 0; i < bareleptons.size(); ++i) {
             const Particle& bl = bareleptons[i];
@@ -127,7 +157,7 @@ namespace Rivet {
               idx = i;
             }
           }
-          // Escape if no lepton found within the dRmax range
+          // Escape if no lepton found within the dRdress range
           if (idx < 0) continue;
 
           // Attach the photon to the closest in-range lepton

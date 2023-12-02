@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -21,7 +21,8 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      ZFinder zmumufinder(FinalState(), Cuts::absetaIn(2.0, 4.5) && Cuts::pT > 20 * GeV, PID::MUON, 60*GeV, 120*GeV);
+      DileptonFinder zmumufinder(91.2*GeV, 0.1, Cuts::absetaIn(2.0, 4.5) && Cuts::pT > 20 * GeV &&
+                                 Cuts::abspid == PID::MUON, Cuts::massIn(60*GeV, 120*GeV));
       declare(zmumufinder, "ZmumuFinder");
 
       // Book histograms
@@ -42,7 +43,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Retrieve dressed leptons, sorted by pT
-      const ZFinder& zmumufinder = apply<ZFinder>(event, "ZmumuFinder");
+      const DileptonFinder& zmumufinder = apply<DileptonFinder>(event, "ZmumuFinder");
       if(zmumufinder.empty()) vetoEvent;
       if(zmumufinder.bosons().size() > 1)
         MSG_WARNING("Found multiple (" << zmumufinder.bosons().size() << ") Z -> mu+ mu- decays!");
@@ -51,8 +52,8 @@ namespace Rivet {
       FourMomentum zmumu = zmumufinder.bosons()[0].momentum();
       if (zmumufinder.leptons().size() < 2) vetoEvent;
 
-      const Particle& muon_p = zmumufinder.leptons()[0];
-      const Particle& muon_m = zmumufinder.leptons()[1];
+      const Particle& muon_p = zmumufinder.constituents()[0];
+      const Particle& muon_m = zmumufinder.constituents()[1];
 
       const double diffphi = deltaPhi(muon_p, muon_m);
       const double diffpsd = deltaEta(muon_p, muon_m);
@@ -80,7 +81,7 @@ namespace Rivet {
 
     ///@}
 
-    
+
     Histo1DPtr _h_sigma_vs_y, _h_sigma_vs_pt, _h_sigma_vs_phi;
     Histo1DGroupPtr _h_sigma_vs_ypt, _h_sigma_vs_yphi;
 

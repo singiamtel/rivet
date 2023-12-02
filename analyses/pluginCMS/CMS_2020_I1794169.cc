@@ -47,7 +47,7 @@ namespace Rivet {
       // Dress the prompt bare leptons with prompt photons within dR < 0.1,
       // and apply some fiducial cuts on the dressed leptons
       Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      LeptonFinder dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
+      LeptonFinder dressed_leps(bare_leps, photons, 0.1, lepton_cuts);
       declare(dressed_leps, "leptons");
 
       // Missing momentum

@@ -14,7 +14,9 @@ References:
  - doi:10.1007/JHEP05(2014)068
  - arXiv:1402.6263 [hep-ex]
 RunInfo:
-  W+c and inclusive double production in pp collisions
+  W+c and inclusive double production in pp collisions.
+Warning:
+  Analysis code recommends running MC with QED FSR from leptons disabled!
 NumEvents: 1000000
 Beams: [p+, p+]
 Energies: [7000]

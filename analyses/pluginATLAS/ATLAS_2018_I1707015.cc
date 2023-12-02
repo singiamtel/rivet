@@ -46,7 +46,7 @@ namespace Rivet {
       // Dress the leptons
       FinalState dressPhotons(Cuts::abspid == PID::PHOTON);
       Cut lepCuts = (Cuts::abseta < 2.5) && (Cuts::pT > 25*GeV);
-      LeptonFinder dressedLeptons(dressPhotons, leptons, 0.1, lepCuts);
+      LeptonFinder dressedLeptons(leptons, dressPhotons, 0.1, lepCuts);
       declare(dressedLeptons, "Leptons");
 
       // Jet alg input
@@ -60,7 +60,7 @@ namespace Rivet {
 
       // Remove prompt dressed muons (muons + associated photons) from jet input
       PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder dressedmuons(dressPhotons, muons, 0.1);
+      LeptonFinder dressedmuons(muons, dressPhotons, 0.1);
       vfs.addVetoOnThisFinalState(dressedmuons);
 
       // Jet clustering

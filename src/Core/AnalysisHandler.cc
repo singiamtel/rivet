@@ -1352,7 +1352,11 @@ namespace Rivet {
     if (xsecs.empty())
       throw UserError("No cross-section supplied!");
 
-    const bool allEqual = std::adjacent_find(xsecs.begin(), xsecs.end(), std::not_equal_to<>()) == xsecs.end();
+    // HepMC3 demands that variations cross-sections be explicitly set by the generator,
+    // in such a way that it cannot be used directly with HepMC2 files - where these are
+    // typically missing - unless the user is willing to jump through ludicrous hoops.
+    bool allEqual = std::adjacent_find(xsecs.begin(), xsecs.end(), std::not_equal_to<>()) == xsecs.end();
+    allEqual |= std::adjacent_find(xsecs.begin() + 1, xsecs.end(), std::not_equal_to<>()) == xsecs.end();
     if (xsecs.size() == 1 || allEqual)  setCrossSection(xsecs[0], isUserSupplied);
     else {
       // Update the user xsec

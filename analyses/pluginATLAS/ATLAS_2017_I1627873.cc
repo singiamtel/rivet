@@ -30,10 +30,10 @@ namespace Rivet {
       PromptFinalState electron_fs(Cuts::abspid == PID::ELECTRON);
       PromptFinalState muon_fs(Cuts::abspid == PID::MUON);
 
-      LeptonFinder dressed_electrons(photon_fs, electron_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_electrons(electron_fs, photon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_electrons, "DressedElectrons");
 
-      LeptonFinder dressed_muons(photon_fs, muon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_muons(muon_fs, photon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_muons, "DressedMuons");
 
       VetoedFinalState remfs(fs);

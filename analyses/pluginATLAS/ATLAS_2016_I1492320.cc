@@ -33,10 +33,10 @@ namespace Rivet {
       // Charged leptons within acceptance
       const PromptFinalState chLep_fid = PromptFinalState(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       const PromptFinalState photon_fs = PromptFinalState(Cuts::abspid == PID::PHOTON);
-      const LeptonFinder dressed_leps(photon_fs, chLep_fid, 0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
+      const LeptonFinder dressed_leps(chLep_fid, photon_fs, 0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.5);
       declare(dressed_leps, "LeptonFinder");
 
-      const LeptonFinder dressed_leps2(photon_fs, chLep_fid, 0.1, Cuts::pT > 10*GeV);
+      const LeptonFinder dressed_leps2(chLep_fid, photon_fs, 0.1, Cuts::pT > 10*GeV);
       declare(dressed_leps2, "LeptonFinder2");
 
 

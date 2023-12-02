@@ -30,7 +30,7 @@ namespace Rivet {
       ChargedLeptons charged_leptons;
       PromptFinalState prompt_leptons(charged_leptons);
       Cut leptonCuts = Cuts::pT > 45*GeV && Cuts::abseta < 2.1;
-      LeptonFinder dressed_leptons(photons, prompt_leptons, 0.1, leptonCuts);
+      LeptonFinder dressed_leptons(prompt_leptons, photons, 0.1, leptonCuts);
       declare(dressed_leptons, "LeptonFinder");
 
       // Jets

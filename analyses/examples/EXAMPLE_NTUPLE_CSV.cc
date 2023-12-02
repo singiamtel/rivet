@@ -30,7 +30,7 @@ namespace Rivet {
       FastJets jetfs(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "Jets");
       DirectFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      LeptonFinder dressed_leps(fs, bare_leps, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV);
+      LeptonFinder dressed_leps(bare_leps, fs, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV);
       declare(dressed_leps, "Leptons");
       declare(MissingMomentum(fs), "MET");
 

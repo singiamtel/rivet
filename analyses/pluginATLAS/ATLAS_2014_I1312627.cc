@@ -1,8 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/WFinder.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
@@ -28,6 +30,7 @@ namespace Rivet {
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2014_I1312627);
 
+
     /// @name Analysis methods
     /// @{
 
@@ -44,26 +47,23 @@ namespace Rivet {
       if (_mode == 2) { // muon channel
         cuts = Cuts::pT > 25*GeV && Cuts::abseta < 2.4;;
       } else if (_mode) { // electron channel
-        cuts = Cuts::pT > 25*GeV && ( Cuts::etaIn(-2.47, -1.52) || Cuts::etaIn(-1.37, 1.37) || Cuts::etaIn(1.52, 2.47) );
+        cuts = Cuts::pT > 25*GeV && ( Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47) );
       } else { // combined data extrapolated to common phase space
         cuts = Cuts::pT > 25*GeV && Cuts::abseta < 2.5;
       }
 
       // Boson finders
-      FinalState fs;
-      WFinder wfinder(fs, cuts, _mode > 1? PID::MUON : PID::ELECTRON, 40*GeV, 8*TeV, 0., 0.1,
-		      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY, MassVariable::MT);
-      declare(wfinder, "WF");
-
-      ZFinder zfinder(fs, cuts, _mode > 1? PID::MUON : PID::ELECTRON, 66*GeV, 116*GeV, 0.1,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
-      declare(zfinder, "ZF");
+      declare("MET", MissingMomentum());
+      LeptonFinder lf(0.1, cuts && Cuts::abspid == (_mode > 1 ? PID::MUON : PID::ELECTRON));
+      declare(lf, "Leptons");
+      DileptonFinder zf(91.2*GeV, 0.1, cuts && Cuts::abspid == (_mode > 1 ? PID::MUON : PID::ELECTRON), Cuts::massIn(66*GeV, 116*GeV));
+      declare(zf, "ZF");
 
       // Jets
-      VetoedFinalState jet_fs(fs);
-      jet_fs.addVetoOnThisFinalState(getProjection<WFinder>("WF"));
-      jet_fs.addVetoOnThisFinalState(getProjection<ZFinder>("ZF"));
-      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
+      VetoedFinalState jet_fs;
+      jet_fs.addVetoOnThisFinalState(lf);
+      jet_fs.addVetoOnThisFinalState(zf);
+      FastJets jets(jet_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL); //< !!
       declare(jets, "Jets");
 
 
@@ -99,10 +99,17 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      // Retrieve boson candidate
-      const WFinder& wf = apply<WFinder>(event, "WF");
-      const ZFinder& zf = apply<ZFinder>(event, "ZF");
-      if (wf.empty() && zf.empty())  vetoEvent;
+      // W reco, starting with MET
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+      const Particles ls_mtfilt = select(ls, [&](const Particle& l){ return mT(l, pmiss) > 40*GeV; });
+      const int ifound = closestMatchIndex(ls_mtfilt, pmiss, Kin::mass, 80.4*GeV);
+
+      // Z reco
+      const DileptonFinder& zf = apply<DileptonFinder>(event, "ZF");
+
+      // Exit if no bosons found (note: overlapping W and Z reco is allowed)
+      if (ifound < 0 && zf.empty()) vetoEvent;
 
       // Retrieve jets
       const JetFinder& jetfs = apply<JetFinder>(event, "Jets");
@@ -114,10 +121,10 @@ namespace Rivet {
         if (oppSign(leptons[0], leptons[1]) && deltaR(leptons[0], leptons[1]) > 0.2)
           fillPlots(leptons, jets, 1);
       }
-      if (!wf.empty()) {
-        const Particles& leptons = wf.leptons();
-        if (wf.neutrino().pT() > 25*GeV && wf.mT() > 40*GeV )
-          fillPlots(leptons, jets, 0);
+      if (ifound >= 0) {
+      const Particle& lepton = ls_mtfilt[ifound];
+      if (pmiss.pT() > 25*GeV)
+          fillPlots(Particles{lepton}, jets, 0);
       }
     }
 
@@ -132,6 +139,7 @@ namespace Rivet {
         divide(item.second.comp[0], item.second.comp[1], item.second.ratio);
       }
     }
+
     /// @}
 
 
@@ -216,6 +224,7 @@ namespace Rivet {
 
   };
 
-  // Hooks for the plugin system
+
   RIVET_DECLARE_PLUGIN(ATLAS_2014_I1312627);
+
 }

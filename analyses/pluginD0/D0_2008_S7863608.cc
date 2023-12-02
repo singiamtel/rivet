@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -20,10 +20,10 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      /// @todo These clustering arguments look odd: are they ok?
+
       Cut cut = Cuts::abseta < 1.7 && Cuts::pT > 15*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, cut && Cuts::abspid == PID::MUON, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zfinder, "DileptonFinder");
 
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
@@ -44,7 +44,7 @@ namespace Rivet {
 
     // Do the analysis
     void analyze(const Event& e) {
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size()==1) {
         _sum_of_weights_inclusive->fill();
         const JetFinder& jetpro = apply<JetFinder>(e, "ConeFinder");

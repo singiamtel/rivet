@@ -34,14 +34,14 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState el_bare(el_id);
       Cut cuts = (Cuts::abseta < 2.47) && ( (Cuts::abseta <= 1.37) || (Cuts::abseta >= 1.52) ) && (Cuts::pT > 15*GeV);
-      LeptonFinder el_dressed_FS(photon_id, el_bare, 0.1, cuts, PhotonOrigin::ALL);
+      LeptonFinder el_dressed_FS(el_bare, photon_id, 0.1, cuts);
       declare(el_dressed_FS,"EL_DRESSED_FS");
 
       // Project dressed muons with pT > 15 GeV and |eta| < 2.5
       IdentifiedFinalState mu_id(FS);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState mu_bare(mu_id);
-      LeptonFinder mu_dressed_FS(photon_id, mu_bare, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder mu_dressed_FS(mu_bare, photon_id, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 15*GeV);
       declare(mu_dressed_FS,"MU_DRESSED_FS");
 
       // get MET from generic invisibles

@@ -27,13 +27,13 @@ namespace Rivet {
       PromptFinalState electrons(Cuts::abspid == PID::ELECTRON);
       PromptFinalState muons(Cuts::abspid == PID::MUON);
 
-      Cut cuts_el = (Cuts::pT > 25*GeV) && ( Cuts::abseta < 1.37 || (Cuts::abseta > 1.52 && Cuts::abseta < 2.47) );
-      Cut cuts_mu = (Cuts::pT > 25*GeV) && (Cuts::abseta < 2.4);
+      Cut cuts_el = Cuts::pT > 25*GeV && ( Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47) );
+      Cut cuts_mu = Cuts::pT > 25*GeV && Cuts::abseta < 2.4;
 
-      LeptonFinder dressed_electrons(photons, electrons, 0.1, cuts_el);
+      LeptonFinder dressed_electrons(electrons, photons, 0.1, cuts_el);
       declare(dressed_electrons, "DressedElectrons");
 
-      LeptonFinder dressed_muons(photons, muons, 0.1, cuts_mu);
+      LeptonFinder dressed_muons(muons, photons, 0.1, cuts_mu);
       declare(dressed_muons, "DressedMuons");
 
       FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);

@@ -3,7 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -30,12 +30,10 @@ namespace Rivet {
       if ( getOption("LMODE") == "EMU" ) _mode = 2;
 
       // Initialise and register projections
-      FinalState fs;
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 25*GeV;
-
-      ZFinder zeeFind(fs, cut, PID::ELECTRON, 76.1876*GeV, 106.1876*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY );
+      DileptonFinder zeeFind(91.2*GeV, 0.1, cut && Cuts::abspid == PID::ELECTRON, Cuts::massIn(76.2*GeV, 106.2*GeV));
       declare(zeeFind, "ZeeFind");
-      ZFinder zmmFind(fs, cut, PID::MUON    , 76.1876*GeV, 106.1876*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NODECAY );
+      DileptonFinder zmmFind(91.2*GeV, 0.1, cut && Cuts::abspid == PID::MUON    , Cuts::massIn(76.2*GeV, 106.2*GeV));
       declare(zmmFind, "ZmmFind");
 
       // Book histograms
@@ -69,8 +67,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zeeFS = apply<ZFinder>(event, "ZeeFind");
-      const ZFinder& zmumuFS = apply<ZFinder>(event, "ZmmFind");
+      const DileptonFinder& zeeFS = apply<DileptonFinder>(event, "ZeeFind");
+      const DileptonFinder& zmumuFS = apply<DileptonFinder>(event, "ZmmFind");
 
       const Particles& zees = zeeFS.bosons();
       const Particles& zmumus = zmumuFS.bosons();

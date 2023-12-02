@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -18,9 +18,8 @@ namespace Rivet {
 
     // Book histograms
     void init() {
-      FinalState fs;
-      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON, 40*GeV, 200*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, Cuts::abspid == PID::ELECTRON, Cuts::massIn(40*GeV, 200*GeV));
+      declare(zfinder, "DileptonFinder");
 
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
@@ -37,7 +36,7 @@ namespace Rivet {
 
       if (_edges.empty())  _edges = _crossSectionRatio->xEdges();
 
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.bosons().size() != 1)  vetoEvent;
 
       FourMomentum e0 = zfinder.constituents()[0].mom();

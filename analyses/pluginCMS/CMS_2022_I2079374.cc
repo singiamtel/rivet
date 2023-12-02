@@ -33,12 +33,11 @@ namespace Rivet {
 
         FinalState fs;
         PromptFinalState pfs(fs);
-
         PromptFinalState bareMuons(Cuts::abspid == PID::MUON);
-        declare(LeptonFinder(pfs, bareMuons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "muons");
+        declare(LeptonFinder(bareMuons, pfs, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "muons");
 
         PromptFinalState bareElectrons(Cuts::abspid == PID::ELECTRON);
-        declare(LeptonFinder(pfs, bareElectrons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PhotonOrigin::ALL), "electrons");
+        declare(LeptonFinder(bareElectrons, pfs, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV), "electrons");
 
         FastJets jets(fs, JetAlg::ANTIKT, 0.4);
         declare(jets, "jets");
@@ -63,8 +62,8 @@ namespace Rivet {
       }
 
       /// Z boson finder.
-      /// Note: we don't use the standard ZFinder class in order to stick to
-      /// the definition of the publication that is simpler than the ZFinder
+      /// Note: we don't use the standard DileptonFinder class in order to stick to
+      /// the definition of the publication that is simpler than the DileptonFinder
       /// algorithm
       /// @param leptons pt-ordered of electron or muon collection to use to build
       /// the Z boson

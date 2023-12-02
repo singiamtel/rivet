@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 
@@ -21,19 +21,18 @@ namespace Rivet {
       book(_sumW50, "sumW50");
       book(_sumWpT, "sumWpT");
 
-      FinalState fs(Cuts::abseta < 2.4 && Cuts::pT > 20*GeV);
-      declare(fs, "FS");
-
+      //FinalState fs(Cuts::abseta < 2.4 && Cuts::pT > 20*GeV); //< likely wrong for dressing inputs
       UnstableParticles ufs(Cuts::abseta < 2 && Cuts::pT > 15*GeV);
       declare(ufs, "UFS");
 
       Cut zetacut = Cuts::abseta < 2.4;
+      DileptonFinder zfindermu(91.2*GeV, 0.1, zetacut && Cuts::pT > 20*GeV &&
+                               Cuts::abspid == PID::MUON, Cuts::massIn(81*GeV, 101*GeV));
+      declare(zfindermu, "DileptonFinderMu");
 
-      ZFinder zfindermu(fs, zetacut, PID::MUON, 81.0*GeV, 101.0*GeV, 0.1);
-      declare(zfindermu, "ZFinderMu");
-
-      ZFinder zfinderel(fs, zetacut, PID::ELECTRON, 81.0*GeV, 101.0*GeV, 0.1);
-      declare(zfinderel, "ZFinderEl");
+      DileptonFinder zfinderel(91.2*GeV, 0.1, zetacut && Cuts::pT > 20*GeV &&
+                               Cuts::abspid == PID::ELECTRON, Cuts::massIn(81*GeV, 101*GeV));
+      declare(zfinderel, "DileptonFinderEl");
 
 
       // Histograms in non-boosted region of Z pT
@@ -56,8 +55,8 @@ namespace Rivet {
     void analyze(const Event& e) {
 
       const UnstableParticles& ufs = apply<UnstableParticles>(e, "UFS");
-      const ZFinder& zfindermu = apply<ZFinder>(e, "ZFinderMu");
-      const ZFinder& zfinderel = apply<ZFinder>(e, "ZFinderEl");
+      const DileptonFinder& zfindermu = apply<DileptonFinder>(e, "DileptonFinderMu");
+      const DileptonFinder& zfinderel = apply<DileptonFinder>(e, "DileptonFinderEl");
 
       // Look for a Z --> mu+ mu- event in the final state
       if (zfindermu.empty() && zfinderel.empty()) vetoEvent;

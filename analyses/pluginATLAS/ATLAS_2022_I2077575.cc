@@ -29,7 +29,7 @@ namespace Rivet {
 
         // External bins for 2D and 3D cross-sections
         std::vector<double> t1_pt_2D_bins_1 = {0.5, 0.55, 0.6, 0.75, 2.0};
-	std::vector<double> t1_pt_2D_bins_2 = {0.5, 0.55, 0.625, 0.75, 2.0};
+        std::vector<double> t1_pt_2D_bins_2 = {0.5, 0.55, 0.625, 0.75, 2.0};
         std::vector<double> t_and_tt_y_2D_bins = {0.0, 0.2, 0.5, 1.0, 2.0};
         std::vector<double> tt_pt_2D_bins = {0.0, 0.1, 0.2, 0.35, 1.0};
         std::vector<double> tt_m_3D_bins = {0.9, 1.2, 1.5, 4.0};
@@ -69,9 +69,9 @@ namespace Rivet {
         book_hist_2D("tt_y_3_tt_m_t1_pt_3D", 	tt_m_3D_bins, 		    72);
 
         // Projections
-        const Cut dressed_lep = (Cuts::abseta < 2.5) && (Cuts::pT >= 25*GeV);
-        const Cut all_dressed_lep = (Cuts::abseta < 2.5);
-        const Cut eta_full = (Cuts::abseta < 4.5);
+        const Cut dressed_lep = Cuts::abseta < 2.5 && Cuts::pT >= 25*GeV;
+        const Cut all_dressed_lep = Cuts::abseta < 2.5;
+        const Cut eta_full = Cuts::abseta < 4.5;
 
         // All final state particles
         const FinalState fs(eta_full);
@@ -81,15 +81,15 @@ namespace Rivet {
 
         // Projection to find the electrons
         PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-        LeptonFinder dressedelectrons(photons, electrons, 0.1, dressed_lep);
+        LeptonFinder dressedelectrons(electrons, photons, 0.1, dressed_lep);
         declare(dressedelectrons, "elecs");
-        LeptonFinder alldressedelectrons(photons, electrons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
+        LeptonFinder alldressedelectrons(electrons, photons, 0.1, all_dressed_lep);
 
         // Projection to find the muons
         PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-        LeptonFinder dressedmuons(photons, muons, 0.1, dressed_lep);
+        LeptonFinder dressedmuons(muons, photons, 0.1, dressed_lep);
         declare(dressedmuons, "muons");
-        LeptonFinder alldressedmuons(photons, muons, 0.1, all_dressed_lep, PhotonOrigin::ALL);
+        LeptonFinder alldressedmuons(muons, photons, 0.1, all_dressed_lep);
 
         // Small-R jet clustering
         VetoedFinalState vfs(fs);
@@ -100,7 +100,8 @@ namespace Rivet {
 
         // Large-R jet clustering.
         FastJets ljets(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
-        ljets.addTrf(new fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2), fastjet::SelectorPtFractionMin(0.05)));
+        ljets.addTrf(new fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2),
+                                         fastjet::SelectorPtFractionMin(0.05)));
         declare(ljets, "ljets");
 
         if (_mode) {

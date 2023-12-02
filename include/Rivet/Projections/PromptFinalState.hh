@@ -31,15 +31,15 @@ namespace Rivet {
     /// Constructor without cuts
     PromptFinalState(TauDecaysAs taudecays=TauDecaysAs::NONPROMPT, MuDecaysAs mudecays=MuDecaysAs::NONPROMPT);
 
-    /// Constructor from a Cut
+    /// Constructor from a cut
     PromptFinalState(const Cut& c, TauDecaysAs taudecays=TauDecaysAs::NONPROMPT, MuDecaysAs mudecays=MuDecaysAs::NONPROMPT);
 
     // Constructor from a FinalState
     PromptFinalState(const FinalState& fsp, TauDecaysAs taudecays=TauDecaysAs::NONPROMPT, MuDecaysAs mudecays=MuDecaysAs::NONPROMPT);
 
-    // /// Constructor from a Cut and optional FinalState.
-    // PromptFinalState(const Cut& c, const FinalState& fsp=FinalState(), TauDecaysAs taudecays, MuDecaysAs mudecays);
-
+    // Constructor from a FinalState with an extra cut
+    PromptFinalState(const FinalState& fsp, const Cut& c, TauDecaysAs taudecays=TauDecaysAs::NONPROMPT, MuDecaysAs mudecays=MuDecaysAs::NONPROMPT);
+    
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(PromptFinalState);
 

@@ -12,9 +12,11 @@ namespace Rivet {
   class ATLAS_2018_I1635273 : public Analysis {
   public:
 
+    /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1635273);
 
-	  // Book histograms and initialise projections before the run
+
+    // Book histograms and initialise projections before the run
     void init() {
 
       // Get options from the new option system
@@ -35,7 +37,7 @@ namespace Rivet {
 
       // Get dressed leptons
       PromptFinalState leptons(Cuts::abspid == (_mode? PID::MUON : PID::ELECTRON), TauDecaysAs::NONPROMPT);
-      LeptonFinder dressedleptons(photons, leptons, 0.1, cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedleptons(leptons, photons, 0.1, cuts);
       declare(dressedleptons, "LeptonFinder");
 
       // Get neutrinos for MET calculation

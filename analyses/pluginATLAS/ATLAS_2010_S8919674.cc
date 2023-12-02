@@ -1,8 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 
 namespace Rivet {
 
@@ -21,22 +23,22 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      // Set up projections to find the electron and muon Ws
-      FinalState fs;
-      Cut cuts = (Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
-      WFinder wfinder_e(fs, cuts, PID::ELECTRON, 0*GeV, 1000*GeV, 25*GeV);
-      declare(wfinder_e, "W_e");
-      WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 0*GeV, 1000*GeV, 25*GeV);
-      declare(wfinder_mu, "W_mu");
+      declare("MET", MissingMomentum());
+
+      // Find electrons and muons
+      const Cut cut_e = (Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
+      LeptonFinder ef(0.1, cut_e && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
+      const Cut cut_m = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
+      LeptonFinder mf(0.1, cut_m && Cuts::abspid == PID::MUON);
+      declare(mf, "Muons");
 
       // Input for the jets: no neutrinos, no muons, and no electron which passed the electron cuts
       VetoedFinalState veto;
-      veto.addVetoOnThisFinalState(wfinder_e);
-      veto.addVetoOnThisFinalState(wfinder_mu);
-      veto.addVetoPairId(PID::MUON);
-      veto.vetoNeutrinos();
-      FastJets jets(veto, JetAlg::ANTIKT, 0.4);
-      declare(jets, "jets");
+      veto.addVetoOnThisFinalState(ef);
+      veto.addVetoOnThisFinalState(mf);
+      FastJets jets(veto, JetAlg::ANTIKT, 0.4, JetMuons::NONE);
+      declare(jets, "Jets");
 
       /// Book histograms
       book(_h_el_njet_inclusive,1,1,1);
@@ -53,18 +55,27 @@ namespace Rivet {
 
       if (_edges.empty())  _edges = _h_mu_njet_inclusive->xEdges();
 
-      const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 20*GeV);
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 20*GeV);
 
-      const WFinder& We = apply<WFinder>(event, "W_e");
-      if (We.bosons().size() == 1) {
-        const FourMomentum p_miss = We.neutrinos()[0];
-        const FourMomentum p_lept = We.leptons()[0];
-        if (p_miss.Et() > 25*GeV && We.mT() > 40*GeV) {
-          Jets js;
-          for (const Jet& j : jets) {
-            if (j.abseta() < 2.8 && deltaR(p_lept, j.momentum()) > 0.5)
-              js.push_back(j);
-          }
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.Et() < 25*GeV) vetoEvent;
+
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const int iefound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+      const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+      const int imfound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+
+      // Require two valid W candidates
+      if (iefound < 0 && imfound < 0) vetoEvent; //< no W's
+      if (iefound >= 0 && imfound >= 0) vetoEvent; //< multi-W
+
+      // Histogramming
+      if (iefound >= 0) {
+        const Particle& e = es[iefound].constituents()[0];
+        if (mT(pmiss, e) > 40*GeV) {
+          const Jets js = select(jets, [&](const Jet& j) { return j.abseta() < 2.8 && deltaR(e, j) > 0.5; });
           _h_el_njet_inclusive->fill(_edges[0]);
           if (js.size() >= 1) {
             _h_el_njet_inclusive->fill(_edges[1]);
@@ -80,16 +91,10 @@ namespace Rivet {
         }
       }
 
-      const WFinder& Wm = apply<WFinder>(event, "W_mu");
-      if (Wm.bosons().size() == 1) {
-        const FourMomentum p_miss = Wm.neutrinos()[0];
-        const FourMomentum p_lept = Wm.leptons()[0];
-        if (p_miss.Et() > 25*GeV && Wm.mT() > 40*GeV) {
-          Jets js;
-          for (const Jet& j : jets) {
-            if (j.abseta() < 2.8 && deltaR(p_lept, j.momentum()) > 0.5)
-              js.push_back(j);
-          }
+      if (imfound >= 0) {
+        const Particle& mu = mus[imfound];
+        if (mT(pmiss, mu) > 40*GeV) {
+          const Jets js = select(jets, [&](const Jet& j) { return j.abseta() < 2.8 && deltaR(mu, j) > 0.5; });
           _h_mu_njet_inclusive->fill(_edges[0]);
           if (js.size() >= 1) {
             _h_mu_njet_inclusive->fill(_edges[1]);
@@ -139,7 +144,6 @@ namespace Rivet {
     /// @}
 
   };
-
 
 
   RIVET_DECLARE_ALIASED_PLUGIN(ATLAS_2010_S8919674, ATLAS_2010_I882534);
