@@ -25,11 +25,8 @@ namespace Rivet {
     void init() {
 
       FinalState fs;
-      IdentifiedFinalState allleptons;
-      allleptons.acceptIdPair(PID::ELECTRON);
-      allleptons.acceptIdPair(PID::MUON);
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      LeptonFinder leptons(fs, allleptons, 0.1, cuts);
+      LeptonFinder leptons(0.1, cuts && (Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON));
       declare(leptons, "leptons");
 
       // Leading neutrinos for Etmiss

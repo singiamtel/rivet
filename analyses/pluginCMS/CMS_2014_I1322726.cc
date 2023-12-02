@@ -2,13 +2,15 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
-  /// @brief Z production in PbPb and pp collisions at 2.76 TeV in the dimuon and dielectron decay channels
+
+  /// Z production in PbPb and pp collisions at 2.76 TeV in the dimuon and dielectron decay channels
   class CMS_2014_I1322726 : public Analysis {
   public:
+
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2014_I1322726);
 
@@ -17,17 +19,14 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      const FinalState fs(Cuts::abseta < 4.9);
 
-      //Defination of ZFinder
-      ZFinder zmumuFinder(fs, Cuts::abseta < 5 && Cuts::pT > 0. * GeV, PID::MUON, 60.0 * GeV, 120.0 * GeV);  //dimuon
+      DileptonFinder zmumuFinder(91.2*GeV, 0.1, Cuts::abseta < 4.9 && Cuts::abspid == PID::MUON, Cuts::massIn(60*GeV, 120*GeV));
       declare(zmumuFinder, "ZmumuFinder");
 
-      ZFinder zeeFinder(
-          fs, Cuts::abseta < 5 && Cuts::pT > 0. * GeV, PID::ELECTRON, 60.0 * GeV, 120.0 * GeV);  //dielectron
+      DileptonFinder zeeFinder(91.2*GeV, 0.1, Cuts::abseta < 4.9 && Cuts::abspid == PID::ELECTRON, Cuts::massIn(60*GeV, 120*GeV));
       declare(zeeFinder, "ZeeFinder");
 
-      FastJets jetfs(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
+      FastJets jetfs(FinalState(Cuts::abseta < 4.9), JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "jets");
 
       book(_h["ds/dydp-mu"], 1, 1, 1);
@@ -36,12 +35,13 @@ namespace Rivet {
       book(_h["ds/dy-el"], 4, 1, 1);
     }
 
+
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const ZFinder& zfindermu = apply<ZFinder>(event, "ZmumuFinder");  // muon
+      const DileptonFinder& zfindermu = apply<DileptonFinder>(event, "ZmumuFinder");  // muon
       const Particles& zmumus = zfindermu.bosons();
 
-      const ZFinder& zfinderel = apply<ZFinder>(event, "ZeeFinder");  // electron
+      const DileptonFinder& zfinderel = apply<DileptonFinder>(event, "ZeeFinder");  // electron
       const Particles& zelels = zfinderel.bosons();
 
       if ((zmumus.size() + zelels.size()) != 1)
@@ -64,6 +64,7 @@ namespace Rivet {
       }
     }
 
+
     void finalize() {
       double norm = crossSection() / picobarn / sumW();
 
@@ -75,12 +76,13 @@ namespace Rivet {
 
     ///@}
 
-    /// @name Histograms
-    ///@{
+
+    /// Histograms
     map<string, Histo1DPtr> _h;
-    ///@}
+
   };
+
 
   RIVET_DECLARE_PLUGIN(CMS_2014_I1322726);
 
-}  // namespace Rivet
+}

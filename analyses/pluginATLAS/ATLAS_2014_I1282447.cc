@@ -1,28 +1,31 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-#include "Rivet/Projections/WFinder.hh"
-#include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
 
 
-  /// @name ATLAS W+c analysis
+  /// @brief ATLAS W+c at 7 TeV
   ///
-  /// This routine implements the ATLAS W+c analysis.
-  /// Apart from those histograms, described and published on HEP Data, here
-  /// are some helper histograms defined, these are:
-  /// 
-  /// d02-x01-y01, d02-x01-y02 and d08-x01-y01 are ratios, the nominator ("_plus")
-  /// and denominator ("_minus") histograms are also given, so that the ratios can
-  /// be reconstructed if need be (e.g. when running on separate samples).
-  /// 
-  /// d05 and d06 are ratios over inclusive W production.
-  /// The routine has to be run on a sample for inclusive W production in order to
-  /// make sure the denominator ("_winc") is correctly filled.
-  /// 
+  /// This routine implements the ATLAS 7 TeV pp W+c analysis.
+  ///
+  /// Apart from those histograms described and published on HepData, there
+  /// are some helper histograms:
+  ///
+  /// - d02-x01-y01, d02-x01-y02 and d08-x01-y01 are ratios, the nominator ("_plus")
+  ///   and denominator ("_minus") histograms are also given, so that the ratios can
+  ///   be reconstructed if need be (e.g. when running on separate samples).
+  ///
+  /// - d05 and d06 are ratios over inclusive W production.
+  ///   The routine has to be run on a sample for inclusive W production in order to
+  ///   make sure the denominator ("_winc") is correctly filled.
+  ///
   /// The ratios can be constructed using the following sample code:
   ///
   /// ```python
@@ -31,103 +34,103 @@ namespace Rivet {
   /// import yoda
   /// hists_wc   = yoda.read("Rivet_Wc.yoda")
   /// hists_winc = yoda.read("Rivet_Winc.yoda")
-  /// 
+  ///
   /// ## division histograms --> ONLY for different plus minus runs
   /// # (merge before using yodamerge Rivet_plus.yoda Rivet_minus.yoda > Rivet_Wc.yoda)
-  /// 
+  ///
   /// d02y01_plus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y01_plus"]
   /// d02y01_minus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y01_minus"]
   /// ratio_d02y01 =  d02y01_plus.divide(d02y01_minus)
   /// ratio_d02y01.path = "/ATLAS_2014_I1282447/d02-x01-y01"
-  /// 
+  ///
   /// d02y02_plus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y02_plus"]
   /// d02y02_minus = hists_wc["/ATLAS_2014_I1282447/d02-x01-y02_minus"]
   /// ratio_d02y02=  d02y02_plus.divide(d02y02_minus)
   /// ratio_d02y02.path = "/ATLAS_2014_I1282447/d02-x01-y02"
-  /// 
+  ///
   /// d08y01_plus = hists_wc["/ATLAS_2014_I1282447/d08-x01-y01_plus"]
   /// d08y01_minus = hists_wc["/ATLAS_2014_I1282447/d08-x01-y01_minus"]
   /// ratio_d08y01=  d08y01_plus.divide(d08y01_minus)
   /// ratio_d08y01.path = "/ATLAS_2014_I1282447/d08-x01-y01"
-  /// 
+  ///
   /// # inclusive cross section
   /// h_winc = hists_winc["/ATLAS_2014_I1282447/d05-x01-y01"]
   /// h_d    = hists_wc["/ATLAS_2014_I1282447/d01-x01-y02"]
   /// h_dstar= hists_wc["/ATLAS_2014_I1282447/d01-x01-y03"]
-  /// 
+  ///
   /// ratio_wd      =  h_d.divide(h_winc)
   /// ratio_wd.path = "/ATLAS_2014_I1282447/d05-x01-y02"
-  /// 
+  ///
   /// ratio_wdstar      =  h_d.divide(h_winc)
   /// ratio_wdstar.path = "/ATLAS_2014_I1282447/d05-x01-y03"
-  /// 
+  ///
   /// # pT differential
   /// h_winc_plus  = hists_winc["/ATLAS_2014_I1282447/d06-x01-y01_winc"]
   /// h_winc_minus = hists_winc["/ATLAS_2014_I1282447/d06-x01-y02_winc"]
-  /// 
+  ///
   /// h_wd_plus      = hists_wc["/ATLAS_2014_I1282447/d06-x01-y01_wplus"]
   /// h_wd_minus     = hists_wc["/ATLAS_2014_I1282447/d06-x01-y02_wminus"]
   /// h_wdstar_plus  = hists_wc["/ATLAS_2014_I1282447/d06-x01-y03_wplus"]
   /// h_wdstar_minus = hists_wc["/ATLAS_2014_I1282447/d06-x01-y04_wminus"]
-  /// 
+  ///
   /// ratio_wd_plus       =  h_wd_plus.divide(h_winc_plus)
   /// ratio_wd_plus.path  = "/ATLAS_2014_I1282447/d06-x01-y01"
   /// ratio_wd_minus      =  h_wd_plus.divide(h_winc_minus)
   /// ratio_wd_minus.path = "/ATLAS_2014_I1282447/d06-x01-y02"
-  /// 
+  ///
   /// ratio_wdstar_plus       =  h_wdstar_plus.divide(h_winc_plus)
   /// ratio_wdstar_plus.path  = "/ATLAS_2014_I1282447/d06-x01-y03"
   /// ratio_wdstar_minus      =  h_wdstar_plus.divide(h_winc_minus)
   /// ratio_wdstar_minus.path = "/ATLAS_2014_I1282447/d06-x01-y04"
-  /// 
+  ///
   /// ratio_wd_plus =  h_wd_plus.divide(h_winc_plus)
   /// ratio_wd_plus.path = "/ATLAS_2014_I1282447/d06-x01-y01"
   /// ratio_wd_minus =  h_wd_plus.divide(h_winc_minus)
   /// ratio_wd_minus.path = "/ATLAS_2014_I1282447/d06-x01-y02"
-  /// 
+  ///
   /// h_winc_plus= hists_winc["/ATLAS_2014_I1282447/d06-x01-y01_winc"]
   /// h_winc_minus= hists_winc["/ATLAS_2014_I1282447/d06-x01-y02_winc"]
-  /// 
+  ///
   /// ## copy other histograms for plotting
-  /// 
+  ///
   /// d01x01y01= hists_wc["/ATLAS_2014_I1282447/d01-x01-y01"]
   /// d01x01y01.path = "/ATLAS_2014_I1282447/d01-x01-y01"
-  /// 
+  ///
   /// d01x01y02= hists_wc["/ATLAS_2014_I1282447/d01-x01-y02"]
   /// d01x01y02.path = "/ATLAS_2014_I1282447/d01-x01-y02"
-  /// 
+  ///
   /// d01x01y03= hists_wc["/ATLAS_2014_I1282447/d01-x01-y03"]
   /// d01x01y03.path = "/ATLAS_2014_I1282447/d01-x01-y03"
-  /// 
+  ///
   /// d03x01y01= hists_wc["/ATLAS_2014_I1282447/d03-x01-y01"]
   /// d03x01y01.path = "/ATLAS_2014_I1282447/d03-x01-y01"
-  /// 
+  ///
   /// d03x01y02= hists_wc["/ATLAS_2014_I1282447/d03-x01-y02"]
   /// d03x01y02.path = "/ATLAS_2014_I1282447/d03-x01-y02"
-  /// 
+  ///
   /// d04x01y01= hists_wc["/ATLAS_2014_I1282447/d04-x01-y01"]
   /// d04x01y01.path = "/ATLAS_2014_I1282447/d04-x01-y01"
-  /// 
+  ///
   /// d04x01y02= hists_wc["/ATLAS_2014_I1282447/d04-x01-y02"]
   /// d04x01y02.path = "/ATLAS_2014_I1282447/d04-x01-y02"
-  /// 
+  ///
   /// d04x01y03= hists_wc["/ATLAS_2014_I1282447/d04-x01-y03"]
   /// d04x01y03.path = "/ATLAS_2014_I1282447/d04-x01-y03"
-  /// 
+  ///
   /// d04x01y04= hists_wc["/ATLAS_2014_I1282447/d04-x01-y04"]
   /// d04x01y04.path = "/ATLAS_2014_I1282447/d04-x01-y04"
-  /// 
+  ///
   /// d07x01y01= hists_wc["/ATLAS_2014_I1282447/d07-x01-y01"]
   /// d07x01y01.path = "/ATLAS_2014_I1282447/d07-x01-y01"
-  /// 
+  ///
   /// yoda.write([ratio_d02y01,ratio_d02y02,ratio_d08y01, ratio_wd ,ratio_wdstar,ratio_wd_plus,ratio_wd_minus ,ratio_wdstar_plus,ratio_wdstar_minus,d01x01y01,d01x01y02,d01x01y03,d03x01y01,d03x01y02,d04x01y01,d04x01y02,d04x01y03,d04x01y04,d07x01y01],"validation.yoda")
   /// ```
+  ///
   class ATLAS_2014_I1282447 : public Analysis {
   public:
 
     /// Constructor
-    ATLAS_2014_I1282447() : Analysis("ATLAS_2014_I1282447")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2014_I1282447);
 
 
     /// @name Analysis methods
@@ -136,30 +139,27 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      /// @todo Initialise and register projections here
-      UnstableParticles fs;
+      // Initialise and register projections here
+      Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
 
-      Cut cuts = Cuts::etaIn(-2.5, 2.5) & (Cuts::pT > 20*GeV);
-
-      /// should use sample WITHOUT QED radiation off the electron
-      WFinder wfinder_born_el(fs, cuts, PID::ELECTRON, 25*GeV, 8000*GeV, 15*GeV, 0.1,
-			      LeptonOrigin::PROMPT, PhotonOrigin::ALL);
-      declare(wfinder_born_el, "WFinder_born_el");
-
-      WFinder wfinder_born_mu(fs, cuts, PID::MUON , 25*GeV, 8000*GeV, 15*GeV, 0.1,
-			      LeptonOrigin::PROMPT, PhotonOrigin::ALL);
-      declare(wfinder_born_mu, "WFinder_born_mu");
+      /// @note Should use sample WITHOUT QED radiation off the electron
+      ///
+      /// @warning This plus PhotonOrigin::ALL would mean dressing only with pi0 -> y y photons!?!
+      declare("MET", MissingMomentum());
+      LeptonFinder ef(0.1, cuts && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
+      LeptonFinder mf(0.1, cuts && Cuts::abspid == PID::MUON);
+      declare(mf, "Muons");
 
       // all hadrons that could be coming from a charm decay --
       // -- for safety, use region -3.5 - 3.5
-      declare(UnstableParticles(Cuts::abseta <3.5), "hadrons");
+      declare(UnstableParticles(Cuts::abseta < 3.5), "hadrons");
 
       // Input for the jets: no neutrinos, no muons, and no electron which passed the electron cuts
       // also: NO electron, muon or tau (needed due to ATLAS jet truth reconstruction feature)
       VetoedFinalState veto;
-
-      veto.addVetoOnThisFinalState(wfinder_born_el);
-      veto.addVetoOnThisFinalState(wfinder_born_mu);
+      veto.addVetoOnThisFinalState(ef);
+      veto.addVetoOnThisFinalState(mf);
       veto.addVetoPairId(PID::ELECTRON);
       veto.addVetoPairId(PID::MUON);
       veto.addVetoPairId(PID::TAU);
@@ -220,7 +220,6 @@ namespace Rivet {
       book(_hist_wcjet_jets_ratio ,"d08-x01-y01");
       book(_hist_wcjet_jets_plus   ,"d08-x01-y01_plus");
       book(_hist_wcjet_jets_minus  ,"d08-x01-y01_minus");
-
     }
 
 
@@ -228,43 +227,51 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       double charge_weight = 0; // account for OS/SS events
-
       int    lepton_charge = 0;
       double lepton_eta    = 0.;
 
       /// Find leptons
-      const WFinder& wfinder_born_el = apply<WFinder>(event, "WFinder_born_el");
-      const WFinder& wfinder_born_mu = apply<WFinder>(event, "WFinder_born_mu");
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.Et() < 25*GeV) vetoEvent;
 
-      if (wfinder_born_el.empty() && wfinder_born_mu.empty()) {
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const int iefound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 15*GeV);
+      const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+      const int imfound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 15*GeV);
+      if (iefound < 0 && imfound < 0) {
         MSG_DEBUG("No W bosons found");
+        vetoEvent;
+      }
+      if (iefound >= 0 && imfound >= 0) {
+        MSG_DEBUG("Multiple W bosons found");
         vetoEvent;
       }
 
       bool keepevent = false;
 
       //check electrons
-      if (!wfinder_born_el.empty()) {
-        const FourMomentum nu = wfinder_born_el.neutrinos()[0];
-        if (wfinder_born_el.mT() > 40*GeV && nu.pT() > 25*GeV) {
+      if (iefound >= 0) {
+        const Particle& el = es[iefound];
+        if (mT(pmiss, el) > 40*GeV) {
           keepevent = true;
-          lepton_charge = wfinder_born_el.leptons()[0].charge();
-          lepton_eta = fabs(wfinder_born_el.leptons()[0].pseudorapidity());
+          lepton_charge = el.charge();
+          lepton_eta = el.abseta();
         }
       }
 
       //check muons
-      if (!wfinder_born_mu.empty()) {
-        const FourMomentum nu = wfinder_born_mu.neutrinos()[0];
-        if (wfinder_born_mu.mT() > 40*GeV && nu.pT() > 25*GeV) {
+      if (imfound >= 0) {
+        const Particle& mu = mus[imfound];
+        if (mT(pmiss, mu) > 40*GeV) {
           keepevent = true;
-          lepton_charge = wfinder_born_mu.leptons()[0].charge();
-          lepton_eta = fabs(wfinder_born_mu.leptons()[0].pseudorapidity());
+          lepton_charge = mu.charge();
+          lepton_eta = mu.abseta();
         }
       }
 
       if (!keepevent) {
-        MSG_DEBUG("Event does not pass mT and MET cuts");
+        MSG_DEBUG("Event does not pass mT cuts");
         vetoEvent;
       }
 
@@ -289,7 +296,7 @@ namespace Rivet {
       /// FIND Different channels
       // 1: wcjet
       // get jets
-      const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT>25.0*GeV && Cuts::abseta<2.5);
+      const Jets& jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25.0*GeV && Cuts::abseta < 2.5);
       // loop over jets to select jets used to match to charm
       Jets js;
       int    matched_charmHadron = 0;
@@ -447,7 +454,6 @@ namespace Rivet {
       divide(_hist_wplusdstar_wplusinc_pt,   _hist_wplus_winc , _hist_wplusdstar_wplusinc_pt_ratio  );
       divide(_hist_wminusdstar_wminusinc_pt, _hist_wminus_winc, _hist_wminusdstar_wminusinc_pt_ratio);
 
-
       //d07
       scale(_hist_wcjet_jets, sf);
 
@@ -464,42 +470,15 @@ namespace Rivet {
 
     // Data members like post-cuts event weight counters go here
 
-    // Check whether particle comes from b-decay
+    /// Check whether particle comes from b-decay
+    ///
+    /// @note Slight difference wrt Rivet's native Particle::fromBottom method!
     bool isFromBDecay(const Particle& p) {
-
-      /// @todo I think we can just replicated the original behaviour with this call
-      /// Note slight difference to Rivet's native Particle::fromBottom method!
-      return p.hasAncestorWith([](const Particle &p)->bool{return p.hasBottom();});
-      /*
-      bool isfromB = false;
-
-      if (p.genParticle() == nullptr)  return false;
-
-      ConstGenParticlePtr part = p.genParticle();
-      ConstGenVertexPtr ivtx = part->production_vertex();
-      while (ivtx) {
-        if (ivtx->particles_in().size() < 1) {
-          isfromB = false;
-          break;
-        }
-        const HepMC::GenVertex::particles_in_const_iterator iPart_invtx = ivtx->particles_in_const_begin();
-        part = (*iPart_invtx);
-        if (!part) {
-          isfromB = false;
-          break;
-        }
-        isfromB = PID::hasBottom(part->pdg_id());
-
-        if (isfromB == true)  break;
-        ivtx = part->production_vertex();
-        if ( part->pdg_id() == 2212 || !ivtx )  break; // reached beam
-      }
-      return isfromB;
-       */
+      return p.hasAncestorWith([](const Particle& p)->bool{return p.hasBottom();});
     }
 
-
-    // Check whether particle has charmed children
+    /// Check whether particle has charmed children
+    ///
     /// @todo Use built-in method and avoid HepMC!
     bool hasCharmedChildren(ConstGenParticlePtr part) {
 
@@ -509,11 +488,7 @@ namespace Rivet {
       ConstGenVertexPtr ivtx = part->end_vertex();
       if (ivtx == nullptr)  return false;
 
-      // if (ivtx->particles_out_size() < 2) return false;
-      //HepMC::GenVertex::particles_out_const_iterator iPart_invtx = ivtx->particles_out_const_begin();
-      //HepMC::GenVertex::particles_out_const_iterator end_invtx = ivtx->particles_out_const_end();
-
-      for(ConstGenParticlePtr p2: HepMCUtils::particles(ivtx, Relatives::CHILDREN)){
+      for (ConstGenParticlePtr p2: HepMCUtils::particles(ivtx, Relatives::CHILDREN)) {
         if (p2 == part)  continue;
         hasCharmedChild = PID::hasCharm(p2->pdg_id());
         if (hasCharmedChild == true)  break;
@@ -555,7 +530,6 @@ namespace Rivet {
     Histo1DPtr _hist_wplus_wdstar_eta_lep;
     Histo1DPtr _hist_wminus_wdstar_eta_lep;
 
-
     // postprocessing histos
     //d05-x01
     Histo1DPtr _hist_w_inc;
@@ -588,7 +562,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2014_I1282447);
 
 }

@@ -180,11 +180,17 @@ namespace Rivet {
     }
 
     /// Veto particles from a supplied final state
-    VetoedFinalState& addVetoOnThisFinalState(const ParticleFinder& fs) {
+    VetoedFinalState& vetoFinalState(const ParticleFinder& fs) {
       const string name = "FS_" + to_str(_vetofsnames.size());
       declare(fs, name);
       _vetofsnames.insert(name);
       return *this;
+    }
+    /// Alias
+    ///
+    /// @deprecated Prefer the shorter version
+    VetoedFinalState& addVetoOnThisFinalState(const ParticleFinder& fs) {
+      return vetoFinalState(fs);
     }
 
 

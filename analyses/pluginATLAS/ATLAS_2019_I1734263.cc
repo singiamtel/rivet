@@ -37,9 +37,9 @@ namespace Rivet {
       // Project dressed leptons (e/mu not from tau) with pT > 27 GeV and |eta| < 2.5
       // Both for normal and simplified phase space
       PromptFinalState lep_bare(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      LeptonFinder lep_dressed(photon_id, lep_bare, 0.1, lepton_cuts, PhotonOrigin::ALL);
+      LeptonFinder lep_dressed(lep_bare, photon_id, 0.1, lepton_cuts);
       declare(lep_dressed,"lep_dressed");
-      LeptonFinder lep_dressed_simpl(photon_id, lep_bare, 0.1, lepton_cuts_simpl, PhotonOrigin::ALL);
+      LeptonFinder lep_dressed_simpl(lep_bare, photon_id, 0.1, lepton_cuts_simpl);
       declare(lep_dressed_simpl,"lep_dressed_simpl");
 
       // Get MET

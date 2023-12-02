@@ -23,19 +23,19 @@ namespace Rivet {
       const FinalState fs;
 
       // Get photons to dress leptons
-      IdentifiedFinalState photons(fs);
-      photons.acceptIdPair(PID::PHOTON);
+      IdentifiedFinalState photons(fs, PID::PHOTON);
+      PromptFinalState prompt_photons(photons);
 
       // Projection to find the electrons
       PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder elecs(photons, prompt_el, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 25*GeV));
-      LeptonFinder veto_elecs(photons, prompt_el, 0.1, eta_full, PhotonOrigin::NODECAY);
+      LeptonFinder elecs(prompt_el, photons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
+      LeptonFinder veto_elecs(prompt_el, prompt_photons, 0.1, eta_full);
       declare(elecs, "elecs");
 
       // Projection to find the muons
       PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder muons(photons, prompt_mu, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 25*GeV));
-      LeptonFinder veto_muons(photons, prompt_mu, 0.1, eta_full, PhotonOrigin::NODECAY);
+      LeptonFinder muons(prompt_mu, photons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
+      LeptonFinder veto_muons(prompt_mu, prompt_photons, 0.1, eta_full);
       declare(muons, "muons");
 
       // Jet clustering.

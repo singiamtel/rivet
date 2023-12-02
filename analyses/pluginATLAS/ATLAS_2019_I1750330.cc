@@ -10,7 +10,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief Semileptonic ttbar at 13 TeV
   class ATLAS_2019_I1750330 : public Analysis {
   public:
@@ -35,19 +35,19 @@ namespace Rivet {
       PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
       declare(electrons, "electrons");
 
-      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(electrons, photons, 0.1, lep_cuts);
       declare(dressedelectrons, "dressedelectrons");
 
-      LeptonFinder ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedelectrons(electrons, all_photons, 0.1, eta_full);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
       declare(muons, "muons");
 
-      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(muons, photons, 0.1, lep_cuts);
       declare(dressedmuons, "dressedmuons");
 
-      LeptonFinder ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedmuons(muons, all_photons, 0.1, eta_full);
       declare(ewdressedmuons, "ewdressedmuons");
 
       InvisibleFinalState neutrinos(OnlyPrompt::YES, TauDecaysAs::PROMPT);

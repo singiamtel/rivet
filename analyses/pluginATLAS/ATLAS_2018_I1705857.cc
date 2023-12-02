@@ -8,12 +8,13 @@
 namespace Rivet {
 
 
-  /// @brief ttbb at 13 TeV
+  /// ttbb at 13 TeV
   class ATLAS_2018_I1705857 : public Analysis {
   public:
 
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1705857);
+
 
     void init() {
       // Eta ranges
@@ -32,8 +33,8 @@ namespace Rivet {
       // Projection to find the muons
       PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
 
-      LeptonFinder dressedelectrons25(photons, electrons, 0.1, lep_cuts25, PhotonOrigin::ALL);
-      LeptonFinder dressedmuons25(photons, muons, 0.1, lep_cuts25, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons25(electrons, photons, 0.1, lep_cuts25);
+      LeptonFinder dressedmuons25(muons, photons, 0.1, lep_cuts25);
 
       declare(dressedelectrons25, "elecs");
       declare(dressedmuons25, "muons");
@@ -45,8 +46,8 @@ namespace Rivet {
       neutrinos.acceptTauDecays(true);
 
       PromptFinalState jet_photons(eta_full && Cuts::abspid == PID::PHOTON, TauDecaysAs::NONPROMPT);
-      LeptonFinder all_dressed_electrons(jet_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
-      LeptonFinder all_dressed_muons(jet_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_electrons(electrons, jet_photons, 0.1, eta_full);
+      LeptonFinder all_dressed_muons(muons, jet_photons, 0.1, eta_full);
 
       VetoedFinalState vfs(fs);
       vfs.addVetoOnThisFinalState(all_dressed_electrons);
@@ -149,8 +150,8 @@ namespace Rivet {
       if (pass_emu && (nbjets < 3 || njets < 3))    vetoEvent;
       if (pass_ljets && (nbjets < 4 || njets < 6))  vetoEvent;
 
-      double hthad = sum(jets, pT, 0.0);
-      double ht = sum(leptons, pT, hthad);
+      double hthad = sum(jets, Kin::pT, 0.0);
+      double ht = sum(leptons, Kin::pT, hthad);
 
       FourMomentum jsum = bjets[0].momentum() + bjets[1].momentum();
       double dr_leading = deltaR(bjets[0], bjets[1]);

@@ -149,8 +149,7 @@ namespace Rivet {
       prompt_photons.acceptMuonDecays(true);
       prompt_photons.acceptTauDecays(true);
 
-      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, dressed_lepton_cone_,
-                                     Cuts::open(), PhotonOrigin::NODECAY);
+      LeptonFinder dressed_leptons(prompt_leptons, prompt_photons, dressed_lepton_cone_);
       declare(dressed_leptons, "LeptonFinder");
 
       // Photons

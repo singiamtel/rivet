@@ -58,15 +58,15 @@ namespace Rivet {
 
         // Projection to find the electrons
         PromptFinalState electrons(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-        LeptonFinder dressedelectrons(photons, electrons, 0.1, dressed_lep);
+        LeptonFinder dressedelectrons(electrons, photons, 0.1, dressed_lep);
         declare(dressedelectrons, "elecs");
-        LeptonFinder ewdressedelectrons(photons, electrons, 0.1, eta_full);
+        LeptonFinder ewdressedelectrons(electrons, photons, 0.1, eta_full);
 
         // Projection to find the muons
         PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-        LeptonFinder dressedmuons(photons, muons, 0.1, dressed_lep);
+        LeptonFinder dressedmuons(muons, photons, 0.1, dressed_lep);
         declare(dressedmuons, "muons");
-        LeptonFinder ewdressedmuons(photons, muons, 0.1, eta_full);
+        LeptonFinder ewdressedmuons(muons, photons, 0.1, eta_full);
 
         // Jet clustering.
         VetoedFinalState vfs;

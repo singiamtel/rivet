@@ -3,6 +3,7 @@
 #define RIVET_Utils_HH
 
 #include "Rivet/Tools/RivetSTL.hh"
+#include "Rivet/Tools/TypeTraits.hh"
 #include "Rivet/Tools/PrettyPrint.hh"
 #include "Rivet/Tools/Exceptions.hh"
 #include <ostream>
@@ -298,7 +299,8 @@ namespace Rivet {
   /// @{
 
   /// Return number of true elements in the container @a c .
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline unsigned int count(const CONTAINER& c) {
     // return std::count_if(std::begin(c), std::end(c), [](const typename CONTAINER::value_type& x){return bool(x);});
     unsigned int rtn = 0;
@@ -313,7 +315,9 @@ namespace Rivet {
   // }
 
   /// Return number of elements in the container @a c for which @c f(x) is true.
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            //typename FN = bool(const typename std::decay_t<CONTAINER>::value_type&, const std::decay_t<T>&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline unsigned int count(const CONTAINER& c, const FN& f) {
     return std::count_if(std::begin(c), std::end(c), f);
   }
@@ -321,7 +325,8 @@ namespace Rivet {
 
 
   /// Return true if x is true for any x in container c, otherwise false.
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline bool any(const CONTAINER& c) {
     // return std::any_of(std::begin(c), std::end(c), [](const auto& x){return bool(x);});
     for (const auto& x : c) if (bool(x)) return true;
@@ -335,7 +340,9 @@ namespace Rivet {
   // }
 
   /// Return true if f(x) is true for any x in container c, otherwise false.
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            //typename FN = double(const typename std::decay_t<CONTAINER>::value_type&, const std::decay_t<T>&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline bool any(const CONTAINER& c, const FN& f) {
     return std::any_of(std::begin(c), std::end(c), f);
   }
@@ -343,7 +350,8 @@ namespace Rivet {
 
 
   /// Return true if @a x is true for all @c x in container @a c, otherwise false.
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline bool all(const CONTAINER& c) {
     // return std::all_of(std::begin(c), std::end(c), [](const auto& x){return bool(x);});
     for (const auto& x : c) if (!bool(x)) return false;
@@ -357,15 +365,17 @@ namespace Rivet {
   // }
 
   /// Return true if @a f(x) is true for all @c x in container @a c, otherwise false.
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            //typename FN = double(const typename std::decay_t<CONTAINER>::value_type&, const std::decay_t<T>&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline bool all(const CONTAINER& c, const FN& f) {
     return std::all_of(std::begin(c), std::end(c), f);
   }
 
 
-
   /// Return true if @a x is false for all @c x in container @a c, otherwise false.
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline bool none(const CONTAINER& c) {
     // return std::none_of(std::begin(c), std::end(c), [](){});
     for (const auto& x : c) if (bool(x)) return false;
@@ -379,7 +389,9 @@ namespace Rivet {
   // }
 
   /// Return true if @a f(x) is false for all @c x in container @a c, otherwise false.
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            //typename FN = double(const typename std::decay_t<CONTAINER>::value_type&, const std::decay_t<T>&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline bool none(const CONTAINER& c, const FN& f) {
     return std::none_of(std::begin(c), std::end(c), f);
   }
@@ -394,24 +406,30 @@ namespace Rivet {
   //   return out;
   // }
 
-  /// A single-container-arg version of std::transform, aka @c map
-  template <typename CONTAINER1, typename CONTAINER2, typename FN>
-  inline const CONTAINER2& transform(const CONTAINER1& in, CONTAINER2& out, const FN& f) {
+  /// A single-container-arg version of std::transform
+  /// @todo Make the function template specific to ParticleBase
+  /// or introduce C++20 concepts
+  template <typename CONTAINER1, typename CONTAINER2,
+            typename FN = typename std::decay_t<CONTAINER2>::value_type(
+                          const typename std::decay_t<CONTAINER1>::value_type::ParticleBase&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER1>> &&
+                                         is_citerable_v<std::decay_t<CONTAINER2>> >>
+  inline const CONTAINER2& transform(const CONTAINER1& in, CONTAINER2& out, FN&& f) {
     out.clear(); out.resize(in.size());
-    std::transform(in.begin(), in.end(), out.begin(), f);
+    std::transform(in.begin(), in.end(), out.begin(), std::forward<FN>(f));
     return out;
   }
 
   /// A single-container-arg, return-value version of std::transform, aka @c map
   /// @todo Make the function template polymorphic... or specific to ParticleBase
-  template <typename CONTAINER1, typename T2>
-  inline std::vector<T2> transform(const CONTAINER1& in, const std::function<T2(typename CONTAINER1::value_type)>& f) {
-    std::vector<T2> out(in.size());
+  template <typename CONTAINER1, typename RTN,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER1>> >>
+  inline std::vector<RTN> transform(const CONTAINER1& in,
+                                    const std::function<RTN(typename CONTAINER1::value_type::ParticleBase)>& f) {
+    std::vector<RTN> out;
     transform(in, out, f);
     return out;
   }
-
-
 
   // /// A single-container-arg version of std::accumulate, aka @c reduce
   // template <typename CONTAINER1, typename T>
@@ -421,18 +439,19 @@ namespace Rivet {
   // }
 
   /// A single-container-arg version of std::accumulate, aka @c reduce
-  template <typename CONTAINER1, typename T, typename FN>
+  template <typename CONTAINER1, typename T, typename FN,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER1>> >>
   inline T accumulate(const CONTAINER1& in, const T& init, const FN& f) {
     const T rtn = std::accumulate(in.begin(), in.end(), init, f);
     return rtn;
   }
 
 
-
   /// @brief Generic sum function, adding @c x for all @c x in container @a c
   ///
   /// @note Default-constructs the return type -- not always possible! Supply an explicit start value if necessary.
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline typename CONTAINER::value_type sum(const CONTAINER& c) {
     typename CONTAINER::value_type rtn; //< default construct return type
     for (const auto& x : c) rtn += x;
@@ -442,7 +461,8 @@ namespace Rivet {
   /// Generic sum function, adding @c x for all @c x in container @a c, starting with @a start
   ///
   /// @note It's more more flexible here to not use CONTAINER::value_type, allowing implicit casting to T.
-  template <typename CONTAINER, typename T>
+  template <typename CONTAINER, typename T,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline T sum(const CONTAINER& c, const T& start) {
     T rtn = start;
     for (const auto& x : c) rtn += x;
@@ -450,19 +470,22 @@ namespace Rivet {
   }
 
   /// Generic sum function, adding @a fn(@c x) for all @c x in container @a c, starting with @a start
-  template <typename CONTAINER, typename FN, typename T>
-  inline T sum(const CONTAINER& c, const FN& f, const T& start=T()) {
+  template <typename CONTAINER, typename T,
+            typename FN = T(const typename std::decay_t<CONTAINER>::value_type&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
+  inline T sum(CONTAINER&& c, FN&& fn, const T& start=T()) {
+    auto f = std::function(std::forward<FN>(fn));
     T rtn = start;
-    for (const auto& x : c) rtn += f(x);
+    for (const auto& x : c) rtn += fn(x);
     return rtn;
   }
-
 
 
   /// In-place generic sum function, adding @c x on to container @a out for all @c x in container @a c
   ///
   /// @note It's more more flexible here to not use CONTAINER::value_type, allowing implicit casting to T.
-  template <typename CONTAINER, typename T>
+  template <typename CONTAINER, typename T,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline T& isum(const CONTAINER& c, T& out) {
     for (const auto& x : c) out += x;
     return out;
@@ -471,7 +494,9 @@ namespace Rivet {
   /// In-place generic sum function, adding @a fn(@c x) on to container @a out for all @c x in container @a c
   ///
   /// @note It's more more flexible here to not use CONTAINER::value_type, allowing implicit casting to T.
-  template <typename CONTAINER, typename FN, typename T>
+  template <typename CONTAINER, typename FN, typename T,
+            //typename FN = double(const typename std::decay_t<CONTAINER>::value_type&, const std::decay_t<T>&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline T& isum(const CONTAINER& c, const FN& f, T& out) {
     for (const auto& x : c) out += f(x);
     return out;
@@ -482,7 +507,8 @@ namespace Rivet {
   /// Filter a collection in-place, removing the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& idiscard(CONTAINER& c, const FN& f) {
     const auto newend = std::remove_if(std::begin(c), std::end(c), f);
     c.erase(newend, c.end());
@@ -490,13 +516,15 @@ namespace Rivet {
   }
 
   /// Version with element-equality comparison in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& idiscard(CONTAINER& c, const typename CONTAINER::value_type& y) {
     return idiscard(c, [&](typename CONTAINER::value_type& x){ return x == y; });
   }
 
   /// Version with several element-equality comparisons in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& idiscard_if_any(CONTAINER& c, const CONTAINER& ys) {
     return idiscard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
   }
@@ -505,20 +533,23 @@ namespace Rivet {
   /// Filter a collection by copy, removing the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER discard(const CONTAINER& c, const FN& f) {
     CONTAINER rtn = c;
     return idiscard(rtn, f); ///< @todo More efficient would be copy_if with back_inserter...
   }
 
   /// Version with element-equality comparison in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER discard(const CONTAINER& c, const typename CONTAINER::value_type& y) {
     return discard(c, [&](typename CONTAINER::value_type& x){ return x == y; });
   }
 
   /// Version with several element-equality comparisons in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER discard_if_any(const CONTAINER& c, const CONTAINER& ys) {
     return discard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
   }
@@ -529,20 +560,24 @@ namespace Rivet {
   /// @note New container will be replaced, not appended to
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            //typename FN = bool(const typename std::decay_t<CONTAINER>::value_type&, const std::decay_t<T>&),
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& discard(const CONTAINER& c, const FN& f, CONTAINER& out) {
     out = discard(c, f);
     return out;
   }
 
   /// Version with element-equality comparison in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& discard(const CONTAINER& c, const typename CONTAINER::value_type& y, CONTAINER& out) {
     return discard(c, [&](typename CONTAINER::value_type& x){ return x == y; }, out);
   }
 
   /// Version with several element-equality comparisons in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& discard_if_any(const CONTAINER& c, const CONTAINER& ys, CONTAINER& out) {
     return discard(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); }, out);
   }
@@ -552,9 +587,9 @@ namespace Rivet {
   /// Filter a collection in-place, keeping the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  template <typename CONTAINER, typename FN>
-  inline CONTAINER& iselect(CONTAINER& c, const FN& f) {
-    //using value_type = typename std::remove_reference<decltype(*std::begin(std::declval<typename std::add_lvalue_reference<CONTAINER>::type>()))>::type;
+  template <typename CONTAINER, typename FN,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
+      inline CONTAINER& iselect(CONTAINER& c, const FN& f) {
     auto invf = [&](const typename CONTAINER::value_type& x){ return !f(x); };
     return idiscard(c, invf); //< yes, intentional!
   }
@@ -562,7 +597,8 @@ namespace Rivet {
   // No single equality-comparison version for select, since that would be silly!
 
   /// Version with several element-equality comparisons in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& iselect_if_any(CONTAINER& c, const CONTAINER& ys) {
     return iselect(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
   }
@@ -571,7 +607,8 @@ namespace Rivet {
   /// Filter a collection by copy, keeping the subset that passes the supplied function
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER select(const CONTAINER& c, const FN& f) {
     CONTAINER rtn = c;
     return iselect(rtn, f); ///< @todo More efficient would be copy_if with back_inserter ... but is that equally container agnostic?
@@ -580,7 +617,8 @@ namespace Rivet {
   // No single equality-comparison version for select, since that would be silly!
 
   /// Version with several element-equality comparisons in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER select_if_any(const CONTAINER& c, const CONTAINER& ys) {
     return select(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); });
   }
@@ -591,7 +629,8 @@ namespace Rivet {
   /// @note New container will be replaced, not appended to
   ///
   /// @todo Use const std::function<bool(typename CONTAINER::value_type)>... but need polymorphism for ParticleBase
-  template <typename CONTAINER, typename FN>
+  template <typename CONTAINER, typename FN,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& select(const CONTAINER& c, const FN& f, CONTAINER& out) {
     out = select(c, f);
     return out;
@@ -600,7 +639,8 @@ namespace Rivet {
   // No single equality-comparison version for select, since that would be silly!
 
   /// Version with several element-equality comparisons in place of a function
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER& select_if_any(const CONTAINER& c, const CONTAINER& ys, CONTAINER& out) {
     return select(c, [&](typename CONTAINER::value_type& x){ return contains(ys, x); }, out);
   }
@@ -611,7 +651,8 @@ namespace Rivet {
   ///
   /// The element at the @a j index is not included in the returned container.
   /// @a i and @a j can be negative, treated as backward offsets from the end of the container.
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER slice(const CONTAINER& c, int i, int j) {
     CONTAINER rtn;
     const size_t off1 = (i >= 0) ? i : c.size() + i;
@@ -626,7 +667,8 @@ namespace Rivet {
   /// @brief Tail slice of the container elements cf. Python's [i:] syntax
   ///
   /// Single-index specialisation of @c slice(c, i, j)
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER slice(const CONTAINER& c, int i) {
     return slice(c, i, c.size());
   }
@@ -634,7 +676,8 @@ namespace Rivet {
   /// @brief Head slice of the @a n first container elements
   ///
   /// Negative @a n means to take the head excluding the @a n -element tail
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER head(const CONTAINER& c, int n) {
     // if (n > c.size()) throw RangeError("Requested head longer than container");
     if (n < 0) n = std::max(0, (int)c.size()+n);
@@ -645,7 +688,8 @@ namespace Rivet {
   /// @brief Tail slice of the @a n last container elements
   ///
   /// Negative @a n means to take the tail from after the @a n th element
-  template <typename CONTAINER>
+  template <typename CONTAINER,
+            typename = std::enable_if_t< is_citerable_v<std::decay_t<CONTAINER>> >>
   inline CONTAINER tail(const CONTAINER& c, int n) {
     // if (n > c.size()) throw RangeError("Requested tail longer than container");
     if (n < 0) n = std::max(0, (int)c.size()+n);
@@ -696,6 +740,99 @@ namespace Rivet {
     const double rtnmin = e.first != in.end() ? *e.first : errval;
     const double rtnmax = e.second != in.end() ? *e.first : errval;
     return std::make_pair(rtnmin, rtnmax);
+  }
+
+  /// @}
+
+
+  /// @defgroup contcombutils Container-combinatorics utils
+  /// @{
+
+  /// @brief Return the index from a vector which best matches fn(c[i]) to the target value
+  ///
+  /// A NaN return from the function will be counted as a no-match, as will combinations giving
+  /// a value outside the given @a minval .. @a maxval range. A -1 index is returned in the
+  /// case that no valid match is found.
+  template <typename CONTAINER,
+            typename FN = double(const typename std::decay_t<CONTAINER>::value_type&),
+            typename = isCIterable<CONTAINER>>
+  inline int closestMatchIndex(CONTAINER&& c, FN&& fn,
+			       double target, double minval=-DBL_MAX, double maxval=DBL_MAX) {
+    auto f = std::function(std::forward<FN>(fn));
+    int ibest = -1;
+    double best = DBL_NAN;
+    for (size_t i = 0; i < c.size(); ++i) {
+      const double val = f(c[i]);
+      if (isnan(val)) continue;
+      if (val < minval || val > maxval) continue;
+      if (isnan(best) || fabs(val-target) < fabs(best-target)) {
+        best = val;
+        ibest = i;
+      }
+    }
+    return ibest;
+  }
+
+  /// @brief Return the indices from two vectors which best match fn(c1[i], c2[j]) to the target value
+  ///
+  /// A NaN return from the function will be counted as a no-match, as will combinations giving
+  /// a value outside the given @a minval .. @a maxval range. A {-1,-1} pair is returned in the
+  /// case that no valid match is found.
+  ///
+  /// @note No attempt is made to avoid duplication: the input lists are assumed independent and
+  ///   the user should check the sanity of the result, e.g. c1[i] and c2[j] are not the same object.
+  template <typename CONTAINER1, typename CONTAINER2,
+            typename FN = double(const typename std::decay_t<CONTAINER1>::value_type&,
+                                 const typename std::decay_t<CONTAINER2>::value_type&),
+            typename = isCIterable<CONTAINER1, CONTAINER2>>
+  inline pair<int,int> closestMatchIndices(CONTAINER1&& c1, CONTAINER2&& c2, FN&& fn,
+					   double target, double minval=-DBL_MAX, double maxval=DBL_MAX) {
+    auto f = std::function(std::forward<FN>(fn));
+    pair<int,int> ijbest{-1,-1};
+    double best = DBL_NAN;
+    for (size_t i = 0; i < c1.size(); ++i) {
+      for (size_t j = 0; j < c2.size(); ++j) {
+        const double val = f(c1[i], c2[j]);
+        if (isnan(val)) continue;
+        if (val < minval || val > maxval) continue;
+        if (isnan(best) || fabs(val-target) < fabs(best-target)) {
+          best = val;
+          ijbest = {i,j};
+        }
+      }
+    }
+    return ijbest;
+  }
+
+  /// @brief Return the index from a vector which best matches fn(c[i], x) to the target value
+  ///
+  /// A NaN return from the function will be counted as a no-match, as will combinations giving
+  /// a value outside the given @a minval .. @a maxval range. A -1 index is returned in the
+  /// case that no valid match is found.
+  ///
+  /// @note No attempt is made to avoid duplication: the inputs are assumed independent and
+  ///   the user should check the sanity of the result, e.g. c[i] and x are not the same object.
+  template <typename CONTAINER, typename T,
+            typename FN = double(const typename std::decay_t<CONTAINER>::value_type&, const std::decay_t<T>&),
+            typename = isCIterable<CONTAINER>>
+  inline int closestMatchIndex(CONTAINER&& c, const T& x, FN&& fn,
+			       double target, double minval=-DBL_MAX, double maxval=DBL_MAX) {
+    pair<int,int> ijbest = closestMatchIndices(std::forward<CONTAINER>(c), vector<T>{x}, std::forward<FN>(fn), target, minval, maxval);
+    return ijbest.first;
+  }
+
+  /// @brief Return the index from a vector which best matches fn(x, c[j]) to the target value
+  ///
+  /// A NaN return from the function will be counted as a no-match, as will combinations giving
+  /// a value outside the given @a minval .. @a maxval range. A -1 index is returned in the
+  /// case that no valid match is found.
+  ///
+  /// @note No attempt is made to avoid duplication: the inputs are assumed independent and
+  ///   the user should check the sanity of the result, e.g. c[i] and x are not the same object.
+  template <typename CONTAINER, typename T, typename FN, typename = isCIterable<CONTAINER>>
+  inline int closestMatchIndex(T&& x, CONTAINER&& c, FN&& fn,
+			       double target, double minval=-DBL_MAX, double maxval=DBL_MAX) {
+    return closestMatchIndex(std::forward<CONTAINER>(c), std::forward<T>(x), std::forward<FN>(fn), target, minval, maxval);
   }
 
   /// @}

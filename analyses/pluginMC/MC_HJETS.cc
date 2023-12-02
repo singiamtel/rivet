@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetAnalysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -26,15 +26,13 @@ namespace Rivet {
       const double ptcut = getOption<double>("PTTAUMIN", 25.);
 
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+      /// @todo Hmm, FS taus??
+      DileptonFinder hfinder(125*GeV, 0.0, cut && Cuts::abspid == PID::TAU, Cuts::massIn(115*GeV, 135*GeV));
 
-      /// @todo Urk, abuse! Need explicit HiggsFinder (and TauFinder?)
-      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NONE, 125*GeV);
       declare(hfinder, "Hfinder");
 
       // set ptcut from input option
-      const double jetptcut = getOption<double>("PTJMIN", 20.0);
-      _jetptcut = jetptcut * GeV;
+      _jetptcut = getOption<double>("PTJMIN", 20.0) * GeV;
 
       // set clustering radius from input option
       const double R = getOption<double>("R", 0.4);
@@ -43,14 +41,14 @@ namespace Rivet {
       JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
       if ( algoopt == "KT" ) {
-	clusterAlgo = JetAlg::KT;
+        clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = JetAlg::CA;
+        clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = JetAlg::ANTIKT;
+        clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
-	clusterAlgo = JetAlg::ANTIKT;
+        MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+        clusterAlgo = JetAlg::ANTIKT;
       }
 
       FastJets jetpro(hfinder.remainingFinalState(), clusterAlgo, R);
@@ -66,7 +64,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & e) {
-      const ZFinder& hfinder = apply<ZFinder>(e, "Hfinder");
+      const DileptonFinder& hfinder = apply<DileptonFinder>(e, "Hfinder");
       if (hfinder.bosons().size() != 1) vetoEvent;
 
       FourMomentum hmom(hfinder.bosons()[0].momentum());

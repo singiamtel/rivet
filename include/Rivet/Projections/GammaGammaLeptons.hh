@@ -41,7 +41,7 @@ namespace Rivet {
       case LeptonReco::ALL:
 	declare(FinalState(cuts), "LFS");
       case LeptonReco::ALL_DRESSED:
-        declare(LeptonFinder(FinalState(), dressDR, cuts, PhotonOrigin::ALL), "LFS");
+        declare(LeptonFinder(FinalState(), dressDR, cuts), "LFS");
       case LeptonReco::PROMPT_BARE:
         declare(PromptFinalState(cuts), "LFS");
       case LeptonReco::PROMPT_DRESSED:

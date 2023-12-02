@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
@@ -8,6 +8,7 @@ namespace Rivet {
 
 
   /// Z + jets in pp at 13 TeV
+  ///
   /// @note This base class contains a "mode" variable for combined, e, and mu channel derived classes
   class ATLAS_2015_CONF_2015_041 : public Analysis {
   public:
@@ -18,7 +19,8 @@ namespace Rivet {
     /// Constructor
     ATLAS_2015_CONF_2015_041(const string name="ATLAS_2015_CONF_2015_041", size_t channel = 0,
                              const string ref_data="ATLAS_2015_CONF_2015_041")
-                             : Analysis(name) {
+      : Analysis(name)
+    {
       _mode = channel; // This class uses the combined e+mu mode
       setRefDataName(ref_data);
     }
@@ -28,10 +30,10 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      const FinalState fs;
 
       Cut cuts = (Cuts::pT > 25*GeV) & (Cuts::abseta < 2.5);
-      ZFinder zfinder(fs, cuts, _mode? PID::MUON : PID::ELECTRON, 66*GeV, 116*GeV);
+      DileptonFinder zfinder(91.2*GeV, 0.1, cuts && Cuts::abspid == (_mode ? PID::MUON : PID::ELECTRON),
+                             Cuts::massIn(66*GeV, 116*GeV));
       declare(zfinder, "zfinder");
 
       // Define veto FS in order to prevent Z-decay products entering the jet algorithm
@@ -56,7 +58,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zfinder = apply<ZFinder>(event, "zfinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "zfinder");
       const Particles& leptons = zfinder.constituents();
       if (leptons.size() != 2)  vetoEvent;
 

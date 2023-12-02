@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetAnalysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"

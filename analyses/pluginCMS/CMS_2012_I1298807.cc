@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/MergedFinalState.hh"
 
@@ -20,19 +20,18 @@ namespace Rivet {
     /// Initialise projections and histograms
     void init() {
 
-      // FinalState electrons(Cuts::abseta < 2.5 && Cuts::abspid == PID::ELECTRON);
-      // FinalState muons(Cuts::abseta < 2.4 && Cuts::abspid == PID::MUON);
-      // MergedFinalState leptons(electrons, muons);
       FinalState leptons((Cuts::abspid == PID::ELECTRON && Cuts::abseta < 2.5) ||
                          (Cuts::abspid == PID::MUON && Cuts::abseta < 2.4));
       declare(leptons, "Leptons");
 
       Cut cut_el = Cuts::abseta < 2.5 && Cuts::pT > 7.0*GeV;
-      Cut cut_mu = Cuts::abseta < 2.4 && Cuts::pT > 5.0*GeV;
-
-      ZFinder zeefinder(FinalState(), cut_el, PID::ELECTRON, 60*GeV, 120*GeV, 0.1);
+      DileptonFinder zeefinder(91.2*GeV, 0.1, cut_el && Cuts::abspid == PID::ELECTRON,
+                               Cuts::massIn(60*GeV, 120*GeV));
       declare(zeefinder, "ZeeFinder");
-      ZFinder zmmfinder(FinalState(), cut_mu, PID::MUON, 60*GeV, 120*GeV, 0.1);
+
+      Cut cut_mu = Cuts::abseta < 2.4 && Cuts::pT > 5.0*GeV;
+      DileptonFinder zmmfinder(91.2*GeV, 0.1, cut_mu && Cuts::abspid == PID::MUON,
+                               Cuts::massIn(60*GeV, 120*GeV));
       declare(zmmfinder, "ZmmFinder");
 
       VetoedFinalState fs_woZmm;
@@ -40,9 +39,11 @@ namespace Rivet {
       VetoedFinalState fs_woZee;
       fs_woZee.addVetoOnThisFinalState(zeefinder);
 
-      ZFinder zeefinder_woZee(fs_woZee, cut_el, PID::ELECTRON, 60*GeV, 120*GeV, 0.1);
+      DileptonFinder zeefinder_woZee(fs_woZee, 91.2*GeV, 0.1,
+                                     cut_el && Cuts::abspid == PID::ELECTRON, Cuts::massIn(60*GeV, 120*GeV));
       declare(zeefinder_woZee, "Zeefinder_WoZee");
-      ZFinder zmmfinder_woZmm(fs_woZmm, cut_mu, PID::MUON, 60*GeV, 120*GeV, 0.1);
+      DileptonFinder zmmfinder_woZmm(fs_woZmm, 91.2*GeV, 0.1,
+                                     cut_mu && Cuts::abspid == PID::MUON, Cuts::massIn(60*GeV, 120*GeV));
       declare(zmmfinder_woZmm, "Zmmfinder_WoZmm");
 
       // Book histograms
@@ -67,16 +68,16 @@ namespace Rivet {
       if (leading_l_pt < 20*GeV || second_l_pt < 10*GeV) vetoEvent;
 
       // Find acceptable ZZ combinations and build four-momenta, otherwise veto
-      const ZFinder& zeefinder = apply<ZFinder>(evt, "ZeeFinder");
-      const ZFinder& zeefinder_woZee = apply<ZFinder>(evt, "Zeefinder_WoZee");
-      const ZFinder& zmmfinder = apply<ZFinder>(evt, "ZmmFinder");
-      const ZFinder& zmmfinder_woZmm = apply<ZFinder>(evt, "Zmmfinder_WoZmm");
+      const DileptonFinder& zeefinder = apply<DileptonFinder>(evt, "ZeeFinder");
+      const DileptonFinder& zeefinder_woZee = apply<DileptonFinder>(evt, "Zeefinder_WoZee");
+      const DileptonFinder& zmmfinder = apply<DileptonFinder>(evt, "ZmmFinder");
+      const DileptonFinder& zmmfinder_woZmm = apply<DileptonFinder>(evt, "Zmmfinder_WoZmm");
 
       FourMomentum pZ_a, pZ_b, pZ_1, pZ_2;
       FourMomentum pZZ, Z_a_l1, Z_a_l2, Z_b_l1, Z_b_l2;
       if (zeefinder.bosons().size() > 0 && zmmfinder.bosons().size() > 0) {
-        pZ_a = zeefinder.bosons()[0];
-        pZ_b = zmmfinder.bosons()[0];
+        pZ_a = zeefinder.boson();
+        pZ_b = zmmfinder.boson();
         pZZ = pZ_a + pZ_b;
         pZ_1 = pZ_a;
         pZ_2 = pZ_b;
@@ -85,8 +86,8 @@ namespace Rivet {
         Z_b_l1 = zmmfinder.constituents()[0];
         Z_b_l2 = zmmfinder.constituents()[1];
       } else if (zeefinder.bosons().size() > 0 && zeefinder_woZee.bosons().size() > 0) {
-        pZ_a = zeefinder.bosons()[0];
-        pZ_b = zeefinder_woZee.bosons()[0];
+        pZ_a = zeefinder.boson();
+        pZ_b = zeefinder_woZee.boson();
         pZZ = pZ_a + pZ_b;
         pZ_1 = pZ_a;
         pZ_2 = pZ_b;
@@ -95,8 +96,8 @@ namespace Rivet {
         Z_b_l1 = zeefinder_woZee.constituents()[0];
         Z_b_l2 = zeefinder_woZee.constituents()[1];
       } else if (zmmfinder.bosons().size() > 0 && zmmfinder_woZmm.bosons().size() > 0) {
-        pZ_a = zmmfinder.bosons()[0];
-        pZ_b = zmmfinder_woZmm.bosons()[0];
+        pZ_a = zmmfinder.boson();
+        pZ_b = zmmfinder_woZmm.boson();
         pZZ = pZ_a + pZ_b;
         pZ_1 = pZ_a;
         pZ_2 = pZ_b;

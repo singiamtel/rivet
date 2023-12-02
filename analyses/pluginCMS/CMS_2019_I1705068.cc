@@ -2,27 +2,28 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/WFinder.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 
 namespace Rivet {
 
 
-  /// Measurement of associated production of a W boson and a charm quark in proton-proton collisions at 13 TeV
+  /// W + charm quark in proton-proton collisions at 13 TeV
   class CMS_2019_I1705068 : public Analysis {
   public:
 
+    /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2019_I1705068);
 
 
+    /// Initialise analyis
     void init() {
 
       // Projections
-      FinalState fs;
-      WFinder wfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 0*GeV, PID::MUON,
-                         0*GeV, 1000000*GeV, 0*GeV, 0.1, LeptonOrigin::PROMPT,
-                         PhotonOrigin::NODECAY, MassVariable::MT);
-      declare(wfinder_mu, "WFinder_mu");
+      declare(MissingMom(), "MET");
+      LeptonFinder lf(0.1, Cuts::abseta < 2.4 && Cuts::abspid == PID::MUON);
+      declare(lf, "Leptons");
 
       UnstableParticles dst(Cuts::pT > 5*GeV && Cuts::abseta < 2.4);
       declare(dst, "Dstar");
@@ -31,24 +32,24 @@ namespace Rivet {
       book(_hist_WplusMinus_MuAbseta, "d04-x01-y01");
       book(_hist_Wplus_MuAbseta, "d05-x01-y01");
       book(_hist_Wminus_MuAbseta, "d06-x01-y01");
-
     }
 
 
     void analyze(const Event& event) {
 
-      // Get the reconstructed W
-      const WFinder& wfinder_mu = apply<WFinder>(event, "WFinder_mu");
-      if (wfinder_mu.bosons().size() != 1) vetoEvent;
+      // Identify the closest-matching mu+MET to m == mW
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      const Particles& mus = apply<LeptonFinder>(event, "Leptons").particles();
+      const Particles mus_mtfilt = select(mus, [&](const Particle& m){ return mT(m, pmiss) > 0*GeV; });
+      const int imfound = closestMatchIndex(mus_mtfilt, pmiss, Kin::mass, 80.4*GeV);
 
-      // No Missing Energy or MT cut at generator level:
-      const FourMomentum& lepton0 = wfinder_mu.leptons()[0].momentum();
-      double pt0 = lepton0.pT();
-      double eta0 = fabs( lepton0.eta() );
-      if ( (eta0 > 2.4) || (pt0 < 26.0*GeV) ) vetoEvent;
-
-      int muID = wfinder_mu.leptons()[0].pid();
-
+      // No MET or MT cut at generator level
+      if (imfound < 0) vetoEvent;
+      const Particle& lepton0 = mus_mtfilt[imfound];
+      const double pt0 = lepton0.pT();
+      const double eta0 = lepton0.abseta();
+      const int muID = lepton0.pid();
+      if (eta0 > 2.4 || pt0 < 26*GeV) vetoEvent;
 
       // D* selection:
       // OS = W boson and D* Meson have Opposite (charge) Signs
@@ -58,7 +59,7 @@ namespace Rivet {
       // OS-SS to remove the gluon splitting background
 
       const UnstableParticles& dst = apply<UnstableParticles>(event, "Dstar");
-      for (auto p: dst.particles()) {
+      for (const Particle& p : dst.particles()) {
         if (muID == -13 && p.pid() == -413) { // OS
           _hist_Wplus_MuAbseta->fill(eta0);
           _hist_WplusMinus_MuAbseta->fill(eta0);

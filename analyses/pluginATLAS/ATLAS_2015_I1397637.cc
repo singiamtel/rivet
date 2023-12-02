@@ -66,13 +66,13 @@ namespace Rivet {
       Cut eta_ranges = Cuts::abseta < 2.5;
 
       // Get dressed muons and the good muons (pt>25GeV)
-      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, eta_ranges, PhotonOrigin::ALL);
-      LeptonFinder dressed_mu(photons, bare_mu, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(bare_mu, photons, 0.1, eta_ranges);
+      LeptonFinder dressed_mu(bare_mu, photons, 0.1, eta_ranges && Cuts::pT > 25*GeV);
       declare(dressed_mu, "muons");
 
       // Get dressed electrons and the good electrons (pt>25GeV)
-      LeptonFinder all_dressed_el(photons, bare_el, 0.1, eta_ranges, PhotonOrigin::ALL);
-      LeptonFinder dressed_el(photons, bare_el, 0.1, eta_ranges && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(bare_el, photons, 0.1, eta_ranges);
+      LeptonFinder dressed_el(bare_el, photons, 0.1, eta_ranges && Cuts::pT > 25*GeV);
       declare(dressed_el, "electrons");
 
       // Jet clustering

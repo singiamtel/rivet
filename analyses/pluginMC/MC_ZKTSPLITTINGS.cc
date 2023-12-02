@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetSplittings.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -29,10 +29,8 @@ namespace Rivet {
       const double ptcut = getOption<double>("PTLMIN", 25.);
 
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
-
-      FinalState fs;
-      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, _dR, cut && Cuts::abspid == _lepton, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zfinder, "DileptonFinder");
 
       // set clustering radius from input option
       const double R = getOption<double>("R", 0.6);
@@ -47,7 +45,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & e) {
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
 
       MC_JetSplittings::analyze(e);

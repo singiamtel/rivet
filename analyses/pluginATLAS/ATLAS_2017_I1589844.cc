@@ -37,21 +37,20 @@ namespace Rivet {
       if ( getOption("LMODE") == "EL" ) _mode = 1;
       if ( getOption("LMODE") == "MU" ) _mode = 2;
 
-      const FinalState fs;
+      Cut cuts_mu = (Cuts::pT > 25*GeV) && (Cuts::abseta < 2.4);
+      Cut cuts_el = Cuts::pT > 25*GeV && (Cuts::abseta <= 1.37 || (Cuts::abseta >= 1.52 && Cuts::abseta < 2.47));
 
-      const Cut cuts_mu = (Cuts::pT > 25*GeV) && (Cuts::abseta < 2.4);
-      const Cut cuts_el = Cuts::pT > 25*GeV && (Cuts::abseta <= 1.37 || (Cuts::abseta >= 1.52 && Cuts::abseta < 2.47));
-
+      FinalState fs;
       IdentifiedFinalState bare_mu(fs);
       bare_mu.acceptIdPair(PID::MUON);
       IdentifiedFinalState bare_el(fs);
       bare_el.acceptIdPair(PID::ELECTRON);
-      const LeptonFinder muons(fs, bare_mu, 0.1, cuts_mu, PhotonOrigin::ALL);
-      const LeptonFinder elecs(fs, bare_el, 0.1, cuts_el, PhotonOrigin::ALL);
+      LeptonFinder muons(bare_mu, fs, 0.1, cuts_mu);
+      LeptonFinder elecs(bare_el, fs, 0.1, cuts_el);
       declare(muons, "muons");
       declare(elecs, "elecs");
 
-      const ChargedFinalState cfs(Cuts::abseta < 2.5 && Cuts::pT > 0.4*GeV);
+      ChargedFinalState cfs(Cuts::abseta < 2.5 && Cuts::pT > 0.4*GeV);
       VetoedFinalState jet_fs(cfs);
       jet_fs.addVetoOnThisFinalState(muons);
       jet_fs.addVetoOnThisFinalState(elecs);

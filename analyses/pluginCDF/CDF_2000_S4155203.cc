@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -19,8 +19,8 @@ namespace Rivet {
 
     void init() {
       // Set up projections
-      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 66*GeV, 116*GeV, 0.0);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.0, Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder, "DileptonFinder");
 
       // Book histogram
       book(_hist_zpt ,1, 1, 1);
@@ -29,7 +29,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& e) {
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) {
         MSG_DEBUG("Num e+ e- pairs found = " << zfinder.bosons().size());
         vetoEvent;

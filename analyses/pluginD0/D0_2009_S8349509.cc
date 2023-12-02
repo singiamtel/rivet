@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -20,8 +20,8 @@ namespace Rivet {
     /// Book histograms
     void init() {
       Cut cut = Cuts::abseta < 1.7 && Cuts::pT > 15*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 65*GeV, 115*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, cut && Cuts::abspid == PID::MUON, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zfinder, "DileptonFinder");
 
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
@@ -49,7 +49,7 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.bosons().size() == 1) {
         // count inclusive sum of weights for histogram normalisation
         _inclusive_Z_sumofweights->fill();

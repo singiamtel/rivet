@@ -31,8 +31,8 @@ namespace Rivet {
         // Wide lepton cuts which cover both channels and are used for the jet veto.
         Cut dressedele_cuts = (Cuts::abseta < 4.9) && (Cuts::pT > 7*GeV);
         Cut dressedmu_cuts = (Cuts::abseta < 2.7) && (Cuts::pT > 7*GeV);
-        const LeptonFinder dressedelectrons(prompt_photons, prompt_ele, 0.1, dressedele_cuts);
-        const LeptonFinder dressedmuons(prompt_photons, prompt_mu, 0.1, dressedmu_cuts);
+        const LeptonFinder dressedelectrons(prompt_ele, prompt_photons, 0.1, dressedele_cuts);
+        const LeptonFinder dressedmuons(prompt_mu, prompt_photons, 0.1, dressedmu_cuts);
 
         declare(dressedelectrons, "electrons");
         declare(dressedmuons, "muons");

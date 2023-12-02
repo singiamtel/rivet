@@ -35,9 +35,9 @@ namespace Rivet {
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
-      LeptonFinder dressedelectrons(photons, electrons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(electrons, photons, 0.1, eta_lep && Cuts::pT > 25*GeV);
       declare(dressedelectrons, "dressedelectrons");
-      LeptonFinder ewdressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedelectrons(electrons, photons, 0.1, eta_full);
 
       // Projection to find the muons
       IdentifiedFinalState mu_id(fs);
@@ -45,9 +45,9 @@ namespace Rivet {
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(true);
       declare(muons, "muons");
-      LeptonFinder dressedmuons(photons, muons, 0.1, eta_lep && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(muons, photons, 0.1, eta_lep && Cuts::pT > 25*GeV);
       declare(dressedmuons, "dressedmuons");
-      LeptonFinder ewdressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder ewdressedmuons(muons, photons, 0.1, eta_full);
 
       // Projection to find neutrinos and produce MET
       IdentifiedFinalState nu_id;

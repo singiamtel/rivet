@@ -1,8 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetAnalysis.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/VetoedFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Analysis.hh"
 
 namespace Rivet {
 
@@ -22,69 +24,69 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-		  _dR=0.2;
-      if (getOption("SCHEME") == "BARE")  _dR = 0.0;
-		  _lepton=PID::ELECTRON;
-      if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
-      // set FS cuts from input options
-      const double etacut = getOption<double>("ABSETALMAX", 3.5);
-      const double ptcut = getOption<double>("PTLMIN", 25.);
+      // Use analysis options
+      _dR = (getOption("SCHEME") == "BARE") ? 0.0 : 0.2;
+      _lepton = (getOption("LMODE") == "MU") ? PID::MUON : PID::ELECTRON;
+      const double ETACUT = getOption<double>("ABSETALMAX", 3.5);
+      const double PTCUT = getOption<double>("PTLMIN", 25.);
+      const Cut cut = Cuts::abseta < ETACUT && Cuts::pT > PTCUT*GeV;
 
-      FinalState fs;
-      Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+      // Define projections
+      declare("MET", MissingMomentum());
+      LeptonFinder lf(_dR, cut && Cuts::abspid == _lepton);
+      declare(lf, "Leptons");
 
-      WFinder wfinder(fs, cut, _lepton, 60.0*GeV, 100.0*GeV, 25.0*GeV, _dR);
-      declare(wfinder, "WFinder");
-
-      // set ptcut from input option
-      const double jetptcut = getOption<double>("PTJMIN", 20.0);
-      _jetptcut = jetptcut * GeV;
-
-      // set clustering radius from input option
+      // Set pT cut, jet alg, and clustering radius from input options
+      _jetptcut = getOption<double>("PTJMIN", 20.0) * GeV;
       const double R = getOption<double>("R", 0.4);
-
-      // set clustering algorithm from input option
       JetAlg clusterAlgo;
       const string algoopt = getOption("ALGO", "ANTIKT");
       if ( algoopt == "KT" ) {
-	clusterAlgo = JetAlg::KT;
+        clusterAlgo = JetAlg::KT;
       } else if ( algoopt == "CA" ) {
-	clusterAlgo = JetAlg::CA;
+        clusterAlgo = JetAlg::CA;
       } else if ( algoopt == "ANTIKT" ) {
-	clusterAlgo = JetAlg::ANTIKT;
+        clusterAlgo = JetAlg::ANTIKT;
       } else {
-	MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
-	clusterAlgo = JetAlg::ANTIKT;
+        MSG_WARNING("Unknown jet clustering algorithm option " + algoopt + ". Defaulting to anti-kT");
+        clusterAlgo = JetAlg::ANTIKT;
       }
 
-      FastJets jetpro(wfinder.remainingFinalState(), clusterAlgo, R);
-      declare(jetpro, "Jets");
+      // Find jets with clustering radius from input option
+      VetoedFinalState jetinput;
+      jetinput.addVetoOnThisFinalState(lf);
+      FastJets fj(jetinput, clusterAlgo, R);
+      declare(fj, "Jets");
 
-      book(_h_W_jet1_deta ,"W_jet1_deta", 50, -5.0, 5.0);
-      book(_h_W_jet1_dR ,"W_jet1_dR", 25, 0.5, 7.0);
+      book(_h_W_jet1_deta, "W_jet1_deta", 50, -5.0, 5.0);
+      book(_h_W_jet1_dR, "W_jet1_dR", 25, 0.5, 7.0);
 
       MC_JetAnalysis::init();
     }
 
 
-
     /// Do the analysis
-    void analyze(const Event & e) {
+    void analyze(const Event& event) {
 
-      const WFinder& wfinder = apply<WFinder>(e, "WFinder");
-      if (wfinder.bosons().size() != 1) {
-        vetoEvent;
-      }
-      FourMomentum wmom(wfinder.bosons().front().momentum());
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
 
-      const Jets& jets = apply<FastJets>(e, "Jets").jetsByPt(Cuts::pT > _jetptcut);
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+      const int ifound = closestMatchIndex(ls, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+      if (ifound < 0) vetoEvent;
+      const Particle& l = ls[ifound];
+      FourMomentum wmom = l.mom() + pmiss;
+
+      const Jets& jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > _jetptcut);
       if (jets.size() > 0) {
         _h_W_jet1_deta->fill(wmom.eta()-jets[0].eta());
         _h_W_jet1_dR->fill(deltaR(wmom, jets[0].momentum()));
       }
 
-      MC_JetAnalysis::analyze(e);
+      MC_JetAnalysis::analyze(event);
     }
 
 
@@ -117,6 +119,7 @@ namespace Rivet {
 
   };
 
-  // The hooks for the plugin system
+
   RIVET_DECLARE_PLUGIN(MC_WJETS);
+
 }

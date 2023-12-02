@@ -22,12 +22,11 @@ namespace Rivet {
     // Set up projections and book histograms
     void init() {
       // Complete final state
-      FinalState fs( (Cuts::abseta < 5) and (Cuts::pT > 0.0*MeV) );
+      FinalState fs(Cuts::abseta < 5);
 
       // Dressed leptons
       ChargedLeptons charged_leptons(fs);
-      IdentifiedFinalState photons(fs);
-      photons.acceptIdPair(PID::PHOTON);
+      IdentifiedFinalState photons(fs, PID::PHOTON);
 
       PromptFinalState prompt_leptons(charged_leptons);
       prompt_leptons.acceptMuonDecays(true);
@@ -37,7 +36,7 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
       Cut looseLeptonCuts = Cuts::pt > 15*GeV && Cuts::abseta < 2.4;
 
-      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, 0.1, looseLeptonCuts, PhotonOrigin::ALL);
+      LeptonFinder dressed_leptons(prompt_leptons, prompt_photons, 0.1, looseLeptonCuts);
       declare(dressed_leptons, "LeptonFinder");
 
       // Projection for jets

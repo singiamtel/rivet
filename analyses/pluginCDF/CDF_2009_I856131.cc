@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -23,8 +23,8 @@ namespace Rivet {
       /// Initialise and register projections here
       // this seems to have been corrected completely for all selection cuts,
       // i.e. eta cuts and pT cuts on leptons.
-      ZFinder zfinder(FinalState(), Cuts::open(), PID::ELECTRON, 66*GeV, 116*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder, "DileptonFinder");
 
 
       /// Book histograms here
@@ -36,7 +36,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.bosons().size() == 1) {
         _h_yZ->fill(fabs(zfinder.bosons()[0].rapidity()));
         _h_xs->fill(1960);

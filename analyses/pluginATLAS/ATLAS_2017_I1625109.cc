@@ -192,8 +192,8 @@ namespace Rivet {
 
       // Baseline lepton and jet declaration
       const Cut lepton_baseline_cuts = Cuts::abseta < 2.7 && Cuts::pT > 5*GeV;
-      const LeptonFinder elecs = LeptonFinder(photons, bare_elecs, 0.1, lepton_baseline_cuts);
-      const LeptonFinder muons = LeptonFinder(photons, bare_muons, 0.1, lepton_baseline_cuts);
+      const LeptonFinder elecs = LeptonFinder(bare_elecs, photons, 0.1, lepton_baseline_cuts);
+      const LeptonFinder muons = LeptonFinder(bare_muons, photons, 0.1, lepton_baseline_cuts);
       declare(elecs, "electrons");
       declare(muons, "muons");
 

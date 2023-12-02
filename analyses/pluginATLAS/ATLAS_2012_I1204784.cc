@@ -1,10 +1,8 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
-
-
 
 
   /// ATLAS Z phi* measurement
@@ -19,16 +17,15 @@ namespace Rivet {
 
       /// Book histograms and initialise projections before the run
       void init() {
-        FinalState fs;
         Cut cuts = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-        ZFinder zfinder_dressed_el(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1);
-        declare(zfinder_dressed_el, "ZFinder_dressed_el");
-        ZFinder zfinder_bare_el(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.0);
-        declare(zfinder_bare_el, "ZFinder_bare_el");
-        ZFinder zfinder_dressed_mu(fs, cuts, PID::MUON, 66*GeV, 116*GeV, 0.1);
-        declare(zfinder_dressed_mu, "ZFinder_dressed_mu");
-        ZFinder zfinder_bare_mu(fs, cuts, PID::MUON, 66*GeV, 116*GeV, 0.0);
-        declare(zfinder_bare_mu, "ZFinder_bare_mu");
+        DileptonFinder zfinder_dressed_el(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+        declare(zfinder_dressed_el, "DileptonFinder_dressed_el");
+        DileptonFinder zfinder_bare_el(91.2*GeV, 0.0, cuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+        declare(zfinder_bare_el, "DileptonFinder_bare_el");
+        DileptonFinder zfinder_dressed_mu(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::MUON, Cuts::massIn(66*GeV, 116*GeV));
+        declare(zfinder_dressed_mu, "DileptonFinder_dressed_mu");
+        DileptonFinder zfinder_bare_mu(91.2*GeV, 0.0, cuts && Cuts::abspid == PID::MUON, Cuts::massIn(66*GeV, 116*GeV));
+        declare(zfinder_bare_mu, "DileptonFinder_bare_mu");
 
         // Book histograms
         // Single-differential plots
@@ -49,19 +46,21 @@ namespace Rivet {
       /// Perform the per-event analysis
       void analyze(const Event& event) {
 
-        const ZFinder& zfinder_dressed_el = apply<ZFinder>(event, "ZFinder_dressed_el");
-        const ZFinder& zfinder_bare_el = apply<ZFinder>(event, "ZFinder_bare_el");
-        const ZFinder& zfinder_dressed_mu = apply<ZFinder>(event, "ZFinder_dressed_mu");
-        const ZFinder& zfinder_bare_mu = apply<ZFinder>(event, "ZFinder_bare_mu");
-
+        const DileptonFinder& zfinder_dressed_el = apply<DileptonFinder>(event, "DileptonFinder_dressed_el");
         fillPlots(zfinder_dressed_el, _hist_zphistar_el_dressed, _h_phistar_el_dressed);
+
+        const DileptonFinder& zfinder_bare_el = apply<DileptonFinder>(event, "DileptonFinder_bare_el");
         fillPlots(zfinder_bare_el, _hist_zphistar_el_bare, _h_phistar_el_bare);
+
+        const DileptonFinder& zfinder_dressed_mu = apply<DileptonFinder>(event, "DileptonFinder_dressed_mu");
         fillPlots(zfinder_dressed_mu, _hist_zphistar_mu_dressed, _h_phistar_mu_dressed);
+
+        const DileptonFinder& zfinder_bare_mu = apply<DileptonFinder>(event, "DileptonFinder_bare_mu");
         fillPlots(zfinder_bare_mu, _hist_zphistar_mu_bare, _h_phistar_mu_bare);
       }
 
 
-      void fillPlots(const ZFinder& zfind, Histo1DPtr hist, Histo1DGroupPtr& binnedHist) {
+      void fillPlots(const DileptonFinder& zfind, Histo1DPtr hist, Histo1DGroupPtr& binnedHist) {
         if (zfind.bosons().size() != 1) return;
         Particles leptons = sortBy(zfind.constituents(), cmpMomByPt);
 

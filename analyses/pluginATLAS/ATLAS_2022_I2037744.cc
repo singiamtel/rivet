@@ -39,11 +39,11 @@ namespace Rivet {
             declare(electrons, "electrons");
 
             // Analysis dressed electrons
-            LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL);
+            LeptonFinder dressedelectrons(electrons, photons, 0.1, lep_cuts);
             declare(dressedelectrons, "dressedelectrons");
 
             // "All" dressed electrons to be removed from input to jetbuilder
-            LeptonFinder ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+            LeptonFinder ewdressedelectrons(electrons, all_photons, 0.1, eta_full);
             declare(ewdressedelectrons, "ewdressedelectrons");
 
             //Final state muons, including from prompt tau decays
@@ -51,11 +51,11 @@ namespace Rivet {
             declare(muons, "muons");
 
             //Analysis dressed muons
-            LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL);
+            LeptonFinder dressedmuons(muons, photons, 0.1, lep_cuts);
             declare(dressedmuons, "dressedmuons");
 
             //"All" dressed muons to be removed from input to jetbuilder and for use in METbuilder
-            LeptonFinder ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+            LeptonFinder ewdressedmuons(muons, all_photons, 0.1, eta_full);
             declare(ewdressedmuons, "ewdressedmuons");
 
             //Neutrinos to be removed from input to jetbuilder, acceptTauDecays=true

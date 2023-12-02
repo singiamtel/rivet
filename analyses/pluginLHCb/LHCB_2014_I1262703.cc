@@ -1,12 +1,13 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
 
 
   /// @brief Study of forward Z + jet production at 7 TeV at LHCb
+  ///
   /// @author W. Barter, A. Bursche, M. Sirendi (Rivet implementation)
   class LHCB_2014_I1262703 : public Analysis {
   public:
@@ -20,8 +21,8 @@ namespace Rivet {
 
       // Projections
       const Cut mycut = Cuts::eta >= 2.0 && Cuts::eta <= 4.5 && Cuts::pT > 20*GeV;
-      ZFinder zfinder(FinalState(), mycut, PID::MUON, 60*GeV, 120*GeV, 0.);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.0, mycut && Cuts::abspid == PID::MUON, Cuts::massIn(60*GeV, 120*GeV));
+      declare(zfinder, "DileptonFinder");
       FastJets jetpro(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5);
       declare(jetpro, "Jets");
 
@@ -43,7 +44,7 @@ namespace Rivet {
     /// Do the analysis
     void analyze(const Event & e) {
 
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
       const Particles leptons = zfinder.constituents();
 

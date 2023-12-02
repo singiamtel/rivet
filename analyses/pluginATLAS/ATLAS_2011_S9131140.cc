@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -21,17 +21,15 @@ namespace Rivet {
     void init() {
 
       // Set up projections
-      FinalState fs;
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-
-      ZFinder zfinder_dressed_el(fs, cut, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.1);
-      declare(zfinder_dressed_el, "ZFinder_dressed_el");
-      ZFinder zfinder_bare_el(fs, cut, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.0);
-      declare(zfinder_bare_el, "ZFinder_bare_el");
-      ZFinder zfinder_dressed_mu(fs, cut, PID::MUON, 66.0*GeV, 116.0*GeV, 0.1);
-      declare(zfinder_dressed_mu, "ZFinder_dressed_mu");
-      ZFinder zfinder_bare_mu(fs, cut, PID::MUON, 66.0*GeV, 116.0*GeV, 0.0);
-      declare(zfinder_bare_mu, "ZFinder_bare_mu");
+      DileptonFinder zfinder_dressed_el(91.2*GeV, 0.1, cut && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder_dressed_el, "DileptonFinder_dressed_el");
+      DileptonFinder zfinder_bare_el(91.2*GeV, 0.0, cut && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder_bare_el, "DileptonFinder_bare_el");
+      DileptonFinder zfinder_dressed_mu(91.2*GeV, 0.1, cut && Cuts::abspid == PID::MUON, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder_dressed_mu, "DileptonFinder_dressed_mu");
+      DileptonFinder zfinder_bare_mu(91.2*GeV, 0.0, cut && Cuts::abspid == PID::MUON, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder_bare_mu, "DileptonFinder_bare_mu");
 
       // Book histograms
       book(_hist_zpt_el_dressed     ,1, 1, 2);  // electron "dressed"
@@ -48,28 +46,28 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& evt) {
-      const ZFinder& zfinder_dressed_el = apply<ZFinder>(evt, "ZFinder_dressed_el");
+      const DileptonFinder& zfinder_dressed_el = apply<DileptonFinder>(evt, "DileptonFinder_dressed_el");
       if (!zfinder_dressed_el.bosons().empty()) {
         _sumw_el_dressed->fill();
         const FourMomentum pZ = zfinder_dressed_el.bosons()[0].momentum();
         _hist_zpt_el_dressed->fill(pZ.pT()/GeV);
       }
 
-      const ZFinder& zfinder_bare_el = apply<ZFinder>(evt, "ZFinder_bare_el");
+      const DileptonFinder& zfinder_bare_el = apply<DileptonFinder>(evt, "DileptonFinder_bare_el");
       if (!zfinder_bare_el.bosons().empty()) {
         _sumw_el_bare->fill();
 	    const FourMomentum pZ = zfinder_bare_el.bosons()[0].momentum();
         _hist_zpt_el_bare->fill(pZ.pT()/GeV);
       }
 
-      const ZFinder& zfinder_dressed_mu = apply<ZFinder>(evt, "ZFinder_dressed_mu");
+      const DileptonFinder& zfinder_dressed_mu = apply<DileptonFinder>(evt, "DileptonFinder_dressed_mu");
       if (!zfinder_dressed_mu.bosons().empty()) {
         _sumw_mu_dressed->fill();
         const FourMomentum pZ = zfinder_dressed_mu.bosons()[0].momentum();
         _hist_zpt_mu_dressed->fill(pZ.pT()/GeV);
       }
 
-      const ZFinder& zfinder_bare_mu = apply<ZFinder>(evt, "ZFinder_bare_mu");
+      const DileptonFinder& zfinder_bare_mu = apply<DileptonFinder>(evt, "DileptonFinder_bare_mu");
       if (!zfinder_bare_mu.bosons().empty()) {
         _sumw_mu_bare->fill();
         const FourMomentum pZ = zfinder_bare_mu.bosons()[0].momentum();

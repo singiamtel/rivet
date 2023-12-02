@@ -31,12 +31,12 @@ namespace Rivet {
     	// Muons
     	Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 25*GeV;
     	PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-    	LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, lepton_cuts, PhotonOrigin::ALL);
+    	LeptonFinder all_dressed_mu(bare_mu, photons, 0.1, lepton_cuts);
     	declare(all_dressed_mu, "muons");
 
     	// Electrons
     	PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-    	LeptonFinder all_dressed_el(photons, bare_el, 0.1, lepton_cuts, PhotonOrigin::ALL);
+    	LeptonFinder all_dressed_el(bare_el, photons, 0.1, lepton_cuts);
     	declare(all_dressed_el, "electrons");
 
     	//Jet forming

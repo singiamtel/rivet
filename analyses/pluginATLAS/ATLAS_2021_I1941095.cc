@@ -35,14 +35,14 @@ namespace Rivet {
 
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_el(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
-      LeptonFinder electrons(promptphotons, bare_el, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(bare_el, promptphotons, 0.1, Cuts::abseta < 2.5);
+      LeptonFinder electrons(bare_el, promptphotons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
       declare(electrons,"electrons");
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_mu(promptphotons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
-      LeptonFinder muons(promptphotons,bare_mu, 0.1, Cuts::abseta <2.5 && Cuts::pT > 25*GeV, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(bare_mu, promptphotons, 0.1, Cuts::abseta < 2.5);
+      LeptonFinder muons(bare_mu, promptphotons, 0.1, Cuts::abseta <2.5 && Cuts::pT > 25*GeV);
       declare(muons,"muons");
 
       // AntiKt4TruthWZJets as AntiKt4TruthWZJets, but w/o photons from hadrons in dressing
@@ -57,7 +57,8 @@ namespace Rivet {
       // AntiKt10TruthTrimmedPtFrac5SmallR20Jets
       FinalState fs(Cuts::abseta < 5.0);
       FastJets fjets(fs, JetAlg::ANTIKT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
-      _trimmer = fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2), fastjet::SelectorPtFractionMin(0.05));
+      _trimmer = fastjet::Filter(fastjet::JetDefinition(fastjet::kt_algorithm, 0.2),
+                                 fastjet::SelectorPtFractionMin(0.05));
       declare(fjets,"fjets");
 
       // Missing momentum

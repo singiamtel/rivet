@@ -50,14 +50,14 @@ namespace Rivet {
 
       // Dressed leptons
       Cut lep_cuts = Cuts::pT > 7*GeV && Cuts::abseta < 2.5;
-      LeptonFinder dressed_leps(photon_fs, (_mode == 2 ? el_fs : mu_fs), 0.1, lep_cuts);
+      LeptonFinder dressed_leps((_mode == 2 ? el_fs : mu_fs), photon_fs, 0.1, lep_cuts);
       declare(dressed_leps, "LeptonFinder");
 
       // In-acceptance leptons for lepton veto
       PromptFinalState veto_lep_fs(Cuts::abseta < 4.9 && (Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON));
       veto_lep_fs.acceptTauDecays();
       veto_lep_fs.acceptMuonDecays();
-      LeptonFinder veto_lep(photon_fs, veto_lep_fs, 0.1, lep_cuts);
+      LeptonFinder veto_lep(veto_lep_fs, photon_fs, 0.1, lep_cuts);
       declare(veto_lep, "VetoLeptons");
 
       // MET

@@ -28,9 +28,9 @@ namespace Rivet {
       Cut etaranges_el = Cuts::abseta < 2.5 && Cuts::pT > 7*GeV;
       Cut etaranges_mu = Cuts::abseta < 2.7 && Cuts::pT > 6*GeV;
 
-      LeptonFinder electron_sel4l(photon, bare_EL, 0.1, etaranges_el);
+      LeptonFinder electron_sel4l(bare_EL, photon, 0.1, etaranges_el);
       declare(electron_sel4l, "ELECTRON_sel4l");
-      LeptonFinder muon_sel4l(photon, bare_MU, 0.1, etaranges_mu);
+      LeptonFinder muon_sel4l(bare_MU, photon, 0.1, etaranges_mu);
       declare(muon_sel4l, "MUON_sel4l");
 
 

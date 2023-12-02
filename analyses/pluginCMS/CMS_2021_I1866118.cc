@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -9,18 +9,20 @@
 
 namespace Rivet {
 
-  /// @brief Study of Z boson plus jets events using variables sensitive to double-parton scattering in pp collisions at 13 TeV
+
+  /// Z boson + jets sensitive to double-parton scattering at 13 TeV
   class CMS_2021_I1866118 : public Analysis {
   public:
+
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2021_I1866118);
 
+
     /// Initialization
     void init() {
-      const FinalState fs;
 
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 27 * GeV;
-      ZFinder zmumufinder(fs, cut, PID::MUON, 70 * GeV, 110 * GeV);
+      DileptonFinder zmumufinder(91.2*GeV, 0.1, cut && Cuts::abspid == PID::MUON, Cuts::massIn(70*GeV, 110*GeV));
       declare(zmumufinder, "zmumufinder");
 
       // Define veto FS in order to prevent Z-decay products entering the jet algorithm
@@ -44,9 +46,10 @@ namespace Rivet {
       book(_h["reldpt_j1j2_Z2J"], 10, 1, 1);
     }
 
+
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const ZFinder& zmumufinder = apply<ZFinder>(event, "zmumufinder");
+      const DileptonFinder& zmumufinder = apply<DileptonFinder>(event, "zmumufinder");
       const Particles& zmumus = zmumufinder.bosons();
       if (zmumus.size() != 1) {
         vetoEvent;
@@ -86,6 +89,7 @@ namespace Rivet {
       }
     }
 
+
     /// Normalise histograms etc., after the run
     void finalize() {
       double norm = (sumOfWeights() != 0) ? crossSection()/picobarn/sumOfWeights() : 1.0;
@@ -102,21 +106,22 @@ namespace Rivet {
       }
     }
 
+
   private:
+
     /// @name Histogram objects
-    //@{
+    /// @{
     Histo1DPtr h_dphi_Z1J_cn;
     Histo1DPtr h_reldpt_Z1J_cn;
     Histo1DPtr h_dphi_Zdijet_Z2J_cn;
     Histo1DPtr h_reldpt_Zdijet_Z2J_cn;
     Histo1DPtr h_reldpt_j1j2_Z2J_cn;
-
     map<string,Histo1DPtr> _h;
+    /// @}
 
-    //@}
   };
 
-  // Hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(CMS_2021_I1866118);
 
-}  // namespace Rivet
+}

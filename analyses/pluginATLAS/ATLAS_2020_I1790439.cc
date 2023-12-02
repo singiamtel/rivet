@@ -26,7 +26,7 @@ namespace Rivet {
       Cut cut_lep = (Cuts::abseta < 2.7) && (Cuts::pT > 5*GeV);
       PromptFinalState prompt_photons(Cuts::abspid == PID::PHOTON);
       PromptFinalState prompt_leptons(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-      LeptonFinder dLeptons(prompt_photons, prompt_leptons, 0.1, cut_lep, PhotonOrigin::ALL);
+      LeptonFinder dLeptons(prompt_leptons, prompt_photons, 0.1, cut_lep);
       declare(dLeptons, "AllLeptons");
 
       /// Jet inputs
@@ -35,7 +35,7 @@ namespace Rivet {
 
       // reject all leptons dressed with only prompt photons from jet input
       FinalState leptons(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-      LeptonFinder reject_leptons(prompt_photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
+      LeptonFinder reject_leptons(leptons, prompt_photons, 0.1);
       jet_input.addVetoOnThisFinalState(reject_leptons);
 
       // reject prompt invisibles, including from tau decays

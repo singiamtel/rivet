@@ -43,15 +43,14 @@ namespace Rivet {
       PromptFinalState el_bare_FS(Cuts::abseta < 5.0 && Cuts::abspid == PID::ELECTRON);
 
       // Project dressed electrons with pT > 15 GeV and |eta| < 2.47
-      LeptonFinder el_dressed_FS(ph_dressing_FS, el_bare_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
+      LeptonFinder el_dressed_FS(el_bare_FS, ph_dressing_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
       declare(el_dressed_FS,"EL_DRESSED_FS");
 
       // Project bare muons
       PromptFinalState mu_bare_FS(Cuts::abseta < 5.0 && Cuts::abspid == PID::MUON);
 
       // Project dressed muons with pT > 15 GeV and |eta| < 2.47
-      //LeptonFinder mu_dressed_FS(ph_dressing_FS, mu_bare_FS, 0.1, true, -2.47, 2.47, 15.0*GeV, false);
-      LeptonFinder mu_dressed_FS(ph_dressing_FS, mu_bare_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
+      LeptonFinder mu_dressed_FS(mu_bare_FS, ph_dressing_FS, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 15*GeV);
       declare(mu_dressed_FS,"MU_DRESSED_FS");
 
       // Final state excluding muons and neutrinos (for jet building and photon isolation)

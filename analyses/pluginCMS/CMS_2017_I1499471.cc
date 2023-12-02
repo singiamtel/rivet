@@ -4,11 +4,10 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
-
-//#define DebugLog
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
+
 
   class CMS_2017_I1499471 : public Analysis {
   public:
@@ -16,23 +15,19 @@ namespace Rivet {
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2017_I1499471);
 
+
     /// Book histograms and initialise projections before the run
     void init() {
 
-#ifdef DebugLog
-      // set optionally the verbosity for the internal Rivet message system
-      getLog().setLevel(0);
-#endif
-
-      FinalState fs; ///< @todo No cuts?
-      VisibleFinalState visfs(fs);
-
-      ZFinder zeeFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::ELECTRON, 71.0*GeV, 111.0*GeV, 0.1 );
+      DileptonFinder zeeFinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV &&
+                               Cuts::abspid == PID::ELECTRON, Cuts::massIn(71.0*GeV, 111.0*GeV));
       declare(zeeFinder, "ZeeFinder");
 
-      ZFinder zmumuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 71.0*GeV, 111.0*GeV, 0.1 );
+      DileptonFinder zmumuFinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV &&
+                                 Cuts::abspid == PID::MUON, Cuts::massIn(71.0*GeV, 111.0*GeV));
       declare(zmumuFinder, "ZmumuFinder");
 
+      VisibleFinalState visfs;
       VetoedFinalState jetConstits(visfs);
       jetConstits.addVetoOnThisFinalState(zeeFinder);
       jetConstits.addVetoOnThisFinalState(zmumuFinder);
@@ -78,8 +73,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zeeFS = apply<ZFinder>(event, "ZeeFinder");
-      const ZFinder& zmumuFS = apply<ZFinder>(event, "ZmumuFinder");
+      const DileptonFinder& zeeFS = apply<DileptonFinder>(event, "ZeeFinder");
+      const DileptonFinder& zmumuFS = apply<DileptonFinder>(event, "ZmumuFinder");
 
       const Particles& zees = zeeFS.bosons();
       const Particles& zmumus = zmumuFS.bosons();
@@ -291,7 +286,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2017_I1499471);
 
 }

@@ -14,7 +14,7 @@ namespace Rivet {
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2016_I1487726);
 
-      
+
         /// @name Analysis methods
         /// @{
 
@@ -30,7 +30,7 @@ namespace Rivet {
             FinalState phs(Cuts::abspid == PID::PHOTON);
 
             Cut lep_fid = (Cuts::abseta < 2.4 && Cuts::pT >= 25*GeV);
-            LeptonFinder dlep(phs, _mode? elfs : mufs, 0.1, lep_fid, PhotonOrigin::ALL);
+            LeptonFinder dlep(_mode? elfs : mufs, phs, 0.1, lep_fid);
             declare(dlep, "LeptonFinder");
 
             FastJets fj(FinalState(), JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);

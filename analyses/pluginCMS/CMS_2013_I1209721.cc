@@ -1,33 +1,29 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/Thrust.hh"
 
 namespace Rivet {
-
-
 
 
   /// CMS Z+jets delta(phi) and jet thrust measurement at 7 TeV
   class CMS_2013_I1209721 : public Analysis {
   public:
 
-    CMS_2013_I1209721()
-      : Analysis("CMS_2013_I1209721")
-    {    }
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2013_I1209721);
 
 
     /// Book projections and histograms
     void init() {
       // Full final state
-      const FinalState fs((Cuts::etaIn(-5.0,5.0)));
-      declare(fs, "FS");
+      const FinalState fs(Cuts::abseta < 5.0);
       // Z finders for electrons and muons
       Cut cuts = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      const ZFinder zfe(fs, cuts, PID::ELECTRON, 71*GeV, 111*GeV);
-      const ZFinder zfm(fs, cuts, PID::MUON,     71*GeV, 111*GeV);
+      const DileptonFinder zfe(fs, 91.2*GeV, 0.1, cuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(71*GeV, 111*GeV));
       declare(zfe, "ZFE");
+      const DileptonFinder zfm(fs, 91.2*GeV, 0.1, cuts && Cuts::abspid == PID::MUON, Cuts::massIn(71*GeV, 111*GeV));
       declare(zfm, "ZFM");
       // Jets
       const FastJets jets(fs, JetAlg::ANTIKT, 0.5);
@@ -51,8 +47,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Apply the Z finders
-      const ZFinder& zfe = apply<ZFinder>(event, "ZFE");
-      const ZFinder& zfm = apply<ZFinder>(event, "ZFM");
+      const DileptonFinder& zfe = apply<DileptonFinder>(event, "ZFE");
+      const DileptonFinder& zfm = apply<DileptonFinder>(event, "ZFM");
 
       // Choose the Z candidate (there must be one)
       if (zfe.empty() && zfm.empty()) vetoEvent;

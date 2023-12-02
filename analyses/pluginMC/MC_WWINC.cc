@@ -1,6 +1,8 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
@@ -11,9 +13,7 @@ namespace Rivet {
   public:
 
     /// Default constructor
-    MC_WWINC()
-      : Analysis("MC_WWINC")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(MC_WWINC);
 
 
     /// @name Analysis methods
@@ -21,28 +21,22 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      FinalState fs;
+      declare("MET", MissingMomentum());
 
-      // set FS cuts from input options
-      const double etaecut = getOption<double>("ABSETAEMAX", 3.5);
-      const double ptecut = getOption<double>("PTEMIN", 25.);
+      // Find electrons with cuts from input options
+      const double ETAECUT = getOption<double>("ABSETAEMAX", 3.5);
+      const double PTECUT = getOption<double>("PTEMIN", 25.);
+      const Cut cut_e = Cuts::abseta < ETAECUT && Cuts::pT > PTECUT*GeV;
+      LeptonFinder ef(0.2, cut_e && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
 
-      Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
+      // Find muons with cuts from input options
+      const double ETAMUCUT = getOption<double>("ABSETAMUMAX", 3.5);
+      const double PTMUCUT = getOption<double>("PTMUMIN", 25.);
+      const Cut cut_m = Cuts::abseta < ETAMUCUT && Cuts::pT > PTMUCUT*GeV;
+      LeptonFinder mf(0.2, cut_m && Cuts::abspid == PID::MUON);
+      declare(mf, "Muons");
 
-      WFinder wenufinder(fs, cute, PID::ELECTRON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
-      declare(wenufinder, "WenuFinder");
-
-      VetoedFinalState wmnuinput;
-      wmnuinput.addVetoOnThisFinalState(wenufinder);
-      
-      // set FS cuts from input options
-      const double etamucut = getOption<double>("ABSETAMUMAX", 3.5);
-      const double ptmucut = getOption<double>("PTMUMIN", 25.);
-
-      Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
-      
-      WFinder wmnufinder(wmnuinput, cutmu, PID::MUON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
-      declare(wmnufinder, "WmnuFinder");
 
       // properties of the pair momentum
       double sqrts = sqrtS()>0. ? sqrtS() : 14000.;
@@ -77,61 +71,60 @@ namespace Rivet {
     }
 
 
-
     /// Do the analysis
-    void analyze(const Event & e) {
+    void analyze(const Event& event) {
 
-      const WFinder& wenufinder = apply<WFinder>(e, "WenuFinder");
-      if (wenufinder.bosons().size()!=1) {
-        vetoEvent;
-      }
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
 
-      const WFinder& wmnufinder = apply<WFinder>(e, "WmnuFinder");
-      if (wmnufinder.bosons().size()!=1) {
-        vetoEvent;
-      }
+      // Identify the closest-matching l+MET to m == mW
+      /// @note Dubious strategy, given there are two neutrinos...
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const int iefound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+      const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+      const int imfound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
 
-      FourMomentum wenu(wenufinder.bosons()[0].momentum());
-      FourMomentum wmnu(wmnufinder.bosons()[0].momentum());
-      FourMomentum ww(wenu+wmnu);
-      // find leptons
-      FourMomentum ep=wenufinder.leptons()[0].momentum();
-      FourMomentum enu=wenufinder.neutrinos()[0].momentum();
-      FourMomentum mm=wmnufinder.leptons()[0].momentum();
-      FourMomentum mnu=wmnufinder.neutrinos()[0].momentum();
+      // Require two valid W candidates
+      if (iefound < 0 || imfound < 0) vetoEvent;
 
-      _h_WW_pT->fill(ww.pT());
-      _h_WW_pT_peak->fill(ww.pT());
-      _h_WW_eta->fill(ww.eta());
-      _h_WW_phi->fill(ww.phi());
-      double mww2=ww.mass2();
-      if (mww2>0.0) _h_WW_m->fill(sqrt(mww2));
+      // Get momenta
+      const FourMomentum pe = es[iefound].mom();
+      const FourMomentum pm = mus[imfound].mom();
 
-      _h_WW_dphi->fill(mapAngle0ToPi(wenu.phi()-wmnu.phi()));
-      _h_WW_deta->fill(wenu.eta()-wmnu.eta());
-      _h_WW_dR->fill(deltaR(wenu,wmnu));
-      _h_WW_dpT->fill(fabs(wenu.pT()-wmnu.pT()));
+      const FourMomentum pww = pe + pm + pmiss; //< don't double-count the MET
+      _h_WW_pT->fill(pww.pT());
+      _h_WW_pT_peak->fill(pww.pT());
+      _h_WW_eta->fill(pww.eta());
+      _h_WW_phi->fill(pww.phi());
+      if (pww.mass2() > 0.0) _h_WW_m->fill(pww.mass());
 
-      Vector3 crossWenu = ep.p3().cross(enu.p3());
-      Vector3 crossWmnu = mm.p3().cross(mnu.p3());
-      double costheta = crossWenu.dot(crossWmnu)/crossWenu.mod()/crossWmnu.mod();
+      const FourMomentum penu = pe + pmiss;
+      const FourMomentum pmnu = pm + pmiss;
+      _h_WW_dphi->fill(mapAngle0ToPi(penu.phi()-pmnu.phi()));
+      _h_WW_deta->fill(penu.eta() - pmnu.eta());
+      _h_WW_dR->fill(deltaR(penu, pmnu));
+      _h_WW_dpT->fill(fabs(penu.pT() - pmnu.pT()));
+
+      const Vector3 crossWenu = pe.p3().cross(penu.p3());
+      const Vector3 crossWmnu = pm.p3().cross(pmnu.p3());
+      const double costheta = crossWenu.dot(crossWmnu)/crossWenu.mod()/crossWmnu.mod();
       _h_WW_costheta_planes->fill(costheta);
 
-      _h_W_pT->fill(wenu.pT());
-      _h_W_pT->fill(wmnu.pT());
-      _h_W_eta->fill(wenu.eta());
-      _h_W_eta->fill(wmnu.eta());
+      _h_W_pT->fill(penu.pT()/GeV);
+      _h_W_pT->fill(pmnu.pT()/GeV);
+      _h_W_eta->fill(penu.eta());
+      _h_W_eta->fill(pmnu.eta());
 
-      _h_Wl_pT->fill(ep.pT());
-      _h_Wl_pT->fill(mm.pT());
-      _h_Wl_eta->fill(ep.eta());
-      _h_Wl_eta->fill(mm.eta());
+      _h_Wl_pT->fill(pe.pT()/GeV);
+      _h_Wl_pT->fill(pm.pT()/GeV);
+      _h_Wl_eta->fill(pe.eta());
+      _h_Wl_eta->fill(pm.eta());
 
-      _h_WeWm_dphi->fill(mapAngle0ToPi(ep.phi()-mm.phi()));
-      _h_WeWm_deta->fill(ep.eta()-mm.eta());
-      _h_WeWm_dR->fill(deltaR(ep,mm));
-      double m2=FourMomentum(ep+mm).mass2();
-      if (m2 < 0) m2 = 0.0;
+      _h_WeWm_dphi->fill(mapAngle0ToPi(pe.phi() - pm.phi()));
+      _h_WeWm_deta->fill(pe.eta() - pm.eta());
+      _h_WeWm_dR->fill(deltaR(pe, pm));
+      const double m2 = max(FourMomentum(pe + pm).mass2(), 0.0);
       _h_WeWm_m->fill(sqrt(m2));
     }
 
@@ -189,8 +182,6 @@ namespace Rivet {
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_WWINC);
 
 }

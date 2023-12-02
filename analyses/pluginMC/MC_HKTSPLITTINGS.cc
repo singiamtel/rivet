@@ -1,14 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetSplittings.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
 
 
-
-
-  /// @brief MC validation analysis for higgs [-> tau tau] + jets events
+  /// MC validation analysis for higgs [-> tau tau] + jets events
   class MC_HKTSPLITTINGS : public MC_JetSplittings {
   public:
 
@@ -28,9 +26,9 @@ namespace Rivet {
       const double ptcut = getOption<double>("PTTAUMIN", 25.);
 
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+      /// @todo FS taus??
+      DileptonFinder hfinder(125*GeV, 0.0, cut && Cuts::abspid == PID::TAU, Cuts::massIn(115*GeV, 135*GeV));
 
-      /// @todo Urk, abuse! Need explicit HiggsFinder and TauFinder
-      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0, LeptonOrigin::PROMPT, PhotonOrigin::NONE, 125*GeV);
       declare(hfinder, "Hfinder");
 
       // set clustering radius from input option
@@ -43,10 +41,9 @@ namespace Rivet {
     }
 
 
-
     /// Do the analysis
     void analyze(const Event & e) {
-      const ZFinder& hfinder = apply<ZFinder>(e, "Hfinder");
+      const DileptonFinder& hfinder = apply<DileptonFinder>(e, "Hfinder");
       if (hfinder.bosons().size() != 1) vetoEvent;
       MC_JetSplittings::analyze(e);
     }

@@ -6,7 +6,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief Lepton differential ttbar analysis at 13 TeV
   class ATLAS_2019_I1759875 : public Analysis {
   public:
@@ -17,23 +17,19 @@ namespace Rivet {
 
       Cut eta_full = Cuts::abseta < 5.0 && Cuts::pT > 1.0*MeV;
 
-      // All final state particles
-      const FinalState fs;
-
       // Get photons to dress leptons
-      IdentifiedFinalState photons(fs);
-      photons.acceptIdPair(PID::PHOTON);
+      PromptFinalState photons(Cuts::pid == PID::PHOTON);
 
       // Projection to find the electrons
       PromptFinalState prompt_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder elecs(photons, prompt_el, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
-      LeptonFinder veto_elecs(photons, prompt_el, 0.1, eta_full, PhotonOrigin::NODECAY);
+      LeptonFinder elecs(prompt_el, photons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV);
+      LeptonFinder veto_elecs(prompt_el, photons, 0.1, eta_full);
       declare(elecs, "elecs");
 
       // Projection to find the muons
       PromptFinalState prompt_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder muons(photons, prompt_mu, 0.1, (Cuts::abseta < 2.5) && (Cuts::pT > 20*GeV));
-      LeptonFinder veto_muons(photons, prompt_mu, 0.1, eta_full, PhotonOrigin::NODECAY);
+      LeptonFinder muons(prompt_mu, photons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 20*GeV);
+      LeptonFinder veto_muons(prompt_mu, photons, 0.1, eta_full);
       declare(muons, "muons");
 
       VetoedFinalState vfs;

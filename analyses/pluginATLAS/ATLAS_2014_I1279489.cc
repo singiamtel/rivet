@@ -130,16 +130,10 @@ namespace Rivet {
 
       FinalState fs(Cuts::abseta < 5.);
 
-      FinalState photon_fs(fs, Cuts::abspid == PID::PHOTON);
-
-      FinalState electron_fs(fs, Cuts::abspid == PID::ELECTRON);
-
-      FinalState muon_fs(fs, Cuts::abspid == PID::MUON);
-
-      LeptonFinder dressed_electrons(photon_fs, electron_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_electrons(0.1, Cuts::abspid == PID::ELECTRON && Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_electrons, "DressedElectrons");
 
-      LeptonFinder dressed_muons(photon_fs, muon_fs, 0.1, Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
+      LeptonFinder dressed_muons(0.1, Cuts::abspid == PID::MUON && Cuts::abseta < 2.47 && Cuts::pT > 25*GeV);
       declare(dressed_muons, "DressedMuons");
 
       FastJets jets(fs, JetAlg::ANTIKT, 0.4);

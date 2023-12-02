@@ -2,8 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/WFinder.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "fastjet/tools/Filter.hh"
 #include "fastjet/tools/Pruner.hh"
 #include "Rivet/Tools/AtlasCommon.hh"
@@ -13,22 +12,10 @@ namespace Rivet {
   class MC_JET_IN_HI : public Analysis {
   public:
 
-    /// @name Constructors etc.
-    /// @{
-
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(MC_JET_IN_HI);
 
-    /// @}
 
-
-  public:
-
-    string ts(int in) {
-      std::stringstream ss;
-      ss << in;
-      return ss.str();
-    }
     /// @name Analysis methods
     /// @{
 
@@ -36,22 +23,17 @@ namespace Rivet {
     void init() {
       // Declare centrality projection - we use the ATLAS PbPb definition
       // to be able to compare to data.
-      declareCentrality(ATLAS::SumET_PBPB_Centrality(),"ATLAS_PBPB_CENTRALITY",
-		      "sumETFwd","sumETFwd");
-      // The final state where jets are found
-      FinalState fs(Cuts::abseta < 2.5);
-      declare(fs, "FS");
+      declareCentrality(ATLAS::SumET_PBPB_Centrality(), "ATLAS_PBPB_CENTRALITY", "sumETFwd", "sumETFwd");
 
-      ZFinder zfinder(fs, Cuts::abseta < 2.5 && Cuts::pT > 30*GeV, PID::MUON, 80*GeV, 100*GeV, 0.2,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, Cuts::abseta < 2.5 && Cuts::pT > 30*GeV &&
+                             Cuts::abspid == PID::MUON, Cuts::massIn(80*GeV, 100*GeV));
+      declare(zfinder, "DileptonFinder");
 
       // Z+jet jet collections
       declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.3), "JetsAK3");
       declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.5), "JetsAK5");
       declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.7), "JetsAK7");
       declare(FastJets(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.9), "JetsAK9");
-
       jetFinders = {"JetsAK3", "JetsAK5", "JetsAK7", "JetsAK9"};
 
       h_zpT.resize(jetFinders.size());
@@ -65,13 +47,14 @@ namespace Rivet {
 
       centData = {0., 0.2, 0.4, 0.6, 0.8,};
       for (size_t i = 0; i < centData.size(); ++i) {
-        book(c_jetpT[centData[i]], "cjetpT" + ts(i),logspace(100, 10.0,1000));
-        book(c_zpT[centData[i]], "czpt" + ts(i),logspace(100, 10.0,1000));
-	      book(sow[centData[i]], "sow_" + ts(i));
+        book(c_jetpT[centData[i]], "cjetpT" + toString(i),logspace(100, 10.0,1000));
+        book(c_zpT[centData[i]], "czpt" + toString(i),logspace(100, 10.0,1000));
+	      book(sow[centData[i]], "sow_" + toString(i));
       }
     }
 
-    bool isBackToBack_zj(const ZFinder& zf, const fastjet::PseudoJet& psjet) {
+
+    bool isBackToBack_zj(const DileptonFinder& zf, const fastjet::PseudoJet& psjet) {
       const FourMomentum& z = zf.bosons()[0].momentum();
       const FourMomentum jmom(psjet.e(), psjet.px(), psjet.py(), psjet.pz());
       return (deltaPhi(z, jmom) > 7.*M_PI/8. );
@@ -82,7 +65,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Get the Z
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
       Particle z = zfinder.bosons()[0];
       Particle l1 = zfinder.constituents()[0];
@@ -133,11 +116,11 @@ namespace Rivet {
        }
     }
 
-
     /// @}
 
 
   private:
+
     vector<string> jetFinders;
     // Centrality inclusive histograms
     vector<Histo1DPtr> h_zpT;

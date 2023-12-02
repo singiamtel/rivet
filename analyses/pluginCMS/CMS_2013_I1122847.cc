@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -15,14 +15,13 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      const FinalState fs;
 
       Cut cuts_mu = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      ZFinder zfinder_mu(fs, cuts_mu, PID::MUON, 40*GeV, 7*TeV, 0.0);
+      DileptonFinder zfinder_mu(91.2*GeV, 0.0, cuts_mu && Cuts::abspid == PID::MUON, Cuts::mass > 40*GeV);
       declare(zfinder_mu, "zfinder_mu");
 
-      Cut cuts_el = (Cuts::pT >= 20*GeV && Cuts::abseta < 2.4 && !Cuts::absetaIn(1.447, 1.57));
-      ZFinder zfinder_el(fs, cuts_el, PID::ELECTRON, 40*GeV, 7*TeV, 0.0);
+      Cut cuts_el = Cuts::pT > 20*GeV && Cuts::abseta < 2.4 && !Cuts::absetaIn(1.447, 1.57);
+      DileptonFinder zfinder_el(91.2*GeV, 0.0, cuts_el && Cuts::abspid == PID::ELECTRON, Cuts::mass > 40*GeV);
       declare(zfinder_el, "zfinder_el");
 
 
@@ -99,7 +98,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zfinder_el = apply<ZFinder>(event, "zfinder_el");
+      const DileptonFinder& zfinder_el = apply<DileptonFinder>(event, "zfinder_el");
       if (zfinder_el.bosons().size() > 0) {
         const Particle& z  = zfinder_el.bosons()[0];
         const Particle& l1 = zfinder_el.constituents()[0];
@@ -134,7 +133,7 @@ namespace Rivet {
         }
       }
 
-      const ZFinder& zfinder_mu = apply<ZFinder>(event, "zfinder_mu");
+      const DileptonFinder& zfinder_mu = apply<DileptonFinder>(event, "zfinder_mu");
       if (zfinder_mu.bosons().size() > 0) {
         const Particle& z  = zfinder_mu.bosons()[0];
         const Particle& l1 = zfinder_mu.constituents()[0];

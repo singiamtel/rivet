@@ -10,6 +10,8 @@ RunInfo:
 Options:
  - LMODE=EL,MU
  - SCHEME=DRESSED,BARE
+ - ABSETALMAX=#
+ - PTLMIN=#
 PtCuts: [0]
 Description:
   Monte Carlo validation observables for $W[\ell \, \nu]$ + 2 jets production

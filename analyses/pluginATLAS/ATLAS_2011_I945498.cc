@@ -1,13 +1,11 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/LeadingParticlesFinalState.hh"
-
 
 namespace Rivet {
 
@@ -37,21 +35,20 @@ namespace Rivet {
       }
 
       // Set up projections
-	  FinalState fs;
-      ZFinder zfinder_mu(fs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 66*GeV, 116*GeV, 0.1);
-      declare(zfinder_mu, "ZFinder_mu");
+      Cut cuts_mu = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
+      DileptonFinder zfinder_mu(91.2*GeV, 0.1, cuts_mu && Cuts::abspid == PID::MUON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder_mu, "DileptonFinder_mu");
 
-      Cut cuts = (Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
+      Cut cuts_e = (Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
+      DileptonFinder zfinder_el(91.2*GeV, 0.1, cuts_e && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder_el, "DileptonFinder_el");
 
-      ZFinder zfinder_el(fs, cuts, PID::ELECTRON, 66*GeV, 116*GeV, 0.1);
-      declare(zfinder_el, "ZFinder_el");
-
-	  Cut cuts25_20 = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
       // For combined cross-sections (combined phase space + dressed level)
-      ZFinder zfinder_comb_mu(fs, cuts25_20, PID::MUON, 66.0*GeV, 116.0*GeV, 0.1);
-      declare(zfinder_comb_mu, "ZFinder_comb_mu");
-      ZFinder zfinder_comb_el(fs, cuts25_20, PID::ELECTRON, 66.0*GeV, 116.0*GeV, 0.1);
-      declare(zfinder_comb_el, "ZFinder_comb_el");
+      Cut cuts25_20 = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
+      DileptonFinder zfinder_comb_mu(91.2*GeV, 0.1, cuts25_20 && Cuts::abspid == PID::MUON, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder_comb_mu, "DileptonFinder_comb_mu");
+      DileptonFinder zfinder_comb_el(91.2*GeV, 0.1, cuts25_20 && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder_comb_el, "DileptonFinder_comb_el");
 
       // Define veto FS in order to prevent Z-decay products entering the jet algorithm
       VetoedFinalState remfs;
@@ -88,7 +85,7 @@ namespace Rivet {
 
     // Jet selection criteria universal for electron and muon channel
     /// @todo Replace with a Cut passed to jetsByPt
-    Jets selectJets(const ZFinder* zf, const FastJets* allJets) {
+    Jets selectJets(const DileptonFinder* zf, const FastJets* allJets) {
       const FourMomentum l1 = zf->constituents()[0].momentum();
       const FourMomentum l2 = zf->constituents()[1].momentum();
       Jets jets;
@@ -105,11 +102,11 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      vector<const ZFinder*> zfs;
-      zfs.push_back(& (apply<ZFinder>(event, "ZFinder_el")));
-      zfs.push_back(& (apply<ZFinder>(event, "ZFinder_mu")));
-      zfs.push_back(& (apply<ZFinder>(event, "ZFinder_comb_el")));
-      zfs.push_back(& (apply<ZFinder>(event, "ZFinder_comb_mu")));
+      vector<const DileptonFinder*> zfs;
+      zfs.push_back(& (apply<DileptonFinder>(event, "DileptonFinder_el")));
+      zfs.push_back(& (apply<DileptonFinder>(event, "DileptonFinder_mu")));
+      zfs.push_back(& (apply<DileptonFinder>(event, "DileptonFinder_comb_el")));
+      zfs.push_back(& (apply<DileptonFinder>(event, "DileptonFinder_comb_mu")));
 
       vector<const FastJets*> fjs;
       fjs.push_back(& (apply<FastJets>(event, "jets")));

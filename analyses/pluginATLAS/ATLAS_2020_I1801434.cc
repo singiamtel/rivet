@@ -25,7 +25,7 @@ namespace Rivet {
       FinalState fs(eta_full);
       FinalState fs_neutrino;
 
-      const FinalState all_photons(eta_full && Cuts::abspid == PID::PHOTON);
+      FinalState all_photons(eta_full && Cuts::abspid == PID::PHOTON);
       PromptFinalState photons(all_photons);
       photons.acceptTauDecays(false);
       declare(photons, "photons");
@@ -35,20 +35,20 @@ namespace Rivet {
       electrons.acceptTauDecays(true);
       declare(electrons, "electrons");
 
-      LeptonFinder dressedelectrons(photons, electrons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder dressedelectrons(electrons, photons, 0.1, lep_cuts, DressingType::CLUSTER);
       declare(dressedelectrons, "dressedelectrons");
 
-      LeptonFinder ewdressedelectrons(all_photons, electrons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder ewdressedelectrons(electrons, all_photons, 0.1, eta_full, DressingType::CLUSTER);
       declare(ewdressedelectrons, "ewdressedelectrons");
 
       PromptFinalState muons(eta_full && Cuts::abspid == PID::MUON);
       muons.acceptTauDecays(true);
       declare(muons, "muons");
 
-      LeptonFinder dressedmuons(photons, muons, 0.1, lep_cuts, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder dressedmuons(muons, photons, 0.1, lep_cuts, DressingType::CLUSTER);
       declare(dressedmuons, "dressedmuons");
 
-      LeptonFinder ewdressedmuons(all_photons, muons, 0.1, eta_full, PhotonOrigin::ALL, DressingType::CLUSTER);
+      LeptonFinder ewdressedmuons(muons, all_photons, 0.1, eta_full, DressingType::CLUSTER);
       declare(ewdressedmuons, "ewdressedmuons");
 
       PromptFinalState taus(eta_full && Cuts::abspid == PID::TAU);

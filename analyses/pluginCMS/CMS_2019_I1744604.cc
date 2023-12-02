@@ -24,7 +24,7 @@ namespace Rivet {
     void init() override {
 
       // final state of all stable particles
-      Cut particle_cut = (Cuts::abseta < 5.0) and (Cuts::pT > 0.*MeV);
+      Cut particle_cut = Cuts::abseta < 5.0;
       FinalState fs(particle_cut);
 
       // select charged leptons
@@ -43,19 +43,14 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
 
       // Dressed leptons from selected prompt charged leptons and photons
-      Cut lepton_cut   = (Cuts::abseta < 2.4) and (Cuts::pT > 26.*GeV);
-      LeptonFinder dressed_leptons(
-        prompt_photons, prompt_leptons, 0.1,
-        lepton_cut, PhotonOrigin::ALL);
+      Cut lepton_cut = Cuts::abseta < 2.4 and Cuts::pT > 26*GeV;
+      LeptonFinder dressed_leptons(prompt_leptons, prompt_photons, 0.1, lepton_cut);
       declare(dressed_leptons, "LeptonFinder");
 
       // Jets
       VetoedFinalState fsForJets(fs);
       fsForJets.addVetoOnThisFinalState(dressed_leptons);
-      declare(
-        // excludes all neutrinos by default
-        FastJets(fsForJets, JetAlg::ANTIKT, 0.4),
-        "Jets");
+      declare(FastJets(fsForJets, JetAlg::ANTIKT, 0.4), "Jets"); //< excludes all neutrinos by default
 
       // Neutrinos
       IdentifiedFinalState neutrinos(fs);

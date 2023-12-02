@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -25,10 +25,9 @@ namespace Rivet {
       const double ptcut = getOption<double>("PTTAUMIN", 25.);
 
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
+      /// @todo Er, FS taus?
+      DileptonFinder hfinder(125*GeV, 0.0, cut && Cuts::abspid == PID::TAU, Cuts::massIn(115*GeV, 135*GeV));
 
-      /// @todo Urk, abuse! Need explicit HiggsFinder and TauFinder?
-      ZFinder hfinder(FinalState(), cut, PID::TAU, 115*GeV, 135*GeV, 0.0,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NONE, 125*GeV);
       declare(hfinder, "Hfinder");
       book(_h_H_mass ,"H_mass", 50, 119.7, 120.3);
       book(_h_H_pT ,"H_pT", logspace(100, 1.0, 0.5*(sqrtS()>0.?sqrtS():14000.)/GeV));
@@ -42,7 +41,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & e) {
-      const ZFinder& hfinder = apply<ZFinder>(e, "Hfinder");
+      const DileptonFinder& hfinder = apply<DileptonFinder>(e, "Hfinder");
       if (hfinder.bosons().size() != 1) vetoEvent;
 
       FourMomentum hmom(hfinder.bosons()[0].momentum());

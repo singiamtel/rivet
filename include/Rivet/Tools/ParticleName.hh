@@ -49,6 +49,7 @@ namespace Rivet {
     static const PdgId WMINUSBOSON = -WPLUSBOSON;
     static const PdgId WPLUS = WPLUSBOSON;
     static const PdgId WMINUS = WMINUSBOSON;
+    static const PdgId WBOSON = WPLUSBOSON;
     static const PdgId Z0BOSON = 23;
     static const PdgId ZBOSON = Z0BOSON;
     static const PdgId Z0 = Z0BOSON;

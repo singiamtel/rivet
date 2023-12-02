@@ -8,7 +8,7 @@
 namespace Rivet {
 
 
-  /// @brief Base class providing common functionality for MC jet validation analyses
+  /// @brief Base class providing common functionality for MC jet-structure validation analyses
   class MC_JetSplittings : public Analysis {
   public:
 

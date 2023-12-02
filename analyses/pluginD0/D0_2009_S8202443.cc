@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -19,17 +19,17 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      FinalState fs;
       // Leptons in constrained tracking acceptance
       Cut cuts = (Cuts::abseta < 1.1 || Cuts::absetaIn(1.5, 2.5)) && Cuts::pT > 25*GeV;
-      ZFinder zfinder_constrained(fs, cuts, PID::ELECTRON, 65*GeV, 115*GeV, 0.2);
-      declare(zfinder_constrained, "ZFinderConstrained");
+      DileptonFinder zfinder_constrained(91.2*GeV, 0.2, cuts &&
+                                         Cuts::abspid == PID::ELECTRON, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zfinder_constrained, "DileptonFinderConstrained");
       FastJets conefinder_constrained(zfinder_constrained.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder_constrained, "ConeFinderConstrained");
 
       // Unconstrained leptons
-      ZFinder zfinder(fs, Cuts::open(), PID::ELECTRON, 65*GeV, 115*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, Cuts::abspid == PID::ELECTRON, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zfinder, "DileptonFinder");
       FastJets conefinder(zfinder.remainingFinalState(), JetAlg::D0ILCONE, 0.5);
       declare(conefinder, "ConeFinder");
 
@@ -48,7 +48,7 @@ namespace Rivet {
     // Do the analysis
     void analyze(const Event& e) {
       // Unconstrained electrons
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() == 0) {
         MSG_DEBUG("No unique lepton pair found.");
         vetoEvent;
@@ -64,7 +64,7 @@ namespace Rivet {
 
 
       // Constrained electrons
-      const ZFinder& zfinder_constrained = apply<ZFinder>(e, "ZFinderConstrained");
+      const DileptonFinder& zfinder_constrained = apply<DileptonFinder>(e, "DileptonFinderConstrained");
       if (zfinder_constrained.bosons().size() == 0) {
         MSG_DEBUG("No unique constrained lepton pair found.");
         return; // Not really a "veto", since if we got this far there is an unconstrained Z

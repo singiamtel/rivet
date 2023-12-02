@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/Beam.hh"
 #include "Rivet/Math/LorentzTrans.hh"
 #include "Rivet/Math/Vector3.hh"
@@ -22,21 +22,17 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      const FinalState fs;
 
       const ParticlePair& beam = beams();
       _pcom = beam.first.momentum() + beam.second.momentum();
-      if (beam.first.mom().E() == beam.second.mom().E()) {
-        _y_shift = -0.465;
-      }
+      if (beam.first.mom().E() == beam.second.mom().E()) _y_shift = -0.465;
 
-      ZFinder zmumuFinder(fs, Cuts::abseta < 2.4 && Cuts::pT > 10 * GeV, PID::MUON, 15.0 * GeV, 600.0 * GeV, 0.1);
+      DileptonFinder zmumuFinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 10*GeV &&
+                                 Cuts::abspid == PID::MUON, Cuts::massIn(15*GeV, 600*GeV));
       declare(zmumuFinder, "ZmumuFinder");
 
-      ZFinder TotzmumuFinder(fs, Cuts::pT > 0.0 * GeV, PID::MUON, 0.0 * GeV, 1000.0 * GeV, 0.1);
-      declare(TotzmumuFinder, "TotzmumuFinder");
-
-      declare(FinalState(), "FS");
+      DileptonFinder totzmumuFinder(91.2*GeV, 0.1, Cuts::abspid == PID::MUON, Cuts::mass < 1000*GeV);
+      declare(totzmumuFinder, "TotzmumuFinder");
 
       book(_h["111"], 1, 1, 1);
       book(_h["211"], 2, 1, 1);
@@ -56,8 +52,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const ZFinder& ZmumuFinder = apply<ZFinder>(event, "ZmumuFinder");
-      const ZFinder& TotzmumuFinder = apply<ZFinder>(event, "TotzmumuFinder");
+      const DileptonFinder& ZmumuFinder = apply<DileptonFinder>(event, "ZmumuFinder");
+      const DileptonFinder& TotzmumuFinder = apply<DileptonFinder>(event, "TotzmumuFinder");
       const Particles& zmumus = ZmumuFinder.bosons();
       const Particles& totzmumus = TotzmumuFinder.bosons();
 

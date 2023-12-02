@@ -33,18 +33,18 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState electrons(el_id);
       electrons.acceptTauDecays(false);
-      LeptonFinder dressedelectrons(photons, electrons, 0.1, Cuts::abseta< 2.5 && Cuts::pT > 25.0*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedelectrons(electrons, photons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
       declare(dressedelectrons, "electrons");
-      LeptonFinder fulldressedelectrons(photons, electrons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder fulldressedelectrons(electrons, photons, 0.1, eta_full);
 
       // Projection to find the muons
       IdentifiedFinalState mu_id(FS);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState muons(mu_id);
       muons.acceptTauDecays(false);
-      LeptonFinder dressedmuons(photons, muons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25.0*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressedmuons(muons, photons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
       declare(dressedmuons, "muons");
-      LeptonFinder fulldressedmuons(photons, muons, 0.1, eta_full, PhotonOrigin::ALL);
+      LeptonFinder fulldressedmuons(muons, photons, 0.1, eta_full);
 
       // Projection to find neutrinos to exclude from jets
       IdentifiedFinalState nu_id;

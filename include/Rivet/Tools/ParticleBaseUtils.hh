@@ -1,6 +1,7 @@
 #ifndef RIVET_PARTICLEBASEUTILS_HH
 #define RIVET_PARTICLEBASEUTILS_HH
 
+#include "Rivet/Tools/Utils.hh"
 #include "Rivet/ParticleBase.hh"
 
 namespace Rivet {
@@ -630,7 +631,6 @@ namespace Rivet {
   /// @}
 
 
-
   /// @defgroup particlebaseutils_kin Unbound functions for kinematic properties
   ///
   /// @todo Mostly move to functions on FourMomentum
@@ -674,16 +674,135 @@ namespace Rivet {
     inline double mass(const ParticleBase& p) { return p.mass(); }
 
 
-    /// Unbound function access to pair pT
-    inline double pairPt(const ParticleBase& p1, const ParticleBase& p2) { return (p1.mom() + p2.mom()).pT(); }
+    // /// Unbound function access to pair pT
+    // inline double pairPt(const ParticleBase& p1, const ParticleBase& p2) { return (p1.mom() + p2.mom()).pT(); }
 
-    /// Unbound function access to pair mass
-    inline double pairMass(const ParticleBase& p1, const ParticleBase& p2) { return (p1.mom() + p2.mom()).mass(); }
+    // /// Unbound function access to pair mass
+    // inline double pairMass(const ParticleBase& p1, const ParticleBase& p2) { return (p1.mom() + p2.mom()).mass(); }
+
+
+    /// @brief Get the mass of a ParticleBase and a P4
+    inline double mass(const ParticleBase& p, const FourMomentum& p4) {
+      return mass(p.mom(), p4);
+    }
+
+    /// @brief Get the mass of a ParticleBase and a P4
+    inline double mass(const FourMomentum& p4, const ParticleBase& p) {
+      return mass(p4, p.mom());
+    }
+
+    /// @brief Get the mass of a pair of ParticleBase (as separate args)
+    inline double mass(const ParticleBase& p1, const ParticleBase& p2) {
+      return mass(p1.mom(), p2.mom());
+    }
+
+    /// @brief Get the mass^2 of a ParticleBase and a P4
+    inline double mass2(const ParticleBase& p, const P4& p4) {
+      return mass2(p.mom(), p4);
+    }
+
+    /// @brief Get the mass^2 of a ParticleBase and a P4
+    inline double mass2(const P4& p4, const ParticleBase& p) {
+      return mass2(p4, p.mom());
+    }
+
+    /// @brief Get the mass^2 of a pair of ParticleBase (as separate args)
+    inline double mass2(const ParticleBase& p1, const ParticleBase& p2) {
+      return mass2(p1.mom(), p2.mom());
+    }
+
+    /// @brief Get the transverse mass of a ParticleBase and a P4
+    ///
+    /// @note This ignores the particle mass and just computes mT from the 3-vectors
+    /// @todo Fix!!
+    inline double mT(const ParticleBase& p, const P4& p4) {
+      return mT(p.mom(), p4);
+    }
+
+    /// @brief Get the transverse mass of a ParticleBase and a P4
+    ///
+    /// @note This ignores the particle mass and just computes mT from the 3-vectors
+    /// @todo Fix!!
+    inline double mT(const P4& p4, const ParticleBase& p) {
+      return mT(p4, p.mom());
+    }
+
+    /// @brief Get the transverse mass of a pair of ParticleBase (as separate args)
+    ///
+    /// @note This ignores the particle mass and just computes mT from the 3-vectors
+    /// @todo Fix!!
+    inline double mT(const ParticleBase& p1, const ParticleBase& p2) {
+      return mT(p1.mom(), p2.mom());
+    }
+
+    /// @brief Get the transverse momentum of a ParticleBase and a P4
+    inline double pT(const ParticleBase& p, const P4& p4) {
+      return pT(p.mom(), p4);
+    }
+
+    /// @brief Get the transverse momentum of a ParticleBase and a P4
+    inline double pT(const P4& p4, const ParticleBase& p) {
+      return pT(p4, p.mom());
+    }
+
+    /// @brief Get the transverse momentum of a pair of ParticleBase (as separate args)
+    inline double pT(const ParticleBase& p1, const ParticleBase& p2) {
+      return pT(p1.mom(), p2.mom());
+    }
 
   }
 
   // Import Kin namespace into Rivet
   using namespace Kin;
+
+  /// @}
+
+
+  /// @defgroup pbcontcombutils ParticleBase container-combinatorics utils
+  /// @{
+
+  /// @brief Return the index from a vector which best matches mass(c[i]) to the target value
+  ///
+  /// A specialisation of closestMatchIndex from Utils.hh, with the
+  /// function bound to Kin::mass as a common use-case.
+  // auto closestMassIndex = std::bind(closestMatchIndex, std::placeholders::_1, Kin::mass, std::placeholders::_2, std::placeholders::_3);
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline int closestMassIndex(CONTAINER&& c, double mtarget, double mmin=-DBL_MAX, double mmax=DBL_MAX) {
+    return closestMatchIndex(std::forward<CONTAINER>(c), Kin::mass, mtarget, mmin, mmax);
+  }
+
+  /// @brief Return the indices from two vectors which best match fn(c1[i], c2[j]) to the target value
+  ///
+  /// A specialisation of closestMatchIndex from Utils.hh, with the
+  /// function bound to Kin::mass as a common use-case.
+  template <typename CONTAINER1, typename CONTAINER2, typename = isCIterable<CONTAINER1, CONTAINER2>>
+  inline pair<int,int> closestMassIndices(CONTAINER1&& c1, CONTAINER2&& c2,
+        				   double mtarget, double mmin=-DBL_MAX, double mmax=DBL_MAX) {
+    return closestMatchIndices(std::forward<CONTAINER1>(c1),
+                               std::forward<CONTAINER2>(c2), Kin::mass, mtarget, mmin, mmax);
+  }
+
+  /// @brief Return the index from a vector which best matches fn(c[i], x) to the target value
+  ///
+  /// A specialisation of closestMatchIndex from Utils.hh, with the
+  /// function bound to Kin::mass as a common use-case.
+  template <typename CONTAINER, typename T, typename = isCIterable<CONTAINER>>
+  inline int closestMassIndex(CONTAINER&& c, const T& x,
+                              double mtarget, double mmin=-DBL_MAX, double mmax=DBL_MAX) {
+    using FN = double(const ParticleBase&,const T&);
+    return closestMatchIndex<CONTAINER, T, FN>(std::forward<CONTAINER>(c), x, Kin::mass, mtarget, mmin, mmax);
+  }
+
+
+  /// @brief Return the index from a vector which best matches fn(x, c[j]) to the target value
+  ///
+  /// A specialisation of closestMatchIndex from Utils.hh, with the
+  /// function bound to Kin::mass as a common use-case.
+  template <typename CONTAINER, typename T, typename = isCIterable<CONTAINER>>
+  inline int closestMassIndex(T&& x, CONTAINER&& c,
+                              double mtarget, double mmin=-DBL_MAX, double mmax=DBL_MAX) {
+    return closestMatchIndex(std::forward<T>(x), std::forward<CONTAINER>(c), Kin::mass, mtarget, mmin, mmax);
+  }
 
   /// @}
 

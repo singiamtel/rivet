@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -23,11 +23,10 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      const FinalState fs;
-      declare(fs, "FS");
       Cut cut = Cuts::etaIn(-10.,10.);
-      ZFinder zfinder(fs, cut, PID::MUON, 4.0*GeV, 100.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NONE);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.0, cut && Cuts::abspid == PID::MUON,
+                             Cuts::massIn(4.0*GeV, 100.0*GeV), LeptonOrigin::PROMPT);
+      declare(zfinder, "DileptonFinder");
 
       // Book histograms
       book(_h_pT ,1, 1, 1);
@@ -48,7 +47,7 @@ namespace Rivet {
         MSG_ERROR("Incorrect beam energy used: " << sqrtS()/GeV);
         throw Error("Unexpected sqrtS ! Only 200 GeV is supported");
       }
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.particles().size() < 1) vetoEvent;
       double mass = zfinder.bosons()[0].momentum().mass()/GeV;
       double pt_DY   = zfinder.bosons()[0].momentum().pT()/GeV;

@@ -189,16 +189,21 @@ namespace Rivet {
   /// @{
   namespace Kin {
 
+    /// @todo This shouldn't be necessary, if the sum() function SFINAE picked up be ParticleBase versions...
+    inline double pT(const Jet& j) {
+      return j.pT();
+    }
+
     inline double sumPt(const Jets& js) {
-      return sum(js, pT, 0.0);
+      return sum(js, Kin::pT, 0.0);
     }
 
     inline FourMomentum sumP4(const Jets& js) {
-      return sum(js, p4, FourMomentum());
+      return sum(js, Kin::p4, FourMomentum());
     }
 
     inline Vector3 sumP3(const Jets& js) {
-      return sum(js, p3, Vector3());
+      return sum(js, Kin::p3, Vector3());
     }
 
     /// @todo Min dPhi, min dR?

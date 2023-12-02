@@ -23,11 +23,11 @@ namespace Rivet {
 
       PromptFinalState photons(Cuts::abspid == PID::PHOTON, TauDecaysAs::PROMPT);
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder elecs(photons, bare_el, 0.1, Cuts::pT > 7*GeV && Cuts::abseta < 2.47);
+      LeptonFinder elecs(bare_el, photons, 0.1, Cuts::pT > 7*GeV && Cuts::abseta < 2.47);
       declare(elecs, "elecs");
 
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder muons(photons, bare_mu, 0.1, Cuts::pT > 6*GeV && Cuts::abseta < 2.5);
+      LeptonFinder muons(bare_mu, photons, 0.1, Cuts::pT > 6*GeV && Cuts::abseta < 2.5);
       declare(muons, "muons");
 
       FastJets jets(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);

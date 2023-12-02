@@ -6,13 +6,13 @@
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/InvMassFinalState.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/WFinder.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
 
 namespace Rivet {
 
 
   /// @brief Differential cross-section of W bosons + jets in pp collisions at sqrt(s)=7 TeV
+  ///
   /// @author Darin Baumgartel (darinb@cern.ch)
   ///
   /// Based on Rivet analysis originally created by Anil Singh (anil@cern.ch), Lovedeep Saini (lovedeep@cern.ch)
@@ -38,16 +38,11 @@ namespace Rivet {
       PromptFinalState pfs(fs);
       IdentifiedFinalState bareMuons(pfs);
       bareMuons.acceptIdPair(PID::MUON);
-      LeptonFinder muonClusters(fs, bareMuons, -1); //, Cuts::open(), false, false);
+      LeptonFinder muonClusters(bareMuons, fs, -1); //, Cuts::open(), false, false);
       declare(muonClusters, "muonClusters");
-
-      IdentifiedFinalState neutrinos(pfs);
-      neutrinos.acceptIdPair(PID::NU_MU);
-      declare(neutrinos, "neutrinos");
 
       VetoedFinalState jetFS(fs);
       jetFS.addVetoOnThisFinalState(muonClusters);
-      jetFS.addVetoOnThisFinalState(neutrinos);
       jetFS.vetoNeutrinos();
       FastJets jetprojection(jetFS, JetAlg::ANTIKT, 0.5);
       declare(jetprojection, "Jets");
@@ -93,9 +88,6 @@ namespace Rivet {
       DressedLepton dressedmuon = muonClusters.dressedLeptons()[0];
       if (dressedmuon.momentum().abseta() > 2.1) vetoEvent;
       if (dressedmuon.momentum().pT() < 25.0*GeV) vetoEvent;
-
-      // Get the muon neutrino
-      //const Particles& neutrinos = apply<FinalState>(event, "neutrinos").particlesByPt();
 
       // Check that the muon and neutrino are not decay products of tau
       if (dressedmuon.bareLepton().hasAncestorWith(Cuts::pid ==  PID::TAU)) vetoEvent;

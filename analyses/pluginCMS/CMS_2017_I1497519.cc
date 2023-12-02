@@ -138,22 +138,13 @@ namespace Rivet {
       if ( getOption("LMODE") == "MU" ) _mode = 1;
       if ( getOption("LMODE") == "EMU" ) _mode = 2;
 
-      FinalState fs;
+      declare(LeptonFinder(0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.4 && Cuts::abspid == PID::MUON), "muons");
+      declare(LeptonFinder(0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.4 && Cuts::abspid == PID::ELECTRON), "electrons");
 
-      PromptFinalState bareMuons(Cuts::abspid == PID::MUON);
-      declare(LeptonFinder(fs, bareMuons, /*dRmax = */0.1,
-                             Cuts::pT > 20*GeV && Cuts::abseta < 2.4,
-			     PhotonOrigin::ALL), "muons");
-
-      PromptFinalState bareElectrons(Cuts::abspid == PID::ELECTRON);
-      declare(LeptonFinder(fs, bareElectrons, /*dRmax =*/ 0.1,
-                             Cuts::pT > 20*GeV && Cuts::abseta < 2.4,
-			     PhotonOrigin::ALL), "electrons");
-
-      FastJets jets(fs, JetAlg::ANTIKT, 0.5);
+      FastJets jets(FinalState(), JetAlg::ANTIKT, 0.5);
       declare(jets, "jets");
 
-      _h = std::vector<Histo1DPtr>(nHistos);
+      _h = vector<Histo1DPtr>(nHistos);
       for (int ih = 0; ih < nHistos; ++ih){
         book(_h[_histListInPaperOrder[ih]], ih + 1, 1, 1);
       }
@@ -165,8 +156,8 @@ namespace Rivet {
     }
 
     /// Z boson finder.
-    /// Note: we don't use the standard ZFinder class in order to stick to
-    /// the definition of the publication that is simpler than the ZFinder
+    /// Note: we don't use the standard DileptonFinder class in order to stick to
+    /// the definition of the publication that is simpler than the DileptonFinder
     /// algorithm
     /// @param leptons pt-ordered of electron or muon collection to use to build
     /// the Z boson

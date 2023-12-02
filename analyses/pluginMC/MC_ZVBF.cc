@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
@@ -23,10 +23,9 @@ namespace Rivet {
       _lepton=PID::ELECTRON;
       if (getOption("LMODE") == "MU")  _lepton = PID::MUON;
 
-      FinalState fs;
       Cut cut = Cuts::abseta < 3.5 && Cuts::pT > 25*GeV;
-      ZFinder zfinder(fs, cut, _lepton, 65*GeV, 115*GeV, _dR);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, _dR, cut && Cuts::abspid == _lepton, Cuts::massIn(65*GeV, 115*GeV));
+      declare(zfinder, "DileptonFinder");
       FastJets jetpro(zfinder.remainingFinalState(), JetAlg::ANTIKT, 0.4);
       declare(jetpro, "Jets");
 
@@ -64,8 +63,8 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & e) {
-      MSG_TRACE("MC_ZVBF: running ZFinder");
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      MSG_TRACE("MC_ZVBF: running DileptonFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
       const FourMomentum& zmom = zfinder.bosons()[0].momentum();
       MSG_TRACE("MC_ZVBF: have exactly one Z boson candidate");

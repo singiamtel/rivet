@@ -1454,22 +1454,56 @@ namespace Rivet {
   /// @}
 
 
-  /// @defgroup momutils_mt MT calculation
+  /// @defgroup momutils_mt Mass and MT calculations
   /// @{
 
+  /// Calculate mass of two 4-vectors
+  inline double mass(const FourMomentum& a, const FourMomentum& b) {
+    return (a + b).mass();
+  }
+
+  /// Calculate mass^2 of two 4-vectors
+  inline double mass2(const FourMomentum& a, const FourMomentum& b) {
+    return (a + b).mass2();
+  }
+  
   /// Calculate transverse mass of a visible and an invisible 4-vector
+  ///
+  /// @Note This is implemented in terms of massless 3-vectors,
+  /// ignoring actual masses in the 4-vectors.
   inline double mT(const FourMomentum& vis, const FourMomentum& invis) {
     return mT(vis.p3(), invis.p3());
   }
 
   /// Calculate transverse mass of a visible 4-vector and an invisible 3-vector
+  ///
+  /// @Note This is implemented in terms of massless 3-vectors,
+  /// ignoring actual masses in the 4-vectors.
   inline double mT(const FourMomentum& vis, const Vector3& invis) {
     return mT(vis.p3(), invis);
   }
 
   /// Calculate transverse mass of a visible 4-vector and an invisible 3-vector
+  ///
+  /// @Note This is implemented in terms of massless 3-vectors,
+  /// ignoring actual masses in the 4-vectors.
   inline double mT(const Vector3& vis, const FourMomentum& invis) {
     return mT(vis, invis.p3());
+  }
+
+  /// Calculate transverse momentum of two 4-vectors
+  inline double pT(const FourMomentum& vis, const FourMomentum& invis) {
+    return pT(vis.p3(), invis.p3());
+  }
+
+  /// Calculate transverse momentum of a 4-vector and a 3-vector
+  inline double pT(const FourMomentum& vis, const Vector3& invis) {
+    return pT(vis.p3(), invis);
+  }
+
+  /// Calculate transverse momentum of a 4-vector and a 3-vector
+  inline double pT(const Vector3& vis, const FourMomentum& invis) {
+    return pT(vis, invis.p3());
   }
 
   /// @}

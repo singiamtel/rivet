@@ -1,11 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
 
+  /// Precise study of Z pT using novel phi* technique
   class D0_2010_S8821313 : public Analysis {
   public:
 
@@ -20,10 +21,11 @@ namespace Rivet {
 
       /// Initialise and register projections
       FinalState fs;
-      Cut cuts = (Cuts::abseta < 1.1 || Cuts::absetaIn( 1.5,  3.0)) && Cuts::pT > 20*GeV;
-      ZFinder zfinder_ee(fs, cuts, PID::ELECTRON, 70*GeV, 110*GeV, 0.2);
+      Cut cuts_e = (Cuts::abseta < 1.1 || Cuts::absetaIn( 1.5,  3.0)) && Cuts::pT > 20*GeV;
+      DileptonFinder zfinder_ee(91.2*GeV, 0.2, cuts_e && Cuts::abspid == PID::ELECTRON, Cuts::massIn(70*GeV, 110*GeV));
       declare(zfinder_ee, "zfinder_ee");
-      ZFinder zfinder_mm(fs, Cuts::abseta < 2 && Cuts::pT > 15*GeV, PID::MUON, 70*GeV, 110*GeV, 0.0);
+      Cut cuts_m = Cuts::abseta < 2 && Cuts::pT > 15*GeV;
+      DileptonFinder zfinder_mm(91.2*GeV, 0.0, cuts_m && Cuts::abspid == PID::MUON, Cuts::massIn(70*GeV, 110*GeV));
       declare(zfinder_mm, "zfinder_mm");
 
       /// Book histograms here
@@ -35,7 +37,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zfinder_ee = apply<ZFinder>(event, "zfinder_ee");
+      const DileptonFinder& zfinder_ee = apply<DileptonFinder>(event, "zfinder_ee");
       if (zfinder_ee.bosons().size() == 1) {
         Particles ee = zfinder_ee.constituents();
         std::sort(ee.begin(), ee.end(), cmpMomByPt);
@@ -50,7 +52,7 @@ namespace Rivet {
         _h_phistar_ee->fill(zmom.rapidity(), phistar);
       }
 
-      const ZFinder& zfinder_mm = apply<ZFinder>(event, "zfinder_mm");
+      const DileptonFinder& zfinder_mm = apply<DileptonFinder>(event, "zfinder_mm");
       if (zfinder_mm.bosons().size() == 1) {
         Particles mm = zfinder_mm.constituents();
         std::sort(mm.begin(), mm.end(), cmpMomByPt);

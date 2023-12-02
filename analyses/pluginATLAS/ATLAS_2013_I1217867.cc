@@ -39,18 +39,12 @@ namespace Rivet {
 
       FinalState fs(Cuts::abseta < 5.0);
 
-      IdentifiedFinalState bareElectrons(fs);
-      bareElectrons.acceptIdPair(PID::ELECTRON);
-
       Cut cuts = (Cuts::absetaIn(0, 1.37) || Cuts::absetaIn(1.52, 2.47)) && Cuts::pT > 20*GeV;
-
-      LeptonFinder electronClusters(fs, bareElectrons, 0.1, cuts);
+      LeptonFinder electronClusters(0.1, Cuts::abspid == PID::ELECTRON && cuts);
       declare(electronClusters, "electronClusters");
 
-      IdentifiedFinalState bareMuons(fs);
-      bareMuons.acceptIdPair(PID::MUON);
       Cut mucuts = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      LeptonFinder muonClusters(fs, bareMuons, 0.1, mucuts);
+      LeptonFinder muonClusters(0.1, Cuts::abspid == PID::MUON && mucuts);
       declare(muonClusters, "muonClusters");
 
       IdentifiedFinalState neutrinos(Cuts::pT > 25*GeV);

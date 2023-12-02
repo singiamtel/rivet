@@ -5,8 +5,6 @@
 namespace Rivet {
 
 
-
-
   MC_JetSplittings::MC_JetSplittings(const string& name,
                                      size_t njet,
                                      const string& jetpro_name)

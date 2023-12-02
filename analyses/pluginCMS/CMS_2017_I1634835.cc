@@ -3,16 +3,19 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Tools/Cuts.hh"
 
 namespace Rivet {
 
+
   /// @brief Z+charm at 8 TeV
   class CMS_2017_I1634835 : public Analysis {
-     public:
+  public:
+
       /// Constructor
       RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2017_I1634835);
+
 
       /// @name Analysis methods
       ///@{
@@ -20,15 +23,15 @@ namespace Rivet {
       /// Book histograms and initialise projections before the run
       void init() {
           // Initialise and register projections
-          FinalState fs;
-
-          ZFinder zeeFinder(fs, Cuts::abseta < 2.1 && Cuts::pT > 20 * GeV, PID::ELECTRON, 71.0 * GeV, 111.0 * GeV, 0.1);
+          DileptonFinder zeeFinder(91.2*GeV, 0.1, Cuts::abseta < 2.1 && Cuts::pT > 20*GeV &&
+                                   Cuts::abspid == PID::ELECTRON, Cuts::massIn(71*GeV, 111*GeV));
           declare(zeeFinder, "ZeeFinder");
 
-          ZFinder zmumuFinder(fs, Cuts::abseta < 2.1 && Cuts::pT > 20 * GeV, PID::MUON, 71.0 * GeV, 111.0 * GeV, 0.1);
+          DileptonFinder zmumuFinder(91.2*GeV, 0.1, Cuts::abseta < 2.1 && Cuts::pT > 20*GeV &&
+                                     Cuts::abspid == PID::MUON, Cuts::massIn(71*GeV, 111*GeV));
           declare(zmumuFinder, "ZmumuFinder");
 
-          VetoedFinalState jetConstits(fs);
+          VetoedFinalState jetConstits;
           jetConstits.addVetoOnThisFinalState(zeeFinder);
           jetConstits.addVetoOnThisFinalState(zmumuFinder);
 
@@ -50,8 +53,8 @@ namespace Rivet {
 
       /// Perform the per-event analysis
       void analyze(const Event& event) {
-          const ZFinder& zeeFS = apply<ZFinder>(event, "ZeeFinder");
-          const ZFinder& zmumuFS = apply<ZFinder>(event, "ZmumuFinder");
+          const DileptonFinder& zeeFS = apply<DileptonFinder>(event, "ZeeFinder");
+          const DileptonFinder& zmumuFS = apply<DileptonFinder>(event, "ZmumuFinder");
 
           const Particles& zees = zeeFS.bosons();
           const Particles& zmumus = zmumuFS.bosons();

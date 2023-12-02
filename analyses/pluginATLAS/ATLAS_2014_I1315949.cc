@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -15,10 +15,8 @@ namespace Rivet {
 
     void init() {
 
-      FinalState fs;
-
-      ZFinder zfinder(fs, Cuts::abseta<2.4 && Cuts::pT>20.0*GeV, PID::MUON, 66*GeV, 116*GeV, 0.1);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV && Cuts::abspid == PID::MUON, Cuts::massIn(66*GeV, 116*GeV));
+      declare(zfinder, "DileptonFinder");
 
       ChargedFinalState cfs( zfinder.remainingFinalState() );
       declare(cfs, "cfs");
@@ -64,7 +62,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
 
       if (zfinder.bosons().size() != 1) vetoEvent;
 
@@ -123,10 +121,10 @@ namespace Rivet {
         nTrmin     = nRight;
       }
       else {
-	ptSumTrmax = ptSumRight;
-	ptSumTrmin = ptSumLeft;
-	nTrmax     = nRight;
-	nTrmin     = nLeft;
+        ptSumTrmax = ptSumRight;
+        ptSumTrmin = ptSumLeft;
+        nTrmax     = nRight;
+        nTrmin     = nLeft;
       }
 
       // min max regions have difference are than all other regions

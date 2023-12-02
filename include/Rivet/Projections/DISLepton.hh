@@ -13,17 +13,17 @@
 
 namespace Rivet {
 
-  
+
   /// @brief Get the incoming and outgoing leptons in a DIS event.
   class DISLepton : public FinalState {
   public:
-    
+
     /// @name Constructors.
     /// @{
 
     /// Constructor with optional cuts first
     DISLepton(const Cut& cuts=Cuts::OPEN,
-	      LeptonReco lreco=LeptonReco::ALL, ObjOrdering lsort=ObjOrdering::ENERGY, 
+	      LeptonReco lreco=LeptonReco::ALL, ObjOrdering lsort=ObjOrdering::ENERGY,
 	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
       : _isolDR(isolDR), _lsort(lsort), _lreco(lreco)
     {
@@ -40,28 +40,32 @@ namespace Rivet {
       // Lepton reco mode
       switch (_lreco) {
       case LeptonReco::ALL:
-	declare(FinalState(cuts), "LFS");
+        declare(FinalState(cuts), "LFS");
+        break;
       case LeptonReco::ALL_DRESSED:
-        declare(LeptonFinder(FinalState(), dressDR, cuts, PhotonOrigin::ALL), "LFS");
+        declare(LeptonFinder(FinalState(), dressDR, cuts), "LFS");
+        break;
       case LeptonReco::PROMPT_BARE:
         declare(PromptFinalState(cuts), "LFS");
+        break;
       case LeptonReco::PROMPT_DRESSED:
         declare(LeptonFinder(PromptFinalState(), dressDR, cuts), "LFS");
+        break;
       }
-      
+
       // Identify the non-outgoing-lepton part of the event
       VetoedFinalState remainingFS;
       remainingFS.addVetoOnThisFinalState(*this);
       declare(remainingFS, "RFS");
     }
 
-    
+
     /// Constructor without lepton-ordering spec, requiring cuts
     DISLepton(Cut& cuts, LeptonReco lreco=LeptonReco::ALL,
 	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
       : DISLepton(cuts, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
     {  }
-    
+
     /// Constructor without cuts, requiring lepton reco spec
     DISLepton(LeptonReco lreco, ObjOrdering lsort=ObjOrdering::ENERGY,
 	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
@@ -73,8 +77,8 @@ namespace Rivet {
 	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
       : DISLepton(Cuts::OPEN, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
     {  }
-    
-    
+
+
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(DISLepton);
 
@@ -116,7 +120,7 @@ namespace Rivet {
     /// Clear the projection
     void clear() { _theParticles.clear(); }
 
-    
+
   protected:
 
     /// The incoming lepton
@@ -136,7 +140,7 @@ namespace Rivet {
 
   };
 
-  
+
 }
 
 #endif

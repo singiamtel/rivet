@@ -718,42 +718,157 @@ namespace Rivet {
     return make_pair(pp.first.pid(), pp.second.pid());
   }
 
-  /// @brief Get the energies of a ParticlePair
-  inline pair<double,double> energies(const ParticlePair& pp) {
-    return make_pair(pp.first.E(), pp.second.E());
-  }
+  namespace Kin {
+  
+    /// @brief Get the energies of a ParticlePair
+    inline pair<double,double> energies(const ParticlePair& pp) {
+      return make_pair(pp.first.E(), pp.second.E());
+    }
+   
+    /// @brief Get the momenta of a ParticlePair
+    inline pair<FourMomentum,FourMomentum> moms(const ParticlePair& pp) {
+      return make_pair(pp.first.mom(), pp.second.mom());
+    }
 
-  /// @brief Get the momenta of a ParticlePair
-  inline pair<FourMomentum,FourMomentum> moms(const ParticlePair& pp) {
-    return make_pair(pp.first.mom(), pp.second.mom());
+    /// @brief Get the mass of a ParticlePair
+    inline double mass(const ParticlePair& pp) {
+      return mass(pp.first, pp.second);
+    }
+
+    /// @brief Get the mass^2 of a ParticlePair
+    inline double mass2(const ParticlePair& pp) {
+      return mass2(pp.first, pp.second);
+    }
+
+    /// @brief Get the transverse mass of a ParticlePair
+    inline double mT(const ParticlePair& pp) {
+      return mT(pp.first, pp.second);
+    }
+
+    /// @brief Get the transverse momentum of a ParticlePair
+    inline double pT(const ParticlePair& pp) {
+      return pT(pp.first, pp.second);
+    }
+
+  }  
+  
+  /// @}
+
+
+  /// @defgroup Specialised kinematics for Particle
+  ///
+  /// @todo Get rid of this, make it all work via the base class definitions and template matching
+  ///
+  /// @{
+
+  namespace Kin {
+
+    /// @brief Get the mass of a Particle and a P4
+    inline double mass(const Particle& p, const FourMomentum& p4) {
+      return mass(p.mom(), p4);
+    }
+
+    /// @brief Get the mass of a Particle and a P4
+    inline double mass(const FourMomentum& p4, const Particle& p) {
+      return mass(p4, p.mom());
+    }
+
+    /// @brief Get the mass of a pair of Particle (as separate args)
+    inline double mass(const Particle& p1, const Particle& p2) {
+      return mass(p1.mom(), p2.mom());
+    }
+
+    /// @brief Get the mass^2 of a Particle and a P4
+    inline double mass2(const Particle& p, const P4& p4) {
+      return mass2(p.mom(), p4);
+    }
+
+    /// @brief Get the mass^2 of a Particle and a P4
+    inline double mass2(const P4& p4, const Particle& p) {
+      return mass2(p4, p.mom());
+    }
+
+    /// @brief Get the mass^2 of a pair of Particle (as separate args)
+    inline double mass2(const Particle& p1, const Particle& p2) {
+      return mass2(p1.mom(), p2.mom());
+    }
+
+    /// @brief Get the transverse mass of a Particle and a P4
+    ///
+    /// @note This ignores the particle mass and just computes mT from the 3-vectors
+    /// @todo Fix!!
+    inline double mT(const Particle& p, const P4& p4) {
+      return mT(p.mom(), p4);
+    }
+
+    /// @brief Get the transverse mass of a Particle and a P4
+    ///
+    /// @note This ignores the particle mass and just computes mT from the 3-vectors
+    /// @todo Fix!!
+    inline double mT(const P4& p4, const Particle& p) {
+      return mT(p4, p.mom());
+    }
+
+    /// @brief Get the transverse mass of a pair of Particle (as separate args)
+    ///
+    /// @note This ignores the particle mass and just computes mT from the 3-vectors
+    /// @todo Fix!!
+    inline double mT(const Particle& p1, const Particle& p2) {
+      return mT(p1.mom(), p2.mom());
+    }
+
+    /// @brief Get the transverse momentum of a Particle and a P4
+    inline double pT(const Particle& p, const P4& p4) {
+      return pT(p.mom(), p4);
+    }
+
+    /// @brief Get the transverse momentum of a Particle and a P4
+    inline double pT(const P4& p4, const Particle& p) {
+      return pT(p4, p.mom());
+    }
+
+    /// @brief Get the transverse momentum of a pair of Particle (as separate args)
+    inline double pT(const Particle& p1, const Particle& p2) {
+      return pT(p1.mom(), p2.mom());
+    }
+
   }
 
   /// @}
 
 
-
   /// @defgroup particleutils_kin Operations on collections of Particle
   ///
   /// @note This can't be done on generic collections of ParticleBase -- thanks, C++ :-/
+  ///
+  /// @todo Or can't it? Try some of the metaprogramming that got closestMatchIndex working...
+  ///
   /// @{
   namespace Kin {
 
+    /// @todo This shouldn't be necessary, if the sum() function SFINAE picked up be ParticleBase versions...
+    inline double pT(const Particle& p) {
+      return p.pT();
+    }
+
     inline double sumPt(const Particles& ps) {
-      return sum(ps, pT, 0.0);
+      return sum(ps, Kin::pT, 0.0);
     }
 
     inline FourMomentum sumP4(const Particles& ps) {
-      return sum(ps, p4, FourMomentum());
+      return sum(ps, Kin::p4, FourMomentum());
     }
 
     inline Vector3 sumP3(const Particles& ps) {
-      return sum(ps, p3, Vector3());
+      return sum(ps, Kin::p3, Vector3());
     }
 
     /// @todo Min dPhi, min dR?
+
     /// @todo Isolation routines?
 
   }
+
 
   // Import Kin namespace into Rivet
   using namespace Kin;
@@ -763,7 +878,7 @@ namespace Rivet {
   inline bool isSame(const Particle& a, const Particle& b) {
     return a.isSame(b);
   }
-
+  
   /// @}
 
 
@@ -791,12 +906,10 @@ namespace Rivet {
   /// @brief Check whether a set of particles' decay chains can contain the requested list of pids.
   /// @note if absolute is true, then only the absolute values of pids are compared.
   /// @note if ignorephoton is true, then photons are ignored when searching for the set of particles.
-  bool cascadeContains
-    ( const Particles& parts
-    , const vector<int>& pids
-    , bool absolute
-    , bool ignorephoton
-    );
+  bool cascadeContains( const Particles& parts,
+			const vector<int>& pids,
+		        bool absolute,
+			bool ignorephoton);
 
   /// @}
 

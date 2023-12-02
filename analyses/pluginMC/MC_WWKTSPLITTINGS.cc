@@ -1,13 +1,14 @@
 // -*- C++ -*-
 #include "Rivet/Analyses/MC_JetSplittings.hh"
-#include "Rivet/Projections/WFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 
 namespace Rivet {
 
 
-  /// @brief MC validation analysis for W^+[enu]W^-[munu] + jets events
+  /// @brief MC validation analysis for e+mu W^+W^- + jets events
   class MC_WWKTSPLITTINGS : public MC_JetSplittings {
   public:
 
@@ -22,39 +23,30 @@ namespace Rivet {
 
     /// Book histograms
     void init() {
-      FinalState fs;
+      declare("MET", MissingMomentum());
 
-      // set FS cuts from input options
-      const double etaecut = getOption<double>("ABSETAEMAX", 3.5);
-      const double ptecut = getOption<double>("PTEMIN", 25.);
+      // Find electrons with cuts from input options
+      const double ETAECUT = getOption<double>("ABSETAEMAX", 3.5);
+      const double PTECUT = getOption<double>("PTEMIN", 25.);
+      const Cut cut_e = Cuts::abseta < ETAECUT && Cuts::pT > PTECUT*GeV;
+      LeptonFinder ef(0.1, cut_e && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
 
-      Cut cute = Cuts::abseta < etaecut && Cuts::pT > ptecut*GeV;
+      // Find muons with cuts from input options
+      const double ETAMUCUT = getOption<double>("ABSETAMUMAX", 3.5);
+      const double PTMUCUT = getOption<double>("PTMUMIN", 25.);
+      const Cut cut_m = Cuts::abseta < ETAMUCUT && Cuts::pT > PTMUCUT*GeV;
+      LeptonFinder mf(0.2, cut_m && Cuts::abspid == PID::MUON);
+      declare(mf, "Muons");
 
-      WFinder wenufinder(fs, cute, PID::ELECTRON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
-      declare(wenufinder, "WenuFinder");
-
-      VetoedFinalState wmnuinput;
-      wmnuinput.addVetoOnThisFinalState(wenufinder);
-
-      // set FS cuts from input options
-      const double etamucut = getOption<double>("ABSETAMUMAX", 3.5);
-      const double ptmucut = getOption<double>("PTMUMIN", 25.);
-
-      Cut cutmu = Cuts::abseta < etamucut && Cuts::pT > ptmucut*GeV;
-      
-      WFinder wmnufinder(wmnuinput, cutmu, PID::MUON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
-      declare(wmnufinder, "WmnuFinder");
-
+      // Find jets with clustering radius from input option
       VetoedFinalState jetinput;
       jetinput
-          .addVetoOnThisFinalState(wenufinder)
-          .addVetoOnThisFinalState(wmnufinder);
-
-      // set clustering radius from input option
+	.addVetoOnThisFinalState(ef)
+	.addVetoOnThisFinalState(mf);
       const double R = getOption<double>("R", 0.6);
-      
-      FastJets jetpro(jetinput, JetAlg::KT, R);
-      declare(jetpro, "Jets");
+      FastJets fj(jetinput, JetAlg::KT, R);
+      declare(fj, "Jets");
 
       MC_JetSplittings::init();
     }
@@ -62,18 +54,23 @@ namespace Rivet {
 
 
     /// Do the analysis
-    void analyze(const Event & e) {
-      const WFinder& wenufinder = apply<WFinder>(e, "WenuFinder");
-      if (wenufinder.bosons().size()!=1) {
-        vetoEvent;
-      }
+    void analyze(const Event& event) {
 
-      const WFinder& wmnufinder = apply<WFinder>(e, "WmnuFinder");
-      if (wmnufinder.bosons().size()!=1) {
-        vetoEvent;
-      }
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
 
-      MC_JetSplittings::analyze(e);
+      // Identify the closest-matching l+MET to m == mW
+      /// @note Dubious strategy, given there are two neutrinos...
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const int iefound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+      const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+      const int imfound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+
+      // Require two valid W candidates
+      if (iefound < 0 || imfound < 0) vetoEvent;
+
+      MC_JetSplittings::analyze(event);
     }
 
 
@@ -87,8 +84,6 @@ namespace Rivet {
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_WWKTSPLITTINGS);
 
 }

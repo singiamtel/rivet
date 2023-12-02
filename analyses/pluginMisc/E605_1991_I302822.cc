@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -22,11 +22,10 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      const FinalState fs;
-      declare(fs, "FS");
-      Cut cut = Cuts::etaIn(-10.,10.);
-      ZFinder zfinder(fs, cut, PID::MUON, 4.0*GeV, 100.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NONE);
-      declare(zfinder, "ZFinder");
+      Cut cut = Cuts::abseta < 10.;
+      DileptonFinder zfinder(91.2*GeV, 0.0, cut && Cuts::abspid == PID::MUON,
+                             Cuts::massIn(4.0*GeV, 100.0*GeV), LeptonOrigin::PROMPT);
+      declare(zfinder, "DileptonFinder");
 
       // Book histograms in mass ranges (measurement is not normalised to mass range)
       book(_h["pT_M_78"],   17, 1, 1);
@@ -60,7 +59,7 @@ namespace Rivet {
         throw Error("Unexpected sqrtS ! Only 38.8 GeV is supported");
       }
 
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.particles().size() >= 1) {
 
         double Zmass = zfinder.bosons()[0].momentum().mass()/GeV;
@@ -109,7 +108,7 @@ namespace Rivet {
       if (idx && idx <= _edges.at(tag).size()) {
         edge = _edges.at(tag)[idx-1];
       }
-      _h[tag]->fill(edge);
+      _h[tag]->fill(edge, weight);
     }
 
 

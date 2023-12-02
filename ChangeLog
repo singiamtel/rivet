@@ -2,6 +2,35 @@
 
 	* Improvements to rivet-mkhtml output.
 
+2023-11-24  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Swap the first two args of the two-FS LeptonFinder constructor
+	so the leptons are given first: only a few analyses affected, but
+	take care.
+
+	* Add closestMassIndex and closestMassIndices functions as a
+	pre-bound version of closestMatchIndex...
+
+	* Remove implicit dressing dR from LeptonFinder and
+	DileptonFinder, and implicit mass from DileptonFinder.
+
+	* Revamp the constructors for LeptonFinder and DileptonFinder so
+	you either specify promptness conditions via cuts only or through
+	passed final states, but not both.
+
+2023-11-14  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Vector4.hh, ParticleUtils.hh: add unbound mass(), mass2() and
+	mT() functions for pair-combinations of Particles, Jets, and
+	FourMomenta.
+
+	* Utils.hh: Add closestMatchIndex and closestMatchIndices
+	container-combinatorics functions.
+
+2023-11-13  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Rename the ZFinder to DileptonFinder.
+
 2023-11-11  Christian Gutschow  <chris.g@cern.ch>
 
 	* Remove various methods + constructors that have been deprecated in 3.1.x

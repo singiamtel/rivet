@@ -1,7 +1,8 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/Beam.hh"
 
 namespace Rivet {
@@ -11,18 +12,9 @@ namespace Rivet {
   class MC_WPOL : public Analysis {
   public:
 
-    /// @name Constructors etc.
-    /// @{
-
     /// Constructor
-    MC_WPOL()
-      : Analysis("MC_WPOL")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(MC_WPOL);
 
-    /// @}
-
-
-  public:
 
     /// @name Analysis methods
     /// @{
@@ -30,10 +22,11 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      FinalState fs;
-      WFinder wfinder(fs, Cuts::open(), PID::ELECTRON,
-                      60.0*GeV, 100.0*GeV, 0.0*GeV, 0.0);
-      declare(wfinder, "WFinder");
+      declare(MissingMomentum(), "MET");
+
+      LeptonFinder lf(0.1, Cuts::abspid == PID::ELECTRON);
+      declare(lf, "Leptons");
+
       Beam beams;
       declare(beams, "Beams");
 
@@ -66,42 +59,46 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const WFinder& wfinder = apply<WFinder>(event, "WFinder");
-      if (wfinder.bosons().size() != 1) {
-        vetoEvent;
-      }
-      const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
+      // MET cut
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
 
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+      const int ifound = closestMassIndex(ls, pmiss, 80.4*GeV, 60*GeV, 100*GeV);
+      if (ifound < 0) vetoEvent;
+
+      const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
       FourMomentum pb1(beams.second.momentum()), pb2(beams.first.momentum());
-      Particle lepton = wfinder.leptons()[0];
+      const Particle& lepton = ls[ifound];
       FourMomentum pl(lepton.momentum());
-      size_t idx = (PID::charge3(lepton.pid())>0 ? 0 : 1);
-      FourMomentum plnu(wfinder.bosons()[0].momentum());
+      const size_t idx = lepton.charge3() > 0 ? 0 : 1;
+      const FourMomentum plnu = lepton.mom() + pmiss;
 
       const LorentzTransform cms = LorentzTransform::mkFrameTransformFromBeta(plnu.betaVec());
       Matrix3 zrot(plnu.p3(), Vector3(0.0, 0.0, 1.0));
-      pl=cms.transform(pl);
-      pb1=cms.transform(pb1);
-      pb2=cms.transform(pb2);
-      Vector3 pl3=pl.p3();
-      Vector3 pb13=pb1.p3();
-      Vector3 pb23=pb2.p3();
-      pl3=zrot*pl3;
-      pb13=zrot*pb13;
-      pb23=zrot*pb23;
-      Vector3 xref(cos(pb13.theta())>cos(pb23.theta())?pb13:pb23);
+      pl = cms.transform(pl);
+      pb1 = cms.transform(pb1);
+      pb2 = cms.transform(pb2);
+      Vector3 pl3 = pl.p3();
+      Vector3 pb13 = pb1.p3();
+      Vector3 pb23 = pb2.p3();
+      pl3 = zrot*pl3;
+      pb13 = zrot*pb13;
+      pb23 = zrot*pb23;
+      Vector3 xref(cos(pb13.theta())>cos(pb23.theta()) ? pb13 : pb23);
       Matrix3 xrot(Vector3(xref.x(), xref.y(), 0.0), Vector3(1.0, 0.0, 0.0));
-      pl3=xrot*pl3;
+      pl3 = xrot*pl3;
 
-      double ptw(wfinder.bosons()[0].pT()/GeV);
+      double ptw(plnu.pT()/GeV);
       double thetas(pl3.theta()), phis(pl3.phi());
       double costhetas(cos(thetas)), sinthetas(sin(thetas));
       double cosphis(cos(phis)), sinphis(sin(phis));
-      if (phis<0.0) phis+=2.0*M_PI;
+      if (phis < 0.0) phis += 2.0*M_PI;
 
       _h_histos[idx][0]->fill(costhetas);
       _h_histos[idx][1]->fill(phis*180.0/M_PI);
-      if (ptw>20.0) {
+      if (ptw > 20.0) {
         _h_histos[idx][2]->fill(costhetas);
         _h_histos[idx][3]->fill(phis*180.0/M_PI);
       }
@@ -116,19 +113,16 @@ namespace Rivet {
       _h_dists[idx][8]->fill(ptw,0.5*sqr(1.0-costhetas)-(1.0-2.0*sqr(costhetas)));
       _h_dists[idx][9]->fill(ptw,0.5*sqr(1.0+costhetas)-(1.0-2.0*sqr(costhetas)));
       _h_dists[idx][10]->fill(ptw,5.0*sqr(sinthetas)-3.0);
-
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      for (size_t i=0; i<_h_histos.size(); ++i) {
+      for (size_t i = 0; i < _h_histos.size(); ++i) {
         for (Histo1DPtr histo : _h_histos[i]) {
           scale(histo, crossSection()/picobarn/sumOfWeights());
         }
       }
-
     }
 
     /// @}
@@ -138,7 +132,6 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-
     vector<vector<Profile1DPtr> > _h_dists;
     vector<vector<Histo1DPtr> > _h_histos;
     /// @}
@@ -147,8 +140,6 @@ namespace Rivet {
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_WPOL);
 
 }

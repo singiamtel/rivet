@@ -26,11 +26,11 @@ namespace Rivet {
 
       // Selection: lepton selection
       Cut etaranges_el = Cuts::abseta < 2.47 && Cuts::pT > 7*GeV;
-      LeptonFinder electron_sel4l(photons, bare_el, 0.1, etaranges_el, PhotonOrigin::NODECAY);
+      LeptonFinder electron_sel4l(bare_el, photons, 0.1, etaranges_el);
       declare(electron_sel4l, "electrons");
 
       Cut etaranges_mu = Cuts::abseta < 2.7 && Cuts::pT > 6*GeV;
-      LeptonFinder muon_sel4l(photons, bare_mu, 0.1, etaranges_mu, PhotonOrigin::NODECAY);
+      LeptonFinder muon_sel4l(bare_mu, photons, 0.1, etaranges_mu);
       declare(muon_sel4l, "muons");
 
       FastJets jetpro(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);

@@ -14,9 +14,8 @@ namespace Rivet {
   public:
 
     /// Constructor
-    CMS_2016_I1491950()
-      : Analysis("CMS_2016_I1491950")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2016_I1491950);
+
 
     /// Book histograms and initialise projections before the run
     void init() {

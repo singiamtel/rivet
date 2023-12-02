@@ -25,9 +25,7 @@ namespace Rivet {
 
       FinalState all_photons(vfs, Cuts::abspid == PID::PHOTON);
       FinalState leptons(vfs, Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-
-      LeptonFinder dressed_leptons(all_photons, leptons, 0.1,
-				     Cuts::abseta < 2.4 && Cuts::pT > 15*GeV, PhotonOrigin::ALL);
+      LeptonFinder dressed_leptons(leptons, all_photons, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 15*GeV);
       declare(dressed_leptons, "MyLeptons");
 
       VetoedFinalState photons(all_photons);

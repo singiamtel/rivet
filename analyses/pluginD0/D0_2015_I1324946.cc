@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -18,8 +18,8 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      FinalState fs;
-      ZFinder zfinder_mm(fs, Cuts::abseta < 2 && Cuts::pT > 15*GeV, PID::MUON, 30*GeV, 500*GeV, 0.0);
+      DileptonFinder zfinder_mm(91.2*GeV, 0.0, Cuts::abseta < 2 && Cuts::pT > 15*GeV &&
+                                Cuts::abspid == PID::MUON, Cuts::massIn(30*GeV, 500*GeV));
       declare(zfinder_mm, "zfinder_mm");
 
       book(_h_phistar_mm_peak_central, 1, 1, 1);
@@ -35,7 +35,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       //70<Mmm<105
-      const ZFinder& zfinder_mm = apply<ZFinder>(event, "zfinder_mm");
+      const DileptonFinder& zfinder_mm = apply<DileptonFinder>(event, "zfinder_mm");
       if (zfinder_mm.bosons().size() == 1) {
         Particles mm = zfinder_mm.constituents();
         std::sort(mm.begin(), mm.end(), cmpMomByPt);

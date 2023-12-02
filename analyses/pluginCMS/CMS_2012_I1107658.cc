@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -14,9 +14,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    CMS_2012_I1107658()
-      : Analysis("CMS_2012_I1107658")
-    {   }
+    RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2012_I1107658);
 
 
     /// Initialization
@@ -24,12 +22,10 @@ namespace Rivet {
 
       /// @note Using a bare muon Z (but with a clustering radius!?)
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 4*GeV, 140*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, cut && Cuts::abspid == PID::MUON, Cuts::massIn(4*GeV, 140*GeV));
+      declare(zfinder, "DileptonFinder");
 
-      ChargedFinalState cfs((Cuts::etaIn(-2, 2) && Cuts::pT >=  500*MeV));
-      VetoedFinalState nonmuons(cfs);
-      nonmuons.addVetoPairId(PID::MUON);
+      ChargedFinalState nonmuons(Cuts::abseta < 2 && Cuts::pT > 500*MeV && Cuts::abspid != PID::MUON);
       declare(nonmuons, "nonmuons");
 
       book(_h_Nchg_towards_pTmumu                 ,1, 1, 1);
@@ -57,7 +53,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
 
       if (zfinder.bosons().size() != 1) vetoEvent;
 

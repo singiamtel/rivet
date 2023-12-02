@@ -8,7 +8,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief leptoquark search at 13 TeV
   ///
   /// @note This base class contains a "mode" variable to specify lepton channel
@@ -39,7 +39,7 @@ namespace Rivet {
 
         // Find and dress the electrons and muons
         PromptFinalState bare_leps(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
-        LeptonFinder dressed_leps(photons, bare_leps, 0.1, baseline_lep_cuts, PhotonOrigin::ALL);
+        LeptonFinder dressed_leps(bare_leps, photons, 0.1, baseline_lep_cuts);
         declare(dressed_leps, "leptons");
 
         //and finally the jets:

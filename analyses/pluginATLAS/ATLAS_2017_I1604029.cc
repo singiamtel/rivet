@@ -37,9 +37,9 @@ namespace Rivet {
       PromptFinalState prompt_mu(base_cuts && Cuts::abspid == PID::MUON);
       PromptFinalState prompt_el(base_cuts && Cuts::abspid == PID::ELECTRON);
       IdentifiedFinalState all_photons(fs, PID::PHOTON);
-      LeptonFinder elecs(all_photons, prompt_el, 0.1, dressed_cuts);
+      LeptonFinder elecs(prompt_el, all_photons, 0.1, dressed_cuts);
       declare(elecs, "elecs");
-      LeptonFinder muons(all_photons, prompt_mu, 0.1, dressed_cuts);
+      LeptonFinder muons(prompt_mu, all_photons, 0.1, dressed_cuts);
       declare(muons, "muons");
 
       // auxiliary projections for 'single-lepton ttbar filter'

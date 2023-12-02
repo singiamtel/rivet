@@ -1,7 +1,8 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/LeadingParticlesFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 
@@ -23,11 +24,11 @@ namespace Rivet {
 
     // Book histograms and set up projections
     void init() {
+
       // Projections
-      FinalState fs;
-      /// @todo Use separate pT and ETmiss cuts in WFinder
-      const WFinder wfe(fs, Cuts::abseta < 5 && Cuts::pT > 25*GeV, PID::ELECTRON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
-      declare(wfe, "WFe");
+      declare("MET", MissingMomentum());
+      LeptonFinder ef(0.2, Cuts::abseta < 5 && Cuts::pT > 25*GeV && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
 
       // Histograms (temporary +- charge histos and scatters to store the calculated asymmetries)
       for (size_t pmindex = 0; pmindex < 2; ++pmindex) {
@@ -44,24 +45,30 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event & event) {
-      const WFinder& wf = apply<WFinder>(event, "WFe");
-      if (wf.bosons().size() == 0) {
+
+      // W reco, starting with MET
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.pT() < 25*GeV) vetoEvent;
+
+      // Identify the closest-matching l+MET to m == mW
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const int ifound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
+      if (ifound < 0) {
         MSG_DEBUG("No W candidates found: vetoing");
         vetoEvent;
       }
 
       // Get the e+- momentum, and an effective charge including the eta sign
-      /// @todo Is it correct to multiply the eta sign into the charge to "fold" the plot?
-      const FourMomentum p_e = wf.leptons()[0].momentum();
-      const int chg_e = sign(p_e.eta()) * sign(charge(wf.leptons()[0]));
+      const Particle& e = es[ifound];
+      const int chg_e = sign(e.eta()) * sign(e.charge());
       assert(chg_e == 1 || chg_e == -1);
       MSG_TRACE("Charged lepton sign = " << chg_e);
 
       // Fill histos with appropriate +- indexing
       const size_t pmindex = (chg_e > 0) ? 0 : 1;
-      if (p_e.Et() < 35*GeV) _hs_dsigpm_deta_25_35[pmindex]->fill(fabs(p_e.eta()));
-      else _hs_dsigpm_deta_35[pmindex]->fill(fabs(p_e.eta()));
-      _hs_dsigpm_deta_25[pmindex]->fill(fabs(p_e.eta()));
+      if (e.Et() < 35*GeV) _hs_dsigpm_deta_25_35[pmindex]->fill(e.abseta());
+      else _hs_dsigpm_deta_35[pmindex]->fill(e.abseta());
+      _hs_dsigpm_deta_25[pmindex]->fill(e.abseta());
     }
 
 
@@ -89,8 +96,6 @@ namespace Rivet {
     /// @}
 
   };
-
-
 
 
   RIVET_DECLARE_ALIASED_PLUGIN(D0_2008_S7837160, D0_2008_I791230);

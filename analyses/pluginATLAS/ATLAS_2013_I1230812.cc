@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
@@ -9,16 +9,13 @@ namespace Rivet {
 
 
   /// Z + jets in pp at 7 TeV (combined channel / base class)
+  ///
   /// @note This base class contains a "mode" variable for combined, e, and mu channel derived classes
   class ATLAS_2013_I1230812 : public Analysis {
   public:
 
-    /// @name Constructors etc.
-    /// @{
-
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2013_I1230812);
-    /// @}
 
 
     /// Book histograms and initialise projections before the run
@@ -34,15 +31,15 @@ namespace Rivet {
       Cut pt20 = Cuts::pT >= 20*GeV;
       Cut eta_e = _mode? Cuts::abseta < 1.37 || Cuts::absetaIn(1.52, 2.47) : Cuts::abseta < 2.5;
       Cut eta_m = _mode? Cuts::abseta < 2.4 : Cuts::abseta < 2.5;
-      ZFinder zfinder_el(FinalState(eta_e), pt20, PID::ELECTRON, 66*GeV, 116*GeV);
-      ZFinder zfinder_mu(FinalState(eta_m), pt20, PID::MUON, 66*GeV, 116*GeV);
+      DileptonFinder zfinder_el(91.2*GeV, 0.1, eta_e && pt20 && Cuts::abspid == PID::ELECTRON, Cuts::massIn(66*GeV, 116*GeV));
+      DileptonFinder zfinder_mu(91.2*GeV, 0.1, eta_m && pt20 && Cuts::abspid == PID::MUON, Cuts::massIn(66*GeV, 116*GeV));
       declare(zfinder_el, "zfinder_el");
       declare(zfinder_mu, "zfinder_mu");
 
       // Define veto FS in order to prevent Z-decay products entering the jet algorithm
       VetoedFinalState had_fs;
-      had_fs.addVetoOnThisFinalState(getProjection<ZFinder>("zfinder_el"));
-      had_fs.addVetoOnThisFinalState(getProjection<ZFinder>("zfinder_mu"));
+      had_fs.addVetoOnThisFinalState(getProjection<DileptonFinder>("zfinder_el"));
+      had_fs.addVetoOnThisFinalState(getProjection<DileptonFinder>("zfinder_mu"));
       FastJets jets(had_fs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::ALL);
       declare(jets, "jets");
 
@@ -81,13 +78,13 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       FourMomentum z, lp, lm;
-      const ZFinder& zfinder_el = apply<ZFinder>(event, "zfinder_el");
-      const ZFinder& zfinder_mu = apply<ZFinder>(event, "zfinder_mu");
+      const DileptonFinder& zfinder_el = apply<DileptonFinder>(event, "zfinder_el");
+      const DileptonFinder& zfinder_mu = apply<DileptonFinder>(event, "zfinder_mu");
 
-      bool e_ok = zfinder_el.constituents().size() == 2 && zfinder_mu.constituents().size() ==0;
-      bool m_ok = zfinder_el.constituents().size() == 0 && zfinder_mu.constituents().size() ==2;
+      bool e_ok = zfinder_el.constituents().size() == 2 && zfinder_mu.constituents().size() == 0;
+      bool m_ok = zfinder_el.constituents().size() == 0 && zfinder_mu.constituents().size() == 2;
 
-      if (_mode == 0 &&  !e_ok && !m_ok ) vetoEvent;
+      if (_mode == 0 && !e_ok && !m_ok) vetoEvent;
       if (_mode == 1 && !e_ok) vetoEvent;
       if (_mode == 2 && !m_ok) vetoEvent;
 

@@ -6,7 +6,7 @@
 #include "Rivet/Projections/InvMassFinalState.hh"
 #include "Rivet/Projections/VisibleFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -21,17 +21,15 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      FinalState fs; ///< @todo No cuts?
-      VisibleFinalState visfs(fs);
-      // Prompt leptons only
-      PromptFinalState pfs(fs);
-
-      ZFinder zeeFinder(pfs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::ELECTRON, 71.0*GeV, 111.0*GeV);
+      DileptonFinder zeeFinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV &&
+                               Cuts::abspid == PID::ELECTRON, Cuts::massIn(71*GeV, 111*GeV));
       declare(zeeFinder, "ZeeFinder");
 
-      ZFinder zmumuFinder(pfs, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV, PID::MUON, 71.0*GeV, 111.0*GeV);
+      DileptonFinder zmumuFinder(91.2*GeV, 0.1, Cuts::abseta < 2.4 && Cuts::pT > 20*GeV &&
+                                 Cuts::abspid == PID::MUON, Cuts::massIn(71*GeV, 111*GeV));
       declare(zmumuFinder, "ZmumuFinder");
 
+      VisibleFinalState visfs;
       VetoedFinalState jetConstits(visfs);
       jetConstits.addVetoOnThisFinalState(zeeFinder);
       jetConstits.addVetoOnThisFinalState(zmumuFinder);
@@ -60,8 +58,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {;
 
-      const ZFinder& zeeFS = apply<ZFinder>(event, "ZeeFinder");
-      const ZFinder& zmumuFS = apply<ZFinder>(event, "ZmumuFinder");
+      const DileptonFinder& zeeFS = apply<DileptonFinder>(event, "ZeeFinder");
+      const DileptonFinder& zmumuFS = apply<DileptonFinder>(event, "ZmumuFinder");
 
       const Particles& zees = zeeFS.bosons();
       const Particles& zmumus = zmumuFS.bosons();

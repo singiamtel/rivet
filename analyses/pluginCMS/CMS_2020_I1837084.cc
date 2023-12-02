@@ -5,7 +5,7 @@
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -25,8 +25,7 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      ZFinder zmmFind(FinalState(), Cuts::pT > 0*GeV, PID::MUON, 76.1876*GeV, 106.1876*GeV, 0.1,
-                      LeptonOrigin::PROMPT, PhotonOrigin::NODECAY);
+      DileptonFinder zmmFind(91.2*GeV, 0.1, Cuts::abspid == PID::MUON, Cuts::massIn(76.1876*GeV, 106.1876*GeV));
       declare(zmmFind, "ZmmFind");
 
       // Book histograms
@@ -40,7 +39,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const Particles& zmms = apply<ZFinder>(event, "ZmmFind").bosons();
+      const Particles& zmms = apply<DileptonFinder>(event, "ZmmFind").bosons();
 
       if (zmms.size() == 1 && zmms[0].pT() > 200*GeV) {
         _h_Z_pt     ->fill(min(zmms[0].pT()/GeV, 1499.999));

@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -22,8 +22,8 @@ namespace Rivet {
 
       const FinalState fs;
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 25*GeV;
-      ZFinder zfinder(fs, cuts, PID::ELECTRON, 116*GeV, 1500*GeV, 0.1);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::ELECTRON, Cuts::massIn(116*GeV, 1500*GeV));
+      declare(zfinder, "DileptonFinder");
 
       book(_hist_mll, 1, 1, 2);
     }
@@ -31,18 +31,17 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
 
-    	if (zfinder.bosons().size() != 1)  vetoEvent;
+      if (zfinder.bosons().size() != 1)  vetoEvent;
 
       double mass = zfinder.bosons()[0].mass();
-	    _hist_mll->fill(mass);
+      _hist_mll->fill(mass);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
       const double sf = crossSection()/sumOfWeights();
       scale(_hist_mll, sf);
     }

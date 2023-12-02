@@ -1,8 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
-#include "Rivet/Projections/WFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 
 namespace Rivet {
 
@@ -11,12 +13,8 @@ namespace Rivet {
   class ATLAS_2011_I954993 : public Analysis {
   public:
 
-    /// Default constructor
-    ATLAS_2011_I954993()
-      : Analysis("ATLAS_2011_I954993")
-    {
-
-    }
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2011_I954993);
 
 
     /// @name Analysis methods
@@ -24,23 +22,23 @@ namespace Rivet {
 
     /// Projection and histogram setup
     void init() {
-      FinalState fs;
       Cut cuts = Cuts::abseta < 2.5 && Cuts::pT > 15*GeV;
+      DileptonFinder zfinder_e(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::ELECTRON,
+                               Cuts::massIn(81.1876*GeV, 101.1876*GeV));
+      declare(zfinder_e, "DileptonFinder_e");
+      DileptonFinder zfinder_mu(91.2*GeV, 0.1, cuts && Cuts::abspid == PID::MUON,
+                                Cuts::massIn(81.1876*GeV, 101.1876*GeV));
+      declare(zfinder_mu, "DileptonFinder_mu");
 
-      ZFinder zfinder_e(fs, cuts, PID::ELECTRON, 81.1876*GeV, 101.1876*GeV, 0.1);
-      declare(zfinder_e, "ZFinder_e");
-      ZFinder zfinder_mu(fs, cuts, PID::MUON, 81.1876*GeV, 101.1876*GeV, 0.1);
-      declare(zfinder_mu, "ZFinder_mu");
-
+      declare("MET", MissingMomentum());
       VetoedFinalState weinput;
       weinput.addVetoOnThisFinalState(zfinder_e);
-      WFinder wfinder_e(weinput, cuts, PID::ELECTRON, 0*GeV, 1000*GeV, 25*GeV, 0.1);
-      declare(wfinder_e, "WFinder_e");
-
+      LeptonFinder ef(weinput, 0.1, cuts && Cuts::abspid == PID::ELECTRON);
+      declare(ef, "Elecs");
       VetoedFinalState wminput;
       wminput.addVetoOnThisFinalState(zfinder_mu);
-      WFinder wfinder_mu(wminput,cuts, PID::MUON, 0*GeV, 1000*GeV, 25*GeV, 0.1);
-      declare(wfinder_mu, "WFinder_mu");
+      LeptonFinder mf(wminput, 0.1, cuts && Cuts::abspid == PID::MUON);
+      declare(mf, "Muons");
 
       // Histograms
       book(_h_fiducial ,1,1,1);
@@ -48,47 +46,41 @@ namespace Rivet {
 
 
     /// Do the analysis
-    void analyze(const Event& e) {
-      const ZFinder& zfinder_e = apply<ZFinder>(e, "ZFinder_e");
-      const ZFinder& zfinder_mu = apply<ZFinder>(e, "ZFinder_mu");
-      const WFinder& wfinder_e = apply<WFinder>(e, "WFinder_e");
-      const WFinder& wfinder_mu = apply<WFinder>(e, "WFinder_mu");
+    void analyze(const Event& event) {
 
       // Looking for a Z, exit if not found
+      const DileptonFinder& zfinder_e = apply<DileptonFinder>(event, "DileptonFinder_e");
+      const DileptonFinder& zfinder_mu = apply<DileptonFinder>(event, "DileptonFinder_mu");
       if (zfinder_e.bosons().size() != 1 && zfinder_mu.bosons().size() != 1) {
         MSG_DEBUG("No Z boson found, vetoing event");
         vetoEvent;
       }
 
       // Looking for a W, exit if not found
-      if (wfinder_e.bosons().size()!= 1 && wfinder_mu.bosons().size() != 1) {
+      const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+      if (pmiss.Et() < 25*GeV) vetoEvent;
+      const Particles& es = apply<LeptonFinder>(event, "Elecs").particles();
+      const int iefound = closestMatchIndex(es, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+      const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+      const int imfound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 1000*GeV);
+      if (iefound < 0 && imfound < 0) {
         MSG_DEBUG("No W boson found, vetoing event");
         vetoEvent;
       }
 
       // If we find a W, make fiducial acceptance cuts and exit if not found
-      if (wfinder_e.bosons().size() == 1) {
-        const FourMomentum We = wfinder_e.leptons()[0];
-        const FourMomentum Wenu = wfinder_e.neutrinos()[0];
-        const double mT = wfinder_e.mT();
-        if (Wenu.pT() < 25*GeV || We.pT() < 20*GeV || mT < 20*GeV) {
-          MSG_DEBUG("Wnu pT = " << Wenu.pT()/GeV << " GeV, Wl pT = " << We.pT()/GeV << " GeV, mT = " << mT/GeV << " GeV");
-          vetoEvent;
-        }
-      } else if (wfinder_mu.bosons().size() == 1) {
-        const FourMomentum Wmu = wfinder_mu.leptons()[0];
-        const FourMomentum Wmunu = wfinder_mu.neutrinos()[0];
-        const double mT = wfinder_mu.mT();
-        if (Wmunu.pT() < 25*GeV || Wmu.pT() < 20*GeV || mT < 20*GeV) {
-          MSG_DEBUG("Wnu pT = " << Wmunu.pT()/GeV << ", Wl pT = " << Wmu.pT()/GeV << " GeV, mT = " << mT/GeV << " GeV");
-          vetoEvent;
-        }
-      } else {
-        MSG_DEBUG("No W boson found: vetoing event");
-        vetoEvent;
+      if (iefound >= 0) {
+        const Particle& e = es[iefound];
+        const double mt = mT(pmiss, e);
+        if (e.pT() < 20*GeV || mt < 20*GeV) vetoEvent;
+      } else if (imfound >= 0) {
+        const Particle& m = mus[imfound];
+        const double mt = mT(pmiss, m);
+        if (m.pT() < 20*GeV || mt < 20*GeV) vetoEvent;
       }
 
       // Update the fiducial cross-section histogram
+      /// @todo Would be better as a counter
       _h_fiducial->fill(7000);
     }
 
@@ -103,15 +95,12 @@ namespace Rivet {
 
   private:
 
-    /// @name Histograms
-    /// @{
+    /// Histogram
     Histo1DPtr _h_fiducial;
-    /// @}
 
   };
 
 
-  //// The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2011_I954993);
 
 }

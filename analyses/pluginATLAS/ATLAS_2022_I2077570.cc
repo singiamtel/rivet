@@ -9,7 +9,7 @@
 
 namespace Rivet {
 
-  
+
   /// Collinear Z + Jets in pp at 13 TeV
   class ATLAS_2022_I2077570 : public Analysis {
   public:
@@ -31,11 +31,11 @@ namespace Rivet {
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_mu(all_photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(bare_mu, all_photons, 0.1, Cuts::abseta < 2.5);
 
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_el(all_photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(bare_el, all_photons, 0.1, Cuts::abseta < 2.5);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 4.5));
@@ -54,10 +54,10 @@ namespace Rivet {
       // Kinematic cuts for leptons
       const Cut cuts_lep = Cuts::pT > 25*GeV && Cuts::abseta < 2.5;
 
-      LeptonFinder dressed_electrons(photons, electrons, 0.1, cuts_lep);
+      LeptonFinder dressed_electrons(electrons, photons, 0.1, cuts_lep);
       declare(dressed_electrons, "DressedElectrons");
 
-      LeptonFinder dressed_muons(photons, muons, 0.1, cuts_lep);
+      LeptonFinder dressed_muons(muons, photons, 0.1, cuts_lep);
       declare(dressed_muons, "DressedMuons");
 
 

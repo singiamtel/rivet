@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
 
@@ -22,10 +22,8 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      const FinalState fs;
-
-      ZFinder zfinder(fs, Cuts::abseta < 15.0, PID::MUON, 3.5*GeV, 30.0*GeV, 0.1, LeptonOrigin::PROMPT, PhotonOrigin::NONE);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.0, Cuts::abseta < 15.0 && Cuts::abspid == PID::MUON, Cuts::massIn(3.5*GeV, 30.0*GeV));
+      declare(zfinder, "DileptonFinder");
 
       // Book histograms
       // 400 GeV and y = 0.03
@@ -51,7 +49,7 @@ namespace Rivet {
         throw Error("Unexpected sqrtS ! Only 27.4 GeV is supported");
       }
 
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
       if (zfinder.particles().size() >= 1) {
 
         double Zmass = zfinder.bosons()[0].momentum().mass()/GeV;

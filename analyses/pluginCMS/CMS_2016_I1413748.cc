@@ -31,14 +31,14 @@ namespace Rivet {
       el_id.acceptIdPair(PID::ELECTRON);
       PromptFinalState electrons(el_id);
       declare(electrons, "Electrons");
-      LeptonFinder dressed_electrons(photons, electrons, 0.1);
+      LeptonFinder dressed_electrons(electrons, photons, 0.1);
       declare(dressed_electrons, "DressedElectrons");
 
       IdentifiedFinalState mu_id(fs);
       mu_id.acceptIdPair(PID::MUON);
       PromptFinalState muons(mu_id);
       declare(muons, "Muons");
-      LeptonFinder dressed_muons(photons, muons, 0.1);
+      LeptonFinder dressed_muons(muons, photons, 0.1);
       declare(dressed_muons, "DressedMuons");
 
       // Parton-level top quarks

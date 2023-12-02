@@ -29,7 +29,7 @@ namespace Rivet {
       // Electrons and muons in Fiducial PS
       PromptFinalState leptons(Cuts::abspid == PID::ELECTRON || Cuts::abspid == PID::MUON);
       leptons.acceptTauDecays(false);
-      LeptonFinder dressedleptons(photons, leptons, 0.1, Cuts::open(), PhotonOrigin::ALL);
+      LeptonFinder dressedleptons(leptons, photons, 0.1);
       declare(dressedleptons, "LeptonFinder");
 
       // Prompt neutrinos (yikes!)
@@ -42,17 +42,17 @@ namespace Rivet {
 
       // Muons
       PromptFinalState bare_mu(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_mu(photons, bare_mu, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_mu(bare_mu, photons, 0.1, Cuts::abseta < 2.5);
 
       // Electrons
       PromptFinalState bare_el(Cuts::abspid == PID::ELECTRON, TauDecaysAs::PROMPT);
-      LeptonFinder all_dressed_el(photons, bare_el, 0.1, Cuts::abseta < 2.5, PhotonOrigin::ALL);
+      LeptonFinder all_dressed_el(bare_el, photons, 0.1, Cuts::abseta < 2.5);
 
       //Jet forming
       VetoedFinalState vfs(FinalState(Cuts::abseta < 5.0));
       vfs.addVetoOnThisFinalState(all_dressed_el);
       vfs.addVetoOnThisFinalState(all_dressed_mu);
-      
+
       FastJets jets(vfs, JetAlg::ANTIKT, 0.4, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jets, "Jets");
 

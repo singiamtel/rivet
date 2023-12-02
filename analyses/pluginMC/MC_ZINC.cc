@@ -1,9 +1,8 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 
 namespace Rivet {
-
 
 
   /// @brief MC validation analysis for Z events
@@ -27,11 +26,9 @@ namespace Rivet {
       const double etacut = getOption<double>("ABSETALMAX", 3.5);
       const double ptcut = getOption<double>("PTLMIN", 25.);
 
-      FinalState fs;
       Cut cut = Cuts::abseta < etacut && Cuts::pT > ptcut*GeV;
-
-      ZFinder zfinder(fs, cut, _lepton, 66.0*GeV, 116.0*GeV, _dR);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, _dR, cut && Cuts::abspid == _lepton, Cuts::massIn(66.0*GeV, 116.0*GeV));
+      declare(zfinder, "DileptonFinder");
 
       book(_h_Z_mass ,"Z_mass", 50, 66.0, 116.0);
       book(_h_Z_pT ,"Z_pT", logspace(100, 1.0, 0.5*(sqrtS()>0.?sqrtS():14000.)/GeV));
@@ -40,14 +37,12 @@ namespace Rivet {
       book(_h_Z_phi ,"Z_phi", 25, 0.0, TWOPI);
       book(_h_lepton_pT ,"lepton_pT", logspace(100, 10.0, 0.25*(sqrtS()>0.?sqrtS():14000.)/GeV));
       book(_h_lepton_eta ,"lepton_eta", 40, -4.0, 4.0);
-
     }
-
 
 
     /// Do the analysis
     void analyze(const Event & e) {
-      const ZFinder& zfinder = apply<ZFinder>(e, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
 
       FourMomentum zmom(zfinder.bosons()[0].momentum());

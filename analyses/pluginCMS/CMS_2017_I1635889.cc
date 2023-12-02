@@ -1,15 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ZFinder.hh"
+#include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
-//#include "Rivet/ParticleName.hh"
 
 namespace Rivet {
-
-
 
 
   /// Underlying event activity in the Drell-Yan process at 13 TeV
@@ -17,9 +14,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    CMS_2017_I1635889()
-      : Analysis("CMS_2017_I1635889")
-    {   }
+    RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2017_I1635889);
 
 
     /// Initialization
@@ -27,8 +22,8 @@ namespace Rivet {
 
       /// @note Using a bare muon Z (but with a clustering radius!?)
       Cut cut = Cuts::abseta < 2.4 && Cuts::pT > 10*GeV;
-      ZFinder zfinder(FinalState(), cut, PID::MUON, 81*GeV, 101*GeV, 0.2);
-      declare(zfinder, "ZFinder");
+      DileptonFinder zfinder(91.2*GeV, 0.2, cut && Cuts::abspid == PID::MUON, Cuts::massIn(81*GeV, 101*GeV));
+      declare(zfinder, "DileptonFinder");
 
       ChargedFinalState cfs(zfinder.remainingFinalState());
       declare(cfs, "cfs");
@@ -44,7 +39,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const ZFinder& zfinder = apply<ZFinder>(event, "ZFinder");
+      const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
 
       if (zfinder.bosons().size() != 1) vetoEvent;
       if (zfinder.constituents()[0].pT()<20 && zfinder.constituents()[1].pT()<20)vetoEvent;
