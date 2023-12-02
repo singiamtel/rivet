@@ -22,7 +22,7 @@ namespace Rivet {
 
     /// Constructor with optional cuts first
     GammaGammaLeptons(const Cut& cuts=Cuts::OPEN,
-		      LeptonReco lreco=LeptonReco::ALL, ObjOrdering lsort=ObjOrdering::ENERGY, 
+		      LeptonReco lreco=LeptonReco::ALL, ObjOrdering lsort=ObjOrdering::ENERGY,
 		      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
       : _isolDR(isolDR), _lsort(lsort)
     {
@@ -39,13 +39,17 @@ namespace Rivet {
       // Lepton reco mode
       switch (lreco) {
       case LeptonReco::ALL:
-	declare(FinalState(cuts), "LFS");
+        declare(FinalState(cuts), "LFS");
+        break;
       case LeptonReco::ALL_DRESSED:
         declare(LeptonFinder(FinalState(), dressDR, cuts), "LFS");
+        break;
       case LeptonReco::PROMPT_BARE:
         declare(PromptFinalState(cuts), "LFS");
+        break;
       case LeptonReco::PROMPT_DRESSED:
         declare(LeptonFinder(PromptFinalState(), dressDR, cuts), "LFS");
+        break;
       }
     }
 
@@ -55,7 +59,7 @@ namespace Rivet {
 		      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
       : GammaGammaLeptons(cuts, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
     {  }
-    
+
     /// Constructor without cuts, requiring lepton reco spec
     GammaGammaLeptons(LeptonReco lreco, ObjOrdering lsort=ObjOrdering::ENERGY,
 	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
@@ -68,7 +72,7 @@ namespace Rivet {
       : GammaGammaLeptons(Cuts::OPEN, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
     {  }
 
-    
+
     /// Constructor from other constructors
     GammaGammaLeptons(const FinalState& leptoncandidates,
 		      const Beam& beamproj=Beam(),
@@ -126,7 +130,7 @@ namespace Rivet {
 
   };
 
-  
+
 }
 
 #endif

@@ -44,3 +44,5 @@ BibTeX: '@article{Abramowicz:2015mha,
 }'
 ReleaseTests:
  - $A DIS-e+-HighQ2 :BEAM=EPLUS:ENERGY=300.
+ - $A-2 ep-920-dis-photoprod
+

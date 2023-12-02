@@ -1,0 +1,44 @@
+Name: OPAL_2007_I734955
+Year: 2007
+Summary: Inclusive charged hadrons in gm+gm
+Experiment: OPAL
+Collider: LEP II
+SpiresID: 7018290
+InspireID: 734955
+Status: UNVALIDATED
+Authors:
+ - I. Helenius <ilkka.m.helenius@jyu.fi>
+References:
+ - Phys.Lett. B651 (2007) 92-101
+ - CERN-PH-EP-2006-038
+ - arXiv:hep-ex/0612045
+RunInfo:
+  e+e- collisions with center-of-mass energies from 183 GeV to 209 GeV;
+  Inclusive production of charged hadrons in photon-photon collisions;
+  Differential cross section as a function of p_T and \eta;
+NumEvents: 1000000
+Beams: [e+, e-]
+Energies: [[91.5, 91.5],[104.5, 104.5],[98, 98]]
+Description:
+  OPAL measurement for inclusive charged hadrons in photon-photon collisions
+  et LEP-II. Data binned in invariant mass of the gm+gm system (W) with bins
+  10 < W < 125 GeV, 10 < W < 30 GeV, 30 < W < 50 GeV and 50 < W < 125 GeV.
+  Charged particles within $|\eta| < 1.5$ and $p_T>120$~MeV. Maximum photon
+  virtuality of $Q^2 < 4.5$~GeV$^2$.
+BibKey: Abbiendi:2006kw
+BibTeX: '@article{Abbiendi:2006kw,
+      author         = "Abbiendi, G. and others",
+      title          = "{Inclusive production of charged hadrons in
+                        photon-photon collisions}",
+      collaboration  = "OPAL",
+      journal        = "Phys. Lett.",
+      volume         = "B651",
+      year           = "2007",
+      pages          = "92-101",
+      doi            = "10.1016/j.physletb.2007.06.001",
+      eprint         = "hep-ex/0612045",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ex",
+      reportNumber   = "CERN-PH-EP-2006-038",
+      SLACcitation   = "%%CITATION = HEP-EX/0612045;%%"
+}'

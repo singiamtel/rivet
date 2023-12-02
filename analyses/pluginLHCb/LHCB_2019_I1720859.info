@@ -1,0 +1,39 @@
+Name: LHCB_2019_I1720859
+Year: 2019
+Summary: Measurement of b-hadron fractions in 13 TeV pp collisions
+Experiment: LHCB
+Collider: LHC
+InspireID: 1720859
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Markus Seidel <markus.seidel@cern.ch>
+References:
+ - 'LHCb-PAPER-2018-050'
+ - 'Phys. Rev. D 100 (2019) 3, 031102'
+ - 'arXiv:1902.06794'
+RunInfo: Minimum bias or low-pt bbbar events
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 1.67
+Description:
+  'The production fractions of $\overline{B}^0_s$ and $\Lambda^0_b$ hadrons, normalized to the sum of $B^-$ and $\overline{B}^0$ fractions, are measured in 13 TeV pp collisions using data collected by the LHCb experiment, corresponding to an integrated luminosity of 1.67/fb.'
+ReleaseTests:
+ - $A LHC-13-Top-All
+Keywords: []
+BibKey: LHCb:2019fns
+BibTeX: '@article{LHCb:2019fns,
+    author = "Aaij, Roel and others",
+    collaboration = "LHCb",
+    title = "{Measurement of $b$ hadron fractions in 13 TeV $pp$ collisions}",
+    eprint = "1902.06794",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2019-016, LHCb-PAPER-2018-050",
+    doi = "10.1103/PhysRevD.100.031102",
+    journal = "Phys. Rev. D",
+    volume = "100",
+    number = "3",
+    pages = "031102",
+    year = "2019"
+}'

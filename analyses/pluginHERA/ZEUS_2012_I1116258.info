@@ -51,3 +51,7 @@ BibTeX: '@article{Abramowicz:2012jz,
       reportNumber   = "DESY-12-045",
       SLACcitation   = "%%CITATION = ARXIV:1205.6153;%%"
 }'
+
+ReleaseTests:
+ - $A ep-920-dis-photoprod
+

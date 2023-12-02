@@ -1,5 +1,6 @@
 from . import ALICE_2014_I1244523 # pseudo-2D object should really be 1D
 from . import ATLAS_2018_I1711223 # use string edges
+from . import ATLAS_2022_I2614196 # slice 2D object into 1D objects
 from . import BABAR_2016_I1391152 # add seprate table for the "average" bin
 from . import CELLO_1983_I191415 # remove extra bin in overlap region
 from . import CLEO_1985_I205668 # mask rogue bin

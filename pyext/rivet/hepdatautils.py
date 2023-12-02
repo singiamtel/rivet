@@ -97,7 +97,7 @@ def patch_yodaref(yoda_from_hepdata, pattern=None, unpattern=None):
     import rivet.hepdatapatches as hdpatch
     # Get analysis object, request Ref(Un)match strings to pass as pattern & unpattern
     hepdata_content = yoda.read(yoda_from_hepdata, True, pattern, unpattern)
-    addons = [ ]
+    addons = [ ]; toRemove = [ ]
     for tag in hepdata_content:
         if not tag.startswith("/REF"):  continue
         routine, tableid = tag.rstrip("/")[5:].split('/')
@@ -107,6 +107,9 @@ def patch_yodaref(yoda_from_hepdata, pattern=None, unpattern=None):
             hepdata_content[tag] = routine_patcher.patch(tag, hepdata_content[tag])
             if isinstance(hepdata_content[tag], list):
                 addons += hepdata_content[tag]
-    for val in addons:
-        hepdata_content[val.path()] = val
+                toRemove.append(tag)
+    for tag in toRemove:
+        del hepdata_content[tag]
+    for ao in addons:
+        hepdata_content[ao.path()] = ao
     return hepdata_content

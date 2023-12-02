@@ -47,7 +47,7 @@ namespace Rivet {
       book(_h_tau, QEdges);
       book(_h_B, QEdges);
       book(_h_rho, QEdges);
-      for (size_t iQ=0; iQ < QEdges.size(); ++iQ) {
+      for (size_t iQ=0; iQ < QEdges.size()-1; ++iQ) {
         book(_h_tauc->bin(iQ+1), 1+iQ,1,1);
         book(_h_tau->bin(iQ+1),  8+iQ,1,1);
         book(_h_B->bin(iQ+1),   15+iQ,1,1);
@@ -94,11 +94,11 @@ namespace Rivet {
       	// Boost to Breit frame
         const FourMomentum breitMom = breitboost.transform(p.momentum());
       	if (breitMom.eta() < 0) {
-	  thrust_num += abs(breitMom.pz());
-	  thrust_den += breitMom.p();
-	  b_num += abs(breitMom.pt());
-	  sumMom.operator+=(breitMom.p3());
-	  sumE += breitMom.E();
+          thrust_num += abs(breitMom.pz());
+          thrust_den += breitMom.p();
+          b_num += abs(breitMom.pt());
+          sumMom.operator+=(breitMom.p3());
+          sumE += breitMom.E();
       	}
       }
 

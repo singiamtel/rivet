@@ -1,0 +1,41 @@
+Name: STAR_2014_I1253360
+Year: 2014
+Summary: The differential cross section within the pseudorapidity range $0.8 < \eta < 2.0$ in proton-proton collisions at $\sqrt{s} = 200$~GeV
+Experiment: STAR
+Collider: RHIC
+InspireID: 1253360
+Status: VALIDATED
+Authors:
+ - Dmitry Kalinkin <dmitry.kalinkin+hepcedar@gmail.com>
+References:
+ - Phys. Rev. D 89, 012001
+ - DOI:10.1103/PhysRevD.89.012001
+ - arXiv:1309.1800
+Beams: [p+, p+]
+Energies: [[100,100]]
+Luminosity_fb: 0.008
+Description:
+  'The differencial inclusive cross section for pi0 production is measured at STAR using data from Run 6.'
+ValidationInfo:
+  'Was tested with Pythia 6 and Pythia 8 with the standard hard QCD process.'
+Keywords: []
+BibKey: PhysRevD.89.012001
+BibTeX: '@article{PhysRevD.89.012001,
+  title = {Neutral pion cross section and spin asymmetries at intermediate pseudorapidity in polarized proton collisions at $\sqrt{s}=200\text{ }\text{ }\mathrm{GeV}$},
+  author = {Adamczyk, L. and others},
+  collaboration = {STAR Collaboration},
+  journal = {Phys. Rev. D},
+  volume = {89},
+  issue = {1},
+  pages = {012001},
+  numpages = {11},
+  year = {2014},
+  month = {Jan},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.89.012001},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.89.012001}
+}'
+
+ReleaseTests:
+ - $A Star-Jets-1
+ - $A-2 Star-Jets-3
