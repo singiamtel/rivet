@@ -29,6 +29,7 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         AnalysisHandler& addAnalysis(string)
         vector[string] analysisNames()
         vector[string] stdAnalysisNames()
+        vector[pair[string,size_t]] fillLayout()
         vector[bool] fillOutcomes()
         vector[double] fillFractions()
         # Analysis* analysis(string)
