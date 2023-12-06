@@ -74,23 +74,21 @@ namespace Rivet {
 
 
       // Book cut-flows
-      const vector<string> cuts2j = {"Pre-sel+MET+pT1", "Njet", "Dphi_min(j,MET)", "pT2", "MET/sqrtHT", "m_eff(incl)"};
-      _flows.addCutflow("2jl", cuts2j);
-      _flows.addCutflow("2jm", cuts2j);
-      _flows.addCutflow("2jt", cuts2j);
-      const vector<string> cutsXj = {"Pre-sel+MET+pT1", "Njet", "Dphi_min(j,MET)", "pT2", "pT4", "Aplanarity", "MET/m_eff(Nj)", "m_eff(incl)"};
-      _flows.addCutflow("4jt", cutsXj);
-      _flows.addCutflow("5j",  cutsXj);
-      _flows.addCutflow("6jm", cutsXj);
-      _flows.addCutflow("6jt", cutsXj);
-      
-      book(_flows);
+      const vector<string> cuts2j = {"Pre-sel+MET+pT1", "Njet", "Dphi_min(j,MET)",
+                                     "pT2", "MET/sqrtHT", "m_eff(incl)"};
+      const vector<string> cutsXj = {"Pre-sel+MET+pT1", "Njet", "Dphi_min(j,MET)",
+                                     "pT2", "pT4", "Aplanarity", "MET/m_eff(Nj)", "m_eff(incl)"};
+      book(_flows, {"CF-2jl", "CF-2jm", "CF-2jt", "CF-4jt", "CF-5j", "CF-6jm", "CF-6jt"});
+      for (auto& b : _flows->bins()) {
+        if (b.index() < 4)  book(b, b.xEdge(), cuts2j);
+        else                book(b, b.xEdge(), cutsXj);
+      }
     }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      _flows.fillinit();
+      _flows->groupfillinit();
 
       // Same MET cut for all signal regions
       //const Vector3 vmet = -apply<MissingMomentum>(event, "TruthMET").vectorEt();
@@ -154,11 +152,11 @@ namespace Rivet {
 
       // Fill SR counters
       // 2-jet SRs
-      if (_flows["2jl"].filltail({true, true, min_dphi_met_3 > 0.8, j2pt > 200*GeV,
+      if (_flows->fillnext("CF-2jl", {true, true, min_dphi_met_3 > 0.8, j2pt > 200*GeV,
             met_sqrt_ht > 15*sqrt(GeV), meff_incl > 1200*GeV})) _h_2jl->fill();
-      if (_flows["2jm"].filltail({j1pt > 300*GeV, true, min_dphi_met_3 > 0.4, j2pt > 50*GeV,
+      if (_flows->fillnext("CF-2jm", {j1pt > 300*GeV, true, min_dphi_met_3 > 0.4, j2pt > 50*GeV,
             met_sqrt_ht > 15*sqrt(GeV), meff_incl > 1600*GeV})) _h_2jm->fill();
-      if (_flows["2jt"].filltail({true, true, min_dphi_met_3 > 0.8, j2pt > 200*GeV,
+      if (_flows->fillnext("CF-2jt", {true, true, min_dphi_met_3 > 0.8, j2pt > 200*GeV,
             met_sqrt_ht > 20*sqrt(GeV), meff_incl > 2000*GeV})) _h_2jt->fill();
 
       // Fill SR Meff Histo1Ds
@@ -180,16 +178,16 @@ namespace Rivet {
       const double min_dphi_met_more = jets50.size() > 3 ? min(tail(dphimets50, -3)) : -1;
 
 
-      if (_flows["4jt"].filltail({true, jets50.size() >= 4, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
+      if (_flows->fillnext("CF-4jt", {true, jets50.size() >= 4, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
             jetpts[1] > 100*GeV, j4pt > 100*GeV, aplanarity > 0.04, met_meff_4 > 0.20, meff_incl > 2200*GeV}))
         _h_4jt->fill();
-      if (_flows["5j"].filltail({true, jets50.size() >= 5, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
+      if (_flows->fillnext("CF-5j", {true, jets50.size() >= 5, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
             jetpts[1] > 100*GeV, j4pt > 100*GeV && j5pt > 50*GeV, aplanarity > 0.04, met_meff_5 > 0.25, meff_incl > 1600*GeV}))
         _h_5j->fill();
-      if (_flows["6jm"].filltail({true, jets50.size() >= 6, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
+      if (_flows->fillnext("CF-6jm", {true, jets50.size() >= 6, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
             jetpts[1] > 100*GeV, j4pt > 100*GeV && j6pt > 50*GeV, aplanarity > 0.04, met_meff_6 > 0.25, meff_incl > 1600*GeV}))
         _h_6jm->fill();
-      if (_flows["6jt"].filltail({true, jets50.size() >= 6, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
+      if (_flows->fillnext("CF-6jt", {true, jets50.size() >= 6, min_dphi_met_3 > 0.4 && min_dphi_met_more > 0.2,
             jetpts[1] > 100*GeV, j4pt > 100*GeV && j6pt > 50*GeV, aplanarity > 0.04, met_meff_6 > 0.20, meff_incl > 2000*GeV}))
         _h_6jt->fill();
 
@@ -228,7 +226,6 @@ namespace Rivet {
       barchart(_h_temp_Meff_5j ,_hMeff_5j );
       barchart(_h_temp_Meff_6jm,_hMeff_6jm);
       barchart(_h_temp_Meff_6jt,_hMeff_6jt);
-      //MSG_INFO("CUTFLOWS:\n\n" << _flows);
 
     }
 
@@ -253,7 +250,7 @@ namespace Rivet {
     /// @}
 
     /// Cut-flows
-    Cutflows _flows;
+    CutflowsPtr _flows;
 
   };
 

@@ -555,7 +555,9 @@ namespace Rivet {
     BinnedDbnPtr<DbnN, AxisT...>& book(BinnedDbnPtr<DbnN, AxisT...>& ao,
                                        const std::string& name, const std::vector<size_t>& nbins,
                                        const std::vector<std::pair<double,double>>& loUpPairs) {
-      assert(nbins.size() == loUpPairs.size() && "Vectors should have the same size!");
+      if (nbins.size() != loUpPairs.size()) {
+        throw RangeError("Vectors should have the same size!");
+      }
       const string path = histoPath(name);
 
       YODA::BinnedDbn<DbnN, AxisT...> yao(nbins, loUpPairs, path);
@@ -667,7 +669,9 @@ namespace Rivet {
                                               const std::vector<GroupAxisT>& edges,
                                               const std::vector<std::string>& names) {
       ao = make_shared<HistoGroup<GroupAxisT, AxisT...>>(edges);
-      assert(ao->numBins() == names.size() && "Binning and reference-data names don't match!");
+      if (ao->numBins() != names.size()) {
+        throw RangeError("Binning and reference-data names don't match!");
+      }
       for (auto& b : ao->bins()) {
         const string& refname = names[b.index()-1];
         book(b, refname, refData<YODA::BinnedEstimate<AxisT...>>(refname));
@@ -697,7 +701,9 @@ namespace Rivet {
     BinnedEstimatePtr<AxisT...>& book(BinnedEstimatePtr<AxisT...>& ao,
                                       const std::string& name, const std::vector<size_t>& nbins,
                                       const std::vector<std::pair<double,double>>& loUpPairs) {
-      assert(nbins.size() == loUpPairs.size() && "Vectors should have the same size!");
+      if (nbins.size() != loUpPairs.size()) {
+        throw RangeError("Vectors should have the same size!");
+      }
       const string path = histoPath(name);
 
       YODA::BinnedEstimate<AxisT...> yao(nbins, loUpPairs, path);
@@ -920,6 +926,49 @@ namespace Rivet {
 
     /// @}
 
+    /// @defgroup Cutflow booking
+    /// @{
+
+    /// Book a Cutflow object defined by the vector of @a edges
+    CutflowPtr& book(CutflowPtr& ao, const string& name, const std::vector<std::string>& edges) {
+      const string path = histoPath(name);
+      Cutflow yao(edges, path);
+      _setWriterPrecision(path, yao);
+      return ao = registerAO(yao);
+    }
+
+    /// Book a Cutflow object defined by the vector of @a edges
+    CutflowPtr& book(CutflowPtr& ao, const string& name, const std::initializer_list<std::string>& edges) {
+      return book(ao, name, vector<std::string>{edges});
+    }
+
+    /// @}
+
+    /// @name Cutflows booking
+    /// @{
+
+    CutflowsPtr& book(CutflowsPtr& ao, const std::vector<std::string>& edges,
+                                           const std::vector<std::vector<std::string>>& innerEdges) {
+      ao = make_shared<Cutflows>(edges);
+      if (ao->numBins() !=innerEdges.size()) {
+        throw RangeError("Outer and Inner edges don't match");
+      }
+      for (auto& b : ao->bins()) {
+        book(b, b.xEdge(), innerEdges[b.index()-1]);
+      }
+      return ao;
+    }
+
+    CutflowsPtr& book(CutflowsPtr& ao, const std::vector<std::string>& edges) {
+      return ao = make_shared<Cutflows>(edges);
+    }
+
+    CutflowsPtr& book(CutflowsPtr& ao, std::initializer_list<std::string>&& edges) {
+      return ao = make_shared<Cutflows>(std::move(edges));
+    }
+
+    /// @}
+
 
     /// @name Virtual helper function to allow classes deriving
     /// from Analysis (e.g. CumulantAnalysis) to load external
@@ -936,16 +985,6 @@ namespace Rivet {
       (void) iW; // suppress unused variable warning
     }
 
-    /// @defgroup Cutflow booking
-    /// @{
-
-    /// Book all the counterPtr's in a cutflow object
-    Cutflow& book(Cutflow & cf);
-
-    /// Mass-book a Cutflows object
-    Cutflows& book(Cutflows & cfs);
-
-    /// @}
 
   public:
 
@@ -1162,7 +1201,7 @@ namespace Rivet {
       CounterAdapter(const YODA::Estimate& e) : x_(e.val()) {}
 
       CounterAdapter(const YODA::Scatter1D& s) : x_(s.points()[0].x()) {
-        assert( s.numPoints() == 1 && "Can only scale by a single value.");
+        if (s.numPoints() != 1)  throw RangeError("Can only scale by a single value.");
       }
 
       operator double() const { return x_; }
@@ -1179,7 +1218,7 @@ namespace Rivet {
     double dbl(const YODA::Counter& c) { return c.val(); }
     double dbl(const YODA::Estimate0D& e) { return e.val(); }
     double dbl(const YODA::Scatter1D& s) {
-      assert( s.numPoints() == 1 );
+      if ( s.numPoints() != 1 ) throw RangeError("Only scatter with single value supported.");
       return s.points()[0].x();
     }
 
@@ -1234,6 +1273,28 @@ namespace Rivet {
       MSG_TRACE("Scaling histo group by factor " << double(factor));
       try {
         group->scaleW(factor);
+      }
+      catch (YODA::Exception& we) {
+        MSG_WARNING("Could not scale histo group.");
+        return;
+      }
+    }
+
+    /// Multiplicatively scale the cutflow group, @a group, by factor @a factor.
+    void scale(CutflowsPtr& group, CounterAdapter factor) {
+      if (!group) {
+        MSG_WARNING("Failed to scale AnalysisObject=NULL in analysis "
+                    << name() << " (scale=" << double(factor) << ")");
+        return;
+      }
+      if (std::isnan(double(factor)) || std::isinf(double(factor))) {
+        MSG_WARNING("Failed to scale histo group in analysis: "
+                    << name() << " (invalid scale factor = " << double(factor) << ")");
+        factor = 0;
+      }
+      MSG_TRACE("Scaling histo group by factor " << double(factor));
+      try {
+        group->scale(factor);
       }
       catch (YODA::Exception& we) {
         MSG_WARNING("Could not scale histo group.");

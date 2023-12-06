@@ -31,19 +31,17 @@ namespace Rivet {
       book(_h_modeta, "ModEta12", 42,   0,  4.2);
 
       // Cutflows
-      _flows.addCutflow("CutFlow1",
-                        {"NJet >= 4 ", "Delta12 < 1.4", "PJet1 > 400 GeV", "M SumJ > 1.0 ",
-                            "NbJet > 0", "M SumJ > 1.0  & NbJet > 0"});
-      _flows.addCutflow("CutFlow2",
-                        {"NJet >= 4 ", "Delta12 < 1.4", "NJet >= 5 ", "M SumJ > 0.8 ",
-                            "NbJet > 0", "M SumJ > 0.8  & NbJet > 0"});
-      book(_flows);
+      book(_flows, {"CutFlow1", "CutFlow2"},
+                   { {"NJet >= 4 ", "Delta12 < 1.4", "PJet1 > 400 GeV", "M SumJ > 1.0 ",
+                      "NbJet > 0", "M SumJ > 1.0  & NbJet > 0"},
+                     {"NJet >= 4 ", "Delta12 < 1.4", "NJet >= 5 ", "M SumJ > 0.8 ",
+                      "NbJet > 0", "M SumJ > 0.8  & NbJet > 0"} });
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      _flows.fillinit();
+      _flows->groupfillinit();
 
       // Trim large-R jets and apply cuts
       Jets LRJ_old = apply<FastJets>(event, "LargeRJ").jetsByPt(Cuts::abseta < 4.9);
@@ -75,17 +73,18 @@ namespace Rivet {
 
       // CutFlow1
       if (LRJ.size() >= 4) {
-        _flows["CutFlow1"].fill(1);
+        _flows->fillnext("CutFlow1");
         if (delta_eta < 1.4) {
-          _flows["CutFlow1"].fill(2);
+          _flows->fillnext("CutFlow1");
           if (LRJ[0].pT() > 400*GeV) {
-            _flows["CutFlow1"].fill(3);
-            if (sigmaM > 1000*GeV)
-              _flows["CutFlow1"].fill(4);
+            _flows->fillnext("CutFlow1");
+            if (sigmaM > 1000*GeV) {
+              _flows->fillnext("CutFlow1");
+            }
             if (tagg == 0) {
-              _flows["CutFlow1"].fill(5);
+              _flows->fillnext("CutFlow1");
               if (sigmaM > 1000*GeV){
-                _flows["CutFlow1"].fill(6);
+                _flows->fillnext("CutFlow1");
               }
             } //end of btagg loop
           } //end of pT loop
@@ -94,16 +93,18 @@ namespace Rivet {
 
       // CutFlow2
       if (LRJ.size() >= 4) {
-        _flows["CutFlow2"].fill(1);
+        _flows->fillnext("CutFlow2");
         if (delta_eta < 1.4) {
-          _flows["CutFlow2"].fill(2);
+          _flows->fillnext("CutFlow2");
           if (LRJ.size() >= 5) {
-            _flows["CutFlow2"].fill(3);
-            if (sigmaM > 800*GeV)
-              _flows["CutFlow2"].fill(4);
+            _flows->fillnext("CutFlow2");
+            if (sigmaM > 800*GeV) {
+              _flows->fillnext("CutFlow2");
+            }
             if (tagg == 0) {
-              _flows["CutFlow2"].fill(5);
-              if (sigmaM > 800*GeV){_flows["CutFlow2"].fill(6);
+              _flows->fillnext("CutFlow2");
+              if (sigmaM > 800*GeV) {
+                _flows->fillnext("CutFlow2");
               }
             } //end of btagg loop
           } //Njet>5 loop
@@ -132,7 +133,7 @@ namespace Rivet {
     Histo1DPtr _h_sigmaM, _h_modeta;
 
     // Cutflows
-    Cutflows _flows;
+    CutflowsPtr _flows;
 
   };
 

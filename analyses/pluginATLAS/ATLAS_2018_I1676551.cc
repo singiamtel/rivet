@@ -42,75 +42,53 @@ namespace Rivet {
       declare(recomet, "MET");
 
       // Cutflow Setup for 2l-High
+      const strings edges = {"2l-high", "2l-int", "2l-low", "2l-ISR",
+                             "3l-high", "3l-int", "3l-low", "3l-ISR" };
+      book(_cutflows, edges);
       const strings cfnames1 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "Fraction 1 > 0.8", "Fraction 2 < 0.05",
                                 "Delta Phi in [0.3, 2.9]", "H_PP_4,1 > 800 GeV"};
-      _cutflow2l[0].addCutflow("ATLAS_2018_I1676551 SR EW 2l-high", cfnames1);
-
-      // Cutflow Setup for 2l-Int
       const strings cfnames2 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "Fraction 1 > 0.8", "Fraction 2 < 0.05",
                                 "Delta Phi in [0.3, 2.6]", "H_PP_4,1 > 600 GeV"};
-      _cutflow2l[1].addCutflow("ATLAS_2018_I1676551 SR EW 2l-int", cfnames2);
-
-      // Cutflow Setup for 2l-Low
       const strings cfnames3 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "Fraction 1 in [0.35, 0.6]", "Fraction 2 < 0.05",
                                 "Min Delta Phi > 2.4", "H_PP_4,1 > 400 GeV"};
-      _cutflow2l[2].addCutflow("ATLAS_2018_I1676551 SR EW 2l-low", cfnames3);
-
-      // Cutflow Setup for 2l-ISR
       const strings cfnames4 = {"Trigger matching & 2 signal leptons", "Preselection",
                                 "m_Z in [80, 100] GeV", "m_J in [50, 110] GeV",
                                 "Delta Phi > 2.8", "R_ISR in [0.4, 0.75]", "p_CM_T_ISR > 180 GeV",
                                 "p_CM_T_I > 100 GeV", "p_CM_T < 30 GeV"};
-      _cutflow2lISR.addCutflow("ATLAS_2018_I1676551 SR EW 2l-ISR" , cfnames4);
-
-      // Cutflow Setup for 3l-High
       const strings cfnames5 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75,105] GeV", "m_W_T > 150 GeV",
                                 "Fraction 1 > 0.75", "Fraction 2 < 0.8",
                                 "H_PP_31 > 500 GeV", "Fraction 3 < 0.2"};
-      _cutflow3l[0].addCutflow("ATLAS_2018_I1676551 SR EW 3l-high", cfnames5);
-
-      // Cutflow Setup for 3l-Int
       const strings cfnames6 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75,105] GeV", "m_W_T > 130 GeV",
                                 "Fraction 1 > 0.8", "Fraction 2 < 0.75",
                                 "H_PP_31 > 450 GeV", "Fraction 3 < 0.15"};
-      _cutflow3l[1].addCutflow("ATLAS_2018_I1676551 SR EW 3l-int", cfnames6);
-
-      // Cutflow Setup for 3l-Low
       const strings cfnames7 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75,105] GeV", "m_W_T > 100 GeV",
                                 "Fraction 1 > 0.9", "H_PP_31 > 250 GeV", "Fraction 2 < 0.05"};
-      _cutflow3l[2].addCutflow("ATLAS_2018_I1676551 SR EW 3l-low", cfnames7);
-
-      // Cutflow Setup for 3l-ISR
       const strings cfnames8 = {"Trigger matching & 3 signal leptons", "Preselection",
                                 "m_ll in [75, 105] GeV", "m_W_T > 100 GeV",
                                 "Delta Phi > 2.0", "R_ISR in [0.55, 1.0]", "p_CM_T_ISR > 100 GeV",
                                 "p_CM_T_I > 80 GeV", "p_CM_T < 25 GeV"};
-      _cutflow3lISR.addCutflow("ATLAS_2018_I1676551 SR EW 3l-ISR", cfnames8);
+      book(_cutflows->bin(1), edges[0], cfnames1); // Cutflow Setup for 2l-High
+      book(_cutflows->bin(2), edges[1], cfnames2); // Cutflow Setup for 2l-Int
+      book(_cutflows->bin(3), edges[2], cfnames3); // Cutflow Setup for 2l-Low
+      book(_cutflows->bin(4), edges[3], cfnames4); // Cutflow Setup for 2l-ISR
+      book(_cutflows->bin(5), edges[4], cfnames5); // Cutflow Setup for 3l-High
+      book(_cutflows->bin(6), edges[5], cfnames6); // Cutflow Setup for 3l-Int
+      book(_cutflows->bin(7), edges[6], cfnames7); // Cutflow Setup for 3l-Low
+      book(_cutflows->bin(8), edges[7], cfnames8); // Cutflow Setup for 3l-ISR
 
-      for (Cutflows & cfs : _cutflow2l){book(cfs);}
-      for (Cutflows & cfs : _cutflow3l){book(cfs);}
-      book(_cutflow2lISR);
-      book(_cutflow3lISR);
     }
 
 
     // Per-event analysis
     void analyze(const Event& event) {
 
-      _cutflow2l[0].fillinit();
-      _cutflow2l[1].fillinit();
-      _cutflow2l[2].fillinit();
-      _cutflow2lISR.fillinit();
-      _cutflow3l[0].fillinit();
-      _cutflow3l[1].fillinit();
-      _cutflow3l[2].fillinit();
-      _cutflow3lISR.fillinit();
+      _cutflows->groupfillinit();
 
       // Obtain Electrons, Muons and Jets
       Particles elecs = apply<ParticleFinder>(event, "Electrons").particlesByPt(Cuts::pT > 10*GeV && Cuts::abseta < 2.47);
@@ -122,7 +100,7 @@ namespace Rivet {
       idiscardIfAnyDeltaRLess(jets, leptons, 0.4);
 
       // 2-lepton High (n=0), Int (n=1) and Low (n=2) Selection
-      for (int n=0; n<3; ++n) {
+      for (size_t n=0; n<_types.size(); ++n) {
 
         while (true) {
 
@@ -150,7 +128,7 @@ namespace Rivet {
           double p_l2_T = lepton[1].pT();
           if (p_l2_T < 25*GeV) break;
 
-          _cutflow2l[n].fill(1);
+          _cutflows->fillnext("2l"s + _types[n]);
 
           // Requirement on m_ll
           double m_ll = (lepton[0]+lepton[1]).mass();
@@ -183,7 +161,7 @@ namespace Rivet {
           }
 
           // Pre-selection requirements cut
-          _cutflow2l[n].fill(2);
+          _cutflows->fillnext("2l"s+_types[n]);
 
           // Invisible mass JR and Invisible Rapidity JR to obtain Invisible System 4-momentum
           FourMomentum P_V = lepton[0] + lepton[1] + jet[0] + jet[1];
@@ -275,7 +253,7 @@ namespace Rivet {
             double fraction1 = H_PP_11/H_PP_41;
             if (fraction1 < 0.35 || fraction1 > 0.6) break;
           }
-          _cutflow2l[n].fill(3);
+          _cutflows->fillnext("2l"s+_types[n]);
 
           // Lorentz boost from the CM frame to the lab frame
           LorentzTransform LTR = LorentzTransform::mkObjTransform(P_I+P_V);
@@ -285,7 +263,7 @@ namespace Rivet {
           double H_PP_T_41 = P_F_Va1.pT()+P_F_Va2.pT()+P_F_Vb1.pT()+P_F_Vb2.pT()+(P_F_Ia+P_F_Ib).pT();
           double fraction2 = p_lab_T_PP/(p_lab_T_PP+H_PP_T_41);
           if (fraction2 > 0.05) break;
-          _cutflow2l[n].fill(4);
+          _cutflows->fillnext("2l"s+_types[n]);
 
           // Delta-Phi requirement
           if (n == 0) {
@@ -310,7 +288,7 @@ namespace Rivet {
             double delta = min(delta1,delta2);
             if (delta < 2.4) break;
           }
-          _cutflow2l[n].fill(5);
+          _cutflows->fillnext("2l"s+_types[n]);
 
           // H_PP_41 requirement
           double H_PP_41 = P_F_Va1.p()+P_F_Va2.p()+P_F_Vb1.p()+P_F_Vb2.p()+(P_F_Ia+P_F_Ib).p();
@@ -321,7 +299,7 @@ namespace Rivet {
           } else {
             if (H_PP_41 < 400*GeV) break;
           }
-          _cutflow2l[n].fill(6);
+          _cutflows->fillnext("2l"s+_types[n]);
 
           break;
         }
@@ -352,7 +330,7 @@ namespace Rivet {
         }
         if (lepton[0].pT() < 25*GeV || lepton[1].pT() < 25*GeV) break;
 
-        _cutflow2lISR.fill(1);
+        _cutflows->fillnext("2l-ISR");
 
         // Obtain the 4-momenta of leptons and implement requirements on them
         double n_jets = jets.size();
@@ -426,7 +404,7 @@ namespace Rivet {
               indexToReturn == 10 || indexToReturn == 11 || indexToReturn == 12 || indexToReturn == 13) break;
         }
 
-        _cutflow2lISR.fill(2);
+        _cutflows->fillnext("2l-ISR");
 
         // g1 and g2 are the set of jets belonging to the ISR and signal system respectively
         vector<vector<double>> g1, g2;
@@ -440,12 +418,12 @@ namespace Rivet {
         // m_Z requirement
         double m_Z = ((leptons[0]).mom()+(leptons[1]).mom()).mass();
         if (m_Z < 80*GeV || m_Z > 100*GeV) break;
-        _cutflow2lISR.fill(3);
+        _cutflows->fillnext("2l-ISR");
 
         // m_J requirement
         double m_J = ((jets[g2[indexToReturn][0]]).momentum()+(jets[g2[indexToReturn][1]]).momentum()).mass();
         if (m_J < 50*GeV || m_J > 110*GeV) break;
-        _cutflow2lISR.fill(4);
+        _cutflows->fillnext("2l-ISR");
 
         // Compute variables delta_phi, R_ISR, P_T_ISR, p_T_I, p_T and implement their requirements
         double p_T_ISR;
@@ -480,19 +458,19 @@ namespace Rivet {
         }
 
         if (delta_phi < 2.8) break;
-        _cutflow2lISR.fill(5);
+        _cutflows->fillnext("2l-ISR");
 
         if (R_ISR < 0.4 || R_ISR > 0.75) break;
-        _cutflow2lISR.fill(6);
+        _cutflows->fillnext("2l-ISR");
 
         if (p_T_ISR < 180*GeV) break;
-        _cutflow2lISR.fill(7);
+        _cutflows->fillnext("2l-ISR");
 
         if (p_T_I < 100*GeV) break;
-        _cutflow2lISR.fill(8);
+        _cutflows->fillnext("2l-ISR");
 
         if (p_T > 20*GeV) break;
-        _cutflow2lISR.fill(9);
+        _cutflows->fillnext("2l-ISR");
 
         break;
       }
@@ -526,7 +504,7 @@ namespace Rivet {
 
           if (indexToReturn == 3) break;
 
-          _cutflow3l[n].fill(1);
+          _cutflows->fillnext("3l"s+_types[n]);
 
           // Requirements on n_jets
           double n_jets = jets.size();
@@ -566,13 +544,13 @@ namespace Rivet {
           }
 
           // Pre-selection Cut
-          _cutflow3l[n].fill(2);
+          _cutflows->fillnext("3l"s+_types[n]);
 
           // Requirement on m_ll
           double m_ll = (lepton[g[indexToReturn][0]]+lepton[g[indexToReturn][1]]).mass();
           if (m_ll < 75*GeV || m_ll > 105*GeV) break;
 
-          _cutflow3l[n].fill(3);
+          _cutflows->fillnext("3l"s+_types[n]);
 
           // Obtain the missing transverse momentum vector
           Vector3 EtMissX = apply<SmearedMET>(event,"MET").vectorPt();
@@ -590,7 +568,7 @@ namespace Rivet {
             if (m_W_T < 100*GeV) break;
           }
 
-          _cutflow3l[n].fill(4);
+          _cutflows->fillnext("3l"s+_types[n]);
 
           // Invisible mass JR and Invisible Rapidity JR to obtain Invisible System 4-momentum
           FourMomentum P_V = lepton[0]+lepton[1]+lepton[2];
@@ -696,38 +674,38 @@ namespace Rivet {
           } else {
             if (fraction1 < 0.9) break;
           }
-          _cutflow3l[n].fill(5);
+          _cutflows->fillnext("3l"s+_types[n]);
 
           double fraction2 = H_Pb_11/H_Pb_21;
           if (n==0) {
             if (fraction2 < 0.8) break;
-            _cutflow3l[n].fill(6);
+            _cutflows->fillnext("3l"s+_types[n]);
           } else if (n==1) {
             if (fraction2 < 0.75) break;
-            _cutflow3l[n].fill(6);
+            _cutflows->fillnext("3l"s+_types[n]);
           } else { /* ??? */ }
 
           if (n==0) {
             if (H_PP_31 < 550*GeV) break;
-            _cutflow3l[n].fill(7);
+            _cutflows->fillnext("3l"s+_types[n]);
           } else if (n==1) {
             if (H_PP_31 < 450*GeV) break;
-            _cutflow3l[n].fill(7);
+            _cutflows->fillnext("3l"s+_types[n]);
           } else {
             if (H_PP_31 < 250*GeV) break;
-            _cutflow3l[n].fill(6);
+            _cutflows->fillnext("3l"s+_types[n]);
           }
 
           double fraction3 = p_lab_T_PP/(p_lab_T_PP+H_PP_T_31);
           if (n==0) {
             if (fraction3 > 0.2) break;
-            _cutflow3l[n].fill(8);
+            _cutflows->fillnext("3l"s+_types[n]);
           } else if (n==1) {
             if (fraction3 > 0.15) break;
-            _cutflow3l[n].fill(8);
+            _cutflows->fillnext("3l"s+_types[n]);
           } else {
             if (fraction3 > 0.05) break;
-            _cutflow3l[n].fill(7);
+            _cutflows->fillnext("3l"s+_types[n]);
           }
 
           break;
@@ -761,7 +739,7 @@ namespace Rivet {
         }
 
         if (indexToReturn == 3) break;
-        _cutflow3lISR.fill(1);
+        _cutflows->fillnext("3l-ISR");
 
         // Requirements on jet number and forbid B-tags
         double n_jets=jets.size();
@@ -780,7 +758,7 @@ namespace Rivet {
         if (lepton[0].pT() < 25*GeV || lepton[1].pT() < 25*GeV || lepton[2].pT() < 20*GeV) break;
 
         // Pre-selection Cut
-        _cutflow3lISR.fill(2);
+        _cutflows->fillnext("3l-ISR");
 
         // Obtain the missing momentum 3-vector
         Vector3 EtMiss = apply<SmearedMET>(event,"MET").vectorMissingPt();
@@ -788,13 +766,13 @@ namespace Rivet {
         // Requirement on m_ll
         double m_ll = (leptons[g[indexToReturn][0]].mom()+leptons[g[indexToReturn][1]].mom()).mass();
         if (m_ll < 75*GeV || m_ll > 105*GeV) break;
-        _cutflow3lISR.fill(3);
+        _cutflows->fillnext("3l-ISR");
 
         // Requirement on m_W_T
         double deltaphi = deltaPhi(EtMiss,(lepton[indexToReturn]).p3());
         double m_W_T = sqrt(2*((lepton[indexToReturn]).pT())*sqrt(EtMiss.dot(EtMiss))*(1-cos(deltaphi)));
         if (m_W_T < 100*GeV) break;
-        _cutflow3lISR.fill(4);
+        _cutflows->fillnext("3l-ISR");
 
         // Obtain the missing transverse 4-momentum
         FourMomentum EtMiss1;
@@ -836,19 +814,19 @@ namespace Rivet {
         delta_phi = angle((LT.transform(EtMiss1)).p3(),(LT.transform(ISR)).p3());
 
         if (delta_phi < 2.0) break;
-        _cutflow3lISR.fill(5);
+        _cutflows->fillnext("3l-ISR");
 
         if (R_ISR < 0.55 || R_ISR > 1.0) break;
-        _cutflow3lISR.fill(6);
+        _cutflows->fillnext("3l-ISR");
 
         if (p_T_ISR < 100*GeV) break;
-        _cutflow3lISR.fill(7);
+        _cutflows->fillnext("3l-ISR");
 
         if (p_T_I < 80*GeV) break;
-        _cutflow3lISR.fill(8);
+        _cutflows->fillnext("3l-ISR");
 
         if (p_T > 25*GeV) break;
-        _cutflow3lISR.fill(9);
+        _cutflows->fillnext("3l-ISR");
 
         break;
       }
@@ -859,35 +837,19 @@ namespace Rivet {
     /// Finalise cutflow scaling etc.
     void finalize() {
 
-      _cutflow2l[0].normalize(1673, 0);
-      _cutflow2l[1].normalize(4369, 0);
-      _cutflow2l[2].normalize(65247, 0);
-      _cutflow2lISR.normalize(65247, 0);
-      _cutflow3l[0].normalize(1673, 0);
-      _cutflow3l[1].normalize(4369, 0);
-      _cutflow3l[2].normalize(65247, 0);
-      _cutflow3lISR.normalize(65247, 0);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow2l[0]);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow2l[1]);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow2l[2]);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow2lISR);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow3l[0]);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow3l[1]);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow3l[2]);
-      MSG_INFO("CUTFLOWS:\n\n" << _cutflow3lISR);
+      vector<double> scales{ 1673., 4369., 65247 };
+      for (size_t n=0; n < _types.size(); ++n) {
+        _cutflows->binAt("2l"s+_types[n])->normalizeFirst(scales[n]);
+        _cutflows->binAt("3l"s+_types[n])->normalizeFirst(scales[n]);
+      }
+      _cutflows->binAt("2l-ISR")->normalizeFirst(scales[2]);
+      _cutflows->binAt("3l-ISR")->normalizeFirst(scales[2]);
+
+      MSG_INFO("CUTFLOWS:\n\n" << _cutflows);
     }
 
-    Cutflows _cutflow2lHigh;
-    Cutflows _cutflow2lInt;
-    Cutflows _cutflow2lLow;
-    Cutflows _cutflow2lISR;
-    Cutflows _cutflow3lHigh;
-    Cutflows _cutflow3lInt;
-    Cutflows _cutflow3lLow;
-    Cutflows _cutflow3lISR;
-
-    vector<Cutflows> _cutflow2l={_cutflow2lHigh,_cutflow2lInt,_cutflow2lLow};
-    vector<Cutflows> _cutflow3l={_cutflow3lHigh,_cutflow3lInt,_cutflow3lLow};
+    CutflowsPtr _cutflows;
+    const vector<string> _types{"-high", "-int", "-low"};
 
   };
 
