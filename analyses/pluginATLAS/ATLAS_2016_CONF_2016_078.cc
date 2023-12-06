@@ -66,30 +66,25 @@ namespace Rivet {
 
 
       // Book cut-flows
-      const vector<string> cuts23j = {"Pre-sel+MET+pT1+meff", "Njet", "Dphi_min(j123,MET)", "Dphi_min(j4+,MET)", "pT2", "eta_j12", "MET/sqrtHT", "m_eff(incl)"};
-      _flows.addCutflow("2j-0800", cuts23j);
-      _flows.addCutflow("2j-1200", cuts23j);
-      _flows.addCutflow("2j-1600", cuts23j);
-      _flows.addCutflow("2j-2000", cuts23j);
-      _flows.addCutflow("3j-1200", cuts23j);
-      const vector<string> cuts456j = {"Pre-sel+MET+pT1+meff", "Njet", "Dphi_min(j123,MET)", "Dphi_min(j4+,MET)", "pT4", "eta_j1234", "Aplanarity", "MET/m_eff(Nj)", "m_eff(incl)"};
-      _flows.addCutflow("4j-1000", cuts456j);
-      _flows.addCutflow("4j-1400", cuts456j);
-      _flows.addCutflow("4j-1800", cuts456j);
-      _flows.addCutflow("4j-2200", cuts456j);
-      _flows.addCutflow("4j-2600", cuts456j);
-      _flows.addCutflow("5j-1400", cuts456j);
-      _flows.addCutflow("6j-1800", cuts456j);
-      _flows.addCutflow("6j-2200", cuts456j);
+      const vector<string> cuts23j = {"Pre-sel+MET+pT1+meff", "Njet", "Dphi_min(j123,MET)",
+                                      "Dphi_min(j4+,MET)", "pT2", "eta_j12", "MET/sqrtHT", "m_eff(incl)"};
+      const vector<string> cuts456j = {"Pre-sel+MET+pT1+meff", "Njet", "Dphi_min(j123,MET)",
+                                       "Dphi_min(j4+,MET)", "pT4", "eta_j1234", "Aplanarity", "MET/m_eff(Nj)", "m_eff(incl)"};
+      book(_flows, {"CF-2j-0800", "CF-2j-1200", "CF-2j-1600", "CF-2j-2000", "CF-3j-1200",
+                    "CF-4j-1000", "CF-4j-1400", "CF-4j-1800", "CF-4j-2200", "CF-4j-2600",
+                    "CF-5j-1400", "CF-6j-1800", "CF-6j-2200"});
+      for (auto& b : _flows->bins()) {
+        if (b.index() < 6)  book(b, b.xEdge(), cuts23j);
+        else                book(b, b.xEdge(), cuts456j);
+      }
 
-      book(_flows);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      _flows.fillinit();
+      _flows->groupfillinit();
 
       // Same MET cut for all signal regions
       const Vector3 vmet = -apply<SmearedMET>(event, "RecoMET").vectorEt();
@@ -131,7 +126,7 @@ namespace Rivet {
       if (!muons.empty()) vetoEvent;
 
       // Passed presel & MET
-      _flows.fill(1);
+      _flows->groupfillnext();
 
       // Get jets and their pTs
       const Jets jets20 = jets;
@@ -214,19 +209,41 @@ namespace Rivet {
       }
 
       // Cutflows
-      _flows["2j-0800"].filltail({true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 200*GeV, etamax_2 < 0.8, met_sqrtHT > 14*sqrt(GeV), meff_incl >  800*GeV});
-      _flows["2j-1200"].filltail({true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 250*GeV, etamax_2 < 1.2, met_sqrtHT > 16*sqrt(GeV), meff_incl > 1200*GeV});
-      _flows["2j-1600"].filltail({true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 250*GeV, etamax_2 < 1.2, met_sqrtHT > 18*sqrt(GeV), meff_incl > 1600*GeV});
-      _flows["2j-2000"].filltail({true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 250*GeV, etamax_2 < 1.2, met_sqrtHT > 20*sqrt(GeV), meff_incl > 2000*GeV});
-      _flows["3j-1200"].filltail({njets50 >= 3, dphimin_123 > 0.4, dphimin_more > 0.2, jetpts50[0] > 600*GeV && jetpts50[2] > 50*GeV, true, met_sqrtHT > 16*sqrt(GeV), meff_incl > 1200*GeV});
-      _flows["4j-1000"].filltail({njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4, jetpts50[0] > 200*GeV && jetpts50[3] > 100*GeV, etamax_4 < 1.2, aplanarity > 0.04, met_meff_4 > 0.25*sqrt(GeV), meff_incl > 1000*GeV});
-      _flows["4j-1400"].filltail({njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4, jetpts50[0] > 200*GeV && jetpts50[3] > 100*GeV, etamax_4 < 2.0, aplanarity > 0.04, met_meff_4 > 0.25*sqrt(GeV), meff_incl > 1400*GeV});
-      _flows["4j-1800"].filltail({njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4, jetpts50[0] > 200*GeV && jetpts50[3] > 100*GeV, etamax_4 < 2.0, aplanarity > 0.04, met_meff_4 > 0.20*sqrt(GeV), meff_incl > 1800*GeV});
-      _flows["4j-2200"].filltail({njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4, jetpts50[0] > 200*GeV && jetpts50[3] > 150*GeV, etamax_4 < 2.0, aplanarity > 0.04, met_meff_4 > 0.20*sqrt(GeV), meff_incl > 2200*GeV});
-      _flows["4j-2600"].filltail({njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4, jetpts50[0] > 200*GeV && jetpts50[3] > 150*GeV, true,           aplanarity > 0.04, met_meff_4 > 0.20*sqrt(GeV), meff_incl > 2600*GeV});
-      _flows["5j-1400"].filltail({njets50 >= 5, dphimin_123 > 0.4, dphimin_more > 0.2, jetpts50[0] > 500*GeV && jetpts50[4] > 50*GeV, true, true, met_meff_5 > 0.3*sqrt(GeV), meff_incl > 1400*GeV});
-      _flows["6j-1800"].filltail({njets50 >= 6, dphimin_123 > 0.4, dphimin_more > 0.2, jetpts50[0] > 200*GeV && jetpts50[5] >  50*GeV, etamax_6 < 2.0, aplanarity > 0.08, met_meff_6 > 0.20*sqrt(GeV), meff_incl > 1800*GeV});
-      _flows["6j-2200"].filltail({njets50 >= 6, dphimin_123 > 0.4, dphimin_more > 0.2, jetpts50[0] > 200*GeV && jetpts50[5] > 100*GeV, true,           aplanarity > 0.08, met_meff_6 > 0.15*sqrt(GeV), meff_incl > 2200*GeV});
+      _flows->fillnext("CF-2j-0800", {true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 200*GeV,
+                                      etamax_2 < 0.8, met_sqrtHT > 14*sqrt(GeV), meff_incl >  800*GeV});
+      _flows->fillnext("CF-2j-1200", {true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 250*GeV,
+                                      etamax_2 < 1.2, met_sqrtHT > 16*sqrt(GeV), meff_incl > 1200*GeV});
+      _flows->fillnext("CF-2j-1600", {true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 250*GeV,
+                                      etamax_2 < 1.2, met_sqrtHT > 18*sqrt(GeV), meff_incl > 1600*GeV});
+      _flows->fillnext("CF-2j-2000", {true, dphimin_123 > 0.8, dphimin_more > 0.4, jetpts50[1] > 250*GeV,
+                                      etamax_2 < 1.2, met_sqrtHT > 20*sqrt(GeV), meff_incl > 2000*GeV});
+      _flows->fillnext("CF-3j-1200", {njets50 >= 3, dphimin_123 > 0.4, dphimin_more > 0.2,
+                                      jetpts50[0] > 600*GeV && jetpts50[2] > 50*GeV, true,
+                                      met_sqrtHT > 16*sqrt(GeV), meff_incl > 1200*GeV});
+      _flows->fillnext("CF-4j-1000", {njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4,
+                                      jetpts50[0] > 200*GeV && jetpts50[3] > 100*GeV, etamax_4 < 1.2,
+                                      aplanarity > 0.04, met_meff_4 > 0.25*sqrt(GeV), meff_incl > 1000*GeV});
+      _flows->fillnext("CF-4j-1400", {njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4,
+                                      jetpts50[0] > 200*GeV && jetpts50[3] > 100*GeV, etamax_4 < 2.0,
+                                      aplanarity > 0.04, met_meff_4 > 0.25*sqrt(GeV), meff_incl > 1400*GeV});
+      _flows->fillnext("CF-4j-1800", {njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4,
+                                      jetpts50[0] > 200*GeV && jetpts50[3] > 100*GeV, etamax_4 < 2.0,
+                                      aplanarity > 0.04, met_meff_4 > 0.20*sqrt(GeV), meff_incl > 1800*GeV});
+      _flows->fillnext("CF-4j-2200", {njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4,
+                                      jetpts50[0] > 200*GeV && jetpts50[3] > 150*GeV, etamax_4 < 2.0,
+                                      aplanarity > 0.04, met_meff_4 > 0.20*sqrt(GeV), meff_incl > 2200*GeV});
+      _flows->fillnext("CF-4j-2600", {njets50 >= 4, dphimin_123 > 0.4, dphimin_more > 0.4,
+                                      jetpts50[0] > 200*GeV && jetpts50[3] > 150*GeV, true,
+                                      aplanarity > 0.04, met_meff_4 > 0.20*sqrt(GeV), meff_incl > 2600*GeV});
+      _flows->fillnext("CF-5j-1400", {njets50 >= 5, dphimin_123 > 0.4, dphimin_more > 0.2,
+                                      jetpts50[0] > 500*GeV && jetpts50[4] > 50*GeV, true, true,
+                                      met_meff_5 > 0.3*sqrt(GeV), meff_incl > 1400*GeV});
+      _flows->fillnext("CF-6j-1800", {njets50 >= 6, dphimin_123 > 0.4, dphimin_more > 0.2,
+                                      jetpts50[0] > 200*GeV && jetpts50[5] >  50*GeV, etamax_6 < 2.0,
+                                      aplanarity > 0.08, met_meff_6 > 0.20*sqrt(GeV), meff_incl > 1800*GeV});
+      _flows->fillnext("CF-6j-2200", {njets50 >= 6, dphimin_123 > 0.4, dphimin_more > 0.2,
+                                      jetpts50[0] > 200*GeV && jetpts50[5] > 100*GeV, true,
+                                      aplanarity > 0.08, met_meff_6 > 0.15*sqrt(GeV), meff_incl > 2200*GeV});
 
     }
 
@@ -241,7 +258,7 @@ namespace Rivet {
       scale(_h_4j_2600, sf); scale(_h_5j_1400, sf); scale(_h_6j_1800, sf);
       scale(_h_6j_2200, sf);
 
-      _flows.scale(sf);
+      scale(_flows, sf);
       MSG_INFO("CUTFLOWS:\n\n" << _flows);
 
     }
@@ -259,7 +276,7 @@ namespace Rivet {
     /// @}
 
     /// Cut-flows
-    Cutflows _flows;
+    CutflowsPtr _flows;
 
   };
 

@@ -83,17 +83,15 @@ namespace Rivet {
                                "Mmumu not in [9,10.5] GeV", "pTmiss in [125, 200] GeV",
                                "mu+pTmiss trigger", "ISR jet", "HT > 100 GeV",
                                "pTmiss/HT in [0.6, 1.4]", "b-tag veto", "Mtautau veto"};
-      _cutflows.addCutflow("EW", cfnames+strings{"MT < 70 GeV"});
-      _cutflows.addCutflow("St", cfnames);
+      book(_cutflows, {"EW", "St"}, {cfnames+strings{"MT < 70 GeV"}, cfnames});
 
-      book(_cutflows);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      _cutflows.fillinit();
+      _cutflows->groupfillinit();
 
       // Leptons
       const Particles elecs = apply<ParticleFinder>(event, "Electrons").particlesByPt(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
@@ -103,23 +101,23 @@ namespace Rivet {
       _nevtMu += 1;
 
       if (leptons.size() != 2) vetoEvent;
-      _cutflows.fill(1);
+      _cutflows->groupfillnext();
       if (leptons[0].charge() * leptons[1].charge() >= 0) vetoEvent;
-      _cutflows.fill(2);
+      _cutflows->groupfillnext();
 
       // Dilepton cuts
       const FourMomentum pll = leptons[0].mom() + leptons[1].mom();
       if (pll.pT() < 3*GeV) vetoEvent;
-      _cutflows.fill(3);
+      _cutflows->groupfillnext();
       const bool sameflav = (leptons[0].abspid() == leptons[1].abspid());
       if (sameflav) {
         if (!inRange(pll.mass()/GeV, 4, 50)) vetoEvent;
-        _cutflows.fill(4);
+        _cutflows->groupfillnext();
         if (inRange(pll.mass()/GeV, 9, 10.5)) vetoEvent;
-        _cutflows.fill(5);
+        _cutflows->groupfillnext();
       } else {
-        _cutflows.fill(4);
-        _cutflows.fill(5);
+        _cutflows->groupfillnext();
+        _cutflows->groupfillnext();
       }
 
       // Jets
@@ -135,27 +133,27 @@ namespace Rivet {
       const bool mumu = (muons.size() == 2);
       if (ptmiss < (mumu ? 125*GeV : 200*GeV)) vetoEvent;
       if (ptmiss_mu < (mumu ? 125*GeV : 200*GeV)) vetoEvent;
-      _cutflows.fill(6);
+      _cutflows->groupfillnext();
 
       // mu+pTmiss trigger (65% efficient in low-ETmiss region)
       double triggerSF = 1.0;
       if (mumu && ptmiss < 200*GeV) triggerSF = 0.65;
-      _cutflows.fill(7, triggerSF);
+      _cutflows->groupfillnext(triggerSF);
 
       // ISR jet
       if (jets.empty()) vetoEvent;
-      _cutflows.fill(8, triggerSF);
+      _cutflows->groupfillnext(triggerSF);
 
       // MET/HT
       const double ht = sum(jets, Kin::pT, 0.0);
       if (ht < 100*GeV) vetoEvent;
-      _cutflows.fill(9, triggerSF);
+      _cutflows->groupfillnext(triggerSF);
       if (!inRange(ptmiss/ht, 0.6, 1.4)) vetoEvent;
-      _cutflows.fill(10, triggerSF);
+      _cutflows->groupfillnext(triggerSF);
 
       // b-jet veto
       if (any(jets, hasBTag(Cuts::pT > 5*GeV))) vetoEvent; //< b-jet veto with ad hoc tagging threshold
-      _cutflows.fill(11, triggerSF);
+      _cutflows->groupfillnext(triggerSF);
 
       // Tau veto
       const Particles taus = apply<ParticleFinder>(event, "Taus").particlesByPt();
@@ -163,7 +161,7 @@ namespace Rivet {
         const double mtt = (taus[0].mom() + taus[1].mom()).mass();
         if (mtt < 160*GeV) vetoEvent;
       }
-      _cutflows.fill(12, triggerSF);
+      _cutflows->groupfillnext(triggerSF);
 
       // EWino SR (ee, mumu)
       if (sameflav) {
@@ -171,7 +169,7 @@ namespace Rivet {
           if (l.abspid() == PID::MUON and l.pT() < 5*GeV) vetoEvent;
           if (mT(l.mom(), p4miss) > 70*GeV) vetoEvent;
         }
-        _cutflows["EW"].fill(13, triggerSF);
+        _cutflows->fillnext("EW", triggerSF);
         static const vector<double> ptmissedges_ewino = {125., 200., 250., DBL_MAX};
         static const vector<double> mlledges_ewino = {4., 9., 10.5, 20., 30., 50.};
         const int iptm = binIndex(ptmiss/GeV, ptmissedges_ewino);
@@ -182,7 +180,7 @@ namespace Rivet {
 
         // Stop SR
         if (leptons[0].abspid() == PID::MUON and leptons[0].pT() < 5*GeV) vetoEvent;
-        _cutflows["St"].fill(13, triggerSF);
+        _cutflows->fillnext("St", triggerSF);
         static const vector<double> ptmissedges_stop = {125., 200., 300., DBL_MAX};
         static const vector<double> ptledges_stop = {5., 12., 20., 30.};
         const int iptm = binIndex(ptmiss/GeV, ptmissedges_stop);
@@ -202,7 +200,7 @@ namespace Rivet {
         scale(_srcounts_ewino[i], sf);
         scale(_srcounts_stop[i], sf);
       }
-      _cutflows.scale(sf);
+      scale(_cutflows, sf);
       MSG_INFO("CUTFLOWS:\n\n" << _cutflows);
     }
 
@@ -216,7 +214,7 @@ namespace Rivet {
 
     /// Cut-flows
     int _nevtMu = 0;
-    Cutflows _cutflows;
+    CutflowsPtr _cutflows;
 
 
   };

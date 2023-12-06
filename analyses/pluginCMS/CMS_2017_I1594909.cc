@@ -71,18 +71,17 @@ namespace Rivet {
 
 
       // Book cut-flow
-      _flow = Cutflow("Presel", {"Njet>=2", "HT>300", "HTmiss>300",
+      book(_flow, "Presel", {"Njet>=2", "HT>300", "HTmiss>300",
             "Nmuon=0", "Nmuisotrk=0", "Nelec=0", "Nelisotrk=0", "Nhadisotrk=0",
             "dPhi_miss,j1>0.5", "dPhi_miss,j2>0.5", "dPhi_miss,j3>0.3", "dPhi_miss,j4>0.3"
             });
-      book(_flow);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      _flow.fillinit();
+      _flow->fillinit();
 
       // Find leptons and isolation particles
       const Particles elecs = apply<ParticleFinder>(event, "Electrons").particlesByPt();
@@ -128,14 +127,11 @@ namespace Rivet {
       // Event selection
 
       // Njet cut
-      if (njets < 2) vetoEvent;
-      _flow.fill(1);
+      if (_flow->fillnext(njets < 2))  vetoEvent;
       // HT cut
-      if (ht < 300*GeV) vetoEvent;
-      _flow.fill(2);
+      if (_flow->fillnext(ht < 300*GeV))  vetoEvent;
       // HTmiss cut
-      if (htmiss < 300*GeV) vetoEvent;
-      _flow.fill(3);
+      if (_flow->fillnext(htmiss < 300*GeV))  vetoEvent;
 
       // Isolated leptons cut
       if (!select(isoleps, Cuts::pT > 10*GeV).empty()) vetoEvent;
@@ -171,18 +167,14 @@ namespace Rivet {
       //   const double mT = sqrt(2*t.pT()*ptmiss * (1 - cos(deltaPhi(t, vptmiss))) );
       //   if (mT > 100*GeV && t.pT() > 10*GeV) vetoEvent;
       // }
-      _flow.fill(8);
+      _flow->fillnext();
 
 
       // dPhi(jet,HTmiss) cuts
-      if (deltaPhi(vhtmiss, isojets[0]) < 0.5) vetoEvent;
-      _flow.fill(9);
-      if (deltaPhi(vhtmiss, isojets[1]) < 0.5) vetoEvent;
-      _flow.fill(10);
-      if (njets >= 3 && deltaPhi(vhtmiss, isojets[2]) < 0.3) vetoEvent;
-      _flow.fill(11);
-      if (njets >= 4 && deltaPhi(vhtmiss, isojets[3]) < 0.3) vetoEvent;
-      _flow.fill(12);
+      if (_flow->fillnext(deltaPhi(vhtmiss, isojets[0]) < 0.5))  vetoEvent;
+      if (_flow->fillnext(deltaPhi(vhtmiss, isojets[1]) < 0.5))  vetoEvent;
+      if (_flow->fillnext(njets >= 3 && deltaPhi(vhtmiss, isojets[2]) < 0.3))  vetoEvent;
+      if (_flow->fillnext(njets >= 4 && deltaPhi(vhtmiss, isojets[3]) < 0.3))  vetoEvent;
 
 
       /////////////////////////////////////
@@ -241,7 +233,7 @@ namespace Rivet {
       for (CounterPtr& cptr : _counts_agg)
         scale(cptr, sf);
 
-      _flow.scale(sf);
+      scale(_flow, sf);
       MSG_INFO("CUTFLOWS:\n\n" << _flow);
 
     }
@@ -251,7 +243,7 @@ namespace Rivet {
 
   private:
 
-    Cutflow _flow;
+    CutflowPtr _flow;
 
     map<tuple<int,int,int>, CounterPtr> _counts;
     CounterPtr _counts_agg[12];

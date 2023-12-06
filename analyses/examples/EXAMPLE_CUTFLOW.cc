@@ -33,33 +33,31 @@ namespace Rivet {
       // book(_s_cutflow, "cutflow");
 
       // Cut-flows
-      _cutflows.addCutflow("JetLep", {"Jets", "Nlep", "pTlep1", "yLep1"});
-      _cutflows.addCutflow("DiBjet", {"Jets", "0Lep", "2Jet", "Nbjets", });
-
-      book(_cutflows);
+      book(_cutflows, {"JetLep", "DiBjet"}, {{"Jets", "Nlep", "pTlep1", "yLep1"},
+                                             {"Jets", "0Lep", "2Jet", "Nbjets"}});
     }
 
 
     /// Do the analysis
     void analyze(const Event& event) {
 
-      _cutflows.fillinit();
+      _cutflows->groupfillinit();
 
       const Jets jets = apply<JetFinder>(event, "Jets").jetsByPt();
       const Particles leps = apply<FinalState>(event, "Leptons").particlesByPt();
 
       if (jets.empty()) vetoEvent;
-      _cutflows.fill(1);
+      _cutflows->groupfillnext();
 
       if (!leps.empty()) {
-        _cutflows["JetLep"].fill(2);
-        if (!_cutflows["JetLep"].fillnext(leps[0].pT() < 20*GeV)) vetoEvent;
-        _cutflows["JetLep"].fillnext(leps[0].absrap() < 2.5);
+        _cutflows->fillnext("JetLep");
+        if (!_cutflows->fillnext("JetLep", leps[0].pT() < 20*GeV)) vetoEvent;
+        _cutflows->fillnext("JetLep", leps[0].absrap() < 2.5);
       } else {
-        Cutflow& cf = _cutflows["DiBjet"];
-        cf.fillnext();
+        auto& mycf = _cutflows->binAt("DiBjet"s);
+        mycf->fillnext();
         const Jets bjets = filter_select(jets, hasBTag(Cuts::pT > 5*GeV));
-        cf.fillnext({jets.size() >= 2, bjets.size() == 2});
+        mycf->fillnext({jets.size() >= 2, bjets.size() == 2});
       }
 
     }
@@ -73,7 +71,7 @@ namespace Rivet {
 
 
     /// Cut-flow counters
-    Cutflows _cutflows;
+    CutflowsPtr _cutflows;
 
   };
 
