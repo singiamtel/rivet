@@ -67,9 +67,9 @@ namespace Rivet {
     ///
     /// This is the weighted equivalent of the number of events. It should only
     /// be used by external steering code or analyses in the finalize phase.
-    double sumW() const { return _eventCounter->sumW(); }
+    double sumW() const { return _eventCounter.get()->persistent(defaultWeightIndex())->sumW(); }
     /// Access to the sum of squared-weights
-    double sumW2() const { return _eventCounter->sumW2(); }
+    double sumW2() const { return _eventCounter.get()->persistent(defaultWeightIndex())->sumW2(); }
 
     /// @}
 
