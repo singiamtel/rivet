@@ -12,7 +12,7 @@
 #include "HepMC3/Reader.h"
 
 #include "HepMC3/Version.h"
-#if HEPMC3_VERSION_CODE >= 3002007
+#if HEPMC3_VERSION_CODE > 3002007
 #include "HepMC3/ReaderFactory.h"
 #else
 namespace HepMC3 {
