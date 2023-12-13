@@ -292,6 +292,9 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
             PDFsets = [ None for _ in makePDFBand.split() ]
             Enverrors = [ [] for _ in makeEnvelope.split() ]
             for histogramkey, histogram in histogroup.items():
+
+                if histogramkey.startswith('EXTRA'):  continue  # cf. weightname convention
+
                 isNominal = (nominalVariationKey == histogramkey)
                 # Maybe add this mc_errs option to the plotoptions dict and only
                 # pass the plotoptions dict to the function?
@@ -339,12 +342,10 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
 
                 # Don't plot multiweights if already plotting a band
                 if showWeights and not isNominal and not makeEnvelope and not makePDFBand:
-                    wname = rivet.extractWeightName(plot_id_with_anaopt)
-                    if wname.startswith('EXTRA'):  continue  # cf. weightname convention
                     # Check if the user supplied regex-based weightname filtering
                     var_filter = thisFilePlotOptions.get('Variations', '')
                     if var_filter:
-                        if not any([ re.search(pat, wname) for pat in var_filter.split(',') ]):
+                        if not any([ re.search(pat, histogramkey) for pat in var_filter.split(',') ]):
                             continue
                     outputdict['histograms'][filename+label]['multiweight'+histogramkey] = thisObj
 
