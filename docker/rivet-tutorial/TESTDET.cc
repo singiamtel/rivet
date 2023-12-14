@@ -81,8 +81,8 @@ namespace Rivet {
       MSG_DEBUG("Numbers of jets = " << tjets.size() << " true; " << rjets.size() << " reco");
       _h_nj_true->fill(tjets.size(), weight);
       _h_nj_reco->fill(rjets.size(), weight);
-      const Jets tbjets = filter_select(tjets, [](const Jet& j){ return j.bTagged(Cuts::pT > 5*GeV); });
-      const Jets rbjets = filter_select(rjets, [](const Jet& j){ return j.bTagged(Cuts::pT > 5*GeV); });
+      const Jets tbjets = select(tjets, [](const Jet& j){ return j.bTagged(Cuts::pT > 5*GeV); });
+      const Jets rbjets = select(rjets, [](const Jet& j){ return j.bTagged(Cuts::pT > 5*GeV); });
       MSG_DEBUG("Numbers of b-jets = " << tbjets.size() << " true; " << rbjets.size() << " reco");
       _h_nbj_true->fill(tbjets.size(), weight);
       _h_nbj_reco->fill(rbjets.size(), weight);
@@ -97,7 +97,7 @@ namespace Rivet {
 
       const Particles& telecs = apply<ParticleFinder>(event, "TrueElecs").particlesByPt(20*GeV);
       Particles relecs = apply<ParticleFinder>(event, "RecoElecs").particlesByPt(20*GeV);
-      ifilter_select(relecs, particleEffFilter(ELECTRON_IDEFF_ATLAS_RUN2_TIGHT));
+      iselect(relecs, particleEffFilter(ELECTRON_IDEFF_ATLAS_RUN2_TIGHT));
       MSG_DEBUG("Numbers of electrons = " << telecs.size() << " true; " << relecs.size() << " reco");
       _h_ne_true->fill(telecs.size(), weight);
       _h_ne_reco->fill(relecs.size(), weight);
