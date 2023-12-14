@@ -483,7 +483,7 @@ namespace Rivet {
                             typename std::function<bool(const typename PBCONTAINER1::value_type&,
                                                         const typename PBCONTAINER2::value_type&)> fn) {
     for (const auto& pbcmp : tocompare) {
-      ifilter_discard(tofilter, [&](const typename PBCONTAINER1::value_type& pbfilt){ return fn(pbfilt, pbcmp); });
+      idiscard(tofilter, [&](const typename PBCONTAINER1::value_type& pbfilt){ return fn(pbfilt, pbcmp); });
     }
   }
 

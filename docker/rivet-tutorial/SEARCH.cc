@@ -91,12 +91,12 @@ namespace Rivet {
       // Remove all jets within dR < 0.2 of an electron, then electrons within 0.4 of a jet, then muons
       idiscardIfAnyDeltaRLess(jets, elecs, 0.2);
       idiscardIfAnyDeltaRLess(elecs, jets, 0.4);
-      idiscardIfAnyDeltaRLess(muons, filter_select(jets, [](const Jet& j){
+      idiscardIfAnyDeltaRLess(muons, select(jets, [](const Jet& j){
                                        return j.particles(Cuts::abscharge > 0).size() > 4;
                                      }), 0.4);
 
       // Get b-jets
-      Jets bjets = filter_select(jets, hasBTag(Cuts::abseta < 2.5));
+      Jets bjets = select(jets, hasBTag(Cuts::abseta < 2.5));
 
       // Fill histograms
       for (const Jet& j : jets) {

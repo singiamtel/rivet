@@ -59,13 +59,13 @@ namespace Rivet {
 
       // Retrieve objects
       Particles particles = apply<FinalState>(event, "Particles").particles();
-      Particles chparticles = filter_select(particles, isCharged);
+      Particles chparticles = select(particles, isCharged);
       Particles leptons = apply<FinalState>(event, "Leptons").particlesByPt();
-      Particles elecs = filter_select(leptons, isElectron);
-      Particles muons = filter_select(leptons, isMuon);
+      Particles elecs = select(leptons, isElectron);
+      Particles muons = select(leptons, isMuon);
       Jets jets = apply<FastJets>(event, "Jets").jetsByPt(Cuts::pT > 30*GeV);
       idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
-      Jets bjets = filter_select(jets, hasBTag(Cuts::pT > 5*GeV && Cuts::abseta < 2.5));
+      Jets bjets = select(jets, hasBTag(Cuts::pT > 5*GeV && Cuts::abseta < 2.5));
       double met = apply<MissingMomentum>(event, "MET").missingPt();
 
       // Write event row

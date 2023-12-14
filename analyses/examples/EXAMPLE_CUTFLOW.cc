@@ -56,7 +56,7 @@ namespace Rivet {
       } else {
         auto& mycf = _cutflows->binAt("DiBjet"s);
         mycf->fillnext();
-        const Jets bjets = filter_select(jets, hasBTag(Cuts::pT > 5*GeV));
+        const Jets bjets = select(jets, hasBTag(Cuts::pT > 5*GeV));
         mycf->fillnext({jets.size() >= 2, bjets.size() == 2});
       }
 
