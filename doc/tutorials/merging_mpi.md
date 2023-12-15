@@ -38,7 +38,7 @@ import rivet, io
 def processRank(rank):
   ah = rivet.AnalysisHandler("AH%i" % rank)
   # ... analyse some events ...
-  ah.finalize()
+  ah.collapseEventGroup()
   out = io.StringIO()
   ah.writeData(out)
   return out

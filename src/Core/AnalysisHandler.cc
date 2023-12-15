@@ -103,17 +103,6 @@ namespace Rivet {
 
     /// @todo Get the HepMC3::GenRunInfo object from the first event and store/wrap it?
 
-    // Set the Run's beams based on this first event
-    /// @todo Improve this const ugliness
-    const Event evt(const_cast<GenEvent&>(ge));
-    setRunBeams(Rivet::beams(evt));
-
-    MSG_DEBUG("Initialising the analysis handler");
-    _eventNumber = ge.event_number();
-
-    // Set bootstrap file if a name has been set
-    if (!_bootstrapfilename.empty()) _fbootstrap = ofstream(_bootstrapfilename);
-
     // Assemble the weight streams to be used
     setWeightNames(ge);
     if (_skipMultiWeights) {
@@ -124,13 +113,23 @@ namespace Rivet {
       MSG_WARNING("NOT using named weights: assuming first weight is nominal");
     }
 
+    // Set the Run's beams based on this first event
+    /// @todo Improve this const ugliness
+    const Event evt(const_cast<GenEvent&>(ge), _weightIndices);
+    setRunBeams(Rivet::beams(evt));
+
+    MSG_DEBUG("Initialising the analysis handler");
+    _eventNumber = ge.event_number();
+
+    // Set bootstrap file if a name has been set
+    if (!_bootstrapfilename.empty()) _fbootstrap = ofstream(_bootstrapfilename);
+
     // Create the multi-weighted event counter
     _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
 
     // Set the cross section based on what is reported by the init-event, else zero
-    if (ge.cross_section()) {
-      setCrossSection(HepMCUtils::crossSection(ge, _defaultWeightIdx));
-    } else {
+    if (ge.cross_section())  setCrossSection(evt.crossSections());
+    else {
       MSG_DEBUG("No cross-section detected in first event: setting default to 0 pb");
       setCrossSection({0.0, 0.0});
     }
@@ -404,7 +403,7 @@ namespace Rivet {
     // NB. Won't happen for first event because _eventNumber is set in init()
     /// @todo Need to be able to turn this off, in the case of slightly malformed events without event numbers
     if (_eventNumber != ge.event_number()) {
-      pushToPersistent();
+      collapseEventGroup();
       _eventNumber = ge.event_number();
 
       // Dump current final histograms
@@ -473,15 +472,15 @@ namespace Rivet {
   }
 
 
-  void AnalysisHandler::pushToPersistent() {
+  void AnalysisHandler::collapseEventGroup() {
     if ( _subEventWeights.empty() ) return;
     MSG_TRACE("AnalysisHandler::analyze(): Pushing _eventCounter to persistent.");
-    _eventCounter.get()->pushToPersistent(_subEventWeights);
+    _eventCounter.get()->collapseEventGroup(_subEventWeights);
     for (const AnaHandle& a : analyses()) {
       for (const auto& ao : a->analysisObjects()) {
         MSG_TRACE("AnalysisHandler::analyze(): Pushing " << a->name()
                   << "'s " << ao->name() << " to persistent.");
-        ao.get()->pushToPersistent(_subEventWeights, _NLOSmearing);
+        ao.get()->collapseEventGroup(_subEventWeights, _NLOSmearing);
       }
       MSG_TRACE("AnalysisHandler::analyze(): finished pushing "
                 << a->name() << "'s objects to persistent.");
@@ -564,7 +563,7 @@ namespace Rivet {
 
     // First push all analyses' objects to persistent and final
     MSG_TRACE("AnalysisHandler::finalize(): Pushing analysis objects to persistent.");
-    pushToPersistent();
+    collapseEventGroup();
 
     // Warn if no cross-section was set
     if (!nominalCrossSection()) {
@@ -1111,8 +1110,8 @@ namespace Rivet {
 
     // First push all analyses' objects to persistent and final
     MSG_TRACE("AnalysisHandler::merge(): Pushing analysis objects to persistent.");
-    pushToPersistent();
-    other.pushToPersistent();
+    collapseEventGroup();
+    other.collapseEventGroup();
 
     // Collect global weights and cross sections and fix scaling for all AHs
     MSG_DEBUG("Getting event counter and cross-section from "
@@ -1369,7 +1368,9 @@ namespace Rivet {
     // in such a way that it cannot be used directly with HepMC2 files - where these are
     // typically missing - unless the user is willing to jump through ludicrous hoops.
     bool allEqual = std::adjacent_find(xsecs.begin(), xsecs.end(), std::not_equal_to<>()) == xsecs.end();
-    allEqual |= std::adjacent_find(xsecs.begin() + 1, xsecs.end(), std::not_equal_to<>()) == xsecs.end();
+    if (xsecs.size() > 2) {
+      allEqual |= std::adjacent_find(xsecs.begin() + 1, xsecs.end(), std::not_equal_to<>()) == xsecs.end();
+    }
     if (xsecs.size() == 1 || allEqual)  setCrossSection(xsecs[0], isUserSupplied);
     else {
       // Update the user xsec
@@ -1444,7 +1445,7 @@ namespace Rivet {
 
   void AnalysisHandler::updateCrossSection() {
 
-    pushToPersistent();
+    collapseEventGroup();
 
     // update the weighted cross-section estimate with the cross-section
     // information from the previous HepMC file (this method gets called
