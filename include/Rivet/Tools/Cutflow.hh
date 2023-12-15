@@ -203,7 +203,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,

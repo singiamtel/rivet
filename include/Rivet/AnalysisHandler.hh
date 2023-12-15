@@ -295,6 +295,10 @@ namespace Rivet {
     /// @name Histogram / data object access
     /// @{
 
+    /// After all subevents in an event group have been processed, push
+    /// all histo fills to the relevant histograms.
+    void collapseEventGroup();
+
     /// @brief Read analysis plots into the histo collection from the given stream
     ///
     /// Use the @a fmt flag to specify the YODA output format (yoda, yoda.gz, yoda.h5, ...)
@@ -388,7 +392,7 @@ namespace Rivet {
       if (!_initialised)
         throw Error("AnalysisHandler has not been initialised!");
 
-      pushToPersistent();
+      collapseEventGroup();
 
       // Loop over raw AOs and fill a temporary 2D matrix
       // with the per-AO content; keep track of per-AO sizes
@@ -421,7 +425,7 @@ namespace Rivet {
       if (!_initialised)
         throw Error("AnalysisHandler has not been initialised!");
 
-      pushToPersistent();
+      collapseEventGroup();
 
       // get Rivet AOs for access to raw AO pointers
       vector<MultiplexAOPtr> raos = getRivetAOs();
@@ -476,10 +480,6 @@ namespace Rivet {
 
     /// Helper function to strip specific options from data object paths.
     void stripOptions(YODA::AnalysisObjectPtr ao, const vector<string>& delopts) const;
-
-    /// After all subevents in an event group have been processed, push
-    /// all histo fills to the relevant histograms.
-    void pushToPersistent();
 
     /// @brief Merge the AO map @a newaos into @a allaos
     void mergeAOS(map<string, YODA::AnalysisObjectPtr> &allaos,

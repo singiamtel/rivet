@@ -124,7 +124,7 @@ namespace Rivet {
 
 
   /// @defgroup AOFills Minimal objects representing AO fills,
-  /// to be buffered before pushToPersistent().
+  /// to be buffered before collapseEventGroup().
   ///
   /// @note Every object listed here needs a virtual fill method in YODA,
   /// otherwise the Tuple fakery won't work.
@@ -146,7 +146,7 @@ namespace Rivet {
 
   /// @brief FillCollectors which are used to temporarily cache
   /// unaggregated fills until collapsed by the Multiplexers via
-  /// a call to pushToPersistent().
+  /// a call to collapseEventGroup().
   ///
   /// The specialisations of this inherit from the YODA analysis object types,
   /// and are used as such. The user-facing analysis objects in
@@ -179,7 +179,7 @@ namespace Rivet {
     FillCollector(typename YAO::Ptr yao) : YAO(yao->path()) { }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(const double weight=1.0, const double fraction = 1.0) {
@@ -226,7 +226,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,
@@ -276,7 +276,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,
@@ -330,7 +330,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,
@@ -384,7 +384,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,
@@ -438,7 +438,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,
@@ -492,7 +492,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,
@@ -546,7 +546,7 @@ namespace Rivet {
     }
 
     /// Overloaded fill method, which stores Fill info
-    /// until Multiplexer<T>::pushToPersistent() is called.
+    /// until Multiplexer<T>::collapseEventGroup() is called.
     ///
     /// @todo Do we need to deal with users using fractions directly?
     int fill(typename YAO::FillType&& fillCoords,
@@ -940,7 +940,7 @@ namespace Rivet {
     virtual void newSubEvent() = 0;
 
     /// Sync the fill proxies to the persistent histogram.
-    virtual void pushToPersistent(const vector<std::valarray<double>>& weight, const double nlowfrac=0.0) = 0;
+    virtual void collapseEventGroup(const vector<std::valarray<double>>& weight, const double nlowfrac=0.0) = 0;
 
     /// Sync the persistent histograms to the final collection.
     virtual void pushToFinal() = 0;
@@ -1145,7 +1145,7 @@ namespace Rivet {
     ///
     /// Called every sub-event by AnalysisHandler::analyze() before
     /// dispatch to Analysis::analyze(). The fill values will be
-    /// redistributed over variations by pushToPersistent().
+    /// redistributed over variations by collapseEventGroup().
     void newSubEvent() {
       _evgroup.emplace_back(new FillCollector<T>(_persistent[0]));
       _active = _evgroup.back();
@@ -1153,7 +1153,7 @@ namespace Rivet {
     }
 
     /// Pushes the (possibly collapsed) fill(s) into the persistent objects
-    void pushToPersistent(const vector<std::valarray<double>>& weights, const double nlowfrac=0.0) {
+    void collapseEventGroup(const vector<std::valarray<double>>& weights, const double nlowfrac=0.0) {
 
       /// @todo If we don't multiplex (Binned)Estimates, perhaps we can get rid of this protection?
       if constexpr( isFillable<T>::value ) {
