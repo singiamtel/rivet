@@ -309,7 +309,7 @@ if test x$enable_pyext == xyes; then
   AC_SUBST(PYTHON_FULL_VERSION)
   AC_SUBST(PYTHON_MAJOR_VERSION)
   #RIVET_PYTHONPATH=$pythondir
-  RIVET_PYTHONPATH=`$PYTHON -c "from __future__ import print_function; import sysconfig; print(sysconfig.get_path('platlib', vars={'platbase': 'XXX', 'base': 'XXX'}).replace('/local', '').replace('XXX', '$prefix'))"`
+  RIVET_PYTHONPATH=`$PYTHON -c "from __future__ import print_function; import sysconfig; print(sysconfig.get_path('platlib', 'posix_prefix', vars={'platbase': 'XXX', 'base': 'XXX'}).replace('/local', '').replace('XXX', '$prefix'))"`
   AC_SUBST(RIVET_PYTHONPATH)
   AC_MSG_NOTICE(Rivet Python lib will be installed to $RIVET_PYTHONPATH)
   if test -z "$PYTHON"; then
@@ -363,9 +363,9 @@ AM_CPPFLAGS="$AM_CPPFLAGS \$(FASTJETCPPFLAGS) \$(FJCONTRIBCPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(HDF5_CPPFLAGS) \$(HIGHFIVECPPFLAGS)"
 AC_CEDAR_CHECKCXXFLAG([-pedantic], [AM_CXXFLAGS="$AM_CXXFLAGS -pedantic"])
 AC_CEDAR_CHECKCXXFLAG([-Wall], [AM_CXXFLAGS="$AM_CXXFLAGS -Wall"])
+AC_CEDAR_CHECKCXXFLAG([-Wunused-variable], [AM_CXXFLAGS="$AM_CXXFLAGS -Wunused-variable"])
 AC_CEDAR_CHECKCXXFLAG([-Wno-long-long], [AM_CXXFLAGS="$AM_CXXFLAGS -Wno-long-long"])
 AC_CEDAR_CHECKCXXFLAG([-Wno-format], [AM_CXXFLAGS="$AM_CXXFLAGS -Wno-format"])
-dnl AC_CEDAR_CHECKCXXFLAG([-Wno-unused-variable], [AM_CXXFLAGS="$AM_CXXFLAGS -Wno-unused-variable"])
 AC_CEDAR_CHECKCXXFLAG([-Werror=uninitialized], [AM_CXXFLAGS="$AM_CXXFLAGS -Werror=uninitialized"])
 AC_CEDAR_CHECKCXXFLAG([-Werror=delete-non-virtual-dtor], [AM_CXXFLAGS="$AM_CXXFLAGS -Werror=delete-non-virtual-dtor"])
 
