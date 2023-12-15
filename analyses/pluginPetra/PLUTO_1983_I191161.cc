@@ -152,11 +152,11 @@ namespace Rivet {
 
 
     /// @name Histograms
-    //@{
+    /// @{
     YODA::Dbn1D _p_thrust_pt, _p_thrust_pt2, _p_thrust_sum_pt, _p_thrust_sum_pt2;
     YODA::Dbn1D _p_sphere_pt, _p_sphere_pt2, _p_sphere_sum_pt, _p_sphere_sum_pt2;
     double sqs;
-    //@}
+    /// @}
 
   };
 

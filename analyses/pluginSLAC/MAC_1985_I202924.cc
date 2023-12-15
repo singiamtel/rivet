@@ -99,7 +99,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MAC_1985_I202924);
 
 

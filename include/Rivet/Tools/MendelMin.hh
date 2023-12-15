@@ -45,7 +45,7 @@ namespace Rivet {
     /// involved when an individual is evolved twowards the fittest individual.
     MendelMin(const FuncT& fin, unsigned int ndim,
               const Params& fixpar, //const RndT & rndin,
-              unsigned int npop=20, unsigned int ngen=20,
+              unsigned int npop=20, //unsigned int ngen=20, //< unused
               double margin=0.1)
       : _f(fin), _q(fixpar), //_rnd(rndin),
         _NDim(ndim), _margin(margin),
@@ -65,7 +65,7 @@ namespace Rivet {
               unsigned int npop=20, unsigned int ngen=20,
               double margin=0.1)
       : MendelMin([&](const Params& ps, const Params&) -> double { return fin(ps); },
-                  ndim, {}, npop, ngen, margin)
+                  ndim, {}, npop, /* ngen, */ margin)
     {   }
 
 
@@ -80,8 +80,8 @@ namespace Rivet {
 
     /// Evolve the population a given number of generations and return
     /// the best fit value.
-    double evolve(unsigned int NGen) {
-      for ( unsigned n = 0; n < NGen; ++n ) {
+    double evolve(unsigned int nGen) {
+      for ( unsigned n = 0; n < nGen; ++n ) {
         // Calculate the fitness.
         auto mm = minmax();
         // Always kill the fittest individual.

@@ -203,7 +203,6 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2019_I1740909);
 
 }

@@ -7,8 +7,7 @@
 namespace Rivet {
 
 
-  /// @brief Measurement of double-parton scattering in inclusive production of four jets with low transverse momentum in proton-proton collisions at $\sqrt{s}$ = 13 TeV.
-
+  /// Double-parton scattering in inclusive production of four jets with low pT in 13 TeV pp
   class CMS_2021_I1932460 : public Analysis {
   public:
 
@@ -17,7 +16,7 @@ namespace Rivet {
 
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -204,16 +203,15 @@ namespace Rivet {
       scale(_h["DeltaPhiY_binNorm"], _h["DeltaPhiY_binNorm"]->bin(12).xWidth()/_h["DeltaPhiY_binNorm"]->bin(12).sumW() );
       scale(_h["DeltaPtSoft_binNorm"], _h["DeltaPtSoft_binNorm"]->bin(8).xWidth()/_h["DeltaPtSoft_binNorm"]->bin(8).sumW() );
       scale(_h["DeltaS_binNorm"], _h["DeltaS_binNorm"]->bin(7).xWidth()/_h["DeltaS_binNorm"]->bin(7).sumW() );
-
     }
+
+    /// @}
 
     map<string, Histo1DPtr> _h;
 
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2021_I1932460);
-
 
 }

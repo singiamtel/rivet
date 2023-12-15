@@ -150,8 +150,6 @@ namespace Rivet {
 
     }
 
-    //@}
-
 
   protected:
 

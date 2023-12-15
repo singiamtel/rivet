@@ -407,7 +407,6 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
   };
 
-  // This global object acts as a hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2019_I1736531);
 
 }

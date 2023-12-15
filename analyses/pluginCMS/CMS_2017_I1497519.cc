@@ -75,7 +75,7 @@ namespace Rivet {
       }
     }
 
-    void fill3D(int ih, vector<double>& ybins, std::vector<double> zbins, double x, double y, double z, double w){
+    void fill3D(int ih, vector<double>& ybins, vector<double> zbins, double x, double y, double z, double w){
       int izbin = -1;
       double lowEdge = 0;
       int nybins = ybins.size() - 1;
@@ -161,10 +161,10 @@ namespace Rivet {
     /// algorithm
     /// @param leptons pt-ordered of electron or muon collection to use to build
     /// the Z boson
-    std::unique_ptr<Particle> zfinder(const DressedLeptons& leptons){
+    unique_ptr<Particle> zfinder(const DressedLeptons& leptons){
       if(leptons.size() < 2) return 0;
       if(leptons[0].charge()*leptons[1].charge() > 0) return 0;
-      std::unique_ptr<Particle> cand(new Particle(PID::ZBOSON, leptons[0].mom()
+      unique_ptr<Particle> cand(new Particle(PID::ZBOSON, leptons[0].mom()
                                                   + leptons[1].mom()));
       if (cand->mass() < 71.*GeV || cand->mass() > 111.*GeV) return 0;
       return cand;
@@ -177,7 +177,7 @@ namespace Rivet {
       DressedLeptons electrons = apply<LeptonFinder>(event, "electrons").dressedLeptons();
 
       //Look for Z->ee
-      std::unique_ptr<Particle> z = zfinder(electrons);
+      unique_ptr<Particle> z = zfinder(electrons);
 
       const DressedLeptons* dressedLeptons = 0;
 
@@ -319,10 +319,10 @@ namespace Rivet {
       // when running in combined mode, need to average to get lepton xsec
       if (_mode == 2) norm /= 2.;
 
-      MSG_DEBUG("Cross section = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(3) << crossSection() << " pb");
-      MSG_DEBUG("# Events      = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(3) << numEvents() );
-      MSG_DEBUG("SumW          = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(3) << sumOfWeights());
-      MSG_DEBUG("Norm factor   = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(6) << norm);
+      MSG_DEBUG("Cross section = " << setfill(' ') << setw(14) << fixed << setprecision(3) << crossSection() << " pb");
+      MSG_DEBUG("# Events      = " << setfill(' ') << setw(14) << fixed << setprecision(3) << numEvents() );
+      MSG_DEBUG("SumW          = " << setfill(' ') << setw(14) << fixed << setprecision(3) << sumOfWeights());
+      MSG_DEBUG("Norm factor   = " << setfill(' ') << setw(14) << fixed << setprecision(6) << norm);
 
       unsigned ih = 0;
       for(auto& h: _h){
@@ -340,20 +340,24 @@ namespace Rivet {
   private:
 
     ///  Histograms
-    std::vector<Histo1DPtr> _h;
+    vector<Histo1DPtr> _h;
 
     /// List of histogram in the order of appearance
     /// in the paper. Histograms are numbered according
     /// to this order.
-    std::vector<enum histIds> _histListInPaperOrder;
+    vector<enum histIds> _histListInPaperOrder;
 
-    //@name Binning of pseudo-2D/3D histograms
-    std::vector<double> _ptjYjBins;
-    std::vector<double> _yJyZbins;
-    std::vector<double> _ptJyJyZbinsYj;
-    std::vector<double>  _ptJyJyZbinsYZ;
+    /// @name Binning of pseudo-2D/3D histograms
+    /// @{
+    vector<double> _ptjYjBins;
+    vector<double> _yJyZbins;
+    vector<double> _ptJyJyZbinsYj;
+    vector<double>  _ptJyJyZbinsYZ;
+    /// @}
 
   };
 
+
   RIVET_DECLARE_PLUGIN(CMS_2017_I1497519);
+
 }

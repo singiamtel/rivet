@@ -70,7 +70,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MARKJ_1979_I141976);
 
 

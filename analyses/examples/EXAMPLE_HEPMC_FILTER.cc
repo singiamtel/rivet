@@ -18,7 +18,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(EXAMPLE_HEPMC_FILTER);
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Set up projections and book histograms
     void init() {
@@ -51,10 +51,10 @@ namespace Rivet {
     }
 
 
-    //@}
+    /// @}
 
     /// @name Output handler
-    //@{
+    /// @{
 
     #ifdef RIVET_ENABLE_HEPMC_3    
     std::shared_ptr<RivetHepMC::WriterAscii> _writer;
@@ -62,11 +62,11 @@ namespace Rivet {
     std::shared_ptr<RivetHepMC::IO_GenEvent> _writer;
     #endif
 
-    //@}
+    /// @}
+
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(EXAMPLE_HEPMC_FILTER);
 
 }

@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_ParticleAnalysis.hh"
+#include "Rivet/Analyses/MC_PARTICLES_BASE.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
 
@@ -7,11 +7,11 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for muons
-  class MC_MUONS : public MC_ParticleAnalysis {
+  class MC_MUONS : public MC_PARTICLES_BASE {
   public:
 
     MC_MUONS()
-      : MC_ParticleAnalysis("MC_MUONS", 2, "muon")
+      : MC_PARTICLES_BASE("MC_MUONS", 2, "muon")
     {    }
 
 
@@ -29,22 +29,21 @@ namespace Rivet {
         declare(dleps, "Muons");
       }
 
-      MC_ParticleAnalysis::init();
+      MC_PARTICLES_BASE::init();
     }
 
 
     void analyze(const Event& event) {
       const Particles mus = apply<ParticleFinder>(event, "Muons").particlesByPt(Cuts::pT > 0.5*GeV);
-      MC_ParticleAnalysis::_analyze(event, mus);
+      MC_PARTICLES_BASE::_analyze(event, mus);
     }
 
 
     void finalize() {
-      MC_ParticleAnalysis::finalize();
+      MC_PARTICLES_BASE::finalize();
     }
 
   };
-
 
 
   RIVET_DECLARE_PLUGIN(MC_MUONS);

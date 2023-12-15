@@ -122,7 +122,6 @@ namespace Rivet {
     Histo1DGroupPtr _mass[2];
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2012_I1082936);
 
 }

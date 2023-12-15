@@ -74,7 +74,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(DELPHI_2000_I524694);
 
 

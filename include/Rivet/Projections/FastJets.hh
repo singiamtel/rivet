@@ -119,7 +119,7 @@ namespace Rivet {
              JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr,
              double seed_threshold=1.0)
-      : JetFinder(fsp, usemuons, useinvis)
+      : JetFinder(fsp, usemuons, useinvis), _adef(adef)
     {
       _initBase();
       _initJdef(alg, rparameter, seed_threshold);

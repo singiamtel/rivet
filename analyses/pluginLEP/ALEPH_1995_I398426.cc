@@ -130,7 +130,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ALEPH_1995_I398426);
 
 

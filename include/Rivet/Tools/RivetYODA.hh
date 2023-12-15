@@ -854,11 +854,8 @@ namespace Rivet {
           else {
             // this fill axis is unbinned (e.g. in Profiles)
             for (size_t i = 0; i < nFills; ++i) {
-              // What's a good reference for the window size along
-              // an unbinned axes? Picking 20% of the FP edge as
-              // the window size here - is that reasonable?
-              // @note No smearing needed here since
-              // there are no bin edges along this axes
+              /// @todo What's a good reference for the window size along an unbinned axes? Is 20% of the FP edge a reasonable window size?
+              /// @note No smearing needed here since there are no bin-edges along this axes
               const double edge = get<I>(subevents[i].first);
               const double delta = 0.1*fabs(edge);
               edgesHi[I][i] = edge + delta;
@@ -1158,7 +1155,7 @@ namespace Rivet {
     /// Pushes the (possibly collapsed) fill(s) into the persistent objects
     void pushToPersistent(const vector<std::valarray<double>>& weights, const double nlowfrac=0.0) {
 
-      // @todo If we don't multiplex (Binned)Estimates, perhaps we can get rid of this protection?
+      /// @todo If we don't multiplex (Binned)Estimates, perhaps we can get rid of this protection?
       if constexpr( isFillable<T>::value ) {
 
         // Should have as many subevent fills as subevent weights
@@ -1201,10 +1198,11 @@ namespace Rivet {
     void collapseSubevents(const vector<std::valarray<double>>& weights, const double nlowfrac) {
       if constexpr( isFillable<T>::value ) {
         if constexpr (!std::is_same<T, YODA::Counter>::value ) { // binned objects
-          // The number of fills could be different between sub-events,
-          // in which case we will first add a padding of "empty" fills.
-          // We also take the transpose of subevents vs fills.
-          // @todo Do we really need the transposing??
+          /// @note The number of fills could be different between sub-events,
+          /// in which case we will first add a padding of "empty" fills.
+          /// We also take the transpose of subevents vs fills.
+          ///
+          /// @todo Do we really need the transposing??
           for (const Fills<T>& subEvents : applyEmptyFillPaddingAndTranspose<T>(_evgroup)) {
             // construct fill windows with fractional fills
             for (const auto& f : applyFillWindows(_persistent[0], subEvents, weights, nlowfrac)) {

@@ -5,6 +5,7 @@
 
 namespace Rivet {
 
+
   /// @brief Measurement of forward neutron(+ antineutron) production in proton-proton Collisions at 13 TeV
   class LHCF_2020_I1783943 : public Analysis {
   public:
@@ -13,7 +14,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(LHCF_2020_I1783943);
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -123,12 +124,12 @@ namespace Rivet {
       }
 
     }
-    //@}
+    /// @}
 
   private:
 
     /// @name Histograms
-    //@{
+    /// @{
     Histo1DPtr _h_n_en_eta1;
     Histo1DPtr _h_n_en_eta2;
     Histo1DPtr _h_n_en_eta3;
@@ -141,10 +142,11 @@ namespace Rivet {
     Histo1DPtr _h_n_elas;
 
     CounterPtr _inelnorm;
-    //@}
+    /// @}
+
   };
 
-  // The hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(LHCF_2020_I1783943);
 
 }

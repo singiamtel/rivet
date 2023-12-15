@@ -6,27 +6,17 @@
 
 namespace Rivet {
 
+
   /// @brief Inclusive b-jet production in pp collisions at 7 TeV
   class CMS_2012_I1089835 : public Analysis {
   public:
 
-    /// @name Constructors etc.
-    //@{
-
     /// Constructor
-    CMS_2012_I1089835()
-      : Analysis("CMS_2012_I1089835")
-    {
+    RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2012_I1089835);
 
-    }
-
-    //@}
-
-
-  public:
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -79,26 +69,23 @@ namespace Rivet {
 
     }
 
-    //@}
+    /// @}
 
 
   private:
 
     /// @name Histograms
-    //@{
+    /// @{
     Histo1DPtr _h_dsigdpty05;
     Histo1DPtr _h_dsigdpty10;
     Histo1DPtr _h_dsigdpty15;
     Histo1DPtr _h_dsigdpty20;
     Histo1DPtr _h_dsigdpty22;
-    //@}
-
+    /// @}
 
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2012_I1089835);
 
 }

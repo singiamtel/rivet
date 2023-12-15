@@ -21,14 +21,14 @@ namespace Rivet {
   /// A minimal base class for \f$ N \f$-dimensional vectors.
   template <size_t N>
   class Vector {
+
     template <size_t M>
     friend Vector<M> multiply(const Matrix<M>& a, const Vector<M>& b);
 
-  public:
-    Vector() : _vec(EVector::Zero()) { }
 
-    Vector(const Vector<N>& other)
-      : _vec(other._vec) { }
+  public:
+
+    Vector() : _vec(EVector::Zero()) { }
 
     const double& get(const size_t index) const {
       if (index >= N) {

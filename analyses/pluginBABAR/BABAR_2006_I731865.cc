@@ -94,7 +94,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(BABAR_2006_I731865);
 
 }

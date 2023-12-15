@@ -1,18 +1,18 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetSplittings.hh"
+#include "Rivet/Analyses/MC_KTSPLITTINGS_BASE.hh"
 #include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
 
 
-  /// MC validation analysis for higgs [-> tau tau] + jets events
-  class MC_HKTSPLITTINGS : public MC_JetSplittings {
+  /// MC validation analysis for Higgs [-> tau tau] + jets events
+  class MC_HKTSPLITTINGS : public MC_KTSPLITTINGS_BASE {
   public:
 
     /// Default constructor
     MC_HKTSPLITTINGS()
-      : MC_JetSplittings("MC_HKTSPLITTINGS", 4, "Jets")
+      : MC_KTSPLITTINGS_BASE("MC_HKTSPLITTINGS", 4, "Jets")
     {    }
 
 
@@ -37,7 +37,7 @@ namespace Rivet {
       FastJets jetpro(hfinder.remainingFinalState(), JetAlg::KT, R);
       declare(jetpro, "Jets");
 
-      MC_JetSplittings::init();
+      MC_KTSPLITTINGS_BASE::init();
     }
 
 
@@ -45,13 +45,13 @@ namespace Rivet {
     void analyze(const Event & e) {
       const DileptonFinder& hfinder = apply<DileptonFinder>(e, "Hfinder");
       if (hfinder.bosons().size() != 1) vetoEvent;
-      MC_JetSplittings::analyze(e);
+      MC_KTSPLITTINGS_BASE::analyze(e);
     }
 
 
     /// Finalize
     void finalize() {
-      MC_JetSplittings::finalize();
+      MC_KTSPLITTINGS_BASE::finalize();
     }
 
     /// @}
@@ -60,7 +60,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_HKTSPLITTINGS);
 
 }

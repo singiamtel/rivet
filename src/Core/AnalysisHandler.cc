@@ -488,7 +488,7 @@ namespace Rivet {
     }
 
     // Write out bootstrap acceptances if possible
-    // @todo Only a placeholder... complete by writing out actual bin-weights from instrumented ao wrappers
+    /// @todo Only a placeholder... complete by writing out actual bin-weights from instrumented ao wrappers
     if (_fbootstrap.is_open()) {
       if (_subEventWeights.size() == 1) { // correlated subevents currently not supported
         // write out weights
@@ -757,8 +757,8 @@ namespace Rivet {
         }
       }
 
-      // try to read the file and build path-AO map
-      // @todo move this map construction into YODA?
+      // Try to read the file and build path-AO map
+      /// @todo move this map construction into YODA?
       vector<YODA::AnalysisObject*> aos_raw;
       map<string,YODA::AnalysisObjectPtr> raw_map;
       size_t rawcount = 0, tmpcount = 0;
@@ -1085,7 +1085,7 @@ namespace Rivet {
     if (is_equal)   is_equal = std::equal(this_anaNames.begin(), this_anaNames.end(), that_anaNames.begin());
     if (!is_equal)  throw UserError("The AnalysisHandlers are not equivalent!");
 
-    // @todo Do we need to check that the sequence of weight indices is the same?
+    /// @todo Do we need to check that the sequence of weight indices is the same?
 
     // Check if the registered analyses are reentrant safe
     for (const AnaHandle& a : analyses() ) {
@@ -1148,8 +1148,8 @@ namespace Rivet {
             this_ao.get()->unsetActiveWeight();
           }
           other_ao.get()->unsetActiveWeight();
-          // @todo warn if AO could not be found? Throw an error even?
-          //e.g. throw LookupError("Data object " + other_ao->path() + " not found");
+          /// @todo warn if AO could not be found? Throw an error even?
+          ///   e.g. throw LookupError("Data object " + other_ao->path() + " not found");
         }
       }
       _eventCounter.get()->unsetActiveWeight();
@@ -1553,7 +1553,7 @@ namespace Rivet {
       });
     });
     // for now, only load HistoND<d,d,d>
-    // @todo Do we need more 3D types?
+    /// @todo Do we need more 3D types?
     registerType<YODA::HistoND<3>>();
   }
 

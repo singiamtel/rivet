@@ -4,12 +4,14 @@
 
 namespace Rivet {
 
+
   /// @brief Charged particle production at 13 TeV
   class LHCB_2021_I1889335 : public Analysis {
   public:
 
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(LHCB_2021_I1889335);
+
 
     /// @name Analysis methods
     //@{
@@ -29,6 +31,7 @@ namespace Rivet {
       }
     }
 
+
     void analyze(const Event &event) {
 
       const Particles cfs = apply<ALICE::PrimaryParticles>(event, "APRIM").particles();
@@ -43,12 +46,16 @@ namespace Rivet {
       }
     }
 
+
     /// Normalise histograms etc., after the run
     void finalize() {
       const double scale_factor = crossSection() / millibarn / sumOfWeights();
       scale({_h_ppInel_neg, _h_ppInel_pos}, scale_factor);
       divByGroupWidth({_h_ppInel_neg, _h_ppInel_pos});
     }
+
+    /// @}
+
 
   private:
 
@@ -57,5 +64,7 @@ namespace Rivet {
 
   };
 
+
   RIVET_DECLARE_PLUGIN(LHCB_2021_I1889335);
+
 }

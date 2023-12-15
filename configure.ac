@@ -385,7 +385,10 @@ fi
 ## Extra warnings flag (default=none)
 AC_ARG_ENABLE([extra-warnings], [AS_HELP_STRING([--enable-extra-warnings],[build with extra compiler warnings (recommended for developers)  @<:@default=no@:>@])], [], [enable_extra_warnings=no])
 if test x$enable_extra_warnings == xyes; then
-   AC_CEDAR_CHECKCXXFLAG([-Wextra], [AM_CXXFLAGS="$AM_CXXFLAGS -Wextra "])
+  AC_MSG_NOTICE([Enabling extra compiler warnings])
+  dnl AC_CEDAR_CHECKCXXFLAG([-Wextra -Wno-unused-variable], [AM_CXXFLAGS="$AM_CXXFLAGS -Wextra -Wno-unused-variable"])
+  dnl AC_CEDAR_CHECKCXXFLAG([-Wdeprecated-copy], [AM_CXXFLAGS="$AM_CXXFLAGS -Wdeprecated-copy"])
+  AC_CEDAR_CHECKCXXFLAG([-Wextra], [AM_CXXFLAGS="$AM_CXXFLAGS -Wextra "])
 fi
 
 

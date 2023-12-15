@@ -160,6 +160,5 @@ class ZEUS_2008_I810112 : public Analysis {
 
   };
 
-  /// The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ZEUS_2008_I810112);
 }

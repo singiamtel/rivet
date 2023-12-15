@@ -18,10 +18,6 @@ namespace Rivet {
   ///
   /// A specialised version of vector<Particle> which is able to implicitly and
   /// explicitly convert to a vector of FourMomentum.
-  ///
-  /// @todo Add explicit and implicit conversion to PseudoJets
-  ///
-  // typedef std::vector<Particle> Particles;
   class Particles : public std::vector<Particle> {
   public:
     using base = std::vector<Particle>; //< using-declarations don't like template syntax
@@ -41,12 +37,8 @@ namespace Rivet {
   /// Typedef for a pair of Particle objects.
   typedef std::pair<Particle, Particle> ParticlePair;
 
-  //@}
-
-
 
   /////////////////////
-
 
 
   /// Particle representation, either from a HepMC::GenEvent or reconstructed.
@@ -96,6 +88,7 @@ namespace Rivet {
 
     /// @}
 
+
     /// @name Kinematic properties
     /// @{
 
@@ -119,7 +112,7 @@ namespace Rivet {
     /// Apply an active Lorentz transform to this particle
     Particle& transformBy(const LorentzTransform& lt);
 
-    //@
+    /// @}
 
 
     /// @name Positional properties
@@ -141,6 +134,7 @@ namespace Rivet {
     }
 
     /// @}
+
 
     /// @name Displacement-projection properties
     /// @{

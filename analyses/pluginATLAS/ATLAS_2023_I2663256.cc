@@ -10,46 +10,45 @@ namespace Rivet {
 
 
   /// @brief Semivisible jets t-channel search
-
   class ATLAS_2023_I2663256 : public Analysis {
   public:
 
-  RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2023_I2663256)
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2023_I2663256);
 
 
   private:
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
+    /// Initialise and register projections
     void init() {
 
-      //Initialise and register projections
-
       //Leptons
-       ChargedLeptons lfs(FinalState(Cuts::abseta < 2.5 && Cuts::pT > 7*GeV));
-       declare(lfs, "LFS");
+      ChargedLeptons lfs(FinalState(Cuts::abseta < 2.5 && Cuts::pT > 7*GeV));
+      declare(lfs, "LFS");
 
-       FinalState fs(Cuts::abseta < 4.5);
-       VetoedFinalState vfs(fs);
-       vfs.vetoNeutrinos();
-       vfs.addVetoPairId(PID::MUON);
+      FinalState fs(Cuts::abseta < 4.5);
+      VetoedFinalState vfs(fs);
+      vfs.vetoNeutrinos();
+      vfs.addVetoPairId(PID::MUON);
 
-       FastJets j04(vfs, JetAlg::ANTIKT, 0.4);
-       declare(j04, "Jets");
+      FastJets j04(vfs, JetAlg::ANTIKT, 0.4);
+      declare(j04, "Jets");
 
-       SmearedJets sj04(j04, JET_SMEAR_ATLAS_RUN2, [](const Jet& j){
-         return j.bTagged() ? 0.7*(1 - exp(-j.pT()/(10*GeV))) : 0.01;
-       });
-       declare(sj04, "SJets");
+      SmearedJets sj04(j04, JET_SMEAR_ATLAS_RUN2, [](const Jet& j){
+        return j.bTagged() ? 0.7*(1 - exp(-j.pT()/(10*GeV))) : 0.01;
+      });
+      declare(sj04, "SJets");
 
       // Book histograms
 
-       book(_h["ninebin"], 1, 1, 8);
-       book(_h["ht"],      2, 1, 8);
-       book(_h["met"],     3, 1, 8);
-       book(_h["ptbal"],   4, 1, 8);
-       book(_h["difphi"],  5, 1, 8);
+      book(_h["ninebin"], 1, 1, 8);
+      book(_h["ht"],      2, 1, 8);
+      book(_h["met"],     3, 1, 8);
+      book(_h["ptbal"],   4, 1, 8);
+      book(_h["difphi"],  5, 1, 8);
 
     }
 
@@ -129,30 +128,27 @@ namespace Rivet {
     void finalize() {
 
       for (auto& hist : _h) {
-         for (size_t i=0; i < hist.second->numBins(); ++i) {
-           double bW = hist.second->bin(i).xWidth();
-           hist.second->bin(i).scaleW(bW);
-         }
-       }
+        for (size_t i=0; i < hist.second->numBins(); ++i) {
+          double bW = hist.second->bin(i).xWidth();
+          hist.second->bin(i).scaleW(bW);
+        }
+      }
 
       double norm = 139*crossSection()/femtobarn/sumOfWeights();
       scale(_h, norm);
     }
 
+    /// @}
+
 
   private:
 
-    /// @name Histograms
-    //@{
+    /// Histograms
+    map<string, Histo1DPtr> _h;
 
-     map<string, Histo1DPtr> _h;
-
-    //@}
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2023_I2663256);
 
 }
-

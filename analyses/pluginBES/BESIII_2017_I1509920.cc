@@ -22,16 +22,17 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(Beam(), "Beams");
-      UnstableParticles ufs = UnstableParticles(Cuts::abspid==PID::PSI2S);
-      DecayedParticles psi(ufs);
+      UnstableParticles ufs_psi(Cuts::abspid==PID::PSI2S);
+      DecayedParticles psi(ufs_psi);
       psi.addStable(20443);
       psi.addStable(445);
       declare(psi, "PSI");
-      ufs = UnstableParticles(Cuts::abspid==445 or Cuts::abspid==20443);
-      DecayedParticles chi(ufs);
+      UnstableParticles ufs_chi(Cuts::abspid==445 or Cuts::abspid==20443);
+      DecayedParticles chi(ufs_chi);
       chi.addStable(PID::JPSI);
       declare(chi, "CHI");
-      // histograms
+
+      // Histograms
       for(unsigned int ix=0;ix<2;++ix)
 	for(unsigned int iy=0;iy<4;++iy)
 	  book(_h[ix][iy],1+ix,1,1+iy);

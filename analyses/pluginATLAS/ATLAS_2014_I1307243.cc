@@ -204,7 +204,6 @@ namespace Rivet {
     map<string, Histo1DGroupPtr> _h_dphi_dySlices;
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2014_I1307243);
 
 }

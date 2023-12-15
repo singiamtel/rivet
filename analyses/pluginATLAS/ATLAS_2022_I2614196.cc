@@ -18,7 +18,8 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2022_I2614196);
 
     /// @name Analysis methods
-    //@{
+    /// @{
+
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -232,7 +233,7 @@ namespace Rivet {
        _h["phi_CS" + s]->fill(phi_CS);
      }
    }
-   // end of analysis
+
 
    /// Normalise histograms etc., after the run
    void finalize() {
@@ -240,16 +241,19 @@ namespace Rivet {
      scale(_h, sf);
    }
 
+    /// @}
+
+
   private:
 
     /// Histograms
     map<string, Histo1DPtr> _h;
+
     YODA::Axis<double> _ptllAxis;
 
   };
 
-  // The hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(ATLAS_2022_I2614196);
+
 }
-
-

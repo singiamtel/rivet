@@ -35,7 +35,7 @@ namespace Rivet {
     /// Compare with other projections
     //int compare(const Projection& p) const;
     // Taken from Thrust.hh
-    CmpState compare(const Projection& p) const {
+    CmpState compare(const Projection&) const {
       return CmpState::EQ;
     }
 

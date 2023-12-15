@@ -63,9 +63,11 @@ namespace Rivet {
       declare(photonfs, "Photons");
     }
 
+    MergedFinalState mergedfs(photonfs, leptonfs);
+    declare(mergedfs, "Constituents");
+
     // Set up FJ clustering
     if (_dressMode == DressingType::AKT) {
-      MergedFinalState mergedfs(photonfs, leptonfs);
       FastJets leptonjets(mergedfs, JetAlg::ANTIKT, dRdress);
       declare(leptonjets, "LeptonJets");
     }
@@ -88,6 +90,7 @@ namespace Rivet {
     const PCmp sigcmp = mkNamedPCmp(p, "Leptons");
     if (sigcmp != CmpState::EQ) return sigcmp;
 
+    /// @todo Add a mode for the flavoured dressing
     if (_dressMode == DressingType::AKT) {
       const PCmp ljcmp = mkNamedPCmp(p, "LeptonJets");
       if (ljcmp != CmpState::EQ) return ljcmp;
@@ -109,64 +112,91 @@ namespace Rivet {
     Particles allClusteredLeptons;
     allClusteredLeptons.reserve(bareleptons.size());
 
-    if (_dressMode == DressingType::AKT) {
+    if (_dRdress <= 0 || _dressMode == DressingType::CONE) {
 
       // If the radius is 0 or negative, don't even attempt to cluster
-      if (_dRdress <= 0) {
-        for (const Particle& bl : bareleptons) {
-          Particle dl(bl.pid(), bl.momentum(), bl.genParticle(), bl.origin());
-          dl.setConstituents({bl});
-          allClusteredLeptons += dl;
-        }
-      } else {
-        const Jets& lepjets = apply<JetFinder>(e, "LeptonJets").jets();
-        for (const Jet& lepjet : lepjets) {
-          const Particles leps = sortByPt(lepjet.particles(isChargedLepton));
-          if (leps.empty()) continue;
-          Particles constituents = {leps[0]}; //< note no dressing for subleading leptons
-          Particle dl(leps[0].pid(), leps[0].momentum(), leps[0].genParticle(), leps[0].origin());
-          constituents += lepjet.particles(isPhoton);
-          dl.setConstituents(constituents);
-          allClusteredLeptons += dl;
-        }
-      }
-
-    } else {
-
       for (const Particle& bl : bareleptons) {
         Particle dl(bl.pid(), bl.momentum(), bl.genParticle(), bl.origin());
         dl.setConstituents({bl});
         allClusteredLeptons += dl;
       }
 
-      // If the radius is 0 or negative, don't even attempt to cluster
-      if (_dRdress > 0) {
-        // Match each photon to its closest charged lepton within the dR cone
-        const FinalState& photons = apply<FinalState>(e, "Photons");
-        for (const Particle& photon : photons.particles()) {
-          double dRmin = _dRdress;
-          int idx = -1;
-          for (size_t i = 0; i < bareleptons.size(); ++i) {
-            const Particle& bl = bareleptons[i];
-            // Only cluster photons around *charged* signal particles
-            if (bl.charge3() == 0) continue;
-            // Find the closest lepton
-            const double dR = deltaR(bl, photon);
-            if (dR < dRmin) {
-              dRmin = dR;
-              idx = i;
-            }
-          }
-          // Escape if no lepton found within the dRdress range
-          if (idx < 0) continue;
-
-          // Attach the photon to the closest in-range lepton
-          Particle& dl = allClusteredLeptons[idx];
-          MSG_DEBUG("Adding photon " << photon << " to dressed lepton #" << idx << ": " << dl);
-          dl.addConstituent(photon, true);
-        }
-      }
     }
+
+    // Decide how to perform the clustering
+    switch (_dressMode) {
+
+      case DressingType::CONE:
+
+        {
+          // Match each photon to its closest charged lepton within the dR cone
+          const FinalState& photons = apply<FinalState>(e, "Photons");
+          for (const Particle& photon : photons.particles()) {
+            double dRmin = _dRdress;
+            int idx = -1;
+            for (size_t i = 0; i < bareleptons.size(); ++i) {
+              const Particle& bl = bareleptons[i];
+              // Only cluster photons around *charged* signal particles
+              if (bl.charge3() == 0) continue;
+              // Find the closest lepton
+              const double dR = deltaR(bl, photon);
+              if (dR < dRmin) {
+                dRmin = dR;
+                idx = i;
+              }
+            }
+            // Escape if no lepton found within the dRdress range
+            if (idx < 0) continue;
+
+            // Attach the photon to the closest in-range lepton
+            Particle& dl = allClusteredLeptons[idx];
+            MSG_DEBUG("Adding photon " << photon << " to dressed lepton #" << idx << ": " << dl);
+            dl.addConstituent(photon, true);
+          }
+        }
+        break;
+
+
+      // case DressingType::AKT:
+      case DressingType::CLUSTER:
+
+        {
+          if (allClusteredLeptons.size()) {
+            allClusteredLeptons.clear();
+            allClusteredLeptons.reserve(bareleptons.size());
+          }
+          const Jets& lepjets = apply<JetFinder>(e, "LeptonJets").jets();
+          for (const Jet& lepjet : lepjets) {
+            const Particles leps = sortByPt(lepjet.particles(isChargedLepton));
+            if (leps.empty()) continue;
+            Particles constituents = {leps[0]}; //< note no dressing for subleading leptons
+            Particle dl(leps[0].pid(), leps[0].momentum(), leps[0].genParticle(), leps[0].origin());
+            constituents += lepjet.particles(isPhoton);
+            dl.setConstituents(constituents);
+            allClusteredLeptons += dl;
+          }
+        }
+        break;
+
+      // case DressingType::FLAVKT:
+      // case DressingType::FLAVCLUSTER:
+
+        // {
+        //   const Jets& lepjets = apply<JetFinder>(e, "LeptonJets").jets();
+        //   for (const Jet& lepjet : lepjets) {
+        //     const Particles leps = sortByPt(lepjet.particles(isChargedLepton));
+        //     if (leps.empty()) continue;
+        //     Particles constituents = {leps[0]}; //< note no dressing for subleading leptons
+        //     Particle dl(leps[0].pid(), leps[0].momentum(), leps[0].genParticle(), leps[0].origin());
+        //     constituents += lepjet.particles(isPhoton);
+        //     dl.setConstituents(constituents);
+        //     allClusteredLeptons += dl;
+        //   }
+        // }
+        // break;
+
+    }
+
 
     // Fill the canonical particles collection with the composite DL Particles
     for (const Particle& lepton : allClusteredLeptons) {

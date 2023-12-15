@@ -1,0 +1,90 @@
+// -*- C++ -*-
+#ifndef RIVET_MC_CENT_Projections_HH
+#define RIVET_MC_CENT_Projections_HH
+
+#include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
+#include "Rivet/Projections/SingleValueProjection.hh"
+#include "Rivet/Projections/TriggerProjection.hh"
+
+namespace Rivet {
+
+
+  /// Example of a centrality observable projection for pPb that uses
+  /// summed Et in the Pb direction.
+  ///
+  /// @todo Move into Projections?
+  class MC_SumETFwdPbCentrality : public SingleValueProjection {
+  public:
+
+    /// Constructor.
+    MC_SumETFwdPbCentrality() {
+      declare(FinalState(Cuts::eta < -3.2 && Cuts::eta > -4.9 && Cuts::pT > 0.1*GeV), "FSSumETFwdCentrality");
+    }
+
+    /// Clone on the heap.
+    RIVET_DEFAULT_PROJ_CLONE(MC_SumETFwdPbCentrality);
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+  protected:
+
+    /// Perform the projection on the Event
+    void project(const Event& e) {
+      clear();
+      const FinalState& fsfwd = apply<FinalState>(e, "FSSumETFwdCentrality");
+      double estimate = 0.0;
+      for (const Particle& p : fsfwd.particles()) estimate += p.Et();
+      setValue(estimate);
+    }
+
+    /// Compare projections
+    CmpState compare(const Projection& p) const {
+      return mkNamedPCmp(p, "FSSumETFwdCentrality");
+    }
+
+  };
+
+
+  /// Example of a trigger projection for minimum bias pPb requiring at
+  /// least one charged particle in both forward and backward direction.
+  ///
+  /// @todo Move into Projections?
+  class MC_pPbMinBiasTrigger : public TriggerProjection {
+  public:
+
+    /// Constructor.
+    MC_pPbMinBiasTrigger() {
+      declare(FinalState(Cuts::eta < -3.2 && Cuts::eta > -4.9 && Cuts::pT > 0.1*GeV), "FSSumETFwdCentrality");
+      declare(ChargedFinalState(Cuts::eta > 2.09 && Cuts::eta < 3.84 && Cuts::pT > 0.1*GeV), "MBB");
+      declare(ChargedFinalState(Cuts::eta < -2.09 && Cuts::eta > -3.84 && Cuts::pT > 0.1*GeV), "MBF");
+    }
+
+    /// Clone on the heap.
+    RIVET_DEFAULT_PROJ_CLONE(MC_pPbMinBiasTrigger);
+
+    /// Import to avoid warnings about overload-hiding
+    using Projection::operator =;
+
+  protected:
+
+    /// Perform the projection on the Event
+    void project(const Event& event) {
+      pass();
+      if ( apply<FinalState>(event,"MBF").particles().empty() ||
+           apply<FinalState>(event,"MBB").particles().empty() )
+        fail();
+    }
+
+    /// Compare projections
+    CmpState compare(const Projection& p) const {
+      return mkNamedPCmp(p, "MBF") || mkNamedPCmp(p, "MBB");
+    }
+
+  };
+
+
+}
+
+#endif

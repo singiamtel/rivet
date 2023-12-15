@@ -82,7 +82,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(DASP_1978_I129715);
 
 

@@ -14,7 +14,7 @@ namespace Rivet {
     /// The group bin is already being determined in the fill method.
     template <size_t FillDim, typename T, typename AxisT>
     typename YODA::FillableStorage<FillDim, T, AxisT>::FillAdapterT
-    groupAdapter = [](auto& ptr, auto&& coords, double weight, double fraction) { };
+    groupAdapter = [](auto& /* ptr */, auto&& /* coords */, double /* weight */, double /* fraction */) { };
 
   }
 

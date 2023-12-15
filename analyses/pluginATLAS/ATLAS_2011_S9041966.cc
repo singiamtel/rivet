@@ -526,8 +526,6 @@ namespace Rivet {
 
     }
 
-    //@}
-
 
     void finalize() {
       // cerr << '\n' << "Of " << count << " events, saw "
@@ -608,7 +606,6 @@ namespace Rivet {
     int mumuZCR, eeZCR, munuW2CR, munuttCR, enuW2CR, enuttCR;
 
   };
-
 
 
   RIVET_DECLARE_ALIASED_PLUGIN(ATLAS_2011_S9041966, ATLAS_2011_I897002);

@@ -63,7 +63,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(KLOE2_2017_I1634981);
 
 

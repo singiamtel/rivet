@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetSplittings.hh"
+#include "Rivet/Analyses/MC_KTSPLITTINGS_BASE.hh"
 #include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -7,12 +7,12 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for Z + jets events
-  class MC_ZKTSPLITTINGS : public MC_JetSplittings {
+  class MC_ZKTSPLITTINGS : public MC_KTSPLITTINGS_BASE {
   public:
 
     /// Default constructor
     MC_ZKTSPLITTINGS()
-      : MC_JetSplittings("MC_ZKTSPLITTINGS", 4, "Jets")
+      : MC_KTSPLITTINGS_BASE("MC_ZKTSPLITTINGS", 4, "Jets")
     {    }
 
 
@@ -38,7 +38,7 @@ namespace Rivet {
       FastJets jetpro(zfinder.remainingFinalState(), JetAlg::KT, R);
       declare(jetpro, "Jets");
 
-      MC_JetSplittings::init();
+      MC_KTSPLITTINGS_BASE::init();
     }
 
 
@@ -48,13 +48,13 @@ namespace Rivet {
       const DileptonFinder& zfinder = apply<DileptonFinder>(e, "DileptonFinder");
       if (zfinder.bosons().size() != 1) vetoEvent;
 
-      MC_JetSplittings::analyze(e);
+      MC_KTSPLITTINGS_BASE::analyze(e);
     }
 
 
     /// Finalize
     void finalize() {
-      MC_JetSplittings::finalize();
+      MC_KTSPLITTINGS_BASE::finalize();
     }
 
     /// @}

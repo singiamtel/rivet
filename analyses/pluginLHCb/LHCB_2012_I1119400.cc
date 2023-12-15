@@ -351,7 +351,6 @@ namespace Rivet {
     9900024, 9900041, 9900042 };
 
 
-  // Plugin hook
   RIVET_DECLARE_PLUGIN(LHCB_2012_I1119400);
 
 }

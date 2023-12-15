@@ -81,7 +81,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(OPAL_1993_I342766);
 
 

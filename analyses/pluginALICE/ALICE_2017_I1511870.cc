@@ -14,7 +14,7 @@ namespace Rivet {
 
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -126,22 +126,19 @@ namespace Rivet {
             // 1.034 is used to include the correction of the different shapes of the rapidity distributions of D0 and ccbar, the ALICE uncertainty on such a factor (1.034 ± 0.016, i.e. 1.5 percentage point of uncertainty) is not propagated here.
     }
 
-    //@}
+    /// @}
 
 
     /// @name Histograms
-    //@{
+    /// @{
     CounterPtr _h_wei;
     Histo1DPtr _h_D0, _h_Dplus, _h_Dstar, _h_Ds, _h_D0int, _h_Dplusint, _h_Dstarint, _h_Dsint, _h_cc, _h_D0full, _h_D0dummy, _h_D0dummy1, _h_Dplusdummy , _h_ccfull, _h_ptd0;
     Estimate1DPtr _h_DplusonD0, _h_DstaronD0, _h_DsonD0, _h_DsonDplus;
-    //@}
-
+    /// @}
 
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ALICE_2017_I1511870);
-
 
 }

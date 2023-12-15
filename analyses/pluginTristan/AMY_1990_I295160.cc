@@ -6,7 +6,8 @@ namespace Rivet {
 
 
   /// @brief Charged multiplicity below Z pole based on ALEPH Z pole analysis
-  // @author Peter Richardson
+  ///
+  /// @author Peter Richardson
   class AMY_1990_I295160 : public Analysis {
   public:
 
@@ -91,8 +92,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(AMY_1990_I295160);
-
 
 }

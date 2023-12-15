@@ -46,8 +46,14 @@ namespace Rivet {
     /// Clone on the heap.
     virtual unique_ptr<Projection> clone() const = 0;
 
-    /// The destructor.
-    virtual ~Projection();
+    /// Virtual destructor for safe inheritability.
+    virtual ~Projection() = default;
+
+    /// Suppress copy assignment.
+    virtual Projection& operator = (const Projection&) = delete;
+
+    /// Explicit (but not careful!) copy construction (required for clone()).
+    Projection(const Projection&) = default;
 
     /// @}
 
@@ -158,19 +164,12 @@ namespace Rivet {
     /// @note Alias for mkNamedPCmp
     Cmp<Projection> mkPCmp(const Projection& otherparent, const std::string& pname) const;
 
-    /// Block Projection copying
-    virtual Projection& operator = (const Projection&);
-
 
   private:
 
     /// Name variable is used by the base class messages to identify
     /// which derived class is being handled.
     string _name;
-
-    /// Beam-type constraint.
-    /// @todo Remove?
-    set<PdgIdPair> _beamPairs;
 
     /// Flag to tell if this projection is in a valid state.
     bool _isValid;

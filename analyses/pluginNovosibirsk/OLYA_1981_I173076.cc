@@ -67,7 +67,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(OLYA_1981_I173076);
 
 

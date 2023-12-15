@@ -28,6 +28,7 @@ namespace Rivet {
   /// @brief General \f$ N \f$-dimensional mathematical matrix object.
   template <size_t N>
   class Matrix {
+
     template <size_t M>
     friend Matrix<M> add(const Matrix<M>&, const Matrix<M>&);
     template <size_t M>
@@ -39,7 +40,9 @@ namespace Rivet {
     template <size_t M>
     friend Matrix<M> divide(const Matrix<M>&, const double);
 
+
   public:
+
     static Matrix<N> mkZero() {
       Matrix<N> rtn;
       return rtn;
@@ -65,8 +68,6 @@ namespace Rivet {
   public:
 
     Matrix() : _matrix(EMatrix::Zero()) {}
-
-    Matrix(const Matrix<N>& other) : _matrix(other._matrix) {}
 
     Matrix& set(const size_t i, const size_t j, const double value) {
       if (i < N && j < N) {

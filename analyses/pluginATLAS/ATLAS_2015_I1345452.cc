@@ -281,7 +281,6 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2015_I1345452);
 
 }

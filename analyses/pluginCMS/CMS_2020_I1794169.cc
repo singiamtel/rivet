@@ -147,8 +147,6 @@ namespace Rivet {
       scale(_h_WZ_mjj   , norm);
     }
 
-    //@}
-
 
   private:
 
@@ -161,7 +159,6 @@ namespace Rivet {
     /// @}
 
   };
-
 
 
   RIVET_DECLARE_PLUGIN(CMS_2020_I1794169);

@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetSplittings.hh"
+#include "Rivet/Analyses/MC_KTSPLITTINGS_BASE.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
@@ -9,12 +9,12 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for e+mu W^+W^- + jets events
-  class MC_WWKTSPLITTINGS : public MC_JetSplittings {
+  class MC_WWKTSPLITTINGS : public MC_KTSPLITTINGS_BASE {
   public:
 
     /// Default constructor
     MC_WWKTSPLITTINGS()
-      : MC_JetSplittings("MC_WWKTSPLITTINGS", 4, "Jets")
+      : MC_KTSPLITTINGS_BASE("MC_WWKTSPLITTINGS", 4, "Jets")
     {    }
 
 
@@ -48,7 +48,7 @@ namespace Rivet {
       FastJets fj(jetinput, JetAlg::KT, R);
       declare(fj, "Jets");
 
-      MC_JetSplittings::init();
+      MC_KTSPLITTINGS_BASE::init();
     }
 
 
@@ -70,13 +70,13 @@ namespace Rivet {
       // Require two valid W candidates
       if (iefound < 0 || imfound < 0) vetoEvent;
 
-      MC_JetSplittings::analyze(event);
+      MC_KTSPLITTINGS_BASE::analyze(event);
     }
 
 
     /// Finalize
     void finalize() {
-      MC_JetSplittings::finalize();
+      MC_KTSPLITTINGS_BASE::finalize();
     }
 
     /// @}

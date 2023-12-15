@@ -69,7 +69,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(TOPAZ_1997_I454183);
 
 

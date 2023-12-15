@@ -1047,7 +1047,6 @@ namespace Rivet {
   };
 
 
-
   RIVET_DECLARE_PLUGIN(ATLAS_2012_I1204447);
 
 }

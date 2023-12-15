@@ -25,20 +25,20 @@ namespace Rivet {
 
 
   /// Take a jet and return a constant 0
-  inline double JET_EFF_ZERO(const Jet& p) { return 0; }
+  inline double JET_EFF_ZERO(const Jet&) { return 0; }
   /// Alias for JET_EFF_ZERO
-  inline double JET_EFF_0(const Jet& p) { return 0; }
+  inline double JET_EFF_0(const Jet&) { return 0; }
   /// Alias for JET_EFF_ZERO
-  inline double JET_FN0(const Jet& p) { return 0; }
+  inline double JET_FN0(const Jet&) { return 0; }
 
   /// Take a jet and return a constant 1
-  inline double JET_EFF_ONE(const Jet& p) { return 1; }
+  inline double JET_EFF_ONE(const Jet&) { return 1; }
   /// Alias for JET_EFF_ONE
-  inline double JET_EFF_1(const Jet& p) { return 1; }
+  inline double JET_EFF_1(const Jet&) { return 1; }
   /// Alias for JET_EFF_ONE
-  inline double JET_EFF_PERFECT(const Jet& ) { return 1; }
+  inline double JET_EFF_PERFECT(const Jet&) { return 1; }
   /// Alias for JET_EFF_ONE
-  inline double JET_FN1(const Jet& ) { return 1; }
+  inline double JET_FN1(const Jet&) { return 1; }
 
   /// Take a Jet and return a constant efficiency
   struct JET_EFF_CONST {
@@ -143,7 +143,7 @@ namespace Rivet {
   struct JetEffFilter {
     template <typename FN>
     JetEffFilter(const FN& feff) : _feff(feff) {}
-    JetEffFilter(double eff) : JetEffFilter( [&](const Jet& j){return eff;} ) {}
+    JetEffFilter(double eff) : JetEffFilter( [&](const Jet&){return eff;} ) {}
     bool operator () (const Jet& j) const { return efffilt(j, _feff); }
   private:
     const JetEffFn _feff;

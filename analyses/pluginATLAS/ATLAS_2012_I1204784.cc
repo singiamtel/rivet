@@ -13,8 +13,6 @@ namespace Rivet {
       RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1204784);
 
 
-    public:
-
       /// Book histograms and initialise projections before the run
       void init() {
         Cut cuts = Cuts::abseta < 2.4 && Cuts::pT > 20*GeV;
@@ -90,8 +88,6 @@ namespace Rivet {
         normalize(_h_phistar_el_dressed);
       }
 
-      //@}
-
 
     private:
 
@@ -125,7 +121,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2012_I1204784);
 
 }

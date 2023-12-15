@@ -68,16 +68,12 @@ namespace Rivet {
 
   private:
 
-    /// @name Histograms
-    Histo1DPtr _h_hTotD;
-    Histo1DPtr _h_hTotDF;
-    //@}
+    /// Histograms
+    Histo1DPtr _h_hTotD, _h_hTotDF;
 
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2013_I1265659);
 
 }

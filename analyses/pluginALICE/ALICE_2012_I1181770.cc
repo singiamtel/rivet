@@ -4,6 +4,7 @@
 
 namespace Rivet {
 
+
   class ALICE_2012_I1181770 : public Analysis {
   public:
 
@@ -100,7 +101,7 @@ namespace Rivet {
 
   };
 
-  // Hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(ALICE_2012_I1181770);
 
 }

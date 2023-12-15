@@ -254,7 +254,6 @@ namespace Rivet {
   template <typename NUM>
   constexpr inline typename std::enable_if<std::is_arithmetic<NUM>::value, NUM>::type
   intpow(NUM val, unsigned int exp) {
-    assert(exp >= 0);
     if (exp == 0) return (NUM) 1;
     else if (exp == 1) return val;
     return val * intpow(val, exp-1);

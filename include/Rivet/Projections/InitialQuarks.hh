@@ -51,7 +51,9 @@ namespace Rivet {
     virtual void project(const Event& e);
 
     /// Compare projections.
-    virtual CmpState compare(const Projection& p) const;
+    virtual CmpState compare(const Projection&) const {
+      return CmpState::EQ;
+    }
 
 
   protected:
@@ -61,7 +63,7 @@ namespace Rivet {
 
   };
 
-}
 
+}
 
 #endif

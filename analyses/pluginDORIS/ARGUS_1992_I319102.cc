@@ -140,7 +140,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ARGUS_1992_I319102);
 
 

@@ -9,8 +9,6 @@
 namespace Rivet {
 
 
-
-
   class MC_TTBAR : public Analysis {
   public:
 
@@ -298,7 +296,7 @@ namespace Rivet {
 
   private:
 
-    // @name Histogram data members
+    /// @name Histogram data members
     /// @{
     map<string, Histo1DPtr> _h;
     /// @}
@@ -306,8 +304,6 @@ namespace Rivet {
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_TTBAR);
 
 }

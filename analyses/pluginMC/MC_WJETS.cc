@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetAnalysis.hh"
+#include "Rivet/Analyses/MC_JETS_BASE.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
@@ -10,12 +10,12 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for W + jets events
-  class MC_WJETS : public MC_JetAnalysis {
+  class MC_WJETS : public MC_JETS_BASE {
   public:
 
     /// Default constructor
     MC_WJETS(string name="MC_WJETS")
-      : MC_JetAnalysis(name, 4, "Jets")
+      : MC_JETS_BASE(name, 4, "Jets")
     {  }
 
 
@@ -62,7 +62,7 @@ namespace Rivet {
       book(_h_W_jet1_deta, "W_jet1_deta", 50, -5.0, 5.0);
       book(_h_W_jet1_dR, "W_jet1_dR", 25, 0.5, 7.0);
 
-      MC_JetAnalysis::init();
+      MC_JETS_BASE::init();
     }
 
 
@@ -86,7 +86,7 @@ namespace Rivet {
         _h_W_jet1_dR->fill(deltaR(wmom, jets[0].momentum()));
       }
 
-      MC_JetAnalysis::analyze(event);
+      MC_JETS_BASE::analyze(event);
     }
 
 
@@ -94,7 +94,7 @@ namespace Rivet {
     void finalize() {
       scale(_h_W_jet1_deta, crossSection()/picobarn/sumOfWeights());
       scale(_h_W_jet1_dR, crossSection()/picobarn/sumOfWeights());
-      MC_JetAnalysis::finalize();
+      MC_JETS_BASE::finalize();
     }
 
     /// @}

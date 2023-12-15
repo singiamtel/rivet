@@ -60,15 +60,14 @@ namespace Rivet {
 
 
     /// @name Histograms
-    //@{
+    /// @{
     Histo1DGroupPtr _hist_sigmaAK4;
     Histo1DGroupPtr _hist_sigmaAK7;
-    //@}
+    /// @}
 
   };
 
 
-  // This global object acts as a hook for the plugin system.
   RIVET_DECLARE_PLUGIN(CMS_2021_I1972986);
 
 }

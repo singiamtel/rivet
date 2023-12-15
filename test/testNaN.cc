@@ -18,7 +18,7 @@ public:
     book(_h_test, "test", 50, 66.0, 116.0);
   }
 
-  void analyze(const Rivet::Event & e) {
+  void analyze(const Rivet::Event& /* e */) {
     cout << "Normal fill" << endl;
     _h_test->fill(90.);
 
@@ -47,14 +47,13 @@ private:
 
 RIVET_DECLARE_PLUGIN(NanTest);
 
-int main(int argc, char* argv[]) {
-  assert(argc > 1);
+int main() {
 
   Rivet::AnalysisHandler rivet;
   rivet.addAnalysis("NanTest");
 
   std::shared_ptr<std::istream> file;
-  shared_ptr<Rivet::HepMC_IO_type> reader = Rivet::HepMCUtils::makeReader("testApi.hepmc", file);
+  shared_ptr<Rivet::HepMC_IO_type> reader = Rivet::HepMCUtils::makeReader("testAPI.hepmc", file);
   std::shared_ptr<Rivet::GenEvent> evt = make_shared<Rivet::GenEvent>();
   double sum_of_weights = 0.0;
 

@@ -97,6 +97,7 @@ namespace Rivet {
 
   };
 
-  // The hooks for the plugin system
+
   RIVET_DECLARE_PLUGIN(MC_ZINC);
+
 }

@@ -203,14 +203,15 @@ namespace Rivet {
       scale(_d, xsec);
     } // end of finalize
 
-    //@}
 
-    // define histograms
+    // Define histograms
     size_t _mode;
     map<string, Histo1DPtr> _h;
     map<string, BinnedHistoPtr<int>> _d;
 
   };
 
+
   RIVET_DECLARE_PLUGIN(ATLAS_2022_I2077570);
+
 }

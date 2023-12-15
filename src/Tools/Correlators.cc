@@ -148,10 +148,10 @@ namespace Rivet {
   // Project function. Loops over array and calculates Q vectors
   void Correlators::project(const Event& e) {
     setToZero();
-    // @TODO: Weight could be implemented to account for non-uniform
-    // acceptance if detector simulation is needed. If not, the weight
-    // can be unity. Note that this weight is not the MC event weight, which
-    // should be used when filling histograms (as usual).
+    /// @todo Weight could be implemented to account for non-uniform
+    /// acceptance if detector simulation is needed. If not, the weight
+    /// can be unity. Note that this weight is not the MC event weight, which
+    /// should be used when filling histograms (as usual).
     const double w = 1.0;;
     const Particles& parts = apply<ParticleFinder>(e, "FS").particles();
     // Check that we have at least two particles in the event

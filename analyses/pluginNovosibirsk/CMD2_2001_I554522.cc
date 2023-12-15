@@ -108,7 +108,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMD2_2001_I554522);
 
 

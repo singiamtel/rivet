@@ -24,7 +24,7 @@ namespace Rivet {
       FastJets jetsproj4(cfs, JetAlg::ANTIKT, 0.4);
       declare(jetsproj4, "Jets4");
 
-      // @todo tmp YOs
+      /// @todo tmp YOs
       for (size_t i=0 ; i<2 ; i++) {
         book(_h_xsec[i]       ,1+i, 1, 1);
         book(_h_frag_04_06[i] ,3+i, 1, 1);
@@ -115,11 +115,10 @@ namespace Rivet {
     CounterPtr _njets_06_10[2];
     CounterPtr _njets_10_15[2];
     CounterPtr _njets_15_24[2];
+
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2010_CONF_2010_049);
 
 }

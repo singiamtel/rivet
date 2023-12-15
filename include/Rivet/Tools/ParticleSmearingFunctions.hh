@@ -107,7 +107,7 @@ namespace Rivet {
   struct ParticleEffFilter {
     template <typename FN>
     ParticleEffFilter(const FN& feff) : _feff(feff) {}
-    ParticleEffFilter(double eff) : ParticleEffFilter( [&](const Particle& p){return eff;} ) {}
+    ParticleEffFilter(double eff) : ParticleEffFilter( [&](const Particle& ){ return eff; } ) {}
     bool operator () (const Particle& p)  const { return efffilt(p, _feff); }
   private:
     const ParticleEffFn _feff;

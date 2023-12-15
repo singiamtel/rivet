@@ -12,7 +12,8 @@ namespace Rivet {
   public:
 
     /// @name Standard constructors etc.
-    //@{
+    /// @{
+
     /// Constructor.
     DecayedParticles() {}
 
@@ -29,7 +30,8 @@ namespace Rivet {
 
     /// Virtual destructor.
     virtual ~DecayedParticles() { }
-    //@}
+
+    ///@}
 
   public :
 

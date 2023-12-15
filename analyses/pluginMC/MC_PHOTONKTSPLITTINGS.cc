@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetSplittings.hh"
+#include "Rivet/Analyses/MC_KTSPLITTINGS_BASE.hh"
 #include "Rivet/Projections/LeadingParticlesFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
@@ -10,12 +10,12 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for photon + jets events
-  class MC_PHOTONKTSPLITTINGS : public MC_JetSplittings {
+  class MC_PHOTONKTSPLITTINGS : public MC_KTSPLITTINGS_BASE {
   public:
 
     /// Default constructor
     MC_PHOTONKTSPLITTINGS()
-      : MC_JetSplittings("MC_PHOTONKTSPLITTINGS", 4, "Jets")
+      : MC_KTSPLITTINGS_BASE("MC_PHOTONKTSPLITTINGS", 4, "Jets")
     {    }
 
 
@@ -48,7 +48,7 @@ namespace Rivet {
       FastJets jetpro(vfs, JetAlg::KT, R);
       declare(jetpro, "Jets");
 
-      MC_JetSplittings::init();
+      MC_KTSPLITTINGS_BASE::init();
     }
 
 
@@ -80,13 +80,13 @@ namespace Rivet {
         }
       }
 
-      MC_JetSplittings::analyze(e);
+      MC_KTSPLITTINGS_BASE::analyze(e);
     }
 
 
     // Finalize
     void finalize() {
-      MC_JetSplittings::finalize();
+      MC_KTSPLITTINGS_BASE::finalize();
     }
 
     /// @}
@@ -94,8 +94,6 @@ namespace Rivet {
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_PHOTONKTSPLITTINGS);
 
 }

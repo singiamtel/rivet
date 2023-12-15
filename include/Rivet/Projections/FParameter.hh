@@ -75,7 +75,7 @@ namespace Rivet {
     /// Manually calculate the sphericity, without engaging the caching system
     void calc(const vector<Vector3>& fsmomenta);
 
-    //@}
+    /// @}
 
 
   protected:

@@ -154,7 +154,6 @@ namespace Rivet {
   };
 
 
-  // Plugin system hook
   RIVET_DECLARE_PLUGIN(CMS_2013_I1258128);
 
 }

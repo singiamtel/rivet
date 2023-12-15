@@ -72,7 +72,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(TASSO_1989_I278856);
 
 

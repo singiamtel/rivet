@@ -104,16 +104,12 @@ namespace Rivet {
       normalize(_hists);
     }
 
-    //@}
-
-
     /// Histograms
     map<string, Histo1DPtr> _hists;
 
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2016_I1479760);
 
 }

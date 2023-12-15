@@ -32,7 +32,7 @@ namespace Rivet {
       setValue(apply<HepMCHeavyIon>(e, "HepMC").user_cent_estimate());
     }
 
-    CmpState compare(const Projection& p) const {
+    CmpState compare(const Projection&) const {
       return CmpState::EQ;
     }
 

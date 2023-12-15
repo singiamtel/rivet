@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetAnalysis.hh"
+#include "Rivet/Analyses/MC_JETS_BASE.hh"
 #include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
@@ -9,12 +9,12 @@ namespace Rivet {
 
   
   /// @brief MC validation analysis for Higgs-pair events (stable Higgses)
-  class MC_HHJETS : public MC_JetAnalysis {
+  class MC_HHJETS : public MC_JETS_BASE {
   public:
 
     /// Default constructor
     MC_HHJETS()
-      : MC_JetAnalysis("MC_HHJETS", 4, "Jets")
+      : MC_JETS_BASE("MC_HHJETS", 4, "Jets")
     {    }
 
 
@@ -69,7 +69,7 @@ namespace Rivet {
       book(_h_H_jet1_deta ,"H_jet1_deta", 50, -5.0, 5.0);
       book(_h_H_jet1_dR ,"H_jet1_dR", 25, 0.5, 7.0);
 
-      MC_JetAnalysis::init();
+      MC_JETS_BASE::init();
     }
 
 
@@ -115,7 +115,7 @@ namespace Rivet {
         _h_H_jet1_dR->fill(deltaR(hmom, jets[0]));
       }
 
-      MC_JetAnalysis::analyze(e);
+      MC_JETS_BASE::analyze(e);
     }
 
 
@@ -136,7 +136,7 @@ namespace Rivet {
       scale(_h_H_jet1_deta, crossSection()/sumOfWeights());
       scale(_h_H_jet1_dR, crossSection()/sumOfWeights());
 
-      MC_JetAnalysis::finalize();
+      MC_JETS_BASE::finalize();
     }
 
     /// @}
@@ -154,7 +154,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_HHJETS);
 
 }

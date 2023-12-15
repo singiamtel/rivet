@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_ParticleAnalysis.hh"
+#include "Rivet/Analyses/MC_PARTICLES_BASE.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
 
@@ -7,11 +7,11 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for electrons
-  class MC_ELECTRONS : public MC_ParticleAnalysis {
+  class MC_ELECTRONS : public MC_PARTICLES_BASE {
   public:
 
     MC_ELECTRONS()
-      : MC_ParticleAnalysis("MC_ELECTRONS", 2, "electron")
+      : MC_PARTICLES_BASE("MC_ELECTRONS", 2, "electron")
     {    }
 
 
@@ -29,18 +29,18 @@ namespace Rivet {
         declare(dleps, "Electrons");
       }
 
-      MC_ParticleAnalysis::init();
+      MC_PARTICLES_BASE::init();
     }
 
 
     void analyze(const Event& event) {
       const Particles es = apply<ParticleFinder>(event, "Electrons").particlesByPt(Cuts::pT > 0.5*GeV);
-      MC_ParticleAnalysis::_analyze(event, es);
+      MC_PARTICLES_BASE::_analyze(event, es);
     }
 
 
     void finalize() {
-      MC_ParticleAnalysis::finalize();
+      MC_PARTICLES_BASE::finalize();
     }
 
   };

@@ -114,7 +114,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(LHCB_2013_I1218996);
 
 }

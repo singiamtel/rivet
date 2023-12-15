@@ -69,10 +69,10 @@ namespace Rivet {
   /// @{
 
   /// Take a Vector3 and return 0
-  inline double P3_EFF_ZERO(const Vector3& p) { return 0; }
+  inline double P3_EFF_ZERO(const Vector3&) { return 0; }
 
   /// Take a Vector3 and return 1
-  inline double P3_EFF_ONE(const Vector3& p) { return 1; }
+  inline double P3_EFF_ONE(const Vector3&) { return 1; }
 
   /// Take a Vector3 and return a constant number
   struct P3_EFF_CONST {
