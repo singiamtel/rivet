@@ -93,6 +93,9 @@ namespace Rivet {
       return (int)icurr;
     }
 
+    /// Returns current cutflow index for debugging
+    size_t currentIndex() const {  return icurr; }
+
     /// Scale the cutflow weights by the given factor
     void scale(const double factor) {
       BaseT::scaleW(factor);
