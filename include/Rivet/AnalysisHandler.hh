@@ -344,6 +344,9 @@ namespace Rivet {
       _bootstrapfilename = filename;
     }
 
+    /// Return a vector of (AO path, AO numBins) pairs to decode the fills layout
+    vector<pair<string,size_t>> fillLayout() const;
+
     /// Return a vector of the binary fill outcome (was/wasn't filled) at each fill position
     vector<bool> fillOutcomes() const;
 

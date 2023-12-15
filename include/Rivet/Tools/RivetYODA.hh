@@ -1278,7 +1278,7 @@ namespace Rivet {
         _fillOutcomes.resize(nPos);
         _fillFractions.resize(nPos);
       }
-     }
+    }
 
     /// @}
 

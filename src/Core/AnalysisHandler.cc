@@ -517,6 +517,19 @@ namespace Rivet {
   }
 
 
+  vector<pair<string,size_t>> AnalysisHandler::fillLayout() const {
+    if (!_initialised)
+      throw UserError("AnalysisHandler::init has not been called yet!");
+    vector<pair<string,size_t>> rtn;
+    for (const AnaHandle& a : analyses()) {
+      for (const auto& ao : a->analysisObjects()) {
+        rtn.push_back({ao.get()->basePath(), ao.get()->fillOutcomes().size() });
+      }
+    }
+    return rtn;
+  }
+
+
   vector<bool> AnalysisHandler::fillOutcomes() const {
     vector<bool> rtn;
     for (const AnaHandle& a : analyses()) {

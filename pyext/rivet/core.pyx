@@ -137,6 +137,10 @@ cdef class AnalysisHandler:
         "Declare to finalize the current status of this AH's histograms to file every <period> events"
         self._ptr.setFinalizePeriod(name, period)
 
+    def fillLayout(self):
+        "Return vector of (AO path, AO numBins) pairs to decode the fills layout"
+        return self._ptr.fillLayout()
+
     def fillOutcomes(self):
         "Return vector of Booleans representing the fill outcomes"
         return self._ptr.fillOutcomes()
