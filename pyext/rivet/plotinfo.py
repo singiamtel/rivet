@@ -99,7 +99,7 @@ class PlotParser(object):
          * Caching! The result of the lookup is not cached so every call requires a file to be searched for and opened.
         """
         if sections not in ['SPECIAL']:
-            raise ValueError("Can't parse section \'%s\'" % section)
+            raise ValueError("Can't parse sections \'%s\'" % sections)
 
         ## Decompose the histo path and remove the /REF prefix if necessary
         from rivet.aopaths import AOPath
