@@ -56,7 +56,7 @@ namespace Rivet {
     }
 
     // Perform the per-event analysis
-    void analyze(const Event& event) {
+    void analyze(const Event&) {
       h->fill(value);
 
     }
@@ -81,7 +81,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_OPTIONS);
 
 }

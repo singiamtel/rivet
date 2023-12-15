@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetAnalysis.hh"
+#include "Rivet/Analyses/MC_JETS_BASE.hh"
 #include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -8,12 +8,12 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for Z[ee]Z[mumu] + jets events
-  class MC_ZZJETS : public MC_JetAnalysis {
+  class MC_ZZJETS : public MC_JETS_BASE {
   public:
 
     /// Default constructor
     MC_ZZJETS()
-      : MC_JetAnalysis("MC_ZZJETS", 4, "Jets")
+      : MC_JETS_BASE("MC_ZZJETS", 4, "Jets")
     {    }
 
 
@@ -76,7 +76,7 @@ namespace Rivet {
       // Global stuff
       book(_h_HT ,"HT", logspace(100, 100.0, 0.5*(sqrtS()>0.?sqrtS():14000.)/GeV));
 
-      MC_JetAnalysis::init();
+      MC_JETS_BASE::init();
     }
 
 
@@ -111,7 +111,7 @@ namespace Rivet {
       const double HT = sum(jets, Kin::pT, ep.pT() + em.pT() + mp.pT() + mm.pT());
       if (HT > 0.0) _h_HT->fill(HT/GeV);
 
-      MC_JetAnalysis::analyze(e);
+      MC_JETS_BASE::analyze(e);
     }
 
 
@@ -122,7 +122,7 @@ namespace Rivet {
       scale(_h_ZZ_jet1_dR, s);
       scale(_h_Ze_jet1_dR, s);
       scale(_h_HT, s);
-      MC_JetAnalysis::finalize();
+      MC_JETS_BASE::finalize();
     }
 
     /// @}
@@ -142,7 +142,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_ZZJETS);
 
 }

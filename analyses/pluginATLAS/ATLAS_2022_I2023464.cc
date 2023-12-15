@@ -19,7 +19,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR( ATLAS_2022_I2023464 );
 
     /// @name Analysis methods
-    //@{
+    /// @{
     void init() {
       // Project all final state particles (for missing ET)
       const FinalState fs ( Cuts::abseta < 5.5 ) ;
@@ -434,6 +434,9 @@ namespace Rivet {
       scale(_d, xs);
     }
 
+    /// @}
+
+
     double tau_jet(const FourMomentum& Higgs, const Jet& jet ) const {
       const double mTj = sqrt( sqr(jet.pT()) + sqr(jet.mass()) );
       return mTj/(2.0*cosh( jet.rap() - Higgs.rap() ) ) ;
@@ -468,15 +471,16 @@ namespace Rivet {
       else          _d[name]->fill(edge);
     }
 
+
   private:
 
     map<string,Histo1DPtr> _h;
     map<string,BinnedHistoPtr<string>> _d;
     map<string, vector<string>> edges;
 
-    //@}
-  } ;
+  };
 
-  // This is a required hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(ATLAS_2022_I2023464);
+
 }

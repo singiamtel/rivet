@@ -761,7 +761,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(PDG_HADRON_MULTIPLICITIES);
 
 }

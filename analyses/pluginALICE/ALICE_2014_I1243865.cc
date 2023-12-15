@@ -7,6 +7,7 @@
 
 namespace Rivet {
 
+
   class ALICE_2014_I1243865 : public Analysis {
 
   // @brief Multi-strange baryon production at mid-rapidity in 2.76 TeV Pb--Pb collisions
@@ -142,7 +143,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ALICE_2014_I1243865);
 
 }

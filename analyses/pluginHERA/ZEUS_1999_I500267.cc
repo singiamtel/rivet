@@ -62,7 +62,6 @@ class ZEUS_1999_I500267 : public Analysis {
       Histo1DPtr _h_x[3];
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ZEUS_1999_I500267);
 
 

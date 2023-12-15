@@ -6,6 +6,7 @@
 
 namespace Rivet {
 
+
     /// @brief MC analysis to compute semi-leptonic branching ratios of heavy-flavour hadrons
     class MC_HFBRANCHING : public Analysis {
     public:
@@ -14,7 +15,7 @@ namespace Rivet {
       RIVET_DEFAULT_ANALYSIS_CTOR(MC_HFBRANCHING);
 
       /// @name Analysis methods
-      //@{
+      /// @{
 
       const string hadron_id(const int pid) const {
         switch (pid) {
@@ -278,19 +279,19 @@ namespace Rivet {
         normalize(_h);
       }
 
-      //@}
+      /// @}
 
 
     private:
-      // @name Histograms
-      //@{
+      /// @name Histograms
+      /// @{
       map<string, Histo1DPtr> _h;
-      //@}
+      /// @}
       LorentzTransform _boost;
 
   };
 
-  // The hooks for the plugin system
-  RIVET_DECLARE_PLUGIN(MC_HFBRANCHING);
-}
 
+  RIVET_DECLARE_PLUGIN(MC_HFBRANCHING);
+
+}

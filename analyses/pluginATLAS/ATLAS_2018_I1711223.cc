@@ -18,7 +18,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2018_I1711223);
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -244,27 +244,26 @@ namespace Rivet {
     }
 
 
- //@}
+    /// @}
 
   private:
 
 
     /// @name Histograms
-    //@{
-
+    /// @{
     map<string, Histo1DPtr> _h;
     map<string, BinnedHistoPtr<string>> _d;
     map<string, Estimate1DPtr> _s;
+    /// @}
 
-    //@}
-
-    double MZ_PDG = 91.1876;
-    double MW_PDG = 80.385;
-    double GammaZ_PDG = 2.4952;
-    double GammaW_PDG = 2.085;
+    const double MZ_PDG = 91.1876;
+    const double MW_PDG = 80.385;
+    const double GammaZ_PDG = 2.4952;
+    const double GammaW_PDG = 2.085;
 
   };
 
-  // The hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(ATLAS_2018_I1711223);
+
 }

@@ -39,7 +39,7 @@ namespace Rivet {
     
   protected:
 
-    virtual void project(const Event& e) {
+    virtual void project(const Event&) {
       pass();
     }
 

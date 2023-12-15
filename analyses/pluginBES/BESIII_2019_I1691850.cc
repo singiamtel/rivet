@@ -384,7 +384,6 @@ namespace Rivet {
   };
 
 
-
   RIVET_DECLARE_PLUGIN(BESIII_2019_I1691850);
 
 }

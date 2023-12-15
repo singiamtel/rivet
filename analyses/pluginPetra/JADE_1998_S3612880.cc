@@ -120,8 +120,6 @@ namespace Rivet {
       _h[name]->fill(edge);
     }
 
-    //@}
-
 
   private:
 
@@ -130,7 +128,6 @@ namespace Rivet {
     map<string, YODA::Axis<double>> _axes;
 
   };
-
 
 
   RIVET_DECLARE_ALIASED_PLUGIN(JADE_1998_S3612880, JADE_1998_I447560);

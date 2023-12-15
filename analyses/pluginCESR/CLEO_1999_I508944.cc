@@ -94,7 +94,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CLEO_1999_I508944);
 
 

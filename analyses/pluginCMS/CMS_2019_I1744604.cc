@@ -169,7 +169,7 @@ namespace Rivet {
 
       /* find unknown pz component of missing transverse momentum by imposing
          a W boson mass constraint */
-      std::pair<FourMomentum,FourMomentum> nuMomentum = NuMomentum(
+      pair<FourMomentum,FourMomentum> nuMomentum = NuMomentum(
         dressedLeptons[0].px(), dressedLeptons[0].py(), dressedLeptons[0].pz(),
         dressedLeptons[0].E(), met.px(), met.py()
       );
@@ -275,8 +275,6 @@ namespace Rivet {
       }
     }
 
-    //@}
-
 
   private:
 
@@ -349,7 +347,7 @@ namespace Rivet {
     /** @brief helper function to solve for the unknown neutrino pz momentum
      *  using a W boson mass constraint
      */
-    std::pair<FourMomentum,FourMomentum> NuMomentum(
+    pair<FourMomentum,FourMomentum> NuMomentum(
       double pxlep, double pylep, double pzlep,
       double elep, double metpx, double metpy
     ) {
@@ -360,10 +358,10 @@ namespace Rivet {
       double misET2 = (metpx * metpx + metpy * metpy);
       double mu = (WMASS * WMASS) / 2 + metpx * pxlep + metpy * pylep;
       double a  = (mu * pzlep) / (elep * elep - pzlep * pzlep);
-      double a2 = std::pow(a, 2);
+      double a2 = pow(a, 2);
 
-      double b  = (std::pow(elep, 2.) * (misET2) - std::pow(mu, 2.))
-                  / (std::pow(elep, 2) - std::pow(pzlep, 2));
+      double b  = (pow(elep, 2.) * (misET2) - pow(mu, 2.))
+                  / (pow(elep, 2) - pow(pzlep, 2));
 
       double pz1(0), pz2(0), pznu(0), pznu2(0);
 
@@ -460,7 +458,7 @@ namespace Rivet {
                                  + (pyZeroValue - metpy) * (pyZeroValue - metpy);
 
         if (deltaMin == 14000 * 14000) {
-          return std::make_pair(result, result2);
+          return make_pair(result, result2);
         }
 
         if (delta2ZeroValue < deltaMin) {
@@ -478,28 +476,28 @@ namespace Rivet {
         double Enu = sqrt(minPx * minPx + minPy * minPy + pznu * pznu);
         result.setXYZE(minPx, minPy, pznu , Enu);
       }
-      return std::make_pair(result, result2);
+      return make_pair(result, result2);
     }
 
 
     /// @brief helper function find root of the cubic equation a*x^3 + b*x^2 + c*x + d = 0
-    std::vector<double> EquationSolve(
+    vector<double> EquationSolve(
       double a, double b,
       double c, double d
     ) {
-      std::vector<double> result;
+      vector<double> result;
 
-      std::complex<double> x1;
-      std::complex<double> x2;
-      std::complex<double> x3;
+      complex<double> x1;
+      complex<double> x2;
+      complex<double> x3;
 
       double q = (3 * a * c - b * b) / (9 * a * a);
       double r = (9 * a * b * c - 27 * a * a * d - 2 * b * b * b
                  ) / (54 * a * a * a);
       double Delta = q * q * q + r * r;
 
-      std::complex<double> s;
-      std::complex<double> t;
+      complex<double> s;
+      complex<double> t;
 
       double rho = 0;
       double theta = 0;
@@ -509,27 +507,27 @@ namespace Rivet {
 
         theta = acos(r / rho);
 
-        s = std::polar<double>(sqrt(-q), theta / 3.0);
-        t = std::polar<double>(sqrt(-q), -theta / 3.0);
+        s = polar<double>(sqrt(-q), theta / 3.0);
+        t = polar<double>(sqrt(-q), -theta / 3.0);
       }
 
       if (Delta > 0) {
-        s = std::complex<double>(cbrt(r + sqrt(Delta)), 0);
-        t = std::complex<double>(cbrt(r - sqrt(Delta)), 0);
+        s = complex<double>(cbrt(r + sqrt(Delta)), 0);
+        t = complex<double>(cbrt(r - sqrt(Delta)), 0);
       }
 
-      std::complex<double> i(0, 1.0);
+      complex<double> i(0, 1.0);
 
 
-      x1 = s + t + std::complex<double>(-b / (3.0 * a), 0);
+      x1 = s + t + complex<double>(-b / (3.0 * a), 0);
 
-      x2 = (s + t) * std::complex<double>(-0.5, 0)
-           - std::complex<double>(b / (3.0 * a), 0)
-           + (s - t) * i * std::complex<double>(sqrt(3) / 2.0, 0);
+      x2 = (s + t) * complex<double>(-0.5, 0)
+           - complex<double>(b / (3.0 * a), 0)
+           + (s - t) * i * complex<double>(sqrt(3) / 2.0, 0);
 
-      x3 = (s + t) * std::complex<double>(-0.5, 0)
-           - std::complex<double>(b / (3.0 * a), 0)
-           - (s - t) * i * std::complex<double>(sqrt(3) / 2.0, 0);
+      x3 = (s + t) * complex<double>(-0.5, 0)
+           - complex<double>(b / (3.0 * a), 0)
+           - (s - t) * i * complex<double>(sqrt(3) / 2.0, 0);
 
       if (fabs(x1.imag()) < 0.0001) result.push_back(x1.real());
       if (fabs(x2.imag()) < 0.0001) result.push_back(x2.real());

@@ -85,7 +85,8 @@ namespace Rivet {
       if (met_vec.mod() > 150*GeV && photons.size()==1){
 
 	  //inclusive case (Njet>=0)
-	  if (jets.size()>=0){
+	  //if (jets.size()>=0){ //< size is always >= 0
+          {
 	    bool dR_veto = any(jets, DeltaRLess(photons[0], 0.3));
 	    if (not dR_veto) {
 	      double Et_photon = photons[0].Et()/GeV;

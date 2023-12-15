@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetAnalysis.hh"
+#include "Rivet/Analyses/MC_JETS_BASE.hh"
 #include "Rivet/Projections/LeadingParticlesFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
@@ -8,12 +8,12 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for photon + jets events
-  class MC_PHOTONJETS : public MC_JetAnalysis {
+  class MC_PHOTONJETS : public MC_JETS_BASE {
   public:
 
     /// Default constructor
     MC_PHOTONJETS()
-      : MC_JetAnalysis("MC_PHOTONJETS", 4, "Jets")
+      : MC_JETS_BASE("MC_PHOTONJETS", 4, "Jets")
     {    }
 
 
@@ -67,7 +67,7 @@ namespace Rivet {
       book(_h_photon_jet1_dphi ,"photon_jet1_dphi", 20, 0.0, M_PI);
       book(_h_photon_jet1_dR ,"photon_jet1_dR", 25, 0.5, 7.0);
 
-      MC_JetAnalysis::init();
+      MC_JETS_BASE::init();
     }
 
 
@@ -109,7 +109,7 @@ namespace Rivet {
         _h_photon_jet1_dR->fill(deltaR(photon, jets[0].momentum()));
       }
 
-      MC_JetAnalysis::analyze(e);
+      MC_JETS_BASE::analyze(e);
     }
 
 
@@ -119,7 +119,7 @@ namespace Rivet {
       scale(_h_photon_jet1_dphi, crossSectionPerEvent());
       scale(_h_photon_jet1_dR, crossSectionPerEvent());
 
-      MC_JetAnalysis::finalize();
+      MC_JETS_BASE::finalize();
     }
 
     /// @}
@@ -138,7 +138,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_PHOTONJETS);
 
 }

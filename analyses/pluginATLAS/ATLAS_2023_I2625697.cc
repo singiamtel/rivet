@@ -5,6 +5,7 @@
 
 namespace Rivet {
 
+
   /// @brief TEEC in multijets at 13 TeV
   class ATLAS_2023_I2625697 : public Analysis {
   public:
@@ -13,7 +14,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2023_I2625697);
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     void init() {
       // Projections AntiKt4TruthJets
@@ -74,15 +75,16 @@ namespace Rivet {
        }
     }
 
-    //@}
+    /// @}
 
   private:
 
     map<int, Histo1DPtr> _hEEC;
     map<int, Estimate1DPtr> _hAEEC;
+
   };
 
-  // Declare the plugin
+
   RIVET_DECLARE_PLUGIN(ATLAS_2023_I2625697);
 
 }

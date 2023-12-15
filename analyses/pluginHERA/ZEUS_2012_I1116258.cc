@@ -79,7 +79,7 @@ namespace Rivet {
       if (!inRange(sqrt(kin.W2()), 142.0, 293.0)) vetoEvent;
 
       // Jet selection
-      // @TODO check the recombination scheme
+      /// @todo check the recombination scheme
       const Jets jets = apply<FastJets>(event, "Jets")          \
         .jets(Cuts::Et > 17*GeV && Cuts::etaIn(-1*orientation, 2.5*orientation), cmpMomByEt);
       MSG_DEBUG("kT Jet multiplicity = " << jets.size());

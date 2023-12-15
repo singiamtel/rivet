@@ -115,10 +115,10 @@ nobase_pkginclude_HEADERS +=   \
 ## Analysis base class headers
 # TODO: Move to Rivet/AnalysisTools header dir?
 nobase_pkginclude_HEADERS += \
-  Analyses/MC_Cent_pPb.hh \
-  Analyses/MC_ParticleAnalysis.hh \
-  Analyses/MC_JetAnalysis.hh \
-  Analyses/MC_JetSplittings.hh \
+  Analyses/MC_PARTICLES_BASE.hh \
+  Analyses/MC_JETS_BASE.hh \
+  Analyses/MC_KTSPLITTINGS_BASE.hh \
+  Analyses/MC_CENT_PPB_Projections.hh \
   Analyses/AliceCommon.hh \
   Analyses/AtlasCommon.hh \
   Analyses/RHICCommon.hh 

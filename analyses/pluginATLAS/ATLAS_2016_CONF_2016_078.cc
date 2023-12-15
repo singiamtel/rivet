@@ -280,6 +280,5 @@ namespace Rivet {
 
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2016_CONF_2016_078);
 }

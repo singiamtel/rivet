@@ -229,6 +229,5 @@ namespace Rivet {
       BinnedEstimatePtr<int> _r_disc;
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2018_I1635273);
 }

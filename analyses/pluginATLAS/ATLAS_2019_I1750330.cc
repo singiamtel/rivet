@@ -608,14 +608,14 @@ namespace Rivet {
     size_t TransformJetMultiplicity_for_ttbar_m(size_t jet_n) { return jet_n > 6 ? 6 : jet_n; }
 
     size_t TransformJetMultiplicity_pttop(size_t jet_n) {
-      if (jet_n >= 0 && jet_n < 2)  return 0;
+      if (jet_n < 2)  return 0;
       if (jet_n == 2)               return 2;
       if (jet_n > 2)                return 3;
       return jet_n;
     }
 
     size_t TransformJetMultiplicity_ptttbar(size_t jet_n) {
-      if (jet_n >= 0 && jet_n < 2)  return 0;
+      if (jet_n < 2)  return 0;
       if (jet_n >= 2)               return 2;
       return jet_n;
     }

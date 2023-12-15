@@ -107,6 +107,5 @@ namespace Rivet {
       Histo1DPtr _h_Q2_tmp;
   };
 
-  /// The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ZEUS_2011_I945935);
 }

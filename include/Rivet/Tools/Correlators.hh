@@ -3,6 +3,7 @@
 #define RIVET_Correlators_HH
 
 // Tools for calculating flow coefficients using correlators.
+//
 // Classes:
 //   Correlators: Calculates single event correlators of a given harmonic.
 //   Cumulants: An additional base class for flow analyses
@@ -16,16 +17,14 @@
 //         of statistical errors by a bootstrap method.
 //       ECorrelator: Data type for event averaged correlators.
 //
-// Authors: Vytautas Vislavicius, Christine O. Rasmussen, Christian Bierlich.
+/// @authors Vytautas Vislavicius, Christine O. Rasmussen, Christian Bierlich.
 
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projection.hh"
 #include "Rivet/Projections/ParticleFinder.hh"
 #include "YODA/Scatter.h"
-#include <complex>
 
 namespace Rivet {
-  using std::complex;
 
 
   /// @brief Projection for calculating correlators for flow measurements
@@ -142,10 +141,10 @@ namespace Rivet {
 
   protected:
 
-    // @brief Loop over array and calculates Q and P vectors if needed
+    /// @brief Loop over array and calculates Q and P vectors if needed
     void project(const Event& e);
 
-    // @brief Compare to other projection, testing harmonics, pT bins and underlying final state similarity
+    /// @brief Compare to other projection, testing harmonics, pT bins and underlying final state similarity
     CmpState compare(const Projection& p) const {
       const Correlators* other = dynamic_cast<const Correlators*>(&p);
       if (nMax != other->nMax) return CmpState::NEQ;
@@ -154,17 +153,17 @@ namespace Rivet {
       return mkPCmp(p, "FS");
     }
 
-    // @brief Calculate correlators from one particle
+    /// @brief Calculate correlators from one particle
     void fillCorrelators(const Particle& p, const double& weight);
 
-    // @brief Return a Q-vector.
+    /// @brief Return a Q-vector.
     const complex<double> getQ(int n, int p) const {
       bool isNeg = (n < 0);
       if (isNeg) return conj( qVec[abs(n)][p] );
       else       return qVec[n][p];
     }
 
-    // @brief Return a P-vector
+    /// @brief Return a P-vector
     const complex<double> getP(int n, int p, double pT = 0.) const {
       bool isNeg = (n < 0);
       map<double, Vec2D>::const_iterator pTitr = pVec.lower_bound(pT);
@@ -176,37 +175,37 @@ namespace Rivet {
 
   private:
 
-    // @brief Find correlators by recursion
-    //
-    // Order = M (# of particles), n's are harmonics, p's are the powers of the weights
+    /// @brief Find correlators by recursion
+    ///
+    /// Order = M (# of particles), n's are harmonics, p's are the powers of the weights
     const complex<double> recCorr(int order, vector<int> n,
                                   vector<int> p, bool useP, double pT = 0.) const;
 
-    // @brief Two-particle correlator
-    //
-    // Cf. eq. (19) p6. Flag if p-vectors or q-vectors should be used to
-    // calculate the correlator.
+    /// @brief Two-particle correlator
+    ///
+    /// Cf. eq. (19) p6. Flag if p-vectors or q-vectors should be used to
+    /// calculate the correlator.
     const complex<double> twoPartCorr(int n1, int n2, int p1 = 1,
                                       int p2 = 1, double pT = 0., bool useP = false) const;
 
-    // Set elements in vectors to zero
+    /// Set elements in vectors to zero
     void setToZero();
 
-    // Shorthands for setting and comparing to zero
+    /// Shorthands for setting and comparing to zero
     const complex<double> _ZERO = {0., 0.};
     const double _TINY = 1e-10;
 
-    // Shorthand typedefs for vec<vec<complex>>.
+    /// Shorthand typedefs for vec<vec<complex>>.
     typedef vector< vector<complex<double>> > Vec2D;
 
-    // Define Q-vectors and P-vectors
+    /// Define Q-vectors and P-vectors
     Vec2D qVec; // Q[n][p]
     map<double, Vec2D> pVec; // p[pT][n][p]
 
-    // The max values of n and p to be calculated.
+    /// The max values of n and p to be calculated.
     int nMax, pMax;
 
-    // pT bin-edges
+    /// pT bin-edges
     vector<double> pTbinEdges;
 
     bool isPtDiff;
@@ -994,7 +993,7 @@ namespace Rivet {
       }
     }
 
-    // @brief Four particle integrated cn.
+    /// @brief Four particle integrated cn.
     void cnFourInt(Scatter2DPtr h, ECorrPtr e2, ECorrPtr e4) const {
       const auto& e2bins = e2->getBins();
       const auto& e4bins = e4->getBins();
@@ -1027,14 +1026,14 @@ namespace Rivet {
     }
 
 
-    ///Four particle integrated vn
+    /// Four-particle integrated vn
     void vnFourInt(Scatter2DPtr h, ECorrPtr e2, ECorrPtr e4) const {
       cnFourInt(h, e2, e4);
       nthPow(h, 0.25, -1.0);
     }
 
 
-    /// Six particle integrated cn
+    /// Six-particle integrated cn
     void cnSixInt(Scatter2DPtr h, ECorrPtr e2, ECorrPtr e4,
                   ECorrPtr e6) const {
       const auto& e2bins = e2->getBins();
@@ -1075,7 +1074,7 @@ namespace Rivet {
     }
 
 
-    /// Six particle integrated vn
+    /// Six-particle integrated vn
     void vnSixInt(Scatter2DPtr h, ECorrPtr e2, ECorrPtr e4,
                   ECorrPtr e6) const {
       cnSixInt(h, e2, e4, e6);
@@ -1083,7 +1082,7 @@ namespace Rivet {
     }
 
 
-    /// Eight particle integrated cn
+    /// Eight-particle integrated cn
     void cnEightInt(Scatter2DPtr h, ECorrPtr e2, ECorrPtr e4,
                     ECorrPtr e6, ECorrPtr e8) const {
       const auto& e2bins = e2->getBins();
@@ -1131,14 +1130,14 @@ namespace Rivet {
     }
 
 
-    /// Eight particle integrated vn
+    /// Eight-particle integrated vn
     void vnEightInt(Scatter2DPtr h, ECorrPtr e2, ECorrPtr e4, ECorrPtr e6, ECorrPtr e8) const {
       cnEightInt(h, e2, e4, e6, e8);
       nthPow(h, 1./8., -1./33.);
     }
 
 
-    /// Two particle differential vn
+    /// Two-particle differential vn
     void vnTwoDiff(Scatter2DPtr h, ECorrPtr e2Dif) const {
       const auto& e2bins = e2Dif->getBins();
       const auto& ref = e2Dif->getReference();
@@ -1173,7 +1172,7 @@ namespace Rivet {
     }
 
 
-    /// Four particle differential vn
+    /// Four-particle differential vn
     void vnFourDiff(Scatter2DPtr h, ECorrPtr e2Dif, ECorrPtr e4Dif) const {
       const auto& e2bins = e2Dif->getBins();
       const auto& e4bins = e4Dif->getBins();

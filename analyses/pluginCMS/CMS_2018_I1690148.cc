@@ -441,17 +441,13 @@ namespace Rivet {
 
     // @name Histogram data members
     /// @{
-
     Cut particle_cut, lepton_cut, jet_cut;
     Histo1DPtr _h[2][33][4];
-
     /// @}
 
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2018_I1690148);
 
 }

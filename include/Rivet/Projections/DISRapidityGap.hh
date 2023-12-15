@@ -46,7 +46,7 @@ namespace Rivet {
     }
 
     /// @todo Document
-    const double emPzX(const DISFrame& f) const {
+    double emPzX(const DISFrame& f) const {
       if (f == DISFrame::LAB) return _eMpzX_LAB;
       else if (f == DISFrame::XCM) return _eMpzX_XCM;
       else return _eMpzX_HCM;

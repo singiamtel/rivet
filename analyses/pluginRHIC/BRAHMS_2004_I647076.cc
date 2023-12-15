@@ -133,6 +133,5 @@ namespace Rivet {
     /// @}
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(BRAHMS_2004_I647076);
 }

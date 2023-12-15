@@ -50,7 +50,6 @@ namespace Rivet {
 
   };
 
-  // This global object acts as a hook for the plugin system.
   RIVET_DECLARE_PLUGIN(CMS_2016_I1487277);
 
 }

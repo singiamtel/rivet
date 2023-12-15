@@ -137,6 +137,5 @@ namespace Rivet {
     Histo1DPtr _h_Charge[18];
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2017_I1605749);
 }

@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_JetSplittings.hh"
+#include "Rivet/Analyses/MC_KTSPLITTINGS_BASE.hh"
 #include "Rivet/Projections/DileptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -8,12 +8,12 @@ namespace Rivet {
 
 
   /// @brief MC validation analysis for Z[ee]Z[mumu] + jets events
-  class MC_ZZKTSPLITTINGS : public MC_JetSplittings {
+  class MC_ZZKTSPLITTINGS : public MC_KTSPLITTINGS_BASE {
   public:
 
     /// Default constructor
     MC_ZZKTSPLITTINGS()
-      : MC_JetSplittings("MC_ZZKTSPLITTINGS", 4, "Jets")
+      : MC_KTSPLITTINGS_BASE("MC_ZZKTSPLITTINGS", 4, "Jets")
     {    }
 
 
@@ -53,7 +53,7 @@ namespace Rivet {
       FastJets jetpro(jetinput, JetAlg::KT, R);
       declare(jetpro, "Jets");
 
-      MC_JetSplittings::init();
+      MC_KTSPLITTINGS_BASE::init();
     }
 
 
@@ -63,13 +63,13 @@ namespace Rivet {
       if (zeefinder.bosons().size() != 1) vetoEvent;
       const DileptonFinder& zmmfinder = apply<DileptonFinder>(e, "ZmmFinder");
       if (zmmfinder.bosons().size() != 1) vetoEvent;
-      MC_JetSplittings::analyze(e);
+      MC_KTSPLITTINGS_BASE::analyze(e);
     }
 
 
     /// Finalize
     void finalize() {
-      MC_JetSplittings::finalize();
+      MC_KTSPLITTINGS_BASE::finalize();
     }
 
     /// @}
@@ -78,7 +78,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_ZZKTSPLITTINGS);
 
 }

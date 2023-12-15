@@ -366,12 +366,8 @@ namespace Rivet {
       }
     }
 
-    //@}
-
 
   private:
-
-    //Variables* vars;
 
     Plots baseline_plots;
     Plots highpt_plots;

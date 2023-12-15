@@ -87,7 +87,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_ALIASED_PLUGIN(UA5_1982_S875503, UA5_1982_I176647);
 
 }

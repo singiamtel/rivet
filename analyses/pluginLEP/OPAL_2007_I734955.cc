@@ -15,7 +15,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(OPAL_2007_I734955);
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     // Book projections and histograms
     void init() {
@@ -47,6 +47,7 @@ namespace Rivet {
       book(_h_pTpi[0], 11, 1, 1);
       book(_h_pTpi[1], 12, 1, 1);
     }
+
 
     // Do the analysis
     void analyze(const Event& event) {
@@ -95,6 +96,7 @@ namespace Rivet {
 
     }
 
+
     // Finalize
     void finalize() {
       const double sf = crossSection()/picobarn/sumOfWeights();
@@ -104,16 +106,18 @@ namespace Rivet {
       scale(_h_pTpi,  sf);
     }
 
-    //@}
+    /// @}
+
 
   private:
 
     /// @name Histograms
-    //@{
+    /// @{
     Histo1DPtr _h_pTch[4], _h_etach[4], _h_pTch2[2], _h_pTpi[2];
-    //@}
+    /// @}
 
   };
+
 
   RIVET_DECLARE_PLUGIN(OPAL_2007_I734955);
 

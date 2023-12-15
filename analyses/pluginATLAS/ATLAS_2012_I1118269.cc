@@ -4,6 +4,7 @@
 
 namespace Rivet {
 
+
   class ATLAS_2012_I1118269 : public Analysis {
   public:
 
@@ -70,7 +71,6 @@ namespace Rivet {
   };
 
 
-  // Hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2012_I1118269);
 
 }

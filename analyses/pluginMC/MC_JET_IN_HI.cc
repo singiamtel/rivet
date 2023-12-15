@@ -136,7 +136,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_JET_IN_HI);
 
 }

@@ -151,7 +151,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(GAMMAGAMMA_1981_I158474);
 
 

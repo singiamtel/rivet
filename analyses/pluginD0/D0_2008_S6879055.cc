@@ -95,7 +95,6 @@ namespace Rivet {
   };
 
 
-
   RIVET_DECLARE_ALIASED_PLUGIN(D0_2008_S6879055, D0_2008_I724239);
 
 }

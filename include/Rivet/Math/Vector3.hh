@@ -362,7 +362,7 @@ namespace Rivet {
 
 
     /// @name Coordinate setters
-    //@{
+    /// @{
 
     /// Set x-component of momentum \f$ p_x \f$.
     ThreeMomentum& setPx(double px) {
@@ -382,11 +382,11 @@ namespace Rivet {
       return *this;
     }
 
-    //@}
+    /// @}
 
 
     /// @name Accessors
-    //@{
+    /// @{
 
     /// Get x-component of momentum \f$ p_x \f$.
     double px() const { return x(); }
@@ -437,14 +437,14 @@ namespace Rivet {
       return sqrt(pT2());
     }
 
-    //@}
+    /// @}
 
 
     ////////////////////////////////////////
 
 
     /// @name Arithmetic operators (needed again for covariant returns)
-    //@{
+    /// @{
 
     /// Multiply by a scalar
     ThreeMomentum& operator *= (double a) {
@@ -482,7 +482,7 @@ namespace Rivet {
     //   return -*this;
     // }
 
-    //@}
+    /// @}
 
   };
 

@@ -11,26 +11,30 @@
 namespace Rivet {
 
 
-  // @brief Projects out an event mixed of several events, given
-  // a mixing observable (eg. number of final state particles),
-  // defining what should qualify as a mixable event.
-  // Binning in the mixing observable is defined in the constructor,
-  // as is the number of events one wants to mix with.
-  // The method calculateMixingObs() must can be overloaded
-  // in derived classes, to provide the definition of the mixing observable,
-  // on the provided projection, eg. centrality or something more elaborate.
-  //
-  // The implementation can correcly handle mixing of weighted events, but
-  // not multi-weighted events. Nor does the implementation attemt to handle
-  // calculation of one (or more) event weights for the mixed events. For most
-  // common use cases, like calculating a background sample, this is sufficient.
-  // If a more elaborate use case ever turns up, this must be reevaluated.
-  //
-  //
-  // @author Christian Bierlich <christian.bierlich@thep.lu.se>
+  /// @brief Make an event mixed together from several events
+  ///
+  /// Project out an event mixed of several events, given a mixing
+  /// observable (e.g. number of final state particles), defining what
+  /// should qualify as a mixable event.  Binning in the mixing
+  /// observable is defined in the constructor, as is the number of
+  /// events one wants to mix with.  The method calculateMixingObs()
+  /// must can be overloaded in derived classes, to provide the
+  /// definition of the mixing observable, on the provided projection,
+  /// eg. centrality or something more elaborate.
+  ///
+  /// The implementation can correcly handle mixing of weighted
+  /// events, but not multi-weighted events. Nor does the
+  /// implementation attemt to handle calculation of one (or more)
+  /// event weights for the mixed events. For most common use cases,
+  /// like calculating a background sample, this is sufficient.  If a
+  /// more elaborate use case ever turns up, this must be reevaluated.
+  ///
+  /// @author Christian Bierlich <christian.bierlich@thep.lu.se>
 
-  // Weighted random shuffle, similar to std::random_shuffle, which
-  // allows the passing of a weight for each element to be shuffled.
+  /// Weighted random shuffle, similar to std::random_shuffle, which
+  /// allows the passing of a weight for each element to be shuffled.
+  ///
+  /// @todo Move to utils?
   template <class RandomAccessIterator,
             class WeightIterator, class RandomNumberGenerator>
   void weighted_shuffle(RandomAccessIterator first, RandomAccessIterator last,
@@ -46,7 +50,8 @@ namespace Rivet {
       ++fw;
     }
   }
-  // A MixEvent is a vector of particles with and associated weight.
+
+  /// A MixEvent is a vector of particles with and associated weight.
   typedef pair<Particles, double> MixEvent;
   typedef map<double, std::deque<MixEvent> > MixMap;
 
@@ -65,7 +70,7 @@ namespace Rivet {
   ///
   class EventMixingBase : public Projection {
   protected:
-    // Constructor
+    /// Constructor
     EventMixingBase(const Projection & mixObsProj, const ParticleFinder& mix,
                     size_t nMixIn, double oMin, double oMax, double deltao,
                     const size_t defaultIdx) : nMix(nMixIn), unitWeights(true) {
@@ -88,8 +93,8 @@ namespace Rivet {
 
   public:
 
-    // Test if we have enough mixing events available for projected,
-    // current mixing observable.
+    /// Test if we have enough mixing events available for projected,
+    /// current mixing observable.
     bool hasMixingEvents() const {
       MixMap::const_iterator mixItr = mixEvents.lower_bound(mObs);
       if(mixItr == mixEvents.end() || mixItr->second.size() < nMix + 1)
@@ -97,7 +102,7 @@ namespace Rivet {
       return true;
     }
 
-    // Return a vector of mixing events.
+    /// Return a vector of mixing events.
     vector<MixEvent> getMixingEvents() const {
       if (!hasMixingEvents())
         return vector<MixEvent>();
@@ -105,8 +110,10 @@ namespace Rivet {
       return vector<MixEvent>(mixItr->second.begin(), mixItr->second.end() - 1);
     }
 
-    // Return a vector of particles from the mixing events. Can
-    // be overloaded in derived classes, though normally not neccesary.
+    /// @brief Return a vector of particles from the mixing events.
+    ///
+    /// Can be overloaded in derived classes, though normally not
+    /// necessary.
     virtual const Particles particles() const {
       // Test if we have enough mixing events.
       if (!hasMixingEvents())
@@ -145,8 +152,9 @@ namespace Rivet {
 
   protected:
 
-    // Calulate mixing observable.
-    // Must be overloaded in derived classes.
+    /// Calculate the mixing observable.
+    ///
+    /// Must be overloaded in derived classes.
     virtual void calculateMixingObs(const Projection* mProj) = 0;
 
 
@@ -198,7 +206,7 @@ namespace Rivet {
   };
 
 
-  // EventMixingFinalState has multiplicity as the mixing observable
+  /// EventMixingFinalState has multiplicity as the mixing observable
   class EventMixingFinalState : public EventMixingBase {
   public:
     EventMixingFinalState(const ParticleFinder & mixObsProj,
@@ -216,7 +224,7 @@ namespace Rivet {
 
   protected:
 
-    // Calculate mixing observable
+    /// Calculate the mixing observable
     virtual void calculateMixingObs(const Projection* mProj) {
       mObs = ((ParticleFinder*) mProj)->particles().size();
     }
@@ -224,7 +232,7 @@ namespace Rivet {
   };
 
 
-  // EventMixingCentrality has centrality as the mixing observable
+  /// EventMixingCentrality has centrality as the mixing observable
   class EventMixingCentrality : public EventMixingBase {
   public:
 
@@ -240,9 +248,9 @@ namespace Rivet {
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
 
-
   protected:
 
+    /// Calculate the mixing observable
     virtual void calculateMixingObs(const Projection* mProj) {
       mObs = ((CentralityProjection*) mProj)->operator()();
     }

@@ -2,18 +2,19 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Particle.hh"
 
-
 namespace Rivet {
+
 
   class LHCB_2010_I867355 : public Analysis {
   public:
 
-    LHCB_2010_I867355() : Analysis("LHCB_2010_I867355")
-    {  }
+    RIVET_DEFAULT_ANALYSIS_CTOR(LHCB_2010_I867355);
+
 
     void init() {
 
-      //@ Results are presented for two different fragmentation functions, LEP and Tevatron. Therefore, we have two sets of histograms.
+      /// @note Results are presented for two different fragmentation
+      /// functions, LEP and Tevatron, therefore two sets of histos.
       book(_h_sigma_vs_eta_lep ,1, 1, 1);
       book(_h_sigma_vs_eta_tvt ,1, 1, 2);
       book(_h_sigma_total_lep  ,2, 1, 1);
@@ -82,7 +83,6 @@ namespace Rivet {
   };
 
 
-  // Hook for the plugin system
   RIVET_DECLARE_PLUGIN(LHCB_2010_I867355);
 
 }

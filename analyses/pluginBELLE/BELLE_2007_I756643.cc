@@ -103,7 +103,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(BELLE_2007_I756643);
 
 

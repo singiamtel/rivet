@@ -15,7 +15,7 @@ namespace Rivet {
 
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -47,19 +47,16 @@ namespace Rivet {
 
     }
 
-    //@}
+    /// @}
     
-    private:
+  private:
 
     /// Histogram for fiducial cross section
     Histo1DPtr _hist_xsec_fid;
 
-
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2019_I1753720);
-
 
 }

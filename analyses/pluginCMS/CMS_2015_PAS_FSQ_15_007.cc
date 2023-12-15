@@ -242,6 +242,5 @@ namespace Rivet {
     Profile1DPtr _h_PtSum_vs_leadTrackPt_transAvg;
   };
 
-  // This global object acts as a hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2015_PAS_FSQ_15_007);
 }  // namespace Rivet

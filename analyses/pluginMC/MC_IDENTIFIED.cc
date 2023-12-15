@@ -7,17 +7,14 @@ namespace Rivet {
 
 
   /// Generic analysis looking at various distributions of final state particles
-  /// @todo Rename as MC_HADRONS
+  ///
+  /// @todo Rename as MC_HADRONS?
   class MC_IDENTIFIED : public Analysis {
   public:
 
     /// Constructor
-    MC_IDENTIFIED()
-      : Analysis("MC_IDENTIFIED")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(MC_IDENTIFIED);
 
-
-  public:
 
     /// @name Analysis methods
     /// @{
@@ -97,7 +94,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_IDENTIFIED);
 
 }

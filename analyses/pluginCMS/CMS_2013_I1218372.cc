@@ -1,13 +1,4 @@
-// Samantha Dooling DESY
-// February 2012
-//
 // -*- C++ -*-
-// =============================
-//
-// Ratio of the energy deposited in the pseudorapidity range
-// -6.6 < eta < -5.2 for events with a charged particle jet
-//
-// =============================
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
@@ -18,13 +9,13 @@
 namespace Rivet {
 
 
+  /// Ratio of energy in -6.6 < eta < -5.2 for events with a charged-particle jet
   class CMS_2013_I1218372 : public Analysis {
   public:
 
-  /// Constructor
-  CMS_2013_I1218372()
-    : Analysis("CMS_2013_I1218372")
-    { }
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2013_I1218372);
+
 
     void init() {
 
@@ -37,9 +28,6 @@ namespace Rivet {
       fsv.vetoNeutrinos();
       fsv.addVetoPairId(PID::MUON);
       declare(fsv, "fsv");
-
-      FinalState a,b;
-      a = b;
 
       // for the hadron level selection
       VetoedFinalState sfsv;
@@ -159,7 +147,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(CMS_2013_I1218372);
 
 }

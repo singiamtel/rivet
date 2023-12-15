@@ -21,7 +21,7 @@ namespace Rivet {
 
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -224,19 +224,16 @@ namespace Rivet {
       scale(_h, sf);
     }
 
-    //@}
+    /// @}
 
   private:
 
-    /// @name Histograms
-    //@{
+    /// Histograms
     map<string, Histo1DPtr> _h;
-    //@}
 
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2022_I2103950);
 
 }

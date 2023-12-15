@@ -5,11 +5,6 @@
 namespace Rivet {
 
 
-  CmpState InitialQuarks::compare(const Projection& p) const {
-    return CmpState::EQ;
-  }
-
-
   void InitialQuarks::project(const Event& e) {
     _theParticles.clear();
 

@@ -10,15 +10,7 @@ namespace Rivet {
 
   Projection::Projection()
     : _name("BaseProjection"), _isValid(true)
-  {
-    // addPdgIdPair(PID::ANY, PID::ANY);
-  }
-
-
-  Projection::~Projection() = default;
-
-
-  Projection& Projection::operator = (const Projection&) { return *this; }
+  {  }
 
 
   bool Projection::before(const Projection& p) const {

@@ -1,17 +1,17 @@
 // -*- C++ -*-
-#include "Rivet/Analyses/MC_ParticleAnalysis.hh"
+#include "Rivet/Analyses/MC_PARTICLES_BASE.hh"
 #include "Rivet/Projections/TauFinder.hh"
 
 namespace Rivet {
 
 
   /// @brief MC validation analysis for taus
-  class MC_TAUS : public MC_ParticleAnalysis {
+  class MC_TAUS : public MC_PARTICLES_BASE {
   public:
 
     /// Constructor
     MC_TAUS()
-      : MC_ParticleAnalysis("MC_TAUS", 2, "tau")
+      : MC_PARTICLES_BASE("MC_TAUS", 2, "tau")
     {    }
 
 
@@ -20,26 +20,25 @@ namespace Rivet {
       TauFinder taus(TauDecay::ANY);
       declare(taus, "Taus");
 
-      MC_ParticleAnalysis::init();
+      MC_PARTICLES_BASE::init();
     }
 
 
     /// Per-event analysis
     void analyze(const Event& event) {
       const Particles taus = apply<TauFinder>(event, "Taus").particlesByPt(0.5*GeV);
-      MC_ParticleAnalysis::_analyze(event, taus);
+      MC_PARTICLES_BASE::_analyze(event, taus);
     }
 
 
     /// Normalisations etc.
     void finalize() {
-      MC_ParticleAnalysis::finalize();
+      MC_PARTICLES_BASE::finalize();
     }
 
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(MC_TAUS);
 
 }

@@ -139,7 +139,7 @@ namespace Rivet {
         if (0.09  <= value && value <= 0.11)  edge = _edges[label][idx-7];
         if (0.25  <= value && value <= 0.7 )  edge = _edges[label][idx-15];
       }
-      _nd[label]->fill(edge);
+      _nd[label]->fill(edge, weight);
     }
 
 
@@ -160,7 +160,6 @@ namespace Rivet {
   };
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(TPC_1988_I262143);
 
 

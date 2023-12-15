@@ -487,7 +487,6 @@ namespace Rivet {
     map<string, Histo1DGroupPtr> _h_multi;
   };
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2020_I1801434);
 
 }

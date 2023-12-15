@@ -21,7 +21,7 @@ public:
 
 	/// @name Analysis methods
 
-        bool isParticleFromCollision(const Particle& p, const Particles& parents, const Beam& beams) const {
+        bool isParticleFromCollision(const Particles& parents, const Beam& beams) const {
           bool beam[nbeam]={false};
           if (parents.size()==nbeam) {
             for ( int ipar=0; ipar < nbeam; ++ipar ) {
@@ -32,10 +32,6 @@ public:
             if(beam[0] && beam[1]) return true;
           }
           return false;
-	}
-
-	bool isParticleFromDecay(const Particle p, const Particles& parents) const {
-          return (parents.size() == ndecay);
 	}
 
 	bool isDeviated(Particle p, Particle parent) { //Select/Remove particles decayed between IP and LHCf
@@ -151,13 +147,13 @@ public:
 
 				vector<Particle> parents = p.parents();
 
-				if(isParticleFromCollision(p, parents, beams)) { //Particles directly produced in collisions
+				if(isParticleFromCollision(parents, beams)) { //Particles directly produced in collisions
 					if(!PID::isHadron(p.pid())) continue; //Remove non-hadron particles
 					if(PID::charge(p.pid()) != 0) continue; //Remove charged particles
 
 					eta = p.eta();
 					en = p.E()/GeV;
-				} else if(isParticleFromDecay(p, parents)) { //Particles produced from decay
+				} else if(parents.size() == ndecay) { //Particles produced from decay
 					ConstGenVertexPtr pv = p.genParticle()->production_vertex();
 					assert(pv != nullptr);
 
@@ -194,7 +190,7 @@ public:
 
 							Particle ancestor = ancestors[0];
 
-							if(isParticleFromCollision(parent, ancestors, beams)) { //if we found first particles produced in collisions we consider them
+							if(isParticleFromCollision(ancestors, beams)) { //if we found first particles produced in collisions we consider them
 								isEnded=true;
 
 								if(!PID::isHadron(parent.pid())) isValid=false; //Remove non-hadron ancestors/parents
@@ -206,7 +202,7 @@ public:
 
 								eta = parent.eta();
 								en = parent.E()/GeV;
-							} else if (isParticleFromDecay(parent, ancestors)) { //if we found first particles produced entering LHCf we consider them
+							} else if (ancestors.size() == ndecay) { //if we found first particles produced entering LHCf we consider them
 								ConstGenVertexPtr pv_prev = parent.genParticle()->production_vertex();
 								assert(pv_prev != NULL);
 
@@ -247,7 +243,6 @@ public:
 
 				vector<Particle> parents = p.parents();
 
-				//if(isParticleFromCollision(p, parents)) { //Particles directly produced in collisions
 					if(p.pid() != 2112 ) continue;
 
 					eta = p.eta();
@@ -296,7 +291,6 @@ private:
 };
 
 
-// The hook for the plugin system
 RIVET_DECLARE_PLUGIN(LHCF_2015_I1351909);
 
 

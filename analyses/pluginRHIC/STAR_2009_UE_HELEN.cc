@@ -11,6 +11,7 @@ namespace Rivet {
 
 
   /// @brief STAR underlying event
+  ///
   /// @author Hendrik Hoeth
   class STAR_2009_UE_HELEN : public Analysis {
   public:
@@ -142,7 +143,7 @@ namespace Rivet {
 
 
     void finalize() {
-      //
+      /// @todo Really nothing to do?
     }
 
     /// @}
@@ -157,8 +158,6 @@ namespace Rivet {
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(STAR_2009_UE_HELEN);
 
 }

@@ -214,14 +214,15 @@ namespace Rivet {
        }
     }
 
-     //@}
 
   private:
 
     /// @name Histograms
     map<string, Histo1DPtr> _h;
+
   };
 
-  // The hook for the plugin system
+
   RIVET_DECLARE_PLUGIN(ATLAS_2021_I1852328);
+
 }

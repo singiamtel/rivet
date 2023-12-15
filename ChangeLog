@@ -2,6 +2,16 @@
 
 	* Fix Python path detection again, cf. GAMBIT Mac CI. Thanks to Chris Chang.
 
+2023-12-07  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Consistency renaming of MC analysis intermediate base-classes
+	(and noting that one of those headers contains projections and
+	should be moved accordingly).
+
+	* Enforce all-caps analysis naking convention and in particular
+	improve systematic consistency and sorting order of MC decay
+	analyses and all centrality analyses.
+
 2023-11-29  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Improvements to rivet-mkhtml output.

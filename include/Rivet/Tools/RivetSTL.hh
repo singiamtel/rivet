@@ -14,6 +14,7 @@
 #include <sstream>
 #include <cmath>
 #include <limits>
+#include <complex>
 
 namespace Rivet {
 
@@ -47,6 +48,8 @@ namespace Rivet {
   using std::function;
 
   using std::isnan;
+
+  using std::complex;
 
   /// @name Streaming containers as string reps
   /// @todo Make these named toStr rather than operator<<

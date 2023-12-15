@@ -335,7 +335,7 @@ namespace Rivet {
   /// @name Combining Percentiles
   ///
   /// Follows the naming of functions for the underlying AnalysisObjects: global operators
-  // @{
+  /// @{
 
   template <typename T>
   Percentile<typename ReferenceTraits<T>::RefT>
@@ -690,6 +690,8 @@ namespace Rivet {
   operator/(const PercentileXaxis<T> numer, const PercentileXaxis<T> denom) {
     return divide(numer, denom);
   }
+
+  /// @}
 
 
 }

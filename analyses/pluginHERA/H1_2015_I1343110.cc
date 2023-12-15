@@ -9,6 +9,7 @@
 
 namespace Rivet {
 
+
   namespace H1_2015_I1343110_PROJECTIONS {
 
     /// Projection to find the largest gaps and the masses of the two
@@ -207,9 +208,11 @@ namespace Rivet {
           }
         }
 
-        // Find t: Currently can only handle gap on proton side.
-        // @TODO: Expand to also handle gap on photon side
         // Boost p from LAB to HCM frame to find t.
+        ///
+        /// @note Currently can only handle gap on proton side.
+        ///
+        /// @todo Expand to also handle gap on photon side
         const FourMomentum proton = hcmboost.transform(diskin.beamHadron().momentum());
         FourMomentum pPom         = proton - _momY_HCM;
         _t                        = pPom * pPom;
@@ -287,6 +290,7 @@ namespace Rivet {
     };
 
   }
+
 
   /// @brief H1 diffractive dijets
   ///

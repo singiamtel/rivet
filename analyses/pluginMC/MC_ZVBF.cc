@@ -14,7 +14,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(MC_ZVBF);
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Initialize
     void init() {
@@ -141,9 +141,10 @@ namespace Rivet {
       efficiency(_h["mjj"], _h["jve_mjj"], _s["jve_mjj"]);
     }
 
-    //@}
+    /// @}
 
-    // check if jet is between tagging jets
+
+    /// Check if jet is between tagging jets
     bool isBetween(const Jet &probe, const Jet &boundary1, const Jet &boundary2) {
       double y_p = probe.rapidity();
       double y_b1 = boundary1.rapidity();
@@ -162,21 +163,24 @@ namespace Rivet {
       return mapAngleMPiToPi(dphijj)/M_PI;
     }
 
+
   private:
 
     /// @name Parameters for specialised e/mu and dressed/bare subclassing
-    //@{
+    /// @{
     double _dR;
     PdgId _lepton;
-    //@}
+    /// @}
 
     /// @name Histograms
-    //@{
+    /// @{
     map<string,Histo1DPtr> _h;
     map<string,Estimate1DPtr> _s;
-    //@}
+    /// @}
 
   };
 
+
   RIVET_DECLARE_PLUGIN(MC_ZVBF);
+
 }

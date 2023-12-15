@@ -5,6 +5,7 @@
 
 namespace Rivet {
 
+
   /// Rivet analysis class for ATLAS_2015_I1387176 dataset
   class ATLAS_2015_I1387176 : public Analysis {
   public:
@@ -79,8 +80,6 @@ namespace Rivet {
   };
 
 
-
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(ATLAS_2015_I1387176);
 
 }
