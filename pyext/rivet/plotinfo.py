@@ -49,7 +49,7 @@ class PlotParser(object):
 
         Parameters
         ----------
-        section : ('PLOT'|'SPECIAL'|'HISTOGRAM')
+        section : ('PLOT'|'SPECIAL'|'HISTOGRAM'|'FUNCTION')
             The section that should be extracted.
         hpath : str
             The histogram path, i.e. /AnalysisID/HistogramID .
@@ -57,7 +57,7 @@ class PlotParser(object):
         TODO:
          * Caching! The result of the lookup is not cached so every call requires a file to be searched for and opened.
         """
-        if section not in ['PLOT', 'SPECIAL', 'HISTOGRAM']:
+        if section not in ['PLOT', 'SPECIAL', 'HISTOGRAM', 'FUNCTION']:
             raise ValueError("Can't parse section \'%s\'" % section)
 
         ## Decompose the histo path and remove the /REF prefix if necessary
@@ -70,7 +70,7 @@ class PlotParser(object):
 
         ## Assemble the list of headers from any matching plotinfo paths and additional style files
         plotfile = aop.basepathparts()[0] + ".plot"
-        ret = {'PLOT': {}, 'SPECIAL': None, 'HISTOGRAM': {}}
+        ret = {'PLOT': {}, 'SPECIAL': None, 'HISTOGRAM': {}, 'FUNCTION': None}
         for pidir in self.plotpaths:
             plotpath = os.path.join(pidir, plotfile)
             self._readHeadersFromFile(plotpath, ret, section, aop.basepath())
@@ -90,7 +90,7 @@ class PlotParser(object):
 
         Parameters
         ----------
-        section : ('SPECIAL')
+        section : ('SPECIAL'|'FUNCTION')
             The section that should be extracted. Only Specials allowed to occur multiple times.
         hpath : str
             The histogram path, i.e. /AnalysisID/HistogramID .
@@ -98,7 +98,7 @@ class PlotParser(object):
         TODO:
          * Caching! The result of the lookup is not cached so every call requires a file to be searched for and opened.
         """
-        if sections not in ['SPECIAL']:
+        if sections not in ['SPECIAL', 'FUNCTION']:
             raise ValueError("Can't parse sections \'%s\'" % sections)
 
         ## Decompose the histo path and remove the /REF prefix if necessary
@@ -111,7 +111,7 @@ class PlotParser(object):
 
         ## Assemble the list of headers from any matching plotinfo paths and additional style files
         plotfile = aop.basepathparts()[0] + ".plot"
-        ret = {'SPECIAL': {}}
+        ret = {'SPECIAL': {},'FUNCTION': {}}
         for pidir in self.plotpaths:
             plotpath = os.path.join(pidir, plotfile)
             self._readNamedHeadersFromFile(plotpath, ret, sections, aop.basepath())
@@ -149,7 +149,7 @@ class PlotParser(object):
                     if m2:
                         msec = m2
                         startreading = True
-                        if section in ['SPECIAL']:
+                        if section in ['SPECIAL','FUNCTION']:
                             ret[section] = ''
                         continue
             if not startreading:
@@ -182,7 +182,7 @@ class PlotParser(object):
                 if vm:
                     prop, value = vm.group(1,2)
                     ret[section]['ReplaceOption[' + prop + ']'] = texpand(value)
-            elif section in ['SPECIAL']:
+            elif section in ['SPECIAL','FUNCTION']:
                 ret[section] += line
         f.close()
 
@@ -206,7 +206,7 @@ class PlotParser(object):
                 if tag == section:
                     if self.pat_paths[pathpat].match(hpath):
                         startreading = True
-                        if section in ['SPECIAL']:
+                        if section in ['SPECIAL','FUNCTION']:
                             ret[section][name] = ''
                         continue
             if not startreading:
@@ -216,7 +216,7 @@ class PlotParser(object):
                 continue
             elif self.isComment(line):
                 continue
-            if section in ['SPECIAL']:
+            if section in ['SPECIAL','FUNCTION']:
                 ret[section][name] += line
         f.close()
 
@@ -277,6 +277,39 @@ class PlotParser(object):
         :meth:`getSections`
         """
         return self.getSections('SPECIAL', hpath)
+
+
+    def getFunction(self, hpath):
+        """Get a FUNCTION section for histogram hpath.
+
+        The FUNCTION section is only available in a few analyses.
+
+        Parameters
+        ----------
+        hpath : str
+            Histogram path. Must have the form /AnalysisID/HistogramID .
+
+        See also
+        --------
+        :meth:`getSection`
+        """
+        return self.getSection('FUNCTION', hpath)
+
+    def getFunctions(self, hpath):
+        """Get all FUNCTION sections for histogram hpath.
+
+        The FUNCTION section is only available in a few analyses.
+
+        Parameters
+        ----------
+        hpath : str
+            Histogram path. Must have the form /AnalysisID/HistogramID .
+
+        See also
+        --------
+        :meth:`getSections`
+        """
+        return self.getSections('FUNCTION', hpath)
 
 
     def getHistogramOptions(self, hpath):

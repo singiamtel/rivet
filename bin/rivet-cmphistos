@@ -233,10 +233,10 @@ def mkoutdir(outdir):
         raise Exception(msg)
 
 
-def mkOutput(hpath, aos, plot=None, special=None):
+def mkOutput(hpath, aos, plot=None, special=None, function=None):
     """
     Make the .dat file string. We can't use "yoda.writeFLAT(anaobjects, 'foobar.dat')"
-    because the PLOT and SPECIAL blocks don't have a corresponding analysis object.
+    because the PLOT, SPECIAL and FUNCTION blocks don't have a corresponding analysis object.
     """
     output = ''
 
@@ -249,6 +249,12 @@ def mkOutput(hpath, aos, plot=None, special=None):
             output += "# BEGIN SPECIAL %s\n" % k
             output += v
             output += "# END SPECIAL\n\n"
+    if function is not None:
+        for k, v in function.items():
+            output += "\n"
+            output += "# BEGIN FUNCTION %s\n" % k
+            output += v
+            output += "# END FUNCTION\n\n"
 
     from io import StringIO
     sio = StringIO()
@@ -464,6 +470,7 @@ if __name__ == '__main__':
 
         ## Get a special object, if there is one for this path
         special = plotparser.getSpecials(hpath)
+        function = plotparser.getFunctions(hpath)
 
 
         ## Handle reference data histogram, if there is one
@@ -486,7 +493,7 @@ if __name__ == '__main__':
             mainlines.append(hpath)
             ## For 2D
             if is2d:
-                s = mkOutput(hpath, [refdata], plot, special)
+                s = mkOutput(hpath, [refdata], plot, special, function)
                 writeOutput(s, hpath)
 
 
@@ -623,7 +630,7 @@ if __name__ == '__main__':
                         ## For 2D, plot each histo now (since overlay makes no sense)
                         if is2d:
                             suffix=(infile.split("/")[-1].replace(".yoda.gz", "").replace(".yoda",""))
-                            s = mkOutput(hpath, [hmc], plot, special)
+                            s = mkOutput(hpath, [hmc], plot, special, function)
                             writeOutput(s, "%s_%s" % (hpath,suffix))
                     styleidx += 1
 
@@ -651,5 +658,5 @@ if __name__ == '__main__':
 
         ## Make the output and write to file
         if len(anaobjects) > 0:
-            o = mkOutput(hpath, anaobjects, plot, special)
+            o = mkOutput(hpath, anaobjects, plot, special, function)
             writeOutput(o, hpath)
