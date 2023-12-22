@@ -1,6 +1,11 @@
+2023-12-18  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Rename all legacy SPIRES-named analyses to an Inspire-based code-name.
+
 2023-12-15  Andy Buckley  <andy.buckley@cern.ch>
 
-	* Fix Python path detection again, cf. GAMBIT Mac CI. Thanks to Chris Chang.
+	* Fix Python path detection again, cf. GAMBIT Mac CI. Thanks to
+	Chris Chang.
 
 2023-12-07  Andy Buckley  <andy.buckley@cern.ch>
 
