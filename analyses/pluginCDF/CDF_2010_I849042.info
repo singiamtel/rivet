@@ -1,4 +1,4 @@
-Name: CDF_2010_I849042_DY
+Name: CDF_2010_I849042
 Year: 2010
 Summary: CDF Run 2 underlying event in Drell-Yan
 Experiment: CDF
@@ -19,7 +19,7 @@ RunInfo:
 NumEvents: 1000000
 Beams: [p-, p+]
 Energies: [1960]
-PtCuts: [0]
+PtCuts: [0, 10, 20, 50, 100, 150]
 Description:
   Deepak Kar and Rick Field's measurement of the underlying event in
   Drell-Yan events. $Z -> ee$ and $Z -> \mu\mu$ events are selected using
@@ -30,7 +30,15 @@ Description:
   the $Z$ has been reconstructed. Thus the region most sensitive to the
   underlying event is the toward region (the recoil jet is boosted into
   the away region).
-
+Options:
+ - MODE=DY,QCD
 ReleaseTests:
- - $A TVT-Run-II-Z-mu
-
+ - $A TVT-Run-II-Jets-0 :MODE=QCD
+ - $A-2 TVT-Run-II-Jets-1 :MODE=QCD
+ - $A-3 TVT-Run-II-Jets-2 :MODE=QCD
+ - $A-4 TVT-Run-II-Jets-3 :MODE=QCD
+ - $A-5 TVT-Run-II-Jets-4 :MODE=QCD
+ - $A-6 TVT-Run-II-Jets-5 :MODE=QCD
+ - $A-7 TVT-Run-II-Jets-6 :MODE=QCD
+ - $A-8 TVT-Run-II-Jets-7 :MODE=QCD
+ - $A-9 TVT-Run-II-Z-mu :MODE=DY

@@ -1,6 +1,6 @@
-Name: ATLAS_2011_I928289_Z
+Name: ATLAS_2011_I928289
 Year: 2011
-Summary: Z inclusive cross sections at 7 TeV
+Summary: inclusive W and Z cross-sections at 7 TeV
 Experiment: ATLAS
 Collider: LHC
 InspireID: 928289
@@ -14,21 +14,25 @@ References:
  - doi:10.1103/PhysRevD.85.072004
  - arXiv:1109.5141 [hep-ex]
 RunInfo:
-  p + p -> Z + X ( Z -> mu^+ mu^- or e^+ e^- )
-NumEvents: 1000000
+  p + p -> W + X ( W -> mu nu or e nu )
+  p + p -> Z + X ( Z -> mu mu or e e )
 NeedCrossSection: yes
 Beams: [p+, p+]
 Energies: [7000]
-PtCuts: [20, 20]
+PtCuts: [20]
+Options:
+ - MODE=W,Z
 Description:
-  The production cross sections of the inclusive Drell-Yan process $Z/\gamma^\ast \rightarrow \ell\ell$
-  ($\ell = e, \mu$) are measured in proton-proton collisions at $\sqrt{s} = 7$~TeV with the ATLAS detector.
-  The cross sections are evaluated differentially as a function of the $Z$ boson rapidity based on an
-  integrated luminosity of about 35~$\text{pb}^{-1}$ collected in 2010.
+  The production cross sections of the inclusive Drell-Yan process $W^\pm \rightarrow \ell\nu$
+  and  $Z/\gamma^\ast \rightarrow \ell\ell$ ($\ell = e, \mu$) are measured in proton-proton collisions
+  at $\sqrt{s} = 7$~TeV with the ATLAS detector.
+  The cross sections are evaluated differentially as a function of the boson rapidity based on an
+  integrated luminosity of about 35~$\text{pb}^{-1}$ collected in 2010. The cross sections are measured
+  separately for $W^+$ and $W^-$ production, and then used to construct the $W$ charge asymmetry as well.
 BibKey: Aad:2011dm
 BibTeX: '@article{Aad:2011dm,
       author         = "Aad, Georges and others",
-      title          = "{Measurement of the inclusive $W^\pm$ and Z/gamma cross
+      title          = "{Measurement of the inclusive $W^\pm$ and $Z/\gamma$ cross
                         sections in the electron and muon decay channels in $pp$
                         collisions at $\sqrt{s}=7$ TeV with the ATLAS detector}",
       collaboration  = "ATLAS Collaboration",
@@ -45,6 +49,8 @@ BibTeX: '@article{Aad:2011dm,
 }'
 
 ReleaseTests:
- - $A LHC-Z-e
- - $A-2 LHC-Z-mu
+ - $A LHC-W-e :MODE=W
+ - $A-2 LHC-W-mu :MODE=W
+ - $A-3 LHC-Z-e :MODE=Z
+ - $A-4 LHC-Z-mu :MODE=Z
 

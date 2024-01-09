@@ -19,18 +19,20 @@ Beams: [p+, p+]
 Energies: [7000]
 PtCuts: [25,25]
 NeedCrossSection: True
+Options:
+ - LMODE=EL,MU
 Description:
-  'Measurements from the ATLAS experiment of the forward-backward asymmetry in the reaction
-  $pp \rightarrow Z / \gamma^\ast \rightarrow \ell^+\ell^-$, with $\ell$ being electrons or muons.
-  The results are based on the full set of data collected in 2011 in $pp$ collisions at the LHC at
-  $\sqrt{s} = 7$~TeV, corresponding to an integrated luminosity of 4.8~$\text{fb}^{-1}$. The measured
-  asymmetry values are found to be in agreement with the corresponding Standard Model predictions.
-  The default routine will pick up the electron decay channel of the $Z$ boson. Individual channels can
-  be specified directly with the plugins ATLAS_2014_I1312627_EL and ATLAS_2014_I1312627_MU, respectively.
-  N.B. When running on multiple files, the asymmetry might have to be reconstructed in a post-processing
-  step. To that end, the necessary Histo1D objects are written out as well. The asymmetry is a Scatter2D
-  object and is constructed from auxiliary Histo1D objects retained in the output file. The asymmetry is
-  constructed in the following way: asym = (pos - neg) / (pos + neg)'
+  'This paper presents measurements from the ATLAS experiment of the forward-backward
+  asymmetry in the reaction $pp \to Z/\gamma^\ast \to \ell^+ \ell^-$, with $\ell$ being electrons or muons,
+  and the extraction of the effective weak mixing angle. The results are based on the full set
+  of data collected in 2011 in pp collisions at the LHC at $\sqrt{s}$ = 7 TeV, corresponding
+  to an integrated luminosity of 4.8 fb$^{-1}$. The measured asymmetry values are found to
+  be in agreement with the corresponding Standard Model predictions. The combination
+  of the muon and electron channels yields a value of the effective weak mixing angle of
+  $\sin^2\theta^\text{lept}_\text{eff}$ = 0.2308$\pm$0.0005(stat.)$\pm$0.0006(syst.)$\pm$0.0009(PDF),
+  where the first uncertainty corresponds to data statistics, the second to systematic effects
+  and the third to knowledge of the parton density functions.
+  This result agrees with the current world average from the Particle Data Group fit.'
 BibKey: Aad:2015uau
 BibTeX: '@article{Aad:2015uau,
       author         = "Aad, Georges and others",
@@ -45,3 +47,6 @@ BibTeX: '@article{Aad:2015uau,
       reportNumber   = "CERN-PH-EP-2014-259",
       SLACcitation   = "%%CITATION = ARXIV:1503.03709;%%"
 }'
+ReleaseTests:
+ - $A LHC-Z-e :LMODE=EL
+ - $A LHC-Z-mu :LMODE=MU
