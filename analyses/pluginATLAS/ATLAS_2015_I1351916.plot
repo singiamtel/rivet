@@ -7,15 +7,22 @@ YMax=1.2
 YMin=-0.7
 RatioPlotYMax=3.0
 RatioPlotYMin=-3.0
-XLabel=$m_{ee}$ [GeV]
 YLabel=$A_\mathrm{FB}$
 LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1351916/d02
 Title=Central--central electron channel, dressed level
+XLabel=$m_{ee}$ [GeV]
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1351916/d03
 Title=Central--forward electron channel, dressed level
+XLabel=$m_{ee}$ [GeV]
 # END PLOT
+
+# BEGIN PLOT /ATLAS_2015_I1351916_MU/d04
+Title=Central--central muon channel, dressed level
+XLabel=$m_{ee}$ [GeV]
+# END PLOT
+

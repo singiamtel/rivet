@@ -21,10 +21,14 @@ XCustomMajorTicks=1.5 $\geq1/\geq0$  2.5 $\geq2/\geq1$  3.5 $\geq3/\geq2$  4.5 $
 LegendYPos=0.3
 # END PLOT
 
-# BEGIN PLOT /ATLAS_2015_CONF_2015_041/d..-x01
+# BEGIN PLOT /ATLAS_2015_CONF_2015_041/d..-x02-y01
 Title=$Z \rightarrow e^+ e^-$, dressed level
 # END PLOT
 
-# BEGIN PLOT /ATLAS_2015_CONF_2015_041/d..-x02
+# BEGIN PLOT /ATLAS_2015_CONF_2015_041/d..-x02-y02
+Title=$Z \rightarrow \mu^+ mu^-$, dressed level
+# END PLOT
+
+# BEGIN PLOT /ATLAS_2015_CONF_2015_041/d..-x01
 Title=$Z \rightarrow \ell^+ \ell^-$, dressed level
 # END PLOT
