@@ -1,0 +1,53 @@
+Name: ATLAS_2023_I2648096
+Year: 2023
+Summary: dileptonic ttbar at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2648096
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Christian Gutschow <chris.g@cern.ch>
+References:
+ - ATLAS-TOPQ-2018-26
+ - JHEP 07 (2023) 141
+ - arXiv:2303.15340 [hep-ex]
+Keywords:
+ - TTBAR
+ - DILEPTON
+RunInfo:
+  dileptonic top-quark pair production
+Luminosity_fb: 140.1
+Beams: [p+, p+]
+Energies: [13000]
+PtCuts: [20]
+NeedCrossSection: True
+Description:
+    'Differential and double-differential distributions of kinematic variables of leptons from decays of top-quark pairs ($t\bar{t}$)
+     are measured using the full LHC Run 2 data sample collected with the ATLAS detector. The data were collected at a pp collision
+     energy of $\sqrt{s}=13$ TeV and correspond to an integrated luminosity of 140 fb$^{-1}$. The measurements use events containing
+     an oppositely charged $e\mu$ pair and $b$-tagged jets. The results are compared with predictions from several Monte Carlo generators.
+     While no prediction is found to be consistent with all distributions, a better agreement with measurements of the lepton $p_\text{T}$
+     distributions is obtained by reweighting the $t\bar{t}$ sample so as to reproduce the top-quark $p_\text{T}$ distribution from an NNLO
+     calculation. The inclusive top-quark pair production cross-section is measured as well, both in a fiducial region and in the full
+     phase-space. The total inclusive cross-section is found to be
+     $\sigma_{t\bar{t}$ = 829\pm 1\text{(stat)}\pm 13\text{(syst)}\pm 8\text{(lumi)}\pm 2\text{(beam)}$ pb,
+     where the uncertainties are due to statistics, systematic effects, the integrated luminosity and the beam energy.
+     This is in excellent agreement with the theoretical expectation.'
+BibKey: ATLAS:2023gsl,
+BibTeX: '@article{ATLAS:2023gsl,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Inclusive and differential cross-sections for dilepton $ t\overline{t} $ production measured in $ \sqrt{s} $ = 13 TeV pp collisions with the ATLAS detector}",
+    eprint = "2303.15340",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2023-016",
+    doi = "10.1007/JHEP07(2023)141",
+    journal = "JHEP",
+    volume = "07",
+    pages = "141",
+    year = "2023"
+}'
+ReleaseTest:
+ - $A LHC-13-Top-L
