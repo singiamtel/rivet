@@ -938,6 +938,63 @@ namespace Rivet {
     return TRK_EFF_CMS_RUN1(p);
   }
 
+  /// @brief Return the efficiency of the ATLAS JVT tagger at > 0.2 W.P.
+  ///
+  /// Values taken from fig 17, https://arxiv.org/pdf/1510.03823.pdf.
+  /// Shockingly, its run1, but it's still the most recent ATLAS JVT public plots
+  /// And is still cited by all the Run 2 papers
+  /// Note! The exact translation of weak/medium/tight varies across runs/years
+  /// If possible double check the score cut off used.
+  inline double ATLAS_JVT_EFF_LOOSE(const Jet & j){
+    if (j.abseta() > 2.4) return 1.0;
+    // No data for jets pt < 20, hopefully not relevant:
+    if (j.pt() <= 20*GeV || j.pt() >= 60*GeV) return 1.0;
+
+    const static vector<double> binedges_pt = {20*GeV,25*GeV,30*GeV,35*GeV,40*GeV,45*GeV,50*GeV,55*GeV,60*GeV};
+    const static vector<double> binvals = {0.9, 0.93, 0.94, 0.95, 0.96, 0.96, 0.97, 0.97};
+
+    const size_t bini = binIndex(j.pt(), binedges_pt);
+    return binvals[bini];
+  }
+
+  /// @brief Return the efficiency of the ATLAS JVT tagger at > 0.4 W.P.
+  ///
+  /// Values taken from fig 17, https://arxiv.org/pdf/1510.03823.pdf.
+  /// Shockingly, its run1, but it's still the most recent ATLAS JVT public plots
+  /// And is still cited by all the Run 2 papers
+  /// Note! The exact translation of weak/medium/tight varies across runs/years
+  /// If possible double check the score cut off used.
+  inline double ATLAS_JVT_EFF_MEDIUM(const Jet & j){
+    if (j.abseta() > 2.4) return 1.0;
+    // No data for jets pt < 20, hopefully not relevant:
+    if (j.pt() <= 20*GeV || j.pt() >= 60*GeV) return 1.0;
+
+    const static vector<double> binedges_pt = {20*GeV,25*GeV,30*GeV,35*GeV,40*GeV,45*GeV,50*GeV,55*GeV,60*GeV};
+    const static vector<double> binvals = {0.86, 0.9, 0.92, 0.93, 0.94, 0.95, 0.95, 0.96};
+
+    const size_t bini = binIndex(j.pt(), binedges_pt);
+    return binvals[bini];
+  }
+
+  /// @brief Return the efficiency of the ATLAS JVT tagger at > 0.7 W.P.
+  ///
+  /// Values taken from fig 17, https://arxiv.org/pdf/1510.03823.pdf.
+  /// Shockingly, its run1, but it's still the most recent ATLAS JVT public plots
+  /// And is still cited by all the Run 2 papers
+  /// Note! The exact translation of weak/medium/tight varies across runs/years
+  /// If possible double check the score cut off used.
+  inline double ATLAS_JVT_EFF_TIGHT(const Jet & j){
+    if (j.abseta() > 2.4) return 1.0;
+    // No data for jets pt < 20, hopefully not relevant:
+    if (j.pt() <= 20*GeV || j.pt() >= 60*GeV) return 1.0;
+
+    const static vector<double> binedges_pt = {20*GeV,25*GeV,30*GeV,35*GeV,40*GeV,45*GeV,50*GeV,55*GeV,60*GeV};
+    const static vector<double> binvals = {0.81, 0.84, 0.87, 0.90, 0.91, 0.92, 0.93, 0.94};
+
+    const size_t bini = binIndex(j.pt(), binedges_pt);
+    return binvals[bini];
+  }
+
   /// @}
 
   /// @}
