@@ -1,0 +1,51 @@
+Name: ALICE_2018_I1669819
+Year: 2018
+Summary: Strange meson production at 5 TeV
+Experiment: ALICE
+Collider: LHC
+InspireID: 1669819
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Yonne Lourens <yonne_14@live.nl>
+ - Christian Gutschow <chris.g@cern.ch>
+References:
+- JHEP 10 (2018) 174
+- DOI:10.1007/JHEP10(2018)174
+- arXiv:1804.09083
+- ALICE-4086
+RunInfo: Minimum bias events
+Beams: [[p+,p+],[Pb,Pb]]
+Energies: [5020,1044160]
+Luminosity_fb: [18e-6, 13e-9]
+Description:
+  'We report measurements of the production of prompt $D^0$, $D^+$, $D^{∗+}$ and $D^+_\text{s}$ mesons in Pb-Pb collisions
+  at the centre-of-mass energy per nucleon-nucleon pair $\sqrt{s_\text{NN}}$ = 5.02 TeV, in the centrality classes 0-10%,
+  30-50% and 60-80%. The $D$-meson production yields are measured at mid-rapidity (|y|<0.5) as a function of transverse
+  momentum ($p_\text{T}$). The $p_\text{T}$ intervals covered in central collisions are $1 < p_\text{T} < 50$ GeV/c for
+  $D^0$, $2 < p_\text{T} < 50$ GeV/c for $D^+$, $3 < p_\text{T} < 50$ GeV/c for $D^{*+}$, and $4 < p_\text{T} < 16$ GeV/c
+  for $D^+_\text{s}$ mesons. The nuclear modification factors ($R_\text{AA}$) for non-strange $D$ mesons
+  ($D^0$, $D^+$, $D^{∗+}$) show minimum values of about 0.2 for $p_\text{T}$ = 6-10 GeV/c in the most central collisions
+  and are compatible within uncertainties with those measured at $\sqrt{s_\text{NN}}$ = 2.76 TeV. For $D^+_\text{s}$ mesons,
+  the values of $R_\text{AA}$ are larger than those of non-strange $D$ mesons, but compatible within uncertainties.
+  In central collisions the average $R_\text{AA}$ of non-strange $D$ mesons is compatible with that of charged particles
+  for $p_\text{T} > 8$ GeV/c, while it is larger at lower $p_\text{T}$. The nuclear modification factors for strange and
+  non-strange $D$ mesons are also compared to theoretical models with different implementations of in-medium energy loss.'
+Keywords: [PbPb, pp, prompt charm production]
+BibKey: ALICE:2018lyv
+BibTeX: '@article{ALICE:2018lyv,
+    author = "Acharya, S. and others",
+    collaboration = "ALICE",
+    title = "{Measurement of D$^{0}$, D$^{+}$, D$^{*+}$ and D$_{s}^{+}$ production in Pb-Pb collisions at $ \sqrt{{\mathrm{s}}_{\mathrm{NN}}}=5.02 $ TeV}",
+    eprint = "1804.09083",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CERN-EP-2018-066",
+    doi = "10.1007/JHEP10(2018)174",
+    journal = "JHEP",
+    volume = "10",
+    pages = "174",
+    year = "2018"
+}'
+
