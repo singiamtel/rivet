@@ -1,0 +1,49 @@
+Name: H1_2006_I711847
+Year: 2006
+Summary: Dijet photoproduction analysis
+Experiment: H1
+Collider: HERA Run II
+SpiresID: 6552536
+InspireID: 711847
+Status: UNVALIDATED
+Reentrant: true
+Luminosity_fb: 0.0666
+Authors:
+ - Ilkka Helenius <ilkka.m.helenius@jyu.fi>
+References:
+ - Phys.Lett. B639 (2006) 21-31
+ - DESY 06/020
+ - arXiv:hep-ex/0603014
+RunInfo:
+  920 GeV protons colliding with 27.6 GeV positrons;
+  Direct and resolved photoproduction of dijets;
+  Jet pseudorapidity $-0.5 < |\eta| < 2.75$
+  Leading jet $ET > 25$ GeV, second jet $pT > 15$ GeV;
+  Virtuality $Q^2 < 1.0$ GeV;
+NumEvents: 1000000
+Beams: [p+, e+]
+Energies: [[920, 27.6]]
+PtCuts: [0]
+Description:
+  H1 photoproduction of of jets from proton--positron collisions 
+  at beam energies of 920~GeV on 27.5~GeV. Total integrated luminosity
+  66.6 pb$^-1$.
+BibKey: Aktas:2006qe
+BibTeX: '@article{Aktas:2006qe,
+      author         = "Aktas, A. and others",
+      title          = "{Photoproduction of dijets with high transverse momenta
+                        at HERA}",
+      collaboration  = "H1",
+      journal        = "Phys. Lett.",
+      volume         = "B639",
+      year           = "2006",
+      pages          = "21-31",
+      doi            = "10.1016/j.physletb.2006.05.060",
+      eprint         = "hep-ex/0603014",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ex",
+      reportNumber   = "DESY-06-020",
+      SLACcitation   = "%%CITATION = HEP-EX/0603014;%%"
+}'
+ReleaseTests:
+ - $A ep-920-dis-photoprod
