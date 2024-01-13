@@ -1,0 +1,56 @@
+Name: ALICE_2021_I1848990
+Year: 2021
+Summary: Measurement of beauty and charm production iat 5 TeV
+Experiment: ALICE
+Collider: LHC
+InspireID: 1848990
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Yonne Lourens <yonne_14@live.nl>
+ - Maria Monalisa De Melo Paulino
+References:
+ - 'JHEP 05 (2021) 220'
+ - 'DOI:10.1007/JHEP05(2021)220'
+ - 'arXiv:2102.13601'
+ - 'ALICE-6677'
+RunInfo: Minimum bias events
+Beams: [p+, p+]
+Energies: [[2510,2510]]
+Luminosity_fb: 19.3e-6
+Description:
+  'The $p_\text{T}$-differential production cross sections of prompt and non-prompt (produced in beauty-hadron decays) D mesons
+   were measured by the ALICE experiment at midrapidity ($|y|<0.5$) in proton-proton collisions at $\sqrt{s}$=5.02 TeV. The data
+   sample used in the analysis corresponds to an integrated luminosity of $(19.3\pm0.4)$ nb${}^{-1}$. D mesons were reconstructed
+   from their decays $D^0 \to K^-\pi^+$, $D^+\to K^-\pi^+\pi^+$, and $D^+_\text{s} \to \varphi\pi^+\to K^-K^+\pi^+$ and their
+   charge conjugates. Compared to previous measurements in the same rapidity region, the cross sections of prompt $D^+$ and
+   $D^+_\text{s}$ mesons have an extended $p_\text{T}$ coverage and total uncertainties reduced by a factor ranging from 1.05 to 1.6,
+   depending on $p_\text{T}$, allowing for a more precise determination of their $p_\text{T}$-integrated cross sections.
+   The results are well described by perturbative QCD calculations. The fragmentation fraction of heavy quarks to strange mesons
+   divided by the one to non-strange mesons, $f_\text{s}/(f_\text{u}+f_\text{d})$, is compatible for charm and beauty quarks and
+   with previous measurements at different centre-of-mass energies and collision systems. The $b\bar{b}$ production cross section
+   per rapidity unit at midrapidity, estimated from non-prompt $D$-meson measurements, is
+   $\text{d}\sigma_{b\bar{b}} / \text{d} y_{|y|<0.5}$ = 34.5 $\pm$ 2.4 (stat) ${}^{+4.7}_{-2.9}$ (tot. syst.) $\mu$b${}^{-1}$.
+   It is compatible with previous measurements at the same centre-of-mass energy and with the cross section predicted by
+   perturbative QCD calculations.'
+Keywords: [pp collisions, charm, beauty]
+BibKey: ALICE:2021mgk
+BibTeX: '@article{ALICE:2021mgk,
+    author = "Acharya, Shreyasi and others",
+    collaboration = "ALICE",
+    title = "{Measurement of beauty and charm production in pp collisions at $ \sqrt{s} $ = 5.02 TeV via non-prompt and prompt D mesons}",
+    eprint = "2102.13601",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CERN-EP-2021-034",
+    doi = "10.1007/JHEP05(2021)220",
+    journal = "JHEP",
+    volume = "05",
+    pages = "220",
+    year = "2021"
+}'
+
+
+   
+
+
