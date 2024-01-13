@@ -1,0 +1,46 @@
+Name: H1_1998_I477556
+Year: 1998
+Summary: Charged-particle photoproduction analysis
+Experiment: H1
+Collider: HERA Run I
+SpiresID: 3863948
+InspireID: 477556
+Reentrant: true
+Luminosity_fb: 0.00135
+Status: UNVALIDATED
+Authors:
+ - Ilkka Helenius <ilkka.m.helenius@jyu.fi>
+References:
+ - Eur.Phys.J.C10:363,1999
+ - DESY 98/148
+ - arXiv:hep-ex/9810020
+RunInfo:
+  820 GeV protons colliding with 27.5 GeV positrons;
+  Direct and resolved photoproduction of charged particles;
+  particle pseudorapidity $|\eta| < 1$
+NumEvents: 1000000
+Beams: [p+, gamma]
+Energies: [[820, 12.195]]
+PtCuts: [2]
+Description:
+  H1 photoproduction of charged particles from proton--positron collisions 
+  at beam energies of 820~GeV on 27.5~GeV. Notice that the flux factor has
+  been divided out and this is for p+gamma at the average energy for
+  proton-photon system.
+BibKey: Adloff:1998vt
+BibTeX: '@Article{Adloff:1998vt,
+      author         = "Adloff, C. and others",
+      title          = "{Charged particle cross-sections in photoproduction and
+                        extraction of the gluon density in the photon}",
+      collaboration  = "H1",
+      journal        = "Eur. Phys. J.",
+      volume         = "C10",
+      year           = "1999",
+      pages          = "363-372",
+      doi            = "10.1007/s100520050761",
+      eprint         = "hep-ex/9810020",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ex",
+      reportNumber   = "DESY-98-148",
+      SLACcitation   = "%%CITATION = HEP-EX/9810020;%%"
+}'
