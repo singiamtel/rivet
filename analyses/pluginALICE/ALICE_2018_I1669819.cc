@@ -76,7 +76,7 @@ namespace Rivet {
             if (part == "Ds") {
               const string ref2name = mkAxisCode(part_idx++, 1, 1);
               const YODA::Estimate1D ref2 = refData(ref2name);
-              rname = part+"_Dplus_"+cen;
+              rname = part+"_Dplus"+cen;
               book(_h["num_"+rname], "_num_"+rname, ref2);
               book(_h["den_"+rname], "_den_"+rname, ref2);
               book(_e[rname], ref2name);
@@ -232,7 +232,7 @@ namespace Rivet {
 
           for (const Particle& p : particlesDplus) {
             if (p.fromBottom()) continue;
-            _h["DplusPt_0010"+cen]->fill(p.pT()/GeV);
+            _h["DplusPt_"+cen]->fill(p.pT()/GeV);
             _h["num_Dplus_D0"+cen]->fill(p.pT()/GeV);
             _h["den_Ds_Dplus"+cen]->fill(p.pT()/GeV);
             _h["num_DplusPbPb_pp"+cen]->fill(p.pT()/GeV);
@@ -240,14 +240,14 @@ namespace Rivet {
 
           for (const Particle& p : particlesDstar) {
             if (p.fromBottom()) continue;
-            _h["DstarPt_0010"+cen]->fill(p.pT()/GeV);
+            _h["DstarPt_"+cen]->fill(p.pT()/GeV);
             _h["num_Dstar_D0"+cen]->fill(p.pT()/GeV);
             _h["num_DstarPbPb_pp"+cen]->fill(p.pT()/GeV);
           }
 
           for (const Particle& p : particlesDs) {
             if (p.fromBottom())  continue;
-            _h["DsPt_0010"+cen]->fill(p.pT()/GeV);
+            _h["DsPt_"+cen]->fill(p.pT()/GeV);
             _h["num_Ds_D0"+cen]->fill(p.pT()/GeV);
             _h["num_Ds_Dplus"+cen]->fill(p.pT()/GeV);
             _h["num_DsPbPb_pp"+cen]->fill(p.pT()/GeV);
@@ -285,7 +285,7 @@ namespace Rivet {
 
       for (auto& item  : _h) {
         for (const string& cen : vector<string>{ "00-10", "30-50", "60-80" }) {
-          if (item.first.find("_pp") != string::npos) {
+          if (item.first.substr(0, 4) == "den_" && item.first.find("_pp") != string::npos) {
             scale(item.second, _n[cen]/_c["sow_pp5TeV"]->sumW());
             continue;
           }
