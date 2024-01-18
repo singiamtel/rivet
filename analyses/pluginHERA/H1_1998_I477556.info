@@ -44,3 +44,5 @@ BibTeX: '@Article{Adloff:1998vt,
       reportNumber   = "DESY-98-148",
       SLACcitation   = "%%CITATION = HEP-EX/9810020;%%"
 }'
+ReleaseTests:
+ - $A egamma-200-dis-photoprod
