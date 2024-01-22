@@ -1,0 +1,47 @@
+Name: ATLAS_2023_I2663725
+Year: 2023
+Summary: VBS Zy production at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2663725
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Qibin Liu <qibin.liu@cern.ch>
+ - Gitanjali Poddar <poddar@lapp.in2p3.fr>
+ - Narei Lorenzo Martinez <narei.lorenzomartinez@lapp.in2p3.fr>
+References:
+ - arXiv:2305.19142 [hep-ex]
+ - ATLAS-STDM-2018-36
+Keywords:
+  - Zy
+  - VBS
+RunInfo: Electroweak Zy + 2jet production
+Beams: [p+, p+]
+Energies: [13000]
+Luminosity_fb: 140.0
+Description: |
+  This Letter presents the measurement of the fiducial and differential cross-sections of the electroweak production of a
+  $Z\gamma$ pair in association with two jets. The analysis uses 140 fb${}^{-1}$ of LHC proton-proton collision data taken
+  at $\sqrt{s}=13$ TeV recorded by the ATLAS detector during the years 2015-2018. Events with a $Z$ boson candidate decaying
+  into either an $e^+e^-$ or $\mu^+\mu^-$ pair, a photon and two jets are selected. The electroweak component is extracted by
+  requiring a large dijet invariant mass and a large rapidity gap between the two jets and is measured with an observed and
+  expected significance well above five standard deviations. The fiducial $pp \to Z\gamma jj$ cross-section for the electroweak
+  production is measured to be $3.6 \pm 0.5$ fb. The total fiducial cross-section that also includes contributions where the jets
+  arise from strong interactions is measured to be $16.8+2.0-1.8$ fb. The results are consistent with the Standard Model predictions.
+  Differential cross-sections are also measured using the same events and are compared with partoni-shower Monte Carlo simulations.
+  Good agreement is observed between data and predictions.
+BibKey: ATLAS:2023fxh
+BibTeX: '@article{ATLAS:2023fxh,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Measurement of the cross-sections of the electroweak and total production of a $Z \gamma$ pair in association with two jets in $pp$ collisions at $\sqrt{s}$ = 13 TeV with the ATLAS detector}",
+    eprint = "2305.19142",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2023-098",
+    month = "5",
+    year = "2023"
+}'
+ReleaseTests:
+ - $A pp-13000-eegamma
