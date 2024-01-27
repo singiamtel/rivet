@@ -79,6 +79,19 @@ namespace Rivet {
   template<typename... Args>
   using isCIterable = std::enable_if_t<(CIterable<Args>::value && ...)>;
 
+  // SFINAE struct to check for cstr
+  template<typename T>
+  struct isCString : std::false_type { };
+
+  template<>
+  struct isCString<char[]> : std::true_type { };
+
+  template<size_t N>
+  struct isCString<char[N]> : std::true_type { };
+
+  template <typename T>
+  inline constexpr bool is_cstring_v = isCString<T>::value;
+
 
   /// SFINAE check if T is a YODA Fillable
   template<typename T, typename = void>
