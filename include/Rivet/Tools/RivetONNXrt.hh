@@ -91,19 +91,20 @@ namespace Rivet {
     }
 
     /// Method to check if @a key exists in network metatdata
-    const bool hasKey(const std::string& key) const {
+    bool hasKey(const std::string& key) const {
       Ort::AllocatorWithDefaultOptions allocator;
       return (bool)_metadata->LookupCustomMetadataMapAllocated(key.c_str(), allocator);
     }
 
     /// Method to retrieve value associated with @a key
     /// from network metadata and return value as type T
-    template <typename T>
-    const T retrieve(const std::string& key) const {
+    template <typename T,
+      typename std::enable_if_t<!is_iterable_v<T> | is_cstring_v<T> >>
+    T retrieve(const std::string& key) const {
       Ort::AllocatorWithDefaultOptions allocator;
       Ort::AllocatedStringPtr res = _metadata->LookupCustomMetadataMapAllocated(key.c_str(), allocator);
       if (!res) {
-        throw("Ket '"+key+"' not found in network metadata!");
+        throw("Key '"+key+"' not found in network metadata!");
       }
       /*if constexpr (std::is_same<T, std::string>::value) {
         return res.get();
@@ -112,16 +113,37 @@ namespace Rivet {
     }
 
     /// Template specialisation of retrieve for std::string
-    const std::string retrieve(const std::string& key) const {
+    std::string retrieve(const std::string& key) const {
       Ort::AllocatorWithDefaultOptions allocator;
       Ort::AllocatedStringPtr res = _metadata->LookupCustomMetadataMapAllocated(key.c_str(), allocator);
       if (!res) {
-        throw("Ket '"+key+"' not found in network metadata!");
+        throw("Key '"+key+"' not found in network metadata!");
       }
       return res.get();
     }
 
-    const std::string retrieve(const std::string& key, const std::string& defaultreturn) const {
+    /// Overload of retrieve for vector<T>
+    template <typename T>
+    vector<T> retrieve(const std::string & key) const {
+      const vector<string> stringvec = split(retrieve(key), ",");
+      vector<T> returnvec = {};
+      for (const string & s : stringvec){
+        returnvec.push_back(lexical_cast<T>(s));
+      }
+      return returnvec;
+    }
+
+    /// Overload of retrieve for vector<T>, with a default return
+    template <typename T>
+    vector<T> retrieve(const std::string & key, const vector<T> & defaultreturn) const {
+      try {
+        return retrieve<T>(key);
+      } catch (...) {
+        return defaultreturn;
+      }
+    }
+
+    std::string retrieve(const std::string& key, const std::string& defaultreturn) const {
       try {
         return retrieve(key);
       } catch (...) {
@@ -131,8 +153,9 @@ namespace Rivet {
 
     /// Variation of retrieve method that falls back
     /// to @a defaultreturn if @a key cannot be found
-    template <typename T>
-    const T retrieve(const std::string& key, const T& defaultreturn) const {
+    template <typename T,
+      typename std::enable_if_t<!is_iterable_v<T> | is_cstring_v<T> >>
+    T retrieve(const std::string& key, const T& defaultreturn) const {
       try {
         return retrieve<T>(key);
       } catch (...) {
