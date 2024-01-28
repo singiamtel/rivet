@@ -44,7 +44,7 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         void setFinalizePeriod(string, int)
         void mergeYodas(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool)
         void merge(AnalysisHandler&)
-        vector[double] serializeContent() except +
+        vector[double] serializeContent(bool) except +
         void deserializeContent(vector[double]&) except +
 
 cdef extern from "Rivet/Run.hh" namespace "Rivet":
