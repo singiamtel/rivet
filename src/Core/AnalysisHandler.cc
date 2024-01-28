@@ -1291,6 +1291,7 @@ namespace Rivet {
         rao.get()->setActiveWeightIdx(iW);
         output.push_back(rao.get()->activeAO());
       }
+      rao.get()->unsetActiveWeight();
     }
 
     return output;

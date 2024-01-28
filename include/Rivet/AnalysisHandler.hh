@@ -388,7 +388,7 @@ namespace Rivet {
     /// @name MPI (de-)serialisation
     ///@{
 
-    vector<double> serializeContent() {
+    vector<double> serializeContent(bool fixed_length = false) {
       if (!_initialised)
         throw Error("AnalysisHandler has not been initialised!");
 
@@ -401,7 +401,7 @@ namespace Rivet {
       data.resize(raos.size());
       size_t total = 0;
       for (size_t i = 0; i < raos.size(); ++i) {
-        vector<double> tmp = raos[i]->serializeContent();
+        vector<double> tmp = raos[i]->serializeContent(fixed_length);
         total += tmp.size() + 1; // +1 for length parameter
         data[i].reserve(tmp.size());
         data[i].insert(std::end(data[i]),

@@ -162,8 +162,8 @@ cdef class AnalysisHandler:
         "Combine analysis data in-memory with another AH object"
         self._ptr.merge(other._ptr[0])
 
-    def serializeContent(self):
-        return self._ptr.serializeContent()
+    def serializeContent(self, fixed_length = False):
+        return self._ptr.serializeContent(fixed_length)
 
     def deserializeContent(self, data):
         data = list(float(x) for x in data)
