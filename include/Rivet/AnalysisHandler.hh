@@ -421,7 +421,7 @@ namespace Rivet {
       return rtn;
     }
 
-    void deserializeContent(const vector<double>& data) {
+    void deserializeContent(const vector<double>& data, size_t nprocs = 0) {
       if (!_initialised)
         throw Error("AnalysisHandler has not been initialised!");
 
@@ -442,6 +442,7 @@ namespace Rivet {
 
         // obtain content length and set content iterators
         size_t aoLen = *(itr + offset); ++offset;
+        if (nprocs)  aoLen /= nprocs;
         auto first = itr + offset;
         auto last = first + aoLen;
         // load data into AO
