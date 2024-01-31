@@ -1,0 +1,38 @@
+Name: LHCF_2023_I2658888
+Year: 2023
+Summary: Measurement of the forward $\eta$ meson production rate in p-p collisions at $\sqrt{s} = 13$~TeV with the LHCf-Arm2 detector
+Experiment: LHCF
+Collider: LHC
+InspireID: 2658888
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Eugenio Berti <eugenio.berti@fi.infn.it>
+ - LHCf collaboration <lhcf@isee.nagoya-u.ac.jp>
+References:
+ - 'JHEP 10 (2023) 169'
+ - 'DOI:10.1007/JHEP10(2023)169'
+ - 'arXiv:2305.06633'
+Keywords:
+ - Eta mesons
+ - Forward Physics
+RunInfo: Measurement of the inclusive $\eta$ meson production rate at $p_{T} < 1.10 GeV/c$ in $\sqrt{s} = 13$~TeV proton-proton collisions, expressed as a function of the Feynman variable $\x_{F} = 2 p_{Z}/sqrt(s)$.
+NumEvents: 1000000
+NeedCrossSection: no
+Beams: [p+, p+]
+Energies: [13000]
+Description: 'The forward $\eta$ mesons production has been observed by the Large Hadron Collider forward (LHCf) experiment in proton-proton collision at $\sqrt{s}$ = 13 TeV. This paper presents the measurement of the inclusive production rate of $\eta$ in $p_T<$ 1.1 GeV/c, expressed as a function of the Feynman-x variable. These results are compared with the predictions of several hadronic interaction models commonly used for the modelling of the air showers produced by ultra-high energy cosmic rays. This is both the first measurement of $\eta$ mesons from LHCf and the first time a particle containing strange quarks has been observed in the forward region for high-energy collisions. These results will provide a powerful constraint on hadronic interaction models for the purpose of improving the understanding of the processes underlying the air showers produced in the Earth atmosphere by ultra-energetic cosmic rays.'
+BibKey: JHEP.10.169
+BibTeX: '@article{JHEP.10.169,
+    author = "Adriani, O. and others",
+    title = "{Measurement of the forward \ensuremath{\eta} meson production rate in p-p collisions at $ \sqrt{\textrm{s}} $ = 13 TeV with the LHCf-Arm2 detector}",
+    eprint = "2305.06633",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2023-076",
+    doi = "10.1007/JHEP10(2023)169",
+    journal = "JHEP",
+    volume = "10",
+    pages = "169",
+    year = "2023"
+}'
