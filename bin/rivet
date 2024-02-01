@@ -81,6 +81,8 @@ anagroup.add_argument("--pwd", dest="ANALYSIS_PATH_PWD", action="store_true", de
                       help="append the current directory (pwd) to the analysis/data search paths (cf. $RIVET_ANALYSIS_PATH).")
 anagroup.add_argument("--print-projection-tree", dest="DEBUG_PROJ_TREE", action="store_true", default=False,
                       help="Plot the projection tree for this set of analyses (in addition to running rivet normally")
+anagroup.add_argument("--no-detex", dest="DO_DETEX", action="store_false", default=True,
+                      help="do not perform replacement of LaTeX symbols with Unicode when printing to terminal")
 
 extragroup = parser.add_argument_group("Extra run settings")
 extragroup.add_argument("-o", "-H", "--histo-file", dest="HISTOFILE",
@@ -244,20 +246,18 @@ if args.LIST_ANALYSES:
             msg.append('')
             if args.LOGLEVEL <= logging.INFO:
                 a = rivet.AnalysisLoader.getAnalysis(aname)
-                st = "" if "VALIDATED" in a.status() else "[UNVALIDATED]" #("[%s] " % a.status())
-                # detex will very likely introduce some non-ASCII chars from
-                # Greek names in analysis titles.
-                # The u"" prefix and explicit print encoding are necessary for
-                # py2 to handle this properly
+                st = "" if "VALIDATED" in a.status() else "[UNVALIDATED] " #("[%s] " % a.status())
+                # detex() introduces non-ASCII chars from Greek names in analysis titles.
+                # The u"" prefix and explicit print encoding are necessary for Py2 to handle this properly
                 msg[-1] = u"%s%s" % (st, a.summary())
                 if args.LOGLEVEL < logging.INFO:
                     if a.keywords():
                         msg[-1] += u"  [%s]" % " ".join(a.keywords())
                     if a.luminosityfb():
                         msg[-1] += u"  [ \int L = %s fb^{-1} ]" % a.luminosityfb()
-    msg = rivet.util.detex(msg)
+    if args.DO_DETEX:
+        msg = rivet.util.detex(msg)
     retlist = '\n'.join([ u"%-25s   %s" % (a,m) for a,m in zip(names,msg) ])
-    #retlist = retlist.encode('utf-8')
     print(retlist)
     sys.exit(0)
 
@@ -301,7 +301,8 @@ if len(args.SHOW_ANALYSES) > 0:
         msg = ""
         msg += name + "\n"
         msg += (len(name) * "=") + "\n\n"
-        msg += rivet.util.detex(ana.summary()) + "\n\n"
+        summ = ana.summary()
+        msg += (rivet.util.detex(summ) if args.DO_DETEX else summ) + "\n\n"
         msg += "Status: " + ana.status() + "\n"
         msg += "URL: https://rivet.hepforge.org/analyses/{}.html".format(name) + "\n"
         msg += "\n"
@@ -329,7 +330,8 @@ if len(args.SHOW_ANALYSES) > 0:
 
         msg += "Description:\n"
         twrap = textwrap.TextWrapper(width=75, initial_indent=2*" ", subsequent_indent=2*" ")
-        msg += twrap.fill(rivet.util.detex(ana.description())) + "\n\n"
+        desc = ana.description()
+        msg += twrap.fill(rivet.util.detex(desc) if args.DO_DETEX else desc) + "\n\n"
 
         if ana.experiment():
             msg += "Experiment: " + ana.experiment()

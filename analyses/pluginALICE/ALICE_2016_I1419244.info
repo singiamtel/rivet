@@ -31,7 +31,7 @@ BibKey: Adam:2016izf
 BibTeX: '@article{Adam:2016izf,
       author         = "Adam, Jaroslav and others",
       title          = "{Anisotropic flow of charged particles in Pb-Pb
-                        collisions at $\sqrt{s_{\rm NN}}=5.02$ TeV}",
+                        collisions at $\sqrt{s_\mathrm{NN}}=5.02$ TeV}",
       collaboration  = "ALICE",
       journal        = "Phys. Rev. Lett.",
       volume         = "116",

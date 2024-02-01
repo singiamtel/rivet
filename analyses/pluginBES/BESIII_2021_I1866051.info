@@ -23,7 +23,7 @@ Keywords: []
 BibKey: Ablikim:2021llj
 BibTeX: '@article{Ablikim:2021llj,
     author = "Ablikim, M. and others",
-    title = "{Cross section measurement of $e^{+}e^{-} \to K_{S}^{0}K_{L}^{0}$ at $\sqrt{s}=2.00-3.08~{\rm GeV}$}",
+    title = "{Cross section measurement of $e^{+}e^{-} \to K_{S}^{0}K_{L}^{0}$ at $\sqrt{s}=2.00-3.08~\mathrm{GeV}$}",
     eprint = "2105.13597",
     archivePrefix = "arXiv",
     primaryClass = "hep-ex",

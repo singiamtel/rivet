@@ -35,8 +35,8 @@ Description:
     eta-phi plane smaller 1.2) its four momentum is subtracted from the four momentum of the jet.
 
   Definition of the particle level phase space:
-  - only ${\rm t\bar{t}}$ decays with one top quark decaying hadronically and one top quark
-    decaying leptonically including an electron or muon from the W decay.
+  - only $t\bar{t}$ decays with one top quark decaying hadronically and one top quark
+    decaying leptonically including an electron or muon from the $W$ decay.
   - lepton $\pt > 45~\GeV$ and $|\eta| < 2.1$
   - at least one jet with $\pt > 400~\GeV$ and $|\eta| < 2.5$
   - a second jet with $\pt > 150~\GeV$ and $|\eta| < 2.5$

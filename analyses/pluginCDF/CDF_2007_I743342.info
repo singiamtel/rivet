@@ -36,9 +36,7 @@ BibTeX: '@Article{Abulencia:2007ez,
      author    = "Abulencia, A. and others",
      collaboration = "CDF",
      title     = "{Measurement of the Inclusive Jet Cross Section using the
-                  {\boldmath $k_{\rm T}$} algorithmin{\boldmath
-                  $p\overline{p}$} Collisions at{\boldmath $\sqrt{s}$} = 1.96
-                  TeV with the CDF II Detector}",
+                  {$k_{T}$} algorithm in {$p\overline{p}$} Collisions at {$\sqrt{s}$} = 1.96~TeV with the CDF II Detector}",
      journal   = "Phys. Rev.",
      volume    = "D75",
      year      = "2007",

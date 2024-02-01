@@ -22,7 +22,7 @@ BibKey: BESIII:2020ish
 BibTeX: '@article{BESIII:2020ish,
     author = "Ablikim, Medina and others",
     collaboration = "BESIII",
-    title = "{Observation of the decays $\chi_{cJ}\to\Sigma^{0}\bar{p}K^{+}+{\rm c.c.}~(J=0, 1, 2)$}",
+    title = "{Observation of the decays $\chi_{cJ}\to\Sigma^{0}\bar{p}K^{+}+\mathrm{c.c.}~(J=0, 1, 2)$}",
     eprint = "2009.09265",
     archivePrefix = "arXiv",
     primaryClass = "hep-ex",

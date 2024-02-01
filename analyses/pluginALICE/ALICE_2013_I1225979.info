@@ -25,7 +25,7 @@ BibTeX: '@article{Abbas:2013bpa,
       author         = "Abbas, Ehab and others",
       title          = "{Centrality dependence of the pseudorapidity density
                         distribution for charged particles in Pb-Pb collisions at
-                        $\sqrt{s_{\rm NN}}$ = 2.76 TeV}",
+                        $\sqrt{s_\mathrm{NN}}$ = 2.76 TeV}",
       collaboration  = "ALICE",
       journal        = "Phys. Lett.",
       volume         = "B726",

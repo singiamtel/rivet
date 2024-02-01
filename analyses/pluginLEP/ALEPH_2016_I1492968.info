@@ -17,7 +17,7 @@ BibKey: Heister:2016stz
 BibTeX: '@article{Heister:2016stz,
       author         = "Heister, Arno",
       title          = "{Observation of an excess at 30 GeV in the opposite sign
-                        di-muon spectra of ${\rm Z} \to b\overline{ b} + {\rm X}$
+                        di-muon spectra of $Z \to b\overline{b} + X$
                         events recorded by the ALEPH experiment at LEP}",
       year           = "2016",
       eprint         = "1610.06536",

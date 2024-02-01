@@ -1,3 +1,12 @@
+2023-12-22  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add --no-detex option to rivet script, to bypass pydetex (or
+	fallback) TeX decoding.
+
+2023-12-21  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Replace flaky pandoc subprocess call with pydetex library.
+
 2023-12-18  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Rename all legacy SPIRES-named analyses to an Inspire-based code-name.
