@@ -101,20 +101,11 @@ extragroup.add_argument("-n", "--nevts", dest="MAXEVTNUM", type=int,
 extragroup.add_argument("--nskip", dest="EVTSKIPNUM", type=int,
                         default=0, metavar="NUM",
                         help="skip NUM events read from input before beginning processing")
-extragroup.add_argument("--skip-weights", "--skip-multiweights", dest="SKIP_WEIGHTS", action="store_true",
-                      default=False, help="only run on the nominal weight")
-extragroup.add_argument("--match-weights", dest="MATCH_WEIGHTS", default="",
-                        help="select weight variations matching this comma-separated list of weight names "
-                        "(supports regular expressions). Nominal weight cannot be skipped.")
-extragroup.add_argument("--unmatch-weights", dest="UNMATCH_WEIGHTS", default="",
-                        help="deselect weight variations matching this comma-separated list of weight names "
-                        "(supports regular expressions). Nominal weight cannot be skipped.")
-extragroup.add_argument("--nominal-weight", "--default-weight", dest="NOMINAL_WEIGHT", default="",
-                        help="specify the nominal weight name from the variations ")
-extragroup.add_argument("--weight-cap", dest="WEIGHT_CAP", type=float,
-                      default=None, help="set maximum abs(weight) to be used for histogram fills")
-extragroup.add_argument("--nlo-smearing", dest="NLO_SMEARING", type=float,
-                      default=0.0, help=" If larger than zero, smear histogram fillings to avoid that NLO counter events end up on the other side of a bin-boundary as compared to the corresponding real event in a fill. The fills will be smeared over the given fraction of the bin width.")
+extragroup.add_argument("--nlo-smearing", dest="NLO_SMEARING", type=float, default=0.0,
+                        help="If larger than zero, smear histogram fillings to avoid that "
+                        + "NLO counter events end up on the other side of a bin-boundary "
+                        + "as compared to the corresponding real event in a fill. The fills "
+                        + "will be smeared over the given fraction of the bin width.")
 extragroup.add_argument("--runname", dest="RUN_NAME", default=None, metavar="NAME",
                         help="give an optional run name, to be prepended as a 'top level directory' in histo paths")
 extragroup.add_argument("--ignore-beams", dest="IGNORE_BEAMS", action="store_true", default=False,
@@ -129,6 +120,20 @@ extragroup.add_argument("-d", "--dump", "--histo-interval", dest="DUMP_PERIOD", 
                         "finalize function is executed first.")
 extragroup.add_argument("--bootstrapfile", dest="BOOTSTRAP_FILE", default=None,
                         help="set the file name for a boostrap file. Note: This file grows in size quickly!")
+
+weightsgroup = parser.add_argument_group("Weight-stream settings")
+weightsgroup.add_argument("--weight-skip", "--skip-weights", "--skip-multiweights", dest="SKIP_WEIGHTS", action="store_true",
+                          default=False, help="only run on the nominal weight")
+weightsgroup.add_argument("--weight-match", "--match-weights", dest="MATCH_WEIGHTS", default="",
+                          help="select weight variations matching this comma-separated list of weight names "
+                          "(supports regular expressions). Nominal weight cannot be skipped.")
+weightsgroup.add_argument("--weight-unmatch", "--unmatch-weights", dest="UNMATCH_WEIGHTS", default="",
+                          help="deselect weight variations matching this comma-separated list of weight names "
+                          "(supports regular expressions). Nominal weight cannot be skipped.")
+weightsgroup.add_argument("--weight-nominal", "--weight-default", "--nominal-weight", "--default-weight", dest="NOMINAL_WEIGHT", default="",
+                          help="specify the nominal weight name from the variations ")
+weightsgroup.add_argument("--weight-cap", dest="WEIGHT_CAP", type=float,
+                          default=None, help="set maximum abs(weight) to be used for histogram fills")
 
 timinggroup = parser.add_argument_group("Timeouts and periodic operations")
 timinggroup.add_argument("--event-timeout", dest="EVENT_TIMEOUT", type=int,

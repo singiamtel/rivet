@@ -47,8 +47,11 @@ namespace Rivet {
       _unmatchWeightNames(""),
       _nominalWeightName(""),
       _weightCap(0.),
-      _NLOSmearing(0.), _defaultWeightIdx(0),
-      _rivetDefaultWeightIdx(0), _dumpPeriod(0), _dumping(false) {
+      _NLOSmearing(0.),
+      _defaultWeightIdx(0),
+      _rivetDefaultWeightIdx(0),
+      _customDefaultWeightIdx(-1),
+      _dumpPeriod(0), _dumping(false) {
     registerDefaultTypes<double,int,string>();
   }
 
@@ -207,7 +210,11 @@ namespace Rivet {
 
 
   void AnalysisHandler::setWeightNames(const GenEvent& ge) {
-    _weightNames = HepMCUtils::weightNames(ge);
+    setWeightNames( HepMCUtils::weightNames(ge) );
+  }
+
+  void AnalysisHandler::setWeightNames(const vector<string>& weightNames) {
+    _weightNames = weightNames;
 
     // If there are no weights, add a nominal one
     if (_weightNames.empty()) {
@@ -219,19 +226,22 @@ namespace Rivet {
 
     // Find default weights, starting with the chosen or preferred name (default = "")
     size_t nDefaults = 0;
+    int customNomIdx = -1;
     string nom_winner = "";
     vector<string> nom_shortlist;
     _weightIndices.clear();
     for (size_t i = 0, N = _weightNames.size(); i < N; ++i) {
       _weightIndices.push_back(i);
-      if (_weightNames[i] == _nominalWeightName) {
+      if (_weightNames[i] == "") {
         nom_shortlist.push_back("'"+ _weightNames[i] +"'");
         if (nDefaults == 0) {
-          nom_winner = "'" + _weightNames[i] + "'";
-          _weightNames[i] = "";
-          _rivetDefaultWeightIdx = _defaultWeightIdx = i;
+          nom_winner = _weightNames[i];
+          _defaultWeightIdx = i;
         }
-        nDefaults += 1;
+        ++nDefaults;
+      }
+      else if (customNomIdx < 0 && _weightNames[i] == _nominalWeightName) {
+        customNomIdx = i;
       }
     }
 
@@ -241,36 +251,55 @@ namespace Rivet {
         const string W = toUpper(_weightNames[i]);
         if (W == "WEIGHT" || W == "0" || W == "DEFAULT" || W == "NOMINAL") {
           nom_shortlist.push_back("'"+ _weightNames[i] +"'");
-          if (nDefaults == 0) {
-            nom_winner = "'" + _weightNames[i] + "'";
-            _weightNames[i] = "";
-            _rivetDefaultWeightIdx = _defaultWeightIdx = i;
+          if (nDefaults == 0 || (int)i == customNomIdx) {
+            nom_winner = _weightNames[i];
+            _defaultWeightIdx = i;
           }
-          nDefaults += 1;
+          ++nDefaults;
         }
       }
     }
 
-    // Warn user that no nominal weight could be identified
+    // If no nominal weight could be identified,
+    // check whether the user has specified a nominal
+    if (nDefaults == 0 && customNomIdx >=0) {
+      ++nDefaults;
+      nom_winner = _weightNames[customNomIdx];
+      _defaultWeightIdx = customNomIdx;
+      customNomIdx = -1;
+    }
+
+    // Warn user if still no nominal weight could be identified
     if (nDefaults == 0) {
       MSG_WARNING("Could not identify nominal weight. Will continue assuming variations-only run.");
-      // Note quoting for clarity, given the indents:
+      // Put candidates in quotes in case weight name contains whitespace
       MSG_WARNING("Candidate weight names:\n    '" << join(_weightNames, "'\n    '") << "'");
     }
+
     // Warn if multiple weight names were acceptable alternatives
     if (nDefaults > 1) {
-      MSG_WARNING("Found " << nDefaults << " default weight candidates: " << join(nom_shortlist, ", ") << ". Will use: " <<  nom_winner);
+      MSG_WARNING("Found " << nDefaults << " default weight candidates: "
+                  << join(nom_shortlist, ", ") << ". Will use: '"
+                  <<  nom_winner << "'");
     }
 
-    // Apply behaviours for only using the nominal weight, or all weights
-    if (_skipMultiWeights)  {
+    if (_skipMultiWeights) {
 
       // If running in single-weight mode, remove all bar the nominal weight
-      _weightIndices = { _defaultWeightIdx };
-      _weightNames = { _weightNames[_defaultWeightIdx] };
-      _rivetDefaultWeightIdx = 0;
+      _weightIndices.clear();
+      _weightNames.clear();
+      if (customNomIdx >= 0 && customNomIdx != (int)_defaultWeightIdx) {
+        _weightIndices.push_back(customNomIdx);
+        _weightNames.push_back(_weightNames[customNomIdx]);
+        _customDefaultWeightIdx = 0;
+        MSG_WARNING("Specified nominal weight different from auto-detected nominal weight. Will retain both.");
+      }
+      _weightIndices.push_back(_defaultWeightIdx);
+      _weightNames.push_back(_weightNames[_defaultWeightIdx]);
+      _rivetDefaultWeightIdx = _weightIndices.size() - 1;
 
-    } else {
+    }
+    else {
 
       // Check if weight name matches a supplied string/regex and filter to select those only
       if (_matchWeightNames != "") {
@@ -283,12 +312,19 @@ namespace Rivet {
         // Check which weights match supplied weight-name pattern
         vector<string> selected_subset; vector<size_t> selected_indices;
         for (size_t i = 0, N = _weightNames.size(); i < N; ++i) {
+          // The default weight cannot be "unselected"
           if (_weightIndices[i] == _defaultWeightIdx) {
-            // The default weight cannot be "unselected"
             _rivetDefaultWeightIdx = selected_indices.size();
             selected_indices.push_back(_weightIndices[i]);
             selected_subset.push_back(_weightNames[i]);
             MSG_DEBUG("Selected nominal weight: \"" << _weightNames[i] << "\"");
+            continue;
+          }
+          else if (_weightIndices[i] == customNomIdx) {
+            _customDefaultWeightIdx = selected_indices.size();
+            selected_indices.push_back(_weightIndices[i]);
+            selected_subset.push_back(_weightNames[i]);
+            MSG_DEBUG("Selected custom nominal weight: " << _weightNames[i]);
             continue;
           }
           for (const std::regex& re : patterns) {
@@ -316,12 +352,19 @@ namespace Rivet {
       // Check which weights match supplied weight-name pattern
       vector<string> selected_subset; vector<size_t> selected_indices;
       for (size_t i = 0, N = _weightNames.size(); i < N; ++i) {
+        // The default weight cannot be vetoed
         if (_weightIndices[i] == _defaultWeightIdx) {
-          // The default weight cannot be vetoed
           _rivetDefaultWeightIdx = selected_indices.size();
           selected_indices.push_back(_weightIndices[i]);
           selected_subset.push_back(_weightNames[i]);
           MSG_DEBUG("Selected nominal weight: " << _weightNames[i]);
+          continue;
+        }
+        else if (_weightIndices[i] == customNomIdx) {
+          _customDefaultWeightIdx = selected_indices.size();
+          selected_indices.push_back(_weightIndices[i]);
+          selected_subset.push_back(_weightNames[i]);
+          MSG_DEBUG("Selected custom nominal weight: " << _weightNames[i]);
           continue;
         }
         bool skip = false;
@@ -340,8 +383,12 @@ namespace Rivet {
 
     // Done (de-)selecting weights: show useful debug messages
     MSG_DEBUG("Default weight name: \"" <<  _weightNames[_rivetDefaultWeightIdx] << "\"");
-    MSG_DEBUG("Default weight index (Rivet): " << _rivetDefaultWeightIdx);
-    MSG_DEBUG("Default weight index (overall): " << _defaultWeightIdx);
+    MSG_DEBUG("Default weight position (in Rivet): " << _rivetDefaultWeightIdx);
+    MSG_DEBUG("Default weight index (in original weight vector): " << _defaultWeightIdx);
+
+    // Set Rivet's preferred weight name for the intended nominal
+    if (_customDefaultWeightIdx < 0)  _customDefaultWeightIdx = _rivetDefaultWeightIdx;
+    _weightNames[_customDefaultWeightIdx] = "";
 
     // Write weight names into the bootstrap file, if active
     if (_fbootstrap.is_open()) {
@@ -1000,9 +1047,7 @@ namespace Rivet {
     }
 
     // Make analysis handler aware of the weight names present
-    _weightNames.clear();
-    _rivetDefaultWeightIdx = _defaultWeightIdx = 0;
-    _weightNames = vector<string>(foundWeightNames.begin(), foundWeightNames.end());
+    setWeightNames( vector<string>(foundWeightNames.begin(), foundWeightNames.end()) );
 
     // Then we create and initialize all analyses
     for (const string& ananame : foundAnalyses) { addAnalysis(ananame); }
@@ -1226,9 +1271,9 @@ namespace Rivet {
     output.reserve(raos.size() * numWeights() * (includeraw ? 2 : 1));
 
     // Identify an index ordering so that default weight is written out first
-    vector<size_t> order = { _rivetDefaultWeightIdx };
-    for (size_t i = 0; i < numWeights(); ++i) {
-      if (i != _rivetDefaultWeightIdx) order.push_back(i);
+    vector<size_t> order{ (size_t)_customDefaultWeightIdx };
+    for (int i = 0, N = (int)numWeights(); i < N; ++i) {
+      if (i != _customDefaultWeightIdx) order.push_back(i);
     }
 
     // Then we go through all finalized, non-TMP AOs one weight at a time
@@ -1362,17 +1407,11 @@ namespace Rivet {
 
   void AnalysisHandler::setCrossSection(const vector<pair<double,double>>& xsecs, bool isUserSupplied) {
 
-    if (xsecs.empty())
+    if (xsecs.empty()) {
       throw UserError("No cross-section supplied!");
-
-    // HepMC3 demands that variations cross-sections be explicitly set by the generator,
-    // in such a way that it cannot be used directly with HepMC2 files - where these are
-    // typically missing - unless the user is willing to jump through ludicrous hoops.
-    bool allEqual = std::adjacent_find(xsecs.begin(), xsecs.end(), std::not_equal_to<>()) == xsecs.end();
-    if (xsecs.size() > 2) {
-      allEqual |= std::adjacent_find(xsecs.begin() + 1, xsecs.end(), std::not_equal_to<>()) == xsecs.end();
     }
-    if (xsecs.size() == 1 || allEqual)  setCrossSection(xsecs[0], isUserSupplied);
+
+    if (xsecs.size() == 1)  setCrossSection(xsecs[0], isUserSupplied);
     else {
       // Update the user xsec
       if (isUserSupplied) _userxs = xsecs[0];
@@ -1405,7 +1444,7 @@ namespace Rivet {
     /// @todo Performance optimization? Overwriting the whole scatter wrapper on every event seems inefficient...
     MSG_TRACE("Setting nominal cross-section = " << xsec.first << " +- " << xsec.second << " pb");
     _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
-    _eventCounter.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
+    _eventCounter.get()->setActiveWeightIdx(defaultWeightIndex());
     const double nomwgt = sumW();
     const double nomwt2 = sumW2();
     for (size_t iW = 0; iW < numWeights(); ++iW) {
@@ -1421,7 +1460,7 @@ namespace Rivet {
 
 
   double AnalysisHandler::nominalCrossSection() const {
-    _xs.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
+    _xs.get()->setActiveWeightIdx(defaultWeightIndex());
     double xs = _xs->val();
     if (isnan(xs)) {
       string errMsg = "Value missing when requesting nominal cross-section";
@@ -1433,7 +1472,7 @@ namespace Rivet {
 
 
   double AnalysisHandler::nominalCrossSectionError() const {
-    _xs.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
+    _xs.get()->setActiveWeightIdx(defaultWeightIndex());
     double xserr = _xs->errAvg();
     if (isnan(xserr)) {
       string errMsg = "Value missing when requesting nominal cross-section error";
@@ -1451,7 +1490,7 @@ namespace Rivet {
     // update the weighted cross-section estimate with the cross-section
     // information from the previous HepMC file (this method gets called
     // before the first event from the new file gets processed).
-    _eventCounter.get()->setActiveWeightIdx(_rivetDefaultWeightIdx);
+    _eventCounter.get()->setActiveWeightIdx(defaultWeightIndex());
     const double effN = _eventCounter->effNumEntries();
     const double wgt = effN - _numEntriesAggregate;
     _numEntriesAggregate = effN;
