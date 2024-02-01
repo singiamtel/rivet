@@ -517,6 +517,7 @@ if __name__ == '__main__':
                     poptions = getFileOptions(plotoptions[infile], componentNames) if construct_band else { }
                     for bandType, bandContribs in poptions.items():
                         for curvegroup in bandContribs.split(' '):
+                            hasMatch = False
                             isPDF = 'PDF' in bandType
                             errors = None; PDFset = None; nPDF = None; nomVals = None; PDFvars = [ ]
                             for varname in sorted(hmcs.keys()):
@@ -546,11 +547,18 @@ if __name__ == '__main__':
                                         errors[1] = list(map(max, zip(errors[1], central_values)))
                                     # remove current variation from curves to be plotted
                                     if not isNominal:
+                                        hasMatch = True
                                         del mchistos[infile][xpath][varname]
                                         if isPDF and PDFset == None:
                                             lhapdfID = int(re.search('PDF[0-9]*', varname).group(0)[3:])
                                             PDFset = lhapdf.mkPDF(lhapdfID).set()
                                             nPDF = int(PDFset.size)
+                            if not hasMatch:
+                                txt = "WARNING: "
+                                txt += 'PDF band' if isPDF else 'Envelope'
+                                txt += " prescription '" + curvegroup
+                                txt += "' did not match any variation weights!"
+                                print(txt, file=sys.stderr)
                             # compute PDF uncertainty
                             if PDFset:
                                 # if the number of PDF variations is off by 1,
