@@ -314,11 +314,10 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                     outputdict['histograms'][filename+label]['nominal'] = thisObj
 
                 for i, prescription in enumerate(makePDFBand.split()):
-                    if verbose and prescription not in pdf_matches:
-                      pdf_matches[prescription] = [ ]
+                    if prescription not in pdf_matches:
+                        pdf_matches[prescription] = [ ]
                     if any([ re.search(pat, histogramkey) for pat in prescription.split(',') ]):
-                        if verbose:
-                            pdf_matches[prescription].append(histogramkey)
+                        pdf_matches[prescription].append(histogramkey)
 
                         # store values from PDF variation
                         PDFvars[i].append(central_values)
@@ -329,10 +328,10 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                             PDFsets[i] = lhapdf.mkPDF(lhapdfID).set()
 
                 for i, prescription in enumerate(makeEnvelope.split()):
-                    if verbose and prescription not in env_matches:
-                      env_matches[prescription] = [ ]
+                    if prescription not in env_matches:
+                        env_matches[prescription] = [ ]
                     if isNominal or any([ re.search(pat, histogramkey) for pat in prescription.split(',') ]):
-                        if verbose:
+                        if not isNominal:
                             env_matches[prescription].append(histogramkey)
                         if not Enverrors[i]:
                             Enverrors[i] = [ list(central_values), list(central_values) ]
@@ -349,14 +348,19 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                             continue
                     outputdict['histograms'][filename+label]['multiweight'+histogramkey] = thisObj
 
-            if verbose:
-                for pat in pdf_matches:
-                  print ("PDF prescription \"%s\" matches:" % pat)
-                  print (pdf_matches[pat])
-                for pat in env_matches:
-                  print ("Envelope prescription \"%s\" matches:" % pat)
-                  print (env_matches[pat])
-                del pdf_matches, env_matches
+            for pat in pdf_matches:
+                if not len(pdf_matches[pat]):
+                    print (f"WARNING: PDF band prescription '{pat}' did not match any variation weights!")
+                elif verbose:
+                    print ("PDF prescription \"%s\" matches:" % pat)
+                    print (pdf_matches[pat])
+            for pat in env_matches:
+                if not len(env_matches[pat]):
+                    print (f"WARNING: Envelope prescription '{pat}' did not match any variation weights!")
+                elif verbose:
+                    print ("Envelope prescription \"%s\" matches:" % pat)
+                    print (env_matches[pat])
+            del pdf_matches, env_matches
 
             PDFerrors = [ ]
             for pdf_set, pdf_vars in zip(PDFsets, PDFvars):
