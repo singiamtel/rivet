@@ -153,7 +153,7 @@ namespace Rivet {
         ss2 << fixed << setprecision(3) << pctinc << "%";
         const string pctincstr = ss2.str();
         ss << "\n"
-           << setw(maxnamelen+5) << left << (i == 1 ? "" : "Pass "+BaseT::bin(i-1).xEdge()) << "   "
+           << setw(maxnamelen+5) << left << (i == 1 ? "" : "Pass "+BaseT::bin(i).xEdge()) << "   "
            << setw(weight0len) << right << weightstr << "    "
            << setw(count0len) << right << countstr << "    "
            << setw(6) << right << (pcttot < 0 ? "- " : pcttotstr) << "    "
