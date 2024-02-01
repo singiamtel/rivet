@@ -105,7 +105,10 @@ namespace Rivet {
       Histo1DPtr _h_K0S[7];
       Histo1DPtr _h_LAMBDA[7];
       Histo1DPtr _h_Q2_tmp;
+
   };
 
+
   RIVET_DECLARE_PLUGIN(ZEUS_2011_I945935);
+
 }

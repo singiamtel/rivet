@@ -87,127 +87,151 @@ def texpand(s):
     return t
 
 
+def _detex(t):
+    t = t.replace(r"\rm", "")
+    t = t.replace(r"\it", "")
+    t = t.replace(r"\boldmath", "")
+    t = t.replace(r"\mathrm{", "{")
+    t = t.replace(r"\text{", "{")
+    t = t.replace(r"\MeV", "MeV")
+    t = t.replace(r"\GeV", "GeV")
+    t = t.replace(r"\TeV", "TeV")
+    t = t.replace("~", " ")
+    t = t.replace("\,", " ")
+    t = t.replace("\;", " ")
+    t = t.replace("\!", "")
+    try:
+        import pydetex.parsers as pdtp
+        #t = texpand(t)
+        t = pdtp.unicode_chars_equations(t)
+    except:
+        t = t.replace("{", "")
+        t = t.replace("}", "")
+    t = t.replace("$", "")
+    return t
+
+
 def detex(tex):
-    """Use pandoc (if available) to modify LaTeX text strings from
+    """Use pydetex (if available) to modify LaTeX text strings from
     analysis metadata for use as plain text, e.g. as printed to the terminal.
 
     The argument can either be a string or an iterable of strings.
-
-    TODO: Replace \gamma, \mu, \tau, \\Upsilon, \rho, \psi, \pi, \eta, \Delta, \Omega, \omega -> no-\ form?
-    TODO: Replace e^+- -> e+-?
     """
     if not tex:
         return tex
     import sys
     if sys.version_info[0] < 3:
-        # we don't want to handle non-ascii chars in Python2 anymore
+        # We don't handle non-ASCII chars in Python2 anymore
         return tex
-    from distutils.spawn import find_executable
-    if not find_executable("pandoc"):
-        return tex
+
+    # from distutils.spawn import find_executable
+    # if not find_executable("pandoc"):
+    #     return tex
 
     try:
         tex_is_str = type(tex) in (unicode,str)
     except NameError: # for py3
         tex_is_str = type(tex) is str
 
-    texheader = r"""
-    \newcommand{\text}[1]{#1}
-    \newcommand{\ensuremath}[1]{#1}
-    \newcommand{\emph}[1]{_#1_}
-    \newcommand{\textrm}[1]{#1}
-    \newcommand{\textit}[1]{_#1_}
-    \newcommand{\textbf}[1]{*#1*}
-    \newcommand{\mathrm}[1]{#1}
-    \newcommand{\mathit}[1]{_#1_}
-    \newcommand{\mathbf}[1]{*#1*}
-    \newcommand{\bm}[1]{*#1*}
-    \newcommand{\frac}[2]{#1/#2}
-    \newcommand{\sqrt}[1]{sqrt(#1)}
-    \newcommand{\hat}[1]{#1hat}
-    \newcommand{\bar}[1]{#1bar}
-    \newcommand{\d}[1]{d#1}
-    \newcommand{\degree}{^\circ }
-    \newcommand{\infty}{oo }
-    \newcommand{\exp}{exp }
-    \newcommand{\log}{log }
-    \newcommand{\ln}{ln }
-    \newcommand{\sin}{sin }
-    \newcommand{\cos}{cos }
-    \newcommand{\tan}{tan }
-    \newcommand{\sinh}{sinh }
-    \newcommand{\cosh}{cosh }
-    \newcommand{\tanh}{tanh }
-    \newcommand{\ell}{l}
-    \newcommand{\varphi}{\phi}
-    \newcommand{\varepsilon}{\epsilon}
-    \newcommand{\sim}{~}
-    \newcommand{\lesssim}{<~ }
-    \newcommand{\gtrsim}{>~ }
-    \newcommand{\neq}{!= }
-    \newcommand{\ge}{>= }
-    \newcommand{\gg}{>> }
-    \newcommand{\le}{<= }
-    \newcommand{\ll}{<< }
-    \newcommand{\pm}{+- }
-    \newcommand{\mp}{-+ }
-    \newcommand{\times}{x }
-    \newcommand{\cdot}{. }
-    \newcommand{\dots}{... }
-    \newcommand{\ldots}{... }
-    \newcommand{\langle}{<}
-    \newcommand{\rangle}{>}
-    \newcommand{\gets}{<- }
-    \newcommand{\to}{-> }
-    \newcommand{\leftarrow}{<- }
-    \newcommand{\rightarrow}{-> }
-    \newcommand{\leftrightarrow}{<-> }
-    \newcommand{\Leftarrow}{<= }
-    \newcommand{\Rightarrow}{=> }
-    \newcommand{\Leftrightarrow}{ }
-    \newcommand{\left}{}
-    \newcommand{\right}{}
-    \newcommand{\!}{}
-    \newcommand{\/}{}
-    \newcommand{\rm}{}
-    \newcommand{\it}{}
-    \newcommand{\,}{ }
-    \newcommand{\;}{ }
-    \newcommand{\ }{ }
-    \newcommand{\unit}[2]{#1 #2}
-    \newcommand{\bar}[1]{#1bar}
-    \newcommand{\pT}{pT }
-    \newcommand{\perp}{T}
-    \newcommand{\ast}{*}
-    \newcommand{\MeV}{MeV }
-    \newcommand{\GeV}{GeV }
-    \newcommand{\TeV}{TeV }
-    """
-    import subprocess
-    pandoc_cmd = ['pandoc','-f','latex','-t','plain','--wrap=none']
-    ### check we have the right wrap option ###
-    x = subprocess.Popen(pandoc_cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = x.communicate(b' ')
-    x = x.wait()
-    if x != 0:
-        pandoc_cmd[-1] = '--no-wrap'
-    p = subprocess.Popen(pandoc_cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    texbody = tex if tex_is_str else "@@".join(tex)
-    # texbody = texbody.replace("$", "")
-    # pandoc reads in UTF-8, need to encode / decode correctly
-    plain, err = p.communicate((texheader + texbody).replace("\n", "").encode('utf-8'))
-    ret = p.wait()
-    if ret != 0:
-        return tex
-    # pandoc sends UTF-8, need to decode
-    plain = plain.decode('utf-8')
-    plain = plain.replace("\n", "")
-    plains = plain.replace(r"\&", "&").split("@@")
+    # texheader = r"""
+    # \newcommand{\text}[1]{#1}
+    # \newcommand{\ensuremath}[1]{#1}
+    # \newcommand{\emph}[1]{_#1_}
+    # \newcommand{\textrm}[1]{#1}
+    # \newcommand{\textit}[1]{_#1_}
+    # \newcommand{\textbf}[1]{*#1*}
+    # \newcommand{\mathrm}[1]{#1}
+    # \newcommand{\mathit}[1]{_#1_}
+    # \newcommand{\mathbf}[1]{*#1*}
+    # \newcommand{\bm}[1]{*#1*}
+    # \newcommand{\frac}[2]{#1/#2}
+    # \newcommand{\sqrt}[1]{sqrt(#1)}
+    # \newcommand{\hat}[1]{#1hat}
+    # \newcommand{\bar}[1]{#1bar}
+    # \newcommand{\d}[1]{d#1}
+    # \newcommand{\degree}{^\circ }
+    # \newcommand{\infty}{oo }
+    # \newcommand{\exp}{exp }
+    # \newcommand{\log}{log }
+    # \newcommand{\ln}{ln }
+    # \newcommand{\sin}{sin }
+    # \newcommand{\cos}{cos }
+    # \newcommand{\tan}{tan }
+    # \newcommand{\sinh}{sinh }
+    # \newcommand{\cosh}{cosh }
+    # \newcommand{\tanh}{tanh }
+    # \newcommand{\ell}{l}
+    # \newcommand{\varphi}{\phi}
+    # \newcommand{\varepsilon}{\epsilon}
+    # \newcommand{\sim}{~}
+    # \newcommand{\lesssim}{<~ }
+    # \newcommand{\gtrsim}{>~ }
+    # \newcommand{\neq}{!= }
+    # \newcommand{\ge}{>= }
+    # \newcommand{\gg}{>> }
+    # \newcommand{\le}{<= }
+    # \newcommand{\ll}{<< }
+    # \newcommand{\pm}{+- }
+    # \newcommand{\mp}{-+ }
+    # \newcommand{\times}{x }
+    # \newcommand{\cdot}{. }
+    # \newcommand{\dots}{... }
+    # \newcommand{\ldots}{... }
+    # \newcommand{\langle}{<}
+    # \newcommand{\rangle}{>}
+    # \newcommand{\gets}{<- }
+    # \newcommand{\to}{-> }
+    # \newcommand{\leftarrow}{<- }
+    # \newcommand{\rightarrow}{-> }
+    # \newcommand{\leftrightarrow}{<-> }
+    # \newcommand{\Leftarrow}{<= }
+    # \newcommand{\Rightarrow}{=> }
+    # \newcommand{\Leftrightarrow}{ }
+    # \newcommand{\left}{}
+    # \newcommand{\right}{}
+    # \newcommand{\!}{}
+    # \newcommand{\/}{}
+    # \newcommand{\rm}{}
+    # \newcommand{\it}{}
+    # \newcommand{\,}{ }
+    # \newcommand{\;}{ }
+    # \newcommand{\ }{ }
+    # \newcommand{\unit}[2]{#1 #2}
+    # \newcommand{\bar}[1]{#1bar}
+    # \newcommand{\pT}{pT }
+    # \newcommand{\perp}{T}
+    # \newcommand{\ast}{*}
+    # \newcommand{\MeV}{MeV }
+    # \newcommand{\GeV}{GeV }
+    # \newcommand{\TeV}{TeV }
+    # """
+    # import subprocess
+    # pandoc_cmd = ['pandoc','-f','latex','-t','plain','--wrap=none']
+    # ### check we have the right wrap option ###
+    # x = subprocess.Popen(pandoc_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # out, err = x.communicate(b' ')
+    # x = x.wait()
+    # if x != 0:
+    #     pandoc_cmd[-1] = '--no-wrap'
+    # texbody = tex if tex_is_str else " @@ ".join(tex)
+    # p = subprocess.Popen(pandoc_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # # texbody = texbody.replace("$", "")
+    # # pandoc reads in UTF-8, need to encode / decode correctly
+    # plain, err = p.communicate((texheader + texbody).replace("\n", "").encode('utf-8'))
+    # ret = p.wait()
+    # if ret != 0:
+    #     return tex
+    # # pandoc sends UTF-8, need to decode
+    # plain = plain.decode('utf-8')
+    # plain = plain.replace("\n", "")
+    # plain = plain.replace(r"\&", "&")
+    # plains = plain.split(" @@ ")
+
     if tex_is_str:
-        assert len(plains) == 1
-        return plains[0] if plains[0] else tex
+        return _detex(tex)
     else:
-        return plains if plains else tex
+        ss = [_detex(t) for t in tex]
+        return ss
 
 # print detex(r"Foo \! $\int \text{bar} \d{x} \sim \; \frac{1}{3} \neq \emph{foo}$ \to \gg bar")
 # print detex([r"Foo \! $\int \text{bar} \d{x} \sim", r"\frac{1}{3} \neq \emph{foo}$ \to \gg bar"])

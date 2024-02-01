@@ -18,7 +18,7 @@ Beams: [p+, p+]
 Energies: [7000]
 PtCuts:
 Description:
-  'Transverse momentum spectra $\frac{1}{N_{\rm inel}} \frac{{\rm d}^2N}{{\rm d}p_{\rm T}{\rm d}y}$ of $\Sigma(1385)^{\pm}$, $\overline{\Sigma}(1385)^{\pm}$  and $(\Xi(1530)^{0}+\overline{\Xi}(1530)^{0})/2$ at mid-rapidity ($|y| < 0.5$)
+  'Transverse momentum spectra $\frac{1}{N_\mathrm{inel}} \frac{\mathrm{d}^2N}{\mathrm{d}p_\mathrm{T}\mathrm{d}y}$ of $\Sigma(1385)^{\pm}$, $\overline{\Sigma}(1385)^{\pm}$  and $(\Xi(1530)^{0}+\overline{\Xi}(1530)^{0})/2$ at mid-rapidity ($|y| < 0.5$)
 in inelastic proton-proton collisions at $\sqrt{s} =$ 7 TeV'
 BibKey: Abelev:2014qqa
 BibTeX: '@article{Abelev:2014qqa,

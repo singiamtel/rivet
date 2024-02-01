@@ -16,7 +16,7 @@ BibKey: ALICE:2018qdv
 BibTex: '@article{ALICE:2018qdv,
     author = "Acharya, Shreyasi and others",
     collaboration = "ALICE",
-    title = "{Production of the $\rho$(770)${^{0}}$ meson in pp and Pb-Pb collisions at $\sqrt{s_{\rm NN}}$ = 2.76 TeV}",
+    title = "{Production of the $\rho$(770)${^{0}}$ meson in pp and Pb-Pb collisions at $\sqrt{s_\mathrm{NN}}$ = 2.76 TeV}",
     eprint = "1805.04365",
     archivePrefix = "arXiv",
     primaryClass = "nucl-ex",

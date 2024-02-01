@@ -22,7 +22,7 @@ BibKey: BESIII:2022qvy
 BibTeX: '@article{BESIII:2022qvy,
     author = "Ablikim, Medina and others",
     collaboration = "BESIII",
-    title = "{Determination of U-spin breaking parameters with an amplitude analysis of the decay $D^0 \to K_{\rm L}^0\pi^+\pi^-$}",
+    title = "{Determination of U-spin breaking parameters with an amplitude analysis of the decay $D^0 \to K_\mathrm{L}^0\pi^+\pi^-$}",
     eprint = "2212.09048",
     archivePrefix = "arXiv",
     primaryClass = "hep-ex",

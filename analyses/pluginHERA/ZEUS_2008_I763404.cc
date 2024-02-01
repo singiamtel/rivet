@@ -176,6 +176,7 @@ namespace Rivet {
     int nVeto0, nVeto1, nVeto2, nVeto3, nVeto4;
   };
 
+
   RIVET_DECLARE_PLUGIN(ZEUS_2008_I763404);
 
 }

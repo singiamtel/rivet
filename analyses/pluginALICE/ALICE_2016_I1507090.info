@@ -25,7 +25,7 @@ BibTeX: '@article{Adam:2016ddh,
       author         = "Adam, Jaroslav and others",
       title          = "{Centrality dependence of the pseudorapidity density
                         distribution for charged particles in Pb-Pb collisions at
-                        $\sqrt{s_{\rm NN}}=5.02$ TeV}",
+                        $\sqrt{s_\mathrm{NN}}=5.02$ TeV}",
       collaboration  = "ALICE",
       journal        = "Phys. Lett.",
       volume         = "B772",

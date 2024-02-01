@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+# for i in $(ls plugin*/*_S*.cc | grep -vE "_SUS_|MC_"); do ./renameS2I.sh $i; done
 
 if [[ -z "$1" ]]; then
     echo "Usage: `basename $0` <path/to/some_analysis_S123456.cc>"

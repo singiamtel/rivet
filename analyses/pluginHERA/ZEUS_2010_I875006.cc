@@ -9,7 +9,7 @@
 namespace Rivet {
 
 
-  /// @brief DIS dijets in the breit frame
+  /// @brief DIS dijets in the Breit frame
   class ZEUS_2010_I875006 : public Analysis {
   public:
 
@@ -196,6 +196,7 @@ namespace Rivet {
     Histo1DPtr _h_ZetaQ2[6];
     Histo1DPtr _h_EtQ2[6];
     /// @}
+
   };
 
 
