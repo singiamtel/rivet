@@ -145,8 +145,8 @@ namespace Rivet {
 
     /// @brief Get the path to a data file associated with this analysis
     ///
-    /// The searched-for filename will be <ANANAME>.<extn> of suffix is empty/unspecified,
-    /// or <ANANAME>-<suffix>.<extn> if a non-zero suffix is specified.
+    /// The searched-for filename will be \<ANANAME\>.\<extn\> of suffix is empty/unspecified,
+    /// or \<ANANAME\>-\<suffix\>.\<extn\> if a non-zero suffix is specified.
     std::string analysisDataPath(const std::string& extn, const std::string& suffix="") {
       string filename = name() + (suffix.empty() ? "" : "-") + suffix + "." + extn;
       return findAnalysisDataFile(filename);

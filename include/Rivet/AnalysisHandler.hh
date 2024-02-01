@@ -89,6 +89,9 @@ namespace Rivet {
     /// Set the weight names from a GenEvent
     void setWeightNames(const GenEvent& ge);
 
+    /// Set the weight names from a vector<string>
+    void setWeightNames(const vector<string>& weightNames);
+
     /// Get the index of the nominal weight-stream
     size_t defaultWeightIndex() const { return _rivetDefaultWeightIdx; }
 
@@ -600,6 +603,9 @@ namespace Rivet {
 
     /// The index in the (possibly pruned) weight vector for the nominal weight stream
     size_t _rivetDefaultWeightIdx;
+
+    /// The index of the (possibly user-specified) intended default stream
+    int _customDefaultWeightIdx;
 
     /// How often Rivet runs finalize() and writes the result to a YODA file.
     int _dumpPeriod;

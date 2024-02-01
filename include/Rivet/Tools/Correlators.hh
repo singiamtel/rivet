@@ -269,7 +269,7 @@ namespace Rivet {
 
       /// @brief Fill a correlator bin with the return type from a Correlator
       ///
-      /// The pair gives the numerator and denominator of <M>_event.
+      /// The pair gives the numerator and denominator of \<M\>_event.
       void fill(const pair<double, double>& cor, const double& weight = 1.0) {
         // Test if denominator for the single event average is zero.
         if (cor.second < 1e-10) return;

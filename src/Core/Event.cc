@@ -72,6 +72,12 @@ namespace Rivet {
         for (size_t i = 0; i < Nselws; ++i) {
           _xsecs[i] = HepMCUtils::crossSection(_genevent, _weightIndices[i]);
         }
+        // HepMC3 demands that variations cross-sections be explicitly set by the generator,
+        // in such a way that it cannot be used directly with HepMC2 files - where these are
+        // typically missing - unless the user is willing to jump through ludicrous hoops.
+        bool allEqual = std::adjacent_find(_xsecs.begin(), _xsecs.end(), std::not_equal_to<>()) == _xsecs.end();
+        allEqual |= std::adjacent_find(_xsecs.begin() + 1, _xsecs.end(), std::not_equal_to<>()) == _xsecs.end();
+        if (allEqual)  return { HepMCUtils::crossSection(_genevent) };
       }
     }
     return _xsecs;
