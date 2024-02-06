@@ -93,6 +93,14 @@ namespace Rivet {
   inline constexpr bool is_cstring_v = isCString<T>::value;
 
 
+  /// SFINAE check if T has a binning() method
+  template<typename T, typename = void>
+  struct hasBinning : std::false_type { };
+  //
+  template<typename T>
+  struct hasBinning<T, std::void_t<decltype(std::declval<T>().binning())>> : std::true_type { };
+
+
   /// SFINAE check if T is a YODA Fillable
   template<typename T, typename = void>
   struct isFillable : std::false_type { };

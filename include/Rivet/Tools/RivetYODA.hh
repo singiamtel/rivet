@@ -1055,6 +1055,11 @@ namespace Rivet {
       return _active;
     }
 
+    template <typename U = T>
+    auto binning() const -> std::enable_if_t<hasBinning<T>::value, const typename U::BinningT&> {
+      return _persistent.back()->binning();
+    }
+
     /// Get the AO path of the object, without variation suffix
     string basePath() const { return _basePath; }
 
@@ -1351,6 +1356,15 @@ namespace Rivet {
       }
       return *_p;
     }
+
+    template <typename U = T>
+    auto binning() const -> std::enable_if_t<hasBinning<typename T::Inner>::value, const typename U::Inner::BinningT&> {
+      if (_p == nullptr) {
+        throw Error("Dereferencing null AnalysisObject pointer. Is there an unbooked histogram variable?");
+      }
+      return _p->binning();
+    }
+
 
     /// Goes right through to the active Multiplexer<YODA> object's members
     const T& operator -> () const {
