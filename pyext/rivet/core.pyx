@@ -108,6 +108,10 @@ cdef class AnalysisHandler:
             _make_iss(iss, name_or_stream)
             self._ptr.readData_ISTR(iss, fmt, preload)
 
+    def loadAOs(self, aoPaths, aoData):
+        "Load AO state from vector of AO paths and vector of serialized AO content."
+        self._ptr.loadAOs(aoPaths, aoData);
+
     def writeData(self, file_or_filename, fmt="yoda"):
         "Write histogram data to the provided file name or handle"
         cdef c.ostringstream oss
@@ -149,18 +153,21 @@ cdef class AnalysisHandler:
         "Return vector of doubles representing the fill fractions"
         return self._ptr.fillFractions()
 
-    def mergeYodas(self, filelist, delopts, addopts, matches, unmatches, equiv):
+    def mergeYodas(self, filelist, delopts, addopts, matches, unmatches, equiv, reentrantOnly):
         "Access to the API call for merging multiple YODA files correctly, including finalization. Mainly for rivet-merge"
         filelist  = [ f for f in filelist ]
         delopts   = [ d for d in delopts  ]
         addopts   = [ d for d in addopts ]
         matches   = [ d for d in matches ]
         unmatches = [ d for d in unmatches ]
-        self._ptr.mergeYodas(filelist, delopts, addopts, matches, unmatches, equiv)
+        self._ptr.mergeYodas(filelist, delopts, addopts, matches, unmatches, equiv, reentrantOnly)
 
     def merge(self, AnalysisHandler other):
         "Combine analysis data in-memory with another AH object"
         self._ptr.merge(other._ptr[0])
+
+    def getRawAOpaths(self):
+        return self._ptr.getRawAOpaths()
 
     def serializeContent(self, fixed_length = False):
         return self._ptr.serializeContent(fixed_length)

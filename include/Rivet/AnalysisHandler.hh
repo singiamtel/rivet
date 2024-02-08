@@ -63,13 +63,29 @@ namespace Rivet {
       return  size_t(N + 0.5 - (N<0)); // round to nearest integer
     }
 
+    /// Get the effective number of events seen. Should only really be used by external
+    /// steering code or analyses in the finalize phase.
+    ///
+    /// N.B. This only reports the count for the last collapsed event group
+    /// and hence ignores any additional sub-events seen so far.
+    double effNumEvents() const {
+      if ((bool)_eventCounter) { return _eventCounter->effNumEntries(); }
+      return _eventCounter.get()->persistent(defaultWeightIndex())->effNumEntries();
+    }
+
     /// @brief Access the sum of the event weights seen
     ///
     /// This is the weighted equivalent of the number of events. It should only
     /// be used by external steering code or analyses in the finalize phase.
-    double sumW() const { return _eventCounter.get()->persistent(defaultWeightIndex())->sumW(); }
+    double sumW() const {
+      if ((bool)_eventCounter) { return _eventCounter->sumW(); }
+      return _eventCounter.get()->persistent(defaultWeightIndex())->sumW();
+    }
     /// Access to the sum of squared-weights
-    double sumW2() const { return _eventCounter.get()->persistent(defaultWeightIndex())->sumW2(); }
+    double sumW2() const {
+      if ((bool)_eventCounter) { return _eventCounter->sumW2(); }
+      return _eventCounter.get()->persistent(defaultWeightIndex())->sumW2();
+    }
 
     /// @}
 
@@ -316,6 +332,9 @@ namespace Rivet {
     /// Get all raw YODA analysis objects (across all weights)
     vector<YODA::AnalysisObjectPtr> getRawAOs() const;
 
+    /// Get all raw YODA analysis object paths (across all weights)
+    vector<std::string> getRawAOpaths() const;
+
     /// Get a pointer to a preloaded yoda object with the given path,
     /// or null if path is not found.
     const YODA::AnalysisObjectPtr getPreload(const string& path) const {
@@ -380,11 +399,17 @@ namespace Rivet {
                     const vector<string>& addopts=vector<string>(),
                     const vector<string>& matches=vector<string>(),
                     const vector<string>& unmatches=vector<string>(),
-                    bool equiv=false);
+                    const bool equiv=false, const bool reentrantOnly = true);
 
     /// A method to merge another AnalysisHandler into the current one
     void merge(AnalysisHandler &other);
 
+    /// @brief A method to prepare a re-entrant run for a given set
+    /// of AO paths and serialized AO data
+    ///
+    /// The @a unscale parameter multiplies fillable objects with sumW/xsec to counteract
+    /// the cross-section scaling in finalize() when merging different processes (non-equiv)
+    void loadAOs(const vector<string>& aoPaths, const vector<double>& aoData);
 
     /// @}
 
@@ -411,10 +436,17 @@ namespace Rivet {
                        std::make_move_iterator(std::begin(tmp)),
                        std::make_move_iterator(std::end(tmp)));
       }
+      total += _beaminfo->numBins()+1;
       // Now that we know the total size of all AOs,
       // rearrange memory to improve overall layout
       std::vector<double> rtn; // serialized return vector
       rtn.reserve(total); // pre-allocate enough memory
+      // Add beam IDs
+      rtn.push_back(_beaminfo->numBins());
+      for (int beamID : _beaminfo->xEdges()) {
+        rtn.push_back(beamID);
+      }
+      // Add raw YODA AO content
       for (size_t i = 0; i < data.size(); ++i) {
         rtn.push_back(data[i].size()); // length of the AO
         rtn.insert(std::end(rtn),
@@ -433,8 +465,19 @@ namespace Rivet {
       // get Rivet AOs for access to raw AO pointers
       vector<MultiplexAOPtr> raos = getRivetAOs();
 
-      size_t iAO = 0, iW = 0, offset = 0;
+
+      size_t iAO = 0, iW = 0, offset = data[0]+1;
       const auto itr = data.cbegin();
+
+      // beam info first
+      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(vector<int>(itr, itr+offset), "/TMP/_BEAMINFO");
+      size_t beamLen = *(itr + offset); ++offset;
+      auto beam_first = itr + offset;
+      auto beam_last = beam_first + beamLen;
+      _beaminfo->deserializeContent(std::vector<double>{beam_first, beam_last});
+      offset += beamLen;
+
+      // then the multiweighted AOs
       while (offset < data.size()) {
         if (iW < numWeights())  raos[iAO].get()->setActiveWeightIdx(iW);
         else {
@@ -493,7 +536,7 @@ namespace Rivet {
                   const vector<string>& optAnas=vector<string>(),
                   const vector<string>& optKeys=vector<string>(),
                   const vector<string>& optVals=vector<string>(),
-                  bool equiv=false,
+                  const bool equiv=false,
                   const bool overwrite_xsec = false,
                   const double user_xsec = 1.0);
 
@@ -502,7 +545,14 @@ namespace Rivet {
     ///
     /// The @a unscale parameter multiplies fillable objects with sumW/xsec to counteract
     /// the cross-section scaling in finalize() when merging different processes (non-equiv)
-    void loadAOs(const map<string, YODA::AnalysisObjectPtr>& allAOs, const bool unscale = false);
+    void loadAOs(const map<string, YODA::AnalysisObjectPtr>& allAOs,
+                 const bool unscale = false, const bool reentrantOnly = true);
+
+    /// @brief A method to set the internal _beaminfo object from a pair of beams
+    void _setRunBeamInfo(const ParticlePair& beams);
+
+    /// @brief A method to set the internal _beaminfo object from an existing YODA AO
+    void _setRunBeamInfo(YODA::AnalysisObjectPtr ao);
 
     /// @}
 
@@ -553,6 +603,9 @@ namespace Rivet {
 
     /// Cross-section known to AH
     Estimate0DPtr _xs;
+
+    /// Beam info known to AH
+    YODA::BinnedEstimatePtr<int> _beaminfo;
 
     /// Cross-section averages for runs over multiple files
     vector<Estimate0D> _xsAvg;

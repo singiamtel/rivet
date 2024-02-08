@@ -17,7 +17,7 @@ import os, sys
 ## Load the rivet module
 try:
     import rivet
-except:
+except Exception as e:
     ## If rivet loading failed, try to bootstrap the Python path!
     # try:
     #     # TODO: Is this a good idea? Maybe just notify the user that their PYTHONPATH is wrong?
@@ -37,6 +37,12 @@ except:
 rivet.util.set_process_name("rivet-merge")
 
 import time, datetime, logging, signal
+import multiprocessing
+
+try:
+    numcores = multiprocessing.cpu_count()
+except:
+    numcores = 1
 
 ## Parse command line options
 import argparse
@@ -61,6 +67,10 @@ extragroup.add_argument("-m", "--match", dest="MATCH", action="append", default=
                          help="only write out histograms whose path matches this regex")
 extragroup.add_argument("-M", "--unmatch", dest="UNMATCH", action="append", default=[],
                         help="exclude histograms whose path matches this regex")
+extragroup.add_argument("--assume-reentrant", dest="ASSUME_REENTRANT", action="store_true", default=False,
+                        help="assume all routines are reentrant-safe, even if they are not explicitly marked as such")
+extragroup.add_argument("-j", "--jobs", dest="JOBS", type=int,
+                        default=1, help="max number of threads to be used [%s]" % numcores)
 
 verbgroup = parser.add_argument_group("Verbosity control")
 parser.add_argument("-l", dest="NATIVE_LOG_STRS", action="append",
@@ -70,76 +80,107 @@ verbgroup.add_argument("-v", "--verbose", action="store_const", const=logging.DE
 verbgroup.add_argument("-q", "--quiet", action="store_const", const=logging.WARNING, dest="LOGLEVEL",
                        default=logging.INFO, help="be very quiet")
 
-args = parser.parse_args()
+
+def subMerge(yodafiles, mergeoptions, addoptions, match, unmatch, equiv, reentrantOnly, preload = None, procnum = 1):
+    """Worker function that merges a subset of the input YODA files
+       and returns AO paths and serialized AO data in memory."""
+    ah = rivet.AnalysisHandler("AH%d" % procnum)
+    if preload is not None:
+        ah.readData(preload)
+    ah.mergeYodas(yodafiles, mergeoptions, addoptions, match, unmatch, equiv, reentrantOnly)
+    return ah.getRawAOpaths(), ah.serializeContent()
 
 
-## Configure logging
-logging.basicConfig(level=args.LOGLEVEL, format="%(message)s")
-for l in args.NATIVE_LOG_STRS:
-    name, level = None, None
+if __name__ == '__main__':
+
+    args = parser.parse_args()
+
+
+    ## Configure logging
+    logging.basicConfig(level=args.LOGLEVEL, format="%(message)s")
+    if not args.NATIVE_LOG_STRS:
+        # find the key in rivet.LEVELS corresponding to the value of args.LOGLEVEL
+        l = list(rivet.LEVELS.keys())[list(rivet.LEVELS.values()).index(args.LOGLEVEL)]
+        args.NATIVE_LOG_STRS.append("Rivet=%s" % l)
+    for l in args.NATIVE_LOG_STRS:
+        name, level = None, None
+        try:
+            name, level = l.split("=")
+        except:
+            name = "Rivet"
+            level = l
+        ## Fix name
+        if name != "Rivet" and not name.startswith("Rivet."):
+            name = "Rivet." + name
+        try:
+            ## Get right error type
+            level = rivet.LEVELS.get(level.upper(), None)
+            logging.debug("Setting log level: %s %d" % (name, level))
+            rivet.setLogLevel(name, level)
+        except:
+            logging.warning("Couldn't process logging string '%s'" % l)
+
+
+    ## Set up signal handling
+    RECVD_KILL_SIGNAL = None
+    def handleKillSignal(signum, frame):
+        "Declare us as having been signalled, and return to default handling behaviour"
+        global RECVD_KILL_SIGNAL
+        logging.critical("Signal handler called with signal " + str(signum))
+        RECVD_KILL_SIGNAL = signum
+        signal.signal(signum, signal.SIG_DFL)
+    ## Signals to handle
+    signal.signal(signal.SIGTERM, handleKillSignal);
+    signal.signal(signal.SIGHUP,  handleKillSignal);
+    signal.signal(signal.SIGINT,  handleKillSignal);
+    signal.signal(signal.SIGUSR1, handleKillSignal);
+    signal.signal(signal.SIGUSR2, handleKillSignal);
     try:
-        name, level = l.split("=")
+        signal.signal(signal.SIGXCPU, handleKillSignal);
     except:
-        name = "Rivet"
-        level = l
-    ## Fix name
-    if name != "Rivet" and not name.startswith("Rivet."):
-        name = "Rivet." + name
-    try:
-        ## Get right error type
-        level = rivet.LEVELS.get(level.upper(), None)
-        logging.debug("Setting log level: %s %d" % (name, level))
-        rivet.setLogLevel(name, level)
-    except:
-        logging.warning("Couldn't process logging string '%s'" % l)
+        pass
 
 
-## Set up signal handling
-RECVD_KILL_SIGNAL = None
-def handleKillSignal(signum, frame):
-    "Declare us as having been signalled, and return to default handling behaviour"
-    global RECVD_KILL_SIGNAL
-    logging.critical("Signal handler called with signal " + str(signum))
-    RECVD_KILL_SIGNAL = signum
-    signal.signal(signum, signal.SIG_DFL)
-## Signals to handle
-signal.signal(signal.SIGTERM, handleKillSignal);
-signal.signal(signal.SIGHUP,  handleKillSignal);
-signal.signal(signal.SIGINT,  handleKillSignal);
-signal.signal(signal.SIGUSR1, handleKillSignal);
-signal.signal(signal.SIGUSR2, handleKillSignal);
-try:
-    signal.signal(signal.SIGXCPU, handleKillSignal);
-except:
-    pass
+    if args.ANALYSIS_PATH_PWD:
+        rivet.addAnalysisLibPath(os.path.abspath("."))
+        rivet.addAnalysisDataPath(os.path.abspath("."))
 
-
-## Set up analysis handler
-try:
+    ## Set up analysis handler
     ah = rivet.AnalysisHandler("Merging")
-    if args.ANALYSIS_PATH_PWD:
-        rivet.addAnalysisLibPath(os.path.abspath("."))
-        rivet.addAnalysisDataPath(os.path.abspath("."))
-    if args.PRELOADFILE is not None:
-        ah.readData(args.PRELOADFILE)
 
-    ah.mergeYodas(args.YODAFILES, args.MERGEOPTIONS, args.ADDOPTIONS,
-                  args.MATCH, args.UNMATCH, args.EQUIV)
-    ah.writeData(args.OUTPUTFILE)
+    ## Check if it's worth splitting the input files
+    splitFiles = args.JOBS > 1 and len(args.YODAFILES) > 2*args.JOBS
 
-except:
-    # Python3 and Cython3 might require explicit byte strings
-    ah = rivet.AnalysisHandler(b"Merging")
-    if args.ANALYSIS_PATH_PWD:
-        rivet.addAnalysisLibPath(os.path.abspath("."))
-        rivet.addAnalysisDataPath(os.path.abspath("."))
-    yfiles = [y.encode() for y in args.YODAFILES]
-    moptions = [m.encode() for m in args.MERGEOPTIONS]
-    aoptions = [a.encode() for a in args.ADDOPTIONS]
-    matchexp = [e.encode() for e in args.MATCH]
-    unmatch  = [e.encode() for e in args.UNMATCH]
-    if args.PRELOADFILE is not None:
-        ah.readData([p.encode() for p in args.PRELOADFILE])
+    if splitFiles:
 
-    ah.mergeYodas(yfiles, moptions, aoptions, matchexp, unmatch, args.EQUIV)
+        nprocs = args.JOBS if args.JOBS < numcores else numcores
+        # Call multiprocessing pool to merge subsets of files
+        manager = multiprocessing.Manager()
+        p = multiprocessing.Pool(processes=nprocs)
+        jobs = [p.apply_async(func=subMerge,
+                              args=(args.YODAFILES[idx:idx+nprocs],
+                                    args.MERGEOPTIONS, args.ADDOPTIONS,
+                                    args.MATCH, args.UNMATCH,
+                                    args.EQUIV, not args.ASSUME_REENTRANT,
+                                    args.PRELOADFILE, procID,))
+                                    for procID, idx in enumerate(range(0, len(args.YODAFILES), nprocs))]
+        p.close()
+        results = [ job.get() for job in jobs ]
+        # Merge the individual substeps
+        ah.loadAOs(*results[0])
+        for aopaths, aodata in results[1:]:
+            ahtemp = rivet.AnalysisHandler("TempAH")
+            ahtemp.loadAOs(aopaths, aodata)
+            ah.merge(ahtemp)
+
+    else:
+
+        if args.PRELOADFILE is not None:
+            ah.readData(args.PRELOADFILE)
+
+        ah.mergeYodas(args.YODAFILES, args.MERGEOPTIONS, args.ADDOPTIONS,
+                      args.MATCH, args.UNMATCH, args.EQUIV, not args.ASSUME_REENTRANT)
+
+    logging.info("Rerunning finalize ...")
+    ah.finalize()
     ah.writeData(args.OUTPUTFILE)

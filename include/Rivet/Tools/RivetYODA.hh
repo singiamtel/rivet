@@ -1490,6 +1490,11 @@ namespace Rivet {
   /// @defgroup aomanip Analysis object manipulation functions
   /// @{
 
+  inline bool isTmpPath(const std::string& path, const bool tmp_only = false) {
+    if (tmp_only)  return path.find("/TMP/") != string::npos;
+    return path.find("/TMP/") != string::npos || path.find("/_") != string::npos;
+  }
+
   /// Function to get a map of all the refdata in a paper with the
   /// given @a papername.
   map<string, YODA::AnalysisObjectPtr> getRefData(const string& papername);
@@ -1561,6 +1566,14 @@ namespace Rivet {
   template<size_t N>
   inline bool bookingCompatible(YODA::ScatterNDPtr<N> a, YODA::ScatterNDPtr<N> b) {
     return a->numPoints() == b->numPoints();
+  }
+
+  inline bool beamInfoCompatible(YODA::AnalysisObjectPtr a, YODA::AnalysisObjectPtr b) {
+    YODA::BinnedEstimatePtr<int> beamsA = std::dynamic_pointer_cast<YODA::BinnedEstimate<int>>(a);
+    YODA::BinnedEstimatePtr<int> beamsB = std::dynamic_pointer_cast<YODA::BinnedEstimate<int>>(b);
+    return  beamsA && beamsB && (*beamsA == *beamsB) && beamsA->numBins() == 2 &&
+            fuzzyEquals(beamsA->bin(1).val(), beamsB->bin(1).val()) &&
+            fuzzyEquals(beamsA->bin(2).val(), beamsB->bin(2).val());
   }
 
   /// @}
