@@ -23,7 +23,7 @@ namespace Rivet {
 
   double Analysis::sqrtS() const {
     double sqrts = handler().runSqrtS();
-    if (sqrts <= 0) {
+    if (sqrts <= 0 || isnan(sqrts)) {
       MSG_DEBUG("Suspicious beam energy. You're probably running rivet-merge. Fetching beam energy from option.");
       sqrts = getOption<double>("ENERGY", 0);
     }

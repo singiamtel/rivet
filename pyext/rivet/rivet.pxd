@@ -37,13 +37,15 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         void writeData_OSTR "writeData" (ostringstream&, string&) except +
         void readData_FILE "readData" (string&, bool) except +
         void readData_ISTR "readData" (istringstream&, string&, bool) except +
+        void loadAOs(vector[string]&, vector[double]&) except +
         void setCrossSection(double, double, bool)
         double nominalCrossSection()
         double nominalCrossSectionError()
         void finalize()
         void setFinalizePeriod(string, int)
-        void mergeYodas(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool)
+        void mergeYodas(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool, bool)
         void merge(AnalysisHandler&)
+        vector[string] getRawAOpaths() except +
         vector[double] serializeContent(bool) except +
         void deserializeContent(vector[double]&) except +
 

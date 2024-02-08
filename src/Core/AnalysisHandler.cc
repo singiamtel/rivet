@@ -759,7 +759,7 @@ namespace Rivet {
                                    const vector<string> &addopts,
                                    const vector<string> &matches,
                                    const vector<string> &unmatches,
-                                   bool equiv) {
+                                   const bool equiv, const bool reentrantOnly) {
 
     // Parse option adding.
     vector<string> optAnas;
@@ -825,13 +825,18 @@ namespace Rivet {
         YODA::read(file, aos_raw);
         for (YODA::AnalysisObject* aor : aos_raw) {
           const string& aopath = aor->path();
+          if (aopath == "/TMP/_BEAMINFO") {
+            raw_map[aopath].reset(aor);
+            ++rawcount; ++tmpcount;
+            continue;
+          }
           // skip everything that isn't pre-finalize
           const AOPath aop_obj(aopath);
           if (!aop_obj.isRaw()) {
             delete aor;
             continue;
           }
-          if (aop_obj.isTmp())  ++tmpcount;
+          if (isTmpPath(aopath, true))  ++tmpcount;
           ++rawcount;
           bool skip = false;
           if (aopath != "" && aopath != "/RAW/_XSEC" && aopath != "/RAW/_EVTCOUNT") {
@@ -859,8 +864,8 @@ namespace Rivet {
         continue;
       }
       if (equiv && (2*rawcount - tmpcount) != aos_raw.size()) {
-        MSG_WARNING("Number of pre- and post-finalize AOs do not match for file: " << file);
-        continue;
+        MSG_DEBUG("Number of pre- and post-finalize AOs do not match for file: " << file);
+        //continue; <| Can't guarantee this is consistent in older output files! :(
       }
 
       // merge AOs from current file into "allaos"
@@ -902,15 +907,10 @@ namespace Rivet {
       }
     }
 
-    MSG_INFO("Rerunning finalize ...");
-
     // initialise analyses and load merged AOs back into memory
     // set unscale to true if equiv is false
-    loadAOs(allaos, !equiv);
+    loadAOs(allaos, !equiv, reentrantOnly);
 
-    // Finally we just have to finalize all analyses, leaving to the
-    // controlling program to write it out to some YODA file.
-    finalize();
   }
 
 
@@ -927,6 +927,7 @@ namespace Rivet {
 
 
     map<string, double> scales;
+    const string beaminfokey("/TMP/_BEAMINFO");
     for (const auto& item : newaos) {
       const string& aopath = item.first;
       YODA::AnalysisObjectPtr ao = item.second;
@@ -935,16 +936,40 @@ namespace Rivet {
       if ( !path ) {
         throw UserError("Invalid path name in new AO set!");
       }
+      if (aopath == beaminfokey) {
+        if (!equiv)  continue;
+        auto beam_it = allaos.find(beaminfokey);
+        if ( beam_it == allaos.end() ) { // assign first occurrence
+          addAO(ao, allaos[beaminfokey], 1.0);
+        }
+        else {
+          if (!beamInfoCompatible(ao, beam_it->second)) {
+            throw UserError("Equivalent merging requires matching beams across input files!");
+          }
+        }
+        continue;
+      }
       // skip everything that isn't pre-finalize
       if ( !path.isRaw() ) continue;
 
+
       MSG_DEBUG(" " << ao->path());
+
+      double nomSumW = 1.0;
+      if (overwrite_xsec)  {
+        // Get the nominal sumW
+        auto ec_it = newaos.find("/RAW/_EVTCOUNT");
+        if ( ec_it != newaos.end() ) {
+          YODA::CounterPtr cPtr = std::static_pointer_cast<YODA::Counter>(ec_it->second);
+          nomSumW = cPtr->sumW()? cPtr->sumW() : 1;
+        }
+      }
 
       const string& wname = path.weightComponent();
       if ( scales.find(wname) == scales.end() ) {
         scales[wname] = 1.0;
         // get the sum of weights and number of entries for the current weight
-        double evts = 0, sumw = 1;
+        double evts = 0.0, sumw = 1.0;
         auto ec_it = newaos.find("/RAW/_EVTCOUNT" + wname);
         if ( ec_it != newaos.end() ) {
           YODA::CounterPtr cPtr = std::static_pointer_cast<YODA::Counter>(ec_it->second);
@@ -967,7 +992,8 @@ namespace Rivet {
           if (xsec) { // for >= V3 ASCII
             if (overwrite_xsec) {
               MSG_DEBUG("Set user-supplied weight: " << user_xsec);
-              xsec->setVal(user_xsec);
+              xsec->setVal(user_xsec*sumw/nomSumW);
+              xsec->setErr(0.0);
             }
             else {
               MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
@@ -984,7 +1010,8 @@ namespace Rivet {
             YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
             if (overwrite_xsec) {
               MSG_DEBUG("Set user-supplied weight: " << user_xsec);
-              xsec->point(0).setX(user_xsec);
+              xsec->point(0).setX(user_xsec*sumw/nomSumW);
+              xsec->point(0).setXErrs(0.0, 0.0);
             }
             else {
               MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
@@ -1028,17 +1055,28 @@ namespace Rivet {
   }
 
 
-  void AnalysisHandler::loadAOs(const map<string, YODA::AnalysisObjectPtr>& allAOs, const bool unscale) {
+  void AnalysisHandler::loadAOs(const map<string, YODA::AnalysisObjectPtr>& allAOs,
+                                const bool unscale, const bool reentrantOnly) {
 
     // Check that AH hasn't already been initialised
     if (_initialised)
       throw UserError("AnalysisHandler::init has already been called: cannot re-initialize!");
 
+    const string beaminfokey("/TMP/_BEAMINFO");
+    if (allAOs.find(beaminfokey) == allAOs.end()) {
+      // beam info invalid for non-equivalent merging
+      MSG_DEBUG("No beaminfo provided (probably in heterogeneous merging mode): setting empty beam info.");
+      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(beaminfokey);
+    }
 
     // get list of analyses & multi-weights to be initialised
     set<string> foundAnalyses;
     set<string> foundWeightNames;
     for (const auto& pair : allAOs) {
+      if (pair.first == beaminfokey) {
+        _setRunBeamInfo(pair.second);
+        continue;
+      }
       AOPath path(pair.first);
       if ( path.analysisWithOptions() != "" ) {
         foundAnalyses.insert(path.analysisWithOptions());
@@ -1052,11 +1090,21 @@ namespace Rivet {
     // Then we create and initialize all analyses
     for (const string& ananame : foundAnalyses) { addAnalysis(ananame); }
     _stage = Stage::INIT;
+    vector<string> anamestodelete;
     for (const AnaHandle& a : analyses() ) {
       MSG_TRACE("Initialising analysis: " << a->name());
-      if ( !a->info().reentrant() )
-        MSG_WARNING("Analysis " << a->name() << " has not been validated to have "
-                    << "a reentrant finalize method. The merged result is unpredictable.");
+      if ( !a->info().reentrant() ) {
+        if (reentrantOnly) {
+          MSG_DEBUG("Analysis " << a->name() << " has not been validated to have "
+                      << "a reentrant finalize method and will be removed.");
+          anamestodelete.push_back(a->name());
+          continue;
+        }
+        else {
+          MSG_WARNING("Analysis " << a->name() << " has not been validated to have "
+                      << "a reentrant finalize method. The merged result is unpredictable.");
+        }
+      }
       try {
         // Allow projection registration in the init phase onwards
         a->_allowProjReg = true;
@@ -1069,6 +1117,7 @@ namespace Rivet {
       }
       MSG_TRACE("Done initialising analysis: " << a->name());
     } // analyses
+    if (anamestodelete.size()) removeAnalyses(anamestodelete);
     _stage = Stage::OTHER;
     _initialised = true;
     _isEndOfFile = true; // in case this is a re-entrant run
@@ -1129,6 +1178,87 @@ namespace Rivet {
   }
 
 
+  void AnalysisHandler::loadAOs(const vector<string>& aoPaths,
+                                const vector<double>& aoData) {
+
+    // Check that AH hasn't already been initialised
+    if (_initialised)
+      throw UserError("AnalysisHandler::init has already been called: cannot re-initialize!");
+
+
+    // get list of analyses & multi-weights to be initialised
+    set<string> foundAnalyses;
+    set<string> foundWeightNames;
+    for (const string& aopath : aoPaths) {
+      if (aopath == "/TMP/_BEAMINFO")  continue;
+      AOPath path(aopath);
+      if ( path.analysisWithOptions() != "" ) {
+        foundAnalyses.insert(path.analysisWithOptions());
+      }
+      foundWeightNames.insert(path.weight());
+    }
+
+    // Make analysis handler aware of the weight names present
+    _weightNames.clear();
+    _rivetDefaultWeightIdx = _defaultWeightIdx = 0;
+    _weightNames = vector<string>(foundWeightNames.begin(), foundWeightNames.end());
+
+    // Then we create and initialize all analyses
+    for (const string& ananame : foundAnalyses) { addAnalysis(ananame); }
+    _stage = Stage::INIT;
+    for (const AnaHandle& a : analyses() ) {
+      MSG_TRACE("Initialising analysis: " << a->name());
+      if ( !a->info().reentrant() )
+        MSG_WARNING("Analysis " << a->name() << " has not been validated to have "
+                    << "a reentrant finalize method. The merged result is unpredictable.");
+      try {
+        // Allow projection registration in the init phase onwards
+        a->_allowProjReg = true;
+        a->init();
+        a->setProjectionHandler(_projHandler);
+        a->syncDeclQueue();
+      } catch (const Error& err) {
+        cerr << "Error in " << a->name() << "::init method: " << err.what() << endl;
+        exit(1);
+      }
+      MSG_TRACE("Done initialising analysis: " << a->name());
+    } // analyses
+    _stage = Stage::OTHER;
+    _initialised = true;
+    _isEndOfFile = true; // in case this is a re-entrant run
+
+    // Collect global weights and cross sections and fix scaling for all files
+    MSG_DEBUG("Getting event counter and cross-section from "
+              << weightNames().size() << " " << numWeights());
+    _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
+    _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
+
+    // load AOs into memory
+    MSG_TRACE("Attempt to deserialize AO data.");
+    try {
+      deserializeContent(aoData);
+    } catch (const Error& err) {
+      cerr << "Error when trying to deserialize AO data: " << err.what() << endl;
+      exit(1);
+    }
+    MSG_TRACE("Successfully deserialized AO data.");
+
+    for (size_t iW = 0; iW < numWeights(); ++iW) {
+      MSG_DEBUG("Weight # " << iW << " of " << numWeights());
+
+      // Call rawHookIn for Correlators
+      for (const AnaHandle& a : analyses()) {
+        for (const auto& ao : a->analysisObjects()) {
+          ao.get()->setActiveWeightIdx(iW);
+          YODA::AnalysisObjectPtr yao = ao.get()->activeAO();
+          a->rawHookIn(yao);
+          ao.get()->unsetActiveWeight();
+        }
+      }
+    }
+  }
+
+
   void AnalysisHandler::merge(AnalysisHandler& other) {
 
     // Check if both AHs have been initialised
@@ -1136,10 +1266,15 @@ namespace Rivet {
       throw UserError("AnalysisHandler::init has not been called: cannot merge!");
 
     // Check if both AHs contain the same registered analyses
-    const std::vector<std::string> &this_anaNames = analysisNames();
-    const std::vector<std::string> &that_anaNames = other.analysisNames();
-    bool is_equal = bool(this_anaNames.size() == that_anaNames.size());
-    if (is_equal)   is_equal = std::equal(this_anaNames.begin(), this_anaNames.end(), that_anaNames.begin());
+    bool is_equal = beamInfoCompatible(_beaminfo, other._beaminfo);
+    if (is_equal) {
+      const std::vector<std::string> &this_anaNames = analysisNames();
+      const std::vector<std::string> &that_anaNames = other.analysisNames();
+      is_equal &= this_anaNames.size() == that_anaNames.size();
+      if (is_equal)  is_equal = std::equal(this_anaNames.begin(),
+                                           this_anaNames.end(),
+                                           that_anaNames.begin());
+    }
     if (!is_equal)  throw UserError("The AnalysisHandlers are not equivalent!");
 
     /// @todo Do we need to check that the sequence of weight indices is the same?
@@ -1249,16 +1384,16 @@ namespace Rivet {
 
 
   vector<MultiplexAOPtr> AnalysisHandler::getRivetAOs() const {
-      vector<MultiplexAOPtr> rtn;
+    vector<MultiplexAOPtr> rtn;
 
-      for (const AnaHandle& a : analyses()) {
-        for (const auto& ao : a->analysisObjects()) {
-          rtn.push_back(ao);
-        }
+    for (const AnaHandle& a : analyses()) {
+      for (const auto& ao : a->analysisObjects()) {
+        rtn.push_back(ao);
       }
-      rtn.push_back(_eventCounter);
-      rtn.push_back(_xs);
-      return rtn;
+    }
+    rtn.push_back(_eventCounter);
+    rtn.push_back(_xs);
+    return rtn;
   }
 
 
@@ -1268,7 +1403,7 @@ namespace Rivet {
     // First get all multiweight AOs
     vector<MultiplexAOPtr> raos = getRivetAOs();
     vector<YODA::AnalysisObjectPtr> output;
-    output.reserve(raos.size() * numWeights() * (includeraw ? 2 : 1));
+    output.reserve(raos.size() * numWeights() * (includeraw ? 2 : 1) + 1); // plus one for beaminfo
 
     // Identify an index ordering so that default weight is written out first
     vector<size_t> order{ (size_t)_customDefaultWeightIdx };
@@ -1276,14 +1411,16 @@ namespace Rivet {
       if (i != _customDefaultWeightIdx) order.push_back(i);
     }
 
+    // add beam info object
+    output.push_back( _beaminfo );
+
     // Then we go through all finalized, non-TMP AOs one weight at a time
     size_t nantrigger = 0;
     for (size_t iW : order) {
       for (auto rao : raos) {
         rao.get()->setActiveFinalWeightIdx(iW);
-        if (rao->path().find("/TMP/") != string::npos) continue; //< skip TMP histos
+        if ( isTmpPath(rao->path(), true) )  continue;
         // skip leading-underscored analysis-level histos
-        if (rao->path().find("/_") != string::npos && !startsWith(rao->path(), "/_")) continue;
         YODA::AnalysisObjectPtr aop = rao.get()->activeAO();
         // Convert to an inert type (e.g. estimate)
         const std::string aopath = aop->path();
@@ -1328,7 +1465,8 @@ namespace Rivet {
     // Prepare output vector
     vector<YODA::AnalysisObjectPtr> output;
     vector<MultiplexAOPtr> raos = getRivetAOs();
-    output.reserve(raos.size() * numWeights());
+    output.reserve(raos.size() * numWeights() + 1);
+    output.push_back(_beaminfo);
 
     // Get all multiweight AOs
     for (auto rao : raos) {
@@ -1337,6 +1475,26 @@ namespace Rivet {
         output.push_back(rao.get()->activeAO());
       }
       rao.get()->unsetActiveWeight();
+    }
+
+    return output;
+  }
+
+
+  vector<std::string> AnalysisHandler::getRawAOpaths() const {
+
+    // Prepare output vector
+    vector<std::string> output;
+    vector<MultiplexAOPtr> raos = getRivetAOs();
+    output.reserve(raos.size() * numWeights() + 1);
+    output.push_back(_beaminfo->path());
+
+    // Get all multiweight AOs
+    for (auto rao : raos) {
+      for (size_t iW = 0; iW < numWeights(); ++iW) {
+        rao.get()->setActiveWeightIdx(iW);
+        output.push_back(rao.get()->activeAO()->path());
+      }
     }
 
     return output;
@@ -1529,10 +1687,26 @@ namespace Rivet {
 
   AnalysisHandler& AnalysisHandler::setRunBeams(const ParticlePair& beams) {
     _beams = beams;
+    _setRunBeamInfo(beams);
     MSG_DEBUG("Setting run beams = " << beams << " @ " << sqrtS(beams)/GeV << " GeV");
     return *this;
   }
 
+  void AnalysisHandler::_setRunBeamInfo(const ParticlePair& beams) {
+    PdgIdPair beamids = pids(beams);
+    pair<FourMomentum,FourMomentum> beammoms = moms(beams);
+    _beaminfo = make_shared<YODA::BinnedEstimate<int>>(vector<int>{beamids.first, beamids.second}, "/TMP/_BEAMINFO");
+    const bool first_pos = beammoms.first.pz() > 0.;
+    _beaminfo->bin(1).setVal((first_pos? beammoms.second.pz() : beammoms.first.pz())/GeV);
+    _beaminfo->bin(2).setVal((first_pos? beammoms.first.pz() : beammoms.second.pz())/GeV);
+  }
+
+  void AnalysisHandler::_setRunBeamInfo(YODA::AnalysisObjectPtr ao) {
+    if (!_beaminfo) {
+      YODA::BinnedEstimatePtr<int> beaminfo = std::dynamic_pointer_cast<YODA::BinnedEstimate<int>>(ao);
+      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(*beaminfo);
+    }
+  }
 
   PdgIdPair AnalysisHandler::runBeamIDs() const {
     return pids(runBeams());
@@ -1543,7 +1717,11 @@ namespace Rivet {
   }
 
   double AnalysisHandler::runSqrtS() const {
-    return sqrtS(runBeams());
+    double rtn = sqrtS(runBeams());
+    if (rtn < 0. && _beaminfo) { // try falling back to _beaminfo
+      rtn = sqrtS(_beaminfo->bin(1).val(), _beaminfo->bin(2).val());
+    }
+    return rtn;
   }
 
   bool AnalysisHandler::copyAO(YODA::AnalysisObjectPtr src, YODA::AnalysisObjectPtr dst, const double scale) {
