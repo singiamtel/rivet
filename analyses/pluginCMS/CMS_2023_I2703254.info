@@ -1,0 +1,55 @@
+Name: CMS_2023_I2703254
+Year: 2023
+Summary: Inclusive and differential cross section measurements of ttbb production in the lepton+jets channel at 13 TeV
+Experiment: CMS
+Collider: LHC
+InspireID: I2703254
+Status: VALIDATED
+Reentrant: true
+RefMatch: '(d01|d1.|d2.|d3.)-x01-y01'
+Authors:
+- Seo Hyeon An <seo.hyeon.an@cern.ch>
+- Florencia Canelli <florencia.canelli@cern.ch>
+- Ji Eun Choi <ji.eun.choi@cern.ch>
+- Kyle Cormier <kyle.james.read.cormier@cern.ch>
+- Tae Jeong Kim <tae.jeong.kim@cern.ch>
+- Umberto Molinatti <umberto.molinatti@cern.ch>
+- Emanuel Pfeffer <emanuel.pfeffer@cern.ch>
+- Jan van der Linden <jan.vdlinden@cern.ch>
+- Sebastien Wertz <sebastien.wertz@cern.ch>
+References:
+ - CMS-TOP-22-009
+ - arXiv:2309.14442
+ - Submitted to JHEP
+RunInfo: ttbar events at sqrt(s) = 13 TeV
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 138.0
+Description:
+  'Measurement of inclusive and differential cross sections of the associated production of top quark and b quark pairs, $t\bar{t}b\bar{b}$.
+  The cross sections are measured in the semileptonic decay channel of the top quark pair, using events containing exactly one isolated electron or muon.
+  Four fiducial phase spaces are defined.
+  "6j4b" requires the presence of at least six jets and at least four b jets.
+  "5j3b" requires at least five jets and at least three b jets.
+  "6j3b3l" requires at least six jets, including at least three b jets, and at least three light jets
+  "7j4b3l" phase space, requiring at least seven jets, including at least four b jets and at least three light jets.
+  All jets are required to have $\pT > 25~\GeV$ and $|\eta| < 2.4$. 
+  B jets are defined using ghost-matching of B hadrons.
+  No requirement is applied on the origin of of the b jets, i.e. the phase space definition is independent from simulated parton content.'
+ValidationInfo:
+  Powheg + Pythia8 and Sherpa simulations are used for the validation.
+ReleaseTests:
+ - $A LHC-13-Top-L
+Keywords: [CMS, ttbb, unfolding, top, differential]
+BibKey: CMS:2023xjh
+BibTeX: '@article{CMS:2023xjh,
+    author = "Hayrapetyan, Aram and others",
+    collaboration = "CMS",
+    title = "{Inclusive and differential cross section measurements of $\mathrm{t\bar{t}b\bar{b}}$ production in the lepton+jets channel at $\sqrt{s}$ = 13 TeV}",
+    eprint = "2309.14442",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CMS-TOP-22-009, CERN-EP-2023-201",
+    month = "9",
+    year = "2023"
+}'
