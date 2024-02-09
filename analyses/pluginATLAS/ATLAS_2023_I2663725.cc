@@ -4,6 +4,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/InvisibleFinalState.hh"
 
 namespace Rivet {
 
