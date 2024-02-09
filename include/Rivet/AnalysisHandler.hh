@@ -466,15 +466,25 @@ namespace Rivet {
       vector<MultiplexAOPtr> raos = getRivetAOs();
 
 
-      size_t iAO = 0, iW = 0, offset = data[0]+1;
-      const auto itr = data.cbegin();
-
       // beam info first
-      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(vector<int>(itr, itr+offset), "/TMP/_BEAMINFO");
+      size_t iAO = 0, iW = 0, nBeams = data[0], offset = 1;
+      if (nprocs)  nBeams /= nprocs;
+      const auto itr = data.cbegin();
+      // set beam IDs
+      vector<int> edges{itr+offset, itr+offset+nBeams};
+      if (nprocs >= 2) {
+        for (int& edge : edges) { edge /= nprocs; }
+      }
+      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(edges, "/TMP/_BEAMINFO");
+      offset+= nBeams;
+      // set beam momenta
       size_t beamLen = *(itr + offset); ++offset;
-      auto beam_first = itr + offset;
-      auto beam_last = beam_first + beamLen;
-      _beaminfo->deserializeContent(std::vector<double>{beam_first, beam_last});
+      if (nprocs)  beamLen /= nprocs;
+      std::vector<double> energies{itr+offset, itr+offset+beamLen};
+      if (nprocs >= 2) {
+        for (double& e : energies) { e /= nprocs; }
+      }
+      _beaminfo->deserializeContent(energies);
       offset += beamLen;
 
       // then the multiweighted AOs
