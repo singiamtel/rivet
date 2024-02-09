@@ -76,6 +76,8 @@ Get in touch via the developer mailing list if you need any assistance: [rivet-s
 
 [Migrating from Rivet v2 to Rivet v3](doc/tutorials/mig2to3.md)
 
+[Migrating from Rivet v3 to Rivet v4](doc/tutorials/mig3to4.md)
+
 
 
 ## Developer topics
