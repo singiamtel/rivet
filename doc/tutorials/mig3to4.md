@@ -1,6 +1,6 @@
-# Migration from Rivet v3.1 to Rivet v3.2
+# Migration from Rivet v3 to Rivet v4
 
-Rivet 3.2 is a minor new release series, in which we've made some big
+Rivet 4 is a major new release series, in which we've made some big
 changes that affect the programming interface (or "API") exposed to
 analysis authors.
 
@@ -10,9 +10,9 @@ code will need to be changed. We have made the changes to all the
 analyses submitted to the Rivet core library, so there's another
 incentive to submit your analyses, too!
 
-The 3.1 -> 3.2 changes particularly affect histogramming -- which
+The 3 -> 4 changes particularly affect histogramming -- which
 now requires the fully reworked YODA v2 -- and the configuration of
-some projections. Version 3.2 also adds functionality for storing and loading
+some projections. Version 4 also adds functionality for storing and loading
 analysis-specific structure data in HDF5 format, and other new
 features, but as those are not changes to existing functionality they
 aren't covered in this migration guide.
