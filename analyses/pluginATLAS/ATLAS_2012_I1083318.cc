@@ -163,7 +163,7 @@ namespace Rivet {
         }
 
         // Scale all histos to the cross section
-        const double factor = crossSection()/sumOfWeights();
+        const double factor = crossSection()/picobarn/sumOfWeights();
         scale(_h_DeltaPhi_2jet[i], factor);
         scale(_h_DeltaR_2jet[i], factor);
         scale(_h_DeltaY_2jet[i], factor);

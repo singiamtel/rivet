@@ -138,7 +138,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      const double normfac = crossSection() / sumOfWeights();
+      const double normfac = crossSection()/picobarn / sumOfWeights();
 
       scale( _h_bjet_Pt,      normfac);
       scale( _h_bjet_Y,       normfac);

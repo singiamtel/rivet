@@ -134,7 +134,7 @@ namespace Rivet {
     
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_charge_electron, crossSection()/sumOfWeights());
+      scale(_h_charge_electron, crossSection()/picobarn/sumOfWeights());
       normalize({_h_y, _h_W2, _h_x, _h_Q2, _h_gammahad,
           _h_eminuspz,
           _h_pt_remnant,

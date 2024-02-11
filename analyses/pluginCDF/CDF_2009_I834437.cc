@@ -54,7 +54,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_Et_photon, crossSection()/sumOfWeights()/2.0);
+      scale(_h_Et_photon, crossSection()/picobarn/sumOfWeights()/2.0);
     }
 
     /// @}

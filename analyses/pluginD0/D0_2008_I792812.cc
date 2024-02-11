@@ -77,7 +77,7 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      const double invlumi = crossSection()/sumOfWeights();
+      const double invlumi = crossSection()/picobarn/sumOfWeights();
       scale(_h_total_cross_section, invlumi);
       scale(_h_jet_pT_cross_section, invlumi);
       scale(_h_jet_y_cross_section, invlumi);

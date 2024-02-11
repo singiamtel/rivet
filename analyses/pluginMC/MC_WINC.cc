@@ -102,14 +102,14 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      scale(_h_W_mass, crossSection()/sumOfWeights());
-      scale(_h_W_mT, crossSection()/sumOfWeights());
-      scale(_h_W_pT, crossSection()/sumOfWeights());
-      scale(_h_W_pT_peak, crossSection()/sumOfWeights());
-      scale(_h_W_y, crossSection()/sumOfWeights());
-      scale(_h_W_phi, crossSection()/sumOfWeights());
-      scale(_h_lepton_pT, crossSection()/sumOfWeights());
-      scale(_h_lepton_eta, crossSection()/sumOfWeights());
+      scale(_h_W_mass, crossSection()/picobarn/sumOfWeights());
+      scale(_h_W_mT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_W_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_W_pT_peak, crossSection()/picobarn/sumOfWeights());
+      scale(_h_W_y, crossSection()/picobarn/sumOfWeights());
+      scale(_h_W_phi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_lepton_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_lepton_eta, crossSection()/picobarn/sumOfWeights());
 
       // Construct asymmetry: (dsig+/deta - dsig-/deta) / (dsig+/deta + dsig-/deta) for each Et region
       divide(*_htmp_dsigplus_deta - *_htmp_dsigminus_deta,
@@ -120,8 +120,8 @@ namespace Rivet {
       divide(_h_Wplus_pT, _h_Wminus_pT,
              _h_asym_pT);
 
-      scale(_h_Wplus_pT, crossSection()/picobarn/sumOfWeights());
-      scale(_h_Wminus_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_Wplus_pT, crossSection()/picobarn/picobarn/sumOfWeights());
+      scale(_h_Wminus_pT, crossSection()/picobarn/picobarn/sumOfWeights());
     }
 
     /// @}

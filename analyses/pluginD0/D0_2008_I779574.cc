@@ -77,7 +77,7 @@ namespace Rivet {
     /// Finalize
     void finalize() {
       /// Scale by cross-section
-      const double scalefactor = crossSection() / sumOfWeights();
+      const double scalefactor = crossSection()/picobarn / sumOfWeights();
       scale(_h_dsigdptdy_y00_04, scalefactor);
       scale(_h_dsigdptdy_y04_08, scalefactor);
       scale(_h_dsigdptdy_y08_12, scalefactor);

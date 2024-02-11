@@ -118,7 +118,7 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      const double lumi_gen = sumOfWeights()/crossSection();
+      const double lumi_gen = sumOfWeights()/crossSection()/picobarn;
       const double dy_photon = 2.0;
       const double dy_jet_central = 1.6;
       const double dy_jet_forward = 2.0;

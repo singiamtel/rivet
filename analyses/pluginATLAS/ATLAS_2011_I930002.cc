@@ -283,10 +283,10 @@ namespace Rivet {
       // Two, three and four jet channels have bin width = 100 (GeV)
       // High mass channel has bin width = 150 (GeV)
       // Integrated luminosity = 1040 (pb)
-      scale( _hist_meff_2j, 100. * 1040 * crossSection()/sumOfWeights() );
-      scale( _hist_meff_3j, 100. * 1040 * crossSection()/sumOfWeights() );
-      scale( _hist_meff_4j, 100. * 1040 * crossSection()/sumOfWeights() );
-      scale( _hist_meff_HM, 150. * 1040 * crossSection()/sumOfWeights() );
+      scale( _hist_meff_2j, 100. * 1040 * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_meff_3j, 100. * 1040 * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_meff_4j, 100. * 1040 * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_meff_HM, 150. * 1040 * crossSection()/picobarn/sumOfWeights() );
     }
 
     /// @}

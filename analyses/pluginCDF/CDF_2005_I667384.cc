@@ -72,9 +72,9 @@ namespace Rivet {
 
     void finalize() {
       for (size_t i=0; i<4; ++i) {
-        scale(_h_m_PP[i], crossSection()/sumOfWeights());
-        scale(_h_pT_PP[i], crossSection()/sumOfWeights());
-        scale(_h_dphi_PP[i], crossSection()/M_PI/sumOfWeights());
+        scale(_h_m_PP[i], crossSection()/picobarn/sumOfWeights());
+        scale(_h_pT_PP[i], crossSection()/picobarn/sumOfWeights());
+        scale(_h_dphi_PP[i], crossSection()/picobarn/M_PI/sumOfWeights());
       }
     }
 

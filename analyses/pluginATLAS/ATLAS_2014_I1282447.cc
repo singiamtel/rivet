@@ -407,7 +407,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      const double sf = crossSection() / sumOfWeights();
+      const double sf = crossSection()/picobarn / sumOfWeights();
 
       // norm to cross section
       // d01
@@ -429,11 +429,11 @@ namespace Rivet {
       scale(_hist_wminus_wcjet_eta_lep, sf);
 
       //d04
-      scale(_hist_wplus_wdminus_eta_lep, crossSection()/sumOfWeights());
-      scale(_hist_wminus_wdplus_eta_lep, crossSection()/sumOfWeights());
+      scale(_hist_wplus_wdminus_eta_lep, crossSection()/picobarn/sumOfWeights());
+      scale(_hist_wminus_wdplus_eta_lep, crossSection()/picobarn/sumOfWeights());
 
-      scale(_hist_wplus_wdstar_eta_lep , crossSection()/sumOfWeights());
-      scale(_hist_wminus_wdstar_eta_lep, crossSection()/sumOfWeights());
+      scale(_hist_wplus_wdstar_eta_lep , crossSection()/picobarn/sumOfWeights());
+      scale(_hist_wminus_wdstar_eta_lep, crossSection()/picobarn/sumOfWeights());
 
       //d05
       scale(_hist_w_inc, 0.01 * sf); // in percent --> /100

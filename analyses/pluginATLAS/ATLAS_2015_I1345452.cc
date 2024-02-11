@@ -239,7 +239,7 @@ namespace Rivet {
 
     void finalize() {
       // Normalize to cross-section
-      const double scalefactor(crossSection() / sumOfWeights());
+      const double scalefactor(crossSection()/picobarn / sumOfWeights());
       for (map<string, Histo1DPtr>::iterator hit = _h.begin(); hit != _h.end(); ++hit) {
         double sf = scalefactor;
         if ( (hit->first).find("_") == std::string::npos )  sf *= 0.5;

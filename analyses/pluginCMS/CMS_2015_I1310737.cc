@@ -149,7 +149,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      const double norm = (sumOfWeights() != 0) ? crossSection()/sumOfWeights() : 1.0;
+      const double norm = (sumOfWeights() != 0) ? crossSection()/picobarn/sumOfWeights() : 1.0;
 
       scale(_h_excmult_jets_tot, norm );
       scale(_h_incmult_jets_tot, norm );

@@ -93,14 +93,14 @@ namespace Rivet {
 
     void finalize() {
 
-      scale(_h_M, crossSection()/sumOfWeights());
-      scale(_h_pT, crossSection()/sumOfWeights());
-      scale(_h_dPhi, crossSection()/sumOfWeights());
-      scale(_h_costheta, crossSection()/sumOfWeights());
+      scale(_h_M, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_dPhi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_costheta, crossSection()/picobarn/sumOfWeights());
 
-      scale(_h_pT_M, crossSection()/sumOfWeights());
-      scale(_h_dPhi_M, crossSection()/sumOfWeights());
-      scale(_h_costheta_M, crossSection()/sumOfWeights());
+      scale(_h_pT_M, crossSection()/picobarn/sumOfWeights());
+      scale(_h_dPhi_M, crossSection()/picobarn/sumOfWeights());
+      scale(_h_costheta_M, crossSection()/picobarn/sumOfWeights());
 
       divByGroupWidth({_h_pT_M, _h_dPhi_M, _h_costheta_M});
     }

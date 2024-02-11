@@ -263,7 +263,7 @@ namespace Rivet {
 
     void finalize() {
 
-      const double sf = crossSection()/sumOfWeights();
+      const double sf = crossSection()/picobarn/sumOfWeights();
 
       gapfractionfromjetpt("jetspt", m_hist_gap1, 1);
       gapfractionfromjetpt("jetspt", m_hist_gap2, 2);

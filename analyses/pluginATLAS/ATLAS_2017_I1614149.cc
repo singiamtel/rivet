@@ -280,7 +280,7 @@ namespace Rivet {
 
     void finalize() {
       // Normalize to cross-section
-      const double sf = (crossSection() / sumOfWeights());
+      const double sf = (crossSection()/picobarn / sumOfWeights());
       for (HistoMap::value_type& hist : _h) {
         scale(hist.second, sf);
         if (hist.first.find("_norm") != string::npos)  normalize(hist.second);

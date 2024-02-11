@@ -118,7 +118,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double normfac = crossSection()/sumOfWeights();
+      double normfac = crossSection()/picobarn/sumOfWeights();
       scale(_h_el_njet_inclusive, normfac/nanobarn);
       scale(_h_mu_njet_inclusive, normfac/nanobarn);
       scale(_h_el_pT_jet1, normfac);

@@ -150,8 +150,8 @@ namespace Rivet {
     /// @}
 
     void finalize() {
-      double fact = crossSection()/sumOfWeights()*37;
-      MSG_WARNING("testing " << crossSection() << " " << sumOfWeights() << " " << fact);
+      double fact = crossSection()/picobarn/sumOfWeights()*37;
+      MSG_WARNING("testing " << crossSection()/picobarn << " " << sumOfWeights() << " " << fact);
       scale(_hist_beta,fact);
       scale(_hist_time,fact);
       scale(_hist_mass,fact);

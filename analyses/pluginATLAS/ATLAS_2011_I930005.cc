@@ -418,27 +418,27 @@ namespace Rivet {
 
     void finalize() {
 
-      scale( _3j_hist_eTmiss_e, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3j_hist_eTmiss_mu, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3j_hist_m_eff_e, 50. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3j_hist_m_eff_mu, 50. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3j_hist_mT_e, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3j_hist_mT_mu, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3jl_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3jl_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3jt_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _3jt_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
+      scale( _3j_hist_eTmiss_e, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3j_hist_eTmiss_mu, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3j_hist_m_eff_e, 50. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3j_hist_m_eff_mu, 50. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3j_hist_mT_e, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3j_hist_mT_mu, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3jl_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3jl_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3jt_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _3jt_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
 
-      scale( _4j_hist_eTmiss_e, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4j_hist_eTmiss_mu, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4j_hist_m_eff_e, 50. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4j_hist_m_eff_mu, 50. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4j_hist_mT_e, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4j_hist_mT_mu, 10. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4jl_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4jl_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4jt_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
-      scale( _4jt_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/sumOfWeights() );
+      scale( _4j_hist_eTmiss_e, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4j_hist_eTmiss_mu, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4j_hist_m_eff_e, 50. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4j_hist_m_eff_mu, 50. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4j_hist_mT_e, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4j_hist_mT_mu, 10. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4jl_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4jl_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4jt_hist_m_eff_e_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
+      scale( _4jt_hist_m_eff_mu_final, 100. * 1.04e3 * crossSection()/picobarn/sumOfWeights() );
 
 
     }

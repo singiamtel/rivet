@@ -450,7 +450,7 @@ namespace Rivet {
 
     void finalize() {
 
-      const double sf = crossSection()/sumOfWeights();
+      const double sf = crossSection()/picobarn/sumOfWeights();
 
       for (auto& item : _h) {
         if (item.first.find("_norm") != string::npos) {

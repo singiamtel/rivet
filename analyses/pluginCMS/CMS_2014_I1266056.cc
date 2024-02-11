@@ -104,13 +104,13 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      const double scale_jetcentral = crossSection()/sumOfWeights(); // *3 (jet eta < 1.5)
+      const double scale_jetcentral = crossSection()/picobarn/sumOfWeights(); // *3 (jet eta < 1.5)
       scale(_h_phverycentral_jetcentral, scale_jetcentral); // * 1.8 (photon eta < 0.9)
       scale(_h_phcentral_jetcentral    , scale_jetcentral); // * 1.08 (0.9 .. 1.44)
       scale(_h_phforward_jetcentral    , scale_jetcentral); // * 1.06 (1.57 .. 2.1)
       scale(_h_phveryforward_jetcentral, scale_jetcentral); // * 0.8  (2.1 .. 2.5)
 
-      const double scale_jetforward = crossSection()/sumOfWeights(); // *2 (1.5 < eta < 2.5)
+      const double scale_jetforward = crossSection()/picobarn/sumOfWeights(); // *2 (1.5 < eta < 2.5)
       scale(_h_phverycentral_jetforward, scale_jetforward); // .. as above ..
       scale(_h_phcentral_jetforward    , scale_jetforward); // .. as above ..
       scale(_h_phforward_jetforward    , scale_jetforward); // .. as above ..

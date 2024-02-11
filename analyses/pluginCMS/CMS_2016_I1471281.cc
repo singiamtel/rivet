@@ -82,7 +82,7 @@ namespace Rivet {
 
       /// Normalise histograms etc., after the run
       void finalize() {
-        MSG_DEBUG("Cross section = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(3) << crossSection() << " pb");
+        MSG_DEBUG("Cross section = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(3) << crossSection()/picobarn << " pb");
         MSG_DEBUG("# Events      = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(3) << numEvents() );
         MSG_DEBUG("SumW          = " << std::setfill(' ') << std::setw(14) << std::fixed << std::setprecision(3) << sumOfWeights());
         if (_mode == 0 || _mode == 1) normalize(_hist_WtoMuNuPt);

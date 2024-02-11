@@ -202,7 +202,7 @@ namespace Rivet {
     /// Finalize data objects after the run
     void finalize() {
       const double sf = _mode? 1.0 : 0.5;
-      const double scalefactor = sf * crossSection() / sumOfWeights();
+      const double scalefactor = sf * crossSection()/picobarn / sumOfWeights();
       scale(histos, scalefactor);
     }
 

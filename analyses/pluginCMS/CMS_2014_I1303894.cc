@@ -177,7 +177,7 @@ namespace Rivet {
     // Finalize the histograms.
     void finalize() {
 
-      const double inclusive_cross_section = crossSection();
+      const double inclusive_cross_section = crossSection()/picobarn;
       const double norm_1jet_histo = inclusive_cross_section*dbl(*_n_1jet)/sumOfWeights();
       const double norm_2jet_histo = inclusive_cross_section*dbl(*_n_2jet)/sumOfWeights();
       const double norm_3jet_histo = inclusive_cross_section*dbl(*_n_3jet)/sumOfWeights();

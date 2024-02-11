@@ -112,7 +112,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      MSG_DEBUG("crossSection " << crossSection() << " sumOfWeights " << sumOfWeights());
+      MSG_DEBUG("crossSection " << crossSection()/picobarn << " sumOfWeights " << sumOfWeights());
 
       // Hardcoded bin widths
       double DRbin = 0.4;
@@ -124,12 +124,12 @@ namespace Rivet {
       double nDataDPhi56 = 24220.00;
       double nDataDPhi84 = 4964.00;
       double nDataDPhi120 = 919.10;
-      double normDR56 = safediv(nDataDR56, dbl(*_c["MCDR56"]), crossSection()/sumOfWeights());
-      double normDR84 = safediv(nDataDR84, dbl(*_c["MCDR84"]), crossSection()/sumOfWeights());
-      double normDR120 = safediv(nDataDR120, dbl(*_c["MCDR120"]), crossSection()/sumOfWeights());
-      double normDPhi56 = safediv(nDataDPhi56, dbl(*_c["MCDPhi56"]), crossSection()/sumOfWeights());
-      double normDPhi84 = safediv(nDataDPhi84, dbl(*_c["MCDPhi84"]), crossSection()/sumOfWeights());
-      double normDPhi120 = safediv(nDataDPhi120, dbl(*_c["MCDPhi120"]), crossSection()/sumOfWeights());
+      double normDR56 = safediv(nDataDR56, dbl(*_c["MCDR56"]), crossSection()/picobarn/sumOfWeights());
+      double normDR84 = safediv(nDataDR84, dbl(*_c["MCDR84"]), crossSection()/picobarn/sumOfWeights());
+      double normDR120 = safediv(nDataDR120, dbl(*_c["MCDR120"]), crossSection()/picobarn/sumOfWeights());
+      double normDPhi56 = safediv(nDataDPhi56, dbl(*_c["MCDPhi56"]), crossSection()/picobarn/sumOfWeights());
+      double normDPhi84 = safediv(nDataDPhi84, dbl(*_c["MCDPhi84"]), crossSection()/picobarn/sumOfWeights());
+      double normDPhi120 = safediv(nDataDPhi120, dbl(*_c["MCDPhi120"]), crossSection()/picobarn/sumOfWeights());
       scale(_h_dsigma_dR_56GeV, normDR56*DRbin);
       scale(_h_dsigma_dR_84GeV, normDR84*DRbin);
       scale(_h_dsigma_dR_120GeV, normDR120*DRbin);

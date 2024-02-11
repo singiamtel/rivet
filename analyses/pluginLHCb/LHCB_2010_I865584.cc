@@ -108,11 +108,11 @@ namespace Rivet {
                 << "Nb. Ks0 (y < 2.5): " << sumKs0_outdwn << endl
                 << "Nb. Ks0 (pT < " << (MIN_PT/MeV) << " MeV/c): " << sum_low_pt_loss << endl
                 << "Nb. Ks0 (pT > 1.6 GeV/c): " << sum_high_pt_loss << endl
-                << "Cross-section [mb]: " << crossSection()/millibarn << endl
+                << "Cross-section [mb]: " << crossSection()/picobarn/millibarn << endl
                 << "Nb. events: " << numEvents());
       // Compute cross-section; multiply by bin width for correct scaling
       // cross-section given by Rivet in pb (symmetric LHCb!)
-      double xsection_factor = 0.5 * crossSection()/sumOfWeights();
+      double xsection_factor = 0.5 * crossSection()/picobarn/sumOfWeights();
       // Divide by bin area for consistent scaling, xsection in mub
       scale(_h_K0s_pt_30, 0.1*xsection_factor/microbarn);
       scale(_h_K0s_pt_35, 0.1*xsection_factor/microbarn);

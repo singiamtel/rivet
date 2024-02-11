@@ -135,7 +135,7 @@ namespace Rivet {
       MSG_DEBUG("Sum of weights for Z production in mass range = " << dbl(*_sumWeightsWithZ));
       MSG_DEBUG("Sum of weights for Z+jet production in mass range = " << dbl(*_sumWeightsWithZJet));
 
-      scale(_sigmaBJet, crossSection()/sumOfWeights());
+      scale(_sigmaBJet, crossSection()/picobarn/sumOfWeights());
       scale(_ratioBJetToZ, 1.0/ *_sumWeightsWithZ);
       scale(_ratioBJetToJet, 1.0/ *_sumWeightsWithZJet);
     }

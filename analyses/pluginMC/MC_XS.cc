@@ -46,7 +46,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_pmXS, crossSection()/sumOfWeights());
+      scale(_h_pmXS, crossSection()/picobarn/sumOfWeights());
     }
 
     /// @}

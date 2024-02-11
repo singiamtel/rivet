@@ -314,12 +314,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      double norm = (sumOfWeights() != 0) ? crossSection()/sumOfWeights() : 1.0;
+      double norm = (sumOfWeights() != 0) ? crossSection()/picobarn/sumOfWeights() : 1.0;
 
       // when running in combined mode, need to average to get lepton xsec
       if (_mode == 2) norm /= 2.;
 
-      MSG_DEBUG("Cross section = " << setfill(' ') << setw(14) << fixed << setprecision(3) << crossSection() << " pb");
+      MSG_DEBUG("Cross section = " << setfill(' ') << setw(14) << fixed << setprecision(3) << crossSection()/picobarn << " pb");
       MSG_DEBUG("# Events      = " << setfill(' ') << setw(14) << fixed << setprecision(3) << numEvents() );
       MSG_DEBUG("SumW          = " << setfill(' ') << setw(14) << fixed << setprecision(3) << sumOfWeights());
       MSG_DEBUG("Norm factor   = " << setfill(' ') << setw(14) << fixed << setprecision(6) << norm);

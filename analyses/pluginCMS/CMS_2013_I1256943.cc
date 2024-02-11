@@ -146,17 +146,17 @@ namespace Rivet {
     void finalize() {
 
       // Normalize excluding overflow bins (d'oh)
-      normalize(_h_dR_BB, 0.7*crossSection()*dbl(*_sumW)/sumOfWeights(), false);  // d01-x01-y01
-      normalize(_h_dphi_BB, 0.53*crossSection()*dbl(*_sumW)/sumOfWeights(), false);   // d02-x01-y01
-      normalize(_h_min_dR_ZB, 0.84*crossSection()*dbl(*_sumW)/sumOfWeights(), false); // d03-x01-y01
-      normalize(_h_A_ZBB, 0.2*crossSection()*dbl(*_sumW)/sumOfWeights(), false);  // d04-x01-y01
+      normalize(_h_dR_BB, 0.7*crossSection()/picobarn*dbl(*_sumW)/sumOfWeights(), false);  // d01-x01-y01
+      normalize(_h_dphi_BB, 0.53*crossSection()/picobarn*dbl(*_sumW)/sumOfWeights(), false);   // d02-x01-y01
+      normalize(_h_min_dR_ZB, 0.84*crossSection()/picobarn*dbl(*_sumW)/sumOfWeights(), false); // d03-x01-y01
+      normalize(_h_A_ZBB, 0.2*crossSection()/picobarn*dbl(*_sumW)/sumOfWeights(), false);  // d04-x01-y01
 
-      normalize(_h_dR_BB_boost, 0.84*crossSection()*dbl(*_sumW50)/sumOfWeights(), false); // d05-x01-y01
-      normalize(_h_dphi_BB_boost, 0.63*crossSection()*dbl(*_sumW50)/sumOfWeights(), false);   // d06-x01-y01
-      normalize(_h_min_dR_ZB_boost, 1*crossSection()*dbl(*_sumW50)/sumOfWeights(), false);    // d07-x01-y01
-      normalize(_h_A_ZBB_boost, 0.25*crossSection()*dbl(*_sumW50)/sumOfWeights(), false); // d08-x01-y01
+      normalize(_h_dR_BB_boost, 0.84*crossSection()/picobarn*dbl(*_sumW50)/sumOfWeights(), false); // d05-x01-y01
+      normalize(_h_dphi_BB_boost, 0.63*crossSection()/picobarn*dbl(*_sumW50)/sumOfWeights(), false);   // d06-x01-y01
+      normalize(_h_min_dR_ZB_boost, 1*crossSection()/picobarn*dbl(*_sumW50)/sumOfWeights(), false);    // d07-x01-y01
+      normalize(_h_A_ZBB_boost, 0.25*crossSection()/picobarn*dbl(*_sumW50)/sumOfWeights(), false); // d08-x01-y01
 
-      normalize(_h_min_ZpT, 40*crossSection()*dbl(*_sumWpT)/sumOfWeights(), false);   // d09-x01-y01
+      normalize(_h_min_ZpT, 40*crossSection()/picobarn*dbl(*_sumWpT)/sumOfWeights(), false);   // d09-x01-y01
     }
 
 

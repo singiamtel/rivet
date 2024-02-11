@@ -217,7 +217,7 @@ namespace Rivet {
     void finalize() {
       // R
       Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      double fact = crossSection()/picobarn/ sumOfWeights() /nanobarn;
       double sig_h = _c_hadrons->val()*fact;
       double err_h = _c_hadrons->err()*fact;
       double sig_c = _c_DDX->val()*fact;
@@ -305,8 +305,8 @@ namespace Rivet {
               error = _c_DDX->err()/nanobarn;
             }
           }
-          sigma *= crossSection()/ sumOfWeights();
-          error *= crossSection()/ sumOfWeights();
+          sigma *= crossSection()/picobarn/ sumOfWeights();
+          error *= crossSection()/picobarn/ sumOfWeights();
           Estimate1DPtr mult;
           book(mult, ix,1,iy);
           for (auto& b : mult->bins()) {

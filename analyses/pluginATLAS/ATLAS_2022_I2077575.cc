@@ -322,7 +322,7 @@ namespace Rivet {
 
       void finalize() {
         // Normalize histograms to cross-section in femtobarns (for consistency with HEPData)
-        const double sf = crossSection() * 1000 / sumOfWeights();
+        const double sf = crossSection()/picobarn * 1000 / sumOfWeights();
         for (auto& h_it : _h) {
           scale(h_it.second, sf);
           // Parton-level distributions corrected for all-hadronic branching fraction

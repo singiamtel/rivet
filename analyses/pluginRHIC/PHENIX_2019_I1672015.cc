@@ -71,8 +71,8 @@ namespace Rivet {
       normalize(_h_m_DiMuon);
       normalize(_h_pT_DiMuon);
       normalize(_h_y_DiMuon);
-      scale(_h_pT, crossSection()/(sumOfWeights())/2.);
-      scale(_h_mass, crossSection()/(sumOfWeights())/2.);
+      scale(_h_pT, crossSection()/picobarn/(sumOfWeights())/2.);
+      scale(_h_mass, crossSection()/picobarn/(sumOfWeights())/2.);
 
     }
 
