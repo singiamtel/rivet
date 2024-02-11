@@ -43,22 +43,23 @@ namespace Rivet {
         declare(jets, "jets");
 
         // Histograms
-        book(_pt_0jet_mass50_76, 1, 1, 1);
-        book(_pt_0jet_mass76_106, 3, 1, 1);
-        book(_pt_0jet_mass106_170, 5, 1, 1);
-        book(_pt_0jet_mass170_350, 7, 1, 1);
-        book(_pt_0jet_mass350_1000, 9, 1, 1);
+        book(_pt_0jet_mass50_76, "_0jetmass_111", refData(1, 1, 1));
+        book(_pt_0jet_mass76_106, "_0jetmass_311", refData(3, 1, 1));
+        book(_pt_0jet_mass106_170, "_0jetmass_511", refData(5, 1, 1));
+        book(_pt_0jet_mass170_350, "_0jetmass_711", refData(7, 1, 1));
+        book(_pt_0jet_mass350_1000, "_0jetmass_911", refData(9, 1, 1));
 
-        book(_pt_1jet_mass50_76, 11, 1, 1);
-        book(_pt_1jet_mass76_106, 13, 1, 1);
-        book(_pt_1jet_mass106_170, 15, 1, 1);
-        book(_pt_1jet_mass170_350, 17, 1, 1);
+        book(_pt_1jet_mass50_76, "_1jetmass_1111", refData(11, 1, 1));
+        book(_pt_1jet_mass76_106, "_1jetmass_1311", refData(13, 1, 1));
+        book(_pt_1jet_mass106_170, "_1jetmass_1511", refData(15, 1, 1));
+        book(_pt_1jet_mass170_350, "_1jetmass_1711", refData(17, 1, 1));
 
-        book(_phistar_mass50_76, 19, 1, 1);
-        book(_phistar_mass76_106, 21, 1, 1);
-        book(_phistar_mass106_170, 23, 1, 1);
-        book(_phistar_mass170_350, 25, 1, 1);
-        book(_phistar_mass350_1000, 27, 1, 1);
+        book(_phistar_mass50_76, "_phistarmass_1911", refData(19, 1, 1));
+        book(_phistar_mass76_106, "_phistarmass_2111", refData(21, 1, 1));
+        book(_phistar_mass106_170, "_phistarmass_2311", refData(23, 1, 1));
+        book(_phistar_mass170_350, "_phistarmass_2511", refData(25, 1, 1));
+        book(_phistar_mass350_1000, "_phistarmass_2711", refData(27, 1, 1));
+
       }
 
       /// Z boson finder.

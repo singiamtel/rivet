@@ -64,7 +64,6 @@ parser.add_argument("--dry-run", help="don't actually do any plotting or HTML bu
 parser.add_argument("--pwd", dest="PATH_PWD", action="store_true", default=False,
                     help="append the current directory (pwd) to the analysis/data search paths (cf. $RIVET_ANALYSIS_PATH)")
 parser.add_argument("--style", dest="STYLE", help="Choose the plotting style", default='default')
-parser.add_argument("--write-files", dest="WRITE_FILES", help="Choose to write YAML files", default=False)
 
 stygroup = parser.add_argument_group("Style options")
 stygroup.add_argument("-t", "--title", dest="TITLE",
@@ -217,7 +216,6 @@ def generate_plots(pyScripts,numcores=1):
 def generateScripts(args):
 
     style = args.STYLE
-    writefiles = args.WRITE_FILES
 
     ## Add pwd to search paths
     if args.PATH_PWD:
@@ -232,15 +230,14 @@ def generateScripts(args):
 
 
     ## Make output directory
-    if not args.DRY_RUN:
-        if os.path.exists(args.OUTPUTDIR) and not os.path.realpath(args.OUTPUTDIR)==os.getcwd():
-            import shutil
-            shutil.rmtree(args.OUTPUTDIR)
-        try:
-            os.makedirs(args.OUTPUTDIR)
-        except:
-            print("Error: failed to make new directory '%s'" % args.OUTPUTDIR)
-            sys.exit(1)
+    if os.path.exists(args.OUTPUTDIR) and not os.path.realpath(args.OUTPUTDIR)==os.getcwd():
+        import shutil
+        shutil.rmtree(args.OUTPUTDIR)
+    try:
+        os.makedirs(args.OUTPUTDIR)
+    except:
+        print("Error: failed to make new directory '%s'" % args.OUTPUTDIR)
+        sys.exit(1)
 
     ## Check that YODA files are accessible
     yodafiles = [ ]
@@ -264,7 +261,7 @@ def generateScripts(args):
     plotContents, hasVars = assemble_plotting_data(yodafiles, args.PATH_PWD,
                                                    args.RIVETREFS, pat_match, pat_unmatch, [os.path.abspath("../")],
                                                    style, configfiles, True, args.OUTPUTDIR, args.MC_ERRS,
-                                                   True, [], args.VERBOSE, writefiles=writefiles,
+                                                   True, [], args.VERBOSE,
                                                    nRatioTicks=args.NRATIOTICKS, showWeights = args.SHOW_WEIGHTS,
                                                    removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION,
                                                    canvasText=args.CANVASTEXT, refLabel=args.REFLABEL,
@@ -281,7 +278,12 @@ def generateScripts(args):
     ## Make web pages first so that we can load it locally in
     ## a browser to view the output before all plots are made
     analyses = sorted(analyses, key=anasort)
-    if not args.DRY_RUN:
+    if args.DRY_RUN:
+        for analysis in analyses:
+            anapath = os.path.join(args.OUTPUTDIR, analysis)
+            if os.path.exists(anapath): continue
+            os.makedirs(anapath)
+    else:
 
         allPlotNames = plotContents.keys()
 
@@ -440,9 +442,9 @@ def generateScripts(args):
                     print("Unicode error in analysis description for " + analysis + ": " + str(ue))
 
             anapath = os.path.join(args.OUTPUTDIR, analysis)
+            if not os.path.exists(anapath):
+                os.makedirs(anapath)
             if not args.SINGLE:
-                if not os.path.exists(anapath):
-                    os.makedirs(anapath)
                 anaindex = open(os.path.join(anapath, "index.html"), 'w')
                 anaindex.write('<html>\n<head>\n<title>%s &ndash; %s</title>\n%s</head>\n<body>\n' %
                                (htmlify(args.TITLE), analysis, style + script))
@@ -515,7 +517,9 @@ def generateScripts(args):
         try:
             pyScript = script_generator.process(singlePlotContent, plotName, args.OUTPUTDIR, args.FORMATS)
             pyScripts += [os.path.abspath(pyScript)]
-        except:
+        except Exception as e:
+            if args.VERBOSE:
+                print(e.message())
             print('Unexpected error encountered for', plotName)
     return pyScripts
 
@@ -529,9 +533,31 @@ if __name__ == '__main__':
     pyScripts = generateScripts(args)
 
     ## Execute generated Python scripts with a multiprocessing Pool
-    # TODO: re-add the progress printout from the plotting pool
-    sys.stdout.write('Plotting...')
-    generate_plots(pyScripts, numcores=args.NUMTHREADS)
+    if not args.DRY_RUN:
+        sys.stdout.write('Plotting...')
+        generate_plots(pyScripts, numcores=args.NUMTHREADS)
 
-    sys.stdout.write('\r')
-    sys.stdout.write('Plotting... done!\n')
+        sys.stdout.write('\r')
+        sys.stdout.write('Plotting... done!\n')
+
+        if args.BOOKLET and 'pdf' in args.FORMATS:
+            if which("pdftk") is not None:
+                bookletcmd = ["pdftk"]
+                for analysis in analyses:
+                    anapath = os.path.join(args.OUTPUTDIR, analysis)
+                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
+                bookletcmd += ["cat", "output", "%s/booklet.pdf" % args.OUTPUTDIR]
+                if args.VERBOSE:
+                    print(bookletcmd)
+                subprocess.Popen(bookletcmd).wait()
+            elif which("pdfmerge") is not None:
+                bookletcmd = ["pdfmerge"]
+                for analysis in analyses:
+                    anapath = os.path.join(args.OUTPUTDIR, analysis)
+                    bookletcmd += sorted(glob.glob("%s/*.pdf" % anapath))
+                bookletcmd += ["%s/booklet.pdf" % args.OUTPUTDIR]
+                if args.VERBOSE:
+                    print(bookletcmd)
+                subprocess.Popen(bookletcmd).wait()
+            else:
+                print("Neither pdftk nor pdfmerge available --- no booklet output possible")

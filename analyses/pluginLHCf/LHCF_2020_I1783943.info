@@ -40,5 +40,3 @@ BibTeX: '@article{LHCf:2020hjf,
 	    reportNumber = "CERN-EP-2020-029",
 	    SLACcitation   = "%%CITATION = ARXIV:2003.02192;%%"
 }'
-ReleaseTests:
- - $A pp-13000-fwd-neutrons
