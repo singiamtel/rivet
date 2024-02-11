@@ -434,7 +434,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
                            plotinfodirs=[], style='default', config_files=[],
                            hier_output=False, outdir='.', mc_errs=True,
                            rivetplotpaths=True, analysispaths=[], verbose=False,
-                           writefiles=False, nRatioTicks=1, showWeights=False,
+                           nRatioTicks=1, showWeights=False,
                            removeOptions = False, deviation=False,
                            canvasText=None, refLabel=None, ratioPlotLabel=None,
                            showRatio=None):
@@ -477,9 +477,6 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
         Search for .plot files in the standard Rivet plot paths.
     verbose : bool
         If True, write more information to stdout.
-    writefiles : bool
-        If True, write the created dicts to dat files.
-        This is used if one wants the intermediate format for later use or if one only calls this function and not rivet-mkhtml.
     nRatioTicks: int
         Number of minor ticks between major ticks, can be specified in rivet-mkhtml
     deviation: bool

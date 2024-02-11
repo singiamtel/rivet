@@ -13,7 +13,9 @@ RunInfo:
 NumEvents: 10000
 PtCuts: [0]
 Description:
-  This is a pure Monte Carlo study for $t\bar{t}$ production.
+  A pure Monte Carlo study for $t\bar{t}$ production, characterising the
+  top-quark final-state via jet and lepton reconstruction rather than
+  the unreliable partonic tops.
 Options:
 - TTMODE=ALLHAD,ONELEP,TWOLEP,ANYLEP
 

@@ -26,40 +26,40 @@ LogX=1
 
 # BEGIN PLOT /MC_MET/pT_inv
 Title=$p_\mathrm{T}$ of vector sum of all invisibles
-XLabel=$p_\mathrm{T}^{inv}$ [GeV]
-YLabel=$\mathrm{d}\sigma / \mathrm{d} p_\mathrm{T}^{inv}$ [pb GeV$^{-1}$]
+XLabel=$p_\mathrm{T}^\mathrm{inv}$ [GeV]
+YLabel=$\mathrm{d}\sigma / \mathrm{d} p_\mathrm{T}^\mathrm{inv}$ [pb GeV$^{-1}$]
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /MC_MET/mass_inv
-Title=Mass $m^{inv}$ of vector sum of all invisibles
-XLabel=$m^{inv}$ [GeV]
-YLabel=$\mathrm{d}\sigma / \mathrm{d} m^{inv}$ [pb GeV$^{-1}$]
+Title=Mass $m^\mathrm{inv}$ of vector sum of all invisibles
+XLabel=$m^\mathrm{inv}$ [GeV]
+YLabel=$\mathrm{d}\sigma / \mathrm{d} m^\mathrm{inv}$ [pb GeV$^{-1}$]
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /MC_MET/rap_inv
-Title=Rapidity $y^{inv}$ of vector sum of all invisibles
-XLabel=$y^{inv}$
-YLabel=$\mathrm{d}\sigma / \mathrm{d} y^{inv}$ [pb]
+Title=Rapidity $y^\mathrm{inv}$ of vector sum of all invisibles
+XLabel=$y^\mathrm{inv}$
+YLabel=$\mathrm{d}\sigma / \mathrm{d} y^\mathrm{inv}$ [pb]
 # END PLOT
 
 # BEGIN PLOT /MC_MET/pT_promptinv
 Title=$p_\mathrm{T}$ of vector sum of all prompt invisibles
-XLabel=$p_\mathrm{T}^{pinv}$ [GeV]
-YLabel=$\mathrm{d}\sigma / \mathrm{d} p_\mathrm{T}^{pinv}$ [pb GeV$^{-1}$]
+XLabel=$p_\mathrm{T}^\mathrm{pinv}$ [GeV]
+YLabel=$\mathrm{d}\sigma / \mathrm{d} p_\mathrm{T}^\mathrm{pinv}$ [pb GeV$^{-1}$]
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /MC_MET/mass_promptinv
-Title=Mass $m^{pinv}$ of vector sum of all prompt invisibles
-XLabel=$m^{pinv}$ [GeV]
-YLabel=$\mathrm{d}\sigma / \mathrm{d} m^{pinv}$ [pb GeV$^{-1}$]
+Title=Mass $m^\mathrm{pinv}$ of vector sum of all prompt invisibles
+XLabel=$m^\mathrm{pinv}$ [GeV]
+YLabel=$\mathrm{d}\sigma / \mathrm{d} m^\mathrm{pinv}$ [pb GeV$^{-1}$]
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /MC_MET/rap_promptinv
-Title=Rapidity $y^{pinv}$ of vector sum of all prompt invisibles
-XLabel=$y^{pinv}$
-YLabel=$\mathrm{d}\sigma / \mathrm{d} y^{pinv}$ [pb]
+Title=Rapidity $y^\mathrm{pinv}$ of vector sum of all prompt invisibles
+XLabel=$y^\mathrm{pinv}$
+YLabel=$\mathrm{d}\sigma / \mathrm{d} y^\mathrm{pinv}$ [pb]
 # END PLOT
