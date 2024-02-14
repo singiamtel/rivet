@@ -708,7 +708,7 @@ namespace Rivet {
         if ( !analysis->info().validOption(opt[0], opt[1]) )
           MSG_WARNING("Setting the option '" << opt[0] << "' to '"
                       << opt[1] << "' for " << analysisname
-                      << " has not been declared in the info file "
+                      << " has not been declared in the info file"
                       << " and may be ignored in the analysis.");
         opts[opt[0]] = opt[1];
       }
