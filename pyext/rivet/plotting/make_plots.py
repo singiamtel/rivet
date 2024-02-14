@@ -118,7 +118,7 @@ def _get_histos(filelist, plotoptions, path_patterns = [], path_unpatterns = [],
             ao = yoda.plotting.utils.mkPlotFriendlyScatter(ao)
 
             ## Add it to the ref or mc paths, if this path isn't already known
-            basepath = aop.basepath(keepref=False)
+            basepath = rivet.stripOptions(aop.basepath(keepref=False))
             defaultWeightName = plotoptions[inname].get('DefaultWeight', '0')
             if aop.isref() and basepath not in refhistos:
                 ao.setPath(aop.varpath(keepref=False, defaultvarid=defaultWeightName))
