@@ -195,7 +195,7 @@ function _make_plots() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     opts="--help -h"
-    opts="$opts --num-threads -n"
+    opts="$opts --jobs -j"
     opts="$opts --palatino --cm --times --minion"
     opts="$opts --ps --pdf --eps --png --pdfpng --pspng"
     opts="$opts --tex --no-cleanup --full-range"
@@ -231,7 +231,7 @@ function _rivet_mkhtml_tex() {
     opts="$opts --config -c"
     opts="$opts --single -s"
     opts="$opts --no-ratio --errs --mc-errs --refid"
-    opts="$opts --num-threads --n"
+    opts="$opts --jobs -j"
     opts="$opts --pdf --ps --booklet"
     opts="$opts --ignore-unvalidated -i"
     opts="$opts --match -m"
@@ -256,7 +256,7 @@ function _rivet_mkhtml_tex() {
     fi
 
     ## Options without an completeable arg
-    if (echo ${prev} | grep -E -- "\<-t\>|--\<title\>|--\<refid\>|--\<n\>|--\<num-threads\>|\<-m\>|--\<match\>|\<-M\>|--\<unmatch\>" &> /dev/null); then
+    if (echo ${prev} | grep -E -- "\<-t\>|--\<title\>|--\<refid\>|--\<j\>|--\<jobs\>|\<-m\>|--\<match\>|\<-M\>|--\<unmatch\>" &> /dev/null); then
         COMPREPLY=()
         return 0
     fi
@@ -284,7 +284,7 @@ function _rivet_mkhtml() {
     opts="$opts --config -c"
     opts="$opts --single -s"
     opts="$opts --no-errs --no-mcerrs --no-mc-errs"
-    opts="$opts --num-threads --n"
+    opts="$opts --jobs --j"
     opts="$opts --pdf --booklet"
     opts="$opts --ignore-unvalidated -i"
     opts="$opts --match -m"
@@ -311,7 +311,7 @@ function _rivet_mkhtml() {
     fi
 
     ## Options without an completeable arg
-    if (echo ${prev} | grep -E -- "\<-t\>|--\<title\>|--\<n\>|--\<num-threads\>|\<-m\>|--\<match\>|\<-M\>|--\<unmatch\>" &> /dev/null); then
+    if (echo ${prev} | grep -E -- "\<-t\>|--\<title\>|--\<j\>|--\<\>|\<-m\>|--\<match\>|\<-M\>|--\<unmatch\>" &> /dev/null); then
         COMPREPLY=()
         return 0
     fi

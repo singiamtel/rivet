@@ -40,8 +40,8 @@ parser.add_argument("-o", "--outputdir", dest="OUTPUTDIR",
                     default="./rivet-plots", help="directory for Web page output")
 parser.add_argument("-c", "--config", dest="CONFIGFILES", action="append", default=["~/.make-plots"],
                     help="plot config file(s) to be used with rivet-cmphistos")
-parser.add_argument("-n", "--num-threads", metavar="NUMTHREADS", dest="NUMTHREADS", type=int,
-                    default=None, help="request make-plots to use a specific number of threads")
+parser.add_argument("-j", "--jobs", metavar="JOBS", dest="JOBS", type=int,
+                    default=None, help="number of parallelized processes to run")
 parser.add_argument("--ignore-missing", dest="IGNORE_MISSING", action="store_true",
                     default=False, help="ignore missing YODA files")
 parser.add_argument("-i", "--ignore-unvalidated", dest="IGNORE_UNVALIDATED", action="store_true",
@@ -327,8 +327,8 @@ for configfile in args.CONFIGFILES:
     configfile = os.path.abspath(os.path.expanduser(configfile))
     if os.access(configfile, os.R_OK):
         mp_cmd.append("--config=%s" % configfile)
-if args.NUMTHREADS:
-    mp_cmd.append("--num-threads=%d" % args.NUMTHREADS)
+if args.JOBS:
+    mp_cmd.append("--jobs=%d" % args.JOBS)
 if args.NO_CLEANUP:
     mp_cmd.append("--no-cleanup")
 if args.NO_SUBPROC:

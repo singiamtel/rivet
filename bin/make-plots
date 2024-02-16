@@ -3551,16 +3551,16 @@ if __name__ == '__main__':
     ## Find number of (virtual) processing units
     import multiprocessing
     try:
-        numcores = multiprocessing.cpu_count()
+        nproc = multiprocessing.cpu_count()
     except:
-        numcores = 1
+        nproc = 1
 
     ## Parse command line options
     import argparse
     parser = argparse.ArgumentParser(usage=__doc__)
     parser.add_argument("DATFILES", nargs="+", help=".dat files to plot")
-    parser.add_argument("-j", "-n", "--num-threads", dest="NUM_THREADS", type=int,
-                        default=numcores, help="max number of threads to be used [%s]" % numcores)
+    parser.add_argument("-j", "--jobs", dest="JOBS", type=int,
+                        default=nproc, help="number of parallelized processes to run [%s]" % nproc)
     parser.add_argument("-o", "--outdir", dest="OUTPUT_DIR", default=None,
                         help="choose the output directory (default = .dat dir)")
     parser.add_argument("--font", dest="OUTPUT_FONT", choices="palatino,cm,times,helvetica,euler,minion".split(","),
@@ -3612,7 +3612,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=args.LOGLEVEL, format="%(message)s")
     args.OUTPUT_FONT = args.OUTPUT_FONT.upper()
     args.OUTPUT_FORMAT = args.OUTPUT_FORMAT.upper().split(",")
-    if args.NUM_THREADS == 1:
+    if args.JOBS == 1:
         args.NO_SUBPROC = True
 
     ## Check for no args
@@ -3708,7 +3708,7 @@ if __name__ == '__main__':
             logging.info("Plotting %s (%d/%d remaining)" % (df, len(datfiles)-i, len(datfiles)))
             process_datfile(df, **datargs)
     else:
-        pool = multiprocessing.Pool(args.NUM_THREADS, init_worker)
+        pool = multiprocessing.Pool(args.JOBS, init_worker)
         process_args = [ (datfile, datargs) for datfile in datfiles ]
         try:
             for i, _ in enumerate(pool.imap(process_wrapper, process_args)):

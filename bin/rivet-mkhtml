@@ -39,9 +39,9 @@ COMMAND = " ".join([os.path.basename(sys.argv[0])] + sys.argv[1:])
 import shutil
 import argparse
 try:
-    numcores = multiprocessing.cpu_count()
+    nproc = multiprocessing.cpu_count()
 except:
-    numcores = 1
+    nproc = 1
 
 parser = argparse.ArgumentParser(usage=__doc__)
 parser.add_argument("YODAFILES", nargs="+", help="data files to compare")
@@ -49,8 +49,8 @@ parser.add_argument("-o", "--outputdir", dest="OUTPUTDIR",
                     default="./rivet-plots", help="directory for Web page output")
 parser.add_argument("-c", "--config", dest="CONFIGFILES", action="append", default=['~/.make-plots'],
                     help="plot config file(s) to be used with rivet-cmphistos")
-parser.add_argument("-n", "--num-threads", metavar="NUMTHREADS", dest="NUMTHREADS", type=int,
-                    default=None, help="max number of threads to be used [%s]" % numcores)
+parser.add_argument("-j", "--jobs", metavar="JOBS", dest="JOBS", type=int,
+                    default=None, help="number of parallelized processes to run [%s]" % nproc)
 parser.add_argument("--ignore-missing", dest="IGNORE_MISSING", action="store_true",
                     default=False, help="ignore missing YODA files")
 parser.add_argument("-i", "--ignore-unvalidated", dest="IGNORE_UNVALIDATED", action="store_true",
@@ -184,7 +184,7 @@ def executeScript(script, shared_modules_list=[]):
         print(ex)
 
 
-def generate_plots(pyScripts,numcores=1):
+def generate_plots(pyScripts,nproc=1):
 
     # manage matplotlib and numpy processes centrally,
     # so that they are not imported for each individual script
@@ -193,7 +193,7 @@ def generate_plots(pyScripts,numcores=1):
     manager_module.shared_modules = ["matplotlib", "numpy", "sys", "os"]
 
     # Call multiprocessing pool to generate plots
-    p = multiprocessing.Pool(processes=numcores)
+    p = multiprocessing.Pool(processes=nproc)
 
     try:
         # show progress bar
@@ -535,7 +535,7 @@ if __name__ == '__main__':
     ## Execute generated Python scripts with a multiprocessing Pool
     if not args.DRY_RUN:
         sys.stdout.write('Plotting...')
-        generate_plots(pyScripts, numcores=args.NUMTHREADS)
+        generate_plots(pyScripts, nproc=args.JOBS)
 
         sys.stdout.write('\r')
         sys.stdout.write('Plotting... done!\n')
