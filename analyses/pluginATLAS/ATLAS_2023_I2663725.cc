@@ -5,6 +5,7 @@
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/InvisibleFinalState.hh"
+#include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
 
