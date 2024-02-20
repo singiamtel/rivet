@@ -17,5 +17,23 @@ namespace Rivet {
     return idiscard(jets, [&](const Jet& j){return c->accept(j);});
   }
 
+  Jets trimJetsFrac(const PseudoJets& jetsIn, const double frac){
+    Jets jetsOut;
+    for (const PseudoJet & pj : jetsIn){
+      const double ptcut = pj.pt()*frac;
+      // TODO: Ugly -> I'd like to use Jets instead of Particles
+      // Will need changes to jet class.
+      vector<Particle> preservedJets;
+      FourMomentum fourmom;
+      for (const PseudoJet & pjconstit : pj.constituents()){
+        if (pjconstit.pt() > ptcut){
+          preservedJets.push_back(Particle(0, Jet(pjconstit).mom()));
+          fourmom += Jet(pjconstit);
+        }
+      }
+      jetsOut.emplace_back(fourmom, preservedJets);
+    }
+    return jetsOut;
+  }
 
 }

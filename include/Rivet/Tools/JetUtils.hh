@@ -183,6 +183,17 @@ namespace Rivet {
   /// @}
 
 
+  /// @defgroup jetutils_trim Trimming operations not covered in fastjet
+  /// @{
+
+  /// Take in PseudoJets, Return Jets with subjet constituents of pt under
+  /// frac*(jetpt) removed.
+  /// Mainly useful for reclustered jets.
+  Jets trimJetsFrac(const PseudoJets& jetsIn, const double frac=0.1);
+
+  /// @}
+
+
 
   /// @defgroup jetutils_coll Operations on collections of Jet
   /// @note This can't be done on generic collections of ParticleBase -- thanks, C++ :-/
