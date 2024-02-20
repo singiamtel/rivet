@@ -292,7 +292,24 @@ namespace Rivet {
     /// C-style arrays of the input/output node names
     vector<const char*> _inNames, _outNames;
   };
+
+  /// Useful function for getting onnx file paths
+  /// Based on getDatafilePath from RivetYODA.cc
+  string getONNXFilePath(const string& filename) {
+    /// Try to find an ONNX file matching this analysis name
+    const string path1 = findAnalysisRefFile(filename);
+    if (!path1.empty()) return path1;
+    throw Rivet::Error("Couldn't find a ref data file for '" + filename +
+                       "' in data path, '" + getRivetDataPath() + "', or '.'");
+  }
+
+  /// Function to get a RivetONNXrt object from an analysis name
+  /// Use suffix to help disambiguate if an analysis requires 
+  /// multiple networks.
+  /// @todo: If ONNX is ever fully integrated into rivet, move
+  /// to analysis class.
+  unique_ptr<RivetONNXrt> getONNX(const string& analysisname, const string& suffix = ".onnx"){
+    return make_unique<RivetONNXrt>(getONNXFilePath(analysisname+suffix));
+  }
 }
-
-
 #endif

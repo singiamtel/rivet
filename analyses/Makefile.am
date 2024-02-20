@@ -4,9 +4,12 @@ SHELL := bash -O extglob
 PLUGIN_DIRS = $(shell ls -d $(srcdir)/plugin*)
 PLUGIN_NAMES = $(notdir $(subst plugin,,$(PLUGIN_DIRS)))
 PLUGIN_LIBS = $(patsubst %,Rivet%Analyses.so,$(PLUGIN_NAMES))
+if !ENABLE_ONNX
+	PLUGIN_LIBS = $(patsubst %,Rivet%Analyses.so,$(filter-out ONNX,$(PLUGIN_NAMES)))
+endif
 PLUGIN_DATAFILES = $(shell ls $(abs_srcdir)/plugin*/*.*)
 
-CLEANFILES = $(PLUGIN_LIBS)
+CLEANFILES = $(PLUGIN_LIBS) data
 EXTRA_DIST = $(PLUGIN_DIRS) examples
 
 %.so:
@@ -38,12 +41,25 @@ RivetSPSAnalyses.so: $(filter-out $(srcdir)/pluginSPS/tmp*.cc, $(wildcard $(srcd
 RivetTOTEMAnalyses.so: $(filter-out $(srcdir)/pluginTOTEM/tmp*.cc, $(wildcard $(srcdir)/pluginTOTEM/*.cc))
 RivetTristanAnalyses.so: $(filter-out $(srcdir)/pluginTristan/tmp*.cc, $(wildcard $(srcdir)/pluginTristan/*.cc))
 
+if ENABLE_ONNX
+.download_onnx_data:
+	(wget -P pluginONNX -r -l1 -nd "https://rivetval.web.cern.ch/rivetval/AUX/" -A "*.onnx" -e robots=off \
+	&& touch .download_onnx_data) \
+	|| (echo "FAILED to download onnx data files from https://rivetval.web.cern.ch/rivetval/AUX/" && \
+	echo "Check you have wget installed and are connected to the internet" && exit 1);
+
+RivetONNXAnalyses.so: $(filter-out $(srcdir)/pluginONNX/tmp*.cc, $(wildcard $(srcdir)/pluginONNX/*.cc)) .download_onnx_data
+	@+echo && RIVET_BUILD_BEFORE_INSTALL=1 bash $(top_builddir)/bin/rivet-build $@ $^ -I$(top_builddir)/include -I$(ONNXRTPREFIX)/include -L$(ONNXRTLIBPATH) -lonnxruntime
+endif
 
 if ENABLE_ANALYSES
 
 all-local: $(PLUGIN_LIBS) $(PLUGIN_DATAFILES)
 	mkdir -p $(builddir)/data
 	for pdir in $(abs_srcdir)/plugin*; do $(LN_S) -f $${pdir}/*.* $(builddir)/data; done
+
+# clean-local:
+# 	rm -rf $(builddir)/data
 
 install-exec-local: $(PLUGIN_LIBS)
 	$(MKDIR_P) $(DESTDIR)$(libdir)/Rivet

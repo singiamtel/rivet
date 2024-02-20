@@ -1,0 +1,69 @@
+Name: ATLAS_2022_I2182381
+Year: 2022
+Summary: Search for SUSY (gluino pair production) in multi-b final states
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2182381
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Tomasz Procter <t.procter.1@research.gla.ac.uk>
+References:
+ - 'https://doi.org/10.1140/epjc/s10052-023-11543-6'
+ - 'arXiv:2211.08028'
+ - 'ATLAS-SUSY-2018-30'
+RunInfo: 'See hepdata for slha files. Testing was done using pythia, using the
+          the flags `SUSY:gg2gluinogluino` and `SUSY:qqbar2gluinogluino`. Cross-
+          section from the LHC susy working group twiki.'
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 139.0
+Description:
+  'A search for supersymmetry involving the pair production of gluinos decaying via off-shell third-generation
+   squarks into the lightest neutralino ($\displaystyle\tilde\chi^0_1$) is reported. It exploits LHC proton--proton
+   collision data at a centre-of-mass energy $\sqrt{s} = 13$ TeV with an integrated luminosity of 139~fb$^{-1}$ collected
+   with the ATLAS detector from 2015 to 2018. The search uses events containing large missing transverse momentum, up to
+    one electron or muon, and several energetic jets, at least three of which must be identified as containing $b$-hadrons.
+    Both a simple kinematic event selection and an event selection based upon a deep neural-network are used. No significant
+    excess above the predicted background is found.  In simplified models involving the pair production of gluinos that
+    decay via off-shell top (bottom) squarks, gluino masses less than 2.44~TeV (2.35~TeV) are excluded at 95\% CL for a
+    massless $\displaystyle\tilde\chi^0_1$. Limits are also set on the gluino mass in models with variable branching ratios
+    for gluino decays to $b\bar{b}\tilde\chi^0_1$, $t\bar{t}\tilde\chi^0_1$ and $t\bar{b}\tilde\chi^-_1$ / $\bar{t}b\tilde\chi^+_1$.'
+ValidationInfo:
+  'Cutflows for Gbb CC, Gbb NN, Gtt 0L CC, Gtt 1L CC and Gtt NN regions were
+  compared to those on HEPDATA and matched very closely (see Rivet MR !745).
+
+  Event generation used pythia and the slha files provided on HEPDATA,
+  and Cross-Sections were corrected to higher order predictions based on
+  the public results from the lhc susy group
+  https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SUSYCrossSections13TeVgluglu.
+  
+  The three Gtb signal regions could not be validated. Cutflow ratios were 
+  broadly consistent, but the final results were out by a factor of approximately 1.6-1.8.
+
+  Note also there is relatively strong dependence (O(10%) around our best guess)
+  on the overflow bin value of the dependent b-tagging efficiencies, which is not
+  provided in the MV2c10 paper. 
+  '
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: [search, bsm, susy, jets, met, bjets, onnx, ml]
+BibKey: 'ATLAS:2022ihe'
+BibTeX: '@article{ATLAS:2022ihe,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Search for supersymmetry in final states with missing transverse momentum and three or more b-jets in 139 fb$^{-1}$ of proton\textendash{}proton collisions at $\sqrt{s} = 13$~TeV with the ATLAS detector}",
+    eprint = "2211.08028",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2022-213",
+    doi = "10.1140/epjc/s10052-023-11543-6",
+    journal = "Eur. Phys. J. C",
+    volume = "83",
+    number = "7",
+    pages = "561",
+    year = "2023"
+}'
+ToDo:
+ - Gtb regions still don't really work
+

@@ -107,8 +107,7 @@ if test x$use_hepmc = xno ; then
 fi
 
 ## Test the discovered HepMC
-rm conftest.*
-
+rm -f conftest.*
 oldCPPFLAGS=$CPPFLAGS
 CPPFLAGS="$CPPFLAGS -I$HEPMC3INCPATH"
 AC_LANG_CONFTEST([AC_LANG_SOURCE([#include <iostream>
@@ -263,6 +262,23 @@ if test x$enable_analyses != xyes; then
 fi
 AM_CONDITIONAL(ENABLE_ANALYSES, [test x$enable_analyses = xyes])
 
+
+## Optional build/install of ONNXRuntime analyses (make standard at some point)
+AC_ARG_ENABLE([onnxrt],
+  [AS_HELP_STRING([--enable-onnxrt],
+  [require ONNXRuntime library and build ONNX analyses plugin; optionally give the path to ONNXRuntime @<:@$prefix@:>@])],
+  [enable_onnx=yes; ONNXRTPREFIX=$enable_onnxrt], [enable_onnx=no; ONNXRTPREFIX=])
+if test x$enable_onnx != xno; then
+  AC_MSG_WARN([Building with ONNXRuntime support, and including ONNX-analyses plugin])
+  if test x$ONNXRTPREFIX = xyes; then ONNXRTPREFIX=$prefix; fi
+  # TODO: test ONNXRt functionality from given paths
+  ONNXRTINCPATH=$ONNXRTPREFIX/include
+  ONNXRTLIBPATH=$ONNXRTPREFIX/lib
+fi
+AM_CONDITIONAL(ENABLE_ONNX, [test x$enable_onnx = xyes])
+AC_SUBST(ONNXRTPREFIX)
+AC_SUBST(ONNXRTINCPATH)
+AC_SUBST(ONNXRTLIBPATH)
 
 dnl ## Build LaTeX docs if possible...
 dnl AC_PATH_PROG(PDFLATEX, pdflatex)
