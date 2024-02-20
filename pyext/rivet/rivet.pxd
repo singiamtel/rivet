@@ -47,7 +47,7 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         void merge(AnalysisHandler&)
         vector[string] getRawAOpaths() except +
         vector[double] serializeContent(bool) except +
-        void deserializeContent(vector[double]&) except +
+        void deserializeContent(vector[double]&, size_t) except +
 
 cdef extern from "Rivet/Run.hh" namespace "Rivet":
     cdef cppclass Run:

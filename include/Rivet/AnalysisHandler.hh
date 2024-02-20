@@ -422,38 +422,30 @@ namespace Rivet {
 
       collapseEventGroup();
 
-      // Loop over raw AOs and fill a temporary 2D matrix
-      // with the per-AO content; keep track of per-AO sizes
+      // Loop over raw AOs and work out the size of the content data
       const vector<YODA::AnalysisObjectPtr> raos = getRawAOs();
-      std::vector<vector<double>> data; // temporary 2D matrix
-      data.resize(raos.size());
       size_t total = 0;
       for (size_t i = 0; i < raos.size(); ++i) {
-        vector<double> tmp = raos[i]->serializeContent(fixed_length);
-        total += tmp.size() + 1; // +1 for length parameter
-        data[i].reserve(tmp.size());
-        data[i].insert(std::end(data[i]),
-                       std::make_move_iterator(std::begin(tmp)),
-                       std::make_move_iterator(std::end(tmp)));
+        total += raos[i]->lengthContent(fixed_length)+1;
       }
       total += _beaminfo->numBins()+1;
-      // Now that we know the total size of all AOs,
-      // rearrange memory to improve overall layout
-      std::vector<double> rtn; // serialized return vector
-      rtn.reserve(total); // pre-allocate enough memory
+
+      // Loop over raw AOs and retrieve the content data
+      std::vector<double> data; // serialized data vector
+      data.reserve(total); // pre-allocate enough memory
       // Add beam IDs
-      rtn.push_back(_beaminfo->numBins());
+      data.push_back(_beaminfo->numBins());
       for (int beamID : _beaminfo->xEdges()) {
-        rtn.push_back(beamID);
+        data.push_back(beamID);
       }
       // Add raw YODA AO content
-      for (size_t i = 0; i < data.size(); ++i) {
-        rtn.push_back(data[i].size()); // length of the AO
-        rtn.insert(std::end(rtn),
-                   std::make_move_iterator(std::begin(data[i])),
-                   std::make_move_iterator(std::end(data[i]))); // AO data
+      for (size_t i = 0; i < raos.size(); ++i) {
+        vector<double> tmp = raos[i]->serializeContent(fixed_length);
+        data.insert(std::end(data),
+                    std::make_move_iterator(std::begin(tmp)),
+                    std::make_move_iterator(std::end(tmp)));
       }
-      return rtn;
+      return data;
     }
 
     void deserializeContent(const vector<double>& data, size_t nprocs = 0) {

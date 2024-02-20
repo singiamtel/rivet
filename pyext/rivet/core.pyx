@@ -172,9 +172,9 @@ cdef class AnalysisHandler:
     def serializeContent(self, fixed_length = False):
         return self._ptr.serializeContent(fixed_length)
 
-    def deserializeContent(self, data):
+    def deserializeContent(self, data, nprocs = 0):
         data = list(float(x) for x in data)
-        self._ptr.deserializeContent(data)
+        self._ptr.deserializeContent(data, nprocs)
 
 
 cdef class Run:
