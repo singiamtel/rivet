@@ -1684,6 +1684,16 @@ namespace Rivet {
   }
 
 
+  vector<double> AnalysisHandler::weightSumWs() const {
+    vector<double> rtn; rtn.reserve(numWeights());
+    for (size_t iW = 0; iW < numWeights(); ++iW) {
+      _eventCounter.get()->setActiveWeightIdx(iW);
+      rtn.push_back(_eventCounter->sumW());
+    }
+    _eventCounter.get()->unsetActiveWeight();
+    return rtn;
+  }
+
 
   AnalysisHandler& AnalysisHandler::setRunBeams(const ParticlePair& beams) {
     _beams = beams;
