@@ -1,5 +1,5 @@
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = src pyext data include bin analyses test doc
+SUBDIRS = src pyext include bin analyses test doc
 
 AUTOMAKE_OPTIONS = foreign
 

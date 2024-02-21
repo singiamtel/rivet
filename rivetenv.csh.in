@@ -23,34 +23,4 @@ else
 setenv PYTHONPATH "@RIVET_PYTHONPATH@:$YODA_PYTHONPATH"
 endif
 
-if ($?TEXMFHOME) then
-setenv TEXMFHOME "$texdatadir/Rivet/texmf:$TEXMFHOME"
-else
-setenv TEXMFHOME "$texdatadir/Rivet/texmf"
-endif
-
-if ($?HOMETEXMF) then
-setenv HOMETEXMF "$texdatadir/Rivet/texmf:$HOMETEXMF"
-else
-setenv HOMETEXMF "$texdatadir/Rivet/texmf"
-endif
-
-if ($?TEXMFCNF) then
-setenv TEXMFCNF "$texdatadir/Rivet/texmf/cnf:$TEXMFCNF"
-else
-setenv TEXMFCNF "$texdatadir/Rivet/texmf/cnf:"
-endif
-
-if ($?TEXINPUTS) then
-setenv TEXINPUTS "$texdatadir/Rivet/texmf/tex//:$TEXINPUTS"
-else
-setenv TEXINPUTS "$texdatadir/Rivet/texmf/tex//:"
-endif
-
-if ($?LATEXINPUTS) then
-setenv LATEXINPUTS "$texdatadir/Rivet/texmf/tex//:$LATEXINPUTS"
-else
-setenv LATEXINPUTS "$texdatadir/Rivet/texmf/tex//:"
-endif
-
 unset YODA_PYTHONPATH
