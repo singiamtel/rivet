@@ -132,7 +132,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       ///  Normalise, scale and otherwise manipulate histograms here
-      const double sf( crossSection() / sumOfWeights() );
+      const double sf( crossSection()/picobarn / sumOfWeights() );
       for (auto& item : _plots) {
         scale(item.second.comp[0], sf);
         scale(item.second.comp[1], sf);

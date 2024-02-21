@@ -223,7 +223,7 @@ namespace Rivet {
 
       void finalize() {
         // Normalize histograms
-        const double sf = crossSection() / sumOfWeights();
+        const double sf = crossSection()/picobarn / sumOfWeights();
         for (auto &hist : _h) {
           scale(hist.second, sf);
           if ((hist.first.find("_norm") != string::npos) && hist.second->integral(false)>0) hist.second->normalize(1.0, false);

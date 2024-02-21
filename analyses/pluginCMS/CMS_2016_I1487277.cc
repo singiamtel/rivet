@@ -41,7 +41,7 @@ namespace Rivet {
 
     // Finalize
     void finalize() {
-      scale(_hist_sigma, crossSection()/sumOfWeights()/2.0);
+      scale(_hist_sigma, crossSection()/picobarn/sumOfWeights()/2.0);
     }
 
   private:

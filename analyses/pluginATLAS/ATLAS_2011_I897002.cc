@@ -557,19 +557,19 @@ namespace Rivet {
       // cerr << "mumujj: " << mumujj << " eejj: " << eejj << " muvjj: " <<
       // muvjj << " evjj: " << evjj << '\n';
 
-      scale( _hist_St_ee, 120. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_St_mumu, 120. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_MLQ_muv, 50. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_MLQ_ev, 50. * 35. * crossSection()/sumOfWeights() );
+      scale( _hist_St_ee, 120. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_St_mumu, 120. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_MLQ_muv, 50. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_MLQ_ev, 50. * 35. * crossSection()/picobarn/sumOfWeights() );
 
-      scale( _hist_St_mumu_ZCR, 20. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_St_ee_ZCR, 20. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_MLQ_munu_W2CR, 20. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_MLQ_enu_W2CR, 20. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_MLQ_munu_ttCR, 20. * 35. * crossSection()/sumOfWeights() );
-      scale( _hist_MLQ_enu_ttCR, 20. * 35. * crossSection()/sumOfWeights() );
+      scale( _hist_St_mumu_ZCR, 20. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_St_ee_ZCR, 20. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_MLQ_munu_W2CR, 20. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_MLQ_enu_W2CR, 20. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_MLQ_munu_ttCR, 20. * 35. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_MLQ_enu_ttCR, 20. * 35. * crossSection()/picobarn/sumOfWeights() );
 
-      // scale( _hist_eTmiss_mu, binwidth*luminosity* crossSection()/sumOfWeights() );
+      // scale( _hist_eTmiss_mu, binwidth*luminosity* crossSection()/picobarn/sumOfWeights() );
 
     }
 

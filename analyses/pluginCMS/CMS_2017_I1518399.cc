@@ -103,7 +103,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      const double sf = crossSection() * 1000 / sumOfWeights();
+      const double sf = crossSection()/picobarn * 1000 / sumOfWeights();
       scale(_hist_mass, sf);
       normalize(_hist_mass_norm, 1.0, false);
     }

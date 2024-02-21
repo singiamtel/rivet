@@ -178,12 +178,12 @@ namespace Rivet {
     void finalize() {
 
       // Normalisation factor
-      double norm = (sumOfWeights() != 0) ? crossSection()/sumOfWeights() : 1.0;
+      double norm = (sumOfWeights() != 0) ? crossSection()/picobarn/sumOfWeights() : 1.0;
       // When running in combined mode, need to average to get lepton xsec
       if (_mode == 2) norm /= 2.;
 
       // MSG_INFO("Cross section = " << std::setfill(' ') << std::setw(14)
-      //          << std::fixed << std::setprecision(3) << crossSection() << " pb");
+      //          << std::fixed << std::setprecision(3) << crossSection()/picobarn << " pb");
       // MSG_INFO("# Events      = " << std::setfill(' ') << std::setw(14)
       //          << std::fixed << std::setprecision(3) << numEvents() );
       // MSG_INFO("SumW          = " << std::setfill(' ') << std::setw(14)

@@ -63,9 +63,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_hist_ext_mu_dressed, crossSection()/sumOfWeights());
-      scale(_hist_mu_dressed,     crossSection()/sumOfWeights());
-      scale(_hist_el_dressed,     crossSection()/sumOfWeights());
+      scale(_hist_ext_mu_dressed, crossSection()/picobarn/sumOfWeights());
+      scale(_hist_mu_dressed,     crossSection()/picobarn/sumOfWeights());
+      scale(_hist_el_dressed,     crossSection()/picobarn/sumOfWeights());
     }
 
     /// @}

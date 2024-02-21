@@ -178,7 +178,7 @@ namespace Rivet {
 
       /// Normalise histograms etc., after the run
       void finalize() {
-        double norm = (sumOfWeights() != 0) ? crossSection()/sumOfWeights() : 1.0;
+        double norm = (sumOfWeights() != 0) ? crossSection()/picobarn/sumOfWeights() : 1.0;
 
         if (_mode == 2)  {
           norm /= 2.;

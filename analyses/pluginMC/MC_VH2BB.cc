@@ -196,38 +196,38 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_jet_bb_Delta_eta, crossSection()/sumOfWeights());
-      scale(_h_jet_bb_Delta_phi, crossSection()/sumOfWeights());
-      scale(_h_jet_bb_Delta_pT, crossSection()/sumOfWeights());
-      scale(_h_jet_bb_Delta_R, crossSection()/sumOfWeights());
-      scale(_h_jet_b_jet_eta, crossSection()/sumOfWeights());
-      scale(_h_jet_b_jet_multiplicity, crossSection()/sumOfWeights());
-      scale(_h_jet_b_jet_phi, crossSection()/sumOfWeights());
-      scale(_h_jet_b_jet_pT, crossSection()/sumOfWeights());
-      scale(_h_jet_H_eta_using_bb, crossSection()/sumOfWeights());
-      scale(_h_jet_H_mass_using_bb, crossSection()/sumOfWeights());
-      scale(_h_jet_H_phi_using_bb, crossSection()/sumOfWeights());
-      scale(_h_jet_H_pT_using_bb, crossSection()/sumOfWeights());
-      scale(_h_jet_eta, crossSection()/sumOfWeights());
-      scale(_h_jet_multiplicity, crossSection()/sumOfWeights());
-      scale(_h_jet_phi, crossSection()/sumOfWeights());
-      scale(_h_jet_pT, crossSection()/sumOfWeights());
-      scale(_h_jet_VBbb_Delta_eta, crossSection()/sumOfWeights());
-      scale(_h_jet_VBbb_Delta_phi, crossSection()/sumOfWeights());
-      scale(_h_jet_VBbb_Delta_pT, crossSection()/sumOfWeights());
-      scale(_h_jet_VBbb_Delta_R, crossSection()/sumOfWeights());
+      scale(_h_jet_bb_Delta_eta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_bb_Delta_phi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_bb_Delta_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_bb_Delta_R, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_b_jet_eta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_b_jet_multiplicity, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_b_jet_phi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_b_jet_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_H_eta_using_bb, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_H_mass_using_bb, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_H_phi_using_bb, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_H_pT_using_bb, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_eta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_multiplicity, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_phi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_VBbb_Delta_eta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_VBbb_Delta_phi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_VBbb_Delta_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_VBbb_Delta_R, crossSection()/picobarn/sumOfWeights());
 
-      scale(_h_VB_eta, crossSection()/sumOfWeights());
-      scale(_h_VB_mass, crossSection()/sumOfWeights());
-      scale(_h_Z_multiplicity, crossSection()/sumOfWeights());
-      scale(_h_W_multiplicity, crossSection()/sumOfWeights());
-      scale(_h_VB_phi, crossSection()/sumOfWeights());
-      scale(_h_VB_pT, crossSection()/sumOfWeights());
+      scale(_h_VB_eta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_VB_mass, crossSection()/picobarn/sumOfWeights());
+      scale(_h_Z_multiplicity, crossSection()/picobarn/sumOfWeights());
+      scale(_h_W_multiplicity, crossSection()/picobarn/sumOfWeights());
+      scale(_h_VB_phi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_VB_pT, crossSection()/picobarn/sumOfWeights());
 
-      scale(_h_jet_bVB_angle_Hframe, crossSection()/sumOfWeights());
-      scale(_h_jet_bb_angle_Hframe, crossSection()/sumOfWeights());
-      scale(_h_jet_bVB_cosangle_Hframe, crossSection()/sumOfWeights());
-      scale(_h_jet_bb_cosangle_Hframe, crossSection()/sumOfWeights());
+      scale(_h_jet_bVB_angle_Hframe, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_bb_angle_Hframe, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_bVB_cosangle_Hframe, crossSection()/picobarn/sumOfWeights());
+      scale(_h_jet_bb_cosangle_Hframe, crossSection()/picobarn/sumOfWeights());
     }
 
 

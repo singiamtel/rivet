@@ -171,12 +171,12 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_phbarrel_jetcentral_SS, crossSection()/sumOfWeights());
-      scale(_h_phbarrel_jetcentral_OS, crossSection()/sumOfWeights());
-      scale(_h_phbarrel_jetmedium_SS, crossSection()/sumOfWeights());
-      scale(_h_phbarrel_jetmedium_OS, crossSection()/sumOfWeights());
-      scale(_h_phbarrel_jetforward_SS, crossSection()/sumOfWeights());
-      scale(_h_phbarrel_jetforward_OS, crossSection()/sumOfWeights());
+      scale(_h_phbarrel_jetcentral_SS, crossSection()/picobarn/sumOfWeights());
+      scale(_h_phbarrel_jetcentral_OS, crossSection()/picobarn/sumOfWeights());
+      scale(_h_phbarrel_jetmedium_SS, crossSection()/picobarn/sumOfWeights());
+      scale(_h_phbarrel_jetmedium_OS, crossSection()/picobarn/sumOfWeights());
+      scale(_h_phbarrel_jetforward_SS, crossSection()/picobarn/sumOfWeights());
+      scale(_h_phbarrel_jetforward_OS, crossSection()/picobarn/sumOfWeights());
     }
 
 

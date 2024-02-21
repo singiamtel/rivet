@@ -43,7 +43,7 @@ namespace Rivet {
     /// Finalize
     void finalize() {
       normalize(_h_Z_pT_normalised);
-      scale(_h_Z_pT_xs, crossSection()/sumOfWeights());
+      scale(_h_Z_pT_xs, crossSection()/picobarn/sumOfWeights());
     }
 
     /// @}

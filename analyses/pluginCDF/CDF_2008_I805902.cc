@@ -46,7 +46,7 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      scale(_h_m_dijet, crossSection()/sumOfWeights());
+      scale(_h_m_dijet, crossSection()/picobarn/sumOfWeights());
     }
 
     /// @}

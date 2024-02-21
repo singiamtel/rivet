@@ -163,7 +163,7 @@ namespace Rivet {
 
     void finalize() {
       // Normalize to cross-section x 0.5 to average lepton flavours
-      const double norm = 0.5*crossSection()/sumOfWeights();
+      const double norm = 0.5*crossSection()/picobarn/sumOfWeights();
       scale(_h, norm);
       scale(_s, norm);
     }

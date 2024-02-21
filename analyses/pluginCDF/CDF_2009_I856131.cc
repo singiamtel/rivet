@@ -49,10 +49,10 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_xs, crossSection()/sumOfWeights());
+      scale(_h_xs, crossSection()/picobarn/sumOfWeights());
       // Data seems to have been normalized for the avg of the two sides
       // (+ve & -ve rapidity) rather than the sum, hence the 0.5:
-      scale(_h_yZ, 0.5*crossSection()/sumOfWeights());
+      scale(_h_yZ, 0.5*crossSection()/picobarn/sumOfWeights());
     }
 
     /// @}

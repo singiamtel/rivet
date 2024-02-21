@@ -67,7 +67,7 @@ namespace Rivet {
 
     // Finalize
     void finalize() {
-      const double lumi_gen = sumOfWeights()/crossSection();
+      const double lumi_gen = sumOfWeights()/crossSection()/picobarn;
       // Divide by effective lumi, plus rapidity bin width of 1.8
       scale(_h_pTgamma, 1/lumi_gen * 1/1.8);
     }

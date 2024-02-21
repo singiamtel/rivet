@@ -56,8 +56,8 @@ namespace Rivet {
 
     // Scale histograms by the production cross section
     void finalize() {
-      scale(_h_sigma,   crossSection() / sumOfWeights() / 2.0);
-      scale(_h_invMass, crossSection() / sumOfWeights() / 2.0);
+      scale(_h_sigma,   crossSection()/picobarn / sumOfWeights() / 2.0);
+      scale(_h_invMass, crossSection()/picobarn / sumOfWeights() / 2.0);
       divByGroupWidth({_h_sigma, _h_invMass});
     }
 

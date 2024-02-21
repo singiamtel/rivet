@@ -120,10 +120,10 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_M, crossSection()/sumOfWeights());
-      scale(_h_pT, crossSection()/sumOfWeights());
-      scale(_h_dPhi, crossSection()/sumOfWeights());
-      scale(_h_cosThetaStar, crossSection()/sumOfWeights());
+      scale(_h_M, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_dPhi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_cosThetaStar, crossSection()/picobarn/sumOfWeights());
     }
 
 

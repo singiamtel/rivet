@@ -121,20 +121,20 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
-      scale(_h_HH_mass, crossSection()/sumOfWeights());
-      scale(_h_HH_dR, crossSection()/sumOfWeights());
-      scale(_h_HH_deta, crossSection()/sumOfWeights());
-      scale(_h_HH_dPhi, crossSection()/sumOfWeights());
-      scale(_h_H_pT, crossSection()/sumOfWeights());
-      scale(_h_H_pT1, crossSection()/sumOfWeights());
-      scale(_h_H_pT2, crossSection()/sumOfWeights());
-      scale(_h_HH_pT, crossSection()/sumOfWeights());
-      scale(_h_H_eta, crossSection()/sumOfWeights());
-      scale(_h_H_eta1, crossSection()/sumOfWeights());
-      scale(_h_H_eta2, crossSection()/sumOfWeights());
-      scale(_h_H_phi, crossSection()/sumOfWeights());
-      scale(_h_H_jet1_deta, crossSection()/sumOfWeights());
-      scale(_h_H_jet1_dR, crossSection()/sumOfWeights());
+      scale(_h_HH_mass, crossSection()/picobarn/sumOfWeights());
+      scale(_h_HH_dR, crossSection()/picobarn/sumOfWeights());
+      scale(_h_HH_deta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_HH_dPhi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_pT1, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_pT2, crossSection()/picobarn/sumOfWeights());
+      scale(_h_HH_pT, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_eta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_eta1, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_eta2, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_phi, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_jet1_deta, crossSection()/picobarn/sumOfWeights());
+      scale(_h_H_jet1_dR, crossSection()/picobarn/sumOfWeights());
 
       MC_JETS_BASE::finalize();
     }

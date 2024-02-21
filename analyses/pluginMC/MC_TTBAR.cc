@@ -283,7 +283,7 @@ namespace Rivet {
     }
 
     void finalize() {
-      const double sf = crossSection() / sumOfWeights();
+      const double sf = crossSection()/picobarn / sumOfWeights();
       for (auto hist : _h) { scale(hist.second, sf); }
     }
 

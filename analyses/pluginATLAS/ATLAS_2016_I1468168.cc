@@ -63,7 +63,7 @@ namespace Rivet {
 
     void finalize() {
       // Normalize to cross-section
-      scale(_h, crossSection() / sumOfWeights());
+      scale(_h, crossSection()/picobarn / sumOfWeights());
     }
 
 

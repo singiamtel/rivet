@@ -98,19 +98,19 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_pt_05_ak5,    crossSection()/sumOfWeights());
-      scale(_h_pt_05_10_ak5, crossSection()/sumOfWeights());
-      scale(_h_pt_10_15_ak5, crossSection()/sumOfWeights());
-      scale(_h_pt_15_20_ak5, crossSection()/sumOfWeights());
-      scale(_h_pt_20_25_ak5, crossSection()/sumOfWeights());
-      scale(_h_pt_25_30_ak5, crossSection()/sumOfWeights());
+      scale(_h_pt_05_ak5,    crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_05_10_ak5, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_10_15_ak5, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_15_20_ak5, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_20_25_ak5, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_25_30_ak5, crossSection()/picobarn/sumOfWeights());
 
-      scale(_h_pt_05_ak7,    crossSection()/sumOfWeights());
-      scale(_h_pt_05_10_ak7, crossSection()/sumOfWeights());
-      scale(_h_pt_10_15_ak7, crossSection()/sumOfWeights());
-      scale(_h_pt_15_20_ak7, crossSection()/sumOfWeights());
-      scale(_h_pt_20_25_ak7, crossSection()/sumOfWeights());
-      scale(_h_pt_25_30_ak7, crossSection()/sumOfWeights());
+      scale(_h_pt_05_ak7,    crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_05_10_ak7, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_10_15_ak7, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_15_20_ak7, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_20_25_ak7, crossSection()/picobarn/sumOfWeights());
+      scale(_h_pt_25_30_ak7, crossSection()/picobarn/sumOfWeights());
 
       divide(_h_pt_05_ak5,    _h_pt_05_ak7,    _h_pt_05_ratio);
       divide(_h_pt_05_10_ak5, _h_pt_05_10_ak7, _h_pt_05_10_ratio);

@@ -254,12 +254,12 @@ namespace Rivet {
 
 
     void finalize() {
-      scale( _hist_meff_1bjet, 50. * 830. * crossSection()/sumOfWeights() );
-      scale( _hist_eTmiss_1bjet, 100. * 830. * crossSection()/sumOfWeights() );
-      scale( _hist_pTj_1bjet, 40. * 830. * crossSection()/sumOfWeights() );
-      scale( _hist_meff_2bjet, 50. * 830. * crossSection()/sumOfWeights() );
-      scale( _hist_eTmiss_2bjet, 100. * 830. * crossSection()/sumOfWeights() );
-      scale( _hist_pTj_2bjet, 40. * 830. * crossSection()/sumOfWeights() );
+      scale( _hist_meff_1bjet, 50. * 830. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_eTmiss_1bjet, 100. * 830. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_pTj_1bjet, 40. * 830. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_meff_2bjet, 50. * 830. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_eTmiss_2bjet, 100. * 830. * crossSection()/picobarn/sumOfWeights() );
+      scale( _hist_pTj_2bjet, 40. * 830. * crossSection()/picobarn/sumOfWeights() );
 
 // cerr<< '\n'<<'\n'
 // << "Saw "
