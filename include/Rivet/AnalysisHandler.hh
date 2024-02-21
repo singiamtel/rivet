@@ -111,6 +111,9 @@ namespace Rivet {
     /// Get the index of the nominal weight-stream
     size_t defaultWeightIndex() const { return _rivetDefaultWeightIdx; }
 
+    /// @brief Access the array of sum of the event weights seen
+    vector<double> weightSumWs() const;
+
     /// Set the weight cap
     void setWeightCap(const double maxWeight) { _weightCap = maxWeight; }
 

@@ -24,8 +24,8 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         void unmatchWeightNames(string)
         void setNominalWeightName(string)
         void setBootstrapFilename(string)
-        void setWeightCap(double)
         void setNLOSmearing(double)
+
         AnalysisHandler& addAnalysis(string)
         vector[string] analysisNames()
         vector[string] stdAnalysisNames()
@@ -46,6 +46,15 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         void mergeYodas(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool, bool)
         void merge(AnalysisHandler&)
         vector[string] getRawAOpaths() except +
+
+        # Weight stream related methods
+        vector[string] weightNames() except +
+        bool haveNamedWeights() except +
+        size_t numWeights() except +
+        vector[double] weightSumWs() except +
+        void setWeightCap(double) except +
+
+        # MPI (de-)serialization
         vector[double] serializeContent(bool) except +
         void deserializeContent(vector[double]&, size_t) except +
 

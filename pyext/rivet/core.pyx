@@ -68,6 +68,22 @@ cdef class AnalysisHandler:
         "Declare which weight-stream name to treat as the nominal [default=Nominal|Default||0]"
         self._ptr.setNominalWeightName(name)
 
+    def haveNamedWeights(self):
+        "Returns Boolean to indicate whether the weight names have been detected."
+        return self._ptr.haveNamedWeights()
+
+    def weightNames(self):
+        "Returns the list of weight names being considered for the run."
+        return self._ptr.weightNames()
+
+    def numWeights(self):
+        "Returns number of weights that are being considered for the run."
+        return self._ptr.numWeights()
+
+    def weightSumWs(self):
+        "Returns the list of sum-of-weight values for each weight stream encountered thus far."
+        return self._ptr.weightSumWs()
+
     def setWeightCap(self, double maxWeight):
         "Set a maximum absolute weight value to use in events with anomalously high weights"
         self._ptr.setWeightCap(maxWeight)
