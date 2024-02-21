@@ -173,10 +173,14 @@ else
     irivet="@includedir@"
 fi
 test -n "$irivet" && mycppflags="$mycppflags -I${irivet}"
-ihepmc="@HEPMC3INCPATH@ @CPPFLAGS@"
+icpp="@CPPFLAGS@"
+test -n "$icpp" && mycppflags="$mycppflags ${icpp}"
+irivetcpp="@RIVETCPPFLAGS@"
+test -n "$irivetcpp" && mycppflags="$mycppflags ${irivetcpp}"
+ihepmc="@HEPMC3INCPATH@"
 test -n "$ihepmc" && mycppflags="$mycppflags -I${ihepmc}"
-iyoda="@YODAINCPATH@"
-test -n "$iyoda" && mycppflags="$mycppflags -I${iyoda}"
+iyoda="@YODACPPFLAGS@"
+test -n "$iyoda" && mycppflags="$mycppflags ${iyoda}"
 ifastjet="@FASTJETINCPATH@"
 test -n "$ifastjet" && mycppflags="$mycppflags -I${ifastjet}"
 ifjcontrib="@FJCONTRIBCPPFLAGS@"
@@ -192,6 +196,10 @@ else
     lrivet="@libdir@"
 fi
 test -n "$lrivet" && myldflags="$myldflags -L${lrivet}"
+llibs="@RIVETLIBS@"
+test -n "$llibs" && myldflags="$myldflags ${llibs}"
+lldflags="@RIVETLDFLAGS@"
+test -n "$lldflags" && myldflags="$myldflags ${lldflags}"
 lhepmc="@HEPMC3LIBPATH@"
 test -n "$lhepmc" && myldflags="$myldflags -L${lhepmc}"
 lyoda="@YODALIBPATH@"
@@ -216,6 +224,10 @@ if [[ -n $with_root ]]; then
     rootcxxflags=$(root-config --cflags 2> /dev/null)
     rootldflags=$(root-config --libs 2> /dev/null)
 fi
+
+# Remove duplicates
+mycppflags=`echo $mycppflags | xargs -n1 | sort -u | xargs`
+myldflags=`echo $myldflags | xargs -n1 | sort -u | xargs`
 
 
 ##################

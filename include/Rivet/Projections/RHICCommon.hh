@@ -1,6 +1,6 @@
 // -*- C++ -*-
-#ifndef RIVET_AtlasCommon_HH
-#define RIVET_AtlasCommon_HH
+#ifndef RIVET_RHIC_COMMON_HH
+#define RIVET_RHIC_COMMON_HH
 
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
@@ -78,7 +78,7 @@ namespace Rivet {
 
     // Compare to another projection.
     virtual CmpState compare(const Projection& p) const {
-      return mkNamedPCmp(p, "BRAHMSCentrality");
+      return mkNamedPCmp(p, "ChargedFinalState");
     }
 
   };
