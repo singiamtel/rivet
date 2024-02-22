@@ -754,6 +754,7 @@ namespace Rivet {
   }
 
 
+  /// @todo Should really be mergeYODAs()...
   void AnalysisHandler::mergeYodas(const vector<string> &aofiles,
                                    const vector<string> &delopts,
                                    const vector<string> &addopts,
@@ -876,7 +877,7 @@ namespace Rivet {
     std::cout << std::endl;
 
     if (allaos.empty()) {
-      cerr << "Insuffient pre-finalize AOs to do a reentrant run!" << endl;
+      cerr << "Insufficient pre-finalize AOs to do a reentrant run!" << endl;
       exit(1);
     }
 
@@ -891,6 +892,7 @@ namespace Rivet {
       assert( xs_it != allaos.end() );
       if (equiv) {
         MSG_DEBUG("Equivalent mode: scale by numEntries");
+        /// @todo Would it not be better to weight the averaging by effNumEntries? That better reflects the stat uncertainty
         const double nentries = std::static_pointer_cast<YODA::Counter>(ec_it->second)->numEntries();
         xs /= nentries;
         xserr /= nentries;
