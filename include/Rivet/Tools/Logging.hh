@@ -12,8 +12,15 @@ namespace Rivet {
 
     /// Log priority levels.
     enum Level {
-      TRACE = 0, DEBUG = 10, INFO = 20, WARN = 30, WARNING = 30, ERROR = 40, CRITICAL = 50, ALWAYS = 50
+      TRACE = 0,
+      DEBUG = 10,
+      INFO = 20,
+      WARN = 30, WARNING = 30,
+      ERROR = 40,
+      CRITICAL = 50, ALWAYS = 50
     };
+    static const int END_COLOR = -10; ///< Special "level-like" code to end coloring
+
 
     /// Typedef for a collection of named logs.
     typedef std::map<std::string, Log> LogMap;
@@ -21,7 +28,7 @@ namespace Rivet {
     /// Typedef for a collection of named log levels.
     typedef std::map<std::string, int> LevelMap;
 
-    /// Typedef for a collection of shell color codes, accessed by log level.
+    /// @brief Typedef for a collection of shell color codes, accessed by log level.
     typedef std::map<int, std::string> ColorCodes;
 
 
@@ -32,12 +39,6 @@ namespace Rivet {
 
     /// A static map of default log levels.
     thread_local static LevelMap defaultLevels;
-
-    /// A static map of shell color codes for the log levels.
-    thread_local static ColorCodes colorCodes;
-
-    /// Shell color code for the end of the log levels.
-    static std::string endColorCode;
 
     /// Show timestamp?
     static bool showTimestamp;
@@ -58,23 +59,6 @@ namespace Rivet {
     static void setLevel(const std::string& name, int level);
     static void setLevels(const LevelMap& logLevels);
 
-    static void setShowTimestamp(bool showTime=true) {
-      showTimestamp = showTime;
-    }
-
-    static void setShowLevel(bool showLevel=true) {
-      showLogLevel = showLevel;
-    }
-
-    static void setShowLoggerName(bool showName=true) {
-      showLoggerName = showName;
-    }
-
-    static void setUseColors(bool useColors=true) {
-      useShellColors = useColors;
-    }
-
-
   protected:
 
     /// @name Hidden constructors etc.
@@ -88,6 +72,7 @@ namespace Rivet {
 
     /// @}
 
+    /// @brief Get the TTY code string for coloured messages
     static std::string getColorCode(int level);
 
 
@@ -141,6 +126,8 @@ namespace Rivet {
     void warn(const std::string& message) { log(WARN, message); }
 
     void error(const std::string& message) { log(ERROR, message); }
+
+    void critical(const std::string& message) { log(CRITICAL, message); }
     /// @}
 
 

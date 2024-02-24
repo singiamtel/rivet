@@ -1,3 +1,8 @@
+2024-02-23  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Update Logging to remove non-const static map of color codes,
+	and add support for the CRITICAL level.
+
 2023-12-22  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add --no-detex option to rivet script, to bypass pydetex (or
