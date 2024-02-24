@@ -43,9 +43,9 @@ cdef extern from "Rivet/AnalysisHandler.hh" namespace "Rivet":
         double nominalCrossSectionError()
         void finalize()
         void setFinalizePeriod(string, int)
-        void mergeYodas(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool, bool)
+        void mergeYODAs(vector[string]&, vector[string]&, vector[string]&, vector[string]&, vector[string]&, bool, bool)
         void merge(AnalysisHandler&)
-        vector[string] getRawAOpaths() except +
+        vector[string] getRawAOPaths() except +
 
         # Weight stream related methods
         vector[string] weightNames() except +

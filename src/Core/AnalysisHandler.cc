@@ -755,7 +755,7 @@ namespace Rivet {
 
 
   /// @todo Should really be mergeYODAs()...
-  void AnalysisHandler::mergeYodas(const vector<string> &aofiles,
+  void AnalysisHandler::mergeYODAs(const vector<string> &aofiles,
                                    const vector<string> &delopts,
                                    const vector<string> &addopts,
                                    const vector<string> &matches,
@@ -1483,7 +1483,7 @@ namespace Rivet {
   }
 
 
-  vector<std::string> AnalysisHandler::getRawAOpaths() const {
+  vector<std::string> AnalysisHandler::getRawAOPaths() const {
 
     // Prepare output vector
     vector<std::string> output;

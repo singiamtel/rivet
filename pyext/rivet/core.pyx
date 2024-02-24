@@ -169,21 +169,21 @@ cdef class AnalysisHandler:
         "Return vector of doubles representing the fill fractions"
         return self._ptr.fillFractions()
 
-    def mergeYodas(self, filelist, delopts, addopts, matches, unmatches, equiv, reentrantOnly):
+    def mergeYODAs(self, filelist, delopts, addopts, matches, unmatches, equiv, reentrantOnly):
         "Access to the API call for merging multiple YODA files correctly, including finalization. Mainly for rivet-merge"
         filelist  = [ f for f in filelist ]
         delopts   = [ d for d in delopts  ]
         addopts   = [ d for d in addopts ]
         matches   = [ d for d in matches ]
         unmatches = [ d for d in unmatches ]
-        self._ptr.mergeYodas(filelist, delopts, addopts, matches, unmatches, equiv, reentrantOnly)
+        self._ptr.mergeYODAs(filelist, delopts, addopts, matches, unmatches, equiv, reentrantOnly)
 
     def merge(self, AnalysisHandler other):
         "Combine analysis data in-memory with another AH object"
         self._ptr.merge(other._ptr[0])
 
-    def getRawAOpaths(self):
-        return self._ptr.getRawAOpaths()
+    def getRawAOPaths(self):
+        return self._ptr.getRawAOPaths()
 
     def serializeContent(self, fixed_length = False):
         return self._ptr.serializeContent(fixed_length)

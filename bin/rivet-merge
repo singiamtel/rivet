@@ -87,7 +87,7 @@ def subMerge(yodafiles, mergeoptions, addoptions, match, unmatch, equiv, reentra
     ah = rivet.AnalysisHandler("AH%d" % procnum)
     if preload is not None:
         ah.readData(preload)
-    ah.mergeYodas(yodafiles, mergeoptions, addoptions, match, unmatch, equiv, reentrantOnly)
+    ah.mergeYODAs(yodafiles, mergeoptions, addoptions, match, unmatch, equiv, reentrantOnly)
     return ah.getRawAOpaths(), ah.serializeContent()
 
 
@@ -178,7 +178,7 @@ if __name__ == '__main__':
         if args.PRELOADFILE is not None:
             ah.readData(args.PRELOADFILE)
 
-        ah.mergeYodas(args.YODAFILES, args.MERGEOPTIONS, args.ADDOPTIONS,
+        ah.mergeYODAs(args.YODAFILES, args.MERGEOPTIONS, args.ADDOPTIONS,
                       args.MATCH, args.UNMATCH, args.EQUIV, not args.ASSUME_REENTRANT)
 
     logging.info("Rerunning finalize ...")
