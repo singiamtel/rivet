@@ -8,12 +8,11 @@ namespace Rivet {
 
   thread_local Log::LogMap Log::existingLogs;
   thread_local Log::LevelMap Log::defaultLevels;
-  thread_local Log::ColorCodes Log::colorCodes;
-  string Log::endColorCode;
   bool Log::showTimestamp = false;
   bool Log::showLogLevel = true;
   bool Log::showLoggerName = true;
   bool Log::useShellColors = true;
+  const int Log::END_COLOR;
 
 
   Log::Log(const string& name)
@@ -91,7 +90,6 @@ namespace Rivet {
 
 
   string Log::getLevelName(int level) {
-    /// @todo Do the map::upper_limit thing to find nearest level...
     switch(level) {
     case TRACE:
       return "TRACE";
@@ -103,37 +101,34 @@ namespace Rivet {
       return "WARN";
     case ERROR:
       return "ERROR";
+    case CRITICAL:
+      return "CRITICAL";
     default:
       return "";
     }
-    //throw Error("Enum value was not a valid log level. How did that happen?");
   }
 
 
   string Log::getColorCode(int level) {
+    // Skip codes if
     if (!Log::useShellColors) return "";
-    // If the codes haven't been initialized, do so now.
-    if (Log::colorCodes.empty()) {
-      // If stdout is a valid tty, try to use the appropriate codes.
-      if (isatty(1)) {
-        /// @todo Test for VT100 compliance?
-        Log::colorCodes[TRACE] = "\033[0;36m";
-        Log::colorCodes[DEBUG] = "\033[0;34m";
-        Log::colorCodes[INFO]  = "\033[0;32m";
-        Log::colorCodes[WARN]  = "\033[0;33m";
-        Log::colorCodes[ERROR] = "\033[0;31m";
-        Log::endColorCode      = "\033[0m";
-      } else {
-        Log::colorCodes[TRACE] = "";
-        Log::colorCodes[DEBUG] = "";
-        Log::colorCodes[INFO] = "";
-        Log::colorCodes[WARN] = "";
-        Log::colorCodes[ERROR] = "";
-      }
+    const static bool IS_TTY = isatty(1);
+    if (!IS_TTY) return "";
+
+    static const ColorCodes TTY_CODES = {
+      {TRACE, "\033[0;36m"},
+      {DEBUG, "\033[0;34m"},
+      {INFO, "\033[0;32m"},
+      {WARN, "\033[0;33m"},
+      {ERROR, "\033[0;31m"},
+      {CRITICAL, "\033[0;31m"},
+      {END_COLOR, "\033[0m"} // end-color code
+    };
+    try {
+      return TTY_CODES.at(level);
+    } catch (...) {
+      return "";
     }
-    // Return the appropriate code from the colour map.
-    /// @todo Do the map::upper_limit thing to find nearest level...
-    return colorCodes[level];
   }
 
 
@@ -143,15 +138,14 @@ namespace Rivet {
     if (level == "INFO") return INFO;
     if (level == "WARN") return WARN;
     if (level == "ERROR") return ERROR;
+    if (level == "CRITICAL") return CRITICAL;
     throw Error("Couldn't create a log level from string '" + level + "'");
   }
 
 
   string Log::formatMessage(int level, const string& message) {
     string out;
-    if (Log::useShellColors) {
-      out += getColorCode(level);
-    }
+    out += getColorCode(level);
 
     if (Log::showLoggerName) {
       out += getName();
@@ -172,10 +166,7 @@ namespace Rivet {
       out += " ";
     }
 
-    if (Log::useShellColors) {
-      out += endColorCode;
-    }
-
+    out += getColorCode(END_COLOR);
     out += " ";
     out += message;
 
