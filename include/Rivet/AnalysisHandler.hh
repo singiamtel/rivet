@@ -330,13 +330,15 @@ namespace Rivet {
     void readData(const std::string& filename, bool preload = true);
 
     /// Get all YODA analysis objects (across all weights, optionally including RAW)
+    ///
+    /// @note We'll live with the mixed-case "Yoda" here, since the consistent all-caps would be worse!
     vector<YODA::AnalysisObjectPtr> getYodaAOs(const bool includeraw=false, const bool mkinert=true) const;
 
     /// Get all raw YODA analysis objects (across all weights)
     vector<YODA::AnalysisObjectPtr> getRawAOs() const;
 
     /// Get all raw YODA analysis object paths (across all weights)
-    vector<std::string> getRawAOpaths() const;
+    vector<std::string> getRawAOPaths() const;
 
     /// Get a pointer to a preloaded yoda object with the given path,
     /// or null if path is not found.
@@ -397,7 +399,7 @@ namespace Rivet {
     /// options to be merged into the same analysis objects.
     ///
 
-    void mergeYodas(const vector<string>& aofiles,
+    void mergeYODAs(const vector<string>& aofiles,
                     const vector<string>& delopts=vector<string>(),
                     const vector<string>& addopts=vector<string>(),
                     const vector<string>& matches=vector<string>(),
