@@ -138,8 +138,10 @@ namespace Rivet {
       if ( getOption("LMODE") == "MU" ) _mode = 1;
       if ( getOption("LMODE") == "EMU" ) _mode = 2;
 
-      declare(LeptonFinder(0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.4 && Cuts::abspid == PID::MUON), "muons");
-      declare(LeptonFinder(0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.4 && Cuts::abspid == PID::ELECTRON), "electrons");
+      declare(LeptonFinder(0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.4 && Cuts::abspid == PID::MUON,
+                           LeptonOrigin::NODECAY, PhotonOrigin::ALL), "muons");
+      declare(LeptonFinder(0.1, Cuts::pT > 20*GeV && Cuts::abseta < 2.4 && Cuts::abspid == PID::ELECTRON,
+                           LeptonOrigin::NODECAY, PhotonOrigin::ALL), "electrons");
 
       FastJets jets(FinalState(), JetAlg::ANTIKT, 0.5);
       declare(jets, "jets");

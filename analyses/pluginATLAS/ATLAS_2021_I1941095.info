@@ -45,5 +45,5 @@ BibTex: '@article{ATLAS:2021dqb,
     month = "10",
     year = "2021"
 }'
-ReleaseTest:
+ReleaseTests:
  - $A pp-13000-ttbar-sl-boosted

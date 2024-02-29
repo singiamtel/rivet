@@ -138,7 +138,7 @@ for ananame in all_analyses:
             valtargets[targetname] = "tmp/" + hepmcname + ".yoda.gz " + \
                 " ".join(targets) + "\n\t$(V)echo extracting " + \
                 targetname + ".yoda.gz\n\t$(V)echo " + hepmcname + " > tmp/" + \
-                targetname + ".log\n\t$(V)yoda2yoda -m '/_XSEC|/_EVTCOUNT|/" +\
+                targetname + ".log\n\t$(V)yoda2yoda -m '/_BEAMPZ|/_XSEC|/_EVTCOUNT|/" +\
                 ananame + options + \
                 "/' tmp/" + hepmcname + ".yoda.gz " + targetname + ".yoda.gz >> tmp/" + \
                 targetname + ".log 2>&1\n"
@@ -160,7 +160,6 @@ for ananame in all_analyses:
             if len(sublines) > 1:
                 valtargets[targetname] += "\t$(V)echo done " + \
                     targetname + ".yoda.gz\n"
-
 
 #############################
 ## Write the Makefile
@@ -235,7 +234,7 @@ mf.write("""
 	    for plot in `yodadiff $< refyodas/$< -t 1e-2 -l`; do \\
 		only="$$only -m $$plot"; \\
 	    done; \\
-	    rivet-mkhtml $$only -o $@dir $< refyodas/$<:Title=ref > /dev/null 2>&1; \\
+	    rivet-mkhtml $$only -j 1 -o $@dir $< refyodas/$<:Title=ref > /dev/null 2>&1; \\
 	  else \\
 	    echo $< is the same as the reference; \\
 	    touch $@; \\
@@ -249,7 +248,7 @@ mf.write("""
 	$(V)rm -rf $@
 	$(V)logfile=$<; logfile="tmp/$${logfile%.yoda.gz}.log"; \\
 	if rivet-merge $< -o $<.yoda.gz >> $$logfile  2>&1; then\\
-	  if yodadiff -q $< $<.yoda.gz ; then \\
+	  if yodadiff -M _BEAMPZ -t 1e-2 -q $< $<.yoda.gz ; then \\
 	    echo $< is reentrant; \\
 	    touch $@; \\
 	  else \\
@@ -334,7 +333,7 @@ clean:
 for hepmc in hepmctargets:
     mf.write("tmp/" + hepmc + ".yoda.gz: HEPMC/" + hepmc + ".hepmc.gz\n")
     mf.write("\t$(V)echo running " + hepmc + "\n")
-    cmd = "\t$(V)rivet HEPMC/" + hepmc + ".hepmc.gz -o tmp/" + hepmc + ".yoda.gz"
+    cmd = "\t$(V)rivet HEPMC/" + hepmc + ".hepmc.gz -d 0 -o tmp/" + hepmc + ".yoda.gz"
     for ana in hepmctargets[hepmc].split(" "):
         cmd += " -a " + ana
     mf.write(cmd + " > tmp/" + hepmc + ".log 2>&1\n")

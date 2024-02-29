@@ -49,5 +49,5 @@ BibTeX: '@article{Aad:2019hzw,
       reportNumber   = "CERN-EP-2019-203",
       SLACcitation   = "%%CITATION = ARXIV:1910.08819;%%"
 }'
-ReleaseTest:
+ReleaseTests:
  - $A LHC-13-Top-L

@@ -49,5 +49,5 @@ BibTeX: '@article{ATLAS:2023gsl,
     pages = "141",
     year = "2023"
 }'
-ReleaseTest:
+ReleaseTests:
  - $A LHC-13-Top-L

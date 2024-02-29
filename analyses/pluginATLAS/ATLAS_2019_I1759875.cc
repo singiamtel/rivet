@@ -104,14 +104,14 @@ namespace Rivet {
       for (auto& hist : _h_multi) {
         if (hist.first.find("_norm") != std::string::npos) {
           // scaling for normalised distribution according integral of whole set
-          const double norm2D = hist.second->integral(false);
-          scale(hist.second, 1./norm2D);
+          hist.second->normalizeGroup(1.0, false);
         }
         else {
           // scaling for non-normalised distribution
           scale(hist.second, sf);
         }
       }
+      divByGroupWidth(_h_multi);
     }
 
 
@@ -133,7 +133,7 @@ namespace Rivet {
       book(_h_multi[name], massbins);
       book(_h_multi[name+"_norm"], massbins);
       for (size_t i=1; i < _h_multi[name]->numBins()+1; ++i) {
-        book(_h_multi[name]->bin(i), index+1, 1, i);
+        book(_h_multi[name]->bin(i), index, 1, i);
         book(_h_multi[name+"_norm"]->bin(i), index+1, 1, i);
       }
     }

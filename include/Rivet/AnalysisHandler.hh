@@ -440,8 +440,8 @@ namespace Rivet {
       data.reserve(total); // pre-allocate enough memory
       // Add beam IDs
       data.push_back(_beaminfo->numBins());
-      for (int beamID : _beaminfo->xEdges()) {
-        data.push_back(beamID);
+      for (const string& beamID : _beaminfo->xEdges()) {
+        data.push_back(_beamInfoLabelToID(beamID));
       }
       // Add raw YODA AO content
       for (size_t i = 0; i < raos.size(); ++i) {
@@ -469,10 +469,14 @@ namespace Rivet {
       const auto itr = data.cbegin();
       // set beam IDs
       vector<int> edges{itr+offset, itr+offset+nBeams};
-      if (nprocs >= 2) {
-        for (int& edge : edges) { edge /= nprocs; }
+      vector<string> labels; labels.reserve(edges.size());
+      size_t id = 0;
+      for (int edge : edges) {
+        if (nprocs >= 2)  edge /= nprocs;
+        labels.push_back(_mkBeamInfoLabel(++id, edge));
       }
-      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(edges, "/TMP/_BEAMINFO");
+
+      _beaminfo = make_shared<YODA::BinnedEstimate<string>>(labels, "/TMP/_BEAMPZ");
       offset+= nBeams;
       // set beam momenta
       size_t beamLen = *(itr + offset); ++offset;
@@ -561,6 +565,19 @@ namespace Rivet {
     /// @brief A method to set the internal _beaminfo object from an existing YODA AO
     void _setRunBeamInfo(YODA::AnalysisObjectPtr ao);
 
+    /// Construct beaminfo label from ID
+    string _mkBeamInfoLabel(size_t n, PdgId id) {
+      return "BEAM"+std::to_string(n)+"("+std::to_string(id)+")";
+    }
+
+    /// Retrieve ID from beaminfo label
+    PdgId _beamInfoLabelToID(const string& label) {
+      size_t pos = label.find("(");
+      string beamID = label.substr(pos+1, label.size()-pos-2);
+      return std::stoi(beamID);
+    }
+
+
     /// @}
 
 
@@ -612,7 +629,7 @@ namespace Rivet {
     Estimate0DPtr _xs;
 
     /// Beam info known to AH
-    YODA::BinnedEstimatePtr<int> _beaminfo;
+    YODA::BinnedEstimatePtr<string> _beaminfo;
 
     /// Cross-section averages for runs over multiple files
     vector<Estimate0D> _xsAvg;
