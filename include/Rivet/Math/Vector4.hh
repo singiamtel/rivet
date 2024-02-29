@@ -1466,10 +1466,10 @@ namespace Rivet {
   inline double mass2(const FourMomentum& a, const FourMomentum& b) {
     return (a + b).mass2();
   }
-  
+
   /// Calculate transverse mass of a visible and an invisible 4-vector
   ///
-  /// @Note This is implemented in terms of massless 3-vectors,
+  /// @note This is implemented in terms of massless 3-vectors,
   /// ignoring actual masses in the 4-vectors.
   inline double mT(const FourMomentum& vis, const FourMomentum& invis) {
     return mT(vis.p3(), invis.p3());
@@ -1477,7 +1477,7 @@ namespace Rivet {
 
   /// Calculate transverse mass of a visible 4-vector and an invisible 3-vector
   ///
-  /// @Note This is implemented in terms of massless 3-vectors,
+  /// @note This is implemented in terms of massless 3-vectors,
   /// ignoring actual masses in the 4-vectors.
   inline double mT(const FourMomentum& vis, const Vector3& invis) {
     return mT(vis.p3(), invis);
@@ -1485,7 +1485,7 @@ namespace Rivet {
 
   /// Calculate transverse mass of a visible 4-vector and an invisible 3-vector
   ///
-  /// @Note This is implemented in terms of massless 3-vectors,
+  /// @note This is implemented in terms of massless 3-vectors,
   /// ignoring actual masses in the 4-vectors.
   inline double mT(const Vector3& vis, const FourMomentum& invis) {
     return mT(vis, invis.p3());

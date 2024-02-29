@@ -80,7 +80,7 @@ namespace Rivet {
     }
 
     ///Get a named projection from this projection appliers declqueue
-    ///TODO @TP: Recursion?
+    ///TODO for TP: Recursion?
     template <typename PROJ>
     const PROJ& getProjectionFromDeclQueue(const std::string name) const {
       auto it = std::find_if(_declQueue.begin(), _declQueue.end(),

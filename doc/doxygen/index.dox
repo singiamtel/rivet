@@ -27,7 +27,7 @@ namespace Rivet {
 /// @li @b PromptFinalState: retrieve FS particles
 /// @li @b JetFinder: base class for jet reconstruction
 /// @li @b FastJets: interface to the FastJet clustering package
-/// @li @b DressedLeptons: finder of "physical" bare leptons plus ~colinear photons
+/// @li @b LeptonFinder: finder of "physical" bare leptons plus ~colinear photons
 /// @li @b MissingMomentum: fiducial definition of momentum imbalances
 ///
 /// @section keytools Key tools

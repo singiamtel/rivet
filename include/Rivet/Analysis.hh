@@ -106,7 +106,7 @@ namespace Rivet {
 
     ///Call the projection applier _syncDeclQueue() method.
     ///(It should be hidden for all projection appliers other than analyses)
-    ///TODO @TP: Is this the right block for this method to be in?
+    ///TODO for TP: Is this the right block for this method to be in?
     void syncDeclQueue() {
       this->_syncDeclQueue();
       this->markAsOwned();

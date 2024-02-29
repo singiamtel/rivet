@@ -65,7 +65,7 @@ namespace Rivet {
     /// The centre of mass energy \f$s\f$
     double s() const { return _theS; }
 
-    /// The angle \$f\gamma_{had}\f$
+    /// The angle \f$\gamma_{had}\f$
     double gammahad() const { return _theGH; }
 
 
