@@ -1,3 +1,7 @@
+2024-02-29  Christian Gutschow  <chris.g@cern.ch>
+
+	* Release 4.0.0
+
 2024-02-23  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Update Logging to remove non-const static map of color codes,

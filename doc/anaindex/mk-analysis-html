@@ -153,9 +153,9 @@ for aname in sorted(all_analyses, key=anasort):
                     code = r.replace("CMS-", "")
                     url = "https://cms-results.web.cern.ch/cms-results/public-results/publications/" + code
                     page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("Public page:", htmlify(url), htmlify(r))
-                elif r.startswith("LHCb-", ""):
-                    code = ref.replace("PAPER-", "")
-                    url = "https://lhcbproject.web.cern.ch/Publications/LHCbProjectPublic/%s.html" % ref
+                elif r.startswith("LHCb-"):
+                    code = r.replace("PAPER-", "")
+                    url = "https://lhcbproject.web.cern.ch/Publications/LHCbProjectPublic/%s.html" % r
                     page += "  <li>%s <a href='%s'>%s</a></li>\n" % ("Public page:", htmlify(url), htmlify(code))
                 else:
                     page += "  <li>%s</li>\n" % htmlify(r)

@@ -12,8 +12,12 @@ echo PYTHONPATH=$PYTHONPATH 1>&2
 declare -a tags
 ## Test we're in a git repo, and if not, exit
 git tag >/dev/null 2>&1 || exit 0
-## Get all tags 
-for t in $(git tag | sort -r); do tags+=($t); done
+## Get all tags
+for t in $(git tag | sort -r); do
+  if [[ "$t" == *"alpha"* ]]; then continue; fi
+  if [[ "$t" == *"chacal"* ]]; then continue; fi
+  tags+=($t);
+done
 let numtags=${#tags[@]}
 
 ## Write out ana files per tag

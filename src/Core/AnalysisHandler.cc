@@ -320,7 +320,7 @@ namespace Rivet {
             MSG_DEBUG("Selected nominal weight: \"" << _weightNames[i] << "\"");
             continue;
           }
-          else if (_weightIndices[i] == customNomIdx) {
+          else if ((int)_weightIndices[i] == customNomIdx) {
             _customDefaultWeightIdx = selected_indices.size();
             selected_indices.push_back(_weightIndices[i]);
             selected_subset.push_back(_weightNames[i]);
@@ -360,7 +360,7 @@ namespace Rivet {
           MSG_DEBUG("Selected nominal weight: " << _weightNames[i]);
           continue;
         }
-        else if (_weightIndices[i] == customNomIdx) {
+        else if ((int)_weightIndices[i] == customNomIdx) {
           _customDefaultWeightIdx = selected_indices.size();
           selected_indices.push_back(_weightIndices[i]);
           selected_subset.push_back(_weightNames[i]);
