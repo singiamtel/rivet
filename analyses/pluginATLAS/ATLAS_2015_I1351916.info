@@ -49,4 +49,4 @@ BibTeX: '@article{Aad:2015uau,
 }'
 ReleaseTests:
  - $A LHC-Z-e :LMODE=EL
- - $A LHC-Z-mu :LMODE=MU
+ - $A-2 LHC-Z-mu :LMODE=MU

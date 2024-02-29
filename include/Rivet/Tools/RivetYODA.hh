@@ -1569,8 +1569,8 @@ namespace Rivet {
   }
 
   inline bool beamInfoCompatible(YODA::AnalysisObjectPtr a, YODA::AnalysisObjectPtr b) {
-    YODA::BinnedEstimatePtr<int> beamsA = std::dynamic_pointer_cast<YODA::BinnedEstimate<int>>(a);
-    YODA::BinnedEstimatePtr<int> beamsB = std::dynamic_pointer_cast<YODA::BinnedEstimate<int>>(b);
+    YODA::BinnedEstimatePtr<string> beamsA = std::dynamic_pointer_cast<YODA::BinnedEstimate<string>>(a);
+    YODA::BinnedEstimatePtr<string> beamsB = std::dynamic_pointer_cast<YODA::BinnedEstimate<string>>(b);
     return  beamsA && beamsB && (*beamsA == *beamsB) && beamsA->numBins() == 2 &&
             fuzzyEquals(beamsA->bin(1).val(), beamsB->bin(1).val()) &&
             fuzzyEquals(beamsA->bin(2).val(), beamsB->bin(2).val());

@@ -826,7 +826,7 @@ namespace Rivet {
         YODA::read(file, aos_raw);
         for (YODA::AnalysisObject* aor : aos_raw) {
           const string& aopath = aor->path();
-          if (aopath == "/TMP/_BEAMINFO") {
+          if (aopath == "/TMP/_BEAMPZ") {
             raw_map[aopath].reset(aor);
             ++rawcount; ++tmpcount;
             continue;
@@ -929,7 +929,7 @@ namespace Rivet {
 
 
     map<string, double> scales;
-    const string beaminfokey("/TMP/_BEAMINFO");
+    const string beaminfokey("/TMP/_BEAMPZ");
     for (const auto& item : newaos) {
       const string& aopath = item.first;
       YODA::AnalysisObjectPtr ao = item.second;
@@ -1064,11 +1064,11 @@ namespace Rivet {
     if (_initialised)
       throw UserError("AnalysisHandler::init has already been called: cannot re-initialize!");
 
-    const string beaminfokey("/TMP/_BEAMINFO");
+    const string beaminfokey("/TMP/_BEAMPZ");
     if (allAOs.find(beaminfokey) == allAOs.end()) {
       // beam info invalid for non-equivalent merging
       MSG_DEBUG("No beaminfo provided (probably in heterogeneous merging mode): setting empty beam info.");
-      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(beaminfokey);
+      _beaminfo = make_shared<YODA::BinnedEstimate<string>>(beaminfokey);
     }
 
     // get list of analyses & multi-weights to be initialised
@@ -1143,7 +1143,16 @@ namespace Rivet {
       // set the cross-section
       const auto xit = allAOs.find(_xs->path());
       if ( xit != allAOs.end() ) {
-        *_xs = *std::static_pointer_cast<YODA::Estimate0D>(xit->second);
+        YODA::Estimate0DPtr xstmp = std::dynamic_pointer_cast<YODA::Estimate0D>(xit->second);
+        if (xstmp) { // for >= V3 ASCII
+          *_xs = *xstmp;
+        }
+        else { // for <= V2 ASCII
+          // old-style cross-section
+          YODA::Scatter1DPtr xstmp = std::static_pointer_cast<YODA::Scatter1D>(xit->second);
+          _xs->setVal(xstmp->point(0).x());
+          _xs->setErr(xstmp->point(0).xErrs());
+        }
         if (unscale && _xs->val()) {
           // in stacking mode: need to unscale prior to finalize
           scales[iW] = _eventCounter->sumW()/_xs->val();
@@ -1154,6 +1163,7 @@ namespace Rivet {
       }
 
       // Go through all analyses and add stuff to their analysis objects;
+      MSG_DEBUG("Load objects into analyses");
       for (const AnaHandle& a : analyses()) {
         for (const auto& ao : a->analysisObjects()) {
           ao.get()->setActiveWeightIdx(iW);
@@ -1192,7 +1202,7 @@ namespace Rivet {
     set<string> foundAnalyses;
     set<string> foundWeightNames;
     for (const string& aopath : aoPaths) {
-      if (aopath == "/TMP/_BEAMINFO")  continue;
+      if (aopath == "/TMP/_BEAMPZ")  continue;
       AOPath path(aopath);
       if ( path.analysisWithOptions() != "" ) {
         foundAnalyses.insert(path.analysisWithOptions());
@@ -1706,8 +1716,9 @@ namespace Rivet {
 
   void AnalysisHandler::_setRunBeamInfo(const ParticlePair& beams) {
     PdgIdPair beamids = pids(beams);
+    vector<string> labels{_mkBeamInfoLabel(1, beamids.first), _mkBeamInfoLabel(2, beamids.second)};
     pair<FourMomentum,FourMomentum> beammoms = moms(beams);
-    _beaminfo = make_shared<YODA::BinnedEstimate<int>>(vector<int>{beamids.first, beamids.second}, "/TMP/_BEAMINFO");
+    _beaminfo = make_shared<YODA::BinnedEstimate<string>>(labels, "/TMP/_BEAMPZ");
     const bool first_pos = beammoms.first.pz() > 0.;
     _beaminfo->bin(1).setVal((first_pos? beammoms.second.pz() : beammoms.first.pz())/GeV);
     _beaminfo->bin(2).setVal((first_pos? beammoms.first.pz() : beammoms.second.pz())/GeV);
@@ -1715,8 +1726,8 @@ namespace Rivet {
 
   void AnalysisHandler::_setRunBeamInfo(YODA::AnalysisObjectPtr ao) {
     if (!_beaminfo) {
-      YODA::BinnedEstimatePtr<int> beaminfo = std::dynamic_pointer_cast<YODA::BinnedEstimate<int>>(ao);
-      _beaminfo = make_shared<YODA::BinnedEstimate<int>>(*beaminfo);
+      YODA::BinnedEstimatePtr<string> beaminfo = std::dynamic_pointer_cast<YODA::BinnedEstimate<string>>(ao);
+      _beaminfo = make_shared<YODA::BinnedEstimate<string>>(*beaminfo);
     }
   }
 

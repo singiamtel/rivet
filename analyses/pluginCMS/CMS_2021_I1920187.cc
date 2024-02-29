@@ -33,41 +33,41 @@ namespace Rivet {
       if ( getOption("MODE") == "DIJET" ) _mode = 1;
       else if ( getOption("MODE") == "ZJET" ) _mode = 2;
       else {
-	MSG_WARNING("Mode not specified in CMS_2021_I1920187, using DIJET");
-	_mode = 1;
+        MSG_WARNING("Mode not specified in CMS_2021_I1920187, using DIJET");
+        _mode = 1;
       }
 
       // Initialise and register projections
       FinalState fs(Cuts::abseta < 5);
       // Z-jet
       if (_mode == 2) {
-	// for the muons
-	double mu_pt = 26.;
-	double mz_min = (90-20);
-	double mz_max = (90+20);
-	double eta_max = 2.4;
-	DileptonFinder zfinder(PromptFinalState(fs), 91.2*GeV, 0.1, Cuts::pT > mu_pt*GeV  && Cuts::abseta < eta_max &&
-                               Cuts::abspid == PID::MUON, Cuts::massIn(mz_min*GeV, mz_max*GeV));
-	declare(zfinder, "DileptonFinder");
+        // for the muons
+        double mu_pt = 26.;
+        double mz_min = (90-20);
+        double mz_max = (90+20);
+        double eta_max = 2.4;
+        DileptonFinder zfinder(fs, 91.2*GeV, 0.1, Cuts::pT > mu_pt*GeV  && Cuts::abseta < eta_max &&
+                                   Cuts::abspid == PID::MUON, Cuts::massIn(mz_min*GeV, mz_max*GeV));
+        declare(zfinder, "DileptonFinder");
 
-	eta_max = 2.4;
-	FinalState fs_muons(Cuts::abseta < eta_max);
-	IdentifiedFinalState muons_noCut(fs_muons, {PID::MUON, PID::ANTIMUON});
-	declare(muons_noCut, "MUONS_NOCUT");
-	// Particles for the jets
-	VetoedFinalState jet_input(fs);
-	jet_input.vetoNeutrinos();
-	jet_input.addVetoOnThisFinalState(getProjection<DileptonFinder>("DileptonFinder"));
-	declare(jet_input, "JET_INPUT");
-	_ptBinsGen = { 50, 65, 88, 120, 150, 186, 254, 326, 408, 1500};
+        eta_max = 2.4;
+        FinalState fs_muons(Cuts::abseta < eta_max);
+        IdentifiedFinalState muons_noCut(fs_muons, {PID::MUON, PID::ANTIMUON});
+        declare(muons_noCut, "MUONS_NOCUT");
+        // Particles for the jets
+        VetoedFinalState jet_input(fs);
+        jet_input.vetoNeutrinos();
+        jet_input.addVetoOnThisFinalState(getProjection<DileptonFinder>("DileptonFinder"));
+        declare(jet_input, "JET_INPUT");
+        _ptBinsGen = { 50, 65, 88, 120, 150, 186, 254, 326, 408, 1500};
       }
       // dijet
       else {
-	// Particles for the jets
-	VetoedFinalState jet_input(fs);
-	jet_input.vetoNeutrinos();
-	declare(jet_input, "JET_INPUT");
-	_ptBinsGen = {50, 65, 88, 120, 150, 186, 254, 326, 408, 481, 614, 800, 1000, 4000};
+        // Particles for the jets
+        VetoedFinalState jet_input(fs);
+        jet_input.vetoNeutrinos();
+        declare(jet_input, "JET_INPUT");
+        _ptBinsGen = {50, 65, 88, 120, 150, 186, 254, 326, 408, 481, 614, 800, 1000, 4000};
       }
       // Book histograms
       // resize vectors appropriately
@@ -77,51 +77,51 @@ namespace Rivet {
 
       // Z jet
       if (_mode == 2) {
-	_h_zpj.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
-	_h_zpj_groomed.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
+        _h_zpj.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
+        _h_zpj_groomed.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
 
-	// Now book histos
-	// remember 1-indexed
+        // Now book histos
+        // remember 1-indexed
 
-	// yoda plot naming scheme
-	// --------------------------------------------------------------------------
-	// channel (ak4/8 radii [000, 100] + zjet / dijet cen / fwd [00, 10, 20] + groomed versions [0, 1])
-	// lambda variable; neutral+charged & charged-only are treated separately [0000,..,4000]
-	// pT bin [00000,..,120000]
-	for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
-	  for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
-	    for (size_t ptInd=0; ptInd < _ptBinsGen.size()-1; ptInd++) {
-	      book(_h_zpj[radiusInd][lambdaInd][ptInd], _hepdata_index.at(0+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
-	      book(_h_zpj_groomed[radiusInd][lambdaInd][ptInd], _hepdata_index.at(10+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
-	    }
-	  }
-	}
+        // yoda plot naming scheme
+        // --------------------------------------------------------------------------
+        // channel (ak4/8 radii [000, 100] + zjet / dijet cen / fwd [00, 10, 20] + groomed versions [0, 1])
+        // lambda variable; neutral+charged & charged-only are treated separately [0000,..,4000]
+        // pT bin [00000,..,120000]
+        for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
+          for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
+            for (size_t ptInd=0; ptInd < _ptBinsGen.size()-1; ptInd++) {
+              book(_h_zpj[radiusInd][lambdaInd][ptInd], _hepdata_index.at(0+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
+              book(_h_zpj_groomed[radiusInd][lambdaInd][ptInd], _hepdata_index.at(10+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
+            }
+          }
+        }
       }
       // di jet
       else {
-	_h_dijet_cen.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
-	_h_dijet_cen_groomed.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
-	_h_dijet_fwd.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
-	_h_dijet_fwd_groomed.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
+        _h_dijet_cen.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
+        _h_dijet_cen_groomed.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
+        _h_dijet_fwd.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
+        _h_dijet_fwd_groomed.resize(nHistsRadii, vector<vector<Histo1DPtr> >(nHistsLambda, vector<Histo1DPtr>(nHistsPt)));
 
-	// Now book histos
-	// remember 1-indexed
+        // Now book histos
+        // remember 1-indexed
 
-	// yoda plot naming scheme
-	// --------------------------------------------------------------------------
-	// channel (ak4/8 radii [000, 100] + zjet / dijet cen / fwd [00, 10, 20] + groomed versions [0, 1])
-	// lambda variable; neutral+charged & charged-only are treated separately [0000,..,4000]
-	// pT bin [00000,..,120000]
-	for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
-	  for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
-	    for (size_t ptInd=0; ptInd < _ptBinsGen.size()-1; ptInd++) {
-	      book(_h_dijet_cen[radiusInd][lambdaInd][ptInd], _hepdata_index.at(1+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
-	      book(_h_dijet_cen_groomed[radiusInd][lambdaInd][ptInd], _hepdata_index.at(11+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
-	      book(_h_dijet_fwd[radiusInd][lambdaInd][ptInd], _hepdata_index.at(2+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
-	      book(_h_dijet_fwd_groomed[radiusInd][lambdaInd][ptInd], _hepdata_index.at(12+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
-	    }
-	  }
-	}
+        // yoda plot naming scheme
+        // --------------------------------------------------------------------------
+        // channel (ak4/8 radii [000, 100] + zjet / dijet cen / fwd [00, 10, 20] + groomed versions [0, 1])
+        // lambda variable; neutral+charged & charged-only are treated separately [0000,..,4000]
+        // pT bin [00000,..,120000]
+        for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
+          for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
+            for (size_t ptInd=0; ptInd < _ptBinsGen.size()-1; ptInd++) {
+              book(_h_dijet_cen[radiusInd][lambdaInd][ptInd], _hepdata_index.at(1+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
+              book(_h_dijet_cen_groomed[radiusInd][lambdaInd][ptInd], _hepdata_index.at(11+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
+              book(_h_dijet_fwd[radiusInd][lambdaInd][ptInd], _hepdata_index.at(2+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
+              book(_h_dijet_fwd_groomed[radiusInd][lambdaInd][ptInd], _hepdata_index.at(12+100*radiusInd+1000*lambdaInd+10000*ptInd), 1, 1);
+            }
+          }
+        }
       }
     }
 
@@ -147,199 +147,194 @@ namespace Rivet {
 
       // z jet
       if (_mode == 2) {
-	for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
-	  float jetRadius = _jetRadii.at(radiusInd);
+        for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
+          float jetRadius = _jetRadii.at(radiusInd);
 
           JetDefinition jet_def(antikt_algorithm, jetRadius);
-	  vector<PseudoJet> jets = (SelectorPtMin(15))(jet_def(particles));
+          vector<PseudoJet> jets = (SelectorPtMin(15))(jet_def(particles));
 
-	  const FinalState& muons = apply<IdentifiedFinalState>(event, "MUONS_NOCUT");
-	  if (muons.size() >= 2) {
-	    Particle muon1 = muons.particlesByPt()[0];
-	    Particle muon2 = muons.particlesByPt()[1];
-	    FourMomentum z = muon1.momentum() + muon2.momentum();
-	    if (jets.size() > 0) {
-	      PseudoJet jet1 = jets[0];
-	    }
-	  }
+          const FinalState& muons = apply<IdentifiedFinalState>(event, "MUONS_NOCUT");
+          if (muons.size() >= 2) {
+            Particle muon1 = muons.particlesByPt()[0];
+            Particle muon2 = muons.particlesByPt()[1];
+            FourMomentum z = muon1.momentum() + muon2.momentum();
+            if (jets.size() > 0) {
+              PseudoJet jet1 = jets[0];
+            }
+          }
 
-	  // Reconstruct Z
-	  const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
-	  if (zfinder.bosons().size() < 1) continue;
+          // Reconstruct Z
+          const DileptonFinder& zfinder = apply<DileptonFinder>(event, "DileptonFinder");
+          if (zfinder.bosons().size() < 1) continue;
 
-	  const Particle & z = zfinder.bosons()[0];
-	  double zpt = z.pt();
+          const Particle & z = zfinder.bosons()[0];
+          double zpt = z.pt();
 
-	  // Now do selection criteria
-	  bool passZpJ = false;
-	  if (jets.size() < 1) continue;
-	  PseudoJet jet1 = jets[0];
-	  float jet1pt = jet1.pt();
-	  float asym = fabs((jet1pt - zpt) / (jet1pt+zpt));
-	  float dphi = Rivet::deltaPhi(jet1.phi(), z.phi());
-	  passZpJ = ((fabs(jet1.rapidity()) < 1.7) && (zpt > 30) && (asym < 0.3) && (dphi > 2.0));
+          // Now do selection criteria
+          bool passZpJ = false;
+          if (jets.size() < 1) continue;
+          PseudoJet jet1 = jets[0];
+          float jet1pt = jet1.pt();
+          float asym = fabs((jet1pt - zpt) / (jet1pt+zpt));
+          float dphi = Rivet::deltaPhi(jet1.phi(), z.phi());
+          passZpJ = ((fabs(jet1.rapidity()) < 1.7) && (zpt > 30) && (asym < 0.3) && (dphi > 2.0));
 
-	  if (!passZpJ) continue;
+          if (!passZpJ) continue;
 
-	  // Now calculate lambda variables and fill hists
+          // Now calculate lambda variables and fill hists
 
-	  // Simplify life - ignore this jet if it is below 1st hist pt range
-	  // Note that we don't apply it to the original jet pt cut - since
-	  // we have phase space where one jet is > 50, and one < 50
-	  if (jet1pt < _ptBinsGen[0]) continue;
-	  // ignore jet if beyond the last bin
-	  if (jet1pt > _ptBinsGen.back()) continue;
+          // Simplify life - ignore this jet if it is below 1st hist pt range
+          // Note that we don't apply it to the original jet pt cut - since
+          // we have phase space where one jet is > 50, and one < 50
+          if (jet1pt < _ptBinsGen[0]) continue;
+          // ignore jet if beyond the last bin
+          if (jet1pt > _ptBinsGen.back()) continue;
 
-	  // Need to use original, ungroomed jet pT to bin
-	  size_t ptBinInd = getBinIndex(jet1pt, _ptBinsGen);
+          // Need to use original, ungroomed jet pT to bin
+          size_t ptBinInd = getBinIndex(jet1pt, _ptBinsGen);
 
-	  // UNGROOMED VERSION
-	  // -------------------------------------------------------------------
-	  vector<PseudoJet> chargedParticles;
-	  for (size_t iC=0; iC<jet1.constituents().size(); iC++)
-	    if (jet1.constituents()[iC].user_index())
-	      chargedParticles.push_back(jet1.constituents()[iC]);
-	  vector<PseudoJet> chargedJets = jet_def(chargedParticles);
+          // UNGROOMED VERSION
+          // -------------------------------------------------------------------
+          vector<PseudoJet> chargedParticles;
+          for (size_t iC=0; iC<jet1.constituents().size(); iC++)
+            if (jet1.constituents()[iC].user_index())
+              chargedParticles.push_back(jet1.constituents()[iC]);
+          vector<PseudoJet> chargedJets = jet_def(chargedParticles);
 
-	  // Fill hists for each lambda variable
-	  for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
-	    const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
-	    Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
-	    float val = -1;
-	    if (thisLambdaVar.isCharged)
-	      val = (chargedJets.size()>0) ? angularity(chargedJets[0]) : -1;
-	    else
-	      val = angularity(jet1);
-	    if (val<0) continue;
-	    _h_zpj[radiusInd][lambdaInd][ptBinInd]->fill(val);
-	  }
+          // Fill hists for each lambda variable
+          for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
+            const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
+            Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
+            float val = -1;
+            if (thisLambdaVar.isCharged)
+              val = (chargedJets.size()>0) ? angularity(chargedJets[0]) : -1;
+            else
+              val = angularity(jet1);
+            if (val<0) continue;
+            _h_zpj[radiusInd][lambdaInd][ptBinInd]->fill(val);
+          }
 
-	  // GROOMED VERSION
-	  // -------------------------------------------------------------------
-	  // Get groomed jet
-	  fastjet::contrib::SoftDrop sd(0, 0.1, jetRadius);
-	  PseudoJet groomedJet = sd(jet1);
-	  PseudoJet groomedJetCharged;
-	  if (chargedJets.size()>0)
-	    groomedJetCharged= sd(chargedJets[0]);
+          // GROOMED VERSION
+          // -------------------------------------------------------------------
+          // Get groomed jet
+          fastjet::contrib::SoftDrop sd(0, 0.1, jetRadius);
+          PseudoJet groomedJet = sd(jet1);
+          PseudoJet groomedJetCharged;
+          if (chargedJets.size()>0)
+            groomedJetCharged= sd(chargedJets[0]);
 
-	  // Fill hists for each lambda variable
-	  for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
-	    const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
-	    Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
-	    float val = -1;
-	    if (thisLambdaVar.isCharged)
-	      val = (chargedJets.size()>0) ? angularity(groomedJetCharged) : -1;
-	    else
-	      val = angularity(groomedJet);
-	    if (val<0) continue;
-	    _h_zpj_groomed[radiusInd][lambdaInd][ptBinInd]->fill(val);
-	  }
-	} // end loop over jet radii
+          // Fill hists for each lambda variable
+          for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
+            const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
+            Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
+            float val = -1;
+            if (thisLambdaVar.isCharged)
+              val = (chargedJets.size()>0) ? angularity(groomedJetCharged) : -1;
+            else
+              val = angularity(groomedJet);
+            if (val<0) continue;
+            _h_zpj_groomed[radiusInd][lambdaInd][ptBinInd]->fill(val);
+          }
+        } // end loop over jet radii
       }
       // di jet
       else {
-	for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
-	  float jetRadius = _jetRadii.at(radiusInd);
+        for (size_t radiusInd=0; radiusInd < _jetRadii.size(); radiusInd++) {
+          float jetRadius = _jetRadii.at(radiusInd);
 
-	  JetDefinition jet_def(antikt_algorithm, jetRadius);
-	  vector<PseudoJet> jets = (SelectorNHardest(2) * SelectorPtMin(15))(jet_def(particles));
+          JetDefinition jet_def(antikt_algorithm, jetRadius);
+          vector<PseudoJet> jets = (SelectorNHardest(2) * SelectorPtMin(15))(jet_def(particles));
 
-	  bool passDijet = false;
-	  if (jets.size() < 2) continue;
-	  const auto & jet1 = jets.at(0);
-	  const auto & jet2 = jets.at(1);
-	  float jet1pt = jet1.pt();
-	  float jet2pt = jet2.pt();
-	  float asym = (jet1pt - jet2pt) / (jet1pt+jet2pt);
-	  float dphi = Rivet::deltaPhi(jet1.phi(), jet2.phi());
-	  passDijet = ((fabs(jet1.rapidity()) < 1.7) && (fabs(jet2.rapidity()) < 1.7) && (asym < 0.3) && (dphi > 2.0));
+          bool passDijet = false;
+          if (jets.size() < 2) continue;
+          const auto & jet1 = jets.at(0);
+          const auto & jet2 = jets.at(1);
+          float jet1pt = jet1.pt();
+          float jet2pt = jet2.pt();
+          float asym = (jet1pt - jet2pt) / (jet1pt+jet2pt);
+          float dphi = Rivet::deltaPhi(jet1.phi(), jet2.phi());
+          passDijet = ((fabs(jet1.rapidity()) < 1.7) && (fabs(jet2.rapidity()) < 1.7) && (asym < 0.3) && (dphi > 2.0));
 
-	  if (!passDijet) continue;
+          if (!passDijet) continue;
 
-	  // Sort by increasing absolute rapidity
-	  vector<PseudoJet> dijets = {jet1, jet2};
-	  std::sort(dijets.begin(), dijets.end(),
-		    [] (const PseudoJet & A, const PseudoJet & B)
-		    { return fabs(A.rapidity()) < fabs(B.rapidity()); }
-		    );
+          // Sort by increasing absolute rapidity
+          vector<PseudoJet> dijets = {jet1, jet2};
+          std::sort(dijets.begin(), dijets.end(),
+              [] (const PseudoJet & A, const PseudoJet & B)
+              { return fabs(A.rapidity()) < fabs(B.rapidity()); }
+              );
 
-	  for (size_t iJ=0; iJ<dijets.size(); iJ++) {
-	    bool isCentral = (iJ == 0);
-	    PseudoJet & jetItr = dijets[iJ];
+          for (size_t iJ=0; iJ<dijets.size(); iJ++) {
+            bool isCentral = (iJ == 0);
+            PseudoJet & jetItr = dijets[iJ];
 
-	    // Simplify life - ignore this jet if it is below 1st hist pt range
-	    // Note that we don't apply it to the original jet pt cut - since
-	    // we have phase space where one jet is > 50, and one < 50
-	    if (jetItr.pt() < _ptBinsGen[0]) continue;
-	    // ignore jet if beyond the last bin
-	    if (jetItr.pt() > _ptBinsGen.back()) continue;
+            // Simplify life - ignore this jet if it is below 1st hist pt range
+            // Note that we don't apply it to the original jet pt cut - since
+            // we have phase space where one jet is > 50, and one < 50
+            if (jetItr.pt() < _ptBinsGen[0]) continue;
+            // ignore jet if beyond the last bin
+            if (jetItr.pt() > _ptBinsGen.back()) continue;
 
-	    // Need to use original, ungroomed jet pT to bin
-	    size_t ptBinInd = getBinIndex(jetItr.pt(), _ptBinsGen);
+            // Need to use original, ungroomed jet pT to bin
+            size_t ptBinInd = getBinIndex(jetItr.pt(), _ptBinsGen);
 
-	    // UNGROOMED VERSION
-	    // -------------------------------------------------------------------
-	    vector<PseudoJet> chargedParticles;
-	    for (size_t iC=0; iC<jetItr.constituents().size(); iC++)
-	      if (jetItr.constituents()[iC].user_index())
-		chargedParticles.push_back(jetItr.constituents()[iC]);
-	    vector<PseudoJet> chargedJets = jet_def(chargedParticles);
+            // UNGROOMED VERSION
+            // -------------------------------------------------------------------
+            vector<PseudoJet> chargedParticles;
+            for (size_t iC=0; iC<jetItr.constituents().size(); iC++)
+              if (jetItr.constituents()[iC].user_index())
+          chargedParticles.push_back(jetItr.constituents()[iC]);
+            vector<PseudoJet> chargedJets = jet_def(chargedParticles);
 
-	    // Fill hists for each lambda variable
-	    for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
-	      const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
-	      Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
-	      float val = -1;
-	      if (thisLambdaVar.isCharged)
-		val = (chargedJets.size()>0) ? angularity(chargedJets[0]) : -1;
-	      else
-		val = angularity(jetItr);
-	      if (val<0) continue;
+            // Fill hists for each lambda variable
+            for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
+              const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
+              Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
+              float val = -1;
+              if (thisLambdaVar.isCharged)
+                val = (chargedJets.size()>0) ? angularity(chargedJets[0]) : -1;
+              else
+                val = angularity(jetItr);
+              if (val<0) continue;
 
-	      if (isCentral) {
-		_h_dijet_cen[radiusInd][lambdaInd][ptBinInd]->fill(val);
-	      } else {
-		_h_dijet_fwd[radiusInd][lambdaInd][ptBinInd]->fill(val);
-	      }
-	    }
+              if (isCentral) {
+                _h_dijet_cen[radiusInd][lambdaInd][ptBinInd]->fill(val);
+              } else {
+                _h_dijet_fwd[radiusInd][lambdaInd][ptBinInd]->fill(val);
+              }
+            }
 
-	    // GROOMED VERSION
-	    // -------------------------------------------------------------------
-	    // Get groomed jet
-	    fastjet::contrib::SoftDrop sd(0, 0.1, jetRadius);
-	    PseudoJet groomedJet = sd(jetItr);
-	    PseudoJet groomedJetCharged;
-	    if (chargedJets.size()>0)
-	      groomedJetCharged= sd(chargedJets[0]);
+            // GROOMED VERSION
+            // -------------------------------------------------------------------
+            // Get groomed jet
+            fastjet::contrib::SoftDrop sd(0, 0.1, jetRadius);
+            PseudoJet groomedJet = sd(jetItr);
+            PseudoJet groomedJetCharged;
+            if (chargedJets.size()>0)
+              groomedJetCharged= sd(chargedJets[0]);
 
-	    // Fill hists for each lambda variable
-	    for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
-	      const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
-	      Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
-	      float val = -1;
-	      if (thisLambdaVar.isCharged)
-		val = (chargedJets.size()>0) ? angularity(groomedJetCharged) : -1;
-	      else
-		val = angularity(groomedJet);
-	      if (val<0) continue;
+            // Fill hists for each lambda variable
+            for (size_t lambdaInd=0; lambdaInd < _lambdaVars.size(); lambdaInd++) {
+              const LambdaVar & thisLambdaVar = _lambdaVars[lambdaInd];
+              Angularity angularity(thisLambdaVar.beta, jetRadius, thisLambdaVar.kappa, thisLambdaVar.constitCut);
+              float val = -1;
+              if (thisLambdaVar.isCharged)
+                val = (chargedJets.size()>0) ? angularity(groomedJetCharged) : -1;
+              else
+                val = angularity(groomedJet);
+              if (val<0) continue;
 
-	      if (isCentral) {
-		_h_dijet_cen_groomed[radiusInd][lambdaInd][ptBinInd]->fill(val);
-	      } else {
-		_h_dijet_fwd_groomed[radiusInd][lambdaInd][ptBinInd]->fill(val);
-	      }
-	    }
+              if (isCentral) {
+                _h_dijet_cen_groomed[radiusInd][lambdaInd][ptBinInd]->fill(val);
+              } else {
+                _h_dijet_fwd_groomed[radiusInd][lambdaInd][ptBinInd]->fill(val);
+              }
+            }
 
-	  } // end loop over dijets
-	} // end loop over jet radii
+          } // end loop over dijets
+        } // end loop over jet radii
       }
     } // end analyze() function
-
-
-    /// Normalise histograms etc., after the run
-    void finalize() {
-    } // end of finalize
 
 
     /// @class Angularity
@@ -349,7 +344,9 @@ namespace Rivet {
     public:
 
       /// ctor
-      Angularity(double alpha, double jet_radius, double kappa=1.0, Selector constitCut=SelectorPtMin(0.)) : _alpha(alpha), _radius(jet_radius), _kappa(kappa), _constitCut(constitCut) {}
+      Angularity(double alpha, double jet_radius,
+                 double kappa=1.0, Selector constitCut=SelectorPtMin(0.))
+        : _alpha(alpha), _radius(jet_radius), _kappa(kappa), _constitCut(constitCut) {}
 
       /// computation of the angularity itself
       double result(const PseudoJet& jet) const{
@@ -711,14 +708,14 @@ namespace Rivet {
 
     // mode for the analysis
     unsigned int _mode;
-    
+
     // 3D vector: [jet radius][lambda variable][pt bin]
     // since each pt bin has its own normalised distribution
     vector<vector<vector<Histo1DPtr> > > _h_dijet_cen,
                                          _h_dijet_cen_groomed,
                                          _h_dijet_fwd,
                                          _h_dijet_fwd_groomed;
-    
+
     // 3D vector: [jet radius][lambda variable][pt bin]
     // since each pt bin has its own normalised distribution
     vector<vector<vector<Histo1DPtr> > > _h_zpj, _h_zpj_groomed;

@@ -16,7 +16,7 @@ namespace Rivet {
 
     // The centrality projection.
     declareCentrality(ATLAS::SumET_PB_Centrality(),
-                      "ATLAS_pPb_Calib", "SumETPb", "CENT");
+                      "ATLAS_CENT_PPB_CALIB", "SumETPb", "CENT");
 
     // The trigger projection.
     declare(ATLAS::MinBiasTrigger(), "Trigger");
