@@ -7,6 +7,7 @@ ARG PYTHIA_VERSION
 
 COPY main89R.cc Makefile.main89R /code/
 RUN export DEBIAN_FRONTEND=noninteractive \
+    && export TERM=xterm \
     && cd /code \
     && wget --no-verbose https://pythia.org/download/pythia83/pythia${PYTHIA_VERSION}.tgz -O- | tar xz \
     && cd pythia*/ && ./configure --{prefix,with-{hepmc3,lhapdf6,rivet}}=/usr/local --with-gzip \

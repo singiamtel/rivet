@@ -2,14 +2,14 @@
 
 set -e
 
-RIVET_VERSION=3.1.8
+RIVET_VERSION=${RIVET_VERSION:-3.1.10}
 PYTHIA_VERSION=8309
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"
 #BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS"
 #if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
 
-BUILD="docker build . -f Dockerfile $DOCKERFLAGS"
+BUILD="docker build . -f Dockerfile --progress=plain $DOCKERFLAGS"
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 

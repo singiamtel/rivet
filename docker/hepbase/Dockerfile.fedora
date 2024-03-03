@@ -1,4 +1,4 @@
-ARG FEDORA_IMAGE=fedora:38
+ARG FEDORA_IMAGE=fedora:latest  #< stable
 FROM ${FEDORA_IMAGE}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
@@ -58,7 +58,7 @@ RUN true \
          dnf install -y libXft libXpm libXext libsqlite3x uuid-devel && \
          dnf clean all && \
          cd /usr/local && \
-         wget --no-verbose https://root.cern/download/root_v6.28.02.Linux-fedoraVERSION_ID=36-x86_64-gcc12.2.tar.gz -O- | tar xz && \
+         wget --no-verbose https://root.cern/download/root_v6.30.02.Linux-fedora39-x86_64-gcc13.2.tar.gz -O- | tar xz && \
          echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh; \
        fi
 
@@ -68,13 +68,21 @@ RUN true \
          hdf5-devel highfive-devel python3-h5py \
     && dnf clean all
 
+# TODO: move pcre etc. (=nlohmann) back to the ROOT deps if it works
 ARG HEPMC_VERSION
 ARG RIVETBS_VERSION
 RUN true \
     && mkdir /code && cd /code \
     && wget --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
     && chmod +x rivet-bootstrap \
-    && INSTALL_PREFIX=/usr/local INSTALL_RIVET=0 INSTALL_YODA=0 INSTALL_CYTHON=0 HEPMC_VERSION=${HEPMC_VERSION} MAKE="make -j $(nproc --ignore=1)" ./rivet-bootstrap \
+    && dnf install -y pcre-devel json-devel xxhash-devel \
+    && dnf clean all \
+    && INSTALL_PREFIX=/usr/local USE_VENV=0 \
+       INSTALL_RIVET=0 INSTALL_YODA=0 INSTALL_CYTHON=0 \
+       HEPMC_VERSION=${HEPMC_VERSION} \
+       HEPMC_CMAKE_ADD='-D HEPMC3_Python_SITEARCH312=/usr/local/lib/python3.12/site-packages -D HEPMC3_PYTHON_VERSIONS=3.12' \
+       MAKE="make -j $(nproc --ignore=1)"  \
+       ./rivet-bootstrap \
     && rm -rf /code
 
 RUN true \

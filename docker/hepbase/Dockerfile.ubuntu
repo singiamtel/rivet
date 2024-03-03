@@ -1,4 +1,4 @@
-ARG UBUNTU_IMAGE=ubuntu:22.04
+ARG UBUNTU_IMAGE=ubuntu:latest #< LTS
 FROM ${UBUNTU_IMAGE}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
@@ -67,7 +67,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
          apt-get install -y libxft2 libxpm4 libglu1-mesa libpthread-stubs0-dev libsqlite3-dev uuid-dev && \
          apt-get -y autoclean && \
          cd /usr/local && \
-         wget --no-verbose https://root.cern/download/root_v6.28.04.Linux-ubuntu22-x86_64-gcc11.3.tar.gz -O- | tar xz && \
+         wget --no-verbose https://root.cern/download/root_v6.30.02.Linux-ubuntu22.04-x86_64-gcc11.4.tar.gz -O- | tar xz && \
          echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh; \
        fi
 
@@ -91,17 +91,22 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'for i in /etc/profile.d/*.sh; do . $i; done' > /tmp/DUMMY2 \
     && cat /tmp/DUMMY1 /tmp/DUMMY2 > /etc/bash.bashrc && rm /tmp/DUMMY*
 
+# TODO: move nlohmann back to the ROOT deps if it works
 ARG HEPMC_VERSION
 ARG RIVETBS_VERSION
 RUN export DEBIAN_FRONTEND=noninteractive \
     && mkdir /code && cd /code \
     && wget --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
     && chmod +x rivet-bootstrap \
+    && grep CMAKE rivet-bootstrap \
+    && apt-get install -y nlohmann-json3-dev \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean \
     && INSTALL_PREFIX=/usr/local USE_VENV=0 \
        INSTALL_RIVET=0 INSTALL_YODA=0 INSTALL_CYTHON=0 \
        HEPMC_VERSION=${HEPMC_VERSION}  \
-       HEPMC_CMAKE_ADD='-D HEPMC3_Python_SITEARCH311=/usr/local/lib/python3.11/site-packages -DHEPMC3_PYTHON_VERSIONS=3.11' \
-       MAKE="make -j $(nproc --ignore=1)" \
+       HEPMC_CMAKE_ADD='-D HEPMC3_Python_SITEARCH310=/usr/local/lib/python3.10/site-packages -D HEPMC3_PYTHON_VERSIONS=3.10 ' \
+       MAKE="make -j $(nproc --ignore=1)"  \
        ./rivet-bootstrap \
     && rm -rf /code
 
@@ -124,7 +129,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
       apt-get install -y texlive-latex-extra texlive-pstricks cm-super dvipng imagemagick && \
       sed -i 's/^.*policy.*coder.*none.*(PS|PDF).*//' /etc/ImageMagick-6/policy.xml && \
       sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml && \
-      texhash; \
+      texhash && \
+      apt-get -y autoremove && \
+      apt-get -y autoclean; \      
     fi
 
 # TODO: fix local/local in packages

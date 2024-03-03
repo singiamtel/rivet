@@ -2,22 +2,28 @@
 
 set -e
 
-RIVET_VERSION=3.1.8
+RIVET_VERSION=${RIVET_VERSION:-3.1.10}
 PYTHIA_VERSION=8309
 
-PLATFLAGS="--platform linux/amd64,linux/arm64"
-BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
-if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
+#PLATFLAGS="--platform linux/amd64,linux/arm64"
+BUILDFLAGS="$PLATFLAGS $DOCKERFLAGS"
+function xdocker { echo "docker $@"; docker "$@"; }
+if [[ -n "$PLATFLAGS" ]]; then
+    if [[ "$PUSH" = 1 ]]; then PUSH="--push"; fi
+    function dx_build { xdocker buildx build -f Dockerfile "$@" $PUSH .; }
+else
+    function dx_build { xdocker build -f Dockerfile "$@" .; }
+fi
+#test "$FORCE" && BUILD="$BUILD --no-cache"
+#--progress=plain
 
-test "$FORCE" && BUILD="$BUILD --no-cache"
-
-BUILD="$BUILD --build-arg RIVET_VERSION=${RIVET_VERSION}"
-BUILD="$BUILD --build-arg PYTHIA_VERSION=${PYTHIA_VERSION}"
-test "$TEST" && BUILD="echo $BUILD"
+BUILDFLAGS="$BUILDFLAGS --build-arg RIVET_VERSION=${RIVET_VERSION}"
+BUILDFLAGS="$BUILDFLAGS --build-arg PYTHIA_VERSION=${PYTHIA_VERSION}"
+test "$TEST" && BUILDFLAGS="echo $BUILDFLAGS"
 
 tag="hepstore/rivet-tutorial:${RIVET_VERSION}"
 echo "Building $tag"
-$BUILD -f Dockerfile -t $tag
+dx_build $BUILDFLAGS -t $tag
 
 if [[ "$LATEST" = 1 ]]; then
     docker tag $tag hepstore/rivet-tutorial:latest
@@ -26,7 +32,7 @@ fi
 if [[ "$PUSH" = 1 ]]; then
     docker push $tag
     if [[ "$LATEST" = 1 ]]; then
-        sleep 1m
+        sleep ${SLEEP:-1}m
         docker push hepstore/rivet-tutorial:latest
     fi
 fi

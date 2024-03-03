@@ -13,7 +13,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && autoconf --version \
     && autoreconf -i \
     && ./configure && make -j $(nproc --ignore=1) && make install \
-    && cd .. \
+    && cd ..  \
     && rm -rf /code
 
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -22,23 +22,19 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && cd rivet/ \
     && autoconf --version \
     && autoreconf -i \
-    && if [[ -d /usr/local/include/HepMC3 ]]; then HEPMC_FLAG="--with-hepmc3=/usr/local"; fi \
+    && if [[ -d /usr/local/include/HepMC3 ]]; then HEPMC_FLAG="--with-hepmc3=/usr/local"; fi  \
     && ./configure $HEPMC_FLAG && make -j $(nproc --ignore=1) && make install \
     && texhash \
     && echo "source /usr/local/etc/bash_completion.d/rivet-completion" > /etc/profile.d/rivet-completion.sh \
     && echo "source /usr/local/etc/bash_completion.d/yoda-completion" > /etc/profile.d/yoda-completion.sh \
-    && texhash \
+    && texhash  \
     && rm -rf /code
 
-# TODO: fix local/local in packages
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'export PYTHONPATH="/usr/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
     && echo 'export PYTHONPATH="/usr/local/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
     && apt-get install -y cm-super dvipng \
     && apt-get autoremove -y \
     && apt-get autoclean -y
-
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && sed -i /usr/local/include/Rivet/Projections/SmearedJets.hh -e 's/return CmpState::EQ;/return Rivet::cmp(get_address(_bTagEffFn), get_address(other._bTagEffFn)) || Rivet::cmp(get_address(_cTagEffFn), get_address(other._cTagEffFn));/'
 
 WORKDIR /work

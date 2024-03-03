@@ -2,15 +2,15 @@
 
 set -e
 
-RIVET_VERSION=3.1.8
-MG5_VERSION=3.4.2
-MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.4.x/+download/MG5_aMC_v3.4.2.tar.gz
+RIVET_VERSION=${RIVET_VERSION:-3.1.10}
+MG5_VERSION=3.5.3
+MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.3.tar.gz
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"
 #BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
 #if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
 
-BUILD="docker build . -f Dockerfile $DOCKERFLAGS"
+BUILD="docker build . -f Dockerfile --progress=plain $DOCKERFLAGS"
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 

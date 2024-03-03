@@ -15,7 +15,7 @@ RUN true \
   && bin/mg5_aMC mg5setup.txt \
   && rm mg5setup.txt
 
-RUN lhapdf install NNPDF23_lo_as_0130_qed
+RUN lhapdf install NNPDF23_lo_as_0130_qed NNPDF40_nlo_as_01180
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'export PYTHONPATH="/usr/local/local/lib/python3.11/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh

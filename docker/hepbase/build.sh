@@ -4,16 +4,16 @@ set -e
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"
 #BUILD="docker buildx build $PLATFLAGS $DOCKERFLAGS" # --squash"
-BUILD="docker build $PLATFLAGS $DOCKERFLAGS" # --squash"
+BUILD="docker build --progress=plain $PLATFLAGS $DOCKERFLAGS" # --squash"
 
 test "$FORCE" && BUILD="$BUILD --no-cache"
 
 test "$TEST" && BUILD="echo $BUILD"
 
-RIVETBS_VERSION=3.1.8
+RIVETBS_VERSION=3.1.10
 LHAPDF_VERSION=6.5.4
 
-for vhepmc in 3.2.6; do  # 2.06.11
+for vhepmc in 3.2.6; do
     for tex in 0 1; do
 
         MSG="Building hepbase image with HepMC=$vhepmc and TeX=$tex"
