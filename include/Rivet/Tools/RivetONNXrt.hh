@@ -295,7 +295,7 @@ namespace Rivet {
 
   /// Useful function for getting onnx file paths
   /// Based on getDatafilePath from RivetYODA.cc
-  string getONNXFilePath(const string& filename) {
+  inline string getONNXFilePath(const string& filename) {
     /// Try to find an ONNX file matching this analysis name
     const string path1 = findAnalysisRefFile(filename);
     if (!path1.empty()) return path1;
@@ -308,7 +308,7 @@ namespace Rivet {
   /// multiple networks.
   /// @todo: If ONNX is ever fully integrated into rivet, move
   /// to analysis class.
-  unique_ptr<RivetONNXrt> getONNX(const string& analysisname, const string& suffix = ".onnx"){
+  inline unique_ptr<RivetONNXrt> getONNX(const string& analysisname, const string& suffix = ".onnx"){
     return make_unique<RivetONNXrt>(getONNXFilePath(analysisname+suffix));
   }
 }
