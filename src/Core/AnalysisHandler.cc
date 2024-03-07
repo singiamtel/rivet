@@ -219,7 +219,7 @@ namespace Rivet {
     // If there are no weights, add a nominal one
     if (_weightNames.empty()) {
       _weightNames.push_back("");
-      _rivetDefaultWeightIdx = _defaultWeightIdx = 0;
+      _customDefaultWeightIdx =_rivetDefaultWeightIdx = _defaultWeightIdx = 0;
       _weightIndices = { 0 };
       return;
     }
