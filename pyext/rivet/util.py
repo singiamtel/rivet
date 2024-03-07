@@ -96,10 +96,10 @@ def _detex(t):
     t = t.replace(r"\MeV", "MeV")
     t = t.replace(r"\GeV", "GeV")
     t = t.replace(r"\TeV", "TeV")
-    t = t.replace("~", " ")
-    t = t.replace("\,", " ")
-    t = t.replace("\;", " ")
-    t = t.replace("\!", "")
+    t = t.replace(r"~", " ")
+    t = t.replace(r"\,", " ")
+    t = t.replace(r"\;", " ")
+    t = t.replace(r"\!", "")
     try:
         import pydetex.parsers as pdtp
         #t = texpand(t)
