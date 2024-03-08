@@ -1877,6 +1877,24 @@ class BinData(object):
         self.val = float(val)
         self.err = floatpair(err)
 
+    def __iadd__(self, val: float):
+      self.val += val
+      self.err[0] += val
+      self.err[1] += val
+      return self
+
+    def __isub__(self, val: float):
+      self.val -= val
+      self.err[0] -= val
+      self.err[1] -= val
+      return self
+
+    def __imul__(self, val: float):
+      self.val *= val
+      self.err[0] *= val
+      self.err[1] *= val
+      return self
+
     @property
     def is2D(self):
         return hasattr(self.low, "__len__") and hasattr(self.high, "__len__")
@@ -2182,14 +2200,12 @@ class Histogram(DrawableObject, Described):
     def delta(self,name):
         self.divide(name)
         for i in range(len(self.data)):
-            self.data[i]['Content'] -= 1.
+            self.data[i].val -= 1.
 
     def deltapercent(self,name):
         self.delta(name)
         for i in range(len(self.data)):
-            self.data[i]['Content'] *= 100.
-            self.data[i]['Error'][0] *= 100.
-            self.data[i]['Error'][1] *= 100.
+            self.data[i] *= 100.
 
     def getBin(self,x):
         if x<self.data[0].xmin or \
