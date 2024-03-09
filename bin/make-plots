@@ -44,12 +44,12 @@ from math import *
 
 ## Regex patterns
 pat_begin_block = re.compile(r'^#?+\s*BEGIN ([A-Z0-9_]+) ?(\S+)?')
-pat_end_block =   re.compile('^#?+\s*END ([A-Z0-9_]+)')
-pat_comment = re.compile('^#|^\s*$')
-pat_property = re.compile('^(\w+?)=(.*)$')
-pat_property_opt = re.compile('^ReplaceOption\[(\w+=\w+)\]=(.*)$')
-pat_path_property  = re.compile('^(\S+?)::(\w+?)=(.*)$')
-pat_options = re.compile(r"((?::\w+=[^:/]+)+)")
+pat_end_block =   re.compile(r'^#?+\s*END ([A-Z0-9_]+)')
+pat_comment = re.compile(r'^#|^\s*$')
+pat_property = re.compile(r'^(\w+?)=(.*)$')
+pat_property_opt = re.compile(r'^ReplaceOption\[(\w+=\w+)\]=(.*)$')
+pat_path_property  = re.compile(r'^(\S+?)::(\w+?)=(.*)$')
+pat_options = re.compile(r'((?::\w+=[^:/]+)+)')
 
 
 if sys.version_info >= (3, 5):
@@ -801,7 +801,7 @@ class Plot(object):
         out += ('      /x1 x1 1 add def } repeat\n')
         out += ('  grestore\n')
         out += ('pop pop}>\n')
-        out += ('\makeatother\n')
+        out += ('\\makeatother\n')
         return out
 
     def write_footer(self):
@@ -1077,7 +1077,7 @@ class RatioPlot(Plot):
             inputdata.description['YMin']=-0.5
             inputdata.description['YMax']=0.5
         elif rpmode=='deltapercent':
-            inputdata.description['YLabel']='\\delta\;[\%]'
+            inputdata.description['YLabel']='\\delta\\;[\\%]'
             inputdata.description['YMin']=-50.
             inputdata.description['YMax']=50.
         elif rpmode=='deltamc':
@@ -2372,24 +2372,24 @@ class Histogram(DrawableObject, Described):
                                     + ', opacity=' + self.getFillOpacity())
                         if self.getErrorTubeLineDash()!='':
                             tubeopts += (', dash=' + self.getErrorTubeLineDash())
-                        out += ('\psline['+tubeopts+']')
+                        out += (r'\psline['+tubeopts+']')
                         out += ('(' + coors.strphys2frameX(self.data[i].xmin) + ', ' \
                                     + coors.strphys2frameY(self.data[i].val-self.data[i].err[0]) + ')(' \
                                     + coors.strphys2frameX(self.data[i].xmax)  + ', ' \
                                     + coors.strphys2frameY(self.data[i].val-self.data[i].err[0]) + ')\n')
-                        out += ('\psline['+tubeopts+']')
+                        out += (r'\psline['+tubeopts+']')
                         out += ('(' + coors.strphys2frameX(self.data[i].xmin) + ', ' \
                                     + coors.strphys2frameY(self.data[i].val+self.data[i].err[1]) + ')(' \
                                     + coors.strphys2frameX(self.data[i].xmax)  + ', ' \
                                     + coors.strphys2frameY(self.data[i].val+self.data[i].err[1]) + ')\n')
                         if self.description.get('ConnectBins', '1') == '1':
                             if i>0:
-                                out += ('\psline['+tubeopts+']')
+                                out += (r'\psline['+tubeopts+']')
                                 out += ('(' + coors.strphys2frameX(self.data[i].xmin) + ', ' \
                                             + coors.strphys2frameY(self.data[i].val-self.data[i].err[0]) + ')(' \
                                             + coors.strphys2frameX(self.data[i].xmin)  + ', ' \
                                             + coors.strphys2frameY(self.data[i-1].val-self.data[i-1].err[0]) + ')\n')
-                                out += ('\psline['+tubeopts+']')
+                                out += (r'\psline['+tubeopts+']')
                                 out += ('(' + coors.strphys2frameX(self.data[i].xmin) + ', ' \
                                             + coors.strphys2frameY(self.data[i].val+self.data[i].err[1]) + ')(' \
                                             + coors.strphys2frameX(self.data[i].xmin)  + ', ' \
@@ -3464,7 +3464,7 @@ def process_datfile(datfile, **kwargs):
 
         ## Run LaTeX (in no-stop mode)
         logging.debug(os.listdir(tempdir))
-        texcmd = ["latex", "\scrollmode\input", texpath]
+        texcmd = ["latex", r"\scrollmode\input", texpath]
         logging.debug("TeX command: " + " ".join(texcmd))
         texproc = subprocess.Popen(texcmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=tempdir)
         logging.debug(texproc.communicate()[0])
