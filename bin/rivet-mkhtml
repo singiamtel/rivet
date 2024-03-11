@@ -171,10 +171,11 @@ def executeScript(script, shared_modules_list=[]):
         np  = importlib.import_module(shared_modules_list[1])
         sys_lib = importlib.import_module(shared_modules_list[2])
         os_lib  = importlib.import_module(shared_modules_list[3])
+        plt = importlib.import_module(shared_modules_list[4])
 
         # pass imports to globals, including plot directory
         script_globals = {'mpl': mpl, 'np': np, 'sys' : sys_lib,
-                          'os' : os_lib, '__file__': script}
+                          'os' : os_lib, 'plt' : plt, '__file__' : script}
 
         # execute script
         exec(open(script).read(), script_globals)
@@ -190,7 +191,7 @@ def generate_plots(pyScripts,nproc=1):
     # so that they are not imported for each individual script
     manager = multiprocessing.Manager()
     manager_module = manager.Namespace()
-    manager_module.shared_modules = ["matplotlib", "numpy", "sys", "os"]
+    manager_module.shared_modules = ["matplotlib", "numpy", "sys", "os", "matplotlib.pyplot"]
 
     # Call multiprocessing pool to generate plots
     p = multiprocessing.Pool(processes=nproc)
