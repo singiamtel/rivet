@@ -146,7 +146,7 @@ namespace Rivet {
     void finalize() {
       double fact = crossSection()/ sumOfWeights()/picobarn;
       for(unsigned int iy=9;iy<11;++iy) {
-        double sigma,error;
+        double sigma=0.,error=0.;
         if(iy==9) {
           sigma = _nD1D->val()*fact;
           error = _nD1D->err()*fact;
