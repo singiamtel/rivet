@@ -446,6 +446,7 @@ namespace Rivet {
       // Add raw YODA AO content
       for (size_t i = 0; i < raos.size(); ++i) {
         vector<double> tmp = raos[i]->serializeContent(fixed_length);
+        data.push_back(tmp.size()); // length of the AO
         data.insert(std::end(data),
                     std::make_move_iterator(std::begin(tmp)),
                     std::make_move_iterator(std::end(tmp)));
@@ -477,7 +478,7 @@ namespace Rivet {
       }
 
       _beaminfo = make_shared<YODA::BinnedEstimate<string>>(labels, "/TMP/_BEAMPZ");
-      offset+= nBeams;
+      offset += nBeams;
       // set beam momenta
       size_t beamLen = *(itr + offset); ++offset;
       if (nprocs)  beamLen /= nprocs;
