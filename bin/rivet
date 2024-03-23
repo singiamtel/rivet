@@ -257,9 +257,9 @@ if args.LIST_ANALYSES:
                 msg[-1] = u"%s%s" % (st, a.summary())
                 if args.LOGLEVEL < logging.INFO:
                     if a.keywords():
-                        msg[-1] += u"  [%s]" % " ".join(a.keywords())
+                        msg[-1] += r"  [%s]" % " ".join(a.keywords())
                     if a.luminosityfb():
-                        msg[-1] += u"  [ \int L = %s fb^{-1} ]" % a.luminosityfb()
+                        msg[-1] += r"  [ \int L = %s fb^{-1} ]" % a.luminosityfb()
     if args.DO_DETEX:
         msg = rivet.util.detex(msg)
     retlist = '\n'.join([ u"%-25s   %s" % (a,m) for a,m in zip(names,msg) ])
