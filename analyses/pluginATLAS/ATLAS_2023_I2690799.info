@@ -1,0 +1,47 @@
+Name: ATLAS_2023_I2690799
+Year: 2023
+Summary: Measurement of electroweak 4 lepton + 2 jet production
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2690799
+Status: VALIDATED
+Authors:
+ - Zuchen Huang <zuchen.huang@cern.ch>
+References:
+ - ATLAS-STDM-2020-02
+ - JHEP 01 (2024) 004
+ - arXiv:2308.12324
+RunInfo: inclusive 4 leptons + 2jet production at 13 TeV
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 140.0
+Description:
+  'Differential cross-sections are measured for the production of four charged leptons in association with two jets. These
+  measurements are sensitive to final states in which the jets are produced via the strong interaction as well as to the
+  purely-electroweak vector boson scattering process. The analysis is performed using proton-proton collision data collected by
+  ATLAS at $\sqrt{s}$=13 TeV and with an integrated luminosity of 140 fb${}^{-1}$. The data are corrected for the effects of
+  detector inefficiency and resolution and are compared to state-of-the-art Monte Carlo event generator predictions.
+  The differential cross-sections are used to search for anomalous weak-boson self-interactions that are induced by
+  dimension-six and dimension-eight operators in Standard Model effective field theory.'
+ReleaseTests:
+ - $A pp-13000-lllljj
+Keywords:
+ - ZBOSON
+ - VBS
+ - LEPTONS
+ - JETS
+BibKey: ATLAS:2023dkz
+BibTeX: '@article{ATLAS:2023dkz,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Differential cross-section measurements of the production of four charged leptons in association with two jets using the ATLAS detector}",
+    eprint = "2308.12324",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2023-152",
+    doi = "10.1007/JHEP01(2024)004",
+    journal = "JHEP",
+    volume = "01",
+    pages = "004",
+    year = "2024"
+}'
