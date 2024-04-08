@@ -21,9 +21,15 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(ChargedFinalState(), "FS");
-
+      if     ( isCompatibleWithSqrtS(22.0*GeV) ) _sqs = "22.0";
+      else if( isCompatibleWithSqrtS(27.7*GeV) ) _sqs = "27.7";
+      else if( isCompatibleWithSqrtS(30.0*GeV) ) _sqs = "30.0";
+      else if( isCompatibleWithSqrtS(31.6*GeV) ) _sqs = "31.6";
+      else
+        MSG_WARNING("CoM energy of events sqrt(s) = " << sqrtS()/GeV
+                    << " doesn't match any available analysis energy .");
       // Book histograms
-      book(_nHadrons, "TMP/hadrons");
+      book(_mult, 2, 1, 1);
 
     }
 
@@ -31,29 +37,20 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const ChargedFinalState& fs = apply<ChargedFinalState>(event, "FS");
-      _nHadrons->fill(fs.particles().size());
-
+      _mult->fill(_sqs,fs.particles().size());
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nHadrons->val()/sumOfWeights();
-      double error = _nHadrons->err()/sumOfWeights();
-      Estimate1DPtr mult;
-      book(mult, 2, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
     }
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _nHadrons;
+    BinnedProfilePtr<string> _mult;
+    string _sqs;
     /// @}
 
 

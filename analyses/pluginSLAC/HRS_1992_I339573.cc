@@ -69,6 +69,10 @@ namespace Rivet {
 
       const double fact = sqr(sqrtS())/GeV2*crossSection()/nanobarn/sumOfWeights();
       scale(_h_lambda, fact);
+      for(auto & b: _h_lambda->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./_axis.width(idx));
+      }
     }
 
     /// @}

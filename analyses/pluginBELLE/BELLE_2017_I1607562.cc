@@ -153,7 +153,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/nanobarn/sumOfWeights();
+      // now need width as well
+      double fact = crossSection()/nanobarn/sumOfWeights()/0.05;
       scale(_h_all, fact);
       scale(_h_strong, fact);
     }

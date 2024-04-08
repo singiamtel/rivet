@@ -61,7 +61,7 @@ namespace Rivet {
 
       for (unsigned int ih=0; ih<3; ++ih) {
         for (unsigned int iy=0; iy<3; ++iy) {
-          normalize(_h_mult[ih][iy], 2000.);
+          normalize(_h_mult[ih][iy], 1000.);
         }
       }
     }

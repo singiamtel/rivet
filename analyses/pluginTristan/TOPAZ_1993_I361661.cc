@@ -34,9 +34,9 @@ namespace Rivet {
       book(_h["rho"]   , 2, 1, 1);
       book(_h["y23"]   , 3, 1, 1);
 
-      _axes["thrust"] = YODA::Axis<double>{22, 0.8, 5.2};
-      _axes["rho"] = YODA::Axis<double>{21, 1.0, 5.2};
-      _axes["y23"] = YODA::Axis<double>{18, 1.2, 8.4};
+      _axes["thrust"] = YODA::Axis<double>(22, 0.8, 5.2);
+      _axes["rho"] = YODA::Axis<double>(21, 1.0, 5.2);
+      _axes["y23"] = YODA::Axis<double>(18, 1.2, 8.4);
 
     }
 
@@ -82,6 +82,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_h);
+      for( auto & hist : _h) {
+        for(auto & b: hist.second->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[hist.first].width(idx));
+        }
+      }
     }
 
     /// @}

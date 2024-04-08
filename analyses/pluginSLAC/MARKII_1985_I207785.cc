@@ -41,7 +41,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h, 1./sumOfWeights());
+      // cross section differential in xp, now plotting p so need to convert
+      scale(_h, 1./sumOfWeights()*sqrtS()/2);
     }
 
     ///@}

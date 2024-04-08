@@ -46,8 +46,10 @@ namespace Rivet {
 
       // thrust
       const Thrust& thrust = apply<Thrust>(event, "Thrust");
-      _c_ncharged->fill(cfs.particles().size());
-      _p_charged->fill(-log(1.-thrust.thrust()),cfs.particles().size());
+      _c_ncharged->fill("57.8",cfs.particles().size());
+      size_t idx = pTAxis.index(-log(1.-thrust.thrust()));
+      string label = idx>0 && idx <= _p_charged->xEdges().size() ?  _p_charged->xEdges()[idx-1] : "OTHER";
+      _p_charged->fill(label,cfs.particles().size());
     }
 
 
@@ -61,8 +63,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Profile1DPtr _p_charged;
-    CounterPtr _c_ncharged;
+    BinnedProfilePtr<string> _p_charged;
+    BinnedProfilePtr<string> _c_ncharged;
+    YODA::Axis<double> pTAxis{1.24,1.58,1.9,2.36,2.66,3.02,3.24,3.46};
     /// @}
 
 

@@ -97,28 +97,17 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/ sumOfWeights() /picobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      Estimate1DPtr hadrons;
-      book(hadrons, "sigma_hadrons");
-      Estimate1DPtr muons;
-      book(muons, "sigma_muons"  );
       BinnedEstimatePtr<string> mult;
       book(mult, 1, 1, 1);
       if (isCompatibleWithSqrtS(9.36*GeV)) {
         mult->bin(1).set(R.val(), R.errPos());
-        hadrons->bin(1).set(sig_h, err_h);
-        muons  ->bin(1).set(sig_m, err_m);
       }
       if (_h_N) {
-      normalize(_h_N, 200.);
+        normalize(_h_N, 100.);
       if (_w_cont->val()!=0)
         scale(_h_tot_N,1./ *_w_cont);
       }
-      normalize(_h_N_Upsilon, 200.);
+      normalize(_h_N_Upsilon, 100.);
       if (_w_ups->val()!=0) {
         scale(_h_N_tot_Upsilon,1./ *_w_ups);
       }
@@ -129,7 +118,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_N, _h_N_Upsilon;
+    BinnedHistoPtr<int> _h_N, _h_N_Upsilon;
     BinnedHistoPtr<string> _h_tot_N, _h_N_tot_Upsilon;
     CounterPtr _c_hadrons, _c_muons;
     CounterPtr _w_cont,_w_ups;

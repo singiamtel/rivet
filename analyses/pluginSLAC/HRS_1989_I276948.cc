@@ -78,6 +78,12 @@ namespace Rivet {
       scale(_h, sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
       scale({_h_sig_rho, _h_sig_Kstar0}, crossSection()/picobarn/sumOfWeights());
       scale({_h_mult_rho, _h_mult_Kstar0}, 1./sumOfWeights());
+      for( auto & hist : _h) {
+        for(auto & b: hist.second->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[hist.first].width(idx));
+        }
+      }
     }
 
     ///@}

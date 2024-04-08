@@ -36,8 +36,8 @@ namespace Rivet {
       const vector<double> bins = {2.,2.6,3.4,4.9};
       book(_h_cThetaStar, bins);
       book(_h_cThetaH, bins);
-      for (size_t ix=1; _h_cThetaH->numBins()+1; ++ix) {
-      	if (ix <= 2) {
+      for (size_t ix=1; ix<_h_cThetaH->numBins()+1; ++ix) {
+      	if (ix <= 3) {
           const string suff = to_string(ix+1);
           book(_h_cThetaStar->bin(ix), "/TMP/cThetaStar_"+suff, 5, -1.0, 1.0);
           book(_h_cThetaH->bin(ix), "/TMP/cThetaH_"+suff, 5, -1.0, 1.0);
@@ -175,7 +175,7 @@ namespace Rivet {
       book(_h_A    ,2,1,1);
       Estimate1DPtr _h_alpha;
       book(_h_alpha,2,1,2);
-      for (size_t ix=1; _h_cThetaH->numBins()+1; ++ix) {
+      for (size_t ix=1; ix< _h_cThetaH->numBins()+1; ++ix) {
       	normalize(_h_cThetaStar->bin(ix));
       	pair<double,pair<double,double> > alpha = calcAlpha(_h_cThetaStar->bin(ix));
       	_h_A->bin(1).set(alpha.first, alpha.second);

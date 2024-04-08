@@ -79,9 +79,10 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_histEEC   , 180.0/M_PI*1000./ *_weightSum);
-      scale(_histEEC_Pi, 180.0/M_PI*1000./ *_weightSum);
-      scale(_histAEEC  , 180.0/M_PI*1000./ *_weightSum);
+      // convert degree -> millirad (due units) and divide bin width in degrees (as bin width not in hist)
+      scale(_histEEC   , 180.0/M_PI*1000./3.6/ *_weightSum);
+      scale(_histEEC_Pi, 180.0/M_PI*1000./3.6/ *_weightSum);
+      scale(_histAEEC  , 180.0/M_PI*1000./3.6/ *_weightSum);
     }
 
     /// @}

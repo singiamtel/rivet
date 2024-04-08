@@ -46,6 +46,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_h_spect, sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
+        for(auto & b: _h_spect->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axis.width(idx));
+        }
     }
 
     ///@}

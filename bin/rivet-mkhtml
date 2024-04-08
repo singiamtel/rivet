@@ -520,7 +520,7 @@ def generateScripts(args):
             pyScripts += [os.path.abspath(pyScript)]
         except Exception as e:
             if args.VERBOSE:
-                print(e.message())
+                print(e)
             print('Unexpected error encountered for', plotName)
     return pyScripts
 

@@ -181,11 +181,6 @@ namespace Rivet {
         h_01->bin(ix).set(rho01.first, rho01.second);
       }
       // integral over z
-      book(h_alpha , 1,2,1);
-      book(h_rho00 , 2,2,1);
-      book(h_rhooff, 2,2,2);
-      book(h_01    , 2,2,3);
-
       double integral = _h_ctheta_all->integral();
       scale(_h_ctheta_all, 1./integral);
       scale(_h_01_all, 1./integral);

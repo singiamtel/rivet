@@ -74,7 +74,7 @@ namespace Rivet {
       _axes[1]["pip"] = YODA::Axis<double>({0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19, 0.58, 0.68, 0.88});
       _axes[1]["Kp"] = YODA::Axis<double>({0.02, 0.1, 0.11, 0.13, 0.15, 0.17, 0.19});
       _axes[1]["p"] = _axes[0]["p"];
-      _axes[1]["pi0"] = _axes[0]["p0"];
+      _axes[1]["pi0"] = _axes[0]["pi0"];
       _axes[1]["K0"] = _axes[0]["K0"];
       _axes[1]["lam"] = _axes[0]["lam"];
       _axes[1]["xi"] = _axes[0]["xi"];
@@ -240,7 +240,7 @@ namespace Rivet {
       string edge = "OTHER";
       const size_t idx = _axes[k][name].index(value);
       if (idx && idx <= _edges[k][name].size())  edge = _edges[k][name][idx-1];
-      (k? _ups1 : _cont)[name]->fill(edge, value);
+      (k? _ups1 : _cont)[name]->fill(edge);
     }
 
 
@@ -253,17 +253,30 @@ namespace Rivet {
         book(est, ix+12, 1, 1);
         for (size_t iy=0; iy<2; ++iy) {
           if (scales[iy]->val() > 0.) {
+            unsigned int iz = iy==0 ? 2 : 1;
             scale(_mult[iy][ix], 1./ *scales[iy]);
-            est->bin(iy+1).set(_mult[iy][ix]->val(), _mult[iy][ix]->err());
+            est->bin(iz).set(_mult[iy][ix]->val(), _mult[iy][ix]->err());
           }
         }
       }
       // spectra
       if (_weightSum_cont->val() > 0.) {
         scale(_cont, 1. / *_weightSum_cont);
+        for( auto & hist : _cont) {
+          for(auto & b: hist.second->bins()) {
+            const size_t idx = b.index();
+            b.scaleW(1./_axes[0][hist.first].width(idx));
+          }
+        }
       }
       if (_weightSum_Ups1->val() > 0.) {
         scale(_ups1, 1. / *_weightSum_Ups1);
+        for( auto & hist : _ups1) {
+          for(auto & b: hist.second->bins()) {
+            const size_t idx = b.index();
+            b.scaleW(1./_axes[1][hist.first].width(idx));
+          }
+        }
       }
     }
 

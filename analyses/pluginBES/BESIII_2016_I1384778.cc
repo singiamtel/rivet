@@ -25,7 +25,7 @@ namespace Rivet {
       _h_L.resize(6);
       _h_U.resize(6);
       _h_C.resize(6);
-      for(size_t ix=0; _h_L.size(); ++ix) {
+      for(size_t ix=0; ix< _h_L.size(); ++ix) {
         const string pre = "/TMP/h_z1z2_"+to_string(ix+1);
         book(_h_L[ix], pre+"_L", 20, 0., M_PI);
         book(_h_U[ix], pre+"_U", 20, 0., M_PI);
@@ -150,7 +150,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // ratios
-      Estimate1DPtr _h_z_UL,_h_z_UC;
+      BinnedEstimatePtr<string> _h_z_UL,_h_z_UC;
       book(_h_z_UL,1,1,5);
       book(_h_z_UC,1,1,6);
       for (size_t ix=0; ix < _h_L.size(); ++ix) {
@@ -159,10 +159,10 @@ namespace Rivet {
         normalize(_h_C[ix]);
         const string pre = "/TMP/R_z1z2_"+to_string(ix+1);
         Estimate1DPtr R1;
-        book(R1, pre+"_UL");
+        book(R1, pre+"_UL", 20, 0., M_PI);
         divide(_h_U[ix], _h_L[ix], R1);
         Estimate1DPtr R2;
-        book(R2, pre+"_UC");
+        book(R2, pre+"_UC", 20, 0., M_PI);
         divide(_h_U[ix], _h_C[ix], R2);
         pair<double,double> asym1 = calcAsymmetry(R1);
         _h_z_UL->bin(ix+1).set(asym1.first, asym1.second);
@@ -178,10 +178,10 @@ namespace Rivet {
         normalize(_h_pT_C->bin(ix));
         const string pre = "/TMP/R_pT_"+to_string(ix);
         Estimate1DPtr R1;
-        book(R1, pre+"_UL");
+        book(R1, pre+"_UL", 20, 0., M_PI);
         divide(_h_pT_U->bin(ix), _h_pT_L->bin(ix), R1);
         Estimate1DPtr R2;
-        book(R2, pre+"_UC");
+        book(R2, pre+"_UC", 20, 0., M_PI);
         divide(_h_pT_U->bin(ix), _h_pT_C->bin(ix), R2);
         pair<double,double> asym1 = calcAsymmetry(R1);
         _h_pT_UL->bin(ix).set(asym1.first, asym1.second);

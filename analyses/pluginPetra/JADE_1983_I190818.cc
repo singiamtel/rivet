@@ -26,7 +26,6 @@ namespace Rivet {
         MSG_WARNING("CoM energy of events sqrt(s) = " << sqrtS()/GeV
                     << " doesn't match any available analysis energy .");
       }
-      book(_counter, "/TMP/MULT");
       book(_mult, 1, 1, 1);
     }
 
@@ -35,30 +34,19 @@ namespace Rivet {
     void analyze(const Event& event) {
       const FinalState& cfs = apply<FinalState>(event, "CFS");
       MSG_DEBUG("Total charged multiplicity = " << cfs.size());
-      _counter->fill(cfs.size());
+      _mult->fill(int(sqrtS()),cfs.size());
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_counter,1./sumOfWeights());
-
-      double val = _counter->val();
-      double err = _counter->err();
-
-      for (auto& b : _mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(val, err);
-        }
-      }
     }
     /// @}
 
   private:
 
     // Histogram
-    CounterPtr _counter;
-    Estimate1DPtr _mult;
+    BinnedProfilePtr<int> _mult;
 
   };
 

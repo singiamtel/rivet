@@ -21,7 +21,8 @@ Title=Dalitz plot for $D^0\to K^0_SK^-\pi^+$
 XLabel=$m^2_{K^-\pi^+}$ [$\mathrm{GeV}^{2}$]
 YLabel=$m^2_{K^0_S\pi^+}$ [$\mathrm{GeV}^{2}$]
 ZLabel=$1/\Gamma{\rm d}^2 \Gamma/{\rm d}m^2_{K^-\pi^+}/{\rm d}m^2_{K^0_S\pi^+}$ [$\rm{GeV}^{-4}$]
-LogZ=1
+LogY=0
+LogZ=0
 END PLOT
 
 BEGIN PLOT /LHCB_2016_I1394391/d02-x01-y01
@@ -47,5 +48,6 @@ Title=Dalitz plot for $D^0\to K^0_SK^+\pi^-$
 XLabel=$m^2_{K^+\pi^-}$ [$\mathrm{GeV}^{2}$]
 YLabel=$m^2_{K^0_S\pi^-}$ [$\mathrm{GeV}^{2}$]
 ZLabel=$1/\Gamma{\rm d}^2 \Gamma/{\rm d}m^2_{K^+\pi^-}/{\rm d}m^2_{K^0_S\pi^-}$ [$\rm{GeV}^{-4}$]
-LogZ=1
+LogY=0
+LogZ=0
 END PLOT

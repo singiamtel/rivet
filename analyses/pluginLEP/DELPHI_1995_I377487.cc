@@ -81,6 +81,10 @@ namespace Rivet {
     void finalize() {
 
       scale(_h_K0_x,  1./sumOfWeights());
+      for(auto & b: _h_K0_x->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./_axis.width(idx));
+      }
       scale(_h_K0_xi, 1./sumOfWeights());
       scale(_h_Ks_x,  1./sumOfWeights());
     }

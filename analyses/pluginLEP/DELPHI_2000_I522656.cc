@@ -169,10 +169,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       for (size_t ix = 0; ix < _h_EEC->numBins(); ++ix) {
-        if (ix<2) scale(_h_thrust->bin(ix+1), 1./_h_bin->bin(ix).sumW());
-        scale(_h_EEC->bin(ix+1),  180./M_PI/_h_bin->bin(ix).sumW());
-        scale(_h_AEEC->bin(ix+1), 180./M_PI/_h_bin->bin(ix).sumW());
-        scale(_h_cone->bin(ix+1), 180./M_PI/_h_bin->bin(ix).sumW());
+        if (ix<2) scale(_h_thrust->bin(ix+1), 1./_h_bin->bin(ix+1).sumW());
+        scale(_h_EEC->bin(ix+1),  180./M_PI/_h_bin->bin(ix+1).sumW());
+        scale(_h_AEEC->bin(ix+1), 180./M_PI/_h_bin->bin(ix+1).sumW());
+        scale(_h_cone->bin(ix+1), 180./M_PI/_h_bin->bin(ix+1).sumW());
       }
 
       scale(_h_thrust_all, 1./sumOfWeights());

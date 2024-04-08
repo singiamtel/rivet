@@ -68,6 +68,10 @@ namespace Rivet {
 
       const double fact = sqr(sqrtS())/GeV2*crossSection()/microbarn/sumOfWeights();
       scale(_h_eta, fact);
+      for(auto & b: _h_eta->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./_axis.width(idx));
+      }
     }
 
     /// @}

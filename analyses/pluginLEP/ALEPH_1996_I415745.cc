@@ -208,15 +208,15 @@ namespace Rivet {
         normalize(_h_plus_cphi->bin(ix));
         normalize(_h_minus_cphi->bin(ix));
         Estimate1DPtr sTemp;
-        book(sTemp, "/TMP/a_cphi_"+to_string(ix));
-        asymm(_h_plus_cphi->bin(ix), _h_minus_cphi->bin(ix), sTemp);
+        book(sTemp, "/TMP/a_cphi_"+to_string(ix),10,0.,1.);
+        asymm(_h_plus_cphi->bin(ix+1), _h_minus_cphi->bin(ix+1), sTemp);
         pair<double,double> alpha = calcAsymmetry(sTemp,0);
         alpha.first  /=aLam;
         alpha.second /=aLam;
         h_trans->bin(ix+1).set(alpha.first, alpha.second);
       }
       Estimate1DPtr sLow;
-      book(sLow,"/TMP/a_cphi_low");
+      book(sLow,"/TMP/a_cphi_low",10,0.,1.);
       asymm(_h_plus_cphi_low, _h_minus_cphi_low, sLow);
       alpha = calcAsymmetry(sLow,0);
       alpha.first  /=aLam;
@@ -226,7 +226,7 @@ namespace Rivet {
       h_trans_low->bin(1).set(alpha.first, alpha.second);
 
       Estimate1DPtr sMid;
-      book(sMid,"/TMP/a_cphi_mid");
+      book(sMid,"/TMP/a_cphi_mid",10,0.,1.);
       asymm(_h_plus_cphi_mid,_h_minus_cphi_mid,sMid);
       alpha = calcAsymmetry(sMid,0);
       alpha.first  /=aLam;
@@ -236,7 +236,7 @@ namespace Rivet {
       h_trans_mid->bin(1).set(alpha.first, alpha.second);
 
       Estimate1DPtr sHigh;
-      book(sHigh,"/TMP/a_cphi_high");
+      book(sHigh,"/TMP/a_cphi_high",10,0.,1.);
       asymm(_h_plus_cphi_high,_h_minus_cphi_high,sHigh);
       alpha = calcAsymmetry(sHigh,0);
       alpha.first  /=aLam;
@@ -249,13 +249,13 @@ namespace Rivet {
       Estimate1DPtr h_asym;
       book(h_asym,3,1,1);
       for (size_t ix=0; ix < _h_plus_lam->numBins(); ++ix) {
-       	normalize(_h_plus_lam->bin(ix));
-       	normalize(_h_minus_lam->bin(ix));
-       	Estimate1DPtr sTemp;
-        book(sTemp, "/TMP/a_lam_"+to_string(ix));
-       	asymm(_h_plus_lam->bin(ix), _h_minus_lam->bin(ix), sTemp);
-       	pair<double,double> alpha = calcAsymmetry(sTemp,1);
-       	h_asym->bin(ix+1).set(alpha.first, alpha.second);
+        normalize(_h_plus_lam->bin(ix+1));
+        normalize(_h_minus_lam->bin(ix+1));
+        Estimate1DPtr sTemp;
+        book(sTemp, "/TMP/a_lam_"+to_string(ix), 20, -1., 1.);
+        asymm(_h_plus_lam->bin(ix+1), _h_minus_lam->bin(ix+1), sTemp);
+        pair<double,double> alpha = calcAsymmetry(sTemp,1);
+        h_asym->bin(ix+1).set(alpha.first, alpha.second);
       }
     }
 

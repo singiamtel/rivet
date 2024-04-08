@@ -193,9 +193,9 @@ namespace Rivet {
       for (unsigned int ix=0; ix<3; ++ix) {
         Estimate0DPtr multX, multY;
         book(multX, 1+ix, 1, 1);
-        book(multX, 1+ix, 1, 2);
+        book(multY, 1+ix, 1, 2);
         *multX = (*_c[ix][0]/ *_c[ix][2]);
-        *multY = (*_c[ix][0]/ *_c[ix][2]);
+        *multY = (*_c[ix][0]/ *_c[ix][1]);
         x = multX->val();
         dx = multX->errPos();
         y = multY->val();
@@ -214,7 +214,7 @@ namespace Rivet {
       Estimate1DPtr multM1, multM2;
       book(multM1, 4, 1, 1);
       multM1->bin(1).set(M1, dM1);
-      book(multM1, 4, 1, 2);
+      book(multM2, 4, 1, 2);
       multM2->bin(1).set(E2, dE2);
     }
 

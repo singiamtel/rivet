@@ -32,9 +32,9 @@ namespace Rivet {
       book(_h["z2_K"],  5, 1, 2);
       book(_h["z2_p"],  5, 1, 3);
 
-      tribook("_pi", 6, 1, 1);
-      tribook("_K",  6, 1, 2);
-      tribook("_p",  6, 1, 3);
+      tribook("pi", 6, 1, 1);
+      tribook("K",  6, 1, 2);
+      tribook("p",  6, 1, 3);
       tribook("2_K", 7, 1, 1);
       tribook("2_p", 7, 1, 2);
       tribook("3_p", 7, 1, 3);
@@ -54,7 +54,6 @@ namespace Rivet {
           _edges[item.first] = _nd["n_" + item.first]->xEdges();
         }
       }
-
       // First, veto on leptonic events by requiring at least 4 charged FS particles
       const FinalState& fs = apply<FinalState>(event, "FS");
       const size_t numParticles = fs.particles().size();
@@ -81,23 +80,23 @@ namespace Rivet {
           _h["z_pi"]->fill(xP);
           _h["z2_pi"]->fill(xP, xP);
           histfill("n_pi", xP, 100.);
-          histfill("d2_K", xP);
-          histfill("d2_p", xP);
-          histfill("d3_p", xP);
+          histfill("d_2_K", xP);
+          histfill("d_2_p", xP);
+          histfill("d_3_p", xP);
         }
         else if (id==321) {
           _h["z_K"]->fill(xP);
           _h["z2_K"]->fill(xP, xP);
           histfill("n_K",  xP, 100.);
-          histfill("n2_K", xP);
-          histfill("d3_p", xP);
+          histfill("n_2_K", xP);
+          histfill("d_3_p", xP);
         }
         else if (id==2212) {
           _h["z_p"]->fill(xP);
           _h["z2_p"]->fill(xP, xP);
           histfill("n_p",  xP, 100.);
-          histfill("n2_p", xP);
-          histfill("n3_p", xP);
+          histfill("n_2_p", xP);
+          histfill("n_3_p", xP);
         }
       }
     }
@@ -109,36 +108,43 @@ namespace Rivet {
         divide(_nd["n_"+item.first], _nd["d_"+item.first], item.second);
       }
     }
-
+    
     /// @}
 
     void histfill(const string& label, const double value, const double weight = 1.0) {
       string edge = "OTHER";
-      const string tag = label.substr(1);
-      const size_t idx = _axis.index(value);
-      if (tag == "_pi") {
-        if (0.035 <= value && value <= 0.07)  edge = _edges[label][idx-3];
-        if (0.09  <= value && value <= 0.11)  edge = _edges[label][idx-7];
-        if (0.16  <= value && value <= 0.7 )  edge = _edges[label][idx-11];
+      const string tag = label.substr(2);
+      size_t idx = _axis.index(value);
+      if (tag=="pi") {
+        if      (0.035 <= value && value <= 0.07)  idx -=  2;
+        else if (0.09  <= value && value <= 0.11)  idx -=  6;
+        else if (0.16  <= value && value <= 0.7 )  idx -= 10;
+        else idx=0;
       }
-      if (tag == "_K") {
-        if (0.035 <= value && value <= 0.07)  edge = _edges[label][idx-3];
-        if (0.09  <= value && value <= 0.14)  edge = _edges[label][idx-7];
-        if (0.25  <= value && value <= 0.7 )  edge = _edges[label][idx-12];
+      if (tag == "K") {
+        if      (0.035 <= value && value <= 0.07)  idx -=  2;
+        else if (0.09  <= value && value <= 0.14)  idx -=  6;
+        else if (0.25  <= value && value <= 0.7 )  idx -= 11;
+        else idx=0;
       }
-      if (tag == "_p" || tag == "2_p") {
-        if (0.035 <= value && value <= 0.11)  edge = _edges[label][idx-3];
-        if (0.25  <= value && value <= 0.7 )  edge = _edges[label][idx-11];
+      if (tag == "p" || tag == "2_p") {
+        if      (0.035 <= value && value <= 0.11)  idx -=  2;
+        else if (0.25  <= value && value <= 0.7 )  idx -= 10;
+        else idx=0;
       }
       if (tag == "2_K") {
-        if (0.025 <= value && value <= 0.11)  edge = _edges[label][idx];
-        if (0.25  <= value && value <= 0.7 )  edge = _edges[label][idx-8];
+        if      (value <= 0.07                  )  ;                 
+        else if (0.09 <= value && value <= 0.11 )  idx -=  4;           
+        else if (0.25  <= value && value <= 0.7 )  idx -= 12;
+        else idx=0;
       }
       if (tag == "3_p") {
-        if (0.035 <= value && value <= 0.07)  edge = _edges[label][idx-3];
-        if (0.09  <= value && value <= 0.11)  edge = _edges[label][idx-7];
-        if (0.25  <= value && value <= 0.7 )  edge = _edges[label][idx-15];
+        if      (0.035 <= value && value <= 0.07)  idx -=  2;
+        else if (0.09  <= value && value <= 0.11)  idx -=  6;
+        else if (0.25  <= value && value <= 0.7 )  idx -= 14;
+        else idx=0;
       }
+      if(idx && idx<= _edges[tag].size()) edge = _edges[tag][idx-1];
       _nd[label]->fill(edge, weight);
     }
 

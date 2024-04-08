@@ -147,7 +147,7 @@ namespace Rivet {
       scale(_h_totalB    ,1./ *_sumW);
       scale(_h_wideB     ,1./ *_sumW);
       scale(_h_y23       ,1./ *_sumW);
-      scale(_h_mult      ,200./ *_sumW);
+      scale(_h_mult      ,100./ *_sumW);
       scale(_h_pTin      ,1./ *_sumW);
       scale(_h_pTout     ,1./ *_sumW);
       scale(_h_y         ,1./ *_sumW);

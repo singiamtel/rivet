@@ -91,7 +91,8 @@ namespace Rivet {
       fastjet::JetDefinition durDef(fastjet::ee_kt_algorithm, fastjet::E_scheme);
       fastjet::ClusterSequence durham(pjs,durDef);
       double y_23 = durham.exclusive_ymerge_max(2);
-      string label = _h["durham"]->xEdges()[durhamAxis.index(y_23)-1];
+      size_t idx = durhamAxis.index(y_23);
+      string label = idx>0 && idx <= _h["durham"]->xEdges().size() ?  _h["durham"]->xEdges()[idx-1] : "OTHER";
       _h["durham"]->fill(label);
       // jade e-scheme
       fastjet::JetDefinition::Plugin *plugin = new fastjet::JadePlugin();
@@ -99,7 +100,8 @@ namespace Rivet {
       jadeEDef.set_recombination_scheme(fastjet::E_scheme);
       fastjet::ClusterSequence jadeE(pjs,jadeEDef);
       y_23 = jadeE.exclusive_ymerge_max(2);
-      label = _h["jade_E"]->xEdges()[jadeAxis.index(y_23)-1];
+      idx = jadeAxis.index(y_23);
+      label = idx>0 && idx <= _h["jade_E"]->xEdges().size() ?  _h["jade_E"]->xEdges()[idx-1] : "OTHER";
       _h["jade_E"]->fill(label);
       // jade p-scheme
       fastjet::P_scheme p_scheme;
@@ -107,7 +109,8 @@ namespace Rivet {
       jadePDef.set_recombiner(&p_scheme);
       fastjet::ClusterSequence jadeP(pjs,jadePDef);
       y_23 = jadeP.exclusive_ymerge_max(2);
-      label = _h["jade_P"]->xEdges()[jadeAxis.index(y_23)-1];
+      idx = jadeAxis.index(y_23);
+      label = idx>0 && idx <= _h["jade_P"]->xEdges().size() ?  _h["jade_P"]->xEdges()[idx-1] : "OTHER";
       _h["jade_P"]->fill(label);
       // jade E0-scheme
       fastjet::E0_scheme e0_scheme;
@@ -115,7 +118,8 @@ namespace Rivet {
       jadeE0Def.set_recombiner(&e0_scheme);
       fastjet::ClusterSequence jadeE0(pjs,jadeE0Def);
       y_23 = jadeE0.exclusive_ymerge_max(2);
-      label = _h["jade_E0"]->xEdges()[jadeAxis.index(y_23)-1];
+      idx = jadeAxis.index(y_23);
+      label = idx>0 && idx <= _h["jade_E0"]->xEdges().size() ?  _h["jade_E0"]->xEdges()[idx-1] : "OTHER";
       _h["jade_E0"]->fill(label);
     }
 
@@ -123,6 +127,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_h, 1./sumOfWeights());
+      for( auto & hist : _h) {
+        for(auto & b: hist.second->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(hist.first=="durham" ? 1./durhamAxis.width(idx) : 1./jadeAxis.width(idx));
+        }
+      }
     }
 
     /// @}

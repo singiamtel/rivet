@@ -54,13 +54,12 @@ namespace Rivet {
 
       for (const Particle& p : ufs.particles()) {
         const int id = p.abspid();
-        double xE = p.E()/meanBeamMom;
         switch (id) {
         case 22: // Photons
-          _histPhoton->fill(xE);
+          _histPhoton->fill(p.E());
           break;
         case 111: // Neutral pions
-          _histPi->fill(xE);
+          _histPi->fill(p.E());
           break;
         }
       }
@@ -70,8 +69,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_histPhoton, 1./sumOfWeights());
-      scale(_histPi    , 1./sumOfWeights());
+      scale(_histPhoton, sqrtS()/2./sumOfWeights());
+      scale(_histPi    , sqrtS()/2./sumOfWeights());
     }
 
     /// @}

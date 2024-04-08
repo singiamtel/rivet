@@ -127,6 +127,12 @@ namespace Rivet {
       scale(_h["rap_all"], 1./sumOfWeights());
       scale(_h["rap_light"], 1./ *_wLight);
       scale(_h["rap_charm"], 1./ *_wCharm);
+      for( auto & hist : _h) {
+        for(auto & b: hist.second->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[hist.first].width(idx));
+        }
+      }
     }
 
     /// @}

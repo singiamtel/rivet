@@ -28,6 +28,8 @@ namespace Rivet {
       book(_h_B_Dmunu,     1, 1, 2);
       book(_h_B_Deplusnu,  2, 1, 1);
       book(_h_B_Dmuplusnu, 2, 1, 2);
+      book(_wB0   ,"/TMP/wB0"   );
+      book(_wBPlus,"/TMP/wBPlus");
     }
 
     // Check for explicit decay into pdgids
@@ -52,11 +54,13 @@ namespace Rivet {
     void analyze(const Event& event) {
       // Get B0 Mesons
       for(const Particle& p : apply<UnstableParticles>(event, "UFS").particles(Cuts::pid==PID::B0)) {
+        _wB0->fill();
         if (isSemileptonicDecay(p, {PID::DMINUS,PID::POSITRON,PID::NU_E})) _h_B_Denu->fill( recoilW(p, PID::DMINUS));
         if (isSemileptonicDecay(p, {PID::DMINUS,PID::ANTIMUON,PID::NU_MU})) _h_B_Dmunu->fill(recoilW(p, PID::DMINUS));
       }
       // Get B+ Mesons
       for(const Particle& p : apply<UnstableParticles>(event, "UFS").particles(Cuts::pid==PID::BPLUS)) {
+        _wBPlus->fill();
         if (isSemileptonicDecay(p, {PID::D0BAR,PID::POSITRON,PID::NU_E})) _h_B_Deplusnu->fill( recoilW(p, PID::D0BAR));
         if (isSemileptonicDecay(p, {PID::D0BAR,PID::ANTIMUON,PID::NU_MU})) _h_B_Dmuplusnu->fill(recoilW(p, PID::D0BAR));
       }
@@ -65,12 +69,12 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      normalize(_h_B_Denu);
-      normalize(_h_B_Dmunu);
-      normalize(_h_B_Deplusnu);
-      normalize(_h_B_Dmuplusnu);
-
+      const double hbar=6.582119569e-25;
+      const double t0=1.519e-12,tPlus=1.638e-12;
+      scale(_h_B_Denu     ,1e15*hbar/t0   / *_wB0);     
+      scale(_h_B_Dmunu    ,1e15*hbar/t0   / *_wB0);    
+      scale(_h_B_Deplusnu ,1e15*hbar/tPlus/ *_wBPlus); 
+      scale(_h_B_Dmuplusnu,1e15*hbar/tPlus/ *_wBPlus);
     }
 
     /// @}
@@ -81,6 +85,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
+    CounterPtr _wB0,_wBPlus;
     Histo1DPtr _h_B_Denu;
     Histo1DPtr _h_B_Dmunu;
     Histo1DPtr _h_B_Deplusnu;

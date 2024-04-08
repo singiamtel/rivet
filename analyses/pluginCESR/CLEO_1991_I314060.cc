@@ -110,24 +110,26 @@ namespace Rivet {
       book(h_rho,   1,1,2);
       Estimate1DPtr h_eta;
       book(h_eta,   1,1,3);
+      unsigned int ix=0;
       for (auto& b : _h_ctheta->bins()) {
         // normalize
         normalize(b);
         // alpha
         pair<double,pair<double,double> > alpha = calcAlpha(b);
-        h_alpha->bin(1).set(alpha.first, alpha.second);
+        h_alpha->bin(1+ix).set(alpha.first, alpha.second);
         // rho
         const double rho = (1.+alpha.first)/(3.+alpha.first);
         pair<double,double> rho_error;
         rho_error.first  = 2.*alpha.second.first /sqr(3.+alpha.first);
         rho_error.second = 2.*alpha.second.second/sqr(3.+alpha.first);
-        h_rho->bin(1).set(rho, rho_error);
+        h_rho->bin(1+ix).set(rho, rho_error);
         // eta
         const double eta = alpha.first/(3.+alpha.first);
         pair<double,double> eta_error;
         eta_error.first  = 3.*alpha.second.first /sqr(3.+alpha.first);
         eta_error.second = 3.*alpha.second.second/sqr(3.+alpha.first);
-        h_eta->bin(1).set(eta, eta_error);
+        h_eta->bin(1+ix).set(eta, eta_error);
+        ++ix;
       }
     }
 

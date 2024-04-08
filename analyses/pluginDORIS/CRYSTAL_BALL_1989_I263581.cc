@@ -65,7 +65,7 @@ namespace Rivet {
 
     string map2string(const double val) const {
       const size_t idx = _axis.index(val);
-      if (val || val <= _edges.size())  return _edges[idx-1];
+      if (idx && idx <= _edges.size())  return _edges[idx-1];
       return "OTHER";
     }
 
@@ -73,7 +73,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // normalize to number of B decays
-      scale(_h_all, 1./ *_nB);
+      scale(_h_all, 1./0.05/ *_nB);
     }
 
     /// @}
@@ -83,7 +83,7 @@ namespace Rivet {
     /// @{
     BinnedHistoPtr<string> _h_all;
     CounterPtr _nB;
-    YODA::Axis<double> _axis{48, 0.6, 3.0};
+    YODA::Axis<double> _axis = YODA::Axis<double>(48, 0.6, 3.0);
     vector<string> _edges;
     /// @}
 

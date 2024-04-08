@@ -84,14 +84,22 @@ namespace Rivet {
 
     string map2string(const double val, const size_t axis) const {
       const size_t idx = axes[axis].index(val);
-      if (idx && idx <= edges[axis].size())  return edges[axis][idx];
+      if (idx && idx <= edges[axis].size())  return edges[axis][idx-1];
       return "OTHER";
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_histEEC,  1.0/ *_weightSum);
+      for(auto & b: _histEEC->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./axes[0].width(idx));
+      }
       scale(_histAEEC, 1.0/ *_weightSum);
+      for(auto & b: _histAEEC->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./axes[1].width(idx));
+      }
     }
 
     /// @}

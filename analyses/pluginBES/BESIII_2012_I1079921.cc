@@ -36,7 +36,6 @@ namespace Rivet {
 	book(_h[0],2,1,1);
       }
       else {
-	cerr << "testing problem " << sqrtS() << "\n";
 	throw Error("Unexpected sqrtS ! Only 3.1 and 3.686 GeV are supported");
       }
     }

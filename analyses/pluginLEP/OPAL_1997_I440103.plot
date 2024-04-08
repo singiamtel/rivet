@@ -3,7 +3,7 @@ LogY=0
 END PLOT
 
 BEGIN PLOT /OPAL_1997_I440103/d01
-XCustomMajorTicks=1	All~$\phi$     2	Primary~$\phi$	3	Helicity-quark~Frame
+XCustomMajorTicks=1	All~$\phi$	2	Primary~$\phi$	3	Helicity-quark~Frame
 END PLOT
 
 

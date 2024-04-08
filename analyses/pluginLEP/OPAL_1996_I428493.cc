@@ -106,13 +106,13 @@ namespace Rivet {
       scale(_h_ctheta1,1./_c_hadron->val());
       normalize(_h_ctheta2);
       pair<double,double> rho = calcRho(_h_ctheta2);
-      Estimate1DPtr h_rho;
+      Estimate0DPtr h_rho;
       book(h_rho,2,1,1);
-      h_rho->bin(1).set(rho.first, rho.second);
+      h_rho->set(rho.first, rho.second);
       Estimate0DPtr h1;
       book(h1, 1,1,1);
       // no of B*/B+B*
-      *h1 = *_c_bStar / (*_c_bStar + *_c_B);
+      divide(*_c_bStar,*_c_bStar + *_c_B, h1);
     }
 
     /// @}

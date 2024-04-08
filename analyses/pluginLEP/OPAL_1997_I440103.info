@@ -14,7 +14,7 @@ NeedCrossSection: no
 Beams: [e-, e+]
 Energies: 91.2
 Description:
-  'Mewasurement of the polarization of  $\phi$, $D^{*+}$ and $B^*$ mesons at LEP1'
+  'Measurement of the polarization of  $\phi$, $D^{*+}$ and $B^*$ mesons at LEP1.'
 Keywords: []
 BibKey: Ackerstaff:1997kd
 BibTeX: '@article{Ackerstaff:1997kd,

@@ -81,8 +81,16 @@ namespace Rivet {
     void finalize() {
       scale(_h_kaon_p  ,1./sumOfWeights());
       scale(_h_kaon_x  ,1./sumOfWeights());
+      for(auto & b: _h_kaon_x->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./_axis[0].width(idx));
+      }
       scale(_h_proton_p,1./sumOfWeights());
       scale(_h_proton_x,1./sumOfWeights());
+      for(auto & b: _h_proton_x->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./_axis[1].width(idx));
+      }
     }
 
     /// @}

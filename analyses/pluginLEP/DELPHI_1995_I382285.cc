@@ -86,7 +86,7 @@ namespace Rivet {
        	normalize(_h_Kp);
        	normalize(_h_Km);
        	Estimate1DPtr sK;
-        book(sK,"a_K");
+        book(sK,"a_K",20,-1.,1.);
        	asymm(_h_Kp,_h_Km,sK);
         pair<double,double> alpha = calcAsymmetry(sK);
         BinnedEstimatePtr<string> h_K;
@@ -96,7 +96,7 @@ namespace Rivet {
        	normalize(_h_lm);
        	normalize(_h_lb);
        	Estimate1DPtr sLam;
-        book(sLam,"a_Lam");
+        book(sLam,"a_Lam",20,-1.,1.);
        	asymm(_h_lm,_h_lb,sLam);
         alpha = calcAsymmetry(sLam);
         BinnedEstimatePtr<string> h_lam;

@@ -21,12 +21,9 @@ namespace Rivet {
       book(_weightSum_Ups1, "TMP/weightSum_Ups1");
       book(_weightSum_Ups2, "TMP/weightSum_Ups2");
 
-      for ( auto i : {0,1,2} ) {
-        if ( i < 2 )
-          book(_count_etaPrime_highZ[i], "TMP/count_etaPrime_highz_" + to_str(i));
-        book(_count_etaPrime_allZ[i], "TMP/count_etaPrime_allz_" + to_str(i));
-        book(_count_f0[i], "TMP/count_f0_" + to_str(i));
-      }
+      book(_count_etaPrime_highZ, 1,1,1);
+      book(_count_etaPrime_allZ , 1,1,2);
+      book(_count_f0            , 5,1,1);
 
       book(_hist_cont_f0 ,2, 1, 1);
       book(_hist_Ups1_f0 ,3, 1, 1);
@@ -48,91 +45,79 @@ namespace Rivet {
           const double beta = p.p3().mod() / p.E();
           if (id == 9010221) {
             _hist_cont_f0->fill(xp, 1./beta);
-	    _count_f0[2]->fill();
+            _count_f0->fill(string("10.45"));
           } else if (id == 331) {
-            if (xp > 0.35) _count_etaPrime_highZ[1]->fill();
-	    _count_etaPrime_allZ[2]->fill();
+            if (xp > 0.35) _count_etaPrime_highZ->fill(string("9.36 - 10.45"));
+            _count_etaPrime_allZ->fill(string("9.36 - 10.45"));
           }
-	}
+        }
       }
       // Upsilon(s) found
       else {
         for (const Particle& ups : upsilons) {
           const int parentId = ups.pid();
-	  if(parentId==553) {
-	    _weightSum_Ups1->fill();
-	  }
-	  else {
-	    _weightSum_Ups2->fill();
-	  }
+          if(parentId==553) {
+            _weightSum_Ups1->fill();
+          }
+          else {
+            _weightSum_Ups2->fill();
+          }
           Particles unstable;
           // Find the decay products we want
           findDecayProducts(ups, unstable);
-	  // boost to rest frame (if required)
+          // boost to rest frame (if required)
           LorentzTransform cms_boost;
           if (ups.p3().mod() > 1*MeV)
             cms_boost = LorentzTransform::mkFrameTransformFromBeta(ups.momentum().betaVec());
           const double mass = ups.mass();
-	  // loop over decay products
+          // loop over decay products
           for(const Particle& p : unstable) {
             const int id = p.pid();
             const FourMomentum p2 = cms_boost.transform(p.momentum());
             const double xp = 2.*p2.E()/mass;
             const double beta = p2.p3().mod()/p2.E();
             if (id == 9010221) {
-	      if(parentId == 553 ) {
-		_hist_Ups1_f0->fill(xp, 1./beta);
-		_count_f0[0]->fill();
-	      }
-	      else {
-		_hist_Ups2_f0->fill(xp, 1./beta);
-		_count_f0[1]->fill();
-	      }
-	    }
-	    else if ( id == 331 ) {
-	      if (parentId == 553) {
-		if (xp > 0.35) _count_etaPrime_highZ[0]->fill();
-		_count_etaPrime_allZ[0]->fill();
-	      }
-	      else {
-		_count_etaPrime_allZ[1]->fill();
-	      }
-	    }
-	  }
-	}
+              if(parentId == 553 ) {
+        	_hist_Ups1_f0->fill(xp, 1./beta);
+        	_count_f0->fill(string("9.46"));
+              }
+              else {
+        	_hist_Ups2_f0->fill(xp, 1./beta);
+        	_count_f0->fill(string("10.02"));
+              }
+            }
+            else if ( id == 331 ) {
+              if (parentId == 553) {
+        	if (xp > 0.35) _count_etaPrime_highZ->fill(string("9.46"));
+        	_count_etaPrime_allZ->fill(string("9.46"));
+              }
+              else {
+        	_count_etaPrime_allZ->fill(string("10.02"));
+              }
+            }
+          }
+        }
       }
     }
 
     void finalize() {
-      // High-Z eta' multiplicity
-      Estimate1DPtr s111;
-      book(s111, 1, 1, 1);
-      if (_weightSum_Ups1->val() > 0) // Point at 9.460
-        s111->bin(1).set(_count_etaPrime_highZ[0]->val() / _weightSum_Ups1->val(), 0);
-      if (_weightSum_cont->val() > 0) // Point at 9.905
-        s111->bin(2).set(_count_etaPrime_highZ[1]->val() / _weightSum_cont->val(), 0);
-
-      // All-Z eta' multiplicity
-      Estimate1DPtr s112;
-      book(s112, 1, 1, 2);
-      if (_weightSum_Ups1->val() > 0) // Point at 9.460
-        s112->bin(1).set(_count_etaPrime_allZ[0]->val() / _weightSum_Ups1->val(), 0);
-      if (_weightSum_cont->val() > 0) // Point at 9.905
-        s112->bin(2).set(_count_etaPrime_allZ[2]->val() / _weightSum_cont->val(), 0);
-      if (_weightSum_Ups2->val() > 0) // Point at 10.02
-        s112->bin(3).set(_count_etaPrime_allZ[1]->val() / _weightSum_Ups2->val(), 0);
-
-
-      // f0 multiplicity
-      Estimate1DPtr s511;
-      book(s511, 5, 1, 1);
-      if (_weightSum_Ups1->val() > 0) // Point at 9.46
-        s511->bin(1).set(_count_f0[0]->val() / _weightSum_Ups1->val(), 0);
-      if (_weightSum_Ups2->val() > 0) // Point at 10.02
-        s511->bin(1).set(_count_f0[1]->val() / _weightSum_Ups2->val(), 0);
-      if (_weightSum_cont->val() > 0) // Point at 10.45
-        s511->bin(1).set(_count_f0[2]->val() / _weightSum_cont->val(), 0);
-
+      // Point at 9.905
+      if (_weightSum_cont->val() > 0) { 
+        _count_etaPrime_highZ->binAt(string("9.36 - 10.45")).scaleW(1./_weightSum_cont->val());
+        _count_etaPrime_allZ ->binAt(string("9.36 - 10.45")).scaleW(1./_weightSum_cont->val());
+        _count_f0            ->binAt(       string("10.45")).scaleW(1./_weightSum_cont->val());
+      }
+      // Point at 9.460
+      if (_weightSum_Ups1->val() > 0) {  
+        _count_etaPrime_highZ->binAt(string("9.46")).scaleW(1./_weightSum_Ups1->val());
+        _count_etaPrime_allZ ->binAt(string("9.46")).scaleW(1./_weightSum_Ups1->val());
+        _count_f0            ->binAt(string("9.46")).scaleW(1./_weightSum_Ups1->val());
+      }
+      // Point at 10.02
+      if (_weightSum_Ups2->val() > 0) {
+        _count_etaPrime_allZ->binAt(string("10.02")).scaleW(1./_weightSum_Ups2->val());
+        _count_f0           ->binAt(string("10.02")).scaleW(1./_weightSum_Ups2->val());
+      }
       // Scale histos
       if (_weightSum_cont->val() > 0.) scale(_hist_cont_f0, 1./ *_weightSum_cont);
       if (_weightSum_Ups1->val() > 0.) scale(_hist_Ups1_f0, 1./ *_weightSum_Ups1);
@@ -144,7 +129,7 @@ namespace Rivet {
 
     /// @name Counters
     /// @{
-    array<CounterPtr,3> _count_etaPrime_highZ, _count_etaPrime_allZ, _count_f0;
+    BinnedHistoPtr<string> _count_etaPrime_highZ, _count_etaPrime_allZ, _count_f0;
     CounterPtr _weightSum_cont,_weightSum_Ups1,_weightSum_Ups2;
     /// @}
 

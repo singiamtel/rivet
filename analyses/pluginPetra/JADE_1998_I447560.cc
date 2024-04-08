@@ -108,7 +108,7 @@ namespace Rivet {
       normalize(_h);
       for (auto& item : _h) {
         for (auto& b : item.second->bins()) {
-          b.scaleW(_axes[item.first].width(b.index()));
+          b.scaleW(1./_axes[item.first].width(b.index()));
         }
       }
     }

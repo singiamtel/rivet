@@ -182,15 +182,15 @@ namespace Rivet {
       smartfill("oblateness", thrust.oblateness() );
       smartfill("sphericity", sphericity.sphericity());
       smartfill("planarity", sphericity.planarity() );
-      smartfill("aplanarity", sphericity.aplanarity());
+      if(isDisc) smartfill("aplanarity", sphericity.aplanarity());
       smartfill("heavy_jet_mass", hemi.scaledM2high());
       smartfill("light_jet_mass", hemi.scaledM2low() );
       smartfill("diff_jet_mass", hemi.scaledM2diff());
       smartfill("wide_broading", hemi.Bmax());
-      smartfill("narrow_broading", hemi.Bmin());
+      if(!isDisc) smartfill("narrow_broading", hemi.Bmin());
       smartfill("total_broading", hemi.Bsum());
       smartfill("diff_broading", hemi.Bdiff());
-      smartfill("total_jet_mass", hemi.scaledM2low()+hemi.scaledM2high());
+      if(!isDisc) smartfill("total_jet_mass", hemi.scaledM2low()+hemi.scaledM2high());
       // E and p scheme jet masses
       Vector3 axis = thrust.thrustAxis();
       FourMomentum p4WithE, p4AgainstE;
@@ -225,17 +225,17 @@ namespace Rivet {
       const double mass2Against_E = p4AgainstE.mass2()/sqr(Evis);
       // fill the histograms
       smartfill("heavy_jet_mass_E", max(mass2With_E,mass2Against_E));
-      smartfill("total_jet_mass_E", mass2With_E+mass2Against_E);
+      if(!isDisc) smartfill("total_jet_mass_E", mass2With_E+mass2Against_E);
       // pscheme
       const double mass2With_P    = p4WithP.mass2()/sqr(Evis);
       const double mass2Against_P = p4AgainstP.mass2()/sqr(Evis);
       // fill the histograms
-      smartfill("heavy_jet_mass_P", max(mass2With_P, mass2Against_P));
+      if(isDisc) smartfill("heavy_jet_mass_P", max(mass2With_P, mass2Against_P));
 
       MSG_DEBUG("Calculating Parisi params");
       const ParisiTensor& parisi = apply<ParisiTensor>(event, "Parisi");
       smartfill("CParam", parisi.C());
-      smartfill("DParam", parisi.D());
+      if(isDisc) smartfill("DParam", parisi.D());
 
       // single particle distributions
       const FinalState& fs = apply<FinalState>(event, "FS");
@@ -291,6 +291,10 @@ namespace Rivet {
             item.first == "pTIn" ||
             item.first == "pTOut")  scale(item.second, 1./sumOfWeights());
         else   normalize(item.second);
+        for(auto & b: item.second->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axis[item.first].width(idx));
+        }
       }
     }
 

@@ -68,9 +68,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // scale by D0 lifetime = 410.1e-6 ps (from PDG 2014 used in paper)
-      // and bin width 0.1 K and 0.2 pi
-      scale(_h_q2_K , 1./dbl(*nD0)/410.1e-6*0.1);
-      scale(_h_q2_pi, 1./dbl(*nD0)/410.1e-6*0.2);
+      scale(_h_q2_K , 1./dbl(*nD0)/410.1e-6);
+      scale(_h_q2_pi, 1./dbl(*nD0)/410.1e-6);
     }
 
     /// @}

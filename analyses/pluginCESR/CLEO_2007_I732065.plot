@@ -62,9 +62,9 @@ YLabel=$1/\Gamma\mathrm{d} \Gamma/\mathrm{d}m^2_{\pi^\pm K^0_S}$ [$\mathrm{GeV}^
 LogY=0
 END PLOT
 BEGIN PLOT /CLEO_2007_I732065/d03-x01-y03
-Title=$K^\mpK^0_S$ mass distribution in $\chi_{c1}\to K^\mp\pi^\pm K^0_S$
-XLabel=$m^2_{K^\mpK^0_S}$ [$\mathrm{GeV}^2$]
-YLabel=$1/\Gamma\mathrm{d} \Gamma/\mathrm{d}m^2_{K^\mpK^0_S}$ [$\mathrm{GeV}^{-2}$]
+Title=$K^\mp K^0_S$ mass distribution in $\chi_{c1}\to K^\mp\pi^\pm K^0_S$
+XLabel=$m^2_{K^\mp K^0_S}$ [$\mathrm{GeV}^2$]
+YLabel=$1/\Gamma\mathrm{d} \Gamma/\mathrm{d}m^2_{K^\mp K^0_S}$ [$\mathrm{GeV}^{-2}$]
 LogY=0
 END PLOT
 BEGIN PLOT /CLEO_2007_I732065/dalitz_3
