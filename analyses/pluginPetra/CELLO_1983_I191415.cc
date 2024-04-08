@@ -107,6 +107,12 @@ namespace Rivet {
 
       const double fact = sqr(sqrtS())/GeV2*crossSection()/microbarn/sumOfWeights();
       scale(_h, fact);
+      for( auto & hist : _h) {
+        for(auto & b: hist.second->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[hist.first].width(idx));
+        }
+      }
 
     }
 

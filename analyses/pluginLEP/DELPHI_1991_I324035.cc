@@ -134,7 +134,7 @@ namespace Rivet {
       normalize( _h_all_10  , 1000.);
       normalize( _h_all_15  , 1000.);
       normalize( _h_all_20  , 1000.);
-      normalize( _h_all_all , 2000.);
+      normalize( _h_all_all , 1000.);
       normalize( _h_hemi_05 , 1000.);
       normalize( _h_hemi_10 , 1000.);
       normalize( _h_hemi_15 , 1000.);

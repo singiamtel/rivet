@@ -53,13 +53,13 @@ namespace Rivet {
         _axes["pi"] = YODA::Axis<double>({0.325, 0.375, 0.425, 0.5, 0.575, 0.7, 0.9, 1.1, 1.3, 1.5});
         _axes["K"]  = YODA::Axis<double>({0.4, 0.5, 0.575, 0.7, 0.9, 1.1});
         _axes["p"]  = YODA::Axis<double>({0.5, 0.7, 1.2325, 2.0975});
-        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.675, 0.925});
+        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.575, 0.7, 0.9, 1.1});
       }
       else {
         _axes["pi"] = YODA::Axis<double>({0.3, 0.4, 0.5, 0.675, 1.05, 1.55});
         _axes["K"]  = YODA::Axis<double>({0.4, 0.5, 0.675, 0.925});
         _axes["p"]  = YODA::Axis<double>({0.475, 0.725, 1.2125, 1.9375});
-        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.575, 0.7, 0.9, 1.1});
+        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.675, 0.925});
       }
       _axes["rp"]  = YODA::Axis<double>({0.475, 0.725, 1.0, 2.2});
     }
@@ -78,7 +78,7 @@ namespace Rivet {
           _edges[item.first] = item.second->xEdges();
         }
         for (const auto& item : _r) {
-          _edges["r"+item.first] = item.second->xEdges();
+          _edges["r"+item.first] = _h["n_"+item.first]->xEdges();
         }
       }
       // First, veto on leptonic events by requiring at least 4 charged FS particles
@@ -104,20 +104,19 @@ namespace Rivet {
         fillND("d_K", modp);
         fillND("d_p", modp);
         double beta = modp/p.E();
-        double xE = p.E()/meanBeamMom;
         if (abs(p.pid())==211) {
           fillhist("p_pi", modp);
-          fillhist("x_pi", xE, 1./beta);
+          fillhist("x_pi", modp, 1./beta);
           fillND("n_pi", modp);
         }
         else if (abs(p.pid())==321) {
           fillhist("p_K", modp);
-          fillhist("x_K", xE, 1./beta);
+          fillhist("x_K", modp, 1./beta);
           fillND("n_K", modp);
         }
         else if (abs(p.pid())==2212) {
           fillhist("p_p", modp);
-          fillhist("x_p", xE, 1./beta);
+          fillhist("x_p", modp, 1./beta);
           fillND("n_p", modp);
         }
       }
@@ -127,7 +126,7 @@ namespace Rivet {
       string edge = "OTHER";
       const string tag = label.substr(2);
       const size_t idx = _axes[tag].index(value);
-      if (idx && idx <= _edges[label].size())  edge = _edges[label][idx];
+      if (idx && idx <= _edges[label].size())  edge = _edges[label][idx-1];
       _h[label]->fill(edge, weight);
     }
 
@@ -135,7 +134,7 @@ namespace Rivet {
       string edge = "OTHER";
       const string tag = label.substr(2);
       const size_t idx = _axes[(tag == "p")? "rp" : "r"].index(value);
-      if (idx && idx <= _edges["r"+tag].size())  edge = _edges[label][idx];
+      if (idx && idx <= _edges["r"+tag].size())  edge = _edges["r"+tag][idx-1];
       _h[label]->fill(edge);
     }
 
@@ -143,12 +142,20 @@ namespace Rivet {
     void finalize() {
 
       scale(_h["p_pi"], crossSection()/nanobarn/sumOfWeights());
-      scale(_h["x_pi"], sqr(sqs)*crossSection()/microbarn/sumOfWeights());
+      scale(_h["x_pi"], sqr(sqs)*crossSection()/microbarn/sumOfWeights()*sqs/2.);
       scale(_h["p_K"],  crossSection()/nanobarn/sumOfWeights());
-      scale(_h["x_K"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights());
+      scale(_h["x_K"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights()*sqs/2.);
       scale(_h["p_p"],  crossSection()/nanobarn/sumOfWeights());
-      scale(_h["x_p"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights());
-
+      scale(_h["x_p"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights()*sqs/2.);
+      vector<string> s1={"pi","K","p"}, s2= {"x_","p_"};
+      for ( auto & key : s1 ) {
+        for(auto & key2 : s2) {
+          for(auto & b: _h[key2+key]->bins()) {
+            const size_t idx = b.index();
+            b.scaleW(1./_axes[key].width(idx));
+          }
+        }
+      }
       for (auto& item : _r) {
         divide(_h["n_"+item.first], _h["d_"+item.first], item.second);
       }

@@ -72,6 +72,7 @@ namespace Rivet {
 	  _h_K0Kp->fill(mplus);
 	  _h_K0Km->fill(mminus);
 	  _h_KpKm->fill(mKK);
+	  _dalitz[1]->fill(mplus,mKK); 
 	}
       }
     }

@@ -56,6 +56,10 @@ namespace Rivet {
 
       normalize(_h_theta,33.6,false); // normalize to data
       scale(_h_x, crossSection()/microbarn/sumOfWeights()*sqr(sqrtS()));
+      for(auto & b: _h_theta->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./_axis.width(idx));
+      }
 
     }
 

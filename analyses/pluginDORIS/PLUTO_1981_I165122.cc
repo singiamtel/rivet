@@ -135,9 +135,12 @@ namespace Rivet {
       // energy dependent
       for(unsigned int ix=1;ix<4;++ix) {
         CounterPtr denom = (ix==1 || ix==3 ) ? _c_muons : _c_hadrons;
-        Estimate0D R = *_c_kaons/ *denom;
-        const double rval = R.val();
-        const double rerr = R.errPos();
+        double rval = 0., rerr=0.;
+        if(denom->numEntries()>0) {
+          Estimate0D R = *_c_kaons/ *denom;
+          rval = R.val();
+          rerr = R.errPos();
+        }
         Estimate1DPtr mult;
         book(mult,ix, 1, 1);
         for (auto& b : mult->bins()) {

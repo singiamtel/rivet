@@ -56,7 +56,7 @@ XLabel=$m^2_{K^0_S\pi^\pm}$ [$\mathrm{GeV}^{2}$]
 YLabel=$1/\Gamma\mathrm{d} \Gamma/\mathrm{d}m^2_{K^0_S\pi^\pm}$ [$\mathrm{GeV}^{-2}$]
 LogY=0
 END PLOT
-BEGIN PLOT /BABAR_2017_I1512302/dalitz_dalitz_K0Kppim
+BEGIN PLOT /BABAR_2017_I1512302/dalitz_K0Kppim
 Title=Dalitz plot for  $J/\psi\to K^0_SK^\pm\pi^\mp$
 XLabel=$m^2_{K^\pm\pi^\mp}$ [$\mathrm{GeV}^2$]
 YLabel=$m^2_{K^0_S\pi^\pm}$ [$\mathrm{GeV}^2$]

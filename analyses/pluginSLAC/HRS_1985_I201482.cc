@@ -151,6 +151,12 @@ namespace Rivet {
       for (size_t i=0; i<3; ++i) {
         scale(_histZJet[i], 0.5/ *_wSum2);
       }
+      for(unsigned int ix=0;ix<2;++ix) {
+        for(auto & b: _histRap[ix]->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[ix].width(idx));
+        }
+      }
     }
 
     /// @}

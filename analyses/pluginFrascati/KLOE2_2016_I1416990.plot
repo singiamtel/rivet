@@ -3,6 +3,7 @@ Title=Dalitz plot for $\eta\to\pi^+\pi^-\pi^0$
 XLabel=$X$
 YLabel=$Y$
 ZLabel=$N/N_0$
+LogY=0
 LogZ=0
 END PLOT
 BEGIN PLOT /KLOE2_2016_I1416990/d02

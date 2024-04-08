@@ -26,12 +26,12 @@ namespace Rivet {
       book(_h_ups1_pi    ,4, 1, 1);
       book(_h_cont_eta[0],5, 1, 1);
       book(_h_cont_eta[1],5, 1, 2);
-      book(_h_ups1_eta ,6, 1, 1);
+      book(_h_ups1_eta   ,6, 1, 1);
       // counters
-      book(_n_Pi[0] , 1, 1, 1);
-      book(_n_Pi[1] , 1, 1, 2);
-      book(_n_Eta[0], 2, 1, 1);
-      book(_n_Eta[1], 2, 1, 2);
+      book(_n_Cont[0], 1, 1, 1);
+      book(_n_Cont[1], 1, 1, 2);
+      book(_n_Ups[0] , 2, 1, 1);
+      book(_n_Ups[1] , 2, 1, 2);
       book(_weightSum_cont,"/TMP/weightSum_cont");
       book(_weightSum_Ups1,"/TMP/weightSum_Ups1");
     }
@@ -63,13 +63,13 @@ namespace Rivet {
           const double xp = 2.*p.E()/sqrtS();
           const double beta = p.p3().mod() / p.E();
           if (id==111) {
-            _n_Pi[0]->fill(sqrtS()/GeV);
+            _n_Cont[0]->fill();
             for (unsigned int ix=0; ix<2; ++ix) {
               _h_cont_pi[ix]->fill(xp,1./beta);
             }
           }
           else {
-            _n_Eta[0]->fill(Ecm);
+            _n_Cont[1]->fill();
             for (unsigned int ix=0; ix<2; ++ix) {
               _h_cont_eta[ix]->fill(xp,1./beta);
             }
@@ -95,11 +95,11 @@ namespace Rivet {
               const double xp = 2.*p2.E()/mass;
               const double beta = p2.p3().mod()/p2.E();
               if (id==111) {
-                _n_Pi[1]->fill(sqrtS()/GeV);
+                _n_Ups[0]->fill(Ecm);
                 _h_ups1_pi->fill(xp,1./beta);
               }
               else if (id==221) {
-                _n_Eta[1]->fill(Ecm);
+                _n_Ups[1]->fill(Ecm);
                 _h_ups1_eta->fill(xp,1./beta);
             }
           }
@@ -116,14 +116,14 @@ namespace Rivet {
         scale(_h_cont_pi[1] , sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
         scale(_h_cont_eta[0], 1./ *_weightSum_cont);
         scale(_h_cont_eta[1], sqr(sqrtS())*crossSection()/microbarn/sumOfWeights());
-      	scale(_n_Pi[0],  1./ *_weightSum_cont);
-      	scale(_n_Eta[0], 1./ *_weightSum_cont);
+      	scale(_n_Cont[0],  1./ *_weightSum_cont);
+      	scale(_n_Cont[1],  1./ *_weightSum_cont);
       }
       if (_weightSum_Ups1->val() > 0.) {
         scale(_h_ups1_pi, 1./ *_weightSum_Ups1);
         scale(_h_ups1_eta, 1./ *_weightSum_Ups1);
-      	scale(_n_Pi[1],  1./ *_weightSum_Ups1);
-      	scale(_n_Eta[1], 1./ *_weightSum_Ups1);
+      	scale(_n_Ups[0],  1./ *_weightSum_Ups1);
+      	scale(_n_Ups[1], 1./ *_weightSum_Ups1);
       }
     }
 
@@ -134,8 +134,8 @@ namespace Rivet {
     /// @{
     Histo1DPtr _h_cont_pi[2] , _h_ups1_pi;
     Histo1DPtr _h_cont_eta[2], _h_ups1_eta;
-    BinnedHistoPtr<string> _n_Eta[2];
-    CounterPtr _n_Pi[2];
+    BinnedHistoPtr<string> _n_Ups[2];
+    CounterPtr _n_Cont[2];
     CounterPtr _weightSum_cont,_weightSum_Ups1;
     const string Ecm = "9.8";
     /// @}

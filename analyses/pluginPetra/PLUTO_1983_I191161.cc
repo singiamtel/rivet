@@ -34,15 +34,23 @@ namespace Rivet {
       declare(sphericity, "Sphericity");
 
       sqs = 1.0;
-      if (isCompatibleWithSqrtS(7.7)) sqs = 7.7;
-      else if (isCompatibleWithSqrtS(9.4)) sqs = 9.4;
-      else if (isCompatibleWithSqrtS(12.)) sqs = 12.;
-      else if (isCompatibleWithSqrtS(13.)) sqs = 13.;
-      else if (isCompatibleWithSqrtS(17.)) sqs = 17.;
-      else if (isCompatibleWithSqrtS(22.)) sqs = 22.;
-      else if (isCompatibleWithSqrtS(27.6)) sqs = 27.6;
-      else if (isCompatibleWithSqrtS(30.8)) sqs = 30.8;
+      if (isCompatibleWithSqrtS(7.7))       sqs = "7.7";
+      else if (isCompatibleWithSqrtS(9.4))  sqs = "9.4";
+      else if (isCompatibleWithSqrtS(12.))  sqs = "12.0";
+      else if (isCompatibleWithSqrtS(13.))  sqs = "13.0";
+      else if (isCompatibleWithSqrtS(17.))  sqs = "17.0";
+      else if (isCompatibleWithSqrtS(22.))  sqs = "22.0";
+      else if (isCompatibleWithSqrtS(27.6)) sqs = "27.6";
+      else if (isCompatibleWithSqrtS(30.8)) sqs = "30.0 - 31.6";
       else MSG_ERROR("Beam energy " << sqrtS() << " not supported!");
+      book(_p_thrust_pt      , 1,1,1);
+      book(_p_thrust_pt2     , 1,1,2);
+      book(_p_thrust_sum_pt  , 1,1,3);
+      book( _p_thrust_sum_pt2, 1,1,4);
+      book(_p_sphere_pt      , 2,1,1);
+      book( _p_sphere_pt2    , 2,1,2);
+      book( _p_sphere_sum_pt , 2,1,3);
+      book( _p_sphere_sum_pt2, 2,1,4);
     }
 
 
@@ -84,68 +92,20 @@ namespace Rivet {
         pT2_T_sum +=      pT2_T ;
         pT_S_sum  += sqrt(pT2_S);
         pT2_S_sum +=      pT2_S ;
-        _p_thrust_pt      .fill(pT_T /MeV         );
-        _p_thrust_pt2     .fill(pT2_T/1e3/sqr(MeV));
-        _p_sphere_pt      .fill(pT_S /MeV         );
-        _p_sphere_pt2     .fill(pT2_S/1e3/sqr(MeV));
+        _p_thrust_pt ->fill(sqs,pT_T /MeV         );
+        _p_thrust_pt2->fill(sqs,pT2_T/1e3/sqr(MeV));
+        _p_sphere_pt ->fill(sqs,pT_S /MeV         );
+        _p_sphere_pt2->fill(sqs,pT2_S/1e3/sqr(MeV));
       }
-      _p_thrust_sum_pt  .fill(pT_T_sum /GeV               );
-      _p_thrust_sum_pt2 .fill(pT2_T_sum/GeV               );
-      _p_sphere_sum_pt  .fill(pT_S_sum /GeV               );
-      _p_sphere_sum_pt2 .fill(pT2_S_sum/GeV               );
+      _p_thrust_sum_pt ->fill(sqs,pT_T_sum /GeV);
+      _p_thrust_sum_pt2->fill(sqs,pT2_T_sum/GeV);
+      _p_sphere_sum_pt ->fill(sqs,pT_S_sum /GeV);
+      _p_sphere_sum_pt2->fill(sqs,pT2_S_sum/GeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        for (unsigned int iy=1;iy<5;++iy) {
-          double value = 0.0, error = 0.0;
-          if (ix==1) {
-            if (iy==1) {
-              value = _p_thrust_pt.xMean();
-              error = _p_thrust_pt.xStdErr();
-            }
-            else if (iy==2) {
-              value = _p_thrust_pt2.xMean();
-              error = _p_thrust_pt2.xStdErr();
-            }
-            else if (iy==3) {
-              value = _p_thrust_sum_pt.xMean();
-              error = _p_thrust_sum_pt.xStdErr();
-            }
-            else if (iy==4) {
-              value = _p_thrust_sum_pt2.xMean();
-              error = _p_thrust_sum_pt2.xStdErr();
-            }
-          }
-          else {
-            if (iy==1) {
-              value = _p_sphere_pt.xMean();
-              error = _p_sphere_pt.xStdErr();
-            }
-            else if (iy==2) {
-              value = _p_sphere_pt2.xMean();
-              error = _p_sphere_pt2.xStdErr();
-            }
-            else if (iy==3) {
-              value = _p_sphere_sum_pt.xMean();
-              error = _p_sphere_sum_pt.xStdErr();
-            }
-            else if (iy==4) {
-              value = _p_sphere_sum_pt2.xMean();
-              error = _p_sphere_sum_pt2.xStdErr();
-            }
-          }
-          Estimate1DPtr mult;
-          book(mult, ix, 1, iy);
-          for (auto& b : mult->bins()) {
-            if (inRange(sqs, b.xMin(), b.xMax())) {
-              b.set(value, error);
-            }
-          }
-        }
-      }
     }
 
     /// @}
@@ -153,9 +113,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    YODA::Dbn1D _p_thrust_pt, _p_thrust_pt2, _p_thrust_sum_pt, _p_thrust_sum_pt2;
-    YODA::Dbn1D _p_sphere_pt, _p_sphere_pt2, _p_sphere_sum_pt, _p_sphere_sum_pt2;
-    double sqs;
+    BinnedProfilePtr<string> _p_thrust_pt, _p_thrust_pt2, _p_thrust_sum_pt, _p_thrust_sum_pt2;
+    BinnedProfilePtr<string> _p_sphere_pt, _p_sphere_pt2, _p_sphere_sum_pt, _p_sphere_sum_pt2;
+    string sqs;
     /// @}
 
   };

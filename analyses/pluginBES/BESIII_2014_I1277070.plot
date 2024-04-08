@@ -20,5 +20,5 @@ BEGIN PLOT /BESIII_2014_I1277070/dalitz
 Title=Dalitz plot for $D^+\to K_S^0\pi^+\pi^0$
 XLabel=$m^2_{K^0_S\pi^0}$ [$\mathrm{GeV}^{-2}$]
 YLabel=$m^2_{\pi^+\pi^0}$ [$\mathrm{GeV}^{-2}$]
-ZLabel=$1/\Gamma{\rm d}^2 \Gamma/{\rm d}m^2_{\K_S^0\pi^0}/{\rm d}m^2_{\pi^+\pi^0}$ [$\rm{GeV}^{-4}$]
+ZLabel=$1/\Gamma{\rm d}^2 \Gamma/{\rm d}m^2_{K_S^0\pi^0}/{\rm d}m^2_{\pi^+\pi^0}$ [$\rm{GeV}^{-4}$]
 END PLOT

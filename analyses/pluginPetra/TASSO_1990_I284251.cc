@@ -34,21 +34,26 @@ namespace Rivet {
       _ih=-1; _iy=-1;
       if(isCompatibleWithSqrtS(14.8*GeV)) {
 	_ih=1;
+        _sqs="14.8";
       }
       else if (isCompatibleWithSqrtS(21.5*GeV)) {
 	_ih=2;
+        _sqs="21.5";
       }
       else if (isCompatibleWithSqrtS(34.5*GeV)) {
 	_ih=0;
 	_iy=3;
+        _sqs="34.5";
       }
       else if (isCompatibleWithSqrtS(35.0*GeV)) {
 	_ih=0;
 	_iy=2;
+        _sqs="35.0";
       }
       else if (isCompatibleWithSqrtS(42.6*GeV)) {
 	_ih=0;
 	_iy=1;
+        _sqs="42.6";
       }
       else
 	MSG_ERROR("Beam energy " << sqrtS() << " not supported!");
@@ -57,7 +62,7 @@ namespace Rivet {
 	book(_h_K0_x, 1,1,_iy);
 	if(_iy!=3) {
 	  book(_p_K0_S_1, 5,1,2*_iy-1);
-	  book(_p_K0_S_2,"TMP/p_K0_S_2",refData(_ih+5,1,2*_iy));
+	  book(_p_K0_S_2,"TMP/p_K0_S_2",refData(5,1,2*_iy));
 	}
 	book(_h_Kstar_x, 8,1,_iy);
 	if(_iy==2) {
@@ -70,8 +75,8 @@ namespace Rivet {
 	book(_p_K0_S_1, _ih+5,1,1);
 	book(_p_K0_S_2,"TMP/p_K0_S_2",refData(_ih+5,1,2));
       }
-      book(_n_K0   ,"/TMP/nK0"   );
-      book(_n_Kstar,"/TMP/nKstar");
+      book(_n_K0   ,4,1,1);
+      book(_n_Kstar,9,1,1);
     }
 
 
@@ -108,16 +113,16 @@ namespace Rivet {
 	  ++nK0;
 	}
       }
-      _n_K0->fill(nK0);
-      _n_Kstar->fill(nKstar);
+      _n_K0   ->fill(_sqs,nK0   );
+      _n_Kstar->fill(_sqs,nKstar);
       double sphere = sphericity.sphericity();
-      if(_p_K0_S_1!=Profile1DPtr()) {
-	_p_K0_S_1->fill(sphere,nK0);
-	_p_K0_S_2->fill(sphere,cfs.particles().size());
+      if(_p_K0_S_1) {
+        _p_K0_S_1->fill(sphere,nK0);
+        _p_K0_S_2->fill(sphere,cfs.particles().size());
       }
-      if(_p_Kstar_S_1!=Profile1DPtr()) {
-	_p_Kstar_S_1->fill(sphere,nKstar);
-	_p_Kstar_S_2->fill(sphere,cfs.particles().size());
+      if(_p_Kstar_S_1) {
+        _p_Kstar_S_1->fill(sphere,nKstar);
+        _p_Kstar_S_2->fill(sphere,cfs.particles().size());
       }
     }
 
@@ -139,24 +144,6 @@ namespace Rivet {
         book(temp,10,1,2);
         divide(_p_Kstar_S_1,_p_Kstar_S_2,temp);
       }
-      // K0 mult
-      scale(_n_K0   ,1./sumOfWeights());
-      Estimate1DPtr mult;
-      book(mult, 4, 1, 1);
-      for (auto& b : mult->bins()) {
-      	if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-       	  b.set(_n_K0->val(), _n_K0->err());
-        }
-      }
-      // K*= mult
-      scale(_n_Kstar,1./sumOfWeights());
-      Estimate1DPtr mult2;
-      book(mult2,9, 1, 1);
-      for (auto& b : mult2->bins()) {
-      	if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-       	  b.set(_n_Kstar->val(), _n_Kstar->err());
-        }
-      }
     }
 
     /// @}
@@ -166,7 +153,8 @@ namespace Rivet {
     /// @{
     Histo1DPtr _h_K0_x, _h_Kstar_x;
     Profile1DPtr _p_K0_S_1, _p_K0_S_2, _p_Kstar_S_1, _p_Kstar_S_2;
-    CounterPtr _n_K0,_n_Kstar;
+    BinnedProfilePtr<string> _n_K0,_n_Kstar;
+    string _sqs;
     int _ih,_iy;
     /// @}
 

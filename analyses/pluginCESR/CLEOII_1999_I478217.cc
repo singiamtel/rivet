@@ -52,6 +52,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_h_Xi_c);
+      // bin width (0.1)
+      scale(_h_Xi_c,10.);
     }
 
     /// @}

@@ -92,6 +92,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_h, 1./sumOfWeights());
+      for( auto & hist : _h) {
+        for(auto & b: hist.second->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[hist.first].width(idx));
+        }
+      }
     }
 
     /// @}

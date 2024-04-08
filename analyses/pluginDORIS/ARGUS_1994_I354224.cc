@@ -24,8 +24,7 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_est_K, 1, 1, 1);
-      book(_h_K, "_hK", refData(1, 1, 1));
+      book(_h_K, 1, 1, 1);
       book(_nB,  "TMP/nB");
     }
 
@@ -63,7 +62,6 @@ namespace Rivet {
     void finalize() {
 
       scale(_h_K, 1./ *_nB);
-      barchart(_h_K, _est_K);
 
     }
 

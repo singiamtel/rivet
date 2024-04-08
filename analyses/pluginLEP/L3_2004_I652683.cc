@@ -24,7 +24,6 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-
       // Projections to use
       const FinalState FS;
       declare(FS, "FS");
@@ -352,7 +351,7 @@ namespace Rivet {
       if (_s.count("y_2_Cambridge")) {
         PseudoJets pjs;
         const FinalState& fs = apply<FinalState>(event, "FS");
-        for (size_t i = 1; i < fs.particles().size()+1; ++i) {
+        for (size_t i = 0; i < fs.particles().size(); ++i) {
           fastjet::PseudoJet pj = fs.particles()[i];
           pjs.push_back(pj);
         }

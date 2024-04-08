@@ -113,8 +113,8 @@ namespace Rivet {
         scale(_h_forward[ix], 2.*771.58e6/ *_nB);
         // get the efficiency product and divide by it
         unsigned int iloc = ix<2 ? 3+ix : (ix<4 ? ix-1 : ix+1);
-        Estimate1D eff = refData<YODA::Estimate1D>(iloc+24,1,1);
-        Scatter3D matrix = refData<YODA::Scatter3D>(19+ix,1,1);
+        Estimate1D eff    = refData<YODA::Estimate1D>(iloc+24,1,1);
+        Estimate2D matrix = refData<YODA::Estimate2D>(  19+ix,1,1);
         // scatter for the result
         Estimate1DPtr corrected;
         book(corrected,ix+7,1,1);
@@ -127,8 +127,8 @@ namespace Rivet {
         vector<double> val2(_h_forward[ix]->numBins(),0.),err2(_h_forward[ix]->numBins(),0.);
         for (unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
           for (unsigned int iz=0;iz<_h_forward[ix]->numBins();++iz) {
-            double corr  = matrix.points()[_h_forward[ix]->numBins()*iz+iy].z()/100.;
-            double ecorr = matrix.points()[_h_forward[ix]->numBins()*iz+iy].zErrAvg()/100.;
+            double corr  = matrix.bin((_h_forward[ix]->numBins()+2)*(iz+1)+iy+1).val()/100.;
+            double ecorr = matrix.bin((_h_forward[ix]->numBins()+2)*(iz+1)+iy+1).errAvg()/100.;
             val2[iy] += corr*val[iz];
             err2[iy] += sqr(ecorr*val[iz]) + sqr(corr*err[iz]);
           }

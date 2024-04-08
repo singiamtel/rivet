@@ -94,6 +94,8 @@ namespace Rivet {
       _h_weight->fill();
       _n_charged.fill(nCharged);
       _n_total.fill(ntotal);
+      // rest of the plots only for some energies
+      if(!_h_p) return;
       // thrust
       const Thrust& thrust = apply<Thrust>(event, "Thrust");
       _thrust.fill(thrust.thrust());
@@ -140,26 +142,28 @@ namespace Rivet {
       const double fact = crossSection()/ sumOfWeights() /picobarn;
       scale({_c_hadrons, _c_muons}, fact);
 
-      Estimate0D R = *_c_hadrons/ *_c_muons;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      size_t idx = 0;
-      if (isCompatibleWithSqrtS(12*GeV))          idx = 1;
-      else if (isCompatibleWithSqrtS(14*GeV))     idx = 2;
-      else if (isCompatibleWithSqrtS(22*GeV))     idx = 3;
-      else if (isCompatibleWithSqrtS(25*GeV))     idx = 4;
-      else if (inRange(sqrtS()/GeV, 27.4, 27.7))  idx = 5;
-      else if (isCompatibleWithSqrtS(30.1*GeV))   idx = 6;
-      else if (inRange(sqrtS()/GeV, 30.5, 31.5))  idx = 7;
-      else if (inRange(sqrtS()/GeV, 32.5, 33.5))  idx = 8;
-      else if (inRange(sqrtS()/GeV, 33.5, 34.5))  idx = 9;
-      else if (inRange(sqrtS()/GeV, 34.5, 35.5))  idx = 10;
-      else if (inRange(sqrtS()/GeV, 35.5, 36.7))  idx = 11;
-      else if (inRange(sqrtS()/GeV, 38.7, 43.1))  idx = 12;
-      mult->bin(idx).set(R.val(), R.errPos());
+      if(_c_muons->numEntries()!=0) {
+        Estimate0D R = *_c_hadrons/ *_c_muons;
+        BinnedEstimatePtr<string> mult;
+        book(mult, 1, 1, 1);
+        size_t idx = 0;
+        if (isCompatibleWithSqrtS(12*GeV))          idx = 1;
+        else if (isCompatibleWithSqrtS(14*GeV))     idx = 2;
+        else if (isCompatibleWithSqrtS(22*GeV))     idx = 3;
+        else if (isCompatibleWithSqrtS(25*GeV))     idx = 4;
+        else if (inRange(sqrtS()/GeV, 27.4, 27.7))  idx = 5;
+        else if (isCompatibleWithSqrtS(30.1*GeV))   idx = 6;
+        else if (inRange(sqrtS()/GeV, 30.5, 31.5))  idx = 7;
+        else if (inRange(sqrtS()/GeV, 32.5, 33.5))  idx = 8;
+        else if (inRange(sqrtS()/GeV, 33.5, 34.5))  idx = 9;
+        else if (inRange(sqrtS()/GeV, 34.5, 35.5))  idx = 10;
+        else if (inRange(sqrtS()/GeV, 35.5, 36.7))  idx = 11;
+        else if (inRange(sqrtS()/GeV, 38.7, 43.1))  idx = 12;
+        mult->bin(idx).set(R.val(), R.errPos());
+      }
 
       // charged particle multiplicity distribution
-      if (_h_mult)  normalize(_h_mult,2.);
+      if (_h_mult)  normalize(_h_mult,1.);
       for (unsigned int iy=1;iy<12;++iy) {
         double value = 0.0, error = 0.0;
         if (iy==1) {

@@ -65,7 +65,7 @@ namespace Rivet {
       // no of B*/B+B*
       BinnedEstimatePtr<string> h1;
       book(h1,1,1,1);
-      *h1 = *_c_bStar / (*_c_bStar + *_c_B);
+      divide(*_c_bStar , (*_c_bStar + *_c_B), h1);
     }
 
     /// @}

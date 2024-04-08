@@ -68,11 +68,11 @@ END PLOT
 BEGIN PLOT /BESIII_2022_I1864775/cthetaP
 Title=Decay angle for $\Lambda\to p \pi^-$
 XLabel=$\cos\theta_\Lambda$
-YLabel=1/\Gamma\mathrm{d}\Gamma/\mathrm{d}\cos\theta_\Lambda$
+YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}\cos\theta_\Lambda$
 END PLOT
 
 BEGIN PLOT /BESIII_2022_I1864775/cthetaM
 Title=Decay angle for $\bar{\Lambda}\to \bar{p} \pi^+$
 XLabel=$\cos\theta_{\bar\Lambda}$
-YLabel=1/\Gamma\mathrm{d}\Gamma/\mathrm{d}\cos\theta_{\bar\Lambda}$
+YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}\cos\theta_{\bar\Lambda}$
 END PLOT

@@ -25,13 +25,13 @@ LogY=0
 # BEGIN PLOT /ARGUS_1993_I342061/d01-x01-y02
 Title=$\eta^\prime$ multiplicity, $x_p > 0.35$
 YLabel=$N_{\eta^\prime}$
-XCustomMajorTicks=9.46	$\Upsilon(1S)$     9.9	   $\text{continuum}$	10.02	$\Upsilon(2S)$		
+#XCustomMajorTicks=9.46	$\Upsilon(1S)$     9.9	   $\text{continuum}$	10.02	$\Upsilon(2S)$		
 # END PLOT
 
 # BEGIN PLOT /ARGUS_1993_I342061/d01-x01-y01
 Title=$\eta^\prime$ multiplicity $z>0.35$
 YLabel=$N_{\eta^\prime}$
-XCustomMajorTicks=9.46	$\Upsilon(1S)$     		9.9	   $\text{continuum}$
+#XCustomMajorTicks=9.46	$\Upsilon(1S)$     		9.9	   $\text{continuum}$
 # END PLOT
 
 # BEGIN PLOT /ARGUS_1993_I342061/d01-x01-y02
@@ -42,7 +42,7 @@ YLabel=$N_{\eta^\prime}$
 # BEGIN PLOT /ARGUS_1993_I342061/d05-x01-y01
 Title=$f_0$ multiplicity
 YLabel=$N_{f_0}$
-XCustomMajorTicks=9.46	$\Upsilon(1S)$     10.02	$\Upsilon(2S)$		10.45	   $\text{continuum}$
+#XCustomMajorTicks=9.46	$\Upsilon(1S)$     10.02	$\Upsilon(2S)$		10.45	   $\text{continuum}$
 LegendYPos=0.2
 LegendXPos=0.2
 # END PLOT

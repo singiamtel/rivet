@@ -33,19 +33,11 @@ namespace Rivet {
       declare(Beam(), "Beams");
       declare(ChargedFinalState(), "CFS");
       declare(InitialQuarks(), "IQF");
-      book(_cLight,  "/TMP/CLIGHT" );
-      book(_cCharm,  "/TMP/CCHARM" );
-      book(_cBottom, "/TMP/CBOTTOM");
 
-      book(_wLight, "_weight_light");
-      book(_wCharm, "_weight_charm");
-      book(_wBottom,"_weight_bottom");
-
-      _mult.resize(4);
-      book(_mult[0], 1, 1, 1);
-      book(_mult[1], 1, 1, 2);
-      book(_mult[2], 1, 1, 3);
-      book(_mult[3], 1, 1, 4);  // bottom minus light
+      // Histograms
+      book(_hLight,  1,1,1);
+      book(_hCharm,  1,1,2);
+      book(_hBottom, 1,1,3);
 
     }
 
@@ -81,55 +73,31 @@ namespace Rivet {
       const size_t numParticles = cfs.particles().size();
       switch (flavour) {
       case 1: case 2: case 3:
-        _wLight->fill();
-        _cLight->fill(numParticles);
+        _hLight ->fill(int(sqrtS()),numParticles);
         break;
       case 4:
-        _wCharm->fill();
-        _cCharm->fill(numParticles);
+        _hCharm ->fill(int(sqrtS()),numParticles);
         break;
       case 5:
-        _wBottom->fill();
-        _cBottom->fill(numParticles);
+        _hBottom->fill(int(sqrtS()),numParticles);
         break;
       }
     }
 
 
     void finalize() {
-
-      // calculate the averages and diffs
-      if(_wLight->val()  != 0.)  scale(_cLight,  1./(*_wLight));
-      if(_wCharm->val()  != 0.)  scale(_cCharm,  1./(*_wCharm));
-      if(_wBottom->val() != 0.)  scale(_cBottom, 1./(*_wBottom));
-      Counter _cDiff = *_cBottom - *_cLight;
-
-      // fill the histograms
-      for (unsigned int ix=1; ix < 5; ++ix) {
-        double val(0.), err(0.0);
-        if(ix==1) {
-          val = _cBottom->val();
-          err = _cBottom->err();
-        }
-        else if(ix==2) {
-          val = _cCharm->val();
-          err = _cCharm->err();
-        }
-        else if(ix==3) {
-          val = _cLight->val();
-          err = _cLight->err();
-        }
-        else if(ix==4) {
-          val = _cDiff.val();
-          err = _cDiff.err();
-        }
-        for (auto& b : _mult[ix-1]->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(val, err);
-          }
+      BinnedEstimatePtr<int> hDiff;
+      book(hDiff,1,1,4);
+      for(unsigned int ix=0;ix<hDiff->numBins();++ix) {
+        if(_hBottom->bin(ix+1).numEntries()>0 &&
+           _hLight ->bin(ix+1).numEntries()>0) {
+          double val = _hBottom->bin(ix+1).mean(2) - _hLight->bin(ix+1).mean(2);
+          double err = sqrt(sqr(_hBottom->bin(ix+1).stdErr(2)) +
+                            sqr(_hLight ->bin(ix+1).stdErr(2)));
+          hDiff->bin(ix+1).setVal(val);
+          hDiff->bin(ix+1).setErr(err);
         }
       }
-
     }
 
     /// @}
@@ -141,16 +109,7 @@ namespace Rivet {
 
     /// @name Multiplicities
     /// @{
-    CounterPtr _cLight;
-    CounterPtr _cCharm;
-    CounterPtr _cBottom;
-    /// @}
-
-    /// @name Weights
-    /// @{
-    CounterPtr _wLight;
-    CounterPtr _wCharm;
-    CounterPtr _wBottom;
+    BinnedProfilePtr<int>  _hLight,_hCharm,_hBottom;
     /// @}
 
   };

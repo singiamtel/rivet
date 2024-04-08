@@ -29,12 +29,9 @@ namespace Rivet {
       declare(InitialQuarks(), "IQF");
 
       // Histograms
-      book(_cLight, "TMP/CLIGHT" );
-      book(_wLight, "TMP/WLIGHT" );
-      book(_cCharm, "TMP/CCHARM" );
-      book(_wCharm, "TMP/WCHARM" );
-      book(_cBottom, "TMP/CBOTTOM");
-      book(_wBottom, "TMP/WBOTTOM");
+      book(_hLight, 1,1,3);
+      book(_hCharm, 1,1,2);
+      book(_hBottom, 1,1,1);
     }
 
 
@@ -68,16 +65,13 @@ namespace Rivet {
       const size_t numParticles = cfs.particles().size();
       switch (flavour) {
       case 1: case 2: case 3:
-        _wLight ->fill();
-        _cLight ->fill(numParticles);
+        _hLight ->fill(int(sqrtS()),numParticles);
         break;
       case 4:
-        _wCharm ->fill();
-        _cCharm ->fill(numParticles);
+        _hCharm ->fill(int(sqrtS()),numParticles);
         break;
       case 5:
-        _wBottom->fill();
-        _cBottom->fill(numParticles);
+        _hBottom->fill(int(sqrtS()),numParticles);
         break;
       }
 
@@ -85,38 +79,16 @@ namespace Rivet {
 
 
     void finalize() {
-      // calculate the averages and diffs
-      if(_wLight ->numEntries()) scale( _cLight, 1./_wLight->val());
-      if(_wCharm ->numEntries()) scale( _cCharm, 1./_wCharm->val());
-      if(_wBottom->numEntries()) scale(_cBottom,1./_wBottom->val());
-      Counter _cDiff = *_cBottom - *_cLight;
-
-      // fill the histograms
-      for (unsigned int ix=1;ix<5;++ix) {
-        double val(0.), err(0.0);
-        if(ix==1) {
-          val = _cBottom->val();
-          err = _cBottom->err();
-        }
-        else if(ix==2) {
-          val = _cCharm->val();
-          err = _cCharm->err();
-        }
-        else if(ix==3) {
-          val = _cLight->val();
-          err = _cLight->err();
-        }
-        else if(ix==4) {
-          val = _cDiff.val();
-          err = _cDiff.err();
-        }
-
-        Estimate1DPtr mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(val, err);
-          }
+      BinnedEstimatePtr<int> hDiff;
+      book(hDiff,1,1,4);
+      for(unsigned int ix=0;ix<hDiff->numBins();++ix) {
+        if(_hBottom->bin(ix+1).numEntries()>0 &&
+           _hLight ->bin(ix+1).numEntries()>0) {
+          double val = _hBottom->bin(ix+1).mean(2) - _hLight->bin(ix+1).mean(2);
+          double err = sqrt(sqr(_hBottom->bin(ix+1).stdErr(2)) +
+                            sqr(_hLight ->bin(ix+1).stdErr(2)));
+          hDiff->bin(ix+1).setVal(val);
+          hDiff->bin(ix+1).setErr(err);
         }
       }
     }
@@ -127,11 +99,8 @@ namespace Rivet {
   private:
 
     /// @name Multiplicities
-    /// @todo Don't we have a Dbn1D-like type that can do both at once?
     /// @{
-    CounterPtr _cLight, _wLight;
-    CounterPtr _cCharm, _wCharm;
-    CounterPtr _cBottom, _wBottom;
+    BinnedProfilePtr<int>  _hLight,_hCharm,_hBottom;
     /// @}
 
   };

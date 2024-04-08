@@ -40,11 +40,11 @@ namespace Rivet {
                                             0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
                                             0.22, 0.24, 0.26, 0.28, 0.30, 0.32, 0.34, 0.36, 0.38, 0.40,
                                             0.45, 0.50, 0.55, 0.60, 0.70, 0.80, 0.90}); // d01
-        _axes.emplace_back<vector<double>>({0.011, 0.023, 0.035, 0.047, 0.057, 0.069, 0.079, 0.083,
-                                            0.093, 0.107, 0.113, 0.119, 0.143, 0.167, 0.191, 0.239}); // d04
+        _axes.emplace_back<vector<double>>({0.011, 0.023, 0.035, 0.0465, 0.058, 0.0695, 0.081,
+                                            0.093, 0.1045, 0.119, 0.1395, 0.1625, 0.1915, 0.2265}); // d04
         _axes.emplace_back<vector<double>>({0.040, 0.056, 0.088, 0.274}); // d07
       }
-      else if (ioff==2) {
+      else if (ioff==1) {
         _axes.emplace_back<vector<double>>({0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
                                             0.12, 0.14, 0.16, 0.18, 0.20, 0.25, 0.40, 0.60, 1.00}); // d02
         _axes.emplace_back<vector<double>>({0.018, 0.036, 0.054, 0.072, 0.108, 0.144, 0.216, 0.360}); // d05
@@ -63,7 +63,7 @@ namespace Rivet {
         _edges.resize(_axes.size());
         _edges[0] = _h["gamma"]->xEdges();
         _edges[1] = _h["pi0"]->xEdges();
-        if (_h.count("eta"))  _edges[3] = _h["eta"]->xEdges();
+        if (_h.count("eta"))  _edges[2] = _h["eta"]->xEdges();
       }
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
@@ -98,6 +98,14 @@ namespace Rivet {
     void finalize() {
       const double sf = crossSection()*sqr(sqrtS())/microbarn/sumOfWeights();
       scale(_h, sf);
+      vector<string> st = {"gamma","pi0","eta"};
+      for(unsigned int ix=0;ix<3;++ix) {
+        if(_h.count(st[ix])==0) continue;
+        for(auto & b: _h[st[ix]]->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[ix].width(idx));
+        }
+      } 
     }
 
     /// @}

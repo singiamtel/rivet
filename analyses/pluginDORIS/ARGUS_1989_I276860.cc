@@ -45,18 +45,13 @@ namespace Rivet {
       book(_h_pt_cont_z, 12, 1, 2);
 
       // Counters
-      book(_n_PiA[1],"/TMP/PiACont");
-      book(_n_PiA[0],"/TMP/PiAUps1");
-      book(_n_PiB[1],"/TMP/PiBCont");
-      book(_n_PiB[0],"/TMP/PiBUps1");
-      book(_n_Kp[1] ,"/TMP/KpCont");
-      book(_n_Kp[0] ,"/TMP/KpUps1");
-      book(_n_KS[1] ,"/TMP/KSCont");
-      book(_n_KS[0] ,"/TMP/KSUps1");
-      book(_n_ptA[1],"/TMP/ptACont");
-      book(_n_ptA[0],"/TMP/ptAUps1");
-      book(_n_ptB[1],"/TMP/ptBCont");
-      book(_n_ptB[0],"/TMP/ptBUps1");
+      book(_n_PiA,1,1,1);
+      book(_n_PiB,1,1,2);
+      book(_n_Kp ,2,1,1);
+      book(_n_KS ,3,1,1);
+      book(_n_ptA,4,1,1);
+      book(_n_ptB,4,1,2);
+      
       // weights
       book(_weightSum_cont,"/TMP/weightSum_cont");
       book(_weightSum_Ups1,"/TMP/weightSum_Ups1");
@@ -85,52 +80,52 @@ namespace Rivet {
       if (upsilons.empty()) {
         MSG_DEBUG("No Upsilons found => continuum event");
         _weightSum_cont->fill();
-	// stable particles
+        // stable particles
         for (const Particle& p : fs.particles(Cuts::abspid==211 or Cuts::abspid==2212 or Cuts::abspid==321 )) {
           const int id = abs(p.pid());
           const double xE = 2.*p.E()/sqrtS();
-	  const double modp = p.p3().mod();
+          const double modp = p.p3().mod();
           const double beta = modp / p.E();
-	  int idMom = !p.parents().empty() ? abs(p.parents()[0].pid()) : 0;
-	  if(id==211) {
-	    // not from K0S or Lambda decays
-	    if(idMom!=310 && idMom != 3122) {
-	      _h_pi_cont_p->fill(modp);
-	      _h_pi_cont_z->fill(xE  ,1./beta);
-	      _n_PiA[1]->fill();
-	    }
-	    _n_PiB[1]->fill();
-	  }
-	  else if(id==321) {
-	    _h_Kp_cont_p->fill(modp);
-	    _h_Kp_cont_z->fill(xE  ,1./beta);
-	    _n_Kp[1]->fill();
-	  }
-	  else if(id==2212) {
-	    // not from K0S or Lambda decays
-	    if(idMom!=310 && idMom != 3122) {
-	      _h_pt_cont_p->fill(modp);
-	      _h_pt_cont_z->fill(xE  ,1./beta);
-	      _n_ptA[1]->fill();
-	    }
-	    _n_ptB[1]->fill();
-	  }
-	}
-	// Unstable particles
+          int idMom = !p.parents().empty() ? abs(p.parents()[0].pid()) : 0;
+          if(id==211) {
+            // not from K0S or Lambda decays
+            if(idMom!=310 && idMom != 3122) {
+              _h_pi_cont_p->fill(modp);
+              _h_pi_cont_z->fill(xE  ,1./beta);
+              _n_PiA->fill(string("9.98"));
+            }
+            _n_PiB->fill(string("9.98"));
+          }
+          else if(id==321) {
+            _h_Kp_cont_p->fill(modp);
+            _h_Kp_cont_z->fill(xE  ,1./beta);
+            _n_Kp->fill(string("9.98"));
+          }
+          else if(id==2212) {
+            // not from K0S or Lambda decays
+            if(idMom!=310 && idMom != 3122) {
+              _h_pt_cont_p->fill(modp);
+              _h_pt_cont_z->fill(xE  ,1./beta);
+              _n_ptA->fill(string("9.98"));
+            }
+            _n_ptB->fill(string("9.98"));
+          }
+        }
+        // Unstable particles
         for (const Particle& p : ufs.particles(Cuts::pid==310 || Cuts::pid==130)) {
           const double xE = 2.*p.E()/sqrtS();
-	  const double modp = p.p3().mod();
+          const double modp = p.p3().mod();
           const double beta = modp / p.E();
-	  _h_KS_cont_p->fill(modp);
-	  _h_KS_cont_z->fill(xE  ,1./beta);
-	  _n_KS[1]->fill();
-	}
+          _h_KS_cont_p->fill(modp);
+          _h_KS_cont_z->fill(xE  ,1./beta);
+          _n_KS->fill(string("9.98"));
+        }
       }
       // Upsilon(s) found
       else {
         MSG_DEBUG("Upsilons found => resonance event");
         for (const Particle& ups : upsilons) {
-	  _weightSum_Ups1->fill();
+          _weightSum_Ups1->fill();
           Particles unstable;
           // Find the decay products we want
           findDecayProducts(ups, unstable);
@@ -138,44 +133,44 @@ namespace Rivet {
           if (ups.p3().mod() > 1*MeV)
             cms_boost = LorentzTransform::mkFrameTransformFromBeta(ups.momentum().betaVec());
           const double mass = ups.mass();
-	  // loop over decay products
+          // loop over decay products
           for(const Particle& p : unstable) {
-	    const int id = abs(p.pid());
+            const int id = abs(p.pid());
             const FourMomentum p2 = cms_boost.transform(p.momentum());
-	    const double xE = 2.*p2.E()/mass;
-	    const double modp = p2.p3().mod();
-	    const double beta = modp / p2.E();
-	    int idMom = !p.parents().empty() ? abs(p.parents()[0].pid()) : 0;
-	    if(id==211) {
-	      // not from K0S or Lambda decays
-	      if(idMom!=310 && idMom != 3122) {
-		_h_pi_ups1_p->fill(modp);
-		_h_pi_ups1_z->fill(xE  ,1./beta);
-		_n_PiA[0]->fill();
-	      }
-	      _n_PiB[0]->fill();
-	    }
-	    else if(id==321) {
-	      _h_Kp_ups1_p->fill(modp);
-	      _h_Kp_ups1_z->fill(xE  ,1./beta);
-	      _n_Kp[0]->fill();
-	    }
-	    else if(id==2212) {
-	      // not from K0S or Lambda decays
-	      if(idMom!=310 && idMom != 3122) {
-		_h_pt_ups1_p->fill(modp);
-		_h_pt_ups1_z->fill(xE  ,1./beta);
-		_n_ptA[0]->fill();
-	      }
-	      _n_ptB[0]->fill();
-	    }
-	    else if(id==310 || id==130) {
-	      _h_KS_ups1_p->fill(modp);
-	      _h_KS_ups1_z->fill(xE  ,1./beta);
-	      _n_KS[0]->fill();
-	    }
-	  }
-	}
+            const double xE = 2.*p2.E()/mass;
+            const double modp = p2.p3().mod();
+            const double beta = modp / p2.E();
+            int idMom = !p.parents().empty() ? abs(p.parents()[0].pid()) : 0;
+            if(id==211) {
+              // not from K0S or Lambda decays
+              if(idMom!=310 && idMom != 3122) {
+        	_h_pi_ups1_p->fill(modp);
+        	_h_pi_ups1_z->fill(xE  ,1./beta);
+        	_n_PiA->fill(string("9.46"));
+              }
+              _n_PiB->fill(string("9.46"));
+            }
+            else if(id==321) {
+              _h_Kp_ups1_p->fill(modp);
+              _h_Kp_ups1_z->fill(xE  ,1./beta);
+              _n_Kp->fill(string("9.46"));
+            }
+            else if(id==2212) {
+              // not from K0S or Lambda decays
+              if(idMom!=310 && idMom != 3122) {
+        	_h_pt_ups1_p->fill(modp);
+        	_h_pt_ups1_z->fill(xE  ,1./beta);
+        	_n_ptA->fill(string("9.46"));
+              }
+              _n_ptB->fill(string("9.46"));
+            }
+            else if(id==310 || id==130) {
+              _h_KS_ups1_p->fill(modp);
+              _h_KS_ups1_z->fill(xE  ,1./beta);
+              _n_KS->fill(string("9.46"));
+            }
+          }
+        }
       }
     }
 
@@ -205,32 +200,15 @@ namespace Rivet {
 	scale(_h_pt_ups1_z, 1./ *_weightSum_Ups1);
       }
       // Counters
-      Estimate1DPtr nPiA;
-      book(nPiA, 1, 1, 1);
-      Estimate1DPtr nPiB;
-      book(nPiB, 1, 1, 2);
-      Estimate1DPtr nKS ;
-      book(nKS, 2, 1, 1);
-      Estimate1DPtr nKp ;
-      book(nKp,3, 1, 1);
-      Estimate1DPtr nptA;
-      book(nptA,4, 1, 1);
-      Estimate1DPtr nptB;
-      book(nptB,4, 1, 2);
       vector<CounterPtr> scales = {_weightSum_Ups1,_weightSum_cont};
+      vector<string> labels={"9.46","9.98"};
       for (unsigned int ix=0;ix<2;++ix) {
-        scale(_n_PiA[ix],1./ *scales[ix]);
-        nPiA->bin(ix+1).set(_n_PiA[ix]->val(),_n_PiA[ix]->err());
-        scale(_n_PiB[ix],1./ *scales[ix]);
-        nPiB->bin(ix+1).set(_n_PiB[ix]->val(),_n_PiB[ix]->err());
-        scale(_n_Kp[ix] ,1./ *scales[ix]);
-        nKp->bin(ix+1).set(_n_Kp[ix]->val(),_n_Kp[ix]->err());
-        scale(_n_KS[ix] ,1./ *scales[ix]);
-        nKS->bin(ix+1).set(_n_KS[ix]->val(),_n_KS[ix]->err());
-        scale(_n_ptA[ix],1./ *scales[ix]);
-        nptA->bin(ix+1).set(_n_ptA[ix]->val(),_n_ptA[ix]->err());
-        scale(_n_ptB[ix],1./ *scales[ix]);
-        nptB->bin(ix+1).set(_n_ptB[ix]->val(),_n_ptB[ix]->err());
+        _n_PiA->binAt(labels[ix]).scaleW(1./ scales[ix]->val());
+        _n_PiB->binAt(labels[ix]).scaleW(1./ scales[ix]->val());
+        _n_Kp->binAt(labels[ix] ).scaleW(1./ scales[ix]->val());
+        _n_KS->binAt(labels[ix] ).scaleW(1./ scales[ix]->val());
+        _n_ptA->binAt(labels[ix]).scaleW(1./ scales[ix]->val());
+        _n_ptB->binAt(labels[ix]).scaleW(1./ scales[ix]->val());
       }
     }
 
@@ -245,7 +223,7 @@ namespace Rivet {
     Histo1DPtr _h_pt_ups1_p, _h_pt_cont_p, _h_pt_ups1_z, _h_pt_cont_z;
 
       // Counters
-    CounterPtr _n_PiA[2], _n_PiB[2], _n_Kp[2], _n_KS[2], _n_ptA[2],_n_ptB[2];
+    BinnedHistoPtr<string> _n_PiA, _n_PiB, _n_Kp, _n_KS, _n_ptA,_n_ptB;
     CounterPtr _weightSum_cont,_weightSum_Ups1;
     /// @}
 

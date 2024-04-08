@@ -225,9 +225,9 @@ namespace Rivet {
           // first extract values and errors applying efficiency
           Vector<10> val,err;
           for(unsigned int ibin=0;ibin<_h[ix][iy]->bins().size();++ibin) {
-            val[ibin] = eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].sumW();
-            err[ibin] = sqr(eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].errW());
-                        sqr(efe[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin].sumW());
+            val[ibin] = eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin+1].sumW();
+            err[ibin] = sqr(eff[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin+1].errW());
+                        sqr(efe[ix][iy][ibin]/100. * _h[ix][iy]->bins()[ibin+1].sumW());
           }
           // put response into a matrix
           Matrix<10> R,R2;
@@ -245,7 +245,7 @@ namespace Rivet {
           for(unsigned int i1=0;i1<10;++i1) total+=val[i1];
           // finally the output scatter
           for(unsigned int ibin=0;ibin<_h[ix][iy]->bins().size();++ibin) {
-            double dx = 0.5*_h[ix][iy]->bins()[ibin].xWidth();
+            double dx = 0.5*_h[ix][iy]->bins()[ibin+1].xWidth();
             double dy = sqrt(err[ibin])/total/2./dx;
             corrected->bin(ibin+1).set(val[ibin]/total/2./dx,	dy);
           }

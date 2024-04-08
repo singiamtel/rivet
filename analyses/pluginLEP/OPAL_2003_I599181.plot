@@ -9,8 +9,8 @@ Title=Mean of the $b$-quark fragmentation function $f(x_B^{weak})$
 XLabel=
 YLabel=$\langle x_B \rangle$
 ShowZero=0
-YMin=0.6
-YMax=0.8
+#YMin=0.6
+#YMax=0.8
 RatioPlotYMin=0.8
 RatioPlotYMax=1.2
 # END PLOT

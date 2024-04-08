@@ -241,7 +241,7 @@ namespace Rivet {
        	normalize(_h_plus_lam->bin(ix+1));
        	normalize(_h_minus_lam->bin(ix+1));
        	Estimate1DPtr eTemp;
-        book(eTemp, "/TMP/a_lam_" + to_string(ix));
+        book(eTemp, "/TMP/a_lam_" + to_string(ix), 20, -1.0, 1.0);
        	asymm(_h_plus_lam->bin(ix+1), _h_minus_lam->bin(ix+1), eTemp);
        	pair<double,double> alpha = calcAsymmetry(eTemp, 1);
        	h_asym->bin(ix+1).set(-alpha.first, alpha.second);
@@ -249,14 +249,14 @@ namespace Rivet {
       normalize(_h_plus_lam_large1 );
       normalize(_h_minus_lam_large1);
       Estimate1DPtr eTemp;
-      book(eTemp, "/TMP/a_lam_large1");
+      book(eTemp, "/TMP/a_lam_large1", 20, -1.0, 1.0);
       asymm(_h_plus_lam_large1,_h_minus_lam_large1,eTemp);
       alpha = calcAsymmetry(eTemp,1);
       book(h_asym,3,1,2);
       h_asym->bin(1).set(-alpha.first, alpha.second);
       normalize(_h_plus_lam_large2 );
       normalize(_h_minus_lam_large2);
-      book(eTemp, "/TMP/a_lam_large2");
+      book(eTemp, "/TMP/a_lam_large2", 20, -1.0, 1.0);
       asymm(_h_plus_lam_large2,_h_minus_lam_large2, eTemp);
       alpha = calcAsymmetry(eTemp,1);
       book(h_asym,3,1,3);

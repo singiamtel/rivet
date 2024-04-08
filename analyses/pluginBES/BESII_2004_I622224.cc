@@ -59,7 +59,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_h_ln, 1./dbl(*_h_weight));
-      vector<string> edges;
+      for(auto & b: _h_ln->bins()) {
+        const size_t idx = b.index();
+        b.scaleW(1./axis.width(idx));
+      }
     }
 
     /// @}

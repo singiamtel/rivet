@@ -29,7 +29,7 @@ namespace Rivet {
       // Book histograms
       book(_h_ctheta_rho, {0.025, 0.05, 0.1, 0.15, 0.3, 0.6});
       book(_h_ctheta_omega, {0.025, 0.05, 0.1, 0.15, 0.3, 0.6});
-      for (size_t i = 0; _h_ctheta_rho->numBins(); ++i) {
+      for (size_t i = 0; i<_h_ctheta_rho->numBins(); ++i) {
         book(_h_ctheta_rho->bin(i+1), "ctheta_rho_"+to_string(i), 20, -1.0, 1.0);
         book(_h_ctheta_omega->bin(i+1), "ctheta_omega_"+to_string(i), 20, -1.0, 1.0);
       }
