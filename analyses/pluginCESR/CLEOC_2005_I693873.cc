@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > pi+pi-, K+K- and p pbar at 3.671 GeV
   class CLEOC_2005_I693873 : public Analysis {
   public:
 
@@ -23,9 +23,9 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_npipi, "TMP/npipi");
-      book(_nKK, "TMP/nKK");
-      book(_nppbar, "TMP/nppbar");
+      book(_npipi , 1,1,1);
+      book(_nKK   , 1,1,2);
+      book(_nppbar, 1,1,3);
     }
 
 
@@ -43,42 +43,19 @@ namespace Rivet {
       if(ntotal!=2) vetoEvent;
 
       if(nCount[211]==1 && nCount[-211]==1)
-	_npipi->fill();
+	_npipi->fill(ecms);
       else if(nCount[321]==1 && nCount[-321]==1)
-	_nKK->fill();
+	_nKK->fill(ecms);
       else if(nCount[2212]==1 && nCount[-2212]==1)
-	_nppbar->fill();
+	_nppbar->fill(ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      for(unsigned int ix=1;ix<4;++ix) {
-        double sigma = 0., error = 0.;
-        if (ix==1) {
-          sigma =  _npipi->val();
-          error =  _npipi->err();
-        }
-        else if (ix==2) {
-          sigma = _nKK->val();
-          error = _nKK->err();
-        }
-        else if (ix==3) {
-          sigma = _nppbar->val();
-          error = _nppbar->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
-
+      scale(_npipi ,crossSection()/ sumOfWeights() /picobarn);
+      scale(_nKK   ,crossSection()/ sumOfWeights() /picobarn);
+      scale(_nppbar,crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -86,7 +63,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _npipi,_nKK,_nppbar;
+    BinnedHistoPtr<string> _npipi,_nKK,_nppbar;
+    string ecms = "3.671";
     /// @}
 
 

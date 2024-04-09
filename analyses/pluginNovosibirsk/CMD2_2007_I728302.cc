@@ -24,8 +24,18 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_npion, "TMP/pion");
-
+      book(_npion, 2,1,1);
+      vector<int> enint({600, 630, 660, 690, 720, 750, 760, 764, 770, 774, 778, 780, 781, 782,
+          783, 784, 786, 790, 794, 800, 810, 820, 840, 880, 920, 940, 950, 958, 970});
+      icms=-1;
+      for(const int& en : enint) {
+        double end = double(en)*MeV;
+        if(isCompatibleWithSqrtS(end)) {
+          icms = en;
+          break;
+        }
+      }
+      if(icms<0) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -36,23 +46,13 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
 	if(abs(p.pid())!=PID::PIPLUS) vetoEvent;
       }
-      _npion->fill();
+      _npion->fill(icms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _npion->val();
-      double error = _npion->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 2, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_npion,crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -60,7 +60,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _npion;
+    BinnedHistoPtr<int> _npion;
+    int icms;
     /// @}
 
 

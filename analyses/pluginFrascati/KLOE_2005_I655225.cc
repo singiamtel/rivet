@@ -20,9 +20,24 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-
       // Book histograms
-      book(_npion, "TMP/pion");
+      book(_npion, 2, 1, 1);
+      vector<string> energies({"0.35", "0.36", "0.37", "0.38", "0.39", "0.4", "0.41", "0.42", "0.43",
+          "0.44", "0.45", "0.46", "0.47", "0.48", "0.49", "0.5", "0.51", "0.52", "0.53", "0.54",
+          "0.55", "0.56", "0.57", "0.58", "0.59", "0.6", "0.61", "0.62", "0.63", "0.64", "0.65",
+          "0.66", "0.67", "0.68", "0.69", "0.7", "0.71", "0.72", "0.73", "0.74", "0.75", "0.76",
+          "0.77", "0.78", "0.79", "0.8", "0.81", "0.82", "0.83", "0.84", "0.85", "0.86", "0.87",
+          "0.88", "0.89", "0.9", "0.91", "0.92", "0.93", "0.94"});
+      bool matched=false;
+      for(const string& en : energies) {
+        double end = sqrt(std::stod(en))*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          ecms = en;
+          matched=true;
+          break;
+        }
+      }
+      if(!matched) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -33,23 +48,13 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
 	if(abs(p.pid())!=PID::PIPLUS) vetoEvent;
       }
-      _npion->fill();
+      _npion->fill(ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _npion->val();
-      double error = _npion->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 2, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqr(sqrtS()/GeV), b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_npion,crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -57,7 +62,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _npion;
+    BinnedHistoPtr<string>  _npion;
+    string ecms;
     /// @}
 
 
