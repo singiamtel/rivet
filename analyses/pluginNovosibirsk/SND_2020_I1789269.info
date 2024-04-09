@@ -12,6 +12,7 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies : [0.5251, 0.5440, 0.5652, 0.5850, 0.6048, 0.6248, 0.6446, 0.6645, 0.6844, 0.7042, 0.7241, 0.7391, 0.7438, 0.7477, 0.7517, 0.7557, 0.7596, 0.7636, 0.7678, 0.7716, 0.7757, 0.7786, 0.7807, 0.7820, 0.7829, 0.7837, 0.7847, 0.7867, 0.7895, 0.7939, 0.7977, 0.8040, 0.8218, 0.8434, 0.8627, 0.8832]
 Description:
   'Measurement of the cross section for $e^+e^-\to \pi^+\pi^-$ at energies between 0.525 and 0.883 GeV'
 ValidationInfo:

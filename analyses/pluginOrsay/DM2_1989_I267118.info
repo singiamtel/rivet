@@ -12,6 +12,7 @@ References:
 RunInfo: e+ e- to hadrons
 NeedCrossSection: yes
 Beams: [e+, e-]
+Energies: [1.35, 1.395, 1.425, 1.475, 1.525, 1.575, 1.625, 1.675, 1.725, 1.775, 1.825, 1.875, 1.925, 1.975, 2.025, 2.075, 2.125]
 Description:
   'Measurement of the cross section for $e^+e^-\to \pi^+\pi^-$ at energies between 1.35 and 2.4 GeV. Useful for comparing models of the pion form factor.'
 Keywords:

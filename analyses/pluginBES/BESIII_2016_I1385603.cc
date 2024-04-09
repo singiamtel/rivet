@@ -49,7 +49,7 @@ namespace Rivet {
       Estimate1DPtr  mult;
       book(mult, 1, 1, 1);
       for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
+        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
           b.set(sigma, error);
         }
       }
