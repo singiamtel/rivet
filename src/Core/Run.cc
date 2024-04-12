@@ -82,9 +82,9 @@ namespace Rivet {
       // Turn off the buffering to make IO faster and make ungetc work on cin
       std::basic_ios<char>::sync_with_stdio(false);
       #ifdef HAVE_LIBZ
-      _istr = make_shared<zstr::istream>(std::cin);
+      _istr = make_shared<zstr::istream>(std::ref(std::cin));
       #else
-      _istr = make_shared<std::istream>(std::cin);
+      _istr = make_shared<std::istream>(std::ref(std::cin));
       #endif
       // Use standard HepMC3 deduction on stream. For HepMC3 < 3.2.0 the function is implemented in Rivet
       _hepmcReader = RivetHepMC::deduce_reader(*_istr);
