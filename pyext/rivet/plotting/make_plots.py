@@ -168,17 +168,6 @@ def _add_ref_hist(output, refhisto, mainlabel, ratiolabel):
     output['plot features']['RatioPlotYLabel'] = ratiolabel
 
 
-def get_nominal_key(listOfHistoKeys):
-    """try to find the key corresponding to the nominal histogram,
-       which seems to differ between different YODA files
-    """
-    name = '0'
-    if 'nominal' in listOfHistoKeys: name='nominal'
-    elif 'yoda' in listOfHistoKeys:  name='yoda'
-    elif '0' in listOfHistoKeys:  name='0'
-    return name
-
-
 def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptions,
                  style, rc_params, mc_errs, nRatioTicks, showWeights, removeOptions, deviation,
                  canvasText, refLabel = None, ratioPlotLabel = None, showRatio = None, verbose = False,):
@@ -282,7 +271,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                             f" failing `import {e.name}`")
                     exit(1)
 
-            nominalVariationKey = get_nominal_key(mchistos_in_file[plot_id_with_anaopt].keys())
+            nominalVariationKey = thisFilePlotOptions.get('DefaultWeight', '0')
             if nominalVariationKey == None:
                 raise NameError("Could not find nominal variation weight!")
 
