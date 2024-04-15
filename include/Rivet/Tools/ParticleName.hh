@@ -218,29 +218,79 @@ namespace Rivet {
     private:
 
       ParticleNames() {
+        // charged leptons
         _add_pid_name(ELECTRON, "ELECTRON");
         _add_pid_name(POSITRON, "POSITRON");
-        _add_pid_name(PROTON, "PROTON");
-        _add_pid_name(ANTIPROTON, "ANTIPROTON");
-        _add_pid_name(PHOTON, "PHOTON");
-        _add_pid_name(NEUTRON, "NEUTRON");
-        _add_pid_name(ANTINEUTRON, "ANTINEUTRON");
         _add_pid_name(MUON, "MUON");
         _add_pid_name(ANTIMUON, "ANTIMUON");
+        _add_pid_name(TAU, "TAU");
+        _add_pid_name(ANTITAU, "ANTITAU");
+        // neutrinos
         _add_pid_name(NU_E, "NU_E");
         _add_pid_name(NU_EBAR, "NU_EBAR");
         _add_pid_name(NU_MU, "NU_MU");
         _add_pid_name(NU_MUBAR, "NU_MUBAR");
         _add_pid_name(NU_TAU, "NU_TAU");
         _add_pid_name(NU_TAUBAR, "NU_TAUBAR");
-        _add_pid_name(PIPLUS, "PIPLUS");
-        _add_pid_name(PIMINUS, "PIMINUS");
-        _add_pid_name(TAU, "TAU");
+        // bosons
+        _add_pid_name(GLUON, "GLUON");
+        _add_pid_name(PHOTON, "PHOTON");
         _add_pid_name(WPLUSBOSON, "WPLUSBOSON");
         _add_pid_name(WMINUSBOSON, "WMINUSBOSON");
         _add_pid_name(ZBOSON, "ZBOSON");
         _add_pid_name(HIGGS, "HIGGS");
-        _add_pid_name(ANTITAU, "ANTITAU");
+        // quarks
+        _add_pid_name(DQUARK, "DOWN");
+        _add_pid_name(UQUARK, "UP");
+        _add_pid_name(SQUARK, "STRANGE");
+        _add_pid_name(CQUARK, "CHARM");
+        _add_pid_name(BQUARK, "BOTTOM");
+        _add_pid_name(TQUARK, "TOP");
+        _add_pid_name(-DQUARK, "ANTIDOWN");
+        _add_pid_name(-UQUARK, "ANTIUP");
+        _add_pid_name(-SQUARK, "ANTISTRANGE");
+        _add_pid_name(-CQUARK, "ANTICHARM");
+        _add_pid_name(-BQUARK, "ANTIBOTTOM");
+        _add_pid_name(-TQUARK, "ANTITOP");
+        // nucleons
+        _add_pid_name(PROTON, "PROTON");
+        _add_pid_name(ANTIPROTON, "ANTIPROTON");
+        _add_pid_name(NEUTRON, "NEUTRON");
+        _add_pid_name(ANTINEUTRON, "ANTINEUTRON");
+        // light mesons
+        _add_pid_name(PI0, "PI0");
+        _add_pid_name(PIPLUS, "PIPLUS");
+        _add_pid_name(PIMINUS, "PIMINUS");
+        _add_pid_name(RHO0, "RHO0");
+        _add_pid_name(RHOPLUS, "RHOPLUS");
+        _add_pid_name(RHOMINUS, "RHOMINUS");
+        _add_pid_name(K0, "K0");
+        _add_pid_name(KPLUS, "KPLUS");
+        _add_pid_name(KMINUS, "KMINUS");
+        _add_pid_name(ETA, "ETA");
+        _add_pid_name(PHI, "PHI");
+        // charm mesons
+        _add_pid_name(D0, "D0");
+        _add_pid_name(D0BAR, "D0BAR");
+        _add_pid_name(DPLUS, "DPLUS");
+        _add_pid_name(DMINUS, "DMINUS");
+        // B mesons
+        _add_pid_name(B0, "B0");
+        _add_pid_name(B0BAR, "B0BAR");
+        _add_pid_name(BPLUS, "BPLUS");
+        _add_pid_name(BMINUS, "BMINUS");
+        // baryons
+        _add_pid_name(LAMBDA, "LAMBDA");
+        _add_pid_name(SIGMA0, "SIGMA0");
+        _add_pid_name(SIGMAPLUS, "SIGMAPLUS");
+        _add_pid_name(SIGMAMINUS, "SIGMAMINUS");
+        _add_pid_name(XI0, "XI0");
+        _add_pid_name(XIPLUS, "XIPLUS");
+        _add_pid_name(XIMINUS, "XIMINUS");
+        // exotics
+        _add_pid_name(REGGEON, "REGGEON");
+        _add_pid_name(POMERON, "POMERON");
+        // nuclei
         _add_pid_name(DEUTERON, "DEUTERON");
         _add_pid_name(ALUMINIUM, "ALUMINIUM");
         _add_pid_name(COPPER, "COPPER");
@@ -248,6 +298,7 @@ namespace Rivet {
         _add_pid_name(GOLD, "GOLD");
         _add_pid_name(LEAD, "LEAD");
         _add_pid_name(URANIUM, "URANIUM");
+        // wildcard
         _add_pid_name(ANY, "*");
       }
 
