@@ -52,11 +52,9 @@ namespace Rivet {
 
 
     void finalize() {
-      scale(_h_dndxf, 1./ *_c_ninel);   // Scale by the number of inelastic events
-      for (auto& b : _h_dndxf->bins()) b.scaleW(1./b.xWidth());  // Scale by the bin width (dxF)
-
+      // Scale by the number of inelastic events
+      scale(_h_dndxf, 1./ *_c_ninel);
       scale(_h_dndy, 1./ *_c_ninel);
-      for (auto& by : _h_dndy->bins()) by.scaleW(1./by.xWidth());
     }
 
 

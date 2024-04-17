@@ -3,12 +3,10 @@ Title=Total XS for $66 < M_{ee}/\mathrm{GeV} < 116$
 XLabel=$\sqrt{s}$
 YLabel=$\sigma$ [pb]
 LogY=0
-XMajorTickMarks=20
-XMinorTickMarks=0
 YMin=150
 YMax=350
-XMin=1955
-XMax=1965
+XMin=1959.5
+XMax=1960.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2009_I856131/d02-x01-y01

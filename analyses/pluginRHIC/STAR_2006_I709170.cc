@@ -29,15 +29,10 @@ namespace Rivet {
 
       book(_h_pT_piplus     ,2, 1, 1); // full range pion binning
       book(_h_pT_piminus    ,7, 1, 1); // full range pion binning
-      book(_tmp_pT_piplus   ,"TMP/pT_piplus", refData(25, 1, 2)); // pi histo compatible with more restricted proton binning
-      book(_tmp_pT_piminus  ,"TMP/pT_piminus", refData(26, 1, 2)); // pi histo compatible with more restricted proton binning
+      book(_tmp_pT_piplus   ,"TMP/pT_piplus" , refData(12, 1, 1)); // pi histo compatible with more restricted proton binning
+      book(_tmp_pT_piminus  ,"TMP/pT_piminus", refData(12, 1, 1)); // pi histo compatible with more restricted proton binning
       book(_h_pT_proton     ,12, 1, 1);
       book(_h_pT_antiproton ,17, 1, 1);
-
-      book(_s_piminus_piplus, 23, 1, 2);
-      book(_s_antipr_pr     , 24, 1, 2);
-      book(_s_pr_piplus     , 25, 1, 2);
-      book(_s_antipr_piminus, 26, 1, 2);
 
       book(_sumWeightSelected, "_sumWeightSelected");
     }
@@ -76,10 +71,54 @@ namespace Rivet {
 
     /// Finalize
     void finalize() {
+      
+      Estimate1DPtr _s_piminus_piplus;
+      book(_s_piminus_piplus,"/TMP/s_piminus_piplus",refData(2,1,1).xEdges());
       divide(_h_pT_piminus, _h_pT_piplus, _s_piminus_piplus);
+      BinnedEstimatePtr<string> _r_piminus_piplus;
+      book(_r_piminus_piplus,23,1,2);
+      for(const auto & b : _s_piminus_piplus->bins()) {
+        const size_t idx = b.index();
+        _r_piminus_piplus->bin(idx).setVal(b.val());
+        for(auto & item : b.sources())
+          _r_piminus_piplus->bin(idx).setErr(b.err(item),item);
+      }
+      Estimate1DPtr _s_antipr_pr;
+      book(_s_antipr_pr,"/TMP/s_antipr_pr",refData(12,1,1).xEdges());
       divide(_h_pT_antiproton, _h_pT_proton, _s_antipr_pr);
+      BinnedEstimatePtr<string> _r_antipr_pr;
+      book(_r_antipr_pr,24,1,2);
+      for(const auto & b : _s_antipr_pr->bins()) {
+        const size_t idx = b.index();
+        _r_antipr_pr->bin(idx).setVal(b.val());
+        for(auto & item : b.sources())
+          _r_antipr_pr->bin(idx).setErr(b.err(item),item);
+      }
+      
+      Estimate1DPtr _s_pr_piplus;
+      book(_s_pr_piplus,"/TMP/s_pr_piplus",refData(12,1,1).xEdges());
       divide(_h_pT_proton, _tmp_pT_piplus, _s_pr_piplus);
+      BinnedEstimatePtr<string> _r_pr_piplus;
+      book(_r_pr_piplus,25,1,2);
+      for(const auto & b : _s_pr_piplus->bins()) {
+        const size_t idx = b.index();
+        _r_pr_piplus->bin(idx).setVal(b.val());
+        for(auto & item : b.sources())
+          _r_pr_piplus->bin(idx).setErr(b.err(item),item);
+      }
+      
+      Estimate1DPtr _s_antipr_piminus;
+      book(_s_antipr_piminus,"/TMP/s_antipr_piminus",refData(12,1,1).xEdges());
       divide(_h_pT_antiproton, _tmp_pT_piminus, _s_antipr_piminus);
+      BinnedEstimatePtr<string> _r_antipr_piminus;
+      book(_r_antipr_piminus,26,1,2);
+      for(const auto & b : _s_antipr_piminus->bins()) {
+        const size_t idx = b.index();
+        _r_antipr_piminus->bin(idx).setVal(b.val());
+        for(auto & item : b.sources())
+          _r_antipr_piminus->bin(idx).setErr(b.err(item),item);
+      }
+      
       const double factor = ((1/(2*M_PI)) / _sumWeightSelected->val());
       scale(_h_pT_piplus,     factor);
       scale(_h_pT_piminus,    factor);
@@ -94,7 +133,6 @@ namespace Rivet {
     CounterPtr _sumWeightSelected;
     Histo1DPtr _h_pT_piplus, _h_pT_piminus, _h_pT_proton, _h_pT_antiproton;
     Histo1DPtr _tmp_pT_piplus, _tmp_pT_piminus;
-    Estimate1DPtr _s_piminus_piplus, _s_antipr_pr, _s_pr_piplus, _s_antipr_piminus;
     /// @}
 
   };

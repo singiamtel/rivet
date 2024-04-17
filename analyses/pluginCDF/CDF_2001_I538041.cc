@@ -62,7 +62,7 @@ namespace Rivet {
       if (eta_idx && eta_idx <= _h_ET->numBins()) {
         // eta bin is in visible range
         const size_t et_idx = _etaxes[eta_idx-1].index(ET);
-        if (et_idx && et_idx <= _etaxes[eta_idx-1].size()) {
+        if (et_idx && et_idx <= _edges[eta_idx-1].size()) {
           // ET bin along this eta bin is also in visible range
           edge = _edges[eta_idx-1][et_idx-1];
         }
