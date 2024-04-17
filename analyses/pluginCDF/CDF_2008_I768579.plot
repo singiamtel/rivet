@@ -1,23 +1,23 @@
 # BEGIN PLOT /CDF_2008_I768579/d01-x01-y01
-Title=$E_\perp$ of jet #1
+Title=$E_\perp$ of 1st jet
 XLabel=$E_\perp$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}E_{\perp}$ [pb/GeV]
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768579/d02-x01-y01
-Title=$E_\perp$ of jet #2
+Title=$E_\perp$ of 2nd jet
 XLabel=$E_\perp$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}E_{\perp}$ [pb/GeV]
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768579/d03-x01-y01
-Title=$E_\perp$ of jet #3
+Title=$E_\perp$ of 3rd jet
 XLabel=$E_\perp$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}E_{\perp}$ [pb/GeV]
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768579/d04-x01-y01
-Title=$E_\perp$ of jet #4
+Title=$E_\perp$ of 4th jet
 XLabel=$E_\perp$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}E_{\perp}$ [pb/GeV]
 # END PLOT

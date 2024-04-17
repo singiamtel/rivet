@@ -63,7 +63,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_yZ;
-    Histo1DPtr _h_xs;
+    BinnedHistoPtr<int> _h_xs;
     /// @}
 
   };

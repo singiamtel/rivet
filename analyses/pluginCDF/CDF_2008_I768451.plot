@@ -2,8 +2,6 @@
 Title=Jet multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(N_{\mathrm{jet}})$
-XMajorTickMarks=10
-XMinorTickMarks=0
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768451/d02-x01-y01
