@@ -1,6 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/DISKinematics.hh"
 #include "Rivet/Projections/DISLepton.hh"
@@ -27,6 +28,8 @@ namespace Rivet {
 
       const FinalState fs(cut);
       declare(fs, "FS");
+      const UnstableParticles ufs(cut);
+      declare(ufs, "UFS");
 
       const ChargedFinalState cfs(cut);
       declare(cfs, "CFS");
@@ -36,10 +39,10 @@ namespace Rivet {
       book(_h["eta_kaon"], 2, 1, 1);
       book(_h["pT_lambda"], 3, 1, 1);
       book(_h["eta_lambda"], 4, 1, 1);
-      book(_h_multK0_0,"TMP/mult_0", refData(5,1,1));
-      book(_h_multK0_1,"TMP/mult_1", refData(5,1,1));
-      book(_h_multK0_2,"TMP/mult_2", refData(6,1,1));
-      book(_h_multK0_3,"TMP/mult_3", refData(6,1,1));
+      book(_h_multK0_0,"TMP/mult_0", refData<YODA::BinnedEstimate<string> >(5,1,1));
+      book(_h_multK0_1,"TMP/mult_1", refData<YODA::BinnedEstimate<string> >(5,1,1));
+      book(_h_multK0_2,"TMP/mult_2", refData<YODA::BinnedEstimate<string> >(6,1,1));
+      book(_h_multK0_3,"TMP/mult_3", refData<YODA::BinnedEstimate<string> >(6,1,1));
       book(_h_scatratio, 6, 1, 1);
       book(_h["K0_NRG_data_pT"], 7, 1, 1);
       book(_h["K0_LRG_data_pT"], 8, 1, 1);
@@ -54,8 +57,10 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-
+      if(_edges.empty()) _edges = _h_multK0_0->xEdges();;
+      
       const FinalState& fs = apply<FinalState>(event, "FS");
+      const UnstableParticles & ufs = apply<UnstableParticles>(event, "UFS");
       const DISKinematics& dk = apply<DISKinematics>(event, "Kinematics");
 
       const DISRapidityGap& g = apply<DISRapidityGap>(event, "Rapidity Gap");
@@ -79,12 +84,19 @@ namespace Rivet {
       double W = sqrt(dk.W2()/GeV);
       bool cut = Q2 >10 && Q2<640 && xbj>0.0003 && xbj<0.01 && ybj>0.04 && ybj<1.0;
       if (!cut) vetoEvent;
-      _h_multK0_1 -> fill(Q2);
-      _h_multK0_2 -> fill(Q2,numPartcharged);
+
+
+      size_t idx = _axis.index(Q2);
+      string edge = "OTHER";
+      if(idx && idx <= _edges.size()) edge=_edges[idx-1];
+
+      
+      _h_multK0_1 -> fill(edge);
+      _h_multK0_2 -> fill(edge,numPartcharged);
 
       _c["dis"] -> fill();
 
-      for(const Particle& p : fs.particles()){
+      for(const Particle& p : ufs.particles()){
           const double eta= p.eta();
           const double pT = p.pT()/GeV;
 	  const int pid = abs(p.pid());
@@ -95,8 +107,8 @@ namespace Rivet {
                 //fill histograms related to the kaons in here.
                 _h["pT_kaon"] -> fill(pT,0.5/pT);
                 _h["eta_kaon"] -> fill(eta);
-                _h_multK0_0 -> fill(Q2);
-                _h_multK0_3 -> fill(Q2);
+                _h_multK0_0 -> fill(edge);
+                _h_multK0_3 -> fill(edge);
                 if(rgap<1.5 && W>140.0 ) {
                    _h["K0_LRG_data_pT"] -> fill(pT,0.5/pT);
                    _h["K0_LRG_data_eta"] -> fill(eta);
@@ -142,15 +154,19 @@ namespace Rivet {
     ///@}
 
 
+   private:
+    
     /// @name Histograms
     ///@{
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    BinnedEstimatePtr<string> _h_scat, _h_scatratio ;
+    BinnedHistoPtr<string> _h_multK0_0 , _h_multK0_1 ,_h_multK0_2 ,_h_multK0_3 ;
+    YODA::Axis<double> _axis = YODA::Axis<double>{8.98, 12.195, 15.41, 32.535,106.89, 240.31};
+    vector<string> _edges;
     ///@}
-   private:
-     Estimate1DPtr _h_scat, _h_scatratio ;
-     Histo1DPtr _h_multK0_0 , _h_multK0_1 ,_h_multK0_2 ,_h_multK0_3 ;
+    
   };
 
 

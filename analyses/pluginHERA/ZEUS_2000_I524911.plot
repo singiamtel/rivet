@@ -9,11 +9,6 @@ YMin=0.00
 YMax=0.10
 LegendYPos=0.4
 LegendXPos=0.5
-
-#YMajorTickMarks=5
-#YMinorTickMarks=3
-
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 # ... add more histograms as you need them ...
@@ -27,10 +22,6 @@ XMin=-180
 XMax=180
 YMin=0.00
 YMax=0.08
-YMajorTickMarks=10
-YMinorTickMarks=3
-
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ZEUS_2000_I524911/d01-x01-y03
@@ -42,9 +33,6 @@ XMin=-180
 XMax=180
 YMin=0.00
 YMax=0.06
-YMajorTickMarks=5
-YMinorTickMarks=3
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ZEUS_2000_I524911/d01-x01-y04
@@ -56,9 +44,6 @@ XMin=-180
 XMax=180
 YMin=0.000
 YMax=0.040
-YMajorTickMarks=10
-YMinorTickMarks=3
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ZEUS_2000_I524911/d02-x01-y01
@@ -70,9 +55,6 @@ XMin=0
 XMax=9.00
 YMin=-0.15
 YMax=0.10
-YMajorTickMarks=10
-
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ZEUS_2000_I524911/d02-x01-y02
@@ -84,7 +66,4 @@ XMin=0
 XMax=9.00
 YMin=-0.10
 YMax=0.15
-YMajorTickMarks=10
-YMinorTickMarks=3
-
-
+END PLOT

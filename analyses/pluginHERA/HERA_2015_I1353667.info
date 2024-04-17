@@ -5,6 +5,7 @@ Experiment: H1/ZEUS
 Collider: HERA
 InspireID: 1353667
 Status: UNVALIDATED
+Reentrant: True
 Authors:
  - Andy Buckley <andy.buckley@cern.ch>
 References:
@@ -25,7 +26,7 @@ Description:
    meson's transverse momentum $p_T(D^*) > 1.5 \GeV$ and pseudorapidity
    $|\eta(D^*)| < 1.5$. The combination procedure takes into account all
    correlations. Double-differential cross sections $d2\sigma/dQ^2 dy$
-   are combined with earlier $D^{∗\pm}$ data, extending the kinematic range
+   are combined with earlier $D^{*\pm}$ data, extending the kinematic range
    down to $Q^2 > 1.5 \GeV^2$.
 Keywords: [ep dis dstar]
 BibKey: H1:2015dma

@@ -138,13 +138,22 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
+      // need to multiply by bin widths
       for (size_t iQ=0; iQ < _h_tauc->numBins(); ++iQ) {
         const double Nev = dbl(*_Nevt_after_cuts_Q[iQ]);
         if (Nev != 0) {
           scale(_h_tauc->bin(iQ+1), 1./Nev);
+          for(auto & bin : _h_tauc->bin(iQ+1)->bins())
+            bin.scaleW(bin.xWidth());
           scale(_h_tau->bin(iQ+1), 1./Nev);
+          for(auto & bin : _h_tau->bin(iQ+1)->bins())
+            bin.scaleW(bin.xWidth());
           scale(_h_B->bin(iQ+1), 1./Nev);
+          for(auto & bin : _h_B->bin(iQ+1)->bins())
+            bin.scaleW(bin.xWidth());
           scale(_h_rho->bin(iQ+1), 1./Nev);
+          for(auto & bin : _h_rho->bin(iQ+1)->bins())
+            bin.scaleW(bin.xWidth());
         }
       }
     }

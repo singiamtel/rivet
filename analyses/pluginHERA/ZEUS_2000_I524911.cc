@@ -41,7 +41,7 @@ namespace Rivet {
       book(_p["cosphi"],2, 1, 1) ;
       book(_p["cos2phi"],2, 1, 2) ;
    
-// counter pointer to store the no. of events           
+      // counter pointer to store the no. of events           
       book(_Nevt_after_cuts, "TMP/Nevt_after_cuts");
 
       
@@ -51,7 +51,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-    
+      if(_edges.empty()) _edges = _p["cosphi"]->xEdges();
     //const FinalState& fsall = apply<FinalState>(event, "FS");
     const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
 
@@ -62,7 +62,6 @@ namespace Rivet {
     double y = dk.y();
     const double Q2 = dk.Q2();
     
-     double PT[] = { 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0};
     // Extract the particles other than the lepton
 
       if(x<0.01||x>0.1) vetoEvent;
@@ -102,21 +101,19 @@ namespace Rivet {
 // Filling histograms with values of cos(phi) and cos(2phi) wrt the corresponding momentum cuts
 
          for (size_t i = 0; i < 8; ++i) {
-            if(hcmMom.pT() > PT[i] ) { 
-             _p["cosphi"]->fill(i+1,cos(hcmMom.phi()));
-             _p["cos2phi"]->fill(i+1,cos(2.*hcmMom.phi()));
-             }
+            if(hcmMom.pT() > _ptCut[i] ) { 
+              _p["cosphi"] ->fill(_edges[i],cos(hcmMom.phi()));
+              _p["cos2phi"]->fill(_edges[i],cos(2.*hcmMom.phi()));
+            }
          }
-         
-         
                     
-         if(hcmMom.pT() > PT[1] ) { _h["A1"] -> fill(phi); }          
+         if(hcmMom.pT() > _ptCut[1] ) { _h["A1"] -> fill(phi); }          
                      
-         if(hcmMom.pT() > PT[3] ) { _h["A2"] -> fill(phi); }
+         if(hcmMom.pT() > _ptCut[3] ) { _h["A2"] -> fill(phi); }
          
-         if(hcmMom.pT() > PT[5] ) { _h["A3"] -> fill(phi); }
+         if(hcmMom.pT() > _ptCut[5] ) { _h["A3"] -> fill(phi); }
                    
-         if(hcmMom.pT() > PT[7] ) { _h["A4"] -> fill(phi); }
+         if(hcmMom.pT() > _ptCut[7] ) { _h["A4"] -> fill(phi); }
         
      }
         
@@ -130,8 +127,7 @@ namespace Rivet {
 
       // correct binwidth in degree to correct for binning from degree to rad by: binwidth/(2PI/10.)
       double norm = dbl(*_Nevt_after_cuts) ;
-   //   cout << " Nev " << norm << " bin_width= " <<_h["A2"]->bin(0).xWidth() << endl;
-      double degTOrad_width = _h["A1"]->bin(0).xWidth()*10./2./M_PI ;
+      double degTOrad_width = _h["A1"]->bin(1).xWidth()*10./2./M_PI ;
       if (norm > 1 ) {
          scale(_h["A1"], degTOrad_width/norm); 
          scale(_h["A2"], degTOrad_width/norm); 
@@ -147,9 +143,11 @@ namespace Rivet {
     /// @name Histograms
     ///@{
     map<string, Histo1DPtr> _h;
-    map<string, Profile1DPtr> _p;
+    map<string, BinnedProfilePtr<string>> _p;
     map<string, CounterPtr> _c;
     CounterPtr _Nevt_after_cuts;
+    vector<string> _edges;
+    vector<double> _ptCut = { 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0};
     ///@}
     
 

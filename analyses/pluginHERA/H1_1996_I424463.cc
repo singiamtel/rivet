@@ -31,31 +31,28 @@ namespace Rivet {
 
       // Book histograms
       book(_NevAll, "TMP/Nev_all");
-      _h_dndpt_high_eta_bin.resize(10);
-      _h_dndpt_low_eta_bin.resize(10);
-      _hdndeta_pt1_bin.resize(10);
-      _hdndeta_bin.resize(10);
-      _hdndptmax_low_eta_bin.resize(8);
       int ixx = 0 ;
       for (size_t ix = 0; ix < 10; ++ix) {
         book(_Nevt_after_cuts[ix], "TMP/Nevt_after_cuts" + to_string(ix));
-        book(_h_dndpt_high_eta_bin[ix], ix+1, 1, 1);
-        book(_h_dndpt_low_eta_bin[ix], ix+11, 1, 1);
+        for(unsigned int ih=0;ih<2;++ih) {
+          book(_h_dndpt_eta_bin[ih][ix], ih*10 + ix+1 , 1, 1);
+          book(_hdndeta_bin    [ih][ix], ih*10 + ix+29, 1, 1);
+        }
         if (ix != 6 && ix != 9) {
           book(_hdndptmax_low_eta_bin[ixx], ixx+21, 1, 1);
           ixx=ixx+1;
         }
-        book(_hdndeta_pt1_bin[ix], ix+29, 1, 1);
-        book(_hdndeta_bin[ix],  ix+39, 1, 1);
       }
-
-
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      // const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
+      if (_edgespT.empty()) {
+        _edgespT    = _h_dndpt_eta_bin   [0][0]->xEdges();
+        _edgesEta   = _hdndeta_bin       [0][0]->xEdges();
+        _edgespTMax = _hdndptmax_low_eta_bin[0]->xEdges();
+      }
       const FinalState& fs = apply<FinalState>(event, "FS");
       const DISKinematics& dk = apply<DISKinematics>(event, "Kinematics");
       const DISLepton& dl = apply<DISLepton>(event,"Lepton");
@@ -132,7 +129,7 @@ namespace Rivet {
             if (etahcm > 0.5 && etahcm < 1.5) {
               for ( int i=0; i< 10; i++) {
                 if (ibin[i]==1) {
-                  _h_dndpt_low_eta_bin[i] ->fill(pThcm);
+                  fillpT(1,i,pThcm);
                   if (pThcm > ptmax_low[i] ) ptmax_low[i] = pThcm;
                 }
               }
@@ -141,14 +138,14 @@ namespace Rivet {
             if (etahcm > 1.5 && etahcm < 2.5){
               for ( int i=0; i< 10; i++) {
                 if (ibin[i]==1) {
-                  _h_dndpt_high_eta_bin[i] ->fill(pThcm);
+                  fillpT(0,i,pThcm);
                   if (pThcm > ptmax_high[i] ) ptmax_high[i] = pThcm;
                 }
               }
             }
             for ( int i=0; i< 10; i++) {
-              if (ibin[i]==1) _hdndeta_bin[i] ->fill(etahcm);
-              if (ibin[i]==1 && pThcm > 1.) _hdndeta_pt1_bin[i] ->fill(etahcm);
+              if (ibin[i]==1)               fillEta(1,i,etahcm);
+              if (ibin[i]==1 && pThcm > 1.) fillEta(0,i,etahcm);
             }
           }
         }  // end of loop over the particles
@@ -157,13 +154,11 @@ namespace Rivet {
       for ( int i=0; i< 10; i++) {
         if (i != 6 && i != 9 ) {
           if ( ibin[i]==1 && EtSum > 6. ) {
-            _hdndptmax_low_eta_bin[ii] ->fill(ptmax_low[i]);
-            // cout << " filling ptmax " << ii << "  " <<  i << endl;
+            fillpTMax(ii,ptmax_low[i]);
           }
           ii=ii+1;
         }
       }
-
     }
 
 
@@ -174,30 +169,101 @@ namespace Rivet {
       int ii = 0;
       for ( int i=0; i< 10; i++) {
         if (_Nevt_after_cuts[i]->val()  != 0) {
-          scale(_h_dndpt_high_eta_bin[i], 1./ *_Nevt_after_cuts[i]);
-          scale(_h_dndpt_low_eta_bin[i], 1./ *_Nevt_after_cuts[i]);
-          scale(_hdndeta_bin[i], 1./ *_Nevt_after_cuts[i]);
-          scale(_hdndeta_pt1_bin[i], 1./ *_Nevt_after_cuts[i]);
+          for(unsigned int ih=0;ih<2;++ih) {
+            scale(_h_dndpt_eta_bin[ih][i], 1./ *_Nevt_after_cuts[i]);
+            size_t ioff=0;
+            if( (ih==0 && (i==6 || i==9)) ||
+                (ih==1 && (i<=4 || i==7)))    ioff=1;
+            else if (ih==1 && (i==5 || i==8)) ioff=2;
+            for(auto & b : _h_dndpt_eta_bin[ih][i]->bins()) {
+              const size_t idx = b.index()+ioff;
+              b.scaleW(1./_axispT.width(idx));
+            }
+            scale(_hdndeta_bin    [ih][i], 1./ *_Nevt_after_cuts[i]);
+            ioff=0;
+            if( (ih==0 && (i==5 || i==6 || i==8 || i==9)) ||
+                (ih==1 && (i==0 || i==4 || i==5 || i==8))) ioff=1;
+            else if (ih==1 && (i==6 || i==9))       ioff=2;
+            for(auto & b : _hdndeta_bin[ih][i]->bins()) {
+              const size_t idx = b.index()+ioff;
+              b.scaleW(1./_axisEta.width(idx));
+            }
+          }
         }
         if ( i !=6 && i!=9) {
-          // if (_Nevt_after_cuts[i]->val()  != 0) scale(_hdndptmax_low_eta_bin[ii], 1./ *_Nevt_after_cuts[i]); ii=ii+1; };
-          if (_Nevt_after_cuts[i]->val()  != 0) normalize(_hdndptmax_low_eta_bin[ii]); ii=ii+1;
+          if (_Nevt_after_cuts[i]->val()  != 0) {
+            normalize(_hdndptmax_low_eta_bin[ii]);
+            for(auto & b : _hdndptmax_low_eta_bin[ii]->bins()) {
+              const size_t idx = b.index();
+              b.scaleW(1./_axispTMax.width(idx));
+            }
+          }
+          ii=ii+1;
         }
       }
+      
     }
-
     /// @}
 
+    void fillEta(const unsigned int ix, const unsigned int iy, const double value) {
+      string edge = "OTHER";
+      const size_t idx = _axisEta.index(value);
+      if (idx && idx <= _edgesEta.size()) {
+        if ( ( (ix==0 && iy>=1&& iy<=3) || (ix==0 && (iy==1 || iy==3)) ) && idx == _edgesEta.size())
+          ;
+        else if (idx==1 && ( (ix==0 && (iy==5 || iy==6 || iy==8 || iy==9)) ||
+                             (ix==1 && (iy==0 || iy==4 || iy==5 || iy==8))))
+          ;
+        else if (idx<=2 && (ix==1 && (iy==6 || iy==9)) )
+          ;
+        else {
+          edge = _edgesEta[idx-1];
+        }
+      }
+      _hdndeta_bin[ix][iy]->fill(edge);
+    }
+    
+    void fillpT(const unsigned int ix, const unsigned int iy, const double value) {
+      string edge = "OTHER";
+      const size_t idx = _axispT.index(value);
+      if (idx && idx <= _edgespT.size()) {
+        if(((ix==0 && iy==8) || (ix==1 && (iy==2 || iy==4 || iy==6))) && idx == _edgespT.size())
+          ;
+        else if (idx==1 && ( (ix==0 && (iy==6 || iy==9)) ||
+                             (ix==1 && (iy<=4 || iy==7))))
+          ;
+        else if (idx<=2 && (ix==1 && (iy==5 || iy==8)))
+          ;
+        else
+          edge = _edgespT[idx-1];
+      }
+      _h_dndpt_eta_bin[ix][iy]->fill(edge);
+    }
+
+    void fillpTMax(const unsigned int ix, const double value) {
+      string edge = "OTHER";
+      const size_t idx = _axispTMax.index(value);
+      if (idx && idx <= _edgespTMax.size()) {
+        if(idx==_edgespTMax.size() && (ix==1 || ix==2 || ix==4))
+          ;
+        else if(idx>=_edgespTMax.size()-1 && ix==5)
+          ;
+        else
+          edge = _edgespTMax[idx-1];
+      }
+      _hdndptmax_low_eta_bin[ix]->fill(edge);
+    }
 
     /// @name Histograms
     /// @{
-    map<string, Histo1DPtr> _h;
-    map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> _c;
     array<CounterPtr,10> _Nevt_after_cuts;
-    vector<Histo1DPtr> _h_dndpt_low_eta_bin, _h_dndpt_high_eta_bin;
-    vector<Histo1DPtr> _hdndeta_bin, _hdndeta_pt1_bin, _hdndptmax_low_eta_bin;
+    BinnedHistoPtr<string> _h_dndpt_eta_bin[2][10], _hdndeta_bin[2][10], _hdndptmax_low_eta_bin[8];
     CounterPtr _NevAll ;
+
+    vector<string> _edgespT,_edgesEta,_edgespTMax;
+    YODA::Axis<double> _axispT    = YODA::Axis<double>{ 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.825, 2.125, 2.525, 3.125, 4.0, 5.0};
+    YODA::Axis<double> _axisEta   = YODA::Axis<double>{ 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.00};
+    YODA::Axis<double> _axispTMax = YODA::Axis<double>{0.005, 0.255, 0.505, 0.755, 1.005, 1.255, 1.505, 1.755, 2.065, 2.5, 3.125, 4.0, 5.0};
     /// @}
 
   };
