@@ -46,14 +46,8 @@ namespace Rivet {
         book(_e["Qxp"+to_string(iP)], 3+iP, 1, 1);
       }
 
-      book(_e["Avg1"], 10,1,1);
-      book(_e["Avg2"], 11,1,1);
-
-      book(_h["QT1"], "TMP/QT1",refData(10,1,1));
-      book(_h["QT2"], "TMP/QT2",refData(11,1,1));
-
-      book(_h["AvgT1"], "TMP/AvgT1",refData(10,1,1));
-      book(_h["AvgT2"], "TMP/AvgT2",refData(11,1,1));
+      book(_p["Avg1"], 10,1,1);
+      book(_p["Avg2"], 11,1,1);
 
       for (size_t iE = 0; iE < 8; ++iE) {
         book(_h["E"+to_string(iE)], 12+iE, 1, 1);
@@ -187,13 +181,9 @@ namespace Rivet {
       if (Q2 > 100 && Q2 < 500 && x>2e-3 && x<1e-2)   _h["N4"]->fill(multiperevent5);
       if (Q2 > 100 && Q2 < 500 && x>1e-2 && x<2e-1)   _h["N5"]->fill(multiperevent6);
 
-      if (Q2 > 12) {
-       _h["AvgT2"] -> fill(sqrt(Q2), multi);
-       _h["QT2"] -> fill(sqrt(Q2));
-      }
+      if (Q2 > 12) _p["Avg2"] -> fill(sqrt(Q2), multi);
 
-      _h["AvgT1"] -> fill(sqrt(Q2), multi);
-      _h["QT1"] -> fill(sqrt(Q2));
+      _p["Avg1"] -> fill(sqrt(Q2), multi);
 
       _h["MeanTest1"] -> fill(sqrt(Q2));
       _h["MeanTest2"] -> fill(sqrt(Q2));
@@ -213,25 +203,22 @@ namespace Rivet {
         scale(_h["E"+to_string(iE)], 1.0/ *_Nevt_after_cuts_E[iE]);
       }
 
-      for(int iN=0 ; iN< 8 ; ++iN){
+      for(int iN=0 ; iN< 6 ; ++iN){
         scale(_h["N"+to_string(iN)], 1.0/ *_Nevt_after_cuts_N[iN]);
       }
 
-      divide(_h["AvgT1"], _h["QT1"],_e["Avg1"] );
-      divide(_h["AvgT2"], _h["QT2"],_e["Avg2"] );
 
 
 
       int iQ = 0;
-      double mean;
       for (auto& histo :_h_Q2_xp->bins()) {
         const double Nev = dbl(*_Nevt_after_cuts_Q[iQ]) ;
         if (Nev != 0) scale(histo, 1./Nev);
 
         for (size_t iP = 0; iP < iPmax; ++iP) {
-          mean = histo->bin(iP).sumW() ;
-          double mean_err = mean/100;
-          _e["Qxp"+to_string(iP)]->bin(iP+1).set(mean, mean_err);
+          double mean      = histo->bin(iP+1).sumW()       /histo->bin(iP+1).xWidth();
+          double mean_err = sqrt( histo->bin(iP+1).sumW2())/histo->bin(iP+1).xWidth();
+          _e["Qxp"+to_string(iP)]->bin(iQ+1).set(mean, mean_err);
         }
         ++iQ;
       }
@@ -257,6 +244,7 @@ namespace Rivet {
     CounterPtr _Nevt_after_cuts_Q[12];
     map<string, Histo1DPtr> _h;
     map<string, Estimate1DPtr> _e;
+    map<string, Profile1DPtr> _p;
     Estimate1DPtr _h_pt_06_ratio;
 
     Histo1DGroupPtr _h_Q2_xp;

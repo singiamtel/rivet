@@ -171,12 +171,11 @@ namespace Rivet {
             jet1 = jet_cut[0].momentum(); // momentum of jet #1 in Breit sys.
             jet2 = jet_cut[1].momentum(); // momentum of jet #2 in Breit sys.
 
-            delta_phi = deltaPhi(jet1,jet2)/degree ;
+            delta_phi = deltaPhi(jet1,jet2);
             _h["1911"] -> fill(Q2);
             _h["2011"] -> fill(xbj);
             _h["2111"] -> fill(jet_cut[0].momentum().Et()/GeV);
             _h["2211"] -> fill(FourMomentum(jet1+jet2).mass()/GeV);  // Jets invariant mass in Breit sys.
-            //cout << " dphi " << delta_phi <<" " << deltaPhi(jet_cut[0].momentum(),jet_cut[1].momentum())/degree <<  endl;
             _h_binned["Q2phi"]->fill(Q2, delta_phi);
             for (const Jet& jet : jet_cut) {
                 for(const Particle & p : Dstar) {
@@ -246,10 +245,8 @@ namespace Rivet {
 
         const double norm = crossSection()/nanobarn/sumW();
         scale(_h, norm);
-        scale(_h_binned["Q2xbj"], norm);
-        scale(_h_binned["Q2phi"], norm*180./M_PI);
-        scale(_h_binned["Q2xgam"], norm);
-        scale(_h_binned["Q2xglue"], norm);
+        scale(_h_binned, norm);
+        divByGroupWidth(_h_binned);
 
         // new scaling needed, since x bins are in log10(x)
         for (auto& b : _h["3011"]->bins()) {

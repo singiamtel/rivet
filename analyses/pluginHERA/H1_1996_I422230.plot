@@ -365,8 +365,6 @@ Title=$R_3$ vs $W$,   $2<\eta<3$
 END PLOT
 
 BEGIN PLOT /H1_1996_I422230/d10-x01-y10
-YMin=-0.4
-YMax=0.6
 Title=$K_3$ vs $W$,   $2<\eta<3$
 END PLOT
 
@@ -449,6 +447,5 @@ Title=$R_3$ vs $W$,   $4<\eta<5$
 END PLOT
 
 BEGIN PLOT /H1_1996_I422230/d12-x01-y10
-YMin=-0.15
 Title=$K_3$ vs $W$, ,   $4<\eta<5$
 END PLOT

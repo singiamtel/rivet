@@ -29,7 +29,6 @@ namespace Rivet {
 
       Histo1DPtr dummy;
       string beamOpt = getOption<string>("BEAM","NONE");
-
       if (beamOpt == "NONE") {
         const ParticlePair& beam = beams();
         _positron = (beam.first.pid() == PID::POSITRON || beam.second.pid() == PID::POSITRON );
@@ -93,7 +92,7 @@ namespace Rivet {
           355., 455., 460., 545., 560., 765., 770., 835.
         };
         book(_h_sigred, Q2edges);
-        _h_sigred->maskBins({8, 13, 16, 18, 25, 29, 31});
+        _h_sigred->maskBins({8, 13, 16, 18, 25, 27, 29, 31});
         size_t idx = 0;
         for (auto& b : _h_sigred->bins()) {
           book(b, 3, 1, ++idx);
@@ -101,43 +100,41 @@ namespace Rivet {
       }
 
       // e+- p at sqrts=225
-      else if (isCompatibleWithSqrtS(225*GeV, eps)) {
-        if (_positron) {
-          // NC e+ p at sqrts=225
-          const vector<double> Q2edges = {
-            1., 1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 22.1, 28.,
-            30., 42., 49., 54., 65., 75., 108., 134., 180., 225., 280., 325.,
-            355., 455., 460., 545., 560., 765., 770., 835.
-          };
-          book(_h_sigred, Q2edges);
-          _h_sigred->maskBins({8, 13, 16, 18, 25, 29, 31});
-          size_t idx = 0;
-          for (auto& b : _h_sigred->bins()) {
-            book(b, 4, 1, ++idx);
-          }
+      else if (isCompatibleWithSqrtS(225*GeV, eps) && _positron ) {
+        // NC e+ p at sqrts=225
+        const vector<double> Q2edges = {
+          1., 1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 22.1, 28.,
+          30., 42., 49., 54., 65., 75., 108., 134., 180., 225., 280., 325.,
+          355., 455., 460., 545., 560., 765., 770., 835.
+        };
+        book(_h_sigred, Q2edges);
+        _h_sigred->maskBins({8, 13, 16, 18, 25, 27, 29, 31});
+        size_t idx = 0;
+        for (auto& b : _h_sigred->bins()) {
+          book(b, 4, 1, ++idx);
         }
-        else {
-          // NC e- p at sqrts=225
-          const vector<double> Q2edges = {
-            54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455.,
-            460., 545., 560., 765., 770., 835., 900., 1120., 1295., 1300.,
-            1755., 1800., 2270., 2500., 3685., 4000., 6520., 7000., 9275.,
-            10000., 15000., 17000., 24770., 25000., 42000., 70000.
-          };
-          book(_h_sigred, Q2edges);
-          _h_sigred->maskBins({2, 9, 11, 13, 15, 17, 20, 22, 24, 26, 28, 30, 32, 34});
-          size_t idx = 0;
-          for (auto& b : _h_sigred->bins()) {
-            book(b, 5, 1, ++idx);
-          }
-          // CC e- p at sqrts=225
-          book(_h_sigred_cc, {280., 325., 460., 545., 900., 1120., 1300., 1755., 1800., 2270.,
-                              2500., 3685., 4000., 6520., 7000., 9275., 10000., 20000., 42000.});
-          _h_sigred_cc->maskBins({2, 4, 6, 8, 10, 12, 14, 16});
-          idx = 0;
-          for (auto& b : _h_sigred_cc->bins()) {
-            book(b, 7, 1, ++idx);
-          }
+      }
+      else if (isCompatibleWithSqrtS(318., eps) && !_positron  ) {
+        // NC e- p at sqrts=318
+        const vector<double> Q2edges = {
+          54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455.,
+          460., 545., 560., 765., 770., 835., 900., 1120., 1295., 1300.,
+          1755., 1800., 2270., 2500., 3685., 4000., 6520., 7000., 9275.,
+          10000., 15000., 17000., 24770., 25000., 42000., 70000.
+        };
+        book(_h_sigred, Q2edges);
+        _h_sigred->maskBins({2, 9, 11, 13, 15, 17, 20, 22, 24, 26, 28, 30, 32, 34});
+        size_t idx = 0;
+        for (auto& b : _h_sigred->bins()) {
+          book(b, 5, 1, ++idx);
+        }
+        // CC e- p at sqrts=318
+        book(_h_sigred_cc, {280., 325., 460., 545., 900., 1120., 1300., 1755., 1800., 2270.,
+                            2500., 3685., 4000., 6520., 7000., 9275., 10000., 20000., 42000.});
+        _h_sigred_cc->maskBins({2, 4, 6, 8, 10, 12, 14, 16});
+        idx = 0;
+        for (auto& b : _h_sigred_cc->bins()) {
+          book(b, 7, 1, ++idx);
         }
       }
     }
@@ -180,8 +177,11 @@ namespace Rivet {
       const double scalefactor=crossSection()/nanobarn/sumOfWeights()/gev2nb ;
       // with _h_sigred.scale also q2 bin width is scaled
       scale(_h_sigred, scalefactor);
-      scale(_h_sigred_cc, scalefactor);
-      divByGroupWidth({_h_sigred, _h_sigred_cc});
+      divByGroupWidth(_h_sigred);
+      if(isCompatibleWithSqrtS(318., 0.01)) {
+        scale(_h_sigred_cc, scalefactor);
+        divByGroupWidth(_h_sigred_cc);
+      }
     }
 
     /// @}

@@ -44,10 +44,10 @@ namespace Rivet {
       // Book histograms
       // specify custom binning
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["costh_lowQ"], 1, 1, 1);
-      book(_h["costh_highQ"], 1, 1, 2);     
-      book(_h["costh_lowQ_noEfwd"], 2, 1, 1);
-      book(_h["costh_highQ_noEfwd"], 2, 1, 2);
+      book(_d["costh_lowQ"]        , 1, 1, 1);
+      book(_d["costh_highQ"]       , 1, 1, 2);
+      book(_d["costh_lowQ_noEfwd"] , 2, 1, 1);
+      book(_d["costh_highQ_noEfwd"], 2, 1, 2);
       book(_h["xp_posCharge_lowQ"], 3, 1, 1);
       book(_h["xp_negCharge_lowQ"], 3, 1, 2);
       book(_h["xp_posCharge_highQ"], 3, 1, 3);
@@ -67,11 +67,12 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if(_edges.empty()) _edges = _d["costh_lowQ"]->xEdges();
 
-     const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
+      const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
     
    
-    //DIS kinematics
+      //DIS kinematics
       const DISKinematics& dk = apply<DISKinematics>(event, "Kinematics");
       if ( dk.failed() ) vetoEvent;
       double y   = dk.y();
@@ -80,9 +81,7 @@ namespace Rivet {
       
       
       
-      bool cut ;
-      
-      cut = Q2 > 12 && y < 0.6 && w2 > 3000 ;
+      bool cut = Q2 > 12 && y < 0.6 && w2 > 3000 ;
       
       
       if ( !cut ) vetoEvent ; 
@@ -136,12 +135,16 @@ namespace Rivet {
         const FourMomentum BreMom = breitboost.transform(p.momentum());
        // cout << BreMom.pz() << endl;
         double x = cos(BreMom.theta());
+
+        size_t idx = _axis.index(x);
+        string edge = "OTHER";
+        if(idx && idx <= _edges.size()) edge=_edges[idx-1];
         
-        if (Q2 < 80 ) _h["costh_lowQ"] ->fill(x);
-        if (Q2 > 100 ) _h["costh_highQ"]  ->fill(x);
+        if (Q2 < 80 )  _d["costh_lowQ" ] ->fill(edge);
+        if (Q2 > 100 ) _d["costh_highQ"]  ->fill(edge);
         
-        if (Q2 < 80  && evcut[0]) _h["costh_lowQ_noEfwd"] ->fill(x);
-        if (Q2 > 100 && evcut[0]) _h["costh_highQ_noEfwd"]  ->fill(x);
+        if (Q2 < 80  && evcut[0]) _d["costh_lowQ_noEfwd" ] ->fill(edge);
+        if (Q2 > 100 && evcut[0]) _d["costh_highQ_noEfwd"]  ->fill(edge);
 
 
         if ( BreMom.pz() > 0. ) continue;
@@ -182,16 +185,14 @@ namespace Rivet {
       normalize(_h["xp_negCharge_lowQ"]);
       if(dbl(*_Nevt_afterh_cuts)>0) scale(_h["xp_negCharge_highQ"], 1.0/ *_Nevt_afterh_cuts);
 
-      scale(_h["costh_lowQ"], 1.0/ *_Nevt_after_cuts);
-      if(dbl(*_Nevt_afterh_cuts)>0) scale(_h["costh_highQ"], 1.0/ *_Nevt_afterh_cuts);
-      //cout << " after fwd cuts " << dbl(*_Nevt_afterfwd_cuts) << endl;
+      scale(_d["costh_lowQ"], 10.0/ *_Nevt_after_cuts);
+      if(dbl(*_Nevt_afterh_cuts)>0) scale(_d["costh_highQ"], 10.0/ *_Nevt_afterh_cuts);
       
-      if(dbl(*_Nevt_afterfwd_cuts)>0) scale(_h["costh_lowQ_noEfwd"], 1.0/ *_Nevt_afterfwd_cuts);
-      if(dbl(*_Nevt_afterhfwd_cuts)>0) scale(_h["costh_highQ_noEfwd"], 1.0/ *_Nevt_afterhfwd_cuts);
+      if(dbl(*_Nevt_afterfwd_cuts)>0) scale(_d["costh_lowQ_noEfwd"], 10.0/ *_Nevt_afterfwd_cuts);
+      if(dbl(*_Nevt_afterhfwd_cuts)>0) scale(_d["costh_highQ_noEfwd"], 10.0/ *_Nevt_afterhfwd_cuts);
       
       scale(_h["ksi_lowQ"], 1.0/ *_Nevt_after_cuts);
       if(dbl(*_Nevt_afterh_cuts)>0) scale(_h["ksi_highQ"], 1.0/ *_Nevt_afterh_cuts);
-      //cout << " Nevt " << dbl(*_Nevt_after_cuts) << endl;
 
       divide(_h["Mult_vrs_Q2_nchrg"], _h["Mult_vrs_Q2_count"], _s["Mult_vrs_Q2"]);
       divide(_h["Mult_vrs_Q2_noEfwd_nchrg"], _h["Mult_vrs_Q2_noEfwd_count"], _s["Mult_vrs_Q2_noEfwd"]);
@@ -203,6 +204,7 @@ namespace Rivet {
     /// @name Histograms
     ///@{
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<string> > _d;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Estimate1DPtr> _s;
@@ -210,6 +212,9 @@ namespace Rivet {
     CounterPtr _Nevt_afterfwd_cuts;
     CounterPtr _Nevt_afterh_cuts;
     CounterPtr _Nevt_afterhfwd_cuts;
+    vector<string> _edges;
+    YODA::Axis<double> _axis = YODA::Axis<double>{-1.0,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,
+                                                  0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
     ///@}
 
 
