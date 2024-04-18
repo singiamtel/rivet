@@ -20,19 +20,20 @@ namespace Rivet {
 
     PdgId ParticleNames::_particleID(const std::string& pname) {
       if (_names_ids.find(pname) == _names_ids.end()) {
-        if (toUpper(pname) == "P+" || toUpper(pname) == "P") return PROTON;
-        if (toUpper(pname) == "P-" || toUpper(pname) == "PBAR") return ANTIPROTON;
-        if (toUpper(pname) == "E-") return ELECTRON;
-        if (toUpper(pname) == "E+") return POSITRON;
-        if (toUpper(pname) == "GAMMA") return PHOTON;
-        if (toUpper(pname) == "N") return NEUTRON;
-        if (toUpper(pname) == "D") return DEUTERON;
-        if (toUpper(pname) == "AL") return ALUMINIUM;
-        if (toUpper(pname) == "CU") return COPPER;
-        if (toUpper(pname) == "XE") return XENON;
-        if (toUpper(pname) == "AU") return GOLD;
-        if (toUpper(pname) == "PB") return LEAD;
-        if (toUpper(pname) == "U") return URANIUM;
+        std::string up = toUpper(pname);
+        if (up == "P+" || up == "P") return PROTON;
+        if (up == "P-" || up == "PBAR") return ANTIPROTON;
+        if (up == "E-") return ELECTRON;
+        if (up == "E+") return POSITRON;
+        if (up == "GAMMA") return PHOTON;
+        if (up == "N") return NEUTRON;
+        if (up == "D") return DEUTERON;
+        if (up == "AL") return ALUMINIUM;
+        if (up == "CU") return COPPER;
+        if (up == "XE") return XENON;
+        if (up == "AU") return GOLD;
+        if (up == "PB") return LEAD;
+        if (up == "U") return URANIUM;
         try {
           PdgId rtn = lexical_cast<PdgId>(pname);
           return rtn;
