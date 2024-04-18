@@ -16,179 +16,179 @@ namespace Rivet {
     /// Static const convenience particle ID names
 
     /// Special wildcard particle name
-    static const PdgId ANY = 10000;
+    constexpr PdgId ANY = 10000;
 
     /// @name Charged leptons
     /// @{
-    static const PdgId ELECTRON = 11;
-    static const PdgId POSITRON = -ELECTRON;
-    static const PdgId EMINUS = ELECTRON;
-    static const PdgId EPLUS = POSITRON;
-    static const PdgId MUON = 13;
-    static const PdgId ANTIMUON = -MUON;
-    static const PdgId TAU = 15;
-    static const PdgId ANTITAU = -TAU;
+    constexpr PdgId ELECTRON = 11;
+    constexpr PdgId POSITRON = -ELECTRON;
+    constexpr PdgId EMINUS = ELECTRON;
+    constexpr PdgId EPLUS = POSITRON;
+    constexpr PdgId MUON = 13;
+    constexpr PdgId ANTIMUON = -MUON;
+    constexpr PdgId TAU = 15;
+    constexpr PdgId ANTITAU = -TAU;
     /// @}
 
     /// @name Neutrinos
     /// @{
-    static const PdgId NU_E = 12;
-    static const PdgId NU_EBAR = -NU_E;
-    static const PdgId NU_MU = 14;
-    static const PdgId NU_MUBAR = -NU_MU;
-    static const PdgId NU_TAU = 16;
-    static const PdgId NU_TAUBAR = -NU_TAU;
+    constexpr PdgId NU_E = 12;
+    constexpr PdgId NU_EBAR = -NU_E;
+    constexpr PdgId NU_MU = 14;
+    constexpr PdgId NU_MUBAR = -NU_MU;
+    constexpr PdgId NU_TAU = 16;
+    constexpr PdgId NU_TAUBAR = -NU_TAU;
     /// @}
 
     /// @name Bosons
     /// @{
-    static const PdgId PHOTON = 22;
-    static const PdgId GAMMA = PHOTON;
-    static const PdgId GLUON = 21;
-    static const PdgId WPLUSBOSON = 24;
-    static const PdgId WMINUSBOSON = -WPLUSBOSON;
-    static const PdgId WPLUS = WPLUSBOSON;
-    static const PdgId WMINUS = WMINUSBOSON;
-    static const PdgId WBOSON = WPLUSBOSON;
-    static const PdgId Z0BOSON = 23;
-    static const PdgId ZBOSON = Z0BOSON;
-    static const PdgId Z0 = Z0BOSON;
-    static const PdgId HIGGSBOSON = 25;
-    static const PdgId HIGGS = HIGGSBOSON;
-    static const PdgId H0BOSON = HIGGSBOSON;
-    static const PdgId HBOSON = HIGGSBOSON;
+    constexpr PdgId PHOTON = 22;
+    constexpr PdgId GAMMA = PHOTON;
+    constexpr PdgId GLUON = 21;
+    constexpr PdgId WPLUSBOSON = 24;
+    constexpr PdgId WMINUSBOSON = -WPLUSBOSON;
+    constexpr PdgId WPLUS = WPLUSBOSON;
+    constexpr PdgId WMINUS = WMINUSBOSON;
+    constexpr PdgId WBOSON = WPLUSBOSON;
+    constexpr PdgId Z0BOSON = 23;
+    constexpr PdgId ZBOSON = Z0BOSON;
+    constexpr PdgId Z0 = Z0BOSON;
+    constexpr PdgId HIGGSBOSON = 25;
+    constexpr PdgId HIGGS = HIGGSBOSON;
+    constexpr PdgId H0BOSON = HIGGSBOSON;
+    constexpr PdgId HBOSON = HIGGSBOSON;
     /// @}
 
     /// @name Quarks
     /// @{
-    static const PdgId DQUARK = 1;
-    static const PdgId UQUARK = 2;
-    static const PdgId SQUARK = 3;
-    static const PdgId CQUARK = 4;
-    static const PdgId BQUARK = 5;
-    static const PdgId TQUARK = 6;
+    constexpr PdgId DQUARK = 1;
+    constexpr PdgId UQUARK = 2;
+    constexpr PdgId SQUARK = 3;
+    constexpr PdgId CQUARK = 4;
+    constexpr PdgId BQUARK = 5;
+    constexpr PdgId TQUARK = 6;
     /// @}
 
     /// @name Nucleons
     /// @{
-    static const PdgId PROTON = 2212;
-    static const PdgId ANTIPROTON = -PROTON;
-    static const PdgId PBAR = ANTIPROTON;
-    static const PdgId NEUTRON = 2112;
-    static const PdgId ANTINEUTRON = -NEUTRON;
+    constexpr PdgId PROTON = 2212;
+    constexpr PdgId ANTIPROTON = -PROTON;
+    constexpr PdgId PBAR = ANTIPROTON;
+    constexpr PdgId NEUTRON = 2112;
+    constexpr PdgId ANTINEUTRON = -NEUTRON;
     /// @}
 
     /// @name Light mesons
     /// @{
-    static const PdgId PI0 = 111;
-    static const PdgId PIPLUS = 211;
-    static const PdgId PIMINUS = -PIPLUS;
-    static const PdgId RHO0 = 113;
-    static const PdgId RHOPLUS = 213;
-    static const PdgId RHOMINUS = -RHOPLUS;
-    static const PdgId K0L = 130;
-    static const PdgId K0S = 310;
-    static const PdgId K0 = 311;
-    static const PdgId KPLUS = 321;
-    static const PdgId KMINUS = -KPLUS;
-    static const PdgId ETA = 221;
-    static const PdgId ETAPRIME = 331;
-    static const PdgId PHI = 333;
-    static const PdgId OMEGA = 223;
+    constexpr PdgId PI0 = 111;
+    constexpr PdgId PIPLUS = 211;
+    constexpr PdgId PIMINUS = -PIPLUS;
+    constexpr PdgId RHO0 = 113;
+    constexpr PdgId RHOPLUS = 213;
+    constexpr PdgId RHOMINUS = -RHOPLUS;
+    constexpr PdgId K0L = 130;
+    constexpr PdgId K0S = 310;
+    constexpr PdgId K0 = 311;
+    constexpr PdgId KPLUS = 321;
+    constexpr PdgId KMINUS = -KPLUS;
+    constexpr PdgId ETA = 221;
+    constexpr PdgId ETAPRIME = 331;
+    constexpr PdgId PHI = 333;
+    constexpr PdgId OMEGA = 223;
     /// @}
 
     /// @name Charmonia
     /// @{
-    static const PdgId ETAC = 441;
-    static const PdgId JPSI = 443;
-    static const PdgId PSI2S = 100443;
+    constexpr PdgId ETAC = 441;
+    constexpr PdgId JPSI = 443;
+    constexpr PdgId PSI2S = 100443;
     /// @}
 
     /// @name Charm mesons
     /// @{
-    static const PdgId D0 = 421;
-    static const PdgId D0BAR = -421;
-    static const PdgId DPLUS = 411;
-    static const PdgId DMINUS = -DPLUS;
-    static const PdgId DSTARPLUS = 413;
-    static const PdgId DSTARMINUS = -DSTARPLUS;
-    static const PdgId DSPLUS = 431;
-    static const PdgId DSMINUS = -DSPLUS;
+    constexpr PdgId D0 = 421;
+    constexpr PdgId D0BAR = -421;
+    constexpr PdgId DPLUS = 411;
+    constexpr PdgId DMINUS = -DPLUS;
+    constexpr PdgId DSTARPLUS = 413;
+    constexpr PdgId DSTARMINUS = -DSTARPLUS;
+    constexpr PdgId DSPLUS = 431;
+    constexpr PdgId DSMINUS = -DSPLUS;
     /// @}
 
     /// @name Bottomonia
     /// @{
-    static const PdgId ETAB = 551;
-    static const PdgId UPSILON1S = 553;
-    static const PdgId UPSILON2S = 100553;
-    static const PdgId UPSILON3S = 200553;
-    static const PdgId UPSILON4S = 300553;
+    constexpr PdgId ETAB = 551;
+    constexpr PdgId UPSILON1S = 553;
+    constexpr PdgId UPSILON2S = 100553;
+    constexpr PdgId UPSILON3S = 200553;
+    constexpr PdgId UPSILON4S = 300553;
     /// @}
 
     /// @name b mesons
     /// @{
-    static const PdgId B0 = 511;
-    static const PdgId B0BAR = -511;
-    static const PdgId BPLUS = 521;
-    static const PdgId BMINUS = -BPLUS;
-    static const PdgId B0S = 531;
-    static const PdgId BCPLUS = 541;
-    static const PdgId BCMINUS = -BCPLUS;
+    constexpr PdgId B0 = 511;
+    constexpr PdgId B0BAR = -511;
+    constexpr PdgId BPLUS = 521;
+    constexpr PdgId BMINUS = -BPLUS;
+    constexpr PdgId B0S = 531;
+    constexpr PdgId BCPLUS = 541;
+    constexpr PdgId BCMINUS = -BCPLUS;
     /// @}
 
     /// @name Baryons
     /// @{
-    static const PdgId LAMBDA = 3122;
-    static const PdgId SIGMA0 = 3212;
-    static const PdgId SIGMAPLUS = 3222;
-    static const PdgId SIGMAMINUS = 3112;
-    static const PdgId SIGMAB = 5212;
-    static const PdgId SIGMABPLUS = 5222;
-    static const PdgId SIGMABMINUS = 5112;
-    static const PdgId LAMBDACPLUS = 4122;
-    static const PdgId LAMBDACMINUS = -4122;
-    static const PdgId LAMBDAB = 5122;
-    static const PdgId XI0 = 3322;
-    static const PdgId XIMINUS = 3312;
-    static const PdgId XIPLUS = -XIMINUS;
-    static const PdgId XI0B = 5232;
-    static const PdgId XIBMINUS = 5132;
-    static const PdgId XI0C = 4132;
-    static const PdgId XICPLUS = 4232;
-    static const PdgId OMEGAMINUS = 3334;
-    static const PdgId OMEGAPLUS = -OMEGAMINUS;
-    static const PdgId OMEGABMINUS = 5332;
-    static const PdgId OMEGA0C = 4332;
+    constexpr PdgId LAMBDA = 3122;
+    constexpr PdgId SIGMA0 = 3212;
+    constexpr PdgId SIGMAPLUS = 3222;
+    constexpr PdgId SIGMAMINUS = 3112;
+    constexpr PdgId SIGMAB = 5212;
+    constexpr PdgId SIGMABPLUS = 5222;
+    constexpr PdgId SIGMABMINUS = 5112;
+    constexpr PdgId LAMBDACPLUS = 4122;
+    constexpr PdgId LAMBDACMINUS = -4122;
+    constexpr PdgId LAMBDAB = 5122;
+    constexpr PdgId XI0 = 3322;
+    constexpr PdgId XIMINUS = 3312;
+    constexpr PdgId XIPLUS = -XIMINUS;
+    constexpr PdgId XI0B = 5232;
+    constexpr PdgId XIBMINUS = 5132;
+    constexpr PdgId XI0C = 4132;
+    constexpr PdgId XICPLUS = 4232;
+    constexpr PdgId OMEGAMINUS = 3334;
+    constexpr PdgId OMEGAPLUS = -OMEGAMINUS;
+    constexpr PdgId OMEGABMINUS = 5332;
+    constexpr PdgId OMEGA0C = 4332;
     /// @}
 
     /// @name Exotic/weird stuff
     /// @{
-    static const PdgId REGGEON = 110;
-    static const PdgId POMERON = 990;
-    static const PdgId ODDERON = 9990;
-    static const PdgId GRAVITON = 39;
-    static const PdgId NEUTRALINO1 = 1000022;
-    static const PdgId GRAVITINO = 1000039;
-    static const PdgId GLUINO = 1000021;
-    static const int BPRIME = 7;
-    static const int TPRIME = 8;
-    static const int LPRIME = 17;
-    static const int NUPRIME = 18;
-    // static const int DARKMATTERSCALAR = 1000051;
-    // static const int DARKMATTERFERMION = 1000052;
-    // static const int DARKMATTERVECTOR = 1000053;
+    constexpr PdgId REGGEON = 110;
+    constexpr PdgId POMERON = 990;
+    constexpr PdgId ODDERON = 9990;
+    constexpr PdgId GRAVITON = 39;
+    constexpr PdgId NEUTRALINO1 = 1000022;
+    constexpr PdgId GRAVITINO = 1000039;
+    constexpr PdgId GLUINO = 1000021;
+    constexpr int BPRIME = 7;
+    constexpr int TPRIME = 8;
+    constexpr int LPRIME = 17;
+    constexpr int NUPRIME = 18;
+    // constexpr int DARKMATTERSCALAR = 1000051;
+    // constexpr int DARKMATTERFERMION = 1000052;
+    // constexpr int DARKMATTERVECTOR = 1000053;
     /// @todo Add axion, black hole remnant, etc. on demand
     /// @}
 
     /// @name Nuclei
     /// @{
-    static const PdgId DEUTERON = 1000010020;
-    static const PdgId ALUMINIUM = 1000130270;
-    static const PdgId COPPER = 1000290630;
-    static const PdgId XENON = 1000541290;
-    static const PdgId GOLD = 1000791970;
-    static const PdgId LEAD = 1000822080;
-    static const PdgId URANIUM = 1000922380;
+    constexpr PdgId DEUTERON = 1000010020;
+    constexpr PdgId ALUMINIUM = 1000130270;
+    constexpr PdgId COPPER = 1000290630;
+    constexpr PdgId XENON = 1000541290;
+    constexpr PdgId GOLD = 1000791970;
+    constexpr PdgId LEAD = 1000822080;
+    constexpr PdgId URANIUM = 1000922380;
     /// @todo Add other nuclei on demand
     /// @}
 
