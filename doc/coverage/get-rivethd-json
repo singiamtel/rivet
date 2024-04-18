@@ -5,8 +5,6 @@
 
 """
 
-from __future__ import print_function
-
 import argparse
 ap = argparse.ArgumentParser(usage=__doc__)
 ap.add_argument("INSFILES", metavar='file', nargs="+", help="Inspire-exported JSON files to read")

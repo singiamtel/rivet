@@ -15,7 +15,6 @@ ENVIRONMENT:
  * RIVET_DATA_PATH: list of paths to be searched for data files
 """
 
-from __future__ import print_function
 import rivet, yoda, sys, os, math, re
 rivet.util.set_process_name(os.path.basename(__file__))
 

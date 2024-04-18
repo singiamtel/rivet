@@ -10,8 +10,6 @@ TODO:
  * Add partial name / regex searching? (Requires extending the Rivet library)
 """
 
-from __future__ import print_function
-
 import rivet, os
 rivet.util.set_process_name(os.path.basename(__file__))
 

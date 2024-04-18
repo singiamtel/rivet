@@ -16,7 +16,6 @@ Examples:
  rivet-diffhepdata-all -l 1 -u 10 -f  # for Rivet .yoda files located in a subdirectory of current path
 """
 
-from __future__ import print_function
 import os, shutil, fnmatch, importlib, glob, requests, argparse
 
 from rivet import hepdatautils, version, getAnalysis

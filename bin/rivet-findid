@@ -15,7 +15,6 @@ Arguments:
                 - DOI:     anything!
 """
 
-from __future__ import print_function
 import sys, os, re
 try:
     from urllib.request import urlopen
