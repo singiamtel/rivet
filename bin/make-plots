@@ -10,8 +10,6 @@ TODO
  * Handle boolean values flexibly (yes, no, true, false, etc. as well as 1, 0)
 """
 
-from __future__ import print_function, division
-
 ##
 ## This program is copyright by Hendrik Hoeth <hoeth@linta.de> and
 ## the Rivet team https://rivet.hepforge.org. It may be used

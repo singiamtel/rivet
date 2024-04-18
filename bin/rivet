@@ -26,7 +26,6 @@ Environment variables:
  * RIVET_STRIP_HEPMC: reduce the complexity of HepMC events before analysis (experimental)
 """
 
-from __future__ import print_function
 import os, sys
 
 ## Load the rivet module

@@ -13,7 +13,6 @@ Examples:
  rivet-diffhepdata ATLAS_2017_I1614149.yoda -d HEPData-ins1614149-v2-yoda.yoda
 """
 
-from __future__ import print_function
 import os, importlib, glob, requests, argparse
 
 from rivet import hepdatautils

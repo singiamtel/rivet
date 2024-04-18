@@ -9,7 +9,6 @@ analysis name.
 We need this as many older papers don't have experiment info in Inspire
 """
 
-from __future__ import print_function
 import time
 import argparse
 ap = argparse.ArgumentParser(usage=__doc__)
