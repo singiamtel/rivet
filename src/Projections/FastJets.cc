@@ -83,7 +83,7 @@ namespace Rivet {
       cmp(_jdef.recombination_scheme(), other._jdef.recombination_scheme()) ||
       cmp(_jdef.plugin(), other._jdef.plugin()) ||
       cmp(_jdef.R(), other._jdef.R()) ||
-      cmp(_adef, other._adef);
+      cmp(_cuts, other._cuts) || cmp(_adef, other._adef);
     if (rtn != CmpState::EQ) return rtn; //< shortcut transformer comparison if aleady different
 
     // Compare the transformers list
@@ -222,13 +222,16 @@ namespace Rivet {
 
   PseudoJets FastJets::pseudojets(double ptmin) const {
     // Get the base set of pseudo-jets
-    PseudoJets rtn = clusterSeq() ? clusterSeq()->inclusive_jets(ptmin) : PseudoJets();
+    PseudoJets tmp = clusterSeq() ? clusterSeq()->inclusive_jets(ptmin) : PseudoJets();
 
     // Run the jet groomers on each jet
-    for (PseudoJet& pj : rtn) {
+    PseudoJets rtn;
+    rtn.reserve(ceil(0.5*tmp.size())); // anticipate half of them to pass on average
+    for (PseudoJet& pj : tmp) {
       for (auto& t : _trfs) {
         pj = t->result(pj);
       }
+      if (_cuts->accept(Jet(pj)))  rtn.push_back(std::move(pj));
     }
 
     return rtn;

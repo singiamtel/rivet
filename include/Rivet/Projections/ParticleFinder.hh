@@ -158,7 +158,7 @@ namespace Rivet {
 
   protected:
 
-    /// The kinematic cuts cuts
+    /// The kinematic cuts
     Cut _cuts;
 
     /// The found particles returned by the particles() methods

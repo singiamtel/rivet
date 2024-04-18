@@ -42,7 +42,23 @@ namespace Rivet {
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr)
-      : JetFinder(fsp, usemuons, useinvis), _jdef(jdef), _adef(adef)
+      : JetFinder(fsp, usemuons, useinvis), _jdef(jdef),
+        _adef(adef), _cuts(Cuts::OPEN)
+    {
+      _initBase();
+    }
+
+    /// Constructor from a FastJet JetDefinition with optional Cut argument
+    ///
+    /// @warning The AreaDefinition pointer must be heap-allocated: it will be stored/deleted via a shared_ptr.
+    FastJets(const FinalState& fsp,
+             const fastjet::JetDefinition& jdef,
+             const Cut& c,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
+             fastjet::AreaDefinition* adef=nullptr)
+      : JetFinder(fsp, usemuons, useinvis), _jdef(jdef),
+        _adef(adef), _cuts(c)
     {
       _initBase();
     }
@@ -58,6 +74,20 @@ namespace Rivet {
       : FastJets(fsp, jdef, usemuons, useinvis, adef)
     {    }
 
+    /// JetDefinition-based constructor with Cut argument and reordered args for easier
+    /// specification of jet area definition
+    ///
+    /// @warning The AreaDefinition pointer must be heap-allocated: it will be stored/deleted via a shared_ptr.
+    FastJets(const FinalState& fsp,
+             const fastjet::JetDefinition& jdef,
+             fastjet::AreaDefinition* adef,
+             const Cut& c,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE)
+      : FastJets(fsp, jdef, c, usemuons, useinvis, adef)
+    {    }
+
+
     /// Native argument constructor, using FastJet alg/scheme enums.
     ///
     /// @warning The AreaDefinition pointer must be heap-allocated: it will be stored/deleted via a shared_ptr.
@@ -70,6 +100,19 @@ namespace Rivet {
       : FastJets(fsp, fastjet::JetDefinition(type, rparameter, recom), usemuons, useinvis, adef)
     {    }
 
+    /// Native argument constructor with Cut argument, using FastJet alg/scheme enums.
+    ///
+    /// @warning The AreaDefinition pointer must be heap-allocated: it will be stored/deleted via a shared_ptr.
+    FastJets(const FinalState& fsp,
+             fastjet::JetAlgorithm type,
+             fastjet::RecombinationScheme recom, double rparameter,
+             const Cut& c,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
+             fastjet::AreaDefinition* adef=nullptr)
+      : FastJets(fsp, fastjet::JetDefinition(type, rparameter, recom), c, usemuons, useinvis, adef)
+    {    }
+
     /// Native argument constructor with reordered args for easier specification of jet area definition
     ///
     /// @warning The AreaDefinition pointer must be heap-allocated: it will be stored/deleted via a shared_ptr.
@@ -80,6 +123,19 @@ namespace Rivet {
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE)
       : FastJets(fsp, type, recom, rparameter, usemuons, useinvis, adef)
+    {    }
+
+    /// Native argument constructor with Cut argument and reordered args for easier specification of jet area definition
+    ///
+    /// @warning The AreaDefinition pointer must be heap-allocated: it will be stored/deleted via a shared_ptr.
+    FastJets(const FinalState& fsp,
+             fastjet::JetAlgorithm type,
+             fastjet::RecombinationScheme recom, double rparameter,
+             fastjet::AreaDefinition* adef,
+             const Cut& c,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE)
+      : FastJets(fsp, type, recom, rparameter, c, usemuons, useinvis, adef)
     {    }
 
     /// @brief Explicitly pass in an externally-constructed plugin
@@ -95,6 +151,20 @@ namespace Rivet {
       _plugin.reset(plugin);
     }
 
+    /// @brief Explicitly pass in an externally-constructed plugin
+    ///
+    /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
+    FastJets(const FinalState& fsp,
+             fastjet::JetDefinition::Plugin* plugin,
+             const Cut& c,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
+             fastjet::AreaDefinition* adef=nullptr)
+      : FastJets(fsp, fastjet::JetDefinition(plugin), c, usemuons, useinvis, adef)
+    {
+      _plugin.reset(plugin);
+    }
+
     /// @brief Explicitly pass in an externally-constructed plugin, with reordered args for easier specification of jet area definition
     ///
     /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
@@ -104,6 +174,18 @@ namespace Rivet {
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE)
       : FastJets(fsp, plugin, usemuons, useinvis, adef)
+    {    }
+
+    /// @brief Explicitly pass in an externally-constructed plugin, with reordered args for easier specification of jet area definition
+    ///
+    /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
+    FastJets(const FinalState& fsp,
+             fastjet::JetDefinition::Plugin* plugin,
+             fastjet::AreaDefinition* adef,
+             const Cut& c,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE)
+      : FastJets(fsp, plugin, c, usemuons, useinvis, adef)
     {    }
 
     /// @brief Convenience constructor using Rivet enums for most common jet algs (including some plugins).
@@ -119,11 +201,33 @@ namespace Rivet {
              JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr,
              double seed_threshold=1.0)
-      : JetFinder(fsp, usemuons, useinvis), _adef(adef)
+      : JetFinder(fsp, usemuons, useinvis),
+        _adef(adef), _cuts(Cuts::OPEN)
     {
       _initBase();
       _initJdef(alg, rparameter, seed_threshold);
     }
+
+    /// @brief Convenience constructor using Cut argument and Rivet enums for most common jet algs (including some plugins).
+    ///
+    /// For the built-in algs, E-scheme recombination is used. For full control
+    /// of FastJet built-in jet algs, use the constructors from native-args or a
+    /// plugin pointer.
+    ///
+    /// @warning Provided area definition pointer must be heap-allocated; Rivet will store/delete via a shared_ptr
+    FastJets(const FinalState& fsp,
+             JetAlg alg, double rparameter,
+             const Cut& c,
+             JetMuons usemuons=JetMuons::ALL,
+             JetInvisibles useinvis=JetInvisibles::NONE,
+             fastjet::AreaDefinition* adef=nullptr,
+             double seed_threshold=1.0)
+      : JetFinder(fsp, usemuons, useinvis), _adef(adef), _cuts(c)
+    {
+      _initBase();
+      _initJdef(alg, rparameter, seed_threshold);
+    }
+
 
 
     /// Clone on the heap.
@@ -290,6 +394,9 @@ namespace Rivet {
 
     /// Cluster sequence
     std::shared_ptr<fastjet::ClusterSequence> _cseq;
+
+    /// The kinematic cuts
+    Cut _cuts;
 
     /// FastJet external plugin
     std::shared_ptr<fastjet::JetDefinition::Plugin> _plugin;
