@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 def compare_with_hepdata(yodafile, inspire_id=0, yodafile_from_hepdata=None, output=None):
     """\
     Compare a YODA reference data file, intended for inclusion in Rivet, with the YODA file downloaded from HEPData.

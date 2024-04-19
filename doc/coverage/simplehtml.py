@@ -222,7 +222,6 @@ This code is copyright 2009-2011 eKit.com Inc (http://www.ekit.com/)
 See the end of the source file for the license of use.
 XHTML support was contributed by Michael Haubenwallner.
 '''
-from __future__ import with_statement
 __version__ = '1.16'
 
 import sys
