@@ -308,24 +308,18 @@ namespace Rivet {
           if(iloc==0) {
             for(unsigned int iy=2;iy<5;++iy) {
               Estimate0D R = *_n_WW[iw][iy]/ *_n_WW[iw][0];
-              Estimate1DPtr mult;
+              BinnedEstimatePtr<int> mult;
               book(mult, 4, 1,  2*(iy-1)-iw);
-              for (auto& b : mult->bins()) {
-                if ( isCompatibleWithSqrtS(b.xMid()) ) {
-                  b.set(R.val(), R.errPos());
-                }
-              }
+              for (auto& b : mult->bins())
+                b.set(R.val(), R.errPos());
             }
           }
         }
         // charged mults
-        Estimate1DPtr mult;
-        book(mult,3,1,1);
-        for (auto& b : mult->bins()) {
-          if ((iloc==1 && b.index()==1) || (iloc==0 && b.index()==2))
-            b.set(ratios[1].val(), ratios[1].errPos());
-          else if ((iloc==1 && b.index()==3) || (iloc==0 && b.index()==4))
-            b.set(ratios[0].val(), ratios[0].errPos());
+        for(unsigned int ii=0;ii<2;++ii) {
+          BinnedEstimatePtr<int> mult;
+          book(mult,3,1,1 + 2*ii);
+          mult->bin(2-iloc).set(ratios[1-ii].val(), ratios[1-ii].errPos());
         }
         // difference histos
         // momentum

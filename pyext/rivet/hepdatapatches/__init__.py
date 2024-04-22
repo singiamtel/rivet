@@ -18,3 +18,4 @@ from . import OPAL_1993_I342766 # pseudo-2D object should really be 1D
 #from . import TASSO_1984_I194774 # d01 values missing on HepData
 from . import TASSO_1986_I230950 # transform x-edges
 from . import TPC_1985_I205868 # pseudo-2D object should really be 1D
+from . import ZEUS_1995_I392386 # pseudo-2D object should really be 1D

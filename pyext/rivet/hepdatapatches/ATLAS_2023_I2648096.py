@@ -1,4 +1,3 @@
-
 import yoda
 
 b_drap_2D    = [ 0., 0.31, 0.62, 0.94, 1.25, 1.56, 1.88, 2.19, 2.50 ]
@@ -27,7 +26,7 @@ def patch(path, ao):
         rtn = [ ao ]
         for subidx, subbins in enumerate(bins):
             newName ='d%i-x01-y0%i' % (newIdent, subidx+1)
-            newPath = aopath.replace(hname, newName)
+            newPath = path.replace(hname, newName)
             newao = yoda.Estimate1D(subbins, newPath)
             for newb in newao.bins():
                 oldb = ao.bin(gidx)

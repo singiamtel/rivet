@@ -42,12 +42,17 @@ LogY=0
 END PLOT
 
 BEGIN PLOT /DELPHI_2001_I526164/d03-x01-y01
-Title=Charged multiplicity in $WW$ events
+Title=Charged multiplicity in $WW$ events (4Q)
 YLabel=$N_{\text{charged}}$
-XCustomMajorTicks=1.  $183(4Q)$     2.   $189(4Q)$   3.   $183(2Q)$   4.   $189(2Q)$
 XLabel=$\sqrt{s}$ [GeV]
 LogY=0
-XMin=0.5
+END PLOT
+
+BEGIN PLOT /DELPHI_2001_I526164/d03-x01-y03
+Title=Charged multiplicity in $WW$ events (2Q)
+YLabel=$N_{\text{charged}}$
+XLabel=$\sqrt{s}$ [GeV]
+LogY=0
 END PLOT
 
 BEGIN PLOT /DELPHI_2001_I526164/d04-x01-y01

@@ -22,7 +22,7 @@ def patch(path, ao):
         idx = 0
         for x in xvals:
           idx += 1
-          if newao.bin(i).isMasked():
+          if newao.bin(idx).isMasked():
             idx += 1
           # check y-z plane for non-NaN bin value
           skip = False
