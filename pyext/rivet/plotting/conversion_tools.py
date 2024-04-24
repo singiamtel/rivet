@@ -1,6 +1,5 @@
 # Convert the old plot file format to a dict that can be parsed by plot2yaml.py
 # Based on pyext/rivet/plotinfo.py
-from __future__ import print_function
 import os, re, logging
 from rivet.util import texpand
 import ast

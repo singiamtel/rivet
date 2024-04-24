@@ -1,4 +1,3 @@
-from __future__ import print_function
 import rivet, yoda
 import os, glob, logging, re
 from math import sqrt

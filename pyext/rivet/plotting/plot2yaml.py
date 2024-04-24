@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os, re, io, logging
 import rivet, yoda
 from rivet.plotting.conversion_tools import convert_legacy_plotfile
