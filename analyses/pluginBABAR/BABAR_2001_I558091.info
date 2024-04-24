@@ -5,8 +5,6 @@ Experiment: BABAR
 Collider: PEP-II
 InspireID: 558091
 Status: VALIDATED
-Authors:
- - Your Name <your@email.address>
 References:
  - PRL 87,162002
 RunInfo: e+ e- to hadrons

@@ -2,7 +2,7 @@
 
 set -e
 
-RIVET_VERSION=${RIVET_VERSION:-3.1.10}
+RIVET_VERSION=${RIVET_VERSION:-4.0.0}
 SHERPA_VERSION=2.2.15
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"

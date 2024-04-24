@@ -7,13 +7,12 @@ InspireID: 524911
 Status: VALIDATED
 Reentrant: True
 Authors:
- - Aryan Borkar aryanborkar9sept@gmail.com
+ - Aryan Borkar <aryanborkar9sept@gmail.com>
  - Hannes Jung <hannes.jung@desy.de>
 References:
  - 'Phys.Lett.B481:199-212,200'
  - 'DOI:10.1016/S0370-2693(00)00430-5'
- - 'arXiv:hep-ex/0003017'
- 
+ - 'arXiv:hep-ex/0003017' 
 RunInfo: The kinematic region studied is $0.2 < y < 0.8$ and $0.01 < x < 0.1$, corresponding to a $Q^2$ range $180 < Q^2 < 7220 \GeV^2$
 Beams: [[p+, e-],[e-,p+]]
 Energies: [[820,27.5],[27.5,820]]

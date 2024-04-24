@@ -7,7 +7,7 @@ InspireID: 1487277
 Status: VALIDATED
 Reentrant: true
 Authors:
- - Hannes Jung
+ - Hannes Jung <hannes.jung@desy.de>
 References:
  - DOI:10.1007/JHEP03(2017)156
  - arXiv:1609.05331

@@ -4,20 +4,22 @@
 #include "YODA/BinnedDbn.h"
 #include "YODA/IO.h"
 
-// #include <regex>
 #include <sstream>
 using namespace std;
 
 namespace Rivet {
 
+
   string getDatafilePath(const string& papername) {
     /// Try to find a YODA file matching this analysis name
-    const string path1 = findAnalysisRefFile(papername + ".yoda");
+    const string name1 = papername + ".yoda.gz";
+    const string path1 = findAnalysisRefFile(name1);
     if (!path1.empty()) return path1;
-    const string path2 = findAnalysisRefFile(papername + ".yoda.gz");
+    const string name2 = papername + ".yoda";
+    const string path2 = findAnalysisRefFile(name2);
     if (!path2.empty()) return path2;
-    throw Rivet::Error("Couldn't find a ref data file for '" + papername +
-                       "' in data path, '" + getRivetDataPath() + "', or '.'");
+    throw Rivet::Error("Couldn't find a ref data file '" + name1 + "' or '" + name2 + "' " +
+                       "in the path " + toString(getAnalysisRefPaths()) + " for analysis " + papername);
   }
 
 
@@ -177,5 +179,6 @@ namespace Rivet {
       cout << opt.first << "->" << opt.second << " ";
     cout << endl << endl;
   }
+
 
 }

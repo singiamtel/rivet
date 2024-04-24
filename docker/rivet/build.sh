@@ -2,8 +2,8 @@
 
 set -e
 
-YODA_BRANCH=${YODA_BRANCH:-yoda-1.9.10}
-RIVET_BRANCHES=${RIVET_BRANCHES:-rivet-3.1.10} #rivet-chacal24
+YODA_BRANCH=${YODA_BRANCH:-yoda-2.0.0}
+RIVET_BRANCHES=${RIVET_BRANCHES:-rivet-4.0.0}
 
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"

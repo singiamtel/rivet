@@ -7,9 +7,9 @@ InspireID: 1487726
 Status: VALIDATED
 Reentrant: true
 Authors:
- - marek.schoenherr@cern.ch
- - mileswu@uchicago.edu
- - chris.g@cern.ch
+ - Marek Schoenherr <marek.schoenherr@cern.ch>
+ - Miles Wu <mileswu@uchicago.edu>
+ - Chris Gutschow <chris.g@cern.ch>
 References:
  - ATLAS-STDM-2015-16
  - DOI:10.1016/j.physletb.2016.12.005

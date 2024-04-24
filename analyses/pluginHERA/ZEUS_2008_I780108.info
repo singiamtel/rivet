@@ -7,7 +7,7 @@ InspireID: 780108
 Status: VALIDATED
 Reentrant: true
 Authors:
- -  Andrii Verbytskyi  andrii.verbytskyi@mpp.mpg.de
+ -  Andrii Verbytskyi <andrii.verbytskyi@mpp.mpg.de>
 References:
 - arXiv:0802.3955 [hep-ex]
 - Phys. Rev. D78 (2008) 032004

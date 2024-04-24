@@ -2,7 +2,7 @@
 
 set -e
 
-RIVET_VERSION=${RIVET_VERSION:-3.1.10}
+RIVET_VERSION=${RIVET_VERSION:-4.0.0}
 MG5_VERSION=3.5.3
 MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.3.tar.gz
 

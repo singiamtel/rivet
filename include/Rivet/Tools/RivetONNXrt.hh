@@ -10,12 +10,13 @@
 #include "Rivet/Tools/Utils.hh"
 #include "onnxruntime/onnxruntime_cxx_api.h"
 
-
 namespace Rivet {
+
 
   /// @brief Simple interface class to take care of basic ONNX networks
   ///
   /// See analyses/examples/EXAMPLE_ONNX.cc for how to use this.
+  ///
   /// @note A node is not a neuron but a single tensor of arbitrary dimension size
   class RivetONNXrt {
 
@@ -293,15 +294,18 @@ namespace Rivet {
     vector<const char*> _inNames, _outNames;
   };
 
-  /// Useful function for getting onnx file paths
+
+  /// @brief Useful function for getting ONNX file paths
+  ///
   /// Based on getDatafilePath from RivetYODA.cc
   inline string getONNXFilePath(const string& filename) {
     /// Try to find an ONNX file matching this analysis name
-    const string path1 = findAnalysisRefFile(filename);
+    const string path1 = findAnalysisDataFile(filename);
     if (!path1.empty()) return path1;
-    throw Rivet::Error("Couldn't find a ref data file for '" + filename +
-                       "' in data path, '" + getRivetDataPath() + "', or '.'");
+    throw Rivet::Error("Couldn't find an ONNX data file for '" + filename + "' " +
+                       "in the path " + toString(getRivetDataPaths()));
   }
+
 
   /// Function to get a RivetONNXrt object from an analysis name
   /// Use suffix to help disambiguate if an analysis requires 
@@ -311,5 +315,8 @@ namespace Rivet {
   inline unique_ptr<RivetONNXrt> getONNX(const string& analysisname, const string& suffix = ".onnx"){
     return make_unique<RivetONNXrt>(getONNXFilePath(analysisname+suffix));
   }
+
+
 }
+
 #endif

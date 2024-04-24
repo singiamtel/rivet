@@ -1,3 +1,19 @@
+2024-04-18  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Fix Inspire BibTeX-download string decoding and update broken
+	URL to Inspire API (now for I-codes only).
+
+2024-03-18  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Only activate autobooking example code in mkanalysis output if
+	HEPData retrieval was successful, rather than only vetoing based
+	on presence of an 'MC_' prefix.
+
+	* Improvements to the path-finding failure messages.
+	
+	* Swapping the ref data search logic to prioritise .yoda.gz (as
+	.yoda will fail for all std analyses now).
+
 2024-02-29  Christian Gutschow  <chris.g@cern.ch>
 
 	* Release 4.0.0

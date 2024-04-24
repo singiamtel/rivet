@@ -7,7 +7,7 @@ InspireID: 1621811
 Status: VALIDATED NOHEPDATA
 Reentrant: true
 Authors:
- - Peter Richardsomn <peter.richardson@durham.ac.uk>
+ - Peter Richardson <peter.richardson@durham.ac.uk>
 References:
  - Phys.Rev.D 96 (2017) 11, 112005
 RunInfo: Any process producing Lambda_b0 baryons, originally pp
