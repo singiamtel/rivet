@@ -7,9 +7,9 @@ InspireID: 1698006
 Status: VALIDATED
 Reentrant: true
 Authors:
- - J.Butterworth@ucl.ac.uk
- - sokratis.michail.19@ucl.ac.uk
- - yoran.yeh.20@ucl.ac.uk
+ - Jon Butterworth <J.Butterworth@ucl.ac.uk>
+ - Michail Sokratis <sokratis.michail.19@ucl.ac.uk>
+ - Yoran Yeh <yoran.yeh.20@ucl.ac.uk>
 References:
  - ATLAS-STDM-2017-18
  - JHEP 12 (2018) 010

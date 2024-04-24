@@ -95,6 +95,7 @@ try:
     os.makedirs("build/rivet")
 except FileExistsError:
     pass
+# TODO: maybe build symlinks instead, so they remain in sync from src to build?
 for pyfile in glob("@srcdir@/rivet/*.py"):
     shutil.copy(pyfile, "build/rivet/")
 shutil.copytree("@srcdir@/rivet/hepdatapatches", "build/rivet/hepdatapatches")

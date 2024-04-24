@@ -1,9 +1,21 @@
 #! /usr/bin/env python
 
-import rivet, re
+import argparse
+ap = argparse.ArgumentParser()
+ap.add_argument("--blacklist", dest="BLACKLIST", help="file of analyses to exclude from address extraction")
+args = ap.parse_args()
 
+ana_blacklist = []
+if args.BLACKLIST:
+    with open(args.BLACKLIST) as blf:
+        ana_blacklist = [l.strip() for l in blf.readlines()]
+    #print(ana_blacklist)
+
+import rivet, re
 authors_emails = {}
 for aname in rivet.AnalysisLoader.analysisNames():
+    if aname in ana_blacklist:
+        continue
     ana = rivet.AnalysisLoader.getAnalysis(aname)
     for au_em in ana.authors():
         au, em = None, None
@@ -22,4 +34,5 @@ for aname in rivet.AnalysisLoader.analysisNames():
                 authors_emails[au] = em
 
 for au, em in sorted(authors_emails.items()):
-    print(u"{} <{}>".format(au, em).encode("utf-8"))
+    print(u"{} <{}>".format(au, em))
+    #.encode("utf-8"))

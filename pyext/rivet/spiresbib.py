@@ -1,39 +1,42 @@
 #! /usr/bin/env python
 
 import logging, re
-try:
-    from urllib.request import urlopen
-except ImportError:
-    from urllib2 import urlopen
+from urllib.request import urlopen
 
 usage = """%prog <spiresid> [<spiresid2> ...]
 
 Given Inspire and SPIRES paper IDs, fetch the corresponding BibTeX db entry from
 the SPIRES Web interface and write it to stdout. Prefix the code with I or S
 appropriately.
+
+TODO:
+ - remove SPIRES option and handling code
 """
 
 def fetch_bibtex(iscode, refid):
+    "Download and decode BibTeX"
+
+    logging.debug("Fetching BibTeX")
     if iscode.upper() == "I":
-        url = "http://inspire-hep.net/record/%s/export/hx" % str(refid)
+        url = f"https://inspirehep.net/api/literature/{refid}?format=bibtex"
         logging.debug("Downloading Inspire BibTeX from %s" % url)
-    elif iscode.upper() == "S":
-        url = "http://inspire-hep.net/search?p=find+key+%s&of=hx" % str(refid)
-        logging.debug("Downloading SPIRES BibTeX from %s" % url)
-    hreq = urlopen(url)
-    bibtexhtml = hreq.read()
-    hreq.close()
-    #logging.debug(bibtexhtml)
-    return bibtexhtml
+    else:
+        raise Exception("SPIRES lookup no longer supported")
+
+    hresp = urlopen(url)
+    bibtex_bytes = hresp.read()
+    encoding = hresp.headers.get_content_charset('utf-8')
+    bibtex = bibtex_bytes.decode(encoding)
+    hresp.close()
+
+    return bibtex
 
 
-def extract_bibtex(html):
-    ## Extract BibTeX block from HTML
-    re_spiresbibtex = re.compile(r'<pre>(.*?)</pre>', re.MULTILINE | re.DOTALL)
-    m = re_spiresbibtex.search(html)
-    if m is None:
-        return None, None
-    bib = m.group(1).strip()
+def extract_bibtex(bibtxt):
+    "Extract BibTeX key from block"
+
+    logging.debug("Extracting BibTeX detail")
+    bib = bibtxt.strip()
 
     ## Get BibTeX key
     re_bibtexkey = re.compile(r'^@.+?{(.+?),$', re.MULTILINE)
@@ -63,14 +66,15 @@ def get_bibtexs_from_repos(iscodes_refids):
 
 if __name__ == '__main__':
     ## Parse command line options
-    from optparse import OptionParser
-    parser = OptionParser(usage=usage)
-    opts, args = parser.parse_args()
+    import argparse
+    ap = argparse.ArgumentParser(usage=usage)
+    ap.add_argument("CODES", nargs="*")
+    args = parser.parse_args()
 
     ## Make individual bibinfo files
-    for arg in args:
-        iscode = arg[0]
-        refid = arg[1:]
+    for code in args.CODES:
+        iscode = code[0]
+        refid = code[1:]
         key, bibtex = get_bibtex_from_repo(iscode, refid)
         import sys
         f = sys.stdout
@@ -78,12 +82,12 @@ if __name__ == '__main__':
         f.write("BibTeX: '%s'\n" % bibtex)
 
     # ## Build ref db
-    # bibdb = get_bibtexs_from_spires(args)
+    # bibdb = get_bibtexs_from_spires(args.CODES)
     # for sid, (key, bibtex) in bibdb.iteritems():
     #     print key, "=>\n", bibtex
 
     # ## Pickle ref db9151176
     # import cPickle as pickle
-    # fpkl = open("spiresbib.pkl", "w")repo
+    # fpkl = open("spiresbib.pkl", "w")
     # pickle.dump(bibdb)
     # fpkl.close()

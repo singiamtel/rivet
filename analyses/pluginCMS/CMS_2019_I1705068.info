@@ -8,8 +8,8 @@ Status: VALIDATED
 Reentrant: true
 Authors:
  - cms-pag-conveners-smp@cern.ch
- - Svenja.Karen.Pflitsch@cern.ch
- - Katerina.Lipka@cern.ch
+ - Svenja Pflitsch <Svenja.Karen.Pflitsch@cern.ch>
+ - Katerina Lipka <Katerina.Lipka@cern.ch>
 References:
  - Eur.Phys.J. C79 (2019) no.3, 269
  - DOI:10.1140/epjc/s10052-019-6752-1

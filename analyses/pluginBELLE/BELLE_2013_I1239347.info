@@ -7,7 +7,7 @@ InspireID: 1239347
 Status: VALIDATED NOHEPDATA
 Reentrant: true
 Authors:
- - Peter Richardson <peter.richardson@durham.ac.uk>Your Name <your@email.address>
+ - Peter Richardson <peter.richardson@durham.ac.uk>
 References:
  - Phys.Rev.D 88 (2013) 7, 074026
 RunInfo: Any process producing B0, originally Upsilon(4S) decay

@@ -7,7 +7,7 @@ InspireID: 168182
 Status: VALIDATED
 Reentrant: true
 Authors:
- - Hannes Jung hannes.jung@desy.de
+ - Hannes Jung <hannes.jung@desy.de>
 References:
  - "Phys. Rev. Lett., 48(1982), 302"
  - "DOI: 10.1103/PhysRevLett.48.302"

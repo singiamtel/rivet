@@ -17,6 +17,7 @@ build/rivet/core.so: build.py rivet/core.cpp
            $(abs_top_srcdir)/src/.libs/libRivet.dylib \
            $(abs_builddir)/build/rivet/core.so
 
+# TODO: always update the .py files, without triggering an extension rebuild
 install-exec-local: build/rivet/core.so
 	$(MKDIR_P) $(DESTDIR)$(RIVET_PYTHONPATH)
 	cp -r $(abs_builddir)/build/rivet $(DESTDIR)$(RIVET_PYTHONPATH)/
@@ -32,7 +33,7 @@ build/rivet/core.so: build.py rivet/core.cpp
 	cd $(abs_builddir) && $(PYEXT_ENV) RIVET_LOCAL=1 $(PYTHON) $(abs_builddir)/build.py
 	touch $@
 
-
+# TODO: always update the .py files, without triggering an extension rebuild
 install-exec-local: build/rivet/core.so
 	$(MKDIR_P) $(DESTDIR)$(RIVET_PYTHONPATH)
 	cp -r $(abs_builddir)/build/rivet $(DESTDIR)$(RIVET_PYTHONPATH)/

@@ -10,7 +10,7 @@ test "$FORCE" && BUILD="$BUILD --no-cache"
 
 test "$TEST" && BUILD="echo $BUILD"
 
-RIVETBS_VERSION=3.1.10
+RIVETBS_VERSION=4.0.0
 LHAPDF_VERSION=6.5.4
 
 for vhepmc in 3.2.6; do
