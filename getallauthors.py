@@ -34,5 +34,5 @@ for aname in rivet.AnalysisLoader.analysisNames():
                 authors_emails[au] = em
 
 for au, em in sorted(authors_emails.items()):
-    print(u"{} <{}>".format(au, em))
+    print(r"{} <{}>".format(au, em))
     #.encode("utf-8"))
