@@ -252,16 +252,15 @@ if args.LIST_ANALYSES:
                 a = rivet.AnalysisLoader.getAnalysis(aname)
                 st = "" if "VALIDATED" in a.status() else "[UNVALIDATED] " #("[%s] " % a.status())
                 # detex() introduces non-ASCII chars from Greek names in analysis titles.
-                # The u"" prefix and explicit print encoding are necessary for Py2 to handle this properly
-                msg[-1] = u"%s%s" % (st, a.summary())
+                msg[-1] = r"%s%s" % (st, a.summary())
                 if args.LOGLEVEL < logging.INFO:
                     if a.keywords():
                         msg[-1] += r"  [%s]" % " ".join(a.keywords())
                     if a.luminosityfb():
-                        msg[-1] += r"  [ \int L = %s fb^{-1} ]" % a.luminosityfb()
+                        msg[-1] += r"  [ \\int L = %s fb^{-1} ]" % a.luminosityfb()
     if args.DO_DETEX:
         msg = rivet.util.detex(msg)
-    retlist = '\n'.join([ u"%-25s   %s" % (a,m) for a,m in zip(names,msg) ])
+    retlist = '\n'.join([ r"%-25s   %s" % (a,m) for a,m in zip(names,msg) ])
     print(retlist)
     sys.exit(0)
 
@@ -418,7 +417,7 @@ if len(args.SHOW_ANALYSES) > 0:
         try:
             import tempfile, subprocess
             tffd, tfpath = tempfile.mkstemp(prefix="rivet-show.")
-            msgsum = u"\n\n".join(msgs)
+            msgsum = r"\n\n".join(msgs)
             msgsum = msgsum.encode('utf-8')
             os.write(tffd, msgsum)
             if sys.stdout.isatty():

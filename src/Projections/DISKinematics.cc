@@ -80,7 +80,7 @@ namespace Rivet {
     // Finally rotate so outgoing lepton at phi = 0
     FourMomentum pLepOutHCM = tmp.transform(pLepOut);
     tmp.preMult(Matrix3(Vector3::mkZ(), -pLepOutHCM.azimuthalAngle()));
-    assert(isZero(tmp.transform(pLepOut).azimuthalAngle()));
+    assert(isZero(sin(tmp.transform(pLepOut).azimuthalAngle())));
     _hcm = tmp;
 
     // Boost to Breit frame (use opposite convention for photon --- along *minus* z)
@@ -88,7 +88,7 @@ namespace Rivet {
     const double bz = 1 - 2*x();
     _breit = LorentzTransform::mkObjTransformFromBeta(Vector3::mkZ() * bz).combine(tmp);
     assert(isZero(angle(_breit.transform(pGamma).vector3(), -Vector3::mkZ()), 1e-3));
-    assert(isZero(_breit.transform(pLepOut).azimuthalAngle(), 1e-3));
+    assert(isZero(sin(_breit.transform(pLepOut).azimuthalAngle()), 1e-3));
   }
 
 
