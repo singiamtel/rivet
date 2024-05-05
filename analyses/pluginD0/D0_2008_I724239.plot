@@ -2,7 +2,6 @@
 Title=Inclusive jet multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(Z \, + \geq N_{\mathrm{jet}}\;\mathrm{jets}) / \sigma(Z \; \mathrm{inclusive})$
-XMajorTickMarks=10
 XMinorTickMarks=0
 # END PLOT
 

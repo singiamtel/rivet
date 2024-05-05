@@ -2,7 +2,6 @@
 Title=Inclusive jet multiplicity (electron channel)
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(W \, + \geq N_{\mathrm{jet}}\;\mathrm{jets})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.57
@@ -12,7 +11,6 @@ RatioPlotYMax=1.57
 Title=Inclusive jet multiplicity (muon channel)
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(W \, + \geq N_{\mathrm{jet}}\;\mathrm{jets})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.57

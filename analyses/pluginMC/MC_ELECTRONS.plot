@@ -168,7 +168,6 @@ YLabel=$y(\mathrm{e4})_+/y(\mathrm{e4})_-$
 Title=Exclusive electron multiplicity
 XLabel=$N_{\mathrm{electron}}$
 YLabel=$\sigma(N_{\mathrm{electron}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -177,7 +176,6 @@ ErrorBands=1
 Title=Exclusive prompt electron multiplicity
 XLabel=$N_{\mathrm{electron}}$
 YLabel=$\sigma(N_{\mathrm{electron}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -186,7 +184,6 @@ ErrorBands=1
 Title=Inclusive electron multiplicity
 XLabel=$N_{\mathrm{electron}}$
 YLabel=$\sigma(\geq N_{\mathrm{electron}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -195,7 +192,6 @@ ErrorBands=1
 Title=Inclusive prompt electron multiplicity
 XLabel=$N_{\mathrm{electron}}$
 YLabel=$\sigma(\geq N_{\mathrm{electron}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -204,7 +200,6 @@ ErrorBands=1
 Title=Ratio of electron multiplicity
 XLabel=$N_{\mathrm{electron}}$
 YLabel=$\sigma(\geq N_{\mathrm{electron}})/\sigma(\geq N_{\mathrm{electron}}-1)$
-XMajorTickMarks=10
 XMinorTickMarks=0
 LogY=0
 ErrorBands=1
@@ -214,7 +209,6 @@ ErrorBands=1
 Title=Ratio of prompt electron multiplicity
 XLabel=$N_{\mathrm{electron}}$
 YLabel=$\sigma(\geq N_{\mathrm{electron}})/\sigma(\geq N_{\mathrm{electron}}-1)$
-XMajorTickMarks=10
 XMinorTickMarks=0
 LogY=0
 ErrorBands=1

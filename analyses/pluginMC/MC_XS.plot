@@ -5,7 +5,6 @@ YLabel=$\sigma_\mathrm{total}$ [pb]
 LogY=0
 ShowZero=0
 XCustomMajorTicks=0.	$\quad$
-#XMajorTickMarks=20
 XMinorTickMarks=0
 LegendAlign=r
 # END PLOT
@@ -16,7 +15,6 @@ XLabel=
 YLabel=$N$
 LogY=0
 XCustomMajorTicks=0.5	$\quad$
-#XMajorTickMarks=20
 XMinorTickMarks=0
 LegendXPos=0.05
 LegendYPos=0.15

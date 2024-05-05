@@ -168,7 +168,6 @@ YLabel=$|y(\tau\mathrm{4}|$
 Title=Exclusive tau multiplicity
 XLabel=$N_{\mathrm{tau}}$
 YLabel=$\sigma(N_{\mathrm{tau}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -177,7 +176,6 @@ ErrorBands=1
 Title=Inclusive tau multiplicity
 XLabel=$N_{\mathrm{tau}}$
 YLabel=$\sigma(\geq N_{\mathrm{tau}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -186,7 +184,6 @@ ErrorBands=1
 Title=Ratio of tau multiplicity
 XLabel=$N_{\mathrm{tau}}$
 YLabel=$\sigma(\geq N_{\mathrm{tau}})/\sigma(\geq N_{\mathrm{tau}}-1)$
-XMajorTickMarks=10
 XMinorTickMarks=0
 LogY=0
 ErrorBands=1

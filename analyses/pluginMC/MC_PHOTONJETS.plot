@@ -210,7 +210,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}m(\mathrm{jet~4})$ [pb/GeV]
 Title=Exclusive jet multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(N_{\mathrm{jet}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -219,7 +218,6 @@ ErrorBands=1
 Title=Inclusive jet multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(\geq N_{\mathrm{jet}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -228,7 +226,6 @@ ErrorBands=1
 Title=Ratio of jet multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(\geq N_{\mathrm{jet}})/\sigma(\geq N_{\mathrm{jet}}-1)$
-XMajorTickMarks=10
 XMinorTickMarks=0
 LogY=0
 ErrorBands=1
