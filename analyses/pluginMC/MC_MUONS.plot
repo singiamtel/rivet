@@ -168,7 +168,6 @@ YLabel=$y(\mu\mathrm{4})_+/y(\mu\mathrm{4})_-$
 Title=Exclusive muon multiplicity
 XLabel=$N_{\mathrm{muon}}$
 YLabel=$\sigma(N_{\mathrm{muon}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -177,7 +176,6 @@ ErrorBands=1
 Title=Exclusive prompt muon multiplicity
 XLabel=$N_{\mathrm{muon}}$
 YLabel=$\sigma(N_{\mathrm{muon}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -186,7 +184,6 @@ ErrorBands=1
 Title=Inclusive muon multiplicity
 XLabel=$N_{\mathrm{muon}}$
 YLabel=$\sigma(\geq N_{\mathrm{muon}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -195,7 +192,6 @@ ErrorBands=1
 Title=Inclusive prompt muon multiplicity
 XLabel=$N_{\mathrm{muon}}$
 YLabel=$\sigma(\geq N_{\mathrm{muon}})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -204,7 +200,6 @@ ErrorBands=1
 Title=Ratio of muon multiplicity
 XLabel=$N_{\mathrm{muon}}$
 YLabel=$\sigma(\geq N_{\mathrm{muon}})/\sigma(\geq N_{\mathrm{muon}}-1)$
-XMajorTickMarks=10
 XMinorTickMarks=0
 LogY=0
 ErrorBands=1
@@ -214,7 +209,6 @@ ErrorBands=1
 Title=Ratio of prompt muon multiplicity
 XLabel=$N_{\mathrm{muon}}$
 YLabel=$\sigma(\geq N_{\mathrm{muon}})/\sigma(\geq N_{\mathrm{muon}}-1)$
-XMajorTickMarks=10
 XMinorTickMarks=0
 LogY=0
 ErrorBands=1

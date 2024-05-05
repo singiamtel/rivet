@@ -2,7 +2,6 @@
 Title=Inclusive jet multiplicity ($R=0.4$)
 XLabel=$N_\mathrm{jet}$
 YLabel=$\sigma$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 # END PLOT
 
@@ -10,7 +9,6 @@ XMinorTickMarks=0
 Title=Inclusive jet multiplicity ratio $N/N-1$ ($R=0.4$)
 XLabel=$N_\mathrm{jet}$
 YLabel=$\sigma_N/\sigma_{N-1}$
-XMajorTickMarks=10
 XMinorTickMarks=0
 # END PLOT
 

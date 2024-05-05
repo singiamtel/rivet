@@ -83,7 +83,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}y(\mathrm{jet~4})$ [fb]
 Title=Exclusive gap-jet multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(N_{\mathrm{jet}})$ [fb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT
@@ -92,7 +91,6 @@ ErrorBands=1
 Title=Inclusive gap-jet multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(\geq N_{\mathrm{jet}})$ [fb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 ErrorBands=1
 # END PLOT

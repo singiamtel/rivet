@@ -7,7 +7,6 @@ CustomLegend=\boldmath$p_\perp^\text{jet}>20$ \bf{GeV}
 Title=Inclusive Jet Multiplicity
 XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(W \, + \geq N_{\mathrm{jet}}\;\mathrm{jets})$ [pb]
-XMajorTickMarks=10
 XMinorTickMarks=0
 RatioPlotYMin=0.0
 RatioPlotYMax=2.0
@@ -19,7 +18,6 @@ XLabel=$N_{\mathrm{jet}}$
 YLabel=$\sigma(\geq N_{\mathrm{jet}}\;\mathrm{jets})/\sigma(\geq N_{\mathrm{jet}}-1\;\mathrm{jets})$
 LogY=0
 RatioPlot=0
-XMajorTickMarks=10
 XMinorTickMarks=0
 LegendYPos=0.5
 # END PLOT

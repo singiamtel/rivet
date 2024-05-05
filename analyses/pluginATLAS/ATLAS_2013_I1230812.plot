@@ -69,7 +69,6 @@ XLabel=$N_\mathrm{jet}$
 YLabel=$\sigma(N_\mathrm{jet})/\sigma(N_\mathrm{jet}-1)$
 LegendYPos=0.4
 XMinorTickMarks=0
-XMajorTickMarks=10
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2013_I1230812.*/d09-x01-y.*

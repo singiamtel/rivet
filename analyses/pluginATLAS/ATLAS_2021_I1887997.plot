@@ -97,7 +97,6 @@ XMin=1.95e-3
 # BEGIN PLOT /ATLAS_2021_I1887997/yy_xs
 LogY=0
 LegendYPos=0.4
-XMajorTickMarks=20
 XMinorTickMarks=0
 XTwosidedTicks=0
 YTwosidedTicks=0
