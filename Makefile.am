@@ -13,7 +13,7 @@ dist_pkgconfig_DATA = rivet.pc
 doc:
 	cd doc && $(MAKE) doc
 
-.PHONY : doc dox pyclean
+.PHONY : doc dox pyclean analyses-indiv
 
 clean-local:
 	@rm -rf a.out
@@ -29,3 +29,16 @@ install-data-local:
 DEST = login.hepforge.org:rivet/downloads/
 upload: dist
 	$(RSH) $(DIST_ARCHIVES) $(DEST)
+
+ANASOURCES ?= $(shell cat doc/anaindex/analyses.dat)
+
+
+# Check that analyses can be built individually
+%.anacheck:
+	@ANA=$(basename $@); \
+  SRC=$(shell find analyses -type f -name "$(basename $@).cc"); \
+  rivet-build Rivet$${ANA}.so $${SRC} &>/dev/null || echo "Build problem in $${ANA}"; \
+  rm -rf "Rivet$${ANA}.so";
+
+analyses-indiv: $(addsuffix .anacheck, ${ANASOURCES})
+	@echo "Individual analysis checks done."
