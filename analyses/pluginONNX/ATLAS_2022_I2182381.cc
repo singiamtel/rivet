@@ -215,17 +215,26 @@ namespace Rivet {
       const Particles sigleptons = sortByPt(tight_muons + tight_electrons);
       const Particles baseleptons = sortByPt(smeared_muons + loose_electrons);
 
-      // A small aside: Gbb NN analysis has four very weird CRs:
-      bool zjcr = false;
-      if (nSigLeptons == 2
-          && (sigleptons[0].mom()+sigleptons[1].mom()).mass() > 60*GeV
-          && (sigleptons[0].mom()+sigleptons[1].mom()).mass() < 120*GeV
-          && (sigleptons[0].mom()+sigleptons[1].mom()).pT() > 70*GeV ){
-        ThreeMomentum ETMisshat = ETMiss.vectorEtMiss() + sigleptons[0].p3() + sigleptons[1].p3();
-        if (ETMisshat.pt() < 200*GeV ){
-          zjcr = true;
+      bool zjcr = false; // Does the event qualify for a zjcr
+      bool onlyzjcr = false; // Does the event qualify for zjcr but would otherwise fail preselection
+      ThreeMomentum ETMisshat{};
+      // A small (and hopefully quick) aside: Gbb NN analysis has four very weird CRs:
+      if (nSigLeptons == 2 &&
+          sigleptons[0].pid() == -sigleptons[1].pid()){
+        const double combined_lepton_mass = (sigleptons[0].mom()+sigleptons[1].mom()).mass();
+        const double combined_lepton_pt = (sigleptons[0].mom()+sigleptons[1].mom()).pt();
+        if(combined_lepton_mass > 60*GeV && combined_lepton_mass < 120*GeV
+        && combined_lepton_pt > 70*GeV ){
+          ETMisshat = ETMiss.vectorEtMiss() + sigleptons[0].p3() + sigleptons[1].p3();
+          if (ETMisshat.pt() > 200*GeV ){
+            zjcr = true;
+            if (etmiss < 200){
+              onlyzjcr = true;
+            }
+          }
         }
       }
+      
 
       // Universal preselection
       // At least four jets
@@ -234,13 +243,15 @@ namespace Rivet {
       // At least three of which btagged:
       if (bjets.size() < 3) vetoEvent;
       // ETmiss > 200GeV
-      if ((etmiss <= 200*GeV) | zjcr) vetoEvent;
+      if ((etmiss <= 200*GeV) && !onlyzjcr) vetoEvent;
 
-      _f_GbbNN->groupfillinit(); _f_GttNN->groupfillinit();
-      _f_GbbCC->groupfillinit(); _f_Gtt0lCC->groupfillinit(); _f_Gtt1lCC->groupfillinit(); _f_GtbCC->groupfillinit();
+      if (!onlyzjcr){
+        _f_GbbNN->groupfillinit(); _f_GttNN->groupfillinit();
+        _f_GbbCC->groupfillinit(); _f_Gtt0lCC->groupfillinit(); _f_Gtt1lCC->groupfillinit(); _f_GtbCC->groupfillinit();
 
-      // Gtb 0l 1st cutflow entry
-      _f_GtbCC->groupfillnext();
+        // Gtb 0l 1st cutflow entry
+        _f_GtbCC->groupfillnext();
+      }
 
       // Define some important variables
       const double meff = (etmiss +
@@ -318,153 +329,171 @@ namespace Rivet {
           normalise_parameter_nn_input(nn_input);
           nn_outputs["Gbb_"+to_string(params.first)+"_"+to_string(params.second)] = _nn->compute(nn_input);
         }
-
-        // Fill Gtt NN sig, control and validation regions
-        if (nSigLeptons >= 1 || (dPhi4jmin >= 0.4 && nBaseLeptons == 0)){
-          _f_GttNN->groupfillnext();
-          if(_f_GttNN->fillnext("CF_Gtt_2100_1", nn_outputs["Gtt_2100_1"][0] > 0.9997)){
-            _c["SR_Gtt_2100_1"]->fill();
-          }
-          else if (nn_outputs["Gtt_2100_1"][0] > 0.68 && nn_outputs["Gtt_2100_1"][0] < 0.86 &&
-                     log10(nn_outputs["Gtt_2100_1"][0]) >= -1.8 && meff >= 2000 ){
-            _c["CR_Gtt_2100_1"]->fill();
-          }
-          else if (nn_outputs["Gtt_2100_1"][0] > 0.86 && nn_outputs["Gtt_2100_1"][0] < 0.9997
-                     && meff >= 2000 ){
-            _c["VR_Gtt_2100_1"]->fill();
-          }
-
-          if(_f_GttNN->fillnext("CF_Gtt_1800_1", nn_outputs["Gtt_1800_1"][0] > 0.9997)){
-            _c["SR_Gtt_1800_1"]->fill();
-          }
-          else if (nn_outputs["Gtt_1800_1"][0] > 0.73 && nn_outputs["Gtt_1800_1"][0] < 0.89 &&
-                     log10(nn_outputs["Gtt_1800_1"][0]) >= -2.0 && meff >= 2000 ){
-            _c["CR_Gtt_1800_1"]->fill();
-          }
-          else if (nn_outputs["Gtt_1800_1"][0] > 0.89 && nn_outputs["Gtt_1800_1"][0] < 0.9997
-                     && meff >= 2000 ){
-            _c["VR_Gtt_1800_1"]->fill();
-          }
-
-          if(_f_GttNN->fillnext("CF_Gtt_2300_1200", nn_outputs["Gtt_2300_1200"][0] > 0.9993)){
-            _c["SR_Gtt_2300_1200"]->fill();
-          }
-          else if (nn_outputs["Gtt_2300_1200"][0] > 0.78 && nn_outputs["Gtt_2300_1200"][0] < 0.83 &&
-                     log10(nn_outputs["Gtt_2300_1200"][0]) >= -1.6 && meff >= 1400 ){
-            _c["CR_Gtt_2300_1200"]->fill();
-          }
-          else if (nn_outputs["Gtt_2300_1200"][0] > 0.83 && nn_outputs["Gtt_2300_1200"][0] < 0.9993
-                     && meff >= 1800 ){
-            _c["VR_Gtt_2300_1200"]->fill();
-          }
-
-          if(_f_GttNN->fillnext("CF_Gtt_1900_1400", nn_outputs["Gtt_1900_1400"][0] > 0.9987)){
-            _c["SR_Gtt_1900_1400"]->fill();
-          }
-          else if (nn_outputs["Gtt_1900_1400"][0] > 0.78 && nn_outputs["Gtt_1900_1400"][0] < 0.8 &&
-                     log10(nn_outputs["Gtt_1900_1400"][0]) >= -1.4 && meff >= 800  && totJetMass < 700){
-            _c["CR_Gtt_1900_1400"]->fill();
-          }
-          else if (nn_outputs["Gtt_1900_1400"][0] > 0.8 && nn_outputs["Gtt_1900_1400"][0] < 0.9987
-                     && meff >= 800  && totJetMass < 700){
-            _c["VR_Gtt_1900_1400"]->fill();
+        // Repeat again for zjcr with leptons zeroed and using etmisshat
+        if (zjcr){
+          for (const pair<size_t, size_t> & params : _gbb_nn_params){
+            // Parameters first
+            nn_input[84] = 0.0; nn_input[85] = params.first; nn_input[86] = params.second;
+            normalise_parameter_nn_input(nn_input);
+            // Zero leptons, set etmiss to etmisshat and then renorm
+            zero_lepton_kinematic_nn_input(nn_input);
+            nn_input[82] = ETMisshat.pt();
+            nn_input[83] = ETMisshat.phi(MINUSPI_PLUSPI);
+            normalise_lepmet_kinematic_nn_input(nn_input);
+            nn_outputs["Gbb_"+to_string(params.first)+"_"+to_string(params.second)+"_CRZscore"] = _nn->compute(nn_input);
           }
         }
 
-        // Fill  Gbb NN sig,CR & VR regions
-        if (nBaseLeptons ==  0 ){
-          _f_GbbNN->groupfillnext();
-          if (_f_GbbNN->fillnext("CF_Gbb_2800_1400", {dPhi4jmin >= 0.6, nn_outputs["Gbb_2800_1400"][1] > 0.999})){
-            _c["SR_Gbb_2800_1400"]->fill();
-          }
-          else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2800_1400"][1] > 0.43 && nn_outputs["Gbb_2800_1400"][1] < 0.76 
-                    && log10(nn_outputs["Gbb_2800_1400"][2]) >= -0.7 && meff >= 1400*GeV && totJetMass < 800*GeV){
-            _c["CR_Gbb_2800_1400"]->fill();
-          }
-          else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2800_1400"][1] > 0.76 && nn_outputs["Gbb_2800_1400"][1] < 0.999 
-                    && log10(nn_outputs["Gbb_2800_1400"][6]) < -1.7 && meff >= 2500*GeV && totJetMass < 800*GeV){
-            _c["VR1_Gbb_2800_1400"]->fill();
-          }
-          else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2800_1400"][1] > 0.76 && nn_outputs["Gbb_2800_1400"][1] < 0.999 
-                    && log10(nn_outputs["Gbb_2800_1400"][6]) >= -1.7){
-            _c["VR2_Gbb_2800_1400"]->fill();
+        // Fill Gtt NN sig, control and validation regions
+        if (!onlyzjcr){
+          if (nSigLeptons >= 1 || (dPhi4jmin >= 0.4 && nBaseLeptons == 0)){
+            _f_GttNN->groupfillnext();
+            if(_f_GttNN->fillnext("CF_Gtt_2100_1", nn_outputs["Gtt_2100_1"][0] > 0.9997)){
+              _c["SR_Gtt_2100_1"]->fill();
+            }
+            else if (nn_outputs["Gtt_2100_1"][0] > 0.68 && nn_outputs["Gtt_2100_1"][0] < 0.86 &&
+                      log10(nn_outputs["Gtt_2100_1"][0]) >= -1.8 && meff >= 2000 ){
+              _c["CR_Gtt_2100_1"]->fill();
+            }
+            else if (nn_outputs["Gtt_2100_1"][0] > 0.86 && nn_outputs["Gtt_2100_1"][0] < 0.9997
+                      && meff >= 2000 ){
+              _c["VR_Gtt_2100_1"]->fill();
+            }
+
+            if(_f_GttNN->fillnext("CF_Gtt_1800_1", nn_outputs["Gtt_1800_1"][0] > 0.9997)){
+              _c["SR_Gtt_1800_1"]->fill();
+            }
+            else if (nn_outputs["Gtt_1800_1"][0] > 0.73 && nn_outputs["Gtt_1800_1"][0] < 0.89 &&
+                      log10(nn_outputs["Gtt_1800_1"][0]) >= -2.0 && meff >= 2000 ){
+              _c["CR_Gtt_1800_1"]->fill();
+            }
+            else if (nn_outputs["Gtt_1800_1"][0] > 0.89 && nn_outputs["Gtt_1800_1"][0] < 0.9997
+                      && meff >= 2000 ){
+              _c["VR_Gtt_1800_1"]->fill();
+            }
+
+            if(_f_GttNN->fillnext("CF_Gtt_2300_1200", nn_outputs["Gtt_2300_1200"][0] > 0.9993)){
+              _c["SR_Gtt_2300_1200"]->fill();
+            }
+            else if (nn_outputs["Gtt_2300_1200"][0] > 0.78 && nn_outputs["Gtt_2300_1200"][0] < 0.83 &&
+                      log10(nn_outputs["Gtt_2300_1200"][0]) >= -1.6 && meff >= 1400 ){
+              _c["CR_Gtt_2300_1200"]->fill();
+            }
+            else if (nn_outputs["Gtt_2300_1200"][0] > 0.83 && nn_outputs["Gtt_2300_1200"][0] < 0.9993
+                      && meff >= 1800 ){
+              _c["VR_Gtt_2300_1200"]->fill();
+            }
+
+            if(_f_GttNN->fillnext("CF_Gtt_1900_1400", nn_outputs["Gtt_1900_1400"][0] > 0.9987)){
+              _c["SR_Gtt_1900_1400"]->fill();
+            }
+            else if (nn_outputs["Gtt_1900_1400"][0] > 0.78 && nn_outputs["Gtt_1900_1400"][0] < 0.8 &&
+                      log10(nn_outputs["Gtt_1900_1400"][0]) >= -1.4 && meff >= 800  && totJetMass < 700){
+              _c["CR_Gtt_1900_1400"]->fill();
+            }
+            else if (nn_outputs["Gtt_1900_1400"][0] > 0.8 && nn_outputs["Gtt_1900_1400"][0] < 0.9987
+                      && meff >= 800  && totJetMass < 700){
+              _c["VR_Gtt_1900_1400"]->fill();
+            }
           }
 
-          if (_f_GbbNN->fillnext("CF_Gbb_2300_1000", {dPhi4jmin >= 0.6, nn_outputs["Gbb_2300_1000"][1] > 0.9994})){
-            _c["SR_Gbb_2300_1000"]->fill();
-          }
-          else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2300_1000"][1] > 0.52 && nn_outputs["Gbb_2300_1000"][1] < 0.77 
-                    && log10(nn_outputs["Gbb_2300_1000"][2]) >= -0.8 && meff >= 1400*GeV && totJetMass < 800*GeV){
-            _c["CR_Gbb_2300_1000"]->fill();
-          }
-          else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2300_1000"][1] > 0.77 && nn_outputs["Gbb_2300_1000"][1] < 0.9994
-                    && log10(nn_outputs["Gbb_2300_1000"][6]) < -1.3 && meff >= 2400*GeV && totJetMass < 800*GeV){
-            _c["VR1_Gbb_2300_1000"]->fill();
-          }
-          else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2300_1000"][1] > 0.77 && nn_outputs["Gbb_2300_1000"][1] < 0.9994
-                    && log10(nn_outputs["Gbb_2300_1000"][6]) >= -1.3){
-            _c["VR2_Gbb_2300_1000"]->fill();
-          }
+          // Fill  Gbb NN sig,CR & VR regions
+          if (nBaseLeptons ==  0 ){
+            _f_GbbNN->groupfillnext();
+            if (_f_GbbNN->fillnext("CF_Gbb_2800_1400", {dPhi4jmin >= 0.6, nn_outputs["Gbb_2800_1400"][1] > 0.999})){
+              _c["SR_Gbb_2800_1400"]->fill();
+            }
+            else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2800_1400"][1] > 0.43 && nn_outputs["Gbb_2800_1400"][1] < 0.76 
+                      && log10(nn_outputs["Gbb_2800_1400"][2]) >= -0.7 && meff >= 1400*GeV && totJetMass < 800*GeV){
+              _c["CR_Gbb_2800_1400"]->fill();
+            }
+            else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2800_1400"][1] > 0.76 && nn_outputs["Gbb_2800_1400"][1] < 0.999 
+                      && log10(nn_outputs["Gbb_2800_1400"][6]) < -1.7 && meff >= 2500*GeV && totJetMass < 800*GeV){
+              _c["VR1_Gbb_2800_1400"]->fill();
+            }
+            else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2800_1400"][1] > 0.76 && nn_outputs["Gbb_2800_1400"][1] < 0.999 
+                      && log10(nn_outputs["Gbb_2800_1400"][6]) >= -1.7){
+              _c["VR2_Gbb_2800_1400"]->fill();
+            }
 
-          //N.b., because we want to be efficient with our analysis, the dPhi4jmin cut has already been made
-          if (_f_GbbNN->fillnext("CF_Gbb_2100_1600", {dPhi4jmin >= 0.4, nn_outputs["Gbb_2100_1600"][1] > 0.9993})){
-            _c["SR_Gbb_2100_1600"]->fill();
-          }
-          else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2100_1600"][1] > 0.88 && nn_outputs["Gbb_2100_1600"][1] < 0.91 
-                    && log10(nn_outputs["Gbb_2100_1600"][2]) >= -1.3 && meff >= 800*GeV && totJetMass < 500*GeV){
-            _c["CR_Gbb_2100_1600"]->fill();
-          }
-          else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2100_1600"][1] > 0.91 && nn_outputs["Gbb_2100_1600"][1] < 0.9993
-                    && log10(nn_outputs["Gbb_2100_1600"][6]) < -1.4 && meff >= 800*GeV && totJetMass < 500*GeV){
-            _c["VR1_Gbb_2100_1600"]->fill();
-          }
-          else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2100_1600"][1] > 0.91 && nn_outputs["Gbb_2100_1600"][1] < 0.9993
-                    && log10(nn_outputs["Gbb_2100_1600"][6]) >= -1.4){
-            _c["VR2_Gbb_2100_1600"]->fill();
-          }
+            if (_f_GbbNN->fillnext("CF_Gbb_2300_1000", {dPhi4jmin >= 0.6, nn_outputs["Gbb_2300_1000"][1] > 0.9994})){
+              _c["SR_Gbb_2300_1000"]->fill();
+            }
+            else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2300_1000"][1] > 0.52 && nn_outputs["Gbb_2300_1000"][1] < 0.77 
+                      && log10(nn_outputs["Gbb_2300_1000"][2]) >= -0.8 && meff >= 1400*GeV && totJetMass < 800*GeV){
+              _c["CR_Gbb_2300_1000"]->fill();
+            }
+            else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2300_1000"][1] > 0.77 && nn_outputs["Gbb_2300_1000"][1] < 0.9994
+                      && log10(nn_outputs["Gbb_2300_1000"][6]) < -1.3 && meff >= 2400*GeV && totJetMass < 800*GeV){
+              _c["VR1_Gbb_2300_1000"]->fill();
+            }
+            else if (dPhi4jmin >= 0.5 && nn_outputs["Gbb_2300_1000"][1] > 0.77 && nn_outputs["Gbb_2300_1000"][1] < 0.9994
+                      && log10(nn_outputs["Gbb_2300_1000"][6]) >= -1.3){
+              _c["VR2_Gbb_2300_1000"]->fill();
+            }
 
-          //N.b., because we want to be efficient with our analysis, the dPhi4jmin cut has already been made
-          if (_f_GbbNN->fillnext("CF_Gbb_2000_1800", {dPhi4jmin >= 0.4, nn_outputs["Gbb_2000_1800"][1] > 0.997})){
-            _c["SR_Gbb_2000_1800"]->fill();
-          }
-          else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2000_1800"][1] > 0.92 && nn_outputs["Gbb_2000_1800"][1] < 0.93
-                    && log10(nn_outputs["Gbb_2000_1800"][2]) >= -1.9 && meff >= 400*GeV && totJetMass < 400*GeV){
-            _c["CR_Gbb_2000_1800"]->fill();
-          }
-          else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2000_1800"][1] > 0.93 && nn_outputs["Gbb_2000_1800"][1] < 0.9997
-                    && log10(nn_outputs["Gbb_2000_1800"][6]) < -1.4 && meff >= 400*GeV && totJetMass < 400*GeV){
-            _c["VR1_Gbb_2000_1800"]->fill();
-          }
-          else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2000_1800"][1] > 0.93 && nn_outputs["Gbb_2000_1800"][1] < 0.9997
-                    && log10(nn_outputs["Gbb_2000_1800"][6]) >= -1.4){
-            _c["VR2_Gbb_2000_1800"]->fill();
+            //N.b., because we want to be efficient with our analysis, the dPhi4jmin cut has already been made
+            if (_f_GbbNN->fillnext("CF_Gbb_2100_1600", {dPhi4jmin >= 0.4, nn_outputs["Gbb_2100_1600"][1] > 0.9993})){
+              _c["SR_Gbb_2100_1600"]->fill();
+            }
+            else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2100_1600"][1] > 0.88 && nn_outputs["Gbb_2100_1600"][1] < 0.91 
+                      && log10(nn_outputs["Gbb_2100_1600"][2]) >= -1.3 && meff >= 800*GeV && totJetMass < 500*GeV){
+              _c["CR_Gbb_2100_1600"]->fill();
+            }
+            else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2100_1600"][1] > 0.91 && nn_outputs["Gbb_2100_1600"][1] < 0.9993
+                      && log10(nn_outputs["Gbb_2100_1600"][6]) < -1.4 && meff >= 800*GeV && totJetMass < 500*GeV){
+              _c["VR1_Gbb_2100_1600"]->fill();
+            }
+            else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2100_1600"][1] > 0.91 && nn_outputs["Gbb_2100_1600"][1] < 0.9993
+                      && log10(nn_outputs["Gbb_2100_1600"][6]) >= -1.4){
+              _c["VR2_Gbb_2100_1600"]->fill();
+            }
+
+            //N.b., because we want to be efficient with our analysis, the dPhi4jmin cut has already been made
+            if (_f_GbbNN->fillnext("CF_Gbb_2000_1800", {dPhi4jmin >= 0.4, nn_outputs["Gbb_2000_1800"][1] > 0.997})){
+              _c["SR_Gbb_2000_1800"]->fill();
+            }
+            else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2000_1800"][1] > 0.92 && nn_outputs["Gbb_2000_1800"][1] < 0.93
+                      && log10(nn_outputs["Gbb_2000_1800"][2]) >= -1.9 && meff >= 400*GeV && totJetMass < 400*GeV){
+              _c["CR_Gbb_2000_1800"]->fill();
+            }
+            else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2000_1800"][1] > 0.93 && nn_outputs["Gbb_2000_1800"][1] < 0.9997
+                      && log10(nn_outputs["Gbb_2000_1800"][6]) < -1.4 && meff >= 400*GeV && totJetMass < 400*GeV){
+              _c["VR1_Gbb_2000_1800"]->fill();
+            }
+            else if (dPhi4jmin >= 0.4 && nn_outputs["Gbb_2000_1800"][1] > 0.93 && nn_outputs["Gbb_2000_1800"][1] < 0.9997
+                      && log10(nn_outputs["Gbb_2000_1800"][6]) >= -1.4){
+              _c["VR2_Gbb_2000_1800"]->fill();
+            }
           }
         }
 
         // Fill the Gbb NN Z CRs
         if (zjcr){
-          if (nn_outputs["Gbb_2000_1800"][1] >= 0.9 &&
-               log10(nn_outputs["Gbb_2000_1800"][2]) < -2.2 &&
-                log10(nn_outputs["Gbb_2000_1800"][6]) >= -3.7 ){
+          if (nn_outputs["Gbb_2000_1800_CRZscore"][1] >= 0.9 &&
+               log10(nn_outputs["Gbb_2000_1800_CRZscore"][2]) < -2.2 &&
+                log10(nn_outputs["Gbb_2000_1800_CRZscore"][6]) >= -3.7 ){
             _c["CRZ_Gbb_2000_1800"]->fill();
           }
-          if (nn_outputs["Gbb_2100_1600"][1] >= 0.9 &&
-               log10(nn_outputs["Gbb_2100_1600"][2]) < -1.7 &&
-                log10(nn_outputs["Gbb_2100_1600"][6]) >= -4.9 ){
+          if (nn_outputs["Gbb_2100_1600_CRZscore"][1] >= 0.9 &&
+               log10(nn_outputs["Gbb_2100_1600_CRZscore"][2]) < -1.7 &&
+                log10(nn_outputs["Gbb_2100_1600_CRZscore"][6]) >= -4.9 ){
             _c["CRZ_Gbb_2100_1600"]->fill();
           }
-          if (nn_outputs["Gbb_2300_1000"][1] >= 0.8 &&
-               log10(nn_outputs["Gbb_2300_1000"][2]) < -1.3 &&
-                log10(nn_outputs["Gbb_2300_1000"][6]) >= -2.7 ){
+          if (nn_outputs["Gbb_2300_1000_CRZscore"][1] >= 0.8 &&
+               log10(nn_outputs["Gbb_2300_1000_CRZscore"][2]) < -1.3 &&
+                log10(nn_outputs["Gbb_2300_1000_CRZscore"][6]) >= -2.7 ){
             _c["CRZ_Gbb_2300_1000"]->fill();
           }
-          if (nn_outputs["Gbb_2800_1400"][1] >= 0.6 &&
-               log10(nn_outputs["Gbb_2800_1400"][2]) < -1.3 &&
-                log10(nn_outputs["Gbb_2800_1400"][6]) >= -3.0 ){
+          if (nn_outputs["Gbb_2800_1400_CRZscore"][1] >= 0.6 &&
+               log10(nn_outputs["Gbb_2800_1400_CRZscore"][2]) < -1.3 &&
+                log10(nn_outputs["Gbb_2800_1400_CRZscore"][6]) >= -3.0 ){
             _c["CRZ_Gbb_2800_1400"]->fill();
           }
         }
       }
+      // The special zjcr events are no longer needed
+      if (onlyzjcr) vetoEvent;
 
       /////////////////////////////////////////////////////////////////////////
       // CC Analysis
@@ -700,6 +729,22 @@ namespace Rivet {
     void normalise_parameter_nn_input(vector<float> & nn_input) const {
       for (size_t i = 84; i < 87; ++i){ // Magic numbers - last 3 elements of 
         nn_input[i] = ((nn_input[i] - _nn_norm_means[i])/_nn_norm_devs[i]);
+      }
+      return;
+    }
+
+    // normalise just lepton and met inputs (useful for CRZ regions)
+    void normalise_lepmet_kinematic_nn_input(vector<float> & nn_input) const {
+      for (size_t i = 66; i < 84; ++i){
+        nn_input[i] = ((nn_input[i] - _nn_norm_means[i])/_nn_norm_devs[i]);
+      }
+      return;
+    }
+
+    // Zero-out lepton variables (for CRZ regions)
+    static void zero_lepton_kinematic_nn_input(vector<float> & nn_input) {
+      for (size_t i = 66; i < 82; ++i){
+        nn_input[i] = 0.0;
       }
       return;
     }
