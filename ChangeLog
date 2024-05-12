@@ -1,3 +1,8 @@
+2024-05-11  Christian Gutschow  <chris.g@cern.ch>
+
+	* Aadd Makefile option to build annalyses one by one
+	(e.g. to catch missing headers and other build problems)
+
 2024-04-18  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Fix Inspire BibTeX-download string decoding and update broken
@@ -10,7 +15,7 @@
 	on presence of an 'MC_' prefix.
 
 	* Improvements to the path-finding failure messages.
-	
+
 	* Swapping the ref data search logic to prioritise .yoda.gz (as
 	.yoda will fail for all std analyses now).
 
