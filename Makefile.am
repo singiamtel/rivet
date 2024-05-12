@@ -18,12 +18,17 @@ doc:
 clean-local:
 	@rm -rf a.out
 
+if ENABLE_ANALYSES
+if ENABLE_PYEXT
+
 install-data-local:
 	$(MAKE) -C doc dat json
 	$(mkdir_p) $(DESTDIR)$(pkgdatadir)
 	$(install_sh_DATA) doc/analists/analyses.dat $(DESTDIR)$(pkgdatadir)/ || true
 	$(install_sh_DATA) doc/analists/analyses.json $(DESTDIR)$(pkgdatadir)/ || true
 
+endif	
+endif
 
 ## Upload tarballs to HepForge
 DEST = login.hepforge.org:rivet/downloads/
