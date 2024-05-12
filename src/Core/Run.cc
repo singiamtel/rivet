@@ -84,7 +84,7 @@ namespace Rivet {
       #ifdef HAVE_LIBZ
       _istr = make_shared<zstr::istream>(std::ref(std::cin));
       #else
-      _istr = make_shared<std::istream>(std::ref(std::cin));
+      _istr = std::shared_ptr<std::istream>(&std::cin, [](auto*){ /* no deletion */ });
       #endif
       // Use standard HepMC3 deduction on stream. For HepMC3 < 3.2.0 the function is implemented in Rivet
       _hepmcReader = RivetHepMC::deduce_reader(*_istr);
