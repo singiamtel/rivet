@@ -35,13 +35,16 @@ TESTS_ENVIRONMENT = \
   RIVET_TESTS_SRC=$(srcdir)
 
 TESTS = \
-testMath testMatVec testCmp testAPI.sh testNaN.sh testBeams \
-testImport.sh
+testMath testMatVec testCmp testAPI.sh testNaN.sh testBeams
+
+if ENABLE_PYEXT
+TESTS += testImport.sh
 
 if ENABLE_ANALYSES
 
 TESTS += testCmdLine.sh
 
+endif
 endif
 
 EXTRA_DIST = testAPI.hepmc testCmdLine.sh testImport.sh testAPI.sh testNaN.sh
