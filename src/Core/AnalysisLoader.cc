@@ -2,10 +2,10 @@
 #include "Rivet/AnalysisLoader.hh"
 #include "Rivet/Tools/RivetPaths.hh"
 #include "Rivet/Tools/Utils.hh"
-#include "Rivet/Tools/osdir.hh"
 #include "Rivet/Analysis.hh"
 #include <fstream>
 #include <dlfcn.h>
+#include <filesystem>
 
 namespace Rivet {
 
@@ -152,16 +152,17 @@ namespace Rivet {
       const string libsuffix = ".so";
       for (const string& d : dirs) {
         if (d.empty()) continue;
-        oslink::directory dir(d);
-        while (dir) {
-          string filename = dir.next();
+        if (!std::filesystem::is_directory(d)) continue;
+        for (const auto &f : std::filesystem::directory_iterator(d)) {
+          if (!(f.is_symlink()||f.is_regular_file())) continue;
+          std::string filename = f.path().filename();
           // Require that plugin lib name starts with 'Rivet'
           if (filename.find("Rivet") != 0) continue;
           size_t posn = filename.find(libsuffix);
           if (posn == string::npos || posn != filename.length()-libsuffix.length()) continue;
           /// @todo Make sure this is an abs path
           /// @todo Sys-dependent path separator instead of "/"
-          const string path = d + "/" + filename;
+          const string path = std::filesystem::canonical(f.path());
           // Ensure no duplicate paths
           if (find(_pluginpaths.begin(), _pluginpaths.end(), path) == _pluginpaths.end()) {
             _pluginpaths += path;
