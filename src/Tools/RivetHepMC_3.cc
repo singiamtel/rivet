@@ -1,9 +1,9 @@
 // -*- C++ -*-
-
+#include "Rivet/Config/DummyConfig.hh"
+#if HAVE_LIBZ
 #include "../Core/zstr/zstr.hpp"
+#endif
 #include "HepMC3/GenCrossSection.h"
-#include "HepMC3/ReaderAscii.h"
-#include "HepMC3/ReaderAsciiHepMC2.h"
 #include "HepMC3/ReaderFactory.h"
 #include "Rivet/Tools/RivetHepMC.hh"
 #include <cassert>
@@ -80,18 +80,17 @@ namespace Rivet {
       shared_ptr<HepMC_IO_type> ret;
 
       #ifdef HAVE_LIBZ
-      if (filename == "-")
+      if (filename == "-") {
         istrp = make_shared<zstr::istream>(std::cin);
-      else
+      } else {
         istrp = make_shared<zstr::ifstream>(filename.c_str());
+      }
       std::istream& istr = *istrp;
       #else
       if (filename != "-") istrp = make_shared<std::ifstream>(filename.c_str());
       std::istream& istr = filename == "-" ? std::cin : *istrp;
       #endif
-
       ret = RivetHepMC::deduce_reader(istr);
-
       // Check that everything was ok.
       if (ret) {
         if (ret->failed()) {

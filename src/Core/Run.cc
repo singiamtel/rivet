@@ -4,7 +4,9 @@
 #include "Rivet/Math/MathUtils.hh"
 #include "Rivet/Tools/RivetPaths.hh"
 #include "Rivet/Tools/RivetHepMC.hh"
+#ifdef HAVE_LIBZ
 #include "zstr/zstr.hpp"
+#endif
 #include <limits>
 #include <iostream>
 
@@ -86,7 +88,6 @@ namespace Rivet {
       #else
       _istr = std::shared_ptr<std::istream>(&std::cin, [](auto*){ /* no deletion */ });
       #endif
-      // Use standard HepMC3 deduction on stream. For HepMC3 < 3.2.0 the function is implemented in Rivet
       _hepmcReader = RivetHepMC::deduce_reader(*_istr);
     } else {
       // Use standard HepMC3 deduction on file
@@ -135,13 +136,7 @@ namespace Rivet {
       }
       if (!_istr) MSG_INFO("Info in deduce_reader: input stream is too short or invalid.");
       for (size_t i = 0; i < back; ++i) _istr->unget();
-      if (strncmp(head.at(0).c_str(), "HepMC::Version", 14) == 0 &&
-          strncmp(head.at(1).c_str(), "HepMC::CompressedAsciiv3-START_EVENT_LISTING", 44) == 0) {
-        MSG_INFO("Info in deduce_reader: Attempt CompressedAsciiv3");
-        //_hepmcReader= make_shared<Rivet::RivetHepMC::ReaderCompressedAscii>(_istr);
-      }
     }
-
 
     if (_hepmcReader == nullptr) {
       MSG_ERROR("Read error in file '" << evtfile << "' " << errormessage);
