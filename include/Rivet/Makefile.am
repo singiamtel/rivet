@@ -167,8 +167,6 @@ nobase_pkginclude_HEADERS += \
   Tools/ExptSmearingFunctions.hh \
   Tools/TypeTraits.hh \
   Tools/Utils.hh
-nobase_dist_noinst_HEADERS += \
-  Tools/osdir.hh
 
 ## Maths
 nobase_pkginclude_HEADERS += \
