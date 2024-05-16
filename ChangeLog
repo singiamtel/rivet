@@ -1,6 +1,10 @@
+2024-05-16  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Change Python build to use PY_LDFLAGS rather than LINKFORSHARED variable.
+
 2024-05-11  Christian Gutschow  <chris.g@cern.ch>
 
-	* Aadd Makefile option to build annalyses one by one
+	* Add Makefile option to build analyses one by one
 	(e.g. to catch missing headers and other build problems)
 
 2024-04-18  Andy Buckley  <andy.buckley@cern.ch>
