@@ -180,6 +180,7 @@ $ac_sysconfig_result])
 	#
 	# Check for Python include path
 	#
+        # TODO: should we be using PY_CPPFLAGS from sysconfig?
 	AC_MSG_CHECKING([for Python include path])
 	if test -z "$PYTHON_CPPFLAGS"; then
 		if test "$IMPORT_SYSCONFIG" = "import sysconfig"; then
@@ -343,7 +344,7 @@ EOD`
 	if test -z "$PYTHON_EXTRA_LDFLAGS"; then
 		PYTHON_EXTRA_LDFLAGS=`$PYTHON -c "$IMPORT_SYSCONFIG; \
 			conf = sysconfig.get_config_var; \
-			print (conf('LINKFORSHARED'))"`
+			print (conf('PY_LDFLAGS'))"`
 	fi
 	AC_MSG_RESULT([$PYTHON_EXTRA_LDFLAGS])
 	AC_SUBST(PYTHON_EXTRA_LDFLAGS)
