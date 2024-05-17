@@ -40,7 +40,7 @@ YMin=0.7
 YMax=1.3
 END PLOT
 BEGIN PLOT /ALICE_2016_I1507157/d05-x01-y02
-Title=Integrated correlation function for $K^+ K^+ + K^- K-$
+Title=Integrated correlation function for $K^+ K^+ + K^- K^-$
 XLabel=$\Delta \phi$ (rad)
 YLabel=$C(\Delta \phi)$
 LogY=0
