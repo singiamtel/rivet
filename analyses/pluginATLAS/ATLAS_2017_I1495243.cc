@@ -66,7 +66,7 @@ namespace Rivet {
       book(_h["ljet_pt"] , 7,1,1);
 
       for (size_t i = 0; i < 4; ++i) {
-        book(_h["njet"  + to_str(i)], i+1, 1, 1);
+        book(_d["njet"  + to_str(i)], i+1, 1, 1);
         book(_h["Q0"    + to_str(i)], "_Q0"    + to_str(i+ 7), refData((i>1?"d":"d0") + to_str(i+ 8) + "-x01-y01"));
         book(_h["MQ0"   + to_str(i)], "_MQ0"   + to_str(i+12), refData("d" + to_str(i+12) + "-x01-y01"));
         book(_h["Qsum"  + to_str(i)], "_Qsum"  + to_str(i+16), refData("d" + to_str(i+16) + "-x01-y01"));
@@ -144,7 +144,7 @@ namespace Rivet {
       for (size_t i = 0; i < 4; ++i) {
         size_t cutoff = i? 3 : 4;
         if (njetcount[i] > cutoff)  njetcount[i] = cutoff;
-        _h["njet" + to_str(i)]->fill(njetcount[i]);
+        _d["njet" + to_str(i)]->fill(discretise(njetcount[i], i));
 
         if (leadpt[i] > 305*GeV)  leadpt[i] = 305*GeV;
         _h["Q0" + to_str(i)]->fill(leadpt[i]);
@@ -201,6 +201,19 @@ namespace Rivet {
       for (map<string, Histo1DPtr>::iterator hit = _h.begin(); hit != _h.end(); ++hit) {
         if (hit->first.find("jet") != string::npos)  normalize(hit->second);
       }
+      normalize(_d);
+    }
+
+    string discretise(const size_t n, const size_t axis) const {
+      if (n == 0) return "0"s;
+      if (n == 1) return "1"s;
+      if (n == 2) return "2"s;
+      if (axis) {
+        return ">= 3"s;
+      }
+      else if (n == 3) return "3"s;
+      else if (n <= 8) return "4.0 - 8.0"s;
+      return "OTHER"s;
     }
 
 
@@ -209,6 +222,7 @@ namespace Rivet {
     /// @name Histogram helper functions
     map<string, Histo1DPtr> _h;
     map<string, Estimate1DPtr> _s;
+    map<string, BinnedHistoPtr<string>> _d;
   };
 
 
