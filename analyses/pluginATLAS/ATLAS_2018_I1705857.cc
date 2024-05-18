@@ -61,8 +61,8 @@ namespace Rivet {
       book(_histograms["fid_xsec"], 1, 1, 1);
       book(_histograms["fid_xsec_no_ttX"], 2, 1, 1);
 
-      book(_histograms["nbjets_emu"], 3, 1, 1);
-      book(_histograms["nbjets_emu_no_ttX"], 4, 1, 1);
+      book(_d["nbjets_emu"], 3, 1, 1);
+      book(_d["nbjets_emu_no_ttX"], 4, 1, 1);
 
       // HT
       book_hist("ht_emu", 3);
@@ -137,7 +137,7 @@ namespace Rivet {
       if (!pass_emu && !pass_ljets)  vetoEvent;
 
       if (pass_emu) {
-        if (nbjets >= 2)  fill("nbjets_emu", nbjets - 1);
+        if (nbjets >= 2)  dfill("nbjets_emu", nbjets - 1);
         if (nbjets >= 3)  fill("fid_xsec", 1);
         if (nbjets >= 4)  fill("fid_xsec", 2);
       }
@@ -224,11 +224,21 @@ namespace Rivet {
         if (h.first.find("fid_xsec") != string::npos)  continue;
         normalize(h.second, 1.0);
       }
+      scale(_d, sf);
     }
 
     void fill(const string& name, const double value) {
       _histograms[name]->fill(value);
       _histograms[name + "_no_ttX"]->fill(value);
+    }
+
+    void dfill(const string& name, const size_t value) {
+      string edge("OTHER");
+      if (value == 2)  edge = "2";
+      else if (value == 3)  edge = "3";
+      else if (value >= 4)  edge = ">= 4";
+      _d[name]->fill(edge);
+      _d[name + "_no_ttX"]->fill(edge);
     }
 
     void book_hist(const std::string& name, unsigned int d) {
@@ -239,6 +249,7 @@ namespace Rivet {
 
     private:
       map<std::string, Histo1DPtr> _histograms;
+      map<std::string, BinnedHistoPtr<string>> _d;
 
   };
 

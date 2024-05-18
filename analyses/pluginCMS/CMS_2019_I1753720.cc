@@ -35,7 +35,7 @@ namespace Rivet {
        const Jets bjets = select(jets, [](const Jet& j) { return j.bTagged(); } );
 
        if (jets.size() >= 8 && jets_30.size() >= 6 && bjets.size() >= 4) {
-           _hist_xsec_fid->fill(1.);
+           _hist_xsec_fid->fill("$\\sigma$ [PB]"s);
        }
     }
 
@@ -52,7 +52,7 @@ namespace Rivet {
   private:
 
     /// Histogram for fiducial cross section
-    Histo1DPtr _hist_xsec_fid;
+    BinnedHistoPtr<string> _hist_xsec_fid;
 
   };
 
