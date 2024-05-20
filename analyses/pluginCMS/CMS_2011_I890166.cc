@@ -88,10 +88,12 @@ namespace Rivet {
 
 
     void finalize() {
-      divide(_h_dNLambda_dpT,_h_dNKshort_dpT, _h_LampT_KpT);
-      divide(_h_dNXi_dpT,_h_dNLambda_dpT, _h_XipT_LampT);
-      divide(_h_dNLambda_dy,_h_dNKshort_dy, _h_Lamy_Ky);
-      divide(_h_dNXi_dy,_h_dNLambda_dy, _h_Xiy_Lamy);
+      divide(_h_dNLambda_dpT, _h_dNKshort_dpT, _h_LampT_KpT);
+      YODA::Histo1D denom = _h_dNLambda_dpT->clone();
+      denom.rebinXTo(_h_dNXi_dpT->xEdges());
+      divide(*_h_dNXi_dpT, denom, _h_XipT_LampT);
+      divide(_h_dNLambda_dy, _h_dNKshort_dy, _h_Lamy_Ky);
+      divide(_h_dNXi_dy, _h_dNLambda_dy, _h_Xiy_Lamy);
       const double normpT = 1.0/sumOfWeights();
       const double normy = 0.5*normpT; // Accounts for using |y| instead of y
       scale(_h_dNKshort_dy, normy);
