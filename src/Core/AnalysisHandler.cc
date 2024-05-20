@@ -1741,8 +1741,8 @@ namespace Rivet {
 
   double AnalysisHandler::runSqrtS() const {
     double rtn = sqrtS(runBeams());
-    if (rtn < 0. && _beaminfo) { // try falling back to _beaminfo
-      rtn = sqrtS(_beaminfo->bin(1).val(), _beaminfo->bin(2).val());
+    if (rtn <= 0. && _beaminfo) { // try falling back to _beaminfo
+      rtn = sqrtS(fabs(_beaminfo->bin(1).val()), fabs(_beaminfo->bin(2).val()));
     }
     return rtn;
   }
