@@ -61,7 +61,7 @@ namespace Rivet {
       double Zphi = zfinder.bosons()[0].phi();
       double Zmass = zfinder.bosons()[0].mass()/GeV;
 
-      Particles particles = apply<VetoedFinalState>(event, "nonmuons").particles();
+      Particles particles = apply<ChargedFinalState>(event, "nonmuons").particles();
 
       int nTowards = 0;
       int nTransverse = 0;
