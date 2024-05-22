@@ -60,23 +60,23 @@ namespace Rivet {
       declare(jets, "Jets");
 
       // Book histograms
-      book(_h_eee      , 1, 1, 1);
-      book(_h_mee      , 1, 1, 2);
-      book(_h_emm      , 1, 1, 3);
-      book(_h_mmm      , 1, 1, 4);
-      book(_h_fid      , 1, 1, 5);
-      book(_h_eee_Plus , 2, 1, 1);
-      book(_h_mee_Plus , 2, 1, 2);
-      book(_h_emm_Plus , 2, 1, 3);
-      book(_h_mmm_Plus , 2, 1, 4);
-      book(_h_fid_Plus , 2, 1, 5);
-      book(_h_eee_Minus, 3, 1, 1);
-      book(_h_mee_Minus, 3, 1, 2);
-      book(_h_emm_Minus, 3, 1, 3);
-      book(_h_mmm_Minus, 3, 1, 4);
-      book(_h_fid_Minus, 3, 1, 5);
-      book(_h_total    , 6, 1, 1);
-      book(_h_Njets    , 8, 1, 1);
+      book(_h["eee"]      , 1, 1, 1);
+      book(_h["mee"]      , 1, 1, 2);
+      book(_h["emm"]      , 1, 1, 3);
+      book(_h["mmm"]      , 1, 1, 4);
+      book(_h["fid"]      , 1, 1, 5);
+      book(_h["eee_Plus"] , 2, 1, 1);
+      book(_h["mee_Plus"] , 2, 1, 2);
+      book(_h["emm_Plus"] , 2, 1, 3);
+      book(_h["mmm_Plus"] , 2, 1, 4);
+      book(_h["fid_Plus"] , 2, 1, 5);
+      book(_h["eee_Minus"], 3, 1, 1);
+      book(_h["mee_Minus"], 3, 1, 2);
+      book(_h["emm_Minus"], 3, 1, 3);
+      book(_h["mmm_Minus"], 3, 1, 4);
+      book(_h["fid_Minus"], 3, 1, 5);
+      book(_htot, 6, 1, 1);
+      book(_hnjets, 8, 1, 1);
 
     }
 
@@ -141,7 +141,7 @@ namespace Rivet {
       if (i < 0 || j < 0 || k < 0) vetoEvent;
 
       FourMomentum ZbosonTotal = dressedleptonsTotal[i].momentum()+dressedleptonsTotal[j].momentum();
-      if ( ZbosonTotal.mass() >= 66*GeV && ZbosonTotal.mass() <= 116*GeV )  _h_total->fill(13000);
+      if ( ZbosonTotal.mass() >= 66*GeV && ZbosonTotal.mass() <= 116*GeV )  _htot->fill(13000);
 
       //---end Total PS
 
@@ -221,28 +221,31 @@ namespace Rivet {
       if (deltaR(Zlepton1, Wlepton)  < 0.3)        vetoEvent;
       if (deltaR(Zlepton2, Wlepton)  < 0.3)        vetoEvent;
 
-      if (EventType == 3)  _h_eee->fill(13000.);
-      if (EventType == 2)  _h_mee->fill(13000.);
-      if (EventType == 1)  _h_emm->fill(13000.);
-      if (EventType == 0)  _h_mmm->fill(13000.);
-      _h_fid->fill(13000);
+      if (EventType == 3)  _h["eee"]->fill(13000);
+      if (EventType == 2)  _h["mee"]->fill(13000);
+      if (EventType == 1)  _h["emm"]->fill(13000);
+      if (EventType == 0)  _h["mmm"]->fill(13000);
+      _h["fid"]->fill(13000);
 
       if (EventCharge == 1) {
-        if (EventType == 3)  _h_eee_Plus->fill(13000.);
-        if (EventType == 2)  _h_mee_Plus->fill(13000.);
-        if (EventType == 1)  _h_emm_Plus->fill(13000.);
-        if (EventType == 0)  _h_mmm_Plus->fill(13000.);
-        _h_fid_Plus->fill(13000);
+        if (EventType == 3)  _h["eee_Plus"]->fill(13000);
+        if (EventType == 2)  _h["mee_Plus"]->fill(13000);
+        if (EventType == 1)  _h["emm_Plus"]->fill(13000);
+        if (EventType == 0)  _h["mmm_Plus"]->fill(13000);
+        _h["fid_Plus"]->fill(13000);
       } else {
-        if (EventType == 3)  _h_eee_Minus->fill(13000.);
-        if (EventType == 2)  _h_mee_Minus->fill(13000.);
-        if (EventType == 1)  _h_emm_Minus->fill(13000.);
-        if (EventType == 0)  _h_mmm_Minus->fill(13000.);
-        _h_fid_Minus->fill(13000);
+        if (EventType == 3)  _h["eee_Minus"]->fill(13000);
+        if (EventType == 2)  _h["mee_Minus"]->fill(13000);
+        if (EventType == 1)  _h["emm_Minus"]->fill(13000);
+        if (EventType == 0)  _h["mmm_Minus"]->fill(13000);
+        _h["fid_Minus"]->fill(13000);
       }
 
-      if (jets.size() < 4)  _h_Njets->fill(jets.size());
-      else  _h_Njets->fill(4);
+      if (jets.size() == 0)  _hnjets->fill("0.0"s);
+      else if (jets.size() == 1)  _hnjets->fill("1.0"s);
+      else if (jets.size() == 2)  _hnjets->fill("2.0"s);
+      else if (jets.size() == 3)  _hnjets->fill("3.0"s);
+      else  _hnjets->fill("$\\geq 4$"s);
 
     }
 
@@ -250,31 +253,14 @@ namespace Rivet {
     void finalize() {
 
       // Print summary info
-      const double xs_pb(crossSection() / picobarn);
-      const double xs_fb(crossSection() / femtobarn);
-      const double sumw(sumOfWeights());
-      const double sf_pb(xs_pb / sumw);
-      const double sf_fb(xs_fb / sumw);
-
+      const double sf_pb = crossSection() / picobarn / sumOfWeights();
+      const double sf_fb = crossSection() / femtobarn / sumOfWeights();
       const float totalBR= 4*0.1086*0.033658; // W and Z leptonic branching fractions
 
-      scale(_h_fid,       sf_fb/4.);
-      scale(_h_eee,       sf_fb);
-      scale(_h_mee,       sf_fb);
-      scale(_h_emm,       sf_fb);
-      scale(_h_mmm,       sf_fb);
-      scale(_h_fid_Plus,  sf_fb/4.);
-      scale(_h_eee_Plus,  sf_fb);
-      scale(_h_mee_Plus,  sf_fb);
-      scale(_h_emm_Plus,  sf_fb);
-      scale(_h_mmm_Plus,  sf_fb);
-      scale(_h_fid_Minus, sf_fb/4.);
-      scale(_h_eee_Minus, sf_fb);
-      scale(_h_mee_Minus, sf_fb);
-      scale(_h_emm_Minus, sf_fb);
-      scale(_h_mmm_Minus, sf_fb);
-      scale(_h_Njets, sf_fb/4.);
-      scale(_h_total, sf_pb/totalBR);
+      scale(_h, sf_fb);
+      scale({ _h["fid"], _h["fid_Plus"], _h["fid_Minus"]}, 0.25);
+      scale(_hnjets, 0.25*sf_fb);
+      scale(_htot, sf_pb/totalBR);
 
     }
 
@@ -286,23 +272,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_eee;
-    Histo1DPtr _h_mee;
-    Histo1DPtr _h_emm;
-    Histo1DPtr _h_mmm;
-    Histo1DPtr _h_fid;
-    Histo1DPtr _h_eee_Plus;
-    Histo1DPtr _h_mee_Plus;
-    Histo1DPtr _h_emm_Plus;
-    Histo1DPtr _h_mmm_Plus;
-    Histo1DPtr _h_fid_Plus;
-    Histo1DPtr _h_eee_Minus;
-    Histo1DPtr _h_mee_Minus;
-    Histo1DPtr _h_emm_Minus;
-    Histo1DPtr _h_mmm_Minus;
-    Histo1DPtr _h_fid_Minus;
-    Histo1DPtr _h_total;
-    Histo1DPtr _h_Njets;
+    map<string,BinnedHistoPtr<int>> _h;
+    BinnedHistoPtr<int> _htot;
+    BinnedHistoPtr<string> _hnjets;
 
     /// @}
 
