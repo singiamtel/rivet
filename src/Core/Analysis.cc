@@ -426,9 +426,9 @@ namespace Rivet {
       }
     }
     else if ( sel == "GEN" ) {
-      YODA::Histo1DPtr genhists =
-        getPreload<Histo1D>("/" + calAnaName + "/" + calHistName);
-      if ( !genhists || genhists->numEntries() <= 1 ) {
+      YODA::Estimate1DPtr genhists =
+        getPreload<Estimate1D>("/" + calAnaName + "/" + calHistName);
+      if ( !genhists || genhists->areaUnderCurve() <= 0.0 ) {
         MSG_WARNING("No generated calibration histogram for " <<
                     "CentralityProjection " << projName << " found " <<
                     "(requested histogram " << calHistName << " in " <<
@@ -442,9 +442,9 @@ namespace Rivet {
       }
     }
     else if ( sel == "IMP" ) {
-      YODA::Histo1DPtr imphists =
-        getPreload<Histo1D>("/" + calAnaName + "/" + calHistName + "_IMP");
-      if ( !imphists || imphists->numEntries() <= 1 ) {
+      YODA::Estimate1DPtr imphists =
+        getPreload<Estimate1D>("/" + calAnaName + "/" + calHistName + "_IMP");
+      if ( !imphists || imphists->areaUnderCurve() <= 0.0 ) {
         MSG_WARNING("No impact parameter calibration histogram for " <<
                     "CentralityProjection " << projName << " found " <<
                     "(requested histogram " << calHistName << "_IMP in " <<
@@ -459,9 +459,9 @@ namespace Rivet {
       }
     }
     else if ( sel == "USR" ) {
-      YODA::Histo1DPtr usrhists =
-        getPreload<Histo1D>("/" + calAnaName + "/" + calHistName + "_USR");
-      if ( !usrhists || usrhists->numEntries() <= 1 ) {
+      YODA::Estimate1DPtr usrhists =
+        getPreload<Estimate1D>("/" + calAnaName + "/" + calHistName + "_USR");
+      if ( !usrhists || usrhists->areaUnderCurve() <= 0.0 ) {
         MSG_WARNING("No user-defined calibration histogram for " <<
                     "CentralityProjection " << projName << " found " <<
                     "(requested histogram " << calHistName << "_USR in " << calAnaName << ")");
