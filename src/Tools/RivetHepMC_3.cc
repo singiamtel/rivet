@@ -76,38 +76,6 @@ namespace Rivet {
     }
 
 
-    shared_ptr<HepMC_IO_type> makeReader(std::string filename, std::shared_ptr<std::istream>& istrp, std::string* errm) {
-      shared_ptr<HepMC_IO_type> ret;
-
-      #ifdef HAVE_LIBZ
-      if (filename == "-") {
-        istrp = make_shared<zstr::istream>(std::cin);
-      } else {
-        istrp = make_shared<zstr::ifstream>(filename.c_str());
-      }
-      std::istream& istr = *istrp;
-      #else
-      if (filename != "-") istrp = make_shared<std::ifstream>(filename.c_str());
-      std::istream& istr = filename == "-" ? std::cin : *istrp;
-      #endif
-      ret = RivetHepMC::deduce_reader(istr);
-      // Check that everything was ok.
-      if (ret) {
-        if (ret->failed()) {
-          if (errm) *errm = "Problems reading from HepMC file. ";
-          ret = shared_ptr<HepMC_IO_type>();
-        }
-        return ret;
-      }
-      if (!ret && filename == "-") {
-        if (errm) *errm += "Problems reading HepMC from stdin. No header found. ";
-        return shared_ptr<HepMC_IO_type>();
-      }
-
-      return ret;
-    }
-
-
     void strip(GenEvent& ge, const set<long>& stripid) {
       //      std::cerr << "Stripping event " << ge.event_number() << std::endl;
       vector<HepMC3::GenParticlePtr> allparticles = ge.particles();

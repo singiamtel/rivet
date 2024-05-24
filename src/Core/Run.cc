@@ -77,9 +77,6 @@ namespace Rivet {
     // Set current weight-scaling member
     _fileweight = weight;
 
-    // In case makeReader fails.
-    std::string errormessage;
-
     if (evtfile == "-") {
       // Turn off the buffering to make IO faster and make ungetc work on cin
       std::basic_ios<char>::sync_with_stdio(false);
@@ -139,7 +136,7 @@ namespace Rivet {
     }
 
     if (_hepmcReader == nullptr) {
-      MSG_ERROR("Read error in file '" << evtfile << "' " << errormessage);
+      MSG_ERROR("Read error in file '" << evtfile);
       return false;
     }
     return true;

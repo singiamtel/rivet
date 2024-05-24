@@ -52,8 +52,7 @@ int main() {
   Rivet::AnalysisHandler rivet;
   rivet.addAnalysis("NanTest");
 
-  std::shared_ptr<std::istream> file;
-  shared_ptr<Rivet::HepMC_IO_type> reader = Rivet::HepMCUtils::makeReader("testAPI.hepmc", file);
+  auto reader = Rivet::RivetHepMC::deduce_reader("testAPI.hepmc");
   std::shared_ptr<Rivet::GenEvent> evt = make_shared<Rivet::GenEvent>();
   double sum_of_weights = 0.0;
 
