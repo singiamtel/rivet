@@ -57,7 +57,6 @@ namespace Rivet {
     int particles_size(ConstGenEventPtr ge);
     int particles_size(const GenEvent* ge);
     std::pair<ConstGenParticlePtr,ConstGenParticlePtr> beams(const GenEvent* ge);
-    std::shared_ptr<HepMC_IO_type> makeReader(std::string filename, std::shared_ptr<std::istream>& istrp, std::string* errm = 0);
     bool readEvent(std::shared_ptr<HepMC_IO_type> io, std::shared_ptr<GenEvent> evt);
     void strip(GenEvent & ge, const set<long>& stripid = {1, -1, 2, -2, 3,-3, 21});
     vector<string> weightNames(const GenEvent& ge);
