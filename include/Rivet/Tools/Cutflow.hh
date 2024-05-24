@@ -16,7 +16,7 @@ namespace Rivet {
     template<typename T>
     std::vector<T> operator+(std::vector<T>&& res, const std::vector<T>& vadd) {
       res.insert(std::end(res), std::begin(vadd), std::end(vadd));
-      return res;
+      return std::move(res);
     }
   }
 
