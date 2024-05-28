@@ -303,7 +303,7 @@ namespace Rivet {
     const string path1 = findAnalysisDataFile(filename);
     if (!path1.empty()) return path1;
     throw Rivet::Error("Couldn't find an ONNX data file for '" + filename + "' " +
-                       "in the path " + toString(getRivetDataPaths()));
+                       "in the path " + toString(getRivetDataPath()));
   }
 
 
