@@ -57,7 +57,7 @@ int main() {
   cout << "Vzminus eta, rap = " << vzminus.eta() << ", " << vzminus.rap() << endl;
   cout << "V45 eta, rap = " << v45.eta() << ", " << v45.rap() << endl;
   assert(vnull.eta() == 0);
-  assert(std::isnan(vnull.rap()));
+  assert(vnull.rap() == 0);
   assert(std::isinf(vzplus.eta()));
   assert(std::isinf(vzplus.rap()));
   assert(std::isinf(vzminus.eta()));

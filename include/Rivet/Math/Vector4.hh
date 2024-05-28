@@ -605,6 +605,8 @@ namespace Rivet {
 
     /// Calculate the rapidity.
     double rapidity() const {
+      if (E() == 0.0) [[ unlikely ]] return 0.0;
+      if (E() == fabs(pz())) [[unlikely]] return std::copysign(INF, pz());
       return 0.5 * std::log( (E() + pz()) / (E() - pz()) );
     }
     /// Alias for rapidity.

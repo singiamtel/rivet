@@ -1,3 +1,8 @@
+2024-05-26  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add FPE protections against eta and rap calculations with
+	(massless) null and z-axis vectors.
+
 2024-05-16  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Change Python build to use PY_LDFLAGS rather than LINKFORSHARED variable.
