@@ -54,7 +54,7 @@ namespace Rivet {
       // Centrality projection for high multiplicity trigger in pp.
       if (sysType == pp)
         declareCentrality(ALICE::V0MMultiplicity(),
-	  "ALICE_2015_PPCentrality", "V0M","V0M");
+	  "ALICE_2015_CENT_PP", "V0M","V0M");
 
       // The full central charged final state.
       const ChargedFinalState& cfs = ChargedFinalState(Cuts::abseta < 0.8 &&

@@ -38,7 +38,7 @@ namespace Rivet {
 
       // Initialise and register projections
 
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_CENT_PBPB", "V0M", "V0M");
 
       const ALICE::PrimaryParticles app(Cuts::abseta < 0.8 && Cuts::pT > 1*GeV && Cuts::abscharge > 0);
       declare(app, "app");

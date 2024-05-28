@@ -28,7 +28,7 @@ namespace Rivet {
 
       // Declare centrality projection
       declareCentrality(ALICE::V0MMultiplicity(),
-        "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+        "ALICE_2015_CENT_PBPB", "V0M", "V0M");
 
       // Charged, primary particles with |eta| < 0.5 and pT > 150 MeV
       declare(ALICE::PrimaryParticles(Cuts::abseta < 0.5 &&

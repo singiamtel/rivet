@@ -25,7 +25,7 @@ namespace Rivet {
       declare(HepMCHeavyIon(), "HepMC");
 
       // Declare centrality projection
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_CENT_PBPB", "V0M", "V0M");
 
       // Charged, primary particles with |y| < 0.5
       declare(ALICE::PrimaryParticles(Cuts::absrap < 0.5 && Cuts::abscharge > 0), "APRIM");

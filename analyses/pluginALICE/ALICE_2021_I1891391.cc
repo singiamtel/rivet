@@ -190,7 +190,7 @@ namespace Rivet {
     void init() {
 
       // Projections
-      declareCentrality(ALICE::V0MMultiplicity(),"ALICE_2015_PPCentrality","V0M","V0M");
+      declareCentrality(ALICE::V0MMultiplicity(),"ALICE_2015_CENT_PP","V0M","V0M");
 
       // Projections for trigger particles: charged, primary particles
       // with |eta| < 0.8 and different pT bins

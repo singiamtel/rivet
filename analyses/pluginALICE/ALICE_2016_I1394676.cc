@@ -21,7 +21,7 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       // Centrality projection.
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality",
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_CENT_PBPB",
         "V0M","V0M");
       // Projections for the 2-out-of-3 trigger.
       declare(ChargedFinalState( (Cuts::eta > 2.8 && Cuts::eta < 5.1) &&

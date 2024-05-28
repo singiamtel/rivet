@@ -23,7 +23,7 @@ namespace Rivet {
       declare(ALICE::V0AndTrigger(), "V0-AND");
       // The centrality projection.
       declareCentrality(ALICE::V0MMultiplicity(),
-           "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+           "ALICE_2015_CENT_PBPB", "V0M", "V0M");
 
       // Invariant pT distributions.
       book(_histPtPi, "d01-x01-y01"); //pi+
