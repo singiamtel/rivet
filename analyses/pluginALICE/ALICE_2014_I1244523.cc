@@ -41,7 +41,7 @@ namespace Rivet {
     void init() {
       // The centrality projection.
       declareCentrality(ALICE::V0AMultiplicity(),
-           "ALICE_2015_PPBCentrality", "V0A", "V0A");
+           "ALICE_2015_CENT_PPB", "V0A", "V0A");
 
       // Define the cuts for the analysis:
       // pPb Collision has a centre of mass system shift of +0.465

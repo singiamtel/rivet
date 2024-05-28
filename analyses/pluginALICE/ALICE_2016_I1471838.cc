@@ -30,7 +30,7 @@ namespace Rivet {
     void init() {
       // Centrality projection.
       declareCentrality(ALICE::V0MMultiplicity(),
-        "ALICE_2015_PPCentrality","V0M","V0M");
+        "ALICE_2015_CENT_PP","V0M","V0M");
       // Central primary particles
       declare(ChargedFinalState(Cuts::abseta < 1.0),"PP");
       declare(ALICE::PrimaryParticles(Cuts::absrap < 0.5),"PPy");

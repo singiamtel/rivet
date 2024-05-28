@@ -37,7 +37,7 @@ namespace Rivet {
 
     void init() {
 
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M","V0M");
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_CENT_PBPB", "V0M","V0M");
 
       const UnstableParticles ufsD0(Cuts::absrap < 0.5 && Cuts::pT > 0.*GeV && Cuts::abspid == 421);
       declare(ufsD0, "ufsD0");

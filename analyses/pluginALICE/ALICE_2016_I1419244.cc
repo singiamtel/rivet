@@ -26,7 +26,7 @@ namespace Rivet {
       // Declare the trigger projection.
       declare<ALICE::V0AndTrigger>(ALICE::V0AndTrigger(),"V0-AND");
       // Centrality projection.
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M","V0M");
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_CENT_PBPB", "V0M","V0M");
 
       // The full central charged final state.
       const ChargedFinalState& cfs = ChargedFinalState(Cuts::abseta < 0.8 &&

@@ -23,7 +23,7 @@ namespace Rivet {
     void init() {
 
       // Declare centrality projection
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_CENT_PBPB", "V0M", "V0M");
 
       // Projection for trigger particles: charged, primary particles
       // with |eta| < 1.0 and 8 < pT < 15 GeV/c

@@ -37,7 +37,7 @@ namespace Rivet {
       if (isHI) {
         declare(HepMCHeavyIon(), "HepMC");
 
-        declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+        declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_CENT_PBPB", "V0M", "V0M");
 
         _centrality_regions.clear();
         _centrality_regions = {{0., 20.},   {20., 40.},  {40., 60.}, {60., 80.}};

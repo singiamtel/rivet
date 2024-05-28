@@ -27,7 +27,7 @@ namespace Rivet {
 
       // The centrality projection.
       declareCentrality(ALICE::V0MMultiplicity(),
-           "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+           "ALICE_2015_CENT_PBPB", "V0M", "V0M");
 
       // Access the HepMC heavy ion info
       declare(HepMCHeavyIon(), "HepMC");
