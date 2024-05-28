@@ -71,29 +71,29 @@ namespace Rivet {
 
       // MET
       if (_mode == 0 || _mode == 1){
-        book(_h["vvg"],     2, 1, 1);
-        book(_h["vvgg"],    4, 1, 1);
+        book(_d["vvg"],     2, 1, 1);
+        book(_d["vvgg"],    4, 1, 1);
         book(_h["pT"],      7, 1, 1);
         book(_h["pT_0jet"], 8, 1, 1);
       }
 
       // always book e and mu in charged lepton modes; there are sometimes 4 leptons.
       if (_mode != 1){
-	// electron
-        book(_h["eeg"],  1, 1, 1);
-        book(_h["eegg"], 3, 1, 1);
+        // electron
+        book(_d["eeg"],  1, 1, 1);
+        book(_d["eegg"], 3, 1, 1);
         // muon
-	book(_h["mmg"],  1, 1, 2);
-	book(_h["mmgg"], 3, 1, 2);
+        book(_d["mmg"],  1, 1, 2);
+        book(_d["mmgg"], 3, 1, 2);
 
         // combined
-        book(_h["llgg"], 3, 1, 3);
-        book(_h["llg"], 1, 1, 3);
+        book(_d["llgg"], 3, 1, 3);
+        book(_d["llg"], 1, 1, 3);
         book(_h["pT"], 5, 1, 1);
         book(_h["pT_0jet"], 6, 1, 1);
         book(_h["M"], 9, 1, 1);
         book(_h["M_0jet"], 10, 1, 1);
-        book(_h["Njets"], 11, 1, 1);
+        book(_d["Njets"], 11, 1, 1);
       }
     }
 
@@ -101,6 +101,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
+      if (_sedges.empty())  _sedges = _d["Njets"]->xEdges();
       // Get objects
       DressedLeptons electrons = apply<LeptonFinder>(event, "Electrons").dressedLeptons();
       DressedLeptons muons = apply<LeptonFinder>(event, "Muons").dressedLeptons();
@@ -112,213 +113,213 @@ namespace Rivet {
       Vector3 met_vec;
       for (const Particle& p : metfs.particles()) met_vec += p.mom().perpVec();
 
-      if (met_vec.mod() >= 100*GeV && !photons.empty() && _mode < 2){
+      if (met_vec.mod() >= 100*GeV && !photons.empty() && _mode < 2) {
 
-	if (photons.size() > 1) { // nu nu y y
+        if (photons.size() > 1) { // nu nu y y
 
-	  bool yy_veto = false;
-	  yy_veto |= photons[0].pT() < 22*GeV;
-	  yy_veto |= photons[1].pT() < 22*GeV;
-	  yy_veto |= met_vec.mod() < 110*GeV;
-	  const double yyPhi = (photons[0].momentum() + photons[1].momentum()).phi();
-	  yy_veto |= fabs(yyPhi - met_vec.phi()) < 2.62 || fabs(yyPhi - met_vec.phi()) > 3.66;
-	  yy_veto |= deltaR(photons[0], photons[1]) < 0.4;
+          bool yy_veto = false;
+          yy_veto |= photons[0].pT() < 22*GeV;
+          yy_veto |= photons[1].pT() < 22*GeV;
+          yy_veto |= met_vec.mod() < 110*GeV;
+          const double yyPhi = (photons[0].momentum() + photons[1].momentum()).phi();
+          yy_veto |= fabs(yyPhi - met_vec.phi()) < 2.62 || fabs(yyPhi - met_vec.phi()) > 3.66;
+          yy_veto |= deltaR(photons[0], photons[1]) < 0.4;
 
-	  // Photon isolation calculated by jets, count jets
-	  Jet ph0_jet, ph1_jet;
-	  double min_dR_ph0_jet = 999., min_dR_ph1_jet = 999.;
-	  size_t njets = 0;
-	  for (const Jet& j : jets) {
-	    if (j.pT() > 30*GeV && j.abseta() < 4.5) {
-	      if (deltaR(j, photons[0]) > 0.3 && deltaR(j, photons[1]) > 0.3)  ++njets;
-	    }
-	    if (deltaR(j, photons[0]) < min_dR_ph0_jet) {
-	      min_dR_ph0_jet = deltaR(j, photons[0]);
-	      ph0_jet = j;
-	    }
-	    if (deltaR(j, photons[1]) < min_dR_ph1_jet) {
-	      min_dR_ph1_jet = deltaR(j, photons[1]);
-	      ph1_jet = j;
-	    }
-	  }
-	  double photon0iso = 0., photon1iso = 0.;
-	  if (min_dR_ph0_jet < 0.4)  photon0iso = ph0_jet.pT() - photons[0].pT();
-	  if (min_dR_ph1_jet < 0.4)  photon1iso = ph1_jet.pT() - photons[1].pT();
-	  yy_veto |= photon0iso/photons[0].pT() > 0.5;
-	  yy_veto |= photon1iso/photons[1].pT() > 0.5;
+          // Photon isolation calculated by jets, count jets
+          Jet ph0_jet, ph1_jet;
+          double min_dR_ph0_jet = 999., min_dR_ph1_jet = 999.;
+          size_t njets = 0;
+          for (const Jet& j : jets) {
+            if (j.pT() > 30*GeV && j.abseta() < 4.5) {
+              if (deltaR(j, photons[0]) > 0.3 && deltaR(j, photons[1]) > 0.3)  ++njets;
+            }
+            if (deltaR(j, photons[0]) < min_dR_ph0_jet) {
+              min_dR_ph0_jet = deltaR(j, photons[0]);
+              ph0_jet = j;
+            }
+            if (deltaR(j, photons[1]) < min_dR_ph1_jet) {
+              min_dR_ph1_jet = deltaR(j, photons[1]);
+              ph1_jet = j;
+            }
+          }
+          double photon0iso = 0., photon1iso = 0.;
+          if (min_dR_ph0_jet < 0.4)  photon0iso = ph0_jet.pT() - photons[0].pT();
+          if (min_dR_ph1_jet < 0.4)  photon1iso = ph1_jet.pT() - photons[1].pT();
+          yy_veto |= photon0iso/photons[0].pT() > 0.5;
+          yy_veto |= photon1iso/photons[1].pT() > 0.5;
 
-	  if (!yy_veto) {
-	    _h["vvgg"]->fill(0.5);
-	    if (!njets)  _h["vvgg"]->fill(1.5);
-	  }
-	} // end of nu nu y y section
+          if (!yy_veto) {
+            _d["vvgg"]->fill(">= 0"s);
+            if (!njets)  _d["vvgg"]->fill("= 0"s);
+          }
+        } // end of nu nu y y section
 
 
-	if ((photons[0].pT() >= 130*GeV)  &&
-	    (fabs(fabs(deltaPhi(photons[0], met_vec)) - 3.14) <= 1.57)) {
+        if ((photons[0].pT() >= 130*GeV)  &&
+            (fabs(fabs(deltaPhi(photons[0], met_vec)) - 3.14) <= 1.57)) {
 
-	  // Photon isolation calculated by jets, count jets
-	  Jet ph_jet;
-	  double min_dR_ph_jet = 999.;
-	  size_t njets = 0;
-	  for (const Jet& j : jets) {
-	    if (j.pT() > 30*GeV && j.abseta() < 4.5) {
-	      if (deltaR(j, photons[0]) > 0.3)  ++njets;
-	    }
-	    if (deltaR(j, photons[0]) < min_dR_ph_jet) {
-	      min_dR_ph_jet = deltaR(j, photons[0]);
-	      ph_jet = j;
-	    }
-	  }
-	  double photoniso = 0;
-	  if (min_dR_ph_jet < 0.4)  photoniso = ph_jet.pT() - photons[0].pT();
-	  if (photoniso/photons[0].pT() > 0.5)  vetoEvent;
+          // Photon isolation calculated by jets, count jets
+          Jet ph_jet;
+          double min_dR_ph_jet = 999.;
+          size_t njets = 0;
+          for (const Jet& j : jets) {
+            if (j.pT() > 30*GeV && j.abseta() < 4.5) {
+              if (deltaR(j, photons[0]) > 0.3)  ++njets;
+            }
+            if (deltaR(j, photons[0]) < min_dR_ph_jet) {
+              min_dR_ph_jet = deltaR(j, photons[0]);
+              ph_jet = j;
+            }
+          }
+          double photoniso = 0;
+          if (min_dR_ph_jet < 0.4)  photoniso = ph_jet.pT() - photons[0].pT();
+          if (photoniso/photons[0].pT() > 0.5)  vetoEvent;
 
-	  const double pTgamma = photons[0].pT()/GeV;
-	  _h["pT"]->fill(pTgamma);
-	  _h["vvg"]->fill(0.5);
-	  if (!njets) {
-	    _h["vvg"]->fill(1.5);
-	    _h["pT_0jet"]->fill(pTgamma);
-	  }
+          const double pTgamma = photons[0].pT()/GeV;
+          _h["pT"]->fill(pTgamma);
+          _d["vvg"]->fill(">= 0"s);
+          if (!njets) {
+            _d["vvg"]->fill("= 0"s);
+            _h["pT_0jet"]->fill(pTgamma);
+          }
 
-	}
+        }
       }  // end of nu nu y (y) section
 
       // Dilepton candidate
       bool el = false;
       if ( (_mode != 1) &&
-	   (( electrons.size() >= 2 && _mode != 3 ) ||
-	    ( muons.size()     >= 2 && _mode != 2 ) )) {
+           (( electrons.size() >= 2 && _mode != 3 ) ||
+            ( muons.size()     >= 2 && _mode != 2 ) )) {
 
-	DressedLeptons lep_p, lep_m;
+        DressedLeptons lep_p, lep_m;
 
-	// Sort the dressed leptons by pt
-	if (electrons.size() >= 2) {
-	  el = true;
-	  sortByPt(electrons);
-	  for (const DressedLepton& lep : electrons) {
-	    if (lep.charge() > 0.)  lep_p.push_back(lep);
-	    if (lep.charge() < 0.)  lep_m.push_back(lep);
-	  }
-	} else {
-	  sortByPt(muons);
-	  for (const DressedLepton& lep : muons) {
-	    if (lep.charge() > 0.)  lep_p.push_back(lep);
-	    if (lep.charge() < 0.)  lep_m.push_back(lep);
-	  }
-	}
-
-
-	if (!lep_p.empty() && !lep_m.empty() &&
-	    (lep_p[0].abspid() == lep_m[0].abspid()) &&
-	    ((lep_p[0].momentum() + lep_m[0].momentum()).mass() >= 40*GeV)){
-
-	  // Photon lepton overlap removal
-	  if (photons.empty())  vetoEvent;
-
-	  if (photons.size() > 1) {
-
-	    bool veto = false;
-	    veto |= deltaR(photons[0], lep_p[0]) < 0.4;
-	    veto |= deltaR(photons[0], lep_m[0]) < 0.4;
-	    veto |= deltaR(photons[1], lep_p[0]) < 0.4;
-	    veto |= deltaR(photons[1], lep_m[0]) < 0.4;
-	    veto |= deltaR(photons[0], photons[1]) < 0.4;
-
-	    Jet ph0_jet, ph1_jet;
-	    double min_dR_ph0_jet = 999., min_dR_ph1_jet=999.;
-	    int njets = 0;
-	    for (const Jet& j : jets){
-	      if (j.pT() > 30*GeV && j.abseta() < 4.5) {
-		if (deltaR(j, lep_p[0]) > 0.3 && deltaR(j, lep_m[0]) > 0.3) {
-		  if (deltaR(j, photons[0]) > 0.3 && deltaR(j, photons[1]) > 0.3 )  ++njets;
-		}
-	      }
-	      if (deltaR(j, photons[0]) < min_dR_ph0_jet) {
-		min_dR_ph0_jet = deltaR(j, photons[0]);
-		ph0_jet = j;
-	      }
-	      if (deltaR(j, photons[1]) < min_dR_ph1_jet) {
-		min_dR_ph1_jet = deltaR(j, photons[1]);
-		ph1_jet = j;
-	      }
-	    }
-	    double photon0iso = 0, photon1iso = 0;
-	    if (min_dR_ph0_jet < 0.4) photon0iso = ph0_jet.pT() - photons[0].pT();
-	    if (min_dR_ph1_jet < 0.4) photon1iso = ph1_jet.pT() - photons[1].pT();
-	    veto |= photon0iso/photons[0].pT() > 0.5;
-	    veto |= photon1iso/photons[1].pT() > 0.5;
-
-	    // Fill plots
-	    // ee and mm need doing.
-	    if (!veto) {
-	      _h["llgg"]->fill(0.5);
-	      if (el) {
-		_h["eegg"]->fill(0.5);
-	      } else {
-		_h["mmgg"]->fill(0.5);
-	      }
-
-	      if (!njets) {
-		_h["llgg"]->fill(1.5);
-		if (el) {
-		  _h["eegg"]->fill(1.5);
-		} else {
-		  _h["mmgg"]->fill(1.5);
-		}
-	      }
-	    }
-	  }
-
-	  if (deltaR(photons[0], lep_p[0]) < 0.7)  vetoEvent;
-	  if (deltaR(photons[0], lep_m[0]) < 0.7)  vetoEvent;
-
-	  // Photon isolation calculated by jets, count jets
-	  Jet ph_jet;
-	  double min_dR_ph_jet = 999.;
-	  size_t njets = 0;
-	  for (const Jet& j : jets) {
-	    if (j.pT() > 30*GeV && j.abseta() < 4.5) {
-	      if (deltaR(j, lep_p[0]) > 0.3 && deltaR(j, lep_m[0]) > 0.3 && deltaR(j, photons[0]) > 0.3)  ++njets;
-	    }
-	    if (deltaR(j, photons[0]) < min_dR_ph_jet) {
-	      min_dR_ph_jet = deltaR(j, photons[0]);
-	      ph_jet = j;
-	    }
-	  }
-
-	  double photoniso = 0;
-	  if (min_dR_ph_jet < 0.4)  photoniso = ph_jet.pT() - photons[0].pT();
-	  if (photoniso/photons[0].pT() > 0.5)  vetoEvent;
+        // Sort the dressed leptons by pt
+        if (electrons.size() >= 2) {
+          el = true;
+          sortByPt(electrons);
+          for (const DressedLepton& lep : electrons) {
+            if (lep.charge() > 0.)  lep_p.push_back(lep);
+            if (lep.charge() < 0.)  lep_m.push_back(lep);
+          }
+        } else {
+          sortByPt(muons);
+          for (const DressedLepton& lep : muons) {
+            if (lep.charge() > 0.)  lep_p.push_back(lep);
+            if (lep.charge() < 0.)  lep_m.push_back(lep);
+          }
+        }
 
 
-	  // Fill plots
-	  const double pTgamma = photons[0].pT()/GeV;
-	  const double mllgamma = (lep_p[0].momentum() + lep_m[0].momentum() + photons[0].momentum()).mass()/GeV;
+        if (!lep_p.empty() && !lep_m.empty() &&
+            (lep_p[0].abspid() == lep_m[0].abspid()) &&
+            ((lep_p[0].momentum() + lep_m[0].momentum()).mass() >= 40*GeV)){
 
-	  _h["pT"]->fill(pTgamma);
-	  _h["M"]->fill(mllgamma);
-	  _h["Njets"]->fill(njets < 3? njets : 3);
+          // Photon lepton overlap removal
+          if (photons.empty())  vetoEvent;
 
-	  _h["llg"]->fill(0.5);
-	  if (el) {
-	    _h["eeg"]->fill(0.5);
-	  } else {
-	    _h["eeg"]->fill(0.5);
-	  }
+          if (photons.size() > 1) {
 
-	  if (!njets) {
-	    _h["pT_0jet"]->fill(pTgamma);
-	    _h["M_0jet"]->fill(mllgamma);
-	    _h["llg"]->fill(1.5);
-	    if (el) {
-	      _h["eeg"]->fill(1.5);
-	    } else {
-	      _h["mmg"]->fill(1.5);
-	    }
-	  }
-	}
+            bool veto = false;
+            veto |= deltaR(photons[0], lep_p[0]) < 0.4;
+            veto |= deltaR(photons[0], lep_m[0]) < 0.4;
+            veto |= deltaR(photons[1], lep_p[0]) < 0.4;
+            veto |= deltaR(photons[1], lep_m[0]) < 0.4;
+            veto |= deltaR(photons[0], photons[1]) < 0.4;
+
+            Jet ph0_jet, ph1_jet;
+            double min_dR_ph0_jet = 999., min_dR_ph1_jet=999.;
+            int njets = 0;
+            for (const Jet& j : jets){
+              if (j.pT() > 30*GeV && j.abseta() < 4.5) {
+                if (deltaR(j, lep_p[0]) > 0.3 && deltaR(j, lep_m[0]) > 0.3) {
+                  if (deltaR(j, photons[0]) > 0.3 && deltaR(j, photons[1]) > 0.3 )  ++njets;
+                }
+              }
+              if (deltaR(j, photons[0]) < min_dR_ph0_jet) {
+                min_dR_ph0_jet = deltaR(j, photons[0]);
+                ph0_jet = j;
+              }
+              if (deltaR(j, photons[1]) < min_dR_ph1_jet) {
+                min_dR_ph1_jet = deltaR(j, photons[1]);
+                ph1_jet = j;
+              }
+            }
+            double photon0iso = 0, photon1iso = 0;
+            if (min_dR_ph0_jet < 0.4) photon0iso = ph0_jet.pT() - photons[0].pT();
+            if (min_dR_ph1_jet < 0.4) photon1iso = ph1_jet.pT() - photons[1].pT();
+            veto |= photon0iso/photons[0].pT() > 0.5;
+            veto |= photon1iso/photons[1].pT() > 0.5;
+
+            // Fill plots
+            // ee and mm need doing.
+            if (!veto) {
+              _d["llgg"]->fill(">= 0"s);
+              if (el) {
+                _d["eegg"]->fill(">= 0"s);
+              } else {
+                _d["mmgg"]->fill(">= 0"s);
+              }
+
+              if (!njets) {
+                _d["llgg"]->fill("= 0"s);
+                if (el) {
+                  _d["eegg"]->fill("= 0"s);
+                } else {
+                  _d["mmgg"]->fill("= 0"s);
+                }
+              }
+            }
+          }
+
+          if (deltaR(photons[0], lep_p[0]) < 0.7)  vetoEvent;
+          if (deltaR(photons[0], lep_m[0]) < 0.7)  vetoEvent;
+
+          // Photon isolation calculated by jets, count jets
+          Jet ph_jet;
+          double min_dR_ph_jet = 999.;
+          size_t njets = 0;
+          for (const Jet& j : jets) {
+            if (j.pT() > 30*GeV && j.abseta() < 4.5) {
+              if (deltaR(j, lep_p[0]) > 0.3 && deltaR(j, lep_m[0]) > 0.3 && deltaR(j, photons[0]) > 0.3)  ++njets;
+            }
+            if (deltaR(j, photons[0]) < min_dR_ph_jet) {
+              min_dR_ph_jet = deltaR(j, photons[0]);
+              ph_jet = j;
+            }
+          }
+
+          double photoniso = 0;
+          if (min_dR_ph_jet < 0.4)  photoniso = ph_jet.pT() - photons[0].pT();
+          if (photoniso/photons[0].pT() > 0.5)  vetoEvent;
+
+
+          // Fill plots
+          const double pTgamma = photons[0].pT()/GeV;
+          const double mllgamma = (lep_p[0].momentum() + lep_m[0].momentum() + photons[0].momentum()).mass()/GeV;
+
+          _h["pT"]->fill(pTgamma);
+          _h["M"]->fill(mllgamma);
+          _d["Njets"]->fill(_sedges[min(3, njets)]);
+
+          _d["llg"]->fill(">= 0"s);
+          if (el) {
+            _d["eeg"]->fill(">= 0"s);
+          } else {
+            _d["eeg"]->fill(">= 0"s);
+          }
+
+          if (!njets) {
+            _h["pT_0jet"]->fill(pTgamma);
+            _h["M_0jet"]->fill(mllgamma);
+            _d["llg"]->fill("= 0"s);
+            if (el) {
+              _d["eeg"]->fill("= 0"s);
+            } else {
+              _d["mmg"]->fill("= 0"s);
+            }
+          }
+        }
       }
     } // end of analysis
 
@@ -327,16 +328,17 @@ namespace Rivet {
     void finalize() {
       const double sf = crossSection()/femtobarn/sumOfWeights();
       scale(_h, sf);
+      scale(_d, sf);
       // if we are running both e and mu, the combined lepton histos
       // need to be divided by two to get the average
       if (_mode == 0 || _mode == 4){
-        scale(_h["llgg"], 0.5);
-        scale(_h["llg"], 0.5);
+        scale(_d["llgg"], 0.5);
+        scale(_d["llg"], 0.5);
         scale(_h["pT"], 0.5);
         scale(_h["pT_0jet"], 0.5);
         scale(_h["M"], 0.5);
         scale(_h["M_0jet"], 0.5);
-        scale(_h["Njets"], 0.5);
+        scale(_d["Njets"], 0.5);
       }
     }
 
@@ -352,6 +354,8 @@ namespace Rivet {
 
     /// Histograms
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<string>> _d;
+    vector<string> _sedges;
 
   };
 

@@ -63,7 +63,7 @@ namespace Rivet {
       const MissingMomentum& mm = apply<MissingMom>(event, "MET");
       const P4& pmiss = mm.missingMom();
       if (pmiss.pT() < 30*GeV) vetoEvent;
-	
+
       // Next find the W's
       const Particles& es = apply<LeptonFinder>(event, "Electrons").particles();
       const Particles es_mtfilt = select(es, [&](const Particle& e){ return inRange(mT(e, pmiss), 60*GeV, 100*GeV); });
@@ -74,8 +74,8 @@ namespace Rivet {
 
       // Build a combined list of pseudo-W's
       Particles wls; wls.reserve(2);
-      if (iefound < 0) wls.push_back(Particle(copysign(PID::WBOSON, es_mtfilt[iefound].pid()), es_mtfilt[iefound].mom()+pmiss));
-      if (imfound < 0) wls.push_back(Particle(copysign(PID::WBOSON, ms_mtfilt[imfound].pid()), ms_mtfilt[imfound].mom()+pmiss));
+      if (iefound >= 0) wls.push_back(Particle(copysign(PID::WBOSON, es_mtfilt[iefound].pid()), es_mtfilt[iefound].mom()+pmiss));
+      if (imfound >= 0) wls.push_back(Particle(copysign(PID::WBOSON, ms_mtfilt[imfound].pid()), ms_mtfilt[imfound].mom()+pmiss));
       if (wls.empty()) vetoEvent;
 
       // If more than one Z candidate, use the one with Mll nearest to MZ
