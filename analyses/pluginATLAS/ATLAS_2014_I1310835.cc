@@ -7,7 +7,7 @@
 
 namespace Rivet {
 
-  
+
   /// @brief H(125)->ZZ->4l at 8 TeV
   class ATLAS_2014_I1310835 : public Analysis {
   public:
@@ -51,6 +51,7 @@ namespace Rivet {
     /// Do the analysis
     void analyze(const Event& e) {
 
+      if (_sedges.empty())  _sedges = _h_njets->xEdges();
       ////////////////////////////////////////////////////////////////////
       // preselection of leptons for ZZ-> llll final state
       ////////////////////////////////////////////////////////////////////
@@ -221,7 +222,7 @@ namespace Rivet {
       _h_rapidity->fill(H4l_rapidity);
       _h_costheta->fill(H4l_costheta);
       _h_m34->fill(H4l_m34);
-      _h_njets->fill(n_jets + 1);
+      _h_njets->fill(_sedges[min(3, n_jets)]);
       _h_leadingjetpt->fill(leading_jet_pt);
 
 
@@ -252,7 +253,9 @@ namespace Rivet {
   private:
 
     Histo1DPtr _h_pt, _h_rapidity, _h_costheta;
-    Histo1DPtr _h_m34, _h_njets, _h_leadingjetpt;
+    Histo1DPtr _h_m34, _h_leadingjetpt;
+    BinnedHistoPtr<string> _h_njets;
+    vector<string> _sedges;
 
   };
 
