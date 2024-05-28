@@ -374,8 +374,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
 
                 BandScatter = nominalScatter.clone()
                 # iterate over bins
-                for ibin, y in enumerate(nominalScatter.yVals() if 'Scatter2D' in nominalScatter.type() else nominalScatter.xVals()):
-                    totErrDn, totErrUp = BandScatter.point(ibin).yErrs() if 'Scatter2D' in BandScatter.type() else BandScatter.point(0).xErrs()
+                for ibin, y in enumerate(nominalScatter.vals(nominalScatter.dim()-1)):
+                    totErrDn, totErrUp = BandScatter.point(ibin).errs(BandScatter.dim()-1)
                     totErrDn = totErrDn*totErrDn
                     totErrUp = totErrUp*totErrUp
 
@@ -392,7 +392,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                         totErrUp += absEnvUp*absEnvUp
 
                     # Scatter object with total Band uncertainty
-                    BandScatter.point(ibin).setYErrs(sqrt(totErrDn), sqrt(totErrUp))
+                    BandScatter.point(ibin).setErrs(BandScatter.dim()-1, sqrt(totErrDn), sqrt(totErrUp))
                 outputdict['histograms'][filename+label]['BandUncertainty'] = BandScatter
 
     # Check if there's reference data
