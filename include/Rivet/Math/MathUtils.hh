@@ -45,6 +45,11 @@ namespace Rivet {
   inline typename std::enable_if<std::is_floating_point<NUM>::value, bool>::type
   notNaN(NUM val) { return !std::isnan(val); }
 
+  /// @brief Square root of the absolute value with the sign of the argument propagated
+  template <typename NUM>
+  inline typename std::enable_if<std::is_floating_point<NUM>::value, NUM>::type
+  sqrt_signed(NUM val) { return std::copysign(sqrt(std::abs(val)), val); }
+
   /// @brief Compare two numbers for equality with a degree of fuzziness
   ///
   /// This version for floating point types (if any argument is FP) has a degree

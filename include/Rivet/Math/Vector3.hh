@@ -210,8 +210,8 @@ namespace Rivet {
     /// Implemented using the tan half-angle formula
     /// tan(theta/2) = sin(theta) / [1 + cos(theta)] = pT / (p + pz)
     double pseudorapidity() const {
-      if (mod() == 0.0) [[ unlikely ]] return 0.0;
-      if (mod() == fabs(z()) ) [[unlikely]] return std::copysign(INF, z());
+      if (mod() == 0.0) return 0.0; ///< @todo Add [[ unlikely ]] with C++20
+      if (mod() == fabs(z()) ) return std::copysign(INF, z()); ///< @todo Add [[ unlikely ]] with C++20
       const double eta = std::log((mod() + fabs(z())) / perp());
       return std::copysign(eta, z());
     }
