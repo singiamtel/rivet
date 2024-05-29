@@ -2,12 +2,16 @@ AUTOMAKE_OPTIONS = -Wno-portability
 SHELL := bash -O extglob
 
 PLUGIN_DIRS = $(shell ls -d $(srcdir)/plugin*)
-PLUGIN_NAMES = $(notdir $(subst plugin,,$(PLUGIN_DIRS)))
+PLUGIN_NAMES_ALL = $(notdir $(subst plugin,,$(PLUGIN_DIRS)))
+FILTER_DISABLED =
 if !ENABLE_ONNX
-PLUGIN_LIBS = $(patsubst %,Rivet%Analyses.so,$(filter-out ONNX,$(PLUGIN_NAMES)))
-else
-PLUGIN_LIBS = $(patsubst %,Rivet%Analyses.so,$(PLUGIN_NAMES))
+FILTER_DISABLED += ONNX
 endif
+#if !ENABLE_HIGHFIVE
+#FILTER_DISABLED += H5
+#endif
+PLUGIN_NAMES = $(filter-out $(FILTER_DISABLED),$(PLUGIN_NAMES_ALL))
+PLUGIN_LIBS = $(patsubst %,Rivet%Analyses.so,$(PLUGIN_NAMES))
 PLUGIN_DATAFILES = $(shell ls $(abs_srcdir)/plugin*/*.*)
 
 CLEANFILES = $(PLUGIN_LIBS) data

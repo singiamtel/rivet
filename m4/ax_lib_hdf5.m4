@@ -320,4 +320,114 @@ HDF5 support is being disabled (equivalent to --with-hdf5=no).
 	AC_DEFINE([HAVE_HDF5], [1], [Defined if you have HDF5 support])
     fi
 fi
+
+## We have a set of user-set variables:
+H5_PATH=""
+H5_INCPATH=""
+
+## Don't know why this isn't working by default:
+test x${prefix} = xNONE && prefix=${ac_default_prefix}
+
+## Environment variables for specifying paths
+dnl ifelse($5, yes,
+  AC_ARG_VAR(@&t@HIGHFIVE@&t@PATH,
+    path to HighFive @<:@$prefix and various standard locations@:>@)
+dnl )
+AC_ARG_VAR(@&t@HIGHFIVE@&t@INCPATH,
+  path to the directory containing the cedar_PkgName header files @<:@HIGHFIVE@&t@PATH/include@:>@)
+pkgpath=${HIGHFIVE@&t@PATH}
+
+AC_ARG_WITH([highfive],
+            AS_HELP_STRING(--with-highfive,
+              path to HighFive @<:@$prefix and various standard locations@:>@),
+  [if test "$withval" = "no"; then
+     with_highfive="no"
+   elif test "$withval" = "yes"; then
+     with_highfive="yes"
+   else
+     with_highfive="yes"
+     H5_PATH="$withval"
+   fi],
+   [with_highfive="yes"]
+)
+
+if test "x$with_highfive" = "xyes"; then
+
+    ## Base paths
+    pkgbases="$prefix $ac_default_prefix /usr /"
+    if test "$H5_PATH"; then pkgbases="$H5_PATH"; fi
+
+    ## Look for include files: first build the search list...
+    incpaths=""
+    if test "$H5_INCPATH"; then
+      incpath=`echo $H5_INCPATH | sed -e 's://*:/:g' -e 's:/$::'`
+      incpaths="$incpath"
+    else
+      for base in $pkgbases; do
+        incpath=`echo "$base/include" | sed -e 's://*:/:g' -e 's:/$::'`
+        incpaths="$incpaths $incpath"
+      done
+    fi
+    #echo "DEBUG: inc paths = $incpaths"
+
+
+    ## Build package names
+    incnames="HighFive HIGHFIVE highfive"
+
+    ## .. and then do the search:
+    for incpath in $incpaths; do
+      for incname in $incnames; do
+        fullincpath="$incpath/$incname"
+
+        #echo "Testing highfive inc path: $fullincpath"
+
+        if test -d $fullincpath; then
+          pkginc=yes
+          break
+        else
+          pkginc=no;
+        fi
+        if test x$pkginc != xno; then break; fi
+      done
+      if test x$pkginc != xno; then break; fi
+    done
+    #echo "pkginc $pkginc"
+
+    if test x$pkginc != xno; then
+      HIGHFIVE@&t@INCPATH="$incpath"
+      AC_CEDAR_ABSPATH(HIGHFIVE@&t@INCPATH)
+      HIGHFIVE@&t@INCNAME="$incname"
+      HIGHFIVE@&t@CPPFLAGS="-I$HIGHFIVE@&t@INCPATH"
+      #echo HIGHFIVE@&t@INCPATH : $HIGHFIVE@&t@INCPATH
+      #AC_MSG_NOTICE([Found HighFiveder directory at $incpath])
+    else
+      ## Last resort --- only tried if $pkgpath was specified
+      if test x$pkgpath != x; then
+        incpath="$pkgpath/include"
+        if test -d "$incpath"; then
+          HIGHFIVE@&t@INCPATH=`echo $incpath | sed -e s:'/$':'':`
+          AC_CEDAR_ABSPATH(HIGHFIVE@&t@INCPATH)
+          HIGHFIVE@&t@INCNAME=""
+          HIGHFIVE@&t@CPPFLAGS="-I$HIGHFIVE@&t@INCPATH"
+          pkginc=yes
+          #AC_MSG_NOTICE([Found HighFive header directory at $incpath])
+        fi
+      else
+        AC_MSG_WARN(HighFive header directory was not found)
+      fi
+    fi
+    #AC_MSG_NOTICE(HighFive header directory was at $incpath $pkginc)
+
+  if test "x$pkginc" = "xyes"; then
+    ## Export variables to automake
+    AC_SUBST(HIGHFIVE@&t@INCNAME)
+    AC_SUBST(HIGHFIVE@&t@INCPATH)
+    AC_SUBST(HIGHFIVE@&t@CPPFLAGS)
+    AC_DEFINE([HAVE_H5], [1], [Defined if you have HDF5 support])
+  else
+    with_highfive=no
+  fi
+
+fi
+  AC_SUBST(with_highfive)
 ])

@@ -21,15 +21,9 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_SUBST(LT_OBJDIR)
 
 ## Compute version code
-let rivet_major=[`echo "$PACKAGE_VERSION" | cut -d. -f1 | sed -e 's/^0*//'`]
-let rivet_minor=[`echo "$PACKAGE_VERSION" | cut -d. -f2 | sed -e 's/^0*//'`]
-let rivet_micro=[`echo "$PACKAGE_VERSION" | cut -d. -f3 | sed -e 's/^0*//'`]
-if test "x$rivet_minor" = "x"; then
-  rivet_minor=0
-fi
-if test "x$rivet_micro" = "x"; then
-  rivet_micro=0
-fi
+let rivet_major=$(echo "$PACKAGE_VERSION" | cut -d. -f1 | sed -e 's/^0*//;s/^$/0/')
+let rivet_minor=$(echo "$PACKAGE_VERSION" | cut -d. -f2 | sed -e 's/^0*//;s/^$/0/')
+let rivet_micro=$(echo "$PACKAGE_VERSION" | cut -d. -f3 | sed -e 's/^0*//;s/^$/0/')
 let PACKAGE_VERSION_CODE=10000*$rivet_major+100*$rivet_minor+$rivet_micro
 
 ## Package-specific #defines
@@ -241,17 +235,20 @@ LIBS=$oldLIBS
 
 ## HDF5 + highfive
 AX_LIB_HDF5()
-AC_MSG_NOTICE([HDF5 include flags: $HDF5_CFLAGS ::: $HDF5_CPPFLAGS])
-AC_MSG_NOTICE([HDF5 lib flags: $HDF5_LDFLAGS ::: $HDF5_LIBS])
-if test x$HDF5_TYPE == xparallel; then
-  AX_PROG_CXX_MPI([true], [], [AC_MSG_ERROR([Found hdf5-parallel, but no MPI compiler.])])
+if test "x$with_highfive" = "xyes"; then
+  if test x$HDF5_TYPE == xparallel; then
+    AX_PROG_CXX_MPI([true], [], [AC_MSG_ERROR([Found hdf5-parallel, but no MPI compiler.])])
+  fi
+  AC_MSG_NOTICE([HDF5 include flags: $HDF5_CFLAGS ::: $HDF5_CPPFLAGS])
+  AC_MSG_NOTICE([HDF5 lib flags: $HDF5_LDFLAGS ::: $HDF5_LIBS])
+  oldCPPFLAGS=$CPPFLAGS
+  CPPFLAGS="$CPPFLAGS $HDF5_CPPFLAGS $HIGHFIVECPPFLAGS"
+  AC_CHECK_HEADER([highfive/H5File.hpp], [], [AC_MSG_ERROR([H5 header not found.])])
+  CPPFLAGS=$oldCPPFLAGS
+else
+  AC_MSG_NOTICE([Not building extra HighFive compatibility tools])
 fi
-#
-AC_CEDAR_HEADERS([highfive], , , [AC_MSG_ERROR([highfive (HDF5 for C++) is required])])
-oldCPPFLAGS=$CPPFLAGS
-CPPFLAGS="$CPPFLAGS $HDF5_CPPFLAGS $HIGHFIVECPPFLAGS"
-AC_CHECK_HEADER([highfive/H5File.hpp], [], [AC_MSG_ERROR([H5 header not found.])])
-CPPFLAGS=$oldCPPFLAGS
+AM_CONDITIONAL(ENABLE_HIGHFIVE, [test x$with_highfive = xyes])
 
 ## HEPTopTagger
 # AC_CEDAR_HEADERS([HEPTopTagger], , , [AC_MSG_ERROR([HEPTopTagger is required])])
@@ -390,7 +387,9 @@ AM_CPPFLAGS="$AM_CPPFLAGS \$(RIVETCPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(YODACPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS -I\$(HEPMC3INCPATH)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(FASTJETCPPFLAGS) \$(FJCONTRIBCPPFLAGS)"
-AM_CPPFLAGS="$AM_CPPFLAGS \$(HDF5_CPPFLAGS) \$(HIGHFIVECPPFLAGS)"
+if test "x$with_highfive" = "xyes"; then
+  AM_CPPFLAGS="$AM_CPPFLAGS \$(HDF5_CPPFLAGS) \$(HIGHFIVECPPFLAGS)"
+fi
 AC_CEDAR_CHECKCXXFLAG([-pedantic], [AM_CXXFLAGS="$AM_CXXFLAGS -pedantic"])
 AC_CEDAR_CHECKCXXFLAG([-Wall], [AM_CXXFLAGS="$AM_CXXFLAGS -Wall"])
 AC_CEDAR_CHECKCXXFLAG([-Wunused-variable], [AM_CXXFLAGS="$AM_CXXFLAGS -Wunused-variable"])

@@ -121,7 +121,7 @@ nobase_pkginclude_HEADERS += \
   Analyses/MC_CENT_PPB_Projections.hh \
   Analyses/AliceCommon.hh \
   Analyses/AtlasCommon.hh \
-  Analyses/RHICCommon.hh 
+  Analyses/RHICCommon.hh
 
 ## Tools
 nobase_pkginclude_HEADERS += \
@@ -151,7 +151,6 @@ nobase_pkginclude_HEADERS += \
   Tools/ProjectionTreePlotter.hh \
   Tools/RHICCommon.hh \
   Tools/RivetFastJet.hh \
-  Tools/RivetHDF5.hh \
   Tools/RivetHepMC.hh \
   Tools/RivetHTT.hh \
   Tools/RivetLWTNN.hh  \
@@ -167,6 +166,10 @@ nobase_pkginclude_HEADERS += \
   Tools/ExptSmearingFunctions.hh \
   Tools/TypeTraits.hh \
   Tools/Utils.hh
+
+if ENABLE_HIGHFIVE
+  nobase_pkginclude_HEADERS += Tools/RivetHDF5.hh
+endif
 
 ## Maths
 nobase_pkginclude_HEADERS += \

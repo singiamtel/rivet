@@ -32,4 +32,7 @@
 /* Define to 1 if you have the <execinfo.h> header file. */
 #undef HAVE_EXECINFO_H
 
+/* Define to 1 if you have HDF5 support. */
+#undef HAVE_H5
+
 #endif
