@@ -12,7 +12,6 @@ libRivetTools_la_SOURCES = \
   Percentile.cc \
   ProjectionTreePlotter.cc \
   RivetHepMC_3.cc \
-  RivetHDF5.cc \
   RivetMT2.cc \
   RivetPaths.cc \
   RivetYODA.cc \
@@ -26,6 +25,9 @@ libRivetTools_la_CPPFLAGS = $(AM_CPPFLAGS) \
   -DENABLE_BINRELOC \
   -DDEFAULTDATADIR=\"$(datadir)\" -DDEFAULTLIBDIR=\"$(libdir)\"
 
-libRivetTools_la_CPPFLAGS += $(HDF5_CPPFLAGS)
-libRivetTools_la_LDFLAGS = $(HDF5_LDFLAGS)
-libRivetTools_la_LIBADD = $(HDF5_LIBS)
+if ENABLE_HIGHFIVE
+  libRivetTools_la_SOURCES += RivetHDF5.cc
+  libRivetTools_la_CPPFLAGS += $(HDF5_CPPFLAGS)
+  libRivetTools_la_LDFLAGS = $(HDF5_LDFLAGS)
+  libRivetTools_la_LIBADD = $(HDF5_LIBS)
+endif

@@ -12,7 +12,9 @@
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Tools/ParticleUtils.hh"
+#ifdef HAVE_H5
 #include "Rivet/Tools/RivetHDF5.hh"
+#endif
 #include "Rivet/Tools/HistoGroup.hh"
 #include "Rivet/Tools/RivetMT2.hh"
 #include "Rivet/Tools/RivetPaths.hh"
@@ -457,6 +459,7 @@ namespace Rivet {
     /// @}
 
 
+    #ifdef HAVE_H5
     /// @name Auxiliary HDF5 reference data
     /// @{
 
@@ -479,6 +482,7 @@ namespace Rivet {
     }
 
     /// @}
+    #endif
 
 
     /// @name Histogram reference data
