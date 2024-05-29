@@ -101,7 +101,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      if (_sedges.empty())  _sedges = _d["Njets"]->xEdges();
       // Get objects
       DressedLeptons electrons = apply<LeptonFinder>(event, "Electrons").dressedLeptons();
       DressedLeptons muons = apply<LeptonFinder>(event, "Muons").dressedLeptons();
@@ -188,6 +187,11 @@ namespace Rivet {
 
       // Dilepton candidate
       bool el = false;
+
+      if (_mode != 1) {
+	  if (_sedges.empty())  _sedges = _d["Njets"]->xEdges();
+      }
+
       if ( (_mode != 1) &&
            (( electrons.size() >= 2 && _mode != 3 ) ||
             ( muons.size()     >= 2 && _mode != 2 ) )) {
