@@ -118,7 +118,7 @@ namespace Rivet {
     }
 
     void finalize() {
-      for (size_t i = 0; i < _h_Njets->numBins()-2; ++i) {
+      for (size_t i = 1; i < _h_Njets->numBins()-1; ++i) {
         double  n = _h_Njets->bin(i + 1).sumW();
         double dN = _h_Njets->bin(i + 1).sumW2();
         double  d = _h_Njets->bin(i).sumW();
@@ -129,7 +129,7 @@ namespace Rivet {
           // use F. James's approximation for weighted events:
           e = sqrt( safediv((1 - 2 * r) * dN + r * r * dD, d * d) );
         }
-        _h_Njets_Ratio->bin(i+1).set(r, e);
+        _h_Njets_Ratio->bin(i).set(r, e);
       }
 
       // when running in combined mode, need to average to get lepton xsec
