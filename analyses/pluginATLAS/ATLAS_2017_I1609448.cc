@@ -201,20 +201,17 @@ namespace Rivet {
       const YODA::Estimate1D& rmiss = refData(handler.d, handler.x, handler.y);
       const YODA::Estimate1D& numer = refData(handler.d, handler.x, handler.y + 1);
       const YODA::Estimate1D& denom = refData(handler.d, handler.x, handler.y + 2);
+      const YODA::Estimate1D& bsm = handler.histo->mkEstimate();
       for (size_t i = 1; i < handler.estimate->numBins()+1; ++i) {
         const auto& r = rmiss.bin(i); // SM Rmiss
         const auto& n = numer.bin(i); // SM numerator
         const auto& d = denom.bin(i); // SM denominator
-        const auto& b = handler.histo->bin(i); // BSM
-        double bsmy = b.sumW();
-        double bsmey = b.errW();
-        // Combined numerator
-        double sm_plus_bsm = n.val() + bsmy;
+        const auto& b = bsm.bin(i); // BSM
         // Rmiss central value
-        double rmiss_y = safediv(sm_plus_bsm, d.val());
+        const double rmiss_y = safediv(n.val() + b.val(), d.val());
         // Ratio error (Rmiss = SM_num/SM_denom + BSM/SM_denom ~ Rmiss_SM + BSM/SM_denom
-        double rmiss_p = sqrt(sqr(r.errPos())  + safediv(sqr(bsmey), sqr(d.val())));
-        double rmiss_m = sqrt(sqr(r.errNeg()) + safediv(sqr(bsmey), sqr(d.val())));
+        const double rmiss_p = sqrt(sqr(r.errPos())  + safediv(sqr(b.errPos()), sqr(d.val())));
+        const double rmiss_m = sqrt(sqr(r.errNeg()) + safediv(sqr(b.errNeg()), sqr(d.val())));
         // Set new values
         handler.estimate->bin(i).set(rmiss_y, {rmiss_m, rmiss_p});
       }
