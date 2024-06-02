@@ -152,7 +152,7 @@ namespace Rivet {
       book_hist("absPout",25);
       book_hist("deltaPhi_tt",29);
       book_hist("HT_tt",33);
-      book_hist("extrajet_n",37);
+      book_disc("extrajet_n",37);
       book_hist("ttbar_abs_y_fine",41);
       book_hist("abs_y_boost",45);
       book_hist("chi_tt",49);
@@ -187,8 +187,8 @@ namespace Rivet {
       book_hist("boosted_rc_Pout_lep",872);
       book_hist("boosted_rc_chi_tt",868);
       book_hist("boosted_rc_HT",876);
-      book_hist("hadTop_boosted_rc_subjets",884);
-      book_hist("boosted_rc_extrajet",880);
+      book_disc("hadTop_boosted_rc_subjets",884);
+      book_disc("boosted_rc_extrajet",880);
       book_hist("ttbar_boosted_rc_m",864);
       book_hist("ttbar_boosted_rc_pt",856);
       book_hist("ttbar_boosted_rc_Rapidity",860);
@@ -292,7 +292,7 @@ namespace Rivet {
       int extrajet_n = jet_multiplicity - 4;
       int new_jet_multi = TransformJetMultiplicity(jet_multiplicity);
       int new_jet_multi_for_ttbar_m = TransformJetMultiplicity_for_ttbar_m(jet_multiplicity);
-      int new_extrajet_multi = TransformExtrajetMultiplicity(extrajet_n);
+      const string new_extrajet_multi = TransformExtrajetMultiplicity(extrajet_n);
 
       _h_multi["top_had_pt_absPout_multi"]->fill(ppseudotophadron.pt()/GeV, absPout);
       _h_multi["ttbar_m_top_had_pt_multi"]->fill(pttbar.mass()/GeV, ppseudotophadron.pt()/GeV);
@@ -342,7 +342,7 @@ namespace Rivet {
       _h["ttbar_abs_y_fine"]->fill(pttbar.absrap());
       _h["leading_top_pt"]->fill(Leading_top_pt/GeV);
       _h["subleading_top_pt"]->fill(Subleading_top_pt/GeV);
-      _h["extrajet_n"]->fill(new_extrajet_multi+1);
+      _d["extrajet_n"]->fill(new_extrajet_multi);
 
       _h["chi_tt_norm"]->fill(chi_ttbar);
       _h["deltaPhi_tt_norm"]->fill(deltaPhi_ttbar);
@@ -356,7 +356,7 @@ namespace Rivet {
       _h["ttbar_abs_y_fine_norm"]->fill(pttbar.absrap());
       _h["leading_top_pt_norm"]->fill(Leading_top_pt/GeV);
       _h["subleading_top_pt_norm"]->fill(Subleading_top_pt/GeV);
-      _h["extrajet_n_norm"]->fill(new_extrajet_multi+1);
+      _d["extrajet_n_norm"]->fill(new_extrajet_multi);
     }
 
     void Boosted_selection(const Event& event) {
@@ -473,8 +473,8 @@ namespace Rivet {
       double absPout_lep = fabs(vpseudotoplepton.dot((vpseudotophadron.cross(z_versor))/(vpseudotophadron.cross(z_versor).mod())));
       size_t extrajet = smallRjets.size() - subjets -1;
 
-      size_t new_subjets_multi = TransformExtrajetMultiplicity_boosted(subjets);
-      size_t new_extrajet_multi = TransformExtrajetMultiplicity_boosted(extrajet);
+      const string new_subjets_multi = TransformExtrajetMultiplicity_boosted(subjets);
+      const string new_extrajet_multi = TransformExtrajetMultiplicity_boosted(extrajet);
       size_t new_extrajet_multi_pttop = TransformJetMultiplicity_pttop(extrajet);
       size_t new_extrajet_multi_ptttbar = TransformJetMultiplicity_ptttbar(extrajet);
       size_t new_extrajet_multi_mttbar = TransformJetMultiplicity_mttbar(extrajet);
@@ -509,8 +509,8 @@ namespace Rivet {
       _h["boosted_rc_Pout_lep"]->fill(absPout_lep);
       _h["boosted_rc_chi_tt"]->fill(chi_ttbar);
       _h["boosted_rc_HT"]->fill(HT_ttbar/GeV);
-      _h["hadTop_boosted_rc_subjets"]->fill(new_subjets_multi);
-      _h["boosted_rc_extrajet"]->fill(new_extrajet_multi+1);
+      _d["hadTop_boosted_rc_subjets"]->fill(new_subjets_multi);
+      _d["boosted_rc_extrajet"]->fill(new_extrajet_multi);
       _h["ttbar_boosted_rc_m"]->fill(pttbar.mass()/GeV);
       _h["ttbar_boosted_rc_pt"]->fill(pttbar.pt()/GeV);
       _h["ttbar_boosted_rc_Rapidity"]->fill(pttbar.absrapidity());
@@ -522,8 +522,8 @@ namespace Rivet {
       _h["boosted_rc_Pout_lep_norm"]->fill(absPout_lep);
       _h["boosted_rc_chi_tt_norm"]->fill(chi_ttbar);
       _h["boosted_rc_HT_norm"]->fill(HT_ttbar/GeV);
-      _h["hadTop_boosted_rc_subjets_norm"]->fill(new_subjets_multi);
-      _h["boosted_rc_extrajet_norm"]->fill(new_extrajet_multi+1);
+      _d["hadTop_boosted_rc_subjets_norm"]->fill(new_subjets_multi);
+      _d["boosted_rc_extrajet_norm"]->fill(new_extrajet_multi);
       _h["ttbar_boosted_rc_m_norm"]->fill(pttbar.mass()/GeV);
       _h["ttbar_boosted_rc_pt_norm"]->fill(pttbar.pt()/GeV);
       _h["ttbar_boosted_rc_Rapidity_norm"]->fill(pttbar.absrap());
@@ -534,6 +534,10 @@ namespace Rivet {
       // Normalize to cross-section
       const double sf = crossSection()/picobarn / sumOfWeights();
       for (auto& hit : _h) {
+        scale(hit.second, sf);
+        if (hit.first.find("_norm") != string::npos)  normalize(hit.second, 1.0, false);
+      }
+      for (auto& hit : _d) {
         scale(hit.second, sf);
         if (hit.first.find("_norm") != string::npos)  normalize(hit.second, 1.0, false);
       }
@@ -592,35 +596,56 @@ namespace Rivet {
     }
 
 
-    void book_hist(string name, size_t table) {
+    void book_hist(const string& name, size_t table) {
       // HepData entry has dummy "Table of Contents",
       // so need to offset everything by one unit
       book(_h[name], table+3, 1, 1);
       book(_h[name+"_norm"], table+1, 1, 1);
     }
 
-    size_t TransformJetMultiplicity(size_t jet_n) { return jet_n > 7 ? 7 : jet_n; }
+    void book_disc(const string& name, size_t table) {
+      // HepData entry has dummy "Table of Contents",
+      // so need to offset everything by one unit
+      book(_d[name], table+3, 1, 1);
+      book(_d[name+"_norm"], table+1, 1, 1);
+    }
 
-    size_t TransformExtrajetMultiplicity(size_t jet_n) { return jet_n > 6 ? 6 : jet_n; }
+    size_t TransformJetMultiplicity(size_t jet_n) const { return jet_n > 7 ? 7 : jet_n; }
 
-    size_t TransformExtrajetMultiplicity_boosted(size_t jet_n) { return jet_n > 4 ? 4 : jet_n; }
+    string TransformExtrajetMultiplicity(size_t jet_n) const {
+      if (jet_n == 0)       return "0.0"s;
+      else if (jet_n == 1)  return "1.0"s;
+      else if (jet_n == 2)  return "2.0"s;
+      else if (jet_n == 3)  return "3.0"s;
+      else if (jet_n == 4)  return "4.0"s;
+      else if (jet_n == 5)  return "5.0"s;
+      else                  return "$\\geq$6.0"s;
+    }
 
-    size_t TransformJetMultiplicity_for_ttbar_m(size_t jet_n) { return jet_n > 6 ? 6 : jet_n; }
+    string TransformExtrajetMultiplicity_boosted(size_t jet_n) const {
+      if (jet_n == 0)       return "0.0"s;
+      else if (jet_n == 1)  return "1.0"s;
+      else if (jet_n == 2)  return "2.0"s;
+      else if (jet_n == 3)  return "3.0"s;
+      else                  return "$\\geq$4.0"s;
+    }
 
-    size_t TransformJetMultiplicity_pttop(size_t jet_n) {
+    size_t TransformJetMultiplicity_for_ttbar_m(size_t jet_n) const { return jet_n > 6 ? 6 : jet_n; }
+
+    size_t TransformJetMultiplicity_pttop(size_t jet_n) const {
       if (jet_n < 2)  return 0;
       if (jet_n == 2)               return 2;
       if (jet_n > 2)                return 3;
       return jet_n;
     }
 
-    size_t TransformJetMultiplicity_ptttbar(size_t jet_n) {
+    size_t TransformJetMultiplicity_ptttbar(size_t jet_n) const {
       if (jet_n < 2)  return 0;
       if (jet_n >= 2)               return 2;
       return jet_n;
     }
 
-    size_t TransformJetMultiplicity_mttbar(size_t jet_n) {
+    size_t TransformJetMultiplicity_mttbar(size_t jet_n) const {
       if (jet_n == 0)  return 0;
       if (jet_n == 1)  return 1;
       if (jet_n >= 2)  return 2;
@@ -630,6 +655,7 @@ namespace Rivet {
     /// @name Objects that are used by the event selection decisions
     /// @{
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<string>> _d;
     map<string, Histo1DGroupPtr> _h_multi;
     /// @}
 

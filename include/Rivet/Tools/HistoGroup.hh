@@ -3,6 +3,7 @@
 #define RIVET_HISTOGROUP_HH
 
 #include "Rivet/Config/RivetCommon.hh"
+#include "Rivet/Tools/Logging.hh"
 #include "Rivet/Tools/RivetYODA.hh"
 
 namespace Rivet {
@@ -154,11 +155,22 @@ namespace Rivet {
     /// @note Treat the histogram group as an entity when calculating the integral.
     void normalizeGroup(const double normto=1.0, const bool includeOverflows=true) {
       const double oldintegral = integral(includeOverflows);
-      if (oldintegral == 0) throw WeightError("Attempted to normalize a histogram group with null area");
+      if (oldintegral == 0) {
+        MSG_DEBUG("Attempted to normalize a histogram group with null area; skipping.");
+        return;
+      }
       scaleW(normto / oldintegral);
     }
 
     /// @}
+
+    protected:
+
+    /// Get a Log object based on the name() property of the calling analysis object.
+    Log& getLog() const {
+      string logname = "Rivet.HistoGroup";
+      return Log::getLog(logname);
+    }
 
   };
 
