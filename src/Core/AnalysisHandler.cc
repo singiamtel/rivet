@@ -37,7 +37,6 @@ namespace Rivet {
 
   AnalysisHandler::AnalysisHandler(const string& runname)
     : _runname(runname),
-      _numEntriesAggregate(0),
       _isEndOfFile(false),
       _userxs{NAN, NAN},
       _initialised(false),
@@ -129,6 +128,9 @@ namespace Rivet {
 
     // Create the multi-weighted event counter
     _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
+
+    // Create a per-file event counter
+    _fileCounter = CounterPtr(weightNames(), Counter("_FILECOUNT"));
 
     // Set the cross section based on what is reported by the init-event, else zero
     if (ge.cross_section())  setCrossSection(evt.crossSections());
@@ -467,6 +469,7 @@ namespace Rivet {
     // Make a new sub-event: affects every analysis object
     MSG_DEBUG("Starting new sub-event");
     _eventCounter.get()->newSubEvent();
+    _fileCounter.get()->newSubEvent();
     for (const AnaHandle& a : analyses()) {
       for (const auto& ao : a->analysisObjects()) {
         ao.get()->newSubEvent();
@@ -495,6 +498,7 @@ namespace Rivet {
     // Update the event counter
     // NB. updated on sub-events, but synced cf. histos on full-event boundaries
     _eventCounter->fill();
+    _fileCounter->fill();
 
     // Run the analyses
     for (const AnaHandle& a : analyses()) {
@@ -523,6 +527,7 @@ namespace Rivet {
     if ( _subEventWeights.empty() ) return;
     MSG_TRACE("AnalysisHandler::analyze(): Pushing _eventCounter to persistent.");
     _eventCounter.get()->collapseEventGroup(_subEventWeights);
+    _fileCounter.get()->collapseEventGroup(_subEventWeights);
     for (const AnaHandle& a : analyses()) {
       for (const auto& ao : a->analysisObjects()) {
         MSG_TRACE("AnalysisHandler::analyze(): Pushing " << a->name()
@@ -623,6 +628,7 @@ namespace Rivet {
 
     // Copy all histos to finalize versions.
     _eventCounter.get()->pushToFinal();
+    _fileCounter.get()->pushToFinal();
     _xs.get()->pushToFinal();
     for (const AnaHandle& a : analyses()) {
       for (const auto& ao : a->analysisObjects()) {
@@ -639,19 +645,23 @@ namespace Rivet {
         continue;
       }
       for (size_t iW = 0; iW < numWeights(); ++iW) {
-        _eventCounter.get()->setActiveFinalWeightIdx(iW);
         _xs.get()->setActiveFinalWeightIdx(iW);
-        const double effN = _eventCounter->effNumEntries();
-        const double sf = effN - _numEntriesAggregate;
-        double oldXS = 0., oldXSerrSq = 0.;
+        _fileCounter.get()->setActiveFinalWeightIdx(iW);
+
+        const double sf = _fileCounter->effNumEntries();
+        double xs = 0., xserrSq = 0., norm = 0.;
         if (iW < _xsAvg.size()) {
-          oldXS = _xsAvg[iW].val();
-          oldXSerrSq = _xsAvg[iW].errAvg(); // already squared
+          xs = _xsAvg[iW].val();
+          xserrSq = _xsAvg[iW].errAvg(); // already squared
+          norm = _xsNorm[iW];
         }
-        double xs = oldXS + sf * _xs->val();
-        double xserr = sqrt(oldXSerrSq + sqr(sf*_xs->errAvg()));
-        xs /= effN;  xserr /= effN;
-        _xs->reset();  _xs->set(xs, xserr);
+        xs += sf * _xs->val();
+        // final uncertainty will be based on average of the per-file uncertainties
+        // and add the variance of the central values around their average
+        xserrSq += sf*sqr(_xs->val()) + sf*sqr(_xs->errAvg());
+        norm += sf; //< keep track of norm factor for weighted average
+        xs /= norm;  xserrSq /= norm; // Should there be a Bessel correction?
+        _xs->reset();  _xs->set(xs, sqrt(xserrSq - sqr(xs)));
         for (const auto& ao : a->analysisObjects()) {
           ao.get()->setActiveFinalWeightIdx(iW);
         }
@@ -661,6 +671,7 @@ namespace Rivet {
         } catch (const Error& err) {
           throw Error(a->name() + "::finalize method error: " + err.what());
         }
+        _fileCounter.get()->unsetActiveWeight();
       }
     }
 
@@ -884,28 +895,29 @@ namespace Rivet {
     MSG_DEBUG("Finalize cross-section scaling ...");
     for (const auto& item : allxsecs) {
       const string& wname = item.first;
+      if (wname.rfind("norm"s, 0) == 0) continue;
       double xs = item.second.first;
-      double xserr = sqrt(item.second.second);
-      auto ec_it = allaos.find("/RAW/_EVTCOUNT" + wname);
-      assert( ec_it != allaos.end() );
-      auto xs_it = allaos.find("/RAW/_XSEC" + wname);
+      double xserrSq = item.second.second;
+      auto xs_it = allaos.find("/RAW/_XSEC"s + wname);
       assert( xs_it != allaos.end() );
       if (equiv) {
         MSG_DEBUG("Equivalent mode: scale by numEntries");
-        /// @todo Would it not be better to weight the averaging by effNumEntries? That better reflects the stat uncertainty
-        const double nentries = std::static_pointer_cast<YODA::Counter>(ec_it->second)->numEntries();
-        xs /= nentries;
-        xserr /= nentries;
+        auto norm_it = allxsecs.find("norm"s + wname);
+        assert( norm_it != allxsecs.end() );
+        const double norm = norm_it->second.first;
+        xs /= norm;
+        xserrSq /= norm;
+        xserrSq -= sqr(xs);
       }
       YODA::Estimate0DPtr xsec = std::dynamic_pointer_cast<YODA::Estimate0D>(xs_it->second);
       if (xsec) {
         xsec->reset();
-        xsec->set(xs, xserr);
+        xsec->set(xs, sqrt(xserrSq));
       }
       else { // old-style cross-section
         YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
         xsec->reset();
-        xsec->addPoint(xs, xserr);
+        xsec->addPoint(xs, sqrt(xserrSq));
       }
     }
 
@@ -960,7 +972,7 @@ namespace Rivet {
       double nomSumW = 1.0;
       if (overwrite_xsec)  {
         // Get the nominal sumW
-        auto ec_it = newaos.find("/RAW/_EVTCOUNT");
+        auto ec_it = newaos.find("/RAW/_EVTCOUNT"s);
         if ( ec_it != newaos.end() ) {
           YODA::CounterPtr cPtr = std::static_pointer_cast<YODA::Counter>(ec_it->second);
           nomSumW = cPtr->sumW()? cPtr->sumW() : 1;
@@ -971,12 +983,18 @@ namespace Rivet {
       if ( scales.find(wname) == scales.end() ) {
         scales[wname] = 1.0;
         // get the sum of weights and number of entries for the current weight
-        double evts = 0.0, sumw = 1.0;
-        auto ec_it = newaos.find("/RAW/_EVTCOUNT" + wname);
+        double Neff = 0.0, sumw = 1.0, xs_sf = 1.0;
+        auto ec_it = newaos.find("/RAW/_EVTCOUNT"s + wname);
         if ( ec_it != newaos.end() ) {
           YODA::CounterPtr cPtr = std::static_pointer_cast<YODA::Counter>(ec_it->second);
-          evts = cPtr->numEntries();
           sumw = cPtr->sumW()? cPtr->sumW() : 1;
+          if (equiv) {
+            xs_sf = cPtr->effNumEntries();
+            // Keep track of weights used in the weighted cross-section average
+            auto norm_it = allxsecs.insert( make_pair("norm"s + wname, make_pair(0,0)) ).first;
+            norm_it->second.first  += xs_sf;
+            norm_it->second.second += xs_sf;
+          }
         }
         else if (!equiv) {
           throw UserError("Missing event counter, needed for non-equivalent merging!");
@@ -984,7 +1002,7 @@ namespace Rivet {
         // in stacking mode: add up all the cross sections
         // in equivalent mode: weight the cross-sections
         // estimates by the corresponding number of entries
-        const string xspath = "/RAW/_XSEC" + wname;
+        const string xspath = "/RAW/_XSEC"s + wname;
         auto xs_it = newaos.find(xspath);
         if ( xs_it != newaos.end() ) {
           // get iterator to the existing (or newly created) key-value pair
@@ -1001,11 +1019,18 @@ namespace Rivet {
               MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
               xsec->scale(user_xsec);
             }
-            // update cross-sections, possibly weighted by number of entries
-            xit->second.first  += (equiv? evts : 1.0) * xsec->val();
-            xit->second.second += (equiv? sqr(evts) : 1.0) * sqr(xsec->errAvg());
-            // only in stacking mode: multiply each AO by cross-section / sumW
-            if (!equiv)  scales[wname] = xsec->val() / sumw;
+            // weighted average of cross-sections
+            xit->second.first  += xs_sf * xsec->val();
+            xit->second.second += xs_sf * sqr(xsec->errAvg());
+            if (equiv) {
+              // final uncertainty will be based on average of the per-file uncertainties
+              // and add the variance of the central values around their average
+              xit->second.second += xs_sf * sqr(xsec->val());
+            }
+            else {
+              // only in stacking mode: multiply each AO by cross-section / sumW
+              scales[wname] = xsec->val() / sumw;
+            }
           }
           else { // for <= V2 ASCII
             // old-style cross-section
@@ -1019,11 +1044,18 @@ namespace Rivet {
               MSG_DEBUG("Multiply user-supplied weight: " << user_xsec);
               xsec->scale(0, user_xsec);
             }
-            // update cross-sections, possibly weighted by number of entries
-            xit->second.first  += (equiv? evts : 1.0) * xsec->point(0).x();
-            xit->second.second += (equiv? sqr(evts) : 1.0) * sqr(xsec->point(0).xErrAvg());
-            // only in stacking mode: multiply each AO by cross-section / sumW
-            if (!equiv)  scales[wname] = xsec->point(0).x() / sumw;
+            // weighted average of cross-sections
+            xit->second.first  += xs_sf * xsec->point(0).x();
+            xit->second.second += xs_sf * sqr(xsec->point(0).xErrAvg());
+            if (equiv) {
+              // final uncertainty will be based on average of the per-file uncertainties
+              // and add the variance of the central values around their average
+              xit->second.second += xs_sf * sqr(xsec->point(0).x());
+            }
+            else {
+              // only in stacking mode: multiply each AO by cross-section / sumW
+              scales[wname] = xsec->point(0).x() / sumw;
+            }
           }
         }
         else if (!equiv) {
@@ -1128,16 +1160,18 @@ namespace Rivet {
     MSG_DEBUG("Getting event counter and cross-section from "
               << weightNames().size() << " " << numWeights());
     _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
+    _fileCounter = CounterPtr(weightNames(), Counter("_FILECOUNT"));
     _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
     vector<double> scales(numWeights(), 1.0);
     for (size_t iW = 0; iW < numWeights(); ++iW) {
       MSG_DEBUG("Weight # " << iW << " of " << numWeights());
       _eventCounter.get()->setActiveWeightIdx(iW);
+      _fileCounter.get()->setActiveWeightIdx(iW);
       _xs.get()->setActiveWeightIdx(iW);
       // set the sum of weights
       auto aoit = allAOs.find(_eventCounter->path());
       if (aoit != allAOs.end()) {
-        *_eventCounter = *std::static_pointer_cast<YODA::Counter>(aoit->second);
+        *_fileCounter = *_eventCounter = *std::static_pointer_cast<YODA::Counter>(aoit->second);
       }
 
       // set the cross-section
@@ -1243,6 +1277,7 @@ namespace Rivet {
     MSG_DEBUG("Getting event counter and cross-section from "
               << weightNames().size() << " " << numWeights());
     _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
+    _fileCounter = CounterPtr(weightNames(), Counter("_FILECOUNT"));
     _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
 
     // load AOs into memory
@@ -1253,6 +1288,7 @@ namespace Rivet {
       cerr << "Error when trying to deserialize AO data: " << err.what() << endl;
       exit(1);
     }
+    *_fileCounter = *_eventCounter;
     MSG_TRACE("Successfully deserialized AO data.");
 
     for (size_t iW = 0; iW < numWeights(); ++iW) {
@@ -1653,35 +1689,39 @@ namespace Rivet {
   }
 
 
+  // update the weighted cross-section estimate with the cross-section
+  // information from the previous HepMC file (this method gets called
+  // before the first event from the new file gets processed).
   void AnalysisHandler::updateCrossSection() {
 
     collapseEventGroup();
 
-    // update the weighted cross-section estimate with the cross-section
-    // information from the previous HepMC file (this method gets called
-    // before the first event from the new file gets processed).
-    _eventCounter.get()->setActiveWeightIdx(defaultWeightIndex());
-    const double effN = _eventCounter->effNumEntries();
-    const double wgt = effN - _numEntriesAggregate;
-    _numEntriesAggregate = effN;
-    _eventCounter.get()->unsetActiveWeight();
-
-
     // add cross-section contribution from last file
-    if (_xsAvg.empty())  _xsAvg.resize(numWeights());
+    if (_xsAvg.empty()) {
+      _xsAvg.resize(numWeights());
+      _xsNorm.resize(numWeights(), 0.0);
+    }
     for (size_t iW = 0; iW < numWeights(); ++iW) {
       _xs.get()->setActiveWeightIdx(iW);
-      double oldXS = 0., oldXSerrSq = 0.;
+      _fileCounter.get()->setActiveWeightIdx(iW);
+      const double sf = _fileCounter->effNumEntries();
+      _xsNorm[iW] += sf; //< keep track of norm factor for weighted everage
+      double xs = 0., xserrSq = 0.;
       if (!isnan(_xsAvg[iW].val())) {
         // update previous values
-        oldXS = _xsAvg[iW].val();
-        oldXSerrSq = _xsAvg[iW].errAvg(); // already squared
+        xs = _xsAvg[iW].val();
+        xserrSq = _xsAvg[iW].errAvg(); // already squared
       }
-      const double xs = oldXS + wgt * _xs->val();
-      const double xserr = oldXSerrSq + sqr(wgt * _xs->errAvg());
+      // central value: numerator of weighted average
+      xs += sf * _xs->val();
+      // final uncertainty will be based on average of the per-file uncertainties
+      // and add the variance of the central values around their average
+      xserrSq += sf*sqr(_xs->val()) + sf*sqr(_xs->errAvg());
       _xs.get()->unsetActiveWeight();
       _xsAvg[iW].reset();
-      _xsAvg[iW].set(xs, xserr);
+      _xsAvg[iW].set(xs, xserrSq); // leave as squared error, avoiding repeated sqrt calls
+      _fileCounter->reset();
+      _fileCounter.get()->unsetActiveWeight();
     }
     // Information processed - we're good to continue
     // processing the current event file
