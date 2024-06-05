@@ -34,6 +34,8 @@ namespace Rivet {
 
   public:
 
+    using Annotations = std::map<std::string, std::string>;
+
     /// Preferred constructor, with optional run name.
     AnalysisHandler(const string& runname="");
 
@@ -194,6 +196,73 @@ namespace Rivet {
     // void setCheckConsistency(bool check=true) { _checkConsistency = check; }
     // Check event consistency with the run, usually determined from the first event
     // bool consistentWithRun(Event& event) {
+
+    /// @}
+
+
+    /// @name Run-based annotations
+    /// @{
+
+    // Get all the annotation names
+    std::vector<std::string> annotations() const {
+      return _beaminfo->annotations();
+    }
+
+    /// Check if an annotation is defined
+    bool hasAnnotation(const std::string& name) const {
+      return _beaminfo->hasAnnotation(name);
+    }
+
+    /// Get an annotation by name (as a string)
+    const std::string& annotation(const std::string& name) const {
+      return _beaminfo->annotation(name);
+    }
+
+    /// Get an annotation by name (as a string) with a default in case the annotation is not found
+    const std::string& annotation(const std::string& name, const std::string& defaultreturn) const {
+      return _beaminfo->annotation(name, defaultreturn);
+    }
+
+    /// @brief Get an annotation by name (copied to another type)
+    ///
+    /// @note Templated on return type
+    template <typename T>
+    const T annotation(const std::string& name) const {
+      return _beaminfo->annotation<T>(name);
+    }
+
+    /// @brief Get an annotation by name (copied to another type) with a default in case the annotation is not found
+    ///
+    /// @note Templated on return type
+    template <typename T>
+    const T annotation(const std::string& name, T&& defaultreturn) const {
+      return _beaminfo->annotation<T>(name, std::forward<T>(defaultreturn));
+    }
+
+    /// @brief Add or set an annotation by name (templated for remaining types)
+    ///
+    /// @note Templated on arg type, but stored as a string.
+    template <typename T>
+    void setAnnotation(const std::string& name, T&& value) {
+      _beaminfo->annotation<T>(name, std::forward<T>(value));
+    }
+
+
+    /// Set all annotations at once
+    void setAnnotations(const Annotations& anns) {
+      _beaminfo->setAnnotations(anns);
+    }
+
+    /// Delete an annotation by name
+    void rmAnnotation(const std::string& name) {
+      _beaminfo->rmAnnotation(name);
+    }
+
+
+    /// Delete an annotation by name
+    void clearAnnotations() {
+      _beaminfo->clearAnnotations();
+    }
 
     /// @}
 
