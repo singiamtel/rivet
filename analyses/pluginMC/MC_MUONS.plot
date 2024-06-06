@@ -41,7 +41,7 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\eta(\mu\mathrm{2,~}\mu\mathrm{3})$ [pb
 # END PLOT
 
 # BEGIN PLOT /MC_MUONS/muons_dphi_
-Title=Pseudorapidity separation between muons
+Title=Azimuthal angle separation between muons
 LegendXPos=0.1
 # END PLOT
 
