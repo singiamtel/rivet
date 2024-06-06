@@ -35,6 +35,17 @@ namespace Rivet {
     using ArgType = PtrType;
   };
 
+  template<typename T>
+  struct TypeIdentity { using type = T; };
+
+
+  /// Conditional to return the signed integer type, otherwise same type
+  template<typename T>
+  using sign_if_integral = std::conditional_t<(std::is_integral_v<T> && !std::is_same_v<T,bool>),
+                                        std::make_signed<T>, TypeIdentity<T>>;
+  //
+  template<typename T>
+  using sign_if_integral_t = typename sign_if_integral<T>::type;
 
 
   /// SFINAE definition of dereferenceability trait, cf. Boost has_dereference
