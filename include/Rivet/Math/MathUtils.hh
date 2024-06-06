@@ -20,7 +20,7 @@ namespace Rivet {
   /// This version for floating point types has a degree of fuzziness expressed
   /// by the absolute @a tolerance parameter, for floating point safety.
   template <typename NUM>
-  inline typename std::enable_if<std::is_floating_point<NUM>::value, bool>::type
+  inline typename std::enable_if_t<std::is_floating_point_v<NUM>, bool>
   isZero(NUM val, double tolerance=1e-8) {
     return fabs(val) < tolerance;
   }
@@ -30,19 +30,19 @@ namespace Rivet {
   /// SFINAE template specialisation for integers, since there is no FP
   /// precision issue.
   template <typename NUM>
-  inline typename std::enable_if<std::is_integral<NUM>::value, bool>::type
+  inline typename std::enable_if_t<std::is_integral_v<NUM>, bool>
   isZero(NUM val, double=1e-5) { //< NB. unused tolerance parameter for ints, still needs a default value!
     return val == 0;
   }
 
   /// @brief Check if a number is NaN
   template <typename NUM>
-  inline typename std::enable_if<std::is_floating_point<NUM>::value, bool>::type
+  inline typename std::enable_if_t<std::is_floating_point_v<NUM>, bool>
   isNaN(NUM val) { return std::isnan(val); }
 
   /// @brief Check if a number is non-NaN
   template <typename NUM>
-  inline typename std::enable_if<std::is_floating_point<NUM>::value, bool>::type
+  inline typename std::enable_if_t<std::is_floating_point_v<NUM>, bool>
   notNaN(NUM val) { return !std::isnan(val); }
 
   /// @brief Square root of the absolute value with the sign of the argument propagated
@@ -56,9 +56,8 @@ namespace Rivet {
   /// of fuzziness expressed by the fractional @a tolerance parameter, for
   /// floating point safety.
   template <typename N1, typename N2>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value &&
-   (std::is_floating_point<N1>::value || std::is_floating_point<N2>::value), bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2> &&
+                                   (std::is_floating_point_v<N1> || std::is_floating_point_v<N2>), bool>
   fuzzyEquals(N1 a, N2 b, double tolerance=1e-5) {
     const double absavg = (std::abs(a) + std::abs(b))/2.0;
     const double absdiff = std::abs(a - b);
@@ -71,8 +70,7 @@ namespace Rivet {
   /// Simpler SFINAE template specialisation for integers, since there is no FP
   /// precision issue.
   template <typename N1, typename N2>
-  inline typename std::enable_if<
-    std::is_integral<N1>::value && std::is_integral<N2>::value, bool>::type
+  inline typename std::enable_if_t<std::is_integral_v<N1> && std::is_integral_v<N2>, bool>
     fuzzyEquals(N1 a, N2 b, double) { //< NB. unused tolerance parameter for ints, still needs a default value!
     return a == b;
   }
@@ -82,8 +80,7 @@ namespace Rivet {
   ///
   /// The @a tolerance parameter on the equality test is as for @c fuzzyEquals.
   template <typename N1, typename N2>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2>, bool>
   fuzzyGtrEquals(N1 a, N2 b, double tolerance=1e-5) {
     return a > b || fuzzyEquals(a, b, tolerance);
   }
@@ -93,28 +90,31 @@ namespace Rivet {
   ///
   /// The @a tolerance parameter on the equality test is as for @c fuzzyEquals.
   template <typename N1, typename N2>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2>, bool>
   fuzzyLessEquals(N1 a, N2 b, double tolerance=1e-5) {
     return a < b || fuzzyEquals(a, b, tolerance);
   }
 
   /// @brief Get the minimum of two numbers
+  ///
+  /// @note unsigned integral types are cast to their integer equivalents first
   template <typename N1, typename N2>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value,
-    typename std::common_type<N1,N2>::type >::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2>,
+                                   std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>> >
   min(N1 a, N2 b) {
-    return a > b ? b : a;
+    using rtnT = std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>>;
+    return ((rtnT)a > (rtnT)b)? b : a;
   }
 
   /// @brief Get the maximum of two numbers
+  ///
+  /// @note unsigned integral types are cast to their integer equivalents first
   template <typename N1, typename N2>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value,
-    typename std::common_type<N1,N2>::type >::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2>,
+                                   std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>> >
   max(N1 a, N2 b) {
-    return a > b ? a : b;
+    using rtnT = std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>>;
+    return ((rtnT)a > (rtnT)b)? a : b;
   }
 
   /// @}
@@ -133,8 +133,7 @@ namespace Rivet {
   ///
   /// Interval boundary types are defined by @a lowbound and @a highbound.
   template <typename N1, typename N2, typename N3>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value && std::is_arithmetic<N3>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2> && std::is_arithmetic_v<N3>, bool>
   inRange(N1 value, N2 low, N3 high,
           RangeBoundary lowbound=CLOSED, RangeBoundary highbound=OPEN) {
     if (lowbound == OPEN && highbound == OPEN) {
@@ -153,8 +152,7 @@ namespace Rivet {
   /// Interval boundary types are defined by @a lowbound and @a highbound.
   /// Closed intervals are compared fuzzily.
   template <typename N1, typename N2, typename N3>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value && std::is_arithmetic<N3>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2> && std::is_arithmetic_v<N3>, bool>
   fuzzyInRange(N1 value, N2 low, N3 high,
                RangeBoundary lowbound=CLOSED, RangeBoundary highbound=OPEN) {
     if (lowbound == OPEN && highbound == OPEN) {
@@ -170,8 +168,7 @@ namespace Rivet {
 
   /// Alternative version of inRange which accepts a pair for the range arguments.
   template <typename N1, typename N2, typename N3>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value && std::is_arithmetic<N3>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2> && std::is_arithmetic_v<N3>, bool>
   inRange(N1 value, pair<N2, N3> lowhigh,
           RangeBoundary lowbound=CLOSED, RangeBoundary highbound=OPEN) {
     return inRange(value, lowhigh.first, lowhigh.second, lowbound, highbound);
@@ -184,8 +181,7 @@ namespace Rivet {
   ///
   /// @note The interval is closed (inclusive) at the low end, and open (exclusive) at the high end.
   template <typename N1, typename N2, typename N3>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value && std::is_arithmetic<N3>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2> && std::is_arithmetic_v<N3>, bool>
   in_range(N1 val, N2 low, N3 high) {
     return inRange(val, low, high, CLOSED, OPEN);
   }
@@ -194,8 +190,7 @@ namespace Rivet {
   ///
   /// @note The interval is closed at both ends.
   template <typename N1, typename N2, typename N3>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value && std::is_arithmetic<N3>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2> && std::is_arithmetic_v<N3>, bool>
   in_closed_range(N1 val, N2 low, N3 high) {
     return inRange(val, low, high, CLOSED, CLOSED);
   }
@@ -204,8 +199,7 @@ namespace Rivet {
   ///
   /// @note The interval is open at both ends.
   template <typename N1, typename N2, typename N3>
-  inline typename std::enable_if<
-    std::is_arithmetic<N1>::value && std::is_arithmetic<N2>::value && std::is_arithmetic<N3>::value, bool>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2> && std::is_arithmetic_v<N3>, bool>
   in_open_range(N1 val, N2 low, N3 high) {
     return inRange(val, low, high, OPEN, OPEN);
   }
@@ -220,7 +214,7 @@ namespace Rivet {
 
   /// Named number-type squaring operation.
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, NUM>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, NUM>
   sqr(NUM a) {
     return a*a;
   }
@@ -231,7 +225,7 @@ namespace Rivet {
   /// @todo When std::common_type can be used, generalise to multiple numeric types with appropriate return type.
   // template <typename N1, typename N2>
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, NUM>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, NUM>
   //std::common_type<N1, N2>::type
   add_quad(NUM a, NUM b) {
     return sqrt(a*a + b*b);
@@ -243,7 +237,7 @@ namespace Rivet {
   /// @todo When std::common_type can be used, generalise to multiple numeric types with appropriate return type.
   // template <typename N1, typename N2>
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, NUM>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, NUM>
   //std::common_type<N1, N2, N3>::type
   add_quad(NUM a, NUM b, NUM c) {
     return sqrt(a*a + b*b + c*c);
@@ -257,7 +251,7 @@ namespace Rivet {
 
   /// A more efficient version of pow for raising numbers to integer powers.
   template <typename NUM>
-  constexpr inline typename std::enable_if<std::is_arithmetic<NUM>::value, NUM>::type
+  constexpr inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, NUM>
   intpow(NUM val, unsigned int exp) {
     if (exp == 0) return (NUM) 1;
     else if (exp == 1) return val;
@@ -266,7 +260,7 @@ namespace Rivet {
 
   /// Find the sign of a number
   template <typename NUM>
-  constexpr inline typename std::enable_if<std::is_arithmetic<NUM>::value, int>::type
+  constexpr inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, int>
   sign(NUM val) {
     if (isZero(val)) return ZERO;
     const int valsign = (val > 0) ? PLUS : MINUS;
@@ -438,7 +432,7 @@ namespace Rivet {
 
   /// Actual helper implementation of binIndex (so generic and specific overloading can work)
   template <typename NUM, typename CONTAINER>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value && std::is_arithmetic<typename CONTAINER::value_type>::value, int>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM> && std::is_arithmetic_v<typename CONTAINER::value_type>, int>
   _binIndex(NUM val, const CONTAINER& binedges, bool allow_overflow=false) {
     if (val < *begin(binedges)) return -1; ///< Below/out of histo range
     // CONTAINER::iterator_type itend =
@@ -456,7 +450,7 @@ namespace Rivet {
   /// @note The @a binedges vector must be sorted
   /// @todo Use std::common_type<NUM1, NUM2>::type x = val; ?
   template <typename NUM1, typename NUM2>
-  inline typename std::enable_if<std::is_arithmetic<NUM1>::value && std::is_arithmetic<NUM2>::value, int>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM1> && std::is_arithmetic_v<NUM2>, int>
   binIndex(NUM1 val, std::initializer_list<NUM2> binedges, bool allow_overflow=false) {
     return _binIndex(val, binedges, allow_overflow);
   }
@@ -470,7 +464,7 @@ namespace Rivet {
   /// @note The @a binedges vector must be sorted
   /// @todo Use std::common_type<NUM1, NUM2>::type x = val; ?
   template <typename NUM, typename CONTAINER>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value && std::is_arithmetic<typename CONTAINER::value_type>::value, int>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM> && std::is_arithmetic_v<typename CONTAINER::value_type>, int>
   binIndex(NUM val, const CONTAINER& binedges, bool allow_overflow=false) {
     return _binIndex(val, binedges, allow_overflow);
   }
@@ -484,7 +478,7 @@ namespace Rivet {
   /// Calculate the median of a sample
   /// @todo Support multiple container types via SFINAE
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, NUM>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, NUM>
   median(const vector<NUM>& sample) {
     if (sample.empty()) throw RangeError("Can't compute median of an empty set");
     vector<NUM> tmp = sample;
@@ -498,7 +492,7 @@ namespace Rivet {
   /// Calculate the mean of a sample
   /// @todo Support multiple container types via SFINAE
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, double>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, double>
   mean(const vector<NUM>& sample) {
     if (sample.empty()) throw RangeError("Can't compute mean of an empty set");
     double mean = 0.0;
@@ -511,7 +505,7 @@ namespace Rivet {
   // Calculate the error on the mean, assuming Poissonian errors
   /// @todo Support multiple container types via SFINAE
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, double>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, double>
   mean_err(const vector<NUM>& sample) {
     if (sample.empty()) throw RangeError("Can't compute mean_err of an empty set");
     double mean_e = 0.0;
@@ -525,7 +519,7 @@ namespace Rivet {
   /// Calculate the covariance (variance) between two samples
   /// @todo Support multiple container types via SFINAE
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, double>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, double>
   covariance(const vector<NUM>& sample1, const vector<NUM>& sample2) {
     if (sample1.empty() || sample2.empty()) throw RangeError("Can't compute covariance of an empty set");
     if (sample1.size() != sample2.size()) throw RangeError("Sizes of samples must be equal for covariance calculation");
@@ -544,7 +538,7 @@ namespace Rivet {
   /// Calculate the error on the covariance (variance) of two samples, assuming poissonian errors
   /// @todo Support multiple container types via SFINAE
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, double>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, double>
   covariance_err(const vector<NUM>& sample1, const vector<NUM>& sample2) {
     if (sample1.empty() || sample2.empty()) throw RangeError("Can't compute covariance_err of an empty set");
     if (sample1.size() != sample2.size()) throw RangeError("Sizes of samples must be equal for covariance_err calculation");
@@ -567,7 +561,7 @@ namespace Rivet {
   /// Calculate the correlation strength between two samples
   /// @todo Support multiple container types via SFINAE
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, double>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, double>
   correlation(const vector<NUM>& sample1, const vector<NUM>& sample2) {
     const double cov = covariance(sample1, sample2);
     const double var1 = covariance(sample1, sample1);
@@ -580,7 +574,7 @@ namespace Rivet {
   /// Calculate the error of the correlation strength between two samples assuming Poissonian errors
   /// @todo Support multiple container types via SFINAE
   template <typename NUM>
-  inline typename std::enable_if<std::is_arithmetic<NUM>::value, double>::type
+  inline typename std::enable_if_t<std::is_arithmetic_v<NUM>, double>
   correlation_err(const vector<NUM>& sample1, const vector<NUM>& sample2) {
     const double cov = covariance(sample1, sample2);
     const double var1 = covariance(sample1, sample1);
