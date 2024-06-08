@@ -1344,8 +1344,6 @@ namespace Rivet {
       other._xs.get()->setActiveWeightIdx(iW);
       const double ntrials = _eventCounter->sumW()/_xs->val() + other._eventCounter->sumW()/other._xs->val();
       // set the sum of weights
-      const double this_evts = _eventCounter->numEntries();
-      const double other_evts = other._eventCounter->numEntries();
       *_eventCounter += *other._eventCounter;
       // set the cross-section
       const double sumw  = _eventCounter->sumW();

@@ -1,3 +1,8 @@
+2024-06-07  Christian Gutschow  <chris.g@cern.ch>
+
+	* Replace cross-section average with exact sumW/Ntrials calculation
+	in multi-input-file runs and merging
+
 2024-05-26  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add FPE protections against eta and rap calculations with
