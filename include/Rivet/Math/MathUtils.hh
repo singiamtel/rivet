@@ -100,9 +100,9 @@ namespace Rivet {
   /// @note unsigned integral types are cast to their integer equivalents first
   template <typename N1, typename N2>
   inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2>,
-                                   std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>> >
+                                   signed_if_mixed_t<N1,N2> >
   min(N1 a, N2 b) {
-    using rtnT = std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>>;
+    using rtnT = signed_if_mixed_t<N1,N2>;
     return ((rtnT)a > (rtnT)b)? b : a;
   }
 
@@ -111,9 +111,9 @@ namespace Rivet {
   /// @note unsigned integral types are cast to their integer equivalents first
   template <typename N1, typename N2>
   inline typename std::enable_if_t<std::is_arithmetic_v<N1> && std::is_arithmetic_v<N2>,
-                                   std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>> >
+                                   signed_if_mixed_t<N1,N2> >
   max(N1 a, N2 b) {
-    using rtnT = std::common_type_t<sign_if_integral_t<N1>,sign_if_integral_t<N2>>;
+    using rtnT = signed_if_mixed_t<N1,N2>;
     return ((rtnT)a > (rtnT)b)? a : b;
   }
 
