@@ -701,14 +701,11 @@ namespace Rivet {
     /// Beam info known to AH
     YODA::BinnedEstimatePtr<string> _beaminfo;
 
-    /// Cross-section averages for runs over multiple files
-    vector<Estimate0D> _xsAvg;
+    /// Total number of trials
+    double _ntrials;
 
     /// Total number of entries of the current HepMC file
     CounterPtr _fileCounter;
-
-    /// Normalisation factors for the multi-file cross-section average
-    vector<double> _xsNorm;
 
     /// Toggle for multi-file runs
     bool _isEndOfFile;
