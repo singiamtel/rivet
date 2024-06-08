@@ -47,6 +47,16 @@ namespace Rivet {
   template<typename T>
   using sign_if_integral_t = typename sign_if_integral<T>::type;
 
+  /// Conditional to return true if all input parameters are unsgined
+  template<typename... Args>
+  using all_unsigned = std::conjunction<std::is_unsigned<Args>...>;
+
+  /// Conditional to return signed common type if input types are mixed signed/unsigned
+  template<typename... Args>
+  using signed_if_mixed_t = std::conditional_t<all_unsigned<Args...>::value,
+                                               std::common_type_t<Args...>,
+                                               std::common_type_t<sign_if_integral_t<Args>...>>;
+
 
   /// SFINAE definition of dereferenceability trait, cf. Boost has_dereference
   template <typename T, typename=void>
