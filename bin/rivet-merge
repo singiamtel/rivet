@@ -67,6 +67,8 @@ extragroup.add_argument("-m", "--match", dest="MATCH", action="append", default=
                          help="only write out histograms whose path matches this regex")
 extragroup.add_argument("-M", "--unmatch", dest="UNMATCH", action="append", default=[],
                         help="exclude histograms whose path matches this regex")
+extragroup.add_argument("-x", "--cross-section", dest="XSEC", default=None,
+                        help="specify the signal process cross-section (in pb) to overwrite the values found in the files")
 extragroup.add_argument("--assume-reentrant", dest="ASSUME_REENTRANT", action="store_true", default=False,
                         help="assume all routines are reentrant-safe, even if they are not explicitly marked as such")
 extragroup.add_argument("-j", "--jobs", dest="JOBS", type=int,
@@ -151,6 +153,13 @@ if __name__ == '__main__':
     ## Check if it's worth splitting the input files
     splitFiles = args.JOBS > 1 and len(args.YODAFILES) > 2*args.JOBS
 
+    # If the user specified a global cross-section, attach the value
+    # like ":=1.23" to each file name in order to force overwriting
+    xs = ''
+    if args.XSEC is not None:
+        xs = ':=' + args.XSEC
+    inputFiles = [ y if ':' in y else y + xs for y in args.YODAFILES ]
+
     if splitFiles:
 
         nprocs = args.JOBS if args.JOBS < numcores else numcores
@@ -158,12 +167,12 @@ if __name__ == '__main__':
         manager = multiprocessing.Manager()
         p = multiprocessing.Pool(processes=nprocs)
         jobs = [p.apply_async(func=subMerge,
-                              args=(args.YODAFILES[idx:idx+nprocs],
+                              args=(inputFiles[idx:idx+nprocs],
                                     args.MERGEOPTIONS, args.ADDOPTIONS,
                                     args.MATCH, args.UNMATCH,
                                     args.EQUIV, not args.ASSUME_REENTRANT,
                                     args.PRELOADFILE, procID,))
-                                    for procID, idx in enumerate(range(0, len(args.YODAFILES), nprocs))]
+                                    for procID, idx in enumerate(range(0, len(inputFiles), nprocs))]
         p.close()
         results = [ job.get() for job in jobs ]
         # Merge the individual substeps
@@ -178,7 +187,7 @@ if __name__ == '__main__':
         if args.PRELOADFILE is not None:
             ah.readData(args.PRELOADFILE)
 
-        ah.mergeYODAs(args.YODAFILES, args.MERGEOPTIONS, args.ADDOPTIONS,
+        ah.mergeYODAs(inputFiles, args.MERGEOPTIONS, args.ADDOPTIONS,
                       args.MATCH, args.UNMATCH, args.EQUIV, not args.ASSUME_REENTRANT)
 
     logging.info("Rerunning finalize ...")
