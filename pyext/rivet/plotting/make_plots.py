@@ -221,6 +221,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
     outputdict['style'] = style
     outputdict['stylepath'] = '../'
     outputdict['histograms'] = {}
+    outputdict['pat_warn'] = {}
 
     componentNames = ['BandComponentPDF', 'BandComponentEnv']
 
@@ -338,13 +339,19 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
 
             for pat in pdf_matches:
                 if not len(pdf_matches[pat]):
-                    print (f"WARNING: PDF band prescription '{pat}' did not match any variation weights!")
+                    if verbose:
+                        print (f"WARNING: PDF band prescription '{pat}' did not match any variation weights!")
+                    elif not pat in outputdict['pat_warn'].setdefault('PDF band', {}).setdefault(filename, []):
+                        outputdict['pat_warn']['PDF band'][filename].append(pat)
                 elif verbose:
                     print ("PDF prescription \"%s\" matches:" % pat)
                     print (pdf_matches[pat])
             for pat in env_matches:
                 if not len(env_matches[pat]):
-                    print (f"WARNING: Envelope prescription '{pat}' did not match any variation weights!")
+                    if verbose:
+                        print (f"WARNING: Envelope prescription '{pat}' did not match any variation weights!")
+                    elif not pat in outputdict['pat_warn'].setdefault('Envelope', {}).setdefault(filename, []):
+                        outputdict['pat_warn']['Envelope'][filename].append(pat)
                 elif verbose:
                     print ("Envelope prescription \"%s\" matches:" % pat)
                     print (env_matches[pat])
@@ -526,7 +533,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
     hasVariations = hpaths.pop()
 
     # Write each file
-    plot_info_dicts = {}
+    plot_info_dicts, pattern_warnings = {}, {}
     for plot_id in hpaths:
         outputdict = _make_output(
             plot_id, plotdirs, config_files,
@@ -535,8 +542,19 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
             nRatioTicks, showWeights, removeOptions, deviation,
             canvasText, refLabel, ratioPlotLabel, showRatio, verbose
         )
-        if 'histograms' in outputdict: # protection against Counters
-            plot_info_dicts[plot_id] = outputdict
+        for presc, warnings in outputdict.setdefault('pat_warn', {}).items():
+            for filename, pats in warnings.items():
+                for pat in pats:
+                    if not pat in pattern_warnings.setdefault(presc, {}).setdefault(filename, []):
+                        pattern_warnings[presc][filename].append(pat)
+        del outputdict['pat_warn']
+        plot_info_dicts[plot_id] = outputdict
+    if not verbose:
+        for presc, warnings in pattern_warnings.items():
+            for filename, pats in warnings.items():
+                for pat in pats:
+                    print (f"WARNING: {presc} prescription '{pat}' did not match "
+                           + f"any variation weights in file '{filename}'!")
 
     return plot_info_dicts, hasVariations
 
