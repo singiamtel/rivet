@@ -66,8 +66,6 @@ parser.add_argument("--style", dest="STYLE", help="Choose the plotting style", d
 stygroup = parser.add_argument_group("Style options")
 stygroup.add_argument("-t", "--title", dest="TITLE",
                       default="Plots from Rivet analyses", help="title to be displayed on the main web page")
-stygroup.add_argument("--reflabel", dest="REFLABEL",
-                      default="Data", help="legend entry for reference data")
 stygroup.add_argument("--ratiolabel", dest="RATIOPLOTLABEL",
                       default=None, help="label on ratio panel")
 stygroup.add_argument("--deviation", dest="DEVIATION", action="store_true",
@@ -197,8 +195,8 @@ def generate_plots(pyScripts,nproc=1):
     try:
         # show progress bar
         import tqdm
-        jobs = [p.apply_async(func=executeScript, 
-                                args=(pyScript, manager_module.shared_modules,)) 
+        jobs = [p.apply_async(func=executeScript,
+                                args=(pyScript, manager_module.shared_modules,))
                                 for pyScript in pyScripts]
         p.close()
 
@@ -206,8 +204,8 @@ def generate_plots(pyScripts,nproc=1):
             job.get()
 
     except ImportError:
-        for i, _ in enumerate(p.starmap(func=executeScript, 
-                    iterable=[(pyScript, manager_module.shared_modules) 
+        for i, _ in enumerate(p.starmap(func=executeScript,
+                    iterable=[(pyScript, manager_module.shared_modules)
                             for pyScript in pyScripts])):
             sys.stderr.write(f'\rdone {100*i/len(pyScripts):.1f}%')
 
@@ -241,15 +239,14 @@ def generateScripts(args):
     ## Check that YODA files are accessible
     yodafiles = [ ]
     for yodafile in args.YODAFILES:
-        if yodafile.startswith("PLOT:"):
-            continue
         yodafilepath = os.path.abspath(yodafile.split(":")[0])
-        if not os.access(yodafilepath, os.R_OK):
-            print("Error: cannot read from %s" % yodafilepath)
-            if args.IGNORE_MISSING:
-                continue
-            else:
-                sys.exit(2)
+        if not yodafile.startswith("PLOT:") and not yodafile.startswith("REF:"):
+            if not os.access(yodafilepath, os.R_OK):
+                print("Error: cannot read from %s" % yodafilepath)
+                if args.IGNORE_MISSING:
+                    continue
+                else:
+                    sys.exit(2)
         yodafiles.append(yodafile)
 
     ## Make sure user-supplied config files are accessible
@@ -263,7 +260,7 @@ def generateScripts(args):
                                                    True, [], args.VERBOSE,
                                                    nRatioTicks=args.NRATIOTICKS, showWeights = args.SHOW_WEIGHTS,
                                                    removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION,
-                                                   canvasText=args.CANVASTEXT, refLabel=args.REFLABEL,
+                                                   canvasText=args.CANVASTEXT,
                                                    ratioPlotLabel=args.RATIOPLOTLABEL, showRatio=args.SHOW_RATIO)
 
     # Unique list of analyses
@@ -308,7 +305,7 @@ def generateScripts(args):
         if not args.OFFLINE:
             script = '''\
             <script type="text/javascript">
-              window.MathJax = { tex: { inlineMath: [['$','$']] }, 
+              window.MathJax = { tex: { inlineMath: [['$','$']] },
                                  options: { menuOptions: { settings: { inTabOrder: false } } } };
             </script>
             <script type="text/javascript" id="MathJax-script" async
