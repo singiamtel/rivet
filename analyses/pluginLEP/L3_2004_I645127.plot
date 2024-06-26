@@ -22,7 +22,7 @@ ConnectGaps=1
 XMin=185
 XMax=210
 END PLOT
-BEGIN PLOT /L3_2004_I645127/d03-x01-y05
+BEGIN PLOT /L3_2004_I645127/d03-x01-y0
 Title=Cross section for $\gamma\gamma\to \mu^+\mu^-$
 XLabel=$\sqrt{s}$ [GeV]
 YLabel=$\sigma(\gamma\gamma\to \mu^+\mu^-)$ [nb]

@@ -12,6 +12,8 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies: [3.598, 3.692, 3.71, 3.73, 3.74, 3.75, 3.762, 3.766, 3.77, 3.774,
+           3.78, 3.786, 3.79, 3.8, 3.81, 3.821, 3.83, 3.85, 3.865, 3.87, 3.886]
 Description:
   'Measurement of $R$  and the hadronic cross section for energies between 3.598 and 3.886 GeV.
    The hadronic and muonic cross sections are also outputted to the yoda file

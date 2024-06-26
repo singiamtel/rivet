@@ -1,0 +1,36 @@
+Name: BABAR_2008_I755245
+Year: 2008
+Summary: $D_s^{(*)+}K^-$ mass distribution in $B^-\to D_s^{(*)+}K^-\pi^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 755245
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 100 (2008) 171803
+RunInfo: Any process producing B- mesons, originally Upsilon(4S) decay
+Description:
+  'Measurement of the $D_s^{(*)+}K^-$ mass distribution in $B^-\to D_s^{(*)+}K^-\pi^-$ by BaBar. The background subtracted data was read from Figure 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007xlt
+BibTeX: '@article{BaBar:2007xlt,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of tree-level B decays with s anti-s production from gluon radiation.}",
+    eprint = "0707.1043",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-07-025, SLAC-PUB-12690",
+    doi = "10.1103/PhysRevLett.100.171803",
+    journal = "Phys. Rev. Lett.",
+    volume = "100",
+    pages = "171803",
+    year = "2008"
+}
+'

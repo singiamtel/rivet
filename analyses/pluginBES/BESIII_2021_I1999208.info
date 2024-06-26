@@ -5,7 +5,6 @@ Experiment: BESIII
 Collider: BEPC
 InspireID: 1999208
 Status: VALIDATED
-Reentrant: true
 Authors:
  - Peter Richardson <peter.richardson@durham.ac.uk>
 References:
@@ -13,8 +12,14 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams:  [e+,e-]
+Energies: [2.0000, 2.0500, 2.1000, 2.1250, 2.1500, 2.1750, 2.2000, 2.2324,
+           2.3094, 2.3864, 2.3960, 2.6444, 2.6464, 2.9000, 2.9500, 2.9810,
+           3.0000, 3.0200, 3.0800]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to\omega\pi^0\pi^0$ between 2 and 3.08 GeV by the BESIII collaboration.'
+  'Measurement of the cross section for $e^+e^-\to\omega\pi^0\pi^0$ between 2 and 3.08 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

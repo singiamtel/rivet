@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > omega pi+pi-
   class DM1_1981_I166964 : public Analysis {
   public:
 
@@ -22,7 +22,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nomega, "TMP/omega");
+      book(_nomega, "TMP/omega" ,refData(1,1,1));
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -70,7 +70,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _nomega->fill();
+	    _nomega->fill(sqrtS()/MeV);
 	}
       }
     }
@@ -79,15 +79,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sigma = _nomega->val()*fact;
-      double error = _nomega->err()*fact;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nomega,fact);
+      Estimate1DPtr tmp;
+      book(tmp,1,1,1);
+      barchart(_nomega,tmp);
     }
 
     /// @}
@@ -95,7 +90,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nomega;
+    Histo1DPtr _nomega;
     /// @}
 
 

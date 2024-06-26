@@ -2,9 +2,9 @@
 15366 . Leptonic Structure Functions of the Photon #figs#
 17781 . $\Lambda$ Production in $e^+ e^-$ Annihilations at 29-{GeV}: A Comparison With Lund Model Predictions #implemented#
 17849 . {Bose-Einstein} Correlations Observed in $e^+ e^-$ Annihilation at a Center-of-mass Energy of 34-{GeV} #???#
-18502 . Study of Quark Fragmentation in e+ e- Annihilation at 29-GeV: Charged Particle Multiplicity and Single Particle Rapidity Distributions #implemented#
+18502 . Study of Quark Fragmentation in e+ e- Annihilation at 29-GeV: Charged Particle Multiplicity and Single Particle Rapidity Distributions
 18545 X A Search for Single Photons at {PETRA} #search#
-18688 . Observation of Tensor and Scalar Mesons Produced in $e^+ e^-$ Annihilation at 29-{GeV} #implemented#
+18688 . Observation of Tensor and Scalar Mesons Produced in $e^+ e^-$ Annihilation at 29-{GeV}
 20715 X Search for Wrong Sign D0 Decays #limit#
 23360 . Production Cross-section and Electroweak Asymmetry of $D^*$ and $D$ Mesons Produced in $e^+ e^-$ Annihilations at 29-{GeV} #implemented#
 23570 X Study of Multi - Hadron Events With Isolated Leptons in $e^+ e^-$ Annihilation at $50\le \sqrt{s} \le 55$-{GeV} #search#
@@ -29,6 +29,7 @@
 140294 . Cross-Sections and Event Topologies in e+ e- Annihilation at 13-GeV and 17-GeV Observed with the PLUTO Detector #implemented#
 140303 . Properties of Hadron Final States in e+ e- Annihilation at 13-GeV and 17-GeV Center-Of-Mass Energies #implemented#
 140818 . Measurement of Leptonic Branching Ratios of the $\Upsilon$ (9.46) #implemented#
+141976 . Study of Electron - Positron Collisions at the Highest {PETRA} Energy #implemented#
 142123 X Evidence for Planar Events in e+ e- Annihilation at High-Energies #not implementable#
 142517 . Search for a 'Top' Threshold in Hadronic $e^+ e^-$ Annihilation at Energies Between 22-{GeV} and 31.6-{GeV} #implemented#
 142632 X Evidence for Gluon Bremsstrahlung in e+ e- Annihilations at High-Energies #not implementable#
@@ -39,10 +40,10 @@
 143198 X Energy Scan for Narrow States in $e^+ e^-$ Annihilation at Center-of-mass Energies Between 29.90-{GeV} and 31.46-{GeV} #not implementable#
 143690 . E+ e- Annihilation at High-Energies and Search for the t-Quark Continuum Contribution #implemented#
 143691 . Rapid Growth of Charged Particle Multiplicity in High-Energy e+ e- Annihilations #implement#
-143939 . CHARMED MESON PRODUCTION AND DECAY PROPERTIES AT THE psi-prime-prime (3770) #implemented#
+143939 . CHARMED MESON PRODUCTION AND DECAY PROPERTIES AT THE psi-prime-prime (3770)
 143985 ? Observation of Planar Three Jet Events in e+ e- Annihilation and Evidence for Gluon Bremsstrahlung #data elsewhere?#
 144112 X Two Particle Correlations in $e^+ e^-$ Annihilation #superseeded#
-144382 . DECAYS OF THE psi-prime (3684) TO OTHER CHARMONIUM STATES #implemented#
+144382 . DECAYS OF THE psi-prime (3684) TO OTHER CHARMONIUM STATES
 152289 . Test of {QED} in the Reactions $e^+ e^- \to e^+ e^-$ and $e^+ e^- \to \mu^+ \mu^-$ at {CMS} Energies From 9.4-{GeV} to 31.6-{GeV} #table#
 152290 X Search for Narrow Resonances in $e^+ e^-$ Annihilation at c.m. Energies Between 29.90-{GeV} and 31.46-{GeV} #R, superseeded 164319#
 152291 . Search for Narrow Resonances in $e^+ e^-$ Annihilation at {PETRA} #implemented#
@@ -63,7 +64,7 @@
 155032 X Prompt Muons in Multiparticle Events From $e^+ e^-$ Annihilation at {PETRA} #superseeded#
 155318 X A Study of Multi-Jet Events in e+ e- Annihilation #data elsewhere#
 155594 . INELASTIC ELECTRON PHOTON SCATTERING AT MODERATE FOUR MOMENTUM TRANSFERS #data#
-156315 . Energy-energy Correlations in $e^+ e^-$ Annihilation Into Hadrons #implemented#
+156315 . Energy-energy Correlations in $e^+ e^-$ Annihilation Into Hadrons
 156511 . Observation of {QCD} Effects in Transverse Momenta of $e^+ e^-$ Jets #???#
 156513 X Search for New Sequential Leptons in $e^+ e^-$ Annihilation at {PETRA} Energies #search#
 156659 . Topology of the $\Upsilon$ Decay #dists#
@@ -79,7 +80,7 @@
 165769 X Two Photon Excitation of the Tensor Meson F0 (1270) #not implementable#
 165785 . Energy Carried by $\gamma$ Rays and Neutral Particles in Multi - Hadron Final States at {PETRA} #????#
 166363 . Baryon Production in e+ e- Annihilation at PETRA #implement#
-166365 . SEARCH FOR NARROW QUARKONIUM STATES AND PAIR PRODUCTION OF NEW HEAVY QUARKS AT c.m. ENERGIES FROM 33-GeV TO 36.7-GeV #implemented#
+166365 . SEARCH FOR NARROW QUARKONIUM STATES AND PAIR PRODUCTION OF NEW HEAVY QUARKS AT c.m. ENERGIES FROM 33-GeV TO 36.7-GeV
 166367 X $\Lambda$, $\bar{\Lambda}$ Production in $e^+ e^-$ Annihilation at 33-{GeV} Center-of-mass Energy #fig 3?, superseeded 205119#
 166369 . Measurement of Hadron Production and Three Jet Event Properties at {PETRA} {MIT} #implemented#
 166799 . Review of $e^+ e^-$ Experiments With Pluto From 3-{GeV} to 31-{GeV} #implemented#
@@ -131,7 +132,7 @@
 189546 . Lepton Pair Production in Deep Inelastic $e \gamma$ Scattering #????#
 190818 . Charged Particle and Neutral Kaon Production in e+ e- Annihilation at PETRA #implemented#
 191159 X Precise Measurement of Total Cross-Sections for the Process e+ e- ---> Multi-Hadrons in the Center-Of-Mass Energy Range Between 12.0-GeV and 36.4-GeV #measurement of R, superseeded 234905#
-191161 . Measurement of Transverse Momenta in $e^+ e^-$ Annihilation Jets at {PETRA} #implement#
+191161 . Measurement of Transverse Momenta in $e^+ e^-$ Annihilation Jets at {PETRA}
 191231 . Measurement of the Processes $e^+ e^- \to e^+ e^-$ and $e^+ e^- \to \gamma \gamma$ at {PETRA} #data#
 191415 . Inclusive $\gamma$ and $\pi^0$ Production in $e^+ e^-$ Annihilation at 14-{GeV}, 22-{GeV}, and 34-{GeV} Center-of-mass Energy #implemented#
 191416 X Observation of Inclusive $\eta$ Production in $e^+ e^-$ Annihilation at {CM} Energies of 34-{GeV} #spectra in paper, but superseeded by 213948#
@@ -184,6 +185,7 @@
 202783 . Search for New Heavy Quarks in $e^+ e^-$ Collisions Up to 46.78-{GeV} Center-of-mass Energy #implemented#
 202784 . Measurements of Energy Correlations in $e^+ e^- \to$ Hadrons #implemented#
 202785 . Charged $D^*$ Production in $e^+ e^-$ Annihilation #implement#
+202899 . Inclusive D0 and $D^+$ Production in $e^+ e^-$ Annihilation at 29-{GeV} #implemented#
 202924 . A Measurement of Energy-energy Correlations in $e^+ e^- \to$ Hadrons at $\sqrt{s}=29$-{GeV} #implemented#
 203142 X Upper Limits on the Production Rate of the Decuplet Baryons $\Delta$ and $\Sigma^*$ in $e^+ e^-$ Annihilation at 34.4-{GeV} #limit#
 203143 ? Determination of $\alpha_s$ in First and Second Order {QCD} From $e^+ e^-$ Annihilation Into Hadrons #dists, elsewhere?#
@@ -204,6 +206,7 @@
 205119 . A Detailed Study of Strange Particle Production in $e^+ e^-$ Annihilation at High-energy #implement#
 205120 . The Production and Decay of Tau Leptons in $e^+ e^-$ Annihilation at {PETRA} Energies #data#
 205124 X Determination of the Average Lifetime of Bottom Hadrons #lifetime#
+205132 . Charged $D^*$ Production in $e^+ e^-$ Annihilation at 29-{GeV} and a Limit on D0 - Anti-d0 Mixing #implemented#
 205634 X Tagged Two Photon Production of Muon Pairs #not implementable#
 205658 . Measurement of the Total Hadronic Cross-section in Photon-photon Interactions #data#
 205868 . Inclusive $\gamma$ and $\pi^0$ production cross-sections and energy fractions in $e^+e^-$ annihilation at 29-GeV #implementable#
@@ -223,17 +226,18 @@
 213118 X Prompt muon production in $e^+e^-$ annihilations at 29-GeV #not implementable#
 213239 X A Search for Monojet Events Produced by Virtual $\Z^0$ Bosons in $e^+ e^-$ Annihilation at {PETRA} #search#
 213241 . Measurements of Tau Lepton Production and Decay #data#
-213242 . Production of $\phi$ and F (1970) $\to \phi \pi$ in $e^+ e^-$ Annihilation at 29-{GeV} #implemented#
+213242 . Production of $\phi$ and F (1970) $\to \phi \pi$ in $e^+ e^-$ Annihilation at 29-{GeV}
 213402 . Exclusive production of $K^+ K^- \pi^+ \pi^-$ in photon-photon collisions #data#
 213948 . A Study of Photon Production in Hadronic $e^+ e^-$ Annihilation #spectra#
 214133 X Baryon production in $e^+e^-$ annihilation at $\sqrt{s}=29$ GeV: clusters, diquarks, popcorn? #not implementable#
 214359 X A measurement of the η radiative width Γ η→γγ #just width no sigma#
 214360 . Comparison of Three Jet Events With {QCD} Shower Models #data elsewhere?#
-215848 . Hadron Production in $e^+ e^-$ Annihilation at $\sqrt{s}=29$-{GeV} #implemented#
+215848 . Hadron Production in $e^+ e^-$ Annihilation at $\sqrt{s}=29$-{GeV}
 215869 . A Study of Energy-energy Correlations in $e^+ e^-$ Annihilations at $\sqrt{s}=34$.6-{GeV} #implement#
 216796 X Experimental Limit on Monojet Production in $e^+ e^-$ Annihilation #search#
 216798 X A Search for the Supersymmetric Chargino in $e^+ e^-$ Annihilation at {PETRA} #search#
 216799 X A Measurement of the Total Cross-section and a Study of Inclusive Muon Production for the Process $e^+ e^- \to$ Hadrons in the Energy Range Between 39.79-{GeV} and 46.78-{GeV} #data, superseeded 234905#
+216850 . Inclusive Charged Particle Distribution in Nearly Threefold Symmetric Three Jet Events at $e$({CM}) = 29-{GeV} #implemented#
 217416 . Charged $D^*$ meson production in $e^+e^-$ annihilation at $\sqrt{s}=29$ GeV #implementable#
 217503 . A study of $\eta$ formation in photon-photon collisions at PEP #data#
 220003 . Charged Meson Pair Production in $\gamma \gamma$ Interactions #implemented#
@@ -278,10 +282,12 @@
 239032 X SEARCH FOR HIGH MASS NARROW RESONANCES IN VIRTUAL PHOTON PHOTON INTERACTIONS #search#
 242454 . A study of $\eta^\prime$ formation in photon-photon collisions #???#
 244835 . A Measurement of the Muon Pair Production in $e^+ e^-$ Annihilation at 38.3-{GeV} $\le \sqrt{s} \le$ 46.8-{GeV} #data#
+244856 . Observation of $e^+ e^- \to D(s$)+- $D^*(s$)-+ at $\sqrt{s}=4$.14-{GeV} #data#
 245241 X Searches for Supersymmetric Particles With the Cello Detector at {PETRA} #search#
 245571 . Measurement of the Polarization of $\tau$ Leptons Produced in $e^+ e^-$ Annihilation at $\sqrt{s}=29$-{GeV} #implemented#
 245612 X Measurement of the Tau Lepton Lifetime #lifetime#
 245732 X A Search for Hadronic Events With Low Thrust and an Isolated Lepton #search#
+246162 . Production of Strange Baryons in $e^+ e^-$ Annihilations at 29-{GeV} #implemented#
 246181 X Precise Measurement of the Lifetime of the Tau Lepton #lifetime#
 246184 . Multi - Hadronic Events at E(c.m.) = 29-GeV and Predictions of QCD Models from E(c.m.) = 29-GeV to E(c.m.) = 93-GeV #implemented#
 246215 X Search for Leptoquarks and Other New Particles With Lepton - Hadron Signature in $e^+ e^-$ Interactions #search#
@@ -479,7 +485,7 @@
 298078 . Determination of alpha-s from jet multiplicities measured on the Z0 resonance #data#
 298079 X A Precision measurement of the number of neutrino species #cross section scan, but supersseded by 314418#
 298080 . A Test of QCD based on four jet events from Z0 decays #figs 3,4#
-298238 . Measurement of the polarization of $\tau$ leptons from $e^+e^-$ at $\sqrt{s} = 57$ GeV #implemented#
+298238 . Measurement of the polarization of $\tau$ leptons from $e^+e^-$ at $\sqrt{s} = 57$ GeV
 298414 X Measurement of electroweak parameters from Z decays into Fermion pairs #superseeded#
 298642 X The OPAL detector at LEP #detector#
 298682 X Limits on a light Higgs boson in e+ e- collisions at LEP #search#
@@ -768,7 +774,7 @@
 372999 X Search for the minimal Standard Model Higgs boson #search#
 373000 . QCD studies using a cone based jet finding algorithm for $e^{+} e^{-}$ collisions at LEP #data but exact algorithm??#
 373005 . Measurement of alpha-s from energy-energy correlations at the Z0 resonance #implementable#
-373007 X Precise measurement of the left-right cross-section asymmetry in Z boson production by e+ e- collisions #EW, superseeded #
+373007 X Precise measurement of the left-right cross-section asymmetry in Z boson production by e+ e- collisions #EW, superseeded#
 373112 X A Measurement of the $B_s^0$ meson mass #mass#
 373113 X A Precision measurement of the average lifetime of B hadrons #lifetime#
 373114 . Improved measurements of cross-sections and asymmetries at the Z0 resonance #fig 3?#
@@ -1859,5 +1865,5 @@
 1267648 . Update of the ALEPH non-strange spectral functions from hadronic $\tau$ decays #implemented#
 1313438 . Measurement of the electron structure function F$\frac{e}{2}$ at LEP energies #tables#
 1389624 . Study of the $e^+ e^-\to\mu^+ \mu^- \gamma$ reaction at center-of-mass energies between 54 and 64 GeV #sigma and assymmetry ??#
-1492968 . Observation of an excess at 30 GeV in the opposite sign di-muon spectra of ${\rm Z} \to b\overline{ b} + {\rm X}$ events recorded by the ALEPH experiment at LEP #implemented#
+1492968 . Observation of an excess at 30 GeV in the opposite sign di-muon spectra of ${\rm Z} \to b\overline{ b} + {\rm X}$ events recorded by the ALEPH experiment at LEP
 1649622 . A Search for $\eta'_c$ Production in Photon-Photon Fusion at LEP #dists#

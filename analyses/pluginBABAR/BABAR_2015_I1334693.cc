@@ -57,7 +57,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      normalize(_h_q2, 375.4); // normalize to data
+      normalize(_h_q2, 375.4*0.3); // normalize to data
 
     }
 

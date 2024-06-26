@@ -1,0 +1,36 @@
+Name: CLEO_1988_I23509
+Year: 1988
+Summary: Measurement of the $c\bar{c}$ cross section at 10.5 GeV
+Experiment: CLEO
+Collider: CESR
+InspireID: 23509
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 38 (1988) 2679
+RunInfo: e+ e- > hadrons
+Beams: [e+, e-]
+Energies: [10.5]
+Description:
+  'Measurement of $c\bar{c}$ cross section at 10.5 GeV, the ratio to the $\mu^+\mu^-$ cross section is also measured.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1988bzj
+BibTeX: '@article{CLEO:1988bzj,
+    author = "Bowcock, T. J. V. and others",
+    collaboration = "CLEO",
+    title = "{Investigation of the Total Charm Pair Cross-section in Nonresonant $e^+ e^-$ Annihilations at $\sqrt{s}=10$.5-{GeV}}",
+    reportNumber = "CLNS-87-109, CLEO-87-9",
+    doi = "10.1103/PhysRevD.38.2679",
+    journal = "Phys. Rev. D",
+    volume = "38",
+    pages = "2679",
+    year = "1988",
+    note = "[Erratum: Phys.Rev.D 40, 1701 (1989)]"
+}
+'

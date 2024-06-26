@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief R measurement
   class PLUTO_1980_I152291 : public Analysis {
   public:
 
@@ -22,8 +22,10 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_c_hadrons[ix], "/TMP/sigma_hadrons_"+toString(ix+1), refData(1+ix,1,1));
+        book(_c_muons  [ix], "/TMP/sigma_muons_"  +toString(ix+1), refData(1+ix,1,1));
+      }
     }
 
 
@@ -39,38 +41,22 @@ namespace Rivet {
       }
       // mu+mu- + photons
       if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	_c_muons->fill();
+	 ntotal==2+nCount[22]) {
+	for(unsigned int ix=0;ix<2;++ix) _c_muons[ix]->fill(sqrtS());
+      }
       // everything else
-      else
-	_c_hadrons->fill();
+      else {
+	for(unsigned int ix=0;ix<2;++ix) _c_hadrons[ix]->fill(sqrtS());
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/ sumOfWeights() /picobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      for (unsigned int ix=1;ix<3;++ix) {
-        std::ostringstream title;
-        title << "d0" << ix << "_sigma";
-        Estimate1DPtr hadrons;
-        book(hadrons, title.str() + "_hadrons");
-        Estimate1DPtr muons;
-        book(muons, title.str() + "_muons"  );
+      for(unsigned int ix=0;ix<2;++ix) {
         Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(R.val(), R.errPos());
-            hadrons->bin(b.index()).set(sig_h, err_h);
-            muons  ->bin(b.index()).set(sig_m, err_m);
-          }
-        }
+        book(mult, ix+1, 1, 1);
+        divide(_c_hadrons[ix], _c_muons[ix],mult);
       }
     }
 
@@ -79,7 +65,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    Histo1DPtr _c_hadrons[2], _c_muons[2];
     /// @}
 
 

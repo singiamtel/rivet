@@ -22,10 +22,19 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_c_total, "/TMP/total");
-      book(_c_omega, "/TMP/omega");
-      book(_c_rho  , "/TMP/rho"  );
-      book(_c_rhop , "/TMP/rhop" );
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_sigma_total[ix],1+ix,1,1);
+        for (const string& en : _sigma_total[ix].binning().edges<0>()) {
+          double end = std::stod(en)*GeV;
+          if(isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      for(unsigned int ix=0;ix<3;++ix)
+        book(_sigma_res[ix], "/TMP/c_res_"+toString(ix),refData(3,1,1+ix));
+      
       if(inRange(sqrtS()/GeV,1.42,1.48)) {
 	book(_h_x,4,1,1);
 	book(_h_m,4,1,3);
@@ -62,8 +71,10 @@ namespace Rivet {
 	else if(p.pid()==-211) pim=p;
       }
       if(ntotal!=3) vetoEvent;
-      if(nCount[-211]==1&&nCount[211]==1&&nCount[111]==1)
-	_c_total->fill();
+      if(nCount[-211]==1&&nCount[211]==1&&nCount[111]==1) {
+	_sigma_total[0]->fill(_ecms[0]);
+	_sigma_total[1]->fill(_ecms[1]);
+      }
       else
 	vetoEvent;
       if(_h_x) {
@@ -101,11 +112,11 @@ namespace Rivet {
 	if(!matched) continue;
 	if(matched) {
 	  if(p.pid()==223)
-	    _c_omega->fill();
+	    _sigma_res[2]->fill(sqrtS());
 	  else if(p.pid()==213 || p.pid()==113)
-	    _c_rho->fill();
+	    _sigma_res[0]->fill(sqrtS());
 	  else
-	    _c_rhop->fill();
+	    _sigma_res[1]->fill(sqrtS());
 	  break;
 	}
       }
@@ -119,36 +130,13 @@ namespace Rivet {
         normalize(_h_m,1.,false);
       }
       double fact = crossSection()/nanobarn/sumOfWeights();
-      for (unsigned int ix=1;ix<4;++ix) {
-        unsigned int ymax = ix!=3 ? 2 : 4;
-        for (unsigned int iy=1;iy<ymax;++iy) {
-          double sigma(0.),error(0.);
-          if(ix<3) {
-            sigma = _c_total->val()*fact;
-            error = _c_total->err()*fact;
-          }
-          else if(ix==3) {
-            if(iy==1) {
-              sigma = _c_rho->val()*fact;
-              error = _c_rho->err()*fact;
-            }
-            else if(iy==2) {
-              sigma = _c_rhop->val()*fact;
-              error = _c_rhop->err()*fact;
-            }
-            else {
-              sigma = _c_omega->val()*fact;
-              error = _c_omega->err()*fact;
-            }
-          }
-          Estimate1DPtr  mult;
-          book(mult, ix, 1, iy);
-          for (auto& b : mult->bins()) {
-            if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-              b.set(sigma, error);
-            }
-          }
-        }
+      for(unsigned int ix=0;ix<2;++ix)
+        scale(_sigma_total[ix],fact);
+      for(unsigned int ix=0;ix<3;++ix) {
+        scale(_sigma_res[ix],fact);
+        Estimate1DPtr tmp;
+        book(tmp,3,1,1+ix);
+        barchart(_sigma_res[ix],tmp);
       }
     }
 
@@ -157,7 +145,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_total,_c_omega,_c_rho,_c_rhop;
+    BinnedHistoPtr<string> _sigma_total[2];
+    string _ecms[2];
+    Histo1DPtr _sigma_res[3];
     Histo1DPtr _h_x,_h_m;
     /// @}
 

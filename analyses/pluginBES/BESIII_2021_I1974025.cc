@@ -239,9 +239,9 @@ namespace Rivet {
       double aLambda = 0.754;
       // calculate alpha0
       pair<double,pair<double,double> > alpha0 = calcAlpha0(_h_F[5]);
-      Estimate1DPtr _h_alpha0;
+      Estimate0DPtr _h_alpha0;
       book(_h_alpha0,3,1,1);
-      _h_alpha0->bin(1).set(alpha0.first, make_pair(alpha0.second.first,alpha0.second.second));
+      _h_alpha0->set(alpha0.first, make_pair(-alpha0.second.first,alpha0.second.second));
       double s2 = -1. + sqr(alpha0.first);
       double s3 = 3 + alpha0.first;
       double s1 = sqr(s3);
@@ -267,13 +267,10 @@ namespace Rivet {
 	  (pow(1 - pow(alpha0.first,2),1.5)*pow(c_T4_p.first,3)*pow(-((disc + 2*s1*s5*s6)/   (s2*s6)),1.5)*(-9*s2*s4 + 4*s1*s5*s6));
         ds_P /= sqrt(1.-sqr(sDelta));
         ds_M /= sqrt(1.-sqr(sDelta));
-        Estimate1DPtr _h_sin;
+        Estimate0DPtr _h_sin;
         book(_h_sin,3,1,2);
-        _h_sin->bin(1).set(Delta/M_PI*180., make_pair( -ds_P/M_PI*180., -ds_M/M_PI*180. ));
+        _h_sin->set(Delta/M_PI*180., make_pair(  ds_M/M_PI*180., -ds_P/M_PI*180. ));
       }
-      // scale to number of observed events in experiment
-      // for(unsigned int ix=0;ix<5;++ix)
-      // 	scale(_h_F[ix], 262.);
     }
 
     /// @}

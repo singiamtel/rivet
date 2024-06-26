@@ -142,17 +142,14 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=3;ix<19;++ix) {
-        if(ix==5 || ix==10) continue;
-        double sigma = _nMeson[ix]->val();
-        double error = _nMeson[ix]->err();
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr  mult;
+      scale(_nMeson, crossSection()/ sumOfWeights() /picobarn);
+      for (unsigned int ix=3; ix<19; ++ix) {
+        if (ix==5 || ix==10) continue;
+        BinnedEstimatePtr<string>  mult;
         book(mult, 1, 1, ix);
         for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma,  make_pair(error,error));
+          if (isCompatibleWithSqrtS(std::stod(b.xEdge()))) {
+            b.set(_nMeson[ix]->val(), _nMeson[ix]->err());
           }
         }
       }

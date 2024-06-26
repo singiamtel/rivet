@@ -7,7 +7,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> 4 pions
   class CMD2_1999_I483994 : public Analysis {
   public:
 
@@ -23,9 +23,9 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_ncharged, "TMP/charged");
-      book(_nneutral, "TMP/neutral");
-      book(_nomega, "TMP/omega");
+      book(_ncharged, 1, 1, 1);
+      book(_nneutral, 2, 1, 1);
+      book(_nomega  , 3, 1, 1);
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -51,9 +51,9 @@ namespace Rivet {
       }
       if(ntotal==4) {
 	if( nCount[211] == 2 && nCount[-211] == 2 )
-	  _ncharged->fill();
+	  _ncharged->fill(round(sqrtS()/MeV));
 	else if( nCount[211] == 1 && nCount[-211] == 1 && nCount[111] == 2)
-	  _nneutral->fill();
+	  _nneutral->fill(round(sqrtS()/MeV));
       }
 
 
@@ -81,7 +81,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _nomega->fill();
+	    _nomega->fill(round(sqrtS()/MeV));
 	}
       }
     }
@@ -89,30 +89,10 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<4;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _ncharged->val();
-          error = _ncharged->err();
-        }
-        else if(ix==2) {
-            sigma = _nneutral->val();
-          error = _nneutral->err();
-              }
-        else if(ix==3) {
-          sigma = _nomega->val();
-          error = _nomega->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale(_ncharged,fact);
+      scale(_nneutral,fact);
+      scale(_nomega  ,fact);
     }
 
     /// @}
@@ -120,7 +100,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _ncharged,_nneutral,_nomega;
+    BinnedHistoPtr<int> _ncharged,_nneutral,_nomega;
     /// @}
 
 

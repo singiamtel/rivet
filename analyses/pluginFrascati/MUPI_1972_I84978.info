@@ -12,11 +12,13 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: yes
 Beams: [e-, e+]
+Energies: [1.2, 1.5, 1.9, 2.1]
+Options:
+ - ENERGY=*
 Description:
   'Measurement of $R$ and the hadronic cross seection in $e^+e^-$ collisions by
    the Mu-Pi group for energies between 1.2 and 2.1 GeV.
-   The muonic cross section is also outputted to the yoda file
-   so that ratio $R$ can be recalcuated if runs are combined.'
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ceradini:1973pr
 BibTeX: '@article{Ceradini:1973pr,

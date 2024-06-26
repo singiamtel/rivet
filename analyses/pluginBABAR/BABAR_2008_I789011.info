@@ -1,0 +1,38 @@
+Name: BABAR_2008_I789011
+Year: 2008
+Summary: Angular distributions in $e^+e^-\to\rho^+\rho^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 789011
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 78 (2008) 071103
+RunInfo: e+ e- > hadrons
+Beams: [e+, e-]
+Energies: [10.58]
+Description:
+  'Measurement of helicty angle distributions in $e^+e^-\to\rho^+\rho^-$. The corrected data were read from fgiure 4 in the paper'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2008fsh
+BibTeX: '@article{BaBar:2008fsh,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of $e^+ e^- \to \rho^{+} \rho^{-}$ near $\sqrt{s}$ = 10.58-GeV}",
+    eprint = "0806.3893",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "SLAC-PUB-13230, BABAR-PUB-08-018",
+    doi = "10.1103/PhysRevD.78.071103",
+    journal = "Phys. Rev. D",
+    volume = "78",
+    pages = "071103",
+    year = "2008"
+}
+'

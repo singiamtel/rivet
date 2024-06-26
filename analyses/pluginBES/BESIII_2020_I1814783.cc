@@ -22,11 +22,23 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_n_plus ,"/TMP/NPLUS" );
-      book(_n_minus,"/TMP/NMINUS");
-      if(isCompatibleWithSqrtS(2.396*GeV, 1E-2)) {
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_n_plus [ix],1+ix,1,1);
+        book(_n_minus[ix],1+ix,1,2);
+        for (const string& en : _n_plus[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if(isCompatibleWithSqrtS(2.396*GeV)) {
         book(_h_cTheta_A,3,1,1);
         book(_h_cTheta_B,3,1,2);
+      }
+      if (_ecms[0].empty() && _ecms[1].empty()) {
+        MSG_ERROR("Beam energy incompatible with analysis.");
       }
     }
 
@@ -95,7 +107,9 @@ namespace Rivet {
           }
           if(matched) {
             if(abs(p1.pid())==3222) {
-              _n_plus->fill();
+              for(unsigned int ix=0;ix<2;++ix) {
+                if(!_ecms[ix].empty()) _n_plus[ix]->fill(_ecms[ix]);
+              }
               if(_h_cTheta_A) {
                 double cTheta = p1.pid()>0 ?
                   cos(p1.momentum().polarAngle()) :
@@ -104,14 +118,16 @@ namespace Rivet {
                 _h_cTheta_B->fill(cTheta);
               }
             }
-            else if(abs(p1.pid())==3112)
-              _n_minus->fill();
+            else if(abs(p1.pid())==3112) {
+              for(unsigned int ix=0;ix<2;++ix) {
+                if(!_ecms[ix].empty()) _n_minus[ix]->fill(_ecms[ix]);
+              }
+            }
             break;
           }
         }
         if(matched) break;
       }
-
     }
 
 
@@ -122,25 +138,9 @@ namespace Rivet {
         normalize(_h_cTheta_B);
       }
       double fact = crossSection()/ sumOfWeights() /picobarn;
-      for(unsigned int iy=1;iy<3;++iy) {
-        double sigma,error;
-        if(iy==1) {
-          sigma = _n_plus->val()*fact;
-          error = _n_plus->err()*fact;
-        }
-        else {
-          sigma = _n_minus->val()*fact;
-          error = _n_minus->err()*fact;
-        }
-        for(unsigned int ix=1;ix<3;++ix) {
-          Estimate1DPtr  mult;
-          book(mult, ix, 1, iy);
-          for (auto& b : mult->bins()) {
-            if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-              b.set(sigma, error);
-            }
-          }
-        }
+      for(unsigned int iy=0;iy<2;++iy) {
+        scale(_n_plus [iy],fact);
+        scale(_n_minus[iy],fact);
       }
     }
     /// @}
@@ -148,8 +148,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _n_plus,_n_minus;
+    BinnedHistoPtr<string> _n_plus[2],_n_minus[2];
     Histo1DPtr _h_cTheta_A,_h_cTheta_B;
+    string _ecms[2];
     /// @}
 
   };

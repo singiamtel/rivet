@@ -12,7 +12,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief phi D* and B* polarization
   class OPAL_1997_I440103 : public Analysis {
   public:
 
@@ -312,19 +312,19 @@ namespace Rivet {
       normalize(_h_B,1.,false);
       normalize(_h_B2);
       pair<double,double> rho = calcRho(_h_B2,1);
-      Estimate1DPtr h_rhoB;
+      BinnedEstimatePtr<string> h_rhoB;
       book(h_rhoB,4,1,1);
       h_rhoB->bin(1).set(rho.first, rho.second);
       // D*
       normalize(_h_DS_ctheta );
       normalize(_h_DS_ctheta2);
       rho = calcRho(_h_DS_ctheta2,1);
-      Estimate1DPtr h_rhoD;
+      BinnedEstimatePtr<string> h_rhoD;
       book(h_rhoD,3,1,1);
       h_rhoD->bin(1).set(rho.first, rho.second);
       normalize(_h_DS_alpha );
       normalize(_h_DS_alpha2);
-      Estimate1DPtr h_reRho_D;
+      BinnedEstimatePtr<string> h_reRho_D;
       book(h_reRho_D,3,1,2);
       rho = calcRho(_h_DS_alpha2,2);
       h_reRho_D->bin(1).set(rho.first, rho.second);
@@ -334,7 +334,7 @@ namespace Rivet {
       normalize(_h_phi_ctheta2);
       normalize(_h_phi_ctheta3);
       normalize(_h_phi_ctheta4);
-      Estimate1DPtr hrho_phi;
+      BinnedEstimatePtr<string> hrho_phi;
       book(hrho_phi,1,1,1);
       rho = calcRho(_h_phi_ctheta2,0);
       hrho_phi->bin(1).set(rho.first, rho.second);
@@ -347,7 +347,7 @@ namespace Rivet {
       normalize(_h_phi_alpha2);
       normalize(_h_phi_alpha3);
       normalize(_h_phi_alpha4);
-      Estimate1DPtr  hreRho_phi;
+      BinnedEstimatePtr<string>  hreRho_phi;
       book(hreRho_phi,1,1,2);
       rho = calcRho(_h_phi_alpha2,2);
       hreRho_phi->bin(1).set(rho.first, rho.second);
@@ -360,7 +360,7 @@ namespace Rivet {
       normalize(_h_phi_beta2);
       normalize(_h_phi_beta3);
       normalize(_h_phi_beta4);
-      Estimate1DPtr himRho_phi;
+      BinnedEstimatePtr<string> himRho_phi;
       book(himRho_phi,1,1,3);
       rho = calcRho(_h_phi_beta2,2);
       himRho_phi->bin(1).set(rho.first, rho.second);
@@ -372,7 +372,7 @@ namespace Rivet {
       Estimate0D temp  = ((*_c_phi_cos_plus-*_c_phi_cos_neg)/(*_c_phi_cos_plus+*_c_phi_cos_neg));
       Estimate0D temp2 = ((*_c_phi_cos_plus2-*_c_phi_cos_neg2)/(*_c_phi_cos_plus2+*_c_phi_cos_neg2));
       Estimate0D temp3 = ((*_c_phi_cos_plus3-*_c_phi_cos_neg3)/(*_c_phi_cos_plus3+*_c_phi_cos_neg3));
-      Estimate1DPtr hreDiff_phi;
+      BinnedEstimatePtr<string> hreDiff_phi;
       book(hreDiff_phi,1,1,4);
       hreDiff_phi->bin(1) = temp;
       hreDiff_phi->bin(2) = temp2;
@@ -381,7 +381,7 @@ namespace Rivet {
       temp  = ((*_c_phi_sin_plus-*_c_phi_sin_neg)/(*_c_phi_sin_plus+*_c_phi_sin_neg));
       temp2 = ((*_c_phi_sin_plus2-*_c_phi_sin_neg2)/(*_c_phi_sin_plus2+*_c_phi_sin_neg2));
       temp3 = ((*_c_phi_sin_plus3-*_c_phi_sin_neg3)/(*_c_phi_sin_plus3+*_c_phi_sin_neg3));
-      Estimate1DPtr himDiff_phi;
+      BinnedEstimatePtr<string> himDiff_phi;
       book(himDiff_phi,1,1,5);
       himDiff_phi->bin(1) = temp;
       himDiff_phi->bin(2) = temp2;

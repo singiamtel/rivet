@@ -1,0 +1,33 @@
+Name: CMD3_2023_I2634277
+Year: 2023
+Summary: Cross section for $e^+e^-\to\pi^+\pi^-$ between threshold and 1.2 GeV
+Experiment: CMD3
+Collider: VEPP-2M
+InspireID: 2634277
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2302.08834 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Description:
+  'Cross section for $e^+e^-\to\pi^+\pi^-$ between threshold and 1.2 GeV. data on $|F_\pi|^2$ extracted from tables in the paper'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CMD-3:2023alj
+BibTeX: '@article{CMD-3:2023alj,
+    author = "Ignatov, F. V. and others",
+    collaboration = "CMD-3",
+    title = "{Measurement of the $e^+e^-\to\pi^+\pi^-$ cross section from threshold to 1.2 GeV with the CMD-3 detector}",
+    eprint = "2302.08834",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "2",
+    year = "2023"
+}
+'

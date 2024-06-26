@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > n nbar
   class SND_2014_I1321689 : public Analysis {
   public:
 
@@ -24,7 +24,8 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_nneutron, "TMP/neutron");
+      for(unsigned int ix=0;ix<2;++ix)
+        book(_nneutron[ix], 1+ix,1,1);
 
     }
 
@@ -32,30 +33,19 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const FinalState& fs = apply<FinalState>(event, "FS");
-      if(fs.particles().size()!=2) vetoEvent;
+      if (fs.particles().size() != 2) vetoEvent;
       for (const Particle& p : fs.particles()) {
-	if(abs(p.pid())!=PID::NEUTRON) vetoEvent;
+        if (p.abspid() != PID::NEUTRON) vetoEvent;
       }
-      _nneutron->fill();
+      for(unsigned int ix=0;ix<2;++ix) _nneutron[ix]->fill(round(sqrtS()/MeV));
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      double sigma = _nneutron->val();
-      double error = _nneutron->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      for (unsigned int ix=1;ix<3;++ix) {
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for(unsigned int ix=0;ix<2;++ix)
+        scale(_nneutron[ix], crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -63,7 +53,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nneutron;
+    BinnedHistoPtr<int> _nneutron[2];
     /// @}
 
 

@@ -12,8 +12,14 @@ References:
  - arXiv:2012.11079
 RunInfo: e+ e- to hadrons
 Beams: [e+, e-]
+Energies: [4.009, 4.160, 4.180, 4.190, 4.200, 4.210, 4.220,
+           4.230, 4.237, 4.246, 4.260, 4.270, 4.280, 4.290,
+           4.315, 4.340, 4.360, 4.380, 4.400, 4.420, 4.440, 4.470, 4.600]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to2p2\bar{p}$ for $E_{\text{CMS}}$ between 4 and 4.6 GeV by the BESIII collaboration.'
+  'Measurement of the cross section for $e^+e^-\to2p2\bar{p}$ for $E_{\text{CMS}}$ between 4 and 4.6 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

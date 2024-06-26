@@ -12,8 +12,24 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams:  [e+,e-]
+Energies:  [1.51, 1.53, 1.55, 1.57, 1.59, 1.61, 1.63, 1.65, 1.67, 1.69,
+            1.71, 1.73, 1.75, 1.77, 1.79, 1.81, 1.83, 1.85, 1.87, 1.89,
+            1.91, 1.93, 1.95, 1.97, 1.99, 2.01, 2.03, 2.05, 2.07, 2.09,
+            2.11, 2.13, 2.15, 2.17, 2.19, 2.21, 2.23, 2.25, 2.27, 2.29,
+            2.31, 2.33, 2.35, 2.37, 2.39, 2.41, 2.43, 2.45, 2.47, 2.49,
+            2.51, 2.53, 2.55, 2.57, 2.59, 2.61, 2.63, 2.65, 2.67, 2.69,
+            2.71, 2.73, 2.75, 2.77, 2.79, 2.81, 2.83, 2.85, 2.87, 2.89,
+            2.91, 2.93, 2.95, 2.97, 2.99, 3.01, 3.03, 3.05, 3.07, 3.09,
+            3.11, 3.13, 3.15, 3.17, 3.19, 3.21, 3.23, 3.25, 3.27, 3.29,
+            3.31, 3.33, 3.35, 3.37, 3.39, 3.41, 3.43, 3.45, 3.47, 3.49,
+            3.61, 3.63, 3.65, 3.67, 3.69, 3.71, 3.73, 3.75, 3.77, 3.79,
+            3.81, 3.83, 3.85, 3.87, 3.89, 3.51, 3.53, 3.55, 3.57, 3.59,
+            3.91, 3.93, 3.95, 3.97, 3.99]
+Options:
+ - ENERGY=*
 Description:
-   'Cross section for $e^+e^-\to K_S^0K^\pm\pi^\mp$ with $\pi^0$, $\eta$ between threshold and 4 GeV using radiative events.'
+   'Cross section for $e^+e^-\to K_S^0K^\pm\pi^\mp$ with $\pi^0$, $\eta$ between threshold and 4 GeV using radiative events.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords:
 BibKey: TheBABAR:2017aph
 BibTeX: '@article{TheBABAR:2017aph,

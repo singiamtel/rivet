@@ -4,6 +4,7 @@
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/NonHadronicFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -51,8 +52,8 @@ namespace Rivet {
 
 
     double rndGauss(double sigma, double mean) {
-      double r = sqrt(-2.0*log(rand()/static_cast<double>(RAND_MAX)));
-      double phi = rand()/static_cast<double>(RAND_MAX)*2.0*pi;
+      double r = sqrt(-2.0*log(rand01()));
+      double phi = rand01()*2.0*pi;
       return mean+sigma*r*sin(phi);
     }
 

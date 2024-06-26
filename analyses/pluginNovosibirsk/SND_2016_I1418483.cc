@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> pi0 gamma
   class SND_2016_I1418483 : public Analysis {
   public:
 
@@ -20,7 +20,27 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       declare(FinalState(), "FS");
-      book(_numPi0Gamma, "TMP/Pi0Gamma");
+      book(_numPi0Gamma, 1, 1, 5);
+      for (const string& en : _numPi0Gamma.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/MeV, emin, emax)) {
+            _ecms = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*MeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms = en;
+            break;
+          }
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -36,24 +56,14 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==2 && nCount[22]==1 && nCount[111]==1)
-	_numPi0Gamma->fill();
+	_numPi0Gamma->fill(_ecms);
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _numPi0Gamma->val();
-      double error = _numPi0Gamma->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 5);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_numPi0Gamma, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -61,7 +71,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numPi0Gamma;
+    BinnedHistoPtr<string> _numPi0Gamma;
+    string _ecms;
     /// @}
 
 

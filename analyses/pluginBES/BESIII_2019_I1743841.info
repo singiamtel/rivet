@@ -12,9 +12,13 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
-Luminosity_fb: 
+Energies: [2.1000, 2.1250, 2.1500, 2.1750, 2.2000, 2.2324, 2.3094, 2.3864, 2.3960, 2.5000, 2.6444, 2.6464, 2.7000, 2.8000, 2.9000, 2.9500, 2.9810, 3.0000, 3.0200, 3.0800]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for  $e^+e^- \to$  $K^+K^-K^+K^-$ and $K^+K^-\phi$ for center of mass energies between 2.10 and 3.08 GeV by the BESIII experiment.'
+  'Measurement of the cross section for  $e^+e^- \to$  $K^+K^-K^+K^-$ and
+   $K^+K^-\phi$ for center of mass energies between 2.10 and 3.08 GeV by the BESIII experiment.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ablikim:2019tpp
 BibTeX: '@article{Ablikim:2019tpp,

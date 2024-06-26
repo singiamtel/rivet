@@ -4,8 +4,7 @@ XLabel=$\sqrt{s}$ GeV
 YLabel=$\langle N_{\mathrm{charged}}\rangle$
 LogY=0
 ConnectGaps=1
-XMax=10.2
-XCustomMajorTicks=9.4624	$\Upsilon(1S)$     10.01480	   $\Upsilon(2S)$
+XCustomMajorTicks=1 $7.35-7.49$, 2 $8.629-9.142$ 3 $9.15-9.41$ 4 $\Upsilon(1S)$(off) 5 $\Upsilon(2S)$(off) 6 $\Upsilon(1S)$(on) 7 $\Upsilon(2S)$(on)
 END PLOT
 BEGIN PLOT /LENA_1981_I164397/d04
 XLabel=$T^\prime$

@@ -4,6 +4,4 @@ XLabel=$\sqrt{s}$/GeV
 YLabel=$\sigma(e^+e^-\to \mathrm{hadrons})/nb$
 LogY=0
 ConnectGaps=1
-XMin=9
-XMax=10
 END PLOT

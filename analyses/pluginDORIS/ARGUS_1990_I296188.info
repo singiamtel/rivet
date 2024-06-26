@@ -1,0 +1,35 @@
+Name: ARGUS_1990_I296188
+Year: 1990
+Summary: Angular distribution of $B$ mesons in $e^+e^-\to\Upsilon(4S)\to B\bar{B}$
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 296188
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.C 48 (1990) 543-552
+RunInfo: e+ e- -> Upsilon(4S)
+Beams: [e+, e-]
+Energies: [10.58]
+Description:
+  'Angular distribution of $B$ mesons in $e^+e^-\to\Upsilon(4S)\to B\bar{B}$. The background subtracted data was read from figure 2 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1990jet
+BibTeX: '@article{ARGUS:1990jet,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Exclusive Hadronic Decays of $B$ Mesons}",
+    reportNumber = "DESY-90-046",
+    doi = "10.1007/BF01614687",
+    journal = "Z. Phys. C",
+    volume = "48",
+    pages = "543--552",
+    year = "1990"
+}
+'

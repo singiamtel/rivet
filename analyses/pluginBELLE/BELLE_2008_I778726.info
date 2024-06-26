@@ -1,0 +1,35 @@
+Name: BELLE_2008_I778726
+Year: 2008
+Summary: $B^0\to p\bar{p}K^{*0}$ and  $B^+\to p\bar{p}K^{*+}$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 778726
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 100 (2008) 251801
+RunInfo: Any process producing B0 and B+ mesons, originally Upsilon(4S) decays
+Description:
+  'Kinematic distributions in  $B^0\to p\bar{p}K^{*0}$ and  $B^+\to p\bar{p}K^{*+}$ decays. The branchingf ratio vs $p\bar{p}$ was taken from Table I in the paper, while the uncorrected kaon helicity angle and corrected proton angle were read from figures in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2008zkc
+BibTeX: '@article{Belle:2008zkc,
+    author = "Chen, J. H. and others",
+    collaboration = "Belle",
+    title = "{Observation of B0 ---\ensuremath{>} p anti-p K*0 with a large K*0 polarization}",
+    eprint = "0802.0336",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BELLE-PREPRINT-2008-5, KEK-PREPRINT-2007-77",
+    doi = "10.1103/PhysRevLett.100.251801",
+    journal = "Phys. Rev. Lett.",
+    volume = "100",
+    pages = "251801",
+    year = "2008"
+}'

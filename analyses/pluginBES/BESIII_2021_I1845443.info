@@ -4,7 +4,7 @@ Summary: Cross section for $e^+e^-\to p \bar{p} \eta$ and $p \bar{p} \omega$ at 
 Experiment: BESIII
 Collider: BEPC
 InspireID: 1845443
-Status: VALIDATED
+Status: VALIDATED NOHEPDATA
 Reentrant: true
 Authors:
  - Peter Richardson <peter.richardson@durham.ac.uk>
@@ -12,9 +12,13 @@ References:
  - Phys.Rev.D 104 (2021) 9, 092008
 RunInfo: e+e- to hadrons
 Beams: [e+, e-]
+Energies: [3.7730, 3.8695, 4.0076, 4.1784, 4.1888, 4.1989, 4.2092, 4.2187, 4.2263, 4.2357, 4.2438, 4.2580, 4.2668, 4.2777, 4.3583, 4.4156, 4.5995]
+Options:
+ - ENERGY=*
 Description:
   'Cross section for  $e^+e^-\to p \bar{p} \eta$ and $p \bar{p} \omega$ at energies between 3.773 and 4.600 GeV
-   measured by the BESIII collaboration.'
+   measured by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Validated using Herwig 7 events'
 #ReleaseTests:

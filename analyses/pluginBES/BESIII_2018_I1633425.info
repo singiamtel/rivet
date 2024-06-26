@@ -11,8 +11,12 @@ References:
  - Phys.Rev. D97 (2018) no.5, 052001
 RunInfo: e+ e- to hadrons
 Beams: [e+, e-]
+Energies: [4.226, 4.258, 4.358, 4.416, 4.600]
+Options:
+ - ENERGY=*
 Description:
-  'Cross section for  $e^+e^-\to\pi^+\pi^-h_c$ for energies between 3.89 and 4.6 GeV measured by the BESIII collaboration.'
+  'Cross section for  $e^+e^-\to\pi^+\pi^-h_c$ for energies between 3.89 and 4.6 GeV measured by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   ''
 #ReleaseTests:

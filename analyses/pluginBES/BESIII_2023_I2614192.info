@@ -1,0 +1,37 @@
+Name: BESIII_2023_I2614192
+Year: 2023
+Summary: $e^+e^-\to n \bar{n}$ between 2 and 2.95 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2614192
+Status: VALIDATED NOHEPDATA SINGLEWEIGHT
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 130 (2023) 15, 151905
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Description:
+  'Measurement of the electric and magnetic form factors for  $e^+e^-\to n \bar{n}$ between 2 and 2.95 GeV.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2022rrg
+BibTeX: '@article{BESIII:2022rrg,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurements of the Electric and Magnetic Form Factors of the Neutron for Timelike Momentum Transfer}",
+    eprint = "2212.07071",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevLett.130.151905",
+    journal = "Phys. Rev. Lett.",
+    volume = "130",
+    number = "15",
+    pages = "151905",
+    year = "2023"
+}
+'

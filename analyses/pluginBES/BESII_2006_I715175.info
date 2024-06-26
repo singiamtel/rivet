@@ -1,0 +1,36 @@
+Name: BESII_2006_I715175
+Year: 2006
+Summary: Angular distributions in $J/\psi\to\gamma\omega\omega$ decays
+Experiment: BESII
+Collider: BEPC
+InspireID: 715175
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 73 (2006) 112007
+NeedCrossSection: no
+Beams: [e-, e+]
+Energies: [3.1]
+Description:
+  'Measurement angular distributions in $J/\psi\to\gamma\omega\omega$ decays.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2006nqh
+BibTeX: '@article{BES:2006nqh,
+    author = "Ablikim, M. and others",
+    collaboration = "BES",
+    title = "{Pseudoscalar production at omega omega threshold in J/psi ---\ensuremath{>} gamma omega omega}",
+    eprint = "hep-ex/0604045",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevD.73.112007",
+    journal = "Phys. Rev. D",
+    volume = "73",
+    pages = "112007",
+    year = "2006"
+}
+'

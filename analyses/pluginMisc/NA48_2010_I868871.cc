@@ -31,7 +31,7 @@ namespace Rivet {
         const string name = "ctheta_Sigma_"+std::to_string(b.index()-1);
         book(b, name, 20, -1.0, 1.0);
       }
-      _nSigma=0.;
+      book(_nSigma,"TMP/nSigma");
     }
 
 
@@ -145,7 +145,7 @@ namespace Rivet {
           Vector3 axis2 = pp.p3().unit();
           double cTheta2 = pp2.p3().unit().dot(axis2);
           _h_ctheta_Sigma->fill(cTheta,cTheta2);
-          _nSigma += 1.;
+          _nSigma->fill();
         }
       }
     }
@@ -186,22 +186,23 @@ namespace Rivet {
     void finalize() {
       // Xi0 -> Lambda0 pi0
       normalize(_h_ctheta_pi0);
-      Estimate1DPtr _h_alpha_pi0;
+      Estimate0DPtr _h_alpha_pi0;
       book(_h_alpha_pi0,1,1,1);
       pair<double,double> alpha = calcAlpha(_h_ctheta_pi0);
-      _h_alpha_pi0->bin(1).set(alpha.first, alpha.second);
+      _h_alpha_pi0->set(alpha.first, alpha.second);
       // Xi0 -> Lambda gamma (N.B. sign due defns)
       normalize(_h_ctheta_gamma);
-      Estimate1DPtr _h_alpha_gamma;
-      book(_h_alpha_gamma,2,1,1);
+      Estimate0DPtr _h_alpha_gamma;
+      book(_h_alpha_gamma,1,1,2);
       alpha = calcAlpha(_h_ctheta_gamma);
-      _h_alpha_gamma->bin(1).set(-alpha.first, alpha.second);
+      _h_alpha_gamma->set(-alpha.first, alpha.second);
       // Xi0 -> Sigma gamma
-      scale(_h_ctheta_Sigma, 1./_nSigma);
-      Estimate1DPtr _h_alpha_Sigma;
-      book(_h_alpha_Sigma,3,1,1);
+      scale(_h_ctheta_Sigma, 1./ *_nSigma);
+      divByGroupWidth(_h_ctheta_Sigma);
+      Estimate0DPtr _h_alpha_Sigma;
+      book(_h_alpha_Sigma,1,1,3);
       alpha = calcAlpha(_h_ctheta_Sigma);
-      _h_alpha_Sigma->bin(1).set(alpha.first, alpha.second);
+      _h_alpha_Sigma->set(alpha.first, alpha.second);
     }
 
     /// @}
@@ -211,7 +212,7 @@ namespace Rivet {
     /// @{
     Histo1DPtr _h_ctheta_pi0,_h_ctheta_gamma;
     Histo1DGroupPtr _h_ctheta_Sigma;
-    double _nSigma;
+    CounterPtr  _nSigma;
     /// @}
 
   };

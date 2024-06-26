@@ -1,4 +1,4 @@
-// -*- C++ -*-
+#// -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief Charm cross sections 3.92 and 4.26 GeV
   class CLEOC_2008_I777917 : public Analysis {
   public:
 
@@ -23,21 +23,16 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
-      book(_c_D0D0, "/TMP/sigma_D0D0");
-      book(_c_DpDm, "/TMP/sigma_DpDm");
-      book(_c_DsDs, "/TMP/sigma_DsDs");
-      book(_c_D0D0S, "/TMP/sigma_D0D0S");
-      book(_c_DpDmS, "/TMP/sigma_DpDmS");
-      book(_c_DsDsS, "/TMP/sigma_DsDsS");
-      book(_c_D0SD0S, "/TMP/sigma_D0SD0S");
-      book(_c_DpSDmS, "/TMP/sigma_DpSDmS");
-      book(_c_DsSDsS, "/TMP/sigma_DsSDsS");
-      book(_c_DD, "/TMP/sigma_DD");
-      book(_c_DDX, "/TMP/sigma_DDX");
-      book(_c_DSDpi, "/TMP/sigma_DSDpi");
-      book(_c_DSDSpi, "/TMP/sigma_DSDSpi");
+      for(unsigned int ix=0;ix<3;++ix)
+        for(unsigned int iy=0;iy<3;++iy)
+          book(_sigma_DD[ix][iy],1+ix,1,1+iy);
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_sigma_DDpi[ix],4,1,1+ix);
+        book(_sigma_DDX [ix],5,1,1+ix);
+      }
+      book(_sigma_R[0],"TMP/hadron",refData<YODA::BinnedEstimate<int>>(6,1,1));
+      book(_sigma_R[1],"TMP/muon",refData<YODA::BinnedEstimate<int>>(6,1,1));
+      book(_sigma_cc,6,1,1);
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -64,11 +59,12 @@ namespace Rivet {
       }
       // mu+mu- + photons
       if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	_c_muons->fill();
-      // everything else
+	 ntotal==2+nCount[22]) {
+	_sigma_R[1]->fill(round(sqrtS()/MeV));
+        return;
+      }
       else
-	_c_hadrons->fill();
+        _sigma_R[0]  ->fill(round(sqrtS()/MeV));
       // identified final state with D mesons
       const FinalState& ufs = apply<UnstableParticles>(event, "UFS");
       for(unsigned int ix=0;ix<ufs.particles().size();++ix) {
@@ -110,8 +106,10 @@ namespace Rivet {
 	    continue;
 	  if(!p2.parents().empty() && p2.parents()[0].pid()==p1.pid())
 	    continue;
-	  if((id1==411 || id1==421 || id1==431) && (id2==411 || id2==421 || id2==431 ))
-	    _c_DDX->fill();
+	  if((id1==411 || id1==421 || id1==431) && (id2==411 || id2==421 || id2==431 )) {
+	    _sigma_DDX[1]->fill(round(sqrtS()/MeV));
+            _sigma_cc->fill(round(sqrtS()/MeV));
+          }
 	  map<long,int> nRes2 = nRes;
 	  int ncount2 = ncount;
 	  findChildren(p2,nRes2,ncount2);
@@ -125,36 +123,36 @@ namespace Rivet {
 	    }
 	    if(matched) {
 	      if(id1==411 && id2==411) {
-		_c_DpDm->fill();
-		_c_DD  ->fill();
+		_sigma_DD[1][0]->fill(round(sqrtS()/MeV));
+		_sigma_DDX[0]  ->fill(round(sqrtS()/MeV));
 	      }
 	      else if(id1==421&& id2==421) {
-		_c_D0D0->fill();
-		_c_DD  ->fill();
+		_sigma_DD[0][0]->fill(round(sqrtS()/MeV));
+		_sigma_DDX[0]  ->fill(round(sqrtS()/MeV));
 	      }
 	      else if(id1==431&& id2==431) {
-		_c_DsDs->fill();
+		_sigma_DD[2][0]->fill(round(sqrtS()/MeV));
 	      }
 	      else if(id1==413 && id2==413) {
-		_c_DpSDmS->fill();
+		_sigma_DD[1][2]->fill(round(sqrtS()/MeV));
 	      }
 	      else if(id1==423&& id2==423) {
-		_c_D0SD0S->fill();
+		_sigma_DD[0][2]->fill(round(sqrtS()/MeV));
 	      }
 	      else if(id1==433&& id2==433) {
-		_c_DsSDsS->fill();
+		_sigma_DD[2][2]->fill(round(sqrtS()/MeV));
 	      }
 	      else if((id1==421 && id2==423) ||
 		      (id1==423 && id2==421)) {
-		_c_D0D0S->fill();
+		_sigma_DD[0][1]->fill(round(sqrtS()/MeV));
 	      }
 	      else if((id1==411 && id2==413) ||
 		      (id1==413 && id2==411)) {
-		_c_DpDmS->fill();
+		_sigma_DD[1][1]->fill(round(sqrtS()/MeV));
 	      }
 	      else if((id1==431 && id2==433) ||
 		      (id1==433 && id2==431)) {
-		_c_DsDsS->fill();
+		_sigma_DD[2][1]->fill(round(sqrtS()/MeV));
 	      }
 	    }
 	  }
@@ -197,15 +195,15 @@ namespace Rivet {
 	      if(Ddecay) continue;
 	      if((id1==413 || id1==423 ) &&
 		 (id2==413 || id2==423 )) {
-		_c_DSDSpi->fill();
+		_sigma_DDpi[1]->fill(round(sqrtS()/MeV));
 	      }
 	      else if((id1==411 || id1==421 ) &&
 		      (id2==413 || id2==423 )) {
-		_c_DSDpi->fill();
+		_sigma_DDpi[0]->fill(round(sqrtS()/MeV));
 	      }
 	      else if((id1==413 || id1==423 ) &&
 		      (id2==411 || id2==421 )) {
-		_c_DSDpi->fill();
+		_sigma_DDpi[0]->fill(round(sqrtS()/MeV));
 	      }
 	    }
 	  }
@@ -215,107 +213,19 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      // R
-      Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/picobarn/ sumOfWeights() /nanobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_c = _c_DDX->val()*fact;
-      double err_c = _c_DDX->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      Estimate1DPtr charm, hadrons, muons, mult;
-      book(charm, 6,1,1);
-      book(hadrons, "sigma_hadrons");
-      book(muons, "sigma_muons"  );
-      book(mult, 6,1,2);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(R.val(), R.errPos());
-          hadrons->bin(b.index()).set(sig_h, err_h);
-          charm  ->bin(b.index()).set(sig_c, err_c);
-          muons  ->bin(b.index()).set(sig_m, err_m);
-        }
+      // cross sections
+      double fact = crossSection()/picobarn/ sumOfWeights();
+      for(unsigned int ix=0;ix<3;++ix)
+        for(unsigned int iy=0;iy<3;++iy)
+          scale(_sigma_DD[ix][iy],fact);
+      for(unsigned int ix=0;ix<2;++ix) {
+        scale(_sigma_DDpi[ix],fact);
+        scale(_sigma_DDX [ix],fact*1e-3); // this one in nb
       }
-      for (unsigned int ix=1;ix<6;++ix) {
-        unsigned int imax(0);
-        if     (ix<=3) imax = 4;
-        else           imax = 3;
-        for (unsigned int iy=1;iy<imax;++iy) {
-          double sigma(0),error(0);
-          if(ix==1) {
-            if(iy==1) {
-              sigma = _c_D0D0->val()/picobarn;
-              error = _c_D0D0->err()/picobarn;
-            }
-            else if(iy==2) {
-              sigma = _c_D0D0S->val()/picobarn;
-              error = _c_D0D0S->err()/picobarn;
-            }
-            else if(iy==3) {
-              sigma = _c_D0SD0S->val()/picobarn;
-              error = _c_D0SD0S->err()/picobarn;
-            }
-          }
-          else if(ix==2) {
-            if(iy==1) {
-              sigma = _c_DpDm->val()/picobarn;
-              error = _c_DpDm->err()/picobarn;
-            }
-            else if(iy==2) {
-              sigma = _c_DpDmS->val()/picobarn;
-              error = _c_DpDmS->err()/picobarn;
-            }
-            else if(iy==3) {
-              sigma = _c_DpSDmS->val()/picobarn;
-              error = _c_DpSDmS->err()/picobarn;
-            }
-          }
-          else if(ix==3) {
-            if(iy==1) {
-              sigma = _c_DsDs->val()/picobarn;
-              error = _c_DsDs->err()/picobarn;
-            }
-            else if(iy==2) {
-              sigma = _c_DsDsS->val()/picobarn;
-              error = _c_DsDsS->err()/picobarn;
-            }
-            else if(iy==3) {
-              sigma = _c_DsSDsS->val()/picobarn;
-              error = _c_DsSDsS->err()/picobarn;
-            }
-          }
-          else if(ix==4) {
-            if(iy==1) {
-              sigma = _c_DSDpi->val()/picobarn;
-              error = _c_DSDpi->err()/picobarn;
-            }
-            else if(iy==2) {
-              sigma = _c_DSDSpi->val()/picobarn;
-              error = _c_DSDSpi->err()/picobarn;
-            }
-          }
-          else if(ix==5) {
-            if(iy==1) {
-              sigma = _c_DD->val()/nanobarn;
-              error = _c_DD->err()/nanobarn;
-            }
-            else if(iy==2) {
-              sigma = _c_DDX->val()/nanobarn;
-              error = _c_DDX->err()/nanobarn;
-            }
-          }
-          sigma *= crossSection()/picobarn/ sumOfWeights();
-          error *= crossSection()/picobarn/ sumOfWeights();
-          Estimate1DPtr mult;
-          book(mult, ix,1,iy);
-          for (auto& b : mult->bins()) {
-            if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-              b.set(sigma, error);
-            }
-          }
-        }
-      }
+      BinnedEstimatePtr<int> tmp;
+      book(tmp,6,1,2);
+      divide(_sigma_R[0],_sigma_R[1],tmp);
+      scale(_sigma_cc,fact*1e-3);
     }
 
     /// @}
@@ -323,12 +233,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_D0D0, _c_DpDm,_c_DsDs;
-    CounterPtr _c_D0D0S, _c_DpDmS,_c_DsDsS;
-    CounterPtr _c_D0SD0S, _c_DpSDmS,_c_DsSDsS;
-    CounterPtr _c_DD, _c_DDX;
-    CounterPtr _c_DSDpi, _c_DSDSpi;
-    CounterPtr _c_hadrons, _c_muons;
+    BinnedHistoPtr<int> _sigma_DD[3][3];
+    BinnedHistoPtr<int> _sigma_DDpi[2];
+    BinnedHistoPtr<int> _sigma_DDX[2];
+    BinnedHistoPtr<int> _sigma_R[2],_sigma_cc;
     /// @}
 
 

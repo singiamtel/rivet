@@ -1,0 +1,34 @@
+Name: BELLE_2006_I688850
+Year: 2006
+Summary: Helicity angle and mass distribution for $\pi^+\pi^-$ in $B^0\to\rho^0\pi^0$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 688850
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 73 (2006) 111105
+RunInfo: Any process producing B0 mesons, originally Upsilon(4S) decays 
+Description:
+  'Measurement of the helicity angle and mass distribution for $\pi^+\pi^-$ in $B^0\to\rho^0\pi^0$'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2005zwt
+BibTeX: '@article{Belle:2005zwt,
+    author = "Dragic, J. and others",
+    collaboration = "Belle",
+    title = "{Measurement of branching fraction and direct CP asymmetry in B0 ---\ensuremath{>} rho0 pi0 decays}",
+    eprint = "hep-ex/0508007",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevD.73.111105",
+    journal = "Phys. Rev. D",
+    volume = "73",
+    pages = "111105",
+    year = "2006"
+}
+'

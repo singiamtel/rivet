@@ -1,0 +1,37 @@
+Name: CLEOII_1997_I439745
+Year: 1997
+Summary: Measurement of the cross section for $\gamma\gamma\to\Lambda^0\bar{\Lambda^0}$
+Experiment: CLEOII
+Collider: CESR
+InspireID: 439745
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 56 (1997) R2485-R2489
+RunInfo: Either gamma gamma collisions or e+e- with the gamma gamma process
+Beams: [[e+, e-], [gamma,gamma]]
+Energies: [10.58,2.325,2.45,2.55,2.75,3.25]
+Description:
+  'Measurement of the cross section for $\gamma\gamma\to\Lambda^0\bar{\Lambda^0}$. The cross section for $\gamma\gamma$ collisions as a funmction of the $gamma\gamma$ centre-of-mass energy is provided, together with the total cross section for the production in $e^+e^-$ via the $\gamma\gamma$ process.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1997mhv
+BibTeX: '@article{CLEO:1997mhv,
+    author = "Anderson, S. and others",
+    collaboration = "CLEO",
+    title = "{Lambda anti-lambda production in two photon interactions at CLEO}",
+    eprint = "hep-ex/9701013",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-9800, CLNS-96-1448, CLEO-96-19",
+    doi = "10.1103/PhysRevD.56.R2485",
+    journal = "Phys. Rev. D",
+    volume = "56",
+    pages = "R2485--R2489",
+    year = "1997"
+}
+'

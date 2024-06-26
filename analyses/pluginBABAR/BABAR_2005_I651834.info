@@ -1,0 +1,38 @@
+Name: BABAR_2005_I651834
+Year: 2005
+Summary:  $\pi^+\pi^-$ mass distribution in $X(3872$ and $\psi(2S)$ to $J/\psi\pi^+\pi^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 651834
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 71 (2005) 071103
+RunInfo: Any process producing psi(2S), X(3872), original B decays
+Options:
+ - PID=*
+Description:
+  'The  $\pi^+\pi^-$ mass distribution in the decays  $X(3872$ and $\psi(2S)$ to $J/\psi\pi^+\pi^-$ measureed by BaBaR in $B\to J\psi K^-\pi^+\pi^-$ decays. The background subtracted data were read from figure 3 in the paper. There is no consensus as to the nature of the $\chi_{c1}(3872)$ $c\bar{c}$ state and therefore we taken its PDG code to be 9030443, i.e. the first unused code for an undetermined
+   spin one $c\bar{c}$ state. This can be changed using the PID option if a different code is used by the event generator performing the simulation.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2004oro
+BibTeX: '@article{BaBar:2004oro,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Study of the $B \to J/\psi K^- \pi^+ \pi^-$ decay and measurement of the $B \to X(3872) K^-$ branching fraction}",
+    eprint = "hep-ex/0406022",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-10475, BABAR-PUB-04-011",
+    doi = "10.1103/PhysRevD.71.071103",
+    journal = "Phys. Rev. D",
+    volume = "71",
+    pages = "071103",
+    year = "2005"
+}
+'

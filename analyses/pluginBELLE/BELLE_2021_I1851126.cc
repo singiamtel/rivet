@@ -94,33 +94,33 @@ namespace Rivet {
     void finalize() {
       // first mode
       normalize(_h_c_P);
-      Estimate1DPtr _h_alpha_P;
+      Estimate0DPtr _h_alpha_P;
       book(_h_alpha_P,2,1,1);
       pair<double,double> alphaP = calcAlpha(_h_c_P);
       alphaP.first /= -0.401;
       alphaP.second/= -0.401;
-      _h_alpha_P->bin(1).set(alphaP.first, alphaP.second);
+      _h_alpha_P->set(alphaP.first, alphaP.second);
       // second mode
       normalize(_h_c_M);
-      Estimate1DPtr _h_alpha_M;
+      Estimate0DPtr _h_alpha_M;
       book(_h_alpha_M,2,1,2);
       pair<double,double> alphaM = calcAlpha(_h_c_M);
       alphaM.first /= 0.389;
       alphaM.second/= 0.389;
-      _h_alpha_M->bin(1).set(alphaM.first, alphaM.second);
+      _h_alpha_M->set(alphaM.first, alphaM.second);
       // average
       double aver = 0.5*(-alphaP.first+alphaM.first);
       double err  = 0.5*sqrt(sqr(alphaP.second)+sqr(alphaM.second));
-      Estimate1DPtr _h_alpha_aver;
+      Estimate0DPtr _h_alpha_aver;
       book(_h_alpha_aver,2,1,3);
-      _h_alpha_aver->bin(1).set(aver, err);
+      _h_alpha_aver->set(aver, err);
       // asymetry
       double asym = (alphaP.first+alphaM.first)/(alphaP.first-alphaM.first);
       err         = 2./sqr(alphaP.first-alphaM.first)*sqrt(sqr(alphaM.first *alphaP.second)+
 							   sqr(alphaM.second*alphaP.first ));
-      Estimate1DPtr _h_alpha_asym;
+      Estimate0DPtr _h_alpha_asym;
       book(_h_alpha_asym,2,1,4);
-      _h_alpha_asym->bin(1).set(asym, err);
+      _h_alpha_asym->set(asym, err);
     }
 
     ///@}

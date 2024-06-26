@@ -45,9 +45,9 @@ namespace Rivet {
 	const Particles & gam = ETA.decayProducts()[ix].at(22);
 	double mass2 = (gam[0].momentum()+gam[1].momentum()).mass2();
 	_h_m->fill(mass2);
-	_h_br[0]->fill(.5);
-	if(any(ETA.decaying()[ix].children(), hasAbsPID(PID::OMEGA))) _h_br[1]->fill(.5);
-	if(ETA.decaying()[ix].children().size()==3) _h_br[2]->fill(0.5);
+	_h_br[0]->fill();
+	if(any(ETA.decaying()[ix].children(), hasAbsPID(PID::OMEGA))) _h_br[1]->fill();
+	if(ETA.decaying()[ix].children().size()==3) _h_br[2]->fill();
       }
     }
 
@@ -66,8 +66,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_m,_h_br[3];
-    CounterPtr _netap;
+    Histo1DPtr _h_m;
+    CounterPtr _netap,_h_br[3];
     /// @}
 
 

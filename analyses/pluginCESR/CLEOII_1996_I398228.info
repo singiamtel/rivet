@@ -1,0 +1,33 @@
+Name: CLEOII_1996_I398228
+Year: 1996
+Summary: $\eta$ momentum spectrum in $B$ decays
+Experiment: CLEOII
+Collider: CESR
+InspireID: 398228
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uK>
+References:
+ - Phys.Rev.D 53 (1996) 6033-6036
+RunInfo: Any process producing Upsilon(4S), originally e+e-
+Description:
+  'Measurement of the $\eta$ momentum spectrum in $B$ decays. The data were taken from table I in the paper.'
+ValidationInfo:
+  'Herwig 7 events using EvtGen for the B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1995nxf
+BibTeX: '@article{CLEO:1995nxf,
+    author = "Kubota, Y. and others",
+    collaboration = "CLEO",
+    title = "{The Inclusive decay B --- eta X}",
+    reportNumber = "CLNS-95-1327, CLEO-95-4",
+    doi = "10.1103/PhysRevD.53.6033",
+    journal = "Phys. Rev. D",
+    volume = "53",
+    pages = "6033--6036",
+    year = "1996"
+}
+'

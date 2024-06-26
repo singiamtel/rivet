@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > pi+pi-
   class DM1_1978_I134061 : public Analysis {
   public:
 
@@ -23,18 +23,14 @@ namespace Rivet {
 
       // Book histograms
       book(_npion,1,1,1);
-      vector<string> energies({"483.0", "602.4", "700.0", "750.2", "773.2", "778.2", "783.2", "788.2",
-          "793.2", "843.2", "893.2", "963.0", "985.0", "1003.0", "1053.0", "1096.0"});
-      bool matched=false;
-      for(const string& en : energies) {
+      for (const string& en : _npion.binning().edges<0>()) {
         double end = std::stod(en)*MeV;
         if(isCompatibleWithSqrtS(end)) {
           ecms = en;
-          matched=true;
           break;
         }
       }
-      if(!matched) MSG_ERROR("Beam energy incompatible with analysis.");
+      if(ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 

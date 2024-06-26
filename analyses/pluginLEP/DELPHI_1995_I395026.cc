@@ -145,19 +145,19 @@ namespace Rivet {
       scale(_h_ctheta1,1./_c_hadron->val());
       normalize(_h_ctheta2);
       pair<double,double> rho = calcRho(_h_ctheta2);
-      Estimate1DPtr h_rho;
+      BinnedEstimatePtr<string> h_rho;
       book(h_rho, 3,1,1);
       h_rho->bin(1).set(rho.first, rho.second);
       // no of B* per hadronic Z
       double val = _c_bStar->val()/_c_hadron->val();
       double err = val*sqrt(sqr(_c_bStar->err()/_c_bStar->val())+sqr(_c_hadron->err()/_c_hadron->val()));
-      Estimate1DPtr h_nBS;
+      BinnedEstimatePtr<string> h_nBS;
       book(h_nBS,2,1,1);
       h_nBS->bin(1).set(val, err);
       // no of B* per b bbar
       val = _c_bStar->val()/_c_bottom->val();
       err = val*sqrt(sqr(_c_bStar->err()/_c_bStar->val())+sqr(_c_bottom->err()/_c_bottom->val()));
-      Estimate1DPtr h1;
+      BinnedEstimatePtr<string> h1;
       book(h1,1,1,1);
       h1->bin(1).set(val, err);
       Counter ctemp = *_c_bStar+*_c_B;

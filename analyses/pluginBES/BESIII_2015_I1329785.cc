@@ -21,9 +21,17 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nChi0, "TMP/chi0");
-      book(_nChi1, "TMP/chi1");
-      book(_nChi2, "TMP/chi2");
+      book(_nChi0, 1, 1, 8);
+      book(_nChi1, 2, 1, 8);
+      book(_nChi2, 3, 1, 8);
+      for (const string& en : _nChi0.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -69,11 +77,11 @@ namespace Rivet {
         }
         if(matched) {
           if(p.pid()==10441)
-            _nChi0->fill();
+            _nChi0->fill(_ecms);
           else if(p.pid()==20443)
-            _nChi1->fill();
+            _nChi1->fill(_ecms);
           else if(p.pid()==445)
-            _nChi2->fill();
+            _nChi2->fill(_ecms);
           break;
         }
       }
@@ -82,36 +90,17 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
       double fact =  crossSection()/ sumOfWeights() /picobarn;
-      for(unsigned int ix=1;ix<4;++ix) {
-        double sigma(0.),error(0.);
-        if(ix==1) {
-          sigma = _nChi0->val()*fact;
-          error = _nChi0->err()*fact;
-        }
-        else if(ix==2) {
-          sigma = _nChi1->val()*fact;
-          error = _nChi1->err()*fact;
-        }
-        else if(ix==3) {
-          sigma = _nChi2->val()*fact;
-          error = _nChi2->err()*fact;
-        }
-        Estimate1DPtr  mult;
-        book(mult,ix, 1, 8);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      scale(_nChi0,fact);
+      scale(_nChi1,fact);
+      scale(_nChi2,fact);
     }
     /// @}
 
     /// @name Histograms
     /// @{
-    CounterPtr _nChi0,_nChi1,_nChi2;
+    BinnedHistoPtr<string> _nChi0,_nChi1,_nChi2;
+    string _ecms;
     /// @}
 
   };

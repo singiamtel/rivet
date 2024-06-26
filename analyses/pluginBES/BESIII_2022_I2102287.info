@@ -1,0 +1,35 @@
+Name: BESIII_2022_I2102287
+Year: 2022
+Summary: $e^+e^-\to e^+e^-$ and $\mu^+\mu^-$ cross sections for $\sqrt{s}=3.05$ to $3.12$ GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2102287
+Status: VALIDATED NOHEPDATA SINGLEWEIGHT
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2206.13674 [hep-ex]
+RunInfo: e+ e- -> e+ e- and mu+mu-
+Beams: [e+, e-]
+Options:
+ - ECENT=3.05,3.06,3.083,3.09,3.093,3.0943,3.0952,3.0958,3.0969,3.0982,3.099,3.1015,3.1055,3.112,3.12
+Description:
+  'Measurement of the observed $e^+e^-$ and $\mu^+\mu^-$ cross sections near the $J/\psi$ by BESIII.  As the analyses requires the beam energy smearing described in the paper then central CMS energy should be specified using the ECENT (in GeV) option.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2022wsp
+BibTeX: '@article{BESIII:2022wsp,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Measurement of the total and leptonic decay widths of the $J/\psi$ resonance with an energy scan method at BESIII}",
+    eprint = "2206.13674",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "6",
+    year = "2022"
+}
+'

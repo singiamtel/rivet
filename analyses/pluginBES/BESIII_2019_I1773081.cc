@@ -22,7 +22,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
 
-      book(_num3pi, "TMP/num3");
+      book(_num3pi, "TMP/num3" , refData(1,1,1));
 
     }
 
@@ -39,25 +39,17 @@ namespace Rivet {
       }
       if(ntotal!=3) vetoEvent;
       if(nCount[-211]==1&&nCount[211]==1&&nCount[111]==1)
-        _num3pi->fill();
+        _num3pi->fill(sqrtS()/GeV);
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      double sigma = _num3pi->val();
-      double error = _num3pi->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
+      scale(_num3pi, crossSection()/ sumOfWeights() /nanobarn);
       Estimate1DPtr  mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_num3pi,mult);
     }
 
     /// @}
@@ -65,7 +57,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _num3pi;
+    Histo1DPtr _num3pi;
     /// @}
 
   };

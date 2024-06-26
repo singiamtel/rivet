@@ -12,6 +12,7 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies: [6.964, 7.38, 8.38, 9.432, 9.996, 10.33, 10.538]
 Description:
   'Measurement of $R$ in $e^+e^-$ collisions by CLEO for energies between 6.964 and 10.538 GeV.
    The individual hadronic and muonic cross sections are also outputted to the yoda file

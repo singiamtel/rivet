@@ -209,9 +209,9 @@ namespace Rivet {
         value *= factor;
         error *= abs(factor);
         if(ix==1) value *=-1.;
-        Estimate1DPtr  alpha;
+        Estimate0DPtr  alpha;
         book(alpha,2,1,1+ix);
-        alpha->bin(1).set(value, error);
+        alpha->set(value, error);
       }
     }
 

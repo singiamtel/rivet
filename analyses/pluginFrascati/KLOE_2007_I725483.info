@@ -1,0 +1,36 @@
+Name: KLOE_2007_I725483
+Year: 2007
+Summary: $e^+e^-\to\pi^0\pi^0\gamma$
+Experiment: KLOE
+Collider: <Insert the collider name>
+InspireID: 725483
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Eur.Phys.J.C 49 (2007) 473-488
+RunInfo: e+e- > pi0 pi0 gamma, pi0 should be set stable
+Beams: [e+, e-]
+Energies: [1.01955,1.01965,1.01985,1.01995]
+Description:
+  'Measurement of the $\pi^0\pi^0$ and $\pi^0\gamma$ mass distribution in  $e^+e^-\to\pi^0\pi^0\gamma$ at centre-of-mass energies near the mass of the phi resonance.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: KLOE:2006vmv
+BibTeX: '@article{KLOE:2006vmv,
+    author = "Ambrosino, F. and others",
+    collaboration = "KLOE",
+    title = "{Dalitz plot analysis of $e^+ e^- \to \pi^0 \pi^0 \gamma$ events at $\sqrt{s}$ approximately M($\phi$) with the KLOE detector}",
+    eprint = "hep-ex/0609009",
+    archivePrefix = "arXiv",
+    doi = "10.1140/epjc/s10052-006-0157-7",
+    journal = "Eur. Phys. J. C",
+    volume = "49",
+    pages = "473--488",
+    year = "2007"
+}
+'

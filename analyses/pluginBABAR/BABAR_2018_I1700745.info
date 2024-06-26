@@ -12,9 +12,18 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams:  [e+,e-]
+Energies:  [1.125, 1.175, 1.225, 1.275, 1.325, 1.375, 1.425, 1.475, 1.525, 1.575, 1.625, 1.675,
+            1.725, 1.775, 1.825, 1.875, 1.925, 1.975, 2.025, 2.075, 2.125, 2.175, 2.225, 2.275,
+            2.325, 2.375, 2.425, 2.475, 2.525, 2.575, 2.625, 2.675, 2.725, 2.775, 2.825, 2.875,
+            2.925, 2.975, 3.025, 3.075, 3.125, 3.175, 3.225, 3.275, 3.325, 3.375, 3.425, 3.475,
+            3.525, 3.575, 3.625, 3.675, 3.725, 3.775, 3.825, 3.875, 3.925, 3.975, 4.025, 4.075,
+            4.125, 4.175, 4.225, 4.275, 4.325]
+Options:
+ - ENERGY=*
 Description:
   'Measurement of the cross section for $e^+e^-\to\pi^+\pi^-3\pi^0$ and $\pi^+\pi^-2\pi^0\eta$ between threshold and 4.35 GeV.
-   The cross sections for the $\pi^+\pi^-\eta$, $\omega\pi^0\pi^0$ and $\omega\pi^0\eta$ resonant contributions are also measured'
+   The cross sections for the $\pi^+\pi^-\eta$, $\omega\pi^0\pi^0$ and $\omega\pi^0\eta$ resonant contributions are also measured.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords:
 BibKey: Lees:2018dnv
 BibTeX: '@article{Lees:2018dnv,

@@ -21,17 +21,26 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nJPsi, "TMP/JPsi");
+      book(_nJPsi, 1,1,1);
+      for (const string& en : _nJPsi.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
       for (const Particle &child : p.children()) {
-        if(child.children().empty()) {
+        if (child.children().empty()) {
           --nRes[child.pid()];
           --ncount;
         }
-        else
+        else {
           findChildren(child,nRes,ncount);
+        }
       }
     }
 
@@ -45,30 +54,37 @@ namespace Rivet {
         ++ntotal;
       }
       const FinalState& ufs = apply<FinalState>(event, "UFS");
-      for (const Particle& p : ufs.particles()) {
+      for (const Particle& p : ufs.particles(Cuts::pid==443)) {
         if(p.children().empty()) continue;
-        // find the h_c
-        if(p.pid()==443) {
-          map<long,int> nRes = nCount;
-          int ncount = ntotal;
-          findChildren(p,nRes,ncount);
-          // omega pi+pi-
-          if(ncount!=2) continue;
-          bool matched = true;
-          for(auto const & val : nRes) {
-            if(abs(val.first)==331) {
-              if(val.second !=1) {
-                matched = false;
-                break;
-              }
+        map<long,int> nRes = nCount;
+        int ncount = ntotal;
+        findChildren(p,nRes,ncount);
+        bool matched=false;
+        for (const Particle& p2 : ufs.particles(Cuts::pid==331)) {
+          if (p2.children().empty()) continue;
+          bool psiParent=false;
+          Particle parent=p2;
+          while (!parent.parents().empty()) {
+            parent=parent.parents()[0];
+            if (parent.pid()==443) {
+              psiParent=true;
+              break;
             }
-            else if(val.second!=0) {
+          }
+          if (psiParent) continue;
+          map<long,int> nRes2 = nRes;
+          int ncount2 = ncount;
+          findChildren(p2,nRes2,ncount2);
+          if (ncount2!=0) continue;
+          matched = true;
+          for (const auto& val : nRes2) {
+            if (val.second!=0) {
               matched = false;
               break;
             }
           }
           if(matched) {
-            _nJPsi->fill();
+            _nJPsi->fill(_ecms);
             break;
           }
         }
@@ -78,17 +94,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nJPsi->val();
-      double error = _nJPsi->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nJPsi, crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -96,7 +102,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nJPsi;
+    BinnedHistoPtr<string> _nJPsi;
+    string _ecms;
     /// @}
 
   };

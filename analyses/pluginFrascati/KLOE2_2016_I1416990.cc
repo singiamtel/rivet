@@ -24,7 +24,7 @@ namespace Rivet {
       // Book histograms
       book(_dalitz, 1,1,1);
       book(_h_dalitz, {-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,
-                        0.,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8});
+                       0.,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8});
       for (unsigned int i=1;i<=_h_dalitz->numBins();++i) {
         book(_h_dalitz->bins()[i], 2, 1, i);
       }

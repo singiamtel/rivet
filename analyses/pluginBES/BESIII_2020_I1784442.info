@@ -1,0 +1,47 @@
+Name: BESIII_2020_I1784442
+Year: 2020
+Summary: Cross Section for $e^+e^-\to\eta J/\psi$ for energies between 3.81 and 4.60 GeV 
+Experiment: BESIII
+Collider: BEPC
+InspireID: 1784442
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 102 (2020) 3, 031101
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Energies : [3.8077, 3.8474, 3.8874, 3.8924, 3.8962, 3.8974, 3.9024, 3.9074, 3.9124, 3.9174, 3.9224, 3.9274, 3.9324, 3.9374, 3.9424, 3.9474,
+            3.9524, 3.9574, 3.9624, 3.9674, 3.9724, 3.9774, 3.9824, 3.9874, 3.9924, 3.9974, 4.0024, 4.0074, 4.0076, 4.0094, 4.0114, 4.0134,
+            4.0154, 4.0174, 4.0224, 4.0274, 4.0324, 4.0374, 4.0474, 4.0524, 4.0574, 4.0624, 4.0674, 4.0774, 4.0855, 4.0874, 4.0974, 4.1074,
+            4.1174, 4.1274, 4.1374, 4.1424, 4.1474, 4.1574, 4.1674, 4.1774, 4.178, 4.1874, 4.1886, 4.1893, 4.1924, 4.1974, 4.1996, 4.2004,
+            4.2034, 4.2074, 4.2077, 4.2097, 4.2124, 4.2171, 4.2174, 4.2188, 4.2224, 4.2263, 4.2274, 4.2324, 4.2358, 4.2374, 4.2404, 4.2417,
+            4.2424, 4.2439, 4.2454, 4.2474, 4.2524, 4.2574, 4.258, 4.2624, 4.2669, 4.2674, 4.2724, 4.2774, 4.2778, 4.2824, 4.2874, 4.2974,
+            4.3074, 4.3079, 4.3174, 4.3274, 4.3374, 4.3474, 4.3574, 4.3583, 4.3674, 4.3774, 4.3874, 4.3874, 4.3924, 4.3974, 4.4074, 4.4156,
+            4.4174, 4.4224, 4.4274, 4.4374, 4.4474, 4.4574, 4.4671, 4.4774, 4.4974, 4.5174, 4.5271, 4.5374, 4.5474, 4.5574, 4.5674, 4.5745,
+            4.5774, 4.5874, 4.5995]
+
+Description:
+  'Cross section for  $e^+e^-\to\eta J/\psi$ for energies between 3.81 and 4.60 GeV measured by the BESIII collaboration.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2020bgb
+BibTeX: '@article{BESIII:2020bgb,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Observation of the $Y(4220)$ and $Y(4360)$ in the process $e^{+}e^{-} \to \eta J/\psi$}",
+    eprint = "2003.03705",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.102.031101",
+    journal = "Phys. Rev. D",
+    volume = "102",
+    number = "3",
+    pages = "031101",
+    year = "2020"
+}
+'

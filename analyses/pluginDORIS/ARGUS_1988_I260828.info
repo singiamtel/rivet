@@ -1,0 +1,34 @@
+Name: ARGUS_1988_I260828
+Year: 1988
+Summary: Cross sction for $\gamma\gamma\to K^+K^-\pi^+\pi^-\pi^0$ $\sqrt{s}=2\to3.6\,$GeV
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 260828
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 210 (1988) 273-277
+RunInfo: gamma gamma -> hadrons
+Beams: [gamma,gamma]
+Description:
+  'Measurement of the cross section for $\gamma\gamma\to K^+K^-\pi^+\pi^-\pi^0$ with $\sqrt{s}=2\to3.6\,$GeV.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1988ulg
+BibTeX: '@article{ARGUS:1988ulg,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{A Search for $\omega \phi$ and $\phi \phi$ Production in the Reactions $\gamma \gamma \to K^+ K^- \pi^+ \pi^- \pi^0$ and $\gamma \gamma \to 2 K^+ 2 K^-$}",
+    reportNumber = "DESY-88-016",
+    doi = "10.1016/0370-2693(88)90385-1",
+    journal = "Phys. Lett. B",
+    volume = "210",
+    pages = "273--277",
+    year = "1988"
+}
+'

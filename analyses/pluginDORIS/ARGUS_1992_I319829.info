@@ -1,0 +1,35 @@
+Name: ARGUS_1992_I319829
+Year: 1992
+Summary: $D^+_s$ production in $e^+e^-$ annihilation at 10.5 GeV, and $B$ decays
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 319829
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 54 (1992) 1-12
+RunInfo: e+e- to hadrons, at 10.47 GeV, or Upsilon(4S) (10.58)
+NeedCrossSection: yes
+Beams: [e-, e+]
+Description:
+  'Measurement of the scaled momentum spectra for $D^+_s$ production in $e^+e^-$ annihilation at 10.5 GeV, and from $B$ decays at the $\Upsilon(4S)$.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1991xej
+BibTeX: '@article{ARGUS:1991xej,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Production of D(s)+ mesons in B decays and determination of f(D(s))}",
+    reportNumber = "DESY-91-121",
+    doi = "10.1007/BF01881703",
+    journal = "Z. Phys. C",
+    volume = "54",
+    pages = "1--12",
+    year = "1992"
+}
+'

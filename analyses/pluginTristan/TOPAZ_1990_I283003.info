@@ -12,6 +12,7 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies: [50.0, 52.0, 54.0, 55.0, 56.0, 56.5, 57.0, 58.29, 59.06, 60.0, 60.8, 61.4]
 Description:
   'Measurement of $R$ in $e^+e^-$ collisions by TOPAZ for energies between 50 and 61.4 GeV.
    The individual hadronic and muonic cross sections are also outputted to the yoda file

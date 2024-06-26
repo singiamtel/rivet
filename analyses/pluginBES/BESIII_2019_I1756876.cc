@@ -23,8 +23,16 @@ namespace Rivet {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
       // Book histograms
-      book(_nD1D, "/TMP/nD1D");
-      book(_nPsi, "/TMP/nPsi");
+      book(_nD1D, 1, 1,  1);
+      book(_nPsi, 1, 1,  2);
+      for (const string& en : _nD1D.binning().edges<0>()) {
+        const double end = std::stod(en)*MeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
 
     }
 
@@ -61,7 +69,7 @@ namespace Rivet {
           map<long,int> nRes2 = nRes;
           int ncount2 = ncount;
           findChildren(p2,nRes2,ncount2);
-          if(ncount2!=1) continue;
+          if(ncount2!=2) continue;
           matched=true;
           for(auto const & val : nRes2) {
             if(abs(val.first)==211) {
@@ -103,8 +111,8 @@ namespace Rivet {
           }
         }
         if(matched) {
-          _nPsi->fill();
-          break;
+          _nPsi->fill(_ecms);
+          return;
         }
       }
       // D1 D
@@ -119,16 +127,10 @@ namespace Rivet {
           map<long,int> nRes2 = nRes;
           int ncount2 = ncount;
           findChildren(p2,nRes2,ncount2);
-          if(ncount2!=1) continue;
+          if(ncount2!=0) continue;
           matched=true;
           for(auto const & val : nRes2) {
-            if(abs(val.first)==211) {
-              if(val.second!=1) {
-                matched = false;
-                break;
-              }
-            }
-            else if(val.second!=0) {
+            if(val.second!=0) {
               matched = false;
               break;
             }
@@ -136,8 +138,8 @@ namespace Rivet {
           if(matched) break;
         }
         if(matched) {
-          _nD1D->fill();
-          break;
+          _nD1D->fill(_ecms);
+          return;
         }
       }
     }
@@ -145,32 +147,16 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights()/picobarn;
-      for(unsigned int iy=9;iy<11;++iy) {
-        double sigma=0.,error=0.;
-        if(iy==9) {
-          sigma = _nD1D->val()*fact;
-          error = _nD1D->err()*fact;
-        }
-        else if(iy==10) {
-          sigma = _nPsi->val()*fact;
-          error = _nPsi->err()*fact;
-        }
-        Estimate1DPtr mult;
-        book(mult,1,1,iy);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
-
+      scale(_nD1D,fact);
+      scale(_nPsi,fact);
     }
 
     /// @}
 
     /// @name Histograms
     /// @{
-    CounterPtr _nD1D, _nPsi;
+    BinnedHistoPtr<string> _nD1D, _nPsi;
+    string _ecms;
     /// @}
 
   };

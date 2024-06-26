@@ -8,6 +8,8 @@ Title=
 XLabel=
 YLabel=$\alpha$
 LogY=0
+YMin=-1
+YMax=1
 END PLOT
 
 BEGIN PLOT /NA48_2010_I868871/ctheta_pi0
@@ -15,15 +17,16 @@ Title=$\cos\theta$ for $\Xi^0\to\Lambda^0\pi^0$ and $\bar\Xi^0\to\bar\Lambda^0\p
 END PLOT
 BEGIN PLOT /NA48_2010_I868871/d01-x01-y01
 Title=$\alpha$ for $\Xi^0\to\Lambda^0\pi^0$ and $\bar\Xi^0\to\bar\Lambda^0\pi^0$
-YMin=-0.35
-YMax=-0.24
+END PLOT
+BEGIN PLOT /NA48_2010_I868871/d01-x01-y02
+Title=$\alpha$ for $\Xi^0\to\Lambda^0\gamma$ and $\bar\Xi^0\to\bar\Lambda^0\gamma$
+END PLOT
+BEGIN PLOT /NA48_2010_I868871/d01-x01-y03
+Title=$\alpha$ for $\Xi^0\to\Sigma^0\gamma$ and $\bar\Xi^0\to\bar\Sigma^0\gamma$
 END PLOT
 
 BEGIN PLOT /NA48_2010_I868871/ctheta_gamma
 Title=$\cos\theta$ for $\Xi^0\to\Lambda^0\gamma$ and $\bar\Xi^0\to\bar\Lambda^0\gamma$
-END PLOT
-BEGIN PLOT /NA48_2010_I868871/d02-x01-y01
-Title=$\alpha$ for $\Xi^0\to\Lambda^0\gamma$ and $\bar\Xi^0\to\bar\Lambda^0\gamma$
 END PLOT
 
 BEGIN PLOT /NA48_2010_I868871/ctheta_Sigma_0
@@ -88,6 +91,3 @@ Title=$\cos\theta$ for $\Xi^0\to\Sigma^0\gamma$ and $\bar\Xi^0\to\bar\Sigma^0\ga
 END PLOT
 
 
-BEGIN PLOT /NA48_2010_I868871/d03-x01-y01
-Title=$\alpha$ for $\Xi^0\to\Sigma^0\gamma$ and $\bar\Xi^0\to\bar\Sigma^0\gamma$
-END PLOT

@@ -12,6 +12,9 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies: [10.0, 10.005, 10.01, 10.02, 10.028, 10.033, 10.044, 10.053, 10.07, 10.08,
+           10.09, 10.1, 10.63, 9.41, 9.425, 9.44, 9.45, 9.455, 9.46, 9.47, 9.48, 9.49, 9.5, 9.51, 9.98]
+
 Description:
   'Measurement of $R$ in $e^+e^-$ collisions for energies between 9.41 and 9.51, and 9.98 and 10.63 GeV.
    The individual hadronic and muonic cross sections are also outputted to the yoda file

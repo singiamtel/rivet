@@ -49,7 +49,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      normalize(_h_n,2.);
+      normalize(_h_n);
     }
 
     /// @}
@@ -57,7 +57,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_n;
+    BinnedHistoPtr<int> _h_n;
     /// @}
 
 

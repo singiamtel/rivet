@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief Sigma- and Lambda(1520) ar Z pole
   class DELPHI_2000_I524694 : public Analysis {
   public:
 
@@ -45,7 +45,7 @@ namespace Rivet {
         case 3112:
           _histXpSigma->fill(xp);
 	  break;
-        case 3124:
+        case 102134:
           _histXpLambda->fill(xp);
 	  break;
 	}

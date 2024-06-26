@@ -12,10 +12,14 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+, e-]
+Energies :  [3.65,3.773]
+Options:
+ - ENERGY=*
 Description:
   'Cross section for $e^+e^-\to 2\pi^+2\pi^-K^+K^-$, $\pi^+\pi^-2K^+2K^-$,
   $2\pi^+2\pi^-p\bar{p}$, $3\pi^+3\pi^-$, $2\pi^+2\pi^-K^+K^-\pi^0$,
-  $\rho^0\pi^+\pi^-$, $\rho^0K^+K^-$, $\rho^0p\bar{p}$, $K^{*0}K^-\pi^++\text{c.c.}$ at 3.650 and 3.773 GeV.'
+  $\rho^0\pi^+\pi^-$, $\rho^0K^+K^-$, $\rho^0p\bar{p}$, $K^{*0}K^-\pi^++\text{c.c.}$ at 3.650 and 3.773 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ablikim:2007af
 BibTeX: '@article{Ablikim:2007af,

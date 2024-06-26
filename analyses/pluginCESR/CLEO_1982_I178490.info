@@ -1,0 +1,35 @@
+Name: CLEO_1982_I178490
+Year: 1982
+Summary: Spectrum of $D^{*+}$ mesons in $e^+e^-$ at $\sqrt{s}=10.4\,$GeV
+Experiment: CLEO
+Collider: CESR
+InspireID: 178490
+Status: VALIDATED NOHEPDATA
+Reentrant:  true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 49 (1982) 610
+RunInfo: e+ e- > hadrons
+Beams: [e+, e-]
+Energies: [10.4]
+Description:
+  'Measurement of the scaled momentum spectrum of $D^{*+}$ mesons in $e^+e^-$ at $\sqrt{s}=10.4\,$GeV'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1982uqh
+BibTeX: '@article{CLEO:1982uqh,
+    author = "Bebek, C. and others",
+    collaboration = "CLEO",
+    title = "{Inclusive Charged $D^*$ Production in $e^+ e^-$ Annihilations at $W=10$.4-{GeV}}",
+    reportNumber = "CLEO/82-01, CLNS 82/534",
+    doi = "10.1103/PhysRevLett.49.610",
+    journal = "Phys. Rev. Lett.",
+    volume = "49",
+    pages = "610",
+    year = "1982"
+}
+'

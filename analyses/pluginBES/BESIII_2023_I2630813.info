@@ -1,0 +1,37 @@
+Name: BESIII_2023_I2630813
+Year: 2023
+Summary: Mass distributions in the decay $D_s^+\to\omega\pi^+\eta$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2630813
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 107 (2023) 5, 052010
+ - arXiv:2302.04670 [hep-ex]
+RunInfo: Any process producing D_s+ mesons, originally e+e-
+Description:
+  'Measurement of mass distributions in the decay $D_s^+\to\omega\pi^+\eta$ by the BESIII collaboration. The data were read from the plots in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023mie
+BibTeX: '@article{BESIII:2023mie,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Observation of the decay Ds+\textrightarrow{}\ensuremath{\omega}\ensuremath{\pi}+\ensuremath{\eta}}",
+    eprint = "2302.04670",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.107.052010",
+    journal = "Phys. Rev. D",
+    volume = "107",
+    number = "5",
+    pages = "052010",
+    year = "2023"
+}
+'

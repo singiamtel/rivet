@@ -1,0 +1,36 @@
+Name: BES_2003_I563492
+Year: 2003
+Summary: Mass distributions in $\psi(2S)\to\gamma\pi^+\pi^-$ and $\psi(2S)\to\gamma K^+K^-$
+Experiment: BES
+Collider: BEPC
+InspireID: 563492
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ -  Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 67 (2003) 032004
+RunInfo: Any process producing psi(2S), originally e+e-
+Description:
+  'Measurement of the pion pair mass distribution in $\psi(2S)\to\gamma\pi^+\pi^-$
+ and $\psi(2S)\to\gamma K^+K^-$. The background subtracted data were read from the plots in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2001unb
+BibTeX: '@article{BES:2001unb,
+    author = "Bai, J. Z. and others",
+    collaboration = "BES",
+    title = "{Radiative decay of the psi(2S) into two pseudoscalar mesons}",
+    eprint = "hep-ex/0109040",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-9157",
+    doi = "10.1103/PhysRevD.67.032004",
+    journal = "Phys. Rev. D",
+    volume = "67",
+    pages = "032004",
+    year = "2003"
+}
+'

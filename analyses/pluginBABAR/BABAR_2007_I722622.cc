@@ -89,16 +89,12 @@ namespace Rivet {
 	    !(p.abspid()==id0 && nPi==1 && nStable==2) )
 	  continue;
 	if(p.abspid()==idp) {
-	  if(ups)
-	    _b_p->fill(0.5);
-	  else
-	    _r_p->fill(0.5);
+	  if(ups) _b_p->fill();
+	  else    _r_p->fill("10.58"s);
 	}
 	else {
-	  if(ups)
-	    _b_0->fill(0.5);
-	  else
-	    _r_0->fill(0.5);
+	  if(ups) _b_0->fill();
+	  else    _r_0->fill("10.58"s);
 	  idXic=4132;
 	}
 	// boost to Xi'_c rest frame
@@ -135,8 +131,8 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_p_0,_h_p_p,_h_ctheta;
-    Histo1DPtr _b_p,_b_0;
-    Histo1DPtr _r_p,_r_0;
+    CounterPtr _b_p,_b_0;
+    BinnedHistoPtr<string> _r_p,_r_0;
     CounterPtr _ups;
     /// @}
 

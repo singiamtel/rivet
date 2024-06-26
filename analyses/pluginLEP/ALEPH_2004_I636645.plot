@@ -391,6 +391,31 @@ LegendXPos=0.05
 LegendYPos=0.2
 # END PLOT
 
+# BEGIN PLOT /ALEPH_2004_I636645/d53-x01-y0
+XLabel=$E_\mathrm{CMS}/GeV$
+LogY=0
+# END PLOT
+# BEGIN PLOT /ALEPH_2004_I636645/d53-x01-y01
+Title=Mean Total Jet Broadening
+YLabel=$B_T$
+# END PLOT
+# BEGIN PLOT /ALEPH_2004_I636645/d53-x01-y02
+Title=Mean Wide Jet Broadening
+YLabel=$B_W$
+# END PLOT
+# BEGIN PLOT /ALEPH_2004_I636645/d53-x01-y03
+Title=Mean C-parameter
+YLabel=$C$
+# END PLOT
+# BEGIN PLOT /ALEPH_2004_I636645/d53-x01-y04
+Title=Mean heavy jet mass
+YLabel=$\rho$
+# END PLOT
+# BEGIN PLOT /ALEPH_2004_I636645/d53-x01-y05
+Title=Mean $1-T$
+YLabel=$1-T$
+# END PLOT
+
 # BEGIN PLOT /ALEPH_2004_I636645/d54-x01-y01
 Title=Thrust ($E_\mathrm{CMS}=91.2$ GeV)
 XLabel=$T$

@@ -1,0 +1,52 @@
+{
+    "2649979": [
+        "Observation of the electromagnetic field effect via charge-dependent directed flow in heavy-ion collisions at the Relativistic Heavy Ion Collider",
+        "STAR",
+        "10.1103/PhysRevX.14.011028",
+        null,
+        "2304.03430",
+        "ins2649979",
+        null,
+        []
+    ],
+    "2702151": [
+        "Reaction plane correlated triangular flow in <math><mtext>Au</mtext><mo>+</mo><mtext>Au</mtext></math> collisions at <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>3</mn></mrow></math> GeV",
+        "STAR Collaboration\n19",
+        "10.1103/PhysRevC.109.044914",
+        null,
+        "2309.12610",
+        "ins2702151",
+        null,
+        []
+    ],
+    "2703253": [
+        "Longitudinal and transverse spin transfer to <math display=\"inline\"><mi mathvariant=\"normal\">\u039b</mi></math> and <math display=\"inline\"><mover accent=\"true\"><mi mathvariant=\"normal\">\u039b</mi><mo stretchy=\"false\">\u00af</mo></mover></math> hyperons in polarized <math display=\"inline\"><mi>p</mi><mo>+</mo><mi>p</mi></math> collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>200</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>GeV</mi></math>",
+        "STAR",
+        "10.1103/PhysRevD.109.012004",
+        null,
+        "2309.14220",
+        "ins2703253",
+        null,
+        []
+    ],
+    "2735142": [
+        "Jet-hadron correlations with respect to the event plane in <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>200</mn></mrow></math> GeV <math><mrow><mi>Au</mi><mo>+</mo><mi>Au</mi></mrow></math> collisions in STAR",
+        "STAR",
+        "10.1103/PhysRevC.109.044909",
+        null,
+        "2307.13891",
+        "ins2735142",
+        null,
+        []
+    ],
+    "2777052": [
+        "Results on elastic cross sections in proton\u2013proton collisions at <math altimg=\"si1.svg\"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>510</mn></math> GeV with the STAR detector at RHIC",
+        "STAR",
+        "10.1016/j.physletb.2024.138601",
+        null,
+        "2309.16622",
+        null,
+        null,
+        []
+    ]
+}

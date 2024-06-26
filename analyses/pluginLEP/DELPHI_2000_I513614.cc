@@ -69,7 +69,7 @@ namespace Rivet {
         const double rho = 0.091;
         const double P = (7. + rho*(30. - 40.*ratio) + 4.*(2.-3.*ratio)*ratio)/sqr(1.+2.*ratio);
         const double dP = (20.*(-1. + 4.*rho*(-2. + ratio) - 2.*ratio))/pow(1. + 2.*ratio,3)*dr;
-       	Estimate1DPtr h_pol;
+       	BinnedEstimatePtr<string> h_pol;
         book(h_pol, 1,1,1);
        	h_pol->bin(1).set(P, dP);
       }

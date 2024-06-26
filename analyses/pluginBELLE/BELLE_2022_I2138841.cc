@@ -176,7 +176,7 @@ namespace Rivet {
             book(_h_alpha1,2,1+imeson,iy);
             book(_h_alpha2,2,1+imeson,2+iy);
           }
-          *_h_alpha1 = *_c[imeson][iy][1]/ *_c[imeson][iy][0];
+          divide(_c[imeson][iy][1], _c[imeson][iy][0], _h_alpha1);
           // divide out aLambda
           double rval = _h_alpha1->val() / aLambda.first;
           pair<double,double> rerr = _h_alpha1->err();

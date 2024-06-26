@@ -23,9 +23,17 @@ namespace Rivet {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
       // histograms
-      book(_nBB  , "/TMP/nBB"  );
-      book(_nBBS , "/TMP/nBBS" );
-      book(_nBSBS, "/TMP/nBSBS");
+      for(unsigned int ix=0;ix<3;++ix)
+        book(_sigma[ix],1,1,1+ix);
+      for (const string& en : _sigma[0].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -77,16 +85,16 @@ namespace Rivet {
 	    if(bHadrons[ix].abspid()==511 ||
 	       bHadrons[ix].abspid()==521) {
 	      if(bHadrons[iy].pid()==-bHadrons[ix].pid())
-		_nBB->fill();
+		_sigma[0]->fill(_ecms);
 	      else
-		_nBBS->fill();
+		_sigma[1]->fill(_ecms);
 	    }
 	    else if(bHadrons[ix].abspid()==513 ||
 		    bHadrons[ix].abspid()==523) {
 	      if(bHadrons[iy].pid()==-bHadrons[ix].pid())
-		_nBSBS->fill();
+		_sigma[2]->fill(_ecms);
 	      else
-		_nBBS->fill();
+		_sigma[1]->fill(_ecms);
 	    }
 	    break;
 	  }
@@ -97,30 +105,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int iy=1;iy<4;++iy) {
-        double sigma,error;
-        if(iy==1) {
-          sigma = _nBB->val();
-          error = _nBB->err();
-        }
-        else if(iy==2) {
-          sigma = _nBBS->val();
-          error = _nBBS->err();
-        }
-        else {
-          sigma = _nBSBS->val();
-          error = _nBSBS->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, iy);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /picobarn;
+      for(unsigned int ix=0;ix<3;++ix)
+        scale(_sigma[ix],fact);
     }
 
     ///@}
@@ -128,7 +115,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    CounterPtr _nBB,_nBBS,_nBSBS;
+    BinnedHistoPtr<string> _sigma[3];
+    string _ecms;
     ///@}
 
 

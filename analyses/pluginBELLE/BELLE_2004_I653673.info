@@ -1,0 +1,37 @@
+Name: BELLE_2004_I653673
+Year: 2004
+Summary: Double charmonium production in $e^+e^-$ collisions at $\sqrt{s}=10.6\,$GeV
+Experiment: BELLE
+Collider: KEKB
+InspireID: 653673
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 70 (2004) 071102
+RunInfo: e+e- > double charmonium
+Beams: [e+, e-]
+Energies: [10.6]
+Description:
+  'Double charmonium production at $\sqrt{s}=10.6\,$GeV.
+  The cross sections and $\alpha$ parameters were taken from the tables in the paper and the corrected angular distributions read from the figures.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2004abn
+BibTeX: '@article{Belle:2004abn,
+    author = "Abe, Kazuo and others",
+    collaboration = "Belle",
+    title = "{Study of double charmonium production in e+ e- annihilation at s**(1/2) \textasciitilde{} 10.6-GeV}",
+    eprint = "hep-ex/0407009",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevD.70.071102",
+    journal = "Phys. Rev. D",
+    volume = "70",
+    pages = "071102",
+    year = "2004"
+}
+'

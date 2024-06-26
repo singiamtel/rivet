@@ -39,15 +39,15 @@ namespace Rivet {
 	int id = abs(p.pid());
 	if(id==_sid+110 && isDecay(p,{4122,-211})) {
 	  _h[0]->fill(xp);
-	  _r[0]->fill(0.5);
+	  _r[0]->fill("10.52"s);
 	}
 	else if(id==_sid+210&& isDecay(p,{4122,111})) {
 	  _h[1]->fill(xp);
-	  _r[1]->fill(0.5);
+	  _r[1]->fill("10.52"s);
 	}
 	else if(id==_sid+220&& isDecay(p,{4122,211})) {
 	  _h[2]->fill(xp);
-	  _r[2]->fill(0.5);
+	  _r[2]->fill("10.52"s);
 	}
       }
     }
@@ -79,7 +79,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h[3],_r[3];
+    Histo1DPtr _h[3];
+    BinnedHistoPtr<string> _r[3];
     static const int _sid = 14002;
     /// @}
 

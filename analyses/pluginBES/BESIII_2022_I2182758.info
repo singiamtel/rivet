@@ -1,0 +1,38 @@
+Name: BESIII_2022_I2182758
+Year: 2022
+Summary: Cross section for $e^+e^-\to J/\psi K^0_SK^0_S$ at energies between 4.126 and 4.95 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2182758
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2211.08561 [hep-ex]
+RunInfo: e+e- to hadrons, KS0 set stable
+Beams: [e+, e-]
+Energies:  [4.128, 4.157, 4.178, 4.189, 4.199, 4.209, 4.219, 4.226, 4.236, 4.244, 4.258, 4.267,
+            4.278, 4.288, 4.312, 4.337, 4.358, 4.377, 4.396, 4.416, 4.436, 4.467, 4.527, 4.6,
+            4.612, 4.628, 4.641, 4.661, 4.682, 4.698, 4.74, 4.75, 4.78, 4.842, 4.918, 4.95]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to J/\psi K^0_SK^0_S$ at energies between 4.126 and 4.95 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Ablikim:2022yav
+BibTeX: '@article{Ablikim:2022yav,
+    author = "Ablikim, M. and others",
+    title = "{Observation of the $Y(4230)$ and evidence for a new vector charmonium-like state $Y(4710)$ in $e^{+}e^{-}\to K_{S}^{0} K_{S}^{0} J/\psi$}",
+    eprint = "2211.08561",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "11",
+    year = "2022"
+}
+'

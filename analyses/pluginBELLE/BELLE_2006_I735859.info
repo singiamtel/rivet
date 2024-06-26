@@ -1,0 +1,34 @@
+Name: BELLE_2006_I735859
+Year: 2006
+Summary: Helicity angle in $B\to\omega K$ and $B^+\to\omega\pi^+$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 735859
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 74 (2006) 111101
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the helicty angle in $B\to\omega K$ and $B^+\to\omega\pi^+$ decays. The data were read from Figure2 in the paper and are background subtracted. The mass distributions are not implemented due to resolution effects.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2006tin
+BibTeX: '@article{Belle:2006tin,
+    author = "Jen, C. -M. and others",
+    collaboration = "Belle",
+    title = "{Improved measurements of branching fractions and CP partial rate asymmetries for B---\ensuremath{>}omegaK and B---\ensuremath{>}omegapi}",
+    eprint = "hep-ex/0609022",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevD.74.111101",
+    journal = "Phys. Rev. D",
+    volume = "74",
+    pages = "111101",
+    year = "2006"
+}
+'

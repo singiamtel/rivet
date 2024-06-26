@@ -91,14 +91,14 @@ END PLOT
 
 BEGIN PLOT /ALICE_2021_I1848990/d14-x01-y01
 Title=Charm-quark fragmentation-fraction ratio for $p_T(D)>1$ GeV/$c$
-XCustomMajorTicks=1	"pp $\to$ D (Q=PROMPT) + X"
+XCustomMajorTicks=1	$pp\to{D}(\mathrm{prompt})+X$
 YLabel=prompt $f_s$/($f_u+f_d$)
 ConnectBins=0
 END PLOT
 
 BEGIN PLOT /ALICE_2021_I1848990/d15-x01-y01
 Title=Beauty-quark fragmentation-fraction ratio for $p_T(D)>2$ GeV/$c$
-XCustomMajorTicks=1	"pp $\to$ D (Q=NON-PROMPT) + X"
+XCustomMajorTicks=1	$pp\to{D}(\mathrm{non-prompt})+X$
 YLabel=non-prompt $f_s$/($f_u+f_d$)
 ConnectBins=0
 END PLOT

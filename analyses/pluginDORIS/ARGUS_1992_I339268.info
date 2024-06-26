@@ -1,0 +1,33 @@
+Name: ARGUS_1992_I339268
+Year: 1992
+Summary: $3\pi$ mass distribution in $\tau^-\to\pi^-\pi^-\pi^+\nu_\tau$ decays
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 339268
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 58 (1993) 61-70
+RunInfo: Any process producing tau leptons, originally e+e- > tau+tau-
+Description:
+  'Three pion mass distrubution in $\tau^-\to\pi^-\pi^-\pi^+\nu_\tau$ decays. Data take from the tables in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1992olh
+BibTeX: '@article{ARGUS:1992olh,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Analysis of the decay tau- ---\ensuremath{>} pi- pi- pi+ tau-neutrino and determination of the a1 (1260) resonance parameters}",
+    reportNumber = "DESY-92-125",
+    doi = "10.1007/BF01554080",
+    journal = "Z. Phys. C",
+    volume = "58",
+    pages = "61--70",
+    year = "1993"
+}
+'

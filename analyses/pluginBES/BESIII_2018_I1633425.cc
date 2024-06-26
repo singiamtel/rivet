@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Cross-section for $e^+e^-\to\pi^0\pi^0\psi(2S)$ for energies between 4.009 to 4.600 GeV
+  /// @brief Cross-section for e+e- -> pi0pi0psi(2S) for energies between 4.009 to 4.600 GeV
   class BESIII_2018_I1633425 : public Analysis {
   public:
 
@@ -21,7 +21,16 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nPsi2, "TMP/Psi2S");
+      book(_nPsi2, 1, 1, 1);
+      for (const string& en : _nPsi2.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -68,7 +77,7 @@ namespace Rivet {
             }
           }
           if(matched) {
-            _nPsi2->fill();
+            _nPsi2->fill(_ecms);
             break;
           }
         }
@@ -77,24 +86,15 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nPsi2->val();
-      double error = _nPsi2->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nPsi2, crossSection()/ sumOfWeights() /picobarn);
     }
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _nPsi2;
+    BinnedHistoPtr<string> _nPsi2;
+    string _ecms;
     /// @}
 
   };

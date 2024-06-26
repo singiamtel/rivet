@@ -1,0 +1,35 @@
+Name: BESIII_2023_I2677290
+Year: 2023
+Summary: Cross section and form factors for $e^+e^-\to \Lambda_c^+\bar{\Lambda}_c^-$ below 4.95 GeV.
+Collider: BEPC
+InspireID: 2677290
+Status: VALIDATED NOHEPDATA
+Reentrant:  true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2307.07316 [hep-ex]
+RunInfo: e+e- to hadrons
+NeedCrossSection: yes
+Beams: [e+, e-]
+Enegies: [4.6119, 4.628, 4.6409, 4.6612, 4.6819, 4.6988, 4.7397, 4.75, 4.7805, 4.8431, 4.918, 4.9509]
+Options:
+ - ENERGY=*
+Description:
+  'Cross section and form factors for $e^+e^-\to \Lambda_c^+\bar{\Lambda}_c^-$ below 4.95 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023rwv
+BibTeX: '@article{BESIII:2023rwv,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurement of the Energy-Dependent Electromagnetic Form Factors of a Charmed Baryon}",
+    eprint = "2307.07316",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "7",
+    year = "2023"
+}
+'

@@ -1,0 +1,35 @@
+Name: BELLE_2002_I590700
+Year: 2002
+Summary: Mass and angular distributions in $B\to D^{(*)}K^-K^{0(*)}$ decays
+Experiment: BELLE
+Collider: KEKB
+InspireID: 590700
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 542 (2002) 171-182
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of mass and angular distributions in $B\to D^{(*)}K^-K^{0(*)}$ decays. The corrected, background subtracted data was read from the figures in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2002gzj
+BibTeX: '@article{Belle:2002gzj,
+    author = "Drutskoy, A. and others",
+    collaboration = "Belle",
+    title = "{Observation of B ---\ensuremath{>} D(*) K- K0(*) decays}",
+    eprint = "hep-ex/0207041",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2002-25, KEK-PREPRINT-2002-72",
+    doi = "10.1016/S0370-2693(02)02373-0",
+    journal = "Phys. Lett. B",
+    volume = "542",
+    pages = "171--182",
+    year = "2002"
+}
+'

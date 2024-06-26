@@ -1,0 +1,36 @@
+Name: BABAR_2004_I626518
+Year: 2004
+Summary: Helicity angles and polarization in $B^-\to D^{*0}K^{*-}$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 626518
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 92 (2004) 141801
+RunInfo: Any process producing B+/- mesons, originally Upsilon(4S) decays
+Description:
+'Measurement of the helicity angles and polarization in $B^-\to D^{*0}K^{*-}$. The data was read from figure 2 in the
+ paper and the background given subtracted.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2003zoz
+BibTeX: '@article{BaBar:2003zoz,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of the branching fraction and polarization for the decay $B^- \to D^{0*} K^{*-}$}",
+    eprint = "hep-ex/0308057",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-10140, BABAR-PUB-0324, BABAR-PUB-03-024",
+    doi = "10.1103/PhysRevLett.92.141801",
+    journal = "Phys. Rev. Lett.",
+    volume = "92",
+    pages = "141801",
+    year = "2004"
+}
+'

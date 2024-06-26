@@ -50,14 +50,14 @@ namespace Rivet {
         FourMomentum p = boost.transform(dec.momentum());
         double mom=p.p3().mod();
         if(dec.pid()==221) {
-          _br_eta[iMeson]->fill(0.5);
+          _br_eta[iMeson]->fill();
           _s_eta[iMeson]->fill(mom);
         }
         else if(dec.pid()==331) {
-          _br_etaPrime[iMeson]->fill(0.5);
+          _br_etaPrime[iMeson]->fill();
         }
         else {
-          _br_phi[iMeson]->fill(0.5);
+          _br_phi[iMeson]->fill();
           _s_phi[iMeson] ->fill(mom);
         }
       }
@@ -127,8 +127,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _n_D[3];
-    Histo1DPtr _br_eta[3],_br_etaPrime[3],_br_phi[3];
+    CounterPtr _n_D[3], _br_eta[3],_br_etaPrime[3],_br_phi[3];
     Histo1DPtr _s_eta[3], _s_phi[3];
     /// @}
 

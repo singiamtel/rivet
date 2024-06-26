@@ -21,7 +21,15 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nChi0, "TMP/chi0");
+      book(_nChi0, 1,1,1);
+      for (const string& en : _nChi0.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -66,7 +74,7 @@ namespace Rivet {
             }
           }
           if(matched) {
-            _nChi0->fill();
+            _nChi0->fill(_ecms);
             break;
           }
         }
@@ -77,16 +85,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact =  crossSection()/ sumOfWeights() /picobarn;
-      double sigma = _nChi0->val()*fact;
-      double error = _nChi0->err()*fact;
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nChi0,crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -94,7 +93,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nChi0;
+    BinnedHistoPtr<string> _nChi0;
+    string _ecms;
     /// @}
 
   };

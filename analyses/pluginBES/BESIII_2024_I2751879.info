@@ -1,0 +1,38 @@
+Name: BESIII_2024_I2751879
+Year: 2024
+Summary: Cross section for  $e^+e^-\to\omega\chi_{c(1,2)}$ at from $\sqrt{s}=4.308$ to 4.951 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2751879
+Status: VALIDATED NOHEPDATA
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2210.13058 [hep-ex]
+RunInfo: e+ e- -> hadrons
+Beams: [e+, e-]
+Energies :  [4.308, 4.312, 4.337, 4.358, 4.377, 4.387, 4.396, 4.416, 4.436,
+             4.467, 4.527, 4.575,   4.6, 4.612, 4.628, 4.641, 4.661, 4.682,
+             4.699, 4.74, 4.75, 4.781, 4.843, 4.918, 4.951]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for  $e^+e^-\to\omega\chi_{c(1,2)}$ at from $\sqrt{s}=4.308$ to 4.951 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  Herwig 7 events''
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024jzg
+BibTeX: '@article{BESIII:2024jzg,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Observation of two structures in the processes $e^+e^-\rightarrow\omega\chi_{c1}$ and $\omega\chi_{c2}$}",
+    eprint = "2401.14720",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "1",
+    year = "2024"
+}
+'

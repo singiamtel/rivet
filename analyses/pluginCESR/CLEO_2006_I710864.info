@@ -1,0 +1,40 @@
+Name: CLEO_2006_I710864
+Year: 2006
+Summary: Cross sections for $e^+e^-\to J/\psi + \pi^+\pi^-$, $\pi^0\pi^0$ or $K^+K^-$
+Experiment: CLEO
+Collider: CESR
+InspireID: 710864
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 96 (2006) 162003
+RunInfo: For the cross sections e+e- -> hadrons at 4.015, 4.160 or 4.260 GeV, any process producing psi(4230) for decays. pi0 should be set stable
+Options:
+ - MODE=SIGMA,DECAY
+ - PID=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to J/\psi + \pi^+\pi^-$, $\pi^0\pi^0$ or $K^+K^-$
+   at $\sqrt{s}=4.015$, $4.160$ or $4.260\,$GeV to study the properties of $\psi(4040)$ , $\psi(4160)$ and $Y(4260)$ (now $\psi(4230)$).
+   Two modes are provided, one for the $e^+e^-$ cross secions (MODE=SIGMA) and a second which implements the measured mass distribution in $Y(4260)\to J/\psi\pi^+\pi^-$ decays. There is no consensus as to the nature of the $\psi(4230)$ $c\bar{c}$ state and therefore we taken its PDG code to be 9030443, i.e. the first unused code for an undetermined spin one $c\bar{c}$ state. This can be changed using the PID option if a different code is used by the event generator performing the simulation.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2006ike
+BibTeX: '@article{CLEO:2006ike,
+    author = "Coan, T. E. and others",
+    collaboration = "CLEO",
+    title = "{Charmonium decays of Y(4260), psi(4160) and psi(4040)}",
+    eprint = "hep-ex/0602034",
+    archivePrefix = "arXiv",
+    reportNumber = "CLNS-06-1952, CLEO-06-02",
+    doi = "10.1103/PhysRevLett.96.162003",
+    journal = "Phys. Rev. Lett.",
+    volume = "96",
+    pages = "162003",
+    year = "2006"
+}
+'

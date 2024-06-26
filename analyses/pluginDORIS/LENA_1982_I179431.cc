@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief R measurement
   class LENA_1982_I179431 : public Analysis {
   public:
 
@@ -26,10 +26,19 @@ namespace Rivet {
         const auto& ref = refData(i+1, 1, 1);
         book(_h_hadrons[i], "d0"+to_string(i+1)+"_sigma_hadrons", ref);
         book(_h_muons[i], "d0"+to_string(i+1)+"_sigma_muons", ref);
-        book(_ratios[i], i+1, 1, 1);
       }
-      book(_c_hadrons, "d03_sigma_hadrons");
-      book(_c_muons, "d03_sigma_muons");
+      book(_c_hadrons, "d03_sigma_hadrons", refData<YODA::BinnedEstimate<string>>(3,1,1));
+      book(_c_muons, "d03_sigma_muons"   , refData<YODA::BinnedEstimate<string>>(3,1,1) );
+      for (const string& en : _c_hadrons.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty() && !inRange(sqrtS()/GeV,7.4,9.43))
+        MSG_ERROR("Beam energy incompatible with analysis.");
+      if(_ecms.empty()) _ecms="OTHER";
     }
 
 
@@ -47,34 +56,27 @@ namespace Rivet {
       if (nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) {
         _h_muons[0]->fill(sqrtS()/GeV);
         _h_muons[1]->fill(sqrtS()/GeV);
-        _c_muons->fill();
+        _c_muons->fill(_ecms);
       }
       // everything else
       else {
         _h_hadrons[0]->fill(sqrtS()/GeV);
         _h_hadrons[1]->fill(sqrtS()/GeV);
-        _c_hadrons->fill();
+        _c_hadrons->fill(_ecms);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      const double fact = crossSection() / sumOfWeights() / picobarn;
-      scale(_h_hadrons, fact);
-      scale(_h_muons, fact);
-      scale({_c_hadrons, _c_muons}, fact);
-      divide(_h_hadrons[0], _h_muons[0], _ratios[0]);
-      divide(_h_hadrons[1], _h_muons[1], _ratios[1]);
-      const Estimate0D R =  *_c_hadrons / *_c_muons;
+      for(unsigned int ix=0;ix<2;++ix) {
+        Estimate1DPtr mult;
+        book(mult, ix+1, 1, 1);
+        divide(_h_hadrons[ix],_h_muons[ix],mult);
+      }
       BinnedEstimatePtr<string> mult;
       book(mult, 3, 1, 1);
-      for (auto& b : mult->bins()) {
-        const double Ecm = std::stod(b.xEdge());
-        if (isCompatibleWithSqrtS(Ecm/GeV)) {
-          b.set(R.val(), R.errPos());
-        }
-      }
+      divide(_c_hadrons,_c_muons,mult);
     }
 
     /// @}
@@ -82,9 +84,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    BinnedHistoPtr<string> _c_hadrons, _c_muons;
     Histo1DPtr _h_hadrons[2], _h_muons[2];
-    Estimate1DPtr _ratios[2];
+    string _ecms;
     /// @}
 
 

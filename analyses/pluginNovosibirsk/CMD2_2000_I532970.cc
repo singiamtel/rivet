@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > pi+pi+ omega or eta
   class CMD2_2000_I532970 : public Analysis {
   public:
 
@@ -23,10 +23,16 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numOmegaPiPi, "TMP/OmegaPiPi");
-      book(_numEtaPiPi, "TMP/EtaPiPi");
-      book(_num5Pi, "TMP/5Pi");
-
+      book(_numOmegaPiPi, 1, 1, 1);
+      book(_numEtaPiPi  , 2, 1, 1);
+      for (const string& en : _numOmegaPiPi.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -52,7 +58,6 @@ namespace Rivet {
 	++ntotal;
       }
       const FinalState& ufs = apply<FinalState>(event, "UFS");
-      bool foundRes = false;
       for (const Particle& p : ufs.particles()) {
 	if(p.children().empty()) continue;
 	// find the eta
@@ -76,8 +81,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched) {
-	    _numEtaPiPi->fill();
-	    foundRes = true;
+	    _numEtaPiPi->fill(_ecms);
 	  }
 	}
 	// find the omega
@@ -101,50 +105,25 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched) {
-	    _numOmegaPiPi->fill();
-	    foundRes = true;
+	    _numOmegaPiPi->fill(_ecms);
 	  }
 	}
       }
-
-      if(foundRes) vetoEvent;
-      if(nCount[-211]==2&&nCount[211]==2&&nCount[111]==1)
-	_num5Pi->fill();
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<4;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _numOmegaPiPi->val();
-          error = _numOmegaPiPi->err();
-        }
-        else if(ix==2) {
-          sigma = _numEtaPiPi->val();
-          error = _numEtaPiPi->err();
-        }
-        else {
-          sigma = _num5Pi->val();
-          error = _num5Pi->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale(_numOmegaPiPi,fact);
+      scale(_numEtaPiPi  ,fact);
     }
 
     /// @}
 
     /// @name Histograms
     /// @{
-    CounterPtr _numEtaPiPi,_numOmegaPiPi,_num5Pi;
+    BinnedHistoPtr<string> _numEtaPiPi,_numOmegaPiPi;
+    string _ecms;
     /// @}
 
   };

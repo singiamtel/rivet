@@ -21,10 +21,10 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nUps1pipi, "TMP/nUps1pipi");
-      book(_nUps2pipi, "TMP/nUps2pipi");
-      book(_nUps3pipi, "TMP/nUps3pipi");
-      book(_nUps1KK,   "TMP/nUps1KK");
+      book(_nUps1pipi, 1, 1, 1);
+      book(_nUps2pipi, 2, 1, 1);
+      book(_nUps3pipi, 3, 1, 1);
+      book(_nUps1KK,   4, 1, 1);
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -70,15 +70,15 @@ namespace Rivet {
 	if(matched) {
 	  if(nRes[211]==1 && nRes[-211]==1 ) {
 	    if(p.pid()==553)
-	      _nUps1pipi->fill();
+	      _nUps1pipi->fill("10.87"s);
 	    if(p.pid()==100553)
-	      _nUps2pipi->fill();
+	      _nUps2pipi->fill("10.87"s);
 	    if(p.pid()==200553)
-	      _nUps3pipi->fill();
+	      _nUps3pipi->fill("10.87"s);
 	  }
 	  else if(nRes[321]==1 && nRes[-321]==1) {
 	    if(p.pid()==553)
-	      _nUps1KK->fill();
+	      _nUps1KK->fill("10.87"s);
 	  }
 	}
       }
@@ -88,39 +88,17 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /picobarn;
-      for(unsigned int ix=1;ix<5;++ix) {
-	double sigma = 0.0, error = 0.0;
-	if(ix==1) {
-	  sigma = _nUps1pipi->val()*fact;
-	  error = _nUps1pipi->err()*fact;
-	}
-	else if(ix==2) {
-	  sigma = _nUps2pipi->val()*fact;
-	  error = _nUps2pipi->err()*fact;
-	}
-	else if(ix==3) {
-	  sigma = _nUps3pipi->val()*fact;
-	  error = _nUps3pipi->err()*fact;
-	}
-	else if(ix==4) {
-	  sigma = _nUps1KK->val()*fact;
-	  error = _nUps1KK->err()*fact;
-	}
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      scale(_nUps1pipi,fact);
+      scale(_nUps2pipi,fact);
+      scale(_nUps3pipi,fact);
+      scale(_nUps1KK  ,fact);
     }
 
     /// @}
 
     /// @name Histograms
     /// @{
-    CounterPtr _nUps1pipi,_nUps2pipi,_nUps3pipi,_nUps1KK;
+    BinnedHistoPtr<string> _nUps1pipi,_nUps2pipi,_nUps3pipi,_nUps1KK;
     /// @}
 
   };

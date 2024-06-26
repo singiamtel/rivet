@@ -22,14 +22,8 @@ namespace Rivet {
       declare(UnstableParticles(),"UFS");
       // Book histograms
       // averages
-      _h_N_aver  = {Profile1DPtr(),Profile1DPtr(),Profile1DPtr()};
-      _h_R2_aver = {Profile1DPtr(),Profile1DPtr(),Profile1DPtr()};
-      book(_h_N_aver [0],1,3,1);
-      book(_h_N_aver [1],1,2,1);
-      book(_h_N_aver [2],1,1,1);
-      book(_h_R2_aver[0],1,3,2);
-      book(_h_R2_aver[1],1,2,2);
-      book(_h_R2_aver[2],1,1,2);
+      book(_h_N_aver ,1,1,1);
+      book(_h_R2_aver,1,1,2);
       // dists
       _h_N  = {Histo1DPtr(),Histo1DPtr(),Histo1DPtr()};
       _h_R2 = {Histo1DPtr(),Histo1DPtr(),Histo1DPtr()};
@@ -64,7 +58,7 @@ namespace Rivet {
 	findDecayProducts(p,children,nCharged);
 	// ncharged
 	_h_N     [iHist]->fill(nCharged);
-	_h_N_aver[iHist]->fill(0.5,nCharged);
+	_h_N_aver->fill(iHist,nCharged);
 	// R_2
 	LorentzTransform boost = LorentzTransform::mkFrameTransformFromBeta(p.momentum().betaVec());
 	vector<FourMomentum> mom;
@@ -86,7 +80,7 @@ namespace Rivet {
 	}
 	double R2=H2/H0;
 	_h_R2     [iHist]->fill(R2);
-	_h_R2_aver[iHist]->fill(0.5,R2);
+	_h_R2_aver->fill(iHist,R2);
       }
     }
 
@@ -105,7 +99,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     vector<Histo1DPtr> _h_N,_h_R2;
-    vector<Profile1DPtr> _h_N_aver,_h_R2_aver;
+    BinnedProfilePtr<int> _h_N_aver,_h_R2_aver;
     /// @}
 
 

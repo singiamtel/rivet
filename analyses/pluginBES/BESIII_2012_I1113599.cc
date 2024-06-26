@@ -99,15 +99,15 @@ namespace Rivet {
       // proton
       normalize(_h_proton );
       pair<double,pair<double,double> > alpha = calcAlpha(_h_proton);
-      Estimate1DPtr _h_alpha_proton;
+      Estimate0DPtr _h_alpha_proton;
       book(_h_alpha_proton,1,1,1);
-      _h_alpha_proton->bin(1).set(alpha.first, alpha.second);
+      _h_alpha_proton->set(alpha.first, alpha.second);
       // neutron
       normalize(_h_neutron);
       alpha = calcAlpha(_h_neutron);
-      Estimate1DPtr _h_alpha_neutron;
+      Estimate0DPtr _h_alpha_neutron;
       book(_h_alpha_neutron, 1,1,2);
-      _h_alpha_neutron->bin(1).set(alpha.first, alpha.second);
+      _h_alpha_neutron->set(alpha.first, alpha.second);
     }
 
     /// @}

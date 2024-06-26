@@ -1,0 +1,39 @@
+Name: BELLE_2008_I756554
+Year: 2008
+Summary: Mass and angular distributions in $B^+\to D^0\bar{D}^0K^+$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 756554
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 100 (2008) 092001
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Options:
+ - PID=*
+Description:
+'Measurement of mass and angular distributions in $B^+\to D^0\bar{D}^0K^+$ decays by the BaBar collaboration.
+ The efficiency corrected, background subtracted, data were read from Figures 3 and 4. The PDG code for the $D_s(2700)$ is not defined but we
+  make the assumption it is the vector $2S$ state with PDG code 100433, although this can b e changed using the PID option.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2007hht
+BibTeX: '@article{Belle:2007hht,
+    author = "Brodzicka, J. and others",
+    collaboration = "Belle",
+    title = "{Observation of a new D(sJ) meson in B+ ---\ensuremath{>} anti-D0 D0 K+ decays}",
+    eprint = "0707.3491",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevLett.100.092001",
+    journal = "Phys. Rev. Lett.",
+    volume = "100",
+    pages = "092001",
+    year = "2008"
+}
+'

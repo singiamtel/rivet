@@ -106,7 +106,7 @@ namespace Rivet {
             }
           }
           if (matched) {
-            _h_sigma->fill(2.396);
+            _h_sigma->fill("2.396"s);
             if(p1.pid()==PID::LAMBDA) {
               Lambda=p1;
             }
@@ -170,7 +170,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_sigma,_h_cTheta;
+    BinnedHistoPtr<string> _h_sigma;
+    Histo1DPtr _h_cTheta;
     Histo1DGroupPtr _h_pol;
     /// @}
 

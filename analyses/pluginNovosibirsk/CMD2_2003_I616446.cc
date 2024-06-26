@@ -23,7 +23,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numOmegaPi, "TMP/OmegaPi");
+      book(_numOmegaPi, 1, 1, 1);
     }
 
 
@@ -63,7 +63,7 @@ namespace Rivet {
 	  if(nRes[111]!=1 || nRes[22]!=1) continue;
 	  // omega pi0
 	  if(nCount[111]-nRes[111]==1)
-	    _numOmegaPi->fill();
+	    _numOmegaPi->fill(round(sqrtS()/MeV));
 	}
       }
     }
@@ -71,23 +71,12 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      double sigma = _numOmegaPi->val();
-      double error = _numOmegaPi->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_numOmegaPi, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @name Histograms
     /// @{
-    CounterPtr _numOmegaPi;
+    BinnedHistoPtr<int> _numOmegaPi;
     /// @}
 
   };

@@ -26,8 +26,16 @@ namespace Rivet {
       for(unsigned int ix=1;ix<7;++ix) {
         stringstream ss;
         ss << "TMP/n" << ix;
-        book(_nMeson[ix], ss.str());
+        book(_nMeson[ix], 1, 1, ix);
       }
+      for (const string& en : _nMeson[2].binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -45,49 +53,40 @@ namespace Rivet {
 
       if(ntotal==3) {
         if((nCount[ 211]==1 && nCount[-321]==1) ||
-           (nCount[-211]==1 && nCount[ 321]==1) )
-          _nMeson[1]->fill();
+           (nCount[-211]==1 && nCount[ 321]==1) ) {
+          if(_ecms=="3.773"s) _nMeson[1]->fill(_ecms);
+        }
       }
       else if(ntotal==4&&nCount[111]==1) {
         if((nCount[ 211]==1 && nCount[-321]==1) ||
            (nCount[-211]==1 && nCount[ 321]==1) )
-          _nMeson[2]->fill();
+          _nMeson[2]->fill(_ecms);
       }
       else if(ntotal==5) {
         if((nCount[ 211]==2 && nCount[-211]==1 && nCount[-321]==1) ||
            (nCount[-211]==2 && nCount[ 211]==1 && nCount[ 321]==1) )
-          _nMeson[3]->fill();
+          _nMeson[3]->fill(_ecms);
         if(((nCount[ 211]==1 &&  nCount[-321]==1) ||
             (nCount[-211]==1 &&  nCount[ 321]==1) ) && nCount[111]==2)
-          _nMeson[6]->fill();
+          _nMeson[6]->fill(_ecms);
       }
       else if(ntotal==6&&nCount[111]==1) {
         if((nCount[ 211]==2 && nCount[-211]==1 && nCount[-321]==1) ||
            (nCount[-211]==2 && nCount[ 211]==1 && nCount[ 321]==1) )
-          _nMeson[4]->fill();
+          _nMeson[4]->fill(_ecms);
       }
       else if(ntotal==7) {
         if((nCount[ 211]==3 && nCount[-211]==2 && nCount[-321]==1) ||
-           (nCount[-211]==3 && nCount[ 211]==2 && nCount[ 321]==1) )
-          _nMeson[5]->fill();
+           (nCount[-211]==3 && nCount[ 211]==2 && nCount[ 321]==1) ) {
+          if(_ecms=="3.773"s) _nMeson[5]->fill(_ecms);
+        }
       }
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<7;++ix) {
-        double sigma = _nMeson[ix]->val();
-        double error = _nMeson[ix]->err();
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for(unsigned int ix=1;ix<7;++ix)
+        scale(_nMeson[ix],crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -95,7 +94,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nMeson[7];
+    BinnedHistoPtr<string> _nMeson[7];
+    string _ecms;
     /// @}
 
 

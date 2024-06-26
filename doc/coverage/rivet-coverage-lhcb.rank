@@ -3,7 +3,7 @@
 867355 . Measurement of $\sigma(pp \to b \bar{b} X)$ at $\sqrt{s}=7~\rm{TeV}$ in the forward region
 886284 ? First observation of $B^0_s \to J/\psi f_0(980)$ decays
 886536 ? First observation of $\bar{B}^0_s \to D_{s2}^{*+} X \mu^-\bar{\nu}$ decays
-891233 ? Measurement of $J/\psi$ production in $pp$ collisions at $\sqrt{s}=7~\rm{TeV}$
+891233 . Measurement of $J/\psi$ production in $pp$ collisions at $\sqrt{s}=7~\rm{TeV}$
 892495 ? Search for the rare decays $B^0_s \to \mu^+\mu^-$ and $B^0 \to \mu^+\mu^-$
 914506 . Determination of $f_s/f_d$ for $7~\rm{TeV}$ $pp$ collisions and a measurement of the branching fraction of the decay $B_d\to D^-K^+$
 917009 . Measurement of $V^0$ production ratios in $pp$ collisions at $\sqrt{s} = 0.9$ and $7~\rm{TeV}$
@@ -217,8 +217,8 @@
 1311488 ! Measurement of the forward $W$ boson cross-section in $pp$ collisions at $\sqrt{s} = 7 {\rm \, TeV}$
 1311489 X Determination of $\gamma$ and −2$\beta_s$ from charmless two-body decays of beauty mesons
 1311994 X Measurements of $CP$ violation in the three-body phase space of charmless $B^{\pm}$ decays
-1315113 X Measurement of the $\chi_b(3P)$ mass and of the relative rate of $\chi_{b1}(1P)$ and $\chi_{b2}(1P)$ production
-1316329 ? Measurement of the $\eta_c (1S)$ production cross-section in proton-proton collisions via the decay $\eta_c (1S) \rightarrow p \bar{p}$
+1315113 . Measurement of the $\chi_b(3P)$ mass and of the relative rate of $\chi_{b1}(1P)$ and $\chi_{b2}(1P)$ production
+1316329 . Measurement of the $\eta_c (1S)$ production cross-section in proton-proton collisions via the decay $\eta_c (1S) \rightarrow p \bar{p}$
 1317237 X Measurement of the $CP$-violating phase $\phi_s$ in $\bar{B}^{0}_{s}\to D_{s}^{+}D_{s}^{-}$ decays
 1319484 X Search for the lepton flavour violating decay τ$^{−}$ → μ$^{−}$ μ$^{+}$ μ$^{−}$
 1319485 X Precision Measurement of the Mass and Lifetime of the $\Xi_b^-$ Baryon
@@ -228,7 +228,7 @@
 1325983 X Study of $\eta-\eta^{\prime}$ mixing from measurement of $B^0_{(s)} \rightarrow J/\psi \eta^{(\prime)}$~decay rates
 1326136 ! Measurement of the Z+b-jet cross-section in pp collisions at $ \sqrt{s} $ = 7 TeV in the forward region
 1326411 X Measurement of the CP-violating phase $\beta$ in $B^0\rightarrow J/\psi \pi^+\pi^-$ decays and limits on penguin effects
-1327230 X Measurement of $B_c^+$ production in proton-proton collisions at $\sqrt{s}=8$ TeV
+1327230 . Measurement of $B_c^+$ production in proton-proton collisions at $\sqrt{s}=8$ TeV
 1327481 X Precision measurement of $CP$ violation in $B_s^0 \to J/\psi K^+K^-$ decays
 1328624 X Observation of two new $\Xi_b^-$ baryon resonances
 1329958 X Measurement of the lifetime of the $B_c^+$ meson using the $B_c^+\rightarrow J/\psi\pi^+$ decay mode
@@ -427,7 +427,7 @@
 1673686 . Measurement of $C\!P$ asymmetries in two-body $B_{(s)}^{0}$-meson decays to charged pions and kaons
 1674704 . Search for a dimuon resonance in the $\Upsilon$ mass region
 1674835 X Observation of a new $\Xi_b^-$ resonance
-1674916 X Measurement of $D_s^{\pm}$ production asymmetry in $pp$ collisions at $\sqrt{s} =7$ and 8 TeV
+1674916 . Measurement of $D_s^{\pm}$ production asymmetry in $pp$ collisions at $\sqrt{s} =7$ and 8 TeV
 1676225 X Measurement of the CKM angle $\gamma$ using $B^\pm\to DK^\pm$ with $D\to K_\text{S}^0\pi^+\pi^-$, $K_\text{S}^0K^+K^-$ decays
 1676395 X Measurement of the time-integrated $CP$ asymmetry in $D^0 \rightarrow K^0_S K^0_S$ decays
 1676811 X Measurement of the Lifetime of the Doubly Charmed Baryon $\Xi_{cc}^{++}$
@@ -459,12 +459,12 @@
 1709949 . Study of the $B^0\to \rho(770)^0 K^*(892)^0$ decay with an amplitude analysis of $B^0\to (\pi^+\pi^-) (K^+\pi^-)$ decays
 1714780 . Model-Independent Observation of Exotic Contributions to $B^0\to J/\psi K^+\pi^-$ Decays
 1714986 . Observation of the doubly Cabibbo-suppressed decay $\Xi_{c}^{+}\to p\phi$
-1716259 X Measurement of the mass and production rate of $\Xi_b^-$ baryons
+1716259 . Measurement of the mass and production rate of $\Xi_b^-$ baryons
 1718851 . Measurement of the ratio of branching fractions of the decays $\Lambda^0_b\to\psi(2S) \Lambda$ and $\Lambda^0_b\!\to J/\psi \Lambda$
 1720413 . Measurement of $B^+$, $B^0$ and $\Lambda_b^0$ production in $p\mkern 1mu\mathrm{Pb}$ collisions at $\sqrt{s_\mathrm{NN}}=8.16\,{\rm TeV}$
 1720423 . Dalitz plot analysis of the $D^+\to K^-K^+K^+$ decay
 1720479 X Observation of $B^0_{(s)} \to J/\psi p \overline{p}$ decays and precision measurements of the $B^0_{(s)}$ masses
-1720859 ! Measurement of $b$ hadron fractions in 13 TeV $pp$ collisions
+1720859 . Measurement of $b$ hadron fractions in 13 TeV $pp$ collisions
 1721081 X Amplitude analysis of $B^{0}_{s} \rightarrow K^{0}_{\textrm{S}} K^{\pm}\pi^{\mp}$ decays
 1723351 X Search for $CP$ violation in $D_s^+\to K_S^0 \pi^+$, $D^+\to K_S^0 K^+$ and $D^+\to \phi \pi^+$ decays
 1724179 . Measurement of the mass difference between neutral charm-meson eigenstates
@@ -499,7 +499,7 @@
 1760788 . Measurement of $\mathit{\Xi}_{cc}^{++}$ production in $pp$ collisions at $\sqrt{s}=13$ TeV
 1762092 . Measurement of the $B_c^-$ meson production fraction and asymmetry in 7 and 13 TeV $pp$ collisions
 1762838 ? Updated measurement of decay-time-dependent CP asymmetries in $D^0 \to K^+K^-$ and $D^0 \to \pi^+\pi^-$ decays
-1763898 ? Measurement of the $\eta_c(1S)$ production cross-section in $pp$ collisions at $\sqrt{s} = 13$ TeV
+1763898 . Measurement of the $\eta_c(1S)$ production cross-section in $pp$ collisions at $\sqrt{s} = 13$ TeV
 1765144 X Determination of quantum numbers for several excited charmed mesons observed in $B^- \to D^{*+} \pi^- \pi^-$ decays
 1766087 ? Observation of the semileptonic decay $B^{+}\to p\overline{p}\mu^{+}\nu_{\mu}$
 1766239 ? Precision measurement of the $\Xi_{cc}^{++}$ mass
@@ -564,13 +564,15 @@
 1862723 X A Comparison of CPU and GPU Implementations for the LHCb Experiment Run 3 Trigger
 1872884 X Evidence of a $J/\psi\Lambda$ structure and observation of excited $\Xi^-$ states in the $\Xi^-_b \to J/\psi\Lambda K^-$ decay
 1877981 ? Study of coherent $J/\psi$ production in lead-lead collisions at $ \sqrt{{\mathrm{s}}_{\mathrm{NN}}} $ = 5 TeV
-1889335 ! Measurement of prompt charged-particle production in pp collisions at $ \sqrt{\mathrm{s}} $ = 13 TeV
+1888216 . Observation of a $\Lambda_b^0-\overline{\Lambda}_b^0$ production asymmetry in proton-proton collisions at $\sqrt{s} = 7 \textrm{ and } 8\,\textrm{TeV}$
+1889335 . Measurement of prompt charged-particle production in pp collisions at $ \sqrt{\mathrm{s}} $ = 13 TeV
 1899799 X $J/\psi$ photoproduction in Pb-Pb peripheral collisions at $\sqrt {s_{NN}}$= 5 TeV
 1903743 X Evidence for a new structure in the $J/\psi p$ and $J/\psi \bar{p}$ systems in $B_s^0 \to J/\psi p \bar{p}$ decays
 1906173 X Search for the radiative $\Xi_b^-\to\Xi^-\gamma$ decay
 1908214 X Analysis of Neutral B-Meson Decays into Two Muons
 1908217 X Measurement of the $B^0_s\to\mu^+\mu^-$ decay properties and search for the $B^0\to\mu^+\mu^-$ and $B^0_s\to\mu^+\mu^-\gamma$ decays
 1913240 ! Measurement of the Nuclear Modification Factor and Prompt Charged Particle Production in $p-Pb$ and $pp$ Collisions at $\sqrt {s_{NN}}$=5  TeV
+1915030 . Measurement of $J/\psi$ production cross-sections in $pp$ collisions at $\sqrt{s}=5$ TeV
 1915358 X Study of the doubly charmed tetraquark $T_{cc}^{+}$
 1915457 X Observation of an exotic narrow doubly charmed tetraquark
 1915806 ? Measurement of the W boson mass
@@ -597,6 +599,7 @@
 2045484 . First Measurement of the <math display="inline"><mrow><mi>Z</mi><mo stretchy="false">→</mo><msup><mrow><mi>μ</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>μ</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> Angular Coefficients in the Forward Region of <math display="inline"><mi>p</mi><mi>p</mi></math> Collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
 2069763 . Search for the doubly heavy baryon $\it{\Xi}_{bc}^{+}$ decaying to $J/\it{\psi} \it{\Xi}_{c}^{+}$
 2072369 ? Measurement of CP asymmetries in $ {D}_{(s)}^{+}\to \eta {\pi}^{+} $ and $ {D}_{(s)}^{+}\to {\eta}^{\prime }{\pi}^{+} $ decays
+2072869 . Evidence for modification of $b$ quark hadronization in high-multiplicity $pp$ collisions at $\sqrt{s} = 13$ TeV
 2083797 ? Search for <math display="inline"><mrow><mi>C</mi><mi>P</mi></mrow></math> violation using <math display="inline"><mrow><mover accent="true"><mrow><mi>T</mi></mrow><mrow><mo stretchy="false">^</mo></mrow></mover></mrow></math>-odd correlations in <math display="inline"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy="false">→</mo><mi>p</mi><mover accent="true"><mrow><mi>p</mi></mrow><mrow><mo stretchy="false">¯</mo></mrow></mover><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>π</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> decays
 2084295 . Measurement of antiproton production from antihyperon decays in ${p} \textrm{He}$ collisions at $\sqrt{s_{\scriptscriptstyle \mathrm NN}} =110\,\text {Ge\hspace{-1.00006pt}V}$
 2085913 ! Measurement of the Z boson production cross-section in proton-lead collisions at $ \sqrt{s_{\textrm{NN}}} $ = 8.16 TeV
@@ -605,31 +608,45 @@
 2107941 . Search for the lepton-flavour violating decays B$^{0}$→ K$^{*0}$μ$^{±}$e$^{∓}$ and $ {B}_s^0 $→ ϕμ$^{±}$e$^{∓}$
 2132748 ? Amplitude analysis of the $D^+\to\pi^- \pi^+\pi^+$ decay and measurement of the $\pi^-\pi^+$ S-wave amplitude
 2138845 . Study of $ {B}_c^{+} $ meson decays to charmonia plus multihadron final states
+2141288 . Multidifferential study of identified charged hadron distributions in $Z$-tagged jets in proton-proton collisions at $\sqrt{s}=$13 TeV
 2148941 ? Measurement of the CKM angle $\gamma$ with $ B^\pm \to D[K^\mp \pi^\pm \pi^\pm \pi^\mp] h^\pm$ decays using a binned phase-space approach
 2154229 . Search for the lepton-flavour violating decays $B^0 \to K^{*0} \tau^\pm \mu^\mp$
 2154232 ? Amplitude analysis of the $ {D}_s^{+} $→ π$^{−}$π$^{+}$π$^{+}$ decay
 2165165 . Measurement of the $ {\Lambda}_c^{+} $ to D$^{0}$ production ratio in periphera PbPb collisions at $ \sqrt{s_{\textrm{NN}}} $ = 5.02 TeV
 2168941 ? Measurement of the ratio of branching fractions $ \mathcal{B}\left({B}_c^{+}\to {B}_s^0{\pi}^{+}\right)/\mathcal{B}\left({B}_c^{+}\to J/\psi {\pi}^{+}\right) $
 2172077 ? Observation of the $B^0_s\!\to D^{*+}D^{*-}$ decay
+2175466 . Study of the $B^{-} \to \Lambda_{c}^{+} \bar{\Lambda}_{c}^{-} K^{-}$ decay
+2178454 . First observation of the <math display="inline"><msup><mi>B</mi><mo>+</mo></msup><mo stretchy="false">→</mo><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><msubsup><mi>D</mi><mi>s</mi><mo>-</mo></msubsup><msup><mi>K</mi><mo>+</mo></msup></math> decay
 2614213 ? Search for the rare decays $W^+ \to D^+_s\gamma$ and $Z \to D^0\gamma$ at LHCb
 2615983 . Test of lepton universality in $b \rightarrow s \ell^+ \ell^-$ decays
 2618202 . Measurement of Υ production in pp collisions at $ \sqrt{s} $ = 5 TeV
 2618313 ? First observation and branching fraction measurement of the $ {\Lambda}_b^0\to {D}_s^{-}p $ decay
 2623821 ? $ {\Lambda}_c^{+} $ polarimetry using the dominant hadronic mode
 2626410 ? A study of $C\!P$ violation in the decays $B^\pm\to[K^+K^-\pi^+\pi^-]_D h^{\pm}$ ($h = K, \pi$) and $B^\pm\to[\pi^+\pi^-\pi^+\pi^-]_D h^{\pm}$
-2635083 ? Observation of the $ {\textrm{B}}_{\textrm{s}}^0 $→ χ$_{c1}$(3872)π$^{+}$π$^{−}$ decay
+2629770 . Measurement of the ratios of branching fractions $\mathcal{R}(D^{*})$ and $\mathcal{R}(D^{0})$
+2633007 . Measurement of the <math display="inline"><mrow><msubsup><mrow><mi mathvariant="normal">Λ</mi></mrow><mrow><mi>b</mi></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy="false">→</mo><mi mathvariant="normal">Λ</mi><mo stretchy="false">(</mo><mn>1520</mn><mo stretchy="false">)</mo><msup><mrow><mi>μ</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>μ</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> Differential Branching Fraction
+2635083 . Observation of the $ {\textrm{B}}_{\textrm{s}}^0 $→ χ$_{c1}$(3872)π$^{+}$π$^{−}$ decay
 2639012 ? Search for $\it{CP}$ violation in $D_{(s)}^{+}\rightarrow K^{-}K^{+}K^{+}$ decays
-2643022 ? Observation of the $B^+ \rightarrow J/\psi \eta^{\prime} K^+$ decay
+2643022 . Observation of the $B^+ \rightarrow J/\psi \eta^{\prime} K^+$ decay
 2649222 . Search for $D^{*}(2007)^{0} \rightarrow \mu ^{+} \mu ^{-}$ in $B^{-}\rightarrow \pi ^{-} \mu ^{+} \mu ^{-}$ decays
+2651271 . Precision Measurement of <math display="inline"><mrow><mi>C</mi><mi>P</mi></mrow></math> Violation in the Penguin-Mediated Decay <math display="inline"><mrow><msubsup><mrow><mi>B</mi></mrow><mrow><mi>s</mi></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy="false">→</mo><mi>ϕ</mi><mi>ϕ</mi></mrow></math>
 2655326 . Study of charmonium decays to $K^0_S K \pi$ in the $B \to (K^0_S K \pi) K$ channels
+2658872 . Measurement of <math><msubsup><mi mathvariant="normal">Ξ</mi><mrow><mi>c</mi></mrow><mo>+</mo></msubsup></math> production in <math><mrow><mi>p</mi><mi>Pb</mi></mrow></math> collisions at <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>8.16</mn></mrow></math> TeV at LHCb
+2662328 . Measurement of the mass difference and relative production rate of the <math display="inline"><msubsup><mi mathvariant="normal">Ω</mi><mi>b</mi><mo>-</mo></msubsup></math> and <math display="inline"><msubsup><mi mathvariant="normal">Ξ</mi><mi>b</mi><mo>-</mo></msubsup></math> baryons
 2662581 ! Associated production of prompt J/ψ and Υ mesons in pp collisions at $ \sqrt{s} $ = 13 TeV
+2665748 . Evidence for the decays B$^{0}$→$ \overline{D} ^{(*)0}$ϕ and updated measurements of the branching fractions of the $ {B}_s^0 $→$ \overline{D} ^{(*)0}$ϕ decays
+2669403 . Measurement of CP asymmetries and branching fraction ratios of B$^{−}$ decays to two charm mesons
+2669595 . Study of the Bose-Einstein correlations of same-sign pions in proton-lead collisions
+2670819 . Search for CP violation in the phase space of D$^{0}$→ π$^{−}$π$^{+}$π$^{0}$ decays with the energy test
 2673124 . Open charm production and asymmetry in pNe collisions at $\sqrt{s_{\scriptscriptstyle {\textrm{NN}}}} = 68.5\,\text {Ge\hspace{-1.00006pt}V}$
 2676543 ? Direct <math display="inline"><mi>C</mi><mi>P</mi></math> violation in charmless three-body decays of <math display="inline"><msup><mi>B</mi><mo>±</mo></msup></math> mesons
 2677042 ? Search for the rare hadronic decay <math display="inline"><msubsup><mi>B</mi><mi>s</mi><mn>0</mn></msubsup><mo stretchy="false">→</mo><mi>p</mi><mover accent="true"><mi>p</mi><mo stretchy="false">¯</mo></mover></math>
 2678048 ? Observation of a <math display="inline"><mi>J</mi><mo>/</mo><mi>ψ</mi><mi mathvariant="normal">Λ</mi></math> Resonance Consistent with a Strange Pentaquark Candidate in <math display="inline"><msup><mi>B</mi><mo>-</mo></msup><mo stretchy="false">→</mo><mi>J</mi><mo>/</mo><mi>ψ</mi><mi mathvariant="normal">Λ</mi><mover accent="true"><mi>p</mi><mo stretchy="false">¯</mo></mover></math> Decays
 2678329 . Charmonium production in $p$Ne collisions at $\sqrt{s_{\scriptscriptstyle \text {NN}}} =68.5$ GeV
 2678996 ? Search for direct <math display="inline"><mi>C</mi><mi>P</mi></math> violation in charged charmless <math display="inline"><mi>B</mi><mo stretchy="false">→</mo><mi>P</mi><mi>V</mi></math> decays
+2680343 . Observation of New Baryons in the <math display="inline"><msubsup><mi mathvariant="normal">Ξ</mi><mi>b</mi><mo>-</mo></msubsup><msup><mi>π</mi><mo>+</mo></msup><msup><mi>π</mi><mo>-</mo></msup></math> and <math display="inline"><mrow><msubsup><mrow><mi mathvariant="normal">Ξ</mi></mrow><mrow><mi>b</mi></mrow><mrow><mn>0</mn></mrow></msubsup><msup><mrow><mi>π</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>π</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> Systems
 2680578 . Nuclear Modification Factor of Neutral Pions in the Forward and Backward Regions in <math display="inline"><mrow><mi>p</mi><mtext>-</mtext><mi>Pb</mi></mrow></math> Collisions
+2680637 . Observation and branching fraction measurement of the decay <math display="inline"><msubsup><mi mathvariant="normal">Ξ</mi><mi>b</mi><mo>-</mo></msubsup><mo stretchy="false">→</mo><msubsup><mi mathvariant="normal">Λ</mi><mi>b</mi><mn>0</mn></msubsup><msup><mi>π</mi><mo>-</mo></msup></math>
 2681870 ? Search for Rare Decays of <math display="inline"><msup><mi>D</mi><mn>0</mn></msup></math> Mesons into Two Muons
 2682591 . Test of lepton flavor universality using <math display="inline"><mrow><msup><mrow><mi>B</mi></mrow><mn>0</mn></msup><mo stretchy="false">→</mo><msup><mrow><mi>D</mi></mrow><mrow><mo>*</mo><mo>-</mo></mrow></msup><msup><mrow><mi>τ</mi></mrow><mrow><mo>+</mo></mrow></msup><msub><mrow><mi>ν</mi></mrow><mrow><mi>τ</mi></mrow></msub></mrow></math> decays with hadronic <math display="inline"><mi>τ</mi></math> channels
 2682593 ? First Observation of a Doubly Charged Tetraquark and Its Neutral Partner
@@ -640,8 +657,37 @@
 2683025 ? Amplitude analysis of the <math display="inline"><msubsup><mi mathvariant="normal">Λ</mi><mi>c</mi><mo>+</mo></msubsup><mo stretchy="false">→</mo><mi>p</mi><msup><mi>K</mi><mo>-</mo></msup><msup><mi>π</mi><mo>+</mo></msup></math> decay and <math display="inline"><msubsup><mi mathvariant="normal">Λ</mi><mi>c</mi><mo>+</mo></msubsup></math> baryon polarization measurement in semileptonic beauty hadron decays
 2684465 ? Measurement of lepton universality parameters in $B^+\to K^+\ell^+\ell^-$ and $B^0\to K^{*0}\ell^+\ell^-$ decays
 2684884 . Search for <math display="inline"><mrow><msubsup><mrow><mi>K</mi></mrow><mrow><mi mathvariant="normal">S</mi><mo stretchy="false">(</mo><mi mathvariant="normal">L</mi><mo stretchy="false">)</mo></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy="false">→</mo><msup><mrow><mi>μ</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>μ</mi></mrow><mrow><mo>-</mo></mrow></msup><msup><mrow><mi>μ</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>μ</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> decays at LHCb
+2685074 . Improved Measurement of <math display="inline"><mi>C</mi><mi>P</mi></math> Violation Parameters in <math display="inline"><msubsup><mi>B</mi><mi>s</mi><mn>0</mn></msubsup><mo stretchy="false">→</mo><mi>J</mi><mo>/</mo><mi>ψ</mi><msup><mi>K</mi><mo>+</mo></msup><msup><mi>K</mi><mo>-</mo></msup></math> Decays in the Vicinity of the <math display="inline"><mi>ϕ</mi><mo stretchy="false">(</mo><mn>1020</mn><mo stretchy="false">)</mo></math> Resonance
+2685710 . Observation of the decays $ {B}_{(s)}^0 $ → D$_{s1}$(2536)$^{∓}$K$^{±}$
+2687526 . A search for rare B → Dμ$^{+}$μ$^{−}$ decays
+2688617 . Observation of Cabibbo-Suppressed Two-Body Hadronic Decays and Precision Mass Measurement of the <math display="inline"><mrow><msubsup><mrow><mi mathvariant="normal">Ω</mi></mrow><mrow><mi>c</mi></mrow><mrow><mn>0</mn></mrow></msubsup></mrow></math> Baryon
 2690240 ? Observation of a Resonant Structure near the <math display="inline"><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><msubsup><mi>D</mi><mi>s</mi><mo>-</mo></msubsup></math> Threshold in the <math display="inline"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mo>+</mo></mrow></msup><mo stretchy="false">→</mo><msubsup><mrow><mi>D</mi></mrow><mrow><mi>s</mi></mrow><mrow><mo>+</mo></mrow></msubsup><msubsup><mrow><mi>D</mi></mrow><mrow><mi>s</mi></mrow><mrow><mo>-</mo></mrow></msubsup><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup></mrow></math> Decay
+2690798 . Measurement of the Z boson production cross-section in pp collisions at $ \sqrt{s} $ = 5.02 TeV
 2691605 . Measurement of the Branching Fractions <math display="inline"><mi mathvariant="script">B</mi><mo stretchy="false">(</mo><msup><mi>B</mi><mn>0</mn></msup><mo stretchy="false">→</mo><mi>p</mi><mover accent="true"><mi>p</mi><mo stretchy="false">¯</mo></mover><mi>p</mi><mover accent="true"><mi>p</mi><mo stretchy="false">¯</mo></mover><mo stretchy="false">)</mo></math> and <math display="inline"><mrow><mi mathvariant="script">B</mi><mo stretchy="false">(</mo><msubsup><mrow><mi>B</mi></mrow><mrow><mi>s</mi></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy="false">→</mo><mi>p</mi><mover accent="true"><mrow><mi>p</mi></mrow><mrow><mo stretchy="false">¯</mo></mrow></mover><mi>p</mi><mover accent="true"><mrow><mi>p</mi></mrow><mrow><mo stretchy="false">¯</mo></mrow></mover><mo stretchy="false">)</mo></mrow></math>
 2692262 ? Measurement of the Time-Integrated <math display="inline"><mi>C</mi><mi>P</mi></math> Asymmetry in <math display="inline"><mrow><msup><mrow><mi>D</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy="false">→</mo><msup><mrow><mi>K</mi></mrow><mrow><mo>-</mo></mrow></msup><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup></mrow></math> Decays
 2694330 ? Model-independent measurement of charm mixing parameters in <math display="inline"><mover accent="true"><mi>B</mi><mo stretchy="false">¯</mo></mover><mo stretchy="false">→</mo><msup><mi>D</mi><mn>0</mn></msup><mo stretchy="false">(</mo><mo stretchy="false">→</mo><msubsup><mi>K</mi><mi>S</mi><mn>0</mn></msubsup><msup><mi>π</mi><mo>+</mo></msup><msup><mi>π</mi><mo>-</mo></msup><mo stretchy="false">)</mo><msup><mi>μ</mi><mo>-</mo></msup><msub><mover accent="true"><mi>ν</mi><mo stretchy="false">¯</mo></mover><mi>μ</mi></msub><mi>X</mi></math> decays
 2694685 . Measurement of the Prompt <math display="inline"><mrow><msup><mrow><mi>D</mi></mrow><mrow><mn>0</mn></mrow></msup></mrow></math> Nuclear Modification Factor in <math display="inline"><mrow><mi>p</mi><mtext>-</mtext><mi>Pb</mi></mrow></math> Collisions at <math display="inline"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>N</mi><mi>N</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>8.16</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
+2696997 . Measurement of the CKM angle $\gamma $ in the ${{{B} ^0} \rightarrow {D} {{K} ^{*0}}}$ channel using self-conjugate ${D} \rightarrow {{K} ^0_{\textrm{S}}} h^+ h^-$ decays
+2698798 . Measurement of <math display="inline"><mi>C</mi><mi>P</mi></math> Violation in <math display="inline"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy="false">→</mo><mi>ψ</mi><mo stretchy="false">(</mo><mo stretchy="false">→</mo><msup><mrow><mo>ℓ</mo></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mo>ℓ</mo></mrow><mrow><mo>-</mo></mrow></msup><mo stretchy="false">)</mo><msubsup><mrow><mi>K</mi></mrow><mrow><mi>S</mi></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy="false">(</mo><mo stretchy="false">→</mo><msup><mrow><mi>π</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>π</mi></mrow><mrow><mo>-</mo></mrow></msup><mo stretchy="false">)</mo></mrow></math> Decays
+2703009 . Measurement of prompt D$^{+}$ and $ {D}_s^{+} $ production in pPb collisions at $ \sqrt{s_{NN}} $ = 5.02 TeV
+2703379 . Observation of New <math display="inline"><mrow><msubsup><mrow><mi mathvariant="normal">Ω</mi></mrow><mrow><mi>c</mi></mrow><mrow><mn>0</mn></mrow></msubsup></mrow></math> States Decaying to the <math display="inline"><mrow><msubsup><mrow><mi mathvariant="normal">Ξ</mi></mrow><mrow><mi>c</mi></mrow><mrow><mo>+</mo></mrow></msubsup><msup><mrow><mi>K</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> Final State
+2703387 . Evidence of a <math display="inline"><mrow><mi>J</mi><mo>/</mo><mi>ψ</mi><msubsup><mrow><mi>K</mi></mrow><mrow><mtext>S</mtext></mrow><mrow><mn>0</mn></mrow></msubsup></mrow></math> Structure in <math display="inline"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy="false">→</mo><mi>J</mi><mo>/</mo><mi>ψ</mi><mi>ϕ</mi><msubsup><mrow><mi>K</mi></mrow><mrow><mtext>S</mtext></mrow><mrow><mn>0</mn></mrow></msubsup></mrow></math> Decays
+2709142 . Measurement of the CKM angle γ using the B$^{±}$→ D$^{*}$h$^{±}$ channels
+2709160 . Helium identification with LHCb
+2712864 . Enhanced Production of <math display="inline"><msubsup><mi mathvariant="normal">Λ</mi><mi>b</mi><mn>0</mn></msubsup></math> Baryons in High-Multiplicity <math display="inline"><mi>p</mi><mi>p</mi></math> Collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2713081 . Observation of $\Xi_b^0 \rightarrow \Xi_c^+ D_s^-$ and $\Xi_b^- \rightarrow \Xi_c^0 D_s^-$ decays
+2714583 . Production of <math><mi>η</mi></math> and <math><msup><mi>η</mi><mo>′</mo></msup></math> mesons in <math><mrow><mi>p</mi><mi>p</mi></mrow></math> and <math><mrow><mi>p</mi><mi>Pb</mi></mrow></math> collisions
+2715658 . Search for CP violation in the phase space of $ {D}^0\to {K}_S^0{K}^{\pm }{\pi}^{\mp } $ decays with the energy test
+2718909 . Fraction of <math display="inline"><mrow><msub><mrow><mi>χ</mi></mrow><mrow><mi>c</mi></mrow></msub></mrow></math> Decays in Prompt <math display="inline"><mi>J</mi><mo>/</mo><mi>ψ</mi></math> Production Measured in <math display="inline"><mrow><mi>p</mi><mi>Pb</mi></mrow></math> Collisions at <math display="inline"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>NN</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>8.16</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
+2720158 . Curvature-bias corrections using a pseudomass method
+2723367 . Measurement of forward charged hadron flow harmonics in peripheral PbPb collisions at <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>5.02</mn><mspace width="0.16em"/><mi>TeV</mi></mrow></math> with the LHCb detector
+2724083 . A model-independent measurement of the CKM angle γ in partially reconstructed B$^{±}$ → D$^{*}$h$^{±}$ decays with D → $ {K}_S^0 $h$^{+}$h$^{−}$ (h = π, K)
+2725992 . Measurement of J/ψ-pair production in pp collisions at $ \sqrt{s} $ = 13 TeV and study of gluon transverse-momentum dependent PDFs
+2729856 . Momentum scale calibration of the LHCb spectrometer
+2737292 . Amplitude Analysis of the <math display="inline"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy="false">→</mo><msup><mrow><mi>K</mi></mrow><mrow><mo>*</mo><mn>0</mn></mrow></msup><msup><mrow><mi>μ</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>μ</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> Decay
+2737371 . Determination of short- and long-distance contributions in <math display="inline"><msup><mi>B</mi><mn>0</mn></msup><mo stretchy="false">→</mo><msup><mi>K</mi><mrow><mo>*</mo><mn>0</mn></mrow></msup><msup><mi>μ</mi><mo>+</mo></msup><msup><mi>μ</mi><mo>-</mo></msup></math> decays
+2738554 . Search for ${{B} _{c} ^+} \!\rightarrow {{\pi } ^+} {\mu ^+\mu ^-} $ decays and measurement of the branching fraction ratio ${\mathcal {B}} ({{B} _{c} ^+} \!\rightarrow {\psi {(2S)}} {{\pi } ^+} )/{\mathcal {B}} ({{B} _{c} ^+} \!\rightarrow {{J \hspace{-1.66656pt}/\hspace{-1.111pt}\psi }} {{\pi } ^+} )$
+2739188 . Study of $ {B}_c^{+}\to {\chi}_c{\pi}^{+} $ decays
+2750410 . Prompt and nonprompt ψ(2S) production in pPb collisions at $ \sqrt{s_{\textrm{NN}}} $ = 8.16 TeV
+2753647 . Study of CP violation in B$^{0}$→ DK$^{⋆}$(892)$^{0}$ decays with D → Kπ(ππ), ππ(ππ), and KK final states
+2756705 . Observation of the $ {B}_c^{+}\to J/\psi {\pi}^{+}{\pi}^0 $ decay

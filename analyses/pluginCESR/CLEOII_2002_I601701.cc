@@ -20,8 +20,8 @@ namespace Rivet {
     void init() {
       declare(UnstableParticles(), "UFS");
 
-      book(_hist    , 1, 1, 3);
-      book(_mult,"TMP/mult");
+      book(_hist, 1, 1, 3);
+      book(_mult, 2, 1, 3);
       book(_weightSum,"TMP/weightSum");
 
     }
@@ -71,10 +71,7 @@ namespace Rivet {
       if (_weightSum->val() > 0.)
         scale(_hist, 1. / *_weightSum);
       // BR
-      Estimate0DPtr est;
-      book(est, 2, 1, 3);
       scale(_mult,1./ *_weightSum);
-      est->set(_mult->val(), _mult->err());
     }
 
     /// @}

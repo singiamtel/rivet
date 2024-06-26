@@ -12,8 +12,13 @@ References:
 RunInfo:  e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies: [4.0076, 4.1783, 4.1888, 4.1989, 4.2092, 4.2187, 4.2263, 4.2357,
+           4.2438, 4.2580, 4.2668, 4.2777, 4.3583, 4.4156, 4.5995]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to\Xi^-\bar{\Xi}^+$ between 4.009 and 4.6 GeV.'
+  'Measurement of the cross section for $e^+e^-\to\Xi^-\bar{\Xi}^+$ between 4.009 and 4.6 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ablikim:2019kkp
 BibTeX: '@article{Ablikim:2019kkp,

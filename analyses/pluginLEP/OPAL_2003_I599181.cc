@@ -26,9 +26,9 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_histXbweak,1,1,1);
+      book(_histXbweak, "TMP/hist", refData(1,1,1));
 
-      book(_histMeanXbweak, 2, 1, 1);
+      book(_histMeanXbweak, 5, 1, 1);
 
     }
 
@@ -50,7 +50,7 @@ namespace Rivet {
         if (bhad.isLastWith(hasBottom)) {
           const double xp = bhad.E()/meanBeamMom;
           _histXbweak->fill(xp);
-          _histMeanXbweak->fill(_histMeanXbweak->bin(1).xMid(), xp);
+          _histMeanXbweak->fill("91.2", xp);
         }
       }
     }
@@ -59,6 +59,9 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_histXbweak);
+      Estimate1DPtr tmp;
+      book(tmp,1,1,1);
+      barchart(_histXbweak,tmp);
     }
 
     /// @}
@@ -67,7 +70,7 @@ namespace Rivet {
   private:
 
     Histo1DPtr _histXbweak;
-    Profile1DPtr _histMeanXbweak;
+    BinnedProfilePtr<string> _histMeanXbweak;
 
   };
 

@@ -1,0 +1,37 @@
+Name: BELLE_2004_I643565
+Year: 2004
+Summary: Cross section for $e^+e^-\to D^{(*)+}D^{(*)-}$ at $\sqrt{s}=10.58$GeV
+Experiment: BELLE
+Collider: KEKB
+InspireID: 643565
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 70 (2004) 071101
+RunInfo: e+e- > hadrons
+Beams: [e+, e-]
+Energies: [10.58]
+Description:
+  'Cross section for $e^+e^-\to D^{(*)+}D^{(*)-}$ at $\sqrt{s}=10.58$GeV'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2004wmr
+BibTeX: '@article{Belle:2004wmr,
+    author = "Uglov, T. and others",
+    collaboration = "Belle",
+    title = "{Measurement of the e+ e- ---\ensuremath{>} D(*)+ D(*)- cross-sections}",
+    eprint = "hep-ex/0401038",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PRERPINT-2004-3, KEK-PREPRINT-2003-119",
+    doi = "10.1103/PhysRevD.70.071101",
+    journal = "Phys. Rev. D",
+    volume = "70",
+    pages = "071101",
+    year = "2004"
+}
+'

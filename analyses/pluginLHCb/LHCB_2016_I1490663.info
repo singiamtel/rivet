@@ -5,6 +5,7 @@ Experiment: LHCB
 Collider: LHC 5TeV
 InspireID: 1490663
 Status: VALIDATED
+Reentrant : true
 Authors:
  - Dominik Muller <dominik.muller@cern.ch>
  - Patrick Spradlin <patrick.spradlin@cern.ch>
@@ -16,7 +17,7 @@ References:
 RunInfo: Minimum bias QCD events, proton--proton interactions at $\sqrt{s} = 5$ TeV.
 NumEvents: 1000000
 Beams:  [p+, p+]
-Energies: [5000]
+Energies: [5020]
 NeedCrossSection: True
 Description:
   'Measurements of differential production cross-sections with respect to

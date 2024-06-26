@@ -55,7 +55,7 @@ namespace Rivet {
 	findChildren(p,piPlus,piMinus);
 	if(p.pid()<0) swap(piPlus,piMinus);
 	if(piPlus.size()>=2 && !piMinus.empty()) {
-	  _h_br[iloc]->fill(.5);
+	  _h_br[iloc]->fill();
 	  sortBy(piMinus,cmpMomByP);
 	  sortBy(piPlus ,cmpMomByP);
 	  _h_mom[iloc][2]->fill(piMinus[0].p3().mod());
@@ -82,7 +82,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_br[2],_h_mass[2],_h_mom[2][3];
+    CounterPtr _h_br[2];
+    Histo1DPtr _h_mass[2],_h_mom[2][3];
     CounterPtr _c[2];
     /// @}
 

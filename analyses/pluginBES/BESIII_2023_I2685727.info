@@ -1,0 +1,41 @@
+Name: BESIII_2023_I2685727
+Year: 2023
+Summary: Cross section for $e^+e^-\to\phi+K^+K^-$ and $K^0_SK^0_S$ at energies between 3.773 and 4.7008 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2685727
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 108 (2023) 3, 032004
+ - arXiv:2304.07783 [hep-ex]
+RunInfo: e+e- to hadrons, KS0 set stable
+Beams: [e+, e-]
+Energies: [3.7730, 3.8695, 4.0076, 4.1285, 4.1574, 4.1784, 4.1888, 4.1989,
+           4.2091, 4.2187, 4.2263, 4.2357, 4.2438, 4.2580, 4.2666, 4.2776,
+           4.2879, 4.3121, 4.3374, 4.3583, 4.3774, 4.3964, 4.4156, 4.4362,
+           4.4671, 4.5271, 4.5995, 4.6151, 4.6304, 4.6431, 4.6639, 4.6842, 4.7008]
+Options:
+ - ENERGY=*
+Description:
+  'Cross section for $e^+e^-\to\phi+K^+K^-$ and $K^0_SK^0_S$ at energies between 3.773 and 4.7008 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023fqf
+BibTeX: '@article{BESIII:2023fqf,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Cross section measurements of $e^+e^- \to \Phi K^+ K^-$ and $e^+ e^- \to \Phi K_S^0 K_S^0$ at center-of-mass energies between 3.7730 GeV and 4.7008 GeV}",
+    eprint = "2304.07783",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "4",
+    year = "2023"
+}
+'

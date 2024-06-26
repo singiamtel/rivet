@@ -1,0 +1,44 @@
+Name: BESIII_2021_I1880103
+Year: 2021
+Summary:  Cross Section for $e^+e^-\to\gamma\chi_{c(1,2)}$ for energies between 3.773 and 4.600 GeV
+Experiment: BESIII
+Collider: 
+InspireID: 1880103
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 104 (2021) 9, 092001
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Energies:  [3.773, 3.8077, 3.8675, 3.8715, 3.8962, 4.0076, 4.0855, 4.1285, 4.1574, 4.1783, 4.1888,
+            4.1989, 4.2092, 4.2187, 4.2263, 4.2357, 4.2438, 4.258, 4.2668, 4.2778, 4.2879, 4.3079,
+            4.3121, 4.3374, 4.3583, 4.3774, 4.3874, 4.3965, 4.4156, 4.4362, 4.4671, 4.5271, 4.5745, 4.5995]
+Options:
+- ENERGY=*
+Description:
+  'Cross section for $e^+e^-\to\gamma\chi_{c(1,2)}$ for energies between 3.773 and 4.600 GeV measured by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  ''
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2021yal
+BibTeX: '@article{BESIII:2021yal,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Measurement of $e^+e^-\to\gamma \chi_{c0,c1,c2}$ cross sections at center-of-mass energies between 3.77 and 4.60~GeV}",
+    eprint = "2107.03604",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.104.092001",
+    journal = "Phys. Rev. D",
+    volume = "104",
+    number = "9",
+    pages = "092001",
+    year = "2021"
+}
+'
+

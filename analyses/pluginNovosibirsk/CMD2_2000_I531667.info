@@ -12,9 +12,13 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
-Luminosity_fb: 
+Energies: [0.984, 1.004, 1.0103, 1.0157, 1.0168, 1.0178, 1.0187, 1.0197,
+           1.0206, 1.0215, 1.0227, 1.0278, 1.034, 1.04, 1.05, 1.06]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to\pi^+\pi^+\pi^-\pi^+$ hear the $\phi$ mass.'
+  'Measurement of the cross section for $e^+e^-\to\pi^+\pi^+\pi^-\pi^+$ hear the $\phi$ mass.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords:
 BibKey: Akhmetshin:2000it
 BibTeX: '@article{Akhmetshin:2000it,

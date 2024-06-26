@@ -23,11 +23,17 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      for(unsigned int ix=1;ix<6;++ix) {
-        stringstream ss;
-        ss << "TMP/n" << ix;
-        book(_nMeson[ix], ss.str());
+      for(unsigned int ix=1;ix<6;++ix)
+        book(_nMeson[ix], 1, 1, ix);
+      for (const string& en : _nMeson[1].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
       }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -45,20 +51,20 @@ namespace Rivet {
 
       if(ntotal==4) {
         if(nCount[211]==1 && nCount[-211]==1)
-          _nMeson[1]->fill();
+          _nMeson[1]->fill(_ecms);
         else if(nCount[321]==1 && nCount[-321]==1)
-          _nMeson[2]->fill();
+          _nMeson[2]->fill(_ecms);
       }
       else if(ntotal==6) {
         if(nCount[211]==2 && nCount[-211]==2)
-          _nMeson[3]->fill();
+          _nMeson[3]->fill(_ecms);
         else if(nCount[321]==1 && nCount[-321]==1 &&
                 nCount[211]==1 && nCount[-211]==1)
-          _nMeson[4]->fill();
+          _nMeson[4]->fill(_ecms);
       }
       else if(ntotal==8) {
         if(nCount[211]==3 && nCount[-211]==3)
-          _nMeson[5]->fill();
+          _nMeson[5]->fill(_ecms);
       }
 
     }
@@ -66,19 +72,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<6;++ix) {
-        double sigma = _nMeson[ix]->val();
-        double error = _nMeson[ix]->err();
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for(unsigned int ix=1;ix<6;++ix)
+        scale(_nMeson[ix], crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -86,7 +81,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nMeson[6];
+    BinnedHistoPtr<string> _nMeson[6];
+    string _ecms;
     /// @}
 
 

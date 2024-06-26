@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       // Initialise and register projections
-      declare(UnstableParticles(),"UFS");
+      declare(UnstableParticles(Cuts::abspid==102154),"UFS");
       book(_h_mpipi,1,1,1);
     }
 
@@ -53,7 +53,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       // loop over unstable particles
-      for(const Particle& lb : apply<UnstableParticles>(event, "UFS").particles(Cuts::abspid==101254)) {
+      for(const Particle& lb : apply<UnstableParticles>(event, "UFS").particles()) {
 	unsigned int nstable(0);
 	Particles pip, pim, lambda;
 	findDecayProducts(lb,nstable,pip,pim,lambda);

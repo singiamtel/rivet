@@ -149,15 +149,15 @@ namespace Rivet {
       if(isCompatibleWithSqrtS(3.1*GeV,1e-1)) ioff=0;
       else if (isCompatibleWithSqrtS(3.686*GeV, 1E-1)) ioff=1;
       normalize(_h_xi,1.,false);
-      Estimate1DPtr _h_alpha_xi;
+      Estimate0DPtr _h_alpha_xi;
       book(_h_alpha_xi,2,2*ioff+2,1);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_xi);
-      _h_alpha_xi->bin(1).set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
+      _h_alpha_xi->set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
       normalize(_h_sig,1.,false);
-      Estimate1DPtr _h_alpha_sig;
+      Estimate0DPtr _h_alpha_sig;
       book(_h_alpha_sig,2,2*ioff+1,1);
       alpha = calcAlpha(_h_sig);
-      _h_alpha_sig->bin(1).set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
+      _h_alpha_sig->set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
 
     }
     /// @}

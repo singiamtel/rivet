@@ -24,11 +24,11 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_h_w     , 1, 1, 1);
-      book(_h_costhv, 2, 1, 1);
-      book(_h_costhl, 3, 1, 1);
-      book(_h_chi   , 4, 1, 1);
-
+      book(_h_w     , "TMP/h_w"     , refData(1, 1, 1));
+      book(_h_costhv, "TMP/h_costhv", refData(2, 1, 1));
+      book(_h_costhl, "TMP/h_costhl", refData(3, 1, 1));
+      book(_h_chi   , "TMP/h_chi"   , refData(4, 1, 1));
+      book(_nB,"TMP/nB");
     }
 
 
@@ -68,6 +68,8 @@ namespace Rivet {
       FourMomentum pl, pnu, pB, pD, pDs, ppi;
       // Iterate of B0bar mesons
       for(const Particle& p : apply<UnstableParticles>(event, "UFS").particles(Cuts::pid==-511)) {
+        if(p.children().size()==1 && p.children()[0].abspid()==511) continue;
+        _nB->fill();
         pB = p.momentum();
         // Find semileptonic decays
         if (analyzeDecay(p, {PID::DSTARPLUS,-12,11}) || analyzeDecay(p, {PID::DSTARPLUS,-14,13}) ) {
@@ -118,20 +120,25 @@ namespace Rivet {
         }
       }
     }
-        //else if (analyzeDecay(p, {413,-14,13}) ) {
-          //_h_w->fill(recoilW(p));
-        //}
 
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      double GAMMA_B0 = 4.32e-13; // Total width in GeV, calculated from mean life time of 1.52 pico seconds
-      double BR_B0_DSPLUS_ELL_NU = 0.0495; // Branching fraction from the same paper for B0bar to D*+ ell nu
-      double NORM = GAMMA_B0 * BR_B0_DSPLUS_ELL_NU; // Normalise histos to partial width
-      normalize(_h_w,      NORM);
-      normalize(_h_costhv, NORM);
-      normalize(_h_costhl, NORM);
-      normalize(_h_chi,    NORM);
+      double GAMMA_B0 = 4.32e-13 *1e15; // Normalise histos to partial width ifetime converted to GeV (x10^-15)
+      // factor 1/2 as e+mu in hists 
+      scale(_h_w,      0.5*GAMMA_B0/ *_nB);
+      scale(_h_costhv, 0.5*GAMMA_B0/ *_nB);
+      scale(_h_costhl, 0.5*GAMMA_B0/ *_nB);
+      scale(_h_chi,    0.5*GAMMA_B0/ *_nB);
+      Estimate1DPtr tmp;
+      book(tmp,1,1,1);
+      barchart(_h_w,tmp);
+      book(tmp,2,1,1);
+      barchart(_h_costhv,tmp);
+      book(tmp,3,1,1);
+      barchart(_h_costhl,tmp);
+      book(tmp,4,1,1);
+      barchart(_h_chi,tmp);
     }
 
     /// @}
@@ -143,6 +150,7 @@ namespace Rivet {
     Histo1DPtr _h_costhv;
     Histo1DPtr _h_costhl;
     Histo1DPtr _h_chi;
+    CounterPtr _nB;
     /// @}
 
 

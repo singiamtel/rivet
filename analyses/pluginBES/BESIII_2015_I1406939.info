@@ -12,9 +12,13 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies: [4.416, 4.599]
+Options:
+ - ENERGY=*
 Luminosity_fb: 
 Description:
-  'Measurement of the cross section for $e^+e^-\to \omega\chi_{c(1,2)}$ at energies between 4.42 and 4.6 GeV by the BESIII collaboration.'
+  'Measurement of the cross section for $e^+e^-\to \omega\chi_{c(1,2)}$ at energies between 4.42 and 4.6 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ablikim:2015uix
 BibTeX: '@article{Ablikim:2015uix,

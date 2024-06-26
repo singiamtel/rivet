@@ -1,0 +1,242 @@
+{
+    "2070407": [
+        "ALICE luminosity determination for Pb$-$Pb collisions at $\\sqrt{s_{\\mathrm{NN}}} = 5.02$ TeV",
+        "ALICE",
+        "10.1088/1748-0221/19/02/P02039",
+        "2805118",
+        "2204.10148",
+        null,
+        null,
+        [
+            "CERN-EP-2022-072"
+        ]
+    ],
+    "2165947": [
+        "<math display=\"inline\"><mrow><mi>\u03c8</mi><mo stretchy=\"false\">(</mo><mn>2</mn><mi>S</mi><mo stretchy=\"false\">)</mo></mrow></math> Suppression in Pb-Pb Collisions at the LHC",
+        "ALICE",
+        "10.1103/PhysRevLett.132.042301",
+        "2836343",
+        "2210.08893",
+        "ins2165947",
+        null,
+        [
+            "CERN-EP-2022-210"
+        ]
+    ],
+    "2628372": [
+        "Measurement of the fraction of jet longitudinal momentum carried by <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi><mo>+</mo></msubsup></math> baryons in <math display=\"inline\"><mi>p</mi><mi>p</mi></math> collisions",
+        "ALICE",
+        "10.1103/PhysRevD.109.072005",
+        "2848009",
+        "2301.13798",
+        "ins2628372",
+        null,
+        [
+            "CERN-EP-2023-005"
+        ]
+    ],
+    "2637686": [
+        "Measurement of the radius dependence of charged-particle jet suppression in Pb\u2013Pb collisions at <math altimg=\"si1.svg\"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi mathvariant=\"normal\">NN</mi></mrow></msub></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>5.02</mn><mspace width=\"0.25em\"/><mtext>TeV</mtext></math>",
+        "ALICE",
+        "10.1016/j.physletb.2023.138412",
+        "2851087",
+        "2303.00592",
+        "ins2637686",
+        null,
+        [
+            "CERN-EP-2023-027"
+        ]
+    ],
+    "2648616": [
+        "Measurements of inclusive J/\u03c8 production at midrapidity and forward rapidity in Pb\u2013Pb collisions at <math altimg=\"si1.svg\"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi mathvariant=\"normal\">NN</mi></mrow></msub></mrow></msqrt></math> = 5.02 TeV",
+        "ALICE",
+        "10.1016/j.physletb.2024.138451",
+        "2853190",
+        "2303.13361",
+        "ins2648616",
+        null,
+        [
+            "CERN-EP-2023-054"
+        ]
+    ],
+    "2658375": [
+        "First Measurement of the <math display=\"inline\"><mo stretchy=\"false\">|</mo><mi>t</mi><mo stretchy=\"false\">|</mo></math> Dependence of Incoherent <math display=\"inline\"><mi>J</mi><mo>/</mo><mi>\u03c8</mi></math> Photonuclear Production",
+        "ALICE",
+        "10.1103/PhysRevLett.132.162302",
+        "2857569",
+        "2305.06169",
+        "ins2658375",
+        null,
+        [
+            "CERN-EP-2023-080"
+        ]
+    ],
+    "2675130": [
+        "Measurement of the low-energy antitriton inelastic cross section",
+        "ALICE",
+        "10.1016/j.physletb.2023.138337",
+        "2862568",
+        "2307.03603",
+        "ins2675130",
+        null,
+        [
+            "CERN-EP-2023-118"
+        ]
+    ],
+    "2678721": [
+        "Measurement of inclusive charged-particle jet production in pp and p-Pb collisions at $ \\sqrt{s_{\\textrm{NN}}} $ = 5.02 TeV",
+        "ALICE",
+        "10.1007/JHEP05(2024)041",
+        "2864166",
+        "2307.10860",
+        "ins2678721",
+        null,
+        [
+            "CERN-EP-2023-131"
+        ]
+    ],
+    "2679248": [
+        "Pseudorapidity dependence of anisotropic flow and its decorrelations using long-range multiparticle correlations in Pb\u2013Pb and Xe\u2013Xe collisions",
+        "ALICE",
+        "10.1016/j.physletb.2024.138477",
+        "2864805",
+        "2307.11116",
+        "ins2679248",
+        null,
+        [
+            "CERN-EP-2023-134"
+        ]
+    ],
+    "2681682": [
+        "Modification of charged-particle jets in event-shape engineered Pb\u2013Pb collisions at <math altimg=\"si1.svg\"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi mathvariant=\"normal\">NN</mi></mrow></msub></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>5.02</mn></math> TeV",
+        "ALICE",
+        "10.1016/j.physletb.2024.138584",
+        "2865908",
+        "2307.14097",
+        "ins2681682",
+        null,
+        [
+            "CERN-EP-2023-154"
+        ]
+    ],
+    "2692201": [
+        "Prompt and non-prompt\u00a0J$/\\psi$ production at midrapidity in Pb\u2013Pb collisions at $ \\sqrt{s_{\\textrm{NN}}} $ = 5.02 TeV",
+        "ALICE",
+        "10.1007/JHEP02(2024)066",
+        "2868709",
+        "2308.16125",
+        "ins2692201",
+        null,
+        [
+            "CERN-EP-2023-190"
+        ]
+    ],
+    "2692205": [
+        "<math><mrow><msup><mi>K</mi><mo>*</mo></msup><msup><mrow><mo>(</mo><mn>892</mn><mo>)</mo></mrow><mo>\u00b1</mo></msup></mrow></math> resonance production in Pb-Pb collisions at <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>5.02</mn></mrow></math> TeV",
+        "ALICE",
+        "10.1103/PhysRevC.109.044902",
+        "2868119",
+        "2308.16119",
+        "ins2692205",
+        null,
+        [
+            "CERN-EP-2023-176"
+        ]
+    ],
+    "2692420": [
+        "Skewness and kurtosis of mean transverse momentum fluctuations at the LHC energies",
+        "ALICE",
+        "10.1016/j.physletb.2024.138541",
+        "2868644",
+        "2308.16217",
+        "ins2692420",
+        null,
+        [
+            "CERN-EP-2023-187"
+        ]
+    ],
+    "2692432": [
+        "Multiplicity and event-scale dependent flow and jet fragmentation in pp collisions at $ \\sqrt{s} $ = 13 TeV and in p\u2013Pb collisions at $ \\sqrt{s_{\\textrm{NN}}} $ = 5.02 TeV",
+        "ALICE",
+        "10.1007/JHEP03(2024)092",
+        "2868827",
+        "2308.16591",
+        "ins2692432",
+        null,
+        [
+            "CERN-EP-2023-195"
+        ]
+    ],
+    "2693248": [
+        "Measurements of long-range two-particle correlation over a wide pseudorapidity range in p$-$Pb collisions at $\\sqrt{s_{\\rm NN}}=5.0$ TeV",
+        "ALICE",
+        "10.1007/JHEP01(2024)199",
+        "2868913",
+        "2308.16590",
+        "ins2693248",
+        null,
+        [
+            "CERN-EP-2023-196"
+        ]
+    ],
+    "2709103": [
+        "Charged-particle production as a function of the relative transverse activity classifier in pp, p\u2013Pb, and Pb\u2013Pb collisions at the LHC",
+        "ALICE",
+        "10.1007/JHEP01(2024)056",
+        "2871841",
+        "2310.07490",
+        "ins2709103",
+        null,
+        [
+            "CERN-EP-2023-212"
+        ]
+    ],
+    "2709104": [
+        "Femtoscopic correlations of identical charged pions and kaons in <math><mrow><mi>p</mi><mi>p</mi></mrow></math> collisions at <math><mrow><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn></mrow></math> TeV with event-shape selection",
+        "ALICE",
+        "10.1103/PhysRevC.109.024915",
+        "2873784",
+        "2310.07509",
+        "ins2709104",
+        null,
+        [
+            "CERN-EP-2023-229"
+        ]
+    ],
+    "2724206": [
+        "Observation of abnormal suppression of f0(980) production in p\u2013Pb collisions at <math altimg=\"si1.svg\"><msqrt><mrow><msub><mrow><mtext mathvariant=\"italic\">s</mtext></mrow><mrow><mi mathvariant=\"bold\">NN</mi></mrow></msub></mrow></msqrt></math> = 5.02 TeV",
+        "ALICE",
+        "10.1016/j.physletb.2024.138665",
+        "2880177",
+        "2311.11786",
+        "ins2724206",
+        null,
+        [
+            "CERN-EP-2023-263"
+        ]
+    ],
+    "2725922": [
+        "Emergence of Long-Range Angular Correlations in Low-Multiplicity Proton-Proton Collisions",
+        "ALICE",
+        "10.1103/PhysRevLett.132.172302",
+        "2880277",
+        "2311.14357",
+        "ins2725922",
+        null,
+        [
+            "CERN-EP-2023-265"
+        ]
+    ],
+    "2753045": [
+        "System-size dependence of the hadronic rescattering effect at energies available at the CERN Large Hadron Collider",
+        "ALICE",
+        "10.1103/PhysRevC.109.014911",
+        "2868115",
+        "2308.16115",
+        "ins2691823",
+        null,
+        [
+            "CERN-EP-2023-175"
+        ]
+    ]
+}

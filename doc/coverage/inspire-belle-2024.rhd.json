@@ -1,0 +1,93 @@
+{
+    "2115280": [
+        "Search for a dark leptophilic scalar produced in association with <math display=\"inline\"><msup><mi>\u03c4</mi><mo>+</mo></msup><msup><mi>\u03c4</mi><mo>-</mo></msup></math> pair in <math display=\"inline\"><mrow><msup><mrow><mi>e</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> annihilation at center-of-mass energies near 10.58\u00a0GeV",
+        "Belle",
+        "10.1103/PhysRevD.109.032002",
+        null,
+        "2207.07476",
+        null,
+        null,
+        [
+            "BELLE-CONF-2201",
+            "Belle Preprint 2023-13",
+            "KEK Preprint 2023-17"
+        ]
+    ],
+    "2693910": [
+        "Search for charged-lepton flavor violation in $\\Upsilon(2S) \\to \\ell^\\mp\\tau^\\pm$ ($\\ell=e,\\mu$) decays at Belle",
+        "Belle",
+        "10.1007/JHEP02(2024)187",
+        null,
+        "2309.02739",
+        null,
+        null,
+        [
+            "Belle Preprint 2023-14",
+            "KEK Preprint 2023-19"
+        ]
+    ],
+    "2708659": [
+        "Measurement of branching fractions and direct <math display=\"inline\"><mrow><mi>C</mi><mi>P</mi></mrow></math> asymmetries for <math display=\"inline\"><mrow><mi>B</mi><mo stretchy=\"false\">\u2192</mo><mi>K</mi><mi>\u03c0</mi></mrow></math> and <math display=\"inline\"><mi>B</mi><mo stretchy=\"false\">\u2192</mo><mi>\u03c0</mi><mi>\u03c0</mi></math> decays at Belle II",
+        "Belle-II",
+        "10.1103/PhysRevD.109.012001",
+        null,
+        "2310.06381",
+        null,
+        null,
+        [
+            "Belle II Preprint 2023-003",
+            "KEK Preprint 2022-58"
+        ]
+    ],
+    "2709096": [
+        "Search for baryon and lepton number violating decays <math display=\"inline\"><mrow><mi>D</mi><mo stretchy=\"false\">\u2192</mo><mi>p</mi><mo>\u2113</mo></mrow></math>",
+        "Belle",
+        "10.1103/PhysRevD.109.L031101",
+        null,
+        "2310.07412",
+        null,
+        null,
+        [
+            "Belle Preprint: 2023-15",
+            "KEK Preprint 2023-20"
+        ]
+    ],
+    "2724872": [
+        "Search for the decay <math display=\"inline\"><mrow><msubsup><mrow><mi>B</mi></mrow><mrow><mi>s</mi></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy=\"false\">\u2192</mo><mi>J</mi><mo>/</mo><mi>\u03c8</mi><msup><mrow><mi>\u03c0</mi></mrow><mrow><mn>0</mn></mrow></msup></mrow></math> at Belle experiment",
+        "Belle",
+        "10.1103/PhysRevD.109.032007",
+        null,
+        "2311.12724",
+        null,
+        null,
+        [
+            "Belle Preprint 2023-19",
+            "KEK Preprint 2023-33"
+        ]
+    ],
+    "2730555": [
+        "Search for the semileptonic decays <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039e</mi><mi>c</mi><mn>0</mn></msubsup><mo stretchy=\"false\">\u2192</mo><msup><mi mathvariant=\"normal\">\u039e</mi><mn>0</mn></msup><msup><mo>\u2113</mo><mo>+</mo></msup><msup><mo>\u2113</mo><mo>-</mo></msup></math> at Belle",
+        "Belle",
+        "10.1103/PhysRevD.109.052003",
+        null,
+        "2312.02580",
+        null,
+        null,
+        [
+            "Belle Preprint 2023-16 KEK Preprint 2023-29"
+        ]
+    ],
+    "2739195": [
+        "Search for the <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msub><mi>\u03b7</mi><mi>b</mi></msub><mo stretchy=\"false\">(</mo><mn>1</mn><mi>S</mi><mo stretchy=\"false\">)</mo><mi>\u03c9</mi></math> and <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msub><mi>\u03c7</mi><mrow><mi>b</mi><mn>0</mn></mrow></msub><mo stretchy=\"false\">(</mo><mn>1</mn><mi>P</mi><mo stretchy=\"false\">)</mo><mi>\u03c9</mi></math> processes at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>10.745</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>GeV</mi></math>",
+        "Belle-II",
+        "10.1103/PhysRevD.109.072013",
+        null,
+        "2312.13043",
+        null,
+        null,
+        [
+            "Belle II Preprint 2023-018",
+            "KEK Preprint 2023-36"
+        ]
+    ]
+}

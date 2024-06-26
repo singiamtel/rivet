@@ -143,7 +143,7 @@ namespace Rivet {
       normalize(_h_pi );
       normalize(_h_rho);
       // the polarization
-      Estimate1DPtr _h_alpha;
+      Estimate0DPtr _h_alpha;
       book(_h_alpha,1,1,2);
       pair<double,double> alpha_pi  = calcAlpha(_h_pi );
       pair<double,double> alpha_rho = calcAlpha(_h_rho);
@@ -153,7 +153,7 @@ namespace Rivet {
       pair<double,double> alpha;
       alpha.first  = (alpha_pi.first*sqr(alpha_rho.second)+alpha_rho.first*sqr(alpha_pi.second))/(sqr(alpha_pi.second)+sqr(alpha_rho.second));
       alpha.second = alpha_pi.second*alpha_rho.second/sqrt(sqr(alpha_pi.second)+sqr(alpha_rho.second));
-      _h_alpha->bin(1).set(alpha.first, alpha.second);
+      _h_alpha->set(alpha.first, alpha.second);
 
     }
 

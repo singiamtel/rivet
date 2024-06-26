@@ -22,8 +22,15 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nMeson[0], "/TMP/n_pi0");
-      book(_nMeson[1], "/TMP/n_eta");
+      for(unsigned int ix=0;ix<2;++ix)
+        book(_nMeson[ix], 1, 1, 1+ix);
+      for (const string& en : _nMeson[0].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -68,7 +75,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched) {
-	    _nMeson[0]->fill();
+	    _nMeson[0]->fill(_ecms);
 	    continue;
 	  }
 	}
@@ -87,7 +94,7 @@ namespace Rivet {
 	      }
 	    }
 	    if(matched) {
-	      _nMeson[1]->fill();
+	      _nMeson[1]->fill(_ecms);
 	      break;
 	    }
 	  }
@@ -99,17 +106,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/picobarn/sumOfWeights();
-      for(unsigned int ix=0;ix<2; ++ix) {
-        double sigma = _nMeson[ix]->val()*fact;
-        double error = _nMeson[ix]->err()*fact;
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, 1+ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for(unsigned int ix=0;ix<2; ++ix)
+        scale(_nMeson[ix],fact);
     }
 
     /// @}
@@ -117,7 +115,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nMeson[2];
+    BinnedHistoPtr<string> _nMeson[2];
+    string _ecms;
     /// @}
 
 

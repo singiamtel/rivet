@@ -60,6 +60,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if(_edges.empty()) _edges = _h_etap->xEdges();
       // find scattered leptons and calc Q2
       const Beam& beams = apply<Beam>(event, "Beams");
       double q12 = -1, q22 = -1;
@@ -97,20 +98,20 @@ namespace Rivet {
         if (matched) {
 	  // 2<Q2<10 for both photons bin
 	  if(q12>2.&&q12<10.&&q22>2.&&q22<10.) {
-	    _h_etap->fill(0,1./sqr(8.));
+	    _h_etap->fill(_edges[0],1./sqr(8.));
 	  }
 	  // 10<Q2<30 for both photons bin
 	  else if(q12>10&&q12<30.&&q22>10.&&q22<30.)
-	    _h_etap->fill(1,1./sqr(20.));
+	    _h_etap->fill(_edges[1],1./sqr(20.));
 	  // 10<Q12<30 2<Q22<10
 	  else if(q22>2.&&q22<10.&&q12>10.&&q12<30.)
-	    _h_etap->fill(2,1./8./20./2.);
+	    _h_etap->fill(_edges[2],1./8./20./2.);
 	  // 2<Q22<30 30<Q12<60
 	  else if(q22>2.&&q22<30.&&q12>30.&&q12<60.)
-	    _h_etap->fill(3,1./28./30./2.);
+	    _h_etap->fill(_edges[3],1./28./30./2.);
 	  // 30<Q2<60 for both photons
 	  else if(q22>30.&&q22<60.&&q12>30.&&q12<60.)
-	    _h_etap->fill(4,1./sqr(30.));
+	    _h_etap->fill(_edges[4],1./sqr(30.));
         }
       }
     }
@@ -125,8 +126,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_etap;
-    unsigned int _ncount=0;
+    BinnedHistoPtr<string> _h_etap;
+    vector<string> _edges;
     ///@}
 
 

@@ -21,7 +21,16 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(UnstableParticles(), "UFS");
-      book(_c_kaons   , "/TMP/sigma_kaons");
+      book(_c_kaons   , "TMP/nK", refData<YODA::BinnedEstimate<string>>(1, 1, 1));
+
+      for (const string& en : _c_kaons.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -29,22 +38,16 @@ namespace Rivet {
     void analyze(const Event& event) {
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       unsigned int count = ufs.particles(Cuts::pid==310).size();
-      _c_kaons->fill(count);
+      _c_kaons->fill(_ecms,count);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate1DPtr mult;
+      BinnedEstimatePtr<string> mult;
       book(mult,1, 1, 1);
-      double fact = crossSection()/nanobarn/sumOfWeights();
-      double sigma = _c_kaons->val()*fact;
-      double error = _c_kaons->err()*fact;
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_c_kaons,mult);
+      scale(mult,crossSection()/nanobarn);
     }
 
     ///@}
@@ -52,7 +55,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    CounterPtr _c_kaons;
+    BinnedProfilePtr<string> _c_kaons;
+    string _ecms;
     ///@}
 
 

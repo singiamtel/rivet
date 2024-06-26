@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief R measurement
   class TOPAZ_1993_I353845 : public Analysis {
   public:
 
@@ -22,8 +22,16 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
+      book(_c_hadrons, 2, 1, 1);
+      book(_c_muons,   4, 1, 1);
+      for (const string& en : _c_hadrons.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -40,34 +48,18 @@ namespace Rivet {
       // mu+mu- + photons
       if(nCount[-13]==1 and nCount[13]==1 &&
 	 ntotal==2+nCount[22])
-	_c_muons->fill();
+	_c_muons->fill(_ecms);
       // everything else
       else
-	_c_hadrons->fill();
+	_c_hadrons->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /picobarn;
-      for (unsigned int ix=2;ix<5;ix+=2) {
-        double sigma,error;
-        if(ix==2) {
-          sigma = _c_hadrons->val()*fact;
-          error = _c_hadrons->err()*fact;
-        }
-        else {
-          sigma = _c_muons  ->val()*fact;
-          error = _c_muons  ->err()*fact;
-        }
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      scale(_c_hadrons, fact);
+      scale(_c_muons,   fact);
     }
 
     /// @}
@@ -75,7 +67,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    BinnedHistoPtr<string> _c_hadrons, _c_muons;
+    string _ecms;
     /// @}
 
 

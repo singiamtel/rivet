@@ -12,6 +12,7 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies: [9.39]
 Description:
   'Measurement of $R$ in $e^+e^-$ collisions by the Crystal Ball experiment
    for 9.39  GeV.

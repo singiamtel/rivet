@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > p pbar
   class CMD3_2016_I1385598 : public Analysis {
   public:
 
@@ -24,8 +24,15 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_nproton, "TMP/proton");
-
+      book(_nproton, 1,1,6);
+      for (const string& en : _nproton.binning().edges<0>()) {
+        double end = en=="1900 (2012)"s ? 1.9 : std::stod(en)*MeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -36,21 +43,13 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
         if (p.abspid() != PID::PROTON) vetoEvent;
       }
-      _nproton->fill();
+      _nproton->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_nproton, crossSection()/ sumOfWeights() /nanobarn);
-      BinnedEstimatePtr<string> mult;
-      book(mult, 1, 1, 6);
-      for (auto& b : mult->bins()) {
-        const double sqrts = std::stod(b.xEdge().substr(0, 4));
-        if (isCompatibleWithSqrtS(sqrts*MeV)) {
-          b.set(_nproton->val(), _nproton->err());
-        }
-      }
     }
 
     /// @}
@@ -58,7 +57,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nproton;
+    BinnedHistoPtr<string> _nproton;
+    string _ecms;
     /// @}
 
 

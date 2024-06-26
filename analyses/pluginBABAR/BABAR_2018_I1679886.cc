@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief tau -> K+ KS nu_tau
   class BABAR_2018_I1679886 : public Analysis {
   public:
 
@@ -21,7 +21,8 @@ namespace Rivet {
 
       declare(UnstableParticles(), "UFS");
       book(_h_KK, 1, 1, 1);
-
+      book(_v_KK, 1, 1, 2);
+      book(_c,"TMP/c");
     }
 
     void findDecayProducts(const Particle & mother, unsigned int & nstable,
@@ -67,8 +68,15 @@ namespace Rivet {
       	  swap(nKp,nKm);
       	}
        	if(nstable!=3) continue;
-      	if(nKm==1 && nK0==1 )
-          _h_KK->fill(p_tot.mass());
+      	if(nKm==1 && nK0==1 ) {
+          double q = p_tot.mass();
+          _h_KK->fill(q);
+          double mtau = tau.mass();
+          double Cq   = q*sqr(sqr(mtau)-sqr(q))*(sqr(mtau)+2.*sqr(q));
+          double fact = pow(mtau,8)/Cq;
+          _v_KK->fill(q,fact);
+          _c->fill();
+        }
       }
 
 
@@ -78,6 +86,11 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_h_KK);
+      // values from PDG 2023 for constants, see eqn 1 of paper
+      double brKK = 0.5*1.486e-3; // PDG is K0 divide by 2 to get KS0
+      double brE  = 0.1782;
+      double Vud  = .97367;
+      scale(_v_KK, 1000.*brKK/brE/sqr(Vud)/12./M_PI/ *_c);
     }
 
     /// @}
@@ -85,7 +98,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_KK;
+    Histo1DPtr _h_KK,_v_KK;
+    CounterPtr _c;
     /// @}
 
 

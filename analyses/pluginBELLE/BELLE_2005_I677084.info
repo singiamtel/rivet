@@ -1,0 +1,35 @@
+Name: BELLE_2005_I677084
+Year: 2005
+Summary: Helicity angle in $B^-\to D^0 D^{*-}$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 677084
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 95 (2005) 041803
+RunInfo: Any process producing B+- mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the helicity angle distribution in $B^-\to D^0 D^{*-}$ decays. The background subtracted data were read from Figure 2 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2005wxx
+BibTeX: '@article{Belle:2005wxx,
+    author = "Majumder, G. and others",
+    collaboration = "Belle",
+    title = "{Evidence for B0 ---\ensuremath{>} D+ D- and observation of B- ---\ensuremath{>} D0 D- and B- ---\ensuremath{>} D0 D*- decays}",
+    eprint = "hep-ex/0502038",
+    archivePrefix = "arXiv",
+    reportNumber = "KE-PREPRINT-2004-99, BELLE-PREPRINT-2005-3",
+    doi = "10.1103/PhysRevLett.95.041803",
+    journal = "Phys. Rev. Lett.",
+    volume = "95",
+    pages = "041803",
+    year = "2005"
+}
+'

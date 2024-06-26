@@ -1,0 +1,33 @@
+Name: BELLE_2023_I2624324
+Year: 2023
+Summary:  Decay kinematics of semileptonic $B\to D^*$ decays.
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2624324
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durhamm.ac.uk>
+References:
+ - arXiv:2301.07529 [hep-ex]
+RunInfo: Any process producing B0, B+ mesons
+Description:
+  'Measurement of recoil w, helicity and decay plane angles of semileptonc $\bar{B}$ to $D^{*}$ decays.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2023bwv
+BibTeX: '@article{Belle:2023bwv,
+    author = "Prim, M. T. and others",
+    collaboration = "Belle",
+    title = "{Measurement of Differential Distributions of $B \to D^* \ell \bar \nu_\ell$ and Implications on $|V_{cb}|$}",
+    eprint = "2301.07529",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle Preprint 2022-34; KEK Preprint 2022-47",
+    month = "1",
+    year = "2023"
+}
+'

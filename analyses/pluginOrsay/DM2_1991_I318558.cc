@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> K+K-pi0 and KS0 K+-pi-+
   class DM2_1991_I318558 : public Analysis {
   public:
 
@@ -22,10 +22,8 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       // Book histograms
-      for (unsigned int ix=1;ix<3;++ix) {
-        stringstream ss;
-        ss << "TMP/n" << ix;
-        book(_nMeson[ix], ss.str());
+      for (unsigned int ix=0;ix<2;++ix) {
+        book(_nMeson[ix], ix+1, 1, 1);
       }
     }
 
@@ -44,27 +42,17 @@ namespace Rivet {
       if(nCount[310]==1 &&
 	 ((nCount[ 211]==1&&nCount[-321]==1)||
 	  (nCount[-211]==1&&nCount[ 321]==1)))
-	 _nMeson[1]->fill();
+	 _nMeson[0]->fill(round(sqrtS()/MeV));
       else if(nCount[321]==1 &&
 	      nCount[-321]==1 && nCount[111]==1)
-	 _nMeson[2]->fill();
+        _nMeson[1]->fill(round(sqrtS()/MeV));
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma = _nMeson[ix]->val();
-        double error = _nMeson[ix]->err();
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      for (unsigned int ix=0;ix<2;++ix) {
+        scale(_nMeson[ix], crossSection()/ sumOfWeights() /nanobarn);
       }
     }
 
@@ -73,7 +61,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nMeson[3];
+    BinnedHistoPtr<int> _nMeson[2];
     /// @}
 
 

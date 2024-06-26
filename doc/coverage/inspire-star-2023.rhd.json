@@ -9,6 +9,16 @@
         null,
         []
     ],
+    "1838481": [
+        "Global Polarization of $\\Xi$ and $\\Omega$ Hyperons in Au+Au Collisions at $\\sqrt {s_{NN}}$ = 200  GeV",
+        "STAR",
+        "10.1103/PhysRevLett.126.162301",
+        null,
+        "2012.13601",
+        "ins1838481",
+        null,
+        []
+    ],
     "1978766": [
         "Evidence of Mass Ordering of Charm and Bottom Quark Energy Loss in Au+Au Collisions at RHIC",
         "STAR",
@@ -99,6 +109,16 @@
         null,
         []
     ],
+    "2626682": [
+        "Energy dependence of intermittency for charged hadrons in Au+Au collisions at RHIC",
+        "STAR",
+        "10.1016/j.physletb.2023.138165",
+        null,
+        "2301.11062",
+        "ins2626682",
+        null,
+        []
+    ],
     "2629622": [
         "Pion, kaon, and (anti)proton production in <math><mtext>U</mtext><mo>+</mo><mtext>U</mtext></math> collisions at <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>193</mn></mrow></math> GeV measured with the STAR detector",
         "STAR",
@@ -145,7 +165,7 @@
         "10.1007/JHEP06(2023)176",
         null,
         "2303.06590",
-        null,
+        "ins2641480",
         null,
         []
     ],
@@ -156,6 +176,16 @@
         null,
         "2210.02909",
         "ins2642282",
+        null,
+        []
+    ],
+    "2643014": [
+        "Hyperon Polarization along the Beam Direction Relative to the Second and Third Harmonic Event Planes in Isobar Collisions at <math display=\"inline\"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>N</mi><mi>N</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>200</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>GeV</mi></mrow></math>",
+        "STAR",
+        "10.1103/PhysRevLett.131.202301",
+        "2880372",
+        "2303.09074",
+        "ins2643014",
         null,
         []
     ],

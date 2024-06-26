@@ -1,0 +1,36 @@
+Name: CLEOII_1997_I440969
+Year: 1997
+Summary: Momenta spectra and polarization in $B\to D^{(*)}$ decays
+Experiment: CLEOII
+Collider: CESR
+InspireID: 440969
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 56 (1997) 3783-3802
+RunInfo: Any process producing Upsilon(4S), originally e+e-
+Description:
+'Measurement of the momenta spectrra for the production of $D^0$, D$^+$, $D^{*0}$ and $D^{*+}$ mesons in $B$ decays by CLEO.
+ The polarization of the $D^*$ mesons in also measured.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1997kfu
+BibTeX: '@article{CLEO:1997kfu,
+    author = "Gibbons, L. and others",
+    collaboration = "CLEO",
+    title = "{The Inclusive decays B --\ensuremath{>} D X and B --\ensuremath{>} D* X}",
+    eprint = "hep-ex/9703006",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-9795, CLNS-96-1454, CLEO-96-23",
+    doi = "10.1103/PhysRevD.56.3783",
+    journal = "Phys. Rev. D",
+    volume = "56",
+    pages = "3783--3802",
+    year = "1997"
+}
+'

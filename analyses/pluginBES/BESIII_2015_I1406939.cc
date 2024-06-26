@@ -21,8 +21,18 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nChi1, "TMP/chi1");
-      book(_nChi2, "TMP/chi2");
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_nChi[ix], 2+ix,1,6);
+        for (const string& en : _nChi[ix].binning().edges<0>()) {
+          double end = std::stod(en)*GeV;
+          if(isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if(_ecms[0].empty() && _ecms[1].empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -65,10 +75,12 @@ namespace Rivet {
             }
           }
           if(matched) {
-            if(p.pid()==20443)
-              _nChi1->fill();
-            else if(p.pid()==445)
-              _nChi2->fill();
+            if(p.pid()==20443) {
+              if(!_ecms[0].empty()) _nChi[0]->fill(_ecms[0]);
+            }
+            else if(p.pid()==445){
+              if(!_ecms[1].empty()) _nChi[1]->fill(_ecms[1]);
+            }
             break;
           }
         }
@@ -79,27 +91,10 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
       double fact =  crossSection()/ sumOfWeights() /picobarn;
-      for(unsigned int ix=2;ix<4;++ix) {
-        double sigma(0.),error(0.);
-        if(ix==2) {
-          sigma = _nChi1->val()*fact;
-          error = _nChi1->err()*fact;
-        }
-        else if(ix==3) {
-          sigma = _nChi2->val()*fact;
-          error = _nChi2->err()*fact;
-        }
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 6);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      for(unsigned int ix=0;ix<2;++ix) {
+        scale(_nChi[ix],fact);
       }
-
     }
 
     /// @}
@@ -107,7 +102,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nChi1,_nChi2;
+    BinnedHistoPtr<string> _nChi[2];
+    string _ecms[2];
     /// @}
 
 

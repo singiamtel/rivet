@@ -182,7 +182,9 @@ namespace Rivet {
       for (size_t ix=0; ix<6; ++ix) {
         for (size_t iy=0; iy<3; ++iy) {
           scale(_d_all[ix][iy], sf);
+          divByGroupWidth(_d_all[ix][iy]);
           scale(_d_strong[ix][iy], sf);
+          divByGroupWidth(_d_strong[ix][iy]);
         }
       }
     }

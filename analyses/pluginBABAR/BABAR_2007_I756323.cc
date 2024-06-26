@@ -33,11 +33,6 @@ namespace Rivet {
       book(_weight_Kpipi, "/TMP/weight_Kpipi");
       book(_weight_KpiK, "/TMP/weight_KpiK");
       book(_weight_KKK, "/TMP/weight_KKK");
-
-      book(tmp11, 11, 1, 1);
-      book(tmp12, 12, 1, 1);
-      book(tmp13, 13, 1, 1);
-      book(tmp14, 14, 1, 1);
     }
 
 
@@ -97,38 +92,33 @@ namespace Rivet {
 
 
     void finalize() {
-      if (_weight_pipipi->val() > 0.) {
-        scale(_hist_pipipi_pipipi, 1.0 / *_weight_pipipi);
-        scale(_hist_pipipi_pipi  , 0.5 / *_weight_pipipi);
-      }
-      if (_weight_Kpipi->val() > 0.) {
-        scale(_hist_Kpipi_Kpipi  , 1.0 / *_weight_Kpipi);
-        scale(_hist_Kpipi_Kpi    , 1.0 / *_weight_Kpipi);
-        scale(_hist_Kpipi_pipi   , 1.0 / *_weight_Kpipi);
-      }
-      if (_weight_KpiK->val() > 0.) {
-        scale(_hist_KpiK_KpiK    , 1.0 / *_weight_KpiK);
-        scale(_hist_KpiK_KK      , 1.0 / *_weight_KpiK);
-        scale(_hist_KpiK_piK     , 1.0 / *_weight_KpiK);
-      }
-      if (_weight_KKK->val() > 0.) {
-        scale(_hist_KKK_KKK      , 1.0 / *_weight_KKK);
-        scale(_hist_KKK_KK       , 0.5 / *_weight_KKK);
-      }
-      tmp11->bin(1).set(100*_weight_pipipi->val()/_weight_total->val(),
-                        100*sqrt(double(_weight_pipipi->val()))/_weight_total->val());
-      tmp12->bin(1).set(100*_weight_Kpipi->val()/_weight_total->val(),
-                        100*sqrt(double(_weight_Kpipi->val()))/_weight_total->val());
-      tmp13->bin(1).set(100*_weight_KpiK->val()/_weight_total->val(),
-                        100*sqrt(double(_weight_KpiK->val()))/_weight_total->val());
-      tmp14->bin(1).set(100*_weight_KKK->val()/_weight_total->val(),
-                        100*sqrt(double(_weight_KKK->val()))/_weight_total->val());
+      normalize(_hist_pipipi_pipipi);
+      normalize(_hist_pipipi_pipi);
+      normalize(_hist_Kpipi_Kpipi);
+      normalize(_hist_Kpipi_Kpi  );
+      normalize(_hist_Kpipi_pipi );
+      normalize(_hist_KpiK_KpiK  );
+      normalize(_hist_KpiK_KK    );
+      normalize(_hist_KpiK_piK   );
+      normalize(_hist_KKK_KKK    );
+      normalize(_hist_KKK_KK     );
+      Estimate0DPtr tmp;
+      book(tmp,11,1,1);
+      divide(*_weight_pipipi, *_weight_total, tmp);
+      scale(tmp,100.);
+      book(tmp,12,1,1);
+      divide(*_weight_Kpipi, *_weight_total, tmp);
+      scale(tmp,100.);
+      book(tmp,13,1,1);
+      divide(*_weight_KpiK, *_weight_total, tmp);
+      scale(tmp,100.);
+      book(tmp,14,1,1);
+      divide(*_weight_KKK, *_weight_total, tmp);
+      scale(tmp,100.);
     }
 
 
   private:
-
-    Estimate1DPtr tmp11, tmp12, tmp13, tmp14;
 
     // Histograms
     Histo1DPtr _hist_pipipi_pipipi, _hist_pipipi_pipi;

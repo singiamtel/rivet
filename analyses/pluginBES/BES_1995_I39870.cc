@@ -22,7 +22,15 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
+      book(_c_hadrons, 1, 1, 1);
+      for (const string& en : _c_hadrons.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -39,23 +47,14 @@ namespace Rivet {
       // mu+mu- + photons
       if (nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) vetoEvent;
       // everything else
-      else _c_hadrons->fill();
+      else _c_hadrons->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      Estimate1DPtr hadrons;
-      book(hadrons, 1, 1, 1);
-      for (auto& b : hadrons->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sig_h, make_pair(err_h,err_h));
-        }
-      }
-
+      scale(_c_hadrons,fact);
     }
 
     /// @}
@@ -63,7 +62,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons;
+    BinnedHistoPtr<string> _c_hadrons;
+    string _ecms;
     /// @}
 
   };

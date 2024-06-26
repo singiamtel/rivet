@@ -1,0 +1,37 @@
+Name: BELLE_2023_I2099998
+Year: 2023
+Summary: Mass and helicity angles in $B^+\to K^+K^-\pi^+$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2099998
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 107 (2023) 3, 032013
+RunInfo: Any process producing B+ mesons, originally Upsilon(4S) decays
+Description:
+  'Mass and helicity angles in $B^+\to K^+K^-\pi^+$. The data for the mass distributions was taken from tables I and IV in the paper, and the corrected data for the helicity angles from figure 4.'
+ValidationInfo:
+  'Herwig7 events using EvtGen fpr B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2022bpm
+BibTeX: '@article{Belle:2022bpm,
+    author = "Hsu, C. -L. and others",
+    collaboration = "Belle",
+    title = "{Angular analysis of the low K+K- invariant mass enhancement in B+\textrightarrow{}K+K-\ensuremath{\pi}+ decays}",
+    eprint = "2206.11445",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle Preprint: 2022-07; KEK Preprint: 2022-5",
+    doi = "10.1103/PhysRevD.107.032013",
+    journal = "Phys. Rev. D",
+    volume = "107",
+    number = "3",
+    pages = "032013",
+    year = "2023"
+}
+'

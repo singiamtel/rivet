@@ -1,0 +1,35 @@
+Name: BELLE_2005_I680703
+Year: 2005
+Summary: Measurement of angular distributions in $B^0\to J/\psi K^{*0}$ 
+Experiment: BELLE
+Collider: KEKB
+InspireID: 680703
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+- Phys.Rev.Lett. 95 (2005) 091601
+RunInfo: Any process producing B mesons, orginally Upsilon(4S) decay
+Description:
+  'Measurement of the $K^*$ helicity angle and transversality angles in the charmonium decay for $B^0\to J/\psi K^{*0}$. The data were read from Figure 2 in the paper which are background subtracted and corrected for efficiency/acceptance.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2005qtf
+BibTeX: '@article{Belle:2005qtf,
+    author = "Itoh, R. and others",
+    collaboration = "Belle",
+    title = "{Studies of CP violation in B ---\ensuremath{>} J/psi K* decays}",
+    eprint = "hep-ex/0504030",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2005-15, KEK-PREPRINT-2005-7",
+    doi = "10.1103/PhysRevLett.95.091601",
+    journal = "Phys. Rev. Lett.",
+    volume = "95",
+    pages = "091601",
+    year = "2005"
+}
+'

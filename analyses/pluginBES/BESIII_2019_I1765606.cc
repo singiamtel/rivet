@@ -129,10 +129,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_h_cTheta);
-      Estimate1DPtr h_alpha_xi;
+      Estimate0DPtr h_alpha_xi;
       book(h_alpha_xi,2,1,1);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_cTheta);
-      h_alpha_xi->bin(1).set(alpha.first, alpha.second);
+      h_alpha_xi->set(alpha.first, alpha.second);
     }
 
     /// @}

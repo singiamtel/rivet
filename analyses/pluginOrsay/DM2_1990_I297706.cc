@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > p pbar Lambda Lambdabar
   class DM2_1990_I297706 : public Analysis {
   public:
 

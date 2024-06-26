@@ -1,0 +1,43 @@
+Name: BESIII_2023_I2661512
+Year: 2023
+Summary: Cross section for $e^+e^-\to\Delta^{++}\bar{p}\pi^-+\text{c.c}$ for $\sqrt{s}=2.3094\to2.6464$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2661512
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 108 (2023) 7, 072010
+ - arXiv:2305.12166 [hep-ex]
+RunInfo: e+e- to hadrons
+NeedCrossSection: yes
+Beams:  [e+,e-]
+Energies: [2.3094, 2.3864, 2.396, 2.5, 2.6444, 2.6454, 2.6464]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to\Delta^{++}\bar{p}\pi^-+\text{c.c}$ for $\sqrt{s}=2.3094\to2.6464$ by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023tuq
+BibTeX: '@article{BESIII:2023tuq,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Production of the doubly charged \ensuremath{\Delta} baryon in e+e- annihilation at energies from 2.3094 to 2.6464~GeV}",
+    eprint = "2305.12166",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.108.072010",
+    journal = "Phys. Rev. D",
+    volume = "108",
+    number = "7",
+    pages = "072010",
+    year = "2023"
+}
+'

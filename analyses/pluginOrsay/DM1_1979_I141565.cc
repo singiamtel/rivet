@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > p pbar
   class DM1_1979_I141565 : public Analysis {
   public:
 
@@ -20,7 +20,7 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_nProton,  "/TMP/nProton" );
+      book(_nProton,  "/TMP/nProton", refData(1,1,1) );
     }
 
 
@@ -35,22 +35,16 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==2 && nCount[2212]==1 && nCount[-2212]==1)
-	_nProton->fill();
+	_nProton->fill(sqrtS()/GeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sigma = _nProton->val()*fact;
-      double error = _nProton->err()*fact;
+      scale(_nProton, crossSection()/ sumOfWeights() /nanobarn);
       Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_nProton,mult);
     }
 
     /// @}
@@ -58,7 +52,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nProton;
+    Histo1DPtr _nProton;
     /// @}
 
 

@@ -1,0 +1,35 @@
+Name: BELLE_2006_I715430
+Year: 2006
+Summary: Form factors in $D^0\to(\pi^-,K^-)\ell^+\nu_\ell$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 715430
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 97 (2006) 061804
+RunInfo: Any process producing D0 mesons, originally Upsilon(4S)
+Description:
+  'Measurement of the form factors in $D^0\to(\pi^-,K^-)\ell^+\nu_\ell$. The corrected data was read from the figure 2 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B and D meson decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2006idb
+BibTeX: '@article{Belle:2006idb,
+    author = "Widhalm, L. and others",
+    collaboration = "Belle",
+    title = "{Measurement of D0 ---\ensuremath{>} pi l nu (Kl nu) Form Factors and Absolute Branching Fractions}",
+    eprint = "hep-ex/0604049",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2006-12",
+    doi = "10.1103/PhysRevLett.97.061804",
+    journal = "Phys. Rev. Lett.",
+    volume = "97",
+    pages = "061804",
+    year = "2006"
+}
+'

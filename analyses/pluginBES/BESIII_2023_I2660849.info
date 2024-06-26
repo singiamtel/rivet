@@ -1,0 +1,48 @@
+Name: BESIII_2023_I2660849
+Year: 2023
+Summary: $e^+e^-\to D^{*+}_sD^{*-}_s$ cross sections between threshold and 4.95 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2660849
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 131 (2023) 15, 151903
+ - arXiv:2305.10789 [hep-ex]
+RunInfo: e+e- > hadrons
+Beams: [e+, e-]
+Energies:  [4.22626, 4.228, 4.233, 4.2357, 4.238, 4.241, 4.24166, 4.243, 4.2438, 4.246, 4.248,
+            4.253, 4.25797, 4.258, 4.263, 4.2668, 4.268, 4.273, 4.2777, 4.278, 4.283, 4.28788,
+            4.288, 4.298, 4.30789, 4.308, 4.31205, 4.318, 4.328, 4.33739, 4.338, 4.348, 4.358,
+            4.35826, 4.368, 4.37737, 4.378, 4.3874, 4.388, 4.393, 4.39645, 4.398, 4.408, 4.41558,
+            4.418, 4.423, 4.428, 4.43624, 4.438, 4.448, 4.458, 4.46706, 4.478, 4.498, 4.518,
+            4.52714, 4.538, 4.548, 4.558, 4.568, 4.5745, 4.578, 4.588, 4.59953, 4.61186, 4.628,
+            4.64091, 4.66124, 4.68192, 4.69882, 4.7397, 4.75005, 4.78054, 4.84307, 4.91802, 4.95093]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the $e^+e^-\to D^{*+}_sD^{*-}_s$ cross sections between threshold and 4.95 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023wsc
+BibTeX: '@article{BESIII:2023wsc,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Precise Measurement of the e+e-\textrightarrow{}Ds*+Ds*- Cross Sections at Center-of-Mass Energies from Threshold to 4.95~GeV}",
+    eprint = "2305.10789",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevLett.131.151903",
+    journal = "Phys. Rev. Lett.",
+    volume = "131",
+    number = "15",
+    pages = "151903",
+    year = "2023"
+}
+'

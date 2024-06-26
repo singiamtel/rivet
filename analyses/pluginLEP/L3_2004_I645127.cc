@@ -28,16 +28,18 @@ namespace Rivet {
 
       // Initialise and register projections
       if(_mode==0) {
+	declare(GammaGammaKinematics(), "Kinematics");
         declare(GammaGammaFinalState(), "FS");
         declare(UnstableParticles(),"UFS");
+        // Book histos
+        book(_c_sigma_mu1, 1,1,1);
+        book(_c_sigma_mu2, 1,1,2);
+        book(_c_sigma_tau, 2,1,1);
       }
       else if(_mode==1) {
         declare(FinalState(), "FS");
+        book(_sigma,"TMP/sigma",refData(3,1,1));
       }
-      // Book counters
-      book(_c_sigma_mu1, "/TMP/sigma_mu_1");
-      book(_c_sigma_mu2, "/TMP/sigma_mu_2");
-      book(_c_sigma_tau, "/TMP/sigma_tau");
 
     }
 
@@ -73,12 +75,11 @@ namespace Rivet {
 	}
       }
       if( nCount[-13]==1 && nCount[13]==1 && ntotal==2+nCount[22]) {
-	if(W2<1600.*sqr(GeV)) {
-	  _c_sigma_mu1->fill();
-	  if(fiducal) {
-	    _c_sigma_mu2->fill();
-	  }
-	}
+	if(W2<1600.*sqr(GeV) && _c_sigma_mu1) {
+          _c_sigma_mu2->fill(round(sqrtS()));
+          if(fiducal) _c_sigma_mu1->fill(round(sqrtS()));
+        }
+        if(_sigma) _sigma->fill(sqrtS());
       }
       if(_mode==1) return;
       bool foundTauPlus = false, foundTauMinus = true;
@@ -105,7 +106,7 @@ namespace Rivet {
 	}
       }
       if(matched)
-	_c_sigma_tau->fill();
+	_c_sigma_tau->fill(round(sqrtS()));
     }
 
 
@@ -113,48 +114,18 @@ namespace Rivet {
     void finalize() {
       // prefactor for the cross sections
       double fact  = crossSection()/picobarn/sumOfWeights();
-      if(_mode==1) fact /= 1000.;
-      scale(_c_sigma_mu1,fact);
-      scale(_c_sigma_mu2,fact);
-      scale(_c_sigma_tau,fact);
-      unsigned int imin=0, imax = 3;
-      if(_mode==1) {
-        imin=3;
-        imax=4;
+      if(_mode==0) {
+        scale(_c_sigma_mu1,fact);
+        scale(_c_sigma_mu2,fact);
+        scale(_c_sigma_tau,fact);
       }
-      for (unsigned int ihist=imin;ihist<imax;++ihist) {
-        unsigned int id=0, iy=0;
-        double sigma = 0., error = 0.;
-        if(ihist==0) {
-          id=1;
-          iy=1;
-          sigma = _c_sigma_mu2->val();
-          error = _c_sigma_mu2->err();
-        }
-        else if(ihist==1) {
-          id=1;
-          iy=2;
-          sigma = _c_sigma_mu1->val();
-          error = _c_sigma_mu1->err();
-        }
-        else if(ihist==2) {
-          id=2;
-          iy=1;
-          sigma = _c_sigma_tau->val();
-          error = _c_sigma_tau->err();
-        }
-        else if(ihist==3) {
-          id=3;
-          iy=5;
-          sigma = _c_sigma_mu1->val();
-          error = _c_sigma_mu1->err();
-        }
-        Estimate1DPtr  mult;
-        book(mult, id, 1, iy);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
+      else {
+        fact /= 1000.;
+        scale(_sigma,fact);
+        for(unsigned int iy=1;iy<6;++iy) {
+          Estimate1DPtr tmp;
+          book(tmp,3,1,iy);
+          barchart(_sigma,tmp);
         }
       }
     }
@@ -164,7 +135,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_sigma_mu1,_c_sigma_mu2,_c_sigma_tau;
+    BinnedHistoPtr<int> _c_sigma_mu1,_c_sigma_mu2,_c_sigma_tau;
+    Histo1DPtr _sigma;
     unsigned int _mode;
     /// @}
 

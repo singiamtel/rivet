@@ -1,0 +1,33 @@
+Name: ARGUS_1994_I376001
+Year: 1994
+Summary: Helicity angles in  $B\to J/\psi K^{*}$ 
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 376001
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 340 (1994) 217-220
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decay
+Description:
+  'Measurement of the $K^*$ and $J/\psi$ helicity angles in the charmonium decay for $B\to J/\psi K^{*}$. The data were read from Figure 2 in the paper which are background subtracted and corrected for efficiency/acceptance.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1994rms
+BibTeX: '@article{ARGUS:1994rms,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Measurement of the polarization in the decay B ---\ensuremath{>} J / psi K*}",
+    reportNumber = "DESY-94-139",
+    doi = "10.1016/0370-2693(94)01302-0",
+    journal = "Phys. Lett. B",
+    volume = "340",
+    pages = "217--220",
+    year = "1994"
+}
+'

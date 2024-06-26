@@ -59,18 +59,18 @@ namespace Rivet {
 	}
 	else if(p.children()[0].pid()==sign*413 &&
 		isK0(p.children()[1].pid())) {
-	  _r[1]->fill(0.5);
+	  _r[1]->fill(">= 0.0"s);
 	  continue;
       	}
       	else if(p.children()[1].pid()==sign*413 &&
       		isK0(p.children()[0].pid())) {
-	  _r[1]->fill(0.5);
+	  _r[1]->fill(">= 0.0"s);
 	  continue;
       	}
 	else {
 	  continue;
 	}
-	_r[0]->fill(0.5);
+	_r[0]->fill(">= 0.0"s);
 	if(Dstar.children().size()!=2) continue;
 	Particle pion;
 	if(Dstar.children()[0].pid()== 111 &&
@@ -112,7 +112,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_x,_h_cTheta;
-    Histo1DPtr _r[2];
+    BinnedHistoPtr<string> _r[2];
     /// @}
 
 

@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > 2pi+ 2pi-
   class CMD2_2000_I531667 : public Analysis {
   public:
 
@@ -23,7 +23,15 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_npion, "TMP/pion");
+      book(_npion, 1, 1, 1);
+      for (const string& en : _npion.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -34,23 +42,13 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
 	if(abs(p.pid())!=PID::PIPLUS) vetoEvent;
       }
-      _npion->fill();
+      _npion->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _npion->val();
-      double error = _npion->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_npion, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -58,7 +56,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _npion;
+    BinnedHistoPtr<string> _npion;
+    string _ecms;
     /// @}
 
 

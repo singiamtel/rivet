@@ -38,7 +38,7 @@ namespace Rivet {
       unsigned int offset = 0;
       int offset2 = -1;
       isDisc = false;
-
+      skipBin = false;
       if      (isCompatibleWithSqrtS(45*GeV)) offset = 1;
       else if (isCompatibleWithSqrtS(66*GeV)) offset = 2;
       else if (isCompatibleWithSqrtS(76*GeV)) offset = 3;
@@ -61,18 +61,22 @@ namespace Rivet {
       else if (isCompatibleWithSqrtS(200*GeV)) {
         offset2= 1;
         offset = 1;
+        skipBin = true;
       }
       else if (isCompatibleWithSqrtS(202*GeV)) {
         offset2= 1;
         offset = 2;
+        skipBin = true;
       }
       else if (isCompatibleWithSqrtS(205*GeV)) {
         offset2= 1;
         offset = 3;
+        skipBin = true;
       }
       else if (isCompatibleWithSqrtS(207*GeV)) {
         offset2= 1;
         offset = 4;
+        skipBin = true;
       }
       else    MSG_ERROR("Beam energy not supported!");
       // Book the histograms
@@ -139,13 +143,14 @@ namespace Rivet {
                                                      0.09, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.24, 0.28});
         _axis["CParam"] = YODA::Axis<double>({0.0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44,
                                               0.48, 0.52, 0.56, 0.6, 0.64, 0.68, 0.72, 0.76, 0.8, 0.84, 0.88});
-        _axis["DParam"] = YODA::Axis<double>({0.0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44,
-                                              0.48, 0.52, 0.56, 0.6, 0.64, 0.68, 0.72, 0.76, 0.8, 0.84, 0.88, 0.92});
-        _axis["heavy_jet_mass"] = YODA::Axis<double>({0.0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16,
-                                                      0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.54});
+        _axis["DParam"] = YODA::Axis<double>({0.00, 0.02,0.04,0.06,0.08,0.10,0.12,0.14,0.16,0.20,
+                                              0.24,0.28,0.32,0.36,0.40,0.44,0.48,0.54});
+        _axis["heavy_jet_mass"] = YODA::Axis<double>({0.00, 0.01,0.02,0.03,0.04,0.05,0.06,
+                                                      0.08,0.10,0.12,0.14,0.16,0.20,0.24,0.28,0.32});
         _axis["heavy_jet_mass_P"] = YODA::Axis<double>({0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08,
                                                         0.1, 0.12, 0.14, 0.16, 0.2, 0.24, 0.28, 0.32});
-        _axis["heavy_jet_mass_E"] = YODA::Axis<double>({0.0, 0.01, 0.02, 0.03, 0.04, 0.05});
+        _axis["heavy_jet_mass_E"] = YODA::Axis<double>({0.00, 0.01,0.02,0.03,0.04,0.05,0.06,
+                                                        0.08,0.10,0.12,0.14,0.16,0.20,0.24,0.28,0.32});
         _axis["light_jet_mass"] = YODA::Axis<double>({0.0, 0.01, 0.02, 0.03, 0.04, 0.05});
         _axis["diff_jet_mass"] = YODA::Axis<double>({0.0, 0.01, 0.02, 0.03, 0.04, 0.06, 0.08, 0.12, 0.16, 0.2, 0.25, 0.3});
         _axis["sphericity"] = YODA::Axis<double>({0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.1,
@@ -269,7 +274,12 @@ namespace Rivet {
 
     void smartfill(const string& tag, const double value) {
       if (isDisc) {
-        const size_t idx = _axis[tag].index(value);
+        size_t idx = _axis[tag].index(value);
+        // skip masked bin in wide broadening
+        if(tag=="wide_broading" && skipBin) {
+          if(idx==8) idx=0;
+          else if(idx>8) idx-=1;
+        }
         if (idx && idx <= _edges[tag].size()) {
           _d[tag]->fill(_edges[tag][idx-1]);
         }
@@ -292,7 +302,11 @@ namespace Rivet {
             item.first == "pTOut")  scale(item.second, 1./sumOfWeights());
         else   normalize(item.second);
         for(auto & b: item.second->bins()) {
-          const size_t idx = b.index();
+          size_t idx = b.index();
+          // skip masked bin in wide broadening
+          if(item.first=="wide_broading" && skipBin) {
+            if(idx>=8) ++idx;
+          }
           b.scaleW(1./_axis[item.first].width(idx));
         }
       }
@@ -308,6 +322,7 @@ namespace Rivet {
     map<string, YODA::Axis<double>> _axis;
     map<string, vector<string>> _edges;
     bool isDisc;
+    bool skipBin;
 
     /// @}
   };

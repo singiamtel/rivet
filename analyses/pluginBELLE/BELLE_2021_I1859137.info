@@ -12,8 +12,15 @@ References:
  - arXiv:2104.08371
 RunInfo: e+ e- to hadrons
 Beams: [e+, e-]
+Energies: [10.6322, 10.6810, 10.7313, 10.7712, 10.8295, 10.8489, 10.8574, 10.8642,
+           10.8658, 10.8676, 10.8778, 10.8828, 10.8889, 10.8983, 10.9073, 10.9287,
+           10.9575, 10.9753, 10.9904, 11.0039, 11.0148, 11.0185, 11.0208] 
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross sections for $B,\bar{B}$, $B\bar{B}^*$ and $B^*\bar{B}^*$ by the BELLE experiment for energies between 10.63 and 11.02 GeV.'
+  'Measurement of the cross sections for $B,\bar{B}$, $B\bar{B}^*$ and $B^*\bar{B}^*$ by the
+   BELLE experiment for energies between 10.63 and 11.02 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7'
 #ReleaseTests:

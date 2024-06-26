@@ -40,8 +40,8 @@ END PLOT
 
 BEGIN PLOT /BESIII_2016_I1422780/d01-x01-y03
 Title=$\alpha$ parameters for the decays
-XCustomMajorTicks=1.	  $(1S)\Xi^-\bar{\Xi}^+$	2.	$(1S)\Sigma^{*-}\bar{\Sigma}^{*+}$	3.	$(1S)\Sigma^{*+}\bar{\Sigma}^{*-}$	4.	  $(2S)\Xi^-\bar{\Xi}^+$	5.	$(2S)\Sigma^{*-}\bar{\Sigma}^{*+}$	6.	$(2S)\Sigma^{*+}\bar{\Sigma}^{*-}$
 LogY=0
+XMajorTicksAngle=60
 XMin=0.5
 XMax=6.5
 END PLOT

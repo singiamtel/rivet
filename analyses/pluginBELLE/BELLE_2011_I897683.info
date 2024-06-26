@@ -1,0 +1,36 @@
+Name: BELLE_2011_I897683
+Year: 2011
+Summary: $\phi K$ mass distribution in $B^{+,0}\to\phi K^{+,0}\gamma$ decays
+Experiment: BELLE
+Collider: KEKB
+InspireID: 897683
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 84 (2011) 071101
+RunInfo: Any process producing B+ and B0 mesons
+Description:
+  'Measurement of the $\phi K$ mass distribution in $B^{+,0}\to\phi K^{+,0}\gamma$ decays. The data was read from the plots in the paper whcih are background subtracted and efficiency corrected.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2011qkk
+BibTeX: '@article{Belle:2011qkk,
+    author = "Sahoo, H. and others",
+    collaboration = "Belle",
+    title = "{First Observation of Radiative $B^0 \to \phi K^0 \gamma$ Decays and Measurements of Their Time-Dependent $CP$ Violation}",
+    eprint = "1104.5590",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BELLE-PREPRINT-2011-6, KEK-PREPRINT-2011-1",
+    doi = "10.1103/PhysRevD.84.071101",
+    journal = "Phys. Rev. D",
+    volume = "84",
+    pages = "071101",
+    year = "2011"
+}
+'

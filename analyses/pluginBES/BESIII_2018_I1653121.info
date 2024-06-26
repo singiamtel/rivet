@@ -9,10 +9,15 @@ Authors:
  - Peter Richardson <peter.richardson@durham.ac.uk>
 References:
  - Phys.Rev. D97 (2018) 071101
-RunInfo: e+ e- to hadrons
+RunInfo: e+ e- to hadrons pi0 and KS0 set stable
 Beams: [e+, e-]
+Energies: [4.189, 4.208, 4.217, 4.226, 4.242, 4.258, 4.308, 4.358, 4.387, 4.416, 4.467, 4.527, 4.575, 4.600]
+Options:
+- ENERGY=*
 Description:
-  'Cross section for  $e^+e^-\to K^+K^-J/\psi$ and $K^0_SK^0_SJ/\psi$ for energies between 4.2 and 4.6 GeV measured by the BESIII collaboration.'
+  'Cross section for  $e^+e^-\to K^+K^-J/\psi$ and $K^0_SK^0_SJ/\psi$ for energies between 4.2 and 4.6 GeV
+   measured by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   ''
 #ReleaseTests:

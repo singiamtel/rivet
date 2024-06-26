@@ -1,0 +1,40 @@
+Name: BESII_2004_I661567
+Year: 2004
+Summary: Cross sections for $e^+e^-\to\omega\pi^0$, $\rho\eta^{(\prime)}$ for $\sqrt{s}=3.65$, $3.686$, and $3.773$
+Experiment: BESII
+Collider: BEPC
+InspireID: 661567
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 70 (2004) 112007
+RunInfo: e+ e- > hadrons, pi0 and KS) set stable
+Beams: [e+, e-]
+Energies: [ 3.650,3.686,3.773]
+Options:
+ - ENERGY=*
+Description:
+  'The data were taken from Table III in the paper.
+  Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2004cnx
+BibTeX: '@article{BES:2004cnx,
+    author = "Ablikim, M. and others",
+    collaboration = "BES",
+    title = "{Measurement of the final states omega pi0, rho eta, and rho eta prime from psi (2S) electromagnetic decays and e+e- annihilations}",
+    eprint = "hep-ex/0410031",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevD.70.112007",
+    journal = "Phys. Rev. D",
+    volume = "70",
+    pages = "112007",
+    year = "2004",
+    note = "[Erratum: Phys.Rev.D 71, 019901 (2005)]"
+}
+'

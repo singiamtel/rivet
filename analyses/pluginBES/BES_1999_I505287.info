@@ -1,0 +1,34 @@
+Name: BES_1999_I505287
+Year: 1999
+Summary: Mass and angular distributions for  $J/\psi\to\gamma K^{*0}\bar{K}^{*0}$
+Experiment: BES
+Collider: BEPC
+InspireID: 505287
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 472 (2000) 200-206
+RunInfo: Any process producing J/psi, originally e+e-
+Description:
+  'Mass and angular distributions for  $J/\psi\to\gamma K^{*0}\bar{K}^{*0}$. The data were read from the figures in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:1999zaa
+BibTeX: '@article{BES:1999zaa,
+    author = "Bai, J. Z. and others",
+    collaboration = "BES",
+    title = "{Partial wave analysis of J / psi ---\ensuremath{>} gamma (K+ K- pi+ pi-)}",
+    eprint = "hep-ex/9908045",
+    archivePrefix = "arXiv",
+    doi = "10.1016/S0370-2693(99)01399-4",
+    journal = "Phys. Lett. B",
+    volume = "472",
+    pages = "200--206",
+    year = "2000"
+}
+'

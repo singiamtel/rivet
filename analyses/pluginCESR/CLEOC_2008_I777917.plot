@@ -1,7 +1,7 @@
 BEGIN PLOT /CLEOC_2008_I777917/d06-x01-y01
 Title=$\sigma(e^+e^-\to \mathrm{charm})$
 XLabel=$\sqrt{s}$/MeV
-YLabel=$\sigma(e^+e^-\to \mathrm{charm})/pb$
+YLabel=$\sigma(e^+e^-\to \mathrm{charm})$ [nb]
 LogY=0
 ConnectGaps=1
 END PLOT

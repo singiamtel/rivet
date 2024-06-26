@@ -23,7 +23,16 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_nproton, "TMP/proton");
+      book(_nproton, 1, 1, 1);
+
+      for (const string& en : _nproton.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
 
     }
 
@@ -31,28 +40,17 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const FinalState& fs = apply<FinalState>(event, "FS");
-      if(fs.particles().size()!=3) vetoEvent;
+      if (fs.particles().size()!=3) vetoEvent;
       for (const Particle& p :  fs.particles()) {
-        if(abs(p.pid())!=PID::PROTON&& p.pid()==PID::PI0) vetoEvent;
+        if (abs(p.pid())!=PID::PROTON && p.pid()!=PID::PI0) vetoEvent;
       }
-      _nproton->fill();
+      _nproton->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nproton->val();
-      double error = _nproton->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1D temphisto(refData(1, 1, 1));
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nproton, crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -60,7 +58,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nproton;
+    BinnedHistoPtr<string> _nproton;
+    string _ecms;
     /// @}
 
 

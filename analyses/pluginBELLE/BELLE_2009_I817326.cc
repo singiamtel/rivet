@@ -203,8 +203,6 @@ namespace Rivet {
     /// @{
     Histo1DPtr _h_br[2][2],_h_br_B[2][2][2];
     Profile1DPtr _p_FL[2],_p_FB[2][2];
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2009_I817326/d01-x01-y02
-// BEGIN YODA_SCATTER2D_V2 /REF/BELLE_2009_I817326/d01-x02-y02
     CounterPtr _c[3];
     /// @}
 

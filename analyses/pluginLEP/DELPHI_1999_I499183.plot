@@ -1,3 +1,224 @@
+BEGIN PLOT /DELPHI_1999_I499183/d01-x01-y01
+Title=Average $1-T$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle 1-T \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d01-x01-y02
+Title=Average $(1-T)^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle(1-T)^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d01-x01-y03
+Title=Average $(1-T)^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle(1-T)^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d02-x01-y01
+Title=Average $T_\mathrm{major}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle T_\mathrm{major} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d02-x01-y02
+Title=Average $T_\mathrm{major}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle T_\mathrm{major}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d02-x01-y03
+Title=Average $T_\mathrm{major}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle T_\mathrm{major}^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d03-x01-y01
+Title=Average $T_\mathrm{minor}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle T_\mathrm{minor} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d023-x01-y02
+Title=Average $T_\mathrm{minor}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle T_\mathrm{minor}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d03-x01-y03
+Title=Average $T_\mathrm{minor}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle T_\mathrm{minor}^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d04-x01-y01
+Title=Average $O$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle O \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d04-x01-y02
+Title=Average $O^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle O^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d04-x01-y03
+Title=Average $O^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle O^3\rangle$
+LogY=0
+END PLOT
+
+
+BEGIN PLOT /DELPHI_1999_I499183/d05-x01-y01
+Title=Average $\rho_\mathrm{heavy}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{heavy} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d05-x01-y02
+Title=Average $\rho_\mathrm{heavy}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{heavy}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d05-x01-y03
+Title=Average $\rho_\mathrm{heavy}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{heavy}^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d06-x01-y01
+Title=Average $\rho_\mathrm{light}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{light} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d06-x01-y02
+Title=Average $\rho_\mathrm{light}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{light}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d06-x01-y03
+Title=Average $\rho_\mathrm{light}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{light}^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d07-x01-y01
+Title=Average $\rho_\mathrm{diff}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{diff} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d07-x01-y02
+Title=Average $\rho_\mathrm{diff}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{diff}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d07-x01-y03
+Title=Average $\rho_\mathrm{diff}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle \rho_\mathrm{diff}^3\rangle$
+LogY=0
+END PLOT
+
+BEGIN PLOT /DELPHI_1999_I499183/d08-x01-y01
+Title=Average $B_\mathrm{max}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{max} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d08-x01-y02
+Title=Average $B_\mathrm{max}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{max}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d08-x01-y03
+Title=Average $B_\mathrm{max}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{max}^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d09-x01-y01
+Title=Average $B_\mathrm{min}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{min} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d09-x01-y02
+Title=Average $B_\mathrm{min}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{min}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d09-x01-y03
+Title=Average $B_\mathrm{min}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{min}^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d10-x01-y01
+Title=Average $B_\mathrm{sum}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{sum} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d10-x01-y02
+Title=Average $B_\mathrm{sum}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{sum}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d10-x01-y03
+Title=Average $B_\mathrm{sum}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{sum}^3\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d11-x01-y01
+Title=Average $B_\mathrm{diff}$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{diff} \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d11-x01-y02
+Title=Average $B_\mathrm{diff}^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{diff}^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d11-x01-y03
+Title=Average $B_\mathrm{diff}^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle B_\mathrm{diff}^3\rangle$
+LogY=0
+END PLOT
+
+BEGIN PLOT /DELPHI_1999_I499183/d12-x01-y01
+Title=Average $C$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle C \rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d12-x01-y02
+Title=Average $C^2$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle C^2\rangle$
+LogY=0
+END PLOT
+BEGIN PLOT /DELPHI_1999_I499183/d12-x01-y03
+Title=Average $C^3$ vs $\sqrt{s}$
+XLabel=$\sqrt{s}$ [GeV]
+YLabel=$\langle C^3\rangle$
+LogY=0
+END PLOT
+
 BEGIN PLOT /DELPHI_1999_I499183/d13-x01-y01
 Title=Thrust ($E_\mathrm{CMS}=133$ GeV)
 XLabel=$1-T$

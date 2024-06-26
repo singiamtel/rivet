@@ -30,13 +30,14 @@ namespace Rivet {
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
-      for(const Particle &child : p.children()) {
-	if(child.children().empty()) {
-	  nRes[child.pid()]-=1;
-	  --ncount;
-	}
-	else
-	  findChildren(child,nRes,ncount);
+      for (const Particle &child : p.children()) {
+        if (child.children().empty()) {
+          nRes[child.pid()]-=1;
+          --ncount;
+        }
+        else {
+          findChildren(child,nRes,ncount);
+        }
       }
     }
 
@@ -47,28 +48,28 @@ namespace Rivet {
       map<long,int> nCount;
       int ntotal(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
       // mu+mu- + photons
-      if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	vetoEvent;
+      if (nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) {
+        vetoEvent;
+      }
       // unstable charm analysis
       const FinalState& ufs = apply<UnstableParticles>(event, "UFS");
-      for(unsigned int ix=0;ix<ufs.particles().size();++ix) {
+      for (unsigned int ix=0; ix<ufs.particles().size(); ++ix) {
        	const Particle& p1 = ufs.particles()[ix];
        	int id1 = abs(p1.pid());
-       	if(id1 != 411 && id1 != 413) continue;
+       	if (id1 != 411 && id1 != 413) continue;
       	// check fs
       	bool fs = true;
       	for (const Particle & child : p1.children()) {
-      	  if(child.pid()==p1.pid()) {
+      	  if (child.pid()==p1.pid()) {
       	    fs = false;
       	    break;
       	  }
       	}
-      	if(!fs) continue;
+      	if (!fs) continue;
       	// find the children
       	map<long,int> nRes = nCount;
       	int ncount = ntotal;
@@ -76,44 +77,44 @@ namespace Rivet {
       	bool matched=false;
        	int sign = p1.pid()/id1;
       	// loop over the other fs particles
-      	for(unsigned int iy=ix+1;iy<ufs.particles().size();++iy) {
+      	for (unsigned int iy=ix+1; iy<ufs.particles().size(); ++iy) {
       	  const Particle& p2 = ufs.particles()[iy];
       	  fs = true;
       	  for (const Particle & child : p2.children()) {
-      	    if(child.pid()==p2.pid()) {
+      	    if (child.pid()==p2.pid()) {
       	      fs = false;
       	      break;
       	    }
       	  }
-      	  if(!fs) continue;
-       	  if(p2.pid()/abs(p2.pid())==sign) continue;
+      	  if (!fs) continue;
+       	  if (p2.pid()/abs(p2.pid())==sign) continue;
       	  int id2 = abs(p2.pid());
-       	  if(id2 != 411 && id2 != 413) continue;
-      	  if(!p2.parents().empty() && p2.parents()[0].pid()==p1.pid())
+       	  if (id2 != 411 && id2 != 413) continue;
+      	  if (!p2.parents().empty() && p2.parents()[0].pid()==p1.pid()) {
       	    continue;
+          }
       	  map<long,int> nRes2 = nRes;
       	  int ncount2 = ncount;
       	  findChildren(p2,nRes2,ncount2);
-	  if(ncount2!=0) continue;
-	  matched=true;
-	  for(auto const & val : nRes2) {
-	    if(val.second!=0) {
-	      matched = false;
-	      break;
-	    }
-	  }
-	  if(matched) {
-	    if(id1==413 && id2==413) {
-	      _c_DpSDmS->fill();
-	    }
-	    else if((id1==411 && id2==413) ||
-		    (id1==413 && id2==411)) {
-	      _c_DpDmS->fill();
-	    }
-	    break;
-	  }
+          if (ncount2!=0) continue;
+          matched=true;
+          for (const auto& val : nRes2) {
+            if (val.second!=0) {
+              matched = false;
+              break;
+            }
+          }
+          if (matched) {
+            if (id1==413 && id2==413) {
+              _c_DpSDmS->fill();
+            }
+            else if((id1==411 && id2==413) || (id1==413 && id2==411)) {
+              _c_DpDmS->fill();
+            }
+            break;
+          }
       	}
-	if(matched) break;
+        if (matched) break;
       }
     }
 
@@ -127,7 +128,7 @@ namespace Rivet {
           sigma = _c_DpDmS->val()*fact;
           error = _c_DpDmS->err()*fact;
         }
-        else if(iy==2) {
+        else if (iy==2) {
           sigma = _c_DpSDmS->val()*fact;
           error = _c_DpSDmS->err()*fact;
         }

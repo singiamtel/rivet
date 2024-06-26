@@ -1,7 +1,7 @@
 Name: HYPERCP_2005_I677384
 Year: 2005
 Summary: Measurement of asymmetry in $\Omega^-\to\Lambda^0K^-$
-Experiment: HYPERCP
+Experiment: HyperCP
 InspireID: 677384
 Status: VALIDATED
 Authors:
@@ -23,7 +23,7 @@ BibTeX: '@article{Chen:2005aza,
       author         = "Chen, Y. C. and others",
       title          = "{Measurement of the alpha asymmetry parameter for the
                         Omega- ---&gt; Lambda K- decay}",
-      collaboration  = "HYPERCP",
+      collaboration  = "HyperCP",
       journal        = "Phys. Rev.",
       volume         = "D71",
       year           = "2005",

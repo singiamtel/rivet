@@ -46,21 +46,21 @@ namespace Rivet {
 	if(cont) {
 	  if(p.abspid()==431) {
 	    _h_Ds_off->fill(mom);
-	    _c_Ds_off->fill(0.5);
+	    _c_Ds_off->fill("10.58"s);
 	  }
 	  else {
 	    _h_DsStar_off->fill(mom);
-	    _c_DsStar_off->fill(0.5);
+	    _c_DsStar_off->fill("10.58"s);
 	  }
 	}
 	else {
 	  if(p.abspid()==431) {
 	    _h_Ds_on->fill(mom);
-	    _c_Ds_on->fill(0.5);
+	    _c_Ds_on->fill();
 	  }
 	  else {
 	    _h_DsStar_on->fill(mom);
-	    _c_DsStar_on->fill(0.5);
+	    _c_DsStar_on->fill();
 	  }
 	}
       }
@@ -87,7 +87,8 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_Ds_on,_h_Ds_off,_h_DsStar_on,_h_DsStar_off;
-    Histo1DPtr _c_Ds_on,_c_Ds_off,_c_DsStar_on,_c_DsStar_off;
+    CounterPtr _c_Ds_on,_c_DsStar_on;
+    BinnedHistoPtr<string> _c_Ds_off,_c_DsStar_off;
     CounterPtr _w_ups;
     /// @}
 

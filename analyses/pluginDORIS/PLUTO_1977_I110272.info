@@ -12,6 +12,9 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: yes
 Beams: [e-, e+]
+Energies: [3.6, 3.63, 3.66, 4.0, 4.015, 4.03, 4.035, 4.05, 4.065, 4.08, 4.1,
+           4.115, 4.13, 4.15, 4.19, 4.2, 4.23, 4.25, 4.27, 4.31, 4.37, 4.405,
+           4.415, 4.425, 4.47, 5.54, 4.64, 4.76]
 Description:
   'Measurement of $R$ in $e^+e^-$ collisions by PLUTO for energies between 3.1 and 4.8 GeV.
    The individual hadronic and muonic cross sections are also outputted to the yoda file

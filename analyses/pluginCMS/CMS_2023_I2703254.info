@@ -3,7 +3,7 @@ Year: 2023
 Summary: Inclusive and differential cross section measurements of ttbb production in the lepton+jets channel at 13 TeV
 Experiment: CMS
 Collider: LHC
-InspireID: I2703254
+InspireID: 2703254
 Status: VALIDATED
 Reentrant: true
 RefMatch: '(d01|d1.|d2.|d3.)-x01-y01'

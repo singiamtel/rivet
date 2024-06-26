@@ -15,7 +15,7 @@ NumEvents: 1000000
 NeedCrossSection: no
 Beams: [e+,e-]
 Energies: [91.2]
-Description: 'OPAL measurement of the inclusive cross section for K^{*\pm} (892) production in hadronic decays of the Z0' 
+Description: 'OPAL measurement of the inclusive cross section for $K^{*\pm} (892) $production in hadronic decays of the Z0' 
 BibKey: Acton:1992us
 BibTeX: '@article{Acton:1992us,
       author         = "Acton, P. D. and others",

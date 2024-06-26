@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> K+K-
   class OLYA_1981_I173076 : public Analysis {
   public:
 
@@ -24,8 +24,27 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_nkaon, "TMP/kaon");
-
+      book(_nkaon, 1, 1, 1);
+      for (const string& en : _nkaon.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/GeV, emin, emax)) {
+            _ecms = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms = en;
+            break;
+          }
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -36,23 +55,13 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
 	if(abs(p.pid())!=PID::KPLUS) vetoEvent;
       }
-      _nkaon->fill();
+      _nkaon->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nkaon->val();
-      double error = _nkaon->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nkaon, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -60,7 +69,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nkaon;
+    BinnedHistoPtr<string> _nkaon;
+    string _ecms;
     /// @}
 
 

@@ -26,12 +26,13 @@ namespace Rivet {
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
       for (const Particle &child : p.children()) {
-	if(child.children().empty()) {
-	  --nRes[child.pid()];
-	  --ncount;
-	}
-	else
-	  findChildren(child,nRes,ncount);
+        if (child.children().empty()) {
+          --nRes[child.pid()];
+          --ncount;
+        }
+        else {
+          findChildren(child,nRes,ncount);
+        }
       }
     }
 
@@ -41,52 +42,49 @@ namespace Rivet {
       map<long,int> nCount;
       int ntotal(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
-	if(p.children().empty()) continue;
-	// find the omega
-	if(p.pid()==443) {
-	  map<long,int> nRes = nCount;
-	  int ncount = ntotal;
-	  findChildren(p,nRes,ncount);
-	  // omega pi+pi-
-	  if(ncount!=2) continue;
-	  bool matched = true;
-	  for(auto const & val : nRes) {
-	    if(abs(val.first)==211) {
-	      if(val.second !=1) {
-		matched = false;
-		break;
-	      }
-	    }
-	    else if(val.second!=0) {
-	      matched = false;
-	      break;
-	    }
-	  }
-	  if(matched) {
-	    _nJPsi->fill();
-	    break;
-	  }
-	}
+        if (p.children().empty()) continue;
+        // find the omega
+        if (p.pid()==443) {
+          map<long,int> nRes = nCount;
+          int ncount = ntotal;
+          findChildren(p,nRes,ncount);
+          // omega pi+pi-
+          if (ncount!=2) continue;
+          bool matched = true;
+          for (const auto& val : nRes) {
+            if (abs(val.first)==211) {
+              if (val.second !=1) {
+                matched = false;
+                break;
+              }
+            }
+            else if (val.second!=0) {
+              matched = false;
+              break;
+            }
+          }
+          if (matched) {
+            _nJPsi->fill();
+            break;
+          }
+        }
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma =  _nJPsi->val();
-      double error = _nJPsi->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
+      scale(_nJPsi, crossSection()/ sumOfWeights() /picobarn);
       Estimate1DPtr  mult;
       book(mult, 1, 1, 1);
       for (auto& b : mult->bins()) {
         if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
+          b.set(_nJPsi->val(), _nJPsi->err());
         }
       }
     }

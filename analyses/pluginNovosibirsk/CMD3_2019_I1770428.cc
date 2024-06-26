@@ -23,7 +23,7 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_cK0K0pippim , "TMP/K0K0pippim");
+      book(_cK0K0pippim , "TMP/K0K0pippim", refData(1, 1, 6));
       book( _h_pipi ,2,1,1);
       book( _h_total,2,1,2);
     }
@@ -45,7 +45,7 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==4 && nCount[310]==2 && nCount[211]==1 && nCount[-211]==1) {
-	_cK0K0pippim->fill();
+	_cK0K0pippim->fill(sqrtS()/MeV);
 	FourMomentum ppipi = pip[0].momentum()+pip[1].momentum();
 	_h_pipi->fill(ppipi.mass()/MeV);
 	for(unsigned int ix=0;ix<2;++ix)
@@ -58,16 +58,10 @@ namespace Rivet {
     void finalize() {
       normalize(_h_pipi );
       normalize(_h_total);
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sigma = _cK0K0pippim->val()*fact;
-      double error = _cK0K0pippim->err()*fact;
+      scale(_cK0K0pippim,crossSection()/ sumOfWeights() /nanobarn);
       Estimate1DPtr  mult;
       book(mult, 1, 1, 6);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_cK0K0pippim,mult);
     }
 
     /// @}
@@ -75,7 +69,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _cK0K0pippim;
+    Histo1DPtr _cK0K0pippim;
     Histo1DPtr _h_pipi, _h_total;
     /// @}
 

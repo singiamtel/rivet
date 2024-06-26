@@ -28,13 +28,14 @@ namespace Rivet {
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
-      for(const Particle &child : p.children()) {
-	if(child.children().empty()) {
-	  nRes[child.pid()]-=1;
-	  --ncount;
-	}
-	else
-	  findChildren(child,nRes,ncount);
+      for (const Particle &child : p.children()) {
+        if (child.children().empty()) {
+          nRes[child.pid()]-=1;
+          --ncount;
+        }
+        else {
+          findChildren(child,nRes,ncount);
+        }
       }
     }
 
@@ -45,70 +46,64 @@ namespace Rivet {
       map<long,int> nCount;
       int ntotal(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
       const FinalState& ufs = apply<FinalState>(event, "UFS");
 
-      for(unsigned int ix=0;ix<ufs.particles().size();++ix) {
-	const Particle& p1 = ufs.particles()[ix];
-	if(abs(p1.pid())!=413) continue;
-	map<long,int> nRes = nCount;
-	int ncount = ntotal;
-	findChildren(p1,nRes,ncount);
-	bool matched=false;
-	int sign = -p1.pid()/abs(p1.pid());
-	for(unsigned int iy=0;iy<ufs.particles().size();++iy) {
-	  if(ix==iy) continue;
-	  const Particle& p2 = ufs.particles()[iy];
-	  if(!p2.parents().empty() && p2.parents()[0].pid()==p1.pid())
-	    continue;
-	  if(p2.pid()!=sign*413 && p2.pid()!=sign*411) continue;
-	  map<long,int> nRes2 = nRes;
-	  int ncount2 = ncount;
-	  findChildren(p2,nRes2,ncount2);
-	  if(ncount2!=0) continue;
-	  matched=true;
-	  for(auto const & val : nRes2) {
-	    if(val.second!=0) {
-	      matched = false;
-	      break;
-	    }
-	  }
-	  if(matched) {
-	    sign = abs(p2.pid());
-	    break;
-	  }
-	}
-	if(matched) {
-	  if(sign==411)
-	    _nDS->fill();
-	  else if(sign==413)
-	    _nDSS->fill();
-	}
+      for (unsigned int ix=0; ix<ufs.particles().size(); ++ix) {
+        const Particle& p1 = ufs.particles()[ix];
+        if (abs(p1.pid())!=413) continue;
+        map<long,int> nRes = nCount;
+        int ncount = ntotal;
+        findChildren(p1,nRes,ncount);
+        bool matched=false;
+        int sign = -p1.pid()/abs(p1.pid());
+        for (unsigned int iy=0; iy<ufs.particles().size(); ++iy) {
+          if (ix==iy) continue;
+          const Particle& p2 = ufs.particles()[iy];
+          if (!p2.parents().empty() && p2.parents()[0].pid()==p1.pid()) {
+            continue;
+          }
+          if (p2.pid()!=sign*413 && p2.pid()!=sign*411) continue;
+          map<long,int> nRes2 = nRes;
+          int ncount2 = ncount;
+          findChildren(p2,nRes2,ncount2);
+          if (ncount2!=0) continue;
+          matched=true;
+          for (const auto& val : nRes2) {
+            if (val.second!=0) {
+              matched = false;
+              break;
+            }
+          }
+          if (matched) {
+            sign = abs(p2.pid());
+            break;
+          }
+        }
+        if (matched) {
+          if (sign==411) {
+            _nDS->fill();
+          }
+          else if (sign==413) {
+            _nDSS->fill();
+          }
+        }
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<3;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _nDSS->val();
-          error = _nDSS->err();
-        }
-        else {
-          sigma = _nDS->val();
-          error = _nDS->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr  mult;
+      scale({_nDSS,_nDS}, crossSection()/ sumOfWeights() /nanobarn);
+      for (unsigned int ix=1; ix<3; ++ix) {
+        Estimate1DPtr mult;
         book(mult, ix, 1, 1);
         for (auto& b : mult->bins()) {
           if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
+            b.set( (ix==1? _nDSS : _nDS)->val(),
+                   (ix==1? _nDSS : _nDS)->err() );
           }
         }
       }

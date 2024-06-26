@@ -3,4 +3,7 @@ Title=$\sigma(e^+e^-\to K^0_SK^0_L)$
 XLabel=$\sqrt{s}$/GeV
 YLabel=$\sigma(e^+e^-\to K^0_SK^0_L)$/nb
 ConnectGaps=1
+XMajorTicksAngle=90
+BottomMargin=1.9
+XLabelSep=-0.55
 END PLOT

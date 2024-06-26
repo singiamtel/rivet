@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > pi+ pi- pi0
   class DM1_1980_I140174 : public Analysis {
   public:
 
@@ -22,7 +22,15 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_n3pi, "TMP/3pi");
+      book(_n3pi, 1, 1, 1);
+      for (const string& en : _n3pi.binning().edges<0>()) {
+        double end = std::stod(en)*MeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -37,23 +45,13 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==3 && nCount[211] == 1 && nCount[-211] == 1 && nCount[111] == 1)
-	_n3pi->fill();
+	_n3pi->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _n3pi->val();
-      double error = _n3pi->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_n3pi, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -61,7 +59,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _n3pi;
+    BinnedHistoPtr<string> _n3pi;
+    string _ecms;
     /// @}
 
 
