@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> eta pi+pi-
   class DM2_1988_I264144 : public Analysis {
   public:
 
@@ -23,7 +23,27 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numEtaPiPi, "TMP/EtaPiPi");
+      book(_numEtaPiPi, 1,1,1);
+      for (const string& en : _numEtaPiPi.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/MeV, emin, emax)) {
+            _ecms = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*MeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms = en;
+            break;
+          }
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -71,7 +91,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _numEtaPiPi->fill();
+	    _numEtaPiPi->fill(_ecms);
 	}
       }
     }
@@ -79,17 +99,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _numEtaPiPi->val();
-      double error = _numEtaPiPi->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_numEtaPiPi, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -97,7 +107,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numEtaPiPi;
+    BinnedHistoPtr<string> _numEtaPiPi;
+    string _ecms;
     /// @}
 
 

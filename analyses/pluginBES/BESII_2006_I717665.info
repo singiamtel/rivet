@@ -13,6 +13,7 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: yes
 Beams: [e-, e+]
+Energies: [3.65, 3.6648, 3.773]
 Options:
  - ENERGY=*
 Description:

@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > eta or pi0  + gamma
   class CMD2_2005_I658856 : public Analysis {
   public:
 
@@ -23,8 +23,19 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numEtaGamma, "TMP/EtaGamma");
-      book(_numPi0Gamma, "TMP/Pi0Gamma");
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_sigma[ix], 1+ix, 1, 1);
+        for (const string& en : _sigma[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*MeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if (_ecms[0].empty() && _ecms[1].empty() && _ecms[2].empty()) {
+        MSG_ERROR("Beam energy incompatible with analysis.");
+      }
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -50,7 +61,7 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==2 && nCount[22]==1 && nCount[111]==1)
-	_numPi0Gamma->fill();
+	_sigma[1]->fill(_ecms[1]);
 
 
       const FinalState& ufs = apply<FinalState>(event, "UFS");
@@ -77,7 +88,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _numEtaGamma->fill();
+	    _sigma[0]->fill(_ecms[0]);
 	}
       }
 
@@ -86,26 +97,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _numEtaGamma->val();
-          error = _numEtaGamma->err();
-        }
-        else {
-          sigma = _numPi0Gamma->val();
-          error = _numPi0Gamma->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for (unsigned int ix=0;ix<2;++ix) {
+        scale(_sigma[ix],fact);
       }
     }
 
@@ -114,7 +108,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numEtaGamma,_numPi0Gamma;
+    BinnedHistoPtr<string> _sigma[2];
+    string _ecms[2];
     /// @}
 
 

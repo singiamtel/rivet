@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > eta(') gamma
   class BABAR_2006_I716277 : public Analysis {
   public:
 
@@ -22,8 +22,8 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numEtaGamma, "TMP/EtaGamma");
-      book(_numEtaPrimeGamma, "TMP/EtaPrimeGamma");
+      book(_numEtaGamma,      1, 1, 1);
+      book(_numEtaPrimeGamma, 1, 1, 2);
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -74,35 +74,18 @@ namespace Rivet {
 	}
 	if(matched) {
 	  if(p.pid()==221)
-	    _numEtaGamma->fill();
+	    _numEtaGamma->fill("10.58"s);
 	  else
-	    _numEtaPrimeGamma->fill();
+	    _numEtaPrimeGamma->fill("10.58"s);
 	}
       }
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _numEtaGamma->val();
-          error = _numEtaGamma->err();
-        }
-        else {
-          sigma = _numEtaPrimeGamma->val();
-          error = _numEtaPrimeGamma->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /femtobarn;
-        error *= crossSection()/ sumOfWeights() /femtobarn;
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /femtobarn;
+      scale(_numEtaGamma,fact);
+      scale(_numEtaPrimeGamma,fact);
     }
 
     /// @}
@@ -110,7 +93,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numEtaGamma,_numEtaPrimeGamma;
+    BinnedHistoPtr<string> _numEtaGamma,_numEtaPrimeGamma;
     /// @}
 
 

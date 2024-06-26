@@ -1,0 +1,33 @@
+Name: ARGUS_1992_I335698
+Year: 1992
+Summary: Hadronic mass spectrum and helicity angle in $\tau^-\to\pi^-\pi^0\nu_\tau$
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 335698
+Status: VALIDATED NOHEPDATA
+Reentrant:  true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 56 (1992) 339-346
+RunInfo: Any process producing tau leptons, originally e+e-
+Description:
+  'Hadronic mass spectrum and helicity angle in $\tau^-\to\pi^-\pi^0\nu_\tau$. Corrected data read from figures 3 and 4 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1992mhj
+BibTeX: '@article{ARGUS:1992mhj,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Measurement of the decay tau- ---\ensuremath{>} rho- tau-neutrino}",
+    reportNumber = "DESY-92-082",
+    doi = "10.1007/BF01565941",
+    journal = "Z. Phys. C",
+    volume = "56",
+    pages = "339--346",
+    year = "1992"
+}
+'

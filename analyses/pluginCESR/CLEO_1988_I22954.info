@@ -1,0 +1,36 @@
+Name: CLEO_1988_I22954
+Year: 1988
+Summary: Spectra of $D$ hadrons in $e^+e^-$ at $\sqrt{s}=10.55\,$GeV 
+Experiment: CLEO
+Collider: CESR
+InspireID: 22954
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 37 (1988) 1719
+RunInfo: e+ e- > hadrons
+Beams: [e+, e-]
+Energies: [10.55]
+Description:
+  'Scaled momentum spectra for $D^*+$, $D^{*0}$, $D^+$, $D^0$, $D_s^+$ and $\Lambda_c^+$  in $e^+e^-$ at $\sqrt{s}=10.55\,$GeV '
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1988jcc
+BibTeX: '@article{CLEO:1988jcc,
+    author = "Bortoletto, D. and others",
+    collaboration = "CLEO",
+    title = "{Charm Production in Nonresonant e+ e- Annihilations at s**(1/2) = 10.55-GeV}",
+    reportNumber = "CLNS-87-105, CLEO-87-8",
+    doi = "10.1103/PhysRevD.37.1719",
+    journal = "Phys. Rev. D",
+    volume = "37",
+    pages = "1719",
+    year = "1988",
+    note = "[Erratum: Phys.Rev.D 39, 1471 (1989)]"
+}
+'

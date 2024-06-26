@@ -2,6 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/Beam.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -75,7 +76,7 @@ namespace Rivet {
           Particle p1=pions[i1], p2=pions[i2];
           double z1(x1),z2(x2);
           // randomly order the particles
-          if (rand()/static_cast<double>(RAND_MAX) < 0.5) {
+          if (rand01() < 0.5) {
             swap(p1,p2);
             swap(z1,z2);
           }

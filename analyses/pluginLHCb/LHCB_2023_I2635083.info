@@ -1,0 +1,35 @@
+Name: LHCB_2023_I2635083
+Year: 2023
+Summary: $\pi^+\pi^-$ mass distribution in $B^0_s\to\psi(2S)\pi^+\pi^-$ and $B^0_s\to\chi_{c1}\pi^+\pi^-$
+Experiment: LHCB
+Collider: LHC
+InspireID: 2635083
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2302.10629 [hep-ex]
+RunInfo: Any process producing Bs0, originally pp
+Options:
+ - PID=*
+Description:
+  'The  $\pi^+\pi^-$ mass distribution in $B^0_s\to\psi(2S)\pi^+\pi^-$ and $B^0_s\to\chi_{c1}\pi^+\pi^-$ are measured. The data was extracted from the figures in the paper. There is no consensus as to the nature of the $\chi_{c1}(3872)$ $c\bar{c}$ state and therefore we taken its PDG code to be 9030443, i.e. the first unused code for an undetermined
+   spin one $c\bar{c}$ state. This can be changed using the PID option if a different code is used by the event generator performing the simulation.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B meson decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: LHCb:2023reb
+BibTeX: '@article{LHCb:2023reb,
+    collaboration = "LHCb",
+    title = "{Observation of the $B^0_s\rightarrow \chi_{c1}(3872)\pi^+\pi^-$ decay}",
+    eprint = "2302.10629",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2023-015, LHCb-PAPER-2022-049",
+    month = "2",
+    year = "2023"
+}
+'

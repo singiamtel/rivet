@@ -1,0 +1,38 @@
+Name: BESII_2006_I717720
+Year: 2006
+Summary:  Cross section for hadron production for $\sqrt{s}=3.65\to3.87\,$GeV
+Experiment: BESII
+Collider: BEPC
+InspireID: 717720
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 97 (2006) 121801
+RunInfo: e+e- > hadrons
+Beams: [e+, e-]
+Options:
+ - ECENT=3.701,3.706,3.714,3.722,3.730,3.738,3.746,3.754,3.759,3.762,3.764,3.766,3.768,3.770,3.772,3.774,3.776,3.780,3.785,3.791,3.801,3.811,3.821,3.837,3.853,3.6658,3.6710,3.6740,3.6772,3.6789,3.6798,3.6809,3.6817,3.6821,3.6824,3.6832,3.6840,3.6846,3.6851,3.6858,3.6863,3.6872,3.6875,3.6881,3.6898,3.6924,3.6967,3.7005,3.7060,3.7139,3.7219,3.7300,3.7380,3.7460,3.7539,3.7591,3.7621,3.7639,3.7659,3.7679,3.7699,3.7719,3.7740,3.7759,3.7798,3.7850,3.7908,3.8009,3.8109,3.8209,3.8368,3.8527
+Description:
+  'Measurement of the cross section for $e^+e^-\to\text{hadrons}$ for $\sqrt{s}=3.65\to3.87\,$GeV. In addition the cross section to charm hadrons near the $\psi(3770)$ is measured.
+   As the analyses requires the beam energy smearing described in the paper then central CMS energy should be specified using the ECENT (in GeV) option.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2006fpf
+BibTeX: '@article{BES:2006fpf,
+    author = "Ablikim, M. and others",
+    collaboration = "BES",
+    title = "{Measurements of the braching fractions for psi(3770) ---\ensuremath{>} D0 anti-D0, D+ D-, D anti-D and the resonance parameters of psi(3770) and psi(2S)}",
+    eprint = "hep-ex/0605107",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevLett.97.121801",
+    journal = "Phys. Rev. Lett.",
+    volume = "97",
+    pages = "121801",
+    year = "2006"
+}
+'

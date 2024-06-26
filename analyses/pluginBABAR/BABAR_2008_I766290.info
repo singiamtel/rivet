@@ -1,0 +1,37 @@
+Name: BABAR_2008_I766290
+Year: 2008
+Summary: Mass distribution in $B^-\to\Lambda_c^+\bar{\Lambda}_c^-K^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 766290
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 77 (2008) 031101
+RunInfo: Any process producing B+/-, orignally Upsilon(4S) decays
+Description:
+'Measurement of mass distributions in  $B^-\to\Lambda_c^+\bar{\Lambda}_c^-K^-$ decays. The data was read from
+plots in the paper, the data is not corrected for efficiency/acceptance although the sideband backgrounds given in the paper have been subtracted.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007xtc
+BibTeX: '@article{BaBar:2007xtc,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{A Study of anti-B ---\ensuremath{>} Xi(c) anti-Lambda-(c) and anti-B ---\ensuremath{>} anti-Lambda+(c) anti-Lambda-(c) anti-K decays at BABAR}",
+    eprint = "0710.5775",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-07-053, SLAC-PUB-12938",
+    doi = "10.1103/PhysRevD.77.031101",
+    journal = "Phys. Rev. D",
+    volume = "77",
+    pages = "031101",
+    year = "2008"
+}
+'

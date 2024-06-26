@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Cross section for $e^+e^-\to K^0_SK^\pm\pi^\mp\pi^0$ and $K^0_SK^\pm\pi^\mp\eta$ between 3.90 to 4.60 GeV
+  /// @brief Cross section for e+e- K0SK+-\pi+-\pi0 and K0SK+-pi-+eta between 3.90 to 4.60 GeV
   class BESIII_2018_I1699641 : public Analysis {
   public:
 
@@ -24,8 +24,21 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_cKKpipi, "TMP/2Kpipi" );
-      book(_cKKpieta, "TMP/2Kpieta");
+      for(unsigned int ix=0;ix<2;++ix)
+        book(_sigma[ix], 1+ix, 1, 1);
+ 
+      for (const string& en : _sigma[0].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) {
+        if(isCompatibleWithSqrtS(4.085)) _ecms="4.085"s;
+        else
+          MSG_ERROR("Beam energy incompatible with analysis.");
+      }
     }
 
 
@@ -54,7 +67,7 @@ namespace Rivet {
       if(ntotal==4 && nCount[310]==1 && nCount[111]==1 &&
          ((nCount[ 321]==1 &&nCount[-211]==1) ||
           (nCount[-321]==1 &&nCount[ 211]==1) ))
-        _cKKpipi->fill();
+        _sigma[0]->fill(_ecms);
       // eta resonance
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
@@ -83,41 +96,24 @@ namespace Rivet {
         if(matched==false) continue;
         if((nCount[ 321] == 1 && nCount[-211] ==1) ||
            (nCount[-321] == 1 && nCount[ 211] ==1))
-          _cKKpieta->fill();
+          _sigma[1]->fill(_ecms);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _cKKpipi->val();
-          error = _cKKpipi->err();
-        }
-        else if(ix==2) {
-          sigma = _cKKpieta->val();
-          error = _cKKpieta->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /picobarn;
+      for (unsigned int ix=0;ix<2;++ix)
+        scale(_sigma[ix],fact);
     }
-
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _cKKpipi,_cKKpieta;
+    BinnedHistoPtr<string> _sigma[2];
+    string _ecms;
     /// @}
 
   };

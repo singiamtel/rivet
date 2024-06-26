@@ -21,7 +21,16 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(UnstableParticles(), "UFS");
-      book(_c_psi   , "/TMP/sigma_psi");
+      book(_c_psi   , 1, 1, 1);
+
+      for (const string& en : _c_psi.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -29,22 +38,13 @@ namespace Rivet {
     void analyze(const Event& event) {
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       unsigned int count = ufs.particles(Cuts::pid==443).size();
-      _c_psi->fill(count);
+      _c_psi->fill(_ecms,count);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/nanobarn/sumOfWeights();
-      double sigma = _c_psi->val()*fact;
-      double error = _c_psi->err()*fact;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_c_psi, crossSection()/nanobarn/sumOfWeights());
     }
 
     ///@}
@@ -52,7 +52,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    CounterPtr _c_psi;
+    BinnedHistoPtr<string> _c_psi;
+    string _ecms;
     ///@}
 
 

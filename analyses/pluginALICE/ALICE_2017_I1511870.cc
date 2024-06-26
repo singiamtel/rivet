@@ -39,7 +39,7 @@ namespace Rivet {
       book(_h_ptd0,14,1,1);                                     // mean pt of prompt D0
       book(_h_D0full,15,1,1);                                   // integrated cross section for D0 in full rapidity
       book(_h_ccfull,16,1,1);                                   // integrated cross section for ccbar in full rapidity
-      book(_h_wei,"_h_wei");    				                        // Counter used to calculate D0 mean pt (necessary to store an integer number for event normalisation, i.e. to still be able to compute <pT> from multiple parallel MC jobs)
+      book(_h_wei,"_h_wei");    				// Counter used to calculate D0 mean pt (necessary to store an integer number for event normalisation, i.e. to still be able to compute <pT> from multiple parallel MC jobs)
       book(_h_D0dummy,"TMP/_h_D0dummy",refData(5,1,1));         // used to make DplusonD0
       book(_h_D0dummy1,"TMP/_h_D0dummy1",refData(7,1,1));       // used to make DsonD0
       book(_h_Dplusdummy,"TMP/_h_Dplusdummy",refData(8,1,1));   // used to make DsonDplus
@@ -132,7 +132,8 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     CounterPtr _h_wei;
-    Histo1DPtr _h_D0, _h_Dplus, _h_Dstar, _h_Ds, _h_D0int, _h_Dplusint, _h_Dstarint, _h_Dsint, _h_cc, _h_D0full, _h_D0dummy, _h_D0dummy1, _h_Dplusdummy , _h_ccfull, _h_ptd0;
+    Histo1DPtr _h_D0, _h_Dplus, _h_Dstar, _h_Ds, _h_D0dummy, _h_D0dummy1, _h_Dplusdummy;
+    BinnedHistoPtr<int> _h_D0int, _h_Dplusint, _h_Dstarint, _h_Dsint, _h_cc, _h_D0full, _h_ccfull, _h_ptd0;
     Estimate1DPtr _h_DplusonD0, _h_DstaronD0, _h_DsonD0, _h_DsonDplus;
     /// @}
 

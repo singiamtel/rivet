@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief R measurement
   class CRYSTAL_BALL_1988_I261078 : public Analysis {
   public:
 
@@ -22,8 +22,8 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "sigma_hadrons");
-      book(_c_muons, "sigma_muons");
+      book(_c_hadrons, "sigma_hadrons", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_muons  , "sigma_muons"  , refData<YODA::BinnedEstimate<string>>(1,1,1));
     }
 
 
@@ -50,7 +50,9 @@ namespace Rivet {
     void finalize() {
       const double fact = crossSection()/ sumOfWeights() /picobarn;
       scale( {_c_hadrons, _c_muons}, fact);
-      divide(_c_hadrons, _c_muons, _mult);
+      BinnedEstimatePtr<string> mult;
+      book(mult,1,1,1);
+      divide(_c_hadrons, _c_muons, mult);
     }
     /// @}
 
@@ -58,7 +60,6 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     BinnedHistoPtr<string> _c_hadrons, _c_muons;
-    BinnedEstimatePtr<string> _mult;
     const string Ecm = "9.39";
     /// @}
 

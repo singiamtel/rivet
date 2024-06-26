@@ -37,7 +37,7 @@ namespace Rivet {
           case PID::B0:           return {413,411,10413,10411,20413,415};
           case PID::BPLUS:        return {423,421,10423,10421,20423,425};
           case PID::B0S:          return {433,431,10433,10431,20433,435};
-          case PID::LAMBDAB:      return {4122,14122,4124};
+          case PID::LAMBDAB:      return {4122,102142,102144};
           case PID::D0:           return {323,321,10323,325,211,213};
           case PID::DPLUS:        return {313,311,10313,315,111,113,221,331,231};
           case PID::DSPLUS:       return {333,221,331,311,313};

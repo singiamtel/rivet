@@ -100,17 +100,20 @@ namespace Rivet {
       	book(RK,1,1+ix,2);
       	divide(_h_br[1][ix],_h_br[3][ix],RK);
       	book(RK,1,1+ix,1);
-      	for (size_t ibin=1; ibin < _h_br[1][ix]->numBins()+1; ++ibin) {
-      	  double num     = _h_br[0][ix]->bin(ibin).sumW()   +_h_br[1][ix]->bin(ibin).sumW();
-      	  double numErr2 = sqr(_h_br[0][ix]->bin(ibin).errW())+sqr(_h_br[1][ix]->bin(ibin).errW());
-      	  double den     = _h_br[2][ix]->bin(ibin).sumW()   +_h_br[3][ix]->bin(ibin).sumW();
-      	  double denErr2 = sqr(_h_br[2][ix]->bin(ibin).errW())+sqr(_h_br[3][ix]->bin(ibin).errW());
+        size_t iloc=1;
+      	for (size_t ibin=0; ibin < _h_br[1][ix]->numBins(); ++ibin) {
+          while(_h_br[0][ix]->bin(iloc).isMasked()) ++iloc;
+      	  double num     = _h_br[0][ix]->bin(iloc).sumW()   +_h_br[1][ix]->bin(iloc).sumW();
+      	  double numErr2 = sqr(_h_br[0][ix]->bin(iloc).errW())+sqr(_h_br[1][ix]->bin(iloc).errW());
+      	  double den     = _h_br[2][ix]->bin(iloc).sumW()   +_h_br[3][ix]->bin(iloc).sumW();
+      	  double denErr2 = sqr(_h_br[2][ix]->bin(iloc).errW())+sqr(_h_br[3][ix]->bin(iloc).errW());
       	  double val(0.),err(0.);
       	  if(num>0. && den>0.) {
       	    val = num/den;
       	    err = val*(numErr2/sqr(num)+denErr2/sqr(den));
       	  }
-      	  RK->bin(ibin).set(val, err);
+      	  RK->bin(iloc).set(val, err);
+          ++iloc;
       	}
       }
     }

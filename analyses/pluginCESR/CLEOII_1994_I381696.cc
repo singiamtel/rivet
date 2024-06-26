@@ -45,8 +45,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      static const int id2595 = 14122;
-      static const int id2625 = 4124;
+      static const int id2595 = 102142;
+      static const int id2625 = 102144;
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
       const double Emax = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;

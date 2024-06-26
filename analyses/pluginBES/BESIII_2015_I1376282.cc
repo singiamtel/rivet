@@ -69,9 +69,10 @@ namespace Rivet {
       FourMomentum pHadron = boost1.transform(K0[0].momentum()+K0[1].momentum()+eta.momentum());
       LorentzTransform boost2 = LorentzTransform::mkFrameTransformFromBeta(pHadron.betaVec());
       Vector3 axis1 = pGamma.p3().unit();
-      Vector3 axis2 = boost2.transform(boost1.transform(eta.momentum()));
+      Vector3 axis2 = boost2.transform(boost1.transform(eta.momentum())).p3().unit();
       _h[4]->fill(axis1.dot(axis2));
-      FourMomentum pKK = boost2.transform(K0[0].momentum()+K0[1].momentum());
+      FourMomentum pKK = boost2.transform(boost1.transform(K0[0].momentum()+K0[1].momentum()));
+      axis2 = pKK.p3().unit();
       LorentzTransform boost3 = LorentzTransform::mkFrameTransformFromBeta(pKK.betaVec());
       for(unsigned ix=0;ix<2;++ix) {
 	Vector3 axis3 = boost3.transform(boost2.transform(boost1.transform(K0[ix].momentum()))).p3().unit();

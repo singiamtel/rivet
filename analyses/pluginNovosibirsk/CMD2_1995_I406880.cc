@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> hadrons near phi
   class CMD2_1995_I406880 : public Analysis {
   public:
 
@@ -23,10 +23,10 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nKpKm, "TMP/KpKm");
-      book(_nK0K0, "TMP/K0K0");
-      book(_n3pi, "TMP/3pi");
-      book(_numEtaGamma, "TMP/EtaGamma");
+      book(_nKpKm      , "TMP/KpKm"    , refData(1, 1, 1));
+      book(_nK0K0      , "TMP/K0K0"    , refData(1, 1, 2));
+      book(_n3pi       , "TMP/3pi"     , refData(1, 1, 3));
+      book(_numEtaGamma, "TMP/EtaGamma", refData(1, 1, 4));
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -52,12 +52,12 @@ namespace Rivet {
       }
       if(ntotal==2) {
 	if(nCount[321]==1 && nCount[-321]==1)
-	  _nKpKm->fill();
+	  _nKpKm->fill(sqrtS()/MeV);
 	else if(nCount[130]==1 && nCount[310]==1)
-	  _nK0K0->fill();
+	  _nK0K0->fill(sqrtS()/MeV);
       }
       else if(ntotal==3 && nCount[211] == 1 && nCount[-211] == 1 && nCount[111] == 1)
-	_n3pi->fill();
+	_n3pi->fill(sqrtS()/MeV);
 
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
@@ -83,7 +83,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _numEtaGamma->fill();
+	    _numEtaGamma->fill(sqrtS()/MeV);
 	}
       }
     }
@@ -91,41 +91,27 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<5;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _nKpKm->val();
-          error = _nKpKm->err();
-        }
-        else if(ix==2) {
-          sigma = _nK0K0->val();
-          error = _nK0K0->err();
-        }
-        else if(ix==3) {
-          sigma = _n3pi->val();
-          error = _n3pi->err();
-        }
-        else if(ix==4) {
-          sigma = _numEtaGamma->val();
-          error = _numEtaGamma->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      Estimate1DPtr mult;
+      scale(_nKpKm,fact);
+      book(mult, 1, 1, 1);
+      barchart(_nKpKm,mult);
+      scale(_nK0K0,fact);
+      book(mult, 1, 1, 2);
+      barchart(_nK0K0,mult);
+      scale(_n3pi,fact);
+      book(mult, 1, 1, 3);
+      barchart(_n3pi,mult);
+      scale(_numEtaGamma,fact);
+      book(mult, 1, 1, 4);
+      barchart(_numEtaGamma,mult);
     }
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _nKpKm,_nK0K0,_n3pi,_numEtaGamma;
+    Histo1DPtr _nKpKm,_nK0K0,_n3pi,_numEtaGamma;
     /// @}
 
 

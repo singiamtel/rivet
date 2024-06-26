@@ -1,0 +1,35 @@
+Name: BABAR_2004_I656424
+Year: 2004
+Summary: Helicity angle in $B\to D^+_{s1}(2460) \bar{D}$ decays
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 656424
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 97 (2006) 242001
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Helicity angle in $B\to D^+_{s1}(2460) \bar{D}$ decays. The efficiency corrected, background subtracted data was read from Figure 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2004dmq
+BibTeX: '@article{Belle:2004dmq,
+    author = "Gabyshev, N. and others",
+    collaboration = "Belle",
+    title = "{Study of decay mechanisms in B- ---\ensuremath{>} Lambda/c+ anti-p pi- decays and observation of low-mass structure in the Lambda/c+ anti-p system}",
+    eprint = "hep-ex/0409005",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2006-31, KEK-PREPRINT-2006-48",
+    doi = "10.1103/PhysRevLett.97.242001",
+    journal = "Phys. Rev. Lett.",
+    volume = "97",
+    pages = "242001",
+    year = "2006"
+}
+'

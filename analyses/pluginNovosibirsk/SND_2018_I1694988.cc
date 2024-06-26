@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> pi0 gamma
   class SND_2018_I1694988 : public Analysis {
   public:
 
@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       declare(FinalState(), "FS");
-      book(_numPi0Gamma, "TMP/Pi0Gamma");
+      book(_numPi0Gamma, 1, 1, 1);
     }
 
 
@@ -35,23 +35,13 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==2 && nCount[22]==1 && nCount[111]==1)
-	_numPi0Gamma->fill();
+	_numPi0Gamma->fill(round(sqrtS()/MeV));
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _numPi0Gamma->val();
-      double error = _numPi0Gamma->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_numPi0Gamma, crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -59,7 +49,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numPi0Gamma;
+    BinnedHistoPtr<int> _numPi0Gamma;
     /// @}
 
 

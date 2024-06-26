@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> K+K-pi0
   class SND_2020_I1806118 : public Analysis {
   public:
 
@@ -25,8 +25,15 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book( _nKKPi,"TMP/nKKPi" );
-      book(_nPhiPi,"TMP/nPhiPi");
+      book( _nKKPi, 1, 1, 1);
+      book(_nPhiPi,"TMP/nPhiPi", refData(2,1,1));
+      for (const string& en : _nKKPi.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -53,7 +60,7 @@ namespace Rivet {
       // KK pi state
       if(ntotal==3 && nCount[321]==1 &&
 	 nCount[-321]==1 && nCount[111]==1)
-	_nKKPi->fill();
+	_nKKPi->fill(_ecms);
       // phi pi state
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles(Cuts::pid==333)) {
@@ -76,7 +83,7 @@ namespace Rivet {
 	  }
 	}
 	if(matched) {
-	  _nPhiPi->fill();
+	  _nPhiPi->fill(sqrtS()/GeV);
 	  break;
 	}
       }
@@ -85,33 +92,21 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _nKKPi->val();
-          error = _nKKPi->err();
-        }
-        else {
-          sigma = _nPhiPi->val();
-          error = _nPhiPi->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact =  crossSection()/ sumOfWeights() /nanobarn;
+      scale(_nKKPi ,fact);
+      scale(_nPhiPi,fact);
+      Estimate1DPtr  mult;
+      book(mult, 2, 1, 1);
+      barchart(_nPhiPi,mult);
     }
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _nKKPi,_nPhiPi;
+    BinnedHistoPtr<string> _nKKPi;
+    Histo1DPtr _nPhiPi;
+    string _ecms;
     /// @}
 
 

@@ -68,6 +68,19 @@
             "PU-86-577"
         ]
     ],
+    "22954": [
+        "Charm Production in Nonresonant e+ e- Annihilations at s**(1/2) = 10.55-GeV",
+        "CLEO",
+        "10.1103/PhysRevD.37.1719",
+        null,
+        null,
+        "ins22954",
+        null,
+        [
+            "CLNS-87-105",
+            "CLEO-87-8"
+        ]
+    ],
     "23360": [
         "Production Cross-section and Electroweak Asymmetry of $D^*$ and $D$ Mesons Produced in $e^+ e^-$ Annihilations at 29-{GeV}",
         null,
@@ -81,6 +94,19 @@
             "PU-88-613",
             "IUHEE-88-2",
             "UM-HE-88-2"
+        ]
+    ],
+    "23509": [
+        "Investigation of the Total Charm Pair Cross-section in Nonresonant $e^+ e^-$ Annihilations at $\\sqrt{s}=10$.5-{GeV}",
+        "CLEO",
+        "10.1103/PhysRevD.38.2679",
+        null,
+        null,
+        "ins23509",
+        null,
+        [
+            "CLNS-87-109",
+            "CLEO-87-9"
         ]
     ],
     "84794": [
@@ -210,6 +236,19 @@
         null,
         [
             "LAL-78/31"
+        ]
+    ],
+    "133123": [
+        "Inclusive Production of $D$ Mesons in $e^+ e^-$ Annihilation at 7-{GeV}",
+        null,
+        "10.1016/0370-2693(79)91249-8",
+        null,
+        null,
+        "ins133123",
+        null,
+        [
+            "SLAC-PUB-2184",
+            "LBL-8143"
         ]
     ],
     "133588": [
@@ -502,6 +541,18 @@
             "LAL 81/33"
         ]
     ],
+    "168793": [
+        "Production of $\\pi^0 \\pi^0$ and $\\pi^0 \\eta$ in Photon - Photon Collisions",
+        null,
+        "10.1016/0370-2693(82)90957-1",
+        null,
+        null,
+        "ins168793",
+        null,
+        [
+            "SLAC-PUB-2821"
+        ]
+    ],
     "169326": [
         "Hadron Production by e+ e- Annihilation at Center-Of-Mass Energies Between 2.6-GeV and 7.8-GeV. Part 1. Total Cross-Section, Multiplicities and Inclusive Momentum Distributions",
         null,
@@ -587,6 +638,19 @@
             "LBL-14619"
         ]
     ],
+    "178490": [
+        "Inclusive Charged $D^*$ Production in $e^+ e^-$ Annihilations at $W=10$.4-{GeV}",
+        "CLEO",
+        "10.1103/PhysRevLett.49.610",
+        null,
+        null,
+        "ins178490",
+        null,
+        [
+            "CLEO/82-01",
+            "CLNS 82/534"
+        ]
+    ],
     "178613": [
         "The Hadronic Cross-section of Electron - Positron Annihilation at 9.5-{GeV} and the $\\Upsilon$ and $\\Upsilon^\\prime$ Resonance Parameters",
         null,
@@ -598,6 +662,16 @@
         [
             "DESY-82-037"
         ]
+    ],
+    "180612": [
+        "DECAY OF B MESONS INTO CHARGED AND NEUTRAL KAONS",
+        "CLEO",
+        "10.1103/PhysRevLett.48.1070",
+        null,
+        null,
+        "ins180612",
+        null,
+        []
     ],
     "180613": [
         "SEARCH FOR STRUCTURE IN SIGMA (E+ E- ---> HADRONS) BETWEEN S**(1/2) = 10.34-GEV AND 11.6-GEV",
@@ -737,6 +811,22 @@
             "UM HE 84-03"
         ]
     ],
+    "202899": [
+        "Inclusive D0 and $D^+$ Production in $e^+ e^-$ Annihilation at 29-{GeV}",
+        null,
+        "10.1103/PhysRevLett.53.1971",
+        null,
+        null,
+        "ins202899",
+        null,
+        [
+            "ANL-HEP-PR-84-46",
+            "IUHEE 57",
+            "UM HE 84-13",
+            "PU-84-517",
+            "HRS-PR-84-1"
+        ]
+    ],
     "202924": [
         "A Measurement of Energy-energy Correlations in $e^+ e^- \\to$ Hadrons at $\\sqrt{s}=29$-{GeV}",
         null,
@@ -747,6 +837,29 @@
         null,
         [
             "SLAC-PUB-3385"
+        ]
+    ],
+    "204307": [
+        "OBSERVATION OF DIRECT PHOTONS IN UPSILON AND UPSILON' DECAYS AND DETERMINATION OF THE QCD SCALE PARAMETER",
+        null,
+        "10.1016/0370-2693(84)91905-1",
+        null,
+        null,
+        null,
+        null,
+        []
+    ],
+    "205132": [
+        "Charged $D^*$ Production in $e^+ e^-$ Annihilation at 29-{GeV} and a Limit on D0 - Anti-d0 Mixing",
+        null,
+        "10.1103/PhysRevLett.54.522",
+        null,
+        null,
+        "ins205132",
+        null,
+        [
+            "SLAC-PUB-3498",
+            "CALT-68-1206"
         ]
     ],
     "205668": [
@@ -850,6 +963,45 @@
             "UM-HE-85-16"
         ]
     ],
+    "216850": [
+        "Inclusive Charged Particle Distribution in Nearly Threefold Symmetric Three Jet Events at $e$({CM}) = 29-{GeV}",
+        null,
+        "10.1103/PhysRevLett.55.1954",
+        null,
+        null,
+        "ins216850",
+        null,
+        [
+            "SLAC-PUB-3759",
+            "LBL-20171"
+        ]
+    ],
+    "217547": [
+        "Formation of Delta (980) and A2 (1320) in Photon-photon Collisions",
+        "Crystal Ball",
+        "10.1103/PhysRevD.33.1847",
+        null,
+        null,
+        "ins217547",
+        null,
+        [
+            "SLAC-PUB-3761",
+            "DESY-85-97"
+        ]
+    ],
+    "218314": [
+        "Inclusive $\\phi$ Production in $B$ Meson Decay",
+        "CLEO",
+        "10.1103/PhysRevLett.56.800",
+        null,
+        null,
+        "ins218314",
+        null,
+        [
+            "CLNS-85/706",
+            "CLEO-85-8"
+        ]
+    ],
     "220003": [
         "Charged Meson Pair Production in $\\gamma \\gamma$ Interactions",
         null,
@@ -896,6 +1048,19 @@
         null,
         [
             "MIT-LNS-146"
+        ]
+    ],
+    "230961": [
+        "A Study of the Decay $B \\to \\psi$ X",
+        "CLEO",
+        "10.1103/PhysRevD.34.3279",
+        null,
+        null,
+        "ins230961",
+        null,
+        [
+            "CLNS-86/739",
+            "CLEO-86-9"
         ]
     ],
     "233599": [
@@ -957,6 +1122,18 @@
         null,
         []
     ],
+    "244856": [
+        "Observation of $e^+ e^- \\to D(s$)+- $D^*(s$)-+ at $\\sqrt{s}=4$.14-{GeV}",
+        "MARK-III",
+        "10.1103/PhysRevLett.58.2171",
+        null,
+        null,
+        "ins244856",
+        null,
+        [
+            "SLAC-PUB-4158"
+        ]
+    ],
     "245571": [
         "Measurement of the Polarization of $\\tau$ Leptons Produced in $e^+ e^-$ Annihilation at $\\sqrt{s}=29$-{GeV}",
         null,
@@ -968,6 +1145,21 @@
         [
             "SLAC-PUB-4066",
             "COLO-HEP-132"
+        ]
+    ],
+    "246162": [
+        "Production of Strange Baryons in $e^+ e^-$ Annihilations at 29-{GeV}",
+        null,
+        "10.1103/PhysRevLett.58.2627",
+        null,
+        null,
+        "ins246162",
+        null,
+        [
+            "ANL-HEP-PR-87-26",
+            "IUHEE-87-4",
+            "PU-87-591",
+            "UM-HE-87-06"
         ]
     ],
     "246184": [
@@ -993,6 +1185,18 @@
         null,
         [
             "SLAC-PUB-4346"
+        ]
+    ],
+    "247567": [
+        "First Observation of $\\gamma \\gamma \\to \\omega \\rho^0$",
+        "ARGUS",
+        "10.1016/0370-2693(87)91684-4",
+        null,
+        null,
+        "ins247567",
+        null,
+        [
+            "DESY-87-048"
         ]
     ],
     "247900": [
@@ -1158,6 +1362,19 @@
             "SLAC-PUB-5160"
         ]
     ],
+    "294492": [
+        "A Measurement of $\\pi^0 \\pi^0$ Production in Two Photon Collisions",
+        "Crystal Ball",
+        "10.1103/PhysRevD.41.3324",
+        null,
+        null,
+        "ins294492",
+        null,
+        [
+            "SLAC-PUB-5163",
+            "DESY-90-002"
+        ]
+    ],
     "295286": [
         "Measurement of the Total Hadronic Cross-section in $e^+ e^-$ Annihilation at $\\sqrt{s}=29$-{GeV}",
         "MARK-II",
@@ -1198,7 +1415,7 @@
         ]
     ],
     "302822": [
-        "Dimuon production in proton - copper collisions at $\\sqrt{s}$ = 38.8-GeV",
+        "Dimuon Production in Proton - Copper Collisions at $\\sqrt{s}$ = 38.8-GeV",
         null,
         "10.1103/PhysRevD.43.2815",
         null,
@@ -1219,6 +1436,19 @@
         null,
         [
             "SLAC-REPRINT-1990-012"
+        ]
+    ],
+    "306832": [
+        "Measurement of the decay of the Upsilon (1S) and Upsilon (2S) resonances to muon pairs",
+        "Crystal Ball",
+        "10.1007/BF01597555",
+        null,
+        null,
+        "ins306832",
+        null,
+        [
+            "SLAC-PUB-5402",
+            "DESY-91-089"
         ]
     ],
     "315873": [
@@ -1606,6 +1836,16 @@
         null,
         []
     ],
+    "712991": [
+        "Partial wave analyses of J/psi ---> gamma pi+ pi- and gamma pi0 pi0",
+        null,
+        "10.1016/j.physletb.2006.10.004",
+        null,
+        "hep-ex/0603048",
+        null,
+        null,
+        []
+    ],
     "717778": [
         "Study of the e+ e- ---> eta gamma process with SND detector at the VEPP-2M e+ e- collider",
         null,
@@ -1691,6 +1931,18 @@
             "BABAR-PUB-06-055"
         ]
     ],
+    "727063": [
+        "Studies of gamma gamma to Lambda anti-Lambda , Sigma0 anti-Sigma0 production at Belle",
+        "Belle",
+        null,
+        null,
+        "hep-ex/0609048",
+        null,
+        null,
+        [
+            "BELLE-CONF-0673"
+        ]
+    ],
     "728191": [
         "Measurement of the e+ e- ---> pi+ pi- cross section with the CMD-2 detector in the 370 - 520-MeV c.m. energy range",
         null,
@@ -1715,6 +1967,16 @@
             "BABAR-PUB-06-038"
         ]
     ],
+    "735496": [
+        "Measurements of the continuum R(uds) and R values in e+e- annihilation in the energy region between 3.650 and 3.872-GeV",
+        null,
+        "10.1103/PhysRevLett.97.262001",
+        null,
+        "hep-ex/0612054",
+        null,
+        null,
+        []
+    ],
     "755881": [
         "Measurement of the e+e- -> K+K- process cross-section in the energy range s**(1/2) = 1.04 - 1.38 GeV with the SND detector in the experiment at VEPP-2M e+e- collider",
         null,
@@ -1736,6 +1998,16 @@
         [
             "BELLE-CONF-0704"
         ]
+    ],
+    "763951": [
+        "Study of psi(2S) decays into gamma K+ K- and gamma pi+ pi-",
+        "BES",
+        null,
+        null,
+        "0710.2324",
+        null,
+        null,
+        []
     ],
     "776519": [
         "Study of the Exclusive Initial-State-Radiation Production of the D anti-D System",
@@ -1846,6 +2118,16 @@
             "CLNS-10-2067",
             "CLEO-10-4"
         ]
+    ],
+    "899499": [
+        "Improved measurement of the electroweak penguin process B ---> X(s) l+ l-",
+        "Belle",
+        "10.22323/1.120.0231",
+        null,
+        null,
+        null,
+        null,
+        []
     ],
     "913909": [
         "Analysis of the Decay $D^0 \\to K^0_S \\pi^0 \\pi^0$",
@@ -2203,6 +2485,16 @@
         null,
         []
     ],
+    "1793431": [
+        "Study of the process $e^+e^-\\to\\pi^0\\pi^0 J/\\psi$ and neutral charmonium-like state $Z_c(3900)^0$",
+        "BESIII",
+        "10.1103/PhysRevD.102.012009",
+        null,
+        "2004.13788",
+        null,
+        null,
+        []
+    ],
     "1799437": [
         "Analysis of the decay $D^0\\rightarrow K_{S}^{0} K^{+} K^{-}$",
         "BESIII",
@@ -2212,6 +2504,28 @@
         null,
         null,
         []
+    ],
+    "1808875": [
+        "Measurement of cross sections for $e^{+}e^{-} \\rightarrow \\mu^+\\mu^-$ at center-of-mass energies from 3.80 to 4.60 GeV",
+        "BESIII",
+        "10.1103/PhysRevD.102.112009",
+        null,
+        "2007.12872",
+        "ins1808875",
+        null,
+        []
+    ],
+    "1829739": [
+        "$\\Lambda^+_c$ Production and Baryon-to-Meson Ratios in pp and p-Pb Collisions at $\\sqrt {s_{NN}}$=5.02\u2009\u2009TeV at the LHC",
+        "ALICE",
+        "10.1103/PhysRevLett.127.202301",
+        "2743731",
+        "2011.06078",
+        "ins1829739",
+        null,
+        [
+            "CERN-EP-2020-217"
+        ]
     ],
     "1845443": [
         "Cross section measurement of $e^+e^- \\to p\\bar{p}\\eta$ and $e^+e^- \\to p\\bar{p}\\omega$ at center-of-mass energies between 3.773\u00a0GeV and 4.6\u00a0GeV",
@@ -2235,6 +2549,16 @@
             "CMS-SMP-17-008",
             "CERN-EP-2020-251"
         ]
+    ],
+    "1849633": [
+        "Observation of $e^{+}e^{-}\\rightarrow\\eta\\psi(2S)$\u00a0at center-of-mass energies from 4.236 to 4.600 GeV",
+        "BESIII",
+        "10.1007/JHEP10(2021)177",
+        null,
+        "2103.01480",
+        null,
+        null,
+        []
     ],
     "1849747": [
         "Amplitude analysis and branching fraction measurement of $D_s^+ \\to K^-K^+\\pi^+\\pi^0$",
@@ -2310,6 +2634,30 @@
             "Belle Preprint 2021-06; KEK Preprint 2021-2"
         ]
     ],
+    "1862793": [
+        "Measurement of the Cross Sections of $\\Xi^0_{c}$ and $\\Xi^+_{c}$ Baryons and of the Branching-Fraction Ratio BR($\\Xi^0_{c} \\rightarrow \\Xi^-{e}^+\\nu_{ e}$)/BR($\\Xi^0_{c} \\rightarrow \\Xi^-\\pi^+$) in pp collisions at 13 TeV",
+        "ALICE",
+        "10.1103/PhysRevLett.127.272001",
+        "2766135",
+        "2105.05187",
+        "ins1862793",
+        null,
+        [
+            "CERN-EP-2021-084"
+        ]
+    ],
+    "1863039": [
+        "Measurement of the production cross section of prompt $ {\\Xi}_{\\mathrm{c}}^0 $ baryons at midrapidity in pp collisions at $ \\sqrt{s} $ = 5.02 TeV",
+        "ALICE",
+        "10.1007/JHEP10(2021)159",
+        "2766009",
+        "2105.05616",
+        "ins1863039",
+        null,
+        [
+            "CERN-EP-2021-079"
+        ]
+    ],
     "1866051": [
         "Cross section measurement of $e^{+}e^{-} \\to K_{S}^{0}K_{L}^{0}$ at $\\sqrt{s}=2.00-3.08~{GeV}$",
         "BESIII",
@@ -2353,6 +2701,20 @@
         null,
         []
     ],
+    "1867474": [
+        "Measurement of branching fractions and search for $CP$ violation in $D^{0}\\to\\pi^{+}\\pi^{-}\\eta$, $D^{0}\\to K^{+}K^{-}\\eta$, and $D^{0}\\to\\phi\\eta$ at Belle",
+        "Belle",
+        "10.1007/JHEP09(2021)075",
+        null,
+        "2106.04286",
+        null,
+        null,
+        [
+            "KEK Preprint 2021-8",
+            "Belle Preprint 2021-11",
+            "UCHEP-21-03"
+        ]
+    ],
     "1867843": [
         "Light meson spectroscopy from Dalitz plot analyses of $\\eta_c$ decays to $\\eta' K^+ K^-$, $\\eta' \\pi^+ \\pi^-$, and $\\eta \\pi^+ \\pi^-$ produced in two-photon interactions",
         "BaBar",
@@ -2395,6 +2757,29 @@
         null,
         []
     ],
+    "1876550": [
+        "Measurement of prompt open-charm production cross sections in proton-proton collisions at $ \\sqrt{s} $ = 13 TeV",
+        "CMS",
+        "10.1007/JHEP11(2021)225",
+        "2774790",
+        "2107.01476",
+        "ins1876550",
+        null,
+        [
+            "CMS-BPH-18-003",
+            "CERN-EP-2021-085"
+        ]
+    ],
+    "1880103": [
+        "Measurement of $e^+e^-\\to\\gamma \\chi_{c0,c1,c2}$ cross sections at center-of-mass energies between 3.77 and 4.60\u00a0GeV",
+        "BESIII",
+        "10.1103/PhysRevD.104.092001",
+        null,
+        "2107.03604",
+        null,
+        null,
+        []
+    ],
     "1887997": [
         "Measurement of the production cross section of pairs of isolated photons in $pp$ collisions at 13 TeV with the ATLAS detector",
         "ATLAS",
@@ -2405,6 +2790,19 @@
         null,
         [
             "CERN-EP-2021-105"
+        ]
+    ],
+    "1888216": [
+        "Observation of a $\\Lambda_b^0-\\overline{\\Lambda}_b^0$ production asymmetry in proton-proton collisions at $\\sqrt{s} = 7 \\textrm{ and } 8\\,\\textrm{TeV}$",
+        "LHCb",
+        "10.1007/JHEP10(2021)060",
+        "2776527",
+        "2107.09593",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2021-016",
+            "CERN-EP-2021-121"
         ]
     ],
     "1891391": [
@@ -2430,6 +2828,18 @@
         [
             "Belle Preprint 2021-15",
             "KEK Preprint 2021-13"
+        ]
+    ],
+    "1898832": [
+        "Inclusive $\\text {J}/\\psi $ production at midrapidity in pp collisions at $\\sqrt{s} = 13$ TeV",
+        "ALICE",
+        "10.1140/epjc/s10052-021-09873-4",
+        "2777656",
+        "2108.01906",
+        "ins1898832",
+        null,
+        [
+            "CERN-EP-2021-160"
         ]
     ],
     "1900124": [
@@ -2475,6 +2885,32 @@
         null,
         [
             "CERN-EP-2021-123"
+        ]
+    ],
+    "1915030": [
+        "Measurement of $J/\\psi$ production cross-sections in $pp$ collisions at $\\sqrt{s}=5$ TeV",
+        "LHCb",
+        "10.1007/JHEP11(2021)181",
+        "2779925",
+        "2109.00220",
+        "ins1915030",
+        null,
+        [
+            "LHCb-PAPER-2021-020",
+            "CERN-EP-2021-156"
+        ]
+    ],
+    "1917200": [
+        "Measurements of $q^2$ Moments of Inclusive $B \\rightarrow X_c \\ell^+ \\nu_{\\ell}$ Decays with Hadronic Tagging",
+        "Belle",
+        "10.1103/PhysRevD.104.112011",
+        null,
+        "2109.01685",
+        "ins1917200",
+        null,
+        [
+            "Belle Preprint 2021-18",
+            "KEK Preprint 2021-22"
         ]
     ],
     "1921775": [
@@ -2573,6 +3009,16 @@
         null,
         []
     ],
+    "2102287": [
+        "Measurement of the total and leptonic decay widths of the $J/\\psi$ resonance with an energy scan method at BESIII",
+        "BESIII",
+        null,
+        null,
+        "2206.13674",
+        null,
+        null,
+        []
+    ],
     "2163247": [
         "Determination of $|V_{ub}|$ from untagged $B^0\\to\\pi^- \\ell^+ \\nu_{\\ell}$ decays using 2019-2021 Belle II data",
         "Belle-II",
@@ -2615,6 +3061,83 @@
         null,
         null,
         "2212.09048",
+        null,
+        null,
+        []
+    ],
+    "2634277": [
+        "Measurement of the $e^+e^-\\to\\pi^+\\pi^-$ cross section from threshold to 1.2 GeV with the CMD-3 detector",
+        "CMD-3",
+        null,
+        null,
+        "2302.08834",
+        null,
+        null,
+        []
+    ],
+    "2655951": [
+        "Observation of ${B\\to D^{(*)} K^- K^{0}_S}$ decays using the 2019-2022 Belle II data sample",
+        "Belle-II",
+        null,
+        null,
+        "2305.01321",
+        null,
+        null,
+        [
+            "BELLE2-CONF-2023-003"
+        ]
+    ],
+    "2658888": [
+        "Measurement of the forward \u03b7 meson production rate in p-p collisions at $ \\sqrt{\\textrm{s}} $ = 13 TeV with the LHCf-Arm2 detector",
+        null,
+        "10.1007/JHEP10(2023)169",
+        "2857050",
+        "2305.06633",
+        "ins2658888",
+        null,
+        [
+            "CERN-EP-2023-076"
+        ]
+    ],
+    "2703254": [
+        "Inclusive and differential cross section measurements of $\\mathrm{t\\bar{t}b\\bar{b}}$ production in the lepton+jets channel at $\\sqrt{s}$ = 13 TeV",
+        "CMS",
+        null,
+        "2872305",
+        "2309.14442",
+        "ins2703254",
+        null,
+        [
+            "CMS-TOP-22-009",
+            "CERN-EP-2023-201"
+        ]
+    ],
+    "2706428": [
+        "Measurement of $e^{+}e^{-}\\rightarrow\\eta J/\\psi$ Cross Section from $\\sqrt{s}=$ 3.808 GeV to 4.951 GeV",
+        "BESIII",
+        null,
+        null,
+        "2310.03361",
+        null,
+        null,
+        []
+    ],
+    "2751832": [
+        "Study of $e^{+}e^{-}\\rightarrow\\pi^{+}\\pi^{-}\\pi^{0}$ at $\\sqrt{s}$ from 2.00 to 3.08 GeV at BESIII",
+        "BESIII",
+        null,
+        null,
+        "2401.14711",
+        null,
+        null,
+        []
+    ],
+    "2755997": [
+        "Precise Measurement of Born Cross Sections for $e^+e^-\\to D\\bar{D}$ and Observation of One Structure between $\\sqrt{s} = 3.80-4.95$ GeV",
+        "BESIII",
+        null,
+        null,
+        "2402.03829",
         null,
         null,
         []

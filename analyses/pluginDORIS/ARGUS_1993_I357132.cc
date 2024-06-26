@@ -47,7 +47,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      static const int id2625 = 4124;
+      static const int id2625 = 102144;
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
       const double Emax = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
@@ -60,7 +60,7 @@ namespace Rivet {
 	unsigned int nstable(0);
 	findDecayProducts(p,Lambda_c,pions,nstable);
 	if(nstable==3&&pions.size()==2&&Lambda_c.size()==1)
-	  _h_rate->fill(10.58);
+	  _h_rate->fill("10.58"s);
       }
     }
 
@@ -76,7 +76,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_x,_h_rate;
+    Histo1DPtr _h_x;
+    BinnedHistoPtr<string> _h_rate;
     /// @}
 
 

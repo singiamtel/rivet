@@ -1,0 +1,33 @@
+Name: ARGUS_1992_I334962
+Year: 1992
+Summary: Proton and $\Lambda$ momentum spectrum in B decays
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 334962
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 56 (1992) 1-6
+RunInfo: Any processs producing Upslion(4S), originally e+e-
+Description:
+  'Measurement of the proton and $\Lambda$ momentum spectrum in B decays by ARGUS. The corrected data were read from the figures in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1992orq
+BibTeX: '@article{ARGUS:1992orq,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Measurement of inclusive baryon production in B meson decays}",
+    reportNumber = "DESY-92-074",
+    doi = "10.1007/BF01589700",
+    journal = "Z. Phys. C",
+    volume = "56",
+    pages = "1--6",
+    year = "1992"
+}
+'

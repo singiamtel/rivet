@@ -3,6 +3,7 @@
 #include "Rivet/Projections/Thrust.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/Beam.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -29,9 +30,9 @@ namespace Rivet {
       string type  [3] = {"KK","Kpi","pipi"};
       string charge[3] = {"Like","Opposite","All"};
       unsigned int nbin=20;
-      for(unsigned int itype=0;itype<3;++itype) {
-        for(unsigned int icharge=0;icharge<3;++icharge) {
-          for(unsigned int ibin=0;ibin<16;++ibin) {
+      for (unsigned int itype=0;itype<3;++itype) {
+        for (unsigned int icharge=0;icharge<3;++icharge) {
+          for (unsigned int ibin=0;ibin<16;++ibin) {
             std::ostringstream title1;
             title1 << "/TMP/h_thrust" << type[itype] << "_" << charge[icharge] << "_" << ibin+1;
             book(_h_thrust[itype][icharge][ibin],title1.str(),nbin,0.,M_PI);
@@ -55,10 +56,12 @@ namespace Rivet {
       // get the axis, direction of incoming electron
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
       Vector3 axis1;
-      if(beams.first.pid()>0)
-        axis1 = beams.first .momentum().p3().unit();
-      else
-        axis1 = beams.second.momentum().p3().unit();
+      if (beams.first.pid()>0) {
+        axis1 = beams.first .mom().p3().unit();
+      }
+      else {
+        axis1 = beams.second.mom().p3().unit();
+      }
       // apply thrust cuts  T > 0.8  and | cos θ th | < 0.6
       Thrust thrust = apply<Thrust>(event,"Thrust");
       if(thrust.thrust()<=0.8) vetoEvent;
@@ -69,43 +72,42 @@ namespace Rivet {
       ThreeVector t_y = t_z.cross(t_x);
       // loop over the particles
       Particles charged = apply<FinalState>(event,"FS").particles(Cuts::abspid==PID::PIPLUS || Cuts::abspid==PID::KPLUS);
-      for(unsigned int ix=0;ix<charged.size();++ix) {
+      for (unsigned int ix=0;ix<charged.size();++ix) {
         // z and angle cut
-        const double x1=2.*charged[ix].momentum().t()/sqrtS();
-        if(x1<0.16||x1>.9) continue;
-        if(abs(t_z.angle(charged[ix].momentum().p3()))>0.25*M_PI) continue;
-        double dot1 = t_z.dot(charged[ix].p3());
-        for(unsigned int iy=ix+1;iy<charged.size();++iy) {
-          const double x2=2.*charged[iy].momentum().t()/sqrtS();
+        const double x1=2.*charged[ix].mom().t()/sqrtS();
+        if (x1<0.16||x1>.9) continue;
+        double dot1 = t_z.dot(charged[ix].p3().unit());
+	if(abs(dot1)<sqrt(.5)) continue;
+        for (unsigned int iy=ix+1;iy<charged.size();++iy) {
+          const double x2=2.*charged[iy].mom().t()/sqrtS();
           // z and angle cut
-          if(x2<0.16||x2>.9) continue;
-          if(abs(t_z.angle(charged[ix].momentum().p3()))>0.25*M_PI) continue;
+          if (x2<0.16||x2>.9) continue;
           // different hemi
-          double dot2 = t_z.dot(charged[iy].p3());
-          if(dot1*dot2>0.) continue;
+          double dot2 = t_z.dot(charged[iy].p3().unit());
+	  if(abs(dot2)<sqrt(0.5) || dot1*dot2>0.) continue;
           Particle p1=charged[ix], p2=charged[iy];
           double z1(x1),z2(x2);
           // randomly order the particles
-          if(rand()/static_cast<double>(RAND_MAX) < 0.5 ) {
+          if (rand01() < 0.5 ) {
             swap(p1,p2);
             swap(z1,z2);
           }
           // thrust def
           double phi12 = atan2(p1.p3().dot(t_y),p1.p3().dot(t_x))+atan2(p2.p3().dot(t_y),p2.p3().dot(t_x));
-          if(phi12>M_PI)  phi12 -= 2*M_PI;
-          if(phi12<-M_PI) phi12 += 2*M_PI;
-          if(phi12<0.) phi12 = -phi12;
+          if (phi12>M_PI)  phi12 -= 2*M_PI;
+          if (phi12<-M_PI) phi12 += 2*M_PI;
+          if (phi12<0.) phi12 = -phi12;
           // hadron defn
           ThreeVector h_z = p2.p3().unit();
           ThreeVector h_x = (axis1 - h_z.dot(axis1)*h_z).unit();
           ThreeVector pt1 = p1.p3() - h_z.dot(p1.p3())*h_z;
           double phi0 = pt1.angle(h_x);
-          if(phi0>M_PI)  phi0 -= 2*M_PI;
-          if(phi0<-M_PI) phi0 += 2*M_PI;
+          if (phi0>M_PI)  phi0 -= 2*M_PI;
+          if (phi0<-M_PI) phi0 += 2*M_PI;
           int ibin = 4*iBin(z1)+iBin(z2);
           // pi pi
-          if(p1.abspid()==PID::PIPLUS && p2.abspid()==PID::PIPLUS) {
-            if(p1.pid()==p2.pid()) {
+          if (p1.abspid()==PID::PIPLUS && p2.abspid()==PID::PIPLUS) {
+            if (p1.pid()==p2.pid()) {
               _h_thrust[2][0][ibin]->fill(phi12);
               _h_hadron[2][0][ibin]->fill(phi0);
             }
@@ -117,8 +119,8 @@ namespace Rivet {
             _h_hadron[2][2][ibin]->fill(phi0);
           }
           // K K
-          else if(p1.abspid()==PID::KPLUS && p2.abspid()==PID::KPLUS) {
-            if(p1.pid()==p2.pid()) {
+          else if (p1.abspid()==PID::KPLUS && p2.abspid()==PID::KPLUS) {
+            if (p1.pid()==p2.pid()) {
               _h_thrust[0][0][ibin]->fill(phi12);
               _h_hadron[0][0][ibin]->fill(phi0);
             }
@@ -148,7 +150,7 @@ namespace Rivet {
 
     pair<double,double> calcAsymmetry(Estimate1DPtr hist, double fact=1.) {
       double sum1(0.),sum2(0.);
-      for (auto& b : hist->bins() ) {
+      for (const auto& b : hist->bins() ) {
         double Oi = b.val();
         if(Oi==0. || std::isnan(Oi) ) continue;
         double ai = 1.;
@@ -157,25 +159,23 @@ namespace Rivet {
         sum1 += sqr(bi/Ei);
         sum2 += bi/sqr(Ei)*(Oi-ai);
       }
-      if(sum1==0.) return make_pair(0.,0.);
+      if (sum1==0.) return make_pair(0.,0.);
       return make_pair(sum2/sum1*1e4,sqrt(1./sum1)*1e4);
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int itype=0;itype<3;++itype) {
-        for(unsigned int icharge=0;icharge<3;++icharge) {
-          for(unsigned int ibin=0;ibin<16;++ibin) {
-            normalize(_h_thrust[itype][icharge][ibin]);
-            normalize(_h_hadron[itype][icharge][ibin]);
-          }
+      for (unsigned int itype=0;itype<3;++itype) {
+        for (unsigned int icharge=0;icharge<3;++icharge) {
+          normalize(_h_thrust[itype][icharge]);
+          normalize(_h_hadron[itype][icharge]);
         }
       }
       // construct ther ratios
       // declare the histos for the distributions
-      string type  [3] = {"pipi","Kpi","KK"};
-      string charge[3] = {"Like","Opposite","All"};
-      for(unsigned int itype=0;itype<3;++itype) {
+      const string type  [3] = {"pipi","Kpi","KK"};
+      const string charge[3] = {"Like","Opposite","All"};
+      for (unsigned int itype=0;itype<3;++itype) {
         Estimate2DPtr h3_thrust_UL;
         book(h3_thrust_UL,2*itype+1,1,2);
         Estimate2DPtr h3_thrust_UC;
@@ -197,55 +197,56 @@ namespace Rivet {
 
         Estimate2D temphisto1(refData<Estimate2D>(2*itype+1, 1, 2));
         Estimate2D temphisto2(refData<Estimate2D>(2*itype+2, 1, 2));
+        unsigned int off2=0;
         for (unsigned int ibin=0;ibin<16;++ibin) {
-          //const auto& b1 = temphisto1.bin(ibin);
-          //const auto& b2 = temphisto2.bin(ibin);
+          if (ibin==0) off2=0;
           if (ibin>0 && ibin%4==0) {
             ++ihist;
             book(h2_thrust_UL,7+2*itype,ihist,2);
             book(h2_thrust_UC,7+2*itype,ihist,3);
             book(h2_hadron_UL,8+2*itype,ihist,2);
             book(h2_hadron_UC,8+2*itype,ihist,3);
+            off2=ibin;
           }
           // thrust direction
           // opposite/like sign
           std::ostringstream title1;
           title1 << "/TMP/R_thrust_" << type[itype] << "_UL_" << ibin+1;
           Estimate1DPtr htemp;
-          book(htemp,title1.str());
+          book(htemp,title1.str(),_h_thrust[itype][1][ibin]->xEdges());
           divide(_h_thrust[itype][1][ibin],
           _h_thrust[itype][0][ibin],htemp);
           pair<double,double> asym = calcAsymmetry(htemp);
           h3_thrust_UL->bin(ibin+1).set(asym.first, asym.second);
-          h2_thrust_UL->bin(ibin+1).set(asym.first, asym.second);
+          h2_thrust_UL->bin(ibin-off2+1).set(asym.first, asym.second);
           // opposite/all sign
           std::ostringstream title2;
           title2 << "/TMP/R_thrust_" << type[itype] << "_UC_" << ibin+1;
-          book(htemp,title2.str());
+          book(htemp,title2.str(),_h_thrust[itype][1][ibin]->xEdges());
           divide(_h_thrust[itype][1][ibin],
           _h_thrust[itype][2][ibin],htemp);
           asym = calcAsymmetry(htemp);
           h3_thrust_UC->bin(ibin+1).set(asym.first, asym.second);
-          h2_thrust_UC->bin(ibin+1).set(asym.first, asym.second);
+          h2_thrust_UC->bin(ibin-off2+1).set(asym.first, asym.second);
           // hadron dirn
           // opposite/like sign
           std::ostringstream title3;
           title3 << "/TMP/R_hadron_" << type[itype] << "_UL_" << ibin+1;
-          book(htemp,title3.str());
+          book(htemp,title3.str(),_h_hadron[itype][1][ibin]->xEdges());
           divide(_h_hadron[itype][1][ibin],
           _h_hadron[itype][0][ibin],htemp);
           asym = calcAsymmetry(htemp,2.);
           h3_hadron_UL->bin(ibin+1).set(asym.first, asym.second);
-          h2_hadron_UL->bin(ibin+1).set(asym.first, asym.second);
+          h2_hadron_UL->bin(ibin-off2+1).set(asym.first, asym.second);
           // opposite/all sign
           std::ostringstream title4;
           title4 << "/TMP/R_hadron_" << type[itype] << "_UC_" << ibin+1;
-          book(htemp,title4.str());
+          book(htemp,title4.str(),_h_hadron[itype][1][ibin]->xEdges());
           divide(_h_hadron[itype][1][ibin],
           _h_hadron[itype][2][ibin],htemp);
           asym = calcAsymmetry(htemp,2.);
           h3_hadron_UC->bin(ibin+1).set(asym.first, asym.second);
-          h2_hadron_UC->bin(ibin+1).set(asym.first, asym.second);
+          h2_hadron_UC->bin(ibin-off2+1).set(asym.first, asym.second);
         }
       }
     }

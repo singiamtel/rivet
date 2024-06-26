@@ -1,0 +1,36 @@
+Name: BELLE_2008_I768236
+Year: 2008
+Summary: $B\to D^*\ell\nu_\ell$ decays
+Experiment: BELLE
+Collider: KEKB
+InspireID: 768236
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 77 (2008) 091503
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the hadronic mass, helicity and $w$ distributions for $B\to D^*\ell\nu_\ell$ decays. The background subtracted data was read from the plots in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2007uwr
+BibTeX: '@article{Belle:2007uwr,
+    author = "Liventsev, D. and others",
+    collaboration = "Belle",
+    title = "{Study of B --\ensuremath{>} D**lnu with full reconstruction tagging}",
+    eprint = "0711.3252",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BELLE-PREPRINT-2007-46, KEK-PREPRINT-2007-55",
+    doi = "10.1103/PhysRevD.77.091503",
+    journal = "Phys. Rev. D",
+    volume = "77",
+    pages = "091503",
+    year = "2008"
+}
+'

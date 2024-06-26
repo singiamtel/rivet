@@ -55,6 +55,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if(_edges.empty()) _edges=_h->xEdges();
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for(const Particle& p : ufs.particles()) {
 	if(p.children().empty()) continue;
@@ -76,8 +77,11 @@ namespace Rivet {
 	LorentzTransform boost = LorentzTransform::mkFrameTransformFromBeta(p.momentum().betaVec());
 	pl  = boost.transform(pl );
 	double pp = pl.p3().mod();
-	for(const auto & bin : _h->bins())
-	  if(bin.xMin()<pp) _h->fill(bin.xMid());
+        double Emin=1.0;
+        for(unsigned int ix=0;ix<_edges.size();++ix) {
+	  if(pp>Emin) _h->fill(_edges[ix]);
+          Emin+=0.1;
+        }
       }
     }
 
@@ -85,7 +89,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // 1e3 due br normalization and 0.1 to remove bin width
-      scale(_h, 0.1*1e3/ *_nB);
+      scale(_h, 1e3/ *_nB);
     }
 
     /// @}
@@ -93,8 +97,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h;
+    BinnedHistoPtr<string> _h;
     CounterPtr _nB;
+    vector<string> _edges;
     /// @}
 
 

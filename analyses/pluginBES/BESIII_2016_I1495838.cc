@@ -21,7 +21,19 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nPsi, "TMP/psi");
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_sigmaPsi[ix], 1+ix, 1, 1);
+        for (const string& en : _sigmaPsi[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if (_ecms[0].empty() && _ecms[1].empty()) {
+        MSG_ERROR("Beam energy incompatible with analysis.");
+      }
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -67,7 +79,8 @@ namespace Rivet {
           }
         }
         if(matched) {
-          _nPsi->fill();
+          _sigmaPsi[0]->fill(_ecms[0]);
+          _sigmaPsi[1]->fill(_ecms[1]);
           break;
         }
       }
@@ -76,17 +89,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact =  crossSection()/ sumOfWeights() /picobarn;
-      double sigma = _nPsi->val()*fact;
-      double error = _nPsi->err()*fact;
-      for(unsigned int ix=1;ix<3;++ix) {
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for(unsigned int ix=0;ix<2;++ix)
+        scale(_sigmaPsi[ix],fact);
     }
 
     /// @}
@@ -94,7 +98,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nPsi;
+    BinnedHistoPtr<string> _sigmaPsi[2];
+    string _ecms[2];
     /// @}
 
 

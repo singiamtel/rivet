@@ -64,7 +64,7 @@ namespace Rivet {
       for(unsigned int iy=0;iy<2;++iy) {
 	normalize(_dalitz[iy]);
 	for(unsigned int ix=0;ix<4;++ix)
-	  normalize(_h[ix][iy]);
+	  normalize(_h[ix][iy],1.,false);
       }
     }
 

@@ -1,0 +1,34 @@
+Name: ARGUS_1991_I296187
+Year: 1991
+Summary: $\gamma\gamma\to \rho^0\rho^0$ between 1.2 and 2.2 GeV
+Experiment: ARGUS
+Collider:  DORIS
+InspireID: 296187
+Status: VALIDATED
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 50 (1991) 1-10
+RunInfo: gamma gamma to hadrons, pi0 mesons must be set stable
+Beams: [gamma, gamma]
+Description:
+  'Measurement of the cross section for $\gamma\gamma\to \rho^0\rho^0$ between 1.2 and 2.2 GeV.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: 
+BibTeX: '@article{ARGUS:1990ouo,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Observation of Spin Parity 2+ Dominance in the Reaction $\gamma \gamma \to \rho^0 \rho^0$ Near Threshold}",
+    reportNumber = "DESY-90-034",
+    doi = "10.1007/BF01558550",
+    journal = "Z. Phys. C",
+    volume = "50",
+    pages = "1--10",
+    year = "1991"
+}
+'

@@ -134,10 +134,10 @@ namespace Rivet {
     void finalize() {
       normalize(_h_xim,1.,false);
       normalize(_h_xip,1.,false);
-      Estimate1DPtr _h_alpha_xi;
+      Estimate0DPtr _h_alpha_xi;
       book(_h_alpha_xi, 2,1,1);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_xim);
-      _h_alpha_xi->bin(1).set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
+      _h_alpha_xi->set(alpha.first, make_pair(alpha.second.first,alpha.second.second));
     }
 
     /// @}

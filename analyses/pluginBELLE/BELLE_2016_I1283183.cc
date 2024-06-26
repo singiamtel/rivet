@@ -21,7 +21,8 @@ namespace Rivet {
       // Initialise and register projections
       declare(UnstableParticles(Cuts::abspid==521 || Cuts::abspid==511), "UFS");
       // book the profile hist
-      book(_p,2,1,1);
+      for(unsigned int ix=0;ix<4;++ix)
+        book(_p[ix],1,1,ix+1);
     }
 
     void findDecayProducts(bool & charm, const Particle& mother,
@@ -46,6 +47,10 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if(_edges.empty()) {
+        for(unsigned int ix=0;ix<4;++ix)
+          _edges.push_back(_p[ix]->xEdges()[0]);
+      }
       // Loop over bottoms
       for (const Particle& bottom : apply<UnstableParticles>(event, "UFS").particles()) {
        	// remove mixing entries etc
@@ -61,7 +66,7 @@ namespace Rivet {
 	if(bottom.pid()>0) swap(lp,lm);
 	double q2 = (lp[0].momentum()+lm[0].momentum()).mass2();
 	// veto region valid for muons but not electrons
-	if(lm[0].pid()==PID::ELECTRON && ( (q2>7.3 && q2<8.1) || (q2>11.8 && q2<12.5) )) continue;
+	if(lm[0].pid()==PID::ELECTRON && ( (q2>7.3 && q2<10.5) || (q2>11.8 && q2<12.5) )) continue;
 	// first boost to bottom frame
 	const LorentzTransform boost  = LorentzTransform::mkFrameTransformFromBeta(bottom.momentum().betaVec());
 	FourMomentum plp = boost.transform(lp[0] .momentum());
@@ -71,7 +76,14 @@ namespace Rivet {
 	plp = boost2.transform(plp);
 	pB  = boost .transform(pB );
 	double cTheta = plp.p3().unit().dot(pB.p3().unit());
-	_p->fill(q2, cTheta>0 ? 1 : -1);
+        if(q2>0.2&&q2<4.3)
+          _p[0]->fill(_edges[0], cTheta>0 ? 1 : -1);
+        else if(q2>4.3 && q2<8.1)
+          _p[1]->fill(_edges[1], cTheta>0 ? 1 : -1);
+        else if(q2>10.2 && q2<12.5)
+          _p[2]->fill(_edges[2], cTheta>0 ? 1 : -1);
+        else if(q2>14.3 && q2<25.0)
+          _p[3]->fill(_edges[3], cTheta>0 ? 1 : -1);
       }
     }
 
@@ -85,7 +97,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Profile1DPtr _p;
+    BinnedProfilePtr<string> _p[4];
+    vector<string> _edges;
     /// @}
 
 

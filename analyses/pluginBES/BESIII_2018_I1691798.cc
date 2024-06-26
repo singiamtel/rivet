@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Cross-section for $K^0_SK^\pm\pi^\mp$ between 3.8 and 4.6 GeV
+  /// @brief Cross-section for KSO K+-pi-+ between 3.8 and 4.6 GeV
   class BESIII_2018_I1691798 : public Analysis {
   public:
 
@@ -20,7 +20,16 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_nKKpi, "/TMP/nKKpi" );
+      book(_nKKpi, 1, 1, 1);
+
+      for (const string& en : _nKKpi.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -38,23 +47,13 @@ namespace Rivet {
       if(ntotal==3 && nCount[310]==1 &&
          ((nCount[ 321]=1 &&  nCount[-211] ==1) ||
           (nCount[-321]=1 &&  nCount[ 211] ==1)))
-        _nKKpi->fill();
+        _nKKpi->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nKKpi->val();
-      double error = _nKKpi->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nKKpi, crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -62,7 +61,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nKKpi;
+    BinnedHistoPtr<string> _nKKpi;
+    string _ecms;
     /// @}
 
 

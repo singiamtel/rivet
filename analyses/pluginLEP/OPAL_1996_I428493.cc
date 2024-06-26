@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief B* production at LEP1
   class OPAL_1996_I428493 : public Analysis {
   public:
 
@@ -28,8 +28,8 @@ namespace Rivet {
       book(_h_ctheta1, 3,1,1);
       book(_h_ctheta2, "/TMP/ctheta",20,-1.,1.);
       book(_c_hadron , "/TMP/chadron");
-      book(_c_bStar  , "/TMP/cbStar ");
-      book(_c_B      , "/TMP/cB     ");
+      book(_c_bStar  , "/TMP/cbStar ", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_B      , "/TMP/cB     ", refData<YODA::BinnedEstimate<string>>(1,1,1));
     }
 
 
@@ -55,11 +55,11 @@ namespace Rivet {
 	if(p.abspid()==511 || p.abspid()==521) {
 	  if(p.parents()[0].abspid()==p.abspid()) continue;
 	  if(p.parents()[0].abspid()==513 || p.parents()[0].abspid()==523) continue;
-	  _c_B->fill();
+	  _c_B->fill("91.2"s);
 	}
 	// B*
 	else {
-	  _c_bStar->fill();
+	  _c_bStar->fill("91.2"s);
 	  Particle decay;
 	  if(p.children().size()!=2) continue;
 	  int mid = p.abspid()-2;
@@ -106,10 +106,10 @@ namespace Rivet {
       scale(_h_ctheta1,1./_c_hadron->val());
       normalize(_h_ctheta2);
       pair<double,double> rho = calcRho(_h_ctheta2);
-      Estimate0DPtr h_rho;
+      BinnedEstimatePtr<string> h_rho;
       book(h_rho,2,1,1);
-      h_rho->set(rho.first, rho.second);
-      Estimate0DPtr h1;
+      h_rho->bin(1).set(rho.first, rho.second);
+      BinnedEstimatePtr<string> h1;
       book(h1, 1,1,1);
       // no of B*/B+B*
       divide(*_c_bStar,*_c_bStar + *_c_B, h1);
@@ -121,7 +121,8 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_ctheta1, _h_ctheta2;
-    CounterPtr _c_hadron,_c_bStar,_c_B;
+    CounterPtr _c_hadron;
+    BinnedHistoPtr<string> _c_bStar,_c_B;
     /// @}
 
 

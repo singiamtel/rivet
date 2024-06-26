@@ -52,10 +52,10 @@ namespace Rivet {
       	else if  (BB.decaying()[ix].pid()<0 && BB.modeMatches(ix,3,mode1CC)) {
        	  sign=-1; iK=-321;
        	}
-        else if (BB.decaying()[ix].pid()>0 && BB.modeMatches(ix,3,mode2)) {
+        else if (BB.decaying()[ix].pid()<0 && BB.modeMatches(ix,3,mode2)) {
           sign=1; iK = 310;
         }
-      	else if  (BB.decaying()[ix].pid()<0 && BB.modeMatches(ix,3,mode2CC)) {
+      	else if  (BB.decaying()[ix].pid()>0 && BB.modeMatches(ix,3,mode2CC)) {
        	  sign=-1; iK= 310;
        	}
       	else {

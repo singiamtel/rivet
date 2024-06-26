@@ -1,0 +1,34 @@
+Name: BESII_2004_I650570
+Year: 2004
+Summary: Mass and angular distributions in $J/\psi\to pK^-\bar\Lambda$ +c.c.
+Experiment: BESII
+Collider: BEPC
+InspireID: 650570
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 93 (2004) 112002
+RunInfo: Any process producing j/psi, originally e+e-
+Description:
+  'Mass and angular distributions in $J/\psi\to pK^-\bar\Lambda$ +c.c.. The data were read from figure 2 in the paper, which is not background subtracted but has very small ($\sim1\%$) backgrounds.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2004fgd
+BibTeX: '@article{BES:2004fgd,
+    author = "Ablikim, M. and others",
+    collaboration = "BES",
+    title = "{Observation of a threshold enhancement in the p anti-Lambda invariant mass spectrum}",
+    eprint = "hep-ex/0405050",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevLett.93.112002",
+    journal = "Phys. Rev. Lett.",
+    volume = "93",
+    pages = "112002",
+    year = "2004"
+}
+'

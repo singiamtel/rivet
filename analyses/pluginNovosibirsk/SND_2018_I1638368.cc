@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> eta pi+pi-
   class SND_2018_I1638368 : public Analysis {
   public:
 
@@ -23,7 +23,15 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numEtaPiPi, "TMP/EtaPiPi");
+      book(_numEtaPiPi, 1,1,1);
+      for (const string& en : _numEtaPiPi.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -72,7 +80,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _numEtaPiPi->fill();
+	    _numEtaPiPi->fill(_ecms);
 	}
       }
     }
@@ -80,17 +88,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _numEtaPiPi->val();
-      double error = _numEtaPiPi->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale(_numEtaPiPi,fact);
     }
 
     /// @}
@@ -98,7 +97,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numEtaPiPi;
+    BinnedHistoPtr<string> _numEtaPiPi;
+    string _ecms;
     /// @}
 
 

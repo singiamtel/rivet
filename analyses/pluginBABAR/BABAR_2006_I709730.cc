@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 
-
 namespace Rivet {
 
 
@@ -22,11 +21,20 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_num3pip3pim,      "TMP/num3pip3pim"     );
-      book(_num2pip2pim2pi0,  "TMP/num2pip2pim2pi0" );
-      book(_num2pip2pim2KpKm, "TMP/num2pip2pim2KpKm");
+      for(unsigned int ix=0;ix<3;++ix) {
+        book(_sigma[ix],1+ix,1,1);
+        for (const string& en : _sigma[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if (_ecms[0].empty() && _ecms[1].empty() && _ecms[2].empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
-
+    
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
@@ -40,49 +48,31 @@ namespace Rivet {
       }
 
       if(ntotal!=6) vetoEvent;
-      if(nCount[-211]==3 && nCount[211]==3)
-	_num3pip3pim->fill();
-      else if(nCount[-211]==2 && nCount[211]==2 && nCount[111]==2)
-	_num2pip2pim2pi0->fill();
-      else if(nCount[-211]==2 && nCount[211]==2 && nCount[321]==1 && nCount[-321]==1)
-	_num2pip2pim2KpKm->fill();
+      if(nCount[-211]==3 && nCount[211]==3) {
+	if(!_ecms[0].empty()) _sigma[0]->fill(_ecms[0]);
+      }
+      else if(nCount[-211]==2 && nCount[211]==2 && nCount[111]==2) {
+	if(!_ecms[1].empty()) _sigma[1]->fill(_ecms[1]);
+      }
+      else if(nCount[-211]==2 && nCount[211]==2 &&
+              nCount[321]==1 && nCount[-321]==1) {
+	if(!_ecms[2].empty()) _sigma[2]->fill(_ecms[2]);
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      for(unsigned int ix=1; ix<4; ++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _num3pip3pim->val();
-          error = _num3pip3pim->err();
-        }
-        else if(ix==2) {
-          sigma = _num2pip2pim2pi0->val();
-          error = _num2pip2pim2pi0->err();
-        }
-        else if(ix==3) {
-          sigma = _num2pip2pim2KpKm->val();
-          error = _num2pip2pim2KpKm->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            mult->bin(1).set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for(unsigned int ix=0; ix<3; ++ix)
+        scale(_sigma[ix],fact);
     }
 
     /// @}
 
     // just count the number of events of the types we're looking for
-    CounterPtr _num3pip3pim,_num2pip2pim2pi0,_num2pip2pim2KpKm;
-
+    BinnedHistoPtr<string> _sigma[3];
+    string _ecms[3];
   };
 
 

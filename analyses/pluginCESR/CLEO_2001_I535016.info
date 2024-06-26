@@ -1,0 +1,38 @@
+Name: CLEO_2001_I535016
+Year: 2001
+Summary: Hadronic Mass distribution in $\tau^-\to2\pi^-\pi^+3\pi^0\nu_\tau$ and $3\pi^-2\pi^+\pi^0\nu_\tau$
+Experiment: CLEO
+Collider: CESR
+InspireID: 535016
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 86 (2001) 4467-4471
+RunInfo: Any process producing tau leptons, originally e+e-
+Description:
+  'Measurement of the hadronic mass distribution in n $\tau^-\to2\pi^-\pi^+3\pi^0\nu_\tau$ and $3\pi^-2\pi^+\pi^0\nu_\tau$.
+   The data were read from the plots in the paper and are not corrected, although the backgrounds given in the paper have been subtracted.
+   The plots should therefore only be used for qualitative comparisons however the data is useful as there are not corrected distributions
+   for this decay mode.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2000trg
+BibTeX: '@article{CLEO:2000trg,
+    author = "Anastassov, A. and others",
+    collaboration = "CLEO",
+    title = "{Study of tau decays to six pions and neutrino}",
+    eprint = "hep-ex/0010025",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-REPRINT-2000-074, CLNS-00-1687, CLEO-00-16",
+    doi = "10.1103/PhysRevLett.86.4467",
+    journal = "Phys. Rev. Lett.",
+    volume = "86",
+    pages = "4467--4471",
+    year = "2001"
+}
+'

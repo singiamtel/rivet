@@ -57,7 +57,7 @@ namespace Rivet {
         _c_cont->fill();
         MSG_DEBUG("No Upsilons found => continuum event");
         for (const Particle &p : ufs.particles(Cuts::abspid==411 or Cuts::abspid==421 or Cuts::abspid==413)) {
-          double xp = p.p3().mod()/sqrt(sqr(meanBeamMom)+sqr(p.mass()));
+          double xp = p.p3().mod()/sqrt(sqr(meanBeamMom)-sqr(p.mass()));
           if(p.abspid()==421) {
             _h_x_D0->fill(xp);
             _n_D0->fill(Ecms);

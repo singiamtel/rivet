@@ -24,10 +24,16 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
       // histograms
       for(unsigned int ix=0;ix<6;++ix) {
-        std::ostringstream title;
-        title << "TMP/c_" << ix+1;
-        book(_c[ix],title.str());
+        book(_c[ix], 1+ix,1,1);
       }
+      for (const string& en : _c[0].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
       if(isCompatibleWithSqrtS(2.125*GeV,1e-3)) {
         book(_h_KK   ,7,1,1);
         book(_h_pipi ,7,1,2);
@@ -99,11 +105,11 @@ namespace Rivet {
           }
           if(matched) {
             if(p.abspid()==100321)
-              _c[2]->fill();
+              _c[2]->fill(_ecms);
             else if(p.abspid()== 20323)
-              _c[3]->fill();
+              _c[3]->fill(_ecms);
             else if(p.abspid()==10323)
-              _c[4]->fill();
+              _c[4]->fill(_ecms);
           }
         }
         // phi + 2pi0
@@ -122,7 +128,7 @@ namespace Rivet {
             }
           }
           if(matched)
-            _c[1]->fill();
+            _c[1]->fill(_ecms);
         }
         // K*K*
         else if(p.abspid()==323) {
@@ -139,13 +145,13 @@ namespace Rivet {
               }
             }
             if(matched)
-              _c[5]->fill();
+              _c[5]->fill(_ecms);
           }
         }
       }
       // final-state
       if(ntotal==4 && nCount[321]==1 && nCount[-321]==1 && nCount[111]==2) {
-        _c[0]->fill();
+        _c[0]->fill(_ecms);
         if(_h_KK) {
           FourMomentum pKK = Kp[0].momentum()+Kp[1].momentum();
           _h_KK->fill(pKK.mass());
@@ -164,16 +170,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
       for(unsigned int ix=0;ix<6;++ix) {
-        double sigma = _c[ix]->val()*crossSection()/ sumOfWeights() /nanobarn;;
-        double error = _c[ix]->err()*crossSection()/ sumOfWeights() /nanobarn;;
-        Estimate1DPtr  mult;
-        book(mult, ix+1, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+        scale(_c[ix],fact);
       }
       if(_h_KK) {
         normalize(_h_KK   );
@@ -189,7 +188,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c[6];
+    BinnedHistoPtr<string> _c[6];
+    string _ecms;
     Histo1DPtr _h_KK, _h_pipi, _h_Kpi, _h_KKpi, _h_Kpipi;
     /// @}
 

@@ -71,6 +71,9 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       normalize(_h_D2_x);
+      for(auto & b : _h_D2_x->bins()) {
+        b.scaleW(1./axisMap.width(b.index()));
+      }
       normalize(_h_D2_ctheta);
       // br of D mode used from PDG2018
       const double br = 0.0898;
@@ -86,7 +89,7 @@ namespace Rivet {
     BinnedHistoPtr<string> _h_D2_x;
     Histo1DPtr _h_D2_ctheta;
     vector<string> sedges;
-    YODA::Axis<double> axisMap{0.0, 0.4, 0.6, 0.7125, 0.85, 1.0};
+    YODA::Axis<double> axisMap{0.0, 0.5, 0.6, 0.7, 0.85, 1.0};
     /// @}
 
 

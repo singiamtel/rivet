@@ -32,10 +32,10 @@ namespace Rivet {
       book(_h_rho, {-0.9, -0.7, -0.5, -0.3, -0.1, 0.1, 0.3, 0.5, 0.7, 0.9 });
       for (size_t ix=0; ix < _h_e->numBins(); ++ix) {
         const string suff = to_string(ix);
-        book(_h_e->bin(ix),   "_h_e_"+suff,   20, -1.0, 1.0);
-        book(_h_mu->bin(ix),  "_h_mu_"+suff,  20, -1.0, 1.0);
-        book(_h_pi->bin(ix),  "_h_pi_"+suff,  20, -1.0, 1.0);
-        book(_h_rho->bin(ix), "_h_rho_"+suff, 20, -1.0, 1.0);
+        book(_h_e->bin(ix+1),   "_h_e_"+suff,   20, -1.0, 1.0);
+        book(_h_mu->bin(ix+1),  "_h_mu_"+suff,  20, -1.0, 1.0);
+        book(_h_pi->bin(ix+1),  "_h_pi_"+suff,  20, -1.0, 1.0);
+        book(_h_rho->bin(ix+1), "_h_rho_"+suff, 20, -1.0, 1.0);
       }
     }
 
@@ -161,11 +161,10 @@ namespace Rivet {
 
         normalize(_h_rho->bin(ix));
         pair<double,double> P_rho = calcP(_h_rho->bin(ix), 0);
-        s1 += P_rho.first/sqr(P_rho.second);
-        s2 += 1./sqr(P_rho.second);
-
         P_rho.first  /=0.46;
         P_rho.second /=0.46;
+        s1 += P_rho.first/sqr(P_rho.second);
+        s2 += 1./sqr(P_rho.second);
         // average
         _h_P->bin(ix).set(s1/s2, sqrt(1./s2));
       }

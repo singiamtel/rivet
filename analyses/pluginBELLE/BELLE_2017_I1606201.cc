@@ -49,7 +49,7 @@ namespace Rivet {
 	  _h[ 3]->fill(xp);
 	  _r[ 3]->fill(0.5);
 	}
-	else if(id==3124) {
+	else if(id==102134) {
 	  _h[ 4]->fill(xp);
 	  _r[ 4]->fill(0.5);
 	}
@@ -69,11 +69,11 @@ namespace Rivet {
 	  _h[ 8]->fill(xp);
 	  _r[ 8]->fill(0.5);
 	}
-	else if(id==14122) {
+	else if(id==102142) {
 	  _h[ 9]->fill(xp);
 	  _r[ 9]->fill(0.5);
 	}
-	else if(id==4124) {
+	else if(id==102144) {
 	  _h[10]->fill(xp);
 	  _r[10]->fill(0.5);
 	}

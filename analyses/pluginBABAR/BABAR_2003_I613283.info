@@ -1,0 +1,35 @@
+Name: BABAR_2003_I613283
+Year: 2003
+Summary: Helicity angles and Polarization in $B^0\to D^{*+}_sD^{*-}$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 613283
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 67 (2003) 092003
+RunInfo: Any proces producing B0 mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the helicity angles and polarization in $B^0\to D^{*+}_sD^{*-}$. The polarization was given in the paper and the background subtracted data for the helicity angles was extracted from figure 2 in the paper.'
+ValidationInfo:
+  Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2003ltl
+BibTeX: '@article{BaBar:2003ltl,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of $B^0 \to D_s^{(*)+} D^{*-}$ branching fractions and $B^0 \to D_s^{(*)+} D^{*-}$ polarization with a partial reconstruction technique}",
+    eprint = "hep-ex/0302015",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-9644, BABAR-PUB-03-001",
+    doi = "10.1103/PhysRevD.67.092003",
+    journal = "Phys. Rev. D",
+    volume = "67",
+    pages = "092003",
+    year = "2003"
+}
+'

@@ -37,7 +37,7 @@ namespace Rivet {
       book(_h_cThetaStar, bins);
       book(_h_cThetaH, bins);
       for (size_t ix=1; ix<_h_cThetaH->numBins()+1; ++ix) {
-      	if (ix <= 3) {
+      	if (ix <= 2) {
           const string suff = to_string(ix+1);
           book(_h_cThetaStar->bin(ix), "/TMP/cThetaStar_"+suff, 5, -1.0, 1.0);
           book(_h_cThetaH->bin(ix), "/TMP/cThetaH_"+suff, 5, -1.0, 1.0);
@@ -93,12 +93,12 @@ namespace Rivet {
       	    }
       	  }
           _h_Jpsi->fill(pStar);
-          _h_sig_JPsi_all->fill(10.6);
+          _h_sig_JPsi_all->fill("10.6"s);
           if (pStar>2.) {
-            _h_sig_Jpsi_high->fill(10.6);
+            _h_sig_Jpsi_high->fill("10.6"s);
             if(feedDown) {
               _h_feed->fill(pStar);
-              _h_sig_Jpsi_feed->fill(10.6);
+              _h_sig_Jpsi_feed->fill("10.6"s);
             }
             double cThetaS = cos(mom.p3().polarAngle());
             _h_cThetaStar->fill(pStar, cThetaS);
@@ -121,7 +121,7 @@ namespace Rivet {
         }
         else {
           _h_Psi2->fill(pStar);
-          if (pStar>2.)  _h_sig_Psi2_high->fill(10.6);
+          if (pStar>2.)  _h_sig_Psi2_high->fill("10.6"s);
         }
       }
     }
@@ -178,10 +178,10 @@ namespace Rivet {
       for (size_t ix=1; ix< _h_cThetaH->numBins()+1; ++ix) {
       	normalize(_h_cThetaStar->bin(ix));
       	pair<double,pair<double,double> > alpha = calcAlpha(_h_cThetaStar->bin(ix));
-      	_h_A->bin(1).set(alpha.first, alpha.second);
+      	_h_A->bin(ix).set(alpha.first, alpha.second);
       	normalize(_h_cThetaH->bin(ix));
       	alpha = calcAlpha(_h_cThetaH->bin(ix));
-      	_h_alpha->bin(1).set(alpha.first, alpha.second);
+      	_h_alpha->bin(ix).set(alpha.first, alpha.second);
       }
       normalize(_h_cS_low);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_cS_low);
@@ -207,7 +207,8 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_Jpsi,_h_Psi2,_h_feed;
-    Histo1DPtr _h_sig_JPsi_all,_h_sig_Jpsi_high,_h_sig_Jpsi_feed,_h_sig_Psi2_high;
+    BinnedHistoPtr<string> _h_sig_JPsi_all,_h_sig_Jpsi_high,
+      _h_sig_Jpsi_feed,_h_sig_Psi2_high;
     Histo1DPtr _h_cS_low,_h_cS_high,_h_cH_low,_h_cH_high;
     Histo1DGroupPtr _h_cThetaStar, _h_cThetaH;
 

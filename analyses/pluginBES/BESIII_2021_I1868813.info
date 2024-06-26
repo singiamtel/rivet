@@ -13,8 +13,14 @@ References:
 RunInfo: 
   e+ e- to hadrons
 Beams: [e-, e+]
+Energies:  [3.6451, 3.6474, 3.6534, 3.6789, 3.6799, 3.6809, 3.6818,
+            3.6822, 3.6826, 3.6834, 3.6840, 3.6846, 3.6848, 3.6854,
+            3.6860, 3.6866, 3.6873, 3.6874, 3.6890, 3.6920, 3.6964, 3.7002]
+Options:
+ - ENERGY=*
 Description:
-  'Cross section for the production of $K^0_S$ for energies between 3.645 and 3.7, i.e near the $\psi(2S)$ resonace measured by BESIII.'
+  'Cross section for the production of $K^0_S$ for energies between 3.645 and 3.7, i.e near the $\psi(2S)$ resonace measured by BESIII.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

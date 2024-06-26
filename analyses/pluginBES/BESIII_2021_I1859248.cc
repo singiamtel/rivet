@@ -24,17 +24,26 @@ namespace Rivet {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
       // counter
-      book(_c_phiLL, "TMP/c_phiLL");
+      book(_c_phiLL, 1, 1, 1);
+      for (const string& en : _c_phiLL.binning().edges<0>()) {
+        const double end = std::stod(en)*MeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
-      for(const Particle &child : p.children()) {
-	if(child.children().empty()) {
-	  nRes[child.pid()]-=1;
-	  --ncount;
-	}
-	else
-	  findChildren(child,nRes,ncount);
+      for (const Particle &child : p.children()) {
+        if (child.children().empty()) {
+          nRes[child.pid()]-=1;
+          --ncount;
+        }
+        else {
+          findChildren(child,nRes,ncount);
+        }
       }
     }
 
@@ -45,55 +54,47 @@ namespace Rivet {
       map<long,int> nCount;
       int ntotal(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       // loop over phi mesons
       for (const Particle& phi : ufs.particles(Cuts::pid==333)) {
-	bool matched = false;
-	map<long,int> nRes=nCount;
-	int ncount = ntotal;
-	findChildren(phi,nRes,ncount);
-	// then Lambda baryons
-	for (const Particle& lambda : ufs.particles(Cuts::pid==3122)) {
-	  map<long,int> nResB = nRes;
-	  int ncountB = ncount;
-	  findChildren(lambda,nResB,ncountB);
-	  for (const Particle& lambar : ufs.particles(Cuts::pid==-3122)) {
-	    map<long,int> nResC = nResB;
-	    int ncountC = ncountB;
-	    findChildren(lambar,nResC,ncountC);
-	    for(auto const & val : nResC) {
-	      if(val.second!=0) {
-		matched = false;
-		break;
-	      }
-	    }
-	    if(matched) {
-	      _c_phiLL->fill();
-	      break;
-	    }
-	  }
-	  if(matched) break;
-	}
-	if(matched) break;
+        bool matched = false;
+        map<long,int> nRes=nCount;
+        int ncount = ntotal;
+        findChildren(phi,nRes,ncount);
+        // then Lambda baryons
+        for (const Particle& lambda : ufs.particles(Cuts::pid==3122)) {
+          map<long,int> nResB = nRes;
+          int ncountB = ncount;
+          findChildren(lambda,nResB,ncountB);
+          for (const Particle& lambar : ufs.particles(Cuts::pid==-3122)) {
+            map<long,int> nResC = nResB;
+            int ncountC = ncountB;
+            findChildren(lambar,nResC,ncountC);
+	    matched=true;
+            for (const auto& val : nResC) {
+              if (val.second!=0) {
+                matched = false;
+                break;
+              }
+            }
+            if (matched) {
+              _c_phiLL->fill(_ecms);
+              break;
+            }
+          }
+          if (matched) break;
+        }
+        if (matched) break;
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/ sumOfWeights() /picobarn;
-      double sigma = _c_phiLL->val()*fact;
-      double error = _c_phiLL->err()*fact;
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_c_phiLL, crossSection()/ sumOfWeights() /picobarn);
     }
 
     ///@}
@@ -101,7 +102,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    CounterPtr _c_phiLL;
+    BinnedHistoPtr<string> _c_phiLL;
+    string _ecms;
     ///@}
 
 

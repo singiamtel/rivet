@@ -1,0 +1,35 @@
+Name: CLEOII_2004_I647288
+Year: 2004
+Summary: Lepton spectra and moments in $B$ decays
+Experiment: CLEOII
+Collider: CESR
+InspireID: 647288
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 70 (2004) 032003
+RunInfo: Bottom mesons produced at the Upsilon(4S)
+Description:
+  'Measurement of the primary and secondary lepton spetrum in $B$ decays by CLEO, in additon the momentum of the electron energy are measured. The values of the moments were taken from the tables in the paper and the corrected spectra read from the figures.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2004stg
+BibTeX: '@article{CLEO:2004stg,
+    author = "Mahmood, A. H. and others",
+    collaboration = "CLEO",
+    title = "{Measurement of the B-meson inclusive semileptonic branching fraction and electron energy moments}",
+    eprint = "hep-ex/0403053",
+    archivePrefix = "arXiv",
+    reportNumber = "CLNS-04-1860, CLEO-04-02",
+    doi = "10.1103/PhysRevD.70.032003",
+    journal = "Phys. Rev. D",
+    volume = "70",
+    pages = "032003",
+    year = "2004"
+}
+'

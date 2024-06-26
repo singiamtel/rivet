@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> K_S0K_L0 with pi0, eta and 2pi0
   class BABAR_2017_I1511276 : public Analysis {
   public:
 
@@ -24,11 +24,19 @@ namespace Rivet {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
 
-      book(_nKKpi  , "TMP/KKpi");
-      book(_nPhipi , "TMP/Phipi");
-      book(_nKKeta , "TMP/KKeta");
-      book(_nKKpipi, "TMP/KKpipi");
-
+      // Book histograms
+      for(unsigned int ix=0;ix<4;++ix) {
+        book(_sigma[ix], 1+ix, 1, 1);
+        for (const string& en : _sigma[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if (_ecms[0].empty() && _ecms[1].empty() && _ecms[2].empty() && _ecms[3].empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -53,11 +61,13 @@ namespace Rivet {
       }
       // stable histos
       if( ntotal == 3 && nCount[130] == 1 &&
-	  nCount[310] == 1 && nCount[111] == 1)
-	_nKKpi->fill();
+	  nCount[310] == 1 && nCount[111] == 1) {
+	if(!_ecms[0].empty()) _sigma[0]->fill(_ecms[0]);
+      }
       else if( ntotal == 4 && nCount[130] == 1 &&
-	       nCount[310] == 1 && nCount[111] == 2)
-	_nKKpipi->fill();
+	       nCount[310] == 1 && nCount[111] == 2) {
+	if(!_ecms[3].empty()) _sigma[3]->fill(_ecms[3]);
+      }
       // unstable particles
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
@@ -80,8 +90,9 @@ namespace Rivet {
 	      break;
 	    }
 	  }
-	  if(matched)
-	    _nPhipi->fill();
+	  if(matched) {
+	    if(!_ecms[1].empty()) _sigma[1]->fill(_ecms[1]);
+          }
 	}
 	else if(p.pid()==221 && ncount==2) {
 	  for(auto const & val : nRes) {
@@ -96,8 +107,9 @@ namespace Rivet {
 	      break;
 	    }
 	  }
-	  if(matched)
-	    _nKKeta->fill();
+	  if(matched) {
+	    if(!_ecms[2].empty()) _sigma[2]->fill(_ecms[2]);
+          }
 	}
       }
     }
@@ -105,36 +117,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<5;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _nKKpi->val();
-          error = _nKKpi->err();
-        }
-        else if (ix==2) {
-          sigma = _nPhipi->val();
-          error = _nPhipi->err();
-        }
-        else if (ix==3) {
-          sigma = _nKKeta->val();
-          error = _nKKeta->err();
-        }
-        else if (ix==4) {
-          sigma = _nKKpipi->val();
-          error = _nKKpipi->err();
-        }
-
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for(unsigned int ix=0;ix<4;++ix)
+        scale(_sigma[ix],fact);
     }
 
     /// @}
@@ -142,7 +127,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nKKpi,_nPhipi,_nKKeta,_nKKpipi;
+    BinnedHistoPtr<string> _sigma[4];
+    string _ecms[4];
     /// @}
 
 

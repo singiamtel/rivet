@@ -1,0 +1,36 @@
+Name: ARGUS_1988_I266892
+Year: 1988
+Summary:  Baryon-antibaryon correlations at the $\Upsilon(1S)$ and nearby continuum
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 266892
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 43 (1989) 45
+RunInfo:
+  $e^+ e^-$ analysis in the 10 GeV CMS energy range
+Beams: [e+, e-]
+Energies: [9.46,10.]
+Description:
+  'Correlations in the production of $p\bar{p}$ and hyperon-antihyperon pairs.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1988hec
+BibTeX: '@article{ARGUS:1988hec,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Results on Baryon anti-Baryon Correlations in e+ e- Annihilation}",
+    reportNumber = "PRINT-89-0001 (DORTMUND), DESY-89-013",
+    doi = "10.1007/BF02430609",
+    journal = "Z. Phys. C",
+    volume = "43",
+    pages = "45",
+    year = "1989"
+}
+'

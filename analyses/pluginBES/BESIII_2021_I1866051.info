@@ -13,8 +13,13 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies: [2.000, 2.050, 2.100, 2.125, 2.150, 2.175, 2.200, 2.232,
+           2.309, 2.386, 2.396, 2.644, 2.646, 2.900, 3.080]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for  $e^+e^-\to$ $K_S^0K_L^0$ for energies between 2.00 and 3.08 GeV'
+  'Measurement of the cross section for  $e^+e^-\to$ $K_S^0K_L^0$ for energies between 2.00 and 3.08 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig7 events'
 #ReleaseTests:

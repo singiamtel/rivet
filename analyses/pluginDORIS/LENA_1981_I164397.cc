@@ -7,7 +7,7 @@
 namespace Rivet {
 
 
-  /// @brief Thrust like variable at Upsilon(1s,2S)
+  /// @brief Thrust like variable at Upsilon(1S,2S)
   class LENA_1981_I164397 : public Analysis {
   public:
 
@@ -22,23 +22,32 @@ namespace Rivet {
     void init() {
       declare(UnstableParticles(), "UFS");
       declare(ChargedFinalState(), "FS");
-
-      book(_weightSum_cont, "TMP/weightSum_cont");
-      book(_weightSum_Ups1, "TMP/weightSum_Ups1");
-      book(_weightSum_Ups2, "TMP/weightSum_Ups2");
-      book(_charge_cont, "TMP/charge_cont");
-      book(_charge_Ups1, "TMP/charge_Ups1");
-      book(_charge_Ups2, "TMP/charge_Ups2");
-
-      if(isCompatibleWithSqrtS(9.5149*GeV,1e-2)) {
+      book(_mult,3,1,1);
+      _ecms = "OTHER";
+      if (inRange(sqrtS(),7.35,7.49)) {
+        _ecms = "7.35 - 7.49"s;
+      }
+      else if (inRange(sqrtS(),8.629,9.142)) {
+        _ecms = "8.629 - 9.142"s;
+      }
+      else if (inRange(sqrtS(),9.15,9.41)) {
+        _ecms = "9.15 - 9.41"s;
+      }
+      else if(isCompatibleWithSqrtS(9.5149*GeV,1e-2)) {
+        _ecms = "9.5149";
         book(_hist_T_cont ,4, 1, 1);
       }
       else if(isCompatibleWithSqrtS(9.9903*GeV,1e-2)) {
+        _ecms = "9.9903";
         book(_hist_T_cont ,4, 1, 2);
       }
       book(_hist_T_Ups1 ,4, 1, 3);
       book(_hist_T_Ups2 ,4, 1, 4);
+      book(_weightSum_cont, "TMP/weightSum_cont");
+      book(_weightSum_Ups1, "TMP/weightSum_Ups1");
+      book(_weightSum_Ups2, "TMP/weightSum_Ups2");
     }
+
 
     /// Recursively walk the decay tree to find the charged decay products of @a p
     void findDecayProducts(Particle mother, Particles& charged) {
@@ -71,7 +80,7 @@ namespace Rivet {
         MSG_DEBUG("No Upsilons found => continuum event");
         _weightSum_cont->fill();
 	Particles cfs = apply<ChargedFinalState>(event, "FS").particles();
-	_charge_cont->fill(cfs.size());
+	_mult->fill(_ecms,cfs.size());
 	if(_hist_T_cont) {
           LorentzTransform boost;
 	  _hist_T_cont->fill(thrustPrime(boost,cfs));
@@ -90,12 +99,12 @@ namespace Rivet {
           findDecayProducts(ups, charged);
 	  if(parentId==553) {
 	    _weightSum_Ups1->fill();
-	    _charge_Ups1->fill(charged.size());
+	    _mult->fill("9.4624"s,charged.size());
 	    _hist_T_Ups1->fill(thrustPrime(boost,charged));
 	  }
 	  else {
 	    _weightSum_Ups2->fill();
-	    _charge_Ups2->fill(charged.size());
+	    _mult->fill("10.0148"s,charged.size());
 	    _hist_T_Ups2->fill(thrustPrime(boost,charged));
 	  }
 	}
@@ -107,39 +116,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // charged particle multiplicity
-      if(_weightSum_cont->val()>0. ) {
-        scale(_charge_cont,1./ *_weightSum_cont );
-        if(_hist_T_cont) scale(_hist_T_cont,1./ *_weightSum_cont );
-      }
-      if(_weightSum_Ups1->val()>0. ) {
-        scale(_charge_Ups1,1./ *_weightSum_Ups1 );
+      if ( _weightSum_cont->val()>0. && _hist_T_cont )
+        scale(_hist_T_cont,1./ *_weightSum_cont );
+      if(_weightSum_Ups1->val()>0. )
          scale(_hist_T_Ups1,1./ *_weightSum_Ups1 );
-      }
-      if(_weightSum_Ups2->val()>0. ) {
-        scale(_charge_Ups2,1./ *_weightSum_Ups2 );
+      if(_weightSum_Ups2->val()>0. )
         scale(_hist_T_Ups2,1./ *_weightSum_Ups2 );
-      }
-      Estimate1DPtr _mult;
-      book(_mult, 3, 1, 1);
-      for (auto& b : _mult->bins()) {
-        // Upsilon 1S
-        if(b.index()==4) {
-          if (_weightSum_Ups1->val()>0.) {
-            b.set(_charge_Ups1->val(), _charge_Ups1->err());
-          }
-        }
-        // Upsilon 2S
-        else if(b.index()==7) {
-          if (_weightSum_Ups2->val()>0.) {
-            b.set(_charge_Ups2->val(), _charge_Ups2->err());
-          }
-        }
-        else {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax()) && _weightSum_cont->val()>0.) {
-            b.set(_charge_cont->val(), _charge_cont->err());
-          }
-        }
-      }
     }
 
     /// @}
@@ -147,9 +129,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
+    BinnedProfilePtr<string> _mult;
     CounterPtr _weightSum_cont, _weightSum_Ups1, _weightSum_Ups2;
-    CounterPtr _charge_cont, _charge_Ups1, _charge_Ups2;
     Histo1DPtr _hist_T_cont,_hist_T_Ups1,_hist_T_Ups2;
+    string _ecms;
     /// @}
 
 

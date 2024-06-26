@@ -1,0 +1,36 @@
+Name: BELLE_2008_I754259
+Year: 2008
+Summary: $B^+\to p\bar{p} \pi^+,K^+$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 754259
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 659 (2008) 80-86
+RunInfo: Any process producing B+ mesons, originally Upsilon(4S) decays 
+Description:
+  'Mass and angular distributions in $B^+\to p\bar{p} \pi^+,K^+$ decays. The mass dsitributions were extracted from Tables 1 and 2 in the paper, while the angular distributions were extracted from the figures. The numbers are corrected for efficiency and acceptance.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2007oni
+BibTeX: '@article{Belle:2007oni,
+    author = "Wei, J. T. and others",
+    collaboration = "Belle",
+    title = "{Study of B+ ---\ensuremath{>} p anti-p K+ and B+ ---\ensuremath{>} p anti-p pi+}",
+    eprint = "0706.4167",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BELLE-PREPRINT-2007-26, KEK-PREPRINT-2007-15",
+    doi = "10.1016/j.physletb.2007.11.063",
+    journal = "Phys. Lett. B",
+    volume = "659",
+    pages = "80--86",
+    year = "2008"
+}
+'

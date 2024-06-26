@@ -10,5 +10,35 @@
         [
             "CERN-EP-2023-092"
         ]
+    ],
+    "2670980": [
+        "Study of the Process ${e^{+}e^{-}\\to}{\\eta\\gamma}{\\to 7}\\!\\gamma$ in the Energy Range $\\sqrt{{s}}{=1.07{-}2}$ GeV",
+        "SND",
+        "10.1134/S1063778823060042",
+        null,
+        "2306.12734",
+        null,
+        null,
+        []
+    ],
+    "2693057": [
+        "Study of the process <math><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>\u2212</mo></msup><mo>\u2192</mo><mi>\u03c9</mi><msup><mi>\u03c0</mi><mn>0</mn></msup><mo>\u2192</mo><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>\u2212</mo></msup><msup><mi>\u03c0</mi><mn>0</mn></msup><msup><mi>\u03c0</mi><mn>0</mn></msup></math> in the energy range 1.05\u20132.00 GeV with SND",
+        "SND",
+        "10.1103/PhysRevD.108.092012",
+        null,
+        "2309.00280",
+        null,
+        null,
+        []
+    ],
+    "2696331": [
+        "Measuring the Neutron Timelike Electromagnetic Form Factor with the SND Detector",
+        "SND",
+        "10.1134/S1063778823060054",
+        null,
+        "2309.05241",
+        null,
+        null,
+        []
     ]
 }

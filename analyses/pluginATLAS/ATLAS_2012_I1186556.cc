@@ -6,6 +6,7 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -14,9 +15,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2012_I1186556()
-      : Analysis("ATLAS_2012_I1186556")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1186556);
 
 
     /// @name Analysis methods
@@ -176,7 +175,7 @@ namespace Rivet {
 	// require at least 1 b jet
 	unsigned int n_b=0;
 	for(unsigned int ix=0;ix<recon_jets.size();++ix) {
-	   if(recon_jets[ix].bTagged() && rand()/static_cast<double>(RAND_MAX)<=0.60)
+	   if(recon_jets[ix].bTagged() && rand01()<=0.60)
 	     ++n_b;
 	}
 	if(n_b==0) vetoEvent;

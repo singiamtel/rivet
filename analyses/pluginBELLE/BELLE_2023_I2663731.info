@@ -1,0 +1,36 @@
+Name: BELLE_2023_I2663731
+Year: 2023
+Summary: mass and angular distributions in $B^0\to p(\bar\Lambda^0,\bar\Sigma^0)\pi^-$ decays
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2663731
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2305.18821 [hep-ex]
+RunInfo: Any process producing B0, originally Upsilon(4S) decays
+Description:
+'Measurement of the differential branching ratio with respect to the baryon pair invariant mass for
+$B^0\to p(\bar\Lambda^0,\bar\Sigma^0)\pi^-$. The differential branching ratio with respect to the proton
+helicity angle is also measured in the threshold region, i.e. for the baryon pair mass <2.8 GeV.
+The data were read from the tables in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2023qym
+BibTeX: '@article{Belle:2023qym,
+    author = "Chang, C. -Y. and others",
+    collaboration = "Belle",
+    title = "{Evidence for $B^0 \to p\bar{\Sigma}^0\pi^-$ at Belle}",
+    eprint = "2305.18821",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle preprint:2023-10; KEK preprint:2023-12",
+    month = "5",
+    year = "2023"
+}
+'

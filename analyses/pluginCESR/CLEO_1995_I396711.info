@@ -1,0 +1,35 @@
+Name: CLEO_1995_I396711
+Year: 1995
+Summary: Mass spectrum in hadronic $\tau$ decays
+Experiment: CLEO
+Collider: CESR
+InspireID: 396711
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 356 (1995) 580-588
+RunInfo: 
+  Tau production, can be any process but original data was in
+  $e^+ e^-$ at the $\Upsilon(4S)$ resonance
+Description:
+  'Measurement of the mass spectrum in hadronic $\tau$ decays. The decay were read from figure 1 in the paper which is fully corrected.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1995nlc
+BibTeX: '@article{CLEO:1995nlc,
+    author = "Coan, T. and others",
+    collaboration = "CLEO",
+    title = "{Measurement of alpha-s from tau decays}",
+    reportNumber = "CLNS-95-1332, CLEO-95-6",
+    doi = "10.1016/0370-2693(95)00824-5",
+    journal = "Phys. Lett. B",
+    volume = "356",
+    pages = "580--588",
+    year = "1995"
+}
+'

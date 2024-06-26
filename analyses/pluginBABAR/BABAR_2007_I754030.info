@@ -1,0 +1,36 @@
+Name: BABAR_2007_I754030
+Year: 2007
+Summary: Helicity angle in $B^+\to\omega K^+$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 754030
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 76 (2007) 031103
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the helicty angle in $B^+\to\omega K^+$ decays. The data were read from Figure 1d in the paper and backgrounds given  subtracted. The mass distributions are not implemented due to resolution effects.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007nku
+BibTeX: '@article{BaBar:2007nku,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Branching fraction and CP-violation charge asymmetry measurements for B-meson decays to eta K+-, eta pi+-, eta-prime K, eta-prime pi+-, omega K, and omega pi+-}",
+    eprint = "0706.3893",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "SLAC-PUB-12630, BABAR-PUB-07-032",
+    doi = "10.1103/PhysRevD.76.031103",
+    journal = "Phys. Rev. D",
+    volume = "76",
+    pages = "031103",
+    year = "2007"
+}
+'

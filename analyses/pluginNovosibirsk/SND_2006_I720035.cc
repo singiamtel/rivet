@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > KS0 KL0
   class SND_2006_I720035 : public Analysis {
   public:
 
@@ -21,7 +21,27 @@ namespace Rivet {
     void init() {
 
       declare(FinalState(), "FS");
-      book(_nK0K0, "TMP/K0K0");
+      book(_nK0K0, 1, 1, 1);
+      for (const string& en : _nK0K0.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/GeV, emin, emax)) {
+            _ecms = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms = en;
+            break;
+          }
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -38,25 +58,14 @@ namespace Rivet {
       }
       if(ntotal==2 &&
 	 nCount[130]==1 && nCount[310]==1)
-	_nK0K0->fill();
+	_nK0K0->fill(_ecms);
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      double sigma = _nK0K0->val();
-      double error = _nK0K0->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nK0K0, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -64,7 +73,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nK0K0;
+    BinnedHistoPtr<string> _nK0K0;
+    string _ecms;
     /// @}
 
 

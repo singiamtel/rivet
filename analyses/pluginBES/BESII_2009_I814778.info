@@ -12,6 +12,7 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: yes
 Beams: [e-, e+]
+Energies: [2.6, 3.07, 3.65]
 Description:
   'Measurement of $R$ in $e^+e^-$ collisions by BESII for energies between 2.6 and 3.65 GeV.
    The individual hadronic and muonic cross sections are also outputted to the yoda file

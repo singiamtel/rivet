@@ -1,0 +1,37 @@
+Name: BESIII_2023_I2674370
+Year: 2023
+Summary: Cross section for $e^+e^-\to pK^-\bar\Lambda^0 +\text{c.c.}$ from 4.009 and 4.951 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2674370
+Status: VALIDATED NOHEPDATA SINGLEWEIGHT
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2211.10755 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Energies: [4.009, 4.129, 4.157, 4.178, 4.189, 4.199, 4.209, 4.219, 4.226, 4.236, 4.244, 4.258, 4.267, 4.278, 4.288, 4.312, 4.337, 4.358, 4.377, 4.397, 4.416, 4.436, 4.467, 4.527, 4.600, 4.612, 4.628, 4.641, 4.661, 4.682, 4.699, 4.740, 4.750, 4.781, 4.843, 4.918, 4.951]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to pK^-\bar\Lambda^0 +\text{c.c.}$ from 4.009 and 4.951 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023ojh
+BibTeX: '@article{BESIII:2023ojh,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurement of $e^+e^-\to pK^-\bar{\Lambda}+c.c.$ cross sections between 4.009 GeV and 4.951 GeV}",
+    eprint = "2307.02328",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "7",
+    year = "2023"
+}
+'

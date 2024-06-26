@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > 2pi+2pi-
   class GAMMAGAMMA_1980_I153382 : public Analysis {
   public:
 
@@ -21,7 +21,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       // Book histograms
-      book(_npion, "TMP/pion");
+      book(_npion, "TMP/pion", refData(1, 1, 1));
     }
 
 
@@ -32,23 +32,16 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
 	if(abs(p.pid())!=PID::PIPLUS) vetoEvent;
       }
-      _npion->fill();
+      _npion->fill(sqrtS()/GeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _npion->val();
-      double error = _npion->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
+      scale(_npion, crossSection()/ sumOfWeights() /nanobarn);
       Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_npion,mult);
     }
 
     /// @}
@@ -56,7 +49,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _npion;
+    Histo1DPtr _npion;
     /// @}
 
 

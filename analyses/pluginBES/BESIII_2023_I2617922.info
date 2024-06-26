@@ -1,0 +1,38 @@
+Name: BESIII_2023_I2617922
+Year: 2023
+Summary:  Cross Section for $e^+e^-\to\eta J/\psi$ at $\sqrt{s}=3.773$ GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2617922
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 102 (2020) 3, 031101
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Energies: [3.773]
+Description:
+  'Cross section for  $e^+e^-\to\eta J/\psi$ for $\sqrt{s}=3.773$ GeV measured by the BESIII collaboration.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2022yoo
+BibTeX: '@article{BESIII:2022yoo,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Observation of \ensuremath{\psi}(3770)\textrightarrow{}\ensuremath{\eta}J/\ensuremath{\psi}}",
+    eprint = "2212.12165",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.107.L091101",
+    journal = "Phys. Rev. D",
+    volume = "107",
+    number = "9",
+    pages = "L091101",
+    year = "2023"
+}
+'

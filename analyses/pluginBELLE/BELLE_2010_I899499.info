@@ -1,0 +1,32 @@
+Name: BELLE_2010_I899499
+Year: 2010
+Summary: Photon Energy and Hadronic mass spectrum in  $B\to X_s\ell^+\ell^-$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 899499
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - PoS ICHEP2010 (2010) 231
+Description:
+  'Measurement of the photon energy and hadronic mass spectrum in $B\to X_s\ell^+\ell^-$. This conference proceding is more recent than the publication in BELLE_2005_I679052, however the data had to be read from the figures.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Chiang:2010zz
+BibTeX: '@article{Chiang:2010zz,
+    author = "Chiang, Cheng-Chin",
+    editor = "Pire, Bernard and Cirelli, Marco and Colas, Paul and Djouadi, Abdelhak and Lounis, Abdenour and Machefert, Frederic and Wormser, Guy",
+    collaboration = "Belle",
+    title = "{Improved measurement of the electroweak penguin process B ---\ensuremath{>} X(s) l+ l-}",
+    doi = "10.22323/1.120.0231",
+    journal = "PoS",
+    volume = "ICHEP2010",
+    pages = "231",
+    year = "2010"
+}
+'

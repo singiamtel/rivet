@@ -12,6 +12,7 @@ References:
  - arxiv:2009.01404
 RunInfo: e+ e- to hadrons. Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.
 Beams: [e-, e+]
+Energies: [2.3864, 2.3960, 2.5000, 2.6444, 2.6464, 2.7500, 2.9000, 2.9884]
 Options:
  - ENERGY=*
 Description:

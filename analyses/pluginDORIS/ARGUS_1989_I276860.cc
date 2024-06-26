@@ -47,8 +47,8 @@ namespace Rivet {
       // Counters
       book(_n_PiA,1,1,1);
       book(_n_PiB,1,1,2);
-      book(_n_Kp ,2,1,1);
-      book(_n_KS ,3,1,1);
+      book(_n_KS ,2,1,1);
+      book(_n_Kp ,3,1,1);
       book(_n_ptA,4,1,1);
       book(_n_ptB,4,1,2);
       
@@ -92,23 +92,23 @@ namespace Rivet {
             if(idMom!=310 && idMom != 3122) {
               _h_pi_cont_p->fill(modp);
               _h_pi_cont_z->fill(xE  ,1./beta);
-              _n_PiA->fill(string("9.98"));
+              _n_PiA->fill("9.98"s);
             }
-            _n_PiB->fill(string("9.98"));
+            _n_PiB->fill("9.98"s);
           }
           else if(id==321) {
             _h_Kp_cont_p->fill(modp);
             _h_Kp_cont_z->fill(xE  ,1./beta);
-            _n_Kp->fill(string("9.98"));
+            _n_Kp->fill("9.98"s);
           }
           else if(id==2212) {
             // not from K0S or Lambda decays
             if(idMom!=310 && idMom != 3122) {
               _h_pt_cont_p->fill(modp);
               _h_pt_cont_z->fill(xE  ,1./beta);
-              _n_ptA->fill(string("9.98"));
+              _n_ptA->fill("9.98"s);
             }
-            _n_ptB->fill(string("9.98"));
+            _n_ptB->fill("9.98"s);
           }
         }
         // Unstable particles
@@ -118,7 +118,7 @@ namespace Rivet {
           const double beta = modp / p.E();
           _h_KS_cont_p->fill(modp);
           _h_KS_cont_z->fill(xE  ,1./beta);
-          _n_KS->fill(string("9.98"));
+          _n_KS->fill("9.98"s);
         }
       }
       // Upsilon(s) found
@@ -146,28 +146,28 @@ namespace Rivet {
               if(idMom!=310 && idMom != 3122) {
         	_h_pi_ups1_p->fill(modp);
         	_h_pi_ups1_z->fill(xE  ,1./beta);
-        	_n_PiA->fill(string("9.46"));
+        	_n_PiA->fill("9.46"s);
               }
-              _n_PiB->fill(string("9.46"));
+              _n_PiB->fill("9.46"s);
             }
             else if(id==321) {
               _h_Kp_ups1_p->fill(modp);
               _h_Kp_ups1_z->fill(xE  ,1./beta);
-              _n_Kp->fill(string("9.46"));
+              _n_Kp->fill("9.46"s);
             }
             else if(id==2212) {
               // not from K0S or Lambda decays
               if(idMom!=310 && idMom != 3122) {
         	_h_pt_ups1_p->fill(modp);
         	_h_pt_ups1_z->fill(xE  ,1./beta);
-        	_n_ptA->fill(string("9.46"));
+        	_n_ptA->fill("9.46"s);
               }
-              _n_ptB->fill(string("9.46"));
+              _n_ptB->fill("9.46"s);
             }
             else if(id==310 || id==130) {
               _h_KS_ups1_p->fill(modp);
               _h_KS_ups1_z->fill(xE  ,1./beta);
-              _n_KS->fill(string("9.46"));
+              _n_KS->fill("9.46"s);
             }
           }
         }

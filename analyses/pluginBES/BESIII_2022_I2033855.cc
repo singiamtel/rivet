@@ -170,9 +170,9 @@ namespace Rivet {
         for(unsigned int iy=0;iy<2;++iy) {
           normalize(_h[ix][iy],1.,false);
           pair<double,pair<double,double> > alpha0 = calcAlpha0(_h[ix][iy]);
-          Estimate1DPtr _h_alpha0;
+          Estimate0DPtr _h_alpha0;
           book(_h_alpha0,1+ix,1,1+iy);
-          _h_alpha0->bin(1).set(alpha0.first, alpha0.second);
+          _h_alpha0->set(alpha0.first, alpha0.second);
         }
       }
     }

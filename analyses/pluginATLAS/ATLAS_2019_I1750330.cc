@@ -534,8 +534,8 @@ namespace Rivet {
       // Normalize to cross-section
       const double sf = crossSection()/picobarn / sumOfWeights();
       for (auto& hit : _h) {
-        scale(hit.second, sf);
-        if (hit.first.find("_norm") != string::npos)  normalize(hit.second, 1.0, false);
+        if (hit.first.find("_norm") != string::npos)  normalize(hit.second);
+        else                                          scale(hit.second, sf);
       }
       for (auto& hit : _d) {
         scale(hit.second, sf);
@@ -543,9 +543,7 @@ namespace Rivet {
       }
       for (auto& hit : _h_multi) {
         if (hit.first.find("_norm") != string::npos) {
-          scale(hit.second, sf);
-          const double norm2D = hit.second->integral(false);
-          scale(hit.second, safediv(1.0, norm2D));
+          normalizeGroup(hit.second, 1.0, false);
         }
         else {
           scale(hit.second, sf);

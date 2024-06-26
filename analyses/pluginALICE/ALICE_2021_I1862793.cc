@@ -21,7 +21,7 @@ namespace Rivet {
       book(_h_XPDP,4,1,1);                                   // ratio of production cross section between XiC+ and D0
       book(_h_X0Lc,5,1,1);                                   // ratio of production cross section between XiC and LambdaC
       book(_h_XcSc,6,1,1);                                   // ratio of production cross section between XiC and SigmaC
-      book(_h_X0Iint,7,1,1);                                 // XiC0 pt-integrated production cross section with 1<pt<12 GeV/c
+      book(_h_X0Iint,"TMP/Xint", refData(7,1,1));            // XiC0 pt-integrated production cross section with 1<pt<12 GeV/c
       book(_h_X0Oint,8,1,1);                                 // XiC0 pt-integrated production cross section with pt>0 GeV/c
       book(_h_XPint,9,1,1);                                  // XiC+ pt-integrated production cross section with 4<pt<12 GeV/c
 
@@ -43,7 +43,7 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-
+      if(_edges.empty()) _edges=_h_X0Oint->xEdges();
       const UnstableParticles& up = apply<UnstableParticles>(event, "up");
 
       for (const Particle& p : up.particles()) {
@@ -69,7 +69,7 @@ namespace Rivet {
             _h_X0D->fill(p.pT()/GeV);
             _h_Xc->fill(p.pT()/GeV);
             _h_X0L->fill(p.pT()/GeV);
-            _h_X0Oint->fill(1);
+            _h_X0Oint->fill(_edges[0]);
 
             if(p.pT()/GeV < 12.0 && p.pT()/GeV >= 1.0){
               _h_X0Iint->fill(1);
@@ -111,13 +111,18 @@ namespace Rivet {
       divide(_h_Xc, _h_Sc, _h_XcSc);
 
       scale(_h_X0Iint,              crossSection()/(microbarn*2*sumOfWeights()));
+      Estimate1DPtr tmp;
+      book(tmp,7,1,1);
+      barchart(_h_X0Iint,tmp);
       scale(_h_X0Oint,              crossSection()/(microbarn*2*sumOfWeights()));
       scale(_h_XPint,               crossSection()/(microbarn*2*sumOfWeights()));
 
     }
 
-    Histo1DPtr _h_X0, _h_XP, _h_X0Iint,_h_X0Oint, _h_XPint, _h_Sc, _h_Lc, _h_D0, _h_DP, _h_Xc, _h_X0D, _h_XPD, _h_X0L;
+    Histo1DPtr _h_X0, _h_XP, _h_X0Iint, _h_XPint, _h_Sc, _h_Lc, _h_D0, _h_DP, _h_Xc, _h_X0D, _h_XPD, _h_X0L;
     Estimate1DPtr _h_X0D0, _h_XPDP, _h_X0Lc, _h_XcSc;
+    BinnedHistoPtr<string> _h_X0Oint;
+    vector<string> _edges;
 
   };
 

@@ -92,7 +92,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       for(unsigned int ix=0;ix<10;++ix)
-	normalize(_h[ix]);
+	normalize(_h[ix],1.,false);
     }
 
     /// @}

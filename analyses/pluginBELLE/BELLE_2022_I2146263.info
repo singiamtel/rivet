@@ -1,0 +1,37 @@
+Name: BELLE_2022_I2146263
+Year: 2022
+Summary: Cross section for $e^+e^-\to\eta\phi$ 
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2146263
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 107 (2023) 012006
+ - arXiv:2209.00810 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Description:
+  'Measurement of the cross section for $e^+e^-\to\eta\phi$ using ISR for centre-of-mass energies between 1.55 and 3.95 GeV by the BELLE collaboration.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2022fhh
+BibTeX: '@article{Belle:2022fhh,
+    author = "Zhu, W. J. and others",
+    collaboration = "Belle",
+    title = "{Study of $e^{+}e^{-}\to\eta\phi$ via Initial State Radiation at Belle}",
+    eprint = "2209.00810",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.107.012006",
+    journal = "Phys. Rev. D",
+    volume = "107",
+    pages = "012006",
+    year = "2023"
+}
+'

@@ -23,12 +23,17 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-
-
-      book(_c_all  , "/TMP/all");
-      book(_c_omega, "/TMP/omega");
-      book(_c_phi  , "/TMP/phi");
-      book(_c_rho  , "/TMP/rho");
+      for(unsigned int ix=0;ix<4;++ix)
+        book(_sigma[ix], 1, 1, 1+ix);
+      for (const string& en : _sigma[0].binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms[0] = en;
+          if(end>1.6*GeV) _ecms[1]=en;
+          break;
+        }
+      }
+      if(_ecms[0].empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -76,7 +81,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched) {
-	    _c_all->fill();
+	    _sigma[0]->fill(_ecms[0]);
 	    found = true;
 	  }
 	}
@@ -95,46 +100,23 @@ namespace Rivet {
 	  }
 	  if(matched2) {
 	    if(p2.pid()==223)
-	      _c_omega->fill();
-	    else if(p2.pid()==333)
-	      _c_phi->fill();
+	      _sigma[1]->fill(_ecms[0]);
+	    else if(p2.pid()==333 && !_ecms[1].empty())
+	      _sigma[2]->fill(_ecms[1]);
 	    foundOmegaPhi=true;
 	  }
 	}
       }
       if(found && !foundOmegaPhi)
-	_c_rho->fill();
+	_sigma[3]->fill(_ecms[0]);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/nanobarn/sumOfWeights();
-      for (unsigned int ix=1;ix<5;++ix) {
-        double sigma(0.),error(0.);
-        if(ix==1) {
-          sigma = _c_all->val()*fact;
-          error = _c_all->err()*fact;
-        }
-        else if(ix==2) {
-          sigma = _c_omega->val()*fact;
-          error = _c_omega->err()*fact;
-        }
-        else if(ix==3) {
-          sigma = _c_phi->val()*fact;
-          error = _c_phi->err()*fact;
-        }
-        else if(ix==4) {
-          sigma = _c_rho->val()*fact;
-          error = _c_rho->err()*fact;
-        }
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      for (unsigned int ix=0;ix<4;++ix) {
+        scale(_sigma[ix],fact);
       }
     }
 
@@ -143,7 +125,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_all, _c_omega, _c_phi,_c_rho;
+    BinnedHistoPtr<string> _sigma[4];
+    string _ecms[2];
     /// @}
 
 

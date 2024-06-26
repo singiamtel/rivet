@@ -1,0 +1,36 @@
+Name: BABAR_2005_I667017
+Year: 2005
+Summary: Helicity angle in $B^0\to D^\mp K^{*\pm}$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 667017
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 95 (2005) 171802
+RunInfo: Any process producing B0 mesons, originally Upsilon(4S) decays 
+Description:
+'Measurement of the helicity angle in  $B^0\to D^\mp K^{*\pm}$ decays.
+The efficiency corrected, background subtracted decay were read from figure 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2004kuq
+BibTeX: '@article{BaBar:2004kuq,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of branching fraction and Dalitz distribution for $B^0 \to D^{(*)\pm} K^0 \pi^\mp$ decays}",
+    eprint = "hep-ex/0412040",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-10893, BABAR-PUB-04-040",
+    doi = "10.1103/PhysRevLett.95.171802",
+    journal = "Phys. Rev. Lett.",
+    volume = "95",
+    pages = "171802",
+    year = "2005"
+}
+'

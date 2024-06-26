@@ -26,10 +26,10 @@ namespace Rivet {
       book(_h_obs1,1,1,1);
       book(_h_obs2,1,1,2);
       book(_h_obs3,1,1,3);
-      book(_h_all1,1,2,1);
-      book(_h_all2,1,2,2);
-      book(_h_all3,1,2,3);
-      book(_h_x,2,1,1);
+      book(_h_all1,2,1,1);
+      book(_h_all2,2,1,2);
+      book(_h_all3,2,1,3);
+      book(_h_x,3,1,1);
     }
 
     void findDecayProducts(Particle parent, Particles & Xi, Particles & pions,unsigned int & nstable) {

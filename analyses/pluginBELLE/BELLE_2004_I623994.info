@@ -1,0 +1,35 @@
+Name: BELLE_2004_I623994
+Year: 2004
+Summary: Helicity angle in $B^+\to\psi(3770)K^+$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 623994
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 93 (2004) 051803
+RunInfo: Any process producing B+- mesons, originally Upsilon(4S) decay
+Description:
+  'Measurement of the helicity angle in  $B^+\to\psi(3770)K^+$. The data were read from figure 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2003eeg
+BibTeX: '@article{Belle:2003eeg,
+    author = "Abe, Kazuo and others",
+    collaboration = "Belle",
+    title = "{Observation of B+ ---\ensuremath{>} psi(3770) K+}",
+    eprint = "hep-ex/0307061",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-CONF-0303",
+    doi = "10.1103/PhysRevLett.93.051803",
+    journal = "Phys. Rev. Lett.",
+    volume = "93",
+    pages = "051803",
+    year = "2004"
+}
+'

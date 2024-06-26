@@ -1,0 +1,34 @@
+Name: BABAR_2006_I714147
+Year: 2006
+Summary: Helicity angle in $B^-\to D^0K^{*-}$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 714147
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 73 (2006) 111104
+RunInfo: Any process producing B+-, originally Upsilon(4S) decay
+Description:
+  'Measurement of the Helicity angle in $B^-\to D^0K^{*-}$. The acceptance corrected data was read from Figure 2 in the paper and the background given subtracted.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2006kjz
+BibTeX: '@article{BaBar:2006kjz,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of the $B^{-} \to D^0 K^{*-}$ branching fraction}",
+    eprint = "hep-ex/0604017",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-11807, BABAR-PUB-06-003",
+    doi = "10.1103/PhysRevD.73.111104",
+    journal = "Phys. Rev. D",
+    volume = "73",
+    pages = "111104",
+    year = "2006"
+}'

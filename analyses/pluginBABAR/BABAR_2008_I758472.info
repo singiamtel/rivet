@@ -1,0 +1,36 @@
+Name: BABAR_2008_I758472
+Year: 2008
+Summary: Longitudinal Polarization in $B^0\to K^{*0}\bar{K}^{*0}$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 758472
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 100 (2008) 081801
+RunInfo: Any process producing B0 mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the longitudinal polarization of the $K^{*0}$ mesons in the decay $B^0\to K^{*0}\bar{K}^{*0}$ by the BaBar collaboration. Only the longitudinal polarization is implemented due to the large backgrounds in the kinematic distributions in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007wwj
+BibTeX: '@article{BaBar:2007wwj,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of $B^0 \to$ K*0 $\bar{K}$* 0 and search for $B^0 \to$ K*0 K*0}",
+    eprint = "0708.2248",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-07-050, SLAC-PUB-12724",
+    doi = "10.1103/PhysRevLett.100.081801",
+    journal = "Phys. Rev. Lett.",
+    volume = "100",
+    pages = "081801",
+    year = "2008"
+}
+'

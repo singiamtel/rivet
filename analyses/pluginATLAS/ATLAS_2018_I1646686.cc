@@ -8,6 +8,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PartonicTops.hh"
 #include "Rivet/Math/LorentzTrans.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -123,7 +124,7 @@ namespace Rivet {
 	      const double pout_parton = abs(calcPout(t1_parton, t2_parton));
 	      const double dPhi_parton = deltaPhi(t1_parton, t2_parton);
 
-	      const int randomChoice = rand() % 2;
+	      const int randomChoice = int(rand01() < 0.5);
 	      const FourMomentum& randomTopParton = (randomChoice == 0) ? t1_parton : t2_parton;
 
 	      fillParton("t_pt", randomTopParton.pT()/GeV);

@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> KS0 K+- pi-+
   class DM1_1982_I176801 : public Analysis {
   public:
 
@@ -20,7 +20,7 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_nKKpi, "/TMP/nKKpi");
+      book(_nKKpi, "/TMP/nKKpi", refData(1,1,1));
 
     }
 
@@ -39,23 +39,16 @@ namespace Rivet {
       if(nCount[310]==1 &&
 	 ((nCount[ 211]==1&&nCount[-321]==1)||
 	  (nCount[-211]==1&&nCount[ 321]==1)))
-	_nKKpi->fill();
+	_nKKpi->fill(sqrtS()/MeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nKKpi->val();
-      double error = _nKKpi->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
+      scale(_nKKpi, crossSection()/ sumOfWeights() /nanobarn);
       Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_nKKpi,mult);
     }
 
     /// @}
@@ -63,7 +56,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nKKpi;
+    Histo1DPtr _nKKpi;
     /// @}
 
 

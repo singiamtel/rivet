@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- -> hadrons
   class CLEO_2006_I691720 : public Analysis {
   public:
 
@@ -26,10 +26,17 @@ namespace Rivet {
 
       // Book histograms
       for(unsigned int ix=1;ix<18;++ix) {
-	stringstream ss;
-	ss << "TMP/n" << ix;
-	book(_nMeson[ix], ss.str());
+        if(ix==6||ix==16) continue;
+	book(_nMeson[ix], 1,1,ix);
       }
+      for (const string& en : _nMeson[1].binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -55,7 +62,7 @@ namespace Rivet {
       }
       if(ntotal==3) {
 	if(nCount[211]==1 && nCount[-211]==1 && nCount[111]==1)
-	  _nMeson[1]->fill();
+	  _nMeson[1]->fill(_ecms);
       }
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for(unsigned int ix=0;ix<ufs.particles().size();++ix) {
@@ -80,14 +87,14 @@ namespace Rivet {
 	  }
        	  if(matched) {
 	    if(p1.pid()==113) {
-	      _nMeson[2]->fill();
-	      _nMeson[3]->fill();
+	      _nMeson[2]->fill(_ecms);
+	      _nMeson[3]->fill(_ecms);
 	    }
 	    else if(p1.pid()==223) {
-	      _nMeson[5]->fill();
+	      _nMeson[5]->fill(_ecms);
 	    }
 	    else if(p1.pid()==10113) {
-	      _nMeson[15]->fill();
+	      _nMeson[15]->fill(_ecms);
 	    }
 	  }
 	}
@@ -107,12 +114,12 @@ namespace Rivet {
 	  }
        	  if(matched) {
 	    if(p1.pid()==abs(113)) {
-	      _nMeson[2]->fill();
-	      _nMeson[4]->fill();
+	      _nMeson[2]->fill(_ecms);
+	      _nMeson[4]->fill(_ecms);
 	    }
 	    else {
-	      _nMeson[15]->fill();
-	      _nMeson[17]->fill();
+	      _nMeson[15]->fill(_ecms);
+	      _nMeson[17]->fill(_ecms);
 	    }
 	  }
 	}
@@ -131,7 +138,7 @@ namespace Rivet {
        	    }
 	  }
        	  if(matched) {
-	    _nMeson[14]->fill();
+	    if(_ecms=="3.671"s) _nMeson[14]->fill(_ecms);
 	  }
 	}
 	// second unstable particle
@@ -154,25 +161,27 @@ namespace Rivet {
 	  if(!matched) continue;
 	  if( (p1.pid()==113 && p2.pid()==221) ||
 	      (p2.pid()==113 && p1.pid()==221) )
-	    _nMeson[7]->fill();
+	    _nMeson[7]->fill(_ecms);
 	  else if( (p1.pid()==223 && p2.pid()==221) ||
 		   (p2.pid()==223 && p1.pid()==221) )
-	    _nMeson[8]->fill();
+	    _nMeson[8]->fill(_ecms);
 	  else if( (p1.pid()==333 && p2.pid()==221) ||
 		   (p2.pid()==333 && p1.pid()==221) )
-	    _nMeson[9]->fill();
+	    _nMeson[9]->fill(_ecms);
 	  else  if( (p1.pid()==113 && p2.pid()==331) ||
 		    (p2.pid()==113 && p1.pid()==331) )
-	    _nMeson[10]->fill();
+	    _nMeson[10]->fill(_ecms);
 	  else  if( (p1.pid()==223 && p2.pid()==331) ||
-		    (p2.pid()==223 && p1.pid()==331) )
-	    _nMeson[11]->fill();
+		    (p2.pid()==223 && p1.pid()==331) ) {
+	    if(_ecms=="3.773"s)_nMeson[11]->fill(_ecms);
+          }
 	  else  if( (p1.pid()==333 && p2.pid()==331) ||
-		    (p2.pid()==333 && p1.pid()==331) )
-	    _nMeson[12]->fill();
+		    (p2.pid()==333 && p1.pid()==331) ) {
+	    if(_ecms=="3.773"s)_nMeson[12]->fill(_ecms);
+          }
 	  else  if( (p1.pid()==313 && p2.pid()==-313) ||
 		    (p2.pid()==313 && p1.pid()==-313) )
-	    _nMeson[13]->fill();
+	    _nMeson[13]->fill(_ecms);
 	}
       }
     }
@@ -182,17 +191,7 @@ namespace Rivet {
     void finalize() {
       for(unsigned int ix=1;ix<18;++ix) {
         if(ix==6||ix==16) continue;
-        double sigma = _nMeson[ix]->val();
-        double error = _nMeson[ix]->err();
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+        scale(_nMeson[ix],crossSection()/ sumOfWeights() /picobarn);
       }
     }
 
@@ -201,7 +200,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nMeson[18];
+    BinnedHistoPtr<string> _nMeson[18];
+    string _ecms;
     /// @}
 
 

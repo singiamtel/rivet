@@ -1,0 +1,37 @@
+Name: BABAR_2008_I792439
+Year: 2008
+Summary: Mass and angular distributions in  $B^0\to\phi K\pi$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 792439
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 78 (2008) 092008
+RunInfo: Any process producing B0, originally Upsilon(4S) decay
+Description:
+  'Measurment of mass and angular distributions in  $B^0\to\phi K\pi$ decays. The corrected
+   data were read from the figures in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2008lan
+BibTeX: '@article{BaBar:2008lan,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Time-Dependent and Time-Integrated Angular Analysis of B -\ensuremath{>} phi Ks pi0 and B -\ensuremath{>} phi K+ pi-}",
+    eprint = "0808.3586",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "SLAC-PUB-13337, BABAR-PUB-08-036",
+    doi = "10.1103/PhysRevD.78.092008",
+    journal = "Phys. Rev. D",
+    volume = "78",
+    pages = "092008",
+    year = "2008"
+}
+'

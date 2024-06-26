@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- R
   class GAMMAGAMMA_1975_I100016 : public Analysis {
   public:
 
@@ -22,8 +22,8 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
+      book(_c_hadrons, "/TMP/sigma_hadrons", refData(1,1,2));
+      book(_c_muons, "/TMP/sigma_muons", refData(1,1,2));
     }
 
 
@@ -40,34 +40,22 @@ namespace Rivet {
       // mu+mu- + photons
       if(nCount[-13]==1 and nCount[13]==1 &&
 	 ntotal==2+nCount[22])
-	_c_muons->fill();
+	_c_muons->fill(sqrtS()/GeV);
       // everything else
       else
-	_c_hadrons->fill();
+	_c_hadrons->fill(sqrtS()/GeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      Estimate1DPtr hadrons;
-      book(hadrons, 1,1,1);
-      Estimate1DPtr muons;
-      book(muons, "sigma_muons"  );
       Estimate1DPtr mult;
       book(mult, 1, 1, 2);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(R.val(), R.errPos());
-          hadrons->bin(b.index()).set(sig_h, err_h);
-          muons  ->bin(b.index()).set(sig_m, err_m);
-        }
-      }
+      divide(_c_hadrons, _c_muons, mult);
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale(_c_hadrons,fact);
+      book(mult, 1, 1, 1);
+      barchart(_c_hadrons,mult);
     }
 
     /// @}
@@ -75,7 +63,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    Histo1DPtr _c_hadrons, _c_muons;
     /// @}
 
 

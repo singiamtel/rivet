@@ -1,0 +1,35 @@
+Name: BELLE_2007_I732595
+Year: 2007
+Summary: Hadronic mass moments in $B\to X_c\ell^-\bar\nu_\ell$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 732595
+Status: VALIDATED NOHEPDATA SINGLEWEIGHT
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 75 (2007) 032005
+RunInfo: Any process producing B0/B+, originally Upsilon(4S) decays
+Description:
+  'Measurement of the moments of the hadronic mass in $B\to X_c\ell^-\bar\nu_\ell$.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2006jtu
+BibTeX: '@article{Belle:2006jtu,
+    author = "Schwanda, C. and others",
+    collaboration = "Belle",
+    title = "{Moments of the Hadronic Invariant Mass Spectrum in $B \to X_c \ell \nu$ Decays at {BELLE}}",
+    eprint = "hep-ex/0611044",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2006-37, KEK-PREPRINT-2006-54, BELLE-CONF-0668",
+    doi = "10.1103/PhysRevD.75.032005",
+    journal = "Phys. Rev. D",
+    volume = "75",
+    pages = "032005",
+    year = "2007"
+}
+'

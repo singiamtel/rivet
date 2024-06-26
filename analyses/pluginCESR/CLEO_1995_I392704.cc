@@ -103,16 +103,16 @@ namespace Rivet {
     void finalize() {
       // Lambda_c -> Lambda pi+
       normalize(_h_Lambda);
-      Estimate1DPtr _h_alpha1;
+      Estimate0DPtr _h_alpha1;
       book(_h_alpha1,3,1,1);
       pair<double,double> alpha = calcAlpha(_h_Lambda);
-      _h_alpha1->bin(1).set(alpha.first, alpha.second);
+      _h_alpha1->set(alpha.first, alpha.second);
       // Lambda_c -> Sigma+ pi0
       normalize(_h_Sigma);
-      Estimate1DPtr _h_alpha2;
+      Estimate0DPtr _h_alpha2;
       book(_h_alpha2,4,1,1);
       alpha = calcAlpha(_h_Sigma);
-      _h_alpha2->bin(1).set(alpha.first, alpha.second);
+      _h_alpha2->set(alpha.first, alpha.second);
     }
 
     /// @}

@@ -147,14 +147,14 @@ namespace Rivet {
       // normalize
       normalize(_h_lam);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_lam);
-      Estimate1DPtr _h_alpha_lam;
+      Estimate0DPtr _h_alpha_lam;
       book(_h_alpha_lam, 2,2*ioff+1,1);
-      _h_alpha_lam->bin(1).set(alpha.first, alpha.second);
+      _h_alpha_lam->set(alpha.first, alpha.second);
       normalize(_h_sig);
       alpha = calcAlpha(_h_sig);
-      Estimate1DPtr _h_alpha_sig;
+      Estimate0DPtr _h_alpha_sig;
       book(_h_alpha_sig, 2,2*ioff+2,1);
-      _h_alpha_sig->bin(1).set(alpha.first, alpha.second);
+      _h_alpha_sig->set(alpha.first, alpha.second);
     }
 
     /// @}

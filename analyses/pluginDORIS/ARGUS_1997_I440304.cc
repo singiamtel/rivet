@@ -23,8 +23,8 @@ namespace Rivet {
       declare(Beam(), "Beams");
       declare(UnstableParticles(), "UFS");
       // book histos
-      book(_h_rate1,1,1,1);
-      book(_h_rate2,1,2,1);
+      book(_h_rate1,"TMP/tot_1",refData(1,1,1));
+      book(_h_rate2,"TMP/tot_2",refData(1,2,1));
       book(_h_x,2,1,1);
     }
 
@@ -48,7 +48,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      static const int id2595 = 14122;
+      static const int id2595 = 102142;
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
       const double Emax = ( beams.first.p3().mod() + beams.second.p3().mod() ) / 2.0;
@@ -74,8 +74,13 @@ namespace Rivet {
       normalize(_h_x);
       // br for lambda_c mode from pdg 2018
       double br = 0.0623;
-      scale(_h_rate1,0.3*br*crossSection()/sumOfWeights()/picobarn);
-      scale(_h_rate2,    br*crossSection()/sumOfWeights()/picobarn);
+      scale(_h_rate1,br*crossSection()/sumOfWeights()/picobarn);
+      scale(_h_rate2,br*crossSection()/sumOfWeights()/picobarn);
+      Estimate1DPtr tmp;
+      book(tmp,1,1,1);
+      barchart(_h_rate1,tmp);
+      book(tmp,1,2,1);
+      barchart(_h_rate2,tmp);
     }
 
     /// @}

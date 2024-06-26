@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > hadrons
   class GAMMAGAMMA_1981_I158474 : public Analysis {
   public:
 
@@ -20,15 +20,10 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_n3pi, "TMP/n3pi");
-      book(_n4pi, "TMP/n4pi");
-      book(_n5pi, "TMP/n5pi");
-      book(_n6pi, "TMP/n6pi");
-      book(_n35pi, "TMP/n35pi");
-      book(_n46pi, "TMP/n46pi");
-      book(_nC2, "TMP/nC2");
-      book(_nC4, "TMP/nC4");
-      book(_nmu, "TMP/nmu");
+      for(unsigned int ix=0;ix<6;++ix)
+        book(_h[ix],"TMP/h_"+toString(ix+1),refData(1,1,1+ix));
+      for(unsigned int ix=6;ix<9;++ix)
+        book(_h[ix],"TMP/h_"+toString(ix+1),refData(2,1,1));
     }
 
 
@@ -45,31 +40,31 @@ namespace Rivet {
       // mu+mu- + photons
       if(nCount[-13]==1 and nCount[13]==1 &&
 	 ntotal==2+nCount[22])
-	_nmu->fill();
+	_h[8]->fill(sqrtS());
       else {
 	if(ntotal==3 && nCount[211] == 1 && nCount[-211]==1 && nCount[111]==1 ) {
-	  _n3pi->fill();
+	  _h[0]->fill(sqrtS());
 	}
 	if(ntotal==4 && nCount[211] == 1 && nCount[-211]==1 && nCount[111]==2 ) {
-	  _n4pi->fill();
+	  _h[1]->fill(sqrtS());
 	}
 	if(ntotal==5 && nCount[211] == 2 && nCount[-211]==2 && nCount[111]==1 ) {
-	  _n5pi->fill();
+	  _h[2]->fill(sqrtS());
 	}
 	if(ntotal==6 && nCount[211] == 2 && nCount[-211]==2 && nCount[111]==2 ) {
-	  _n6pi->fill();
+	  _h[3]->fill(sqrtS());
 	}
 	if(nCount[211] == 1 && nCount[-211]==1 && ntotal == 2+nCount[111]) {
-	  _nC2->fill();
+	  _h[6]->fill(sqrtS());
 	}
 	if(nCount[211] == 2 && nCount[-211]==2 && ntotal == 4+nCount[111]) {
-	  _nC4->fill();
+	  _h[7]->fill(sqrtS());
 	}
 	if((nCount[211]+nCount[-211]+nCount[111])==ntotal ) {
 	  if(ntotal==3 || ntotal ==5)
-	    _n35pi->fill();
+	    _h[4]->fill(sqrtS());
 	  else if(ntotal==4 || ntotal==6)
-	    _n46pi ->fill();
+	    _h[5] ->fill(sqrtS());
 	}
       }
     }
@@ -78,65 +73,18 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /nanobarn;
-      for(unsigned int ix=1;ix<7;++ix) {
-        double sigma = 0.0, error = 0.0;
-        if(ix==1) {
-          sigma = _n3pi->val()*fact;
-          error = _n3pi->err()*fact;
-        }
-        else if(ix==2) {
-          sigma = _n4pi->val()*fact;
-          error = _n4pi->err()*fact;
-        }
-        else if(ix==3) {
-          sigma = _n5pi->val()*fact;
-          error = _n5pi->err()*fact;
-        }
-        else if(ix==4) {
-          sigma = _n6pi->val()*fact;
-          error = _n6pi->err()*fact;
-        }
-        else if(ix==5) {
-          sigma = _n35pi->val()*fact;
-          error = _n35pi->err()*fact;
-        }
-        else if(ix==6) {
-          sigma = _n46pi->val()*fact;
-          error = _n46pi->err()*fact;
-        }
-        Estimate1DPtr mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      for(unsigned int ix=0;ix<9;++ix) {
+        scale(_h[ix],fact);
+        if(ix>=6) continue;
+        Estimate1DPtr tmp;
+        book(tmp,1,1,1+ix);
+        barchart(_h[ix],tmp);
       }
-      for (unsigned int ix=1;ix<3;++ix) {
-        Estimate0D R = (ix==1? *_nC2 : *_nC4)/ *_nmu;
-        double sig_h = (ix ==1 ? _nC2 : _nC4)->val()*fact;
-        double err_h = (ix ==1 ? _nC2 : _nC4)->err()*fact;
-        double sig_m = _nmu->val()*fact;
-        double err_m = _nmu->err()*fact;
-        std::ostringstream title;
-        if(ix==1)
-          title << "sigma_2pi";
-        else
-          title << "sigma_4pi";
-        Estimate1DPtr hadrons;
-        book(hadrons, title.str());
-        Estimate1DPtr muons;
-        book(muons, "sigma_muons");
-        Estimate1DPtr mult;
-        book(mult, 2,1,ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(R.val(), R.errPos());
-            hadrons->bin(b.index()).set(sig_h, err_h);
-            if(ix==1) muons->bin(b.index()).set(sig_m, err_m);
-          }
-        }
-      }
+      Estimate1DPtr tmp;
+      book(tmp,2,1,1);
+      divide(_h[6],_h[8],tmp);
+      book(tmp,2,1,2);
+      divide(_h[7],_h[8],tmp);
     }
 
     /// @}
@@ -144,7 +92,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _n3pi,_n4pi,_n5pi,_n6pi,_n35pi,_n46pi,_nC2,_nC4,_nmu;
+    Histo1DPtr _h[9];
     /// @}
 
 

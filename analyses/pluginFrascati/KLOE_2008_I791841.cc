@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> pi+pi-2pi0 and 2pi0gamma near the phi
   class KLOE_2008_I791841 : public Analysis {
   public:
 
@@ -20,8 +20,17 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_n4pi, "TMP/4pi");
-      book(_n2pigamma, "TMP/2pigamma");
+      book(_n4pi, 1,1,1);
+      book(_n2pigamma, 2,1,1);
+      for (const string& en : _n4pi.binning().edges<0>()) {
+        const double end = std::stod(en)*MeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -35,10 +44,10 @@ namespace Rivet {
       }
       if (nCount[111]==2) {
         if( nCount[211] == 1 && nCount[-211] == 1 ) {
-          _n4pi->fill();
+          _n4pi->fill(_ecms);
         }
         else if( nCount[22] == 1) {
-          _n2pigamma->fill();
+          _n2pigamma->fill(_ecms);
         }
       }
     }
@@ -46,26 +55,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _n4pi->val();
-          error = _n4pi->err();
-        }
-        else if(ix==2) {
-          sigma = _n2pigamma->val();
-          error = _n2pigamma->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale(_n4pi,fact);
+      scale(_n2pigamma,fact);
     }
 
     /// @}
@@ -73,7 +65,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _n4pi,_n2pigamma;
+    BinnedHistoPtr<string> _n4pi,_n2pigamma;
+    string _ecms;
     /// @}
 
 

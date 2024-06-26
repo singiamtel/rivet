@@ -1,0 +1,33 @@
+Name: ARGUS_1994_I375417
+Year: 1994
+Summary: Pion helicity angle in $\tau^-\to\pi^-\pi^0\nu_\tau$
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 375417
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 337 (1994) 383-392
+RunInfo: Any process producing tau leptons, originally e+e-
+Description:
+  'Measurement of the pion helicity angle in the $\pi^-\pi^0$ frame for $\tau^-\to\pi^-\pi^0\nu_\tau$. The corrected data were read from figure 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1994ejm
+BibTeX: '@article{ARGUS:1994ejm,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Determination of the structure of tau decays in the reaction e+ e- ---\ensuremath{>} tau+ tau- ---\ensuremath{>} rho+ anti-tau-neutrino rho- tau-neutrino and a precision measurement of the tau-neutrino helicity}",
+    reportNumber = "DESY-94-120",
+    doi = "10.1016/0370-2693(94)90992-X",
+    journal = "Phys. Lett. B",
+    volume = "337",
+    pages = "383--392",
+    year = "1994"
+}
+'

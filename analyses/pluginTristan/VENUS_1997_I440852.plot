@@ -14,8 +14,8 @@ Title=Scaled $\pi^-$ momentum in $\tau^-\to \pi^-\nu_\tau$
 END PLOT
 BEGIN PLOT /VENUS_1997_I440852/d01-x01-y01
 XLabel=Mode
-XCustomMajorTicks=1.  $e$	2.  $\mu$	3.    $\pi$    4. $\rho$  5. sum
 YLabel=$P_\tau$
 Title=$\tau$ polarization
 LogY=0
+XCustomMajorTicks=1 $e$ 2 $\mu$ 3 $\pi$ 4 $\rho$ 5 sum
 END PLOT

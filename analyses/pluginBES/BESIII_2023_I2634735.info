@@ -1,0 +1,36 @@
+Name: BESIII_2023_I2634735
+Year: 2023
+Summary: Analysis of $\psi(2S)$ decays to $\Xi^0\bar{\Xi}^0$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2634735
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2302.09767 [hep-ex]
+RunInfo: e+e- > psi(2S) 
+NeedCrossSection: no
+Beams: [e-, e+]
+Energies: [3.686]
+Description:
+  'Analysis of the angular distribution of the baryons, and decay products, produced in $e^+e^-\to \psi(2S) \to \Xi^0\bar{\Xi}^0$.
+   Gives information about the decay and is useful for testing correlations in hadron decays. The phase and $\alpha$ parameters were taken from the tables in the paper. '
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023lkg
+BibTeX: '@article{BESIII:2023lkg,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{First Simultaneous Measurement of $\Xi^0$ and $\bar{\Xi}^0$ Asymmetry Parameters in $\psi(3686)$ Decay}",
+    eprint = "2302.09767",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "2",
+    year = "2023"
+}
+'

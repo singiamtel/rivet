@@ -1,0 +1,36 @@
+Name: CLEOIII_2005_I675005
+Year: 2005
+Summary: Hadronic mass spectra in four hadron $\tau^-$ decays with $K^\pm$
+Experiment: CLEOIII
+Collider: CESR
+InspireID: 675005
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 94 (2005) 241802
+RunInfo: Any process producting tau leptons, originally e+e-
+Description:
+'Measurement of the hadronic mass spectrum in $\tau^-\to K^-\pi^+\pi^-\pi^0\nu_\tau$ (excluding $\omega$ and $K^-\omega\nu_\tau$)
+ and $\tau^-\to K^-K^+\pi^-\pi^0\nu_\tau$ decays. The background subtracted, efficiency corrected data were read from Figure 2 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: 
+BibTeX: '@article{CLEO:2005qyl,
+    author = "Arms, Kregg E. and others",
+    collaboration = "CLEO",
+    title = "{Study of tau decays to four-hadron final states with kaons}",
+    eprint = "hep-ex/0501042",
+    archivePrefix = "arXiv",
+    reportNumber = "CLNS-04-1899, CLEO-04-17",
+    doi = "10.1103/PhysRevLett.94.241802",
+    journal = "Phys. Rev. Lett.",
+    volume = "94",
+    pages = "241802",
+    year = "2005"
+}
+'

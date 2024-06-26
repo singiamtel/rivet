@@ -1,0 +1,33 @@
+Name: CUSB_1984_I204307
+Year: 1984
+Summary: Direct Photon Spectrum in $\Upsilon(1,2)$ decays
+Experiment: CUSB
+Collider: CESR
+InspireID: 204307
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 138 (1984) 225-229
+RunInfo: Any process producing Upsilon mesons, original e+e- collisions
+Description:
+  'Measurement of the photon spectrum in $\Upsilon(1,2)$ decays by CUSB.
+   The spectrum was read from the figures in the paper but is corrected
+   for efficiency/resolution.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Schamberger:1984mm
+BibTeX: '@article{Schamberger:1984mm,
+    author = "Schamberger, R. Dean and others",
+    title = "{OBSERVATION OF DIRECT PHOTONS IN UPSILON AND UPSILON-PRIME DECAYS AND DETERMINATION OF THE QCD SCALE PARAMETER}",
+    doi = "10.1016/0370-2693(84)91905-1",
+    journal = "Phys. Lett. B",
+    volume = "138",
+    pages = "225--229",
+    year = "1984"
+}
+'

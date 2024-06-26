@@ -1,0 +1,35 @@
+Name: ARGUS_1995_I374784
+Year: 1995
+Summary: Electron and muon spectrum in leptonic tau decays
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 374784
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 341 (1995) 441-447
+RunInfo: e+e- -> tau+tau-, needed due pseudo-rest frame definition
+Beams: [e+, e-]
+Energies: [10.]
+Description:
+  'Measurement of the electron and muon spectrum in leptonic tau decays in the pseudo-rest frame of the tau lepton. Correccted data read from figures 3 and 4 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1994uih
+BibTeX: '@article{ARGUS:1994uih,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{The First measurement of the Michel parameter eta in tau decays}",
+    reportNumber = "DESY-94-100",
+    doi = "10.1016/0370-2693(94)01386-Q",
+    journal = "Phys. Lett. B",
+    volume = "341",
+    pages = "441--447",
+    year = "1995"
+}
+'

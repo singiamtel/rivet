@@ -66,21 +66,21 @@ namespace Rivet {
 	}
 	else if(p.children()[0].pid()==sign*411 &&
 		p.children()[1].pid()==-sign*211) {
-	  if(p.abspid()!=idD1) _r[0]->fill(0.5);
+	  if(p.abspid()!=idD1) _r[0]->fill("10.58"s);
 	  continue;
 	}
 	else if(p.children()[1].pid()==sign*411 &&
 		p.children()[0].pid()==-sign*211) {
-	  if(p.abspid()!=idD1) _r[0]->fill(0.5);
+	  if(p.abspid()!=idD1) _r[0]->fill("10.58"s);
 	  continue;
 	}
 	else {
 	  continue;
 	}
 	if(p.abspid()==idD1)
-	  _r[2]->fill(0.5);
+	  _r[2]->fill("10.58"s);
 	else
-	  _r[1]->fill(0.5);
+	  _r[1]->fill("10.58"s);
 	if(Dstar.children().size()!=2) continue;
 	Particle pion;
 	if(Dstar.children()[0].pid()== sign*211 &&
@@ -126,7 +126,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_D2_cTheta,_h_D2_x,_h_D1_cTheta,_h_D1_x;
-    Histo1DPtr _r[3];
+    BinnedHistoPtr<string> _r[3];
     /// @}
 
 

@@ -1,0 +1,35 @@
+Name: BELLE_2004_I630328
+Year: 2004
+Summary: Differential branching ratio w.r.t $p\bar{p}$ mass for $B^+\to p\bar{p} \pi^+,K^+,K^{*+}$ and $B^0\to p\bar{p}K^0_S$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 630328
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 92 (2004) 131801
+RunInfo: Any process producing B+ mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the differential branching ratio with respect to the $p\bar{p}$ mass for $B^+\to p\bar{p} \pi^+,K^+,K^{*+}$ and $B^0\to p\bar{p}K^0_S$. The data was taken from table 1 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2003pwf
+BibTeX: '@article{Belle:2003pwf,
+    author = "Wang, M. Z. and others",
+    collaboration = "Belle",
+    title = "{Observation of B+ ---\ensuremath{>} p anti-p pi+, B0 ---\ensuremath{>} p anti-p K0, and B+ ---\ensuremath{>} p anti-p K*+}",
+    eprint = "hep-ex/0310018",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-CONF-0313",
+    doi = "10.1103/PhysRevLett.92.131801",
+    journal = "Phys. Rev. Lett.",
+    volume = "92",
+    pages = "131801",
+    year = "2004"
+}
+'

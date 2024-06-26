@@ -153,18 +153,18 @@ namespace Rivet {
       normalize(_h_cthetaxi0);
       normalize(_h_cthetaxim);
       // calculate the values of alpha
-      Estimate1DPtr _h_alphaLam;
+      Estimate0DPtr _h_alphaLam;
       book(_h_alphaLam,1,1,1);
       pair<double,double> alpha = calcAlpha(_h_cthetalam);
-      _h_alphaLam->bin(1).set(alpha.first, alpha.second);
-      Estimate1DPtr _h_alphaXi0;
+      _h_alphaLam->set(alpha.first, alpha.second);
+      Estimate0DPtr _h_alphaXi0;
       book(_h_alphaXi0,1,1,2);
       alpha = calcAlpha(_h_cthetaxi0);
-      _h_alphaXi0->bin(1).set(alpha.first, alpha.second);
-      Estimate1DPtr _h_alphaXim;
+      _h_alphaXi0->set(alpha.first, alpha.second);
+      Estimate0DPtr _h_alphaXim;
       book(_h_alphaXim,1,1,3);
       alpha = calcAlpha(_h_cthetaxim);
-      _h_alphaXim->bin(1).set(alpha.first, alpha.second);
+      _h_alphaXim->set(alpha.first, alpha.second);
     }
 
     /// @}

@@ -23,8 +23,8 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_c_omega, "/TMP/omega");
-      book(_c_total, "/TMP/total");
+      book(_c_omega, "/TMP/omega", refData(1,1,1));
+      book(_c_total, "/TMP/total", refData(3,1,1));
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -73,7 +73,7 @@ namespace Rivet {
 	  }
 	}
 	if(!matched) continue;
-	_c_total->fill();
+	_c_total->fill(sqrtS());
 	// check if from omega
 	for (const Particle& p2 : ufs.particles()) {
 	  if(p2.pid()!=223) continue;
@@ -89,7 +89,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched2)
-	    _c_omega->fill();
+	    _c_omega->fill(sqrtS());
 	}
       }
     }
@@ -98,24 +98,13 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/picobarn/sumOfWeights();
-      for(unsigned int ix=1;ix<4; ix+=2) {
-       	double sigma(0.),error(0.);
-       	if(ix==1) {
-       	  sigma = _c_omega->val()*fact;
-       	  error = _c_omega->err()*fact;
-       	}
-       	else if(ix==3) {
-       	  sigma = _c_total->val()*fact;
-       	  error = _c_total->err()*fact;
-       	}
-       	Estimate1DPtr  mult;
-       	book(mult, ix, 1, 1);
-       	for (auto& b : mult->bins()) {
-      	  if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-      	    b.set(sigma, error);
-      	  }
-       	}
-      }
+      scale(_c_total,fact);
+      Estimate1DPtr  mult;
+      book(mult, 1, 1, 1);
+      barchart(_c_total,mult);
+      scale(_c_omega,fact);
+      book(mult, 3, 1, 1);
+      barchart(_c_omega,mult);
     }
 
     /// @}
@@ -123,7 +112,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_total,_c_omega;
+    Histo1DPtr _c_total,_c_omega;
     /// @}
 
 

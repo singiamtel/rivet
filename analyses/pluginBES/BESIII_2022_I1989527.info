@@ -1,0 +1,38 @@
+Name: BESIII_2022_I1989527
+Year: 2022
+Summary: Cross section for $e^+e^-\to D^{*+}D^{*-}$ and $D^\pm D^{*\mp}$ between 4.08 and 4.6 GeV
+Experiment: BESIII
+Collider:  BEPC
+InspireID: 1989527
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - JHEP 05 (2022) 155
+RunInfo: e+e- to hadrons
+NeedCrossSection: yes
+Beams: [e+, e-]
+Energies  : [4.0854, 4.1285, 4.1574, 4.178, 4.1886, 4.1989, 4.2092, 4.2171, 4.2263, 4.2357, 4.2438, 4.258, 4.2668, 4.2777,
+            4.2879, 4.3079, 4.3121, 4.3374, 4.3583, 4.3774, 4.3874, 4.3964, 4.4156, 4.4362, 4.4671, 4.5271, 4.5745, 4.5995]
+Options:
+- ENERGY=*
+Description:
+  'Cross section for $e^+e^-\to D^{*+}D^{*-}$ and $D^\pm D^{*\mp}$ between 4.08 and 4.6 GeV. 
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+Keywords: []
+BibKey: BESIII:2021yvc
+BibTeX: '@article{BESIII:2021yvc,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Cross section measurements of the $e^+e^-\to D^{*+}D^{*-}$ and $e^+e^-\to D^{*+}D^{-}$ processes at center-of-mass energies from 4.085 to 4.600 GeV}",
+    eprint = "2112.06477",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1007/JHEP05(2022)155",
+    journal = "JHEP",
+    volume = "05",
+    pages = "155",
+    year = "2022"
+}
+'

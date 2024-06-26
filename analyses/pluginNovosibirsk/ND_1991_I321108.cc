@@ -49,11 +49,11 @@ namespace Rivet {
       for(const string& en : energies) {
         double end = std::stod(en)*GeV;
         if(isCompatibleWithSqrtS(end)) {
-          ecms = en;
+          _ecms = en;
           break;
         }
       }
-      if(ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -81,31 +81,31 @@ namespace Rivet {
       }
       if(ntotal==2) {
 	if(nCount[211]==1&&nCount[-211]==1)
-	  _n2Pi->fill(ecms);
+	  _n2Pi->fill(_ecms);
 	if(nCount[321]==1&&nCount[-321]==1)
-	  _nKC->fill(ecms);
+	  _nKC->fill(_ecms);
 	if(nCount[310]==1&&nCount[130]==1)
-	  _nKN->fill(ecms);
+	  _nKN->fill(_ecms);
       }
       else if(ntotal==3) {
 	if(nCount[211]==1&&nCount[-211]==1&&nCount[111]==1) {
-	  _n3Pi[0]->fill(ecms);
-	  _n3Pi[1]->fill(ecms);
+	  _n3Pi[0]->fill(_ecms);
+	  _n3Pi[1]->fill(_ecms);
         }
       }
       else if(ntotal==4) {
 	if(nCount[211]==2&&nCount[-211]==2) {
-	  _n4PiC[0]->fill(ecms);
-	  _n4PiC[1]->fill(ecms);
+	  _n4PiC[0]->fill(_ecms);
+	  _n4PiC[1]->fill(_ecms);
         }
 	else if(nCount[211]==1&&nCount[-211]==1&&nCount[111]==2) {
-	  _n4PiN[0]->fill(ecms);
-	  _n4PiN[1]->fill(ecms);
+	  _n4PiN[0]->fill(_ecms);
+	  _n4PiN[1]->fill(_ecms);
         }
       }
       else if(ntotal==5) {
 	if(nCount[211]==2&&nCount[-211]==2&&nCount[111]==1)
-	  _n5Pi->fill(ecms);
+	  _n5Pi->fill(_ecms);
       }
 
       const FinalState& ufs = apply<FinalState>(event, "UFS");
@@ -132,7 +132,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _nEtaPiPi->fill(ecms);
+	    _nEtaPiPi->fill(_ecms);
 	}
 	else if(p.pid()==223) {
 	  map<long,int> nRes = nCount;
@@ -155,7 +155,7 @@ namespace Rivet {
 	  }
 	  if(matched) {
             for(unsigned int ix=0;ix<5;++ix)
-              _nOmegaPi[ix]->fill(ecms);
+              _nOmegaPi[ix]->fill(_ecms);
           }
 	}
       }
@@ -184,7 +184,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     BinnedHistoPtr<string> _nOmegaPi[5],_n2Pi,_n3Pi[2],_n4PiC[2],_n4PiN[2],_nEtaPiPi,_nKC,_nKN,_n5Pi;
-    string ecms;
+    string _ecms;
     /// @}
 
 

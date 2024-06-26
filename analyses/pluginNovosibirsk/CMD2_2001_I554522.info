@@ -12,8 +12,15 @@ References:
 RunInfo: e+ e- to hadrons below 0.6 and 1.38 GeV
 NeedCrossSection: yes
 Beams: [e+, e-]
+Energies: [0.6900, 0.7200, 0.7500, 0.7600, 0.7640, 0.7700, 0.7740, 0.7780, 0.7800, 0.7810, 0.7820, 0.7830,
+           0.7840, 0.7850, 0.7860, 0.7900, 0.7940, 0.8000, 0.8100, 0.8200, 0.8400, 0.8800, 0.9200, 0.9400,
+           0.9500, 0.9580, 0.9700, 0.9840, 1.0040, 1.0103, 1.0157, 1.01678, 1.01782, 1.01868, 1.01969,
+           1.02058, 1.02151, 1.02274, 1.0278, 1.0337, 1.0396, 1.0497, 1.0600, 1.1000, 1.3540]
+Options:
+ - ENERGY=*
 Description:
-  'Cross section for $e^+e^-\to\eta\gamma$ for energies between 600 MeV and 1380 MeV'
+  'Cross section for $e^+e^-\to\eta\gamma$ for energies between 600 MeV and 1380 MeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords:
 BibKey: Akhmetshin:2001hm
 BibTeX: '@article{Akhmetshin:2001hm,

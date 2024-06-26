@@ -21,8 +21,8 @@ namespace Rivet {
       // projections
       declare(UnstableParticles(),"UFS");
       // histos
-      book(_c_Omega     ,"TMP/Omega"    ,1,0.,1.);
-      book(_c_Omega_Star,"TMP/OmegaStar",1,0.,1.);
+      book(_c_Omega     ,"TMP/Omega"    ,refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_Omega_Star,"TMP/OmegaStar",refData<YODA::BinnedEstimate<string>>(1,1,1));
     }
 
 
@@ -33,16 +33,16 @@ namespace Rivet {
 	double xp = omega.momentum().p3().mod()/sqrt(0.25*sqr(sqrtS())-sqr(omega.mass()));
 	if(xp<0.5) continue;
 	if(omega.abspid()==4332)
-	  _c_Omega->fill(0.5);
+	  _c_Omega->fill("10.58"s);
 	else
-	  _c_Omega_Star->fill(0.5);
+	  _c_Omega_Star->fill("10.58"s);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate1DPtr ratio;
+      BinnedEstimatePtr<string> ratio;
       book(ratio,1,1,1);
       divide(_c_Omega_Star,_c_Omega,ratio);
     }
@@ -52,7 +52,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _c_Omega,_c_Omega_Star;
+    BinnedHistoPtr<string> _c_Omega,_c_Omega_Star;
     /// @}
 
 

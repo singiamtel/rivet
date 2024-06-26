@@ -1,0 +1,42 @@
+Name: BESIII_2023_I2645388
+Year: 2023
+Summary: Cross section for $e^+e^-\to D^{*0}D^{*-}\pi^+$+c.c. for $\sqrt{s}=4.189\to4.951$ GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2645388
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2301.07321 [hep-ex]
+RunInfo: e+ e- > hadrons
+Beams: [e+, e-]
+Energies: [4.189, 4.199, 4.2, 4.203, 4.207, 4.209, 4.212, 4.217, 4.219, 4.222, 4.226, 4.227, 4.232, 4.236,
+           4.237, 4.24, 4.242, 4.244, 4.245, 4.247, 4.252, 4.257, 4.258, 4.262, 4.267, 4.272, 4.277, 4.278,
+           4.282, 4.287, 4.297, 4.307, 4.308, 4.311, 4.317, 4.327, 4.337, 4.347, 4.357, 4.358, 4.367, 4.377,
+           4.387, 4.392, 4.395, 4.397, 4.407, 4.416, 4.417, 4.422, 4.427, 4.436, 4.437, 4.447, 4.457, 4.467,
+           4.477, 4.497, 4.517, 4.527, 4.537, 4.547, 4.557, 4.567, 4.575, 4.577, 4.587, 4.6, 4.613, 4.628,
+           4.641, 4.661, 4.682, 4.699, 4.74, 4.75, 4.781, 4.843, 4.918, 4.951]
+Options:
+ - ENERGY=*
+Description:
+  'Cross section for $e^+e^-\to D^{*0}D^{*-}\pi^+$+c.c. for $\sqrt{s}=4.189\to4.951$ GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023unv
+BibTeX: '@article{BESIII:2023unv,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Observation of Three Charmonium-like States with $J^{PC}=1^{--}$ in $e^{+}e^{-}\to D^{*0}D^{*-}\pi^{+}+c.c.$ Process}",
+    eprint = "2301.07321",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "1",
+    year = "2023"
+}
+'

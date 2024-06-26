@@ -134,11 +134,11 @@ namespace Rivet {
         // rho
         normalize(_h_ctheta_rho->bin(ix));
         pair<double,double> rho00 = calcRho(_h_ctheta_rho->bin(ix));
-        h_rho->bin(ix+1).set(rho00.first, rho00.second);
+        h_rho->bin(ix).set(rho00.first, rho00.second);
         // omega
         normalize(_h_ctheta_omega->bin(ix));
         rho00 = calcRho(_h_ctheta_omega->bin(ix));
-        h_omega->bin(ix+1).set(rho00.first, rho00.second);
+        h_omega->bin(ix).set(rho00.first, rho00.second);
       }
       // omega over whole range
       Estimate1DPtr h_omega_all;

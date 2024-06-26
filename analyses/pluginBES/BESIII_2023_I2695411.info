@@ -1,0 +1,37 @@
+Name: BESIII_2023_I2695411
+Year: 2023
+Summary: Cross section for $e^+e^-\to\Xi^-\bar{\Xi}^+$ for $\sqrt{s}=3.510\to4.843\,$GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2695411
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2309.04215 [hep-ex]
+RunInfo: e+ e- -> hadrons
+Beams: [e+, e-]
+Energies : [3.51, 3.65, 3.773, 3.808, 3.867, 3.871, 3.896, 4.128, 4.157, 4.288, 4.312, 4.337, 4.377, 4.396, 4.436, 4.612, 4.628, 4.641, 4.661, 4.682, 4.699, 4.781, 4.843]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to\Xi^-\bar{\Xi}^+$ for $\sqrt{s}=3.510\to4.843\,$GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023rse
+BibTeX: '@article{BESIII:2023rse,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurement of the cross section of $e^+e^-\rightarrow\Xi^{-}\bar\Xi^{+}$ at center-of-mass energies between 3.510 and 4.843 GeV}",
+    eprint = "2309.04215",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "9",
+    year = "2023"
+}
+'

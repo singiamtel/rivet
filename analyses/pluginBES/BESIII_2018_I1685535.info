@@ -11,8 +11,21 @@ References:
  - Phys.Rev.Lett. 122 (2019) no.10, 102002
 RunInfo: e+e- to hadrons
 Beams: [e+, e-]
+Energies: [4.0474, 4.0524, 4.0574, 4.0624, 4.0674, 4.0774, 4.0855, 4.0874,
+           4.0974, 4.1074, 4.1174, 4.1274, 4.1374, 4.1424, 4.1474, 4.1574,
+           4.1674, 4.1774, 4.1874, 4.1886, 4.1924, 4.1974, 4.2004, 4.2034,
+           4.2074, 4.2077, 4.2124, 4.2171, 4.2174, 4.2224, 4.2263, 4.2274,
+           4.2324, 4.2374, 4.2404, 4.2417, 4.2424, 4.2454, 4.2474, 4.2524,
+           4.2574, 4.2580, 4.2624, 4.2674, 4.2724, 4.2774, 4.2824, 4.2874,
+           4.2974, 4.3074, 4.3079, 4.3174, 4.3274, 4.3374, 4.3474, 4.3574,
+           4.3583, 4.3674, 4.3774, 4.3874, 4.3924, 4.3974, 4.4074, 4.4156,
+           4.4174, 4.4224, 4.4274, 4.4374, 4.4474, 4.4574, 4.4671, 4.4774,
+           4.4974, 4.5174, 4.5271, 4.5374, 4.5474, 4.5574, 4.5674, 4.5745, 4.5774, 4.5874, 4.5995]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section  for $e^+e^-\to\pi^+D^0D^{*-}$ +c.c. cross section between 4.05 and 4.60 GeV by thew BEWS collaboration.'
+  'Measurement of the cross section  for $e^+e^-\to\pi^+D^0D^{*-}$ +c.c. cross section between 4.05 and 4.60 GeV by thew BEWS collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   ''
 #ReleaseTests:

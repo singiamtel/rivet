@@ -6,6 +6,7 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -14,9 +15,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2012_I1126136()
-      : Analysis("ATLAS_2012_I1126136")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1126136);
 
 
     /// @name Analysis methods
@@ -124,7 +123,7 @@ namespace Rivet {
       for(const Jet& jet : recon_jets) {
         /// @todo Should be abseta?
         if (!jet.bTagged() && jet.eta()>2.5) continue;
-        double prob = rand()/static_cast<double>(RAND_MAX);
+        double prob = rand01();
         if (prob <= 0.60) tight_bjets.push_back(jet);
         if (prob <= 0.75) loose_bjets.push_back(jet);
       }

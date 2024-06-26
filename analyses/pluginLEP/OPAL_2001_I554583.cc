@@ -30,7 +30,7 @@ namespace Rivet {
       book(_h_mu, edges);
       book(_h_pi, edges);
       book(_h_rho, edges);
-      for (size_t ix=0; _h_e->numBins(); ++ix) {
+      for (size_t ix=0; ix<_h_e->numBins(); ++ix) {
         const string suff = std::to_string(ix);
         book(_h_e->bin(ix+1), "_h_e_"+suff, 20, -1.0, 1.0);
         book(_h_mu->bin(ix+1), "_h_mu_"+suff, 20, -1.0, 1.0);
@@ -151,7 +151,7 @@ namespace Rivet {
     void finalize() {
       Estimate1DPtr _h_P;
       book(_h_P,2,1,1);
-      Estimate1DPtr _t_P;
+      BinnedEstimatePtr<string> _t_P;
       book(_t_P,1,1,5);
       for (size_t ix=0; ix < _h_e->numBins()+1; ++ix) {
         Histo1DPtr& he = ix<10 ? _h_e->bin(ix+1) : _t_e;
@@ -172,10 +172,15 @@ namespace Rivet {
         Histo1DPtr& hrho = ix<10 ? _h_rho->bin(ix+1) : _t_rho;
       	normalize(hrho);
       	pair<double,double> P_rho = calcP(hrho,0);
+	P_rho.first  /=0.46;
+	P_rho.second /=0.46;
       	s1 += P_rho.first/sqr(P_rho.second);
       	s2 += 1./sqr(P_rho.second);
        	// average
-        _h_P->bin(ix+1).set(s1/s2, sqrt(1./s2));
+        if(ix<10)
+          _h_P->bin(ix+1).set(s1/s2, sqrt(1./s2));
+        else
+	  _t_P->bin(1).set(s1/s2,sqrt(1./s2));
       }
     }
 

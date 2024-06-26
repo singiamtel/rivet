@@ -16,13 +16,10 @@ RunInfo:
 NumEvents: 1000000
 SpiresID: 7266081
 InspireID: 756323
-Beams: [e+, e-]
-Energies: [[3.5, 8.0]]
-PtCuts: [0]
 Description: Measurement of tau decays to three charged hadrons using
  a data sample corresponding to an integrated luminosity of 342 fb$^{-1}$ collected
  with the BABAR detector at the SLAC PEP-II electron-positron storage ring operating
- at a center-of-mass energy near 10.58 GeV.
+ at a center-of-mass energy near 10.58 GeV. Can be run with any process producing tau leptons.'
 BibKey: Aubert:2007mh
 BibTeX: '@Article{Aubert:2007mh,
      author    = "Aubert, Bernard and others",

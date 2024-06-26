@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> pi+pi- and 3pi0 or 2pi0eta
   class BABAR_2018_I1700745 : public Analysis {
   public:
 
@@ -24,11 +24,22 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_num5Pi       , "TMP/5Pi");
-      book(_num2PiEta    , "TMP/2PiEta");
-      book(_numOmegaPiPi , "TMP/OmegaPiPi");
-      book(_num4PiEta    , "TMP/4PiEta");
-      book(_numOmegaPiEta, "TMP/OmegaPiEta");
+
+      for(unsigned int ix=0;ix<5;++ix)
+        book(_sigma[ix], 1+ix, 1, 1);
+      for (const string& en : _sigma[0].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) {
+        if(isCompatibleWithSqrtS(1.075))
+          _ecms = "1.075";
+        else
+          MSG_ERROR("Beam energy incompatible with analysis.");
+      }
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -52,7 +63,7 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==5 && nCount[211]==1 && nCount[-211]==1 && nCount[111]==3)
-	_num5Pi->fill();
+	_sigma[0]->fill(_ecms);
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
      	if(p.children().empty()) continue;
@@ -79,7 +90,7 @@ namespace Rivet {
 		}
 	      }
 	      if(matched)
-		_num2PiEta->fill();
+		_sigma[1]->fill(_ecms);
 	    }
 	    // 4 pi eta
 	    else if(ncount==4) {
@@ -103,7 +114,7 @@ namespace Rivet {
 		}
 	      }
 	      if(matched)
-		_num4PiEta->fill();
+		_sigma[3]->fill(_ecms);
 	    }
 	    // pi0 omega eta
 	    for (const Particle& p2 : ufs.particles()) {
@@ -126,7 +137,7 @@ namespace Rivet {
 		}
 	      }
 	      if(matched) {
-		_numOmegaPiEta->fill();
+		_sigma[4]->fill(_ecms);
 		break;
 	      }
 	    }
@@ -147,7 +158,7 @@ namespace Rivet {
 	      }
 	    }
 	    if(matched)
-	      _numOmegaPiPi->fill();
+	      _sigma[2]->fill(_ecms);
 	  }
 	}
       }
@@ -155,46 +166,17 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<6;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _num5Pi->val();
-          error = _num5Pi->err();
-        }
-        else if(ix==2) {
-          sigma = _num2PiEta->val();
-          error = _num2PiEta->err();
-        }
-        else if(ix==3) {
-          sigma = _numOmegaPiPi->val();
-          error = _numOmegaPiPi->err();
-        }
-        else if(ix==4) {
-          sigma = _num4PiEta->val();
-          error = _num4PiEta->err();
-        }
-        else if(ix==5) {
-          sigma = _numOmegaPiEta->val();
-          error = _numOmegaPiEta->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for (unsigned int ix=0;ix<5;++ix)
+        scale(_sigma[ix],fact);
     }
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _num5Pi,_num2PiEta,_numOmegaPiPi,
-      _num4PiEta,_numOmegaPiEta;
+    BinnedHistoPtr<string> _sigma[5];
+    string _ecms;
     /// @}
 
   };

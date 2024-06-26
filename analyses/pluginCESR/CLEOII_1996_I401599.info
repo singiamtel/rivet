@@ -1,0 +1,33 @@
+Name: CLEOII_1996_I401599
+Year: 1996
+Summary: Momentum spectrum of $D_s^+$ mesons in $B$ decays
+Experiment: CLEOII
+Collider: CESR
+InspireID: 401599
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 53 (1996) 4734-4746
+RunInfo: Any process producing Upslion(4S), originaly e+e-
+Description:
+  'Momentum spectrum of $D_s^+$ mesons in $B$ meson decays, where the $B$ mesons are produced at the $\Upsilon(4S)$'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1995psi
+BibTeX: '@article{CLEO:1995psi,
+    author = "Gibaut, D. and others",
+    collaboration = "CLEO",
+    title = "{Measurements of B ---\ensuremath{>} D(s)+ X decays}",
+    reportNumber = "CLNS-95-1354, CLEO-95-16",
+    doi = "10.1103/PhysRevD.53.4734",
+    journal = "Phys. Rev. D",
+    volume = "53",
+    pages = "4734--4746",
+    year = "1996"
+}
+'

@@ -138,7 +138,7 @@ namespace Rivet {
              case 4112:
                 _histMeanMultiSigma_c_PlusPlus_0->fill(_histMeanMultiSigma_c_PlusPlus_0->bin(1).xMid());
                 break;
-             case 3124:
+             case 102134:
                 _histMeanMultiLambda1520->fill(_histMeanMultiLambda1520->bin(1).xMid());
                 break;
           }
@@ -393,7 +393,7 @@ namespace Rivet {
              case 5122:
                 _histMeanMultiLambda_b_0->fill(_histMeanMultiLambda_b_0->bin(1).xMid());
                 break;
-             case 3124:
+             case 102134:
                 _histMeanMultiLambda1520->fill(_histMeanMultiLambda1520->bin(1).xMid());
                 break;
           }

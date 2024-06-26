@@ -11,9 +11,14 @@ References:
  - arXiv 2005.05850
 RunInfo: e+e- to hadrons
 Beams: [e+, e-]
+Energies: [4.467, 4.527, 4.550, 4.560, 4.570, 4.575, 4.580, 4.590, 4.600]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to D_s^{(*)+}D_{s1}(2460)^-+\text{c.c.}$ by the BESIII experiment for
-   centre-of-mass energies between 4.467 and 4.6 GeV.'
+  'Measurement of the cross section for $e^+e^-\to D_s^{(*)+}D_{s1}(2460)^-+\text{c.c.}$
+   by the BESIII experiment for
+   centre-of-mass energies between 4.467 and 4.6 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

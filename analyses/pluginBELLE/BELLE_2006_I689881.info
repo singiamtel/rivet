@@ -1,0 +1,37 @@
+Name: BELLE_2006_I689881
+Year: 2006
+Summary: Measurement of the kaon helicity angle in $B^0\to \chi_{c1} K^{*0}$ 
+Experiment: BELLE
+Collider: KEKB
+InspireID: 689881
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 634 (2006) 155-164
+RunInfo: Any process producing B mesons, orginally Upsilon(4S) decay
+Description:
+  'Measurement of the $K^*$ helicity angle in the charmonium decay for
+  $B^0\to \chi_{c1} K^{*0}$. The data were read from Figure 5 in the paper which
+  is corrected for efficiency/acceptance.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2005eoz
+BibTeX: '@article{Belle:2005eoz,
+    author = "Soni, N. and others",
+    collaboration = "Belle",
+    title = "{Measurement of branching fractions for B ---\ensuremath{>} chi(c1(2)) K (K*) at BELLE}",
+    eprint = "hep-ex/0508032",
+    archivePrefix = "arXiv",
+    reportNumber = "KEK-PREPRINT-2005-50, BELLE-PREPRINT-2005-27",
+    doi = "10.1016/j.physletb.2006.01.013",
+    journal = "Phys. Lett. B",
+    volume = "634",
+    pages = "155--164",
+    year = "2006"
+}
+'

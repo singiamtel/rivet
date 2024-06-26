@@ -25,17 +25,20 @@ namespace Rivet {
       declare(ChargedFinalState(), "FS");
       declare(UnstableParticles(), "UFS");
       // book hists
-      const vector<double> edges = {-0.94 -0.83, -0.72, -0.55,-0.35,-0.12, 0.12, 0.35, 0.55, 0.72, 0.83, 0.94};
+      const vector<double> edges = {-0.94, -0.83, -0.72, -0.55,-0.35,-0.12, 0.12, 0.35, 0.55, 0.72, 0.83, 0.94};
       book(_h_e, edges);  _h_e->maskBins({2, 10});
       book(_h_mu, edges);  _h_mu->maskBins({2, 10});
       book(_h_pi, edges);  _h_pi->maskBins({2, 10});
       book(_h_rho, edges);  _h_rho->maskBins({2, 10});
+      unsigned int iy=1;
       for (size_t ix=0; ix < _h_e->numBins(); ++ix) {
         const string suff = std::to_string(ix);
-        book(_h_e->bins()[ix], "_h_e_"+suff, 20, -1.0, 1.0);
-        book(_h_mu->bins()[ix], "_h_mu_"+suff, 20, -1.0, 1.0);
-        book(_h_pi->bins()[ix], "_h_pi_"+suff, 20, -1.0, 1.0);
-        book(_h_rho->bins()[ix], "_h_rho_"+suff, 20, -1.0, 1.0);
+        if (iy==2 || iy==10) ++iy;
+        book(_h_e->bin(iy), "_h_e_"+suff, 20, -1.0, 1.0);
+        book(_h_mu->bin(iy), "_h_mu_"+suff, 20, -1.0, 1.0);
+        book(_h_pi->bin(iy), "_h_pi_"+suff, 20, -1.0, 1.0);
+        book(_h_rho->bin(iy), "_h_rho_"+suff, 20, -1.0, 1.0);
+        iy+=1;
       }
     }
 
@@ -143,27 +146,30 @@ namespace Rivet {
     void finalize() {
       Estimate1DPtr _h_P;
       book(_h_P, 1, 1, 1);
+      unsigned int iy=1;
       for (size_t ix=0; ix < _h_e->numBins(); ++ix) {
-        normalize(_h_e->bins()[ix]);
-        pair<double,double> P_e  = calcP(_h_e->bins()[ix], 1);
+        if (iy==2 || iy==10) ++iy;
+        normalize(_h_e->bin(iy));
+        pair<double,double> P_e  = calcP(_h_e->bin(iy), 1);
         double s1 = P_e.first/sqr(P_e.second);
         double s2 = 1./sqr(P_e.second);
-        normalize(_h_mu->bins()[ix]);
-        pair<double,double> P_mu = calcP(_h_mu->bins()[ix], 1);
+        normalize(_h_mu->bin(iy));
+        pair<double,double> P_mu = calcP(_h_mu->bin(iy), 1);
         s1 += P_mu.first/sqr(P_mu.second);
         s2 += 1./sqr(P_mu.second);
-        normalize(_h_pi->bins()[ix]);
-        pair<double,double> P_pi = calcP(_h_pi->bins()[ix], 0);
+        normalize(_h_pi->bin(iy));
+        pair<double,double> P_pi = calcP(_h_pi->bin(iy), 0);
         s1 += P_pi.first/sqr(P_pi.second);
         s2 += 1./sqr(P_pi.second);
-        normalize(_h_rho->bins()[ix]);
-        pair<double,double> P_rho = calcP(_h_rho->bins()[ix], 0);
-        s1 += P_rho.first/sqr(P_rho.second);
-        s2 += 1./sqr(P_rho.second);
+        normalize(_h_rho->bin(iy));
+        pair<double,double> P_rho = calcP(_h_rho->bin(iy), 0);
         P_rho.first  /=0.46;
         P_rho.second /=0.46;
+        s1 += P_rho.first/sqr(P_rho.second);
+        s2 += 1./sqr(P_rho.second);
         // average
-        _h_P->bin(ix+1).set(s1/s2, sqrt(1./s2));
+        _h_P->bin(iy).set(s1/s2, sqrt(1./s2));
+        ++iy;
       }
     }
 

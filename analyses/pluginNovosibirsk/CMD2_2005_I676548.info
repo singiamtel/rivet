@@ -1,0 +1,35 @@
+Name: CMD2_2005_I676548
+Year: 2005
+Summary: Form-factor for $\omega\to\pi^0e^+e^-$
+Experiment: CMD2
+Collider: VEPP-2M
+InspireID: 676548
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 613 (2005) 29-38
+RunInfo: Any process producing omega mesons with both the dalitz decay and radiative decay for normalization, originally e+e-
+Description:
+  'Measurement of the form factor $\left|F_{\omega\pi^0}(q^2)\right|$ for the decay $\omega\to\pi^0e^+e^-$.'
+ValidationInfo:
+  'Heriwg7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CMD-2:2005dew
+BibTeX: '@article{CMD-2:2005dew,
+    author = "Akhmetshin, R. R. and others",
+    collaboration = "CMD-2",
+    title = "{Study of the rho and omega meson decays into pseudoscalar meson and e+ e- pair with the CMD-2 detector}",
+    eprint = "hep-ex/0502024",
+    archivePrefix = "arXiv",
+    reportNumber = "BUDKER-INP-2004-72",
+    doi = "10.1016/j.physletb.2005.03.019",
+    journal = "Phys. Lett. B",
+    volume = "613",
+    pages = "29--38",
+    year = "2005"
+}
+'

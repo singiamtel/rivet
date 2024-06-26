@@ -22,8 +22,21 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
+      book(_c_hadrons1, "/TMP/sigma_hadrons1", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_muons1,   "/TMP/sigma_muons1"  , refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_hadrons2, "/TMP/sigma_hadrons2", refData(2,1,1));
+      book(_c_muons2,   "/TMP/sigma_muons2"  , refData(2,1,1));
+      for (const string& en : _c_hadrons1.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty() &&
+         !inRange(sqrtS()/GeV,39.8, 43.1) &&
+         !inRange(sqrtS()/GeV,43.2, 45.2))
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -40,45 +53,33 @@ namespace Rivet {
       }
       // mu+mu- + photons
       if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	_c_muons->fill();
+	 ntotal==2+nCount[22]) {
+	_c_muons1->fill(_ecms);
+	_c_muons2->fill(sqrtS()/GeV);
+      }
       // everything else
-      else
-	_c_hadrons->fill();
-
+      else {
+	_c_hadrons1->fill(_ecms);
+	_c_hadrons2->fill(sqrtS()/GeV);
+      }
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/ sumOfWeights() /picobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      for (unsigned int ix=1;ix<3;++ix) {
-        std::ostringstream title;
-        title << "d0" << ix;
-        Estimate1DPtr hadrons;
-        book(hadrons, title.str()+"_sigma_hadrons");
-        Estimate1DPtr muons;
-        book(muons, title.str()+"_sigma_muons"  );
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(R.val(), R.errPos());
-            hadrons->bin(b.index()).set(sig_h, err_h);
-            muons  ->bin(b.index()).set(sig_m, err_m);
-          }
-        }
-      }
+      BinnedEstimatePtr<string> mult1;
+      book(mult1, 1, 1, 1);
+      divide(_c_hadrons1,_c_muons1,mult1);
+      Estimate1DPtr mult2;
+      book(mult2, 2, 1, 1);
+      divide(_c_hadrons2,_c_muons2,mult2);
     }
     /// @}
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    BinnedHistoPtr<string> _c_hadrons1, _c_muons1;
+    Histo1DPtr _c_hadrons2, _c_muons2;
+    string _ecms;
     /// @}
 
   };

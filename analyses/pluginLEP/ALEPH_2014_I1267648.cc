@@ -23,15 +23,13 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_h_pip0 , 1, 1, 1);
-      book(_h_pi2p0, 2, 1, 1);
-      book(_h_pi3p0, 3, 1, 1);
-      book(_h_3pi  , 4, 1, 1);
-      book(_h_3pip0, 5, 1, 1);
+      for(unsigned int ix=0;ix<5;++ix)
+        book(_h[ix], "TMP/h_"+toString(ix+1),refData(1+ix,1,1));
+      book(_c,"TMP/ntau");
     }
 
 
-    void findDecayProducts(const Particle &mother, unsigned int &nstable, unsigned int &npip,
+    void findDecayProducts(const Particle &mother, const int isign, unsigned int &nstable, unsigned int &npip,
                            unsigned int &npim, unsigned int &npi0, FourMomentum &ptot) {
       for (const Particle &p : mother.children()) {
         int id = p.pid();
@@ -39,12 +37,12 @@ namespace Rivet {
           ++nstable;
           ptot += p.momentum();
         }
-        else if (id == PID::PIPLUS) {
+        else if (id*isign == PID::PIPLUS) {
           ++npip;
           ++nstable;
           ptot += p.momentum();
         }
-        else if (id == PID::PIMINUS) {
+        else if (id*isign == PID::PIMINUS) {
           ++npim;
           ++nstable;
           ptot += p.momentum();
@@ -55,7 +53,7 @@ namespace Rivet {
           ptot += p.momentum();
         }
         else if (id == PID::PHOTON)  continue;
-        else if (!p.children().empty())  findDecayProducts(p, nstable, npip, npim, npi0, ptot);
+        else if (!p.children().empty())  findDecayProducts(p, isign, nstable, npip, npim, npi0, ptot);
         else  ++nstable;
       }
     }
@@ -66,32 +64,32 @@ namespace Rivet {
 
       // Loop over taus
       for (const Particle& tau : apply<UnstableParticles>(event, "UFS").particles(Cuts::abspid==PID::TAU)) {
+        _c->fill();
         FourMomentum ptot;
         unsigned int nstable(0), npip(0), npim(0), npi0(0);
-        findDecayProducts(tau,nstable,npip,npim,npi0,ptot);
+        findDecayProducts(tau,tau.pid()/tau.abspid(),nstable,npip,npim,npi0,ptot);
         // tau -> pi pi0 nu_tau (both charges)
-        if (npim==1 && npi0==1 && nstable==3)  _h_pip0->fill(ptot.mass2());
+        if (npim==1 && npi0==1 && nstable==3)  _h[0]->fill(ptot.mass2());
         // tau -> pi pi0 pi0 nu_tau (both charges)
-        else if (npim==1 && npi0==2 && nstable==4)  _h_pi2p0->fill(ptot.mass2());
+        else if (npim==1 && npi0==2 && nstable==4)  _h[1]->fill(ptot.mass2());
         //    tau -> pi pi0 pi0 pi0         (3,1,1)
-        else if (npim==1 && npi0==3 && nstable==5)  _h_pi3p0->fill(ptot.mass2());
+        else if (npim==1 && npi0==3 && nstable==5)  _h[2]->fill(ptot.mass2());
         //    tau -> 3 charged pions        (4,1,1)
-        else if (npim==2 && npip==1 && nstable==4)  _h_3pi->fill(ptot.mass2());
+        else if (npim==2 && npip==1 && nstable==4)  _h[3]->fill(ptot.mass2());
         //    tau -> 3 charged pions + pi0  (5,1,1)
-        else if (npim==2 && npip==1 && npi0==1 && nstable==5)  _h_3pip0->fill(ptot.mass2());
+        else if (npim==2 && npip==1 && npi0==1 && nstable==5)  _h[4]->fill(ptot.mass2());
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      normalize(_h_pip0);  // normalize to unity
-      normalize(_h_pi2p0); // normalize to unity
-      normalize(_h_pi3p0); // normalize to unity
-      normalize(_h_3pi);   // normalize to unity
-      normalize(_h_3pip0); // normalize to unity
-
+      for(unsigned int ix=0;ix<5;++ix) {
+        scale(_h[ix] ,100./ *_c);
+        Estimate1DPtr tmp;
+        book(tmp,1+ix,1,1);
+        barchart(_h[ix],tmp);
+      }
     }
 
     /// @}
@@ -102,13 +100,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_pip0;
-    Histo1DPtr _h_pi2p0;
-    Histo1DPtr _h_pi3p0;
-    Histo1DPtr _h_3pi;
-    Histo1DPtr _h_3pip0;
+    Histo1DPtr _h[5];
+    CounterPtr _c;
     /// @}
-
   };
 
 

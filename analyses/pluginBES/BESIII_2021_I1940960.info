@@ -12,9 +12,12 @@ References:
  -  arXiv:2110.04510
 RunInfo: e+e- to hadrons
 Beams: [e+, e-]
-Energies: [2.396]
+Energies: [2.3864, 2.3960, 2.5000, 2.6444, 2.6464, 2.9000, 2.9884]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to\Sigma^0\bar{\Sigma}^0$   between 2.3864 and 3.02 GeV by the BESIII collaboration.'
+  'Measurement of the cross section for $e^+e^-\to\Sigma^0\bar{\Sigma}^0$   between 2.3864 and 3.02 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig7 events'
 #ReleaseTests:

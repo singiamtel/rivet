@@ -1,0 +1,32 @@
+Name: BESIII_2023_I2702517
+Year: 2023
+Summary: $\psi(2S)\to \Lambda \bar{\Lambda}\eta^\prime$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2702517
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2309.13790 [hep-ex]
+RunInfo: Any process producing psi(2S) originally e+e-
+Description:
+  'Measurement of the mass distributions in the decay $\psi(2S)\to \Lambda \bar{\Lambda}\eta^\prime$. The data were read from the plots in the paper. It is also not clear that any resolution effects have been unfolded.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Ablikim:2023pjg
+BibTeX: '@article{Ablikim:2023pjg,
+    author = "Ablikim, M.",
+    collaboration = "BESIII",
+    title = "{Observation of $\psi(3686) \rightarrow \Lambda \bar{\Lambda} \eta^{\prime}$ decay}",
+    eprint = "2309.13790",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "9",
+    year = "2023"
+}
+'

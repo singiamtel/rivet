@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief R measurement
   class TASSO_1982_I176887 : public Analysis {
   public:
 
@@ -22,8 +22,30 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_c_hadrons[ix], "/TMP/sigma_hadrons_"+toString(2*ix), refData<YODA::BinnedEstimate<string>>(1+2*ix,1,1));
+        book(_c_muons[ix],   "/TMP/sigma_muons_"  +toString(2*ix), refData<YODA::BinnedEstimate<string>>(1+2*ix,1,1));
+        for (const string& en : _c_hadrons[ix].binning().edges<0>()) {
+          const size_t idx = en.find("-");
+          if(idx!=std::string::npos) {
+            const double emin = std::stod(en.substr(0,idx));
+            const double emax = std::stod(en.substr(idx+1,string::npos));
+            if(inRange(sqrtS()/GeV, emin, emax)) {
+              _ecms[ix] = en;
+              break;
+            }
+          }
+          else {
+            const double end = std::stod(en)*GeV;
+            if (isCompatibleWithSqrtS(end)) {
+              _ecms[ix] = en;
+              break;
+            }
+          }
+        }
+      }
+      book(_c_hadronsI, "/TMP/sigma_hadrons_1", refData<YODA::BinnedEstimate<int>>(2,1,1));
+      book(_c_muonsI,   "/TMP/sigma_muons_1"  , refData<YODA::BinnedEstimate<int>>(2,1,1));
     }
 
 
@@ -39,46 +61,37 @@ namespace Rivet {
       }
       // mu+mu- + photons
       if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	_c_muons->fill();
+	 ntotal==2+nCount[22]) {
+	for(unsigned int ix=0;ix<2;++ix) _c_muons[ix]->fill(_ecms[ix]);
+        _c_muonsI->fill(round(sqrtS()/GeV));
+      }
       // everything else
-      else
-	_c_hadrons->fill();
+      else {
+	for(unsigned int ix=0;ix<2;++ix) _c_hadrons[ix]->fill(_ecms[ix]);
+        _c_hadronsI->fill(round(sqrtS()/GeV));
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/ sumOfWeights() /picobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      for (unsigned int ix=1;ix<4;++ix) {
-        std::ostringstream title;
-        title << "d0" << ix << "_sigma";
-        Estimate1DPtr hadrons;
-        book(hadrons, title.str() + "_hadrons");
-        Estimate1DPtr muons;
-        book(muons, title.str() + "_muons"  );
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(R.val(), R.errPos());
-            hadrons->bin(b.index()).set(sig_h, err_h);
-            muons  ->bin(b.index()).set(sig_m, err_m);
-          }
-        }
+      for(unsigned int ix=0;ix<2;++ix) {
+        BinnedEstimatePtr<string> mult;
+        book(mult, 1+2*ix, 1, 1);
+        divide(_c_hadrons[ix],_c_muons[ix],mult);
       }
+      BinnedEstimatePtr<int> multI;
+      book(multI, 2, 1, 1);
+      divide(_c_hadronsI,_c_muonsI,multI);
     }
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    BinnedHistoPtr<string> _c_hadrons[2], _c_muons[2];
+    string _ecms[2];
+    BinnedHistoPtr<int> _c_hadronsI, _c_muonsI;
     /// @}
 
 

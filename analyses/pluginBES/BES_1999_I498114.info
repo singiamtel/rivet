@@ -1,0 +1,32 @@
+Name: BES_1999_I498114
+Year: 1999
+Summary: Hadronic Mass in $J/\psi\to\gamma \eta\pi^+\pi^-$
+Experiment: BES
+Collider: BEPC
+InspireID: 498114
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 446 (1999) 356-362
+RunInfo: Any process producing J/psi, originally e+e-
+Description:
+  'Measurement of the hadronic mass in $J/\psi\to\gamma \eta\pi^+\pi^-$. The data were read from figure 2 in the paper and the background given subtracted.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:1999axp
+BibTeX: '@article{BES:1999axp,
+    author = "Bai, J. Z. and others",
+    collaboration = "BES",
+    title = "{Partial wave analysis of J / psi --\ensuremath{>} gamma (eta pi+ pi-)}",
+    doi = "10.1016/S0370-2693(98)01445-2",
+    journal = "Phys. Lett. B",
+    volume = "446",
+    pages = "356--362",
+    year = "1999"
+}
+'

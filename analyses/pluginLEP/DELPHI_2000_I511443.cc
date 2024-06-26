@@ -140,24 +140,24 @@ namespace Rivet {
       Estimate1DPtr _h_P;
       book(_h_P,1,1,1);
       for (size_t ix=0; ix < _h_e->numBins(); ++ix) {
-        normalize(_h_e->bin(ix));
-        normalize(_h_mu->bin(ix));
-        normalize(_h_pi->bin(ix));
-        normalize(_h_rho->bin(ix));
-        pair<double,double> P_e  = calcP(_h_e->bin(ix), 1);
+        normalize(_h_e->bin(ix+1));
+        normalize(_h_mu->bin(ix+1));
+        normalize(_h_pi->bin(ix+1));
+        normalize(_h_rho->bin(ix+1));
+        pair<double,double> P_e  = calcP(_h_e->bin(ix+1), 1);
         double s1 = P_e.first/sqr(P_e.second);
         double s2 = 1./sqr(P_e.second);
-        pair<double,double> P_mu = calcP(_h_mu->bin(ix), 1);
+        pair<double,double> P_mu = calcP(_h_mu->bin(ix+1), 1);
         s1 += P_mu.first/sqr(P_mu.second);
         s2 += 1./sqr(P_mu.second);
-        pair<double,double> P_pi = calcP(_h_pi->bin(ix), 0);
+        pair<double,double> P_pi = calcP(_h_pi->bin(ix+1), 0);
         s1 += P_pi.first/sqr(P_pi.second);
         s2 += 1./sqr(P_pi.second);
-        pair<double,double> P_rho = calcP(_h_rho->bin(ix), 0);
-        s1 += P_rho.first/sqr(P_rho.second);
-        s2 += 1./sqr(P_rho.second);
+        pair<double,double> P_rho = calcP(_h_rho->bin(ix+1), 0);
         P_rho.first  /=0.46;
         P_rho.second /=0.46;
+        s1 += P_rho.first/sqr(P_rho.second);
+        s2 += 1./sqr(P_rho.second);
         // average
         _h_P->bin(ix+1).set(s1/s2, sqrt(1./s2));
       }

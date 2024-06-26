@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> pi+pi-pi0
   class SND_1999_I508003 : public Analysis {
   public:
 
@@ -23,7 +23,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
 
-      book(_num3pi, "TMP/num3");
+      book(_num3pi, 1, 1, 1);
 
     }
 
@@ -40,25 +40,14 @@ namespace Rivet {
       }
       if(ntotal!=3) vetoEvent;
       if(nCount[-211]==1&&nCount[211]==1&&nCount[111]==1)
-	_num3pi->fill();
+	_num3pi->fill(round(sqrtS()/MeV));
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      double sigma = _num3pi->val();
-      double error = _num3pi->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_num3pi, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -66,7 +55,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _num3pi;
+    BinnedHistoPtr<int> _num3pi;
     /// @}
 
 

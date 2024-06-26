@@ -59,8 +59,8 @@ namespace Rivet {
 	for(const Particle& p : deut) {
 	  double mom = p.momentum().p3().mod();
 	  _h_p[3]->fill(mom);
-	  _h_r[3]->fill(10.58);
-	  _h_r[4]->fill(10.58);
+	  _h_r[3]->fill("10.58"s);
+	  _h_r[4]->fill("10.58"s);
 	}
       }
       // upsilon decays
@@ -82,7 +82,7 @@ namespace Rivet {
 	    boost = LorentzTransform::mkFrameTransformFromBeta(Y.momentum().betaVec());
 	  for(const Particle& p : deut) {
 	    double mom = boost.transform(p.momentum()).p3().mod();
-	    _h_r[ihist]->fill(10.58);
+	    _h_r[ihist]->fill("10.58"s);
 	    _h_p[ihist]->fill(mom);
 	    _w  [ihist]->fill();
 	  }
@@ -114,7 +114,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_p[4],_h_r[5];
+    Histo1DPtr _h_p[4];
+    BinnedHistoPtr<string> _h_r[5];
     CounterPtr _w[4];
 
     // deuteron id code

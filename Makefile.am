@@ -24,8 +24,8 @@ if ENABLE_PYEXT
 install-data-local:
 	$(MAKE) -C doc dat json
 	$(mkdir_p) $(DESTDIR)$(pkgdatadir)
-	$(install_sh_DATA) doc/analists/analyses.dat $(DESTDIR)$(pkgdatadir)/ || true
-	$(install_sh_DATA) doc/analists/analyses.json $(DESTDIR)$(pkgdatadir)/ || true
+	$(install_sh_DATA) doc/anaindex/analyses.dat $(DESTDIR)$(pkgdatadir)/ || true
+	$(install_sh_DATA) doc/anaindex/analyses.json $(DESTDIR)$(pkgdatadir)/ || true
 
 endif	
 endif

@@ -1,0 +1,32 @@
+Name: BES_1998_I482964
+Year: 1998
+Summary: Mass distributions in  $J/\psi\to\gamma K^+K^-\pi^0$
+Experiment: BES
+Collider: BEPC
+InspireID: 482964
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 440 (1998) 217-224
+RunInfo: Any process producing J/psi, originally e+e-
+Description:
+  'Measurement of mass distributions in  $J/\psi\to\gamma K^+K^-\pi^0$. The data were read from the plots in the paper and are not corrected.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:1998bgh
+BibTeX: '@article{BES:1998bgh,
+    author = "Bai, J. Z. and others",
+    collaboration = "BES",
+    title = "{Partial wave analysis of J / psi --\ensuremath{>} gamma (K+ K- pi0)}",
+    doi = "10.1016/S0370-2693(98)01241-6",
+    journal = "Phys. Lett. B",
+    volume = "440",
+    pages = "217--224",
+    year = "1998"
+}
+'

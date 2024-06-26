@@ -1,0 +1,34 @@
+Name: BABAR_2004_I632736
+Year: 2004
+Summary: Polarization in $B^0\to\rho^+\rho^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 632736
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 69 (2004) 031102
+Description:
+  'Measurement of the polarization in $B^0\to\rho^+\rho^-$.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2003rdc
+BibTeX: '@article{BaBar:2003rdc,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of the decay $B^0 \to \rho^+ \rho^-$ and measurement of the branching fraction and polarization}",
+    eprint = "hep-ex/0311017",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-10217, BABAR-PUB-03-040",
+    doi = "10.1103/PhysRevD.69.031102",
+    journal = "Phys. Rev. D",
+    volume = "69",
+    pages = "031102",
+    year = "2004"
+}
+'

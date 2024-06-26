@@ -1,4 +1,14 @@
 {
+    "1624209": [
+        "L\u00e9vy-stable two-pion Bose-Einstein correlations in $\\sqrt{s_{NN}}=200$ GeV Au$+$Au collisions",
+        "PHENIX",
+        "10.1103/PhysRevC.97.064911",
+        null,
+        "1709.05649",
+        "ins1624209",
+        null,
+        []
+    ],
     "2033856": [
         "Measurement of Direct-Photon Cross Section and Double-Helicity Asymmetry at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>510</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>GeV</mi></math> in <math display=\"inline\"><mover accent=\"true\"><mi>p</mi><mo stretchy=\"false\">\u2192</mo></mover><mo>+</mo></math><math display=\"inline\"><mover accent=\"true\"><mi>p</mi><mo stretchy=\"false\">\u2192</mo></mover></math> Collisions",
         "PHENIX",
@@ -56,6 +66,16 @@
         null,
         "2303.07190",
         "ins2641468",
+        null,
+        []
+    ],
+    "2641474": [
+        "Transverse single-spin asymmetry of charged hadrons at forward and backward rapidity in polarized <math display=\"inline\"><mi>p</mi><mo>+</mo><mi>p</mi></math>, <math display=\"inline\"><mrow><mi>p</mi><mo>+</mo><mi>Al</mi></mrow></math>, and <math display=\"inline\"><mrow><mi>p</mi><mo>+</mo><mi>Au</mi></mrow></math> collisions at <math display=\"inline\"><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>200</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>GeV</mi></math>",
+        "PHENIX",
+        "10.1103/PhysRevD.108.072016",
+        null,
+        "2303.07191",
+        null,
         null,
         []
     ]

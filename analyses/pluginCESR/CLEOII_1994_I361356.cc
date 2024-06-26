@@ -56,11 +56,11 @@ namespace Rivet {
 	  double mom = boost.transform(sig.momentum()).vector3().mod();
 	  if(sig.abspid()==4222) {
 	    _h_Sigma_pp->fill(mom);
-	    _b_Sigma_pp->fill(0.5);
+	    _b_Sigma_pp->fill();
 	  }
 	  else {
 	    _h_Sigma_0->fill(mom);
-	    _b_Sigma_0->fill(0.5);
+	    _b_Sigma_0->fill();
 	  }
 	}
       }
@@ -80,7 +80,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_Sigma_0, _h_Sigma_pp;
-    Histo1DPtr _b_Sigma_0, _b_Sigma_pp;
+    CounterPtr _b_Sigma_0, _b_Sigma_pp;
     CounterPtr _c_ups;
     /// @}
 

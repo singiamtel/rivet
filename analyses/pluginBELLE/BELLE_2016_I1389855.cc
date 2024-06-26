@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > hb pi+pi-
   class BELLE_2016_I1389855 : public Analysis {
   public:
 
@@ -19,19 +19,22 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-
       declare(FinalState(), "FS");
-      declare(UnstableParticles(), "UFS");
+      declare(UnstableParticles(Cuts::pid==10553 ||
+                                Cuts::pid==110553), "UFS");
 
       book(_nhb1, 1, 1, 3);
       book(_nhb2, 1, 1, 4);
 
       // Check which indices match the Ecm energy
-      for (const auto& est : refData<YODA::BinnedEstimate<int>>(1, 1, 1).bins()) {
-        if (inRange(sqrtS()/MeV, est.valMin(), est.valMax())) {
+      YODA::BinnedEstimate<int> tmp = refData<YODA::BinnedEstimate<int>>(1, 1, 1); 
+      for (const auto& est : tmp.bins()) {
+        if (abs(sqrtS()/MeV-est.val())<est.totalErrAvg()) {
           edges.push_back(est.xEdge());
         }
       }
+      if (edges.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle& p, map<long,int>& nRes, int &ncount) {
@@ -59,37 +62,34 @@ namespace Rivet {
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
         if (p.children().empty()) continue;
-        // find the omega
-        if (p.pid()== 10553|| p.pid()==110553) {
-          map<long,int> nRes = nCount;
-          int ncount = ntotal;
-          findChildren(p,nRes,ncount);
-          // omega pi+pi-
-          if(ncount!=2) continue;
-          bool matched = true;
-          for (const auto& val : nRes) {
-            if (abs(val.first)==211) {
-              if (val.second !=1) {
-                matched = false;
-                break;
-              }
-            }
-            else if (val.second!=0) {
+        map<long,int> nRes = nCount;
+        int ncount = ntotal;
+        findChildren(p,nRes,ncount);
+        // omega pi+pi-
+        if(ncount!=2) continue;
+        bool matched = true;
+        for (const auto& val : nRes) {
+          if (abs(val.first)==211) {
+            if (val.second !=1) {
               matched = false;
               break;
             }
           }
-          if (matched) {
-            for (const int Ecm : edges) {
-              if (p.pid() == 10553) {
-                _nhb1->fill(Ecm);
-              }
-              else {
-                _nhb2->fill(Ecm);
-              }
-            }
+          else if (val.second!=0) {
+            matched = false;
             break;
           }
+        }
+        if (matched) {
+          for (const int Ecm : edges) {
+            if (p.pid() == 10553) {
+              _nhb1->fill(Ecm);
+            }
+            else {
+              _nhb2->fill(Ecm);
+            }
+          }
+          break;
         }
       }
     }

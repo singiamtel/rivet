@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > hadrons
   class CRYSTAL_BALL_1986_I238081 : public Analysis {
   public:
 
@@ -24,9 +24,16 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
-      book(_c_D_star, "/TMP/sigma_D_star");
+      book(_c_hadrons, "/TMP/sigma_hadrons",refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_muons,   "/TMP/sigma_muons"  ,refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_D_star,  "/TMP/sigma_D_star" ,refData(2,1,1));
+      
+      for (const string& ecms : _c_hadrons.binning().edges<0>()) {
+        if (isCompatibleWithSqrtS(std::stod(ecms)*GeV)) {
+          _ecms = ecms;
+          break;
+        }
+      }
     }
 
 
@@ -41,13 +48,14 @@ namespace Rivet {
 	++ntotal;
       }
       // mu+mu- + photons
-      if(nCount[-13]==1 and nCount[13]==1 &&
-	 ntotal==2+nCount[22])
-	_c_muons->fill();
-      // everything else
-      else
-	_c_hadrons->fill();
-
+      if(!_ecms.empty()) {
+        if(nCount[-13]==1 and nCount[13]==1 &&
+           ntotal==2+nCount[22])
+          _c_muons->fill(_ecms);
+        // everything else
+        else
+          _c_hadrons->fill(_ecms);
+      }
       const FinalState& ufs = apply<UnstableParticles>(event, "UFS");
       bool found = false;
       for (const Particle & p : ufs.particles()) {
@@ -65,43 +73,21 @@ namespace Rivet {
 	}
       }
       if(found)
-	_c_D_star->fill();
+	_c_D_star->fill(sqrtS());
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       // R
-      Estimate0D R = *_c_hadrons/ *_c_muons;
-      double fact = crossSection()/ sumOfWeights() /picobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      Estimate1DPtr hadrons;
-      book(hadrons, "sigma_hadrons");
-      Estimate1DPtr muons;
-      book(muons, "sigma_muons");
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(R.val(), R.errPos());
-          hadrons->bin(b.index()).set(sig_h, err_h);
-          muons  ->bin(b.index()).set(sig_m, err_m);
-        }
-      }
-      // D*
-      fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sigma = _c_D_star->val()*fact;
-      double error = _c_D_star->err()*fact;
-      Estimate1DPtr mult2;
-      book(mult2, 2, 1, 1);
-      for (auto& b : mult2->bins()) {
-      	if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-      	  b.set(sigma, error);
-      	}
-      }
+      BinnedEstimatePtr<string> tmp;
+      book(tmp,1,1,1);
+      divide(_c_hadrons,_c_muons,tmp);
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      scale(_c_D_star,fact);
+      Estimate1DPtr tmp2;
+      book(tmp2,2,1,1);
+      barchart(_c_D_star,tmp2);
     }
 
     /// @}
@@ -109,7 +95,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons,_c_D_star;
+    BinnedHistoPtr<string> _c_hadrons, _c_muons;
+    Histo1DPtr _c_D_star;
+    string _ecms;
     /// @}
 
 

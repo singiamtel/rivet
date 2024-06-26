@@ -14,7 +14,7 @@ NeedCrossSection: yes
 Beams: [e+,e-]
 Luminosity_fb: 
 Description:
-  'Measurement of the cross section for  $e^+e^-\to$ ^0_SK^\pm\pi^\mp$
+  'Measurement of the cross section for  $e^+e^-\to K^0_SK^\pm\pi^\mp$
     for energies from 1.4 to 2.`x GeV.'
 Keywords:
 BibKey: Mane:1982si

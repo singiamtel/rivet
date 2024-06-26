@@ -12,9 +12,15 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies:  [1.41, 1.43, 1.45, 1.47, 1.482, 1.51, 1.53, 1.55, 1.57, 1.588, 1.61, 1.63, 1.65,
+            1.67, 1.69, 1.708, 1.73, 1.75, 1.77, 1.788, 1.81, 1.83, 1.85, 1.87, 1.89, 1.91,
+            1.932, 1.948, 1.97, 1.986, 2.01, 2.03, 2.047, 2.112, 2.13, 2.147, 2.166]
+Options:
+ - ENERGY=*
 Luminosity_fb: 
 Description:
-  'Measurement of the cross section for $e^+e^-\to\pi^+\pi^+\pi^-\pi^+$ between 1.4 and 2.18 GeV'
+  'Measurement of the cross section for $e^+e^-\to\pi^+\pi^+\pi^-\pi^+$ between 1.4 and 2.18 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords:
 BibKey: Cordier:1981zn
 BibTeX: '@article{Cordier:1981zn,

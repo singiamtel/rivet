@@ -1,0 +1,44 @@
+Name: BESIII_2024_I2755997
+Year: 2024
+Summary: Cross section for $e^+e^-\to D\bar{D}$ for $\sqrt{s}$ between 3.80 and 4.95 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2755997
+Status: VALIDATED NOHEPDATA 
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2402.03829 [hep-ex]
+RunInfo: e+e- to hadrons
+NeedCrossSection: yes
+Beams: [e+, e-]
+Energies :  [3.80765, 3.85, 3.89, 3.895, 3.89624, 3.9, 3.905, 3.91, 3.915, 3.92, 3.925, 3.93, 3.935, 3.94, 3.945, 3.95, 3.955, 3.96, 3.965, 3.97,
+             3.975, 3.98, 3.985, 3.99, 3.995, 4.0, 4.005, 4.00762, 4.01, 4.012, 4.014, 4.016, 4.018, 4.02, 4.025, 4.03, 4.035, 4.04, 4.05, 4.055,
+             4.06, 4.065, 4.07, 4.08, 4.08545, 4.09, 4.1, 4.11, 4.12, 4.12878, 4.13, 4.14, 4.145, 4.15, 4.15783, 4.16, 4.17, 4.18, 4.18859,
+             4.18912, 4.19, 4.195, 4.19915, 4.2, 4.203, 4.206, 4.20773, 4.20939, 4.21, 4.215, 4.21713, 4.21893, 4.22, 4.225, 4.22626, 4.23,
+             4.235, 4.23577, 4.24, 4.24166, 4.243, 4.24397, 4.245, 4.248, 4.25, 4.255, 4.25797, 4.26, 4.265, 4.26681, 4.27, 4.275, 4.27778,
+             4.28, 4.285, 4.28843, 4.29, 4.3, 4.30789, 4.31, 4.31268, 4.32, 4.33, 4.33793, 4.34, 4.35, 4.35826, 4.36, 4.37, 4.37788, 4.38,
+             4.3874, 4.39, 4.395, 4.39683, 4.4, 4.41, 4.41558, 4.42, 4.425, 4.43, 4.4371, 4.44, 4.45, 4.46, 4.46706, 4.48, 4.5, 4.52, 4.52714,
+             4.54, 4.55, 4.56, 4.57, 4.5745, 4.58, 4.59, 4.59953, 4.61186, 4.628, 4.64091, 4.66124, 4.68192, 4.69882, 4.7397, 4.75005, 4.78054, 4.84307, 4.91802, 4.95093]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to D\bar{D}$ for $\sqrt{s}$ between 3.80 and 4.95 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024ths
+BibTeX: '@article{BESIII:2024ths,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Precise Measurement of Born Cross Sections for $e^+e^-\to D\bar{D}$ and Observation of One Structure between $\sqrt{s} = 3.80-4.95$ GeV}",
+    eprint = "2402.03829",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "2",
+    year = "2024"
+}
+'

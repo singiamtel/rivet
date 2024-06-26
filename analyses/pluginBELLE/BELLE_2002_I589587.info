@@ -1,0 +1,35 @@
+Name: BELLE_2002_I589587
+Year: 2002
+Summary: $\pi\pi$ mass and helicity angle for $B^0\to\rho^\pm\pi^\mp$ and $B^+\to\rho^0\pi^+$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 589587
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 542 (2002) 183-192
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays 
+Description:
+  'Measurement of the $\pi\pi$ mass and helicity angle for $B^0\to\rho^\pm\pi^\mp$ and $B^+\to\rho^0\pi^+$. The background subtracted data were read from figures 2 and 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2002ezq
+BibTeX: '@article{Belle:2002ezq,
+    author = "Gordon, A. and others",
+    collaboration = "Belle",
+    title = "{Study of B ---\ensuremath{>} rho pi decays at BELLE}",
+    eprint = "hep-ex/0207007",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2002-18, KEK-PREPRINT-2002-59",
+    doi = "10.1016/S0370-2693(02)02374-2",
+    journal = "Phys. Lett. B",
+    volume = "542",
+    pages = "183--192",
+    year = "2002"
+}
+'

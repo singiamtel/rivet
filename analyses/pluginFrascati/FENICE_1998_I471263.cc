@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e-> n nbar
   class FENICE_1998_I471263 : public Analysis {
   public:
 
@@ -22,7 +22,16 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nNeutron,  "/TMP/nNeutron" );
+      book(_nNeutron, 1,1,1);
+      for (const string& en : _nNeutron.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -37,22 +46,13 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==2 && nCount[2112]==1 && nCount[-2112]==1)
-	_nNeutron->fill();
+	_nNeutron->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sigma = _nNeutron->val()*fact;
-      double error = _nNeutron->err()*fact;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nNeutron, crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -60,7 +60,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nNeutron;
+    BinnedHistoPtr<string> _nNeutron;
+    string _ecms;
     /// @}
 
 

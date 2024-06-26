@@ -13,8 +13,11 @@ RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e-, e+]
 Energies: [4.35830,4.38740,4.41560,4.46710,4.52710,4.57450,4.59950]
+Options:
+- ENERGY=*
 Description:
-  'Cross section for $e^+e^-\to D^+D^-\pi^+\pi^-$ for $E_{\text{CMS}}=4.36\to4.60$ GeV. The cross sections for the subprocesses $e^+e^-\to D_1(2420)^\pm D^\mp$ and $e^+e^-\to \psi(3770) \pi^+\pi^-$ are measured.'
+  'Cross section for $e^+e^-\to D^+D^-\pi^+\pi^-$ for $E_{\text{CMS}}=4.36\to4.60$ GeV. The cross sections for the subprocesses $e^+e^-\to D_1(2420)^\pm D^\mp$ and $e^+e^-\to \psi(3770) \pi^+\pi^-$ are measured.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ablikim:2019okg
 BibTeX: '@article{Ablikim:2019okg,

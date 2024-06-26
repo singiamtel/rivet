@@ -1,0 +1,36 @@
+Name: BABAR_2008_I789278
+Year: 2008
+Summary: Longitudinal polarization in $B^\pm\to\phi K^\pm_1$ and $\phi K^\pm_2$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 789278
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 101 (2008) 161801
+RunInfo: Any process producing B+ mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the longitudinal polarization in $B^\pm\to\phi K^\pm_1$ and $\phi K^\pm_2$. The values were taken from Table I, due to the large backgrounds none of the distributions are implemented.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2008ozy
+BibTeX: '@article{BaBar:2008ozy,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation and Polarization Measurements of $B^\pm \to \phi K_{1}^\pm$ and $B^\pm \to \phi K_{2}^{*\pm}$}",
+    eprint = "0806.4419",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "SLAC-PUB-13267, BABAR-PUB-08-021",
+    doi = "10.1103/PhysRevLett.101.161801",
+    journal = "Phys. Rev. Lett.",
+    volume = "101",
+    pages = "161801",
+    year = "2008"
+}
+'

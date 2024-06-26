@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > K+K-, KS0 KL0 and pi+pi-pi0
   class SND_2001_I533574 : public Analysis {
   public:
 
@@ -22,12 +22,23 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_nKpKm, "TMP/KpKm");
-      book(_nK0K0, "TMP/K0K0");
-      book(_n3pi, "TMP/3pi");
+      for (unsigned int ix=0;ix<2;++ix) {
+        for (unsigned int iy=0;iy<4;++iy)
+          book(_sigma[ix][iy], 1+ix, 1, 1+iy);
+        
+        for (const string& en : _sigma[ix][3].binning().edges<0>()) {
+          double end = std::stod(en)*MeV;
+          if(isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if(_ecms[0].empty() && _ecms[1].empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
-
-
+    
+    
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const FinalState& fs = apply<FinalState>(event, "FS");
@@ -39,47 +50,31 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==2) {
-	if(nCount[321]==1 && nCount[-321]==1)
-	  _nKpKm->fill();
-	else if(nCount[130]==1 && nCount[310]==1)
-	  _nK0K0->fill();
+	if(nCount[321]==1 && nCount[-321]==1) {
+          for(unsigned int ix=0;ix<2;++ix)
+            _sigma[ix][0]->fill(_ecms[ix]);
+        }
+        else if(nCount[130]==1 && nCount[310]==1) {
+          for(unsigned int ix=0;ix<2;++ix) {
+            _sigma[ix][1]->fill(_ecms[ix]);
+            _sigma[ix][2]->fill(_ecms[ix]);
+          }
+        }
       }
-      else if(ntotal==3 && nCount[211] == 1 && nCount[-211] == 1 && nCount[111] == 1)
-	_n3pi->fill();
+      else if(ntotal==3 && nCount[211] == 1 && nCount[-211] == 1 && nCount[111] == 1) {
+        for(unsigned int ix=0;ix<2;++ix)
+          _sigma[ix][3]->fill(_ecms[ix]);
+      }
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int iy=1;iy<3;++iy) {
-        for (unsigned int ix=1;ix<5;++ix) {
-          double sigma = 0., error = 0.;
-          if(ix==1) {
-            sigma = _nKpKm->val();
-            error = _nKpKm->err();
-          }
-          else if(ix==2) {
-            sigma = _nK0K0->val();
-            error = _nK0K0->err();
-          }
-          else if(ix==3) {
-            sigma = _nK0K0->val();
-            error = _nK0K0->err();
-          }
-          else if(ix==4) {
-            sigma = _n3pi->val();
-            error = _n3pi->err();
-          }
-          sigma *= crossSection()/ sumOfWeights() /nanobarn;
-          error *= crossSection()/ sumOfWeights() /nanobarn;
-          Estimate1DPtr mult;
-          book(mult, iy, 1, ix);
-          for (auto& b : mult->bins()) {
-            if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-              b.set(sigma, error);
-            }
-          }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for (unsigned int ix=0;ix<2;++ix) {
+        for (unsigned int iy=0;iy<4;++iy) {
+          scale(_sigma[ix][iy],fact);
         }
       }
     }
@@ -89,7 +84,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nKpKm,_nK0K0,_n3pi;
+    BinnedHistoPtr<string> _sigma[2][4];
+    string _ecms[2];
     /// @}
 
 

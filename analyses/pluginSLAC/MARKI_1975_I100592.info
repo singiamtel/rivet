@@ -12,8 +12,12 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies: [2.4, 2.6, 2.8, 3.0, 3.1, 3.2, 3.3, 3.4, 3.6, 3.8, 4.0, 4.1, 4.2, 4.3, 4.4, 4.6, 4.8, 5.0]
+Options:
+ - ENERGY=*
 Description:
-  'Cross section and harged particle multiplicity for energies between 2.6 and 5 GeV'
+  'Cross section and harged particle multiplicity for energies between 2.6 and 5 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 BibKey: Augustin:1975yq
 BibTeX: '@article{Augustin:1975yq,
       author         = "Augustin, J. E. and others",

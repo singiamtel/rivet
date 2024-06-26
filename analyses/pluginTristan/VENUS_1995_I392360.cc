@@ -27,10 +27,11 @@ namespace Rivet {
       // bin for the angle plots
       int ibin = (sqrtS()-1.0)/0.05 + 2;
       book(_h_cTheta, ibin, 1, 1);
-      book(_cPi, "/TMP/nPi");
+      book(_cPi, 1, 1, 1);
       _cmax = ibin>2 ? 0.6 : 0.4;
-      if (ibin == 2)  _axis = YODA::Axis<double>(6, 0.0, 0.6);
-      else            _axis = YODA::Axis<double>(4, 0.0, 0.4);
+      if (ibin == 2)  _axis = YODA::Axis<double>(4, 0.0, 0.4);
+      else            _axis = YODA::Axis<double>(6, 0.0, 0.6);
+      _ecms = _cPi.binning().edges<0>()[ibin-2];
     }
 
 
@@ -50,7 +51,7 @@ namespace Rivet {
           foundM = true;
       }
       if (!foundP || !foundM) vetoEvent;
-      if (cTheta<=_cmax)    _cPi->fill();
+      if (cTheta<=_cmax)    _cPi->fill(_ecms);
       if (_h_cTheta )  _h_cTheta->fill(map2string(cTheta));
     }
 
@@ -63,16 +64,14 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double fact = crossSection()/nanobarn/sumOfWeights();
-      if (_h_cTheta ) scale(_h_cTheta, fact);
-      scale(_cPi, fact);
-      BinnedEstimatePtr<string> mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        const double Ecm = std::stod(b.xEdge());
-        if (isCompatibleWithSqrtS(sqrtS()/GeV, Ecm)) {
-          b.set(_cPi->val(), _cPi->err());
+      if (_h_cTheta ) {
+        scale(_h_cTheta, fact);
+        for(auto & b : _h_cTheta->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axis.width(idx));
         }
       }
+      scale(_cPi, fact);
     }
 
     ///@}
@@ -80,11 +79,11 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    BinnedHistoPtr<string> _h_cTheta;
-    CounterPtr _cPi;
+    BinnedHistoPtr<string> _h_cTheta,_cPi;
     double _cmax;
     YODA::Axis<double> _axis;
     vector<string> _edges;
+    string _ecms;
     ///@}
 
 

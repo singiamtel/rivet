@@ -1,0 +1,36 @@
+Name: BABAR_2007_I755548
+Year: 2007
+Summary: Mass distributions in $B\to p\bar{p} K^{(*)}$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 755548
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 76 (2007) 092004
+RunInfo: 
+Description:
+  'Measurement of mass distributions in $B^0\to p \bar{p} K^0_S$, $B^0\to p \bar{p} K^{*0}$, $B^+\to p \bar{p} K^+$ and $B^+\to p \bar{p} K^{*+}$. The corrected data were read from the plots in the paper.'
+ValidationInfo:
+  'Herwig7 events usnig EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007esv
+BibTeX: '@article{BaBar:2007esv,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Evidence for the B0 ----\ensuremath{>} p anti-p K*0 and B+ ---\ensuremath{>} eta(c) K*+ decays and Study of the Decay Dynamics of B Meson Decays into p anti-p h final states}",
+    eprint = "0707.1648",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-07-031, SLAC-PUB-12661",
+    doi = "10.1103/PhysRevD.76.092004",
+    journal = "Phys. Rev. D",
+    volume = "76",
+    pages = "092004",
+    year = "2007"
+}
+'

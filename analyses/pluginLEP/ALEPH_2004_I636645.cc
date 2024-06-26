@@ -106,7 +106,7 @@ namespace Rivet {
         case 172: offset = 2; break;
         case 183: offset = 3; break;
         case 189: offset = 4; break;
-        case 197: offset = 5; break;
+        case 196: offset = 5; break;
         case 200: offset = 6; break;
         case 206: offset = 7; break;
         default:
@@ -128,14 +128,33 @@ namespace Rivet {
                     << " doesn't match any available analysis energy .");
       }
 
-      book(mult, 1, 1, 1);
+      book(_mult, 1, 1, 1);
+      book(_mean_totaljetbroadening, 53, 1, 1);
+      book(_mean_widejetbroadening,  53, 1, 2);
+      book(_mean_C,                  53, 1, 3);
+      book(_mean_rho,                53, 1, 4);
+      book(_mean_thrust,             53, 1, 5);
+      for (const string& en : _mult.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
     }
 
 
     void analyze(const Event& e) {
 
       const Thrust& thrust = apply<Thrust>(e, "Thrust");
+      _mean_thrust->fill(_ecms,1.- thrust.thrust());
       const Sphericity& sphericity = apply<Sphericity>(e, "Sphericity");
+      const Hemispheres& hemi = apply<Hemispheres>(e, "Hemispheres");
+      _mean_totaljetbroadening->fill(_ecms,hemi.Bsum());
+      _mean_widejetbroadening->fill(_ecms,hemi.Bmax());
+      _mean_rho->fill(_ecms,hemi.scaledM2high());
+      const ParisiTensor& parisi = apply<ParisiTensor>(e, "Parisi");
+      _mean_C->fill(_ecms,parisi.C());
 
       if(_initialisedJets) {
         bool LEP1 = isCompatibleWithSqrtS(91.2*GeV,0.01);
@@ -149,13 +168,10 @@ namespace Rivet {
           _h_thrustminor->fill(thrust.thrustMinor());
         _h_oblateness->fill(thrust.oblateness());
 
-        const Hemispheres& hemi = apply<Hemispheres>(e, "Hemispheres");
         _h_heavyjetmass->fill(hemi.scaledM2high());
         _h_jetmassdifference->fill(hemi.scaledM2diff());
         _h_totaljetbroadening->fill(hemi.Bsum());
         _h_widejetbroadening->fill(hemi.Bmax());
-
-        const ParisiTensor& parisi = apply<ParisiTensor>(e, "Parisi");
         _h_cparameter->fill(parisi.C());
 
         _h_aplanarity->fill(sphericity.aplanarity());
@@ -258,11 +274,7 @@ namespace Rivet {
       const double avgNumParts = dbl(*_weightedTotalChargedPartNum) / sumOfWeights();
 
 
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(avgNumParts, 0.);
-        }
-      }
+      _mult->fill(_ecms,avgNumParts);
 
       if (_initialisedSpectra) {
         normalize(_h_xp, avgNumParts);
@@ -281,7 +293,10 @@ namespace Rivet {
     bool _initialisedJets = false;
     bool _initialisedSpectra = false;
 
-    Estimate1DPtr mult;
+    BinnedProfilePtr<string> _mult;
+    BinnedProfilePtr<string> _mean_totaljetbroadening,_mean_widejetbroadening,
+      _mean_C,_mean_rho,_mean_thrust;
+    string _ecms;
     Histo1DPtr _h_xp;
     Histo1DPtr _h_xi;
     Histo1DPtr _h_xe;

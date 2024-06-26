@@ -12,6 +12,7 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu-
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies: [57.37, 57.77, 57.97, 58.22, 58.47, 58.72, 58.97, 59.22, 59.47, 59.84]
 Description:
   'Measurement of the hadronic cross section in $e^+e^-$ collisions by TOPAZ for energies between 57.37 and 59.84 GeV.
    The individual hadronic and muonic cross sections are also outputted to the yoda file

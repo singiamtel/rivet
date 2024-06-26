@@ -66,10 +66,10 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      normalize(_h_pipi  );
-      normalize(_h_etapip);
-      normalize(_h_etapi0);
-      normalize(_dalitz  );
+      normalize(_h_pipi  ,1.,false);
+      normalize(_h_etapip,1.,false);
+      normalize(_h_etapi0,1.,false);
+      normalize(_dalitz  ,1.,false);
     }
 
     /// @}

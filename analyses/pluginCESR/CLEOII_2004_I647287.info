@@ -1,0 +1,35 @@
+Name: CLEOII_2004_I647287
+Year: 2004
+Summary: Hadronic mass moments in $B\to X_c\ell\nu$ decays
+Experiment: CLEOII
+Collider: 
+InspireID: 647287
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 70 (2004) 032002
+RunInfo: Any process producing B mesons, originally Upsilon(4S)
+Description:
+  'Measurement of hadronic mass moments in $B\to X_c\ell\nu$ decays. The data were taken from the tables in the paper.'
+ValidationInfo:
+  'Herwig7 events using Evtgen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2004bqt
+BibTeX: '@article{CLEO:2004bqt,
+    author = "Csorna, S. E. and others",
+    collaboration = "CLEO",
+    title = "{Moments of the B meson inclusive semileptonic decay rate using neutrino reconstruction}",
+    eprint = "hep-ex/0403052",
+    archivePrefix = "arXiv",
+    reportNumber = "CLNS-04-1859, CLEO-04-1",
+    doi = "10.1103/PhysRevD.70.032002",
+    journal = "Phys. Rev. D",
+    volume = "70",
+    pages = "032002",
+    year = "2004"
+}
+'

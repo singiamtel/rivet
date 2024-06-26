@@ -1,0 +1,39 @@
+Name: BESIII_2024_I2748736
+Year: 2024
+Summary: $e^+e^-\to\Sigma^+\bar{\Sigma}^-$ cross section for centre-of-mass energies between 3.510 and 4.951 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2748736
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2401.09468 [hep-ex]
+RunInfo: e+ e- to hadrons. Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.
+Beams: [e-, e+]
+Energies: [3.51, 3.582, 3.65, 3.67, 3.773, 3.808, 3.867, 3.871, 3.896, 4.008, 4.128, 4.157, 4.178, 4.189,
+           4.199, 4.209, 4.226, 4.236, 4.244, 4.258, 4.267, 4.278, 4.288, 4.312, 4.337, 4.358, 4.377, 4.396,
+           4.416, 4.436, 4.527, 4.6, 4.628, 4.641, 4.661, 4.682, 4.74, 4.75, 4.781, 4.918, 4.951]
+Options:
+ - ENERGY=*
+Description:
+  '$e^+e^-\to\Sigma^+\bar{\Sigma}^-$ cross section for centre-of-mass energies between 3.510 and 4.951 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024umc
+BibTeX: '@article{BESIII:2024umc,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurement of Born cross section of $e^{+}e^{-}\rightarrow\Sigma^{+}\bar\Sigma^{-}$ at center-of-mass energies between 3.510 and 4.951 GeV}",
+    eprint = "2401.09468",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "1",
+    year = "2024"
+}
+'

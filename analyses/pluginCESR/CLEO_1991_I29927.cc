@@ -22,8 +22,16 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_c_B, "/TMP/sigma_B");
-      book(_c_Bstar, "/TMP/sigma_Bstar");
+      book(_c_B    , 1, 1, 1);
+      book(_c_Bstar, 2, 1, 1);
+      for (const string& en : _c_B.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
 
     }
 
@@ -41,33 +49,17 @@ namespace Rivet {
         }
       }
       if(!bhads.empty())
-        _c_B->fill();
+        _c_B->fill(_ecms);
       if(nBstar!=0)
-        _c_Bstar->fill(nBstar);
+        _c_Bstar->fill(_ecms,nBstar);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /picobarn;
-      for(unsigned int ix=1;ix<3;++ix) {
-        double sig(0.),err(0.);
-        if(ix==1) {
-          sig = _c_B->val()*fact;
-          err = _c_B->err()*fact;
-        }
-        else {
-          sig = _c_Bstar->val()*fact;
-          err = _c_Bstar->err()*fact;
-        }
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMid(), b.xMax())) {
-            b.set(sig, err);
-          }
-        }
-      }
+      scale(_c_B,fact);
+      scale(_c_Bstar,fact);
     }
 
     /// @}
@@ -75,7 +67,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_B, _c_Bstar;
+    BinnedHistoPtr<string> _c_B, _c_Bstar;
+    string _ecms;
     /// @}
 
 

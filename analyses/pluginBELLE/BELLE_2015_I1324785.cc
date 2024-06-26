@@ -21,7 +21,16 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nPsi2s, "TMP/psi2s");
+      book(_nPsi2s, 1, 1, 1);
+      for (const string& en : _nPsi2s.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -68,7 +77,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched) {
-	    _nPsi2s->fill();
+	    _nPsi2s->fill(_ecms);
 	    break;
 	  }
 	}
@@ -78,17 +87,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma =  _nPsi2s->val();
-      double error = _nPsi2s->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nPsi2s, crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -96,7 +95,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nPsi2s;
+    BinnedHistoPtr<string> _nPsi2s;
+    string _ecms;
     /// @}
 
 

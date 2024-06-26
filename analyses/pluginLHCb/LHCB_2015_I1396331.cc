@@ -142,12 +142,12 @@ namespace Rivet {
         book(hr_DstarDplus[i], 13, 1, i+1);
         book(hr_DsDstar[i], 14, 1, i+1);
         // fill ratio plots
-      	divide(_hbr_Dplus->bin(i), _hbr_Dzero->bin(i), hr_DplusDzero[i]);
-      	divide(_hbr_Ds->bin(i),    _hbr_Dzero->bin(i), hr_DsDzero[i]);
-      	divide(_hbr_Dstar->bin(i), _hbr_Dzero->bin(i), hr_DstarDzero[i]);
-      	divide(_hbr_Ds->bin(i),    _hbr_Dplus->bin(i), hr_DsDplus[i]);
-      	divide(_hbr_Dstar->bin(i), _hbr_Dplus->bin(i), hr_DstarDplus[i]);
-      	divide(_hbr_Ds->bin(i),    _hbr_Dstar->bin(i), hr_DsDstar[i]);
+      	divide(_hbr_Dplus->bin(i+1), _hbr_Dzero->bin(i+1), hr_DplusDzero[i]);
+      	divide(_hbr_Ds->bin(i+1),    _hbr_Dzero->bin(i+1), hr_DsDzero[i]);
+      	divide(_hbr_Dstar->bin(i+1), _hbr_Dzero->bin(i+1), hr_DstarDzero[i]);
+      	divide(_hbr_Ds->bin(i+1),    _hbr_Dplus->bin(i+1), hr_DsDplus[i]);
+      	divide(_hbr_Dstar->bin(i+1), _hbr_Dplus->bin(i+1), hr_DstarDplus[i]);
+      	divide(_hbr_Ds->bin(i+1),    _hbr_Dstar->bin(i+1), hr_DsDstar[i]);
       	// scale 100x as measurement is in %
       	hr_DplusDzero[i]->scale(100.);
       	hr_DsDzero[i]->scale(100.);
