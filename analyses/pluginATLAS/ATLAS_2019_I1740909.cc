@@ -29,20 +29,34 @@ namespace Rivet {
       book(_p["nch_jetpt_C"], 2, 1, 1);
       book(_p["nch_jetpt_B"], 9, 1, 1);
 
-      for (size_t i_bin = 0; i_bin < 14; ++i_bin) {
-        book(_h["nch_B"+to_str(i_bin)] , 13 + i_bin, 1, 1);
-        book(_hr["r_B"+to_str(i_bin)] , 27 + i_bin, 1, 1);
-        book(_h["zeta_B"+to_str(i_bin)] , 41 + i_bin, 1, 1);
-        book(_h["pTrel_B"+to_str(i_bin)] , 55 + i_bin, 1, 1);
-        book(_h["nch_F"+to_str(i_bin)] , 69 + i_bin, 1, 1);
-        book(_hr["r_F"+to_str(i_bin)] , 83 + i_bin, 1, 1);
-        book(_h["zeta_F"+to_str(i_bin)] , 97 + i_bin, 1, 1);
-        book(_h["pTrel_F"+to_str(i_bin)] , 111 + i_bin, 1, 1);
-        book(_h["nch_C"+to_str(i_bin)] , 125 + i_bin, 1, 1);
-        book(_hr["r_C"+to_str(i_bin)] , 139 + i_bin, 1, 1);
-        book(_h["zeta_C"+to_str(i_bin)] , 153 + i_bin, 1, 1);
-        book(_h["pTrel_C"+to_str(i_bin)] , 167 + i_bin, 1, 1);
-        }
+      vector<double> ptbins{100., 200., 300., 400., 500., 600., 700., 800.,
+                            900., 1000., 1200., 1400., 1600., 2000., 2500.};
+      for (const string& suff : vector<string>{"B", "F", "C"}) {
+        book(_h["nch_"+suff], ptbins);
+        book(_h["r_"+suff], ptbins);
+        book(_h["zeta_"+suff], ptbins);
+        book(_h["pTrel_"+suff], ptbins);
+      }
+      for (size_t idx = 0; idx < ptbins.size()-1; ++idx) {
+        dualbook(_h["nch_B"]->bin(idx+1),    13 + idx, 1, 1);
+        dualbook(_h["r_B"]->bin(idx+1),      27 + idx, 1, 1);
+        dualbook(_h["zeta_B"]->bin(idx+1),   41 + idx, 1, 1);
+        dualbook(_h["pTrel_B"]->bin(idx+1),  55 + idx, 1, 1);
+        dualbook(_h["nch_F"]->bin(idx+1),    69 + idx, 1, 1);
+        dualbook(_h["r_F"]->bin(idx+1),      83 + idx, 1, 1);
+        dualbook(_h["zeta_F"]->bin(idx+1),   97 + idx, 1, 1);
+        dualbook(_h["pTrel_F"]->bin(idx+1), 111 + idx, 1, 1);
+        dualbook(_h["nch_C"]->bin(idx+1),   125 + idx, 1, 1);
+        dualbook(_h["r_C"]->bin(idx+1),     139 + idx, 1, 1);
+        dualbook(_h["zeta_C"]->bin(idx+1),  153 + idx, 1, 1);
+        dualbook(_h["pTrel_C"]->bin(idx+1), 167 + idx, 1, 1);
+      }
+    }
+
+    void dualbook(Histo1DPtr& hist, unsigned int d, unsigned int x, unsigned int y) {
+      const string hname = mkAxisCode(d, x, y);
+      book(hist, "_aux_"+hname, refData(hname));
+      book(_s[hist.get()->basePath()], hname);
     }
 
     void analyze(const Event& event) {
@@ -68,9 +82,7 @@ namespace Rivet {
 
       // Calculate obs, separately for central and fwd, also get bin
       double fpt = m_goodJets[pos_f].pT();
-      size_t f_bin = GetJetBin(fpt);
       double cpt = m_goodJets[pos_c].pT();
-      size_t c_bin = GetJetBin(cpt);
 
       for (const Particle& p : m_goodJets[pos_f].particles()) {
         if (p.pT() < 0.5*GeV)  continue;
@@ -81,12 +93,12 @@ namespace Rivet {
           ftval = p.pT()*sin(p.phi()-m_goodJets[pos_f].phi());
           frval = deltaR(m_goodJets[pos_f], p);
 
-          _hr["r_F"+to_str(f_bin)]->fill(frval);
-          _hr["r_B"+to_str(f_bin)]->fill(frval);
-          _h["zeta_F"+to_str(f_bin)]->fill(fzval);
-          _h["zeta_B"+to_str(f_bin)]->fill(fzval);
-          _h["pTrel_F"+to_str(f_bin)]->fill(ftval);
-          _h["pTrel_B"+to_str(f_bin)]->fill(ftval);
+          _h["r_F"]->fill(fpt, frval);
+          _h["r_B"]->fill(fpt, frval);
+          _h["zeta_F"]->fill(fpt, fzval);
+          _h["zeta_B"]->fill(fpt, fzval);
+          _h["pTrel_F"]->fill(fpt, ftval);
+          _h["pTrel_B"]->fill(fpt, ftval);
         }
       }
 
@@ -99,12 +111,12 @@ namespace Rivet {
           ctval = p.pT()*sin(p.phi()-m_goodJets[pos_c].phi());
           crval = deltaR(m_goodJets[pos_c], p);
 
-          _hr["r_C"+to_str(c_bin)]->fill(crval);
-          _hr["r_B"+to_str(c_bin)]->fill(crval);
-          _h["zeta_C"+to_str(c_bin)]->fill(czval);
-          _h["zeta_B"+to_str(c_bin)]->fill(czval);
-          _h["pTrel_C"+to_str(c_bin)]->fill(ctval);
-          _h["pTrel_B"+to_str(c_bin)]->fill(ctval);
+          _h["r_C"]->fill(cpt, crval);
+          _h["r_B"]->fill(cpt, crval);
+          _h["zeta_C"]->fill(cpt, czval);
+          _h["zeta_B"]->fill(cpt, czval);
+          _h["pTrel_C"]->fill(cpt, ctval);
+          _h["pTrel_B"]->fill(cpt, ctval);
         }
       }
 
@@ -118,58 +130,32 @@ namespace Rivet {
       _p["nch_jetpt_B"]->fill(fpt,fnch);
       _p["nch_jetpt_B"]->fill(cpt,cnch);
 
-      _h["nch_F"+to_str(f_bin)]->fill(fnch);
-      _h["nch_C"+to_str(c_bin)]->fill(cnch);
-      _h["nch_B"+to_str(f_bin)]->fill(fnch);
-      _h["nch_B"+to_str(c_bin)]->fill(cnch);
+      _h["nch_F"]->fill(fpt, fnch);
+      _h["nch_C"]->fill(cpt, cnch);
+      _h["nch_B"]->fill(fpt, fnch);
+      _h["nch_B"]->fill(cpt, cnch);
     }
 
 
     void finalize() {
 
-      for (size_t i_bin = 0; i_bin < 14; ++i_bin) {
-
-        const double sfB =  _h["nch_B"+to_str(i_bin)]->sumW();
-        if (sfB) {
-          scale(_h["zeta_B"+to_str(i_bin)],2.0/sfB);
-          scale(_h["pTrel_B"+to_str(i_bin)],2.0/sfB);
-          scale(_hr["r_B"+to_str(i_bin)],2.0/sfB);
-          scale(_h["nch_B"+to_str(i_bin)], 2.0/sfB);
+      for (const string& suff : vector<string>{"B", "F", "C"}) {
+        const double num = suff=="B"? 2.0 : 1.0;
+        vector<double> sf = _h["nch_"+suff]->sumWGroup();
+        for (double& f : sf) {
+          f = safediv(num, f, 0.0);
         }
-
-        const double sfF =  _h["nch_F"+to_str(i_bin)]->sumW();
-        if (sfF) {
-          scale(_h["zeta_F"+to_str(i_bin)],1.0/sfF);
-          scale(_h["pTrel_F"+to_str(i_bin)],1.0/sfF);
-          scale(_hr["r_F"+to_str(i_bin)],1.0/sfF);
-          scale(_h["nch_F"+to_str(i_bin)], 1.0/sfF);
-        }
-
-        const double sfC =  _h["nch_C"+to_str(i_bin)]->sumW();
-        if (sfC) {
-          scale(_h["zeta_C"+to_str(i_bin)],1.0/sfC);
-          scale(_h["pTrel_C"+to_str(i_bin)],1.0/sfC);
-          scale(_hr["r_C"+to_str(i_bin)],1.0/sfC);
-          scale(_h["nch_C"+to_str(i_bin)], 1.0/sfC);
+        scale({_h["nch_"+suff], _h["zeta_"+suff], _h["pTrel_"+suff], _h["r_"+suff]}, sf);
+        for (auto& r : _h["r_"+suff]->bins()) {
+          for (auto& b : r->bins()) {
+            b.scaleW(1.0/(2*M_PI*b.xMid()));
+          }
         }
       }
 
-      // For r only
-      /// @todo Replace with barchart()
-      for (auto& hist : _hr) {
-        for(size_t i=1; i < hist.second->numBins()+1; ++i) {
-          const double x = hist.second->bin(i).xMid();
-          const double bW = hist.second->bin(i).xWidth();
-          hist.second->bin(i).scaleW(bW/(2.0*M_PI*x));
-        }
-      }
-
-      // The rest
-      /// @todo Replace with barchart()
       for (auto& hist : _h) {
-        for (size_t i=1; i < hist.second->numBins()+1; ++i) {
-          const double bW = hist.second->bin(i).xWidth();
-          hist.second->bin(i).scaleW(bW);
+        for (auto& b : hist.second->bins()) {
+          barchart(b, _s[b.get()->basePath()]);
         }
       }
 
@@ -177,29 +163,8 @@ namespace Rivet {
 
   private:
 
-    size_t GetJetBin(const double jetpt){
-      size_t i_bin = 0;
-      if (inRange(jetpt,100,200)) i_bin=0;
-      if (inRange(jetpt,200,300)) i_bin=1;
-      if (inRange(jetpt,300,400)) i_bin=2;
-      if (inRange(jetpt,400,500)) i_bin=3;
-      if (inRange(jetpt,500,600)) i_bin=4;
-      if (inRange(jetpt,600,700)) i_bin=5;
-      if (inRange(jetpt,700,800)) i_bin=6;
-      if (inRange(jetpt,800,900)) i_bin=7;
-      if (inRange(jetpt,900,1000)) i_bin=8;
-      if (inRange(jetpt,1000,1200)) i_bin=9;
-      if (inRange(jetpt,1200,1400)) i_bin=10;
-      if (inRange(jetpt,1400,1600)) i_bin=11;
-      if (inRange(jetpt,1600,2000)) i_bin=12;
-      if (inRange(jetpt,2000,2500)) i_bin=13;
-      if(jetpt < 100) i_bin=0;
-      if(jetpt > 2500) i_bin=13;
-      return i_bin;
-    }
-
-    map<string, Histo1DPtr> _h;
-    map<string, Histo1DPtr> _hr;
+    map<string, Histo1DGroupPtr> _h;
+    map<string, Estimate1DPtr> _s;
     map<string, Profile1DPtr> _p;
   };
 
