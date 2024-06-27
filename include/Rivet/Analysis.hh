@@ -1280,6 +1280,35 @@ namespace Rivet {
       }
     }
 
+    /// Multiplicatively scale the given histogram group, @a group, by factors @a factors.
+    template<typename GroupAxisT, typename... AxisT>
+    void scale(HistoGroupPtr<GroupAxisT, AxisT...>& group, const vector<double>& factors) {
+      if (!group) {
+        MSG_WARNING("Failed to scale AnalysisObject=NULL in analysis " << name());
+        return;
+      }
+      if (group->numBins(true) != factors.size()) {
+        throw RangeError(name() + ": Number of scale factors does not match group binning");
+        return;
+      }
+      for (auto& b : group->bins(true)) {
+        if (!b.get())  continue;
+        double factor = factors[b.index()];
+        if (std::isnan(factor) || std::isinf(factor)) {
+          MSG_WARNING("Failed to scale componment of histo group in analysis: "
+                      << name() << " (invalid scale factor = " << factor << ")");
+          factor = 0;
+        }
+        MSG_TRACE("Scaling histo group element by factor " << factor);
+        try {
+          b->scaleW(factor);
+        }
+        catch (YODA::Exception& we) {
+          MSG_WARNING("Could not scale component of histo group.");
+        }
+      }
+    }
+
     /// Multiplicatively scale the cutflow group, @a group, by factor @a factor.
     void scale(CutflowsPtr& group, CounterAdapter factor) {
       if (!group) {
@@ -1320,6 +1349,23 @@ namespace Rivet {
       for (auto& ao : std::vector<T>{aos})  scale(ao, factor);
     }
 
+    /// Iteratively scale the AOs in the map @a aos, by factors @a factors.
+    template<typename T, typename U>
+    void scale(std::map<T, U>& aos, const vector<double>& factors) {
+      for (auto& item : aos)  scale(item.second, factors);
+    }
+
+    /// Iteratively scale the AOs in the iterable @a aos, by factors @a factors.
+    template <typename AORange, typename = std::enable_if_t<YODA::isIterable<AORange>>>
+    void scale(AORange& aos, const vector<double>& factors) {
+      for (auto& ao : aos)  scale(ao, factors);
+    }
+
+    /// Iteratively scale the AOs in the initialiser list @a aos, by factors @a factors.
+    template <typename T>
+    void scale(std::initializer_list<T> aos, const vector<double>& factors) {
+      for (auto& ao : std::vector<T>{aos})  scale(ao, factors);
+    }
 
     /// Scale the given histogram group, @a group, by the group axis width
     template<typename GroupAxisT, typename... AxisT>

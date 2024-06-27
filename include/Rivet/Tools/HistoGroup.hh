@@ -100,6 +100,20 @@ namespace Rivet {
       return sumw2;
     }
 
+    /// @brief Return the vector of sum of weights for each histo in the group.
+    vector<double> sumWGroup(const bool includeOverflows=true) const noexcept {
+      vector<double> rtn;
+      rtn.reserve(BaseT::numBins(true));
+      for (const auto& b : BaseT::bins(true)) {
+        if (!b.get()) {
+          rtn.push_back(0.0);
+          continue;
+        }
+        rtn.push_back( b->sumW(includeOverflows) );
+      }
+      return rtn;
+    }
+
     /// @brief Get the total volume of the histogram group.
     double integral(const bool includeOverflows=true) const noexcept {
       return sumW(includeOverflows);
