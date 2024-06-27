@@ -42,7 +42,14 @@ DOCS += coverage/rivet-coverage.html \
   coverage/rivet-coverage-searchesonly.html \
   coverage/rivet-coverage-nosearches.html \
   coverage/rivet-coverage-nosearches-noheavyion.html
-coverage/rivet-coverage.html: anaindex $(wildcard $(srcdir)/coverage/inspire*.json) $(wildcard $(srcdir)/coverage/*.rank) $(top_srcdir)/analyses $(srcdir)/coverage/mk-coverage-html
+
+COVERAGE_SRC = \
+    $(srcdir)/coverage/inspire*.json \
+    $(srcdir)/coverage/*.rank \
+    $(top_srcdir)/analyses \
+    $(srcdir)/coverage/mk-coverage-html
+
+coverage/rivet-coverage.html: anaindex $(COVERAGE_SRC)
 	$(mkdir_p) coverage && cd coverage && \
     LD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(LD_LIBRARY_PATH):$(LD_LIBRARY_PATH) \
     DYLD_LIBRARY_PATH=$(abs_top_builddir)/src/.libs:$(FASTJETLIBPATH):$(FJCONTRIBLIBPATH):$(DYLD_LIBRARY_PATH):$(DYLD_LIBRARY_PATH) \

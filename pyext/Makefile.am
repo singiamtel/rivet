@@ -4,11 +4,15 @@ if ENABLE_PYEXT
 
 PYEXT_ENV = LDFLAGS="$(LDFLAGS)" CC="$(CXX)" CXX="$(CXX)" CXXFLAGS="$(PYEXT_CXXFLAGS)" ARCHFLAGS="" PYTHONPATH="$(DESTDIR):$(PYTHONPATH)"
 
+PYCORE_SRC = \
+    rivet/*.py \
+    rivet/plotting/*.py
+
 all-local: build/rivet/core.so
 
 if WITH_OSX
 
-build/rivet/core.so: build.py rivet/core.cpp
+build/rivet/core.so: build.py rivet/core.cpp $(PYCORE_SRC)
 	$(MKDIR_P) $(abs_builddir)/build/rivet
 	cd $(abs_builddir) && $(PYEXT_ENV) RIVET_LOCAL=1 $(PYTHON) $(abs_builddir)/build.py
 	touch $@
@@ -28,7 +32,7 @@ install-exec-local: build/rivet/core.so
 
 else
 
-build/rivet/core.so: build.py rivet/core.cpp
+build/rivet/core.so: build.py rivet/core.cpp $(PYCORE_SRC)
 	$(MKDIR_P) $(abs_builddir)/build/rivet
 	cd $(abs_builddir) && $(PYEXT_ENV) RIVET_LOCAL=1 $(PYTHON) $(abs_builddir)/build.py
 	touch $@
