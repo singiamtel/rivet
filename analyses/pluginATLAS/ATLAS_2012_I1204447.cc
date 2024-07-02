@@ -7,6 +7,7 @@
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -15,8 +16,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2012_I1204447()
-      : Analysis("ATLAS_2012_I1204447") {  }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1204447);
 
 
     /// Book histograms and initialise projections before the run
@@ -24,9 +24,6 @@ namespace Rivet {
 
       // To calculate the acceptance without having the fiducial lepton efficiencies included, this part can be turned off
       _use_fiducial_lepton_efficiency = true;
-
-      // Random numbers for simulation of ATLAS detector reconstruction efficiency
-      srand(160385);
 
       // Read in all signal regions
       _signal_regions = getSignalRegions();
@@ -110,7 +107,7 @@ namespace Rivet {
         int muon_id = 13;
         if ( mu.hasAncestorWith(Cuts::pid == 15) || mu.hasAncestorWith(Cuts::pid == -15)) muon_id = 14;
         const double eff = (_use_fiducial_lepton_efficiency) ? apply_reco_eff(muon_id, mu) : 1.0;
-        const bool keep_muon = rand()/static_cast<double>(RAND_MAX) <= eff;
+        const bool keep_muon = rand01() <= eff;
 
         // Keep muon if pTCone30/pT < 0.15 and eTCone30/pT < 0.2 and reconstructed
         if (keep_muon && pTinCone/mu.pT() <= 0.15 && eTinCone/mu.pT() < 0.2)
@@ -141,7 +138,7 @@ namespace Rivet {
         int elec_id = 11;
         if (e.hasAncestorWith(Cuts::pid == 15) || e.hasAncestorWith(Cuts::pid == -15)) elec_id = 12;
         const double eff = (_use_fiducial_lepton_efficiency) ? apply_reco_eff(elec_id, e) : 1.0;
-        const bool keep_elec = rand()/static_cast<double>(RAND_MAX) <= eff;
+        const bool keep_elec = rand01() <= eff;
 
         // Keep electron if pTCone30/pT < 0.13 and eTCone30/pT < 0.2 and reconstructed
         if (keep_elec && pTinCone/e.pT() <= 0.13 && eTinCone/e.pT() < 0.2)
@@ -179,7 +176,7 @@ namespace Rivet {
 
         // Get fiducial lepton efficiency simulate reco efficiency
         const double eff = (_use_fiducial_lepton_efficiency) ? apply_reco_eff(tau_id, tau_vis) : 1.0;
-        const bool keep_tau = rand()/static_cast<double>(RAND_MAX) <= eff;
+        const bool keep_tau = rand01() <= eff;
 
         // Keep tau if nprong = 1, it decays hadronically, and it's reconstructed by the detector
         if ( !lep_decaying_tau && nprong == 1 && keep_tau) tau_candidates.push_back(tau_vis);
@@ -320,7 +317,7 @@ namespace Rivet {
 
 
       // Jet cleaning
-      if (rand()/static_cast<double>(RAND_MAX) <= 0.42) {
+      if (rand01() <= 0.42) {
         for (const Jet& jet : recon_jets) {
           const double eta = jet.rapidity();
           const double phi = jet.azimuthalAngle(MINUSPI_PLUSPI);

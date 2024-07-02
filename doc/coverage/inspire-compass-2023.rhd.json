@@ -8,7 +8,31 @@
         null,
         null,
         [
-            "CERN-EP-2022--073"
+            "CERN-EP-2022-073"
+        ]
+    ],
+    "2173365": [
+        "Spin density matrix elements in exclusive $\\rho ^0$ meson muoproduction",
+        "COMPASS",
+        "10.1140/epjc/s10052-023-11359-4",
+        "2838737",
+        "2210.16932",
+        null,
+        null,
+        [
+            "CERN-EP-2022-231"
+        ]
+    ],
+    "2620635": [
+        "Transverse-spin-dependent azimuthal asymmetries of pion and kaon pairs produced in muon-proton and muon-deuteron semi-inclusive deep inelastic scattering",
+        "COMPASS",
+        "10.1016/j.physletb.2023.138155",
+        "2845289",
+        "2301.02013",
+        null,
+        null,
+        [
+            "CERN-EP-2022-292"
         ]
     ]
 }

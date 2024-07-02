@@ -1,0 +1,33 @@
+Name: ARGUS_1993_I357133
+Year: 1993
+Summary: Electron spectra in $B$ decays
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 357133
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 318 (1993) 397-404
+RunInfo: Bottom mesons produced at the Upsilon(4S)
+Description:
+  'Measurement of the primary and secondary lepton spetrum in $B$ decays by ARGUS. The corrected spectra read from figures 4 and 5 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1993wgo
+BibTeX: '@article{ARGUS:1993wgo,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{A Model independent determination of the inclusive semileptonic decay fraction of B mesons}",
+    reportNumber = "DESY-93-104",
+    doi = "10.1016/0370-2693(93)90146-9",
+    journal = "Phys. Lett. B",
+    volume = "318",
+    pages = "397--404",
+    year = "1993"
+}
+'

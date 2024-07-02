@@ -56,6 +56,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if(_edges.empty()) _edges = _p_X[0]->xEdges();
       static const double Lambda=0.65*GeV;
       // find and loop over Upslion(4S)
       for (const Particle& p : apply<UnstableParticles>(event, "UFS").particles()) {
@@ -87,12 +88,18 @@ namespace Rivet {
 	double nX2 = sqr(mX)-2.*Lambda*pX.t()+sqr(Lambda);
 	double m1=mX,m2=nX2;
 	for(unsigned int ix=0;ix<6;++ix) {
-	  for(const auto & bin : _p_X[ix]->bins())
-	    if(bin.xMin()<modp) _p_X[ix]->fill(bin.xMid(),m1);
-	  m1 *=mX;
-	  if(ix>=3) continue;
-	  for(const auto & bin : _p_n[ix]->bins())
-	    if(bin.xMin()<modp) _p_n[ix]->fill(bin.xMid(),m2);
+          double Emin = 0.8;
+          for(unsigned int iy=0;iy<_edges.size();++iy) {
+            if(modp>Emin) _p_X[ix]->fill(_edges[iy],m1);
+            Emin+=0.1;
+          }
+          m1 *=mX;
+          if(ix>=3) continue;
+          Emin = 0.8;
+          for(unsigned int iy=0;iy<_edges.size();++iy) {
+	    if(modp>Emin) _p_n[ix]->fill(_edges[iy],m2);
+            Emin+=0.1;
+          }
 	  m2 *=nX2;
 	}
       }
@@ -108,8 +115,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Profile1DPtr _p_X[6],_p_n[3];
-
+    BinnedProfilePtr<string> _p_X[6],_p_n[3];
+    vector<string> _edges;
     /// @}
 
 

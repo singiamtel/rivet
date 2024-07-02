@@ -21,7 +21,7 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_numPiPiGamma, "TMP/PiPiGamma");
+      book(_numPiPiGamma, 1, 1, 1);
     }
 
 
@@ -39,25 +39,13 @@ namespace Rivet {
       // three particles (pi0 pi0 gamma)
       if(ntotal!=3) vetoEvent;
       if(nCount[111]==2 && nCount[22]==1)
-	_numPiPiGamma->fill();
+	_numPiPiGamma->fill(round(sqrtS()/MeV));
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      double sigma = _numPiPiGamma->val();
-      double error = _numPiPiGamma->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
-
+      scale(_numPiPiGamma, crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -65,7 +53,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numPiPiGamma;
+    BinnedHistoPtr<int> _numPiPiGamma;
     /// @}
 
 

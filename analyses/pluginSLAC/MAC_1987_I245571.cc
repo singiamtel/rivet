@@ -121,7 +121,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate1DPtr h_P;
+      BinnedEstimatePtr<int> h_P;
       book(h_P,2,1,1);
       normalize(_h_e);
       pair<double,double> P_e  = calcP(_h_e,1);
@@ -137,10 +137,10 @@ namespace Rivet {
       s2 += 1./sqr(P_pi.second);
       normalize(_h_rho);
       pair<double,double> P_rho = calcP(_h_rho,0);
-      s1 += P_rho.first/sqr(P_rho.second);
-      s2 += 1./sqr(P_rho.second);
       P_rho.first  /=0.46;
       P_rho.second /=0.46;
+      s1 += P_rho.first/sqr(P_rho.second);
+      s2 += 1./sqr(P_rho.second);
       // average
       h_P->bin(1).set(s1/s2, sqrt(1./s2));
     }

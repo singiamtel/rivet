@@ -205,8 +205,8 @@ namespace Rivet {
       Estimate1DPtr h_trans;
       book(h_trans,2,1,1);
       for (size_t ix=0; ix < _h_plus_cphi->numBins(); ++ix) {
-        normalize(_h_plus_cphi->bin(ix));
-        normalize(_h_minus_cphi->bin(ix));
+        normalize(_h_plus_cphi->bin(ix+1));
+        normalize(_h_minus_cphi->bin(ix+1));
         Estimate1DPtr sTemp;
         book(sTemp, "/TMP/a_cphi_"+to_string(ix),10,0.,1.);
         asymm(_h_plus_cphi->bin(ix+1), _h_minus_cphi->bin(ix+1), sTemp);

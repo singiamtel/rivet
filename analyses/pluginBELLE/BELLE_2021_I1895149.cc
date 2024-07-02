@@ -122,13 +122,14 @@ namespace Rivet {
         // first divide by eff
         for (unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
           val[iy] = _h_forward[ix]->bin(iy+1).sumW()/eff.bin(iy+1).val();
-          err[iy] =val[iy]*sqrt(sqr(eff.bin(iy+1).relErrAvg()) + sqr(_h_forward[ix]->bin(iy+1).relErrW()));
+          double relE = eff.bin(iy+1).totalErrAvg()/eff.bin(iy+1).val();
+          err[iy] =val[iy]*sqrt(sqr(relE) + sqr(_h_forward[ix]->bin(iy+1).relErrW()));
         }
         vector<double> val2(_h_forward[ix]->numBins(),0.),err2(_h_forward[ix]->numBins(),0.);
         for (unsigned int iy=0;iy<_h_forward[ix]->numBins();++iy) {
           for (unsigned int iz=0;iz<_h_forward[ix]->numBins();++iz) {
             double corr  = matrix.bin((_h_forward[ix]->numBins()+2)*(iz+1)+iy+1).val()/100.;
-            double ecorr = matrix.bin((_h_forward[ix]->numBins()+2)*(iz+1)+iy+1).errAvg()/100.;
+            double ecorr = matrix.bin((_h_forward[ix]->numBins()+2)*(iz+1)+iy+1).totalErrAvg()/100.;
             val2[iy] += corr*val[iz];
             err2[iy] += sqr(ecorr*val[iz]) + sqr(corr*err[iz]);
           }

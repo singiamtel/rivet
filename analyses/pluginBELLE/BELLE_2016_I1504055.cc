@@ -33,9 +33,9 @@ namespace Rivet {
       declare(BB, "BB");
       for(unsigned int ix=0;ix<2;++ix) {
 	for(unsigned int iy=0;iy<6;++iy) {
-	  book(_p_P[ix][iy],1,1+ix,1+iy);
+	  book(_p_P[ix][iy],"TMP/p_P_"+toString(ix)+"_"+toString(iy),refData(1,1+ix,1+iy));
 	  if(iy>1) continue;
-	  book(_p_Q[ix][iy],2,1+ix,1+iy);
+	  book(_p_Q[ix][iy],"TMP/p_Q_"+toString(ix)+"_"+toString(iy),refData(2,1+ix,1+iy));
 	}
       }
       book(_FL,"TMP/FL");
@@ -166,9 +166,14 @@ namespace Rivet {
       double fact = 1./sqrt(fl*(1.-fl));
       for(unsigned int ix=0;ix<2;++ix) {
         for(unsigned int iy=0;iy<6;++iy) {
-          _p_P[ix][iy]->scale(2, fact);
-          if(iy>1) continue;
-          _p_Q[ix][iy]->scale(2, fact);
+          Estimate1DPtr tmp;
+          book(tmp,1,1+ix,1+iy);
+          barchart(_p_P[ix][iy],tmp);
+          scale(tmp,fact);
+	  if(iy>1) continue;
+          book(tmp,2,1+ix,1+iy);
+          barchart(_p_Q[ix][iy],tmp);
+          scale(tmp,fact);
         }
       }
     }

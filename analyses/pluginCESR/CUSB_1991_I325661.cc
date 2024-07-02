@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > B* X
   class CUSB_1991_I325661 : public Analysis {
   public:
 
@@ -23,7 +23,27 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_c_Bstar, "/TMP/sigma_Bstar");
+      book(_c_Bstar, 1, 1, 1);
+      for (const string& en : _c_Bstar.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/GeV, emin, emax)) {
+            _ecms = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms = en;
+            break;
+          }
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -40,22 +60,13 @@ namespace Rivet {
         }
       }
       if(nBstar!=0)
-        _c_Bstar->fill(nBstar);
+        _c_Bstar->fill(_ecms,nBstar);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sig = _c_Bstar->val()*fact;
-      double err = _c_Bstar->err()*fact;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sig, err);
-        }
-      }
+      scale(_c_Bstar,crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -63,7 +74,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_Bstar;
+    BinnedHistoPtr<string> _c_Bstar;
+    string _ecms;
     /// @}
 
 

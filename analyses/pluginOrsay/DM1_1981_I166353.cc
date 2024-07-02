@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > 3pi+3pi-
   class DM1_1981_I166353 : public Analysis {
   public:
 
@@ -20,7 +20,7 @@ namespace Rivet {
     void init() {
       // Initialise and register projections
       declare(FinalState(), "FS");
-      book(_num3pip3pim, "TMP/num3pip3pim");
+      book(_num3pip3pim, "TMP/num3pip3pim",refData(1,1,1));
     }
 
 
@@ -33,28 +33,22 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal!=6) vetoEvent;
-      _num3pip3pim->fill();
+      _num3pip3pim->fill(sqrtS()/GeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sigma = _num3pip3pim->val()*fact;
-      double error = _num3pip3pim->err()*fact;
+      scale(_num3pip3pim,crossSection()/ sumOfWeights() /nanobarn);
       Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_num3pip3pim,mult);
     }
     /// @}
 
     /// @name Histograms
     /// @{
-    CounterPtr _num3pip3pim;
+    Histo1DPtr _num3pip3pim;
     /// @}
 
   };

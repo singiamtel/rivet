@@ -12,10 +12,15 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
-Luminosity_fb: 
+Energies: [4.175, 4.225, 4.425, 4.475, 4.525, 4.575, 4.625, 4.675, 4.725, 4.775, 4.825,
+           4.875, 4.925, 4.975, 5.025, 5.075, 5.125, 5.175, 5.225, 5.275, 5.325, 5.375,
+           5.425, 5.475, 5.525, 5.575, 5.675, 5.725, 5.775, 5.825, 5.875, 5.925, 5.975]
+Options:
+ - ENERGY=*
 Description:
   'Measurement of the cross section for $e^+e^-\to J/\psi K^+K^-$ at energies between 4.175 and 5.975 GeV using radiative return by BELLE.
-   The paper also includes $J\psi K^0_SK^0_S$ but the data is a confidence limit and is therefore not implemented'
+   The paper also includes $J\psi K^0_SK^0_S$ but the data is a confidence limit and is therefore not implemented.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Shen:2014gdm
 BibTeX: '@article{Shen:2014gdm,

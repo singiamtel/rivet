@@ -72,8 +72,29 @@ namespace Rivet {
       book(_h_diff_broading   , 39+offset, 1, offset2);
       book(_h_CParam          , 41+offset, 1, offset2);
       book(_h_DParam          , 43+offset, 1, offset2);
+      for(unsigned int ix=0;ix<3;++ix) {
+        book(_p_thrust[ix],  1,1,1+ix);
+        book(_p_major[ix] ,  2,1,1+ix);
+        book(_p_minor[ix] ,  3,1,1+ix);
+        book(_p_obl[ix]   ,  4,1,1+ix);
+        book(_p_heavy[ix] ,  5,1,1+ix);
+        book(_p_light[ix] ,  6,1,1+ix);
+        book(_p_diff[ix]  ,  7,1,1+ix);
+        book(_p_bmax[ix]  ,  8,1,1+ix);
+        book(_p_bmin[ix]  ,  9,1,1+ix);
+        book(_p_bsum[ix]  , 10,1,1+ix);
+        book(_p_bdiff[ix] , 11,1,1+ix);
+        book(_p_C[ix]     , 12,1,1+ix);
+      }
     }
 
+    void fillMoment(array<BinnedProfilePtr<int>,3> & mom, double val) {
+      double tmp=val;
+      for(unsigned int ix=0;ix<3;++ix) {
+        mom[ix]->fill(round(sqrtS()/GeV),tmp);
+        tmp*=val;
+      }
+    }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
@@ -90,7 +111,10 @@ namespace Rivet {
       _h_major     ->fill(thrust.thrustMajor());
       _h_minor     ->fill(thrust.thrustMinor());
       _h_oblateness->fill(thrust.oblateness() );
-
+      fillMoment(_p_thrust,1.-thrust.thrust()  );
+      fillMoment(_p_major ,thrust.thrustMajor());
+      fillMoment(_p_minor ,thrust.thrustMinor());
+      fillMoment(_p_obl   ,thrust.oblateness() );
       // sphericity related
       const Sphericity& sphericity = apply<Sphericity>(event, "Sphericity");
       _h_sphericity->fill(sphericity.sphericity());
@@ -102,15 +126,23 @@ namespace Rivet {
       _h_heavy_jet_mass->fill(hemi.scaledM2high());
       _h_light_jet_mass->fill(hemi.scaledM2low() );
       _h_diff_jet_mass ->fill(hemi.scaledM2diff());
+      fillMoment(_p_heavy,hemi.scaledM2high());
+      fillMoment(_p_light,hemi.scaledM2low() );
+      fillMoment(_p_diff ,hemi.scaledM2diff());
       // jet broadening
       _h_wide_broading  ->fill(hemi.Bmax() );
       _h_narrow_broading->fill(hemi.Bmin() );
       _h_total_broading ->fill(hemi.Bsum() );
       _h_diff_broading  ->fill(hemi.Bdiff());
+      fillMoment(_p_bmax,hemi.Bmax() );
+      fillMoment(_p_bmin,hemi.Bmin() );
+      fillMoment(_p_bsum,hemi.Bsum() );
+      fillMoment(_p_bdiff,hemi.Bdiff());
       MSG_DEBUG("Calculating Parisi params");
       const ParisiTensor& parisi = apply<ParisiTensor>(event, "Parisi");
       _h_CParam->fill(parisi.C());
       _h_DParam->fill(parisi.D());
+      fillMoment(_p_C,parisi.C());
     }
 
 
@@ -146,6 +178,8 @@ namespace Rivet {
     Histo1DPtr _h_heavy_jet_mass,_h_light_jet_mass,_h_diff_jet_mass;
     Histo1DPtr _h_wide_broading,_h_narrow_broading,_h_total_broading,_h_diff_broading;
     Histo1DPtr _h_CParam,_h_DParam;
+    array<BinnedProfilePtr<int>,3> _p_thrust,_p_major,_p_minor,_p_obl,
+      _p_heavy,_p_light,_p_diff,_p_bmax,_p_bmin,_p_bsum,_p_bdiff,_p_C;
     /// @}
 
 

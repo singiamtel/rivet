@@ -30,13 +30,12 @@ namespace Rivet {
       // bin for the angle plots
       int ibin = (sqrtS()-0.8)/0.005 + 2;
       book(_h_cTheta,ibin,1,1);
-      book(_cPi, "/TMP/nPi");
+      book(_cPi, 1, 1, 1);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-
       if (_EcmEdges.empty())  _EcmEdges = _cPi->xEdges();
       if (_thetaEdges.empty())  _thetaEdges = _h_cTheta->xEdges();
 
@@ -56,7 +55,7 @@ namespace Rivet {
       if (cTheta<=0.6)  _cPi->fill(_EcmEdges[eIndex]);
       if (_h_cTheta ) {
         size_t idx = _thetaAxis.index(cTheta) - 1;
-        _h_cTheta->fill(_thetaEdges[idx]);
+        _h_cTheta->fill(idx < _thetaEdges.size() ? _thetaEdges[idx] : "OTHER"s);
       }
     }
 
@@ -64,7 +63,13 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double fact = crossSection()/nanobarn/sumOfWeights();
-      if (_h_cTheta ) scale(_h_cTheta ,fact);
+      if (_h_cTheta ) {
+        scale(_h_cTheta ,fact);
+        for(auto & b : _h_cTheta->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_thetaAxis.width(idx));
+        }
+      }
       scale(_cPi, fact);
     }
 

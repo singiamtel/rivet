@@ -21,7 +21,7 @@ namespace Rivet {
     void init() {
 
       declare(FinalState(), "FS");
-      book(_nK0K0, "TMP/K0K0");
+      book(_nK0K0, "TMP/K0K0", refData(1,1,6));
 
     }
 
@@ -39,23 +39,16 @@ namespace Rivet {
       }
       if(ntotal==2 &&
 	 nCount[130]==1 && nCount[310]==1)
-	_nK0K0->fill();
+	_nK0K0->fill(sqrtS()/MeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nK0K0->val();
-      double error = _nK0K0->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 6);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nK0K0,crossSection()/ sumOfWeights() /nanobarn);
+      Estimate1DPtr tmp;
+      book(tmp,1,1,6);
+      barchart(_nK0K0,tmp);
     }
 
     /// @}
@@ -63,7 +56,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nK0K0;
+    Histo1DPtr _nK0K0;
     /// @}
 
 

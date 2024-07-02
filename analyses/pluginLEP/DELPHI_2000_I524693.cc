@@ -35,9 +35,9 @@ namespace Rivet {
       declare(InitialQuarks(), "IQF");
 
       // Histograms
-      book(_hLight,  1,1,1);
+      book(_hLight,  1,1,3);
       book(_hCharm,  1,1,2);
-      book(_hBottom, 1,1,3);
+      book(_hBottom, 1,1,1);
 
     }
 
@@ -94,8 +94,7 @@ namespace Rivet {
           double val = _hBottom->bin(ix+1).mean(2) - _hLight->bin(ix+1).mean(2);
           double err = sqrt(sqr(_hBottom->bin(ix+1).stdErr(2)) +
                             sqr(_hLight ->bin(ix+1).stdErr(2)));
-          hDiff->bin(ix+1).setVal(val);
-          hDiff->bin(ix+1).setErr(err);
+          hDiff->bin(ix+1).set(val,err);
         }
       }
     }

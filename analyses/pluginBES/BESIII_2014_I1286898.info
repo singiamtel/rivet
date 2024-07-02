@@ -12,8 +12,12 @@ References:
 RunInfo: e+ e- to hadrons
 NeedCrossSection: yes
 Beams: [e+, e-]
+Energies: [3.65, 3.748, 3.752, 3.755, 3.76, 3.766, 3.772, 3.773, 3.778, 3.784, 3.791, 3.798, 3.805, 3.81, 3.819, 3.9]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to p\bar{p}$ for energies between 3.65 and 3.9 GeV'
+  'Measurement of the cross section for $e^+e^-\to p\bar{p}$ for energies between 3.65 and 3.9 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords:
 BibKey: Ablikim:2014jrz
 BibTeX: '%%% contains utf-8, see: http://inspirehep.net/info/faq/general#utf8

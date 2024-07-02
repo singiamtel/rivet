@@ -1,0 +1,34 @@
+Name: CLEO_2001_I535113
+Year: 2001
+Summary: $K^*$ helicity angle in $B\to\psi(2S)K^*$
+Experiment: CLEO
+Collider: CESR
+InspireID: 535113
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 63 (2001) 031103
+Description:
+  'Measurement of the $K^*$ helicity angle in the charmonium decay for $B\to K^* \psi(2S)$. The data were read from figure 2 in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2000ped
+BibTeX: '@article{CLEO:2000ped,
+    author = "Richichi, S. J. and others",
+    collaboration = "CLEO",
+    title = "{Study of $B \to \psi_{2S} K$ and $B \to \psi_{2S}$ K*(892) decays}",
+    eprint = "hep-ex/0010036",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-REPRINT-2000-076, CLNS-00-1688, CLEO-00-17",
+    doi = "10.1103/PhysRevD.63.031103",
+    journal = "Phys. Rev. D",
+    volume = "63",
+    pages = "031103",
+    year = "2001"
+}
+'

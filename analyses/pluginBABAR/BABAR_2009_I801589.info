@@ -1,0 +1,36 @@
+Name: BABAR_2009_I801589
+Year: 2009
+Summary: Mass and angular distributions in $B^0\to K^+\pi^- (J/\psi,\psi(2S))$ and $B^+\to K^0_S\pi^+(J/\psi,\psi(2S))$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 801589
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 79 (2009) 112001
+RunInfo: Any process producing B+ and B0 mesons, originally Upsilon(4S) decays
+Description:
+  'Mass and angular distributions in $B^0\to K^+\pi^- (J/\psi,\psi(2S))$ and $B^+\to K^0_S\pi^+(J/\psi,\psi(2S))$. The corrected, background subtracted data was read from the figures in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2008bxw
+BibTeX: '@article{BaBar:2008bxw,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Search for the Z(4430)- at BABAR}",
+    eprint = "0811.0564",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "SLAC-PUB-13437, BABAR-PUB-08-045",
+    doi = "10.1103/PhysRevD.79.112001",
+    journal = "Phys. Rev. D",
+    volume = "79",
+    pages = "112001",
+    year = "2009"
+}
+'

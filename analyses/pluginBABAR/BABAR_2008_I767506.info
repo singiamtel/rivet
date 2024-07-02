@@ -1,0 +1,37 @@
+Name: BABAR_2008_I767506
+Year: 2008
+Summary: $J/\psi\omega$ mass in $B\to J/\psi\omega K$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 767506
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durhma.ac.uk>
+References:
+ - Phys.Rev.Lett. 101 (2008) 082001
+RunInfo: Any process producing B mesins, originally Upsilon(4S) decays
+Description:
+'Measurement of the $J/\psi\omega$ mass distribution in $B\to J/\psi\omega K$.
+ The background subtracted corrected data were read from figure 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007vxr
+BibTeX: '@article{BaBar:2007vxr,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of Y(3940) $\to J/\psi \omega$ in $B \to J/\psi \omega K$ at BABAR}",
+    eprint = "0711.2047",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "SLAC-PUB-13000, BABAR-PUB-07-044",
+    doi = "10.1103/PhysRevLett.101.082001",
+    journal = "Phys. Rev. Lett.",
+    volume = "101",
+    pages = "082001",
+    year = "2008"
+}
+'

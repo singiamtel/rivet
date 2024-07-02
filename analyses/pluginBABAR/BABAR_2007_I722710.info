@@ -1,0 +1,35 @@
+Name: BABAR_2007_I722710
+Year: 2007
+Summary: $B^0\to\eta^\prime K^{*0}$ decays
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 722710
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 98 (2007) 051802
+RunInfo: Any process producing B0, originally Upsilon(4S) decay
+Description:
+  'Measurement of the $K^{*0}$ mass and helicity angle distributions for $B^0\to\eta^\prime K^{*0}$ by Babar. The data was read from the plots in the paper which are however background subtracted and efficiency corrected.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2006tig
+BibTeX: '@article{BaBar:2006tig,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of $B \to \eta^\prime K^{*}$ and evidence for $B^{+} \to \eta^\prime \rho^{+}$}",
+    eprint = "hep-ex/0607109",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-11999, BABAR-PUB-06-045",
+    doi = "10.1103/PhysRevLett.98.051802",
+    journal = "Phys. Rev. Lett.",
+    volume = "98",
+    pages = "051802",
+    year = "2007"
+}
+'

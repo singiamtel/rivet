@@ -25,10 +25,10 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
 
-      book(_c_all  , "/TMP/all");
-      book(_c_omega, "/TMP/omega");
-      book(_c_rho  , "/TMP/rho");
-      book(_c_other, "/TMP/other");
+      book(_c_all  , 1, 1, 1);
+      book(_c_omega, 1, 1, 2);
+      book(_c_rho  , 1, 1, 3);
+      book(_c_other, 1, 1, 4);
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -78,7 +78,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched) {
-	    _c_all->fill();
+	    _c_all->fill(round(sqrtS()/MeV));
 	    found = true;
 	  }
 	}
@@ -97,7 +97,7 @@ namespace Rivet {
 	  }
 	  if(matched2) {
 	    if(p2.pid()==223)
-	      _c_omega->fill();
+	      _c_omega->fill(round(sqrtS()/MeV));
 	    foundOmegaPhi=true;
 	  }
 	}
@@ -133,7 +133,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched) {
-	    _c_rho->fill();
+	    _c_rho->fill(round(sqrtS()/MeV));
 	    founda0Rho=true;
 	    break;
 	  }
@@ -141,39 +141,17 @@ namespace Rivet {
 	if(founda0Rho) break;
       }
       if(found && !foundOmegaPhi && ! founda0Rho)
-	_c_other->fill();
+	_c_other->fill(round(sqrtS()/MeV));
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/nanobarn/sumOfWeights();
-      for (unsigned int ix=1;ix<5;++ix) {
-        double sigma(0.),error(0.);
-        if(ix==1) {
-          sigma = _c_all->val()*fact;
-          error = _c_all->err()*fact;
-        }
-        else if(ix==2) {
-          sigma = _c_omega->val()*fact;
-          error = _c_omega->err()*fact;
-        }
-        else if(ix==3) {
-          sigma = _c_rho->val()*fact;
-          error = _c_rho->err()*fact;
-        }
-        else if(ix==4) {
-          sigma = _c_other->val()*fact;
-          error = _c_other->err()*fact;
-        }
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      scale(_c_all,   fact);
+      scale(_c_omega, fact);
+      scale(_c_rho,   fact);
+      scale(_c_other, fact);
     }
 
     /// @}
@@ -181,7 +159,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_all, _c_omega, _c_rho, _c_other;
+    BinnedHistoPtr<int> _c_all, _c_omega, _c_rho, _c_other;
     /// @}
 
 

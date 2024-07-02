@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief R measurement
   class PLUTO_1982_I166799 : public Analysis {
   public:
 
@@ -21,8 +21,31 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       // counters for R
-      book(_c_hadrons, "/TMP/sigma_hadrons");
-      book(_c_muons, "/TMP/sigma_muons");
+      book(_c_hadrons[0], "/TMP/sigma_hadrons", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_hadrons[1], 2,1,1);
+      book(_c_muons, "/TMP/sigma_muons",refData<YODA::BinnedEstimate<string>>(1,1,1));
+      for(unsigned int ix=0;ix<2;++ix) {
+        for (const string& en : _c_hadrons[ix].binning().edges<0>()) {
+          const size_t idx = en.find("-");
+          if(idx!=std::string::npos) {
+            const double emin = std::stod(en.substr(0,idx));
+            const double emax = std::stod(en.substr(idx+1,string::npos));
+            if(inRange(sqrtS()/GeV, emin, emax)) {
+              _ecms[ix] = en;
+              break;
+            }
+          }
+          else {
+            const double end = std::stod(en)*GeV;
+            if (isCompatibleWithSqrtS(end)) {
+              _ecms[ix] = en;
+              break;
+            }
+          }
+        }
+      }
+      if(_ecms[0].empty() && _ecms[1].empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -38,43 +61,23 @@ namespace Rivet {
       }
       if(nCount[-13]==1 and nCount[13]==1 && ntotal==2+nCount[22]) {
         // mu+mu- + photons
-        _c_muons->fill();
+        _c_muons->fill(_ecms[0]);
       }
       else {
         // everything else
-        _c_hadrons->fill();
+        _c_hadrons[0]->fill(_ecms[0]);
+        _c_hadrons[1]->fill(_ecms[1]);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      Estimate0D R = *_c_hadrons/ *_c_muons;
       double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      double sig_m = _c_muons  ->val()*fact;
-      double err_m = _c_muons  ->err()*fact;
-      Estimate1DPtr hadrons;
-      book(hadrons, "sigma_hadrons");
-      Estimate1DPtr muons;
-      book(muons, "sigma_muons"  );
-      Estimate1DPtr mult;
+      scale(_c_hadrons[1],fact);
+      BinnedEstimatePtr<string> mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(R.val(), R.errPos());
-          hadrons->bin(b.index()).set(sig_h, err_h);
-          muons  ->bin(b.index()).set(sig_m, err_m);
-        }
-      }
-      // cross section
-      book(hadrons, 2, 1, 1);
-      for (auto& b : hadrons->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sig_h, err_h);
-        }
-      }
+      divide(_c_hadrons[0],_c_muons,mult);
     }
 
     /// @}
@@ -82,7 +85,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons, _c_muons;
+    BinnedHistoPtr<string> _c_hadrons[2], _c_muons;
+    string _ecms[2];
     /// @}
 
 

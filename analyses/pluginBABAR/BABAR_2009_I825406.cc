@@ -22,7 +22,8 @@ namespace Rivet {
       UnstableParticles ufs = UnstableParticles(Cuts::pid==511);
       declare(ufs, "B0");
       // histograms
-      book(_p,1,1,1);
+      book(_p[0],1,1,1);
+      book(_p[1],"TMP/wgt");
     }
 
     void findChildren(const Particle & p, Particles & pim, Particles & pip,
@@ -71,13 +72,15 @@ namespace Rivet {
 	FourMomentum ppim = boost2.transform(boost.transform(pim[0].momentum()));
 	Vector3 n = ppip.p3().cross(ppim.p3()).unit();
 	double cTheta = n.dot(pa1m.p3().unit());
-	_p->fill(5.28,(2.-5.*sqr(cTheta)));
+	_p[0]->fill((2.-5.*sqr(cTheta)));
+        _p[1]->fill();
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      scale(_p[0], 1./ *_p[1]);
     }
 
     /// @}
@@ -85,7 +88,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Profile1DPtr _p;
+    CounterPtr _p[2];
     /// @}
 
 

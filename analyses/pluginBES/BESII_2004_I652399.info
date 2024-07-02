@@ -1,0 +1,37 @@
+Name: BESII_2004_I652399
+Year: 2004
+Summary: Mass and angular distributions in $J/\psi\to\omega \pi^+\pi^-$
+Experiment: BESII
+Collider: BEPC
+InspireID: 652399
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 598 (2004) 149-158
+RunInfo: e+e- > J/psi
+NeedCrossSection: no
+Beams: [e-, e+]
+Energies: [3.1]
+Description:
+  'Mass and angular distributions in $J/\psi\to\omega \pi^+\pi^-$. The data were read from the figures in the paper and are not corrected for acceptance.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2004mws
+BibTeX: '@article{BES:2004mws,
+    author = "Ablikim, M. and others",
+    collaboration = "BES",
+    title = "{The sigma pole in J / psi ---\ensuremath{>} omega pi+ pi-}",
+    eprint = "hep-ex/0406038",
+    archivePrefix = "arXiv",
+    doi = "10.1016/j.physletb.2004.07.052",
+    journal = "Phys. Lett. B",
+    volume = "598",
+    pages = "149--158",
+    year = "2004"
+}
+'

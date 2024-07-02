@@ -1,0 +1,37 @@
+Name: ARGUS_1990_I295621
+Year: 1990
+Summary: $pp$ and $\Lambda\Lambda$ production at the $\Upsilon(1,2S)$ and nearby continuum
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 295621
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 49 (1991) 349-354
+RunInfo:
+  $e^+ e^-$ analysis in the 10 GeV CMS energy range
+Beams: [e+, e-]
+Energies: [9.46,10.,10.02]
+Description:
+'Measurement of the production of  $pp$ and $\Lambda\Lambda$ in $\Upsilon(1,2S)$ decays
+ and the nearby $e^+e^-$ continuum.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1990rrm
+BibTeX: '@article{ARGUS:1990rrm,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{STUDY OF p p AND LAMBDA LAMBDA PRODUCTION IN e+ e- ANNIHILATION AT 10-GeV CENTER-OF-MASS ENERGY}",
+    reportNumber = "DESY-90-033",
+    doi = "10.1007/BF01549686",
+    journal = "Z. Phys. C",
+    volume = "49",
+    pages = "349--354",
+    year = "1991"
+}
+'

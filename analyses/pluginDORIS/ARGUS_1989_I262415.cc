@@ -38,7 +38,7 @@ namespace Rivet {
     void findDecayProducts(Particle mother, Particles& unstable) {
       for(const Particle & p: mother.children()) {
         const int id = p.pid();
-	if(id == 3124) {
+	if(id == 102134) {
 	  unstable.push_back(p);
 	}
 	if(!p.children().empty())
@@ -56,7 +56,7 @@ namespace Rivet {
       if (upsilons.empty()) {
         MSG_DEBUG("No Upsilons found => continuum event");
         _weightSum_cont->fill();
-        for (const Particle& p : ufs.particles(Cuts::abspid==3124)) {
+        for (const Particle& p : ufs.particles(Cuts::abspid==102134)) {
           const double xp = 2.*p.E()/sqrtS();
           const double beta = p.p3().mod() / p.E();
 	  _h_cont->fill(xp,1./beta);

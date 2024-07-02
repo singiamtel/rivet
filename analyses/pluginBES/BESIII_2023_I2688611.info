@@ -1,0 +1,38 @@
+Name: BESIII_2023_I2688611
+Year: 2023
+Summary: Cross section for $e^+e^-\to\eta\phi$ for centre-of-mass energies between 3.773 and 4.6 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2688611
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2308.08161 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Energies: [3.773, 4.008, 4.086, 4.178, 4.189, 4.2, 4.21, 4.219, 4.226, 4.236, 4.242, 4.244,
+           4.258, 4.267, 4.278, 4.308, 4.358, 4.387, 4.416, 4.467, 4.527, 4.575, 4.6]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to\eta\phi$ for centre-of-mass energies between  3.773 and 4.6 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Ablikim:2023kvh
+BibTeX: '@article{Ablikim:2023kvh,
+    author = "Ablikim, M. and others",
+    title = "{Study of ee to eta phi at center-of-mass energies from 3.773 to 4.600 GeV}",
+    eprint = "2308.08161",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "about 4000",
+    month = "8",
+    year = "2023"
+}
+'

@@ -1,6 +1,6 @@
 Name: BESIII_2021_I1867196
 Year: 2021
-Summary: Cross section for $e^+e^-\to D_S^{*+} D_{s0}^*(2317)^-$, $D_S^{*+} D_{s1}^*(2460)^-$, $D_S^{*+} D_{s1}^*(2536)^-$ between 4.6 and 4.7 GeV
+Summary: Cross section for $e^+e^-\to D_s^{*+} D_{s0}^*(2317)^-$, $D_s^{*+} D_{s1}^*(2460)^-$, $D_s^{*+} D_{s1}^*(2536)^-$ between 4.6 and 4.7 GeV
 Experiment: BESIII
 Collider: BEPC
 InspireID: 1867196
@@ -12,8 +12,12 @@ References:
  - Phys.Rev.D 104 (2021) 032012
 RunInfo: e+e- to hadrons
 Beams: [e+, e-]
+Energies: [4.600, 4.612, 4.626, 4.640, 4.660, 4.680, 4.700]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for Cross section for $e^+e^-\to D_S^{*+} D_{s0}^*(2317)^-$, $D_S^{*+} D_{s1}^*(2460)^-$, $D_S^{*+} D_{s1}^*(2536)^-$ between 4.6 and 4.7 GeV by the BESIII collaboration.'
+  'Measurement of the cross section for Cross section for $e^+e^-\to D_s^{*+} D_{s0}^*(2317)^-$, $D_s^{*+} D_{s1}^*(2460)^-$, $D_s^{*+} D_{s1}^*(2536)^-$ between 4.6 and 4.7 GeV by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

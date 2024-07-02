@@ -1,0 +1,38 @@
+Name: BESIII_2024_I2751832
+Year: 2024
+Summary: Cross section for $e^+e^-\to\pi^+\pi^-\pi^0$ between 2.00 and 3.08 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2751832
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2401.14711
+RunInfo: e+ e- to hadrons, pi0 set stable
+Beams: [e+, e-]
+Energies:  [2.0, 2.05, 2.1, 2.125, 2.15, 2.175, 2.2, 2.2324, 2.3094, 2.3864, 2.396, 2.6444, 2.6464, 2.9, 2.95, 2.981, 3.0, 3.02, 3.08]
+Options:
+ - ENERGY=*
+Description:
+  'Cross section for  $e^+e^-\to\pi^+\pi^-\pi^0$ between 2.00 and 3.08 GeV measured by BESII.
+   The $\rho\pi$ and $\rho(1450)\pi$ subprocesses are also extracted.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024okl
+BibTeX: '@article{BESIII:2024okl,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Study of $e^{+}e^{-}\rightarrow\pi^{+}\pi^{-}\pi^{0}$ at $\sqrt{s}$ from 2.00 to 3.08 GeV at BESIII}",
+    eprint = "2401.14711",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "1",
+    year = "2024"
+}
+'

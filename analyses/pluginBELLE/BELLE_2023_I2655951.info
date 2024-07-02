@@ -1,0 +1,34 @@
+Name: BELLE_2023_I2655951
+Year: 2023
+Summary: $K^-K^0_S$ mass distribution in $B\to D^{(*)}K^-K^0_S$ decays
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2655951
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2305.01321 [hep-ex]
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+'Measurement of $K^-K^0_S$ mass distribution in $B\to D^{(*)}K^-K^0_S$ decays.
+ The corrected, background subtracted data was read from the figures in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle-II:2023gye
+BibTeX: '@article{Belle-II:2023gye,
+    author = "Abudinen, F. and others",
+    collaboration = "Belle-II",
+    title = "{Observation of ${B\to D^{(*)} K^- K^{0}_S}$ decays using the 2019-2022 Belle II data sample}",
+    eprint = "2305.01321",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BELLE2-CONF-2023-003",
+    month = "5",
+    year = "2023"
+}
+'

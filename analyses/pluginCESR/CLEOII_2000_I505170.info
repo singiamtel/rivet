@@ -1,0 +1,37 @@
+Name: CLEOII_2000_I505170
+Year: 2000
+Summary: Spectral functions in  $\tau^-\to\pi^-\pi^-\pi^+\pi^0\nu_\tau$
+Experiment: CLEOII
+Collider: CESR
+InspireID: 505170
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 61 (2000) 072003
+RunInfo: Any process producing tau leptons, originally e+e-
+Description:
+  'Measurement of the spectral functions for $\tau^-\to\pi^-\pi^-\pi^+\pi^0\nu_\tau$, 
+  $\tau^-\to\pi^-\omega\nu_\tau$ and non-$\omega$  $\tau^-\to\pi^-\pi^-\pi^+\pi^0\nu_\tau$.
+  The helicity angle in $\tau^-\to\pi^-\omega\nu_\tau$ and mass distributions are also measured.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1999heg
+BibTeX: '@article{CLEO:1999heg,
+    author = "Edwards, K. W. and others",
+    collaboration = "CLEO",
+    title = "{Resonant structure of tau ---\ensuremath{>} three pi pi0 neutrino(tau) and tau ---\ensuremath{>} omega pi neutrino(tau) decays}",
+    eprint = "hep-ex/9908024",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-REPRINT-1999-109, CLNS-99-1631, CLEO-99-11",
+    doi = "10.1103/PhysRevD.61.072003",
+    journal = "Phys. Rev. D",
+    volume = "61",
+    pages = "072003",
+    year = "2000"
+}
+'

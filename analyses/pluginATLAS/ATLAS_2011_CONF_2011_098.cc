@@ -5,6 +5,7 @@
 #include "Rivet/Projections/VisibleFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -71,8 +72,7 @@ namespace Rivet {
       // Temp: calorimeter module failure with 10% acceptance loss;
       // region unknown ==> randomly choose 10% of events to be vetoed
 
-      if ( rand()/static_cast<double>(RAND_MAX) < 0.1 )
-        vetoEvent;
+      if ( rand01() < 0.1 ) vetoEvent;
 
       Jets tmp_cand_jets = apply<FastJets>(event, "AntiKtJets04").jetsByPt(Cuts::pT>20*GeV && Cuts::abseta < 2.8);
 
@@ -145,7 +145,7 @@ namespace Rivet {
 	if(fabs( j.eta() ) <= 2.8) {
 	  recon_jets.push_back(j);
 	  if ( fabs( j.eta() ) <= 2.5 && j.perp()>50. &&
-	       j.bTagged() && rand()/static_cast<double>(RAND_MAX) < 0.5 )
+	       j.bTagged() && rand01() < 0.5 )
 	    bjets.push_back(j);
 	}
       }

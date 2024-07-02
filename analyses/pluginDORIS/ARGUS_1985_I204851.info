@@ -1,0 +1,35 @@
+Name: ARGUS_1985_I204851
+Year: 1985
+Summary: Spectrum of $D^{*+}$ mesons in $e^+e^-$ at $\sqrt{s}=10.4\,$GeV
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 204851
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 150 (1985) 235-241
+RunInfo: e+ e- > hadrons
+Beams: [e+, e-]
+Energies: [10.4]
+Description:
+  'Measurement of the scaled momentum spectrum of $D^{*+}$ mesons in $e^+e^-$ at $\sqrt{s}=10.4\,$GeV'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1984cqw
+BibTeX: '@article{ARGUS:1984cqw,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Production and Decay of the Charged D* Mesons in e+ e- Annihilation at 10-GeV Center-Of-Mass Energy}",
+    reportNumber = "DESY-84-073",
+    doi = "10.1016/0370-2693(85)90177-7",
+    journal = "Phys. Lett. B",
+    volume = "150",
+    pages = "235--241",
+    year = "1985"
+}
+'

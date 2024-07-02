@@ -12,10 +12,14 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
-Luminosity_fb: 
+Energies:  [ 0.750, 0.760, 0.764, 0.774, 0.778, 0.780, 0.781, 0.782, 0.783,
+             0.784, 0.785, 0.786, 0.790, 0.794, 0.800, 0.810, 0.820, 0.840,
+             0.880, 0.920, 0.940, 0.950, 0.958, 0.970]
+Options:
+ - ENERGY=*
 Description:
-Description:
-  'Measurement of the cross section for $e^+e^-\to\pi^0\pi^0\gamma$ at energies between 0.6 and 0.97 GeV.'
+  'Measurement of the cross section for $e^+e^-\to\pi^0\pi^0\gamma$ at energies between 0.6 and 0.97 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Akhmetshin:2003rg
 BibTeX: '@article{Akhmetshin:2003rg,

@@ -94,10 +94,10 @@ namespace Rivet {
     void finalize() {
       normalize(_h_ctheta1);
       normalize(_h_ctheta2);
-      Estimate1DPtr _h_alpha;
+      Estimate0DPtr _h_alpha;
       book(_h_alpha,1,1,1);
       pair<double,double> alpha = calcAlpha(_h_ctheta1);
-      _h_alpha->bin(1).set(alpha.first, alpha.second);
+      _h_alpha->set(alpha.first, alpha.second);
     }
 
     /// @}

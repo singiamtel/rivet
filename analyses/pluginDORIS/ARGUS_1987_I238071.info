@@ -1,0 +1,33 @@
+Name: ARGUS_1987_I238071
+Year: 1987
+Summary: $\pi^+\pi^-$ mass spectrum in $\Upsilon(2S)\to\pi^+\pi^-\Upsilon(1S)$
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 238071
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 35 (1987) 283
+RunInfo: In princple any process producing Upsilon(2S)
+Description:
+  'Measurement of the $\pi^+\pi^-$ mass spectrum in $\Upsilon(2S)\to\pi^+\pi^-\Upsilon(1S)$.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1986gsf
+BibTeX: '@article{ARGUS:1986gsf,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{The Hadronic Transitions From $\Upsilon$ (2s) to $\Upsilon$ (1s)}",
+    reportNumber = "DESY-86-169",
+    doi = "10.1007/BF01570762",
+    journal = "Z. Phys. C",
+    volume = "35",
+    pages = "283",
+    year = "1987"
+}
+'

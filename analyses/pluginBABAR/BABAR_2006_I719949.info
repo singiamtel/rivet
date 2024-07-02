@@ -1,0 +1,37 @@
+Name: BABAR_2006_I719949
+Year: 2006
+Summary: $e^+e^-\to\rho^0\rho^0$ and $\rho^0\phi^0$ at $\sqrt{s}=10.58\,$GeV
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 719949
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 97 (2006) 112002
+RunInfo: e+ e- > hadrons
+Beams: [e+, e-]
+Energies: [10.58]
+Description:
+  'Measurement of the cross section, production angle and helicity angles in the decays for $e^+e^-\to\rho^0\rho^0$ and $\rho^0\phi^0$ at $\sqrt{s}=10.58\,$GeV. The cross section was taken from the tet of the paper and the corrected angular distributionss from figures 5 and 6.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2006vxk
+BibTeX: '@article{BaBar:2006vxk,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of e+e- Annihilations into the C = +1 Hadronic Final States rho0 rho0 and phi rho0}",
+    eprint = "hep-ex/0606054",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-11923, BABAR-PUB-06-035",
+    doi = "10.1103/PhysRevLett.97.112002",
+    journal = "Phys. Rev. Lett.",
+    volume = "97",
+    pages = "112002",
+    year = "2006"
+}
+'

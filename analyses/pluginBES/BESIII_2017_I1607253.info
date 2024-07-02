@@ -1,0 +1,41 @@
+Name: BESIII_2017_I1607253
+Year: 2017
+Summary: Cross sections for $e^+e^-\to \phi\phi\phi$ and $\phi\phi\omega$ for energies between 4 and 4.6 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 1607253
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 774 (2017) 78-86
+ - arXiV:1706.07490 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+,e-]
+Energies : [4.008, 4.226, 4.258, 4.358, 4.416, 4.6]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross sections for $e^+e^-\to \phi\phi\phi$ and $\phi\phi\omega$ for energies between 4 and 4.6 GeV
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2017ftc
+BibTeX: '@article{BESIII:2017ftc,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurement of cross sections of the interactions $e^+e^-\rightarrow \phi\phi\omega$ and $e^+e^-\rightarrow \phi\phi\phi$ at center-of-mass energies from 4.008 to 4.600 GeV}",
+    eprint = "1706.07490",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1016/j.physletb.2017.09.021",
+    journal = "Phys. Lett. B",
+    volume = "774",
+    pages = "78--86",
+    year = "2017"
+}
+'

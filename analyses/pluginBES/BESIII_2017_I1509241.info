@@ -12,8 +12,12 @@ References:
  - Phys.Lett. B771 (2017) 45-51
 RunInfo: e+e- to hadrons
 Beams: [e+, e-]
+Energies:  [4.008, 4.085, 4.189, 4.208, 4.217, 4.226, 4.242, 4.258, 4.308, 4.358, 4.387, 4.416, 4.600]
+Options:
+ - ENERGY=*
 Description:
-  'Cross section for $e^+e^-\to p \bar{p} \pi^0$ at energies between 4.008 and 4.600 GeV measured by the BESIII collaboration.'
+  'Cross section for $e^+e^-\to p \bar{p} \pi^0$ at energies between 4.008 and 4.600 GeV measured by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Validated using Herwig 7 events'
 #ReleaseTests:

@@ -23,8 +23,17 @@ namespace Rivet {
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
       // book counters
-      book(_c2Kp2Km , "TMP/2Kp2Km" );
-      book(_cKpKmPhi, "TMP/KpKmPhi");
+      for(unsigned int ix=0;ix<2;++ix)
+	book(_sigma[ix],ix+1, 1, 1);
+
+      for (const string& en : _sigma[0].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -49,7 +58,7 @@ namespace Rivet {
         ++ntotal;
       }
       if(ntotal==4 && nCount[321]==2 && nCount[-321]==2)
-        _c2Kp2Km->fill();
+        _sigma[0]->fill(_ecms);
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p :  ufs.particles(Cuts::pid==333)) {
         if(p.children().empty()) continue;
@@ -72,7 +81,7 @@ namespace Rivet {
             }
           }
           if(matched)
-            _cKpKmPhi->fill();
+            _sigma[1]->fill(_ecms);
         }
       }
     }
@@ -80,26 +89,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<3;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma =  _c2Kp2Km->val();
-          error =  _c2Kp2Km->err();
-        }
-        else {
-          sigma =  _cKpKmPhi->val();
-          error =  _cKpKmPhi->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr  mult;
-        book(mult,ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for(unsigned int ix=0;ix<2;++ix)
+        scale(_sigma[ix],crossSection()/ sumOfWeights() /picobarn);
     }
 
     /// @}
@@ -107,7 +98,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c2Kp2Km,_cKpKmPhi;
+    BinnedHistoPtr<string> _sigma[2];
+    string _ecms;
     /// @}
 
   };

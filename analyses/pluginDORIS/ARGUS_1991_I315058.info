@@ -1,0 +1,34 @@
+Name: ARGUS_1991_I315058
+Year: 1991
+Summary: $\gamma\gamma\to \rho^+\rho^-$ between 1.2 and 2.2 GeV
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 315058
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 267 (1991) 535-540
+RunInfo: gamma gamma to hadrons, pi0 mesons must be set stable
+Beams: [gamma, gamma]
+Description:
+  'Measurement of the cross section for $\gamma\gamma\to \rho^+\rho^-$ between 1.2 and 2.2 GeV'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1991qpj
+BibTeX: '@article{ARGUS:1991qpj,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{A Spin parity analysis of gamma gamma ---\ensuremath{>} rho+ rho-}",
+    reportNumber = "DESY-91-019",
+    doi = "10.1016/0370-2693(91)90907-8",
+    journal = "Phys. Lett. B",
+    volume = "267",
+    pages = "535--540",
+    year = "1991"
+}
+'

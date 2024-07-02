@@ -35,12 +35,10 @@ namespace Rivet {
       book(_h["K0"]     , 3, 1, 1);
       book(_wSum,"TMP/wSum");
 
-      _axes["charged"] = YODA::Axis<double>{22, 0.6, 5.0};
-      _axes["pi"] = YODA::Axis<double>{1.17, 1.47, 1.77, 2.07, 2.345, 2.545, 2.695, 2.875, 3.195,
+      _axes["charged"] = YODA::Axis<double>(22, 0.6, 5.0);
+      _axes["pi"] = YODA::Axis<double>{1.17, 1.47, 1.77, 2.07, 2.37, 2.545, 2.695, 2.85,3.1,3.315,
                                        3.46, 3.56, 3.69, 3.865, 4.05, 4.28, 4.565, 4.77, 4.89};
-      _axes["Kp"] = YODA::Axis<double>{1.17, 1.47, 1.77, 2.27, 2.695, 3.09, 3.46, 3.56, 3.69, 3.865, 4.05, 4.28, 4.56};
-      _axes["proton"] = YODA::Axis<double>{1.17, 1.47, 1.77, 2.27, 2.695, 3.09, 3.46, 3.56, 3.69, 3.85};
-      _axes["K0"] = YODA::Axis<double>{1.575, 2.025, 2.4, 2.7, 3.0, 3.3, 3.75, 4.35};
+      _axes["K0"] = YODA::Axis<double>{1.5, 2.1, 2.4, 2.7, 3.0, 3.3, 3.6, 4.5};
     }
 
 
@@ -64,36 +62,54 @@ namespace Rivet {
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle & p : ufs.particles(Cuts::pid==130 || Cuts::pid==310)) {
         const double xi = -log(p.p3().mod()/meanBeamMom);
-        fillhist("K0", xi);
+        fillhist("K0", "K0", xi);
       }
       // charged particles
       for (const Particle& p : cfs.particles()) {
         double xi = -log(p.p3().mod()/meanBeamMom);
-        fillhist("charged", xi);
+        fillhist("charged", "charged", xi);
         int id = abs(p.pid());
         if (id==211) {
-          fillhist("pi", xi);
+          fillhist("pi", "pi", xi);
         }
         else if (id==321) {
-          fillhist("Kp", xi);
+          fillhist("Kp", "pi", xi);
         }
         else if (id==2212) {
-          fillhist("proton", xi);
+          fillhist("proton", "pi", xi);
         }
       }
     }
 
-    void fillhist(const string& label, const double value) {
+    void fillhist(const string& label_hist, const string& label_axis, const double value) {
       string edge = "OTHER";
-      const size_t idx = _axes[label].index(value);
-      if (idx && idx <= _edges[label].size())  edge = _edges[label][idx-1];
-      _h[label]->fill(edge);
+      size_t idx = _axes[label_axis].index(value);
+      // binning for pi, Kp and proton same but different masked bins (pion only 1 masked bin 9)
+      if ( label_axis=="pi" ) {
+        if (idx==9) idx=0;
+        else if (idx>9) --idx;
+      }
+      if (idx && idx <= _edges[label_axis].size())  edge = _edges[label_axis][idx-1];
+      _h[label_hist]->fill(edge);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
       scale(_h, 1./ *_wSum);
+      for( auto & hist : _h) {
+        for(auto & b: hist.second->bins()) {
+          size_t idx = b.index();
+          if (hist.first=="pi" || _axes.find(hist.first)==_axes.end()) {
+            auto it = std::find(_edges["pi"].begin(), _edges["pi"].end(), _edges[hist.first][idx-1]);
+            idx = std::distance(_edges["pi"].begin(), it)+1;
+            if(idx>=9) ++idx;
+            b.scaleW(1./_axes["pi"].width(idx));
+          }
+          else
+            b.scaleW(1./_axes[hist.first].width(idx));
+        }
+      }
     }
 
     /// @}

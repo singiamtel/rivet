@@ -1,0 +1,35 @@
+Name: ARGUS_1987_I247567
+Year: 1987
+Summary: Cross Section for $\gamma\gamma\to 2\pi^+2\pi^-\pi^0$ and $\rho^0\omega$ for $\sqrt{s}=1\to3.3\,$GeV
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 247567
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 196 (1987) 101
+RunInfo: gamma gamma to hadrons
+Beams: [gamma, gamma]
+Description:
+  'Measurement of the cross section for $\gamma\gamma\to 2\pi^+2\pi^-\pi^0$ and $\rho^0\omega$ for $\sqrt{s}=1\to3.3\,$GeV'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1987oba
+BibTeX: '@article{ARGUS:1987oba,
+    author = "Albrecht, H. and others",
+    editor = "Courau, A. and Kessler, P.",
+    collaboration = "ARGUS",
+    title = "{First Observation of $\gamma \gamma \to \omega \rho^0$}",
+    reportNumber = "DESY-87-048",
+    doi = "10.1016/0370-2693(87)91684-4",
+    journal = "Phys. Lett. B",
+    volume = "196",
+    pages = "101",
+    year = "1987"
+}
+'

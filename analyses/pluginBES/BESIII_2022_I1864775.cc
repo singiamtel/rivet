@@ -275,9 +275,9 @@ namespace Rivet {
       normalize(_h_clam[1]);
       // calculate alpha0
       pair<double,pair<double,double> > alpha0 = calcAlpha0(_h_cTheta);
-      Estimate1DPtr _h_alpha0;
+      Estimate0DPtr _h_alpha0;
       book(_h_alpha0,2,1,1);
-      _h_alpha0->bin(1).set(alpha0.first, alpha0.second);
+      _h_alpha0->set(alpha0.first, alpha0.second);
       double s2 = -1. + sqr(alpha0.first);
       double s3 = 3 + alpha0.first;
       double s1 = sqr(s3);
@@ -325,13 +325,13 @@ namespace Rivet {
 														     8*(c_T3.first*c_T4.first*alpha0.second.second +  s3*c_T4.first*c_T3.second +  s3*c_T3.first*c_T4.second)* s1*s5*s6))/
 													    (4* pow(3 + alpha0.first,3)* pow(c_T3.first,3)* pow(c_T4.first,3) -  9*s2*s3*c_T3.first*c_T4.first*s4)))/
 		      (disc + 2*s1*s5*s6)))/(2.*pow(c_T3.first,2));
-      Estimate1DPtr _h_alphaM;
+      Estimate0DPtr _h_alphaM;
       book(_h_alphaM,2,1,3);
-      _h_alphaM->bin(1).set(aM, make_pair(-aM_M , -aM_P));
+      _h_alphaM->set(aM, make_pair(-aM_M , -aM_P));
 
-      Estimate1DPtr _h_alphaP;
+      Estimate0DPtr _h_alphaP;
       book(_h_alphaP,2,1,5);
-      _h_alphaP->bin(1).set(aP, make_pair(-aP_M , -aP_P));
+      _h_alphaP->set(aP, make_pair(-aP_M , -aP_P));
       // now for Delta
       double sDelta = (-2.*(3. + alpha0.first)*c_T3.first)/(aM*sqrt(1 - sqr(alpha0.first)));
       double cDelta = (-3*(3 + alpha0.first)*c_T2.first)/(aM*aP*sqrt(1 - sqr(alpha0.first)));
@@ -345,26 +345,26 @@ namespace Rivet {
 	(pow(1 - pow(alpha0.first,2),1.5)*pow(c_T4.first,3)*pow(-((disc + 2*s1*s5*s6)/   (s2*s6)),1.5)*(-9*s2*s4 + 4*s1*s5*s6));
       ds_P /= sqrt(1.-sqr(sDelta));
       ds_M /= sqrt(1.-sqr(sDelta));
-      Estimate1DPtr _h_sin;
+      Estimate0DPtr _h_sin;
       book(_h_sin,2,1,2);
-      _h_sin->bin(1).set(Delta, make_pair(-ds_P, -ds_M));
+      _h_sin->set(Delta, make_pair(-ds_P, -ds_M));
       // final the lambdas
       // xibar+
-      Estimate1DPtr _h_lamP;
+      Estimate0DPtr _h_lamP;
       book(_h_lamP, 2,1,7);
       pair<double,double> alpha = calcAlpha(_h_clam[0]);
       alpha.second = sqrt(sqr(alpha.second/alpha.first)+ 0.5*(sqr(aM_M)+sqr(aM_P))/sqr(aM));
       alpha.first   /= aM;
       alpha.second *=alpha.first;
-      _h_lamP->bin(1).set(alpha.first, alpha.second);
+      _h_lamP->set(alpha.first, alpha.second);
       // xi-
-      Estimate1DPtr _h_lamM;
+      Estimate0DPtr _h_lamM;
       book(_h_lamM, 2,1,8);
       alpha = calcAlpha(_h_clam[1]);
       alpha.second = sqrt(sqr(alpha.second/alpha.first)+ 0.5*(sqr(aP_M)+sqr(aP_P))/sqr(aP));
       alpha.first   /= aP;
       alpha.second *=alpha.first;
-      _h_lamM->bin(1).set(alpha.first, alpha.second);
+      _h_lamM->set(alpha.first, alpha.second);
     }
 
     /// @}

@@ -1,0 +1,36 @@
+Name: BABAR_2007_I748372
+Year: 2007
+Summary: Measurement of angular distributions in $B\to K^* + J/\psi, \psi(2S)$ and $\chi_{c1}$ decays 
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 748372
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 76 (2007) 031102
+RunInfo: Any process producing B mesons, orginally Upsilon(4S) decay
+Description:
+  'Measurement of the $K^*$ helicity angle and transversality angles in the charmonium decay for $B\to K^* + J/\psi, \psi(2S)$ and $\chi_{c1}$ decays. The data were read from Figure 2 in the paper which are corrected for efficiency/acceptance.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007rbr
+BibTeX: '@article{BaBar:2007rbr,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of decay amplitudes of $B \to J/\psi K^{*}, \psi(2S) K^{*}$, and $\chi_{c1} K^{*}$ with an angular analysis}",
+    eprint = "0704.0522",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "SLAC-PUB-12430, BABAR-PUB-07-009",
+    doi = "10.1103/PhysRevD.76.031102",
+    journal = "Phys. Rev. D",
+    volume = "76",
+    pages = "031102",
+    year = "2007"
+}
+'

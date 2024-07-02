@@ -1,0 +1,37 @@
+Name: CRYSTAL_BALL_1992_I306832
+Year: 1992
+Summary: Cross section for $e^+e^-\to\Upsilon(1,2S)\to\mu^+\mu^-$
+Experiment: CRYSTAL_BALL
+Collider: DORIS
+InspireID: 306832
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 53 (1992) 193-206
+RunInfo: e+e- > Upslion(1,2S) -> mu+mu-
+Beams: [e+, e-]
+Options:
+ - ECENT=9362.9,9388.3,9396.3,9407.4,9416.9,9426.1,9436.2,9444.3,9448.4,9452.5,9455.4,9457.5,9459.1,9459.5,9460.1,9460.4,9460.6,9461.3,9467.5,9471.2,9473.6,9478.0,9481.8,9486.1,9490.0,9493.6,9497.6,9506.6,9966.2,9985.4,10009.4,10014.6,10018.4,10022.1,10023.3,10023.9,10024.6,10028.2,10029.5,10033.2,10039.1
+Description:
+  Cross section for $e^+e^-\to\Upsilon(1,2S)\to\mu^+\mu^-$. The continuum contribution was subtracted.
+   As the analyses requires the beam energy smearing described in the paper then central CMS energy should be specified using the ECENT (in MeV) option..
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CrystalBall:1990jgu
+BibTeX: '@article{CrystalBall:1990jgu,
+    author = "Kobel, M. and others",
+    collaboration = "Crystal Ball",
+    title = "{Measurement of the decay of the Upsilon (1S) and Upsilon (2S) resonances to muon pairs}",
+    reportNumber = "SLAC-PUB-5402, DESY-91-089",
+    doi = "10.1007/BF01597555",
+    journal = "Z. Phys. C",
+    volume = "53",
+    pages = "193--206",
+    year = "1992"
+}
+'

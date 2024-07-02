@@ -14,7 +14,7 @@
         ]
     ],
     "2605178": [
-        "Search for high-mass exclusive $\\gamma\\gamma$$\\to$ WW and $\\gamma\\gamma$$\\to$ ZZ production in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
+        "Search for high-mass exclusive $\\gamma\\gamma\\to WW$ and $\\gamma\\gamma\\to ZZ$ production in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
         "CMS",
         "10.1007/JHEP07(2023)229",
         "2842494",
@@ -25,6 +25,20 @@
             "CMS-SMP-21-014",
             "TOTEM-2022-002",
             "CERN-EP-2022-177"
+        ]
+    ],
+    "2639338": [
+        "A search for new physics in central exclusive production using the missing mass technique with the CMS detector and the CMS-TOTEM precision proton spectrometer",
+        "CMS",
+        "10.1140/epjc/s10052-023-11687-5",
+        "2851947",
+        "2303.04596",
+        "ins2639338",
+        null,
+        [
+            "CMS-EXO-19-009",
+            "TOTEM-2023-001",
+            "CERN-EP-2023-003"
         ]
     ]
 }

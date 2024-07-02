@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief Charged multiplicity
   class MARKI_1982_I169326 : public Analysis {
   public:
 
@@ -23,37 +23,34 @@ namespace Rivet {
       declare(ChargedFinalState(), "FS");
 
       // Book histograms
-      book(_nHadrons, "TMP/hadrons");
-
+      book(_nHadrons, 6, 1, 1);
+      for (const string& en : _nHadrons.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const ChargedFinalState& fs = apply<ChargedFinalState>(event, "FS");
-      _nHadrons->fill(fs.particles().size());
+      _nHadrons->fill(_ecms,fs.particles().size());
     }
 
 
     /// Normalise histograms etc., after the run
-    void finalize() {
-      double sigma = _nHadrons->val()/sumOfWeights();
-      double error = _nHadrons->err()/sumOfWeights();
-      Estimate1DPtr mult;
-      book(mult, 6, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
-    }
-
+    void finalize() {}
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _nHadrons;
+    BinnedProfilePtr<string> _nHadrons;
+    string _ecms;
     /// @}
 
 

@@ -42,12 +42,12 @@ namespace Rivet {
       }
       book(_h_ctheta_large, 4, 1, 4);
 
-      book(_h_cphi, {0.3, 0.6, 0.9, 1.2, 1.5});
-      //book(_h_cphi->bin(1), "/TMP/cphiP_0", 10, 0.0, 1.0);
-      book(_h_cphi->bin(1), 5, 1, 1);
-      book(_h_cphi->bin(2), 5, 1, 2);
-      book(_h_cphi->bin(3), "/TMP/cphiP_3", 10, 0.0, 1.0);
-      book(_h_cphi->bin(4), "/TMP/cphiP_4", 10, 0.0, 1.0);
+      book(_h_cphi, {0.0, 0.3, 0.6, 0.9, 1.2, 1.5});
+      book(_h_cphi->bin(1), "/TMP/cphiP_0", 10, 0.0, 1.0);
+      book(_h_cphi->bin(2), 5, 1, 1);
+      book(_h_cphi->bin(3), 5, 1, 2);
+      book(_h_cphi->bin(4), "/TMP/cphiP_3", 10, 0.0, 1.0);
+      book(_h_cphi->bin(5), "/TMP/cphiP_4", 10, 0.0, 1.0);
 
       book(_h_cphi_low, 5, 1, 4);
       book(_h_cphi_mid, "/TMP/cphiP_mid", 10, 0.0, 1.0);

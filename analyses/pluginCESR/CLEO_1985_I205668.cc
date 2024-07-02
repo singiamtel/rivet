@@ -57,7 +57,7 @@ namespace Rivet {
       book(_ups1["phi"]   ,11,1,2);
 
       _axes[0]["pip"] = YODA::Axis<double>({0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17,
-                                            0.19, 0.58, 0.68, 0.78, 0.98});
+          0.19, 0.48, 0.58, 0.68, 0.78, 0.98});
       _axes[0]["Kp"] = YODA::Axis<double>({0.03, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19});
       _axes[0]["p"] = YODA::Axis<double>({0.06, 0.14, 0.155, 0.185, 0.215, 0.245, 0.275});
       _axes[0]["pi0"] = YODA::Axis<double>({0.1, 0.2, 0.3, 0.4, 0.5});
@@ -71,11 +71,12 @@ namespace Rivet {
       _axes[0]["Kstar0"] = YODA::Axis<double>({0.0, 0.06, 0.12, 0.24, 0.36, 0.48});
       _axes[0]["phi"] = YODA::Axis<double>({0.195, 0.385, 0.575, 0.945});
 
-      _axes[1]["pip"] = YODA::Axis<double>({0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19, 0.58, 0.68, 0.88});
+      _axes[1]["pip"] = YODA::Axis<double>({0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19, 0.48, 0.58, 0.68, 0.88});
       _axes[1]["Kp"] = YODA::Axis<double>({0.02, 0.1, 0.11, 0.13, 0.15, 0.17, 0.19});
       _axes[1]["p"] = _axes[0]["p"];
       _axes[1]["pi0"] = _axes[0]["pi0"];
-      _axes[1]["K0"] = _axes[0]["K0"];
+      _axes[1]["K0"] =  YODA::Axis<double>({0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45,
+                                             0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9});
       _axes[1]["lam"] = _axes[0]["lam"];
       _axes[1]["xi"] = _axes[0]["xi"];
       _axes[1]["rho"] = YODA::Axis<double>({0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7});
@@ -238,7 +239,11 @@ namespace Rivet {
 
     void discfill(const string& name, const double value, const size_t k) {
       string edge = "OTHER";
-      const size_t idx = _axes[k][name].index(value);
+      size_t idx = _axes[k][name].index(value);
+      if (name=="pip") {
+        if(idx==8) idx=0;
+        else if(idx>8) idx-=1;
+      }
       if (idx && idx <= _edges[k][name].size())  edge = _edges[k][name][idx-1];
       (k? _ups1 : _cont)[name]->fill(edge);
     }
@@ -264,7 +269,8 @@ namespace Rivet {
         scale(_cont, 1. / *_weightSum_cont);
         for( auto & hist : _cont) {
           for(auto & b: hist.second->bins()) {
-            const size_t idx = b.index();
+            size_t idx = b.index();
+            if(hist.first=="pip" && idx>=8) idx+=1;
             b.scaleW(1./_axes[0][hist.first].width(idx));
           }
         }
@@ -273,7 +279,8 @@ namespace Rivet {
         scale(_ups1, 1. / *_weightSum_Ups1);
         for( auto & hist : _ups1) {
           for(auto & b: hist.second->bins()) {
-            const size_t idx = b.index();
+            size_t idx = b.index();
+            if(hist.first=="pip" && idx>=8) idx+=1;
             b.scaleW(1./_axes[1][hist.first].width(idx));
           }
         }

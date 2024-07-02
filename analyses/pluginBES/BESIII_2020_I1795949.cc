@@ -24,8 +24,16 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-      book(_c_Ds    ,"/TMP/c_Ds"    );
-      book(_c_DsStar,"/TMP/c_DsStar");
+      book(_c_Ds    , 1, 1, 1);
+      book(_c_DsStar, 2, 1, 1);
+      for (const string& en : _c_Ds.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -98,10 +106,10 @@ namespace Rivet {
           }
           if(matched) {
             if((id1==431 && id2==20433) || (id1==20433 && id2==421)) {
-              _c_Ds->fill();
+              _c_Ds->fill(_ecms);
             }
             else if((id1==433 && id2==20433) || (id1==20433 && id2==433)) {
-              _c_DsStar->fill();
+              _c_DsStar->fill(_ecms);
             }
             break;
           }
@@ -114,24 +122,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights()/picobarn;
-      for (unsigned int ih=1;ih<3;++ih) {
-        double sigma = 0.0, error = 0.0;
-        if(ih==1) {
-          sigma = _c_Ds->val()*fact;
-          error = _c_Ds->err()*fact;
-        }
-        else if(ih==2) {
-          sigma = _c_DsStar->val()*fact;
-          error = _c_DsStar->err()*fact;
-        }
-        Estimate1DPtr mult;
-        book(mult, ih, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      scale(_c_Ds    ,fact);
+      scale(_c_DsStar,fact);
     }
 
     /// @}
@@ -139,7 +131,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_Ds,_c_DsStar;
+    BinnedHistoPtr<string> _c_Ds,_c_DsStar;
+    string _ecms;
     /// @}
 
   };

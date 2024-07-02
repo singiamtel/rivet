@@ -12,13 +12,17 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
-Luminosity_fb: 
+Energies:  [1.0001, 1.0099, 1.0172, 1.01815, 1.0193, 1.01945, 1.01955, 1.01965,
+            1.01975, 1.01985, 1.01995, 1.02005, 1.02015, 1.02045, 1.0223, 1.0230, 1.02995]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $\pi^+\pi^-2\pi^0$ and $2\pi^0\gamma$ near the $\phi$ mass'
+  'Measurement of the cross section for $\pi^+\pi^-2\pi^0$ and $2\pi^0\gamma$ near the $\phi$ mass.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ambrosino:2008gb
 BibTeX: '@article{Ambrosino:2008gb,
-      author         = "Ambrosino, F. and others",
+      author         = Ambrosino, F. and others",
       title          = "{Study of the process $e^+ e^- \to \omega \pi^0$ in the
                         $\phi$-meson mass region with the KLOE detector}",
       collaboration  = "KLOE",

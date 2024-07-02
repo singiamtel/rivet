@@ -4,7 +4,7 @@ XLabel=$x_{B}$
 YLabel=$1/N \, \mathrm{d}{N}/\mathrm{d}x_B$
 # END PLOT
 
-# BEGIN PLOT /OPAL_2003_I599181/d02-x01-y01
+# BEGIN PLOT /OPAL_2003_I599181/d05-x01-y01
 Title=Mean of the $b$-quark fragmentation function $f(x_B^{weak})$
 XLabel=
 YLabel=$\langle x_B \rangle$

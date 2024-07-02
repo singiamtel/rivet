@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 # TODO: structure better, e.g. associative groupings by YSTART:YEND pairs
-CURRENT=(alice atlas cms lhcb totem lhcf star phenix cleo h1 zeus hermes babar belle opal delphi aleph l3 sld compass snd cmd bes besiii cdf d0 kloe kedr)
+CURRENT=(alice atlas cms lhcb totem lhcf star phenix cleo h1 zeus hermes babar belle opal delphi aleph l3 sld compass snd cmd bes besiii cdf d0 kloe focus kedr e691 e791 e756)
 TO2010=(focus e691 e791 e756)
 TO2000=(amy jade argus venus topaz hrs mac tpc dm2 cello fenice lena cusb e735 olya)
 TO1990=(dasp desy147 dm1 jade marki markii markj mupi pluto tasso) # nmd two_gamma

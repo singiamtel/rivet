@@ -12,8 +12,18 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: no
 Beams: [e-, e+]
+Energies:  [2.6, 2.8, 3.0, 3.15, 3.2, 3.3, 3.4, 3.45, 3.5, 3.55, 3.6,
+            3.65, 3.75, 3.8, 3.85, 3.9, 3.95, 4.0, 4.05, 4.1, 4.15, 4.2,
+            4.25, 4.3, 4.35, 4.4, 4.45, 4.5, 4.55, 4.6, 4.65, 4.7, 4.8,
+            4.9, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.75, 5.8, 5.85, 5.9,
+            5.95, 6.0, 6.05, 6.1, 6.15, 6.2, 6.25, 6.3, 6.35, 6.4, 6.45,
+            6.5, 6.55, 6.6, 6.65, 6.7, 6.75, 6.8, 6.85, 6.9, 6.95, 7.0,
+            7.05, 7.1, 7.15, 7.2, 7.25, 7.3, 7.35, 7.4, 7.45, 7.5, 7.8]
+Options:
+ - ENERGY=*
 Description:
-  'Charged particle multiplicity for energies between 2.6 and 7.8 GeV'
+  'Charged particle multiplicity for energies between 2.6 and 7.8 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Siegrist:1981zp
 BibTeX: '@article{Siegrist:1981zp,

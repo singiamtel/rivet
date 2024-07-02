@@ -1,0 +1,39 @@
+Name: BESIII_2023_I2686032
+Year: 2023
+Summary: Cross section for $e^+e^-\to\Lambda^0\bar{\Sigma}^0+\text{c.c.}$ for $\sqrt{s}=2.3094\to3.0800\,$GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2686032
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2308.03361 [hep-ex]
+RunInfo: e+ e- -> hadrons
+Beams: [e+, e-]
+Energies:  [2.3094, 2.3864, 2.3960, 2.5000, 2.6444, 2.6464, 2.7000,
+            2.8000, 2.9000, 2.9500, 2.9810, 3.0000, 3.0200, 3.0800]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to\Lambda^0\bar{\Sigma}^0+\text{c.c.}$ for $\sqrt{s}=2.3094\to3.0800\,$GeV
+   by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023pfv
+BibTeX: '@article{BESIII:2023pfv,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Measurement of the $e^+e^- \to \Lambda\bar\Sigma^0 + c.c.$ cross sections at $\sqrt{s}$ from 2.3094 to 3.0800 GeV}",
+    eprint = "2308.03361",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "8",
+    year = "2023"
+}
+'

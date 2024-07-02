@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > eta K+K-
   class SND_2018_I1693737 : public Analysis {
   public:
 
@@ -22,7 +22,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_nKKEta, "/TMP/nKKEta");
+      book(_nKKEta, "/TMP/nKKEta", refData(1,1,1));
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -67,7 +67,7 @@ namespace Rivet {
 	  }
 	}
 	if(matched) {
-	  _nKKEta->fill();
+	  _nKKEta->fill(sqrtS());
 	  break;
 	}
       }
@@ -75,17 +75,10 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nKKEta->val();
-      double error = _nKKEta->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
+      scale(_nKKEta, crossSection()/ sumOfWeights() /nanobarn);
       Estimate1DPtr mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_nKKEta,mult);
     }
 
     /// @}
@@ -93,7 +86,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nKKEta;
+    Histo1DPtr _nKKEta;
     /// @}
 
 

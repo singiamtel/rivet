@@ -71,7 +71,7 @@ namespace Rivet {
         findChildren(p,nRes,ncount);
         bool matched=false;
         // check for Sigma0 or Sigma0bar
-        for (const Particle& p2 : ufs.particles(Cuts::pid==sign*3212)) {
+        for (const Particle& p2 : ufs.particles(Cuts::pid==-sign*3212)) {
           if(p2.children().empty()) continue;
           map<long,int> nRes2=nRes;
           int ncount2 = ncount;
@@ -139,9 +139,9 @@ namespace Rivet {
       normalize(_h_bar);
       normalize(_h_all);
       pair<double,pair<double,double> > alpha = calcAlpha(_h_all);
-      Estimate1DPtr h_alpha_lam;
+      Estimate0DPtr h_alpha_lam;
       book(h_alpha_lam, 5,1,1);
-      h_alpha_lam->bin(1).set(alpha.first, alpha.second);
+      h_alpha_lam->set(alpha.first, alpha.second);
 
     }
 

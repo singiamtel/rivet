@@ -1,0 +1,34 @@
+Name: BESII_2005_I678943
+Year: 2005
+Summary: $\pi^+\pi^-$ mass distribution in $J/\psi\to 2\pi^+2\pi^-$
+Experiment: BESII
+Collider: BEPC
+InspireID: 678943
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 72 (2005) 012002
+RunInfo: Any process producing J/psi, originally e+e-
+Description:
+  '$\pi^+\pi^-$ mass distribution in $J/\psi\to 2\pi^+2\pi^-$. The uncorrected data was read from the figures in the paper, given the lack of corrections and background subtraction only the low background $J/\psi\to 2\pi^+2\pi^-$ mode is implemented and not the $\psi(2S)\to3\pi^+\pi^-$ distributions which have a large background.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2005lbh
+BibTeX: '@article{BES:2005lbh,
+    author = "Ablikim, M. and others",
+    collaboration = "BES",
+    title = "{Measurement of the branching fractions of psi(2S) ---\ensuremath{>} 3(pi+ pi-) and J / psi ---\ensuremath{>} 2(pi+ pi-)}",
+    eprint = "hep-ex/0503040",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevD.72.012002",
+    journal = "Phys. Rev. D",
+    volume = "72",
+    pages = "012002",
+    year = "2005"
+}
+'

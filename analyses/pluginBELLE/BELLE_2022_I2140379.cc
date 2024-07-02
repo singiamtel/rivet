@@ -111,16 +111,16 @@ namespace Rivet {
       pair<double,double> aSigma(-.983,0.013);
       for (unsigned int ix=0;ix<3;++ix) {
         normalize(_h[ix]);
-        Estimate1DPtr _h_alpha1;
+        Estimate0DPtr _h_alpha1;
         book(_h_alpha1,1,1+ix,1);
         pair<double,double> alpha = calcAlpha(_h[ix]);
-        _h_alpha1->bin(1).set(alpha.first, alpha.second);
+        _h_alpha1->set(alpha.first, alpha.second);
         // divide out alpha Sigma
         alpha.second = alpha.first/aSigma.first* sqrt(sqr(alpha.second/alpha.first) + sqr(aSigma.second/aSigma.first));
         alpha.first /= aSigma.first;
-        Estimate1DPtr _h_alpha2;
+        Estimate0DPtr _h_alpha2;
         book(_h_alpha2,1,1+ix,2);
-        _h_alpha2->bin(1).set(alpha.first, alpha.second);
+        _h_alpha2->set(alpha.first, alpha.second);
       }
     }
 

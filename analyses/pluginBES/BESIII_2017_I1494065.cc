@@ -20,8 +20,20 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       declare(FinalState(), "FS");
-      declare(UnstableParticles(), "UFS");
-      book(_nhc, "TMP/h_c");
+      declare(UnstableParticles(Cuts::pid==10443), "UFS");
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_nhc[ix], 1+ix, 1, 1);
+        for (const string& en : _nhc[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if (_ecms[0].empty() && _ecms[1].empty()) {
+        MSG_ERROR("Beam energy incompatible with analysis.");
+      }
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -45,51 +57,40 @@ namespace Rivet {
         ++ntotal;
       }
       const FinalState& ufs = apply<FinalState>(event, "UFS");
+      // loop over the h_c
       for (const Particle& p : ufs.particles()) {
         if(p.children().empty()) continue;
-        // find the h_c
-        if(p.pid()==10443) {
-          map<long,int> nRes = nCount;
-          int ncount = ntotal;
-          findChildren(p,nRes,ncount);
-          // omega pi+pi-
-          if(ncount!=2) continue;
-          bool matched = true;
-          for(auto const & val : nRes) {
-            if(abs(val.first)==211) {
-              if(val.second !=1) {
-                matched = false;
-                break;
-              }
-            }
-            else if(val.second!=0) {
+        map<long,int> nRes = nCount;
+        int ncount = ntotal;
+        findChildren(p,nRes,ncount);
+        // h_c pi+pi-
+        if(ncount!=2) continue;
+        bool matched = true;
+        for(auto const & val : nRes) {
+          if(abs(val.first)==211) {
+            if(val.second !=1) {
               matched = false;
               break;
             }
           }
-          if(matched) {
-            _nhc->fill();
+          else if(val.second!=0) {
+            matched = false;
             break;
           }
+        }
+        if(matched) {
+          _nhc[0]->fill(_ecms[0]);
+          _nhc[1]->fill(_ecms[1]);
+          break;
         }
       }
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nhc->val();
-      double error = _nhc->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      for(unsigned int  ix=1;ix<3;++ix) {
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      const double fact = crossSection()/ sumOfWeights() /picobarn;
+      for(unsigned int ix=0;ix<2;++ix)
+        scale(_nhc[ix],fact);
     }
 
     /// @}
@@ -97,7 +98,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nhc;
+    BinnedHistoPtr<string> _nhc[2];
+    string _ecms[2];
     /// @}
 
 

@@ -6,6 +6,7 @@
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Tools/Random.hh"
 
 namespace Rivet {
 
@@ -15,9 +16,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2012_I1095236()
-      : Analysis("ATLAS_2012_I1095236")
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1095236);
 
 
     /// @name Analysis methods
@@ -154,12 +153,12 @@ namespace Rivet {
       unsigned int ntagged=0;
       for (const Jet & jet : recon_jets ) {
         if(jet.perp()>50. && abs(jet.eta())<2.5 &&
-           jet.bTagged() && rand()/static_cast<double>(RAND_MAX)<=0.60)
+           jet.bTagged() && rand01()<=0.60)
           ++ntagged;
       }
 
       // ATLAS calo problem
-      if(rand()/static_cast<double>(RAND_MAX)<=0.42) {
+      if(rand01()<=0.42) {
         for ( const Jet & jet : recon_jets ) {
           double eta = jet.rapidity();
           double phi = jet.azimuthalAngle(MINUSPI_PLUSPI);

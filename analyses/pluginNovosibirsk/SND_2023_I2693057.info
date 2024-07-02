@@ -1,0 +1,43 @@
+Name: SND_2023_I2693057
+Year: 2023
+Summary: Cross section for $e^+e^-\to\omega\pi^0\to\pi^+\pi^-\pi^0\pi^0$ for $\sqrt{s}=1.05\to2$ GeV
+Experiment: SND
+Collider: VEPP-2M
+InspireID: 2693057
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2309.00280 [hep-ex]
+RunInfo: e+ e- to hadrons, pi0 set stable
+NeedCrossSection: yes
+Beams: [e+, e-]
+Enegies: [1.0497, 1.0727, 1.0990, 1.1214, 1.1484, 1.1706, 1.1967, 1.2461, 1.2704,
+          1.2753, 1.3191, 1.3435, 1.3533, 1.3681, 1.4173, 1.4321, 1.4420, 1.4668,
+          1.4917, 1.5117, 1.5167, 1.5417, 1.5668, 1.5920, 1.6173, 1.6427, 1.6682,
+          1.6733, 1.6937, 1.7142, 1.7194, 1.7451, 1.7555, 1.7710, 1.7969, 1.8230,
+          1.8386, 1.8491, 1.8701, 1.8722, 1.8912, 1.9017, 1.9229, 1.9282, 1.9441,
+          1.9548, 1.9654, 1.9815, 1.9868, 2.0083]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cCross section for $e^+e^-\to\omega\pi^0\to\pi^+\pi^-\pi^0\pi^0$ for $\sqrt{s}=1.05\to2$ GeV by the SND collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: SND:2023gan
+BibTeX: '@article{SND:2023gan,
+    author = "Achasov, M. N. and others",
+    collaboration = "SND",
+    title = "{Study of the process $e^+e^- \to \omega\pi^0 \to \pi^+\pi^-\pi^0\pi^0$ in the energy range $1.05-2.00$ GeV with SND}",
+    eprint = "2309.00280",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "9",
+    year = "2023"
+}
+'

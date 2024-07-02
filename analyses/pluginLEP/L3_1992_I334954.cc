@@ -43,6 +43,8 @@ namespace Rivet {
       book(_histOblateness,  4, 1, 1);
       book(_histJade      ,  6, 1, 1);
       book(_histDurham    ,  7, 1, 1);
+      book(_histH3        ,  8, 1, 1);
+      book(_histH4        ,  9, 1, 1);
       book(_histSphericity, 10, 1, 1);
       book(_histAplanarity, 11, 1, 1);
       book(_histC         , 12, 1, 1);
@@ -86,6 +88,21 @@ namespace Rivet {
       const FastJets& jadejet = apply<FastJets>(event, "JadeJets");
       y23 = jadejet.clusterSeq()->exclusive_ymerge_max(2);
       _histJade->fill(y23);
+      // fox-wolfram moments
+      double H3=0, H4=0;
+      const FinalState&  fs = apply<FinalState>(event, "FS");
+      for(const Particle & p1 : fs.particles()) {
+	double modp1 = p1.p3().mod();
+	for(const Particle & p2 : fs.particles()) {
+	  double modp2 = p2.p3().mod();
+	  double cTheta = p1.p3().dot(p2.p3())/modp1/modp2;
+	  double pre = modp1*modp2/sqr(sqrtS());
+	  H3 +=   0.5*pre*cTheta*(5.*sqr(cTheta)-3.);
+	  H4 += 0.125*pre*((35.*sqr(cTheta)-30.)*sqr(cTheta)+3.);
+	}
+      }
+      _histH3->fill(H3);
+      _histH4->fill(H4);
     }
 
 
@@ -97,6 +114,8 @@ namespace Rivet {
       scale(_histOblateness, 1./sumOfWeights());
       scale(_histJade      , 1./sumOfWeights());
       scale(_histDurham    , 1./sumOfWeights());
+      scale(_histH3        , 1./sumOfWeights());
+      scale(_histH4        , 1./sumOfWeights());
       scale(_histSphericity, 1./sumOfWeights());
       scale(_histAplanarity, 1./sumOfWeights());
       scale(_histC         , 1./sumOfWeights());
@@ -114,6 +133,7 @@ namespace Rivet {
     ///@{
     Histo1DPtr _histThrust, _histMajor, _histMinor, _histOblateness;
     Histo1DPtr _histJade,_histDurham;
+    Histo1DPtr _histH3,_histH4;
     Histo1DPtr _histSphericity, _histAplanarity;
     Histo1DPtr _histC, _histD;
     Histo1DPtr _histMJetHeavy, _histMJetLight;

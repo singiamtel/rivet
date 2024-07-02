@@ -24,19 +24,14 @@ namespace Rivet {
 
       // Book histograms
       book(_npion, 1,1,1);
-      vector<string> energies({"525.1", "544.0", "565.2", "585.0", "604.8", "624.8", "644.6", "664.5", "684.4", "704.2", "724.1",
-          "739.1", "743.8", "747.7", "751.7", "755.7", "759.6", "763.6", "767.8", "771.6", "775.7", "778.6", "780.7", "782.0",
-          "782.9", "783.7", "784.7", "786.7", "789.5", "793.9", "797.7", "804.0", "821.8", "843.4", "862.7", "883.2"});
-      bool matched=false;
-      for(const string& en : energies) {
+      for (const string& en : _npion.binning().edges<0>()) {
         double end = std::stod(en)*MeV;
         if(isCompatibleWithSqrtS(end)) {
-          ecms = en;
-          matched=true;
+          _ecms = en;
           break;
         }
       }
-      if(!matched) MSG_ERROR("Beam energy incompatible with analysis.");
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     /// Perform the per-event analysis
@@ -46,7 +41,7 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
 	if(abs(p.pid())!=PID::PIPLUS) vetoEvent;
       }
-      _npion->fill(ecms);
+      _npion->fill(_ecms);
     }
 
 
@@ -61,7 +56,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     BinnedHistoPtr<string> _npion;
-    string ecms;
+    string _ecms;
     /// @}
 
 

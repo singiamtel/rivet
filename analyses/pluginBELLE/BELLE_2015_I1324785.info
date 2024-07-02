@@ -13,8 +13,17 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies:  [4.01, 4.03, 4.05, 4.07, 4.09, 4.11, 4.13, 4.15, 4.17, 4.19, 4.21, 4.23, 4.25,
+           4.27, 4.29, 4.31, 4.33, 4.35, 4.37, 4.39, 4.41, 4.43, 4.45, 4.47, 4.49, 4.51,
+           4.53, 4.55, 4.57, 4.59, 4.61, 4.63, 4.65, 4.67, 4.69, 4.71, 4.73, 4.75, 4.77,
+           4.79, 4.81, 4.83, 4.85, 4.87, 4.89, 4.91, 4.93, 4.95, 4.97, 4.99, 5.01, 5.03,
+           5.05, 5.07, 5.09, 5.11, 5.13, 5.15, 5.17, 5.19, 5.21, 5.23, 5.25, 5.27, 5.29,
+           5.31, 5.33, 5.35, 5.37, 5.39, 5.41, 5.43, 5.45, 5.47, 5.49]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to \psi(2S)\pi^+\pi^-$ at energies between 4.0 and 5.5 GeV using radiative return by BELLE.'
+  'Measurement of the cross section for $e^+e^-\to \psi(2S)\pi^+\pi^-$ at energies between 4.0 and 5.5 GeV using radiative return by BELLE.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 BibKey: Wang:2014hta
 BibTeX: '@article{Wang:2014hta,
       author         = "Wang, X. L. and others",

@@ -27,6 +27,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if(_edges.empty()) _edges=_p->xEdges();
       // Loop over upslion(4s)
       for (const Particle& p : apply<UnstableParticles>(event, "UFS").particles()) {
       	// boost to rest frame
@@ -52,8 +53,11 @@ namespace Rivet {
 	  if (ngamma != 1 || charm ) continue;
 	  double Egamma = cms_boost.transform(pgamma).E();
 	  double wgt = bottom.pid()<0 ? 100. : -100.;
-	  for(const auto & bin : _p->bins())
-	    if(bin.xMin()<Egamma) _p->fill(bin.xMid(),wgt);
+          double Emin=1.7;
+	  for(unsigned int ix=0;ix<_edges.size();++ix) {
+	    if(Egamma>Emin) _p->fill(_edges[ix],wgt);
+            Emin+=0.1;
+          }
 	}
       }
     }
@@ -68,7 +72,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Profile1DPtr _p;
+    BinnedProfilePtr<string> _p;
+    vector<string> _edges;
     /// @}
 
 

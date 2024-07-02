@@ -1,0 +1,121 @@
+// -*- C++ -*-
+#include "Rivet/Analysis.hh"
+#include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
+
+namespace Rivet {
+
+
+  /// @brief e+e- > D*+D*-, D+- D*-+
+  class BESIII_2022_I1989527 : public Analysis {
+  public:
+
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(BESIII_2022_I1989527);
+
+
+    /// @name Analysis methods
+    /// @{
+
+    /// Book histograms and initialise projections before the run
+    void init() {
+      // Initialise and register projections
+      declare(FinalState(), "FS");
+      declare(UnstableParticles(), "UFS");
+      book(_nDSS, 1,1,3);
+      book(_nDS,  2,1,3);
+      for (const string& en : _nDS.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if (_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
+    }
+
+    void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
+      for (const Particle &child : p.children()) {
+        if (child.children().empty()) {
+          nRes[child.pid()]-=1;
+          --ncount;
+        }
+        else {
+          findChildren(child,nRes,ncount);
+        }
+      }
+    }
+
+
+    /// Perform the per-event analysis
+    void analyze(const Event& event) {
+      const FinalState& fs = apply<FinalState>(event, "FS");
+
+      map<long,int> nCount;
+      int ntotal(0);
+      for (const Particle& p : fs.particles()) {
+        nCount[p.pid()] += 1;
+        ++ntotal;
+      }
+      const FinalState& ufs = apply<FinalState>(event, "UFS");
+
+      for (unsigned int ix=0; ix<ufs.particles().size(); ++ix) {
+        const Particle& p1 = ufs.particles()[ix];
+        if(abs(p1.pid())!=413) continue;
+        map<long,int> nRes = nCount;
+        int ncount = ntotal;
+        findChildren(p1,nRes,ncount);
+        bool matched=false;
+        int sign = -p1.pid()/abs(p1.pid());
+        for (unsigned int iy=0; iy<ufs.particles().size(); ++iy) {
+          if (ix==iy) continue;
+          const Particle& p2 = ufs.particles()[iy];
+          if (!p2.parents().empty() && p2.parents()[0].pid()==p1.pid()) {
+            continue;
+          }
+          if (p2.pid()!=sign*413 && p2.pid()!=sign*411) continue;
+          map<long,int> nRes2 = nRes;
+          int ncount2 = ncount;
+          findChildren(p2,nRes2,ncount2);
+          if (ncount2!=0) continue;
+          matched=true;
+          for (const auto& val : nRes2) {
+            if (val.second!=0) {
+              matched = false;
+              break;
+            }
+          }
+          if (matched) {
+            sign = abs(p2.pid());
+            break;
+          }
+        }
+        if (matched) {
+          if (sign==411)     _nDS->fill(_ecms);
+          else if(sign==413) _nDSS->fill(_ecms);
+        }
+      }
+    }
+
+
+    /// Normalise histograms etc., after the run
+    void finalize() {
+      scale({_nDS, _nDSS}, crossSection()/ sumOfWeights() /picobarn);
+    }
+
+    /// @}
+
+
+    /// @name Histograms
+    /// @{
+    BinnedHistoPtr<string> _nDSS,_nDS;
+    string _ecms;
+    /// @}
+
+
+  };
+
+
+  RIVET_DECLARE_PLUGIN(BESIII_2022_I1989527);
+
+}

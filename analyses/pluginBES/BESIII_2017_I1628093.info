@@ -12,8 +12,12 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+, e-]
+Energies: [4.5745, 4.5800, 4.5900, 4.5995]
+Options:
+ - ENERGY=*
 Description:
-  'Cross section for $e^+e^-\to \Lambda_c^+\bar{\Lambda}_c^-$ near threshold.'
+  'Cross section for $e^+e^-\to \Lambda_c^+\bar{\Lambda}_c^-$ near threshold.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ablikim:2017lct
 BibTeX: '@article{Ablikim:2017lct,

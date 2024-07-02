@@ -1,0 +1,46 @@
+Name: BELLE_2008_I759262
+Year: 2008
+Summary: Cross section for $e^+e^-\to J/\psi X(3940), X(4160)$ at $\sqrt{s}=10.6\,$GeV
+Experiment: BELLE
+Collider: KEKB
+InspireID: 759262
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 100 (2008) 202001
+RunInfo: e+e- -> J/psi X(3940) X(4160)
+Beams: [e+, e-]
+Energies: [10.6]
+Options:
+ - PID3940=*
+ - PID4160=*
+Description:
+  'Cross section for $e^+e^-\to J/\psi X(3940)/X(4160)$ at $\sqrt{s}=10.6\,$GeV.
+   The $X(3940)$ is measured using $D^*\bar{D}$ modes while the $X(4160)$ mode is measured
+   using $D^*\bar{D}^*$ modes.
+   The status of the $X(3940)$ is not clear, we
+   take the PDG code to be 9010441, which can be changed using the PID3940 option.
+   For the $X(4160)$ spin, partiy, $2^-$ is favoured and therefore we use 9010445,
+   which can be changed using the PID4160 option.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2007woe
+BibTeX: '@article{Belle:2007woe,
+    author = "Pakhlov, P. and others",
+    collaboration = "Belle",
+    title = "{Production of New Charmoniumlike States in e+ e- --\ensuremath{>} J/psi D(*) anti-D(*) at s**(1/2) \textasciitilde{} 10. GeV}",
+    eprint = "0708.3812",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevLett.100.202001",
+    journal = "Phys. Rev. Lett.",
+    volume = "100",
+    pages = "202001",
+    year = "2008"
+}
+'

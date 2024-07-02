@@ -73,7 +73,7 @@ namespace Rivet {
       	double cL = plp.p3().unit().dot(axis1);
 	_h_angle[0]->fill(cL);
 	Vector3 LTrans = plp.p3() - cL*plp.p3().mod()*axis1;
-	FourMomentum pKpi = pip.momentum()+Km.momentum();
+	FourMomentum pKpi = boost1.transform(pip.momentum()+Km.momentum());
       	LorentzTransform boost3 = LorentzTransform::mkFrameTransformFromBeta(pKpi.betaVec());
       	FourMomentum ppi = boost3.transform(boost1.transform(pip.momentum()));
 	double cPi = ppi.p3().unit().dot(axis1);

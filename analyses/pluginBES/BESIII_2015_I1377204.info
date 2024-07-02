@@ -12,9 +12,13 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies: [4.19, 4.21, 4.22, 4.23, 4.245, 4.26, 4.31, 4.36, 4.39, 4.42]
+Options:
+ - ENERGY=*
 Luminosity_fb: 
 Description:
-  'Measurement of the cross section for $e^+e^-\to J/\psi \pi^0\pi^0$ at energies between 4.19 and 4.42 GeV'
+  'Measurement of the cross section for $e^+e^-\to J/\psi \pi^0\pi^0$ at energies between 4.19 and 4.42 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Ablikim:2015tbp
 BibTeX: '@article{Ablikim:2015tbp,

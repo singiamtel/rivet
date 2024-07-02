@@ -1,0 +1,34 @@
+Name: BES_1999_I507639
+Year: 1999
+Summary: Hadronic mass distribution in $J/\psi\to\gamma \pi^+\pi^-\pi^+\pi^-$
+Experiment: BES
+Collider: BEPC
+InspireID: 507639
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 472 (2000) 207-214
+RunInfo: Any process producing J/psi, originally e+e-
+Description:
+  'Hadronic mass distribution in $J/\psi\to\gamma \pi^+\pi^-\pi^+\pi^-$. Only the $\pi^+\pi^-\pi^+\pi^-$ mass distribution isa implemented as the background is not given for the other distributions. The data were read from figure 4d and the background given subtracted.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:1999dmf
+BibTeX: '@article{BES:1999dmf,
+    author = "Bai, J. Z. and others",
+    collaboration = "BES",
+    title = "{Partial wave analysis of J / psi to gamma (pi+ pi- pi+ pi-)}",
+    eprint = "hep-ex/9909040",
+    archivePrefix = "arXiv",
+    doi = "10.1016/S0370-2693(99)01393-3",
+    journal = "Phys. Lett. B",
+    volume = "472",
+    pages = "207--214",
+    year = "2000"
+}
+'

@@ -5,6 +5,7 @@
 #include "Rivet/Projections/MergedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Tools/Random.hh"
 #include "fastjet/SISConePlugin.hh"
 
 namespace Rivet {
@@ -113,7 +114,7 @@ namespace Rivet {
         //        for the STAR tracking efficiency. Once we have the
         //        final numbers (corrected to hadron level), we need
         //        to remove this!!!!
-        if (1.0*rand()/static_cast<double>(RAND_MAX) > 0.87834-exp(-1.48994-0.788432*pT)) {
+        if (1.0*rand01() > 0.87834-exp(-1.48994-0.788432*pT)) {
           continue;
         }
         // -------- end of efficiency hack -------

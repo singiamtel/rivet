@@ -23,8 +23,18 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_npion1, "TMP/pion1");
-      book(_npion2, "TMP/pion2");
+      for(unsigned int ix=0;ix<2;++ix) {
+        book(_npion[ix], 1+ix, 1, 1);
+        for (const string& en : _npion[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            break;
+          }
+        }
+      }
+      if (_ecms[0].empty() && _ecms[1].empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -40,34 +50,16 @@ namespace Rivet {
       }
       if(ntotal!=4) vetoEvent;
       if(nCount[-211]==2&&nCount[211]==2)
-	_npion1->fill();
+	_npion[0]->fill(_ecms[0]);
       else if(nCount[-211]==1&&nCount[211]==1&&nCount[111]==2)
-	_npion2->fill();
+	_npion[1]->fill(_ecms[1]);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _npion1->val();
-          error = _npion1->err();
-        }
-        else {
-          sigma = _npion2->val();
-          error = _npion2->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for (unsigned int ix=0;ix<2;++ix)
+        scale(_npion[ix], crossSection()/ sumOfWeights() /nanobarn);
     }
 
     /// @}
@@ -75,7 +67,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _npion1,_npion2;
+    BinnedHistoPtr<string> _npion[2];
+    string _ecms[2];
     /// @}
 
 

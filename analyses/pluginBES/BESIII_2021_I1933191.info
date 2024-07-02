@@ -13,8 +13,16 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies: [4.0076, 4.0854, 4.1285, 4.1574, 4.1784, 4.1888, 4.1989,
+           4.2091, 4.2185, 4.2263, 4.2357, 4.2436, 4.2580, 4.2668,
+           4.2777, 4.2879, 4.3079, 4.3121, 4.3374, 4.3583, 4.3774,
+           4.3874, 4.3964, 4.4156, 4.4362, 4.4671, 4.5271, 4.5745,
+           4.5995, 4.6121, 4.6279, 4.6409, 4.6613, 4.6812, 4.6984]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to \psi(2S)\pi^+\pi^-$ at energies between 4.0 and 4.7 GeV by the BES collaboration.'
+  'Measurement of the cross section for $e^+e^-\to \psi(2S)\pi^+\pi^-$ at energies between 4.0 and 4.7 GeV by the BES collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

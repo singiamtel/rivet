@@ -1,0 +1,35 @@
+Name: BABAR_2005_I686355
+Year: 2005
+Summary: Helicity angle and polarization in $B^0\to D^{*+}D^{*-}$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 686355
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 95 (2005) 151804
+RunInfo: Any process producing B0, original Upsilon(4S) decay
+Description:
+  'Helicity angle distributions and polarization in $B^0\to D^{*+}D^{*-}$ decays'
+ValidationInfo:
+  'Herwig 7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2005ahl
+BibTeX: '@article{BaBar:2005ahl,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of time-dependent CP asymmetries and the CP-odd fraction in the decay $B^0 \to D^{*+} D^{*-}$}",
+    eprint = "hep-ex/0506082",
+    archivePrefix = "arXiv",
+    reportNumber = "BABAR-PUB-05-24, SLAC-PUB-11321, BABAR-PUB-05-024",
+    doi = "10.1103/PhysRevLett.95.151804",
+    journal = "Phys. Rev. Lett.",
+    volume = "95",
+    pages = "151804",
+    year = "2005"
+}
+'

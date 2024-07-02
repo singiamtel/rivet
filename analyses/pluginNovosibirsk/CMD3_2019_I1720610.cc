@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- -> 3(pi+pi-)pi0
   class CMD3_2019_I1720610 : public Analysis {
   public:
 
@@ -22,24 +22,24 @@ namespace Rivet {
 
       // Initialise and register projections
       declare(FinalState(), "FS");
-      declare(UnstableParticles(), "UFS");
+      declare(UnstableParticles(Cuts::pid==221 || Cuts::pid==223), "UFS");
 
       // Book histograms
-
-      book(_c_all  , "/TMP/all");
-      book(_c_omega, "/TMP/omega");
-      book(_c_eta  , "/TMP/eta");
+      book(_sigma[0], "TMP/c_all",   refData(1, 1, 1));
+      book(_sigma[1], "TMP/c_eta",   refData(1, 1, 2));
+      book(_sigma[2], "TMP/c_omega", refData(1, 1, 3));
 
     }
 
-    void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
-      for(const Particle &child : p.children()) {
-	if(child.children().empty()) {
-	  --nRes[child.pid()];
-	  --ncount;
-	}
-	else
-	  findChildren(child,nRes,ncount);
+    void findChildren(const Particle& p, map<long,int>& nRes, int& ncount) {
+      for (const Particle& child : p.children()) {
+        if (child.children().empty()) {
+          --nRes[child.pid()];
+          --ncount;
+        }
+        else {
+          findChildren(child,nRes,ncount);
+        }
       }
     }
 
@@ -50,47 +50,47 @@ namespace Rivet {
       map<long,int> nCount;
       int ntotal(0);
       for (const Particle& p : fs.particles()) {
-	nCount[p.pid()] += 1;
-	++ntotal;
+        nCount[p.pid()] += 1;
+        ++ntotal;
       }
-      if(ntotal==7 && nCount[211]==3 && nCount[-211]==3 && nCount[111] ==1 ) {
-	_c_all->fill();
+      if (ntotal==7 && nCount[211]==3 && nCount[-211]==3 && nCount[111] ==1 ) {
+        _sigma[0]->fill(sqrtS()/MeV);
       }
       // find omega/phi + eta
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       bool found=false;
       for (const Particle& p : ufs.particles()) {
-	if(p.children().empty()) continue;
-	// find the eta/omega
-	if(p.pid()!=221 && p.pid()!=223) continue;
-	map<long,int> nRes = nCount;
-	int ncount = ntotal;
-	findChildren(p,nRes,ncount);
-	// eta/omega 2(pi+pi-)
-	if(ncount==4) {
-	  bool matched = true;
-	  for(auto const & val : nRes) {
-	    if(abs(val.first)==211 ) {
-	      if(val.second !=2) {
-		matched = false;
-		break;
-	      }
-	    }
-	    else if(val.second!=0) {
-	      matched = false;
-	      break;
-	    }
-	  }
-	  if(matched) {
-	    if(p.pid()==221)
-	      _c_eta->fill();
-	    else if(p.pid()==223)
-	      _c_omega->fill();
-	    found = true;
-	    break;
-	  }
-	}
-	if(found) break;
+        if(p.children().empty()) continue;
+        map<long,int> nRes = nCount;
+        int ncount = ntotal;
+        findChildren(p,nRes,ncount);
+        // eta/omega 2(pi+pi-)
+        if(ncount==4) {
+          bool matched = true;
+          for (const auto& val : nRes) {
+            if (abs(val.first)==211 ) {
+              if (val.second !=2) {
+                matched = false;
+                break;
+              }
+            }
+            else if(val.second!=0) {
+              matched = false;
+              break;
+            }
+          }
+          if (matched) {
+            if (p.pid()==221) {
+              _sigma[1]->fill(sqrtS()/MeV);
+            }
+            else if (p.pid()==223) {
+              _sigma[2]->fill(sqrtS()/MeV);
+            }
+            found = true;
+            break;
+          }
+        }
+        if (found) break;
       }
 
     }
@@ -98,28 +98,12 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double fact = crossSection()/nanobarn/sumOfWeights();
-      for (unsigned int ix=1;ix<4;++ix) {
-        double sigma(0.),error(0.);
-        if(ix==1) {
-          sigma = _c_all->val()*fact;
-          error = _c_all->err()*fact;
-        }
-        else if(ix==2) {
-          sigma = _c_eta->val()*fact;
-          error = _c_eta->err()*fact;
-        }
-        else if(ix==3) {
-          sigma = _c_omega->val()*fact;
-          error = _c_omega->err()*fact;
-        }
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, ix);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      const double fact = crossSection()/nanobarn/sumOfWeights();
+      for(unsigned int ix=0;ix<3;++ix) {
+        scale(_sigma[ix], fact);
+        Estimate1DPtr tmp;
+        book(tmp,1,1,1+ix);
+        barchart(_sigma[ix],tmp);
       }
     }
 
@@ -128,7 +112,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_all,_c_omega,_c_eta;
+    Histo1DPtr _sigma[3];
     /// @}
 
 

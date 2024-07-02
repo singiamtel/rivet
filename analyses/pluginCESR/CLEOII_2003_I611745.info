@@ -1,0 +1,36 @@
+Name: CLEOII_2003_I611745
+Year: 2003
+Summary: Angular distributions and longitudinal polarization in $B\to D^*\rho$ decays
+Experiment: CLEOII
+Collider: CESR
+InspireID: 611745
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 67 (2003) 112002
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+'Angular distributions and longitudinal polarization in $B\to D^*\rho$ decays. The longitudinal polarizations are taken from Eqn. 3 in the paper and
+the angular distributions read from figure 2.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2003quc
+BibTeX: '@article{CLEO:2003quc,
+    author = "Csorna, S. E. and others",
+    collaboration = "CLEO",
+    title = "{Measurements of the branching fractions and helicity amplitudes in $B \to D^{*} \rho$ decays}",
+    eprint = "hep-ex/0301028",
+    archivePrefix = "arXiv",
+    reportNumber = "CLNS-03-1813, CLEO-03-01",
+    doi = "10.1103/PhysRevD.67.112002",
+    journal = "Phys. Rev. D",
+    volume = "67",
+    pages = "112002",
+    year = "2003"
+}
+'

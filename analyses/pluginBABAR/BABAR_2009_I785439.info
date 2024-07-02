@@ -1,0 +1,36 @@
+Name: BABAR_2009_I785439
+Year: 2009
+Summary: Mass distributions in $B\to\eta K\gamma$ decays
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 785439
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 79 (2009) 011102
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Mass distributions in $B\to\eta K\gamma$ decays'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2008cqt
+BibTeX: '@article{BaBar:2008cqt,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Branching Fractions and CP-Violating Asymmetries in Radiative $B$ Decays to $\eta K \gamma$}",
+    eprint = "0805.1317",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-08-012, SLAC-PUB-13228",
+    doi = "10.1103/PhysRevD.79.011102",
+    journal = "Phys. Rev. D",
+    volume = "79",
+    pages = "011102",
+    year = "2009"
+}
+'

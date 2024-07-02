@@ -1,0 +1,35 @@
+Name: BELLE_2005_I679052
+Year: 2005
+Summary: Photon Energy and Hadronic mass spectrum in  $B\to X_s\ell^+\ell^-$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 679052
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ -  Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Belle:2005fli
+RunInfo:  Any process producing B0, B+ mesons, original Upsilon(4S) decays
+Description:
+  'Measurement of the photon energy and hadronic mass spectrum in $B\to X_s\ell^+\ell^-$, while there is a more recent conference proceding in this paper the values are given in a table, rather than having to be read from the figures.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2005fli
+BibTeX: '@article{Belle:2005fli,
+    author = "Iwasaki, M. and others",
+    collaboration = "Belle",
+    title = "{Improved measurement of the electroweak penguin process $B \to X_s l^+ l^-$}",
+    eprint = "hep-ex/0503044",
+    archivePrefix = "arXiv",
+    reportNumber = "KEK-PREPRINT-2005-5, BELLE-PREPRINT-2005-14",
+    doi = "10.1103/PhysRevD.72.092005",
+    journal = "Phys. Rev. D",
+    volume = "72",
+    pages = "092005",
+    year = "2005"
+}
+'

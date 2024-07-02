@@ -53,7 +53,7 @@ namespace Rivet {
 	_h_x->fill(xp);
 	int sign = p.pid()/p.abspid();
 	if(isDecay(p,{sign*4232,-sign*211})) {
-	  _r->fill(0.5);
+	  _r->fill("10.5"s);
 	}
       }
       unsigned int nxi = ufs.particles(Cuts::abspid==4232).size();
@@ -70,7 +70,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_x,_r;
+    Histo1DPtr _h_x;
+    BinnedHistoPtr<string> _r;
     CounterPtr _c_xi;
     /// @}
 

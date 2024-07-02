@@ -13,12 +13,33 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: yes
 Beams:  [e+,e-]
+Energies: [3.872, 4.009, 4.130, 4.160, 4.180, 4.190, 4.200, 4.210,
+           4.220, 4.230, 4.237, 4.246, 4.260, 4.270, 4.290, 4.315,
+           4.340, 4.360, 4.380, 4.400, 4.420, 4.440, 4.600, 4.620,
+           4.640, 4.660, 4.680, 4.700]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to\pi^+\pi^-\eta$  between 3.872 and 4.7 GeV by the BESIII collaboration.'
+  'Measurement of the cross section for $e^+e^-\to\pi^+\pi^-\eta$  between 3.872 and 4.7 GeV
+   by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
-BibKey: 
-BibTeX: ''
+BibKey: BESIII:2022vpa
+BibTeX: '@article{BESIII:2022vpa,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Measurement of the cross section of e$^{+}$e$^{−}$\textrightarrow{} \ensuremath{\eta}\ensuremath{\pi}$^{+}$\ensuremath{\pi}$^{−}$ at center-of-mass energies from 3.872 GeV to 4.700 GeV}",
+    eprint = "2202.12748",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1007/JHEP12(2022)153",
+    journal = "JHEP",
+    volume = "12",
+    pages = "153",
+    year = "2022"
+}
+'

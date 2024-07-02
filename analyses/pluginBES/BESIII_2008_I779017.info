@@ -1,0 +1,36 @@
+Name: BESIII_2008_I779017
+Year: 2008
+Summary: Cross section for light hadron production for $\sqrt{s}=3.65\to3.87\,$GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 779017
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 659 (2008) 74-79
+RunInfo: e+e- > hadrons
+Beams: [e+, e-]
+Options:
+ - ECENT=3.65029,3.65874,3.66565,3.67072,3.67365,3.67668,3.67834,3.67942,3.68069,3.68128,3.68147,3.68186,3.68265,3.68333,3.68392,3.68490,3.68519,3.68578,3.68637,3.68696,3.68735,3.68921,3.69009,3.69176,3.69579,3.69775,3.69962,3.70493,3.70582,3.71282,3.71371,3.72072,3.72171,3.72844,3.72953,3.73658,3.73747,3.73812,3.73894,3.74609,3.74676,3.74884,3.75001,3.75117,3.75238,3.75349,3.75398,3.75480,3.75582,3.75713,3.75757,3.75829,3.75892,3.75946,3.75985,3.76048,3.76077,3.76091,3.76150,3.76193,3.76208,3.76286,3.76324,3.76388,3.76451,3.76490,3.76543,3.76577,3.76587,3.76645,3.76689,3.76728,3.76786,3.76806,3.76845,3.76883,3.76922,3.76956,3.76971,3.76995,3.77020,3.77049,3.77053,3.77083,3.77127,3.77156,3.77185,3.77214,3.77263,3.77287,3.77317,3.77361,3.77375,3.77404,3.77419,3.77482,3.77555,3.77565,3.77619,3.77638,3.77687,3.77755,3.77785,3.77843,3.77872,3.77902,3.77945,3.78034,3.78043,3.78077,3.78111,3.78238,3.78360,3.78380,3.78473,3.78605,3.78717,3.78771,3.78839,3.78859,3.79079,3.79363,3.79858,3.80078,3.80869,3.81086,3.81787,3.82003,3.82796,3.83652,3.83825,3.84857,3.85276,3.85861,3.87268,3.87340
+Description:
+  'Measurement of the cross section for $e^+e^-\to\text{light hadrons}$ for $\sqrt{s}=3.65\to3.87\,$GeV.
+   As the analyses requires the beam energy smearing described in the paper then central CMS energy should be specified using the ECENT (in GeV) option.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BES:2008vad
+BibTeX: '@article{BES:2008vad,
+    author = "Ablikim, M. and others",
+    collaboration = "BES",
+    title = "{Direct measurements of the cross sections for e+ e- ---\ensuremath{>} hadrons (non-D anti-D) in the range from 3.65-GeV to 3.87-GeV and the branching fraction for psi(3770) ---\ensuremath{>} non-D anti-D}",
+    doi = "10.1016/j.physletb.2007.11.078",
+    journal = "Phys. Lett. B",
+    volume = "659",
+    pages = "74--79",
+    year = "2008"
+}
+'

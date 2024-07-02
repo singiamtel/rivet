@@ -1,0 +1,36 @@
+Name: BELLE_2008_I754089
+Year: 2008
+Summary: Transversality angles for $\eta_c\to f_2f^{(\prime)}_2$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 754089
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Eur.Phys.J.C 53 (2008) 1-14
+RunInfo: Any process producing eta_c, originally gamma gamma
+Description:
+  'Transversality angles for $\eta_c\to f_2f^{(\prime)}_2$. The background subtracted data were read from figure 8 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2007qae
+BibTeX: '@article{Belle:2007qae,
+    author = "Uehara, S. and others",
+    collaboration = "Belle",
+    title = "{Study of charmonia in four-meson final states produced in two-photon collisions}",
+    eprint = "0706.3955",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BELLE-2007-29, KEK-2007-26",
+    doi = "10.1140/epjc/s10052-007-0451-z",
+    journal = "Eur. Phys. J. C",
+    volume = "53",
+    pages = "1--14",
+    year = "2008"
+}
+'

@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+e- > pi+pi-pi0 and pi+pi-omega
   class DM2_1992_I339265 : public Analysis {
   public:
 
@@ -23,8 +23,28 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_n3pi, "TMP/3pi");
-      book(_nomega, "TMP/omega");
+      book(_n3pi,   1, 1, 1);
+      book(_nomega, 2, 1, 1);
+      for (const string& en : _n3pi.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/MeV, emin, emax)) {
+            _ecms = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*MeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms = en;
+            break;
+          }
+        }
+      }
+      if (_ecms.empty())
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -50,7 +70,7 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==3 && nCount[211] == 1 && nCount[-211] == 1 && nCount[111] == 1)
-	_n3pi->fill();
+	_n3pi->fill(_ecms);
 
       const FinalState& ufs = apply<FinalState>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
@@ -76,7 +96,7 @@ namespace Rivet {
 	    }
 	  }
 	  if(matched)
-	    _nomega->fill();
+	    _nomega->fill(_ecms);
 	}
       }
     }
@@ -84,26 +104,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (unsigned int ix=1;ix<3;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _n3pi->val();
-          error = _n3pi->err();
-        }
-        else if(ix==2) {
-          sigma = _nomega->val();
-          error = _nomega->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact=crossSection()/ sumOfWeights() /nanobarn;
+      scale(_n3pi,fact);
+      scale(_nomega,fact);
     }
 
     /// @}
@@ -111,7 +114,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _n3pi,_nomega;
+    BinnedHistoPtr<string> _n3pi,_nomega;
+    string _ecms;
     /// @}
 
 

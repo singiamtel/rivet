@@ -20,8 +20,17 @@ namespace Rivet {
     void init() {
       declare(FinalState(), "FS");
       for (unsigned int ix=0;ix<8;++ix) {
-        book(_nCharged[ix], "TMP/nCharged_"+to_str(ix+1));
+        book(_nCharged[ix], 1, 1, ix+1);
       }
+
+      for (const string& en : _nCharged[0].binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -37,26 +46,26 @@ namespace Rivet {
       if(ntotal==4) {
 	if(nCount[211]==1 && nCount[-211]==1) {
 	  if(nCount[321]==1 && nCount[-321]==1 )
-	    _nCharged[0]->fill();
+	    _nCharged[0]->fill(_ecms);
 	  else if(nCount[2212]==1 && nCount[-2212]==1 )
-	    _nCharged[3]->fill();
+	    _nCharged[3]->fill(_ecms);
 	}
 	else if(nCount[321]==2 && nCount[-321]==2 )
-	  _nCharged[1]->fill();
+	  _nCharged[1]->fill(_ecms);
 	else if (nCount[211]==2 && nCount[-211]==2 )
-	  _nCharged[2]->fill();
+	  _nCharged[2]->fill(_ecms);
       }
       else if(ntotal==5 && nCount[111]==1) {
 	if(nCount[211]==1 && nCount[-211]==1) {
 	  if(nCount[321]==1 && nCount[-321]==1 )
-	    _nCharged[4]->fill();
+	    _nCharged[4]->fill(_ecms);
 	  else if(nCount[2212]==1 && nCount[-2212]==1 )
-	    _nCharged[7]->fill();
+	    _nCharged[7]->fill(_ecms);
 	}
 	else if(nCount[321]==2 && nCount[-321]==2 )
-	  _nCharged[5]->fill();
+	  _nCharged[5]->fill(_ecms);
 	else if (nCount[211]==2 && nCount[-211]==2 )
-	  _nCharged[6]->fill();
+	  _nCharged[6]->fill(_ecms);
       }
     }
 
@@ -64,24 +73,16 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /picobarn;
-      for (unsigned int ix=0;ix<8;++ix) {
-        double sigma = _nCharged[ix]->val()*fact;
-        double error = _nCharged[ix]->err()*fact;
-        Estimate1DPtr mult;
-        book(mult, 1, 1, ix+1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for (unsigned int ix=0;ix<8;++ix)
+        scale(_nCharged[ix],fact);
     }
     /// @}
 
 
     /// @name Histograms
     /// @{
-    CounterPtr _nCharged[8];
+    BinnedHistoPtr<string> _nCharged[8];
+    string _ecms;
     /// @}
 
 

@@ -43,7 +43,11 @@ now = datetime.datetime.now()
 ## Experiment (grouping) names and regex patterns
 import re
 EXPTS = ["ALICE", "ATLAS", "CMS", "LHCb", "Forward", "HERA", "EE-HIGH", "EE-LOW", "Tevatron", "RHIC", "SPS", "Other"]
-EXPT_PATTS = ["ALICE", "ATLAS", "CMS", "LHCb", "LHCF|TOTEM", "H1|ZEUS|HERMES", "ALEPH|DELPHI|L3|L3\+C|OPAL|SLD|LEP|TASSO|JADE|AMY|TOPAZ|MAC|VENUS|CELLO|TPC|TPC/TWO|TPC/TWO-GAMMA|TPC-TWO-GAMMA|HRS|PLUTO|MARK-J|MARK-II|MARKJ|MARKII", "BABAR|KEDR|DESY-HAMBURG-HEIDELBERG-MUNICH|AACHEN-DESY-ANNECY(LAPP)-MIT-NIKHEF-BEIJING|BELLE|BELLE-II|CLEO|CLEO-II|CUSB|ARGUS|SND|CMD|CMD2|CMD-2|CMD-3|CMD3|DM1|DM2|DM1-DM2|KLOE|KLOE-2|BES|BESIII|OLYA|FENICE|LENA|DASP|MARK-I|MARKI|MUPI|NMD|DESY147|MD1|CRYSTAL|CRYSTAL_BALL|ND|GAMMAGAMMA|BBAR|AACHEN-DESY-ANNECY\(LAPP\)-MIT-NIKHEF-BEIJING|MARK-III", "CDF|D0|E735", "STAR|PHENIX", "COMPASS|NA48|NA49|EHS/NA22|NA22"]
+EXPT_PATTS = ["ALICE", "ATLAS", "CMS", "LHCb", "LHCF|TOTEM", "H1|ZEUS|HERMES|HERA-B",
+              "ALEPH|DELPHI|L3|L3\+C|OPAL|SLD|LEP|TASSO|JADE|AMY|TOPAZ|MAC|VENUS|CELLO|TPC|TPC/TWO|TPC/TWO\sGAMMA|TPC/TWO-GAMMA|TPC-TWO-GAMMA|HRS|PLUTO|MARK-J|MARK-II|MARKJ|MARKII|DELCO|AACHEN-DESY-ANNECY\(LAPP\)-MIT-NIKHEF-BEIJING",
+              "BABAR|KEDR|DESY-HAMBURG-HEIDELBERG-MUNICH|AACHEN-DESY-ANNECY(LAPP)-MIT-NIKHEF-BEIJING|BELLE|BELLE-II|CLEO|CLEO-II|CUSB|ARGUS|SND|CMD|CMD2|CMD-2|CMD-3|CMD3|DM1|DM2|DM1-DM2|KLOE|KLOE-2|BES|BESII|BESIII|OLYA|FENICE|LENA|DASP|MARK-I|MARKI|MUPI|NMD|DESY147|MD1|CRYSTAL\sBALL|ND|GAMMAGAMMA|BBAR|MARK-III",
+              "CDF|D0|E710|E735|E811", "STAR|PHENIX|BRAHMS",
+              "ACCMOR|R209|R608|R704|UA1|UA2|UA4|UA4/2|UA5|UA6|UA8|NA3|NA5|NA10|NA14|EHS/NA22|NA22|NA24|NA27|COMPASS|NA35|NA36|NA38|NA44|NA48|NA49|NA51|NA52\s(NEWMASS)|NA56/SPY|NA60|NA61/SHINE|NA62|NOMAD|NA50|WA21|WA25|WA59|WA70|WA75|WA76|WA77|WA78|WA80|WA82|WA85|WA89|WA94|WA102|CHORUS|HARP|EUROPEAN\sMUON|NEW\sMUON|SPIN\sMUON|SPY|BEATRICE|BCDMS|AACHEN-BERLIN-CERN-LONDON-VIENNA|SABRE|AACHEN-BERLIN-CERN-LONDON-VIENNA|ATHENS-DEMOCRITUS-LIVERPOOL-VIENNA|SCANDINAVIAN\sBUBBLE\sCHAMBER|BRITISH-SCANDINAVIAN-MIT|CPLEAR|OBELIX|SPIN\sMUON\s\(SMC\)|RUTHERFORD-LONDON|CHLM|AACHEN-BERLIN-BONN-CERN-CRACOW-HEIDELBERG-LONDON-VIENNA-WARSAW|BARI-BONN-CERN-DARESBURY-GLASGOW-LIVERPOOL-MILAN-VIENNA|OMEGA\sPHOTON|BRISTOL-GENEVA-HEIDELBERG-ORSAY-RUTHERFORD-STRASBOURG|CERN-HEIDELBERG-LUND|SOVIET-CERN|CMOR|EHS-RCBC|LEBC-EHS|AMES-BOLOGNA-CERN-DORTMUND-HEIDELBERG-WARSAW|CERN-COLUMBIA-OXFORD-ROCKEFELLER|AXIAL\sFIELD\sSPECTROMETER|CERN-OXFORD-ROCKEFELLER|BEBC\sWA59"]
 EXPT_REOBJS = [re.compile(patt, re.I) for patt in EXPT_PATTS]
 
 ## Add the rivet Python module build dir(s) to the Python module path, then import
@@ -93,8 +97,8 @@ for aname in rivet.AnalysisLoader.analysisNames():
 blacklist, greylist, hotlist = [], [], []
 assigned = {}
 comment  = {}
-commpatt = re.compile(r"^(.*)\s*\#(.*)$")
-mailpatt = re.compile(r"^(.*)\s*<(.+@.+>)\s*$")
+commpatt = re.compile(r"^(.*)\s*\#(.*)\#$")
+mailpatt = re.compile(r"^(.*)\s*<(.+@.+)>\s*$")
 mainpatt = re.compile(r"^(\d+)\s+(.)\s+(.+)$")
 for rankfilestr in args.RANKFILES:
     for rankfile in rankfilestr.split(" "):
@@ -108,13 +112,11 @@ for rankfilestr in args.RANKFILES:
                 comm, mcomm = None, commpatt.match(line)
                 if mcomm:
                     comm = mcomm.group(2).strip()
-                    comment[ins] = comm
                     line = mcomm.group(1).strip()
                 # Optional assigned email address
                 email, mmail = None, mailpatt.match(line)
                 if mmail:
                     email = mmail.group(2).strip()
-                    assigned[ins] = email
                     line = mmail.group(1).strip()
                 # Finally the core components
                 m = mainpatt.match(line)
@@ -122,6 +124,8 @@ for rankfilestr in args.RANKFILES:
                     continue
                 # ID and status codes
                 ins = int(m.group(1))
+                if comm  : comment[ins] = comm
+                if email : assigned[ins] = email
                 code = m.group(2)
                 if code == "X":
                     blacklist.append(ins)
@@ -141,7 +145,27 @@ for ins, rec in records.items():
 
     ## Sanitise title and experiment
     rec[0] = (rec[0] or "[NO TITLE]").replace("\n", " ")
-    rec[1] = (rec[1] or "UNKNOWN").upper().split()[0].strip()
+    rec[1] = (rec[1] or "UNKNOWN").upper().strip().replace("_"," ")
+    if "FERMILAB E" in rec[1] or "FERMILAB-E" in rec[1]: rec[1] = rec[1][9:]
+    if "FNAL E"     in rec[1] or "FNAL-E"     in rec[1]: rec[1] = rec[1][5:]
+    if   rec[1][0:2] == "H1" or rec[1][0:2] == "L3":  rec[1]=rec[1][0:2]
+    elif rec[1][0:4] == "CMS " or rec[1][0:4] =="LEP ": rec[1]=rec[1][0:3] 
+    elif rec[1][0:5] == "KLOE " : rec[1]="KLOE" 
+    elif rec[1][0:5] == "ATLAS" or rec[1][0:5] == "ALICE" or  rec[1][0:5] == "BABAR" : rec[1]=rec[1][0:5]
+    elif rec[1][0:6] == "DELPHI" : rec[1]=rec[1][0:6]
+    elif rec[1][0:8] == "BELLE-II" : rec[1]=rec[1][0:8]
+    elif rec[1]=="TPC / TWO GAMMA" : rec[1]="TPC/TWO-GAMMA"
+    elif "BESIII" in rec[1] : rec[1]="BESIII"
+    elif "CRYSTAL BALL" in rec[1] and (ins>569000 and ins < 648000 ) :  rec[1]="CRYSTAL BALL AT AGS"
+    elif rec[1]=="A LARGE ION COLLIDER EXPERIMENT" : rec[1]="ALICE"
+    elif "TOTEM" in rec[1] : rec[1]="TOTEM"
+    elif "NA48" in rec[1] : rec[1]="NA48"
+    elif "NA14" in rec[1] : rec[1]="NA14"
+    elif rec[1]=="EHS - NA22" : rec[1]="EHS/NA22"
+    elif rec[1][0:3]=="E-0" : rec[1]=rec[1].replace("E-0","E")
+    elif rec[1][0:2]=="E-" : rec[1]=rec[1].replace("E-","E")
+    elif rec[1][0:4]=="HARP" : rec[1]="HARP"
+    elif rec[1]=="BONN UA5" : rec[1]="UA5"
 
     ## Ranking
     code = "default"
@@ -275,6 +299,11 @@ $(document).ready( function(){
     b.text(t.indexOf("Show") != -1 ? t.replace("Show", "Hide") : t.replace("Hide", "Show") );
     $(".grey").toggle(100);
   });
+  $("#rivettoggle").click( function(){
+    var b = $("#rivettoggle"); var t = b.text();
+    b.text(t.indexOf("Show") != -1 ? t.replace("Show", "Hide") : t.replace("Hide", "Show") );
+    $(".rivet").toggle(100);
+  });
   $("#tabs").tabs();
 });
 """, escape=False)
@@ -355,7 +384,7 @@ for ex in EXPTS:
 
 body.button("Show greylist", id="greytoggle")
 body.button("Show blacklist", id="blacktoggle")
-
+body.button("Hide rivet", id="rivettoggle")
 #body.input(klass="search", placeholder="Search")
 #body.button("Sort by name", klass="sort", data-sort="name")
 

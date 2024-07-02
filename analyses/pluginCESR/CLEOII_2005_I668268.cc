@@ -102,10 +102,10 @@ namespace Rivet {
     void finalize() {
       //  asymmetry
       normalize(_h_Lambda);
-      Estimate1DPtr _h_alpha;
+      Estimate0DPtr _h_alpha;
       book(_h_alpha,1,1,1);
       pair<double,double> alpha = calcAlpha(_h_Lambda);
-      _h_alpha->bin(1).set(alpha.first, alpha.second);
+      _h_alpha->set(alpha.first, alpha.second);
     }
     /// @}
 

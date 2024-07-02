@@ -27,8 +27,26 @@ namespace Rivet {
       declare(Thrust(fs), "Thrust");
 
       // Counters for R
-      book(_c_hadrons, "sigma_hadrons");
-      book(_c_muons, "sigma_muons");
+      book(_c_hadrons, "sigma_hadrons", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_muons,   "sigma_muons"  , refData<YODA::BinnedEstimate<string>>(1,1,1));
+      for (const string& en : _c_hadrons.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/GeV, emin, emax)) {
+            _ecms[0] = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[0] = en;
+            break;
+          }
+        }
+      }
       book(_h_weight, "/TMP/HWeight");
       unsigned int iloc(0);
       sqs = sqrtS();
@@ -56,6 +74,35 @@ namespace Rivet {
         book(_h_S,   12,1,iloc);
         book(_h_T,   13,1,iloc);
         book(_h_y,   14,1,iloc);
+      }
+      // average event shapes
+      book(_n_charged ,4 ,1,  1);
+      book(_n_total   ,"TMP/ntotal",refData<YODA::BinnedEstimate<string>>(4 ,1,  2));
+      book(_sphericity,4 ,1,  4);
+      book(_thrust    ,4 ,1,  5);
+      book(_p_total   ,4 ,1,  6);
+      book(_p_l       ,4 ,1,  7);
+      book(_pt        ,4 ,1,  8);
+      book(_pt2       ,4 ,1,  9);
+      book(_pt2_in    ,4 ,1, 10);
+      book(_pt2_out   ,4 ,1, 11);
+      for (const string& en : _n_charged.binning().edges<0>()) {
+        const size_t idx = en.find("-");
+        if(idx!=std::string::npos) {
+          const double emin = std::stod(en.substr(0,idx));
+          const double emax = std::stod(en.substr(idx+1,string::npos));
+          if(inRange(sqrtS()/GeV, emin, emax)) {
+            _ecms[1] = en;
+            break;
+          }
+        }
+        else {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[1] = en;
+            break;
+          }
+        }
       }
     }
 
@@ -86,22 +133,20 @@ namespace Rivet {
       }
       // mu+mu- + photons
       if (nCount[-13]==1 and nCount[13]==1 && int(fs.particles().size())==2+nCount[22]) {
-        _c_muons->fill();
+        _c_muons->fill(_ecms[0]);
         return;
       }
       // everything else
-      _c_hadrons->fill();
+      _c_hadrons->fill(_ecms[0]);
       _h_weight->fill();
-      _n_charged.fill(nCharged);
-      _n_total.fill(ntotal);
-      // rest of the plots only for some energies
-      if(!_h_p) return;
+      _n_charged->fill(_ecms[1],nCharged);
+      _n_total->fill(_ecms[1],ntotal);
       // thrust
       const Thrust& thrust = apply<Thrust>(event, "Thrust");
-      _thrust.fill(thrust.thrust());
+      _thrust->fill(_ecms[1],thrust.thrust());
       // sphericity
       const Sphericity& sphericity = apply<Sphericity>(event, "Sphericity");
-      _sphericity.fill(sphericity.sphericity());
+      _sphericity->fill(_ecms[1],sphericity.sphericity());
       // global distributions
       if (_h_mult)  _h_mult->fill(nCharged);
       if (_h_S)     _h_S   ->fill(sphericity.sphericity());
@@ -111,22 +156,22 @@ namespace Rivet {
         if (!PID::isCharged(p.pid())) continue;
         const Vector3 mom3 = p.p3();
         double pp = mom3.mod();
-        _p_total.fill(pp);
+        _p_total->fill(_ecms[1],pp);
         if (_h_p)  _h_p ->fill(pp);
         if (_h_xp) _h_xp->fill(2.*pp/sqrtS());
         const double mom = dot(sphericity.sphericityAxis(), mom3);
-        _p_l.fill(fabs(mom));
+        _p_l->fill(_ecms[1],fabs(mom));
         if (_h_pl)  _h_pl->fill(fabs(mom));
         if (_h_xl)  _h_xl->fill(2.*fabs(mom)/sqrtS());
         const double pTin = dot(mom3, sphericity.sphericityMajorAxis());
-        _pt2_in.fill(sqr(pTin));
+        _pt2_in->fill(_ecms[1],sqr(pTin));
         const double pTout = dot(mom3, sphericity.sphericityMinorAxis());
-        _pt2_out.fill(sqr(pTout));
+        _pt2_out->fill(_ecms[1],sqr(pTout));
         double pT = sqr(pTin) + sqr(pTout);
-        _pt2.fill(pT);
+        _pt2->fill(_ecms[1],pT);
         if (_h_pt2)  _h_pt2->fill(pT);
         pT=sqrt(pT);
-        _pt.fill(pT);
+        _pt->fill(_ecms[1],pT);
         if (_h_pt)  _h_pt->fill(pT);
         if (_h_xT)  _h_xT->fill(2.*pT/sqrtS());
         if (_h_y) {
@@ -139,88 +184,17 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      const double fact = crossSection()/ sumOfWeights() /picobarn;
-      scale({_c_hadrons, _c_muons}, fact);
-
-      if(_c_muons->numEntries()!=0) {
-        Estimate0D R = *_c_hadrons/ *_c_muons;
-        BinnedEstimatePtr<string> mult;
-        book(mult, 1, 1, 1);
-        size_t idx = 0;
-        if (isCompatibleWithSqrtS(12*GeV))          idx = 1;
-        else if (isCompatibleWithSqrtS(14*GeV))     idx = 2;
-        else if (isCompatibleWithSqrtS(22*GeV))     idx = 3;
-        else if (isCompatibleWithSqrtS(25*GeV))     idx = 4;
-        else if (inRange(sqrtS()/GeV, 27.4, 27.7))  idx = 5;
-        else if (isCompatibleWithSqrtS(30.1*GeV))   idx = 6;
-        else if (inRange(sqrtS()/GeV, 30.5, 31.5))  idx = 7;
-        else if (inRange(sqrtS()/GeV, 32.5, 33.5))  idx = 8;
-        else if (inRange(sqrtS()/GeV, 33.5, 34.5))  idx = 9;
-        else if (inRange(sqrtS()/GeV, 34.5, 35.5))  idx = 10;
-        else if (inRange(sqrtS()/GeV, 35.5, 36.7))  idx = 11;
-        else if (inRange(sqrtS()/GeV, 38.7, 43.1))  idx = 12;
-        mult->bin(idx).set(R.val(), R.errPos());
-      }
-
+      BinnedEstimatePtr<string> mult;
+      book(mult, 1, 1, 1);
+      divide(_c_hadrons,_c_muons,mult);
       // charged particle multiplicity distribution
       if (_h_mult)  normalize(_h_mult,1.);
-      for (unsigned int iy=1;iy<12;++iy) {
-        double value = 0.0, error = 0.0;
-        if (iy==1) {
-          value = _n_charged.xMean();
-          error = _n_charged.xStdErr();
-        }
-        else if (iy==2) {
-          double num = _n_charged.xMean();
-          double den =   _n_total.xMean();
-          value = num/den;
-          error = value*sqrt(sqr(_n_charged.xStdErr()/num)+sqr(_n_total.xStdErr()/den));
-        }
-        else if (iy==3) {
-          value = _n_charged.xStdDev();
-          error = _n_charged.xStdErr();
-        }
-        else if (iy==4) {
-          value = _sphericity.xMean();
-          error = _sphericity.xStdErr();
-        }
-        else if (iy==5) {
-          value = _thrust.xMean();
-          error = _thrust.xStdErr();
-        }
-        else if (iy==6) {
-          value = _p_total.xMean();
-          error = _p_total.xStdErr();
-        }
-        else if (iy==7) {
-          value = _p_l.xMean();
-          error = _p_l.xStdErr();
-        }
-        else if (iy==8) {
-          value = _pt.xMean();
-          error = _pt.xStdErr();
-        }
-        else if (iy==9) {
-          value = _pt2.xMean();
-          error = _pt2.xStdErr();
-        }
-        else if (iy==10) {
-          value = _pt2_in.xMean();
-          error = _pt2_in.xStdErr();
-        }
-        else if (iy==11) {
-          value = _pt2_out.xMean();
-          error = _pt2_out.xStdErr();
-        }
-        BinnedEstimatePtr<string> mult;
-        book(mult, 4, 1, iy);
-        for (auto& b : mult->bins()) {
-          const double Ecm = std::stod(b.xEdge());
-          if (isCompatibleWithSqrtS(Ecm*GeV)) {
-            b.set(value, error);
-          }
-        }
-      }
+      // charged fraction
+      book(mult,4,1,2);
+      divide(_n_charged,_n_total,mult);
+      book(mult,4,1,3);
+      const auto & b = _n_charged->binAt(_ecms[1]);
+      mult->binAt(_ecms[1]).set(b.stdDev(2),b.stdErr(2));
       // scale the distributions
       scale(_h_p  ,1./_h_weight->sumW());
       scale(_h_xp ,1./_h_weight->sumW());
@@ -241,10 +215,11 @@ namespace Rivet {
     /// @{
     Histo1DPtr _h_p,_h_xp,_h_pl,_h_pt,_h_pt2,_h_xl,_h_xT,_h_S,_h_T,_h_y;
     BinnedHistoPtr<int> _h_mult;
-    CounterPtr _c_hadrons, _c_muons;
-    YODA::Dbn1D _n_charged, _n_total, _sphericity, _thrust, _p_total, _p_l, _pt, _pt2, _pt2_in, _pt2_out;
+    BinnedHistoPtr<string> _c_hadrons, _c_muons;
+    BinnedProfilePtr<string> _n_charged, _n_total,_sphericity, _thrust, _p_total, _p_l, _pt, _pt2, _pt2_in, _pt2_out;
     CounterPtr  _h_weight;
     double sqs;
+    string _ecms[2];
     /// @}
 
   };

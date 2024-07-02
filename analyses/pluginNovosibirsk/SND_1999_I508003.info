@@ -12,8 +12,15 @@ References:
 RunInfo: e+ e- to hadrons
 NeedCrossSection: yes
 Beams: [e+, e-]
+Energies:  [1.040, 1.050, 1.060, 1.070, 1.080, 1.090, 1.100, 1.110, 1.120, 1.130,
+            1.140, 1.150, 1.160, 1.180, 1.190, 1.200, 1.210, 1.220, 1.230, 1.240,
+            1.250, 1.260, 1.270, 1.280, 1.290, 1.300, 1.310, 1.320, 1.330, 1.340,
+            1.350, 1.360, 1.370, 1.380]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to \pi^+\pi^-\pi^0$ by SND for energies between 1.04 and 1.38 GeV.'
+  'Measurement of the cross section for $e^+e^-\to \pi^+\pi^-\pi^0$ by SND for energies between 1.04 and 1.38 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords:
 BibKey: Achasov:1999gw
 BibTeX: '@article{Achasov:1999gw,

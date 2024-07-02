@@ -13,8 +13,11 @@ RunInfo: e+e- collisions
 NeedCrossSection: yes
 Beams: [e-, e+]
 Energies: [10.58,10.61,10.62,10.63,10.64,10.65,10.7]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the inclusive cross section for $B^*$ production at energies above the $\Upsilon(4S)$ mass.'
+  'Measurement of the inclusive cross section for $B^*$ production at energies above the $\Upsilon(4S)$ mass.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 Keywords: []
 BibKey: Akerib:1991eq
 BibTeX: '@article{Akerib:1991eq,

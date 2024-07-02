@@ -617,28 +617,25 @@ namespace Rivet {
     // First push all analyses' objects to persistent and final
     MSG_TRACE("AnalysisHandler::finalize(): Pushing analysis objects to persistent.");
     collapseEventGroup();
-
     // Warn if no cross-section was set
     if (!nominalCrossSection()) {
       MSG_WARNING("Null nominal cross-section: setting to 10^-10 pb to allow rescaling");
       setCrossSection(1.0e-10, 0.0);
     }
-
     // update Ntrials calculation
     const double ntrials = safediv(_fileCounter.get()->persistent(defaultWeightIndex())->sumW(),
                                    _xs.get()->persistent(defaultWeightIndex())->val()) + _ntrials;
-
-    for (size_t iW = 0; iW < numWeights(); ++iW) {
-      const double sumw  = _eventCounter.get()->persistent(iW)->sumW();
-      const double sumw2 = _eventCounter.get()->persistent(iW)->sumW2();
-      double xs = 0.0, xserr = 0.0;
-      if (ntrials >= 1.0) {
+    if (ntrials >= 1.0) {
+      for (size_t iW = 0; iW < numWeights(); ++iW) {
+        const double sumw  = _eventCounter.get()->persistent(iW)->sumW();
+        const double sumw2 = _eventCounter.get()->persistent(iW)->sumW2();
+        double xs = 0.0, xserr = 0.0;
         xs = sumw / ntrials;
         xserr = (sumw2/ntrials) -  sqr(sumw/ntrials);
         xserr /= ntrials - 1;
+        _xs.get()->persistent(iW)->reset();
+        _xs.get()->persistent(iW)->set(xs, sqrt(xserr));
       }
-      _xs.get()->persistent(iW)->reset();
-      _xs.get()->persistent(iW)->set(xs, sqrt(xserr));
     }
 
     // Copy all histos to finalize versions.
@@ -1728,12 +1725,13 @@ namespace Rivet {
 
   void AnalysisHandler::_setRunBeamInfo(const ParticlePair& beams) {
     PdgIdPair beamids = pids(beams);
-    vector<string> labels{_mkBeamInfoLabel(1, beamids.first), _mkBeamInfoLabel(2, beamids.second)};
     pair<FourMomentum,FourMomentum> beammoms = moms(beams);
-    _beaminfo = make_shared<YODA::BinnedEstimate<string>>(labels, "/TMP/_BEAMPZ");
     const bool first_pos = beammoms.first.pz() > 0.;
-    _beaminfo->bin(1).setVal((first_pos? beammoms.second.pz() : beammoms.first.pz())/GeV);
-    _beaminfo->bin(2).setVal((first_pos? beammoms.first.pz() : beammoms.second.pz())/GeV);
+    vector<string> labels{_mkBeamInfoLabel(1, first_pos? beamids.second : beamids.first),
+                          _mkBeamInfoLabel(2, first_pos? beamids.first : beamids.second)};
+    _beaminfo = make_shared<YODA::BinnedEstimate<string>>(labels, "/TMP/_BEAMPZ");
+    _beaminfo->bin(1+first_pos).setVal(beammoms.first.pz()/GeV);
+    _beaminfo->bin(2-first_pos).setVal(beammoms.second.pz()/GeV);
   }
 
   void AnalysisHandler::_setRunBeamInfo(YODA::AnalysisObjectPtr ao) {
@@ -1753,7 +1751,7 @@ namespace Rivet {
 
   double AnalysisHandler::runSqrtS() const {
     double rtn = sqrtS(runBeams());
-    if (rtn <= 0. && _beaminfo) { // try falling back to _beaminfo
+    if (rtn <= 0. && _beaminfo && _beaminfo->numBins()==2) { // try falling back to _beaminfo
       rtn = sqrtS(fabs(_beaminfo->bin(1).val()), fabs(_beaminfo->bin(2).val()));
     }
     return rtn;

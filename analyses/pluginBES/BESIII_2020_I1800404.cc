@@ -73,11 +73,11 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // percentage and bin width
-      normalize(_h_jpsi[0],200.);
-      normalize(_h_jpsi[1],200.);
-      normalize(_h_chi0   ,200.);
-      normalize(_h_chi1   ,200.);
-      normalize(_h_chi2   ,200.);
+      normalize(_h_jpsi[0],100.);
+      normalize(_h_jpsi[1],100.);
+      normalize(_h_chi0   ,100.);
+      normalize(_h_chi1   ,100.);
+      normalize(_h_chi2   ,100.);
     }
 
     /// @}
@@ -85,7 +85,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_jpsi[2],_h_chi0,_h_chi1,_h_chi2;
+    BinnedHistoPtr<int> _h_jpsi[2],_h_chi0,_h_chi1,_h_chi2;
     /// @}
 
   };

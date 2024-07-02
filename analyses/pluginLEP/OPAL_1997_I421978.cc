@@ -63,7 +63,7 @@ namespace Rivet {
 
       for (const Particle& p : ufs.particles()) {
         const int id = p.abspid();
-        if (!inRange(id, 3000, 3999)) continue;
+        if (!inRange(id, 3000, 3999)&&id!=102134) continue;
 
         const double xE = p.E()/meanBeamMom;
         const double xp = p.p3().mod()/(2*meanBeamMom);
@@ -90,7 +90,7 @@ namespace Rivet {
           _histXpXi1530->fill(xE);
           _histXiXi1530->fill(xi);
           break;
-        case 3124:
+        case 102134:
           _histXpLambda1520->fill(xE);
           _histXiLambda1520->fill(xi);
           break;

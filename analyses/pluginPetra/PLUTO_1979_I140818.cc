@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief hadronic cross section
   class PLUTO_1979_I140818 : public Analysis {
   public:
 
@@ -21,7 +21,15 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       // counters for R
-      book(_c_hadrons, "/TMP/sigma_hadrons");
+      book(_c_hadrons, 2, 1, 1);
+      for (const string& en : _c_hadrons.binning().edges<0>()) {
+        double end = std::stod(en)*GeV;
+        if(isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -41,7 +49,7 @@ namespace Rivet {
       }
       else {
         // everything else
-        _c_hadrons->fill();
+        _c_hadrons->fill(_ecms);
       }
 
     }
@@ -50,15 +58,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       double fact = crossSection()/ sumOfWeights() /nanobarn;
-      double sig_h = _c_hadrons->val()*fact;
-      double err_h = _c_hadrons->err()*fact;
-      Estimate1DPtr hadrons;
-      book(hadrons, 2, 1, 1);
-      for (auto& b : hadrons->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sig_h, err_h);
-        }
-      }
+      scale(_c_hadrons,fact);
     }
 
     /// @}
@@ -66,7 +66,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_hadrons;
+    BinnedHistoPtr<string> _c_hadrons;
+    string _ecms;
     /// @}
 
 

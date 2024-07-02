@@ -65,7 +65,7 @@ namespace Rivet {
     void finalize() {
       for(unsigned int ix=0;ix<3;++ix)
 	for(unsigned int iy=0;iy<3;++iy)
-	  normalize(_h[ix][iy]);
+	  normalize(_h[ix][iy],1.,false);
     }
 
     /// @}

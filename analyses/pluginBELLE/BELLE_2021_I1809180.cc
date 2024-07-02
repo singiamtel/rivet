@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       // set the PDG code
-      _pid = getOption<double>("PID", 204232);
+      _pid = getOption<double>("PID", 103242);
       // projections
       declare(UnstableParticles(Cuts::abspid==_pid), "UFS");
       for(unsigned int ix=0;ix<2;++ix)

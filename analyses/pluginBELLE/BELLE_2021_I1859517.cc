@@ -150,20 +150,20 @@ namespace Rivet {
     void finalize() {
       // Lambda Kbar*0
       normalize(_h_Lambda);
-      Estimate1DPtr _h_alpha;
+      Estimate0DPtr _h_alpha;
       book(_h_alpha,4,1,1);
       pair<double,double> alpha = calcAlpha(_h_Lambda);
-      _h_alpha->bin(1).set(alpha.first, alpha.second);
+      _h_alpha->set(alpha.first, alpha.second);
       // Sigma0 Kbar*0
       normalize(_h_Sigma0);
       book(_h_alpha,4,1,2);
       alpha = calcAlpha(_h_Sigma0);
-      _h_alpha->bin(1).set(alpha.first, alpha.second);
+      _h_alpha->set(alpha.first, alpha.second);
       // Sigma+ K*-
       normalize(_h_Sigmap);
       book(_h_alpha,4,1,3);
       alpha = calcAlpha(_h_Sigmap);
-      _h_alpha->bin(1).set(alpha.first, alpha.second);
+      _h_alpha->set(alpha.first, alpha.second);
 
     }
 

@@ -1,0 +1,37 @@
+Name: BELLE_2007_I748975
+Year: 2007
+Summary: $B^+\to p \bar{\Lambda}^0\gamma$, $B^+\to p \bar{\Lambda}^0\pi^0$ and $B^0\to p \bar{\Lambda}^0\pi^-$  
+Experiment: BELLE
+Collider: KEKB
+InspireID: 748975
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 76 (2007) 052004
+RunInfo: Any process producing B0 and B+ mesons, originally Upsilon(4S) decays
+Description:
+'Mass and angular distributions in $B^+\to p \bar{\Lambda}^0\gamma$, $B^+\to p \bar{\Lambda}^0\pi^0$ and $B^0\to p \bar{\Lambda}^0\pi^-$ decays. The mass distributions, $\alpha$ parameters and average $\bar{\Lambda}^0$ energies were
+read from the table in the paper, while the $\cos\theta_p$ distributions were extracted from the figures.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2007lbz
+BibTeX: '@article{Belle:2007lbz,
+    author = "Wang, M. -Z. and others",
+    collaboration = "Belle",
+    title = "{Study of B+ ---\ensuremath{>} p anti-Lambda gamma, p anti-Lambda pi0 and B0 ---\ensuremath{>} p anti-Lambda pi-}",
+    eprint = "0704.2672",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BELLE-PREPRINT-2007-19, KEK-PREPRINT-2007-6",
+    doi = "10.1103/PhysRevD.76.052004",
+    journal = "Phys. Rev. D",
+    volume = "76",
+    pages = "052004",
+    year = "2007"
+}
+'

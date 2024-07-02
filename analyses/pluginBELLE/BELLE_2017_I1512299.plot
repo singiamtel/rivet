@@ -6,30 +6,22 @@ LogY=0
 # BEGIN PLOT /BELLE_2017_I1512299/d01-x01-y01
 XLabel=$w$
 YLabel=$\Delta\Gamma/\Delta w$~[GeV]
-YMin=1e-14
-YMax=1e-13
 # END PLOT
 
 # BEGIN PLOT /BELLE_2017_I1512299/d02-x01-y01
 XLabel=$\cos\theta_v$
 YLabel=$\Delta\Gamma/\Delta \cos\theta_v$~[GeV]
-YMin=3e-15
-YMax=2e-14
 # END PLOT
 
 # BEGIN PLOT /BELLE_2017_I1512299/d03-x01-y01
 XLabel=$\cos\theta_l$
 YLabel=$\Delta\Gamma/\Delta \cos\theta_l$~[GeV]
-YMin=3e-15
-YMax=2e-14
 # END PLOT
 
 
 # BEGIN PLOT /BELLE_2017_I1512299/d04-x01-y01
 XLabel=$\chi$
 YLabel=$\Delta\Gamma/\Delta\chi$~[GeV]
-YMin=1e-15
-YMax=1e-14
 # END PLOT
 
 # BEGIN PLOT /BELLE_2017_I1512299/d05-x01-y01

@@ -36,6 +36,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      double alpha = -0.732;
       static const map<PdgId,unsigned int> & mode   = { { 2212,1},{-3122,1}, {-211,1}};
       DecayedParticles B0 = apply<DecayedParticles>(event, "B0");
       // loop over particles
@@ -68,24 +69,21 @@ namespace Rivet {
 	Vector3 axis1 = pLam.p3().unit();
 	double cTheta = axisP.dot(axis1);
 	_h_pol1   ->fill(pLam.E(),3.*cTheta);
-	_h_pol2[0]->fill(pLam.E(),3.*cTheta);
+	_h_pol2[0]->fill(pLam.E(),3.*cTheta/alpha);
 	Vector3 axis2 = pLam.p3().cross(pProton.p3()).unit();
 	cTheta = axisP.dot(axis2);
-	_h_pol2[1]->fill(pLam.E(),3.*cTheta);
+	_h_pol2[1]->fill(pLam.E(),3.*cTheta/alpha);
 	Vector3 axis3 = axis1.cross(axis2);
 	cTheta = axisP.dot(axis3);
-	_h_pol2[2]->fill(pLam.E(),3.*cTheta);
+	_h_pol2[2]->fill(pLam.E(),3.*cTheta/alpha);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double alpha = -0.732;
-      for(unsigned int ix=0;ix<2;++ix) {
-	if(ix<2) normalize(_h_mass[ix],1.,false);
-	_h_pol2[ix]->scale(2, 1./alpha);
-      }
+      for(unsigned int ix=0;ix<2;++ix)
+	normalize(_h_mass[ix],1.,false);
     }
 
     /// @}

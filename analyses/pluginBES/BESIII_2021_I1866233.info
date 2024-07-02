@@ -13,8 +13,12 @@ References:
 RunInfo:  e+e- to hadrons
 NeedCrossSection: yes
 Beams: [e+,e-]
+Energies: [2.644, 2.646, 2.700, 2.800, 2.900, 2.950, 2.981, 3.000, 3.020, 3.080]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to\Xi^0\bar{\Xi}^0$ between 2.644 and 3.080.'
+  'Measurement of the cross section for $e^+e^-\to\Xi^0\bar{\Xi}^0$ between 2.644 and 3.080.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'H7 events'
 #ReleaseTests:

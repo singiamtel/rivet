@@ -1,34 +1,17 @@
 BEGIN PLOT /CLEOII_1992_I32611/d01-x01-y01
-Title=Average Charged Multplicity in $\chi_{b2}(2S)$ decays
+Title=Average Charged Multplicity in $\chi_{J=0,1,2}(2P)$ decays
 YLabel=$\langle N_{\mathrm{charged}}\rangle$
-LogY=0
-END PLOT
-BEGIN PLOT /CLEOII_1992_I32611/d01-x02-y01
-Title=Average Charged Multplicity in $\chi_{b1}(2S)$ decays
-YLabel=$\langle N_{\mathrm{charged}}\rangle$
-LogY=0
-END PLOT
-BEGIN PLOT /CLEOII_1992_I32611/d01-x03-y01
-Title=Average Charged Multplicity in $\chi_{b0}(2S)$ decays
-YLabel=$\langle N_{\mathrm{charged}}\rangle$
+XLabel=$J$
 LogY=0
 END PLOT
 
 BEGIN PLOT /CLEOII_1992_I32611/d01-x01-y02
-Title=Average 2nd Fox-Wolfram momentum in $\chi_{b2}(2S)$ decays
+Title=Average 2nd Fox-Wolfram momentum in $\chi_{J=0,1,2}(2P)$ decays
 YLabel=$\langle R_2\rangle$
+XLabel=$J$
 LogY=0
 END PLOT
-BEGIN PLOT /CLEOII_1992_I32611/d01-x02-y02
-Title=Average 2nd Fox-Wolfram momentum in $\chi_{b1}(2S)$ decays
-YLabel=$\langle R_2\rangle$
-LogY=0
-END PLOT
-BEGIN PLOT /CLEOII_1992_I32611/d01-x03-y02
-Title=Average 2nd Fox-Wolfram momentum in $\chi_{b0}(2S)$ decays
-YLabel=$\langle R_2\rangle$
-LogY=0
-END PLOT
+
 
 
 BEGIN PLOT /CLEOII_1992_I32611/d02-x01-y01

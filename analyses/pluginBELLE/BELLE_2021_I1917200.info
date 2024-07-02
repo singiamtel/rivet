@@ -1,0 +1,37 @@
+Name: BELLE_2021_I1917200
+Year: 2021
+Summary: Leptonic mass moments in $B\to X_c\ell\nu$ decays
+Experiment: BELLE
+Collider: KEKB
+InspireID: 1917200
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 104 (2021) 11, 112011
+RunInfo: B meson production in Upsilon(4S) decays
+Description:
+  'Measurement of leptonic mass moments in $B\to X_c\ell\nu$ decays.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2021idw
+BibTeX: '@article{Belle:2021idw,
+    author = "van Tonder, R. and others",
+    collaboration = "Belle",
+    title = "{Measurements of $q^2$ Moments of Inclusive $B \rightarrow X_c \ell^+ \nu_{\ell}$ Decays with Hadronic Tagging}",
+    eprint = "2109.01685",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle Preprint 2021-18, KEK Preprint 2021-22",
+    doi = "10.1103/PhysRevD.104.112011",
+    journal = "Phys. Rev. D",
+    volume = "104",
+    number = "11",
+    pages = "112011",
+    year = "2021"
+}
+'

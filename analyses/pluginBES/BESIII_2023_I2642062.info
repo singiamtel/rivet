@@ -1,0 +1,31 @@
+Name: BESIII_2023_I2642062
+Year: 2023
+Summary: Cross section for $e^+e^-\to\Lambda\bar{\Lambda}$ between threshold and 3 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2642062
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2303.07629 [hep-ex]
+Description:
+  'Measurement of the cross section for $e^+e^-\to\Lambda\bar{\Lambda}$ between threshold and 3 GeV'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023ioy
+BibTeX: '@article{BESIII:2023ioy,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Measurement of the $e^{+}e^{-}\rightarrow\Lambda\bar{\Lambda}$ cross section from threshold to 3.00 GeV using events with initial-state radiation}",
+    eprint = "2303.07629",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "3",
+    year = "2023"
+}
+'

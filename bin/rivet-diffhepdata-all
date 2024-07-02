@@ -48,7 +48,7 @@ print('    sync={}'.format(perform_sync))
 
 def versionSorter(filename):
     # e.g. "HEPData-ins944757-v2-yoda.yoda.gz" -> v2 -> 2
-    return int(filename.split('-')[2][1:])
+    return int(os.path.split(filename)[-1].split('-')[2][1:])
 
 def find(filename, path):
     """ Function to return first matching 'filename' by walking the directory tree top-down from 'path'. """
@@ -73,9 +73,9 @@ if not os.path.exists(output_name):
 
 # Get mapping between INSPIRE IDs and Rivet analysis names.
 # use local file is available (needed for development of patches at same time as analysis)
-if os.path.isfile("doc/analists/analyses.json") :
+if os.path.isfile("doc/anaindex/analyses.json") :
     import json
-    with open("doc/analists/analyses.json") as jf:
+    with open("doc/anaindex/analyses.json") as jf:
         analyses = json.load(jf)
 else :
     analyses_url = 'http://rivet.hepforge.org/analyses'

@@ -1,0 +1,37 @@
+Name: BABAR_2008_I782405
+Year: 2008
+Summary: Mass distributions in $B^+\to K^+\pi^+\pi^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 782405
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 78 (2008) 071103
+RunInfo: Any process producing B+ mesons, originally Upsilon(4S) decays
+Description:
+'Measurement of mass distributions in $B^+\to K^+\pi^+\pi^-$.
+ The data were read from the figures in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2008lpx
+BibTeX: '@article{BaBar:2008lpx,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Evidence for Direct CP Violation from Dalitz-plot analysis of $B^\pm \to K^\pm \pi^\mp \pi^\pm$}",
+    eprint = "0803.4451",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-08-005, SLAC-PUB-13189",
+    doi = "10.1103/PhysRevD.78.012004",
+    journal = "Phys. Rev. D",
+    volume = "78",
+    pages = "012004",
+    year = "2008"
+}
+'

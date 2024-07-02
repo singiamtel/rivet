@@ -1,4 +1,4 @@
-Name: LHCB_2015_I1401225
+#Name: LHCB_2015_I1401225
 Year: 2015
 Summary: Mass distributions in the decay $D^0\to K^-\pi^+\mu^+\mu^-$
 Experiment: LHCB
@@ -12,7 +12,7 @@ References:
  - Phys.Lett.B 757 (2016) 558-567
 RunInfo: Any process producing D0
 Description:
-  'Kinematic distributions  in the decay $D^0\to K^-\pi^+e^+e^-$. Resolution/acceptance effects have been not unfolded.'
+  'Kinematic distributions  in the decay $D^0\to K^-\pi^+\mu^+\mu^-$. Resolution/acceptance effects have been not unfolded.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

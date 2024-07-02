@@ -1,0 +1,25 @@
+Name: BESIII_2023_I2689064
+Year: 2023
+Summary:  Kinematic distributions in $\Lambda_c^+\to \Lambda^0 \ell^+\nu_\ell$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2689064
+Status: VALIDATED NOHEPDATA
+Reentrant: true 
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 108 (2023) 3, L031105
+ - arXiv:2306.02624 [hep-ex]
+RunInfo: Any process producing Lambda_c+
+Description:
+  'Measurement of the kinematic distributions in $\Lambda_c^+\to \Lambda^0 \ell^+\nu_\ell$ by BES-III.  N.B.
+  The data were read from the paper, the decay for the asymmetries has been correct, however the kinematic distributions
+  and may not have been corrected for acceptance, although the background given in the paper has been subtracted.'
+ValidationInfo:
+  'Herwig 7 events using EvtGen for the decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: 
+BibTeX: ''

@@ -1,0 +1,35 @@
+Name: SND_2023_I2670980
+Year: 2023
+Summary: Cross section for $e^+e^-\to\eta\gamma$ for energies between 1.07 and 2 GeV
+Experiment: SND
+Collider: 
+Collider: 
+InspireID: 2670980
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors: Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+- arXiv:2306.12734 [hep-ex]
+RunInfo: e+ e- to hadrons
+NeedCrossSection: yes
+Beams: [e+, e-]
+Options:
+ - ENERGY=*
+Description:
+  'Cross section for $e^+e^-\to\eta\gamma$ for energies between 1.07 and 2 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: SND:2023sur
+BibTeX: '@article{SND:2023sur,
+    author = "Achasov, M. N. and others",
+    collaboration = "SND",
+    title = "{Study of the process $e^+e^-\to\eta\gamma\to 7\gamma$ in the energy range $\sqrt{s}$ = 1.07 -- 2 GeV}",
+    eprint = "2306.12734",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "6",
+    year = "2023"
+}
+'

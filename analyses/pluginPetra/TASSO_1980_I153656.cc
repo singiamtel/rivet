@@ -39,11 +39,8 @@ namespace Rivet {
         MSG_ERROR("Beam energy " << sqrtS() << " GeV not supported!");
 
       book(_h["p_pi"],3*_iHist+2,1,1);
-      book(_h["x_pi"],3*_iHist+2,1,2);
       book(_h["p_K"] ,3*_iHist+3,1,1);
-      book(_h["x_K"] ,3*_iHist+3,1,2);
       book(_h["p_p"] ,3*_iHist+4,1,1);
-      book(_h["x_p"] ,3*_iHist+4,1,2);
 
       tribook("pi", 3*_iHist+ 8, 1, 1);
       tribook("K",  3*_iHist+ 9, 1, 1);
@@ -56,10 +53,10 @@ namespace Rivet {
         _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.575, 0.7, 0.9, 1.1});
       }
       else {
-        _axes["pi"] = YODA::Axis<double>({0.3, 0.4, 0.5, 0.675, 1.05, 1.55});
-        _axes["K"]  = YODA::Axis<double>({0.4, 0.5, 0.675, 0.925});
-        _axes["p"]  = YODA::Axis<double>({0.475, 0.725, 1.2125, 1.9375});
-        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.675, 0.925});
+        _axes["pi"] = YODA::Axis<double>({0.3, 0.4, 0.5, 0.6, 1.0, 1.6});
+        _axes["K"]  = YODA::Axis<double>({0.4, 0.5, 0.6, 1.0});
+        _axes["p"]  = YODA::Axis<double>({0.5, 0.7, 0.9, 2.43});
+        _axes["r"]  = YODA::Axis<double>({0.4, 0.5, 0.6, 1.0});
       }
       _axes["rp"]  = YODA::Axis<double>({0.475, 0.725, 1.0, 2.2});
     }
@@ -103,20 +100,16 @@ namespace Rivet {
         fillND("d_pi", modp);
         fillND("d_K", modp);
         fillND("d_p", modp);
-        double beta = modp/p.E();
         if (abs(p.pid())==211) {
           fillhist("p_pi", modp);
-          fillhist("x_pi", modp, 1./beta);
           fillND("n_pi", modp);
         }
         else if (abs(p.pid())==321) {
           fillhist("p_K", modp);
-          fillhist("x_K", modp, 1./beta);
           fillND("n_K", modp);
         }
         else if (abs(p.pid())==2212) {
           fillhist("p_p", modp);
-          fillhist("x_p", modp, 1./beta);
           fillND("n_p", modp);
         }
       }
@@ -142,18 +135,13 @@ namespace Rivet {
     void finalize() {
 
       scale(_h["p_pi"], crossSection()/nanobarn/sumOfWeights());
-      scale(_h["x_pi"], sqr(sqs)*crossSection()/microbarn/sumOfWeights()*sqs/2.);
       scale(_h["p_K"],  crossSection()/nanobarn/sumOfWeights());
-      scale(_h["x_K"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights()*sqs/2.);
       scale(_h["p_p"],  crossSection()/nanobarn/sumOfWeights());
-      scale(_h["x_p"],  sqr(sqs)*crossSection()/microbarn/sumOfWeights()*sqs/2.);
-      vector<string> s1={"pi","K","p"}, s2= {"x_","p_"};
+      vector<string> s1={"pi","K","p"};
       for ( auto & key : s1 ) {
-        for(auto & key2 : s2) {
-          for(auto & b: _h[key2+key]->bins()) {
-            const size_t idx = b.index();
-            b.scaleW(1./_axes[key].width(idx));
-          }
+        for(auto & b: _h["p_"+key]->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_axes[key].width(idx));
         }
       }
       for (auto& item : _r) {

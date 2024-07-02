@@ -147,9 +147,9 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // find energy
-      //int ioff=-1;
-      //if(isCompatibleWithSqrtS(3.1*GeV,1e-1)) ioff=0;
-      //else if (isCompatibleWithSqrtS(3.686*GeV, 1E-1)) ioff=1;
+      int ioff=0;
+      if(isCompatibleWithSqrtS(3.1*GeV,1e-1)) ioff=1;
+      else if (isCompatibleWithSqrtS(3.686*GeV, 1E-1)) ioff=4;
       vector< pair<double,pair<double,double> > > alpha;
       normalize(_h_xi,1.,false);
       alpha.push_back(calcAlpha(_h_xi));
@@ -157,11 +157,12 @@ namespace Rivet {
       alpha.push_back(calcAlpha(_h_sigm));
       normalize(_h_sigp,1.,false);
       alpha.push_back(calcAlpha(_h_sigp));
-      Estimate1DPtr _h_alpha;
+      BinnedEstimatePtr<string> _h_alpha;
       book(_h_alpha,1,1,3);
       for (unsigned int ix=0;ix<3;++ix) {
-        _h_alpha->bin(ix+1).set(alpha[ix].first,
-                                make_pair(alpha[ix].second.first,alpha[ix].second.second));
+        _h_alpha->bin(ix+ioff).set(alpha[ix].first,
+                                   make_pair(alpha[ix].second.first,
+                                             alpha[ix].second.second));
       }
     }
     /// @}

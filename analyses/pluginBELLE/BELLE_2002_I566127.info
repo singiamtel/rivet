@@ -1,0 +1,34 @@
+Name: BELLE_2002_I566127
+Year: 2002
+Summary: Mass distributions in $\Lambda_c^+\to \Sigma^+ K^+K^-$ and $\Lambda_c^+\to \Lambda^0K^0_SK^+$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 566127
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 524 (2002) 33-43
+Description:
+  'Mass distributions in $\Lambda_c^+\to \Sigma^+ K^+K^-$ and $\Lambda_c^+\to \Lambda^0K^0_SK^+$. The data were read from the plots in the paper and are not corrected. The background given was subtracted. The statistics are fairly low, however these are the only distributions available for these modes.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2001hyr
+BibTeX: '@article{Belle:2001hyr,
+    author = "Abe, Kazuo and others",
+    collaboration = "Belle",
+    title = "{Observation of Cabibbo suppressed and W exchange Lambda+(c) baryon decays}",
+    eprint = "hep-ex/0111032",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2001-17, KEK-PREPRINT-2001-137",
+    doi = "10.1016/S0370-2693(01)01373-9",
+    journal = "Phys. Lett. B",
+    volume = "524",
+    pages = "33--43",
+    year = "2002"
+}
+'

@@ -1,0 +1,42 @@
+Name: BELLE_2007_I686580
+Year: 2007
+Summary: Cross section for $e^+e^-\to J/\psi X(3940)$ at $\sqrt{s}=10.6\,$GeV
+Experiment: BELLE
+Collider: KEKB
+InspireID: 686580
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 98 (2007) 082001
+RunInfo: e+e- -> J/psi X(3940)
+Beams: [e+, e-]
+Energies: [10.6]
+Options:
+ - PID=*
+Description:
+  'Cross section for $e^+e^-\to J/\psi X(3940)$ at $\sqrt{s}=10.6\,$GeV.
+   The $X(3940)$ is measure in modes with more than two charged tracks.
+   The status of the $X(3940)$ is not clear, we
+   take the PDG code to be 9010441, which can be changed using the PID option'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2005lik
+BibTeX: '@article{Belle:2005lik,
+    author = "Abe, Kazuo and others",
+    collaboration = "Belle",
+    title = "{Observation of a new charmonium state in double charmonium production in e+ e- annihilation at s**(1/2) \textasciitilde{} 10.6-GeV}",
+    eprint = "hep-ex/0507019",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-CONF-0517, LP2005-152, EPS05-489",
+    doi = "10.1103/PhysRevLett.98.082001",
+    journal = "Phys. Rev. Lett.",
+    volume = "98",
+    pages = "082001",
+    year = "2007"
+}
+'

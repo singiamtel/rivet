@@ -22,8 +22,17 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numOmegaPi, "TMP/OmegaPi");
-      book(_nOmegaEta, "/TMP/nOmegaEta");
+      book(_numOmegaPi, 2, 1, 1);
+      book(_nOmegaEta,  1, 1, 1);
+
+      for (const string& en : _numOmegaPi.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -67,7 +76,7 @@ namespace Rivet {
           }
         }
         if(matched) {
-          _numOmegaPi->fill();
+          _numOmegaPi->fill(_ecms);
           break;
         }
         // now for omega eta
@@ -84,7 +93,7 @@ namespace Rivet {
             }
           }
           if(matched) {
-            _nOmegaEta->fill();
+            _nOmegaEta->fill(_ecms);
             break;
           }
         }
@@ -95,26 +104,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<3;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _nOmegaEta->val();
-          error = _nOmegaEta->err();
-        }
-        else {
-          sigma = _numOmegaPi->val();
-          error = _numOmegaPi->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /picobarn;
-        error *= crossSection()/ sumOfWeights() /picobarn;
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /picobarn;
+      scale(_nOmegaEta ,fact);
+      scale(_numOmegaPi,fact);
     }
 
     /// @}
@@ -122,8 +114,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nOmegaEta;
-    CounterPtr _numOmegaPi;
+    BinnedHistoPtr<string> _nOmegaEta,_numOmegaPi;
+    string _ecms;
     /// @}
 
   };

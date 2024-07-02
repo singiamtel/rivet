@@ -1,0 +1,33 @@
+Name: CLEOII_1995_I382221
+Year: 1995
+Summary: Momentum Spectra for $J/\psi$, $\psi(2S)$ and $\chi_{c1}$ production in B decays
+Experiment: CLEOII
+Collider:  CESR
+InspireID: 382221
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 52 (1995) 2661-2672
+RunInfo: any process with Upsilon(4S) decay, originally e+e-
+Description:
+  'Momentum Spectra for $J/\psi$, $\psi(2S)$ and $\chi_{c1}$ production in B decays at the $\Upsilon(4S)$'
+ValidationInfo:
+  'Herwig 7 events using EvtGen for the decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1994wfj
+BibTeX: '@article{CLEO:1994wfj,
+    author = "Balest, R. and others",
+    collaboration = "CLEO",
+    title = "{Inclusive decays of $B$ mesons to charmonium}",
+    reportNumber = "CLNS-94-1315, CLEO-94-26",
+    doi = "10.1103/PhysRevD.52.2661",
+    journal = "Phys. Rev. D",
+    volume = "52",
+    pages = "2661--2672",
+    year = "1995"
+}
+'

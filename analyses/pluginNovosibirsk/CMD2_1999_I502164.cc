@@ -6,7 +6,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief e+ e- > KS0 KL0
   class CMD2_1999_I502164 : public Analysis {
   public:
 
@@ -20,7 +20,8 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       declare(FinalState(), "FS");
-      book(_nK0K0, "TMP/K0K0");
+      for(unsigned int ix=0;ix<4;++ix)
+        book(_sigma[ix], "TMP/sigma_"+toString(ix), refData(1+ix, 1, 1));
 
     }
 
@@ -37,27 +38,20 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==2 &&
-	 nCount[130]==1 && nCount[310]==1)
-	_nK0K0->fill();
-
+	 nCount[130]==1 && nCount[310]==1) {
+	for(unsigned int ix=0;ix<4;++ix) _sigma[ix]->fill(sqrtS()/MeV);
+      }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      double sigma = _nK0K0->val();
-      double error = _nK0K0->err();
-      sigma *= crossSection()/ sumOfWeights() /nanobarn;
-      error *= crossSection()/ sumOfWeights() /nanobarn;
-      for (unsigned int ix=1;ix<5;++ix) {
-        Estimate1DPtr mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for(unsigned int ix=0;ix<4;++ix) {
+        scale(_sigma[ix],fact);
+        Estimate1DPtr tmp;
+        book(tmp, 1+ix, 1, 1);
+        barchart(_sigma[ix],tmp);
       }
     }
 
@@ -66,7 +60,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _nK0K0;
+    Histo1DPtr _sigma[4];
     /// @}
 
 

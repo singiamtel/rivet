@@ -11,9 +11,22 @@ References:
  - Phys.Rev. D93 (2016) no.1, 011101
 RunInfo: e+e- to hadrons and muons (for normalisation)
 Beams: [e+, e-]
+Energies : [10.6328, 10.6820, 10.7321, 10.7322, 10.7535, 10.7579, 10.7637, 10.7677, 10.7711,
+            10.7716, 10.7760, 10.7820, 10.7871, 10.7920, 10.7955, 10.7999, 10.8063, 10.8107,
+            10.8157, 10.8205, 10.8210, 10.8259, 10.8304, 10.8332, 10.8396, 10.8450, 10.8494,
+            10.8497, 10.8528, 10.8577, 10.8589, 10.8633, 10.8639, 10.8667, 10.8686, 10.8690,
+            10.8695, 10.8752, 10.8785, 10.8788, 10.8836, 10.8860, 10.8889, 10.8918, 10.8962,
+            10.8985, 10.9009, 10.9011, 10.9056, 10.9077, 10.9104, 10.9152, 10.9215, 10.9250,
+            10.9275, 10.9313, 10.9348, 10.9400, 10.9444, 10.9493, 10.9537, 10.9575, 10.9590,
+            10.9633, 10.9674, 10.9727, 10.9773, 10.9775, 10.9833, 10.9873, 10.9919, 10.9927,
+            10.9975, 11.0013, 11.0068, 11.0069, 11.0121, 11.0164, 11.0175, 11.0188, 11.0214,
+            11.0220, 11.0269, 11.0313, 11.0386, 11.0402, 11.0474]
+Options:
+ - ENERGY=*
 Description:
   'Measurement of the ratio of the cross sections for $e^+e^-\to\Upsilon(1,2,3S)\pi^+\pi^-$ and $e^+e^-\to b\bar{b}$ to the
-  muon cross section for energies between  10.63 and 11.05 GeV by the BELLE collaboration.'
+  muon cross section for energies between  10.63 and 11.05 GeV by the BELLE collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   ''
 #ReleaseTests:

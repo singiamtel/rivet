@@ -1,0 +1,32 @@
+Name: BESIII_2023_I2633025
+Year: 2023
+Summary: Kinematic distributions in $\eta\to\pi^+\pi^-\pi^0$ and $3\pi^0$ decays
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2633025
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2302.08282 [hep-ex]
+RunInfo: Any process producing eta mesons, originally e+e-
+Description:
+  'Kinematic distributions in $\eta\to\pi^+\pi^-\pi^0$ and $3\pi^0$ decays. The data were read from the plots in the paper'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023edk
+BibTeX: '@article{BESIII:2023edk,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Precision measurement of the matrix elements for $\eta\to\pi^+\pi^-\pi^0$ and $\eta\to\pi^0\pi^0\pi^0$ decays}",
+    eprint = "2302.08282",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "2",
+    year = "2023"
+}
+'

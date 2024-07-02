@@ -194,12 +194,12 @@ namespace Rivet {
         Estimate0DPtr multX, multY;
         book(multX, 1+ix, 1, 1);
         book(multY, 1+ix, 1, 2);
-        *multX = (*_c[ix][0]/ *_c[ix][2]);
-        *multY = (*_c[ix][0]/ *_c[ix][1]);
+        divide(_c[ix][0], _c[ix][2], multX);
+        divide(_c[ix][0], _c[ix][1], multY);
         x = multX->val();
-        dx = multX->errPos();
+        dx = multX->totalErrAvg();
         y = multY->val();
-        dy = multY->errPos();
+        dy = multY->totalErrAvg();
       }
       // convert x and y to M1 and E2
       double M1 = (3*sqrt(10) + sqrt(30)*x - 2*sqrt(15)*y)/(3.*(sqrt(2) + sqrt(6)*x + 2*sqrt(3)*y));
@@ -211,11 +211,11 @@ namespace Rivet {
       double e4 = (-10*(sqrt(6) - 3*sqrt(2)*x))/(3.*sqr(sqrt(2) + sqrt(6)*x + 2*sqrt(3)*y));
       pair<double,double> dM1 = make_pair(sqrt(sqr(e1*dx)+sqr(e2*dy)),sqrt(sqr(e1*dx)+sqr(e2*dy)));
       pair<double,double> dE2 = make_pair(sqrt(sqr(e3*dx)+sqr(e4*dy)),sqrt(sqr(e3*dx)+sqr(e4*dy)));
-      Estimate1DPtr multM1, multM2;
+      Estimate0DPtr multM1, multM2;
       book(multM1, 4, 1, 1);
-      multM1->bin(1).set(M1, dM1);
+      multM1->set(M1, dM1);
       book(multM2, 4, 1, 2);
-      multM2->bin(1).set(E2, dE2);
+      multM2->set(E2, dE2);
     }
 
     /// @}

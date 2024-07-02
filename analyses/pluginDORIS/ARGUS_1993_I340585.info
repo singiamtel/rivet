@@ -1,0 +1,32 @@
+Name: ARGUS_1993_I340585
+Year: 1993
+Summary: $q^2$ spectrum in $\bar{B}^0\to D^{*+}\ell^-\bar\nu_\ell$
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 340585
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Z.Phys.C 57 (1993) 533-540
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  '$q^2$ spectrum in $\bar{B}^0\to D^{*+}\ell^-\bar\nu_\ell$. Corrected data read from figure 7.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1992dng
+BibTeX: '@article{ARGUS:1992dng,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Investigation of the decays anti-B0 ---\ensuremath{>} D*+ lepton- anti-neutrino and anti-B ---\ensuremath{>} D** lepton- anti-neutrino}",
+    reportNumber = "DESY-92-146",
+    journal = "Z. Phys. C",
+    volume = "57",
+    pages = "533--540",
+    year = "1993"
+}
+'

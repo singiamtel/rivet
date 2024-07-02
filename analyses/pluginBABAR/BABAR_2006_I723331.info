@@ -1,0 +1,35 @@
+Name: BABAR_2006_I723331
+Year: 2006
+Summary: $D^{*\pm}K^0_S$ mass in $B^0\to D^{*+}D^{*-}K^0_S$ decays
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 723331
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 74 (2006) 091101
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the $D^{*\pm}K^0_S$ mass in $B^0\to D^{*+}D^{*-}K^0_S$ decays. The efficiency corrected data were read from figure 1b in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2006asx
+BibTeX: '@article{BaBar:2006asx,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of the Branching Fraction and Time-Dependent CP Asymmetry in the Decay $B^0 \to D^{*+} D^{*-} K^0_{s}$}",
+    eprint = "hep-ex/0608016",
+    archivePrefix = "arXiv",
+    reportNumber = "BABAR-PUB-06-023, SLAC-PUB-12045",
+    doi = "10.1103/PhysRevD.74.091101",
+    journal = "Phys. Rev. D",
+    volume = "74",
+    pages = "091101",
+    year = "2006"
+}
+'

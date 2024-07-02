@@ -12,9 +12,12 @@ References:
 RunInfo: gamma gamma to hadrons
 Beams: [gamma, gamma]
 Energies: []
+Options:
+ - ENERGY=*
 Description:
   'Measurement of the differential cross section for $\gamma\gamma\to\pi^+\pi^-$. Both the cross section as a function of the centre-of-mass energy
-   of the photonic collision, and the differential cross section with respect to the pion scattering angle are measured.'
+   of the photonic collision, and the differential cross section with respect to the pion scattering angle are measured.
+  Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 gamma gamma to pi+ pi- events'
 #ReleaseTests:

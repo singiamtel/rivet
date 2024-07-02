@@ -1,0 +1,34 @@
+Name: BELLE_2004_I623102
+Year: 2004
+Summary: Mass and angular distributions in $B^-\to D^{(*)+}\pi^-\pi^-$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 623102
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 69 (2004) 112002
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Mass and angular distributions in $B^-\to D^{(*)+}\pi^-\pi^-$. The data were read from the figures in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2003nsh
+BibTeX: '@article{Belle:2003nsh,
+    author = "Abe, Kazuo and others",
+    collaboration = "Belle",
+    title = "{Study of B- ---\ensuremath{>} D**0 pi- (D**0 ---\ensuremath{>} D(*)+ pi-) decays}",
+    eprint = "hep-ex/0307021",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevD.69.112002",
+    journal = "Phys. Rev. D",
+    volume = "69",
+    pages = "112002",
+    year = "2004"
+}
+'

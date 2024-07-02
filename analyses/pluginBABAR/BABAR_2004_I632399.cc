@@ -53,7 +53,7 @@ namespace Rivet {
 	for(const Particle & phi : phis) {
           FourMomentum p2 = cms_boost.transform(phi.momentum());
 	  _h_phi->fill(p2.p3().mod());
-	  _b_phi->fill(0.5);
+	  _b_phi->fill();
 	}
       }
     }
@@ -72,8 +72,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_phi,_b_phi;
-    CounterPtr _c_4S;
+    Histo1DPtr _h_phi;
+    CounterPtr _b_phi,_c_4S;
     /// @}
 
 

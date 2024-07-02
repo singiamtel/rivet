@@ -23,7 +23,7 @@ namespace Rivet {
       // Book histograms
       book(_h_br, 1, 1, 1);
       book(_p_E,  1, 1, 2);
-      book(_p_E2,"TMP/E2",refData(1,1,3));
+      book(_p_E2,"TMP/E2",refData<YODA::BinnedEstimate<string>>(1,1,3));
       book(_nBottom, "TMP/BottomCounter");
     }
 
@@ -40,12 +40,17 @@ namespace Rivet {
         }
         else if ( !p.children().empty() ) {
           findDecayProducts(p, nK0, nKp, nKm);
-        }
+        } 
       }
     }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if(_edges.empty()) {
+        _edges = _h_br->xEdges();
+        for(const string & en : _edges)
+          _eCut.push_back(std::stod(en)*GeV);
+      }
       // Loop over bottoms
       for (const Particle& bottom : apply<UnstableParticles>(event, "UFS").particles()) {
 	// remove mixing entries etc
@@ -67,11 +72,11 @@ namespace Rivet {
         if (nk % 2 == 1) {
           const LorentzTransform boost = LorentzTransform::mkFrameTransformFromBeta(bottom.momentum().betaVec());
           double eGamma = boost.transform(pgamma).E();
-          for (const auto& bin : _h_br->bins()) {
-            if(eGamma>bin.xMin()) {
-              _h_br->fill(bin.xMid());
-              _p_E ->fill(bin.xMid(),eGamma);
-              _p_E2->fill(bin.xMid(),sqr(eGamma));
+          for(unsigned int ix=0;ix<_eCut.size();++ix) {
+            if(eGamma>_eCut[ix]) {
+              _h_br->fill(_edges[ix]);
+              _p_E ->fill(_edges[ix],eGamma);
+              _p_E2->fill(_edges[ix],sqr(eGamma));
             }
           }
         }
@@ -81,16 +86,16 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      // 1e4 for br ormalization and 0.1 for bin width
-      scale(_h_br, 1e3/_nBottom->sumW());
+      // 1e4 for br ormalization
+      scale(_h_br, 1e4/_nBottom->sumW());
       // dispersion
-      Estimate1DPtr dispersion;
+      BinnedEstimatePtr<string> dispersion;
       book(dispersion,1,1,3);
       for (auto& b : dispersion->bins()) {
         const auto& bE  = _p_E->bin(b.index());
         const auto& bE2 = _p_E2->bin(b.index());
-        const double val = bE2.xMean()-sqr(bE.xMean());
-        const double err = val*sqrt(sqr(bE2.xStdErr()/bE2.xMean())+4.*sqr(bE.xStdErr()/bE.xMean()));
+        const double val = bE2.mean(2)-sqr(bE.mean(2));
+        const double err = val*sqrt(sqr(bE2.stdErr(2)/bE2.mean(2))+4.*sqr(bE.stdErr(2)/bE.mean(2)));
         b.set(val,err);
       }
     }
@@ -100,9 +105,11 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_br;
-    Profile1DPtr _p_E,_p_E2;
+    BinnedHistoPtr<string> _h_br;
+    BinnedProfilePtr<string> _p_E,_p_E2;
     CounterPtr _nBottom;
+    vector<string> _edges;
+    vector<double> _eCut;
     /// @}
 
 

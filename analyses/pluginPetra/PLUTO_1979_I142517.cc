@@ -5,7 +5,7 @@
 namespace Rivet {
 
 
-  /// @brief Add a short analysis description here
+  /// @brief Measurement of R
   class PLUTO_1979_I142517 : public Analysis {
   public:
 
@@ -21,7 +21,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       book(_c_hadrons, "sigma_hadrons", refData<YODA::BinnedEstimate<string>>(1,1,1));
-      book(_c_muons, "sigma_muons", refData<YODA::BinnedEstimate<string>>(1,1,1));
+      book(_c_muons, "sigma_muons"    , refData<YODA::BinnedEstimate<string>>(1,1,1));
       book(_mult, 1, 1, 1);
       for (const string label : {"22.0", "27.6", "30.0", "31.6"}) {
         const double E = std::stod(label);

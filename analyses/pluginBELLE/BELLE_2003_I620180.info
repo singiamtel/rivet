@@ -1,0 +1,35 @@
+Name: BELLE_2003_I620180
+Year: 2003
+Summary: Mass and helicity angles in $B^+\to\rho^+\rho^0$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 620180
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 91 (2003) 221801
+RunInfo: Any process producing B+, originally Upsilon(4S) decay
+Description:
+  'Mass and helicity angles in $B^+\to\rho^+\rho^0$. The background subtracted data were read from figures 2 and 3 in the paper. Due to the large asymmetry due to the cuts the $\rho^+$ helicity angle is not included.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2003lsm
+BibTeX: '@article{Belle:2003lsm,
+    author = "Zhang, J. and others",
+    collaboration = "Belle",
+    title = "{Observation of B+ ---\ensuremath{>} rho+ rho0}",
+    eprint = "hep-ex/0306007",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2003-6, KEK-PREPRINT-2003-19",
+    doi = "10.1103/PhysRevLett.91.221801",
+    journal = "Phys. Rev. Lett.",
+    volume = "91",
+    pages = "221801",
+    year = "2003"
+}
+'

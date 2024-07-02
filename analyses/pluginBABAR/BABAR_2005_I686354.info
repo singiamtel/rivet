@@ -1,0 +1,39 @@
+Name: BABAR_2005_I686354
+Year: 2005
+Summary: $\pi^+\pi^-$ mass distribution in $Y(4260)\to J/\psi\pi^+\pi^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 686354
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 95 (2005) 142001
+RunInfo: Any process producing psi(4230) for decays
+Options:
+ - PID=*
+Description:
+  'Mass distribution in $Y(4260)\to J/\psi\pi^+\pi^-$ decays ($Y(4260)$ is now $\psi(4230)$).
+  The background subtracted data were read from figure 3 in the paper.
+  There is no consensus as to the nature of the $\psi(4230)$ $c\bar{c}$ state and therefore we taken its PDG code to be 9030443, i.e. the first unused code for an undetermined spin one $c\bar{c}$ state. This can be changed using the PID option if a different code is used by the event generator performing the simulation.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2005hhc
+BibTeX: '@article{BaBar:2005hhc,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Observation of a broad structure in the $\pi^+ \pi^- J/\psi$ mass spectrum around 4.26-GeV/c$^2$}",
+    eprint = "hep-ex/0506081",
+    archivePrefix = "arXiv",
+    reportNumber = "BABAR-PUB-05-29, SLAC-PUB-11320, BABAR-PUB-05-029",
+    doi = "10.1103/PhysRevLett.95.142001",
+    journal = "Phys. Rev. Lett.",
+    volume = "95",
+    pages = "142001",
+    year = "2005"
+}
+'

@@ -25,8 +25,8 @@ namespace Rivet {
       declare(UnstableParticles(), "UFS");
 
       // Book histograms
-
-      book(_c_all, "/TMP/all");
+      for(unsigned int ix=0;ix<3;++ix)
+        book(_sigma[ix],1,1,1+ix);
 
     }
 
@@ -52,26 +52,16 @@ namespace Rivet {
 	++ntotal;
       }
       if(ntotal==6 && nCount[211]==3 && nCount[-211]==3) {
-	_c_all->fill();
+        for(unsigned int ix=0;ix<3;++ix) _sigma[ix]->fill(round(sqrtS()/MeV));
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
       double fact = crossSection()/nanobarn/sumOfWeights();
-      double sigma = _c_all->val()*fact;
-      double error = _c_all->err()*fact;
-      for (unsigned int ihist=1;ihist<4;++ihist) {
-        Estimate1DPtr  mult;
-        book(mult, 1, 1, ihist);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      for(unsigned int ix=0;ix<3;++ix)
+        scale(_sigma[ix],fact);
     }
 
     /// @}
@@ -79,7 +69,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _c_all;
+    BinnedHistoPtr<int> _sigma[3];
     /// @}
 
 

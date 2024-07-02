@@ -24,15 +24,20 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-
-      book(_cKpKmpippim , "TMP/KpKmpippim");
-      book(_cKstarKpi   , "TMP/KstarKpi");
-      book(_cphipippim  , "TMP/phipippim");
-      book(_cphif0_980  , "TMP/phif0_980");
-      book(_cphif0_600  , "TMP/phif0_600");
-      book(_cKpKmpi0pi0 , "TMP/KpKmpi0pi0");
-      book(_cphif0pi0pi0, "TMP/phif0pi0pi0");
-      book(_c2Kp2Km     , "TMP/2Kp2Km");
+      bool matched = false;
+      for(unsigned int ix=0;ix<8;++ix) {
+        book(_sigma[ix],1+ix,1,1);
+        for (const string& en : _sigma[ix].binning().edges<0>()) {
+          const double end = std::stod(en)*GeV;
+          if (isCompatibleWithSqrtS(end)) {
+            _ecms[ix] = en;
+            matched=true;
+            break;
+          }
+        }
+      }
+      if(!matched)
+        MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -81,8 +86,9 @@ namespace Rivet {
 	  if((nCount[321] == 1 && nCount[-321] ==0 &&
 	      nCount[211] == 0 && nCount[-211] == 1) ||
 	     (nCount[321] == 0 && nCount[-321] ==1 &&
-	      nCount[211] == 1 && nCount[-211] == 0))
-	    _cKstarKpi->fill();
+	      nCount[211] == 1 && nCount[-211] == 0)) {
+	    if(!_ecms[1].empty()) _sigma[1]->fill(_ecms[1]);
+          }
 	}
 	else if(p.pid()==333) {
 	  map<long,int> nRes=nCount;
@@ -103,8 +109,9 @@ namespace Rivet {
 		break;
 	      }
 	    }
-	    if(matched)
-	      _cphipippim->fill();
+	    if(matched) {
+	      if(!_ecms[2].empty()) _sigma[2]->fill(_ecms[2]);
+            }
 	  }
 	  for (const Particle& p2 : ufs.particles()) {
 	    if(p2.pid()!=9010221&&p2.pid()!=9000221) continue;
@@ -122,73 +129,35 @@ namespace Rivet {
 	    }
 	    if(matched2) {
 	      if(p2.pid()==9010221) {
-		_cphif0pi0pi0->fill();
-		_cphif0_980  ->fill();
+		if(!_ecms[6].empty()) _sigma[6]->fill(_ecms[6]);
+		if(!_ecms[3].empty()) _sigma[3]->fill(_ecms[3]);
 	      }
 	      else {
-		_cphif0_600  ->fill();
+		if(!_ecms[4].empty()) _sigma[4]->fill(_ecms[4]);
 	      }
 	    }
 	  }
 	}
       }
       if(ntotal==4) {
-	if(nCount[321]==1 && nCount[-321]==1 && nCount[211]==1 && nCount[-211]==1)
-	  _cKpKmpippim->fill();
-	else if( nCount[321]==1 && nCount[-321]==1 && nCount[111]==2)
-	  _cKpKmpi0pi0->fill();
-	else if( nCount[321]==2 && nCount[-321]==2)
-	  _c2Kp2Km->fill();
+	if(nCount[321]==1 && nCount[-321]==1 && nCount[211]==1 && nCount[-211]==1) {
+	  if(!_ecms[0].empty()) _sigma[0]->fill(_ecms[0]);
+        }
+	else if( nCount[321]==1 && nCount[-321]==1 && nCount[111]==2) {
+	  if(!_ecms[5].empty()) _sigma[5]->fill(_ecms[5]);
+        }
+	else if( nCount[321]==2 && nCount[-321]==2) {
+	  if(!_ecms[7].empty()) _sigma[7]->fill(_ecms[7]);
+        }
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for(unsigned int ix=1;ix<9;++ix) {
-        double sigma = 0., error = 0.;
-        if(ix==1) {
-          sigma = _cKpKmpippim->val();
-          error = _cKpKmpippim->err();
-        }
-        else if(ix==2) {
-          sigma = _cKstarKpi->val();
-          error = _cKstarKpi->err();
-        }
-        else if(ix==3) {
-          sigma = _cphipippim->val();
-          error = _cphipippim->err();
-        }
-        else if(ix==4) {
-          sigma = _cphif0_980->val();
-          error = _cphif0_980->err();
-        }
-        else if(ix==5) {
-          sigma = _cphif0_600->val();
-          error = _cphif0_600->err();
-        }
-        else if(ix==6) {
-          sigma = _cKpKmpi0pi0->val();
-          error = _cKpKmpi0pi0->err();
-        }
-        else if(ix==7) {
-          sigma = _cphif0pi0pi0->val();
-          error = _cphif0pi0pi0->err();
-        }
-        else if(ix==8) {
-          sigma =  _c2Kp2Km->val();
-          error =  _c2Kp2Km->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        Estimate1DPtr  mult;
-        book(mult, ix, 1, 1);
-        for (auto& b : mult->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
-      }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for(unsigned int ix=0;ix<8;++ix)
+        scale(_sigma[ix],fact);
     }
 
     /// @}
@@ -196,8 +165,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _cKpKmpippim, _cKstarKpi, _cphipippim,
-      _cphif0_980,_cphif0_600, _cKpKmpi0pi0, _cphif0pi0pi0, _c2Kp2Km;
+    BinnedHistoPtr<string> _sigma[8];
+    string _ecms[8];
     /// @}
 
 

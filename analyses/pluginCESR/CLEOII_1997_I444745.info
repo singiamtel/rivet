@@ -1,0 +1,35 @@
+Name: CLEOII_1997_I444745
+Year: 1997
+Summary: $\pi^+\pi^-\pi^-\eta$ mass in $\tau\to\pi^+\pi^-\pi^-\eta\nu_\tau$
+Experiment: CLEOII
+Collider: CESR
+InspireID: 444745
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 79 (1997) 2406-2410
+RunInfo: Any process producing tau leptons, originally e+ e-
+Description:
+  'Measurement of the hadronic mass in $\tau\to\pi^+\pi^-\pi^-\eta\nu_\tau$ decays, excluding the $f_1$ contribution. The background subtracted data were read from figure 4 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:1997fpa
+BibTeX: '@article{CLEO:1997fpa,
+    author = "Bergfeld, T. and others",
+    collaboration = "CLEO",
+    title = "{First observation of tau ---\ensuremath{>} 3 pi eta tau-neutrino and tau ---\ensuremath{>} f1 pi tau-neutrino decays}",
+    eprint = "hep-ex/9706020",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-9764, CLNS-97-1489, CLEO-97-13",
+    doi = "10.1103/PhysRevLett.79.2406",
+    journal = "Phys. Rev. Lett.",
+    volume = "79",
+    pages = "2406--2410",
+    year = "1997"
+}
+'

@@ -101,7 +101,7 @@ namespace Rivet {
       scale(_h_thrust     , 1./sumOfWeights());
       scale(_h_pTin2      , 1./sumOfWeights());
       scale(_h_pTout2     , 1./sumOfWeights());
-      scale(_h_ncharged   , 2000./sumOfWeights());
+      scale(_h_ncharged   , 1000./sumOfWeights());
       scale(_h_pTin       , 1./sumOfWeights());
       scale(_h_pTout      , 1./sumOfWeights());
       scale(_h_pT         , 1./sumOfWeights());
@@ -115,8 +115,8 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     Histo1DPtr _h_sphericity, _h_aplanarity, _h_thrust,
-      _h_pTin2, _h_pTout2, _h_ncharged,
-      _h_pTin, _h_pTout, _h_pT, _h_x, _h_rap;
+      _h_pTin2, _h_pTout2,_h_pTin, _h_pTout, _h_pT, _h_x, _h_rap;
+    BinnedHistoPtr<int> _h_ncharged;
     /// @}
 
   };

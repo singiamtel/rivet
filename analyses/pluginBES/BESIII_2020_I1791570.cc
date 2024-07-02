@@ -239,9 +239,9 @@ namespace Rivet {
       int ih = isCompatibleWithSqrtS(3.1*GeV,1e-2) ? 1 : 2;
       // calculate alpha0
       pair<double,pair<double,double> > alpha0 = calcAlpha0(_h_cThetaL);
-      Estimate1DPtr _h_alpha0;
+      Estimate0DPtr _h_alpha0;
       book(_h_alpha0,4,1,ih);
-      _h_alpha0->bin(1).set(alpha0.first, alpha0.second);
+      _h_alpha0->set(alpha0.first, alpha0.second);
       double s2 = -1. + sqr(alpha0.first);
       double s3 = 3 + alpha0.first;
       double s1 = sqr(s3);
@@ -289,15 +289,15 @@ namespace Rivet {
                                                                                                                        8*(c_T3.first*c_T4.first*alpha0.second.second +  s3*c_T4.first*c_T3.second +  s3*c_T3.first*c_T4.second)* s1*s5*s6))/
                                                                                                               (4* pow(3 + alpha0.first,3)* pow(c_T3.first,3)* pow(c_T4.first,3) -  9*s2*s3*c_T3.first*c_T4.first*s4)))/
                         (disc + 2*s1*s5*s6)))/(2.*pow(c_T3.first,2));
-        Estimate1DPtr _h_alphaM;
+        Estimate0DPtr _h_alphaM;
         book(_h_alphaM,2,1,1);
-        _h_alphaM->bin(1).set(aM, make_pair(-aM_M , -aM_P ));
-        Estimate1DPtr _h_alphaP;
+        _h_alphaM->set(aM, make_pair(-aM_M , -aM_P ));
+        Estimate0DPtr _h_alphaP;
         book(_h_alphaP,2,1,2);
-        _h_alphaP->bin(1).set(aP, make_pair(-aP_M , -aP_P  ));
-        Estimate1DPtr _h_alphabar;
+        _h_alphaP->set(aP, make_pair(-aP_M , -aP_P  ));
+        Estimate0DPtr _h_alphabar;
         book(_h_alphabar,2,1,3);
-        _h_alphabar->bin(1).set(0.5*(aM-aP),
+        _h_alphabar->set(0.5*(aM-aP),
                                 make_pair(0.5*sqrt(sqr(aM_M)+sqr(aP_P)) ,
                                           0.5*sqrt(sqr(aM_P)+sqr(aP_M))));
         // now for Delta
@@ -314,9 +314,9 @@ namespace Rivet {
           (pow(1 - pow(alpha0.first,2),1.5)*pow(c_T4.first,3)*pow(-((disc + 2*s1*s5*s6)/   (s2*s6)),1.5)*(-9*s2*s4 + 4*s1*s5*s6));
         ds_P /= sqrt(1.-sqr(sDelta));
         ds_M /= sqrt(1.-sqr(sDelta));
-        Estimate1DPtr _h_sin;
+        Estimate0DPtr _h_sin;
         book(_h_sin,3,1,ih);
-        _h_sin->bin(1).set(Delta/M_PI*180., make_pair( -ds_P/M_PI*180., -ds_M/M_PI*180. ));
+        _h_sin->set(Delta/M_PI*180., make_pair( -ds_P/M_PI*180., -ds_M/M_PI*180. ));
       }
     }
 

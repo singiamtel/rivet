@@ -24,13 +24,8 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-
-      book(_num4pi,   "TMP/num4");
-      book(_numOmega, "TMP/numOmega");
-      _mult.resize(2);
-      book(_mult[0], 1, 1, 1);
-      book(_mult[1], 2, 1, 1);
-
+      for(unsigned int ix=0;ix<2;++ix)
+        book(_mult[ix], "TMP/mult_"+toString(ix), refData(1+ix, 1, 1));
     }
 
 
@@ -46,10 +41,10 @@ namespace Rivet {
       }
       if(ntotal!=4) vetoEvent;
       if(nCount[-211]==1&&nCount[211]==1&&nCount[111]==2) {
-        _num4pi->fill();
+        _mult[0]->fill(sqrtS()/GeV);
         const FinalState& ufs = apply<FinalState>(event, "UFS");
         if (!ufs.particles(Cuts::pid==223).empty()) {
-          _numOmega->fill();
+          _mult[1]->fill(sqrtS()/GeV);
         }
       }
 
@@ -58,24 +53,12 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      for(size_t ix=1;ix<3;++ix) {
-        double sigma,error;
-        if(ix==1) {
-          sigma = _num4pi->val();
-          error = _num4pi->err();
-        }
-        else {
-          sigma = _numOmega->val();
-          error = _numOmega->err();
-        }
-        sigma *= crossSection()/ sumOfWeights() /nanobarn;
-        error *= crossSection()/ sumOfWeights() /nanobarn;
-        for (auto& b : _mult[ix-1]->bins()) {
-          if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-            b.set(sigma, error);
-          }
-        }
+      double fact = crossSection()/ sumOfWeights() /nanobarn;
+      for(size_t ix=0;ix<2;++ix) {
+        scale(_mult[ix],fact);
+        Estimate1DPtr tmp;
+        book(tmp,1+ix,1,1);
+        barchart(_mult[ix],tmp);
       }
     }
 
@@ -83,8 +66,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _num4pi, _numOmega;
-    vector<Estimate1DPtr> _mult;
+    Histo1DPtr _mult[2];
     /// @}
 
 

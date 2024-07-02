@@ -139,9 +139,9 @@ namespace Rivet {
       normalize(_h);
       // calculate alpha0
       pair<double,pair<double,double> > alpha0 = calcAlpha0(_h);
-      Estimate1DPtr _h_alpha0;
+      Estimate0DPtr _h_alpha0;
       book(_h_alpha0,2,1,1);
-      _h_alpha0->bin(1).set(alpha0.first, make_pair(alpha0.second.first,alpha0.second.second));
+      _h_alpha0->set(alpha0.first, make_pair(alpha0.second.first,alpha0.second.second));
     }
 
     /// @}

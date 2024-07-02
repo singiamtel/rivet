@@ -12,7 +12,7 @@ References:
  - Phys.Rev.D 96 (2017) 3, 031101
 RunInfo: Any process producing B+ mesons, originally e+e- at Upsilon(4S)
 Description:
-  'Differential branching ratio oand CP-asymmetry in the mass of the kaon pair for the decay $B^+\to K^+K^-\pi^+$.'
+  'Differential branching ratio and CP-asymmetry in the mass of the kaon pair for the decay $B^+\to K^+K^-\pi^+$.'
 ValidationInfo:
   'Herwig 7 events using Evtgen for decays'
 #ReleaseTests:

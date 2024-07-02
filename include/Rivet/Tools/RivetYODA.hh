@@ -772,11 +772,11 @@ namespace Rivet {
         using isContinuous = typename SubwindowT::template is_CAxis<I>;
 
         if constexpr(!isContinuous::value) { // discrete axes don't need smearing
-          // use single edge axis for discrete coordinates
+          // use single-edge axis for discrete coordinates
           subwindows.template axis<I>() = FillAxisT({ std::get<I>(subevents[0].first) });
           return;
         }
-        else { // continupus axes need windowing
+        else { // continuous axes need windowing
           edgesHi[I].resize(nFills);
           edgesLo[I].resize(nFills);
 

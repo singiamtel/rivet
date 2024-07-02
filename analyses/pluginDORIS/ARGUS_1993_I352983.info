@@ -1,0 +1,33 @@
+Name: ARGUS_1993_I352983
+Year: 1993
+Summary: Dalitz plot analysis of $D^0\to K^0_S\pi^+\pi^-$
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 352983
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 308 (1993) 435-443
+RunInfo: Any process producing D0
+Description:
+  'Kinematic distributions  in the decay $D^0\to K^0_S\pi^+\pi^-$. Data were read from figure 3 in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Hewig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1993pyb
+BibTeX: '@article{ARGUS:1993pyb,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{A Partial wave analysis of the decay D0 ---\ensuremath{>} K0(s) pi+ pi-}",
+    reportNumber = "DESY-93-003",
+    doi = "10.1016/0370-2693(93)91309-B",
+    journal = "Phys. Lett. B",
+    volume = "308",
+    pages = "435--443",
+    year = "1993"
+}
+'

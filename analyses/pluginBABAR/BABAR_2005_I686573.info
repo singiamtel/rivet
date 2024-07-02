@@ -1,0 +1,36 @@
+Name: BABAR_2005_I686573
+Year: 2005
+Summary: Mass distributions in $B^+\to p\bar{p}K^+$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 686573
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 72 (2005) 051101
+RunInfo: Any process producing B+- mesons, originally Upsilon(4S) decays 
+Description:
+'Measurement of mass distributions in $B^+\to p\bar{p}K^+$. The data were
+ read from the plots in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2005sdl
+BibTeX: '@article{BaBar:2005sdl,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of the $B^+ \to p \bar{p} K^+$ branching fraction and study of the decay dynamics}",
+    eprint = "hep-ex/0507012",
+    archivePrefix = "arXiv",
+    reportNumber = "BABAR-PUB-05-20, SLAC-PUB-11296, BABAR-PUB-05-020",
+    doi = "10.1103/PhysRevD.72.051101",
+    journal = "Phys. Rev. D",
+    volume = "72",
+    pages = "051101",
+    year = "2005"
+}
+'

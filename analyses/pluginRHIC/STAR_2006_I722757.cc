@@ -90,7 +90,7 @@ namespace Rivet {
           case 3214: // Sigma(1385)
             _h_pT_vs_mass->fill(1.3840, pT);
             break;
-          case 3124: // Lambda(1520)
+          case 102134: // Lambda(1520)
             _h_pT_vs_mass->fill(1.5200, pT);
             break;
           case PID::KPLUS:

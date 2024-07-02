@@ -53,29 +53,29 @@ namespace Rivet {
           const double pcm = cms_boost.transform(FourMomentum(allJpsi[i]->momentum())).p();
           _hist_all_Jpsi->fill(pcm);
         }
-        _mult_JPsi->fill(10.58, double(allJpsi.size()));
+        _mult_JPsi->fill(double(allJpsi.size()));
         for (size_t i = 0; i < primaryJpsi.size(); i++) {
           const double pcm = cms_boost.transform(FourMomentum(primaryJpsi[i]->momentum())).p();
           _hist_primary_Jpsi->fill(pcm);
         }
-        _mult_JPsi_direct->fill(10.58, double(primaryJpsi.size()));
+        _mult_JPsi_direct->fill(double(primaryJpsi.size()));
         for (size_t i=0; i<Psiprime.size(); i++) {
           const double pcm = cms_boost.transform(FourMomentum(Psiprime[i]->momentum())).p();
           _hist_Psi_prime->fill(pcm);
         }
-        _mult_Psi2S->fill(10.58, double(Psiprime.size()));
+        _mult_Psi2S->fill(double(Psiprime.size()));
         for (size_t i = 0; i < all_chi_c1.size(); i++) {
           const double pcm = cms_boost.transform(FourMomentum(all_chi_c1[i]->momentum())).p();
           _hist_chi_c1->fill(pcm);
         }
-        _mult_chi_c1->fill(10.58, double(all_chi_c1.size()));
-        _mult_chi_c1_direct->fill(10.58, double(primary_chi_c1.size()));
+        _mult_chi_c1->fill(double(all_chi_c1.size()));
+        _mult_chi_c1_direct->fill(double(primary_chi_c1.size()));
         for (size_t i = 0; i < all_chi_c2.size(); i++) {
           const double pcm = cms_boost.transform(FourMomentum(all_chi_c2[i]->momentum())).p();
           _hist_chi_c2->fill(pcm);
         }
-        _mult_chi_c2->fill(10.58, double(all_chi_c2.size()));
-        _mult_chi_c2_direct->fill(10.58, double(primary_chi_c2.size()));
+        _mult_chi_c2->fill(double(all_chi_c2.size()));
+        _mult_chi_c2_direct->fill(double(primary_chi_c2.size()));
       }
     } // analyze
 
@@ -106,11 +106,11 @@ namespace Rivet {
       book(_mult_chi_c2        ,1, 1, 5);
       book(_mult_chi_c2_direct ,1, 1, 6);
       book(_mult_Psi2S         ,1, 1, 7);
-      book(_hist_all_Jpsi      ,6, 1, 1);
-      book(_hist_chi_c1        ,7, 1, 1);
-      book(_hist_chi_c2        ,7, 1, 2);
-      book(_hist_Psi_prime     ,8, 1, 1);
-      book(_hist_primary_Jpsi  ,10, 1, 1);
+      book(_hist_all_Jpsi      ,2, 1, 1);
+      book(_hist_chi_c1        ,3, 1, 1);
+      book(_hist_chi_c2        ,3, 1, 2);
+      book(_hist_Psi_prime     ,4, 1, 1);
+      book(_hist_primary_Jpsi  ,6, 1, 1);
 
       book(_weightSum, "TMP/weightSum");
     } // init
@@ -127,13 +127,13 @@ namespace Rivet {
     Histo1DPtr _hist_Psi_prime;
     Histo1DPtr _hist_primary_Jpsi;
 
-    Histo1DPtr _mult_JPsi;
-    Histo1DPtr _mult_JPsi_direct;
-    Histo1DPtr _mult_chi_c1;
-    Histo1DPtr _mult_chi_c1_direct;
-    Histo1DPtr _mult_chi_c2;
-    Histo1DPtr _mult_chi_c2_direct;
-    Histo1DPtr _mult_Psi2S;
+    CounterPtr _mult_JPsi;
+    CounterPtr _mult_JPsi_direct;
+    CounterPtr _mult_chi_c1;
+    CounterPtr _mult_chi_c1_direct;
+    CounterPtr _mult_chi_c2;
+    CounterPtr _mult_chi_c2_direct;
+    CounterPtr _mult_Psi2S;
     /// @}
 
     void findDecayProducts(ConstGenParticlePtr p,

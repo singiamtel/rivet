@@ -23,7 +23,7 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_nproton, "TMP/proton");
+      book(_nproton, "TMP/proton", refData(1,1,1));
     }
 
 
@@ -34,23 +34,16 @@ namespace Rivet {
       for (const Particle& p : fs.particles()) {
 	if(abs(p.pid())!=PID::PROTON) vetoEvent;
       }
-      _nproton->fill();
+      _nproton->fill(sqrtS()/GeV);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma = _nproton->val();
-      double error = _nproton->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
+      scale(_nproton, crossSection()/ sumOfWeights() /picobarn);
       Estimate1DPtr  mult;
       book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      barchart(_nproton,mult);
     }
 
     ///@}
@@ -58,7 +51,7 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    CounterPtr _nproton;
+    Histo1DPtr _nproton;
     ///@}
 
 

@@ -1,0 +1,37 @@
+Name: BELLE_2023_I2660525
+Year: 2023
+Summary: Cross sections for $e^+e^-\to b\bar{b} \to (D_s^+,D^0)X$ for $\sqrt{s}$ between 10.63 and 11.02 GeV
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2660525
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arxiv:2305.10098 [hep-ex]
+RunInfo: Any process producing Upsilon(4,5S) for decays and e+e--> hadrons for the cross sections
+Options:
+ - MODE=SIGMA,DECAY
+Description:
+'The cross sections for $e^+e^-\to b\bar{b} \to (D_s^+,D^0)X$ are measured for $\sqrt{s}$ between 10.63 and 11.02 GeV.
+ The cross sections for $e^+e^-\to b\bar{b} \to B\bar{B}X$ and  $e^+e^-\to b\bar{b} \to B_s^0\bar{B}_s^0X$ are then extracted.
+ In addition the $D_s^+$, $D^0$ spectra in $\Upsilon(4,5S)$ decays are measured. There are two modes, one DECAY (the default), for the spectra in the decays and a second SIGMA for the cross sections.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2023yfw
+BibTeX: '@article{Belle:2023yfw,
+    author = "Zhukova, V. and others",
+    collaboration = "Belle",
+    title = "{Measurement of the $e^+e^- \to B_s^0 \bar{B}_s^0 X$ cross section in the energy range from $10.63$ to $11.02$ GeV using inclusive $D_s^{\pm}$ and $D^0$ production}",
+    eprint = "2305.10098",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle Preprint 2023-09, KEK Preprint 2023-11",
+    month = "5",
+    year = "2023"
+}
+'

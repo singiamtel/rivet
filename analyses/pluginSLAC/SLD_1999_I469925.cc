@@ -19,12 +19,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    SLD_1999_I469925()
-      : Analysis("SLD_1999_I469925"),
-         _multPiPlus(4),_multKPlus(4),_multK0(4),
-         _multKStar0(4),_multPhi(4),
-         _multProton(4),_multLambda(4)
-    {    }
+    RIVET_DEFAULT_ANALYSIS_CTOR(SLD_1999_I469925);
 
 
     /// @name Analysis methods
@@ -98,7 +93,7 @@ namespace Rivet {
         dot = quarks[0].p3().dot(axis);
         if (quarks[0].pid() < 0) dot *= -1;
       }
-
+      vector<unsigned int> multTmp = {0,0,0,0,0,0,0};
       for (const Particle& p : fs.particles()) {
         const double xp = p.p3().mod()/meanBeamMom;
         // if in quark or antiquark hemisphere
@@ -111,12 +106,11 @@ namespace Rivet {
         // charged pions
         if (id == PID::PIPLUS) {
           _h_XpPiPlusN->fill(xp);
-          _multPiPlus[0]->fill();
+          ++multTmp[0];
           switch (flavour) {
           case PID::DQUARK:
           case PID::UQUARK:
           case PID::SQUARK:
-            _multPiPlus[1]->fill();
             _h_XpPiPlusLight->fill(xp);
             if( ( quark && p.pid()>0 ) || ( !quark && p.pid()<0 ))
               _h_RPiPlus->fill(xp);
@@ -124,23 +118,20 @@ namespace Rivet {
               _h_RPiMinus->fill(xp);
             break;
           case PID::CQUARK:
-            _multPiPlus[2]->fill();
             _h_XpPiPlusCharm->fill(xp);
             break;
           case PID::BQUARK:
-            _multPiPlus[3]->fill();
             _h_XpPiPlusBottom->fill(xp);
             break;
           }
         }
         else if (id == PID::KPLUS) {
           _h_XpKPlusN->fill(xp);
-          _multKPlus[0]->fill();
+          ++multTmp[1];
           switch (flavour) {
           case PID::DQUARK:
           case PID::UQUARK:
           case PID::SQUARK:
-            _multKPlus[1]->fill();
             _temp_XpKPlusLight->fill(xp);
             _h_XpKPlusLight->fill(xp);
             if( ( quark && p.pid()>0 ) || ( !quark && p.pid()<0 ))
@@ -150,24 +141,21 @@ namespace Rivet {
             break;
          break;
           case PID::CQUARK:
-            _multKPlus[2]->fill();
             _h_XpKPlusCharm->fill(xp);
             _temp_XpKPlusCharm->fill(xp);
             break;
           case PID::BQUARK:
-            _multKPlus[3]->fill();
             _h_XpKPlusBottom->fill(xp);
             break;
           }
         }
         else if (id == PID::PROTON) {
           _h_XpProtonN->fill(xp);
-          _multProton[0]->fill();
+          ++multTmp[5];
           switch (flavour) {
           case PID::DQUARK:
           case PID::UQUARK:
           case PID::SQUARK:
-            _multProton[1]->fill();
             _temp_XpProtonLight->fill(xp);
             _h_XpProtonLight->fill(xp);
             if( ( quark && p.pid()>0 ) || ( !quark && p.pid()<0 ))
@@ -177,12 +165,10 @@ namespace Rivet {
             break;
          break;
           case PID::CQUARK:
-            _multProton[2]->fill();
             _temp_XpProtonCharm->fill(xp);
             _h_XpProtonCharm->fill(xp);
             break;
           case PID::BQUARK:
-            _multProton[3]->fill();
             _h_XpProtonBottom->fill(xp);
             break;
           }
@@ -196,13 +182,12 @@ namespace Rivet {
         bool quark = p.p3().dot(axis)*dot>0.;
         int id = p.abspid();
         if (id == PID::LAMBDA) {
-          _multLambda[0]->fill();
+          ++multTmp[6];
           _h_XpLambdaN->fill(xp);
           switch (flavour) {
           case PID::DQUARK:
           case PID::UQUARK:
           case PID::SQUARK:
-            _multLambda[1]->fill();
             _h_XpLambdaLight->fill(xp);
             if( ( quark && p.pid()>0 ) || ( !quark && p.pid()<0 ))
               _h_RLambda->fill(xp);
@@ -210,23 +195,20 @@ namespace Rivet {
               _h_RLBar  ->fill(xp);
             break;
           case PID::CQUARK:
-            _multLambda[2]->fill();
             _h_XpLambdaCharm->fill(xp);
             break;
           case PID::BQUARK:
-            _multLambda[3]->fill();
             _h_XpLambdaBottom->fill(xp);
             break;
           }
         }
         else if (id == 313) {
-          _multKStar0[0]->fill();
+          ++multTmp[3];
           _h_XpKStar0N->fill(xp);
           switch (flavour) {
           case PID::DQUARK:
           case PID::UQUARK:
           case PID::SQUARK:
-            _multKStar0[1]->fill();
             _temp_XpKStar0Light->fill(xp);
             _h_XpKStar0Light->fill(xp);
             if ( ( quark && p.pid()>0 ) || ( !quark && p.pid()<0 ))
@@ -236,55 +218,64 @@ namespace Rivet {
             break;
             break;
           case PID::CQUARK:
-            _multKStar0[2]->fill();
             _temp_XpKStar0Charm->fill(xp);
             _h_XpKStar0Charm->fill(xp);
             break;
           case PID::BQUARK:
-            _multKStar0[3]->fill();
             _h_XpKStar0Bottom->fill(xp);
             break;
           }
         }
         else if (id == 333) {
-          _multPhi[0]->fill();
+          ++multTmp[4];
           _h_XpPhiN->fill(xp);
           switch (flavour) {
           case PID::DQUARK:
           case PID::UQUARK:
           case PID::SQUARK:
-            _multPhi[1]->fill();
             _h_XpPhiLight->fill(xp);
             break;
           case PID::CQUARK:
-            _multPhi[2]->fill();
             _h_XpPhiCharm->fill(xp);
             break;
           case PID::BQUARK:
-            _multPhi[3]->fill();
             _h_XpPhiBottom->fill(xp);
             break;
           }
         }
         else if (id == PID::K0S || id == PID::K0L) {
-          _multK0[0]->fill();
+          ++multTmp[2];
           _h_XpK0N->fill(xp);
           switch (flavour) {
           case PID::DQUARK:
           case PID::UQUARK:
           case PID::SQUARK:
-            _multK0[1]->fill();
             _h_XpK0Light->fill(xp);
             break;
           case PID::CQUARK:
-            _multK0[2]->fill();
             _h_XpK0Charm->fill(xp);
             break;
           case PID::BQUARK:
-            _multK0[3]->fill();
             _h_XpK0Bottom->fill(xp);
             break;
           }
+        }
+      }
+      if(_labels.empty()) _labels=_mult[0]->xEdges();
+      for(unsigned int ix=0;ix<7;++ix) {
+        _mult[0]->fill(_labels[ix],multTmp[ix]);
+        switch (flavour) {
+        case PID::DQUARK:
+        case PID::UQUARK:
+        case PID::SQUARK:
+          _mult[1]->fill(_labels[ix],multTmp[ix]);
+          break;
+        case PID::CQUARK:
+          _mult[2]->fill(_labels[ix],multTmp[ix]);
+          break;
+        case PID::BQUARK:
+          _mult[3]->fill(_labels[ix],multTmp[ix]);
+          break;
         }
       }
     }
@@ -379,58 +370,8 @@ namespace Rivet {
       book(_SumOfcWeights, "_SumOfcWeights");
       book(_SumOfbWeights, "_SumOfbWeights");
 
-      for ( size_t i=0; i<4; ++i) {
-      	book(_multPiPlus[i], "_multPiPlus_"+to_str(i));
-      	book(_multKPlus[i], "_multKPlus_"+to_str(i));
-      	book(_multK0[i], "_multK0_"+to_str(i));
-      	book(_multKStar0[i], "_multKStar0_"+to_str(i));
-      	book(_multPhi[i], "_multPhi_"+to_str(i));
-      	book(_multProton[i], "_multProton_"+to_str(i));
-      	book(_multLambda[i], "_multLambda_"+to_str(i));
-      }
-
-      book(tmp1, 24, 1, 1);
-      book(tmp2, 24, 1, 2);
-      book(tmp3, 24, 1, 3);
-      book(tmp4, 24, 1, 4);
-      book(tmp5, 25, 1, 1);
-      book(tmp6, 25, 1, 2);
-      book(tmp7, 24, 2, 1);
-      book(tmp8, 24, 2, 2);
-      book(tmp9, 24, 2, 3);
-      book(tmp10, 24, 2, 4);
-      book(tmp11, 25, 2, 1);
-      book(tmp12, 25, 2, 2);
-      book(tmp13, 24, 3, 1);
-      book(tmp14, 24, 3, 2);
-      book(tmp15, 24, 3, 3);
-      book(tmp16, 24, 3, 4);
-      book(tmp17, 25, 3, 1);
-      book(tmp18, 25, 3, 2);
-      book(tmp19, 24, 4, 1);
-      book(tmp20, 24, 4, 2);
-      book(tmp21, 24, 4, 3);
-      book(tmp22, 24, 4, 4);
-      book(tmp23, 25, 4, 1);
-      book(tmp24, 25, 4, 2);
-      book(tmp25, 24, 5, 1);
-      book(tmp26, 24, 5, 2);
-      book(tmp27, 24, 5, 3);
-      book(tmp28, 24, 5, 4);
-      book(tmp29, 25, 5, 1);
-      book(tmp30, 25, 5, 2);
-      book(tmp31, 24, 6, 1);
-      book(tmp32, 24, 6, 2);
-      book(tmp33, 24, 6, 3);
-      book(tmp34, 24, 6, 4);
-      book(tmp35, 25, 6, 1);
-      book(tmp36, 25, 6, 2);
-      book(tmp37, 24, 7, 1);
-      book(tmp38, 24, 7, 2);
-      book(tmp39, 24, 7, 3);
-      book(tmp40, 24, 7, 4);
-      book(tmp41, 25, 7, 1);
-      book(tmp42, 25, 7, 2);
+      for ( size_t i=0; i<4; ++i)
+        book(_mult[i],24,1,1+i);
     }
 
 
@@ -518,126 +459,17 @@ namespace Rivet {
       scale(_h_RLBar,          1 / *_SumOfudsWeights);
 
       // Multiplicities
-      double avgNumPartsAll, avgNumPartsLight,avgNumPartsCharm, avgNumPartsBottom;
-      // pi+/-
-      // all
-      avgNumPartsAll = dbl(*_multPiPlus[0])/sumOfWeights();
-      tmp1->bin(1).set(avgNumPartsAll, 0.);
-      // light
-      avgNumPartsLight = dbl(*_multPiPlus[1] / *_SumOfudsWeights);
-      tmp2->bin(1).set(avgNumPartsLight, 0.);
-      // charm
-      avgNumPartsCharm = dbl(*_multPiPlus[2] / *_SumOfcWeights);
-      tmp3->bin(1).set(avgNumPartsCharm, 0.);
-      // bottom
-      avgNumPartsBottom = dbl(*_multPiPlus[3] / *_SumOfbWeights);
-      tmp4->bin(1).set(avgNumPartsBottom, 0.);
-      // charm-light
-      tmp5->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
-      // bottom-light
-      tmp6->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
-      // K+/-
-      // all
-      avgNumPartsAll = dbl(*_multKPlus[0])/sumOfWeights();
-      tmp7->bin(1).set(avgNumPartsAll, 0.);
-      // light
-      avgNumPartsLight = dbl(*_multKPlus[1] / *_SumOfudsWeights);
-      tmp8->bin(1).set(avgNumPartsLight, 0.);
-      // charm
-      avgNumPartsCharm = dbl(*_multKPlus[2] / *_SumOfcWeights);
-      tmp9->bin(1).set(avgNumPartsCharm, 0.);
-      // bottom
-      avgNumPartsBottom = dbl(*_multKPlus[3] / *_SumOfbWeights);
-      tmp10->bin(1).set(avgNumPartsBottom, 0.);
-      // charm-light
-      tmp11->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
-      // bottom-light
-      tmp12->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
-      // K0
-      // all
-      avgNumPartsAll = dbl(*_multK0[0])/sumOfWeights();
-      tmp13->bin(1).set(avgNumPartsAll, 0.);
-      // light
-      avgNumPartsLight = dbl(*_multK0[1] / *_SumOfudsWeights);
-      tmp14->bin(1).set(avgNumPartsLight, 0.);
-      // charm
-      avgNumPartsCharm = dbl(*_multK0[2] / *_SumOfcWeights);
-      tmp15->bin(1).set(avgNumPartsCharm, 0.);
-      // bottom
-      avgNumPartsBottom = dbl(*_multK0[3] / *_SumOfbWeights);
-      tmp16->bin(1).set(avgNumPartsBottom, 0.);
-      // charm-light
-      tmp17->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
-      // bottom-light
-      tmp18->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
-      // K*0
-      // all
-      avgNumPartsAll = dbl(*_multKStar0[0])/sumOfWeights();
-      tmp19->bin(1).set(avgNumPartsAll, 0.);
-      // light
-      avgNumPartsLight = dbl(*_multKStar0[1] / *_SumOfudsWeights);
-      tmp20->bin(1).set(avgNumPartsLight, 0.);
-      // charm
-      avgNumPartsCharm = dbl(*_multKStar0[2] / *_SumOfcWeights);
-      tmp21->bin(1).set(avgNumPartsCharm, 0.);
-      // bottom
-      avgNumPartsBottom = dbl(*_multKStar0[3] / *_SumOfbWeights);
-      tmp22->bin(1).set(avgNumPartsBottom, 0.);
-      // charm-light
-      tmp23->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
-      // bottom-light
-      tmp24->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
-      // phi
-      // all
-      avgNumPartsAll = dbl(*_multPhi[0])/sumOfWeights();
-      tmp25->bin(1).set(avgNumPartsAll, 0.);
-      // light
-      avgNumPartsLight = dbl(*_multPhi[1] / *_SumOfudsWeights);
-      tmp26->bin(1).set(avgNumPartsLight, 0.);
-      // charm
-      avgNumPartsCharm = dbl(*_multPhi[2] / *_SumOfcWeights);
-      tmp27->bin(1).set(avgNumPartsCharm, 0.);
-      // bottom
-      avgNumPartsBottom = dbl(*_multPhi[3] / *_SumOfbWeights);
-      tmp28->bin(1).set(avgNumPartsBottom, 0.);
-      // charm-light
-      tmp29->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
-      // bottom-light
-      tmp30->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
-      // p
-      // all
-      avgNumPartsAll = dbl(*_multProton[0])/sumOfWeights();
-      tmp31->bin(1).set(avgNumPartsAll, 0.);
-      // light
-      avgNumPartsLight = dbl(*_multProton[1] / *_SumOfudsWeights);
-      tmp32->bin(1).set(avgNumPartsLight, 0.);
-      // charm
-      avgNumPartsCharm = dbl(*_multProton[2] / *_SumOfcWeights);
-      tmp33->bin(1).set(avgNumPartsCharm, 0.);
-      // bottom
-      avgNumPartsBottom = dbl(*_multProton[3] / *_SumOfbWeights);
-      tmp34->bin(1).set(avgNumPartsBottom, 0.);
-      // charm-light
-      tmp35->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
-      // bottom-light
-      tmp36->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
-      // Lambda
-      // all
-      avgNumPartsAll = dbl(*_multLambda[0])/sumOfWeights();
-      tmp37->bin(1).set(avgNumPartsAll, 0.);
-      // light
-      avgNumPartsLight = dbl(*_multLambda[1] / *_SumOfudsWeights);
-      tmp38->bin(1).set(avgNumPartsLight, 0.);
-      // charm
-      avgNumPartsCharm = dbl(*_multLambda[2] / *_SumOfcWeights);
-      tmp39->bin(1).set(avgNumPartsCharm, 0.);
-      // bottom
-      avgNumPartsBottom = dbl(*_multLambda[3] / *_SumOfbWeights);
-      tmp40->bin(1).set(avgNumPartsBottom, 0.);
-      // charm-light
-      tmp41->bin(1).set(avgNumPartsCharm - avgNumPartsLight, 0.);
-      // bottom-light
-      tmp42->bin(1).set(avgNumPartsBottom - avgNumPartsLight, 0.);
+      BinnedEstimatePtr<string> diffCharm,diffBottom;
+      book(diffCharm ,25,1,1);
+      book(diffBottom,25,1,2);
+      for(unsigned int ix=0;ix<7;++ix) {
+        const double val1 = _mult[2]->bin(ix+1).mean(2)-_mult[1]->bin(ix+1).mean(2);
+        const double err1 = sqrt(sqr(_mult[2]->bin(ix+1).stdErr(2))+sqr(_mult[1]->bin(ix+1).stdErr(2)));
+        diffCharm->bin(ix+1).set(val1,err1);
+        const double val2 = _mult[3]->bin(ix+1).mean(2)-_mult[1]->bin(ix+1).mean(2);
+        const double err2 = sqrt(sqr(_mult[3]->bin(ix+1).stdErr(2))+sqr(_mult[1]->bin(ix+1).stdErr(2)));
+        diffBottom->bin(ix+1).set(val2,err2);
+      }
     }
 
     /// @}
@@ -649,8 +481,6 @@ namespace Rivet {
     /// particles. Used to calculate average number of particles for the
     /// inclusive single particle distributions' normalisations.
     CounterPtr _SumOfudsWeights, _SumOfcWeights, _SumOfbWeights;
-    vector<CounterPtr> _multPiPlus, _multKPlus, _multK0,
-      _multKStar0, _multPhi, _multProton, _multLambda;
 
     Histo1DPtr _h_XpPiPlusSig, _h_XpPiPlusN;
     Histo1DPtr _h_XpKPlusSig, _h_XpKPlusN;
@@ -687,50 +517,9 @@ namespace Rivet {
     Estimate1DPtr _s_Xp_PhiCh_PhiLi, _s_Xp_PhiBo_PhiLi;
 
     Estimate1DPtr _s_PiM_PiP, _s_KSBar0_KS0, _s_KM_KP, _s_Pr_PBar, _s_Lam_LBar;
-
+    BinnedProfilePtr<string> _mult[4];
+    vector<string> _labels;
     /// @}
-      Estimate1DPtr tmp1;
-      Estimate1DPtr tmp2;
-      Estimate1DPtr tmp3;
-      Estimate1DPtr tmp4;
-      Estimate1DPtr tmp5;
-      Estimate1DPtr tmp6;
-      Estimate1DPtr tmp7;
-      Estimate1DPtr tmp8;
-      Estimate1DPtr tmp9;
-      Estimate1DPtr tmp10;
-      Estimate1DPtr tmp11;
-      Estimate1DPtr tmp12;
-      Estimate1DPtr tmp13;
-      Estimate1DPtr tmp14;
-      Estimate1DPtr tmp15;
-      Estimate1DPtr tmp16;
-      Estimate1DPtr tmp17;
-      Estimate1DPtr tmp18;
-      Estimate1DPtr tmp19;
-      Estimate1DPtr tmp20;
-      Estimate1DPtr tmp21;
-      Estimate1DPtr tmp22;
-      Estimate1DPtr tmp23;
-      Estimate1DPtr tmp24;
-      Estimate1DPtr tmp25;
-      Estimate1DPtr tmp26;
-      Estimate1DPtr tmp27;
-      Estimate1DPtr tmp28;
-      Estimate1DPtr tmp29;
-      Estimate1DPtr tmp30;
-      Estimate1DPtr tmp31;
-      Estimate1DPtr tmp32;
-      Estimate1DPtr tmp33;
-      Estimate1DPtr tmp34;
-      Estimate1DPtr tmp35;
-      Estimate1DPtr tmp36;
-      Estimate1DPtr tmp37;
-      Estimate1DPtr tmp38;
-      Estimate1DPtr tmp39;
-      Estimate1DPtr tmp40;
-      Estimate1DPtr tmp41;
-      Estimate1DPtr tmp42;
   };
 
 

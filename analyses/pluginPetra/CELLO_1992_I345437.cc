@@ -33,8 +33,8 @@ namespace Rivet {
       else if (inRange(sqrtS()/GeV,1.25,1.35))
         book(_h_cTheta2,2,1,21);
 
-      book(_cPi, "/TMP/nPi");
-      thetaAxis = YODA::Axis<double>(16, 0.0, 0.8);
+      book(_cPi, 1, 1, 1);
+      _thetaAxis = YODA::Axis<double>(16, 0.0, 0.8);
     }
 
 
@@ -68,15 +68,27 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double fact = crossSection()/nanobarn/sumOfWeights();
-      if (_h_cTheta )  scale(_h_cTheta, fact);
-      if (_h_cTheta2)  scale(_h_cTheta2, fact);
+      if (_h_cTheta ) {
+        scale(_h_cTheta, fact);
+        for(auto & b : _h_cTheta->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_thetaAxis.width(idx));
+        }
+      }
+      if (_h_cTheta2) {
+        scale(_h_cTheta2, fact);
+        for(auto & b : _h_cTheta2->bins()) {
+          const size_t idx = b.index();
+          b.scaleW(1./_thetaAxis.width(idx));
+        }
+      }
       scale(_cPi, fact);
     }
 
     /// @}
 
     string map2string(const double theta, const size_t alt) const {
-      const size_t idx = thetaAxis.index(theta) - 1;
+      const size_t idx = _thetaAxis.index(theta) - 1;
       if (idx < thetaEdges[alt].size())  return thetaEdges[alt][idx];
       return "OTHER";
     }
@@ -85,7 +97,7 @@ namespace Rivet {
     /// @{
     BinnedHistoPtr<string> _cPi, _h_cTheta, _h_cTheta2;
     vector<string> thetaEdges[2];
-    YODA::Axis<double> thetaAxis;
+    YODA::Axis<double> _thetaAxis;
     YODA::Axis<double> ecmAxis{0.75, 0.775, 0.8, 0.825, 0.85, 0.875, 0.9, 0.925, 0.95, 0.975, 1.0,
                                1.025, 1.05, 1.075, 1.1, 1.125, 1.15, 1.175, 1.2, 1.225, 1.25, 1.275, 1.3,
                                1.325, 1.35, 1.375, 1.4, 1.425, 1.45, 1.475, 1.51875, 1.6, 1.7, 1.8, 1.9, 2.0};

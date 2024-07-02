@@ -105,10 +105,10 @@ namespace Rivet {
       scale(_h_ctheta1,1./_c_hadron->val());
       normalize(_h_ctheta2);
       pair<double,double> rho = calcRho(_h_ctheta2);
-      Estimate1DPtr h_rho;
+      BinnedEstimatePtr<string> h_rho;
       book(h_rho,2,1,1);
       h_rho->bin(1).set(rho.first, rho.second);
-      Estimate1DPtr h1;
+      BinnedEstimatePtr<string> h1;
       book(h1,1,1,1);
       Counter ctemp = *_c_bStar+*_c_B;
       // no of B*/B+B*

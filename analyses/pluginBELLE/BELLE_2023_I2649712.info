@@ -1,0 +1,33 @@
+Name: BELLE_2023_I2649712
+Year: 2023
+Summary: Leptonic mass moments in $B\to X_c\ell\nu$ decays
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2649712
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 107 (2023) 7, 072002
+RunInfo: B meson production in Upsilon(4S) decays
+Description:
+  'Measurement of leptonic mass moments in $B\to X_c\ell\nu$ decays.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle-II:2023jgq
+BibTeX: '@article{Belle-II:2023jgq,
+    author = "Abudinen, F. and others",
+    collaboration = "Belle-II",
+    title = "{Measurement of lepton mass squared moments in B\textrightarrow{}Xc\ensuremath{\ell}\ensuremath{\nu}\textasciimacron{}\ensuremath{\ell} decays with the Belle II experiment}",
+    doi = "10.1103/PhysRevD.107.072002",
+    journal = "Phys. Rev. D",
+    volume = "107",
+    number = "7",
+    pages = "072002",
+    year = "2023"
+}
+'

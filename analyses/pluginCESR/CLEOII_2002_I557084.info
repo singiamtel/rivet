@@ -1,0 +1,34 @@
+Name: CLEOII_2002_I557084
+Year: 2002
+Summary: Mass distributions in $\bar{B}^0\to D^{*0}\pi^+\pi^+\pi^-\pi^-$
+Experiment: CLEOII
+Collider: CESR
+InspireID: 557084
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - 
+RunInfo: Any process producing B0 mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of mass distributions in $\bar{B}^0\to D^{*0}\pi^+\pi^+\pi^-\pi^-$. The data were read from the figures in the paper. All the data is background subracted and that for the $4\pi$ mass distribution efficiency corrected.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2001vfw
+BibTeX: '@article{CLEO:2001vfw,
+    author = "Edwards, K. W. and others",
+    collaboration = "CLEO",
+    title = "{First observation of anti-B0 ---\ensuremath{>} D*0 pi+ pi+ pi- pi- decays}",
+    eprint = "hep-ex/0105071",
+    archivePrefix = "arXiv",
+    reportNumber = "CLNS-01-1735, CLEO-01-09",
+    doi = "10.1103/PhysRevD.65.012002",
+    journal = "Phys. Rev. D",
+    volume = "65",
+    pages = "012002",
+    year = "2002"
+}'

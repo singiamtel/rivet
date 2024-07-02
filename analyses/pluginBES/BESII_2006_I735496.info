@@ -1,0 +1,42 @@
+Name: BESII_2006_I735496
+Year: 2006
+Summary: Measurement of $R$ for energies between 3.65 and 3.872 GeV
+Experiment: BESII
+Collider: BEPC
+InspireID: 735496
+Status: VALIDATED NOHEPDATA SINGLEWEIGHT
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 97 (2006) 262001
+RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
+Beams: [e+, e-]
+Energies :  [3.65, 3.66, 3.692, 3.7, 3.708, 3.716, 3.724, 3.732, 3.74, 3.748, 3.75, 3.7512, 3.7524, 3.7536, 3.7548, 3.756,
+             3.7572, 3.7584, 3.7596, 3.7608, 3.762, 3.7622, 3.7634, 3.7646, 3.7658, 3.767, 3.7682, 3.7694, 3.7706, 3.7714, 3.7716,
+             3.7718, 3.772, 3.7722, 3.7726, 3.773, 3.7742, 3.7754, 3.7766, 3.7778, 3.779, 3.7798, 3.7802, 3.7804, 3.7808, 3.781,
+             3.7812, 3.7814, 3.7816, 3.7818, 3.7822, 3.7826, 3.7838, 3.785, 3.7862, 3.7874, 3.7886, 3.7898, 3.79, 3.795, 3.8,
+             3.81, 3.82, 3.83, 3.84, 3.85, 3.86, 3.872]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of $R$ and the hadronic cross section in $e^+e^-$ collisions by BESII for energies between 3.65 and 3.872, in the vicinity of the $\psi(3770)$.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Ablikim:2006mb
+BibTeX: '@article{Ablikim:2006mb,
+    author = "Ablikim, M. and others",
+    title = "{Measurements of the continuum R(uds) and R values in e+e- annihilation in the energy region between 3.650 and 3.872-GeV}",
+    eprint = "hep-ex/0612054",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevLett.97.262001",
+    journal = "Phys. Rev. Lett.",
+    volume = "97",
+    pages = "262001",
+    year = "2006"
+}
+'

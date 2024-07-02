@@ -12,8 +12,16 @@ References:
  -     Phys.Rev.D 104 (2021) 9, L091104
 RunInfo:  e+e- to hadrons
 Beams: [e+, e-]
+Energies: [3.5100, 3.5146, 3.5815, 3.6500, 3.6702, 3.7730, 3.8077,
+           3.8675, 3.8715, 3.8962, 4.0076, 4.1301, 4.1585, 4.1783,
+           4.1893, 4.1996, 4.2097, 4.2188, 4.2263, 4.2358, 4.2439,
+           4.2580, 4.2669, 4.2778, 4.2889, 4.3128, 4.3379, 4.3583,
+           4.3776, 4.3980, 4.4156, 4.4370, 4.5995]
+Options:
+ - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to\Lambda\bar{\Lambda}$ between 3.5 and 4.6 GeV'
+  'Measurement of the cross section for $e^+e^-\to\Lambda\bar{\Lambda}$ between 3.5 and 4.6 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig 7 events'
 #ReleaseTests:

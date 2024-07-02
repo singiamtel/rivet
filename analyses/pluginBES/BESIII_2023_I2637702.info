@@ -1,0 +1,37 @@
+Name: BESIII_2023_I2637702
+Year: 2023
+Summary: Transverse $\Lambda$ polarization in $e^+e^-\to\Lambda^0\bar\Lambda^0$ for $\sqrt{s}=3.68\to3.71\,$GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2637702
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2303.00271 [hep-ex]
+RunInfo: e+ e- -> hadrons
+Beams: [e+, e-]
+Energies: [3.68, 3.683, 3.684, 3.685, 3.687, 3.691, 3.71]
+Options:
+ - ENERGY=*
+Description:
+  'Transverse $\Lambda$ polarization in $e^+e^-\to\Lambda^0\bar\Lambda^0$ for $\sqrt{s}=3.68\to3.71\,$GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023euh
+BibTeX: '@article{BESIII:2023euh,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurement of $\Lambda$ transverse polarization in $e^{+}e^{-}$ collisions at $\sqrt{s}= 3.68-3.71$ GeV}",
+    eprint = "2303.00271",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "3",
+    year = "2023"
+}
+'

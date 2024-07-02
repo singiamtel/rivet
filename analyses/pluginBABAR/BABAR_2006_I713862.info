@@ -1,0 +1,35 @@
+Name: BABAR_2006_I713862
+Year: 2006
+Summary: $\bar{B}^0\to D^{*+} \omega\pi^-$ decays
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 713862
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 74 (2006) 012001
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of mass distributions and the $D^{*+}$ polarization in  $\bar{B}^0\to D^{*+} \omega\pi^-$ decays. The background subtracted/corrected data for the mass distributions was read from the figures in the paper and the polarization from Table 1.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2006ctj
+BibTeX: '@article{BaBar:2006ctj,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Study of the decay $\bar{B}^0 \to D^{*+} \omega \pi^{-}$}",
+    eprint = "hep-ex/0604009",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-11801, BABAR-PUB-06-021",
+    doi = "10.1103/PhysRevD.74.012001",
+    journal = "Phys. Rev. D",
+    volume = "74",
+    pages = "012001",
+    year = "2006"
+}
+'

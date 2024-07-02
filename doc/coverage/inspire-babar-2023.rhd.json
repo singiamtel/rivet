@@ -33,5 +33,42 @@
         null,
         null,
         []
+    ],
+    "2668874": [
+        "Search for Evidence of Baryogenesis and Dark Matter in <math display=\"inline\"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mo>+</mo></mrow></msup><mo stretchy=\"false\">\u2192</mo><msub><mrow><mi>\u03c8</mi></mrow><mrow><mi mathvariant=\"italic\">D</mi></mrow></msub><mo>+</mo><mi mathvariant=\"italic\">p</mi></mrow></math> Decays at BABAR",
+        "BaBar",
+        "10.1103/PhysRevLett.131.201801",
+        null,
+        "2306.08490",
+        null,
+        null,
+        [
+            "BABAR-PUB-23/03 SLAC-PUB-17731"
+        ]
+    ],
+    "2684565": [
+        "Precision $e^-$ Beam Polarimetry at an $e^+e^-$ B Factory using Tau-Pair Events",
+        "BaBar",
+        "10.1103/PhysRevD.108.092001",
+        null,
+        "2308.00774",
+        null,
+        null,
+        [
+            "BABAR-PUB-23/004 SLAC-PUB-17732"
+        ]
+    ],
+    "2686999": [
+        "Measurement of additional radiation in the initial-state-radiation processes <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>\u03bc</mi><mo>+</mo></msup><msup><mi>\u03bc</mi><mo>-</mo></msup><mi>\u03b3</mi></math> and <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup><mi>\u03b3</mi></math> at BABAR",
+        "BaBar",
+        "10.1103/PhysRevD.108.L111103",
+        null,
+        "2308.05233",
+        null,
+        null,
+        [
+            "BABAR-PUB-23/005",
+            "SLAC-PUB-17736"
+        ]
     ]
 }

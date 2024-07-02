@@ -1,0 +1,35 @@
+Name: BABAR_2006_I722820
+Year: 2006
+Summary: Mass and helicity angle distributions in $B\to\eta K^*$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 722820
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 97 (2006) 201802
+RunInfo: Any process producing B mesons, originally Upsilon(4S)
+Description:
+  'Measurement of the $K\pi$ mass and helicity angle in $B\to\eta K^*$ decays. The data were read from Figure 2 in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2006ltn
+BibTeX: '@article{BaBar:2006ltn,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurement of branching fractions and charge asymmetries in B decays to an eta meson and a K* meson}",
+    eprint = "hep-ex/0608005",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-PUB-12011, BABAR-PUB-06-053",
+    doi = "10.1103/PhysRevLett.97.201802",
+    journal = "Phys. Rev. Lett.",
+    volume = "97",
+    pages = "201802",
+    year = "2006"
+}
+'

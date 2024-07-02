@@ -1,0 +1,34 @@
+Name: ARGUS_1987_I237930
+Year: 1987
+Summary: Spectral functions in  $\tau^-\to\pi^-\pi^-\pi^+\pi^0\nu_\tau$
+Experiment: ARGUS
+Collider: DORIS
+InspireID: 237930
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Lett.B 185 (1987) 223
+RunInfo: Any process producing tau leptons, originally e+e-
+Description:
+  'Measurement of the spectral functions for $\tau^-\to\pi^-\pi^-\pi^+\pi^0\nu_\tau$ and
+   $\tau^-\to\pi^-\omega\nu_\tau$, and the helicity angle in $\tau^-\to\pi^-\omega\nu_\tau$. The corrected data were read from figures 3 and 5 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: ARGUS:1986bzw
+BibTeX: '@article{ARGUS:1986bzw,
+    author = "Albrecht, H. and others",
+    collaboration = "ARGUS",
+    title = "{Evidence for the Decay tau- ---\ensuremath{>} tau-neutrino omega pi-}",
+    reportNumber = "DESY-86-142",
+    doi = "10.1016/0370-2693(87)91559-0",
+    journal = "Phys. Lett. B",
+    volume = "185",
+    pages = "223",
+    year = "1987"
+}
+'

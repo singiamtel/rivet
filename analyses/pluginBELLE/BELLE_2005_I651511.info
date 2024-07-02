@@ -1,0 +1,35 @@
+Name: BELLE_2005_I651511
+Year: 2005
+Summary: Helicity angle and $\pi^+\pi^0$ mass in $B^+\to\pi^+\pi^0\pi^0$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 651511
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 94 (2005) 031801
+RunInfo: Any process producing B+ mesons, originally Upsilon(4S) decays 
+Description:
+  'Measurement of the Helicity angle and $\pi^+\pi^0$ mass in $B^+\to\pi^+\pi^0\pi^0$. The background subracted was read from figures 2 and 3 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle:2004que
+BibTeX: '@article{Belle:2004que,
+    author = "Zhang, J. and others",
+    collaboration = "Belle",
+    title = "{Measurement of branching fraction and CP asymmetry in B+ ---\ensuremath{>}rho+ pi0}",
+    eprint = "hep-ex/0406006",
+    archivePrefix = "arXiv",
+    reportNumber = "BELLE-PREPRINT-2004-15, KEK-PREPRINT-2004-19",
+    doi = "10.1103/PhysRevLett.94.031801",
+    journal = "Phys. Rev. Lett.",
+    volume = "94",
+    pages = "031801",
+    year = "2005"
+}
+'

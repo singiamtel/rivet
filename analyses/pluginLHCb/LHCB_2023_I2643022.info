@@ -1,0 +1,32 @@
+Name: LHCB_2023_I2643022
+Year: 2023
+Summary: Mass distributions in $B^+\to J/\psi\eta^\prime K^+$
+Experiment: LHCB
+Collider: LHC
+InspireID: 2643022
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2303.09443 [hep-ex]
+RunInfo: Any process producing B+, originally pp
+Description:
+  ' Mass distributions in $B^+\to J/\psi\eta^\prime K^+$. Background subtracted data extracted from figure 2 in the paper.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: LHCb:2023qca
+BibTeX: '@article{LHCb:2023qca,
+    collaboration = "LHCb",
+    title = "{Observation of the $B^+ \rightarrow J/\psi \eta^{\prime} K^+$ decay}",
+    eprint = "2303.09443",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "LHCb-PAPER-2022-054, CERN-EP-2023-022",
+    month = "3",
+    year = "2023"
+}
+'

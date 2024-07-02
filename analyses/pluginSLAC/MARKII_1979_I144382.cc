@@ -20,56 +20,59 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      declare(UnstableParticles(),"UFS");
-      book(_hist, 1, 1, 1);
-
+      declare(UnstableParticles(Cuts::pid==100443),"UFS");
+      for(unsigned int ix=0;ix<2;++ix)
+	book(_h[ix], 1+ix, 1, 1);
     }
 
 
-    void findDecayProducts(const Particle & mother,
-			   unsigned int & nstable,
-			   Particles& pip, Particles& pim,
-			   Particles & onium) {
-      for(const Particle & p : mother.children()) {
+    void findDecayProducts(const Particle & mother, unsigned int & nstable,
+                           Particles& pip, Particles& pim, Particles & onium) {
+      for (const Particle& p : mother.children()) {
         int id = p.pid();
-      	if ( id == PID::PIMINUS) {
-	  pim.push_back(p);
-	  ++nstable;
-	}
+      	if (id == PID::PIMINUS) {
+          pim.push_back(p);
+          ++nstable;
+        }
        	else if (id == PID::PIPLUS) {
        	  pip.push_back(p);
        	  ++nstable;
        	}
-	else if (id==443) {
-	  onium.push_back(p);
-	  ++nstable;
-	}
-	else if ( !p.children().empty() ) {
-	  findDecayProducts(p,nstable,pip,pim,onium);
-	}
-	else
-	  ++nstable;
+        else if (id==443) {
+          onium.push_back(p);
+          ++nstable;
+        }
+        else if ( !p.children().empty() ) {
+          findDecayProducts(p,nstable,pip,pim,onium);
+        }
+        else {
+          ++nstable;
+        }
       }
     }
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       // loop over unstable particles
-      for(const Particle& ups : apply<UnstableParticles>(event, "UFS").particles(Cuts::pid==100443)) {
+      for(const Particle& ups : apply<UnstableParticles>(event, "UFS").particles()) {
       	unsigned int nstable(0);
       	Particles pip, pim, onium;
       	findDecayProducts(ups,nstable,pip,pim,onium);
       	// check for onium
-      	if(onium.size() !=1 || nstable !=3 || pip.size()!=1 || pim.size() !=1 ) continue;
-      	FourMomentum q = pip[0].momentum()+pim[0].momentum();
-      	_hist->fill(q.mass2());
+      	if (onium.size() !=1 || nstable !=3 || pip.size()!=1 || pim.size() !=1) continue;
+      	double mpipi = (pip[0].momentum()+pim[0].momentum()).mass();
+      	_h[0]->fill(sqr(mpipi));
+	double mpi = 2.*pip[0].mass();
+	double x = (mpipi-mpi)/(ups.mass()-onium[0].mass()-mpi);
+	_h[1]->fill(x);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      normalize(_hist);
+      for(unsigned int ix=0;ix<2;++ix)
+	normalize(_h[ix],1.,false);
     }
 
     /// @}
@@ -77,7 +80,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _hist;
+    Histo1DPtr _h[2];
     /// @}
 
 

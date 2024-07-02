@@ -1,0 +1,37 @@
+Name: BABAR_2008_I791879
+Year: 2008
+Summary: $B^-\to \Lambda_c^+\bar{p}^-\pi^-$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 791879
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 78 (2008) 112003
+RunInfo: Any process producing B+-
+Description:
+'Measurement of the $\Lambda_c^+\bar{p}^-$ mass distributon in $B^-\to \Lambda_c^+\bar{p}^-\pi^-$ and helicity angle in  $B^-\to \Sigma_c^0(\to\Lambda_c^+\pi^-)\bar{p}^-$.
+ Data read from plots in paper but is background subtraced and efficiency corrected.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2008get
+BibTeX: '@article{BaBar:2008get,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Measurements of B(anti-B0 ---\ensuremath{>} Lambda(c)+ anti-p) and B(B- ---\ensuremath{>} Lambda(c)+ anti-p pi-) and Studies of Lambda(c)+ pi- Resonances}",
+    eprint = "0807.4974",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-08-016, SLAC-PUB-13341",
+    doi = "10.1103/PhysRevD.78.112003",
+    journal = "Phys. Rev. D",
+    volume = "78",
+    pages = "112003",
+    year = "2008"
+}
+'

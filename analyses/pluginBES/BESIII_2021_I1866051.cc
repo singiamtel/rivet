@@ -23,7 +23,15 @@ namespace Rivet {
       declare(FinalState(), "FS");
 
       // Book histograms
-      book(_nKSKL    , "TMP/nKSKL");
+      book(_nKSKL, 1, 1, 1);
+      for (const string& en : _nKSKL.binning().edges<0>()) {
+        const double end = std::stod(en)*GeV;
+        if (isCompatibleWithSqrtS(end)) {
+          _ecms = en;
+          break;
+        }
+      }
+      if(_ecms.empty()) MSG_ERROR("Beam energy incompatible with analysis.");
     }
 
 
@@ -39,21 +47,13 @@ namespace Rivet {
       }
 
       if(ntotal==2 && nCount[130]==1 && nCount[310]==1)
-	_nKSKL->fill();
+	_nKSKL->fill(_ecms);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      double sigma =  _nKSKL->val()*crossSection()/ sumOfWeights() /picobarn;
-      double error =  _nKSKL->err()*crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr  mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/GeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_nKSKL, crossSection()/ sumOfWeights() /picobarn);
     }
 
     ///@}
@@ -61,7 +61,8 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    CounterPtr _nKSKL;
+    BinnedHistoPtr<string> _nKSKL;
+    string _ecms;
     ///@}
 
 

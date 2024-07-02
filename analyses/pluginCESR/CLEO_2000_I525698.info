@@ -1,0 +1,35 @@
+Name: CLEO_2000_I525698
+Year: 2000
+Summary: Mass distributions in $\tau^-\to K^-\pi^+\pi^-\nu_\tau$
+Experiment: CLEO
+Collider: CESR
+InspireID: 525698
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 62 (2000) 072006
+RunInfo: Any process producing tau leptons, originally e+e-
+Description:
+  'Measurement of mass distributions in $\tau^-\to K^-\pi^+\pi^-\nu_\tau$. The background subtracted, corrected data were read from figure 2 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: CLEO:2000nrp
+BibTeX: '@article{CLEO:2000nrp,
+    author = "Asner, D. M. and others",
+    collaboration = "CLEO",
+    title = "{Resonance structure of tau- ---\ensuremath{>} K- pi+ pi- nu(tau) decays}",
+    eprint = "hep-ex/0004002",
+    archivePrefix = "arXiv",
+    reportNumber = "SLAC-REPRINT-2000-086, CLNS-00-1666, CLEO-00-4",
+    doi = "10.1103/PhysRevD.62.072006",
+    journal = "Phys. Rev. D",
+    volume = "62",
+    pages = "072006",
+    year = "2000"
+}
+'

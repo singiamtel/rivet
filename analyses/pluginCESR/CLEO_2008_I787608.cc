@@ -92,9 +92,9 @@ namespace Rivet {
       for(unsigned int ix=0;ix<3;++ix) {
 	for(unsigned int iy=0;iy<iK[ix];++iy) {
 	  // 4 pion
-	  if(iy<2) normalize(_h_pi[ix][iy]);
+	  if(iy<2) normalize(_h_pi[ix][iy],1.,false);
 	  // 2 K 2 pi
-	  normalize(_h_K[ix][iy]);
+	  normalize(_h_K[ix][iy],1.,false);
 	}
       }
     }

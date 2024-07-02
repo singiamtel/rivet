@@ -40,8 +40,8 @@ namespace Rivet {
 	      p.children()[1].pid()==sign*211) ||
 	     (p.children()[1].pid()==sign*3334 &&
 	      p.children()[0].pid()==sign*211) ) {
-	    if(ups) _b->fill(0.5);
-	    else    _r->fill(0.5);
+	    if(ups) _b->fill();
+	    else    _r->fill("10.58"s);
 	  }
 	}
       }
@@ -52,7 +52,7 @@ namespace Rivet {
     void finalize() {
       normalize(_h_p);
       if(_ups->effNumEntries()!=0) {
-	scale(_b,0.5/ *_ups);
+	scale(_b, 0.5/ *_ups);
       }
       scale(_r,crossSection()/sumOfWeights()/femtobarn);
     }
@@ -61,8 +61,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_p,_b,_r;
-    CounterPtr _ups;
+    Histo1DPtr _h_p;
+    BinnedHistoPtr<string> _r;
+    CounterPtr _b, _ups;
     /// @}
 
 

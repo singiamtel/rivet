@@ -578,8 +578,8 @@ if not args.DRY_RUN:
                     svg_code = svg.read()
                 # We need to reset all the IDs in the SVG.
                 svgfile_name = analysis + "-" + os.path.splitext(os.path.split(svgfile)[-1])[0]
-                reset_id = re.sub("(?<=id=\").+?(?=\")", lambda matchobj : svgfile_name + "-" + matchobj.group(0), svg_code)
-                reset_href = re.sub("(?<=\#).+?(?=[)\"])", lambda matchobj : svgfile_name + "-" + matchobj.group(0), reset_id)
+                reset_id = re.sub(r"(?<=id=\").+?(?=\")", lambda matchobj : svgfile_name + "-" + matchobj.group(0), svg_code)
+                reset_href = re.sub(r"(?<=\#).+?(?=[)\"])", lambda matchobj : svgfile_name + "-" + matchobj.group(0), reset_id)
                 svg_file_content = "<div>\n" + reset_href + "</div>\n"
                 anaindex.write(svg_file_content)
             else:

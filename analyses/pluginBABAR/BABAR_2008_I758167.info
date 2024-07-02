@@ -1,0 +1,42 @@
+Name: BABAR_2008_I758167
+Year: 2008
+Summary: Helicity angles in $B\to \bar{D} D_{s1}^+(2536)$, $B\to \psi(3770)K$ and $B\to X(3872)K$
+Experiment: BABAR
+Collider: PEP-II
+InspireID: 758167
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 77 (2008) 011102
+RunInfo: Any process producing B mesons, originally Upsilon(4S)
+Options:
+ - PID=*
+Description:
+'Measurement of helicity angles in $B\to \bar{D} D_{s1}^+(2536)$, $B\to \psi(3770)K$ and $B\to X(3872)K$ decays using $B\to \bar{D}^{(*)}D^{(*)}K$ modes.
+The background subtracted, efficiency corrected distributions were read from Figure 1 in the paper.
+There is no consensus as to the nature of the $X(3872)$ $c\bar{c}$ state and therefore we taken its PDG code to be 9030443, i.e. the first
+unused code for an undetermined spin one $c\bar{c}$ state. This can be changed using the PID option if a different code is used by the
+event generator performing the simulation.'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BaBar:2007cmo
+BibTeX: '@article{BaBar:2007cmo,
+    author = "Aubert, Bernard and others",
+    collaboration = "BaBar",
+    title = "{Study of Resonances in Exclusive B Decays to anti-D(*) D(*) K}",
+    eprint = "0708.1565",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "BABAR-PUB-07-049, SLAC-PUB-12728",
+    doi = "10.1103/PhysRevD.77.011102",
+    journal = "Phys. Rev. D",
+    volume = "77",
+    pages = "011102",
+    year = "2008"
+}
+'

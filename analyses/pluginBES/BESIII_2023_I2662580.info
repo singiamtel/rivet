@@ -1,0 +1,32 @@
+Name: BESIII_2023_I2662580
+Year: 2023
+Summary: Mass distributions in $D^+\to K^0_S\pi^+\pi^0\pi^0$ decays
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2662580
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2305.15879 [hep-ex]
+RunInfo: Any process producting D+ mesons, originally psi(3770) decay
+Description:
+  'Measurement of the mass distributions in $D^+\to K^0_S\pi^+\pi^0\pi^0$ decays by the BESIII collaboration. The data were read from the plots in the paper and therefore for some points the error bars are the size of the point. It is also not clear that any resolution effects have been unfolded.'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023qgj
+BibTeX: '@article{BESIII:2023qgj,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Amplitude analysis and branching fraction measurement of the decay $D^{+} \to K_S^0\pi^+\pi^0\pi^0$}",
+    eprint = "2305.15879",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "5",
+    year = "2023"
+}
+'

@@ -22,7 +22,7 @@ namespace Rivet {
       // Initialise and register projections
       declare(FinalState(), "FS");
       declare(UnstableParticles(), "UFS");
-      book(_numEtaGamma, "TMP/EtaGamma");
+      book(_numEtaGamma, "TMP/EtaGamma", refData(1,1,1));
     }
 
     void findChildren(const Particle & p,map<long,int> & nRes, int &ncount) {
@@ -71,25 +71,17 @@ namespace Rivet {
 	  }
 	}
 	if(matched)
-	  _numEtaGamma->fill();
+	  _numEtaGamma->fill(sqrtS()/MeV);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      double sigma = _numEtaGamma->val();
-      double error = _numEtaGamma->err();
-      sigma *= crossSection()/ sumOfWeights() /picobarn;
-      error *= crossSection()/ sumOfWeights() /picobarn;
-      Estimate1DPtr mult;
-      book(mult, 1, 1, 1);
-      for (auto& b : mult->bins()) {
-        if (inRange(sqrtS()/MeV, b.xMin(), b.xMax())) {
-          b.set(sigma, error);
-        }
-      }
+      scale(_numEtaGamma, crossSection()/ sumOfWeights() /picobarn);
+      Estimate1DPtr tmp;
+      book(tmp,1,1,1);
+      barchart(_numEtaGamma,tmp);
     }
 
     /// @}
@@ -97,7 +89,7 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    CounterPtr _numEtaGamma;
+    Histo1DPtr _numEtaGamma;
     /// @}
 
 

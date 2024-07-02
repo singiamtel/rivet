@@ -12,6 +12,9 @@ References:
 RunInfo: e+ e- to hadrons and e+ e- to mu+ mu- (for normalization)
 NeedCrossSection: yes
 Beams: [e-, e+]
+Energies: [3.08049, 3.08554, 3.09063, 3.09258, 3.09373, 3.09452, 3.0953, 3.09567, 3.09607,
+           3.09647, 3.09686, 3.09763, 3.09802, 3.09842, 3.0988, 3.09919, 3.0996, 3.09998,
+           3.10075, 3.10278, 3.10549, 3.11014, 3.11636]
 Description:
   'Measurement of the hadronic cross section in $e^+e^-$ collisions by BES for energies between 3.08 and 3.116 GeV.'
 BibKey: Bai:1995ik
