@@ -4,7 +4,7 @@ LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
 
 ARG BUILD_TOOLS
-RUN export DEBIAN_FRONTEND=noninteractive \
+RUN export DEBIAN_FRONTEND=noninteractive \ 
     && apt-get update -y \
     && apt-get upgrade -y \
     && apt-get install -y apt-utils tzdata \
@@ -12,13 +12,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           CXX_CMD=g++; CC_CMD=gcc; FC_CMD=gfortran; BUILD_PKGS="g++ gcc gfortran"; \
        elif [[ "$BUILD_TOOLS" = "LLVM" ]]; then \
           CXX_CMD=clang++; CC_CMD=clang; FC_CMD=gfortran; BUILD_PKGS="clang gfortran"; \
-       elif [[ "$BUILD_TOOLS" = "Intel" ]]; then \
-          CXX_CMD=icpc; CC_CMD=icc; FC_CMD=ifort; BUILD_PKGS="intel-hpckit"; \
-          apt-get install -y wget linux-headers-generic kmod gnupg && \
-          wget --no-verbose https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB -O - | apt-key add - && \
-          echo "deb https://apt.repos.intel.com/oneapi all main" > /etc/apt/sources.list.d/oneAPI.list && \
-          apt-get update -y && \
-          echo 'source /opt/intel/oneapi/setvars.sh &> /dev/null' >> /etc/profile.d/01-buildtools.sh; \
        fi \
     && apt-get install -y ${BUILD_PKGS} \
     && apt-get -y autoremove \
@@ -32,13 +25,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           update-alternatives --install /usr/bin/c++ c++ $(which clang++) 2 && \
           update-alternatives --install /usr/bin/gcc gcc $(which clang) 2 && \
           update-alternatives --install /usr/bin/cc  cc  $(which clang) 2; \
-       #    update-alternatives --install /usr/bin/gfortran gfortran $(which flang) 2; \
-       # elif [[ "$BUILD_TOOLS" = "Intel" ]]; then \
-       #    # # update-alternatives --install /usr/bin/g++ g++ $(which icpc) 2 && \
-       #    # # update-alternatives --install /usr/bin/c++ c++ $(which icpc) 2 && \
-       #    # # update-alternatives --install /usr/bin/gcc gcc $(which icc) 2 && \
-       #    # # update-alternatives --install /usr/bin/cc  cc  $(which icc) 2 && \
-       #    # # update-alternatives --install /usr/bin/gfortran gfortran $(which ifort) 2; \
+          # update-alternatives --install /usr/bin/gfortran gfortran $(which flang) 2; \
        fi \
     && apt-get install -y \
          make automake autoconf libtool cmake rsync \
@@ -47,34 +34,23 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y autoclean
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && if [[ "$BUILD_TOOLS" != "Intel" ]]; then \
-         apt-get install -y python3 python3-dev && \
-         update-alternatives --install /usr/bin/python python /usr/bin/python3 2 && \
-         update-alternatives --install /usr/bin/python-config python-config /usr/bin/python3-config 2 && \
-         apt-get -y autoremove && \
-         apt-get -y autoclean; \
-       fi \
-    #&& wget --no-verbose https://bootstrap.pypa.io/get-pip.py -O get-pip.py \
-    #&& python get-pip.py \
-    #&& apt-get install -y python3-pip \
-    #&& pip install matplotlib requests Cython \
-    && apt-get install -y python3-matplotlib python3-requests cython3 \
-    && update-alternatives --install /usr/bin/cython cython /usr/bin/cython3 2
+    && apt-get install -y python3 python3-dev \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 2 \
+    && update-alternatives --install /usr/bin/python-config python-config /usr/bin/python3-config 2 \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean \
+    && apt-get install -y python3-pip && rm -f /usr/lib/python*/EXTERNALLY-MANAGED
+    
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update -y \
+    && apt-get install -y libxft2 libxpm4 libglu1-mesa libpthread-stubs0-dev libsqlite3-dev uuid-dev nlohmann-json3-dev \
+    && apt-get -y autoclean \
+    && cd /usr/local \
+    && wget --no-verbose https://root.cern/download/root_v6.32.02.Linux-ubuntu22.04-x86_64-gcc11.4.tar.gz -O- | tar xz \
+    && echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && if [[ "$BUILD_TOOLS" != "Intel" ]]; then \
-         apt-get update -y && \
-         apt-get install -y libxft2 libxpm4 libglu1-mesa libpthread-stubs0-dev libsqlite3-dev uuid-dev && \
-         apt-get -y autoclean && \
-         cd /usr/local && \
-         wget --no-verbose https://root.cern/download/root_v6.30.02.Linux-ubuntu22.04-x86_64-gcc11.4.tar.gz -O- | tar xz && \
-         echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh; \
-       fi
-
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y \
-         zlib1g-dev libgsl-dev \
-         libhdf5-dev h5utils hdf5-tools python3-h5py \
+    && apt-get install -y zlib1g-dev libgsl-dev libhdf5-dev h5utils hdf5-tools python3-h5py \
     && mkdir /code && cd /code \
     && wget https://github.com/BlueBrain/HighFive/archive/refs/tags/v2.7.1.tar.gz -O- | tar xz \
     && mv HighFive-*/include/highfive /usr/local/include/ \
@@ -91,7 +67,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'for i in /etc/profile.d/*.sh; do . $i; done' > /tmp/DUMMY2 \
     && cat /tmp/DUMMY1 /tmp/DUMMY2 > /etc/bash.bashrc && rm /tmp/DUMMY*
 
-# TODO: move nlohmann back to the ROOT deps if it works
 ARG HEPMC_VERSION
 ARG RIVETBS_VERSION
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -99,7 +74,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && wget --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
     && chmod +x rivet-bootstrap \
     && grep CMAKE rivet-bootstrap \
-    && apt-get install -y nlohmann-json3-dev \
     && apt-get -y autoremove \
     && apt-get -y autoclean \
     && INSTALL_PREFIX=/usr/local USE_VENV=0 \
@@ -121,6 +95,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && ls wrappers/python/build/lhapdf -l \
     && rm -r /code
 
+# TODO: remove for Rivet v4?
 ARG LATEX
 RUN export DEBIAN_FRONTEND=noninteractive \
     && if test "$LATEX" = "1"; then \
@@ -134,10 +109,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
       apt-get -y autoclean; \      
     fi
 
-# TODO: fix local/local in packages
+# NB. Installing scipy auto-installs a compatible numpy
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'export PYTHONPATH="/usr/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
-    && echo 'export PYTHONPATH="/usr/local/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh
+    && pip install --upgrade scipy matplotlib Cython requests
 
 ## Interactive niceties
 ADD bash.bashrc.completion /etc/

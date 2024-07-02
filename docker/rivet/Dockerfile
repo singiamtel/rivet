@@ -33,8 +33,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'export PYTHONPATH="/usr/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
     && echo 'export PYTHONPATH="/usr/local/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh \
+    && apt-get update -y \
     && apt-get install -y cm-super dvipng \
+    && apt-get install -y python3-pip && rm -f /usr/lib/python*/EXTERNALLY-MANAGED \
     && apt-get autoremove -y \
     && apt-get autoclean -y
 
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && pip install --upgrade numpy~=1.26 scipy matplotlib
+    
 WORKDIR /work

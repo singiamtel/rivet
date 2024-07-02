@@ -13,7 +13,7 @@ test "$TEST" && BUILD="echo $BUILD"
 RIVETBS_VERSION=4.0.0
 LHAPDF_VERSION=6.5.4
 
-for vhepmc in 3.2.6; do
+for vhepmc in 3.3.0; do # 3.2.6
     for tex in 0 1; do
 
         MSG="Building hepbase image with HepMC=$vhepmc and TeX=$tex"

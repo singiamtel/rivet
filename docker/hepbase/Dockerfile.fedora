@@ -107,7 +107,7 @@ RUN true \
 ARG LATEX
 RUN if test "$LATEX" = "1"; then \
       dnf install -y \
-        texlive-latex-bin texlive-latexconfig \
+        texlive-latex-bin texlive-latex-extra texlive-latexconfig \
         texlive-pst-tools texlive-pst-arrow \
         texlive-relsize texlive-cm texlive-hyphen-base \
         texlive-dvips texlive-collection-fontsrecommended \

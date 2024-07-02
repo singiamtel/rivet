@@ -23,6 +23,7 @@ BUILDFLAGS="$BUILDFLAGS --build-arg YODA_BRANCH=$YODA_BRANCH"
 ## Last branch name -> latest
 for RIVET_BRANCH in $RIVET_BRANCHES; do
     RIVET_VERSION=${RIVET_BRANCH#rivet-}
+    RIVET_VERSION=${RIVET_VERSION#release-}
 
     MSG="Building Rivet $RIVET_VERSION image with architecture ="
     for CC in gcc; do  # clang
