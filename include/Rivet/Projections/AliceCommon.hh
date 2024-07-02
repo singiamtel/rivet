@@ -1,5 +1,6 @@
 #ifndef PROJECTIONS_ALICECOMMON_HH
 #define PROJECTIONS_ALICECOMMON_HH
+
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
@@ -288,7 +289,7 @@ namespace Rivet {
     public:
 
       PrimaryParticles(const Cut& c=Cuts::open())
-        : Rivet::PrimaryParticles({},c)
+        : Rivet::PrimaryParticles({}, c)
       { }
 
       /// Compare to projections.

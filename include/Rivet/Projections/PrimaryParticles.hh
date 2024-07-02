@@ -10,10 +10,9 @@ namespace Rivet {
 
   /// @brief Project out primary particles according to definition
   ///
-  /// A Rivet projection that mimics an experimental primary partcile
-  /// definition by projecting out according to particle ID.
-  /// The projection can be further specialized to accomodate
-  /// specific experimental definitions.
+  /// Mimic an experimental primary-particle definition by projecting
+  /// out according to particle ID.  The projection can be further
+  /// specialized to accommodate specific experimental definitions.
   ///
   /// @author Christian Holm Christensen <cholm@nbi.dk>
   class PrimaryParticles : public ParticleFinder {
@@ -25,8 +24,9 @@ namespace Rivet {
     ///
     /// @param pids  List of PDG IDs which are considered primary
     /// @param c     Normal particle cuts
-    PrimaryParticles(std::initializer_list<int> pids, const Cut& c=Cuts::open()) :
-      ParticleFinder(c), _pdgIds(pids) {
+    PrimaryParticles(std::initializer_list<int> pids, const Cut& c=Cuts::open())
+      : ParticleFinder(c), _pdgIds(pids)
+    {
       setName("PrimaryParticles");
     }
 
@@ -43,11 +43,11 @@ namespace Rivet {
     }
 
     /// Compare to another projection
-	///
-	/// @param p Projection to compare to.
-	///
-	/// @return Equivalent if the projection @a p is of the same type as this,
-	/// the cuts are equal, and the list of PDG IDs is the same.
+    ///
+    /// @param p Projection to compare to.
+    ///
+    /// @return Equivalent if the projection @a p is of the same type as this,
+    /// the cuts are equal, and the list of PDG IDs is the same.
     virtual CmpState compare(const Projection& p) const
     {
       const PrimaryParticles* other = dynamic_cast<const PrimaryParticles*>(&p);

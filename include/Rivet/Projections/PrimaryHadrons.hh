@@ -13,6 +13,7 @@ namespace Rivet {
   /// @brief Project out the first hadrons from hadronisation.
   ///
   /// @todo Also be able to return taus? Prefer a separate tau finder.
+  ///
   /// @todo This assumes that the primary hadrons are unstable... should we also look for stable primary hadrons?
   class PrimaryHadrons : public FinalState {
   public:
@@ -33,11 +34,11 @@ namespace Rivet {
       declare(UnstableParticles(Cuts::etaIn(mineta, maxeta) && Cuts::pT > minpt), "UFS");
     }
 
-
     /// Clone on the heap.
     RIVET_DEFAULT_PROJ_CLONE(PrimaryHadrons);
 
     /// @}
+
 
     /// Import to avoid warnings about overload-hiding
     using Projection::operator =;
