@@ -131,10 +131,16 @@ hepmc_version=`./conftest`
 if test x$hepmc_version != x; then
   let hepmc_major=[`echo "$hepmc_version" | cut -d. -f1 | sed -e 's/^0*//'`]
   let hepmc_minor=[`echo "$hepmc_version" | cut -d. -f2 | sed -e 's/^0*//'`]
-  let hepmc_third=[`echo "$hepmc_version" | cut -d. -f3 | sed -e 's/^0*//'`]
+  let hepmc_micro=[`echo "$hepmc_version" | cut -d. -f3 | sed -e 's/^0*//'`]
+  if test "x$hepmc_minor" = "x"; then
+    hepmc_minor=0
+  fi
+  if test "x$hepmc_micro" = "x"; then
+    hepmc_micro=0
+  fi
 fi
 rm -f conftest conftest.cpp conftest.cc conftest.C
-HEPMC_VERSION=$hepmc_major$hepmc_minor$hepmc_third
+HEPMC_VERSION=$hepmc_major$hepmc_minor$hepmc_micro
 AC_MSG_NOTICE([HepMC version is $hepmc_version -> $HEPMC_VERSION])
 if test $HEPMC_VERSION -le 310; then
   AC_MSG_ERROR([HepMC3 version 3.1.1 or later is required.])
@@ -164,6 +170,12 @@ if test -f "$FJCONFIG"; then
   fjmajor=[`echo $fjversion | cut -f1 -d. | sed -e 's/^0*//'`]
   fjminor=[`echo $fjversion | cut -f2 -d. | sed -e 's/^0*//'`]
   fjmicro=[`echo $fjversion | cut -f3 -d. | sed -e 's/^0*//'`]
+  if test "x$fjminor" = "x"; then
+    fjminor=0
+  fi
+  if test "x$fjmicro" = "x"; then
+    fjmicro=0
+  fi
   if test "$fjmajor" -lt 3 -o "$fjminor" -lt 2 ; then  #< only works for v3.x
     AC_MSG_ERROR([FastJet version 3.2.0 or later is required])
   fi
