@@ -529,7 +529,7 @@ namespace Rivet {
         MSG_WARNING("Requested mean of a distribution with no net fill weights");
       }
       else {
-        // loop to calcualte mean
+        // loop to calculate mean
         for (auto& b : histo_input->bins()) { // loop over points
           mysumWX  += b.sumW()*b.xEdge();
           mysumW   += b.sumW();
