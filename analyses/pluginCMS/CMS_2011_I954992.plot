@@ -2,6 +2,4 @@
 Title=Exclusive $\gamma\gamma$ production of muon pairs
 XLabel=$\sqrt{s}$ [GeV]
 YLabel=$\sigma(pp \to p\mu^{+}\mu^{-}p)$ [pb]
-LegendXPos=0.67
-LegendYPos=0.60
 # END PLOT

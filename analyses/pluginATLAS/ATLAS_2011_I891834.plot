@@ -3,8 +3,6 @@ Title=Transverse $N$ density vs. $p_\perp^\mathrm{clus1}$, $\sqrt{s} = \mathrm{9
 XLabel=$p_\perp$ (leading particle) [GeV]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I891834/d02-x01-y01
@@ -12,8 +10,6 @@ Title=Transverse $N$ density vs. $p_\perp^\mathrm{clus1}$, $\sqrt{s} = \mathrm{7
 XLabel=$p_\perp$ (leading particle) [GeV]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I891834/d03-x01-y01
@@ -21,8 +17,6 @@ Title=Transverse $\sum{p_\perp}$ density vs. $p_\perp^\mathrm{clus1}$, $\sqrt{s}
 XLabel=$p_\perp$ (leading particle) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum{p_\perp}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I891834/d04-x01-y01
@@ -30,8 +24,6 @@ Title=Transverse $\sum{p_\perp}$ density vs. $p_\perp^\mathrm{clus1}$, $\sqrt{s}
 XLabel=$p_\perp$ (leading particle) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum{p_\perp}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 
@@ -42,8 +34,6 @@ Title=$N$ density vs. $\Delta\phi$, $p_\perp^\mathrm{clus1} > 1.0$ GeV, $\sqrt{s
 XLabel=$\left|\phi\right|$ (w.r.t. leading particle) [rad]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I891834/d13-x01-y02
@@ -51,8 +41,6 @@ Title=$N$ density vs. $\Delta\phi$, $p_\perp^\mathrm{clus1} > 2.0$ GeV, $\sqrt{s
 XLabel=$\left|\phi\right|$ (w.r.t. leading particle) [rad]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I891834/d13-x01-y03
@@ -60,8 +48,6 @@ Title=$N$ density vs. $\Delta\phi$, $p_\perp^\mathrm{clus1} > 3.0$ GeV, $\sqrt{s
 XLabel=$\left|\phi\right|$ (w.r.t. leading particle) [rad]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 
@@ -70,8 +56,6 @@ Title=$N$ density vs. $\Delta\phi$, $p_\perp^\mathrm{clus1} > 1.0$ GeV, $\sqrt{s
 XLabel=$\left|\phi\right|$ (w.r.t. leading particle) [rad]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I891834/d14-x01-y02
@@ -79,8 +63,6 @@ Title=$N$ density vs. $\Delta\phi$, $p_\perp^\mathrm{clus1} > 2.0$ GeV, $\sqrt{s
 XLabel=$\left|\phi\right|$ (w.r.t. leading particle) [rad]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I891834/d14-x01-y03
@@ -88,6 +70,4 @@ Title=$N$ density vs. $\Delta\phi$, $p_\perp^\mathrm{clus1} > 3.0$ GeV, $\sqrt{s
 XLabel=$\left|\phi\right|$ (w.r.t. leading particle) [rad]
 YLabel=$\langle\mathrm{d}^2 N/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.4
-LegendYPos=0.4
 # END PLOT

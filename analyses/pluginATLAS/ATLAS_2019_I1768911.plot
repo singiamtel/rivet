@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2019_I1768911/d..
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendYPos=0.3
-LegendXPos=0.05
 Title=$Z\rightarrow \ell\ell$, dressed level, $66\,\text{GeV}\leq m_{\ell\ell} < 116\,\text{GeV}$, $|\eta_{\ell}| < 2.5$
 # END PLOT
 

@@ -1,7 +1,6 @@
 # BEGIN PLOT /ATLAS_2016_I1494075/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LogY=0
 YMin=0
 RatioPlotMode=datamc

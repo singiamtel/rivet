@@ -2,7 +2,6 @@
 XLabel=$\cos\phi$
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1609253/d01-x01-y01

@@ -5,8 +5,6 @@ YLabel=$1/N_\mathrm{evt} \  \mathrm{d}N_\mathrm{evt}/\mathrm{d}x$
 LogX=1
 LogY=1
 FullRange=1
-LegendXPos=0.1
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_PDFS/PdfXmin
@@ -17,7 +15,6 @@ XLabel=$x_\mathrm{min}$
 # BEGIN PLOT /MC_PDFS/PdfXmax
 Title=PDF sampling $x_\mathrm{max}$ value distribution
 XLabel=$x_\mathrm{max}$
-LegendXPos=0.3
 XMin=0.00005
 # END PLOT
 
@@ -28,7 +25,6 @@ YLabel=$1/N_\mathrm{evt} \  \mathrm{d}N_\mathrm{evt}/\mathrm{d}Q$
 LogX=0
 LogY=1
 FullRange=1
-LegendYPos=0.9
 # END PLOT
 
 # BEGIN PLOT /MC_PDFS/PdfXQ

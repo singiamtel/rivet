@@ -9,8 +9,6 @@ YTwosidedTicks=1
 Title={TransDIF charged-particle density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -20,8 +18,6 @@ YTwosidedTicks=1
 Title={TransMIN charged-particle density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -31,8 +27,6 @@ YTwosidedTicks=1
 Title={TransMAX charged-particle density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -43,8 +37,6 @@ YTwosidedTicks=1
 Title={TransAVE charged-particle density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -55,8 +47,6 @@ YTwosidedTicks=1
 Title={TransDIF charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -67,8 +57,6 @@ YTwosidedTicks=1
 Title={TransMIN charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -79,8 +67,6 @@ YTwosidedTicks=1
 Title={TransMAX charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -91,8 +77,6 @@ YTwosidedTicks=1
 Title={TransAVE charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=1.96\,\mathrm{TeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -102,8 +86,6 @@ YTwosidedTicks=1
 Title={TransDIF charged-particle density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -113,8 +95,6 @@ YTwosidedTicks=1
 Title={TransMIN charged-particle density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -125,8 +105,6 @@ YTwosidedTicks=1
 Title={TransMAX charged-particle density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -137,8 +115,6 @@ YTwosidedTicks=1
 Title={TransAVE charged-particle density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -149,8 +125,6 @@ YTwosidedTicks=1
 Title={TransDIF charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -161,8 +135,6 @@ YTwosidedTicks=1
 Title={TransMIN charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -173,8 +145,6 @@ YTwosidedTicks=1
 Title={TransMAX charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 LogY=0
 # END PLOT
 
@@ -185,8 +155,6 @@ YTwosidedTicks=1
 Title={TransAVE charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=900\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50 
 LogY=0
 # END PLOT
 
@@ -197,8 +165,6 @@ YTwosidedTicks=1
 Title={TransDIF charged-particle density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
 # END PLOT
@@ -210,8 +176,6 @@ YTwosidedTicks=1
 Title={TransMIN charged-particle density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.20
-LegendYPos=0.40
 RatioPlotYMax=2.099
 LogY=0
 # END PLOT
@@ -223,8 +187,6 @@ YTwosidedTicks=1
 Title={TransMAX charged-particle density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
 # END PLOT
@@ -236,8 +198,6 @@ YTwosidedTicks=1
 Title={TransAVE charged-particle density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dN_\mathrm{ch}\,/d\eta\, d\phi$}
-LegendXPos=0.40
-LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
 # END PLOT
@@ -249,8 +209,6 @@ YTwosidedTicks=1
 Title={TransDIF charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
 # END PLOT
@@ -262,8 +220,6 @@ YTwosidedTicks=1
 Title={TransMIN charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.20
-LegendYPos=0.40
 RatioPlotYMax=2.099
 LogY=0
 # END PLOT
@@ -275,8 +231,6 @@ YTwosidedTicks=1
 Title={TransMAX charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}_\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
 # END PLOT
@@ -288,8 +242,6 @@ YTwosidedTicks=1
 Title={TransAVE charged $p^{\mathrm{sum}}_\mathrm{T}$ density $\sqrt{s}=300\,\mathrm{GeV}$}
 XLabel={$p_\mathrm{T}^{\mathrm{max}}$ [GeV]}
 YLabel={$(1/N_\mathrm{events})\; dp^{\mathrm{sum}}\mathrm{T}\,/d\eta\, d\phi$ [GeV]}
-LegendXPos=0.40
-LegendYPos=0.50
 RatioPlotYMax=2.099
 LogY=0
 XLabelSep=4.4

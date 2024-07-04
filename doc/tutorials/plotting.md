@@ -54,3 +54,12 @@ files for the plot website. Some versions of imagemagick might cause error
 messages like `not authorized @ error/constitute.c/ReadImage/412`, which can
 [be fixed](https://stackoverflow.com/q/52998331/3094872) by giving `rights="read|write"` for both PS and PDF formats in
 `/etc/ImageMagick-7/policy.xml`.
+
+### Changing the reference data style
+
+The style of the reference data can be influenced using a dummy `REF` argument
+on the command line, e.g. `REF:LineColor=red`. Additional tags can be supplied
+in order to superimpose the reference curve with different properties, e.g.
+```
+REF:ErrorBandColor=green yellow REF2:ErrorPatter=^stat:ErrorBandColor=darkgreen"
+```

@@ -28,5 +28,4 @@ Title=$\phi(1020)$ transverse momentum, $|y|<0.6$, $\sqrt{s}=0.9\,\mathrm{TeV}$ 
 Title=$\Lambda / K^0_s$ ratio, $|y|<0.75$, $\sqrt{s}=0.9\,\mathrm{TeV}$ (INEL)
 YLabel=$(\sigma(\Lambda)+\sigma(\bar \Lambda))/2 \sigma(K^0_s)$
 LogY=0
-LegendYPos=0.4
 # END PLOT

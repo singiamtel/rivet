@@ -6,8 +6,6 @@ LogY=1
 LeftMargin=1.5
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendXPos=0.95
-LegendAlign=r
 YMin=2.0E-06
 # END PLOT
 

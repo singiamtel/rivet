@@ -2,7 +2,6 @@
 Title=3 lepton
 LogY=0
 YLabel=Fiducial Cross section [fb]
-LegendAlign=r
 # END PLOT
 
 
@@ -10,7 +9,6 @@ LegendAlign=r
 Title=dilepton + dijet
 LogY=0
 YLabel=Fiducial Cross section [fb] 
-LegendAlign=r
 # END PLOT
 
 

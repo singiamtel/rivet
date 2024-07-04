@@ -1,7 +1,6 @@
 # BEGIN PLOT /ATLAS_2017_I1517194/d..
 RatioPlotYMax=2.0
 RatioPlotYMin=0.0
-LegendAlign=r
 LogY=1
 # END PLOT
 
@@ -63,8 +62,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ forward-lepton control region: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d21-x01-y01
@@ -89,8 +86,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ signal region ($M_{jj}>1.0$ TeV): $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d25-x01-y01
@@ -115,8 +110,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 1.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d29-x01-y01
@@ -165,8 +158,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 0.5$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d37-x01-y01
@@ -209,16 +200,12 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 2.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d44-x01-y01
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 2.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta y(j_1, j_2)$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta y$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d45-x01-y01
@@ -261,8 +248,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ forward-lepton/central-jet region: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d52-x01-y01
@@ -293,8 +278,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ central-jet validation region: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d57-x01-y01
@@ -325,8 +308,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=QCD+EW $Wjj$ signal region ($M_{jj}>0.5$ TeV): $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d62-x01-y01
@@ -351,8 +332,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 1.5$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d66-x01-y01
@@ -401,8 +380,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ forward-lepton control region: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d74-x01-y01
@@ -427,8 +404,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ signal region ($M_{jj}>1.0$ TeV): $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d78-x01-y01
@@ -453,8 +428,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 1.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d82-x01-y01
@@ -503,8 +476,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 0.5$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d90-x01-y01
@@ -547,8 +518,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ inclusive region with $M_{jj} > 2.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d97-x01-y01
@@ -597,8 +566,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ forward-lepton/central-jet region: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d105-x01-y01
@@ -629,8 +596,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ central-jet validation region: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d110-x01-y01
@@ -655,8 +620,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=QCD+EW $Wjj$ signal region ($M_{jj}>0.5$ TeV): $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d114-x01-y01
@@ -675,8 +638,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 1.5$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d117-x01-y01
@@ -701,8 +662,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}N_\mathrm{jets}^\mathrm{gap}$
 Title=EW-only $Wjj$ signal region ($M_{jj}>1.0$ TeV): $W\to\ell\nu$
 XLabel=Dijet mass [GeV]
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}M_{jj}$ [1/GeV]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d121-x01-y01
@@ -715,8 +674,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [1/GeV]
 Title=EW-only $Wjj$ signal region ($M_{jj}>1.0$ TeV): $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d123-x01-y01
@@ -741,8 +698,6 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}M_{jj}$ [1/GeV]
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 1.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d127-x01-y01
@@ -767,16 +722,12 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}C_\ell$
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 1.0$ TeV: $W\to\ell\nu$
 XLabel=Number of jets in the rapidity gap
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}N_\mathrm{jets}^\mathrm{gap}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d131-x01-y01
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 2.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}\Delta \phi$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d132-x01-y01
@@ -801,16 +752,12 @@ YLabel=$1/\sigma \mathrm{d}\sigma / \mathrm{d}N_\mathrm{jets}^\mathrm{gap}$
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 1.5$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d136-x01-y01
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 1.5$ TeV: $W\to\ell\nu$
 XLabel=$\Delta y(j_1, j_2)$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta y$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d137-x01-y01
@@ -829,8 +776,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}N_\mathrm{jets}^\mathrm{gap}$ [fb]
 Title=EW-only $Wjj$ signal region ($M_{jj}>1.0$ TeV): $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d140-x01-y01
@@ -849,8 +794,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}$ [fb/GeV]
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 1.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d143-x01-y01
@@ -875,8 +818,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}N_\mathrm{jets}^\mathrm{gap}$ [fb]
 Title=EW-only $Wjj$ inclusive region with $M_{jj} > 2.0$ TeV: $W\to\ell\nu$
 XLabel=$\Delta\phi(j_1,j_2) / \pi$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi$ [fb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1517194/d147-x01-y01

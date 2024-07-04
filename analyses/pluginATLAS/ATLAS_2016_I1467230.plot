@@ -1,6 +1,5 @@
 # BEGIN PLOT /ATLAS_2016_I1467230/*
 FullRange=1
-LegendAlign=r
 # END PLOT
 
 
@@ -39,7 +38,6 @@ Title=Charged particle $p_\mathrm{T}$, $p_\mathrm{T} > 100\,\mathrm{MeV}$, $|\et
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1467230/d03-x01-y01
@@ -56,7 +54,6 @@ LogY=0
 FullRange=1
 XLabel=$n_\mathrm{ch}$
 YLabel=$\langle p_\mathrm{T}\rangle$ $\;$ [GeV]
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1467230/d04-x01-y01

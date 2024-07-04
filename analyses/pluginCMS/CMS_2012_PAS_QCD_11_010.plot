@@ -1,6 +1,5 @@
 # BEGIN PLOT /CMS_2012_PAS_QCD_11_010/d0
 XLabel=leading jet $p_\perp$ [GeV]
-LegendYPos=0.5
 # END PLOT
 
 

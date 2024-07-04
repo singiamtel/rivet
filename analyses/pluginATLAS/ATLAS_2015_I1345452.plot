@@ -1,6 +1,5 @@
 # BEGIN PLOT /ATLAS_2015_I1345452/d.
 LeftMargin=1.9
-LegendXPos=0.6
 YLabelSep=8.0
 RatioPlotYMin=0.6
 RatioPlotYMax=1.8

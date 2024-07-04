@@ -4,7 +4,6 @@ XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.8
 YLabelSep=7.5
-ErrorBars=1
 Title=bare leptons
 # END PLOT
 

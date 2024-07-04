@@ -1,13 +1,10 @@
 BEGIN PLOT /ATLAS_2020_I1790439/d..
-LegendAlign=r
 XTwosidedTicks=1
 YTwosidedTicks=1
 LogY=0
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d03-x01-y01
-LegendAlign=l
-LegendXPos=0.05
 YLabel=Cross section [fb]
 XCustomMajorTicks=1  $\sigma_{4\mu}$  2  $\sigma_{4e}$  3  $\sigma_{2\mu2e}$  4  $\sigma_{2e2\mu}$  5  $\sigma_{4\mu+4e}$  6  $\sigma_{2\cdot(2\mu2e)}$  7  $\sigma_\text{sum}$  8  $\sigma_\text{comb}$  9  $\sigma_\text{tot}$
 XMinorTickMarks=0
@@ -22,8 +19,6 @@ LogX=1
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d07-x01-y01
-LegendAlign=l
-LegendXPos=0.05
 XLabel=$m_{12}$ [GeV]
 YLabel=d$\sigma$/d$m_{12}$ [fb/GeV]
 END PLOT
@@ -156,8 +151,6 @@ Title=$H\to 4\ell$
 XLabel=$m_{12}$ vs $m_{34}$
 YLabel=d$\sigma$/d$m_{12}$d$m_{34}$ [fb]
 XMinorTickMarks=0
-LegendAlign=l
-LegendXPos=0.05
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d48-x01-y01
@@ -165,8 +158,6 @@ Title=$H\to 2\ell 2\mu$
 XLabel=$m_{12}$ vs $m_{34}$
 YLabel=d$\sigma$/d$m_{12}$d$m_{34}$ [fb]
 XMinorTickMarks=0
-LegendAlign=l
-LegendXPos=0.05
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d49-x01-y01
@@ -174,8 +165,6 @@ Title=$H\to 2\ell 2e$
 XLabel=$m_{12}$ vs $m_{34}$
 YLabel=d$\sigma$/d$m_{12}$d$m_{34}$ [fb]
 XMinorTickMarks=0
-LegendAlign=l
-LegendXPos=0.05
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d51-x01-y01
@@ -272,16 +261,12 @@ BEGIN PLOT /ATLAS_2020_I1790439/d65-x01-y01
 Title=$H\to 4\ell$
 XLabel=$m_{12}$ [GeV]
 YLabel=d$\sigma$/d$m_{12}$ [fb/GeV]
-LegendAlign=l
-LegendXPos=0.05
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d66-x01-y01
 Title=$H\to 2\ell 2\ell^\prime$
 XLabel=$m_{12}$ [GeV]
 YLabel=d$\sigma$/d$m_{12}$ [fb/GeV]
-LegendAlign=l
-LegendXPos=0.05
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d68-x01-y01
@@ -320,8 +305,6 @@ XLabel=$m_{12}$ vs $m_{34}$
 YLabel=d$^2\sigma$/d$m_{12}$d$m_{34}$ [fb]
 LogY=1
 XMinorTickMarks=0
-LegendAlign=l
-LegendXPos=0.05
 END PLOT
 
 BEGIN PLOT /ATLAS_2020_I1790439/d75-x01-y01
@@ -330,7 +313,5 @@ XLabel=$m_{12}$ vs $m_{34}$
 YLabel=d$^2\sigma$/d$m_{12}$d$m_{34}$ [fb]
 LogY=1
 XMinorTickMarks=0
-LegendAlign=l
-LegendXPos=0.05
 END PLOT
 

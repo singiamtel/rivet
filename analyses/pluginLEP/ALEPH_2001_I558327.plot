@@ -2,14 +2,12 @@
 Title=$b$ quark fragmentation function $f(x_B^\mathrm{weak})$
 XLabel=$x_B$
 YLabel=$1/N \, \mathrm{d}{N}/\mathrm{d}x_B$
-LegendYPos=0.60
 # END PLOT
 
 # BEGIN PLOT /ALEPH_2001_I558327/d01-x01-y02
 Title=$b$ quark fragmentation function $f(x_B^\mathrm{lead})$
 XLabel=$x_B$
 YLabel=$1/N \, \mathrm{d}{N}/\mathrm{d}x_B$
-LegendXPos=0.10
 # END PLOT
 
 # BEGIN PLOT /ALEPH_2001_I558327/d07-x01-y01

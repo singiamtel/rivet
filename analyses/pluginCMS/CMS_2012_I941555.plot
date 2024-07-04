@@ -3,8 +3,6 @@ XLabel=$y(Z)$
 YLabel=$1/\sigma \; \mathrm{d}\sigma / \mathrm{d}|y|(Z)$
 LogX=0
 LogY=0
-LegendXPos=0.1
-LegendYPos=0.3
 NormalizeToIntegral=1
 # END PLOT
 
@@ -27,8 +25,6 @@ YLabel=$1/\sigma \; \mathrm{d}\sigma / \mathrm{d}p_T(Z)$ [1/GeV]
 LogX=1
 LogY=1
 XMin=0.4
-LegendXPos=0.1
-LegendYPos=0.4
 NormalizeToIntegral=1
 # END PLOT
 
@@ -51,8 +47,6 @@ YLabel=$1/\sigma \; \mathrm{d}\sigma / \mathrm{d}p_T(Z)$ [1/GeV]
 LogX=0
 LogY=1
 XMin=0.4
-LegendXPos=0.1
-LegendYPos=0.4
 NormalizeToIntegral=1
 # END PLOT
 

@@ -5,8 +5,6 @@ YLabel=$\frac{1}{\sigma_{\mathrm{fid.}}}\frac{\mathrm{d}\sigma_{\mathrm{fid.}}}{
 YMin=0.001
 XMin=0.001
 LogX=1
-LegendYPos=0.6
-LegendXPos=0.1
 RatioPlotYMin=0.8
 RatioPlotYMax=1.2
 # END PLOT

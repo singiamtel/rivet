@@ -71,7 +71,6 @@ Title=Azimuthal angle between photons
 XLabel=$\Delta\Phi_{\gamma \gamma}$ [$\pi\cdot$rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\Phi_{\gamma \gamma}$ [pb/$\pi\cdot$rad]
 YMax=110.0
-LegendXPos=0.05
 RatioPlotMode=deviation
 # END PLOT
 
@@ -80,7 +79,6 @@ Title=Azimuthal angle between photons (compared to DIPHOX)
 XLabel=$\Delta\Phi_{\gamma \gamma}$ [$\pi\cdot$rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\Phi_{\gamma \gamma}$ [pb/$\pi\cdot$rad]
 YMax=110.0
-LegendXPos=0.05
 RatioPlotMode=deviation
 # END PLOT
 
@@ -89,7 +87,6 @@ Title=Azimuthal angle between photons (compared to RESBOS)
 XLabel=$\Delta\Phi_{\gamma \gamma}$ [$\pi\cdot$rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\Phi_{\gamma \gamma}$ [pb/$\pi\cdot$rad]
 YMax=110.0
-LegendXPos=0.05
 RatioPlotMode=deviation
 # END PLOT
 
@@ -98,6 +95,5 @@ Title=Azimuthal angle between photons (compared to PYTHIA)
 XLabel=$\Delta\Phi_{\gamma \gamma}$ [$\pi\cdot$rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\Phi_{\gamma \gamma}$ [pb/$\pi\cdot$rad]
 YMax=110.0
-LegendXPos=0.05
 RatioPlotMode=deviation
 # END PLOT

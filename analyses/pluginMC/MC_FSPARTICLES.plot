@@ -14,7 +14,6 @@ YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}E$ [GeV$^{-1}$]
 XLabel=$\eta$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}\eta$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/Eta$
@@ -29,7 +28,6 @@ Title=Pseudorapidity of charged particles
 XLabel=$|\eta|$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta_+ \; / \; \mathrm{d}\sigma/\mathrm{d}\eta_-$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/EtaPMRatio
@@ -45,7 +43,6 @@ Title=Pseudorapidity distribution of $\langle \sum E_\perp \rangle$
 XLabel=$\eta$
 YLabel=$\langle \sum E_\perp \rangle$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/MultCh
@@ -67,7 +64,6 @@ Title=Azimuthal distribution of all particles
 XLabel=$\phi$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}\phi$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/PhiCh
@@ -75,7 +71,6 @@ Title=Azimuthal distribution of charged particles
 XLabel=$\phi$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}\phi$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/Pt$
@@ -97,7 +92,6 @@ Title=Rapidity of all particles
 XLabel=$y$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}y$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/RapidityPMRatio
@@ -105,7 +99,6 @@ Title=Rapidity $+/-$ ratio of all particles
 XLabel=$|y|$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_+ \; / \; \mathrm{d}\sigma/\mathrm{d}y_-$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/RapidityCh$
@@ -113,7 +106,6 @@ Title=Rapidity of charged particles
 XLabel=$y$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}y$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_FSPARTICLES/RapidityChPMRatio
@@ -121,5 +113,4 @@ Title=Rapidity $+/-$ ratio of charged particles
 XLabel=$|y|$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_+ \; / \; \mathrm{d}\sigma/\mathrm{d}y_-$
 LogY=0
-LegendYPos=0.5
 # END PLOT

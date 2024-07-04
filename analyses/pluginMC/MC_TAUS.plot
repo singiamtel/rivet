@@ -1,7 +1,5 @@
 # BEGIN PLOT /MC_TAUS/taus_dR_
 Title=$\Delta R$ separation between taus
-LegendXPos=0.10
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_TAUS/taus_dR_12
@@ -21,8 +19,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta{R}(\tau\mathrm{2,~}\tau\mathrm{3})$ [p
 
 # BEGIN PLOT /MC_TAUS/taus_deta_
 Title=Pseudorapidity separation between taus
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_TAUS/taus_deta_12
@@ -42,7 +38,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\eta(\tau\mathrm{3,~}\tau\mathrm{3})$ [
 
 # BEGIN PLOT /MC_TAUS/taus_dphi_
 Title=Pseudorapidity separation between taus
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /MC_TAUS/taus_dphi_12
@@ -64,32 +59,24 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi(\tau\mathrm{2,~}\tau\mathrm{3})$ [
 Title=Pseudorapidity of leading tau
 XLabel=$\eta(\tau\mathrm{1})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\tau\mathrm{1})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_TAUS/tau_eta_2
 Title=Pseudorapidity of second tau
 XLabel=$\eta(\tau\mathrm{2})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\tau\mathrm{2})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_TAUS/tau_eta_3
 Title=Pseudorapidity of third tau
 XLabel=$\eta(\tau\mathrm{3})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\tau\mathrm{3})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_TAUS/tau_eta_4
 Title=Pseudorapidity of fourth tau
 XLabel=$\eta(\tau\mathrm{4})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\tau\mathrm{4})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_TAUS/tau_eta_pmratio_1
@@ -194,8 +181,6 @@ Title=Transverse momentum of leading tau
 XLabel=$p_\perp(\tau\mathrm{1})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\tau\mathrm{1})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -204,8 +189,6 @@ Title=Transverse momentum of second tau
 XLabel=$p_\perp(\tau\mathrm{2})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\tau\mathrm{2})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 #XMin=20.0
 # END PLOT
 
@@ -214,8 +197,6 @@ Title=Transverse momentum of third tau
 XLabel=$p_\perp(\tau\mathrm{3})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\tau\mathrm{3})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 #XMin=20.0
 # END PLOT
 
@@ -224,7 +205,5 @@ Title=Transverse momentum of fourth tau
 XLabel=$p_\perp(\tau\mathrm{4})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\tau\mathrm{4})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 #XMin=20.0
 # END PLOT

@@ -2,7 +2,6 @@ BEGIN PLOT /H1_1995_I394793/d01-x01-y01
 Title= Cos theta with low Q
 XLabel= $\cos \Theta_B$
 YLabel= $1/N dn_{ch} / d \cos \Theta_B $
-# + any additional plot settings you might like, see make-plots documentation
 
 END PLOT
 
@@ -68,8 +67,6 @@ Title= Average charged particle multiplicity vrs. Q2
 XLabel=$Q^2$ [GeV$^2$]
 YLabel=$<n_{ch}>$
 LogX=1
-#LegendYPos=0.6
-LegendXPos=0.1
 END PLOT
 
 BEGIN PLOT /H1_1995_I394793/d06-x01-y01

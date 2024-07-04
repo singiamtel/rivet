@@ -7,8 +7,6 @@ XMin=-180
 XMax=180
 YMin=0.00
 YMax=0.10
-LegendYPos=0.4
-LegendXPos=0.5
 END PLOT
 
 # ... add more histograms as you need them ...

@@ -3,8 +3,6 @@ Title=Pseudorapidity distribution of kaon multiplicity
 XLabel=$\eta$
 YLabel=$1/\sigma_K \; \mathrm{d}\sigma_K/\mathrm{d}\eta$
 LogY=0
-LegendXPos=0.3
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_IDENTIFIED/EtaLambda
@@ -12,8 +10,6 @@ Title=Pseudorapidity distribution of $\Lambda$ multiplicity
 XLabel=$\eta$
 YLabel=$1/\sigma_\Lambda \; \mathrm{d}\sigma_\Lambda/\mathrm{d}\eta$
 LogY=0
-LegendXPos=0.3
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_IDENTIFIED/EtaPi
@@ -21,8 +17,6 @@ Title=Pseudorapidity distribution of pion multiplicity
 XLabel=$\eta$
 YLabel=$1/\sigma_\pi \; \mathrm{d}\sigma_\pi/\mathrm{d}\eta$
 LogY=0
-LegendXPos=0.3
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_IDENTIFIED/Mults.*PIDs

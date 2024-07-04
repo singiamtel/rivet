@@ -43,7 +43,7 @@ LogY=0
 
 # BEGIN PLOT /ZEUS_2010_I875006/d07-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right ) $
-CustomLegend=$125 < Q^2 < 250 \, \mathrm{GeV^2}$
+LegendTitle=$125 < Q^2 < 250 \, \mathrm{GeV^2}$
 XLabel=$\mathrm{log_{10}} \left ( \xi \right )$
 YLabel=$\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right )[pb]$
 LogY=1
@@ -51,7 +51,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d08-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right ) $
-CustomLegend=$250 < Q^2 < 500 \, \mathrm{GeV^2}$
+LegendTitle=$250 < Q^2 < 500 \, \mathrm{GeV^2}$
 XLabel=$\mathrm{log_{10}} \left ( \xi \right )$
 YLabel=$\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right )[pb]$
 LogY=1
@@ -59,7 +59,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d09-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right ) $
-CustomLegend=$500 < Q^2 < 1\,000 \, \mathrm{GeV^2}$
+LegendTitle=$500 < Q^2 < 1\,000 \, \mathrm{GeV^2}$
 XLabel=$\mathrm{log_{10}} \left ( \xi \right )$
 YLabel=$\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right )[pb]$
 LogY=1
@@ -67,7 +67,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d10-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right ) $
-CustomLegend=$1\,000 < Q^2 < 2\,000 \, \mathrm{GeV^2}$
+LegendTitle=$1\,000 < Q^2 < 2\,000 \, \mathrm{GeV^2}$
 XLabel=$\mathrm{log_{10}} \left ( \xi \right )$
 YLabel=$\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right )[pb]$
 LogY=1
@@ -75,7 +75,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d11-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right ) $
-CustomLegend=$2\,000 < Q^2 < 5\,000 \, \mathrm{GeV^2}$
+LegendTitle=$2\,000 < Q^2 < 5\,000 \, \mathrm{GeV^2}$
 XLabel=$\mathrm{log_{10}} \left ( \xi \right )$
 YLabel=$\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right )[pb]$
 LogY=1
@@ -83,7 +83,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d12-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right ) $
-CustomLegend=$5\,000 < Q^2 < 20\,000 \, \mathrm{GeV^2}$
+LegendTitle=$5\,000 < Q^2 < 20\,000 \, \mathrm{GeV^2}$
 XLabel=$\mathrm{log_{10}} \left ( \xi \right )$
 YLabel=$\mathrm{d} \sigma / \mathrm{d \, log_{10}} \left ( \xi \right )[pb]$
 LogY=1
@@ -91,7 +91,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d13-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}$
-CustomLegend=$125 < Q^2 < 250 \, \mathrm{GeVQ^2}$
+LegendTitle=$125 < Q^2 < 250 \, \mathrm{GeVQ^2}$
 XLabel=$E^{jet}_{T,B}$ / GeV
 YLabel=$\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}[pb/GeV]$
 LogY=1
@@ -99,7 +99,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d14-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}$
-CustomLegend=$250 < Q^2 < 500 \, \mathrm{GeV^2}$
+LegendTitle=$250 < Q^2 < 500 \, \mathrm{GeV^2}$
 XLabel=$E^{jet}_{T,B}$ / GeV
 YLabel=$\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}[pb/GeV]$
 LogY=1
@@ -107,7 +107,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d15-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}$
-CustomLegend=$500 < Q^2 < 1\,000 \, \mathrm{GeV^2}$
+LegendTitle=$500 < Q^2 < 1\,000 \, \mathrm{GeV^2}$
 XLabel=$E^{jet}_{T,B}$ / GeV
 YLabel=$\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}[pb/GeV]$
 LogY=1
@@ -115,7 +115,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d16-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}$
-CustomLegend=$1\,000 < Q^2 < 2\,000 \, \mathrm{GeV^2}$
+LegendTitle=$1\,000 < Q^2 < 2\,000 \, \mathrm{GeV^2}$
 XLabel=$E^{jet}_{T,B}$ / GeV
 YLabel=$\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}[pb/GeV]$
 LogY=1
@@ -123,7 +123,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d17-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}$
-CustomLegend=$2\,000 < Q^2 < 5\,000 \, \mathrm{GeV^2}$
+LegendTitle=$2\,000 < Q^2 < 5\,000 \, \mathrm{GeV^2}$
 XLabel=$E^{jet}_{T,B}$ / GeV
 YLabel=$\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}[pb/GeV]$
 LogY=1
@@ -131,7 +131,7 @@ LogY=1
 
 # BEGIN PLOT /ZEUS_2010_I875006/d18-x01-y01
 Title=Inclusive dijet cross sections $\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}$
-CustomLegend=$5\,000 < Q^2 < 20\,000 \, \mathrm{GeV^2}$
+LegendTitle=$5\,000 < Q^2 < 20\,000 \, \mathrm{GeV^2}$
 XLabel=$E^{jet}_{T,B}$ / GeV
 YLabel=$\mathrm{d} \sigma / \mathrm{d} E^{jet}_{t,B}[pb/GeV]$
 LogY=1

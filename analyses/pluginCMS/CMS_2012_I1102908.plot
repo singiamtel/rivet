@@ -2,8 +2,6 @@
 Title=Inclusive to exclusive dijet production ratio
 XLabel=$\Delta y$
 YLabel=$\frac{\mathrm{d} \sigma^\mathrm{inc}} {\mathrm{d} y}  /  \frac{\mathrm{d} \sigma^\mathrm{exc}}{\mathrm{d} y}$
-LegendXPos=0.7
-LegendYPos=0.2
 FullRange=1
 LogY=0
 # END PLOT
@@ -12,8 +10,6 @@ LogY=0
 Title=Mueller-Navelet to exclusive dijet production ratio
 XLabel=$\Delta y$
 YLabel=$\frac{\mathrm{d} \sigma^\mathrm{MN}}{\mathrm{d} y} / \frac{\mathrm{d} \sigma^\mathrm{exc}}{\mathrm{d} y}$
-LegendXPos=0.7
-LegendYPos=0.2
 FullRange=1
 LogY=0
 # END PLOT

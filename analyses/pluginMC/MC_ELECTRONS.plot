@@ -1,7 +1,5 @@
 # BEGIN PLOT /MC_ELECTRONS/electrons_dR_
 Title=$\Delta R$ separation between electrons
-LegendXPos=0.10
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_ELECTRONS/electrons_dR_12
@@ -21,8 +19,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta{R}(\mathrm{e2,~e3})$ [pb]
 
 # BEGIN PLOT /MC_ELECTRONS/electrons_deta_
 Title=Pseudorapidity separation between electrons
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ELECTRONS/electrons_deta_12
@@ -42,7 +38,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\eta(\mathrm{e2,~e3})$ [pb]
 
 # BEGIN PLOT /MC_ELECTRONS/electrons_dphi_
 Title=Pseudorapidity separation between electrons
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /MC_ELECTRONS/electrons_dphi_12
@@ -64,32 +59,24 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi(\mathrm{e2,~e3})$ [pb]
 Title=Pseudorapidity of leading electron
 XLabel=$\eta(\mathrm{e1})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{e1})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ELECTRONS/electron_eta_2
 Title=Pseudorapidity of second electron
 XLabel=$\eta(\mathrm{e2})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{e2})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ELECTRONS/electron_eta_3
 Title=Pseudorapidity of third electron
 XLabel=$\eta(\mathrm{e3})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{e3})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ELECTRONS/electron_eta_4
 Title=Pseudorapidity of fourth electron
 XLabel=$\eta(\mathrm{e4})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{e4})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ELECTRONS/electron_eta_pmratio_1
@@ -219,8 +206,6 @@ Title=Transverse momentum of leading electron
 XLabel=$p_\perp(\mathrm{e1})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{e1})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -229,8 +214,6 @@ Title=Transverse momentum of second electron
 XLabel=$p_\perp(\mathrm{e2})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{e2})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -239,8 +222,6 @@ Title=Transverse momentum of third electron
 XLabel=$p_\perp(\mathrm{e3})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{e3})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -249,7 +230,5 @@ Title=Transverse momentum of fourth electron
 XLabel=$p_\perp(\mathrm{e4})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{e4})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT

@@ -249,8 +249,6 @@ YLabel=$\mathrm{d}N/\mathrm{d}x_p$
 Title=$R^q_{\pi^+}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to\pi^+)+N(\bar q\to\pi^-)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\pi^+}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -258,8 +256,6 @@ LogY=1
 Title=$R^q_{\pi^-}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to\pi^-)+N(\bar q\to\pi^+)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\pi^-}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -267,8 +263,6 @@ LogY=1
 Title=$D^q_{\pi^-}=(R^q_{\pi^-}-R^q_{\pi^+})/(R^q_{\pi^-}+R^q_{\pi^+})$
 XLabel=$x_p$
 YLabel=$D^q_{\pi^-}$ 
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -277,8 +271,6 @@ LogY=0
 Title=$R^q_{K^{*0}}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to K^{*0})+N(\bar q\to \bar K^{*0})\right]$
 XLabel=$x_p$
 YLabel=$R^q_{K^{*0}}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -286,8 +278,6 @@ LogY=1
 Title=$R^q_{\bar K^{*0}}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to \bar K^{*0})+N(\bar q\to K^{*0})\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\bar K^{*0}}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -295,8 +285,6 @@ LogY=1
 Title=$D^q_{\bar K^{*0}}=(R^q_{\bar K^{*0}}-R^q_{K^{*0}})/(R^q_{\bar K^{*0}}+R^q_{K^{*0}})$
 XLabel=$x_p$
 YLabel=$D^q_{\bar K^{*0}}$ 
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -305,8 +293,6 @@ LogY=0
 Title=$R^q_{K^+}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to K^+)+N(\bar q\to K^-)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{K^+}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -314,8 +300,6 @@ LogY=1
 Title=$R^q_{K^-}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to K^-)+N(\bar q\to K^+)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{K^-}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -323,8 +307,6 @@ LogY=1
 Title=$D^q_{K^-}=(R^q_{K^-}-R^q_{K^+})/(R^q_{K^-}+R^q_{K^+})$
 XLabel=$x_p$
 YLabel=$D^q_{K^-}$ 
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -333,8 +315,6 @@ LogY=0
 Title=$R^q_{p}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to p)+N(\bar q\to \bar p)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{p}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -342,8 +322,6 @@ LogY=1
 Title=$R^q_{\bar p}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to \bar p)+N(\bar q\to p)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\bar p}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -351,8 +329,6 @@ LogY=1
 Title=$D^q_{p}=(R^q_{p}-R^q_{\bar p})/(R^q_{p}+R^q_{\bar p})$
 XLabel=$x_p$
 YLabel=$D^q_{p}$ 
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -361,8 +337,6 @@ LogY=0
 Title=$R^q_{\Lambda^0}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to \Lambda^0)+N(\bar q\to \bar \Lambda^0)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\Lambda^0}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -370,8 +344,6 @@ LogY=1
 Title=$R^q_{\bar \Lambda^0}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to \bar \Lambda^0)+N(\bar q\to \Lambda^0)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\bar \Lambda^0}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -379,8 +351,6 @@ LogY=1
 Title=$D^q_{\Lambda^0}=(R^q_{\Lambda^0}-R^q_{\bar \Lambda^0})/(R^q_{\Lambda^0}+R^q_{\bar \Lambda^0})$
 XLabel=$x_p$
 YLabel=$D^q_{\Lambda^0}$ 
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT

@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2015_I1408516/d..
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendYPos=0.3
-LegendXPos=0.05
 LogX=1
 LogY=1
 YLabel=$1/\sigma$ $\mathrm{d}\sigma/\mathrm{d} p_\mathrm{T}^{\ell\ell}$
@@ -215,7 +213,6 @@ Title=$Z\rightarrow ee$, dressed level
 XLabel=$m_{\ell\ell}$ [GeV]
 YLabel=$\sigma$ [pb]
 LogX=0
-LegendYPos=0.95
 # END PLOT
 
 
@@ -430,7 +427,6 @@ Title=$Z\rightarrow \mu\mu$, dressed level
 XLabel=$m_{\ell\ell}$ [GeV]
 YLabel=$\sigma$ [pb]
 LogX=0
-LegendYPos=0.95
 # END PLOT
 
 

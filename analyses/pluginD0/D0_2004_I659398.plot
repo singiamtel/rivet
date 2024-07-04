@@ -2,7 +2,6 @@
 Title=Jet--jet azimuthal angle, $p_\perp^\mathrm{max} \in [75,100]\mathrm{~GeV}$
 XLabel=$\Delta \phi_\mathrm{dijet}$ / rad
 YLabel=$1/\sigma_\mathrm{dijet} \, \mathrm{d}\sigma_\mathrm{dijet}/\mathrm{d}\Delta\phi_\mathrm{dijet}$
-LegendXPos=0.10
 FullRange=1
 # END PLOT
 
@@ -10,7 +9,6 @@ FullRange=1
 Title=Jet--jet azimuthal angle, $p_\perp^\mathrm{max} \in [100..130]\mathrm{~GeV}$
 XLabel=$\Delta \phi_\mathrm{dijet}$ / rad
 YLabel=$1/\sigma_\mathrm{dijet} \, \mathrm{d}\sigma_\mathrm{dijet}/\mathrm{d}\Delta\phi_\mathrm{dijet}$
-LegendXPos=0.10
 FullRange=1
 # END PLOT
 
@@ -18,7 +16,6 @@ FullRange=1
 Title=Jet--jet azimuthal angle, $p_\perp^\mathrm{max} \in [130..180]\mathrm{~GeV}$
 XLabel=$\Delta \phi_\mathrm{dijet}$ / rad
 YLabel=$1/\sigma_\mathrm{dijet} \, \mathrm{d}\sigma_\mathrm{dijet}/\mathrm{d}\Delta\phi_\mathrm{dijet}$
-LegendXPos=0.10
 FullRange=1
 # END PLOT
 
@@ -26,7 +23,6 @@ FullRange=1
 Title=Jet--jet azimuthal angle, $p_\perp^\mathrm{max} > 180\mathrm{~GeV}$
 XLabel=$\Delta \phi_\mathrm{dijet}$ / rad
 YLabel=$1/\sigma_\mathrm{dijet} \, \mathrm{d}\sigma_\mathrm{dijet}/\mathrm{d}\Delta\phi_\mathrm{dijet}$
-LegendXPos=0.10
 FullRange=1
 # END PLOT
 

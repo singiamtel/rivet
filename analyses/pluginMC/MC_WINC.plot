@@ -34,8 +34,6 @@ Title=W boson $p_\perp$
 XLabel=$p_\perp^{\mathrm{W}}$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp^{\mathrm{W}}$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_WINC/W_pT_peak
@@ -44,16 +42,12 @@ XLabel=$p_\perp^{\mathrm{W}}$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp^{\mathrm{W}}$ [pb/GeV]
 LogY=0
 LogX=0
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_WINC/W_y
 Title=W boson rapidity
 XLabel=$y_{\mathrm{W}}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{\mathrm{W}}$ [pb]
-LegendXPos=0.35
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_WINC/W_phi
@@ -67,8 +61,6 @@ Title=$p_\perp$ of $W^+$ boson
 XLabel=$p_\perp^{W^+}$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp^{W^+}$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_WINC/Wminus_pT$
@@ -76,8 +68,6 @@ Title=$p_\perp$ of $W^-$ boson
 XLabel=$p_\perp^{W^-}$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp^{W^-}$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_WINC/lepton_pT

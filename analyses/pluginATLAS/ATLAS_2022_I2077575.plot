@@ -1,7 +1,6 @@
 # BEGIN PLOT /ATLAS_2022_I2077575/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LogY=1
 RatioPlotYMin=0.75
 RatioPlotYMax=1.25

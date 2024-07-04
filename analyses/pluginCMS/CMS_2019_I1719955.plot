@@ -4,7 +4,6 @@ YLabel=$\frac{1}{\sigma}\frac{d\sigma}{d\Delta\phi_{12}}$ [deg$^{-1}$]
 FullRange=1
 RatioPlotYMin=0.85
 RatioPlotYMax=1.15
-LegendXPos=0.085
 LogY=0
 # END PLOT
 # BEGIN PLOT /CMS_2019_I1719955/d01-x01-y01

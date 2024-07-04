@@ -1,7 +1,4 @@
 BEGIN PLOT /ATLAS_2020_I1803608/d..
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.25
 XTwosidedTicks=1
 YTwosidedTicks=1
 LogY=1

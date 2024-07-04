@@ -18,7 +18,6 @@ Title=Azimuthal angle between the photons
 XLabel=$\Delta\phi_{\gamma\gamma}$ [rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi_{\gamma\gamma}$ [pb/rad]
 RatioPlotMode=deviation
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /D0_2010_I846997/d04-x01-y01
@@ -41,7 +40,6 @@ Title=Azimuthal angle between the photons (30 GeV$<M_{\gamma\gamma}<$50 GeV)
 XLabel=$\Delta\phi_{\gamma\gamma}$ [rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi_{\gamma\gamma}/\mathrm{d}M_{\gamma\gamma}$ [pb/rad/GeV]
 RatioPlotMode=deviation
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /D0_2010_I846997/d07-x01-y01
@@ -64,7 +62,6 @@ Title=Azimuthal angle between the photons (50 GeV$<M_{\gamma\gamma}<$80 GeV)
 XLabel=$\Delta\phi_{\gamma\gamma}$ [rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi_{\gamma\gamma}/\mathrm{d}M_{\gamma\gamma}$ [pb/rad/GeV]
 RatioPlotMode=deviation
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /D0_2010_I846997/d10-x01-y01
@@ -87,7 +84,6 @@ Title=Azimuthal angle between the photons (80 GeV$<M_{\gamma\gamma}<$350 GeV)
 XLabel=$\Delta\phi_{\gamma\gamma}$ [rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi_{\gamma\gamma}/\mathrm{d}M_{\gamma\gamma}$ [pb/rad/GeV]
 RatioPlotMode=deviation
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /D0_2010_I846997/d13-x01-y01

@@ -2,6 +2,5 @@
 Title=$\sigma_\mathrm{inel}$ at $\sqrt{s}=7$ TeV
 XCustomMajorTicks=0.5 $\xi>5x10^{-6}$  1.5 $n_\text{ch}>1$  2.5 $n_\text{ch}>2$  3.5 $n_\text{ch}>3$
 YLabel=$\sigma_\mathrm{inel}$ [mb]
-LegendYPos=0.4
 LogY=0
 # END PLOT

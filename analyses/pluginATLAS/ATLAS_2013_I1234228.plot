@@ -3,7 +3,6 @@ LogY=1
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.6
-LegendAlign=r
 Title=$Z\rightarrow e^+e^-$, dressed level
 XLabel=$m_{ee}$ [GeV]
 YLabel=$\frac{\mathrm{d}\sigma}{\mathrm{d} m_{ee}}$ [pb/GeV]

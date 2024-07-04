@@ -1,7 +1,5 @@
 # BEGIN PLOT /ATLAS_2018_I1711223/d..
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.5
 YTwosidedTicks=1
 # END PLOT
 
@@ -39,7 +37,6 @@ Title=Differential fiducial $W^{\pm}Zjj$ cross section as a function of $m_{jj}$
 YLabel=$\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$m_{jj}$ [GeV]
 LogY=1
-#LegendAlign=r
 # END PLOT #
 
 # BEGIN PLOT /ATLAS_2018_I1711223/d16-x01-y01

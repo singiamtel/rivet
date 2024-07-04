@@ -8,24 +8,18 @@ BEGIN PLOT /CMS_2019_I1753680/d26-x01-y01
 Title=CMS, 13 TeV, $Z \to \mu^+ \mu^-$
 XLabel=$|y^{Z}|$
 YLabel=$d\sigma/d|y^{Z}|$ [pb]
-LegendXPos=0.05
-LegendYPos=0.7
 END PLOT
 
 BEGIN PLOT /CMS_2019_I1753680/d26-x01-y02
 Title=CMS, 13 TeV, $Z \to e^+ e^-$
 XLabel=$|y^{Z}|$
 YLabel=$d\sigma/d|y^{Z}|$ [pb]
-LegendXPos=0.05
-LegendYPos=0.7
 END PLOT
 
 BEGIN PLOT /CMS_2019_I1753680/d26-x01-y03
 Title=CMS, 13 TeV, $Z \to \ell^+ \ell^-$
 XLabel=$|y^{Z}|$
 YLabel=$d\sigma/d|y^{Z}|$ [pb]
-LegendXPos=0.05
-LegendYPos=0.7
 END PLOT
 
 BEGIN PLOT /CMS_2019_I1753680/d27-x01-y01
@@ -136,8 +130,6 @@ BEGIN PLOT /CMS_2019_I1753680/d32-x01-y01
 Title=CMS, 13 TeV, $Z \to \ell^+ \ell^-$
 XLabel=$|y^{Z}|$
 YLabel=$1/\sigma d\sigma/d|y^{Z}|$
-LegendXPos=0.05
-LegendYPos=0.7
 END PLOT
 
 BEGIN PLOT /CMS_2019_I1753680/d33-x01-y01

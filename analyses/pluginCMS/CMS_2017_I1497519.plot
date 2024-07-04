@@ -6,8 +6,6 @@ XTwosidedTicks=1
 YTwosidedTicks=1
 FullRange=1
 ConnectBins=0
-LegendXPos=0.54
-LegendYPos=0.93
 # END PLOT
 
 
@@ -135,8 +133,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}|y(\text{Z})|$}
 XLabel=\large{$|y(\text{Z})|$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -147,8 +143,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}|y(\text{Z})|$}
 XLabel=\large{$|y(\text{Z})|$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -159,8 +153,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}|y(\text{Z})|$}
 XLabel=\large{$|y(\text{Z})|$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -171,8 +163,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{diff}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{diff}(\text{Z},\text{j}_1)}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -183,8 +173,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{diff}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{diff}(\text{Z},\text{j}_1)}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -195,8 +183,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{diff}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{diff}(\text{Z},\text{j}_1)}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -207,8 +193,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{diff}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{diff}(\text{Z},\text{j}_1)}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -219,8 +203,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{diff}}(Z,\text{j}_{2})$}
 XLabel=\large{$y_{\text{diff}(\text{Z},\text{j}_2)}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -231,8 +213,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{diff}}(Z,\text{dijet})$}
 XLabel=\large{$y_{\text{diff}(\text{Z},\text{dijet})}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -243,8 +223,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{diff}}(\text{j}_{1},\text{j}_{2})$}
 XLabel=\large{$y_{\text{diff}}(\text{j}_1,\text{j}_2)$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -255,8 +233,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{sum}}(\text{j}_{1},\text{j}_{2})$}
 XLabel=\large{$y_{\text{sum}}(\text{j}_1,\text{j}_2)$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -267,8 +243,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{sum}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{sum}}(\text{Z},\text{j}_1)$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -279,8 +253,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{sum}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{sum}}(\text{Z},\text{j}_1)$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -291,8 +263,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{sum}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{sum}}(\text{Z},\text{j}_1)$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -303,8 +273,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, \large{$N_{\text{jets}} \ge 2$} 
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{sum}}(Z,\text{j}_{1})$}
 XLabel=\large{$y_{\text{sum}}(\text{Z},\text{j}_1)$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -315,8 +283,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{sum}}(Z,\text{j}_{2})$}
 XLabel=\large{$y_{\text{sum}}(\text{Z},\text{j}_2)$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -327,8 +293,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$1/\sigma \text{d}\sigma/\text{d}y_{\text{sum}}(Z,\text{dijet})$}
 XLabel=\large{$y_{\text{sum}}(\text{Z},\text{dijet})$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -389,8 +353,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -401,8 +363,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -413,8 +373,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -425,8 +383,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{2})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_2}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -437,8 +393,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -449,8 +403,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, N_{\text{jets}}\ge 1$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -461,8 +413,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, N_{\text{jets}}\ge 2$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -473,8 +423,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, N_{\text{jets}}\ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -485,8 +433,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, N_{\text{jets}}\ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{2})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_2}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -497,8 +443,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, N_{\text{jets}}\ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -509,8 +453,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 1, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}, N_{\text{jets}}\ge 1$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -521,8 +463,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 2, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}, N_{\text{jets}}\ge 2$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -533,8 +473,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}, N_{\text{jets}}\ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -545,8 +483,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}, N_{\text{jets}}\ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{2})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_2}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -557,8 +493,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}, N_{\text{jets}}\ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -569,8 +503,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, H_{\text{T}} > 300\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{1})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_1}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -581,8 +513,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, H_{\text{T}} > 300\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{2})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_2}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -593,8 +523,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}, H_{\text{T}} > 300\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(Z,\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{Z},\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -605,8 +533,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{1},\text{j}_{2})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_1,\text{j}_2}$}
-LegendXPos=0.035
-LegendYPos=0.93
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -617,8 +543,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{1},\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_1,\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.2
 
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
@@ -630,8 +554,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{2},\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_2,\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -642,8 +564,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{1},\text{j}_{2})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_1,\text{j}_2}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -654,8 +574,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{1},\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_1,\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -666,8 +584,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 150\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{2},\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_2,\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -678,8 +594,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{1},\text{j}_{2})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_1,\text{j}_2}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -690,8 +604,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{1},\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_1,\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -702,8 +614,6 @@ LogY=0
 Title=CMS, 8$\,$TeV, Z+jets, $N_{\text{jets}} \ge 3, p_{\text{T}}(\text{Z}) > 300\,\text{GeV}$
 YLabel=\large{$\text{d}\sigma/\text{d}\Delta\phi(\text{j}_{2},\text{j}_{3})$ [pb/rad]}
 XLabel=\large{$\Delta\phi_{\text{j}_2,\text{j}_3}$}
-LegendXPos=0.035
-LegendYPos=0.2
 RatioPlotYMin=0.2
 RatioPlotYMax=1.8
 # END PLOT
@@ -794,8 +704,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $|y(\text{Z})| < 0.5$
 YLabel=\large{$\text{d}^2\sigma/2\text{d}y(\text{j})\text{d}y(\text{Z})$ [pb]}
 XLabel=\large{$|y(\text{j})|\cdot\text{sign}(y(\text{Z})\cdot y(\text{j}))$}
-LegendXPos=0.35
-LegendYPos=0.2
 RatioPlotYMin=0.4
 RatioPlotYMax=1.6
 # END PLOT
@@ -806,8 +714,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $0.5 < |y(\text{Z})| < 1$
 YLabel=\large{$\text{d}^2\sigma/2\text{d}y(\text{j})\text{d}y(\text{Z})$ [pb]}
 XLabel=\large{$|y(\text{j})|\cdot\text{sign}(y(\text{Z})\cdot y(\text{j}))$}
-LegendXPos=0.35
-LegendYPos=0.2
 RatioPlotYMin=0.4
 RatioPlotYMax=1.6
 # END PLOT
@@ -818,8 +724,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $1 < |y(\text{Z})| < 1.5$
 YLabel=\large{$\text{d}^2\sigma/2\text{d}y(\text{j})\text{d}y(\text{Z})$ [pb]}
 XLabel=\large{$|y(\text{j})|\cdot\text{sign}(y(\text{Z})\cdot y(\text{j}))$}
-LegendXPos=0.35
-LegendYPos=0.2
 RatioPlotYMin=0.4
 RatioPlotYMax=1.6
 # END PLOT
@@ -830,8 +734,6 @@ LogY=1
 Title=CMS, 8$\,$TeV, Z+jets, $1.5 < |y(\text{Z})| < 2.5$
 YLabel=\large{$\text{d}^2\sigma/2\text{d}y(\text{j})\text{d}y(\text{Z})$ [pb]}
 XLabel=\large{$|y(\text{j})|\cdot\text{sign}(y(\text{Z})\cdot y(\text{j}))$}
-LegendXPos=0.35
-LegendYPos=0.2
 RatioPlotYMin=0.4
 RatioPlotYMax=1.6
 # END PLOT

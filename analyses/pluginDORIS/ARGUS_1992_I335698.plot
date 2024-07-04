@@ -9,5 +9,4 @@ Title=$\pi^-\pi^0$ helicity angle in $\tau\to\pi^-\pi^0\nu_\tau$
 XLabel=$\cos\theta$
 YLabel=$1/\Gamma\text{d}\Gamma/\text{d}\cos\theta$
 LogY=0
-LegendYPos=0.2
 END PLOT

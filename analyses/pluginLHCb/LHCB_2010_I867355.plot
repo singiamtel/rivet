@@ -1,7 +1,5 @@
 # BEGIN PLOT /LHCB_2010_I867355/d0
 XLabel=$\eta(H_b)$
-LegendXPos=0.05
-LegendYPos=0.40
 # END PLOT
 
 

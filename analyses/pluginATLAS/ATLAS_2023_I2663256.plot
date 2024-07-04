@@ -1,5 +1,4 @@
 BEGIN PLOT /ATLAS_2023_I2663256/d..
-LegendAlign=r
 XTwosidedTicks=1
 YTwosidedTicks=1
 LogY=1

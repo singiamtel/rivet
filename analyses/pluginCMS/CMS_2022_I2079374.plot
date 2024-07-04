@@ -144,7 +144,6 @@ BEGIN PLOT /CMS_2022_I2079374/d31-x01-y01
 Title=CMS, 13 TeV, $\mathrm{Z}/\gamma^* \to \ell^+ \ell^-$,  $106<m_{\ell\ell}<170$ GeV
 XLabel=$p_{\mathrm{T}}(\ell\ell)$ [GeV]
 YLabel=Ratio to Z peak region
-LegendXPos=0.05
 LogX=1
 LogY=0
 XMin=0.3
@@ -154,7 +153,6 @@ BEGIN PLOT /CMS_2022_I2079374/d33-x01-y01
 Title=CMS, 13 TeV, $\mathrm{Z}/\gamma^* \to \ell^+ \ell^-$, $170<m_{\ell\ell}<350$ GeV
 XLabel=$p_{\mathrm{T}}(\ell\ell)$ [GeV]
 YLabel=Ratio to Z peak region
-LegendXPos=0.05
 LogX=1
 LogY=0
 XMin=0.3
@@ -164,7 +162,6 @@ BEGIN PLOT /CMS_2022_I2079374/d35-x01-y01
 Title=CMS, 13 TeV, $\mathrm{Z}/\gamma^* \to \ell^+ \ell^-$, $350<m_{\ell\ell}<1000$ GeV
 XLabel=$p_{\mathrm{T}}(\ell\ell)$ [GeV]
 YLabel=Ratio to Z peak region
-LegendXPos=0.05
 LogX=1
 LogY=0
 XMin=0.3
@@ -185,7 +182,6 @@ BEGIN PLOT /CMS_2022_I2079374/d39-x01-y01
 Title=CMS, 13 TeV, $\mathrm{Z}/\gamma^* \to \ell^+ \ell^-$, $106<m_{\ell\ell}<170$ GeV
 XLabel=$p_{\mathrm{T}}(\ell\ell)$ [GeV]
 YLabel=Ratio to Z peak region
-LegendXPos=0.05
 LogX=1
 LogY=0
 XMin=0.5
@@ -195,7 +191,6 @@ BEGIN PLOT /CMS_2022_I2079374/d41-x01-y01
 Title=CMS, 13 TeV, $\mathrm{Z}/\gamma^* \to \ell^+ \ell^-$, $170<m_{\ell\ell}<350$ GeV
 XLabel=$p_{\mathrm{T}}(\ell\ell)$ [GeV]
 YLabel=Ratio to Z peak region
-LegendXPos=0.05
 LogX=1
 LogY=0
 XMin=0.5
@@ -207,7 +202,6 @@ BEGIN PLOT /CMS_2022_I2079374/d43-x01-y01
 Title=CMS, 13 TeV, $\mathrm{Z}/\gamma^* \to \ell^+ \ell^-$, $50<m_{\ell\ell}<76$ GeV
 XLabel=$\phi^*_\eta$
 YLabel=Ratio to Z peak region
-LegendXPos=0.05
 LogX=1
 LogY=0
 XMin=0.001

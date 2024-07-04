@@ -1,13 +1,9 @@
 # BEGIN PLOT /ATLAS_2013_I1217863/d..-x..-y..
 LogY=1
-LegendYPos=0.90
-LegendXPos=0.90
-LegendAlign=r
 RatioPlotYMax=1.5
 RatioPlotYMin=0.5
 XTwosidedTicks=1
 YTwosidedTicks=1
-ErrorBars=1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2013_I1217863/d1[1-2]-x01-y..

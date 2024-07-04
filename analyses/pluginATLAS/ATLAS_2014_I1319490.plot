@@ -2,8 +2,6 @@
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.5
-LegendYPos=0.3
-LegendXPos=0.1
 LogY=1
 # END PLOT
 
@@ -21,8 +19,6 @@ Title=$W \rightarrow \mu \nu$, dressed level
 XMinorTickMarks=0
 XLabel=$N_\mathrm{jets}$
 YLabel=$\sigma_{W + N_\mathrm{jets}}$
-LegendYPos=0.9
-LegendXPos=0.6
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2014_I1319490/d01
@@ -128,7 +124,6 @@ YLabel=$\mathrm{d}\sigma_{W + \geq 5j} / \mathrm{d}H_\mathrm{T}$
 # BEGIN PLOT /ATLAS_2014_I1319490/d23
 XLabel=$\Delta\phi_{j1,j2}$
 YLabel=$\mathrm{d}\sigma_{W + \geq 2j} / \mathrm{d}\Delta\phi_{j1,j2}$
-LegendYPos=0.9
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2014_I1319490/d24

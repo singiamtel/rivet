@@ -5,17 +5,14 @@ LogY=0
 
 # BEGIN PLOT /ATLAS_2012_I1125575/d01-x..-y..
 YLabel=$\langle N_\mathrm{ch} \rangle / \Delta\eta \Delta\phi$
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1125575/d02-x..-y..
 YLabel=$\langle p_\perp \rangle$ [GeV]
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1125575/d03-x..-y..
 YLabel=$\langle \sum p_\perp \rangle / \Delta\eta \Delta\phi$
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1125575/d01-x01-y01

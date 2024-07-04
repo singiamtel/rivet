@@ -5,7 +5,6 @@ XTwosidedTicks=1
 YTwosidedTicks=1
 RatioPlotYMin=0.9
 RatioPlotYMax=1.1
-Legend=1
 Title=CMS, 8 TeV, $\mathrm{t\bar{t}}$ dilepton channel, parton-level
 # END PLOT
 

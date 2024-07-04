@@ -4,7 +4,6 @@ XLabel=$\Delta R_{BB}$
 YLabel=$d\sigma/0.7$ (pb)
 LogX=0
 LogY=0
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /CMS_2013_I1256943/d02-x01-y01
@@ -21,7 +20,6 @@ XLabel=$min \Delta R_{ZB}$
 YLabel=$d\sigma/0.84$ (pb)
 LogX=0
 LogY=1
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /CMS_2013_I1256943/d04-x01-y01
@@ -54,7 +52,6 @@ XLabel=$min \Delta R_{ZB}$
 YLabel=$d\sigma/1$ (pb)
 LogX=0
 LogY=1
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /CMS_2013_I1256943/d08-x01-y01

@@ -2,8 +2,6 @@
 XLabel=$\eta$
 LogY=0
 RatioPlot=1
-LegendXPos=0.05
-LegendYPos=0.97
 # END PLOT
 
 

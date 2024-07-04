@@ -4,15 +4,10 @@ XTwosidedTicks=1
 YTwosidedTicks=1
 XLabel=Jet $p_\mathrm{T}$ [GeV]
 YLabel=$\langle n_\mathrm{charged}\rangle$
-LegendAlign=r
-LegendYPos=0.30
-LegendXPos=0.95
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1419070/d0[7-9]
 YLabel=$\langle n^\mathrm{central}_\mathrm{charged} - n^\mathrm{forward}_\mathrm{charged}\rangle$
-LegendAlign=l
-LegendXPos=0.2
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1419070/d1[0-2]

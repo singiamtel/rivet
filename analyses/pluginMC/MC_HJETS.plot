@@ -12,8 +12,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta{\eta}(\mathrm{h,~1st~jet})$ [pb]
 
 # BEGIN PLOT /MC_HJETS/jets_dR_
 Title=$\Delta R$ separation between jets
-LegendXPos=0.10
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_HJETS/jets_dR_12
@@ -33,8 +31,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta{R}(\mathrm{jet~2,~jet~3})$ [pb]
 
 # BEGIN PLOT /MC_HJETS/jets_deta_
 Title=Pseudorapidity separation between jets
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_HJETS/jets_deta_12
@@ -54,7 +50,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\eta(\mathrm{jet~2,~jet~3})$ [pb]
 
 # BEGIN PLOT /MC_HJETS/jets_dphi_
 Title=Pseudorapidity separation between jets
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /MC_HJETS/jets_dphi_12
@@ -76,32 +71,24 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi(\mathrm{jet~2,~jet~3})$ [pb]
 Title=Pseudorapidity of leading jet
 XLabel=$\eta(\mathrm{jet~1})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~1})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_HJETS/jet_eta_2
 Title=Pseudorapidity of second jet
 XLabel=$\eta(\mathrm{jet~2})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~2})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_HJETS/jet_eta_3
 Title=Pseudorapidity of third jet
 XLabel=$\eta(\mathrm{jet~3})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~3})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_HJETS/jet_eta_4
 Title=Pseudorapidity of fourth jet
 XLabel=$\eta(\mathrm{jet~4})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~4})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_HJETS/jet_eta_pmratio_1
@@ -230,8 +217,6 @@ Title=Transverse momentum of leading jet
 XLabel=$p_\perp(\mathrm{jet~1})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~1})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -240,8 +225,6 @@ Title=Transverse momentum of second jet
 XLabel=$p_\perp(\mathrm{jet~2})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~2})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -250,8 +233,6 @@ Title=Transverse momentum of third jet
 XLabel=$p_\perp(\mathrm{jet~3})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~3})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -260,8 +241,6 @@ Title=Transverse momentum of fourth jet
 XLabel=$p_\perp(\mathrm{jet~4})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~4})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -276,5 +255,4 @@ LogX=1
 Title=Dijet invariant mass spectrum
 XLabel=$m_{jj}$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}m_{jj}$ [pb/GeV]
-LegendAlign=r
 # END PLOT

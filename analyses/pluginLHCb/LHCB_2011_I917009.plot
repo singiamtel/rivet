@@ -3,7 +3,6 @@ Title=$\bar{\Lambda}/\Lambda$ ratio at $\sqrt{s}=0.9$ TeV ($0.25 < p_\perp < 0.6
 XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
-ErrorBars=1
 RatioPlot=0
 # END PLOT
 
@@ -12,8 +11,6 @@ Title=$\bar{\Lambda}/\Lambda$ ratio at $\sqrt{s}=0.9$ TeV ($0.65 < p_\perp < 1.0
 XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.4
 RatioPlot=0
 # END PLOT
 
@@ -22,8 +19,6 @@ Title=$\bar{\Lambda}/\Lambda$ ratio at $\sqrt{s}=0.9$ TeV ($1.00 < p_\perp < 2.5
 XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.35
 RatioPlot=0
 # END PLOT
 
@@ -32,8 +27,6 @@ Title=$\bar{\Lambda}/K_{s}^{0}$ ratio at $\sqrt{s}=0.9$ TeV ($0.25 < p_\perp < 0
 XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.35
 RatioPlot=0
 # END PLOT
 
@@ -42,8 +35,6 @@ Title=$\bar{\Lambda}/K_{s}^{0}$ ratio at $\sqrt{s}=0.9$ TeV ($0.65 < p_\perp < 1
 XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.33
 RatioPlot=0
 # END PLOT
 
@@ -62,8 +53,6 @@ Title=$\bar{\Lambda}/\Lambda$ ratio at $\sqrt{s}=0.9$ TeV ($0.25 < p_\perp < 2.5
 XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.55
 RatioPlot=0
 # END PLOT
 
@@ -72,8 +61,6 @@ Title=$\bar{\Lambda}/K_{s}^{0}$ ratio at $\sqrt{s}=0.9$ TeV ($0.25 < p_\perp < 2
 XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.35
 RatioPlot=0
 # END PLOT
 
@@ -82,7 +69,6 @@ Title=$\bar{\Lambda}/\Lambda$ ratio at $\sqrt{s}=0.9$ TeV ($2.0 < y < 4.0$)
 XLabel=$p_\perp$ [GeV/$c$]
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
-LegendYPos=0.48
 RatioPlot=0
 # END PLOT
 
@@ -91,7 +77,6 @@ Title=$\bar{\Lambda}/K_{s}^{0}$ ratio at $\sqrt{s}=0.9$ TeV ($2.0 < y < 4.0$)
 XLabel=$p_\perp$ [GeV/$c$]
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
-LegendYPos=0.3
 RatioPlot=0
 # END PLOT
 
@@ -100,7 +85,6 @@ Title=$\bar{\Lambda}/\Lambda$ ratio at $\sqrt{s}=0.9$ TeV ($0.25 < p_\perp < 2.5
 XLabel=Rapidity loss ($\Delta y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
-LegendYPos=0.5
 RatioPlot=0
 # END PLOT
 
@@ -109,7 +93,6 @@ Title=$\bar{\Lambda}/K_{s}^{0}$ ratio at $\sqrt{s}=0.9$ TeV ($0.25 < p_\perp < 2
 XLabel=Rapidity loss ($\Delta y$)
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
-LegendYPos=0.3
 RatioPlot=0
 # END PLOT
 
@@ -130,8 +113,6 @@ XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
 YMin=0.65
-LegendYPos=0.3
-LegendXPos=0.1
 RatioPlot=0
 # END PLOT
 
@@ -141,8 +122,6 @@ XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
 YMin=0.65
-LegendYPos=0.3
-LegendXPos=0.1
 RatioPlot=0
 # END PLOT
 
@@ -152,7 +131,6 @@ XLabel=Rapidity ($y$)
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
 YMin=0.1
-LegendXPos=0.4
 RatioPlot=0
 # END PLOT
 
@@ -212,7 +190,6 @@ Title=$\bar{\Lambda}/K_{s}^{0}$ ratio at $\sqrt{s}=7$ TeV ($2.0 < y < 4.5$)
 XLabel=$p_\perp$ [GeV/$c$]
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
-LegendYPos=0.33
 RatioPlot=0
 # END PLOT
 
@@ -222,7 +199,6 @@ XLabel=Rapidity loss ($\Delta y$)
 YLabel=$\bar{\Lambda}/\Lambda$
 LogY=0
 YMin=0.25
-LegendYPos=0.65
 RatioPlot=0
 # END PLOT
 
@@ -231,6 +207,5 @@ Title=$\bar{\Lambda}/K_{s}^{0}$ ratio at $\sqrt{s}=7$ TeV ($0.15 < p_\perp < 2.5
 XLabel=Rapidity loss ($\Delta y$)
 YLabel=$\bar{\Lambda}/K_{s}^{0}$
 LogY=0
-LegendYPos=0.33
 RatioPlot=0
 # END PLOT

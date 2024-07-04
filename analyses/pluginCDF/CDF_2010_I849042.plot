@@ -11,42 +11,32 @@ YLabel=$\langle N_\mathrm{ch} \rangle / \mathrm{d}\eta\,\mathrm{d}\phi$
 
 # BEGIN PLOT /CDF_2010_I849042/d01-x01-y01
 Title=Toward region charged particle density
-LegendXPos=0.35
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d01-x01-y02
 Title=Transverse region charged particle density
-LegendXPos=0.35
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d01-x01-y03
 Title=Away region charged particle density
-LegendXPos=0.10
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d02-x01-y01
 Title=TransMAX region charged particle density
-LegendXPos=0.35
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d02-x01-y02
 Title=TransMIN region charged particle density
-LegendXPos=0.10
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d02-x01-y03
 Title=TransDIF region charged particle density
-LegendXPos=0.10
 # END PLOT
 
 
 
 # BEGIN PLOT /CDF_2010_I849042/d0[34]
 YLabel=$\langle \sum p_T^\mathrm{track} \rangle / \mathrm{d}\eta\,\mathrm{d}\phi$ / GeV
-LegendXPos=0.10
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d03-x01-y01
@@ -77,7 +67,6 @@ Title=TransDIF region charged $p_\perp^\mathrm{sum}$ density
 
 # BEGIN PLOT /CDF_2010_I849042/d05
 YLabel=$\langle p_T^\mathrm{track} \rangle$ / GeV
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d05-x01-y01
@@ -92,7 +81,6 @@ Title=Transverse region charged $p_\perp$ average
 
 # BEGIN PLOT /CDF_2010_I849042/d06
 YLabel=max $p_T^\mathrm{track}$ / GeV
-LegendXPos=0.10
 # END PLOT
 
 # BEGIN PLOT /CDF_2010_I849042/d06-x01-y01
@@ -107,7 +95,6 @@ Title=Transverse region charged $p_\perp$ maximum
 
 # BEGIN PLOT /CDF_2010_I849042/d0[789]
 XLabel=$N_\mathrm{ch}$
-LegendXPos=0.10
 ShowZero=0
 YLabel=$\langle p_T \rangle$ / GeV
 # END PLOT
@@ -130,7 +117,6 @@ Title=Average charged $p_\perp$ vs charged multiplicity, $p_\perp(Z) < 10\,\math
 
 # BEGIN PLOT /CDF_2010_I849042/d1[01]
 YLabel=$\langle N_\mathrm{ch} \rangle / \mathrm{d}\eta\,\mathrm{d}\phi$
-LegendYPos=0.5
 XLabel=$p_T(\mathrm{leading~jet})$ / GeV
 LogY=0
 # END PLOT
@@ -175,7 +161,6 @@ LogY=0
 
 # BEGIN PLOT /CDF_2010_I849042/d1[23]
 YLabel=$\langle \sum p_T^\mathrm{track} \rangle / \mathrm{d}\eta\,\mathrm{d}\phi$ / GeV
-LegendXPos=0.10
 XLabel=$p_T(\mathrm{leading~jet})$ / GeV
 LogY=0
 # END PLOT
@@ -219,7 +204,6 @@ LogY=0
 
 
 # BEGIN PLOT /CDF_2010_I849042/d1[45]
-LegendXPos=0.10
 ShowZero=0
 YLabel=$\langle p_T^\mathrm{track} \rangle$ / GeV
 XLabel=$p_T(\mathrm{leading~jet})$ / GeV

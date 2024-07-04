@@ -3,8 +3,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Leading hard jet $\eta$ in pp$\rightarrow$ 4j in 
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 LogY=1
 # END PLOT
 
@@ -22,7 +20,6 @@ XLabel=$\Delta$S
 YLabel=$1/\sigma$ $d\sigma/d\Delta S\; [1/rad]$
 FullRange=1
 LogY=1
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /CMS_2013_I1273574/d10-x01-y01
@@ -30,7 +27,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Normalized $\Delta\phi^{soft}$ in pp$\rightarrow$
 XLabel=$\Delta\phi^{soft}$
 YLabel=$1/\sigma$ $d\sigma/d\Delta\phi^{soft}\; [1/rad]$
 FullRange=1
-LegendXPos=0.1
 LogY=1
 # END PLOT
 
@@ -39,7 +35,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Normalized $\Delta^{rel}_{soft}p_{T}$ in pp$\righ
 XLabel=$\Delta^{rel}_{soft}p_{T}$
 YLabel=$1/\sigma$ $d\sigma/d\Delta^{rel}_{soft}p_{T}\;$
 FullRange=1
-LegendXPos=0.1
 LogY=1
 # END PLOT
 
@@ -48,8 +43,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Leading soft jet $\eta$ in pp$\rightarrow$ 4j in 
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 LogY=1
 # END PLOT
 
@@ -66,8 +59,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Subleading soft jet $\eta$ in pp$\rightarrow$ 4j 
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 LogY=1
 # END PLOT 
 
@@ -84,8 +75,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Subleading hard jet $\eta$ in pp$\rightarrow$ 4j 
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 LogY=1
 # END PLOT
 

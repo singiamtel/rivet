@@ -4,8 +4,6 @@ XLabel=$Q$ [GeV]
 YLabel=$\Delta (Q)$
 LogY=0
 YMin=-0.002
-LegendXPos=0.98
-LegendAlign=r
 RatioPlotMode=deviation
 END PLOT
 
@@ -14,9 +12,6 @@ Title=
 XLabel=$Q$ [GeV]
 YLabel=$\Delta_\mathrm{3h} (Q)$
 LogY=0
-LegendXPos=0.98
-LegendYPos=0.3
-LegendAlign=r
 RatioPlotMode=deviation
 END PLOT
 

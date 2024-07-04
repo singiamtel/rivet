@@ -3,7 +3,6 @@ XTwosidedTicks=1
 YTwosidedTicks=1
 LogY=1
 LogX=1
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1772071/d01
@@ -39,8 +38,6 @@ LogX=0
 Title=Inclusive region
 XLabel=$\Delta \phi^{\gamma-\text{jet}}$ [rad]
 YLabel=$\text{d}\sigma / \text{d} \Delta \phi^{\gamma-\text{jet}}$ [pb/rad]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1772071/d06
@@ -56,8 +53,6 @@ LogX=0
 Title=Inclusive region
 XLabel=$\Delta \phi^{\text{jet}-\text{jet}}$ [rad]
 YLabel=$\text{d}\sigma / \text{d} \Delta \phi^{\text{jet}-\text{jet}}$ [pb /rad]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1772071/d08
@@ -97,8 +92,6 @@ LogX=0
 Title=Fragmentation-enriched region, $E_\text{T}^\gamma<p_\text{T}^\text{jet2}$
 XLabel=$ |\Delta y^{\gamma-\text{jet}}| $
 YLabel=$\text{d}\sigma / \text{d} |\Delta y^{\gamma-\text{jet}}|$ [pb ]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1772071/d14
@@ -107,8 +100,6 @@ LogX=0
 Title=Fragmentation-enriched region, $E_\text{T}^\gamma<p_\text{T}^\text{jet2}$
 XLabel=$\Delta \phi^{\gamma-\text{jet}}$ [rad]
 YLabel=$\text{d}\sigma / \text{d} \Delta \phi^{\gamma-\text{jet}}$ [pb/rad]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1772071/d15
@@ -116,8 +107,6 @@ LogX=0
 Title=Fragmentation-enriched region, $E_\text{T}^\gamma<p_\text{T}^\text{jet2}$
 XLabel=$|\Delta y^{\text{jet}-\text{jet}}|$
 YLabel=$\text{d}\sigma / \text{d} |\Delta y^{\text{jet}-\text{jet}}|$ [pb ]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 
@@ -128,8 +117,6 @@ LogX=0
 Title=Fragmentation-enriched region, $E_\text{T}^\gamma<p_\text{T}^\text{jet2}$
 XLabel=$\Delta \phi^{\text{jet}-\text{jet}}$ [rad]
 YLabel=$\text{d}\sigma / \text{d} \Delta \phi^{\text{jet}-\text{jet}}$ [pb /rad]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1772071/d17
@@ -178,8 +165,6 @@ LogX=0
 Title=Direct-enriched region, $E_\text{T}^\gamma>p_\text{T}^\text{jet1}$
 XLabel=$\Delta \phi^{\gamma-\text{jet}}$ [rad]
 YLabel=$\text{d}\sigma / \text{d} \Delta \phi^{\gamma-\text{jet}}$ [pb/rad]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1772071/d24
@@ -187,8 +172,6 @@ LogX=0
 Title=Direct-enriched region, $E_\text{T}^\gamma>p_\text{T}^\text{jet1}$
 XLabel=$|\Delta y^{\text{jet}-\text{jet}}|$
 YLabel=$\text{d}\sigma / \text{d} |\Delta y^{\text{jet}-\text{jet}}|$ [pb ]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 
@@ -198,8 +181,6 @@ LogX=0
 Title=Direct-enriched region, $E_\text{T}^\gamma>p_\text{T}^\text{jet1}$
 XLabel=$\Delta \phi^{\text{jet}-\text{jet}}$ [rad]
 YLabel=$\text{d}\sigma / \text{d} \Delta \phi^{\text{jet}-\text{jet}}$ [pb /rad]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 

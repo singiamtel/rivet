@@ -3,7 +3,6 @@ Title=Transverse cone $\langle \langle p_\perp^\mathrm{max} \rangle \rangle$ vs.
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$\langle p_\perp^\mathrm{max} \rangle$ / GeV
 LogY=0
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /CDF_2004_I647490/d01-x01-y02
@@ -11,7 +10,6 @@ Title=Transverse cone $\langle \langle p_\perp^\mathrm{min} \rangle \rangle$ vs.
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$\langle p_\perp^\mathrm{min} \rangle$ / GeV
 LogY=0
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /CDF_2004_I647490/d02-x01-y01
@@ -19,7 +17,6 @@ Title=Transverse cone $\langle p_\perp^\mathrm{max} \rangle$ vs. $E_\perp^\mathr
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$\langle p_\perp^\mathrm{max} \rangle$ / GeV
 LogY=0
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /CDF_2004_I647490/d02-x01-y02
@@ -27,7 +24,6 @@ Title=Transverse cone $\langle p_\perp^\mathrm{min} \rangle$ vs. $E_\perp^\mathr
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$\langle p_\perp^\mathrm{min} \rangle$ / GeV
 LogY=0
-LegendXPos=0.35
 # END PLOT
 
 # BEGIN PLOT /CDF_2004_I647490/d02-x01-y03
@@ -35,7 +31,6 @@ Title=Transverse cone $\langle p_\perp^\mathrm{diff} \rangle$ vs. $E_\perp^\math
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$\langle p_\perp^\mathrm{diff} \rangle$ / GeV
 LogY=0
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /CDF_2004_I647490/d03-x01-y01
@@ -78,7 +73,6 @@ Title=Transverse cone $N_\mathrm{max}$ vs. $E_\perp^\mathrm{lead}$ at $\sqrt{s}$
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$N_\mathrm{max}$
 LogY=0
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /CDF_2004_I647490/d04-x01-y02
@@ -86,7 +80,6 @@ Title=Transverse cone $N_\mathrm{min}$ vs. $E_\perp^\mathrm{lead}$ at $\sqrt{s}$
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$N_\mathrm{min}$
 LogY=0
-LegendXPos=0.25
 # END PLOT
 
 # BEGIN PLOT /CDF_2004_I647490/d05-x01-y01
@@ -110,7 +103,6 @@ ErrorBars=0
 Title=Swiss Cheese $p_\perp^\mathrm{sum}$ vs. $E_\perp^\mathrm{lead}$ (2 jets removed) at $\sqrt{s}$ = 1800 GeV
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV (2 jets removed)
-LegendXPos=0.10
 LogY=0
 # END PLOT
 
@@ -118,7 +110,6 @@ LogY=0
 Title=Swiss Cheese $p_\perp^\mathrm{sum}$ vs. $E_\perp^\mathrm{lead}$ (3 jets removed) at $\sqrt{s}$ = 1800 GeV
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV (3 jets removed)
-LegendYPos=0.3
 LogY=0
 # END PLOT
 
@@ -126,7 +117,6 @@ LogY=0
 Title=Transverse cone $\langle p_\perp^\mathrm{max} \rangle$ vs. $E_\perp^\mathrm{lead}$ at $\sqrt{s}$ = 630 GeV
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$\langle p_\perp^\mathrm{max} \rangle$ / GeV
-LegendYPos=0.5
 LogY=0
 # END PLOT
 
@@ -141,7 +131,6 @@ LogY=0
 Title=Transverse cone $\langle p_\perp^\mathrm{diff} \rangle$ vs. $E_\perp^\mathrm{lead}$ at $\sqrt{s}$ = 630 GeV
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$\langle p_\perp^\mathrm{diff} \rangle$ / GeV
-LegendYPos=0.45
 LogY=0
 # END PLOT
 
@@ -149,7 +138,6 @@ LogY=0
 Title=Swiss Cheese $p_\perp^\mathrm{sum}$ vs. $E_\perp^\mathrm{lead}$ (2 jets removed) at $\sqrt{s}$ = 630 GeV
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV (2 jets removed)
-LegendYPos=0.3
 LogY=0
 # END PLOT
 
@@ -157,7 +145,6 @@ LogY=0
 Title=Swiss Cheese $p_\perp^\mathrm{sum}$ vs. $E_\perp^\mathrm{lead}$ (3 jets removed) at $\sqrt{s}$ = 630 GeV
 XLabel=$E_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV (3 jets removed)
-LegendYPos=0.3
 LogY=0
 # END PLOT
 

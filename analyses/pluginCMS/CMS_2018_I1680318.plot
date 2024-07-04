@@ -1,8 +1,6 @@
 ## General Settings ##
 #
 # BEGIN PLOT /CMS_2018_I1680318/*
-##LegendYPos=0.4
-##LegendXPos=0.5
 RatioPlotYMin=0.6
 RatioPlotYMax=1.4
 # END PLOT
