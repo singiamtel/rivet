@@ -1,6 +1,5 @@
 # BEGIN PLOT /CMS_2013_I1261026/d0[1234567]-.*
 XLabel=$N_\mathrm{ch}$
-LegendYPos=0.4
 LogY=0
 # END PLOT
 
@@ -36,8 +35,6 @@ Title=Mean $p_\mathrm{T}$, charged particle jets, $p^\mathrm{ch.jet}_\mathrm{T} 
 
 # BEGIN PLOT /CMS_2013_I1261026/d0[67]-.*
 YLabel=Charged jet rate
-LegendYPos=0.8
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /CMS_2013_I1261026/d06-x01-y01

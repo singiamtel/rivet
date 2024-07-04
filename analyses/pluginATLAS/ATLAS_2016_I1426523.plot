@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2016_I1426523/d..-x..-y..
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d01
@@ -103,9 +101,6 @@ XLabel=$p_\mathrm{T}^{\mathrm{Z}}$ [GeV]
 LogY=0
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d13-x01-y01
@@ -114,9 +109,6 @@ YLabel=$\Delta\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$p_\mathrm{T}^{\mathrm{Z}}$ [GeV]
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d14-x01-y01
@@ -125,9 +117,6 @@ YLabel=$\Delta\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$p_\mathrm{T}^{\mathrm{Z}}$ [GeV]
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d15-x01-y01
@@ -136,9 +125,6 @@ YLabel=$\Delta\sigma^{\mathrm{fid.}}/\Delta p_\mathrm{T}^{\mathrm{W}}$ [fb]
 XLabel=$p_\mathrm{T}^{\mathrm{W}}$ [GeV]
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d16-x01-y01
@@ -147,9 +133,6 @@ YLabel=$\Delta\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$p_\mathrm{T}^{\mathrm{W}}$ [GeV]
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d17-x01-y01
@@ -158,9 +141,6 @@ YLabel=$\Delta\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$p_\mathrm{T}^{\mathrm{W}}$ [GeV]
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d18-x01-y01
@@ -209,27 +189,18 @@ XCustomMajorTicks=0 0 20 20 40 40 60 60 80 80 100 100 130 $\infty$
 Title=Differential fiducial $W^{\pm}Z$ cross section as a function of $|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
 YLabel=$\Delta\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d25-x01-y01
 Title=Differential fiducial $W^{+}Z$ cross section as a function of $|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
 YLabel=$\Delta\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d26-x01-y01
 Title=Differential fiducial $W^{-}Z$ cross section as a function of $|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
 YLabel=$\Delta\sigma^{\mathrm{fid.}}$ [fb]
 XLabel=$|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d27-x01-y01
@@ -249,9 +220,6 @@ XLabel=$m_{jj}$ [GeV]
 LogY=1
 XCustomMajorTicks=0 0 200 200 400 400 600 600 800 800 1000 1000 1100 $\infty$
 XCustomMinorTicks=50 100 150 250 300 350 450 500 550 650 700 750 850 900 950 1050
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d29-x01-y01
@@ -269,9 +237,6 @@ YLabel=$1/\sigma^{\mathrm{fid.}} \cdot \Delta\sigma^{\mathrm{fid.}}$
 XLabel=$p_\mathrm{T}^{\mathrm{Z}}$ [GeV]
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d31-x01-y01
@@ -280,9 +245,6 @@ YLabel=$1/\sigma^{\mathrm{fid.}} \cdot \Delta\sigma^{\mathrm{fid.}}$
 XLabel=$p_\mathrm{T}^{\mathrm{Z}}$ [GeV]
 XCustomMajorTicks=0 0 50 50 100 100 150 150 200 200 250 250 290 $\infty$
 XCustomMinorTicks=10 20 30 40 60 70 80 90 110 120 130 140 160 170 180 190 210 220 230 240 260 270 280
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d32-x01-y01
@@ -333,27 +295,18 @@ XCustomMajorTicks=0 0 20 20 40 40 60 60 80 80 100 100 130 $\infty$
 Title=Normalised differential $W^{\pm}Z$ cross section as a function of $|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
 YLabel=$1/\sigma^{\mathrm{fid.}} \cdot \Delta\sigma^{\mathrm{fid.}}$
 XLabel=$|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d39-x01-y01
 Title=Normalised differential $W^{-}Z$ cross section as a function of $|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
 YLabel=$1/\sigma^{\mathrm{fid.}} \cdot \Delta\sigma^{\mathrm{fid.}}$ 
 XLabel=$|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d40-x01-y01
 Title=Normalised differential $W^{+}Z$ cross section as a function of $|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
 YLabel=$1/\sigma^{\mathrm{fid.}} \cdot \Delta\sigma^{\mathrm{fid.}}$ 
 XLabel=$|y_{\mathrm{Z}}-y_{\ell,\mathrm{W}}|$
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d41-x01-y01
@@ -373,9 +326,6 @@ XLabel=$m_{jj}$ [GeV]
 LogY=1
 XCustomMajorTicks=0 0 200 200 400 400 600 600 800 800 1000 1000 1100 $\infty$
 XCustomMinorTicks=50 100 150 250 300 350 450 500 550 650 700 750 850 900 950 1050
-LegendXPos=0.95
-LegendYPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426523/d43-x01-y01

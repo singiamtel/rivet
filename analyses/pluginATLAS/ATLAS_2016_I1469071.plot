@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2016_I1469071/d..-x..-y..
 LogY=0
 RatioPlot=1
-LegendXPos=0.05
-LegendYPos=0.5
 YTwosidedTicks=1
 # END PLOT
 
@@ -32,7 +30,7 @@ Title=Fiducial cross section in $W^{\pm}Z\rightarrow \mu\nu \mu\mu$ channel
 
 # BEGIN PLOT /ATLAS_2016_I1469071/d01-x01-y05
 Title=Combined fiducial cross section in a single $W^{\pm}Z\rightarrow \ell\nu\ell\ell$ channel
-#CustomLegend=\text{bf}{ATLAS} Internal
+#LegendTitle=\text{bf}{ATLAS} Internal
 # END PLOT #
 
 # BEGIN PLOT /ATLAS_2016_I1469071/d02

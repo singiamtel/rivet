@@ -2,7 +2,6 @@ BEGIN PLOT /MC_DILEPTON/com_costheta.*
 Title=Angle between leptons and boost in boson frame
 XLabel=$\cos\theta^*$
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}\cos\theta^*$
-LegendYPos=0.4
 END PLOT
 
 BEGIN PLOT /MC_DILEPTON/com_costheta_l1
@@ -11,7 +10,6 @@ END PLOT
 
 BEGIN PLOT /MC_DILEPTON/com_costheta_l2
 Title=Angle between subleading lepton and boost in boson frame
-LegendYPos=0.9
 END PLOT
 
 
@@ -19,7 +17,6 @@ BEGIN PLOT /MC_DILEPTON/com_ppara.*
 Title=Lepton momenta along boost in boson frame
 XLabel=$p^*_\parallel$ [GeV]
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}p^*_\parallel$ [1/GeV]
-LegendYPos=0.4
 END PLOT
 
 BEGIN PLOT /MC_DILEPTON/com_ppara_l1
@@ -28,7 +25,6 @@ END PLOT
 
 BEGIN PLOT /MC_DILEPTON/com_ppara_l2
 Title=Subleading lepton momentum along boost in boson frame
-LegendYPos=0.9
 END PLOT
 
 
@@ -56,7 +52,6 @@ END PLOT
 BEGIN PLOT /MC_DILEPTON/lep._costheta
 XLabel=$\cos\theta$
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}\cos\theta$
-LegendXPos=0.4
 END PLOT
 
 BEGIN PLOT /MC_DILEPTON/lep1_costheta
@@ -71,7 +66,6 @@ END PLOT
 BEGIN PLOT /MC_DILEPTON/lep._ppara
 XLabel=$p_\parallel$ [GeV]
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}p_\parallel$ [1/GeV]
-LegendYPos=0.4
 END PLOT
 
 BEGIN PLOT /MC_DILEPTON/lep1_ppara

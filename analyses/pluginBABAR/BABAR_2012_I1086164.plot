@@ -4,5 +4,4 @@ XLabel=$\sqrt{s}$/MeV
 YLabel=$\sigma(e^+e^-\to 2\pi^+2\pi^-)$/nb
 LogY=0
 ConnectGaps=1
-LegendXPos=0.8
 END PLOT

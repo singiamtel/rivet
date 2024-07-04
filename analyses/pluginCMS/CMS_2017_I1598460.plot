@@ -7,7 +7,6 @@ RatioPlot=1
 RatioPlotMode=datamc
 RatioPlotYMin=0.4
 RatioPlotYMax=1.6
-LegendXPos = 0.5
 END PLOT
 
 BEGIN PLOT /CMS_2017_I1598460/d01-x01-y01

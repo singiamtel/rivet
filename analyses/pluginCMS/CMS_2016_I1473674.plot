@@ -4,7 +4,6 @@ LogX=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 #NormalizeToIntegral=1
-LegendXPos=0.4
 Title=\textbf{CMS} \hspace{10em} $19.7\,\mathrm{fb}^{-\mathrm{1}}$ (8 TeV)
 # END PLOT
 

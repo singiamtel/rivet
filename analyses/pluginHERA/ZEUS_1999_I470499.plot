@@ -5,5 +5,4 @@ LogY=0
 Title=ZEUS 1995
 XLabel=$x$
 YLabel=$d\sigma/d x $ [nb]
-LegendXPos=0.4
 END PLOT

@@ -6,6 +6,4 @@ LogY=1
 Title=ZEUS 1995
 XLabel=$E^2/Q^2$
 YLabel=$dsigma/d(E^2/Q^2)nb$
-LegendXPos=0.2
-LegendYPos=0.7
 END PLOT

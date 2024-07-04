@@ -1,7 +1,6 @@
 # BEGIN PLOT /CDF_2012_NOTE10874/d
 XLabel=$p_\perp^\mathrm{max}$ [GeV/c]
 LogY=0
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /CDF_2012_NOTE10874/d01
@@ -24,25 +23,25 @@ YLabel=Ratio
 # END PLOT
 
 # BEGIN PLOT /CDF_2012_NOTE10874/d0.-x0.-y01
-CustomLegend=300 GeV
+LegendTitle=300 GeV
 # END PLOT
 
 # BEGIN PLOT /CDF_2012_NOTE10874/d0.-x0.-y02
-CustomLegend=900 GeV
+LegendTitle=900 GeV
 # END PLOT
 
 # BEGIN PLOT /CDF_2012_NOTE10874/d0.-x0.-y03
-CustomLegend=1960 GeV
+LegendTitle=1960 GeV
 # END PLOT
 
 # BEGIN PLOT /CDF_2012_NOTE10874/d0.-x0.-y04
-CustomLegend=Energy Ratio 1960/300 
+LegendTitle=Energy Ratio 1960/300 
 # END PLOT
 
 # BEGIN PLOT /CDF_2012_NOTE10874/d0.-x0.-y05
-CustomLegend=Energy Ratio 900/300 
+LegendTitle=Energy Ratio 900/300 
 # END PLOT
 
 # BEGIN PLOT /CDF_2012_NOTE10874/d0.-x0.-y06
-CustomLegend=Energy Ratio 1960/900 
+LegendTitle=Energy Ratio 1960/900 
 # END PLOT

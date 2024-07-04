@@ -24,7 +24,7 @@ if sys.version_info[:1] < (3,):
     sys.exit(1)
 
 import rivet, yoda
-import os, subprocess
+import os, re, subprocess
 from rivet.plotting.make_plots import assemble_plotting_data
 from yoda.plotting import script_generator
 import multiprocessing
@@ -66,6 +66,8 @@ parser.add_argument("--style", dest="STYLE", help="Choose the plotting style", d
 stygroup = parser.add_argument_group("Style options")
 stygroup.add_argument("-t", "--title", dest="TITLE",
                       default="Plots from Rivet analyses", help="title to be displayed on the main web page")
+stygroup.add_argument("--reflabel", dest="REFLABEL",
+                      default="Data", help="legend entry for reference data")
 stygroup.add_argument("--ratiolabel", dest="RATIOPLOTLABEL",
                       default=None, help="label on ratio panel")
 stygroup.add_argument("--deviation", dest="DEVIATION", action="store_true",
@@ -240,7 +242,7 @@ def generateScripts(args):
     yodafiles = [ ]
     for yodafile in args.YODAFILES:
         yodafilepath = os.path.abspath(yodafile.split(":")[0])
-        if not yodafile.startswith("PLOT:") and not yodafile.startswith("REF:"):
+        if not yodafile.startswith("PLOT:") and not re.fullmatch(r"^REF(\d+)?:.*", yodafile):
             if not os.access(yodafilepath, os.R_OK):
                 print("Error: cannot read from %s" % yodafilepath)
                 if args.IGNORE_MISSING:
@@ -260,7 +262,7 @@ def generateScripts(args):
                                                    True, [], args.VERBOSE,
                                                    nRatioTicks=args.NRATIOTICKS, showWeights = args.SHOW_WEIGHTS,
                                                    removeOptions = args.REMOVE_OPTIONS, deviation=args.DEVIATION,
-                                                   canvasText=args.CANVASTEXT,
+                                                   canvasText=args.CANVASTEXT, refLabel=args.REFLABEL,
                                                    ratioPlotLabel=args.RATIOPLOTLABEL, showRatio=args.SHOW_RATIO)
 
     # Unique list of analyses

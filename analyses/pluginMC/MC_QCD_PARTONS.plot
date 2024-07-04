@@ -1,5 +1,4 @@
 # BEGIN PLOT /MC_QCD_PARTONS/.*
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /MC_QCD_PARTONS/log10_R_0

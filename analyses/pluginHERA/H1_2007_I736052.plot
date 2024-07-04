@@ -4,7 +4,6 @@ XLabel= $Q^2$ $[GeV^2]$
 YLabel= $d\sigma /dQ^2$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d05-x01-y01
@@ -13,7 +12,6 @@ XLabel= x
 YLabel= $d\sigma /dx$ $[nb]$
 LogX=1
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d06-x01-y01
@@ -22,7 +20,6 @@ XLabel= $W$ $[GeV]$
 YLabel= $d\sigma /dW$ $[nb$ $GeV^{-1}]$
 LogX=0
 LogY=0
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d07-x01-y01
@@ -31,7 +28,6 @@ XLabel= $p_{T}$ $[GeV]$
 YLabel= $d\sigma /dp_{T}$ $[nb$ $GeV^{-1}]$
 LogX=0
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d08-x01-y01
@@ -40,8 +36,6 @@ XLabel= $\eta$
 YLabel= $d\sigma /d\eta$ $[nb]$
 LogX=0
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.25
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d09-x01-y01
@@ -50,7 +44,6 @@ XLabel= z
 YLabel= $d\sigma /dz$ $[nb]$
 LogX=0
 LogY=0
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d10-x01-y01
@@ -59,10 +52,7 @@ XLabel= x
 YLabel= $d^2\sigma /dQ^2dx$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[2,$ $4.22]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.3
+LegendTitle= $Q^2\in[2,$ $4.22]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d11-x01-y01
@@ -71,10 +61,7 @@ XLabel= x
 YLabel= $d^2\sigma /dQ^2dx$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[4.22,$ $10]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.3
+LegendTitle= $Q^2\in[4.22,$ $10]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d12-x01-y01
@@ -83,9 +70,7 @@ XLabel= x
 YLabel= $d^2\sigma /dQ^2dx$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[10,$ $17.8]$ $GeV^2$
-LegendAlign=r
+LegendTitle= $Q^2\in[10,$ $17.8]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d13-x01-y01
@@ -94,9 +79,7 @@ XLabel= x
 YLabel= $d^2\sigma /dQ^2dx$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[17.8,$ $31.6]$ $GeV^2$
-LegendAlign=r
+LegendTitle= $Q^2\in[17.8,$ $31.6]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d14-x01-y01
@@ -105,9 +88,7 @@ XLabel= x
 YLabel= $d^2\sigma /dQ^2dx$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[31.6,$ $100]$ $GeV^2$
-LegendAlign=r
+LegendTitle= $Q^2\in[31.6,$ $100]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d15-x01-y01
@@ -116,9 +97,7 @@ XLabel= $Q^2$ $[GeV^2]$
 YLabel= $d\sigma^* /dQ^2$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-Legend=1
-CustomLegend= $p_{T}$ $\textgreater$ $2$ $GeV$
-LegendAlign=r
+LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d16-x01-y01
@@ -127,9 +106,7 @@ XLabel= $x$
 YLabel= $d\sigma^* /dx$ $[nb]$
 LogX=1
 LogY=1
-Legend=1
-CustomLegend= $p_{T}$ $\textgreater$ $2$ $GeV$
-LegendAlign=r
+LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d17-x01-y01
@@ -138,9 +115,7 @@ XLabel= $p_{T}$ $[GeV]$
 YLabel= $d\sigma^* /dp_{T}$ $[nb$ $GeV^{-1}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $p_{T}$ $\textgreater$ $2$ $GeV$
-LegendAlign=r
+LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d18-x01-y01
@@ -149,10 +124,7 @@ XLabel= $\eta$
 YLabel= $d\sigma^* /d\eta$ $[nb]$
 LogX=0
 LogY=0
-Legend=1
-CustomLegend= $p_{T}$ $\textgreater$ $2$ $GeV$
-LegendXPos=0.05
-LegendYPos=0.3
+LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d19-x01-y01
@@ -161,7 +133,6 @@ XLabel= $Q^2$ $[GeV^2]$
 YLabel= $d\sigma /dQ^2$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d20-x01-y01
@@ -170,7 +141,6 @@ XLabel= x
 YLabel= $d\sigma /dx$ $[nb]$
 LogX=1
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d21-x01-y01
@@ -179,7 +149,6 @@ XLabel= $E^{max}_T$ $[GeV]$
 YLabel= $d\sigma /dE^{max}_{T}$ $[nb$ $GeV^{-1}]$
 LogX=0
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d22-x01-y01
@@ -188,7 +157,6 @@ XLabel= $M_{jj}$ $[GeV]$
 YLabel= $d\sigma /dM_{jj}$ $[nb$ $GeV^{-1}]$
 LogX=0
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d23-x01-y01
@@ -197,10 +165,7 @@ XLabel= $\Delta \phi$ [rad]
 YLabel= $d^2\sigma /dQ^2d\Delta \phi$ $[nb$ $GeV^{-2}\text{rad}^{-1}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[2,$ $10]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.9
+LegendTitle= $Q^2\in[2,$ $10]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d24-x01-y01
@@ -209,10 +174,7 @@ XLabel= $\Delta \phi$ [rad]
 YLabel= $d^2\sigma /dQ^2d\Delta \phi$ $[nb$ $GeV^{-2}\text{rad}^{-1}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[10,$ $100]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.9
+LegendTitle= $Q^2\in[10,$ $100]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d25-x01-y01
@@ -221,7 +183,6 @@ XLabel= $\eta_{DJ}$
 YLabel= $d\sigma /d\eta_{DJ}$ $[nb]$
 LogX=0
 LogY=0
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d26-x01-y01
@@ -230,7 +191,6 @@ XLabel= $\eta_{OJ}$
 YLabel= $d\sigma /d\eta_{OJ}$ $[nb]$
 LogX=0
 LogY=0
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d27-x01-y01
@@ -239,7 +199,6 @@ XLabel= $\Delta \eta$
 YLabel= $d\sigma /d\Delta \eta$ $[nb]$
 LogX=0
 LogY=0
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d28-x01-y01
@@ -248,8 +207,6 @@ XLabel= $x^{obs}_{\gamma}$
 YLabel= $d\sigma /dx^{obs}_{\gamma}$ $[nb]$
 LogX=0
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.9
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d29-x01-y01
@@ -258,10 +215,7 @@ XLabel= $x^{obs}_{\gamma}$
 YLabel= $d^2\sigma /dQ^2dx^{obs}_{\gamma}$ $[nb$ $GeV^{-2}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[2,$ $5]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.9
+LegendTitle= $Q^2\in[2,$ $5]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d29-x01-y02
@@ -270,10 +224,7 @@ XLabel= $x^{obs}_{\gamma}$
 YLabel= $d^2\sigma /dQ^2dx^{obs}_{\gamma}$ $[nb$ $GeV^{-2}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[5,$ $10]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.9
+LegendTitle= $Q^2\in[5,$ $10]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d29-x01-y03
@@ -282,10 +233,7 @@ XLabel= $x^{obs}_{\gamma}$
 YLabel= $d^2\sigma /dQ^2dx^{obs}_{\gamma}$ $[nb$ $GeV^{-2}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[10,$ $100]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.9
+LegendTitle= $Q^2\in[10,$ $100]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d30-x01-y01
@@ -294,7 +242,6 @@ XLabel= $\log_{10}(x^{obs}_{g})$
 YLabel= $d\sigma /dx^{obs}_{g}$ $[nb]$
 LogX=0
 LogY=1
-LegendAlign=r
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d31-x01-y01
@@ -303,10 +250,7 @@ XLabel= $\log_{10}(x^{obs}_{g})$
 YLabel= $d^2\sigma /dQ^2dx^{obs}_{g}$ $[nb$ $GeV^{-2}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[2,$ $5]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.3
+LegendTitle= $Q^2\in[2,$ $5]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d31-x01-y02
@@ -315,10 +259,7 @@ XLabel= $\log_{10}(x^{obs}_{g})$
 YLabel= $d^2\sigma /dQ^2dx^{obs}_{g}$ $[nb$ $GeV^{-2}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[5,$ $10]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.3
+LegendTitle= $Q^2\in[5,$ $10]$ $GeV^2$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d31-x01-y03
@@ -327,8 +268,5 @@ XLabel= $\log_{10}(x^{obs}_{g})$
 YLabel= $d^2\sigma /dQ^2dx^{obs}_{g}$ $[nb$ $GeV^{-2}]$
 LogX=0
 LogY=1
-Legend=1
-CustomLegend= $Q^2\in[10,$ $100]$ $GeV^2$
-LegendXPos=0.05
-LegendYPos=0.3
+LegendTitle= $Q^2\in[10,$ $100]$ $GeV^2$
 END PLOT

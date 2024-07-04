@@ -39,7 +39,6 @@ Title=$N_\mathrm{ch}$ (toward) for min-bias
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$N_\mathrm{ch}$
 LogY=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2001_I564673/d03-x01-y02
@@ -60,7 +59,6 @@ LogY=0
 Title=$N_\mathrm{ch}$ (toward) for JET20
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$N_\mathrm{ch}$
-LegendYPos=0.5
 LogY=0
 # END PLOT
 
@@ -68,7 +66,6 @@ LogY=0
 Title=$N_\mathrm{ch}$ (transverse) for JET20
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$N_\mathrm{ch}$
-LegendYPos=0.5
 LogY=0
 # END PLOT
 
@@ -76,7 +73,6 @@ LogY=0
 Title=$N_\mathrm{ch}$ (away) for JET20
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$N_\mathrm{ch}$
-LegendYPos=0.5
 LogY=0
 # END PLOT
 
@@ -84,7 +80,6 @@ LogY=0
 Title=$p_\perp^\mathrm{sum}$ (toward) for min-bias
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV
-LegendXPos=0.10
 LogY=0
 # END PLOT
 
@@ -92,7 +87,6 @@ LogY=0
 Title=$p_\perp^\mathrm{sum}$ (transverse) for min-bias
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV
-LegendXPos=0.10
 LogY=0
 # END PLOT
 
@@ -100,7 +94,6 @@ LogY=0
 Title=$p_\perp^\mathrm{sum}$ (away) for min-bias
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV
-LegendXPos=0.10
 LogY=0
 # END PLOT
 
@@ -108,7 +101,6 @@ LogY=0
 Title=$p_\perp^\mathrm{sum}$ (toward) for JET20
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV
-LegendXPos=0.10
 LogY=0
 ShowZero=0
 # END PLOT
@@ -117,7 +109,6 @@ ShowZero=0
 Title=$p_\perp^\mathrm{sum}$ (transverse) for JET20
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV
-LegendXPos=0.10
 LogY=0
 # END PLOT
 
@@ -125,7 +116,6 @@ LogY=0
 Title=$p_\perp^\mathrm{sum}$ (away) for JET20
 XLabel=$p_\perp^\mathrm{lead}$ / GeV
 YLabel=$p_\perp^\mathrm{sum}$ / GeV
-LegendXPos=0.10
 LogY=0
 # END PLOT
 

@@ -2,8 +2,6 @@
 Title=$1/\sigma d\sigma/dp_{T}^{jet}$, $p_{T}^{jet}>$10 GeV
 XLabel=$p_{T}^{jet}$ [GeV]
 YLabel=$1/\sigma d\sigma/dp_{T}^{jet}$ [1/GeV]
-LegendXPos=0.6
-LegendYPos=0.9
 LogY=1
 # END PLOT
 
@@ -11,8 +9,6 @@ LogY=1
 Title=$1/\sigma d\sigma/d\eta^{jet}$, $p_{T}^{jet}>$20 GeV
 XLabel=$\eta^{jet}$
 YLabel=$1/\sigma d\sigma/d\eta^{jet}$
-LegendXPos=0.6
-LegendYPos=0.9
 LogY=0
 # END PLOT
 
@@ -20,8 +16,6 @@ LogY=0
 Title=$1/\sigma d\sigma/d\eta^{jet}$, $p_{T}^{jet}>$10 GeV
 XLabel=$\eta^{jet}$
 YLabel=$1/\sigma d\sigma/d\eta^{jet}$
-LegendXPos=0.6
-LegendYPos=0.9
 LogY=0
 # END PLOT
 
@@ -29,8 +23,6 @@ LogY=0
 Title=$1/\sigma d\sigma/dy^{Z}$, $p_{T}^{jet}>$20 GeV
 XLabel=$y^{Z}$
 YLabel=$1/\sigma d\sigma/dy^{Z}$
-LegendXPos=0.6
-LegendYPos=0.9
 LogY=0
 YMin=-0.1
 # END PLOT
@@ -39,8 +31,6 @@ YMin=-0.1
 Title=$1/\sigma d\sigma/dy^{Z}$, $p_{T}^{jet}>$10 GeV
 XLabel=$y^{Z}$
 YLabel=$1/\sigma d\sigma/dy^{Z}$
-LegendXPos=0.6
-LegendYPos=0.9
 LogY=0
 YMin=-0.1
 # END PLOT
@@ -49,8 +39,6 @@ YMin=-0.1
 Title=$1/\sigma d\sigma/dp_{T}^{Z}$, $p_{T}^{jet}>$20 GeV
 XLabel=$p_{T}^{Z}$ [GeV]
 YLabel=$1/\sigma d\sigma/dp_{T}^{Z}$ [1/GeV]
-LegendXPos=0.6
-LegendYPos=0.9
 LogY=1
 # END PLOT
 
@@ -58,8 +46,6 @@ LogY=1
 Title=$1/\sigma d\sigma/dp_{T}^{Z}$, $p_{T}^{jet}>$10 GeV
 XLabel=$p_{T}^{Z}$ [GeV]
 YLabel=$1/\sigma d\sigma/dp_{T}^{Z}$ [1/GeV]
-LegendXPos=0.6
-LegendYPos=0.9
 LogY=1
 # END PLOT
 
@@ -67,8 +53,6 @@ LogY=1
 Title=$1/\sigma d\sigma/d\Delta\phi$, $p_{T}^{jet}>$20 GeV
 XLabel=$\Delta\phi$
 YLabel=$1/\sigma d\sigma/d\Delta\phi $
-LegendXPos=0.1
-LegendYPos=0.9
 LogY=0
 # END PLOT
 
@@ -76,8 +60,6 @@ LogY=0
 Title=$1/\sigma d\sigma/d\Delta\phi$, $p_{T}^{jet}>$10 GeV
 XLabel=$\Delta\phi$
 YLabel=$1/\sigma d\sigma/d\Delta\phi $
-LegendXPos=0.1
-LegendYPos=0.9
 LogY=0
 # END PLOT
 
@@ -85,8 +67,6 @@ LogY=0
 Title=$1/\sigma d\sigma/d\Delta y$, $p_{T}^{jet}>$20 GeV
 XLabel=$\Delta y$
 YLabel=$1/\sigma d\sigma/d\Delta y$
-LegendXPos=0.1
-LegendYPos=0.9
 LogY=0
 # END PLOT
 
@@ -94,7 +74,5 @@ LogY=0
 Title=$1/\sigma d\sigma/d\Delta y$, $p_{T}^{jet}>$10 GeV
 XLabel=$\Delta y$
 YLabel=$1/\sigma d\sigma/d\Delta y$
-LegendXPos=0.1
-LegendYPos=0.9
 LogY=0
 # END PLOT

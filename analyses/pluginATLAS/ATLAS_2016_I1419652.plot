@@ -67,7 +67,6 @@ Title=Charged particle $\eta$, $p_\perp > 500\,\mathrm{MeV}$, $|\eta| < 2.5$, $\
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1419652/d07
@@ -75,7 +74,6 @@ Title=Charged particle $\eta$, $p_\perp > 500\,\mathrm{MeV}$, $|\eta| < 2.5$, $\
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1419652/d11
@@ -83,7 +81,6 @@ Title=Charged particle $\eta$, $p_\perp > 500\,\mathrm{MeV}$, $|\eta| < 0.8$, $\
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1419652/d15
@@ -91,7 +88,6 @@ Title=Charged particle $\eta$, $p_\perp > 500\,\mathrm{MeV}$, $|\eta| < 0.8$, $\
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1419652/d06

@@ -1,5 +1,4 @@
 # BEGIN PLOT /CMS_2011_I886332/d
-LegendYPos=0.4
 LogY=0
 # END PLOT
 

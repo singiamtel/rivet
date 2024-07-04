@@ -34,8 +34,6 @@ ConnectBins=0
 RatioPlotYMin=0.01
 RatioPlotYMax=1.3
 LogY=0
-LegendYPos=0.95
-LegendXPos=0.53
 END PLOT
 
 BEGIN PLOT /ALICE_2017_I1645239/d05-x01-y01
@@ -45,8 +43,6 @@ YLabel=$\Lambda_c^+$/D$^0$
 ConnectBins=0
 RatioPlotYMin=0.01
 RatioPlotYMax=1.3
-LegendYPos=0.68
-LegendXPos=0.53
 END PLOT
 
 BEGIN PLOT /ALICE_2017_I1645239/d06-x01-y01
@@ -56,8 +52,6 @@ YLabel=$\Lambda_c^+$/D$^0$
 ConnectBins=0
 RatioPlotYMin=0.01
 RatioPlotYMax=1.3
-LegendYPos=0.68
-LegendXPos=0.53
 END PLOT
 
 BEGIN PLOT /ALICE_2017_I1645239/d07-x01-y01
@@ -68,8 +62,6 @@ ConnectBins=0
 RatioPlotYMin=0.01
 RatioPlotYMax=1.3
 LogY=0
-LegendYPos=0.95
-LegendXPos=0.30
 YMax = 2
 YMin = 0.2
 END PLOT

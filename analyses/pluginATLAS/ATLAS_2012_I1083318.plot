@@ -1,5 +1,5 @@
 # BEGIN PLOT /ATLAS_2012_I1083318/d..-x..-y02
-CustomLegend=\boldmath$p_\perp^\text{jet}>20$ \bf{GeV}
+LegendTitle=\boldmath$p_\perp^\text{jet}>20$ \bf{GeV}
 # END PLOT
 
 
@@ -19,7 +19,6 @@ YLabel=$\sigma(\geq N_{\mathrm{jet}}\;\mathrm{jets})/\sigma(\geq N_{\mathrm{jet}
 LogY=0
 RatioPlot=0
 XMinorTickMarks=0
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d03-x01-y0[12]
@@ -148,8 +147,6 @@ XLabel=$m$(jets) [GeV]
 YLabel=d$\sigma$/d$m$ [pb/GeV]
 RatioPlotYMin=0.25
 RatioPlotYMax=2.35
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d19-x01-y0[12]
@@ -158,8 +155,6 @@ XLabel=$m$(jets) [GeV]
 YLabel=d$\sigma$/d$m$ [pb/GeV]
 RatioPlotYMin=0.25
 RatioPlotYMax=2.35
-LegendXPos=0.2
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d20-x01-y0[12]
@@ -169,7 +164,6 @@ YLabel=d$\sigma$/d$y$ [pb]
 LogY=0
 RatioPlotYMin=0.0
 RatioPlotYMax=1.99
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d21-x01-y0[12]
@@ -179,7 +173,6 @@ YLabel=d$\sigma$/d$\Delta y$ [pb]
 LogY=0
 RatioPlotYMin=0.0
 RatioPlotYMax=1.99
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d22-x01-y0[12]
@@ -189,8 +182,6 @@ YLabel=d$\sigma$/d$\Sigma y$ [pb]
 LogY=0
 RatioPlotYMin=0.25
 RatioPlotYMax=1.99
-LegendXPos=0.3
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d23-x01-y0[12]
@@ -200,7 +191,6 @@ YLabel=d$\sigma$/d$\Delta R$ [pb]
 LogY=0
 RatioPlotYMin=0.0
 RatioPlotYMax=1.99
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d24-x01-y0[12]
@@ -210,7 +200,6 @@ YLabel=d$\sigma$/d$\Delta y$ [pb]
 LogY=0
 RatioPlotYMin=0.0
 RatioPlotYMax=1.99
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1083318/d25-x01-y0[12]
@@ -220,5 +209,4 @@ YLabel=d$\sigma$/d$\Delta \phi$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
-LegendXPos=0.05
 # END PLOT

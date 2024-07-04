@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2021_I1852328/.*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
-LegendXPos=0.95
 LeftMargin=1.5
 Title=$pp \rightarrow e^{\pm}\mu^{\mp}\nu\nu j$
 # END PLOT

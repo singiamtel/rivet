@@ -3,5 +3,4 @@ Title=$\sigma(e^+e^-\to \pi^+\pi^-\pi^0)$
 XLabel=$\sqrt{s}$/GeV
 YLabel=$\sigma(e^+e^-\to \pi^+\pi^-\pi^0)$/nb
 ConnectGaps=1
-LegendXPos=0.1
 END PLOT

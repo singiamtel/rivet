@@ -3,8 +3,6 @@ Title=Transverse $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s}
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d01-x01-y02
@@ -12,8 +10,6 @@ Title=Toward $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d01-x01-y03
@@ -21,8 +17,6 @@ Title=Away $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d02-x01-y01
@@ -30,8 +24,6 @@ Title=Transverse $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s}
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d02-x01-y02
@@ -39,8 +31,6 @@ Title=Toward $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d02-x01-y03
@@ -48,8 +38,6 @@ Title=Away $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -58,8 +46,6 @@ Title=Transverse $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} =
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d03-x01-y02
@@ -67,8 +53,6 @@ Title=Toward $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d03-x01-y03
@@ -76,8 +60,6 @@ Title=Away $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \math
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d04-x01-y01
@@ -85,8 +67,6 @@ Title=Transverse $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} =
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d04-x01-y02
@@ -94,8 +74,6 @@ Title=Toward $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d04-x01-y03
@@ -103,8 +81,6 @@ Title=Away $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \math
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -113,8 +89,6 @@ Title=Std. dev. Transverse $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$,
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=Std. dev. $\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d06-x01-y01
@@ -122,8 +96,6 @@ Title=Std. dev. Transverse $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$,
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=Std. dev. $\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -132,8 +104,6 @@ Title=Std. dev. Transverse $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=Std. dev. $\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi$[GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d08-x01-y01
@@ -141,8 +111,6 @@ Title=Std. dev. Transverse $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=Std. dev. $\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi$[GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -151,8 +119,6 @@ Title=Transverse $\langle p_\perp \rangle$ vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle p_\perp \rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d09-x01-y02
@@ -160,8 +126,6 @@ Title=Toward $\langle p_\perp \rangle$ vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = 
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle p_\perp \rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d09-x01-y03
@@ -169,8 +133,6 @@ Title=Away $\langle p_\perp \rangle$ vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \m
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle p_\perp \rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -179,8 +141,6 @@ Title=Transverse $\langle p_\perp \rangle$ vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle p_\perp \rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d10-x01-y02
@@ -188,8 +148,6 @@ Title=Toward $\langle p_\perp \rangle$ vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = 
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle p_\perp \rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d10-x01-y03
@@ -197,8 +155,6 @@ Title=Away $\langle p_\perp \rangle$ vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \m
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle p_\perp \rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -207,8 +163,6 @@ Title=Transverse $\langle p_\perp \rangle$ vs. $N_\mathrm{chg}$, $\sqrt{s} = \ma
 XLabel=$N_\mathrm{chg}$
 YLabel=$\langle p_\perp \rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d11-x01-y02
@@ -223,8 +177,6 @@ Title=Away $\langle p_\perp \rangle$ vs. $N_\mathrm{chg}$, $\sqrt{s} = \mathrm{9
 XLabel=$N_\mathrm{chg}$
 YLabel=$\langle p_\perp \rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -233,8 +185,6 @@ Title=Transverse $\langle p_\perp \rangle$ vs. $N_\mathrm{chg}$, $\sqrt{s} = \ma
 XLabel=$N_\mathrm{chg}$
 YLabel=$\langle p_\perp \rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d12-x01-y02
@@ -249,8 +199,6 @@ Title=Away $\langle p_\perp \rangle$ vs. $N_\mathrm{chg}$, $\sqrt{s} = \mathrm{7
 XLabel=$N_\mathrm{chg}$
 YLabel=$\langle p_\perp \rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -259,8 +207,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 1.0$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d13-x01-y02
@@ -268,8 +214,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 1.5$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d13-x01-y03
@@ -277,8 +221,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 2.0$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d13-x01-y04
@@ -286,8 +228,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 2.5$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -296,8 +236,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 1.0$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d14-x01-y02
@@ -305,8 +243,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 2.0$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d14-x01-y03
@@ -314,8 +250,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 3.0$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d14-x01-y04
@@ -323,8 +257,6 @@ Title=$N_\mathrm{chg}$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 5.0$ G
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -333,8 +265,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 1.0$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d15-x01-y02
@@ -342,8 +272,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 1.5$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d15-x01-y03
@@ -351,8 +279,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 2.0$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d15-x01-y04
@@ -360,8 +286,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 2.5$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -370,8 +294,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 1.0$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d16-x01-y02
@@ -379,8 +301,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 2.0$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d16-x01-y03
@@ -388,8 +308,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 3.0$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d16-x01-y04
@@ -397,8 +315,6 @@ Title=$p_\perp$ density vs. $\Delta\phi$, $p_\perp^\mathrm{trk1} > 5.0$ GeV, $\s
 XLabel=$\left|\phi\right|$ (w.r.t. leading track) [rad]
 YLabel=$\langle\mathrm{d}^2 p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -407,8 +323,6 @@ Title=Transverse $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s}
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d17-x01-y02
@@ -416,8 +330,6 @@ Title=Toward $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d17-x01-y03
@@ -425,8 +337,6 @@ Title=Away $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d18-x01-y01
@@ -434,8 +344,6 @@ Title=Transverse $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s}
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d18-x01-y02
@@ -443,8 +351,6 @@ Title=Toward $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d18-x01-y03
@@ -452,8 +358,6 @@ Title=Away $N_\mathrm{chg}$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 
@@ -462,8 +366,6 @@ Title=Transverse $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} =
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d19-x01-y02
@@ -471,8 +373,6 @@ Title=Toward $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d19-x01-y03
@@ -480,8 +380,6 @@ Title=Away $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \math
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d20-x01-y01
@@ -489,8 +387,6 @@ Title=Transverse $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} =
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d20-x01-y02
@@ -498,8 +394,6 @@ Title=Toward $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \ma
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d20-x01-y03
@@ -507,8 +401,6 @@ Title=Away $\sum p_\perp$ density vs. $p_\perp^\mathrm{trk1}$, $\sqrt{s} = \math
 XLabel=$p_\perp$ (leading track) [GeV]
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d21-x01-y01
@@ -516,8 +408,6 @@ Title=Transverse $N_\mathrm{chg}$ density vs. $|\eta^\mathrm{trk1}|$, $\sqrt{s} 
 XLabel=$|\eta|$ (leading track)
 YLabel=$\langle\mathrm{d}^2 N_\mathrm{chg}/\mathrm{d}\eta\mathrm{d}\phi\rangle$
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I879407/d22-x01-y01
@@ -525,6 +415,4 @@ Title=Transverse $\sum p_\perp$ density vs. $|\eta^\mathrm{trk1}|$, $\sqrt{s} = 
 XLabel=$|\eta|$ (leading track)
 YLabel=$\langle\mathrm{d}^2 \sum p_\perp/\mathrm{d}\eta\mathrm{d}\phi\rangle$ [GeV]
 LogY=0
-LegendXPos=0.5
-LegendYPos=0.4
 # END PLOT

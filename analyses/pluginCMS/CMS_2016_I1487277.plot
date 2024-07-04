@@ -4,9 +4,7 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
-LegendXPos=0.3
-#CustomLegend=anti-$k_T$,R=0.7
+#LegendTitle=anti-$k_T$,R=0.7
 RatioPlotYMin=0.1
 #RatioPlotYMax=1.5
 RatioPlotYMax=2.0

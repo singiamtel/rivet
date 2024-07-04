@@ -3,6 +3,5 @@ Title=$\sigma(e^+e^-\to \eta\gamma)$
 XLabel=$\sqrt{s}$ [GeV]
 YLabel=$\sigma(e^+e^-\to \eta\gamma)$ [pb]
 LogY=1
-LegendXPos=0.1
 ConnectGaps=1
 END PLOT

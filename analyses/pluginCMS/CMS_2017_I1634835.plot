@@ -1,6 +1,5 @@
 # BEGIN PLOT /CMS_2017_I1634835/*
 Title=CMS, 8 TeV, Z+charm jets
-LegendAlign=r
 LogX = 0
 LogY = 0
 RatioPlotYMin=0

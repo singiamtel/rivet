@@ -31,8 +31,6 @@ Title=Rapidity w.r.t. thrust axes, $y_T$
 XLabel=$y_T$
 YLabel=$N \, \mathrm{d}{\sigma}/\mathrm{d}{y_T}$
 FullRange=1
-LegendXPos=0.15
-LegendYPos=0.8
 # END PLOT
 
 # BEGIN PLOT /DELPHI_1996_I424112/d06-x01-y01
@@ -40,8 +38,6 @@ Title=Rapidity w.r.t. sphericity axes, $y_S$
 XLabel=$y_S$
 YLabel=$N \, \mathrm{d}{\sigma}/\mathrm{d}{y_S}$
 FullRange=1
-LegendXPos=0.15
-LegendYPos=0.8
 # END PLOT
 
 # BEGIN PLOT /DELPHI_1996_I424112/d07-x01-y01
@@ -56,7 +52,6 @@ Title=Log of scaled momentum, $\log(1/x_p)$
 XLabel=$\log(1/x_p)$
 YLabel=$N \, \mathrm{d}{\sigma}/\mathrm{d}{\log(1/x_p)}$
 FullRange=1
-LegendYPos=0.8
 # END PLOT
 
 # BEGIN PLOT /DELPHI_1996_I424112/d09-x01-y01
@@ -64,8 +59,6 @@ Title=Mean out-of-plane $p_\perp$ in GeV w.r.t. thrust axes vs. $x_p$
 XLabel=$x_p$
 YLabel=$p_\perp^\mathrm{out}$ / GeV
 LogY=0
-LegendXPos=0.35
-LegendYPos=0.7
 # END PLOT
 
 # BEGIN PLOT /DELPHI_1996_I424112/d10-x01-y01
@@ -73,16 +66,12 @@ Title=Mean $p_\perp$ in GeV vs. $x_p$
 XLabel=$x_p$
 YLabel=$p_\perp$ / GeV
 LogY=0
-LegendXPos=0.35
-LegendYPos=0.7
 # END PLOT
 
 # BEGIN PLOT /DELPHI_1996_I424112/d11-x01-y01
 Title=$1-\mathrm{Thrust}$
 XLabel=$1-T$
 YLabel=$N \, \mathrm{d}{\sigma}/\mathrm{d}{(1-T)}$
-LegendXPos=0.15
-LegendYPos=0.6
 FullRange=1
 # END PLOT
 
@@ -90,8 +79,6 @@ FullRange=1
 Title=Thrust major, $M$
 XLabel=$M$
 YLabel=$N \, \mathrm{d}{\sigma}/\mathrm{d}{M}$
-LegendXPos=0.15
-LegendYPos=0.6
 FullRange=1
 # END PLOT
 
@@ -113,7 +100,6 @@ FullRange=1
 Title=Sphericity, $S$
 XLabel=$S$
 YLabel=$N \, \mathrm{d}{\sigma}/\mathrm{d}{S}$
-LegendXPos=0.65
 FullRange=1
 # END PLOT
 
@@ -240,7 +226,6 @@ FullRange=1
 Title=Energy-energy correlation, EEC
 XLabel=$\cos{\chi}$
 YLabel=EEC
-LegendXPos=0.45
 FullRange=1
 # END PLOT
 

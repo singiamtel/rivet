@@ -3,8 +3,6 @@ LogY=1
 LogX=1
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
-LegendXPos=0.95
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1448301/d0[1-4]
@@ -13,7 +11,6 @@ LogX=0
 YLabel=Fiducial Cross section [fb]
 XLabel=$N_\mathrm{jets}$
 XCustomMajorTicks=1.0 $\geq0$ 2.0 $=0$
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1448301/d01-x01-y01

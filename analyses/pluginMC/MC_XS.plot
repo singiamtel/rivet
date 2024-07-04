@@ -6,7 +6,6 @@ LogY=0
 ShowZero=0
 XCustomMajorTicks=0.	$\quad$
 XMinorTickMarks=0
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /MC_XS/N
@@ -16,8 +15,6 @@ YLabel=$N$
 LogY=0
 XCustomMajorTicks=0.5	$\quad$
 XMinorTickMarks=0
-LegendXPos=0.05
-LegendYPos=0.15
 # END PLOT
 
 # BEGIN PLOT /MC_XS/pmXS
@@ -30,7 +27,6 @@ ShowZero=0
 XMinorTickMarks=0
 XMin=-1
 XMax=1
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /MC_XS/pmN
@@ -43,5 +39,4 @@ XCustomMajorTicks=-0.5	$w<0$	0.5	$w\geq0$
 XMinorTickMarks=0
 XMin=-1
 XMax=1
-LegendXPos=0.05
 # END PLOT

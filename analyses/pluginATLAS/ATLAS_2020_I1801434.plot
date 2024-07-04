@@ -2,9 +2,6 @@
 Title=All hadronic channel
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendYPos=0.90
-LegendXPos=0.95
-LegendAlign=r
 LogY=1
 RatioPlotYMin=0.85
 RatioPlotYMax=1.15

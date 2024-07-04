@@ -1,7 +1,6 @@
 # BEGIN PLOT /ATLAS_2019_I1718132/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LeftMargin=1.5
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -27,8 +26,6 @@ Title=$eejj$
 XLabel=$\mathrm{min} \Delta \phi (j_{0}, l)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (j_{0}, l)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d20-x01-y01
@@ -50,8 +47,6 @@ Title=$eejj$
 XLabel=$\mathrm{min} \Delta \phi (jj)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (jj)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d38-x01-y01
@@ -104,8 +99,6 @@ Title=$eejj$, $S_\mathrm{T}>600$ GeV
 XLabel=$\mathrm{min} \Delta \phi (j_{0}, l)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (j_{0}, l)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d23-x01-y01
@@ -127,8 +120,6 @@ Title=$eejj$, $S_\mathrm{T}>600$ GeV
 XLabel=$\mathrm{min} \Delta \phi (jj)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (jj)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d41-x01-y01
@@ -201,8 +192,6 @@ Title=$e\mu jj$
 XLabel=$\mathrm{min} \Delta \phi (jj)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (jj)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d40-x01-y01
@@ -210,8 +199,6 @@ Title=$e\mu jj$
 XLabel=$\mathrm{min} \Delta \phi (ll)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (ll)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d46-x01-y01
@@ -256,9 +243,6 @@ Title=$e\mu jj$, $S_\mathrm{T}>600$ GeV
 XLabel=$\mathrm{min} \Delta \phi (j_{0}, l)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (j_{0}, l)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.15
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d25-x01-y01
@@ -280,8 +264,6 @@ Title=$e\mu jj$, $S_\mathrm{T}>600$ GeV
 XLabel=$\mathrm{min} \Delta \phi (jj)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (jj)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d43-x01-y01
@@ -289,8 +271,6 @@ Title=$e\mu jj$, $S_\mathrm{T}>600$ GeV
 XLabel=$\mathrm{min} \Delta \phi (ll)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (ll)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d49-x01-y01
@@ -335,8 +315,6 @@ Title=$\mu\mu jj$
 XLabel=$\mathrm{min} \Delta \phi (j_{0}, l)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (j_{0}, l)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d21-x01-y01
@@ -358,8 +336,6 @@ Title=$\mu\mu jj$
 XLabel=$\mathrm{min} \Delta \phi (jj)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (jj)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d39-x01-y01
@@ -411,8 +387,6 @@ Title=$\mu\mu jj$, $S_\mathrm{T} > 600$ GeV
 XLabel=$\mathrm{min} \Delta \phi (j_{0}, l)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (j_{0}, l)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d24-x01-y01
@@ -434,8 +408,6 @@ Title=$\mu\mu jj$, $S_\mathrm{T} > 600$ GeV
 XLabel=$\mathrm{min} \Delta \phi (jj)$ [rad]
 YLabel=d$\sigma$/d$\mathrm{min} \Delta \phi (jj)$ [pb/rad]
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1718132/d42-x01-y01

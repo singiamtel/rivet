@@ -2,8 +2,6 @@
 Title=Separation between Z boson pair and leading jet
 XLabel=$\Delta R(\mathrm{ZZ,~1st~jet})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta R(\mathrm{ZZ,~1st~jet})$ [pb]
-LegendXPos=0.35
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/ZZ_jet1_deta
@@ -16,8 +14,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta{\eta}(\mathrm{ZZ,~1st~jet})$ [pb]
 Title=Separation between $e^+$ and leading jet
 XLabel=$\Delta R(e^+,\mathrm{1st~jet})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta R(e^+,\mathrm{1st~jet})$ [pb]
-LegendXPos=0.35
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/HT
@@ -25,14 +21,10 @@ Title=HT
 XLabel=$H_T$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}H_T$ [pb/GeV]
 LogX=1
-LegendXPos=0.10
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jets_dR_
 Title=$\Delta R$ separation between jets
-LegendXPos=0.10
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jets_dR_12
@@ -52,8 +44,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta{R}(\mathrm{jet~2,~jet~3})$ [pb]
 
 # BEGIN PLOT /MC_ZZJETS/jets_deta_
 Title=Pseudorapidity separation between jets
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jets_deta_12
@@ -73,7 +63,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\eta(\mathrm{jet~2,~jet~3})$ [pb]
 
 # BEGIN PLOT /MC_ZZJETS/jets_dphi_
 Title=Pseudorapidity separation between jets
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jets_dphi_12
@@ -95,32 +84,24 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi(\mathrm{jet~2,~jet~3})$ [pb]
 Title=Pseudorapidity of leading jet
 XLabel=$\eta(\mathrm{jet~1})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~1})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jet_eta_2
 Title=Pseudorapidity of second jet
 XLabel=$\eta(\mathrm{jet~2})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~2})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jet_eta_3
 Title=Pseudorapidity of third jet
 XLabel=$\eta(\mathrm{jet~3})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~3})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jet_eta_4
 Title=Pseudorapidity of fourth jet
 XLabel=$\eta(\mathrm{jet~4})$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\eta(\mathrm{jet~4})$ [pb]
-LegendYPos=0.5
-LegendXPos=0.30
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jet_eta_pmratio_1
@@ -249,8 +230,6 @@ Title=$\log_{10}$(Integrated $0$ jet rate in $k_\perp$ [GeV])
 XLabel=$\log_{10}(d_{\mathrm{cut}}/\mathrm{GeV})$
 YLabel=$R_{0}$
 Rebin=2
-LegendYPos=0.8
-LegendXPos=0.75
 # END PLOT
 
 # BEGIN PLOT /MC_ZZJETS/jet_pT_1
@@ -258,8 +237,6 @@ Title=Transverse momentum of leading jet
 XLabel=$p_\perp(\mathrm{jet~1})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~1})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -268,8 +245,6 @@ Title=Transverse momentum of second jet
 XLabel=$p_\perp(\mathrm{jet~2})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~2})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -278,8 +253,6 @@ Title=Transverse momentum of third jet
 XLabel=$p_\perp(\mathrm{jet~3})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~3})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -288,8 +261,6 @@ Title=Transverse momentum of fourth jet
 XLabel=$p_\perp(\mathrm{jet~4})$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp(\mathrm{jet~4})$ [pb/GeV]
 LogX=1
-LegendXPos=0.05
-LegendYPos=0.5
 XMin=20.0
 # END PLOT
 
@@ -304,5 +275,4 @@ LogX=1
 Title=Dijet invariant mass spectrum
 XLabel=$m_{jj}$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}m_{jj}$ [pb/GeV]
-LegendAlign=r
 # END PLOT

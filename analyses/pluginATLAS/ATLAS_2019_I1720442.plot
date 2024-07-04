@@ -2,7 +2,6 @@
 LogY=1
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LeftMargin=1.5
 XLabel=$m_{4\ell}$ [GeV]
 YLabel=$\mathrm{d} \sigma^\mathrm{fid}_{4\ell}/\mathrm{d}m_{4\ell}$ [fb / GeV]

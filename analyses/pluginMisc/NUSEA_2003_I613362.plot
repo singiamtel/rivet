@@ -1,12 +1,9 @@
 # BEGIN PLOT /NUSEA_2003_I613362/DiMuon_pT
-LegendYPos=0.8
-LegendXPos=0.3
 YMin=1E-5
 YMax=10
 Title=Drell-Yan production at $\sqrt{s}=38.8$ GeV
 XLabel=$p_T$ (GeV)
 YLabel=$1/\sigma d\sigma/dp_T$ (GeV$^{-1}$)
-# + any additional plot settings you might like, see make-plots documentation
 RatioPlot=0
 
 # END PLOT
@@ -15,23 +12,18 @@ RatioPlot=0
 Title=Drell-Yan $\sqrt{s}=38.8$ GeV
 #LogY=0
 #LogX=0
-LegendYPos=0.4
-LegendXPos=0.1
 # END PLOT
 # BEGIN PLOT /NUSEA_2003_I613362/d1*
 Title=NuSea: Drell-Yan $\sqrt{s}=38.8$ GeV
 #LogY=0
 #LogX=0
-LegendYPos=0.4
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /NUSEA_2003_I613362/d01-x01-y01
 #Title=NuSea: Drell-Yan $\sqrt{s}=38.8$ GeV
 XLabel=$M_{\mu^+\mu^-}$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$-0.05 < x_F < 0.05$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$-0.05 < x_F < 0.05$
 
 
 # END PLOT
@@ -43,8 +35,7 @@ YMin=0.5
 YMax=50
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.05 < x_F < 0.1$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.05 < x_F < 0.1$
 
 
 # END PLOT
@@ -53,14 +44,11 @@ CustomLegend=$0.05 < x_F < 0.1$
 
 # BEGIN PLOT /NUSEA_2003_I613362/d03-x01-y01
 #Title=NuSea: Drell-Yan
-LegendYPos=0.95
-LegendXPos=0.2
 YMin=0.5
 YMax=100
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.1 < x_F < 0.15$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.1 < x_F < 0.15$
 
 
 # END PLOT
@@ -71,8 +59,7 @@ CustomLegend=$0.1 < x_F < 0.15$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.15 < x_F < 0.2$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.15 < x_F < 0.2$
 
 
 # END PLOT
@@ -84,8 +71,7 @@ CustomLegend=$0.15 < x_F < 0.2$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.2 < x_F < 0.25$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.2 < x_F < 0.25$
 
 
 # END PLOT
@@ -97,8 +83,7 @@ CustomLegend=$0.2 < x_F < 0.25$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.25 < x_F < 0.3$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.25 < x_F < 0.3$
 
 
 # END PLOT
@@ -109,8 +94,7 @@ CustomLegend=$0.25 < x_F < 0.3$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.3 < x_F < 0.35$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.3 < x_F < 0.35$
 
 
 # END PLOT
@@ -120,8 +104,7 @@ CustomLegend=$0.3 < x_F < 0.35$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.35 < x_F < 0.4$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.35 < x_F < 0.4$
 
 
 # END PLOT
@@ -132,8 +115,7 @@ CustomLegend=$0.35 < x_F < 0.4$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.4 < x_F < 0.45$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.4 < x_F < 0.45$
 
 
 # END PLOT
@@ -144,8 +126,7 @@ CustomLegend=$0.4 < x_F < 0.45$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.45 < x_F < 0.5$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.45 < x_F < 0.5$
 
 
 # END PLOT
@@ -156,8 +137,7 @@ CustomLegend=$0.45 < x_F < 0.5$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.5 < x_F < 0.55$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.5 < x_F < 0.55$
 
 
 # END PLOT
@@ -168,8 +148,7 @@ CustomLegend=$0.5 < x_F < 0.55$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.55 < x_F < 0.6$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.55 < x_F < 0.6$
 
 
 # END PLOT
@@ -180,8 +159,7 @@ CustomLegend=$0.55 < x_F < 0.6$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.6 < x_F < 0.65$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.6 < x_F < 0.65$
 
 
 # END PLOT
@@ -192,8 +170,7 @@ CustomLegend=$0.6 < x_F < 0.65$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.65 < x_F < 0.7$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.65 < x_F < 0.7$
 
 
 # END PLOT
@@ -204,8 +181,7 @@ CustomLegend=$0.65 < x_F < 0.7$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.7 < x_F < 0.75$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.7 < x_F < 0.75$
 
 
 # END PLOT
@@ -216,20 +192,15 @@ CustomLegend=$0.7 < x_F < 0.75$
 #Title=NuSea: Drell-Yan
 XLabel=$M$ (GeV)
 YLabel=$M^3d^2\sigma/dMdx_F$ (nb GeV$^2$)
-CustomLegend=$0.75 < x_F < 0.8$
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$0.75 < x_F < 0.8$
 
 
 # END PLOT
 # BEGIN PLOT /NUSEA_2003_I613362/d40*
-LegendYPos=0.4
-LegendXPos=0.1
 # END PLOT
 
 
 # BEGIN PLOT /NUSEA_2003_I613362/d40-x01-y01
-LegendYPos=0.95
-LegendXPos=0.2
 LogY=1
 LogX=0
 YMin=0.01
@@ -239,9 +210,7 @@ YMax=300
 Title=NuSea: Drell-Yan $\sqrt{s}=38.8$ GeV, $-0.05 < x_F < 0.15$
 XLabel=$p_T$ (GeV)
 YLabel=$(2 E)/(\pi \sqrt{s}) d\sigma/dx_Fdp_T^2$ (pb/GeV)
-CustomLegend=$4.2 < M_{\mu^+\mu^-} < 5.2 $ GeV
-# + any additional plot settings you might like, see make-plots documentation
-#GofLegend=1
+LegendTitle=$4.2 < M_{\mu^+\mu^-} < 5.2 $ GeV
 GofType=chi2
 # END PLOT
 
@@ -251,10 +220,8 @@ LogX=0
 Title=NuSea: Drell-Yan $\sqrt{s}=38.8$ GeV, $-0.05 < x_F < 0.15$
 XLabel=$p_T$ (GeV)
 YLabel=$(2 E)/(\pi \sqrt{s}) d\sigma/dx_Fdp_T^2$ (pb/GeV)
-CustomLegend=$5.2 < M_{\mu^+\mu^-} < 6.2 $ GeV
-#GofLegend=1
+LegendTitle=$5.2 < M_{\mu^+\mu^-} < 6.2 $ GeV
 #GofType=chi2
-# + any additional plot settings you might like, see make-plots documentation
 # END PLOT
 
 # BEGIN PLOT /NUSEA_2003_I613362/d40-x01-y03
@@ -263,8 +230,7 @@ LogX=0
 Title=NuSea: Drell-Yan $\sqrt{s}=38.8$ GeV, $-0.05 < x_F < 0.15$
 XLabel=$p^{\mu+^+\mu^-}_T$ (GeV)
 YLabel=$(2 E)/(\pi \sqrt{s}) d\sigma/dx_Fdp_T^2$ (pb/GeV)
-CustomLegend=$6.2 < M_{\mu^+\mu^-} < 7.2 $ GeV
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$6.2 < M_{\mu^+\mu^-} < 7.2 $ GeV
 # END PLOT
 
 # BEGIN PLOT /NUSEA_2003_I613362/d40-x01-y04
@@ -273,8 +239,7 @@ LogX=0
 Title=NuSea: Drell-Yan $\sqrt{s}=38.8$ GeV, $-0.05 < x_F < 0.15$
 XLabel=$p_T$ (GeV)
 YLabel=$(2 E)/\pi \sqrt{s}) d\sigma/dx_Fdp_T^2$ (pb/GeV)
-CustomLegend=$7.2 < M_{\mu^+\mu^-} < 8.7 $ GeV
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$7.2 < M_{\mu^+\mu^-} < 8.7 $ GeV
 # END PLOT
 
 # BEGIN PLOT /NUSEA_2003_I613362/d40-x01-y05
@@ -283,8 +248,7 @@ LogX=0
 Title=NuSea: Drell-Yan $\sqrt{s}=38.8$ GeV, $-0.05 < x_F < 0.15$
 XLabel=$p_T$ (GeV)
 YLabel=$(2 E)/(\pi \sqrt{s}) d\sigma/dx_Fdp_T^2$ (pb/GeV)
-CustomLegend=$10.2< M_{\mu^+\mu^-} < 12.85 $ GeV
-# + any additional plot settings you might like, see make-plots documentation
+LegendTitle=$10.2< M_{\mu^+\mu^-} < 12.85 $ GeV
 # END PLOT
 
 

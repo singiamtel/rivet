@@ -3,7 +3,5 @@ Title=Mean charged multiplicity average for $\sqrt{s}$ between 12 and 31.3 GeV
 YLabel=$\bar{n}_\mathrm{ch}$
 XLabel=$\sqrt{s}$
 LogY=0
-LegendXPos=0.25
-LegendYPos=0.25
 ConnectGaps=1
 # END PLOT

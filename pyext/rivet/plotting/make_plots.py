@@ -58,7 +58,7 @@ def _parse_args(args):
     for a in args:
         asplit = a.split(':')
         path = asplit[0]
-        if path != "PLOT" and path != "REF":
+        if path != "PLOT" and not re.fullmatch(r"REF(\d+)?$", path):
             filelist.append(path)
             while path in plotoptions:
                 path = '_' + path
@@ -79,7 +79,7 @@ def _parse_args(args):
             plotoptions[has_name] = plotoptions.pop(path)
         else:
             has_name = path
-        if path != "PLOT" and path != 'REF' and not has_title:
+        if path != "PLOT" and not re.fullmatch(r"REF(\d+)?$", path) and not has_title:
             plotoptions[has_name]['Title'] = _sanitise_string(os.path.basename( os.path.splitext(path)[0] ))
     return filelist, plotoptions
 
@@ -153,27 +153,31 @@ def _get_histos(filelist, plotoptions, path_patterns = [], path_unpatterns = [],
     return refhistos, mchistos, hpaths
 
 
-def _add_ref_hist(output, refhisto, reflabel, ratiolabel):
-    reflabel = 'Data'
+def _add_ref_hist(output, refhisto, reftitle, ratiolabel):
     refhisto.setAnnotation('IsRef', True)
-    # check if a band was explicitly requested
-    refbands = [ ]
-    needsBand = len([ val for key, val in output.get('REF', {}).items()
-                                       if 'ErrorBand' in key and val ])
-    # if the user requested bands for multiple sigma levels,
-    # start adding them from the back
-    for sigma in reversed(max(refbands, key=len) if len(refbands) else ['']):
-        suff = str(sigma) if sigma != 1 else ''
-        # add nominal reference curve
-        output['histograms'][reflabel+suff] = {'nominal': refhisto}
-        output['histograms'][reflabel+suff]['IsRef'] = True
-        output['histograms'][reflabel+suff]['LineColor'] = 'black'
+    # assemble array of REF/REF2/... for every reference curve tag on
+    # the command line, sort them based on tailing digits, then loop
+    for ref_key in sorted(list(set([ tag for tag in output.keys()
+                       if re.fullmatch(r"REF(\d+)?$", tag) ] + ['REF'])),
+                       key=lambda k : int(k[3:] if len(k) > 3 else 0)):
+        reflabel = reftitle + (ref_key[3:] if len(ref_key) > 3 else '')
+        errpat = output.get(ref_key, {}).get('ErrorPattern', '')
+        # check if a band was explicitly requested
+        needsBand = len([ val for key, val in output.get(ref_key, {}).items()
+                                           if 'ErrorBand' in key and val ])
+        # add new reference curve
+        output['histograms'][reflabel] = {
+            'nominal' : yoda.plotting.utils.mkPlotFriendlyScatter(refhisto, errorPattern=errpat)
+        }
+        output['histograms'][reflabel]['IsRef'] = True
+        output['histograms'][reflabel]['LineColor'] = 'black'
         # set label for reference data in legend
-        output['histograms'][reflabel+suff]['Title'] = reflabel
+        output['histograms'][reflabel]['Title'] = reftitle
         # set additional reference-data options
-        output['histograms'][reflabel+suff].update(output.get('REF', {}))
-        if sigma or needsBand:
-            output['histograms'][reflabel+suff]['BandUncertainty'] = yoda.plotting.utils.mkPlotFriendlyScatter(refhisto)
+        output['histograms'][reflabel].update(output.get(ref_key, {}))
+        if needsBand:
+            bandao = yoda.plotting.utils.mkPlotFriendlyScatter(refhisto, errorPattern=errpat)
+            output['histograms'][reflabel]['BandUncertainty'] = bandao
 
     # decide if ratio panel is shown or not
     output['plot features']['RatioPlot'] = ratiolabel != None
@@ -183,7 +187,7 @@ def _add_ref_hist(output, refhisto, reflabel, ratiolabel):
 
 def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptions,
                  style, rc_params, mc_errs, nRatioTicks, showWeights, removeOptions, deviation,
-                 canvasText, ratioPlotLabel = None, showRatio = None, verbose = False,):
+                 canvasText, refLabel=None, ratioPlotLabel = None, showRatio = None, verbose = False,):
 
     """Create output dictionary for the plot_id.
 
@@ -223,20 +227,22 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
     outputdict = {}
     plot_configs = plot2yaml.get_plot_configs(plot_id, plotdirs=plotdirs, config_files=config_files)
     outputdict['plot features'] = plot_configs
+    if deviation:
+        outputdict['plot features']['RatioPlotMode'] = 'deviation'
     rpmode = plot_configs.get('RatioPlotMode', 'mcdata')
-    deviation |= plot_configs.get('Deviation', False)
-    outputdict['plot features']['Deviation'] = deviation or rpmode == 'deviation'
 
     # only write extra info to the .dat file if specified by user
     if nRatioTicks !=1: outputdict['plot features'].update({"nRatioTicks": nRatioTicks})
     if canvasText != None: outputdict['plot features'].update({"canvasText" : canvasText})
     outputdict['plot features'].update(plotoptions.get('PLOT', {}))
-    outputdict['REF'] = plotoptions.get('REF', {})
     outputdict['rcParams'] = rc_params
     outputdict['style'] = style
     outputdict['stylepath'] = '../'
     outputdict['histograms'] = {}
     outputdict['pat_warn'] = {}
+    for key, val in plotoptions.items():
+        if re.fullmatch(r"REF(\d+)?$", key):
+            outputdict[key] = val
 
     componentNames = ['BandComponentPDF', 'BandComponentEnv']
 
@@ -248,7 +254,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
         if hasRatio:
             rplabel = ratioPlotLabel if ratioPlotLabel != None else \
                       refhistos[plot_id].annotation('RatioPlotYLabel', 'MC/Data')
-        reftitle = refhistos[plot_id].annotation('Title', 'Data')
+        reftitle = refLabel if refLabel != None else \
+                   refhistos[plot_id].annotation('Title', 'Data')
         reflabel = reftitle if reftitle != None else 'Data'
         _add_ref_hist(outputdict, refhistos[plot_id], reflabel, rplabel)
 
@@ -424,7 +431,8 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
         if hasRatio:
             rplabel = ratioPlotLabel if ratioPlotLabel != None else \
                       refhistos[plot_id].annotation('RatioPlotYLabel', 'Data/MC')
-        reftitle = refhistos[plot_id].annotation('Title', 'Data')
+        reftitle = refLabel if refLabel != None else \
+                   refhistos[plot_id].annotation('Title', 'Data')
         reflabel = reftitle if reftitle != None else 'Data'
         _add_ref_hist(outputdict, refhistos[plot_id], reflabel, rplabel)
 
@@ -432,7 +440,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
     # A list of keys is first created. Otherwise, it will raise an error since the size of the dict changes.
     dict_keys = list(outputdict.keys())
     for key in dict_keys:
-        if not outputdict[key] or key == 'REF':
+        if not outputdict[key] or re.fullmatch(r"REF(\d+)?$", key):
             del outputdict[key]
     return outputdict
 
@@ -444,7 +452,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
                            rivetplotpaths=True, analysispaths=[], verbose=False,
                            nRatioTicks=1, showWeights=False,
                            removeOptions = False, deviation=False,
-                           canvasText=None, ratioPlotLabel=None,
+                           canvasText=None, refLabel=None, ratioPlotLabel=None,
                            showRatio=None):
     """Create a dictionary of the plotting data that can be turned
     into self-consistent Python executables.
@@ -489,6 +497,8 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
         Number of minor ticks between major ticks, can be specified in rivet-mkhtml
     deviation: bool
         Scale ratio-plot to error of the reference histogram (1 standard deviation)
+    refLabel : str
+        Legend name of the reference data in the plots.
     ratioPlotLabel : str
         Label on the y-axis of the ratio panel.
 
@@ -551,7 +561,7 @@ def assemble_plotting_data(args, path_pwd=True, rivetrefs=True,
             mchistos, refhistos,
             plotoptions, stylename, rc_params_dict, mc_errs,
             nRatioTicks, showWeights, removeOptions, deviation,
-            canvasText, ratioPlotLabel, showRatio, verbose
+            canvasText, refLabel, ratioPlotLabel, showRatio, verbose
         )
         for presc, warnings in outputdict.setdefault('pat_warn', {}).items():
             for filename, pats in warnings.items():

@@ -1,6 +1,4 @@
 # BEGIN PLOT /D0_2010_I856972/d0
-LegendXPos=0.4
-LegendYPos=0.9
 FullRange=1
 # END PLOT
 

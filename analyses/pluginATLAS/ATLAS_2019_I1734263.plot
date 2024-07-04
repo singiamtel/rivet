@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2019_I1734263/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
-LegendXPos=0.95
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1734263/d01-x01-y01
@@ -90,8 +88,6 @@ LogY=0
 Title=$pp \rightarrow e^{\pm}\mu^{\mp}\nu\nu$
 XLabel=$\Delta \phi_{\ell\ell}$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \Delta \phi_{\ell\ell}$ [fb]
-LegendXPos=0.05
-LegendAlign=l
 LogY=0
 # END PLOT
 
@@ -99,8 +95,6 @@ LogY=0
 Title=$pp \rightarrow e^{\pm}\mu^{\mp}\nu\nu$
 XLabel=$\Delta \phi_{\ell\ell}$
 YLabel=$1 / \sigma \; \mathrm{d}\sigma / \mathrm{d} \Delta \phi_{\ell\ell}$
-LegendXPos=0.05
-LegendAlign=l
 LogY=0
 # END PLOT
 

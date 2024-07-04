@@ -2,7 +2,6 @@
 Title=Cross section for $\log_{10}M_{Y} < 0.5$ (SD dominated)
 XLabel=$\log_{10}\xi_{X}$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\log_{10}\xi_{X}$ [mb]
-LegendXPos=0.1
 LogY=0
 YMax=2.0
 # END PLOT
@@ -27,7 +26,6 @@ YMax=0.7
 Title=Visible cross sections
 XCustomMajorTicks=0.5	$\sigma_\text{no-CASTOR}$	1.5	$\sigma_\text{CASTOR}$	2.5	$\sigma_\text{CG}$
 YLabel=$\sigma$ [mb]
-LegendYPos=0.9
 LogY=0
 # END PLOT
 

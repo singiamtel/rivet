@@ -1,5 +1,4 @@
 # BEGIN PLOT /MC_TTBAR/.*
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /MC_TTBAR/.*jet.?_[1234]_pT
@@ -42,7 +41,6 @@ LogX=1
 Title=Dijet invariant mass spectrum
 XLabel=$m_{jj}$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}m_{jj}$ [pb GeV$^{-1}$]
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /MC_TTBAR/.*jetb_1_pT

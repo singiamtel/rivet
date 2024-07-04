@@ -31,7 +31,6 @@ Title=$uds$ events $\ln(1/x_p)$
 XLabel=$\xi_p$
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}\xi_p$
 FullRange=1
-LegendYPos=0.65
 # END PLOT
 
 # BEGIN PLOT /OPAL_1998_I472637/d06-x01-y01
@@ -39,7 +38,6 @@ Title=$c$ events $\ln(1/x_p)$
 XLabel=$\xi_p$
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}\xi_p$
 FullRange=1
-LegendYPos=0.65
 # END PLOT
 
 # BEGIN PLOT /OPAL_1998_I472637/d07-x01-y01
@@ -47,7 +45,6 @@ Title=$b$ events $\ln(1/x_p)$
 XLabel=$\xi_p$
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}\xi_p$
 FullRange=1
-LegendYPos=0.65
 # END PLOT
 
 # BEGIN PLOT /OPAL_1998_I472637/d08-x01-y01
@@ -55,7 +52,6 @@ Title=All events $\ln(1/x_p)$
 XLabel=$\xi_p$
 YLabel=$1/\sigma \, \mathrm{d}\sigma/\mathrm{d}\xi_p$
 FullRange=1
-LegendYPos=0.65
 # END PLOT
 
 # BEGIN PLOT /OPAL_1998_I472637/d09-x01-y01

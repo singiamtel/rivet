@@ -3,7 +3,6 @@ XLabel=$\eta$
 YLabel=$\mathrm{d}E/\mathrm{d}\eta$ [GeV]
 FullRange=1
 LogY=1
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /CMS_2011_I930319/d01-x01-y01

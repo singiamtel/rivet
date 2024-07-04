@@ -1,7 +1,6 @@
 # BEGIN PLOT /ATLAS_2017_I1591327/d.*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LogY=1
 # END PLOT
 
@@ -35,9 +34,6 @@ LogX=1
 Title=Polar scattering angle of the photons
 XLabel=$|\cos\theta_{\eta}^\ast|$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}|\cos\theta_{\eta}^\ast|$ [fb]
-LegendYPos=0.3
-LegendXPos=0.05
-LegendAlign=l
 LogY=0
 # END PLOT
 
@@ -45,7 +41,5 @@ LogY=0
 Title=Azimuthal angle between the photons
 XLabel=$\Delta\phi_{\gamma\gamma}$ [rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi_{\gamma\gamma}$ [fb rad$^{-1}$]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 

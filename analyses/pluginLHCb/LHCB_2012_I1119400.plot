@@ -1,8 +1,6 @@
 # BEGIN PLOT /LHCB_2012_I1119400/d
 XLabel=$\eta$
 LogY=0
-LegendXPos=0.05
-LegendYPos=0.4
 # END PLOT
 
 

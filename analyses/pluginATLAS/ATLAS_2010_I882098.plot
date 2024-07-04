@@ -19,7 +19,6 @@ Title=Charged particle $\eta$ at 2360$\,$GeV, track $p_\perp > 500\,\mathrm{MeV}
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d19-x01-y01
@@ -43,7 +42,6 @@ Title=Charged particle $\eta$ at 7$\,$TeV, track $p_\perp > 100\,\mathrm{MeV}$, 
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d25-x01-y01
@@ -51,7 +49,6 @@ Title=Charged $\langle p_\perp \rangle$ vs. $N_\mathrm{ch}$ at 7$\,$TeV, track $
 LogY=0
 XLabel=$N_\mathrm{ch}$
 YLabel=$\langle p_\perp \rangle$ $\;$ [GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d35-x01-y01
@@ -75,7 +72,6 @@ Title=Charged particle $\eta$ at 7$\,$TeV, track $p_\perp > 100\,\mathrm{MeV}$, 
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d37-x01-y01
@@ -106,7 +102,6 @@ Title=Charged $\langle p_\perp \rangle$ vs. $N_\mathrm{ch}$ at 7$\,$TeV, track $
 LogY=0
 XLabel=$N_\mathrm{ch}$
 YLabel=$\langle p_\perp \rangle$ $\;$ [GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d17-x01-y01
@@ -130,7 +125,6 @@ Title=Charged particle $\eta$ at 7$\,$TeV, track $p_\perp > 500\,\mathrm{MeV}$, 
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d23-x01-y01
@@ -138,7 +132,6 @@ Title=Charged $\langle p_\perp \rangle$ vs. $N_\mathrm{ch}$ at 7$\,$TeV, track $
 LogY=0
 XLabel=$N_\mathrm{ch}$
 YLabel=$\langle p_\perp \rangle$ $\;$ [GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d21-x01-y01
@@ -162,7 +155,6 @@ Title=Charged particle $\eta$ at 7$\,$TeV, track $p_\perp > 500\,\mathrm{MeV}$, 
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d18-x01-y01
@@ -186,7 +178,6 @@ Title=Charged particle $\eta$ at 900$\,$GeV, track $p_\perp > 100\,\mathrm{MeV}$
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d24-x01-y01
@@ -194,7 +185,6 @@ Title=Charged $\langle p_\perp \rangle$ vs. $N_\mathrm{ch}$ at 900$\,$GeV, track
 LogY=0
 XLabel=$N_\mathrm{ch}$
 YLabel=$\langle p_\perp \rangle$ $\;$ [GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d34-x01-y01
@@ -218,7 +208,6 @@ Title=Charged particle $\eta$ at 900$\,$GeV, track $p_\perp > 100\,\mathrm{MeV}$
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d36-x01-y01
@@ -242,7 +231,6 @@ Title=Charged particle $\eta$ at 900$\,$GeV, track $p_\perp > 2500\,\mathrm{MeV}
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d38-x01-y01
@@ -250,7 +238,6 @@ Title=Charged $\langle p_\perp \rangle$ vs. $N_\mathrm{ch}$ at 900$\,$GeV, track
 LogY=0
 XLabel=$N_\mathrm{ch}$
 YLabel=$\langle p_\perp \rangle$ $\;$ [GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d15-x01-y01
@@ -274,7 +261,6 @@ Title=Charged particle $\eta$ at 900$\,$GeV, track $p_\perp > 500\,\mathrm{MeV}$
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d22-x01-y01
@@ -282,7 +268,6 @@ Title=Charged $\langle p_\perp \rangle$ vs. $N_\mathrm{ch}$ at 900$\,$GeV, track
 LogY=0
 XLabel=$N_\mathrm{ch}$
 YLabel=$\langle p_\perp \rangle$ $\;$ [GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2010_I882098/d20-x01-y01
@@ -307,5 +292,4 @@ Title=Charged particle $\eta$ at 900$\,$GeV, track $p_\perp > 500\,\mathrm{MeV}$
 LogY=0
 XLabel=$\eta$
 YLabel=$1/N_\mathrm{ev} \, \mathrm{d}N_\mathrm{ch}/\mathrm{d}\eta$
-LegendYPos=0.4
 # END PLOT

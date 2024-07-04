@@ -4,7 +4,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.6
 RatioPlotMode=deviation
 # END PLOT
 
@@ -14,7 +13,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.6
 RatioPlotMode=deviation
 # END PLOT
 
@@ -24,7 +22,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.6
 RatioPlotMode=deviation
 # END PLOT
 
@@ -34,7 +31,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.6
 RatioPlotMode=deviation
 # END PLOT
 
@@ -44,7 +40,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.6
 RatioPlotMode=deviation
 # END PLOT
 
@@ -54,7 +49,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.6
 RatioPlotMode=deviation
 # END PLOT
 
@@ -64,7 +58,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.05
 RatioPlotMode=deviation
 # END PLOT
 
@@ -74,7 +67,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.05
 RatioPlotMode=deviation
 # END PLOT
 
@@ -84,7 +76,6 @@ XLabel=$\Delta\eta$
 YLabel=$R(\Delta\eta)$
 LogY=0
 LogX=0
-LegendXPos=0.05
 RatioPlotMode=deviation
 # END PLOT
 
@@ -94,7 +85,6 @@ XLabel=$\Delta\phi$
 YLabel=$R(\Delta\phi)$
 LogY=0
 LogX=0
-LegendXPos=0.4
 RatioPlotMode=deviation
 # END PLOT
 
@@ -104,7 +94,6 @@ XLabel=$\Delta\phi$
 YLabel=$R(\Delta\phi)$
 LogY=0
 LogX=0
-LegendXPos=0.4
 RatioPlotMode=deviation
 # END PLOT
 
@@ -114,7 +103,6 @@ XLabel=$\Delta\phi$
 YLabel=$R(\Delta\phi)$
 LogY=0
 LogX=0
-LegendXPos=0.4
 RatioPlotMode=deviation
 # END PLOT
 
@@ -124,7 +112,6 @@ XLabel=$\Delta\phi$
 YLabel=$R(\Delta\phi)$
 LogY=0
 LogX=0
-LegendXPos=0.1
 RatioPlotMode=deviation
 # END PLOT
 
@@ -134,7 +121,6 @@ XLabel=$\Delta\phi$
 YLabel=$R(\Delta\phi)$
 LogY=0
 LogX=0
-LegendXPos=0.1
 RatioPlotMode=deviation
 # END PLOT
 
@@ -144,6 +130,5 @@ XLabel=$\Delta\phi$
 YLabel=$R(\Delta\phi)$
 LogY=0
 LogX=0
-LegendXPos=0.1
 RatioPlotMode=deviation
 # END PLOT

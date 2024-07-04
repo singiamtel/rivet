@@ -1,14 +1,12 @@
 # BEGIN PLOT /CMS_2011_I879315/d
 XLabel=n
 YLabel=$P_{n}$
-LegendXPos=0.7
 FullRange=1
 # END PLOT
 
 # BEGIN PLOT /CMS_2011_I879315/d2[3-5]
 XLabel=n
 YLabel=$\langle p_\perp \rangle$ [GeV]
-LegendXPos=0.5
 LogY=0
 # END PLOT
 

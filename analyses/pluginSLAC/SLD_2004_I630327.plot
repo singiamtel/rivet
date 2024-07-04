@@ -84,8 +84,6 @@ YLabel=$\mathrm{d}N/\mathrm{d}x_p$
 Title=$\pi^\pm$ multiplicity
 XLabel=$x_p$
 YLabel=$\mathrm{d}N/\mathrm{d}x_p$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -93,8 +91,6 @@ LogY=0
 Title=$K^\pm$  multiplicity
 XLabel=$x_p$
 YLabel=$\mathrm{d}N/\mathrm{d}x_p$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -102,8 +98,6 @@ LogY=0
 Title=$p,\bar p$ multiplicity
 XLabel=$x_p$
 YLabel=$\mathrm{d}N/\mathrm{d}x_p$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -113,8 +107,6 @@ LogY=0
 Title=$\pi^\pm$ multiplicity, ($uds$) events
 XLabel=
 YLabel=$N_{\pi^\pm}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -122,8 +114,6 @@ LogY=0
 Title=$\pi^\pm$ multiplicity, $c$ events
 XLabel=
 YLabel=$N_{\pi^\pm}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -131,8 +121,6 @@ LogY=0
 Title=$\pi^\pm$ multiplicity, $b$ events
 XLabel=
 YLabel=$N_{\pi^\pm}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -140,8 +128,6 @@ LogY=0
 Title=$K^\pm$ multiplicity, ($uds$) events
 XLabel=
 YLabel=$N_{K^\pm}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -149,8 +135,6 @@ LogY=0
 Title=$K^\pm$ multiplicity, $c$ events
 XLabel=
 YLabel=$N_{K^\pm}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -158,8 +142,6 @@ LogY=0
 Title=$K^\pm$ multiplicity, $b$ events
 XLabel=
 YLabel=$N_{K^\pm}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -167,8 +149,6 @@ LogY=0
 Title=$p, \bar p$ multiplicity, ($uds$) events
 XLabel=
 YLabel=$N_{p, \bar p}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -176,8 +156,6 @@ LogY=0
 Title=$p, \bar p$ multiplicity, $c$ events
 XLabel=
 YLabel=$N_{p, \bar p}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -185,8 +163,6 @@ LogY=0
 Title=$p, \bar p$ multiplicity, $b$ events
 XLabel=
 YLabel=$N_{p, \bar p}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -194,8 +170,6 @@ LogY=0
 Title=Charged particle multiplicity, ($uds$) events
 XLabel=
 YLabel=$N_{\mathrm{charged}}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -203,8 +177,6 @@ LogY=0
 Title=Charged particle multiplicity, $c$ events
 XLabel=
 YLabel=$N_{\mathrm{charged}}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -212,8 +184,6 @@ LogY=0
 Title=Charged particle multiplicity, $b$ events
 XLabel=
 YLabel=$N_{\mathrm{charged}}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -222,8 +192,6 @@ LogY=0
 Title=Difference in Charged multiplicity between $c$ and $uds$ events
 XLabel=$E_\mathrm{CMS}/GeV$
 YLabel=$\delta_{bl}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -231,8 +199,6 @@ LogY=0
 Title=Difference in Charged multiplicity between $b$ and $uds$ events
 XLabel=$E_\mathrm{CMS}/GeV$
 YLabel=$\delta_{bl}$
-LegendXPos=0.60
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -241,8 +207,6 @@ LogY=0
 Title=$R^q_{\pi^+}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to\pi^+)+N(\bar q\to\pi^-)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\pi^+}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -250,8 +214,6 @@ LogY=1
 Title=$R^q_{\pi^-}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to\pi^-)+N(\bar q\to\pi^+)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\pi^-}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -259,8 +221,6 @@ LogY=1
 Title=$D^q_{\pi^-}=(R^q_{\pi^-}-R^q_{\pi^+})/(R^q_{\pi^-}+R^q_{\pi^+})$
 XLabel=$x_p$
 YLabel=$D^q_{\pi^-}$ [$\%$]
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -268,8 +228,6 @@ LogY=0
 Title=$R^q_{K^+}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to K^+)+N(\bar q\to K^-)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{K^+}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -277,8 +235,6 @@ LogY=1
 Title=$R^q_{K^-}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to K^-)+N(\bar q\to K^+)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{K^-}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -286,8 +242,6 @@ LogY=1
 Title=$D^q_{K^-}=(R^q_{K^-}-R^q_{K^+})/(R^q_{K^-}+R^q_{K^+})$
 XLabel=$x_p$
 YLabel=$D^q_{K^-}$ [$\%$]
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT
@@ -295,8 +249,6 @@ LogY=0
 Title=$R^q_{p}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to p)+N(\bar q\to \bar p)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{p}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -304,8 +256,6 @@ LogY=1
 Title=$R^q_{\bar p}=\frac{1}{2N_\mathrm{events}}\frac{\mathrm{d}}{\mathrm{d}x_p}\left[N(q\to \bar p)+N(\bar q\to p)\right]$
 XLabel=$x_p$
 YLabel=$R^q_{\bar p}$
-LegendXPos=0.60
-LegendYPos=0.85
 FullRange=1
 LogY=1
 # END PLOT
@@ -313,8 +263,6 @@ LogY=1
 Title=$D^q_{p}=(R^q_{p}-R^q_{\bar p})/(R^q_{p}+R^q_{\bar p})$
 XLabel=$x_p$
 YLabel=$D^q_{p}$ [$\%$]
-LegendXPos=0.20
-LegendYPos=0.5
 FullRange=1
 LogY=0
 # END PLOT

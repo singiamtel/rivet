@@ -8,7 +8,6 @@ YMin=-0.7
 RatioPlotYMax=3.0
 RatioPlotYMin=-3.0
 YLabel=$A_\mathrm{FB}$
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1351916/d02

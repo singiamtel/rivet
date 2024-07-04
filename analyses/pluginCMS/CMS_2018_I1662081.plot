@@ -4,7 +4,6 @@ LogX=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 #NormalizeToIntegral=1
-LegendXPos=0.4
 Title=CMS, 13 TeV, $t\bar{t}$ lepton+jets
 # END PLOT
 

@@ -2,8 +2,6 @@
 LogY=1
 YLabel=$d^2\sigma/dp_{T}dy$ (pb/GeV)
 XLabel=$p_{T}$ (GeV)
-LegendXPos=0.1
-LegendYPos=0.3
 FullRange=1
 # END PLOT
 

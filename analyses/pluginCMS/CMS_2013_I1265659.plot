@@ -5,7 +5,6 @@ YLabel=$F_{\eta_2}(\beta)$
 LogY=0
 YMax=0.099
 YMin=0.011
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /CMS_2013_I1265659/d01-x01-y02
@@ -15,5 +14,4 @@ YLabel=$F_{\eta_2}(\beta)$
 LogY=0
 YMax=0.099
 YMin=0.011
-LegendXPos=0.05
 # END PLOT

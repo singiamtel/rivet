@@ -1,6 +1,4 @@
 # BEGIN PLOT /LHCB_2014_I1281685/d01-x01-y01
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -12,8 +10,6 @@ LogY=0
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d02-x01-y01
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -25,8 +21,6 @@ LogY=0
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d03-x01-y01
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -38,8 +32,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d04-x01-y01
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -51,8 +43,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d04-x01-y02
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -64,8 +54,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d04-x01-y03
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -77,8 +65,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d04-x01-y04
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -90,8 +76,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d04-x01-y05
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -103,8 +87,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d05-x01-y01
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -116,8 +98,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d05-x01-y02
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -129,8 +109,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d05-x01-y03
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -142,8 +120,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d05-x01-y04
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -155,8 +131,6 @@ LogY=1
 
 
 # BEGIN PLOT /LHCB_2014_I1281685/d05-x01-y05
-#LegendXPos=0.0
-#LegendYPos=0.0
 #FullRange=1
 #XMin=0.0
 #YMin=0.0

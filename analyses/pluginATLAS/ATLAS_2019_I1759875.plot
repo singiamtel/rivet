@@ -1,9 +1,6 @@
 # BEGIN PLOT /ATLAS_2019_I1759875/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendYPos=0.90
-LegendXPos=0.95
-LegendAlign=r
 LogY=1
 Title=
 RatioPlotYMax=1.02
@@ -55,31 +52,21 @@ YLabel=$1 / \sigma \; \mathrm{d}\sigma / \mathrm{d} m^{e\mu}$ [1/GeV]
 # BEGIN PLOT /ATLAS_2019_I1759875/d09
 XLabel=Dilepton $|y^{e\mu}|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} |y^{e\mu}|$ [fb]
-LegendYPos=0.55
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1759875/d10
 XLabel=Dilepton $|y^{e\mu}|$
 YLabel=$1 / \sigma \; \mathrm{d}\sigma / \mathrm{d} |y^{e\mu}|$
-LegendYPos=0.55
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1759875/d11
 XLabel=Dilepton $\Delta \phi^{e\mu}$ [rad]
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \Delta \phi^{e\mu}$ [fb/rad]
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1759875/d12
 XLabel=Dilepton $\Delta \phi^{e\mu}$ [rad]
 YLabel=$1 / \sigma \; \mathrm{d}\sigma / \mathrm{d} \Delta \phi^{e\mu}$ [1/rad]
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1759875/d13

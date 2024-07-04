@@ -2,8 +2,6 @@
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.9
-LegendXPos=0.95
-LegendAlign=r
 YLabelSep=8.0
 RatioPlotYMin=0.7
 RatioPlotYMax=1.3
@@ -35,17 +33,11 @@ YLabel=$1/\sigma$ $\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}^{t\bar{t}}$ [1/GeV]
 # BEGIN PLOT /ATLAS_2015_I1404878/d05
 XLabel=$|y_{t\bar{t}}|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}|y_{t\bar{t}}|$ [pb]
-LegendXPos=0.05
-LegendYPos=0.3
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d06
 XLabel=$|y_{t\bar{t}}|$
 YLabel=$1/\sigma$ $\mathrm{d}\sigma / \mathrm{d}|y_{t\bar{t}}|$
-LegendXPos=0.05
-LegendYPos=0.3
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d07
@@ -62,17 +54,11 @@ YLabel=$1/\sigma$ $\mathrm{d}\sigma / \mathrm{d}p_\mathrm{T}^{t,\mathrm{had}}$ [
 # BEGIN PLOT /ATLAS_2015_I1404878/d09
 XLabel=$|y_{t,\mathrm{had}}|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}|y_{t,\mathrm{had}}|$ [pb]
-LegendXPos=0.05
-LegendYPos=0.3
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d10
 XLabel=$|y_{t,\mathrm{had}}|$
 YLabel=$1/\sigma$ $\mathrm{d}\sigma / \mathrm{d}|y_{t,\mathrm{had}}|$
-LegendXPos=0.05
-LegendYPos=0.3
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d11
@@ -89,15 +75,11 @@ YLabel=$1/\sigma$ $\mathrm{d}\sigma / \mathrm{d}|p_\mathrm{out}^{t\bar{t}}|$ [1/
 # BEGIN PLOT /ATLAS_2015_I1404878/d13
 XLabel=$\Delta \phi_{t\bar{t}}$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta \phi_{t\bar{t}}$ [pb]
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d14
 XLabel=$\Delta \phi_{t\bar{t}}$
 YLabel=$1/\sigma$ $\mathrm{d}\sigma / \mathrm{d}\Delta \phi_{t\bar{t}}$
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d15
@@ -114,17 +96,11 @@ YLabel=$1/\sigma$ $\mathrm{d}\sigma / \mathrm{d}H_\mathrm{T}^{t\bar{t}}$ [1/GeV]
 # BEGIN PLOT /ATLAS_2015_I1404878/d17
 XLabel=$y_\mathrm{boost}$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}y_\mathrm{boost}$ [pb]
-LegendXPos=0.05
-LegendYPos=0.3
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d18
 XLabel=$y_\mathrm{boost}$
 YLabel=$1\/sigma$ $\mathrm{d}\sigma / \mathrm{d}y_\mathrm{boost}$
-LegendXPos=0.05
-LegendYPos=0.3
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1404878/d19

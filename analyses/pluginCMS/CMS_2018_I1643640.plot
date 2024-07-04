@@ -1,7 +1,6 @@
 # BEGIN PLOT /CMS_2018_I1643640/d.*
 FullRange=1
 LogY=1
-LegendXPos=0.1
 NormalizeToIntegral=1
 # END PLOT
 

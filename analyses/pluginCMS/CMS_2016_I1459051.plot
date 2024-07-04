@@ -5,7 +5,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -17,7 +16,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -29,7 +27,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -41,7 +38,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -53,7 +49,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -65,7 +60,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -77,7 +71,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -89,7 +82,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -101,7 +93,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -113,7 +104,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -125,7 +115,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -137,7 +126,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -149,7 +137,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT
@@ -161,7 +148,6 @@ YLabel=d$^2\sigma$/d$p_{T}$d$y$ [pb/GeV]
 FullRange=1
 LogY=1
 LogX=1
-LegendYPos=0.9
 RatioPlotYMax=2
 RatioPlotYMin=0.1
 # END PLOT

@@ -9,7 +9,6 @@ Title=Scaled momentum spectrum for $D_2^*(2460)^0$
 XLabel=$x_p$
 YLabel=$1/\sigma\mathrm{d}\sigma/\mathrm{d}x_p$
 LogY=0
-LegendXPos=0.2
 END PLOT
 BEGIN PLOT /ARGUS_1989_I268577/d03-x01-y01
 Title=Decay angle for $D_2^*(2460)^0$

@@ -9,5 +9,4 @@ Title=$b$ hadron $\eta$ at $\sqrt{s}=7$ TeV
 XLabel=$|\eta|(H_b)$
 YLabel=$\mathrm{d}\sigma(H_bX) / \mathrm{d}|\eta|(H_b)$ [$\mu$b]
 LogY=0
-LegendYPos=0.4
 # END PLOT

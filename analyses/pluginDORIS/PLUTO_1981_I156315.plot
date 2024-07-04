@@ -1,7 +1,6 @@
 BEGIN PLOT /PLUTO_1981_I156315/d01
 XLabel=$\chi/$degrees
 YLabel=EEC [$\mathrm{rad}^{-1}$]
-LegendXPos=0.45
 FullRange=1
 END PLOT
 BEGIN PLOT /PLUTO_1981_I156315/d01-x01-y01
@@ -32,13 +31,11 @@ BEGIN PLOT /PLUTO_1981_I156315/d04-x01-y01
 Title=Asymmetry of the energy-energy correlation at $E_{\mathrm{CMS}}=7.7\to9.4$ GeV
 XLabel=$\chi/$degrees
 YLabel=AEEC [$\mathrm{rad}^{-1}$]
-LegendXPos=0.45
 FullRange=1
 END PLOT
 BEGIN PLOT /PLUTO_1981_I156315/d05-x01-y01
 Title=Asymmetry of the energy-energy correlation at $E_{\mathrm{CMS}}=30.0\to31.6$ GeV
 XLabel=$\chi/$degrees
 YLabel=AEEC [$\mathrm{rad}^{-1}$]
-LegendXPos=0.45
 FullRange=1
 END PLOT

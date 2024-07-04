@@ -2,7 +2,6 @@
 LogY=1
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LeftMargin=1.5
 # END PLOT
 # BEGIN PLOT /ATLAS_2021_I1849535/d01-x01-y01
