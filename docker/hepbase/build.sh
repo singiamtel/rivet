@@ -13,7 +13,7 @@ test "$TEST" && BUILD="echo $BUILD"
 RIVETBS_VERSION=4.0.0
 LHAPDF_VERSION=6.5.4
 
-for vhepmc in 3.3.0; do # 3.2.6
+for vhepmc in 3.2.7; do # 3.3.0
     for tex in 0 1; do
 
         MSG="Building hepbase image with HepMC=$vhepmc and TeX=$tex"
@@ -39,14 +39,6 @@ for vhepmc in 3.3.0; do # 3.2.6
         $BUILD -f Dockerfile.ubuntu ${CLANGARGS/gfortran/flang} -t $tag .
         test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
         echo -e "\n\n\n"
-
-        if [[ "$INTEL" = 1 ]]; then
-            echo "@@ $MSG on Ubuntu with Intel compilers"
-            tag=hepstore/hepbase-ubuntu-intel-hepmc${vhepmc:0:1}-py3$TEXSUFFIX$ARM
-            $BUILD -f Dockerfile.ubuntu $INTELARGS -t $tag .
-            test "$PUSH" = 1 && docker push $tag && sleep ${SLEEP:-1}m
-            echo -e "\n\n\n"
-        fi
 
         echo "@@ $MSG on Fedora with GCC compilers"
         tag=hepstore/hepbase-fedora-gcc-hepmc${vhepmc:0:1}-py3$TEXSUFFIX$ARM

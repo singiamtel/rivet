@@ -3,6 +3,7 @@ FROM ${FEDORA_IMAGE}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
 
+# TODO: rm Intel
 ARG BUILD_TOOLS
 RUN true \
     && dnf update -y \
@@ -22,6 +23,7 @@ RUN true \
     && echo -e "\nexport CXX=$CXX_CMD\nexport CC=$CC_CMD\nexport FC=$FC_CMD\n" >> /etc/profile.d/01-buildtools.sh \
     && cat /etc/profile.d/01-buildtools.sh >> /root/.bashrc
 
+# TODO: rm Intel
 RUN true \
     && if [[ "$BUILD_TOOLS" = "LLVM" ]]; then \
           update-alternatives --install /usr/bin/g++ g++ $(which clang++) 2 && \
@@ -42,6 +44,7 @@ RUN true \
          git wget tar less bzip2 findutils which nano file diffutils \
     && dnf clean all
 
+# TODO: rm Intel
 RUN true \
     && if [[ "$BUILD_TOOLS" != "Intel" ]]; then \
          dnf install -y python3 python3-devel && \
@@ -49,46 +52,53 @@ RUN true \
          alternatives --install /usr/bin/python-config python-config /usr/bin/python3-config 2 && \
          dnf clean all; \
        fi \
-    #&& wget --no-verbose https://bootstrap.pypa.io/get-pip.py -O get-pip.py \
+    #&& wget --no-check-certificate --no-verbose https://bootstrap.pypa.io/get-pip.py -O get-pip.py \
     #&& python get-pip.py \
     && pip install matplotlib requests Cython
 
 RUN true \
-    && if [[ "$BUILD_TOOLS" != "Intel" ]]; then \
-         dnf install -y libXft libXpm libXext libsqlite3x uuid-devel && \
-         dnf clean all && \
-         cd /usr/local && \
-         wget --no-verbose https://root.cern/download/root_v6.30.02.Linux-fedora39-x86_64-gcc13.2.tar.gz -O- | tar xz && \
-         echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh; \
-       fi
+    && dnf install -y libXft libXpm libXext libsqlite3x uuid-devel pcre-devel json-devel xxhash-devel tbb2020.3-devel \
+    && dnf clean all \
+    && cd /usr/local \
+    && wget --no-check-certificate --no-verbose https://root.cern/download/root_v6.32.02.Linux-fedora39-x86_64-gcc13.3.tar.gz -O- | tar xz \
+    && echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh
 
+# TODO: Update HighFive to 2.9.0... or just let this be handled by the bootstrap
 RUN true \
-    && dnf install -y \
-         zlib-devel gsl-devel \
-         hdf5-devel highfive-devel python3-h5py \
-    && dnf clean all
+    && dnf install -y zlib-devel gsl-devel hdf5-devel python3-h5py \
+    && dnf clean all \
+    && mkdir /code && cd /code \
+    && wget --no-check-certificate --no-verbose https://github.com/BlueBrain/HighFive/archive/refs/tags/v2.7.1.tar.gz -O- | tar xz \
+    && mv HighFive-*/include/highfive /usr/local/include/ \
+    && rm -rf /code
 
-# TODO: move pcre etc. (=nlohmann) back to the ROOT deps if it works
+# TODO: remove bootstrap hack for HepMC URL
 ARG HEPMC_VERSION
 ARG RIVETBS_VERSION
 RUN true \
     && mkdir /code && cd /code \
-    && wget --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
+    && wget --no-check-certificate --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
+    && sed -e 's!http://hepmc.web.cern.ch/hepmc/releases/!https://cedar-tools.web.cern.ch/downloads/!' -i rivet-bootstrap \
     && chmod +x rivet-bootstrap \
-    && dnf install -y pcre-devel json-devel xxhash-devel \
     && dnf clean all \
+    && PYV=$(python -c "import sys; v = sys.version_info; print(f'{v[0]}.{v[1]}')") \
     && INSTALL_PREFIX=/usr/local USE_VENV=0 \
        INSTALL_RIVET=0 INSTALL_YODA=0 INSTALL_CYTHON=0 \
+       INSTALL_HDF5=0 INSTALL_HIGHFIVE=0 \
        HEPMC_VERSION=${HEPMC_VERSION} \
-       HEPMC_CMAKE_ADD='-D HEPMC3_Python_SITEARCH312=/usr/local/lib/python3.12/site-packages -D HEPMC3_PYTHON_VERSIONS=3.12' \
+       HEPMC_CMAKE_ADD="-D HEPMC3_Python_SITEARCH${PYV//./}=/usr/local/lib/python$PYV/site-packages -D HEPMC3_PYTHON_VERSIONS=$PYV" \
        MAKE="make -j $(nproc --ignore=1)"  \
        ./rivet-bootstrap \
     && rm -rf /code
 
+## Build and enable user content via ld and Python paths
 RUN true \
-    && echo "export LD_LIBRARY_PATH=\"/usr/local/lib:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
-    && echo "export LD_LIBRARY_PATH=\"/usr/local/lib64:/usr/lib64:$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
-    && echo "export PYTHONPATH=\"$(for i in $(ls /usr/local/lib/python* -d); do echo -n "$i/site-packages:"; done)\$PYTHONPATH\"" >> /etc/profile.d/05-usrlocal.sh \
+    && echo "export LD_LIBRARY_PATH=\"/usr/lib64:/usr/lib:\$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
+    && echo "export LD_LIBRARY_PATH=\"/usr/local/lib64:/usr/local/lib:\$LD_LIBRARY_PATH\"" >> /etc/profile.d/05-usrlocal.sh \
+    && PYV=$(python -c "import sys; v = sys.version_info; print(f'{v[0]}.{v[1]}')") \
+    && echo "export PYTHONPATH=\"$(for i in $(ls /usr/local/lib*/python$PYV -d); do echo -n "$i/dist-packages:"; done)\$PYTHONPATH\"" >> /etc/profile.d/05-usrlocal.sh \
+    && echo "export PYTHONPATH=\"$(for i in $(ls /usr/local/lib*/python$PYV -d); do echo -n "$i/site-packages:"; done)\$PYTHONPATH\"" >> /etc/profile.d/05-usrlocal.sh \
+    && cat /etc/profile.d/05-usrlocal.sh \
     && cp /etc/bashrc /tmp/DUMMY1 \
     && echo 'for i in /etc/profile.d/*.sh; do . $i; done' > /tmp/DUMMY2 \
     && cat /tmp/DUMMY1 /tmp/DUMMY2 > /etc/bashrc && rm /tmp/DUMMY*
@@ -96,7 +106,7 @@ RUN true \
 ARG LHAPDF_VERSION
 RUN true \
     && mkdir /code && cd /code \
-    && wget --no-verbose https://lhapdf.hepforge.org/downloads/?f=LHAPDF-${LHAPDF_VERSION}.tar.gz -O- | tar xz \
+    && wget --no-check-certificate --no-verbose https://lhapdf.hepforge.org/downloads/?f=LHAPDF-${LHAPDF_VERSION}.tar.gz -O- | tar xz \
     && cd LHAPDF-*/ \
     && ls wrappers/python/ -l \
     && ./configure --prefix=/usr/local \
@@ -104,10 +114,13 @@ RUN true \
     && ls wrappers/python/build/lhapdf -l \
     && rm -r /code
 
+# TODO: remove for Rivet v4? Still needed in the mpl for now :-(
 ARG LATEX
 RUN if test "$LATEX" = "1"; then \
       dnf install -y \
-        texlive-latex-bin texlive-latex-extra texlive-latexconfig \
+        texlive texlive-latex \
+        texlive-latex-bin texlive-latexconfig \
+        texlive-collection-latex texlive-collection-latexrecommended \
         texlive-pst-tools texlive-pst-arrow \
         texlive-relsize texlive-cm texlive-hyphen-base \
         texlive-dvips texlive-collection-fontsrecommended \
@@ -115,6 +128,10 @@ RUN if test "$LATEX" = "1"; then \
       dnf clean all; \
       texhash; \
     fi
+
+# NB. Installing scipy auto-installs a compatible numpy
+RUN true \
+    && pip install --upgrade scipy matplotlib Cython requests
 
 ## Interactive niceties
 ADD bash.bashrc.completion /etc/
