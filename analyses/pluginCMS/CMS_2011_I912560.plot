@@ -4,6 +4,4 @@ XLabel=H$_{T}$ [TeV]
 YLabel=R$_{32}$
 FullRange=1
 LogY=0
-LegendYPos=0.4
-LegendXPos=0.5
 # END PLOT

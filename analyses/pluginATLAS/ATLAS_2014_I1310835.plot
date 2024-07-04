@@ -2,7 +2,6 @@
 XTwosidedTicks=1
 YTwosidedTicks=1
 LogY=0
-LegendAlign=r
 RatioPlotYMax=1.75
 RatioPlotYMin=0.25
 # END PLOT

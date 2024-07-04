@@ -3,7 +3,6 @@ XLabel=$\Delta\phi$ [rad]
 YLabel=$\frac{1}{\sigma}\frac{d\sigma}{d\Delta\phi}$ [rad$^{-1}$]
 FullRange=1
 LogY=1
-LegendXPos=0.1
 NormalizeToIntegral=1
 RatioPlotYMin=0.39
 RatioPlotYMax=2.51

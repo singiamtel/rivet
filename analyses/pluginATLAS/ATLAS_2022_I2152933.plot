@@ -3,12 +3,8 @@ Title=
 YLabel=Fraction of events
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendXPos=0.9
-LegendYPos=0.95
-LegendAlign=r
 RatioPlotYMin=0.6
 RatioPlotYMax=1.4
-ErrorBars=1
 LogY=0
 BottomMargin=1.2
 # END PLOT

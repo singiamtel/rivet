@@ -14,5 +14,4 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}p_{\perp\gamma\gamma}$ [pb/GeV]
 Title=Azimuthal separation of the photons
 XLabel=$\Delta\phi_{\gamma\gamma}$ [rad]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}\Delta\phi_{\gamma\gamma}$ [pb/rad]
-LegendXPos=0.1
 # END PLOT

@@ -7,8 +7,6 @@ Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=
 LogX=0
 LogY=1
 FullRange=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -18,8 +16,6 @@ YLabel=$\sigma (\mathrm{W}\rightarrow \mu \nu + N_{\mathrm{jet}})$ [pb]
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -29,8 +25,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 1 \mathrm{jet})/dp_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -40,8 +34,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 2 \mathrm{jet})/dp_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -51,8 +43,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 3 \mathrm{jet})/dp_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -62,8 +52,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 4 \mathrm{jet})/dp_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 # BEGIN PLOT /CMS_2014_I1303894/d05-x01-y01
@@ -72,8 +60,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 1 \mathrm{jet})/d|\eta|$ [p
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -83,8 +69,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 2 \mathrm{jet})/d|\eta|$ [p
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -94,8 +78,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 3 \mathrm{jet})/d|\eta|$ [p
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -105,8 +87,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 4 \mathrm{jet})/d|\eta|$ [p
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -116,8 +96,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 1 \mathrm{jet})/dH_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 # BEGIN PLOT /CMS_2014_I1303894/d10-x01-y01
@@ -126,8 +104,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 2 \mathrm{jet})/dH_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 # BEGIN PLOT /CMS_2014_I1303894/d11-x01-y01
@@ -136,8 +112,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 3 \mathrm{jet})/dH_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 # BEGIN PLOT /CMS_2014_I1303894/d12-x01-y01
@@ -146,8 +120,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 4 \mathrm{jet})/dH_{\mathrm
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -157,8 +129,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 1 \mathrm{jet})/d\Delta\phi
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.07
-LegendYPos=0.9
 # END PLOT
 
 
@@ -168,8 +138,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 2 \mathrm{jet})/d\Delta\phi
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -179,8 +147,6 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 3 \mathrm{jet})/d\Delta\phi
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT
 
 
@@ -190,6 +156,4 @@ YLabel=$d\sigma (\mathrm{W}\rightarrow \mu \nu +\geq 4 \mathrm{jet})/d\Delta\phi
 Title=$\mathrm{CMS}~~~~~~~\sqrt{s}=7~\mathrm{TeV}~~~~~~~\mathrm{L}_\mathrm{int}=5.0~\mathrm{fb}^{-1}$
 LogX=0
 LogY=1
-LegendXPos=0.7
-LegendYPos=0.9
 # END PLOT

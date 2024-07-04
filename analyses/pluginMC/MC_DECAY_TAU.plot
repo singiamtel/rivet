@@ -269,7 +269,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_pippimpim_1
 Title=Distribution of the hadronic mass in $\tau^-\to2\pi^-\pi^+\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{2\pi^-\pi^+}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{2\pi^-\pi^+}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -289,7 +288,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_pi0pi0pim_1
 Title=Distribution of the hadronic mass in $\tau^-\to2\pi^0\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{2\pi^0\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{2\pi^0\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -308,7 +306,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_kmpimkp_1
 Title=Distribution of the hadronic mass in $\tau^-\to K^-\pi^-K^+\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ K^-\pi^-K^+}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ K^-\pi^-K^+}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -333,7 +330,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_kmpi0k0_1
 Title=Distribution of the hadronic mass in $\tau^-\to K^-\pi^0K^0\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ K^-\pi^0K^0}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ K^-\pi^0K^0}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -358,7 +354,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_pi0pi0km_1
 Title=Distribution of the hadronic mass in $\tau^-\to 2\pi^0K^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ 2\pi^0K^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ 2\pi^0K^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -377,7 +372,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_kmpimpip_1
 Title=Distribution of the hadronic mass in $\tau^-\to K^-\pi^-\pi^+\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ K^-\pi^-\pi^+}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ K^-\pi^-\pi^+}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -402,7 +396,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_pimk0pi0_1
 Title=Distribution of the hadronic mass in $\tau^-\to \pi^-\pi^0\bar{K}^0\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^-\pi^0\bar{K}^0}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^-\pi^0\bar{K}^0}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -427,7 +420,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_pimpi0eta_1
 Title=Distribution of the hadronic mass in $\tau^-\to \pi^-\pi^0\eta\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^-\pi^0\eta}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^-\pi^0\eta}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -451,7 +443,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_pimpi0gamma_1
 Title=Distribution of the hadronic mass in $\tau^-\to \pi^-\pi^0\gamma\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^-\pi^0\gamma}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^-\pi^0\gamma}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -476,7 +467,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_kspimks_1
 Title=Distribution of the hadronic mass in $\tau^-\to K^0_S\pi^-K^0_S\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ K^0_S\pi^-K^0_S}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ K^0_S\pi^-K^0_S}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -495,7 +485,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_klpimkl_1
 Title=Distribution of the hadronic mass in $\tau^-\to K^0_L\pi^-K^0_L\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ K^0_L\pi^-K^0_L}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ K^0_L\pi^-K^0_L}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -514,7 +503,6 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_3B_kspimkl_1
 Title=Distribution of the hadronic mass in $\tau^-\to K^0_S\pi^-K^0_L\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ K^0_S\pi^-K^0_L}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ K^0_S\pi^-K^0_L}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
@@ -539,91 +527,78 @@ END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipi_1
 Title=Distribution of the $\pi^0\pi^-$ mass in $\tau^-\to 3\pi^0\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^0\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^0\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipi_2
 Title=Distribution of the $\pi^0\pi^0$ mass in $\tau^-\to 3\pi^0\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{\pi^0\pi^0}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{\pi^0\pi^0}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipipi_1
 Title=Distribution of the $\pi^0\pi^0\pi^0$ mass in $\tau^-\to 3\pi^0\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{\pi^0\pi^0\pi^0}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{\pi^0\pi^0\pi^0}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipipi_2
 Title=Distribution of the $\pi^0\pi^0\pi^-$ mass in $\tau^-\to 3\pi^0\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^0\pi^0\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^0\pi^0\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipipipi_1
 Title=Distribution of the hadronic mass in $\tau^-\to 3\pi^0\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ 3\pi^0\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ 3\pi^0\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipi_3
 Title=Distribution of the $\pi^0\pi^+$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^0\pi^+}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^0\pi^+}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipi_4
 Title=Distribution of the $\pi^0\pi^-$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{\pi^0\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{\pi^0\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipi_5
 Title=Distribution of the $\pi^+\pi^-$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{\pi^+\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{\pi^+\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipi_6
 Title=Distribution of the $\pi^-\pi^-$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{\pi^-\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{\pi^-\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipipi_3
 Title=Distribution of the $\pi^0\pi^-\pi^+$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^0\pi^-\pi^+}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^0\pi^-\pi^+}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipipi_4
 Title=Distribution of the $\pi^+\pi^-\pi^-$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^+\pi^-\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^+\pi^-\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipipi_5
 Title=Distribution of the $\pi^0\pi^-\pi^-$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{ \pi^0\pi^-\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{ \pi^0\pi^-\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT
 
 BEGIN PLOT /MC_DECAY_TAU/h_4B_pipipipi_2
 Title=Distribution of the $\pi^0\pi^+2\pi^-$ mass in $\tau^-\to \pi^0\pi^+2\pi^-\nu_\tau$
-LegendXPos=0.1
 XLabel=$m_{\pi^0\pi^+2\pi^-}$/GeV
 YLabel=$1/\Gamma\mathrm{d}\Gamma/\mathrm{d}m_{\pi^0\pi^+2\pi^-}$$\,$$[\mathrm{GeV}^{-1}]$
 END PLOT

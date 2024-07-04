@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2019_I1720438/d..
 LogY=0
 RatioPlot=1
-LegendXPos=0.05
-LegendYPos=0.5
 YTwosidedTicks=1
 Title=last bin includes overflow
 # END PLOT

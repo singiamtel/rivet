@@ -6,39 +6,30 @@ RatioPlotYMax=1.999
 # BEGIN PLOT /ATLAS_2013_I1217867/d01.*
 XLabel=$\sqrt{d_{0}}$ [GeV]
 YLabel=$1/\sigma$ d$\sigma$/d$\sqrt{d_{0}}$ [1/GeV]
-LegendXPos=0.1
-LegendYPos=0.6
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2013_I1217867/d02.*
 XLabel=$\sqrt{d_{1}}$ [GeV]
 YLabel=$1/\sigma$ d$\sigma$/d$\sqrt{d_{1}}$ [1/GeV]
-LegendXPos=0.1
-LegendYPos=0.6
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2013_I1217867/d03.*
 XLabel=$\sqrt{d_{2}}$ [GeV]
 YLabel=$1/\sigma$ d$\sigma$/d$\sqrt{d_{2}}$ [1/GeV]
-LegendXPos=0.1
-LegendYPos=0.6
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2013_I1217867/d04.*
 XLabel=$\sqrt{d_{3}}$ [GeV]
 YLabel=$1/\sigma$ d$\sigma$/d$\sqrt{d_{3}}$ [1/GeV]
-LegendXPos=0.1
-LegendYPos=0.6
 LogX=1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2013_I1217867/d05.*
 XLabel=$\sqrt{d_{1}/d_{0}}$
 YLabel=$1/\sigma$ d$\sigma$/d$\sqrt{d_{1}/d_{0}}$
-LegendXPos=0.05
 LogX=1
 LogY=0
 YMax=4.0
@@ -47,7 +38,6 @@ YMax=4.0
 # BEGIN PLOT /ATLAS_2013_I1217867/d06.*
 XLabel=$\sqrt{d_{2}/d_{1}}$
 YLabel=$1/\sigma$ d$\sigma$/d$\sqrt{d_{2}/d_{1}}$
-LegendXPos=0.05
 LogX=1
 LogY=0
 YMax=3.0
@@ -56,7 +46,6 @@ YMax=3.0
 # BEGIN PLOT /ATLAS_2013_I1217867/d07.*
 XLabel=$\sqrt{d_{3}/d_{2}}$
 YLabel=$1/\sigma$ d$\sigma$/d$\sqrt{d_{3}/d_{2}}$
-LegendXPos=0.05
 LogX=1
 LogY=0
 YMax=3.0

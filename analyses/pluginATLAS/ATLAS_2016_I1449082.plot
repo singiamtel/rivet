@@ -5,7 +5,6 @@ YTwosidedTicks=1
 RatioPlotYMax=1.9
 RatioPlotYMin=0.1
 LeftMargin=1.6
-LegendAlign=r
 # END PLOT 
 
 # BEGIN PLOT /ATLAS_2016_I1449082/d01-x01-y01
@@ -52,7 +51,6 @@ YLabel=$A_C^{t\bar{t}}$
 # BEGIN PLOT /ATLAS_2016_I1449082/d08-x01-y01
 XLabel=$m_{t\bar{t}}$ [GeV] 
 YLabel=$A_C^{t\bar{t}}$
-# + any additional plot settings you might like, see make-plots documentation
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1449082/d09-x01-y01

@@ -1,6 +1,4 @@
 # BEGIN PLOT /LHCB_2012_I1208102/d02-x01-y01
-LegendXPos=0.55
-LegendYPos=0.90
 #FullRange=1
 #XMin=0.0
 #YMin=0.0
@@ -13,8 +11,6 @@ RatioPlot=1
 
 
 # BEGIN PLOT /LHCB_2012_I1208102/d03-x01-y01
-LegendXPos=0.50
-LegendYPos=0.90
 #FullRange=1
 XMin=1e-2
 #YMin=0.0

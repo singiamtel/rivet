@@ -1,5 +1,4 @@
 # BEGIN PLOT /ATLAS_2018_I1656578/d.
-LegendAlign=r
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.9

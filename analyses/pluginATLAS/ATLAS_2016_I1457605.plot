@@ -5,8 +5,6 @@ LogX=1
 LogY=1
 YMax=1.0E04
 YMin=1.0E-07
-LegendYPos=0.30
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1457605/d01

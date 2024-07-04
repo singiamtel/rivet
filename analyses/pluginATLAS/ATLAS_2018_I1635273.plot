@@ -1,14 +1,11 @@
 # BEGIN PLOT /ATLAS_2018_I1635273/d..
 LogY=1
-LegendAlign=r
 XTwosidedTicks=1
 YTwosidedTicks=1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1635273/d..-x01-y03
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1635273/d0[1,3]-.*
@@ -105,9 +102,6 @@ Title=$W^+ + \geq 1 \mathrm{jets} / W^- + \geq 1 \mathrm{jets}$ (electron channe
 # BEGIN PLOT /ATLAS_2018_I1635273/d2[1,3]-.*
 XLabel=Leading jet $|y|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} |y^\mathrm{jet1}|$ [fb]
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.35
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1635273/d21-x01-y01
@@ -137,18 +131,12 @@ Title=$W^\pm + \geq 2 \mathrm{jets}$ (electron channel data)
 XLabel=Second leading jet $|y|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} |y^\mathrm{jet2}|$ [fb]
 Title=$W^\pm + \geq 2 \mathrm{jets}$ (electron channel data)
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.35
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1635273/d30-.*
 XLabel=$\Delta R_\mathrm{jet1,jet2}$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \Delta R_\mathrm{jet1,jet2})$ [fb]
 Title=$W^\pm + \geq 2 \mathrm{jets}$ (electron channel data)
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.35
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1635273/d32-.*
@@ -231,9 +219,6 @@ Title=$W^+ + \geq 2 \mathrm{jets} / W^- + \geq 2 \mathrm{jets}$ (electron channe
 LogY=0
 XLabel=Dressed lepton $|\eta|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} |\eta^\ell|$ [fb]
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.35
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1635273/d51-x01-y01

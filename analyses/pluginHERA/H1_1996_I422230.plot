@@ -6,7 +6,6 @@ END PLOT
 
 BEGIN PLOT /H1_1996_I422230/d01-x01-y01
 Title=$P_n$ vs multiplicity $1 < \eta <2 $, $80 < W <115$ GeV
-LegendXPos=0.45
 END PLOT
 
 BEGIN PLOT /H1_1996_I422230/d01-x01-y02
@@ -15,8 +14,6 @@ END PLOT
 
 BEGIN PLOT /H1_1996_I422230/d01-x01-y03
 Title=$P_n$ vs multiplicity $1 < \eta < 4 $, $80 < W < 115 $ GeV
-LegendYPos=0.6
-LegendXPos=0.2
 END PLOT
 
 BEGIN PLOT /H1_1996_I422230/d01-x01-y04

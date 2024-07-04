@@ -3,7 +3,6 @@ XTwosidedTicks=1
 YTwosidedTicks=1
 LogY=1
 LogX=1
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1645627/d01
@@ -23,8 +22,6 @@ LogX=0
 Title=$E_\mathrm{T}^\gamma > 125$ GeV, $p_\mathrm{T}^\mathrm{jet-lead} > 100$ GeV
 XLabel=$\Delta\phi^{\gamma\mathrm{-jet}}$ [rad]
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \Delta\phi^{\gamma\mathrm{-jet}}$ [pb/rad]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1645627/d04
@@ -39,7 +36,5 @@ LogX=0
 Title=$m^{\gamma\mathrm{-jet}} > 450$ GeV, $|\eta^\gamma + y^\mathrm{jet}| < 2.37$
 XLabel=$|\mathrm{cos}\theta^\ast|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} |\mathrm{cos}\theta^\ast|$ [pb]
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 

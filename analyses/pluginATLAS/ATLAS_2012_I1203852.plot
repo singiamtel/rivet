@@ -40,8 +40,6 @@ YLabel=1/$\sigma^{fid}_{ZZ}$ $\times$ d$\sigma^{fid}_{ZZ}$/d$\Delta\phi(\ell^+,\
 LogY=0
 Scale=0.001
 YLabelPos=0.5
-LegendXPos=0.5
-LegendYPos=0.35
 RatioPlotMode=datamc
 RatioPlotYMax=2.1
 # END PLOT
@@ -60,8 +58,6 @@ Title=Differential cross-section for $ZZ\to \ell\ell\nu\nu$ vs. $p_{\perp}^{Z}$
 XLabel=$p_\perp^Z$~[GeV]
 YLabel=1/$\sigma^{fid}_{ZZ}$ $\times$ d$\sigma^{fid}_{ZZ}$/d$p_\perp^Z$~[GeV$^{-1}$]
 LogY=0
-LegendXPos=0.1
-LegendYPos=0.3
 RatioPlotMode=datamc
 # END PLOT
 
@@ -71,8 +67,6 @@ Scale=0.001
 XLabel=$\Delta\phi(\ell^+,\ell^-)$
 YLabel=1/$\sigma^{fid}_{ZZ}$ $\times$ d$\sigma^{fid}_{ZZ}$/d$\Delta\phi(\ell^+,\ell^-)$~[100 GeV$^{-1}$]
 LogY=0
-LegendXPos=0.1
-LegendYPos=0.3
 RatioPlotMode=datamc
 RatioPlotYMax=1.8
 # END PLOT

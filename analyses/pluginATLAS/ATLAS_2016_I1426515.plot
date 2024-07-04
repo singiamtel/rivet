@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2016_I1426515/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
-LegendXPos=0.95
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426515/d01-x01-y01
@@ -11,7 +9,6 @@ XLabel=
 XCustomMajorTicks=1.0 $WW\rightarrow\mu\mu$
 YLabel=Fiducial cross section [fb]
 LogY=0
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426515/d01-x01-y02
@@ -20,7 +17,6 @@ XLabel=
 XCustomMajorTicks=1.0 $WW\rightarrow{ee}$
 YLabel=Fiducial cross section [fb]
 LogY=0
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426515/d02-x01-y01
@@ -29,7 +25,6 @@ XLabel=
 XCustomMajorTicks=1.0 $WW\rightarrow{e\mu}$
 YLabel=Fiducial cross section [fb]
 LogY=0
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426515/d10-x01-y01
@@ -84,16 +79,12 @@ LeftMargin=1.5
 Title=$WW \rightarrow e\mu$
 XLabel=$\Delta \phi_{\ell\ell}$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \Delta \phi_{\ell\ell}$ [fb]
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426515/d13-x01-y02
 Title=$WW \rightarrow e\mu$
 XLabel=$\Delta \phi_{\ell\ell}$
 YLabel=$1 / \sigma \; \mathrm{d}\sigma / \mathrm{d} \Delta \phi_{\ell\ell}$
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1426515/d14-x01-y01

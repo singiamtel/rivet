@@ -73,7 +73,6 @@ Title=Integrated 2-jet rate with Jade algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Jade}$
 YLabel=$R_2$
 LogX=1
-LegendYPos=0.65
 FullRange=1
 # END PLOT
 
@@ -82,7 +81,6 @@ Title=Integrated 3-jet rate with Jade algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Jade}$
 YLabel=$R_3$
 LogX=1
-LegendYPos=0.65
 FullRange=1
 # END PLOT
 
@@ -91,8 +89,6 @@ Title=Integrated 4-jet rate with Jade algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Jade}$
 YLabel=$R_4$
 LogX=1
-LegendXPos=0.30
-LegendYPos=0.65
 FullRange=1
 # END PLOT
 
@@ -101,8 +97,6 @@ Title=Integrated 5-jet rate with Jade algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Jade}$
 YLabel=$R_5$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.65
 FullRange=1
 # END PLOT
 
@@ -111,8 +105,6 @@ Title=Integrated $\geq$6-jet rate with Jade algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Jade}$
 YLabel=$R_{\geq 6}$
 LogX=1
-LegendXPos=0.10
-LegendYPos=0.65
 FullRange=1
 # END PLOT
 
@@ -366,7 +358,6 @@ Title=Integrated 2-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Durham}$
 YLabel=$R_2$
 LogX=1
-LegendYPos=0.6
 FullRange=1
 # END PLOT
 
@@ -375,8 +366,6 @@ Title=Integrated 3-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Durham}$
 YLabel=$R_3$
 LogX=1
-LegendYPos=0.6
-LegendXPos=0.35
 FullRange=1
 # END PLOT
 
@@ -385,8 +374,6 @@ Title=Integrated 4-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Durham}$
 YLabel=$R_4$
 LogX=1
-LegendYPos=0.6
-LegendXPos=0.25
 FullRange=1
 # END PLOT
 
@@ -395,8 +382,6 @@ Title=Integrated 5-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Durham}$
 YLabel=$R_5$
 LogX=1
-LegendYPos=0.6
-LegendXPos=0.30
 FullRange=1
 # END PLOT
 
@@ -405,8 +390,6 @@ Title=Integrated $\geq$6-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{\mathrm{cut}}^\mathrm{Durham}$
 YLabel=$R_{\geq 6}$
 LogX=1
-LegendYPos=0.6
-LegendXPos=0.05
 FullRange=1
 # END PLOT
 
@@ -590,8 +573,6 @@ Title=Differential 2-jet rate with Durham algorithm (35 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d24-x01-y02
@@ -599,8 +580,6 @@ Title=Differential 3-jet rate with Durham algorithm (35 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d24-x01-y03
@@ -608,8 +587,6 @@ Title=Differential 4-jet rate with Durham algorithm (35 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d24-x01-y04
@@ -617,8 +594,6 @@ Title=Differential 5-jet rate with Durham algorithm (35 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d25-x01-y01
@@ -626,8 +601,6 @@ Title=Differential 2-jet rate with Durham algorithm (44 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d25-x01-y02
@@ -635,8 +608,6 @@ Title=Differential 3-jet rate with Durham algorithm (44 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d25-x01-y03
@@ -644,8 +615,6 @@ Title=Differential 4-jet rate with Durham algorithm (44 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d25-x01-y04
@@ -653,8 +622,6 @@ Title=Differential 5-jet rate with Durham algorithm (44 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d26-x01-y01
@@ -662,8 +629,6 @@ Title=Differential 2-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 FullRange=1
 # END PLOT
 
@@ -672,8 +637,6 @@ Title=Differential 3-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 FullRange=1
 # END PLOT
 
@@ -682,8 +645,6 @@ Title=Differential 4-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 FullRange=1
 # END PLOT
 
@@ -692,8 +653,6 @@ Title=Differential 5-jet rate with Durham algorithm (91.2 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 FullRange=1
 # END PLOT
 
@@ -702,8 +661,6 @@ Title=Differential 2-jet rate with Durham algorithm (133 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d27-x01-y02
@@ -711,8 +668,6 @@ Title=Differential 3-jet rate with Durham algorithm (133 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d27-x01-y03
@@ -720,8 +675,6 @@ Title=Differential 4-jet rate with Durham algorithm (133 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d27-x01-y04
@@ -729,8 +682,6 @@ Title=Differential 5-jet rate with Durham algorithm (133 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d28-x01-y01
@@ -738,8 +689,6 @@ Title=Differential 2-jet rate with Durham algorithm (161 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d28-x01-y02
@@ -747,8 +696,6 @@ Title=Differential 3-jet rate with Durham algorithm (161 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d28-x01-y03
@@ -756,8 +703,6 @@ Title=Differential 4-jet rate with Durham algorithm (161 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d28-x01-y04
@@ -765,8 +710,6 @@ Title=Differential 5-jet rate with Durham algorithm (161 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d29-x01-y01
@@ -774,8 +717,6 @@ Title=Differential 2-jet rate with Durham algorithm (172 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d29-x01-y02
@@ -783,8 +724,6 @@ Title=Differential 3-jet rate with Durham algorithm (172 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d29-x01-y03
@@ -792,8 +731,6 @@ Title=Differential 4-jet rate with Durham algorithm (172 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d29-x01-y04
@@ -801,8 +738,6 @@ Title=Differential 5-jet rate with Durham algorithm (172 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d30-x01-y01
@@ -810,8 +745,6 @@ Title=Differential 2-jet rate with Durham algorithm (183 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d30-x01-y02
@@ -819,8 +752,6 @@ Title=Differential 3-jet rate with Durham algorithm (183 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d30-x01-y03
@@ -828,8 +759,6 @@ Title=Differential 4-jet rate with Durham algorithm (183 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d30-x01-y04
@@ -837,8 +766,6 @@ Title=Differential 5-jet rate with Durham algorithm (183 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d31-x01-y01
@@ -846,8 +773,6 @@ Title=Differential 2-jet rate with Durham algorithm (189 GeV)
 XLabel=$y_{23}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{23}$
 LogX=1
-LegendXPos=0.25
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d31-x01-y02
@@ -855,8 +780,6 @@ Title=Differential 3-jet rate with Durham algorithm (189 GeV)
 XLabel=$y_{34}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{34}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d31-x01-y03
@@ -864,8 +787,6 @@ Title=Differential 4-jet rate with Durham algorithm (189 GeV)
 XLabel=$y_{45}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{45}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /JADE_OPAL_2000_I513337/d31-x01-y04
@@ -873,6 +794,4 @@ Title=Differential 5-jet rate with Durham algorithm (189 GeV)
 XLabel=$y_{56}^\mathrm{Durham}$
 YLabel=$\mathrm{d}\sigma/\mathrm{d}y_{56}$
 LogX=1
-LegendXPos=0.15
-LegendYPos=0.5
 # END PLOT

@@ -42,7 +42,6 @@ BEGIN PLOT /CMS_2017_I1608166/d43-x01-y01
 Title=CMS, 13 TeV, MB, $\pi^{-}/\pi^{+}$
 XLabel=$p_{T}$ [GeV]
 YLabel=Yield ratio
-LegendXPos=0.05
 YMin=0.7
 YMax=1.5
 END PLOT
@@ -51,7 +50,6 @@ BEGIN PLOT /CMS_2017_I1608166/d44-x01-y01
 Title=CMS, 13 TeV, MB, $K^{-}/K^{+}$
 XLabel=$p_{T}$ [GeV]
 YLabel=Yield ratio
-LegendXPos=0.05
 YMin=0.7
 YMax=1.5
 END PLOT
@@ -60,7 +58,6 @@ BEGIN PLOT /CMS_2017_I1608166/d45-x01-y01
 Title=CMS, 13 TeV, MB, $\bar{p}/p$
 XLabel=$p_{T}$ [GeV]
 YLabel=Yield ratio
-LegendXPos=0.05
 YMin=0.7
 YMax=1.5
 END PLOT
@@ -69,7 +66,6 @@ BEGIN PLOT /CMS_2017_I1608166/d46-x01-y01
 Title=CMS, 13 TeV, MB, $(K^{+} + K^{-}) / (\pi^{+} + \pi^{-})$
 XLabel=$p_{T}$ [GeV]
 YLabel=Yield ratio
-LegendXPos=0.05
 YMin=0
 YMax=0.35
 END PLOT
@@ -78,7 +74,6 @@ BEGIN PLOT /CMS_2017_I1608166/d47-x01-y01
 Title=CMS, 13 TeV, MB, $(p + \bar{p}) / (\pi^{+} + \pi^{-})$
 XLabel=$p_{T}$ [GeV]
 YLabel=Yield ratio
-LegendXPos=0.05
 YMin=0
 YMax=0.35
 END PLOT

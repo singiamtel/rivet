@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2015_I1390114/d..
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendXPos=0.95
-LegendAlign=r
 XLabel=
 #RatioPlotYMax=2.1
 #RatioPlotYMin=0.1

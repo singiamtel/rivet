@@ -5,5 +5,4 @@ YLabel=$\mathrm{d}{\sigma_{jj}}/\mathrm{d}{\xi}$ [$\mu$b]
 FullRange=1
 LogX=1
 LogY=1
-LegendXPos=0.08
 # END PLOT

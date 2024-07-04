@@ -5,9 +5,6 @@ LeftMargin=1.5
 LogY=0
 Title=VBF phase space
 XLabel=$p_\mathrm{T}^\mathrm{miss}$ [GeV]
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1609448/d01

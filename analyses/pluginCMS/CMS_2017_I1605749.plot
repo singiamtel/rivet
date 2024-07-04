@@ -2,8 +2,6 @@
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{1}^{\kappa=1.0}$ [e]
 YLabel=1/N dN/dQ$_{1}^{1.0}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-1.0
 XMax=1.0
@@ -13,8 +11,6 @@ XMax=1.0
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-1.5
 XMax=1.5
@@ -24,8 +20,6 @@ XMax=1.5
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{1}^{\kappa=0.3}$ [e]
 YLabel=1/N dN/dQ$_{1}^{0.3}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-2.52
 XMax=2.52
@@ -36,8 +30,6 @@ XMax=2.52
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{L,1}^{\kappa=1.0}$ [e]
 YLabel=1/N dN/dQ$_{L,1}^{1.0}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-1.0
 XMax=1.0
@@ -47,8 +39,6 @@ XMax=1.0
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{L,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{L,1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.8
 XMax=0.8
@@ -58,8 +48,6 @@ XMax=0.8
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{L,1}^{\kappa=0.3}$ [e]
 YLabel=1/N dN/dQ$_{L,1}^{0.3}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.6
 XMax=0.6
@@ -69,8 +57,6 @@ XMax=0.6
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{T,1}^{\kappa=1.0}$ [e]
 YLabel=1/N dN/dQ$_{T,1}^{1.0}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-1.0
 XMax=1.0
@@ -80,8 +66,6 @@ XMax=1.0
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{T,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{T,1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.7
 XMax=0.7
@@ -91,8 +75,6 @@ XMax=0.7
 Title=CMS, 8 TeV, jetcharge of leading jet (p$_\mathrm{T} >$ 400 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{T,1}^{\kappa=0.3}$ [e]
 YLabel=1/N dN/dQ$_{T,1}^{0.3}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.7
 XMax=0.7
@@ -102,8 +84,6 @@ XMax=0.7
 Title=CMS, 8 TeV, jetcharge of leading jet (400$<$p$_\mathrm{T}<$700 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-1.5
 XMax=1.5
@@ -113,8 +93,6 @@ XMax=1.5
 Title=CMS, 8 TeV, jetcharge of leading jet ( 700$<$p$_\mathrm{T}<$1000 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-1.5
 XMax=1.5
@@ -125,8 +103,6 @@ XMax=1.5
 Title=CMS, 8 TeV, jetcharge of leading jet (1000$<$p$_\mathrm{T}<$1800 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-1.5
 XMax=1.5
@@ -137,8 +113,6 @@ XMax=1.5
 Title=CMS, 8 TeV, jetcharge of leading jet (400$<$p$_\mathrm{T}<$700 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{L,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{L,1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.8
 XMax=0.8
@@ -148,8 +122,6 @@ XMax=0.8
 Title=CMS, 8 TeV, jetcharge of leading jet (700$<$p$_\mathrm{T}<$1000 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{L,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{L,1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.8
 XMax=0.8
@@ -159,8 +131,6 @@ XMax=0.8
 Title=CMS, 8 TeV, jetcharge of leading jet (1000$<$p$_\mathrm{T}<$1800 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{L,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{L,1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.8
 XMax=0.8
@@ -170,8 +140,6 @@ XMax=0.8
 Title=CMS, 8 TeV, jetcharge of leading jet (400$<$p$_\mathrm{T}<$700 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{T,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{T,1}^{0.6}$ [1/e]
-LegendXPos=0.7
-LegendYPos=0.7
 LogY=0
 XMin=-0.7
 XMax=0.7
@@ -181,8 +149,6 @@ XMax=0.7
 Title=CMS, 8 TeV, jetcharge of leading jet (700$<$p$_\mathrm{T}<$1000 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{T,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{T,1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78
 LogY=0
 XMin=-0.7
 XMax=0.7
@@ -192,8 +158,6 @@ XMax=0.7
 Title=CMS, 8 TeV, jetcharge of leading jet (1000$<$p$_\mathrm{T}<$1800 GeV, $\eta$ $<$ 1.5)
 XLabel=Q$_{T,1}^{\kappa=0.6}$ [e]
 YLabel=1/N dN/dQ$_{T,1}^{0.6}$ [1/e]
-LegendXPos=0.70
-LegendYPos=0.78 
 LogY=0
 XMin=-0.7
 XMax=0.7

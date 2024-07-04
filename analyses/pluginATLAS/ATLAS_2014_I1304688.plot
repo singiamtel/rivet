@@ -1,5 +1,4 @@
 # BEGIN PLOT /ATLAS_2014_I1304688/d..
-LegendXPos=0.39
 RatioPlotYMin=0.1
 RatioPlotYMax=1.9
 # END PLOT

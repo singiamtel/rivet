@@ -4,7 +4,6 @@ LogX=1
 LogY=0
 YMin=-0.2
 YMax=0.5
-LegendXPos=0.1
 RatioPlotMode=deviation
 # END PLOT
 

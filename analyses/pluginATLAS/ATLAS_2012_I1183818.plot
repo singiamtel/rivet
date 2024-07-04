@@ -2,8 +2,6 @@
 XLabel=$|\eta|$
 YLabel=$\langle \frac{\mathrm{d}^{2}\sum E_{\perp}}{\mathrm{d}\eta \mathrm{d}\phi} \rangle$~[GeV]
 LogY=0
-LegendXPos=0.1
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2012_I1183818/d01-x01-y01

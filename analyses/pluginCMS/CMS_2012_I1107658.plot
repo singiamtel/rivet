@@ -1,6 +1,5 @@
 # BEGIN PLOT /CMS_2012_I1107658/d0
 LogY=0
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /CMS_2012_I1107658/d0[1-3]
@@ -62,7 +61,6 @@ Title=Away $\langle p_\perp \rangle$ vs $p_\perp^{\mu\mu}$
 XLabel=$m_{\mu\mu}$ [GeV]
 YMin=0.5
 LogY=0
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /CMS_2012_I1107658/d10-x01-y01

@@ -1,9 +1,6 @@
 # BEGIN PLOT /ATLAS_2022_I2037744/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
-LegendYPos=0.92
-LegendXPos=0.96
 LogY=1
 RatioPlotYMax=1.5
 RatioPlotYMin=0.5
@@ -97,13 +94,11 @@ YLabel=$1/\sigma \cdot \mathrm{d}\sigma / \mathrm{d} H_{\mathrm{T}}^{t\bar{t}}$ 
 # BEGIN PLOT /ATLAS_2022_I2037744/d24-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(b_{\ell},t_{h})$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(b_{\ell},t_{h})$ [pb]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d26-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(b_{\ell},t_{h})$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(b_{\ell},t_{h})$
-LegendYPos=0.4
 # END PLOT
 
 
@@ -123,7 +118,6 @@ YLabel=$1/\sigma \cdot \mathrm{d}\sigma / \mathrm{d} p_{\mathrm{T}}^{t\bar{t}}$ 
 # BEGIN PLOT /ATLAS_2022_I2037744/d30-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(t_{h},t_{\ell})$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(t_{h},t_{\ell})$ [pb]
-LegendXPos=0.6
 RatioPlotYMax=1.75
 RatioPlotYMin=0.25
 # END PLOT
@@ -131,7 +125,6 @@ RatioPlotYMin=0.25
 # BEGIN PLOT /ATLAS_2022_I2037744/d32-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(t_{h},t_{\ell})$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(t_{h},t_{\ell})$
-LegendXPos=0.6
 RatioPlotYMax=1.75
 RatioPlotYMin=0.25
 # END PLOT
@@ -188,26 +181,22 @@ YLabel=$1/\sigma \cdot \mathrm{d}\sigma / \mathrm{d} m(j_{1},t_{h})$ [1/GeV]
 # BEGIN PLOT /ATLAS_2022_I2037744/d45-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h})$ [pb]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d47-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h})$
-LegendYPos=0.4
 # END PLOT
 
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d48-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{2},t_{h})$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(j_{2},t_{h})$ [pb]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d50-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{2},t_{h})$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / \mathrm{d} \frac{\Delta\phi}{\pi}(j_{2},t_{h})$
-LegendYPos=0.4
 # END PLOT
 
 
@@ -320,42 +309,36 @@ YLabel=$\mathrm{d}\sigma / (\mathrm{d} p^{j,1}_{\mathrm{T}} / \mathrm{d} p^{t,h}
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$355 \mathrm{GeV} < p^{t,h}_{\mathrm{T}} \leq 398 \mathrm{GeV}$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} p^{t,h}_{\mathrm{T}})$ [1/GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d82-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$398 \mathrm{GeV} < p^{t,h}_{\mathrm{T}} \leq 496 \mathrm{GeV}$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} p^{t,h}_{\mathrm{T}})$ [1/GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d83-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$496 \mathrm{GeV} < p^{t,h}_{\mathrm{T}} \leq 2000 \mathrm{GeV})$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} p^{t,h}_{\mathrm{T}})$ [1/GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d84-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$355 \mathrm{GeV} < p^{t,h}_{\mathrm{T}} \leq 398 \mathrm{GeV}$
 YLabel=$\mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} p^{t,h}_{\mathrm{T}})$ [pb/GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d85-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$398 \mathrm{GeV} < p^{t,h}_{\mathrm{T}} \leq 496 \mathrm{GeV}$
 YLabel=$\mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} p^{t,h}_{\mathrm{T}})$ [pb/GeV]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d86-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$496 \mathrm{GeV} < p^{t,h}_{\mathrm{T}} \leq 2000 \mathrm{GeV}$
 YLabel=$\mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} p^{t,h}_{\mathrm{T}})$ [pb/GeV]
-LegendYPos=0.4
 # END PLOT
 
 
@@ -364,42 +347,36 @@ LegendYPos=0.4
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$N^{j} = 1$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} N^{j})$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d94-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$N^{j} = 2)$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} N^{j})$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d95-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$N^{j} \geq 3$
 YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} N^{j})$
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d96-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$N^{j} = 1$
 YLabel=$\mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} N^{j})$ [pb]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d97-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$N^{j} = 2$
 YLabel=$\mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} N^{j})$ [pb]
-LegendYPos=0.4
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d98-x01-y01
 XLabel=$\frac{\Delta\phi}{\pi}(j_{1},t_{h})$
 Title=$N^{j} \geq 3$
 YLabel=$\mathrm{d}\sigma / (\mathrm{d} \frac{\Delta\phi}{\pi}(j_{1},t_{h}) / \mathrm{d} N^{j})$ [pb]
-LegendYPos=0.4
 # END PLOT
 
 

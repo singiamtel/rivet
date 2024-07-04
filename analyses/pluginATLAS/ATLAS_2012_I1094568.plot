@@ -1,6 +1,4 @@
 # BEGIN PLOT /ATLAS_2012_I1094568/d0[1234]-x0[12]-y01
-LegendXPos=0.45
-LegendYPos=0.75
 LogY=0
 RatioPlotYMin=0.8
 RatioPlotYMax=1.2
@@ -63,7 +61,6 @@ YMin=0.86
 Title=Gap fraction vs. $Q_\mathrm{sum}$ for veto region: $1.5 < |y| < 2.1$
 RatioPlotYMin=0.97
 RatioPlotYMax=1.03
-LegendYPos=0.60
 YMin=0.92
 # END PLOT
 

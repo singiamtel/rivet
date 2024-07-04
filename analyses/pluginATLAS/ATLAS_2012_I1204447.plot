@@ -1,7 +1,5 @@
 # BEGIN PLOT /ATLAS_2012_I1204447/.*
 YLabel=$N_\mathrm{events}$
-LegendYPos=0.5
-LegendXPos=0.05
 XMinorTickMarks=0
 # END PLOT
 

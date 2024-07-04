@@ -30,8 +30,6 @@ FullRange=1
 Title=Two-jet resolution variable, $Y_3$ (charged)
 XLabel=$Y_3$
 YLabel=$1/N \, \mathrm{d}{N}/\mathrm{d}{Y_3}$
-LegendXPos=0.15
-LegendYPos=0.8
 FullRange=1
 # END PLOT
 
@@ -46,8 +44,6 @@ FullRange=1
 Title=$C$ parameter (charged)
 XLabel=$C$
 YLabel=$1/N \, \mathrm{d}{N}/\mathrm{d}{C}$
-LegendXPos=0.15
-LegendYPos=0.65
 FullRange=1
 # END PLOT
 
@@ -69,8 +65,6 @@ FullRange=1
 Title=Rapidity w.r.t. thrust axes, $y_T$ (charged)
 XLabel=$y_T$
 YLabel=$1/\sigma \, \mathrm{d}{\sigma}/\mathrm{d}{y_T}$
-LegendXPos=0.15
-LegendYPos=0.8
 FullRange=1
 # END PLOT
 
@@ -92,7 +86,6 @@ FullRange=1
 Title=Log of scaled momentum, $\log(1/x_p)$ (charged)
 XLabel=$\xi_p$
 YLabel=$1/\sigma \, \mathrm{d}{\sigma}/\mathrm{d}{\xi_p}$
-LegendYPos=0.8
 FullRange=1
 # END PLOT
 
@@ -100,8 +93,6 @@ FullRange=1
 Title=Charged multiplicity distribution
 XLabel=$N_\mathrm{ch}$
 YLabel=$1/N \, \mathrm{d}{N}/\mathrm{d}{N_\mathrm{ch}}$
-LegendXPos=0.20
-LegendYPos=0.75
 FullRange=1
 # END PLOT
 
@@ -170,7 +161,6 @@ FullRange=1
 Title=$\gamma$ spectrum
 XLabel=$\xi_p$
 YLabel=$1/\sigma \, \mathrm{d}{\sigma}/\mathrm{d}{\xi_p}$
-LegendYPos=0.75
 FullRange=1
 # END PLOT
 

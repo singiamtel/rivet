@@ -2,8 +2,6 @@
 LogX= 1
 LogY= 1
 LeftMargin=1.5
-LegendXPos=0.2
-LegendYPos=0.2
 #YMin= 0.0001
 #YMax= 1000000
 RatioPlotYMin=0

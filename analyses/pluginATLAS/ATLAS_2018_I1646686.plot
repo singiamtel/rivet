@@ -1,7 +1,6 @@
 # BEGIN PLOT /ATLAS_2018_I1646686/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LogY=1
 LeftMargin=1.5
 RatioPlotYMin=0.75
@@ -24,7 +23,6 @@ YLabel=Cross section [pb]
 XCustomMajorTicks=0.0 $\sigma_\mathrm{fiducial}$
 Title=Inclusive fiducial particle-level cross section
 LogY=0
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d02-x01-y01
@@ -95,17 +93,12 @@ Title=Particle-level $t\bar{t}$ out-of-plane momentum
 XLabel=$\Delta\phi(t_{1},t_{2})$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \Delta\phi(t_{1},t_{2}) \ [\mathrm{pb}]$
 Title=Particle-level $t\bar{t}$ azimuthal opening angle 
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d13-x01-y01
 XLabel=$H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{GeV}]$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{pb} \ \mathrm{GeV}^{-1}]$
 Title=Particle-level $t\bar{t}$  $H_{\mathrm{T}}$
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d14-x01-y01
@@ -113,9 +106,6 @@ XLabel=$|\cos{\theta^\ast}|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}|\cos{\theta^\ast}| \ [\mathrm{pb}]$
 Title=Particle-level $t\bar{t}$ $\cos{\theta^\ast}$
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d15-x01-y01
@@ -186,17 +176,12 @@ Title=Particle-level $t\bar{t}$ out-of-plane momentum
 XLabel=$\Delta\phi(t_{1},t_{2})$
 YLabel=$1 / \sigma \ \cdot \ \mathrm{d}\sigma / \mathrm{d} \Delta\phi(t_{1},t_{2}) \ [\mathrm{pb}]$
 Title=Particle-level $t\bar{t}$ azimuthal opening angle 
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d26-x01-y01
 XLabel=$H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{GeV}]$
 YLabel=$1 / \sigma \ \cdot \ \mathrm{d}\sigma / \mathrm{d} H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{GeV}^{-1}]$
 Title=Particle-level $t\bar{t}$  $H_{\mathrm{T}}$
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d27-x01-y01
@@ -204,9 +189,6 @@ XLabel=$|\cos{\theta^\ast}|$
 YLabel=$1 / \sigma \ \cdot \ \mathrm{d}\sigma /\mathrm{d}|\cos{\theta^\ast}| \ [\mathrm{pb}]$
 Title=Particle-level $t\bar{t}$ $\cos{\theta^\ast}$
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d82-x01-y01
@@ -290,17 +272,12 @@ Title=Parton-level $t\bar{t}$ out-of-plane momentum
 XLabel=$\Delta\phi(t_{1},t_{2})$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \Delta\phi(t_{1},t_{2}) \ [\mathrm{pb}]$
 Title=Parton-level $t\bar{t}$ azimuthal opening angle 
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d95-x01-y01
 XLabel=$H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{GeV}]$
 YLabel=$\mathrm{d}\sigma / \mathrm{d} H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{pb} \ \mathrm{GeV}^{-1}]$
 Title=Parton-level $t\bar{t}$  $H_{\mathrm{T}}$
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d96-x01-y01
@@ -308,9 +285,6 @@ XLabel=$|\cos{\theta^\ast}|$
 YLabel=$\mathrm{d}\sigma / \mathrm{d}|\cos{\theta^\ast}| \ [\mathrm{pb}]$
 Title=Parton-level $t\bar{t}$ $\cos{\theta^\ast}$
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 
@@ -395,17 +369,12 @@ Title=Parton-level $t\bar{t}$ out-of-plane momentum
 XLabel=$\Delta\phi(t_{1},t_{2})$
 YLabel=$1 / \sigma \ \cdot \ \mathrm{d}\sigma / \mathrm{d} \Delta\phi(t_{1},t_{2}) \ [\mathrm{pb}]$
 Title=Parton-level $t\bar{t}$ azimuthal opening angle 
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d110-x01-y01
 XLabel=$H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{GeV}]$
 YLabel=$1 / \sigma \ \cdot \ \mathrm{d}\sigma / \mathrm{d} H_{\mathrm{T}}^{t\bar{t}} \ [\mathrm{GeV}^{-1}]$
 Title=Parton-level $t\bar{t}$  $H_{\mathrm{T}}$
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2018_I1646686/d111-x01-y01
@@ -413,8 +382,5 @@ XLabel=$|\cos{\theta^\ast}|$
 YLabel=$1 / \sigma \ \cdot \ \mathrm{d}\sigma / \mathrm{d}|\cos{\theta^\ast}| \ [\mathrm{pb}]$
 Title=Parton-level $t\bar{t}$ $\cos{\theta^\ast}$
 LogY=0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.3
 # END PLOT
 

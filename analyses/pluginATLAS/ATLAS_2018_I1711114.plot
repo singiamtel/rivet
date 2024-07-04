@@ -1,6 +1,5 @@
 # BEGIN PLOT /ATLAS_2018_I1711114/d.
 LogY=0
-LegendAlign=r
 XTwosidedTicks=1
 YTwosidedTicks=1
 # END PLOT

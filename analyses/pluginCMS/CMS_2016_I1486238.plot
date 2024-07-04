@@ -3,8 +3,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Leading b jet $\eta$ in pp$\rightarrow$ 2b+2j+X
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 LogY=1
 RatioPlotYMin=0.1
 RatioPlotYMax=2.5
@@ -26,7 +24,6 @@ XLabel=$\Delta$S
 YLabel=$1/\sigma$ $d\sigma/d\Delta S\; [1/rad]$
 FullRange=1
 LogY=1
-LegendXPos=0.1
 RatioPlotYMin=0.1
 RatioPlotYMax=2.5
 # END PLOT
@@ -36,7 +33,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Normalized $\Delta\phi^{light}$ in pp$\rightarrow
 XLabel=$\Delta\phi^{light}$
 YLabel=$1/\sigma$ $d\sigma/d\Delta\phi^{light}\; [1/rad]$
 FullRange=1
-LegendXPos=0.1
 RatioPlotYMin=0.1
 RatioPlotYMax=2.5
 LogY=1
@@ -47,7 +43,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Normalized $\Delta^{rel}_{light}p_{T}$ in pp$\rig
 XLabel=$\Delta^{rel}_{light}p_{T}$
 YLabel=$1/\sigma$ $d\sigma/d\Delta^{rel}_{light}p_{T}\;$
 FullRange=1
-LegendXPos=0.1
 RatioPlotYMin=0.1
 RatioPlotYMax=2.5
 LogY=1
@@ -58,8 +53,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Leading other jet $\eta$ in pp$\rightarrow$ 2b+2j
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 RatioPlotYMin=0.1
 RatioPlotYMax=2.5
 LogY=1
@@ -80,8 +73,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Subleading other jet $\eta$ in pp$\rightarrow$ 2b
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 RatioPlotYMin=0.1
 RatioPlotYMax=2.5
 LogY=1
@@ -102,8 +93,6 @@ Title=CMS, $\sqrt{s}$ = 7 TeV, Subleading b jet $\eta$ in pp$\rightarrow$ 2b+2j+
 XLabel=$\eta$
 YLabel=$d\sigma/d\eta\; [\mathrm{pb}/rad]$
 FullRange=1
-LegendXPos=0.2
-LegendYPos=0.4
 RatioPlotYMin=0.1
 RatioPlotYMax=2.5
 LogY=1

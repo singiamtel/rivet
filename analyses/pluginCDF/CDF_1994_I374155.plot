@@ -15,8 +15,6 @@ Title=Pseudorapidity, $\eta$, of 3rd jet
 XLabel=$\eta_3$
 YLabel=Fraction of events
 LogY=0
-LegendXPos=0.33
-LegendYPos=0.33
 # END PLOT
 
 # BEGIN PLOT /CDF_1994_I374155/d04-x01-y01

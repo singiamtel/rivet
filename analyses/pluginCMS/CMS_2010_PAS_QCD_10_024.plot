@@ -3,8 +3,6 @@ XLabel=$\eta$
 YLabel=$\frac{1}{N}\frac{\mathrm{d}N_\mathrm{ch}}{\mathrm{d}\eta}$
 LogY=0
 YMin=1
-LegendXPos=0.5
-LegendYPos=0.3
 # END PLOT
 
 # BEGIN PLOT /CMS_2010_PAS_QCD_10_024/d01-x01-y01

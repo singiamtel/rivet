@@ -1,6 +1,5 @@
 # BEGIN PLOT /ATLAS_2019_I1724098/d.
 LogY=0
-LegendAlign=r
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.8
@@ -56,8 +55,6 @@ YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~Nsubjets}}$
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d09
 Title=Top selection, soft-dropped
-LegendAlign=l
-LegendXPos=0.05
 XLabel=$C_2$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} C_2}$
 # END PLOT
@@ -65,8 +62,6 @@ YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} C_2}$
 # BEGIN PLOT /ATLAS_2019_I1724098/d10
 Title=Top selection, soft-dropped
 XLabel=$D_2$
-LegendAlign=l
-LegendXPos=0.05
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} D_2}$
 # END PLOT
 
@@ -82,9 +77,6 @@ XLabel=ECF2$^\mathrm{norm}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~ECF2}^\mathrm{norm}}$
 LogY=1
 LeftMargin=2.0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.25
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d12
@@ -93,17 +85,12 @@ XLabel=ECF3$^\mathrm{norm}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~ECF3}^\mathrm{norm}}$
 LogY=1
 LeftMargin=2.0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.25
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d13
 Title=Top selection, soft-dropped
 XLabel= $\tau_{21}^\mathrm{WTA}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} \tau_{21}^\mathrm{WTA}}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d14
@@ -123,8 +110,6 @@ YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~Nsubjets}}$
 Title=$W$ selection, soft-dropped
 XLabel=$C_2$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} C_2}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d18
@@ -145,9 +130,6 @@ XLabel=ECF2$^\mathrm{norm}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~ECF2}^\mathrm{norm}}$
 LogY=1
 LeftMargin=2.0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.25
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d20
@@ -168,8 +150,6 @@ YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} \tau_{21}^\math
 Title=$W$ selection, soft-dropped
 XLabel=$\tau_{32}^\mathrm{WTA}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} \tau_{32}^\mathrm{WTA}}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d23
@@ -230,8 +210,6 @@ YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} C_2}$
 Title=Top selection, trimmed
 XLabel=$D_2$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} D_2}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d30
@@ -246,9 +224,6 @@ XLabel=ECF2$^\mathrm{norm}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~ECF2}^\mathrm{norm}}$
 LogY=1
 LeftMargin=2.0
-LegendAlign=l
-LegendXPos=0.15
-LegendYPos=0.25
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d34
@@ -263,8 +238,6 @@ LeftMargin=2.0
 Title=Top selection, trimmed
 XLabel=$\tau_{21}^\mathrm{WTA}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} \tau_{21}^\mathrm{WTA}}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d36
@@ -284,8 +257,6 @@ YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~Nsubjets}}$
 Title=$W$ selection, trimmed
 XLabel=$C_2$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} C_2}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d40
@@ -306,9 +277,6 @@ XLabel=ECF2$^\mathrm{norm}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d~ECF2}^\mathrm{norm}}$
 LogY=1
 LeftMargin=2.0
-LegendAlign=l
-LegendXPos=0.05
-LegendYPos=0.25
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2019_I1724098/d42
@@ -329,7 +297,5 @@ YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} \tau_{21}^\math
 Title=$W$ selection, trimmed
 XLabel=$\tau_{32}^\mathrm{WTA}$
 YLabel=$\dfrac{1}{\sigma} \; \dfrac{\mathrm{d}\sigma}{\mathrm{d} \tau_{32}^\mathrm{WTA}}$
-LegendAlign=l
-LegendXPos=0.05
 # END PLOT
 

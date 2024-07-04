@@ -3,8 +3,6 @@ YLabel=$1/\sigma\mathrm{d}\sigma/\mathrm{d}p_\perp$ [$\mathrm{GeV}^{-1}$]
 LogX=1
 XMin=1.0
 YMin=0.000001
-LegendXPos=0.05
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I917931/d01-x01-y02

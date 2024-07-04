@@ -8,8 +8,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}p_{\perp}$(1st jet) [pb/GeV]
 Title=Differential cross section in leading jet rapidity
 XLabel=$|y|$(1st jet)
 YLabel=$\mathrm{d}\sigma/\mathrm{d}|y|$(1st jet) [pb]
-LegendXPos=0.05
-LegendYPos=0.45
 # END PLOT
 
 # BEGIN PLOT /D0_2008_I792812/d03-x01-y01
@@ -22,8 +20,6 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}p_{\perp}$(Z) [pb/GeV]
 Title=Differential cross section in Z/$\gamma*$ rapidity
 XLabel=$|y|$(Z)
 YLabel=$\mathrm{d}\sigma/\mathrm{d}|y|$(Z) [pb]
-LegendXPos=0.05
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /D0_2008_I792812/d01-x01-y02
@@ -36,8 +32,6 @@ YLabel=$1/\sigma_\mathrm{inc}\,\mathrm{d}\sigma/\mathrm{d}p_{\perp}$(1st jet) [1
 Title=Differential cross section in leading jet rapidity
 XLabel=$|y|$(1st jet)
 YLabel=$1/\sigma_\mathrm{inc}\,\mathrm{d}\sigma/\mathrm{d}|y|$(1st jet)
-LegendXPos=0.05
-LegendYPos=0.45
 # END PLOT
 
 # BEGIN PLOT /D0_2008_I792812/d03-x01-y02
@@ -50,8 +44,6 @@ YLabel=$1/\sigma_\mathrm{inc}\,\mathrm{d}\sigma/\mathrm{d}p_{\perp}$(Z) [1/GeV]
 Title=Differential cross section in Z/$\gamma*$ rapidity
 XLabel=$|y|$(Z)
 YLabel=$1/\sigma_\mathrm{inc}\,\mathrm{d}\sigma/\mathrm{d}|y|$(Z)
-LegendXPos=0.05
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /D0_2008_I792812/d05-x01-y01

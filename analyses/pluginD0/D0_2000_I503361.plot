@@ -2,6 +2,5 @@
 Title=Z-boson $p_\perp$, $\sqrt{s}=1.8$~TeV
 XLabel=$p_\perp$~[GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp$~[GeV]
-# + any additional plot settings you might like, see make-plots documentation
 # END PLOT
 

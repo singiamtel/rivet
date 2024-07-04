@@ -35,7 +35,6 @@ Title=First-to-last top-quark $p_\perp$ difference vs $p_\perp^\mathrm{first}$
 XLabel=$p_\perp^\mathrm{first}$~[GeV]
 YLabel=$\langle \Delta p_\perp \rangle$~[GeV]
 LogY=0
-LegendYPos=0.2
 # END PLOT
 
 # BEGIN PLOT /MC_PARTONICTOPS/t_lep_n

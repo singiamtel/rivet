@@ -157,29 +157,24 @@ BEGIN PLOT /DELPHI_2000_I522656/d12-x01-y01
 Title=Wide jet broadening
 XLabel=$B_W$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}B_W$
-LegendYPos=0.8
 END PLOT
 BEGIN PLOT /DELPHI_2000_I522656/d13-x01-y01
 Title=Total jet broadening
 XLabel=$B_T$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}B_T$
-LegendYPos=0.8
 END PLOT
 BEGIN PLOT /DELPHI_2000_I522656/d17-x01-y01
 Title=Differential 2-jet rate(JADE) 
 XLabel=$y_{23}$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}y_{23}$
-LegendYPos=0.8
 END PLOT
 BEGIN PLOT /DELPHI_2000_I522656/d18-x01-y01
 Title=Differential 2-jet rate(Durham) 
 XLabel=$y_{23}$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}y_{23}$
-LegendYPos=0.8
 END PLOT
 BEGIN PLOT /DELPHI_2000_I522656/d20-x01-y01
 Title=Differential 2-jet rate(Cambridge) 
 XLabel=$y_{23}$
 YLabel=$1/\sigma \; \mathrm{d}\sigma/\mathrm{d}y_{23}$
-LegendYPos=0.8
 END PLOT

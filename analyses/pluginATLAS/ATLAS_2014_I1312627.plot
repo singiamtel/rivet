@@ -15,8 +15,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.5
-LegendYPos=0.3
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2014_I1312627/d0[1-4]
@@ -25,7 +23,6 @@ XLabel=$N_\mathrm{jets}$
 YLabel=$(\sigma_{W + N_\mathrm{jets}}) / (\sigma_{Z + N_\mathrm{jets}})$
 YMax=18.0
 YMin=6.5
-LegendYPos=0.9
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2014_I1312627/d01

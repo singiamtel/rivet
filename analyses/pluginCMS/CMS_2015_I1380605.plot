@@ -2,8 +2,6 @@
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.5
-LegendYPos=0.3
-LegendXPos=0.1
 LogX=1
 LogY=1
 # END PLOT

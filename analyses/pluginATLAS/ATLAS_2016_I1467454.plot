@@ -3,7 +3,6 @@ LogY=1
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.6
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1467454/d18

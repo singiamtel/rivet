@@ -1,9 +1,6 @@
 # BEGIN PLOT /ATLAS_2019_I1750330/*
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendYPos=0.90
-LegendXPos=0.95
-LegendAlign=r
 LogY=1
 Title=
 RatioPlotYMax=1.15

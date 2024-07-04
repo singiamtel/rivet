@@ -31,8 +31,6 @@ YMin=0.0
 YMax=900.0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -43,8 +41,6 @@ YMin=0.0
 YMax=320.0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -74,8 +70,6 @@ YMin=0.0
 YMax=900.0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -86,8 +80,6 @@ YMin=0.0
 YMax=320.0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -116,8 +108,6 @@ YMin=0.0
 YMax=900.0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -128,8 +118,6 @@ YMin=0.0
 YMax=320.0
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -161,8 +149,6 @@ YMin=0.0
 YMax=0.5
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -174,8 +160,6 @@ YMin=0.0
 YMax=0.5
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -207,8 +191,6 @@ YMin=0.0
 YMax=0.5
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -220,8 +202,6 @@ YMin=0.0
 YMax=0.5
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -253,8 +233,6 @@ YMin=0.0
 YMax=0.5
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 
@@ -266,8 +244,6 @@ YMin=0.0
 YMax=0.5
 RatioPlotYMin=0.45
 RatioPlotYMax=1.55
-LegendXPos=0.3
-LegendYPos=0.4
 LogY=0
 #END PLOT
 

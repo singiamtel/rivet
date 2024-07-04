@@ -2,7 +2,6 @@
 LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendAlign=r
 LeftMargin=1.5
 # END PLOT
 

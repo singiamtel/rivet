@@ -6,9 +6,6 @@ YMin=0.0000001
 XMin=1
 LogX=1
 GofType=chi2
-GofLegend=0
-LegendYPos=0.55
-LegendXPos=0.1
 RatioPlotYMin=0.5
 RatioPlotYMax=1.4
 # END PLOT

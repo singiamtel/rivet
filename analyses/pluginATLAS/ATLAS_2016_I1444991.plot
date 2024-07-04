@@ -3,7 +3,6 @@ LogY=1
 XTwosidedTicks=1
 YTwosidedTicks=1
 LeftMargin=1.5
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1444991/d02
@@ -12,9 +11,6 @@ XLabel=$N_\mathrm{jet}$
 YLabel=$\mathrm{d}\sigma_\mathrm{fid} / \mathrm{d} N_\mathrm{jet}$ [fb]
 XCustomMajorTicks=1.0 $0$ 2.0 $1$ 3.0 $2$
 LogY=0
-LegendYPos=0.30
-LegendXPos=0.05
-LegendAlign=l
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2016_I1444991/d03
@@ -61,6 +57,5 @@ Title=Leading jet veto efficiency
 XLabel=$p_\mathrm{T}^\mathrm{jet}$ threshold [GeV]
 YLabel=$\epsilon_0$
 LogY=0
-LegendYPos=0.3
 # END PLOT
 

@@ -9,8 +9,6 @@ Title=$\bar{B}^0 \to \pi^+ \ell^- \nu$
 
 # BEGIN PLOT /BELLE_2013_I1238273/d03-x01-y01
 Title=$\bar{B}^0 \to \rho^+ \ell^- \nu$
-LegendXPos=0.1
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /BELLE_2013_I1238273/d02-x01-y01

@@ -1,8 +1,6 @@
 # BEGIN PLOT /ATLAS_2013_I1244522/d..
 XTwosidedTicks=1
 YTwosidedTicks=1
-LegendYPos=0.9
-LegendXPos=0.6
 LeftMargin=1.5
 YLabelSep=6.0
 # END PLOT
@@ -29,8 +27,6 @@ YLabel=$\mathrm{d}\sigma / \mathrm{d}|y^\mathrm{jet}|$ [pb]
 XLabel=$\Delta\phi^{\gamma j}$ [rad]
 YLabel=$\mathrm{d}\sigma / \mathrm{d}\Delta\phi^{\gamma j}$ [pb]
 LogY=1
-LegendYPos=0.9
-LegendXPos=0.1
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2013_I1244522/d05-x01-y01

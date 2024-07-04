@@ -26,14 +26,12 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}E_{\perp}$ [pb/GeV]
 Title=$\sigma(1 \mathrm{~jets})/\sigma(0 \mathrm{~jets})$
 XLabel=$\sqrt{(}s)$ [GeV]
 YLabel=$\sigma(1 \mathrm{~jets})/\sigma(0 \mathrm{~jets})$
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768579/d05-x01-y02
 Title=$\sigma(2 \mathrm{~jets})/\sigma(1 \mathrm{~jets})$
 XLabel=$\sqrt{(}s)$ [GeV]
 YLabel=$\sigma(2 \mathrm{~jets})/\sigma(1 \mathrm{~jets})$
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768579/d05-x01-y03
@@ -52,14 +50,12 @@ YLabel=$\sigma(4 \mathrm{~jets})/\sigma(3 \mathrm{~jets})$
 Title=$\sigma(1 \mathrm{~jets})$
 XLabel=$\sqrt{(}s)$ [GeV]
 YLabel=$\sigma(1 \mathrm{~jets})$
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768579/d07-x01-y01
 Title=$\sigma(2 \mathrm{~jets})$
 XLabel=$\sqrt{(}s)$ [GeV]
 YLabel=$\sigma(2 \mathrm{~jets})$
-LegendYPos=0.5
 # END PLOT
 
 # BEGIN PLOT /CDF_2008_I768579/d08-x01-y01
@@ -78,6 +74,5 @@ YLabel=$\sigma(4 \mathrm{~jets})$
 Title=$\sigma(0 \mathrm{~jets})$
 XLabel=$\sqrt{(}s)$ [GeV]
 YLabel=
-LegendYPos=0.5
 # END PLOT
 

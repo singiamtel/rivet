@@ -3,9 +3,6 @@ LeftMargin=1.5
 LogX=0
 LogY=0
 GofType=chi2
-GofLegend=0
-LegendYPos=0.8
-LegendXPos=0.5
 RatioPlotYMin=0.6
 RatioPlotYMax=1.3
 # END PLOT

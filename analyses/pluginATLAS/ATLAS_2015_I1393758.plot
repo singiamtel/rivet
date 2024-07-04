@@ -3,9 +3,6 @@ LogY=0
 XTwosidedTicks=1
 YTwosidedTicks=1
 XLabel=Jet $p_\mathrm{T}$ [GeV]
-LegendAlign=r
-LegendYPos=0.30
-LegendXPos=0.95
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1393758/d01-x01-y01

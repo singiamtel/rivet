@@ -4,10 +4,6 @@ XLabel=${p_{T}^{W}}$ [GeV]
 YLabel=${{1/\sigma} {d\sigma}/{dp_{T}^{W}}}$ [$GeV^{-1}$]
 LogX=0
 LogY=1
-LegendXPos=0.4
-LegendYPos=0.8
-#LegendXPos=0.1
-#LegendYPos=0.3
 RatioPlotYMin=0.7
 RatioPlotYMax=1.3
 # END PLOT
@@ -19,10 +15,6 @@ XLabel=${p_{T}^{Z}}$ [GeV]
 YLabel=${{1/\sigma} {d\sigma}/{dp_{T}^{Z}}}$ [$GeV^{-1}$]
 LogX=0
 LogY=1
-LegendXPos=0.4
-LegendYPos=0.8
-#LegendXPos=0.1
-#LegendYPos=0.3
 RatioPlotYMin=0.4
 RatioPlotYMax=1.6
 # END PLOT

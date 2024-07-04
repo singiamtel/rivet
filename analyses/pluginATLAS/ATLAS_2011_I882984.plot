@@ -7,7 +7,6 @@ YLabel=$\rho(r)$
 XLabel=$r$
 YLabel=$\Psi(r)$
 LogY=0
-LegendYPos=0.6
 ## END PLOT
 
 ## BEGIN PLOT /ATLAS_2011_I882984/d01-x01-y01

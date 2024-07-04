@@ -27,7 +27,6 @@ BEGIN PLOT /ATLAS_2022_I2077570/d05-x01-y01
 Title=$p_{\mathrm{T},j1} > 500$ GeV
 XLabel=$\Delta R_{Z,j}^{min}$
 YLabel=$d\sigma/d\Delta R_{Z,j}^{min}$ [pb]
-LegendXPos=0.15
 LogY=0
 END PLOT
 
@@ -35,7 +34,6 @@ BEGIN PLOT /ATLAS_2022_I2077570/d06-x01-y01
 Title=$p_{\mathrm{T},j1} > 500$ GeV
 XLabel=$r_{Z,j}$
 YLabel=$d\sigma/dr_{Z,j}$ [pb]
-LegendXPos=0.15
 YMax = 0.2
 LogY=0
 END PLOT
@@ -51,7 +49,6 @@ BEGIN PLOT /ATLAS_2022_I2077570/d08-x01-y01
 Title=$p_{\mathrm{T},j1} > 500$ GeV $+$ $\Delta R_{Z,j}^{min} > 2.0$
 XLabel=$r_{Z,j}$
 YLabel=$d\sigma/dr_{Z,j}$ [pb]
-LegendXPos=0.15
 LogY=1
 END PLOT
 

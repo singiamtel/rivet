@@ -5,8 +5,6 @@ LogX=1
 XTwosidedTicks=1
 YTwosidedTicks=1
 #LeftMargin=1.5
-LegendXPos=0.95
-LegendAlign=r
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2017_I1589844/d..-x01-y02

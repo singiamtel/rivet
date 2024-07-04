@@ -1,7 +1,6 @@
 # BEGIN PLOT /ARGUS_1993_I342061/d0[234]-x01-y01
 XLabel=$x_p$
 YLabel=$1/(\sigma\beta)\mathrm{d}\sigma/\mathrm{d}x_p$
-LegendXPos=0.7
 # END PLOT
 
 # BEGIN PLOT /ARGUS_1993_I342061/d02-x01-y01
@@ -43,6 +42,4 @@ YLabel=$N_{\eta^\prime}$
 Title=$f_0$ multiplicity
 YLabel=$N_{f_0}$
 #XCustomMajorTicks=9.46	$\Upsilon(1S)$     10.02	$\Upsilon(2S)$		10.45	   $\text{continuum}$
-LegendYPos=0.2
-LegendXPos=0.2
 # END PLOT
