@@ -14,6 +14,7 @@
  * - (for input streams) check that the opened file is peek-able
  * - turn on the badbit in the exception mask
  */
+namespace Rivet {
 namespace strict_fstream
 {
 
@@ -234,4 +235,5 @@ public:
 }; // class fstream
 
 } // namespace strict_fstream
+} // namespace Rivet
 

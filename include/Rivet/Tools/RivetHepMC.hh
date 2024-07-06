@@ -12,6 +12,10 @@
 #include "HepMC3/Reader.h"
 
 #include "HepMC3/Version.h"
+#if HEPMC3_VERSION_CODE >= 3003000
+#define HEPMC3_Z_SUPPORT 1
+#define HEPMC3_USE_COMPRESSION 1
+#endif
 #if HEPMC3_VERSION_CODE > 3002007
 #include "HepMC3/ReaderFactory.h"
 #else
