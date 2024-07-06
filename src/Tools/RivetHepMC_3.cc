@@ -1,7 +1,10 @@
 // -*- C++ -*-
 #include "Rivet/Config/DummyConfig.hh"
+#include "HepMC3/Version.h"
+#if HEPMC3_VERSION_CODE < 3003000
 #if HAVE_LIBZ
 #include "../Core/zstr/zstr.hpp"
+#endif
 #endif
 #include "HepMC3/GenCrossSection.h"
 #include "HepMC3/ReaderFactory.h"
