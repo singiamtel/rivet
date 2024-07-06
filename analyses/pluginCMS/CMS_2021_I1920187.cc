@@ -336,6 +336,18 @@ namespace Rivet {
       }
     } // end analyze() function
 
+    void finalize() {
+      for (auto& hvec3 : { _h_dijet_cen, _h_dijet_cen_groomed,
+                          _h_dijet_fwd, _h_dijet_fwd_groomed,
+                          _h_zpj, _h_zpj_groomed }) {
+        for (auto& hvec2 : hvec3) {
+          for (auto& hvec : hvec2) {
+            normalize(hvec, 1.0, false);
+          }
+        }
+      }
+    }
+
 
     /// @class Angularity
     /// Definition of angularity

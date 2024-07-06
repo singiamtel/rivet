@@ -173,8 +173,8 @@ if __name__ == '__main__':
                                     args.EQUIV, not args.ASSUME_REENTRANT,
                                     args.PRELOADFILE, procID,))
                                     for procID, idx in enumerate(range(0, len(inputFiles), nprocs))]
-        p.close()
         results = [ job.get() for job in jobs ]
+        p.close()
         # Merge the individual substeps
         ah.loadAOs(*results[0])
         for aopaths, aodata in results[1:]:

@@ -74,6 +74,7 @@ rivetenv.sh
 rivetenv.csh
 test/testApi
 test/testCmp
+test/testMerging
 test/testNaN
 include/Rivet/Config/DummyConfig.hh.in
 include/Rivet/Config/BuildOptions.hh
@@ -85,7 +86,7 @@ doc/coverage/inspire-missing.ins.json.bak
 doc/coverage/wget-log
 test/log
 test/*.log
-test/out.yoda
+test/out*.yoda
 test/NaN.aida
 test/Rivet.yoda
 test/testBoost

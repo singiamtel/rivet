@@ -344,8 +344,9 @@ namespace Rivet {
               if (h_it.first.find("tt_y_3") != string::npos) { scale(h_it.second, 1. / 1.1); }
             }
             else {
-             const double norm_2D = h_it.second->integral(false);
-             scale(h_it.second, safediv(1.0, norm_2D));
+              const double norm_2D = h_it.second->integral(false);
+              scale(h_it.second, safediv(1.0, norm_2D));
+              divByGroupWidth(h_it.second);
             }
           }
           else {
@@ -354,17 +355,27 @@ namespace Rivet {
               if (h_it.first.find("tt_y_2") != string::npos) { scale(h_it.second, 1. / 0.6); }
               if (h_it.first.find("tt_y_3") != string::npos) { scale(h_it.second, 1. / 1.1); }
               scale(h_it.second, sf);
+              divByGroupWidth(h_it.second);
             }
-            else scale(h_it.second, sf);
+            else {
+              scale(h_it.second, sf);
+              divByGroupWidth(h_it.second);
+            }
           }
         }
         scale(_h_multi["tt_y_1_tt_m_t1_pt_3D_norm"], safediv(1, norm_3D));
+        divByGroupWidth(_h_multi["tt_y_1_tt_m_t1_pt_3D_norm"]);
         scale(_h_multi["tt_y_2_tt_m_t1_pt_3D_norm"], safediv(1, norm_3D));
+        divByGroupWidth(_h_multi["tt_y_2_tt_m_t1_pt_3D_norm"]);
         scale(_h_multi["tt_y_3_tt_m_t1_pt_3D_norm"], safediv(1, norm_3D));
+        divByGroupWidth(_h_multi["tt_y_3_tt_m_t1_pt_3D_norm"]);
         if (_mode) {
           scale(_h_multi["tt_y_1_tt_m_t1_pt_3D_parton_norm"], safediv(1, norm_3D_parton));
+          divByGroupWidth(_h_multi["tt_y_1_tt_m_t1_pt_3D_parton_norm"]);
           scale(_h_multi["tt_y_2_tt_m_t1_pt_3D_parton_norm"], safediv(1, norm_3D_parton));
+          divByGroupWidth(_h_multi["tt_y_2_tt_m_t1_pt_3D_parton_norm"]);
           scale(_h_multi["tt_y_3_tt_m_t1_pt_3D_parton_norm"], safediv(1, norm_3D_parton));
+          divByGroupWidth(_h_multi["tt_y_3_tt_m_t1_pt_3D_parton_norm"]);
         }
       }
 

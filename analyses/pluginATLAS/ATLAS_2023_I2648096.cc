@@ -128,6 +128,7 @@ namespace Rivet {
         else {
           scale(hist.second, sf);
         }
+        divByGroupWidth(hist.second);
       }
     }
 

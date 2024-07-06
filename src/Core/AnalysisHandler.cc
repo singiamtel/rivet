@@ -133,6 +133,9 @@ namespace Rivet {
     // Create a per-file event counter
     _fileCounter = CounterPtr(weightNames(), Counter("_FILECOUNT"));
 
+    // Create a running counter for the cross-section variance
+    _xserr = CounterPtr(weightNames(), Counter("XSECERR"));
+
     // Set the cross section based on what is reported by the init-event, else zero
     if (ge.cross_section())  setCrossSection(evt.crossSections());
     else {
@@ -623,19 +626,28 @@ namespace Rivet {
       setCrossSection(1.0e-10, 0.0);
     }
     // update Ntrials calculation
-    const double ntrials = safediv(_fileCounter.get()->persistent(defaultWeightIndex())->sumW(),
-                                   _xs.get()->persistent(defaultWeightIndex())->val()) + _ntrials;
-    if (ntrials >= 1.0) {
-      for (size_t iW = 0; iW < numWeights(); ++iW) {
+    const double ntrials = _ntrials + safediv(_fileCounter.get()->persistent(defaultWeightIndex())->sumW(),
+                                              _xs.get()->persistent(defaultWeightIndex())->val());
+    const double nFiles = _xserr.get()->persistent(defaultWeightIndex())->numEntries() + 1.0;
+    for (size_t iW = 0; iW < numWeights(); ++iW) {
+      double xs = 0.0, xserr = 0.0;
+      if (ntrials) {
         const double sumw  = _eventCounter.get()->persistent(iW)->sumW();
-        const double sumw2 = _eventCounter.get()->persistent(iW)->sumW2();
-        double xs = 0.0, xserr = 0.0;
+        //const double sumw2 = _eventCounter.get()->persistent(iW)->sumW2();
+        const double lastXSE = _xs.get()->persistent(iW)->totalErrAvg();
+        const double xse2 = _xserr.get()->persistent(iW)->sumW2() + sqr(lastXSE);
+        const double xse = _xserr.get()->persistent(iW)->sumW() + lastXSE;
         xs = sumw / ntrials;
-        xserr = (sumw2/ntrials) -  sqr(sumw/ntrials);
-        xserr /= ntrials - 1;
-        _xs.get()->persistent(iW)->reset();
-        _xs.get()->persistent(iW)->set(xs, sqrt(xserr));
+        // This would be exact, but we don't have the actual number of trials
+        //xserr = (sumw2/ntrials) -  sqr(sumw/ntrials);
+        //xserr /= ntrials - 1;
+        // Work out variance of cross-section uncertainties instead,
+        // unless there is only one file to begin with
+        xserr = xse/nFiles;
+        if (nFiles > 1.0)  xserr += sqrt(xse2/nFiles - sqr(xse/nFiles));
       }
+      _xs.get()->persistent(iW)->reset();
+      _xs.get()->persistent(iW)->set(xs, xserr);
     }
 
     // Copy all histos to finalize versions.
@@ -791,7 +803,7 @@ namespace Rivet {
     bool overwrite_xsec = false;
     size_t nfiles = 0, nfilestot = aofiles.size();
     map<string, YODA::AnalysisObjectPtr> allaos;
-    map<string, pair<double,double> > allxsecs;
+    map<string, std::array<double,4>> allxsecs;
     for (string file : aofiles) {
       ++nfiles;
       std::cout << "[" << nfiles << "/" << nfilestot << "] Merging data file " << file << "\r";
@@ -891,34 +903,39 @@ namespace Rivet {
     MSG_DEBUG("Finalize cross-section scaling ...");
     for (const auto& item : allxsecs) {
       const string& wname = item.first;
-      double xs = item.second.first;
-      double xserrSq = item.second.second;
+      double xs = item.second[0];
+      double xserr = item.second[1];
+      const double counts = item.second[3];
       auto xs_it = allaos.find("/RAW/_XSEC"s + wname);
       assert( xs_it != allaos.end() );
       if (equiv) {
-        MSG_DEBUG("Equivalent mode: scale by numEntries");
-        auto ec_it = allaos.find("/RAW/_EVTCOUNT" + wname);
-        assert( ec_it != allaos.end() );
-        const double sumw  = std::static_pointer_cast<YODA::Counter>(ec_it->second)->sumW();
-        const double sumw2 = std::static_pointer_cast<YODA::Counter>(ec_it->second)->sumW2();
-        const double ntrials = xs;
-        if (ntrials >= 1.0) {
+        MSG_DEBUG("Equivalent mode: work out combined cross-section");
+        const double ntrials = item.second[2];
+        if (ntrials && counts) {
+          const double xse = xs, xse2 = xserr; // re-purposed for propagating
+          auto ec_it = allaos.find("/RAW/_EVTCOUNT" + wname);
+          assert( ec_it != allaos.end() );
+          const double sumw = std::static_pointer_cast<YODA::Counter>(ec_it->second)->sumW();
+          //const double sumw2 = std::static_pointer_cast<YODA::Counter>(ec_it->second)->sumW2();
           xs = sumw/ntrials;
-          xserrSq = ((sumw2/ntrials) - sqr(sumw/ntrials))/(ntrials-1);
+          // This would be exact, but we don't have the actual number of trials
+          //item.second.second = ((sumw2/ntrials) - sqr(sumw/ntrials))/(ntrials-1);
+          xserr = xse/counts; // mean of all uncertainties in the files
+          if (counts > 1.0)  xserr += sqrt(xse2/counts - sqr(xse/counts)); // variance of the uncertainty values
         }
         else {
-          xs = xserrSq = 0.0;
+          xs = xserr = 0.;
         }
       }
       YODA::Estimate0DPtr xsec = std::dynamic_pointer_cast<YODA::Estimate0D>(xs_it->second);
       if (xsec) {
         xsec->reset();
-        xsec->set(xs, sqrt(xserrSq));
+        xsec->set(xs, xserr);
       }
       else { // old-style cross-section
         YODA::Scatter1DPtr xsec = std::static_pointer_cast<YODA::Scatter1D>(xs_it->second);
         xsec->reset();
-        xsec->addPoint(xs, sqrt(xserrSq));
+        xsec->addPoint(xs, xserr);
       }
     }
 
@@ -931,7 +948,7 @@ namespace Rivet {
 
   void AnalysisHandler::mergeAOS(map<string, YODA::AnalysisObjectPtr> &allaos,
                                  const map<string, YODA::AnalysisObjectPtr> &newaos,
-                                 map<string, pair<double, double>> &allxsecs,
+                                 map<string, std::array<double,4>> &allxsecs,
                                  const vector<string> &delopts,
                                  const vector<string> &optAnas,
                                  const vector<string> &optKeys,
@@ -998,7 +1015,7 @@ namespace Rivet {
         auto xs_it = newaos.find(xspath);
         if ( xs_it != newaos.end() ) {
           // get iterator to the existing (or newly created) key-value pair
-          auto xit = allxsecs.insert( make_pair(wname, make_pair(0,0)) ).first;
+          auto xit = allxsecs.insert( make_pair(wname, std::array<double,4>{0.,0.,0.,0.}) ).first;
           // Get cross-section AO, which was a S1D in V2 and then became a E0D from V3
           YODA::Estimate0DPtr xsec = std::dynamic_pointer_cast<YODA::Estimate0D>(xs_it->second);
           if (xsec) { // for >= V3 ASCII
@@ -1012,12 +1029,16 @@ namespace Rivet {
               xsec->scale(user_xsec);
             }
             if (equiv) {
-              xit->second.first += sumw / xsec->val(); // Ntrials
+              // keep track of (squared) cross-section error sums
+              xit->second[0] += xsec->totalErrAvg();
+              xit->second[1] += sqr(xsec->totalErrAvg());
+              xit->second[2] += sumw / xsec->val();
+              xit->second[3] += 1.0;
             }
             else {
               // only in stacking mode: multiply each AO by cross-section / sumW
-              xit->second.first += xsec->val();
-              xit->second.second += sqr(xsec->errAvg());
+              xit->second[0] += xsec->val();
+              xit->second[1] += xsec->totalErrAvg();
               scales[wname] = xsec->val() / sumw;
             }
           }
@@ -1035,12 +1056,16 @@ namespace Rivet {
             }
             // weighted average of cross-sections
             if (equiv) {
-              xit->second.first  += sumw / xsec->point(0).x(); // Ntrials
+              // keep track of (squared) cross-section error sums
+              xit->second[0] += xsec->point(0).xErrAvg(); // cross-section error
+              xit->second[1] += sqr(xsec->point(0).xErrAvg()); // squared cross-section error
+              xit->second[2] += sumw / xsec->point(0).x();
+              xit->second[3] += 1.0;
             }
             else {
               // only in stacking mode: multiply each AO by cross-section / sumW
-              xit->second.first  += xsec->point(0).x();
-              xit->second.second += sqr(xsec->point(0).xErrAvg());
+              xit->second[0] += xsec->point(0).x();
+              xit->second[1] += xsec->point(0).xErrAvg();
               scales[wname] = xsec->point(0).x() / sumw;
             }
           }
@@ -1148,6 +1173,7 @@ namespace Rivet {
               << weightNames().size() << " " << numWeights());
     _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
     _fileCounter = CounterPtr(weightNames(), Counter("_FILECOUNT"));
+    _xserr = CounterPtr(weightNames(), Counter("XSECERR"));
     _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
     vector<double> scales(numWeights(), 1.0);
     for (size_t iW = 0; iW < numWeights(); ++iW) {
@@ -1265,6 +1291,7 @@ namespace Rivet {
               << weightNames().size() << " " << numWeights());
     _eventCounter = CounterPtr(weightNames(), Counter("_EVTCOUNT"));
     _fileCounter = CounterPtr(weightNames(), Counter("_FILECOUNT"));
+    _xserr = CounterPtr(weightNames(), Counter("XSECERR"));
     _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
 
     // load AOs into memory
@@ -1332,26 +1359,19 @@ namespace Rivet {
     MSG_DEBUG("Getting event counter and cross-section from "
               << weightNames().size() << " " << numWeights());
 
+    // Update ntrials counter
+    _ntrials += other._ntrials + safediv(other._fileCounter.get()->persistent(defaultWeightIndex())->sumW(),
+                                         other._xs.get()->persistent(defaultWeightIndex())->val());
     for (size_t iW = 0; iW < numWeights(); ++iW) {
       MSG_DEBUG("Weight # " << iW << " of " << numWeights());
-      // work out the combined Ntrials
+      // combine sumW counter
       _eventCounter.get()->setActiveWeightIdx(iW);
       other._eventCounter.get()->setActiveWeightIdx(iW);
-      _xs.get()->setActiveWeightIdx(iW);
-      other._xs.get()->setActiveWeightIdx(iW);
-      const double ntrials = _eventCounter->sumW()/_xs->val() + other._eventCounter->sumW()/other._xs->val();
-      // set the sum of weights
       *_eventCounter += *other._eventCounter;
-      // set the cross-section
-      const double sumw  = _eventCounter->sumW();
-      const double sumw2 = _eventCounter->sumW2();
-      double xs = sumw / ntrials;
-      double xserrSq = (sumw2/ntrials) - sqr(sumw2/ntrials);
-      xserrSq /= ntrials - 1.0;
-      YODA::Estimate0D& this_xs = *_xs;
-      this_xs.reset();
-      this_xs.set(xs, sqrt(xserrSq));
-
+      // combine cross-section error
+      _xserr.get()->setActiveWeightIdx(iW);
+      other._xserr.get()->setActiveWeightIdx(iW);
+      *_xserr += *other._xserr;
 
       // Go through all analyses and merge other's AOs with current AOs
       for (const auto& apair : other.analysesMap()) {
@@ -1376,8 +1396,10 @@ namespace Rivet {
           ///   e.g. throw LookupError("Data object " + other_ao->path() + " not found");
         }
       }
+      other._eventCounter.get()->unsetActiveWeight();
       _eventCounter.get()->unsetActiveWeight();
-      _xs.get()->unsetActiveWeight();
+      other._xserr.get()->unsetActiveWeight();
+      _xserr.get()->unsetActiveWeight();
     } // end of loop over weights
     // leave it to user to call finalize()
   }
@@ -1690,6 +1712,8 @@ namespace Rivet {
       _fileCounter.get()->setActiveWeightIdx(iW);
       _fileCounter->reset();
       _fileCounter.get()->unsetActiveWeight();
+      _xs.get()->setActiveWeightIdx(iW);
+      _xserr.get()->persistent(iW)->fill(_xs->totalErrAvg());
     }
     // Information processed - we're good to continue
     _xs.get()->unsetActiveWeight();
