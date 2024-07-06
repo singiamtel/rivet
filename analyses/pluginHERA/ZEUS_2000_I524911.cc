@@ -37,14 +37,14 @@ namespace Rivet {
       book(_h["A2"], 1, 1, 2);
       book(_h["A3"], 1, 1, 3);
       book(_h["A4"], 1, 1, 4);
-                
+
       book(_p["cosphi"],2, 1, 1) ;
       book(_p["cos2phi"],2, 1, 2) ;
-   
-      // counter pointer to store the no. of events           
+
+      // counter pointer to store the no. of events
       book(_Nevt_after_cuts, "TMP/Nevt_after_cuts");
 
-      
+
 
     }
 
@@ -61,7 +61,7 @@ namespace Rivet {
     double x = dk.x();
     double y = dk.y();
     const double Q2 = dk.Q2();
-    
+
     // Extract the particles other than the lepton
 
       if(x<0.01||x>0.1) vetoEvent;
@@ -69,10 +69,10 @@ namespace Rivet {
       if(Q2 > 7220 || Q2 < 180) vetoEvent;
 
       _Nevt_after_cuts -> fill();
-        
+
       Particles particles;
       particles.reserve(cfs.particles().size());
-      
+
       ConstGenParticlePtr dislepGP = dl.out().genParticle();
       for (const Particle& p : cfs.particles()) {
           ConstGenParticlePtr loopGP = p.genParticle();
@@ -80,44 +80,43 @@ namespace Rivet {
           if (loopGP == dislepGP) continue;
           particles.push_back(p);
       }
-    
+
     const LorentzTransform hcmboost = dk.boostHCM();
     for (size_t ip1 = 0; ip1 < particles.size(); ++ip1) {
         const Particle& p = particles[ip1];
-       
-       // calculate zh        
+
+       // calculate zh
         double zh = 2.*x/Q2* (dk.beamHadron().E()*p.momentum().E() - dk.beamHadron().pz()*p.momentum().pz()) ;
        // cout << " zh " << zh << endl;
        // Boost to hcm
-       
+
        if (zh < 0.2 ) continue ;
 
-         const FourMomentum hcmMom = hcmboost.transform(p.momentum());      
-                  
-         const double phi =mapAngleMPiToPi(hcmMom.phi())/degree ;
-         
-         
-         
-// Filling histograms with values of cos(phi) and cos(2phi) wrt the corresponding momentum cuts
+         const FourMomentum hcmMom = hcmboost.transform(p.momentum());
 
+         const double phi_rad = mapAngleMPiToPi(hcmMom.phi());
+         const double phi_deg = phi_rad/degree;
+
+        // Filling histograms with values of cos(phi) and cos(2phi)
+        // wrt the corresponding momentum cuts
          for (size_t i = 0; i < 8; ++i) {
-            if(hcmMom.pT() > _ptCut[i] ) { 
-              _p["cosphi"] ->fill(_edges[i],cos(hcmMom.phi()));
-              _p["cos2phi"]->fill(_edges[i],cos(2.*hcmMom.phi()));
+            if(hcmMom.pT() > _ptCut[i] ) {
+              _p["cosphi"] ->fill(_edges[i], cos(phi_rad));
+              _p["cos2phi"]->fill(_edges[i], cos(2.*phi_rad));
             }
          }
-                    
-         if(hcmMom.pT() > _ptCut[1] ) { _h["A1"] -> fill(phi); }          
-                     
-         if(hcmMom.pT() > _ptCut[3] ) { _h["A2"] -> fill(phi); }
-         
-         if(hcmMom.pT() > _ptCut[5] ) { _h["A3"] -> fill(phi); }
-                   
-         if(hcmMom.pT() > _ptCut[7] ) { _h["A4"] -> fill(phi); }
-        
+
+         if(hcmMom.pT() > _ptCut[1] ) { _h["A1"] -> fill(phi_deg); }
+
+         if(hcmMom.pT() > _ptCut[3] ) { _h["A2"] -> fill(phi_deg); }
+
+         if(hcmMom.pT() > _ptCut[5] ) { _h["A3"] -> fill(phi_deg); }
+
+         if(hcmMom.pT() > _ptCut[7] ) { _h["A4"] -> fill(phi_deg); }
+
      }
-        
-  
+
+
   }
 
 
@@ -129,12 +128,12 @@ namespace Rivet {
       double norm = dbl(*_Nevt_after_cuts) ;
       double degTOrad_width = _h["A1"]->bin(1).xWidth()*10./2./M_PI ;
       if (norm > 1 ) {
-         scale(_h["A1"], degTOrad_width/norm); 
-         scale(_h["A2"], degTOrad_width/norm); 
+         scale(_h["A1"], degTOrad_width/norm);
+         scale(_h["A2"], degTOrad_width/norm);
          scale(_h["A3"], degTOrad_width/norm);
-         scale(_h["A4"], degTOrad_width/norm); 
-      }     
-      
+         scale(_h["A4"], degTOrad_width/norm);
+      }
+
     }
 
     ///@}
@@ -149,7 +148,7 @@ namespace Rivet {
     vector<string> _edges;
     vector<double> _ptCut = { 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0};
     ///@}
-    
+
 
 
   };

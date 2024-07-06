@@ -556,6 +556,7 @@ namespace Rivet {
         for (double& e : energies) { e /= nprocs; }
       }
       _beaminfo->deserializeContent(energies);
+      for (auto& b : _beaminfo->bins(true))  b.rmErrs();
       offset += beamLen;
 
       // then the multiweighted AOs
@@ -578,6 +579,16 @@ namespace Rivet {
         ++iW; offset += aoLen; // increment offset
       }
       raos[iAO].get()->unsetActiveWeight();
+      // Reset cross-section bookkeeping
+      _ntrials = 0.0;
+      _fileCounter = CounterPtr(weightNames(), Counter("_FILECOUNT"));
+      _xserr = CounterPtr(weightNames(), Counter("XSECERR"));
+      if (nprocs >= 2) {
+        for (size_t iW = 0; iW < numWeights(); ++iW) {
+          *_fileCounter.get()->persistent(iW) = *_eventCounter.get()->persistent(iW);
+          _xs.get()->persistent(iW)->scale(1.0/nprocs);
+        }
+      }
     }
 
     /// @}
@@ -612,7 +623,7 @@ namespace Rivet {
     /// @brief Merge the AO map @a newaos into @a allaos
     void mergeAOS(map<string, YODA::AnalysisObjectPtr> &allaos,
                   const map<string, YODA::AnalysisObjectPtr> &newaos,
-                  map<string, pair<double, double>> &allxsecs,
+                  map<string, std::array<double,4>> &allxsecs,
                   const vector<string>& delopts=vector<string>(),
                   const vector<string>& optAnas=vector<string>(),
                   const vector<string>& optKeys=vector<string>(),
@@ -697,6 +708,9 @@ namespace Rivet {
 
     /// Cross-section known to AH
     Estimate0DPtr _xs;
+
+    /// Running average of the cross-section uncertainties
+    CounterPtr _xserr;
 
     /// Beam info known to AH
     YODA::BinnedEstimatePtr<string> _beaminfo;

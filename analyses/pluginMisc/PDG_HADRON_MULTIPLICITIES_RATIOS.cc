@@ -13,9 +13,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    PDG_HADRON_MULTIPLICITIES_RATIOS() : Analysis("PDG_HADRON_MULTIPLICITIES_RATIOS")
-    {}
-
+    RIVET_DEFAULT_ANALYSIS_CTOR(PDG_HADRON_MULTIPLICITIES_RATIOS);
 
     /// @name Analysis methods
     /// @{

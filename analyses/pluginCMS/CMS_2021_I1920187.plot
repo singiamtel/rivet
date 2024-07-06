@@ -1,14 +1,15 @@
+# BEGIN PLOT /CMS_2021_I1920187/.*
+Leftmargin=0.9
+Topmargin=0.9
+# END PLOT
+
 # BEGIN PLOT /CMS_2021_I1920187/d02-x01-y01
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16,13 +17,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -30,13 +27,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -44,13 +37,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -58,13 +47,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -72,13 +57,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -86,13 +67,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -100,13 +77,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -114,13 +87,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -128,13 +97,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -142,13 +107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -156,13 +117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -170,13 +127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -184,13 +137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -198,13 +147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -212,13 +157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -226,13 +167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -240,13 +177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -254,13 +187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -268,13 +197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -282,13 +207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -296,13 +217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -310,13 +227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -324,13 +237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -338,13 +247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -352,13 +257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -366,13 +267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -380,13 +277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -394,13 +287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -408,13 +297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -422,13 +307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -436,13 +317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -450,13 +327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -464,13 +337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -478,13 +347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -492,13 +357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -506,13 +367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -520,13 +377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -534,13 +387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -548,13 +397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -562,13 +407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -576,13 +417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -590,13 +427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -604,13 +437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -618,13 +447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -632,13 +457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -646,13 +467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -660,13 +477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -674,13 +487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -688,13 +497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -702,13 +507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -716,13 +517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -730,13 +527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -744,13 +537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -758,13 +547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -772,13 +557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -786,13 +567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -800,13 +577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -814,13 +587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -828,13 +597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -842,13 +607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -856,13 +617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -870,13 +627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -884,13 +637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -898,13 +647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -912,13 +657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -926,13 +667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -940,13 +677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -954,13 +687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -968,13 +697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -982,13 +707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -996,13 +717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1010,13 +727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1024,13 +737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1038,13 +747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1052,13 +757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1066,13 +767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1080,13 +777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1094,13 +787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1108,13 +797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1122,13 +807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1136,13 +817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1150,13 +827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1164,13 +837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1178,13 +847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1192,13 +857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1206,13 +867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1220,13 +877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1234,13 +887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1248,13 +897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1262,13 +907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1276,13 +917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1290,13 +927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1304,13 +937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1318,13 +947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1332,13 +957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1346,13 +967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1360,13 +977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1374,13 +987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1388,13 +997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1402,13 +1007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1416,13 +1017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1430,13 +1027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1444,13 +1037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1458,13 +1047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1472,13 +1057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1486,13 +1067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1500,13 +1077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1514,13 +1087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1528,13 +1097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1542,13 +1107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1556,13 +1117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1570,13 +1127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1584,13 +1137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1598,13 +1147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1612,13 +1157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1626,13 +1167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1640,13 +1177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1654,13 +1187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1668,13 +1197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1682,13 +1207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1696,13 +1217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1710,13 +1227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1724,13 +1237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1738,13 +1247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1752,13 +1257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1766,13 +1267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1780,13 +1277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1794,13 +1287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1808,13 +1297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1822,13 +1307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1836,13 +1317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1850,13 +1327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1864,13 +1337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1878,13 +1347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1892,13 +1357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1906,13 +1367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1920,13 +1377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1934,13 +1387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1948,13 +1397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1962,13 +1407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1976,13 +1417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -1990,13 +1427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2004,13 +1437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2018,13 +1447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2032,13 +1457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2046,13 +1467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2060,13 +1477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2074,13 +1487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2088,13 +1497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2102,13 +1507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2116,13 +1517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2130,13 +1527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2144,13 +1537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2158,13 +1547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2172,13 +1557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2186,13 +1567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2200,13 +1577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2214,13 +1587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2228,13 +1597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2242,13 +1607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2256,13 +1617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2270,13 +1627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2284,13 +1637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2298,13 +1647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2312,13 +1657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2326,13 +1667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2340,13 +1677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2354,13 +1687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2368,13 +1697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2382,13 +1707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2396,13 +1717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2410,13 +1727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2424,13 +1737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2438,13 +1747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2452,13 +1757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2466,13 +1767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2480,13 +1777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2494,13 +1787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2508,13 +1797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2522,13 +1807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2536,13 +1817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2550,13 +1827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2564,13 +1837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2578,13 +1847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2592,13 +1857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2606,13 +1867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2620,13 +1877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2634,13 +1887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2648,13 +1897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2662,13 +1907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2676,13 +1917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2690,13 +1927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2704,13 +1937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2718,13 +1947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2732,13 +1957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2746,13 +1967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2760,13 +1977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2774,13 +1987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2788,13 +1997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2802,13 +2007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2816,13 +2017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2830,13 +2027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2844,13 +2037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2858,13 +2047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2872,13 +2057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2886,13 +2067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2900,13 +2077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2914,13 +2087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2928,13 +2097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2942,13 +2107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2956,13 +2117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2970,13 +2127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2984,13 +2137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -2998,13 +2147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3012,13 +2157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3026,13 +2167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3040,13 +2177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3054,13 +2187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3068,13 +2197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3082,13 +2207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3096,13 +2217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3110,13 +2227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3124,13 +2237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3138,13 +2247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3152,13 +2257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3166,13 +2267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3180,13 +2277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3194,13 +2287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3208,13 +2297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3222,13 +2307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3236,13 +2317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3250,13 +2327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3264,13 +2337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3278,13 +2347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3292,13 +2357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3306,13 +2367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3320,13 +2377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3334,13 +2387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3348,13 +2397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3362,13 +2407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3376,13 +2417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3390,13 +2427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3404,13 +2437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3418,13 +2447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3432,13 +2457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3446,13 +2467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3460,13 +2477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3474,13 +2487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3488,13 +2497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3502,13 +2507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3516,13 +2517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3530,13 +2527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3544,13 +2537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3558,13 +2547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3572,13 +2557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3586,13 +2567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3600,13 +2577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3614,13 +2587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3628,13 +2597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3642,13 +2607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3656,13 +2617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3670,13 +2627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3684,13 +2637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3698,13 +2647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3712,13 +2657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3726,13 +2667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3740,13 +2677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3754,13 +2687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3768,13 +2697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3782,13 +2707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3796,13 +2717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3810,13 +2727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3824,13 +2737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3838,13 +2747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3852,13 +2757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3866,13 +2767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3880,13 +2777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3894,13 +2787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3908,13 +2797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3922,13 +2807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3936,13 +2817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3950,13 +2827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3964,13 +2837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3978,13 +2847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -3992,13 +2857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4006,13 +2867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4020,13 +2877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4034,13 +2887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4048,13 +2897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4062,13 +2907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4076,13 +2917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4090,13 +2927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4104,13 +2937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4118,13 +2947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4132,13 +2957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4146,13 +2967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4160,13 +2977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4174,13 +2987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4188,13 +2997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4202,13 +3007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4216,13 +3017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4230,13 +3027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4244,13 +3037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4258,13 +3047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4272,13 +3057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4286,13 +3067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4300,13 +3077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4314,13 +3087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4328,13 +3097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4342,13 +3107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4356,13 +3117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4370,13 +3127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4384,13 +3137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4398,13 +3147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4412,13 +3157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4426,13 +3167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4440,13 +3177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4454,13 +3187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4468,13 +3197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4482,13 +3207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4496,13 +3217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4510,13 +3227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4524,13 +3237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4538,13 +3247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4552,13 +3257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4566,13 +3267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4580,13 +3277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4594,13 +3287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4608,13 +3297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4622,13 +3307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4636,13 +3317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4650,13 +3327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4664,13 +3337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4678,13 +3347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4692,13 +3357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4706,13 +3367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4720,13 +3377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4734,13 +3387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4748,13 +3397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4762,13 +3407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4776,13 +3417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4790,13 +3427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4804,13 +3437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4818,13 +3447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4832,13 +3457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4846,13 +3467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4860,13 +3477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4874,13 +3487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4888,13 +3497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4902,13 +3507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4916,13 +3517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4930,13 +3527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4944,13 +3537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4958,13 +3547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4972,13 +3557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -4986,13 +3567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5000,13 +3577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5014,13 +3587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5028,13 +3597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5042,13 +3607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5056,13 +3617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5070,13 +3627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5084,13 +3637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5098,13 +3647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5112,13 +3657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5126,13 +3667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5140,13 +3677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5154,13 +3687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5168,13 +3697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5182,13 +3707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5196,13 +3717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5210,13 +3727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5224,13 +3737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5238,13 +3747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5252,13 +3757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5266,13 +3767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5280,13 +3777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5294,13 +3787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5308,13 +3797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5322,13 +3807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5336,13 +3817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5350,13 +3827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5364,13 +3837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5378,13 +3847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5392,13 +3857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5406,13 +3867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5420,13 +3877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5434,13 +3887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5448,13 +3897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5462,13 +3907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5476,13 +3917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5490,13 +3927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5504,13 +3937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5518,13 +3947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5532,13 +3957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5546,13 +3967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5560,13 +3977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5574,13 +3987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5588,13 +3997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5602,13 +4007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5616,13 +4017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5630,13 +4027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5644,13 +4037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5658,13 +4047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5672,13 +4057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5686,13 +4067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5700,13 +4077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5714,13 +4087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5728,13 +4097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5742,13 +4107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5756,13 +4117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5770,13 +4127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5784,13 +4137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5798,13 +4147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5812,13 +4157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5826,13 +4167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5840,13 +4177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5854,13 +4187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5868,13 +4197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5882,13 +4207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5896,13 +4217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5910,13 +4227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5924,13 +4237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5938,13 +4247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5952,13 +4257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5966,13 +4267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5980,13 +4277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -5994,13 +4287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6008,13 +4297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6022,13 +4307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6036,13 +4317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6050,13 +4327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6064,13 +4337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6078,13 +4347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6092,13 +4357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6106,13 +4367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6120,13 +4377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6134,13 +4387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6148,13 +4397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6162,13 +4407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6176,13 +4417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6190,13 +4427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6204,13 +4437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6218,13 +4447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6232,13 +4457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6246,13 +4467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6260,13 +4477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6274,13 +4487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6288,13 +4497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6302,13 +4507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6316,13 +4517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6330,13 +4527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6344,13 +4537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6358,13 +4547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6372,13 +4557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6386,13 +4567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6400,13 +4577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6414,13 +4587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6428,13 +4597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6442,13 +4607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6456,13 +4617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6470,13 +4627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6484,13 +4637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6498,13 +4647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6512,13 +4657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6526,13 +4667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6540,13 +4677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6554,13 +4687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6568,13 +4697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6582,13 +4707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6596,13 +4717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6610,13 +4727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6624,13 +4737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6638,13 +4747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6652,13 +4757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6666,13 +4767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6680,13 +4777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6694,13 +4787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6708,13 +4797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6722,13 +4807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6736,13 +4817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6750,13 +4827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6764,13 +4837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6778,13 +4847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6792,13 +4857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6806,13 +4867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6820,13 +4877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6834,13 +4887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6848,13 +4897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6862,13 +4907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6876,13 +4917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6890,13 +4927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6904,13 +4937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6918,13 +4947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6932,13 +4957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6946,13 +4967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6960,13 +4977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6974,13 +4987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -6988,13 +4997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7002,13 +5007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7016,13 +5017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7030,13 +5027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7044,13 +5037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7058,13 +5047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7072,13 +5057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7086,13 +5067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7100,13 +5077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7114,13 +5087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7128,13 +5097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7142,13 +5107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7156,13 +5117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7170,13 +5127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7184,13 +5137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7198,13 +5147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7212,13 +5157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7226,13 +5167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7240,13 +5177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7254,13 +5187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7268,13 +5197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7282,13 +5207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7296,13 +5217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7310,13 +5227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7324,13 +5237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7338,13 +5247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7352,13 +5257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7366,13 +5267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7380,13 +5277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7394,13 +5287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7408,13 +5297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7422,13 +5307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7436,13 +5317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7450,13 +5327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7464,13 +5337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7478,13 +5347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7492,13 +5357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7506,13 +5367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7520,13 +5377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7534,13 +5387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7548,13 +5397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7562,13 +5407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7576,13 +5417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7590,13 +5427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7604,13 +5437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7618,13 +5447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7632,13 +5457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7646,13 +5467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7660,13 +5477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7674,13 +5487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7688,13 +5497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7702,13 +5507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7716,13 +5517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7730,13 +5527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7744,13 +5537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7758,13 +5547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7772,13 +5557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7786,13 +5567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7800,13 +5577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7814,13 +5587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7828,13 +5597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7842,13 +5607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7856,13 +5617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7870,13 +5627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7884,13 +5637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7898,13 +5647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7912,13 +5657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7926,13 +5667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7940,13 +5677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7954,13 +5687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7968,13 +5697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7982,13 +5707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -7996,13 +5717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8010,13 +5727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8024,13 +5737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8038,13 +5747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8052,13 +5757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8066,13 +5767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8080,13 +5777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8094,13 +5787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8108,13 +5797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8122,13 +5807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8136,13 +5817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8150,13 +5827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8164,13 +5837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8178,13 +5847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8192,13 +5857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8206,13 +5867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8220,13 +5877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8234,13 +5887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8248,13 +5897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8262,13 +5907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8276,13 +5917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8290,13 +5927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8304,13 +5937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8318,13 +5947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8332,13 +5957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8346,13 +5967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8360,13 +5977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8374,13 +5987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8388,13 +5997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8402,13 +6007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8416,13 +6017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8430,13 +6027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8444,13 +6037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8458,13 +6047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8472,13 +6057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8486,13 +6067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8500,13 +6077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8514,13 +6087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8528,13 +6097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8542,13 +6107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8556,13 +6117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8570,13 +6127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8584,13 +6137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8598,13 +6147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8612,13 +6157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8626,13 +6167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8640,13 +6177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8654,13 +6187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8668,13 +6197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8682,13 +6207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8696,13 +6217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8710,13 +6227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8724,13 +6237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8738,13 +6247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8752,13 +6257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8766,13 +6267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8780,13 +6277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8794,13 +6287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8808,13 +6297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8822,13 +6307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8836,13 +6317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8850,13 +6327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8864,13 +6337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8878,13 +6347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8892,13 +6357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8906,13 +6367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8920,13 +6377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8934,13 +6387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8948,13 +6397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8962,13 +6407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8976,13 +6417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -8990,13 +6427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9004,13 +6437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9018,13 +6447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9032,13 +6457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9046,13 +6467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9060,13 +6477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9074,13 +6487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9088,13 +6497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9102,13 +6507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9116,13 +6517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9130,13 +6527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9144,13 +6537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9158,13 +6547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9172,13 +6557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9186,13 +6567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9200,13 +6577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9214,13 +6587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9228,13 +6597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9242,13 +6607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9256,13 +6617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9270,13 +6627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9284,13 +6637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9298,13 +6647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9312,13 +6657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9326,13 +6667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9340,13 +6677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9354,13 +6687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9368,13 +6697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9382,13 +6707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9396,13 +6717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9410,13 +6727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9424,13 +6737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9438,13 +6747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9452,13 +6757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9466,13 +6767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9480,13 +6777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9494,13 +6787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9508,13 +6797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9522,13 +6807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9536,13 +6817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9550,13 +6827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9564,13 +6837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9578,13 +6847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9592,13 +6857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9606,13 +6867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9620,13 +6877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9634,13 +6887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9648,13 +6897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9662,13 +6907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9676,13 +6917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9690,13 +6927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9704,13 +6937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9718,13 +6947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9732,13 +6957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9746,13 +6967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9760,13 +6977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9774,13 +6987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9788,13 +6997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9802,13 +7007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9816,13 +7017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9830,13 +7027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9844,13 +7037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9858,13 +7047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9872,13 +7057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9886,13 +7067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9900,13 +7077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9914,13 +7087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9928,13 +7097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9942,13 +7107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9956,13 +7117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9970,13 +7127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9984,13 +7137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -9998,13 +7147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10012,13 +7157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10026,13 +7167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10040,13 +7177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10054,13 +7187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10068,13 +7197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10082,13 +7207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10096,13 +7217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10110,13 +7227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10124,13 +7237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10138,13 +7247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10152,13 +7257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10166,13 +7267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10180,13 +7277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10194,13 +7287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10208,13 +7297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10222,13 +7307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10236,13 +7317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10250,13 +7327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10264,13 +7337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10278,13 +7347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10292,13 +7357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10306,13 +7367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10320,13 +7377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10334,13 +7387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10348,13 +7397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10362,13 +7407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10376,13 +7417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10390,13 +7427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10404,13 +7437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10418,13 +7447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10432,13 +7457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10446,13 +7467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10460,13 +7477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10474,13 +7487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10488,13 +7497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10502,13 +7507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10516,13 +7517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10530,13 +7527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10544,13 +7537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10558,13 +7547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10572,13 +7557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10586,13 +7567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10600,13 +7577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10614,13 +7587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10628,13 +7597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10642,13 +7607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10656,13 +7617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10670,13 +7627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10684,13 +7637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10698,13 +7647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10712,13 +7657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10726,13 +7667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10740,13 +7677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10754,13 +7687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10768,13 +7697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10782,13 +7707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10796,13 +7717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10810,13 +7727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10824,13 +7737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10838,13 +7747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10852,13 +7757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10866,13 +7767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10880,13 +7777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10894,13 +7787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10908,13 +7797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10922,13 +7807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10936,13 +7817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10950,13 +7827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10964,13 +7837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10978,13 +7847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -10992,13 +7857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11006,13 +7867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11020,13 +7877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11034,13 +7887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11048,13 +7897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11062,13 +7907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11076,13 +7917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11090,13 +7927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11104,13 +7937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11118,13 +7947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11132,13 +7957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11146,13 +7967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11160,13 +7977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11174,13 +7987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11188,13 +7997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11202,13 +8007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11216,13 +8017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11230,13 +8027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11244,13 +8037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11258,13 +8047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11272,13 +8057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11286,13 +8067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11300,13 +8077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11314,13 +8087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11328,13 +8097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11342,13 +8107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11356,13 +8117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11370,13 +8127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11384,13 +8137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11398,13 +8147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11412,13 +8157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11426,13 +8167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11440,13 +8177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11454,13 +8187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11468,13 +8197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11482,13 +8207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11496,13 +8217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11510,13 +8227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11524,13 +8237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11538,13 +8247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11552,13 +8257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11566,13 +8267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11580,13 +8277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11594,13 +8287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11608,13 +8297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11622,13 +8307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11636,13 +8317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11650,13 +8327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11664,13 +8337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11678,13 +8347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11692,13 +8357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11706,13 +8367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11720,13 +8377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11734,13 +8387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11748,13 +8397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11762,13 +8407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11776,13 +8417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11790,13 +8427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11804,13 +8437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11818,13 +8447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11832,13 +8457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11846,13 +8467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11860,13 +8477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11874,13 +8487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11888,13 +8497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11902,13 +8507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11916,13 +8517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11930,13 +8527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11944,13 +8537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11958,13 +8547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11972,13 +8557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -11986,13 +8567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12000,13 +8577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12014,13 +8587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12028,13 +8597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12042,13 +8607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12056,13 +8617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12070,13 +8627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12084,13 +8637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12098,13 +8647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12112,13 +8657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12126,13 +8667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12140,13 +8677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12154,13 +8687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12168,13 +8697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12182,13 +8707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12196,13 +8717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12210,13 +8727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12224,13 +8737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12238,13 +8747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12252,13 +8757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12266,13 +8767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12280,13 +8777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12294,13 +8787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12308,13 +8797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12322,13 +8807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12336,13 +8817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12350,13 +8827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12364,13 +8837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12378,13 +8847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12392,13 +8857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12406,13 +8867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12420,13 +8877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12434,13 +8887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12448,13 +8897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12462,13 +8907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12476,13 +8917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12490,13 +8927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12504,13 +8937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12518,13 +8947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12532,13 +8957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12546,13 +8967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12560,13 +8977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12574,13 +8987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12588,13 +8997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12602,13 +9007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12616,13 +9017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12630,13 +9027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12644,13 +9037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12658,13 +9047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12672,13 +9057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12686,13 +9067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12700,13 +9077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12714,13 +9087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12728,13 +9097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12742,13 +9107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12756,13 +9117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12770,13 +9127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12784,13 +9137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12798,13 +9147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12812,13 +9157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12826,13 +9167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12840,13 +9177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12854,13 +9187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12868,13 +9197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12882,13 +9207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12896,13 +9217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12910,13 +9227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12924,13 +9237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12938,13 +9247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12952,13 +9257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12966,13 +9267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12980,13 +9277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -12994,13 +9287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13008,13 +9297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13022,13 +9307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13036,13 +9317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13050,13 +9327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13064,13 +9337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13078,13 +9347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13092,13 +9357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13106,13 +9367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13120,13 +9377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13134,13 +9387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13148,13 +9397,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13162,13 +9407,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13176,13 +9417,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13190,13 +9427,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13204,13 +9437,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13218,13 +9447,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13232,13 +9457,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13246,13 +9467,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13260,13 +9477,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13274,13 +9487,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13288,13 +9497,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13302,13 +9507,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13316,13 +9517,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13330,13 +9527,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13344,13 +9537,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13358,13 +9547,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13372,13 +9557,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13386,13 +9567,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13400,13 +9577,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13414,13 +9587,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13428,13 +9597,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13442,13 +9607,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13456,13 +9617,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13470,13 +9627,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13484,13 +9637,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13498,13 +9647,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13512,13 +9657,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13526,13 +9667,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13540,13 +9677,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13554,13 +9687,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13568,13 +9697,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13582,13 +9707,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13596,13 +9717,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13610,13 +9727,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13624,13 +9737,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13638,13 +9747,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13652,13 +9757,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13666,13 +9767,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13680,13 +9777,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13694,13 +9787,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13708,13 +9797,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13722,13 +9807,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13736,13 +9817,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13750,13 +9827,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13764,13 +9837,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13778,13 +9847,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13792,13 +9857,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13806,13 +9867,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13820,13 +9877,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13834,13 +9887,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13848,13 +9897,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13862,13 +9907,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13876,13 +9917,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13890,13 +9927,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13904,13 +9937,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13918,13 +9947,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13932,13 +9957,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13946,13 +9967,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13960,13 +9977,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13974,13 +9987,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -13988,13 +9997,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14002,13 +10007,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14016,13 +10017,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14030,13 +10027,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14044,13 +10037,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14058,13 +10047,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14072,13 +10057,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14086,13 +10067,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14100,13 +10077,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14114,13 +10087,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14128,13 +10097,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14142,13 +10107,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14156,13 +10117,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14170,13 +10127,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14184,13 +10137,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14198,13 +10147,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14212,13 +10157,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14226,13 +10167,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14240,13 +10177,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14254,13 +10187,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14268,13 +10197,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14282,13 +10207,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14296,13 +10217,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14310,13 +10227,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14324,13 +10237,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14338,13 +10247,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14352,13 +10257,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14366,13 +10267,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, central dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14380,13 +10277,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14394,13 +10287,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14408,13 +10297,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14422,13 +10307,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14436,13 +10317,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14450,13 +10327,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14464,13 +10337,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14478,13 +10347,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14492,13 +10357,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 408 $<p_{T}^{\text{jet}}<$ 481 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14506,13 +10367,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 481 $<p_{T}^{\text{jet}}<$ 614 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14520,13 +10377,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 614 $<p_{T}^{\text{jet}}<$ 800 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14534,13 +10387,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 800 $<p_{T}^{\text{jet}}<$ 1000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14548,26 +10397,18 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, forward dijet region, 1000 $<p_{T}^{\text{jet}}<$ 4000 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 # BEGIN PLOT /CMS_2021_I1920187/d01-x01-y01
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14575,13 +10416,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14589,13 +10426,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14603,13 +10436,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14617,13 +10446,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14631,13 +10456,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14645,13 +10466,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14659,13 +10476,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14673,13 +10486,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14687,13 +10496,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14701,13 +10506,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14715,13 +10516,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14729,13 +10526,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14743,13 +10536,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14757,13 +10546,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14771,13 +10556,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14785,13 +10566,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14799,13 +10576,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14813,13 +10586,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14827,13 +10596,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14841,13 +10606,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14855,13 +10616,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14869,13 +10626,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14883,13 +10636,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14897,13 +10646,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14911,13 +10656,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14925,13 +10666,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14939,13 +10676,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14953,13 +10686,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14967,13 +10696,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14981,13 +10706,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -14995,13 +10716,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15009,13 +10726,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15023,13 +10736,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15037,13 +10746,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15051,13 +10756,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15065,13 +10766,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15079,13 +10776,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15093,13 +10786,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15107,13 +10796,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15121,13 +10806,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15135,13 +10816,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15149,13 +10826,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15163,13 +10836,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15177,13 +10846,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15191,13 +10856,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15205,13 +10866,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15219,13 +10876,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15233,13 +10886,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15247,13 +10896,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15261,13 +10906,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15275,13 +10916,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15289,13 +10926,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15303,13 +10936,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15317,13 +10946,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15331,13 +10956,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15345,13 +10966,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15359,13 +10976,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15373,13 +10986,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15387,13 +10996,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15401,13 +11006,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15415,13 +11016,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15429,13 +11026,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15443,13 +11036,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15457,13 +11046,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15471,13 +11056,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15485,13 +11066,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15499,13 +11076,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15513,13 +11086,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15527,13 +11096,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15541,13 +11106,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15555,13 +11116,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15569,13 +11126,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15583,13 +11136,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15597,13 +11146,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15611,13 +11156,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15625,13 +11166,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15639,13 +11176,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15653,13 +11186,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15667,13 +11196,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15681,13 +11206,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15695,13 +11216,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15709,13 +11226,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15723,13 +11236,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15737,13 +11246,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15751,13 +11256,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15765,13 +11266,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15779,13 +11276,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15793,13 +11286,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15807,13 +11296,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15821,13 +11306,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15835,13 +11316,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15849,13 +11326,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15863,13 +11336,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15877,13 +11346,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15891,13 +11356,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15905,13 +11366,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15919,13 +11376,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15933,13 +11386,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15947,13 +11396,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15961,13 +11406,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15975,13 +11416,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -15989,13 +11426,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16003,13 +11436,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16017,13 +11446,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16031,13 +11456,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16045,13 +11466,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16059,13 +11476,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16073,13 +11486,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16087,13 +11496,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16101,13 +11506,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16115,13 +11516,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16129,13 +11526,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16143,13 +11536,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16157,13 +11546,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16171,13 +11556,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16185,13 +11566,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16199,13 +11576,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16213,13 +11586,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16227,13 +11596,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16241,13 +11606,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16255,13 +11616,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16269,13 +11626,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16283,13 +11636,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16297,13 +11646,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16311,13 +11656,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16325,13 +11666,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16339,13 +11676,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16353,13 +11686,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16367,13 +11696,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16381,13 +11706,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16395,13 +11716,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16409,13 +11726,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16423,13 +11736,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16437,13 +11746,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16451,13 +11756,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16465,13 +11766,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16479,13 +11776,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16493,13 +11786,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16507,13 +11796,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16521,13 +11806,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16535,13 +11816,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16549,13 +11826,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16563,13 +11836,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16577,13 +11846,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16591,13 +11856,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16605,13 +11866,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16619,13 +11876,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16633,13 +11886,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16647,13 +11896,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16661,13 +11906,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16675,13 +11916,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16689,13 +11926,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16703,13 +11936,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16717,13 +11946,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16731,13 +11956,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16745,13 +11966,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16759,13 +11976,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16773,13 +11986,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16787,13 +11996,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16801,13 +12006,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16815,13 +12016,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16829,13 +12026,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16843,13 +12036,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16857,13 +12046,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16871,13 +12056,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16885,13 +12066,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16899,13 +12076,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16913,13 +12086,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16927,13 +12096,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16941,13 +12106,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16955,13 +12116,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16969,13 +12126,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16983,13 +12136,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -16997,13 +12146,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17011,13 +12156,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17025,13 +12166,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17039,13 +12176,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17053,13 +12186,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17067,13 +12196,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17081,13 +12206,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK4 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17095,13 +12216,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17109,13 +12226,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17123,13 +12236,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17137,13 +12246,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17151,13 +12256,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17165,13 +12266,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17179,13 +12276,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17193,13 +12286,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17207,13 +12296,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17221,13 +12306,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17235,13 +12316,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17249,13 +12326,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17263,13 +12336,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17277,13 +12346,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17291,13 +12356,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17305,13 +12366,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17319,13 +12376,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17333,13 +12386,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17347,13 +12396,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17361,13 +12406,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17375,13 +12416,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17389,13 +12426,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17403,13 +12436,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17417,13 +12446,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17431,13 +12456,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17445,13 +12466,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17459,13 +12476,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17473,13 +12486,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17487,13 +12496,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17501,13 +12506,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17515,13 +12516,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17529,13 +12526,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17543,13 +12536,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17557,13 +12546,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17571,13 +12556,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17585,13 +12566,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17599,13 +12576,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17613,13 +12586,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17627,13 +12596,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17641,13 +12606,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17655,13 +12616,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17669,13 +12626,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17683,13 +12636,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17697,13 +12646,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17711,13 +12656,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17725,13 +12666,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17739,13 +12676,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17753,13 +12686,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17767,13 +12696,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17781,13 +12706,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17795,13 +12716,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17809,13 +12726,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17823,13 +12736,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17837,13 +12746,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17851,13 +12756,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17865,13 +12766,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17879,13 +12776,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17893,13 +12786,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17907,13 +12796,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17921,13 +12806,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17935,13 +12816,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17949,13 +12826,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17963,13 +12836,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17977,13 +12846,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -17991,13 +12856,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18005,13 +12866,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18019,13 +12876,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18033,13 +12886,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18047,13 +12896,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18061,13 +12906,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18075,13 +12916,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18089,13 +12926,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18103,13 +12936,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18117,13 +12946,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18131,13 +12956,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18145,13 +12966,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18159,13 +12976,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18173,13 +12986,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18187,13 +12996,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18201,13 +13006,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18215,13 +13016,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18229,13 +13026,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18243,13 +13036,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18257,13 +13046,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18271,13 +13056,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18285,13 +13066,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18299,13 +13076,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18313,13 +13086,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18327,13 +13096,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18341,13 +13106,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18355,13 +13116,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18369,13 +13126,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18383,13 +13136,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18397,13 +13146,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18411,13 +13156,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18425,13 +13166,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18439,13 +13176,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18453,13 +13186,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed LHA
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18467,13 +13196,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18481,13 +13206,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18495,13 +13216,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18509,13 +13226,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18523,13 +13236,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18537,13 +13246,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18551,13 +13256,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18565,13 +13266,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18579,13 +13276,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed LHA (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18593,13 +13286,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18607,13 +13296,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18621,13 +13306,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18635,13 +13316,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18649,13 +13326,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18663,13 +13336,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18677,13 +13346,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18691,13 +13356,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18705,13 +13366,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed multiplicity (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18719,13 +13376,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18733,13 +13386,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18747,13 +13396,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18761,13 +13406,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18775,13 +13416,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18789,13 +13426,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18803,13 +13436,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18817,13 +13446,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18831,13 +13456,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed pTD2 (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18845,13 +13466,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18859,13 +13476,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18873,13 +13486,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18887,13 +13496,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18901,13 +13506,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18915,13 +13516,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18929,13 +13526,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18943,13 +13536,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18957,13 +13546,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed thrust (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18971,13 +13556,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18985,13 +13566,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -18999,13 +13576,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19013,13 +13586,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19027,13 +13596,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19041,13 +13606,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19055,13 +13616,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19069,13 +13626,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19083,13 +13636,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed width (charged-only)
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19097,13 +13646,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19111,13 +13656,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19125,13 +13666,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19139,13 +13676,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19153,13 +13686,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19167,13 +13696,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19181,13 +13706,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19195,13 +13716,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19209,13 +13726,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed multiplicity
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=150.
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19223,13 +13736,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19237,13 +13746,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19251,13 +13756,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19265,13 +13766,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19279,13 +13776,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19293,13 +13786,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19307,13 +13796,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19321,13 +13806,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19335,13 +13816,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed pTD2
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19349,13 +13826,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19363,13 +13836,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19377,13 +13846,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19391,13 +13856,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19405,13 +13866,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19419,13 +13876,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19433,13 +13886,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19447,13 +13896,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19461,13 +13906,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed thrust
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19475,13 +13916,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 50 $<p_{T}^{\text{jet}}<$ 65 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19489,13 +13926,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 65 $<p_{T}^{\text{jet}}<$ 88 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19503,13 +13936,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 88 $<p_{T}^{\text{jet}}<$ 120 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19517,13 +13946,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 120 $<p_{T}^{\text{jet}}<$ 150 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19531,13 +13956,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 150 $<p_{T}^{\text{jet}}<$ 186 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19545,13 +13966,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 186 $<p_{T}^{\text{jet}}<$ 254 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19559,13 +13976,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 254 $<p_{T}^{\text{jet}}<$ 326 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19573,13 +13986,9 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 326 $<p_{T}^{\text{jet}}<$ 408 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT
 
 
@@ -19587,11 +13996,7 @@ NormalizeToIntegral=1
 Title=CMS, 13 TeV, AK8 jets, Z+jet region, 408 $<p_{T}^{\text{jet}}<$ 1500 GeV
 XLabel=groomed width
 YLabel=$\frac{1}{\mathrm d N / \mathrm d p_{T}}\frac{\mathrm d^{2}N}{\mathrm d p_{T}~\mathrm d \lambda}$
-LeftMargin=1.7
 XMin=0.0
 XMax=1.0
 LogY=0
-XTwosidedTicks=1
-YTwosidedTicks=1
-NormalizeToIntegral=1
 # END PLOT

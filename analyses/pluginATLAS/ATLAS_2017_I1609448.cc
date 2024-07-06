@@ -210,10 +210,10 @@ namespace Rivet {
         // Rmiss central value
         const double rmiss_y = safediv(n.val() + b.val(), d.val());
         // Ratio error (Rmiss = SM_num/SM_denom + BSM/SM_denom ~ Rmiss_SM + BSM/SM_denom
-        const double rmiss_p = sqrt(sqr(r.errPos())  + safediv(sqr(b.errPos()), sqr(d.val())));
-        const double rmiss_m = sqrt(sqr(r.errNeg()) + safediv(sqr(b.errNeg()), sqr(d.val())));
+        const double rmiss_p = sqrt(sqr(r.totalErrPos())  + safediv(sqr(b.val()? b.totalErrPos() : 0.), sqr(d.val())));
+        const double rmiss_m = sqrt(sqr(r.totalErrNeg()) + safediv(sqr(b.val()? b.totalErrNeg() : 0.), sqr(d.val())));
         // Set new values
-        handler.estimate->bin(i).set(rmiss_y, {rmiss_m, rmiss_p});
+        handler.estimate->bin(i).set(rmiss_y, {-rmiss_m, rmiss_p});
       }
     }
 

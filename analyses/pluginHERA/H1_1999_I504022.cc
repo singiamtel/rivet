@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-
 #include "Rivet/Projections/DISKinematics.hh"
 
 namespace Rivet {
@@ -25,7 +24,7 @@ namespace Rivet {
       // Initialise and register projections
 
       // The basic final-state projection:
- 
+
       declare(FinalState(Cuts::abseta < 7 ), "FS");
       declare(DISKinematics(), "Kinematics");
       declare(UnstableParticles(), "UFS");
@@ -33,7 +32,7 @@ namespace Rivet {
 
       // Book histograms
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      
+
       book(_h["p_T>2.5&x"], 1, 1, 1);
       book(_h["Q:2.0-4.5-eta"], 2, 1, 1);
       book(_h["Q:2.0-4.5-p_T"], 3, 1, 1);
@@ -60,7 +59,7 @@ namespace Rivet {
         double xbj  = dk.x();
         double ybj = dk.y();
         double Q2 = dk.Q2()/GeV2;
-        
+
         // Q2 and inelasticity cuts
         //cout << " after xbj " << xbj << endl;
         if (!inRange(ybj, 0.1, 0.6)) vetoEvent;
@@ -79,7 +78,7 @@ namespace Rivet {
         vetoEvent;
       }
 
-      // Extracting the pi0 
+      // Extracting the pi0
       const UnstableParticles& ufs = apply<UnstableFinalState>(event, "UFS");
       //Get the hadronic CMS kinematics
       const LorentzTransform hcmboost = dk.boostHCM();
@@ -88,11 +87,11 @@ namespace Rivet {
         //cout << " Pid = " << p.pid() << endl;
         //Get the LAB kinematics
         double theta = p.theta();
-        double eta = p.momentum().pseudorapidity();
-        // double pT = p.momentum().pT()/GeV; 
+        double eta = p.pseudorapidity();
+        // double pT = p.pT()/GeV;
         //Boost hcm
-        const FourMomentum hcmMom = hcmboost.transform(p.momentum());
-        double pThcm =hcmMom.pT();
+        const FourMomentum hcmMom = hcmboost.transform(p.mom());
+        double pThcm = hcmMom.pT();
 
         double e_pi0 = p.E()/GeV;
         double x_pi0_proton = e_pi0/e_proton;
@@ -102,20 +101,20 @@ namespace Rivet {
         //cout << " theta " << theta << " in deg " << theta/degree << endl;
         if (!inRange(theta/degree, 5, 25)) continue;
         if(pThcm < 2.5*GeV) continue;
-        
+
         //Three cuts for Q2:
         if (Q2 > 2.0*GeV2 && Q2 < 4.5*GeV2){
           _h["Q:2.0-4.5-eta"]->fill(eta);
           _h["Q:2.0-4.5-p_T"]->fill(pThcm);
-        } 
+        }
         if (Q2 > 4.5*GeV2 && Q2 < 15.0*GeV2){
           _h["Q:4.5-15.0-x"]->fill(xbj);
           _h["Q:4.5-15.0-eta"]->fill(eta);
           _h["Q:4.5-15.0-p_T"]->fill(pThcm);
-        }  
+        }
         if (Q2 > 15.0*GeV2 && Q2 < 70.0*GeV2){
           _h["Q:15.0-70.0-x"]->fill(xbj);
-          _h["Q:15.0-70.0-eta"]->fill(eta); 
+          _h["Q:15.0-70.0-eta"]->fill(eta);
           _h["Q:15.0-70.0-p_T"]->fill(pThcm);
         }
 
@@ -128,7 +127,7 @@ namespace Rivet {
           _h["p_T>3.5&x"]->fill(xbj);
           _h["p_T>3.5&Q"]->fill(Q2);
         }
-        
+
       }
 
     }
@@ -158,8 +157,6 @@ namespace Rivet {
     /// @name Histograms
     ///@{
     map<string, Histo1DPtr> _h;
-    map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> _c;
     ///@}
 
 
