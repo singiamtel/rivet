@@ -12,7 +12,7 @@ Authors:
 References:
  - arXiv:1507.00233
 RunInfo:
-   '$sqrt{s}=8$ TeV, minbias events, no \pT cut on partons'
+   '$sqrt{s}=8$ TeV, minbias events, no pT cut on partons'
 NumEvents: 1000000
 NeedCrossSection: no
 Beams: [p+, p+]

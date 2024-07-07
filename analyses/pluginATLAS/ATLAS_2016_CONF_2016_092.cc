@@ -45,6 +45,7 @@ namespace Rivet {
     void finalize() {
       // Divide by 2 to only get positive rapidity values
       scale(_h_pT, 0.5*crossSection()/picobarn/sumOfWeights());
+      divByGroupWidth(_h_pT);
     }
 
 

@@ -16,6 +16,8 @@ Energies: [13000]
 Luminosity_fb: 0.085
 PtCuts: [25,30]
 NeedCrossSection: True
+Options:
+ - LMODE=EL,MU
 Description:
   'Preliminary measurements of the cross-section for the production of a $Z$
   boson in association with jets in $pp$ collisions at $\sqrt{s} = 13$\,TeV are

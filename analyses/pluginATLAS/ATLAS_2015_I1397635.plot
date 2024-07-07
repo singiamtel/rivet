@@ -3,4 +3,3 @@ LogY=0
 XCustomMajorTicks=1.0	$\sigma_{Wt+t\bar{t}}$ 
 YLabel=Cross section [fb]
 # END PLOT
-

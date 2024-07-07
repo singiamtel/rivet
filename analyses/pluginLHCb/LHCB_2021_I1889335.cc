@@ -25,9 +25,9 @@ namespace Rivet {
       vector<double> edges = {2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 4.8};
       book(_h_ppInel_neg, edges);
       book(_h_ppInel_pos, edges);
-      for (size_t i=0; i < edges.size(); ++i) {
-        book(_h_ppInel_neg->bin(i+1), 1, 1, i+1);
-        book(_h_ppInel_pos->bin(i+1), 2, 1, i+1);
+      for (size_t i=1; i < edges.size(); ++i) {
+        book(_h_ppInel_neg->bin(i), 1, 1, i);
+        book(_h_ppInel_pos->bin(i), 2, 1, i);
       }
     }
 

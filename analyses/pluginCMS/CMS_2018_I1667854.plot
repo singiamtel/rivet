@@ -1,10 +1,4 @@
-# BEGIN PLOT /CMS_2018_I1667854/*
-XLabelSep=4.4
-YLabelSep=5.4
-ConnectBins=0
-# END PLOT
-
-# BEGIN PLOT /CMS_2018_I1667854/d01-x01-y01
+BEGIN PLOT /CMS_2018_I1667854/d01-x01-y01
 XTwosidedTicks=1
 YTwosidedTicks=1
 LogY=0
@@ -12,8 +6,8 @@ Title={$\sqrt{s}=13~\mathrm{TeV}$}
 FullRange=1
 LogX=0
 LogY=1
-XLabel={Exclusive Jet Multiplicity}
-YLabel={$\sigma(\mathrm{Z}/\gamma*\rightarrow \mathrm{ll} + N \mathrm{~jets})$ [pb]}
+XLabel=Exclusive Jet Multiplicity
+YLabel=$\sigma(\mathrm{Z}/\gamma*\rightarrow \mathrm{ll} + N \mathrm{~jets})$ [pb]
 # END PLOT
 
 # BEGIN PLOT /CMS_2018_I1667854/d02-x01-y01
@@ -23,8 +17,8 @@ Title={$\sqrt{s}=13\,\mathrm{TeV}$}
 FullRange=1
 LogX=0
 LogY=1
-XLabel={Inclusive Jet Multiplicity}
-YLabel={$\sigma(\mathrm{Z}/\gamma*\rightarrow \mathrm{ll} + \geq N \mathrm{~jets})$ [pb]}
+XLabel=Inclusive Jet Multiplicity
+YLabel=$\sigma(\mathrm{Z}/\gamma*\rightarrow \mathrm{ll} + \geq N \mathrm{~jets})$ [pb]
 # END PLOT
 
 # BEGIN PLOT /CMS_2018_I1667854/d03-x01-y01
@@ -34,19 +28,19 @@ Title={$\sqrt{s}=13\,\mathrm{TeV}$}
 FullRange=1
 LogX=1
 LogY=1
-XLabel={$p_{\mathrm{T}}(\mathrm{Z}), N_{jet} \geq 1$ [GeV]}
-YLabel={$d\sigma/dp_{\mathrm{T}}(\mathrm{Z})$ [pb/GeV]}
+XLabel=$p_{\mathrm{T}}(\mathrm{Z}), N_{jet} \geq 1$ [GeV]
+YLabel=$d\sigma/dp_{\mathrm{T}}(\mathrm{Z})$ [pb/GeV]
 # END PLOT
 
 # BEGIN PLOT /CMS_2018_I1667854/d04-x01-y01
 XTwosidedTicks=1
 YTwosidedTicks=1
-Title={$\sqrt{s}=13\,\mathrm{TeV}$}
+Title=$\sqrt{s}=13\,\mathrm{TeV}$
 FullRange=1
 LogX=0
 LogY=1
-XLabel={Leading jet $p_{\mathrm{T}}$ [GeV]}
-YLabel={$d\sigma/dp_{\mathrm{T}}$ [pb/GeV]}
+XLabel=Leading jet $p_{\mathrm{T}}$ [GeV]
+YLabel=$d\sigma/dp_{\mathrm{T}}$ [pb/GeV]
 # END PLOT
 
 # BEGIN PLOT /CMS_2018_I1667854/d05-x01-y01
@@ -192,13 +186,9 @@ XLabel={JZB, $p_\mathrm{T}(\mathrm{Z}) < 50\,$GeV [GeV]}
 YLabel={$d\sigma/d\mathrm{JZB}$ [pb/GeV]}
 # END PLOT
 
-# BEGIN PLOT /CMS_2018_I1667854/d18-x01-y01
-XTwosidedTicks=1
-YTwosidedTicks=1
-Title={$\sqrt{s}=13\,\mathrm{TeV}$}
-FullRange=1
-LogX=0
+BEGIN PLOT /CMS_2018_I1667854/d18-x01-y01
+Title=$\sqrt{s}=13\,\mathrm{TeV}$
 LogY=1
-XLabel={JZB, $p_{\mathrm{T}}(\mathrm{Z}) > 50\,$GeV [GeV]}
-YLabel={$d\sigma/d\mathrm{JZB}$ [pb/GeV]}
+XLabel=JZB, $p_{\mathrm{T}}(\mathrm{Z}) > 50\,$GeV [GeV]
+YLabel=$d\sigma/d\mathrm{JZB}$ [pb/GeV]
 # END PLOT

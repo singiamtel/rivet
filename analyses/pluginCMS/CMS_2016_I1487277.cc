@@ -21,9 +21,12 @@ namespace Rivet {
       declare(FastJets(fs, JetAlg::ANTIKT, 0.7),"Jets");
 
       // Book histograms:
-      book(_hist_sigma, {0., 0.5, 1., 1.5, 2., 2.5, 3., 4.7});
+      book(_hist_sigma, {0., 0.5, 1., 1.5, 2., 2.5, 3., 3.2, 4.7});
       for (auto& b : _hist_sigma->bins()) {
-        book(b, b.index(), 1, 1);
+        if(b.index()<7)
+          book(b, b.index(), 1, 1);
+        else if(b.index()==8)
+          book(b, 7, 1, 1);
       }
 
     }
@@ -42,6 +45,7 @@ namespace Rivet {
     // Finalize
     void finalize() {
       scale(_hist_sigma, crossSection()/picobarn/sumOfWeights()/2.0);
+      _hist_sigma->divByGroupWidth();
     }
 
   private:

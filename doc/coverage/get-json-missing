@@ -62,7 +62,10 @@ for ins, rec in anas.items():
         import urllib2 as urlreq
 
     ## Skip if we have the paper or from PDG
-    if int(ins) in records:
+    try :
+        if int(ins) in records:
+            continue
+    except :
         continue
     if "PDG" in rec[0]:
         continue

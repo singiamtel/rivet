@@ -54,8 +54,8 @@ namespace Rivet {
       const DileptonFinder& zfinder_dressed_mu_rap = apply<DileptonFinder>(evt, "DileptonFinder_dressed_mu_rap");
       if (!zfinder_dressed_mu_rap.bosons().empty()) {
         const FourMomentum pZ = zfinder_dressed_mu_rap.bosons()[0].momentum();
-        _hist_zrap_mu_dressed->fill(pZ.rapidity()/GeV);
-        _hist_zrap_comb_dressed->fill(pZ.rapidity()/GeV);
+        _hist_zrap_mu_dressed->fill(pZ.absrapidity());
+        _hist_zrap_comb_dressed->fill(pZ.absrapidity());
       }
 
       const DileptonFinder& zfinder_dressed_mu_pt = apply<DileptonFinder>(evt, "DileptonFinder_dressed_mu_pt");
@@ -72,8 +72,8 @@ namespace Rivet {
       const DileptonFinder& zfinder_dressed_el_rap = apply<DileptonFinder>(evt, "DileptonFinder_dressed_el_rap");
       if (!zfinder_dressed_el_rap.bosons().empty()) {
         const FourMomentum pZ = zfinder_dressed_el_rap.bosons()[0].momentum();
-        _hist_zrap_el_dressed->fill(pZ.rapidity()/GeV);
-        _hist_zrap_comb_dressed->fill(pZ.rapidity()/GeV);
+        _hist_zrap_el_dressed->fill(abs(pZ.rapidity()/GeV));
+        _hist_zrap_comb_dressed->fill(abs(pZ.rapidity()/GeV));
       }
 
       const DileptonFinder& zfinder_dressed_el_pt = apply<DileptonFinder>(evt, "DileptonFinder_dressed_el_pt");

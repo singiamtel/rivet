@@ -348,7 +348,6 @@ namespace Rivet {
       }
     }
 
-
     /// @class Angularity
     /// Definition of angularity
     ///

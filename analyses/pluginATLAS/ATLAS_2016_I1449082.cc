@@ -252,7 +252,6 @@ namespace Rivet {
   private:
 
     void calcAsymAndError(Histo1DPtr hist, double& asym, double& err)  {
-
       int nBins = hist->numBins();
       if (nBins % 2 != 0) {
       	asym = -999; err = -999.;
@@ -265,11 +264,12 @@ namespace Rivet {
       double dNpos = 0.;
       for (int iB = 0; iB < nBins; ++iB) {
         if (iB < nBins/2) {
-          Nneg  += hist->bin(iB).sumW();
-          dNneg += hist->bin(iB).sumW2();
-        } else {
-          Npos  += hist->bin(iB).sumW();
-          dNpos += hist->bin(iB).sumW2();
+          Nneg  += hist->bin(iB+1).sumW();
+          dNneg += hist->bin(iB+1).sumW2();
+        }
+        else {
+          Npos  += hist->bin(iB+1).sumW();
+          dNpos += hist->bin(iB+1).sumW2();
         }
       }
       dNneg = sqrt(dNneg);

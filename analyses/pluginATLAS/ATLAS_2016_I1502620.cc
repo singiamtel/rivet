@@ -88,7 +88,7 @@ namespace Rivet {
       const int imfound = closestMatchIndex(mus_mtfilt, pmiss, Kin::mass, 80.4*GeV);
 
       // Require only one W candidate
-      if (pmiss.pT() < 25*GeV && (int(iefound >= 0) + int(imfound >= 0)) == 1 && _runW) {
+      if (pmiss.pT() > 25*GeV && (int(iefound >= 0) + int(imfound >= 0)) == 1 && _runW) {
         Particle lep;
         if (_mode != 2 && iefound >= 0) lep = es_mtfilt[iefound];
         else if (_mode != 1 && imfound >= 0) lep = mus_mtfilt[imfound];
@@ -140,7 +140,7 @@ namespace Rivet {
       double lfac = 1.0;
       // If we running on both electrons and muons, divide by two -> xsec for one flavour
       if (_mode == 0) lfac = 0.5;
-      const double sf = lfac * 0.5 * crossSection() /picobarn / sumOfWeights(); //< 0.5 accounts for rapidity bin width
+      const double sf = lfac * 0.5 * crossSection() /picobarn / sumOfWeights(); //< 0.5 accounts for folding +/- rapidity
 
       if (_runW){
         scale(_h_Wp_eta, sf);

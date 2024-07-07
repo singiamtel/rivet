@@ -66,7 +66,7 @@ namespace Rivet {
 
       book(_histo ,1,1,1);
       book(_ratio, 2,1,1);
-      book(_aux   ,"_aux", 1, 0.5, 1.5);
+      book(_aux   ,"_aux");
     }
 
 
@@ -128,7 +128,7 @@ namespace Rivet {
           _histo->fill(4);
         }
         if ( pass_2lep && jets.size() >= 4) {
-          _aux->fill(1);
+          _aux->fill();
         }
       }
     }
@@ -139,16 +139,25 @@ namespace Rivet {
       scale(_histo, sf);
       scale(_aux,  sf);
 
-      // construct ratio
-      const double v = _histo->bin(3).sumW() / _histo->bin(0).sumW();
-      const double e = _histo->bin(3).errW() / _histo->bin(0).errW();
-      _ratio->bin(1).set(100.0 * v, 100.0 * e); // convert into percentage
+
+      const double  n = _histo->bin(4).sumW();
+      const double dN = _histo->bin(4).sumW2();
+      const double  d = _aux->sumW();
+      const double dD = _aux->sumW2();
+      const double  r = safediv(n, d);
+      double e = sqrt( safediv(r * (1 - r), d) );
+      if ( _aux->effNumEntries() != _aux->numEntries() ) {
+        // use F. James's approximation for weighted events:
+        e = sqrt( safediv((1 - 2 * r) * dN + r * r * dD, d * d) );
+      }
+      _ratio->bin(1).set(100.0 * r, 100.0 * e); // convert into percentage
     }
 
 
   private:
 
-    Histo1DPtr _histo, _aux;
+    Histo1DPtr _histo;
+    CounterPtr _aux;
     Estimate1DPtr _ratio;
 
   };

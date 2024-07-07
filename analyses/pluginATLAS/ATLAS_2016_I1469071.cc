@@ -82,7 +82,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-
       const DressedLeptons& dressedleptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
       const DressedLeptons& dressedleptonsTotal = apply<LeptonFinder>(event, "LeptonFinderTotal").dressedLeptons();
       const Particles& neutrinos = apply<PromptFinalState>(event, "Neutrinos").particlesByPt();

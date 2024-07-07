@@ -43,6 +43,7 @@ namespace Rivet {
 
     void finalize() {
       scale(_g, 1./sumOfWeights());
+      divByGroupWidth(_g);
     }
 
   private:

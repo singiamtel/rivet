@@ -269,7 +269,7 @@ YLabel=$\mathrm{d}\sigma / (\mathrm{d} p^{j,1}_{\mathrm{T}} / \mathrm{d} N^{j})$
 # BEGIN PLOT /ATLAS_2022_I2037744/d69-x01-y01
 XLabel=$p^{j,1}_{\mathrm{T}}$ [GeV]
 Title=$355 \mathrm{GeV} < p^{t,h}_{\mathrm{T}} \leq 398 \mathrm{GeV}$
-YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} p^{j,1}_{\mathrm{T}} / \mathrm{d} p^{t,h}_{\mathrm{T}}) [1/GeV${}^{2}$]
+YLabel=$1/\sigma \cdot \mathrm{d}\sigma / (\mathrm{d} p^{j,1}_{\mathrm{T}} / \mathrm{d} p^{t,h}_{\mathrm{T}})$ [1/GeV${}^{2}$]
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2022_I2037744/d70-x01-y01

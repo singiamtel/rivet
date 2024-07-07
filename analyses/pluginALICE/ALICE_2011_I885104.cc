@@ -26,17 +26,18 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
+      if(_edges.empty()) _edges = _histAveragePt->xEdges();
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       for (const Particle& p : cfs.particles()) {
         if(p.absrap()<0.5) {
           switch (p.pid()) {
             case 211:
               _histPtPions->fill(p.pT()/GeV);
-              _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+              _histAveragePt->fill(_edges[0], p.pT()/GeV);
               break;
             case -211:
               _histPtAntiPions->fill(p.pT()/GeV);
-              _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+              _histAveragePt->fill(_edges[0], p.pT()/GeV);
               break;
             case 2212:
               if ( !(p.hasAncestorWith(Cuts::pid == 3322) ||                             // Xi0
@@ -44,7 +45,7 @@ namespace Rivet {
                      p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
                      p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ) ) {  // Xi-/+
                 _histPtProtons->fill(p.pT()/GeV);
-                _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+                _histAveragePt->fill(_edges[2], p.pT()/GeV);
               }
               break;
             case -2212:
@@ -53,16 +54,16 @@ namespace Rivet {
                      p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
                      p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ) ) {  // Xi-/+
                 _histPtAntiProtons->fill(p.pT()/GeV);
-                _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+                _histAveragePt->fill(_edges[2], p.pT()/GeV);
               }
               break;
             case 321:
               _histPtKaons->fill(p.pT()/GeV);
-              _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+              _histAveragePt->fill(_edges[1], p.pT()/GeV);
               break;
             case -321:
               _histPtAntiKaons->fill(p.pT()/GeV);
-              _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+              _histAveragePt->fill(_edges[1], p.pT()/GeV);
               break;
           }
         }
@@ -88,7 +89,8 @@ namespace Rivet {
     Histo1DPtr _histPtAntiPions;
     Histo1DPtr _histPtAntiProtons;
     Histo1DPtr _histPtAntiKaons;
-    Profile1DPtr _histAveragePt;
+    BinnedProfilePtr<string> _histAveragePt;
+    vector<string> _edges;
 
   };
 

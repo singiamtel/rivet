@@ -61,29 +61,30 @@ namespace Rivet {
       declare(jets, "Jets");
 
       // Book histograms
-      book(_h["eee"]       , 1, 1, 1);
-      book(_h["mee"]       , 1, 1, 2);
-      book(_h["emm"]       , 1, 1, 3);
-      book(_h["mmm"]       , 1, 1, 4);
-      book(_h["fid"]       , 1, 1, 5);
-      book(_h["eee_Plus"]  , 2, 1, 1);
-      book(_h["mee_Plus"]  , 2, 1, 2);
-      book(_h["emm_Plus"]  , 2, 1, 3);
-      book(_h["mmm_Plus"]  , 2, 1, 4);
-      book(_h["fid_Plus"]  , 2, 1, 5);
-      book(_h["eee_Minus"] , 3, 1, 1);
-      book(_h["mee_Minus"] , 3, 1, 2);
-      book(_h["emm_Minus"] , 3, 1, 3);
-      book(_h["mmm_Minus"] , 3, 1, 4);
-      book(_h["fid_Minus"] , 3, 1, 5);
-      book(_h["total"]     , 5, 1, 1);
-      book(_h["Njets"]     , 27, 1, 1);
-      book(_h["Njets_norm"], 41, 1, 1);
+      book(_i["eee"]       , 1, 1, 1);
+      book(_i["mee"]       , 1, 1, 2);
+      book(_i["emm"]       , 1, 1, 3);
+      book(_i["mmm"]       , 1, 1, 4);
+      book(_i["fid"]       , 1, 1, 5);
+      book(_i["eee_Plus"]  , 2, 1, 1);
+      book(_i["mee_Plus"]  , 2, 1, 2);
+      book(_i["emm_Plus"]  , 2, 1, 3);
+      book(_i["mmm_Plus"]  , 2, 1, 4);
+      book(_i["fid_Plus"]  , 2, 1, 5);
+      book(_i["eee_Minus"] , 3, 1, 1);
+      book(_i["mee_Minus"] , 3, 1, 2);
+      book(_i["emm_Minus"] , 3, 1, 3);
+      book(_i["mmm_Minus"] , 3, 1, 4);
+      book(_i["fid_Minus"] , 3, 1, 5);
+      book(_i["total"]     , 5, 1, 1);
+      
+      book(_ss["Njets"]     , 27, 1, 1);
+      book(_ss["Njets_norm"], 41, 1, 1);
 
-      bookHandler("ZpT",	             12);
+      bookHandler("ZpT",	       12);
       bookHandler("ZpT_Plus",          13);
       bookHandler("ZpT_Minus",         14);
-      bookHandler("WpT",	             15);
+      bookHandler("WpT",	       15);
       bookHandler("WpT_Plus",          16);
       bookHandler("WpT_Minus",         17);
       bookHandler("mTWZ",              18);
@@ -92,7 +93,7 @@ namespace Rivet {
       bookHandler("pTv",               21);
       bookHandler("pTv_Plus",          22);
       bookHandler("pTv_Minus",         23);
-      bookHandler("Deltay",	           24);
+      bookHandler("Deltay",	       24);
       bookHandler("Deltay_Plus",       25);
       bookHandler("Deltay_Minus",      26);
       bookHandler("mjj",               28);
@@ -103,9 +104,9 @@ namespace Rivet {
       bookHandler("WpT_norm",          33);
       bookHandler("mTWZ_norm",         34);
       bookHandler("pTv_norm", 	       35);
-      bookHandler("pTv_Plus_norm",	   36);
-      bookHandler("pTv_Minus_norm",	   37);
-      bookHandler("Deltay_norm",	     38);
+      bookHandler("pTv_Plus_norm",     36);
+      bookHandler("pTv_Minus_norm",    37);
+      bookHandler("Deltay_norm",       38);
       bookHandler("Deltay_Minus_norm", 39);
       bookHandler("Deltay_Plus_norm",  40);
       bookHandler("mjj_norm",          42);
@@ -122,7 +123,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-
+      if(_edges.empty()) _edges = _ss["Njets"]->xEdges();
       const DressedLeptons& dressedleptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
       const DressedLeptons& dressedleptonsTotal = apply<LeptonFinder>(event, "LeptonFinderTotal").dressedLeptons();
       const Particles& neutrinos = apply<PromptFinalState>(event, "Neutrinos").particlesByPt();
@@ -189,7 +190,7 @@ namespace Rivet {
 
       FourMomentum ZbosonTotal   = dressedleptonsTotal[i].momentum()+dressedleptonsTotal[j].momentum();
 
-      if ( (ZbosonTotal.mass() >= 66*GeV) && (ZbosonTotal.mass() <= 116*GeV) ) _h["total"]->fill(8000);
+      if ( (ZbosonTotal.mass() >= 66*GeV) && (ZbosonTotal.mass() <= 116*GeV) ) _i["total"]->fill(8000);
 
       //---end Total PS
 
@@ -281,19 +282,19 @@ namespace Rivet {
 
       double AbsDeltay = fabs(Zboson.rapidity()-Wlepton.rapidity());
 
-      if (EventType == 3) _h["eee"]->fill(8000.);
-      if (EventType == 2) _h["mee"]->fill(8000.);
-      if (EventType == 1) _h["emm"]->fill(8000.);
-      if (EventType == 0) _h["mmm"]->fill(8000.);
-      _h["fid"]->fill(8000.);
+      if (EventType == 3) _i["eee"]->fill(8000);
+      if (EventType == 2) _i["mee"]->fill(8000);
+      if (EventType == 1) _i["emm"]->fill(8000);
+      if (EventType == 0) _i["mmm"]->fill(8000);
+      _i["fid"]->fill(8000);
 
       if (EventCharge == 1) {
 
-        if (EventType == 3) _h["eee_Plus"]->fill(8000.);
-        if (EventType == 2) _h["mee_Plus"]->fill(8000.);
-        if (EventType == 1) _h["emm_Plus"]->fill(8000.);
-        if (EventType == 0) _h["mmm_Plus"]->fill(8000.);
-        _h["fid_Plus"]->fill(8000.);
+        if (EventType == 3) _i["eee_Plus"]->fill(8000);
+        if (EventType == 2) _i["mee_Plus"]->fill(8000);
+        if (EventType == 1) _i["emm_Plus"]->fill(8000);
+        if (EventType == 0) _i["mmm_Plus"]->fill(8000);
+        _i["fid_Plus"]->fill(8000);
 
         _h["Deltay_Plus"]->fill(AbsDeltay);
         _h["Deltay_Plus_norm"]->fill(AbsDeltay);
@@ -306,11 +307,11 @@ namespace Rivet {
 
       } else {
 
-        if (EventType == 3) _h["eee_Minus"]->fill(8000.);
-        if (EventType == 2) _h["mee_Minus"]->fill(8000.);
-        if (EventType == 1) _h["emm_Minus"]->fill(8000.);
-        if (EventType == 0) _h["mmm_Minus"]->fill(8000.);
-        _h["fid_Minus"]->fill(8000.);
+        if (EventType == 3) _i["eee_Minus"]->fill(8000);
+        if (EventType == 2) _i["mee_Minus"]->fill(8000);
+        if (EventType == 1) _i["emm_Minus"]->fill(8000);
+        if (EventType == 0) _i["mmm_Minus"]->fill(8000);
+        _i["fid_Minus"]->fill(8000);
 
         _h["Deltay_Minus"]->fill(AbsDeltay);
         _h["Deltay_Minus_norm"]->fill(AbsDeltay);
@@ -329,9 +330,9 @@ namespace Rivet {
       fillWithOverflow("pTv", neutrinos[0].pt()/GeV, 90);
 
       _h["Deltay"]->fill(AbsDeltay);
-
-      fillWithOverflow("Njets", jets.size(), 5);
-      fillWithOverflow("Njets_norm", jets.size(), 5);
+      size_t njets = min(jets.size(),size_t(5));
+      _ss["Njets"     ]->fill(_edges[njets]);
+      _ss["Njets_norm"]->fill(_edges[njets]);
       fillWithOverflow("ZpT_norm", Zboson.pT()/GeV, 220);
       fillWithOverflow("WpT_norm", Wboson.pT()/GeV, 220);
       fillWithOverflow("mTWZ_norm", mTWZ, 600);
@@ -389,10 +390,26 @@ namespace Rivet {
         else if (it.first.find("mjj") != string::npos)     scale(it.second, sf_fb/4.);
         else                                               scale(it.second, sf_fb);
       }
+      for (auto& it : _i) {
+        if (it.first.find("total") != string::npos)        scale(it.second, sf_pb/totalBR);
+        else if (it.first.find("norm") != string::npos)    normalize(it.second);
+        else if (it.first.find("fid") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("Njets") != string::npos)   scale(it.second, sf_fb/4.);
+        else if (it.first.find("ZpT") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("WpT") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("mTWZ") != string::npos)    scale(it.second, sf_fb/4.);
+        else if (it.first.find("pTv") != string::npos)     scale(it.second, sf_fb/4.);
+        else if (it.first.find("Deltay") != string::npos)  scale(it.second, sf_fb/4.);
+        else if (it.first.find("mjj") != string::npos)     scale(it.second, sf_fb/4.);
+        else                                               scale(it.second, sf_fb);
+      }
       for (auto& it : _s) {
         barchart(_h[it.first], it.second);
         removeAnalysisObject(_h[it.first]);
       }
+      // normalisation of njets
+      scale(_ss["Njets"], sf_fb/4.);
+      normalize(_ss["Njets_norm"]);
     }
 
     /// @}
@@ -404,7 +421,10 @@ namespace Rivet {
     /// @{
 
      map<string, Histo1DPtr> _h;
+     map<string, BinnedHistoPtr<int> > _i;
+     map<string, BinnedHistoPtr<string> > _ss;
      map<string, Estimate1DPtr> _s;
+     vector<string> _edges;
 
      /// @}
 
