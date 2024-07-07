@@ -1,0 +1,19 @@
+Name: MC_TAUPOL
+Summary: Monte Carlo validation observables for tau polarisation
+Status: VALIDATED
+Reentrant: true
+Authors:
+- George Marsden <george.marsden@student.manchester.ac.uk>
+- Christian Gutschow <chris.g@cern.ch>
+References:
+RunInfo:
+  single- or di-tau production
+Description:
+  'Observables sensitive to the polarisation of the $\tau$ lepton.'
+Options:
+ - MODE=DITAU,SINGLE
+ - LOMASS
+ - HIMASS
+ReleaseTests:
+ - $A pp-13000-Ztautau-2
+
