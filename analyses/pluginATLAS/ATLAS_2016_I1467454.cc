@@ -70,7 +70,9 @@ namespace Rivet {
       const double sf = crossSection()/picobarn/sumOfWeights();
       scale(_hist_mll, sf);
       scale(_hist_rap, sf*0.5);
+      divByGroupWidth(_hist_rap);
       scale(_hist_deta, sf*0.5);
+      divByGroupWidth(_hist_deta);
 
     }
 

@@ -8,7 +8,5 @@ YLabel=Fiducial Cross section [fb]
 # BEGIN PLOT /ATLAS_2016_I1492320/d01-x01-y02
 Title=dilepton + dijet
 LogY=0
-YLabel=Fiducial Cross section [fb] 
+YLabel=Fiducial Cross section [fb]
 # END PLOT
-
-

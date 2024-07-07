@@ -1,9 +1,10 @@
 # BEGIN PLOT /ALICE_2012_I1181770/d
 XLabel=$\sqrt{s}$ [GeV]
+ConnectGaps=1
 # END PLOT
 
 # BEGIN PLOT /ALICE_2012_I1181770/d01-x01-y0
-Title=Production ratios of SD with $M_{X} < 200\;\GeV/c^2$ to INEL
+Title=Production ratios of SD with $M_{X} < 200\;\mathrm{GeV}/c^2$ to INEL
 YLabel=$\sigma_\mathrm{SD} / \sigma_\mathrm{inel}$
 # END PLOT
 
@@ -13,7 +14,7 @@ YLabel=$\sigma_\mathrm{DD} / \sigma_\mathrm{inel}$
 # END PLOT
 
 # BEGIN PLOT /ALICE_2012_I1181770/d03-x01-y0
-Title=Single diffraction cross-section for $M_{X} < 200\;\GeV/c^2$
+Title=Single diffraction cross-section for $M_{X} < 200\;\mathrm{GeV}/c^2$
 YLabel=$\sigma_\mathrm{SD}$ [mb]
 # END PLOT
 

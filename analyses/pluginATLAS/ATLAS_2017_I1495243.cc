@@ -80,7 +80,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-
       // Get the selected objects, using the projections.
       Jets all_jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 25*GeV && Cuts::abseta < 2.5);
 
@@ -173,7 +172,7 @@ namespace Rivet {
 
       for (auto& b : out->bins()) {
           double numW = in->sumW(), numW2 = in->sumW2();
-          for (size_t j = b.index(); j < nEnd; ++j) {
+          for (size_t j = b.index(); j <= nEnd; ++j) {
             numW  -= in->bin(j).sumW();
             numW2 -= in->bin(j).sumW2();
           }

@@ -30,12 +30,10 @@ namespace Rivet {
       } else {
         book(_h_pi0,       1,1,1);
         book(_h_eta,       3,1,1);
-        book(_h_etaToPion, 4,1,1);
+        // Temporary plots with the binning of _h_etaToPion to construct the eta/pi0 ratio
+        book(_temp_h_eta , "TMP/h_eta" , refData(3,1,1));
+        book(_temp_h_pion, "TMP/h_pion", refData(3,1,1));
       }
-
-      // Temporary plots with the binning of _h_etaToPion to construct the eta/pi0 ratio
-      book(_temp_h_pion, "TMP/h_pion", refData(4,1,1));
-      book(_temp_h_eta , "TMP/h_eta",  refData(4,1,1));
     }
 
 
@@ -49,7 +47,7 @@ namespace Rivet {
           // Neutral pion; ALICE corrects for pi0 feed-down from K_0_s and Lambda
           if (p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122)) continue; //< K_0_s, Lambda, Anti-Lambda
           _h_pi0->fill(p.pT()/GeV, 1.0/normfactor);
-          _temp_h_pion->fill(p.pT()/GeV);
+          if( _cm_energy_case == 2) _temp_h_pion->fill(p.pT()/GeV);
         } else if (p.pid() == 221 && _cm_energy_case == 2) {
           // eta meson (only for 7 TeV)
           _h_eta->fill(p.pT()/GeV, 1.0/normfactor);
@@ -63,7 +61,20 @@ namespace Rivet {
     void finalize() {
       scale(_h_pi0, crossSection()/microbarn/sumOfWeights());
       if (_cm_energy_case == 2) {
-        divide(_temp_h_eta, _temp_h_pion, _h_etaToPion);
+        // first divide hists with binned axis
+        Estimate1DPtr tmp_ratio;
+        book(tmp_ratio,"TMP/ratio",_h_eta->xEdges());
+        divide(_temp_h_eta, _temp_h_pion, tmp_ratio);
+        // now convert to strings from ref data
+        BinnedEstimatePtr<string> ratio;
+        book(ratio, 4,1,1);
+        for(const auto & b : tmp_ratio->bins()) {
+          const size_t idx = b.index();
+          ratio->bin(idx).setVal(b.val());
+          for(const string & ss : b.sources()) {
+            ratio->bin(idx).setErr(b.err(ss),ss);
+          }
+        }
         scale(_h_eta, crossSection()/microbarn/sumOfWeights());
       }
     }
@@ -76,7 +87,6 @@ namespace Rivet {
 
     Histo1DPtr _h_pi0, _h_eta;
     Histo1DPtr _temp_h_pion, _temp_h_eta;
-    Estimate1DPtr _h_etaToPion;
 
   };
 

@@ -21,7 +21,7 @@ Energies: [13000]
 Luminosity_fb: 140.0
 Description:
   'The production of a $W$ boson in association with a single charm quark is studied using 140 ifb$^{-1}$ of i$\sqrt{s} = 13$TeV
-  protoin-proton collision data collected with the ATLAS detector at the Large Hadron Collider. The charm quark is tagged by a
+  proton-proton collision data collected with the ATLAS detector at the Large Hadron Collider. The charm quark is tagged by a
   charmed hadron, reconstructed with a secondary-vertex fit. The $W$ boson is reconstructed from an electron/muon decay and the
   missing transverse momentum. The mesons reconstructed are $D^\pm\to K^\mp\pi^\pm\pi^\pm$ and
   $D^{\ast\pm} \to D^0\pi^\pm \to (K^\mp\pi^\pm)\pi^\pm$, where $p_\text{T}(e,\mu)>30$GeV, $|\eta(e,\mu)|<2.5$,

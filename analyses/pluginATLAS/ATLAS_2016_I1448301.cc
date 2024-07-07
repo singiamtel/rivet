@@ -100,7 +100,6 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-
       // Get objects
       DressedLeptons electrons = apply<LeptonFinder>(event, "Electrons").dressedLeptons();
       DressedLeptons muons = apply<LeptonFinder>(event, "Muons").dressedLeptons();
@@ -148,7 +147,7 @@ namespace Rivet {
           yy_veto |= photon1iso/photons[1].pT() > 0.5;
 
           if (!yy_veto) {
-            _d["vvgg"]->fill(">= 0"s);
+            _d["vvgg"]->fill(">= 0.0"s);
             if (!njets)  _d["vvgg"]->fill("= 0"s);
           }
         } // end of nu nu y y section
@@ -176,7 +175,7 @@ namespace Rivet {
 
           const double pTgamma = photons[0].pT()/GeV;
           _h["pT"]->fill(pTgamma);
-          _d["vvg"]->fill(">= 0"s);
+          _d["vvg"]->fill(">= 0.0"s);
           if (!njets) {
             _d["vvg"]->fill("= 0"s);
             _h["pT_0jet"]->fill(pTgamma);
@@ -258,11 +257,11 @@ namespace Rivet {
             // Fill plots
             // ee and mm need doing.
             if (!veto) {
-              _d["llgg"]->fill(">= 0"s);
+              _d["llgg"]->fill(">= 0.0"s);
               if (el) {
-                _d["eegg"]->fill(">= 0"s);
+                _d["eegg"]->fill(">= 0.0"s);
               } else {
-                _d["mmgg"]->fill(">= 0"s);
+                _d["mmgg"]->fill(">= 0.0"s);
               }
 
               if (!njets) {
@@ -306,11 +305,11 @@ namespace Rivet {
           _h["M"]->fill(mllgamma);
           _d["Njets"]->fill(_sedges[min(3, njets)]);
 
-          _d["llg"]->fill(">= 0"s);
+          _d["llg"]->fill(">= 0.0"s);
           if (el) {
-            _d["eeg"]->fill(">= 0"s);
+            _d["eeg"]->fill(">= 0.0"s);
           } else {
-            _d["eeg"]->fill(">= 0"s);
+            _d["mmg"]->fill(">= 0.0"s);
           }
 
           if (!njets) {
@@ -360,7 +359,6 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, BinnedHistoPtr<string>> _d;
     vector<string> _sedges;
-
   };
 
 

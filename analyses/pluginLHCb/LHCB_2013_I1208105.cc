@@ -157,7 +157,8 @@ namespace Rivet {
             err = (_tp_totEF_minbias->bin(i).yMean() * _th_totN_minbias->bin(i).errW() +
                    _tp_totEF_minbias->bin(i).yStdErr() * _th_totN_minbias->bin(i).sumW());
           }
-          _s_totEF_minbias->bin(i).set(val/_mbSumW->val(), err/_mbSumW->val());
+          _s_totEF_minbias->bin(i).set(val/_mbSumW->val()/_th_totN_minbias->bin(i).xWidth(),
+                                       err/_mbSumW->val()/_th_totN_minbias->bin(i).xWidth());
         }
       }
       if (_hdSumW->sumW()) {
@@ -168,7 +169,8 @@ namespace Rivet {
             err = (_tp_totEF_hard->bin(i).yMean() * _th_totN_hard->bin(i).errW() +
                    _tp_totEF_hard->bin(i).yStdErr() * _th_totN_hard->bin(i).sumW());
           }
-          _s_totEF_hard->bin(i).set(val/_hdSumW->val(), err/_hdSumW->val());
+          _s_totEF_hard->bin(i).set(val/_hdSumW->val()/_th_totN_hard->bin(i).xWidth(),
+                                    err/_hdSumW->val()/_th_totN_hard->bin(i).xWidth());
         }
       }
       if (_dfSumW->sumW()) {
@@ -179,7 +181,8 @@ namespace Rivet {
             err = (_tp_totEF_diff->bin(i).yMean() * _th_totN_diff->bin(i).errW() +
                    _tp_totEF_diff->bin(i).yStdErr() * _th_totN_diff->bin(i).sumW());
           }
-          _s_totEF_diff->bin(1).set(val/_dfSumW->val(), err/_dfSumW->val());
+          _s_totEF_diff->bin(i).set(val/_dfSumW->val()/_th_totN_diff->bin(i).xWidth(),
+                                    err/_dfSumW->val()/_th_totN_diff->bin(i).xWidth());
         }
       }
       if (_ndSumW->sumW()) {
@@ -189,7 +192,8 @@ namespace Rivet {
             val = _tp_totEF_nondiff->bin(i).yMean() * _th_totN_nondiff->bin(i).sumW();
             err = (_tp_totEF_nondiff->bin(i).yMean() * _th_totN_nondiff->bin(i).errW() +
                    _tp_totEF_nondiff->bin(i).yStdErr() * _th_totN_nondiff->bin(i).sumW());
-            _s_totEF_nondiff->bin(i).set(val/_ndSumW->val(), err/_ndSumW->val());
+            _s_totEF_nondiff->bin(i).set(val/_ndSumW->val()/_th_totN_nondiff->bin(i).xWidth(),
+                                         err/_ndSumW->val()/_th_totN_nondiff->bin(i).xWidth());
          }
         }
       }
@@ -201,7 +205,8 @@ namespace Rivet {
             err = (_tp_chEF_minbias->bin(i).yMean() * _th_chN_minbias->bin(i).errW() +
                    _tp_chEF_minbias->bin(i).yStdErr() * _th_chN_minbias->bin(i).sumW());
           }
-          _s_chEF_minbias->bin(i).set(val/_mbchSumW->val(), err/_mbchSumW->val());
+          _s_chEF_minbias->bin(i).set(val/_mbchSumW->val()/_th_chN_minbias->bin(i).xWidth(),
+                                      err/_mbchSumW->val()/_th_chN_minbias->bin(i).xWidth());
         }
       }
       if (_hdchSumW->sumW()) {
@@ -212,7 +217,8 @@ namespace Rivet {
             err = (_tp_chEF_hard->bin(i).yMean() * _th_chN_hard->bin(i).errW() +
                    _tp_chEF_hard->bin(i).yStdErr() * _th_chN_hard->bin(i).sumW());
           }
-          _s_chEF_hard->bin(i).set(val/_hdchSumW->val(), err/_hdchSumW->val());
+          _s_chEF_hard->bin(i).set(val/_hdchSumW->val()/_th_chN_hard->bin(i).xWidth(),
+                                   err/_hdchSumW->val()/_th_chN_hard->bin(i).xWidth());
         }
       }
       if (_dfchSumW->sumW()) {
@@ -223,7 +229,8 @@ namespace Rivet {
             err = (_tp_chEF_diff->bin(i).yMean() * _th_chN_diff->bin(i).errW() +
                    _tp_chEF_diff->bin(i).yStdErr() * _th_chN_diff->bin(i).sumW());
           }
-          _s_chEF_diff->bin(i).set(val/_dfchSumW->val(), err/_dfchSumW->val());
+          _s_chEF_diff->bin(i).set(val/_dfchSumW->val()/_th_chN_diff->bin(i).xWidth(),
+                                   err/_dfchSumW->val()/_th_chN_diff->bin(i).xWidth());
         }
       }
       if (_ndchSumW->sumW()) {
@@ -234,7 +241,8 @@ namespace Rivet {
             err = (_tp_chEF_nondiff->bin(i).yMean() * _th_chN_nondiff->bin(i).errW() +
                    _tp_chEF_nondiff->bin(i).yStdErr() * _th_chN_nondiff->bin(i).sumW());
           }
-          _s_chEF_nondiff->bin(i).set(val/_ndchSumW->val(), err/_ndchSumW->val());
+          _s_chEF_nondiff->bin(i).set(val/_ndchSumW->val()/_th_chN_nondiff->bin(i).xWidth(),
+                                      err/_ndchSumW->val()/_th_chN_nondiff->bin(i).xWidth());
         }
       }
     }

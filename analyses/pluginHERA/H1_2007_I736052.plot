@@ -97,7 +97,7 @@ XLabel= $Q^2$ $[GeV^2]$
 YLabel= $d\sigma^* /dQ^2$ $[nb$ $GeV^{-2}]$
 LogX=1
 LogY=1
-LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
+LegendTitle= $p_{T}>2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d16-x01-y01
@@ -106,7 +106,7 @@ XLabel= $x$
 YLabel= $d\sigma^* /dx$ $[nb]$
 LogX=1
 LogY=1
-LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
+LegendTitle= $p_{T}>2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d17-x01-y01
@@ -115,7 +115,7 @@ XLabel= $p_{T}$ $[GeV]$
 YLabel= $d\sigma^* /dp_{T}$ $[nb$ $GeV^{-1}]$
 LogX=0
 LogY=1
-LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
+LegendTitle= $p_{T}>2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d18-x01-y01
@@ -124,7 +124,7 @@ XLabel= $\eta$
 YLabel= $d\sigma^* /d\eta$ $[nb]$
 LogX=0
 LogY=0
-LegendTitle= $p_{T}$ $\textgreater$ $2$ $GeV$
+LegendTitle= $p_{T}>2$ $GeV$
 END PLOT
 
 BEGIN PLOT /H1_2007_I736052/d19-x01-y01

@@ -89,7 +89,7 @@ namespace Rivet {
     // Convenient fill function
     void fillS(Histo1DPtr h, const Particles& part, bool SE=true) {
       // Loop over bins, take bin centers as parameter values
-      for(size_t i=0; i < h->numBins(); ++i) {
+      for(size_t i=1; i <= h->numBins(); ++i) {
         double x = h->bin(i).xMid();
         double width = h->bin(i).xMax() - h->bin(i).xMin();
         double y;

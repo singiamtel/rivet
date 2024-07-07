@@ -1,6 +1,6 @@
 Name: CMS_2016_I1487277
 Year: 2016
-Summary: Measurement and QCD analysis of double-differential inclusive jet cross sections in $pp$ collisions at $\sqrt{s} = 8~\TeV$  and cross-section ratios to 2.76 and 7 TeV
+Summary: Measurement and QCD analysis of double-differential inclusive jet cross sections in $pp$ collisions at $\sqrt{s} = 8$\,TeV  and cross-section ratios to 2.76 and 7 TeV
 Experiment: CMS
 Collider: LHC
 InspireID: 1487277
@@ -19,10 +19,10 @@ Beams: [p+, p+]
 Energies: [8000]
 Luminosity_fb: 19.7
 Description:
-  'A measurement of the double-differential inclusive jet cross section as a function of the jet transverse momentum $\pt$ and the absolute jet rapidity $\abs{y}$ is presented.
+  'A measurement of the double-differential inclusive jet cross section as a function of the jet transverse momentum $p_\perp$ and the absolute jet rapidity $|y|$ is presented.
 Data from LHC proton-proton collisions at $\sqrt{s}=8\TeV$, corresponding to an integrated luminosity of 19.7 fb^{-1}, have been collected with the CMS detector.
-Jets are reconstructed using the anti-$\kt$ clustering algorithm with a size parameter of 0.7 in a phase space region covering jet $\pt$ from $74\GeV$ up to $2.5\TeV$ and jet absolute rapidity up to $\abs{y}=3.0$.
-The low-$\pt$ jet range between 21 and $74\GeV$ is also studied up to $\abs{y}=4.7$, using a dedicated data sample corresponding to an integrated luminosity of 5.6\pbinv.
+Jets are reconstructed using the anti-$\kt$ clustering algorithm with a size parameter of 0.7 in a phase space region covering jet $p_\perp$ from $74\GeV$ up to $2.5\TeV$ and jet absolute rapidity up to $|y|=3.0$.
+The low-$p_\perp$ jet range between 21 and $74\GeV$ is also studied up to $|y|=4.7$, using a dedicated data sample corresponding to an integrated luminosity of 5.6\pbinv.
 The measured jet cross section is corrected for detector effects and compared with the predictions from perturbative QCD at next-to-leading order (NLO) using various sets of parton distribution functions (PDF).
 Cross section ratios to the corresponding measurements performed at 2.76 and $7\TeV$ are presented.
 From the measured double-differential jet cross section, the value of the strong coupling constant evaluated at the $Z$ mass is $\alpha_\mathrm{S}(M_{Z}) = 0.1164^{+0.0060}_{-0.0043}$,

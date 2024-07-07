@@ -60,11 +60,11 @@ namespace Rivet {
       const double accphi = M_PI - diffphi;
       const double angular = tan(accphi/2) / cosh(diffpsd/2);
 
-      _h_sigma_vs_y->fill(zmumu.rapidity());
+      _h_sigma_vs_y->fill(zmumu.absrapidity());
       _h_sigma_vs_pt->fill(zmumu.pT()/GeV);
       _h_sigma_vs_phi->fill(angular);
-      _h_sigma_vs_ypt->fill(zmumu.rapidity(), zmumu.pT()/GeV);
-      _h_sigma_vs_yphi->fill(zmumu.rapidity(), angular);
+      _h_sigma_vs_ypt->fill(zmumu.absrapidity(), zmumu.pT()/GeV);
+      _h_sigma_vs_yphi->fill(zmumu.absrapidity(), angular);
     }
 
 

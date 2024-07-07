@@ -99,7 +99,7 @@ namespace Rivet {
     void finalize() {
       for (size_t i = 0; i < _eta_bins.size()-1; ++i) {
         if (fabs(_eta_bins[i] - 1.37) < .0001) continue;
-        scale(_h_Et_photon[i], crossSection()/picobarn/sumOfWeights());
+        scale(_h_Et_photon[i], crossSection()/nanobarn/sumOfWeights());
       }
     }
 

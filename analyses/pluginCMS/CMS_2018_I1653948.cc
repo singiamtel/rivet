@@ -61,8 +61,8 @@ namespace Rivet {
       double xiy = (My * My) / (sqrtS()/GeV * sqrtS()/GeV);
       double xi  = max(xix, xiy);
 
-      if (xi > _xi_hf_cut) _h_xsec->fill(0.5);
-      if (xix > _xi_castor_cut || xiy > _xi_hf_cut) _h_xsec->fill(1.5);
+      if (xi > _xi_hf_cut) _h_xsec->fill(1);
+      if (xix > _xi_castor_cut || xiy > _xi_hf_cut) _h_xsec->fill(2);
     }
 
 
@@ -74,7 +74,7 @@ namespace Rivet {
 
   private:
 
-    Histo1DPtr _h_xsec;
+    BinnedHistoPtr<int> _h_xsec;
     double _xi_hf_cut;
     double _xi_castor_cut;
 

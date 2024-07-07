@@ -143,7 +143,7 @@ namespace Rivet {
       for (size_t i = 0; i < pTcuts.size(); ++i) {
         jet_n[i] = countJets(jets, i);
         const string name = "mult_" + std::to_string(i);
-        const string& edge = _edges[i][jet_n[i]-3];
+        const string& edge = jet_n[i] < 3 ? "OTHER" : _edges[i][jet_n[i]-3];
         _s[name]->fill(edge);
       }
 

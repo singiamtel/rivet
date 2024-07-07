@@ -102,7 +102,6 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-
       DressedLeptons leptons;
       for (auto &lep : apply<LeptonFinder>(event, "muons").dressedLeptons()) { leptons.push_back(lep); }
       for (auto &lep : apply<LeptonFinder>(event, "elecs").dressedLeptons()) { leptons.push_back(lep); }
@@ -137,7 +136,7 @@ namespace Rivet {
       if (!pass_emu && !pass_ljets)  vetoEvent;
 
       if (pass_emu) {
-        if (nbjets >= 2)  dfill("nbjets_emu", nbjets - 1);
+        if (nbjets >= 2)  dfill("nbjets_emu", nbjets);
         if (nbjets >= 3)  fill("fid_xsec", 1);
         if (nbjets >= 4)  fill("fid_xsec", 2);
       }
@@ -225,6 +224,8 @@ namespace Rivet {
         normalize(h.second, 1.0);
       }
       scale(_d, sf);
+      normalize(_d["nbjets_emu"]);
+      normalize(_d["nbjets_emu_no_ttX"]);
     }
 
     void fill(const string& name, const double value) {

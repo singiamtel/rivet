@@ -29,6 +29,7 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
+      if(_edges.empty()) _edges=_histAveragePt->xEdges();
       const UnstableParticles& cfs = apply<UnstableParticles>(event, "CFS");
       for (const Particle& p : cfs.particles()) {
 	// protections against mc generators decaying long-lived particles
@@ -41,53 +42,48 @@ namespace Rivet {
 	       p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334)  ))     // Omega-/+
 	{
 	  int aid = p.abspid();
-	  if (aid == 211  || // pi+
-            aid == 321  || // K+
-            aid == 313  || // K*(892)0
-            aid == 2212 || // proton
-            aid == 333  )  // phi(1020)
-          {
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
-	  }
+	  if      (aid == 211 ) _histAveragePt->fill(_edges[0], p.pT()/GeV); // pi+
+          else if (aid == 321 ) _histAveragePt->fill(_edges[1], p.pT()/GeV); // K+
+          else if (aid == 313 ) _histAveragePt->fill(_edges[2], p.pT()/GeV);   // K*(892)0
+          else if (aid == 2212) _histAveragePt->fill(_edges[3], p.pT()/GeV);    // proton
+          else if (aid == 333 ) _histAveragePt->fill(_edges[4], p.pT()/GeV);    // phi(1020)
 	} // end if "rejection of long-lived particles"
-
-
         switch (p.pid()) {
 	  case 3224:
 	    _histPtSigmaStarPlus->fill(p.pT()/GeV);
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[6], p.pT()/GeV);
 	    break;
 	  case -3224:
 	    _histPtSigmaStarPlusAnti->fill(p.pT()/GeV);
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[6], p.pT()/GeV);
 	    break;
 	  case 3114:
 	    _histPtSigmaStarMinus->fill(p.pT()/GeV);
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[6], p.pT()/GeV);
 	    break;
 	  case -3114:
 	    _histPtSigmaStarMinusAnti->fill(p.pT()/GeV);
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[6], p.pT()/GeV);
 	    break;
 	  case 3324:
 	    _histPtXiStar->fill(p.pT()/GeV);
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[7], p.pT()/GeV);
 	    break;
 	  case -3324:
 	    _histPtXiStar->fill(p.pT()/GeV);
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[7], p.pT()/GeV);
 	    break;
 	  case 3312:
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[5], p.pT()/GeV);
 	    break;
 	  case -3312:
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[5], p.pT()/GeV);
 	    break;
 	  case 3334:
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[8], p.pT()/GeV);
 	    break;
 	  case -3334:
-	    _histAveragePt->fill(p.mass()/GeV, p.pT()/GeV);
+	    _histAveragePt->fill(_edges[8], p.pT()/GeV);
 	    break;
         }
       }
@@ -110,7 +106,8 @@ namespace Rivet {
     Histo1DPtr   _histPtSigmaStarMinus;
     Histo1DPtr   _histPtSigmaStarMinusAnti;
     Histo1DPtr   _histPtXiStar;
-    Profile1DPtr _histAveragePt;
+    BinnedProfilePtr<string> _histAveragePt;
+    vector<string> _edges;
   };
 
 

@@ -83,29 +83,29 @@ namespace Rivet {
       size_t nBins = _hist_EEC1->numBins();
       for (size_t k = 0; k < nBins/2; ++k) {
 
-        double y1 = _hist_EEC1->bin(k+1).sumW() - _hist_EEC1->bin(nBins-(k+2)).sumW();
-        double ey1 = sqrt( sqr(_hist_EEC1->bin(k+1).errW()) + sqr(_hist_EEC1->bin(nBins-(k+2)).errW()) );
-        _hist_AEEC1->bin(k+1).set(y1,ey1);
+        double y1 = _hist_EEC1->bin(k+1).sumW() - _hist_EEC1->bin(nBins-k).sumW();
+        double ey1 = sqrt( sqr(_hist_EEC1->bin(k+1).errW()) + sqr(_hist_EEC1->bin(nBins-k).errW()) );
+        _hist_AEEC1->bin(k+1).set(y1/_hist_AEEC1->bin(k+1).xWidth(),ey1/_hist_AEEC1->bin(k+1).xWidth());
 
-        double y2 = _hist_EEC2->bin(k+1).sumW() - _hist_EEC2->bin(nBins-(k+2)).sumW();
-        double ey2 = sqrt( sqr(_hist_EEC2->bin(k+1).errW()) + sqr(_hist_EEC2->bin(nBins-(k+2)).errW()) );
-        _hist_AEEC2->bin(k+1).set(y2,ey2);
+        double y2 = _hist_EEC2->bin(k+1).sumW() - _hist_EEC2->bin(nBins-k).sumW();
+        double ey2 = sqrt( sqr(_hist_EEC2->bin(k+1).errW()) + sqr(_hist_EEC2->bin(nBins-k).errW()) );
+        _hist_AEEC2->bin(k+1).set(y2/_hist_AEEC2->bin(k+1).xWidth(),ey2/_hist_AEEC2->bin(k+1).xWidth());
 
-        double y3 = _hist_EEC3->bin(k+1).sumW() - _hist_EEC3->bin(nBins-(k+2)).sumW();
-        double ey3 = sqrt( sqr(_hist_EEC3->bin(k+1).errW()) + sqr(_hist_EEC3->bin(nBins-(k+2)).errW()) );
-        _hist_AEEC3->bin(k+1).set(y3,ey3);
+        double y3 = _hist_EEC3->bin(k+1).sumW() - _hist_EEC3->bin(nBins-k).sumW();
+        double ey3 = sqrt( sqr(_hist_EEC3->bin(k+1).errW()) + sqr(_hist_EEC3->bin(nBins-k).errW()) );
+        _hist_AEEC3->bin(k+1).set(y3/_hist_AEEC3->bin(k+1).xWidth(),ey3/_hist_AEEC3->bin(k+1).xWidth());
 
-        double y4 = _hist_EEC4->bin(k+1).sumW() - _hist_EEC4->bin(nBins-(k+2)).sumW();
-        double ey4 = sqrt( sqr(_hist_EEC4->bin(k+1).errW()) + sqr(_hist_EEC4->bin(nBins-(k+2)).errW()) );
-        _hist_AEEC4->bin(k+1).set(y4,ey4);
+        double y4 = _hist_EEC4->bin(k+1).sumW() - _hist_EEC4->bin(nBins-k).sumW();
+        double ey4 = sqrt( sqr(_hist_EEC4->bin(k+1).errW()) + sqr(_hist_EEC4->bin(nBins-k).errW()) );
+        _hist_AEEC4->bin(k+1).set(y4/_hist_AEEC4->bin(k+1).xWidth(),ey4/_hist_AEEC4->bin(k+1).xWidth());
 
-        double y5 = _hist_EEC5->bin(k+1).sumW() - _hist_EEC5->bin(nBins-(k+2)).sumW();
-        double ey5 = sqrt( sqr(_hist_EEC5->bin(k+1).errW()) + sqr(_hist_EEC5->bin(nBins-(k+2)).errW()) );
-        _hist_AEEC5->bin(k+1).set(y5,ey5);
+        double y5 = _hist_EEC5->bin(k+1).sumW() - _hist_EEC5->bin(nBins-k).sumW();
+        double ey5 = sqrt( sqr(_hist_EEC5->bin(k+1).errW()) + sqr(_hist_EEC5->bin(nBins-k).errW()) );
+        _hist_AEEC5->bin(k+1).set(y5/_hist_AEEC5->bin(k+1).xWidth(),ey5/_hist_AEEC5->bin(k+1).xWidth());
 
-        double y6 = _hist_EEC6->bin(k+1).sumW() - _hist_EEC6->bin(nBins-(k+2)).sumW();
-        double ey6 = sqrt( sqr(_hist_EEC6->bin(k+1).errW()) + sqr(_hist_EEC6->bin(nBins-(k+2)).errW()) );
-        _hist_AEEC6->bin(k+1).set(y6,ey6);
+        double y6 = _hist_EEC6->bin(k+1).sumW() - _hist_EEC6->bin(nBins-k).sumW();
+        double ey6 = sqrt( sqr(_hist_EEC6->bin(k+1).errW()) + sqr(_hist_EEC6->bin(nBins-k).errW()) );
+        _hist_AEEC6->bin(k+1).set(y6/_hist_AEEC6->bin(k+1).xWidth(),ey6/_hist_AEEC6->bin(k+1).xWidth());
 
       }
     }

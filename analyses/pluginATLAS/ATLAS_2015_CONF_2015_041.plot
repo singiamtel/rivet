@@ -23,7 +23,7 @@ Title=$Z \rightarrow e^+ e^-$, dressed level
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_CONF_2015_041/d..-x02-y02
-Title=$Z \rightarrow \mu^+ mu^-$, dressed level
+Title=$Z \rightarrow \mu^+ \mu^-$, dressed level
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_CONF_2015_041/d..-x01

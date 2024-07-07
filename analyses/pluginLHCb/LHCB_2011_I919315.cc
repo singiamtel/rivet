@@ -37,7 +37,7 @@ namespace Rivet {
       const UnstableParticles& ufs = apply<UnstableParticles> (event, "phiFS");
 
       for (const Particle& p : ufs.particles()) {
-      	double y  = p.rapidity();
+      	double y  = p.absrapidity();
         double pT = p.pt();
         _h_Phi_y->fill(y);
         _h_Phi_pT->fill(pT/MeV);
@@ -52,6 +52,7 @@ namespace Rivet {
       scale (_h_Phi_y, scale_factor);
       scale (_h_Phi_pT, scale_factor);
       scale(_h_Phi_pT_y, scale_factor/1000.);
+      divByGroupWidth(_h_Phi_pT_y);
     }
 
     /// @}

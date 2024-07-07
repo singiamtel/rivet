@@ -7,7 +7,7 @@ XLabel=
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2015_I1390114/d01
-XCustomMajorTicks=1.0	$\sigma_\text{ttb(lepton+jets)}$	2.0	$\sigma_{e\mu}$	3.0	$\sigma_{ttbb\text{(cut-based)}}$	4.0	$\sigma_{ttbb\text{(fit-based)}}$
+XCustomMajorTicks=1.0	$\sigma_\mathrm{ttb(lepton+jets)}$	2.0	$\sigma_{e\mu}$	3.0	$\sigma_{ttbb\mathrm{(cut-based)}}$	4.0	$\sigma_{ttbb\mathrm{(fit-based)}}$
 YLabel=Cross section [fb]
 # END PLOT
 
@@ -16,4 +16,3 @@ LogY=0
 XCustomMajorTicks=1.0	$R_{ttbb}$ 
 YLabel=Cross section ratio [$\%$]
 # END PLOT
-

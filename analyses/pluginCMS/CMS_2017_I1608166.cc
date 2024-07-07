@@ -80,7 +80,7 @@ namespace Rivet {
             _hkpi[p.abspid()]->fill(map2string(p.pt() / GeV, 4, true));
           }
           if (p.abspid() != PID::KPLUS) {
-            _hppi[p.abspid()]->fill(map2string(p.pt() / GeV, 4, true));
+            _hppi[p.abspid()]->fill(map2string(p.pt() / GeV, 5, true));
           }
         }
       }
@@ -92,8 +92,8 @@ namespace Rivet {
       if (isRatio && id == 4)  id = PID::KPLUS;
       else if (isRatio && id == 5)  id = PID::PROTON;
       const size_t idx = _axes.at(id).index(value);
-      if (idx && idx <= _edges.at(id).size()) {
-        return _edges.at(id)[idx-1];
+      if (idx && idx <= _edges.at(type).size()) {
+        return _edges.at(type)[idx-1];
       }
       return "OTHER";
     }

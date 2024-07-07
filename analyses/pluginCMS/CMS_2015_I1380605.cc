@@ -46,7 +46,7 @@ namespace Rivet {
       double track_ptmax = 0;
       for (const Particle& p : cfs.particles(Cuts::abseta < 2.4)) track_ptmax = max(track_ptmax, p.pT());
       // Fill track analysis histograms
-      for (size_t i = 0; i < _h_tracks->numBins(); ++i) {
+      for (size_t i = 1; i <= _h_tracks->numBins(); ++i) {
         const double binlimitlow_t = _h_tracks->bin(i).xMin();
         const double weightbw_t = _h_tracks->bin(i).xWidth();
         const double xbin_t = _h_tracks->bin(i).xMid();
@@ -59,7 +59,7 @@ namespace Rivet {
       double jet_ptmax = 0;
       for (const Jet& j : jetsdeta) jet_ptmax = max(jet_ptmax, j.pT());
       // Fill jet analysis histograms
-      for (size_t i = 0; i < _h_jets->numBins(); ++i) {
+      for (size_t i = 1; i <= _h_jets->numBins(); ++i) {
         const double binlimitlow_j = _h_jets->bin(i).xMin();
         const double weightbw_j = _h_jets->bin(i).xWidth();
         const double xbin_j = _h_jets->bin(i).xMid();
@@ -70,9 +70,9 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      const double norm_t0 = _h_tracks->bin(7).sumW()/2.056170e-03;
+      const double norm_t0 = _h_tracks->bin(8).sumW()/2.056170e-03/_h_tracks->bin(8).xWidth();
       //const double norm_t1 = _h_tracks->bin(7).sumW()/2.056170e-03;
-      const double norm_j0 = _h_jets->bin(13).sumW()/3.575290e-03;
+      const double norm_j0 = _h_jets->bin(14).sumW()/3.575290e-03/_h_jets->bin(14).xWidth();
       //const double norm_j1 = _h_jets->bin(13).sumW()/3.575290e-03;
       if (norm_t0 > 0 ) scale(_h_tracks, 1./ norm_t0);
       if (norm_j0 > 0 ) scale(_h_jets, 1./ norm_j0);
