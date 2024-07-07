@@ -2,22 +2,17 @@
 
 # TODO: rewrite in Python?
 
-## Where to look for the files 
+## Where to look for the files
 builddir="."
 test -n "$1" && builddir=$1
 
 echo PYTHONPATH=$PYTHONPATH 1>&2
 
-## Get list of all tags excluding tip
-declare -a tags
 ## Test we're in a git repo, and if not, exit
 git tag >/dev/null 2>&1 || exit 0
-## Get all tags
-for t in $(git tag | sort -r); do
-  if [[ "$t" == *"alpha"* ]]; then continue; fi
-  if [[ "$t" == *"chacal"* ]]; then continue; fi
-  tags+=($t);
-done
+## Get list of all tags excluding tip
+tags=$(git tag | grep -v "alpha" | grep -v "chacal" | sort -r -V)
+tags=($tags)
 let numtags=${#tags[@]}
 
 ## Write out ana files per tag
@@ -26,13 +21,12 @@ for i in `seq 0 $N`; do
     tag=${tags[$i]}
 
     tagfile="analist-$tag.dat"
-    test -e "$builddir/$tagfile" && continue
-    echo "Writing analysis list to $builddir/$tagfile" 1>&2
+    test -e "$tagfile" && continue
+    echo "Writing analysis list to $tagfile" 1>&2
 
-    > $builddir/$tagfile
     git ls-tree --full-tree -r --name-only $tag src/Analysis/ src/Analyses/ analyses/ | grep "\.cc" | \
         while read i; do basename $i .cc >> $tagfile; done
-    sort $tagfile > $$ && mv $$ $tagfile
+    sort -u $tagfile > $$ && mv $$ $tagfile
 done
 
 ## Diff ana lists between all tags
@@ -49,10 +43,10 @@ for i in `seq 0 $N`; do
     tagfile0="analist-$rev0.dat"
     tagfile1="analist-$rev1.dat"
 
-    anas=$(comm -13 $tagfile0 $tagfile1)
+    anas=$(comm -13 $tagfile0 $tagfile1 | sort -u)
     test -n "$(echo $anas)" && { echo -e "\n  Added:"; echo $anas | xargs rivet --list-analyses | while read l; do echo "    $l"; done; }
 
-    anas=$(comm -23 $tagfile0 $tagfile1)
+    anas=$(comm -23 $tagfile0 $tagfile1 | sort -u)
     test -n "$(echo $anas)" && { echo -e "\n  Removed:"; echo $anas | sed -e 's/\ \+/\n/g' | while read l; do echo "    $l"; done; }
 
     echo
