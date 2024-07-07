@@ -2,6 +2,12 @@ EXTRA_DIST = anaindex/mk-analysis-html anaindex/mk-analysis-json anaindex/mk-ana
 DOCS =
 DOCDIRS =
 
+COVERAGE_SRC = \
+    $(srcdir)/coverage/inspire*.json \
+    $(srcdir)/coverage/*.rank \
+    $(top_srcdir)/analyses \
+    $(srcdir)/coverage/mk-coverage-html
+
 if ENABLE_PYEXT
 
 ## Analysis-list HTML pages
@@ -42,12 +48,6 @@ DOCS += coverage/rivet-coverage.html \
   coverage/rivet-coverage-searchesonly.html \
   coverage/rivet-coverage-nosearches.html \
   coverage/rivet-coverage-nosearches-noheavyion.html
-
-COVERAGE_SRC = \
-    $(srcdir)/coverage/inspire*.json \
-    $(srcdir)/coverage/*.rank \
-    $(top_srcdir)/analyses \
-    $(srcdir)/coverage/mk-coverage-html
 
 coverage/rivet-coverage.html: anaindex $(COVERAGE_SRC)
 	$(mkdir_p) coverage && cd coverage && \
