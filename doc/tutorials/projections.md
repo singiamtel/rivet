@@ -31,7 +31,7 @@ Here are some examples of projections available in the current release of Rivet:
 
 ### How to use projections
 
-For this example we'll use the FinalState projection in an analysis. The analysis header file must include the interface of FinalState, with a `#include "Rivet/Projections/FinalState.hh"` directive.
+For this example we'll use the FinalState projection in an analysis. The analysis file (or its header, if you're using one) must include the interface of FinalState, with a `#include "Rivet/Projections/FinalState.hh"` directive.
 
 Create and initialize projections in the analysis `init` method:
 ```
