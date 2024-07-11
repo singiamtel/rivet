@@ -43,17 +43,19 @@ The constructor and three event loop methods are used for the following:
  * `analyze`: select particles, filter according to cuts, loop over combinations, construct observables, fill histograms. This is where the per-event aspect of the analysis algorithm goes.
  * `finalize`: normalize/scale/divide histograms, tuples, etc.
 
-This probably looks similar to every analysis system you've ever used, so hopefully you're not worried about Rivet being weird or difficult to learn ;-)
+This implementation is intentionally similar to other analysis systems to minimize the learning curve when switching to Rivet.
 
-Rivet provides implementations of many calculational tools, called "projections". These are just observable calculator objects with a silly name, so don't get worried. (They automatically cache their results, to make Rivet automatically efficient, but you don't have to worry about that since it's, well, automatic.) The projections are used by calling the analysis' `apply(event)` method. This will return a const reference to the completed projection object and takes the type of the reference as a template argument, e.g.
+Rivet provides implementations of many calculational tools, called "projections", which are just objects that calculate observables. (They automatically cache their results, to make Rivet automatically efficient, but you don't have to worry about that since it's, well, automatic.) The projections are used by calling the analysis' `apply(event)` method. This will return a const reference to the completed projection object and takes the type of the reference as a template argument, e.g.
 ```
   const FinalState& cfs = apply<FinalState>(event, "Tracks");
 ```
 The name "Tracks" here will have been registered in the `init` method as referring to a projection of type "ChargedFinalState" --- a calculator which provides a list of charged particles with certain basic cuts applied. This is done via the `declare` method. Note that a) you don't have to manage the memory yourself, and b) polymorphism via the reference is both allowed and encouraged. If b) means nothing to you, don't worry... we just want to reassure C++ fiends who might think we're cramping their style!
 
+See the dedicated tutorial on projections for more information.
+
 ### Example
 
-Here is an example of the whole Rivet analysis shebang. We've compressed it into a single .cc file since the `analyze` method is nice and short and there is no reason to make a header:
+Here is an example of the whole Rivet analysis shebang. As usual, it is just a single .cc file:
 
 ```
 #include "Rivet/Analysis.hh"
