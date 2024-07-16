@@ -68,7 +68,7 @@ namespace Rivet {
     assert(isZero(dot(pGammaHCM.vector3(), Vector3::mkY())));
 
     // Rotate so the photon is along the positive z-axis
-    const double rot_angle = pGammaHCM.polarAngle() * (pGammaHCM.px() >= 0 ? -1 : 1);
+    const double rot_angle =-atan2(pGammaHCM.x(),pGammaHCM.z());
     tmp.preMult(Matrix3(Vector3::mkY(), rot_angle));
 
     // Check that final HCM photon lies along +ve z as expected
