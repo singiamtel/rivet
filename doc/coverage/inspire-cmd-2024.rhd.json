@@ -1,1 +1,22 @@
-{}
+{
+    "2634277": [
+        "Measurement of the <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup></math> cross section from threshold to 1.2\u00a0GeV with the CMD-3 detector",
+        "CMD-3",
+        "10.1103/PhysRevD.109.112002",
+        null,
+        "2302.08834",
+        null,
+        null,
+        []
+    ],
+    "2701971": [
+        "Measurement of the Pion Form Factor with CMD-3 Detector and its Implication to the Hadronic Contribution to Muon (<math display=\"inline\"><mrow><mi>g</mi><mo>-</mo><mn>2</mn></mrow></math>)",
+        "CMD-3",
+        "10.1103/PhysRevLett.132.231903",
+        null,
+        "2309.12910",
+        null,
+        null,
+        []
+    ]
+}

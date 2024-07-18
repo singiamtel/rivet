@@ -1,3 +1,12 @@
+2024-18-07 Peter Richardson <peter.richardson@durham.ac.uk>
+
+	* Add BELLE_2024_I2778312    B- -> D0 pi- pi0
+	* Add BESIII_2024_I2738509   e+e- > KS0 KL0
+	* Add BESIII_2024_I2739177  e+e- > Sigma+ Sigma-
+	* Add BESIII_2024_I2753516  eta spectra in e+e-
+	* Add BESIII_2024_I2776394  e+e- -> omega eta'
+	* Add LHCB_2024_I2756705    B_c -> J/psi pi+ pi0
+
 2024-07-07  Christian Gutschow  <chris.g@cern.ch>
 
 	* Release 4.0.1
@@ -9,7 +18,7 @@
 
 2024-05-26  Andy Buckley  <andy.buckley@cern.ch>
 
-	* Add FPE protections against eta and rap calculations with
+	* Add FPE protections against eta` and rap calculations with
 	(massless) null and z-axis vectors.
 
 2024-05-16  Andy Buckley  <andy.buckley@cern.ch>

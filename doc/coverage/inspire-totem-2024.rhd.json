@@ -1,1 +1,30 @@
-{}
+{
+    "2140837": [
+        "Search for central exclusive production of top quark pairs in proton-proton collisions at $ \\sqrt{s} $ = 13 TeV with tagged protons",
+        "CMS",
+        "10.1007/JHEP06(2024)187",
+        "2875437",
+        "2310.11231",
+        "ins2140837",
+        null,
+        [
+            "CMS-TOP-21-007",
+            "TOTEM 2023-002",
+            "CERN-EP-2023-113"
+        ]
+    ],
+    "2752118": [
+        "Nonresonant central exclusive production of charged-hadron pairs in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "TOTEM",
+        "10.1103/PhysRevD.109.112013",
+        "2887547",
+        "2401.14494",
+        "ins2752118",
+        null,
+        [
+            "CMS-SMP-21-004",
+            "TOTEM-2024-001",
+            "CERN-EP-2023-279"
+        ]
+    ]
+}

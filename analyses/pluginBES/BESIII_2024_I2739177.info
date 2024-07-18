@@ -1,0 +1,37 @@
+Name: BESIII_2024_I2739177
+Year: 2024
+Summary: $e^+e^-\to\Sigma^+\bar{\Sigma}^-$  cross section for centre-of-mass energies between 2.379 and 3.04 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2739177
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 109 (2024) 3, 034029
+ - arXiv:2312.12719 [hep-ex]
+RunInfo: e+ e- to hadrons.
+Beams: [e-, e+]
+Description:
+  '$e^+e^-\to\Sigma^+\bar{\Sigma}^-$ cross section for centre-of-mass energies between 2.379 and 3.04 GeV using ISR.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023ldb
+BibTeX: '@article{BESIII:2023ldb,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurements of \ensuremath{\Sigma} electromagnetic form factors in the timelike region using the untagged initial-state radiation technique}",
+    eprint = "2312.12719",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.109.034029",
+    journal = "Phys. Rev. D",
+    volume = "109",
+    number = "3",
+    pages = "034029",
+    year = "2024"
+}'

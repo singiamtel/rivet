@@ -1,0 +1,36 @@
+Name: LHCB_2024_I2756705
+Year: 2024
+Summary: $\pi^+\pi^0$ mass distribution in $B_c^+\to J/\psi \pi^+\pi^0$ decays
+Experiment: LHCB
+Collider: LHC
+InspireID: 2756705
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - JHEP 04 (2024) 151
+ - arXiv:2402.05523 [hep-ex]
+RunInfo: Any process producing B_c+, originally pp
+Description:
+  'Mass distributions in $B_c^+$ decays to $J/\psi \pi^+\pi^0$. The background subtracted data were extracted from figure 5 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: LHCb:2024nlg
+BibTeX: '@article{LHCb:2024nlg,
+    author = "Aaij, Roel and others",
+    collaboration = "LHCb",
+    title = "{Observation of the $ {B}_c^{+}\to J/\psi {\pi}^{+}{\pi}^0 $ decay}",
+    eprint = "2402.05523",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "LHCb-PAPER-2023-046, CERN-EP-2024-019",
+    doi = "10.1007/JHEP04(2024)151",
+    journal = "JHEP",
+    volume = "04",
+    pages = "151",
+    year = "2024"
+}'
