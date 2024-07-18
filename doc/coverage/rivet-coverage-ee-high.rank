@@ -40,10 +40,10 @@
 143198 X Energy Scan for Narrow States in $e^+ e^-$ Annihilation at Center-of-mass Energies Between 29.90-{GeV} and 31.46-{GeV} #not implementable#
 143690 . E+ e- Annihilation at High-Energies and Search for the t-Quark Continuum Contribution #implemented#
 143691 . Rapid Growth of Charged Particle Multiplicity in High-Energy e+ e- Annihilations #implement#
-143939 . CHARMED MESON PRODUCTION AND DECAY PROPERTIES AT THE psi-prime-prime (3770)
+143939 . CHARMED MESON PRODUCTION AND DECAY PROPERTIES AT THE psi-prime-prime (3770) #implemented#
 143985 ? Observation of Planar Three Jet Events in e+ e- Annihilation and Evidence for Gluon Bremsstrahlung #data elsewhere?#
 144112 X Two Particle Correlations in $e^+ e^-$ Annihilation #superseeded#
-144382 . DECAYS OF THE psi-prime (3684) TO OTHER CHARMONIUM STATES
+144382 . DECAYS OF THE psi-prime (3684) TO OTHER CHARMONIUM STATES #implemented#
 152289 . Test of {QED} in the Reactions $e^+ e^- \to e^+ e^-$ and $e^+ e^- \to \mu^+ \mu^-$ at {CMS} Energies From 9.4-{GeV} to 31.6-{GeV} #table#
 152290 X Search for Narrow Resonances in $e^+ e^-$ Annihilation at c.m. Energies Between 29.90-{GeV} and 31.46-{GeV} #R, superseeded 164319#
 152291 . Search for Narrow Resonances in $e^+ e^-$ Annihilation at {PETRA} #implemented#

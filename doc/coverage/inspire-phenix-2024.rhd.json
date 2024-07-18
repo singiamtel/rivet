@@ -18,5 +18,15 @@
         "ins2061074",
         null,
         []
+    ],
+    "2737599": [
+        "Identified charged-hadron production in <math><mrow><mi>p</mi><mo>+</mo><mi>Al</mi></mrow></math>, <math><mrow><mmultiscripts><mi>He</mi><mprescripts/><none/><mn>3</mn></mmultiscripts><mo>+</mo><mi>Au</mi></mrow></math>, and <math><mrow><mi>Cu</mi><mo>+</mo><mi>Au</mi></mrow></math> collisions at <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>200</mn><mspace width=\"0.16em\"/><mi>GeV</mi></mrow></math> and in <math><mrow><mi mathvariant=\"normal\">U</mi><mo>+</mo><mi mathvariant=\"normal\">U</mi></mrow></math> collisions at <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>193</mn><mspace width=\"0.16em\"/><mi>GeV</mi></mrow></math>",
+        "PHENIX",
+        "10.1103/PhysRevC.109.054910",
+        null,
+        "2312.09827",
+        null,
+        null,
+        []
     ]
 }

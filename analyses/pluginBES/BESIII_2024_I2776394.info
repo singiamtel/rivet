@@ -1,0 +1,36 @@
+Name: BESIII_2024_I2776394
+Year: 2024
+Summary:  Cross section for $e^+e^-\to\omega\eta^\prime$ for $\sqrt{s}$ between 2 and 3.08 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2776394
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - JHEP 07 (2024) 093
+ - arXiv:2404.07436 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Description:
+  'Cross section for $e^+e^-\to\omega\eta^\prime$ for $\sqrt{s}$ between 2 and 3.08 GeV'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024qjv
+BibTeX: '@article{BESIII:2024qjv,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Measurement of e$^{+}$e$^{−}$ \textrightarrow{} \ensuremath{\omega}\ensuremath{\eta^\prime} cross sections at $ \sqrt{s} $ = 2.000 to 3.080 GeV}",
+    eprint = "2404.07436",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1007/JHEP07(2024)093",
+    journal = "JHEP",
+    volume = "07",
+    pages = "093",
+    year = "2024"
+}'

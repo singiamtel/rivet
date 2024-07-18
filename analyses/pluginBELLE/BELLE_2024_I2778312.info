@@ -1,0 +1,37 @@
+Name: BELLE_2024_I2778312
+Year: 2024
+Summary:  Mass and angular distributions in $B^-\to D^0\pi^-\pi^0$ in the $\rho$ region
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2778312
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 109 (2024) 11, L111103
+ - arXiv:2404.10874 [hep-ex]
+RunInfo: Any process producing B mesons, originally Upsilon(4S) decays
+Description:
+  'Measurement of the mass and angular distribution in  $B^-\to D^0\pi^-\pi^0$ decays in the $\rho$ region'
+ValidationInfo:
+  'Herwig7 events using EvtGen for B decays'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle-II:2024vfw
+BibTeX: '@article{Belle-II:2024vfw,
+    author = "Adachi, I. and others",
+    collaboration = "Belle-II",
+    title = "{Measurement of the branching fraction of the decay B-\textrightarrow{}D0\ensuremath{\rho}(770)- at Belle II}",
+    eprint = "2404.10874",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle II Preprint 2024-011, KEK Preprint 2024-4",
+    doi = "10.1103/PhysRevD.109.L111103",
+    journal = "Phys. Rev. D",
+    volume = "109",
+    number = "11",
+    pages = "L111103",
+    year = "2024"
+}'

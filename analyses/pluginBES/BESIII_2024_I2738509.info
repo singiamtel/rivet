@@ -1,0 +1,37 @@
+Name: BESIII_2024_I2738509
+Year: 2024
+Summary: Cross section for $e^+e^-\to K^0_SK^0_L$ for $\sqrt{s}$ between 3.51 GeV and 4.95 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2738509
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 132 (2024) 13, 131901
+ - arXiv:2312.10962 [hep-ex]
+RunInfo: e+e- to hadrons K0S and K0L stable
+Beams: [e+,e-]
+Description:
+  'Cross section for $e^+e^-\to K^0_SK^0_L$ for $\sqrt{s}$ between 3.51 GeV and 4.95 GeV measured by BES'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023zsk
+BibTeX: '@article{BESIII:2023zsk,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Observation of significant flavor-SU(3) breaking in the kaon wave function at $12~{\rm GeV}^2<Q^2<25~{\rm GeV}^2$ and discovery of the charmless decay $\psi(3770)\to K_S^0K_L^0$}",
+    eprint = "2312.10962",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevLett.132.131901",
+    journal = "Phys. Rev. Lett.",
+    volume = "132",
+    number = "13",
+    pages = "131901",
+    year = "2024"
+}'

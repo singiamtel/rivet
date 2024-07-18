@@ -775,7 +775,7 @@
         "10.1016/j.physletb.2023.137848",
         "2845147",
         "2212.10552",
-        null,
+        "ins2616326",
         null,
         [
             "CERN-EP-2022-260"
@@ -847,7 +847,7 @@
         "10.1140/epjc/s10052-023-11873-5",
         "2846335",
         "2301.06822",
-        null,
+        "ins2623797",
         null,
         [
             "CERN-EP-2022-228"
@@ -1478,7 +1478,7 @@
         ]
     ],
     "2686498": [
-        "Search for single vector-like B quark production and decay via B \u2192 bH($ b\\overline{b} $) in pp collisions at $ \\sqrt{s} $ = 13 TeV with the ATLAS detector",
+        "Search for single vector-like $B$ quark production and decay via $B\\rightarrow bH(b\\bar{b})$ in $pp$ collisions at $\\sqrt{s} = 13$ TeV with the ATLAS detector",
         "ATLAS",
         "10.1007/JHEP11(2023)168",
         "2858670",

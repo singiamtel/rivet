@@ -1077,7 +1077,7 @@
 1849964 . Search for resonant and nonresonant new phenomena in high-mass dilepton final states at $ \sqrt{s} $ = 13 TeV
 1850544 ! Measurements of production cross sections of the Higgs boson in the four-lepton final state in proton–proton collisions at $\sqrt{s} = 13\,\text {Te}\text {V} $
 1850859 . Using Z Boson Events to Study Parton-Medium Interactions in Pb-Pb Collisions
-1851456 . Measurements of Higgs boson production cross sections and couplings in the diphoton decay channel at $ \sqrt{\mathrm{s}} $ = 13 TeV # STXS inclusive cross-secs#
+1851456 . Measurements of Higgs boson production cross sections and couplings in the diphoton decay channel at $ \sqrt{\mathrm{s}} $ = 13 TeV #STXS inclusive cross-secs#
 1857809 . Search for W′ bosons decaying to a top and a bottom quark at s=13TeV in the hadronic final state
 1857811 . Search for charged Higgs bosons produced in vector boson fusion processes and decaying into vector boson pairs in proton–proton collisions at $\sqrt{s} = 13\,{\text {TeV}} $
 1858929 X Test beam characterization of sensor prototypes for the CMS Barrel MIP Timing Detector
@@ -1146,7 +1146,7 @@
 2072381 X Reconstruction of decays to merged photons using end-to-end deep learning with domain continuation in the CMS detector
 2072383 . Search for a massive scalar resonance decaying to a light scalar and a Higgs boson in the four b quarks final state with boosted topology
 2072831 . Search for Higgs boson decays to a Z boson and a photon in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
-2072861 . Measurements of Higgs boson production in the decay channel with a pair of $\tau $ leptons in proton–proton collisions at $\sqrt{s}=13$ TeV # STXS inclusive cross-sections#
+2072861 . Measurements of Higgs boson production in the decay channel with a pair of $\tau $ leptons in proton–proton collisions at $\sqrt{s}=13$ TeV #STXS inclusive cross-sections#
 2074094 . Two-particle azimuthal correlations in γp interactions using pPb collisions at <math altimg="si1.svg"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><msub><mrow/><mrow><mi mathvariant="normal">NN</mi></mrow></msub></mrow></msub></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>8.16</mn><mspace width="0.25em"/><mtext>TeV</mtext></math>
 2074138 . Search for light Higgs bosons from supersymmetric cascade decays in $\text {pp}$ collisions at $\sqrt{s}=13\,\textrm{TeV}$
 2075414 . Azimuthal Correlations within Exclusive Dijets with Large Momentum Transfer in Photon-Lead Collisions
@@ -1183,6 +1183,7 @@
 2132369 ? Search for $CP$ violation in ttH and tH production in multilepton channels in proton-proton collisions at $\sqrt{s}$ = 13 TeV
 2136024 ! Measurement of the cross section of top quark-antiquark pair production in association with a W boson in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2139823 . Search for pair-produced vector-like leptons in final states with third-generation leptons and at least three b quark jets in proton-proton collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn><mspace width="0.2em"/><mtext>TeV</mtext></math>
+2140837 . Search for central exclusive production of top quark pairs in proton-proton collisions at $ \sqrt{s} $ = 13 TeV with tagged protons
 2142341 ! Measurement of the Higgs boson inclusive and differential fiducial production cross sections in the diphoton decay channel with pp collisions at $ \sqrt{s} $ = 13 TeV
 2142913 . Search for new physics using effective field theory in 13 TeV pp collision events that contain a top quark pair and a boosted Z or Higgs boson
 2145902 X R&D of back-end electronics for improved resistive plate chambers for the phase 2 upgrade of the CMS end-cap muon system
@@ -1212,6 +1213,7 @@
 2637936 . A search for decays of the Higgs boson to invisible particles in events with a top-antitop quark pair or a vector boson in proton-proton collisions at $\sqrt{s} = 13\,\text {Te}\hspace{-.08em}\text {V} $
 2639010 ? Evidence for Four-Top Quark Production in Proton-Proton Collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn><mspace width="0.2em"/><mtext>TeV</mtext></math>
 2639338 . A search for new physics in central exclusive production using the missing mass technique with the CMS detector and the CMS-TOTEM precision proton spectrometer
+2648528 . Observation of the <math display="inline"><mrow><mi mathvariant="normal">ϒ</mi><mo stretchy="false">(</mo><mn>3</mn><mi>S</mi><mo stretchy="false">)</mo></mrow></math> Meson and Suppression of <math display="inline"><mrow><mi mathvariant="normal">ϒ</mi></mrow></math> States in Pb-Pb Collisions at <math display="inline"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>N</mi><mi>N</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>5.02</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
 2648536 . Probing Small Bjorken-<math display="inline"><mi>x</mi></math> Nuclear Gluonic Structure via Coherent <math display="inline"><mrow><mi>J</mi><mo>/</mo><mi>ψ</mi></mrow></math> Photoproduction in Ultraperipheral Pb-Pb Collisions at <math display="inline"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>NN</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>5.02</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
 2648595 . First measurement of the top quark pair production cross section in proton-proton collisions at $ \sqrt{s} $ = 13.6 TeV
 2651438 . Search for top squark pair production in a final state with at least one hadronically decaying tau lepton in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
@@ -1240,23 +1242,44 @@
 2684710 . Measurement of the Higgs boson production via vector boson fusion and its decay into bottom quarks in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2685711 . Measurement of the production cross section for a W boson in association with a charm quark in proton–proton collisions at $\sqrt{s} = 13\,\hbox {TeV}$
 2687527 . Search for Scalar Leptoquarks Produced via <math display="inline"><mi>τ</mi></math>-Lepton–Quark Scattering in <math display="inline"><mi>p</mi><mi>p</mi></math> Collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
+2688366 . Search for a third-generation leptoquark coupled to a τ lepton and a b quark through single, pair, and nonresonant production in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2688930 ? Constraints on anomalous Higgs boson couplings to vector bosons and fermions from the production of Higgs bosons using the <math display="inline"><mi>τ</mi><mi>τ</mi></math> final state
 2693765 . Luminosity determination using Z boson production at the CMS experiment
+2699807 . Autoencoder-Based Anomaly Detection System for Online Data Quality Monitoring of the CMS Electromagnetic Calorimeter
 2702153 . Measurement of the τ lepton polarization in Z boson decays in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
-2703254 . Inclusive and differential cross section measurements of $\mathrm{t\bar{t}b\bar{b}}$ production in the lepton+jets channel at $\sqrt{s}$ = 13 TeV
+2703254 . Inclusive and differential cross section measurements of $ \textrm{t}\overline{\textrm{t}}\textrm{b}\overline{\textrm{b}} $ production in the lepton+jets channel at $ \sqrt{s} $ = 13 TeV
 2704054 . Production and validation of industrially produced large-sized GEM foils for the Phase-2 upgrade of the CMS muon spectrometer
 2704121 . Search for direct production of GeV-scale resonances decaying to a pair of muons in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2705044 . Search for supersymmetry in final states with disappearing tracks in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2705674 . Search for a new resonance decaying into two spin-0 bosons in a final state with two photons and two bottom quarks in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
+2706284 . Development of the CMS detector for the CERN LHC Run 3
+2706677 . Search for stealth supersymmetry in final states with two photons, jets, and low missing transverse momentum in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2706679 . Study of azimuthal anisotropy of ϒ(1S) mesons in pPb collisions at <math altimg="si1.svg"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><msub><mrow/><mrow><mi mathvariant="normal">NN</mi></mrow></msub></mrow></msub></mrow></msqrt></math> = 8.16 TeV
 2709669 . Observation of WW$\gamma$ production and search for H$\gamma$ production in proton-proton collisions at $\sqrt{s}$ = 13 TeV
 2710916 . Muon identification using multivariate techniques in the CMS experiment in proton-proton collisions at sqrt(s) = 13 TeV
 2712865 . Search for dark matter particles in W$^{+}$W$^{−}$ events with transverse momentum imbalance in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
+2713513 . Search for Narrow Trijet Resonances in Proton-Proton Collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
+2716079 . Search for W′ bosons decaying to a top and a bottom quark in leptonic final states in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2716400 . Search for an exotic decay of the Higgs boson into a Z boson and a pseudoscalar particle in proton-proton collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn><mrow><mspace width="0.20em"/><mtext>TeV</mtext></mrow></math>
 2719537 . Search for new Higgs bosons via same-sign top quark pair production in association with a jet in proton-proton collisions at $\sqrt{s}$ = 13 TeV
 2724506 . Higher-order moments of the elliptic flow distribution in PbPb collisions at $ \sqrt{s_{\textrm{NN}}} $ = 5.02 TeV
-2730742 . Search for the Lepton Flavor Violating τ → 3μ Decay in Proton-Proton Collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn><mspace width="0.2em"/><mtext>TeV</mtext></math>
+2730742 . Search for the lepton flavor violating τ → 3μ decay in proton-proton collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn><mspace width="0.2em"/><mtext>TeV</mtext></math>
 2735808 . Search for Long-Lived Heavy Neutral Leptons with Lepton Flavour Conserving or Violating Decays to a Jet and a Charged Lepton
+2736546 . Measurement of simplified template cross sections of the Higgs boson produced in association with <math display="inline"><mi>W</mi></math> or <math display="inline"><mi>Z</mi></math> bosons in the <math display="inline"><mi>H</mi><mo stretchy="false">→</mo><mi>b</mi><mover accent="true"><mi>b</mi><mo stretchy="false">¯</mo></mover></math> decay channel in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2736549 . Search for flavor changing neutral current interactions of the top quark in final states with a photon and additional jets in proton-proton collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
+2738533 . Evidence for tWZ production in proton-proton collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn></math> TeV in multilepton final states
 2740536 . Timing Performance of the CMS High Granularity Calorimeter Prototype
-2760544 . Search for exotic decays of the Higgs boson to a pair of pseudoscalars in the $\upmu \upmu \text{ b } \text{ b } $ and $\uptau \uptau \text{ b } \text{ b } $ final states
-2783406 . CMS iRPC FEB development and validation
+2741216 . Measurement of the primary Lund jet plane density in proton-proton collisions at $ \sqrt{\textrm{s}} $ = 13 TeV
+2747107 . Extracting the speed of sound in quark–gluon plasma with ultrarelativistic lead–lead collisions at the LHC
+2747130 . Test of lepton flavor universality in and decays in proton-proton collisions at
+2755433 . Combined search for electroweak production of winos, binos, higgsinos, and sleptons in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2758137 . Search for pair production of scalar and vector leptoquarks decaying to muons and bottom quarks in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2760544 . Search for exotic decays of the Higgs boson to a pair of pseudoscalars in the $\mu\mu$bb and $\tau\tau$bb final states
+2760892 . Search for long-lived particles decaying to final states with a pair of muons in proton-proton collisions at $ \sqrt{s} $ = 13.6 TeV
+2761908 . Search for long-lived particles using displaced vertices and missing transverse momentum in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2762139 . Observation of the <math display="inline"><msubsup><mi mathvariant="normal">Ξ</mi><mi>b</mi><mo>-</mo></msubsup><mo stretchy="false">→</mo><mrow><mi>ψ</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><msup><mi mathvariant="normal">Ξ</mi><mo>-</mo></msup></math> decay and studies of the <math display="inline"><msub><mi mathvariant="normal">Ξ</mi><mi>b</mi></msub><mo stretchy="false">(</mo><mn>5945</mn><msup><mo stretchy="false">)</mo><mn>0</mn></msup></math> baryon in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2763130 . Search for long-lived heavy neutral leptons decaying in the CMS muon detectors in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2763679 . Search for heavy neutral leptons in final states with electrons, muons, and hadronically decaying tau leptons in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
+2766369 . Search for long-lived heavy neutrinos in the decays of B mesons produced in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
+2769284 . Search for the decay of the Higgs boson to a pair of light pseudoscalar bosons in the final state with four bottom quarks in proton-proton collisions at $ \sqrt{\textrm{s}} $ = 13 TeV
+2769595 . Observation of the <math display="inline"><mi>J</mi><mo>/</mo><mi>ψ</mi><mo stretchy="false">→</mo><msup><mi>μ</mi><mo>+</mo></msup><msup><mi>μ</mi><mo>-</mo></msup><msup><mi>μ</mi><mo>+</mo></msup><msup><mi>μ</mi><mo>-</mo></msup></math> decay in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>

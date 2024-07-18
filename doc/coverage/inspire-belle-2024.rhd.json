@@ -13,6 +13,18 @@
             "KEK Preprint 2023-17"
         ]
     ],
+    "2686639": [
+        "Measurement of branching-fraction ratios and CP asymmetries in B$^{\u00b1}$ \u2192 D$_{CP\u00b1}$K$^{\u00b1}$ decays at Belle and Belle II",
+        "Belle",
+        "10.1007/JHEP05(2024)212",
+        null,
+        "2308.05048",
+        null,
+        null,
+        [
+            "Belle II Preprint 2023-011;KEK Preprint 2023-9"
+        ]
+    ],
     "2693910": [
         "Search for charged-lepton flavor violation in $\\Upsilon(2S) \\to \\ell^\\mp\\tau^\\pm$ ($\\ell=e,\\mu$) decays at Belle",
         "Belle",
@@ -52,6 +64,19 @@
             "KEK Preprint 2023-20"
         ]
     ],
+    "2721845": [
+        "First Measurement of <math display=\"inline\"><mrow><mi>R</mi><mo stretchy=\"false\">(</mo><msub><mrow><mi>X</mi></mrow><mrow><mi>\u03c4</mi><mo>/</mo><mo>\u2113</mo></mrow></msub><mo stretchy=\"false\">)</mo></mrow></math> as an Inclusive Test of the <math display=\"inline\"><mrow><mi>b</mi><mo stretchy=\"false\">\u2192</mo><mi>c</mi><mi>\u03c4</mi><mi>\u03bd</mi></mrow></math> Anomaly",
+        "Belle-II",
+        "10.1103/PhysRevLett.132.211804",
+        null,
+        "2311.07248",
+        null,
+        null,
+        [
+            "Belle II Preprint 2023-016",
+            "KEK Preprint 2023-34"
+        ]
+    ],
     "2724872": [
         "Search for the decay <math display=\"inline\"><mrow><msubsup><mrow><mi>B</mi></mrow><mrow><mi>s</mi></mrow><mrow><mn>0</mn></mrow></msubsup><mo stretchy=\"false\">\u2192</mo><mi>J</mi><mo>/</mo><mi>\u03c8</mi><msup><mrow><mi>\u03c0</mi></mrow><mrow><mn>0</mn></mrow></msup></mrow></math> at Belle experiment",
         "Belle",
@@ -63,6 +88,19 @@
         [
             "Belle Preprint 2023-19",
             "KEK Preprint 2023-33"
+        ]
+    ],
+    "2725943": [
+        "Evidence for <math display=\"inline\"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mo>+</mo></mrow></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>K</mi><mo>+</mo></msup><mi>\u03bd</mi><mover accent=\"true\"><mi>\u03bd</mi><mo stretchy=\"false\">\u00af</mo></mover></mrow></math> decays",
+        "Belle-II",
+        "10.1103/PhysRevD.109.112006",
+        null,
+        "2311.14647",
+        null,
+        null,
+        [
+            "Belle II Preprint 2023-017",
+            "KEK Preprint 2023-35"
         ]
     ],
     "2730555": [
@@ -88,6 +126,71 @@
         [
             "Belle II Preprint 2023-018",
             "KEK Preprint 2023-36"
+        ]
+    ],
+    "2755520": [
+        "Search for a heavy neutral lepton that mixes predominantly with the tau neutrino",
+        "Belle",
+        "10.1103/PhysRevD.109.L111102",
+        null,
+        "2402.02580",
+        null,
+        null,
+        [
+            "Belle Preprint 2023-22",
+            "KEK Preprint 2023-44"
+        ]
+    ],
+    "2762190": [
+        "New graph-neural-network flavor tagger for Belle II and measurement of sin <math display=\"inline\"><mn>2</mn><msub><mi>\u03d5</mi><mn>1</mn></msub></math> in <math display=\"inline\"><msup><mi>B</mi><mn>0</mn></msup><mo stretchy=\"false\">\u2192</mo><mi>J</mi><mo>/</mo><mi>\u03c8</mi><msubsup><mi>K</mi><mi mathvariant=\"normal\">S</mi><mn>0</mn></msubsup></math> decays",
+        "Belle-II",
+        "10.1103/PhysRevD.110.012001",
+        null,
+        "2402.17260",
+        null,
+        null,
+        [
+            "Belle II Preprint 2024-006",
+            "KEK Preprint 2023-53"
+        ]
+    ],
+    "2764835": [
+        "Search for a <math display=\"inline\"><msup><mi>\u03bc</mi><mo>+</mo></msup><msup><mi>\u03bc</mi><mo>-</mo></msup></math> resonance in four-muon final states at Belle II",
+        "Belle-II",
+        "10.1103/PhysRevD.109.112015",
+        null,
+        "2403.02841",
+        null,
+        null,
+        [
+            "2024-007",
+            "2023-55"
+        ]
+    ],
+    "2764853": [
+        "Measurement of <math display=\"inline\"><mrow><mi>C</mi><mi>P</mi></mrow></math> asymmetries in <math display=\"inline\"><mrow><msup><mrow><mi>B</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy=\"false\">\u2192</mo><msubsup><mrow><mi>K</mi></mrow><mrow><mi>S</mi></mrow><mrow><mn>0</mn></mrow></msubsup><msubsup><mrow><mi>K</mi></mrow><mrow><mi>S</mi></mrow><mrow><mn>0</mn></mrow></msubsup><msubsup><mrow><mi>K</mi></mrow><mrow><mi>S</mi></mrow><mrow><mn>0</mn></mrow></msubsup></mrow></math> decays at Belle II",
+        "Belle-II",
+        "10.1103/PhysRevD.109.112020",
+        null,
+        "2403.02590",
+        null,
+        null,
+        [
+            "Belle II Preprint 2024-008",
+            "KEK Preprint 2023-56"
+        ]
+    ],
+    "2778312": [
+        "Measurement of the branching fraction of the decay <math display=\"inline\"><msup><mi>B</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>D</mi><mn>0</mn></msup><mi>\u03c1</mi><mo stretchy=\"false\">(</mo><mn>770</mn><msup><mo stretchy=\"false\">)</mo><mo>-</mo></msup></math> at Belle II",
+        "Belle-II",
+        "10.1103/PhysRevD.109.L111103",
+        null,
+        "2404.10874",
+        null,
+        null,
+        [
+            "Belle II Preprint 2024-011",
+            "KEK Preprint 2024-4"
         ]
     ]
 }

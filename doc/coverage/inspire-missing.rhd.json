@@ -2798,7 +2798,7 @@
         "10.1007/JHEP10(2021)060",
         "2776527",
         "2107.09593",
-        null,
+        "ins1888216",
         null,
         [
             "LHCb-PAPER-2021-016",
@@ -2989,16 +2989,6 @@
         null,
         []
     ],
-    "1997451": [
-        "Measurement of $e^{+}e^{-}\\to\\phi\\pi^{+}\\pi^{-}$ cross sections at center-of-mass energies from 2.00 to 3.08 GeV",
-        "BESIII",
-        null,
-        null,
-        "2112.13219",
-        null,
-        null,
-        []
-    ],
     "2030993": [
         "Amplitude analysis and branching-fraction measurement of $D_{s}^{+} \\to \\pi^{+}\\pi^{0}\\eta^{\\prime}$",
         "BESIII",
@@ -3065,16 +3055,6 @@
         null,
         []
     ],
-    "2634277": [
-        "Measurement of the $e^+e^-\\to\\pi^+\\pi^-$ cross section from threshold to 1.2 GeV with the CMD-3 detector",
-        "CMD-3",
-        null,
-        null,
-        "2302.08834",
-        null,
-        null,
-        []
-    ],
     "2655951": [
         "Observation of ${B\\to D^{(*)} K^- K^{0}_S}$ decays using the 2019-2022 Belle II data sample",
         "Belle-II",
@@ -3098,29 +3078,6 @@
         [
             "CERN-EP-2023-076"
         ]
-    ],
-    "2703254": [
-        "Inclusive and differential cross section measurements of $\\mathrm{t\\bar{t}b\\bar{b}}$ production in the lepton+jets channel at $\\sqrt{s}$ = 13 TeV",
-        "CMS",
-        null,
-        "2872305",
-        "2309.14442",
-        "ins2703254",
-        null,
-        [
-            "CMS-TOP-22-009",
-            "CERN-EP-2023-201"
-        ]
-    ],
-    "2706428": [
-        "Measurement of $e^{+}e^{-}\\rightarrow\\eta J/\\psi$ Cross Section from $\\sqrt{s}=$ 3.808 GeV to 4.951 GeV",
-        "BESIII",
-        null,
-        null,
-        "2310.03361",
-        null,
-        null,
-        []
     ],
     "2751832": [
         "Study of $e^{+}e^{-}\\rightarrow\\pi^{+}\\pi^{-}\\pi^{0}$ at $\\sqrt{s}$ from 2.00 to 3.08 GeV at BESIII",
