@@ -103,7 +103,8 @@ void PxConePlugin::run_clustering(fastjet::ClusterSequence & clust_seq) const {
     &ierr        // = 0 if all is OK ;   = -1 otherwise
     );
 
-  if (ierr != 0) throw fastjet::Error("An error occurred while running PXCONE");
+  //if (ierr != 0) throw fastjet::Error("An error occurred while running PXCONE");
+  if (ierr != 0) return;
 
   // now transfer information back
   valarray<int> last_index_created(njet);
