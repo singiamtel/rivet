@@ -8,7 +8,7 @@ Status: VALIDATED
 Authors:
  - Peter Richardson <peter.richardson@durham.ac.uk>
 References:
-- Phys.Rev. D76 (2007) 072012, 2007 
+- Phys.Lett.B 107 (1981) 297-300
 RunInfo: e+ e- to hadrons
 NeedCrossSection: yes
 Beams: [e+, e-]
