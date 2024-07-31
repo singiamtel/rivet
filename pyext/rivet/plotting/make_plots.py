@@ -60,6 +60,7 @@ def _parse_args(args):
         path = asplit[0]
         if path != "PLOT" and not re.fullmatch(r"REF(\d+)?$", path):
             filelist.append(path)
+            path = path.split('/')[-1]
             while path in plotoptions:
                 path = '_' + path
         plotoptions[path] = {}
