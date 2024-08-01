@@ -2,20 +2,20 @@
 
 set -e
 
-RIVET_VERSION=${RIVET_VERSION:-4.0.0}
+RIVET_VERSION=${RIVET_VERSION:-4.0.1}
 PYTHIA_VERSION=${PYTHIA_VERSION:-8311}  # TODO: 8312 changes the example names
+MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.5.tar.gz
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"
 BUILDFLAGS="$PLATFLAGS $DOCKERFLAGS"
 function xdocker { echo "docker $@"; docker "$@"; }
 if [[ -n "$PLATFLAGS" ]]; then
     if [[ "$PUSH" = 1 ]]; then PUSH="--push"; fi
-    function dx_build { xdocker buildx build -f Dockerfile "$@" $PUSH .; }
+    function dx_build { xdocker buildx build -f Dockerfile --progress=plain "$@" $PUSH .; }
 else
-    function dx_build { xdocker build -f Dockerfile "$@" .; }
+    function dx_build { xdocker build -f Dockerfile --progress=plain "$@" .; }
 fi
 #test "$FORCE" && BUILD="$BUILD --no-cache"
-#--progress=plain
 
 BUILDFLAGS="$BUILDFLAGS --build-arg RIVET_VERSION=${RIVET_VERSION}"
 BUILDFLAGS="$BUILDFLAGS --build-arg PYTHIA_VERSION=${PYTHIA_VERSION}"

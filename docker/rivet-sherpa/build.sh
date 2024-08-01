@@ -2,8 +2,8 @@
 
 set -e
 
-RIVET_VERSION=${RIVET_VERSION:-4.0.0}
-SHERPA_VERSION=2.2.15
+RIVET_VERSION=${RIVET_VERSION:-4.0.1}
+SHERPA_VERSION=2.2.16
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"
 #BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
