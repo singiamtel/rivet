@@ -17,11 +17,11 @@ RUN true \
 
 RUN lhapdf install NNPDF23_lo_as_0130_qed NNPDF40_nlo_as_01180
 
-ADD mgpatch.diff /work
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && cd /work/MG5_aMC/ \
-    && patch -p1 < /work/mgpatch.diff \
-    && cd /work && rm *.diff
+# ADD mgpatch.diff /work
+# RUN export DEBIAN_FRONTEND=noninteractive \
+#     && cd /work/MG5_aMC/ \
+#     && patch -p1 < /work/mgpatch.diff \
+#     && cd /work && rm *.diff
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'export PYTHONPATH="/usr/local/local/lib/python3.10/dist-packages:$PYTHONPATH"' >> /etc/profile.d/05-usrlocal.sh

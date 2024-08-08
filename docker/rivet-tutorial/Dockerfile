@@ -28,8 +28,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ##########
 
 WORKDIR /work
-ADD . /work
-RUN true \
-  && cd MG5_aMC/ \
-  && patch -p1 < /work/mgpatch.diff \
-  && cd /work && rm Dockerfile build.sh* *.diff
+
+# ADD . /work
+# RUN true \
+#   && cd MG5_aMC/ \
+#   && patch -p1 < /work/mgpatch.diff \
+#   && cd /work && rm Dockerfile build.sh* *.diff
