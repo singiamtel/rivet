@@ -349,6 +349,20 @@
             "CERN-EP-2023-223"
         ]
     ],
+    "2719536": [
+        "Search for high-mass exclusive diphoton production with tagged protons in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "TOTEM",
+        "10.1103/PhysRevD.110.012010",
+        "2879069",
+        "2311.02725",
+        "ins2719536",
+        null,
+        [
+            "CMS-EXO-21-007",
+            "TOTEM-2023-003",
+            "CERN-EP-2023-143"
+        ]
+    ],
     "2719537": [
         "Search for new Higgs bosons via same-sign top quark pair production in association with a jet in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
         "CMS",
@@ -477,7 +491,7 @@
         ]
     ],
     "2747130": [
-        "Test of lepton flavor universality in and decays in proton-proton collisions at",
+        "Test of lepton flavor universality in B$^{\\pm}$$\\to$ K$^{\\pm}\\mu^+\\mu^-$ and B$^{\\pm}$$\\to$ K$^{\\pm}$e$^+$e$^-$ decays in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
         "CMS",
         "10.1088/1361-6633/ad4e65",
         "2886387",
@@ -516,6 +530,19 @@
             "CERN-EP-2023-238"
         ]
     ],
+    "2755637": [
+        "Search for long-lived particles decaying in the CMS muon detectors in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "CMS",
+        "10.1103/PhysRevD.110.032007",
+        "2888280",
+        "2402.01898",
+        "ins2755637",
+        null,
+        [
+            "CMS-EXO-21-008",
+            "CERN-EP-2024-008"
+        ]
+    ],
     "2758137": [
         "Search for pair production of scalar and vector leptoquarks decaying to muons and bottom quarks in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
         "CMS",
@@ -527,6 +554,19 @@
         [
             "CMS-EXO-21-019",
             "CERN-EP-2023-301"
+        ]
+    ],
+    "2759506": [
+        "Search for a scalar or pseudoscalar dilepton resonance produced in association with a massive vector boson or top quark-antiquark pair in multilepton events at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "CMS",
+        "10.1103/PhysRevD.110.012013",
+        "2889464",
+        "2402.11098",
+        "ins2759506",
+        null,
+        [
+            "CMS-EXO-21-018",
+            "CERN-EP-2023-304"
         ]
     ],
     "2760544": [
@@ -569,7 +609,7 @@
         ]
     ],
     "2762139": [
-        "Observation of the <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039e</mi><mi>b</mi><mo>-</mo></msubsup><mo stretchy=\"false\">\u2192</mo><mrow><mi>\u03c8</mi><mrow><mo stretchy=\"false\">(</mo><mn>2</mn><mi>S</mi><mo stretchy=\"false\">)</mo></mrow></mrow><msup><mi mathvariant=\"normal\">\u039e</mi><mo>-</mo></msup></math> decay and studies of the <math display=\"inline\"><msub><mi mathvariant=\"normal\">\u039e</mi><mi>b</mi></msub><mo stretchy=\"false\">(</mo><mn>5945</mn><msup><mo stretchy=\"false\">)</mo><mn>0</mn></msup></math> baryon in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "Observation of the $\\Xi^-_\\mathrm{b}$$\\to$$\\psi$(2S)$\\Xi^-$ decay and studies of the $\\Xi_\\mathrm{b}^{\\ast{}0}$ baryon in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
         "CMS",
         "10.1103/PhysRevD.110.012002",
         "2890225",
@@ -605,6 +645,32 @@
         [
             "CMS-EXO-22-011",
             "CERN-EP-2024-032"
+        ]
+    ],
+    "2764172": [
+        "Constraints on anomalous Higgs boson couplings from its production and decay using the WW channel in proton\u2013proton collisions at $\\sqrt{s} = 13~\\text {TeV}$",
+        "CMS",
+        "10.1140/epjc/s10052-024-12925-0",
+        "2890530",
+        "2403.00657",
+        "ins2764172",
+        null,
+        [
+            "CMS-HIG-22-008",
+            "CERN-EP-2024-035"
+        ]
+    ],
+    "2765268": [
+        "Search for dark QCD with emerging jets in proton-proton collisions at $ \\sqrt{s} $ = 13 TeV",
+        "CMS",
+        "10.1007/JHEP07(2024)142",
+        "2890630",
+        "2403.01556",
+        null,
+        null,
+        [
+            "CMS-EXO-22-015",
+            "CERN-EP-2024-049"
         ]
     ],
     "2766369": [
@@ -646,6 +712,19 @@
             "CERN-EP-2024-058"
         ]
     ],
+    "2772624": [
+        "Search for ${\\text {Z}{}{}} {\\text {Z}{}{}} $ and ${\\text {Z}{}{}} {\\text {H}{}{}} $ production in the ${\\text {b}{}{}} {\\bar{{\\text {b}{}{}}}{}{}} {\\text {b}{}{}} {\\bar{{\\text {b}{}{}}}{}{}} $ final state using proton-proton collisions at $\\sqrt{s}=13\\,\\text {Te}\\hspace{-.08em}\\text {V} $",
+        "CMS",
+        "10.1140/epjc/s10052-024-13021-z",
+        "2894040",
+        "2403.20241",
+        "ins2772624",
+        null,
+        [
+            "CMS-HIG-22-011",
+            "CERN-EP-2024-026"
+        ]
+    ],
     "2789110": [
         "Combination of Measurements of the Top Quark Mass from Data Collected by the ATLAS and CMS Experiments at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>7</mn></math> and 8\u00a0TeV",
         "ATLAS",
@@ -659,5 +738,15 @@
             "ATLAS-TOPQ-2019-13",
             "CERN-EP-2024-020"
         ]
+    ],
+    "2810159": [
+        "Research and development of time resolution and time reference adjustment for CMS improved resistive plate chambers (iRPCs)",
+        "CMS Muon Group",
+        "10.1007/s41605-024-00473-w",
+        "2905918",
+        null,
+        null,
+        null,
+        []
     ]
 }

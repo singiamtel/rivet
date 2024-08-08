@@ -1,1 +1,26 @@
-{}
+{
+    "2768737": [
+        "Observation and differential cross section measurement of neutral current DIS events with an empty hemisphere in the Breit frame",
+        "H1",
+        "10.1140/epjc/s10052-024-13003-1",
+        "2892377",
+        "2403.08982",
+        null,
+        null,
+        [
+            "DESY-24-034"
+        ]
+    ],
+    "2769135": [
+        "Measurement of groomed event shape observables in deep-inelastic electron-proton scattering at HERA",
+        "H1",
+        "10.1140/epjc/s10052-024-12987-0",
+        "2892376",
+        "2403.10134",
+        null,
+        null,
+        [
+            "DESY-24-036"
+        ]
+    ]
+}

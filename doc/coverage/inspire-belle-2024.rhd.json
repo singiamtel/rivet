@@ -192,5 +192,18 @@
             "Belle II Preprint 2024-011",
             "KEK Preprint 2024-4"
         ]
+    ],
+    "2788176": [
+        "Search for two-body <math display=\"inline\"><mi>B</mi></math> meson decays to <math display=\"inline\"><mrow><msup><mrow><mi mathvariant=\"normal\">\u039b</mi></mrow><mrow><mn>0</mn></mrow></msup></mrow></math> and <math display=\"inline\"><mrow><msubsup><mrow><mi mathvariant=\"normal\">\u03a9</mi></mrow><mrow><mi>c</mi></mrow><mrow><mo stretchy=\"false\">(</mo><mo>*</mo><mo stretchy=\"false\">)</mo><mn>0</mn></mrow></msubsup></mrow></math>",
+        "Belle",
+        "10.1103/PhysRevD.110.L031102",
+        null,
+        "2405.11390",
+        null,
+        null,
+        [
+            "Belle Preprint 2024-04",
+            "KEK Preprint 2024-5"
+        ]
     ]
 }

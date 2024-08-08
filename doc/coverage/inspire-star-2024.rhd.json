@@ -49,6 +49,16 @@
         null,
         []
     ],
+    "2725932": [
+        "Observation of Strong Nuclear Suppression in Exclusive <math display=\"inline\"><mrow><mi>J</mi><mo>/</mo><mi>\u03c8</mi></mrow></math> Photoproduction in <math display=\"inline\"><mrow><mi>Au</mi><mo stretchy=\"false\">+</mo><mi>Au</mi></mrow></math> Ultraperipheral Collisions at RHIC",
+        "STAR",
+        "10.1103/PhysRevLett.133.052301",
+        null,
+        "2311.13637",
+        null,
+        null,
+        []
+    ],
     "2735142": [
         "Jet-hadron correlations with respect to the event plane in <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>200</mn></mrow></math> GeV <math><mrow><mi>Au</mi><mo>+</mo><mi>Au</mi></mrow></math> collisions in STAR",
         "STAR",
@@ -65,6 +75,16 @@
         "10.1016/j.physletb.2024.138601",
         null,
         "2309.16622",
+        null,
+        null,
+        []
+    ],
+    "2814012": [
+        "Exclusive <math><mrow><mi>J</mi><mo>/</mo><mi>\u03c8</mi></mrow><mo>,</mo><mo>\u00a0</mo><mrow><mi>\u03c8</mi><mo>(</mo><mn>2</mn><mi>s</mi><mo>)</mo></mrow></math>, and <math><mrow><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>\u2212</mo></msup></mrow></math> pair production in <math><mrow><mi>Au</mi><mo>+</mo><mi>Au</mi></mrow></math> ultraperipheral collisions at the BNL Relativistic Heavy Ion Collider",
+        "STAR",
+        "10.1103/PhysRevC.110.014911",
+        null,
+        "2311.13632",
         null,
         null,
         []

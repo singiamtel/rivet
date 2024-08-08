@@ -207,7 +207,7 @@
         "10.1103/PhysRevLett.132.151901",
         null,
         "2310.17937",
-        null,
+        "ins2714792",
         null,
         []
     ],
@@ -441,6 +441,16 @@
         null,
         []
     ],
+    "2751832": [
+        "Study of <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup><msup><mi>\u03c0</mi><mn>0</mn></msup></math> at <math display=\"inline\"><msqrt><mi>s</mi></msqrt></math> from 2.00 to 3.08\u00a0GeV at BESIII",
+        "BESIII",
+        "10.1103/PhysRevD.110.032005",
+        null,
+        "2401.14711",
+        null,
+        null,
+        []
+    ],
     "2751879": [
         "Observation of Structures in the Processes <math display=\"inline\"><mrow><msup><mrow><mi>e</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>-</mo></mrow></msup><mo stretchy=\"false\">\u2192</mo><mi>\u03c9</mi><msub><mrow><mi>\u03c7</mi></mrow><mrow><mi>c</mi><mn>1</mn></mrow></msub></mrow></math> and <math display=\"inline\"><mi>\u03c9</mi><msub><mi>\u03c7</mi><mrow><mi>c</mi><mn>2</mn></mrow></msub></math>",
         "BESIII",
@@ -457,6 +467,16 @@
         "10.1103/PhysRevLett.133.021901",
         null,
         "2401.17873",
+        null,
+        null,
+        []
+    ],
+    "2755429": [
+        "Study of \u03b7\u2032 \u2192 \u03c0$^{+}$\u03c0$^{\u2212}$l$^{+}$l$^{\u2212}$ decays at BESIII",
+        "BESIII",
+        "10.1007/JHEP07(2024)135",
+        null,
+        "2402.01993",
         null,
         null,
         []
@@ -487,6 +507,16 @@
         "10.1103/PhysRevD.109.072018",
         null,
         "2403.03500",
+        null,
+        null,
+        []
+    ],
+    "2767167": [
+        "Determination of the number of \u03c8(3686) events taken at BESIII*",
+        "BESIII",
+        "10.1088/1674-1137/ad595b",
+        null,
+        "2403.06766",
         null,
         null,
         []
@@ -531,6 +561,18 @@
         null,
         []
     ],
+    "2775015": [
+        "Search for diphoton decays of an axionlike particle in radiative <math display=\"inline\"><mi>J</mi><mo>/</mo><mi>\u03c8</mi></math> decays",
+        "BESIII",
+        "10.1103/PhysRevD.110.L031101",
+        null,
+        "2404.04640",
+        null,
+        null,
+        [
+            "BESIII Analysis Memo - 671"
+        ]
+    ],
     "2776394": [
         "Measurement of e$^{+}$e$^{\u2212}$ \u2192 \u03c9\u03b7\u2032 cross sections at $ \\sqrt{s} $ = 2.000 to 3.080 GeV",
         "BESIII",
@@ -561,12 +603,32 @@
         null,
         []
     ],
+    "2786394": [
+        "Search for the radiative transition <math display=\"inline\"><msub><mi>\u03c7</mi><mrow><mi>c</mi><mn>1</mn></mrow></msub><mo stretchy=\"false\">(</mo><mn>3872</mn><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">\u2192</mo><mi>\u03b3</mi><msub><mi>\u03c8</mi><mn>2</mn></msub><mo stretchy=\"false\">(</mo><mn>3823</mn><mo stretchy=\"false\">)</mo></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.012012",
+        null,
+        "2405.07741",
+        null,
+        null,
+        []
+    ],
     "2787029": [
         "Search for the leptonic decays <math display=\"inline\"><msup><mi>D</mi><mrow><mo>*</mo><mo>+</mo></mrow></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>e</mi><mo>+</mo></msup><msub><mi>\u03bd</mi><mi>e</mi></msub></math> and <math display=\"inline\"><msup><mi>D</mi><mrow><mo>*</mo><mo>+</mo></mrow></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>\u03bc</mi><mo>+</mo></msup><msub><mi>\u03bd</mi><mi>\u03bc</mi></msub></math>",
         "BESIII",
         "10.1103/PhysRevD.110.012003",
         null,
         "2405.09066",
+        null,
+        null,
+        []
+    ],
+    "2802333": [
+        "Measurement of the cross sections of $ {e}^{+}{e}^{-}\\to {K}^{-}{\\overline{\\Xi}}^{+}\\Lambda /{\\Sigma}^0 $ at center-of-mass energies between 3.510 and 4.914 GeV",
+        "BESIII",
+        "10.1007/JHEP07(2024)258",
+        null,
+        "2406.18183",
         null,
         null,
         []

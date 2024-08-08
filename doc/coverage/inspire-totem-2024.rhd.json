@@ -13,6 +13,20 @@
             "CERN-EP-2023-113"
         ]
     ],
+    "2719536": [
+        "Search for high-mass exclusive diphoton production with tagged protons in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "TOTEM",
+        "10.1103/PhysRevD.110.012010",
+        "2879069",
+        "2311.02725",
+        "ins2719536",
+        null,
+        [
+            "CMS-EXO-21-007",
+            "TOTEM-2023-003",
+            "CERN-EP-2023-143"
+        ]
+    ],
     "2752118": [
         "Nonresonant central exclusive production of charged-hadron pairs in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
         "TOTEM",

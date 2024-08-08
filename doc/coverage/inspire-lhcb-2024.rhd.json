@@ -493,6 +493,32 @@
             "CERN-EP-2023-253"
         ]
     ],
+    "2765956": [
+        "First observation of the $ {\\Lambda}_b^0 $\u2192 D$^{+}$D$^{\u2212}$\u039b decay",
+        "LHCb",
+        "10.1007/JHEP07(2024)140",
+        "2890932",
+        "2403.03586",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2023-042",
+            "CERN-EP-2024-041"
+        ]
+    ],
+    "2768765": [
+        "Tracking of charged particles with nanosecond lifetimes at LHCb",
+        "LHCb",
+        "10.1140/epjc/s10052-024-12993-2",
+        "2891799",
+        "2403.09483",
+        null,
+        null,
+        [
+            "CERN-EP-2024-077",
+            "LHCb-DP-2023-004"
+        ]
+    ],
     "2774056": [
         "Search for the $ {B}_s^0 $\u2192 \u03bc$^{+}$\u03bc$^{\u2212}$\u03b3 decay",
         "LHCb",
@@ -504,6 +530,19 @@
         [
             "LHCb-PAPER-2023-045",
             "CERN-EP-2024-065"
+        ]
+    ],
+    "2775803": [
+        "Search for prompt production of pentaquarks in charm hadron final states",
+        "LHCb",
+        "10.1103/PhysRevD.110.032001",
+        "2895139",
+        "2404.07131",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2023-018",
+            "CERN-EP-2024-071"
         ]
     ]
 }

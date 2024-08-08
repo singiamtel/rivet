@@ -1244,19 +1244,19 @@
 2687527 . Search for Scalar Leptoquarks Produced via <math display="inline"><mi>τ</mi></math>-Lepton–Quark Scattering in <math display="inline"><mi>p</mi><mi>p</mi></math> Collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
 2688366 . Search for a third-generation leptoquark coupled to a τ lepton and a b quark through single, pair, and nonresonant production in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2688930 ? Constraints on anomalous Higgs boson couplings to vector bosons and fermions from the production of Higgs bosons using the <math display="inline"><mi>τ</mi><mi>τ</mi></math> final state
-2693765 . Luminosity determination using Z boson production at the CMS experiment
-2699807 . Autoencoder-Based Anomaly Detection System for Online Data Quality Monitoring of the CMS Electromagnetic Calorimeter
-2702153 . Measurement of the τ lepton polarization in Z boson decays in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
-2703254 . Inclusive and differential cross section measurements of $ \textrm{t}\overline{\textrm{t}}\textrm{b}\overline{\textrm{b}} $ production in the lepton+jets channel at $ \sqrt{s} $ = 13 TeV
-2704054 . Production and validation of industrially produced large-sized GEM foils for the Phase-2 upgrade of the CMS muon spectrometer
+2693765 X Luminosity determination using Z boson production at the CMS experiment
+2699807 X Autoencoder-Based Anomaly Detection System for Online Data Quality Monitoring of the CMS Electromagnetic Calorimeter
+2702153 ? Measurement of the τ lepton polarization in Z boson decays in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
+2703254 ! Inclusive and differential cross section measurements of $ \textrm{t}\overline{\textrm{t}}\textrm{b}\overline{\textrm{b}} $ production in the lepton+jets channel at $ \sqrt{s} $ = 13 TeV
+2704054 X Production and validation of industrially produced large-sized GEM foils for the Phase-2 upgrade of the CMS muon spectrometer
 2704121 . Search for direct production of GeV-scale resonances decaying to a pair of muons in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2705044 . Search for supersymmetry in final states with disappearing tracks in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2705674 . Search for a new resonance decaying into two spin-0 bosons in a final state with two photons and two bottom quarks in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
-2706284 . Development of the CMS detector for the CERN LHC Run 3
+2706284 X Development of the CMS detector for the CERN LHC Run 3
 2706677 . Search for stealth supersymmetry in final states with two photons, jets, and low missing transverse momentum in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2706679 . Study of azimuthal anisotropy of ϒ(1S) mesons in pPb collisions at <math altimg="si1.svg"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><msub><mrow/><mrow><mi mathvariant="normal">NN</mi></mrow></msub></mrow></msub></mrow></msqrt></math> = 8.16 TeV
-2709669 . Observation of WW$\gamma$ production and search for H$\gamma$ production in proton-proton collisions at $\sqrt{s}$ = 13 TeV
-2710916 . Muon identification using multivariate techniques in the CMS experiment in proton-proton collisions at sqrt(s) = 13 TeV
+2709669 ? Observation of WW$\gamma$ production and search for H$\gamma$ production in proton-proton collisions at $\sqrt{s}$ = 13 TeV
+2710916 X Muon identification using multivariate techniques in the CMS experiment in proton-proton collisions at sqrt(s) = 13 TeV
 2712865 . Search for dark matter particles in W$^{+}$W$^{−}$ events with transverse momentum imbalance in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2713513 . Search for Narrow Trijet Resonances in Proton-Proton Collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
 2716079 . Search for W′ bosons decaying to a top and a bottom quark in leptonic final states in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
@@ -1265,21 +1265,27 @@
 2724506 . Higher-order moments of the elliptic flow distribution in PbPb collisions at $ \sqrt{s_{\textrm{NN}}} $ = 5.02 TeV
 2730742 . Search for the lepton flavor violating τ → 3μ decay in proton-proton collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn><mspace width="0.2em"/><mtext>TeV</mtext></math>
 2735808 . Search for Long-Lived Heavy Neutral Leptons with Lepton Flavour Conserving or Violating Decays to a Jet and a Charged Lepton
-2736546 . Measurement of simplified template cross sections of the Higgs boson produced in association with <math display="inline"><mi>W</mi></math> or <math display="inline"><mi>Z</mi></math> bosons in the <math display="inline"><mi>H</mi><mo stretchy="false">→</mo><mi>b</mi><mover accent="true"><mi>b</mi><mo stretchy="false">¯</mo></mover></math> decay channel in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2736546 ? Measurement of simplified template cross sections of the Higgs boson produced in association with <math display="inline"><mi>W</mi></math> or <math display="inline"><mi>Z</mi></math> bosons in the <math display="inline"><mi>H</mi><mo stretchy="false">→</mo><mi>b</mi><mover accent="true"><mi>b</mi><mo stretchy="false">¯</mo></mover></math> decay channel in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2736549 . Search for flavor changing neutral current interactions of the top quark in final states with a photon and additional jets in proton-proton collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
-2738533 . Evidence for tWZ production in proton-proton collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn></math> TeV in multilepton final states
-2740536 . Timing Performance of the CMS High Granularity Calorimeter Prototype
-2741216 . Measurement of the primary Lund jet plane density in proton-proton collisions at $ \sqrt{\textrm{s}} $ = 13 TeV
-2747107 . Extracting the speed of sound in quark–gluon plasma with ultrarelativistic lead–lead collisions at the LHC
-2747130 . Test of lepton flavor universality in and decays in proton-proton collisions at
+2738533 ? Evidence for tWZ production in proton-proton collisions at <math altimg="si1.svg"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>13</mn></math> TeV in multilepton final states
+2740536 X Timing Performance of the CMS High Granularity Calorimeter Prototype
+2741216 ! Measurement of the primary Lund jet plane density in proton-proton collisions at $ \sqrt{\textrm{s}} $ = 13 TeV
+2747107 ? Extracting the speed of sound in quark–gluon plasma with ultrarelativistic lead–lead collisions at the LHC
+2747130 ? Test of lepton flavor universality in B$^{\pm}$$\to$ K$^{\pm}\mu^+\mu^-$ and B$^{\pm}$$\to$ K$^{\pm}$e$^+$e$^-$ decays in proton-proton collisions at $\sqrt{s}$ = 13 TeV
 2755433 . Combined search for electroweak production of winos, binos, higgsinos, and sleptons in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2755637 . Search for long-lived particles decaying in the CMS muon detectors in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2758137 . Search for pair production of scalar and vector leptoquarks decaying to muons and bottom quarks in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2759506 . Search for a scalar or pseudoscalar dilepton resonance produced in association with a massive vector boson or top quark-antiquark pair in multilepton events at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2760544 . Search for exotic decays of the Higgs boson to a pair of pseudoscalars in the $\mu\mu$bb and $\tau\tau$bb final states
 2760892 . Search for long-lived particles decaying to final states with a pair of muons in proton-proton collisions at $ \sqrt{s} $ = 13.6 TeV
 2761908 . Search for long-lived particles using displaced vertices and missing transverse momentum in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
-2762139 . Observation of the <math display="inline"><msubsup><mi mathvariant="normal">Ξ</mi><mi>b</mi><mo>-</mo></msubsup><mo stretchy="false">→</mo><mrow><mi>ψ</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mi>S</mi><mo stretchy="false">)</mo></mrow></mrow><msup><mi mathvariant="normal">Ξ</mi><mo>-</mo></msup></math> decay and studies of the <math display="inline"><msub><mi mathvariant="normal">Ξ</mi><mi>b</mi></msub><mo stretchy="false">(</mo><mn>5945</mn><msup><mo stretchy="false">)</mo><mn>0</mn></msup></math> baryon in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2762139 ? Observation of the $\Xi^-_\mathrm{b}$$\to$$\psi$(2S)$\Xi^-$ decay and studies of the $\Xi_\mathrm{b}^{\ast{}0}$ baryon in proton-proton collisions at $\sqrt{s}$ = 13 TeV
 2763130 . Search for long-lived heavy neutral leptons decaying in the CMS muon detectors in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
 2763679 . Search for heavy neutral leptons in final states with electrons, muons, and hadronically decaying tau leptons in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
+2764172 ? Constraints on anomalous Higgs boson couplings from its production and decay using the WW channel in proton–proton collisions at $\sqrt{s} = 13~\text {TeV}$
+2765268 . Search for dark QCD with emerging jets in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2766369 . Search for long-lived heavy neutrinos in the decays of B mesons produced in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
 2769284 . Search for the decay of the Higgs boson to a pair of light pseudoscalar bosons in the final state with four bottom quarks in proton-proton collisions at $ \sqrt{\textrm{s}} $ = 13 TeV
-2769595 . Observation of the <math display="inline"><mi>J</mi><mo>/</mo><mi>ψ</mi><mo stretchy="false">→</mo><msup><mi>μ</mi><mo>+</mo></msup><msup><mi>μ</mi><mo>-</mo></msup><msup><mi>μ</mi><mo>+</mo></msup><msup><mi>μ</mi><mo>-</mo></msup></math> decay in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2769595 ? Observation of the <math display="inline"><mi>J</mi><mo>/</mo><mi>ψ</mi><mo stretchy="false">→</mo><msup><mi>μ</mi><mo>+</mo></msup><msup><mi>μ</mi><mo>-</mo></msup><msup><mi>μ</mi><mo>+</mo></msup><msup><mi>μ</mi><mo>-</mo></msup></math> decay in proton-proton collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>
+2772624 . Search for ${\text {Z}{}{}} {\text {Z}{}{}} $ and ${\text {Z}{}{}} {\text {H}{}{}} $ production in the ${\text {b}{}{}} {\bar{{\text {b}{}{}}}{}{}} {\text {b}{}{}} {\bar{{\text {b}{}{}}}{}{}} $ final state using proton-proton collisions at $\sqrt{s}=13\,\text {Te}\hspace{-.08em}\text {V} $
+2810159 X Research and development of time resolution and time reference adjustment for CMS improved resistive plate chambers (iRPCs)

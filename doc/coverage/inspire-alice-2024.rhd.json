@@ -269,7 +269,7 @@
         "10.1007/JHEP05(2024)184",
         "2872369",
         "2310.10236",
-        null,
+        "ins2711421",
         null,
         [
             "CERN-EP-2023-215"
@@ -309,6 +309,30 @@
         null,
         [
             "CERN-EP-2023-265"
+        ]
+    ],
+    "2739149": [
+        "Investigating the composition of the K<math altimg=\"si1.svg\"><msubsup><mrow/><mrow><mn>0</mn></mrow><mrow><mo>\u204e</mo></mrow></msubsup><mo stretchy=\"false\">(</mo><mn>700</mn><mo stretchy=\"false\">)</mo></math> state with \u03c0\u00b1K<math altimg=\"si10.svg\"><msubsup><mrow/><mrow><mi mathvariant=\"normal\">S</mi></mrow><mrow><mn>0</mn></mrow></msubsup></math> correlations at the LHC",
+        "ALICE",
+        "10.1016/j.physletb.2024.138915",
+        "2883574",
+        "2312.12830",
+        "ins2739149",
+        null,
+        [
+            "CERN-EP-2023-287"
+        ]
+    ],
+    "2750983": [
+        "Studying the interaction between charm and light-flavor mesons",
+        "ALICE",
+        "10.1103/PhysRevD.110.032004",
+        "2886967",
+        "2401.13541",
+        "ins2750983",
+        null,
+        [
+            "CERN-EP-2024-013"
         ]
     ],
     "2753045": [

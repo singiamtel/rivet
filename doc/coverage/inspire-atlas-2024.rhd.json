@@ -443,6 +443,18 @@
             "CERN-EP-2023-271"
         ]
     ],
+    "2728869": [
+        "Search for light long-lived neutral particles from Higgs boson decays via vector-boson-fusion production from pp collisions at $\\sqrt{s}=13$ TeV with the ATLAS detector",
+        "ATLAS",
+        "10.1140/epjc/s10052-024-12902-7",
+        "2882627",
+        "2311.18298",
+        "ins2728869",
+        null,
+        [
+            "CERN-EP-2023-226"
+        ]
+    ],
     "2729396": [
         "Measurement and interpretation of same-sign W boson pair production in association with two jets in pp collisions at $ \\sqrt{s} $ = 13 TeV with the ATLAS detector",
         "ATLAS",
@@ -479,8 +491,20 @@
             "CERN-EP-2023-232"
         ]
     ],
+    "2731621": [
+        "Search for short- and long-lived axion-like particles in $H\\rightarrow a a \\rightarrow 4\\gamma $ decays with the ATLAS experiment at the LHC",
+        "ATLAS",
+        "10.1140/epjc/s10052-024-12979-0",
+        "2883279",
+        "2312.03306",
+        "ins2731621",
+        null,
+        [
+            "CERN-EP-2023-202"
+        ]
+    ],
     "2732688": [
-        "Measurement of jet substructure in boosted $t\\bar{t}$ events with the ATLAS detector using 140 fb$^{-1}$ of 13 TeV $pp$ collisions",
+        "Measurement of jet substructure in boosted <math display=\"inline\"><mi>t</mi><mover accent=\"true\"><mi>t</mi><mo stretchy=\"false\">\u00af</mo></mover></math> events with the ATLAS detector using <math display=\"inline\"><mn>140</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><msup><mi>fb</mi><mrow><mo>-</mo><mn>1</mn></mrow></msup></math> of 13\u00a0TeV <math display=\"inline\"><mi>p</mi><mi>p</mi></math> collisions",
         "ATLAS",
         "10.1103/PhysRevD.109.112016",
         "2883323",
@@ -501,6 +525,18 @@
         null,
         [
             "CERN-EP-2023-261"
+        ]
+    ],
+    "2744513": [
+        "Inclusive and differential cross-section measurements of $ t\\overline{t}Z $ production in pp collisions at $ \\sqrt{s} $ = 13 TeV with the ATLAS detector, including EFT and spin-correlation interpretations",
+        "ATLAS",
+        "10.1007/JHEP07(2024)163",
+        "2883457",
+        "2312.04450",
+        "ins2744513",
+        null,
+        [
+            "CERN-EP-2023-252"
         ]
     ],
     "2745375": [
@@ -635,6 +671,18 @@
             "CERN-EP-2024-004"
         ]
     ],
+    "2758009": [
+        "Statistical Combination of ATLAS Run 2 Searches for Charginos and Neutralinos at the LHC",
+        "ATLAS",
+        "10.1103/PhysRevLett.133.031802",
+        "2889204",
+        "2402.08347",
+        "ins2758009",
+        null,
+        [
+            "CERN-EP-2024-018"
+        ]
+    ],
     "2759101": [
         "Combination of searches for heavy spin-1 resonances using 139 fb$^{\u22121}$ of proton-proton collision data at $ \\sqrt{s} $ = 13 TeV with the ATLAS detector",
         "ATLAS",
@@ -645,6 +693,18 @@
         null,
         [
             "CERN-EP-2024-039"
+        ]
+    ],
+    "2759516": [
+        "A search for top-squark pair production, in final states containing a top quark, a charm quark and missing transverse momentum, using the 139 fb$^{\u22121}$ of pp collision data collected by the ATLAS detector",
+        "ATLAS",
+        "10.1007/JHEP07(2024)250",
+        "2889657",
+        "2402.12137",
+        "ins2759516",
+        null,
+        [
+            "CERN-EP-2023-262"
         ]
     ],
     "2762382": [
@@ -695,6 +755,40 @@
             "CERN-EP-2023-289"
         ]
     ],
+    "2766986": [
+        "Observation of electroweak production of W$^{+}$W$^{\u2212}$ in association with jets in proton-proton collisions at $ \\sqrt{s} $ = 13 TeV with the ATLAS detector",
+        "ATLAS",
+        "10.1007/JHEP07(2024)254",
+        "2891254",
+        "2403.04869",
+        null,
+        null,
+        [
+            "CERN-EP-2024-015"
+        ]
+    ],
+    "2767173": [
+        "Search for charged-lepton-flavor violating <math display=\"inline\"><mi>\u03bc</mi><mi>\u03c4</mi><mi>q</mi><mi>t</mi></math> interactions in top-quark production and decay in <math display=\"inline\"><mi>p</mi><mi>p</mi></math> collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math> with the ATLAS detector at the LHC",
+        "ATLAS",
+        "10.1103/PhysRevD.110.012014",
+        "2891377",
+        "2403.06742",
+        null,
+        null,
+        [
+            "CERN-EP-2024-061"
+        ]
+    ],
+    "2768375": [
+        "Search for low-mass resonances decaying into two jets and produced in association with a photon or a jet at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math> with the ATLAS detector",
+        "ATLAS",
+        "10.1103/PhysRevD.110.032002",
+        "2891720",
+        "2403.08547",
+        null,
+        null,
+        []
+    ],
     "2770237": [
         "Measurement of vector boson production cross sections and their ratios using pp collisions at <math altimg=\"si1.svg\"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>13.6</mn></math> TeV with the ATLAS detector",
         "ATLAS",
@@ -717,6 +811,30 @@
         null,
         [
             "CERN-EP-2024-082"
+        ]
+    ],
+    "2773613": [
+        "Search for flavour-changing neutral-current couplings between the top quark and the Higgs boson in multi-lepton final states in 13\u00a0TeV pp collisions with the ATLAS detector",
+        "ATLAS",
+        "10.1140/epjc/s10052-024-12994-1",
+        "2894371",
+        "2404.02123",
+        "ins2773613",
+        null,
+        [
+            "CERN-EP-2024-070"
+        ]
+    ],
+    "2778961": [
+        "Search for heavy Majorana neutrinos in e\u00b1e\u00b1 and e\u00b1\u03bc\u00b1 final states via WW scattering in pp collisions at <math altimg=\"si1.svg\"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>13</mn></math> TeV with the ATLAS detector",
+        "ATLAS",
+        "10.1016/j.physletb.2024.138865",
+        "2892600",
+        "2403.15016",
+        null,
+        null,
+        [
+            "CERN-EP-2024-083"
         ]
     ],
     "2784423": [
