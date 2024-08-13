@@ -1,0 +1,45 @@
+Name: CMS_2022_I2080534
+Year: 2022
+Summary: EW W+W- production at 13 TeV
+Experiment: CMS
+Collider: LHC
+InspireID: 2080534
+Status: VALIDATED
+Reentrant: true
+Authors:
+  - Mattia Lizzo <mattia.lizzo@cern.ch>
+References:
+  - 'CMS-SMP-21-001'
+  - 'Phys.Lett.B 841 (2023) 137495'
+  - 'arXiv:2205.05711'
+RunInfo: EW production of W+W- pairs in association with two jets, each W boson decaying into l+nu final state.
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 138.0
+Description:
+  'An observation is reported of the electroweak production of a $W^+W^-$ pair in association with two jets, with both $W$ bosons
+  decaying leptonically. The data sample corresponds to an integrated luminosity of 138fb$^{-1}$ of proton-proton collisions at
+  $\sqrt{s} = 13$ TeV, collected by the CMS detector at the CERN LHC. Events are selected by requiring exactly two opposite-sign
+  leptons (electrons or muons) and two jets with large pseudorapidity separation and high dijet invariant mass. Events are
+  categorized based on the flavor of the final-state leptons. A signal is observed with a significance of 5.6 standard deviations
+  (5.2 expected) with respect to the background-only hypothesis. The measured fiducial cross section is 10.2 $\pm$ 2.0 fb and this
+  value is consistent with the standard model prediction of 9.1 $\pm$ 0.6 fb.'
+Keywords: [CMS, W pairs, VBS]
+BibKey: CMS:2022woe
+BibTeX: '@article{CMS:2022woe,
+    author = "Tumasyan, Armen and others",
+    collaboration = "CMS",
+    title = "{Observation of electroweak W+W\ensuremath{-} pair production in association with two jets in proton-proton collisions at s=13TeV}",
+    eprint = "2205.05711",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CMS-SMP-21-001, CERN-EP-2022-038",
+    doi = "10.1016/j.physletb.2022.137495",
+    journal = "Phys. Lett. B",
+    volume = "841",
+    pages = "137495",
+    year = "2023"
+}'
+ReleaseTests:
+- $A LHC-13-WW
+
