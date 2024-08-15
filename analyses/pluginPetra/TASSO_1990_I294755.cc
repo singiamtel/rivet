@@ -27,21 +27,11 @@ namespace Rivet {
       declare(Sphericity(cfs), "Sphericity");
 
       // Histos
-      int offset = 0;
-      switch (int(sqrtS()/GeV)) {
-        case 14:
-          offset = 0;
-          break;
-        case 22:
-          offset = 1;
-          break;
-        case 35:
-          offset = 2;
-          break;
-        case 44:
-          offset = 3;
-          break;
-      }
+      int offset = 0; // default is 14.03 GeV
+      if (isCompatibleWithSqrtS(21.99))      offset = 1;
+      else if (isCompatibleWithSqrtS(35.0))  offset = 2;
+      else if (isCompatibleWithSqrtS(43.7))  offset = 3;
+
       book(_h_xp[0]      , 2, 1, 1+offset);
       book(_h_xp[1]      , 3, 1, 1+offset);
       book(_h_xi         , 4, 1, 1+offset);
