@@ -50,14 +50,14 @@ estimate some of the associated generator-level uncertainties.
 
 Unless you have a local Rivet installation that you can use, consider installing the latest Rivet docker container, e.g.\ using
 \begin{verbatim}
-  docker pull hepstore/rivet:3.1.8
+  docker pull hepstore/rivet:4.0.1
 \end{verbatim}
 In case of problems with disk space, you may wish to consider running
 {\texttt{docker container prune}} and {\texttt{docker system prune}} first.
 You can run the container interactively, giving read/write access to your local directory using
 \begin{footnotesize}
 \begin{verbatim}
-  docker container run -it -v $PWD:$PWD -w $PWD hepstore/rivet:3.1.8 /bin/bash
+  docker container run -it -v $PWD:$PWD -w $PWD hepstore/rivet:4.0.1 /bin/bash
 \end{verbatim}
 \end{footnotesize}
 \noindent The tarball with the HepMC events used for this tutorial can be obtained as follows
@@ -96,7 +96,9 @@ via the associated \texttt{.info} file!
 
 For this tutorial, we have prepared an initial draft routine for you already!
 Let's take a look at the content of the file called \verb|MY_ANALYSIS.cc|,
-printed in full on the next page.
+printed in full on the next page\footnote{The materials for this tutorial
+can also be found in the
+\href{https://gitlab.com/hepcedar/rivet/-/tree/release-4-0-x/doc/tutorials/lhc-basic-tutorial}{Rivet repo}.}.
 
 \clearpage
 \newpage
@@ -113,10 +115,10 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(MY_ANALYSIS);
+    RIVET_DEFAULT_ANALYSIS_CTOR(MY_ANALYSIS);
 
     /// @name Analysis methods
-    //@{
+    /// @{
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -129,10 +131,11 @@ namespace Rivet {
       vector<double> mll_bins = { 66., 74., 78., 82., 84., 86., 88., 89., 90., 91.,
                                   92., 93., 94., 96., 98., 100., 104., 108., 116. };
       book(_h["mll"], "mass_ll", mll_bins);
-      //book(_h["jets_excl"],  "jets_excl",   6, -0.5,  5.5);
-      //book(_h["bjets_excl"], "bjets_excl",  3, -0.5,  2.5);
       //book(_h["HT"],         "HT",          6,  20., 110.);
       //book(_h["pTmiss"],     "pTmiss",     10,   0., 100.);
+
+      //book(_d["jets_excl"],  "jets_excl",  {0, 1, 2, 3, 4, 5});
+      //book(_d["bjets_excl"], "bjets_excl", {0, 1, 2});
     }
 
     /// Perform the per-event analysis
@@ -149,24 +152,24 @@ namespace Rivet {
 
       const double sf = crossSection() / sumOfWeights();
       scale(_h, sf);
+      scale(_d, sf);
 
     }
 
-    //@}
+    /// @}
 
     /// @name Histograms
-    //@{
-
+    /// @{
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<int>> _d;
     size_t _lmode;
-
-    //@}
+    /// @}
 
   };
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(MY_ANALYSIS);
+  RIVET_DECLARE_PLUGIN(MY_ANALYSIS);
 }
 \end{verbatim}
 \end{footnotesize}
@@ -226,7 +229,7 @@ once with \verb|LMODE=MU|. Any \verb|string|-type value is acceptable, unless
 a certain set of allowed values is specified in the \verb|.info| file.
 
 The last part of the \verb|init()| method is used to book histograms.
-The one-dimensional histogram pointer type is called \verb|Histo1DPtr|.
+The one-dimensional continuous histogram pointer type is called \verb|Histo1DPtr|.
 Seeing as a routine can quickly accumulate many dozens or even hundreds
 of histograms, it is often convenient to collect them in a key--value
 map, e.g.\ a \verb|map<string,Histo1DPtr>|. This is the underlying
@@ -251,10 +254,21 @@ for measurements, the syntax shown in the last line can be used to let Rivet
 work out the binning based on the reference data. The integers are referring
 to the integers in the canonical HEPData identifier (e.g.\ \verb|d01-x02-y03|).
 
+Strictly speaking, \verb|Histo1DPtr| is just an alias for the more generic
+\verb|BinnedHistoPtr<double>| where \texttt{double} is the C++ template
+parameter used to specify the edge type along the continuous axis. For histograms
+along discrete axes, such as multiplicty distributions or arbitrary
+\texttt{string} labels, it might be preferable to book \verb|BinnedHistoPtr<int>|
+or \verb|BinnedHistoPtr<string>| instead, respectively.
+This also works in higher (axis-)dimensions by adding more type labels
+as template arguments (e.g.\ \verb|BinnedHistoPtr<double,int>|).
+
 The \verb|analyze(const Event& event)| function is executed once per event.
-Currently, all it does is fill a histogram with the number \verb|1|, which
-isn't all that useful. It will be up to you to make it do something clever
-in the next section, but let's first look at the final part of the skeleton.
+Currently, all it does is fill a histogram with the number
+\verb|1.0|\footnote{The type of this argument should match the axis type specified
+in the histogram constructor.}, which isn't all that useful. It will be up to you
+to make it do something clever in the next section, but let's first look at the
+final part of the skeleton.
 
 In the \verb|finalize()| method, the histogram is then just scaled by a factor
 $\sigma/\sum_i w_i$ where $\sigma$ is the generator cross-section and
@@ -408,6 +422,7 @@ At the end of the exercise you should have produced a single output file
 in the \verb|yoda| format. This format is ASCII-based and can be inspected
 with your favourite text editor. Can you find your filled histogram?
 
+\clearpage
 In fact, you should see loads of them! There will be a version for each of
 the 18 variation weights (including the nominal) in the setup as well
 as a version before and after running the \verb|finalize| method
@@ -421,12 +436,10 @@ plots and arrange them in a little HTML-based booklet
 for you to enjoy them using your favourite browser.
 You can try this out using the command
 \begin{verbatim}
-  rivet-mkhtml --errs --no-weights Rivet.yoda
+  rivet-mkhtml Rivet.yoda
 \end{verbatim}
 This will create a directory \verb|rivet-plots| which contains
 an \verb|index.html| file among other things.
-The \verb|--errs| is to switch on statistical error bars
-and the \verb|--no-weights| flag skips all but the nominal-weight predictions.
 Check it out!
 
 \begin{center}
@@ -454,15 +467,15 @@ the dilepton spectrum constructed from leptons at the so-called \emph{bare level
 after photon radiation, which explains why the electron-pair lineshape deviates from the muon-pair version.
 Luckily, Rivet offers more complex projections that implement experimental strategies, e.g.\ for
 lepton dressing, heavy-flavour tagging or mass-windowing and so on.
-For instance, the \verb|DressedLeptons| projection dresses the bare lepton four-momentum
+For instance, the \verb|LeptonFinder| projection can be used to dress the bare lepton four-momentum
 with all photon four-momenta, within a given cone size (typically 0.1) in order to recover
 energy losses from QED final-state radiation (FSR). Leptons whose four-momenta have been
 corrected in this way are referred to as being reconstructed at the \emph{dressed level}.
-The \verb|DressedLeptons| constructor
+The \verb|LeptonFinder| constructor
 takes the following arguments:
 \begin{small}
 \begin{verbatim}
-  DressedLeptons leps(photon FS, bare-lepton FS, dressing-cone size, optional selection cuts);
+  LeptonFinder leps(bare-lepton FS, photon FS, dressing-cone size, optional selection cuts);
 \end{verbatim}
 \end{small}
 This is the recommended procedure to define leptons at the particle level,
@@ -482,7 +495,6 @@ the one on the right-hand side shows the same spectrum constructed from
 leptons at the dressed level. The compensating effect of the dressing
 procedure should be clearly visible when comparing the two ratios.
 
-\clearpage
 
 \begin{center}
 \includegraphics[width=0.49\textwidth]{figures/mass_ll_bare.pdf}
@@ -504,7 +516,7 @@ Rivet has a \verb|FastJets| projection which uses the \texttt{FastJet}
 program internally. The constructor could look like this:
 \begin{small}
 \begin{verbatim}
-  FastJets jets(input FS, FastJets::KT, 1.0, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+  FastJets jets(input FS, JetAlg::KT, 1.0, JetMuons::NONE, JetInvisibles::NONE);
 \end{verbatim}
 \end{small}
 The first argument is the \verb|FinalState|-based input collection of particles to be clustered.
@@ -512,7 +524,7 @@ The second and third argument specify the clustering algorithm and associated je
 The last two arguments are optional and can be used to reflect experimental strategies for
 how to deal with muons or invisibles particles in the clustering.
 Possible values are \verb|NONE|, \verb|DECAY|, \verb|ALL|; the default being
-to include all muons (\verb|Muons::ALL|) but to exclude all invisible particles (\verb|Invisibles::NONE|).
+to include all muons (\verb|JetMuons::ALL|) but to exclude all invisible particles (\verb|JetInvisibles::NONE|).
 Similar to the \verb|particlesByPt()| method we encountered earlier, the \verb|FastJet| projection
 comes with an equivalent \verb|jetsByPt()| method. It takes an optional \verb|Cuts| argument as well,
 which allows to efficiently select a subset of the jets that pass certain fiducial requirements.
@@ -577,6 +589,8 @@ e.g.\ due to superior resolution or selection efficiency, and so the candidates
 from other object collections (reconstructed with less precise detector components)
 which fall into the same fiducial phase space are simply removed from the final state
 in those object collections.
+
+\clearpage
 
 \begin{exercise}
 Modify the \verb|cc| file to remove all jets that are within $\Delta R < 0.4$
@@ -676,7 +690,7 @@ release to be able to compare against data as well, such as \verb|ATLAS_2017_I15
 the 13\,TeV $Z$+jets measurement~(\href{https://arxiv.org/abs/1702.05725}{arXiv:1702.05725})
 from the ATLAS experiment for instance.
 
-Try plotting this without passing the \verb|--no-weights| flag to the \verb|rivet-mkhtml| command.
+Try plotting this with the \verb|--with-variations| flag to the \verb|rivet-mkhtml| command.
 What you should see is something like the following:
 
 \begin{center}
@@ -684,18 +698,19 @@ What you should see is something like the following:
 \includegraphics[width=0.49\textwidth]{figures/HT_all_weights.pdf}
 \end{center}
 
-The default behaviour is to superimpose the available variation weights in a lighter
+The \verb|--with-variations| flag superimposes the available variation weights in a lighter
 shading along with the central value. This already gives an idea of the spread of
 the variations, but it also highlights that there seem to be some variation weights
 in the setup that correspond to some auxiliary quantity which isn't mean to be used
 for histogramming. These are the two curves which lie at least a factor $\mathcal{O}(10^4)$
-below the central value. There is currently no agreed upon standard for how to label
-weights and so the Rivet default behaviour is to be as inclusive as feasible when
-it comes to weight variations. However, it also provides some functionality to filter
-out a specific subset of the weights. In the following we will look at a few examples
-for how to deal with weights when using the plotting scripts, but in principle similar
-options are also available to (de-)select weights already at run time
-(cf. \verb|rivet --help| for the available flags).
+below the central value. Although there is an in-principle agreement on a standard for
+how to label weights\footnote{See \href{https://arxiv.org/abs/2203.08230}{arXiv:2203.08230}.},
+not all generators have yet implemented this standard for their latest public release.
+While Rivet default behaviour is to be as inclusive as feasible when it comes to weight
+variations, it also provides some functionality to filter out a specific subset of the weights.
+In the following we will look at a few examples for how to deal with weights when using the
+plotting scripts, but in principle similar options are also available to (de-)select weights
+already at run time (cf. \verb|rivet --help| for the available flags).
 
 Let's take a look at what sort of variation weights are included in the setup:
 \begin{verbatim}
@@ -714,7 +729,7 @@ seem to follow the pattern \verb|MUR*_MUF*_PDF261000| at their core where the wi
 \verb|1| or \verb|2|. We can use this observation to construct a regular expression that will select
 all the relevant weights
 \begin{verbatim}
-  rivet-mkhtml --errs Rivet.yoda:"Variations=MUR.*MUF.*PDF261000"
+  rivet-mkhtml --with-variations Rivet.yoda:"Variations=.*MUR.*MUF.*PDF261000.*"
 \end{verbatim}
 This will essentially produce the same plots as above but without the outliers
 at the bottom of the canvas. Let's take it one step further and attempt to combine
@@ -728,7 +743,7 @@ based on the envelope of the scale variations. For instance, we could ask Rivet 
 the envelope for the same regular expression as we had above, like so
 \begin{footnotesize}
 \begin{verbatim}
-  rivet-mkhtml --errs Rivet.yoda":Variations=MUR.*MUF.*PDF261000:BandComponentEnv=MUR.*MUF.*PDF261000"
+  rivet-mkhtml Rivet.yoda":BandComponentEnv=MUR.*MUF.*PDF261000"
 \end{verbatim}
 \end{footnotesize}
 which will produce something like the following:
@@ -904,7 +919,7 @@ which can only be derivef from the event file, then the reentrant histogramming 
 We can easily verify that this gives the same result as our original output file:
 \begin{footnotesize}
 \begin{verbatim}
-rivet-mkhtml --errs --no-weights Rivet.yoda:"Title=single run" merged.yoda.gz:"Title=merged run"
+rivet-mkhtml Rivet.yoda:"Title=single run" merged.yoda.gz:"Title=merged run"
 \end{verbatim}
 \end{footnotesize}
 which should give you a straight horizontal line at unity in the ratio panel.
@@ -933,7 +948,7 @@ option string from the histogram path. We can again easily verify that
 this gives the same answer as our original output file:
 \begin{footnotesize}
 \begin{verbatim}
-rivet-mkhtml --errs --no-weights Rivet.yoda:"Title=both channels" zll.yoda.gz:"Title=stacked channels"
+rivet-mkhtml Rivet.yoda:"Title=both channels" zll.yoda.gz:"Title=stacked channels"
 \end{verbatim}
 \end{footnotesize}
 where \verb|Rivet.yoda| is the output from running the routine without options
