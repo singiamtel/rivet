@@ -26,10 +26,11 @@ namespace Rivet {
       vector<double> mll_bins = { 66., 74., 78., 82., 84., 86., 88., 89., 90., 91.,
                                   92., 93., 94., 96., 98., 100., 104., 108., 116. };
       book(_h["mll"], "mass_ll", mll_bins);
-      //book(_h["jets_excl"],  "jets_excl",   6, -0.5,  5.5);
-      //book(_h["bjets_excl"], "bjets_excl",  3, -0.5,  2.5);
       //book(_h["HT"],         "HT",          6,  20., 110.);
       //book(_h["pTmiss"],     "pTmiss",     10,   0., 100.);
+
+      //book(_d["jets_excl"],  "jets_excl",  {0, 1, 2, 3, 4, 5});
+      //book(_d["bjets_excl"], "bjets_excl", {0, 1, 2});
     }
 
     /// Perform the per-event analysis
@@ -46,6 +47,7 @@ namespace Rivet {
 
       const double sf = crossSection() / sumOfWeights();
       scale(_h, sf);
+      scale(_d, sf);
 
     }
 
@@ -54,6 +56,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<int>> _d;
     size_t _lmode;
     /// @}
 

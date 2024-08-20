@@ -31,7 +31,7 @@ namespace Rivet {
       declare(bare_leps, "bare_leps");
 
       PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      LeptonFinder dressed_leps(photons, bare_leps, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 10*GeV);
+      LeptonFinder dressed_leps(bare_leps, photons, 0.1, Cuts::abseta < 2.5 && Cuts::pT > 10*GeV);
       declare(dressed_leps, "dressed_leptons");
 
       // jet collection
@@ -44,9 +44,9 @@ namespace Rivet {
       //book(_h["mll"], "mass_ll", mll_bins);
       book(_h["mll_bare"],    "mass_ll_bare",    mll_bins);
       book(_h["mll_dressed"], "mass_ll_dressed", mll_bins);
-      book(_h["jets_excl"],   "jets_excl",   6, -0.5,  5.5);
-      book(_h["bjets_excl"],  "bjets_excl",  3, -0.5,  2.5);
       book(_h["HT"],          "HT",          6,  20., 110.);
+      book(_d["jets_excl"],   "jets_excl",  {0, 1, 2, 3, 4, 5});
+      book(_d["bjets_excl"],  "bjets_excl", {0, 1, 2});
     }
 
     /// Perform the per-event analysis
@@ -75,13 +75,13 @@ namespace Rivet {
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 10*GeV && Cuts::absrap < 4.5);
       idiscardIfAnyDeltaRLess(jets, leptons, 0.4);
 
-      _h["jets_excl"]->fill(jets.size());
+      _d["jets_excl"]->fill(jets.size());
 
       const double HT = sum(jets, Kin::pT, 0.0);
       _h["HT"]->fill(HT/GeV);
 
       size_t bTags = count(jets, hasBTag(Cuts::pT > 5*GeV && Cuts::abseta < 2.5));
-      _h["bjets_excl"]->fill(bTags);
+      _d["bjets_excl"]->fill(bTags);
     }
 
     /// Normalise histograms etc., after the run
@@ -89,6 +89,7 @@ namespace Rivet {
 
       const double sf = crossSection() / sumOfWeights();
       scale(_h, sf);
+      scale(_d, sf);
 
     }
 
@@ -97,6 +98,7 @@ namespace Rivet {
     /// @name Histograms
     /// @{
     map<string, Histo1DPtr> _h;
+    map<string, BinnedHistoPtr<int>> _d;
     size_t _lmode;
     /// @}
 
