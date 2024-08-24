@@ -120,7 +120,7 @@ namespace Rivet {
       if (isolated_photons.size() < 2) vetoEvent;
 
       // Select leading pT pair
-      sortByPt(isolated_photons);
+      isortByPt(isolated_photons);
       const FourMomentum y1 = isolated_photons[0];
       const FourMomentum y2 = isolated_photons[1];
 

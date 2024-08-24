@@ -207,17 +207,14 @@ namespace Rivet {
       // Select leptons
       const DressedLeptons& dressedLeptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
       if (dressedLeptons.size() != 2) vetoEvent;
-      sortByPt(dressedLeptons);
 
       const FourMomentum& lepton1 = dressedLeptons[0].momentum();
       const FourMomentum& lepton2 = dressedLeptons[1].momentum();
-      if ((lepton1 + lepton2).mass() < 20*GeV)
-        vetoEvent;
+      if ((lepton1 + lepton2).mass() < 20*GeV)  vetoEvent;
 
       // Select neutrinos
       const Particles neutrinos = apply<InvisibleFinalState>(event, "Neutrinos").particlesByPt();
-      if (neutrinos.size() < 2)
-        vetoEvent;
+      if (neutrinos.size() < 2)  vetoEvent;
 
       // Select bjets
       const FastJets& fjJets = apply<FastJets>(event, "ak4jets");

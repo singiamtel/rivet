@@ -433,7 +433,7 @@ namespace Rivet {
       }
 
       // Start object building from trivial thing - prompt neutrinos
-      sortByPt(neutrinos);
+      isortByPt(neutrinos);
 
       // Proceed to lepton dressing
       FastJets fjLep(FinalState(), JetAlg::ANTIKT, _lepR);
