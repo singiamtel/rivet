@@ -200,13 +200,13 @@ namespace Rivet {
         // Sort the dressed leptons by pt
         if (electrons.size() >= 2) {
           el = true;
-          sortByPt(electrons);
+          isortByPt(electrons);
           for (const DressedLepton& lep : electrons) {
             if (lep.charge() > 0.)  lep_p.push_back(lep);
             if (lep.charge() < 0.)  lep_m.push_back(lep);
           }
         } else {
-          sortByPt(muons);
+          isortByPt(muons);
           for (const DressedLepton& lep : muons) {
             if (lep.charge() > 0.)  lep_p.push_back(lep);
             if (lep.charge() < 0.)  lep_m.push_back(lep);

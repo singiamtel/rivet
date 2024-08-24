@@ -341,8 +341,8 @@ namespace Rivet {
       if (recon_mu.size() + recon_e.size() + recon_tau.size() < 3 || recon_leptons.size() < 2) vetoEvent;
 
       // Sort leptons by decreasing pT
-      sortByPt(recon_leptons);
-      sortByPt(recon_tau);
+      isortByPt(recon_leptons);
+      isortByPt(recon_tau);
 
       // Calculate HTlep, fill lepton pT histograms & store chosen combination of 3 leptons
       double HTlep = 0.;

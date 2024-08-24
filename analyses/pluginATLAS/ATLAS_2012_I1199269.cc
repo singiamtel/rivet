@@ -98,7 +98,7 @@ namespace Rivet {
 
       // Require at least two isolated photons and select leading pT pair
       if (isolated_photons.size() < 2) vetoEvent;
-      sortByPt(isolated_photons);
+      isortByPt(isolated_photons);
       const FourMomentum& y1 = isolated_photons[0].momentum();
       const FourMomentum& y2 = isolated_photons[1].momentum();
 

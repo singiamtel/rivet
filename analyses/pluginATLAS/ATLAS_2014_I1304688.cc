@@ -81,10 +81,10 @@ namespace Rivet {
       }
 
       // Get the selected objects, using the projections.
-      const DressedLeptons dressedelectrons = sortByPt(apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons());
+      const DressedLeptons dressedelectrons = apply<LeptonFinder>(event, "dressedelectrons").dressedLeptons();
       const DressedLeptons vetodressedelectrons = apply<LeptonFinder>(event, "vetodressedelectrons").dressedLeptons();
 
-      const DressedLeptons dressedmuons = sortByPt(apply<LeptonFinder>(event, "dressedmuons").dressedLeptons());
+      const DressedLeptons dressedmuons = apply<LeptonFinder>(event, "dressedmuons").dressedLeptons();
       const DressedLeptons vetodressedmuons = apply<LeptonFinder>(event, "vetodressedmuons").dressedLeptons();
 
       if (dressedelectrons.empty() && dressedmuons.empty())  vetoEvent;

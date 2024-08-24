@@ -81,7 +81,6 @@ namespace Rivet {
       // Select leptons
       const DressedLeptons& dressedLeptons = apply<SpecialLeptonFinder>(event, "LeptonFinder").dressedLeptons();
       if ( dressedLeptons.size() < 2 ) vetoEvent;
-      sortByPt(dressedLeptons);
 
       const FourMomentum& lepton1 = dressedLeptons[0].momentum();
       const FourMomentum& lepton2 = dressedLeptons[1].momentum();
@@ -98,13 +97,6 @@ namespace Rivet {
       const FastJets& fjJets = apply<FastJets>(event, "ak4jets");
       const Jets jets = fjJets.jetsByPt(Cuts::abseta < 2.4 && Cuts::pT > 30*GeV);
       const Jets bJets = select(jets, hasBTag());
-      // Jets bJets;
-      // for ( Jets::const_iterator itjet = jets.begin(); itjet != jets.end() ; ++itjet) {
-      //   if ( itjet->bTagged() ) { // Note: default b tagging algorithm is ghost association (see the Rivet Jet class reference manual)
-      //     bJets.push_back(*itjet);
-      //   }
-      // }
-      // sortByPt(bJets);
       // There should at least two b jets.
       if ( bJets.size() < 2 ) vetoEvent;
 

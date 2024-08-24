@@ -340,8 +340,8 @@ namespace Rivet {
       if (recon_mu.size() + recon_e.size() + recon_tau.size() < 3 || recon_leptons.size() < 2) vetoEvent;
 
       // Sort leptons by decreasing pT
-      sortByPt(recon_leptons);
-      sortByPt(recon_tau);
+      isortByPt(recon_leptons);
+      isortByPt(recon_tau);
 
       // Calculate HTlep, fill lepton pT histograms & store chosen combination of 3 leptons
       double HTlep = 0.;
@@ -387,8 +387,8 @@ namespace Rivet {
         }
       }
 
-      sortByPt(mT_leptons);
-      sortByPt(mTW_leptons);
+      isortByPt(mT_leptons);
+      isortByPt(mTW_leptons);
 
       double mT = sqrt(2*pTmiss.pT()/GeV*mT_leptons[0].pT()/GeV*(1-cos(pTmiss.phi()-mT_leptons[0].phi())));
       double mTW = sqrt(2*pTmiss.pT()/GeV*mTW_leptons[0].pT()/GeV*(1-cos(pTmiss.phi()-mTW_leptons[0].phi())));

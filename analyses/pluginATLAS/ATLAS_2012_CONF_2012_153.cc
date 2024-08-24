@@ -108,7 +108,7 @@ namespace Rivet {
       }
 
       // Sort by transverse momentum
-      sortByPt(cand_e);
+      isortByPt(cand_e);
 
       // resolve jet/lepton ambiguity
       Jets recon_jets;
