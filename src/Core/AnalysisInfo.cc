@@ -127,12 +127,12 @@ namespace Rivet {
       if (doc["Beams"]) {
         const YAML::Node& beams = doc["Beams"];
         vector<PdgIdPair> beam_pairs;
-        if (beams.size() == 2 && beams[0].IsScalar() && beams[0].IsScalar()) {
+        if (beams.size() == 2 && beams[0].IsScalar() && beams[1].IsScalar()) {
           beam_pairs += PID::make_pdgid_pair(beams[0].as<string>(), beams[1].as<string>());
         } else {
           for (size_t i = 0; i < beams.size(); ++i) {
             const YAML::Node& bp = beams[i];
-            if (bp.size() != 2 || !bp[0].IsScalar() || !bp[0].IsScalar())
+            if (bp.size() != 2 || !bp[0].IsScalar() || !bp[1].IsScalar())
               throw InfoError("Beam ID pairs have to be either a 2-tuple or a list of 2-tuples of particle names");
             beam_pairs += PID::make_pdgid_pair(bp[0].as<string>(), bp[1].as<string>());
           }
