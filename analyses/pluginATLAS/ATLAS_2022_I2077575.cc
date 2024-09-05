@@ -36,7 +36,9 @@ namespace Rivet {
 
         //histogram booking
         book(_h["inclusive_particle"], 2, 1, 1);
-        if (_mode)  book(_h["inclusive_parton"], 147, 1, 1);
+        if (_mode) {
+          book(_h["inclusive_parton"], 147, 1, 1);
+        }
         book_hist("t_pt", 	       3);
         book_hist("t_y",  	       4);
         book_hist("t1_pt",         5);
@@ -454,10 +456,14 @@ namespace Rivet {
       void book_hist_2D(const std::string name, const vector<double>& external_bins, unsigned int index) {
         book(_h_multi[name], external_bins);
         book(_h_multi[name+"_norm"], external_bins);
+        if (_mode) {
+          book(_h_multi[name+"_parton"], external_bins);
+          book(_h_multi[name+"_parton_norm"], external_bins);
+        }
         for (size_t i=0; i < _h_multi[name]->numBins(); ++i) {
           book(_h_multi[name]->bin(i+1), index+i, 1, 1);
           book(_h_multi[name+"_norm"]->bin(i+1), index+72+i, 1, 1);
-          if (_mode != 0) {
+          if (_mode) {
             book(_h_multi[name+"_parton"]->bin(i+1), index+145+i, 1, 1);
             book(_h_multi[name+"_parton_norm"]->bin(i+1), index+217+i, 1, 1);
           }
