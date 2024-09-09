@@ -1,0 +1,44 @@
+Name: ATLAS_2023_I2723369
+Year: 2023
+Summary: ZZ production at 13.6 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2723369
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Tairun Zu <tairan.xu@cern.ch>
+References:
+ - arXiv:2311.09715 [hep-ex]
+ - ATLAS-STDM-2022-17
+ - PLB 855 (2024) 138764
+Keywords:
+  - ZZ
+RunInfo: pp -> llll @ 13.6 TeV
+Beams: [p+, p+]
+Energies: [13600]
+Luminosity_fb: 29.0
+Description: |
+  This paper reports cross-section measurements of ZZ production in pp collisions at $\sqrt{s}$ = 13.6 TeV at the Large Hadron Collider.
+  The data were collected by the ATLAS detector in 2022, and correspond to an integrated luminosity of 29 fb$^{-1}$. Events in the
+  $ZZ\to 4\ell$ ($\ell = e,\mu$) final states are selected and used to measure the inclusive and differential cross-sections in a
+  fiducial region defined close to the analysis selections. The inclusive cross-section is further extrapolated to the total phase space
+  with a requirement of 66 $< m_Z <$ 116 GeV for both $Z$ bosons, yielding 16.8 $\pm$ 1.1 pb. The results are well described by the
+  Standard Model predictions.
+BibKey: ATLAS:2023de
+BibTeX: '@article{ATLAS:2023dew,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Measurement of ZZ production cross-sections in the four-lepton final state in pp collisions at s=13.6TeV with the ATLAS experiment}",
+    eprint = "2311.09715",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2023-235",
+    doi = "10.1016/j.physletb.2024.138764",
+    journal = "Phys. Lett. B",
+    volume = "855",
+    pages = "138764",
+    year = "2024"
+}'
+ReleaseTests:
+ - $A pp-13600-llll
