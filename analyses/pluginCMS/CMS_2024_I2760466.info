@@ -1,0 +1,46 @@
+Name: CMS_2024_I2760466
+Year: 2024
+Summary: Measurement of energy correlators inside jets and determination of the strong coupling at 13 TeV
+Experiment: CMS
+Collider: LHC
+InspireID: 2760466
+Status: VALIDATED
+Reentrant: true
+RefMatch: 'y01'
+RefUnmatch: 'd35|d36|d37'
+Authors:
+ - cms-pag-conveners-smp@cern.ch
+ - Yulei Ye <yulei.ye@cern.ch>
+References:
+ - arXiv:2402.13864
+ - CMS-SMP-22-015
+ - Accepted for publication in Phys. Rev. Lett.
+RunInfo: pp to QCD jets at 13 TeV
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 36.3
+Description:
+  'Measurements for the the 2-point and 3-point energy correlator jet substructure
+   observables (EC2 and EC3) using LHC 13 TeV data collected by the CMS experiment.
+   The anti-kT clustering algorithm is used with distance parameter of 0.4 in a
+   phase space region with jet pT from 97 GeV.'
+ValidationInfo:
+  'Generate inclusive QCD process with jet pT from 50 to 2000 GeV.'
+BibKey: CMS:2024mlf
+BibTeX: '@article{CMS:2024mlf,
+    author = "Hayrapetyan, Aram and others",
+    collaboration = "CMS",
+    title = "{Measurement of Energy Correlators inside Jets and Determination of the Strong Coupling \ensuremath{\alpha}S(mZ)}",
+    eprint = "2402.13864",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CMS-SMP-22-015, CERN-EP-2024-010",
+    doi = "10.1103/PhysRevLett.133.071903",
+    journal = "Phys. Rev. Lett.",
+    volume = "133",
+    number = "7",
+    pages = "071903",
+    year = "2024"
+}'
+ReleaseTests:
+ - $A LHC-13-DiJets-boosted
