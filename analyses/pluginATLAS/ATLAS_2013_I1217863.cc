@@ -120,105 +120,105 @@ namespace Rivet {
       if (coneEnergy / leadingPhoton.E() >= 0.5 )  vetoEvent;
 
       if (_doW) {
-	// Retrieve W boson candidate
-	const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
-	if (pmiss.pT() > 35*GeV) {
+        // Retrieve W boson candidate
+        const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+        if (pmiss.pT() > 35*GeV) {
 
-	  const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
-	  const int ifound = closestMatchIndex(ls, pmiss, Kin::mass, 80.4*GeV);
-	  if (ifound >= 0) {
+          const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
+          const int ifound = closestMatchIndex(ls, pmiss, Kin::mass, 80.4*GeV);
+          if (ifound >= 0) {
 
-	    // Retrieve constituent lepton
-	    const Particle& lepton = ls[ifound];
-	    if ( lepton.pT() > 25.0*GeV && lepton.abseta() < 2.47 ) { //< redundant cut
+            // Retrieve constituent lepton
+            const Particle& lepton = ls[ifound];
+            if ( lepton.pT() > 25.0*GeV && lepton.abseta() < 2.47 ) { //< redundant cut
 
-	      // Check photon-lepton overlap
-	      if ( deltaR(leadingPhoton, lepton) > 0.7 ) {
+              // Check photon-lepton overlap
+              if ( deltaR(leadingPhoton, lepton) > 0.7 ) {
 
-		// Count jets
-		const FastJets& jetfs = apply<FastJets>(event, "Jets");
-		Jets jets = jetfs.jets(cmpMomByEt);
-		int goodJets = 0;
-		for (const Jet& j : jets) {
-		  if ( !(j.Et() > 30.0*GeV) )  break;
-		  if ( (j.abseta() < 4.4) &&				\
-		       (deltaR(leadingPhoton, j) > 0.3) &&		\
-		       (deltaR(lepton,        j) > 0.3) )  ++goodJets;
-		}
+                // Count jets
+                const FastJets& jetfs = apply<FastJets>(event, "Jets");
+                Jets jets = jetfs.jets(cmpMomByEt);
+                int goodJets = 0;
+                for (const Jet& j : jets) {
+                  if ( !(j.Et() > 30.0*GeV) )  break;
+                  if ( (j.abseta() < 4.4) &&				\
+                       (deltaR(leadingPhoton, j) > 0.3) &&		\
+                       (deltaR(lepton,        j) > 0.3) )  ++goodJets;
+                }
 
-		double Njets = double(goodJets) + 0.5;
-		double photonEt = leadingPhoton.Et()*GeV;
+                double Njets = double(goodJets) + 0.5;
+                double photonEt = leadingPhoton.Et()*GeV;
 
-		const FourMomentum& lep_gamma = lepton.momentum() + leadingPhoton.momentum();
-		double term1 = sqrt(lep_gamma.mass2() + lep_gamma.pT2()) + pmiss.Et();
-		double term2 = (lep_gamma + pmiss).pT2();
-		double mWgammaT = sqrt(term1 * term1 - term2) * GeV;
+                const FourMomentum& lep_gamma = lepton.momentum() + leadingPhoton.momentum();
+                double term1 = sqrt(lep_gamma.mass2() + lep_gamma.pT2()) + pmiss.Et();
+                double term2 = (lep_gamma + pmiss).pT2();
+                double mWgammaT = sqrt(term1 * term1 - term2) * GeV;
 
-		_hist_EgammaT_inclW->fill(photonEt);
+                _hist_EgammaT_inclW->fill(photonEt);
 
-		_hist_Njet_EgammaT15W->fill(Njets);
+                _hist_Njet_EgammaT15W->fill(Njets);
 
-		if ( !goodJets )  _hist_EgammaT_exclW->fill(photonEt);
+                if ( !goodJets )  _hist_EgammaT_exclW->fill(photonEt);
 
-		if (photonEt > 40.0*GeV) {
-		  _hist_mWgammaT->fill(mWgammaT);
-		  if (photonEt > 60.0*GeV)  _hist_Njet_EgammaT60W->fill(Njets);
-		}
-	      }
-	    }
-	  }
-	}
+                if (photonEt > 40.0*GeV) {
+                  _hist_mWgammaT->fill(mWgammaT);
+                  if (photonEt > 60.0*GeV)  _hist_Njet_EgammaT60W->fill(Njets);
+                }
+              }
+            }
+          }
+        }
       }
 
-      if (_doZ ){
+      if (_doZ ) {
 
-	// Retrieve Z boson candidate
-	const DileptonFinder& zf = apply<DileptonFinder>(event, "ZF");
-	if ( zf.bosons().size() == 1 ) {
-	  const Particle& Zboson  = zf.boson();
-	  if ( (Zboson.mass() > 40.0*GeV) ) {
+        // Retrieve Z boson candidate
+        const DileptonFinder& zf = apply<DileptonFinder>(event, "ZF");
+        if ( zf.bosons().size() == 1 ) {
+          const Particle& Zboson  = zf.boson();
+          if ( (Zboson.mass() > 40.0*GeV) ) {
 
-	    // Check charge of constituent leptons
-	    const Particles& leptons = zf.constituents();
-	    if (leptons.size() == 2 && leptons[0].charge() * leptons[1].charge() < 0.) {
+            // Check charge of constituent leptons
+            const Particles& leptons = zf.constituents();
+            if (leptons.size() == 2 && leptons[0].charge() * leptons[1].charge() < 0.) {
 
-	      bool lpass = true;
-	      // Check photon-lepton overlap
-	      for (const Particle& p : leptons) {
-		if ( !(p.pT() > 25.0*GeV && p.abseta() < 2.47 && deltaR(leadingPhoton, p) > 0.7) )  lpass = false;
-	      }
-	      if ( lpass ) {
+              bool lpass = true;
+              // Check photon-lepton overlap
+              for (const Particle& p : leptons) {
+                if ( !(p.pT() > 25.0*GeV && p.abseta() < 2.47 && deltaR(leadingPhoton, p) > 0.7) )  lpass = false;
+              }
+              if ( lpass ) {
 
-		// Count jets
-		const FastJets& jetfs = apply<FastJets>(event, "Jets");
-		Jets jets = jetfs.jets(cmpMomByEt);
-		int goodJets = 0;
-		for (const Jet& j : jets) {
-		  if ( !(j.Et() > 30.0*GeV) )  break;
-		  if ( (j.abseta() < 4.4) &&		    \
-		       (deltaR(leadingPhoton, j) > 0.3) &&  \
-		       (deltaR(leptons[0],    j) > 0.3) &&		\
-		       (deltaR(leptons[1],    j) > 0.3) )  ++goodJets;
-		}
+                // Count jets
+                const FastJets& jetfs = apply<FastJets>(event, "Jets");
+                Jets jets = jetfs.jets(cmpMomByEt);
+                int goodJets = 0;
+                for (const Jet& j : jets) {
+                  if ( !(j.Et() > 30.0*GeV) )  break;
+                  if ( (j.abseta() < 4.4) &&		    \
+                       (deltaR(leadingPhoton, j) > 0.3) &&  \
+                       (deltaR(leptons[0],    j) > 0.3) &&		\
+                       (deltaR(leptons[1],    j) > 0.3) )  ++goodJets;
+                }
 
-		double Njets = double(goodJets) + 0.5;
-		double photonEt = leadingPhoton.Et()*GeV;
-		double mZgamma = (Zboson.momentum() + leadingPhoton.momentum()).mass() * GeV;
+                double Njets = double(goodJets) + 0.5;
+                double photonEt = leadingPhoton.Et()*GeV;
+                double mZgamma = (Zboson.momentum() + leadingPhoton.momentum()).mass() * GeV;
 
-		_hist_EgammaT_inclZ->fill(photonEt);
+                _hist_EgammaT_inclZ->fill(photonEt);
 
-		_hist_Njet_EgammaT15Z->fill(Njets);
+                _hist_Njet_EgammaT15Z->fill(Njets);
 
-		if ( !goodJets )   _hist_EgammaT_exclZ->fill(photonEt);
+                if ( !goodJets )   _hist_EgammaT_exclZ->fill(photonEt);
 
-		if (photonEt >= 40.0*GeV) {
-		  _hist_mZgamma->fill(mZgamma);
-		  if (photonEt >= 60.0*GeV)  _hist_Njet_EgammaT60Z->fill(Njets);
-		}
-	      }
-	    }
-	  }
-	}
+                if (photonEt >= 40.0*GeV) {
+                  _hist_mZgamma->fill(mZgamma);
+                  if (photonEt >= 60.0*GeV)  _hist_Njet_EgammaT60Z->fill(Njets);
+                }
+              }
+            }
+          }
+        }
       }
 
     }
@@ -232,32 +232,30 @@ namespace Rivet {
       const double sf = xs_fb / sumw;
 
       if (_doZ) {
-	scale(_hist_EgammaT_exclZ, sf);
-	scale(_hist_EgammaT_inclZ, sf);
-	normalize(_hist_Njet_EgammaT15Z);
-	normalize(_hist_Njet_EgammaT60Z);
-	normalize(_hist_mZgamma);
+        scale(_hist_EgammaT_exclZ, sf);
+        scale(_hist_EgammaT_inclZ, sf);
+        normalize(_hist_Njet_EgammaT15Z);
+        normalize(_hist_Njet_EgammaT60Z);
+        normalize(_hist_mZgamma);
       }
 
       if (_doW) {
-	scale(_hist_EgammaT_exclW, sf);
-	scale(_hist_EgammaT_inclW, sf);
-	normalize(_hist_Njet_EgammaT15W);
-	normalize(_hist_Njet_EgammaT60W);
-	normalize(_hist_mWgammaT);
+        scale(_hist_EgammaT_exclW, sf);
+        scale(_hist_EgammaT_inclW, sf);
+        normalize(_hist_Njet_EgammaT15W);
+        normalize(_hist_Njet_EgammaT60W);
+        normalize(_hist_mWgammaT);
       }
 
     }
 
     /// @}
 
-  protected:
+  private:
 
     size_t _mode;
     bool _doW;
     bool _doZ;
-
-  private:
 
     /// @name Histograms
     /// @{

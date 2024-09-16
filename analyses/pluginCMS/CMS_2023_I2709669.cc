@@ -49,8 +49,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       // Retrieve dressed leptons, sorted by pT
-      Particles muons = apply<LeptonFinder>(event, "muons").particles();
-      Particles electrons = apply<LeptonFinder>(event, "electrons").particles();
+      Particles muons = apply<LeptonFinder>(event, "muons").particlesByPt();
+      Particles electrons = apply<LeptonFinder>(event, "electrons").particlesByPt();
 
       Particles photons =
           apply<PromptFinalState>(event, "photons").particles(Cuts::abseta < 2.5 && Cuts::pT > 20 * GeV);

@@ -200,7 +200,7 @@ namespace Rivet {
 
     /// @brief Retrieve the dressed leptons
     ///
-    /// @note Like particles() but with helper functions
+    /// @note Like particles() but with helper functions and sorted by pT
     DressedLeptons dressedLeptons() const {
       DressedLeptons rtn;
       for (const Particle& p : particles(cmpMomByPt))

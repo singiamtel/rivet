@@ -132,10 +132,7 @@ namespace Rivet {
         return;
       }
 
-      DressedLeptons dressedLeptons = apply<LeptonFinder>(
-        event,
-        "LeptonFinder"
-      ).dressedLeptons();
+      DressedLeptons dressedLeptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
 
       // only analyze events with one dressed lepton (muon or electron)
       if (dressedLeptons.size()!=1) {

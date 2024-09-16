@@ -65,7 +65,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Retrieve dressed leptons, sorted by pT
-      Particles leptons = apply<LeptonFinder>(event, "leptons").particles();
+      Particles leptons = apply<LeptonFinder>(event, "leptons").particlesByPt();
 
       // Apply a #leptons requirement
       if (leptons.size() <= 1 || leptons.size() >= 4) return;

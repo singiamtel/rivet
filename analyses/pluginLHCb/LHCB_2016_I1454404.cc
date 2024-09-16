@@ -86,7 +86,7 @@ namespace Rivet {
       }
     }
 
-    
+
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const Cut jetSel = Cuts::eta >= 2.2 && Cuts::eta <= 4.2 && Cuts::pT > 20*GeV;
@@ -119,14 +119,14 @@ namespace Rivet {
 
       // W
       if (_mode == 0 || _mode == 1 || _mode == 2  || _mode == 4) {
-	
-	// Identify the closest-matching l+MET to m == mW
-	const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
-	const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
-	const int ifound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 500*GeV);
+
+        // Identify the closest-matching l+MET to m == mW
+        const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
+        const Particles& mus = apply<LeptonFinder>(event, "Muons").particles();
+        const int ifound = closestMatchIndex(mus, pmiss, Kin::mass, 80.4*GeV, 0*GeV, 500*GeV);
         if (ifound >= 0) {
-	  const Particle& mu = mus[ifound];
-	  
+          const Particle& mu = mus[ifound];
+
           const Jets jetsW = apply<FastJets>(event, "JetsW").jetsByPt(jetSel);
           const Jets cleanedJetsW = discard(jetsW, deltaRLess(mu, 0.5));
 
@@ -155,7 +155,7 @@ namespace Rivet {
       }
     }
 
-    
+
     /// Normalise histograms etc., after the run
     void finalize() {
       const double scalefactor = crossSection()/picobarn/sumOfWeights();
@@ -181,7 +181,7 @@ namespace Rivet {
       }
     }
 
-    
+
   protected:
 
     size_t _mode;
@@ -193,7 +193,7 @@ namespace Rivet {
     Histo1DPtr _h_eta_wpj, _h_eta_wmj, _h_etaj_wpj, _h_etaj_wmj, _h_ptj_wpj, _h_ptj_wmj;
     Histo1DPtr _h_yz_zj, _h_etaj_zj, _h_ptj_zj, _h_dphi_zj;
     /// @}
-    
+
   };
 
 

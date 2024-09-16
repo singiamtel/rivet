@@ -72,7 +72,7 @@ namespace Rivet {
 
     /// Do the analysis
     void analyze(const Event& event) {
-      
+
       // MET cut
       const P4& pmiss = apply<MissingMom>(event, "MET").missingMom();
       if (pmiss.pT() < 25*GeV) vetoEvent;
@@ -81,7 +81,7 @@ namespace Rivet {
       const Particles& ls = apply<LeptonFinder>(event, "Leptons").particles();
       const int ifound = closestMatchIndex(ls, pmiss, Kin::mass, 80.4*GeV, 60*GeV, 100*GeV);
 
-      if (ifound < 0) vetoEvent;      
+      if (ifound < 0) vetoEvent;
       const Particle& l = ls[ifound];
       const FourMomentum& wmom = l.momentum() + pmiss;
 
@@ -159,7 +159,7 @@ namespace Rivet {
 
     /// @}
 
-    
+
     // Check if jet is between tagging jets
     bool isBetween(const Jet &probe, const Jet &boundary1, const Jet &boundary2) {
       double y_p = probe.rapidity();
@@ -179,7 +179,7 @@ namespace Rivet {
       return mapAngleMPiToPi(dphijj)/M_PI;
     }
 
-    
+
   private:
 
     /// @name Parameters for specialised e/mu and dressed/bare subclassing
@@ -196,7 +196,7 @@ namespace Rivet {
 
   };
 
-  
+
   RIVET_DECLARE_PLUGIN(MC_WVBF);
 
 }
