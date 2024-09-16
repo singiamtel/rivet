@@ -7,11 +7,11 @@ InspireID: 316132
 Authors:
  - Peter Richardson <peter.richardson>@durham.ac.uk>
 References:
- - Phys.Rev. D43 (1991) 29-33, 1991 
+ - Phys.Rev. D43 (1991) 29-33, 1991
 RunInfo: continuum e+e- -> hadrons at 29 GeV
 NeedCrossSection: no
 Beams: [e+,e-]
-Energies: 29
+Energies: [29]
 Description:
   'Measurement of the polarization of $D^{*+}$ mesons in $e^+e^-$ collisions at 29 GeV by the TPC experiment'
 Keywords: []

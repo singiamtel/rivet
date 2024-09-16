@@ -22,6 +22,7 @@ from rivet import hepdatautils, version, getAnalysis
 import yoda
 
 parser = argparse.ArgumentParser(usage='Check compatibility of YODA reference data files with HEPData for all Rivet analyses')
+parser.add_argument('-i', '--inspire_map', nargs=1, default=[None], help='json map of the Inspire ID to routine name')
 parser.add_argument('-r', '--rivet_directory', nargs=1, default=['.'], help='directory to search for Rivet .yoda files')
 parser.add_argument('-d', '--hepdata_directory', nargs=1, default=['.'], help='directory to store downloaded HEPData .yoda files')
 parser.add_argument('-o', '--output_directory', nargs=1, default=['.'], help='directory to write yodadiff output')
@@ -30,6 +31,7 @@ parser.add_argument('-u', '--upper_count', nargs=1, type=int, default=[0], help=
 parser.add_argument('-f', '--force_download', action='store_true', help='force re-download of HEPData .yoda files')
 parser.add_argument('--sync', action='store_true', help='perform sync operation')
 args = parser.parse_args()
+inspire_map = args.inspire_map[0]
 rivet_directory = args.rivet_directory[0]
 hepdata_directory = args.hepdata_directory[0]
 output_name = args.output_directory[0]
@@ -38,6 +40,7 @@ upper_count = args.upper_count[0]
 force_download = args.force_download
 perform_sync = args.sync
 print('Arguments specified:')
+print('    inspire_map={}'.format(inspire_map))
 print('    rivet_directory={}'.format(rivet_directory))
 print('    hepdata_directory={}'.format(hepdata_directory))
 print('    output={}'.format(output_name))
@@ -63,7 +66,10 @@ def getRefDataFiles(pattern, path):
     """ Function to return all file names matching 'pattern' by walking the directory tree top-down from 'path'. """
     for root, dirs, files in os.walk(path):
          if 'plugin' in root:
-            return fnmatch.filter(files, pattern)
+            matches = fnmatch.filter(files, pattern)
+            if matches:
+                return matches
+    return []
 
 # Create output directories if they don't already exist.
 if not os.path.exists(hepdata_directory):
@@ -73,9 +79,9 @@ if not os.path.exists(output_name):
 
 # Get mapping between INSPIRE IDs and Rivet analysis names.
 # use local file is available (needed for development of patches at same time as analysis)
-if os.path.isfile("doc/anaindex/analyses.json") :
+if inspire_map and os.path.isfile(inspire_map):
     import json
-    with open("doc/anaindex/analyses.json") as jf:
+    with open(inspire_map) as jf:
         analyses = json.load(jf)
 else :
     analyses_url = 'http://rivet.hepforge.org/analyses'

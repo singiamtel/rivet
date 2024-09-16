@@ -12,7 +12,7 @@ References:
 RunInfo: e+e- -> hadrons at Z pole
 NeedCrossSection: no
 Beams: [e-, e+]
-Energies: 91.2
+Energies: [91.2]
 Description:
   'Measurement of the $\pi^0$ spectrum, and distribution of $p_T^{\text{in}}$ and $p_T^{\text{out}}$ with respect to the sphericity axis by the ALEPH experiment at LEP1.'
 Keywords: []

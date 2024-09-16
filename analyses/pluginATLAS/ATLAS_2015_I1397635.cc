@@ -66,7 +66,7 @@ namespace Rivet {
       jets.useInvisibles();
       declare(jets, "jets");
 
-      book(_histo ,1,1,1);
+      book(_histo, 1, 1, 1);
     }
 
 
@@ -111,7 +111,7 @@ namespace Rivet {
       if (met.pT() <= 20*GeV)  vetoEvent;
 
       // Make the plot
-      _histo->fill(1);
+      _histo->fill();
     }
 
 
@@ -123,7 +123,7 @@ namespace Rivet {
 
   private:
 
-    Histo1DPtr _histo;
+    CounterPtr _histo;
 
   };
 
