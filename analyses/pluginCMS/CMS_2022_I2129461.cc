@@ -44,12 +44,13 @@ namespace Rivet {
       prompt_photons.acceptTauDecays(true);
 
       // Dressed leptons from selected prompt charged leptons and photons
-      Cut lepton_cut = ((Cuts::abseta < 2.4) and 
-                        (Cuts::pT > 20.*GeV) and 
-                        (((Cuts::abspid == PID::ELECTRON) and ((Cuts::abseta < 1.4442) or (Cuts::abseta > 1.566))) or (Cuts::abspid == PID::MUON)));
+      Cut lepton_cut = ((Cuts::abseta < 2.4) &&
+                        (Cuts::pT > 20.*GeV) &&
+                        (((Cuts::abspid == PID::ELECTRON) &&
+                         ((Cuts::abseta < 1.4442) or (Cuts::abseta > 1.566))) ||
+                         (Cuts::abspid == PID::MUON)));
 
-      LeptonFinder dressed_leptons(
-        prompt_photons, prompt_leptons, 0.1, lepton_cut);
+      LeptonFinder dressed_leptons(prompt_photons, prompt_leptons, 0.1, lepton_cut);
       declare(dressed_leptons, "LeptonFinder");
 
       // Jets
@@ -75,10 +76,7 @@ namespace Rivet {
 
     /// @brief Perform the per-event analysis
     void analyze(const Event& event) {
-      DressedLeptons dressedLeptons = apply<LeptonFinder>(
-        event,
-        "LeptonFinder"
-      ).dressedLeptons();
+      DressedLeptons dressedLeptons = apply<LeptonFinder>(event, "LeptonFinder").dressedLeptons();
 
       // Require at least two dressed leptons
       if (dressedLeptons.size() < 2) vetoEvent;

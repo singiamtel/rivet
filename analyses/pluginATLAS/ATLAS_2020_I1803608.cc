@@ -56,8 +56,8 @@ namespace Rivet {
 
       // Access fiducial electrons and muons
       const Particle *l1 = nullptr, *l2 = nullptr;
-      Particles muons = apply<LeptonFinder>(event, "DressedMuons").particles();
-      Particles elecs = apply<LeptonFinder>(event, "DressedElectrons").particles();
+      Particles muons = apply<LeptonFinder>(event, "DressedMuons").particlesByPt();
+      Particles elecs = apply<LeptonFinder>(event, "DressedElectrons").particlesByPt();
 
       // Dilepton selection 1: =2 leptons of the same kind
       if (muons.size()+elecs.size() != 2) vetoEvent;
