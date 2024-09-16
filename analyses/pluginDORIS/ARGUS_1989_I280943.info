@@ -12,7 +12,7 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: no
 Beams: [e-, e+]
-Energies: 10
+Energies: [10]
 Description:
   'Measurements of the scaled momentum spectrum for $D_1(2420)^0$ and $D^*_2(2460)^0$ production in $e^+e^-$ collisions at 10 GeV.
    The decays $D_1(2420)^0, D^*_2(2460)^0 \to D^{*+}\pi^-\to D^0\pi^+\pi^-$ were used and the helicity angle,

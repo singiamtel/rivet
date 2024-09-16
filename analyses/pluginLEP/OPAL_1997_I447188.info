@@ -12,7 +12,7 @@ References:
 RunInfo: e+e- -> hadrons at 91.2 GeV
 NeedCrossSection: no
 Beams: [e-, e+]
-Energies: 91.2
+Energies: [91.2]
 Description:
   'Measurement of the polarization of $\Lambda^0$ baryons at LEP 1. The $\cos\theta$ and $\cos\phi$ distributions are extracted and then the polarization obtained by fitting the resulting distributions.'
 Keywords: []

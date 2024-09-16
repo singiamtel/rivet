@@ -12,7 +12,7 @@ References:
 RunInfo: e+e-> hadrons
 NeedCrossSection: no
 Beams: [e+,e-]
-Energies: 91.2
+Energies: [91.2]
 Description:
 'Forward-Backward Asymmetry for $K^\pm$ and $\Lambda^0$,$\bar\Lambda^0$ at LEP1, the paper goes on to extract the
 strange quark asymmetry but this involves a lot of corrections and therefore only the  $K^\pm$ and $\Lambda^0$,$\bar\Lambda^0$ are included'

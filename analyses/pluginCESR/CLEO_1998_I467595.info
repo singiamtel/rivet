@@ -12,7 +12,7 @@ References:
 RunInfo: continuum e+e- -> hadrons at 10.5 GeV
 NeedCrossSection: no
 Beams: [e+,e-]
-Energies: 10.5
+Energies: [10.5]
 Description:
   'Measurement of the polarization of $D^{*+}$ mesons in $e^+e^-$ collisions at 10.5 GeV by CLEO'
 Keywords: []

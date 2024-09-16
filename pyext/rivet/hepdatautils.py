@@ -97,7 +97,7 @@ def patch_yodaref(yoda_from_hepdata, pattern=None, unpattern=None):
     hepdata_content = yoda.read(yoda_from_hepdata, True, pattern, unpattern)
     addons = [ ]; toRemove = [ ]
     for tag in hepdata_content:
-        print(tag)
+        #print(tag)
         if not tag.startswith("/REF"):  continue
         routine, tableid = tag.rstrip("/")[5:].split('/')
         if hasattr(hdpatch, routine):

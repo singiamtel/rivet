@@ -15,7 +15,7 @@ RunInfo:
 NumEvents: 1000000
 NeedCrossSection: no
 Beams: [p+, p+]
-Energies: 2760
+Energies: [2760]
 PtCuts: 'Charged particles leading jet: $p_T > 1.0$~\GeV, $|\eta| < 2.0$.
          Charged particles:             $p_T > 0.5$~\GeV, $|\eta| < 2.0$'
 Description:

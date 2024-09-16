@@ -12,7 +12,7 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: no
 Beams: [e-, e+]
-Energies: 29
+Energies: [29]
 Description:
   'The polarization of $D^{*\pm}$ mesons produced in $e^+e^-$ collisions is measured for
    a centre-of-mass energy of 29 GeV.'

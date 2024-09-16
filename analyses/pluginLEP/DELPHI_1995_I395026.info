@@ -12,7 +12,7 @@ References:
 RunInfo: e+e- to hadrons
 NeedCrossSection: no
 Beams: [e-, e+]
-Energies: 91.2
+Energies: [91.2]
 Description:
 'Spectrum for the production of $B^*$ mesons at LEP1. The polarization and ratio of vector to pseudoscalar
 $B$ meson production is also measured.'

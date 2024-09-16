@@ -8,11 +8,11 @@ Status: VALIDATED
 Authors:
  - Peter Richardson <peter.richardson@durham.ac.uk>
 References:
- - Phys.Lett. B345 (1995) 589-597, 1995 
+ - Phys.Lett. B345 (1995) 589-597, 1995
 RunInfo: e+e- to hadrons
 NeedCrossSection: no
 Beams: [e-, e+]
-Energies: 91.2
+Energies: [91.2]
 Description:
   'The ratio of vector to pseudoscalar for $B$ meson production at LEP1.'
 Keywords: []

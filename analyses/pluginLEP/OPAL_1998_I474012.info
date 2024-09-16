@@ -12,10 +12,10 @@ References:
 RunInfo: e+e- > hadrons
 NeedCrossSection: no
 Beams: [e-, e+]
-Energies: 91.2
+Energies: [91.2]
 Description:
 'Measurement of the polarization of b-baryons, mainly $\Lambda_b$ at LEP1. The result is obtained by measuring the ratio of
- the neutrino (missing energy) to the charged lepton energy, rather than the more sophisticated fit used in the paper.' 
+ the neutrino (missing energy) to the charged lepton energy, rather than the more sophisticated fit used in the paper.'
 Keywords: []
 BibKey: Abbiendi:1998uz
 BibTeX: '@article{Abbiendi:1998uz,

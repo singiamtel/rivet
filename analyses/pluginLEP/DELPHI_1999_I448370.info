@@ -12,7 +12,7 @@ References:
 RunInfo: e+e-> hadrons
 NeedCrossSection: no
 Beams: [e+,e-]
-Energies: 91.2
+Energies: [91.2]
 Description:
   'The transverse, longitudinal and asymmetric components of the fragmentation
    function are measured from the inclusive charged particles produced in $e^+e^-$
