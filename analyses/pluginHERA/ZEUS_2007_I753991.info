@@ -1,0 +1,44 @@
+Name: ZEUS_2007_I753991
+Year: 2007
+Summary: High E_T Dijet Photoproduction events at HERA
+Experiment: ZEUS
+Collider: HERA
+InspireID: 753991
+Status: VALIDATED 
+Reentrant: true
+Authors:
+ - Bradley Pattengale <pattengalebradley@gmail.com>
+ - Matthew Wing <m.wing@ucl.ac.uk>
+References:
+ - 'Phys.Rev.D 76 (2007) 072011'
+ - 'DOI:10.1103/PhysRevD.76.072011'
+ - 'arXiv:0706.3809'
+RunInfo: Dijet photoproduction in ep collisions. Minimum jet pT = 15 GeV
+Beams: [[p+, e+],[p+, e-]]
+Energies: [[920, 27.5],[920,27.5]]
+Luminosity_fb: 0.0818
+Description:
+  'Cross sections of dijets from photoproduction are shown from collisons between protons and electrons/positrons with beam energies 920GeV
+  and 27.5GeV, respectively. Jet with high transverse energies $E_t^{jet1} > 20GeV,\ E_t^{jet2}>15GeV$ were selected. This data is compared
+  to next-to leading order QCD calculations, and measurements were found that show sensitivity to parton distribution functions of both the
+  proton and photon, and to beyond next-to leading order QCD calculations.'
+ValidationInfo:
+  'Run with Pythia 8.310 using the example main93, jet photoproduction. See arXiv:2408.15842, Fig.5'
+BibKey: ZEUS:2007njl
+BibTeX: '@article{ZEUS:2007njl,
+    author = "Chekanov, S. and others",
+    collaboration = "ZEUS",
+    title = "{High-E(T) dijet photoproduction at HERA}",
+    eprint = "0706.3809",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "DESY-07-092",
+    doi = "10.1103/PhysRevD.76.072011",
+    journal = "Phys. Rev. D",
+    volume = "76",
+    pages = "072011",
+    year = "2007"}'
+ReleaseTests:
+ - $A ep-920-dis-photoprod
+ 
+

@@ -1,0 +1,47 @@
+Name: ZEUS_2007_I756660
+Year: 2007
+Summary: Three- and four-jet final states in photoproduction at HERA
+Experiment: ZEUS
+Collider: HERA
+InspireID: 756660
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Vithyaban Anjelo Narendran <vithyaban.narendran@physics.ox.ac.uk>
+ - Bradley Pattengale <pattengalebradley@gmail.com>
+ - Matthew Wing <m.wing@ucl.ac.uk>
+References:
+ - 'Nucl.Phys.B 792 (2008) 1-47'
+ - 'DOI:10.1016/j.nuclphysb.2007.08.021'
+ - 'arXiv:0707.3749'
+RunInfo: Photoproduction in ep collisions, jets with pT>6 GeV
+Beams: [[p+, e+],[p+, e-],[p+, e+],[p+, e-]]
+Energies: [[920, 27.5],[920, 27.5],[820, 27.5],[820, 27.5]]
+Luminosity_fb: 0.121
+Description:
+  'Three- and four-jet events were measured from photoproduction events at HERA. This data was taken with center of mass energies of $\sqrt{s} = 300$ GeV
+  and $\sqrt{s} = 318$ GeV. The kinematic cuts applied were $E_T^{jet} > 6$ GeV, $|\eta| < 2.4$, $Q^2 < 1$ GeV$^2$, and $0.2 \leq y \leq 0.85$.
+  Cross sections are presented as a function of $M_{nj}$, $x_{\gamma}$, $E_T^{jet}$, $\eta$, $y$, and $cos(\phi_3)$'
+ValidationInfo:
+  'Tested with Pythia 8.310 using the main93 program, jet photopriduction. See arXiv:2408.15842 Fig.6.'
+Keywords: []
+BibKey: ZEUS:2007xwd
+BibTeX: '@article{ZEUS:2007xwd,
+    author = "Chekanov, S. and others",
+    collaboration = "ZEUS",
+    title = "{Three- and four-jet final states in photoproduction at HERA}",
+    eprint = "0707.3749",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "DESY-07-102",
+    doi = "10.1016/j.nuclphysb.2007.08.021",
+    journal = "Nucl. Phys. B",
+    volume = "792",
+    pages = "1--47",
+    year = "2008"
+}
+ReleaseTests:
+ - $A ep-920-dis-photoprod
+
+
+
