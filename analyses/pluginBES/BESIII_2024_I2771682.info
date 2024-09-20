@@ -1,0 +1,41 @@
+Name: BESIII_2024_I2771682
+Year: 2024
+Summary: Cross Section for $e^+e^-\to\eta \psi(2S)$ for energies between 4.288 to 4.951 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2771682
+Status: VALIDATED NOHEPDATA
+Reentrant: false
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 109 (2024) 11, 112004
+ - arXiv:2403.16811 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Energies: [4.288, 4.312, 4.337, 4.377, 4.396, 4.436, 4.612, 4.628, 4.641, 4.661, 4.682, 4.699, 4.74, 4.75, 4.781, 4.843, 4.918, 4.951]
+Options:
+ - ENERGY=*
+Description:
+  'Cross section for  $e^+e^-\to\eta \psi(2S)$ for energies between 4.288 and 4.951 GeV measured by the BESIII collaboration.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024jzt
+BibTeX: '@article{BESIII:2024jzt,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Cross section measurement of e+e-\textrightarrow{}\ensuremath{\eta}\ensuremath{\psi}(2S) and search for e+e-\textrightarrow{}\ensuremath{\eta}X\textasciitilde{}(3872)}",
+    eprint = "2403.16811",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.109.112004",
+    journal = "Phys. Rev. D",
+    volume = "109",
+    number = "11",
+    pages = "112004",
+    year = "2024"
+}'

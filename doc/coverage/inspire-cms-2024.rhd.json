@@ -26,6 +26,19 @@
             "CERN-EP-2022-219"
         ]
     ],
+    "2623117": [
+        "<math altimg=\"si1.svg\"><msubsup><mrow><mi mathvariant=\"normal\">K</mi></mrow><mrow><mi mathvariant=\"normal\">S</mi></mrow><mrow><mn>0</mn></mrow></msubsup></math> and <math altimg=\"si2.svg\"><mi mathvariant=\"normal\">\u039b</mi><mo stretchy=\"false\">(</mo><mover accent=\"true\"><mrow><mi mathvariant=\"normal\">\u039b</mi></mrow><mo>\u203e</mo></mover><mo stretchy=\"false\">)</mo></math> two-particle femtoscopic correlations in PbPb collisions at <math altimg=\"si3.svg\"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi mathvariant=\"normal\">NN</mi></mrow></msub></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>5.02</mn><mspace width=\"0.2em\"/><mtext>TeV</mtext></math>",
+        "CMS",
+        "10.1016/j.physletb.2024.138936",
+        "2846106",
+        "2301.05290",
+        "ins2623117",
+        null,
+        [
+            "CMS-HIN-21-006",
+            "CERN-EP-2022-280"
+        ]
+    ],
     "2648528": [
         "Observation of the <math display=\"inline\"><mrow><mi mathvariant=\"normal\">\u03d2</mi><mo stretchy=\"false\">(</mo><mn>3</mn><mi>S</mi><mo stretchy=\"false\">)</mo></mrow></math> Meson and Suppression of <math display=\"inline\"><mrow><mi mathvariant=\"normal\">\u03d2</mi></mrow></math> States in Pb-Pb Collisions at <math display=\"inline\"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>N</mi><mi>N</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>5.02</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></mrow></math>",
         "CMS",
@@ -88,6 +101,19 @@
         [
             "CMS-HIN-21-011",
             "CERN-EP-2023-094"
+        ]
+    ],
+    "2679254": [
+        "Multiplicity and transverse momentum dependence of charge-balance functions in pPb and PbPb collisions at LHC energies",
+        "CMS",
+        "10.1007/JHEP08(2024)148",
+        "2865599",
+        "2307.11185",
+        "ins2679254",
+        null,
+        [
+            "CMS-HIN-21-017",
+            "CERN-EP-2023-075"
         ]
     ],
     "2679262": [
@@ -569,6 +595,19 @@
             "CERN-EP-2023-304"
         ]
     ],
+    "2760466": [
+        "Measurement of Energy Correlators inside Jets and Determination of the Strong Coupling <math display=\"inline\"><mrow><msub><mrow><mi>\u03b1</mi></mrow><mrow><mi>S</mi></mrow></msub><mo stretchy=\"false\">(</mo><msub><mrow><mi>m</mi></mrow><mrow><mi>Z</mi></mrow></msub><mo stretchy=\"false\">)</mo></mrow></math>",
+        "CMS",
+        "10.1103/PhysRevLett.133.071903",
+        "2889913",
+        "2402.13864",
+        "ins2760466",
+        null,
+        [
+            "CMS-SMP-22-015",
+            "CERN-EP-2024-010"
+        ]
+    ],
     "2760544": [
         "Search for exotic decays of the Higgs boson to a pair of pseudoscalars in the $\\mu\\mu$bb and $\\tau\\tau$bb final states",
         "CMS",
@@ -595,6 +634,19 @@
             "CERN-EP-2024-025"
         ]
     ],
+    "2761406": [
+        "Portable Acceleration of CMS Computing Workflows with Coprocessors as a Service",
+        "CMS",
+        "10.1007/s41781-024-00124-1",
+        "2889990",
+        "2402.15366",
+        null,
+        null,
+        [
+            "CMS-MLG-23-001",
+            "CERN-EP-2023-303"
+        ]
+    ],
     "2761908": [
         "Search for long-lived particles using displaced vertices and missing transverse momentum in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
         "CMS",
@@ -609,7 +661,7 @@
         ]
     ],
     "2762139": [
-        "Observation of the $\\Xi^-_\\mathrm{b}$$\\to$$\\psi$(2S)$\\Xi^-$ decay and studies of the $\\Xi_\\mathrm{b}^{\\ast{}0}$ baryon in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
+        "Observation of the <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039e</mi><mi>b</mi><mo>-</mo></msubsup><mo stretchy=\"false\">\u2192</mo><mrow><mi>\u03c8</mi><mrow><mo stretchy=\"false\">(</mo><mn>2</mn><mi>S</mi><mo stretchy=\"false\">)</mo></mrow></mrow><msup><mi mathvariant=\"normal\">\u039e</mi><mo>-</mo></msup></math> decay and studies of the <math display=\"inline\"><msub><mi mathvariant=\"normal\">\u039e</mi><mi>b</mi></msub><mo stretchy=\"false\">(</mo><mn>5945</mn><msup><mo stretchy=\"false\">)</mo><mn>0</mn></msup></math> baryon in proton-proton collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
         "CMS",
         "10.1103/PhysRevD.110.012002",
         "2890225",
@@ -686,6 +738,19 @@
             "CERN-EP-2024-053"
         ]
     ],
+    "2768920": [
+        "Search for Higgs boson pair production in the $ \\textrm{b}\\overline{\\textrm{b}}{\\textrm{W}}^{+}{\\textrm{W}}^{-} $ decay mode in proton-proton collisions at $ \\sqrt{s} $ = 13 TeV",
+        "CMS",
+        "10.1007/JHEP07(2024)293",
+        "2891713",
+        "2403.09430",
+        "ins2768920",
+        null,
+        [
+            "CMS-HIG-21-005",
+            "CERN-EP-2024-043"
+        ]
+    ],
     "2769284": [
         "Search for the decay of the Higgs boson to a pair of light pseudoscalar bosons in the final state with four bottom quarks in proton-proton collisions at $ \\sqrt{\\textrm{s}} $ = 13 TeV",
         "CMS",
@@ -712,6 +777,19 @@
             "CERN-EP-2024-058"
         ]
     ],
+    "2771515": [
+        "Performance of the CMS electromagnetic calorimeter in pp collisions at \u221a$_{s}$ = 13 TeV",
+        "CMS",
+        "10.1088/1748-0221/19/09/P09004",
+        "2892650",
+        "2403.15518",
+        null,
+        null,
+        [
+            "CMS-EGM-18-002",
+            "CERN-EP-2024-014"
+        ]
+    ],
     "2772624": [
         "Search for ${\\text {Z}{}{}} {\\text {Z}{}{}} $ and ${\\text {Z}{}{}} {\\text {H}{}{}} $ production in the ${\\text {b}{}{}} {\\bar{{\\text {b}{}{}}}{}{}} {\\text {b}{}{}} {\\bar{{\\text {b}{}{}}}{}{}} $ final state using proton-proton collisions at $\\sqrt{s}=13\\,\\text {Te}\\hspace{-.08em}\\text {V} $",
         "CMS",
@@ -723,6 +801,58 @@
         [
             "CMS-HIG-22-011",
             "CERN-EP-2024-026"
+        ]
+    ],
+    "2772744": [
+        "Measurement of the production cross section of a Higgs boson with large transverse momentum in its decays to a pair of \u03c4 leptons in proton-proton collisions at <math altimg=\"si1.svg\"><msqrt><mrow><mi>s</mi></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>13</mn><mspace width=\"0.25em\"/><mtext>TeV</mtext></math>",
+        "CMS",
+        "10.1016/j.physletb.2024.138964",
+        "2894037",
+        "2403.20201",
+        "ins2772744",
+        null,
+        [
+            "CMS-HIG-21-017",
+            "CERN-EP-2023-300"
+        ]
+    ],
+    "2780732": [
+        "Measurement of multijet azimuthal correlations and determination of the strong coupling in proton-proton collisions at $\\sqrt{s}=13\\,\\text {Te}\\hspace{-.08em}\\text {V} $",
+        "CMS",
+        "10.1140/epjc/s10052-024-13116-7",
+        "2896429",
+        "2404.16082",
+        "ins2780732",
+        null,
+        [
+            "CMS-SMP-22-005",
+            "CERN-EP-2024-066"
+        ]
+    ],
+    "2781260": [
+        "Performance of CMS muon reconstruction from proton-proton to heavy ion collisions",
+        "CMS",
+        "10.1088/1748-0221/19/09/P09012",
+        "2896442",
+        "2404.17377",
+        null,
+        null,
+        [
+            "CMS-MUO-21-001",
+            "CERN-EP-2024-040"
+        ]
+    ],
+    "2787227": [
+        "Search for new physics in high-mass diphoton events from proton-proton collisions at $ \\sqrt{\\textrm{s}} $ = 13 TeV",
+        "CMS",
+        "10.1007/JHEP08(2024)215",
+        "2897765",
+        "2405.09320",
+        "ins2787227",
+        null,
+        [
+            "CMS-EXO-22-024",
+            "CERN-EP-2024-109"
         ]
     ],
     "2789110": [
@@ -739,6 +869,19 @@
             "CERN-EP-2024-020"
         ]
     ],
+    "2789708": [
+        "Searches for violation of Lorentz invariance in top quark pair production using dilepton events in 13 TeV proton-proton collisions",
+        "CMS",
+        "10.1016/j.physletb.2024.138979",
+        "2898468",
+        "2405.14757",
+        "ins2789708",
+        null,
+        [
+            "CMS-TOP-22-007",
+            "CERN-EP-2024-085"
+        ]
+    ],
     "2810159": [
         "Research and development of time resolution and time reference adjustment for CMS improved resistive plate chambers (iRPCs)",
         "CMS Muon Group",
@@ -748,5 +891,18 @@
         null,
         null,
         []
+    ],
+    "2825167": [
+        "Observation of $\\gamma\\gamma\\to\\tau\\tau$ in proton-proton collisions and limits on the anomalous electromagnetic moments of the $\\tau$ lepton",
+        "CMS",
+        "10.1088/1361-6633/ad6fcb",
+        "2900036",
+        "2406.03975",
+        "ins2795515",
+        null,
+        [
+            "CMS-SMP-23-005",
+            "CERN-EP-2024-127"
+        ]
     ]
 }

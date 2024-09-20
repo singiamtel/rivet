@@ -189,6 +189,16 @@
         null,
         []
     ],
+    "2708678": [
+        "Search for <math display=\"inline\"><mrow><mi>J</mi><mo>/</mo><mi>\u03c8</mi></mrow></math> weak decays containing a <math display=\"inline\"><mi>D</mi></math> meson",
+        "BESIII",
+        "10.1103/PhysRevD.110.032020",
+        null,
+        "2310.07277",
+        null,
+        null,
+        []
+    ],
     "2714194": [
         "Study of the doubly Cabibbo-suppressed decays <math display=\"inline\"><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><mo stretchy=\"false\">\u2192</mo><msup><mi>K</mi><mo>+</mo></msup><msup><mi>K</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup></math> and <math display=\"inline\"><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><mo stretchy=\"false\">\u2192</mo><msup><mi>K</mi><mo>+</mo></msup><msup><mi>K</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup><msup><mi>\u03c0</mi><mn>0</mn></msup></math>",
         "BESIII",
@@ -481,6 +491,16 @@
         null,
         []
     ],
+    "2755997": [
+        "Precise Measurement of Born Cross Sections for <math display=\"inline\"><mrow><msup><mrow><mi>e</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>-</mo></mrow></msup><mo stretchy=\"false\">\u2192</mo><mi>D</mi><mover accent=\"true\"><mrow><mi>D</mi></mrow><mrow><mo stretchy=\"false\">\u00af</mo></mrow></mover></mrow></math> at <math display=\"inline\"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>3.80</mn><mi>-</mi><mn>4.95</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>GeV</mi></mrow></math>",
+        "BESIII",
+        "10.1103/PhysRevLett.133.081901",
+        null,
+        "2402.03829",
+        null,
+        null,
+        []
+    ],
     "2759502": [
         "Search for the production of deuterons and antideuterons in <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup></math> annihilation at center-of-mass energies between 4.13 and 4.70\u00a0GeV",
         "BESIII",
@@ -551,6 +571,16 @@
         null,
         []
     ],
+    "2773376": [
+        "Search for <math display=\"inline\"><mi>C</mi></math>-even states decaying to <math display=\"inline\"><msubsup><mi>D</mi><mi>s</mi><mo>\u00b1</mo></msubsup><msubsup><mi>D</mi><mi>s</mi><mrow><mo>*</mo><mo>\u2213</mo></mrow></msubsup></math> with masses between 4.08 and <math display=\"inline\"><mn>4.32</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>GeV</mi><mo>/</mo><msup><mi>c</mi><mn>2</mn></msup></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.032017",
+        null,
+        "2404.02033",
+        null,
+        null,
+        []
+    ],
     "2774057": [
         "Evidence of the <math display=\"inline\"><msub><mi>h</mi><mi>c</mi></msub><mo stretchy=\"false\">\u2192</mo><msubsup><mi>K</mi><mi>S</mi><mn>0</mn></msubsup><msup><mi>K</mi><mo>+</mo></msup><msup><mi>\u03c0</mi><mo>-</mo></msup><mo>+</mo><mi mathvariant=\"normal\">c</mi><mo>.</mo><mi mathvariant=\"normal\">c</mi><mo>.</mo></math> decay",
         "BESIII",
@@ -572,6 +602,16 @@
         [
             "BESIII Analysis Memo - 671"
         ]
+    ],
+    "2775422": [
+        "Search for Rare Decays of <math display=\"inline\"><mrow><msubsup><mrow><mi>D</mi></mrow><mrow><mi>s</mi></mrow><mrow><mo>+</mo></mrow></msubsup></mrow></math> to Final States <math display=\"inline\"><mrow><msup><mrow><mi>\u03c0</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math>, <math display=\"inline\"><mrow><msup><mrow><mi>\u03c1</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math>, <math display=\"inline\"><mrow><msup><mrow><mi>\u03c0</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>\u03c0</mi></mrow><mrow><mn>0</mn></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math>, <math display=\"inline\"><mrow><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>\u03c0</mi></mrow><mrow><mn>0</mn></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>e</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math>, and <math display=\"inline\"><msubsup><mi>K</mi><mi>S</mi><mn>0</mn></msubsup><msup><mi>\u03c0</mi><mo>+</mo></msup><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup></math>",
+        "BESIII",
+        "10.1103/PhysRevLett.133.121801",
+        null,
+        "2404.05973",
+        null,
+        null,
+        []
     ],
     "2776394": [
         "Measurement of e$^{+}$e$^{\u2212}$ \u2192 \u03c9\u03b7\u2032 cross sections at $ \\sqrt{s} $ = 2.000 to 3.080 GeV",
@@ -623,12 +663,112 @@
         null,
         []
     ],
+    "2788180": [
+        "Improved measurement of the branching fraction of h$_{c}$ \u2192 \u03b3\u03b7\u2032/\u03b7 and search for h$_{c}$\u2192 \u03b3\u03c0$^{0}$",
+        "BESIII",
+        "10.1007/JHEP08(2024)180",
+        null,
+        "2405.11585",
+        null,
+        null,
+        []
+    ],
+    "2788736": [
+        "Precision measurement of the branching fraction of <math display=\"inline\"><mrow><mi>J</mi><mo>/</mo><mi>\u03c8</mi><mo stretchy=\"false\">\u2192</mo><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>K</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> via <math display=\"inline\"><mrow><mi>\u03c8</mi><mo stretchy=\"false\">(</mo><mn>2</mn><mi>S</mi><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">\u2192</mo><msup><mrow><mi>\u03c0</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>\u03c0</mi></mrow><mrow><mo>-</mo></mrow></msup><mi>J</mi><mo>/</mo><mi>\u03c8</mi></mrow></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.032006",
+        null,
+        "2405.12809",
+        null,
+        null,
+        []
+    ],
+    "2789190": [
+        "Study of the decays <math display=\"inline\"><mrow><msub><mrow><mi>\u03c7</mi></mrow><mrow><mi>c</mi><mi>J</mi></mrow></msub><mo stretchy=\"false\">\u2192</mo><mi mathvariant=\"normal\">\u039b</mi><mover accent=\"true\"><mrow><mi mathvariant=\"normal\">\u039b</mi></mrow><mrow><mo stretchy=\"false\">\u00af</mo></mrow></mover><mi>\u03c9</mi></mrow></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.032022",
+        null,
+        "2405.13315",
+        null,
+        null,
+        []
+    ],
+    "2792993": [
+        "Study of the decays <math display=\"inline\"><msub><mi>\u03c7</mi><mrow><mi>c</mi><mi>J</mi></mrow></msub><mo stretchy=\"false\">\u2192</mo><mi mathvariant=\"normal\">\u039b</mi><mover accent=\"true\"><mi mathvariant=\"normal\">\u039b</mi><mo stretchy=\"false\">\u00af</mo></mover><mi>\u03d5</mi></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.032016",
+        null,
+        "2405.20638",
+        null,
+        null,
+        []
+    ],
+    "2794834": [
+        "Measurements of the branching fractions of the <math display=\"inline\"><mi>P</mi></math>-wave charmonium spin-singlet state <math display=\"inline\"><mrow><msub><mrow><mi>h</mi></mrow><mrow><mi>c</mi></mrow></msub><mo stretchy=\"false\">(</mo><mrow><mmultiscripts><mrow><msub><mrow><mi>P</mi></mrow><mrow><mn>1</mn></mrow></msub></mrow><mprescripts/><none/><mrow><mn>1</mn></mrow></mmultiscripts></mrow><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">\u2192</mo><msup><mrow><mi>h</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>h</mi></mrow><mrow><mo>-</mo></mrow></msup><msup><mrow><mi>\u03c0</mi></mrow><mrow><mn>0</mn></mrow></msup><mo>/</mo><mi>\u03b7</mi></mrow></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.032023",
+        null,
+        "2406.02931",
+        null,
+        null,
+        []
+    ],
+    "2796557": [
+        "Strong and Weak <math display=\"inline\"><mi>C</mi><mi>P</mi></math> Tests in Sequential Decays of Polarized <math display=\"inline\"><msup><mi mathvariant=\"normal\">\u03a3</mi><mn>0</mn></msup></math> Hyperons",
+        "BESIII",
+        "10.1103/PhysRevLett.133.101902",
+        null,
+        "2406.06118",
+        null,
+        null,
+        []
+    ],
+    "2798387": [
+        "Search for <math display=\"inline\"><mi>X</mi><mo stretchy=\"false\">(</mo><mn>1870</mn><mo stretchy=\"false\">)</mo></math> via the decay <math display=\"inline\"><mi>J</mi><mo>/</mo><mi>\u03c8</mi><mo stretchy=\"false\">\u2192</mo><mi>\u03c9</mi><msup><mi>K</mi><mo>+</mo></msup><msup><mi>K</mi><mo>-</mo></msup><mi>\u03b7</mi></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.052005",
+        null,
+        "2406.09475",
+        null,
+        null,
+        []
+    ],
+    "2801214": [
+        "Search for the <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><mi>\u03d5</mi><msub><mi>\u03c7</mi><mrow><mi>c</mi><mn>1</mn></mrow></msub><mo stretchy=\"false\">(</mo><mn>3872</mn><mo stretchy=\"false\">)</mo></math> process at BESIII",
+        "BESIII",
+        "10.1103/PhysRevD.110.L031103",
+        null,
+        "2406.15030",
+        null,
+        null,
+        []
+    ],
+    "2802329": [
+        "Measurements of $ {K}_S^0 $-$ {K}_L^0 $ asymmetries in the decays $ {\\Lambda}_c^{+}\\to p{K}_{L,S}^0 $,$ p{K}_{L,S}^0{\\pi}^{+}{\\pi}^{-} $ and $ p{K}_{L,S}^0{\\pi}^0 $",
+        "BESIII",
+        "10.1007/JHEP09(2024)007",
+        null,
+        "2406.18083",
+        null,
+        null,
+        []
+    ],
     "2802333": [
         "Measurement of the cross sections of $ {e}^{+}{e}^{-}\\to {K}^{-}{\\overline{\\Xi}}^{+}\\Lambda /{\\Sigma}^0 $ at center-of-mass energies between 3.510 and 4.914 GeV",
         "BESIII",
         "10.1007/JHEP07(2024)258",
         null,
         "2406.18183",
+        null,
+        null,
+        []
+    ],
+    "2808200": [
+        "Measurement of the branching fraction of <math display=\"inline\"><msubsup><mi>D</mi><mi>s</mi><mo>+</mo></msubsup><mo stretchy=\"false\">\u2192</mo><msup><mo>\u2113</mo><mo>+</mo></msup><msub><mi>\u03bd</mi><mo>\u2113</mo></msub></math> via <math display=\"inline\"><msup><mi>e</mi><mo>+</mo></msup><msup><mi>e</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msubsup><mi>D</mi><mi>s</mi><mrow><mo>*</mo><mo>+</mo></mrow></msubsup><msubsup><mi>D</mi><mi>s</mi><mrow><mo>*</mo><mo>-</mo></mrow></msubsup></math>",
+        "BESIII",
+        "10.1103/PhysRevD.110.052002",
+        null,
+        "2407.11727",
         null,
         null,
         []

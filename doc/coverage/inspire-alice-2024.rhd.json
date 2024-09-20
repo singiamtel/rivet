@@ -23,6 +23,30 @@
             "CERN-EP-2022-210"
         ]
     ],
+    "2178285": [
+        "The ALICE experiment: a journey through QCD",
+        "ALICE",
+        "10.1140/epjc/s10052-024-12935-y",
+        "2838475",
+        "2211.04384",
+        null,
+        null,
+        [
+            "CERN-EP-2022-227"
+        ]
+    ],
+    "2618175": [
+        "Azimuthal anisotropy of jet particles in p-Pb and Pb-Pb collisions at $ \\sqrt{{\\textrm{s}}_{\\textrm{NN}}} $ = 5.02 TeV",
+        "ALICE",
+        "10.1007/JHEP08(2024)234",
+        "2845063",
+        "2212.12609",
+        "ins2618175",
+        null,
+        [
+            "CERN-EP-2022-290"
+        ]
+    ],
     "2628372": [
         "Measurement of the fraction of jet longitudinal momentum carried by <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi><mo>+</mo></msubsup></math> baryons in <math display=\"inline\"><mi>p</mi><mi>p</mi></math> collisions",
         "ALICE",
@@ -275,6 +299,18 @@
             "CERN-EP-2023-215"
         ]
     ],
+    "2724193": [
+        "Measurement of (anti)alpha production in central Pb\u2013Pb collisions at <math altimg=\"si1.svg\"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi mathvariant=\"normal\">NN</mi></mrow></msub></mrow></msqrt><mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mo><mn>5.02</mn></math> TeV",
+        "ALICE",
+        "10.1016/j.physletb.2024.138943",
+        "2879717",
+        "2311.11758",
+        "ins2724193",
+        null,
+        [
+            "CERN-EP-2023-255"
+        ]
+    ],
     "2724206": [
         "Observation of abnormal suppression of f0(980) production in p\u2013Pb collisions at <math altimg=\"si1.svg\"><msqrt><mrow><msub><mrow><mtext mathvariant=\"italic\">s</mtext></mrow><mrow><mi mathvariant=\"bold\">NN</mi></mrow></msub></mrow></msqrt></math> = 5.02 TeV",
         "ALICE",
@@ -297,6 +333,18 @@
         null,
         [
             "CERN-EP-2023-248"
+        ]
+    ],
+    "2725426": [
+        "Measurements of Chemical Potentials in Pb-Pb Collisions at <math display=\"inline\"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>NN</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>5.02</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></mrow></math>",
+        "ALICE",
+        "10.1103/PhysRevLett.133.092301",
+        "2881039",
+        "2311.13332",
+        "ins2725426",
+        null,
+        [
+            "CERN-EP-2023-268"
         ]
     ],
     "2725922": [
@@ -357,6 +405,18 @@
         null,
         [
             "CERN-EP-2024-084"
+        ]
+    ],
+    "2781241": [
+        "Measurement of <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u03a9</mi><mi mathvariant=\"normal\">c</mi><mn>0</mn></msubsup></math> baryon production and branching-fraction ratio <math display=\"inline\"><mi>BR</mi><mo stretchy=\"false\">(</mo><msubsup><mi mathvariant=\"normal\">\u03a9</mi><mi mathvariant=\"normal\">c</mi><mn>0</mn></msubsup><mo stretchy=\"false\">\u2192</mo><msup><mi mathvariant=\"normal\">\u03a9</mi><mo>-</mo></msup><msup><mi mathvariant=\"normal\">e</mi><mo>+</mo></msup><msub><mi>\u03bd</mi><mi mathvariant=\"normal\">e</mi></msub><mo stretchy=\"false\">)</mo><mo>/</mo><mi>BR</mi><mo stretchy=\"false\">(</mo><msubsup><mi mathvariant=\"normal\">\u03a9</mi><mi mathvariant=\"normal\">c</mi><mn>0</mn></msubsup><mo stretchy=\"false\">\u2192</mo><msup><mi mathvariant=\"normal\">\u03a9</mi><mo>-</mo></msup><msup><mi>\u03c0</mi><mo>+</mo></msup><mo stretchy=\"false\">)</mo></math> in <math display=\"inline\"><mi>p</mi><mi>p</mi></math> collisions at <math display=\"inline\"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "ALICE",
+        "10.1103/PhysRevD.110.032014",
+        "2895988",
+        "2404.17272",
+        "ins2781241",
+        null,
+        [
+            "CERN-EP-2024-112"
         ]
     ]
 }

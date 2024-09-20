@@ -1,0 +1,34 @@
+Name: SND_2024_I2809918
+Year: 2024
+Summary: Cross section for $e^+e^-\to K^0_SK^0_L$ near the $\phi$ resonance 
+Experiment: SND
+Collider: VEPP-2000
+InspireID: 2809918
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2407.15140 [hep-ex]
+RunInfo: e+e- to hadrons with KS0 stable
+Beams: [e+, e-]
+Energies: [1.00028, 1.001908, 1.005986, 1.009596, 1.015736, 1.0168, 1.017914, 1.019078, 1.01994,
+           1.020908, 1.022092, 1.022932, 1.027736, 1.033816, 1.039788, 1.049804, 1.060016, 1.10002]
+Description:
+  ' Cross section for $e^+e^-\to K^0_SK^0_L$ near the $\phi$ resonance '
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: SND:2024kbi
+BibTeX: '@article{SND:2024kbi,
+    author = "Achasov, M. N. and others",
+    collaboration = "SND",
+    title = "{Measurement of the $e^+e^-\to K_SK_L$ cross section near the $\phi(1020)$ resonance with the SND detector}",
+    eprint = "2407.15140",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "7",
+    year = "2024"
+}'

@@ -1,0 +1,36 @@
+Name: BESIII_2024_I2691955
+Year: 2024
+Summary: $\psi(2S)\to K^-\Lambda^0\bar\Xi^++\mathrm{c.c.}$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2691955
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 109 (2024) 7, 072008
+ - arXiv:2308.15206 [hep-ex]
+RunInfo: Any process producing psi(2S) originally e+e-
+Description:
+  'Measurement of the mass distributions in the decay $\psi(2S)\to K^-\Lambda^0\bar\Xi^++\mathrm{c.c.}$. The data were read from the plots in the paper. It is also not clear that any resolution effects have been unfolded.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023mlv
+BibTeX: '@article{BESIII:2023mlv,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Study of excited \ensuremath{\Xi} states in \ensuremath{\psi}(3686)\textrightarrow{}K-\ensuremath{\Lambda}\ensuremath{\Xi}\textasciimacron{}++c.c.}",
+    eprint = "2308.15206",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.109.072008",
+    journal = "Phys. Rev. D",
+    volume = "109",
+    number = "7",
+    pages = "072008",
+    year = "2024"
+}'

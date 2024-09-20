@@ -1,0 +1,32 @@
+Name: BELLE_2024_I2810686
+Year: 2024
+Summary: Differential branching ratio in $B^0\to\pi^-\ell^+\nu_\ell$ and $B^+\to\rho^0\ell^+\nu_\ell$
+Experiment: BELLE
+Collider: KEKB
+InspireID: 2810686
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ -arXiv:2407.17403 [hep-ex]
+RunInfo:
+  Events with B-decays, either particle guns or collisions, originally e+e- at the Upsilon(4S)
+Description:
+  'Differential branching ratio in $B^0\to\pi^-\ell^+\nu_\ell$ and $B^+\to\rho^0\ell^+\nu_\ell$'
+ValidationInfo:
+  'Herwig 7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Belle-II:2024xwh
+BibTeX: '@article{Belle-II:2024xwh,
+    author = "Adachi, I. and others",
+    collaboration = "Belle-II",
+    title = "{Determination of $|V_{ub}|$ from simultaneous measurements of untagged $B^0\to\pi^- \ell^+ \nu_{\ell}$ and $B^+\to\rho^0 \ell^+\nu_{\ell}$ decays}",
+    eprint = "2407.17403",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "7",
+    year = "2024"
+}'

@@ -1,0 +1,35 @@
+Name: BESIII_2024_I2730532
+Year: 2024
+Summary: Mass distributions for $D^0\to2\pi^+2\pi^-$ and $\pi^+\pi^-2\pi^0$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2730532
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:1605.03814'
+RunInfo: Any process producing D0 mesons, originally e+e-
+Description:
+  'Mass distributions for $D^0\to2\pi^+2\pi^-$ and $\pi^+\pi^-2\pi^0$.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023exz
+BibTeX: '@article{BESIII:2023exz,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Amplitude analysis of the decays and *}",
+    eprint = "2312.02524",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1088/1674-1137/ad3d4d",
+    journal = "Chin. Phys. C",
+    volume = "48",
+    number = "8",
+    pages = "083001",
+    year = "2024"
+}'

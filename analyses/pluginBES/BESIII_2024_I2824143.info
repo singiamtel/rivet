@@ -1,0 +1,39 @@
+Name: BESIII_2024_I2824143
+Year: 2024
+Summary: Cross section for $e^+e^-\to\Xi^0\bar{\Xi}^0$ between 3.51 and 4.95 GeV
+Experiment: BESIII
+Collider: <Insert the collider name>
+InspireID: 2824143
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2409.00427 [hep-ex]
+RunInfo: e+e- to hadrons
+Beams: [e+, e-]
+Energies: [3.51000, 3.58100, 3.65000, 3.67000, 3.77300, 3.80765, 3.86741, 3.87131, 3.89624, 4.00762, 4.08545, 4.12848,
+          4.15744, 4.17800, 4.18800, 4.19915, 4.20939, 4.21893, 4.22626, 4.23570, 4.24397, 4.25797, 4.26681, 4.28788,
+          4.30789, 4.31205, 4.33739, 4.35826, 4.37737, 4.39645, 4.41558, 4.43624, 4.46706, 4.57450, 4.59953, 4.61186,
+          4.62800, 4.64091, 4.66124, 4.68192, 4.69822, 4.73970, 4.78054, 4.84307, 4.91802]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to\Xi^0\bar{\Xi}^0$ between 3.51 and 4.95 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024ues
+BibTeX: '@article{BESIII:2024ues,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Measurement of Born cross sections of $e^+e^-\to\Xi^0\bar{\Xi}^0$ and search for charmonium(-like) states at $\sqrt{s}$ = 3.51-4.95 GeV}",
+    eprint = "2409.00427",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "8",
+    year = "2024"
+}'
