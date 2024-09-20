@@ -16,10 +16,10 @@ Energies : [4.236, 4.242, 4.244, 4.258, 4.267, 4.278, 4.308, 4.358, 4.387, 4.416
 Options:
  - ENERGY=*
 Description:
-  'Cross section for  $e^+e^-\to\eta \psi(2S)$ for energies between 4.236 to 4.600 GeV measured by the BESIII collaboration.
+  'Cross section for  $e^+e^-\to\eta \psi(2S)$ for energies between 4.236 and 4.600 GeV measured by the BESIII collaboration.
    Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
-  ''
+  'Herwig7 events'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []

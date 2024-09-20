@@ -1,1 +1,12 @@
-{}
+{
+    "2726602": [
+        "Model-independent extraction of form factors and <math display=\"inline\"><mo stretchy=\"false\">|</mo><msub><mi>V</mi><mrow><mi>c</mi><mi>b</mi></mrow></msub><mo stretchy=\"false\">|</mo></math> in <math display=\"inline\"><mover accent=\"true\"><mi>B</mi><mo stretchy=\"false\">\u00af</mo></mover><mo stretchy=\"false\">\u2192</mo><mi>D</mi><msup><mo>\u2113</mo><mo>-</mo></msup><msub><mover accent=\"true\"><mi>\u03bd</mi><mo stretchy=\"false\">\u00af</mo></mover><mo>\u2113</mo></msub></math> with hadronic tagging at BABAR",
+        "BaBar",
+        "10.1103/PhysRevD.110.032018",
+        null,
+        "2311.15071",
+        null,
+        null,
+        []
+    ]
+}

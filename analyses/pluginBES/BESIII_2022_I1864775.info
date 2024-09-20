@@ -16,7 +16,7 @@ Beams: [e-, e+]
 Energies: [3.1]
 Description:
   'Analysis of the angular distribution of the baryons, and decay products, produced in
-   $e^+e^-\to J/\psi \to \Xi^-\bar{\Xi}^+$.
+   $e^+e^-\to J/\psi \to \Xi^-\bar{\Xi}^+$. The decays $\Xi^-\to\Lambda^0\pi^-$, $\Lambda^0\to p\pi^-$ and their charged conjugates are used.
    Gives information about the decay and is useful for testing correlations in hadron decays. N.B. the data is not corrected and should only be used qualatively.'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag

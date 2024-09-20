@@ -4,7 +4,7 @@ Summary: Cross section for $e^+e^-\to\omega X(3872)$ for $\sqrt{s}=4.661$ to 4.9
 Experiment: BESIII
 Collider: BEPC
 InspireID: 2614215
-Status: VALIDATED NOHEPDATA SINGLEWEIGHT
+Status: VALIDATED NOHEPDATA
 Reentrant: true
 Authors:
  - Peter Richardson <peter.richardson@durham.ac.uk>

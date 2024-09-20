@@ -1,0 +1,34 @@
+Name: SND_2024_I2809929
+Year: 2024
+Summary: Cross section for $e^+e^-\to n\bar{n}$ near threshold
+Experiment: SND
+Collider: VEPP-2000
+InspireID: 2809929
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Your Name <your@email.address>
+References:
+ - arXiv:2407.15308 [hep-ex]
+RunInfo: e+e- to hadrons
+Energies:  [1.8798, 1.8806, 1.882, 1.884, 1.887, 1.890, 1.895, 1.8975, 1.900, 1.902, 1.904, 1.906, 1.908]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to n\bar{n}$ at energies near the threshold.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: Achasov:2024pbk
+BibTeX: '@article{Achasov:2024pbk,
+    author = "Achasov, M. N. and others",
+    title = "{Cross section of the process $e^+e^-\to n\bar{n}$ near the threshold}",
+    eprint = "2407.15308",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "7",
+    year = "2024"
+}'

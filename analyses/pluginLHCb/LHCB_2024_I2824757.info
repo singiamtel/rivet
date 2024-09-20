@@ -1,0 +1,33 @@
+Name: LHCB_2024_I2824757
+Year: 2024
+Summary: Decay parameters in $\Lambda^0_b\to\Lambda_c^+(\pi^-,K^-)$ with $\Lambda_c^+\to \Lambda^0(\pi^+,K^+)$ or  $\Lambda_c^+\to p K^0_S$
+Experiment: LHCB
+Collider: LHC
+InspireID: 2824757
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durhama.ac.uk>
+References:
+ - arXiv:2409.02759 [hep-ex]
+RunInfo: Any source of unpolarized Lambda_b0 baryons, originally pp
+Description:
+'Measurement of the decay parameters in in $\Lambda^0_b\to\Lambda_c^+(\pi^-,K^-)$ with $\Lambda_c^+\to \Lambda^0(\pi^+,K^+)$ or  $\Lambda_c^+\to p K^0_S$, with
+ $\Lambda^0\to p\pi^-$. The data was read from Tables 1 and 2 in the paper.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: LHCb:2024tnq
+BibTeX: '@article{LHCb:2024tnq,
+    author = "Aaij, Roel and others",
+    collaboration = "LHCb",
+    title = "{Measurement of $\it{\Lambda}_\it{b}^0$, $\it{\Lambda}_\it{c}^+$ and $\it{\Lambda}$ decay parameters using $\it{\Lambda}_\it{b}^0 \to \it{\Lambda}_\it{c}^+ h^-$ decays}",
+    eprint = "2409.02759",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "LHCb-PAPER-2024-017, CERN-EP-2024-200",
+    month = "9",
+    year = "2024"
+}'

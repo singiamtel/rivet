@@ -1,0 +1,40 @@
+Name: SND_2024_I2696331
+Year: 2024
+Summary: Cross section for $e^+e^-\to n\bar{n}$ for $\sqrt{s}$ between 1.891 and 2.007 GeV
+Experiment: SND
+Collider: VEPP-2000
+InspireID: 2696331
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Atom.Nucl. 86 (2023) 6, 1165-1172
+ - arXiv:2309.05241 [hep-ex]
+RunInfo: e+e- to hadrons
+Energies:  [1.891, 1.9006, 1.9206, 1.9416, 1.9376, 1.9606, 1.9808, 2.007]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to n\bar{n}$  for $\sqrt{s}$ between 1.891 and 2.007 GeV.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: SND:2023fos
+BibTeX: '@article{SND:2023fos,
+    author = "Achasov, M. N. and others",
+    collaboration = "SND",
+    title = "{Measuring the Neutron Timelike Electromagnetic Form Factor with the SND Detector}",
+    eprint = "2309.05241",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1134/S1063778823060054",
+    journal = "Phys. Atom. Nucl.",
+    volume = "86",
+    number = "6",
+    pages = "1165--1172",
+    year = "2023"
+}'

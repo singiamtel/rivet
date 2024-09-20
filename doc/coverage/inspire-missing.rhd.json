@@ -554,7 +554,7 @@
         ]
     ],
     "169326": [
-        "Hadron Production by e+ e- Annihilation at Center-Of-Mass Energies Between 2.6-GeV and 7.8-GeV. Part 1. Total Cross-Section, Multiplicities and Inclusive Momentum Distributions",
+        "Hadron Production by e+ e- Annihilation at Center-Of-Mass Energies Between 2.6 GeV and 7.8 GeV: Part 1. Total Cross-Section, Multiplicities and Inclusive Momentum Distributions",
         null,
         "10.1103/PhysRevD.26.969",
         null,
@@ -3079,14 +3079,70 @@
             "CERN-EP-2023-076"
         ]
     ],
-    "2755997": [
-        "Precise Measurement of Born Cross Sections for $e^+e^-\\to D\\bar{D}$ and Observation of One Structure between $\\sqrt{s} = 3.80-4.95$ GeV",
-        "BESIII",
+    "2809918": [
+        "Measurement of the $e^+e^-\\to K_SK_L$ cross section near the $\\phi(1020)$ resonance with the SND detector",
+        "SND",
         null,
         null,
-        "2402.03829",
+        "2407.15140",
         null,
         null,
         []
+    ],
+    "2809929": [
+        "Cross section of the process $e^+e^-\\to n\\bar{n}$ near the threshold",
+        null,
+        null,
+        null,
+        "2407.15308",
+        null,
+        null,
+        []
+    ],
+    "2810686": [
+        "Determination of $|V_{ub}|$ from simultaneous measurements of untagged $B^0\\to\\pi^- \\ell^+ \\nu_{\\ell}$ and $B^+\\to\\rho^0 \\ell^+\\nu_{\\ell}$ decays",
+        "Belle-II",
+        null,
+        null,
+        "2407.17403",
+        null,
+        null,
+        [
+            "Belle II Preprint 2024-023",
+            "KEK Preprint 2024-21"
+        ]
+    ],
+    "2819140": [
+        "Improved measurements of $D^0 \\to K^-\\ell^+\\nu_\\ell$ and $D^+ \\to \\bar K^0\\ell^+\\nu_\\ell$",
+        "BESIII",
+        null,
+        null,
+        "2408.09087",
+        null,
+        null,
+        []
+    ],
+    "2824143": [
+        "Measurement of Born cross sections of $e^+e^-\\to\\Xi^0\\bar{\\Xi}^0$ and search for charmonium(-like) states at $\\sqrt{s}$ = 3.51-4.95 GeV",
+        "BESIII",
+        null,
+        null,
+        "2409.00427",
+        null,
+        null,
+        []
+    ],
+    "2824757": [
+        "Measurement of ${\\Lambda}_{b}^0$, ${\\Lambda}_{c}^+$ and ${\\Lambda}$ decay parameters using ${\\Lambda}_{b}^0 \\to {\\Lambda}_{c}^+ h^-$ decays",
+        "LHCb",
+        null,
+        "2909151",
+        "2409.02759",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2024-017",
+            "CERN-EP-2024-200"
+        ]
     ]
 }

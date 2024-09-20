@@ -116,6 +116,19 @@
             "CERN-EP-2023-141"
         ]
     ],
+    "2691201": [
+        "Study of b-hadron decays to $ {\\Lambda}_c^{+}{h}^{-}{h}^{\\prime -} $ final states",
+        "LHCb",
+        "10.1007/JHEP08(2024)132",
+        "2898274",
+        "2405.12688",
+        null,
+        null,
+        [
+            "CERN-EP-2024-116",
+            "LHCb-PAPER-2024-013"
+        ]
+    ],
     "2696997": [
         "Measurement of the CKM angle $\\gamma $ in the ${{{B} ^0} \\rightarrow {D} {{K} ^{*0}}}$ channel using self-conjugate ${D} \\rightarrow {{K} ^0_{\\textrm{S}}} h^+ h^-$ decays",
         "LHCb",
@@ -257,6 +270,19 @@
         [
             "LHCb-DP-2023-001",
             "CERN-EP-2023-246"
+        ]
+    ],
+    "2722693": [
+        "Observation of strangeness enhancement with charmed mesons in high-multiplicity <math display=\"inline\"><mi>p</mi><mi>Pb</mi></math> collisions at <math display=\"inline\"><msqrt><msub><mi>s</mi><mrow><mi>NN</mi></mrow></msub></msqrt><mo>=</mo><mn>8.16</mn><mtext>\u2009</mtext><mtext>\u2009</mtext><mi>TeV</mi></math>",
+        "LHCb",
+        "10.1103/PhysRevD.110.L031105",
+        "2880094",
+        "2311.08490",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2023-021",
+            "CERN-EP-2023-236"
         ]
     ],
     "2723367": [
@@ -543,6 +569,71 @@
         [
             "LHCb-PAPER-2023-018",
             "CERN-EP-2024-071"
+        ]
+    ],
+    "2782247": [
+        "First observation of $\\Lambda_{b}^{0} \\rightarrow \\Sigma_c^{(*)++} D^{(*)-} K^{-}$ decays",
+        "LHCb",
+        "10.1103/PhysRevD.110.L031104",
+        "2896781",
+        "2404.19510",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2023-044",
+            "CERN-EP-2024-098"
+        ]
+    ],
+    "2782517": [
+        "Amplitude analysis and branching fraction measurement of $ {B}^{+}\\to {D}^{\\ast -}{D}_s^{+}{\\pi}^{+} $ decays",
+        "LHCb",
+        "10.1007/JHEP08(2024)165",
+        "2896748",
+        "2405.00098",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2024-001",
+            "CERN-EP-2024-110"
+        ]
+    ],
+    "2785424": [
+        "Search for Time-Dependent <math display=\"inline\"><mi>C</mi><mi>P</mi></math> Violation in <math display=\"inline\"><mrow><msup><mrow><mi>D</mi></mrow><mrow><mn>0</mn></mrow></msup><mo stretchy=\"false\">\u2192</mo><msup><mrow><mi>\u03c0</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>\u03c0</mi></mrow><mrow><mo>-</mo></mrow></msup><msup><mrow><mi>\u03c0</mi></mrow><mrow><mn>0</mn></mrow></msup></mrow></math> Decays",
+        "LHCb",
+        "10.1103/PhysRevLett.133.101803",
+        "2897372",
+        "2405.06556",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2024-003",
+            "CERN-EP-2024-111"
+        ]
+    ],
+    "2794646": [
+        "Amplitude analysis of the radiative decay $ {\\textrm{B}}_{\\textrm{s}}^0 $\u2192 K$^{+}$K$^{\u2212}$\u03b3",
+        "LHCb",
+        "10.1007/JHEP08(2024)093",
+        "2899442",
+        "2406.00235",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2024-002",
+            "CERN-EP-2024-115"
+        ]
+    ],
+    "2795535": [
+        "Comprehensive analysis of local and nonlocal amplitudes in the B$^{0}$\u2192 K$^{*0}$\u03bc$^{+}$\u03bc$^{\u2212}$ decay",
+        "LHCb",
+        "10.1007/JHEP09(2024)026",
+        "2900135",
+        "2405.17347",
+        null,
+        null,
+        [
+            "LHCb-PAPER-2024-011",
+            "CERN-EP-2024-122"
         ]
     ]
 }

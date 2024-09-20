@@ -1,0 +1,31 @@
+Name: BESIII_2024_I2819140
+Year: 2024
+Summary: Exclusive $D^0\to K^-\ell^+\nu_\ell$ and $D^+\to \bar{K}^0\ell^+\nu_\ell$ decays
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2819140
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - arXiv:2408.09087 [hep-ex]
+RunInfo:  Events with D-decays, either particle guns or collisions.
+Description:
+  'Differential decay rates for semi-leptonic $D^0\to K^-\ell^+\nu_\ell$ and $D^+\to \bar{K}^0\ell^+\nu_\ell$ decays'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024slx
+BibTeX: '@article{BESIII:2024slx,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Improved measurements of $D^0 \to K^-\ell^+\nu_\ell$ and $D^+ \to \bar K^0\ell^+\nu_\ell$}",
+    eprint = "2408.09087",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    month = "8",
+    year = "2024"
+}'

@@ -1,1 +1,26 @@
-{}
+{
+    "2741856": [
+        "Final COMPASS Results on the Transverse-Spin-Dependent Azimuthal Asymmetries in the Pion-Induced Drell-Yan Process",
+        "COMPASS",
+        "10.1103/PhysRevLett.133.071902",
+        "2884859",
+        "2312.17379",
+        null,
+        null,
+        [
+            "CERN-EP-2023-307"
+        ]
+    ],
+    "2742410": [
+        "High-Statistics Measurement of Collins and Sivers Asymmetries for Transversely Polarized Deuterons",
+        "COMPASS",
+        "10.1103/PhysRevLett.133.101903",
+        "2884865",
+        "2401.00309",
+        null,
+        null,
+        [
+            "CERN-EP-2023-308"
+        ]
+    ]
+}

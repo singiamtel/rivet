@@ -387,6 +387,7 @@
 2165935 . Measurements of azimuthal anisotropies at forward and backward rapidity with muons in high-multiplicity p–Pb collisions at <math altimg="si1.svg"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi mathvariant="normal">NN</mi></mrow></msub></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>8.16</mn></math> TeV
 2165947 . <math display="inline"><mrow><mi>ψ</mi><mo stretchy="false">(</mo><mn>2</mn><mi>S</mi><mo stretchy="false">)</mo></mrow></math> Suppression in Pb-Pb Collisions at the LHC
 2175449 ! Jet-like correlations with respect to K$^{0}_{\rm S}$ and $\Lambda$ ($\bar{\Lambda}$) in pp and Pb-Pb collisions at $\mathbf{\it\sqrt{s_\mathrm{NN}}}$ = 5.02 TeV
+2178285 . The ALICE experiment: a journey through QCD
 2182725 . Production of ${\rm K}^{0}_{\rm{S}}$, $\Lambda$ ($\bar{\Lambda}$), $\Xi^{\pm}$ and $\Omega^{\pm}$ in jets and in the underlying event in pp and p$-$Pb collisions
 2182727 ! Measurement of the angle between jet axes in pp collisions at $ \sqrt{s} $ = 5.02 TeV
 2182733 . Two-particle transverse momentum correlations in pp and p-Pb collisions at LHC energies
@@ -394,6 +395,7 @@
 2593303 . J/$\psi$ production at midrapidity in p$-$Pb collisions at $\sqrt{s_{\rm NN}} = 8.16$ TeV
 2601279 . Pseudorapidity densities of charged particles with transverse momentum thresholds in pp collisions at <math display="inline"><mrow><msqrt><mrow><mi>s</mi></mrow></msqrt><mo>=</mo><mn>5.02</mn></mrow></math> and 13 TeV
 2601281 . Multiplicity dependence of charged-particle production in pp, p-Pb, Xe-Xe and Pb-Pb collisions at the LHC
+2618175 . Azimuthal anisotropy of jet particles in p-Pb and Pb-Pb collisions at $ \sqrt{{\textrm{s}}_{\textrm{NN}}} $ = 5.02 TeV
 2626034 . Production of pions, kaons, and protons as a function of the relative transverse activity classifier in pp collisions at $ \sqrt{s} $ = 13 TeV
 2628372 . Measurement of the fraction of jet longitudinal momentum carried by <math display="inline"><msubsup><mi mathvariant="normal">Λ</mi><mi>c</mi><mo>+</mo></msubsup></math> baryons in <math display="inline"><mi>p</mi><mi>p</mi></math> collisions
 2628969 . Symmetry plane correlations in Pb-Pb collisions at $\sqrt{s_{\rm NN}} = 2.76$TeV
@@ -447,10 +449,13 @@
 2709103 . Charged-particle production as a function of the relative transverse activity classifier in pp, p–Pb, and Pb–Pb collisions at the LHC
 2709104 . Femtoscopic correlations of identical charged pions and kaons in <math><mrow><mi>p</mi><mi>p</mi></mrow></math> collisions at <math><mrow><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn></mrow></math> TeV with event-shape selection
 2711421 . Light-flavor particle production in high-multiplicity pp collisions at $ \sqrt{\textrm{s}} $= 13 TeV as a function of transverse spherocity
+2724193 . Measurement of (anti)alpha production in central Pb–Pb collisions at <math altimg="si1.svg"><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi mathvariant="normal">NN</mi></mrow></msub></mrow></msqrt><mo linebreak="goodbreak" linebreakstyle="after">=</mo><mn>5.02</mn></math> TeV
 2724206 . Observation of abnormal suppression of f0(980) production in p–Pb collisions at <math altimg="si1.svg"><msqrt><mrow><msub><mrow><mtext mathvariant="italic">s</mtext></mrow><mrow><mi mathvariant="bold">NN</mi></mrow></msub></mrow></msqrt></math> = 5.02 TeV
 2724212 . Photoproduction of <math display="inline"><mrow><msup><mrow><mi>K</mi></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mi>K</mi></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> Pairs in Ultraperipheral Collisions
+2725426 . Measurements of Chemical Potentials in Pb-Pb Collisions at <math display="inline"><mrow><msqrt><mrow><msub><mrow><mi>s</mi></mrow><mrow><mi>NN</mi></mrow></msub></mrow></msqrt><mo>=</mo><mn>5.02</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></mrow></math>
 2725922 . Emergence of Long-Range Angular Correlations in Low-Multiplicity Proton-Proton Collisions
 2739149 . Investigating the composition of the K<math altimg="si1.svg"><msubsup><mrow/><mrow><mn>0</mn></mrow><mrow><mo>⁎</mo></mrow></msubsup><mo stretchy="false">(</mo><mn>700</mn><mo stretchy="false">)</mo></math> state with π±K<math altimg="si10.svg"><msubsup><mrow/><mrow><mi mathvariant="normal">S</mi></mrow><mrow><mn>0</mn></mrow></msubsup></math> correlations at the LHC
 2750983 . Studying the interaction between charm and light-flavor mesons
 2753045 . System-size dependence of the hadronic rescattering effect at energies available at the CERN Large Hadron Collider
 2771093 . Systematic study of flow vector fluctuations in <math><mrow><msqrt><msub><mi>s</mi><mrow><mi>N</mi><mi>N</mi></mrow></msub></msqrt><mo>=</mo><mn>5.02</mn></mrow></math> TeV Pb-Pb collisions
+2781241 . Measurement of <math display="inline"><msubsup><mi mathvariant="normal">Ω</mi><mi mathvariant="normal">c</mi><mn>0</mn></msubsup></math> baryon production and branching-fraction ratio <math display="inline"><mi>BR</mi><mo stretchy="false">(</mo><msubsup><mi mathvariant="normal">Ω</mi><mi mathvariant="normal">c</mi><mn>0</mn></msubsup><mo stretchy="false">→</mo><msup><mi mathvariant="normal">Ω</mi><mo>-</mo></msup><msup><mi mathvariant="normal">e</mi><mo>+</mo></msup><msub><mi>ν</mi><mi mathvariant="normal">e</mi></msub><mo stretchy="false">)</mo><mo>/</mo><mi>BR</mi><mo stretchy="false">(</mo><msubsup><mi mathvariant="normal">Ω</mi><mi mathvariant="normal">c</mi><mn>0</mn></msubsup><mo stretchy="false">→</mo><msup><mi mathvariant="normal">Ω</mi><mo>-</mo></msup><msup><mi>π</mi><mo>+</mo></msup><mo stretchy="false">)</mo></math> in <math display="inline"><mi>p</mi><mi>p</mi></math> collisions at <math display="inline"><msqrt><mi>s</mi></msqrt><mo>=</mo><mn>13</mn><mtext> </mtext><mtext> </mtext><mi>TeV</mi></math>

@@ -1,0 +1,38 @@
+Name: BESIII_2024_I2792993
+Year: 2024
+Summary: $\chi_{c1,2}\to \Lambda\bar\Lambda^0\phi$ decays
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2792993
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 110 (2024) 3, 032016
+ - arXiv:2405.20638 [hep-ex]
+RunInfo: Any process producing chi_c1 abd chi_c2, original e+e- -> psi(2S)
+Description:
+  'Measurements of mass distributions in $\chi_{c1,2}\to \Lambda\bar\Lambda^0\phi$ decays.
+   The data were read from the plots in the paper and may not be corrected for efficiency but 
+   are background subtracted.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024kis
+BibTeX: '@article{BESIII:2024kis,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Study of the decays \ensuremath{\chi}cJ\textrightarrow{}\ensuremath{\Lambda}\ensuremath{\Lambda}\textasciimacron{}\ensuremath{\phi}}",
+    eprint = "2405.20638",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.110.032016",
+    journal = "Phys. Rev. D",
+    volume = "110",
+    number = "3",
+    pages = "032016",
+    year = "2024"
+}'

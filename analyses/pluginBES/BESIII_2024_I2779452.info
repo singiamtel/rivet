@@ -1,0 +1,43 @@
+Name: BESIII_2024_I2779452
+Year: 2024
+Summary:  Cross section for  $e^+e^-\to\omega \chi_{c(1,2)}$ and $X(3872)$ for $\sqrt{s}=4.66$ to 4.95 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2779452
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 110 (2024) 1, 012006
+ - arXiv:2404.13840 [hep-ex]
+RunInfo: e+ e- -> hadrons
+Beams: [e+, e-]
+Energies: [4.66, 4.68, 4.7, 4.74, 4.75, 4.78, 4.84, 4.92, 4.95]
+Options:
+ - PID=*
+ - ENERGY=*
+Description:
+'Measurement of the cross section for  $e^+e^-\to\omega\chi_{c(1,2)}$ and $e^+e^-\to\omega X(3872)$ for  $\sqrt{s}=4.66$ to 4.95 GeV.
+ There is no consensus as to the nature of the $X(3872)$ $c\bar{c}$ state and therefore we taken its PDG code to be 9030443, i.e. the first unused code for an undetermined
+ spin one $c\bar{c}$ state. This can be changed using the PID option if a different code is used by the event generator performing the simulation.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024ext
+BibTeX: '@article{BESIII:2024ext,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Study of e+e-\textrightarrow{}\ensuremath{\omega}X(3872) and \ensuremath{\gamma}X(3872) from 4.66 to 4.95~GeV}",
+    eprint = "2404.13840",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.110.012006",
+    journal = "Phys. Rev. D",
+    volume = "110",
+    number = "1",
+    pages = "012006",
+    year = "2024"
+}'

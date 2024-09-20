@@ -35,7 +35,7 @@ LogY=0
 
 # BEGIN PLOT /MC_VH2BB/jet_b_jet_multiplicity
 Title= $b$-jet multiplicity
-XLabel= $N_{$b$\mathrm{-jet}}$
+XLabel= $N_{b\mathrm{-jet}}$
 YLabel= $\mathrm{d}\sigma/\mathrm{d}N_{b\mathrm{-jet}}$ [pb]
 LogY=0
 # END PLOT

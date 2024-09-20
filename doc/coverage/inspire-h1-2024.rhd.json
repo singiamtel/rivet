@@ -22,5 +22,17 @@
         [
             "DESY-24-036"
         ]
+    ],
+    "2769150": [
+        "Measurement of the 1-jettiness event shape observable in deep-inelastic electron-proton scattering at HERA",
+        "H1",
+        "10.1140/epjc/s10052-024-13115-8",
+        "2892370",
+        "2403.10109",
+        null,
+        null,
+        [
+            "DESY-24-035"
+        ]
     ]
 }

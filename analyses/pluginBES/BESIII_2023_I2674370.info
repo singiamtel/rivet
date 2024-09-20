@@ -1,14 +1,15 @@
 Name: BESIII_2023_I2674370
 Year: 2023
-Summary: Cross section for $e^+e^-\to pK^-\bar\Lambda^0 +\text{c.c.}$ from 4.009 and 4.951 GeV
+Summary: Cross section for $e^+e^-\to pK^-\bar\Lambda^0 +\text{c.c.}$ for $\sqrt{s}$ from 4.009 and 4.951 GeV
 Experiment: BESIII
 Collider: BEPC
 InspireID: 2674370
-Status: VALIDATED NOHEPDATA SINGLEWEIGHT
+Status: VALIDATED NOHEPDATA
 Reentrant: true
 Authors:
  - Peter Richardson <peter.richardson@durham.ac.uk>
 References:
+ - JHEP 12 (2023) 027
  - arXiv:2211.10755 [hep-ex]
 RunInfo: e+ e- to hadrons
 Beams: [e+, e-]
@@ -16,7 +17,7 @@ Energies: [4.009, 4.129, 4.157, 4.178, 4.189, 4.199, 4.209, 4.219, 4.226, 4.236,
 Options:
  - ENERGY=*
 Description:
-  'Measurement of the cross section for $e^+e^-\to pK^-\bar\Lambda^0 +\text{c.c.}$ from 4.009 and 4.951 GeV by the BESIII collaboration.
+  'Measurement of the cross section for $e^+e^-\to pK^-\bar\Lambda^0 +\text{c.c.}$ for $\sqrt{s}$ from 4.009 and 4.951 GeV by the BESIII collaboration.
    Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
 ValidationInfo:
   'Herwig7 events'

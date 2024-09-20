@@ -1,0 +1,37 @@
+Name: BESIII_2023_I2670262
+Year: 2023
+Summary: Mass distributions in $J/\psi\to \bar\Lambda^0\pi^+\Sigma^-$, $\bar\Lambda^0\pi^-\Sigma^+$ decays
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2670262
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 108 (2023) 11, 112012
+ - arXiv:2306.10319 [hep-ex]
+RunInfo: Any process producing J/psi, originally e+e-
+Description:
+'Mass distributions in $J/\psi\to \bar\Lambda^0\pi^+\Sigma^-$, $\bar\Lambda^0\pi^-\Sigma^+$ decays and charge conjugate decays.
+ The data were read from the figures in the paper and the backgrounds given subtracted.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023syz
+BibTeX: '@article{BESIII:2023syz,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Precise measurement of the branching fractions of J/\ensuremath{\psi}\textrightarrow{}\ensuremath{\Lambda}\textasciimacron{}\ensuremath{\pi}+\ensuremath{\Sigma}-+c.c. and J/\ensuremath{\psi}\textrightarrow{}\ensuremath{\Lambda}\textasciimacron{}\ensuremath{\pi}-\ensuremath{\Sigma}++c.c.}",
+    eprint = "2306.10319",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.108.112012",
+    journal = "Phys. Rev. D",
+    volume = "108",
+    number = "11",
+    pages = "112012",
+    year = "2023"
+}'

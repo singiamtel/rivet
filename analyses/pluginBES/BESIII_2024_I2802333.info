@@ -1,0 +1,43 @@
+Name: BESIII_2024_I2802333
+Year: 2024
+Summary: Cross section for $e^+e^-\to K^-\bar\Xi^+\Lambda^0/\Sigma^0$ for $\sqrt{s}$ from 3.510 and 4.914 GeV
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2802333
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - JHEP 07 (2024) 258
+ - arXiv:2406.18183 [hep-ex]
+RunInfo: e+ e- to hadrons
+Beams: [e+, e-]
+Energies: [3.510, 3.581, 3.650, 3.670, 3.773, 3.867, 3.871, 4.009, 4.130, 4.160, 4.180, 4.190, 4.200,
+           4.210, 4.220, 4.230, 4.237, 4.246, 4.260, 4.290, 4.315, 4.340, 4.360, 4.380, 4.400, 4.420,
+           4.440, 4.600, 4.640, 4.660, 4.680, 4.700, 4.750, 4.780, 4.914]
+Options:
+ - ENERGY=*
+Description:
+  'Measurement of the cross section for $e^+e^-\to K^-\bar\Xi^+\Lambda^0/\Sigma^0$ for $\sqrt{s}$ from 3.510 and 4.914 GeV by the BESIII collaboration.
+   N.B. the cross sections stated are only for the charge combinations, although both charge combinations are used and the results averaged.
+   Beam energy must be specified as analysis option "ENERGY" when rivet-merging samples.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2024ogz
+BibTeX: '@article{BESIII:2024ogz,
+    author = "Ablikim, Medina and others",
+    collaboration = "BESIII",
+    title = "{Measurement of the cross sections of $ {e}^{+}{e}^{-}\to {K}^{-}{\overline{\Xi}}^{+}\Lambda /{\Sigma}^0 $ at center-of-mass energies between 3.510 and 4.914 GeV}",
+    eprint = "2406.18183",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1007/JHEP07(2024)258",
+    journal = "JHEP",
+    volume = "07",
+    pages = "258",
+    year = "2024"
+}'

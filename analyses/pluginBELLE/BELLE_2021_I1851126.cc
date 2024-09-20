@@ -19,7 +19,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       // Initialise and register projections
-      declare(UnstableParticles(), "UFS" );
+      declare(UnstableParticles(Cuts::abspid==4132), "UFS" );
       // Book histograms
       book(_h_c_P,1,1,1);
       book(_h_c_M,1,1,2);
@@ -29,7 +29,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       // loop over Xi_c0 baryons
-      for( const Particle& Xic : apply<UnstableParticles>(event, "UFS").particles(Cuts::abspid==4132)) {
+      for( const Particle& Xic : apply<UnstableParticles>(event, "UFS").particles()) {
 	int sign = Xic.pid()/4132;
 	if(Xic.children().size()!=2) continue;
 	Particle baryon1,meson1;

@@ -128,6 +128,43 @@
             "KEK Preprint 2023-36"
         ]
     ],
+    "2744902": [
+        "Measurements of the Branching Fraction, Polarization, and <math display=\"inline\"><mi>C</mi><mi>P</mi></math> Asymmetry for the Decay <math display=\"inline\"><msup><mi>B</mi><mn>0</mn></msup><mo stretchy=\"false\">\u2192</mo><mi>\u03c9</mi><mi>\u03c9</mi></math>",
+        "Belle",
+        "10.1103/PhysRevLett.133.081801",
+        null,
+        "2401.04646",
+        null,
+        null,
+        [
+            "Belle Preprint 2023-21",
+            "KEK Preprint 2023-43",
+            "UCHEP-24-01"
+        ]
+    ],
+    "2745342": [
+        "Search for Baryon-Number-Violating Processes in <math display=\"inline\"><msup><mi>B</mi><mo>-</mo></msup></math> Decays to the <math display=\"inline\"><msubsup><mover accent=\"true\"><mi mathvariant=\"normal\">\u039e</mi><mo stretchy=\"false\">\u00af</mo></mover><mi>c</mi><mn>0</mn></msubsup><msubsup><mover accent=\"true\"><mi mathvariant=\"normal\">\u039b</mi><mo stretchy=\"false\">\u00af</mo></mover><mi>c</mi><mo>-</mo></msubsup></math> Final State",
+        "Belle",
+        "10.1103/PhysRevLett.133.071802",
+        null,
+        "2401.04807",
+        null,
+        null,
+        [
+            "Belle Preprint 2024-01",
+            "KEK Preprint 2023-48"
+        ]
+    ],
+    "2750205": [
+        "Study of \u03a5(10753) decays to \u03c0$^{+}$\u03c0$^{\u2212}$\u03a5(nS) final states at Belle II",
+        "Belle-II",
+        "10.1007/JHEP07(2024)116",
+        null,
+        "2401.12021",
+        null,
+        null,
+        []
+    ],
     "2755520": [
         "Search for a heavy neutral lepton that mixes predominantly with the tau neutrino",
         "Belle",
@@ -180,6 +217,19 @@
             "KEK Preprint 2023-56"
         ]
     ],
+    "2776860": [
+        "Search for Rare <math display=\"inline\"><mrow><mi>b</mi><mo stretchy=\"false\">\u2192</mo><mi>d</mi><msup><mrow><mo>\u2113</mo></mrow><mrow><mo>+</mo></mrow></msup><msup><mrow><mo>\u2113</mo></mrow><mrow><mo>-</mo></mrow></msup></mrow></math> Transitions at Belle",
+        "Belle",
+        "10.1103/PhysRevLett.133.101804",
+        null,
+        "2404.08133",
+        null,
+        null,
+        [
+            "Belle II Preprint 2024-005",
+            "KEK Preprint 2023-52"
+        ]
+    ],
     "2778312": [
         "Measurement of the branching fraction of the decay <math display=\"inline\"><msup><mi>B</mi><mo>-</mo></msup><mo stretchy=\"false\">\u2192</mo><msup><mi>D</mi><mn>0</mn></msup><mi>\u03c1</mi><mo stretchy=\"false\">(</mo><mn>770</mn><msup><mo stretchy=\"false\">)</mo><mo>-</mo></msup></math> at Belle II",
         "Belle-II",
@@ -193,6 +243,18 @@
             "KEK Preprint 2024-4"
         ]
     ],
+    "2785988": [
+        "Search for lepton-flavor-violating \u03c4$^{\u2212}$\u2192 \u03bc$^{\u2212}$\u03bc$^{+}$\u03bc$^{\u2212}$ decays at Belle II",
+        "Belle-II",
+        "10.1007/JHEP09(2024)062",
+        null,
+        "2405.07386",
+        null,
+        null,
+        [
+            "Belle II Preprint 2024-012 KEK Preprint 2024-6"
+        ]
+    ],
     "2788176": [
         "Search for two-body <math display=\"inline\"><mi>B</mi></math> meson decays to <math display=\"inline\"><mrow><msup><mrow><mi mathvariant=\"normal\">\u039b</mi></mrow><mrow><mn>0</mn></mrow></msup></mrow></math> and <math display=\"inline\"><mrow><msubsup><mrow><mi mathvariant=\"normal\">\u03a9</mi></mrow><mrow><mi>c</mi></mrow><mrow><mo stretchy=\"false\">(</mo><mo>*</mo><mo stretchy=\"false\">)</mo><mn>0</mn></mrow></msubsup></mrow></math>",
         "Belle",
@@ -204,6 +266,57 @@
         [
             "Belle Preprint 2024-04",
             "KEK Preprint 2024-5"
+        ]
+    ],
+    "2789574": [
+        "Test of light-lepton universality in \u03c4 decays with the Belle II experiment",
+        "Belle-II",
+        "10.1007/JHEP08(2024)205",
+        null,
+        "2405.14625",
+        null,
+        null,
+        [
+            "Belle II Preprint 2024-002",
+            "KEK Preprint 2023-49"
+        ]
+    ],
+    "2791635": [
+        "Search for the decay <math display=\"inline\"><msup><mi>B</mi><mn>0</mn></msup><mo stretchy=\"false\">\u2192</mo><mi>\u03b3</mi><mi>\u03b3</mi></math> using Belle and Belle II data",
+        "Belle",
+        "10.1103/PhysRevD.110.L031106",
+        null,
+        "2405.19734",
+        null,
+        null,
+        [
+            "Belle II Preprint: 2024-017",
+            "KEK Preprint: 2024-13"
+        ]
+    ],
+    "2796563": [
+        "Measurement of the branching fractions of $ \\overline{B} $ \u2192 D$^{(*)}$K$^{\u2212} {K}_{(S)}^{\\left(\\ast \\right)0} $ and $ \\overline{B} $ \u2192 D$^{(*)} {D}_s^{-} $ decays at Belle II",
+        "Belle-II",
+        "10.1007/JHEP08(2024)206",
+        null,
+        "2406.06277",
+        null,
+        null,
+        [
+            "Belle II Preprint: 2024-014",
+            "KEK Preprint: 2024-8"
+        ]
+    ],
+    "2801538": [
+        "Search for charmed baryons in the <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi><mo>+</mo></msubsup><mi>\u03b7</mi></math> system and measurement of the branching fractions of <math display=\"inline\"><msub><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi></msub><mo stretchy=\"false\">(</mo><mn>2880</mn><msup><mo stretchy=\"false\">)</mo><mo>+</mo></msup></math> and <math display=\"inline\"><msub><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi></msub><mo stretchy=\"false\">(</mo><mn>2940</mn><msup><mo stretchy=\"false\">)</mo><mo>+</mo></msup></math> decaying to <math display=\"inline\"><msubsup><mi mathvariant=\"normal\">\u039b</mi><mi>c</mi><mo>+</mo></msubsup><mi>\u03b7</mi></math> and <math display=\"inline\"><mi>p</mi><msup><mi>D</mi><mn>0</mn></msup></math> relative to <math display=\"inline\"><msub><mi mathvariant=\"normal\">\u03a3</mi><mi>c</mi></msub><mo stretchy=\"false\">(</mo><mn>2455</mn><mo stretchy=\"false\">)</mo><mi>\u03c0</mi></math>",
+        "Belle",
+        "10.1103/PhysRevD.110.032021",
+        null,
+        "2406.15965",
+        null,
+        null,
+        [
+            "Belle Preprint: 2024-06;KEK Preprint: 2024-15"
         ]
     ]
 }

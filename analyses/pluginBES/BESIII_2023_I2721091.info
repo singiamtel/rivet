@@ -1,0 +1,36 @@
+Name: BESIII_2023_I2721091
+Year: 2023
+Summary: $J/\psi\to \bar{p}\Sigma^+K^0_S+\mathrm{c.c.}$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2721091
+Status: VALIDATED NOHEPDATA
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.D 109 (2024) 1, 012006
+ - arXiv:2311.05955 [hep-ex]
+RunInfo: Any process producing J/psi riginally e+e-
+Description:
+  'Measurement of the mass distributions in the decay $J/\psi\to \bar{p}\Sigma^+K^0_S+\mathrm{c.c.}$. The data were read from the plots in the paper. It is also not clear that any resolution effects have been unfolded.'
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023sus
+BibTeX: '@article{BESIII:2023sus,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Observation and branching fraction measurement of the decay J/\ensuremath{\psi}\textrightarrow{}p\textasciimacron{}\ensuremath{\Sigma}+KS0+c.c.}",
+    eprint = "2311.05955",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.109.012006",
+    journal = "Phys. Rev. D",
+    volume = "109",
+    number = "1",
+    pages = "012006",
+    year = "2024"
+}'

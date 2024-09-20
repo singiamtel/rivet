@@ -1,0 +1,43 @@
+Name: BESIII_2023_I2655292
+Year: 2023
+Summary:  Analysis of $J/\psi\to\Sigma^+\bar\Sigma^-$
+Experiment: BESIII
+Collider: BEPC
+InspireID: 2655292
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Peter Richardson <peter.richardson@durham.ac.uk>
+References:
+ - Phys.Rev.Lett. 131 (2023) 19, 191802
+ - arXiv:2304.14655 [hep-ex]
+RunInfo: e+e- > J/psi
+NeedCrossSection: no
+Beams: [e-, e+]
+Energies: [3.1]
+Description:
+  'Analysis of the angular distribution of the baryons, and decay products, produced in
+   $e^+e^-\to J/\psi \to \Sigma^+\bar\Sigma^-$. The decay modes $\Sigma^+\to p\pi^0$
+   and $\bar\Sigma^-\to \bar{n}\pi^-$ or their charge conjugates are used to extract the
+   decay asymmetry for  $\Sigma^+\to n\pi^+$.
+  Gives information about the decay and is useful for testing correlations in hadron decays. '
+ValidationInfo:
+  'Herwig7 events'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: BESIII:2023sgt
+BibTeX: '@article{BESIII:2023sgt,
+    author = "Ablikim, M. and others",
+    collaboration = "BESIII",
+    title = "{Test of $C\!P$ Symmetry in Hyperon to Neutron Decays}",
+    eprint = "2304.14655",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevLett.131.191802",
+    journal = "Phys. Rev. Lett.",
+    volume = "131",
+    number = "19",
+    pages = "191802",
+    year = "2023"
+}'
