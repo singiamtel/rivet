@@ -247,35 +247,32 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      int iW = 0;
       double iq;
       double mean, dispersion, cq, R2, R3, K3;
       for (auto& histo : _g["mult_all"]->bins()) {
         iq = 2;
+        size_t iW = histo.index();
         _histo_to_moments(histo, iq , mean, dispersion, cq, R2, R3, K3);
 
         // just to have some values, needs to be corrected
-        _e["mean0"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_0"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_0"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_0"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_0"]->bin(iW+1).set(R3, R3/mean);
+        _e["mean0"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_0"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_0"]->bin(iW).set(cq, cq/mean);
+        _e["R2_0"]->bin(iW).set(R2, R2/mean);
+        _e["R3_0"]->bin(iW).set(R3, R3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_0"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_0"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_0"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_0"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D4_0"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_0"]->bin(iW+1).set(cq, cq/mean);
-
-        ++iW;
+        _e["D4_0"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_0"]->bin(iW).set(cq, cq/mean);
       }
-      iW = 0 ;
       mean = 0.;
       dispersion = 0.;
       cq = 0.;
@@ -284,32 +281,31 @@ namespace Rivet {
       K3 = 0.;
       for (auto& histo : _g["mult1"]->bins()) {
         // use scale to get Prob in %, and use counter to count events after cuts
-        scale(histo, 100.0/ *_Nevt_after_cuts[iW]);
+        size_t iW = histo.index();
+        scale(histo, 100.0/ *_Nevt_after_cuts[iW-1]);
         //
         iq = 2 ;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
 
-        _e["mean12"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_12"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_12"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_12"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_12"]->bin(iW+1).set(R3, R3/mean);
-        _e["K3_12"]->bin(iW+1).set(K3, K3/mean);
+        _e["mean12"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_12"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_12"]->bin(iW).set(cq, cq/mean);
+        _e["R2_12"]->bin(iW).set(R2, R2/mean);
+        _e["R3_12"]->bin(iW).set(R3, R3/mean);
+        _e["K3_12"]->bin(iW).set(K3, K3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_12"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_12"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_12"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_12"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D4_12"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_12"]->bin(iW+1).set(cq, cq/mean);
-        ++iW;
+        _e["D4_12"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_12"]->bin(iW).set(cq, cq/mean);
       }
-      iW = 0 ;
       mean = 0.;
       dispersion = 0.;
       cq = 0.;
@@ -319,32 +315,31 @@ namespace Rivet {
 
       for (auto& histo : _g["mult2"]->bins()) {
         // use scale to get Prob in %, and use counter to count events after cuts
-        scale(histo, 100.0/ *_Nevt_after_cuts[iW]);
+        size_t iW = histo.index();
+        scale(histo, 100.0/ *_Nevt_after_cuts[iW-1]);
         //
         iq = 2 ;
         _histo_to_moments(histo, iq, mean, dispersion,cq, R2, R3, K3);
 
-        _e["mean13"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_13"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_13"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_13"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_13"]->bin(iW+1).set(R3, R3/mean);
-        _e["K3_13"]->bin(iW+1).set(K3, K3/mean);
+        _e["mean13"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_13"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_13"]->bin(iW).set(cq, cq/mean);
+        _e["R2_13"]->bin(iW).set(R2, R2/mean);
+        _e["R3_13"]->bin(iW).set(R3, R3/mean);
+        _e["K3_13"]->bin(iW).set(K3, K3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_13"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_13"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_13"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_13"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D4_13"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_13"]->bin(iW+1).set(cq, cq/mean);
-        ++iW;
+        _e["D4_13"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_13"]->bin(iW).set(cq, cq/mean);
       }
-      iW = 0 ;
       mean = 0.;
       dispersion = 0.;
       cq = 0.;
@@ -354,30 +349,29 @@ namespace Rivet {
 
       for (auto& histo : _g["mult3"]->bins()) {
         // use scale to get Prob in %, and use counter to count events after cuts
-        scale(histo, 100.0/ *_Nevt_after_cuts[iW]);
+        size_t iW = histo.index();
+        scale(histo, 100.0/ *_Nevt_after_cuts[iW-1]);
         //
         iq = 2 ;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["mean14"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_14"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_14"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_14"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_14"]->bin(iW+1).set(R3, R3/mean);
+        _e["mean14"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_14"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_14"]->bin(iW).set(cq, cq/mean);
+        _e["R2_14"]->bin(iW).set(R2, R2/mean);
+        _e["R3_14"]->bin(iW).set(R3, R3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_14"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_14"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_14"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_14"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3) ;
-        _e["D4_14"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_14"]->bin(iW+1).set(cq, cq/mean);
-        ++iW;
+        _e["D4_14"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_14"]->bin(iW).set(cq, cq/mean);
       }
-      iW = 0 ;
       mean = 0.;
       dispersion = 0.;
       cq = 0.;
@@ -387,30 +381,29 @@ namespace Rivet {
 
       for (auto& histo : _g["mult4"]->bins()) {
         // use scale to get Prob in %, and use counter to count events after cuts
-        scale(histo, 100.0/ *_Nevt_after_cuts[iW]);
+        size_t iW = histo.index();
+        scale(histo, 100.0/ *_Nevt_after_cuts[iW-1]);
         //
         iq = 2 ;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["mean15"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_15"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_15"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_15"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_15"]->bin(iW+1).set(R3, R3/mean);
+        _e["mean15"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_15"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_15"]->bin(iW).set(cq, cq/mean);
+        _e["R2_15"]->bin(iW).set(R2, R2/mean);
+        _e["R3_15"]->bin(iW).set(R3, R3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_15"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_15"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_15"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_15"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D4_15"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_15"]->bin(iW+1).set(cq, cq/mean);
-        ++iW;
+        _e["D4_15"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_15"]->bin(iW).set(cq, cq/mean);
       }
-      iW = 0 ;
       mean = 0.;
       dispersion = 0.;
       cq = 0.;
@@ -420,32 +413,31 @@ namespace Rivet {
 
       for (auto& histo : _g["mult10_all"]->bins()) {
         // use scale to get Prob in %, and use counter to count events after cuts
-        scale(histo, 100.0/ *_Nevt_after_cuts[iW]);
+        size_t iW = histo.index();
+        scale(histo, 100.0/ *_Nevt_after_cuts[iW-1]);
         //
         iq = 2 ;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["mean23"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_23"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_23"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_23"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_23"]->bin(iW+1).set(R3, R3/mean);
-        _e["K3_23"]->bin(iW+1).set(K3, K3/mean);
+        _e["mean23"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_23"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_23"]->bin(iW).set(cq, cq/mean);
+        _e["R2_23"]->bin(iW).set(R2, R2/mean);
+        _e["R3_23"]->bin(iW).set(R3, R3/mean);
+        _e["K3_23"]->bin(iW).set(K3, K3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_23"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_23"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_23"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_23"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D4_23"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_23"]->bin(iW+1).set(cq, cq/mean);
-        ++iW;
+        _e["D4_23"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_23"]->bin(iW).set(cq, cq/mean);
       }
 
-      iW = 0 ;
       mean = 0.;
       dispersion = 0.;
       cq = 0.;
@@ -455,31 +447,30 @@ namespace Rivet {
 
       for (auto& histo : _g["mult11_all"]->bins()) {
         // use scale to get Prob in %, and use counter to count events after cuts
-        scale(histo, 100.0/ *_Nevt_after_cuts[iW]);
+        size_t iW = histo.index();
+        scale(histo, 100.0/ *_Nevt_after_cuts[iW-1]);
         //
         iq = 2 ;
         _histo_to_moments(histo, iq , mean, dispersion, cq, R2, R3, K3);
-        _e["mean34"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_34"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_34"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_34"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_34"]->bin(iW+1).set(R3, R3/mean);
-        _e["K3_34"]->bin(iW+1).set(K3, K3/mean);
+        _e["mean34"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_34"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_34"]->bin(iW).set(cq, cq/mean);
+        _e["R2_34"]->bin(iW).set(R2, R2/mean);
+        _e["R3_34"]->bin(iW).set(R3, R3/mean);
+        _e["K3_34"]->bin(iW).set(K3, K3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_34"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_34"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_34"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_34"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D4_34"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_34"]->bin(iW+1).set(cq, cq/mean);
-        ++iW;
+        _e["D4_34"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_34"]->bin(iW).set(cq, cq/mean);
       }
-      iW = 0 ;
       mean = 0.;
       dispersion = 0.;
       cq = 0.;
@@ -489,29 +480,29 @@ namespace Rivet {
 
       for (auto& histo : _g["mult12_all"]->bins()) {
         // use scale to get Prob in %, and use counter to count events after cuts
-        scale(histo, 100.0/ *_Nevt_after_cuts[iW]);
+        size_t iW = histo.index();
+        scale(histo, 100.0/ *_Nevt_after_cuts[iW-1]);
         //
         iq = 2 ;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["mean45"]->bin(iW+1).set(mean, 0.5*dispersion);
-        _e["D2_45"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C2_45"]->bin(iW+1).set(cq, cq/mean);
-        _e["R2_45"]->bin(iW+1).set(R2, R2/mean);
-        _e["R3_45"]->bin(iW+1).set(R3, R3/mean);
-        _e["K3_45"]->bin(iW+1).set(K3, K3/mean);
+        _e["mean45"]->bin(iW).set(mean, 0.5*dispersion);
+        _e["D2_45"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C2_45"]->bin(iW).set(cq, cq/mean);
+        _e["R2_45"]->bin(iW).set(R2, R2/mean);
+        _e["R3_45"]->bin(iW).set(R3, R3/mean);
+        _e["K3_45"]->bin(iW).set(K3, K3/mean);
         iq = 3 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D3_45"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C3_45"]->bin(iW+1).set(cq, cq/mean);
+        _e["D3_45"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C3_45"]->bin(iW).set(cq, cq/mean);
         iq = 4 ;
         dispersion = 0 ;
         cq = 0;
         _histo_to_moments(histo, iq, mean, dispersion, cq, R2, R3, K3);
-        _e["D4_45"]->bin(iW+1).set(dispersion, dispersion/mean);
-        _e["C4_45"]->bin(iW+1).set(cq, cq/mean);
-        ++iW;
+        _e["D4_45"]->bin(iW).set(dispersion, dispersion/mean);
+        _e["C4_45"]->bin(iW).set(cq, cq/mean);
       }
 
     }
@@ -530,7 +521,7 @@ namespace Rivet {
       }
       else {
         // loop to calculate mean
-        for (auto& b : histo_input->bins()) { // loop over points
+        for (const auto& b : histo_input->bins()) { // loop over points
           mysumWX  += b.sumW()*b.xEdge();
           mysumW   += b.sumW();
         }
@@ -538,7 +529,7 @@ namespace Rivet {
 
         // loop to calculate dispersion (variance)
         double var = 0., c = 0., r2 = 0., r3 = 0.;
-        for (auto& b : histo_input->bins()) { // loop over points
+        for (const auto& b : histo_input->bins()) { // loop over points
           const double xval = b.xEdge();
           const double weight = b.sumW();
           var = var + weight * pow((xval - mean),iq) ;
@@ -548,9 +539,9 @@ namespace Rivet {
         }
         var = var/mysumW;
         dispersion = pow(var,1./iq);
-        cq = c/mysumW*pow(mean,iq);
-        R2 = r2/mysumW*pow(mean,2);
-        R3 = r3/mysumW*pow(mean,3);
+        cq = c/(mysumW*pow(mean,iq));
+        R2 = r2/(mysumW*pow(mean,2));
+        R3 = r3/(mysumW*pow(mean,3));
         K3 = R3 - 3*R2 + 2;
       }
     }
