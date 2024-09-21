@@ -6,7 +6,7 @@ namespace Rivet {
 
   CmpState VetoedFinalState::compare(const Projection& p) const {
     const PCmp fscmp = mkNamedPCmp(p, "FS");
-    if (fscmp != CmpState::EQ) return CmpState::NEQ;    
+    if (fscmp != CmpState::EQ) return CmpState::NEQ;
     const VetoedFinalState& other = dynamic_cast<const VetoedFinalState&>(p);
     if (_vetofsnames.size() != other._vetofsnames.size()) return CmpState::NEQ;
     //If we have multiple vetofsnames, check to see if they match
@@ -16,7 +16,7 @@ namespace Rivet {
       while (thisit != _vetofsnames.end()){
         if (*thisit != *otherit) return CmpState::NEQ;
         const PCmp vfscmp = mkNamedPCmp(other, *thisit);
-        if (vfscmp != CmpState::EQ) return CmpState::NEQ; 
+        if (vfscmp != CmpState::EQ) return CmpState::NEQ;
         ++thisit; ++otherit;
       }
     }

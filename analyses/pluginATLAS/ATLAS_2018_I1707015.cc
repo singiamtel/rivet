@@ -4,6 +4,7 @@
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/InvisibleFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
 
 namespace Rivet {
@@ -53,10 +54,7 @@ namespace Rivet {
       VetoedFinalState vfs(fs);
 
       // Remove prompt invisibles from jet input
-      VetoedFinalState invis_fs(fs);
-      invis_fs.addVetoOnThisFinalState(VisibleFinalState(fs));
-      PromptFinalState invis_pfs = PromptFinalState(invis_fs, TauDecaysAs::PROMPT);
-      vfs.addVetoOnThisFinalState(invis_pfs);
+      vfs.addVetoOnThisFinalState(InvisibleFinalState(OnlyPrompt::YES, TauDecaysAs::PROMPT));
 
       // Remove prompt dressed muons (muons + associated photons) from jet input
       PromptFinalState muons(Cuts::abspid == PID::MUON, TauDecaysAs::PROMPT);
@@ -87,12 +85,12 @@ namespace Rivet {
 
       // Fetch objects
       const DressedLeptons& leptons = apply<LeptonFinder>(event, "Leptons").dressedLeptons();
-      Particles photons = apply<PromptFinalState>(event, "Photons").particles();
+      const Particles& photons = apply<PromptFinalState>(event, "Photons").particles();
       ChargedFinalState charged = apply<ChargedFinalState>(event, "CFS");
       Jets jets = apply<JetFinder>(event, "Jets").jetsByPt(Cuts::abseta < 2.5 && Cuts::pT > 25*GeV);
 
       // Immediate veto on events without one good photon
-      if ( photons.size() != 1 ) vetoEvent;
+      if (photons.size() != 1) vetoEvent;
       const Particle& photon = photons[0];
 
       // Veto event if photon too close to a lepton
@@ -101,17 +99,13 @@ namespace Rivet {
       }
 
       // Overlap removel of jets near leptons
-      for (const DressedLepton& lep : leptons) {
-        idiscard(jets, deltaRLess(lep, 0.4));
-      }
+      idiscardIfAnyDeltaRLess(jets, leptons, 0.4);
 
       // Overlap removel of jets near isolated photon
-      double conePt = 0.0;
-      Particles photSurround = charged.particles(deltaRLess(photon, 0.3));
-      for (const Particle& p : photSurround) {
-        conePt += p.pt();
+      const double conePt = sum(charged.particles(deltaRLess(photon, 0.3)), Kin::pT, 0.0);
+      if ( conePt / photon.pT() < 0.1 ) {
+        idiscard(jets, deltaRLess(photon, 0.4));
       }
-      if ( conePt / photon.pT() < 0.1 ) idiscard(jets, deltaRLess(photon, 0.4) );
 
       // Veto event if photon too close to good jets
       for (const Jet& jet : jets) {
@@ -154,11 +148,8 @@ namespace Rivet {
 
 
     void finalize() {
-
       // Normalise histograms after the run
-      for (auto &hist : _h) {
-        normalize(hist.second, 1.0, true);
-      }
+      normalize(_h, 1.0, true);
     }
 
 
