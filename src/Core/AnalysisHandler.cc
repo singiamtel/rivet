@@ -625,29 +625,28 @@ namespace Rivet {
       MSG_WARNING("Null nominal cross-section: setting to 10^-10 pb to allow rescaling");
       setCrossSection(1.0e-10, 0.0);
     }
-    // update Ntrials calculation
+    // update Ntrials heuristic calculation
     const double ntrials = _ntrials + safediv(_fileCounter.get()->persistent(defaultWeightIndex())->sumW(),
                                               _xs.get()->persistent(defaultWeightIndex())->val());
-    const double nFiles = _xserr.get()->persistent(defaultWeightIndex())->numEntries() + 1.0;
-    for (size_t iW = 0; iW < numWeights(); ++iW) {
-      double xs = 0.0, xserr = 0.0;
-      if (ntrials) {
+    if (ntrials != 0.) {
+      const double nFiles = _xserr.get()->persistent(defaultWeightIndex())->numEntries() + 1.0;
+      for (size_t iW = 0; iW < numWeights(); ++iW) {
         const double sumw  = _eventCounter.get()->persistent(iW)->sumW();
         //const double sumw2 = _eventCounter.get()->persistent(iW)->sumW2();
         const double lastXSE = _xs.get()->persistent(iW)->totalErrAvg();
         const double xse2 = _xserr.get()->persistent(iW)->sumW2() + sqr(lastXSE);
         const double xse = _xserr.get()->persistent(iW)->sumW() + lastXSE;
-        xs = sumw / ntrials;
+        const double xs = sumw / ntrials;
         // This would be exact, but we don't have the actual number of trials
         //xserr = (sumw2/ntrials) -  sqr(sumw/ntrials);
         //xserr /= ntrials - 1;
         // Work out variance of cross-section uncertainties instead,
         // unless there is only one file to begin with
-        xserr = xse/nFiles;
+        double xserr = xse/nFiles;
         if (nFiles > 1.0)  xserr += sqrt(xse2/nFiles - sqr(xse/nFiles));
+        _xs.get()->persistent(iW)->reset();
+        _xs.get()->persistent(iW)->set(xs, xserr);
       }
-      _xs.get()->persistent(iW)->reset();
-      _xs.get()->persistent(iW)->set(xs, xserr);
     }
 
     // Copy all histos to finalize versions.
@@ -1631,7 +1630,7 @@ namespace Rivet {
       // If not setting the user xsec, and a user xsec is already set, exit early
       if (!isUserSupplied && notNaN(_userxs.first)) return;
 
-      // Otherwise, update the xs scatter
+      // Otherwise, update the xs estimate
       _xs = Estimate0DPtr(weightNames(), Estimate0D("_XSEC"));
       for (size_t iW = 0; iW < numWeights(); ++iW) {
         _xs.get()->setActiveWeightIdx(iW);
