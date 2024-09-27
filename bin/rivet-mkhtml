@@ -200,9 +200,8 @@ def generate_plots(pyScripts,nproc=1):
         jobs = [p.apply_async(func=executeScript,
                                 args=(pyScript, manager_module.shared_modules,))
                                 for pyScript in pyScripts]
-        for job in tqdm.tqdm(jobs):
-            job.get()
         p.close()
+        p.join()
 
     except ImportError:
         for i, _ in enumerate(p.starmap(func=executeScript,
