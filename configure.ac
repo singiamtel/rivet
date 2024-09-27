@@ -129,9 +129,9 @@ else
 fi
 hepmc_version=`./conftest`
 if test x$hepmc_version != x; then
-  let hepmc_major=[`echo "$hepmc_version" | cut -d. -f1 | sed -e 's/^0*//'`]
-  let hepmc_minor=[`echo "$hepmc_version" | cut -d. -f2 | sed -e 's/^0*//'`]
-  let hepmc_micro=[`echo "$hepmc_version" | cut -d. -f3 | sed -e 's/^0*//'`]
+  hepmc_major=[`echo "$hepmc_version" | cut -d. -f1 | sed -e 's/^0*//' -e 's/\([0-9]*\).*/\1/g'`]
+  hepmc_minor=[`echo "$hepmc_version" | cut -d. -f2 | sed -e 's/^0*//' -e 's/\([0-9]*\).*/\1/g'`]
+  hepmc_micro=[`echo "$hepmc_version" | cut -d. -f3 | sed -e 's/^0*//' -e 's/\([0-9]*\).*/\1/g'`]
   if test "x$hepmc_minor" = "x"; then
     hepmc_minor=0
   fi
@@ -246,8 +246,8 @@ CPPFLAGS=$oldCPPFLAGS
 LIBS=$oldLIBS
 
 ## HDF5 + highfive
-AX_LIB_HDF5()
 if test "x$with_highfive" = "xyes"; then
+  AX_LIB_HDF5()
   if test x$HDF5_TYPE == xparallel; then
     AX_PROG_CXX_MPI([true], [], [AC_MSG_ERROR([Found hdf5-parallel, but no MPI compiler.])])
   fi
