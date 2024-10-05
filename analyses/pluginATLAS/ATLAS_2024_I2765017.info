@@ -1,0 +1,61 @@
+Name: ATLAS_2024_I2765017
+Year: 2024
+Summary: pTmiss+jets cross-sections and ratios at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2765017
+Status: VALIDATED
+Authors:
+ - Christian Gutschow <chris.g@cern.ch>
+Reentrant: true
+References:
+ - ATLAS-STDM-2018-55
+ - arXiv:2403.02793 [hep-ex]
+Keywords:
+ - met
+ - jets
+ - zboson
+ - wboson
+ - vjets
+RunInfo:
+  pp -> 0/1/2 l + jet(s) (l = e, mu, nu) at 13 TeV
+Luminosity_fb: 139
+Beams: [p+, p+]
+Energies: [13000]
+PtCuts: [200]
+Options:
+- MODE=FIDUCIAL,EXTRAPOLATED
+- TYPE=SM,BSM
+Description:
+  'Measurements of inclusive, differential cross-sections for the production of events with missing transverse momentum in association
+   with jets in proton-proton collisions at $\sqrt{s} =$ 13 TeV are presented. The measurements are made with the ATLAS detector using
+   an integrated luminosity of 140 fb$^{-1}$ and include measurements of dijet distributions in a region in which vector-boson fusion
+   processes are enhanced. They are unfolded to correct for detector resolution and efficiency within the fiducial acceptance, and are
+   designed to allow robust comparisons with a wide range of theoretical predictions. A measurement of differential cross sections for
+   the $Z\to\nu\nu$ process is made. The measurements are generally well-described by Standard Model predictions except for the dijet
+   invariant mass distribution. Auxiliary measurements of the hadronic system recoiling against isolated leptons, and photons, are also
+   made in the same phase space. Ratios between the measured distributions are then derived, to take advantage of cancellations in
+   modelling effects and some of the major systematic uncertainties. These measurements are sensitive to new phenomena, and provide a
+   mechanism to easily set constraints on phenomenological models. To illustrate the robustness of the approach, these ratios are
+   compared with two common Dark Matter models, where the constraints derived from the measurement are comparable to those set by
+   dedicated detector-level searches.'
+BibKey: ATLAS:2024vqf
+BibTeX: '@article{ATLAS:2024vqf,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Differential cross-sections for events with missing transverse momentum and jets measured with the ATLAS detector in 13 TeV proton-proton collisions}",
+    eprint = "2403.02793",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2024-034",
+    month = "3",
+    year = "2024"
+}'
+ReleaseTests:
+ - $A pp-13000-dm-monoj :TYPE=SM:MODE=FIDUCIAL
+ - $A-2 pp-13000-dm-monoj :TYPE=BSM:MODE=FIDUCIAL
+ - $A-3 pp-13000-dm-monoj :TYPE=SM:MODE=EXTRAPOLATED
+ - $A-4 pp-13000-dm-monoj :TYPE=BSM:MODE=EXTRAPOLATED
+ - $A-5 LHC-13-Z-mu-jets :TYPE=SM
+ - $A-6 pp-13000-eejj :TYPE=SM
+ - $A-7 pp-13000-Wev :TYPE=SM
