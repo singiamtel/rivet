@@ -35,9 +35,8 @@ namespace {
 namespace Rivet {
 
 
-  AnalysisHandler::AnalysisHandler(const string& runname)
-    : _runname(runname),
-      _ntrials(0.0),
+  AnalysisHandler::AnalysisHandler()
+    : _ntrials(0.0),
       _isEndOfFile(false),
       _userxs{NAN, NAN},
       _initialised(false),
@@ -1571,11 +1570,6 @@ namespace Rivet {
     } catch (...) { //< YODA::WriteError&
       throw UserError("Unexpected error in writing file: " + filename);
     }
-  }
-
-
-  string AnalysisHandler::runName() const {
-    return _runname;
   }
 
 

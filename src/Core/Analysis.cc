@@ -48,9 +48,6 @@ namespace Rivet {
     string _histoDir;
     if (_histoDir.empty()) {
       _histoDir = "/" + name();
-      if (handler().runName().length() > 0) {
-        _histoDir = "/" + handler().runName() + _histoDir;
-      }
       replace_all(_histoDir, "//", "/"); //< iterates until none
     }
     return _histoDir;

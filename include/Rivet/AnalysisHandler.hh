@@ -37,7 +37,7 @@ namespace Rivet {
     using Annotations = std::map<std::string, std::string>;
 
     /// Preferred constructor, with optional run name.
-    AnalysisHandler(const string& runname="");
+    AnalysisHandler();
 
     /// The copy constructor is deleted, so it can never be called.
     AnalysisHandler(const AnalysisHandler&) = delete;
@@ -51,9 +51,6 @@ namespace Rivet {
 
     /// @name Run properties
     /// @{
-
-    /// Get the name of this run.
-    string runName() const;
 
     /// Get the number of events seen. Should only really be used by external
     /// steering code or analyses in the finalize phase.
@@ -699,9 +696,6 @@ namespace Rivet {
 
     /// Weight indices
     std::vector<size_t> _weightIndices;
-
-    /// Run name
-    std::string _runname;
 
     /// Event counter
     CounterPtr _eventCounter;
