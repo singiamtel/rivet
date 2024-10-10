@@ -106,7 +106,7 @@ extragroup.add_argument("--nlo-smearing", dest="NLO_SMEARING", type=float, defau
                         + "as compared to the corresponding real event in a fill. The fills "
                         + "will be smeared over the given fraction of the bin width.")
 extragroup.add_argument("--runname", dest="RUN_NAME", default=None, metavar="NAME",
-                        help="give an optional run name, to be prepended as a 'top level directory' in histo paths")
+                        help="[DEPRECATED] give an optional run name, to be prepended as a 'top level directory' in histo paths")
 extragroup.add_argument("--ignore-beams", dest="IGNORE_BEAMS", action="store_true", default=False,
                         help="ignore input event beams when checking analysis compatibility. "
                         "WARNING: analyses may not work correctly, or at all, with inappropriate beams")
@@ -564,6 +564,8 @@ if not os.access(histo_parentdir,os.W_OK):
 
 
 ## Set up analysis handler
+if args.RUN_NAME and len(args.RUN_NAME)>0:
+  logging.warning("WARNING: The --runname option is deprecated and will be removed in a future release.\n")
 RUNNAME = args.RUN_NAME or ""
 ah = rivet.AnalysisHandler(RUNNAME)
 ah.setIgnoreBeams(args.IGNORE_BEAMS)
