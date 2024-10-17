@@ -1,0 +1,50 @@
+Name: ATLAS_2024_I2768921
+Year: 2024
+Summary: ttbar + gamma at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+Status: VALIDATED
+Reentrant: true
+InspireID: 2768921
+Authors:
+ - Carmen Diez Pardos <carmen.diez.pardos@cern.ch>
+ - Stefanie Mueller <stefanie.mueller@student.uni-siegen.de>
+References:
+ - ATLAS-TOPQ-2018-24
+ - arXiv:2403.09452 [hep-ex]
+Keywords:
+  - TTBAR
+  - PHOTON
+RunInfo:
+  pp -> ttbar + photon at 13TeV
+Luminosity_fb: 140.0
+Beams: [p+, p+]
+Energies: [13000]
+Options:
+ - LMODE=SINGLE,DILEPTON,ALL
+Description:
+    'Inclusive and differential cross-sections are measured at particle level for the associated production of a top quark pair
+    and a photon ($t\bar{t}\gamma$). The analysis is performed using an integrated luminosity of 140 fb$^{-1}$ of proton-proton
+    collisions at a centre-of-mass energy of 13 TeV collected by the ATLAS detector. The measurements are performed in the
+    single-lepton and dilepton top quark pair decay channels focusing on $t\bar{t}\gamma$ topologies where the photon is radiated
+    from an initial-state parton or one of the top quarks. The absolute and normalised differential cross-sections are measured for
+    several variables characterising the photon, lepton and jet kinematics as well as the angular separation between those objects.
+    The observables are found to be in good agreement with the Monte Carlo predictions. The photon transverse momentum differential
+    distribution is used to set limits on effective field theory parameters related to the electroweak dipole moments of the top quark.
+    The combined limits using the photon and the $Z$ boson transverse momentum measured in $t\bar{t}$ production in associations with
+    a $Z$ boson are also set.'
+BibKey: ATLAS:2024hmk
+BibTeX: '@article{ATLAS:2024hmk,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Measurements of inclusive and differential cross-sections of $t\bar{t}\gamma$ production in $pp$ collisions at $\sqrt{s}=13$ TeV with the ATLAS detector}",
+    eprint = "2403.09452",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2024-052",
+    month = "3",
+    year = "2024"
+}'
+ReleaseTests:
+ - $A pp-13000-ttbargamma-dl
+ - $A-2 pp-13000-ttbargamma-sl
