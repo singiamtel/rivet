@@ -290,8 +290,12 @@ namespace Rivet {
   ////////////////////////////////////////////////////////////
   // Histogramming
 
+  // For thread safety.
+  static std::mutex cache_ref_data_mutex_guard {};
 
   void Analysis::_cacheRefData() const {
+    std::lock_guard<mutex> lock(cache_ref_data_mutex_guard); // For thread safety.
+
     if (_refdata.empty()) {
       MSG_TRACE("Getting refdata cache for paper " << name());
       _refdata = getRefData(refDataName());
