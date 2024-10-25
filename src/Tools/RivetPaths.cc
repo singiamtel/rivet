@@ -3,6 +3,7 @@
 #include "Rivet/Tools/Utils.hh"
 #include "binreloc.h"
 #include <cstring>
+#include <mutex>
 
 namespace Rivet {
 
@@ -26,8 +27,12 @@ namespace Rivet {
     return "";
   }
 
+  // binreloc is not thread safe.
+  static std::mutex br_mutex_guard {};
 
   string getLibPath() {
+    std::lock_guard<std::mutex> lock(br_mutex_guard); // binreloc is not thread safe.
+    
     BrInitError error;
     br_init_lib(&error);
     char* temp = br_find_lib_dir(DEFAULTLIBDIR);
@@ -37,6 +42,8 @@ namespace Rivet {
   }
 
   string getDataPath() {
+    std::lock_guard<std::mutex> lock(br_mutex_guard); // binreloc is not thread safe.
+
     BrInitError error;
     br_init_lib(&error);
     char* temp = br_find_data_dir(DEFAULTDATADIR);
