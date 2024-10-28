@@ -36,63 +36,61 @@ namespace Rivet {
       declare(Hemispheres(thrust), "Hemispheres");
 
       // Book histograms
-      unsigned int offset = 0;
-      int offset2 = 0;
+      size_t ie=0;
+      for (double eVal : allowedEnergies()) {
 
-      if (isCompatibleWithSqrtS(133*GeV)) {
-	offset  = 0;
-	offset2 = 1;
-      }
-      else if (isCompatibleWithSqrtS(161*GeV)) {
-	offset  = 0;
-	offset2 = 2;
-      }
-      else if (isCompatibleWithSqrtS(172*GeV)) {
-	offset  = 0;
-	offset2 = 3;
-      }
-      else if (isCompatibleWithSqrtS(183*GeV)) {
-	offset  = 1;
-	offset2 = 1;
-      }
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
 
-      book(_h_thrust          , 13+offset, 1, offset2);
-      book(_h_major           , 15+offset, 1, offset2);
-      book(_h_minor           , 17+offset, 1, offset2);
-      book(_h_oblateness      , 19+offset, 1, offset2);
-      book(_h_sphericity      , 21+offset, 1, offset2);
-      book(_h_planarity       , 23+offset, 1, offset2);
-      book(_h_aplanarity      , 25+offset, 1, offset2);
-      book(_h_heavy_jet_mass  , 27+offset, 1, offset2);
-      book(_h_light_jet_mass  , 29+offset, 1, offset2);
-      book(_h_diff_jet_mass   , 31+offset, 1, offset2);
-      book(_h_wide_broading   , 33+offset, 1, offset2);
-      book(_h_narrow_broading , 35+offset, 1, offset2);
-      book(_h_total_broading  , 37+offset, 1, offset2);
-      book(_h_diff_broading   , 39+offset, 1, offset2);
-      book(_h_CParam          , 41+offset, 1, offset2);
-      book(_h_DParam          , 43+offset, 1, offset2);
-      for(unsigned int ix=0;ix<3;++ix) {
-        book(_p_thrust[ix],  1,1,1+ix);
-        book(_p_major[ix] ,  2,1,1+ix);
-        book(_p_minor[ix] ,  3,1,1+ix);
-        book(_p_obl[ix]   ,  4,1,1+ix);
-        book(_p_heavy[ix] ,  5,1,1+ix);
-        book(_p_light[ix] ,  6,1,1+ix);
-        book(_p_diff[ix]  ,  7,1,1+ix);
-        book(_p_bmax[ix]  ,  8,1,1+ix);
-        book(_p_bmin[ix]  ,  9,1,1+ix);
-        book(_p_bsum[ix]  , 10,1,1+ix);
-        book(_p_bdiff[ix] , 11,1,1+ix);
-        book(_p_C[ix]     , 12,1,1+ix);
+        size_t offset , offset2;
+        if (ie==3)      { offset = 1; offset2 = 1; }
+        else if (ie==2) { offset = 0; offset2 = 3; }
+        else if (ie==1) { offset = 0; offset2 = 2; }
+        else            { offset = 0; offset2 = 1; }
+
+        book(_h[en+"thrust"]         , 13+offset, 1, offset2);
+        book(_h[en+"major"]          , 15+offset, 1, offset2);
+        book(_h[en+"minor"]          , 17+offset, 1, offset2);
+        book(_h[en+"oblateness"]     , 19+offset, 1, offset2);
+        book(_h[en+"sphericity"]     , 21+offset, 1, offset2);
+        book(_h[en+"planarity"]      , 23+offset, 1, offset2);
+        book(_h[en+"aplanarity"]     , 25+offset, 1, offset2);
+        book(_h[en+"heavy_jet_mass"] , 27+offset, 1, offset2);
+        book(_h[en+"light_jet_mass"] , 29+offset, 1, offset2);
+        book(_h[en+"diff_jet_mass"]  , 31+offset, 1, offset2);
+        book(_h[en+"wide_broading"]  , 33+offset, 1, offset2);
+        book(_h[en+"narrow_broading"], 35+offset, 1, offset2);
+        book(_h[en+"total_broading"] , 37+offset, 1, offset2);
+        book(_h[en+"diff_broading"]  , 39+offset, 1, offset2);
+        book(_h[en+"CParam"]         , 41+offset, 1, offset2);
+        book(_h[en+"DParam"]         , 43+offset, 1, offset2);
+
+        if (ie < 3) {
+          book(_p["thrust"][ie], 1,1,1+ie);
+          book(_p["major"][ie],  2,1,1+ie);
+          book(_p["minor"][ie],  3,1,1+ie);
+          book(_p["obl"][ie],    4,1,1+ie);
+          book(_p["heavy"][ie],  5,1,1+ie);
+          book(_p["light"][ie],  6,1,1+ie);
+          book(_p["diff"][ie],   7,1,1+ie);
+          book(_p["bmax"][ie],   8,1,1+ie);
+          book(_p["bmin"][ie],   9,1,1+ie);
+          book(_p["bsum"][ie],  10,1,1+ie);
+          book(_p["bdiff"][ie], 11,1,1+ie);
+          book(_p["C"][ie],     12,1,1+ie);
+        }
+        ++ie;
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
     }
 
-    void fillMoment(array<BinnedProfilePtr<int>,3> & mom, double val) {
+    void fillMoment(array<BinnedProfilePtr<int>,3>& mom, double val) {
       double tmp=val;
-      for(unsigned int ix=0;ix<3;++ix) {
-        mom[ix]->fill(round(sqrtS()/GeV),tmp);
-        tmp*=val;
+      for (size_t ix=0; ix<3; ++ix) {
+        mom[ix]->fill(std::stoi(_sqs), tmp);
+        tmp *= val;
       }
     }
 
@@ -101,71 +99,62 @@ namespace Rivet {
 
       // Get beams and average beam momentum
       const ParticlePair& beams = apply<Beam>(event, "Beams").beams();
-      const double meanBeamMom = ( beams.first.p3().mod() +
-                                   beams.second.p3().mod() ) / 2.0;
+      const double meanBeamMom = 0.5*(beams.first.p3().mod() + beams.second.p3().mod());
       MSG_DEBUG("Avg beam momentum = " << meanBeamMom);
 
       const Thrust& thrust = apply<Thrust>(event, "Thrust");
       // thrust related observables
-      _h_thrust    ->fill(1.-thrust.thrust()  );
-      _h_major     ->fill(thrust.thrustMajor());
-      _h_minor     ->fill(thrust.thrustMinor());
-      _h_oblateness->fill(thrust.oblateness() );
-      fillMoment(_p_thrust,1.-thrust.thrust()  );
-      fillMoment(_p_major ,thrust.thrustMajor());
-      fillMoment(_p_minor ,thrust.thrustMinor());
-      fillMoment(_p_obl   ,thrust.oblateness() );
+      _h[_sqs+"thrust"]    ->fill(1.-thrust.thrust()  );
+      _h[_sqs+"major"]     ->fill(thrust.thrustMajor());
+      _h[_sqs+"minor"]     ->fill(thrust.thrustMinor());
+      _h[_sqs+"oblateness"]->fill(thrust.oblateness() );
+      fillMoment(_p["thrust"],1.-thrust.thrust()  );
+      fillMoment(_p["major"] ,thrust.thrustMajor());
+      fillMoment(_p["minor"] ,thrust.thrustMinor());
+      fillMoment(_p["obl"]   ,thrust.oblateness() );
       // sphericity related
       const Sphericity& sphericity = apply<Sphericity>(event, "Sphericity");
-      _h_sphericity->fill(sphericity.sphericity());
-      _h_planarity ->fill(sphericity.planarity() );
-      _h_aplanarity->fill(sphericity.aplanarity());
+      _h[_sqs+"sphericity"]->fill(sphericity.sphericity());
+      _h[_sqs+"planarity"] ->fill(sphericity.planarity() );
+      _h[_sqs+"aplanarity"]->fill(sphericity.aplanarity());
       // hemisphere related
       const Hemispheres& hemi = apply<Hemispheres>(event, "Hemispheres");
       // standard jet masses
-      _h_heavy_jet_mass->fill(hemi.scaledM2high());
-      _h_light_jet_mass->fill(hemi.scaledM2low() );
-      _h_diff_jet_mass ->fill(hemi.scaledM2diff());
-      fillMoment(_p_heavy,hemi.scaledM2high());
-      fillMoment(_p_light,hemi.scaledM2low() );
-      fillMoment(_p_diff ,hemi.scaledM2diff());
+      _h[_sqs+"heavy_jet_mass"]->fill(hemi.scaledM2high());
+      _h[_sqs+"light_jet_mass"]->fill(hemi.scaledM2low() );
+      _h[_sqs+"diff_jet_mass"] ->fill(hemi.scaledM2diff());
+      fillMoment(_p["heavy"],hemi.scaledM2high());
+      fillMoment(_p["light"],hemi.scaledM2low() );
+      fillMoment(_p["diff"] ,hemi.scaledM2diff());
       // jet broadening
-      _h_wide_broading  ->fill(hemi.Bmax() );
-      _h_narrow_broading->fill(hemi.Bmin() );
-      _h_total_broading ->fill(hemi.Bsum() );
-      _h_diff_broading  ->fill(hemi.Bdiff());
-      fillMoment(_p_bmax,hemi.Bmax() );
-      fillMoment(_p_bmin,hemi.Bmin() );
-      fillMoment(_p_bsum,hemi.Bsum() );
-      fillMoment(_p_bdiff,hemi.Bdiff());
+      _h[_sqs+"wide_broading"]  ->fill(hemi.Bmax() );
+      _h[_sqs+"narrow_broading"]->fill(hemi.Bmin() );
+      _h[_sqs+"total_broading"] ->fill(hemi.Bsum() );
+      _h[_sqs+"diff_broading"]  ->fill(hemi.Bdiff());
+      fillMoment(_p["bmax"],hemi.Bmax() );
+      fillMoment(_p["bmin"],hemi.Bmin() );
+      fillMoment(_p["bsum"],hemi.Bsum() );
+      fillMoment(_p["bdiff"],hemi.Bdiff());
       MSG_DEBUG("Calculating Parisi params");
       const ParisiTensor& parisi = apply<ParisiTensor>(event, "Parisi");
-      _h_CParam->fill(parisi.C());
-      _h_DParam->fill(parisi.D());
-      fillMoment(_p_C,parisi.C());
+      _h[_sqs+"CParam"]->fill(parisi.C());
+      _h[_sqs+"DParam"]->fill(parisi.D());
+      fillMoment(_p["C"],parisi.C());
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      for (double eVal : allowedEnergies()) {
 
-      normalize(_h_thrust          );
-      normalize(_h_major           );
-      normalize(_h_minor           );
-      normalize(_h_sphericity      );
-      normalize(_h_planarity       );
-      normalize(_h_aplanarity       );
-      normalize(_h_oblateness      );
-      normalize(_h_heavy_jet_mass  );
-      normalize(_h_light_jet_mass  );
-      normalize(_h_diff_jet_mass   );
-      normalize(_h_wide_broading   );
-      normalize(_h_narrow_broading );
-      normalize(_h_total_broading  );
-      normalize(_h_diff_broading   );
-      normalize(_h_CParam   );
-      normalize(_h_DParam   );
+        const string en = toString(int(eVal));
 
+        for (auto& item : _h) {
+          if (item.first.substr(0,3) != en)  continue;
+          normalize(item.second);
+        }
+
+      }
     }
 
     /// @}
@@ -173,13 +162,11 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_thrust,_h_major,_h_minor;
-    Histo1DPtr _h_sphericity,_h_planarity,_h_aplanarity,_h_oblateness;
-    Histo1DPtr _h_heavy_jet_mass,_h_light_jet_mass,_h_diff_jet_mass;
-    Histo1DPtr _h_wide_broading,_h_narrow_broading,_h_total_broading,_h_diff_broading;
-    Histo1DPtr _h_CParam,_h_DParam;
-    array<BinnedProfilePtr<int>,3> _p_thrust,_p_major,_p_minor,_p_obl,
-      _p_heavy,_p_light,_p_diff,_p_bmax,_p_bmin,_p_bsum,_p_bdiff,_p_C;
+    map<string,Histo1DPtr> _h;
+
+    map<string,array<BinnedProfilePtr<int>,3>> _p;
+
+    string _sqs = "";
     /// @}
 
 

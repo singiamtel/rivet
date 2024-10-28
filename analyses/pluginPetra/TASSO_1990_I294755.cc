@@ -27,19 +27,39 @@ namespace Rivet {
       declare(Sphericity(cfs), "Sphericity");
 
       // Histos
-      int offset = 0; // default is 14.03 GeV
-      if (isCompatibleWithSqrtS(21.99))      offset = 1;
-      else if (isCompatibleWithSqrtS(35.0))  offset = 2;
-      else if (isCompatibleWithSqrtS(43.7))  offset = 3;
+      for (double eVal : allowedEnergies()) {
 
-      book(_h_xp[0]      , 2, 1, 1+offset);
-      book(_h_xp[1]      , 3, 1, 1+offset);
-      book(_h_xi         , 4, 1, 1+offset);
-      book(_h_pT         , 5, 1, 1+offset);
-      book(_h_sphericity , 6, 1, 1+offset);
-      book(_h_aplanarity , 7, 1, 1+offset);
-      book(_h_thrust     , 8, 1, 1+offset);
-      book(_sumWPassed,"/TMP/_sumWPassed");
+        const string en = toString(int(eVal/MeV));
+        if (isCompatibleWithSqrtS(eVal, 1e-02))  _sqs = en;
+
+        int offset = 0;
+        switch (int(eVal+0.5)) {
+          case 14:
+            offset = 0;
+            break;
+          case 22:
+            offset = 1;
+            break;
+          case 35:
+            offset = 2;
+            break;
+          case 44:
+            offset = 3;
+            break;
+        }
+
+        book(_h[en+"xp0"],        2, 1, 1+offset);
+        book(_h[en+"xp1"],        3, 1, 1+offset);
+        book(_h[en+"xi"],         4, 1, 1+offset);
+        book(_h[en+"pT"],         5, 1, 1+offset);
+        book(_n[en+"sphericity"], 6, 1, 1+offset);
+        book(_n[en+"aplanarity"], 7, 1, 1+offset);
+        book(_n[en+"thrust"],     8, 1, 1+offset);
+        book(_c[en], "/TMP/_sumWPassed_"+en);
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
+      }
     }
 
 
@@ -68,7 +88,7 @@ namespace Rivet {
       }
 
       // Raise counter for events that pass trigger conditions
-      _sumWPassed->fill();
+      _c[_sqs]->fill();
 
       const Thrust& thrust = apply<Thrust>(event, "Thrust");
       //const Vector3 & thrustAxis = thrust.thrustAxis ();
@@ -90,27 +110,25 @@ namespace Rivet {
         const double pTin = dot(mom3, sphericity.sphericityMajorAxis());
         const double pTout = dot(mom3, sphericity.sphericityMinorAxis());
         const double pT = sqrt(sqr(pTin)+sqr(pTout));
-        _h_xp[0]->fill(scaledMom);
-        _h_xp[1]->fill(scaledMom);
-        _h_xi->fill(-log(scaledMom));
-        _h_pT->fill(pT);
+        _h[_sqs+"xp0"]->fill(scaledMom);
+        _h[_sqs+"xp1"]->fill(scaledMom);
+        _h[_sqs+"xi"]->fill(-log(scaledMom));
+        _h[_sqs+"pT"]->fill(pT);
       }
       // event shapes
-      _h_sphericity->fill(sphericity.sphericity());
-      _h_aplanarity->fill(sphericity.aplanarity());
-      _h_thrust->fill(thrust.thrust());
+      _n[_sqs+"sphericity"]->fill(sphericity.sphericity());
+      _n[_sqs+"aplanarity"]->fill(sphericity.aplanarity());
+      _n[_sqs+"thrust"]->fill(thrust.thrust());
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_h_xp[0], 1./ *_sumWPassed);
-      scale(_h_xp[1], 1./ *_sumWPassed);
-      scale(_h_xi   , 1./ *_sumWPassed);
-      scale(_h_pT   , 1./ *_sumWPassed);
-      normalize(_h_sphericity);
-      normalize(_h_aplanarity);
-      normalize(_h_thrust    );
+      for (auto& item : _h) {
+        const string en = item.first.substr(0,5);
+        if (_c[en]->sumW())  scale(item.second, 1./ *_c[en]);
+      }
+      normalize(_n);
     }
 
     /// @}
@@ -120,8 +138,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_xp[2], _h_xi, _h_pT, _h_sphericity, _h_aplanarity, _h_thrust;
-    CounterPtr _sumWPassed;
+    map<string,Histo1DPtr> _h, _n;
+    map<string,CounterPtr> _c;
+
+    string _sqs = "";
     /// @}
 
   };

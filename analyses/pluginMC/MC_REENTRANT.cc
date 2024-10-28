@@ -32,23 +32,18 @@ namespace Rivet {
       book(_histEta70, "Eta70", 50, -5, 5);
       book(_histEta09, "Eta09", 50, -5, 5);
       book(_histEtaR , "EtaR",  50, -5, 5);
-      fill70 = fill09 = false;
+
+      if (isCompatibleWithSqrtS(900.))        fill09 = true;
+      else if (isCompatibleWithSqrtS(7000.))  fill70 = true;
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      if (isCompatibleWithSqrtS(900*GeV))
-        fill09 = true;
-      else if (isCompatibleWithSqrtS(7000*GeV))
-        fill70 = true;
-
       const FinalState& cfs = apply<FinalState>(event, "CFS");
       for (const Particle& p : cfs.particles()) {
-        if (isCompatibleWithSqrtS(900*GeV))
-          _histEta09->fill(p.eta());
-        else if (isCompatibleWithSqrtS(7000*GeV))
-          _histEta70->fill(p.eta());
+        if (fill09)       _histEta09->fill(p.eta());
+        else if (fill70)  _histEta70->fill(p.eta());
       }
     }
 
@@ -57,8 +52,9 @@ namespace Rivet {
     void finalize() {
       if ( fill70 ) scale(_histEta70, 1.0/sumOfWeights());
       if ( fill09 ) scale(_histEta09, 1.0/sumOfWeights());
-      if ( _histEta70->numEntries() > 0 && _histEta09->numEntries() > 0 )
+      if (_histEta70->numEntries() > 0 && _histEta09->numEntries() > 0) {
         divide(_histEta70, _histEta09, _histEtaR);
+      }
     }
 
     /// @}
@@ -72,7 +68,7 @@ namespace Rivet {
     Estimate1DPtr _histEtaR;
     /// @}
 
-    bool fill09, fill70;
+    bool fill09 = false, fill70 = false;
 
   };
 

@@ -27,117 +27,122 @@ namespace Rivet {
       declare(DISLepton(), "Lepton");
       declare(DISKinematics(), "Kinematics");
 
-      Histo1DPtr dummy;
       string beamOpt = getOption<string>("BEAM","NONE");
       if (beamOpt == "NONE") {
         const ParticlePair& beam = beams();
-        _positron = (beam.first.pid() == PID::POSITRON || beam.second.pid() == PID::POSITRON );
-      } else {
-        if (beamOpt == "EMINUS") _positron = false;
-        else if (beamOpt == "EPLUS") _positron = true;
+        _positron = (beam.first.pid() == PID::POSITRON || beam.second.pid() == PID::POSITRON);
+      }
+      else {
+        if (beamOpt == "EMINUS")      _positron = false;
+        else if (beamOpt == "EPLUS")  _positron = true;
         else {
-          MSG_ERROR("Beam option error. You have specified an unsupported beam.");
-          return;
+          throw BeamError("Beam species not supported\n");
         }
       }
 
       // Book beams-dependent histograms
-      const double eps = 0.01;
-      if (isCompatibleWithSqrtS(318*GeV, eps) && _positron  ) {
-        // NC e+ p at sqrts=318
-        const vector<double> Q2edges = {
-          0.1, 0.15, 0.2, 0.3, 0.4, 0.45, 0.6, 0.7, 1.0, 1.1, 1.3, 1.7, 2.3,
-          3.1, 3.8, 5.3, 8.0, 9.1, 11., 13., 17.4, 19.1, 25.8, 28., 30., 42.,
-          49., 54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455., 460.,
-          545., 560., 765., 770., 835., 900., 1120., 1295., 1300., 1755., 1800.,
-          2270., 2500., 3685., 4000., 6520., 7000., 9275., 10000., 15000., 17000.,
-          24770., 25000., 42000.
-        };
-        book(_h_sigred, Q2edges);
-        _h_sigred->maskBins({9, 24, 27, 36, 38, 40, 42, 44, 47, 49, 51, 53, 55, 57, 59, 61});
-        size_t idx = 0;
-        for (auto& b : _h_sigred->bins()) {
-          book(b, 1, 1, ++idx);
-        }
-        // CC e+ p at sqrts=318
-        book(_h_sigred_cc, {280., 325., 460., 545., 900., 1120., 1300., 1755., 1800., 2270.,
-                            2500., 3685., 4000., 6520., 7000., 9275., 10000., 20000., 42000.});
-        _h_sigred_cc->maskBins({2, 4, 6, 8, 10, 12, 14, 16});
-        idx = 0;
-        for (auto& b : _h_sigred_cc->bins()) {
-          book(b, 6, 1, ++idx);
-        }
-      }
-      else if (isCompatibleWithSqrtS(300*GeV, eps) && _positron) {
-        // NC e+ p at sqrts=300
-        const vector<double> Q2edges = {
-          0.01, 0.05, 0.07, 0.09, 0.12, 0.18, 0.22, 0.32, 0.4, 0.45, 0.6, 0.7, 1.0, 1.1, 1.3,
-          1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 19.1, 25.8, 28., 30., 42., 49.,
-          54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455., 460., 545., 560.,
-          765., 770., 835., 900., 1120., 1295., 1300., 1755., 1800., 2270., 2500., 3685.,
-          4000., 6520., 7000., 9275., 10000., 15000., 17000., 24770., 25000., 42000.
-        };
-        book(_h_sigred, Q2edges);
-        _h_sigred->maskBins({13, 28, 31, 40, 42, 44, 46, 48, 51, 53, 55, 57, 59, 61, 63, 65});
-        size_t idx = 0;
-        for (auto& b : _h_sigred->bins()) {
-          book(b, 2, 1, ++idx);
-        }
-      }
-      else if (isCompatibleWithSqrtS(251*GeV, eps) && _positron  ) {
-        // NC e+ p at sqrts=251
-        const vector<double> Q2edges = {
-          1., 1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 22.1, 28.,
-          30., 42., 49., 54., 65., 75., 108., 134., 180., 225., 280., 325.,
-          355., 455., 460., 545., 560., 765., 770., 835.
-        };
-        book(_h_sigred, Q2edges);
-        _h_sigred->maskBins({8, 13, 16, 18, 25, 27, 29, 31});
-        size_t idx = 0;
-        for (auto& b : _h_sigred->bins()) {
-          book(b, 3, 1, ++idx);
-        }
-      }
+      const double eps = 1e-2;
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal)) + toString(_positron);
+        if (isCompatibleWithSqrtS(eVal, eps))  _sqs = en;
 
-      // e+- p at sqrts=225
-      else if (isCompatibleWithSqrtS(225*GeV, eps) && _positron ) {
-        // NC e+ p at sqrts=225
-        const vector<double> Q2edges = {
-          1., 1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 22.1, 28.,
-          30., 42., 49., 54., 65., 75., 108., 134., 180., 225., 280., 325.,
-          355., 455., 460., 545., 560., 765., 770., 835.
-        };
-        book(_h_sigred, Q2edges);
-        _h_sigred->maskBins({8, 13, 16, 18, 25, 27, 29, 31});
-        size_t idx = 0;
-        for (auto& b : _h_sigred->bins()) {
-          book(b, 4, 1, ++idx);
+        if (fuzzyEquals(eVal, 318.1, eps) && _positron) {
+          // NC e+ p at sqrts=318
+          const vector<double> Q2edges = {
+            0.1, 0.15, 0.2, 0.3, 0.4, 0.45, 0.6, 0.7, 1.0, 1.1, 1.3, 1.7, 2.3,
+            3.1, 3.8, 5.3, 8.0, 9.1, 11., 13., 17.4, 19.1, 25.8, 28., 30., 42.,
+            49., 54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455., 460.,
+            545., 560., 765., 770., 835., 900., 1120., 1295., 1300., 1755., 1800.,
+            2270., 2500., 3685., 4000., 6520., 7000., 9275., 10000., 15000., 17000.,
+            24770., 25000., 42000.
+          };
+          book(_g[en+"sigred"], Q2edges);
+          _g[en+"sigred"]->maskBins({9, 24, 27, 36, 38, 40, 42, 44, 47, 49, 51, 53, 55, 57, 59, 61});
+          size_t idx = 0;
+          for (auto& b : _g[en+"sigred"]->bins()) {
+            book(b, 1, 1, ++idx);
+          }
+          // CC e+ p at sqrts=318
+          book(_g[en+"sigred_cc"], {280., 325., 460., 545., 900., 1120., 1300., 1755., 1800., 2270.,
+                                2500., 3685., 4000., 6520., 7000., 9275., 10000., 20000., 42000.});
+          _g[en+"sigred_cc"]->maskBins({2, 4, 6, 8, 10, 12, 14, 16});
+          idx = 0;
+          for (auto& b : _g[en+"sigred_cc"]->bins()) {
+            book(b, 6, 1, ++idx);
+          }
         }
+        else if (fuzzyEquals(eVal, 300.3, eps) && _positron) {
+          // NC e+ p at sqrts=300
+          const vector<double> Q2edges = {
+            0.01, 0.05, 0.07, 0.09, 0.12, 0.18, 0.22, 0.32, 0.4, 0.45, 0.6, 0.7, 1.0, 1.1, 1.3,
+            1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 19.1, 25.8, 28., 30., 42., 49.,
+            54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455., 460., 545., 560.,
+            765., 770., 835., 900., 1120., 1295., 1300., 1755., 1800., 2270., 2500., 3685.,
+            4000., 6520., 7000., 9275., 10000., 15000., 17000., 24770., 25000., 42000.
+          };
+          book(_g[en+"sigred"], Q2edges);
+          _g[en+"sigred"]->maskBins({13, 28, 31, 40, 42, 44, 46, 48, 51, 53, 55, 57, 59, 61, 63, 65});
+          size_t idx = 0;
+          for (auto& b : _g[en+"sigred"]->bins()) {
+            book(b, 2, 1, ++idx);
+          }
+        }
+        else if (fuzzyEquals(eVal, 251.5, eps) && _positron) {
+          // NC e+ p at sqrts=251
+          const vector<double> Q2edges = {
+            1., 1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 22.1, 28.,
+            30., 42., 49., 54., 65., 75., 108., 134., 180., 225., 280., 325.,
+            355., 455., 460., 545., 560., 765., 770., 835.
+          };
+          book(_g[en+"sigred"], Q2edges);
+          _g[en+"sigred"]->maskBins({8, 13, 16, 18, 25, 27, 29, 31});
+          size_t idx = 0;
+          for (auto& b : _g[en+"sigred"]->bins()) {
+            book(b, 3, 1, ++idx);
+          }
+        }
+        else if (fuzzyEquals(eVal, 224.9, eps) && _positron) {
+          // NC e+ p at sqrts=225
+          const vector<double> Q2edges = {
+            1., 1.7, 2.3, 3.1, 3.8, 5.3, 8., 9.1, 11., 13., 17.4, 22.1, 28.,
+            30., 42., 49., 54., 65., 75., 108., 134., 180., 225., 280., 325.,
+            355., 455., 460., 545., 560., 765., 770., 835.
+          };
+          book(_g[en+"sigred"], Q2edges);
+          _g[en+"sigred"]->maskBins({8, 13, 16, 18, 25, 27, 29, 31});
+          size_t idx = 0;
+          for (auto& b : _g[en+"sigred"]->bins()) {
+            book(b, 4, 1, ++idx);
+          }
+        }
+        else if (fuzzyEquals(eVal, 318.1, eps) && !_positron) {
+          // NC e- p at sqrts=318
+          const vector<double> Q2edges = {
+            54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455.,
+            460., 545., 560., 765., 770., 835., 900., 1120., 1295., 1300.,
+            1755., 1800., 2270., 2500., 3685., 4000., 6520., 7000., 9275.,
+            10000., 15000., 17000., 24770., 25000., 42000., 70000.
+          };
+          book(_g[en+"sigred"], Q2edges);
+          _g[en+"sigred"]->maskBins({2, 9, 11, 13, 15, 17, 20, 22, 24, 26, 28, 30, 32, 34});
+          size_t idx = 0;
+          for (auto& b : _g[en+"sigred"]->bins()) {
+            book(b, 5, 1, ++idx);
+          }
+          // CC e- p at sqrts=318
+          book(_g[en+"sigred_cc"], {280., 325., 460., 545., 900., 1120., 1300., 1755., 1800., 2270.,
+                                   2500., 3685., 4000., 6520., 7000., 9275., 10000., 20000., 42000.});
+          _g[en+"sigred_cc"]->maskBins({2, 4, 6, 8, 10, 12, 14, 16});
+          idx = 0;
+          for (auto& b : _g[en+"sigred_cc"]->bins()) {
+            book(b, 7, 1, ++idx);
+          }
+        } // end of if
+      } // end of for
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
-      else if (isCompatibleWithSqrtS(318., eps) && !_positron  ) {
-        // NC e- p at sqrts=318
-        const vector<double> Q2edges = {
-          54., 65., 75., 108., 134., 180., 225., 280., 325., 355., 455.,
-          460., 545., 560., 765., 770., 835., 900., 1120., 1295., 1300.,
-          1755., 1800., 2270., 2500., 3685., 4000., 6520., 7000., 9275.,
-          10000., 15000., 17000., 24770., 25000., 42000., 70000.
-        };
-        book(_h_sigred, Q2edges);
-        _h_sigred->maskBins({2, 9, 11, 13, 15, 17, 20, 22, 24, 26, 28, 30, 32, 34});
-        size_t idx = 0;
-        for (auto& b : _h_sigred->bins()) {
-          book(b, 5, 1, ++idx);
-        }
-        // CC e- p at sqrts=318
-        book(_h_sigred_cc, {280., 325., 460., 545., 900., 1120., 1300., 1755., 1800., 2270.,
-                            2500., 3685., 4000., 6520., 7000., 9275., 10000., 20000., 42000.});
-        _h_sigred_cc->maskBins({2, 4, 6, 8, 10, 12, 14, 16});
-        idx = 0;
-        for (auto& b : _h_sigred_cc->bins()) {
-          book(b, 7, 1, ++idx);
-        }
-      }
-    }
+    } // end of init
 
 
     void analyze(const Event& event) {
@@ -161,12 +166,12 @@ namespace Rivet {
       if (PID::isNeutrino(dl.out().abspid()) ) {
         // fill histo for CC
         double F = 2.0*M_PI*x/GF2 * sqr((MW2 + Q2)/MW2);
-        _h_sigred_cc->fill(Q2,x,F); // fill histogram x,Q2
+        _g[_sqs+"sigred_cc"]->fill(Q2,x,F); // fill histogram x,Q2
       }
       else {
         // fill histo for NC
         double F = x*sqr(Q2)/(2.0*M_PI*sqr(alpha)*(1.0+sqr(1-y)));
-        _h_sigred->fill(Q2,x,F); // fill histogram x,Q2
+        _g[_sqs+"sigred"]->fill(Q2,x,F); // fill histogram x,Q2
       }
     }
 
@@ -176,12 +181,8 @@ namespace Rivet {
       const double gev2nb = 0.389e6;
       const double scalefactor=crossSection()/nanobarn/sumOfWeights()/gev2nb ;
       // with _h_sigred.scale also q2 bin width is scaled
-      scale(_h_sigred, scalefactor);
-      divByGroupWidth(_h_sigred);
-      if(isCompatibleWithSqrtS(318., 0.01)) {
-        scale(_h_sigred_cc, scalefactor);
-        divByGroupWidth(_h_sigred_cc);
-      }
+      scale(_g, scalefactor);
+      divByGroupWidth(_g);
     }
 
     /// @}
@@ -189,8 +190,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DGroupPtr _h_sigred, _h_sigred_cc;
-    Histo1DPtr _hist_Q2_10,_hist_Q2_100,_hist_Q2_1000,_hist_Q2_2000,_hist_Q2_3000;
+    map<string,Histo1DGroupPtr> _g;
+
+    string _sqs = "";
+
     bool _positron;
     /// @}
 

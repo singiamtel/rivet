@@ -14,7 +14,6 @@ References:
 RunInfo:
    Requires inclusive inelastic events (non-diffractive and inelastic
    diffractive). The profile plots require large statistics.
-   Beam energy must be specified as analysis option "ENERGY" when rivet-merge'ing samples.
 Beams: [p+, p+]
 Energies: [900, 7000]
 Options:
@@ -32,7 +31,6 @@ Description:
    multiplicity of charged particles and the scalar sum of \pT. and three distributions
    for the two previous quantities as well as \pT for all the particles in the
    transverse region.
-   Beam energy must be specified (in GeV) as analysis option "ENERGY" when rivet-merging samples.
 BibKey: Chatrchyan:2011id
 BibTeX: '@article{Chatrchyan:2011id,
       author         = "Chatrchyan, Serguei and others",
@@ -45,8 +43,8 @@ BibTeX: '@article{Chatrchyan:2011id,
       primaryClass   = "hep-ex",}'
 
 ReleaseTests:
- - $A LHC-7-Jets-1 :ENERGY=7000
- - $A-2 LHC-7-Jets-2 :ENERGY=7000
- - $A-3 LHC-7-Jets-3 :ENERGY=7000
- - $A-4 LHC-7-Jets-4 :ENERGY=7000
+ - $A LHC-7-Jets-1
+ - $A-2 LHC-7-Jets-2
+ - $A-3 LHC-7-Jets-3
+ - $A-4 LHC-7-Jets-4
 

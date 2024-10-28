@@ -20,11 +20,11 @@ namespace Rivet {
     void init() {
 
       // gives the range of eta and min pT for the final state from which I get the jets
-      FastJets jetpro (ChargedFinalState((Cuts::etaIn(-2.5, 2.5) && Cuts::pT >=  0.3*GeV)), JetAlg::ANTIKT, 0.5);
+      FastJets jetpro (ChargedFinalState(Cuts::abseta < 2.5 && Cuts::pT >= 0.3*GeV), JetAlg::ANTIKT, 0.5);
       declare(jetpro, "Jets");
 
       // skip Neutrinos and Muons
-      VetoedFinalState fsv(FinalState((Cuts::etaIn(-7.0, -4.0))));
+      VetoedFinalState fsv(FinalState(Cuts::etaIn(-7.0, -4.0)));
       fsv.vetoNeutrinos();
       fsv.addVetoPairId(PID::MUON);
       declare(fsv, "fsv");
@@ -35,19 +35,25 @@ namespace Rivet {
       sfsv.addVetoPairId(PID::MUON);
       declare(sfsv, "sfsv");
 
-      //counters
-      book(passedSumOfWeights, "passedSumOfWeights");
-      book(inclEflow, "inclEflow");
+      size_t id = 0;
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+        ++id;
 
-      // Temporary histograms to fill the energy flow for leading jet events.
-      // Ratios are calculated in finalyze().
-      int id = 0;
-      if (isCompatibleWithSqrtS( 900)) id=1;
-      if (isCompatibleWithSqrtS(2760*GeV)) id=2;
-      if (isCompatibleWithSqrtS(7000*GeV)) id=3;
-      book(_h_ratio, id, 1, 1);
-      book(_tmp_jet , "TMP/eflow_jet"  ,refData(id, 1, 1));  // Leading jet energy flow in pt
-      book(_tmp_njet, "TMP/number_jet" ,refData(id, 1, 1)); // Number of events in pt
+        //counters
+        book(_c[en+"pass"], "_pass"+en);
+        book(_c[en+"incl"], "_incl"+en);
+
+        // Temporary histograms to fill the energy flow for leading jet events.
+        // Ratios are calculated in finalize().
+        book(_e[en+"ratio"], id, 1, 1);
+        book(_h[en+"num"], "TMP/eflow_jet"+en,  refData(id, 1, 1)); // Leading jet energy flow in pt
+        book(_h[en+"den"], "TMP/number_jet"+en, refData(id, 1, 1)); // Number of events in pt
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
+      }
     }
 
 
@@ -68,7 +74,7 @@ namespace Rivet {
       double dymax = 0;
       int gap_pos  = -1;
       for (size_t i = 0; i < parts.size()-1; ++i) {
-        double dy = parts[i+1].rapidity() - parts[i].rapidity();
+        double dy = parts[i+1].rap() - parts[i].rap();
         if (dy > dymax) {
           dymax = dy;
           gap_pos = i;
@@ -78,14 +84,14 @@ namespace Rivet {
       // calculate mx2 and my2
       FourMomentum xmom;
       for (int i=0; i<=gap_pos; ++i) {
-        xmom += parts[i].momentum();
+        xmom += parts[i].mom();
       }
       double mx2 = xmom.mass2();
       if (mx2<0) vetoEvent;
 
       FourMomentum ymom;
       for (size_t i=gap_pos+1; i<parts.size(); ++i) {
-        ymom += parts[i].momentum();
+        ymom += parts[i].mom();
       }
       double my2 = ymom.mass2();
       if (my2<0) vetoEvent;
@@ -97,33 +103,33 @@ namespace Rivet {
 
       // combine the selection: xi cuts
       bool passedHadronCuts = false;
-      if (isCompatibleWithSqrtS( 900) && (xix > 0.1  || xiy > 0.4 || xidd > 0.5)) passedHadronCuts = true;
-      if (isCompatibleWithSqrtS(2760*GeV) && (xix > 0.07 || xiy > 0.2 || xidd > 0.5)) passedHadronCuts = true;
-      if (isCompatibleWithSqrtS(7000*GeV) && (xix > 0.04 || xiy > 0.1 || xidd > 0.5)) passedHadronCuts = true;
+      if (_sqs=="900"s  && (xix > 0.1  || xiy > 0.4 || xidd > 0.5))  passedHadronCuts = true;
+      if (_sqs=="2760"s && (xix > 0.07 || xiy > 0.2 || xidd > 0.5))  passedHadronCuts = true;
+      if (_sqs=="7000"s && (xix > 0.04 || xiy > 0.1 || xidd > 0.5))  passedHadronCuts = true;
       if (!passedHadronCuts) vetoEvent;
 
       //  ============================== MINIMUM BIAS EVENTS
 
       // loop over particles to calculate the energy
-      passedSumOfWeights->fill();
+      _c[_sqs+"pass"]->fill();
 
       for (const Particle& p : fsv.particles()) {
-        if (-5.2 > p.eta() && p.eta() > -6.6) inclEflow->fill(p.E()/GeV);
+        if (-5.2 > p.eta() && p.eta() > -6.6) _c[_sqs+"incl"]->fill(p.E()/GeV);
       }
 
       //  ============================== JET EVENTS
 
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
       const Jets& jets = jetpro.jetsByPt(Cuts::pT > 1.0*GeV);
-      if (jets.size()<1) vetoEvent;
+      if (jets.size() < 1) vetoEvent;
 
-      if (fabs(jets[0].eta()) < 2.0) {
-        _tmp_njet->fill(jets[0].pT()/GeV);
+      if (jets[0].abseta() < 2.0) {
+        _h[_sqs+"den"]->fill(jets[0].pT()/GeV);
 
         // energy flow
         for (const Particle& p : fsv.particles()) {
           if (p.eta() > -6.6 && p.eta() < -5.2) {  // ask for the CASTOR region
-            _tmp_jet->fill(jets[0].pT()/GeV, p.E()/GeV);
+            _h[_sqs+"num"]->fill(jets[0].pT()/GeV, p.E()/GeV);
           }
         }
       }
@@ -131,19 +137,20 @@ namespace Rivet {
     }// analysis
 
     void finalize() {
-      scale(_tmp_jet, *passedSumOfWeights / *inclEflow);
-      divide(_tmp_jet, _tmp_njet, _h_ratio);
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (_c[en+"incl"]->sumW()) scale(_h[en+"num"], *_c[en+"pass"] / *_c[en+"incl"]);
+        divide(_h[en+"num"], _h[en+"den"], _e[en+"ratio"]);
+      }
     }
 
   private:
     // counters
-    CounterPtr passedSumOfWeights;
-    CounterPtr inclEflow;
+    map<string,CounterPtr> _c;
+    map<string,Histo1DPtr> _h;
+    map<string,Estimate1DPtr> _e;
 
-    // histograms
-    Estimate1DPtr _h_ratio;
-    Histo1DPtr   _tmp_jet;
-    Histo1DPtr   _tmp_njet;
+    string _sqs = "";
   };
 
 

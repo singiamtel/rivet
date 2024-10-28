@@ -1104,8 +1104,9 @@ namespace Rivet {
                                 const bool unscale, const bool reentrantOnly) {
 
     // Check that AH hasn't already been initialised
-    if (_initialised)
+    if (_initialised) {
       throw UserError("AnalysisHandler::init has already been called: cannot re-initialize!");
+    }
 
     const string beaminfokey("/TMP/_BEAMPZ");
     if (allAOs.find(beaminfokey) == allAOs.end()) {
