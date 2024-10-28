@@ -38,6 +38,20 @@ namespace Rivet {
     return handler().runBeamEnergies();
   }
 
+  vector<double> Analysis::allowedEnergies() const {
+    // Check if the ENERGY option was provided
+    double enOpt = getOption("ENERGY", 0.0);
+    if (enOpt)  return { enOpt };
+    // If not, return list of allowed energies from info file
+    vector<double> energies;
+    for (const auto& beams : info().energies()) {
+      energies.push_back( ::Rivet::sqrtS(beams) );
+    }
+    std::sort(energies.begin(), energies.end());
+    energies.erase(std::unique(energies.begin(), energies.end()), energies.end());
+    return energies;
+  }
+
   PdgIdPair Analysis::beamIDs() const {
     return handler().runBeamIDs();
   }

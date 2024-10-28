@@ -15,7 +15,6 @@ References:
 RunInfo:
   QCD events, 900~GeV and 7~TeV. $\Lambda$ and $K_S$ must be able to decay.
   Allow only charged decay modes to improve efficiency.
-  Beam energy must be specified as analysis option "ENERGY" when rivet-merge'ing samples.
 NumEvents: 1000000
 NeedCrossSection: no
 Beams: [p+, p+]
@@ -31,8 +30,7 @@ Description:
    to $\Lambda$ baryons is also measured. The results are compared with various Monte
    Carlo simulation models. Although most of these models agree with data to within
    15 percent in the $K_S$ distributions, substantial disagreements with data are found
-   in the $\Lambda$ distributions of transverse momentum.
-   Beam energy must be specified (in GeV) as analysis option "ENERGY" when rivet-merging samples.'
+   in the $\Lambda$ distributions of transverse momentum.'
 BibKey: Aad:2011hd
 BibTeX: '@article{Aad:2011hd,
       author         = "Aad, Georges and others",
@@ -50,6 +48,6 @@ BibTeX: '@article{Aad:2011hd,
 }'
 
 ReleaseTests:
- - $A LHC-7-UE-Long :ENERGY=7000
- - $A-2 LHC-900-UE-Long :ENERGY=900
+ - $A LHC-7-UE-Long
+ - $A-2 LHC-900-UE-Long
 

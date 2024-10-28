@@ -13,7 +13,6 @@ References:
  - ATLAS-BPHY-2012-02
  - arXiv:1512.03657 [hep-ex]
 RunInfo: hadronic events with J/psi and psi(2S)
-  Beam energy must be specified as analysis option "ENERGY" when rivet-merge'ing samples.
 Beams: [p+, p+]
 Energies: [[3500,3500],[4000,4000]]
 Options:

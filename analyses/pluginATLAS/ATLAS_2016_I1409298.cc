@@ -22,44 +22,52 @@ namespace Rivet {
 
       declare(UnstableParticles(Cuts::pid==443 or Cuts::pid==100443), "UFS");
 
-      unsigned int iloc=0;
-      if (isCompatibleWithSqrtS(7000)) {
-        iloc = 1;
-      }
-      else if (isCompatibleWithSqrtS(8000)) {
-        iloc = 2;
-      }
-      else {
-        throw UserError("Centre-of-mass energy of the given input is neither 7 or 8 TeV.");
-      }
       // binning in y
       const vector<double> yedges = {0.,0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.};
       // book histos
-      for (unsigned int ix=0; ix<3; ++ix) {
-        book(_h_JPsi[ix], yedges);
-        if(ix<2) book(_h_JPsi[ix+3], yedges);
-        book(_h_psi2S[ix], yedges);
-        for (size_t iy=1; iy < yedges.size(); ++iy) {
-          if (ix == 2) {
-            // total no for ratios etc
-            book(_h_JPsi[ix]->bin(iy),  "TMP/JPsi_2_"+toString(iy),  refData(  iloc,1,iy));
-            book(_h_psi2S[ix]->bin(iy), "TMP/psi2S_2_"+toString(iy), refData(4+iloc,1,iy));
-            continue;
+      size_t ie = 0; _ih = 10;
+      for (double eVal : allowedEnergies()) {
+
+        if (isCompatibleWithSqrtS(eVal))  _ih = ie;
+
+        for (unsigned int ix=0; ix<3; ++ix) {
+          book(_h_JPsi[ie][ix], yedges);
+          if(ix<2) book(_h_JPsi[ie][ix+3], yedges);
+          book(_h_psi2S[ie][ix], yedges);
+          for (size_t iy=1; iy < yedges.size(); ++iy) {
+            if (ix == 2) {
+              // total no for ratios etc
+              book(_h_JPsi[ie][ix]->bin(iy),
+                   "TMP/JPsi_2_"+toString(iy)+"_"+toString(ie),
+                   refData(1+ie,1,iy));
+              book(_h_psi2S[ie][ix]->bin(iy),
+                   "TMP/psi2S_2_"+toString(iy)+"_"+toString(ie),
+                   refData(5+ie,1,iy));
+              continue;
+            }
+            // prompt and non-prompt Jpsi
+            book(_h_JPsi[ie][ix]->bin(iy), 1+ie+2*ix,1,iy);
+            // prompt and non-prompt psi(2S)
+            book(_h_psi2S[ie][ix]->bin(iy), 5+ie+2*ix,1,iy);
+            // extra Jpsi for ratios with psi2s
+            if(ix<2) {
+              book(_h_JPsi[ie][ix+3]->bin(iy),
+                   "TMP/JPsi_"+toString(ix+3)+"_"+toString(iy)+"_"+toString(ie),
+                   refData(5+ie+2*ix,1,iy));
+            }
           }
-          // prompt and non-prompt Jpsi
-          book(_h_JPsi[ix]->bin(iy), iloc+2*ix,1,iy);
-          // prompt and non-prompt psi(2S)
-          book(_h_psi2S[ix]->bin(iy), 4+iloc+2*ix,1,iy);
-          // extra Jpsi for ratios with psi2s
-          if(ix<2) book(_h_JPsi[ix+3]->bin(iy), "TMP/JPsi_"+toString(ix+3)+"_"+toString(iy), refData(4+iloc+2*ix,1,iy));
         }
+        ++ie;
+      }
+      if (_ih == 10 && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      
+
       // Final state of unstable particles to get particle spectra
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
 
@@ -69,13 +77,13 @@ namespace Rivet {
         const double absrap = p.absrap();
         const double xp = p.perp();
         if (p.pid()==443) {
-          _h_JPsi[nonPrompt  ]->fill(absrap,xp);
-          _h_JPsi[2          ]->fill(absrap,xp);
-          _h_JPsi[nonPrompt+3]->fill(absrap,xp);
+          _h_JPsi[_ih][nonPrompt  ]->fill(absrap,xp);
+          _h_JPsi[_ih][2          ]->fill(absrap,xp);
+          _h_JPsi[_ih][nonPrompt+3]->fill(absrap,xp);
         }
         else {
-          _h_psi2S[nonPrompt]->fill(absrap,xp);
-          _h_psi2S[2        ]->fill(absrap,xp);
+          _h_psi2S[_ih][nonPrompt]->fill(absrap,xp);
+          _h_psi2S[_ih][2        ]->fill(absrap,xp);
         }
       }
     }
@@ -87,44 +95,35 @@ namespace Rivet {
       const double factor = 0.5*crossSection()/nanobarn/sumOfWeights();
       // br to muons PDG 2021 (psi2s is e+e- due large errors on mu+mu-)
       const vector<double> br = {0.05961,0.00793};
-      // scale histos
-      for (unsigned int ix=0; ix<5; ++ix) {
-        scale(_h_JPsi [ix], factor*br[0]);
-        divByGroupWidth(_h_JPsi[ix]);
-        if(ix>2) continue;
-        scale(_h_psi2S[ix], factor*br[1]);
-        divByGroupWidth(_h_psi2S[ix]);
-      }
-      // ratios, first find CMS energy
-      unsigned int iloc=0;
-      if (isCompatibleWithSqrtS(7000)) {
-        iloc = 1;
-      }
-      else if  (isCompatibleWithSqrtS(8000)) {
-        iloc = 2;
-      }
-      else {
-        throw UserError("Centre-of-mass energy of the given input is neither 7 or 8 TeV.");
-      }
-
-      for (unsigned int iy=1; iy<=_h_JPsi[0]->numBins(); ++iy) {
-        // non-prompt J/psi percentage
-        Estimate1DPtr tmp;
-        book(tmp,8+iloc,1,iy);
-        efficiency(_h_JPsi[1]->bin(iy),_h_JPsi[2]->bin(iy),tmp);
-        tmp->scale(100.);
-        // non-prompt psi2S percentage
-        book(tmp,10+iloc,1,iy);
-        efficiency(_h_psi2S[1]->bin(iy),_h_psi2S[2]->bin(iy),tmp);
-        tmp->scale(100.);
-        // prompt psi(2s)/J/psi percentage
-        book(tmp,12+iloc,1,iy);
-        divide(_h_psi2S[0]->bin(iy),_h_JPsi[3]->bin(iy),tmp);
-        tmp->scale(100.);
-        // non-prompt psi(2s)/J/psi percentage
-        book(tmp,14+iloc,1,iy);
-        divide(_h_psi2S[1]->bin(iy),_h_JPsi[4]->bin(iy),tmp);
-        tmp->scale(100.);
+      for (size_t ie=0; ie<2; ++ie) {
+        // scale histos
+        for (size_t ix=0; ix<5; ++ix) {
+          scale(_h_JPsi[ie][ix], factor*br[0]);
+          divByGroupWidth(_h_JPsi[ie][ix]);
+          if (ix>2) continue;
+          scale(_h_psi2S[ie][ix], factor*br[1]);
+          divByGroupWidth(_h_psi2S[ie][ix]);
+        }
+        // ratios
+        for (size_t iy=1; iy<=_h_JPsi[ie][0]->numBins(); ++iy) {
+          // non-prompt J/psi percentage
+          Estimate1DPtr tmp;
+          book(tmp,9+ie,1,iy);
+          efficiency(_h_JPsi[ie][1]->bin(iy),_h_JPsi[ie][2]->bin(iy),tmp);
+          tmp->scale(100.);
+          // non-prompt psi2S percentage
+          book(tmp,11+ie,1,iy);
+          efficiency(_h_psi2S[ie][1]->bin(iy),_h_psi2S[ie][2]->bin(iy),tmp);
+          tmp->scale(100.);
+          // prompt psi(2s)/J/psi percentage
+          book(tmp,13+ie,1,iy);
+          divide(_h_psi2S[ie][0]->bin(iy),_h_JPsi[ie][3]->bin(iy),tmp);
+          tmp->scale(100.);
+          // non-prompt psi(2s)/J/psi percentage
+          book(tmp,15+ie,1,iy);
+          divide(_h_psi2S[ie][1]->bin(iy),_h_JPsi[ie][4]->bin(iy),tmp);
+          tmp->scale(100.);
+        }
       }
     }
 
@@ -133,7 +132,8 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DGroupPtr _h_JPsi[5],_h_psi2S[3];
+    Histo1DGroupPtr _h_JPsi[2][5], _h_psi2S[2][3];
+    size_t _ih;
     /// @}
 
 

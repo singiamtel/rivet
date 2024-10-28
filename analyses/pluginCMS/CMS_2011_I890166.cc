@@ -15,43 +15,31 @@ namespace Rivet {
 
 
     void init() {
+
       UnstableParticles ufs(Cuts::absrap < 2);
       declare(ufs, "UFS");
-      int beamEnergy = -1;
-      if (isCompatibleWithSqrtS(900*GeV))  beamEnergy = 1;
-      else if (isCompatibleWithSqrtS(7000*GeV))  beamEnergy = 2;
-      else {
-        MSG_WARNING("Could not decipher beam energy. For rivet-merge set -a CMS_2011_I890166:energy=OPT, where OPT is 900 or 7000 (GeV is implied).");
-      }
 
       // Particle distributions versus rapidity and transverse momentum
-      if (beamEnergy == 1){
-        book(_h_dNKshort_dy  ,1, 1, 1);
-        book(_h_dNKshort_dpT ,2, 1, 1);
-        book(_h_dNLambda_dy  ,3, 1, 1);
-        book(_h_dNLambda_dpT ,4, 1, 1);
-        book(_h_dNXi_dy      ,5, 1, 1);
-        book(_h_dNXi_dpT     ,6, 1, 1);
-        //
-        book(_h_LampT_KpT , 7, 1, 1);
-        book(_h_XipT_LampT, 8, 1, 1);
-        book(_h_Lamy_Ky   , 9, 1, 1);
-        book(_h_Xiy_Lamy  , 10, 1, 1);
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+        bool offset(en == "7000"s);
 
-      } else if (beamEnergy == 2){
-        book(_h_dNKshort_dy  ,1, 1, 2);
-        book(_h_dNKshort_dpT ,2, 1, 2);
-        book(_h_dNLambda_dy  ,3, 1, 2);
-        book(_h_dNLambda_dpT ,4, 1, 2);
-        book(_h_dNXi_dy      ,5, 1, 2);
-        book(_h_dNXi_dpT     ,6, 1, 2);
+        book(_h[en+"dNKshort_dy"],  1, 1, 1+offset);
+        book(_h[en+"dNKshort_dpT"], 2, 1, 1+offset);
+        book(_h[en+"dNLambda_dy"],  3, 1, 1+offset);
+        book(_h[en+"dNLambda_dpT"], 4, 1, 1+offset);
+        book(_h[en+"dNXi_dy"],      5, 1, 1+offset);
+        book(_h[en+"dNXi_dpT"],     6, 1, 1+offset);
         //
-        book(_h_LampT_KpT , 7, 1, 2);
-        book(_h_XipT_LampT, 8, 1, 2);
-        book(_h_Lamy_Ky   , 9, 1, 2);
-        book(_h_Xiy_Lamy  , 10, 1, 2);
-      } else {
-        MSG_WARNING("Could not initialize properly.");
+        book(_e[en+"LampT_KpT"],   7, 1, 1+offset);
+        book(_e[en+"XipT_LampT"],  8, 1, 1+offset);
+        book(_e[en+"Lamy_Ky"],     9, 1, 1+offset);
+        book(_e[en+"Xiy_Lamy"],   10, 1, 1+offset);
+
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
     }
 
@@ -62,46 +50,62 @@ namespace Rivet {
       for (const Particle& p : parts.particles()) {
         switch (p.abspid()) {
         case PID::K0S:
-          _h_dNKshort_dy->fill(p.absrap());
-          _h_dNKshort_dpT->fill(p.pT()/GeV);
+          _h[_sqs+"dNKshort_dy"]->fill(p.absrap());
+          _h[_sqs+"dNKshort_dpT"]->fill(p.pT()/GeV);
           break;
 
         case PID::LAMBDA:
           // Lambda should not have Cascade or Omega ancestors since they should not decay. But just in case...
-          if ( !( p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ) ) {
-            _h_dNLambda_dy->fill(p.absrap());
-            _h_dNLambda_dpT->fill(p.pT()/GeV);
+          if ( !( p.hasAncestorWith(Cuts::pid ==  3322) ||
+                  p.hasAncestorWith(Cuts::pid == -3322) ||
+                  p.hasAncestorWith(Cuts::pid ==  3312) ||
+                  p.hasAncestorWith(Cuts::pid == -3312) ||
+                  p.hasAncestorWith(Cuts::pid ==  3334) ||
+                  p.hasAncestorWith(Cuts::pid == -3334) ) ) {
+            _h[_sqs+"dNLambda_dy"]->fill(p.absrap());
+            _h[_sqs+"dNLambda_dpT"]->fill(p.pT()/GeV);
           }
           break;
 
         case PID::XIMINUS:
           // Cascade should not have Omega ancestors since it should not decay.  But just in case...
-          if ( !( p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ) ) {
-            _h_dNXi_dy->fill(p.absrap());
-            _h_dNXi_dpT->fill(p.pT()/GeV);
+          if ( !( p.hasAncestorWith(Cuts::pid ==  3334) ||
+                  p.hasAncestorWith(Cuts::pid == -3334) ) ) {
+            _h[_sqs+"dNXi_dy"]->fill(p.absrap());
+            _h[_sqs+"dNXi_dpT"]->fill(p.pT()/GeV);
           }
           break;
         }
-
       }
     }
 
 
     void finalize() {
-      divide(_h_dNLambda_dpT, _h_dNKshort_dpT, _h_LampT_KpT);
-      YODA::Histo1D denom = _h_dNLambda_dpT->clone();
-      denom.rebinXTo(_h_dNXi_dpT->xEdges());
-      divide(*_h_dNXi_dpT, denom, _h_XipT_LampT);
-      divide(_h_dNLambda_dy, _h_dNKshort_dy, _h_Lamy_Ky);
-      divide(_h_dNXi_dy, _h_dNLambda_dy, _h_Xiy_Lamy);
+
+      for (double eVal : allowedEnergies()) {
+
+        const string en = toString(int(eVal));
+
+        divide(_h[en+"dNLambda_dpT"], _h[en+"dNKshort_dpT"], _e[en+"LampT_KpT"]);
+
+        YODA::Histo1D denom = _h[en+"dNLambda_dpT"]->clone();
+        denom.rebinXTo(_h[en+"dNXi_dpT"]->xEdges());
+        divide(*_h[en+"dNXi_dpT"], denom, _e[en+"XipT_LampT"]);
+
+        divide(_h[en+"dNLambda_dy"], _h[en+"dNKshort_dy"], _e[en+"Lamy_Ky"]);
+        divide(_h[en+"dNXi_dy"], _h[en+"dNLambda_dy"], _e[en+"Xiy_Lamy"]);
+      }
+
       const double normpT = 1.0/sumOfWeights();
       const double normy = 0.5*normpT; // Accounts for using |y| instead of y
-      scale(_h_dNKshort_dy, normy);
-      scale(_h_dNKshort_dpT, normpT);
-      scale(_h_dNLambda_dy, normy);
-      scale(_h_dNLambda_dpT, normpT);
-      scale(_h_dNXi_dy, normy);
-      scale(_h_dNXi_dpT, normpT);
+      for (auto& item : _h) {
+        if (item.first.find("_dy") != string::npos) {
+          scale(item.second, normy);
+        }
+        else {
+          scale(item.second, normpT);
+        }
+      }
     }
 
 
@@ -109,8 +113,10 @@ namespace Rivet {
 
     /// @name Particle distributions versus rapidity and transverse momentum
     /// @{
-    Histo1DPtr _h_dNKshort_dy, _h_dNKshort_dpT, _h_dNLambda_dy, _h_dNLambda_dpT, _h_dNXi_dy, _h_dNXi_dpT;
-    Estimate1DPtr _h_LampT_KpT, _h_XipT_LampT, _h_Lamy_Ky, _h_Xiy_Lamy;
+    map<string,Histo1DPtr> _h;
+    map<string,Estimate1DPtr> _e;
+
+    string _sqs = "";
     /// @}
 
   };

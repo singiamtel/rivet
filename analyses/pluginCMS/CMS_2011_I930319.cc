@@ -17,13 +17,13 @@ namespace Rivet {
 
 
     void init() {
-      const FinalState fs((Cuts::etaIn(-6.0, 6.0)));
+      const FinalState fs(Cuts::abseta < 6.0);
       declare(fs, "FS");
       declare(FastJets(fs, JetAlg::ANTIKT, 0.5), "Jets");
 
       VetoedFinalState fsv(fs);
       fsv.vetoNeutrinos();
-      fsv.addVetoPairDetail(PID::MUON, 0.0*GeV, 99999.9*GeV);
+      fsv.addVetoPair(PID::MUON);
       declare(fsv, "fsv");
 
       // For the MB ND selection
@@ -33,16 +33,19 @@ namespace Rivet {
       fschrgdv.vetoNeutrinos();
       declare(fschrgdv, "fschrgdv");
 
-      if (isCompatibleWithSqrtS(900*GeV)) {
-        book(_hist_mb      ,1, 1, 1); // energy flow in MB, 0.9 TeV
-        book(_hist_dijet ,2, 1, 1); // energy flow in dijet events, 0.9 TeV
-      } else if (isCompatibleWithSqrtS(7000*GeV)) {
-        book(_hist_mb      ,3, 1, 1); // energy flow in MB, 7 TeV
-        book(_hist_dijet ,4, 1, 1); // energy flow in dijet events, 7 TeV
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+        size_t offset = (en == "900"s)? 0 : 2;
+        book(_h[en+"mb"],    1+offset, 1, 1); // energy flow in MB
+        book(_h[en+"dijet"], 2+offset, 1, 1); // energy flow in dijet events
+        book(_c[en+"mb"],    "/tmp/weightMB"+en);
+        book(_c[en+"dijet"], "/tmp/weightDijet"+en);
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
 
-      book(_weightMB, "/tmp/weightMB");
-      book(_weightDiJet, "/tmp/weightDijet");
     }
 
 
@@ -56,35 +59,33 @@ namespace Rivet {
       double count_chrg_backward = 0;
       const FinalState& fschrgdv = apply<FinalState>(event, "fschrgdv");
       for (const Particle& p : fschrgdv.particles()) {
-        if (3.9 < p.eta() && p.eta() < 4.4) count_chrg_forward++;
-        if (-4.4 < p.eta() && p.eta() < -3.9) count_chrg_backward++;
+        if (3.9 < p.eta() && p.eta() < 4.4)     ++count_chrg_forward;
+        if (-4.4 < p.eta() && p.eta() < -3.9)  ++count_chrg_backward;
       }
       if (count_chrg_forward == 0 || count_chrg_backward == 0) vetoEvent;
       /// @todo "Diffractive" veto should really also veto dijet events?
 
 
       // MINIMUM BIAS EVENTS
-      _weightMB->fill();
+      _c[_sqs+"mb"]->fill();
       for (const Particle& p: fsv.particles()) {
-        _hist_mb->fill(p.abseta(), p.E()/GeV);
+        _h[_sqs+"mb"]->fill(p.abseta(), p.E()/GeV);
       }
 
 
       // DIJET EVENTS
-      double PTCUT = -1.0;
-      if (isCompatibleWithSqrtS(900*GeV)) PTCUT = 8.0*GeV;
-      else if (isCompatibleWithSqrtS(7000*GeV)) PTCUT = 20.0*GeV;
       const FastJets& jetpro = apply<FastJets>(event, "Jets");
+      const double PTCUT = (_sqs=="900"s)? 8*GeV : 20*GeV;
       const Jets jets = jetpro.jetsByPt(Cuts::pT > PTCUT);
       if (jets.size() >= 2) {
         // eta cut for the central jets
-        if (fabs(jets[0].eta()) < 2.5 && fabs(jets[1].eta()) < 2.5) {
+        if (jets[0].abseta() < 2.5 && jets[1].abseta() < 2.5) {
           // Back to back condition of the jets
           const double diffphi = deltaPhi(jets[1].phi(), jets[0].phi());
           if (diffphi-PI < 1.0) {
-            _weightDiJet->fill();
+            _c[_sqs+"dijet"]->fill();
             for (const Particle& p: fsv.particles()) {
-              _hist_dijet->fill(p.abseta(), p.E()/GeV);
+              _h[_sqs+"dijet"]->fill(p.abseta(), p.E()/GeV);
             }
           }
         }
@@ -94,16 +95,19 @@ namespace Rivet {
 
 
     void finalize() {
-      scale(_hist_mb   , 0.5/_weightMB->sumW());
-      scale(_hist_dijet, 0.5/_weightDiJet->sumW());
+      for (auto& item : _h) {
+        scale(item.second, 0.5/_c[item.first]->sumW());
+      }
     }
 
 
   private:
 
     /// @{
-    Histo1DPtr _hist_mb, _hist_dijet;
-    CounterPtr _weightMB, _weightDiJet;
+    map<string,Histo1DPtr> _h;
+    map<string,CounterPtr> _c;
+
+    string _sqs = "";
     /// @}
 
   };

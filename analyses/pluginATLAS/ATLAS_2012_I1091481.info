@@ -16,7 +16,6 @@ References:
  - arXiv:1203.0419 [hep-ex]
 RunInfo:
   QCD events with diffractives switched on.
-  Beam energy must be specified as analysis option "ENERGY" when rivet-merge'ing samples.
 NumEvents: 1000000
 NeedCrossSection: no
 Beams: [p+, p+]
@@ -32,8 +31,7 @@ Description:
    The correlations measured in a phase space region dominated by low-$\pT$ particles
    are not well described by conventional models of hadron production. The measured
    spectra show features consistent with the fragmentation of a QCD string
-   represented by a helix-like ordered gluon chain.
-   Beam energy must be specified (in GeV) as analysis option "ENERGY" when rivet-merging samples.'
+   represented by a helix-like ordered gluon chain.'
 BibKey: :2012fa
 BibTeX: '@article{:2012fa,
       author         = "Aad, Georges and others",

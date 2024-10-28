@@ -21,41 +21,35 @@ namespace Rivet {
       const ChargedFinalState cfs;
       declare(cfs, "CFS");
 
-      offset = 0;
-      if (isCompatibleWithSqrtS(14.0*GeV)) {
-        offset = 1;
+      size_t ih = 0;
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal/MeV));
+        if (isCompatibleWithSqrtS(eVal)) {
+          _sqs = en;
+          _ie = ih+1;
+        }
+        book(_h[en], 5, 1, ++ih);
       }
-      else if (isCompatibleWithSqrtS(22.0*GeV)) {
-        offset = 2;
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
-      else if (isCompatibleWithSqrtS(34.8*GeV)) {
-        offset = 3;
-      }
-      else if (isCompatibleWithSqrtS(43.6*GeV)) {
-        offset = 4;
-      }
-      else {
-        MSG_WARNING("CoM energy of events sqrt(s) = " << sqrtS()/GeV
-                    << " doesn't match any available analysis energy .");
-      }
-      book(_histCh, 5, 1, offset);
-      book(_histTotal, 2, 1, 1);
+      book(_p, 2, 1, 1);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      if (Ecm == "")  Ecm = _histTotal->bin(offset).xEdge();
+      if (Ecm == "")  Ecm = _p->bin(_ie).xEdge();
       const FinalState& cfs = apply<FinalState>(event, "CFS");
       MSG_DEBUG("Total charged multiplicity = " << cfs.size());
-      _histCh->fill(cfs.size());
-      _histTotal->fill(Ecm, cfs.size());
+      _h[_sqs]->fill(cfs.size());
+      _p->fill(Ecm, cfs.size());
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      scale(_histCh, 1.0/sumOfWeights());
+      scale(_h, 1.0/sumOfWeights());
     }
 
     /// @}
@@ -65,10 +59,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    BinnedHistoPtr<int> _histCh;
-    BinnedProfilePtr<string> _histTotal;
-    string Ecm = "";
-    int offset;
+    map<string,BinnedHistoPtr<int>> _h;
+    BinnedProfilePtr<string> _p;
+    string Ecm = "", _sqs = "";
+    size_t _ie = 0;
     /// @}
   };
 
