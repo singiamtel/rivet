@@ -38,6 +38,20 @@ namespace Rivet {
     return handler().runBeamEnergies();
   }
 
+  vector<double> Analysis::allowedEnergies() const {
+    // Check if the ENERGY option was provided
+    double enOpt = getOption("ENERGY", 0.0);
+    if (enOpt)  return { enOpt };
+    // If not, return list of allowed energies from info file
+    vector<double> energies;
+    for (const auto& beams : info().energies()) {
+      energies.push_back( ::Rivet::sqrtS(beams) );
+    }
+    std::sort(energies.begin(), energies.end());
+    energies.erase(std::unique(energies.begin(), energies.end()), energies.end());
+    return energies;
+  }
+
   PdgIdPair Analysis::beamIDs() const {
     return handler().runBeamIDs();
   }
@@ -290,8 +304,12 @@ namespace Rivet {
   ////////////////////////////////////////////////////////////
   // Histogramming
 
+  // For thread safety.
+  static std::mutex cache_ref_data_mutex_guard {};
 
   void Analysis::_cacheRefData() const {
+    std::lock_guard<mutex> lock(cache_ref_data_mutex_guard); // For thread safety.
+
     if (_refdata.empty()) {
       MSG_TRACE("Getting refdata cache for paper " << name());
       _refdata = getRefData(refDataName());

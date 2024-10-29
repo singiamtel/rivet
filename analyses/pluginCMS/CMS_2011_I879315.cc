@@ -2,6 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/Beam.hh"
+#include "Rivet/Tools/HistoGroup.hh"
 using namespace std;
 
 namespace Rivet {
@@ -15,41 +16,28 @@ namespace Rivet {
 
 
     void init() {
-      ChargedFinalState cfs((Cuts::etaIn(-2.4, 2.4)));
+      ChargedFinalState cfs(Cuts::abseta < 2.4);
       declare(cfs, "CFS");
 
-      // eta bins
-      _etabins.push_back(0.5);
-      _etabins.push_back(1.0);
-      _etabins.push_back(1.5);
-      _etabins.push_back(2.0);
-      _etabins.push_back(2.4) ;
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
 
-      if (isCompatibleWithSqrtS(900*GeV)) {
-        for (size_t ietabin=0; ietabin < _etabins.size(); ietabin++) {
-          _h_dNch_dn.push_back( Histo1DPtr() );
-          book( _h_dNch_dn.back(), 2 + ietabin, 1, 1);
+        size_t offset = 0;
+        if (en == "2360"s)  offset = 5;
+        else if (en == "7000"s)  offset = 10;
+        book(_g[en+"dNch_dn"], {0.0, 0.5, 1.0, 1.5, 2.0, 2.4});
+        for (auto& b : _g[en+"dNch_dn"]->bins()) {
+          book(b, b.index()+offset+1, 1, 1);
         }
-        book(_h_dNch_dn_pt500_eta24 ,20, 1, 1);
-        book(_h_dmpt_dNch_eta24 ,23, 1, 1);
+
+        if (en == "2360"s)  offset = 1;
+        else if (en == "7000"s)  offset = 2;
+        book(_h[en+"dNch_dn_pt500_eta24"], 20+offset, 1, 1);
+        book(_p[en+"dmpt_dNch_eta24"],     23+offset, 1, 1);
       }
-
-      if (isCompatibleWithSqrtS(2360*GeV)) {
-        for (size_t ietabin=0; ietabin < _etabins.size(); ietabin++) {
-          _h_dNch_dn.push_back( Histo1DPtr() );
-          book(_h_dNch_dn.back(), 7 + ietabin, 1, 1);
-        }
-        book(_h_dNch_dn_pt500_eta24 ,21, 1, 1);
-        book(_h_dmpt_dNch_eta24 ,24, 1, 1);
-      }
-
-      if (isCompatibleWithSqrtS(7000*GeV)) {
-        for (size_t ietabin=0; ietabin < _etabins.size(); ietabin++) {
-          _h_dNch_dn.push_back( Histo1DPtr() );
-          book(_h_dNch_dn.back(), 12 + ietabin, 1, 1);
-        }
-        book(_h_dNch_dn_pt500_eta24 ,22, 1, 1);
-        book(_h_dmpt_dNch_eta24 ,25, 1, 1);
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
     }
 
@@ -60,10 +48,9 @@ namespace Rivet {
       const ChargedFinalState& charged = apply<ChargedFinalState>(event, "CFS");
 
       // Resetting the multiplicity for the event to 0;
-      vector<int> _nch_in_Evt;
-      vector<int> _nch_in_Evt_pt500;
-      _nch_in_Evt.assign(_etabins.size(), 0);
-      _nch_in_Evt_pt500.assign(_etabins.size(), 0);
+      size_t nBins = _g[_sqs+"dNch_dn"]->numBins();
+      vector<int> _nch_in_Evt(nBins, 0);
+      vector<int> _nch_in_Evt_pt500(nBins, 0);
       double sumpt = 0;
 
       // Loop over particles in event
@@ -71,50 +58,43 @@ namespace Rivet {
         // Selecting only charged hadrons
         if (! PID::isHadron(p.pid())) continue;
 
-        double pT = p.pT();
-        double eta = p.eta();
-        sumpt += pT;
-        for (size_t ietabin = _etabins.size(); ietabin > 0; --ietabin) {
-          if (fabs(eta) > _etabins[ietabin-1]) break;
-          ++_nch_in_Evt[ietabin-1];
-          if (pT > 0.5/GeV) ++_nch_in_Evt_pt500[ietabin-1];
+        const double pT = p.pT(); sumpt += pT;
+        const double abseta = p.abseta();
+        size_t ieta = nBins;
+        while (ieta--) {
+          if (abseta > _g[_sqs+"dNch_dn"]->bin(ieta+1).xMax()) break;
+          ++_nch_in_Evt[ieta];
+          if (pT > 0.5*GeV) ++_nch_in_Evt_pt500[ieta];
         }
       }
 
       // Filling multiplicity-dependent histogramms
-      for (size_t ietabin = 0; ietabin < _etabins.size(); ietabin++) {
-        _h_dNch_dn[ietabin]->fill(_nch_in_Evt[ietabin]);
+      for (auto& b : _g[_sqs+"dNch_dn"]->bins()) {
+        b->fill(_nch_in_Evt[b.index()-1]);
       }
 
-      // Do only if eta bins are the needed ones
-      if (_etabins[4] == 2.4 && _etabins[0] == 0.5) {
-        if (_nch_in_Evt[4] != 0) {
-          _h_dmpt_dNch_eta24->fill(_nch_in_Evt[4], sumpt/GeV / _nch_in_Evt[4]);
-        }
-        _h_dNch_dn_pt500_eta24->fill(_nch_in_Evt_pt500[4]);
-      } else {
-        MSG_WARNING("You changed the number of eta bins, but forgot to propagate it everywhere !!");
+      if (_nch_in_Evt[nBins-1] != 0) {
+        _p[_sqs+"dmpt_dNch_eta24"]->fill(_nch_in_Evt[nBins-1], sumpt/GeV / _nch_in_Evt[nBins-1]);
       }
+      _h[_sqs+"dNch_dn_pt500_eta24"]->fill(_nch_in_Evt_pt500[nBins-1]);
     }
 
 
     void finalize() {
-      for (size_t ietabin = 0; ietabin < _etabins.size(); ietabin++){
-        normalize(_h_dNch_dn[ietabin]);
-      }
-      normalize(_h_dNch_dn_pt500_eta24);
+      normalize(_g);
+      normalize(_h);
     }
 
 
   private:
 
     /// @{
-    vector<Histo1DPtr> _h_dNch_dn;
-    Histo1DPtr _h_dNch_dn_pt500_eta24;
-    Profile1DPtr _h_dmpt_dNch_eta24;
-    /// @}
+    map<string, Histo1DPtr> _h;
+    map<string, Profile1DPtr> _p;
+    map<string, Histo1DGroupPtr> _g;
 
-    vector<double> _etabins;
+    string _sqs = "";
+    /// @}
 
   };
 

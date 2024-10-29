@@ -359,6 +359,9 @@ namespace Rivet {
     /// Incoming beam energies for this run
     pair<double,double> beamEnergies() const;
 
+    /// Allowed centre-of-mass energies (in GeV) for this routine
+    vector<double> allowedEnergies() const;
+
     /// Centre of mass energy for this run
     double sqrtS() const;
 

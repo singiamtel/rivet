@@ -15,27 +15,25 @@ namespace Rivet {
     /// @{
 
     void init() {
-      ChargedFinalState cfs((Cuts::etaIn(-2.5, 2.5)));
+      ChargedFinalState cfs(Cuts::abseta < 2.5);
       declare(cfs, "CFS");
 
-      if (isCompatibleWithSqrtS(900*GeV)) {
-        for (int d=1; d<=3; d++) {
-          for (int y=1; y<=4; y++) {
-            _h_dNch_dpT.push_back(Histo1DPtr());
-            book(_h_dNch_dpT.back(), d, 1, y);
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+        bool offset(en == "2360"s);
+
+        for (int d=0; d<3; ++d) {
+          for (int y=0; y<4; ++y) {
+            size_t bin = 4*d+y;
+            book(_h[en+"dNch_dpT"+toString(bin)], d+(offset? 4 : 1), 1, y+1);
           }
         }
-        book(_h_dNch_dpT_all ,7, 1, 1);
-        book(_h_dNch_dEta ,8, 1, 1);
-      } else if (isCompatibleWithSqrtS(2360*GeV)) {
-        for (int d=4; d<=6; d++) {
-          for (int y=1; y<=4; y++) {
-            _h_dNch_dpT.push_back(Histo1DPtr());
-            book(_h_dNch_dpT.back(), d, 1, y);
-          }
-        }
-        book(_h_dNch_dpT_all ,7, 1, 2);
-        book(_h_dNch_dEta ,8, 1, 2);
+        book(_h[en+"dNch_dpT_all"], 7, 1, 1+offset);
+        book(_h[en+"dNch_dEta"],    8, 1, 1+offset);
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
     }
 
@@ -52,15 +50,15 @@ namespace Rivet {
         const double pT = p.pT();
         const double eta = p.eta();
 
-        // The data is actually a duplicated folded distribution.  This should mimic it.
-        _h_dNch_dEta->fill(eta, 0.5);
-        _h_dNch_dEta->fill(-eta, 0.5);
+        // The data is actually a duplicated folded distribution. This should mimic it.
+        _h[_sqs+"dNch_dEta"]->fill(eta, 0.5);
+        _h[_sqs+"dNch_dEta"]->fill(-eta, 0.5);
         if (fabs(eta) < 2.4 && pT > 0.1*GeV) {
           if (pT < 4.0*GeV) {
-            _h_dNch_dpT_all->fill(pT/GeV, 1.0/(pT/GeV));
+            _h[_sqs+"dNch_dpT_all"]->fill(pT/GeV, 1.0/(pT/GeV));
             if (pT < 2.0*GeV) {
-              int ietabin = int(fabs(eta)/0.2);
-              _h_dNch_dpT[ietabin]->fill(pT/GeV);
+              const string suff = toString(int(fabs(eta)/0.2));
+              _h[_sqs+"dNch_dpT"+suff]->fill(pT/GeV);
             }
           }
         }
@@ -77,11 +75,17 @@ namespace Rivet {
       const double normpT = normfac/(2.0*0.2);
       const double normpTall = normfac/(2.0*M_PI*2.0*2.4);
 
-      for (size_t ietabin=0; ietabin < _h_dNch_dpT.size(); ietabin++){
-        scale(_h_dNch_dpT[ietabin], normpT);
+      for (auto& item : _h) {
+        if (item.first.find("_dEta") != string::npos) {
+          scale(item.second, normfac);
+        }
+        else if (item.first.find("_all") != string::npos) {
+          scale(item.second, normpTall);
+        }
+        else {
+          scale(item.second, normpT);
+        }
       }
-      scale(_h_dNch_dpT_all, normpTall);
-      scale(_h_dNch_dEta, normfac);
     }
 
     /// @}
@@ -90,9 +94,9 @@ namespace Rivet {
   private:
 
     /// @{
-    std::vector<Histo1DPtr> _h_dNch_dpT;
-    Histo1DPtr _h_dNch_dpT_all;
-    Histo1DPtr _h_dNch_dEta;
+    map<string, Histo1DPtr> _h;
+
+    string _sqs = "";
     /// @}
 
   };

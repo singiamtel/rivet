@@ -1,3 +1,7 @@
+2024-10-24  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Exclude the mkhtml output pages' plot-filtering form from print output.
+
 2024-09-16 Peter Richardson <peter.richardson@durham.ac.uk>
 
 	* Add BESIII_2024_I2730532 D0 -> 4 pi

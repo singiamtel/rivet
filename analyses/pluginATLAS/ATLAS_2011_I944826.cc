@@ -11,17 +11,10 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2011_I944826()
-      : Analysis("ATLAS_2011_I944826")
-    {}
-
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2011_I944826);
 
     /// Book histograms and initialise projections before the run
     void init() {
-
-      book(_sum_w_ks    , "ks");
-      book(_sum_w_lambda, "lambda");
-      book(_sum_w_passed, "passed");
 
       UnstableParticles ufs(Cuts::pT > 100*MeV);
       declare(ufs, "UFS");
@@ -31,42 +24,37 @@ namespace Rivet {
 
       IdentifiedFinalState nstable(Cuts::abseta < 2.5 && Cuts::pT >= 100*MeV);
       nstable.acceptIdPair(PID::ELECTRON)
-        .acceptIdPair(PID::MUON)
-        .acceptIdPair(PID::PIPLUS)
-        .acceptIdPair(PID::KPLUS)
-        .acceptIdPair(PID::PROTON);
+             .acceptIdPair(PID::MUON)
+             .acceptIdPair(PID::PIPLUS)
+             .acceptIdPair(PID::KPLUS)
+             .acceptIdPair(PID::PROTON);
       declare(nstable, "nstable");
 
 
-      if (isCompatibleWithSqrtS(7000*GeV)) {
-        book(_hist_Ks_pT      ,1, 1, 1);
-        book(_hist_Ks_y       ,2, 1, 1);
-        book(_hist_Ks_mult    ,3, 1, 1);
-        book(_hist_L_pT       ,7, 1, 1);
-        book(_hist_L_y        ,8, 1, 1);
-        book(_hist_L_mult     ,9, 1, 1);
-        book(_hist_Ratio_v_y ,13, 1, 1);
-        book(_hist_Ratio_v_pT,14, 1, 1);
+      for (double eVal : allowedEnergies()) {
+
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+
+        bool is900(en == "900");
+        size_t offset = is900? 3 : 0;
+        book(_h[en+"Ks_pT"],       1+offset, 1, 1);
+        book(_h[en+"Ks_y"],        2+offset, 1, 1);
+        book(_h[en+"Ks_mult"],     3+offset, 1, 1);
+        book(_h[en+"L_pT"],        7+offset, 1, 1);
+        book(_h[en+"L_y"],         8+offset, 1, 1);
+        book(_h[en+"L_mult"],      9+offset, 1, 1);
+        if (is900)  offset = 2;
+        book(_e[en+"v_y"],  13+offset, 1, 1);
+        book(_e[en+"v_pT"], 14+offset, 1, 1);
         //
-        book(_temp_lambda_v_y, "TMP/lambda_v_y", 10, 0.0, 2.5);
-        book(_temp_lambdabar_v_y, "TMP/lambdabar_v_y", 10, 0.0, 2.5);
-        book(_temp_lambda_v_pT, "TMP/lambda_v_pT", 18, 0.5, 4.1);
-        book(_temp_lambdabar_v_pT, "TMP/lambdabar_v_pT", 18, 0.5, 4.1);
+        book(_h[en+"lambda_v_y"],     "TMP/lambda_v_y_"+en,     is900? 5 : 10, 0.0, 2.5);
+        book(_h[en+"lambdabar_v_y"],  "TMP/lambdabar_v_y_"+en,  is900? 5 : 10, 0.0, 2.5);
+        book(_h[en+"lambda_v_pT"],    "TMP/lambda_v_pT_"+en,    is900? 8 : 18, 0.5, is900? 3.7 : 4.1);
+        book(_h[en+"lambdabar_v_pT"], "TMP/lambdabar_v_pT_"+en, is900? 8 : 18, 0.5, is900? 3.7 : 4.1);
       }
-      else if (isCompatibleWithSqrtS(900*GeV)) {
-        book(_hist_Ks_pT   ,4, 1, 1);
-        book(_hist_Ks_y    ,5, 1, 1);
-        book(_hist_Ks_mult ,6, 1, 1);
-        book(_hist_L_pT    ,10, 1, 1);
-        book(_hist_L_y     ,11, 1, 1);
-        book(_hist_L_mult  ,12, 1, 1);
-        book(_hist_Ratio_v_y ,15, 1, 1);
-        book(_hist_Ratio_v_pT,16, 1, 1);
-        //
-        book(_temp_lambda_v_y, "TMP/lambda_v_y", 5, 0.0, 2.5);
-        book(_temp_lambdabar_v_y, "TMP/lambdabar_v_y", 5, 0.0, 2.5);
-        book(_temp_lambda_v_pT, "TMP/lambda_v_pT", 8, 0.5, 3.7);
-        book(_temp_lambdabar_v_pT, "TMP/lambdabar_v_pT", 8, 0.5, 3.7);
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
     }
 
@@ -140,14 +128,12 @@ namespace Rivet {
         MSG_DEBUG("Failed stable particle cut");
         vetoEvent;
       }
-      _sum_w_passed->fill();
 
       // This ufs holds all the Kaons and Lambdas
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
 
       // Some conters
-      int n_KS0 = 0;
-      int n_LAMBDA = 0;
+      int n_KS0 = 0, n_LAMBDA = 0;
 
       // Particle loop
       for (const Particle& p : ufs.particles()) {
@@ -169,10 +155,9 @@ namespace Rivet {
             break;
           }
           if (daughtersSurviveCuts(p) ) {
-            _hist_Ks_y ->fill(y);
-            _hist_Ks_pT->fill(pT/GeV);
-            _sum_w_ks->fill();
-            n_KS0++;
+            _h[_sqs+"Ks_y"] ->fill(y);
+            _h[_sqs+"Ks_pT"]->fill(pT/GeV);
+            ++n_KS0;
           }
           break;
 
@@ -188,67 +173,51 @@ namespace Rivet {
           }
           if ( daughtersSurviveCuts(p) ) {
             if (p.pid() == PID::LAMBDA) {
-              _temp_lambda_v_y->fill(fabs(y));
-              _temp_lambda_v_pT->fill(pT/GeV);
-              _hist_L_y->fill(y);
-              _hist_L_pT->fill(pT/GeV);
-              _sum_w_lambda->fill();
-              n_LAMBDA++;
-            } else if (p.pid() == -PID::LAMBDA) {
-             _temp_lambdabar_v_y->fill(fabs(y));
-              _temp_lambdabar_v_pT->fill(pT/GeV);
+              _h[_sqs+"lambda_v_y"]->fill(fabs(y));
+              _h[_sqs+"lambda_v_pT"]->fill(pT/GeV);
+              _h[_sqs+"L_y"]->fill(y);
+              _h[_sqs+"L_pT"]->fill(pT/GeV);
+              ++n_LAMBDA;
+            }
+            else if (p.pid() == -PID::LAMBDA) {
+              _h[_sqs+"lambdabar_v_y"]->fill(fabs(y));
+              _h[_sqs+"lambdabar_v_pT"]->fill(pT/GeV);
             }
           }
           break;
-
         }
       }
 
       // Fill multiplicity histos
-      _hist_Ks_mult->fill(n_KS0);
-      _hist_L_mult->fill(n_LAMBDA);
+      _h[_sqs+"Ks_mult"]->fill(n_KS0);
+      _h[_sqs+"L_mult"]->fill(n_LAMBDA);
     }
 
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      MSG_DEBUG("# Events that pass the trigger: " << dbl(*_sum_w_passed));
-      MSG_DEBUG("# Kshort events: " << dbl(*_sum_w_ks));
-      MSG_DEBUG("# Lambda events: " << dbl(*_sum_w_lambda));
-
-      /// @todo Replace with normalize()?
-      scale(_hist_Ks_pT,   1.0 / *_sum_w_ks);
-      scale(_hist_Ks_y,    1.0 / *_sum_w_ks);
-      scale(_hist_Ks_mult, 1.0 / *_sum_w_passed);
-
-      /// @todo Replace with normalize()?
-      scale(_hist_L_pT,   1.0 / *_sum_w_lambda);
-      scale(_hist_L_y,    1.0 / *_sum_w_lambda);
-      scale(_hist_L_mult, 1.0 / *_sum_w_passed);
-
       // Division of histograms to obtain lambda_bar/lambda ratios
-      divide(_temp_lambdabar_v_y, _temp_lambda_v_y, _hist_Ratio_v_y);
-      divide(_temp_lambdabar_v_pT, _temp_lambda_v_pT, _hist_Ratio_v_pT);
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+
+        if (_h[en+"L_pT"]->sumW())  scale(_h[en+"L_y"], 1.0 / _h[en+"L_pT"]->sumW());
+        divide(_h[en+"lambdabar_v_y"],  _h[en+"lambda_v_y"],  _e[en+"v_y"]);
+        divide(_h[en+"lambdabar_v_pT"], _h[en+"lambda_v_pT"], _e[en+"v_pT"]);
+      }
+      normalize(_h);
+
     }
 
 
   private:
 
-    /// Counters
-    CounterPtr _sum_w_ks, _sum_w_lambda, _sum_w_passed;
-
     /// @name Persistent histograms
     /// @{
-    Histo1DPtr _hist_Ks_pT, _hist_Ks_y, _hist_Ks_mult;
-    Histo1DPtr _hist_L_pT, _hist_L_y, _hist_L_mult;
-    Estimate1DPtr _hist_Ratio_v_pT, _hist_Ratio_v_y;
-    /// @}
+    map<string,Histo1DPtr> _h;
+    map<string,Estimate1DPtr> _e;
 
-    /// @name Temporary histograms
-    /// @{
-    Histo1DPtr _temp_lambda_v_y, _temp_lambdabar_v_y;
-    Histo1DPtr _temp_lambda_v_pT, _temp_lambdabar_v_pT;
+    string _sqs = "";
     /// @}
 
   };

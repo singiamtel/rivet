@@ -15,34 +15,36 @@ namespace Rivet {
 
 
     void init() {
-      const FinalState fs500((Cuts::etaIn(-2.5, 2.5) && Cuts::pT >=  500*MeV));
+      const FinalState fs500(Cuts::abseta < 2.5 && Cuts::pT >=  500*MeV);
       declare(fs500, "FS500");
-      const FinalState fslead((Cuts::etaIn(-2.5, 2.5) && Cuts::pT >=  1.0*GeV));
+      const FinalState fslead(Cuts::abseta < 2.5 && Cuts::pT >=  1.0*GeV);
       declare(fslead, "FSlead");
 
-      // Get an index for the beam energy
-      isqrts = -1;
-      if (isCompatibleWithSqrtS(900*GeV)) isqrts = 0;
-      else if (isCompatibleWithSqrtS( 7000)) isqrts = 1;
-      assert(isqrts >= 0);
+      for (double eVal : allowedEnergies()) {
 
-      // N profiles, 500 MeV pT cut
-      book(_hist_N_transverse_500 ,1+isqrts, 1, 1);
-      // pTsum profiles, 500 MeV pT cut
-      book(_hist_ptsum_transverse_500 ,3+isqrts, 1, 1);
-      // N vs. Delta(phi) profiles, 500 MeV pT cut
-      book(_hist_N_vs_dPhi_1_500 ,13+isqrts, 1, 1);
-      book(_hist_N_vs_dPhi_2_500 ,13+isqrts, 1, 2);
-      book(_hist_N_vs_dPhi_3_500 ,13+isqrts, 1, 3);
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+        bool is7TeV(en == "7000");
+
+        // N profiles, 500 MeV pT cut
+        book(_h[en+"N_transverse"], 1+is7TeV, 1, 1);
+        // pTsum profiles, 500 MeV pT cut
+        book(_h[en+"ptsum_transverse"], 3+is7TeV, 1, 1);
+        // N vs. Delta(phi) profiles, 500 MeV pT cut
+        book(_h[en+"N_vs_dPhi_1"], 13+is7TeV, 1, 1);
+        book(_h[en+"N_vs_dPhi_2"], 13+is7TeV, 1, 2);
+        book(_h[en+"N_vs_dPhi_3"], 13+is7TeV, 1, 3);
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
+      }
     }
 
 
     void analyze(const Event& event) {
       // Require at least one cluster in the event with pT >= 1 GeV
       const FinalState& fslead = apply<FinalState>(event, "FSlead");
-      if (fslead.size() < 1) {
-        vetoEvent;
-      }
+      if (fslead.size() < 1)  vetoEvent;
 
       // These are the particles  with pT > 500 MeV
       const FinalState& chargedNeutral500 = apply<FinalState>(event, "FS500");
@@ -59,7 +61,7 @@ namespace Rivet {
       vector<double> num500(3, 0), ptSum500(3, 0.0);
       // Temporary histos that bin N in dPhi.
       // NB. Only one of each needed since binnings are the same for the energies and pT cuts
-      Histo1D hist_num_dphi_500(_hist_N_vs_dPhi_1_500->xEdges(),"tmp");
+      YODA::Histo1D htemp(_h[_sqs+"N_vs_dPhi_1"]->xEdges(),"tmp");
       for (const Particle& p : particles500) {
         const double pT = p.pT();
         const double dPhi = deltaPhi(philead, p.phi());
@@ -69,7 +71,7 @@ namespace Rivet {
 
         // Fill temp histos to bin N in dPhi
         if (p.genParticle() != p_lead.genParticle()) { // We don't want to fill all those zeros from the leading track...
-          hist_num_dphi_500.fill(dPhi, 1);
+          htemp.fill(dPhi);
         }
       }
 
@@ -78,30 +80,26 @@ namespace Rivet {
       // The densities are calculated by dividing the UE properties by dEta*dPhi
       // -- each region has a dPhi of 2*PI/3 and dEta is two times 2.5
       const double dEtadPhi = (2*2.5 * 2*PI/3.0);
-      _hist_N_transverse_500->fill(pTlead/GeV,  num500[1]/dEtadPhi);
-      _hist_ptsum_transverse_500->fill(pTlead/GeV, ptSum500[1]/GeV/dEtadPhi);
+      _h[_sqs+"N_transverse"]->fill(pTlead/GeV,  num500[1]/dEtadPhi);
+      _h[_sqs+"ptsum_transverse"]->fill(pTlead/GeV, ptSum500[1]/GeV/dEtadPhi);
 
       // Update the "proper" dphi profile histograms
       // Note that we fill dN/dEtadPhi: dEta = 2*2.5, dPhi = 2*PI/nBins
       // The values tabulated in the note are for an (undefined) signed Delta(phi) rather than
       // |Delta(phi)| and so differ by a factor of 2: we have to actually norm for angular range = 2pi
-      const size_t nbins = refData(13+isqrts,1,1).numBins();
-      for (size_t i = 1; i <= nbins; ++i) {
-        double mean = hist_num_dphi_500.bin(i).xMid();
-        double value = 0.;
-        if (hist_num_dphi_500.bin(i).numEntries() > 0) {
-          mean = hist_num_dphi_500.bin(i).xMean();
-          value = hist_num_dphi_500.bin(i).sumW()/hist_num_dphi_500.bin(i).xWidth()/10.0;
+      for (const auto& b : htemp.bins()) {
+        double mean = b.xMid(), value = 0.;
+        if (b.numEntries() > 0) {
+          mean = b.xMean();
+          value = b.sumW()/b.xWidth()/10.0;
         }
-        if (pTlead/GeV >= 1.0) _hist_N_vs_dPhi_1_500->fill(mean, value);
-        if (pTlead/GeV >= 2.0) _hist_N_vs_dPhi_2_500->fill(mean, value);
-        if (pTlead/GeV >= 3.0) _hist_N_vs_dPhi_3_500->fill(mean, value);
+        if (pTlead/GeV >= 1.0) _h[_sqs+"N_vs_dPhi_1"]->fill(mean, value);
+        if (pTlead/GeV >= 2.0) _h[_sqs+"N_vs_dPhi_2"]->fill(mean, value);
+        if (pTlead/GeV >= 3.0) _h[_sqs+"N_vs_dPhi_3"]->fill(mean, value);
       }
 
     }
 
-
-  private:
 
     // Little helper function to identify Delta(phi) regions
     inline int region_index(double dphi) {
@@ -111,16 +109,11 @@ namespace Rivet {
       return 2;
     }
 
+  private:
 
-    int isqrts;
+    string _sqs = "";
 
-    Profile1DPtr _hist_N_transverse_500;
-
-    Profile1DPtr _hist_ptsum_transverse_500;
-
-    Profile1DPtr _hist_N_vs_dPhi_1_500;
-    Profile1DPtr _hist_N_vs_dPhi_2_500;
-    Profile1DPtr _hist_N_vs_dPhi_3_500;
+    map<string,Profile1DPtr> _h;
 
   };
 
