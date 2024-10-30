@@ -160,11 +160,12 @@ namespace Rivet {
   */
 
 
-  Particles Jet::tags(const Cut& c) const {
-    return select(tags(), c);
+  Particles Jet::tags(const Cut& c, double dRmax) const {
+    const Particles rtn = select(tags(), c);
+    return dRmax < 0 ? rtn : select(rtn, deltaRLess(this->mom(), dRmax));
   }
 
-  Particles Jet::bTags(const Cut& c) const {
+  Particles Jet::bTags(const Cut& c, double dRmax) const {
     Particles rtn;
     // First try for ghost-associated b-tag particles
     for (const Particle& tp : tags()) {
@@ -173,11 +174,13 @@ namespace Rivet {
     // If no proper tags found, look for b quark constituents
     if (rtn.empty()) {
       rtn = select(constituents(), hasAbsPID(PID::BQUARK));
+      iselect(rtn, c);
     }
-    return rtn;
+    // Return, via dR filter if requested
+    return dRmax < 0 ? rtn : select(rtn, deltaRLess(this->mom(), dRmax));
   }
 
-  Particles Jet::cTags(const Cut& c) const {
+  Particles Jet::cTags(const Cut& c, double dRmax) const {
     Particles rtn;
     // First try for ghost-associated c-tag particles
     for (const Particle& tp : tags()) {
@@ -187,16 +190,19 @@ namespace Rivet {
     // If no proper tags found, look for b quark constituents
     if (rtn.empty()) {
       rtn = select(constituents(), hasAbsPID(PID::CQUARK));
+      iselect(rtn, c);
     }
-    return rtn;
+    // Return, via dR filter if requested
+    return dRmax < 0 ? rtn : select(rtn, deltaRLess(this->mom(), dRmax));
   }
 
-  Particles Jet::tauTags(const Cut& c) const {
+  Particles Jet::tauTags(const Cut& c, double dRmax) const {
     Particles rtn;
     for (const Particle& tp : tags()) {
       if (isTau(tp) && c->accept(tp)) rtn.push_back(tp);
     }
-    return rtn;
+    // Return, via dR filter if requested
+    return dRmax < 0 ? rtn : select(rtn, deltaRLess(this->mom(), dRmax));
   }
 
 

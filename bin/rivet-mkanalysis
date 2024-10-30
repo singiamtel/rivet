@@ -333,7 +333,7 @@ namespace Rivet {
       // Remove all jets within dR < 0.2 of a dressed lepton
       idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
 
-      // Select jets ghost-associated to B-hadrons with a certain fiducial selection
+      // Select jets ghost-associated to b-hadrons with a certain fiducial selection
       Jets bjets = select(jets, hasBTag(Cuts::pT > 5*GeV && Cuts::abseta < 2.5));
 
       // Veto event if there are no b-jets
@@ -420,7 +420,7 @@ References:
 #Luminosity_fb: 139.0
 Description:
   'A brief description of what is measured and what it is useful for.
-   Use LaTeX for maths, e.g. $\pT > 50\;\GeV$.'
+   Use LaTeX for maths, e.g. $p_\\mathrm{T} > 50~\\mathrm{GeV}$.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

@@ -1,3 +1,11 @@
+2024-10-30  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add an option deltaR cut argument to the Jet::?Tags() and
+	Jet::?Tagged() methods, allowing restriction of tagging hadrons to
+	a sub-radius within the jet. This changeset also fixes a bug in
+	that cuts on tagging objects were not previously applied to
+	quark-level fallbacks.
+
 2024-10-30  Christian Gutschow  <chris.g@cern.ch>
 
 	* Release 4.0.2
