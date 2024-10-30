@@ -52,10 +52,10 @@ BibTeX: '@article{ATLAS:2024vqf,
     year = "2024"
 }'
 ReleaseTests:
- - $A pp-13000-dm-monoj :TYPE=SM:MODE=FIDUCIAL
- - $A-2 pp-13000-dm-monoj :TYPE=BSM:MODE=FIDUCIAL
- - $A-3 pp-13000-dm-monoj :TYPE=SM:MODE=EXTRAPOLATED
- - $A-4 pp-13000-dm-monoj :TYPE=BSM:MODE=EXTRAPOLATED
+ - $A pp-13000-dm-monoj :MODE=FIDUCIAL:TYPE=SM
+ - $A-2 pp-13000-dm-monoj :MODE=FIDUCIAL:TYPE=BSM
+ - $A-3 pp-13000-dm-monoj :MODE=EXTRAPOLATED:TYPE=SM
+ - $A-4 pp-13000-dm-monoj :MODE=EXTRAPOLATED:TYPE=BSM
  - $A-5 LHC-13-Z-mu-jets :TYPE=SM
  - $A-6 pp-13000-eejj :TYPE=SM
  - $A-7 pp-13000-Wev :TYPE=SM
