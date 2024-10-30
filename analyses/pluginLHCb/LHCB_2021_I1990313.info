@@ -22,9 +22,9 @@ NeedCrosssection: yes
 NumEvents: 100000
 Description:
   'A precision measurement of the $Z^0$ boson production cross-section at $\sqrt{s} = 13$ TeV in the forward region
-is presented, using $pp$ collision data collected by the LHCb detector, 
-corresponding to an integrated luminosity of 5.1 fb$^{-1}$. 
-The production cross-section is measured using $Z \to \mu^+ \mu^-$ events within the fiducial region defined as 
+is presented, using $pp$ collision data collected by the LHCb detector,
+corresponding to an integrated luminosity of 5.1 fb$^{-1}$.
+The production cross-section is measured using $Z \to \mu^+ \mu^-$ events within the fiducial region defined as
 pseudorapidity $2.0<\eta<4.5$ and transverse momentum $p_{T}>20$ GeV$/c$ for both muons
 and dimuon invariant mass $60<M_{\mu\mu}<120$ GeV$/c^{2}$.
  The integrated cross-section is determined to be
@@ -38,7 +38,7 @@ ValidationInfo:
 ReleaseTests:
  - $A LHC-13-Z-mu
 Keywords: ['Electroweak Interaction', 'Forward Physics', 'Hadron-Hadron Scattering', 'Particle and Resonance Production']
-BibKey: 
+BibKey:
 BibTeX: '@article{LHCb:2021huf,
     author = "Aaij, R. and others",
     collaboration = "LHCb",
