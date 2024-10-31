@@ -297,8 +297,16 @@ def generateScripts(args):
           .filterform:hover, .filterform:focus-within { opacity: 1.0; -webkit-transition: opacity 1s; transition: opacity 1s; drop-shadow(gray 0.5em 0.5em 10px); }
           .filterpatt { padding: 0.3em; font-size: 100%; border: 1px solid #85C1E9; border-radius: 0.1em; }
           .filterbutton { padding: 0.3em; font-size: 100%; border: 2px solid #85C1E9; background:#D6EAF8; border-radius: 0.3em; }
+
+          .plot { float:left; font-weight:bold; page-break-inside: avoid; }
+          .plotlinks {  }
+          .plotname { font-size:smaller; }
+
           @media print {
+            .noprint { display:none; }
+            .back { display:none; }
             .filterform { display:none; }
+            .plotlinks { display:none; }
           }
         </style>
         '''
@@ -342,7 +350,9 @@ def generateScripts(args):
         command = '<p id="command">Created with command: <pre>%s</pre></p>' % COMMAND
 
         index = open(os.path.join(args.OUTPUTDIR, "index.html"), "w")
-        index.write('<html>\n<head>\n<title>%s</title>\n%s</head>\n<body>' % (args.TITLE, style + script))
+        index.write('<!DOCTYPE html>\n<html>\n  <head>\n')
+        index.write('    <title>%s</title>\n    %s</head>\n\n<body>' % (args.TITLE, style+script))
+
         if args.BOOKLET and "PDF" in args.FORMATS:
             index.write('<h1><a href="booklet.pdf">%s</a></h1>\n\n' % args.TITLE)
         else:
@@ -445,7 +455,7 @@ def generateScripts(args):
                 os.makedirs(anapath)
             if not args.SINGLE:
                 anaindex = open(os.path.join(anapath, "index.html"), 'w')
-                anaindex.write('<html>\n<head>\n<title>%s &ndash; %s</title>\n%s</head>\n<body>\n' %
+                anaindex.write('<!DOCTYPE html>\n<html>\n<head>\n<title>%s &ndash; %s</title>\n%s</head>\n\n<body>\n' %
                                (htmlify(args.TITLE), analysis, style + script))
                 anaindex.write('<section id="ana_{}">\n'.format(analysis))
                 anaindex.write('<p class="back"><a href="../index.html" title="Return to index page">&larrhk; Index</a></p>\n')
@@ -459,15 +469,16 @@ def generateScripts(args):
                 anaindex = index
 
             ## JS filtering
-            anaindex.write('<div class="filterform">')
-            anaindex.write('<form onsubmit="var patt = document.getElementById(\'patt_{ana}\').value; filterPlots(\'{ana}\', patt); return false;">\n'.format(ana=analysis))
-            anaindex.write('<span><b>Filter plots:</b>&emsp;</span>')
-            anaindex.write('<input class="filterpatt" id="patt_{ana}" type="search" accesskey="s" title="Filter: Alt+s">\n'.format(ana=analysis))
-            anaindex.write('<input class="filterbutton" type="submit" value="Filter">\n')
-            # anaindex.write('<span style="background-color:00cc00; border:2px solid #009933; padding:2px; border-radius:2px;"\n onclick="var patt = document.getElementById(\'patt_{ana}\').value; filterPlots(\'{ana}\', patt);">Filter</span>\n'.format(ana=analysis))
-            anaindex.write('</form>')
-            anaindex.write('</div>')
-            anaindex.write('\n\n')
+            anaindex.write('\n')
+            anaindex.write('<div class="filterform">\n')
+            anaindex.write('  <form onsubmit="var patt = document.getElementById(\'patt_{ana}\').value; filterPlots(\'{ana}\', patt); return false;">\n'.format(ana=analysis))
+            anaindex.write('  <span><b>Filter plots:</b>&emsp;</span>\n')
+            anaindex.write('  <input class="filterpatt" id="patt_{ana}" type="search" accesskey="s" title="Filter: Alt+s">\n'.format(ana=analysis))
+            anaindex.write('  <input class="filterbutton" type="submit" value="Filter">\n')
+            # anaindex.write('  <span style="background-color:00cc00; border:2px solid #009933; padding:2px; border-radius:2px;"\n onclick="var patt = document.getElementById(\'patt_{ana}\').value; filterPlots(\'{ana}\', patt);">Filter</span>\n'.format(ana=analysis))
+            anaindex.write('  </form>\n')
+            anaindex.write('</div>\n')
+            anaindex.write('\n')
 
             srcfiles = [ f.split('/')[-1] for f in allPlotNames if analysis in f ]
             # anaindex.write('<div style="float:none; overflow:auto; width:100%">\n')
@@ -476,20 +487,25 @@ def generateScripts(args):
                 pngfile = obsname+".png"
                 pdffile = obsname+".pdf"
                 pyfile  = obsname+".py"
-                datfile = pyfile.replace('.py', '__data.py')
+                datfile = pyfile.replace(".py", "__data.py")
                 if args.SINGLE:
                     pngfile = os.path.join(analysis, pngfile)
                     pdffile = os.path.join(analysis, pdffile)
                     pyfile  = os.path.join(analysis, pyfile)
                     datfile = os.path.join(analysis, datfile)
 
-                anaindex.write('  <div class="plot" id="plot_{o}" style="float:left; font-size:smaller; font-weight:bold;">\n'.format(o=obsname))
-                anaindex.write('    <a href="#%s-%s">&#9875;</a><a href="%s">&#8984;</a><a href="%s">&#128202;</a> %s:<br/>\n' %
-                               (analysis, obsname, pyfile, datfile, os.path.splitext(pdffile)[0]) )
-                anaindex.write('    <a name="%s-%s"><a href="%s">\n' % (analysis, obsname, pdffile) )
-                anaindex.write('      <img src="%s">\n' % pngfile )
-                anaindex.write('    </a></a>\n')
+                linkname = analysis + "-" + obsname
+                anaindex.write('<div class="plot" id="plot_{o}">\n'.format(o=obsname))
+                anaindex.write('  <div class="plothead">\n')
+                anaindex.write('    <span class="plotlinks">\n')
+                anaindex.write('      <a href="#%s">&#9875;</a>\n' % linkname)
+                anaindex.write('      <a href="%s">&#8984;</a>\n' % pyfile)
+                anaindex.write('      <a href="%s">&#128202;</a>\n' % datfile)
+                anaindex.write('    </span>\n')
+                anaindex.write('    <span class="plotname">%s:</span>\n' % os.path.splitext(pdffile)[0])
                 anaindex.write('  </div>\n')
+                anaindex.write('  <a id="%s" href="%s"><img src="%s"></a>\n' % (linkname, pdffile, pngfile))
+                anaindex.write('</div>\n\n')
             # anaindex.write('</div>\n')
 
             if args.SINGLE:
