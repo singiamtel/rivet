@@ -28,7 +28,7 @@ namespace Rivet {
 
       // Initialise and register projections
       FinalState calofs(Cuts::abseta < 4.8);
-      FastJets fj(calofs, JetAlg::ANTIKT, 0.4);
+      FastJets fj(calofs, JetAlg::ANTIKT, 0.4, JetMuons::DECAY);
       declare(fj, "TruthJets");
       declare(SmearedJets(fj, JET_SMEAR_ATLAS_RUN2, JET_BTAG_ATLAS_RUN2_MV2C20), "RecoJets");
 
