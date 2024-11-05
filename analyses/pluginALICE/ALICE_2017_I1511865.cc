@@ -19,20 +19,22 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       declare(UnstableParticles(Cuts::pid==443 || Cuts::pid==100443), "UFS");
-      if (isCompatibleWithSqrtS(13000)) {
-        book(_h_JPsi_pT,1,1,1);
-        book(_h_JPsi_y,2,1,1);
-        book(_h_Psi2S_pT,3,1,1);
-        book(_h_Psi2S_y ,4,1,1);
-        book(_h_JPsi_pT2,"TMP/JPsi_pY",refData(5,1,1));
-        book(_h_JPsi_y2 ,"TMP/JPsi_y", refData(6,1,1));
+
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal/MeV));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+
+        size_t offset = (en == "5020"s)? 6 : 0;
+        book(_h[en+"JPsi_pT"], 1+offset,1,1);
+        book(_h[en+"JPsi_y"],  2+offset,1,1);
       }
-      else if(isCompatibleWithSqrtS(5020) ) {
-      	book(_h_JPsi_pT,7,1,1);
-      	book(_h_JPsi_y,8,1,1);
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
-      else
-        throw UserError("Centre-of-mass energy of the given input is neither 5020 nor 13000 GeV.");
+      book(_h["Psi2S_pT"], 3,1,1);
+      book(_h["Psi2S_y"],  4,1,1);
+      book(_h["JPsi_pT2"], "TMP/JPsi_pY", refData(5,1,1));
+      book(_h["JPsi_y2"],  "TMP/JPsi_y",  refData(6,1,1));
     }
 
 
@@ -41,31 +43,31 @@ namespace Rivet {
       // loop over J/Psi
       for (const Particle& p : apply<UnstableParticles>(event, "UFS").particles()) {
         // rapidity cut
-        double absrap = p.absrap();
+        const double absrap = p.absrap();
         if (absrap<2.5 || absrap>4) continue;
-        double xp = p.perp();
+        const double xp = p.perp();
         // J/Psi
         if (p.pid()==443) {
-          if(_h_JPsi_pT2) {
+          if (_sqs != "5020"s) {
             if (xp>30.) continue;
-            _h_JPsi_pT->fill(xp);
-            _h_JPsi_y->fill(absrap);
+            _h[_sqs+"JPsi_pT"]->fill(xp);
+            _h[_sqs+"JPsi_y"]->fill(absrap);
             if (xp<=16.) {
-            _h_JPsi_pT2->fill(xp);
-            _h_JPsi_y2->fill(absrap);
+              _h["JPsi_pT2"]->fill(xp);
+              _h["JPsi_y2"]->fill(absrap);
             }
           }
           else {
             if (xp>12.) continue;
-            _h_JPsi_pT->fill(xp);
-            _h_JPsi_y->fill(absrap);
+            _h[_sqs+"JPsi_pT"]->fill(xp);
+            _h[_sqs+"JPsi_y"]->fill(absrap);
           }
         }
         // psi(2S)
-        else if(_h_Psi2S_pT) {
+        else if (_sqs != "5020"s) {
           if (xp>16.) continue;
-          _h_Psi2S_pT->fill(xp);
-          _h_Psi2S_y->fill(absrap);
+          _h["Psi2S_pT"]->fill(xp);
+          _h["Psi2S_y"]->fill(absrap);
         }
       }
     }
@@ -74,26 +76,22 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       // factor 1/2 due folding +/- rap
-      double fact = 0.5*crossSection()/nanobarn/sumOfWeights();
+      const double fact = 0.5*crossSection()/nanobarn/sumOfWeights();
       // factor 1.5 for rapidity range 2.5-4
-      scale(_h_JPsi_pT,fact/1.5);
-      scale(_h_JPsi_y ,fact);
-      if (_h_Psi2S_pT) {
-        scale(_h_Psi2S_pT,fact/1.5);
-        scale(_h_Psi2S_y ,fact);
+      for (auto& item : _h) {
+        if (item.first.find("_pT") != string::npos) {
+          scale(item.second, fact/1.5);
+        }
+        else {
+          scale(item.second, fact);
+        }
       }
-      if (_h_JPsi_pT2) {
-        scale(_h_JPsi_pT2,fact/1.5);
-        Estimate1DPtr tmp;
-        book(tmp,5,1,1);
-        divide(_h_Psi2S_pT,_h_JPsi_pT2,tmp);
-      }
-      if (_h_JPsi_y2) {
-        scale(_h_JPsi_y2 ,fact);
-        Estimate1DPtr tmp;
-        book(tmp,6,1,1);
-        divide(_h_Psi2S_y,_h_JPsi_y2,tmp);
-      }
+
+      Estimate1DPtr tmp;
+      book(tmp,5,1,1);
+      divide(_h["Psi2S_pT"], _h["JPsi_pT2"], tmp);
+      book(tmp,6,1,1);
+      divide(_h["Psi2S_y"], _h["JPsi_y2"], tmp);
     }
 
     ///@}
@@ -101,8 +99,12 @@ namespace Rivet {
 
     /// @name Histograms
     ///@{
-    Histo1DPtr _h_JPsi_pT,_h_JPsi_y,_h_Psi2S_pT,_h_Psi2S_y;
+    map<string,Histo1DPtr> _h;
+    Histo1DPtr _h_JPsi_pT[2], _h_JPsi_y[2];
+    Histo1DPtr _h_Psi2S_pT,_h_Psi2S_y;
     Histo1DPtr _h_JPsi_pT2,_h_JPsi_y2;
+
+    string _sqs = "";
     ///@}
 
 

@@ -18,22 +18,22 @@ namespace Rivet {
       const UnstableParticles ufs(Cuts::absrap < RAPMAX);
       declare(ufs, "UFS");
 
-      // Check if cm energy is 7 TeV or 0.9 TeV
-      if (isCompatibleWithSqrtS(900*GeV))       _cm_energy_case = 1;
-      else if (isCompatibleWithSqrtS(7000*GeV)) _cm_energy_case = 2;
-      if (_cm_energy_case == 0)
-        throw UserError("Center of mass energy of the given input is neither 900 nor 7000 GeV.");
-
       // Book histos
-      if (_cm_energy_case == 1) {
-        book(_h_pi0,       2,1,1);
-      } else {
-        book(_h_pi0,       1,1,1);
-        book(_h_eta,       3,1,1);
-        // Temporary plots with the binning of _h_etaToPion to construct the eta/pi0 ratio
-        book(_temp_h_eta , "TMP/h_eta" , refData(3,1,1));
-        book(_temp_h_pion, "TMP/h_pion", refData(3,1,1));
+      for (double eVal : allowedEnergies()) {
+
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+
+        bool is900GeV(en == "900"s);
+        book(_h[en+"pi0"], 1 + is900GeV,1,1);
       }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
+      }
+      book(_h["eta"], 3,1,1);
+      // Temporary plots with the binning of _h_etaToPion to construct the eta/pi0 ratio
+      book(_h["temp_eta"],  "TMP/h_eta" , refData(3,1,1));
+      book(_h["temp_pion"], "TMP/h_pion", refData(3,1,1));
     }
 
 
@@ -45,13 +45,16 @@ namespace Rivet {
         const double normfactor = TWOPI*p.pT()/GeV*2*RAPMAX;
         if (p.pid() == 111) {
           // Neutral pion; ALICE corrects for pi0 feed-down from K_0_s and Lambda
-          if (p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122)) continue; //< K_0_s, Lambda, Anti-Lambda
-          _h_pi0->fill(p.pT()/GeV, 1.0/normfactor);
-          if( _cm_energy_case == 2) _temp_h_pion->fill(p.pT()/GeV);
-        } else if (p.pid() == 221 && _cm_energy_case == 2) {
+          if (p.hasAncestorWith(Cuts::pid == 310)  ||
+              p.hasAncestorWith(Cuts::pid == 3122) ||
+              p.hasAncestorWith(Cuts::pid == -3122)) continue; //< K_0_s, Lambda, Anti-Lambda
+          _h[_sqs+"pi0"]->fill(p.pT()/GeV, 1.0/normfactor);
+          if (_sqs == "7000"s)  _h["temp_pion"]->fill(p.pT()/GeV);
+        }
+        else if (p.pid() == 221 && _sqs == "7000"s) {
           // eta meson (only for 7 TeV)
-          _h_eta->fill(p.pT()/GeV, 1.0/normfactor);
-          _temp_h_eta->fill(p.pT()/GeV);
+          _h["eta"]->fill(p.pT()/GeV, 1.0/normfactor);
+          _h["temp_eta"]->fill(p.pT()/GeV);
         }
       }
     }
@@ -59,23 +62,18 @@ namespace Rivet {
 
     /// Normalize histos and construct ratio
     void finalize() {
-      scale(_h_pi0, crossSection()/microbarn/sumOfWeights());
-      if (_cm_energy_case == 2) {
-        // first divide hists with binned axis
-        Estimate1DPtr tmp_ratio;
-        book(tmp_ratio,"TMP/ratio",_h_eta->xEdges());
-        divide(_temp_h_eta, _temp_h_pion, tmp_ratio);
-        // now convert to strings from ref data
-        BinnedEstimatePtr<string> ratio;
-        book(ratio, 4,1,1);
-        for(const auto & b : tmp_ratio->bins()) {
-          const size_t idx = b.index();
-          ratio->bin(idx).setVal(b.val());
-          for(const string & ss : b.sources()) {
-            ratio->bin(idx).setErr(b.err(ss),ss);
-          }
-        }
-        scale(_h_eta, crossSection()/microbarn/sumOfWeights());
+      const double sf = crossSection()/microbarn/sumOfWeights();
+      scale(_h, sf);
+
+      // first divide hists with binned axis
+      Estimate1DPtr tmp_ratio;
+      book(tmp_ratio, "TMP/ratio", _h["eta"]->xEdges());
+      divide(_h["temp_eta"], _h["temp_pion"], tmp_ratio);
+      // now convert to strings edges from ref data
+      BinnedEstimatePtr<string> ratio;
+      book(ratio, 4, 1, 1);
+      for (const auto& b : tmp_ratio->bins()) {
+        ratio->bin(b.index()).set(b.val(), b.err());
       }
     }
 
@@ -83,10 +81,9 @@ namespace Rivet {
   private:
 
     const double RAPMAX = 0.8;
-    int _cm_energy_case = 0;
+    string _sqs = "";
 
-    Histo1DPtr _h_pi0, _h_eta;
-    Histo1DPtr _temp_h_pion, _temp_h_eta;
+    map<string,Histo1DPtr> _h;
 
   };
 

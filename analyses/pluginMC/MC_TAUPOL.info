@@ -12,8 +12,8 @@ Description:
   'Observables sensitive to the polarisation of the $\tau$ lepton.'
 Options:
  - MODE=DITAU,SINGLE
- - LOMASS
- - HIMASS
+ - LOMASS=#
+ - HIMASS=#
 ReleaseTests:
  - $A pp-13000-Ztautau-2
 

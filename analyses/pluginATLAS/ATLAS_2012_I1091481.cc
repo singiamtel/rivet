@@ -9,10 +9,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    ATLAS_2012_I1091481()
-      : Analysis("ATLAS_2012_I1091481")
-    {   }
-
+    RIVET_DEFAULT_ANALYSIS_CTOR(ATLAS_2012_I1091481);
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -22,23 +19,26 @@ namespace Rivet {
       ChargedFinalState cfs500(Cuts::abseta < 2.5 && Cuts::pT > 0.5*GeV);
       declare(cfs500,"CFS500");
 
-      // collision energy
-      int isqrts = -1;
-      if (isCompatibleWithSqrtS(900*GeV))  isqrts = 2;
-      if (isCompatibleWithSqrtS(7000*GeV)) isqrts = 1;
-      assert(isqrts > 0);
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+        size_t ih = bool(en == "7000") + 1;
 
-      book(_sE_10_100   ,isqrts, 1, 1);
-      book(_sE_1_100    ,isqrts, 1, 2);
-      book(_sE_10_500   ,isqrts, 1, 3);
+        book(_h[en+"E_10_100"], ih, 1, 1);
+        book(_h[en+"E_1_100"],  ih, 1, 2);
+        book(_h[en+"E_10_500"], ih, 1, 3);
 
-      book(_sEta_10_100 ,isqrts, 2, 1);
-      book(_sEta_1_100  ,isqrts, 2, 2);
-      book(_sEta_10_500 ,isqrts, 2, 3);
+        book(_h[en+"eta_10_100"], ih, 2, 1);
+        book(_h[en+"eta_1_100"],  ih, 2, 2);
+        book(_h[en+"eta_10_500"], ih, 2, 3);
 
-      book(norm_inclusive, "norm_inclusive");
-      book(norm_lowPt, "norm_lowPt");
-      book(norm_pt500, "norm_pt500");
+        book(_c[en+"inclusive"], "_norm_inclusive_"+en);
+        book(_c[en+"lowPt"],     "_norm_lowPt_"+en);
+        book(_c[en+"pt500"],     "_norm_pt500_"+en);
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
+      }
     }
 
 
@@ -89,22 +89,15 @@ namespace Rivet {
     // Convenient fill function
     void fillS(Histo1DPtr h, const Particles& part, bool SE=true) {
       // Loop over bins, take bin centers as parameter values
-      for(size_t i=1; i <= h->numBins(); ++i) {
-        double x = h->bin(i).xMid();
-        double width = h->bin(i).xMax() - h->bin(i).xMin();
+      // @todo use barchart()
+      for (auto& b : h->bins()) {
+        double x = b.xMid();
+        double width = b.xWidth();
         double y;
-        if(SE)  y = getSE(part,   x);
-        else    y = getSeta(part, x);
+        if (SE)  y = getSE(part,   x);
+        else     y = getSeta(part, x);
         h->fill(x, y * width);
-        // Histo1D objects will be converted to Estimate1D objects for plotting
-        // As part of this conversion, Rivet will divide by bin width
-        // However, we want the (x,y) of the Estimate1D to be the (binCenter, sumW) of
-        // the current Histo1D. This is why in the above line we multiply by bin width,
-        // so as to undo later division by bin width.
-        //
-        // Could have used Estimate1D objects in the first place, but they cannot be merged
-        // as easily as Histo1Ds can using yodamerge (missing ScaledBy attribute)
-        }
+      }
     }
 
 
@@ -122,51 +115,48 @@ namespace Rivet {
       if (ptmax > 10.0) vetoEvent;
 
       // Fill the pt>100, pTmax<10 GeV histos
-      fillS(_sE_10_100, part100, true);
-      fillS(_sEta_10_100, part100, false);
-      norm_inclusive->fill();
+      fillS(_h["E_10_100"],   part100, true);
+      fillS(_h["eta_10_100"], part100, false);
+      _c[_sqs+"inclusive"]->fill();
 
       // Fill the pt>100, pTmax<1 GeV histos
       if (ptmax < 1.0) {
-        fillS(_sE_1_100,   part100, true);
-        fillS(_sEta_1_100, part100, false);
-        norm_lowPt->fill();
+        fillS(_h["E_1_100"],   part100, true);
+        fillS(_h["eta_1_100"], part100, false);
+        _c[_sqs+"lowPt"]->fill();
       }
 
       // Fill the pt>500, pTmax<10 GeV histos
       if (part500.size() > 10) {
-        fillS(_sE_10_500,   part500, true );
-        fillS(_sEta_10_500, part500, false);
-        norm_pt500->fill();
+        fillS(_h["E_10_500"],   part500, true );
+        fillS(_h["eta_10_500"], part500, false);
+        _c[_sqs+"pt500"]->fill();
       }
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
       // The scaling takes the multiple fills per event into account
-      scale(_sE_10_100, 1.0/ *norm_inclusive);
-      scale(_sE_1_100 , 1.0/ *norm_lowPt);
-      scale(_sE_10_500, 1.0/ *norm_pt500);
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
 
-      scale(_sEta_10_100, 1.0/ *norm_inclusive);
-      scale(_sEta_1_100 , 1.0/ *norm_lowPt);
-      scale(_sEta_10_500, 1.0/ *norm_pt500);
+        scale(_h[en+"E_10_100"], 1.0/ *_c[en+"inclusive"]);
+        scale(_h[en+ "E_1_100"], 1.0/ *_c[en+"lowPt"]);
+        scale(_h[en+"E_10_500"], 1.0/ *_c[en+"pt500"]);
+
+        scale(_h[en+"eta_10_100"], 1.0/ *_c[en+"inclusive"]);
+        scale(_h[en+ "eta_1_100"], 1.0/ *_c[en+"lowPt"]);
+        scale(_h[en+"eta_10_500"], 1.0/ *_c[en+"pt500"]);
+      }
     }
 
 
   private:
 
-    Histo1DPtr _sE_10_100;
-    Histo1DPtr _sE_1_100;
-    Histo1DPtr _sE_10_500;
+    map<string,Histo1DPtr> _h;
+    map<string,CounterPtr> _c;
 
-    Histo1DPtr _sEta_10_100;
-    Histo1DPtr _sEta_1_100;
-    Histo1DPtr _sEta_10_500;
-
-    CounterPtr norm_inclusive;
-    CounterPtr norm_lowPt;
-    CounterPtr norm_pt500;
+    string _sqs = "";
   };
 
 

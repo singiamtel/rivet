@@ -18,50 +18,48 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      ChargedFinalState cfs((Cuts::etaIn(-1.0, 1.0)));
+      ChargedFinalState cfs(Cuts::abseta < 1.0);
       declare(cfs, "CFS");
 
-      if (isCompatibleWithSqrtS(900*GeV)) {
-        book(_h_dN_deta    ,4, 1, 1);
-      } else if (isCompatibleWithSqrtS(2360*GeV)) {
-        book(_h_dN_deta    ,5, 1, 1);
-      } else if (isCompatibleWithSqrtS(7000*GeV)) {
-        book(_h_dN_deta    ,6, 1, 1);
-        book(_h_dN_dNch    ,3, 1, 1);
-      }
-      book(_Nevt_after_cuts, "Nevt_after_cuts");
+      size_t ih = 0;
+      for (double eVal : allowedEnergies()) {
 
+        const string en = toString(int(eVal));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+
+        book(_h[en+"dN_deta"], 4+ih, 1, 1);
+        if (ih == 2)  book(_h["dN_dNch"], 3, 1, 1);
+        book(_c[en], "Nevt_after_cuts_"+en);
+        ++ih;
+      }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
+      }
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const ChargedFinalState& charged = apply<ChargedFinalState>(event, "CFS");
-      if (charged.size() < 1) {
-        vetoEvent;
-      }
-      _Nevt_after_cuts->fill();
-
+      if (charged.size() < 1)  vetoEvent;
+      _c[_sqs]->fill();
+      if (_sqs == "7000"s)  _h["dN_dNch"]->fill(charged.size());
 
       for (const Particle& p : charged.particles()) {
         const double eta = p.eta();
-        _h_dN_deta->fill(eta);
-      }
-
-      if (isCompatibleWithSqrtS(7000*GeV)) {
-        _h_dN_dNch->fill(charged.size());
+        _h[_sqs+"dN_deta"]->fill(eta);
       }
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      if (isCompatibleWithSqrtS(7000*GeV)) {
-        normalize(_h_dN_dNch);
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal));
+        if (_c[en]->sumW() == 0)  continue;
+        scale(_h[en+"dN_deta"], 1.0/ *_c[en]);
       }
-      scale(_h_dN_deta, 1.0/ *_Nevt_after_cuts);
-
+      normalize(_h["dN_dNch"]);
     }
 
     /// @}
@@ -71,9 +69,10 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_dN_deta;
-    Histo1DPtr _h_dN_dNch;
-    CounterPtr _Nevt_after_cuts;
+    map<string,Histo1DPtr> _h;
+    map<string, CounterPtr> _c;
+
+    string _sqs = "";
     /// @}
 
   };

@@ -113,53 +113,90 @@ namespace Rivet {
     Particles& tags() { return _tags; }
     /// @brief Particles which have been tag-matched to this jet (const version)
     const Particles& tags() const { return _tags; }
-    /// @brief Particles which have been tag-matched to this jet _and_ pass a selector function
+    /// @brief Particles which have been tag-matched to this jet _and_ pass a selector function or dR requirement
     ///
     /// @note Note the less efficient return by value, due to the filtering.
-    Particles tags(const ParticleSelector& f) const { return select(tags(), f); }
-    /// @brief Particles which have been tag-matched to this jet _and_ pass a Cut
+    Particles tags(const ParticleSelector& f, double dRmax=-1) const {
+      const Particles filttags = select(tags(), f);
+      // Return, via dR filter if requested
+      return dRmax < 0 ? filttags : select(filttags, deltaRLess(this->mom(), dRmax));
+    }
+    /// @brief Particles which have been tag-matched to this jet _and_ pass a Cut or dR requirement
     ///
     /// @note Note the less efficient return by value, due to the cut-pass filtering.
-    Particles tags(const Cut& c) const;
+    Particles tags(const Cut& c, double dRmax=-1) const;
 
 
-    /// @brief b particles which have been tag-matched to this jet (and pass an optional Cut)
+    /// @brief Get the b particles tag-matched to this jet
     ///
     /// The default jet finding adds b-hadron tags by ghost association.
-    Particles bTags(const Cut& c=Cuts::open()) const;
-    /// @brief b particles which have been tag-matched to this jet _and_ pass a selector function
-    Particles bTags(const ParticleSelector& f) const { return select(bTags(), f); }
+    ///
+    /// This version has an optional tag-particle Cut requirement
+    /// and restriction to a tighter dR cone around the jet centroid.
+    Particles bTags(const Cut& c=Cuts::open(), double dRmax=-1) const;
 
-    /// Does this jet have at least one b-tag (that passes an optional Cut)?
-    bool bTagged(const Cut& c=Cuts::open()) const { return !bTags(c).empty(); }
-    /// Does this jet have at least one b-tag (that passes the supplied selector function)?
-    bool bTagged(const ParticleSelector& f) const { return !bTags(f).empty(); }
+    /// @brief Get the b particles tag-matched to this jet (with optional selector function and dR restriction)
+    ///
+    /// The default jet finding adds b-hadron tags by ghost association.
+    ///
+    /// This version has an optional tag-particle selector function
+    /// and restriction to a tighter dR cone around the jet centroid.
+    Particles bTags(const ParticleSelector& f, double dRmax=-1) const { return select(bTags(), f); }
+
+    /// Does this jet have at least one b-tag? (with optional Cut and dR restriction)
+    bool bTagged(const Cut& c=Cuts::open(), double dRmax=-1) const { return !bTags(c).empty(); }
+
+    /// Does this jet have at least one b-tag? (with optional selector function and dR restriction)
+    bool bTagged(const ParticleSelector& f, double dRmax=-1) const { return !bTags(f).empty(); }
 
 
-    /// @brief c (and not b) particles which have been tag-matched to this jet (and pass an optional Cut)
+    /// @brief Get the c (and not b) particles tag-matched to this jet
     ///
     /// The default jet finding adds c-hadron tags by ghost association.
-    Particles cTags(const Cut& c=Cuts::open()) const;
-    /// @brief c (and not b) particles which have been tag-matched to this jet and pass a selector function
-    Particles cTags(const ParticleSelector& f) const { return select(cTags(), f); }
+    ///
+    /// This version has an optional tag-particle Cut requirement
+    /// and restriction to a tighter dR cone around the jet centroid.
+    Particles cTags(const Cut& c=Cuts::open(), double dRmax=-1) const;
 
-    /// Does this jet have at least one c-tag (that passes an optional Cut)?
-    bool cTagged(const Cut& c=Cuts::open()) const { return !cTags(c).empty(); }
-    /// Does this jet have at least one c-tag (that passes the supplied selector function)?
-    bool cTagged(const ParticleSelector& f) const { return !cTags(f).empty(); }
+    /// @brief Get the c (and not b) particles which have been tag-matched to this jet
+    ///
+    /// The default jet finding adds c-hadron tags by ghost association.
+    ///
+    /// This version has an optional tag-particle selector function
+    /// and restriction to a tighter dR cone around the jet centroid.
+    Particles cTags(const ParticleSelector& f, double dRmax=-1) const { return select(cTags(), f); }
+
+    /// Does this jet have at least one c-tag? (with optional Cut and dR restriction)
+    bool cTagged(const Cut& c=Cuts::open(), double dRmax=-1) const { return !cTags(c).empty(); }
+
+    /// Does this jet have at least one c-tag? (with optional selector function and dR restriction)
+    bool cTagged(const ParticleSelector& f, double dRmax=-1) const { return !cTags(f).empty(); }
 
 
-    /// @brief Tau particles which have been tag-matched to this jet (and pass an optional Cut)
+    /// @brief Get the tau particles tag-matched to this jet
     ///
     /// The default jet finding adds tau tags by ghost association.
-    Particles tauTags(const Cut& c=Cuts::open()) const;
-    /// @brief Tau particles which have been tag-matched to this jet and pass a selector function
-    Particles tauTags(const ParticleSelector& f) const { return select(tauTags(), f); }
+    ///
+    /// This version has an optional tag-particle Cut requirement
+    /// and restriction to a tighter dR cone around the jet centroid.
+    Particles tauTags(const Cut& c=Cuts::open(), double dRmax=-1) const;
 
-    /// Does this jet have at least one tau-tag (that passes an optional Cut)?
-    bool tauTagged(const Cut& c=Cuts::open()) const { return !tauTags(c).empty(); }
-    /// Does this jet have at least one tau-tag (that passes the supplied selector function)?
-    bool tauTagged(const ParticleSelector& f) const { return !tauTags(f).empty(); }
+    /// @brief Get the tau particles tag-matched to this jet
+    ///
+    /// The default jet finding adds tau tags by ghost association.
+    ///
+    /// This version has an optional tag-particle selector function
+    /// and restriction to a tighter dR cone around the jet centroid.
+    Particles tauTags(const ParticleSelector& f, double dRmax=-1) const { return select(tauTags(), f); }
+
+    /// Does this jet have at least one tau-tag (with optional Cut and dR restriction)
+    bool tauTagged(const Cut& c=Cuts::open(), double dRmax=-1) const { return !tauTags(c).empty(); }
+
+    /// Does this jet have at least one tau-tag (with optional selector function and dR restriction)
+    bool tauTagged(const ParticleSelector& f, double dRmax=-1) const { return !tauTags(f).empty(); }
+
+
+    /// @todo Extend to arbitrary tagging types
 
     /// @}
 

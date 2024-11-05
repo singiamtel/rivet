@@ -2,9 +2,9 @@
 
 set -e
 
-RIVET_VERSION=${RIVET_VERSION:-4.0.1}
-PYTHIA_VERSION=${PYTHIA_VERSION:-8311}  # TODO: 8312 changes the example names
-MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.5.tar.gz
+RIVET_VERSION=${RIVET_VERSION:-4.0.2}
+PYTHIA_VERSION=${PYTHIA_VERSION:-8312}
+MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.6.tar.gz
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"
 BUILDFLAGS="$PLATFLAGS $DOCKERFLAGS"

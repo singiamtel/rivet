@@ -101,6 +101,8 @@ namespace Rivet {
     PseudoJets pjs;
     /// @todo Use FastJet3's UserInfo system to store Particle pointers directly?
 
+    /// @todo Support DeltaR tagging in place of ghost association
+
     // Store 4 vector data about each particle into FastJet's PseudoJets
     for (size_t i = 0; i < fsparticles.size(); ++i) {
       fastjet::PseudoJet pj = fsparticles[i];
@@ -125,6 +127,8 @@ namespace Rivet {
 
     Particles constituents, tags;
     constituents.reserve(pjconstituents.size());
+
+    /// @todo Support DeltaR tagging in place of ghost association
 
     for (const fastjet::PseudoJet& pjc : pjconstituents) {
       // Pure ghosts don't have corresponding particles
@@ -175,6 +179,7 @@ namespace Rivet {
     }
 
     // Tagging particles
+    /// @todo Support DeltaR tagging in place of ghost association
     const Particles chadrons = apply<HeavyHadrons>(e, "HFHadrons").cHadrons();
     const Particles bhadrons = apply<HeavyHadrons>(e, "HFHadrons").bHadrons();
     const Particles taus = apply<FinalState>(e, "Taus").particles();

@@ -21,28 +21,26 @@ namespace Rivet {
     void init() {
       // projections
       declare(UnstableParticles(Cuts::abspid==411 || Cuts::abspid==421 || Cuts::abspid==431 || Cuts::abspid==413), "UFS");
-      // histograms
-      if (isCompatibleWithSqrtS(5020.0)) {
-        for (unsigned int ix=0; ix<4; ++ix) {
-          book(_h_prompt[ix],1+ix,1,1);
-          book(_h_ratio_num[ix],"TMP/h_ratio_num_"+toString(ix+1), refData(6+ix,1,1));
-          book(_h_ratio_den[ix],"TMP/h_ratio_den_"+toString(ix+1), refData(6+ix,1,1));
+
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal/GeV));
+        if (isCompatibleWithSqrtS(eVal))  _sqs = en;
+        bool is7TeV(en == "7000"s);
+
+        size_t offset = is7TeV? 10 : 6;
+        for (size_t ix=0; ix<4; ++ix) {
+          const string mode = en+toString(ix+1);
+          book(_h[mode+"ratio_num"], "TMP/h_ratio_num_"+mode, refData(offset+ix,1,1));
+          book(_h[mode+"ratio_den"], "TMP/h_ratio_den_"+mode, refData(offset+ix,1,1));
+          book(_h[mode+"energy"],    "h_energy_"+mode,        refData(offset+ix,1,1));
+          if (!is7TeV)  book(_h[mode+"prompt"], 1+ix, 1, 1);
         }
-        book(_h_incl,   5, 1, 1);
-        book(_h_total, 18, 1, 1);
       }
-      else if (isCompatibleWithSqrtS(7000.0)){
-        for (unsigned int ix=0;ix<4;++ix) {
-          book(_h_ratio_num[ix],"TMP/h_ratio_num_"+toString(ix+1), refData(10+ix,1,1));
-          book(_h_ratio_den[ix],"TMP/h_ratio_den_"+toString(ix+1), refData(10+ix,1,1));
-        }
+      if (_sqs == "" && !merging()) {
+        throw BeamError("Invalid beam energy for " + name() + "\n");
       }
-      else {
-        throw UserError("Centre-of-mass energy of the given input is neither 5020 nor 7000 GeV.");
-      }
-      for (unsigned int ix=0; ix<4; ++ix) {
-        book(_h_energy[ix],"h_energy_"+toString(ix+1), refData(14+ix,1,1));
-      }
+      book(_h["incl"], 5, 1, 1);
+      book(_total, 18, 1, 1);
     }
 
 
@@ -52,45 +50,39 @@ namespace Rivet {
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "UFS");
       for (const Particle& p : ufs.particles()) {
         // no mixing and |y|<0.5
-        if(p.children().size()==1 || p.absrap()>0.5) continue;
+        if (p.children().size()==1 || p.absrap()>0.5) continue;
         unsigned int imeson=0;
-        if      (p.abspid()==411) {
-          imeson=1;
-        }
-        else if (p.abspid()==413) {
-          imeson=2;
-        }
-        else if (p.abspid()==431) {
-          imeson=3;
-        }
-        const double pT=p.perp();
+        if (p.abspid()==411)       imeson=1;
+        else if (p.abspid()==413)  imeson=2;
+        else if (p.abspid()==431)  imeson=3;
+        const double pT = p.perp();
         if (p.fromBottom()) {
-          if (imeson==0 && _h_incl) _h_incl->fill(pT);
+          if (_sqs == "5020"s && imeson==0) _h["incl"]->fill(pT);
           continue;
         }
         // prompt at 5.02 TeV
-        if (_h_prompt[imeson]) {
-          _h_prompt[imeson]->fill(pT);
-          _h_total->fill(_edges[imeson]);
+        if (_sqs == "7000"s) {
+          _h[_sqs+toString(imeson)+"prompt"]->fill(pT);
+          _total->fill(_edges[imeson]);
         }
         if (imeson==0) {
-          _h_ratio_den[0]->fill(pT);
-          _h_ratio_den[1]->fill(pT);
-          _h_ratio_den[2]->fill(pT);
-          if (_h_incl) _h_incl->fill(pT);
+          _h[_sqs+"0ratio_den"]->fill(pT/GeV);
+          _h[_sqs+"1ratio_den"]->fill(pT/GeV);
+          _h[_sqs+"2ratio_den"]->fill(pT/GeV);
+          if (_sqs == "5020"s) _h["incl"]->fill(pT/GeV);
         }
         else if (imeson==1) {
-          _h_ratio_num[0]->fill(pT);
-          _h_ratio_den[3]->fill(pT);
+          _h[_sqs+"0ratio_num"]->fill(pT/GeV);
+          _h[_sqs+"3ratio_den"]->fill(pT/GeV);
         }
         else if (imeson==2) {
-          _h_ratio_num[1]->fill(pT);
+          _h[_sqs+"1ratio_num"]->fill(pT/GeV);
         }
         else if (imeson==3) {
-          _h_ratio_num[2]->fill(pT);
-          _h_ratio_num[3]->fill(pT);
+          _h[_sqs+"2ratio_num"]->fill(pT/GeV);
+          _h[_sqs+"3ratio_num"]->fill(pT/GeV);
         }
-        _h_energy[imeson]->fill(pT);
+        _h[_sqs+toString(imeson)+"energy"]->fill(pT/GeV);
       }
     }
 
@@ -98,24 +90,18 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       const double factor = crossSection()/microbarn/sumOfWeights();
-      if (_h_prompt[0]) {
-        for(unsigned int ix=0;ix<4;++ix) {
-          scale(_h_prompt[ix],factor);
+      scale(_total, factor);
+      scale(_h,factor);
+
+      Estimate1DPtr tmp;
+      for (double eVal : allowedEnergies()) {
+        const string en = toString(int(eVal/GeV));
+        for (size_t ix=0; ix<4; ++ix) {
+          const string mode = en+toString(ix+1);
+          bool is7TeV(en == "7000"s);
+          book(tmp, 6+4*is7TeV+ix, 1, 1);
+          divide(_h[mode+"ratio_num"], _h[mode+"ratio_den"], tmp);
         }
-        scale(_h_total,factor);
-        scale(_h_incl,factor);
-      }
-      int ioff = 0;
-      if (isCompatibleWithSqrtS(7000.0)) {
-        ioff = 1;
-      }
-      for (unsigned int ix=0;ix<4;++ix) {
-        Estimate1DPtr tmp;
-        scale(_h_energy   [ix],factor);
-        scale(_h_ratio_num[ix],factor);
-        scale(_h_ratio_den[ix],factor);
-        book(tmp,6+4*ioff+ix,1,1);
-        divide(_h_ratio_num[ix],_h_ratio_den[ix],tmp);
       }
     }
 
@@ -124,14 +110,13 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    Histo1DPtr _h_prompt[4],_h_incl;
-    BinnedHistoPtr<string> _h_total;
-    Histo1DPtr _h_ratio_num[4],_h_ratio_den[4];
-    Histo1DPtr _h_energy[4];
+    map<string,Histo1DPtr> _h;
+    BinnedHistoPtr<string> _total;
     vector<string> _edges = { "P P --> D0 (Q=PROMPT) X",
                               "P P --> D+ (Q=PROMPT) X",
                               "P P --> D*+ (Q=PROMPT) X",
                               "P P --> D/s+ (Q=PROMPT) X" };
+    string _sqs = "";
     /// @}
 
 

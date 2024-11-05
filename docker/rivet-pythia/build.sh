@@ -2,8 +2,8 @@
 
 set -e
 
-RIVET_VERSION=${RIVET_VERSION:-4.0.1}
-PYTHIA_VERSION=8311   # TODO: 8312 changes example names
+RIVET_VERSION=${RIVET_VERSION:-4.0.2}
+PYTHIA_VERSION=8312
 
 #PLATFLAGS="--platform linux/amd64,linux/arm64"
 #BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS"

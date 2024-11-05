@@ -70,8 +70,12 @@ namespace Rivet {
   }
 
 
+  // For thread safety.
+  static std::mutex get_analysis_mutex_guard {};
 
   unique_ptr<Analysis> AnalysisLoader::getAnalysis(const string& analysisname) {
+    std::lock_guard<mutex> lock(get_analysis_mutex_guard); // For thread safety.
+
     loadFromAnalysisPlugins();
     AnalysisBuilderMap::const_iterator ai = _ptrs.find(analysisname);
     if (ai == _ptrs.end()) {

@@ -510,6 +510,10 @@ namespace Rivet {
         a->analyze(event);
       } catch (const Error& err) {
         throw Error(a->name() + "::analyze method error: " + err.what());
+      } catch (const std::bad_cast &err) {
+        std::string message = a->name() + "::analyze method error: " + err.what();
+        message += ". A type mismatch occurred, possibly due to attempting to retrieve a different type in ::analyze than was specified in ::init.";
+        throw Error(message);
       }
       MSG_TRACE("Finished running analysis " << a->name());
     }
@@ -1103,8 +1107,9 @@ namespace Rivet {
                                 const bool unscale, const bool reentrantOnly) {
 
     // Check that AH hasn't already been initialised
-    if (_initialised)
+    if (_initialised) {
       throw UserError("AnalysisHandler::init has already been called: cannot re-initialize!");
+    }
 
     const string beaminfokey("/TMP/_BEAMPZ");
     if (allAOs.find(beaminfokey) == allAOs.end()) {
