@@ -192,13 +192,11 @@ namespace Rivet {
     for ( auto opttag : _options ) {
       std::vector<std::string> optv = split(opttag, "=");
       std::string optname = optv[0];
-      if (optv.size()>1) {
-        for ( auto opt : split(optv[1], ",") ) {
-          _optionmap[optname].insert(opt);
-        }
+      if (optv.size() < 2) {
+        throw InfoError("Option '"+optname+"' should have a default value; use '#' to indicate arbitrary FP values");
       }
-      else {
-        _optionmap[optname].insert("");
+      for ( auto opt : split(optv[1], ",") ) {
+        _optionmap[optname].insert(opt);
       }
     }
   }
