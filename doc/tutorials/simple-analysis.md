@@ -2,13 +2,13 @@
 
 At this point you have probably run Rivet a few times, maybe different analyses, different generators, and played around with plotting options. To really utilize the full power of the framework, one does, however, need to write analysis code -- it is an analysis framework after all.
 
-The best tip for writing analyses, is to find an existing similar analysis, from the large library of already existing ones, and take inspiration from that. But even then, it is important to have the basics right. 
+The best tip for writing analyses, is to find an existing similar analysis, from the large library of already existing ones, and take inspiration from that. But even then, it is important to have the basics right.
 
 ### Writing the analysis code
 
 Here we are going to write a new analysis for use with Rivet. This is done "stand-alone", i.e. you don't have to modify the code of Rivet itself: in fact, you can follow these instructions using a system install of Rivet to which you have no write permissions.
 
-All analysis routines are implemented as sub-classes of the Rivet "Analysis" class: pretty much all the magic that binds the analysis object into the Rivet system is handled in this base class, meaning that your code can really concentrate on implementing the physics goals of the analysis. 
+All analysis routines are implemented as sub-classes of the Rivet "Analysis" class: pretty much all the magic that binds the analysis object into the Rivet system is handled in this base class, meaning that your code can really concentrate on implementing the physics goals of the analysis.
 
 
 ### The analysis "wizard"
@@ -49,7 +49,7 @@ Rivet provides implementations of many calculational tools, called "projections"
 ```
   const FinalState& cfs = apply<FinalState>(event, "Tracks");
 ```
-The name "Tracks" here will have been registered in the `init` method as referring to a projection of type "ChargedFinalState" --- a calculator which provides a list of charged particles with certain basic cuts applied. This is done via the `declare` method. Note that a) you don't have to manage the memory yourself, and b) polymorphism via the reference is both allowed and encouraged. If b) means nothing to you, don't worry... we just want to reassure C++ fiends who might think we're cramping their style!
+The name "Tracks" here will have been registered in the `init` method as referring to a projection of type `ChargedFinalState` --- a calculator which provides a list of charged particles with certain basic cuts applied. This is done via the `declare` method. Note that a) you don't have to manage the memory yourself, and b) polymorphism via the reference is both allowed and encouraged. If b) means nothing to you, don't worry... we just want to reassure C++ fiends who might think we're cramping their style!
 
 See the dedicated tutorial on projections for more information.
 
@@ -64,22 +64,22 @@ Here is an example of the whole Rivet analysis shebang. As usual, it is just a s
 #include "Rivet/Projections/FastJets.hh"
 
 namespace Rivet {
-  
+
   class MyAnalysis : public Analysis {
   public:
-    
+
     /// Default constructor
-    MyAnalysis() : Analysis("MYANALYSIS") {   }
-    
-    
+    RIVET_DEFAULT_ANALYSIS_CTOR(MyAnalysis);
+
+
     /// @name Analysis methods
     //@{
     void init() {
       const FinalState fs(Cuts::abseta < 5);
-      declare(FastJets(fs, FastJets::ANTIKT, 0.5), "Jets");
+      declare(FastJets(fs, JetAlg::ANTIKT, 0.5), "Jets");
       declare(ChargedFinalState(Cuts::abseta < 2.5 && Cuts::pT > 500*MeV), "Tracks");
     }
-    
+
     void analyze(const Event& event) {
       const Jets& jets = apply<ChargedFinalState>(event, "Jets")
         .jetsByPt(Cuts::pT > 20*GeV && Cuts::abseta < 4.4);
@@ -92,12 +92,12 @@ namespace Rivet {
     // No histos, so no need for a finalize()!
 
     //@}
-    
+
   };
 
-  // Magic required by the plugin system 
-  DECLARE_RIVET_PLUGIN(MyAnalysis);
-  
+  // Magic required by the plugin system
+  RIVET_DECLARE_PLUGIN(MyAnalysis);
+
 }
 ```
 
@@ -111,11 +111,12 @@ The standard Rivet predefined cuts are (all in the `Rivet::Cuts` namespace): `pT
 
 
 ### Compiling and linking
- 
+
 To use your new analysis, you need to build it into a Rivet analysis plugin library, with a name of the form `Rivet*.so` library. You can do this manually, but to make life easier there is again a helper script, used as follows:
 `rivet-buildplugin RivetMyAnalyses.so MyAnalysis.cc MyOtherAnalysis.cc # etc.`
 
-Note that the name of the library has to start with the word "Rivet" or it will not get loaded at runtime. By default, if no ".so" first argument is given, the name =RivetAnalysis.so= will be used.
+Note that the name of the library has to start with the word "Rivet" or it will not get loaded at runtime. By default, if no ".so"
+first argument is given, the name `RivetAnalysis.so` will be used.
 
 
 ### Running
@@ -132,10 +133,10 @@ You can now use your new analysis right away. Provided that the `RivetMyAnalysis
   MyAnalysis
   ==========
 
-  Spires ID: NONE
-  Spires URL: http://www.slac.stanford.edu/spires/find/hep/www?rawcmd=key+NONE
-  Experiment: NONE
-  Year of publication: NONE
+  Inspire ID: <Insert the Inspire ID>
+  Inspire URL: https://inspirehep.net/literature/<Insert the Inspire ID>
+  Experiment: <Insert the experiment name>(<Insert the collider name>)
+  Year of publication: <Insert year of publication>
 
   Description:
     A do-nothing analysis for demonstrating how to make a plugin

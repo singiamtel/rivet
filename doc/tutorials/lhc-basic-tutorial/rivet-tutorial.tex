@@ -50,14 +50,14 @@ estimate some of the associated generator-level uncertainties.
 
 Unless you have a local Rivet installation that you can use, consider installing the latest Rivet docker container, e.g.\ using
 \begin{verbatim}
-  docker pull hepstore/rivet:4.0.1
+  docker pull hepstore/rivet:X.Y.Z
 \end{verbatim}
 In case of problems with disk space, you may wish to consider running
 {\texttt{docker container prune}} and {\texttt{docker system prune}} first.
 You can run the container interactively, giving read/write access to your local directory using
 \begin{footnotesize}
 \begin{verbatim}
-  docker container run -it -v $PWD:$PWD -w $PWD hepstore/rivet:4.0.1 /bin/bash
+  docker container run -it -v $PWD:$PWD -w $PWD hepstore/rivet:X.Y.Z /bin/bash
 \end{verbatim}
 \end{footnotesize}
 \noindent The tarball with the HepMC events used for this tutorial can be obtained as follows

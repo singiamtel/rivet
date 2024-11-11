@@ -1,6 +1,6 @@
 # make-plots
 
-The plots produced with `rivet-mkhtml` are really rendered with the command `make-plots`, which is called under the hood. The `make-plots` command can also be used to create figures from the simple .dat text format produced by `rivet-cmphistos` directly.
+The plots produced with `rivet-mkhtml-tex` are really rendered with the command `make-plots`, which is called under the hood. The `make-plots` command can also be used to create figures from the simple .dat text format produced by `rivet-cmphistos` directly.
 The `make-plots` script is quite powerful, and includes several options to modify plotting style, adding curves or fits and more. For use with Rivet, the syntax documented in this document should be provided in the .plot file.
 Internally, `make-plots` the simple text format and converts them into PostScript or PDF files by creating a LaTeX file and running `latex`, `dvips`, and maybe `ps2pdf`.
 
