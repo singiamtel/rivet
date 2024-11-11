@@ -106,10 +106,13 @@ e.g. for specific routines:
 ```
 rivet-merge -e -a JADE_OPAL_2000_S4300807:ENERGY=91.2 file1.yoda file2.yoda ...
 ```
-or globally for all analysis routines (post-3.1.8):
+or globally for all analysis routines (as of 3.1.8):
 ```
 rivet-merge -e -a :ENERGY=91.2 file1.yoda file2.yoda ...
 ```
+Note that as of v4.0.0, a beam-info object is written out to the YODA files,
+such that it is no longer necessary to specify the bea energy in principle.
+
 
 
 ## Reentrant safety

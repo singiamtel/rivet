@@ -1,6 +1,7 @@
 # First run
 
-So, we assume you've got Rivet installed and that the `rivet` command is available in your executable path (i.e. the `$PATH` environment variable). Now it's time to run some events, make some analysis data, and plot the results.
+So, we assume you've got Rivet installed and that the `rivet` command is available in your executable path
+(i.e. the `$PATH` environment variable). Now it's time to run some events, make some analysis data, and plot the results.
 
 
 ## Generating and analysing
@@ -27,6 +28,7 @@ If you have trouble with this FIFO approach, try writing a few -- 10 or so -- ev
 
 ## Checking the data
 
-By default, Rivet outputs its histograms in the YODA text format. To get a clearer view of the data values in histogram bins, you can use the `yoda2flat` script, e.g. `yoda2flat Rivet.yoda - | less`.
+By default, Rivet outputs its histograms in the YODA text format. To get a clearer view of the data values in histogram bins, you
+can use the `yodals` script, e.g. `yodals --vv Rivet.yoda | less`.
 
 There is also a `yoda2root` command which provides the data as ROOT histogram (or `TGraph`) objects for those of a ROOTy disposition.

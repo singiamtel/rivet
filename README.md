@@ -19,7 +19,7 @@ runs of existing analyses, to writing, running, and plotting results, as well as
 how to implement and contribute your own analyses.
 
 Alternatively, feel free to checkout one of the self-guided tutorials (listed towards the
-bottom) used for  summer schools and similar. They are suitable for beginners, 
+bottom) used for  summer schools and similar. They are suitable for beginners,
 and differently themed depending on the original audience.
 
 Get in touch via the developer mailing list if you need any assistance: [rivet-support@cern.ch](mailto:rivet-support@cern.ch)
@@ -38,7 +38,7 @@ Get in touch via the developer mailing list if you need any assistance: [rivet-s
 
 [Plotting with `rivet-mkhtml`](doc/tutorials/plotting.md)
 
-[Customize plots with `make-plots`](doc/tutorials/makeplots.md)
+[Customize plots with `make-plots` (deprecated)](doc/tutorials/makeplots.md)
 
 [Merging histograms with `yodamerge` and `rivet-merge`](doc/tutorials/merging.md)
 
@@ -46,8 +46,6 @@ Get in touch via the developer mailing list if you need any assistance: [rivet-s
 ## Advanced running and plotting
 
 [Using analysis options](doc/tutorials/anaoptions.md)
-
-[Preload files, centrality calibration (work in progress)](doc/tutorials/calibration.md)
 
 [Running Rivet on HPC clusters with MPI](doc/tutorials/merging_mpi.md)
 
@@ -67,9 +65,6 @@ Get in touch via the developer mailing list if you need any assistance: [rivet-s
 
 [Writing a simple analysis](doc/tutorials/simple-analysis.md)
 
-[Writing an analysis with FastJet (work in progress)](doc/tutorials/fastjet.md)
-## This is not in the repository? ^
-
 [Contributing a routine](doc/tutorials/anacontrib.md)
 
 [Physics tips and pitfalls](doc/tutorials/tips-pitfalls.md)
@@ -82,9 +77,9 @@ Get in touch via the developer mailing list if you need any assistance: [rivet-s
 
 ## Developer topics
 
-[Working with development source (work in progress)](doc/tutorials/developer.md)
-
 [Coding style](doc/tutorials/codingstyle.md)
+
+
 
 ## Self-guided tutorials
 

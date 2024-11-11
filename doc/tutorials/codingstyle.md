@@ -14,14 +14,14 @@ Some of the rules below might seem rather petty, but please stick by them (and c
 ```
 // prefer
 if (foo < bar) {...
-// to 
+// to
 if(foo<bar){...
 ```
-  , 
+  ,
 ```
 // prefer
 for (int i = 0; i < N; ++i) {
-// to 
+// to
 for(int i=0;i<N;++i){
 ```
   and
@@ -56,7 +56,7 @@ if(foo==bar){
  * Prefer not to use pointers ''at all'' in projection and analysis code. The one exception to this is YODA histograms, where you have no option but to use pointers. See below for more information.
  * Histogram objects should be private and their names should start with "`_hist`" or "`_h`" (and similar for profiles and counters);
  * All Rivet analyses are plugins via the `Analysis` interface, and virtually no analyses inherit from any base class other than `Analysis`. Hence there is no need for header files, and analyses should be written completely inline with the implementations as part of the class definition, all in the `.cc` file.
- * Use the `DEFAULT_ANALYSIS_CTOR()` and similar macros for boilerplate code.
+ * Use the `RIVET_DEFAULT_ANALYSIS_CTOR()` and similar macros for boilerplate code.
  * Analysis class names should be ALL-CAPS unless there is good reason not to.
  * Variables should start with lower-case letters, type names as MixedCase, and constants as ALL_CAPS.
  * Use the `const` keyword to protect your code against accidental modifications.
@@ -68,9 +68,3 @@ if(foo==bar){
  * Use the convenience types and functions to improve readability, e.g. `p.abseta()` rather than `fabs(p.eta())`, `Particles` and `Jets` rather than `vector<Particle>` and `vector<Jet>`, etc. (There are also `strings`, `doubles` and `ints` typedefs for `vector<those_types>`)
  * If your analysis includes the same sets of plots (binnings and cuts can differ), then don't register histograms for each energy, e.g. `_hist_blah_900GeV`, `_hist_blah_7000GeV`, etc.: just make one `_hist_blah` and use the `sqrtS()` function in the `init()` method of the analysis to book it from the appropriate histogram code. Then in the `analyze()` method, you can just call `fill()` without having to work out which variable you should be filling. This can save a ''lot'' of repetitive copy 'n' paste code, and we will reject supplied analyses which should do this and haven't, since otherwise they are a maintenance nightmare.
 
-
-### Why to not use pointers
-
-The "don't use pointers" rule may seem particularly perverse. Aren't they core to how C++ works? Well, for most purposes the answer is "no". While there are certainly areas of C++ code where pointers are useful, they tend to only be the places where references can't be used: polymorphic containers, storage of abstract base classes, and member variables with reference semantics. References are safe, while pointers are the single most common cause of segfaults and difficult-to-find bugs: prefer references whenever possible.
-
-One particular reason to discourage pointers is that we want analysis and projection classes to be writeable by non-C++ experts: if pointers are involved, the level of required expertise is immediately raised (even if you don't realise that that's the case). Using pointers also forces projection authors to have to write custom constructors, destructors, copy constructors and copy assignment operators (cf. the "if you need one, you'll need all three" idiom): that's a lot of work and potential bugs that could have been avoided. This rule is sometimes referred to as the Law of the Big Three: see http://www.parashift.com/c++-faq-lite/coding-standards.html#faq-27.10 (and the rest of this excellent C++ resource!) for details.

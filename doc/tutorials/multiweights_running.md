@@ -55,7 +55,7 @@ Only one weight stream is written out to file (in "nominal weight" style).
 
 If the user additionally supplied `--weight-match` and `--weight-unmatch` flags,
 chances are they don't really know what they're doing.
-Preference is given to `--weights-skip` in this case.
+Preference is given to `--weight-skip` in this case.
 
 If the user also supplies the `--weight-nominal` flag and asks that a variation weight
 be treated as the nominal, two weight streams are written out to file: the actual default

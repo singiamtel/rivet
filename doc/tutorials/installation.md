@@ -27,7 +27,7 @@ source /cvmfs/sft.cern.ch/lcg/releases/LCG_99/ROOT/v6.22.06/x86_64-centos7-gcc10
 1. **Download the bootstrap script** into a temporary working directory, and make it executable:
 ```
   cd /scratch/rivet
-  wget https://gitlab.com/hepcedar/rivetbootstrap/raw/3.1.8/rivet-bootstrap
+  wget https://gitlab.com/hepcedar/rivetbootstrap/raw/X.Y.Z/rivet-bootstrap
   chmod +x rivet-bootstrap
 ```
 (Replace the version string as appropriate if you want to install other versions of Rivet.)
@@ -114,15 +114,3 @@ extensions to compiled non-system libraries. Since this is unrealistic for
 HEP use, we recommend avoiding the Mac-system Python and compiler suite entirely,
 in favour of developer packages from e.g. Homebrew or Conda.
 
-### Mac: Rivet cannot find HepMC2 lib
-
-On recent version macOS, the bootstrap script fails to install Rivet against
-HepMC2 with an error message similar to:
-
-```
-from rivet.core import *
-ImportError: dlopen(/.../rivet/core.so, 10): Library not loaded: libHepMC.4.dylib
-```
-
-This issue seems to have disappeared with HepMC3, so unless HepMC2 is strictly required,
-a simple workaround is to change `HEPMC_VERSION` to a recent HepMC3 version in the bootstrap script.

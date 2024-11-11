@@ -12,7 +12,7 @@ All Rivet projections inherit from the abstract `Projection` class, which define
 The projections are used by Analysis objects. Internally, projections are compared via the `Projection::compare(...)` method which allows duplicate instantiations of the same projection to be avoided - as a result, the second (and so on) time a given projection is called for a particular event, it will simply return its cached value rather than repeating the computation.
 
 
-### Specific projections 
+### Specific projections
 Here are some examples of projections available in the current release of Rivet:
 
  * Beam - obtain the beam from an event
@@ -36,10 +36,10 @@ For this example we'll use the FinalState projection in an analysis. The analysi
 Create and initialize projections in the analysis `init` method:
 ```
 void init() {
-  FinalState fs(-1.0, 1.0, 0.5);
-  addProjection(fs, "FS");
-  addProjection(Multiplicity(fs), "Mult");
-  addProjection(Thrust(fs), "Thrust");
+  FinalState fs(Cuts::abseta < 1.0, Cuts::pT > 0.5*GeV);
+  declare(fs, "FS");
+  declare(Multiplicity(fs), "Mult");
+  declare(Thrust(fs), "Thrust");
 }
 ```
 
@@ -48,7 +48,7 @@ Then, when using the projection, you'll probably want to have something like thi
 void MyAnalysis::analyze(const Event& e) {
   ...
   // Project into final state
-  const FinalState& fs = appl<FinalState>(e, "FS");
+  const FinalState& fs = apply<FinalState>(e, "FS");
   ...
 }
 ```
@@ -61,7 +61,7 @@ If using a projection inside another projection, the same applies for initialisi
 
 The best documentation when writing a projection is to look at some existing ones and use them as templates - pick a short one like `ChargedFinalState` or `Beam` since their structure is easier to see. Issues to be particularly aware of include:
 
- * Use without registration - it's advised that you do the actual calculation in a user-callable method called `calc`, so that the projection can be used without having to be centrally registered and attached to the event. 
+ * Use without registration - it's advised that you do the actual calculation in a user-callable method called `calc`, so that the projection can be used without having to be centrally registered and attached to the event.
  * Caching - make sure that the `project` method stores everything you need to reproduce the calculation result with minimal CPU effort. This will require some member variables explicitly put there for caching. You might want to become familiar with the `mutable` keyword, and use it **very carefully**, if the cache needs to be updated while accessing methods of a `const` projection. Make sure you reuse cached values wherever possible, by using other projections where available.
  * Comparing with other projections - the `compare` method provides a way for Rivet's internal workings to discriminate between projections which are handled polymorphically (i.e. they're all just `Projection*` as far as Rivet's type system is concerned). `compare` should return `CmpState:EQ` if two projections are effectively identical - i.e. not just the same type, but also the same configuration parameters and equivalent internal projections - and `CmpState::NEQ` if they are not identical. See some existing projections for guidance.
  * `new` and `delete` in projections - the projection and analysis destructors are pretty ineffectual things, since they **only get called at the end of the whole run**, rather than in between each event: if `new` is called during the `project` phase, `delete` had better be called in the same phase or you'll have a horrendous memory leak. Anyway, you shouldn't be using `new` unless you have a good reason, and remember: references are just as efficient as pointers and a lot safer!
