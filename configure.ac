@@ -276,12 +276,27 @@ AM_CONDITIONAL(ENABLE_HIGHFIVE, [test x$with_highfive = xyes])
 
 
 ## Disable build/install of standard analyses
+PLUGIN_MATCH=""
+PLUGIN_UNMATCH=""
 AC_ARG_ENABLE([analyses],
   [AS_HELP_STRING([--disable-analyses],[don't try to build or install standard analyses])],
   [], [enable_analyses=yes])
 if test x$enable_analyses != xyes; then
    AC_MSG_WARN([Not building standard Rivet analyses, by request])
+else
+  AC_ARG_WITH([plugin-match],
+              [AS_HELP_STRING([--with-plugin-match=STRING],
+                              [only build analysis groups matching provided regex])],
+              [PLUGIN_MATCH="$withval"], [])
+  AC_ARG_WITH([plugin-unmatch],
+              [AS_HELP_STRING([--with-plugin-unmatch=STRING],
+                              [exclude analysis groups matching provided regex])],
+              [PLUGIN_UNMATCH="$withval"], [])
+  AC_MSG_NOTICE(Build plugins matching "$PLUGIN_MATCH")
+  AC_MSG_NOTICE(Exclude plugins matching "$PLUGIN_UNMATCH")
 fi
+AC_SUBST([PLUGIN_MATCH])
+AC_SUBST([PLUGIN_UNMATCH])
 AM_CONDITIONAL(ENABLE_ANALYSES, [test x$enable_analyses = xyes])
 
 
