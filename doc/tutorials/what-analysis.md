@@ -24,7 +24,7 @@ See [Writing a simple analysis](simple-analysis.md) for instructions on writing 
 When you build your new analysis a `RivetMyAnalysis.so` library will be created, which Rivet needs to find.
 Rivet scans several directories at runtime to find the library files containing analyses. Specifically, the following search locations are tried, in order:
 
- * a directory listed in `RIVET_ANALYSIS_PATH}
+ * a directory listed in `RIVET_ANALYSIS_PATH`
  * the directory where `libRivet.so` is installed (i.e. the Rivet `$prefix/lib` directory)
  * the current directory.
 
@@ -32,7 +32,7 @@ If a duplicate analysis is found in more than one location, Rivet will complain 
 
 Note that (to reduce the number of attempted loadings) *the library name must contain the word `Rivet` and end in the appropriate shared library suffix for the OS: this is .so for Linux and Macs*.
 
-### Real Data
+### Experimental Data
 
 YODA files for all measurements are distributed with Rivet for comparison to the generated plots. These files are obtained from [HepData](http://www.hepdata.net), but distributed with the Rivet code for standalone running.
 
