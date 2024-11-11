@@ -3,14 +3,17 @@ SHELL := bash -O extglob
 
 PLUGIN_DIRS = $(shell ls -d $(srcdir)/plugin*)
 PLUGIN_NAMES_ALL = $(notdir $(subst plugin,,$(PLUGIN_DIRS)))
-FILTER_DISABLED =
+
+PLUGIN_NAMES_MATCHES := $(if $(PLUGIN_MATCH),$(filter $(PLUGIN_MATCH),$(PLUGIN_NAMES_ALL)),$(PLUGIN_NAMES_ALL))
+
+FILTER_DISABLED = $(PLUGIN_UNMATCH)
 if !ENABLE_ONNX
 FILTER_DISABLED += ONNX
 endif
 #if !ENABLE_HIGHFIVE
 #FILTER_DISABLED += H5
 #endif
-PLUGIN_NAMES = $(filter-out $(FILTER_DISABLED),$(PLUGIN_NAMES_ALL))
+PLUGIN_NAMES = $(filter-out $(FILTER_DISABLED),$(PLUGIN_NAMES_MATCHES))
 PLUGIN_LIBS = $(patsubst %,Rivet%Analyses.so,$(PLUGIN_NAMES))
 PLUGIN_DATAFILES = $(shell ls $(abs_srcdir)/plugin*/*.*)
 
