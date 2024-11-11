@@ -22,8 +22,8 @@ namespace Rivet {
       _mode = 0; // default is ditau
       if ( getOption("MODE") == "DITAU" ) { _mode = 0; }
       if ( getOption("MODE") == "SINGLE" ) { _mode = 1; }
-      _lothresh = getOption("LOMASS", _mode? 75*GeV : 86.*GeV);
-      _hithresh = getOption("HIMASS", _mode? 85*GeV : 96*GeV);
+      _lothresh = getOption("MASSMIN", _mode? 75*GeV : 86.*GeV);
+      _hithresh = getOption("MASSMAX", _mode? 85*GeV : 96*GeV);
 
       // Initialise and register projections
       declare(TauFinder(TauDecay::ANY), "taus");

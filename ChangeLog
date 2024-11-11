@@ -1,3 +1,8 @@
+2024-11-11  Christian Gutschow  <chris.g@cern.ch>
+
+	* MC_TAU_POL: Options LOMASS/HIMASS streamlined to MASSMIN/MASSMAX
+
+
 2024-10-30  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add an option deltaR cut argument to the Jet::?Tags() and
