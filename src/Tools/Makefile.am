@@ -25,9 +25,6 @@ libRivetTools_la_CPPFLAGS = $(AM_CPPFLAGS) \
   -DENABLE_BINRELOC \
   -DDEFAULTDATADIR=\"$(datadir)\" -DDEFAULTLIBDIR=\"$(libdir)\"
 
-if ENABLE_HIGHFIVE
+if ENABLE_H5
   libRivetTools_la_SOURCES += RivetHDF5.cc
-  libRivetTools_la_CPPFLAGS += $(HDF5_CPPFLAGS)
-  libRivetTools_la_LDFLAGS = $(HDF5_LDFLAGS)
-  libRivetTools_la_LIBADD = $(HDF5_LIBS)
 endif

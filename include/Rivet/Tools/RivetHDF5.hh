@@ -3,21 +3,21 @@
 #define RIVET_RivetHDF5_HH
 #include "Rivet/Config/RivetCommon.hh"
 #include "Rivet/Tools/RivetPaths.hh"
-#include "highfive/H5File.hpp"
+#include "YODA/highfive/H5File.hpp"
 
 namespace Rivet {
   namespace H5 {
 
 
-    using namespace HighFive;
+    using namespace YODA_H5;
 
 
     /// Read HDF5 file @a filename
-    inline HighFive::File readFile(const string& filename) {
+    inline YODA_H5::File readFile(const string& filename) {
       const string filepath = findAnalysisDataFile(filename);
       if (filepath.empty()) throw IOError("Failed to load HDF5 file " + filename);
       try {
-        return HighFive::File(filepath, HighFive::File::ReadOnly);
+        return YODA_H5::File(filepath, YODA_H5::File::ReadOnly);
       } catch (...) {
         throw IOError("Failed to load HDF5 file " + filename);
       }
@@ -28,7 +28,7 @@ namespace Rivet {
     template <typename T>
     inline bool readData(const string& filename, const string& dsname, T& rtndata) {
       try {
-        HighFive::File h5file = readFile(filename);
+        YODA_H5::File h5file = readFile(filename);
         DataSet dataset = h5file.getDataSet(dsname);
         dataset.read(rtndata);
       } catch (...) {
