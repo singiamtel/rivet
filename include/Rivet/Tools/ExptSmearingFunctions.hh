@@ -771,6 +771,11 @@ namespace Rivet {
   /// @defgroup smearing_met Experiment-specific missing-ET smearing functions
   /// @{
 
+  /// Typedef for MET smearing functions/functors (given a MET vector and scalar sum(ET))
+  ///
+  /// @todo Allow MET calculation to access the whole Event?
+  typedef function<Vector3(const Vector3&, double)> METSmearFn;
+
   inline Vector3 MET_SMEAR_IDENTITY(const Vector3& met, double) { return met; }
 
   /// @brief ATLAS Run 1 ETmiss smearing

@@ -30,7 +30,7 @@ namespace Rivet {
     if (hasProjection("PrevFS") != other.hasProjection("PrevFS")) return CmpState::NEQ;
     if (hasProjection("PrevFS")) {
       const PCmp prevcmp = mkPCmp(other, "PrevFS");
-      if (prevcmp != CmpState::EQ) return  CmpState::NEQ;
+      if (prevcmp != CmpState::EQ) return CmpState::NEQ;
     }
 
     // Then check the extra cuts

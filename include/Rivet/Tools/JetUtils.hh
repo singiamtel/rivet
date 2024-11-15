@@ -99,41 +99,46 @@ namespace Rivet {
 
   /// B-tagging functor, with a tag selection cut as the stored state
   struct HasBTag : BoolJetFunctor {
-    HasBTag(const Cut& c=Cuts::open()) : cut(c) {}
+    HasBTag(const Cut& c=Cuts::open(), double dR=-1) : cut(c), deltaR(dR) {}
     // HasBTag(const std::function<bool(const Jet& j)>& f) : selector(f) {}
-    bool operator() (const Jet& j) const { return j.bTagged(cut); }
+    bool operator() (const Jet& j) const { return j.bTagged(cut, deltaR); }
     // const std::function<bool(const Jet& j)> selector;
     const Cut cut;
+    const double deltaR;
   };
   using hasBTag = HasBTag;
 
   /// C-tagging functor, with a tag selection cut as the stored state
   struct HasCTag : BoolJetFunctor {
-    HasCTag(const Cut& c=Cuts::open()) : cut(c) {}
+    HasCTag(const Cut& c=Cuts::open(), double dR=-1) : cut(c), deltaR(dR) {}
     // HasCTag(const std::function<bool(const Jet& j)>& f) : selector(f) {}
-    bool operator() (const Jet& j) const { return j.cTagged(cut); }
+    bool operator() (const Jet& j) const { return j.cTagged(cut, deltaR); }
     // const std::function<bool(const Jet& j)> selector;
     const Cut cut;
+    const double deltaR;
   };
   using hasCTag = HasCTag;
 
   /// Tau-tagging functor, with a tag selection cut as the stored state
   struct HasTauTag : BoolJetFunctor {
-    HasTauTag(const Cut& c=Cuts::open()) : cut(c) {}
+    HasTauTag(const Cut& c=Cuts::open(), double dR=-1) : cut(c), deltaR(dR) {}
     // HasTauTag(const std::function<bool(const Jet& j)>& f) : selector(f) {}
-    bool operator() (const Jet& j) const { return j.tauTagged(cut); }
+    bool operator() (const Jet& j) const { return j.tauTagged(cut, deltaR); }
     // const std::function<bool(const Jet& j)> selector;
     const Cut cut;
+    const double deltaR;
   };
   using hasTauTag = HasTauTag;
 
   /// Anti-B/C-tagging functor, with a tag selection cut as the stored state
   struct HasNoTag : BoolJetFunctor {
-    HasNoTag(const Cut& c=Cuts::open(), bool quarktagsonly=false) : cut(c), qtagsonly(quarktagsonly) {}
+    HasNoTag(const Cut& c=Cuts::open(), double dR=-1, bool quarktagsonly=false) : cut(c), deltaR(dR), qtagsonly(quarktagsonly) {}
+    HasNoTag(const Cut& c=Cuts::open(), bool quarktagsonly=false) : HasNoTag(c, -1, quarktagsonly) {}
     // HasNoTag(const std::function<bool(const Jet& j)>& f) : selector(f) {}
-    bool operator() (const Jet& j) const { return !j.bTagged(cut) && !j.cTagged(cut) && (qtagsonly || !j.tauTagged(cut)); }
+    bool operator() (const Jet& j) const { return !j.bTagged(cut, deltaR) && !j.cTagged(cut, deltaR) && (qtagsonly || !j.tauTagged(cut, deltaR)); }
     // const std::function<bool(const Jet& j)> selector;
     const Cut cut;
+    const double deltaR;
     bool qtagsonly;
   };
   using hasNoTag = HasNoTag;

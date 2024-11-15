@@ -1,7 +1,20 @@
+2024-11-12  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Extend the Has?Tag functors to accept and pass a dRmax arg.
+
+	* Provide 'IDENTITY' aliases for 'PERFECT' eff/smear functions.
+
+	* Add METSmearFn as a typedef for MET smearing signature.
+
+	* Add a convenience JetScheme struct for grouping simple jet definitions.
+
+	* Add a promptness restriction option to TauFinder, using LeptonOrigin.
+
+	* Extend PhotonOrigin and LeptonOrigin enums to allow more general use.
+
 2024-11-11  Christian Gutschow  <chris.g@cern.ch>
 
 	* MC_TAU_POL: Options LOMASS/HIMASS streamlined to MASSMIN/MASSMAX
-
 
 2024-10-30  Andy Buckley  <andy.buckley@cern.ch>
 

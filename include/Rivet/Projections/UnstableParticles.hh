@@ -21,6 +21,7 @@ namespace Rivet {
   /// from the returned particles collection.
   ///
   /// @todo Convert to a general ParticleFinder since this is explicitly not a final state... but needs care
+  ///
   /// @todo Add a FIRST/LAST/ANY enum to specify the mode for uniquifying replica chains (default = LAST)
   class UnstableParticles : public FinalState {
   public:

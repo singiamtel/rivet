@@ -8,8 +8,8 @@
 namespace Rivet {
 
 
-  /// Accepted classes of lepton origin
-  enum class LeptonOrigin { PROMPT=1, NODECAY=1, ALL };
+  /// Possible classes of lepton origin
+  enum class LeptonOrigin { NONE=0, DIRECT=1, PROMPT=1, NODECAY=1, DECAY=2, ALL=3, ANY=3 };
 
   /// Reconstruction/dressing mode for leptons
   enum class LeptonReco { ALL=0, ALL_BARE=0,
@@ -20,8 +20,8 @@ namespace Rivet {
   /// The approach taken to photon dressing of leptons
   enum class DressingType { DR=0, CONE=0, CLUSTER=1, AKT=1 };
 
-  /// Accepted classes of lepton origin
-  enum class PhotonOrigin { NONE=0, PROMPT=1, NODECAY=1, ALL };
+  /// Possible classes of lepton origin
+  enum class PhotonOrigin { NONE=0, DIRECT=1, PROMPT=1, NODECAY=1, DECAY=2, ALL=3, ANY=3 };
 
 
   /// @brief A charged lepton meta-particle created by clustering photons close to the bare lepton

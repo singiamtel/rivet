@@ -38,6 +38,8 @@ namespace Rivet {
   /// Alias for JET_EFF_ONE
   inline double JET_EFF_PERFECT(const Jet&) { return 1; }
   /// Alias for JET_EFF_ONE
+  inline double JET_EFF_IDENTITY(const Jet&) { return 1; }
+  /// Alias for JET_EFF_ONE
   inline double JET_FN1(const Jet&) { return 1; }
 
   /// Take a Jet and return a constant efficiency
@@ -49,16 +51,25 @@ namespace Rivet {
 
 
   /// @brief Return 1 if the given Jet contains a b, otherwise 0
+  ///
   /// @todo Need to be able to pass a tag pT threshold? -> functor struct
   inline double JET_BTAG_PERFECT(const Jet& j) { return j.bTagged() ? 1 : 0; }
+  /// Alias for JET_BTAG_PERFECT
+  inline double JET_BTAG_IDENTITY(const Jet& j) { return JET_BTAG_PERFECT(j); }
 
   /// @brief Return 1 if the given Jet contains a c, otherwise 0
+  ///
   /// @todo Need to be able to pass a tag pT threshold? -> functor struct
   inline double JET_CTAG_PERFECT(const Jet& j) { return j.cTagged() ? 1 : 0; }
+  /// Alias for JET_CTAG_PERFECT
+  inline double JET_CTAG_IDENTITY(const Jet& j) { return JET_CTAG_PERFECT(j); }
 
   /// @brief Return 1 if the given Jet contains a c, otherwise 0
+  ///
   /// @todo Need to be able to pass a tag pT threshold? -> functor struct
   inline double JET_TAUTAG_PERFECT(const Jet& j) { return j.tauTagged() ? 1 : 0; }
+  /// Alias for JET_TAUTAG_PERFECT
+  inline double JET_TAUTAG_IDENTITY(const Jet& j) { return JET_TAUTAG_PERFECT(j); }
 
 
   /// @brief b-tagging efficiency functor, for more readable b-tag effs and mistag rates
