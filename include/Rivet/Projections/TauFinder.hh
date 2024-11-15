@@ -3,6 +3,7 @@
 
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
+#include "Rivet/DressedLepton.hh"
 
 namespace Rivet {
 
@@ -34,12 +35,27 @@ namespace Rivet {
     }
 
 
-    TauFinder(TauDecay decaymode=TauDecay::ANY, const Cut& cut=Cuts::open()) {
-      /// @todo What about directness/promptness?
+    TauFinder(TauDecay decaymode=TauDecay::ANY,
+              LeptonOrigin origin=LeptonOrigin::ANY,
+              const Cut& cut=Cuts::open()) {
       setName("TauFinder");
       _decmode = decaymode;
+      _origin = origin;
       declare(UnstableParticles(cut), "UFS");
     }
+
+
+    TauFinder(TauDecay decaymode, const Cut& cut,
+              LeptonOrigin origin=LeptonOrigin::ANY)
+      : TauFinder(decaymode, origin, cut)
+    {    }
+
+
+    TauFinder(const Cut& cut,
+              TauDecay decaymode=TauDecay::ANY,
+              LeptonOrigin origin=LeptonOrigin::ANY)
+      : TauFinder(decaymode, origin, cut)
+    {    }
 
 
     /// Clone on the heap.
@@ -66,10 +82,13 @@ namespace Rivet {
     /// The decay-mode enum
     TauDecay _decmode;
 
+    /// The tau origin specification
+    LeptonOrigin _origin;
+
   };
 
 
-  /// @todo Make this the canonical name in future?
+  // Alias
   using Taus = TauFinder;
 
 

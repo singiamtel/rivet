@@ -1,6 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/NonPromptFinalState.hh"
 #include "Rivet/Projections/MergedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 
@@ -48,9 +49,12 @@ namespace Rivet {
     leptonfs.acceptIdPairs({PID::ELECTRON, PID::MUON, PID::TAU}); //< usually no final-state taus...
     if (whichleptons == LeptonOrigin::NODECAY) {
       declare(PromptFinalState(leptonfs, tauDecays, muDecays), "Leptons");
-    } else {
+    } else if (whichleptons == LeptonOrigin::ALL) {
       declare(leptonfs, "Leptons");
-    }
+    } else if (whichleptons == LeptonOrigin::DECAY) {
+      declare(NonPromptFinalState(leptonfs, tauDecays, muDecays), "Leptons");
+    } else
+      throw LogicError("LeptonFinder cannot retrieve leptons when no origins are accepted");
 
     // Find photons -- specialising to prompt if requested
     /// @todo Generalise to allow other clustering particles, e.g. e+e- (don't double-count)

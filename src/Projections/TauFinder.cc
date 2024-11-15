@@ -6,13 +6,26 @@ namespace Rivet {
 
   void TauFinder::project(const Event& e) {
     _theParticles.clear();
-    const auto& ufs = apply<UnstableParticles>(e, "UFS");
-    for (const Particle& p : ufs.particles()) {
+
+    const Particles& ufs = apply<UnstableParticles>(e, "UFS").particles();
+    for (const Particle& p : ufs) {
+      // Taus only, obv
       if (p.abspid() != PID::TAU) continue;
-      if (_decmode == TauDecay::ANY ||
-	  (_decmode == TauDecay::LEPTONIC && isLeptonic(p)) ||
-	  (_decmode == TauDecay::HADRONIC && isHadronic(p)) )
-        _theParticles.push_back(p);
+
+      // Discard if wrong decay mode
+      if ((_decmode == TauDecay::LEPTONIC && isHadronic(p)) ||
+	  (_decmode == TauDecay::HADRONIC && isLeptonic(p)))
+        continue;
+
+      // Discard if wrong origin
+      if ((_origin == LeptonOrigin::NODECAY && !p.isPrompt()) ||
+          (_origin == LeptonOrigin::DECAY && p.isPrompt()))
+        continue;
+      if (_origin == LeptonOrigin::NONE)
+        throw LogicError("TauFinder cannot retrieve taus when no origins are accepted");
+
+      // If not discarded
+      _theParticles.push_back(p);
     }
   }
 
@@ -22,7 +35,7 @@ namespace Rivet {
     if (fscmp != CmpState::EQ) return fscmp;
 
     const TauFinder& other = dynamic_cast<const TauFinder&>(p);
-    return cmp(_decmode, other._decmode);
+    return cmp(_decmode, other._decmode) || cmp(_origin, other._origin);
   }
 
 

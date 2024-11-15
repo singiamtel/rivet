@@ -18,6 +18,23 @@ namespace Rivet {
   enum class JetInvisibles { NONE, DECAY, ALL };
 
 
+  /// Convenience container of params for simple jet definitions
+  struct JetScheme {
+    JetScheme(JetAlg a, double rparam,
+              JetMuons usemuons=JetMuons::ALL,
+              JetInvisibles useinvis=JetInvisibles::NONE)
+      : alg(a), R(rparam), muons(usemuons), invis(useinvis)
+    {    }
+    /// Default constructor just for STL storage
+    JetScheme() : JetScheme(JetAlg::ANTIKT, 0.4) { }
+
+    /// Params
+    JetAlg alg;
+    double R;
+    JetMuons muons = JetMuons::ALL;
+    JetInvisibles invis = JetInvisibles::NONE;
+  };
+
 
   /// Abstract base class for projections which can return a set of {@link Jet}s.
   class JetFinder : public Projection {

@@ -401,6 +401,12 @@ namespace Rivet {
     /// Access the controlling AnalysisHandler object.
     AnalysisHandler& handler() const { return *_analysishandler; }
 
+    /// Access the current event
+    const Event& currentEvent() const {
+      if (!_currentevent) throw Error("No current event set: did you try to access it in init() or finalize()?");
+      return *_currentevent;
+    }
+
 
   protected:
 
@@ -1903,6 +1909,9 @@ namespace Rivet {
     /// The controlling AnalysisHandler object.
     AnalysisHandler* _analysishandler;
 
+    /// The current event.
+    const Event* _currentevent = nullptr;
+
     /// Collection of cached refdata to speed up many autobookings: the
     /// reference data file should only be read once.
     mutable std::map<std::string, YODA::AnalysisObjectPtr> _refdata;
@@ -1953,7 +1962,7 @@ namespace Rivet {
 #define RIVET_DECLARE_ALIASED_PLUGIN(clsname, alias) RIVET_DECLARE_PLUGIN(clsname)( #alias )
 
 /// @def RIVET_DEFAULT_ANALYSIS_CTOR
-/// Preprocessor define to prettify the awkward constructor with name string argument
+/// Preprocessor define to prettify the awkward constructor, with a name-string argument
 #define RIVET_DEFAULT_ANALYSIS_CTOR(clsname) clsname() : Analysis(# clsname) {}
 
 /// @def RIVET_REGISTER_TYPE

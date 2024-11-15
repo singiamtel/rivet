@@ -505,6 +505,8 @@ namespace Rivet {
 
     // Run the analyses
     for (const AnaHandle& a : analyses()) {
+      // Set the current event ptr
+      a->_currentevent = &event;
       MSG_TRACE("About to run analysis " << a->name());
       try {
         a->analyze(event);
@@ -516,6 +518,8 @@ namespace Rivet {
         throw Error(message);
       }
       MSG_TRACE("Finished running analysis " << a->name());
+      // Unset the current event ptr
+      a->_currentevent = nullptr;
     }
 
   }
