@@ -94,8 +94,10 @@ if test -f "$YODACONFIG"; then
   AC_MSG_CHECKING([YODA Python path using yoda-config])
   YODA_PYTHONPATH=`$YODACONFIG --pythonpath`
   YODACPPFLAGS=`$YODACONFIG --cppflags`
+  YODALIBS=`$YODACONFIG --libs`
   AC_MSG_RESULT([$YODA_PYTHONPATH])
 fi
+AC_SUBST(YODALIBS)
 AC_SUBST(YODACPPFLAGS)
 AC_SUBST(YODA_PYTHONPATH)
 
@@ -245,22 +247,18 @@ int main() {
 CPPFLAGS=$oldCPPFLAGS
 LIBS=$oldLIBS
 
-## HDF5 + highfive
-if test "x$with_highfive" = "xyes"; then
-  AX_LIB_HDF5()
-  if test x$HDF5_TYPE == xparallel; then
-    AX_PROG_CXX_MPI([true], [], [AC_MSG_ERROR([Found hdf5-parallel, but no MPI compiler.])])
-  fi
-  AC_MSG_NOTICE([HDF5 include flags: $HDF5_CFLAGS ::: $HDF5_CPPFLAGS])
-  AC_MSG_NOTICE([HDF5 lib flags: $HDF5_LDFLAGS ::: $HDF5_LIBS])
+## HDF5
+AC_ARG_ENABLE([h5], [AS_HELP_STRING([--disable-h5],[disable H5 extension  @<:@default=build@:>@])], [], [with_h5=yes])
+if test "x$with_h5" = "xyes"; then
   oldCPPFLAGS=$CPPFLAGS
-  CPPFLAGS="$CPPFLAGS $HDF5_CPPFLAGS $HIGHFIVECPPFLAGS"
-  AC_CHECK_HEADER([highfive/H5File.hpp], [], [AC_MSG_ERROR([H5 header not found.])])
+  CPPFLAGS="$CPPFLAGS $YODACPPFLAGS"
+  AC_CHECK_HEADER([YODA/highfive/H5Version.hpp], [], [AC_MSG_ERROR([YODA configured without HDF5 support!])])
   CPPFLAGS=$oldCPPFLAGS
+  AC_MSG_NOTICE([Building extra HDF5 compatibility tools])
 else
-  AC_MSG_NOTICE([Not building extra HighFive compatibility tools])
+  AC_MSG_NOTICE([Not building extra HDF5 compatibility tools])
 fi
-AM_CONDITIONAL(ENABLE_HIGHFIVE, [test x$with_highfive = xyes])
+AM_CONDITIONAL(ENABLE_H5, [test x$with_h5 = xyes])
 
 ## HEPTopTagger
 # AC_CEDAR_HEADERS([HEPTopTagger], , , [AC_MSG_ERROR([HEPTopTagger is required])])
@@ -414,9 +412,6 @@ AM_CPPFLAGS="$AM_CPPFLAGS \$(RIVETCPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(YODACPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS -I\$(HEPMC3INCPATH)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(FASTJETCPPFLAGS) \$(FJCONTRIBCPPFLAGS)"
-if test "x$with_highfive" = "xyes"; then
-  AM_CPPFLAGS="$AM_CPPFLAGS \$(HDF5_CPPFLAGS) \$(HIGHFIVECPPFLAGS)"
-fi
 AC_CEDAR_CHECKCXXFLAG([-pedantic], [AM_CXXFLAGS="$AM_CXXFLAGS -pedantic"])
 AC_CEDAR_CHECKCXXFLAG([-Wall], [AM_CXXFLAGS="$AM_CXXFLAGS -Wall"])
 AC_CEDAR_CHECKCXXFLAG([-Wunused-variable], [AM_CXXFLAGS="$AM_CXXFLAGS -Wunused-variable"])

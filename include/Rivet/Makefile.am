@@ -167,7 +167,7 @@ nobase_pkginclude_HEADERS += \
   Tools/TypeTraits.hh \
   Tools/Utils.hh
 
-if ENABLE_HIGHFIVE
+if ENABLE_H5
   nobase_pkginclude_HEADERS += Tools/RivetHDF5.hh
 endif
 
