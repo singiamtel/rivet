@@ -1,10 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
+#include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 
 namespace Rivet {
 
 
-  /// @brief 
+  /// @brief Cross section for  $e^+e^-\to\omega \chi_{c(1,2)}$ and $X(3872)$ for $\sqrt{s}=4.66$ to 4.95 GeV
   class BESIII_2024_I2779452 : public Analysis {
   public:
 
