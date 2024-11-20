@@ -26,7 +26,8 @@ aren't covered in this migration guide.
 - Reference data was previously stored as point+errorbar `Scatter` types,
   which did not have proper binnings. They are now stored as `BinnedEstimate`
   types when the reference data is actually binned. The API and user-facing
-  behaviour should be very similar.
+  behaviour should be very similar. Note that HepData already supports export
+  options for both the new `YODA` format and the `YODA1` legacy format.
 
 - The (badly named) `BinnedHistogram` type that was basically a collection
   of histograms, themselves binned in an additional variable, has been replaced
