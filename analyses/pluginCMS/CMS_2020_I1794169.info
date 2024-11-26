@@ -5,6 +5,7 @@ Experiment: CMS
 Collider: LHC
 InspireID: 1794169
 Status: VALIDATED
+Reentrant: true
 Authors:
  - cms-pag-conveners-smp@cern.ch
  - Guillelmo Gomez-Ceballos <ceballos@cern.ch>
