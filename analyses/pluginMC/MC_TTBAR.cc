@@ -63,6 +63,8 @@ namespace Rivet {
         book(_h["W_mass"], pre + "W_mass", 75, 30, 180);
         book(_h["t_mass"], pre + "t_mass", 150, 130, 430);
         book(_h["t_mass_W_cut"], pre + "t_mass_W_cut", 150, 130, 430);
+        book(_h["t_pT"], pre + "t_pT", 100, 0., 1000.);
+        book(_h["t_pT_W_cut"], pre + "t_pT_W_cut", 100, 0., 1000.);
         book(_h["jetb_1_W_dR"],  pre + "jetb_1_W_dR", 20, 0.0, 7.0);
         book(_h["jetb_1_W_deta"], pre + "jetb_1_W_deta", 20, 0.0, 7.0);
         book(_h["jetb_1_W_dphi"], pre + "jetb_1_W_dphi", 20, 0.0, M_PI);
@@ -214,6 +216,8 @@ namespace Rivet {
         _h["W_mass"]->fill(W.mass());
         _h["t_mass"]->fill(t1.mass());
         _h["t_mass"]->fill(t2.mass());
+        _h["t_pT"]->fill(t1.pT()/GeV);
+        _h["t_pT"]->fill(t2.pT()/GeV);
 
         // Placing a cut on the well-known W mass helps to reduce backgrounds
         // only done for all-hadronic and semileptonic mode (since W is hadronic)
@@ -222,6 +226,9 @@ namespace Rivet {
 
         _h["t_mass_W_cut"]->fill(t1.mass());
         _h["t_mass_W_cut"]->fill(t2.mass());
+
+        _h["t_pT_W_cut"]->fill(t1.pT()/GeV);
+        _h["t_pT_W_cut"]->fill(t2.pT()/GeV);
 
         _h["jetb_1_W_dR"]->fill(deltaR(bjets[0].momentum(), W));
         _h["jetb_1_W_deta"]->fill(fabs(bjets[0].eta()-W.eta()));
