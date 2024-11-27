@@ -200,26 +200,26 @@ END PLOT
 
 BEGIN PLOT /MC_HFDECAYS/high_pT_frag_B_jet
 Title = Fragmentation function for $B$-jets with 500 GeV$<p_\mathrm{T,jet}<$1000 GeV
-XTitle = z$\equiv$ $p_\mathrm{jet}\cdot p_B/|p_\mathrm{jet}|^2$
-YTitle = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
+XLabel = z$\equiv$ $p_\mathrm{jet}\cdot p_B/|p_\mathrm{jet}|^2$
+YLabel = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
 END PLOT
 
 BEGIN PLOT /MC_HFDECAYS/high_pT_frag_C_jet
 Title = Fragmentation function for $C$-jets with 500 GeV$<p_\mathrm{T,jet}<$1000 GeV
-XTitle = z $\equiv$ $p_\mathrm{jet}\cdot p_C/|p_\mathrm{jet}|^2$
-YTitle = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
+XLabel = z $\equiv$ $p_\mathrm{jet}\cdot p_C/|p_\mathrm{jet}|^2$
+YLabel = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
 END PLOT
 
 BEGIN PLOT /MC_HFDECAYS/high_pT_frag_B_jet_1H
 Title = Fragmentation function for $B$-jets with exactly 1 HF hadron and 500 GeV$<p_\mathrm{T,jet}<$1000 GeV
-XTitle = z $\equiv$ $p_\mathrm{jet}\cdot p_B/|p_\mathrm{jet}|^2$
-YTitle = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
+XLabel = z $\equiv$ $p_\mathrm{jet}\cdot p_B/|p_\mathrm{jet}|^2$
+YLabel = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
 END PLOT
 
 BEGIN PLOT /MC_HFDECAYS/high_pT_frag_C_jet_1H
 Title = Fragmentation function for $C$-jets with exactly 1 HF hadron and 500 GeV$<p_\mathrm{T,jet}<$1000 GeV
-XTitle = z $\equiv$ $p_\mathrm{jet}\cdot p_C/|p_\mathrm{jet}|^2$
-YTitle = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
+XLabel = z $\equiv$ $p_\mathrm{jet}\cdot p_C/|p_\mathrm{jet}|^2$
+YLabel = $1/\sigma \mathrm{d}\sigma/\mathrm{d}z$
 END PLOT
 
 BEGIN PLOT /MC_HFDECAYS/lepton_pTrel_B_jets
