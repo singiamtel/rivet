@@ -2,8 +2,12 @@
 FullRange=1
 LogY=1
 LogX=1
-XLabel=$p^{J/\psi}_{T}$ [GeV]
-YLabel=Br(J/$\psi \rightarrow \mu^{+}\mu^{-}$)$\sigma\mathrm{d}^2\sigma/\mathrm{d}p_\perp\mathrm{d}y$ [nb/GeV]
+XLabel=$p^{J/\psi}_\mathrm{T}$ [GeV]
+YLabel=Br(J/$\psi \to \mu^{+}\mu^{-}$)$\sigma\mathrm{d}^2\sigma/\mathrm{d}p_\perp\mathrm{d}y$ [nb/GeV]
+# END PLOT
+
+# BEGIN PLOT /ATLAS_2011_I896268/2.*
+YLabel=Br(J/$\psi \to \mu^{+}\mu^{-}$)$\sigma\mathrm{d}^2\sigma/\mathrm{d}p_\perp\mathrm{d}y$ [pb/GeV]
 # END PLOT
 
 # BEGIN PLOT /ATLAS_2011_I896268/d14-x01-y01

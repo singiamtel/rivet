@@ -1,0 +1,57 @@
+Name: ATLAS_2024_I2762099
+Year: 2024
+Summary: WZ polarisation at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 149992
+Status: UNPHYSICAL
+Reentrant: true
+Authors:
+ - Prachi Arvind Atmasiddha <prachi.atmasiddha@cern.ch>
+ - Junjie Zhu <junjie.zhu@cern.ch>
+References:
+ - ATLAS-STDM-2020-01
+ - arXiv:2402.16365 [hep-ex]
+ - Phys. Rev. Lett. 133 (2024) 101802
+RunInfo: pp ->  lllv (+j) in the electron and muon channels
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 140
+Description:
+  'This Letter presents the first study of the energy dependence of diboson polarization fractions in  $WZ\to \ell\nu\ell^\prime$
+   ($\ell,\ell^\prime = e,\mu$) production. The dataset used corresponds to an integrated luminosity of 140 fb$^{-1}$ of proton-proton
+   collisions at a center-of-mass energy of 13 TeV recorded by the ATLAS detector. Two fiducial regions with an enhanced presence of
+   events featuring two longitudinally polarized bosons are defined. A nonzero fraction of events with two longitudinally polarized
+   bosons is measured with an observed significance of 5.3 standard deviations in the region with 100 $< p_\text{T}^Z<$ 200 GeV and
+   1.6 standard deviations in the region with $p_\text{T}^Z >$ 200 GeV, where $p_\text{T}^Z$ is the transverse momentum of the $Z$
+   boson. This Letter also reports the first study of the radiation-amplitude-zero effect. Events with two transversely polarized
+   bosons are analyzed for the $\Delta Y(\ell_WZ)$ and $\Delta Y(WZ)$ distributions defined respectively as the rapidity difference
+   between the lepton from the $W$ boson decay and the $Z$ boson and the rapidity difference between the $W$ boson and the $Z$
+   boson. Significant suppression of events near zero is observed in both distributions. Unfolded $\Delta Y(\ell_WZ)$ and
+   $\Delta Y(WZ)$ distributions are also measured and compared to theoretical predictions. Users should note that explicit matching
+   of lepton flavour between individual SM neutrinos and charged leptons is used in this analysis routine, to match the MC-based
+   correction to the fiducial region applied in the paper. The data are therefore only valid under the assumption of the
+   Standard Model and cannot be used for BSM reinterpretation.'
+Keywords:
+ - WBOSON
+ - ZBOSON
+ - POLARIZATION
+BibKey: ATLAS:2024qbd
+BibTeX: '@article{ATLAS:2024qbd,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Studies of the Energy Dependence of Diboson Polarization Fractions and the Radiation-Amplitude-Zero Effect in WZ Production with the ATLAS Detector}",
+    eprint = "2402.16365",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2024-045",
+    doi = "10.1103/PhysRevLett.133.101802",
+    journal = "Phys. Rev. Lett.",
+    volume = "133",
+    number = "10",
+    pages = "101802",
+    year = "2024",
+    note = "[Erratum: Phys.Rev.Lett. 133, 169901 (2024)]"
+}'
+ReleaseTests:
+ - $A pp-13000-lllv

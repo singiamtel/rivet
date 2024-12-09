@@ -26,6 +26,10 @@
 
 	* MC_TAU_POL: Options LOMASS/HIMASS streamlined to MASSMIN/MASSMAX
 
+2024-11-26  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add top-quark pT histograms to MC_TTBAR.
+
 2024-10-30  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add an option deltaR cut argument to the Jet::?Tags() and
