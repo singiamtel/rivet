@@ -1,3 +1,11 @@
+2024-12-06  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Explicitly use the Python3 interpreter for all Python scripts.
+
+2024-11-26  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add top-quark pT histograms to MC_TTBAR.
+
 2024-11-14  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add pre/post methods around the three main Analysis event-loop
@@ -25,10 +33,6 @@
 2024-11-11  Christian Gutschow  <chris.g@cern.ch>
 
 	* MC_TAU_POL: Options LOMASS/HIMASS streamlined to MASSMIN/MASSMAX
-
-2024-11-26  Andy Buckley  <andy.buckley@cern.ch>
-
-	* Add top-quark pT histograms to MC_TTBAR.
 
 2024-10-30  Andy Buckley  <andy.buckley@cern.ch>
 
