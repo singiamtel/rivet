@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 """\
 %(prog)s [options] <yodafile1> [<yodafile2> <yodafile3>...] [PLOT:Key1=Val1:...]

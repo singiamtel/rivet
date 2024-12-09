@@ -1,6 +1,5 @@
 "Python utility functions for use by Rivet scripts (and anyone else who wants to)"
 
-
 def set_process_name(name):
     "Try to rename the process on Linux so it doesn't appear as 'python <scriptpath>'"
     try:

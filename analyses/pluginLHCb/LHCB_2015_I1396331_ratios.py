@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 # YODA script to generate the ratio plots between 13 (LHCB_2015_I1396331) and 7 TeV (LHCB_2013_I1218996) c.o.m. energies
 # for D0, D+, Ds+ and D*(2010)+ and their charge conjugates (in this order)

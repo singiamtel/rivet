@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 ## TODO: Why don't these tests work within 'make'?
 

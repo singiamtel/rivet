@@ -1,4 +1,6 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
+
+# TODO: Separate this library from the executable script (currently via shebang above and `if __name__` below.
 
 import logging, re
 from urllib.request import urlopen

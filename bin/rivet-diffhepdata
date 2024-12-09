@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 """\
 %(prog)s [-h|--help] yodafile [-i|--inspire_id INSPIRE_ID] [-d|--yodafile_from_hepdata YODAFILE_FROM_HEPDATA] [-o|--output OUTPUT]
