@@ -17,7 +17,7 @@ nobase_pkginclude_HEADERS += \
   Projection.fhh Projection.hh \
   ProjectionApplier.hh \
   ProjectionHandler.hh \
-  Analysis.hh \
+  Analysis.hh SimpleAnalysis.hh \
   AnalysisHandler.hh \
   AnalysisInfo.hh \
   AnalysisBuilder.hh \

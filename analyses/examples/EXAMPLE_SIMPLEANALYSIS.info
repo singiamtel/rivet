@@ -1,0 +1,14 @@
+Name: EXAMPLE_SIMPLEANALYSIS
+Summary: Example of using the SimpleAnalysis interface
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Andy Buckley <andy.buckley@glasgow.ac.uk>
+Description:
+  An example demonstrating how to use the simplified analysis interface,
+  which provides default object definitions and reconstruction-level
+  smearing without the user needing to explicitly set up projections.
+  This should be particularly useful for reducing barriers to BSM-search
+  analysis preservation, in which the fine detail of object definitions is
+  not crucial.
+Keywords: ['bsm', 'reco']

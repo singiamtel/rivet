@@ -25,6 +25,7 @@ namespace Rivet {
               JetInvisibles useinvis=JetInvisibles::NONE)
       : alg(a), R(rparam), muons(usemuons), invis(useinvis)
     {    }
+
     /// Default constructor just for STL storage
     JetScheme() : JetScheme(JetAlg::ANTIKT, 0.4) { }
 

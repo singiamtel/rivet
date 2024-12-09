@@ -10,6 +10,23 @@ namespace Rivet {
 
 
   /// @defgroup smearing Detector smearing & efficiency functions
+  ///
+  /// A family of smearing functions must include the following names and return types:
+  ///
+  ///   ParticleEffFn <PARTICLE>_EFF_<FAMILY>_<IDCLASS>
+  ///   ParticleSmearFn <PARTICLE>_SMEAR_<FAMILY>
+  ///   ParticleEffFn TRK_EFF_<FAMILY>
+  ///   ParticleSmearFn TRK_SMEAR_<FAMILY>
+  ///   JetEffFn JET_BTAG_<FAMILY>_<TAGGER>
+  ///   JetSmearFn JET_SMEAR_<FAMILY>
+  ///   METSmearFn MET_SMEAR_<FAMILY>
+  ///
+  /// Where @c <PARTICLE> is all of @c ELECTRON, @c MUON, @c PHOTON, and @c TAU,
+  /// @c <IDCLASS> is all of @c LOOSE, @c MEDIUM, and @c TIGHT. The family name
+  /// and tagger name are free (within the constraints of function naming. Providing
+  /// a full set may require use of alias/wrapper functions and/or the predefined
+  /// eff/smearing @c IDENTITY functions.
+  ///
   /// @{
 
   /// @defgroup smearing_elec Experiment-specific electron efficiency and smearing functions
@@ -43,6 +60,7 @@ namespace Rivet {
   /// @brief ATLAS Run 2 'loose' electron reco+identification efficiency
   ///
   /// Values read from Fig 3 of ATL-PHYS-PUB-2015-041
+  ///
   /// @todo What about faking by jets or non-electrons?
   inline double ELECTRON_EFF_ATLAS_RUN2_LOOSE(const Particle& e) {
     if (e.abspid() != PID::ELECTRON) return 0;
@@ -218,6 +236,7 @@ namespace Rivet {
 
 
   /// ATLAS Run 2 electron reco smearing
+  ///
   /// @todo Currently just a copy of the Run 1 version: fix!
   inline Particle ELECTRON_SMEAR_ATLAS_RUN2(const Particle& e) {
     return ELECTRON_SMEAR_ATLAS_RUN1(e);
@@ -235,14 +254,32 @@ namespace Rivet {
     if (e.pT() < 10*GeV) return 0;
     return (e.abseta() < 1.5) ? 0.95 : 0.85;
   }
-
+  /// CMS Run 1 loose electron reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double ELECTRON_EFF_CMS_RUN1_LOOSE(const Particle& e) { return ELECTRON_EFF_CMS_RUN1(e); }
+  /// CMS Run 1 medium electron reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double ELECTRON_EFF_CMS_RUN1_MEDIUM(const Particle& e) { return ELECTRON_EFF_CMS_RUN1(e); }
+  /// CMS Run 1 tight electron reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double ELECTRON_EFF_CMS_RUN1_TIGHT(const Particle& e) { return ELECTRON_EFF_CMS_RUN1(e); }
 
   /// CMS Run 2 electron reco efficiency
+  ///
   /// @todo Currently just a copy of Run 1: fix!
   inline double ELECTRON_EFF_CMS_RUN2(const Particle& e) {
     if (e.abspid() != PID::ELECTRON) return 0;
     return ELECTRON_EFF_CMS_RUN1(e);
   }
+  /// CMS Run 2 loose electron reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double ELECTRON_EFF_CMS_RUN2_LOOSE(const Particle& e) { return ELECTRON_EFF_CMS_RUN2_LOOSE(e); }
+  /// CMS Run 2 medium electron reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double ELECTRON_EFF_CMS_RUN2_MEDIUM(const Particle& e) { return ELECTRON_EFF_CMS_RUN2_MEDIUM(e); }
+  /// CMS Run 2 tight electron reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double ELECTRON_EFF_CMS_RUN2_TIGHT(const Particle& e) { return ELECTRON_EFF_CMS_RUN2_TIGHT(e); }
 
 
   /// @brief CMS electron energy smearing, preserving direction
@@ -273,6 +310,7 @@ namespace Rivet {
   }
 
   /// CMS Run 2 electron reco smearing
+  ///
   /// @todo Currently just a copy of the Run 1 version: fix!
   inline Particle ELECTRON_SMEAR_CMS_RUN2(const Particle& e) {
     return ELECTRON_SMEAR_CMS_RUN1(e);
@@ -314,6 +352,16 @@ namespace Rivet {
     const double eff = effs[i];
     return eff;
   }
+  /// ATLAS Run 1 loose photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_ATLAS_RUN1_LOOSE(const Particle& y) { return PHOTON_EFF_ATLAS_RUN1(y); }
+  /// ATLAS Run 1 medium photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_ATLAS_RUN1_MEDIUM(const Particle& y) { return PHOTON_EFF_ATLAS_RUN1(y); }
+  /// ATLAS Run 1 tight photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_ATLAS_RUN1_TIGHT(const Particle& y) { return PHOTON_EFF_ATLAS_RUN1(y); }
+
 
   /// @brief ATLAS Run 2 photon reco efficiency
   ///
@@ -344,21 +392,52 @@ namespace Rivet {
     const double eff = effs[i];
     return eff;
   }
+  /// ATLAS Run 2 loose photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_ATLAS_RUN2_LOOSE(const Particle& y) { return PHOTON_EFF_ATLAS_RUN2(y); }
+  /// ATLAS Run 2 medium photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_ATLAS_RUN2_MEDIUM(const Particle& y) { return PHOTON_EFF_ATLAS_RUN2(y); }
+  /// ATLAS Run 2 tight photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_ATLAS_RUN2_TIGHT(const Particle& y) { return PHOTON_EFF_ATLAS_RUN2(y); }
+
 
   /// CMS Run 1 photon reco efficiency
+  ///
   /// @todo Currently from Delphes
   inline double PHOTON_EFF_CMS_RUN1(const Particle& y) {
     if (y.abspid() != PID::PHOTON) return 0; ///< @todo Allow electron misID? What about jet misID?
     if (y.pT() < 10*GeV || y.abseta() > 2.5) return 0;
     return (y.abseta() < 1.5) ? 0.95 : 0.85;
   }
+  /// CMS Run 1 loose photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_CMS_RUN1_LOOSE(const Particle& y) { return PHOTON_EFF_CMS_RUN1(y); }
+  /// CMS Run 1 medium photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_CMS_RUN1_MEDIUM(const Particle& y) { return PHOTON_EFF_CMS_RUN1(y); }
+  /// CMS Run 1 tight photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_CMS_RUN1_TIGHT(const Particle& y) { return PHOTON_EFF_CMS_RUN1(y); }
+
 
   /// CMS Run 2 photon reco efficiency
+  ///
   /// @todo Currently just a copy of Run 1: fix!
   inline double PHOTON_EFF_CMS_RUN2(const Particle& y) {
     if (y.abspid() != PID::PHOTON) return 0; ///< @todo Allow electron misID? What about jet misID?
     return PHOTON_EFF_CMS_RUN1(y);
   }
+  /// CMS Run 2 loose photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_CMS_RUN2_LOOSE(const Particle& y) { return PHOTON_EFF_CMS_RUN2(y); }
+  /// CMS Run 2 medium photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_CMS_RUN2_MEDIUM(const Particle& y) { return PHOTON_EFF_CMS_RUN2(y); }
+  /// CMS Run 2 tight photon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double PHOTON_EFF_CMS_RUN2_TIGHT(const Particle& y) { return PHOTON_EFF_CMS_RUN2(y); }
 
 
   /// @todo Use real photon smearing
@@ -381,6 +460,16 @@ namespace Rivet {
     if (m.pT() < 10*GeV) return 0;
     return (m.abseta() < 1.5) ? 0.95 : 0.85;
   }
+  /// ATLAS Run 1 loose muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_ATLAS_RUN1_LOOSE(const Particle& m) { return MUON_EFF_ATLAS_RUN1(m); }
+  /// ATLAS Run 1 medium muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_ATLAS_RUN1_MEDIUM(const Particle& m) { return MUON_EFF_ATLAS_RUN1(m); }
+  /// ATLAS Run 1 tight muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_ATLAS_RUN1_TIGHT(const Particle& m) { return MUON_EFF_ATLAS_RUN1(m); }
+
 
   /// ATLAS Run 2 muon reco efficiency
   ///
@@ -406,9 +495,18 @@ namespace Rivet {
     const double eff = effs[i_pt] * MUON_RECOEFF_ATLAS_RUN2(m);
     return eff;
   }
-
+  /// ATLAS Run 2 loose muon reconstruction efficiency
   /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
-
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_ATLAS_RUN2_LOOSE(const Particle& m) { return MUON_EFF_ATLAS_RUN2(m); }
+  /// ATLAS Run 2 medium muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_ATLAS_RUN2_MEDIUM(const Particle& m) { return MUON_EFF_ATLAS_RUN2(m); }
+  /// ATLAS Run 2 tight muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_ATLAS_RUN2_TIGHT(const Particle& m) { return MUON_EFF_ATLAS_RUN2(m); }
 
 
   /// ATLAS Run 1 muon reco smearing
@@ -433,6 +531,7 @@ namespace Rivet {
   }
 
   /// ATLAS Run 2 muon reco smearing
+  ///
   /// From https://arxiv.org/abs/1603.05598 , eq (10) and Fig 12
   inline Particle MUON_SMEAR_ATLAS_RUN2(const Particle& m) {
     double mres_pt = 0.015;
@@ -452,13 +551,39 @@ namespace Rivet {
     if (m.pT() < 10*GeV) return 0;
     return 0.95 * (m.abseta() < 1.5 ? 1 : exp(0.5 - 5e-4*m.pT()/GeV));
   }
+  /// CMS Run 1 loose muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_CMS_RUN1_LOOSE(const Particle& m) { return MUON_EFF_CMS_RUN1(m); }
+  /// CMS Run 1 medium muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_CMS_RUN1_MEDIUM(const Particle& m) { return MUON_EFF_CMS_RUN1(m); }
+  /// CMS Run 1 tight muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_CMS_RUN1_TIGHT(const Particle& m) { return MUON_EFF_CMS_RUN1(m); }
+
 
   /// CMS Run 2 muon reco efficiency
+  ///
   /// @todo Currently just a copy of Run 1: fix!
   inline double MUON_EFF_CMS_RUN2(const Particle& m) {
-    if (m.abspid() != PID::MUON) return 0;
     return MUON_EFF_CMS_RUN1(m);
   }
+  /// CMS Run 2 loose muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_CMS_RUN2_LOOSE(const Particle& m) { return MUON_EFF_CMS_RUN2(m); }
+  /// CMS Run 2 medium muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_CMS_RUN2_MEDIUM(const Particle& m) { return MUON_EFF_CMS_RUN2(m); }
+  /// CMS Run 2 tight muon reconstruction efficiency
+  /// @todo Add muon loose/medium/tight ID efficiencies? All around 95-98%... ignore?
+  /// @todo Just an alias to generic: improve!
+  inline double MUON_EFF_CMS_RUN2_TIGHT(const Particle& m) { return MUON_EFF_CMS_RUN2(m); }
+
 
 
   /// CMS Run 1 muon reco smearing
@@ -488,6 +613,7 @@ namespace Rivet {
   }
 
   /// CMS Run 2 muon reco smearing
+  ///
   /// @todo Currently just a copy of the Run 1 version: fix!
   inline Particle MUON_SMEAR_CMS_RUN2(const Particle& m) {
     return MUON_SMEAR_CMS_RUN1(m);
@@ -507,7 +633,7 @@ namespace Rivet {
   ///   20-40 GeV 3-prong LMT eff|mis = 0.45|1/60, 0.38|1/100, 0.27|1/300
   ///   > 40 GeV 1-prong LMT eff|mis = 0.66|1/15, 0.56|1/25, 0.36|1/80
   ///   > 40 GeV 3-prong LMT eff|mis = 0.45|1/250, 0.38|1/400, 0.27|1/1300
-  inline double TAU_EFF_ATLAS_RUN1(const Particle& t) {
+  inline double TAU_EFF_ATLAS_RUN1_MEDIUM(const Particle& t) {
     if (t.abseta() > 2.5) return 0; //< hmm... mostly
     if (inRange(t.abseta(), 1.37, 1.52)) return 0; //< crack region
     double pThadvis = 0;
@@ -529,6 +655,16 @@ namespace Rivet {
     }
     return 0;
   }
+  /// ATLAS Run 1 medium muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_ATLAS_RUN1(const Particle& t) { return TAU_EFF_ATLAS_RUN1_MEDIUM(t); }
+  /// ATLAS Run 1 loose tau reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_ATLAS_RUN1_LOOSE(const Particle& t) { return TAU_EFF_ATLAS_RUN1(t); }
+  /// ATLAS Run 1 tight muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_ATLAS_RUN1_TIGHT(const Particle& t) { return TAU_EFF_ATLAS_RUN1(t); }
+
 
   /// @brief ATLAS Run 1 8 TeV tau misID rates (medium working point)
   ///
@@ -571,7 +707,7 @@ namespace Rivet {
   /// From https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PUBNOTES/ATL-PHYS-PUB-2015-045/ATL-PHYS-PUB-2015-045.pdf
   ///   LMT 1 prong efficiency/mistag = 0.6|1/30, 0.55|1/50, 0.45|1/120
   ///   LMT 3 prong efficiency/mistag = 0.5|1/30, 0.4|1/110, 0.3|1/300
-  inline double TAU_EFF_ATLAS_RUN2(const Particle& t) {
+  inline double TAU_EFF_ATLAS_RUN2_MEDIUM(const Particle& t) {
     if (t.abspid() != PID::TAU) return 0;
     if (t.abseta() > 2.5) return 0; //< hmm... mostly
     if (inRange(t.abseta(), 1.37, 1.52)) return 0; //< crack region
@@ -589,6 +725,16 @@ namespace Rivet {
     if (chargedhadrons.size() == 3) return (t.abspid() == PID::TAU) ? 0.40 : 0; //1/110.;
     return 0;
   }
+  /// ATLAS Run 2 medium muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_ATLAS_RUN2(const Particle& t) { return TAU_EFF_ATLAS_RUN2_MEDIUM(t); }
+  /// ATLAS Run 2 loose tau reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_ATLAS_RUN2_LOOSE(const Particle& t) { return TAU_EFF_ATLAS_RUN2(t); }
+  /// ATLAS Run 2 tight muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_ATLAS_RUN2_TIGHT(const Particle& t) { return TAU_EFF_ATLAS_RUN2(t); }
+
 
   /// @brief ATLAS Run 2 13 TeV tau misID rate (medium working point)
   ///
@@ -622,6 +768,7 @@ namespace Rivet {
 
 
   /// ATLAS Run 1 tau smearing
+  ///
   /// @todo Currently a copy of the jet smearing
   inline Particle TAU_SMEAR_ATLAS_RUN1(const Particle& t) {
     // // Const fractional resolution for now
@@ -655,6 +802,7 @@ namespace Rivet {
 
 
   /// ATLAS Run 2 tau smearing
+  ///
   /// @todo Currently a copy of the Run 1 version
   inline Particle TAU_SMEAR_ATLAS_RUN2(const Particle& t) {
     return TAU_SMEAR_ATLAS_RUN1(t);
@@ -668,6 +816,15 @@ namespace Rivet {
     if (t.abspid() != PID::TAU) return 0;
     return (t.abspid() == PID::TAU) ? 0.6 : 0;
   }
+  /// CMS Run 1 loose tau reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_CMS_RUN1_LOOSE(const Particle& t) { return TAU_EFF_CMS_RUN1(t); }
+  /// CMS Run 1 medium muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_CMS_RUN1_MEDIUM(const Particle& t) { return TAU_EFF_CMS_RUN1(t); }
+  /// CMS Run 1 tight muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_CMS_RUN1_TIGHT(const Particle& t) { return TAU_EFF_CMS_RUN1(t); }
 
   /// CMS Run 2 tau efficiency
   ///
@@ -676,9 +833,19 @@ namespace Rivet {
     if (t.abspid() != PID::TAU) return 0;
     return (t.abspid() == PID::TAU) ? 0.6 : 0;
   }
+  /// CMS Run 2 loose tau reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_CMS_RUN2_LOOSE(const Particle& t) { return TAU_EFF_CMS_RUN2(t); }
+  /// CMS Run 2 medium muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_CMS_RUN2_MEDIUM(const Particle& t) { return TAU_EFF_CMS_RUN2(t); }
+  /// CMS Run 2 tight muon reconstruction efficiency
+  /// @todo Just an alias to generic: improve!
+  inline double TAU_EFF_CMS_RUN2_TIGHT(const Particle& t) { return TAU_EFF_CMS_RUN2(t); }
 
 
   /// CMS Run 1 tau smearing
+  ///
   /// @todo Currently a copy of the crappy ATLAS one
   inline Particle TAU_SMEAR_CMS_RUN1(const Particle& t) {
     return TAU_SMEAR_ATLAS_RUN1(t);
@@ -686,6 +853,7 @@ namespace Rivet {
 
 
   /// CMS Run 2 tau smearing
+  ///
   /// @todo Currently a copy of the Run 1 version
   inline Particle TAU_SMEAR_CMS_RUN2(const Particle& t) {
     return TAU_SMEAR_CMS_RUN1(t);
@@ -707,6 +875,8 @@ namespace Rivet {
     if (j.cTagged(ftagsel)) return 0.20*tanh(0.020*j.pT()/GeV)*( 1/(1+0.0034*j.pT()/GeV));
     return 0.002 + 7.3e-6*j.pT()/GeV;
   }
+  /// Alias for naming scheme
+  inline double JET_BTAG_ATLAS_RUN1_XXX(const Jet& j) { return JET_BTAG_ATLAS_RUN1(j); }
 
   /// Return the ATLAS Run 2 MC2c20 77% WP jet flavour tagging efficiency for the given Jet
   inline double JET_BTAG_ATLAS_RUN2_MV2C20(const Jet& j) {
@@ -748,18 +918,21 @@ namespace Rivet {
   }
 
   /// ATLAS Run 2 jet smearing
+  ///
   /// @todo Just a copy of the Run 1 one: improve!!
   inline Jet JET_SMEAR_ATLAS_RUN2(const Jet& j) {
     return JET_SMEAR_ATLAS_RUN1(j);
   }
 
   /// CMS Run 2 jet smearing
+  ///
   /// @todo Just a copy of the suboptimal ATLAS one: improve!!
   inline Jet JET_SMEAR_CMS_RUN1(const Jet& j) {
     return JET_SMEAR_ATLAS_RUN1(j);
   }
 
   /// CMS Run 2 jet smearing
+  ///
   /// @todo Just a copy of the suboptimal ATLAS one: improve!!
   inline Jet JET_SMEAR_CMS_RUN2(const Jet& j) {
     return JET_SMEAR_CMS_RUN1(j);
@@ -827,6 +1000,7 @@ namespace Rivet {
   }
 
   /// CMS Run 1 ETmiss smearing
+  ///
   /// From https://arxiv.org/pdf/1411.0511.pdf Table 2, p16 (Z channels)
   inline Vector3 MET_SMEAR_CMS_RUN1(const Vector3& met, double set) {
     Vector3 smeared_met = met;
@@ -900,9 +1074,24 @@ namespace Rivet {
   }
 
   /// ATLAS Run 2 tracking efficiency
+  ///
   /// @todo Currently just a copy of Run 1: fix!
   inline double TRK_EFF_ATLAS_RUN2(const Particle& p) {
     return TRK_EFF_ATLAS_RUN1(p);
+  }
+
+
+  /// ATLAS Run 1 track smearing
+  ///
+  /// @todo Currently identity: fix!
+  inline Particle TRK_SMEAR_ATLAS_RUN1(const Particle& t) {
+    return PARTICLE_SMEAR_IDENTITY(t);
+  }
+  /// ATLAS Run 2 track smearing
+  ///
+  /// @todo Currently identity: fix!
+  inline Particle TRK_SMEAR_ATLAS_RUN2(const Particle& t) {
+    return PARTICLE_SMEAR_IDENTITY(t);
   }
 
 
@@ -938,9 +1127,24 @@ namespace Rivet {
   }
 
   /// CMS Run 2 tracking efficiency
+  ///
   /// @todo Currently just a copy of Run 1: fix!
   inline double TRK_EFF_CMS_RUN2(const Particle& p) {
     return TRK_EFF_CMS_RUN1(p);
+  }
+
+
+  /// CMS Run 1 track smearing
+  ///
+  /// @todo Currently identity: fix!
+  inline Particle TRK_SMEAR_CMS_RUN1(const Particle& t) {
+    return PARTICLE_SMEAR_IDENTITY(t);
+  }
+  /// CMS Run 2 track smearing
+  ///
+  /// @todo Currently identity: fix!
+  inline Particle TRK_SMEAR_CMS_RUN2(const Particle& t) {
+    return PARTICLE_SMEAR_IDENTITY(t);
   }
 
   /// @brief Return the efficiency of the ATLAS JVT tagger at > 0.2 W.P.
@@ -999,6 +1203,39 @@ namespace Rivet {
     const size_t bini = binIndex(j.pt(), binedges_pt);
     return binvals[bini];
   }
+
+  /// @}
+
+  /// @name A full family of identity smearing functions
+  /// @{
+
+  inline double ELECTRON_EFF_IDENTITY_LOOSE(const Particle& e) { return PARTICLE_EFF_ONE(e); }
+  inline double ELECTRON_EFF_IDENTITY_MEDIUM(const Particle& e) { return PARTICLE_EFF_ONE(e); }
+  inline double ELECTRON_EFF_IDENTITY_TIGHT(const Particle& e) { return PARTICLE_EFF_ONE(e); }
+  inline double MUON_EFF_IDENTITY_LOOSE(const Particle& m) { return PARTICLE_EFF_ONE(m); }
+  inline double MUON_EFF_IDENTITY_MEDIUM(const Particle& m) { return PARTICLE_EFF_ONE(m); }
+  inline double MUON_EFF_IDENTITY_TIGHT(const Particle& m) { return PARTICLE_EFF_ONE(m); }
+  inline double PHOTON_EFF_IDENTITY_LOOSE(const Particle& y) { return PARTICLE_EFF_ONE(y); }
+  inline double PHOTON_EFF_IDENTITY_MEDIUM(const Particle& y) { return PARTICLE_EFF_ONE(y); }
+  inline double PHOTON_EFF_IDENTITY_TIGHT(const Particle& y) { return PARTICLE_EFF_ONE(y); }
+  inline double TAU_EFF_IDENTITY_LOOSE(const Particle& t) { return PARTICLE_EFF_ONE(t); }
+  inline double TAU_EFF_IDENTITY_MEDIUM(const Particle& t) { return PARTICLE_EFF_ONE(t); }
+  inline double TAU_EFF_IDENTITY_TIGHT(const Particle& t) { return PARTICLE_EFF_ONE(t); }
+
+  inline Particle ELECTRON_SMEAR_IDENTITY(const Particle& e) { return PARTICLE_SMEAR_IDENTITY(e); }
+  inline Particle MUON_SMEAR_IDENTITY(const Particle& m) { return PARTICLE_SMEAR_IDENTITY(m); }
+  inline Particle PHOTON_SMEAR_IDENTITY(const Particle& y) { return PARTICLE_SMEAR_IDENTITY(y); }
+  inline Particle TAU_SMEAR_IDENTITY(const Particle& t) { return PARTICLE_SMEAR_IDENTITY(t); }
+
+  inline double TRK_EFF_IDENTITY_TIGHT(const Particle& trk) { return PARTICLE_EFF_ONE(trk); }
+  inline Particle TRK_SMEAR_IDENTITY(const Particle& trk) { return PARTICLE_SMEAR_IDENTITY(trk); }
+
+  // Already defined
+  //inline Jet JET_SMEAR_IDENTITY(const Jet& j) { return JET_SMEAR_IDENTITY(j); }
+  inline double JET_BTAG_IDENTITY_IDENTITY(const Jet& j) { return JET_BTAG_IDENTITY(j); }
+
+  // Already defined
+  //inline Vector3 MET_SMEAR_IDENTITY(const Vector3& met, double set) { return JET_SMEAR_IDENTITY(met, set); }
 
   /// @}
 
