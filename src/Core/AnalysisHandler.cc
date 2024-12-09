@@ -175,7 +175,9 @@ namespace Rivet {
       try {
         // Allow projection registration in the init phase onwards
         a->_allowProjReg = true;
+        a->preInit();
         a->init();
+        a->postInit();
         a->setProjectionHandler(_projHandler);
         a->syncDeclQueue();
         //MSG_DEBUG("Checking consistency of analysis: " << a->name());
@@ -509,7 +511,9 @@ namespace Rivet {
       a->_currentevent = &event;
       MSG_TRACE("About to run analysis " << a->name());
       try {
+        a->preAnalyze(event);
         a->analyze(event);
+        a->postAnalyze(event);
       } catch (const Error& err) {
         throw Error(a->name() + "::analyze method error: " + err.what());
       } catch (const std::bad_cast &err) {
@@ -682,7 +686,9 @@ namespace Rivet {
         }
         try {
           MSG_TRACE("running " << a->name() << "::finalize() for weight " << iW << ".");
+          a->preFinalize();
           a->finalize();
+          a->postFinalize();
         } catch (const Error& err) {
           throw Error(a->name() + "::finalize method error: " + err.what());
         }
@@ -1161,7 +1167,9 @@ namespace Rivet {
       try {
         // Allow projection registration in the init phase onwards
         a->_allowProjReg = true;
+        a->preInit();
         a->init();
+        a->postInit();
         a->setProjectionHandler(_projHandler);
         a->syncDeclQueue();
       } catch (const Error& err) {
@@ -1280,7 +1288,9 @@ namespace Rivet {
       try {
         // Allow projection registration in the init phase onwards
         a->_allowProjReg = true;
+        a->preInit();
         a->init();
+        a->postInit();
         a->setProjectionHandler(_projHandler);
         a->syncDeclQueue();
       } catch (const Error& err) {

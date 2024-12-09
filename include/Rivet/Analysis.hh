@@ -106,9 +106,28 @@ namespace Rivet {
     /// function.
     virtual void finalize() { }
 
-    ///Call the projection applier _syncDeclQueue() method.
-    ///(It should be hidden for all projection appliers other than analyses)
-    ///TODO for TP: Is this the right block for this method to be in?
+    /// @}
+
+
+    /// @name Power-user analysis methods
+    /// @{
+
+    /// A method called before init(), for cleaner subclassing
+    virtual void preInit() { }
+    /// A method called after init(), for cleaner subclassing
+    virtual void postInit() { }
+    /// A method called before analyze(), for cleaner subclassing
+    virtual void preAnalyze(const Event&) { }
+    /// A method called after analyze(), for cleaner subclassing
+    virtual void postAnalyze(const Event&) { }
+    /// A method called before finalize(), for cleaner subclassing
+    virtual void preFinalize() { }
+    /// A method called after finalize(), for cleaner subclassing
+    virtual void postFinalize() { }
+
+    /// Call the projection applier _syncDeclQueue() method.
+    ///
+    /// @note It should be hidden for all projection appliers other than analyses.
     void syncDeclQueue() {
       this->_syncDeclQueue();
       this->markAsOwned();

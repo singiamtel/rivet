@@ -1,3 +1,13 @@
+2024-11-14  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Add pre/post methods around the three main Analysis event-loop
+	functions, allowing cleaner specialisation by
+	analysis-subclassing, and move SimpleAnalysis boilerplate into
+	them.
+
+	* Add SimpleAnalysis simplified API for analyses with generic
+	predefined objects and e.g. isolation and overlap removal.
+
 2024-11-12  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Extend the Has?Tag functors to accept and pass a dRmax arg.
