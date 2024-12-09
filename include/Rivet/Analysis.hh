@@ -1190,7 +1190,7 @@ namespace Rivet {
       if (re != "") {
         std::smatch match;
         const bool needsDP = std::regex_search(path, match, std::regex(re));
-        if (needsDP)  yao.template setAnnotation("WriterDoublePrecision", "1");
+        if (needsDP)  yao.setAnnotation("WriterDoublePrecision", "1");
       }
     }
 
