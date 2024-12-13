@@ -80,6 +80,20 @@ YLabel=$\mathrm{d}\sigma/\mathrm{d}m_{q\bar{q}b}$ [pb GeV$^{-1}$]
 LogY=0
 # END PLOT
 
+# BEGIN PLOT /MC_TTBAR/.*t_pT
+Title=$p_\perp$ distribution for reconstructed top
+XLabel=$p_\perp^t$ [GeV]
+YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp$ [pb GeV$^{-1}$]
+LogY=1
+# END PLOT
+
+# BEGIN PLOT /MC_TTBAR/.*t_pT_W_cut
+Title=$p_\perp$ distribution for reconstructed top after $m_W$ cut
+XLabel=$p_\perp$ [GeV]
+YLabel=$\mathrm{d}\sigma/\mathrm{d}p_\perp$ [pb GeV$^{-1}$]
+LogY=1
+# END PLOT
+
 # BEGIN PLOT /MC_TTBAR/.*_mass
 XLabel=$m$ [GeV]
 YLabel=$\mathrm{d}\sigma/\mathrm{d}m$ [pb GeV$^{-1}$]

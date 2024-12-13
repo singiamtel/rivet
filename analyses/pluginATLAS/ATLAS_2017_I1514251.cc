@@ -118,7 +118,7 @@ namespace Rivet {
     }
 
     void finalize() {
-      for (size_t i = 1; i < _h_Njets->numBins()-1; ++i) {
+      for (size_t i = 1; i < _h_Njets->numBins(); ++i) {
         double  n = _h_Njets->bin(i + 1).sumW();
         double dN = _h_Njets->bin(i + 1).sumW2();
         double  d = _h_Njets->bin(i).sumW();
