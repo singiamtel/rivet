@@ -420,7 +420,7 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
   before_script:
     - apk add bash
     - bash docker/setup-multiarch-builder.sh
-    - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
+    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
   script:
     - cd docker/$IMAGE_NAME/
     - FORCE=1 PUSH=1 MULTIARCH=1 bash build.sh

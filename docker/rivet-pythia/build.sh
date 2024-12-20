@@ -1,6 +1,9 @@
 #! /usr/bin/env bash
 
-set -e
+# Source the common Docker setup script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../docker-common.sh"
+
 
 RIVET_VERSION=${RIVET_VERSION:-4.0.2}
 PYTHIA_VERSION=8312
