@@ -1,31 +1,23 @@
 #! /usr/bin/env bash
 
-# Source the common Docker setup script
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../docker-common.sh"
-
-
 RIVET_VERSION=${RIVET_VERSION:-4.0.2}
 PYTHIA_VERSION=8312
 
-#PLATFLAGS="--platform linux/amd64,linux/arm64"
-#BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS"
-#if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../docker-common.sh"
 
-BUILD="docker build . -f Dockerfile --progress=plain $DOCKERFLAGS"
+BUILDFLAGS+=" --build-arg RIVET_VERSION=${RIVET_VERSION}"
+BUILDFLAGS+=" --build-arg PYTHIA_VERSION=${PYTHIA_VERSION}"
 
-test "$FORCE" && BUILD="$BUILD --no-cache"
+PKG="hepstore/rivet-pythia"
+TAGS="${RIVET_VERSION}-${PYTHIA_VERSION} ${RIVET_VERSION}"
+test "$LATEST" = 1 && TAGS+=" latest"
+for tag in TAGS; do TAGFLAGS="$TAGFLAGS -t $PKG:$tag"; done
 
-BUILD="$BUILD --build-arg RIVET_VERSION=${RIVET_VERSION}"
-BUILD="$BUILD --build-arg PYTHIA_VERSION=${PYTHIA_VERSION}"
-
-BUILD="$BUILD -t hepstore/rivet-pythia:${RIVET_VERSION}-${PYTHIA_VERSION}"
-BUILD="$BUILD -t hepstore/rivet-pythia:${RIVET_VERSION}"
-if [[ "$LATEST" = 1 ]]; then BUILD="$BUILD -t hepstore/rivet-pythia:latest"; fi
-
-echo "Building: $BUILD"
-$BUILD
+dx_build $BUILDFLAGS $TAGFLAGS
 
 if [[ "$PUSH" = 1 ]]; then
-    docker push -a hepstore/rivet-pythia
+    for tag in $TAGS; do
+        xdocker push $PKG:$tag
+    done
 fi

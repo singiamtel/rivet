@@ -1,4 +1,4 @@
-ARG ARCH=ubuntu-gcc-hepmc3-py3
+ARG ARCH=ubuntu-gcc
 FROM hepstore/hepbase-${ARCH}-latex
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]

@@ -428,12 +428,67 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
     - if: $DOCKER_DEPLOY == "1"
       when: manual
 
-hepbase_docker:
+
+hepbase_ubuntu_gcc_docker:
   stage: docker
   variables:
+  #  IMAGE_NAME: hepbase-ubuntu-gcc
     IMAGE_NAME: hepbase
-  #  IMAGE_NAME: hepbase-ubuntu-gcc-py3
+    OS: ubuntu
+    TOOLS: gcc
+    TEX: 0
   <<: *build_docker
+
+hepbase_ubuntu_llvm_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-ubuntu-llvm
+    IMAGE_NAME: hepbase
+    OS: ubuntu
+    TOOLS: llvm
+    TEX: 0
+  <<: *build_docker
+
+hepbase_fedora_gcc_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-fedora-gcc
+    IMAGE_NAME: hepbase
+    OS: fedora
+    TOOLS: gcc
+    TEX: 0
+  <<: *build_docker
+
+hepbase_ubuntu_gcc_tex_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-ubuntu-gcc-latex
+    IMAGE_NAME: hepbase
+    OS: ubuntu
+    TOOLS: gcc
+    TEX: 1
+  <<: *build_docker
+
+hepbase_ubuntu_llvm_tex_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-ubuntu-llvm-latex
+    IMAGE_NAME: hepbase
+    OS: ubuntu
+    TOOLS: llvm
+    TEX: 1
+  <<: *build_docker
+
+hepbase_fedora_gcc_tex_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-fedora-gcc-latex
+    IMAGE_NAME: hepbase
+    OS: fedora
+    TOOLS: gcc
+    TEX: 1
+  <<: *build_docker
+
 
 rivet_docker:
   stage: docker
@@ -445,7 +500,6 @@ rivetmg5_docker:
   stage: docker
   variables:
     IMAGE_NAME: rivet-mg5amcnlo
-  # needs: [rivet_docker]
   <<: *build_docker
 
 rivetpy8_docker:
@@ -464,12 +518,10 @@ rivethw7_docker:
   stage: docker
   variables:
     IMAGE_NAME: rivet-herwig
-  needs: [rivet_docker]
   <<: *build_docker
 
 tutorial_docker:
   stage: docker
   variables:
     IMAGE_NAME: rivet-tutorial
-  needs: [rivetpy8_docker]
   <<: *build_docker

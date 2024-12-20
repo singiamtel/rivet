@@ -18,7 +18,7 @@ for tag in TAGS; do TAGFLAGS="$TAGFLAGS -t $PKG:$tag"; done
 dx_build $BUILDFLAGS $TAGFLAGS
 
 if [[ "$PUSH" = 1 ]]; then
-for tag in $TAGS; do
-    xdocker push $PKG:$tag
-    # sleep $SLEEP
-done
+    for tag in $TAGS; do
+        xdocker push $PKG:$tag
+    done
+fi

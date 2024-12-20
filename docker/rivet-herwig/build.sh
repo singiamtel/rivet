@@ -1,30 +1,25 @@
 #! /usr/bin/env bash
 
-set -e
-
 RIVET_VERSION=${RIVET_VERSION:-4.0.2}
 HERWIG_VERSION=7.3.0
 THEPEG_VERSION=2.3.0
 
-#PLATFLAGS="--platform linux/amd64,linux/arm64"
-#BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
-#if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../docker-common.sh"
 
-BUILD="docker build . -f Dockerfile --progress=plain $DOCKERFLAGS"
+BUILDFLAGS+=" --build-arg RIVET_VERSION=${RIVET_VERSION}"
+BUILDFLAGS+=" --build-arg THEPEG_VERSION=${THEPEG_VERSION}"
+BUILDFLAGS+=" --build-arg HERWIG_VERSION=${HERWIG_VERSION}"
 
-test "$FORCE" && BUILD="$BUILD --no-cache"
+PKG="hepstore/rivet-herwig"
+TAGS="${RIVET_VERSION}-${HERWIG_VERSION} ${RIVET_VERSION}"
+test "$LATEST" = 1 && TAGS+=" latest"
+for tag in TAGS; do TAGFLAGS="$TAGFLAGS -t $PKG:$tag"; done
 
-BUILD="$BUILD --build-arg RIVET_VERSION=${RIVET_VERSION}"
-BUILD="$BUILD --build-arg THEPEG_VERSION=${THEPEG_VERSION}"
-BUILD="$BUILD --build-arg HERWIG_VERSION=${HERWIG_VERSION}"
-
-BUILD="$BUILD -t hepstore/rivet-herwig:${RIVET_VERSION}-${HERWIG_VERSION}"
-BUILD="$BUILD -t hepstore/rivet-herwig:${RIVET_VERSION}"
-if [[ "$LATEST" = 1 ]]; then BUILD="$BUILD -t hepstore/rivet-herwig:latest"; fi
-
-echo "Building: $BUILD"
-$BUILD
+dx_build $BUILDFLAGS $TAGFLAGS
 
 if [[ "$PUSH" = 1 ]]; then
-    docker push -a hepstore/rivet-herwig
+    for tag in $TAGS; do
+        xdocker push $PKG:$tag
+    done
 fi

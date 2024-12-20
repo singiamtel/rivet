@@ -8,9 +8,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
     && apt-get upgrade -y \
     && apt-get install -y apt-utils tzdata \
-    && if [[ "$BUILD_TOOLS" = "GCC" ]]; then \
+    && if [[ "$BUILD_TOOLS" = "gcc" ]]; then \
           CXX_CMD=g++; CC_CMD=gcc; FC_CMD=gfortran; BUILD_PKGS="g++ gcc gfortran"; \
-       elif [[ "$BUILD_TOOLS" = "LLVM" ]]; then \
+       elif [[ "$BUILD_TOOLS" = "llvm" ]]; then \
           CXX_CMD=clang++; CC_CMD=clang; FC_CMD=gfortran; BUILD_PKGS="clang gfortran"; \
        fi \
     && apt-get install -y ${BUILD_PKGS} \
@@ -20,7 +20,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && cat /etc/profile.d/01-buildtools.sh >> /root/.bashrc
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && if [[ "$BUILD_TOOLS" = "LLVM" ]]; then \
+    && if [[ "$BUILD_TOOLS" = "llvm" ]]; then \
           update-alternatives --install /usr/bin/g++ g++ $(which clang++) 2 && \
           update-alternatives --install /usr/bin/c++ c++ $(which clang++) 2 && \
           update-alternatives --install /usr/bin/gcc gcc $(which clang) 2 && \

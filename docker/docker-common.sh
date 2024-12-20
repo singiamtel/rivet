@@ -20,9 +20,9 @@ function xdocker { echo "docker $@"; docker "$@"; }
 ## Define the build function based on the MULTIARCH flag
 if [[ "$MULTIARCH" = 1 ]]; then
     if [[ "$PUSH" = 1 ]]; then PUSH="--push"; fi
-    function dx_build { xdocker buildx build -f ./Dockerfile --progress=plain "$@" $PUSH .; }
+    function dx_build { xdocker buildx build --progress=plain "$@" $PUSH .; }
 else
-    function dx_build { xdocker build -f ./Dockerfile --progress=plain "$@" .; }
+    function dx_build { xdocker build --progress=plain "$@" .; }
 fi
 
 # ## If Docker Hub username is not found and PUSH is set, prompt the user to enter it
