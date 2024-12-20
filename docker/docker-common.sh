@@ -12,6 +12,8 @@ fi
 
 BUILDFLAGS="$PLATFLAGS $DOCKERFLAGS"
 
+SLEEP=${SLEEP:-30}
+
 ## Function to wrap Docker commands
 function xdocker { echo "docker $@"; docker "$@"; }
 

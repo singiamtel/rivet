@@ -1,29 +1,24 @@
 #! /usr/bin/env bash
 
-set -e
-
 RIVET_VERSION=${RIVET_VERSION:-4.0.2}
 MG5_VERSION=3.5.6
 MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.6.tar.gz
 
-#PLATFLAGS="--platform linux/amd64,linux/arm64"
-#BUILD="docker buildx build -f Dockerfile $PLATFLAGS $DOCKERFLAGS ."
-#if [[ -n "$PLATFLAGS" && "$PUSH" = 1 ]]; then BUILD="$BUILD --push"; fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../docker-common.sh"
 
-BUILD="docker build . -f Dockerfile --progress=plain $DOCKERFLAGS"
+BUILDFLAGS+="--build-arg RIVET_VERSION=${RIVET_VERSION}"
+BUILDFLAGS+=" --build-arg MG5_URL=${MG5_URL}"
 
-test "$FORCE" && BUILD="$BUILD --no-cache"
+PKG="hepstore/rivet-mg5amcnlo"
+TAGS="${RIVET_VERSION}-${MG5_VERSION} ${RIVET_VERSION}"
+test "$LATEST" = 1 && TAGS+=" latest"
+for tag in TAGS; do TAGFLAGS="$TAGFLAGS -t $PKG:$tag"; done
 
-BUILD="$BUILD --build-arg RIVET_VERSION=${RIVET_VERSION}"
-BUILD="$BUILD --build-arg MG5_URL=${MG5_URL}"
-
-BUILD="$BUILD -t hepstore/rivet-mg5amcnlo:${RIVET_VERSION}-${MG5_VERSION}"
-BUILD="$BUILD -t hepstore/rivet-mg5amcnlo:${RIVET_VERSION}"
-if [[ "$LATEST" = 1 ]]; then BUILD="$BUILD -t hepstore/rivet-mg5amcnlo:latest"; fi
-
-echo "Building: $BUILD"
-$BUILD
+dx_build $BUILDFLAGS $TAGFLAGS
 
 if [[ "$PUSH" = 1 ]]; then
-    docker push -a hepstore/rivet-mg5amcnlo
-fi
+for tag in $TAGS; do
+    xdocker push $PKG:$tag
+    # sleep $SLEEP
+done
