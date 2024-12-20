@@ -2,6 +2,7 @@ variables:
   GIT_STRATEGY: fetch
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SSL_NO_VERIFY: "true"
+  DOCKER_DRIVER: overlay2
 
 
 stages:
@@ -9,7 +10,9 @@ stages:
 - precheck
 - check
 - validate
-- deploy
+- docker1
+- docker2
+- docker3
 
 
 .trigger_template: &trigger_template
@@ -412,22 +415,66 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
   <<: *check_onnx_analyses_template
 
 
-build_docker_image:
-  stage: deploy
+.build_docker: &build_docker
   image: docker:latest
   services:
     - docker:dind
-  variables:
-    DOCKER_DRIVER: overlay2
-    IMAGE_NAME: rivet
   before_script:
     - apk add bash
     - bash docker/setup-multiarch-builder.sh
-  script:
     - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
-    - chmod +x ./docker/rivet/build.sh
-    - cd ./docker/rivet
-    - FORCE=1 PUSH=1 MULTIARCH=1 ./build.sh
+  script:
+    - cd docker/$IMAGE_NAME/
+    - FORCE=1 PUSH=1 MULTIARCH=1 bash build.sh
   rules:
     - if: $DOCKER_DEPLOY == "1"
       when: manual
+
+rivet_docker:
+  stage: docker1
+  variables:
+    IMAGE_NAME: rivet
+  <<: *build_docker
+
+rivetmg5_docker:
+  stage: docker2
+  variables:
+    IMAGE_NAME: rivet-mg5amcnlo
+  <<: *build_docker
+
+# stage: docker2
+#   image: docker:latest
+#   services:
+#     - docker:dind
+#   variables:
+#     DOCKER_DRIVER: overlay2
+#     IMAGE_NAME: rivet-mg5amcnlo
+#   before_script:
+#     - apk add bash
+#     - bash docker/setup-multiarch-builder.sh
+#   script:
+#     - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
+#     - cd docker/$IMAGE_NAME/
+#     - FORCE=1 PUSH=1 MULTIARCH=1 bash build.sh
+#   rules:
+#     - if: $DOCKER_DEPLOY == "1"
+#       when: manual
+
+# tutorial_docker:
+#   stage: docker3
+#   image: docker:latest
+#   services:
+#     - docker:dind
+#   variables:
+#     DOCKER_DRIVER: overlay2
+#     IMAGE_NAME: rivet
+#   before_script:
+#     - apk add bash
+#     - bash docker/setup-multiarch-builder.sh
+#   script:
+#     - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
+#     - cd docker/$IMAGE_NAME/
+#     - FORCE=1 PUSH=1 MULTIARCH=1 bash ./build.sh
+#   rules:
+#     - if: $DOCKER_DEPLOY == "1"
+#       when: manual
