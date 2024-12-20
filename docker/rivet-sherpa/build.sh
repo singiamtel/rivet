@@ -10,6 +10,7 @@ source "$SCRIPT_DIR/../docker-common.sh"
 BUILDFLAGS+=" --build-arg RIVET_VERSION=${RIVET_VERSION}"
 BUILDFLAGS+=" --build-arg SHERPA_VERSION=${SHERPA_VERSION}"
 
+# TODO: single-source the heavily shared logic below
 PKG="hepstore/rivet-sherpa"
 TAGS="${RIVET_VERSION}-${SHERPA_VERSION} ${RIVET_VERSION}"
 test "$LATEST" = 1 && TAGS+=" latest"

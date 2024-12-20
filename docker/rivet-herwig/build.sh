@@ -11,6 +11,7 @@ BUILDFLAGS+=" --build-arg RIVET_VERSION=${RIVET_VERSION}"
 BUILDFLAGS+=" --build-arg THEPEG_VERSION=${THEPEG_VERSION}"
 BUILDFLAGS+=" --build-arg HERWIG_VERSION=${HERWIG_VERSION}"
 
+# TODO: single-source the heavily shared logic below
 PKG="hepstore/rivet-herwig"
 TAGS="${RIVET_VERSION}-${HERWIG_VERSION} ${RIVET_VERSION}"
 test "$LATEST" = 1 && TAGS+=" latest"

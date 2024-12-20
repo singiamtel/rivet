@@ -10,6 +10,7 @@ source "$SCRIPT_DIR/../docker-common.sh"
 BUILDFLAGS+=" --build-arg RIVET_VERSION=${RIVET_VERSION}"
 BUILDFLAGS+=" --build-arg MG5_URL=${MG5_URL}"
 
+# TODO: single-source the heavily shared logic below
 PKG="hepstore/rivet-mg5amcnlo"
 TAGS="${RIVET_VERSION}-${MG5_VERSION} ${RIVET_VERSION}"
 test "$LATEST" = 1 && TAGS+=" latest"
