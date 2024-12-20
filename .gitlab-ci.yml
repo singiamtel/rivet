@@ -459,36 +459,6 @@ hepbase_fedora_gcc_docker:
     TEX: 0
   <<: *build_docker
 
-hepbase_ubuntu_gcc_tex_docker:
-  stage: docker
-  variables:
-  #  IMAGE_NAME: hepbase-ubuntu-gcc-latex
-    IMAGE_NAME: hepbase
-    OS: ubuntu
-    TOOLS: gcc
-    TEX: 1
-  <<: *build_docker
-
-hepbase_ubuntu_llvm_tex_docker:
-  stage: docker
-  variables:
-  #  IMAGE_NAME: hepbase-ubuntu-llvm-latex
-    IMAGE_NAME: hepbase
-    OS: ubuntu
-    TOOLS: llvm
-    TEX: 1
-  <<: *build_docker
-
-hepbase_fedora_gcc_tex_docker:
-  stage: docker
-  variables:
-  #  IMAGE_NAME: hepbase-fedora-gcc-latex
-    IMAGE_NAME: hepbase
-    OS: fedora
-    TOOLS: gcc
-    TEX: 1
-  <<: *build_docker
-
 
 rivet_docker:
   stage: docker
