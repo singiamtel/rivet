@@ -10,9 +10,7 @@ stages:
 - precheck
 - check
 - validate
-- docker1
-- docker2
-- docker3
+- docker
 
 
 .trigger_template: &trigger_template
@@ -430,51 +428,48 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
     - if: $DOCKER_DEPLOY == "1"
       when: manual
 
+hepbase_docker:
+  stage: docker
+  variables:
+    IMAGE_NAME: hepbase
+  #  IMAGE_NAME: hepbase-ubuntu-gcc-py3
+  <<: *build_docker
+
 rivet_docker:
-  stage: docker1
+  stage: docker
   variables:
     IMAGE_NAME: rivet
   <<: *build_docker
 
 rivetmg5_docker:
-  stage: docker2
+  stage: docker
   variables:
     IMAGE_NAME: rivet-mg5amcnlo
+  # needs: [rivet_docker]
   <<: *build_docker
 
-# stage: docker2
-#   image: docker:latest
-#   services:
-#     - docker:dind
-#   variables:
-#     DOCKER_DRIVER: overlay2
-#     IMAGE_NAME: rivet-mg5amcnlo
-#   before_script:
-#     - apk add bash
-#     - bash docker/setup-multiarch-builder.sh
-#   script:
-#     - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
-#     - cd docker/$IMAGE_NAME/
-#     - FORCE=1 PUSH=1 MULTIARCH=1 bash build.sh
-#   rules:
-#     - if: $DOCKER_DEPLOY == "1"
-#       when: manual
+rivetpy8_docker:
+  stage: docker
+  variables:
+    IMAGE_NAME: rivet-pythia
+  <<: *build_docker
 
-# tutorial_docker:
-#   stage: docker3
-#   image: docker:latest
-#   services:
-#     - docker:dind
-#   variables:
-#     DOCKER_DRIVER: overlay2
-#     IMAGE_NAME: rivet
-#   before_script:
-#     - apk add bash
-#     - bash docker/setup-multiarch-builder.sh
-#   script:
-#     - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
-#     - cd docker/$IMAGE_NAME/
-#     - FORCE=1 PUSH=1 MULTIARCH=1 bash ./build.sh
-#   rules:
-#     - if: $DOCKER_DEPLOY == "1"
-#       when: manual
+rivetsh2_docker:
+  stage: docker
+  variables:
+    IMAGE_NAME: rivet-sherpa
+  <<: *build_docker
+
+rivethw7_docker:
+  stage: docker
+  variables:
+    IMAGE_NAME: rivet-herwig
+  needs: [rivet_docker]
+  <<: *build_docker
+
+tutorial_docker:
+  stage: docker
+  variables:
+    IMAGE_NAME: rivet-tutorial
+  needs: [rivetpy8_docker]
+  <<: *build_docker
