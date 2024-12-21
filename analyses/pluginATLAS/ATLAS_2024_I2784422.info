@@ -1,0 +1,39 @@
+Name: ATLAS_2024_I2784422
+Year: 2024
+Summary: ATLAS Kaon and Lambda Underlying Event spectra at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2784422
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Tim Martin <Tim.Martin@cern.ch>
+References:
+ - ATLAS-STDM-2018-60
+ - arXiv:2405.05048 [hep-ex]
+RunInfo: p p -> X
+Beams: [p+, p+]
+Energies: [13000]
+Description:
+  'Properties of the underlying-event in $pp$ interactions are investigated primarily via the strange hadrons $K_{S}^{0}$,
+  $\Lambda$ and $\bar\Lambda$, as reconstructed using the ATLAS detector at the LHC in minimum-bias $pp$ collision data at
+  $\sqrt{s} = 13$ TeV. The hadrons are reconstructed via the identification of the displaced two-particle vertices
+  corresponding to the decay modes $K_{S}^{0}\rightarrow\pi^+\pi^-$, $\Lambda\rightarrow\pi^-p$ and $\bar\Lambda\rightarrow\pi^+\bar{p}$.
+  These are used in the construction of underlying-event observables in azimuthal regions computed relative to the leading
+  charged-particle jet in the event. Events with a leading charged-particle jet in the range of $10 < p_\text{T} \leq 40$
+  GeV are studied using the number of prompt charged particles in the transverse region.'
+Keywords: [UNDERLYING EVENT, MINIMUM BIAS, KAON, LAMBDA, CHARGED PARTICLE SPECTRA, CHARGED PARTICLE JETS]
+BibKey: ATLAS:2024nbm
+BibTeX: '@article{ATLAS:2024nbm,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Underlying-event studies with strange hadrons in $pp$ collisions at $\sqrt{s} = 13$ TeV with the ATLAS detector}",
+    eprint = "2405.05048",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2024-105",
+    month = "5",
+    year = "2024"
+}'
+ReleaseTests:
+ - $A LHC-13-UE-Long
