@@ -3,7 +3,6 @@ FROM ${FEDORA_IMAGE}
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
 
-# TODO: rm Intel
 ARG BUILD_TOOLS
 RUN true \
     && dnf update -y \
@@ -20,7 +19,6 @@ RUN true \
     && echo -e "\nexport CXX=$CXX_CMD\nexport CC=$CC_CMD\nexport FC=$FC_CMD\n" >> /etc/profile.d/01-buildtools.sh \
     && cat /etc/profile.d/01-buildtools.sh >> /root/.bashrc
 
-# TODO: rm Intel
 RUN true \
     && if [[ "$BUILD_TOOLS" = "llvm" ]]; then \
           update-alternatives --install /usr/bin/g++ g++ $(which clang++) 2 && \
@@ -49,22 +47,20 @@ RUN true \
     && wget --no-check-certificate --no-verbose https://root.cern/download/root_v6.32.02.Linux-fedora39-x86_64-gcc13.3.tar.gz -O- | tar xz \
     && echo "source /usr/local/root/bin/thisroot.sh" > /etc/profile.d/10-cernroot.sh
 
-# TODO: Update HighFive to 2.9.0... or just let this be handled by the bootstrap
+# TODO: delegate HighFive to the bootstrap
 RUN true \
     && dnf install -y zlib-devel gsl-devel hdf5-devel python3-h5py \
     && dnf clean all \
     && mkdir /code && cd /code \
-    && wget --no-check-certificate --no-verbose https://github.com/BlueBrain/HighFive/archive/refs/tags/v2.7.1.tar.gz -O- | tar xz \
+    && wget --no-check-certificate --no-verbose https://github.com/BlueBrain/HighFive/archive/refs/tags/v2.10.1.tar.gz -O- | tar xz \
     && mv HighFive-*/include/highfive /usr/local/include/ \
     && rm -rf /code
 
-# TODO: remove bootstrap hack for HepMC URL
 ARG HEPMC_VERSION
 ARG RIVETBS_VERSION
 RUN true \
     && mkdir /code && cd /code \
-    && wget --no-check-certificate --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/raw/${RIVETBS_VERSION}/rivet-bootstrap \
-    && sed -e 's!http://hepmc.web.cern.ch/hepmc/releases/!https://cedar-tools.web.cern.ch/downloads/!' -i rivet-bootstrap \
+    && wget --no-check-certificate --no-verbose https://gitlab.com/hepcedar/rivetbootstrap/-/raw/${RIVETBS_VERSION}/rivet-bootstrap \
     && chmod +x rivet-bootstrap \
     && dnf clean all \
     && PYV=$(python -c "import sys; v = sys.version_info; print(f'{v[0]}.{v[1]}')") \
@@ -100,7 +96,7 @@ RUN true \
     && ls wrappers/python/build/lhapdf -l \
     && rm -r /code
 
-# TODO: remove for Rivet v4? Still needed in the mpl for now :-(
+# TODO: remove sometime? Still needed in the mpl for now
 ARG LATEX
 RUN if test "$LATEX" = "1"; then \
       dnf install -y \

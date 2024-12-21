@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 RIVETBS_VERSION=4.0.2
-LHAPDF_VERSION=6.5.4
+LHAPDF_VERSION=6.5.5
 HEPMC_VERSION=3.3.0
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
