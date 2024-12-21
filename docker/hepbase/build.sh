@@ -19,10 +19,10 @@ fi
 PKG=hepstore/hepbase-$OS-$TOOLS
 
 echo "Building $PKG image"
-dx_build $BUILDFLAGS -f Dockerfile.$OS --build-arg LATEX=0 --build-arg BUILD_TOOLS=$TOOLS -t $PKG .
+dx_build $BUILDFLAGS -f Dockerfile.$OS --build-arg LATEX=0 --build-arg BUILD_TOOLS=$TOOLS -t $PKG:latest
 test "$PUSH" = 1 && xdocker push $PKG && sleep $SLEEP
 
 PKG+="-latex"
 echo "Building $PKG image"
-dx_build $BUILDFLAGS -f Dockerfile.$OS --build-arg LATEX=1 --build-arg BUILD_TOOLS=$TOOLS -t $PKG .
+dx_build $BUILDFLAGS -f Dockerfile.$OS --build-arg LATEX=1 --build-arg BUILD_TOOLS=$TOOLS -t $PKG:latest
 test "$PUSH" = 1 && xdocker push $PKG && sleep $SLEEP
