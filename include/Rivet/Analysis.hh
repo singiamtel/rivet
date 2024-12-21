@@ -508,7 +508,11 @@ namespace Rivet {
         MSG_ERROR("Can't find reference histogram " << hname);
         throw Exception("Reference data " + hname + " not found.");
       }
-      return dynamic_cast<T&>(*_refdata[hname]);
+      try {
+        return dynamic_cast<T&>(*_refdata[hname]);
+      } catch (...) {
+        throw Exception("Expected type " + _refdata[hname]->type()+" for reference data \"" + hname + "\".\n");
+      }
     }
 
 
