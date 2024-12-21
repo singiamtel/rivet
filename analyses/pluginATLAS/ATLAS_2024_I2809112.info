@@ -1,0 +1,46 @@
+Name: ATLAS_2024_I2809112
+Year: 2024
+Summary: ttbb production at 13 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 2809112
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Mahsana Haleem <Mahsana.Ahsan@cern.ch>
+References:
+ - ATLAS-STDM-2019-03
+ - arXiv:2407.13473 [hep-ex]
+RunInfo: pp ->  ttbb in the e-mu channel
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 140
+Description:
+  'This paper presents measurements of top-antitop quark pair ($t\bar{t}) production in association with additional $b$-jets. The analysis
+  utilises 140 fbi${}^{-1}$ of proton-proton collision data collected with the ATLAS detector at the Large Hadron Collider at a
+  centre-of-mass energy of 13 TeV. Fiducial cross-sections are extracted in a final state featuring one electron and one muon, with
+  at least three or four $b$-jets. Results are presented at the particle level for both integrated cross-sections and normalised
+  differential cross-sections, as functions of global event properties, jet kinematics, and $b$-jet pair properties. Observable
+  quantities characterising $b$-jets originating from the top quark decay and additional b-jets are also measured at the particle
+  level, after correcting for detector effects. The measured integrated fiducial cross-sections are consistent with
+  $t\bar{t}b\bar{b}$ predictions from various next-to-leading-order matrix element calculations matched to a parton shower within
+  the uncertainties ofthe predictions. State-of-the-art theoretical predictions are compared with the differential measurements;
+  none of them simultaneously describes all observables. Differences between any two predictions are smaller than the measurement
+  uncertainties for most observables.'
+Keywords:
+ - TTBAR
+ - TTBB
+BibKey: ATLAS:2024aht
+BibTeX: '@article{ATLAS:2024aht,
+    author = "Aad, Georges and others",
+    collaboration = "ATLAS",
+    title = "{Measurement of $t\bar{t}$ production in association with additional $b$-jets in the $e\mu$ final state in proton-proton collisions at $\sqrt{s}$=13 TeV with the ATLAS detector}",
+    eprint = "2407.13473",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CERN-EP-2024-191",
+    month = "7",
+    year = "2024"
+}'
+ReleaseTests:
+ - $A pp-13000-ttbb
