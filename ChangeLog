@@ -1,3 +1,8 @@
+2024-12-20  Christian Gutschow  <chris.g@cern.ch>
+
+	* Issue a more helpful error message when a ref-data object used
+	for booking mismatches the target type.
+
 2024-11-26  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Add top-quark pT histograms to MC_TTBAR.
