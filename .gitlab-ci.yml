@@ -423,7 +423,7 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
     - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
   script:
     - cd docker/$IMAGE_NAME/
-    - FORCE=1 PUSH=1 MULTIARCH=1 bash build.sh
+    - FORCE=0 PUSH=1 MULTIARCH=1 bash build.sh
   rules:
     - if: $DOCKER_DEPLOY == "1"
       when: manual
