@@ -1,8 +1,9 @@
 #! /usr/bin/env bash
 
 RIVET_VERSION=${RIVET_VERSION:-4.0.2}
-MG5_VERSION=3.5.6
-MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.6.tar.gz
+MG5_VERSION=3.5.7
+#MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v3.5.6.tar.gz
+MG5_URL=https://launchpad.net/mg5amcnlo/3.0/3.6.x/+download/MG5_aMC_v3.5.7.tar.gz
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../docker-common.sh"
