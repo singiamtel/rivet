@@ -21,11 +21,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && if [[ "$BUILD_TOOLS" = "llvm" ]]; then \
-          update-alternatives --install /usr/bin/g++ g++ $(which clang++) 2 && \
-          update-alternatives --install /usr/bin/c++ c++ $(which clang++) 2 && \
-          update-alternatives --install /usr/bin/gcc gcc $(which clang) 2 && \
+          update-alternatives --install /usr/bin/g++ g++ $(which clang++) 2; \
+          update-alternatives --install /usr/bin/c++ c++ $(which clang++) 2; \
+          update-alternatives --install /usr/bin/gcc gcc $(which clang) 2; \
           update-alternatives --install /usr/bin/cc  cc  $(which clang) 2; \
-          # update-alternatives --install /usr/bin/gfortran gfortran $(which flang) 2; \
+          #which flang && update-alternatives --install /usr/bin/gfortran gfortran $(which flang) 2 || true; \
        fi \
     && apt-get install -y \
          make automake autoconf libtool cmake rsync \

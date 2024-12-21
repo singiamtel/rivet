@@ -21,11 +21,12 @@ RUN true \
 
 RUN true \
     && if [[ "$BUILD_TOOLS" = "llvm" ]]; then \
-          update-alternatives --install /usr/bin/g++ g++ $(which clang++) 2 && \
-          update-alternatives --install /usr/bin/c++ c++ $(which clang++) 2 && \
-          update-alternatives --install /usr/bin/gcc gcc $(which clang) 2 && \
-          update-alternatives --install /usr/bin/cc  cc  $(which clang) 2 && \
+          update-alternatives --install /usr/bin/g++ g++ $(which clang++) 2; \
+          update-alternatives --install /usr/bin/c++ c++ $(which clang++) 2; \
+          update-alternatives --install /usr/bin/gcc gcc $(which clang) 2; \
+          update-alternatives --install /usr/bin/cc  cc  $(which clang) 2; \
           update-alternatives --install /usr/bin/gfortran gfortran $(which gfortran) 2; \
+          fi \
     && dnf install -y \
          make redhat-rpm-config cmake \
          m4 automake autoconf libtool \
