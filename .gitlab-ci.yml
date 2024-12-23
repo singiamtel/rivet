@@ -429,7 +429,7 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
       when: manual
 
 
-nohepbase_ubuntu_gcc_docker:
+docker0_nohepbase_ubuntu_gcc:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-ubuntu-gcc
@@ -438,7 +438,7 @@ nohepbase_ubuntu_gcc_docker:
     TOOLS: gcc
   <<: *build_docker
 
-nohepbase_ubuntu_llvm_docker:
+docker0_nohepbase_ubuntu_llvm:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-ubuntu-llvm
@@ -447,7 +447,7 @@ nohepbase_ubuntu_llvm_docker:
     TOOLS: llvm
   <<: *build_docker
 
-nohepbase_fedora_gcc_docker:
+docker0_nohepbase_fedora_gcc:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-fedora-gcc
@@ -457,7 +457,7 @@ nohepbase_fedora_gcc_docker:
   <<: *build_docker
 
 
-hepbase_ubuntu_gcc_docker:
+docker1_hepbase_ubuntu_gcc:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-ubuntu-gcc
@@ -466,7 +466,7 @@ hepbase_ubuntu_gcc_docker:
     TOOLS: gcc
   <<: *build_docker
 
-hepbase_ubuntu_llvm_docker:
+docker1_hepbase_ubuntu_llvm:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-ubuntu-llvm
@@ -475,7 +475,7 @@ hepbase_ubuntu_llvm_docker:
     TOOLS: llvm
   <<: *build_docker
 
-hepbase_fedora_gcc_docker:
+docker1_hepbase_fedora_gcc:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-fedora-gcc
@@ -485,7 +485,7 @@ hepbase_fedora_gcc_docker:
   <<: *build_docker
 
 
-hepbase_ubuntu_gcc_latex_docker:
+docker2_hepbase_ubuntu_gcc_latex:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-ubuntu-gcc-latex
@@ -494,7 +494,7 @@ hepbase_ubuntu_gcc_latex_docker:
     TOOLS: gcc
   <<: *build_docker
 
-hepbase_ubuntu_llvm_latex__docker:
+docker2_hepbase_ubuntu_llvm_latex:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-ubuntu-llvm-latex
@@ -503,7 +503,7 @@ hepbase_ubuntu_llvm_latex__docker:
     TOOLS: llvm
   <<: *build_docker
 
-hepbase_fedora_gcc_latex__docker:
+docker2_hepbase_fedora_gcc_latex:
   stage: docker
   variables:
   #  IMAGE_NAME: hepbase-fedora-gcc-latex
@@ -513,37 +513,39 @@ hepbase_fedora_gcc_latex__docker:
   <<: *build_docker
 
 
-rivet_docker:
+docker3_rivet:
   stage: docker
   variables:
     IMAGE_NAME: rivet
   <<: *build_docker
 
-rivetmg5_docker:
+
+docker4_rivetmg5:
   stage: docker
   variables:
     IMAGE_NAME: rivet-mg5amcnlo
   <<: *build_docker
 
-rivetpy8_docker:
+docker4_rivetpy8:
   stage: docker
   variables:
     IMAGE_NAME: rivet-pythia
   <<: *build_docker
 
-rivetsh2_docker:
+docker4_rivetsh2:
   stage: docker
   variables:
     IMAGE_NAME: rivet-sherpa
   <<: *build_docker
 
-rivethw7_docker:
+docker4_rivethw7:
   stage: docker
   variables:
     IMAGE_NAME: rivet-herwig
   <<: *build_docker
 
-tutorial_docker:
+
+docker5_tutorial:
   stage: docker
   variables:
     IMAGE_NAME: rivet-tutorial
