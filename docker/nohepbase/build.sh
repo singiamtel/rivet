@@ -1,9 +1,5 @@
 #! /usr/bin/env bash
 
-RIVETBS_VERSION=4.0.2
-LHAPDF_VERSION=6.5.5
-HEPMC_VERSION=3.3.0
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../docker-common.sh"
 
@@ -12,11 +8,7 @@ if [[ -z "$OS" || -x "$TOOLS" ]]; then
     exit 1
 fi
 
-PKG=hepstore/hepbase-$OS-$TOOLS
-
-BASEARGS="--build-arg RIVETBS_VERSION=$RIVETBS_VERSION"
-BASEARGS+=" --build-arg LHAPDF_VERSION=$LHAPDF_VERSION"
-BASEARGS+=" --build-arg HEPMC_VERSION=$HEPMC_VERSION"
+PKG=hepstore/nohepbase-$OS-$TOOLS
 
 echo "Building Docker $PKG image"
 dx_build $BUILDFLAGS -f Dockerfile.$OS $BASEARGS --build-arg LATEX=0 --build-arg BUILD_TOOLS=$TOOLS -t $PKG:latest

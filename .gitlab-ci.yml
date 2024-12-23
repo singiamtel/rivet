@@ -429,6 +429,37 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
       when: manual
 
 
+nohepbase_ubuntu_gcc_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-ubuntu-gcc
+    IMAGE_NAME: nohepbase
+    OS: ubuntu
+    TOOLS: gcc
+    TEX: 0
+  <<: *build_docker
+
+nohepbase_ubuntu_llvm_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-ubuntu-llvm
+    IMAGE_NAME: nohepbase
+    OS: ubuntu
+    TOOLS: llvm
+    TEX: 0
+  <<: *build_docker
+
+nohepbase_fedora_gcc_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-fedora-gcc
+    IMAGE_NAME: nohepbase
+    OS: fedora
+    TOOLS: gcc
+    TEX: 0
+  <<: *build_docker
+
+
 hepbase_ubuntu_gcc_docker:
   stage: docker
   variables:
