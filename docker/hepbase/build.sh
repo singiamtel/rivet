@@ -13,16 +13,17 @@ if [[ -z "$OS" || -x "$TOOLS" ]]; then
 fi
 
 PKG=hepstore/hepbase-$OS-$TOOLS
-
 BASEARGS="--build-arg RIVETBS_VERSION=$RIVETBS_VERSION"
 BASEARGS+=" --build-arg LHAPDF_VERSION=$LHAPDF_VERSION"
 BASEARGS+=" --build-arg HEPMC_VERSION=$HEPMC_VERSION"
+BASEARGS+=" --build-arg BUILD_TOOLS=$TOOLS"
 
 echo "Building Docker $PKG image"
-dx_build $BUILDFLAGS -f Dockerfile.$OS $BASEARGS --build-arg LATEX=0 --build-arg BUILD_TOOLS=$TOOLS -t $PKG:latest
+dx_build $BUILDFLAGS -f Dockerfile.$OS $BASEARGS -t $PKG:latest
 test "$PUSH" = 1 && xdocker push $PKG && sleep $SLEEP
 
-PKG+="-latex"
-echo "Building Docker $PKG image"
-dx_build $BUILDFLAGS -f Dockerfile.$OS $BASEARGS --build-arg LATEX=1 --build-arg BUILD_TOOLS=$TOOLS -t $PKG:latest
-test "$PUSH" = 1 && xdocker push $PKG && sleep $SLEEP
+# --build-arg LATEX=0
+# PKG+="-latex"
+# echo "Building Docker $PKG image"
+# dx_build $BUILDFLAGS -f Dockerfile.$OS $BASEARGS --build-arg LATEX=1 --build-arg BUILD_TOOLS=$TOOLS -t $PKG:latest
+# test "$PUSH" = 1 && xdocker push $PKG && sleep $SLEEP

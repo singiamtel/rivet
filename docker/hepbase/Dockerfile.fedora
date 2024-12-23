@@ -42,19 +42,19 @@ RUN true \
     && ls wrappers/python/build/lhapdf -l \
     && rm -r /code
 
-## TeX
-ARG LATEX
-RUN if test "$LATEX" = "1"; then \
-      dnf install -y \
-        texlive texlive-latex \
-        texlive-latex-bin texlive-latexconfig texlive-dvips \
-        texlive-collection-latex texlive-collection-latexrecommended \
-        texlive-pst-tools texlive-pst-arrow \
-        texlive-relsize texlive-cm texlive-hyphen-base \
-        texlive-collection-fontsrecommended texlive-cm-super \
-        ghostscript ImageMagick; \
-      dnf clean all; \
-      texhash; \
-    fi
+# ## TeX
+# ARG LATEX
+# RUN if test "$LATEX" = "1"; then \
+#       dnf install -y \
+#         texlive texlive-latex \
+#         texlive-latex-bin texlive-latexconfig texlive-dvips \
+#         texlive-collection-latex texlive-collection-latexrecommended \
+#         texlive-pst-tools texlive-pst-arrow \
+#         texlive-relsize texlive-cm texlive-hyphen-base \
+#         texlive-collection-fontsrecommended texlive-cm-super \
+#         ghostscript ImageMagick; \
+#       dnf clean all; \
+#       texhash; \
+#     fi
 
 WORKDIR /work

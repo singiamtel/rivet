@@ -436,7 +436,6 @@ nohepbase_ubuntu_gcc_docker:
     IMAGE_NAME: nohepbase
     OS: ubuntu
     TOOLS: gcc
-    TEX: 0
   <<: *build_docker
 
 nohepbase_ubuntu_llvm_docker:
@@ -446,7 +445,6 @@ nohepbase_ubuntu_llvm_docker:
     IMAGE_NAME: nohepbase
     OS: ubuntu
     TOOLS: llvm
-    TEX: 0
   <<: *build_docker
 
 nohepbase_fedora_gcc_docker:
@@ -456,7 +454,6 @@ nohepbase_fedora_gcc_docker:
     IMAGE_NAME: nohepbase
     OS: fedora
     TOOLS: gcc
-    TEX: 0
   <<: *build_docker
 
 
@@ -467,7 +464,6 @@ hepbase_ubuntu_gcc_docker:
     IMAGE_NAME: hepbase
     OS: ubuntu
     TOOLS: gcc
-    TEX: 0
   <<: *build_docker
 
 hepbase_ubuntu_llvm_docker:
@@ -477,7 +473,6 @@ hepbase_ubuntu_llvm_docker:
     IMAGE_NAME: hepbase
     OS: ubuntu
     TOOLS: llvm
-    TEX: 0
   <<: *build_docker
 
 hepbase_fedora_gcc_docker:
@@ -487,7 +482,34 @@ hepbase_fedora_gcc_docker:
     IMAGE_NAME: hepbase
     OS: fedora
     TOOLS: gcc
-    TEX: 0
+  <<: *build_docker
+
+
+hepbase_ubuntu_gcc_latex_docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-ubuntu-gcc-latex
+    IMAGE_NAME: hepbase-latex
+    OS: ubuntu
+    TOOLS: gcc
+  <<: *build_docker
+
+hepbase_ubuntu_llvm_latex__docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-ubuntu-llvm-latex
+    IMAGE_NAME: hepbase-latex
+    OS: ubuntu
+    TOOLS: llvm
+  <<: *build_docker
+
+hepbase_fedora_gcc_latex__docker:
+  stage: docker
+  variables:
+  #  IMAGE_NAME: hepbase-fedora-gcc-latex
+    IMAGE_NAME: hepbase
+    OS: fedora
+    TOOLS: gcc
   <<: *build_docker
 
 
