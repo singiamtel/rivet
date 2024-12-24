@@ -413,6 +413,11 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
   <<: *check_onnx_analyses_template
 
 
+
+#########################
+
+
+
 .build_docker: &build_docker
   image: docker:latest
   services:
@@ -424,6 +429,7 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
   script:
     - cd docker/$IMAGE_NAME/
     - FORCE=0 PUSH=1 MULTIARCH=1 bash build.sh
+    - echo "Build-script result: $?"
   rules:
     - if: $DOCKER_DEPLOY == "1"
       when: manual
@@ -432,7 +438,6 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
 docker0_nohepbase_ubuntu_gcc:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-ubuntu-gcc
     IMAGE_NAME: nohepbase
     OS: ubuntu
     TOOLS: gcc
@@ -441,7 +446,6 @@ docker0_nohepbase_ubuntu_gcc:
 docker0_nohepbase_ubuntu_llvm:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-ubuntu-llvm
     IMAGE_NAME: nohepbase
     OS: ubuntu
     TOOLS: llvm
@@ -450,7 +454,6 @@ docker0_nohepbase_ubuntu_llvm:
 docker0_nohepbase_fedora_gcc:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-fedora-gcc
     IMAGE_NAME: nohepbase
     OS: fedora
     TOOLS: gcc
@@ -460,7 +463,6 @@ docker0_nohepbase_fedora_gcc:
 docker1_hepbase_ubuntu_gcc:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-ubuntu-gcc
     IMAGE_NAME: hepbase
     OS: ubuntu
     TOOLS: gcc
@@ -469,7 +471,6 @@ docker1_hepbase_ubuntu_gcc:
 docker1_hepbase_ubuntu_llvm:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-ubuntu-llvm
     IMAGE_NAME: hepbase
     OS: ubuntu
     TOOLS: llvm
@@ -478,7 +479,6 @@ docker1_hepbase_ubuntu_llvm:
 docker1_hepbase_fedora_gcc:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-fedora-gcc
     IMAGE_NAME: hepbase
     OS: fedora
     TOOLS: gcc
@@ -488,7 +488,6 @@ docker1_hepbase_fedora_gcc:
 docker2_hepbase_ubuntu_gcc_latex:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-ubuntu-gcc-latex
     IMAGE_NAME: hepbase-latex
     OS: ubuntu
     TOOLS: gcc
@@ -497,7 +496,6 @@ docker2_hepbase_ubuntu_gcc_latex:
 docker2_hepbase_ubuntu_llvm_latex:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-ubuntu-llvm-latex
     IMAGE_NAME: hepbase-latex
     OS: ubuntu
     TOOLS: llvm
@@ -506,8 +504,7 @@ docker2_hepbase_ubuntu_llvm_latex:
 docker2_hepbase_fedora_gcc_latex:
   stage: docker
   variables:
-  #  IMAGE_NAME: hepbase-fedora-gcc-latex
-    IMAGE_NAME: hepbase
+    IMAGE_NAME: hepbase-latex
     OS: fedora
     TOOLS: gcc
   <<: *build_docker
