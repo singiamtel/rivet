@@ -1,5 +1,5 @@
 ARG BUILD_TOOLS
-FROM hepbase-ubuntu-$BUILD_TOOLS
+FROM hepstore/hepbase-ubuntu-$BUILD_TOOLS
 LABEL maintainer="rivet-developers@cern.ch"
 SHELL ["/bin/bash", "--login", "-c"]
 
