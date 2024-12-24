@@ -429,7 +429,6 @@ check_onnx_analyses_fedora_gcc_hepmc3_py3:
   script:
     - cd docker/$IMAGE_NAME/
     - FORCE=0 PUSH=1 MULTIARCH=1 bash build.sh
-    - echo "Build-script result: $?"
   rules:
     - if: $DOCKER_DEPLOY == "1"
       when: manual
