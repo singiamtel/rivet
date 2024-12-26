@@ -6,7 +6,7 @@ RIVET_BRANCHES=${RIVET_BRANCHES:-rivet-4.0.2}
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../docker-common.sh"
 
-BUILDFLAGS==" --build-arg YODA_BRANCH=$YODA_BRANCH"
+BUILDFLAGS=" --build-arg YODA_BRANCH=$YODA_BRANCH"
 PKG="hepstore/rivet"
 
 for RIVET_BRANCH in $RIVET_BRANCHES; do
