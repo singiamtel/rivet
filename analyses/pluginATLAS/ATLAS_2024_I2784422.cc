@@ -34,9 +34,9 @@ namespace Rivet {
 
       // All 1D observables used in the creation of final ratios.
       size_t ih = 1;
-      for (const string& obs : { "pTlead", "nTrans" }) {
-        for (const string& num : { "kaon", "lambda" }) {
-          for (const string& den : { "", "prompt", "kaon", "lambda" }) {
+      for (const string& obs : vector<string>{ "pTlead", "nTrans" }) {
+        for (const string& num : vector<string>{ "kaon", "lambda" }) {
+          for (const string& den : vector<string>{ "", "prompt", "kaon", "lambda" }) {
             for (const string& var : variables) {
               for (const string& reg : regions) {
                 if (den == "")  dualbook(obs, num, var, reg, ih);
@@ -85,7 +85,7 @@ namespace Rivet {
         }
       }
 
-      for (const string& type : {"lambda", "kaon"}) {
+      for (const string& type : vector<string>{"lambda", "kaon"}) {
 
         // Strange particles up to eta of 1.0
         const Particles& identifiedFS = apply<UnstableFinalState>(e, type).particles();
@@ -135,7 +135,7 @@ namespace Rivet {
       const double nTransversePrompt = counts["prompt"s+"transverse"s+"n"s].val();
 
       // Fill all 1D accumulator histograms
-      for (const string& type : { "kaon", "lambda", "prompt" }) {
+      for (const string& type : vector<string>{ "kaon", "lambda", "prompt" }) {
         for (const string& var : variables) {
           for (const string& reg : regions) {
             _h["pTlead"+type+reg+var]->fill(jetpT/GeV, counts[type+reg+var].val());
@@ -154,15 +154,15 @@ namespace Rivet {
 
     void finalize() {
 
-      for (const string& obs : { "pTlead", "nTrans" }) {
-        for (const string& num : { "kaon", "lambda" }) {
+      for (const string& obs : vector<string>{ "pTlead", "nTrans" }) {
+        for (const string& num : vector<string>{ "kaon", "lambda" }) {
           for (const string& reg : regions) {
             // Normalise same-species ratio distributions,
             // used to obtain ensemble-averaged mean-pT
             divide(_h[obs+num+reg+"sumpt"], _h[obs+num+reg+"n"], _e[obs+num+num+reg+"n"]);
 
             // Normalise inter-species ratio distributions
-            for (const string& den : { "prompt", "kaon" }) {
+            for (const string& den : vector<string>{ "prompt", "kaon" }) {
               if (num == den)  break;
               for (const string& var : variables) {
                 divide(_h[obs+num+reg+var], _h[obs+den+reg+var], _e[obs+num+den+reg+var]);
@@ -174,7 +174,7 @@ namespace Rivet {
         // Normalise per-event normalised distributions
         // Note: Due to scale(), this must run AFTER the inter-species ratios above,
         // and that kPrompt has a different normalisation factor to kKaon or kLambda.
-        for (const string& num : { "kaon", "lambda" }) {
+        for (const string& num : vector<string>{ "kaon", "lambda" }) {
           for (const string& reg : regions) {
             const double deltaEta = 2.*1.0;
             const double deltaPhi = 2.*M_PI/3.;
