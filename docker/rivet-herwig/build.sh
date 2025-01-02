@@ -11,16 +11,16 @@ BUILDFLAGS+=" --build-arg RIVET_VERSION=${RIVET_VERSION}"
 BUILDFLAGS+=" --build-arg THEPEG_VERSION=${THEPEG_VERSION}"
 BUILDFLAGS+=" --build-arg HERWIG_VERSION=${HERWIG_VERSION}"
 
-# TODO: single-source the heavily shared logic below
 PKG="hepstore/rivet-herwig"
 TAGS="${RIVET_VERSION}-${HERWIG_VERSION} ${RIVET_VERSION}"
-test "$LATEST" = 1 && TAGS+=" latest"
-for tag in TAGS; do TAGFLAGS="$TAGFLAGS -t $PKG:$tag"; done
 
-dx_build $BUILDFLAGS $TAGFLAGS
+source "$SCRIPT_DIR/../docker-build-and-push.sh"
 
-if [[ "$PUSH" = 1 ]]; then
-    for tag in $TAGS; do
-        xdocker push $PKG:$tag
-    done
-fi
+# test "$LATEST" = 1 && TAGS+=" latest"
+# for tag in $TAGS; do TAGFLAGS+=" -t $PKG:$tag"; done
+
+# dx_build $BUILDFLAGS $TAGFLAGS
+
+# if [[ "$PUSH" = 1 ]]; then
+#     for tag in $TAGS; do xdocker push $PKG:$tag; done
+# fi
