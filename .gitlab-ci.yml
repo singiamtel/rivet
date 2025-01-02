@@ -212,11 +212,16 @@ get_test_hepmc:
       if [[ "$VAL" == "1" ]]; then
         if [[ "$ARCH" == "ubuntu-gcc-hepmc3-py3" ]]; then
           cd $VAL_PREFIX
+          export RIVET_RANDOM_SEED=12345
           rivet-mkvaldir VALDIR --ref-dir $CI_PROJECT_DIR/analyses/valref/
           cd VALDIR
           make check -j $(nproc)
-          ls *diff > diffs.txt
-          while read  p; do echo "==== $p ====" ; if [ -s "$p" ]; then echo "fail" ; exit 1 ; else echo "ok";  fi ; done < diffs.txt
+          DIFFDIRS=`find . -name '*.diffdir' -print`
+          if [ -z "$DIFFDIRS" ]; then
+            echo "No differences found: SUCCESS."
+          else
+            echo "Differences found:\n$DIFFDIRS"; exit 1
+          fi
         fi
       fi
   artifacts:
