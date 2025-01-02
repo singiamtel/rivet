@@ -9,6 +9,9 @@ source "$SCRIPT_DIR/../docker-common.sh"
 BUILDFLAGS=" --build-arg YODA_BRANCH=$YODA_BRANCH"
 PKG="hepstore/rivet"
 
+if [[ "$MAIN" = 1 ]]; then RIVET_BRANCHES="main $RIVET_BRANCHES"; fi
+
+# IMPORTANT: put 'latest' version last in the list: it gets reused after the loop
 for RIVET_BRANCH in $RIVET_BRANCHES; do
     RIVET_VERSION=${RIVET_BRANCH#rivet-}
 
