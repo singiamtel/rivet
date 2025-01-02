@@ -42,5 +42,5 @@ BibTeX: '@article{LHCb:2021abm,
   year = "2022"
 }'
 ReleaseTests:
- - $A LHC-13-MinBias
+ - $A LHC-13-Minbias
 
