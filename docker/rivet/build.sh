@@ -20,12 +20,10 @@ for RIVET_BRANCH in $RIVET_BRANCHES; do
         ARCH=ubuntu-$CC-hepmc3-py3
         echo "@@ Building Rivet $RIVET_VERSION image with architecture = $ARCH"
         TAGS="$PKG:$RIVET_VERSION-$ARCH $PKG:$RIVET_VERSION"
-        TAGFLAGS=""; for t in $TAGS; do TAGFLAGS="$TAGFLAGS -t $t"; done
+        for t in $TAGS; do TAGFLAGS+=" -t $t"; done
         dx_build $BUILDFLAGS --build-arg RIVET_BRANCH=$RIVET_BRANCH --build-arg ARCH=$ARCH $TAGFLAGS
         if [[ "$PUSH" = 1 ]]; then
-            for tag in $TAGS; do
-                xdocker push $tag
-            done
+            for tag in $TAGS; do xdocker push $tag; done
             sleep ${SLEEP:-1}
         fi
         echo -e "\n\n\n"
