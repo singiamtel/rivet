@@ -360,7 +360,7 @@ make_plots_fedora_gcc_hepmc3_py3:
   artifacts:
     when: always
     paths:
-      - $TEST_PREFIX/Rivet.yoda
+      - test_$ARCH/Rivet.yoda
     expire_in: 36 hrs
   <<: *trigger_template
 
@@ -411,7 +411,7 @@ check_lwtnn_analyses_fedora_gcc_hepmc3_py3:
   artifacts:
     when: always
     paths:
-      - $TEST_PREFIX/Rivet.yoda
+      - test_$ARCH/Rivet.yoda
     expire_in: 36 hrs
   <<: *trigger_template
 
