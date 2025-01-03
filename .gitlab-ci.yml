@@ -220,7 +220,7 @@ get_test_hepmc:
           if [ -z "$DIFFDIRS" ]; then
             echo "No differences found: SUCCESS."
           else
-            echo "Differences found:\n$DIFFDIRS"; exit 1
+            echo "Differences found:"; echo "$DIFFDIRS"; exit 1
           fi
         fi
       fi
