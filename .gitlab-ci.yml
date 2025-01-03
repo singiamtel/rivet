@@ -357,11 +357,6 @@ make_plots_fedora_gcc_hepmc3_py3:
     - if [[ -z $(grep -m 1 "9.260000e+02 	9.260000e+02 	4.999612e+02 	2.699365e+02 	9.260000e+02" Rivet.yoda) ]];
          then echo "yoda output not matched"; cat Rivet.yoda; exit 1;
       fi
-  artifacts:
-    when: always
-    paths:
-      - test_$ARCH/Rivet.yoda
-    expire_in: 36 hrs
   <<: *trigger_template
 
 check_lwtnn_analyses_ubuntu_gcc_hepmc3_py3:
@@ -408,11 +403,6 @@ check_lwtnn_analyses_fedora_gcc_hepmc3_py3:
     - if [[ -z $(grep -m 1 "1.400000e+02 	1.400000e+02 	5.289760e+03 	2.001242e+05 	1.400000e+02" Rivet.yoda) ]];
          then echo "yoda output not matched"; cat Rivet.yoda; exit 1;
       fi
-  artifacts:
-    when: always
-    paths:
-      - test_$ARCH/Rivet.yoda
-    expire_in: 36 hrs
   <<: *trigger_template
 
 check_onnx_analyses_ubuntu_gcc_hepmc3_py3:
