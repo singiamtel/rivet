@@ -52,7 +52,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
        fi \
     && ./configure --help \
     && ./configure --prefix=/usr/local --with-{thepeg,fastjet}=/usr/local --without-evtgen \
-    && make -j$(nproc --ignore=1)
+    && make -j$(nproc --ignore=1) \
     && make check && make install
 
 # RUN export DEBIAN_FRONTEND=noninteractive \
