@@ -354,7 +354,7 @@ make_plots_fedora_gcc_hepmc3_py3:
   # Run the lwtnn example analysis
     - rivet --pwd -a EXAMPLE_LWTNN $CI_PROJECT_DIR/tt.hepmc.gz
   # For tt.hepmc.gz, there should be only one non-empty histo bin.
-    - yodadiff $CI_PROJECT_DIR/tt.hepmc.gz $CI_PROJECT_DIR/analyses/valref/EXAMPLE_LWTNN.yoda.gz -t 1e-2
+    - yodadiff Rivet.yoda $CI_PROJECT_DIR/analyses/valref/EXAMPLE_LWTNN.yoda.gz -t 1e-2
   <<: *trigger_template
 
 check_lwtnn_analyses_ubuntu_gcc_hepmc3_py3:
@@ -398,7 +398,7 @@ check_lwtnn_analyses_fedora_gcc_hepmc3_py3:
   # Run the ONNX example analysis
     - rivet --pwd -a EXAMPLE_ONNX $CI_PROJECT_DIR/tt.hepmc.gz
   # Compare one particularly lively histo bin
-    - yodadiff $CI_PROJECT_DIR/tt.hepmc.gz $CI_PROJECT_DIR/analyses/valref/EXAMPLE_ONNX.yoda.gz -t 1e-2
+    - yodadiff Rivet.yoda $CI_PROJECT_DIR/analyses/valref/EXAMPLE_ONNX.yoda.gz -t 1e-2
   <<: *trigger_template
 
 check_onnx_analyses_ubuntu_gcc_hepmc3_py3:
