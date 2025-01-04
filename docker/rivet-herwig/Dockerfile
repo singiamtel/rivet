@@ -27,7 +27,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
        else \
          apt-get install -y mercurial && \
          hg clone https://phab.hepforge.org/source/thepeghg -r ${THEPEG_VERSION} ThePEG && \
-         cd ThePEG && autoreconf -i; \
+         cd ThePEG && autoreconf -if; \
        fi \
     && ./configure --help \
     && ./configure --prefix=/usr/local --with-{fastjet,rivet,hepmc,lhapdf}=/usr/local --with-hepmcversion=3 \
@@ -48,7 +48,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
        else \
          apt-get install -y mercurial && \         
          hg clone https://phab.hepforge.org/source/herwighg -r ${HERWIG_VERSION} Herwig && \
-         cd Herwig && autoreconf -i; \
+         cd Herwig && autoreconf -if; \
        fi \
     && ./configure --help \
     && ./configure --prefix=/usr/local --with-{thepeg,fastjet}=/usr/local --without-evtgen \
