@@ -12,3 +12,5 @@ Description:
   takes the pT and eta of the three lead jets, and produces a totally irrelevant
   number, just for proof of principle, which is plotted in a histogram.'
 Keywords: ['lwtnn']
+ReleaseTests:
+ - $A LHC-13-Top-All

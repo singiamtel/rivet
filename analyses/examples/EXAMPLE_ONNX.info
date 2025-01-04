@@ -13,3 +13,5 @@ Description:
   number, just for proof of principle, which is plotted in a histogram.
   Almost identical to EXAMPLE_LWTNN, but the networks are not equivalent.'
 Keywords: ['onnx']
+ReleaseTests:
+ - $A LHC-13-Top-All
