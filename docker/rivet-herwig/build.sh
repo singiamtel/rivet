@@ -1,8 +1,9 @@
 #! /usr/bin/env bash
 
 RIVET_VERSION=${RIVET_VERSION:-4.0.2}
-HERWIG_VERSION=7.3.0
-THEPEG_VERSION=2.3.0
+# NOTE: have to use branches until Rivet4 is supported in an H7 release
+THEPEG_VERSION=release-2-3 #2.3.0
+HERWIG_VERSION=herwig-7-3 #7.3.0
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../docker-common.sh"
