@@ -24,7 +24,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && if [[ ${THEPEG_VERSION} =~ '[0-9]\.[0-9]\.[0-9]' ]]; then \
          wget https://thepeg.hepforge.org/downloads/ThePEG-${THEPEG_VERSION}.tar.bz2 -O - | tar xj && \
          cd ThePEG-${THEPEG_VERSION}; \
-       else; \
+       else \
          apt-get install -y mercurial && \
          hg clone https://phab.hepforge.org/source/thepeghg -r ${THEPEG_VERSION} ThePEG && \
          cd ThePEG && autoreconf -i; \
@@ -45,7 +45,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && if [[ ${THEPEG_VERSION} =~ '[0-9]\.[0-9]\.[0-9]' ]]; then \
          wget https://herwig.hepforge.org/downloads/Herwig-${HERWIG_VERSION}.tar.bz2 -O - | tar xj && \
          cd Herwig-${HERWIG_VERSION}; \
-       else; \
+       else \
          apt-get install -y mercurial && \         
          hg clone https://phab.hepforge.org/source/herwighg -r ${HERWIG_VERSION} Herwig && \
          cd Herwig && autoreconf -i; \
