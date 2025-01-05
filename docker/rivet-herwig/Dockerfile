@@ -10,7 +10,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y autoclean
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y rsync libgsl-dev time getgenopt \
+    && apt-get install -y rsync libgsl-dev time gengetopt \
     && apt-get -y autoremove \
     && apt-get -y autoclean
 
