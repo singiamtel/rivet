@@ -10,7 +10,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y autoclean
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y rsync libgsl-dev time \
+    && apt-get install -y rsync libgsl-dev time getgenopt \
     && apt-get -y autoremove \
     && apt-get -y autoclean
 
@@ -53,8 +53,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && ./configure --help \
     && ./configure --prefix=/usr/local --with-{thepeg,fastjet}=/usr/local --without-evtgen \
     && make -j$(nproc --ignore=1) \
-    && make install \
-    && make check
+    && make check && make install
 
 # RUN export DEBIAN_FRONTEND=noninteractive \
 #     && . /etc/profile \
