@@ -10,12 +10,15 @@ BUILDFLAGS+=" --build-arg YODA_BRANCH=$YODA_BRANCH"
 BUILDFLAGS+=" --build-arg ARCH=ubuntu-gcc-hepmc3-py3"
 
 PKG="hepstore/rivet"
-TAGS="${RIVET_VERSION}"
 
 if [[ "$MAIN" = 1 ]]; then RIVET_BRANCHES="main $RIVET_BRANCHES"; fi
 
 for RIVET_BRANCH in $RIVET_BRANCHES; do
     RIVET_VERSION=${RIVET_BRANCH#rivet-}
+
+    TAGS="${RIVET_VERSION}"
+    test "$LATEST" = 1 && TAGS+=" latest"
+    TAGFLAGS=""; for tag in $TAGS; do TAGFLAGS+=" -t $PKG:$tag"; done
 
     echo "@@ Building Rivet $RIVET_VERSION image"
     dx_build $BUILDFLAGS --build-arg RIVET_BRANCH=$RIVET_BRANCH $TAGFLAGS
