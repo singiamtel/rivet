@@ -32,7 +32,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && ./configure --help \
     && ./configure --prefix=/usr/local --with-{fastjet,rivet,hepmc,lhapdf}=/usr/local --with-hepmcversion=3 \
     && make -j$(nproc --ignore=1) \
-    && make check && make install
+    && make check && make install \
+    && rm -r /code
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && . /etc/profile \
@@ -41,7 +42,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ARG HERWIG_VERSION
 RUN export DEBIAN_FRONTEND=noninteractive \
     && . /etc/profile \
-    && cd /code \
+    && mkdir /code && cd /code \
     && if [[ ${THEPEG_VERSION} =~ '[0-9]\.[0-9]\.[0-9]' ]]; then \
          wget https://herwig.hepforge.org/downloads/Herwig-${HERWIG_VERSION}.tar.bz2 -O - | tar xj && \
          cd Herwig-${HERWIG_VERSION}; \
@@ -53,7 +54,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && ./configure --help \
     && ./configure --prefix=/usr/local --with-{thepeg,fastjet}=/usr/local --without-evtgen \
     && make -j$(nproc --ignore=1) \
-    && make check && make install
+    && make check && make install \
+    && rm -r /code
 
 # RUN export DEBIAN_FRONTEND=noninteractive \
 #     && . /etc/profile \
