@@ -15,13 +15,15 @@ if [[ "$MAIN" = 1 ]]; then RIVET_BRANCHES="main $RIVET_BRANCHES"; fi
 
 for RIVET_BRANCH in $RIVET_BRANCHES; do
     RIVET_VERSION=${RIVET_BRANCH#rivet-}
+    MSG="Building $PKG with Rivet=$RIVET_VERSION"
 
     TAGS="${RIVET_VERSION}"
     test "$LATEST" = 1 && TAGS+=" latest"
     TAGFLAGS=""; for tag in $TAGS; do TAGFLAGS+=" -t $PKG:$tag"; done
 
-    echo "@@ Building Rivet $RIVET_VERSION image"
+    echo "$MSG -> $PKG:${TAGS// /,}"
     dx_build $BUILDFLAGS --build-arg RIVET_BRANCH=$RIVET_BRANCH $TAGFLAGS
+
     if [[ "$PUSH" = 1 ]]; then
         for tag in $TAGS; do xdocker push $PKG:$tag; done
     fi
