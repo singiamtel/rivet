@@ -14,12 +14,3 @@ PKG="hepstore/rivet-sherpa"
 TAGS="${RIVET_VERSION}-${SHERPA_VERSION} ${RIVET_VERSION}"
 
 source "$SCRIPT_DIR/../docker-build-and-push.sh"
-
-# test "$LATEST" = 1 && TAGS+=" latest"
-# for tag in $TAGS; do TAGFLAGS+=" -t $PKG:$tag"; done
-
-# dx_build $BUILDFLAGS $TAGFLAGS
-
-# if [[ "$PUSH" = 1 ]]; then
-#     for tag in $TAGS; do xdocker push $PKG:$tag; done
-# fi
