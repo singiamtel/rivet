@@ -238,7 +238,7 @@ namespace Rivet {
           swap(nu_e ,nu_ebar );
           swap(nu_mu,nu_mubar);
         }
-        // 2 hadrons
+        // classify by number of stable decay products
         FourMomentum tmom = tau.mom();
         const LorentzTransform tboost = LorentzTransform::mkFrameTransformFromBeta(tmom.betaVec());
         if (nstable==2) {
