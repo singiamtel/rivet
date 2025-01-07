@@ -303,34 +303,35 @@ namespace Rivet {
           for (const string& auxil : vector<string>{"cr1ie_"s, "cr1im_"s, "cr2ie_"s, "cr2im_"s}) {
             for (const string& obs : vector<string>{"met_mono"s, "met_vbf"s, "mjj_vbf"s, "dphijj_vbf"s}) {
               const string rmisslabel("rmiss_"s+auxil+obs);
-              const string statslabel("stats");
               MSG_DEBUG("Constructing Rmiss for " << rmisslabel);
               if (_e.find(rmisslabel) == _e.end())  book(_e[rmisslabel], rmisslabel); // book for first weight
               // load SM prediction
-              const string numlabel("sr0l_"s+obs);
-              const string denlabel("sr0l_"s+auxil+"0v_"s+obs);
-              const YODA::Estimate1D& numSM = refData(numlabel+"_thy_nlo"s);
-              const YODA::Estimate1D& denSM = refData(denlabel+"_thy_nlo"s);
-              const YODA::Estimate1D& rmiss = refData(rmisslabel+"_thy_nlo"s);
               // inject BSM component
-              YODA::Estimate1D numer = numSM + _h[numlabel]->mkEstimate("", statslabel);
-              YODA::Estimate1D denom = denSM + _h[denlabel]->mkEstimate("", statslabel);
+              YODA::Estimate1D numer = injectBSM("sr0l_"s+obs);
+              YODA::Estimate1D denom = injectBSM("sr0l_"s+auxil+"0v_"s+obs);
               // construct Rmiss
               if (numer != denom)  numer.rebinXTo(denom.xEdges()); // harmonise binning if need be
               YODA::Estimate1D ratio = numer / denom; // assumes uncorrelated error breakdowns
               // copy over old Rmiss error breakdown
               const string path = _e[rmisslabel]->path();
-              *_e[rmisslabel] = rmiss; _e[rmisslabel]->setPath(path);
+              *_e[rmisslabel] = refData(rmisslabel+"_thy_nlo"s);
+              _e[rmisslabel]->setPath(path);
               // update central value and stats error component
               for (auto& b : _e[rmisslabel]->bins()) {
                 const auto& injb = ratio.bin(b.index());
-                b.set(injb.val(), injb.err(statslabel), statslabel);
+                b.set(injb.val(), injb.err("stats"), "stats");
               }
             }
           }
         }
       }
 
+
+      YODA::Estimate1D injectBSM(const string& label) {
+        YODA::Estimate1D SM = refData(label+"_thy_nlo"s);
+        for (auto& b : SM.bins())  b.scale(b.dVol());
+        return SM + _h[label]->mkEstimate("", "stats", false);
+      }
 
       // check if jet is between tagging jets
       bool isBetween(const Jet& probe, const Jet& boundary1, const Jet& boundary2) const {
