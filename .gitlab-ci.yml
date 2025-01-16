@@ -15,7 +15,7 @@ stages:
 
 .trigger_template: &trigger_template
   rules:
-      changes:
+    - changes:
       - .gitlab*
       - configure.ac
       - Makefile.am
