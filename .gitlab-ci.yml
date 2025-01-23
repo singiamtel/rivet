@@ -211,6 +211,7 @@ get_test_hepmc:
         if [[ "$ARCH" == "ubuntu-gcc-hepmc3-py3" ]]; then
           cd $VAL_PREFIX
           export RIVET_RANDOM_SEED=12345
+          export RIVET_FORCE_DETERMINISTIC_RANDNORM=1
           rivet-mkvaldir VALDIR --ref-dir $CI_PROJECT_DIR/analyses/valref/
           cd VALDIR
           make check -j $(nproc)
