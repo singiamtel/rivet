@@ -1,0 +1,42 @@
+Name: CMS_2022_I2142341
+Year: 2022
+Summary: Measurement of differential fiducial Higgs boson production cross sections in $pp$collisions at $\sqrt{s} = 13$ TeV in the diphoton decay channel
+Collider: LHC
+InspireID: 2142341
+Status: VALIDATED
+Reentrant: True
+Authors:
+ - Alessandro Tarabini <alessandro.tarabini@cern.ch>
+ - Massimiliano Galli <massimiliano.galli@cern.ch>
+References:
+ - 'JHEP 07 (2023) 091'
+ - 'DOI:10.1007/JHEP07(2023)091'
+ - 'arXiv:2208.12279'
+ - 'CMS-HIG-19-016'
+RunInfo: H->$\gamma\gamma$; ggH, VBF, VH, and ttH production modes are included
+Beams: [p+, p+]
+Energies: [[6500,6500]]
+Luminosity_fb: 138.0
+Description:
+  'The cross section for Higgs boson production in pp collisions is measured using the $H\rightarrow \gamma\gamma$ decay mode.
+  The measurements are performed using data collected by the CMS experiment at the LHC at a centre-of-mass energy of 13 TeV, corresponding to an integrated luminosity of $138\,\text{fb}^{-1}$.'
+ValidationInfo:
+  'Validated using ggH + VBF + VH + ttH production modes'
+ReleaseTests:
+- $A pp-13000-Hyy
+Keywords: []
+BibKey: CMS:2022wpo
+BibTeX: '@article{CMS:2022wpo,
+    author = "Tumasyan, Armen and others",
+    collaboration = "CMS",
+    title = "{Measurement of the Higgs boson inclusive and differential fiducial production cross sections in the diphoton decay channel with pp collisions at $ \sqrt{s} $ = 13 TeV}",
+    eprint = "2208.12279",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "CMS-HIG-19-016, CERN-EP-2022-142",
+    doi = "10.1007/JHEP07(2023)091",
+    journal = "JHEP",
+    volume = "07",
+    pages = "091",
+    year = "2023"
+}'
