@@ -283,7 +283,14 @@ if test x$enable_onnx != xno; then
   if test x$ONNXRTPREFIX = xyes; then ONNXRTPREFIX=$prefix; fi
   # TODO: test ONNXRt functionality from given paths
   ONNXRTINCPATH=$ONNXRTPREFIX/include
-  ONNXRTLIBPATH=$ONNXRTPREFIX/lib
+  # Check whether lib or lib64 exists and set ONNXRTLIBPATH accordingly
+  if test -d "$ONNXRTPREFIX/lib64"; then
+    ONNXRTLIBPATH="$ONNXRTPREFIX/lib64"
+  elif test -d "$ONNXRTPREFIX/lib"; then
+    ONNXRTLIBPATH="$ONNXRTPREFIX/lib"
+  else
+    AC_MSG_ERROR([Neither lib nor lib64 found in $ONNXRTPREFIX])
+  fi
 fi
 AM_CONDITIONAL(ENABLE_ONNX, [test x$enable_onnx = xyes])
 AC_SUBST(ONNXRTPREFIX)
