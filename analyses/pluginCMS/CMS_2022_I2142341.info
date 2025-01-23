@@ -4,7 +4,7 @@ Summary: Measurement of differential fiducial Higgs boson production cross secti
 Collider: LHC
 InspireID: 2142341
 Status: VALIDATED
-Reentrant: True
+Reentrant: true
 Authors:
  - Alessandro Tarabini <alessandro.tarabini@cern.ch>
  - Massimiliano Galli <massimiliano.galli@cern.ch>
