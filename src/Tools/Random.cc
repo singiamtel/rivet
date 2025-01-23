@@ -48,7 +48,7 @@ namespace Rivet {
 
   // Return a Gaussian/normal sampled random number with the given mean and width
   double randnorm(double loc, double scale) {
-    static bool useFixedNormal = getEnvParam("RIVET_FORCE_DETERMINISTIC_NORMALS", false);
+    static bool useFixedNormal = getEnvParam("RIVET_FORCE_DETERMINISTIC_RANDNORM", false);
     if (useFixedNormal) {
       static std::uniform_real_distribution<double> uniform(0.0, 1.0);
 
