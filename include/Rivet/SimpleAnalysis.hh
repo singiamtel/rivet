@@ -340,6 +340,8 @@ namespace Rivet {
     /// or muon within the radius of the remaining jet. Suggestions for improvement or
     /// flexible/user-friendly generalisation are welcome!
     ///
+    /// @warning Note that this currently does no overlap-removal with respect to taus.
+    ///
     /// @todo Anything specific to taus? (E.g. OR wrt jets based on #tracks?) To b-jets?
     void doSimpleOverlapRemoval(IDClass eclass=IDClass::MEDIUM, IDClass muclass=IDClass::MEDIUM,
                                 IDClass phoclass=IDClass::MEDIUM, //IDClass tauclass=IDClass::MEDIUM,
