@@ -1,3 +1,5 @@
+"A collection of functions and objects for manipulating Rivet's histogram-path conventions"
+
 def isRefPath(path):
     return path.startswith("/REF")
 
@@ -7,19 +9,36 @@ def isTheoryPath(path):
 def isRawPath(path):
     return path.startswith("/RAW")
 
+def isTmpPath(path):
+    "Match *any* underscore-prefixed or TMP path component"
+    return "/_" in path or "/TMP/" in path
+
+
+def isRefAO(ao):
+    return int(ao.annotation("IsRef")) == 1 or isRefPath(ao.path())
+
 def isRawAO(ao):
     return isRawPath(ao.path())
 
 def isTheoryAO(ao):
     return isTheoryPath(ao.path())
 
+def isTmpAO(ao):
+    return isTmpPath(ao.path())
+
+
+def stripPrefix(path):
+    "Remove any ref, theory, or raw prefix dir"
+    import re
+    return re.sub(r"^/(REF|THY|RAW)/", "/", path)
+
 def stripOptions(path):
     import re
-    return re.sub(r':\w+=[^:/]+', "", path)
+    return re.sub(r":\w+=[^:/]+", "", path)
 
 def stripWeightName(path):
     import re
-    return re.sub(r'\[.*\]', "", path)
+    return re.sub(r"\[.*\]", "", path)
 
 def extractWeightName(path):
     import re
@@ -30,6 +49,7 @@ def extractWeightName(path):
     else:
         return m.group(1)
 
+
 def extractOptionString(path):
     import re
     re_opts = re.compile(r"^.*(:\w+=[^:/]+)+")
@@ -38,22 +58,13 @@ def extractOptionString(path):
         return ""
     opts = list(m.groups())
     for i in range(len(opts)):
-        opts[i] = opts[i].strip(':')
+        opts[i] = opts[i].strip(":")
     return " [" + ",".join(opts) + "]"
-
-def isRefAO(ao):
-    return int(ao.annotation("IsRef")) == 1 or isRefPath(ao.path())
-
-def isTmpPath(path):
-    return "/_" in path #< match *any* underscore-prefixed path component
-
-def isTmpAO(ao):
-    return isTmpPath(ao.path())
 
 
 class AOPath(object):
     """
-    Object representation of analysis object path structures.
+    Object representation of analysis-object path structures.
 
     TODO: move to YODA?
     """
@@ -70,46 +81,51 @@ class AOPath(object):
         self._binid = int(m.group(3).lstrip("#")) if m.group(3) else None
         self._isref = isRefPath(self._basepath)
 
-    def basepath(self, keepref=False):
-        "Main 'Unix-like' part of the AO path, optionally including a /REF prefix"
+    def basepath(self, keep_prefix=False):
+        "Main 'Unix-like' part of the AO path, optionally retaining any prefix dir"
         p = self._basepath.rstrip("/")
-        if not keepref and p.startswith("/REF"):
-            p = p[4:]
+        if not keep_prefix and p.startswith("/REF"):
+            p = stripPrefix(p)
         return p
 
-    def varpath(self, keepref=False, defaultvarid=None):
+    def varpath(self, keep_prefix=False, defaultvarid=None):
         "The basepath, plus any bracketed variation identifier"
-        p = self.basepath(keepref)
+        p = self.basepath(keep_prefix)
         if self.varid(defaultvarid) is not None:
             p += "[%s]" % str(self.varid(defaultvarid))
         return p
 
-    def binpath(self, keepref=False, defaultbinid=None, defaultvarid=None):
+    def binpath(self, keep_prefix=False, defaultbinid=None, defaultvarid=None):
         "The varpath, plus any #-prefixed bin number identifier"
-        p = self.varpath(keepref, defaultvarid)
+        p = self.varpath(keep_prefix, defaultvarid)
         if self.binid(defaultbinid) is not None:
             p += "#%d" % self.binid(defaultbinid)
         return p
 
-    def basepathparts(self, keepref=False):
+    def basepathparts(self, keep_prefix=False):
         "List of basepath components, split by forward slashes"
-        return self.basepath(keepref).strip("/").split("/")
+        return self.basepath(keep_prefix).strip("/").split("/")
 
     # TODO: basepathhead, basepathtail
 
-    def dirname(self, keepref=False):
+    def dirname(self, keep_prefix=False):
         "The non-final (i.e. dir-like) part of the basepath"
         import os
-        return os.path.dirname(self.basepath(keepref))
+        return os.path.dirname(self.basepath(keep_prefix))
 
-    def dirnameparts(self, keepref=False):
+    def dirnameparts(self, keep_prefix=False):
         "List of dirname components, split by forward slashes"
-        return self.dirname(keepref).strip("/").split("/")
+        return self.dirname(keep_prefix).strip("/").split("/")
 
     def basename(self):
         "The final (i.e. file-like) part of the basepath"
         import os
         return os.path.basename(self._basepath)
+
+    def ananame(self):
+        "The first non-prefix part of the basepath"
+        parts = self.dirnameparts()
+        return parts[0] if parts else None
 
     def varid(self, default=None):
         "The variation identifier (without brackets) if there is one, otherwise None"

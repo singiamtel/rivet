@@ -30,7 +30,7 @@ def getRivetRefData(anas=None):
             for path, ao in analysisobjects.iteritems():
                 aop = rivet.AOPath(ao.path)
                 if aop.isref():
-                    ao.path = aop.basepath(keepref=False)
+                    ao.path = aop.basepath(keep_prefix=False)
                     refhistos[ao.path] = ao
     return refhistos
 

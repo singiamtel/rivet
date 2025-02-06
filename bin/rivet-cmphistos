@@ -71,10 +71,10 @@ def getHistos(filelist, filenames):
                 continue
 
             ## Add it to the ref or mc paths, if this path isn't already known
-            basepath = aop.basepath(keepref=False)
+            basepath = aop.basepath(keep_prefix=False)
             defaultWeightName = getDefaultVariation(plotoptions[inname])
             if aop.isref() and basepath not in refhistos:
-                ao.setPath(aop.varpath(keepref=False, defaultvarid=defaultWeightName))
+                ao.setPath(aop.varpath(keep_prefix=False, defaultvarid=defaultWeightName))
                 refhistos[basepath] = ao
             else: #if basepath not in mchistos[infile]:
                 mchistos[inname].setdefault(basepath, {})[aop.varid(defaultWeightName)] = ao
@@ -106,7 +106,7 @@ def getRivetRefData(anas=None):
             for path, ao in analysisobjects.items():
                 aop = rivet.AOPath(ao.path())
                 if aop.isref():
-                    ao.setPath(aop.basepath(keepref=False))
+                    ao.setPath(aop.basepath(keep_prefix=False))
                     refhistos[ao.path()] = ao
     return refhistos
 

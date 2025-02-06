@@ -118,11 +118,11 @@ def _get_histos(filelist, plotoptions, path_patterns = [], path_unpatterns = [],
             ao = yoda.plotting.utils.mkPlotFriendlyScatter(ao)
 
             ## Add it to the ref or mc paths, if this path isn't already known
-            basepath_with_anaopts = aop.basepath(keepref=False)
+            basepath_with_anaopts = aop.basepath(keep_prefix=False)
             basepath = rivet.stripOptions(basepath_with_anaopts)
             defaultWeightName = plotoptions[inname].get('DefaultWeight', '0')
             if aop.isref() and basepath not in refhistos:
-                ao.setPath(aop.varpath(keepref=False, defaultvarid=defaultWeightName))
+                ao.setPath(aop.varpath(keep_prefix=False, defaultvarid=defaultWeightName))
                 refhistos[basepath] = ao
             else: #if basepath not in mchistos[infile]:
                 mchistos[inname].setdefault(basepath_with_anaopts, {})[aop.varid(defaultWeightName)] = ao
@@ -143,7 +143,7 @@ def _get_histos(filelist, plotoptions, path_patterns = [], path_unpatterns = [],
             for path, ao in analysisobjects.items():
                 aop = rivet.AOPath(ao.path())
                 if not aop.isref():  continue
-                ao.setPath(aop.basepath(keepref=False))
+                ao.setPath(aop.basepath(keep_prefix=False))
                 new_aop = ao.path()
                 if new_aop not in hpaths:  continue
                 if new_aop not in refhistos:
