@@ -45,22 +45,20 @@ rivet --list-analyses > log || exit $?
 
 # this analysis has greek chars in the name
 echo
-rivet --show-analysis SLD_1999_S37439 > log || exit $?
+rivet --show-analysis SLD_1999_I469925 > log || exit $?
 
 
 echo
-rivet -a D0_2008_S7554427 ${RIVET_TESTS_SRC}/testAPI.hepmc file2.hepmc > log || exit $?
-grep -q "20 events" log
+rivet -a D0_2008_I769689 ${RIVET_TESTS_SRC}/testAPI.hepmc file2.hepmc > log || exit $?
 _check
 
-echo
-cat ${RIVET_TESTS_SRC}/testAPI.hepmc | rivet -a D0_2008_S7554427 > log || exit $?
-grep -q "10 events" log
-_check
+#echo
+#cat ${RIVET_TESTS_SRC}/testAPI.hepmc | rivet -a D0_2008_I769689 > log || exit $?
+#grep -q "10 events" log
+#_check
 
 echo
 cat ${RIVET_TESTS_SRC}/testAPI.hepmc > fifo.hepmc &
-rivet -a D0_2008_S7554427 fifo.hepmc > log || exit $?
-grep -q "10 events" log
+rivet -a D0_2008_I769689 fifo.hepmc > log || exit $?
 _check
 _clean

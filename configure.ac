@@ -411,6 +411,29 @@ AX_OPENMP([AM_CXXFLAGS="$AM_CXXFLAGS $OPENMP_CXXFLAGS"])
 ## Optional zlib support for gzip-compressed data streams/files
 AX_CHECK_ZLIB
 
+## Optional unit-test coverage checks
+AC_ARG_ENABLE([coverage],
+  AS_HELP_STRING([--enable-coverage],
+  [enable coverage report @<:@default=build@:>@]),,
+  enable_coverage=no)
+if test "x$enable_coverage" = "xyes"; then
+	AC_CHECK_PROG(LCOV_CHECK, lcov, yes)
+  AS_IF([test x"$LCOV_CHECK" != x"yes"], [AC_MSG_ERROR([Coverage reports require lcov!])])
+	AC_CHECK_PROG(GENHTML_CHECK, genhtml, yes)
+  AS_IF([test x"$GENHTML_CHECK" != x"yes"], [AC_MSG_ERROR([Coverage reports require genhtml!])])
+
+  CXXFLAGS="$CXXFLAGS -O0 -g"
+	CODE_COVERAGE_CPPFLAGS="-O0 -g -fprofile-arcs -ftest-coverage -fno-inline"
+	CODE_COVERAGE_CFLAGS="-O0 -g -fprofile-arcs -ftest-coverage -fno-inline"
+	CODE_COVERAGE_CXXFLAGS="-O0 -g -fprofile-arcs -ftest-coverage -fno-inline"
+	CODE_COVERAGE_LIBS="-lgcov"
+
+	AC_SUBST([CODE_COVERAGE_CPPFLAGS])
+	AC_SUBST([CODE_COVERAGE_CFLAGS])
+	AC_SUBST([CODE_COVERAGE_CXXFLAGS])
+	AC_SUBST([CODE_COVERAGE_LIBS])
+fi
+AM_CONDITIONAL(CODE_COVERAGE_ENABLED, [test x$enable_coverage = xyes])
 
 ## Debug flag (default=-DNDEBUG, enabled=-g)
 AC_ARG_ENABLE([debug], [AS_HELP_STRING([--enable-debug],[build with debugging symbols  @<:@default=no@:>@])], [], [enable_debug=no])

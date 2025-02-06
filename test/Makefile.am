@@ -51,4 +51,11 @@ endif
 
 EXTRA_DIST = testAPI.hepmc testCmdLine.sh testImport.sh testAPI.sh testMerging.sh testNaN.sh
 
+if CODE_COVERAGE_ENABLED
+  AM_LIBS = $(CODE_COVERAGE_LIBS)
+  AM_CFLAGS = $(CODE_COVERAGE_CFLAGS)
+  AM_CPPFLAGS += $(CODE_COVERAGE_CPPFLAGS)
+  AM_CXXFLAGS += $(CODE_COVERAGE_CXXFLAGS)
+endif
+
 CLEANFILES = log a.out fifo.hepmc file2.hepmc out*.yoda Rivet.yoda
