@@ -28,7 +28,7 @@ namespace Rivet {
       declare(cfs, "CFS");
       Sphericity sphere(fs);
       declare(sphere, "Sphericity");
-      FastJets jadeJets = FastJets(fs, JetAlg::JADE, 0.7, JetMuons::ALL, JetInvisibles::DECAY);
+      FastJets jadeJets = FastJets(fs, JetAlg::JADE, -1, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jadeJets, "JadeJets");
       // histos
       book(_h,1,1,1);

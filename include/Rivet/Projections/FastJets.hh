@@ -17,12 +17,14 @@
 #include "fastjet/D0RunIIConePlugin.hh"
 #include "fastjet/TrackJetPlugin.hh"
 #include "fastjet/JadePlugin.hh"
+#include "fastjet/contrib/VariableRPlugin.hh"
 
 #include "Rivet/Projections/PxConePlugin.hh"
 #include "Rivet/Tools/TypeTraits.hh"
 
 namespace Rivet {
 
+  typedef std::shared_ptr<fastjet::JetDefinition::Plugin> FJPluginPtr;
 
   /// Find jets using jet algorithms via the FastJet package
   class FastJets : public JetFinder {
@@ -142,34 +144,34 @@ namespace Rivet {
     ///
     /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
     FastJets(const FinalState& fsp,
-             fastjet::JetDefinition::Plugin* plugin,
+             FJPluginPtr plugin,
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr)
-      : FastJets(fsp, fastjet::JetDefinition(plugin), usemuons, useinvis, adef)
+      : FastJets(fsp, fastjet::JetDefinition(plugin.get()), usemuons, useinvis, adef)
     {
-      _plugin.reset(plugin);
+      _plugin = plugin;
     }
 
     /// @brief Explicitly pass in an externally-constructed plugin
     ///
     /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
     FastJets(const FinalState& fsp,
-             fastjet::JetDefinition::Plugin* plugin,
+             FJPluginPtr plugin,
              const Cut& c,
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE,
              fastjet::AreaDefinition* adef=nullptr)
-      : FastJets(fsp, fastjet::JetDefinition(plugin), c, usemuons, useinvis, adef)
+      : FastJets(fsp, fastjet::JetDefinition(plugin.get()), c, usemuons, useinvis, adef)
     {
-      _plugin.reset(plugin);
+      _plugin = plugin;
     }
 
     /// @brief Explicitly pass in an externally-constructed plugin, with reordered args for easier specification of jet area definition
     ///
     /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
     FastJets(const FinalState& fsp,
-             fastjet::JetDefinition::Plugin* plugin,
+             FJPluginPtr plugin,
              fastjet::AreaDefinition* adef,
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE)
@@ -180,7 +182,7 @@ namespace Rivet {
     ///
     /// @warning Provided plugin and area definition pointers must be heap-allocated; Rivet will store/delete via a shared_ptr
     FastJets(const FinalState& fsp,
-             fastjet::JetDefinition::Plugin* plugin,
+             FJPluginPtr plugin,
              fastjet::AreaDefinition* adef,
              const Cut& c,
              JetMuons usemuons=JetMuons::ALL,
@@ -196,16 +198,15 @@ namespace Rivet {
     ///
     /// @warning Provided area definition pointer must be heap-allocated; Rivet will store/delete via a shared_ptr
     FastJets(const FinalState& fsp,
-             JetAlg alg, double rparameter,
+             JetAlg alg, double rparameter=-1,
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE,
-             fastjet::AreaDefinition* adef=nullptr,
-             double seed_threshold=1.0)
+             fastjet::AreaDefinition* adef=nullptr)
       : JetFinder(fsp, usemuons, useinvis),
         _adef(adef), _cuts(Cuts::OPEN)
     {
       _initBase();
-      _initJdef(alg, rparameter, seed_threshold);
+      _initJdef(alg, rparameter);
     }
 
     /// @brief Convenience constructor using Cut argument and Rivet enums for most common jet algs (including some plugins).
@@ -220,12 +221,11 @@ namespace Rivet {
              const Cut& c,
              JetMuons usemuons=JetMuons::ALL,
              JetInvisibles useinvis=JetInvisibles::NONE,
-             fastjet::AreaDefinition* adef=nullptr,
-             double seed_threshold=1.0)
+             fastjet::AreaDefinition* adef=nullptr)
       : JetFinder(fsp, usemuons, useinvis), _adef(adef), _cuts(c)
     {
       _initBase();
-      _initJdef(alg, rparameter, seed_threshold);
+      _initJdef(alg, rparameter);
     }
 
 
@@ -243,12 +243,174 @@ namespace Rivet {
     /// @name Static helper functions for FastJet interaction, with tagging
     /// @{
 
+    /// Make a FastJet JetDefinition according to enum JetAlg
+    static fastjet::JetDefinition mkJetDef(JetAlg alg, double rparameter);
+
+    /// Make a shared pointer to a FastJet plugin according to enum JetAlg
+    /// Templated version for setting arbitrary parameters
+    template<JetAlg JETALG, typename... Args>
+    static FJPluginPtr mkPlugin(Args&&... args){
+      return std::make_shared<mapJetAlg2Plugin_t<JETALG>>(std::forward<Args>(args)...);
+    }
+
+    /// Non-templated version only allowing to set rparameter
+    static FJPluginPtr mkPlugin(JetAlg alg, double rparameter=-1);
+
     /// Make PseudoJets for input to a ClusterSequence, with user_index codes for constituent- and tag-particle linking
     static PseudoJets mkClusterInputs(const Particles& fsparticles, const Particles& tagparticles=Particles());
     /// Make a Rivet Jet from a PseudoJet holding a user_index code for lookup of Rivet fsparticle or tagparticle links
     static Jet mkJet(const PseudoJet& pj, const Particles& fsparticles, const Particles& tagparticles=Particles());
     /// Convert a whole list of PseudoJets to a list of Jets, with mkJet-style unpacking
-    static Jets mkJets(const PseudoJets& pjs, const Particles& fsparticles, const Particles& tagparticles=Particles());
+    static Jets mkJets(const PseudoJets& pjs, const Particles& fsparticles=Particles(), const Particles& tagparticles=Particles());
+
+    /// @}
+
+
+    /// @defgroup jetutils_recluster QoL operations for FastJet reclustering
+    /// @{
+
+    typedef std::pair<PseudoJets, Particles> PJetsParts;
+
+    /// @brief Recluster Rivet::Jets @param jetsIn according to fastjet::JetDefinition @param jDef
+    ///
+    /// @return jet collection with FastJet jet algorithm applied
+    ///
+    /// @note forwards the particles and tags of the original jets to the reclustered jets,
+    /// i.e. R=0.8 jets reclustered from R=0.4 jets will still have the particles/tags of the R=0.4 jets as constituents,
+    /// not the R=0.4 jets themselves as constituents.
+    /// This means that the number of constituents (omitting the filter) is preserved
+    ///
+    /// @note Returned jets are sorted by (descending) pT
+    template <
+      typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, const fastjet::JetDefinition &jDef){
+      PJetsParts reclusteredConsts = reclusterJetsParts(jetsIn, jDef);
+      return mkTaggedJets(jetsIn, reclusteredConsts);
+    }
+
+    /// @brief Recluster Rivet::Jets @param jetsIn according to fastjet::JetDefinition @param jDef
+    ///
+    /// @return jet collection with FastJet jet algorithm applied
+    ///
+    /// @param filter a FastJet::Filter to be applied before re-assigning the tags
+    /// Needed as separate function because FastJet doesn't grant us any easy initialisation check for filters
+    ///
+    /// @note Returned jets are sorted by (descending) pT
+    template <
+      typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, const fastjet::JetDefinition &jDef, const fastjet::Filter &filter){
+      PJetsParts reclusteredConsts = reclusterJetsParts(jetsIn, jDef);
+      ifilterPseudoJets(reclusteredConsts.first, filter);
+      return mkTaggedJets(jetsIn, reclusteredConsts);
+    }
+
+    /// @brief Apply the @param jetAlg (given as shared pointer to JetDefinition::Plugin) to the given @param jetsIn jet collection.
+    ///
+    /// @return jet collection with FastJet jet algorithm applied
+    template <
+      typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, const FJPluginPtr &jetAlg){
+      const fastjet::JetDefinition jDef(jetAlg.get());
+      return reclusterJets(jetsIn, jDef);
+    }
+
+    /// @brief Apply the @param jetAlg (given as shared pointer to JetDefinition::Plugin) to the given @param jetsIn jet collection.
+    ///
+    /// @return jet collection with FastJet jet algorithm applied
+    ///
+    /// @param filter a FastJet::Filter to be applied before re-assigning the tags
+    /// Needed as separate function because FastJet doesn't grant us any easy initialisation check for filters
+    template <
+      typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, const FJPluginPtr &jetAlg, const fastjet::Filter &filter){
+      const fastjet::JetDefinition jDef(jetAlg.get());
+      return reclusterJets(jetsIn, jDef, filter);
+    }
+
+    /// @brief Apply the @param JETALG (given as an template-enum JetAlg and arbitrary @param args...) to the given @param jetsIn jet collection.
+    ///
+    /// @return jet collection with FastJet jet algorithm applied
+    template <
+      JetAlg JETALG, typename... Args, typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, Args&&... args){
+      if constexpr (JETALG<JetAlg::SISCONE){ // JetDefinition
+        const fastjet::JetDefinition jDef = mkJetDef(JETALG, std::forward<Args>(args)...);
+        return reclusterJets(jetsIn, jDef);
+      } else { // Plugin
+        const FJPluginPtr plugin = mkPlugin<JETALG>(std::forward<Args>(args)...);
+        return reclusterJets(jetsIn, plugin);
+      }
+      throw std::invalid_argument( "Unknown jet algorithm: "+to_string(int(JETALG)) );
+    }
+
+    /// @brief Apply the @param JETALG (given as an template-enum JetAlg and arbitrary @param args...) to the given @param jetsIn jet collection.
+    ///
+    /// @return jet collection with FastJet jet algorithm applied
+    ///
+    /// @param filter a FastJet::Filter to be applied before re-assigning the tags
+    /// Needed as separate function because FastJet doesn't grant us any easy initialisation check for filters
+    template <
+      JetAlg JETALG, typename... Args, typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, const fastjet::Filter &filter, Args&&... args){
+      if constexpr (JETALG<JetAlg::SISCONE){ // JetDefinition
+        const fastjet::JetDefinition jDef = mkJetDef(JETALG, std::forward<Args>(args)...);
+        return reclusterJets(jetsIn, jDef, filter);
+      } else { // Plugin
+        const FJPluginPtr plugin = mkPlugin<JETALG>(std::forward<Args>(args)...);
+        return reclusterJets(jetsIn, plugin, filter);
+      }
+      throw std::invalid_argument( "Unknown jet algorithm: "+to_string(int(JETALG)) );
+    }
+
+    /// @brief Apply the @param args... to the given @param jetsMap map of jets.
+    ///
+    /// @return map of jets with FastJet jet algorithm applied
+    template <typename T, typename U, typename... Args>
+    static std::map<T, U> reclusterJets(const std::map<T, U> &jetsMap, Args&&... args){
+      std::map<T, U> rtn;
+      for ( auto const &[key, jetsIn] : jetsMap ) rtn[key] = reclusterJets(jetsIn, std::forward<Args>(args)...);
+      return rtn;
+    }
+
+    /// @brief Apply the @param JETALG (given as an template-enum JetAlg and arbitrary @param args...) to the given @param jetsMap map of jets.
+    ///
+    /// @return map of jets with FastJet jet algorithm applied
+    template <JetAlg JETALG, typename T, typename U, typename... Args>
+    static std::map<T, U> reclusterJets(const std::map<T, U> &jetsMap, Args&&... args){
+      std::map<T, U> rtn;
+      for ( auto const &[key, jetsIn] : jetsMap ) rtn[key] = reclusterJets<JETALG>(jetsIn, std::forward<Args>(args)...);
+      return rtn;
+    }
 
     /// @}
 
@@ -295,6 +457,22 @@ namespace Rivet {
     typename std::enable_if<Derefable<TRF>::value, void>::type
     addTrfs(const TRFS& trfs) {
       for (auto& trf : trfs) addTrf(trf);
+    }
+
+    /// @brief Add a grooming filter
+    ///
+    /// @note Technically just a more physics-oriented wrapper of addTrf()
+    void addFilter(fastjet::Filter* filter) {
+      addTrf(filter);
+    }
+
+    /// @brief Add a list of grooming filters
+    ///
+    /// @note Technically just a more physics-oriented wrapper of addTrfs()
+    template<typename FILTERS, typename FILTER=typename FILTERS::value_type>
+    typename std::enable_if<Derefable<FILTER>::value, void>::type
+    addFilters(const FILTERS& filters) {
+      addTrfs(filters);
     }
 
     /// Don't apply any jet transformers
@@ -368,7 +546,24 @@ namespace Rivet {
 
     /// Shared utility functions to implement constructor behaviour
     void _initBase();
-    void _initJdef(JetAlg alg, double rparameter, double seed_threshold);
+
+
+    void _initJdef(JetAlg alg, double rparameter){
+      MSG_DEBUG("JetAlg = " << static_cast<int>(alg));
+      MSG_DEBUG("R parameter = " << rparameter);
+      if ( alg < JetAlg::SISCONE ){ // fastjet::JetDefinitions
+        _jdef = mkJetDef(alg, rparameter);
+      } else { // fastjet::JetDefinition::Plugins
+        _plugin = mkPlugin(alg, rparameter);
+        _jdef = fastjet::JetDefinition(_plugin.get());
+      }
+    }
+
+    /// Aux function for reclustering
+    static Jets mkTaggedJets(const Jets &jetsIn, const PJetsParts &pJetsParts);
+
+    /// Aux function for reclustering
+    static PJetsParts reclusterJetsParts(const Jets &jetsIn, const fastjet::JetDefinition &jDef);
 
   protected:
 
@@ -399,10 +594,31 @@ namespace Rivet {
     Cut _cuts;
 
     /// FastJet external plugin
-    std::shared_ptr<fastjet::JetDefinition::Plugin> _plugin;
+    FJPluginPtr _plugin;
 
     /// List of jet groomers to be applied
     std::vector< std::shared_ptr<fastjet::Transformer> > _trfs;
+
+    /// Map of Rivet::JetAlg to targeted fastjet::JetAlgorithm and fastjet::RecombinationScheme
+    static const std::map<JetAlg, std::pair<fastjet::JetAlgorithm, fastjet::RecombinationScheme>> jetAlgMap;
+
+    /// "Map" of Rivet::JetAlg to targeted fastjet::JetDefinition::Plugin
+    /// Use dummy X so we can specialise mapJetAlg2Plugin in header
+    template<JetAlg, typename X> struct mapJetAlg2Plugin;
+
+    /// populate "map"
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::SISCONE,     X>{ using type = fastjet::SISConePlugin; };
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::PXCONE,      X>{ using type = Rivet::PxConePlugin; };
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::CDFJETCLU,   X>{ using type = fastjet::CDFJetCluPlugin; };
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::CDFMIDPOINT, X>{ using type = fastjet::CDFMidPointPlugin; };
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::D0ILCONE,    X>{ using type = fastjet::D0RunIIConePlugin; };
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::JADE,        X>{ using type = fastjet::JadePlugin; };
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::TRACKJET,    X>{ using type = fastjet::TrackJetPlugin; };
+    template<typename X> struct mapJetAlg2Plugin<JetAlg::VARIABLER,   X>{ using type = fastjet::contrib::VariableRPlugin; };
+
+    /// Make usage of "map" a bit more convenient
+    template<JetAlg JETALG>
+    using mapJetAlg2Plugin_t = typename mapJetAlg2Plugin<JETALG, void>::type;
 
     /// Map of vectors of y scales. This is mutable so we can use caching/lazy evaluation.
     mutable std::map<int, vector<double> > _yscales;

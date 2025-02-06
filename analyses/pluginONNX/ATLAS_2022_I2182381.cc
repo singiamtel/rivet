@@ -50,6 +50,7 @@ namespace Rivet {
       // Small-R jets
       const FinalState fsj(Cuts::abseta < 4.8);
 	    FastJets Sj(fsj, JetAlg::ANTIKT, 0.4, JetMuons::NONE);
+      _smallR_jDef = Sj.jetDef();
       SmearedJets SSj(Sj, JET_SMEAR_ATLAS_RUN2, JET_BTAG_MV2C10_77_2016);
     	declare(SSj, "smearedSjet");
 
@@ -199,12 +200,9 @@ namespace Rivet {
       });
 
       //Recluster to make large-R jets
-      fastjet::JetDefinition jdef(fastjet::antikt_algorithm, 0.8);
-      ClusterSequence cseq(smallJets, jdef);
-      PseudoJets largeRPseudoJets = cseq.inclusive_jets();
-      Jets largeRjets = trimJetsFrac(largeRPseudoJets, 0.1);
+      const fastjet::Filter filter(_smallR_jDef, fastjet::SelectorPtFractionMin(0.1));
+      Jets largeRjets = reclusterJets<JetAlg::ANTIKT>(smallJets, filter, 0.8); // already sorted by pT
       iselect(largeRjets, Cuts::abseta < 2.0 && Cuts::pt > 100*GeV);
-      isortByPt(largeRjets);
       const size_t nlargeRjets = largeRjets.size();
 
       const MissingMomentum ETMiss = apply<MissingMomentum>("Etmiss", event);
@@ -775,6 +773,9 @@ namespace Rivet {
 
     /// @name Other private variables belonging to the analysis
     /// @{
+
+    // Jet definition
+    fastjet::JetDefinition _smallR_jDef;
     
     // Lists of signal/control/validation regions for Cut'n'Count and Neural Net based analyses.
     const vector<string> _cc_srs = {"SR_Gtt_0l_B", "SR_Gtt_0l_M1", "SR_Gtt_0l_M2", "SR_Gtt_0l_C", "SR_Gbb_0l_B", "SR_Gbb_0l_M", "SR_Gbb_0l_C", "SR_Gtb_0l_B", "SR_Gtb_0l_M", "SR_Gtb_0l_C", "SR_Gtt_1l_B", "SR_Gtt_1l_M1", "SR_Gtt_1l_M2", "SR_Gtt_1l_C"};

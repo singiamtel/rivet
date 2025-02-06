@@ -188,16 +188,148 @@ namespace Rivet {
   /// @}
 
 
-  /// @defgroup jetutils_trim Trimming operations not covered in fastjet
+  /// @defgroup jetutils_trim Trimming operations for Rivet::Jets
   /// @{
 
-  /// Take in PseudoJets, Return Jets with subjet constituents of pt under
-  /// frac*(jetpt) removed.
-  /// Mainly useful for reclustered jets.
-  Jets trimJetsFrac(const PseudoJets& jetsIn, const double frac=0.1);
+  /// @brief Trim subjets with insufficient pT fraction
+  ///
+  /// Removes subjet constituents of pT less than @param frac*(jetpt) in-place.
+  ///
+  /// @note Mainly useful for reclustered jets.
+  ///
+  /// @warning Keeps all tags(), which might be incorrect, depending on use case.
+  /// TODO: Fix this behaviour if necessary.
+  Jet& itrimJetsFrac(Jet &jet, const double frac);
+
+  /// @brief Trim subjets with insufficient pT fraction @param frac
+  ///
+  /// @note Sorts by optional @param sortFunc, default is sorting by (descending) pT
+  ///
+  /// @note Works on (almost) arbritrary containers of Jet
+  ///
+  /// TODO: Does not work on set<Jet> because of const restrictions of set. Fix if necessary.
+  template <
+    typename CONTAINER,
+    typename = std::enable_if_t<
+      is_citerable_v<CONTAINER>,
+      Jet
+    >
+  >
+  CONTAINER& itrimJetsFrac(CONTAINER &jets, const double frac, const JetSorter &sortFunc=cmpMomByPt){
+    for ( Jet &jet : jets ) itrimJetsFrac(jet, frac);
+    isortBy(jets, sortFunc);
+    return jets;
+  }
+
+  template <typename T, typename U>
+  std::map<T, U>& itrimJetsFrac(std::map<T, U> &jetMap, const double frac, const JetSorter &sortFunc=cmpMomByPt){
+    for ( auto &item : jetMap ) itrimJetsFrac(item.second, frac, sortFunc);
+    return jetMap;
+  }
+
+  /// @brief Trim subjets with insufficient pT fraction
+  ///
+  /// Removes subjet constituents of pT less than @param frac*(jetpt) out-of-place.
+  ///
+  /// @note Mainly useful for reclustered jets.
+  ///
+  /// @warning Keeps all tags(), which might be incorrect, depending on use case.
+  /// TODO: Fix this behaviour if necessary.
+  inline Jet trimJetsFrac(const Jet &jet, double frac){
+    Jet rtn = jet;
+    return itrimJetsFrac(rtn, frac);
+  }
+
+  /// @brief Trim subjets with insufficient pT fraction
+  ///
+  /// @note Sorts by optional @param sortFunc, default is sorting by (descending) pT
+  ///
+  /// @note Works on (almost) arbritrary containers of Jet
+  ///
+  /// TODO: Does not work on set<Jet> because of const restrictions of set. Fix if necessary.
+  template <
+    typename... Args, typename CONTAINER,
+    typename = std::enable_if_t<
+      is_citerable_v<CONTAINER>,
+      Jet
+    >
+  >
+  CONTAINER trimJetsFrac(const CONTAINER &jets, Args&&... args){
+    CONTAINER rtn = jets;
+    return itrimJetsFrac(rtn, std::forward<Args>(args)...);
+  }
+
+  template <typename T, typename U, typename... Args>
+  std::map<T, U> trimJetsFrac(const std::map<T, U> &jetMap, Args&&... args){
+    std::map<T, U> rtn = jetMap;
+    return itrimJetsFrac(rtn, std::forward<Args>(args)...);
+  }
 
   /// @}
 
+  /// @defgroup jetutils_filt Operations to apply a FastJet::Filter to PseudoJet(s)
+  /// @{
+
+  /// @brief Apply given FastJet::Filter @param filter to PseudoJet @param pj in-place
+  ///
+  /// @note Can be any kind of filtering/ grooming algorithm, e.g. trimming.
+  PseudoJet& ifilterPseudoJets(PseudoJet &pj, const fastjet::Filter &filter);
+
+  /// @brief Apply given FastJet::Filter @param filter to container of PseudoJet @param pjs in-place
+  ///
+  /// @note Sorts by optional @param sortFunc, default is sorting by (descending) pT
+  template <
+    typename CONTAINER,
+    typename = std::enable_if_t<
+      is_citerable_v<CONTAINER>,
+      PseudoJet
+    >
+  >
+  CONTAINER& ifilterPseudoJets(CONTAINER &pjs, const fastjet::Filter &filter, const JetSorter &sortFunc=cmpMomByPt){
+    for ( PseudoJet& pj : pjs ) ifilterPseudoJets(pj, filter);
+    isortBy(pjs, sortFunc);
+    return pjs;
+  }
+
+  /// @brief Apply given FastJet::Filter @param filter to map @param pjMap in-place
+  ///
+  /// @note Sorts by optional @param sortFunc, default is sorting by (descending) pT
+  template <typename T, typename U, typename... Args>
+  std::map<T, U>& ifilterPseudoJets(std::map<T, U> &pjMap, Args&&... args){
+    for ( auto &item : pjMap ) ifilterPseudoJets(item.second, std::forward<Args>(args)...);
+    return pjMap;
+  }
+
+  /// @brief Apply given FastJet::Filter @param filter to PseudoJet @param pj out-of-place
+  inline PseudoJet filterPseudoJets(const PseudoJet &pj, const fastjet::Filter &filter){
+    PseudoJet rtn = pj;
+    return ifilterPseudoJets(rtn, filter);
+  }
+
+  /// @brief Apply given FastJet::Filter @param filter to container of PseudoJet @param pjs out-of-place
+  ///
+  /// @note Sorts by optional @param sortFunc, default is sorting by (descending) pT
+  template <
+    typename... Args, typename CONTAINER,
+    typename = std::enable_if_t<
+      is_citerable_v<CONTAINER>,
+      PseudoJet
+    >
+  >
+  CONTAINER filterPseudoJets(const CONTAINER &pjs, Args&&... args){
+    CONTAINER rtn = pjs;
+    return ifilterPseudoJets(rtn, std::forward<Args>(args)...);
+  }
+
+  /// @brief Apply given FastJet::Filter @param filter to map @param pjMap out-of-place
+  ///
+  /// @note Sorts by optional @param sortFunc, default is sorting by (descending) pT
+  template <typename T, typename U, typename... Args>
+  std::map<T, U> filterPseudoJets(const std::map<T, U> &pjMap, Args&&... args){
+    std::map<T, U> rtn = pjMap;
+    return ifilterPseudoJets(rtn, std::forward<Args>(args)...);
+  }
+  /// @}
 
 
   /// @defgroup jetutils_coll Operations on collections of Jet

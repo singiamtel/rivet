@@ -22,6 +22,7 @@
 #include "Rivet/Tools/Percentile.hh"
 #include "Rivet/Tools/Cutflow.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
+#include "Rivet/Projections/FastJets.hh"
 #include <tuple>
 
 
@@ -1902,6 +1903,44 @@ namespace Rivet {
       MultiplexAOPtr ao = _getOtherAnalysisObject(ananame, aoname);
       // return dynamic_pointer_cast<AO>(ao);
       return AO(dynamic_pointer_cast<typename AO::value_type>(ao.get()));
+    }
+
+    /// @}
+
+    /// @defgroup Utility functions
+    /// @{
+
+    /// Avoid `FastJet::` scoping prefix
+    template <
+      typename... Args, typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, Args&&... args){
+      return FastJets::reclusterJets(jetsIn, std::forward<Args>(args)...);
+    }
+
+    template <typename T, typename U, typename... Args>
+    static std::map<T, U> reclusterJets(const std::map<T, U> &jetsMap, Args&&... args){
+      return FastJets::reclusterJets(jetsMap, std::forward<Args>(args)...);
+    }
+
+    template <
+      JetAlg JETALG, typename... Args, typename CONTAINER,
+      typename = std::enable_if_t<
+        is_citerable_v<CONTAINER>,
+        Jet
+      >
+    >
+    static CONTAINER reclusterJets(const CONTAINER &jetsIn, Args&&... args){
+      return FastJets::reclusterJets<JETALG>(jetsIn, std::forward<Args>(args)...);
+    }
+
+    template <JetAlg JETALG, typename T, typename U, typename... Args>
+    static std::map<T, U> reclusterJets(const std::map<T, U> &jetsMap, Args&&... args){
+      return FastJets::reclusterJets<JETALG>(jetsMap, std::forward<Args>(args)...);
     }
 
     /// @}
