@@ -19,59 +19,60 @@ namespace Rivet {
     std::cout.clear();
   }
 
+  const std::map<JetAlg, std::pair<fastjet::JetAlgorithm, fastjet::RecombinationScheme>> FastJets::jetAlgMap = {
+    {JetAlg::KT,        std::make_pair(fastjet::kt_algorithm,        fastjet::E_scheme)},
+    {JetAlg::ANTIKT,    std::make_pair(fastjet::antikt_algorithm,    fastjet::E_scheme)},
+    {JetAlg::CAM,       std::make_pair(fastjet::cambridge_algorithm, fastjet::E_scheme)},
+    {JetAlg::DURHAM,    std::make_pair(fastjet::ee_kt_algorithm,     fastjet::E_scheme)},
+    {JetAlg::GENKTEE,   std::make_pair(fastjet::ee_genkt_algorithm,  fastjet::external_scheme)},
+    {JetAlg::KTET,      std::make_pair(fastjet::kt_algorithm,        fastjet::Et_scheme)},
+    {JetAlg::ANTIKTET,  std::make_pair(fastjet::antikt_algorithm,    fastjet::Et_scheme)}
+  };
 
-  void FastJets::_initJdef(JetAlg alg, double rparameter, double seed_threshold) {
-    MSG_DEBUG("JetAlg = " << static_cast<int>(alg));
-    MSG_DEBUG("R parameter = " << rparameter);
-    MSG_DEBUG("Seed threshold = " << seed_threshold);
-    if (alg == JetAlg::KT) {
-      _jdef = fastjet::JetDefinition(fastjet::kt_algorithm, rparameter, fastjet::E_scheme);
-    } else if (alg == JetAlg::ANTIKT) {
-      _jdef = fastjet::JetDefinition(fastjet::antikt_algorithm, rparameter, fastjet::E_scheme);
-    } else if (alg == JetAlg::CAM) {
-      _jdef = fastjet::JetDefinition(fastjet::cambridge_algorithm, rparameter, fastjet::E_scheme);
-    } else if (alg == JetAlg::DURHAM) {
-      _jdef = fastjet::JetDefinition(fastjet::ee_kt_algorithm, fastjet::E_scheme);
-    } else if (alg == JetAlg::GENKTEE) {
-      _jdef = fastjet::JetDefinition(fastjet::ee_genkt_algorithm, rparameter, -1);
-    } else if (alg == JetAlg::KTET) {
-      _jdef = fastjet::JetDefinition(fastjet::kt_algorithm, rparameter, fastjet::Et_scheme);
-    } else if (alg == JetAlg::ANTIKTET) {
-      _jdef = fastjet::JetDefinition(fastjet::antikt_algorithm, rparameter, fastjet::Et_scheme);
-
-    } else {
-      // Plugins:
-      if (alg == JetAlg::SISCONE) {
-        const double OVERLAP_THRESHOLD = 0.75;
-        _plugin = make_shared<fastjet::SISConePlugin>(rparameter, OVERLAP_THRESHOLD);
-      } else if (alg == JetAlg::PXCONE) {
-        string msg = "Using own c++ version of PxCone, since FastJet doesn't install it by default. ";
-        msg += "Please notify the Rivet authors if this behaviour should be changed.";
-        MSG_WARNING(msg);
-        _plugin = make_shared<Rivet::PxConePlugin>(rparameter);
-      } else if (alg == JetAlg::ATLASCONE) {
-        const double OVERLAP_THRESHOLD = 0.5;
-        _plugin = make_shared<fastjet::ATLASConePlugin>(rparameter, seed_threshold, OVERLAP_THRESHOLD);
-      } else if (alg == JetAlg::CMSCONE) {
-        _plugin = make_shared<fastjet::CMSIterativeConePlugin>(rparameter, seed_threshold);
-      } else if (alg == JetAlg::CDFJETCLU) {
-        const double OVERLAP_THRESHOLD = 0.75;
-        _plugin = make_shared<fastjet::CDFJetCluPlugin>(rparameter, OVERLAP_THRESHOLD, seed_threshold);
-      } else if (alg == JetAlg::CDFMIDPOINT) {
-        const double OVERLAP_THRESHOLD = 0.5;
-        _plugin = make_shared<fastjet::CDFMidPointPlugin>(rparameter, OVERLAP_THRESHOLD, seed_threshold);
-      } else if (alg == JetAlg::D0ILCONE) {
-        const double min_jet_Et = 6.0;
-        _plugin = make_shared<fastjet::D0RunIIConePlugin>(rparameter, min_jet_Et);
-      } else if (alg == JetAlg::JADE) {
-        _plugin = make_shared<fastjet::JadePlugin>();
-      } else if (alg == JetAlg::TRACKJET) {
-        _plugin = make_shared<fastjet::TrackJetPlugin>(rparameter);
-      }
-      _jdef = fastjet::JetDefinition(_plugin.get());
+  fastjet::JetDefinition FastJets::mkJetDef(const JetAlg alg, const double rparameter){
+    if( jetAlgMap.find(alg)==jetAlgMap.end() ){
+      throw std::invalid_argument( to_string(int(alg)) + " is no known jet algorithm." );
     }
+    const std::pair<fastjet::JetAlgorithm, fastjet::RecombinationScheme> p = jetAlgMap.at(alg);
+    return fastjet::JetDefinition(p.first, rparameter, p.second);
   }
 
+  FJPluginPtr FastJets::mkPlugin(const JetAlg alg, const double rparameter){
+    /// Unfortunately, we can't simply call the templated version of mkPlugin<> here because `alg` is not a constant expression
+    if (alg == JetAlg::SISCONE) {
+      const double OVERLAP_THRESHOLD = 0.75;
+      return make_shared<fastjet::SISConePlugin>(rparameter, OVERLAP_THRESHOLD);
+    }
+    if (alg == JetAlg::PXCONE) {
+      return make_shared<Rivet::PxConePlugin>(rparameter);
+    }
+    if (alg == JetAlg::CDFJETCLU) {
+      const double OVERLAP_THRESHOLD = 0.75;
+      const double SEED_THRESHOLD = 1.0;
+      return make_shared<fastjet::CDFJetCluPlugin>(rparameter, OVERLAP_THRESHOLD, SEED_THRESHOLD);
+    }
+    if (alg == JetAlg::CDFMIDPOINT) {
+      const double OVERLAP_THRESHOLD = 0.5;
+      const double SEED_THRESHOLD = 1.0;
+      return make_shared<fastjet::CDFMidPointPlugin>(rparameter, OVERLAP_THRESHOLD, SEED_THRESHOLD);
+    }
+    if (alg == JetAlg::D0ILCONE) {
+      const double MIN_JET_ET = 6.0;
+      return make_shared<fastjet::D0RunIIConePlugin>(rparameter, MIN_JET_ET);
+    }
+    if (alg == JetAlg::JADE) {
+      return make_shared<fastjet::JadePlugin>();
+    }
+    if (alg == JetAlg::TRACKJET) {
+      return make_shared<fastjet::TrackJetPlugin>(rparameter);
+    }
+    if (alg == JetAlg::VARIABLER) {
+      const double RHO = 550*GeV;
+      const double RMAX = 1.5;
+      return make_shared<fastjet::contrib::VariableRPlugin>(RHO, rparameter, RMAX, fastjet::contrib::VariableRPlugin::AKTLIKE);
+    }
+    throw std::invalid_argument( "JetAlg " + to_string(int(alg)) + "cannot be converted to fastjet::JetDefinition::Plugin" );
+  }
 
   CmpState FastJets::compare(const Projection& p) const {
     const FastJets& other = dynamic_cast<const FastJets&>(p);
@@ -146,6 +147,9 @@ namespace Rivet {
         const size_t i = abs(pjc.user_index()) - 1;
         if (i >= tagparticles.size()) throw RangeError("Tag particle lookup failed in jet construction");
         tags.push_back(tagparticles.at(i));
+      } else {
+        // Treat as particle dummy
+        constituents.push_back(Particle(0, Jet(pjc).mom()));
       }
     }
 
@@ -162,6 +166,56 @@ namespace Rivet {
     return rtn;
   }
 
+  FastJets::PJetsParts FastJets::reclusterJetsParts(const Jets &jetsIn, const fastjet::JetDefinition &jDef){
+    // Collate jets as pseudoparticles for tagging
+    Particles jetsParts;
+    for(const Jet &j : jetsIn){
+      // Add jet as pseudo-particle
+      jetsParts.push_back(Particle(0, j.mom()));
+    }
+    PseudoJets pjsIn = FastJets::mkClusterInputs(jetsParts);
+
+    // Recluster jets
+    ClusterSequence *cSeq = new ClusterSequence(pjsIn, jDef);
+    PseudoJets pjsReclustered = cSeq->inclusive_jets();
+    cSeq->delete_self_when_unused();
+    // Should delete pointer when all the Pseudojets associated with it have gone out of scope:
+    // https://fastjet.fr/repo/doxygen-3.4.3/classfastjet_1_1ClusterSequence.html#a3a5f949d32342cc4bde9f3bcb33bbe47
+    // Fingers crossed FastJet actually does that correctly and this doesn't cause a memory leak
+
+    return PJetsParts(pjsReclustered, jetsParts);
+  }
+
+  Jets FastJets::mkTaggedJets(const Jets &jetsIn, const PJetsParts &pJetsParts){
+    const PseudoJets &pjsReclustered = pJetsParts.first;
+
+    // Convert to Rivet::Jets
+    Jets jetsOut = FastJets::mkJets(pjsReclustered, pJetsParts.second, Particles());
+
+    // Replace particles and tags of reclustered jets with those from original jets
+    for ( size_t pos=0; pos<pjsReclustered.size(); ++pos ){
+      const PseudoJet &pjLargeR = pjsReclustered[pos];
+      Particles &particles = jetsOut[pos].particles();
+      Particles &tags = jetsOut[pos].tags();
+
+      // Reset particles and tags
+      particles = Particles();
+      tags = Particles();
+
+      // Forward particles and tags from original jets
+      for ( const PseudoJet &pjSmallR : pjLargeR.constituents() ){
+        const Jet &jSmallR = jetsIn[pjSmallR.user_index()-1];
+
+        particles.insert(particles.end(), jSmallR.particles().begin(), jSmallR.particles().end());
+        tags.insert(tags.end(), jSmallR.tags().begin(), jSmallR.tags().end());
+      }
+    }
+
+    // Sort in-place by pT, probably wanted in most cases
+    isortByPt(jetsOut);
+
+    return jetsOut;
+  }
 
   void FastJets::project(const Event& e) {
     // Assemble final state particles

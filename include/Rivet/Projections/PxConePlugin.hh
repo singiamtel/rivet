@@ -96,7 +96,11 @@ public:
     _cone_radius        (cone_radius_in      ),
     _min_jet_energy     (min_jet_energy_in   ),
     _overlap_threshold  (overlap_threshold_in),
-    _E_scheme_jets      (E_scheme_jets_in    ) {}
+    _E_scheme_jets      (E_scheme_jets_in    ) {
+      std::string msg = "Using own c++ version of PxCone, since FastJet doesn't install it by default. ";
+      msg += "Please notify the Rivet authors if this behaviour should be changed.";
+      std::cerr << msg << std::endl;
+    }
 
 
   // some functions to return info about parameters ----------------

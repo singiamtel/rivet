@@ -1,0 +1,16 @@
+Name: EXAMPLE_JETS
+Summary: Example of using different jet collections in Rivet
+Status: VALIDATED 
+Reentrant: true
+Authors:
+ - Martin Habedank <martin.habedank@cern.ch>
+Description:
+  'An example demonstrating the usage of different jet collections and reclustering.
+  First of all, simple small-R jets (R=0.4) are collected.
+  Secondly, these small-R jets are trimmed.
+  Thirdly, the (untrimmed) small-R jets are used for reclustering.
+  For this, different versions of reclusterJets() are used,
+  with implicit and explicit plugin creation.'
+Keywords: ['jets']
+ReleaseTests:
+ - $A LHC-13-Top-L

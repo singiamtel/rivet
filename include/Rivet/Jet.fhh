@@ -30,14 +30,18 @@ namespace Rivet {
 
 
   /// Enum for available jet algorithms
-  enum class JetAlg { KT=0,
-		      AKT=1, ANTIKT=1,
-		      CA=2, CAM=2, CAMBRIDGE=2,
-		      SISCONE, PXCONE,
-		      ATLASCONE, CMSCONE,
-		      CDFJETCLU, CDFMIDPOINT, D0ILCONE,
-		      JADE, DURHAM, TRACKJET, GENKTEE ,
-		      KTET, ANTIKTET };
+  enum class JetAlg {
+          // fastjet::JetDefinitions
+          KT=0,
+          AKT=1, ANTIKT=1,
+          CA=2, CAM=2, CAMBRIDGE=2,
+          DURHAM, GENKTEE, KTET, ANTIKTET,
+          // fastjet::JetDefinition::Plugins
+          SISCONE, PXCONE,
+          CDFJETCLU, CDFMIDPOINT, D0ILCONE,
+          JADE, TRACKJET,
+          VARIABLER
+  };
   
 
 }

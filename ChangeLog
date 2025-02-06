@@ -1,3 +1,12 @@
+2025-02-06 Martin Habedank <martin.habedank@cern.ch>
+
+	* Refactor creating fastjet::JetDefinition and fastjet::JetDefinition::Plugin
+	into distinct (and distinctly callable) methods
+	* Remove unused radius parameter from JetAlg::JADE calls
+	* Introduce wrapper functions for jet reclustering
+	* Add utility functions for adding filters and trimming jet collections
+	* Showcase changes in EXAMPLE_JETS routine
+
 2024-12-06  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Explicitly use the Python3 interpreter for all Python scripts.

@@ -35,7 +35,7 @@ namespace Rivet {
       declare(ParisiTensor(FS), "Parisi");
       declare(Hemispheres(thrust), "Hemispheres");
       declare(InitialQuarks(), "initialquarks");
-      FastJets jadeJets = FastJets(FS, JetAlg::JADE, 0.7, JetMuons::ALL, JetInvisibles::DECAY);
+      FastJets jadeJets = FastJets(FS, JetAlg::JADE, -1, JetMuons::ALL, JetInvisibles::DECAY);
       FastJets durhamJets = FastJets(FS, JetAlg::DURHAM, 0.7, JetMuons::ALL, JetInvisibles::DECAY);
       FastJets cambridgeJets = FastJets(FS, JetAlg::CAM, 0.7, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jadeJets, "JadeJets");

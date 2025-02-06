@@ -23,7 +23,7 @@ namespace Rivet {
       // Projections to use
       const FinalState FS;
       declare(FS, "FS");
-      FastJets jadeJets = FastJets(FS, JetAlg::JADE, 0.7, JetMuons::ALL, JetInvisibles::DECAY);
+      FastJets jadeJets = FastJets(FS, JetAlg::JADE, -1, JetMuons::ALL, JetInvisibles::DECAY);
       declare(jadeJets, "JadeJets");
       // book histos
       book(_h_y_2_JADE, 1,1,1);

@@ -21,7 +21,7 @@ namespace Rivet {
     void init() {
       const ChargedFinalState cfs;
       declare(cfs, "FS");
-      declare(FastJets(cfs, JetAlg::JADE, 0.7), "JadeJets");
+      declare(FastJets(cfs, JetAlg::JADE), "JadeJets");
       // histos
       book(_h_2, 1, 1, 1);
       book(_h_3, 1, 1, 2);

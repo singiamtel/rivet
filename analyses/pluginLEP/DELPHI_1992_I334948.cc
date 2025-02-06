@@ -23,7 +23,7 @@ namespace Rivet {
       // Initialise and register projections
       const ChargedFinalState cfs;
       declare(cfs, "FS");
-      declare(FastJets(cfs, JetAlg::JADE, 0.7), "Jets");
+      declare(FastJets(cfs, JetAlg::JADE), "Jets");
 
       // Book histograms
       for (unsigned int ih=0; ih<3; ++ih) {
