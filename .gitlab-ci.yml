@@ -10,6 +10,7 @@ stages:
 - precheck
 - check
 - validate
+- sync
 
 
 .trigger_template: &trigger_template
@@ -46,6 +47,7 @@ stages:
     ## Build the core library
     # - export CPPFLAGS="$CPPFLAGS -DNDEBUG"
     #- export PATH=$INSTALL_PREFIX/bin:$PATH
+    - if [[ "x$COVERAGE" != "x" ]]; then apt-get update && apt-get install -y lcov curl; fi
     ## Build YODA
     - git clone --depth 1 --branch main https://gitlab.com/hepcedar/yoda.git yoda/
     - cd yoda/
@@ -59,7 +61,7 @@ stages:
     - autoreconf -i
     - cd $BUILD_PREFIX
     - if [[ "$ALLANAS" != "1" ]]; then ANAOPT="--disable-analyses"; fi
-    - CONF="./configure --prefix=$INSTALL_PREFIX $ANAOPT --with-yoda=$INSTALL_PREFIX --with-hepmc=/usr/local --with-fastjet=/usr/local"
+    - CONF="./configure --prefix=$INSTALL_PREFIX $ANAOPT --with-yoda=$INSTALL_PREFIX --with-hepmc=/usr/local --with-fastjet=/usr/local $COVERAGE"
     - if (echo $ARCH | grep -q hepmc3); then CONF=${CONF/with-hepmc/with-hepmc3}; fi
     - echo $CONF
     - $CONF
@@ -96,6 +98,16 @@ stages:
     #   fi
     # - find $CI_PROJECT_DIR
     # - ls $CI_PROJECT_DIR
+    - if [[ "x$COVERAGE" != "x" ]]; then MSG=$(./test/coverage/mkreport); fi
+    - MR_ID=$(git ls-remote origin | grep "${CI_COMMIT_SHORT_SHA}.*merge-requests" | grep -o "merge-requests/.*" | cut -d "/" -f 2) || true
+    - |
+      if [[ "x$COVERAGE" != "x" && "x$MR_ID" != "x" ]]; then
+        curl --request POST "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/merge_requests/${MR_ID}/notes" \
+            --header "PRIVATE-TOKEN: ${CI_PRIVATE_TOKEN}" --header "Content-Type: application/json" \
+            --data "{ \"body\": \"${MSG}\" }" --silent -o /dev/null
+      fi
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "schedule"'
   artifacts:
     when: always
     paths:
@@ -113,6 +125,7 @@ stages:
 build_ubuntu_gcc_hepmc3_py3:
   variables:
     ARCH: ubuntu-gcc-hepmc3-py3
+    COVERAGE: --enable-coverage
   <<: *build_template
 
 build_ubuntu_clang_hepmc3_py3:
@@ -137,6 +150,25 @@ build_fedora_gcc_hepmc3_py3:
 
 # TODO: Add MacOSX
 
+sync_coverage:
+  stage: sync
+  before_script:
+    - git config --global user.name "RivetCheck (CI-bot)"
+    - git config --global user.email "rivet-support@cern.ch"
+  script:
+    - echo "Syncing coverage reference"
+    - ref_diff=$(git diff test/coverage/coverage.json)
+    - echo $ref_diff
+    - |
+      if [[ ! -z "${ref_diff}" ]]; then
+        git add -f test/coverage/coverage.json
+        git commit -m "coverage-reference update [skip ci]"
+        git push "https://gitlab-ci-token:${CI_PRIVATE_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" HEAD:$CI_COMMIT_REF_NAME
+      fi
+  needs:
+    - job: build_ubuntu_gcc_hepmc3_py3
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'
 
 get_test_hepmc:
   image:

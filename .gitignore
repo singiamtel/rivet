@@ -16,6 +16,8 @@
 **.hepmc
 **.egg-info*
 **.build
+**.gcno
+**.gcda
 config.guess
 config.status
 config.sub
@@ -113,3 +115,5 @@ bin/converall.sh
 .DS_Store
 NaN.yoda
 doc/nanas.*
+test/coverage/coverage.info
+test/coverage/html/
