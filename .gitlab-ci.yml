@@ -16,18 +16,18 @@ stages:
 .trigger_template: &trigger_template
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "schedule"'
-      changes:
-      - .gitlab*
-      - configure.ac
-      - Makefile.am
-      - "**/Makefile.am"
-      - m4/*
-      - ci/*
-      - bin/*
-      - include/**/*
-      - src/**/*
-      - pyext/**/*
-      - test/*
+      #changes:
+      #- .gitlab*
+      #- configure.ac
+      #- Makefile.am
+      #- "**/Makefile.am"
+      #- m4/*
+      #- ci/*
+      #- bin/*
+      #- include/**/*
+      #- src/**/*
+      #- pyext/**/*
+      #- test/*
       when: always
     - when: never
 
