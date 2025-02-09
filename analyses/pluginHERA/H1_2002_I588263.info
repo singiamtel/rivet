@@ -1,0 +1,47 @@
+Name: H1_2002_I588263
+Year: 2002
+Summary: H1 inclusive jet cross sections in DIS
+Experiment: H1
+Collider: HERA
+InspireID: 588263
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Joni Laulainen <joollaul@jyu.fi>
+ - Ilkka Helenius <ilkka.m.helenius@jyu.fi>
+References:
+ - 'Phys.Lett.B542:193-206,2002'
+ - 'DOI:10.1016/s0370-2693(02)02375-4'
+ - 'arXiv:hep-ex/0206029'
+RunInfo: NC DIS events
+Beams: [[p+, e+], [e+, p+], [p+, e-], [e-, p+]]
+Energies: [[820.0, 27.5], [27.5, 820.0], [820.0, 27.5], [27.5, 820.0]]
+Description:
+  Inclusive jet cross sections in neutral current deep inelastic
+  scattering of protons and positrons are measured with the H1 detector,
+  with an integrated luminosity of 21.1 pb$^-1$. The phase space is
+  restricted by cuts to photon virtuality $5 < Q^2 < 100$ GeV$^2$ and
+  inelasticity $0.2 < y < 0.6$. Jet selection is done with
+  the $k_T$-cluster algorithm, with additional cuts to their
+  transverse energies in the Breit frame $E_T > 5$ GeV and
+  pseudorapidities in the lab frame $-1 < \eta_{lab} < 2.8$.
+ValidationInfo:
+  Checked the analysis with Hannes Jung, no one-to-one comparison
+  possible with the available generators but comparisons with RAPGAP
+  looks reasonable.
+BibKey: Adloff_2002
+BibTeX: '@article{Adloff_2002,
+  doi       = {10.1016/s0370-2693(02)02375-4},
+  url       = {https://doi.org/10.1016%2Fs0370-2693%2802%2902375-4},
+  year      = 2002,
+  month     = {aug},
+  publisher = {Elsevier {BV}},
+  volume    = {542},
+  number    = {3-4},
+  pages     = {193--206},
+  author    = {Adloff, C. and others },
+  title     = {Measurement of inclusive jet cross-sections in deep-inelastic ep scattering at {HERA}},
+  journal   = {Physics Letters B}
+}'
+ReleaseTests:
+ - $A HERA-I-DIS-jets

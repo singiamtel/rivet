@@ -23,7 +23,9 @@ from . import CMS_2017_I1631985 # add a vector<1D> versions of the 2D AOs
 #from . import DELPHI_1993_I356732 # edges apparently completely wrong
 from . import DELPHI_1999_I499183 # swap x and y in table 39
 from . import DELPHI_2000_I524693 # add missing point
-from . import GAMMAGAMMA_1973_I84794 # reorcer points
+from . import GAMMAGAMMA_1973_I84794 # reorder points
+from . import H1_2002_I588263 # pseudo-3D objects should be 1D
+from . import H1_2016_I1496981 # divide by Q2 bin width
 from . import HRS_1987_I215848 # transform x-edges
 from . import JADE_1990_I282847 # pseudo-2D object should really be 1D
 from . import L3_1992_I334954 # mask "integral" bin
