@@ -58,6 +58,7 @@ Doxyfile
 doxy/html/.*
 doxy/latex/.*
 doc/doxygen/html
+doc/doxygen/xml
 .libs
 .deps
 #Rivet.yoda
