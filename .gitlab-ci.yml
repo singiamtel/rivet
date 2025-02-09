@@ -169,7 +169,7 @@ sync_coverage:
   needs:
     - job: build_ubuntu_gcc_hepmc3_py3
   rules:
-    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"'
 
 announce:
   stage: deploy
@@ -199,7 +199,7 @@ announce:
         echo "No open merge request found for commit ${CI_COMMIT_SHA}."
       fi
   rules:
-    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"'
 
 get_test_hepmc:
   image:
