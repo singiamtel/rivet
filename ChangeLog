@@ -1,3 +1,7 @@
+2025-02-09  Christian Gutschow  <chris.g@cern.ch>
+
+	* Release 4.0.3
+
 2024-12-20  Christian Gutschow  <chris.g@cern.ch>
 
 	* Issue a more helpful error message when a ref-data object used
