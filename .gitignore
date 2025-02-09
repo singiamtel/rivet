@@ -16,6 +16,8 @@
 **.hepmc
 **.egg-info*
 **.build
+**.gcno
+**.gcda
 config.guess
 config.status
 config.sub
@@ -56,6 +58,7 @@ Doxyfile
 doxy/html/.*
 doxy/latex/.*
 doc/doxygen/html
+doc/doxygen/xml
 .libs
 .deps
 #Rivet.yoda
@@ -112,3 +115,6 @@ bin/converall.log
 bin/converall.sh
 .DS_Store
 NaN.yoda
+doc/nanas.*
+test/coverage/coverage.info
+test/coverage/html/

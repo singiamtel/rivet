@@ -37,4 +37,6 @@ Description:
   Beam energy must be specified (in GeV) as analysis option "ENERGY" when rivet-merging samples.
 ReleaseTests:
  - $A LHC-2360-UE
+ - $A-2 LHC-7-MinBias
+ - $A-3 LHC-900-UE-Long
 

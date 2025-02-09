@@ -36,3 +36,5 @@ Description:
   are the correlation between mean transverse momentum and charged
   particle multiplicity, and the `plateau' height as a function of the
   leading track $|\eta|$.'
+ReleaseTests:
+ - $A LHC-7-UE-Long

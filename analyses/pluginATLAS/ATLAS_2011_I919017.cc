@@ -11,7 +11,7 @@ namespace Rivet {
     inline double calcz(const Jet& j, const Particle& p) {
       const double num = j.p3().dot(p.p3());
       const double den = j.p3().mod2();
-      return num/den;
+      return min(num/den, 0.999999);
     }
 
     inline double calcptrel(const Jet& j, const Particle& p) {

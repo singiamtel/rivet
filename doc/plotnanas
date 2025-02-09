@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 import argparse
 ap = argparse.ArgumentParser()
@@ -13,21 +13,48 @@ if not args.OUTFILES:
 import datetime
 import numpy as np
 import matplotlib.pyplot as plt
-# import matplotlib.dates as mdates
-# import matplotlib.cbook as cbook
+import matplotlib as mpl
 
 tags, dates, nanas = [], [], []
 with open(args.DATFILE) as f:
     for line in f:
         items = line.split()
-        tags.append(items[0])
+        label = 'Rivet v' + items[0].split('-')[1][0].replace('0', '1')
+        tags.append(label)
         ts = float(items[1].replace("-3600", "").replace("-7200", ""))
         dates.append(datetime.date.fromtimestamp(ts))
         nanas.append(int(items[2]))
 
-plt.plot(dates, nanas)
-plt.xlabel("Year")
-plt.ylabel("# analyses")
+# Assign unique colors to each major release
+releases = sorted(set(tags))
+cmap = mpl.colormaps['Set3']  # Discrete colormap
+tag_cols = {tag: cmap(i / len(releases)) for i, tag in enumerate(releases)}
+
+# Map release tags to colors
+point_cols = [tag_cols[tag] for tag in tags]
+
+# Create the scatter plot
+fig, ax = plt.subplots(figsize=(12, 6))
+
+# Scatter plot showing the number of analyses per release
+scatter = ax.scatter(dates, nanas, c=point_cols, s=50, edgecolor='black', label='')
+
+# Add a legend for the release versions
+handles = [plt.Line2D([0], [0], marker='o', color=col, markersize=10, linestyle='', label=tag)
+           for tag, col in tag_cols.items()]
+ax.legend(handles=handles, title="Major Release Series", fontsize=10, title_fontsize=12)
+
+# Add labels, grid, and title
+ax.set_xlabel('Release Year', fontsize=12)
+ax.set_ylabel('Number of Analyses', fontsize=12)
+ax.set_title('Contributed Analyses Over Time', fontsize=14)
+ax.grid(True, linestyle='--', alpha=0.6)
+
+# Rotate date labels for better readability
+plt.xticks(rotation=45, ha='right')
+
+# Improve layout
+plt.tight_layout()
 
 for out in args.OUTFILES.split(","):
     plt.savefig(out, dpi=120)

@@ -5,6 +5,7 @@
 namespace Rivet {
 
 
+  /// @brief Track-based underlying event at 900 GeV and 7 TeV in ATLAS
   class ATLAS_2010_I879407 : public Analysis {
   public:
 
@@ -26,22 +27,22 @@ namespace Rivet {
         bool ih(en == "7000"s);
 
         // Nch profiles, 500 MeV track pT cut
-        book(_p[en+"nch_transverse_500[0]"], 1+ih, 1, 1);
-        book(_p[en+"nch_toward_500"],        1+ih, 1, 2);
-        book(_p[en+"nch_away_500"],          1+ih, 1, 3);
+        book(_p[en+"nch_transverse_500_0"], 1+ih, 1, 1);
+        book(_p[en+"nch_toward_500"],       1+ih, 1, 2);
+        book(_p[en+"nch_away_500"],         1+ih, 1, 3);
 
         // pTsum profiles, 500 MeV track pT cut
-        book(_p[en+"ptsum_transverse_500[0]"], 3+ih, 1, 1);
-        book(_p[en+"ptsum_toward_500"],        3+ih, 1, 2);
-        book(_p[en+"ptsum_away_500"],          3+ih, 1, 3);
+        book(_p[en+"ptsum_transverse_500_0"], 3+ih, 1, 1);
+        book(_p[en+"ptsum_toward_500"],       3+ih, 1, 2);
+        book(_p[en+"ptsum_away_500"],         3+ih, 1, 3);
 
         // Standard deviation profiles
         // First the higher moments of main profiles
         // to calculate variance and error on variance...
         for (size_t i = 1; i < 4; ++i) {
           const string mom = toString(i);
-          book(_p[en+"nch_transverse_500_"+mom],   "TMP/nch"+mom,   refData(1+ih, 1, 1));
-          book(_p[en+"ptsum_transverse_500_"+mom], "TMP/ptsum"+mom, refData(3+ih, 1, 1));
+          book(_p[en+"nch_transverse_500_"+mom],   "TMP/nch"+mom+"_"+en,   refData(1+ih, 1, 1));
+          book(_p[en+"ptsum_transverse_500_"+mom], "TMP/ptsum"+mom+"_"+en, refData(3+ih, 1, 1));
         }
         // Then the data point sets into which the results will be inserted
         book(_e[en+"nch_transverse_500"]  , 5+ih, 1, 1);
@@ -253,12 +254,12 @@ namespace Rivet {
       // Convert the various moments of the 500 MeV trans pT and Nch distributions to std devs with correct error
       for (double eVal : allowedEnergies()) {
         const string en = toString(int(eVal));
-        moments_to_stddev(en+"nch_transverse_500", _e["nch_transverse_500"]);
-        moments_to_stddev(en+"ptsum_transverse_500", _e["ptsum_transverse_500"]);
+        moments_to_stddev(en+"nch_transverse_500");
+        moments_to_stddev(en+"ptsum_transverse_500");
       }
     }
 
-    void moments_to_stddev(const string& label, Estimate1DPtr target_dps) {
+    void moments_to_stddev(const string& label) {
       for (size_t b = 1; b < _p[label+"_0"]->numBins()+1; ++b) { // loop over points
         /// @todo Assuming unit weights here! Should use N_effective = sumW**2/sumW2?
         const double numentries = _p[label+"_0"]->bin(b).numEntries();
@@ -268,9 +269,9 @@ namespace Rivet {
           sd = fuzzyLessEquals(var,0.) ? 0 : sqrt(var); ///< Numerical safety check
         }
         if (sd == 0 || numentries < 3) {
-          MSG_WARNING("Need at least 3 bin entries and a non-zero central value to calculate "
+          MSG_DEBUG("Need at least 3 bin entries and a non-zero central value to calculate "
                       << "an error on standard deviation profiles (bin " << b << ")");
-          target_dps->bin(b).set(sd, 0);
+          _e[label]->bin(b).set(sd, 0);
           continue;
         }
         // c2(y) = m4(x) - 4 m3(x) m1(x) - m2(x)^2 + 8 m2(x) m1(x)^2 - 4 m1(x)^4
@@ -281,7 +282,7 @@ namespace Rivet {
           - 4 * intpow(_p[label+"_0"]->bin(b).yMean(), 4);
         const double stderr_on_var = sqrt(var_on_var/(numentries-2.0));
         const double stderr_on_sd = stderr_on_var / (2.0*sd);
-        target_dps->bin(b).set(sd, stderr_on_sd);
+        _e[label]->bin(b).set(sd, stderr_on_sd);
       }
     }
 

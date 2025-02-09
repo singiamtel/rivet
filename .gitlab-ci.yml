@@ -2,6 +2,7 @@ variables:
   GIT_STRATEGY: fetch
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SSL_NO_VERIFY: "true"
+  DOCKER_DRIVER: overlay2
 
 
 stages:
@@ -9,6 +10,26 @@ stages:
 - precheck
 - check
 - validate
+- deploy
+
+
+.trigger_template: &trigger_template
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "schedule"'
+      #changes:
+      #- .gitlab*
+      #- configure.ac
+      #- Makefile.am
+      #- "**/Makefile.am"
+      #- m4/*
+      #- ci/*
+      #- bin/*
+      #- include/**/*
+      #- src/**/*
+      #- pyext/**/*
+      #- test/*
+      when: always
+    - when: never
 
 
 .build_template: &build_template
@@ -29,6 +50,7 @@ stages:
     ## Build the core library
     # - export CPPFLAGS="$CPPFLAGS -DNDEBUG"
     #- export PATH=$INSTALL_PREFIX/bin:$PATH
+    - if [[ "x$COVERAGE" != "x" ]]; then apt-get update && apt-get install -y lcov curl; fi
     ## Build YODA
     - git clone --depth 1 --branch main https://gitlab.com/hepcedar/yoda.git yoda/
     - cd yoda/
@@ -42,7 +64,7 @@ stages:
     - autoreconf -i
     - cd $BUILD_PREFIX
     - if [[ "$ALLANAS" != "1" ]]; then ANAOPT="--disable-analyses"; fi
-    - CONF="./configure --prefix=$INSTALL_PREFIX $ANAOPT --with-yoda=$INSTALL_PREFIX --with-hepmc=/usr/local --with-fastjet=/usr/local"
+    - CONF="./configure --prefix=$INSTALL_PREFIX $ANAOPT --with-yoda=$INSTALL_PREFIX --with-hepmc=/usr/local --with-fastjet=/usr/local $COVERAGE"
     - if (echo $ARCH | grep -q hepmc3); then CONF=${CONF/with-hepmc/with-hepmc3}; fi
     - echo $CONF
     - $CONF
@@ -79,7 +101,14 @@ stages:
     #   fi
     # - find $CI_PROJECT_DIR
     # - ls $CI_PROJECT_DIR
-
+    - if [[ "x$COVERAGE" != "x" ]]; then MSG=$(./test/coverage/mkreport); fi
+    - MR_ID=$(git ls-remote origin | grep "${CI_COMMIT_SHORT_SHA}.*merge-requests" | grep -o "merge-requests/.*" | cut -d "/" -f 2) || true
+    - |
+      if [[ "x$COVERAGE" != "x" && "x$MR_ID" != "x" ]]; then
+        curl --request POST "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/merge_requests/${MR_ID}/notes" \
+            --header "PRIVATE-TOKEN: ${CI_PRIVATE_TOKEN}" --header "Content-Type: application/json" \
+            --data "{ \"body\": \"${MSG}\" }" --silent -o /dev/null
+      fi
   artifacts:
     when: always
     paths:
@@ -92,12 +121,12 @@ stages:
       - local_$ARCH/
       - test_$ARCH/
     expire_in: 36 hrs
-
-
+  <<: *trigger_template
 
 build_ubuntu_gcc_hepmc3_py3:
   variables:
     ARCH: ubuntu-gcc-hepmc3-py3
+    COVERAGE: --enable-coverage
   <<: *build_template
 
 build_ubuntu_clang_hepmc3_py3:
@@ -108,21 +137,69 @@ build_ubuntu_clang_hepmc3_py3:
 build_fedora_gcc_hepmc3_py3:
   variables:
     ARCH: fedora-gcc-hepmc3-py3
-  #only: [schedules]
+  # rules:
+  #   if: $CI_PIPELINE_SOURCE == "schedule"
   <<: *build_template
 
 # build_ubuntu_intel_hepmc3_py3:
 #   tags: [intel-compat]
 #   variables:
 #     ARCH: ubuntu-intel-hepmc3-py3
-#   only: [schedules]
+#   rules:
+#     if: $CI_PIPELINE_SOURCE == "schedule"
 #   <<: *build_template
 
-# build_ubuntu_gcc_hepmc3_py2:
-#   variables:
-#     ARCH: ubuntu-gcc-hepmc3-py2
-#   #only: [schedules]
-#   <<: *build_template
+# TODO: Add MacOSX
+
+sync_coverage:
+  stage: deploy
+  before_script:
+    - git config --global user.name "RivetCheck (CI-bot)"
+    - git config --global user.email "rivet-support@cern.ch"
+  script:
+    - echo "Syncing coverage reference"
+    - ref_diff=$(git diff test/coverage/coverage.json)
+    - echo $ref_diff
+    - |
+      if [[ ! -z "${ref_diff}" ]]; then
+        git add -f test/coverage/coverage.json
+        git commit -m "coverage-reference update [skip ci]"
+        git push "https://gitlab-ci-token:${CI_PRIVATE_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" HEAD:$CI_COMMIT_REF_NAME
+      fi
+  needs:
+    - job: build_ubuntu_gcc_hepmc3_py3
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"'
+
+announce:
+  stage: deploy
+  image:
+    python:3-alpine
+  script:
+    - apk add --no-cache curl jq
+    - pip install --upgrade pip --root-user-action=ignore
+    - pip install --no-cache-dir atproto Mastodon.py --root-user-action=ignore
+    - |
+      MR_DATA=$(curl --silent --header "PRIVATE-TOKEN: ${CI_PRIVATE_TOKEN}" \
+        "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/repository/commits/${CI_COMMIT_SHA}/merge_requests")
+      MR_COUNT=$(echo "$MR_DATA" | jq '[.[] | select(.state=="merged")] | length')
+      if [ "$MR_COUNT" -gt 0 ]; then
+        # Extract labels from the first matching merge request
+        MR_LABELS=$(echo "$MR_DATA" | jq -r '[.[] | select(.state=="merged")][0].labels | join(", ")')
+        if [[ "${MR_LABELS}" == *"#tweetme"* ]]; then
+          MR_IID=$(echo "$MR_DATA" | jq -r '[.[] | select(.state=="merged")][0].iid')
+          export MR_TITLE=$(echo "$MR_DATA" | jq -r '[.[] | select(.state=="merged")][0].title')
+          export MR_URL="${CI_PROJECT_URL}/-/merge_requests/${MR_IID}"
+          echo "Triggering announcement."
+          python ci/post2socials.py
+        else
+          echo "Required label not found. Skipping announcement."
+        fi
+      else
+        echo "No open merge request found for commit ${CI_COMMIT_SHA}."
+      fi
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"'
 
 get_test_hepmc:
   image:
@@ -152,6 +229,7 @@ get_test_hepmc:
       - $CI_PROJECT_DIR/tt.hepmc.gz
       - $CI_PROJECT_DIR/valhepmc
     expire_in: 36 hrs
+  <<: *trigger_template
 
 
 .check_plugin_template: &check_plugin_template
@@ -195,11 +273,17 @@ get_test_hepmc:
       if [[ "$VAL" == "1" ]]; then
         if [[ "$ARCH" == "ubuntu-gcc-hepmc3-py3" ]]; then
           cd $VAL_PREFIX
+          export RIVET_RANDOM_SEED=12345
+          export RIVET_FORCE_DETERMINISTIC_RANDNORM=1
           rivet-mkvaldir VALDIR --ref-dir $CI_PROJECT_DIR/analyses/valref/
           cd VALDIR
           make check -j $(nproc)
-          ls *diff > diffs.txt
-          while read  p; do echo "==== $p ====" ; if [ -s "$p" ]; then echo "fail" ; exit 1 ; else echo "ok";  fi ; done < diffs.txt
+          DIFFDIRS=`find . -name '*.diffdir' -print`
+          if [ -z "$DIFFDIRS" ]; then
+            echo "No differences found: SUCCESS."
+          else
+            echo "Differences found:"; echo "$DIFFDIRS"; exit 1
+          fi
         fi
       fi
   artifacts:
@@ -216,7 +300,7 @@ get_test_hepmc:
     #exclude:
     #  - test_$ARCH/VALDIR/*/*.gz
     expire_in: 36 hrs
-
+  <<: *trigger_template
 
 check_plugin_ubuntu_gcc_hepmc3_py3:
   variables:
@@ -233,7 +317,8 @@ check_plugin_ubuntu_clang_hepmc3_py3:
 check_plugin_fedora_gcc_hepmc3_py3:
   variables:
     ARCH: fedora-gcc-hepmc3-py3
-  #only: [schedules]
+  # rules:
+  #   if: $CI_PIPELINE_SOURCE == "schedule"
   needs: [build_fedora_gcc_hepmc3_py3, get_test_hepmc]
   <<: *check_plugin_template
 
@@ -241,15 +326,9 @@ check_plugin_fedora_gcc_hepmc3_py3:
 #   tags: [intel-compat]
 #   variables:
 #     ARCH: ubuntu-intel-hepmc3-py3
-#   only: [schedules]
+#   rules:
+#     if: $CI_PIPELINE_SOURCE == "schedule"
 #   needs: [build_ubuntu_intel_hepmc3_py3, get_test_hepmc]
-#   <<: *check_plugin_template
-
-# check_plugin_ubuntu_gcc_hepmc3_py2:
-#   variables:
-#     ARCH: ubuntu-gcc-hepmc3-py2
-#   #only: [schedules]
-#   needs: [build_ubuntu_gcc_hepmc3_py2, get_test_hepmc]
 #   <<: *check_plugin_template
 
 
@@ -272,31 +351,29 @@ check_plugin_fedora_gcc_hepmc3_py3:
     paths:
       - test_$ARCH/ttbar_test_plots/
     expire_in: 36 hrs
-  artifacts:
-    when: always
-    paths:
-     - test_$ARCH/ttbar_test_plots
-    expire_in: 36 hrs
-
+  <<: *trigger_template
 
 make_plots_ubuntu_gcc_hepmc3_py3:
   variables:
     ARCH: ubuntu-gcc-hepmc3-py3
-  #only: [schedules]
+  rules:
+    if: $CI_PIPELINE_SOURCE == "schedule"
   needs: [check_plugin_ubuntu_gcc_hepmc3_py3]
   <<: *make_plots_template
 
 make_plots_ubuntu_clang_hepmc3_py3:
   variables:
     ARCH: ubuntu-clang-hepmc3-py3
-  only: [schedules]
+  rules:
+    if: $CI_PIPELINE_SOURCE == "schedule"
   needs: [check_plugin_ubuntu_clang_hepmc3_py3]
   <<: *make_plots_template
 
 make_plots_fedora_gcc_hepmc3_py3:
   variables:
     ARCH: fedora-gcc-hepmc3-py3
-  #only: [schedules]
+  rules:
+    if: $CI_PIPELINE_SOURCE == "schedule"
   needs: [check_plugin_fedora_gcc_hepmc3_py3]
   <<: *make_plots_template
 
@@ -304,16 +381,11 @@ make_plots_fedora_gcc_hepmc3_py3:
 #   tags: [intel-compat]
 #   variables:
 #     ARCH: ubuntu-intel-hepmc3-py3
-#   only: [schedules]
+#   rules:
+#     if: $CI_PIPELINE_SOURCE == "schedule"
 #   needs: [check_plugin_ubuntu_intel_hepmc3_py3]
 #   <<: *make_plots_template
 
-# make_plots_ubuntu_gcc_hepmc3_py2:
-#   variables:
-#     ARCH: ubuntu-gcc-hepmc3-py2
-#   #only: [schedules]
-#   needs: [check_plugin_ubuntu_gcc_hepmc3_py2]
-#   <<: *make_plots_template
 
 .check_lwtnn_analyses_template: &check_lwtnn_analyses_template
   image: hepstore/hepbase-$ARCH
@@ -344,9 +416,8 @@ make_plots_fedora_gcc_hepmc3_py3:
   # Run the lwtnn example analysis
     - rivet --pwd -a EXAMPLE_LWTNN $CI_PROJECT_DIR/tt.hepmc.gz
   # For tt.hepmc.gz, there should be only one non-empty histo bin.
-    - if [[ -z $(grep -m 1 "0.000000e+00	5.000000e+00	9.260000e+02	9.260000e+02	4.999612e+02	2.699365e+02	9.260000e+02" Rivet.yoda) ]];
-         then echo "yoda output not matched"; cat Rivet.yoda; exit 1;
-      fi
+    - yodadiff Rivet.yoda $CI_PROJECT_DIR/analyses/valref/EXAMPLE_LWTNN.yoda.gz -t 1e-2
+  <<: *trigger_template
 
 check_lwtnn_analyses_ubuntu_gcc_hepmc3_py3:
   variables:
@@ -361,6 +432,7 @@ check_lwtnn_analyses_fedora_gcc_hepmc3_py3:
   <<: *check_lwtnn_analyses_template
 
 # TODO - Mac version
+
 
 .check_onnx_analyses_template: &check_onnx_analyses_template
   image: hepstore/hepbase-$ARCH
@@ -388,9 +460,8 @@ check_lwtnn_analyses_fedora_gcc_hepmc3_py3:
   # Run the ONNX example analysis
     - rivet --pwd -a EXAMPLE_ONNX $CI_PROJECT_DIR/tt.hepmc.gz
   # Compare one particularly lively histo bin
-    - if [[ -z $(grep -m 1 "3.500000e+01	4.000000e+01	1.400000e+02	1.400000e+02	5.289760e+03	2.001242e+05	1.400000e+02" Rivet.yoda) ]];
-         then echo "yoda output not matched"; cat Rivet.yoda; exit 1;
-      fi
+    - yodadiff Rivet.yoda $CI_PROJECT_DIR/analyses/valref/EXAMPLE_ONNX.yoda.gz -t 1e-2
+  <<: *trigger_template
 
 check_onnx_analyses_ubuntu_gcc_hepmc3_py3:
   variables:

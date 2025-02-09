@@ -20,24 +20,13 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-    
-      
+
+      // Declare projections
       declare(DISKinematics(), "Kinematics");
       declare(UnstableParticles(), "UFS");
- 
-      // Initialise and register projections
+      declare(FinalState(Cuts::abseta < 4.9), "FS");
 
-      // The basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
-      declare(fs, "FS");
-
-      // Book histograms
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-
-
-
+      // Book histograms from reference data using HEPData ID (digits in "d01-x01-y01")
       book(_h["p_tD*_norm"], 4, 1, 1);
       book(_h["p_tD*"], 4, 1, 2);
       book(_h["p_tD0_norm"], 5, 1, 1);
@@ -46,11 +35,10 @@ namespace Rivet {
       book(_h["xD_D*"], 6, 1, 2);
       book(_h["xD_D0_norm"], 7, 1, 1);
       book(_h["xD_D0"], 7, 1, 2);
-
     }
 
 
-/// Perform the per-event analysis
+    /// Perform the per-event analysis
     void analyze(const Event& event) {
 
       /// @todo Do the event by event analysis here

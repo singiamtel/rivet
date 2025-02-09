@@ -39,8 +39,8 @@ namespace Rivet {
         if (_mode) {
           book(_h["inclusive_parton"], 147, 1, 1);
         }
-        book_hist("t_pt", 	       3);
-        book_hist("t_y",  	       4);
+        book_hist("t_pt",          3);
+        book_hist("t_y",           4);
         book_hist("t1_pt",         5);
         book_hist("t1_y",          6);
         book_hist("t2_pt",         7);

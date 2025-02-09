@@ -137,7 +137,9 @@ namespace Rivet {
         const double pt = p.pT();
         _h[_sqs+label+"_pt"]->fill(pt/GeV, 1.0/pt);
         _h[_sqs+label+"_eta"]->fill(p.eta());
-        if (_sqs != "2360"s)  _p[_sqs+label+"_ptnch"]->fill(nch, pt/GeV);
+        if (_sqs != "2360"s && label != "pt100_nch20"s && label != "pt500_nch6"s) {
+          _p[_sqs+label+"_ptnch"]->fill(nch, pt/GeV);
+        }
       }
     }
 

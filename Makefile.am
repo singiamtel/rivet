@@ -10,13 +10,49 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-debug --with-yoda=$(YODAPATH) --with-hepmc=
 pkgconfigdir = $(libdir)/pkgconfig
 dist_pkgconfig_DATA = rivet.pc
 
+if CODE_COVERAGE_ENABLED
+
+REPORTDIR=$(top_srcdir)/test/coverage
+
+REPORT=$(REPORTDIR)/coverage.info
+
+COVERAGE_EXCL = '*/eigen3/*' '*/HepMC3/*' '*/YODA/*' '/usr/*' '*/test/*'
+
+LCOV_FLAGS = --quiet
+
+if WITH_OSX
+
+LCOV_FLAGS += --ignore-errors inconsistent,inconsistent,usage
+
+endif
+
+cov-report:
+	@lcov --compat-libtool --capture --directory $(top_srcdir) --output-file $(REPORT) $(LCOV_FLAGS)
+	@lcov --remove $(REPORT) --output-file $(REPORT) $(LCOV_FLAGS) $(COVERAGE_EXCL)
+	@genhtml -o $(REPORTDIR)/html $(REPORT) $(LCOV_FLAGS)
+
+cov-reset:
+	@rm -fr $(REPORTDIR)/html $(REPORT)
+	@find . \( -name "*.gcda" -o -name "*.gcno" \) -exec rm {} \;
+
+check:
+	@make cov-report
+
+clean-local:
+	@make cov-reset
+	@rm -rf a.out
+
+else
+
+clean-local:
+	@rm -rf a.out
+
+endif
+
 doc:
 	cd doc && $(MAKE) doc
 
 .PHONY : doc dox pyclean analyses-indiv
-
-clean-local:
-	@rm -rf a.out
 
 if ENABLE_ANALYSES
 if ENABLE_PYEXT

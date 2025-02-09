@@ -15,6 +15,7 @@
 #include <cmath>
 #include <limits>
 #include <complex>
+#include <cstdint>
 
 namespace Rivet {
 

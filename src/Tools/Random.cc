@@ -48,6 +48,26 @@ namespace Rivet {
 
   // Return a Gaussian/normal sampled random number with the given mean and width
   double randnorm(double loc, double scale) {
+    static bool useFixedNormal = getEnvParam("RIVET_FORCE_DETERMINISTIC_RANDNORM", false);
+    if (useFixedNormal) {
+      static std::uniform_real_distribution<double> uniform(0.0, 1.0);
+
+      // Generate two independent uniform random numbers in (0,1]
+      double u1 = uniform(rng());
+      double u2 = uniform(rng());
+
+      // Box-Muller transformation
+      double r = std::sqrt(-2.0 * std::log(u1));
+      double theta = 2.0 * M_PI * u2;
+
+      // Yields two independent normally distributed values
+      double z0 = r * std::cos(theta);
+      //double z1 = r * std::sin(theta);
+
+      // Scale and shift by mean and standard deviation
+      // (unused: loc + z1 * scale)
+      return loc + z0 * scale;
+    }
     normal_distribution<> d(loc, scale);
     const double x = d(rng());
     //cout << "RANDNORM -> " << x << endl;

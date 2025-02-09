@@ -1,7 +1,7 @@
 ## Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Rivet],[4.0.2],[rivet@projects.hepforge.org],[Rivet])
+AC_INIT([Rivet],[4.0.3],[rivet@projects.hepforge.org],[Rivet])
 
 ## Check and block installation into the src/build dir
 if test "$prefix" = "$PWD"; then
@@ -296,7 +296,14 @@ if test x$enable_onnx != xno; then
   if test x$ONNXRTPREFIX = xyes; then ONNXRTPREFIX=$prefix; fi
   # TODO: test ONNXRt functionality from given paths
   ONNXRTINCPATH=$ONNXRTPREFIX/include
-  ONNXRTLIBPATH=$ONNXRTPREFIX/lib
+  # Check whether lib or lib64 exists and set ONNXRTLIBPATH accordingly
+  if test -d "$ONNXRTPREFIX/lib64"; then
+    ONNXRTLIBPATH="$ONNXRTPREFIX/lib64"
+  elif test -d "$ONNXRTPREFIX/lib"; then
+    ONNXRTLIBPATH="$ONNXRTPREFIX/lib"
+  else
+    AC_MSG_ERROR([Neither lib nor lib64 found in $ONNXRTPREFIX])
+  fi
 fi
 AM_CONDITIONAL(ENABLE_ONNX, [test x$enable_onnx = xyes])
 AC_SUBST(ONNXRTPREFIX)
@@ -414,6 +421,29 @@ AX_OPENMP([AM_CXXFLAGS="$AM_CXXFLAGS $OPENMP_CXXFLAGS"])
 ## Optional zlib support for gzip-compressed data streams/files
 AX_CHECK_ZLIB
 
+## Optional unit-test coverage checks
+AC_ARG_ENABLE([coverage],
+  AS_HELP_STRING([--enable-coverage],
+  [enable coverage report @<:@default=build@:>@]),,
+  enable_coverage=no)
+if test "x$enable_coverage" = "xyes"; then
+	AC_CHECK_PROG(LCOV_CHECK, lcov, yes)
+  AS_IF([test x"$LCOV_CHECK" != x"yes"], [AC_MSG_ERROR([Coverage reports require lcov!])])
+	AC_CHECK_PROG(GENHTML_CHECK, genhtml, yes)
+  AS_IF([test x"$GENHTML_CHECK" != x"yes"], [AC_MSG_ERROR([Coverage reports require genhtml!])])
+
+  CXXFLAGS="$CXXFLAGS -O0 -g"
+	CODE_COVERAGE_CPPFLAGS="-O0 -g -fprofile-arcs -ftest-coverage -fno-inline"
+	CODE_COVERAGE_CFLAGS="-O0 -g -fprofile-arcs -ftest-coverage -fno-inline"
+	CODE_COVERAGE_CXXFLAGS="-O0 -g -fprofile-arcs -ftest-coverage -fno-inline"
+	CODE_COVERAGE_LIBS="-lgcov"
+
+	AC_SUBST([CODE_COVERAGE_CPPFLAGS])
+	AC_SUBST([CODE_COVERAGE_CFLAGS])
+	AC_SUBST([CODE_COVERAGE_CXXFLAGS])
+	AC_SUBST([CODE_COVERAGE_LIBS])
+fi
+AM_CONDITIONAL(CODE_COVERAGE_ENABLED, [test x$enable_coverage = xyes])
 
 ## Debug flag (default=-DNDEBUG, enabled=-g)
 AC_ARG_ENABLE([debug], [AS_HELP_STRING([--enable-debug],[build with debugging symbols  @<:@default=no@:>@])], [], [enable_debug=no])
