@@ -14,7 +14,7 @@ MR_URL = os.getenv("MR_URL")
 CONTENT = f"New [Rivet analysis] - {MR_TITLE} 🎉 #HEP #OpenScience"
 
 # Find the position of 'Rivet analysis' in the post content
-start_idx = post_content.find('[Rivet analysis]')
+start_idx = CONTENT.find('[Rivet analysis]')
 end_idx = start_idx + len('Rivet analysis')
 
 # Create a facet (rich text link) for the hyperlink
