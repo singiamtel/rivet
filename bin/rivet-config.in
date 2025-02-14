@@ -85,6 +85,8 @@ if test -n "$tmp"; then
     test -n "$ifastjet" && OUT="$OUT ${ifastjet}"
     ifjcontrib="@FJCONTRIBCPPFLAGS@"
     test -n "$ifjcontrib" && OUT="$OUT ${ifjcontrib}"
+    iyamlcpp="@YAML_CPP_CXXFLAGS@"
+    test -n "$iyamlcpp" && OUT="$OUT ${iyamlcpp}"
 fi
 
 tmp=$( echo "$*" | grep -E -- '--\<ldflags\>|--\<libs\>')
@@ -99,6 +101,8 @@ if test -n "$tmp"; then
     test -n "$lhepmc" && OUT="$OUT ${lhepmc}"
     lyoda="@YODALDFLAGS@ @YODALIBS@"
     test -n "$lyoda" && OUT="$OUT ${lyoda}"
+    lyaml="@YAML_CPP_LDFLAGS@"
+    test -n "$lyaml" && OUT="$OUT ${lyaml}"
     lfastjet="@FASTJETLIBADD@"
     test -n "$lfastjet" && OUT="$OUT ${lfastjet}"
 fi

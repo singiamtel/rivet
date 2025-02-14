@@ -64,7 +64,7 @@ stages:
     - autoreconf -i
     - cd $BUILD_PREFIX
     - if [[ "$ALLANAS" != "1" ]]; then ANAOPT="--disable-analyses"; fi
-    - CONF="./configure --prefix=$INSTALL_PREFIX $ANAOPT --with-yoda=$INSTALL_PREFIX --with-hepmc=/usr/local --with-fastjet=/usr/local $COVERAGE"
+    - CONF="./configure --prefix=$INSTALL_PREFIX $ANAOPT --with-yoda=$INSTALL_PREFIX --with-hepmc=/usr/local --with-fastjet=/usr/local $COVERAGE $EXTRA_CONFIGURE_ARGS"
     - if (echo $ARCH | grep -q hepmc3); then CONF=${CONF/with-hepmc/with-hepmc3}; fi
     - echo $CONF
     - $CONF
@@ -129,14 +129,40 @@ build_ubuntu_gcc_hepmc3_py3:
     COVERAGE: --enable-coverage
   <<: *build_template
 
+build_ubuntu_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-gcc-hepmc3-py3
+    EXTRA_CONFIGURE_ARGS: --with-yaml-cpp
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
+  <<: *build_template
+
 build_ubuntu_clang_hepmc3_py3:
   variables:
     ARCH: ubuntu-clang-hepmc3-py3
   <<: *build_template
 
+build_ubuntu_clang_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-clang-hepmc3-py3
+    EXTRA_CONFIGURE_ARGS: --with-yaml-cpp
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
+  <<: *build_template
+
 build_fedora_gcc_hepmc3_py3:
   variables:
     ARCH: fedora-gcc-hepmc3-py3
+  # rules:
+  #   if: $CI_PIPELINE_SOURCE == "schedule"
+  <<: *build_template
+
+build_fedora_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: fedora-gcc-hepmc3-py3
+    EXTRA_CONFIGURE_ARGS: --with-yaml-cpp
+  before_script:
+    - dnf install -y yaml-cpp-devel
   # rules:
   #   if: $CI_PIPELINE_SOURCE == "schedule"
   <<: *build_template
@@ -308,10 +334,26 @@ check_plugin_ubuntu_gcc_hepmc3_py3:
   needs: [build_ubuntu_gcc_hepmc3_py3, get_test_hepmc]
   <<: *check_plugin_template
 
+check_plugin_ubuntu_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-gcc-hepmc3-py3
+  needs: [build_ubuntu_gcc_hepmc3_py3_yaml_cpp, get_test_hepmc]
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
+  <<: *check_plugin_template
+
 check_plugin_ubuntu_clang_hepmc3_py3:
   variables:
     ARCH: ubuntu-clang-hepmc3-py3
   needs: [build_ubuntu_clang_hepmc3_py3, get_test_hepmc]
+  <<: *check_plugin_template
+
+check_plugin_ubuntu_clang_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-clang-hepmc3-py3
+  needs: [build_ubuntu_clang_hepmc3_py3_yaml_cpp, get_test_hepmc]
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
   <<: *check_plugin_template
 
 check_plugin_fedora_gcc_hepmc3_py3:
@@ -320,6 +362,16 @@ check_plugin_fedora_gcc_hepmc3_py3:
   # rules:
   #   if: $CI_PIPELINE_SOURCE == "schedule"
   needs: [build_fedora_gcc_hepmc3_py3, get_test_hepmc]
+  <<: *check_plugin_template
+
+check_plugin_fedora_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: fedora-gcc-hepmc3-py3
+  # rules:
+  #   if: $CI_PIPELINE_SOURCE == "schedule"
+  needs: [build_fedora_gcc_hepmc3_py3_yaml_cpp, get_test_hepmc]
+  before_script:
+    - dnf install -y yaml-cpp-devel
   <<: *check_plugin_template
 
 # check_plugin_ubuntu_intel_hepmc3_py3:
@@ -361,6 +413,16 @@ make_plots_ubuntu_gcc_hepmc3_py3:
   needs: [check_plugin_ubuntu_gcc_hepmc3_py3]
   <<: *make_plots_template
 
+make_plots_ubuntu_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-gcc-hepmc3-py3
+  rules:
+    if: $CI_PIPELINE_SOURCE == "schedule"
+  needs: [check_plugin_ubuntu_gcc_hepmc3_py3_yaml_cpp]
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
+  <<: *make_plots_template
+
 make_plots_ubuntu_clang_hepmc3_py3:
   variables:
     ARCH: ubuntu-clang-hepmc3-py3
@@ -369,12 +431,32 @@ make_plots_ubuntu_clang_hepmc3_py3:
   needs: [check_plugin_ubuntu_clang_hepmc3_py3]
   <<: *make_plots_template
 
+make_plots_ubuntu_clang_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-clang-hepmc3-py3
+  rules:
+    if: $CI_PIPELINE_SOURCE == "schedule"
+  needs: [check_plugin_ubuntu_clang_hepmc3_py3_yaml_cpp]
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
+  <<: *make_plots_template
+
 make_plots_fedora_gcc_hepmc3_py3:
   variables:
     ARCH: fedora-gcc-hepmc3-py3
   rules:
     if: $CI_PIPELINE_SOURCE == "schedule"
   needs: [check_plugin_fedora_gcc_hepmc3_py3]
+  <<: *make_plots_template
+
+make_plots_fedora_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: fedora-gcc-hepmc3-py3
+  rules:
+    if: $CI_PIPELINE_SOURCE == "schedule"
+  needs: [check_plugin_fedora_gcc_hepmc3_py3_yaml_cpp]
+  before_script:
+    - dnf install -y yaml-cpp-devel 
   <<: *make_plots_template
 
 # make_plots_ubuntu_intel_hepmc3_py3:
@@ -425,10 +507,26 @@ check_lwtnn_analyses_ubuntu_gcc_hepmc3_py3:
   needs: [build_ubuntu_gcc_hepmc3_py3, get_test_hepmc]
   <<: *check_lwtnn_analyses_template
 
+check_lwtnn_analyses_ubuntu_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-gcc-hepmc3-py3
+  needs: [build_ubuntu_gcc_hepmc3_py3_yaml_cpp, get_test_hepmc]
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
+  <<: *check_lwtnn_analyses_template
+
 check_lwtnn_analyses_fedora_gcc_hepmc3_py3:
   variables:
     ARCH: fedora-gcc-hepmc3-py3
   needs: [build_fedora_gcc_hepmc3_py3, get_test_hepmc]
+  <<: *check_lwtnn_analyses_template
+
+check_lwtnn_analyses_fedora_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: fedora-gcc-hepmc3-py3
+  needs: [build_fedora_gcc_hepmc3_py3_yaml_cpp, get_test_hepmc]
+  before_script:
+    - dnf install -y yaml-cpp-devel
   <<: *check_lwtnn_analyses_template
 
 # TODO - Mac version
@@ -469,8 +567,24 @@ check_onnx_analyses_ubuntu_gcc_hepmc3_py3:
   needs: [build_ubuntu_gcc_hepmc3_py3, get_test_hepmc]
   <<: *check_onnx_analyses_template
 
+check_onnx_analyses_ubuntu_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: ubuntu-gcc-hepmc3-py3
+  needs: [build_ubuntu_gcc_hepmc3_py3_yaml_cpp, get_test_hepmc]
+  before_script:
+    - apt-get update && apt-get install -y libyaml-cpp-dev
+  <<: *check_onnx_analyses_template
+
 check_onnx_analyses_fedora_gcc_hepmc3_py3:
   variables:
     ARCH: fedora-gcc-hepmc3-py3
   needs: [build_fedora_gcc_hepmc3_py3, get_test_hepmc]
+  <<: *check_onnx_analyses_template
+
+check_onnx_analyses_fedora_gcc_hepmc3_py3_yaml_cpp:
+  variables:
+    ARCH: fedora-gcc-hepmc3-py3
+  needs: [build_fedora_gcc_hepmc3_py3_yaml_cpp, get_test_hepmc]
+  before_script:
+    - dnf install -y yaml-cpp-devel
   <<: *check_onnx_analyses_template

@@ -286,11 +286,11 @@ tmpmakefile=$(mktemp Makefile.tmp.XXXXXXXXXX)
 cat > "$tmpmakefile" <<EOF
 RCXX = $mycxx
 
-RCXXFLAGS = $shared_flags $mycxxflags $rootcxxflags
+RCXXFLAGS = $shared_flags $mycxxflags $rootcxxflags @YAML_CPP_CXXFLAGS@
 
 RCPPFLAGS = $mycppflags
 
-RLDFLAGS = $myldflags $rootldflags
+RLDFLAGS = $myldflags $rootldflags @YAML_CPP_LDFLAGS@
 
 RLIBS = -lRivet
 
@@ -314,7 +314,7 @@ fi
 
 
 ## Show effective build command and run the (split) compilation
-effcmd="$mycxx -o \"$libname\" $shared_flags $mycppflags $CPPFLAGS $mycxxflags $rootcxxflags $CXXFLAGS $myldflags $rootldflags -lRivet $LDFLAGS $LIBS $sources $usercxxflags"
+effcmd="$mycxx -o \"$libname\" $shared_flags $mycppflags $CPPFLAGS $mycxxflags $rootcxxflags @YAML_CPP_CXXFLAGS@ $CXXFLAGS $myldflags $rootldflags @YAML_CPP_LDFLAGS@ -lRivet $LDFLAGS $LIBS $sources $usercxxflags"
 echo "$effcmd"
 if [[ -n $debug ]]; then
     echo "Contents of generated Makefile ($tmpmakefile):"

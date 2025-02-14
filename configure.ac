@@ -327,6 +327,38 @@ AM_CONDITIONAL(ENABLE_PDFMANUAL, [test x$enable_pdfmanual = xyes])
 AC_ARG_ENABLE([pdfmanual],
   [AS_HELP_STRING([--enable-pdfmanual],[backward compatility dummy flag, no effect and deprecated])], [], [])
 
+# Add support for --with-yaml-cpp
+AC_ARG_WITH([yaml-cpp],
+    [AS_HELP_STRING([--with-yaml-cpp=DIR], [Specify the yaml-cpp prefix path or leave it empty for /usr])],
+    [if test "x$withval" = "xyes"; then
+         yaml_cpp_prefix="/usr"
+     else
+         yaml_cpp_prefix="$withval"
+     fi],
+    [yaml_cpp_prefix="no"])
+# Check if the user provided a custom path for yaml-cpp or use default /usr
+YAML_CPP_CXXFLAGS=""
+YAML_CPP_LDFLAGs=""
+if test "x$yaml_cpp_prefix" != "xno"; then
+    YAML_CPP_CXXFLAGS="-I$yaml_cpp_prefix/include"
+    YAML_CPP_LDFLAGS="-L$yaml_cpp_prefix/lib -L$yaml_cpp_prefix/lib64 -lyaml-cpp"
+    AM_CXXFLAGS="$AM_CXXFLAGS $YAML_CPP_CXXFLAGS"
+    AM_LDFLAGS="$AM_LDFLAGS $YAML_CPP_LDFLAGS"
+    AC_CHECK_LIB([yaml-cpp], [main], ,
+        [AC_MSG_ERROR([yaml-cpp library not found in $yaml_cpp_prefix/lib or $yaml_cpp_prefix/lib64])])
+    AC_CHECK_HEADER([yaml-cpp/yaml.h], ,
+        [AC_MSG_ERROR([yaml-cpp headers not found in $yaml_cpp_prefix/include])])
+    AM_CONDITIONAL([WITH_YAML_CPP], [true])
+else
+    # Use the bundled yaml-cpp
+    AC_CONFIG_FILES([src/Core/yamlcpp/Makefile])
+    AM_CONDITIONAL([WITH_YAML_CPP], [false])
+fi
+# Substitute the variable
+AC_SUBST([YAML_CPP_LDFLAGS])
+AC_SUBST([YAML_CPP_CXXFLAGS])
+
+
 
 ## Build Doxygen documentation if possible
 AC_ARG_ENABLE([doxygen],
@@ -468,7 +500,7 @@ AC_EMPTY_SUBST
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_FILES(include/Makefile include/Rivet/Makefile)
 AC_CONFIG_FILES(src/Makefile)
-AC_CONFIG_FILES(src/Core/Makefile src/Core/yamlcpp/Makefile)
+AC_CONFIG_FILES(src/Core/Makefile)
 AC_CONFIG_FILES(src/Tools/Makefile)
 AC_CONFIG_FILES(src/Projections/Makefile)
 AC_CONFIG_FILES(src/AnalysisTools/Makefile)
