@@ -75,18 +75,16 @@ test -n "$tmp" && OUT="$OUT @RIVETCXXFLAGS@ @RIVETCPPFLAGS@"
 
 tmp=$( echo "$*" | grep -E -- '--\<cppflags\>')
 if test -n "$tmp"; then
-    irivet="@includedir@"
-    test -n "$irivet" && OUT="$OUT -I${irivet}"
-    ihepmc="@HEPMCINCPATH@"
-    test -n "$ihepmc" && OUT="$OUT -I${ihepmc}"
+    irivet="-I@includedir@"
+    test -n "$irivet" && OUT="$OUT ${irivet}"
+    ihepmc="-I@HEPMCINCPATH@"
+    test -n "$ihepmc" && OUT="$OUT ${ihepmc}"
     iyoda="@YODACPPFLAGS@"
     test -n "$iyoda" && OUT="$OUT ${iyoda}"
-    ifastjet="@FASTJETINCPATH@"
-    test -n "$ifastjet" && OUT="$OUT -I${ifastjet}"
+    ifastjet="@FASTJETCPPFLAGS@"
+    test -n "$ifastjet" && OUT="$OUT ${ifastjet}"
     ifjcontrib="@FJCONTRIBCPPFLAGS@"
     test -n "$ifjcontrib" && OUT="$OUT ${ifjcontrib}"
-    ih5="@HDF5_CPPFLAGS@"
-    test -n "$ih5" && OUT="$OUT ${ih5}"
 fi
 
 tmp=$( echo "$*" | grep -E -- '--\<ldflags\>|--\<libs\>')
@@ -97,14 +95,12 @@ if test -n "$tmp"; then
     test -n "$llibs" && OUT="$OUT ${llibs}"
     lldflags="@RIVETLDFLAGS@"
     test -n "$lldflags" && OUT="$OUT ${lldflags}"
-    lhepmc="@HEPMCLIBPATH@"
-    test -n "$lhepmc" && OUT="$OUT -L${lhepmc} @HEPMCLIBNAME@"
-    lyoda="@YODALIBPATH@"
-    test -n "$lyoda" && OUT="$OUT -L${lyoda} -lYODA"
+    lhepmc="-L@HEPMCLIBPATH@ @HEPMCLIBNAME@"
+    test -n "$lhepmc" && OUT="$OUT ${lhepmc}"
+    lyoda="@YODALDFLAGS@ @YODALIBS@"
+    test -n "$lyoda" && OUT="$OUT ${lyoda}"
     lfastjet="@FASTJETLIBADD@"
     test -n "$lfastjet" && OUT="$OUT ${lfastjet}"
-    lh5="@HDF5_LDFLAGS@ @HDF5_LIBS@"
-    test -n "$lh5" && OUT="$OUT ${lh5}"
 fi
 
 tmp=$( echo "$*" | grep -E -- '--\<libs\>|--\<ldadd\>')
