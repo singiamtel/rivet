@@ -1,3 +1,8 @@
+2025-02-14  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Fix removed HDF5 variable expansion in rivet-config, and improve
+	terms reported for YODA (which provides HDF5) and FastJet.
+
 2025-02-09  Christian Gutschow  <chris.g@cern.ch>
 
 	* Release 4.0.3
