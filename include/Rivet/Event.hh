@@ -112,9 +112,21 @@ namespace Rivet {
     }
 
     /// @brief The generation weights associated with the event
+    ///
+    /// This vector contains only the weights selected by the AnalysisHandler,
+    /// so is of constant length for all events.
+    ///
+    /// @note Excluded generation weights, and their associated weight names
+    /// if set, can be accessed via the GenEvent pointer hepmcEventPtr().
     std::valarray<double> weights() const;
 
     /// @brief The generation cross-sections associated with the event
+    ///
+    /// This vector contains only the cross-sections selected by the AnalysisHandler,
+    /// so is of constant length for all events.
+    ///
+    /// @note Excluded cross-sections, and their associated names if set,
+    /// can be accessed via the GenEvent pointer hepmcEventPtr().
     std::vector<std::pair<double, double>> crossSections() const;
 
     /// @}
