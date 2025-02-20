@@ -5,6 +5,7 @@
 namespace Rivet {
 
 
+  /// @brief Azimuthal ordering of charged hadrons
   class ATLAS_2012_I1091481 : public Analysis {
   public:
 
@@ -22,7 +23,7 @@ namespace Rivet {
       for (double eVal : allowedEnergies()) {
         const string en = toString(int(eVal));
         if (isCompatibleWithSqrtS(eVal))  _sqs = en;
-        size_t ih = bool(en == "7000") + 1;
+        size_t ih = bool(en == "900") + 1;
 
         book(_h[en+"E_10_100"], ih, 1, 1);
         book(_h[en+"E_1_100"],  ih, 1, 2);
@@ -115,21 +116,21 @@ namespace Rivet {
       if (ptmax > 10.0) vetoEvent;
 
       // Fill the pt>100, pTmax<10 GeV histos
-      fillS(_h["E_10_100"],   part100, true);
-      fillS(_h["eta_10_100"], part100, false);
+      fillS(_h[_sqs+"E_10_100"],   part100, true);
+      fillS(_h[_sqs+"eta_10_100"], part100, false);
       _c[_sqs+"inclusive"]->fill();
 
       // Fill the pt>100, pTmax<1 GeV histos
       if (ptmax < 1.0) {
-        fillS(_h["E_1_100"],   part100, true);
-        fillS(_h["eta_1_100"], part100, false);
+        fillS(_h[_sqs+"E_1_100"],   part100, true);
+        fillS(_h[_sqs+"eta_1_100"], part100, false);
         _c[_sqs+"lowPt"]->fill();
       }
 
       // Fill the pt>500, pTmax<10 GeV histos
       if (part500.size() > 10) {
-        fillS(_h["E_10_500"],   part500, true );
-        fillS(_h["eta_10_500"], part500, false);
+        fillS(_h[_sqs+"E_10_500"],   part500, true );
+        fillS(_h[_sqs+"eta_10_500"], part500, false);
         _c[_sqs+"pt500"]->fill();
       }
     }

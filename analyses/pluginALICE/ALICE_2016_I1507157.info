@@ -47,6 +47,5 @@ BibTeX: '%%% contains utf-8, see: http://inspirehep.net/info/faq/general#utf8
       reportNumber   = "CERN-EP-2016-322",
       SLACcitation   = "%%CITATION = ARXIV:1612.08975;%%"
 }'
-ToDo:
- - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
-
+ReleaseTests:
+ - $A LHC-7-MinBias
