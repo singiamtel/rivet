@@ -12,7 +12,7 @@ safely on shared computing systems, unless run in [rootless mode](https://docs.d
 This issue may also be avoided by converting the Docker image to an [Apptainer](https://apptainer.org/) image
 for use on HPC clusters that support Apptainer, but our images were not specifically designed
 for Apptainer compatibility and this may require some customisation. We recommend [native
-installation](../installation.md) for production use on HPC facilities, e.g. via
+installation](installation.md) for production use on HPC facilities, e.g. via
 the `rivet-bootstrap` script.*
 
 
