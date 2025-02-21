@@ -22,6 +22,11 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
+      // get option
+      _mode = 0;
+      if ( getOption("LMODE") == "EL" )  _mode = 1;
+      if ( getOption("LMODE") == "MU" )  _mode = 2;
+
       // Prompt photons
       const PromptFinalState photon_fs(Cuts::abspid == PID::PHOTON && Cuts::pT > 30*GeV && Cuts::abseta < 2.37);
       declare(photon_fs, "Photons");
@@ -47,12 +52,12 @@ namespace Rivet {
       declare(vfs, "isolatedFS");
 
       // Histograms
-      book(_hist_EgammaT,     2, 1, 1); // dSigma / dE^gamma_T
-      book(_hist_etagamma,    3, 1, 1);
-      book(_hist_mZgamma,     4, 1, 1); // dSigma / dm^{Zgamma}
-      book(_hist_EZgammaT,    5, 1, 1);
-      book(_hist_dPhiZgamma,  6, 1, 1);
-      book(_hist_ETbyMZgamma, 7, 1, 1);
+      book(_h["EgammaT"],     2, 1, 1); // dSigma / dE^gamma_T
+      book(_h["etagamma"],    3, 1, 1);
+      book(_h["mZgamma"],     4, 1, 1); // dSigma / dm^{Zgamma}
+      book(_h["EZgammaT"],    5, 1, 1);
+      book(_h["dPhiZgamma"],  6, 1, 1);
+      book(_h["ETbyMZgamma"], 7, 1, 1);
     }
 
 
@@ -65,6 +70,10 @@ namespace Rivet {
 
      if (photons.empty())  vetoEvent;
      if (electrons.size() < 2 && muons.size() < 2)  vetoEvent;
+
+     if (_mode == 1 && muons.size())      vetoEvent;
+     if (_mode == 2 && electrons.size())  vetoEvent;
+
      Particles lep;
      // Sort the dressed leptons by pt
      if (electrons.size() >= 2) {
@@ -100,24 +109,21 @@ namespace Rivet {
      double dphilly = deltaPhi((lep[0].momentum() + lep[1].momentum()).phi(), selectedPh[0].momentum().phi());
 
      // Fill plots
-     _hist_EgammaT->fill(selectedPh[0].pT()/GeV);
-     _hist_etagamma->fill(selectedPh[0].abseta());
-     _hist_mZgamma->fill(mlly/GeV);
-     _hist_EZgammaT->fill(ptlly/GeV);
-     _hist_dPhiZgamma->fill(dphilly/pi);
-     _hist_ETbyMZgamma->fill(ptlly/mlly);
+     _h["EgammaT"]->fill(selectedPh[0].pT()/GeV);
+     _h["etagamma"]->fill(selectedPh[0].abseta());
+     _h["mZgamma"]->fill(mlly/GeV);
+     _h["EZgammaT"]->fill(ptlly/GeV);
+     _h["dPhiZgamma"]->fill(dphilly/pi);
+     _h["ETbyMZgamma"]->fill(ptlly/mlly);
    }
 
 
    /// Normalise histograms etc., after the run
    void finalize() {
-      const double sf = crossSection()/femtobarn/sumOfWeights();
-      scale(_hist_EgammaT, sf);
-      scale(_hist_etagamma, sf);
-      scale(_hist_mZgamma, sf);
-      scale(_hist_EZgammaT, sf);
-      scale(_hist_dPhiZgamma, sf/pi);
-      scale(_hist_ETbyMZgamma, sf);
+      double sf = crossSection()/femtobarn/sumOfWeights();
+      if (_mode == 0)  sf *= 0.5;
+      scale(_h, sf);
+      scale(_h["dPhiZgamma"], 1.0/pi);
    }
 
    /// @}
@@ -125,16 +131,11 @@ namespace Rivet {
 
   private:
 
-    // /// Mode flag
-    // size_t _mode;
+    /// Mode flag
+    size_t _mode;
 
     /// Histograms
-    Histo1DPtr _hist_EgammaT;
-    Histo1DPtr _hist_etagamma;
-    Histo1DPtr _hist_mZgamma;
-    Histo1DPtr _hist_EZgammaT;
-    Histo1DPtr _hist_dPhiZgamma;
-    Histo1DPtr _hist_ETbyMZgamma;
+    map<string,Histo1DPtr> _h;
 
   };
 
