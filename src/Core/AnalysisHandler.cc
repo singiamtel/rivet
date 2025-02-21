@@ -639,7 +639,10 @@ namespace Rivet {
     // update Ntrials heuristic calculation
     const double ntrials = _ntrials + safediv(_fileCounter.get()->persistent(defaultWeightIndex())->sumW(),
                                               _xs.get()->persistent(defaultWeightIndex())->val());
-    if (ntrials != 0.) {
+    if (notNaN(_userxs.first)) { // user provided a custom cross-section
+      setCrossSection(_userxs, true);
+    }
+    else if (ntrials != 0.) {
       const double nFiles = _xserr.get()->persistent(defaultWeightIndex())->numEntries() + 1.0;
       for (size_t iW = 0; iW < numWeights(); ++iW) {
         const double sumw  = _eventCounter.get()->persistent(iW)->sumW();
