@@ -45,3 +45,6 @@ BibTeX: '@article{:2012fa,
       reportNumber   = "CERN-PH-EP-2011-197",
       SLACcitation   = "%%CITATION = ARXIV:1203.0419;%%",
 }'
+ReleaseTests:
+ - $A LHC-7-MinBias
+ - $A-2 LHC-900-UE-Long
