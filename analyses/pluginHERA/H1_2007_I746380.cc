@@ -434,8 +434,8 @@ namespace Rivet {
       for (int i = 0; i < 2; ++i) jets[i].transformBy(hcmboost.inverse());
       double etaLabJet1 = dir * jets[0].eta();
       double etaLabJet2 = dir * jets[1].eta();
-      double etaMin     = (isDIS) ? -3. : -1.;
-      double etaMax     = (isDIS) ? 0. : 2.;
+      double etaMin     = (isDIS) ? 0. : -1.;
+      double etaMax     = (isDIS) ? 3. : 2.;
       double eta1       = (isDIS) ? etaXCMJet1 : etaLabJet1;
       double eta2       = (isDIS) ? etaXCMJet2 : etaLabJet2;
       if (!inRange(eta1, etaMin, etaMax)) vetoEvent;

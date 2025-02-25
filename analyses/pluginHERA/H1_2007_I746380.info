@@ -47,4 +47,5 @@ BibTeX: '@article{Aktas:2007hn,
 
 ReleaseTests:
  - $A HERA-I-GammaP-Gap
+ - $A-2 HERA-I-ddis
 
