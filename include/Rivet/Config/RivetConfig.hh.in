@@ -35,4 +35,7 @@
 /* Define to 1 if you have HDF5 support. */
 #undef HAVE_H5
 
+/* Defined if YODA uses bundled HighFive */
+#undef WITH_YODA_HIGHFIVE
+
 #endif
