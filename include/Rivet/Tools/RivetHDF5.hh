@@ -3,7 +3,14 @@
 #define RIVET_RivetHDF5_HH
 #include "Rivet/Config/RivetCommon.hh"
 #include "Rivet/Tools/RivetPaths.hh"
+
+#include "Rivet/Config/RivetConfig.hh"
+#ifdef WITH_YODA_HIGHFIVE
 #include "YODA/highfive/H5File.hpp"
+#else
+#include "highfive/H5File.hpp"
+#define YODA_H5 HighFive
+#endif
 
 namespace Rivet {
   namespace H5 {

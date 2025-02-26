@@ -240,8 +240,28 @@ AC_ARG_ENABLE([h5], [AS_HELP_STRING([--disable-h5],[disable H5 extension  @<:@de
 if test "x$with_h5" = "xyes"; then
   oldCPPFLAGS=$CPPFLAGS
   CPPFLAGS="$CPPFLAGS $YODACPPFLAGS"
-  AC_CHECK_HEADER([YODA/highfive/H5Version.hpp], [], [AC_MSG_ERROR([YODA configured without HDF5 support!])])
+  AC_COMPILE_IFELSE(
+    [AC_LANG_PROGRAM(
+        [[#include "YODA/Config/BuildConfig.h"]],
+        [[#ifndef HAVE_HDF5
+          #error "HAVE_HDF5 not defined"
+          #endif]]
+    )],
+    [],
+    [AC_MSG_ERROR([YODA configured without HDF5 support!])]
+  )
+  AC_COMPILE_IFELSE(
+    [AC_LANG_PROGRAM(
+        [[#include "YODA/Config/BuildConfig.h"]],
+        [[#ifndef WITH_HIGHFIVE
+          #error "WITH_HIGHFIVE not defined"
+          #endif]]
+    )],
+    [AC_DEFINE([WITH_YODA_HIGHFIVE], [1], [Defined if YODA uses bundled HighFive])],
+    [AC_MSG_NOTICE([YODA uses external HighFive])]
+  )
   CPPFLAGS=$oldCPPFLAGS
+  AC_DEFINE_UNQUOTED(HAVE_H5, 1, "Define to 1 if you have HDF5 support.")
   AC_MSG_NOTICE([Building extra HDF5 compatibility tools])
 else
   AC_MSG_NOTICE([Not building extra HDF5 compatibility tools])
