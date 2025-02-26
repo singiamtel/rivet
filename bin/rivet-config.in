@@ -85,7 +85,7 @@ if test -n "$tmp"; then
     test -n "$ifastjet" && OUT="$OUT ${ifastjet}"
     ifjcontrib="@FJCONTRIBCPPFLAGS@"
     test -n "$ifjcontrib" && OUT="$OUT ${ifjcontrib}"
-    iyamlcpp="@YAML_CPP_CXXFLAGS@"
+    iyamlcpp="@YAML_CPP_CPPFLAGS@"
     test -n "$iyamlcpp" && OUT="$OUT ${iyamlcpp}"
 fi
 

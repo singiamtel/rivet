@@ -357,13 +357,11 @@ AC_ARG_WITH([yaml-cpp],
      fi],
     [yaml_cpp_prefix="no"])
 # Check if the user provided a custom path for yaml-cpp or use default /usr
-YAML_CPP_CXXFLAGS=""
+YAML_CPP_CPPFLAGS=""
 YAML_CPP_LDFLAGs=""
 if test "x$yaml_cpp_prefix" != "xno"; then
-    YAML_CPP_CXXFLAGS="-I$yaml_cpp_prefix/include"
+    YAML_CPP_CPPFLAGS="-I$yaml_cpp_prefix/include"
     YAML_CPP_LDFLAGS="-L$yaml_cpp_prefix/lib -L$yaml_cpp_prefix/lib64 -lyaml-cpp"
-    AM_CXXFLAGS="$AM_CXXFLAGS $YAML_CPP_CXXFLAGS"
-    AM_LDFLAGS="$AM_LDFLAGS $YAML_CPP_LDFLAGS"
     AC_CHECK_LIB([yaml-cpp], [main], ,
         [AC_MSG_ERROR([yaml-cpp library not found in $yaml_cpp_prefix/lib or $yaml_cpp_prefix/lib64])])
     AC_CHECK_HEADER([yaml-cpp/yaml.h], ,
@@ -376,7 +374,7 @@ else
 fi
 # Substitute the variable
 AC_SUBST([YAML_CPP_LDFLAGS])
-AC_SUBST([YAML_CPP_CXXFLAGS])
+AC_SUBST([YAML_CPP_CPPFLAGS])
 
 
 
@@ -459,6 +457,8 @@ AM_CPPFLAGS="$AM_CPPFLAGS \$(RIVETCPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(YODACPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS -I\$(HEPMC3INCPATH)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(FASTJETCPPFLAGS) \$(FJCONTRIBCPPFLAGS)"
+AM_CPPFLAGS="$AM_CPPFLAGS \$(YAML_CPP_CPPFLAGS)"
+AM_LDFLAGS="$AM_LDFLAGS \$(YAML_CPP_LDFLAGS)"
 AC_CEDAR_CHECKCXXFLAG([-pedantic], [AM_CXXFLAGS="$AM_CXXFLAGS -pedantic"])
 AC_CEDAR_CHECKCXXFLAG([-Wall], [AM_CXXFLAGS="$AM_CXXFLAGS -Wall"])
 AC_CEDAR_CHECKCXXFLAG([-Wunused-variable], [AM_CXXFLAGS="$AM_CXXFLAGS -Wunused-variable"])

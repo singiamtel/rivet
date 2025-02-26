@@ -25,7 +25,7 @@ if not os.path.isfile(srcpath): # distcheck has it in srcdir
 ## Include args
 incargs = " ".join("-I{}".format(d) for d in incdirs)
 incargs += " -I@prefix@/include"
-incargs += " @HEPMC3CPPFLAGS@ @FASTJETCPPFLAGS@ @YODACPPFLAGS@"
+incargs += " @HEPMC3CPPFLAGS@ @FASTJETCPPFLAGS@ @YODACPPFLAGS@ @YAML_CPP_CPPFLAGS@"
 incargs += " @CPPFLAGS@"
 incargs += " -I" + sysconfig.get_config_var("INCLUDEPY")
 
@@ -43,7 +43,7 @@ linkargs += " @LDFLAGS@"
 ## Library args
 libraries = ["HepMC3", "fastjet", "Rivet"]
 libargs = " ".join("-l{}".format(l) for l in libraries)
-libargs += " @YODALIBS@"
+libargs += " @YODALIBS@ @YAML_CPP_LDFLAGS@"
 
 # print("\n")
 # print("CONFIG VARS")
