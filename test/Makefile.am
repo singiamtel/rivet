@@ -1,4 +1,7 @@
-check_PROGRAMS = testMath testMatVec testCmp testAPI testNaN testBeams testMerging
+check_PROGRAMS = \
+testMath testMatVec testCmp \
+testAPI testYODA testHistoGroup \
+testAnalysis testNaN testBeams testMerging
 
 AM_LDFLAGS = -L$(top_srcdir)/src $(YAMLCPP_LDFLAGS) -L$(YODALIBPATH)
 if WITH_OSX
@@ -16,6 +19,12 @@ testCmp_SOURCES = testCmp.cc
 testCmp_LDADD = $(TEST_LDADD)
 testAPI_SOURCES = testAPI.cc
 testAPI_LDADD = $(TEST_LDADD)
+testYODA_SOURCES = testYODA.cc
+testYODA_LDADD = $(TEST_LDADD)
+testHistoGroup_SOURCES = testHistoGroup.cc
+testHistoGroup_LDADD = $(TEST_LDADD)
+testAnalysis_SOURCES = testAnalysis.cc
+testAnalysis_LDADD = $(TEST_LDADD)
 testNaN_SOURCES = testNaN.cc
 testNaN_LDADD = $(TEST_LDADD)
 testBeams_SOURCES = testBeams.cc
@@ -37,7 +46,9 @@ TESTS_ENVIRONMENT = \
   RIVET_TESTS_SRC=$(srcdir)
 
 TESTS = \
-testMath testMatVec testCmp testAPI.sh testNaN.sh testBeams testMerging.sh
+testMath testMatVec testCmp \
+testAPI.sh testYODA testHistoGroup \
+testAnalysis testNaN.sh testBeams testMerging.sh
 
 if ENABLE_PYEXT
 TESTS += testImport.sh
@@ -49,7 +60,9 @@ TESTS += testCmdLine.sh
 endif
 endif
 
-EXTRA_DIST = testAPI.hepmc testCmdLine.sh testImport.sh testAPI.sh testMerging.sh testNaN.sh
+EXTRA_DIST = \
+testAPI.hepmc testCmdLine.sh testImport.sh \
+testAPI.sh testMerging.sh testNaN.sh
 
 if CODE_COVERAGE_ENABLED
   AM_LIBS = $(CODE_COVERAGE_LIBS)

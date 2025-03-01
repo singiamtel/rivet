@@ -97,6 +97,9 @@ test/*.trs
 test/testMatVec
 test/testMath
 test/testBeams
+test/testAnalysis
+test/testYODA
+test/testHistoGroup
 dev
 devval
 newanalyses

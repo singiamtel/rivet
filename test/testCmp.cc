@@ -10,6 +10,9 @@ int main() {
 
   CmpState cs = CmpState::UNDEF;
 
+  cout << "cmp() = " << cs << '\n';
+  assert(cs == CmpState::UNDEF);
+
   cs = cmp(0.5, 0.6);
   cout << "cmp(0.5, 0.6) = " << cs << '\n';
   assert(cs == CmpState::NEQ);
