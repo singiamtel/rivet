@@ -1,0 +1,33 @@
+Year: 1234
+Summary: Dummy info file
+Experiment: DUMMYEX
+Collider: DUMMYCOLLIDER
+InspireID: 1234567
+SpiresID: 98765
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Grogu <your@email.address>
+References:
+ - 'Dummy reference'
+RunInfo: Dummy run info
+#Beams: [p+, p+]
+#Energies: [[6500,6500]]
+Luminosity_fb: 123.0
+Description:
+  'Dummy description.'
+RefMatch: 'x01'
+RefUnmatch: 'y01'
+WriterDoublePrecision: 'z01'
+Keywords: ['key1']
+Warning: 'dummy warning'
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+BibKey: dummy
+BibTeX: 'Dummy citation.'
+ReleaseTests:
+ - $A DUMMY
+ToDo:
+ - dummy todo

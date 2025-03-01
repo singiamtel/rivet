@@ -33,13 +33,14 @@ cov-report:
 
 cov-reset:
 	@rm -fr $(REPORTDIR)/html $(REPORT)
-	@find . \( -name "*.gcda" -o -name "*.gcno" \) -exec rm {} \;
+	@find . -name "*.gcda" -exec rm {} \;
 
 check:
 	@make cov-report
 
 clean-local:
 	@make cov-reset
+	@find . -name "*.gcno" -exec rm {} \;
 	@rm -rf a.out
 
 else

@@ -1,5 +1,5 @@
 # BEGIN PLOT /H1_2007_I746380/d01-x01-y01
-Title= DIS
+Title=DIS
 YLabel=$\mathrm{d}\sigma / \mathrm{d} z_{\mathbb{P}}$
 XLabel=$z_{\mathbb{P}}$
 LogY=0
@@ -8,7 +8,7 @@ RatioPlotYMax=2.2
 # END PLOT
 
 # BEGIN PLOT /H1_2007_I746380/d02-x01-y01
-Title= DIS
+Title=DIS
 YLabel=$\mathrm{d}\sigma / \mathrm{d} \mathrm{log}_{10}x_{\mathbb{P}}$
 XLabel=$\mathrm{log}_{10}x_{\mathbb{P}}$
 LogY=0
@@ -17,27 +17,28 @@ RatioPlotYMax=2.2
 # END PLOT
 
 # BEGIN PLOT /H1_2007_I746380/d03-x01-y01
-Title= DIS
+Title=DIS
 YLabel=$\mathrm{d}\sigma / \mathrm{d} W$
-XLabel=$W$
+XLabel=$W$ [GeV]
 LogY=0
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
 # END PLOT
 
 # BEGIN PLOT /H1_2007_I746380/d04-x01-y01
-Title= DIS
+Title=DIS
 YLabel=$\mathrm{d}\sigma / \mathrm{d} Q^2$
-XLabel=$Q^2$
+XLabel=$Q^2$ [GeV$^2$]
 LogY=0
+LogX=1
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
 # END PLOT
 
 # BEGIN PLOT /H1_2007_I746380/d05-x01-y01
-Title= DIS
+Title=DIS
 YLabel=$\mathrm{d}\sigma / \mathrm{d} E_T^{*\,\mathrm{jet\,1}}$
-XLabel=$E_T^{*\,\mathrm{jet\,1}}$
+XLabel=$E_T^{*\,\mathrm{jet\,1}}$ [GeV]
 LogY=0
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
@@ -45,8 +46,8 @@ RatioPlotYMax=2.2
 
 # BEGIN PLOT /H1_2007_I746380/d06-x01-y01
 Title=DIS
-YLabel=$\mathrm{d}\sigma / \mathrm{d}<\eta_{\mathrm{jet}}^{\mathrm{lab}}>$
-XLabel=$<\eta_{\mathrm{jet}}^{\mathrm{lab}}>$
+YLabel=$\mathrm{d}\sigma / \mathrm{d}\left<\eta_{\mathrm{jet}}^{\mathrm{lab}}\right>$
+XLabel=$\left<\eta_{\mathrm{jet}}^{\mathrm{lab}}\right>$
 LogY=0
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
@@ -89,27 +90,27 @@ RatioPlotYMax=2.2
 # END PLOT
 
 # BEGIN PLOT /H1_2007_I746380/d11-x01-y01
-Title= Photoproduction
+Title=Photoproduction
 YLabel=$\mathrm{d}\sigma / \mathrm{d} W$
-XLabel=$W$
+XLabel=$W$ [GeV]
 LogY=0
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
 # END PLOT
 
 # BEGIN PLOT /H1_2007_I746380/d12-x01-y01
-Title= Photoproduction
+Title=Photoproduction
 YLabel=$\mathrm{d}\sigma / \mathrm{d} E_T^{*\,\mathrm{jet\,1}}$
-XLabel=$E_T^{*\,\mathrm{jet\,1}}$
+XLabel=$E_T^{*\,\mathrm{jet\,1}}$ [GeV]
 LogY=1
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
 # END PLOT
 
 # BEGIN PLOT /H1_2007_I746380/d13-x01-y01
-Title= Photoproduction
+Title=Photoproduction
 YLabel=$\mathrm{d}\sigma / \mathrm{d}<\eta_{\mathrm{jet}}^{\mathrm{lab}}>$
-XLabel=$<\eta_{\mathrm{jet}}^{\mathrm{lab}}>$
+XLabel=$\left<\eta_{\mathrm{jet}}^{\mathrm{lab}}\right>$
 LogY=0
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
@@ -127,17 +128,8 @@ RatioPlotYMax=2.2
 # BEGIN PLOT /H1_2007_I746380/d15-x01-y01
 Title=Photoproduction
 YLabel=$\mathrm{d}\sigma / \mathrm{d}M_{12}$
-XLabel=$M_{12}$
+XLabel=$M_{12}$ [GeV$^2$]
 LogY=0
 RatioPlotYMin=0.1
 RatioPlotYMax=2.2
 # END PLOT
-
-# ... add more histograms as you need them ...
-# BEGIN PLOT /H1_2007_I746380/d01-x01-y01
-#Title=[Uncomment and insert title for histogram d01-x01-y01 here]
-#XLabel=[Uncomment and insert x-axis label for histogram d01-x01-y01 here]
-#YLabel=[Uncomment and insert y-axis label for histogram d01-x01-y01 here]
-# END PLOT
-
-# ... add more histograms as you need them ...

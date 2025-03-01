@@ -50,4 +50,5 @@ BibTeX: '@Article{Andreev:2015cwa,
 
 ReleaseTests:
  - $A HERA-II-GammaP-Gap
+ - $A-2 HERA-II-ddis
 
