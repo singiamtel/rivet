@@ -29,9 +29,6 @@ namespace Rivet {
       const FastJets jets(fs, JetAlg::Algo::ANTIKT, 0.4);
       declare(jets, "Jets");
 
-      // Histograms
-      // book(_s_cutflow, "cutflow");
-
       // Cut-flows
       book(_cutflows, {"JetLep", "DiBjet"}, {{"Jets", "Nlep", "pTlep1", "yLep1"},
                                              {"Jets", "0Lep", "2Jet", "Nbjets"}});
@@ -77,7 +74,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(EXAMPLE_CUTFLOW);
 
 }

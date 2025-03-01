@@ -21,14 +21,19 @@ namespace Rivet {
       // Set the detector-smearing family
       setDetSmearing(ATLAS_RUN2, MV2C20);
 
+      // Book cutflow
+      book(_cutflow, "cutflow", {"MET", "BJets", "1Lep+2BJet100"});
+
       // Book histograms
       book(_h["ne"], "num_elec", 7, -0.5, 6.5);
       book(_h["nm"], "num_muon", 7, -0.5, 6.5);
       book(_h["nt"], "num_tau", 7, -0.5, 6.5);
       book(_h["ny"], "num_photon", 7, -0.5, 6.5);
       book(_h["njb"], "num_bjet", 7, -0.5, 6.5);
-      book(_h["ptjb1"], "pt_bjet1", 20, 30, 200);
-      book(_h["ptl1"], "pt_lep1", 20, 20, 200);
+      book(_h["ptjb1"], "pt_bjet1", logspace(20, 30, 1000));
+      book(_h["ptl1"], "pt_lep1", logspace(20, 20, 1000));
+      book(_h["met"], "met", logspace(20, 1, 1000));
+      book(_h["met_signf"], "met_signf", logspace(20, 0.01, 100));
       // Book counter
       book(_c["npass"], "count_pass");
     }
@@ -36,9 +41,16 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      /// @todo Automate / build-in the cutflow
+      _cutflow->fillinit();
+
+      // Study MET
+      _h["met"]->fill(met()/GeV);
+      _h["met_signf"]->fill(metSignf());
 
       // Apply a missing-momentum cut
-      if (met().mod() < 100*GeV) vetoEvent;
+      if (met() < 100*GeV) vetoEvent;
+      _cutflow->fillnext();
 
       // Run the overlap removal (see the SimpleAnalysis base class for some info)
       doSimpleOverlapRemoval();
@@ -54,6 +66,7 @@ namespace Rivet {
       // Veto event if there are no b-jets (example eta cut to fully contain a 0.4 jet in the tracker)
       const Jets jbs = bjets(Cuts::pT > 30*GeV && Cuts::abseta < 2.1);
       if (jbs.empty()) vetoEvent;
+      _cutflow->fillnext();
 
       // Get electrons or muons and require one to three of them
       const Particles leps =
@@ -71,6 +84,7 @@ namespace Rivet {
 
       // Fill counter for (made-up) signal-region passes
       if (leps.size() != 1 && bjets(Cuts::pT > 100*GeV).size() == 2) {
+        _cutflow->fillnext();
         _c["npass"]->fill();
       }
     }
@@ -80,15 +94,17 @@ namespace Rivet {
     void finalize() {
       normalize(_h); // normalize to unity
       scaleToIntLumi(_c, 300/femtobarn); // normalize to 300/fb
+      MSG_INFO(_cutflow);
     }
 
     /// @}
 
 
-    /// @name Histograms
+    /// @name Histograms and cutflow
     /// @{
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> _c;
+    CutflowPtr _cutflow;
     /// @}
 
   };

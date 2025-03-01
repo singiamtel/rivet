@@ -33,6 +33,11 @@ namespace Rivet {
     /// The vector-summed missing transverse momentum in the event.
     double missingPt() const { return vectorPt().mod(); }
 
+    /// The scalar-summed visible transverse momentum in the event.
+    virtual double scalarPt() const = 0;
+    /// Alias for scalarPt
+    double scalarSumPt() const { return scalarPt(); }
+
     /// @}
 
 
@@ -52,9 +57,16 @@ namespace Rivet {
     const Vector3 vectorMET() const { return vectorMissingEt(); }
 
     /// The vector-summed missing transverse energy in the event.
-    double missingEt() const { return vectorEt().mod(); }
+    double missingEt() const { return vectorMissingEt().mod(); }
     /// Alias for missingEt
     double met() const { return missingEt(); }
+
+    /// The scalar-summed visible transverse energy in the event.
+    virtual double scalarEt() const = 0;
+    /// Alias for scalarEt
+    double scalarSumEt() const { return scalarEt(); }
+    /// Alias for scalarSumEt
+    double set() const { return scalarEt(); }
 
     /// @}
 

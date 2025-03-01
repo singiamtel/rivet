@@ -2,6 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/TauFinder.hh"
 #include "Rivet/Projections/SmearedJets.hh"
@@ -27,10 +28,12 @@ namespace Rivet {
       MissingMomentum mm(Cuts::abseta < 5);
       declare(mm, "MET0");
 
-      SmearedMET smm1(mm, MET_SMEAR_ATLAS_RUN2);
+      SmearedMET smm1(mm, MET_SMEARPARAMS_ATLAS_RUN2); //< smear-params functor
+      // SmearedMET smm1(mm, MET_SMEAR_ATLAS_RUN2); //< smear functor
+      // SmearedMET smm1(mm, MET_SMEARPARAMS_ATLAS_RUN2, MET_SMEAR_ATLAS_RUN2); //< both functors
       declare(smm1, "MET1");
 
-      SmearedMET smm2(mm, [](const Vector3& met, double){ return P3_SMEAR_LEN_GAUSS(met, 0.1*met.mod()); });
+      SmearedMET smm2(mm, [](const Vector3& met, double){ return METSmearParams{met, 0.1*met.mod(), 0.0}; });
       declare(smm2, "MET2");
 
 
@@ -51,20 +54,18 @@ namespace Rivet {
                       JET_EFF_CONST(0.8));
       declare(sj3, "Jets3");
 
-      // Different smearing/efficiency functor can
-      // be chained in a specifc sequence if need be
       SmearedJets sj4(fj,
                       JET_BTAG_EFFS(0.7, 0.1, 0.01),
                       JET_CTAG_PERFECT,
                       JET_SMEAR_IDENTITY,
                       JET_EFF_CONST(0.8),
                       JET_SMEAR_ATLAS_RUN2,
-                      JET_EFF_CONST(0.9));
+                      JET_EFF_CONST(0.9)); //< functors can be chained in a specific sequence
+
       declare(sj4, "Jets4");
 
 
       IdentifiedFinalState photons(Cuts::abseta < 5, PID::PHOTON);
-
 
       IdentifiedFinalState truthelectrons(Cuts::abseta < 5 && Cuts::pT > 10*GeV, {{PID::ELECTRON, PID::POSITRON}});
       declare(truthelectrons, "Electrons0");
@@ -84,10 +85,12 @@ namespace Rivet {
       declare(truthtaus, "Taus0");
       LeptonFinder dressedtaus(truthtaus, photons, 0.2);
       declare(dressedtaus, "Taus1");
+      // Actually it's an interesting question how to best-define a truth-level tau and what is to be smeared...
       SmearedParticles recotaus(dressedtaus, TAU_EFF_ATLAS_RUN2, TAU_SMEAR_ATLAS_RUN2);
       declare(recotaus, "Taus2");
 
 
+      // Histograms
       book(_h_met_true ,"met_true", 30, 0.0, 120);
       book(_h_met_reco ,"met_reco", 30, 0.0, 120);
 
@@ -123,14 +126,12 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const double weight = 1.0;
-
-      const Vector3 met0 = apply<MissingMomentum>(event, "MET0").vectorEt();
-      const Vector3 met1 = apply<SmearedMET>(event, "MET1").vectorEt();
-      const Vector3 met2 = apply<SmearedMET>(event, "MET2").vectorEt();
+      const Vector3 met0 = apply<METFinder>(event, "MET0").vectorEt();
+      const Vector3 met1 = apply<METFinder>(event, "MET1").vectorEt();
+      const Vector3 met2 = apply<METFinder>(event, "MET2").vectorEt();
       MSG_DEBUG("MET = " << met0.mod()/GeV << ", " << met1.mod()/GeV << ", " << met2.mod()/GeV << " GeV");
-      _h_met_true->fill(met0.mod()/GeV, weight);
-      _h_met_reco->fill(met1.mod()/GeV, weight);
+      _h_met_true->fill(met0.mod()/GeV);
+      _h_met_reco->fill(met1.mod()/GeV);
       if (met0.perp() > 0 && met1.perp() > 0 && deltaPhi(met0, met1) > 0.1) {
         MSG_WARNING("Large MET phi change: " << met0.phi()  << " -> " << met1.phi() <<
                     "; dphi = " << deltaPhi(met0, met1));
@@ -150,57 +151,57 @@ namespace Rivet {
                   "; dphi = " << deltaPhi(jets0[0], jets2[0]) <<
                   "; pT = " << jets0[0].pT()/GeV << " -> " << jets2[0].pT()/GeV);
       }
-      _h_nj_true->fill(jets0.size(), weight);
-      _h_nj_reco->fill(jets2.size(), weight);
+      _h_nj_true->fill(jets0.size());
+      _h_nj_reco->fill(jets2.size());
       if (!jets0.empty()) {
-        _h_j1pt_true->fill(jets0.front().pT()/GeV, weight);
-        _h_j1eta_true->fill(jets0.front().eta(), weight);
+        _h_j1pt_true->fill(jets0.front().pT()/GeV);
+        _h_j1eta_true->fill(jets0.front().eta());
       }
       if (!jets2.empty()) {
-        _h_j1pt_reco->fill(jets2.front().pT()/GeV, weight);
-        _h_j1eta_reco->fill(jets2.front().eta(), weight);
+        _h_j1pt_reco->fill(jets2.front().pT()/GeV);
+        _h_j1eta_reco->fill(jets2.front().eta());
       }
 
       const Particles& elecs1 = apply<ParticleFinder>(event, "Electrons1").particlesByPt();
       const Particles& elecs2 = apply<ParticleFinder>(event, "Electrons2").particlesByPt();
       MSG_DEBUG("Numbers of electrons = " << elecs1.size() << " true; " << elecs2.size() << " reco");
-      _h_ne_true->fill(elecs1.size(), weight);
-      _h_ne_reco->fill(elecs2.size(), weight);
+      _h_ne_true->fill(elecs1.size());
+      _h_ne_reco->fill(elecs2.size());
       if (!elecs1.empty()) {
-        _h_e1pt_true->fill(elecs1.front().pT()/GeV, weight);
-        _h_e1eta_true->fill(elecs1.front().eta(), weight);
+        _h_e1pt_true->fill(elecs1.front().pT()/GeV);
+        _h_e1eta_true->fill(elecs1.front().eta());
       }
       if (!elecs2.empty()) {
-        _h_e1pt_reco->fill(elecs2.front().pT()/GeV, weight);
-        _h_e1eta_reco->fill(elecs2.front().eta(), weight);
+        _h_e1pt_reco->fill(elecs2.front().pT()/GeV);
+        _h_e1eta_reco->fill(elecs2.front().eta());
       }
 
       const Particles& muons1 = apply<ParticleFinder>(event, "Muons1").particlesByPt();
       const Particles& muons2 = apply<ParticleFinder>(event, "Muons2").particlesByPt();
       MSG_DEBUG("Numbers of muons = " << muons1.size() << " true; " << muons2.size() << " reco");
-      _h_nm_true->fill(muons1.size(), weight);
-      _h_nm_reco->fill(muons2.size(), weight);
+      _h_nm_true->fill(muons1.size());
+      _h_nm_reco->fill(muons2.size());
       if (!muons1.empty()) {
-        _h_m1pt_true->fill(muons1.front().pT()/GeV, weight);
-        _h_m1eta_true->fill(muons1.front().eta(), weight);
+        _h_m1pt_true->fill(muons1.front().pT()/GeV);
+        _h_m1eta_true->fill(muons1.front().eta());
       }
       if (!muons2.empty()) {
-        _h_m1pt_reco->fill(muons2.front().pT()/GeV, weight);
-        _h_m1eta_reco->fill(muons2.front().eta(), weight);
+        _h_m1pt_reco->fill(muons2.front().pT()/GeV);
+        _h_m1eta_reco->fill(muons2.front().eta());
       }
 
       const Particles& taus1 = apply<ParticleFinder>(event, "Taus1").particlesByPt();
       const Particles& taus2 = apply<ParticleFinder>(event, "Taus2").particlesByPt();
       MSG_DEBUG("Numbers of taus = " << taus1.size() << " true; " << taus2.size() << " reco");
-      _h_nt_true->fill(taus1.size(), weight);
-      _h_nt_reco->fill(taus2.size(), weight);
+      _h_nt_true->fill(taus1.size());
+      _h_nt_reco->fill(taus2.size());
       if (!taus1.empty()) {
-        _h_t1pt_true->fill(taus1.front().pT()/GeV, weight);
-        _h_t1eta_true->fill(taus1.front().eta(), weight);
+        _h_t1pt_true->fill(taus1.front().pT()/GeV);
+        _h_t1eta_true->fill(taus1.front().eta());
       }
       if (!taus2.empty()) {
-        _h_t1pt_reco->fill(taus2.front().pT()/GeV, weight);
-        _h_t1eta_reco->fill(taus2.front().eta(), weight);
+        _h_t1pt_reco->fill(taus2.front().pT()/GeV);
+        _h_t1eta_reco->fill(taus2.front().eta());
       }
 
     }
@@ -208,36 +209,31 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      normalize(_h_met_true);
-      normalize(_h_met_reco);
+      normalize({_h_met_true, _h_met_reco});
 
-      normalize(_h_nj_true);
-      normalize(_h_nj_reco);
-      normalize(_h_j1pt_true, 1-_h_nj_true->bin(0).sumW());
-      normalize(_h_j1pt_reco, 1-_h_nj_reco->bin(0).sumW());
-      normalize(_h_j1eta_true, 1-_h_nj_true->bin(0).sumW());
-      normalize(_h_j1eta_reco, 1-_h_nj_reco->bin(0).sumW());
+      normalize({_h_nj_true, _h_nj_reco});
+      const double njnorm_true{1-_h_nj_true->bin(0).sumW()};
+      const double njnorm_reco{1-_h_nj_reco->bin(0).sumW()};
+      normalize({_h_j1pt_true, _h_j1eta_true}, njnorm_true);
+      normalize({_h_j1pt_reco, _h_j1eta_reco}, njnorm_reco);
 
-      normalize(_h_ne_true);
-      normalize(_h_ne_reco);
-      normalize(_h_e1pt_true, 1-_h_ne_true->bin(0).sumW());
-      normalize(_h_e1pt_reco, 1-_h_ne_reco->bin(0).sumW());
-      normalize(_h_e1eta_true, 1-_h_ne_true->bin(0).sumW());
-      normalize(_h_e1eta_reco, 1-_h_ne_reco->bin(0).sumW());
+      normalize({_h_ne_true, _h_ne_reco});
+      const double nenorm_true{1-_h_ne_true->bin(0).sumW()};
+      const double nenorm_reco{1-_h_ne_reco->bin(0).sumW()};
+      normalize({_h_e1pt_true, _h_e1eta_true}, nenorm_true);
+      normalize({_h_e1pt_reco, _h_e1eta_reco}, nenorm_reco);
 
-      normalize(_h_nm_true);
-      normalize(_h_nm_reco);
-      normalize(_h_m1pt_true, 1-_h_nm_true->bin(0).sumW());
-      normalize(_h_m1pt_reco, 1-_h_nm_reco->bin(0).sumW());
-      normalize(_h_m1eta_true, 1-_h_nm_true->bin(0).sumW());
-      normalize(_h_m1eta_reco, 1-_h_nm_reco->bin(0).sumW());
+      normalize({_h_nm_true, _h_nm_reco});
+      const double nmnorm_true{1-_h_nm_true->bin(0).sumW()};
+      const double nmnorm_reco{1-_h_nm_reco->bin(0).sumW()};
+      normalize({_h_m1pt_true, _h_m1eta_true}, nmnorm_true);
+      normalize({_h_m1pt_reco, _h_m1eta_reco}, nmnorm_reco);
 
-      normalize(_h_nt_true);
-      normalize(_h_nt_reco);
-      normalize(_h_t1pt_true, 1-_h_nt_true->bin(0).sumW());
-      normalize(_h_t1pt_reco, 1-_h_nt_reco->bin(0).sumW());
-      normalize(_h_t1eta_true, 1-_h_nt_true->bin(0).sumW());
-      normalize(_h_t1eta_reco, 1-_h_nt_reco->bin(0).sumW());
+      normalize({_h_nt_true, _h_nt_reco});
+      const double ntnorm_true{1-_h_nt_true->bin(0).sumW()};
+      const double ntnorm_reco{1-_h_nt_reco->bin(0).sumW()};
+      normalize({_h_t1pt_true, _h_t1eta_true}, ntnorm_true);
+      normalize({_h_t1pt_reco, _h_t1eta_reco}, ntnorm_reco);
     }
 
     /// @}
@@ -257,8 +253,6 @@ namespace Rivet {
 
 
 
-  // The hook for the plugin system
   RIVET_DECLARE_PLUGIN(EXAMPLE_SMEAR);
-
 
 }

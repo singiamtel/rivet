@@ -38,6 +38,21 @@ Title=Transverse momentum of leading charged lepton
 END PLOT
 
 
+BEGIN PLOT /EXAMPLE_SIMPLEANALYSIS/met.*
+YLabel=Acceptance
+END PLOT
+
+BEGIN PLOT /EXAMPLE_SIMPLEANALYSIS/met
+Title=Missing transverse momentum
+XLabel=$p_\mathrm{T}^\mathrm{miss}$ [GeV]
+END PLOT
+
+BEGIN PLOT /EXAMPLE_SIMPLEANALYSIS/met_signf
+Title=Significance of missing transverse momentum
+XLabel=MET significance $p_\mathrm{T}^\mathrm{miss}/\sigma_\mathrm{MET}$
+END PLOT
+
+
 BEGIN PLOT /EXAMPLE_SIMPLEANALYSIS/count_pass
 Title=Signal region event yield
 YLabel=Expected event yield

@@ -36,7 +36,7 @@ namespace Rivet {
 
     using Annotations = std::map<std::string, std::string>;
 
-    /// Preferred constructor, with optional run name.
+    /// Preferred / default constructor.
     AnalysisHandler();
 
     /// The copy constructor is deleted, so it can never be called.

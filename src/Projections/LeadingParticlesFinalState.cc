@@ -33,7 +33,7 @@ namespace Rivet {
     for (const Particle& p : particles) {
       const PdgId pid = p.pid();
       // If it's a PID we're looking for, and passes the cuts
-      if (_ids.find(pid) != _ids.end() && FinalState::accept(p.genParticle())) {
+      if (_ids.find(pid) != _ids.end() && _cuts->accept(p)) {
         // Look for an existing particle in tmp container
         if (tmp.find(pid) != tmp.end()) { // if a particle with this type has been already selected
           const Particle& p2 = *tmp.find(pid)->second;

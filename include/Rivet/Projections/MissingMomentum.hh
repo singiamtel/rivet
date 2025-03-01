@@ -111,8 +111,8 @@ namespace Rivet {
     /// @brief The vector missing transverse energy in the event, as a 3-vector with z=0
     const Vector3 vectorEtMiss() const { return -vectorEt(); }
 
-    /// @brief The scalar value of missing transverse energy in the event
-    double scalarEtMiss() const { return vectorEtMiss().perp(); }
+    // /// @brief The scalar value of the missing transverse energy in the event
+    // double scalarEtMiss() const { return vectorEtMiss().perp(); }
 
     /// The scalar-summed visible transverse energy in the event.
     double scalarEt() const { return _set; }

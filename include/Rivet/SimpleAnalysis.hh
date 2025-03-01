@@ -13,9 +13,6 @@ namespace Rivet {
 
 
   /// @brief Simplified analysis API with predefined physics objects
-  ///
-  /// @todo Allow base-projection overrides
-  /// @todo Support jet reclustering, variable-R, track jets, ... more?
   class SimpleAnalysis : public Analysis {
   public:
 
@@ -23,7 +20,7 @@ namespace Rivet {
     enum class IDClass { LOOSE, MEDIUM, TIGHT };
 
     /// Constructor, passing arg to base class and supporting subclassing
-    virtual SimpleAnalysis(const std::string& name)
+    SimpleAnalysis(const std::string& name)
       : Analysis(name)
     {    }
 
@@ -37,7 +34,8 @@ namespace Rivet {
 
     /// Initialise built-in projections before the run, after user init()
     ///
-    /// @todo Only register default proj if the name hasn't already been used, to allow user overrides
+    /// @todo Only register default proj if the name hasn't already
+    /// been used, to allow user overrides
     void postInit() {
 
       // Electron projections
@@ -47,11 +45,11 @@ namespace Rivet {
         const IDClass& idc = classkv.first;
         const string p = "Electrons";
         const string aname = _pckey(true, idc, p);
-        // if (!hasProjection(aname))
-        declare(SmearedParticles(es, _effs_electron[idc], _smear_electron), aname);
+        if (!hasProjection(aname))
+          declare(SmearedParticles(es, _effs_electron[idc], _smear_electron), aname);
         const string pname = _pckey(false, idc, p);
-        // if (!hasProjection(pname))
-        declare(SmearedParticles(es_prompt, _effs_electron[idc], _smear_electron), pname);
+        if (!hasProjection(pname))
+          declare(SmearedParticles(es_prompt, _effs_electron[idc], _smear_electron), pname);
       }
 
       // Muon projections
@@ -61,11 +59,11 @@ namespace Rivet {
         const IDClass& idc = classkv.first;
         const string p = "Muons";
         const string aname = _pckey(true, idc, p);
-        // if (!hasProjection(aname))
-        declare(SmearedParticles(ms, _effs_muon[idc], _smear_muon), aname);
+        if (!hasProjection(aname))
+          declare(SmearedParticles(ms, _effs_muon[idc], _smear_muon), aname);
         const string pname = _pckey(false, idc, p);
-        //if (!hasProjection(pname))
-        declare(SmearedParticles(ms_prompt, _effs_muon[idc], _smear_muon), pname);
+        if (!hasProjection(pname))
+          declare(SmearedParticles(ms_prompt, _effs_muon[idc], _smear_muon), pname);
       }
 
       // Photon projections
@@ -75,11 +73,11 @@ namespace Rivet {
         const IDClass& idc = classkv.first;
         const string p = "Photons";
         const string aname = _pckey(true, idc, p);
-        // if (!hasProjection(aname))
-        declare(SmearedParticles(ys, _effs_photon[idc], _smear_photon), aname);
+        if (!hasProjection(aname))
+          declare(SmearedParticles(ys, _effs_photon[idc], _smear_photon), aname);
         const string pname = _pckey(false, idc, p);
-        //if (!hasProjection(pname))
-        declare(SmearedParticles(ys_prompt, _effs_photon[idc], _smear_photon), pname);
+        if (!hasProjection(pname))
+          declare(SmearedParticles(ys_prompt, _effs_photon[idc], _smear_photon), pname);
       }
 
       // Tau projections
@@ -89,17 +87,17 @@ namespace Rivet {
         const IDClass& idc = classkv.first;
         const string p = "Taus";
         const string aname = _pckey(true, idc, p);
-        // if (!hasProjection(aname))
-        declare(SmearedParticles(ts, _effs_tau[idc], _smear_tau), aname);
+        if (!hasProjection(aname))
+          declare(SmearedParticles(ts, _effs_tau[idc], _smear_tau), aname);
         const string pname = _pckey(false, idc, p);
-        //if (!hasProjection(pname))
-        declare(SmearedParticles(ts_prompt, _effs_tau[idc], _smear_tau), pname);
+        if (!hasProjection(pname))
+          declare(SmearedParticles(ts_prompt, _effs_tau[idc], _smear_tau), pname);
       }
 
       // Track projection
       const FinalState trkfs(_acut && _trkcut && Cuts::abscharge > 0);
-      // if (!hasProjection("Tracks"))
-      declare(SmearedParticles(trkfs, _eff_trk, _smear_trk), "Tracks");
+      if (!hasProjection("Tracks"))
+        declare(SmearedParticles(trkfs, _eff_trk, _smear_trk), "Tracks");
 
       // Jet projections
       const FinalState allfs(_acut);
@@ -109,13 +107,13 @@ namespace Rivet {
         /// @todo Allow multiple jet-smearing / tagging fns... how to default?
         FastJets jetfs(allfs, jd.alg, jd.R, jd.muons, jd.invis);
         /// @todo The override is more complicated here since users already control the names... throw an exception instead?
-        //if (!hasProjection("Jets"+jditem.first))
-        declare(SmearedJets(jetfs, _smears_jet[jditem.first], _effs_btag[jditem.first]), "Jets"+jditem.first);
+        if (!hasProjection("Jets"+jditem.first))
+          declare(SmearedJets(jetfs, _smears_jet[jditem.first], _effs_btag[jditem.first]), "Jets"+jditem.first);
       }
 
       // Missing momentum projection
-      //if (!hasProjection("MET"))
-      declare(SmearedMET(MissingMomentum(allfs), _smear_met), "MET");
+      if (!hasProjection("MET"))
+        declare(SmearedMET(MissingMomentum(allfs), _smearps_met, _smear_met), "MET");
     }
 
 
@@ -169,8 +167,13 @@ namespace Rivet {
       _smears_jet[jetname] = smear;
       _effs_btag[jetname] = btageff;
     }
-    /// Set the MET reco function
-    void setMETReco(const METSmearFn& smear) {
+    /// Set the MET reco-params function
+    void setMETReco(const METSmearParamsFn& smearps) {
+      _smearps_met = smearps;
+    }
+    /// Set the MET reco functions
+    void setMETReco(const METSmearParamsFn& smearps, const METSmearFn& smear) {
+      _smearps_met = smearps;
       _smear_met = smear;
     }
 
@@ -316,8 +319,23 @@ namespace Rivet {
 
 
     /// Get the MET vector
-    Vector3 met() const {
+    Vector3 vmet() const {
       return apply<METFinder>(currentEvent(), "MET").vectorMissingPt();
+    }
+
+    /// Get the MET scalar
+    double met() const {
+      return vmet().mod();
+    }
+
+    /// Get the SET scalar
+    double set() const {
+      return apply<METFinder>(currentEvent(), "MET").scalarEt();
+    }
+
+    /// Get the MET significance
+    double metSignf() const {
+      return apply<SmearedMET>(currentEvent(), "MET").missingEtSignf();
     }
 
     /// @}
@@ -434,6 +452,7 @@ namespace Rivet {
     ParticleSmearFn _smear_trk{PARTICLE_SMEAR_IDENTITY};
     std::map<std::string, JetSmearFn> _smears_jet{ { "DEFAULT", JET_SMEAR_IDENTITY } };
     std::map<std::string, JetEffFn> _effs_btag{ { "DEFAULT", JET_BTAG_IDENTITY } };
+    METSmearParamsFn _smearps_met{MET_SMEARPARAMS_IDENTITY};
     METSmearFn _smear_met{MET_SMEAR_IDENTITY};
     /// @}
 
@@ -527,5 +546,5 @@ namespace Rivet {
   setTrkReco(TRK_EFF_ ## DET, TRK_SMEAR_ ## DET) ;                      \
   for (const std::string& jname : jetnames())                           \
     setJetReco(JET_SMEAR_ ## DET, JET_BTAG_ ## DET ## _ ## BTAG, jname) ; \
-  setMETReco(MET_SMEAR_ ## DET) ;                                       \
+  setMETReco(MET_SMEARPARAMS_ ## DET, MET_SMEAR_ ## DET) ;                                \
   } while (0)

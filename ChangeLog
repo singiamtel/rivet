@@ -1,7 +1,28 @@
+2025-02-28  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Fix ProjectionApplier::hasProjection() to check against the
+	local projection-registration queue if its ProjectionHandler is
+	not yet bound.
+
+2025-02-26  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Remove FinalState::accept() method, which was misleading as (as
+	implemented) the subclasses did not override it and it always just
+	applied the stored ParticleFinder::_cuts rather than augmenting
+	those with the subclass semantics.
+
 2025-02-14  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Fix removed HDF5 variable expansion in rivet-config, and improve
 	terms reported for YODA (which provides HDF5) and FastJet.
+
+2025-02-04  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Split MET smearing functions into SMEARPARAMS functions that
+	calculate the mean distorted vector and its energy resolution, and
+	the implementation of that smearing. This allows analyses to
+	access the MET offset or resolution params with which to calculate
+	a significance.
 
 2025-02-09  Christian Gutschow  <chris.g@cern.ch>
 
@@ -15,6 +36,14 @@
 	* Introduce wrapper functions for jet reclustering
 	* Add utility functions for adding filters and trimming jet collections
 	* Showcase changes in EXAMPLE_JETS routine
+
+2025-02-04  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Split MET smearing functions into SMEARPARAMS functions that
+	calculate the mean distorted vector and its energy resolution, and
+	the implementation of that smearing. This allows analyses to
+	access the MET offset or resolution params with which to calculate
+	a significance.
 
 2024-12-20  Christian Gutschow  <chris.g@cern.ch>
 
