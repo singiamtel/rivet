@@ -1,0 +1,41 @@
+Name: LHCB_2019_I1720413
+Year: 2019
+Summary: Measurement of $B^+$, $B^0$ and $\mathit{\Lambda}_b^0$ production in $p\mathrm{Pb}$ collisions at $\sqrt{s_\mathrm{NN}} = 8.16\,\mathrm{TeV}$
+Experiment: LHCB
+Collider: LHC
+InspireID: 1720413
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Joshua Friedman <friedm25@purdue.com>
+ - Julian Boelhauve <julian.boelhauve@tu-dortmund.de>
+ - Lars Kolk <lars.kolk@tu-dortmund.de>
+References:
+ - Phys.Rev.D 99 (2019) 5, 052011
+ - DOI:10.1103/PhysRevD.99.052011
+ - arXiv:1902.05599
+ - CERN-EP-2019-010
+ - LHCB-PAPER-2018-048
+Beams: [p+, Pb]
+Energies: [[6500, 533000]]
+RunInfo: Minimum-bias proton-lead interactions at 8.16 TeV centre-of-mass energy.
+NeedCrossSection: yes
+Description:
+  'The production of $B^+$, $B^0$ and $\mathit{\Lambda}_b^0$ hadrons is studied in proton-lead collisions at a center-of-mass energy per nucleon pair of $\sqrt{s_\mathrm{NN}} = 8.16\,\mathrm{TeV}$ recorded with the LHCb detector at the LHC. The measurement uses a dataset corresponding to an integrated luminosity of $12.2\pm 0.3\,\mathrm{nb}^{-1}$ for the case where the proton beam is projected into the LHCb detector (corresponding to measuring hadron production at positive rapidity) and $18.6\pm 0.5\,\mathrm{nb}^{-1}$ for the lead beam projected into the LHCb detector (corresponding to measuring hadron production at negative rapidity). Double-differential cross-sections are measured and used to determine forward-backward ratios and nuclear modification factors, which directly probe nuclear effects in the production of beauty hadrons. The double-differential cross-sections are measured as a function of the beauty-hadron transverse momentum and rapidity in the nucleon-nucleon center-of-mass frame. Forward-to-backward cross-section ratios and nuclear modification factors indicate a significant nuclear suppression at positive rapidity. The ratio of $\mathit{\Lambda}_b^0$ over $B^0$ production cross-sections is reported and is consistent with the corresponding measurement in $pp$ collisions.'
+Keywords: ['cross-section', 'B+ meson', 'B0 meson', 'Lambdab0 baryon', 'proton-lead interaction', '8160 GeV c.m.s.', 'CERN LHC', 'LHCb', 'nuclear modification factor', 'forward-to-backward ratio']
+BibKey: LHCb:2019avm
+BibTeX: '@article{LHCb:2019avm,
+  author = "Aaij, Roel and others",
+  collaboration = "LHCb",
+  title = "{Measurement of $B^+$, $B^0$ and $\Lambda_b^0$ production in $p\mkern 1mu\mathrm{Pb}$ collisions at $\sqrt{s_\mathrm{NN}}=8.16\,{\rm TeV}$}",
+  eprint = "1902.05599",
+  archivePrefix = "arXiv",
+  primaryClass = "hep-ex",
+  reportNumber = "LHCb-PAPER-2018-048; CERN-EP-2019-010, LHCb-PAPER-2018-048, CERN-EP-2019-010",
+  doi = "10.1103/PhysRevD.99.052011",
+  journal = "Phys. Rev. D",
+  volume = "99",
+  number = "5",
+  pages = "052011",
+  year = "2019"
+}'
