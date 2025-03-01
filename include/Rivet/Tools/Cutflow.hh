@@ -254,6 +254,7 @@ namespace Rivet {
 
   };
 
+
   /// @name Cutflow utilities
   /// @{
 

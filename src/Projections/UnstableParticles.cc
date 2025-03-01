@@ -9,47 +9,51 @@ namespace Rivet {
 
     /// @todo Replace PID veto list with PID:: functions?
     vector<PdgId> vetoIds;
-    vetoIds += 22; // status 2 photons don't count!
+    vetoIds += PID::PHOTON; // status 2 photons don't count!
     vetoIds += 110; vetoIds += 990; vetoIds += 9990; // Reggeons
 
     for (ConstGenParticlePtr p : HepMCUtils::particles(e.genEvent())) {
-      const Particle rp(p);
-      const int st = p->status();
-      bool passed =
-        (st == 1 || (st == 2 && !contains(vetoIds, abs(p->pdg_id())))) &&
-        !PID::isParton(p->pdg_id()) && ///< Always veto partons
-        p->status() !=4 && // Filter beam particles
-        _cuts->accept(rp);
 
-      // Avoid double counting by re-marking as unpassed if ID == (any) parent ID
-      ConstGenVertexPtr pv = p->production_vertex();
-      // Avoid double counting by re-marking as unpassed if ID == any child ID
-      ConstGenVertexPtr dv = p->end_vertex();
-      if (passed && dv) {
-        for (ConstGenParticlePtr pp : HepMCUtils::particles(dv, Relatives::CHILDREN)) {
-          if (p->pdg_id() == pp->pdg_id() && pp->status() == 2) {
-            passed = false;
-            break;
+      // First select on GenParticle info/object only
+      bool passed =
+        (p->status() == 1 || //< Stable particle... huh?!?
+         (p->status() == 2 && !contains(vetoIds, abs(p->pdg_id())))) && //< Unvetoed unstable
+        !PID::isParton(p->pdg_id()) && //< Always veto partons, regardless of status
+        p->status() != 4; //< Filter beam particles (necessary?)
+
+      // Avoid double-counting by only using the last item in a decay chain
+      /// @todo Replace with isLastWith(pid)?
+      /// @todo Generalise to allow selection of first or last particles in duplicate chains
+      if (passed) {
+        if (p->end_vertex()) {
+          for (ConstGenParticlePtr pp : HepMCUtils::particles(p->end_vertex(), Relatives::CHILDREN)) {
+            if (p->pdg_id() == pp->pdg_id() && pp->status() == 2) {
+              passed = false;
+              break;
+            }
           }
         }
       }
 
-      // Add to output particles collection
-      if (passed) _theParticles.push_back(rp);
+      // Apply user cuts on the Particle wrapper and add to result if successful
+      if (passed) {
+        const Particle rp(p);
+        if (_cuts->accept(rp)) _theParticles.push_back(std::move(rp));
+      }
 
-      // Log parents and children
+      // Log parents and children (hence not short-circuiting vetos above)
       if (getLog().isActive(Log::TRACE)) {
         MSG_TRACE("ID = " << p->pdg_id()
-                  << ", status = " << st
+                  << ", status = " << p->status()
                   << ", pT = " << p->momentum().perp()
                   << ", eta = " << p->momentum().eta()
                   << ": result = " << std::boolalpha << passed);
-        if (pv) {
-          for (ConstGenParticlePtr pp : HepMCUtils::particles(pv, Relatives::PARENTS))
+        if (p->production_vertex()) {
+          for (ConstGenParticlePtr pp : HepMCUtils::particles(p->production_vertex(), Relatives::PARENTS))
             MSG_TRACE("  parent ID = " << pp->pdg_id());
         }
-        if (dv) {
-          for (ConstGenParticlePtr pp : HepMCUtils::particles(dv, Relatives::CHILDREN))
+        if (p->end_vertex()) {
+          for (ConstGenParticlePtr pp : HepMCUtils::particles(p->end_vertex(), Relatives::CHILDREN))
             MSG_TRACE("  child ID  = " << pp->pdg_id());
         }
       }

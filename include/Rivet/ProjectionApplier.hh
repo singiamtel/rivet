@@ -53,14 +53,23 @@ namespace Rivet {
 
     /// Does this applier have a projection registered under the name @a name?
     bool hasProjection(const std::string& name) const {
-      return getProjHandler().hasProjection(*this, name);
+      if (_projhandler != nullptr) {
+        // If we have a registered proj handler, check its registered names for this PA
+        return getProjHandler().hasProjection(*this, name);
+      } else {
+        // If we don't have a registered proj handler yet, check names against the queue
+        for (const auto& ptr_name_pair : _declQueue) {
+          if (ptr_name_pair.second == name) return true;
+        }
+        return false;
+      }
     }
 
     /// Get the named projection, specifying return type via a template argument.
     /// @todo Add SFINAE to require that PROJ inherit from Projection
     template <typename PROJ>
     const PROJ& getProjection(const std::string& name) const {
-      if (_projhandler != nullptr){
+      if (_projhandler != nullptr) {
         const Projection& p = getProjHandler().getProjection(*this, name);
         return pcast<PROJ>(p);
       }
@@ -214,15 +223,23 @@ namespace Rivet {
     /// Mark object as owned by the _projhandler
     mutable bool _owned;
 
-    /// Pointer to projection handler.
+    /// @brief Pointer to projection handler
+    ///
     /// @todo TP: Would we prefer a smart pointer?
     mutable ProjectionHandler* _projhandler;
-    /// queue storing child projections that need to be properly declared later.
-    /// Declare receives reference to a Projection and name, so we need to store both Projection and name.
+
+    /// @brief Queue storing child projections to be properly declared later
+    ///
+    /// Declaration receives reference to a Projection and a name, so we
+    /// need to store both Projection and name for each queued child.
     mutable std::deque<pair<std::shared_ptr<Projection>, string>> _declQueue;
 
 protected:
-    /// If this applier is owned, recursively flush declQueues of child projections, registering them to the projhandler.
+
+    /// @brief Synchronise the declaration queue once a ProjectionHandler is attached
+    ///
+    /// If this applier is owned, recursively flush the declQueues of the
+    /// child projections, registering _them_ to our projection handler.
     void _syncDeclQueue() const;
 
   };

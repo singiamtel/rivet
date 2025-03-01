@@ -75,7 +75,7 @@ namespace Rivet {
     const Particles& allstable = apply<FinalState>(e, (hasProjection("PrevFS") ? "PrevFS" : "OpenFS")).particles();
     MSG_TRACE("Beginning Cuts selection");
     for (const Particle& p : allstable) {
-      const bool passed = accept(p);
+      const bool passed = _cuts->accept(p);
       MSG_TRACE("Choosing: ID = " << p.pid()
                 << ", pT = " << p.pT()/GeV << " GeV"
                 << ", eta = " << p.eta()
@@ -86,12 +86,12 @@ namespace Rivet {
   }
 
 
-  /// Decide if a particle is to be accepted or not.
-  bool FinalState::accept(const Particle& p) const {
-    // Not having status == 1 should never happen!
-    assert(p.genParticle() == NULL || p.genParticle()->status() == 1);
-    return _cuts->accept(p);
-  }
+  // /// Decide if a particle is to be accepted or not.
+  // bool FinalState::accept(const Particle& p) const {
+  //   // Not having status == 1 should never happen, as this is only called on OpenFS output
+  //   assert(p.genParticle() == nullptr || p.genParticle()->status() == 1);
+  //   return _cuts->accept(p);
+  // }
 
 
 }

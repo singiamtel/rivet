@@ -97,7 +97,7 @@ namespace Rivet {
         }
         // If discarding, go straight to the next particle
         if (!keep) continue;
-        //Ensure the smeared particle satisfies the cuts associated with this projection
+        // Ensure the smeared particle satisfies the cuts associated with this projection
         if (!_cuts->accept(pdet)) continue;
 
         // Store, recording where the smearing was built from

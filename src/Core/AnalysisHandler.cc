@@ -688,7 +688,7 @@ namespace Rivet {
           ao.get()->setActiveFinalWeightIdx(iW);
         }
         try {
-          MSG_TRACE("running " << a->name() << "::finalize() for weight " << iW << ".");
+          MSG_TRACE("Running " << a->name() << "::finalize() for weight " << iW << ".");
           a->preFinalize();
           a->finalize();
           a->postFinalize();

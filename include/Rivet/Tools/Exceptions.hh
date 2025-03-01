@@ -48,6 +48,12 @@ namespace Rivet {
   };
 
 
+  /// @brief Error specialisation for failures relating to event smearing.
+  struct SmearError : public Error {
+    SmearError(const std::string& what) : Error(what) {}
+  };
+
+
   /// @brief Errors relating to event/bin weights
   ///
   /// Arises in computing statistical quantities because e.g. the bin

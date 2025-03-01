@@ -774,7 +774,7 @@ namespace Rivet {
     return closestMatchIndex(std::forward<CONTAINER>(c), Kin::mass, mtarget, mmin, mmax);
   }
 
-  /// @brief Return the indices from two vectors which best match fn(c1[i], c2[j]) to the target value
+  /// @brief Return the indices from two vectors which best match mass(c1[i], c2[j]) to the target value
   ///
   /// A specialisation of closestMatchIndex from Utils.hh, with the
   /// function bound to Kin::mass as a common use-case.
@@ -785,7 +785,7 @@ namespace Rivet {
                                std::forward<CONTAINER2>(c2), Kin::mass, mtarget, mmin, mmax);
   }
 
-  /// @brief Return the index from a vector which best matches fn(c[i], x) to the target value
+  /// @brief Return the index from a vector which best matches mass(c[i], x) to the target value
   ///
   /// A specialisation of closestMatchIndex from Utils.hh, with the
   /// function bound to Kin::mass as a common use-case.
@@ -797,7 +797,7 @@ namespace Rivet {
   }
 
 
-  /// @brief Return the index from a vector which best matches fn(x, c[j]) to the target value
+  /// @brief Return the index from a vector which best matches mass(x, c[j]) to the target value
   ///
   /// A specialisation of closestMatchIndex from Utils.hh, with the
   /// function bound to Kin::mass as a common use-case.
@@ -805,6 +805,182 @@ namespace Rivet {
   inline int closestMassIndex(T&& x, CONTAINER&& c,
                               double mtarget, double mmin=-DBL_MAX, double mmax=DBL_MAX) {
     return closestMatchIndex(std::forward<T>(x), std::forward<CONTAINER>(c), Kin::mass, mtarget, mmin, mmax);
+  }
+
+  /// @}
+
+
+  /// @defgroup pbcontphysutils ParticleBase-container physics utils
+  /// @{
+
+  /// @brief Return the pT sum of a collection of particle-like objects
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline double sumPt(CONTAINER&& c) {
+    return sum(c, Kin::pT, 0.0);
+  }
+
+  /// @brief Return the four-momentum sum of a collection of particle-like objects
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline FourMomentum sumP4(CONTAINER&& c) {
+    return sum(c, Kin::p4, FourMomentum());
+  }
+
+  /// @brief Return the four-momentum sum of a collection of particle-like objects
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline Vector3 sumP3(CONTAINER&& c) {
+    return sum(c, Kin::p3, Vector3());
+  }
+
+  /// @brief Return the four-momentum sum of a collection of particle-like objects
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline Vector3 sumPtVec(CONTAINER&& c) {
+    return sum(c, Kin::pTvec, Vector3());
+  }
+
+
+  /// @brief Calculate the minimum phi separation in a collection of particle-like objects
+  ///
+  /// @note Returns in the range 0..pi
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline double deltaPhiMin(CONTAINER&& c) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c.size(); ++i) {
+      for (size_t j = i; j < c.size(); ++j) {
+        if (i == j) continue;
+        const double dphi = fabs(deltaPhi(c[i], c[j]));
+        if (dphi < rtn) rtn = dphi;
+      }
+    }
+  }
+
+  /// @brief Calculate the minimum phi separation between two collections of particle-like objects
+  ///
+  /// @note Returns in the range 0..pi
+  ///
+  /// @warning Assumes the two vectors are mutually exclusive, so does not protect against self-comparisons.
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER1, typename CONTAINER2, typename = isCIterable<CONTAINER1, CONTAINER2>>
+  inline double deltaPhiMin(CONTAINER1&& c1, CONTAINER2&& c2) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c1.size(); ++i) {
+      for (size_t j = 0; j < c2.size(); ++j) {
+        const double dphi = deltaPhi(c1[i], c2[j]);
+        if (dphi < rtn) rtn = dphi;
+      }
+    }
+  }
+
+
+
+  /// @brief Calculate the minimum pseudorapidity separation in a collection of particle-like objects
+  ///
+  /// @note Returns positive values
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline double deltaEtaMin(CONTAINER&& c) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c.size(); ++i) {
+      for (size_t j = i; j < c.size(); ++j) {
+        if (i == j) continue;
+        const double deta = fabs(deltaEta(c[i], c[j]));
+        if (deta < rtn) rtn = deta;
+      }
+    }
+  }
+
+  /// @brief Calculate the minimum pseudorapidity separation between two collections of particle-like objects
+  ///
+  /// @note Returns positive value
+  ///
+  /// @warning Assumes the two vectors are mutually exclusive, so does not protect against self-comparisons.
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER1, typename CONTAINER2, typename = isCIterable<CONTAINER1, CONTAINER2>>
+  inline double deltaEtaMin(CONTAINER1&& c1, CONTAINER2&& c2) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c1.size(); ++i) {
+      for (size_t j = 0; j < c2.size(); ++j) {
+        const double deta = deltaEta(c1[i], c2[j]);
+        if (deta < rtn) rtn = deta;
+      }
+    }
+  }
+
+
+  /// @brief Calculate the minimum rapidity separation in a collection of particle-like objects
+  ///
+  /// @note Returns positive values
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline double deltaRapMin(CONTAINER&& c) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c.size(); ++i) {
+      for (size_t j = i; j < c.size(); ++j) {
+        if (i == j) continue;
+        const double dy = fabs(deltaRap(c[i], c[j]));
+        if (dy < rtn) rtn = dy;
+      }
+    }
+  }
+
+  /// @brief Calculate the minimum pseudorapidity separation between two collections of particle-like objects
+  ///
+  /// @note Returns positive values
+  ///
+  /// @warning Assumes the two vectors are mutually exclusive, so does not protect against self-comparisons.
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER1, typename CONTAINER2, typename = isCIterable<CONTAINER1, CONTAINER2>>
+  inline double deltaRapMin(CONTAINER1&& c1, CONTAINER2&& c2) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c1.size(); ++i) {
+      for (size_t j = 0; j < c2.size(); ++j) {
+        const double dy = deltaRap(c1[i], c2[j]);
+        if (dy < rtn) rtn = dy;
+      }
+    }
+  }
+
+
+
+  /// @brief Calculate the minimum rapidity separation in a collection of particle-like objects
+  ///
+  /// @note Returns positive values
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER, typename = isCIterable<CONTAINER>>
+  inline double deltaRMin(CONTAINER&& c) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c.size(); ++i) {
+      for (size_t j = i; j < c.size(); ++j) {
+        if (i == j) continue;
+        const double dr = fabs(deltaR(c[i], c[j]));
+        if (dr < rtn) rtn = dr;
+      }
+    }
+  }
+
+  /// @brief Calculate the minimum pseudorapidity separation between two collections of particle-like objects
+  ///
+  /// @note Returns positive values
+  ///
+  /// @warning Assumes the two vectors are mutually exclusive, so does not protect against self-comparisons.
+  ///
+  /// @todo Generalise to min of any 2-ParticleBase function?
+  template <typename CONTAINER1, typename CONTAINER2, typename = isCIterable<CONTAINER1, CONTAINER2>>
+  inline double deltaRMin(CONTAINER1&& c1, CONTAINER2&& c2) {
+    double rtn = DBL_MAX;
+    for (size_t i = 0; i < c1.size(); ++i) {
+      for (size_t j = 0; j < c2.size(); ++j) {
+        const double dr = deltaR(c1[i], c2[j]);
+        if (dr < rtn) rtn = dr;
+      }
+    }
   }
 
   /// @}

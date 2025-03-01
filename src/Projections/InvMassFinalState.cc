@@ -94,9 +94,9 @@ namespace Rivet {
       // Loop around possible particle pairs
       for (const PdgIdPair& ipair : _decayids) {
         if (ipart.pid() == ipair.first) {
-          if (accept(ipart)) type1 += &ipart;
+          if (_cuts->accept(ipart)) type1 += &ipart;
         } else if (ipart.pid() == ipair.second) {
-          if (accept(ipart)) type2 += &ipart;
+          if (_cuts->accept(ipart)) type2 += &ipart;
         }
       }
     }

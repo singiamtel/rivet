@@ -19,15 +19,17 @@ namespace Rivet {
   ///   ParticleSmearFn TRK_SMEAR_<FAMILY>
   ///   JetEffFn JET_BTAG_<FAMILY>_<TAGGER>
   ///   JetSmearFn JET_SMEAR_<FAMILY>
+  ///   METSmearParamsFn MET_SMEARPARAMS_<FAMILY>
   ///   METSmearFn MET_SMEAR_<FAMILY>
   ///
-  /// Where @c <PARTICLE> is all of @c ELECTRON, @c MUON, @c PHOTON, and @c TAU,
+  /// where @c <PARTICLE> is all of @c ELECTRON, @c MUON, @c PHOTON, and @c TAU,
   /// @c <IDCLASS> is all of @c LOOSE, @c MEDIUM, and @c TIGHT. The family name
   /// and tagger name are free (within the constraints of function naming. Providing
   /// a full set may require use of alias/wrapper functions and/or the predefined
   /// eff/smearing @c IDENTITY functions.
   ///
   /// @{
+
 
   /// @defgroup smearing_elec Experiment-specific electron efficiency and smearing functions
   /// @{
@@ -78,6 +80,11 @@ namespace Rivet {
     const int i_et = binIndex(e.Et()/GeV, edges_et, true);
     const double eff = effs_et[i_et] * effs_eta[i_eta] / 0.95; //< norm factor as approximate double differential
     return min(eff, 1.0) * ELECTRON_RECOEFF_ATLAS_RUN2(e);
+  }
+
+  /// @brief Pretend that ATLAS Run 1 loose was the same as in Run 2
+  inline double ELECTRON_EFF_ATLAS_RUN1_LOOSE(const Particle& e) {
+    return ELECTRON_EFF_ATLAS_RUN2_LOOSE(e);
   }
 
 
@@ -264,6 +271,7 @@ namespace Rivet {
   /// @todo Just an alias to generic: improve!
   inline double ELECTRON_EFF_CMS_RUN1_TIGHT(const Particle& e) { return ELECTRON_EFF_CMS_RUN1(e); }
 
+
   /// CMS Run 2 electron reco efficiency
   ///
   /// @todo Currently just a copy of Run 1: fix!
@@ -273,13 +281,13 @@ namespace Rivet {
   }
   /// CMS Run 2 loose electron reconstruction efficiency
   /// @todo Just an alias to generic: improve!
-  inline double ELECTRON_EFF_CMS_RUN2_LOOSE(const Particle& e) { return ELECTRON_EFF_CMS_RUN2_LOOSE(e); }
+  inline double ELECTRON_EFF_CMS_RUN2_LOOSE(const Particle& e) { return ELECTRON_EFF_CMS_RUN2(e); }
   /// CMS Run 2 medium electron reconstruction efficiency
   /// @todo Just an alias to generic: improve!
-  inline double ELECTRON_EFF_CMS_RUN2_MEDIUM(const Particle& e) { return ELECTRON_EFF_CMS_RUN2_MEDIUM(e); }
+  inline double ELECTRON_EFF_CMS_RUN2_MEDIUM(const Particle& e) { return ELECTRON_EFF_CMS_RUN2(e); }
   /// CMS Run 2 tight electron reconstruction efficiency
   /// @todo Just an alias to generic: improve!
-  inline double ELECTRON_EFF_CMS_RUN2_TIGHT(const Particle& e) { return ELECTRON_EFF_CMS_RUN2_TIGHT(e); }
+  inline double ELECTRON_EFF_CMS_RUN2_TIGHT(const Particle& e) { return ELECTRON_EFF_CMS_RUN2(e); }
 
 
   /// @brief CMS electron energy smearing, preserving direction
@@ -895,11 +903,12 @@ namespace Rivet {
   }
 
 
-  /// ATLAS Run 1 jet smearing
+  /// @brief ATLAS Run 1 jet smearing
+  ///
+  /// Implemented by Matthias Danninger for GAMBIT, based roughly on
+  /// https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/CONFNOTES/ATLAS-CONF-2015-017/
   inline Jet JET_SMEAR_ATLAS_RUN1(const Jet& j) {
     // Jet energy resolution lookup
-    //   Implemented by Matthias Danninger for GAMBIT, based roughly on
-    //   https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/CONFNOTES/ATLAS-CONF-2015-017/
     //   Parameterisation can be still improved, but eta dependence is minimal
     /// @todo Also need a JES uncertainty component?
     static const vector<double> binedges_pt = {0., 50., 70., 100., 150., 200., 1000., 10000.};
@@ -920,23 +929,17 @@ namespace Rivet {
   /// ATLAS Run 2 jet smearing
   ///
   /// @todo Just a copy of the Run 1 one: improve!!
-  inline Jet JET_SMEAR_ATLAS_RUN2(const Jet& j) {
-    return JET_SMEAR_ATLAS_RUN1(j);
-  }
+  inline Jet JET_SMEAR_ATLAS_RUN2(const Jet& j) { return JET_SMEAR_ATLAS_RUN1(j); }
 
   /// CMS Run 2 jet smearing
   ///
   /// @todo Just a copy of the suboptimal ATLAS one: improve!!
-  inline Jet JET_SMEAR_CMS_RUN1(const Jet& j) {
-    return JET_SMEAR_ATLAS_RUN1(j);
-  }
+  inline Jet JET_SMEAR_CMS_RUN1(const Jet& j) { return JET_SMEAR_ATLAS_RUN1(j); }
 
   /// CMS Run 2 jet smearing
   ///
   /// @todo Just a copy of the suboptimal ATLAS one: improve!!
-  inline Jet JET_SMEAR_CMS_RUN2(const Jet& j) {
-    return JET_SMEAR_CMS_RUN1(j);
-  }
+  inline Jet JET_SMEAR_CMS_RUN2(const Jet& j) { return JET_SMEAR_CMS_RUN1(j); }
 
   /// @}
 
@@ -944,40 +947,31 @@ namespace Rivet {
   /// @defgroup smearing_met Experiment-specific missing-ET smearing functions
   /// @{
 
-  /// Typedef for MET smearing functions/functors (given a MET vector and scalar sum(ET))
-  ///
-  /// @todo Allow MET calculation to access the whole Event?
-  typedef function<Vector3(const Vector3&, double)> METSmearFn;
-
-  inline Vector3 MET_SMEAR_IDENTITY(const Vector3& met, double) { return met; }
-
-  /// @brief ATLAS Run 1 ETmiss smearing
+  /// @brief ATLAS Run 1 ETmiss resolution
   ///
   /// Based on https://arxiv.org/pdf/1108.5602v2.pdf, Figs 14 and 15
-  inline Vector3 MET_SMEAR_ATLAS_RUN1(const Vector3& met, double set) {
-    Vector3 smeared_met = met;
-
+  inline METSmearParams MET_SMEARPARAMS_ATLAS_RUN1(const Vector3& met, double set) {
     // Linearity offset (Fig 14)
+    Vector3 smeared_met = met;
     if (met.mod() < 25*GeV) smeared_met *= 1.05;
     else if (met.mod() < 40*GeV) smeared_met *= (1.05 - (0.04/15)*(met.mod()/GeV - 25)); //< linear decrease
     else smeared_met *= 1.01;
 
-    // Smear by a Gaussian with width given by the resolution(sumEt) ~ 0.45 sqrt(sumEt) GeV
-    const double resolution = 0.45 * sqrt(set/GeV) * GeV;
-    //const double metsmear = max(randnorm(smeared_met.mod(), resolution), 0.);
-    const double metsmear = fabs(randnorm(smeared_met.mod(), resolution)); //< better to reflect than to create a peak at 0
-    smeared_met = metsmear * smeared_met.unit();
-
-    return smeared_met;
+    return {smeared_met, 0.45*sqrt(set/GeV)*GeV, 0.0};
   }
 
-  /// ATLAS Run 2 ETmiss smearing
+  /// @brief ATLAS Run 1 ETmiss smearing
+  inline Vector3 MET_SMEAR_ATLAS_RUN1(const Vector3& met, double set) {
+    return MET_SMEAR_NORM(MET_SMEARPARAMS_ATLAS_RUN1(met, set));
+  }
+
+
+  /// ATLAS Run 2 ETmiss resolution
   ///
   /// Based on https://arxiv.org/pdf/1802.08168.pdf, Figs 6-9
-  inline Vector3 MET_SMEAR_ATLAS_RUN2(const Vector3& met, double set) {
-    Vector3 smeared_met = met;
-
+  inline METSmearParams MET_SMEARPARAMS_ATLAS_RUN2(const Vector3& met, double set) {
     // Linearity offset (Fig 6)
+    Vector3 smeared_met = met;
     if (met.mod() < 25*GeV) smeared_met *= 1.5;
     else smeared_met *= (1 + exp(-(met.mod() - 25*GeV)/(10*GeV)) - 0.02); //< exp approx to Fig 6 curve, approaching -0.02
 
@@ -989,51 +983,51 @@ namespace Rivet {
     // Resolution(MET_true) (Fig 9)
     const double resolution2 = 15*GeV + 0.5*sqrt(met.mod()/GeV)*GeV;
 
-    // Smear by a Gaussian with width given by the minimum resolution estimator (should mean low-MET events
+    // Smearing width is given by the minimum resolution estimator (should mean low-MET events
     // with high SET do not get a large smearing, and will be dominated by the linearity effect).
-    const double resolution = min(resolution1, resolution2);
-    //const double metsmear = max(randnorm(smeared_met.mod(), resolution), 0.);
-    const double metsmear = fabs(randnorm(smeared_met.mod(), resolution)); //< better to reflect than to create a peak at 0
-    smeared_met = metsmear * smeared_met.unit();
+    /// @todo Arguably should somehow take the max of this and the linearity... but this is re-used
+    const double sigma = min(resolution1, resolution2);
 
-    return smeared_met;
+    return {smeared_met, sigma, 0.0};
   }
 
-  /// CMS Run 1 ETmiss smearing
+  /// ATLAS Run 2 ETmiss smearing
+  inline Vector3 MET_SMEAR_ATLAS_RUN2(const Vector3& met, double set) {
+    return MET_SMEAR_NORM(MET_SMEARPARAMS_ATLAS_RUN2(met, set));
+  }
+
+
+  /// CMS Run 1 ETmiss smearing params
   ///
   /// From https://arxiv.org/pdf/1411.0511.pdf Table 2, p16 (Z channels)
-  inline Vector3 MET_SMEAR_CMS_RUN1(const Vector3& met, double set) {
-    Vector3 smeared_met = met;
-
+  inline METSmearParams MET_SMEARPARAMS_CMS_RUN1(const Vector3& met, double set) {
     // Calculate parallel and perpendicular resolutions and combine in quadrature (?)
     const double resolution_x = (1.1 + 0.6*sqrt(set/GeV)) * GeV;
     const double resolution_y = (1.4 + 0.6*sqrt(set/GeV)) * GeV;
     const double resolution = sqrt(sqr(resolution_x) + sqr(resolution_y));
-
-    // Smear by a Gaussian with width given by the resolution
-    // const double metsmear = max(randnorm(smeared_met.mod(), resolution), 0.);
-    const double metsmear = fabs(randnorm(smeared_met.mod(), resolution)); //< better to reflect than to create a peak at 0
-    smeared_met = metsmear * smeared_met.unit();
-
-    return smeared_met;
+    return {met, resolution,0.0};
   }
 
-  /// CMS Run 2 ETmiss smearing
-  /// From http://inspirehep.net/record/1681214/files/JME-17-001-pas.pdf Table 3, p20
-  inline Vector3 MET_SMEAR_CMS_RUN2(const Vector3& met, double set) {
-    Vector3 smeared_met = met;
+  /// CMS Run 1 ETmiss smearing
+  inline Vector3 MET_SMEAR_CMS_RUN1(const Vector3& met, double set) {
+    return MET_SMEAR_NORM(MET_SMEARPARAMS_CMS_RUN1(met, set));
+  }
 
+
+  /// @brief CMS Run 2 ETmiss smearing
+  ///
+  /// From http://inspirehep.net/record/1681214/files/JME-17-001-pas.pdf Table 3, p20
+  inline METSmearParams MET_SMEARPARAMS_CMS_RUN2(const Vector3& met, double set) {
     // Calculate parallel and perpendicular resolutions and combine in quadrature (?)
     const double resolution_para = ( 2.0 + 0.64*sqrt(set/GeV)) * GeV;
     const double resolution_perp = (-1.5 + 0.68*sqrt(set/GeV)) * GeV;
     const double resolution = sqrt(sqr(resolution_para) + sqr(resolution_perp));
+    return {met, resolution,0.0};
+  }
 
-    // Smear by a Gaussian with width given by the resolution
-    // const double metsmear = max(randnorm(smeared_met.mod(), resolution), 0.);
-    const double metsmear = fabs(randnorm(smeared_met.mod(), resolution)); //< better to reflect than to create a peak at 0
-    smeared_met = metsmear * smeared_met.unit();
-
-    return smeared_met;
+  /// @brief CMS Run 2 ETmiss smearing
+  inline Vector3 MET_SMEAR_CMS_RUN2(const Vector3& met, double set) {
+    return MET_SMEAR_NORM(MET_SMEARPARAMS_CMS_RUN2(met, set));
   }
 
   /// @}
@@ -1230,12 +1224,9 @@ namespace Rivet {
   inline double TRK_EFF_IDENTITY_TIGHT(const Particle& trk) { return PARTICLE_EFF_ONE(trk); }
   inline Particle TRK_SMEAR_IDENTITY(const Particle& trk) { return PARTICLE_SMEAR_IDENTITY(trk); }
 
-  // Already defined
-  //inline Jet JET_SMEAR_IDENTITY(const Jet& j) { return JET_SMEAR_IDENTITY(j); }
   inline double JET_BTAG_IDENTITY_IDENTITY(const Jet& j) { return JET_BTAG_IDENTITY(j); }
 
-  // Already defined
-  //inline Vector3 MET_SMEAR_IDENTITY(const Vector3& met, double set) { return JET_SMEAR_IDENTITY(met, set); }
+  // Already defined: JET_SMEAR_IDENTITY and MET_SMEAR_IDENTITY
 
   /// @}
 
