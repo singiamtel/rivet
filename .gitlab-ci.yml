@@ -101,6 +101,7 @@ stages:
     #   fi
     # - find $CI_PROJECT_DIR
     # - ls $CI_PROJECT_DIR
+    - if [[ "x$COVERAGE" != "x" ]]; then lcov --summary ./test/coverage/coverage.info; fi
     - if [[ "x$COVERAGE" != "x" ]]; then MSG=$(./test/coverage/mkreport); fi
     - MR_ID=$(git ls-remote origin | grep "${CI_COMMIT_SHORT_SHA}.*merge-requests" | grep -o "merge-requests/.*" | cut -d "/" -f 2) || true
     - |
@@ -109,6 +110,7 @@ stages:
             --header "PRIVATE-TOKEN: ${CI_PRIVATE_TOKEN}" --header "Content-Type: application/json" \
             --data "{ \"body\": \"${MSG}\" }" --silent -o /dev/null
       fi
+  coverage: '/^\s*lines\.+: (\d+\.\d+)%/'
   artifacts:
     when: always
     paths:
