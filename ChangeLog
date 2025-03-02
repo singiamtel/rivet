@@ -1,3 +1,8 @@
+2025-03-01  Andy Buckley  <andy.buckley@cern.ch>
+
+	* Update PID utils to MCUtils head, including a new
+	PID::isQuarkonium function from LHCb.
+
 2025-02-28  Andy Buckley  <andy.buckley@cern.ch>
 
 	* Fix ProjectionApplier::hasProjection() to check against the

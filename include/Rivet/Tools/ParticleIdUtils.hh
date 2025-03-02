@@ -1,7 +1,7 @@
 // -*- C++ -*-
 //
 // This file is part of MCUtils -- https://gitlab.com/hepcedar/mcutils/
-// Copyright (C) 2013-2022 Andy Buckley <andy.buckley@cern.ch>
+// Copyright (C) 2013-2025 Andy Buckley <andy.buckley@cern.ch>
 //
 // Embedding of MCUtils code in other projects is permitted provided this
 // notice is retained and the MCUtils namespace and include path are changed.
@@ -23,6 +23,13 @@ namespace Rivet {
     /// @defgroup mcutils_utils Utility functions
     /// @{
 
+    /// Absolute value
+    /// @deprecated Just use abs()!
+    inline int abspid(int pid) {
+      return abs(pid);
+    }
+
+
     // /// Compile-time int^int power-raising function
     // template <size_t N>
     // inline int _intpow(int x) { return x * _intpow<N-1>(x); }
@@ -37,10 +44,7 @@ namespace Rivet {
     inline size_t _pow10(unsigned int power) {
       //assert(power >= 0 && "_pow10 only defined for positive powers");
       assert(power < 16 && "_pow10 only defined for powers < 16");
-      static const size_t POWS10[] = {1, 10, 100, 1000, 10000, 100000, 1000000,
-                                      10000000, 100000000, 1000000000, 10000000000,
-                                      100000000000, 1000000000000, 10000000000000,
-                                      100000000000000, 1000000000000000, 10000000000000000};
+      static const size_t POWS10[] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000000, 1000000000000, 10000000000000, 100000000000000, 1000000000000000, 10000000000000000};
       return POWS10[power];
     }
     // /// Raise 10 to an integer power (constexpr)
@@ -121,6 +125,10 @@ namespace Rivet {
       if (isNucleus(pid)) return (abs(pid)/10000) % 1000;
       return 0;
     }
+    /// @deprecated Use nuclZ()
+    inline int Z(int pid) {
+      return nuclZ(pid);
+    }
 
     /// Get the atomic weight (number of nucleons) in a nucleus/ion
     /// @note Ion numbers are +/- 10LZZZAAAI.
@@ -132,6 +140,10 @@ namespace Rivet {
       if (isNucleus(pid)) return (abs(pid)/10) % 1000;
       return 0;
     }
+    /// @deprecated Use nuclA()
+    inline int A(int pid) {
+      return nuclA(pid);
+    }
 
     /// If this is a nucleus (ion), get nLambda
     /// @note Ion numbers are +/- 10LZZZAAAI.
@@ -142,6 +154,10 @@ namespace Rivet {
       }
       if (isNucleus(pid)) return _digit(n8,pid);
       return 0;
+    }
+    /// @deprecated Use nuclNlambda()
+    inline int lambda(int pid) {
+      return nuclNlambda(pid);
     }
 
     /// @}
@@ -190,6 +206,11 @@ namespace Rivet {
     inline bool isChargedLepton(int pid) {
       const long apid = abs(pid);
       return apid == 11 || apid == 13 || apid == 15 || apid == 17;
+    }
+    /// Alias for isChargedLepton
+    /// @deprecated Prefer isChargedLepton
+    inline bool isChLepton(int pid) {
+      return isChargedLepton(pid);
     }
 
     /// Determine if the PID is that of a neutrino
@@ -330,6 +351,10 @@ namespace Rivet {
       // }
       return false;
     }
+    /// @deprecated Use the nicer capitalisation isDiquark(pid)
+    inline bool isDiQuark(int pid) {
+      return isDiquark(pid);
+    }
 
     /// Check to see if this is a valid pentaquark
     inline bool isPentaquark(int pid) {
@@ -349,6 +374,18 @@ namespace Rivet {
       if (_digit(nq1,pid) > _digit(nl,pid))  return false;
       if (_digit(nl,pid) > _digit(nr,pid))  return false;
       return true;
+    }
+
+    /// Is this a heavy-flavour quarkonium meson?
+    ///
+    /// @note Original by LHCb in Rivet analysis LHCB_2016_I1504058
+    ///
+    /// @note phi = s,sbar is not considered quarkonium
+    inline bool isQuarkonium(int pid) {
+      if (!isMeson(pid)) return false; //< all quarkonia are mesons
+      if (_digit(nq1, pid) != 0) return false;
+      const int fq = _digit(nq2, pid);
+      return (fq > 3 && _digit(nj, pid) > 0 && _digit(nq3, pid) == fq);
     }
 
     /// Is this a valid hadron ID?
@@ -857,17 +894,18 @@ namespace Rivet {
     /// Three times the EM charge (as integer)
     inline int charge3(int pid) {
       static int ch100[100] = { -1,  2, -1, 2, -1, 2, -1, 2, 0, 0,
-                                -3,  0, -3, 0, -3, 0, -3, 0, 0, 0,
-                                 0,  0,  0, 3,  0, 0,  0, 0, 0, 0,
-                                 0,  0,  0, 3,  0, 0,  3, 0, 0, 0,
-                                 0, -1,  0, 0,  0, 0,  0, 0, 0, 0,
-                                 0,  6,  3, 6,  0, 0,  0, 0, 0, 0,
-                                 0,  0,  0, 0,  0, 0,  0, 0, 0, 0,
-                                 0,  0,  0, 0,  0, 0,  0, 0, 0, 0,
-                                 0,  0,  0, 0,  0, 0,  0, 0, 0, 0,
-                                 0,  0,  0, 0,  0, 0,  0, 0, 0, 0 };
-      // Shortcuts for common particles
+        -3,  0, -3, 0, -3, 0, -3, 0, 0, 0,
+        0,  0,  0, 3,  0, 0,  0, 0, 0, 0,
+        0,  0,  0, 3,  0, 0,  3, 0, 0, 0,
+        0, -1,  0, 0,  0, 0,  0, 0, 0, 0,
+        0,  6,  3, 6,  0, 0,  0, 0, 0, 0,
+        0,  0,  0, 0,  0, 0,  0, 0, 0, 0,
+        0,  0,  0, 0,  0, 0,  0, 0, 0, 0,
+        0,  0,  0, 0,  0, 0,  0, 0, 0, 0,
+        0,  0,  0, 0,  0, 0,  0, 0, 0, 0
+      };
       const int ida = abs(pid);
+      // Shortcuts for common particles
       if (pid == 21 || pid == 22) return 0; // gluon and photon
       if (ida == 211) return std::signbit(pid) ? -3 : 3; // charged pion
       if (pid == 111) return 0; // neutral pion
@@ -915,13 +953,19 @@ namespace Rivet {
         } else if (_digit(nr,pid) == 0) { //< squark+q+q+q
           ch3 = ch100[q3-1] + ch100[q2-1] + ch100[q1-1] + ch100[ql-1];
         }
-      } else if (isDiquark(pid)) { // Diquarks
+      } else if (isDiQuark(pid)) { // Diquarks
         ch3 = ch100[q2-1] + ch100[q1-1];
       } else { // Unknown
         return 0;
       }
       if (pid < 0) ch3 *= -1;
       return ch3;
+    }
+
+    /// Alias for charge3
+    /// @deprecated Prefer charge3
+    inline int threeCharge(int pid) {
+      return charge3(pid);
     }
 
     /// Return the absolute value of 3 times the EM charge
@@ -947,14 +991,12 @@ namespace Rivet {
 
     /// Determine if the particle is electrically charged
     inline bool isCharged(int pid) {
-      /// @todo What if PID = 0? Applies to everything... should we throw an exception?
-      if (pid >= -8 && pid <= 8) return true; // quarks and anti-quarks
-      return charge3(pid) != 0; //< pions, photons and gluons already fast in here
+      return charge3(pid) != 0;
     }
 
     /// Determine if the particle is electrically neutral
     inline bool isNeutral(int pid) {
-      return !isCharged(pid);
+      return charge3(pid) == 0;
     }
 
     /// @}
@@ -994,8 +1036,7 @@ namespace Rivet {
 
     /// Determine if the PID is that of an EW scale resonance
     ///
-    /// @todo Also include SUSY, technicolor, etc. etc.?
-    /// Maybe via a isStandardModel(pid) function, but there are stable BSM particles (in principle)
+    /// @todo Also include SUSY, technicolor, etc. etc.? Maybe via a isStandardModel(pid) function, but there are stable BSM particles (in principle)
     inline bool isResonance(int pid) {
       return isW(pid) || isZ(pid) || isHiggs(pid) || isTop(pid);
     }
@@ -1010,6 +1051,8 @@ namespace Rivet {
     }
 
     /// @}
+
+
 
 
     /// @defgroup ppair_class Particle pair classifiers
