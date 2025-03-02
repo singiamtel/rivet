@@ -146,7 +146,7 @@ namespace Rivet {
         }
 
         for (const DressedLepton& lepton : allClusteredLeptons) {
-          if (accept(lepton)) {
+          if (_cuts->accept(lepton)) {
             _clusteredLeptons.push_back(lepton);
             _theParticles.push_back(lepton.bareLepton());
             _theParticles += lepton.photons();
