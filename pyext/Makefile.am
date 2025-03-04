@@ -6,6 +6,7 @@ PYEXT_ENV = LDFLAGS="$(LDFLAGS)" CC="$(CXX)" CXX="$(CXX)" CXXFLAGS="$(PYEXT_CXXF
 
 PYCORE_SRC = \
     rivet/*.py \
+    rivet/pdg/*.py \
     rivet/plotting/*.py
 
 all-local: build/rivet/core.so
