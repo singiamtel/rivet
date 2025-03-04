@@ -5,7 +5,7 @@ EXTRA_DIST = \
     plotinfo.py aopaths.py \
     core.pyx rivet.pxd core.cpp \
     hepdatapatches \
-    plotting
+    pdg plotting
 
 
 MAINTAINERCLEANFILES = core.cpp
