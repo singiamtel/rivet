@@ -29,3 +29,20 @@ in order to superimpose the reference curve with different properties, e.g.
 ```
 REF:ErrorBandColor=green yellow REF2:ErrorPatter=^stat:ErrorBandColor=darkgreen"
 ```
+
+### Under- and overflows
+
+Under- and overflow bins aren't plotted by default because their bin width is infinite.
+A dummy bin width can be supplied when turning histograms into estimates, e.g. using
+```cpp
+Estimat1DPtr est = hist->mkEstimate(/*path =*/ hist->path(),
+                                    /*source =*/ "stats",
+                                    /*divbyvol =*/ true,
+                                    /*overflowWidth =*/ 1.0);
+```
+which will avoid a division by infinity in the overflows.
+The `IncludeOverflows=<0|1>` toggle can be used to get these bins visualised:
+```
+rivet-mkhtml input.yoda.gz PLOT:IncludeOverflows=1
+```
+

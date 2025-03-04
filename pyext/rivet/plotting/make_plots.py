@@ -114,9 +114,6 @@ def _get_histos(filelist, plotoptions, path_patterns = [], path_unpatterns = [],
 
             hasVariations |= bool(aop.varid())
 
-            # Convert non-scatter objects to scatter
-            ao = yoda.plotting.utils.mkPlotFriendlyScatter(ao)
-
             ## Add it to the ref or mc paths, if this path isn't already known
             basepath_with_anaopts = aop.basepath(keep_prefix=False)
             basepath = rivet.stripOptions(basepath_with_anaopts)
@@ -155,7 +152,7 @@ def _get_histos(filelist, plotoptions, path_patterns = [], path_unpatterns = [],
     return refhistos, mchistos, hpaths
 
 
-def _add_ref_hist(output, refhisto, reftitle, ratiolabel):
+def _add_ref_hist(output, refhisto, reftitle, ratiolabel, keepOverflows):
     refhisto.setAnnotation('IsRef', True)
     # assemble array of REF/REF2/... for every reference curve tag on
     # the command line, sort them based on tailing digits, then loop
@@ -169,7 +166,7 @@ def _add_ref_hist(output, refhisto, reftitle, ratiolabel):
                                            if 'ErrorBand' in key and val ])
         # add new reference curve
         output['histograms'][reflabel] = {
-            'nominal' : yoda.plotting.utils.mkPlotFriendlyScatter(refhisto, errorPattern=errpat)
+            'nominal' : yoda.plotting.utils.mkPlotFriendlyScatter(refhisto,includeOverflows=keepOverflows,errorPattern=errpat)
         }
         output['histograms'][reflabel]['IsRef'] = True
         output['histograms'][reflabel]['LineColor'] = 'black'
@@ -178,7 +175,7 @@ def _add_ref_hist(output, refhisto, reftitle, ratiolabel):
         # set additional reference-data options
         output['histograms'][reflabel].update(output.get(ref_key, {}))
         if needsBand:
-            bandao = yoda.plotting.utils.mkPlotFriendlyScatter(refhisto, errorPattern=errpat)
+            bandao = yoda.plotting.utils.mkPlotFriendlyScatter(refhisto,includeOverflows=keepOverflows,errorPattern=errpat)
             output['histograms'][reflabel]['BandUncertainty'] = bandao
 
     # decide if ratio panel is shown or not
@@ -246,7 +243,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
         if re.fullmatch(r"REF(\d+)?$", key):
             outputdict[key] = val
 
-    componentNames = ['BandComponentPDF', 'BandComponentEnv']
+    keepOverflows = int(outputdict['plot features'].get('IncludeOverflows', '0'))
 
     # Check if there's reference data
     if plot_id in refhistos and rpmode != 'datamc':
@@ -259,7 +256,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
         reftitle = refLabel if refLabel != None else \
                    refhistos[plot_id].annotation('Title', 'Data')
         reflabel = reftitle if reftitle != None else 'Data'
-        _add_ref_hist(outputdict, refhistos[plot_id], reflabel, rplabel)
+        _add_ref_hist(outputdict, refhistos[plot_id], reflabel, rplabel, keepOverflows)
 
     # Now add MC curves
     lhapdfCheck = True
@@ -273,6 +270,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
             outputdict['histograms'][filename+label] = {}
 
             thisFilePlotOptions = dict(plotoptions.get(filename, {}))
+
             # add options string to legend entry
             newtitle = thisFilePlotOptions.get('Title', '')
             if not removeOptions:
@@ -312,7 +310,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
                 # pass the plotoptions dict to the function?
                 outputdict['histograms'][filename+label]['ErrorBars'] = mc_errs
 
-                thisObj = yoda.plotting.utils.mkPlotFriendlyScatter(histogram)
+                thisObj = yoda.plotting.utils.mkPlotFriendlyScatter(histogram,includeOverflows=keepOverflows)
 
                 # no support for 3D scatters and bands
                 if thisObj.type() == "Scatter3D":
@@ -436,7 +434,7 @@ def _make_output(plot_id, plotdirs, config_files, mchistos, refhistos, plotoptio
         reftitle = refLabel if refLabel != None else \
                    refhistos[plot_id].annotation('Title', 'Data')
         reflabel = reftitle if reftitle != None else 'Data'
-        _add_ref_hist(outputdict, refhistos[plot_id], reflabel, rplabel)
+        _add_ref_hist(outputdict, refhistos[plot_id], reflabel, rplabel, keepOverflows)
 
     # Remove all sections of the output_dict that do not contain any information.
     # A list of keys is first created. Otherwise, it will raise an error since the size of the dict changes.
