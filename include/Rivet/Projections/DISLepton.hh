@@ -13,6 +13,8 @@
 
 namespace Rivet {
 
+  /// Enum for available DIS incoming-to-outgoing lepton mode
+  enum class DISMode { L2L, L2NU, NU2L, NU2NU };
 
   /// @brief Get the incoming and outgoing leptons in a DIS event.
   class DISLepton : public FinalState {
@@ -24,8 +26,8 @@ namespace Rivet {
     /// Constructor with optional cuts first
     DISLepton(const Cut& cuts=Cuts::OPEN,
 	      LeptonReco lreco=LeptonReco::ALL, ObjOrdering lsort=ObjOrdering::ENERGY,
-	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
-      : _isolDR(isolDR), _lsort(lsort), _lreco(lreco)
+	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0, DISMode dismode=DISMode::L2L)
+      : _isolDR(isolDR), _lsort(lsort), _lreco(lreco), _dismode(dismode)
     {
       setName("DISLepton");
       declare(HadronicFinalState(), "IFS");
@@ -62,20 +64,20 @@ namespace Rivet {
 
     /// Constructor without lepton-ordering spec, requiring cuts
     DISLepton(Cut& cuts, LeptonReco lreco=LeptonReco::ALL,
-	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
-      : DISLepton(cuts, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
+	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0, DISMode dismode=DISMode::L2L)
+      : DISLepton(cuts, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR, dismode)
     {  }
 
     /// Constructor without cuts, requiring lepton reco spec
     DISLepton(LeptonReco lreco, ObjOrdering lsort=ObjOrdering::ENERGY,
-	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
-      : DISLepton(Cuts::OPEN, lreco, lsort, beamundresstheta, isolDR, dressDR)
+	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0, DISMode dismode=DISMode::L2L)
+      : DISLepton(Cuts::OPEN, lreco, lsort, beamundresstheta, isolDR, dressDR, dismode)
     {  }
 
     /// Constructor without cuts or lepton-ordering spec, requiring lepton reco spec
     DISLepton(LeptonReco lreco,
-	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0)
-      : DISLepton(Cuts::OPEN, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR)
+	      double beamundresstheta=0.0, double isolDR=0.0, double dressDR=0.0, DISMode dismode=DISMode::L2L)
+      : DISLepton(Cuts::OPEN, lreco, ObjOrdering::ENERGY, beamundresstheta, isolDR, dressDR, dismode)
     {  }
 
 
@@ -137,6 +139,9 @@ namespace Rivet {
 
     /// The lepton reconstruction mode
     LeptonReco _lreco;
+
+    /// The incoming-to-outgoing lepton mode
+    DISMode _dismode;
 
   };
 
