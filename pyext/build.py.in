@@ -98,6 +98,7 @@ except FileExistsError:
 for pyfile in glob("@srcdir@/rivet/*.py"):
     shutil.copy(pyfile, "build/rivet/")
 shutil.copytree("@srcdir@/rivet/hepdatapatches", "build/rivet/hepdatapatches")
+shutil.copytree("@srcdir@/rivet/pdg", "build/rivet/pdg")
 shutil.copytree("@srcdir@/rivet/plotting", "build/rivet/plotting")
 
 ## Run the extension compilation in the build/rivet dir

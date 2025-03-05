@@ -1,0 +1,42 @@
+Name: LHCB_2016_I1504058
+Year: 2016
+Summary: Measurement of the $b$-quark production cross-section in 7 and 13 TeV $pp$ collisions
+Experiment: LHCB
+Collider: LHC
+InspireID: 1504058
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Gino Daniels <ginocdaniels@gmail.com>
+ - Lars Kolk <lars.kolk@tu-dortmund.de>
+ - Julian Boelhauve <julian.boelhauve@tu-dortmund.de>
+References:
+ - Phys.Rev.Lett. 118 (2017) 5, 052002
+ - Phys.Rev.Lett. 119 (2017) 16, 169901 (erratum)
+ - DOI:10.1103/PhysRevLett.118.052002
+ - DOI:10.1103/PhysRevLett.119.169901 (erratum)
+ - arXiv:1612.05140
+Beams: [p+, p+]
+Energies: [7000, 13000]
+RunInfo: Minimum-bias proton-proton interactions at 7 or 13 TeV centre-of-mass energy.
+NeedCrossSection: yes
+Description:
+  'Measurements of the cross section for producing $b$ quarks in the reaction $pp \to b\overline{b}X$ are reported in 7 and 13 TeV collisions at the LHC as a function of the pseudorapidity $\eta$ in the range $2 < \eta < 5$ covered by the acceptance of the LHCb experiment. The measurements are done using semileptonic decays of $b$-flavored hadrons decaying into a ground-state charmed hadron in association with a muon. The cross sections in the covered $\eta$ range are $72.0 \pm 0.3 \pm 6.8$ and $154.3 \pm 1.5 \pm 14.3\,\mathrm{\mu b}$ for 7 and 13 TeV. The ratio is $2.14 \pm 0.02 \pm 0.13$, where the quoted uncertainties are statistical and systematic, respectively. The agreement with theoretical expectation is good at 7 TeV, but differs somewhat at 13 TeV. The measured ratio of cross sections is larger at lower $\eta$ than the model prediction.'
+Keywords: ['cross-section', 'b quark', 'proton-proton interaction', '7000 GeV c.m.s.', '13000 GeV c.m.s.', 'CERN LHC', 'LHCb', 'semileptonic decay', 'beauty hadron', 'charm hadron', 'muon']
+BibKey: LHCb:2016qpe
+BibTeX: '@article{LHCb:2016qpe,
+  author = "Aaij, Roel and others",
+  collaboration = "LHCb",
+  title = "{Measurement of the $b$-quark production cross-section in 7 and 13 TeV $pp$ collisions}",
+  eprint = "1612.05140",
+  archivePrefix = "arXiv",
+  primaryClass = "hep-ex",
+  reportNumber = "CERN-EP-2016-201, LHCB-PAPER-2016-031",
+  doi = "10.1103/PhysRevLett.118.052002",
+  journal = "Phys. Rev. Lett.",
+  volume = "118",
+  number = "5",
+  pages = "052002",
+  year = "2017",
+  note = "[Erratum: Phys.Rev.Lett. 119, 169901 (2017)]"
+}'

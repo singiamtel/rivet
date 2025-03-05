@@ -7,9 +7,6 @@ Usage: %(prog)s [--help|-h] [--srcroot=<srcrootdir>] <analysisname>
 
 Without the --srcroot flag, the analysis files will be created in the current
 directory.
-
-TODO:
- - remove SPIRES option and handling code
 """
 
 import rivet, sys, os
@@ -36,10 +33,60 @@ parser.add_argument("-q", "--quiet", dest="LOGLEVEL", default=logging.INFO,
                     action="store_const", const=logging.WARNING, help="only write out warning and error messages")
 parser.add_argument("-v", "--verbose", dest="LOGLEVEL", default=logging.INFO,
                     action="store_const", const=logging.DEBUG, help="provide extra debugging messages")
+
+pdggroup = parser.add_argument_group("Branching Ratio Analysis handling")
+pdggroup.add_argument("--pdgid", "--pdgid-br", dest="PID", type=int, default=None,
+                    help="make an analysis for the branching ratios of the particle with this PDG ID code using data from the PDG")
+pdggroup.add_argument("--unstable-pi0", action='store_true', default=False,
+                    help="consider the pi0 to be unstable, default is for it to be considered stable")
+pdggroup.add_argument("--unstable-KS0", action='store_true', default=False,
+                    help="consider the KS0 to be unstable, default is for it to be considered stable")
+pdggroup.add_argument("--unstable-Lambda0", action='store_true', default=False,
+                    help="consider the Lambda0 to be unstable, default is for it to be considered stable")
+
 args = parser.parse_args()
 logging.basicConfig(format="%(msg)s", level=args.LOGLEVEL)
 ANANAMES = args.ANANAMES
 
+if args.PID is not None:
+    import yoda
+    import rivet.pdg as PDG
+
+    if args.PID==15 and not args.unstable_KS0:
+        logging.warning("It is recommended to set the KSO unstable using --unstable-KS0" \
+                        + " for the analysis of tau lepton decays.")
+    # stable particles
+    default_stable=[]
+    if not args.unstable_pi0 :
+        default_stable.append(111)
+        PDG.particle_data.stable.append(111)
+    if not args.unstable_KS0 :
+        default_stable.append(310)
+        PDG.stable.append( 310)
+        PDG.stable.append( 311)
+        PDG.stable.append(-311)
+    if not args.unstable_Lambda0 :
+        default_stable.append( 3122)
+        default_stable.append(-3122)
+    PDG.stable.append( 3122)
+    PDG.stable.append(-3122)
+
+    # extract the data
+    aos, subs, plot = PDG.extractBR(args.PID,args.ANANAMES[0],default_stable)
+    # output the yoda
+    yoda.writeYODA(aos,"%s.yoda.gz" % args.ANANAMES[0])
+    cc = PDG.cc_T.substitute(subs)
+    with open("%s.cc" % args.ANANAMES[0],'w') as f:
+        f.write(cc)
+    # output the info file
+    info = PDG.info_T.substitute(subs)
+    with open("%s.info" % args.ANANAMES[0],'w') as f:
+        f.write(info)
+    # output the plot file
+    with open("%s.plot" % args.ANANAMES[0],'w') as f:
+        f.write(plot)
+
+    sys.exit(0)
 
 ## Work out installation paths
 ANAROOT = os.path.abspath(args.SRCROOT or os.getcwd())
