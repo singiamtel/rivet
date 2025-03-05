@@ -11,7 +11,8 @@ namespace Rivet {
       mkNamedPCmp(other, "LFS") ||
       mkNamedPCmp(other, "IFS") ||
       cmp(_lsort, other._lsort) ||
-      cmp(_isolDR, other._isolDR);
+      cmp(_isolDR, other._isolDR) ||
+      cmp(_dismode, other._dismode);
   }
 
 
