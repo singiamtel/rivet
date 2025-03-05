@@ -52,6 +52,8 @@ BEGIN PLOT /ATLAS_2022_I2023464/d08-x01-y01
 Title=1D differential xsection vs $\Delta\phi_{jj}$
 XLabel=$\Delta\phi_{jj}$
 YLabel=$d\sigma/d\Delta\phi_{jj}$ [fb]
+LogY=0
+YMax=4
 END PLOT
 
 BEGIN PLOT /ATLAS_2022_I2023464/d09-x01-y01
@@ -64,28 +66,37 @@ BEGIN PLOT /ATLAS_2022_I2023464/d10-x01-y01
 Title=1D differential xsection vs $\Delta\phi_{jj}$ in VBF region
 XLabel=$\Delta\phi_{jj}$
 YLabel=$d\sigma/d\Delta\phi_{jj}$ [fb]
+LogY=0
+YMax=0.6
 END PLOT
 
 BEGIN PLOT /ATLAS_2022_I2023464/d21-x01-y01
 Title=1D differential xsection vs $p_{T}^{\gamma 1}/m_{\gamma\gamma}$
 XLabel=$p_{T}^{\gamma 1}/m_{\gamma\gamma}$
 YLabel=$d\sigma/dp_{T}^{\gamma 1}/m_{\gamma\gamma}$ [fb/GeV]
-LogX=1
-XMin=1
+LogX=0
+LogY=0
+XMin=0.35
+XMax=1.0
+YMax=600
 END PLOT
 
 BEGIN PLOT /ATLAS_2022_I2023464/d23-x01-y01
 Title=1D differential xsection vs $p_{T}^{\gamma 2}/m_{\gamma\gamma}$
 XLabel=$p_{T}^{\gamma 2}/m_{\gamma\gamma}$
 YLabel=$d\sigma/dp_{T}^{\gamma 2}/m_{\gamma\gamma}$ [fb/GeV]
-LogX=1
-XMin=1
+LogX=0
+LogY=0
+XMin=0.25
+XMax=1.0
+YMax=600
 END PLOT
 
 BEGIN PLOT /ATLAS_2022_I2023464/d25-x01-y01
 Title=1D differential xsection vs $|y_{\gamma\gamma}|$
 XLabel=$|y_{\gamma\gamma}|$
 YLabel=$|d\sigma/dy_{\gamma\gamma}|$ [fb]
+LogY=0
 END PLOT
 
 BEGIN PLOT /ATLAS_2022_I2023464/d27-x01-y01
