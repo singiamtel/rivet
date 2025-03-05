@@ -45,7 +45,30 @@ namespace Rivet {
     else // _lsort == ObjOrdering::ENERGY
       fsleptons = fs.particles(isLepton, cmpMomByE);
 
-    Particles sfleptons = select(fsleptons, Cuts::pid == _incoming.pid());
+    PdgId outgoingPID = _incoming.pid();
+    if (_dismode == DISMode::L2L && PID::isNeutrino(_incoming.pid())) {
+      fail();
+      return;
+    }
+    else if (_dismode == DISMode::NU2NU && PID::isChargedLepton(_incoming.pid())) {
+      fail();
+      return;
+    }
+    else if (_dismode == DISMode::L2NU && PID::isNeutrino(_incoming.pid())) {
+      fail();
+      return;
+    }
+    else if (_dismode == DISMode::L2NU) {
+      outgoingPID += _incoming.pid() > 0? 1 : -1;
+    }
+    else if (_dismode == DISMode::NU2L && PID::isChargedLepton(_incoming.pid())) {
+      fail();
+      return;
+    }
+    else if (_dismode == DISMode::NU2L) {
+      outgoingPID += _incoming.pid() > 0? -1 : 1;
+    }
+    Particles sfleptons = select(fsleptons, Cuts::pid == outgoingPID);
     MSG_DEBUG("SF leptons = " << sfleptons.size() << ", all leptons = " << fsleptons.size());
     if ( sfleptons.empty() ) sfleptons = fsleptons;
 
