@@ -1,0 +1,41 @@
+Name: LHCB_2022_I2694685
+Year: 2022
+Summary: Measurement of the Prompt $D^0$ Nuclear Modification Factor in $p$-$\mathrm{Pb}$ Collisions at $\sqrt{s_{NN}} = 8.16\,\mathrm{TeV}$
+Experiment: LHCB
+Collider: LHC
+InspireID: 2694685
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Joshua Friedman <friedm25@purdue.com>
+ - Julian Boelhauve <julian.boelhauve@tu-dortmund.de>
+ - Lars Kolk <lars.kolk@tu-dortmund.de>
+References:
+ - Phys.Rev.Lett. 131 (2023) 10, 102301
+ - DOI:10.1103/PhysRevLett.131.102301
+ - arXiv:2205.03936
+ - CERN-EP-2022-082
+ - LHCB-PAPER-2022-007
+Beams: [[p+, p+], [p+, Pb]]
+Energies: [8160, [6500, 533000]]
+RunInfo: Minimum-bias proton-lead interactions at 8.16 TeV centre-of-mass energy.
+NeedCrossSection: yes
+Description:
+  'The production of prompt $D^0$ mesons in proton-lead collisions in both the forward and backward rapidity regions at a center-of-mass energy per nucleon pair of $\sqrt{s_{NN}} = 8.16\,\mathrm{TeV}$ is measured by the LHCb experiment. The nuclear modification factor of prompt $D^0$ mesons is determined as a function of the transverse momentum $p_\mathrm{T}$, and the rapidity in the nucleon-nucleon center-of-mass frame $y^\ast$. In the forward rapidity region, significantly suppressed production with respect to $pp$ collisions is measured, which provides significant constraints on models of nuclear parton distributions and hadron production down to the very low Bjorken-$x$ region of $\sim\! 10^{-5}$. In the backward rapidity region, a suppression with a significance of $2.0\! -\! 3.8$ standard deviations compared to parton distribution functions in a nuclear environment expectations is found in the kinematic region of $p_\mathrm{T} > 6\,\mathrm{GeV}/c$ and $-3.25 < y^\ast < -2.5$, corresponding to $x\sim 0.01$.'
+Keywords: ['cross-section', 'prompt', 'D0 meson', 'proton-lead interaction', '8160 GeV c.m.s.', 'CERN LHC', 'LHCb', 'nuclear modification factor']
+BibKey: LHCb:2022dmh
+BibTeX: '@article{LHCb:2022dmh,
+  author = "Aaij, R. and others",
+  collaboration = "LHCb",
+  title = "{Measurement of the Prompt D0 Nuclear Modification Factor in p-Pb Collisions at sNN=8.16\,\,TeV}",
+  eprint = "2205.03936",
+  archivePrefix = "arXiv",
+  primaryClass = "nucl-ex",
+  reportNumber = "LHCb-PAPER-2022-007, CERN-EP-2022-082",
+  doi = "10.1103/PhysRevLett.131.102301",
+  journal = "Phys. Rev. Lett.",
+  volume = "131",
+  number = "10",
+  pages = "102301",
+  year = "2023"
+}'
