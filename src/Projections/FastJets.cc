@@ -30,10 +30,11 @@ namespace Rivet {
   };
 
   fastjet::JetDefinition FastJets::mkJetDef(const JetAlg alg, const double rparameter){
-    if( jetAlgMap.find(alg)==jetAlgMap.end() ){
+    if (jetAlgMap.find(alg)==jetAlgMap.end()) {
       throw std::invalid_argument( to_string(int(alg)) + " is no known jet algorithm." );
     }
     const std::pair<fastjet::JetAlgorithm, fastjet::RecombinationScheme> p = jetAlgMap.at(alg);
+    if (alg == JetAlg::DURHAM)  return fastjet::JetDefinition(p.first, p.second);
     return fastjet::JetDefinition(p.first, rparameter, p.second);
   }
 

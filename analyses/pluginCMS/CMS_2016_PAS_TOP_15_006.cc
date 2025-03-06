@@ -97,27 +97,33 @@ namespace Rivet {
 
       /// Constructor
       SpecialLeptonFinder(const FinalState& fs, const Cut& cut)
-        : FinalState(cut)
-      {
-        setName("SpecialLeptonFinder");
+        : FinalState(cut) {
+        setName("CMS_2016_PAS_TOP_15_006::SpecialLeptonFinder");
         IdentifiedFinalState ifs(fs);
         ifs.acceptIdPair(PID::PHOTON);
         ifs.acceptIdPair(PID::ELECTRON);
         ifs.acceptIdPair(PID::MUON);
-        declare(ifs, "IFS");
         declare(FastJets(ifs, JetAlg::ANTIKT, 0.1), "LeptonJets");
       }
 
       /// Clone on the heap
-      virtual unique_ptr<Projection> clone() const {
-        return unique_ptr<Projection>(new SpecialLeptonFinder(*this));
-      }
+      RIVET_DEFAULT_PROJ_CLONE(SpecialLeptonFinder);
 
       /// Import to avoid warnings about overload-hiding
       using Projection::operator =;
 
       /// Retrieve the dressed leptons
       const DressedLeptons& dressedLeptons() const { return _clusteredLeptons; }
+
+      /// Compare projections
+      CmpState compare(const Projection& p) const {
+        const PCmp fscmp = mkNamedPCmp(p, "LeptonJets");
+        if (fscmp != CmpState::EQ) return fscmp;
+        const SpecialLeptonFinder& other = dynamic_cast<const SpecialLeptonFinder&>(p);
+        const bool cutcmp = _cuts == other._cuts;
+        if (!cutcmp) return CmpState::NEQ;
+        return CmpState::EQ;
+      }
 
       /// Perform the calculation
       void project(const Event& e) {
@@ -146,7 +152,7 @@ namespace Rivet {
         }
 
         for (const DressedLepton& lepton : allClusteredLeptons) {
-          if (_cuts->accept(lepton)) {
+          if (_cuts->accept(static_cast<const Particle&>(lepton))) {
             _clusteredLeptons.push_back(lepton);
             _theParticles.push_back(lepton.bareLepton());
             _theParticles += lepton.photons();
@@ -154,7 +160,7 @@ namespace Rivet {
         }
       }
 
-    private:
+    protected:
 
       /// Container which stores the clustered lepton objects
       DressedLeptons _clusteredLeptons;
