@@ -1,0 +1,41 @@
+Name: LHCB_2021_I1913240
+Year: 2021
+Summary: Measurement of the Nuclear Modification Factor and Prompt Charged Particle Production in $p$-Pb and $pp$ Collisions at $\sqrt{s_{NN}} = 5$ TeV
+Experiment: LHCB
+Collider: LHC
+InspireID: 1913240
+Status: VALIDATED
+Reentrant: true
+Authors:
+ - Gino Daniels <ginocdaniels@gmail.com>
+ - Lars Kolk <lars.kolk@tu-dortmund.de>
+ - Julian Boelhauve <julian.boelhauve@tu-dortmund.de>
+References:
+ - Phys.Rev.Lett. 128 (2022) 14, 142004
+ - DOI:10.1103/PhysRevLett.128.142004
+ - arXiv:2108.13115
+ - CERN-EP-2021-130
+ - LHCB-PAPER-2021-015
+Beams: [[p+, p+], [p+, Pb]]
+Energies: [5020, [4000, 328000]]
+RunInfo: Minimum-bias proton-proton or proton-lead interactions at 5 TeV centre-of-mass energy.
+NeedCrossSection: yes
+Description:
+  'The production of prompt charged particles in proton-lead collisions and in proton-proton collisions at the nucleon-nucleon center-of-mass energy $\sqrt{s_{NN}} = 5\,\mathrm{TeV}$ is studied at LHCb as a function of pseudorapidity ($\eta$) and transverse momentum ($p_\mathrm{T}$) with respect to the proton beam direction. The nuclear modification factor for charged particles is determined as a function of $\eta$ between $-4.8 < \eta < -2.5$ (backward region) and $2.0 < \eta < 4.8$ (forward region), and $p_\mathrm{T}$ between $0.2 < p_\mathrm{T} < 8.0\,\mathrm{GeV}/c$. The results show a suppression of charged particle production in proton-lead collisions relative to proton-proton collisions in the forward region and an enhancement in the backward region for $p_\mathrm{T}$ larger than $1.5\,\mathrm{GeV}/c$. This measurement constrains nuclear PDFs and saturation models at previously unexplored values of the parton momentum fraction down to $10^{-6}$.'
+Keywords: ['cross-section', 'prompt charged particle', 'proton-lead interaction', 'proton-proton interaction', '5000 GeV c.m.s.', 'CERN LHC', 'LHCb', 'nuclear modification factor']
+BibKey: LHCb:2021vww
+BibTeX: '@article{LHCb:2021vww,
+  author = "Aaij, Roel and others",
+  collaboration = "LHCb",
+  title = "{Measurement of the Nuclear Modification Factor and Prompt Charged Particle Production in $p-Pb$ and $pp$ Collisions at $\sqrt {s_{NN}}$=5\,\,TeV}",
+  eprint = "2108.13115",
+  archivePrefix = "arXiv",
+  primaryClass = "hep-ex",
+  reportNumber = "LHCb-PAPER-2021-015, CERN-EP-2021-130",
+  doi = "10.1103/PhysRevLett.128.142004",
+  journal = "Phys. Rev. Lett.",
+  volume = "128",
+  number = "14",
+  pages = "142004",
+  year = "2022"
+}'
