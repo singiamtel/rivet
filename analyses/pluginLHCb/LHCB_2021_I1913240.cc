@@ -91,7 +91,7 @@ namespace Rivet {
 
     }
 
-    string _beamConfig("");
+    string _beamConfig = "";
     Histo1DGroupPtr _charged_part_eta_pt_hist[3];
   };
 
