@@ -154,8 +154,6 @@ AC_SUBST(HEPMCINCPATH)
 AC_SUBST(HEPMCLIBPATH)
 AC_SUBST(HEPMCLIBNAME)
 
-CPPFLAGS="$CPPFLAGS -DENABLE_HEPMC_3=true"
-
 ## FastJet clustering library
 AC_CEDAR_LIBRARYANDHEADERS([fastjet], , , [AC_MSG_ERROR([FastJet is required])])
 AC_PATH_PROG(FJCONFIG, fastjet-config, [], $FASTJETPATH/bin:$PATH)
@@ -270,16 +268,6 @@ AM_CONDITIONAL(ENABLE_H5, [test x$with_h5 = xyes])
 
 ## HEPTopTagger
 # AC_CEDAR_HEADERS([HEPTopTagger], , , [AC_MSG_ERROR([HEPTopTagger is required])])
-
-
-# ## GNU Scientific Library
-# AC_SEARCH_GSL
-# AC_CEDAR_HEADERS([gsl], , , [AC_MSG_ERROR([GSL (GNU Scientific Library) is required])])
-# oldCPPFLAGS=$CPPFLAGS
-# CPPFLAGS="$CPPFLAGS -I$GSLINCPATH"
-# AC_CHECK_HEADER([gsl/gsl_vector.h], [], [AC_MSG_ERROR([GSL vectors not found.])])
-# CPPFLAGS=$oldCPPFLAGS
-
 
 ## Disable build/install of standard analyses
 PLUGIN_MATCH=""
@@ -451,8 +439,6 @@ AM_CONDITIONAL(WITH_CYTHON, [test x$CYTHON_FOUND = xyes])
 
 ## Set default build flags
 AM_CPPFLAGS="-I\$(top_srcdir)/include -I\$(top_builddir)/include"
-#AM_CPPFLAGS="$AM_CPPFLAGS -I\$(top_srcdir)/include/eigen3"
-#AM_CPPFLAGS="$AM_CPPFLAGS \$(GSL_CPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(RIVETCPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS \$(YODACPPFLAGS)"
 AM_CPPFLAGS="$AM_CPPFLAGS -I\$(HEPMC3INCPATH)"

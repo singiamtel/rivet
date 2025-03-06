@@ -71,9 +71,10 @@ test -n "$tmp" && OUT="$OUT @RIVET_PYTHONPATH@"
 
 ## "Pre-rolled" build info
 tmp=$( echo "$*" | grep -E -- '--\<cflags\>|--\<cxxflags\>')
-test -n "$tmp" && OUT="$OUT @RIVETCXXFLAGS@ @RIVETCPPFLAGS@"
+test -n "$tmp" && OUT="$OUT @RIVETCXXFLAGS@"
 
 tmp=$( echo "$*" | grep -E -- '--\<cppflags\>')
+test -n "$tmp" && OUT="$OUT @RIVETCPPFLAGS@"
 if test -n "$tmp"; then
     irivet="-I@includedir@"
     test -n "$irivet" && OUT="$OUT ${irivet}"
