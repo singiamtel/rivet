@@ -853,6 +853,7 @@ namespace Rivet {
         if (dphi < rtn) rtn = dphi;
       }
     }
+    return rtn;
   }
 
   /// @brief Calculate the minimum phi separation between two collections of particle-like objects
@@ -871,6 +872,7 @@ namespace Rivet {
         if (dphi < rtn) rtn = dphi;
       }
     }
+    return rtn;
   }
 
 
@@ -890,6 +892,7 @@ namespace Rivet {
         if (deta < rtn) rtn = deta;
       }
     }
+    return rtn;
   }
 
   /// @brief Calculate the minimum pseudorapidity separation between two collections of particle-like objects
@@ -908,6 +911,7 @@ namespace Rivet {
         if (deta < rtn) rtn = deta;
       }
     }
+    return rtn;
   }
 
 
@@ -926,6 +930,7 @@ namespace Rivet {
         if (dy < rtn) rtn = dy;
       }
     }
+    return rtn;
   }
 
   /// @brief Calculate the minimum pseudorapidity separation between two collections of particle-like objects
@@ -944,6 +949,7 @@ namespace Rivet {
         if (dy < rtn) rtn = dy;
       }
     }
+    return rtn;
   }
 
 
@@ -963,6 +969,7 @@ namespace Rivet {
         if (dr < rtn) rtn = dr;
       }
     }
+    return rtn;
   }
 
   /// @brief Calculate the minimum pseudorapidity separation between two collections of particle-like objects
@@ -981,6 +988,7 @@ namespace Rivet {
         if (dr < rtn) rtn = dr;
       }
     }
+    return rtn;
   }
 
   /// @}
