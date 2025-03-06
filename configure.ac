@@ -101,6 +101,40 @@ AC_SUBST(YODALIBS)
 AC_SUBST(YODACPPFLAGS)
 AC_SUBST(YODA_PYTHONPATH)
 
+## HDF5
+AC_ARG_ENABLE([h5], [AS_HELP_STRING([--disable-h5],[disable H5 extension  @<:@default=build@:>@])], [], [with_h5=yes])
+if test "x$with_h5" = "xyes"; then
+  oldCPPFLAGS=$CPPFLAGS
+  CPPFLAGS="$CPPFLAGS $YODACPPFLAGS"
+  AC_COMPILE_IFELSE(
+    [AC_LANG_PROGRAM(
+        [[#include "YODA/Config/BuildConfig.h"]],
+        [[#ifndef HAVE_HDF5
+          #error "HAVE_HDF5 not defined"
+          #endif]]
+    )], [], [with_h5=no])
+  if test "x$with_h5" = "xyes"; then
+    AC_COMPILE_IFELSE(
+      [AC_LANG_PROGRAM(
+          [[#include "YODA/Config/BuildConfig.h"]],
+          [[#ifndef WITH_HIGHFIVE
+            #error "WITH_HIGHFIVE not defined"
+            #endif]]
+      )],
+      [AC_DEFINE([WITH_YODA_HIGHFIVE], [1], [Defined if YODA uses bundled HighFive])],
+      [AC_MSG_NOTICE([YODA uses external HighFive])]
+    )
+    AC_DEFINE_UNQUOTED(HAVE_H5, 1, "Define to 1 if you have HDF5 support.")
+    AC_MSG_NOTICE([Building extra HDF5 compatibility tools])
+  else
+    AC_MSG_NOTICE([YODA configured without HDF5 support, not building extra HDF5 compatibility tools])
+  fi
+  CPPFLAGS=$oldCPPFLAGS
+else
+  AC_MSG_NOTICE([Not building extra HDF5 compatibility tools])
+fi
+AM_CONDITIONAL(ENABLE_H5, [test x$with_h5 = xyes])
+
 
 ## HepMC event record library
 use_hepmc=no
@@ -234,39 +268,6 @@ int main() {
    AC_MSG_ERROR([$FASTJET_ERRMSG])])
 CPPFLAGS=$oldCPPFLAGS
 LIBS=$oldLIBS
-
-## HDF5
-AC_ARG_ENABLE([h5], [AS_HELP_STRING([--disable-h5],[disable H5 extension  @<:@default=build@:>@])], [], [with_h5=yes])
-if test "x$with_h5" = "xyes"; then
-  oldCPPFLAGS=$CPPFLAGS
-  CPPFLAGS="$CPPFLAGS $YODACPPFLAGS"
-  AC_COMPILE_IFELSE(
-    [AC_LANG_PROGRAM(
-        [[#include "YODA/Config/BuildConfig.h"]],
-        [[#ifndef HAVE_HDF5
-          #error "HAVE_HDF5 not defined"
-          #endif]]
-    )],
-    [],
-    [AC_MSG_ERROR([YODA configured without HDF5 support!])]
-  )
-  AC_COMPILE_IFELSE(
-    [AC_LANG_PROGRAM(
-        [[#include "YODA/Config/BuildConfig.h"]],
-        [[#ifndef WITH_HIGHFIVE
-          #error "WITH_HIGHFIVE not defined"
-          #endif]]
-    )],
-    [AC_DEFINE([WITH_YODA_HIGHFIVE], [1], [Defined if YODA uses bundled HighFive])],
-    [AC_MSG_NOTICE([YODA uses external HighFive])]
-  )
-  CPPFLAGS=$oldCPPFLAGS
-  AC_DEFINE_UNQUOTED(HAVE_H5, 1, "Define to 1 if you have HDF5 support.")
-  AC_MSG_NOTICE([Building extra HDF5 compatibility tools])
-else
-  AC_MSG_NOTICE([Not building extra HDF5 compatibility tools])
-fi
-AM_CONDITIONAL(ENABLE_H5, [test x$with_h5 = xyes])
 
 ## HEPTopTagger
 # AC_CEDAR_HEADERS([HEPTopTagger], , , [AC_MSG_ERROR([HEPTopTagger is required])])
