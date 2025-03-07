@@ -15,10 +15,10 @@ Run `rivet-mkhtml --help` to find out about all features and options.
 
 Plotting options will be taken from `*.plot` files installed in Rivet's share directory.
 These contain plotting instructions as documented
-[here](https://gitlab.com/hepcedar/yoda/-/blob/release-2-0-x/doc/PlotConfig.md).
+[here](https://gitlab.com/hepcedar/yoda/-/blob/release-2-1-x/doc/PlotConfig.md).
 Such files can also be written for any plugin analysis and will be found if they are in the `RIVET_ANALYSIS_PATH`.
 
-YODA's plotting API is discussed [here](https://gitlab.com/hepcedar/yoda/-/blob/release-2-0-x/doc/PlotAPI.md).
+YODA's plotting API is discussed [here](https://gitlab.com/hepcedar/yoda/-/blob/release-2-1-x/doc/PlotAPI.md).
 
 
 ### Changing the reference data style

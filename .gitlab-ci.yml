@@ -197,7 +197,7 @@ sync_coverage:
   needs:
     - job: build_ubuntu_gcc_hepmc3_py3
   rules:
-    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"'
+    - if: '($CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH || $CI_COMMIT_REF_NAME == "main") && $CI_PIPELINE_SOURCE != "schedule"'
 
 announce:
   stage: deploy

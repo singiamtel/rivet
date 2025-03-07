@@ -4,7 +4,7 @@ DBLUE="darkblue"
 MBLUE="blue"
 LBLUE="lightblue"
 # some useful style options for bands from
-# https://gitlab.com/hepcedar/yoda/-/blob/release-2-0-x/doc/PlotConfig.md?ref_type=heads#band-styles-append-to-file
+# https://gitlab.com/hepcedar/yoda/-/blob/release-2-1-x/doc/PlotConfig.md?ref_type=heads#band-styles-append-to-file
 MEPS_STYLE="ErrorBandColor=$LBLUE:LineColor=$LBLUE"
 ME_STYLE="ErrorBandColor=$MBLUE:LineColor=$MBLUE"
 STAT_STYLE="ErrorBandStyle=/:ErrorBandColor=$DBLUE:LineColor=$DBLUE"
