@@ -114,18 +114,23 @@ if test "x$with_h5" = "xyes"; then
           #endif]]
     )], [], [with_h5=no])
   if test "x$with_h5" = "xyes"; then
-    AC_COMPILE_IFELSE(
-      [AC_LANG_PROGRAM(
-          [[#include "YODA/Config/BuildConfig.h"]],
-          [[#ifndef WITH_HIGHFIVE
-            #error "WITH_HIGHFIVE not defined"
-            #endif]]
-      )],
-      [AC_DEFINE([WITH_YODA_HIGHFIVE], [1], [Defined if YODA uses bundled HighFive])],
-      [AC_MSG_NOTICE([YODA uses external HighFive])]
-    )
-    AC_DEFINE_UNQUOTED(HAVE_H5, 1, "Define to 1 if you have HDF5 support.")
-    AC_MSG_NOTICE([Building extra HDF5 compatibility tools])
+    AX_LIB_HDF5([serial])
+    if test "x$with_hdf5" = "xyes"; then
+      AC_COMPILE_IFELSE(
+        [AC_LANG_PROGRAM(
+            [[#include "YODA/Config/BuildConfig.h"]],
+            [[#ifndef WITH_HIGHFIVE
+              #error "WITH_HIGHFIVE not defined"
+              #endif]]
+        )],
+        [AC_DEFINE([WITH_YODA_HIGHFIVE], [1], [Defined if YODA uses bundled HighFive])],
+        [AC_MSG_NOTICE([YODA uses external HighFive])]
+      )
+      AC_DEFINE_UNQUOTED(HAVE_H5, 1, "Define to 1 if you have HDF5 support.")
+      AC_MSG_NOTICE([Building extra HDF5 compatibility tools])
+    else
+      with_h5=no
+    fi
   else
     AC_MSG_NOTICE([YODA configured without HDF5 support, not building extra HDF5 compatibility tools])
   fi
